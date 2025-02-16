@@ -245,5 +245,4 @@ def get_acct_agenda_ledger(
 
 def get_credit_ledger(x_bud: BudUnit) -> dict[AcctUnit, RespectNum]:
     credit_ledger, debtit_ledger = x_bud.get_credit_ledger_debtit_ledger()
-    print(f"{x_bud.accts=} {credit_ledger=}")
     return credit_ledger

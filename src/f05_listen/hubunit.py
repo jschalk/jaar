@@ -24,7 +24,7 @@ from src.f01_road.finance import (
     default_fund_coin_if_None,
     validate_fund_pool,
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     default_money_magnitude_if_None,
     TimeLinePoint,
 )
@@ -685,7 +685,7 @@ def hubunit_shop(
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
-        penny=default_penny_if_None(penny),
+        penny=filter_penny(penny),
         keep_point_magnitude=default_money_magnitude_if_None(keep_point_magnitude),
     )
     x_hubunit.set_dir_attrs()

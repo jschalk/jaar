@@ -2,7 +2,7 @@ from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance import (
     default_fund_coin_if_None,
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
 )
 from src.f01_road.deal import bridge_str, fisc_title_str
 from src.f03_chrono.chrono import get_default_timeline_config_dict
@@ -62,7 +62,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
     assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
     assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
-    assert x_dict.get(penny_str()) == default_penny_if_None()
+    assert x_dict.get(penny_str()) == filter_penny()
     assert x_dict.get(deallogs_str()) == accord_fisc._get_deallogs_dict()
     assert x_dict.get(cashbook_str()) == accord_fisc.cashbook.get_dict()
     assert set(x_dict.keys()) == {

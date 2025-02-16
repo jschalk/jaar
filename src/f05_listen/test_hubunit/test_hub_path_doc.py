@@ -10,10 +10,10 @@ from src.f05_listen.hub_path import (
     create_timepoint_dir_path,
     create_deal_path,
     create_budpoint_path,
-    create_deal_ledger_depth_dir_path,
-    create_deal_ledger_state_json_path,
-    create_deal_credit_ledger_json_path,
-    create_deal_quota_ledger_json_path,
+    create_episode_node_dir_path,
+    create_episode_node_state_path,
+    create_episode_node_credit_ledger_path,
+    create_episode_node_quota_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -102,9 +102,9 @@ def test_create_timepoint_dir_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_timepoint_dir_path) == doc_str
 
 
-def test_create_deal_ledger_depth_dir_path_HasDocString():
+def test_create_episode_node_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_deal_ledger_depth_dir_path(
+    doc_str = create_episode_node_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -114,12 +114,12 @@ def test_create_deal_ledger_depth_dir_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_deal_ledger_depth_dir_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_episode_node_dir_path) == doc_str
 
 
-def test_create_deal_ledger_state_json_path_HasDocString():
+def test_create_episode_node_state_path_HasDocString():
     # ESTABLISH
-    doc_str = create_deal_ledger_state_json_path(
+    doc_str = create_episode_node_state_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -129,12 +129,12 @@ def test_create_deal_ledger_state_json_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_deal_ledger_state_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_episode_node_state_path) == doc_str
 
 
-def test_create_deal_credit_ledger_json_path_HasDocString():
+def test_create_episode_node_credit_ledger_path_HasDocString():
     # ESTABLISH
-    doc_str = create_deal_credit_ledger_json_path(
+    doc_str = create_episode_node_credit_ledger_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -144,12 +144,12 @@ def test_create_deal_credit_ledger_json_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_deal_credit_ledger_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_episode_node_credit_ledger_path) == doc_str
 
 
-def test_create_deal_quota_ledger_json_path_HasDocString():
+def test_create_episode_node_quota_ledger_path_HasDocString():
     # ESTABLISH
-    doc_str = create_deal_quota_ledger_json_path(
+    doc_str = create_episode_node_quota_ledger_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -159,7 +159,7 @@ def test_create_deal_quota_ledger_json_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_deal_quota_ledger_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_episode_node_quota_ledger_path) == doc_str
 
 
 def test_create_deal_path_HasDocString():

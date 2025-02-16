@@ -10,7 +10,7 @@ from src.f01_road.allot import allot_scale
 from src.f01_road.finance import (
     valid_finance_ratio,
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
     BitNum,
@@ -1425,7 +1425,7 @@ def budunit_shop(
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
-        penny=default_penny_if_None(penny),
+        penny=filter_penny(penny),
         _item_dict=get_empty_dict_if_None(None),
         _keep_dict=get_empty_dict_if_None(None),
         _healers_dict=get_empty_dict_if_None(None),
@@ -1471,7 +1471,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.respect_bit = default_respect_bit_if_None(
         obj_from_bud_dict(bud_dict, "respect_bit")
     )
-    x_bud.penny = default_penny_if_None(obj_from_bud_dict(bud_dict, "penny"))
+    x_bud.penny = filter_penny(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
     x_bud.last_gift_id = obj_from_bud_dict(bud_dict, "last_gift_id")

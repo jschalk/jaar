@@ -1,29 +1,25 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
-from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
+from src.f00_instrument.file import open_file, save_file, open_json, count_dirs_files
 from src.f01_road.deal import (
     ledger_depth_str,
     owner_name_str,
     quota_str,
     DEFAULT_DEPTH_LEDGER,
 )
-from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f04_gift.atom_config import event_int_str
+from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
-    create_budevent_path,
-    create_budpoint_path,
-    create_deal_ledger_state_json_path,
+    create_episode_node_state_path,
     create_fisc_ote1_json_path,
 )
 from src.f07_fisc.fisc import fiscunit_shop
-
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_create_root_ledger_states_Scenaro0_DealEmpty(
+def test_WorldUnit_create_root_episode_nodes_Scenaro0_DealEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -38,13 +34,13 @@ def test_WorldUnit_create_root_ledger_states_Scenaro0_DealEmpty(
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    fizz_world.create_root_ledger_states()
+    fizz_world.create_root_episode_nodes()
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_create_root_ledger_states_Scenaro1_DealExists(
+def test_WorldUnit_create_root_episode_nodes_Scenaro1_DealExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -72,18 +68,18 @@ def test_WorldUnit_create_root_ledger_states_Scenaro1_DealExists(
     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
     assert os_path_exists(a23_ote1_json_path)
 
-    # timepoint37 deal_ledger_state path
-    tp37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
+    # timepoint37 episode_node path
+    tp37_episode_node_json_path = create_episode_node_state_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
-    assert os_path_exists(tp37_deal_ledger_state_json_path) is False
+    assert os_path_exists(tp37_episode_node_json_path) is False
 
     # WHEN
-    fizz_world.create_root_ledger_states()
+    fizz_world.create_root_episode_nodes()
 
     # THEN
-    assert os_path_exists(tp37_deal_ledger_state_json_path)
-    ledger_state_json = open_file(tp37_deal_ledger_state_json_path)
+    assert os_path_exists(tp37_episode_node_json_path)
+    ledger_state_json = open_file(tp37_episode_node_json_path)
     print(f"{ledger_state_json=}")
     ledger_state_dict = get_dict_from_json(ledger_state_json)
     assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
@@ -92,7 +88,7 @@ def test_WorldUnit_create_root_ledger_states_Scenaro1_DealExists(
     assert ledger_state_dict.get(event_int_str()) == event3
 
 
-def test_WorldUnit_create_root_ledger_states_Scenaro2_DealExistsButNoBudExistsInEventsPast(
+def test_WorldUnit_create_root_episode_nodes_Scenaro2_DealExistsButNoBudExistsInEventsPast(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -120,17 +116,17 @@ def test_WorldUnit_create_root_ledger_states_Scenaro2_DealExistsButNoBudExistsIn
     print(f"{a23_ote1_json_path=}")
     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
     assert os_path_exists(a23_ote1_json_path)
-    tp37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
+    tp37_episode_node_json_path = create_episode_node_state_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
-    assert os_path_exists(tp37_deal_ledger_state_json_path) is False
+    assert os_path_exists(tp37_episode_node_json_path) is False
 
     # WHEN
-    fizz_world.create_root_ledger_states()
+    fizz_world.create_root_episode_nodes()
 
     # THEN
-    assert os_path_exists(tp37_deal_ledger_state_json_path)
-    ledger_state_json = open_file(tp37_deal_ledger_state_json_path)
+    assert os_path_exists(tp37_episode_node_json_path)
+    ledger_state_json = open_file(tp37_episode_node_json_path)
     print(f"{ledger_state_json=}")
     ledger_state_dict = get_dict_from_json(ledger_state_json)
     assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
@@ -139,16 +135,18 @@ def test_WorldUnit_create_root_ledger_states_Scenaro2_DealExistsButNoBudExistsIn
     assert not ledger_state_dict.get(event_int_str())
 
 
-def test_WorldUnit_create_root_ledger_states_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
+def test_WorldUnit_create_root_episode_nodes_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
+    a23_penny = 2
 
     # Create FiscUnit with bob deal at time 37
-    accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
+    accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, penny=a23_penny)
+    print(f"{accord23_fisc.penny=}")
     bob_str = "Bob"
     timepoint37 = 37
     deal1_quota = 450
@@ -171,21 +169,23 @@ def test_WorldUnit_create_root_ledger_states_Scenaro3_DealExistsNotPerfectMatch_
     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
     assert os_path_exists(a23_ote1_json_path)
 
-    # destination of deal_ledger_state json
-    tp37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
+    # destination of episode_node json
+    tp37_episode_node_json_path = create_episode_node_state_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
-    assert os_path_exists(tp37_deal_ledger_state_json_path) is False
+    assert os_path_exists(tp37_episode_node_json_path) is False
 
     # WHEN
-    fizz_world.create_root_ledger_states()
+    fizz_world.create_root_episode_nodes()
 
     # THEN
-    assert os_path_exists(tp37_deal_ledger_state_json_path)
-    ledger_state_json = open_file(tp37_deal_ledger_state_json_path)
-    ledger_state_dict = get_dict_from_json(ledger_state_json)
+    assert os_path_exists(tp37_episode_node_json_path)
+    ledger_state_dict = open_json(tp37_episode_node_json_path)
     assert ledger_state_dict.get(ledger_depth_str()) == deal1_ledger_depth
     assert ledger_state_dict.get(owner_name_str()) == bob_str
     assert ledger_state_dict.get(quota_str()) == deal1_quota
     assert ledger_state_dict.get(event_int_str()) == event3
-    assert len(ledger_state_dict) == 4
+    assert ledger_state_dict.get(penny_str()) == a23_penny
+    print(ledger_state_dict.get("ancestor"))
+    assert not ledger_state_dict.get("ancestor")
+    assert len(ledger_state_dict) == 6

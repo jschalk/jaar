@@ -98,7 +98,8 @@ def validate_respect_num(x_respect_num: RespectNum = None) -> RespectNum:
     return max(x_respect_num, default_respect_bit_if_None(x_respect_num))
 
 
-def default_penny_if_None(penny: PennyNum = None) -> PennyNum:
+def filter_penny(penny: PennyNum = None) -> PennyNum:
+    """Penny must be greater than 1"""
     return max(get_1_if_None(penny), 1)
 
 

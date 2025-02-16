@@ -11,7 +11,7 @@ from src.f01_road.jaar_config import (
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     PennyNum,
     default_fund_coin_if_None,
     FundCoin,
@@ -393,7 +393,7 @@ def fiscunit_shop(
     fisc_title = get_fisc_title_if_None(fisc_title)
     if fisc_mstr_dir is None:
         fisc_mstr_dir = get_test_fisc_mstr_dir()
-    fisc_x = FiscUnit(
+    x_fiscunit = FiscUnit(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
         timeline=timeline,
@@ -403,15 +403,18 @@ def fiscunit_shop(
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
-        penny=default_penny_if_None(penny),
+        penny=filter_penny(penny),
         _all_tranbook=tranbook_shop(fisc_title),
     )
-    fisc_x._set_fisc_dirs(in_memory_journal=in_memory_journal)
-    return fisc_x
+    x_fiscunit._set_fisc_dirs(in_memory_journal=in_memory_journal)
+    return x_fiscunit
 
 
-def get_from_json(x_fisc_json: str) -> FiscUnit:
-    return get_from_dict(get_dict_from_json(x_fisc_json))
+def _get_deallogs_from_dict(deallogs_dict: dict) -> dict[OwnerName, DealLog]:
+    return {
+        x_owner_name: get_deallog_from_dict(deallog_dict)
+        for x_owner_name, deallog_dict in deallogs_dict.items()
+    }
 
 
 def get_from_dict(fisc_dict: dict) -> FiscUnit:
@@ -428,8 +431,5 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
     return x_fisc
 
 
-def _get_deallogs_from_dict(deallogs_dict: dict) -> dict[OwnerName, DealLog]:
-    return {
-        x_owner_name: get_deallog_from_dict(deallog_dict)
-        for x_owner_name, deallog_dict in deallogs_dict.items()
-    }
+def get_from_json(x_fisc_json: str) -> FiscUnit:
+    return get_from_dict(get_dict_from_json(x_fisc_json))

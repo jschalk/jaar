@@ -15,10 +15,10 @@ from src.f05_listen.hub_path import (
     create_timepoint_dir_path,
     create_deal_path,
     create_budpoint_path,
-    create_deal_ledger_depth_dir_path,
-    create_deal_ledger_state_json_path,
-    create_deal_credit_ledger_json_path,
-    create_deal_quota_ledger_json_path,
+    create_episode_node_dir_path,
+    create_episode_node_state_path,
+    create_episode_node_credit_ledger_path,
+    create_episode_node_quota_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -189,7 +189,7 @@ def test_create_budpoint_path_ReturnObj():
     assert gen_budpoint_path == expected_budpoint_path_dir
 
 
-def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario0_No_ledger_owners():
+def test_create_episode_node_dir_path_ReturnObj_Scenario0_No_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -197,16 +197,16 @@ def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario0_No_ledger_owners(
     tp7 = 7
 
     # WHEN
-    gen_deal_ledger_state_path = create_deal_ledger_depth_dir_path(
+    gen_episode_node_path = create_episode_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, []
     )
 
     # THEN
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    assert gen_deal_ledger_state_path == timepoint_dir
+    assert gen_episode_node_path == timepoint_dir
 
 
-def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario1_One_ledger_owners():
+def test_create_episode_node_dir_path_ReturnObj_Scenario1_One_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -216,17 +216,17 @@ def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario1_One_ledger_owners
     x_ledger_owners = [yao_str]
 
     # WHEN
-    gen_deal_ledger_state_path = create_deal_ledger_depth_dir_path(
+    gen_episode_node_path = create_episode_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=x_ledger_owners
     )
 
     # THEN
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
-    assert gen_deal_ledger_state_path == tp_yao_dir
+    assert gen_episode_node_path == tp_yao_dir
 
 
-def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
+def test_create_episode_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -238,7 +238,7 @@ def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario2_Three_ledger_owne
     x_ledger_owners = [yao_str, bob_str, zia_str]
 
     # WHEN
-    gen_deal_ledger_depth_dir_path = create_deal_ledger_depth_dir_path(
+    gen_deal_ledger_depth_dir_path = create_episode_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=x_ledger_owners
     )
 
@@ -250,7 +250,7 @@ def test_create_deal_ledger_depth_dir_path_ReturnObj_Scenario2_Three_ledger_owne
     assert gen_deal_ledger_depth_dir_path == expected_tp_yao_bob_zia_dir
 
 
-def test_create_deal_ledger_state_json_path_ReturnObj_Scenario0_Empty_ledger_owners():
+def test_create_episode_node_state_path_ReturnObj_Scenario0_Empty_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -258,7 +258,7 @@ def test_create_deal_ledger_state_json_path_ReturnObj_Scenario0_Empty_ledger_own
     timepoint7 = 7
 
     # WHEN
-    gen_deal_ledger_state_path = create_deal_ledger_state_json_path(
+    gen_episode_node_path = create_episode_node_state_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -269,13 +269,11 @@ def test_create_deal_ledger_state_json_path_ReturnObj_Scenario0_Empty_ledger_own
     sue_dir = create_path(owners_dir, sue_str)
     episodes_dir = create_path(sue_dir, "episodes")
     timepoint_dir = create_path(episodes_dir, timepoint7)
-    expected_deal_ledger_state_path_dir = create_path(
-        timepoint_dir, "deal_ledger_state.json"
-    )
-    assert gen_deal_ledger_state_path == expected_deal_ledger_state_path_dir
+    expected_episode_node_path_dir = create_path(timepoint_dir, "episode_node.json")
+    assert gen_episode_node_path == expected_episode_node_path_dir
 
 
-def test_create_deal_ledger_state_json_path_ReturnObj_Scenario1_Three_ledger_owners():
+def test_create_episode_node_state_path_ReturnObj_Scenario1_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -286,7 +284,7 @@ def test_create_deal_ledger_state_json_path_ReturnObj_Scenario1_Three_ledger_own
     ledger_owners = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_ledger_state_path = create_deal_ledger_state_json_path(
+    gen_episode_node_path = create_episode_node_state_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=ledger_owners
     )
 
@@ -294,13 +292,11 @@ def test_create_deal_ledger_state_json_path_ReturnObj_Scenario1_Three_ledger_own
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_ledger_state_path = create_path(
-        tp_yao_bob_dir, "deal_ledger_state.json"
-    )
-    assert gen_deal_ledger_state_path == expected_deal_ledger_state_path
+    expected_episode_node_path = create_path(tp_yao_bob_dir, "episode_node.json")
+    assert gen_episode_node_path == expected_episode_node_path
 
 
-def test_create_deal_credit_ledger_json_path_ReturnObj_Scenario1_Three_ledger_owners():
+def test_create_episode_node_credit_ledger_path_ReturnObj_Scenario1_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -311,7 +307,7 @@ def test_create_deal_credit_ledger_json_path_ReturnObj_Scenario1_Three_ledger_ow
     ledger_owners = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_credit_ledger_path = create_deal_credit_ledger_json_path(
+    gen_deal_credit_ledger_path = create_episode_node_credit_ledger_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=ledger_owners
     )
 
@@ -323,7 +319,7 @@ def test_create_deal_credit_ledger_json_path_ReturnObj_Scenario1_Three_ledger_ow
     assert gen_deal_credit_ledger_path == expected_deal_credit_ledger_path
 
 
-def test_create_deal_quota_ledger_json_path_ReturnObj_Scenario1_Three_ledger_owners():
+def test_create_episode_node_quota_ledger_path_ReturnObj_Scenario1_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -334,7 +330,7 @@ def test_create_deal_quota_ledger_json_path_ReturnObj_Scenario1_Three_ledger_own
     ledger_owners = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_quota_ledger_path = create_deal_quota_ledger_json_path(
+    gen_deal_quota_ledger_path = create_episode_node_quota_ledger_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=ledger_owners
     )
 

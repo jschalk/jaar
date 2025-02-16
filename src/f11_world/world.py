@@ -49,7 +49,7 @@ from src.f10_etl.transformers import (
     etl_fisc_agg_tables2fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
-    etl_create_root_ledger_states,
+    etl_create_root_episode_nodes,
     etl_create_deal_ledger_depth,
 )
 from dataclasses import dataclass
@@ -220,8 +220,8 @@ class WorldUnit:
     def fisc_ote1_agg_csvs2jsons(self):
         etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
 
-    def create_root_ledger_states(self):
-        etl_create_root_ledger_states(self._fisc_mstr_dir)
+    def create_root_episode_nodes(self):
+        etl_create_root_episode_nodes(self._fisc_mstr_dir)
 
     def create_deal_ledger_depth(self):
         etl_create_deal_ledger_depth(self._fisc_mstr_dir)
