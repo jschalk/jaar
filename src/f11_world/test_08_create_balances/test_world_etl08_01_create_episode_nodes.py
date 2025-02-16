@@ -201,7 +201,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     a23_ote1_dict = {bob_str: {str(timepoint40): event3, str(timepoint66): event7}}
 #     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
 #     print(f"{a23_ote1_json_path=}")
-#     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+#     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 #     assert os_path_exists(a23_ote1_json_path)
 
 #     # Create bob event 3 Budunit json
@@ -250,7 +250,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     a23_ote1_dict = {bob_str: {str(timepoint30): event3, str(timepoint66): event7}}
 #     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
 #     print(f"{a23_ote1_json_path=}")
-#     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+#     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 #     assert os_path_exists(a23_ote1_json_path)
 
 #     # Create bob event 3 Budunit json

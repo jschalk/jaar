@@ -1,9 +1,5 @@
-from src.f00_instrument.dict_toolbox import (
-    get_0_if_None,
-    get_dict_from_json,
-    get_json_from_dict,
-)
-from src.f00_instrument.file import create_path, open_file, save_file, open_json
+from src.f00_instrument.dict_toolbox import get_0_if_None
+from src.f00_instrument.file import create_path, save_json, open_json
 from pathlib import Path
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
@@ -149,7 +145,7 @@ def allot_nested_scale(
     root_ledger = open_json(root_file_path)
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)
     dst_filename = "alloted.json"
-    save_file(x_dir, dst_filename, get_json_from_dict(root_allot))
+    save_json(x_dir, dst_filename, root_allot)
     evalutable_allot_dirs = [x_dir]
     final_allots = {(): root_allot}
 
@@ -164,7 +160,7 @@ def allot_nested_scale(
             if os_path_exists(child_ledger_path) and len(local_dir_parts) <= depth:
                 child_ledger = open_json(child_ledger_path)
                 child_allot = allot_scale(child_ledger, x_scale, grain_unit)
-                save_file(child_dir, dst_filename, get_json_from_dict(child_allot))
+                save_json(child_dir, dst_filename, child_allot)
                 final_allots[local_dir_parts] = child_allot
                 evalutable_allot_dirs.append(child_dir)
 

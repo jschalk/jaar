@@ -1,5 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_json_from_dict
-from src.f00_instrument.file import save_file, create_path
+from src.f00_instrument.file import save_json, create_path
 from src.f01_road.deal import (
     quota_str,
     time_int_str,
@@ -655,8 +654,7 @@ def set_idea_config_json(dimen: str, build_order: int):
     dimen_dict = x_idea_config.get(dimen)
     dimen_dict[build_order_str()] = build_order
     x_idea_config[dimen] = dimen_dict
-    x_file_str = get_json_from_dict(x_idea_config)
-    save_file(config_file_dir(), get_idea_config_filename(), x_file_str)
+    save_json(config_file_dir(), get_idea_config_filename(), x_idea_config)
 
 
 def test_get_idea_config_dict_ReturnsObj_build_order():

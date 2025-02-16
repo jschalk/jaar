@@ -1,9 +1,5 @@
-from src.f00_instrument.file import open_json, save_file, create_path
-from src.f00_instrument.dict_toolbox import (
-    get_json_from_dict,
-    get_dict_from_json,
-    get_from_nested_dict,
-)
+from src.f00_instrument.file import open_json, save_json, create_path
+from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from os import getcwd as os_getcwd
 
 
@@ -458,8 +454,7 @@ def get_normalized_bud_table_build() -> dict[str : dict[str, any]]:
 
 
 def save_atom_config_file(atom_config_dict):
-    x_file_str = get_json_from_dict(atom_config_dict)
-    save_file(config_file_dir(), get_atom_config_filename(), x_file_str)
+    save_json(config_file_dir(), get_atom_config_filename(), atom_config_dict)
 
 
 def get_bud_dimens() -> set:

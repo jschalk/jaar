@@ -1,5 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_json_from_dict
-from src.f00_instrument.file import save_file
+from src.f00_instrument.file import save_json
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud_tool import bud_itemunit_str
 from src.f04_gift.atom_config import (
@@ -57,5 +56,4 @@ def test_create_dimens_idea_format_dict_ReturnObj(rebuild_bool):
 def rebuild_format_jsons(x_rebuild_format_jsons: bool):
     if x_rebuild_format_jsons:
         for x_filename, idea_format in create_dimens_idea_format_dict().items():
-            idea_json = get_json_from_dict(idea_format)
-            save_file(get_idea_formats_dir(), x_filename, idea_json)
+            save_json(get_idea_formats_dir(), x_filename, idea_format)

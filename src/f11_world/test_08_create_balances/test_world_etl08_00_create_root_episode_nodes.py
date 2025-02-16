@@ -1,5 +1,4 @@
-from src.f00_instrument.dict_toolbox import get_json_from_dict
-from src.f00_instrument.file import save_file, open_json, count_dirs_files
+from src.f00_instrument.file import save_file, open_json, save_json, count_dirs_files
 from src.f01_road.deal import (
     ledger_depth_str,
     owner_name_str,
@@ -65,7 +64,7 @@ def test_WorldUnit_create_root_episode_nodes_Scenaro1_DealExists(
     a23_ote1_dict = {bob_str: {str(timepoint37): event3, str(timepoint66): event7}}
     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
     print(f"{a23_ote1_json_path=}")
-    save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+    save_json(a23_ote1_json_path, None, a23_ote1_dict)
     assert os_path_exists(a23_ote1_json_path)
 
     # timepoint37 episode_node path
@@ -113,7 +112,7 @@ def test_WorldUnit_create_root_episode_nodes_Scenaro2_DealExistsButNoBudExistsIn
     a23_ote1_dict = {bob_str: {str(timepoint40): event3, str(timepoint66): event7}}
     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
     print(f"{a23_ote1_json_path=}")
-    save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+    save_json(a23_ote1_json_path, None, a23_ote1_dict)
     assert os_path_exists(a23_ote1_json_path)
     tp37_episode_node_json_path = create_episode_node_state_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
@@ -164,7 +163,7 @@ def test_WorldUnit_create_root_episode_nodes_Scenaro3_DealExistsNotPerfectMatch_
     a23_ote1_dict = {bob_str: {str(timepoint30): event3, str(timepoint66): event7}}
     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
     print(f"{a23_ote1_json_path=}")
-    save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+    save_json(a23_ote1_json_path, None, a23_ote1_dict)
     assert os_path_exists(a23_ote1_json_path)
 
     # destination of episode_node json

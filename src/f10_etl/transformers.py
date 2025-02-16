@@ -912,7 +912,7 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
             owner_dict = x_dict.get(owner_name)
             owner_dict[int(time_int)] = event_int
         json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_title)
-        save_file(json_path, None, get_json_from_dict(x_dict))
+        save_json(json_path, None, x_dict)
 
 
 def etl_create_root_episode_nodes(fisc_mstr_dir: str):
