@@ -1,10 +1,5 @@
-from src.f00_instrument.file import open_file, create_path
-from src.f00_instrument.dict_toolbox import get_dict_from_json
+from src.f00_instrument.file import open_json, create_path
 from src.f01_road.jaar_config import get_json_filename
-from src.f02_bud.bud_tool import budunit_str
-from src.f07_fisc.fisc_config import fiscunit_str
-from src.f08_pidgin.pidgin_config import pidginunit_str
-from src.f09_idea.examples.idea_env import src_idea_dir
 from os import getcwd as os_getcwd
 
 
@@ -18,7 +13,7 @@ def config_file_dir() -> str:
 
 
 def get_idea_config_dict() -> dict:
-    return get_dict_from_json(open_file(config_file_dir(), get_idea_config_filename()))
+    return open_json(config_file_dir(), get_idea_config_filename())
 
 
 def idea_number_str() -> str:
@@ -616,8 +611,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
 
 def get_idearef_from_file(idea_format_filename: str) -> dict:
     idearef_filename = get_json_filename(idea_format_filename)
-    idearef_json = open_file(get_idea_formats_dir(), idearef_filename)
-    return get_dict_from_json(idearef_json)
+    return open_json(get_idea_formats_dir(), idearef_filename)
 
 
 def get_quick_ideas_column_ref() -> dict[str, set[str]]:

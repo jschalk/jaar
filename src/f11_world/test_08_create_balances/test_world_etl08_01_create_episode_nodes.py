@@ -1,4 +1,3 @@
-from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import (
     open_json,
     save_file,
@@ -7,7 +6,7 @@ from src.f00_instrument.file import (
     count_dirs_files,
 )
 from src.f01_road.deal import owner_name_str, quota_str, ledger_depth_str
-from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
+from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
@@ -16,14 +15,13 @@ from src.f05_listen.hub_path import (
     create_budevent_path as budevent_path,
     create_timepoint_dir_path,
     create_budevent_path,
-    create_deal_ledger_depth_dir_path,
-    create_deal_ledger_state_json_path,
-    create_deal_credit_ledger_json_path,
-    create_deal_quota_ledger_json_path,
+    create_episode_node_dir_path,
+    create_episode_node_state_path,
+    create_episode_node_credit_ledger_path,
+    create_episode_node_quota_ledger_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
 )
-from src.f07_fisc.fisc import fiscunit_shop
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -81,25 +79,25 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
     deal1_quota = 450
     deal1_ledger_depth = 0
     event56 = 56
-    deal_ledger_state = {
+    episode_node = {
         ledger_depth_str(): deal1_ledger_depth,
         owner_name_str(): bob_str,
         event_int_str(): event56,
         quota_str(): deal1_quota,
     }
-    a23_bob_ledger_state_path = create_deal_ledger_state_json_path(
+    a23_bob_ledger_state_path = create_episode_node_state_path(
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_title=a23_str,
         owner_name=bob_str,
         time_int=tp37,
     )
-    save_json(a23_bob_ledger_state_path, None, deal_ledger_state)
+    save_json(a23_bob_ledger_state_path, None, episode_node)
     save_budevent(fisc_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
 
-    bob_tp37_credit_ledger_path = create_deal_credit_ledger_json_path(
+    bob_tp37_credit_ledger_path = create_episode_node_credit_ledger_path(
         fisc_mstr_dir, a23_str, bob_str, tp37
     )
-    bob_tp37_quota_ledger_path = create_deal_quota_ledger_json_path(
+    bob_tp37_quota_ledger_path = create_episode_node_quota_ledger_path(
         fisc_mstr_dir, a23_str, bob_str, tp37
     )
     bob_tp37_dir = create_timepoint_dir_path(fisc_mstr_dir, a23_str, bob_str, tp37)
@@ -131,7 +129,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     # save ledger_state json at tp37 root
 #     deal1_quota = 450
 #     deal1_ledger_depth = 1
-#     tp37_ledger_state_path = create_deal_ledger_state_json_path(
+#     tp37_ledger_state_path = create_episode_node_state_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37
 #     )
 #     tp37_ledger_state_dict = {
@@ -157,10 +155,10 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     save_file(budpoint37_path, None, e3_bob_bud.get_json())
 #     assert os_path_exists(budpoint37_path)
 #     tp37_dir = create_timepoint_dir_path(fisc_mstr_dir, a23_str, bob_str, timepoint37)
-#     tp37_yao_dir = create_deal_ledger_depth_dir_path(
+#     tp37_yao_dir = create_episode_node_dir_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37, [yao_str]
 #     )
-#     tp37_yao_state_path = create_deal_ledger_state_json_path(
+#     tp37_yao_state_path = create_episode_node_state_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37, [yao_str]
 #     )
 #     print(f"{tp37_yao_dir=}")
@@ -203,7 +201,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     a23_ote1_dict = {bob_str: {str(timepoint40): event3, str(timepoint66): event7}}
 #     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
 #     print(f"{a23_ote1_json_path=}")
-#     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+#     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 #     assert os_path_exists(a23_ote1_json_path)
 
 #     # Create bob event 3 Budunit json
@@ -252,7 +250,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     a23_ote1_dict = {bob_str: {str(timepoint30): event3, str(timepoint66): event7}}
 #     a23_ote1_json_path = create_fisc_ote1_json_path(fisc_mstr_dir, a23_str)
 #     print(f"{a23_ote1_json_path=}")
-#     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
+#     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 #     assert os_path_exists(a23_ote1_json_path)
 
 #     # Create bob event 3 Budunit json
@@ -266,8 +264,8 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37
 #     )
 #     print(f"{timepoint37_budpoint_path=}")
-#     # destination of deal_ledger_state json
-#     timepoint37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
+#     # destination of episode_node json
+#     timepoint37_episode_node_json_path = create_episode_node_state_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37
 #     )
 #     assert os_path_exists(timepoint37_budpoint_path) is False
@@ -280,16 +278,15 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     generated_e3_bud = budunit_get_from_json(open_file(timepoint37_budpoint_path))
 #     assert e3_budunit.get_dict() == generated_e3_bud.get_dict()
 
-#     assert os_path_exists(timepoint37_deal_ledger_state_json_path)
-#     ledger_state_json = open_file(timepoint37_deal_ledger_state_json_path)
-#     ledger_state_dict = get_dict_from_json(ledger_state_json)
+#     assert os_path_exists(timepoint37_episode_node_json_path)
+#     ledger_state_dict = open_json(timepoint37_episode_node_json_path)
 #     assert ledger_state_dict.get(ledger_depth_str()) == 0
 #     assert ledger_state_dict.get(owner_name_str()) == bob_str
 #     assert ledger_state_dict.get(event_int_str()) == event3
 #     assert len(ledger_state_dict) == 3
 
 
-# a23_ote1_dict = get_dict_from_json(open_file(a23_ote1_json_path))
+# a23_ote1_dict = open_json(a23_ote1_json_path))
 
 # bob_str = "Bob"
 # sue_str = "Sue"
@@ -330,8 +327,8 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     # THEN
 #     assert os_path_exists(a23_ote1_json_path)
 #     assert os_path_exists(a45_event_time_json_path)
-#     a23_ote1_dict = get_dict_from_json(open_file(a23_ote1_json_path))
-#     a45_ote1_dict = get_dict_from_json(open_file(a45_event_time_json_path))
+#     a23_ote1_dict = open_json(a23_ote1_json_path))
+#     a45_ote1_dict = open_json(a45_event_time_json_path))
 #     assert a23_ote1_dict == {bob_str: {str(event3): timepoint55}}
 #     assert a45_ote1_dict == {
 #         sue_str: {str(event3): timepoint55, str(event7): timepoint66}

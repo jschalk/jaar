@@ -43,8 +43,8 @@
 #     # THEN
 #     assert os_path_exists(a23_event_time_json_path)
 #     assert os_path_exists(a45_event_time_json_path)
-#     a23_ote1_dict = get_dict_from_json(open_file(a23_event_time_json_path))
-#     a45_ote1_dict = get_dict_from_json(open_file(a45_event_time_json_path))
+#     a23_ote1_dict = open_json(a23_event_time_json_path))
+#     a45_ote1_dict = open_json(a45_event_time_json_path))
 #     assert a23_ote1_dict == {bob_str: {str(event3): timepoint55}}
 #     assert a45_ote1_dict == {
 #         sue_str: {str(event3): timepoint55, str(event7): timepoint66}

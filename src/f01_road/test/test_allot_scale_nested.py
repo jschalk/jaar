@@ -1,14 +1,7 @@
-from src.f00_instrument.file import save_file, create_path, open_file
-from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
-from src.f01_road.allot import (
-    allot_scale,
-    _create_allot_dict,
-    _allot_missing_scale,
-    _get_missing_scale_list,
-    allot_nested_scale,
-)
+from src.f00_instrument.file import save_json, create_path, open_json
+from src.f00_instrument.dict_toolbox import get_json_from_dict
+from src.f01_road.allot import allot_nested_scale
 from src.f01_road.examples.road_env import get_road_temp_env_dir, env_dir_setup_cleanup
-from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
 
 
@@ -21,7 +14,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(
     sue_str = "Sue"
     root_ledger = {bob_str: 10, sue_str: 40}
     x_filename = "ledger.json"
-    save_file(x_dir, x_filename, get_json_from_dict(root_ledger))
+    save_json(x_dir, x_filename, root_ledger)
     x_scale = 200
     x_grain = 1
 
@@ -52,9 +45,9 @@ def test_allot_nested_scale_ReturnsObj_Scenari1_depth0_NestedFilesExist(
     x_filename = "ledger.json"
     bob_dir = create_path(x_dir, bob_str)
     sue_dir = create_path(x_dir, sue_str)
-    save_file(x_dir, x_filename, get_json_from_dict(root_ledger))
-    save_file(bob_dir, x_filename, get_json_from_dict(bob_ledger))
-    save_file(sue_dir, x_filename, get_json_from_dict(sue_ledger))
+    save_json(x_dir, x_filename, root_ledger)
+    save_json(bob_dir, x_filename, bob_ledger)
+    save_json(sue_dir, x_filename, sue_ledger)
     x_scale = 200
     x_grain = 1
 
@@ -85,9 +78,9 @@ def test_allot_nested_scale_ReturnsObj_Scenari2_depth1_NestedFilesExist(
     x_filename = "ledger.json"
     bob_dir = create_path(x_dir, bob_str)
     sue_dir = create_path(x_dir, sue_str)
-    save_file(x_dir, x_filename, get_json_from_dict(root_ledger))
-    save_file(bob_dir, x_filename, get_json_from_dict(bob_ledger))
-    save_file(sue_dir, x_filename, get_json_from_dict(sue_ledger))
+    save_json(x_dir, x_filename, root_ledger)
+    save_json(bob_dir, x_filename, bob_ledger)
+    save_json(sue_dir, x_filename, sue_ledger)
     x_scale = 200
     x_grain = 1
 
@@ -115,7 +108,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari3_depth1_NoNestedFiles(
     sue_str = "Sue"
     root_ledger = {bob_str: 10, sue_str: 40}
     x_filename = "ledger.json"
-    save_file(x_dir, x_filename, get_json_from_dict(root_ledger))
+    save_json(x_dir, x_filename, root_ledger)
     x_scale = 200
     x_grain = 1
 
@@ -152,11 +145,11 @@ def test_allot_nested_scale_ReturnsObj_Scenari4_depth1_NestedFilesExist(
     sue_dir = create_path(x_dir, sue_str)
     bob_yao_dir = create_path(bob_dir, yao_str)
     sue_yao_dir = create_path(sue_dir, yao_str)
-    save_file(x_dir, x_filename, get_json_from_dict(root_ledger))
-    save_file(bob_dir, x_filename, get_json_from_dict(bob_ledger))
-    save_file(sue_dir, x_filename, get_json_from_dict(sue_ledger))
-    save_file(bob_yao_dir, x_filename, get_json_from_dict(bob_yao_ledger))
-    save_file(sue_yao_dir, x_filename, get_json_from_dict(sue_yao_ledger))
+    save_json(x_dir, x_filename, root_ledger)
+    save_json(bob_dir, x_filename, bob_ledger)
+    save_json(sue_dir, x_filename, sue_ledger)
+    save_json(bob_yao_dir, x_filename, bob_yao_ledger)
+    save_json(sue_yao_dir, x_filename, sue_yao_ledger)
     x_scale = 200
     x_grain = 1
 
@@ -193,11 +186,11 @@ def test_allot_nested_scale_SavesFiles(env_dir_setup_cleanup):
     sue_dir = create_path(x_dir, sue_str)
     bob_yao_dir = create_path(bob_dir, yao_str)
     sue_yao_dir = create_path(sue_dir, yao_str)
-    save_file(x_dir, x_filename, get_json_from_dict(root_ledger))
-    save_file(bob_dir, x_filename, get_json_from_dict(bob_ledger))
-    save_file(sue_dir, x_filename, get_json_from_dict(sue_ledger))
-    save_file(bob_yao_dir, x_filename, get_json_from_dict(bob_yao_ledger))
-    save_file(sue_yao_dir, x_filename, get_json_from_dict(sue_yao_ledger))
+    save_json(x_dir, x_filename, root_ledger)
+    save_json(bob_dir, x_filename, bob_ledger)
+    save_json(sue_dir, x_filename, sue_ledger)
+    save_json(bob_yao_dir, x_filename, bob_yao_ledger)
+    save_json(sue_yao_dir, x_filename, sue_yao_ledger)
     x_scale = 200
     x_grain = 1
     alloted_filename = "alloted.json"
@@ -227,11 +220,11 @@ def test_allot_nested_scale_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(sue_alloted_path)
     assert os_path_exists(bob_yao_alloted_path)
     assert os_path_exists(sue_yao_alloted_path)
-    x_alloted_dict = get_dict_from_json(open_file(x_alloted_path))
-    bob_alloted_dict = get_dict_from_json(open_file(bob_alloted_path))
-    sue_alloted_dict = get_dict_from_json(open_file(sue_alloted_path))
-    bob_yao_alloted_dict = get_dict_from_json(open_file(bob_yao_alloted_path))
-    sue_yao_alloted_dict = get_dict_from_json(open_file(sue_yao_alloted_path))
+    x_alloted_dict = open_json(x_alloted_path)
+    bob_alloted_dict = open_json(bob_alloted_path)
+    sue_alloted_dict = open_json(sue_alloted_path)
+    bob_yao_alloted_dict = open_json(bob_yao_alloted_path)
+    sue_yao_alloted_dict = open_json(sue_yao_alloted_path)
 
     assert x_alloted_dict == {sue_str: 160, bob_str: 40}
     assert bob_alloted_dict == {sue_str: 20, yao_str: 20}

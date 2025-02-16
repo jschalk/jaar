@@ -1,5 +1,5 @@
-from src.f00_instrument.file import open_file, create_path
-from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
+from src.f00_instrument.file import open_json, create_path
+from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from src.f04_gift.atom_config import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
@@ -14,9 +14,7 @@ def get_pidgin_config_filename() -> str:
 
 
 def get_pidgin_config_dict() -> dict:
-    return get_dict_from_json(
-        open_file(config_file_dir(), get_pidgin_config_filename())
-    )
+    return open_json(config_file_dir(), get_pidgin_config_filename())
 
 
 def get_pidgin_dimens() -> set[str]:

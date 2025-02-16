@@ -1,4 +1,11 @@
-from src.f00_instrument.file import set_dir, delete_dir, get_dir_file_strs, create_path
+from src.f00_instrument.file import (
+    set_dir,
+    delete_dir,
+    get_dir_file_strs,
+    create_path,
+    open_file,
+    save_json,
+)
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,
@@ -11,7 +18,7 @@ from src.f01_road.jaar_config import (
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     PennyNum,
     default_fund_coin_if_None,
     FundCoin,
@@ -19,16 +26,6 @@ from src.f01_road.finance import (
     TimeLinePoint,
     FundNum,
 )
-from src.f01_road.deal import get_tranbook_from_dict
-from src.f01_road.road import (
-    default_bridge_if_None,
-    OwnerName,
-    RoadUnit,
-    FiscTitle,
-    AcctName,
-)
-from src.f02_bud.bud import BudUnit
-from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f01_road.deal import (
     DealLog,
     deallog_shop,
@@ -36,8 +33,23 @@ from src.f01_road.deal import (
     TranUnit,
     TranBook,
     tranbook_shop,
+    get_tranbook_from_dict,
 )
+from src.f01_road.road import (
+    default_bridge_if_None,
+    OwnerName,
+    RoadUnit,
+    FiscTitle,
+    AcctName,
+    EventInt,
+)
+from src.f02_bud.bud import BudUnit
+from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f05_listen.basis_buds import get_default_forecast_bud
+from src.f05_listen.hub_path import (
+    create_fisc_json_path,
+    create_episode_node_state_path,
+)
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
     listen_to_speaker_agenda,
@@ -368,6 +380,35 @@ class FiscUnit:
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
+    def create_root_episode_nodes(self, ote1_dict):
+        for owner_name, deal_log in self.deallogs.items():
+            for time_int in deal_log.episodes.keys():
+                self.create_and_save_root_episode_node(owner_name, ote1_dict, time_int)
+
+    def create_and_save_root_episode_node(
+        self,
+        owner_name: OwnerName,
+        ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
+        time_int: TimeLinePoint,
+    ):
+        max_past_event_int = _get_ote1_max_past_event_int(
+            owner_name, ote1_dict, time_int
+        )
+        owner_deallog = self.get_deallog(owner_name)
+        deal_episode = owner_deallog.get_episode(time_int)
+        episode_node = {
+            "owner_name": owner_name,
+            "event_int": max_past_event_int,
+            "ledger_depth": deal_episode.ledger_depth,
+            "quota": deal_episode.quota,
+            "penny": self.penny,
+            "ancestors": [],
+        }
+        episode_node_json_path = create_episode_node_state_path(
+            self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
+        )
+        save_json(episode_node_json_path, None, episode_node)
+
     # TODO evaluate if this should be used
     # def set_all_tranbook(self):
     #     if not hasattr(self, "_combined_tranbook"):
@@ -375,6 +416,17 @@ class FiscUnit:
     #     new_tranunits = self.cashbook.get_new_tranunits()
     #     self._combined_tranbook.add_tranunits(new_tranunits)
     #     return self._combined_tranbook
+
+
+def _get_ote1_max_past_event_int(
+    owner_name: str, ote1_dict: dict[str, dict[str, int]], time_int: int
+):
+    """Using the fisc_ote1_agg grab most recent event int before a given time_int"""
+    ote1_owner_dict = ote1_dict.get(owner_name)
+    event_timepoints = set(ote1_owner_dict.keys())
+    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
+        max_past_timepoint = max(past_timepoints)
+        return ote1_owner_dict.get(max_past_timepoint)
 
 
 def fiscunit_shop(
@@ -393,7 +445,7 @@ def fiscunit_shop(
     fisc_title = get_fisc_title_if_None(fisc_title)
     if fisc_mstr_dir is None:
         fisc_mstr_dir = get_test_fisc_mstr_dir()
-    fisc_x = FiscUnit(
+    x_fiscunit = FiscUnit(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
         timeline=timeline,
@@ -403,15 +455,18 @@ def fiscunit_shop(
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
-        penny=default_penny_if_None(penny),
+        penny=filter_penny(penny),
         _all_tranbook=tranbook_shop(fisc_title),
     )
-    fisc_x._set_fisc_dirs(in_memory_journal=in_memory_journal)
-    return fisc_x
+    x_fiscunit._set_fisc_dirs(in_memory_journal=in_memory_journal)
+    return x_fiscunit
 
 
-def get_from_json(x_fisc_json: str) -> FiscUnit:
-    return get_from_dict(get_dict_from_json(x_fisc_json))
+def _get_deallogs_from_dict(deallogs_dict: dict) -> dict[OwnerName, DealLog]:
+    return {
+        x_owner_name: get_deallog_from_dict(deallog_dict)
+        for x_owner_name, deallog_dict in deallogs_dict.items()
+    }
 
 
 def get_from_dict(fisc_dict: dict) -> FiscUnit:
@@ -428,8 +483,13 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
     return x_fisc
 
 
-def _get_deallogs_from_dict(deallogs_dict: dict) -> dict[OwnerName, DealLog]:
-    return {
-        x_owner_name: get_deallog_from_dict(deallog_dict)
-        for x_owner_name, deallog_dict in deallogs_dict.items()
-    }
+def get_from_json(x_fisc_json: str) -> FiscUnit:
+    return get_from_dict(get_dict_from_json(x_fisc_json))
+
+
+def get_from_standard(fisc_mstr_dir: str, fisc_title: FiscTitle) -> FiscUnit:
+    fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
+    x_fiscunit = get_from_json(open_file(fisc_json_path))
+    x_fiscunit.fisc_mstr_dir = fisc_mstr_dir
+    x_fiscunit._set_fisc_dirs()
+    return x_fiscunit

@@ -1,9 +1,5 @@
-from src.f00_instrument.dict_toolbox import (
-    get_0_if_None,
-    get_dict_from_json,
-    get_json_from_dict,
-)
-from src.f00_instrument.file import create_path, open_file, save_file
+from src.f00_instrument.dict_toolbox import get_0_if_None
+from src.f00_instrument.file import create_path, save_json, open_json
 from pathlib import Path
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
@@ -146,25 +142,25 @@ def allot_nested_scale(
     depth: int,
 ) -> dict[str, GrainFloat]:
     root_file_path = create_path(x_dir, src_filename)
-    root_ledger = get_dict_from_json(open_file(root_file_path))
+    root_ledger = open_json(root_file_path)
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)
     dst_filename = "alloted.json"
-    save_file(x_dir, dst_filename, get_json_from_dict(root_allot))
+    save_json(x_dir, dst_filename, root_allot)
     evalutable_allot_dirs = [x_dir]
     final_allots = {(): root_allot}
 
     while evalutable_allot_dirs != []:
         parent_dir = evalutable_allot_dirs.pop()
         parent_allot_path = create_path(parent_dir, dst_filename)
-        parent_allot = get_dict_from_json(open_file(parent_allot_path))
+        parent_allot = open_json(parent_allot_path)
         for x_dst, x_scale in parent_allot.items():
             child_dir = create_path(parent_dir, x_dst)
             local_dir_parts = _local_path_parts(x_dir, child_dir)
             child_ledger_path = create_path(child_dir, src_filename)
             if os_path_exists(child_ledger_path) and len(local_dir_parts) <= depth:
-                child_ledger = get_dict_from_json(open_file(child_ledger_path))
+                child_ledger = open_json(child_ledger_path)
                 child_allot = allot_scale(child_ledger, x_scale, grain_unit)
-                save_file(child_dir, dst_filename, get_json_from_dict(child_allot))
+                save_json(child_dir, dst_filename, child_allot)
                 final_allots[local_dir_parts] = child_allot
                 evalutable_allot_dirs.append(child_dir)
 

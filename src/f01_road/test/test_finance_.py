@@ -12,7 +12,7 @@ from src.f01_road.finance import (
     validate_respect_num,
     default_fund_coin_if_None,
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     trim_fund_coin_excess,
     trim_bit_excess,
     trim_penny_excess,
@@ -72,11 +72,11 @@ def test_PennyNum_exists():
     assert inspect_getdoc(y_pennynum) == "Smallest Unit of Money"
 
 
-def test_default_penny_if_None_ReturnsObj():
+def test_filter_penny_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_penny_if_None() == 1
-    assert default_penny_if_None(5) == 5
-    assert default_penny_if_None(0.03) == 1
+    assert filter_penny() == 1
+    assert filter_penny(5) == 5
+    assert filter_penny(0.03) == 1
 
 
 def test_trim_penny_excess_ReturnsCorrectedFloat():

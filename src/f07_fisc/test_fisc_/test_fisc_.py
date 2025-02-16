@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f01_road.finance import (
     default_fund_coin_if_None,
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
 )
 from src.f01_road.jaar_config import (
     get_gifts_folder,
@@ -54,7 +54,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.bridge == default_bridge_if_None()
     assert accord_fisc.fund_coin == default_fund_coin_if_None()
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
-    assert accord_fisc.penny == default_penny_if_None()
+    assert accord_fisc.penny == filter_penny()
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     # Calculated fields
     assert accord_fisc._owners_dir != None

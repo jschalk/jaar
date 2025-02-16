@@ -1,6 +1,6 @@
 from src.f01_road.finance import (
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
     validate_respect_num,
@@ -117,7 +117,7 @@ def test_BudUnit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
     assert x_bud.respect_bit == default_respect_bit_if_None()
-    assert x_bud.penny == default_penny_if_None()
+    assert x_bud.penny == filter_penny()
     assert x_bud.itemroot._fund_coin == x_bud.fund_coin
     assert x_bud.itemroot._bridge == x_bud.bridge
     assert x_bud.itemroot._root

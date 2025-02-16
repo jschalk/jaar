@@ -7,7 +7,7 @@ from src.f01_road.road import (
 )
 from src.f01_road.finance import (
     default_respect_bit_if_None,
-    default_penny_if_None,
+    filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
 )
@@ -178,7 +178,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_None()
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
-    assert sue_hubunit.penny == default_penny_if_None()
+    assert sue_hubunit.penny == filter_penny()
     assert sue_hubunit._owners_dir == x_owners_path
     x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_road == texas_road

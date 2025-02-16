@@ -1,5 +1,5 @@
-from src.f00_instrument.file import open_file, create_path
-from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
+from src.f00_instrument.file import open_json, create_path
+from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from os import getcwd as os_getcwd
 
 
@@ -87,7 +87,7 @@ def fisc_timeline_weekday_str() -> str:
 
 
 def get_fisc_config_dict() -> dict:
-    return get_dict_from_json(open_file(config_file_dir(), get_fisc_config_filename()))
+    return open_json(config_file_dir(), get_fisc_config_filename())
 
 
 def get_fisc_dimens() -> set[str]:

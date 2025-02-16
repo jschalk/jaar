@@ -1,6 +1,5 @@
-from src.f00_instrument.file import open_file
+from src.f00_instrument.file import open_json
 from src.f00_instrument.plotly_toolbox import conditional_fig_show
-from src.f00_instrument.dict_toolbox import get_dict_from_json
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit, budunit_shop
 from src.f03_chrono.chrono import (
@@ -46,7 +45,7 @@ def get_squirt_config() -> dict:
 
 def get_example_timeline_config(timeline_title: str) -> dict:
     x_filename = f"timeline_config_{timeline_title}.json"
-    return get_dict_from_json(open_file(chrono_examples_dir(), x_filename))
+    return open_json(chrono_examples_dir(), x_filename)
 
 
 def cregtime_itemunit() -> ItemUnit:

@@ -10,7 +10,8 @@ from src.f04_gift.atom_config import (
     debtit_belief_str,
     event_int_str,
 )
-from src.f09_idea.idea_config import idea_number_str, fiscunit_str
+from src.f07_fisc.fisc_config import fiscunit_str
+from src.f09_idea.idea_config import idea_number_str
 from src.f10_etl.tran_sqlstrs import create_bud_tables
 from src.f10_etl.transformers import (
     etl_idea_staging_to_bud_tables,

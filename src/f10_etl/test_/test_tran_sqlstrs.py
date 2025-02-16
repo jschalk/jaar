@@ -51,8 +51,8 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
-    INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR,
+    CREATE_FISC_OTE1_AGG_SQLSTR,
+    INSERT_FISC_OTE1_AGG_SQLSTR,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -912,7 +912,7 @@ WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
     assert UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
-def test_CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
+def test_CREATE_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = """
 CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
@@ -925,10 +925,10 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 ;
 """
     # WHEN / THEN
-    assert CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_FISC_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR_Exists():
+def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
 INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, time_int)
@@ -942,4 +942,4 @@ ORDER BY fisc_title, owner_name, event_int, time_int
 ;
 """
     # WHEN / THEN
-    assert INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_FISC_OTE1_AGG_SQLSTR == expected_INSERT_sqlstr

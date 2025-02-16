@@ -929,7 +929,7 @@ WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
 """
 
 
-CREATE_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR = """
+CREATE_FISC_OTE1_AGG_SQLSTR = """
 CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
   fisc_title TEXT
 , owner_name TEXT
@@ -939,7 +939,7 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 )
 ;
 """
-INSERT_FISC_OWNER_DEAL_TIME_AGG1_SQLSTR = """
+INSERT_FISC_OTE1_AGG_SQLSTR = """
 INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, time_int)
 SELECT fisc_title, owner_name, event_int, time_int
 FROM (
