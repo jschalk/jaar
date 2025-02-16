@@ -1,5 +1,4 @@
-from src.f00_instrument.file import open_file, create_path as f_path
-from src.f00_instrument.dict_toolbox import get_dict_from_json
+from src.f00_instrument.file import create_path as f_path, open_json
 from src.f01_road.deal import owner_name_str
 from src.f01_road.jaar_config import (
     get_gifts_folder,
@@ -46,8 +45,8 @@ def test_GiftUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(sue_atom2_path)
     assert os_path_exists(sue_atom6_path) is False
-    two_file_json = open_file(sue_atoms_dir, two_filename)
-    assert two_file_json == sports_atom.get_json()
+    two_file_dict = open_json(sue_atoms_dir, two_filename)
+    assert two_file_dict == sports_atom.get_dict()
 
 
 def test_GiftUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
@@ -132,8 +131,7 @@ def test_GiftUnit_save_gift_file_SavesCorrectFile(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(sue_gift2_path)
     assert os_path_exists(sue_gift6_path) is False
-    gift_file_json = open_file(sue_gifts_dir, two_filename)
-    gift_file_dict = get_dict_from_json(gift_file_json)
+    gift_file_dict = open_json(sue_gifts_dir, two_filename)
     print(f"{gift_file_dict=}")
     assert gift_file_dict.get("delta_atom_numbers") == []
     assert gift_file_dict.get(owner_name_str()) == sue_str

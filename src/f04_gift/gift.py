@@ -1,4 +1,4 @@
-from src.f00_instrument.file import save_file, open_file, create_path
+from src.f00_instrument.file import save_file, open_file, open_json, create_path
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.jaar_config import get_init_gift_id_if_None, get_json_filename
 from src.f01_road.road import (
@@ -181,7 +181,7 @@ def create_giftunit_from_files(
     atoms_dir: str,
 ) -> GiftUnit:
     gift_filename = get_json_filename(gift_id)
-    gift_dict = get_dict_from_json(open_file(gifts_dir, gift_filename))
+    gift_dict = open_json(gifts_dir, gift_filename)
     x_owner_name = gift_dict.get("owner_name")
     x_fisc_title = gift_dict.get("fisc_title")
     x_face_name = gift_dict.get("face_name")

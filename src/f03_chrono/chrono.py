@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.f00_instrument.file import open_file, create_path
+from src.f00_instrument.file import open_json, create_path
 from src.f01_road.road import RoadUnit, TimeLineTitle
 from src.f02_bud.item import (
     itemunit_shop,
@@ -50,7 +50,7 @@ class C400Constants:
 
 def get_c400_constants() -> C400Constants:
     c400_constants_path = create_path("src/f03_chrono/", "c400_constants.json")
-    c400_dict = get_dict_from_json(open_file(c400_constants_path))
+    c400_dict = open_json(c400_constants_path)
     return C400Constants(
         day_length=c400_dict.get(f"{day_str()}_length"),
         c400_leap_length=c400_dict.get(f"{c400_leap_str()}_length"),
@@ -602,7 +602,7 @@ def get_default_timeline_config_filename() -> str:
 
 def get_default_timeline_config_dict() -> dict:
     x_filename = get_default_timeline_config_filename()
-    return get_dict_from_json(open_file(config_file_dir(), x_filename))
+    return open_json(config_file_dir(), x_filename)
 
 
 @dataclass

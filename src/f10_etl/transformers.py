@@ -921,7 +921,7 @@ def etl_create_root_episode_nodes(fisc_mstr_dir: str):
         fisc_dir = create_path(fiscs_dir, fisc_title)
         ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
         if os_path_exists(ote1_json_path):
-            ote1_dict = get_dict_from_json(open_file(ote1_json_path))
+            ote1_dict = open_json(ote1_json_path)
             x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
             x_fiscunit.create_root_episode_nodes(ote1_dict)
 

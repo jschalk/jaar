@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_file, save_file, create_path
+from src.f00_instrument.file import open_json, save_file, create_path
 from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
@@ -249,7 +249,7 @@ def config_file_dir() -> str:
 
 
 def get_atom_config_dict() -> dict:
-    return get_dict_from_json(open_file(config_file_dir(), get_atom_config_filename()))
+    return open_json(config_file_dir(), get_atom_config_filename())
 
 
 def get_atom_config_jkeys(x_dimen: str) -> dict:

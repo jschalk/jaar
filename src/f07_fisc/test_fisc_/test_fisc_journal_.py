@@ -1,5 +1,11 @@
-from src.f00_instrument.dict_toolbox import get_dict_from_json, get_from_nested_dict
-from src.f00_instrument.file import delete_dir, save_file, open_file, create_path
+from src.f00_instrument.dict_toolbox import get_from_nested_dict
+from src.f00_instrument.file import (
+    delete_dir,
+    save_file,
+    open_file,
+    open_json,
+    create_path,
+)
 from src.f00_instrument.db_toolbox import (
     get_db_tables,
     get_db_columns,
@@ -129,8 +135,7 @@ def test_fisc_set_fisc_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
 
     # THEN
     # grab config.json
-    config_str = open_file(dest_dir="src/f07_fisc", filename="journal_db_check.json")
-    config_dict = get_dict_from_json(config_str)
+    config_dict = open_json(dest_dir="src/f07_fisc", filename="journal_db_check.json")
     tables_dict = get_from_nested_dict(config_dict, ["tables"])
     print(f"{tables_dict=}")
 

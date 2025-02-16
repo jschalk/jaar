@@ -1,5 +1,5 @@
-from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
-from src.f00_instrument.file import open_file, save_file, open_json, count_dirs_files
+from src.f00_instrument.dict_toolbox import get_json_from_dict
+from src.f00_instrument.file import save_file, open_json, count_dirs_files
 from src.f01_road.deal import (
     ledger_depth_str,
     owner_name_str,
@@ -79,9 +79,8 @@ def test_WorldUnit_create_root_episode_nodes_Scenaro1_DealExists(
 
     # THEN
     assert os_path_exists(tp37_episode_node_json_path)
-    ledger_state_json = open_file(tp37_episode_node_json_path)
-    print(f"{ledger_state_json=}")
-    ledger_state_dict = get_dict_from_json(ledger_state_json)
+    ledger_state_dict = open_json(tp37_episode_node_json_path)
+    print(f"{ledger_state_dict=}")
     assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
     assert ledger_state_dict.get(owner_name_str()) == bob_str
     assert ledger_state_dict.get(quota_str()) == deal1_quota
@@ -126,9 +125,8 @@ def test_WorldUnit_create_root_episode_nodes_Scenaro2_DealExistsButNoBudExistsIn
 
     # THEN
     assert os_path_exists(tp37_episode_node_json_path)
-    ledger_state_json = open_file(tp37_episode_node_json_path)
-    print(f"{ledger_state_json=}")
-    ledger_state_dict = get_dict_from_json(ledger_state_json)
+    ledger_state_dict = open_json(tp37_episode_node_json_path)
+    print(f"{ledger_state_dict=}")
     assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
     assert ledger_state_dict.get(owner_name_str()) == bob_str
     assert ledger_state_dict.get(quota_str()) == deal1_quota
