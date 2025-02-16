@@ -47,7 +47,7 @@ from src.f05_listen.hub_tool import (
     get_owners_downhill_event_ints,
     get_events_owner_credit_ledger,
 )
-from src.f07_fisc.fisc import get_from_json as fiscunit_get_from_json, FiscUnit
+from src.f07_fisc.fisc import get_from_standard as fiscunit_get_from_standard, FiscUnit
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -922,58 +922,8 @@ def etl_create_root_episode_nodes(fisc_mstr_dir: str):
         ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = get_dict_from_json(open_file(ote1_json_path))
-            fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
-            x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
-            for owner_name, deal_log in x_fiscunit.deallogs.items():
-                for time_int, deal_episode in deal_log.episodes.items():
-                    create_and_save_root_episode_node(
-                        fisc_mstr_dir, x_fiscunit, owner_name, ote1_dict, time_int
-                    )
-
-
-def create_and_save_root_episode_node(
-    fisc_mstr_dir: str,
-    x_fiscunit: FiscUnit,
-    owner_name: OwnerName,
-    ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
-    time_int,
-):
-    max_past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
-    owner_deallog = x_fiscunit.get_deallog(owner_name)
-    deal_episode = owner_deallog.get_episode(time_int)
-    episode_node = {
-        "owner_name": owner_name,
-        "event_int": max_past_event_int,
-        "ledger_depth": deal_episode.ledger_depth,
-        "quota": deal_episode.quota,
-        "penny": x_fiscunit.penny,
-        "ancestors": [],
-    }
-    _save_episode_node(
-        fisc_mstr_dir,
-        x_fiscunit.fisc_title,
-        owner_name,
-        time_int,
-        episode_node,
-    )
-
-
-def _save_episode_node(fisc_mstr_dir, fisc_title, owner_name, time_int, episode_node):
-    episode_node_json_path = create_episode_node_state_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
-    )
-    save_json(episode_node_json_path, None, episode_node)
-
-
-def _get_ote1_max_past_event_int(
-    owner_name: str, ote1_dict: dict[str, dict[str, int]], time_int: int
-):
-    """Using the fisc_ote1_agg grab most recent event int before a given time_int"""
-    ote1_owner_dict = ote1_dict.get(owner_name)
-    event_timepoints = set(ote1_owner_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
-        max_past_timepoint = max(past_timepoints)
-        return ote1_owner_dict.get(max_past_timepoint)
+            x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
+            x_fiscunit.create_root_episode_nodes(ote1_dict)
 
 
 def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
@@ -1203,8 +1153,5 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
 def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
-        x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
-        x_fiscunit.fisc_mstr_dir = fisc_mstr_dir
-        x_fiscunit._set_fisc_dirs()
+        x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
         x_fiscunit.generate_all_forecast_buds()

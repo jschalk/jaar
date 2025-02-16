@@ -1,3 +1,4 @@
+from src.f00_instrument.file import save_file, create_path
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.finance import (
     default_fund_coin_if_None,
@@ -7,10 +8,12 @@ from src.f01_road.finance import (
 from src.f01_road.deal import bridge_str, fisc_title_str
 from src.f03_chrono.chrono import get_default_timeline_config_dict
 from src.f04_gift.atom_config import fund_coin_str, respect_bit_str, penny_str
+from src.f05_listen.hub_path import create_fisc_json_path
 from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_dict as fiscunit_get_from_dict,
     get_from_json as fiscunit_get_from_json,
+    get_from_standard as fiscunit_get_from_standard,
 )
 from src.f07_fisc.fisc_config import (
     timeline_str,
@@ -222,3 +225,32 @@ def test_get_from_json_ReturnsFiscUnit():
     assert x_fisc.deallogs == accord_fisc.deallogs
     assert x_fisc.fisc_mstr_dir == accord_fisc.fisc_mstr_dir
     assert x_fisc == accord_fisc
+
+
+def test_get_from_file_ReturnsFiscUnitWith_fisc_mstr_dir(env_dir_setup_cleanup):
+    # ESTABLISH
+    accord45_str = "accord45"
+    accord45_fisc = fiscunit_shop(accord45_str)
+    sue_timeline_title = "sue casa"
+    accord45_fisc.timeline.timeline_title = sue_timeline_title
+    sue_present_time = 23
+    sue_respect_bit = 0.5
+    accord45_fisc.present_time = sue_present_time
+    accord45_fisc.respect_bit = sue_respect_bit
+    x_fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_buzz")
+    accord45_json_path = create_fisc_json_path(x_fisc_mstr_dir, accord45_str)
+    save_file(accord45_json_path, None, accord45_fisc.get_json())
+    assert accord45_fisc.fisc_mstr_dir != x_fisc_mstr_dir
+
+    # WHEN
+    generated_a45_fisc = fiscunit_get_from_standard(x_fisc_mstr_dir, accord45_str)
+
+    # THEN
+    assert generated_a45_fisc.fisc_mstr_dir == x_fisc_mstr_dir
+    assert generated_a45_fisc.fisc_title == accord45_str
+    assert generated_a45_fisc.timeline.timeline_title == sue_timeline_title
+    assert generated_a45_fisc.present_time == sue_present_time
+    assert generated_a45_fisc.respect_bit == sue_respect_bit
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    expected_a45_fisc_dir = create_path(x_fiscs_dir, accord45_str)
+    assert generated_a45_fisc._fisc_dir == expected_a45_fisc_dir
