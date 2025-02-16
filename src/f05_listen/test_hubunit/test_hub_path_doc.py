@@ -9,9 +9,13 @@ from src.f05_listen.hub_path import (
     create_episodes_dir_path,
     create_timepoint_dir_path,
     create_deal_path,
-    create_budpoint_json_path,
+    create_budpoint_path,
+    create_deal_ledger_depth_dir_path,
+    create_deal_ledger_state_json_path,
+    create_deal_credit_ledger_json_path,
+    create_deal_quota_ledger_json_path,
     create_owner_event_dir_path,
-    create_event_bud_path,
+    create_budevent_path,
     create_event_all_gift_path,
     create_event_expressed_gift_path,
     create_voice_path,
@@ -98,6 +102,66 @@ def test_create_timepoint_dir_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_timepoint_dir_path) == doc_str
 
 
+def test_create_deal_ledger_depth_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_deal_ledger_depth_dir_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+        time_int=time_int_str(),
+        ledger_owners=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
+    )
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_deal_ledger_depth_dir_path) == doc_str
+
+
+def test_create_deal_ledger_state_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_deal_ledger_state_json_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+        time_int=time_int_str(),
+        ledger_owners=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
+    )
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_deal_ledger_state_json_path) == doc_str
+
+
+def test_create_deal_credit_ledger_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_deal_credit_ledger_json_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+        time_int=time_int_str(),
+        ledger_owners=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
+    )
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_deal_credit_ledger_json_path) == doc_str
+
+
+def test_create_deal_quota_ledger_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_deal_quota_ledger_json_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+        time_int=time_int_str(),
+        ledger_owners=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
+    )
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_deal_quota_ledger_json_path) == doc_str
+
+
 def test_create_deal_path_HasDocString():
     # ESTABLISH
     doc_str = create_deal_path(
@@ -111,9 +175,9 @@ def test_create_deal_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_deal_path) == doc_str
 
 
-def test_create_budpoint_json_path_HasDocString():
+def test_create_budpoint_path_HasDocString():
     # ESTABLISH
-    doc_str = create_budpoint_json_path(
+    doc_str = create_budpoint_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -121,7 +185,7 @@ def test_create_budpoint_json_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_budpoint_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_budpoint_path) == doc_str
 
 
 def test_create_owner_event_dir_path_HasDocString():
@@ -137,9 +201,9 @@ def test_create_owner_event_dir_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_owner_event_dir_path) == doc_str
 
 
-def test_create_event_bud_path_HasDocString():
+def test_create_budevent_path_HasDocString():
     # ESTABLISH
-    doc_str = create_event_bud_path(
+    doc_str = create_budevent_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -147,7 +211,7 @@ def test_create_event_bud_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_event_bud_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_budevent_path) == doc_str
 
 
 def test_create_event_all_gift_path_HasDocString():

@@ -4,6 +4,8 @@ from src.f00_instrument.file import (
     get_dir_file_strs,
     save_file,
     open_file,
+    save_json,
+    open_json,
     count_files,
     get_directory_path,
     is_path_valid,
@@ -16,6 +18,7 @@ from src.f00_instrument.file import (
     get_dir_filenames,
     get_max_file_number,
 )
+from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f00_instrument.examples.instrument_env import (
     get_instrument_temp_env_dir,
     env_dir_setup_cleanup,
@@ -124,6 +127,48 @@ def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
     assert open_file(dest_dir=x1_file_path, filename=None) == x1_file_str
     assert open_file(dest_dir=x2_file_path, filename=None) == x2_file_str
     assert open_file(dest_dir=x2_file_path) == x2_file_str
+
+
+def test_save_json_SetsFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    bob_str = "bob"
+    yao_str = "yao"
+    x_filename = "fizz_buzz.json"
+    x_dict = {"users": {bob_str: 1, yao_str: 2}}
+    print(f"{env_dir=} {x_filename=}")
+    assert not os_path_exist(create_path(env_dir, x_filename))
+
+    # WHEN
+    save_json(env_dir, x_filename, x_dict)
+
+    # THEN
+    assert os_path_exist(create_path(env_dir, x_filename))
+    generated_dict = get_dict_from_json(open_file(env_dir, x_filename))
+    print(f"{generated_dict=}")
+    expected_dict = {"users": {"bob": 1, "yao": 2}}
+    assert generated_dict == expected_dict
+
+
+def test_open_json_ReturnObj(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    env_dir = get_instrument_temp_env_dir()
+    bob_str = "bob"
+    yao_str = "yao"
+    x_filename = "fizz_buzz.json"
+    x_dict = {"names": {bob_str: 1, yao_str: 2}}
+    print(f"{env_dir=} {x_filename=}")
+    save_json(env_dir, x_filename, x_dict)
+    assert os_path_exist(create_path(env_dir, x_filename))
+
+    # WHEN
+    generated_dict = open_json(env_dir, x_filename)
+
+    # THEN
+    expected_dict = {"names": {"bob": 1, "yao": 2}}
+    assert generated_dict == expected_dict
 
 
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):

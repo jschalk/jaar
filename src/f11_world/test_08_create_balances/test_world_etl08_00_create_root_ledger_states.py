@@ -1,13 +1,18 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
-from src.f01_road.deal import ledger_depth_str, owner_name_str, quota_str
+from src.f01_road.deal import (
+    ledger_depth_str,
+    owner_name_str,
+    quota_str,
+    DEFAULT_DEPTH_LEDGER,
+)
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
-    create_event_bud_path,
-    create_budpoint_json_path,
+    create_budevent_path,
+    create_budpoint_path,
     create_deal_ledger_state_json_path,
     create_fisc_ote1_json_path,
 )
@@ -18,7 +23,9 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(env_dir_setup_cleanup):
+def test_WorldUnit_create_root_ledger_states_Scenaro0_DealEmpty(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     accord23_str = "accord23"
@@ -31,13 +38,15 @@ def test_WorldUnit_create_budpoints_Scenaro0_DealEmpty(env_dir_setup_cleanup):
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    fizz_world.create_budpoints()
+    fizz_world.create_root_ledger_states()
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_create_budpoints_Scenaro1_DealExists(env_dir_setup_cleanup):
+def test_WorldUnit_create_root_ledger_states_Scenaro1_DealExists(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
@@ -63,29 +72,27 @@ def test_WorldUnit_create_budpoints_Scenaro1_DealExists(env_dir_setup_cleanup):
     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
     assert os_path_exists(a23_ote1_json_path)
 
-    # Create bob event 37 Budunit json
-    e3_budunit = budunit_shop(bob_str, a23_str)
-    e3_budpoint_path = create_event_bud_path(fisc_mstr_dir, a23_str, bob_str, event3)
-    save_file(e3_budpoint_path, None, e3_budunit.get_json())
-    assert os_path_exists(e3_budpoint_path)
-
-    # destination of event 37 budunit json
-    timepoint37_budpoint_path = create_budpoint_json_path(
+    # timepoint37 deal_ledger_state path
+    tp37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
-    print(f"{timepoint37_budpoint_path=}")
-    assert os_path_exists(timepoint37_budpoint_path) is False
+    assert os_path_exists(tp37_deal_ledger_state_json_path) is False
 
     # WHEN
-    fizz_world.create_budpoints()
+    fizz_world.create_root_ledger_states()
 
     # THEN
-    assert os_path_exists(timepoint37_budpoint_path)
-    generated_e3_bud = budunit_get_from_json(open_file(timepoint37_budpoint_path))
-    assert e3_budunit.get_dict() == generated_e3_bud.get_dict()
+    assert os_path_exists(tp37_deal_ledger_state_json_path)
+    ledger_state_json = open_file(tp37_deal_ledger_state_json_path)
+    print(f"{ledger_state_json=}")
+    ledger_state_dict = get_dict_from_json(ledger_state_json)
+    assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
+    assert ledger_state_dict.get(owner_name_str()) == bob_str
+    assert ledger_state_dict.get(quota_str()) == deal1_quota
+    assert ledger_state_dict.get(event_int_str()) == event3
 
 
-def test_WorldUnit_create_budpoints_Scenaro2_DealExistsButNoBudExistsInEventsPast(
+def test_WorldUnit_create_root_ledger_states_Scenaro2_DealExistsButNoBudExistsInEventsPast(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -113,28 +120,26 @@ def test_WorldUnit_create_budpoints_Scenaro2_DealExistsButNoBudExistsInEventsPas
     print(f"{a23_ote1_json_path=}")
     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
     assert os_path_exists(a23_ote1_json_path)
-
-    # Create bob event 3 Budunit json
-    e3_budunit = budunit_shop(bob_str, a23_str)
-    e3_budpoint_path = create_event_bud_path(fisc_mstr_dir, a23_str, bob_str, event3)
-    save_file(e3_budpoint_path, None, e3_budunit.get_json())
-    assert os_path_exists(e3_budpoint_path)
-
-    # where a timepoint 37 budunit json should be
-    timepoint37_budpoint_path = create_budpoint_json_path(
+    tp37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
-    print(f"{timepoint37_budpoint_path=}")
-    assert os_path_exists(timepoint37_budpoint_path) is False
+    assert os_path_exists(tp37_deal_ledger_state_json_path) is False
 
     # WHEN
-    fizz_world.create_budpoints()
+    fizz_world.create_root_ledger_states()
 
     # THEN
-    assert os_path_exists(timepoint37_budpoint_path) is False
+    assert os_path_exists(tp37_deal_ledger_state_json_path)
+    ledger_state_json = open_file(tp37_deal_ledger_state_json_path)
+    print(f"{ledger_state_json=}")
+    ledger_state_dict = get_dict_from_json(ledger_state_json)
+    assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
+    assert ledger_state_dict.get(owner_name_str()) == bob_str
+    assert ledger_state_dict.get(quota_str()) == deal1_quota
+    assert not ledger_state_dict.get(event_int_str())
 
 
-def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
+def test_WorldUnit_create_root_ledger_states_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -166,33 +171,18 @@ def test_WorldUnit_create_budpoints_Scenaro3_DealExistsNotPerfectMatch_time_int_
     save_file(a23_ote1_json_path, None, get_json_from_dict(a23_ote1_dict))
     assert os_path_exists(a23_ote1_json_path)
 
-    # Create bob event 3 Budunit json
-    e3_budunit = budunit_shop(bob_str, a23_str)
-    e3_budpoint_path = create_event_bud_path(fisc_mstr_dir, a23_str, bob_str, event3)
-    save_file(e3_budpoint_path, None, e3_budunit.get_json())
-    assert os_path_exists(e3_budpoint_path)
-
-    # destination of event 3 budunit json
-    timepoint37_budpoint_path = create_budpoint_json_path(
-        fisc_mstr_dir, a23_str, bob_str, timepoint37
-    )
-    print(f"{timepoint37_budpoint_path=}")
     # destination of deal_ledger_state json
-    timepoint37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
+    tp37_deal_ledger_state_json_path = create_deal_ledger_state_json_path(
         fisc_mstr_dir, a23_str, bob_str, timepoint37
     )
-    assert os_path_exists(timepoint37_budpoint_path) is False
+    assert os_path_exists(tp37_deal_ledger_state_json_path) is False
 
     # WHEN
-    fizz_world.create_budpoints()
+    fizz_world.create_root_ledger_states()
 
     # THEN
-    assert os_path_exists(timepoint37_budpoint_path)
-    generated_e3_bud = budunit_get_from_json(open_file(timepoint37_budpoint_path))
-    assert e3_budunit.get_dict() == generated_e3_bud.get_dict()
-
-    assert os_path_exists(timepoint37_deal_ledger_state_json_path)
-    ledger_state_json = open_file(timepoint37_deal_ledger_state_json_path)
+    assert os_path_exists(tp37_deal_ledger_state_json_path)
+    ledger_state_json = open_file(tp37_deal_ledger_state_json_path)
     ledger_state_dict = get_dict_from_json(ledger_state_json)
     assert ledger_state_dict.get(ledger_depth_str()) == deal1_ledger_depth
     assert ledger_state_dict.get(owner_name_str()) == bob_str
