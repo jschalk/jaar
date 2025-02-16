@@ -11,7 +11,7 @@ from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
-    create_event_bud_path,
+    create_budevent_path,
     create_budpoint_path,
     create_deal_ledger_state_json_path,
     create_fisc_ote1_json_path,

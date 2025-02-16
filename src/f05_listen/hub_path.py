@@ -108,6 +108,34 @@ def create_deal_ledger_state_json_path(
     return create_path(timepoint_dir, "deal_ledger_state.json")
 
 
+def create_deal_credit_ledger_json_path(
+    fisc_mstr_dir: str,
+    fisc_title: TitleUnit,
+    owner_name: OwnerName,
+    time_int: int,
+    ledger_owners: list[OwnerName] = None,
+):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\episodes\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\credit_ledger.json"""
+    timepoint_dir = create_deal_ledger_depth_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int, ledger_owners
+    )
+    return create_path(timepoint_dir, "credit_ledger.json")
+
+
+def create_deal_quota_ledger_json_path(
+    fisc_mstr_dir: str,
+    fisc_title: TitleUnit,
+    owner_name: OwnerName,
+    time_int: int,
+    ledger_owners: list[OwnerName] = None,
+):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\episodes\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\quota_ledger.json"""
+    timepoint_dir = create_deal_ledger_depth_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int, ledger_owners
+    )
+    return create_path(timepoint_dir, "quota_ledger.json")
+
+
 def create_owner_event_dir_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ):
@@ -120,7 +148,7 @@ def create_owner_event_dir_path(
     return create_path(fisc_events_dir, event_int)
 
 
-def create_event_bud_path(
+def create_budevent_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\bud.json"""

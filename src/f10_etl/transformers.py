@@ -1,4 +1,11 @@
-from src.f00_instrument.file import create_path, get_dir_file_strs, save_file, open_file
+from src.f00_instrument.file import (
+    create_path,
+    get_dir_file_strs,
+    save_file,
+    open_file,
+    save_json,
+    open_json,
+)
 from src.f00_instrument.csv_toolbox import open_csv_with_types
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
@@ -8,12 +15,12 @@ from src.f00_instrument.db_toolbox import (
 )
 from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from src.f01_road.road import FaceName, EventInt
+from src.f01_road.deal import allot_scale
 from src.f02_bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
     BudUnit,
 )
-from src.f02_bud.bud_tool import get_credit_ledger
 from src.f04_gift.atom import atomunit_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
@@ -24,13 +31,16 @@ from src.f05_listen.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
-    create_event_bud_path,
+    create_budevent_path,
     create_budpoint_path,
     create_deal_ledger_state_json_path,
+    create_deal_quota_ledger_json_path,
+    create_deal_credit_ledger_json_path,
 )
 from src.f05_listen.hub_tool import (
     collect_events_dir_owner_events_sets,
     get_owners_downhill_event_ints,
+    get_events_owner_credit_ledger,
 )
 from src.f07_fisc.fisc import get_from_json as fiscunit_get_from_json
 from src.f07_fisc.fisc_config import get_fisc_dimens
@@ -939,7 +949,46 @@ def get_max_past_event_int(owner_name: str, ote1_dict: dict[str, int], time_int:
 
 
 def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
-    pass
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_dir = create_path(fiscs_dir, fisc_title)
+        owners_dir = create_path(fisc_dir, "owners")
+        for owner_name in get_level1_dirs(owners_dir):
+            owner_dir = create_path(owners_dir, owner_name)
+            episodes_dir = create_path(owner_dir, "episodes")
+            for time_int in get_level1_dirs(episodes_dir):
+                process_root_ledger_depth(
+                    fisc_mstr_dir, fisc_title, owner_name, time_int
+                )
+
+
+def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
+    root_ledger_state_json_path = create_deal_ledger_state_json_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int
+    )
+    if os_path_exists(root_ledger_state_json_path):
+        root_ledger_state_json = open_file(root_ledger_state_json_path)
+        root_ledger_state_dict = get_dict_from_json(root_ledger_state_json)
+        x_event_int = root_ledger_state_dict.get("event_int")
+        x_ledger_depth = root_ledger_state_dict.get("ledger_depth")
+        x_owner_name = root_ledger_state_dict.get("owner_name")
+        x_quota = root_ledger_state_dict.get("quota")
+        root_credit_ledger_dict = get_events_owner_credit_ledger(
+            fisc_mstr_dir, fisc_title, x_owner_name, x_event_int
+        )
+        deal_credit_ledger_json_path = create_deal_credit_ledger_json_path(
+            fisc_mstr_dir, fisc_title, owner_name, time_int
+        )
+        deal_quota_ledger_json_path = create_deal_quota_ledger_json_path(
+            fisc_mstr_dir, fisc_title, owner_name, time_int
+        )
+        save_json(deal_credit_ledger_json_path, None, root_credit_ledger_dict)
+        root_quota_ledger = allot_scale(root_credit_ledger_dict, x_quota, 1)
+        save_json(deal_quota_ledger_json_path, None, root_quota_ledger)
+        # print(f"{root_ledger_state_dict=}")
+        # print(f"{root_credit_ledger_dict=}")
+        # print(f"{root_quota_ledger=}")
+
     # print(
     #     f"{owner_name=} {time_int=} {timepoint_event_int=} {deal_episode=}"
     # )
@@ -1082,7 +1131,7 @@ def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 prev_bud = _get_prev_event_int_budunit(
                     fisc_mstr_dir, fisc_title, owner_name, prev_event_int
                 )
-                event_bud_path = create_event_bud_path(
+                budevent_path = create_budevent_path(
                     fisc_mstr_dir, fisc_title, owner_name, event_int
                 )
                 event_dir = create_owner_event_dir_path(
@@ -1092,7 +1141,7 @@ def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 event_gift = get_giftunit_from_json(open_file(gift_path))
                 sift_delta = get_minimal_buddelta(event_gift._buddelta, prev_bud)
                 curr_bud = event_gift.get_edited_bud(prev_bud)
-                save_file(event_bud_path, None, curr_bud.get_json())
+                save_file(budevent_path, None, curr_bud.get_json())
                 expressed_gift = copy_deepcopy(event_gift)
                 expressed_gift.set_buddelta(sift_delta)
                 save_file(event_dir, "expressed_gift.json", expressed_gift.get_json())
@@ -1104,10 +1153,10 @@ def _get_prev_event_int_budunit(
 ) -> BudUnit:
     if prev_event_int is None:
         return budunit_shop(owner_name, fisc_title)
-    prev_event_bud_path = create_event_bud_path(
+    prev_budevent_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, prev_event_int
     )
-    return budunit_get_from_json(open_file(prev_event_bud_path))
+    return budunit_get_from_json(open_file(prev_budevent_path))
 
 
 def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
@@ -1116,10 +1165,10 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
         owner_events = collect_events_dir_owner_events_sets(fisc_mstr_dir, fisc_title)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
-            max_event_bud_path = create_event_bud_path(
+            max_budevent_path = create_budevent_path(
                 fisc_mstr_dir, fisc_title, owner_name, max_event_int
             )
-            max_event_bud_json = open_file(max_event_bud_path)
+            max_event_bud_json = open_file(max_budevent_path)
             voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
             save_file(voice_path, None, max_event_bud_json)
 

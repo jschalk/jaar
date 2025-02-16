@@ -10,7 +10,7 @@ from src.f04_gift.atom_config import (
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
 from src.f05_listen.hub_path import (
     create_owner_event_dir_path,
-    create_event_bud_path,
+    create_budevent_path,
     create_event_all_gift_path,
     create_event_expressed_gift_path,
 )

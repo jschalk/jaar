@@ -1,3 +1,4 @@
+from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
 from os import (
     name as os_name,
     environ as os_environ,
@@ -95,6 +96,14 @@ def open_file(dest_dir: str, filename: str = None):
             f"Could not load file {file_path} {e.args}"
         ) from e
     return x_str
+
+
+def save_json(dest_dir: str, filename: str, x_dict: dict, replace: bool = True):
+    save_file(dest_dir, filename, get_json_from_dict(x_dict))
+
+
+def open_json(dest_dir: str, filename: str = None):
+    return get_dict_from_json(open_file(dest_dir, filename))
 
 
 def count_files(dir_path: str) -> int:
