@@ -900,7 +900,7 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         save_file(json_path, None, get_json_from_dict(x_dict))
 
 
-def etl_create_budpoints(fisc_mstr_dir: str):
+def etl_create_root_ledger_states(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_dir = create_path(fiscs_dir, fisc_title)
@@ -911,13 +911,8 @@ def etl_create_budpoints(fisc_mstr_dir: str):
             x_fiscunit = fiscunit_get_from_json(open_file(fisc_json_path))
             for owner_name, deal_log in x_fiscunit.deallogs.items():
                 for time_int, deal_episode in deal_log.episodes.items():
-                    ote1_owner_dict = ote1_dict.get(owner_name)
-                    max_past_event_int = save_budpoint_file_from_events(
-                        fisc_mstr_dir=fisc_mstr_dir,
-                        fisc_title=fisc_title,
-                        owner_name=owner_name,
-                        ote1_owner_dict=ote1_owner_dict,
-                        time_int=time_int,
+                    max_past_event_int = get_max_past_event_int(
+                        owner_name, ote1_dict, time_int
                     )
                     deal_ledger_state = {
                         "ledger_depth": deal_episode.ledger_depth,
@@ -933,6 +928,14 @@ def etl_create_budpoints(fisc_mstr_dir: str):
                     )
                     deal_ledger_json = get_json_from_dict(deal_ledger_state)
                     save_file(deal_ledger_state_json_path, None, deal_ledger_json)
+
+
+def get_max_past_event_int(owner_name: str, ote1_dict: dict[str, int], time_int: int):
+    ote1_owner_dict = ote1_dict.get(owner_name)
+    event_timepoints = set(ote1_owner_dict.keys())
+    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
+        max_past_timepoint = max(past_timepoints)
+        return ote1_owner_dict.get(max_past_timepoint)
 
 
 def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
@@ -953,28 +956,6 @@ def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
     #       get bud from event_int
     #       add ledger
     #    add to ledger incomplete list
-
-
-def save_budpoint_file_from_events(
-    fisc_mstr_dir: str,
-    fisc_title: str,
-    owner_name: str,
-    ote1_owner_dict: dict[str, int],
-    time_int: int,
-):
-    event_timepoints = set(ote1_owner_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
-        max_past_timepoint = max(past_timepoints)
-        max_past_event_int = ote1_owner_dict.get(max_past_timepoint)
-        event_bud_path = create_event_bud_path(
-            fisc_mstr_dir, fisc_title, owner_name, max_past_event_int
-        )
-        event_bud_json = open_file(event_bud_path)
-        budpoint_path = create_budpoint_path(
-            fisc_mstr_dir, fisc_title, owner_name, time_int
-        )
-        save_file(budpoint_path, None, event_bud_json)
-        return max_past_event_int
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):

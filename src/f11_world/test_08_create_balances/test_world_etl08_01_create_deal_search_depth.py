@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import get_dict_from_json, get_json_from_dict
 from src.f00_instrument.file import open_file, save_file, create_path, count_dirs_files
-from src.f01_road.deal import time_int_str, owner_name_str, fisc_title_str
+from src.f01_road.deal import owner_name_str, quota_str, ledger_depth_str
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
@@ -21,78 +21,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_create_deal_ledger_depth_Scenaro0_budpoint_Empty(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-    fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    a23_str = "accord23"
-
-    # Create FiscUnit with bob deal at time 37
-    accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
-    bob_str = "Bob"
-    timepoint37 = 37
-    deal1_quota = 450
-    deal1_ledger_depth = 0
-    accord23_fisc.add_dealepisode(
-        bob_str, timepoint37, deal1_quota, ledger_depth=deal1_ledger_depth
-    )
-    a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_fisc.get_json())
-
-    print(f"{a23_json_path=}")
-    a23_owners_path = create_owners_dir_path(fizz_world._fisc_mstr_dir, a23_str)
-    assert count_dirs_files(a23_owners_path) == 0
-
-    # WHEN
-    fizz_world.create_deal_ledger_depth()
-
-    # THEN
-    assert count_dirs_files(a23_owners_path) == 0
-
-
-def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-    fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    a23_str = "accord23"
-
-    # Create FiscUnit with bob deal at time 37
-    accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
-    bob_str = "Bob"
-    timepoint37 = 37
-    deal1_quota = 450
-    deal1_ledger_depth = 0
-    accord23_fisc.add_dealepisode(
-        bob_str, timepoint37, deal1_quota, ledger_depth=deal1_ledger_depth
-    )
-    a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_fisc.get_json())
-
-    # Create bob timepoint37 budpoint.json
-    e3_budunit = budunit_shop(bob_str, a23_str)
-    timepoint37_budpoint_path = create_budpoint_path(
-        fisc_mstr_dir, a23_str, bob_str, timepoint37
-    )
-    save_file(timepoint37_budpoint_path, None, e3_budunit.get_json())
-    assert os_path_exists(timepoint37_budpoint_path)
-    timepoint37_dir = create_timepoint_dir_path(
-        fisc_mstr_dir, a23_str, bob_str, timepoint37
-    )
-    assert count_dirs_files(timepoint37_dir) == 1
-
-    # WHEN
-    fizz_world.create_deal_ledger_depth()
-
-    # THEN
-    assert os_path_exists(timepoint37_budpoint_path)
-    assert count_dirs_files(timepoint37_dir) == 1
-
-
-# def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
+# def test_WorldUnit_create_deal_ledger_depth_Scenaro0_budpoint_Empty(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -105,12 +34,87 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     bob_str = "Bob"
 #     timepoint37 = 37
 #     deal1_quota = 450
-#     deal1_ledger_depth = 1
+#     deal1_ledger_depth = 0
 #     accord23_fisc.add_dealepisode(
 #         bob_str, timepoint37, deal1_quota, ledger_depth=deal1_ledger_depth
 #     )
 #     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
 #     save_file(a23_json_path, None, accord23_fisc.get_json())
+
+#     print(f"{a23_json_path=}")
+#     a23_owners_path = create_owners_dir_path(fizz_world._fisc_mstr_dir, a23_str)
+#     assert count_dirs_files(a23_owners_path) == 0
+
+#     # WHEN
+#     fizz_world.create_deal_ledger_depth()
+
+#     # THEN
+#     assert count_dirs_files(a23_owners_path) == 0
+
+
+# def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     fizz_world = worldunit_shop("fizz")
+#     fisc_mstr_dir = fizz_world._fisc_mstr_dir
+#     a23_str = "accord23"
+
+#     # Create FiscUnit with bob deal at time 37
+#     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
+#     bob_str = "Bob"
+#     timepoint37 = 37
+#     deal1_quota = 450
+#     deal1_ledger_depth = 0
+#     accord23_fisc.add_dealepisode(
+#         bob_str, timepoint37, deal1_quota, ledger_depth=deal1_ledger_depth
+#     )
+#     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
+#     save_file(a23_json_path, None, accord23_fisc.get_json())
+
+#     # Create bob timepoint37 budpoint.json
+#     e3_budunit = budunit_shop(bob_str, a23_str)
+#     timepoint37_budpoint_path = create_budpoint_path(
+#         fisc_mstr_dir, a23_str, bob_str, timepoint37
+#     )
+#     save_file(timepoint37_budpoint_path, None, e3_budunit.get_json())
+#     assert os_path_exists(timepoint37_budpoint_path)
+#     timepoint37_dir = create_timepoint_dir_path(
+#         fisc_mstr_dir, a23_str, bob_str, timepoint37
+#     )
+#     assert count_dirs_files(timepoint37_dir) == 1
+
+#     # WHEN
+#     fizz_world.create_deal_ledger_depth()
+
+#     # THEN
+#     assert os_path_exists(timepoint37_budpoint_path)
+#     assert count_dirs_files(timepoint37_dir) == 1
+
+
+# def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     fizz_world = worldunit_shop("fizz")
+#     fisc_mstr_dir = fizz_world._fisc_mstr_dir
+#     a23_str = "accord23"
+#     bob_str = "Bob"
+#     timepoint37 = 37
+
+#     # save ledger_state json at tp37 root
+#     deal1_quota = 450
+#     deal1_ledger_depth = 1
+#     tp37_ledger_state_path = create_deal_ledger_state_json_path(
+#         fisc_mstr_dir, a23_str, bob_str, timepoint37
+#     )
+#     tp37_ledger_state_dict = {
+#         ledger_depth_str(): deal1_ledger_depth,
+#         owner_name_str(): bob_str,
+#         quota_str(): deal1_quota,
+#         event_int_str(): event3,
+#     }
+#     save_file(tp37_ledger_state_path, None, tp37_ledger_state_dict)
 
 #     # Create yao event3 bud.json
 #     event3 = 3
@@ -123,32 +127,28 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
 #     # Create bob timepoint37 budpoint.json
 #     e3_bob_bud = budunit_shop(bob_str, a23_str)
 #     e3_bob_bud.add_acctunit(yao_str)
-#     timepoint37_budpoint_path = create_budpoint_path(
-#         fisc_mstr_dir, a23_str, bob_str, timepoint37
-#     )
-#     save_file(timepoint37_budpoint_path, None, e3_bob_bud.get_json())
-#     assert os_path_exists(timepoint37_budpoint_path)
-#     timepoint37_dir = create_timepoint_dir_path(
-#         fisc_mstr_dir, a23_str, bob_str, timepoint37
-#     )
-#     t37_yao_dir = create_deal_ledger_depth_dir_path(
+#     budpoint37_path = create_budpoint_path(fisc_mstr_dir, a23_str, bob_str, timepoint37)
+#     save_file(budpoint37_path, None, e3_bob_bud.get_json())
+#     assert os_path_exists(budpoint37_path)
+#     tp37_dir = create_timepoint_dir_path(fisc_mstr_dir, a23_str, bob_str, timepoint37)
+#     tp37_yao_dir = create_deal_ledger_depth_dir_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37, [yao_str]
 #     )
-#     t37_yao_state_path = create_deal_ledger_state_json_path(
+#     tp37_yao_state_path = create_deal_ledger_state_json_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37, [yao_str]
 #     )
-#     print(f"{t37_yao_dir=}")
-#     assert count_dirs_files(timepoint37_dir) == 1
-#     assert os_path_exists(t37_yao_dir) is False
-#     assert os_path_exists(t37_yao_state_path) is False
+#     print(f"{tp37_yao_dir=}")
+#     assert os_path_exists(tp37_yao_dir) is False
+#     assert os_path_exists(tp37_yao_state_path) is False
+#     assert count_dirs_files(tp37_dir) == 1
 
 #     # WHEN
 #     fizz_world.create_deal_ledger_depth()
 
 #     # THEN
-#     assert count_dirs_files(timepoint37_dir) == 1
-#     assert os_path_exists(t37_yao_dir)
-#     assert os_path_exists(t37_yao_state_path)
+#     assert os_path_exists(tp37_yao_dir)
+#     assert os_path_exists(tp37_yao_state_path)
+#     assert count_dirs_files(tp37_dir) == 3
 
 
 # def test_WorldUnit_create_deal_ledger_depth_Scenaro2_DealExistsButNoBudExistsInEventsPast(
