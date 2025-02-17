@@ -582,22 +582,22 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_au.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
-    before_sue_au.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     assert before_ball_item.factunits == {}
 
     # WHEN
-    broken_fopen = 55
-    broken_fnigh = 66
+    damaged_fopen = 55
+    damaged_fnigh = 66
     update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_insert())
     update_disc_atomunit.set_jkey("road", ball_road)
     update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jvalue("pick", broken_road)
-    update_disc_atomunit.set_jvalue(fopen_str(), broken_fopen)
-    update_disc_atomunit.set_jvalue(fnigh_str(), broken_fnigh)
+    update_disc_atomunit.set_jvalue("pick", damaged_road)
+    update_disc_atomunit.set_jvalue(fopen_str(), damaged_fopen)
+    update_disc_atomunit.set_jvalue(fnigh_str(), damaged_fnigh)
     # print(f"{update_disc_atomunit=}")
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_atomunit(update_disc_atomunit)
@@ -608,9 +608,9 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     assert after_ball_item.factunits != {}
     assert after_ball_item.factunits.get(knee_road) is not None
     assert after_ball_item.factunits.get(knee_road).base == knee_road
-    assert after_ball_item.factunits.get(knee_road).pick == broken_road
-    assert after_ball_item.factunits.get(knee_road).fopen == broken_fopen
-    assert after_ball_item.factunits.get(knee_road).fnigh == broken_fnigh
+    assert after_ball_item.factunits.get(knee_road).pick == damaged_road
+    assert after_ball_item.factunits.get(knee_road).fopen == damaged_fopen
+    assert after_ball_item.factunits.get(knee_road).fnigh == damaged_fnigh
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_factunit():
@@ -624,12 +624,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_factunit():
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_au.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
-    before_sue_au.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_sue_au.edit_item_attr(
-        road=ball_road, factunit=factunit_shop(base=knee_road, pick=broken_road)
+        road=ball_road, factunit=factunit_shop(base=knee_road, pick=damaged_road)
     )
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     assert before_ball_item.factunits != {}
@@ -660,19 +660,19 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_au.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     medical_str = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
-    before_sue_au.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_sue_au.set_item(itemunit_shop(medical_str), knee_road)
-    before_knee_factunit = factunit_shop(knee_road, broken_road)
+    before_knee_factunit = factunit_shop(knee_road, damaged_road)
     before_sue_au.edit_item_attr(ball_road, factunit=before_knee_factunit)
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     assert before_ball_item.factunits != {}
     assert before_ball_item.factunits.get(knee_road) is not None
-    assert before_ball_item.factunits.get(knee_road).pick == broken_road
+    assert before_ball_item.factunits.get(knee_road).pick == damaged_road
     assert before_ball_item.factunits.get(knee_road).fopen is None
     assert before_ball_item.factunits.get(knee_road).fnigh is None
 
@@ -710,36 +710,36 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_reason_premiseun
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_au.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
-    before_sue_au.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_sue_au.edit_item_attr(
-        ball_road, reason_base=knee_road, reason_premise=broken_road
+        ball_road, reason_base=knee_road, reason_premise=damaged_road
     )
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     assert before_ball_item.reasonunits != {}
     before_knee_reasonunit = before_ball_item.get_reasonunit(knee_road)
     assert before_knee_reasonunit is not None
-    broken_premiseunit = before_knee_reasonunit.get_premise(broken_road)
-    assert broken_premiseunit.need == broken_road
-    assert broken_premiseunit.open is None
-    assert broken_premiseunit.nigh is None
-    assert broken_premiseunit.divisor is None
+    damaged_premiseunit = before_knee_reasonunit.get_premise(damaged_road)
+    assert damaged_premiseunit.need == damaged_road
+    assert damaged_premiseunit.open is None
+    assert damaged_premiseunit.nigh is None
+    assert damaged_premiseunit.divisor is None
 
     # WHEN
-    broken_open = 45
-    broken_nigh = 77
-    broken_divisor = 3
+    damaged_open = 45
+    damaged_nigh = 77
+    damaged_divisor = 3
     update_disc_atomunit = atomunit_shop(
         bud_item_reason_premiseunit_str(), atom_update()
     )
     update_disc_atomunit.set_jkey("road", ball_road)
     update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jkey("need", broken_road)
-    update_disc_atomunit.set_jvalue("open", broken_open)
-    update_disc_atomunit.set_jvalue("nigh", broken_nigh)
-    update_disc_atomunit.set_jvalue("divisor", broken_divisor)
+    update_disc_atomunit.set_jkey("need", damaged_road)
+    update_disc_atomunit.set_jvalue("open", damaged_open)
+    update_disc_atomunit.set_jvalue("nigh", damaged_nigh)
+    update_disc_atomunit.set_jvalue("divisor", damaged_divisor)
     # print(f"{update_disc_atomunit=}")
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_atomunit(update_disc_atomunit)
@@ -749,11 +749,11 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_reason_premiseun
     after_ball_item = after_sue_au.get_item_obj(ball_road)
     after_knee_reasonunit = after_ball_item.get_reasonunit(knee_road)
     assert after_knee_reasonunit is not None
-    after_broken_premiseunit = after_knee_reasonunit.get_premise(broken_road)
-    assert after_broken_premiseunit.need == broken_road
-    assert after_broken_premiseunit.open == broken_open
-    assert after_broken_premiseunit.nigh == broken_nigh
-    assert after_broken_premiseunit.divisor == broken_divisor
+    after_damaged_premiseunit = after_knee_reasonunit.get_premise(damaged_road)
+    assert after_damaged_premiseunit.need == damaged_road
+    assert after_damaged_premiseunit.open == damaged_open
+    assert after_damaged_premiseunit.nigh == damaged_nigh
+    assert after_damaged_premiseunit.divisor == damaged_divisor
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_reason_premiseunit():
@@ -767,19 +767,19 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_reason_premiseun
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_au.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     medical_str = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
-    before_sue_au.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_sue_au.set_item(itemunit_shop(medical_str), knee_road)
     before_sue_au.edit_item_attr(
-        ball_road, reason_base=knee_road, reason_premise=broken_road
+        ball_road, reason_base=knee_road, reason_premise=damaged_road
     )
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     before_knee_reasonunit = before_ball_item.get_reasonunit(knee_road)
-    assert before_knee_reasonunit.get_premise(broken_road) is not None
+    assert before_knee_reasonunit.get_premise(damaged_road) is not None
     assert before_knee_reasonunit.get_premise(medical_road) is None
 
     # WHEN
@@ -822,22 +822,22 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_reason_premiseun
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_au.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     medical_str = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
-    before_sue_au.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_sue_au.set_item(itemunit_shop(medical_str), knee_road)
     before_sue_au.edit_item_attr(
-        ball_road, reason_base=knee_road, reason_premise=broken_road
+        ball_road, reason_base=knee_road, reason_premise=damaged_road
     )
     before_sue_au.edit_item_attr(
         ball_road, reason_base=knee_road, reason_premise=medical_road
     )
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     before_knee_reasonunit = before_ball_item.get_reasonunit(knee_road)
-    assert before_knee_reasonunit.get_premise(broken_road) is not None
+    assert before_knee_reasonunit.get_premise(damaged_road) is not None
     assert before_knee_reasonunit.get_premise(medical_road) is not None
 
     # WHEN
@@ -854,7 +854,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_reason_premiseun
     # THEN
     after_ball_item = after_sue_au.get_item_obj(ball_road)
     after_knee_reasonunit = after_ball_item.get_reasonunit(knee_road)
-    assert after_knee_reasonunit.get_premise(broken_road) is not None
+    assert after_knee_reasonunit.get_premise(damaged_road) is not None
     assert after_knee_reasonunit.get_premise(medical_road) is None
 
 

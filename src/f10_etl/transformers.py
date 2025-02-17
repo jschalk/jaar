@@ -962,6 +962,9 @@ def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
         save_json(deal_credit_ledger_json_path, None, root_credit_ledger_dict)
         root_quota_ledger = allot_scale(root_credit_ledger_dict, x_quota, 1)
         save_json(deal_quota_ledger_json_path, None, root_quota_ledger)
+        for quota_owner, quota_amount in root_quota_ledger.items():
+            print(f"{x_ledger_depth-1=} {quota_owner=} {quota_amount=} {x_event_int=}")
+            print(f"{root_ledger_state_dict=}")
         # print(f"{root_ledger_state_dict=}")
         # print(f"{root_credit_ledger_dict=}")
         # print(f"{root_quota_ledger=}")
