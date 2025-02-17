@@ -59,7 +59,7 @@ from src.f05_listen.hub_path import (
 from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
-    get_events_owner_credit_ledger,
+    get_budevents_credit_ledger,
 )
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
@@ -448,7 +448,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
         parent_quota = parent_deal.get("quota")
         parent_penny = parent_deal.get("penny")
         parent_ancestors = parent_deal.get("ancestors")
-        parent_credit_ledger = get_events_owner_credit_ledger(
+        parent_credit_ledger = get_budevents_credit_ledger(
             fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
         )
         path_ancestors = parent_ancestors[1:]

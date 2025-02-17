@@ -119,7 +119,7 @@ def get_example_yao_job1_speaker() -> BudUnit:
     cook_itemunit = yao_speaker.get_item_obj(cook_road())
     cook_itemunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
-    yao_speaker.set_fact(eat_road(), hungry_road())
+    yao_speaker.add_fact(eat_road(), hungry_road())
     return yao_speaker
 
 
@@ -134,13 +134,13 @@ def get_example_yao_job2_speaker() -> BudUnit:
     cook_itemunit = yao_speaker.get_item_obj(cook_road())
     cook_itemunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_reason(cook_road(), eat_road(), hungry_road())
-    yao_speaker.set_fact(eat_road(), hungry_road())
+    yao_speaker.add_fact(eat_road(), hungry_road())
 
     yao_speaker.set_item(itemunit_shop(sweep_str(), pledge=True), casa_road())
     yao_speaker.set_item(itemunit_shop(dirty_str()), sanitation_road())
     yao_speaker.set_item(itemunit_shop(clean_str()), sanitation_road())
     yao_speaker.edit_reason(sweep_road(), sanitation_road(), dirty_road())
-    yao_speaker.set_fact(sweep_road(), dirty_road())
+    yao_speaker.add_fact(sweep_road(), dirty_road())
     return yao_speaker
 
 
@@ -152,7 +152,7 @@ def get_example_yao_job3_speaker() -> BudUnit:
     yao_speaker.set_item(itemunit_shop(dirty_str()), sanitation_road())
     yao_speaker.set_item(itemunit_shop(clean_str()), sanitation_road())
     yao_speaker.edit_reason(sweep_road(), sanitation_road(), dirty_road())
-    yao_speaker.set_fact(sweep_road(), dirty_road())
+    yao_speaker.add_fact(sweep_road(), dirty_road())
     return yao_speaker
 
 
@@ -354,7 +354,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_voice0.set_item(itemunit_shop(get_on_land_str()), get_location_road())
     yao_voice0.set_l1_item(itemunit_shop(get_swim_str(), pledge=True))
     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_mer_road())
-    yao_voice0.set_fact(get_location_road(), get_in_mer_road())
+    yao_voice0.add_fact(get_location_road(), get_in_mer_road())
     print(f"{yao_voice0.get_fact(get_location_road())=}")
     yao_voice0.del_item_obj(run_road())
     assert yao_voice0._keep_dict.get(get_iowa_road())

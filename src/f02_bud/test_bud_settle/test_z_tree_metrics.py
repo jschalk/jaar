@@ -135,7 +135,7 @@ def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
     print(f"{len(missing_bases)=}")
     assert len(missing_bases) == 11
 
-    yao_budunit.set_fact(
+    yao_budunit.add_fact(
         base=yao_budunit.make_l1_road("day_minute"),
         pick=yao_budunit.make_l1_road("day_minute"),
         fopen=0,

@@ -159,7 +159,7 @@ def test_bud_edit_item_title_Modifies_factunits():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(roses_str), parent_road=bloomers_road)
     yao_bud.set_item(itemunit_shop(rain_str), parent_road=old_water_road)
-    yao_bud.set_fact(base=old_water_road, pick=old_rain_road)
+    yao_bud.add_fact(base=old_water_road, pick=old_rain_road)
 
     item_x = yao_bud.get_item_obj(roses_road)
     assert yao_bud.itemroot.factunits[old_water_road] is not None

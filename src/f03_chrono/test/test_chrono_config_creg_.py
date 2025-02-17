@@ -584,7 +584,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # WHEN
     open_x = 2063971110
     nigh_x1 = 2063971523
-    sue_bud.set_fact(
+    sue_bud.add_fact(
         base=cregtime_road, pick=cregtime_road, fopen=open_x, fnigh=nigh_x1
     )
 
@@ -598,7 +598,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     # nigh_x2 = 1063971923
     open_x2 = 0
     nigh_x2 = 0
-    sue_bud.set_fact(
+    sue_bud.add_fact(
         base=cregtime_road, pick=cregtime_road, fopen=open_x2, fnigh=nigh_x2
     )
     print(f"YAYA {sue_bud.itemroot.factunits=}")
@@ -702,7 +702,7 @@ def test_ItemCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     )
     print("set first fact")
 
-    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, fnigh=1064135133)
+    sue_bud.add_fact(cregtime_road, cregtime_road, 1064131200, fnigh=1064135133)
     print("get 1st agenda dictionary")
     sue_agenda_dict = sue_bud.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
@@ -726,7 +726,7 @@ def test_ItemCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
 
     # WHEN
     print("set 2nd fact")
-    sue_bud.set_fact(cregtime_road, cregtime_road, 1064131200, fnigh=1064136133)
+    sue_bud.add_fact(cregtime_road, cregtime_road, 1064131200, fnigh=1064136133)
     print("get 2nd agenda dictionary")
     sue_agenda_dict = sue_bud.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")

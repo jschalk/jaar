@@ -46,7 +46,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     yao_speaker.edit_item_attr(
         sweep_road, reason_base=status_road, reason_premise=dirty_road
     )
-    yao_speaker.set_fact(status_road, clean_road)
+    yao_speaker.add_fact(status_road, clean_road)
     assert len(yao_speaker.get_agenda_dict()) == 0
 
     # WHEN

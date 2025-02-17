@@ -3,7 +3,7 @@ from src.f01_road.deal import TimeLinePoint
 from src.f01_road.finance import RespectNum
 from src.f01_road.road import AcctName, OwnerName, TitleUnit, EventInt
 from src.f02_bud.bud import BudUnit, get_from_json as budunit_get_from_json
-from src.f02_bud.bud_tool import get_credit_ledger
+from src.f02_bud.bud_tool import get_credit_ledger, get_bud_root_facts_dict
 from src.f05_listen.hub_path import (
     create_budpoint_path,
     create_budevent_path,
@@ -39,7 +39,7 @@ def get_timepoint_credit_ledger(
     return get_credit_ledger(budpoint) if budpoint else {}
 
 
-def get_events_owner_credit_ledger(
+def get_budevents_credit_ledger(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ) -> dict[AcctName, RespectNum]:
     budevent_json_path = create_budevent_path(
@@ -47,6 +47,16 @@ def get_events_owner_credit_ledger(
     )
     budevent = open_bud_file(budevent_json_path)
     return get_credit_ledger(budevent) if budevent else {}
+
+
+def get_budevent_facts(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
+) -> dict[AcctName, RespectNum]:
+    budevent_json_path = create_budevent_path(
+        fisc_mstr_dir, fisc_title, owner_name, event_int
+    )
+    budevent = open_bud_file(budevent_json_path)
+    return get_bud_root_facts_dict(budevent) if budevent else {}
 
 
 def collect_owner_event_dir_sets(

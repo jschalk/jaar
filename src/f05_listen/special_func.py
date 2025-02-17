@@ -44,7 +44,7 @@ def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
     if x_bud.item_exists(fact_pick) is False:
         x_bud.get_item_obj(fact_pick, if_missing_create=True)
     fact_base = get_parent_road(fact_pick)
-    x_bud.set_fact(fact_base, fact_pick)
+    x_bud.add_fact(fact_base, fact_pick)
 
 
 def add_voice_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):

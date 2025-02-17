@@ -25,9 +25,10 @@ from src.f05_listen.hub_tool import (
     save_bud_file,
     open_bud_file,
     get_timepoint_credit_ledger,
-    get_events_owner_credit_ledger,
+    get_budevents_credit_ledger,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
+    get_budevent_facts,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
@@ -122,7 +123,7 @@ def test_get_timepoint_credit_ledger_ReturnsObj_Scenario1_FileExists(
     assert gen_a3_credit_ledger == expected_a3_credit_ledger
 
 
-def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
+def test_get_budevents_credit_ledger_ReturnsObj_Scenario0_NoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -132,7 +133,7 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
     t3 = 3
 
     # WHEN
-    gen_a3_credit_ledger = get_events_owner_credit_ledger(
+    gen_a3_credit_ledger = get_budevents_credit_ledger(
         fisc_mstr_dir, a23_str, sue_str, t3
     )
 
@@ -140,7 +141,7 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
     assert gen_a3_credit_ledger == {}
 
 
-def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
+def test_get_budevents_credit_ledger_ReturnsObj_Scenario1_FileExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -153,13 +154,49 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
     save_bud_file(t3_json_path, None, a3_bud)
 
     # WHEN
-    gen_a3_credit_ledger = get_events_owner_credit_ledger(
+    gen_a3_credit_ledger = get_budevents_credit_ledger(
         fisc_mstr_dir, a23_str, sue_str, t3
     )
 
     # THEN
     expected_a3_credit_ledger = {sue_str: 5, "Yao": 2, "Zia": 33}
     assert gen_a3_credit_ledger == expected_a3_credit_ledger
+
+
+def test_get_budevent_facts_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord"
+    sue_str = "Sue"
+    t3 = 3
+
+    # WHEN
+    gen_a3_facts = get_budevent_facts(fisc_mstr_dir, a23_str, sue_str, t3)
+
+    # THEN
+    assert gen_a3_facts == {}
+
+
+def test_get_budevent_facts_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord"
+    sue_str = "Sue"
+    t3 = 3
+    t3_json_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, t3)
+    sue_bud = budunit_shop(sue_str)
+    casa_road = sue_bud.make_l1_road("case")
+    clean_road = sue_bud.make_l1_road("clean")
+    dirty_road = sue_bud.make_l1_road("dirty")
+    sue_bud.add_fact(casa_road, dirty_road, create_missing_items=True)
+    save_bud_file(t3_json_path, None, sue_bud)
+
+    # WHEN
+    gen_a3_facts = get_budevent_facts(fisc_mstr_dir, a23_str, sue_str, t3)
+
+    # THEN
+    expected_sue_fact_dict = {casa_road: {"base": casa_road, "pick": dirty_road}}
+    assert gen_a3_facts == expected_sue_fact_dict
 
 
 def test_collect_owner_event_dir_sets_ReturnsObj_Scenario0_none(

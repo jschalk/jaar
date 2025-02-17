@@ -22,7 +22,7 @@ class FactCore:
     fopen: float = None
     fnigh: float = None
 
-    def get_dict(self) -> dict[str, str]:
+    def get_dict(self) -> dict[str,]:
         x_dict = {
             "base": self.base,
             "pick": self.pick,
@@ -54,7 +54,7 @@ class FactCore:
         self.base = rebuild_road(self.base, old_road, new_road)
         self.pick = rebuild_road(self.pick, old_road, new_road)
 
-    def get_obj_key(self):
+    def get_obj_key(self) -> RoadUnit:
         return self.base
 
 
@@ -64,7 +64,7 @@ class FactUnit(FactCore):
 
 
 # class FactUnitsshop:
-def factunits_get_from_dict(x_dict: dict):
+def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_base = fact_dict["base"]
@@ -187,7 +187,7 @@ class PremiseStatusFinder:
 
         return False
 
-    def get_task_status(self):
+    def get_task_status(self) -> bool:
         return bool(
             (
                 self.get_active()
