@@ -137,7 +137,7 @@ def test_HubUnit_delete_deal_file_DeletesFile(env_dir_setup_cleanup):
     assert yao_hubunit.deal_file_exists(t55_time_int) is False
 
 
-def test_HubUnit_get_deallog_ReturnsObj(env_dir_setup_cleanup):
+def test_HubUnit_get_brokerunit_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_title(), yao_str)
@@ -146,14 +146,14 @@ def test_HubUnit_get_deallog_ReturnsObj(env_dir_setup_cleanup):
     t55_time_int = t55_deal.time_int
     t66_time_int = t66_deal.time_int
     yao_hubunit._save_valid_deal_file(t55_deal)
-    assert yao_hubunit.get_deallog().episode_exists(t55_time_int)
-    assert yao_hubunit.get_deallog().episode_exists(t66_time_int) is False
+    assert yao_hubunit.get_brokerunit().episode_exists(t55_time_int)
+    assert yao_hubunit.get_brokerunit().episode_exists(t66_time_int) is False
     yao_hubunit._save_valid_deal_file(t66_deal)
 
     # WHEN / THEN
-    assert yao_hubunit.get_deallog().episode_exists(t55_time_int)
-    assert yao_hubunit.get_deallog().episode_exists(t66_time_int)
-    assert yao_hubunit.get_deallog().get_episode(t66_time_int).get_net_deal("Sue")
+    assert yao_hubunit.get_brokerunit().episode_exists(t55_time_int)
+    assert yao_hubunit.get_brokerunit().episode_exists(t66_time_int)
+    assert yao_hubunit.get_brokerunit().get_episode(t66_time_int).get_net_deal("Sue")
 
 
 def test_HubUnit_budpoint_filename_ReturnsObj():

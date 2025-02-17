@@ -27,9 +27,9 @@ from src.f01_road.finance import (
     FundNum,
 )
 from src.f01_road.deal import (
-    DealLog,
-    deallog_shop,
-    get_deallog_from_dict,
+    BrokerUnit,
+    brokerunit_shop,
+    get_brokerunit_from_dict,
     TranUnit,
     TranBook,
     tranbook_shop,
@@ -91,7 +91,7 @@ class FiscUnit:
     fisc_mstr_dir: str = None
     timeline: TimeLineUnit = None
     present_time: int = None
-    deallogs: dict[OwnerName, DealLog] = None
+    brokerunits: dict[OwnerName, BrokerUnit] = None
     cashbook: TranBook = None
     bridge: str = None
     fund_coin: FundCoin = None
@@ -267,18 +267,18 @@ class FiscUnit:
     def get_forecast_file_bud(self, owner_name: OwnerName) -> BudUnit:
         return self._get_hubunit(owner_name).get_forecast_bud()
 
-    # deallogs
-    def set_deallog(self, x_deallog: DealLog):
-        self.deallogs[x_deallog.owner_name] = x_deallog
+    # brokerunits
+    def set_brokerunit(self, x_brokerunit: BrokerUnit):
+        self.brokerunits[x_brokerunit.owner_name] = x_brokerunit
 
-    def deallog_exists(self, x_owner_name: OwnerName) -> bool:
-        return self.deallogs.get(x_owner_name) != None
+    def brokerunit_exists(self, x_owner_name: OwnerName) -> bool:
+        return self.brokerunits.get(x_owner_name) != None
 
-    def get_deallog(self, x_owner_name: OwnerName) -> DealLog:
-        return self.deallogs.get(x_owner_name)
+    def get_brokerunit(self, x_owner_name: OwnerName) -> BrokerUnit:
+        return self.brokerunits.get(x_owner_name)
 
-    def del_deallog(self, x_owner_name: OwnerName):
-        self.deallogs.pop(x_owner_name)
+    def del_brokerunit(self, x_owner_name: OwnerName):
+        self.brokerunits.pop(x_owner_name)
 
     def add_dealepisode(
         self,
@@ -291,10 +291,10 @@ class FiscUnit:
         if time_int < self.present_time and not allow_prev_to_present_time_entry:
             exception_str = f"Cannot set dealepisode because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
             raise dealepisode_Exception(exception_str)
-        if self.deallog_exists(owner_name) is False:
-            self.set_deallog(deallog_shop(owner_name))
-        x_deallog = self.get_deallog(owner_name)
-        x_deallog.add_episode(time_int, quota, ledger_depth)
+        if self.brokerunit_exists(owner_name) is False:
+            self.set_brokerunit(brokerunit_shop(owner_name))
+        x_brokerunit = self.get_brokerunit(owner_name)
+        x_brokerunit.add_episode(time_int, quota, ledger_depth)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
@@ -303,7 +303,7 @@ class FiscUnit:
             "present_time": self.present_time,
             "fund_coin": self.fund_coin,
             "penny": self.penny,
-            "deallogs": self._get_deallogs_dict(),
+            "brokerunits": self._get_brokerunits_dict(),
             "respect_bit": self.respect_bit,
             "timeline": self.timeline.get_dict(),
         }
@@ -314,22 +314,22 @@ class FiscUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def _get_deallogs_dict(self):
+    def _get_brokerunits_dict(self):
         return {
             x_episode.owner_name: x_episode.get_dict()
-            for x_episode in self.deallogs.values()
+            for x_episode in self.brokerunits.values()
         }
 
-    def get_deallogs_time_ints(self) -> set[TimeLinePoint]:
+    def get_brokerunits_time_ints(self) -> set[TimeLinePoint]:
         all_dealepisode_time_ints = set()
-        for x_deallog in self.deallogs.values():
-            all_dealepisode_time_ints.update(x_deallog.get_time_ints())
+        for x_brokerunit in self.brokerunits.values():
+            all_dealepisode_time_ints.update(x_brokerunit.get_time_ints())
         return all_dealepisode_time_ints
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
             tranunit=x_cashpurchase,
-            blocked_time_ints=self.get_deallogs_time_ints(),
+            blocked_time_ints=self.get_brokerunits_time_ints(),
             present_time=self.present_time,
         )
 
@@ -374,15 +374,15 @@ class FiscUnit:
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.fisc_title, x_tranunits)
-        for owner_name, x_deallog in self.deallogs.items():
-            for x_time_int, x_dealepisode in x_deallog.episodes.items():
+        for owner_name, x_brokerunit in self.brokerunits.items():
+            for x_time_int, x_dealepisode in x_brokerunit.episodes.items():
                 for acct_name, x_amount in x_dealepisode._episode_net.items():
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
     def create_root_episode_nodes(self, ote1_dict):
-        for owner_name, deal_log in self.deallogs.items():
-            for time_int in deal_log.episodes.keys():
+        for owner_name, brokerunit in self.brokerunits.items():
+            for time_int in brokerunit.episodes.keys():
                 self.create_and_save_root_episode_node(owner_name, ote1_dict, time_int)
 
     def create_and_save_root_episode_node(
@@ -394,8 +394,8 @@ class FiscUnit:
         max_past_event_int = _get_ote1_max_past_event_int(
             owner_name, ote1_dict, time_int
         )
-        owner_deallog = self.get_deallog(owner_name)
-        deal_episode = owner_deallog.get_episode(time_int)
+        owner_brokerunit = self.get_brokerunit(owner_name)
+        deal_episode = owner_brokerunit.get_episode(time_int)
         episode_node = {
             "owner_name": owner_name,
             "event_int": max_past_event_int,
@@ -450,7 +450,7 @@ def fiscunit_shop(
         fisc_mstr_dir=fisc_mstr_dir,
         timeline=timeline,
         present_time=get_0_if_None(present_time),
-        deallogs={},
+        brokerunits={},
         cashbook=tranbook_shop(fisc_title),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
@@ -462,10 +462,10 @@ def fiscunit_shop(
     return x_fiscunit
 
 
-def _get_deallogs_from_dict(deallogs_dict: dict) -> dict[OwnerName, DealLog]:
+def _get_brokerunits_from_dict(brokerunits_dict: dict) -> dict[OwnerName, BrokerUnit]:
     return {
-        x_owner_name: get_deallog_from_dict(deallog_dict)
-        for x_owner_name, deallog_dict in deallogs_dict.items()
+        x_owner_name: get_brokerunit_from_dict(brokerunit_dict)
+        for x_owner_name, brokerunit_dict in brokerunits_dict.items()
     }
 
 
@@ -478,7 +478,7 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
     x_fisc.fund_coin = fisc_dict.get("fund_coin")
     x_fisc.respect_bit = fisc_dict.get("respect_bit")
     x_fisc.penny = fisc_dict.get("penny")
-    x_fisc.deallogs = _get_deallogs_from_dict(fisc_dict.get("deallogs"))
+    x_fisc.brokerunits = _get_brokerunits_from_dict(fisc_dict.get("brokerunits"))
     x_fisc.cashbook = get_tranbook_from_dict(fisc_dict.get("cashbook"))
     return x_fisc
 

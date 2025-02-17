@@ -31,8 +31,8 @@ from src.f01_road.finance import (
 from src.f01_road.deal import (
     DealEpisode,
     dealepisode_shop,
-    DealLog,
-    deallog_shop,
+    BrokerUnit,
+    brokerunit_shop,
     get_dealepisode_from_json,
 )
 from src.f01_road.road import (
@@ -423,13 +423,13 @@ class HubUnit:
     def delete_deal_file(self, x_time_int: TimeLinePoint):
         delete_dir(self.deal_file_path(x_time_int))
 
-    def get_deallog(self) -> DealLog:
-        x_deallog = deallog_shop(self.owner_name)
+    def get_brokerunit(self) -> BrokerUnit:
+        x_brokerunit = brokerunit_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
         for x_deal_folder_name in x_dirs:
             x_dealepisode = self.get_deal_file(x_deal_folder_name)
-            x_deallog.set_episode(x_dealepisode)
-        return x_deallog
+            x_brokerunit.set_episode(x_dealepisode)
+        return x_brokerunit
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(

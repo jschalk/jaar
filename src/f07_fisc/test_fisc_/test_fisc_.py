@@ -27,7 +27,7 @@ def test_FiscUnit_Exists():
     assert not accord_fisc.fisc_title
     assert not accord_fisc.timeline
     assert not accord_fisc.present_time
-    assert not accord_fisc.deallogs
+    assert not accord_fisc.brokerunits
     assert not accord_fisc.cashbook
     assert not accord_fisc.bridge
     assert not accord_fisc.fund_coin
@@ -49,7 +49,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.fisc_title == get_test_fisc_title()
     assert accord_fisc.timeline == timelineunit_shop()
     assert accord_fisc.present_time == 0
-    assert accord_fisc.deallogs == {}
+    assert accord_fisc.brokerunits == {}
     assert accord_fisc.cashbook == tranbook_shop(get_test_fisc_title())
     assert accord_fisc.bridge == default_bridge_if_None()
     assert accord_fisc.fund_coin == default_fund_coin_if_None()

@@ -285,7 +285,7 @@ def dealepisode_shop(
 
 
 @dataclass
-class DealLog:
+class BrokerUnit:
     owner_name: OwnerName = None
     episodes: dict[TimeLinePoint, DealEpisode] = None
     _sum_dealepisode_quota: FundNum = None
@@ -347,8 +347,8 @@ class DealLog:
         return x_tranbook
 
 
-def deallog_shop(owner_name: OwnerName) -> DealLog:
-    return DealLog(owner_name=owner_name, episodes={}, _sum_acct_deals={})
+def brokerunit_shop(owner_name: OwnerName) -> BrokerUnit:
+    return BrokerUnit(owner_name=owner_name, episodes={}, _sum_acct_deals={})
 
 
 def get_dealepisode_from_dict(x_dict: dict) -> DealEpisode:
@@ -366,11 +366,11 @@ def get_dealepisode_from_json(x_json: str) -> DealEpisode:
     return get_dealepisode_from_dict(get_dict_from_json(x_json))
 
 
-def get_deallog_from_dict(x_dict: dict) -> DealLog:
+def get_brokerunit_from_dict(x_dict: dict) -> BrokerUnit:
     x_owner_name = x_dict.get("owner_name")
-    x_deallog = deallog_shop(x_owner_name)
-    x_deallog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_deallog
+    x_brokerunit = brokerunit_shop(x_owner_name)
+    x_brokerunit.episodes = get_episodes_from_dict(x_dict.get("episodes"))
+    return x_brokerunit
 
 
 def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, DealEpisode]:

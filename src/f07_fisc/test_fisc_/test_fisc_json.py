@@ -18,7 +18,7 @@ from src.f07_fisc.fisc import (
 from src.f07_fisc.fisc_config import (
     timeline_str,
     present_time_str,
-    deallogs_str,
+    brokerunits_str,
     cashbook_str,
 )
 from src.f07_fisc.examples.fisc_env import (
@@ -57,7 +57,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     x_dict = accord_fisc.get_dict()
 
     # THEN
-    print(f"{ accord_fisc._get_deallogs_dict()=}")
+    print(f"{ accord_fisc._get_brokerunits_dict()=}")
     print(f"{ accord_fisc.cashbook.get_dict()=}")
     assert x_dict.get(fisc_title_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
@@ -66,13 +66,13 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
     assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
-    assert x_dict.get(deallogs_str()) == accord_fisc._get_deallogs_dict()
+    assert x_dict.get(brokerunits_str()) == accord_fisc._get_brokerunits_dict()
     assert x_dict.get(cashbook_str()) == accord_fisc.cashbook.get_dict()
     assert set(x_dict.keys()) == {
         fisc_title_str(),
         timeline_str(),
         present_time_str(),
-        deallogs_str(),
+        brokerunits_str(),
         bridge_str(),
         fund_coin_str(),
         respect_bit_str(),
@@ -95,7 +95,7 @@ def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
         fisc_title_str(),
         timeline_str(),
         present_time_str(),
-        deallogs_str(),
+        brokerunits_str(),
         bridge_str(),
         fund_coin_str(),
         respect_bit_str(),
@@ -176,7 +176,7 @@ def test_get_from_dict_ReturnsFiscUnit():
     assert x_fisc.fund_coin == sue_fund_coin
     assert x_fisc.respect_bit == sue_respect_bit
     assert x_fisc.penny == sue_penny
-    assert x_fisc.deallogs == accord_fisc.deallogs
+    assert x_fisc.brokerunits == accord_fisc.brokerunits
     assert x_fisc.cashbook == accord_fisc.cashbook
     assert x_fisc.fisc_mstr_dir == accord_fisc.fisc_mstr_dir
     assert x_fisc == accord_fisc
@@ -222,7 +222,7 @@ def test_get_from_json_ReturnsFiscUnit():
     assert x_fisc.fund_coin == sue_fund_coin
     assert x_fisc.respect_bit == sue_respect_bit
     assert x_fisc.penny == sue_penny
-    assert x_fisc.deallogs == accord_fisc.deallogs
+    assert x_fisc.brokerunits == accord_fisc.brokerunits
     assert x_fisc.fisc_mstr_dir == accord_fisc.fisc_mstr_dir
     assert x_fisc == accord_fisc
 

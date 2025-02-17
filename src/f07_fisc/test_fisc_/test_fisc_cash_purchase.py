@@ -225,8 +225,8 @@ def test_FiscUnit_set_all_tranbook_SetsAttr():
     zia_str = "Zia"
     zia_net_deal = 887
     bob_net_deal = 445
-    sue_x40000_episode = x_fisc.get_deallog(sue_str).get_episode(x40000_time_int)
-    sue_x70000_episode = x_fisc.get_deallog(sue_str).get_episode(x70000_time_int)
+    sue_x40000_episode = x_fisc.get_brokerunit(sue_str).get_episode(x40000_time_int)
+    sue_x70000_episode = x_fisc.get_brokerunit(sue_str).get_episode(x70000_time_int)
     sue_x40000_episode.set_net_deal(bob_str, bob_net_deal)
     sue_x70000_episode.set_net_deal(zia_str, zia_net_deal)
 
