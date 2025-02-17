@@ -401,20 +401,12 @@ class FiscUnit:
             "ledger_depth": dealunit.ledger_depth,
             "quota": dealunit.quota,
             "penny": self.penny,
-            "ancestors": [],
+            "ancestors": [owner_name],
         }
         deal_node_json_path = create_deal_node_state_path(
             self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
         )
         save_json(deal_node_json_path, None, deal_node)
-
-    # TODO evaluate if this should be used
-    # def set_all_tranbook(self):
-    #     if not hasattr(self, "_combined_tranbook"):
-    #         self._combined_tranbook = tranbook_shop(self.fisc_title, [])
-    #     new_tranunits = self.cashbook.get_new_tranunits()
-    #     self._combined_tranbook.add_tranunits(new_tranunits)
-    #     return self._combined_tranbook
 
 
 def _get_ote1_max_past_event_int(

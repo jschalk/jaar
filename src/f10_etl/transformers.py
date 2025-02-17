@@ -103,7 +103,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
-from copy import deepcopy as copy_deepcopy
+from copy import deepcopy as copy_deepcopy, copy as copy_copy
 
 
 class not_given_pidgin_dimen_Exception(Exception):
@@ -941,50 +941,57 @@ def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
 
 
 def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
-    root_ledger_state_json_path = create_deal_node_state_path(
+    root_deal_json_path = create_deal_node_state_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
-    if os_path_exists(root_ledger_state_json_path):
-        root_ledger_state_dict = open_json(root_ledger_state_json_path)
-        x_event_int = root_ledger_state_dict.get("event_int")
-        x_ledger_depth = root_ledger_state_dict.get("ledger_depth")
-        x_owner_name = root_ledger_state_dict.get("owner_name")
-        x_quota = root_ledger_state_dict.get("quota")
-        root_credit_ledger_dict = get_events_owner_credit_ledger(
-            fisc_mstr_dir, fisc_title, x_owner_name, x_event_int
-        )
-        deal_credit_ledger_json_path = create_deal_node_credit_ledger_path(
-            fisc_mstr_dir, fisc_title, owner_name, time_int
-        )
-        deal_quota_ledger_json_path = create_deal_node_quota_ledger_path(
-            fisc_mstr_dir, fisc_title, owner_name, time_int
-        )
-        save_json(deal_credit_ledger_json_path, None, root_credit_ledger_dict)
-        root_quota_ledger = allot_scale(root_credit_ledger_dict, x_quota, 1)
-        save_json(deal_quota_ledger_json_path, None, root_quota_ledger)
-        for quota_owner, quota_amount in root_quota_ledger.items():
-            print(f"{x_ledger_depth-1=} {quota_owner=} {quota_amount=} {x_event_int=}")
-            print(f"{root_ledger_state_dict=}")
-        # print(f"{root_ledger_state_dict=}")
-        # print(f"{root_credit_ledger_dict=}")
-        # print(f"{root_quota_ledger=}")
-
-    # print(
-    #     f"{owner_name=} {time_int=} {timepoint_event_int=} {dealunit=}"
-    # )
-
-    # for every fiscunit
-    # for every deal
-    # find event_int for timepoint
-    # get bud from event
-    # get ledger, save ledger
-    # while depth incomplete
-    #    get currect ledger
-    #    for each acct in ledger
-    #       get most recent event after prev for acct
-    #       get bud from event_int
-    #       add ledger
-    #    add to ledger incomplete list
+    if os_path_exists(root_deal_json_path):
+        root_deal_dict = open_json(root_deal_json_path)
+        deals_to_evaluate = [root_deal_dict]
+        x_count = 0
+        while deals_to_evaluate != [] and x_count < 10:
+            x_count += 1
+            parent_deal = deals_to_evaluate.pop()
+            parent_event_int = parent_deal.get("event_int")
+            parent_ledger_depth = parent_deal.get("ledger_depth")
+            parent_owner_name = parent_deal.get("owner_name")
+            parent_quota = parent_deal.get("quota")
+            parent_penny = parent_deal.get("penny")
+            parent_ancestors = parent_deal.get("ancestors")
+            parent_credit_ledger = get_events_owner_credit_ledger(
+                fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
+            )
+            parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
+                fisc_mstr_dir, fisc_title, owner_name, time_int, parent_ancestors[1:]
+            )
+            save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
+            parent_quota_ledger_path = create_deal_node_quota_ledger_path(
+                fisc_mstr_dir, fisc_title, owner_name, time_int, parent_ancestors[1:]
+            )
+            parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
+            save_json(parent_quota_ledger_path, None, parent_quota_ledger)
+            if parent_ledger_depth > 0:
+                child_ledger_depth = parent_ledger_depth - 1
+                parent_ledger_depth = None
+                for quota_owner, quota_amount in parent_quota_ledger.items():
+                    child_ancestors = list(copy_copy(parent_ancestors))
+                    child_ancestors.append(quota_owner)
+                    child_deal_node = {
+                        "ancestors": child_ancestors,
+                        "event_int": parent_event_int,
+                        "ledger_depth": child_ledger_depth,
+                        "owner_name": quota_owner,
+                        "penny": parent_penny,
+                        "quota": quota_amount,
+                    }
+                    child_deal_json_path = create_deal_node_state_path(
+                        fisc_mstr_dir,
+                        fisc_title,
+                        owner_name,
+                        time_int,
+                        child_ancestors[1:],
+                    )
+                    save_json(child_deal_json_path, None, child_deal_node)
+                    deals_to_evaluate.append(child_deal_node)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):

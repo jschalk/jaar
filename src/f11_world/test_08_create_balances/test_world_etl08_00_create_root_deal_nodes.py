@@ -126,10 +126,11 @@ def test_WorldUnit_create_root_deal_nodes_Scenaro2_DealExistsButNoBudExistsInEve
     assert os_path_exists(tp37_deal_node_json_path)
     ledger_state_dict = open_json(tp37_deal_node_json_path)
     print(f"{ledger_state_dict=}")
+    assert ledger_state_dict.get("ancestors") == [bob_str]
+    assert not ledger_state_dict.get(event_int_str())
     assert ledger_state_dict.get(ledger_depth_str()) == DEFAULT_DEPTH_LEDGER
     assert ledger_state_dict.get(owner_name_str()) == bob_str
     assert ledger_state_dict.get(quota_str()) == deal1_quota
-    assert not ledger_state_dict.get(event_int_str())
 
 
 def test_WorldUnit_create_root_deal_nodes_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
@@ -178,11 +179,11 @@ def test_WorldUnit_create_root_deal_nodes_Scenaro3_DealExistsNotPerfectMatch_tim
     # THEN
     assert os_path_exists(tp37_deal_node_json_path)
     ledger_state_dict = open_json(tp37_deal_node_json_path)
+    assert ledger_state_dict.get("ancestors") == [bob_str]
+    assert ledger_state_dict.get(event_int_str()) == event3
     assert ledger_state_dict.get(ledger_depth_str()) == deal1_ledger_depth
     assert ledger_state_dict.get(owner_name_str()) == bob_str
-    assert ledger_state_dict.get(quota_str()) == deal1_quota
-    assert ledger_state_dict.get(event_int_str()) == event3
     assert ledger_state_dict.get(penny_str()) == a23_penny
-    print(ledger_state_dict.get("ancestor"))
-    assert not ledger_state_dict.get("ancestor")
+    assert ledger_state_dict.get(quota_str()) == deal1_quota
+    print(ledger_state_dict.get("ancestors"))
     assert len(ledger_state_dict) == 6
