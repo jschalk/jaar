@@ -926,7 +926,7 @@ def etl_create_root_deal_nodes(fisc_mstr_dir: str):
             x_fiscunit.create_root_deal_nodes(ote1_dict)
 
 
-def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
+def etl_create_deal_trees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_dir = create_path(fiscs_dir, fisc_title)
@@ -952,7 +952,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
     while deals_to_evaluate != []:
         parent_deal = deals_to_evaluate.pop()
         parent_event_int = parent_deal.get("event_int")
-        parent_ledger_depth = parent_deal.get("ledger_depth")
+        parent_dealdepth = parent_deal.get("dealdepth")
         parent_owner_name = parent_deal.get("owner_name")
         parent_quota = parent_deal.get("quota")
         parent_penny = parent_deal.get("penny")
@@ -970,8 +970,8 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
         )
         parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
         save_json(parent_quota_ledger_path, None, parent_quota_ledger)
-        if parent_ledger_depth > 0:
-            child_ledger_depth = parent_ledger_depth - 1
+        if parent_dealdepth > 0:
+            child_dealdepth = parent_dealdepth - 1
             parent_credit_owners = set(parent_credit_ledger.keys())
             owners_downhill_events_ints = get_owners_downhill_event_ints(
                 owner_events_sets, parent_credit_owners, parent_event_int
@@ -983,7 +983,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                     child_deal_node = {
                         "ancestors": child_ancestors,
                         "event_int": downhill_event_int,
-                        "ledger_depth": child_ledger_depth,
+                        "dealdepth": child_dealdepth,
                         "owner_name": quota_owner,
                         "penny": parent_penny,
                         "quota": quota_amount,

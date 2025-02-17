@@ -286,7 +286,7 @@ class FiscUnit:
         time_int: TimeLinePoint,
         quota: int,
         allow_prev_to_present_time_entry: bool = False,
-        ledger_depth: int = None,
+        dealdepth: int = None,
     ):
         if time_int < self.present_time and not allow_prev_to_present_time_entry:
             exception_str = f"Cannot set dealunit because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
@@ -294,7 +294,7 @@ class FiscUnit:
         if self.brokerunit_exists(owner_name) is False:
             self.set_brokerunit(brokerunit_shop(owner_name))
         x_brokerunit = self.get_brokerunit(owner_name)
-        x_brokerunit.add_deal(time_int, quota, ledger_depth)
+        x_brokerunit.add_deal(time_int, quota, dealdepth)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
@@ -398,7 +398,7 @@ class FiscUnit:
         deal_node = {
             "owner_name": owner_name,
             "event_int": max_past_event_int,
-            "ledger_depth": dealunit.ledger_depth,
+            "dealdepth": dealunit.dealdepth,
             "quota": dealunit.quota,
             "penny": self.penny,
             "ancestors": [owner_name],

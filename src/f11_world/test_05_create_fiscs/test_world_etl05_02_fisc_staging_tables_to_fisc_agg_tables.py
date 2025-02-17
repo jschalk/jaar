@@ -98,7 +98,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
     quota_t9 = 9999
     amount_t22 = 2222
     amount_t23 = 2323
-    x_ledger_depth = 2
+    x_dealdepth = 2
     fizz_world = worldunit_shop("fizz")
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     # create deal rows
@@ -107,11 +107,11 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
     br00002_str = "br00002"
     br00001_csv_filename = f"{br00001_str}.csv"
     br00002_csv_filename = f"{br00002_str}.csv"
-    br00001_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,time_int,quota,ledger_depth
-{sue_inx},{event3},{accord23_str},{bob_inx},{timepoint800},{quota_t8},{x_ledger_depth}
-{sue_inx},{event3},{accord23_str},{yao_inx},{timepoint800},{quota_t8},{x_ledger_depth}
-{sue_inx},{event3},{accord45_str},{yao_inx},{timepoint800},{quota_t8},{x_ledger_depth}
-{sue_inx},{event7},{accord45_str},{yao_inx},{timepoint900},{quota_t9},{x_ledger_depth}
+    br00001_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,time_int,quota,dealdepth
+{sue_inx},{event3},{accord23_str},{bob_inx},{timepoint800},{quota_t8},{x_dealdepth}
+{sue_inx},{event3},{accord23_str},{yao_inx},{timepoint800},{quota_t8},{x_dealdepth}
+{sue_inx},{event3},{accord45_str},{yao_inx},{timepoint800},{quota_t8},{x_dealdepth}
+{sue_inx},{event7},{accord45_str},{yao_inx},{timepoint900},{quota_t9},{x_dealdepth}
 """
     br00002_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,acct_name,time_int,amount
 {sue_inx},{event2},{accord23_str},{bob_inx},{sue_inx},{timepoint22},{amount_t22}

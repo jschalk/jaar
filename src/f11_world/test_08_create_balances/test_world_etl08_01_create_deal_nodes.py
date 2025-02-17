@@ -5,7 +5,7 @@ from src.f00_instrument.file import (
     create_path,
     count_dirs_files,
 )
-from src.f01_road.deal import owner_name_str, quota_str, ledger_depth_str
+from src.f01_road.deal import owner_name_str, quota_str, dealdepth_str
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.hub_path import (
@@ -20,7 +20,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_create_deal_ledger_depth_Scenaro0_timepoint_Empty(
+def test_WorldUnit_create_deal_trees_Scenaro0_timepoint_Empty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -35,7 +35,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro0_timepoint_Empty(
     assert count_dirs_files(a23_bob_tp37_path) == 0
 
     # WHEN
-    fizz_world.create_deal_ledger_depth()
+    fizz_world.create_deal_trees()
 
     # THEN
     assert count_dirs_files(a23_bob_tp37_path) == 0
@@ -63,7 +63,7 @@ def save_budevent(
     return x_budevent_path
 
 
-def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
+def test_WorldUnit_create_deal_trees_Scenaro1_LedgerDepth0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -74,11 +74,11 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
     yao_str = "Yao"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_ledger_depth = 0
+    deal1_dealdepth = 0
     event56 = 56
     deal_node = {
         "ancestors": [],
-        ledger_depth_str(): deal1_ledger_depth,
+        dealdepth_str(): deal1_dealdepth,
         owner_name_str(): bob_str,
         event_int_str(): event56,
         quota_str(): deal1_quota,
@@ -100,7 +100,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
     assert count_dirs_files(bob_tp37_dir) == 1
 
     # WHEN
-    fizz_world.create_deal_ledger_depth()
+    fizz_world.create_deal_trees()
 
     # THEN
     assert os_path_exists(bob_tp37_credit_ledger_path)
@@ -110,7 +110,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro1_LedgerDepth0(
     assert count_dirs_files(bob_tp37_dir) == 3
 
 
-def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
+def test_WorldUnit_create_deal_trees_Scenaro2_LedgerDepth1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -122,12 +122,12 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_ledger_depth = 1
+    deal1_dealdepth = 1
     event56 = 56
     deal_node = {
         "ancestors": [bob_str],
         event_int_str(): event56,
-        ledger_depth_str(): deal1_ledger_depth,
+        dealdepth_str(): deal1_dealdepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -176,7 +176,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
     assert count_dirs_files(tp37_dir) == 1
 
     # WHEN
-    fizz_world.create_deal_ledger_depth()
+    fizz_world.create_deal_trees()
 
     # THEN
     assert os_path_exists(bob_tp37_credit)
@@ -201,7 +201,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
     assert open_json(bob_tp37_bob_node_path) == {
         "ancestors": ["Bob", "Bob"],
         "event_int": 56,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Bob",
         "penny": 1,
         "quota": 150,
@@ -209,7 +209,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
     assert open_json(bob_tp37_yao_node_path) == {
         "ancestors": ["Bob", "Yao"],
         "event_int": 56,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Yao",
         "penny": 1,
         "quota": 150,
@@ -217,7 +217,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
     assert open_json(bob_tp37_zia_node_path) == {
         "ancestors": ["Bob", "Zia"],
         "event_int": 56,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Zia",
         "penny": 1,
         "quota": 150,
@@ -231,7 +231,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
     assert open_json(tp37_zia_quota) == {"Bob": 75, "Yao": 75}
 
 
-def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEvent(
+def test_WorldUnit_create_deal_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -243,14 +243,14 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEven
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_ledger_depth = 1
+    deal1_dealdepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
     deal_node = {
         "ancestors": [bob_str],
         event_int_str(): event55,
-        ledger_depth_str(): deal1_ledger_depth,
+        dealdepth_str(): deal1_dealdepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -300,7 +300,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEven
     assert count_dirs_files(tp37_dir) == 1
 
     # WHEN
-    fizz_world.create_deal_ledger_depth()
+    fizz_world.create_deal_trees()
 
     # THEN
     assert os_path_exists(bob_tp37_credit)
@@ -325,7 +325,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEven
     assert open_json(tp37_bob_node_path) == {
         "ancestors": ["Bob", "Bob"],
         "event_int": 55,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Bob",
         "penny": 1,
         "quota": 150,
@@ -333,7 +333,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEven
     assert open_json(tp37_yao_node_path) == {
         "ancestors": ["Bob", "Yao"],
         "event_int": 44,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Yao",
         "penny": 1,
         "quota": 150,
@@ -341,7 +341,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEven
     assert open_json(tp37_zia_node_path) == {
         "ancestors": ["Bob", "Zia"],
         "event_int": 33,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Zia",
         "penny": 1,
         "quota": 150,
@@ -355,7 +355,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro3_LedgerDepth1_MostRecentEven
     assert open_json(tp37_zia_quota) == {"Bob": 75, "Yao": 75}
 
 
-def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
+def test_WorldUnit_create_deal_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -367,7 +367,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_ledger_depth = 1
+    deal1_dealdepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
@@ -375,7 +375,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
     deal_node = {
         "ancestors": [bob_str],
         event_int_str(): event55,
-        ledger_depth_str(): deal1_ledger_depth,
+        dealdepth_str(): deal1_dealdepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -425,7 +425,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
     assert count_dirs_files(tp37_dir) == 1
 
     # WHEN
-    fizz_world.create_deal_ledger_depth()
+    fizz_world.create_deal_trees()
 
     # THEN
     assert os_path_exists(bob_tp37_credit)
@@ -450,7 +450,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
     assert open_json(tp37_bob_node_path) == {
         "ancestors": ["Bob", "Bob"],
         "event_int": 55,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Bob",
         "penny": 1,
         "quota": 150,
@@ -458,7 +458,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
     assert open_json(tp37_yao_node_path) == {
         "ancestors": ["Bob", "Yao"],
         "event_int": 44,
-        "ledger_depth": 0,
+        "dealdepth": 0,
         "owner_name": "Yao",
         "penny": 1,
         "quota": 150,
@@ -470,7 +470,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
     assert open_json(tp37_yao_quota) == {"Zia": 150}
 
 
-# def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth3(
+# def test_WorldUnit_create_deal_trees_Scenaro4_LedgerDepth3(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -482,12 +482,12 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     zia_str = "Zia"
 #     tp37 = 37  # timepoint
 #     deal1_quota = 450
-#     deal1_ledger_depth = 1
+#     deal1_dealdepth = 1
 #     event56 = 56
 #     deal_node = {
 #         "ancestors": [bob_str],
 #         event_int_str(): event56,
-#         ledger_depth_str(): deal1_ledger_depth,
+#         dealdepth_str(): deal1_dealdepth,
 #         owner_name_str(): bob_str,
 #         penny_str(): 1,
 #         quota_str(): deal1_quota,
@@ -536,7 +536,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert count_dirs_files(tp37_dir) == 1
 
 #     # WHEN
-#     fizz_world.create_deal_ledger_depth()
+#     fizz_world.create_deal_trees()
 
 #     # THEN
 #     assert os_path_exists(bob_tp37_credit)
@@ -561,7 +561,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert open_json(bob_tp37_bob_node_path) == {
 #         "ancestors": ["Bob", "Bob"],
 #         "event_int": 56,
-#         "ledger_depth": 0,
+#         "dealdepth": 0,
 #         "owner_name": "Bob",
 #         "penny": 1,
 #         "quota": 150,
@@ -569,7 +569,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert open_json(bob_tp37_yao_node_path) == {
 #         "ancestors": ["Bob", "Yao"],
 #         "event_int": 56,
-#         "ledger_depth": 0,
+#         "dealdepth": 0,
 #         "owner_name": "Yao",
 #         "penny": 1,
 #         "quota": 150,
@@ -577,7 +577,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert open_json(bob_tp37_zia_node_path) == {
 #         "ancestors": ["Bob", "Zia"],
 #         "event_int": 56,
-#         "ledger_depth": 0,
+#         "dealdepth": 0,
 #         "owner_name": "Zia",
 #         "penny": 1,
 #         "quota": 150,
@@ -591,7 +591,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert open_json(tp37_zia_quota) == {"Bob": 75, "Yao": 75}
 
 
-# def test_WorldUnit_create_deal_ledger_depth_Scenaro2_LedgerDepth1(
+# def test_WorldUnit_create_deal_trees_Scenaro2_LedgerDepth1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -603,12 +603,12 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 
 #     # save ledger_state json at tp37 root
 #     deal1_quota = 450
-#     deal1_ledger_depth = 1
+#     deal1_dealdepth = 1
 #     tp37_ledger_state_path = node_path(
 #         fisc_mstr_dir, a23_str, bob_str, timepoint37
 #     )
 #     tp37_ledger_state_dict = {
-#         ledger_depth_str(): deal1_ledger_depth,
+#         dealdepth_str(): deal1_dealdepth,
 #         owner_name_str(): bob_str,
 #         quota_str(): deal1_quota,
 #         event_int_str(): event3,
@@ -642,7 +642,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert count_dirs_files(tp37_dir) == 1
 
 #     # WHEN
-#     fizz_world.create_deal_ledger_depth()
+#     fizz_world.create_deal_trees()
 
 #     # THEN
 #     assert os_path_exists(tp37_yao_dir)
@@ -650,7 +650,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert count_dirs_files(tp37_dir) == 3
 
 
-# def test_WorldUnit_create_deal_ledger_depth_Scenaro2_DealExistsButNoBudExistsInEventsPast(
+# def test_WorldUnit_create_deal_trees_Scenaro2_DealExistsButNoBudExistsInEventsPast(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -693,13 +693,13 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert os_path_exists(timepoint37_budpoint_path) is False
 
 #     # WHEN
-#     fizz_world.create_deal_ledger_depth()
+#     fizz_world.create_deal_trees()
 
 #     # THEN
 #     assert os_path_exists(timepoint37_budpoint_path) is False
 
 
-# def test_WorldUnit_create_deal_ledger_depth_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
+# def test_WorldUnit_create_deal_trees_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -746,7 +746,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 #     assert os_path_exists(timepoint37_budpoint_path) is False
 
 #     # WHEN
-#     fizz_world.create_deal_ledger_depth()
+#     fizz_world.create_deal_trees()
 
 #     # THEN
 #     assert os_path_exists(timepoint37_budpoint_path)
@@ -755,7 +755,7 @@ def test_WorldUnit_create_deal_ledger_depth_Scenaro4_LedgerDepth1_OneOwnerHasNoP
 
 #     assert os_path_exists(timepoint37_deal_node_json_path)
 #     ledger_state_dict = open_json(timepoint37_deal_node_json_path)
-#     assert ledger_state_dict.get(ledger_depth_str()) == 0
+#     assert ledger_state_dict.get(dealdepth_str()) == 0
 #     assert ledger_state_dict.get(owner_name_str()) == bob_str
 #     assert ledger_state_dict.get(event_int_str()) == event3
 #     assert len(ledger_state_dict) == 3

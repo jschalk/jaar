@@ -270,7 +270,7 @@
     },
     "jvalues": {
       "quota": {},
-      "ledger_depth": {}
+      "dealdepth": {}
     }
   },
   "fisc_timeline_hour": {
