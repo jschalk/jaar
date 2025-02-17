@@ -2,35 +2,35 @@ from src.f00_instrument.file import create_path
 from src.f01_road.road import OwnerName, TitleUnit
 
 
-def create_fisc_json_path(fisc_mstr_dir: str, fisc_title: str) -> str:
+def create_fisc_json_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\fisc.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_title)
     return create_path(fisc_path, "fisc.json")
 
 
-def create_fisc_ote1_csv_path(fisc_mstr_dir: str, fisc_title: str):
+def create_fisc_ote1_csv_path(fisc_mstr_dir: str, fisc_title: TitleUnit):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\fisc_ote1_agg.csv"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_title)
     return create_path(fisc_path, "fisc_ote1_agg.csv")
 
 
-def create_fisc_ote1_json_path(fisc_mstr_dir: str, fisc_title: str):
+def create_fisc_ote1_json_path(fisc_mstr_dir: str, fisc_title: TitleUnit):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\fisc_ote1_agg.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_title)
     return create_path(fisc_path, "fisc_ote1_agg.json")
 
 
-def fisc_agenda_list_report_path(fisc_mstr_dir: str, fisc_title: str) -> str:
+def fisc_agenda_list_report_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\agenda_full_listing.csv"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_title)
     return create_path(fisc_path, "agenda_full_listing.csv")
 
 
-def create_owners_dir_path(fisc_mstr_dir: str, fisc_title: str) -> str:
+def create_owners_dir_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)

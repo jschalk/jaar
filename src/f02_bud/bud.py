@@ -19,7 +19,6 @@ from src.f01_road.finance import (
     FundCoin,
     FundNum,
     validate_respect_num,
-    TimeLinePoint,
 )
 from src.f01_road.jaar_config import max_tree_traverse_default
 from src.f01_road.road import (
