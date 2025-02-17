@@ -32,7 +32,7 @@ from src.f05_listen.hub_path import (
     create_owner_event_dir_path,
     create_budevent_path,
     create_budpoint_path,
-    create_deal_node_state_path,
+    create_deal_node_json_path,
 )
 from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,

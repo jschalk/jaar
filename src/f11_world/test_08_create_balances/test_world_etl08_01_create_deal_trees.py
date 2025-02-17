@@ -1,20 +1,13 @@
-from src.f00_instrument.file import (
-    open_json,
-    save_file,
-    save_json,
-    create_path,
-    count_dirs_files,
-)
+from src.f00_instrument.file import open_json, save_json, count_dirs_files
 from src.f01_road.deal import owner_name_str, quota_str, dealdepth_str
-from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.hub_path import (
-    create_budevent_path,
     create_deal_node_dir_path as node_dir,
-    create_deal_node_state_path as node_path,
+    create_deal_node_json_path as node_path,
     create_deal_node_credit_ledger_path as credit_path,
     create_deal_node_quota_ledger_path as quota_path,
 )
+from src.f05_listen.hub_tool import save_arbitrary_budevent as save_budevent
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -39,28 +32,6 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro0_timepoint_Empty(
 
     # THEN
     assert count_dirs_files(a23_bob_tp37_path) == 0
-
-
-def save_budevent(
-    fisc_mstr_dir: str,
-    fisc_title: str,
-    owner_name: str,
-    event_int: int,
-    accts: list[list],
-) -> str:
-    x_budunit = budunit_shop(owner_name, fisc_title)
-    for acct_list in accts:
-        try:
-            credit_belief = acct_list[1]
-        except Exception:
-            credit_belief = None
-        x_budunit.add_acctunit(acct_list[0], credit_belief)
-    x_budevent_path = create_budevent_path(
-        fisc_mstr_dir, fisc_title, owner_name, event_int
-    )
-    print(f"saved {x_budevent_path} with accts {set(x_budunit.accts.keys())}")
-    save_file(x_budevent_path, None, x_budunit.get_json())
-    return x_budevent_path
 
 
 def test_WorldUnit_create_fisc_deal_trees_Scenaro1_LedgerDepth0(
