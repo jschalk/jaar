@@ -1,5 +1,4 @@
 from src.f00_instrument.file import create_path, save_json, get_level1_dirs, open_json
-from src.f02_bud.bud_tool import get_bud_root_facts_dict
 from src.f05_listen.hub_path import (
     create_deal_node_json_path,
     create_deal_node_facts_path,
@@ -21,13 +20,11 @@ def create_all_deal_node_factunits(fisc_mstr_dir: str, fisc_title: str):
                     fisc_mstr_dir, fisc_title, owner_name, time_int
                 )
                 if os_path_exists(deal_node_json_path):
-                    print(f"{deal_node_json_path=}")
                     deal_node = open_json(deal_node_json_path)
                     deal_event_int = deal_node.get("event_int")
-                    # budevent_fact_dict = get_budevent_facts(
-                    #     fisc_mstr_dir, fisc_title, owner_name, deal_event_int
-                    # )
-                    budevent_fact_dict = {}
+                    budevent_fact_dict = get_budevent_facts(
+                        fisc_mstr_dir, fisc_title, owner_name, deal_event_int
+                    )
                     deal_node_facts_path = create_deal_node_facts_path(
                         fisc_mstr_dir, fisc_title, owner_name, time_int
                     )

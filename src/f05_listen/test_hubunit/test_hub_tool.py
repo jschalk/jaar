@@ -1,5 +1,7 @@
-from src.f00_instrument.file import create_path, set_dir, save_file, open_json
+from src.f00_instrument.file import create_path, set_dir, open_json
+from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
+from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -82,7 +84,7 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists():
     assert gen_sue_bud == expected_sue_bud
 
 
-def test_save_arbitrary_budevent_SetsFile_Scenario0():
+def test_save_arbitrary_budevent_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -98,6 +100,34 @@ def test_save_arbitrary_budevent_SetsFile_Scenario0():
     assert os_path_exists(budevent_path)
     expected_sue_bud = budunit_shop(sue_str, a23_str)
     assert open_bud_file(budevent_path).get_dict() == expected_sue_bud.get_dict()
+
+
+def test_save_arbitrary_budevent_SetsFile_Scenario1_includes_facts(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    event5 = 5
+    sue_str = "Sue"
+    budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, event5)
+    casa_road = create_road(a23_str, "casa")
+    clean_road = create_road(casa_road, "clean")
+    clean_fopen = 11
+    clean_fnigh = 16
+    x_facts = [(casa_road, clean_road, clean_fopen, clean_fnigh)]
+    assert os_path_exists(budevent_path) is False
+
+    # WHEN
+    save_arbitrary_budevent(fisc_mstr_dir, a23_str, sue_str, event5, facts=x_facts)
+
+    # THEN
+    assert os_path_exists(budevent_path)
+    expected_sue_bud = budunit_shop(sue_str, a23_str)
+    expected_sue_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh, True)
+    gen_sue_bud = open_bud_file(budevent_path)
+    assert gen_sue_bud.get_factunits_dict() == expected_sue_bud.get_factunits_dict()
+    assert gen_sue_bud.get_dict() == expected_sue_bud.get_dict()
 
 
 def test_get_timepoint_credit_ledger_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
@@ -210,7 +240,7 @@ def test_get_budevent_facts_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanu
     gen_a3_facts = get_budevent_facts(fisc_mstr_dir, a23_str, sue_str, t3)
 
     # THEN
-    expected_sue_fact_dict = {casa_road: {"base": casa_road, "pick": dirty_road}}
+    expected_sue_fact_dict = {casa_road: {base_str(): casa_road, "pick": dirty_road}}
     assert gen_a3_facts == expected_sue_fact_dict
 
 

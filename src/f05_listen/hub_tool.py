@@ -122,7 +122,7 @@ def save_arbitrary_budevent(
     owner_name: str,
     event_int: int,
     accts: list[list] = None,
-    facts: list[tuple[RoadUnit, RoadUnit]] = None,
+    facts: list[tuple[RoadUnit, RoadUnit, float, float]] = None,
 ) -> str:
     accts = get_empty_list_if_None(accts)
     facts = get_empty_list_if_None(facts)
@@ -133,6 +133,8 @@ def save_arbitrary_budevent(
         except Exception:
             credit_belief = None
         x_budunit.add_acctunit(acct_list[0], credit_belief)
+    for fact_tup in facts:
+        x_budunit.add_fact(fact_tup[0], fact_tup[1], fact_tup[2], fact_tup[3], True)
     x_budevent_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
@@ -159,5 +161,4 @@ def save_arbitrary_dealnode(
         "penny": 1,
         "quota": 150,
     }
-    print(f"     {dealnode_path=}")
     save_json(dealnode_path, None, dealnode_dict)
