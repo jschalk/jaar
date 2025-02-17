@@ -66,7 +66,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
         bridge=slash_str,
         timeline=creg_timelineunit,
     )
-    accord23_fiscunit.add_dealepisode(
+    accord23_fiscunit.add_dealunit(
         owner_name="Sue",
         time_int=777,
         quota=445,
@@ -85,10 +85,10 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert gen_fiscunit.fisc_title == accord23_str
     assert gen_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert gen_fiscunit.timeline == accord23_fiscunit.timeline
-    assert gen_fiscunit.deallogs == accord23_fiscunit.deallogs
+    assert gen_fiscunit.brokerunits == accord23_fiscunit.brokerunits
     assert gen_fiscunit.cashbook.tranunits == accord23_fiscunit.cashbook.tranunits
-    print(f"{gen_fiscunit.deallogs=}")
-    assert len(gen_fiscunit.deallogs) == 1
+    print(f"{gen_fiscunit.brokerunits=}")
+    assert len(gen_fiscunit.brokerunits) == 1
     assert len(gen_fiscunit.cashbook.tranunits) == 1
     assert gen_fiscunit == accord23_fiscunit
 
@@ -157,7 +157,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     assert creg_fiscunit.fisc_title == accord23_str
     assert creg_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert creg_fiscunit.timeline == accord23_fiscunit.timeline
-    assert len(creg_fiscunit.deallogs) == 3
+    assert len(creg_fiscunit.brokerunits) == 3
     assert len(creg_fiscunit.cashbook.tranunits) == 4
     # assert creg_fiscunit == accord23_fiscunit
 
@@ -167,7 +167,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     assert five_fiscunit.penny == x_penny
     assert five_fiscunit.fisc_title == "jeffy45"
     assert five_fiscunit.fisc_mstr_dir == x_fiscs_dir
-    assert len(five_fiscunit.deallogs) == 2
+    assert len(five_fiscunit.brokerunits) == 2
     assert len(five_fiscunit.cashbook.tranunits) == 1
     jeffy45_timeline = jeffy45_fiscunit.timeline
     assert five_fiscunit.timeline.hours_config == jeffy45_timeline.hours_config

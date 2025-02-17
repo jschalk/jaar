@@ -11,14 +11,14 @@ from src.f05_listen.hub_path import (
     create_fisc_ote1_json_path,
     fisc_agenda_list_report_path,
     create_owners_dir_path,
-    create_episodes_dir_path,
+    create_deals_dir_path,
     create_timepoint_dir_path,
-    create_deal_path,
+    create_root_deal_json_path,
     create_budpoint_path,
-    create_episode_node_dir_path,
-    create_episode_node_state_path,
-    create_episode_node_credit_ledger_path,
-    create_episode_node_quota_ledger_path,
+    create_deal_node_dir_path,
+    create_deal_node_state_path,
+    create_deal_node_credit_ledger_path,
+    create_deal_node_quota_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -105,22 +105,22 @@ def test_create_owners_dir_path_ReturnObj():
     assert gen_owners_dir == expected_owners_dir
 
 
-def test_create_episodes_dir_path_ReturnObj():
+def test_create_deals_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
     sue_str = "Sue"
 
     # WHEN
-    episodes_dir = create_episodes_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
+    deals_dir = create_deals_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
 
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    expected_episodes_dir = create_path(sue_dir, "episodes")
-    assert episodes_dir == expected_episodes_dir
+    expected_deals_dir = create_path(sue_dir, "deals")
+    assert deals_dir == expected_deals_dir
 
 
 def test_create_timepoint_dir_path_ReturnObj():
@@ -140,12 +140,12 @@ def test_create_timepoint_dir_path_ReturnObj():
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    episodes_dir = create_path(sue_dir, "episodes")
-    expected_timepoint_dir = create_path(episodes_dir, timepoint7)
+    deals_dir = create_path(sue_dir, "deals")
+    expected_timepoint_dir = create_path(deals_dir, timepoint7)
     assert generated_timepoint_dir == expected_timepoint_dir
 
 
-def test_create_deal_path_ReturnObj():
+def test_create_root_deal_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -153,15 +153,17 @@ def test_create_deal_path_ReturnObj():
     timepoint7 = 7
 
     # WHEN
-    gen_deal_path = create_deal_path(x_fisc_mstr_dir, a23_str, sue_str, timepoint7)
+    gen_deal_path = create_root_deal_json_path(
+        x_fisc_mstr_dir, a23_str, sue_str, timepoint7
+    )
 
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    episodes_dir = create_path(sue_dir, "episodes")
-    timepoint_dir = create_path(episodes_dir, timepoint7)
+    deals_dir = create_path(sue_dir, "deals")
+    timepoint_dir = create_path(deals_dir, timepoint7)
     expected_deal_path_dir = create_path(timepoint_dir, "deal.json")
     assert gen_deal_path == expected_deal_path_dir
 
@@ -183,13 +185,13 @@ def test_create_budpoint_path_ReturnObj():
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    episodes_dir = create_path(sue_dir, "episodes")
-    timepoint_dir = create_path(episodes_dir, timepoint7)
+    deals_dir = create_path(sue_dir, "deals")
+    timepoint_dir = create_path(deals_dir, timepoint7)
     expected_budpoint_path_dir = create_path(timepoint_dir, "budpoint.json")
     assert gen_budpoint_path == expected_budpoint_path_dir
 
 
-def test_create_episode_node_dir_path_ReturnObj_Scenario0_No_ledger_owners():
+def test_create_deal_node_dir_path_ReturnObj_Scenario0_No_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -197,16 +199,16 @@ def test_create_episode_node_dir_path_ReturnObj_Scenario0_No_ledger_owners():
     tp7 = 7
 
     # WHEN
-    gen_episode_node_path = create_episode_node_dir_path(
+    gen_deal_node_path = create_deal_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, []
     )
 
     # THEN
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    assert gen_episode_node_path == timepoint_dir
+    assert gen_deal_node_path == timepoint_dir
 
 
-def test_create_episode_node_dir_path_ReturnObj_Scenario1_One_ledger_owners():
+def test_create_deal_node_dir_path_ReturnObj_Scenario1_One_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -216,17 +218,17 @@ def test_create_episode_node_dir_path_ReturnObj_Scenario1_One_ledger_owners():
     x_ledger_owners = [yao_str]
 
     # WHEN
-    gen_episode_node_path = create_episode_node_dir_path(
+    gen_deal_node_path = create_deal_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=x_ledger_owners
     )
 
     # THEN
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
-    assert gen_episode_node_path == tp_yao_dir
+    assert gen_deal_node_path == tp_yao_dir
 
 
-def test_create_episode_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
+def test_create_deal_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -238,7 +240,7 @@ def test_create_episode_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
     x_ledger_owners = [yao_str, bob_str, zia_str]
 
     # WHEN
-    gen_deal_ledger_depth_dir_path = create_episode_node_dir_path(
+    gen_deal_ledger_depth_dir_path = create_deal_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=x_ledger_owners
     )
 
@@ -250,7 +252,7 @@ def test_create_episode_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
     assert gen_deal_ledger_depth_dir_path == expected_tp_yao_bob_zia_dir
 
 
-def test_create_episode_node_state_path_ReturnObj_Scenario0_Empty_ledger_owners():
+def test_create_deal_node_state_path_ReturnObj_Scenario0_Empty_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -258,7 +260,7 @@ def test_create_episode_node_state_path_ReturnObj_Scenario0_Empty_ledger_owners(
     timepoint7 = 7
 
     # WHEN
-    gen_episode_node_path = create_episode_node_state_path(
+    gen_deal_node_path = create_deal_node_state_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -267,13 +269,13 @@ def test_create_episode_node_state_path_ReturnObj_Scenario0_Empty_ledger_owners(
     accord23_dir = create_path(x_fiscs_dir, a23_str)
     owners_dir = create_path(accord23_dir, get_owners_folder())
     sue_dir = create_path(owners_dir, sue_str)
-    episodes_dir = create_path(sue_dir, "episodes")
-    timepoint_dir = create_path(episodes_dir, timepoint7)
-    expected_episode_node_path_dir = create_path(timepoint_dir, "episode_node.json")
-    assert gen_episode_node_path == expected_episode_node_path_dir
+    deals_dir = create_path(sue_dir, "deals")
+    timepoint_dir = create_path(deals_dir, timepoint7)
+    expected_deal_node_path_dir = create_path(timepoint_dir, "deal_node.json")
+    assert gen_deal_node_path == expected_deal_node_path_dir
 
 
-def test_create_episode_node_state_path_ReturnObj_Scenario1_Three_ledger_owners():
+def test_create_deal_node_state_path_ReturnObj_Scenario1_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -284,7 +286,7 @@ def test_create_episode_node_state_path_ReturnObj_Scenario1_Three_ledger_owners(
     ledger_owners = [yao_str, bob_str]
 
     # WHEN
-    gen_episode_node_path = create_episode_node_state_path(
+    gen_deal_node_path = create_deal_node_state_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=ledger_owners
     )
 
@@ -292,11 +294,11 @@ def test_create_episode_node_state_path_ReturnObj_Scenario1_Three_ledger_owners(
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_episode_node_path = create_path(tp_yao_bob_dir, "episode_node.json")
-    assert gen_episode_node_path == expected_episode_node_path
+    expected_deal_node_path = create_path(tp_yao_bob_dir, "deal_node.json")
+    assert gen_deal_node_path == expected_deal_node_path
 
 
-def test_create_episode_node_credit_ledger_path_ReturnObj_Scenario1_Three_ledger_owners():
+def test_create_deal_node_credit_ledger_path_ReturnObj_Scenario1_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -307,7 +309,7 @@ def test_create_episode_node_credit_ledger_path_ReturnObj_Scenario1_Three_ledger
     ledger_owners = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_credit_ledger_path = create_episode_node_credit_ledger_path(
+    gen_deal_credit_ledger_path = create_deal_node_credit_ledger_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=ledger_owners
     )
 
@@ -319,7 +321,7 @@ def test_create_episode_node_credit_ledger_path_ReturnObj_Scenario1_Three_ledger
     assert gen_deal_credit_ledger_path == expected_deal_credit_ledger_path
 
 
-def test_create_episode_node_quota_ledger_path_ReturnObj_Scenario1_Three_ledger_owners():
+def test_create_deal_node_quota_ledger_path_ReturnObj_Scenario1_Three_ledger_owners():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -330,7 +332,7 @@ def test_create_episode_node_quota_ledger_path_ReturnObj_Scenario1_Three_ledger_
     ledger_owners = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_quota_ledger_path = create_episode_node_quota_ledger_path(
+    gen_deal_quota_ledger_path = create_deal_node_quota_ledger_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=ledger_owners
     )
 

@@ -8,7 +8,7 @@ from src.f03_chrono.chrono import (
     validate_timeline_config,
 )
 from src.f07_fisc.fisc import fiscunit_shop
-from src.f09_idea.idea import _add_cashpurchases_from_df, _add_dealepisodes_from_df
+from src.f09_idea.idea import _add_cashpurchases_from_df, _add_dealunits_from_df
 from src.f09_idea.idea_db_tool import (
     upsert_sheet,
     dataframe_to_dict,
@@ -55,19 +55,19 @@ def get_fiscweek_sorted_args() -> list[str]:
 class FiscPrimeObjsRef:
     def __init__(self, x_dir: str = ""):
         self.unit_agg_tablename = "fiscunit_agg"
-        self.deal_agg_tablename = "fisc_deal_episode_agg"
+        self.deal_agg_tablename = "fisc_dealunit_agg"
         self.cash_agg_tablename = "fisc_cashbook_agg"
         self.hour_agg_tablename = "fisc_timeline_hour_agg"
         self.mont_agg_tablename = "fisc_timeline_month_agg"
         self.week_agg_tablename = "fisc_timeline_weekday_agg"
         self.unit_stage_tablename = "fiscunit_staging"
-        self.deal_stage_tablename = "fisc_deal_episode_staging"
+        self.deal_stage_tablename = "fisc_dealunit_staging"
         self.cash_stage_tablename = "fisc_cashbook_staging"
         self.hour_stage_tablename = "fisc_timeline_hour_staging"
         self.mont_stage_tablename = "fisc_timeline_month_staging"
         self.week_stage_tablename = "fisc_timeline_weekday_staging"
         self.unit_agg_csv_filename = "fiscunit_agg.csv"
-        self.deal_agg_csv_filename = "fisc_deal_episode_agg.csv"
+        self.deal_agg_csv_filename = "fisc_dealunit_agg.csv"
         self.cash_agg_csv_filename = "fisc_cashbook_agg.csv"
         self.hour_agg_csv_filename = "fisc_timeline_hour_agg.csv"
         self.mont_agg_csv_filename = "fisc_timeline_month_agg.csv"
@@ -79,7 +79,7 @@ class FiscPrimeObjsRef:
         self.mont_agg_csv_path = create_path(x_dir, self.mont_agg_csv_filename)
         self.week_agg_csv_path = create_path(x_dir, self.week_agg_csv_filename)
         self.unit_stage_csv_filename = "fiscunit_staging.csv"
-        self.deal_stage_csv_filename = "fisc_deal_episode_staging.csv"
+        self.deal_stage_csv_filename = "fisc_dealunit_staging.csv"
         self.cash_stage_csv_filename = "fisc_cashbook_staging.csv"
         self.hour_stage_csv_filename = "fisc_timeline_hour_staging.csv"
         self.mont_stage_csv_filename = "fisc_timeline_month_staging.csv"
@@ -92,13 +92,13 @@ class FiscPrimeObjsRef:
         self.week_stage_csv_path = create_path(x_dir, self.week_stage_csv_filename)
 
         self.unit_excel_filename = "fiscunit.xlsx"
-        self.deal_excel_filename = "fisc_deal_episode.xlsx"
+        self.deal_excel_filename = "fisc_dealunit.xlsx"
         self.cash_excel_filename = "fisc_cashbook.xlsx"
         self.hour_excel_filename = "fisc_timeline_hour.xlsx"
         self.mont_excel_filename = "fisc_timeline_month.xlsx"
         self.week_excel_filename = "fisc_timeline_weekday.xlsx"
         self.unit_excel_path = create_path(x_dir, "fiscunit.xlsx")
-        self.deal_excel_path = create_path(x_dir, "fisc_deal_episode.xlsx")
+        self.deal_excel_path = create_path(x_dir, "fisc_dealunit.xlsx")
         self.cash_excel_path = create_path(x_dir, "fisc_cashbook.xlsx")
         self.hour_excel_path = create_path(x_dir, "fisc_timeline_hour.xlsx")
         self.mont_excel_path = create_path(x_dir, "fisc_timeline_month.xlsx")
@@ -260,7 +260,7 @@ def create_fiscunit_jsons_from_prime_files(fisc_mstr_dir: str):
             in_memory_journal=True,
         )
         _add_cashpurchases_from_df(fiscunit, fisccash_df)
-        _add_dealepisodes_from_df(fiscunit, fiscdeal_df)
+        _add_dealunits_from_df(fiscunit, fiscdeal_df)
         fiscunits[fiscunit.fisc_title] = fiscunit
     for fiscunit in fiscunits.values():
         fisc_filename = "fisc.json"

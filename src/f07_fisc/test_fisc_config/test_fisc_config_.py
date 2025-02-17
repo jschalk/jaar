@@ -36,7 +36,7 @@ from src.f07_fisc.fisc_config import (
     present_time_str,
     cumlative_minute_str,
     fiscunit_str,
-    fisc_deal_episode_str,
+    fisc_dealunit_str,
     fisc_cashbook_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
@@ -74,7 +74,7 @@ def test_get_fisc_config_dict_ReturnsObj():
     assert fisc_config
     fisc_config_dimens = set(fisc_config.keys())
     assert fiscunit_str() in fisc_config_dimens
-    assert fisc_deal_episode_str() in fisc_config_dimens
+    assert fisc_dealunit_str() in fisc_config_dimens
     assert fisc_cashbook_str() in fisc_config_dimens
     assert fisc_timeline_hour_str() in fisc_config_dimens
     assert fisc_timeline_month_str() in fisc_config_dimens
@@ -82,13 +82,13 @@ def test_get_fisc_config_dict_ReturnsObj():
     assert len(fisc_config) == 6
     _validate_fisc_config(fisc_config)
     fiscunit_dict = fisc_config.get(fiscunit_str())
-    fisc_deal_episode_dict = fisc_config.get(fisc_deal_episode_str())
+    fisc_dealunit_dict = fisc_config.get(fisc_dealunit_str())
     fisc_cashbook_dict = fisc_config.get(fisc_cashbook_str())
     fisc_timeline_hour_dict = fisc_config.get(fisc_timeline_hour_str())
     fisc_timeline_month_dict = fisc_config.get(fisc_timeline_month_str())
     fisc_timeline_weekday_dict = fisc_config.get(fisc_timeline_weekday_str())
     assert len(fiscunit_dict.get(jkeys_str())) == 1
-    assert len(fisc_deal_episode_dict.get(jkeys_str())) == 3
+    assert len(fisc_dealunit_dict.get(jkeys_str())) == 3
     assert len(fisc_cashbook_dict.get(jkeys_str())) == 4
     assert len(fisc_timeline_hour_dict.get(jkeys_str())) == 2
     assert len(fisc_timeline_month_dict.get(jkeys_str())) == 2
@@ -109,7 +109,7 @@ def test_get_fisc_config_dict_ReturnsObj():
     gen_jvalues = set(fiscunit_dict.get(jvalues_str()).keys())
     assert gen_jvalues == x_fiscunit_jvalues
     assert len(fiscunit_dict.get(jvalues_str())) == 9
-    assert len(fisc_deal_episode_dict.get(jvalues_str())) == 2
+    assert len(fisc_dealunit_dict.get(jvalues_str())) == 2
     assert len(fisc_cashbook_dict.get(jvalues_str())) == 1
     assert len(fisc_timeline_hour_dict.get(jvalues_str())) == 1
     assert len(fisc_timeline_month_dict.get(jvalues_str())) == 1
@@ -150,7 +150,7 @@ def test_get_fisc_dimens_ReturnsObj():
 
     # THEN
     assert fiscunit_str() in fisc_config_dimens
-    assert fisc_deal_episode_str() in fisc_config_dimens
+    assert fisc_dealunit_str() in fisc_config_dimens
     assert fisc_cashbook_str() in fisc_config_dimens
     assert fisc_timeline_hour_str() in fisc_config_dimens
     assert fisc_timeline_month_str() in fisc_config_dimens

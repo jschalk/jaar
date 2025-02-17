@@ -75,14 +75,14 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThan
     assert str(excinfo.value) == exception_str
 
 
-def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealEpisodeHas_time_int():
+def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_time_int():
     # ESTABLISH
     x_fisc = fiscunit_shop(present_time=0)
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_quota = 100
-    x_fisc.add_dealepisode("yao", t55_t, t55_quota)
+    x_fisc.add_dealunit("yao", t55_t, t55_quota)
     t55_amount = 37
     t6606_present_time = 6606
     x_fisc.present_time = t6606_present_time
@@ -219,16 +219,16 @@ def test_FiscUnit_set_all_tranbook_SetsAttr():
 
     x40000_time_int = 40000
     x70000_time_int = 70000
-    x_fisc.add_dealepisode(sue_str, x40000_time_int, 1)
-    x_fisc.add_dealepisode(sue_str, x70000_time_int, 1)
+    x_fisc.add_dealunit(sue_str, x40000_time_int, 1)
+    x_fisc.add_dealunit(sue_str, x70000_time_int, 1)
     bob_str = "Bob"
     zia_str = "Zia"
-    zia_net_deal = 887
-    bob_net_deal = 445
-    sue_x40000_episode = x_fisc.get_deallog(sue_str).get_episode(x40000_time_int)
-    sue_x70000_episode = x_fisc.get_deallog(sue_str).get_episode(x70000_time_int)
-    sue_x40000_episode.set_net_deal(bob_str, bob_net_deal)
-    sue_x70000_episode.set_net_deal(zia_str, zia_net_deal)
+    zia_deal_net = 887
+    bob_deal_net = 445
+    sue_x40000_deal = x_fisc.get_brokerunit(sue_str).get_deal(x40000_time_int)
+    sue_x70000_deal = x_fisc.get_brokerunit(sue_str).get_deal(x70000_time_int)
+    sue_x40000_deal.set_deal_net(bob_str, bob_deal_net)
+    sue_x70000_deal.set_deal_net(zia_str, zia_deal_net)
 
     assert x_fisc._all_tranbook == tranbook_shop(x_fisc.fisc_title)
     assert x_fisc.cashpurchase_exists(sue_str, bob_str, t55_t)
@@ -237,9 +237,9 @@ def test_FiscUnit_set_all_tranbook_SetsAttr():
     assert x_fisc.cashpurchase_exists(sue_str, yao_str, t88_t)
     assert x_fisc.cashpurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_episode.net_deal_exists(bob_str)
-    assert sue_x70000_episode.net_deal_exists(zia_str)
-    # x_fisc.add_dealepisode()
+    assert sue_x40000_deal.deal_net_exists(bob_str)
+    assert sue_x70000_deal.deal_net_exists(zia_str)
+    # x_fisc.add_dealunit()
 
     # WHEN
     x_fisc.set_all_tranbook()

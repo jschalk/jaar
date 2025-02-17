@@ -185,7 +185,7 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
 def _get_fisc_idea_format_filenames() -> set[str]:
     idea_numbers = set(get_idea_dimen_ref().get("fiscunit"))
     idea_numbers.update(set(get_idea_dimen_ref().get("fisc_cashbook")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_deal_episode")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_dealunit")))
     idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_hour")))
     idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_month")))
     idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_weekday")))

@@ -18,7 +18,7 @@ from src.f01_road.jaar_config import (
 )
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.hub_path import (
-    create_episodes_dir_path,
+    create_deals_dir_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -54,7 +54,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit._atoms_dir
     assert not x_hubunit._voice_dir
     assert not x_hubunit._forecast_dir
-    assert not x_hubunit._episodes_dir
+    assert not x_hubunit._deals_dir
     assert not x_hubunit._gifts_dir
     assert not x_hubunit._voice_filename
     assert not x_hubunit._voice_path
@@ -120,13 +120,13 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._atoms_dir == create_path(x_hubunit._owner_dir, "atoms")
     assert x_hubunit._voice_dir == create_path(x_hubunit._owner_dir, "voice")
     assert x_hubunit._forecast_dir == create_path(x_hubunit._owner_dir, "forecast")
-    assert x_hubunit._episodes_dir == create_path(x_hubunit._owner_dir, "episodes")
-    func_episodes_dir = create_episodes_dir_path(
+    assert x_hubunit._deals_dir == create_path(x_hubunit._owner_dir, "deals")
+    func_deals_dir = create_deals_dir_path(
         x_fisc_mstr_dir, x_fisc_title, x_hubunit.owner_name
     )
-    print(f"{x_hubunit._episodes_dir=}")
-    print(f"{func_episodes_dir=}")
-    assert x_hubunit._episodes_dir == func_episodes_dir
+    print(f"{x_hubunit._deals_dir=}")
+    print(f"{func_deals_dir=}")
+    assert x_hubunit._deals_dir == func_deals_dir
     assert x_hubunit._gifts_dir == create_path(x_hubunit._owner_dir, get_gifts_folder())
 
     # voice

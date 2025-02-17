@@ -47,8 +47,8 @@ CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_st
 
 CREATE_FISC_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL)"""
 CREATE_FISC_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISC_DEAL_EPISODE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_deal_episode_agg (fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, ledger_depth INT)"""
-CREATE_FISC_DEAL_EPISODE_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_deal_episode_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, ledger_depth INT, error_message TEXT)"""
+CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, ledger_depth INT)"""
+CREATE_FISC_DEALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, ledger_depth INT, error_message TEXT)"""
 CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_title TEXT, hour_title TEXT, cumlative_minute INTEGER)"""
 CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, hour_title TEXT, cumlative_minute INTEGER, error_message TEXT)"""
 CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_title TEXT, month_title TEXT, cumlative_day INTEGER)"""
@@ -63,8 +63,8 @@ def get_fisc_create_table_sqlstrs() -> dict[str, str]:
     return {
         "fisc_cashbook_agg": CREATE_FISC_CASHBOOK_AGG_SQLSTR,
         "fisc_cashbook_staging": CREATE_FISC_CASHBOOK_STAGING_SQLSTR,
-        "fisc_deal_episode_agg": CREATE_FISC_DEAL_EPISODE_AGG_SQLSTR,
-        "fisc_deal_episode_staging": CREATE_FISC_DEAL_EPISODE_STAGING_SQLSTR,
+        "fisc_dealunit_agg": CREATE_FISC_DEALUNIT_AGG_SQLSTR,
+        "fisc_dealunit_staging": CREATE_FISC_DEALUNIT_STAGING_SQLSTR,
         "fisc_timeline_hour_agg": CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR,
         "fisc_timeline_hour_staging": CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR,
         "fisc_timeline_month_agg": CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR,
@@ -221,7 +221,7 @@ GROUP BY fisc_title, owner_name, acct_name, time_int
 HAVING MIN(amount) != MAX(amount)
 """
 FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_title, owner_name, time_int
-FROM fisc_deal_episode_staging
+FROM fisc_dealunit_staging
 GROUP BY fisc_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
     OR MIN(ledger_depth) != MAX(ledger_depth)
@@ -274,7 +274,7 @@ def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
 def get_fisc_inconsistency_sqlstrs() -> dict[str, str]:
     return {
         "fiscunit": FISCUNIT_INCONSISTENCY_SQLSTR,
-        "fisc_deal_episode": FISCDEAL_INCONSISTENCY_SQLSTR,
+        "fisc_dealunit": FISCDEAL_INCONSISTENCY_SQLSTR,
         "fisc_cashbook": FISCCASH_INCONSISTENCY_SQLSTR,
         "fisc_timeline_hour": FISCHOUR_INCONSISTENCY_SQLSTR,
         "fisc_timeline_month": FISCMONT_INCONSISTENCY_SQLSTR,
@@ -562,17 +562,17 @@ WHERE inconsistency_rows.fisc_title = fisc_cashbook_staging.fisc_title
 """
 FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_title, owner_name, time_int
-FROM fisc_deal_episode_staging
+FROM fisc_dealunit_staging
 GROUP BY fisc_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
     OR MIN(ledger_depth) != MAX(ledger_depth)
 )
-UPDATE fisc_deal_episode_staging
+UPDATE fisc_dealunit_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_deal_episode_staging.fisc_title
-    AND inconsistency_rows.owner_name = fisc_deal_episode_staging.owner_name
-    AND inconsistency_rows.time_int = fisc_deal_episode_staging.time_int
+WHERE inconsistency_rows.fisc_title = fisc_dealunit_staging.fisc_title
+    AND inconsistency_rows.owner_name = fisc_dealunit_staging.owner_name
+    AND inconsistency_rows.time_int = fisc_dealunit_staging.time_int
 ;
 """
 FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
@@ -654,7 +654,7 @@ def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
 def get_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     return {
         "fiscunit": FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_deal_episode": FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_dealunit": FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "fisc_cashbook": FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "fisc_timeline_hour": FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "fisc_timeline_month": FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
@@ -740,9 +740,9 @@ WHERE error_message IS NULL
 GROUP BY fisc_title, owner_name, acct_name, time_int
 ;
 """
-FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_deal_episode_agg (fisc_title, owner_name, time_int, quota, ledger_depth)
+FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_title, owner_name, time_int, quota, ledger_depth)
 SELECT fisc_title, owner_name, time_int, MAX(quota), MAX(ledger_depth)
-FROM fisc_deal_episode_staging
+FROM fisc_dealunit_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title, owner_name, time_int
 ;
@@ -810,7 +810,7 @@ def get_bud_insert_del_agg_from_staging_sqlstrs() -> dict[str, str]:
 def get_fisc_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
     return {
         "fisc_cashbook": FISCCASH_AGG_INSERT_SQLSTR,
-        "fisc_deal_episode": FISCDEAL_AGG_INSERT_SQLSTR,
+        "fisc_dealunit": FISCDEAL_AGG_INSERT_SQLSTR,
         "fisc_timeline_hour": FISCHOUR_AGG_INSERT_SQLSTR,
         "fisc_timeline_month": FISCMONT_AGG_INSERT_SQLSTR,
         "fisc_timeline_weekday": FISCWEEK_AGG_INSERT_SQLSTR,
@@ -820,12 +820,12 @@ def get_fisc_insert_agg_from_staging_sqlstrs() -> dict[str, str]:
 
 IDEA_STAGEABLE_PUT_DIMENS = {
     "br00000": ["fiscunit"],
-    "br00001": ["budunit", "fisc_deal_episode", "fiscunit"],
+    "br00001": ["budunit", "fisc_dealunit", "fiscunit"],
     "br00002": [
         "bud_acctunit",
         "budunit",
         "fisc_cashbook",
-        "fisc_deal_episode",
+        "fisc_dealunit",
         "fiscunit",
     ],
     "br00003": ["fisc_timeline_hour", "fiscunit"],
@@ -903,7 +903,7 @@ FROM (
     GROUP BY fisc_title, event_int, time_int
     UNION 
     SELECT fisc_title, event_int, time_int
-    FROM fisc_deal_episode_staging
+    FROM fisc_dealunit_staging
     GROUP BY fisc_title, event_int, time_int
 )
 ORDER BY fisc_title, event_int, time_int
@@ -944,7 +944,7 @@ INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, time_int)
 SELECT fisc_title, owner_name, event_int, time_int
 FROM (
     SELECT fisc_title, owner_name, event_int, time_int
-    FROM fisc_deal_episode_staging
+    FROM fisc_dealunit_staging
     GROUP BY fisc_title, owner_name, event_int, time_int
 )
 ORDER BY fisc_title, owner_name, event_int, time_int

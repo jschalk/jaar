@@ -257,7 +257,7 @@
       "amount": {}
     }
   },
-  "fisc_deal_episode": {
+  "fisc_dealunit": {
     "allowed_crud": "INSERT_MULITPLE",
     "idea_category": "fisc",
     "build_order": 20,

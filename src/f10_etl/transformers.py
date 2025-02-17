@@ -20,7 +20,7 @@ from src.f00_instrument.dict_toolbox import (
 )
 from src.f01_road.road import FaceName, EventInt, OwnerName, FiscTitle
 from src.f01_road.finance import TimeLinePoint
-from src.f01_road.deal import allot_scale, DealEpisode
+from src.f01_road.deal import allot_scale, DealUnit
 from src.f02_bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
@@ -38,9 +38,9 @@ from src.f05_listen.hub_path import (
     create_owner_event_dir_path,
     create_budevent_path,
     create_budpoint_path,
-    create_episode_node_state_path,
-    create_episode_node_quota_ledger_path,
-    create_episode_node_credit_ledger_path,
+    create_deal_node_state_path,
+    create_deal_node_quota_ledger_path,
+    create_deal_node_credit_ledger_path,
 )
 from src.f05_listen.hub_tool import (
     collect_events_dir_owner_events_sets,
@@ -915,7 +915,7 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         save_json(json_path, None, x_dict)
 
 
-def etl_create_root_episode_nodes(fisc_mstr_dir: str):
+def etl_create_root_deal_nodes(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_dir = create_path(fiscs_dir, fisc_title)
@@ -923,7 +923,7 @@ def etl_create_root_episode_nodes(fisc_mstr_dir: str):
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
             x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
-            x_fiscunit.create_root_episode_nodes(ote1_dict)
+            x_fiscunit.create_root_deal_nodes(ote1_dict)
 
 
 def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
@@ -933,15 +933,15 @@ def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
         owners_dir = create_path(fisc_dir, "owners")
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)
-            episodes_dir = create_path(owner_dir, "episodes")
-            for time_int in get_level1_dirs(episodes_dir):
+            deals_dir = create_path(owner_dir, "deals")
+            for time_int in get_level1_dirs(deals_dir):
                 process_root_ledger_depth(
                     fisc_mstr_dir, fisc_title, owner_name, time_int
                 )
 
 
 def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
-    root_ledger_state_json_path = create_episode_node_state_path(
+    root_ledger_state_json_path = create_deal_node_state_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
     if os_path_exists(root_ledger_state_json_path):
@@ -953,21 +953,24 @@ def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
         root_credit_ledger_dict = get_events_owner_credit_ledger(
             fisc_mstr_dir, fisc_title, x_owner_name, x_event_int
         )
-        deal_credit_ledger_json_path = create_episode_node_credit_ledger_path(
+        deal_credit_ledger_json_path = create_deal_node_credit_ledger_path(
             fisc_mstr_dir, fisc_title, owner_name, time_int
         )
-        deal_quota_ledger_json_path = create_episode_node_quota_ledger_path(
+        deal_quota_ledger_json_path = create_deal_node_quota_ledger_path(
             fisc_mstr_dir, fisc_title, owner_name, time_int
         )
         save_json(deal_credit_ledger_json_path, None, root_credit_ledger_dict)
         root_quota_ledger = allot_scale(root_credit_ledger_dict, x_quota, 1)
         save_json(deal_quota_ledger_json_path, None, root_quota_ledger)
+        for quota_owner, quota_amount in root_quota_ledger.items():
+            print(f"{x_ledger_depth-1=} {quota_owner=} {quota_amount=} {x_event_int=}")
+            print(f"{root_ledger_state_dict=}")
         # print(f"{root_ledger_state_dict=}")
         # print(f"{root_credit_ledger_dict=}")
         # print(f"{root_quota_ledger=}")
 
     # print(
-    #     f"{owner_name=} {time_int=} {timepoint_event_int=} {deal_episode=}"
+    #     f"{owner_name=} {time_int=} {timepoint_event_int=} {dealunit=}"
     # )
 
     # for every fiscunit

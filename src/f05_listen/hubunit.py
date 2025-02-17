@@ -29,11 +29,11 @@ from src.f01_road.finance import (
     TimeLinePoint,
 )
 from src.f01_road.deal import (
-    DealEpisode,
-    dealepisode_shop,
-    DealLog,
-    deallog_shop,
-    get_dealepisode_from_json,
+    DealUnit,
+    dealunit_shop,
+    BrokerUnit,
+    brokerunit_shop,
+    get_dealunit_from_json,
 )
 from src.f01_road.road import (
     OwnerName,
@@ -128,7 +128,7 @@ class HubUnit:
     _gifts_dir: str = None
     _voice_dir: str = None
     _forecast_dir: str = None
-    _episodes_dir: str = None
+    _deals_dir: str = None
     _voice_filename: str = None
     _voice_path: str = None
     _forecast_filename: str = None
@@ -144,7 +144,7 @@ class HubUnit:
         self._gifts_dir = f_path(self._owner_dir, get_gifts_folder())
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
-        self._episodes_dir = f_path(self._owner_dir, "episodes")
+        self._deals_dir = f_path(self._owner_dir, "deals")
         self._voice_filename = get_json_filename(self.owner_name)
         self._voice_path = f_path(self._voice_dir, self._voice_filename)
         self._forecast_filename = get_json_filename(self.owner_name)
@@ -395,7 +395,7 @@ class HubUnit:
 
     # Deal methods
     def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self._episodes_dir, str(x_time_int))
+        return f_path(self._deals_dir, str(x_time_int))
 
     def deal_filename(self) -> str:
         return "deal.json"
@@ -403,7 +403,7 @@ class HubUnit:
     def deal_file_path(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self.timepoint_dir(x_time_int), self.deal_filename())
 
-    def _save_valid_deal_file(self, x_deal: DealEpisode):
+    def _save_valid_deal_file(self, x_deal: DealUnit):
         x_deal.calc_magnitude()
         save_file(
             self.timepoint_dir(x_deal.time_int),
@@ -415,25 +415,25 @@ class HubUnit:
     def deal_file_exists(self, x_time_int: TimeLinePoint) -> bool:
         return os_path_exists(self.deal_file_path(x_time_int))
 
-    def get_deal_file(self, x_time_int: TimeLinePoint) -> DealEpisode:
+    def get_deal_file(self, x_time_int: TimeLinePoint) -> DealUnit:
         if self.deal_file_exists(x_time_int):
             x_json = open_file(self.timepoint_dir(x_time_int), self.deal_filename())
-            return get_dealepisode_from_json(x_json)
+            return get_dealunit_from_json(x_json)
 
     def delete_deal_file(self, x_time_int: TimeLinePoint):
         delete_dir(self.deal_file_path(x_time_int))
 
-    def get_deallog(self) -> DealLog:
-        x_deallog = deallog_shop(self.owner_name)
+    def get_brokerunit(self) -> BrokerUnit:
+        x_brokerunit = brokerunit_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
         for x_deal_folder_name in x_dirs:
-            x_dealepisode = self.get_deal_file(x_deal_folder_name)
-            x_deallog.set_episode(x_dealepisode)
-        return x_deallog
+            x_dealunit = self.get_deal_file(x_deal_folder_name)
+            x_brokerunit.set_deal(x_dealunit)
+        return x_brokerunit
 
     def _get_timepoint_dirs(self) -> list[str]:
         x_dict = get_dir_file_strs(
-            self._episodes_dir, include_dirs=True, include_files=False
+            self._deals_dir, include_dirs=True, include_files=False
         )
         return list(x_dict.keys())
 
@@ -474,13 +474,13 @@ class HubUnit:
             raise calc_timepoint_deal_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_time_int)
         if self.deal_file_exists(x_time_int):
-            x_dealepisode = self.get_deal_file(x_time_int)
-            x_budpoint.set_fund_pool(x_dealepisode.quota)
+            x_dealunit = self.get_deal_file(x_time_int)
+            x_budpoint.set_fund_pool(x_dealunit.quota)
         else:
-            x_dealepisode = dealepisode_shop(x_time_int)
-        x_dealepisode._episode_net = get_acct_agenda_ledger(x_budpoint, True)
+            x_dealunit = dealunit_shop(x_time_int)
+        x_dealunit._deal_net = get_acct_agenda_ledger(x_budpoint, True)
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
-        self._save_valid_deal_file(x_dealepisode)
+        self._save_valid_deal_file(x_dealunit)
 
     def calc_timepoint_deals(self):
         for x_timepoint in self._get_timepoint_dirs():

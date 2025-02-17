@@ -20,7 +20,7 @@
             }
         }
     },
-    "fisc_deal_episode": {
+    "fisc_dealunit": {
         "jkeys": {
             "fisc_title": {
                 "class_type": "TitleUnit"

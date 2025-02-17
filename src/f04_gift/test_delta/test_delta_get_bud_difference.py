@@ -689,10 +689,10 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_upd
     bend_str = "bendable"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
     before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     before_fopen = 11
     before_fnigh = 22
     before_fact = factunit_shop(knee_road, bend_road, before_fopen, before_fnigh)
@@ -701,7 +701,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_upd
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
     after_fnigh = 66
-    knee_fact = factunit_shop(knee_road, broken_road, after_fopen, after_fnigh)
+    knee_fact = factunit_shop(knee_road, damaged_road, after_fopen, after_fnigh)
     after_sue_bud.edit_item_attr(ball_road, factunit=knee_fact)
 
     # WHEN
@@ -715,7 +715,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_upd
     ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
     assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("pick") == broken_road
+    assert ball_atomunit.get_value("pick") == damaged_road
     assert ball_atomunit.get_value(fopen_str()) == after_fopen
     assert ball_atomunit.get_value(fnigh_str()) == after_fnigh
     assert get_atomunit_total_count(sue_buddelta) == 1
@@ -732,15 +732,15 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_ins
     before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
     after_fnigh = 66
-    after_fact = factunit_shop(knee_road, broken_road, after_fopen, after_fnigh)
+    after_fact = factunit_shop(knee_road, damaged_road, after_fopen, after_fnigh)
     after_sue_bud.edit_item_attr(road=ball_road, factunit=after_fact)
 
     # WHEN
@@ -753,7 +753,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_ins
     ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
     assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("pick") == broken_road
+    assert ball_atomunit.get_value("pick") == damaged_road
     assert ball_atomunit.get_value(fopen_str()) == after_fopen
     assert ball_atomunit.get_value(fnigh_str()) == after_fnigh
     assert get_atomunit_total_count(sue_buddelta) == 1
@@ -770,19 +770,19 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_del
     before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    broken_str = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_str)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
+    before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    before_broken_open = 55
-    before_broken_nigh = 66
+    before_damaged_open = 55
+    before_damaged_nigh = 66
     before_fact = factunit_shop(
         base=knee_road,
-        pick=broken_road,
-        fopen=before_broken_open,
-        fnigh=before_broken_nigh,
+        pick=damaged_road,
+        fopen=before_damaged_open,
+        fnigh=before_damaged_nigh,
     )
     before_sue_bud.edit_item_attr(road=ball_road, factunit=before_fact)
 
@@ -813,9 +813,9 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    broken_str = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
+    before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     bend_str = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
     before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
@@ -824,16 +824,16 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    broken_open = 45
-    broken_nigh = 77
-    broken_divisor = 3
+    damaged_open = 45
+    damaged_nigh = 77
+    damaged_divisor = 3
     after_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
-        reason_premise=broken_road,
-        reason_premise_open=broken_open,
-        reason_premise_nigh=broken_nigh,
-        reason_premise_divisor=broken_divisor,
+        reason_premise=damaged_road,
+        reason_premise_open=damaged_open,
+        reason_premise_nigh=damaged_nigh,
+        reason_premise_divisor=damaged_divisor,
     )
 
     # WHEN
@@ -847,15 +847,15 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
         bud_item_reason_premiseunit_str(),
         ball_road,
         knee_road,
-        broken_road,
+        damaged_road,
     ]
     ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
     assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("need") == broken_road
-    assert ball_atomunit.get_value("open") == broken_open
-    assert ball_atomunit.get_value("nigh") == broken_nigh
-    assert ball_atomunit.get_value("divisor") == broken_divisor
+    assert ball_atomunit.get_value("need") == damaged_road
+    assert ball_atomunit.get_value("open") == damaged_open
+    assert ball_atomunit.get_value("nigh") == damaged_nigh
+    assert ball_atomunit.get_value("divisor") == damaged_divisor
     assert get_atomunit_total_count(sue_buddelta) == 1
 
 
@@ -871,31 +871,31 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    broken_str = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
+    before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     bend_str = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
     before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
     before_sue_bud.edit_item_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
-    broken_open = 45
-    broken_nigh = 77
-    broken_divisor = 3
+    damaged_open = 45
+    damaged_nigh = 77
+    damaged_divisor = 3
     before_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
-        reason_premise=broken_road,
-        reason_premise_open=broken_open,
-        reason_premise_nigh=broken_nigh,
-        reason_premise_divisor=broken_divisor,
+        reason_premise=damaged_road,
+        reason_premise_open=damaged_open,
+        reason_premise_nigh=damaged_nigh,
+        reason_premise_divisor=damaged_divisor,
     )
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.edit_item_attr(
         ball_road,
         reason_del_premise_base=knee_road,
-        reason_del_premise_need=broken_road,
+        reason_del_premise_need=damaged_road,
     )
 
     # WHEN
@@ -909,12 +909,12 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
         bud_item_reason_premiseunit_str(),
         ball_road,
         knee_road,
-        broken_road,
+        damaged_road,
     ]
     ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
     assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("need") == broken_road
+    assert ball_atomunit.get_value("need") == damaged_road
     assert get_atomunit_total_count(sue_buddelta) == 1
 
 
@@ -930,38 +930,38 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    broken_str = "broke cartilage"
-    broken_road = before_sue_bud.make_road(knee_road, broken_str)
-    before_sue_bud.set_item(itemunit_shop(broken_str), knee_road)
+    damaged_str = "damaged cartilage"
+    damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
+    before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     bend_str = "bend"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
     before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
     before_sue_bud.edit_item_attr(
         ball_road, reason_base=knee_road, reason_premise=bend_road
     )
-    before_broken_open = 111
-    before_broken_nigh = 777
-    before_broken_divisor = 13
+    before_damaged_open = 111
+    before_damaged_nigh = 777
+    before_damaged_divisor = 13
     before_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
-        reason_premise=broken_road,
-        reason_premise_open=before_broken_open,
-        reason_premise_nigh=before_broken_nigh,
-        reason_premise_divisor=before_broken_divisor,
+        reason_premise=damaged_road,
+        reason_premise_open=before_damaged_open,
+        reason_premise_nigh=before_damaged_nigh,
+        reason_premise_divisor=before_damaged_divisor,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_broken_open = 333
-    after_broken_nigh = 555
-    after_broken_divisor = 78
+    after_damaged_open = 333
+    after_damaged_nigh = 555
+    after_damaged_divisor = 78
     after_sue_bud.edit_item_attr(
         ball_road,
         reason_base=knee_road,
-        reason_premise=broken_road,
-        reason_premise_open=after_broken_open,
-        reason_premise_nigh=after_broken_nigh,
-        reason_premise_divisor=after_broken_divisor,
+        reason_premise=damaged_road,
+        reason_premise_open=after_damaged_open,
+        reason_premise_nigh=after_damaged_nigh,
+        reason_premise_divisor=after_damaged_divisor,
     )
 
     # WHEN
@@ -975,15 +975,15 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
         bud_item_reason_premiseunit_str(),
         ball_road,
         knee_road,
-        broken_road,
+        damaged_road,
     ]
     ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
     assert ball_atomunit.get_value(road_str()) == ball_road
     assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("need") == broken_road
-    assert ball_atomunit.get_value("open") == after_broken_open
-    assert ball_atomunit.get_value("nigh") == after_broken_nigh
-    assert ball_atomunit.get_value("divisor") == after_broken_divisor
+    assert ball_atomunit.get_value("need") == damaged_road
+    assert ball_atomunit.get_value("open") == after_damaged_open
+    assert ball_atomunit.get_value("nigh") == after_damaged_nigh
+    assert ball_atomunit.get_value("divisor") == after_damaged_divisor
     assert get_atomunit_total_count(sue_buddelta) == 1
 
 

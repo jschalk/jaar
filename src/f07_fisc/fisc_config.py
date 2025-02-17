@@ -11,8 +11,8 @@ def present_time_str() -> str:
     return "present_time"
 
 
-def deallogs_str() -> str:
-    return "deallogs"
+def brokerunits_str() -> str:
+    return "brokerunits"
 
 
 def cashbook_str() -> str:
@@ -57,7 +57,7 @@ def config_file_dir() -> str:
 
 
 # def fiscunit_str()-> str: return "fiscunit"
-# def fisc_deal_episode_str()-> str: return "fisc_deal_episode"
+# def fisc_dealunit_str()-> str: return "fisc_dealunit"
 # def fisc_cashbook_str()-> str: return "fisc_cashbook"
 # def fisc_timeline_hour_str()-> str: return "fisc_timeline_hour"
 # def fisc_timeline_month_str()-> str: return "fisc_timeline_month"
@@ -66,8 +66,8 @@ def fiscunit_str() -> str:
     return "fiscunit"
 
 
-def fisc_deal_episode_str() -> str:
-    return "fisc_deal_episode"
+def fisc_dealunit_str() -> str:
+    return "fisc_dealunit"
 
 
 def fisc_cashbook_str() -> str:
@@ -93,7 +93,7 @@ def get_fisc_config_dict() -> dict:
 def get_fisc_dimens() -> set[str]:
     return {
         "fiscunit",
-        "fisc_deal_episode",
+        "fisc_dealunit",
         "fisc_cashbook",
         "fisc_timeline_hour",
         "fisc_timeline_month",

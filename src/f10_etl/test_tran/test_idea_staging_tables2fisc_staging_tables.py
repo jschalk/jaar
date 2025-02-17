@@ -28,7 +28,7 @@ from src.f04_gift.atom_config import (
 )
 from src.f07_fisc.fisc_config import (
     fisc_cashbook_str,
-    fisc_deal_episode_str,
+    fisc_dealunit_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,

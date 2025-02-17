@@ -49,8 +49,8 @@ def magnitude_str() -> str:
     return "magnitude"
 
 
-def episode_net_str() -> str:
-    return "episode_net"
+def deal_net_str() -> str:
+    return "deal_net"
 
 
 def owner_name_str() -> str:
@@ -221,38 +221,38 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 
 
 @dataclass
-class DealEpisode:
+class DealUnit:
     time_int: TimeLinePoint = None
     quota: FundNum = None
     ledger_depth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
-    _episode_net: dict[AcctName, FundNum] = None  # ledger of deal outcome
+    _deal_net: dict[AcctName, FundNum] = None  # ledger of deal outcome
 
-    def set_net_deal(self, x_acct_name: AcctName, net_deal: FundNum):
-        self._episode_net[x_acct_name] = net_deal
+    def set_deal_net(self, x_acct_name: AcctName, deal_net: FundNum):
+        self._deal_net[x_acct_name] = deal_net
 
-    def net_deal_exists(self, x_acct_name: AcctName) -> bool:
-        return self._episode_net.get(x_acct_name) != None
+    def deal_net_exists(self, x_acct_name: AcctName) -> bool:
+        return self._deal_net.get(x_acct_name) != None
 
-    def get_net_deal(self, x_acct_name: AcctName) -> FundNum:
-        return self._episode_net.get(x_acct_name)
+    def get_deal_net(self, x_acct_name: AcctName) -> FundNum:
+        return self._deal_net.get(x_acct_name)
 
-    def del_net_deal(self, x_acct_name: AcctName):
-        self._episode_net.pop(x_acct_name)
+    def del_deal_net(self, x_acct_name: AcctName):
+        self._deal_net.pop(x_acct_name)
 
     def calc_magnitude(self):
-        episode_net = self._episode_net.values()
-        x_cred_sum = sum(net_deal for net_deal in episode_net if net_deal > 0)
-        x_debt_sum = sum(net_deal for net_deal in episode_net if net_deal < 0)
+        deal_net = self._deal_net.values()
+        x_cred_sum = sum(deal_net for deal_net in deal_net if deal_net > 0)
+        x_debt_sum = sum(deal_net for deal_net in deal_net if deal_net < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_deal={x_debt_sum}, cred_deal={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_deal_net={x_debt_sum}, cred_deal_net={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._episode_net:
-            x_dict["episode_net"] = self._episode_net
+        if self._deal_net:
+            x_dict["deal_net"] = self._deal_net
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         if self.ledger_depth != DEFAULT_DEPTH_LEDGER:
@@ -263,81 +263,78 @@ class DealEpisode:
         return get_json_from_dict(self.get_dict())
 
 
-def dealepisode_shop(
+def dealunit_shop(
     time_int: TimeLinePoint,
     quota: FundNum = None,
-    episode_net: dict[AcctName, FundNum] = None,
+    deal_net: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
     ledger_depth: int = None,
-) -> DealEpisode:
+) -> DealUnit:
     if quota is None:
         quota = default_fund_pool()
     if ledger_depth is None:
         ledger_depth = DEFAULT_DEPTH_LEDGER
 
-    return DealEpisode(
+    return DealUnit(
         time_int=time_int,
         quota=quota,
         ledger_depth=ledger_depth,
-        _episode_net=get_empty_dict_if_None(episode_net),
+        _deal_net=get_empty_dict_if_None(deal_net),
         _magnitude=get_0_if_None(magnitude),
     )
 
 
 @dataclass
-class DealLog:
+class BrokerUnit:
     owner_name: OwnerName = None
-    episodes: dict[TimeLinePoint, DealEpisode] = None
-    _sum_dealepisode_quota: FundNum = None
-    _sum_acct_deals: int = None
+    deals: dict[TimeLinePoint, DealUnit] = None
+    _sum_dealunit_quota: FundNum = None
+    _sum_acct_deal_nets: int = None
     _time_int_min: TimeLinePoint = None
     _time_int_max: TimeLinePoint = None
 
-    def set_episode(self, x_episode: DealEpisode):
-        self.episodes[x_episode.time_int] = x_episode
+    def set_deal(self, x_deal: DealUnit):
+        self.deals[x_deal.time_int] = x_deal
 
-    def add_episode(
+    def add_deal(
         self, x_time_int: TimeLinePoint, x_quota: FundNum, ledger_depth: int = None
     ):
-        dealepisode = dealepisode_shop(
+        dealunit = dealunit_shop(
             time_int=x_time_int, quota=x_quota, ledger_depth=ledger_depth
         )
-        self.set_episode(dealepisode)
+        self.set_deal(dealunit)
 
-    def episode_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return self.episodes.get(x_time_int) != None
+    def deal_exists(self, x_time_int: TimeLinePoint) -> bool:
+        return self.deals.get(x_time_int) != None
 
-    def get_episode(self, x_time_int: TimeLinePoint) -> DealEpisode:
-        return self.episodes.get(x_time_int)
+    def get_deal(self, x_time_int: TimeLinePoint) -> DealUnit:
+        return self.deals.get(x_time_int)
 
-    def del_episode(self, x_time_int: TimeLinePoint):
-        self.episodes.pop(x_time_int)
+    def del_deal(self, x_time_int: TimeLinePoint):
+        self.deals.pop(x_time_int)
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_name, x_episode.time_int, x_episode.quota]
-            for x_episode in self.episodes.values()
+            [self.owner_name, x_deal.time_int, x_deal.quota]
+            for x_deal in self.deals.values()
         ]
 
     def get_headers(self) -> list:
         return ["owner_name", "time_int", "quota"]
 
     def get_dict(self) -> dict:
-        return {"owner_name": self.owner_name, "episodes": self._get_episodes_dict()}
+        return {"owner_name": self.owner_name, "deals": self._get_deals_dict()}
 
-    def _get_episodes_dict(self) -> dict:
-        return {
-            x_episode.time_int: x_episode.get_dict()
-            for x_episode in self.episodes.values()
-        }
+    def _get_deals_dict(self) -> dict:
+        return {x_deal.time_int: x_deal.get_dict() for x_deal in self.deals.values()}
 
     def get_time_ints(self) -> set[TimeLinePoint]:
-        return set(self.episodes.keys())
+        return set(self.deals.keys())
 
     def get_tranbook(self, fisc_title: FiscTitle) -> TranBook:
         x_tranbook = tranbook_shop(fisc_title)
-        for x_time_int, x_episode in self.episodes.items():
-            for dst_acct_name, x_quota in x_episode._episode_net.items():
+        for x_time_int, x_deal in self.deals.items():
+            for dst_acct_name, x_quota in x_deal._deal_net.items():
                 x_tranbook.add_tranunit(
                     owner_name=self.owner_name,
                     acct_name=dst_acct_name,
@@ -347,37 +344,37 @@ class DealLog:
         return x_tranbook
 
 
-def deallog_shop(owner_name: OwnerName) -> DealLog:
-    return DealLog(owner_name=owner_name, episodes={}, _sum_acct_deals={})
+def brokerunit_shop(owner_name: OwnerName) -> BrokerUnit:
+    return BrokerUnit(owner_name=owner_name, deals={}, _sum_acct_deal_nets={})
 
 
-def get_dealepisode_from_dict(x_dict: dict) -> DealEpisode:
+def get_dealunit_from_dict(x_dict: dict) -> DealUnit:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_episode_net = x_dict.get("episode_net")
+    x_deal_net = x_dict.get("deal_net")
     x_magnitude = x_dict.get("magnitude")
     x_ledger_depth = x_dict.get("ledger_depth")
-    return dealepisode_shop(
-        x_time_int, x_quota, x_episode_net, x_magnitude, ledger_depth=x_ledger_depth
+    return dealunit_shop(
+        x_time_int, x_quota, x_deal_net, x_magnitude, ledger_depth=x_ledger_depth
     )
 
 
-def get_dealepisode_from_json(x_json: str) -> DealEpisode:
-    return get_dealepisode_from_dict(get_dict_from_json(x_json))
+def get_dealunit_from_json(x_json: str) -> DealUnit:
+    return get_dealunit_from_dict(get_dict_from_json(x_json))
 
 
-def get_deallog_from_dict(x_dict: dict) -> DealLog:
+def get_brokerunit_from_dict(x_dict: dict) -> BrokerUnit:
     x_owner_name = x_dict.get("owner_name")
-    x_deallog = deallog_shop(x_owner_name)
-    x_deallog.episodes = get_episodes_from_dict(x_dict.get("episodes"))
-    return x_deallog
+    x_brokerunit = brokerunit_shop(x_owner_name)
+    x_brokerunit.deals = get_deals_from_dict(x_dict.get("deals"))
+    return x_brokerunit
 
 
-def get_episodes_from_dict(episodes_dict: dict) -> dict[TimeLinePoint, DealEpisode]:
+def get_deals_from_dict(deals_dict: dict) -> dict[TimeLinePoint, DealUnit]:
     x_dict = {}
-    for x_episode_dict in episodes_dict.values():
-        x_deal_episode = get_dealepisode_from_dict(x_episode_dict)
-        x_dict[x_deal_episode.time_int] = x_deal_episode
+    for x_deal_dict in deals_dict.values():
+        x_dealunit = get_dealunit_from_dict(x_deal_dict)
+        x_dict[x_dealunit.time_int] = x_dealunit
     return x_dict
 
 

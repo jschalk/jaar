@@ -80,7 +80,7 @@ from src.f07_fisc.fisc_config import (
     get_fisc_config_dict,
     get_fisc_dimens,
     fiscunit_str,
-    fisc_deal_episode_str,
+    fisc_dealunit_str,
     fisc_cashbook_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
@@ -395,7 +395,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert x_idea_config
     idea_config_dimens = set(x_idea_config.keys())
     assert fiscunit_str() in idea_config_dimens
-    assert fisc_deal_episode_str() in idea_config_dimens
+    assert fisc_dealunit_str() in idea_config_dimens
     assert fisc_cashbook_str() in idea_config_dimens
     assert fisc_timeline_hour_str() in idea_config_dimens
     assert fisc_timeline_month_str() in idea_config_dimens
@@ -457,7 +457,7 @@ def _validate_idea_config(x_idea_config: dict):
             map_road_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
-        elif idea_dimen in {fisc_deal_episode_str(), fisc_cashbook_str()}:
+        elif idea_dimen in {fisc_dealunit_str(), fisc_cashbook_str()}:
             assert idea_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
             sub_dimen.get(atom_update()) != None
@@ -678,7 +678,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(bud_item_reasonunit_str(), 17)
     # set_idea_config_json(bud_itemunit_str(), 18)
     # set_idea_config_json(budunit_str(), 19)
-    # set_idea_config_json(fisc_deal_episode_str(), 20)
+    # set_idea_config_json(fisc_dealunit_str(), 20)
     # set_idea_config_json(fisc_cashbook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
@@ -702,7 +702,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(bud_item_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(bud_itemunit_str()).get(bo) == 18
     assert x_idea_config.get(budunit_str()).get(bo) == 19
-    assert x_idea_config.get(fisc_deal_episode_str()).get(bo) == 20
+    assert x_idea_config.get(fisc_dealunit_str()).get(bo) == 20
     assert x_idea_config.get(fisc_cashbook_str()).get(bo) == 21
 
 
