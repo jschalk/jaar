@@ -14,7 +14,7 @@ from src.f07_fisc.fisc import get_from_json as fisc_get_from_json, fiscunit_shop
 from src.f07_fisc.fisc_config import (
     fiscunit_str,
     fisc_cashbook_str,
-    fisc_deal_episode_str,
+    fisc_dealunit_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
@@ -62,7 +62,7 @@ def test_get_fiscdeal_sorted_args_ReturnsObj():
     # ESTABLISH / WHEN
     deal_sorted_args = get_fiscdeal_sorted_args()
     # THEN
-    expected_deal_args = set(get_fisc_config_args(fisc_deal_episode_str()).keys())
+    expected_deal_args = set(get_fisc_config_args(fisc_dealunit_str()).keys())
     # expected_deal_args.add(face_name_str())
     # expected_deal_args.add(event_int_str())
     expected_deal_sorted_args = get_custom_sorted_list(expected_deal_args)
@@ -129,14 +129,14 @@ def test_FiscPrimeObjsRef_Exists():
     assert xp
     agg_str = "_agg"
     assert xp.unit_agg_tablename == f"{fiscunit_str()}{agg_str}"
-    assert xp.deal_agg_tablename == f"{fisc_deal_episode_str()}{agg_str}"
+    assert xp.deal_agg_tablename == f"{fisc_dealunit_str()}{agg_str}"
     assert xp.cash_agg_tablename == f"{fisc_cashbook_str()}{agg_str}"
     assert xp.hour_agg_tablename == f"{fisc_timeline_hour_str()}{agg_str}"
     assert xp.mont_agg_tablename == f"{fisc_timeline_month_str()}{agg_str}"
     assert xp.week_agg_tablename == f"{fisc_timeline_weekday_str()}{agg_str}"
     staging_str = "_staging"
     assert xp.unit_stage_tablename == f"{fiscunit_str()}{staging_str}"
-    assert xp.deal_stage_tablename == f"{fisc_deal_episode_str()}{staging_str}"
+    assert xp.deal_stage_tablename == f"{fisc_dealunit_str()}{staging_str}"
     assert xp.cash_stage_tablename == f"{fisc_cashbook_str()}{staging_str}"
     assert xp.hour_stage_tablename == f"{fisc_timeline_hour_str()}{staging_str}"
     assert xp.mont_stage_tablename == f"{fisc_timeline_month_str()}{staging_str}"
@@ -166,7 +166,7 @@ def test_FiscPrimeObjsRef_Exists():
     assert xp.mont_stage_csv_path == create_path(x_dir, xp.mont_stage_csv_filename)
     assert xp.week_stage_csv_path == create_path(x_dir, xp.week_stage_csv_filename)
     assert xp.unit_excel_filename == f"{fiscunit_str()}.xlsx"
-    assert xp.deal_excel_filename == f"{fisc_deal_episode_str()}.xlsx"
+    assert xp.deal_excel_filename == f"{fisc_dealunit_str()}.xlsx"
     assert xp.cash_excel_filename == f"{fisc_cashbook_str()}.xlsx"
     assert xp.hour_excel_filename == f"{fisc_timeline_hour_str()}.xlsx"
     assert xp.mont_excel_filename == f"{fisc_timeline_month_str()}.xlsx"
@@ -186,7 +186,7 @@ def test_FiscPrimeColumnsRef_Exists():
     # THEN
     unit_args = set(get_fisc_config_args(fiscunit_str()).keys())
     cash_args = set(get_fisc_config_args(fisc_cashbook_str()).keys())
-    deal_args = set(get_fisc_config_args(fisc_deal_episode_str()).keys())
+    deal_args = set(get_fisc_config_args(fisc_dealunit_str()).keys())
     hour_args = set(get_fisc_config_args(fisc_timeline_hour_str()).keys())
     mont_args = set(get_fisc_config_args(fisc_timeline_month_str()).keys())
     week_args = set(get_fisc_config_args(fisc_timeline_weekday_str()).keys())
@@ -676,7 +676,7 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario6_fisc_cashbook(
     assert accord56_fiscunit.cashbook == expected_fiscunit.cashbook
 
 
-def test_create_fiscunit_jsons_from_prime_files_Scenario7_fisc_deal_episode(
+def test_create_fiscunit_jsons_from_prime_files_Scenario7_fisc_dealunit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -712,8 +712,8 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario7_fisc_deal_episode(
     accord56_fiscunit = fisc_get_from_json(open_file(accord56_json_path))
     x_timelineunit = timelineunit_shop(timeline_config_shop())
     expected_fiscunit = fiscunit_shop(accord56_str, fisc_mstr_dir, x_timelineunit)
-    expected_fiscunit.add_dealepisode(sue_str, t3, quota3)
-    expected_fiscunit.add_dealepisode(sue_str, t7, quota7)
+    expected_fiscunit.add_dealunit(sue_str, t3, quota3)
+    expected_fiscunit.add_dealunit(sue_str, t7, quota7)
     print(f"{expected_fiscunit.brokerunits=}")
     print(f"{expected_fiscunit=}")
     assert accord56_fiscunit.brokerunits == expected_fiscunit.brokerunits

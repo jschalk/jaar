@@ -28,7 +28,7 @@ def get_ex1_br00000_df() -> DataFrame:
 
 
 def get_ex1_br00001_df() -> DataFrame:
-    """idea_format_00001_fisc_deal_episode_v0_0_0
+    """idea_format_00001_fisc_dealunit_v0_0_0
     acct_name,fisc_title,owner_name,quota,time_int"""
     x_df = DataFrame(
         columns=["acct_name", "fisc_title", "owner_name", "quota", "time_int"]
@@ -135,7 +135,7 @@ def get_ex2_br00000_df() -> DataFrame:
 
 
 def get_ex2_br00001_df() -> DataFrame:
-    """idea_format_00001_fisc_deal_episode_v0_0_0
+    """idea_format_00001_fisc_dealunit_v0_0_0
     acct_name,fisc_title,owner_name,quota,time_int"""
     x_df = DataFrame(
         columns=["acct_name", "fisc_title", "owner_name", "quota", "time_int"]

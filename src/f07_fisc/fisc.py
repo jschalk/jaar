@@ -48,7 +48,7 @@ from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f05_listen.basis_buds import get_default_forecast_bud
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_episode_node_state_path,
+    create_deal_node_state_path,
 )
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
@@ -63,7 +63,7 @@ from sqlite3 import connect as sqlite3_connect, Connection
 from copy import deepcopy as copy_deepcopy
 
 
-class dealepisode_Exception(Exception):
+class dealunit_Exception(Exception):
     pass
 
 
@@ -280,7 +280,7 @@ class FiscUnit:
     def del_brokerunit(self, x_owner_name: OwnerName):
         self.brokerunits.pop(x_owner_name)
 
-    def add_dealepisode(
+    def add_dealunit(
         self,
         owner_name: OwnerName,
         time_int: TimeLinePoint,
@@ -289,12 +289,12 @@ class FiscUnit:
         ledger_depth: int = None,
     ):
         if time_int < self.present_time and not allow_prev_to_present_time_entry:
-            exception_str = f"Cannot set dealepisode because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
-            raise dealepisode_Exception(exception_str)
+            exception_str = f"Cannot set dealunit because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
+            raise dealunit_Exception(exception_str)
         if self.brokerunit_exists(owner_name) is False:
             self.set_brokerunit(brokerunit_shop(owner_name))
         x_brokerunit = self.get_brokerunit(owner_name)
-        x_brokerunit.add_episode(time_int, quota, ledger_depth)
+        x_brokerunit.add_deal(time_int, quota, ledger_depth)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
@@ -316,15 +316,14 @@ class FiscUnit:
 
     def _get_brokerunits_dict(self):
         return {
-            x_episode.owner_name: x_episode.get_dict()
-            for x_episode in self.brokerunits.values()
+            x_deal.owner_name: x_deal.get_dict() for x_deal in self.brokerunits.values()
         }
 
     def get_brokerunits_time_ints(self) -> set[TimeLinePoint]:
-        all_dealepisode_time_ints = set()
+        all_dealunit_time_ints = set()
         for x_brokerunit in self.brokerunits.values():
-            all_dealepisode_time_ints.update(x_brokerunit.get_time_ints())
-        return all_dealepisode_time_ints
+            all_dealunit_time_ints.update(x_brokerunit.get_time_ints())
+        return all_dealunit_time_ints
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
@@ -375,17 +374,17 @@ class FiscUnit:
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.fisc_title, x_tranunits)
         for owner_name, x_brokerunit in self.brokerunits.items():
-            for x_time_int, x_dealepisode in x_brokerunit.episodes.items():
-                for acct_name, x_amount in x_dealepisode._episode_net.items():
+            for x_time_int, x_dealunit in x_brokerunit.deals.items():
+                for acct_name, x_amount in x_dealunit._deal_net.items():
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
-    def create_root_episode_nodes(self, ote1_dict):
+    def create_root_deal_nodes(self, ote1_dict):
         for owner_name, brokerunit in self.brokerunits.items():
-            for time_int in brokerunit.episodes.keys():
-                self.create_and_save_root_episode_node(owner_name, ote1_dict, time_int)
+            for time_int in brokerunit.deals.keys():
+                self.create_and_save_root_deal_node(owner_name, ote1_dict, time_int)
 
-    def create_and_save_root_episode_node(
+    def create_and_save_root_deal_node(
         self,
         owner_name: OwnerName,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
@@ -395,19 +394,19 @@ class FiscUnit:
             owner_name, ote1_dict, time_int
         )
         owner_brokerunit = self.get_brokerunit(owner_name)
-        deal_episode = owner_brokerunit.get_episode(time_int)
-        episode_node = {
+        dealunit = owner_brokerunit.get_deal(time_int)
+        deal_node = {
             "owner_name": owner_name,
             "event_int": max_past_event_int,
-            "ledger_depth": deal_episode.ledger_depth,
-            "quota": deal_episode.quota,
+            "ledger_depth": dealunit.ledger_depth,
+            "quota": dealunit.quota,
             "penny": self.penny,
             "ancestors": [],
         }
-        episode_node_json_path = create_episode_node_state_path(
+        deal_node_json_path = create_deal_node_state_path(
             self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
         )
-        save_json(episode_node_json_path, None, episode_node)
+        save_json(deal_node_json_path, None, deal_node)
 
     # TODO evaluate if this should be used
     # def set_all_tranbook(self):

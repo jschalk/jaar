@@ -224,9 +224,9 @@ def get_bud_acct_agenda_award_array(
 
 
 def get_bud_acct_agenda_award_csv(x_bud: BudUnit, settle_bud: bool = None) -> str:
-    x_deal_array = get_bud_acct_agenda_award_array(x_bud, settle_bud)
+    x_acct_agenda_award_array = get_bud_acct_agenda_award_array(x_bud, settle_bud)
     x_headers = ["acct_name", "fund_agenda_take", "fund_agenda_give"]
-    return create_csv(x_headers, x_deal_array)
+    return create_csv(x_headers, x_acct_agenda_award_array)
 
 
 def get_acct_agenda_ledger(

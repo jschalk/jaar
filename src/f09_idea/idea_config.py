@@ -287,7 +287,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
 
 
 # def idea_format_00000_fiscunit_v0_0_0()->str: return "idea_format_00000_fiscunit_v0_0_0"
-# def idea_format_00001_fisc_deal_episode_v0_0_0()->str: return "idea_format_00001_fisc_deal_episode_v0_0_0"
+# def idea_format_00001_fisc_dealunit_v0_0_0()->str: return "idea_format_00001_fisc_dealunit_v0_0_0"
 # def idea_format_00002_fisc_cashbook_v0_0_0()->str: return "idea_format_00002_fisc_cashbook_v0_0_0"
 # def idea_format_00003_fisc_timeline_hour_v0_0_0()->str: return "idea_format_00003_fisc_timeline_hour_v0_0_0"
 # def idea_format_00004_fisc_timeline_month_v0_0_0()->str: return "idea_format_00004_fisc_timeline_month_v0_0_0"
@@ -298,8 +298,8 @@ def idea_format_00000_fiscunit_v0_0_0() -> str:
     return "idea_format_00000_fiscunit_v0_0_0"
 
 
-def idea_format_00001_fisc_deal_episode_v0_0_0() -> str:
-    return "idea_format_00001_fisc_deal_episode_v0_0_0"
+def idea_format_00001_fisc_dealunit_v0_0_0() -> str:
+    return "idea_format_00001_fisc_dealunit_v0_0_0"
 
 
 def idea_format_00002_fisc_cashbook_v0_0_0() -> str:
@@ -473,7 +473,7 @@ def idea_format_00117_road_map1_v0_0_0() -> str:
 def get_idea_format_filenames() -> set[str]:
     return {
         idea_format_00000_fiscunit_v0_0_0(),
-        idea_format_00001_fisc_deal_episode_v0_0_0(),
+        idea_format_00001_fisc_dealunit_v0_0_0(),
         idea_format_00002_fisc_cashbook_v0_0_0(),
         idea_format_00003_fisc_timeline_hour_v0_0_0(),
         idea_format_00004_fisc_timeline_month_v0_0_0(),
@@ -568,7 +568,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
         "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscunit_v0_0_0(),
-        "fisc_title,owner_name,time_int,quota,ledger_depth": idea_format_00001_fisc_deal_episode_v0_0_0(),
+        "fisc_title,owner_name,time_int,quota,ledger_depth": idea_format_00001_fisc_dealunit_v0_0_0(),
         "fisc_title,owner_name,acct_name,time_int,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
         "fisc_title,hour_title,cumlative_minute": idea_format_00003_fisc_timeline_hour_v0_0_0(),
         "fisc_title,month_title,cumlative_day": idea_format_00004_fisc_timeline_month_v0_0_0(),
@@ -626,7 +626,7 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 def get_idea_dimen_ref() -> dict[str, set[str]]:
     # return {
     #     "fiscunit": ["br00000"],
-    #     "fisc_deal_episode": ["br00001"],
+    #     "fisc_dealunit": ["br00001"],
     #     "fisc_cashbook": ["br00002"],
     #     "fisc_timeline_hour": ["br00003"],
     #     "fisc_timeline_month": ["br00004"],
@@ -655,7 +655,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
     # }
     return {
         "fiscunit": ["br00000"],
-        "fisc_deal_episode": ["br00001"],
+        "fisc_dealunit": ["br00001"],
         "fisc_cashbook": ["br00002"],
         "fisc_timeline_hour": ["br00003"],
         "fisc_timeline_month": ["br00004"],

@@ -6,8 +6,8 @@ from src.f10_etl.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
 from os.path import exists as os_path_exists
 
 # create test where event create_owner_event_dir_path()
-# test that deal_episode with depth 0 is able to create
-# test that deal_episode with depth 1 is able to create nested budunits directories and populate with event relevant
+# test that dealunit with depth 0 is able to create
+# test that dealunit with depth 1 is able to create nested budunits directories and populate with event relevant
 
 
 def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(

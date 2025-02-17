@@ -11,7 +11,7 @@ from src.f07_fisc.fisc_config import (
     weekday_title_str,
     weekday_order_str,
     fiscunit_str,
-    fisc_deal_episode_str,
+    fisc_dealunit_str,
     fisc_cashbook_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
@@ -32,7 +32,7 @@ def test_str_functions_ReturnsObj():
     assert weekday_title_str() == "weekday_title"
     assert weekday_order_str() == "weekday_order"
     assert fiscunit_str() == "fiscunit"
-    assert fisc_deal_episode_str() == "fisc_deal_episode"
+    assert fisc_dealunit_str() == "fisc_dealunit"
     assert fisc_cashbook_str() == "fisc_cashbook"
     assert fisc_timeline_hour_str() == "fisc_timeline_hour"
     assert fisc_timeline_month_str() == "fisc_timeline_month"

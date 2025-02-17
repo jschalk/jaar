@@ -1,29 +1,29 @@
-from src.f01_road.deal import dealepisode_shop, DealEpisode
+from src.f01_road.deal import dealunit_shop, DealUnit
 
 
-def get_dealepisode_55_example() -> DealEpisode:
+def get_dealunit_55_example() -> DealUnit:
     x_time_int = 55
-    return dealepisode_shop(x_time_int)
+    return dealunit_shop(x_time_int)
 
 
-def get_dealepisode_66_example() -> DealEpisode:
+def get_dealunit_66_example() -> DealUnit:
     t66_time_int = 66
-    t66_dealepisode = dealepisode_shop(t66_time_int)
-    t66_dealepisode.set_net_deal("Sue", -5)
-    t66_dealepisode.set_net_deal("Bob", 5)
-    return t66_dealepisode
+    t66_dealunit = dealunit_shop(t66_time_int)
+    t66_dealunit.set_deal_net("Sue", -5)
+    t66_dealunit.set_deal_net("Bob", 5)
+    return t66_dealunit
 
 
-def get_dealepisode_88_example() -> DealEpisode:
+def get_dealunit_88_example() -> DealUnit:
     t88_time_int = 88
-    t88_dealepisode = dealepisode_shop(t88_time_int)
-    t88_dealepisode.quota = 800
-    return t88_dealepisode
+    t88_dealunit = dealunit_shop(t88_time_int)
+    t88_dealunit.quota = 800
+    return t88_dealunit
 
 
-def get_dealepisode_invalid_example() -> DealEpisode:
+def get_dealunit_invalid_example() -> DealUnit:
     t55_time_int = 55
-    t55_dealepisode = dealepisode_shop(t55_time_int)
-    t55_dealepisode.set_net_deal("Sue", -5)
-    t55_dealepisode.set_net_deal("Bob", 3)
-    return t55_dealepisode
+    t55_dealunit = dealunit_shop(t55_time_int)
+    t55_dealunit.set_deal_net("Sue", -5)
+    t55_dealunit.set_deal_net("Bob", 3)
+    return t55_dealunit

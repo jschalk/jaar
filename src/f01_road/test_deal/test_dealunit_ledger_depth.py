@@ -6,22 +6,22 @@ from src.f01_road.deal import (
     time_int_str,
     bridge_str,
     ledger_depth_str,
-    DealEpisode,
-    dealepisode_shop,
-    get_dealepisode_from_dict,
-    get_dealepisode_from_json,
+    DealUnit,
+    dealunit_shop,
+    get_dealunit_from_dict,
+    get_dealunit_from_json,
 )
 from pytest import raises as pytest_raises
 
 
-# def test_set_deal_episode_net_deals_SetsAttrScenario0_ledger_depth_0():
+# def test_set_dealunit_deal_nets_SetsAttrScenario0_ledger_depth_0():
 #     # ESTABLISH
-#     x_episode = dealepisode_shop(time_int=7, quota=45)
+#     x_deal = dealunit_shop(time_int=7, quota=45)
 
 
 #     # WHEN
 
 
 #     # THEN
-#     assert x_episode._net_deals != None
-#     assert x_episode._net_deals == {yao_str: 45, bob_str: -45}
+#     assert x_deal._deal_nets != None
+#     assert x_deal._deal_nets == {yao_str: 45, bob_str: -45}

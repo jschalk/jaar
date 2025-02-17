@@ -66,7 +66,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
         bridge=slash_str,
         timeline=creg_timelineunit,
     )
-    accord23_fiscunit.add_dealepisode(
+    accord23_fiscunit.add_dealunit(
         owner_name="Sue",
         time_int=777,
         quota=445,

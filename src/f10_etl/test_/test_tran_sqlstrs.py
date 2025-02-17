@@ -878,7 +878,7 @@ FROM (
     GROUP BY fisc_title, event_int, time_int
     UNION 
     SELECT fisc_title, event_int, time_int
-    FROM fisc_deal_episode_staging
+    FROM fisc_dealunit_staging
     GROUP BY fisc_title, event_int, time_int
 )
 ORDER BY fisc_title, event_int, time_int
@@ -935,7 +935,7 @@ INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, time_int)
 SELECT fisc_title, owner_name, event_int, time_int
 FROM (
     SELECT fisc_title, owner_name, event_int, time_int
-    FROM fisc_deal_episode_staging
+    FROM fisc_dealunit_staging
     GROUP BY fisc_title, owner_name, event_int, time_int
 )
 ORDER BY fisc_title, owner_name, event_int, time_int

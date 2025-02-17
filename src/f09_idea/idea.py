@@ -255,7 +255,7 @@ def fisc_build_from_df(
             penny=x_penny,
         )
         fiscunit_dict[x_fiscunit.fisc_title] = x_fiscunit
-        _add_dealepisodes_from_df(x_fiscunit, br00001_df)
+        _add_dealunits_from_df(x_fiscunit, br00001_df)
         _add_cashpurchases_from_df(x_fiscunit, br00002_df)
     return fiscunit_dict
 
@@ -296,10 +296,10 @@ def _get_fisc_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     return fisc_weekdays_dict
 
 
-def _add_dealepisodes_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
+def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
     query_str = f"fisc_title == '{x_fiscunit.fisc_title}'"
     for index, row in br00001_df.query(query_str).iterrows():
-        x_fiscunit.add_dealepisode(
+        x_fiscunit.add_dealunit(
             owner_name=row["owner_name"],
             time_int=row["time_int"],
             quota=row["quota"],
