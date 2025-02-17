@@ -469,25 +469,26 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
             )
             for quota_owner, quota_amount in parent_quota_ledger.items():
                 if downhill_event_int := owners_downhill_events_ints.get(quota_owner):
-                    child_ancestors = list(copy_copy(parent_ancestors))
-                    child_ancestors.append(quota_owner)
-                    child_deal_node = {
-                        "ancestors": child_ancestors,
-                        "event_int": downhill_event_int,
-                        "dealdepth": child_dealdepth,
-                        "owner_name": quota_owner,
-                        "penny": parent_penny,
-                        "quota": quota_amount,
-                    }
-                    child_deal_json_path = create_deal_node_state_path(
-                        fisc_mstr_dir,
-                        fisc_title,
-                        time_owner_name,
-                        time_int,
-                        child_ancestors[1:],
-                    )
-                    save_json(child_deal_json_path, None, child_deal_node)
-                    deals_to_evaluate.append(child_deal_node)
+                    if quota_amount > 0:
+                        child_ancestors = list(copy_copy(parent_ancestors))
+                        child_ancestors.append(quota_owner)
+                        child_deal_node = {
+                            "ancestors": child_ancestors,
+                            "event_int": downhill_event_int,
+                            "dealdepth": child_dealdepth,
+                            "owner_name": quota_owner,
+                            "penny": parent_penny,
+                            "quota": quota_amount,
+                        }
+                        child_deal_json_path = create_deal_node_state_path(
+                            fisc_mstr_dir,
+                            fisc_title,
+                            time_owner_name,
+                            time_int,
+                            child_ancestors[1:],
+                        )
+                        save_json(child_deal_json_path, None, child_deal_node)
+                        deals_to_evaluate.append(child_deal_node)
 
 
 def _get_ote1_max_past_event_int(

@@ -470,6 +470,104 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPas
     assert open_json(tp37_yao_quota) == {"Zia": 150}
 
 
+def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    a23_str = "accord23"
+    bob_str = "Bob"
+    yao_str = "Yao"
+    zia_str = "Zia"
+    tp37 = 37  # timepoint
+    deal1_quota = 2
+    deal1_dealdepth = 1
+    event33 = 33
+    event44 = 44
+    event55 = 55
+    deal_node = {
+        "ancestors": [bob_str],
+        event_int_str(): event55,
+        dealdepth_str(): deal1_dealdepth,
+        owner_name_str(): bob_str,
+        penny_str(): 1,
+        quota_str(): deal1_quota,
+    }
+    a23_bob_ledger_state_path = node_path(
+        fisc_mstr_dir=fisc_mstr_dir,
+        fisc_title=a23_str,
+        owner_name=bob_str,
+        time_int=tp37,
+    )
+    save_json(a23_bob_ledger_state_path, None, deal_node)
+    bob_accts = [[yao_str], [bob_str], [zia_str]]
+    yao_accts = [[zia_str]]
+    zia_accts = [[bob_str], [yao_str]]
+    bob_e55_path = save_budevent(fisc_mstr_dir, a23_str, bob_str, event55, bob_accts)
+    yao_e44_path = save_budevent(fisc_mstr_dir, a23_str, yao_str, event44, yao_accts)
+    yao_e33_path = save_budevent(fisc_mstr_dir, a23_str, yao_str, event33, yao_accts)
+    zia_e33_path = save_budevent(fisc_mstr_dir, a23_str, zia_str, event33, zia_accts)
+    assert os_path_exists(bob_e55_path)
+    assert os_path_exists(yao_e44_path)
+    assert os_path_exists(zia_e33_path)
+    tp37_dir = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    tp37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    tp37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    tp37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    tp37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    bob_tp37_credit = credit_path(fisc_mstr_dir, a23_str, bob_str, tp37)
+    tp37_bob_credit = credit_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    tp37_yao_credit = credit_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    tp37_zia_credit = credit_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    tp37_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37)
+    tp37_bob_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    tp37_yao_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    tp37_zia_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    assert os_path_exists(tp37_node_path)
+    assert os_path_exists(tp37_bob_node_path) is False
+    assert os_path_exists(tp37_yao_node_path) is False
+    assert os_path_exists(tp37_zia_node_path) is False
+    assert os_path_exists(bob_tp37_credit) is False
+    assert os_path_exists(tp37_bob_credit) is False
+    assert os_path_exists(tp37_yao_credit) is False
+    assert os_path_exists(tp37_zia_credit) is False
+    assert os_path_exists(tp37_quota) is False
+    assert os_path_exists(tp37_bob_quota) is False
+    assert os_path_exists(tp37_yao_quota) is False
+    assert os_path_exists(tp37_zia_quota) is False
+    assert count_dirs_files(tp37_dir) == 1
+
+    # WHEN
+    fizz_world.create_fisc_deal_trees()
+
+    # THEN
+    assert os_path_exists(bob_tp37_credit)
+    assert open_json(bob_tp37_credit) == {bob_str: 1, yao_str: 1, zia_str: 1}
+    assert os_path_exists(tp37_quota)
+    assert open_json(tp37_quota) == {bob_str: 0, yao_str: 1, zia_str: 1}
+    print(f"{tp37_bob_node_path=}")
+    print(f"{tp37_yao_node_path=}")
+    print(f"{tp37_zia_node_path=}")
+    assert os_path_exists(tp37_node_path)
+    assert os_path_exists(tp37_bob_node_path) is False
+    assert os_path_exists(tp37_yao_node_path)
+    assert os_path_exists(tp37_zia_node_path)
+    assert os_path_exists(tp37_bob_credit) is False
+    assert os_path_exists(tp37_yao_credit)
+    assert os_path_exists(tp37_zia_credit)
+    assert os_path_exists(tp37_quota)
+    assert os_path_exists(tp37_bob_quota) is False
+    assert os_path_exists(tp37_yao_quota)
+    assert os_path_exists(tp37_zia_quota)
+    assert count_dirs_files(tp37_dir) == 11
+    assert open_json(tp37_yao_credit) == {"Zia": 1}
+    assert open_json(tp37_zia_credit) == {"Bob": 1, "Yao": 1}
+    assert open_json(tp37_quota) == {bob_str: 0, yao_str: 1, zia_str: 1}
+    assert open_json(tp37_yao_quota) == {"Zia": 1}
+    assert open_json(tp37_zia_quota) == {"Bob": 1, "Yao": 0}
+
+
 # def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth3(
 #     env_dir_setup_cleanup,
 # ):
