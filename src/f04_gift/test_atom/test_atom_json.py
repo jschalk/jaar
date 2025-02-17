@@ -55,14 +55,13 @@ def test_AtomUnit_get_json_ReturnsObj():
     knee_road = create_road("a", knee_str)
     x_dimen = bud_item_factunit_str()
     road_str = "road"
-    base_str = "base"
     open_str = "open"
     nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
     insert_factunit_atomunit = atomunit_shop(x_dimen, atom_insert())
     insert_factunit_atomunit.set_jkey(road_str, ball_road)
-    insert_factunit_atomunit.set_jkey(base_str, knee_road)
+    insert_factunit_atomunit.set_jkey(base_str(), knee_road)
     insert_factunit_atomunit.set_jvalue(open_str, knee_open)
     insert_factunit_atomunit.set_jvalue(nigh_str, knee_nigh)
 
@@ -83,14 +82,13 @@ def test_atomunit_get_from_json_ReturnsObj():
     knee_road = create_road("a", knee_str)
     x_dimen = bud_item_factunit_str()
     road_str = "road"
-    base_str = "base"
     open_str = "open"
     nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
     gen_atomunit = atomunit_shop(x_dimen, atom_insert())
     gen_atomunit.set_jkey(road_str, ball_road)
-    gen_atomunit.set_jkey(base_str, knee_road)
+    gen_atomunit.set_jkey(base_str(), knee_road)
     gen_atomunit.set_jvalue(open_str, knee_open)
     gen_atomunit.set_jvalue(nigh_str, knee_nigh)
     atom_json = gen_atomunit.get_json()

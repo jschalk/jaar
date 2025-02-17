@@ -426,7 +426,7 @@ class BudUnit:
             and self._is_item_rangeroot(item_road=fact.base)
         ]
 
-    def set_fact(
+    def add_fact(
         self,
         base: RoadUnit,
         pick: RoadUnit = None,

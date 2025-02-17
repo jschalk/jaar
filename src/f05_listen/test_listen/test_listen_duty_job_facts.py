@@ -96,7 +96,7 @@ def test_listen_to_facts_duty_job_GetsFactsFromSrcBudSelfNotSpeakerSelf(
     # yao_job has fact eat_road = hungry
     # new_yao_job picks yao_duty fact eat_road = full
     yao_duty = get_example_yao_speaker()
-    yao_duty.set_fact(eat_road(), full_road())
+    yao_duty.add_fact(eat_road(), full_road())
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
     print(f"{sue_texas_hubunit.duty_path(yao_duty)=}")
@@ -131,7 +131,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v1(
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
     zia_job = get_example_zia_speaker()
-    zia_job.set_fact(eat_road(), eat_road())
+    zia_job.add_fact(eat_road(), eat_road())
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     sue_texas_hubunit.save_job_bud(zia_job)
 
@@ -162,13 +162,13 @@ def test_listen_to_facts_duty_job_SetsPrioritizesSelfFactsOverSpeakers(
 ):
     # ESTABLISH
     yao_duty = get_example_yao_speaker()
-    yao_duty.set_fact(eat_road(), full_road())
+    yao_duty.add_fact(eat_road(), full_road())
     assert yao_duty.get_fact(eat_road()).pick == full_road()
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
     zia_job = get_example_zia_speaker()
-    zia_job.set_fact(eat_road(), hungry_road())
+    zia_job.add_fact(eat_road(), hungry_road())
     assert zia_job.get_fact(eat_road()).pick == hungry_road()
     sue_texas_hubunit.save_job_bud(zia_job)
 
@@ -192,7 +192,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
     # ESTABLISH
     zia_job = get_example_zia_speaker()
     zia_str = zia_job.owner_name
-    zia_job.set_fact(eat_road(), eat_road())
+    zia_job.add_fact(eat_road(), eat_road())
     assert zia_job.get_fact(eat_road()).pick == eat_road()
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_job_bud(zia_job)
@@ -286,7 +286,7 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #     assert new_yao_job.get_missing_fact_bases().get(status_road) is not None
 
 #     # assert new_yao_job.get_missing_fact_bases().keys() == {status_road}
-#     # sue_speaker.set_fact(status_road, clean_road, create_missing_items=True)
+#     # sue_speaker.add_fact(status_road, clean_road, create_missing_items=True)
 
 #     # # WHEN
 #     # listen_to_facts_duty_job(yao_duty, yao_job, missing_fact_bases)
@@ -328,14 +328,14 @@ def test_listen_to_facts_duty_job_ConfirmNoFactPickedFromOwnersSpeakerDirBud_v2(
 #         sweep_road, reason_base=fridge_road, reason_premise=running_road
 #     )
 #     assert len(yao_duty.get_missing_fact_bases()) == 2
-#     yao_duty.set_fact(status_road, dirty_road)
+#     yao_duty.add_fact(status_road, dirty_road)
 #     assert len(yao_duty.get_missing_fact_bases()) == 1
 #     assert yao_duty.get_fact(status_road).pick == dirty_road
 
 #     # WHEN
 #     yao_job = budunit_shop(yao_str)
-#     yao_job.set_fact(status_road, clean_road, create_missing_items=True)
-#     yao_job.set_fact(fridge_road, running_road, create_missing_items=True)
+#     yao_job.add_fact(status_road, clean_road, create_missing_items=True)
+#     yao_job.add_fact(fridge_road, running_road, create_missing_items=True)
 #     missing_fact_bases = list(yao_duty.get_missing_fact_bases().keys())
 #     listen_to_facts_duty_job(yao_duty, yao_job, missing_fact_bases)
 

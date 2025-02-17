@@ -654,7 +654,7 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
 
     week_open = 3
     week_nigh = 7
-    yao_bud.set_fact(week_road, week_road, week_open, week_nigh)
+    yao_bud.add_fact(week_road, week_road, week_open, week_nigh)
 
     # assert len(ball_item._reasonheirs) == 1
     # assert ball_item._factheirs == {week_road: week_factheir}
@@ -706,7 +706,7 @@ def test_BudUnit_settle_bud_SetsItemUnit_factheir_With_range_factheirs():
 
     week_open = 3
     week_nigh = 7
-    yao_bud.set_fact(week_road, week_road, week_open, week_nigh)
+    yao_bud.add_fact(week_road, week_road, week_open, week_nigh)
 
     # assert len(ball_item._reasonheirs) == 1
     # assert ball_item._factheirs == {week_road: week_factheir}

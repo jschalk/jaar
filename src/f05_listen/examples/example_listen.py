@@ -72,7 +72,7 @@ def get_example_zia_speaker() -> BudUnit:
     zia_speaker.edit_item_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
-    zia_speaker.set_fact(eat_road(), full_road())
+    zia_speaker.add_fact(eat_road(), full_road())
     zia_speaker.set_acct_respect(100)
     return zia_speaker
 
@@ -90,7 +90,7 @@ def get_example_bob_speaker() -> BudUnit:
     bob_speaker.edit_item_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
-    bob_speaker.set_fact(eat_road(), hungry_road())
+    bob_speaker.add_fact(eat_road(), hungry_road())
     bob_speaker.set_acct_respect(100)
     return bob_speaker
 
@@ -112,5 +112,5 @@ def get_example_yao_speaker() -> BudUnit:
     yao_speaker.edit_item_attr(
         cook_road(), reason_base=eat_road(), reason_premise=hungry_road()
     )
-    yao_speaker.set_fact(eat_road(), hungry_road())
+    yao_speaker.add_fact(eat_road(), hungry_road())
     return yao_speaker

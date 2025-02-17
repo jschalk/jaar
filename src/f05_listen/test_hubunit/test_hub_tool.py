@@ -1,11 +1,7 @@
-from src.f00_instrument.file import create_path, set_dir, save_file, open_file
-from src.f01_road.jaar_config import (
-    get_gifts_folder,
-    get_rootpart_of_keep_dir,
-    get_fisc_title_if_None,
-    get_owners_folder,
-)
+from src.f00_instrument.file import create_path, set_dir, open_json
+from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
+from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -13,6 +9,7 @@ from src.f05_listen.hub_path import (
     fisc_agenda_list_report_path,
     create_owners_dir_path,
     create_deals_dir_path,
+    create_deal_node_json_path,
     create_timepoint_dir_path,
     create_budpoint_path,
     create_owner_event_dir_path,
@@ -25,9 +22,12 @@ from src.f05_listen.hub_tool import (
     save_bud_file,
     open_bud_file,
     get_timepoint_credit_ledger,
-    get_events_owner_credit_ledger,
+    get_budevents_credit_ledger,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
+    get_budevent_facts,
+    save_arbitrary_budevent,
+    save_arbitrary_dealnode,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
@@ -84,6 +84,52 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists():
     assert gen_sue_bud == expected_sue_bud
 
 
+def test_save_arbitrary_budevent_SetsFile_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    event5 = 5
+    sue_str = "Sue"
+    budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, event5)
+    assert os_path_exists(budevent_path) is False
+
+    # WHEN
+    save_arbitrary_budevent(fisc_mstr_dir, a23_str, sue_str, event5)
+
+    # THEN
+    assert os_path_exists(budevent_path)
+    expected_sue_bud = budunit_shop(sue_str, a23_str)
+    assert open_bud_file(budevent_path).get_dict() == expected_sue_bud.get_dict()
+
+
+def test_save_arbitrary_budevent_SetsFile_Scenario1_includes_facts(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    event5 = 5
+    sue_str = "Sue"
+    budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, event5)
+    casa_road = create_road(a23_str, "casa")
+    clean_road = create_road(casa_road, "clean")
+    clean_fopen = 11
+    clean_fnigh = 16
+    x_facts = [(casa_road, clean_road, clean_fopen, clean_fnigh)]
+    assert os_path_exists(budevent_path) is False
+
+    # WHEN
+    save_arbitrary_budevent(fisc_mstr_dir, a23_str, sue_str, event5, facts=x_facts)
+
+    # THEN
+    assert os_path_exists(budevent_path)
+    expected_sue_bud = budunit_shop(sue_str, a23_str)
+    expected_sue_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh, True)
+    gen_sue_bud = open_bud_file(budevent_path)
+    assert gen_sue_bud.get_factunits_dict() == expected_sue_bud.get_factunits_dict()
+    assert gen_sue_bud.get_dict() == expected_sue_bud.get_dict()
+
+
 def test_get_timepoint_credit_ledger_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
@@ -122,7 +168,7 @@ def test_get_timepoint_credit_ledger_ReturnsObj_Scenario1_FileExists(
     assert gen_a3_credit_ledger == expected_a3_credit_ledger
 
 
-def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
+def test_get_budevents_credit_ledger_ReturnsObj_Scenario0_NoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -132,7 +178,7 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
     t3 = 3
 
     # WHEN
-    gen_a3_credit_ledger = get_events_owner_credit_ledger(
+    gen_a3_credit_ledger = get_budevents_credit_ledger(
         fisc_mstr_dir, a23_str, sue_str, t3
     )
 
@@ -140,7 +186,7 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario0_NoFile(
     assert gen_a3_credit_ledger == {}
 
 
-def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
+def test_get_budevents_credit_ledger_ReturnsObj_Scenario1_FileExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -153,13 +199,49 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
     save_bud_file(t3_json_path, None, a3_bud)
 
     # WHEN
-    gen_a3_credit_ledger = get_events_owner_credit_ledger(
+    gen_a3_credit_ledger = get_budevents_credit_ledger(
         fisc_mstr_dir, a23_str, sue_str, t3
     )
 
     # THEN
     expected_a3_credit_ledger = {sue_str: 5, "Yao": 2, "Zia": 33}
     assert gen_a3_credit_ledger == expected_a3_credit_ledger
+
+
+def test_get_budevent_facts_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord"
+    sue_str = "Sue"
+    t3 = 3
+
+    # WHEN
+    gen_a3_facts = get_budevent_facts(fisc_mstr_dir, a23_str, sue_str, t3)
+
+    # THEN
+    assert gen_a3_facts == {}
+
+
+def test_get_budevent_facts_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord"
+    sue_str = "Sue"
+    t3 = 3
+    t3_json_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, t3)
+    sue_bud = budunit_shop(sue_str)
+    casa_road = sue_bud.make_l1_road("case")
+    clean_road = sue_bud.make_l1_road("clean")
+    dirty_road = sue_bud.make_l1_road("dirty")
+    sue_bud.add_fact(casa_road, dirty_road, create_missing_items=True)
+    save_bud_file(t3_json_path, None, sue_bud)
+
+    # WHEN
+    gen_a3_facts = get_budevent_facts(fisc_mstr_dir, a23_str, sue_str, t3)
+
+    # THEN
+    expected_sue_fact_dict = {casa_road: {base_str(): casa_road, "pick": dirty_road}}
+    assert gen_a3_facts == expected_sue_fact_dict
 
 
 def test_collect_owner_event_dir_sets_ReturnsObj_Scenario0_none(
@@ -333,3 +415,31 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
 
     # THEN
     assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
+
+
+def test_save_arbitrary_dealnode_SetsFile_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    time7 = 777000
+    sue_str = "Sue"
+    sue7_dealnode = create_deal_node_json_path(fisc_mstr_dir, a23_str, sue_str, time7)
+    event3 = 3
+    das = []
+    assert os_path_exists(sue7_dealnode) is False
+
+    # WHEN
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, das, event3)
+
+    # THEN
+    print(f"{sue7_dealnode=}")
+    assert os_path_exists(sue7_dealnode)
+    expected_sue7_dealnode = {
+        "ancestors": das,
+        "event_int": event3,
+        "dealdepth": 0,
+        "owner_name": sue_str,
+        "penny": 1,
+        "quota": 150,
+    }
+    assert open_json(sue7_dealnode) == expected_sue7_dealnode

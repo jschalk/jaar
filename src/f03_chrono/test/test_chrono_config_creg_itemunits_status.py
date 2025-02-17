@@ -67,7 +67,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_item_Scenario1():
         reason_premise_nigh=1,
         reason_premise_divisor=1,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 0, 1440)
+    sue_budunit.add_fact(creg_road, creg_road, 0, 1440)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -101,7 +101,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_item_Scenario2():
         reason_premise_nigh=420,
         reason_premise_divisor=1440,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 14400300, 14400480)
+    sue_budunit.add_fact(creg_road, creg_road, 14400300, 14400480)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -134,7 +134,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_item_Scenario0():
         reason_premise_nigh=5,
         reason_premise_divisor=7,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 11 * 1400, 12 * 1400)
+    sue_budunit.add_fact(creg_road, creg_road, 11 * 1400, 12 * 1400)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -170,7 +170,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_item_Scenario0():
         reason_premise_nigh=1440,
         reason_premise_divisor=10080,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 0, 1440)
+    sue_budunit.add_fact(creg_road, creg_road, 0, 1440)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -204,7 +204,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_item_Scenario1():
         reason_premise_nigh=4220,
         reason_premise_divisor=10080,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 100802880, 100804220)
+    sue_budunit.add_fact(creg_road, creg_road, 100802880, 100804220)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -238,7 +238,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_item_Scenario0():
         reason_premise_nigh=5,
         reason_premise_divisor=7,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 11 * 10080, 12 * 10080)
+    sue_budunit.add_fact(creg_road, creg_road, 11 * 10080, 12 * 10080)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -271,7 +271,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_item_Scenario0():
         reason_premise_nigh=1440,
         reason_premise_divisor=525600,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 0, 1440)
+    sue_budunit.add_fact(creg_road, creg_road, 0, 1440)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -281,7 +281,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_item_Scenario0():
     assert sue_agenda.get(clean_road)
 
     # WHEN
-    sue_budunit.set_fact(creg_road, creg_road, 1444, 2880)
+    sue_budunit.add_fact(creg_road, creg_road, 1444, 2880)
     sue_agenda = sue_budunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
@@ -314,7 +314,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_item_Scenario1():
         reason_premise_nigh=1440,
         reason_premise_divisor=525600,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 525600, 525600 + 1440)
+    sue_budunit.add_fact(creg_road, creg_road, 525600, 525600 + 1440)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -349,7 +349,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_item_Scenario2():
         reason_premise_nigh=1440,
         reason_premise_divisor=525600,
     )
-    sue_budunit.set_fact(creg_road, creg_road, 525600, 525600 + 1440)
+    sue_budunit.add_fact(creg_road, creg_road, 525600, 525600 + 1440)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -366,13 +366,13 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_item_Scenario2():
     yr2004mar1 = get_creg_min_from_dt(dt=datetime(2004, 3, 1, 0, 0))
     yr2004mar2 = get_creg_min_from_dt(dt=datetime(2004, 3, 2, 0, 0))
 
-    sue_budunit.set_fact(creg_road, creg_road, yr2000mar1, yr2000mar1 + 1440)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000mar1, yr2000mar1 + 1440)
     assert len(sue_budunit.get_agenda_dict()) == 1
-    sue_budunit.set_fact(creg_road, creg_road, yr2000mar2, yr2000mar2 + 1440)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000mar2, yr2000mar2 + 1440)
     assert len(sue_budunit.get_agenda_dict()) == 0
-    sue_budunit.set_fact(creg_road, creg_road, yr2004mar1, yr2004mar1 + 1440)
+    sue_budunit.add_fact(creg_road, creg_road, yr2004mar1, yr2004mar1 + 1440)
     assert len(sue_budunit.get_agenda_dict()) == 1
-    sue_budunit.set_fact(creg_road, creg_road, yr2000mar2, yr2004mar2 + 1440)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000mar2, yr2004mar2 + 1440)
     assert len(sue_budunit.get_agenda_dict()) == 1
 
 
@@ -434,14 +434,14 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     print(f"{wed_gogo_want()=}")
     print(f"{wed_gogo_want()+1440=}")
     clean_item = sue_budunit.get_item_obj(clean_road)
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(year_road).fopen=}")
     print(f"{clean_item._factheirs.get(year_road).fnigh=}")
     print(f"{clean_item.get_reasonheir(year_road)._status=} \n")
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -451,7 +451,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar7day, yr2000_mar8day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar7day, yr2000_mar8day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -461,7 +461,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar1day, yr2000_mar2day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar1day, yr2000_mar2day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -471,7 +471,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     assert len(sue_budunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar2day, yr2000_mar3day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar2day, yr2000_mar3day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -481,7 +481,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar3day, yr2000_mar4day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar3day, yr2000_mar4day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -491,7 +491,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar4day, yr2000_mar5day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar4day, yr2000_mar5day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -501,7 +501,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Wednesday_March1_200
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar5day, yr2000_mar6day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar5day, yr2000_mar6day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -561,14 +561,14 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     print(f"{wed_gogo_want()=}")
     print(f"{wed_gogo_want()+1440=}")
     clean_item = sue_budunit.get_item_obj(clean_road)
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(year_road).fopen=}")
     print(f"{clean_item._factheirs.get(year_road).fnigh=}")
     print(f"{clean_item.get_reasonheir(year_road)._status=} \n")
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar6day, yr2000_mar7day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -578,7 +578,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar7day, yr2000_mar8day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar7day, yr2000_mar8day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -588,7 +588,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar1day, yr2000_mar2day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar1day, yr2000_mar2day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -599,7 +599,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     # assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar2day, yr2000_mar3day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar2day, yr2000_mar3day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -609,7 +609,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     assert len(sue_budunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar3day, yr2000_mar4day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar3day, yr2000_mar4day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -619,7 +619,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar4day, yr2000_mar5day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar4day, yr2000_mar5day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")
@@ -629,7 +629,7 @@ def test_BudUnit_add_time_creg_itemunit_SyncsWeekDayAndYear_Thursday_March2_2000
     assert len(sue_budunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_budunit.set_fact(creg_road, creg_road, yr2000_mar5day, yr2000_mar6day)
+    sue_budunit.add_fact(creg_road, creg_road, yr2000_mar5day, yr2000_mar6day)
     sue_budunit.settle_bud()
     print(f"{clean_item._factheirs.get(wed_road).fopen=}")
     print(f"{clean_item._factheirs.get(wed_road).fnigh=}")

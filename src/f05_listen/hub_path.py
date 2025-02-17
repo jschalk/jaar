@@ -51,7 +51,7 @@ def create_deals_dir_path(
 def create_timepoint_dir_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int"""
     timeline_dir = create_deals_dir_path(fisc_mstr_dir, fisc_title, owner_name)
     return create_path(timeline_dir, time_int)
 
@@ -59,7 +59,7 @@ def create_timepoint_dir_path(
 def create_root_deal_json_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
 ) -> str:
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\deal.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\deal.json"""
     timepoint_dir = create_timepoint_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
@@ -69,7 +69,7 @@ def create_root_deal_json_path(
 def create_budpoint_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
 ) -> str:
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\budpoint.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\budpoint.json"""
     timepoint_dir = create_timepoint_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
@@ -81,29 +81,29 @@ def create_deal_node_dir_path(
     fisc_title: TitleUnit,
     owner_name: OwnerName,
     time_int: int,
-    ledger_owners: list[OwnerName],
+    deal_ancestors: list[OwnerName],
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3"""
     deal_dealdepth_dir = create_timepoint_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
-    if ledger_owners is None:
-        ledger_owners = []
-    for ledger_owner in ledger_owners:
+    if deal_ancestors is None:
+        deal_ancestors = []
+    for ledger_owner in deal_ancestors:
         deal_dealdepth_dir = create_path(deal_dealdepth_dir, ledger_owner)
     return deal_dealdepth_dir
 
 
-def create_deal_node_state_path(
+def create_deal_node_json_path(
     fisc_mstr_dir: str,
     fisc_title: TitleUnit,
     owner_name: OwnerName,
     time_int: int,
-    ledger_owners: list[OwnerName] = None,
+    deal_ancestors: list[OwnerName] = None,
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\deal_node.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\deal_node.json"""
     timepoint_dir = create_deal_node_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, ledger_owners
+        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
     return create_path(timepoint_dir, "deal_node.json")
 
@@ -113,11 +113,11 @@ def create_deal_node_credit_ledger_path(
     fisc_title: TitleUnit,
     owner_name: OwnerName,
     time_int: int,
-    ledger_owners: list[OwnerName] = None,
+    deal_ancestors: list[OwnerName] = None,
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\credit_ledger.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\credit_ledger.json"""
     timepoint_dir = create_deal_node_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, ledger_owners
+        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
     return create_path(timepoint_dir, "credit_ledger.json")
 
@@ -127,13 +127,27 @@ def create_deal_node_quota_ledger_path(
     fisc_title: TitleUnit,
     owner_name: OwnerName,
     time_int: int,
-    ledger_owners: list[OwnerName] = None,
+    deal_ancestors: list[OwnerName] = None,
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\quota_ledger.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\quota_ledger.json"""
     timepoint_dir = create_deal_node_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, ledger_owners
+        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
     return create_path(timepoint_dir, "quota_ledger.json")
+
+
+def create_deal_node_facts_path(
+    fisc_mstr_dir: str,
+    fisc_title: TitleUnit,
+    owner_name: OwnerName,
+    time_int: int,
+    deal_ancestors: list[OwnerName] = None,
+):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\facts.json"""
+    timepoint_dir = create_deal_node_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
+    )
+    return create_path(timepoint_dir, "facts.json")
 
 
 def create_owner_event_dir_path(

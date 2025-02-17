@@ -136,7 +136,7 @@ def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
         if dst_listener.item_exists(pick_road) is False:
             pick_item = src_listener.get_item_obj(pick_road)
             dst_listener.set_item(pick_item, pick_item._parent_road)
-        dst_listener.set_fact(base_road, pick_road)
+        dst_listener.add_fact(base_road, pick_road)
 
 
 def listen_to_speaker_fact(
@@ -149,7 +149,7 @@ def listen_to_speaker_fact(
     for missing_fact_base in missing_fact_bases:
         x_factunit = speaker.get_fact(missing_fact_base)
         if x_factunit is not None:
-            listener.set_fact(
+            listener.add_fact(
                 base=x_factunit.base,
                 pick=x_factunit.pick,
                 fopen=x_factunit.fopen,

@@ -27,18 +27,18 @@ def budunit_v001_with_large_agenda() -> BudUnit:
     ced_week_road = yao_bud.make_l1_road("ced_week")
     weekdays_road = yao_bud.make_l1_road("weekdays")
 
-    yao_bud.set_fact(aaron_road, aaron_road)
-    yao_bud.set_fact(ced_week_road, ced_week_road, fopen=0, fnigh=53)
-    yao_bud.set_fact(day_minute_road, day_minute_road, fopen=0, fnigh=1399)
-    # yao_bud.set_fact(interweb, interweb)
-    yao_bud.set_fact(month_week_road, month_week_road, fopen=0, fnigh=5)
-    yao_bud.set_fact(mood_road, mood_road)
-    # yao_bud.set_fact(movie, movie)
-    yao_bud.set_fact(nations_road, nations_road)
-    yao_bud.set_fact(season_road, season_road)
-    yao_bud.set_fact(year_month_road, year_month_road, fopen=0, fnigh=12)
-    # yao_bud.set_fact(water, water)
-    yao_bud.set_fact(weekdays_road, weekdays_road)
+    yao_bud.add_fact(aaron_road, aaron_road)
+    yao_bud.add_fact(ced_week_road, ced_week_road, fopen=0, fnigh=53)
+    yao_bud.add_fact(day_minute_road, day_minute_road, fopen=0, fnigh=1399)
+    # yao_bud.add_fact(interweb, interweb)
+    yao_bud.add_fact(month_week_road, month_week_road, fopen=0, fnigh=5)
+    yao_bud.add_fact(mood_road, mood_road)
+    # yao_bud.add_fact(movie, movie)
+    yao_bud.add_fact(nations_road, nations_road)
+    yao_bud.add_fact(season_road, season_road)
+    yao_bud.add_fact(year_month_road, year_month_road, fopen=0, fnigh=12)
+    # yao_bud.add_fact(water, water)
+    yao_bud.add_fact(weekdays_road, weekdays_road)
     return yao_bud
 
 
@@ -130,8 +130,8 @@ def get_budunit_with_4_levels_and_2reasons_2facts() -> BudUnit:
     states_road = sue_bud.make_l1_road(states_str)
     usa_str = "USA"
     usa_road = sue_bud.make_road(states_road, usa_str)
-    sue_bud.set_fact(base=week_road, pick=wed_road)
-    sue_bud.set_fact(base=states_road, pick=usa_road)
+    sue_bud.add_fact(base=week_road, pick=wed_road)
+    sue_bud.add_fact(base=states_road, pick=usa_road)
     return sue_bud
 
 
@@ -212,7 +212,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     hour_reasonunit = reasonunit_shop(hour_road)
     hour_reasonunit.set_premise(hour_road, open=80, nigh=90)
     yao_bud.set_l1_item(hour_min_item)
-    yao_bud.set_fact(hour_road, hour_road, 85, 95)
+    yao_bud.add_fact(hour_road, hour_road, 85, 95)
     mail_str = "obtain mail"
     mail_road = yao_bud.make_l1_road(mail_str)
     mail_item = itemunit_shop(mail_str, pledge=True)
@@ -248,7 +248,7 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     shave_reason.set_premise(mon_road)
 
     zia_bud.edit_item_attr(road=shave_road, reason=shave_reason)
-    zia_bud.set_fact(base=week_road, pick=sun_road)
+    zia_bud.add_fact(base=week_road, pick=sun_road)
     factunit_x = factunit_shop(base=week_road, pick=church_road)
     zia_bud.edit_item_attr(road=shave_road, factunit=factunit_x)
     return zia_bud
@@ -372,7 +372,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     amos_bud.edit_item_attr(road=laundry_task_road, teamunit=cali_teamunit)
     # print(f"{basket_road=}")
     # print(f"{amos_bud.fisc_title=}")
-    amos_bud.set_fact(base=basket_road, pick=b_full_road)
+    amos_bud.add_fact(base=basket_road, pick=b_full_road)
 
     return amos_bud
 

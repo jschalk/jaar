@@ -78,20 +78,14 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_premise._status = False
 
     x1_reasonunits = {
-        week_road: reasonunit_shop(
-            base=week_road, premises={wed_premise.need: wed_premise}
-        ),
-        states_road: reasonunit_shop(
-            base=states_road, premises={usa_premise.need: usa_premise}
-        ),
+        week_road: reasonunit_shop(week_road, premises={wed_premise.need: wed_premise}),
+        states_road: reasonunit_shop(states_road, {usa_premise.need: usa_premise}),
     }
+    wed_premises = {wed_premise.need: wed_premise}
+    usa_premises = {usa_premise.need: usa_premise}
     x1_reasonheirs = {
-        week_road: reasonheir_shop(
-            base=week_road, premises={wed_premise.need: wed_premise}, _status=True
-        ),
-        states_road: reasonheir_shop(
-            base=states_road, premises={usa_premise.need: usa_premise}, _status=False
-        ),
+        week_road: reasonheir_shop(week_road, wed_premises, _status=True),
+        states_road: reasonheir_shop(states_road, usa_premises, _status=False),
     }
     biker_awardee_tag = "bikers"
     biker_give_force = 3.0

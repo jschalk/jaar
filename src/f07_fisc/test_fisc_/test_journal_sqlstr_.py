@@ -1,6 +1,12 @@
 from src.f01_road.road import create_road
 from src.f02_bud.bud_tool import bud_item_factunit_str
-from src.f04_gift.atom_config import fopen_str, atom_insert, atom_hx_table_name
+from src.f04_gift.atom_config import (
+    fopen_str,
+    atom_insert,
+    atom_hx_table_name,
+    base_str,
+    road_str,
+)
 from src.f04_gift.atom import atomunit_shop
 from src.f07_fisc.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
@@ -183,18 +189,16 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
 
     # WHEN
     x_dimen = bud_item_factunit_str()
-    road_str = "road"
-    base_str = "base"
     update_disc_atomunit = atomunit_shop(x_dimen, atom_insert())
-    update_disc_atomunit.set_jkey(road_str, ball_road)
-    update_disc_atomunit.set_jkey(base_str, knee_road)
+    update_disc_atomunit.set_jkey(road_str(), ball_road)
+    update_disc_atomunit.set_jkey(base_str(), knee_road)
     update_disc_atomunit.set_jvalue(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
-  {x_dimen}_{atom_insert()}_{road_str}
-, {x_dimen}_{atom_insert()}_{base_str}
+  {x_dimen}_{atom_insert()}_{road_str()}
+, {x_dimen}_{atom_insert()}_{base_str()}
 , {x_dimen}_{atom_insert()}_{fopen_str()}
 )
 VALUES (

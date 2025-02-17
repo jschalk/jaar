@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import create_csv
 from src.f01_road.finance import FundNum, get_net, RespectNum
-from src.f01_road.road import AcctName
+from src.f01_road.road import AcctName, FiscTitle, RoadUnit
 from src.f02_bud.acct import AcctUnit
 from src.f02_bud.group import MemberShip, AwardLink
 from src.f02_bud.item import ItemUnit
@@ -246,3 +246,7 @@ def get_acct_agenda_ledger(
 def get_credit_ledger(x_bud: BudUnit) -> dict[AcctUnit, RespectNum]:
     credit_ledger, debtit_ledger = x_bud.get_credit_ledger_debtit_ledger()
     return credit_ledger
+
+
+def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[RoadUnit, dict[str,]]:
+    return x_bud.get_factunits_dict()
