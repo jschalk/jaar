@@ -43,7 +43,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_credit_ledger_path,
 )
 from src.f05_listen.hub_tool import (
-    collect_events_dir_owner_events_sets,
+    collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     get_events_owner_credit_ledger,
 )
@@ -935,49 +935,54 @@ def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
             owner_dir = create_path(owners_dir, owner_name)
             deals_dir = create_path(owner_dir, "deals")
             for time_int in get_level1_dirs(deals_dir):
-                process_root_ledger_depth(
+                root_deal_json_path = create_deal_node_state_path(
                     fisc_mstr_dir, fisc_title, owner_name, time_int
                 )
+                if os_path_exists(root_deal_json_path):
+                    create_deal_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
 
 
-def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
+def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
     root_deal_json_path = create_deal_node_state_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
+        fisc_mstr_dir, fisc_title, time_owner_name, time_int
     )
-    if os_path_exists(root_deal_json_path):
-        root_deal_dict = open_json(root_deal_json_path)
-        deals_to_evaluate = [root_deal_dict]
-        x_count = 0
-        while deals_to_evaluate != [] and x_count < 10:
-            x_count += 1
-            parent_deal = deals_to_evaluate.pop()
-            parent_event_int = parent_deal.get("event_int")
-            parent_ledger_depth = parent_deal.get("ledger_depth")
-            parent_owner_name = parent_deal.get("owner_name")
-            parent_quota = parent_deal.get("quota")
-            parent_penny = parent_deal.get("penny")
-            parent_ancestors = parent_deal.get("ancestors")
-            parent_credit_ledger = get_events_owner_credit_ledger(
-                fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
+    root_deal_dict = open_json(root_deal_json_path)
+    deals_to_evaluate = [root_deal_dict]
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
+    while deals_to_evaluate != []:
+        parent_deal = deals_to_evaluate.pop()
+        parent_event_int = parent_deal.get("event_int")
+        parent_ledger_depth = parent_deal.get("ledger_depth")
+        parent_owner_name = parent_deal.get("owner_name")
+        parent_quota = parent_deal.get("quota")
+        parent_penny = parent_deal.get("penny")
+        parent_ancestors = parent_deal.get("ancestors")
+        parent_credit_ledger = get_events_owner_credit_ledger(
+            fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
+        )
+        path_ancestors = parent_ancestors[1:]
+        parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
+            fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
+        )
+        save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
+        parent_quota_ledger_path = create_deal_node_quota_ledger_path(
+            fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
+        )
+        parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
+        save_json(parent_quota_ledger_path, None, parent_quota_ledger)
+        if parent_ledger_depth > 0:
+            child_ledger_depth = parent_ledger_depth - 1
+            parent_credit_owners = set(parent_credit_ledger.keys())
+            owners_downhill_events_ints = get_owners_downhill_event_ints(
+                owner_events_sets, parent_credit_owners, parent_event_int
             )
-            parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
-                fisc_mstr_dir, fisc_title, owner_name, time_int, parent_ancestors[1:]
-            )
-            save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
-            parent_quota_ledger_path = create_deal_node_quota_ledger_path(
-                fisc_mstr_dir, fisc_title, owner_name, time_int, parent_ancestors[1:]
-            )
-            parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
-            save_json(parent_quota_ledger_path, None, parent_quota_ledger)
-            if parent_ledger_depth > 0:
-                child_ledger_depth = parent_ledger_depth - 1
-                parent_ledger_depth = None
-                for quota_owner, quota_amount in parent_quota_ledger.items():
+            for quota_owner, quota_amount in parent_quota_ledger.items():
+                if downhill_event_int := owners_downhill_events_ints.get(quota_owner):
                     child_ancestors = list(copy_copy(parent_ancestors))
                     child_ancestors.append(quota_owner)
                     child_deal_node = {
                         "ancestors": child_ancestors,
-                        "event_int": parent_event_int,
+                        "event_int": downhill_event_int,
                         "ledger_depth": child_ledger_depth,
                         "owner_name": quota_owner,
                         "penny": parent_penny,
@@ -986,7 +991,7 @@ def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
                     child_deal_json_path = create_deal_node_state_path(
                         fisc_mstr_dir,
                         fisc_title,
-                        owner_name,
+                        time_owner_name,
                         time_int,
                         child_ancestors[1:],
                     )
@@ -1149,7 +1154,7 @@ def _get_prev_event_int_budunit(
 def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        owner_events = collect_events_dir_owner_events_sets(fisc_mstr_dir, fisc_title)
+        owner_events = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
             max_budevent_path = create_budevent_path(

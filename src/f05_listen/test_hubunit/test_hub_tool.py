@@ -27,7 +27,7 @@ from src.f05_listen.hub_tool import (
     get_timepoint_credit_ledger,
     get_events_owner_credit_ledger,
     get_owners_downhill_event_ints,
-    collect_events_dir_owner_events_sets,
+    collect_owner_event_dir_sets,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
@@ -162,19 +162,19 @@ def test_get_events_owner_credit_ledger_ReturnsObj_Scenario1_FileExists(
     assert gen_a3_credit_ledger == expected_a3_credit_ledger
 
 
-def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario0_none(
+def test_collect_owner_event_dir_sets_ReturnsObj_Scenario0_none(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     # WHEN
-    owner_events_sets = collect_events_dir_owner_events_sets(fisc_mstr_dir, a23_str)
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, a23_str)
     # THEN
     assert owner_events_sets == {}
 
 
-def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario1_DirsExist(
+def test_collect_owner_event_dir_sets_ReturnsObj_Scenario1_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -191,13 +191,13 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario1_DirsExist(
     set_dir(bob2_dir)
 
     # WHEN
-    owner_events_sets = collect_events_dir_owner_events_sets(fisc_mstr_dir, a23_str)
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, a23_str)
 
     # THEN
     assert owner_events_sets == {bob_str: {event1, event2}}
 
 
-def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
+def test_collect_owner_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -218,7 +218,7 @@ def test_collect_events_dir_owner_events_sets_ReturnsObj_Scenario2_DirsExist(
     set_dir(sue7_dir)
 
     # WHEN
-    owner_events_sets = collect_events_dir_owner_events_sets(fisc_mstr_dir, a23_str)
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, a23_str)
 
     # THEN
     assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}
