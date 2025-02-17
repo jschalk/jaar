@@ -5,6 +5,8 @@ from src.f00_instrument.file import (
     create_path,
     open_file,
     save_json,
+    open_json,
+    get_level1_dirs,
 )
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
@@ -34,6 +36,8 @@ from src.f01_road.deal import (
     TranBook,
     tranbook_shop,
     get_tranbook_from_dict,
+    allot_scale,
+    DealUnit,
 )
 from src.f01_road.road import (
     default_bridge_if_None,
@@ -49,6 +53,13 @@ from src.f05_listen.basis_buds import get_default_forecast_bud
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_deal_node_state_path,
+    create_deal_node_credit_ledger_path,
+    create_deal_node_quota_ledger_path,
+)
+from src.f05_listen.hub_tool import (
+    collect_owner_event_dir_sets,
+    get_owners_downhill_event_ints,
+    get_events_owner_credit_ledger,
 )
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
@@ -60,7 +71,8 @@ from src.f05_listen.listen import (
 from src.f07_fisc.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
-from copy import deepcopy as copy_deepcopy
+from copy import deepcopy as copy_deepcopy, copy as copy_copy
+from os.path import exists as os_path_exists
 
 
 class dealunit_Exception(Exception):
@@ -390,14 +402,11 @@ class FiscUnit:
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
         time_int: TimeLinePoint,
     ):
-        max_past_event_int = _get_ote1_max_past_event_int(
-            owner_name, ote1_dict, time_int
-        )
-        owner_brokerunit = self.get_brokerunit(owner_name)
-        dealunit = owner_brokerunit.get_deal(time_int)
+        past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
+        dealunit = self.get_brokerunit(owner_name).get_deal(time_int)
         deal_node = {
             "owner_name": owner_name,
-            "event_int": max_past_event_int,
+            "event_int": past_event_int,
             "dealdepth": dealunit.dealdepth,
             "quota": dealunit.quota,
             "penny": self.penny,
@@ -407,6 +416,78 @@ class FiscUnit:
             self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
         )
         save_json(deal_node_json_path, None, deal_node)
+
+
+def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    for owner_name in get_level1_dirs(owners_dir):
+        owner_dir = create_path(owners_dir, owner_name)
+        deals_dir = create_path(owner_dir, "deals")
+        for time_int in get_level1_dirs(deals_dir):
+            root_deal_json_path = create_deal_node_state_path(
+                fisc_mstr_dir, fisc_title, owner_name, time_int
+            )
+            if os_path_exists(root_deal_json_path):
+                create_deal_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
+
+
+def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
+    root_deal_json_path = create_deal_node_state_path(
+        fisc_mstr_dir, fisc_title, time_owner_name, time_int
+    )
+    root_deal_dict = open_json(root_deal_json_path)
+    deals_to_evaluate = [root_deal_dict]
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
+    while deals_to_evaluate != []:
+        parent_deal = deals_to_evaluate.pop()
+        parent_event_int = parent_deal.get("event_int")
+        parent_dealdepth = parent_deal.get("dealdepth")
+        parent_owner_name = parent_deal.get("owner_name")
+        parent_quota = parent_deal.get("quota")
+        parent_penny = parent_deal.get("penny")
+        parent_ancestors = parent_deal.get("ancestors")
+        parent_credit_ledger = get_events_owner_credit_ledger(
+            fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
+        )
+        path_ancestors = parent_ancestors[1:]
+        parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
+            fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
+        )
+        save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
+        parent_quota_ledger_path = create_deal_node_quota_ledger_path(
+            fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
+        )
+        parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
+        save_json(parent_quota_ledger_path, None, parent_quota_ledger)
+        if parent_dealdepth > 0:
+            child_dealdepth = parent_dealdepth - 1
+            parent_credit_owners = set(parent_credit_ledger.keys())
+            owners_downhill_events_ints = get_owners_downhill_event_ints(
+                owner_events_sets, parent_credit_owners, parent_event_int
+            )
+            for quota_owner, quota_amount in parent_quota_ledger.items():
+                if downhill_event_int := owners_downhill_events_ints.get(quota_owner):
+                    child_ancestors = list(copy_copy(parent_ancestors))
+                    child_ancestors.append(quota_owner)
+                    child_deal_node = {
+                        "ancestors": child_ancestors,
+                        "event_int": downhill_event_int,
+                        "dealdepth": child_dealdepth,
+                        "owner_name": quota_owner,
+                        "penny": parent_penny,
+                        "quota": quota_amount,
+                    }
+                    child_deal_json_path = create_deal_node_state_path(
+                        fisc_mstr_dir,
+                        fisc_title,
+                        time_owner_name,
+                        time_int,
+                        child_ancestors[1:],
+                    )
+                    save_json(child_deal_json_path, None, child_deal_node)
+                    deals_to_evaluate.append(child_deal_node)
 
 
 def _get_ote1_max_past_event_int(

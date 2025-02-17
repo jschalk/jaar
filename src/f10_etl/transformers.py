@@ -5,22 +5,16 @@ from src.f00_instrument.file import (
     open_file,
     save_json,
     open_json,
+    get_level1_dirs,
 )
 from src.f00_instrument.csv_toolbox import open_csv_with_types
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
-    get_table_columns,
     save_to_split_csvs,
-)
-from src.f00_instrument.dict_toolbox import (
-    get_json_from_dict,
-    get_dict_from_json,
-    get_empty_list_if_None,
 )
 from src.f01_road.road import FaceName, EventInt, OwnerName, FiscTitle
 from src.f01_road.finance import TimeLinePoint
-from src.f01_road.deal import allot_scale, DealUnit
 from src.f02_bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
@@ -39,15 +33,15 @@ from src.f05_listen.hub_path import (
     create_budevent_path,
     create_budpoint_path,
     create_deal_node_state_path,
-    create_deal_node_quota_ledger_path,
-    create_deal_node_credit_ledger_path,
 )
 from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
-    get_events_owner_credit_ledger,
 )
-from src.f07_fisc.fisc import get_from_standard as fiscunit_get_from_standard, FiscUnit
+from src.f07_fisc.fisc import (
+    get_from_standard as fiscunit_get_from_standard,
+    create_fisc_owners_deal_trees,
+)
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -605,15 +599,6 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
-def get_level1_dirs(x_dir: str) -> list[str]:
-    """returns sorted list of all first level directorys"""
-    try:
-        level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
-        return sorted(list(level1_dirs.keys()))
-    except OSError as e:
-        return []
-
-
 def etl_otz_face_pidgins_to_otz_event_pidgins(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
@@ -926,77 +911,10 @@ def etl_create_root_deal_nodes(fisc_mstr_dir: str):
             x_fiscunit.create_root_deal_nodes(ote1_dict)
 
 
-def etl_create_deal_trees(fisc_mstr_dir: str):
+def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_dir = create_path(fiscs_dir, fisc_title)
-        owners_dir = create_path(fisc_dir, "owners")
-        for owner_name in get_level1_dirs(owners_dir):
-            owner_dir = create_path(owners_dir, owner_name)
-            deals_dir = create_path(owner_dir, "deals")
-            for time_int in get_level1_dirs(deals_dir):
-                root_deal_json_path = create_deal_node_state_path(
-                    fisc_mstr_dir, fisc_title, owner_name, time_int
-                )
-                if os_path_exists(root_deal_json_path):
-                    create_deal_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
-
-
-def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
-    root_deal_json_path = create_deal_node_state_path(
-        fisc_mstr_dir, fisc_title, time_owner_name, time_int
-    )
-    root_deal_dict = open_json(root_deal_json_path)
-    deals_to_evaluate = [root_deal_dict]
-    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
-    while deals_to_evaluate != []:
-        parent_deal = deals_to_evaluate.pop()
-        parent_event_int = parent_deal.get("event_int")
-        parent_dealdepth = parent_deal.get("dealdepth")
-        parent_owner_name = parent_deal.get("owner_name")
-        parent_quota = parent_deal.get("quota")
-        parent_penny = parent_deal.get("penny")
-        parent_ancestors = parent_deal.get("ancestors")
-        parent_credit_ledger = get_events_owner_credit_ledger(
-            fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
-        )
-        path_ancestors = parent_ancestors[1:]
-        parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
-            fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
-        )
-        save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
-        parent_quota_ledger_path = create_deal_node_quota_ledger_path(
-            fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
-        )
-        parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
-        save_json(parent_quota_ledger_path, None, parent_quota_ledger)
-        if parent_dealdepth > 0:
-            child_dealdepth = parent_dealdepth - 1
-            parent_credit_owners = set(parent_credit_ledger.keys())
-            owners_downhill_events_ints = get_owners_downhill_event_ints(
-                owner_events_sets, parent_credit_owners, parent_event_int
-            )
-            for quota_owner, quota_amount in parent_quota_ledger.items():
-                if downhill_event_int := owners_downhill_events_ints.get(quota_owner):
-                    child_ancestors = list(copy_copy(parent_ancestors))
-                    child_ancestors.append(quota_owner)
-                    child_deal_node = {
-                        "ancestors": child_ancestors,
-                        "event_int": downhill_event_int,
-                        "dealdepth": child_dealdepth,
-                        "owner_name": quota_owner,
-                        "penny": parent_penny,
-                        "quota": quota_amount,
-                    }
-                    child_deal_json_path = create_deal_node_state_path(
-                        fisc_mstr_dir,
-                        fisc_title,
-                        time_owner_name,
-                        time_int,
-                        child_ancestors[1:],
-                    )
-                    save_json(child_deal_json_path, None, child_deal_node)
-                    deals_to_evaluate.append(child_deal_node)
+        create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
