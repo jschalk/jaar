@@ -240,7 +240,7 @@ def test_create_deal_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
     x_ledger_owners = [yao_str, bob_str, zia_str]
 
     # WHEN
-    gen_deal_ledger_depth_dir_path = create_deal_node_dir_path(
+    gen_deal_dealdepth_dir_path = create_deal_node_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, ledger_owners=x_ledger_owners
     )
 
@@ -249,7 +249,7 @@ def test_create_deal_node_dir_path_ReturnObj_Scenario2_Three_ledger_owners():
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_tp_yao_bob_zia_dir = create_path(tp_yao_bob_dir, zia_str)
-    assert gen_deal_ledger_depth_dir_path == expected_tp_yao_bob_zia_dir
+    assert gen_deal_dealdepth_dir_path == expected_tp_yao_bob_zia_dir
 
 
 def test_create_deal_node_state_path_ReturnObj_Scenario0_Empty_ledger_owners():

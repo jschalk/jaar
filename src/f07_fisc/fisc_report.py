@@ -115,7 +115,6 @@ def get_fisc_forecasts_accts_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
-
     return fig
 
 
@@ -174,7 +173,6 @@ def get_fisc_voices_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
-
     return fig
 
 
@@ -233,5 +231,4 @@ def get_fisc_forecasts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
-
     return fig

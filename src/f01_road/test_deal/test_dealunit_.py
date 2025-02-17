@@ -3,30 +3,30 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
-    ledger_depth_str,
+    dealdepth_str,
     magnitude_str,
     deal_net_str,
     DealUnit,
     dealunit_shop,
     get_dealunit_from_dict,
     get_dealunit_from_json,
-    DEFAULT_DEPTH_LEDGER,
+    DEFAULT_DEALDEPTH,
 )
 from pytest import raises as pytest_raises
 
 
 def test_str_functions_ReturnObj():
     assert bridge_str() == "bridge"
-    assert ledger_depth_str() == "ledger_depth"
+    assert dealdepth_str() == "dealdepth"
     assert time_int_str() == "time_int"
     assert quota_str() == "quota"
     assert magnitude_str() == "magnitude"
     assert deal_net_str() == "deal_net"
 
 
-def test_DEFAULT_DEPTH_LEDGER():
+def test_DEFAULT_DEALDEPTH():
     # ESTABLISH / WHEN / THEN
-    assert DEFAULT_DEPTH_LEDGER == 2
+    assert DEFAULT_DEALDEPTH == 2
 
 
 def test_DealUnit_Exists():
@@ -37,7 +37,7 @@ def test_DealUnit_Exists():
     assert x_dealunit
     assert not x_dealunit.time_int
     assert not x_dealunit.quota
-    assert not x_dealunit.ledger_depth
+    assert not x_dealunit.dealdepth
     assert not x_dealunit._deal_net
     assert not x_dealunit._magnitude
 
@@ -54,7 +54,7 @@ def test_dealunit_shop_ReturnsObj():
     assert t4_dealunit.time_int == t4_time_int
     assert t4_dealunit.quota == default_fund_pool()
     assert t4_dealunit._magnitude == 0
-    assert t4_dealunit.ledger_depth == 2
+    assert t4_dealunit.dealdepth == 2
     assert not t4_dealunit._deal_net
 
 
@@ -64,7 +64,7 @@ def test_dealunit_shop_ReturnsObjWith_deal_net():
     t4_quota = 55
     t4_deal_net = {"Sue": -4}
     t4_magnitude = 677
-    t4_ledger_depth = 88
+    t4_dealdepth = 88
 
     # WHEN
     x_dealunit = dealunit_shop(
@@ -72,14 +72,14 @@ def test_dealunit_shop_ReturnsObjWith_deal_net():
         quota=t4_quota,
         deal_net=t4_deal_net,
         magnitude=t4_magnitude,
-        ledger_depth=t4_ledger_depth,
+        dealdepth=t4_dealdepth,
     )
 
     # THEN
     assert x_dealunit
     assert x_dealunit.time_int == t4_time_int
     assert x_dealunit.quota == t4_quota
-    assert x_dealunit.ledger_depth == t4_ledger_depth
+    assert x_dealunit.dealdepth == t4_dealdepth
     assert x_dealunit._magnitude == 677
     assert x_dealunit._deal_net == t4_deal_net
 
@@ -222,9 +222,9 @@ def test_DealUnit_get_dict_ReturnsObjWith_deal_net():
     t4_quota = 55
     t4_deal_net = {"Sue": -4}
     t4_magnitude = 67
-    t4_ledger_depth = 5
+    t4_dealdepth = 5
     t4_dealunit = dealunit_shop(
-        t4_time_int, t4_quota, t4_deal_net, t4_magnitude, t4_ledger_depth
+        t4_time_int, t4_quota, t4_deal_net, t4_magnitude, t4_dealdepth
     )
 
     # WHEN
@@ -236,7 +236,7 @@ def test_DealUnit_get_dict_ReturnsObjWith_deal_net():
         quota_str(): t4_quota,
         magnitude_str(): t4_magnitude,
         deal_net_str(): t4_deal_net,
-        ledger_depth_str(): t4_ledger_depth,
+        dealdepth_str(): t4_dealdepth,
     }
 
 
@@ -288,14 +288,14 @@ def test_get_dealunit_from_dict_ReturnsObj_Scenario1():
     t4_time_int = 4
     t4_quota = 55
     t4_magnitude = 65
-    t4_ledger_depth = 33
+    t4_dealdepth = 33
     t4_deal_net = {"Sue": -77}
     t4_dealunit = dealunit_shop(
         t4_time_int,
         t4_quota,
         t4_deal_net,
         t4_magnitude,
-        ledger_depth=t4_ledger_depth,
+        dealdepth=t4_dealdepth,
     )
     t4_dict = t4_dealunit.get_dict()
 
@@ -308,7 +308,7 @@ def test_get_dealunit_from_dict_ReturnsObj_Scenario1():
     assert x_dealunit.quota == t4_quota
     assert x_dealunit._magnitude == t4_magnitude
     assert x_dealunit._deal_net == t4_deal_net
-    assert x_dealunit.ledger_depth == t4_ledger_depth
+    assert x_dealunit.dealdepth == t4_dealdepth
     assert x_dealunit == t4_dealunit
 
 

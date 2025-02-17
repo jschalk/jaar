@@ -84,14 +84,14 @@ def create_deal_node_dir_path(
     ledger_owners: list[OwnerName],
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3"""
-    deal_ledger_depth_dir = create_timepoint_dir_path(
+    deal_dealdepth_dir = create_timepoint_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
     if ledger_owners is None:
         ledger_owners = []
     for ledger_owner in ledger_owners:
-        deal_ledger_depth_dir = create_path(deal_ledger_depth_dir, ledger_owner)
-    return deal_ledger_depth_dir
+        deal_dealdepth_dir = create_path(deal_dealdepth_dir, ledger_owner)
+    return deal_dealdepth_dir
 
 
 def create_deal_node_state_path(

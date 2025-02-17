@@ -5,22 +5,16 @@ from src.f00_instrument.file import (
     open_file,
     save_json,
     open_json,
+    get_level1_dirs,
 )
 from src.f00_instrument.csv_toolbox import open_csv_with_types
 from src.f00_instrument.db_toolbox import (
     db_table_exists,
     get_row_count,
-    get_table_columns,
     save_to_split_csvs,
-)
-from src.f00_instrument.dict_toolbox import (
-    get_json_from_dict,
-    get_dict_from_json,
-    get_empty_list_if_None,
 )
 from src.f01_road.road import FaceName, EventInt, OwnerName, FiscTitle
 from src.f01_road.finance import TimeLinePoint
-from src.f01_road.deal import allot_scale, DealUnit
 from src.f02_bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
@@ -39,15 +33,15 @@ from src.f05_listen.hub_path import (
     create_budevent_path,
     create_budpoint_path,
     create_deal_node_state_path,
-    create_deal_node_quota_ledger_path,
-    create_deal_node_credit_ledger_path,
 )
 from src.f05_listen.hub_tool import (
-    collect_events_dir_owner_events_sets,
+    collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
-    get_events_owner_credit_ledger,
 )
-from src.f07_fisc.fisc import get_from_standard as fiscunit_get_from_standard, FiscUnit
+from src.f07_fisc.fisc import (
+    get_from_standard as fiscunit_get_from_standard,
+    create_fisc_owners_deal_trees,
+)
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.f08_pidgin.pidgin_config import get_quick_pidgens_column_ref
@@ -103,7 +97,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
-from copy import deepcopy as copy_deepcopy
+from copy import deepcopy as copy_deepcopy, copy as copy_copy
 
 
 class not_given_pidgin_dimen_Exception(Exception):
@@ -605,15 +599,6 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
-def get_level1_dirs(x_dir: str) -> list[str]:
-    """returns sorted list of all first level directorys"""
-    try:
-        level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
-        return sorted(list(level1_dirs.keys()))
-    except OSError as e:
-        return []
-
-
 def etl_otz_face_pidgins_to_otz_event_pidgins(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
@@ -926,65 +911,10 @@ def etl_create_root_deal_nodes(fisc_mstr_dir: str):
             x_fiscunit.create_root_deal_nodes(ote1_dict)
 
 
-def etl_create_deal_ledger_depth(fisc_mstr_dir: str):
+def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_dir = create_path(fiscs_dir, fisc_title)
-        owners_dir = create_path(fisc_dir, "owners")
-        for owner_name in get_level1_dirs(owners_dir):
-            owner_dir = create_path(owners_dir, owner_name)
-            deals_dir = create_path(owner_dir, "deals")
-            for time_int in get_level1_dirs(deals_dir):
-                process_root_ledger_depth(
-                    fisc_mstr_dir, fisc_title, owner_name, time_int
-                )
-
-
-def process_root_ledger_depth(fisc_mstr_dir, fisc_title, owner_name, time_int):
-    root_ledger_state_json_path = create_deal_node_state_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
-    )
-    if os_path_exists(root_ledger_state_json_path):
-        root_ledger_state_dict = open_json(root_ledger_state_json_path)
-        x_event_int = root_ledger_state_dict.get("event_int")
-        x_ledger_depth = root_ledger_state_dict.get("ledger_depth")
-        x_owner_name = root_ledger_state_dict.get("owner_name")
-        x_quota = root_ledger_state_dict.get("quota")
-        root_credit_ledger_dict = get_events_owner_credit_ledger(
-            fisc_mstr_dir, fisc_title, x_owner_name, x_event_int
-        )
-        deal_credit_ledger_json_path = create_deal_node_credit_ledger_path(
-            fisc_mstr_dir, fisc_title, owner_name, time_int
-        )
-        deal_quota_ledger_json_path = create_deal_node_quota_ledger_path(
-            fisc_mstr_dir, fisc_title, owner_name, time_int
-        )
-        save_json(deal_credit_ledger_json_path, None, root_credit_ledger_dict)
-        root_quota_ledger = allot_scale(root_credit_ledger_dict, x_quota, 1)
-        save_json(deal_quota_ledger_json_path, None, root_quota_ledger)
-        for quota_owner, quota_amount in root_quota_ledger.items():
-            print(f"{x_ledger_depth-1=} {quota_owner=} {quota_amount=} {x_event_int=}")
-            print(f"{root_ledger_state_dict=}")
-        # print(f"{root_ledger_state_dict=}")
-        # print(f"{root_credit_ledger_dict=}")
-        # print(f"{root_quota_ledger=}")
-
-    # print(
-    #     f"{owner_name=} {time_int=} {timepoint_event_int=} {dealunit=}"
-    # )
-
-    # for every fiscunit
-    # for every deal
-    # find event_int for timepoint
-    # get bud from event
-    # get ledger, save ledger
-    # while depth incomplete
-    #    get currect ledger
-    #    for each acct in ledger
-    #       get most recent event after prev for acct
-    #       get bud from event_int
-    #       add ledger
-    #    add to ledger incomplete list
+        create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
@@ -1142,7 +1072,7 @@ def _get_prev_event_int_budunit(
 def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        owner_events = collect_events_dir_owner_events_sets(fisc_mstr_dir, fisc_title)
+        owner_events = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
             max_budevent_path = create_budevent_path(

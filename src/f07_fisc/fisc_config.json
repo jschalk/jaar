@@ -36,7 +36,7 @@
             "quota": {
                 "class_type": "int"
             },
-            "ledger_depth": {
+            "dealdepth": {
                 "class_type": "int"
             }
         }

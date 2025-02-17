@@ -176,7 +176,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "c400_number",
         "yr1_jan1_offset",
         "quota",
-        "ledger_depth",
+        "dealdepth",
         "monthday_distortion",
         "timeline_title",
         "error_message",
@@ -279,7 +279,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "c400_number": "INTEGER",
         "yr1_jan1_offset": "INTEGER",
         "quota": "REAL",
-        "ledger_depth": "INT",
+        "dealdepth": "INT",
         "monthday_distortion": "INTEGER",
         "timeline_title": "TEXT",
         "error_message": "TEXT",
@@ -568,7 +568,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
         "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscunit_v0_0_0(),
-        "fisc_title,owner_name,time_int,quota,ledger_depth": idea_format_00001_fisc_dealunit_v0_0_0(),
+        "fisc_title,owner_name,time_int,quota,dealdepth": idea_format_00001_fisc_dealunit_v0_0_0(),
         "fisc_title,owner_name,acct_name,time_int,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
         "fisc_title,hour_title,cumlative_minute": idea_format_00003_fisc_timeline_hour_v0_0_0(),
         "fisc_title,month_title,cumlative_day": idea_format_00004_fisc_timeline_month_v0_0_0(),

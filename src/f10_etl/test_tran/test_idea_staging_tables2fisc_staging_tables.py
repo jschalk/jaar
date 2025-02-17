@@ -8,7 +8,7 @@ from src.f01_road.deal import (
     bridge_str,
     quota_str,
     time_int_str,
-    ledger_depth_str,
+    dealdepth_str,
     owner_name_str,
     fisc_title_str,
 )
@@ -427,7 +427,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario4_Idea_br00001_Table_Wi
         owner_name_str(),
         time_int_str(),
         quota_str(),
-        ledger_depth_str(),
+        dealdepth_str(),
     ]
     a23_owner_name = bob_inx
     a23_time_int = 22
@@ -438,7 +438,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario4_Idea_br00001_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00001_tablename, br00001_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{time_int_str()},{quota_str()}, {ledger_depth_str()})
+INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{time_int_str()},{quota_str()}, {dealdepth_str()})
 VALUES
   ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
 , ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
@@ -466,7 +466,7 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
-            None,  # ledger_depth
+            None,  # dealdepth
             None,  # note
         )
         expected_row1 = (
@@ -477,7 +477,7 @@ VALUES
             a23_owner_name,
             a23_time_int,
             a23_quota,
-            None,  # ledger_depth
+            None,  # dealdepth
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
@@ -840,7 +840,7 @@ VALUES
         print(f"{expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fisc.deal_stage_csv_path)) == 96
+        assert len(open_file(x_fisc.deal_stage_csv_path)) == 93
         assert len(open_file(x_fisc.cash_stage_csv_path)) == 85
         assert len(open_file(x_fisc.hour_stage_csv_path)) == 76
         assert len(open_file(x_fisc.mont_stage_csv_path)) == 74
@@ -902,7 +902,7 @@ VALUES
         print(f"{expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fisc.deal_stage_csv_path)) == 96
+        assert len(open_file(x_fisc.deal_stage_csv_path)) == 93
         assert len(open_file(x_fisc.cash_stage_csv_path)) == 94
         assert len(open_file(x_fisc.hour_stage_csv_path)) == 85
         assert len(open_file(x_fisc.mont_stage_csv_path)) == 83

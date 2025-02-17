@@ -47,8 +47,8 @@ CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_st
 
 CREATE_FISC_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL)"""
 CREATE_FISC_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, ledger_depth INT)"""
-CREATE_FISC_DEALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, ledger_depth INT, error_message TEXT)"""
+CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, dealdepth INT)"""
+CREATE_FISC_DEALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, dealdepth INT, error_message TEXT)"""
 CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_title TEXT, hour_title TEXT, cumlative_minute INTEGER)"""
 CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, hour_title TEXT, cumlative_minute INTEGER, error_message TEXT)"""
 CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_title TEXT, month_title TEXT, cumlative_day INTEGER)"""
@@ -224,7 +224,7 @@ FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_title, owner_name, time_int
 FROM fisc_dealunit_staging
 GROUP BY fisc_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
-    OR MIN(ledger_depth) != MAX(ledger_depth)
+    OR MIN(dealdepth) != MAX(dealdepth)
 """
 FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_title, hour_title
 FROM fisc_timeline_hour_staging
@@ -565,7 +565,7 @@ SELECT fisc_title, owner_name, time_int
 FROM fisc_dealunit_staging
 GROUP BY fisc_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
-    OR MIN(ledger_depth) != MAX(ledger_depth)
+    OR MIN(dealdepth) != MAX(dealdepth)
 )
 UPDATE fisc_dealunit_staging
 SET error_message = 'Inconsistent fisc data'
@@ -740,8 +740,8 @@ WHERE error_message IS NULL
 GROUP BY fisc_title, owner_name, acct_name, time_int
 ;
 """
-FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_title, owner_name, time_int, quota, ledger_depth)
-SELECT fisc_title, owner_name, time_int, MAX(quota), MAX(ledger_depth)
+FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_title, owner_name, time_int, quota, dealdepth)
+SELECT fisc_title, owner_name, time_int, MAX(quota), MAX(dealdepth)
 FROM fisc_dealunit_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title, owner_name, time_int

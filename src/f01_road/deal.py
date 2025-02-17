@@ -41,8 +41,8 @@ def quota_str() -> str:
     return "quota"
 
 
-def ledger_depth_str() -> str:
-    return "ledger_depth"
+def dealdepth_str() -> str:
+    return "dealdepth"
 
 
 def magnitude_str() -> str:
@@ -61,7 +61,7 @@ def fisc_title_str() -> str:
     return "fisc_title"
 
 
-DEFAULT_DEPTH_LEDGER = 2
+DEFAULT_DEALDEPTH = 2
 
 
 @dataclass
@@ -224,7 +224,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 class DealUnit:
     time_int: TimeLinePoint = None
     quota: FundNum = None
-    ledger_depth: int = None  # non-negative
+    dealdepth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
     _deal_net: dict[AcctName, FundNum] = None  # ledger of deal outcome
 
@@ -255,8 +255,8 @@ class DealUnit:
             x_dict["deal_net"] = self._deal_net
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
-        if self.ledger_depth != DEFAULT_DEPTH_LEDGER:
-            x_dict["ledger_depth"] = self.ledger_depth
+        if self.dealdepth != DEFAULT_DEALDEPTH:
+            x_dict["dealdepth"] = self.dealdepth
         return x_dict
 
     def get_json(self) -> dict[str,]:
@@ -268,17 +268,17 @@ def dealunit_shop(
     quota: FundNum = None,
     deal_net: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
-    ledger_depth: int = None,
+    dealdepth: int = None,
 ) -> DealUnit:
     if quota is None:
         quota = default_fund_pool()
-    if ledger_depth is None:
-        ledger_depth = DEFAULT_DEPTH_LEDGER
+    if dealdepth is None:
+        dealdepth = DEFAULT_DEALDEPTH
 
     return DealUnit(
         time_int=time_int,
         quota=quota,
-        ledger_depth=ledger_depth,
+        dealdepth=dealdepth,
         _deal_net=get_empty_dict_if_None(deal_net),
         _magnitude=get_0_if_None(magnitude),
     )
@@ -297,10 +297,10 @@ class BrokerUnit:
         self.deals[x_deal.time_int] = x_deal
 
     def add_deal(
-        self, x_time_int: TimeLinePoint, x_quota: FundNum, ledger_depth: int = None
+        self, x_time_int: TimeLinePoint, x_quota: FundNum, dealdepth: int = None
     ):
         dealunit = dealunit_shop(
-            time_int=x_time_int, quota=x_quota, ledger_depth=ledger_depth
+            time_int=x_time_int, quota=x_quota, dealdepth=dealdepth
         )
         self.set_deal(dealunit)
 
@@ -353,9 +353,9 @@ def get_dealunit_from_dict(x_dict: dict) -> DealUnit:
     x_quota = x_dict.get("quota")
     x_deal_net = x_dict.get("deal_net")
     x_magnitude = x_dict.get("magnitude")
-    x_ledger_depth = x_dict.get("ledger_depth")
+    x_dealdepth = x_dict.get("dealdepth")
     return dealunit_shop(
-        x_time_int, x_quota, x_deal_net, x_magnitude, ledger_depth=x_ledger_depth
+        x_time_int, x_quota, x_deal_net, x_magnitude, dealdepth=x_dealdepth
     )
 
 
