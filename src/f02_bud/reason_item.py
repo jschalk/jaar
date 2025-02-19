@@ -57,13 +57,24 @@ class FactCore:
     def get_obj_key(self) -> RoadUnit:
         return self.base
 
+    def get_tuple(self) -> tuple[RoadUnit, RoadUnit, float, float]:
+        return (self.base, self.pick, self.fopen, self.fnigh)
+
 
 @dataclass
 class FactUnit(FactCore):
     pass
 
 
-# class FactUnitsshop:
+def factunit_shop(
+    base: RoadUnit = None,
+    pick: RoadUnit = None,
+    fopen: float = None,
+    fnigh: float = None,
+) -> FactUnit:
+    return FactUnit(base=base, pick=pick, fopen=fopen, fnigh=fnigh)
+
+
 def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
@@ -90,13 +101,10 @@ def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
     return facts
 
 
-def factunit_shop(
-    base: RoadUnit = None,
-    pick: RoadUnit = None,
-    fopen: float = None,
-    fnigh: float = None,
+def get_factunit_from_tuple(
+    fact_tuple: tuple[RoadUnit, RoadUnit, float, float]
 ) -> FactUnit:
-    return FactUnit(base=base, pick=pick, fopen=fopen, fnigh=fnigh)
+    return factunit_shop(fact_tuple[0], fact_tuple[1], fact_tuple[2], fact_tuple[3])
 
 
 @dataclass
