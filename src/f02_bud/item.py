@@ -46,6 +46,7 @@ from src.f02_bud.reason_item import (
     reasonheir_shop,
     reasons_get_from_dict,
     factunits_get_from_dict,
+    get_dict_from_factunits,
 )
 from src.f02_bud.group import (
     AwardHeir,
@@ -305,8 +306,8 @@ class ItemUnit:
     def factunit_exists(self, x_base: RoadUnit) -> bool:
         return self.factunits.get(x_base) != None
 
-    def get_factunits_dict(self) -> dict[RoadUnit, FactUnit]:
-        return {hc.base: hc.get_dict() for hc in self.factunits.values()}
+    def get_factunits_dict(self) -> dict[RoadUnit, str]:
+        return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, base_factunit: FactUnit):
         # if a item is considered a task then a factheir.fopen attribute can be increased to

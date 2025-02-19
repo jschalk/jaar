@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_json, get_level1_dirs, open_json
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
-from src.f02_bud.reason_item import factunits_get_from_dict
+from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
 from src.f05_listen.hub_path import (
     DEALNODE_FILENAME,
     DEAL_BUDEVENT_FACTS_FILENAME,
@@ -12,7 +12,7 @@ from src.f05_listen.hub_path import (
 from src.f05_listen.hub_tool import get_budevent_facts
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
-from os.path import exists as os_path_exists
+from os.path import exists as os_path_exists, join as os_path_join
 from copy import copy as copy_copy
 
 
@@ -84,50 +84,10 @@ def _create_found_facts(
         deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
         nodes_quotas_dict[deal_owners_tuple] = quota_ledger_dict
 
-    nodes_weighted_facts = get_nodes_with_weighted_facts(
-        nodes_facts_dict, nodes_quotas_dict
-    )
-    print(f"{nodes_weighted_facts=}")
-    # node_be_facts_str = "node_be_facts"
-    # to_eval_facts_str = "to_eval_facts"
-    # output_facts_str = "output_facts"
-    # x_found_dict = {node_be_facts_str: {}, to_eval_facts_str: {}, output_facts_str: {}}
-
-    # for tuple_key in node_be_facts_dict:
-    #     to_eval_facts_dict[tuple_key] = {}
-
-    # sorted_owners_tuples = sorted(node_be_facts_dict.keys(), key=len)
-    # while sorted_owners_tuples != []:
-    #     # grab one of the longest length tuples
-    #     node_owners = sorted_owners_tuples.pop()
-    #     node_be_facts = node_be_facts_dict.get(node_owners)
-    #     # if node has no children set to_evaluate to it's own fact
-    #     if not to_eval_facts_dict.get(node_owners):
-
-    #         print(f"{to_eval_facts_dict=}")
-    #         to_eval_facts_dict.get(node_owners)[node_owners] = node_be_facts
-
-    #     # set it's output facts
-    #     print(f"{to_eval_facts_dict.get(node_owners)=}")
-    #     this_node_to_evaluate_dict = to_eval_facts_dict.get(node_owners)
-    #     for  this_node_to_evaluate_dict.get()
-    #     if not to_eval_facts_dict.get(node_owners):
-    #         print(f"{to_eval_facts_dict}")
-    #         to_eval_facts_dict.get(node_owners)[node_owners] = node_be_facts
-    #         print(f"{to_eval_facts_dict}")
-
-    #     # set parent_node's to_evaluate fact
-    #     if len(node_owners) > 0:
-    #         parent_node_owners = copy_copy(list(node_owners))
-    #         parent_node_owners.pop()
-    #         parent_node_owners = tuple(parent_node_owners)
-    #         to_eval_facts_dict.get(parent_node_owners)[node_owners] = node_be_facts
-    #         # print(x_found_dict)
-
-    # print(f"{to_eval_facts_dict.keys()=}")
-    # print(f"{to_eval_facts_dict.values()=}")
-    # # print(f"{budevents_dict=}")
-    # # budevent_facts_tuples
-
-    for dirpath in budevent_facts_dirs:
-        save_json(dirpath, DEAL_FOUND_FACTS_FILENAME, {})
+    nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quotas_dict)
+    output_dir_facts = {
+        os_path_join(deal_time_dir, *node_addr): get_dict_from_factunits(facts)
+        for node_addr, facts in nodes_wgt_facts.items()
+    }
+    for output_dir, output_facts_dict in output_dir_facts.items():
+        save_json(output_dir, DEAL_FOUND_FACTS_FILENAME, output_facts_dict)

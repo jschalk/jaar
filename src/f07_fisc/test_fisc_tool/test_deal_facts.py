@@ -77,48 +77,53 @@ def test_uphill_deal_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     assert open_json(bob_t5_found_path) == {}
 
 
-# def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     mstr_dir = get_test_fisc_mstr_dir()
-#     bob_str = "Bob"
-#     yao_str = "Yao"
-#     sue_str = "Sue"
-#     a23_str = "accord23"
-#     time5 = 5
-#     casa_road = create_road(a23_str, "casa")
-#     clean_road = create_road(casa_road, "clean")
-#     bob_t5_be_facts = {}
-#     bob_t5_yao_be_facts = {}
-#     bob_t5_yao_sue_be_facts = {casa_road: {base_str(): casa_road, "pick": clean_road}}
-#     das = []
-#     das_y = [yao_str]
-#     das_ys = [yao_str, sue_str]
-#     bob_t5_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-#     bob_t5_yao_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
-#     bob_t5_yao_sue_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-#     save_json(bob_t5_bef_path, None, bob_t5_be_facts)
-#     save_json(bob_t5_yao_bef_path, None, bob_t5_yao_be_facts)
-#     save_json(bob_t5_yao_sue_bef_path, None, bob_t5_yao_sue_be_facts)
-#     bob_t5_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-#     bob_t5_yao_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
-#     bob_t5_yao_sue_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-#     assert os_path_exists(bob_t5_found) is False
-#     assert os_path_exists(bob_t5_yao_found) is False
-#     assert os_path_exists(bob_t5_yao_sue_found) is False
+def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    mstr_dir = get_test_fisc_mstr_dir()
+    bob_str = "Bob"
+    yao_str = "Yao"
+    sue_str = "Sue"
+    a23_str = "accord23"
+    time5 = 5
+    casa_road = create_road(a23_str, "casa")
+    clean_road = create_road(casa_road, "clean")
+    bob_t5_be_facts = {}
+    bob_t5_yao_be_facts = {}
+    bob_t5_yao_sue_be_facts = {casa_road: {base_str(): casa_road, "pick": clean_road}}
+    das = []
+    das_y = [yao_str]
+    das_ys = [yao_str, sue_str]
+    bob_t5_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das)
+    bob_t5_yao_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
+    bob_t5_yao_sue_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
+    bob_t5_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das)
+    bob_t5_yao_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_y)
+    bob_t5_yao_sue_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_ys)
+    save_json(bob_t5_bef_path, None, bob_t5_be_facts)
+    save_json(bob_t5_yao_bef_path, None, bob_t5_yao_be_facts)
+    save_json(bob_t5_yao_sue_bef_path, None, bob_t5_yao_sue_be_facts)
+    save_json(bob_t5_quota_path, None, {yao_str: 1})
+    save_json(bob_t5_yao_quota_path, None, {sue_str: 1})
+    save_json(bob_t5_yao_sue_quota_path, None, {bob_str: 1})
+    bob_t5_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das)
+    bob_t5_yao_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
+    bob_t5_yao_sue_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
+    assert os_path_exists(bob_t5_found) is False
+    assert os_path_exists(bob_t5_yao_found) is False
+    assert os_path_exists(bob_t5_yao_sue_found) is False
 
-#     # WHEN
-#     uphill_deal_node_budevent_facts(mstr_dir, a23_str)
+    # WHEN
+    uphill_deal_node_budevent_facts(mstr_dir, a23_str)
 
-#     # THEN
-#     assert os_path_exists(bob_t5_found)
-#     assert os_path_exists(bob_t5_yao_found)
-#     assert os_path_exists(bob_t5_yao_sue_found)
-#     assert open_json(bob_t5_found) == bob_t5_yao_sue_be_facts
-#     assert open_json(bob_t5_yao_found) == bob_t5_yao_sue_be_facts
-#     assert open_json(bob_t5_yao_sue_found) == bob_t5_yao_sue_be_facts
-#     assert 1 == 2
+    # THEN
+    assert os_path_exists(bob_t5_found)
+    assert os_path_exists(bob_t5_yao_found)
+    assert os_path_exists(bob_t5_yao_sue_found)
+    assert open_json(bob_t5_found) == bob_t5_yao_sue_be_facts
+    assert open_json(bob_t5_yao_found) == bob_t5_yao_sue_be_facts
+    assert open_json(bob_t5_yao_sue_found) == bob_t5_yao_sue_be_facts
 
 
 # def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(env_dir_setup_cleanup):
