@@ -2,7 +2,6 @@ from src.f00_instrument.file import open_json, save_json
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
-    create_deal_node_json_path as node_path,
     create_deal_node_budevent_facts_path as bude_facts_path,
     create_deal_node_found_facts_path as found_facts_path,
     create_budevent_path,
