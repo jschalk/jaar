@@ -105,13 +105,10 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario5_Level2ChildHasOneFact
     bob_str = "Bob"
     yao_str = "Yao"
     clean_fact = example_casa_clean_factunit()
-    bob_yao_facts = {clean_fact.base: clean_fact}
-    bob_str = "Bob"
-    root_addr = ()
-    bob_addr = (bob_str,)
     root_addr = ()
     bob_addr = (bob_str,)
     bob_yao_addr = (bob_str, yao_str)
+    bob_yao_facts = {clean_fact.base: clean_fact}
     nodes_facts_dict = {root_addr: {}, bob_addr: {}, bob_yao_addr: bob_yao_facts}
     nodes_quota_dict = {
         root_addr: {bob_str: 1},
@@ -134,19 +131,18 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario5_Level2ChildHasOneFact
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario6_Level2ChildHasOneFact():
+def test_get_nodes_with_weighted_facts_ReturnObj_Scenario6_Level2ChildsHaveTwoFacts():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
     clean_fact = example_casa_clean_factunit()
-    bob_yao_facts = {clean_fact.base: clean_fact}
-    bob_str = "Bob"
-    root_addr = ()
-    bob_addr = (bob_str,)
+    sky_fact = example_sky_blue_factunit()
     root_addr = ()
     bob_addr = (bob_str,)
     bob_yao_addr = (bob_str, yao_str)
-    nodes_facts_dict = {root_addr: {}, bob_addr: {}, bob_yao_addr: bob_yao_facts}
+    bob_facts = {sky_fact.base: sky_fact}
+    bob_yao_facts = {clean_fact.base: clean_fact}
+    nodes_facts_dict = {root_addr: {}, bob_addr: bob_facts, bob_yao_addr: bob_yao_facts}
     nodes_quota_dict = {
         root_addr: {bob_str: 1},
         bob_addr: {yao_str: 1},
@@ -157,14 +153,102 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario6_Level2ChildHasOneFact
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
 
     # THEN
+    expected_bob_facts = {sky_fact.base: sky_fact, clean_fact.base: clean_fact}
     expected_nodes_weighted_facts = {
-        root_addr: bob_yao_facts,
-        bob_addr: bob_yao_facts,
+        root_addr: expected_bob_facts,
+        bob_addr: expected_bob_facts,
         bob_yao_addr: bob_yao_facts,
     }
     assert nodes_wgt_facts.get(bob_yao_addr) == bob_yao_facts
-    assert nodes_wgt_facts.get(bob_addr) == bob_yao_facts
-    assert nodes_wgt_facts.get(root_addr) == bob_yao_facts
+    assert nodes_wgt_facts.get(bob_addr) == expected_bob_facts
+    assert nodes_wgt_facts.get(root_addr) == expected_bob_facts
+    assert nodes_wgt_facts == expected_nodes_weighted_facts
+
+
+def test_get_nodes_with_weighted_facts_ReturnObj_Scenario7_Level2ChildFactOverridesAncestorFact():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    clean_fact = example_casa_clean_factunit()
+    dirty_fact = example_casa_dirty_factunit()
+    root_addr = ()
+    bob_addr = (bob_str,)
+    bob_yao_addr = (bob_str, yao_str)
+    dirty_facts = {dirty_fact.base: dirty_fact}
+    bob_yao_facts = {clean_fact.base: clean_fact}
+    nodes_facts_dict = {
+        root_addr: {},
+        bob_addr: dirty_facts,
+        bob_yao_addr: bob_yao_facts,
+    }
+    nodes_quota_dict = {
+        root_addr: {bob_str: 1},
+        bob_addr: {yao_str: 1},
+        bob_yao_addr: {yao_str: 1},
+    }
+
+    # WHEN
+    nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
+
+    # THEN
+    expected_clean_facts = {clean_fact.base: clean_fact}
+    expected_nodes_weighted_facts = {
+        root_addr: expected_clean_facts,
+        bob_addr: expected_clean_facts,
+        bob_yao_addr: bob_yao_facts,
+    }
+    assert nodes_wgt_facts.get(bob_yao_addr) == bob_yao_facts
+    assert nodes_wgt_facts.get(bob_addr) == expected_clean_facts
+    assert nodes_wgt_facts.get(root_addr) == expected_clean_facts
+    assert nodes_wgt_facts == expected_nodes_weighted_facts
+
+
+def test_get_nodes_with_weighted_facts_ReturnObj_Scenario8_Level2ChildHasDiffentFacts():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    sue_str = "Sue"
+    clean_fact = example_casa_clean_factunit()
+    dirty_fact = example_casa_dirty_factunit()
+    root_addr = ()
+    bob_addr = (bob_str,)
+    bob_quota_sue = 7
+    bob_quota_yao = 7
+    bob_yao_addr = (bob_str, yao_str)
+    bob_sue_addr = (bob_str, sue_str)
+    bob_facts = {}
+    bob_yao_facts = {clean_fact.base: clean_fact}
+    bob_sue_facts = {dirty_fact.base: dirty_fact}
+    nodes_facts_dict = {
+        root_addr: {},
+        bob_addr: bob_facts,
+        bob_yao_addr: bob_yao_facts,
+        bob_sue_addr: bob_sue_facts,
+    }
+    nodes_quota_dict = {
+        root_addr: {bob_str: 1},
+        bob_addr: {yao_str: bob_quota_sue, sue_str: bob_quota_yao},
+        bob_yao_addr: {yao_str: 1},
+        bob_sue_addr: {yao_str: 1},
+    }
+    assert bob_quota_sue == bob_quota_yao
+
+    # WHEN
+    nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
+
+    # THEN
+    dirty_facts = {dirty_fact.base: dirty_fact}
+    expected_clean_facts = {clean_fact.base: clean_fact}
+    expected_nodes_weighted_facts = {
+        root_addr: expected_clean_facts,
+        bob_addr: expected_clean_facts,
+        bob_yao_addr: bob_yao_facts,
+        bob_sue_addr: dirty_facts,
+    }
+    assert nodes_wgt_facts.get(bob_sue_addr) == dirty_facts
+    assert nodes_wgt_facts.get(bob_yao_addr) == expected_clean_facts
+    assert nodes_wgt_facts.get(bob_addr) == expected_clean_facts
+    assert nodes_wgt_facts.get(root_addr) == expected_clean_facts
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
