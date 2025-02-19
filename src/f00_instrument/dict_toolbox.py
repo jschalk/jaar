@@ -378,3 +378,10 @@ def get_sorted_list_of_dict_keys(
     if include_sort_values:
         sorted_keys = [[key, x_dict[key][nested_value_key]] for key in sorted_keys]
     return sorted_keys
+
+
+def get_max_key(x_dict: dict) -> any:
+    if not x_dict:
+        return None
+    max_value = max(x_dict.values())  # Find max value
+    return min((k for k in x_dict if x_dict[k] == max_value), key=lambda x: x)

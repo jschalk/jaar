@@ -30,6 +30,7 @@ from src.f00_instrument.dict_toolbox import (
     get_str_in_sub_dict,
     get_str_in_all_sub_dict,
     get_sorted_list_of_dict_keys,
+    get_max_key,
 )
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
@@ -901,3 +902,31 @@ def test_get_sorted_list_of_dict_keys_ReturnsObj_WithValues():
 
     # THEN
     assert x_list == [["Bob", 30], ["Yao", 35], ["Sue", 55]]
+
+
+def test_get_max_key_ReturnsObj_Scenario0_Empty():
+    # ESTABLISH
+    x_dict = {}
+    # WHEN / THEN
+    assert not get_max_key(x_dict)
+
+
+def test_get_max_key_ReturnsObj_Scenario1_Simple():
+    x_dict = {
+        (1, "b", 3, "z"): 2.5,
+        (1, "a", 2, "x"): 3.4,
+        (3, "c", 5, "w"): 1.8,
+    }
+    # WHEN / THEN
+    assert get_max_key(x_dict) == (1, "a", 2, "x")
+
+
+def test_get_max_key_ReturnsObj_Scenario2_TupleOrdering():
+    x_dict = {
+        (1, "b", 3, "z"): 2.5,
+        (2, "a", 1, "y"): 3.4,
+        (1, "a", 2, "x"): 3.4,
+        (3, "c", 5, "w"): 1.8,
+    }
+    # WHEN / THEN
+    assert get_max_key(x_dict) == (1, "a", 2, "x")

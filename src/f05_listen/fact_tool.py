@@ -1,15 +1,6 @@
+from src.f00_instrument.dict_toolbox import get_max_key
 from src.f01_road.road import OwnerName, RoadUnit
 from src.f02_bud.reason_item import FactUnit, get_factunit_from_tuple
-
-
-def get_max_key(x_dict: dict) -> any:
-    max_value = max(x_dict.values())  # Find max value
-    return min((k for k in x_dict if x_dict[k] == max_value), key=lambda x: x)
-    # return min((k for k in x_dict if x_dict[k] == max(x_dict.values())), key=str)
-
-
-# def temp_max_key(wgt_facts):
-#     return max(wgt_facts, key=wgt_facts.get)
 
 
 def get_nodes_with_weighted_facts(
