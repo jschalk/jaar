@@ -252,6 +252,63 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario8_Level2ChildHasDiffent
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
+def test_get_nodes_with_weighted_facts_ReturnObj_Scenario9_Level2ChildThreeChildFacts():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    sue_str = "Sue"
+    zia_str = "Zia"
+    clean_fact = example_casa_clean_factunit()
+    dirty_fact = example_casa_dirty_factunit()
+    root_addr = ()
+    bob_addr = (bob_str,)
+    bob_quota_yao = 7
+    bob_quota_sue = 5
+    bob_quota_zia = 5
+    bob_yao_addr = (bob_str, yao_str)
+    bob_sue_addr = (bob_str, sue_str)
+    bob_zia_addr = (bob_str, zia_str)
+    clean_facts = {clean_fact.base: clean_fact}
+    dirty_facts = {dirty_fact.base: dirty_fact}
+    nodes_facts_dict = {
+        root_addr: {},
+        bob_addr: {},
+        bob_yao_addr: clean_facts,
+        bob_sue_addr: dirty_facts,
+        bob_zia_addr: dirty_facts,
+    }
+    nodes_quota_dict = {
+        root_addr: {bob_str: 1},
+        bob_addr: {
+            yao_str: bob_quota_yao,
+            sue_str: bob_quota_sue,
+            zia_str: bob_quota_zia,
+        },
+        bob_yao_addr: {yao_str: 1},
+        bob_sue_addr: {yao_str: 1},
+        bob_zia_addr: {yao_str: 1},
+    }
+    assert bob_quota_yao < bob_quota_sue + bob_quota_zia
+
+    # WHEN
+    nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
+
+    # THEN
+    expected_nodes_weighted_facts = {
+        root_addr: dirty_facts,
+        bob_addr: dirty_facts,
+        bob_yao_addr: clean_facts,
+        bob_sue_addr: dirty_facts,
+        bob_zia_addr: dirty_facts,
+    }
+    assert nodes_wgt_facts.get(bob_zia_addr) == dirty_facts
+    assert nodes_wgt_facts.get(bob_sue_addr) == dirty_facts
+    assert nodes_wgt_facts.get(bob_yao_addr) == clean_facts
+    assert nodes_wgt_facts.get(bob_addr) == dirty_facts
+    assert nodes_wgt_facts.get(root_addr) == dirty_facts
+    assert nodes_wgt_facts == expected_nodes_weighted_facts
+
+
 # # for ever deal node create all factunits
 # def test_get_nodes_with_weighted_facts_SetsFiles_Scenario1_WithFacts():
 #     # ESTABLISH

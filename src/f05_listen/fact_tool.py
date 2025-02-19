@@ -21,20 +21,22 @@ def get_nodes_with_weighted_facts(
             node_addr_list = list(node_addr)
             node_addr_list.append(child_owner)
             child_addr = tuple(node_addr_list)
-            print(f"{child_addr=}")
             if child_input_facts := nodes_facts_dict.get(child_addr):
                 for child_fact in child_input_facts.values():
                     if not to_eval_temp.get(child_fact.base):
                         to_eval_temp[child_fact.base] = {}
-                    to_eval_facts = to_eval_temp.get(child_fact.base)
-                    to_eval_facts[child_fact.get_tuple()] = child_quota
-
-            print(f"{to_eval_temp=}")
+                    base_to_eval = to_eval_temp.get(child_fact.base)
+                    child_fact_tuple = child_fact.get_tuple()
+                    if not base_to_eval.get(child_fact_tuple):
+                        base_to_eval[child_fact_tuple] = 0
+                    current_fact_tuple_quota = base_to_eval.get(child_fact_tuple)
+                    base_to_eval[child_fact_tuple] = (
+                        child_quota + current_fact_tuple_quota
+                    )
 
             for node_fact in node_input_facts.values():
                 if to_eval_temp.get(node_fact.base) is None:
                     to_eval_temp[node_fact.base] = {node_fact.get_tuple(): child_quota}
-                    print(f"{node_fact.get_tuple()=}")
 
         evaluated_facts = {
             fact_base: get_factunit_from_tuple(get_max_key(wgt_facts))
