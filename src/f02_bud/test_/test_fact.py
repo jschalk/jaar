@@ -4,6 +4,7 @@ from src.f02_bud.reason_item import (
     factheir_shop,
     FactCore,
     factunits_get_from_dict,
+    get_factunit_from_tuple,
 )
 from src.f01_road.road import get_default_fisc_title as root_title, create_road
 
@@ -172,6 +173,76 @@ def test_FactUnit_find_replace_road_SetsAttrCorrectly():
     # THEN
     assert sunday_fact.base == new_weekday_road
     assert sunday_fact.pick == new_sunday_road
+
+
+def test_FactUnit_get_tuple_ReturnsObj_Scenario0_base_pick_only():
+    # ESTABLISH
+    weekday_str = "weekday"
+    weekday_road = create_road(root_title(), weekday_str)
+    sunday_str = "Sunday"
+    sunday_road = create_road(weekday_road, sunday_str)
+    sunday_fact = factunit_shop(base=weekday_road, pick=sunday_road)
+
+    # WHEN
+    sunday_tuple = sunday_fact.get_tuple()
+
+    # THEN
+    assert sunday_tuple
+    assert sunday_tuple == (weekday_road, sunday_road, None, None)
+
+
+def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
+    # ESTABLISH
+    weekday_str = "weekday"
+    weekday_road = create_road(root_title(), weekday_str)
+    sunday_str = "Sunday"
+    sunday_road = create_road(weekday_road, sunday_str)
+    sun_fopen = 6
+    sun_fnigh = 9
+    sunday_fact = factunit_shop(weekday_road, sunday_road, sun_fopen, sun_fnigh)
+
+    # WHEN
+    sunday_tuple = sunday_fact.get_tuple()
+
+    # THEN
+    assert sunday_tuple
+    assert sunday_tuple == (weekday_road, sunday_road, sun_fopen, sun_fnigh)
+
+
+def test_get_factunit_from_tuple_ReturnsObj_Scenario0_base_pick_only():
+    # ESTABLISH
+    weekday_str = "weekday"
+    weekday_road = create_road(root_title(), weekday_str)
+    sunday_str = "Sunday"
+    sunday_road = create_road(weekday_road, sunday_str)
+    sunday_fact = factunit_shop(base=weekday_road, pick=sunday_road)
+    sunday_tuple = sunday_fact.get_tuple()
+
+    # WHEN
+    gen_sunday_factunit = get_factunit_from_tuple(sunday_tuple)
+
+    # THEN
+    assert gen_sunday_factunit
+    assert gen_sunday_factunit == sunday_fact
+
+
+def test_get_factunit_from_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
+    # ESTABLISH
+    weekday_str = "weekday"
+    weekday_road = create_road(root_title(), weekday_str)
+    sunday_str = "Sunday"
+    sunday_road = create_road(weekday_road, sunday_str)
+    sun_fopen = 6
+    sun_fnigh = 9
+    sunday_fact = factunit_shop(weekday_road, sunday_road, sun_fopen, sun_fnigh)
+    sunday_tuple = sunday_fact.get_tuple()
+
+    # WHEN
+    gen_sunday_factunit = get_factunit_from_tuple(sunday_tuple)
+
+    # THEN
+    assert gen_sunday_factunit
+    assert gen_sunday_factunit == sunday_fact
 
 
 def test_FactHeir_IsModifiedByFactUnit():

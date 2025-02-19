@@ -45,7 +45,7 @@ def test_HubUnit_deal_filename_ReturnsObj():
     x_deal_filename = yao_hubunit.deal_filename()
 
     # THEN
-    assert x_deal_filename == "deal.json"
+    assert x_deal_filename == "dealunit.json"
 
 
 def test_HubUnit_deal_file_path_ReturnsObj():

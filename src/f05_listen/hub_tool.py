@@ -59,7 +59,7 @@ def get_budevents_credit_ledger(
 
 def get_budevent_facts(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
-) -> dict[RoadUnit, dict]:
+) -> dict[RoadUnit, dict[str,]]:
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
@@ -134,7 +134,11 @@ def save_arbitrary_budevent(
             credit_belief = None
         x_budunit.add_acctunit(acct_list[0], credit_belief)
     for fact_tup in facts:
-        x_budunit.add_fact(fact_tup[0], fact_tup[1], fact_tup[2], fact_tup[3], True)
+        x_base = fact_tup[0]
+        x_pick = fact_tup[1]
+        x_fopen = fact_tup[2]
+        x_fnigh = fact_tup[3]
+        x_budunit.add_fact(x_base, x_pick, x_fopen, x_fnigh, True)
     x_budevent_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
@@ -151,7 +155,7 @@ def save_arbitrary_dealnode(
     event_int: int,
 ):
     dealnode_path = create_deal_node_json_path(
-        fisc_mstr_dir, fisc_title, time_owner_name, time_int
+        fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
     )
     dealnode_dict = {
         "ancestors": deal_ancestors,

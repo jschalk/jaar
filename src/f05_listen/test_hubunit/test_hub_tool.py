@@ -9,7 +9,7 @@ from src.f05_listen.hub_path import (
     fisc_agenda_list_report_path,
     create_owners_dir_path,
     create_deals_dir_path,
-    create_deal_node_json_path,
+    create_deal_node_json_path as node_path,
     create_timepoint_dir_path,
     create_budpoint_path,
     create_owner_event_dir_path,
@@ -423,17 +423,17 @@ def test_save_arbitrary_dealnode_SetsFile_Scenario0(env_dir_setup_cleanup):
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
-    sue7_dealnode = create_deal_node_json_path(fisc_mstr_dir, a23_str, sue_str, time7)
+    sue7_dealnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7)
     event3 = 3
     das = []
-    assert os_path_exists(sue7_dealnode) is False
+    assert os_path_exists(sue7_dealnode_path) is False
 
     # WHEN
     save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, das, event3)
 
     # THEN
-    print(f"{sue7_dealnode=}")
-    assert os_path_exists(sue7_dealnode)
+    print(f"{sue7_dealnode_path=}")
+    assert os_path_exists(sue7_dealnode_path)
     expected_sue7_dealnode = {
         "ancestors": das,
         "event_int": event3,
@@ -442,4 +442,33 @@ def test_save_arbitrary_dealnode_SetsFile_Scenario0(env_dir_setup_cleanup):
         "penny": 1,
         "quota": 150,
     }
-    assert open_json(sue7_dealnode) == expected_sue7_dealnode
+    assert open_json(sue7_dealnode_path) == expected_sue7_dealnode
+
+
+def test_save_arbitrary_dealnode_SetsFile_Scenario1(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    time7 = 777000
+    sue_str = "Sue"
+    bob_str = "Bob"
+    das = [bob_str, sue_str]
+    sue7_dealnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    event3 = 3
+    assert os_path_exists(sue7_dealnode_path) is False
+
+    # WHEN
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, das, event3)
+
+    # THEN
+    print(f"{sue7_dealnode_path=}")
+    assert os_path_exists(sue7_dealnode_path)
+    expected_sue7_dealnode = {
+        "ancestors": das,
+        "event_int": event3,
+        "dealdepth": 0,
+        "owner_name": sue_str,
+        "penny": 1,
+        "quota": 150,
+    }
+    assert open_json(sue7_dealnode_path) == expected_sue7_dealnode

@@ -398,7 +398,7 @@ class HubUnit:
         return f_path(self._deals_dir, str(x_time_int))
 
     def deal_filename(self) -> str:
-        return "deal.json"
+        return "dealunit.json"
 
     def deal_file_path(self, x_time_int: TimeLinePoint) -> str:
         return f_path(self.timepoint_dir(x_time_int), self.deal_filename())
