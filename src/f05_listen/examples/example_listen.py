@@ -1,5 +1,6 @@
 from src.f01_road.road import RoadUnit, create_road, get_default_fisc_title
 from src.f02_bud.item import itemunit_shop
+from src.f02_bud.reason_item import factunit_shop, FactUnit
 from src.f02_bud.bud import budunit_shop, BudUnit
 
 
@@ -114,3 +115,24 @@ def get_example_yao_speaker() -> BudUnit:
     )
     yao_speaker.add_fact(eat_road(), hungry_road())
     return yao_speaker
+
+
+def example_casa_clean_factunit() -> FactUnit:
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    clean_road = create_road(casa_road, "clean")
+    return factunit_shop(casa_road, clean_road)
+
+
+def example_casa_dirty_factunit() -> FactUnit:
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    dirty_road = create_road(casa_road, "dirty")
+    return factunit_shop(casa_road, dirty_road)
+
+
+def example_sky_blue_factunit() -> FactUnit:
+    a23_str = "accord23"
+    sky_road = create_road(a23_str, "sky color")
+    blue_road = create_road(sky_road, "blue")
+    return factunit_shop(sky_road, blue_road)

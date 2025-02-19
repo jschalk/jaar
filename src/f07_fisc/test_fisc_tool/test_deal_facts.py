@@ -4,6 +4,7 @@ from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_deal_node_budevent_facts_path as bude_facts_path,
     create_deal_node_found_facts_path as found_facts_path,
+    create_deal_node_quota_ledger_path as quota_path,
     create_budevent_path,
 )
 from src.f05_listen.hub_tool import save_arbitrary_budevent, save_arbitrary_dealnode
@@ -25,8 +26,10 @@ def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(
     time5 = 5
     das = []
     bob_t5_be_facts_path = bude_facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
+    bob_t5_be_quota_path = quota_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
     be_facts_dict = {}
     save_json(bob_t5_be_facts_path, None, be_facts_dict)
+    save_json(bob_t5_be_quota_path, None, {})
     bob_t5_found_path = found_facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
     assert os_path_exists(bob_t5_found_path) is False
 
@@ -54,9 +57,15 @@ def test_uphill_deal_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     bob_t5_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das)
     bob_t5_yao_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
     bob_t5_yao_sue_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
+    bob_t5_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das)
+    bob_t5_yao_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_y)
+    bob_t5_yao_sue_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_ys)
     save_json(bob_t5_bef_path, None, {})
     save_json(bob_t5_yao_bef_path, None, {})
     save_json(bob_t5_yao_sue_bef_path, None, {})
+    save_json(bob_t5_quota_path, None, {})
+    save_json(bob_t5_yao_quota_path, None, {})
+    save_json(bob_t5_yao_sue_quota_path, None, {})
     bob_t5_found_path = found_facts_path(mstr_dir, a23_str, bob_str, time5, das)
     assert os_path_exists(bob_t5_found_path) is False
 

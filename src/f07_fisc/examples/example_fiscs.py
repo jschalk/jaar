@@ -254,7 +254,7 @@ def create_example_fisc4() -> FiscUnit:
     return accord_fisc
 
 
-def example_clean_factunit() -> FactUnit:
+def example_casa_clean_factunit() -> FactUnit:
     a23_str = "accord23"
     casa_road = create_road(a23_str, "casa")
     clean_road = create_road(casa_road, "clean")

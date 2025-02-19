@@ -7,7 +7,7 @@ from src.f05_listen.hub_path import (
 )
 from src.f05_listen.hub_tool import save_arbitrary_budevent, save_arbitrary_dealnode
 from src.f07_fisc.fisc_tool import create_all_deal_node_facts_files
-from src.f07_fisc.examples.example_fiscs import example_clean_factunit
+from src.f07_fisc.examples.example_fiscs import example_casa_clean_factunit
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
@@ -46,7 +46,7 @@ def test_create_all_deal_node_facts_files_SetsFiles_Scenario1_WithFacts(
     a23_str = "accord23"
     event300 = 300
     time5 = 5
-    clean_fact = example_clean_factunit()
+    clean_fact = example_casa_clean_factunit()
     x_facts = [clean_fact.get_tuple()]
     save_arbitrary_budevent(fisc_mstr_dir, a23_str, bob_str, event300, facts=x_facts)
     bob3_budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, bob_str, event300)

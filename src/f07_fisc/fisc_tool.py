@@ -1,9 +1,11 @@
 from src.f00_instrument.file import create_path, save_json, get_level1_dirs, open_json
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
+from src.f02_bud.reason_item import factunits_get_from_dict
 from src.f05_listen.hub_path import (
     DEALNODE_FILENAME,
     DEAL_BUDEVENT_FACTS_FILENAME,
     DEAL_FOUND_FACTS_FILENAME,
+    DEAL_QUOTA_LEDGER_FILENAME,
     create_deal_node_json_path,
     create_deal_node_budevent_facts_path,
 )
@@ -55,19 +57,36 @@ def uphill_deal_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
                 for dirpath, dirnames, filenames in os_walk(deal_time_dir)
                 if DEAL_BUDEVENT_FACTS_FILENAME in set(filenames)
             ]
-            _create_found_facts(deal_time_dir, budevent_facts_dirs)
+            quota_ledger_dirs = [
+                dirpath
+                for dirpath, dirnames, filenames in os_walk(deal_time_dir)
+                if DEAL_QUOTA_LEDGER_FILENAME in set(filenames)
+            ]
+            _create_found_facts(deal_time_dir, budevent_facts_dirs, quota_ledger_dirs)
 
 
-def _create_found_facts(deal_time_dir: str, budevent_facts_dirs: list[str]):
+def _create_found_facts(
+    deal_time_dir: str, budevent_facts_dirs: list[str], quota_ledger_dirs: list[str]
+):
     nodes_facts_dict = {}
     for dirpath in budevent_facts_dirs:
         budevent_facts_path = create_path(dirpath, DEAL_BUDEVENT_FACTS_FILENAME)
-        budevent_facts_dict = open_json(budevent_facts_path)
+        budevent_facts_dict = factunits_get_from_dict(open_json(budevent_facts_path))
         deal_path = dirpath.replace(deal_time_dir, "")
         deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
         nodes_facts_dict[deal_owners_tuple] = budevent_facts_dict
 
-    nodes_weighted_facts = get_nodes_with_weighted_facts(nodes_facts_dict)
+    nodes_quotas_dict = {}
+    for dirpath in quota_ledger_dirs:
+        quota_ledger_path = create_path(dirpath, DEAL_QUOTA_LEDGER_FILENAME)
+        quota_ledger_dict = open_json(quota_ledger_path)
+        deal_path = dirpath.replace(deal_time_dir, "")
+        deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
+        nodes_quotas_dict[deal_owners_tuple] = quota_ledger_dict
+
+    nodes_weighted_facts = get_nodes_with_weighted_facts(
+        nodes_facts_dict, nodes_quotas_dict
+    )
     print(f"{nodes_weighted_facts=}")
     # node_be_facts_str = "node_be_facts"
     # to_eval_facts_str = "to_eval_facts"
