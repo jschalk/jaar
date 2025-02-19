@@ -1,5 +1,7 @@
+from src.f01_road.road import create_road
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
+from src.f02_bud.reason_item import factunit_shop, FactUnit
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f07_fisc.examples.fisc_env import get_test_fisc_mstr_dir
@@ -250,3 +252,10 @@ def create_example_fisc4() -> FiscUnit:
     zia_hubunit.save_voice_bud(zia_voice_bud)
 
     return accord_fisc
+
+
+def example_clean_factunit() -> FactUnit:
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    clean_road = create_road(casa_road, "clean")
+    return factunit_shop(casa_road, clean_road)
