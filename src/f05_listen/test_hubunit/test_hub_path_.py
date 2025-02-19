@@ -6,6 +6,20 @@ from src.f01_road.jaar_config import (
     get_owners_folder,
 )
 from src.f05_listen.hub_path import (
+    FISC_FILENAME,
+    FISC_OTE1_AGG_CSV_FILENAME,
+    FISC_OTE1_AGG_JSON_FILENAME,
+    FISC_AGENDA_FULL_LISTING_FILENAME,
+    DEALUNIT_FILENAME,
+    DEALNODE_FILENAME,
+    DEAL_CREDIT_LEDGER_FILENAME,
+    DEAL_QUOTA_LEDGER_FILENAME,
+    DEAL_BUDEVENT_FACTS_FILENAME,
+    DEAL_FOUND_FACTS_FILENAME,
+    BUDPOINT_FILENAME,
+    BUDEVENT_FILENAME,
+    EVENT_ALL_GIFT_FILENAME,
+    EVENT_EXPRESSED_GIFT_FILENAME,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
@@ -19,7 +33,8 @@ from src.f05_listen.hub_path import (
     create_deal_node_json_path,
     create_deal_node_credit_ledger_path,
     create_deal_node_quota_ledger_path,
-    create_deal_node_facts_path,
+    create_deal_node_budevent_facts_path,
+    create_deal_node_found_facts_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -28,6 +43,24 @@ from src.f05_listen.hub_path import (
     create_forecast_path,
 )
 from src.f05_listen.examples.listen_env import get_listen_temp_env_dir
+
+
+def test_hub_path_constants_are_values():
+    # ESTABLISH / WHEN / THEN
+    assert FISC_FILENAME == "fisc.json"
+    assert FISC_OTE1_AGG_CSV_FILENAME == "fisc_ote1_agg.csv"
+    assert FISC_OTE1_AGG_JSON_FILENAME == "fisc_ote1_agg.json"
+    assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
+    assert DEALUNIT_FILENAME == "dealunit.json"
+    assert DEALNODE_FILENAME == "deal_node.json"
+    assert DEAL_CREDIT_LEDGER_FILENAME == "credit_ledger.json"
+    assert DEAL_QUOTA_LEDGER_FILENAME == "quota_ledger.json"
+    assert DEAL_BUDEVENT_FACTS_FILENAME == "budevent_facts.json"
+    assert DEAL_FOUND_FACTS_FILENAME == "found_facts.json"
+    assert BUDPOINT_FILENAME == "budpoint.json"
+    assert BUDEVENT_FILENAME == "bud.json"
+    assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
+    assert EVENT_EXPRESSED_GIFT_FILENAME == "expressed_gift.json"
 
 
 def test_create_fisc_json_path_ReturnObj():
@@ -41,7 +74,7 @@ def test_create_fisc_json_path_ReturnObj():
     # THEN
     fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_path = create_path(fiscs_dir, a23_str)
-    expected_a23_json_path = create_path(a23_path, "fisc.json")
+    expected_a23_json_path = create_path(a23_path, FISC_FILENAME)
     assert gen_a23_json_path == expected_a23_json_path
 
 
@@ -56,7 +89,7 @@ def test_create_fisc_ote1_csv_path_ReturnObj():
     # THEN
     fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_path = create_path(fiscs_dir, a23_str)
-    expected_a23_te_path = create_path(a23_path, "fisc_ote1_agg.csv")
+    expected_a23_te_path = create_path(a23_path, FISC_OTE1_AGG_CSV_FILENAME)
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
@@ -71,7 +104,7 @@ def test_create_fisc_ote1_json_path_ReturnObj():
     # THEN
     fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_path = create_path(fiscs_dir, a23_str)
-    expected_a23_te_path = create_path(a23_path, "fisc_ote1_agg.json")
+    expected_a23_te_path = create_path(a23_path, FISC_OTE1_AGG_JSON_FILENAME)
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
@@ -86,7 +119,9 @@ def test_fisc_agenda_list_report_path_ReturnObj():
     # THEN
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     a23_path = create_path(fiscs_dir, a23_str)
-    expected_a23_agenda_full_path = create_path(a23_path, "agenda_full_listing.csv")
+    expected_a23_agenda_full_path = create_path(
+        a23_path, FISC_AGENDA_FULL_LISTING_FILENAME
+    )
     assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
@@ -164,7 +199,7 @@ def test_create_root_deal_json_path_ReturnObj():
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_deal_path_dir = create_path(timepoint_dir, "deal.json")
+    expected_deal_path_dir = create_path(timepoint_dir, DEALUNIT_FILENAME)
     assert gen_deal_path == expected_deal_path_dir
 
 
@@ -187,7 +222,7 @@ def test_create_budpoint_path_ReturnObj():
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_budpoint_path_dir = create_path(timepoint_dir, "budpoint.json")
+    expected_budpoint_path_dir = create_path(timepoint_dir, BUDPOINT_FILENAME)
     assert gen_budpoint_path == expected_budpoint_path_dir
 
 
@@ -271,7 +306,7 @@ def test_create_deal_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_deal_node_path_dir = create_path(timepoint_dir, "deal_node.json")
+    expected_deal_node_path_dir = create_path(timepoint_dir, DEALNODE_FILENAME)
     assert gen_deal_node_path == expected_deal_node_path_dir
 
 
@@ -294,7 +329,7 @@ def test_create_deal_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_node_path = create_path(tp_yao_bob_dir, "deal_node.json")
+    expected_deal_node_path = create_path(tp_yao_bob_dir, DEALNODE_FILENAME)
     assert gen_deal_node_path == expected_deal_node_path
 
 
@@ -317,7 +352,9 @@ def test_create_deal_node_credit_ledger_path_ReturnObj_Scenario1_Three_deal_ance
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_credit_ledger_path = create_path(tp_yao_bob_dir, "credit_ledger.json")
+    expected_deal_credit_ledger_path = create_path(
+        tp_yao_bob_dir, DEAL_CREDIT_LEDGER_FILENAME
+    )
     assert gen_deal_credit_ledger_path == expected_deal_credit_ledger_path
 
 
@@ -340,11 +377,13 @@ def test_create_deal_node_quota_ledger_path_ReturnObj_Scenario1_Three_deal_ances
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_quota_ledger_path = create_path(tp_yao_bob_dir, "quota_ledger.json")
+    expected_deal_quota_ledger_path = create_path(
+        tp_yao_bob_dir, DEAL_QUOTA_LEDGER_FILENAME
+    )
     assert gen_deal_quota_ledger_path == expected_deal_quota_ledger_path
 
 
-def test_create_deal_node_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
+def test_create_deal_node_budevent_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -355,7 +394,7 @@ def test_create_deal_node_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_facts_path = create_deal_node_facts_path(
+    gen_deal_facts_path = create_deal_node_budevent_facts_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
@@ -363,7 +402,30 @@ def test_create_deal_node_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
     timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_facts_path = create_path(tp_yao_bob_dir, "facts.json")
+    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_BUDEVENT_FACTS_FILENAME)
+    assert gen_deal_facts_path == expected_deal_facts_path
+
+
+def test_create_deal_node_found_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    tp7 = 7
+    yao_str = "Yao"
+    bob_str = "Bob"
+    deal_ancestors = [yao_str, bob_str]
+
+    # WHEN
+    gen_deal_facts_path = create_deal_node_found_facts_path(
+        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
+    )
+
+    # THEN
+    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(timepoint_dir, yao_str)
+    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
+    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_FOUND_FACTS_FILENAME)
     assert gen_deal_facts_path == expected_deal_facts_path
 
 
@@ -408,7 +470,7 @@ def test_create_budevent_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_bud_path = create_path(a23_bob_e3_dir, "bud.json")
+    expected_a23_bob_e3_bud_path = create_path(a23_bob_e3_dir, BUDEVENT_FILENAME)
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_bud_path
 
 
@@ -431,7 +493,9 @@ def test_create_event_all_gift_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_all_gift_path = create_path(a23_bob_e3_dir, "all_gift.json")
+    expected_a23_bob_e3_all_gift_path = create_path(
+        a23_bob_e3_dir, EVENT_ALL_GIFT_FILENAME
+    )
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_gift_path
 
 
@@ -454,10 +518,10 @@ def test_create_event_expressed_gift_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_all_gift_path = create_path(
-        a23_bob_e3_dir, "expressed_gift.json"
+    expected_a23_bob_e3_expressed_gift_path = create_path(
+        a23_bob_e3_dir, EVENT_EXPRESSED_GIFT_FILENAME
     )
-    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_gift_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_gift_path
 
 
 def test_create_voice_path_ReturnObj():
