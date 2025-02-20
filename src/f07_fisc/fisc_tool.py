@@ -1,4 +1,10 @@
-from src.f00_instrument.file import create_path, save_json, get_level1_dirs, open_json
+from src.f00_instrument.file import (
+    create_path,
+    save_json,
+    get_level1_dirs,
+    open_json,
+    save_file,
+)
 from src.f01_road.deal import (
     allot_scale,
     DealUnit,
@@ -8,14 +14,18 @@ from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factu
 from src.f05_listen.hub_path import (
     DEALNODE_FILENAME,
     DEAL_BUDEVENT_FACTS_FILENAME,
+    DEAL_BUDADJUST_FILENAME,
     DEAL_FOUND_FACTS_FILENAME,
     DEAL_QUOTA_LEDGER_FILENAME,
     create_deal_node_json_path,
+    create_budevent_path,
+    create_deal_node_budadjust_path,
     create_deal_node_budevent_facts_path,
     create_deal_node_credit_ledger_path,
     create_deal_node_quota_ledger_path,
 )
 from src.f05_listen.hub_tool import (
+    open_bud_file,
     get_budevent_facts,
     collect_owner_event_dir_sets,
     get_budevents_credit_ledger,
@@ -174,3 +184,32 @@ def _create_found_facts(
     }
     for output_dir, output_facts_dict in output_dir_facts.items():
         save_json(output_dir, DEAL_FOUND_FACTS_FILENAME, output_facts_dict)
+
+
+def create_deal_node_budadjusts(fisc_mstr_dir: str, fisc_title: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    for owner_name in get_level1_dirs(owners_dir):
+        owner_dir = create_path(owners_dir, owner_name)
+        deals_dir = create_path(owner_dir, "deals")
+        for time_int in get_level1_dirs(deals_dir):
+            deal_time_dir = create_path(deals_dir, time_int)
+            for dirpath, dirnames, filenames in os_walk(deal_time_dir):
+                if DEALNODE_FILENAME in set(filenames):
+                    create_and_save_budadjust_file(
+                        fisc_mstr_dir, fisc_title, owner_name, dirpath
+                    )
+
+
+def create_and_save_budadjust_file(fisc_mstr_dir, fisc_title, owner_name, dirpath):
+    deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
+    deal_node_dict = open_json(deal_node_json_path)
+    deal_node_owner_name = deal_node_dict.get("owner_name")
+    deal_node_event_int = deal_node_dict.get("event_int")
+    budevent_json_path = create_budevent_path(
+        fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int
+    )
+    budevent = open_bud_file(budevent_json_path)
+    budadjust_path = create_path(dirpath, DEAL_BUDADJUST_FILENAME)
+    save_file(budadjust_path, None, budevent.get_json())

@@ -3,7 +3,7 @@ from src.f02_bud.item import itemunit_shop
 from src.f02_bud.reason_item import reasonunit_shop
 from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels,
-    get_budunit_mop_example1,
+    get_mop_with_reason_budunit_example1,
 )
 
 
@@ -88,7 +88,7 @@ def test_BudUnit_get_relevant_roads_ReturnsSimpleReasonUnitBase():
 
 def test_BudUnit_get_relevant_roads_ReturnsReasonUnitBaseAndDescendents():
     # ESTABLISH
-    x_bud = get_budunit_mop_example1()
+    x_bud = get_mop_with_reason_budunit_example1()
     casa_str = "casa"
     casa_road = x_bud.make_l1_road(casa_str)
     floor_str = "mop floor"

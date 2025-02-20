@@ -10,6 +10,7 @@ DEALNODE_FILENAME = "deal_node.json"
 DEAL_CREDIT_LEDGER_FILENAME = "credit_ledger.json"
 DEAL_QUOTA_LEDGER_FILENAME = "quota_ledger.json"
 DEAL_BUDEVENT_FACTS_FILENAME = "budevent_facts.json"
+DEAL_BUDADJUST_FILENAME = "budadjust.json"
 DEAL_FOUND_FACTS_FILENAME = "found_facts.json"
 BUDPOINT_FILENAME = "budpoint.json"
 BUDEVENT_FILENAME = "bud.json"
@@ -163,6 +164,20 @@ def create_deal_node_budevent_facts_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
     return create_path(timepoint_dir, "budevent_facts.json")
+
+
+def create_deal_node_budadjust_path(
+    fisc_mstr_dir: str,
+    fisc_title: TitleUnit,
+    owner_name: OwnerName,
+    time_int: int,
+    deal_ancestors: list[OwnerName] = None,
+):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\budadjust.json"""
+    timepoint_dir = create_deal_node_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
+    )
+    return create_path(timepoint_dir, "budadjust.json")
 
 
 def create_deal_node_found_facts_path(

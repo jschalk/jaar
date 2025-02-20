@@ -303,7 +303,7 @@ def get_budunit_irrational_example() -> BudUnit:
     return hatter_bud
 
 
-def get_budunit_mop_example1():
+def get_mop_with_reason_budunit_example1():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
