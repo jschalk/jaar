@@ -1,4 +1,8 @@
 from src.f00_instrument.file import create_path, save_json, get_level1_dirs, open_json
+from src.f01_road.deal import (
+    allot_scale,
+    DealUnit,
+)
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
 from src.f05_listen.hub_path import (
@@ -8,12 +12,91 @@ from src.f05_listen.hub_path import (
     DEAL_QUOTA_LEDGER_FILENAME,
     create_deal_node_json_path,
     create_deal_node_budevent_facts_path,
+    create_deal_node_credit_ledger_path,
+    create_deal_node_quota_ledger_path,
 )
-from src.f05_listen.hub_tool import get_budevent_facts
+from src.f05_listen.hub_tool import (
+    get_budevent_facts,
+    collect_owner_event_dir_sets,
+    get_budevents_credit_ledger,
+    get_owners_downhill_event_ints,
+)
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
 from os.path import exists as os_path_exists, join as os_path_join
 from copy import copy as copy_copy
+
+
+def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    for owner_name in get_level1_dirs(owners_dir):
+        owner_dir = create_path(owners_dir, owner_name)
+        deals_dir = create_path(owner_dir, "deals")
+        for time_int in get_level1_dirs(deals_dir):
+            create_deal_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
+
+
+def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
+    root_deal_json_path = create_deal_node_json_path(
+        fisc_mstr_dir, fisc_title, time_owner_name, time_int
+    )
+    if os_path_exists(root_deal_json_path):
+        root_deal_dict = open_json(root_deal_json_path)
+        deals_to_evaluate = [root_deal_dict]
+        owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
+        while deals_to_evaluate != []:
+            parent_deal = deals_to_evaluate.pop()
+            parent_event_int = parent_deal.get("event_int")
+            parent_dealdepth = parent_deal.get("dealdepth")
+            parent_owner_name = parent_deal.get("owner_name")
+            parent_quota = parent_deal.get("quota")
+            parent_penny = parent_deal.get("penny")
+            parent_ancestors = parent_deal.get("ancestors")
+            parent_credit_ledger = get_budevents_credit_ledger(
+                fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
+            )
+            path_ancestors = parent_ancestors[1:]
+            parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
+                fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
+            )
+            save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
+            parent_quota_ledger_path = create_deal_node_quota_ledger_path(
+                fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
+            )
+            parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
+            save_json(parent_quota_ledger_path, None, parent_quota_ledger)
+            if parent_dealdepth > 0:
+                child_dealdepth = parent_dealdepth - 1
+                parent_credit_owners = set(parent_credit_ledger.keys())
+                owners_downhill_events_ints = get_owners_downhill_event_ints(
+                    owner_events_sets, parent_credit_owners, parent_event_int
+                )
+                for quota_owner, quota_amount in parent_quota_ledger.items():
+                    if downhill_event_int := owners_downhill_events_ints.get(
+                        quota_owner
+                    ):
+                        if quota_amount > 0:
+                            child_ancestors = list(copy_copy(parent_ancestors))
+                            child_ancestors.append(quota_owner)
+                            child_deal_node = {
+                                "ancestors": child_ancestors,
+                                "event_int": downhill_event_int,
+                                "dealdepth": child_dealdepth,
+                                "owner_name": quota_owner,
+                                "penny": parent_penny,
+                                "quota": quota_amount,
+                            }
+                            child_deal_json_path = create_deal_node_json_path(
+                                fisc_mstr_dir,
+                                fisc_title,
+                                time_owner_name,
+                                time_int,
+                                child_ancestors[1:],
+                            )
+                            save_json(child_deal_json_path, None, child_deal_node)
+                            deals_to_evaluate.append(child_deal_node)
 
 
 def create_all_deal_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):

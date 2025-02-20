@@ -14,7 +14,6 @@ from src.f00_instrument.db_toolbox import (
     save_to_split_csvs,
 )
 from src.f01_road.road import FaceName, EventInt, OwnerName, FiscTitle
-from src.f01_road.finance import TimeLinePoint
 from src.f02_bud.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
@@ -26,13 +25,10 @@ from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
 from src.f05_listen.hub_path import (
     create_voice_path,
-    create_fisc_json_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
     create_budevent_path,
-    create_budpoint_path,
-    create_deal_node_json_path,
 )
 from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
@@ -40,7 +36,10 @@ from src.f05_listen.hub_tool import (
 )
 from src.f07_fisc.fisc import (
     get_from_standard as fiscunit_get_from_standard,
+)
+from src.f07_fisc.fisc_tool import (
     create_fisc_owners_deal_trees,
+    uphill_deal_node_budevent_facts,
 )
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -97,7 +96,7 @@ from src.f10_etl.pidgin_agg import (
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection
-from copy import deepcopy as copy_deepcopy, copy as copy_copy
+from copy import deepcopy as copy_deepcopy
 
 
 class not_given_pidgin_dimen_Exception(Exception):
@@ -915,6 +914,12 @@ def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title)
+
+
+def etl_uphill_deal_node_budevent_facts(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        uphill_deal_node_budevent_facts(fisc_mstr_dir, fisc_title)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
