@@ -5,7 +5,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_budadjust_path as budadjust_path,
     create_deal_node_found_facts_path as found_facts_path,
 )
-from src.f05_listen.hub_tool import save_arbitrary_dealnode
+from src.f05_listen.hub_tool import save_arbitrary_dealnode, open_bud_file
 from src.f07_fisc.fisc_tool import create_deal_node_budadjusts
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
@@ -49,34 +49,47 @@ def get_bob_mop_with_reason_budunit_example() -> BudUnit:
     return bob_bud
 
 
+def get_bob_mop_fact_clean_budunit_example() -> BudUnit:
+    bob_bud = get_bob_mop_with_reason_budunit_example()
+    casa_road = bob_bud.make_l1_road("casa")
+    floor_road = bob_bud.make_road(casa_road, "floor status")
+    clean_road = bob_bud.make_road(floor_road, "clean")
+    bob_bud.add_fact(floor_road, clean_road)
+    return bob_bud
+
+
 def get_yao_run_with_reason_budunit_example() -> BudUnit:
     yao_bud = budunit_shop("Yao", "accord23")
     sport_str = "sport"
     participate_str = "participate"
-    skiing_str = "skiing"
-    running_str = "running"
+    ski_str = "skiing"
+    run_str = "running"
     weather_str = "weather"
     raining_str = "raining"
     snowing_str = "snowing"
     sport_road = yao_bud.make_l1_road(sport_str)
     participate_road = yao_bud.make_road(sport_road, participate_str)
-    skiing_road = yao_bud.make_road(participate_road, skiing_str)
-    running_road = yao_bud.make_road(participate_road, running_str)
+    ski_road = yao_bud.make_road(participate_road, ski_str)
+    run_road = yao_bud.make_road(participate_road, run_str)
     weather_road = yao_bud.make_l1_road(weather_str)
-    raining_road = yao_bud.make_road(weather_road, raining_str)
-    snowing_road = yao_bud.make_road(weather_road, snowing_str)
+    rain_road = yao_bud.make_road(weather_road, raining_str)
+    snow_road = yao_bud.make_road(weather_road, snowing_str)
     yao_bud.add_item(participate_road)
-    yao_bud.add_item(skiing_road, pledge=True)
-    yao_bud.add_item(running_road, pledge=True)
+    yao_bud.add_item(ski_road, 5, pledge=True)
+    yao_bud.add_item(run_road, 1, pledge=True)
     yao_bud.add_item(weather_road)
-    yao_bud.add_item(raining_road)
-    yao_bud.add_item(snowing_road)
-    yao_bud.edit_item_attr(
-        skiing_road, reason_base=weather_road, reason_premise=snowing_road
-    )
-    yao_bud.edit_item_attr(
-        running_road, reason_base=weather_road, reason_premise=raining_road
-    )
+    yao_bud.add_item(rain_road)
+    yao_bud.add_item(snow_road)
+    yao_bud.edit_item_attr(ski_road, reason_base=weather_road, reason_premise=snow_road)
+    yao_bud.edit_item_attr(run_road, reason_base=weather_road, reason_premise=rain_road)
+    return yao_bud
+
+
+def get_yao_run_rain_fact_budunit_example() -> BudUnit:
+    yao_bud = get_yao_run_with_reason_budunit_example()
+    weather_road = yao_bud.make_l1_road("weather")
+    rain_road = yao_bud.make_road(weather_road, "raining")
+    yao_bud.add_fact(weather_road, rain_road)
     return yao_bud
 
 
@@ -102,14 +115,14 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     bob_tp5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
     save_json(bob_tp5_found, None, bob_tp5_found_facts)
     # create paths for budadjusts
-    bob_tp5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-    assert os_path_exists(bob_tp5_budadjust_path) is False
+    bob_tp5_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+    assert os_path_exists(bob_tp5_adjust_path) is False
 
     # WHEN
     create_deal_node_budadjusts(mstr_dir, a23_str)
 
     # THEN
-    assert os_path_exists(bob_tp5_budadjust_path)
+    assert os_path_exists(bob_tp5_adjust_path)
 
 
 def test_create_budadjusts_SetsFiles_Scenario1_TwoNodesNoFacts(env_dir_setup_cleanup):
@@ -140,14 +153,72 @@ def test_create_budadjusts_SetsFiles_Scenario1_TwoNodesNoFacts(env_dir_setup_cle
     save_json(bob_tp5_found, None, bob_tp5_found_facts)
     save_json(bob_tp5_yao_found, None, bob_tp5_yao_found_facts)
     # create paths for budadjusts
-    bob_tp5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+    bob_tp5_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
     bob_tp5_yao_budadjust_p = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
-    assert os_path_exists(bob_tp5_budadjust_path) is False
+    assert os_path_exists(bob_tp5_adjust_path) is False
     assert os_path_exists(bob_tp5_yao_budadjust_p) is False
 
     # WHEN
     create_deal_node_budadjusts(mstr_dir, a23_str)
 
     # THEN
-    assert os_path_exists(bob_tp5_budadjust_path)
+    assert os_path_exists(bob_tp5_adjust_path)
     assert os_path_exists(bob_tp5_yao_budadjust_p)
+
+
+def test_create_budadjusts_SetsFiles_Scenario1_TwoNodesWithFacts(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord"
+    tp5 = 5
+    bob_str = "Bob"
+    yao_str = "Yao"
+    das = []
+    das_yao = [yao_str]
+    event7 = 7
+    # create deal_node files
+    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, das, event7)
+    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, das_yao, event7)
+    # create budevent files
+    bob_mop_budunit = get_bob_mop_fact_clean_budunit_example()
+    yao_run_budunit = get_yao_run_rain_fact_budunit_example()
+    bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
+    yao7_budevent_path = create_budevent_path(mstr_dir, a23_str, yao_str, event7)
+    save_file(bob7_budevent_path, None, bob_mop_budunit.get_json())
+    save_file(yao7_budevent_path, None, yao_run_budunit.get_json())
+    # create found_facts files
+    casa_road = bob_mop_budunit.make_l1_road("casa")
+    floor_road = bob_mop_budunit.make_road(casa_road, "floor status")
+    dirty_road = bob_mop_budunit.make_road(floor_road, "dirty")
+    weather_road = yao_run_budunit.make_l1_road("weather")
+    snow_road = yao_run_budunit.make_road(weather_road, "snowing")
+    bob5_found_facts = {floor_road: {"base": floor_road, "pick": dirty_road}}
+    bob5_yao_found_facts = {weather_road: {"base": weather_road, "pick": snow_road}}
+    bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
+    bob5_yao_found_path = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
+    print(f"{bob5_yao_found_path=}")
+    save_json(bob5_found, None, bob5_found_facts)
+    save_json(bob5_yao_found_path, None, bob5_yao_found_facts)
+    # create paths for budadjusts
+    bob5_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+    bob5_yao_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
+    assert os_path_exists(bob5_adjust_path) is False
+    assert os_path_exists(bob5_yao_adjust_path) is False
+    assert bob_mop_budunit.get_factunits_dict() != bob5_found_facts
+    assert yao_run_budunit.get_factunits_dict() != bob5_yao_found_facts
+
+    # WHEN
+    create_deal_node_budadjusts(mstr_dir, a23_str)
+
+    # THEN
+    assert os_path_exists(bob5_adjust_path)
+    assert os_path_exists(bob5_yao_adjust_path)
+    bob5_budadjust = open_bud_file(bob5_adjust_path)
+    bob5_yao_budadjust = open_bud_file(bob5_yao_adjust_path)
+    print(f"{bob5_yao_budadjust.get_item_dict().keys()=}")
+    print(f"{bob5_yao_budadjust.get_factunits_dict().keys()=}")
+    assert bob5_budadjust.get_factunits_dict() == bob5_found_facts
+    assert bob5_budadjust.get_fact(floor_road).pick == dirty_road
+    assert bob5_yao_budadjust.get_factunits_dict() != {}
+    assert bob5_found_facts == bob5_budadjust.get_factunits_dict()
+    assert bob5_yao_found_facts == bob5_yao_budadjust.get_factunits_dict()

@@ -1079,11 +1079,8 @@ def get_obj_from_item_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             else originunit_shop()
         )
     elif dict_key == "factunits":
-        return (
-            factunits_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) is not None
-            else factunits_get_from_dict({})
-        )
+        facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))
+        return factunits_get_from_dict(facts_dict)
     elif dict_key == "awardlinks":
         return (
             awardlinks_get_from_dict(x_dict[dict_key])

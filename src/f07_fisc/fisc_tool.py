@@ -11,6 +11,7 @@ from src.f01_road.deal import (
 )
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
+from src.f02_bud.bud_tool import set_factunits_to_bud
 from src.f05_listen.hub_path import (
     DEALNODE_FILENAME,
     DEAL_BUDEVENT_FACTS_FILENAME,
@@ -21,6 +22,7 @@ from src.f05_listen.hub_path import (
     create_budevent_path,
     create_deal_node_budadjust_path,
     create_deal_node_budevent_facts_path,
+    create_deal_node_found_facts_path,
     create_deal_node_credit_ledger_path,
     create_deal_node_quota_ledger_path,
 )
@@ -205,11 +207,15 @@ def create_deal_node_budadjusts(fisc_mstr_dir: str, fisc_title: str):
 def create_and_save_budadjust_file(fisc_mstr_dir, fisc_title, owner_name, dirpath):
     deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
     deal_node_dict = open_json(deal_node_json_path)
-    deal_node_owner_name = deal_node_dict.get("owner_name")
+    ancestors = deal_node_dict.get("ancestors")
+    deal_node_owner_name = ancestors.pop() if ancestors else owner_name
     deal_node_event_int = deal_node_dict.get("event_int")
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int
     )
-    budevent = open_bud_file(budevent_json_path)
+    budadjust_unit = open_bud_file(budevent_json_path)
+    found_facts_path = create_path(dirpath, DEAL_FOUND_FACTS_FILENAME)
+    found_facts_dict = open_json(found_facts_path)
+    set_factunits_to_bud(budadjust_unit, found_facts_dict)
     budadjust_path = create_path(dirpath, DEAL_BUDADJUST_FILENAME)
-    save_file(budadjust_path, None, budevent.get_json())
+    save_file(budadjust_path, None, budadjust_unit.get_json())

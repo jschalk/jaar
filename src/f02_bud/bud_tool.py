@@ -4,7 +4,12 @@ from src.f01_road.road import AcctName, FiscTitle, RoadUnit
 from src.f02_bud.acct import AcctUnit
 from src.f02_bud.group import MemberShip, AwardLink
 from src.f02_bud.item import ItemUnit
-from src.f02_bud.reason_item import ReasonUnit, FactUnit, PremiseUnit
+from src.f02_bud.reason_item import (
+    ReasonUnit,
+    FactUnit,
+    PremiseUnit,
+    factunits_get_from_dict,
+)
 from src.f02_bud.bud import BudUnit
 
 
@@ -250,3 +255,19 @@ def get_credit_ledger(x_bud: BudUnit) -> dict[AcctUnit, RespectNum]:
 
 def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[RoadUnit, dict[str,]]:
     return x_bud.get_factunits_dict()
+
+
+def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
+    factunits_dict = factunits_get_from_dict(x_facts_dict)
+    missing_fact_bases = set(x_bud.get_missing_fact_bases().keys())
+    not_missing_fact_bases = set(x_bud.get_factunits_dict().keys())
+    bud_fact_bases = not_missing_fact_bases.union(missing_fact_bases)
+    for factunit in factunits_dict.values():
+        if factunit.base in bud_fact_bases:
+            x_bud.add_fact(
+                factunit.base,
+                factunit.pick,
+                factunit.fopen,
+                factunit.fnigh,
+                create_missing_items=True,
+            )
