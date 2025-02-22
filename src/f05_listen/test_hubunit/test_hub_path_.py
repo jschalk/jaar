@@ -11,6 +11,7 @@ from src.f05_listen.hub_path import (
     FISC_OTE1_AGG_JSON_FILENAME,
     FISC_AGENDA_FULL_LISTING_FILENAME,
     DEALUNIT_FILENAME,
+    DEAL_ACCT_LEDGER_FILENAME,
     DEALNODE_FILENAME,
     DEAL_CREDIT_LEDGER_FILENAME,
     DEAL_QUOTA_LEDGER_FILENAME,
@@ -30,6 +31,7 @@ from src.f05_listen.hub_path import (
     create_deals_dir_path,
     create_timepoint_dir_path,
     create_root_deal_json_path,
+    create_root_acct_ledger_json_path,
     create_budpoint_path,
     create_deal_node_dir_path,
     create_deal_node_json_path,
@@ -56,6 +58,7 @@ def test_hub_path_constants_are_values():
     assert FISC_OTE1_AGG_JSON_FILENAME == "fisc_ote1_agg.json"
     assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
     assert DEALUNIT_FILENAME == "dealunit.json"
+    assert DEAL_ACCT_LEDGER_FILENAME == "deal_acct_ledger.json"
     assert DEALNODE_FILENAME == "deal_node.json"
     assert DEAL_CREDIT_LEDGER_FILENAME == "credit_ledger.json"
     assert DEAL_QUOTA_LEDGER_FILENAME == "quota_ledger.json"
@@ -206,6 +209,29 @@ def test_create_root_deal_json_path_ReturnObj():
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
     expected_deal_path_dir = create_path(timepoint_dir, DEALUNIT_FILENAME)
+    assert gen_deal_path == expected_deal_path_dir
+
+
+def test_create_root_acct_ledger_json_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    timepoint7 = 7
+
+    # WHEN
+    gen_deal_path = create_root_acct_ledger_json_path(
+        x_fisc_mstr_dir, a23_str, sue_str, timepoint7
+    )
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, a23_str)
+    owners_dir = create_path(accord23_dir, get_owners_folder())
+    sue_dir = create_path(owners_dir, sue_str)
+    deals_dir = create_path(sue_dir, "deals")
+    timepoint_dir = create_path(deals_dir, timepoint7)
+    expected_deal_path_dir = create_path(timepoint_dir, DEAL_ACCT_LEDGER_FILENAME)
     assert gen_deal_path == expected_deal_path_dir
 
 

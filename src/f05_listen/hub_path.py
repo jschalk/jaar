@@ -7,6 +7,7 @@ FISC_OTE1_AGG_JSON_FILENAME = "fisc_ote1_agg.json"
 FISC_AGENDA_FULL_LISTING_FILENAME = "agenda_full_listing.csv"
 DEALUNIT_FILENAME = "dealunit.json"
 DEALNODE_FILENAME = "deal_node.json"
+DEAL_ACCT_LEDGER_FILENAME = "deal_acct_ledger.json"
 DEAL_CREDIT_LEDGER_FILENAME = "credit_ledger.json"
 DEAL_QUOTA_LEDGER_FILENAME = "quota_ledger.json"
 DEAL_BUDEVENT_FACTS_FILENAME = "budevent_facts.json"
@@ -81,6 +82,16 @@ def create_root_deal_json_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int
     )
     return create_path(timepoint_dir, "dealunit.json")
+
+
+def create_root_acct_ledger_json_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
+) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\deal_acct_ledger.json"""
+    timepoint_dir = create_timepoint_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int
+    )
+    return create_path(timepoint_dir, "deal_acct_ledger.json")
 
 
 def create_budpoint_path(
