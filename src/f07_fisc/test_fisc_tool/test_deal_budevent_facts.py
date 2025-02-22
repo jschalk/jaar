@@ -24,7 +24,7 @@ def test_create_all_deal_node_facts_files_SetsFiles_Scenario0_NoFacts(
     save_arbitrary_budevent(fisc_mstr_dir, a23_str, bob_str, event300)
     bob3_budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, bob_str, event300)
     print(f"{bob3_budevent_path=}")
-    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, [], event300)
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, event300, [])
     bob_t5_facts_path = bude_facts_path(fisc_mstr_dir, a23_str, bob_str, time5)
     # print(f" {bob_t5_facts_path=}")
     assert os_path_exists(bob_t5_facts_path) is False
@@ -51,7 +51,7 @@ def test_create_all_deal_node_facts_files_SetsFiles_Scenario1_WithFacts(
     save_arbitrary_budevent(fisc_mstr_dir, a23_str, bob_str, event300, facts=x_facts)
     bob3_budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, bob_str, event300)
     print(f"{bob3_budevent_path=}")
-    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, [], event300)
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, event300, [])
     bob_t5_facts_path = bude_facts_path(fisc_mstr_dir, a23_str, bob_str, time5)
     # print(f" {bob_t5_facts_path=}")
     assert os_path_exists(bob_t5_facts_path) is False
@@ -79,7 +79,7 @@ def test_create_all_deal_node_facts_files_SetsFiles_Scenario2_WithFacts_NotAtRoo
     save_arbitrary_budevent(fisc_mstr_dir, a23_str, bob_str, event300, facts=x_facts)
     yao_str = "Yao"
     das = [yao_str, bob_str]
-    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, das, event300)
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, event300, das)
     bob_t5_facts_path = bude_facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
     print(f" {bob_t5_facts_path=}")
     assert os_path_exists(bob_t5_facts_path) is False

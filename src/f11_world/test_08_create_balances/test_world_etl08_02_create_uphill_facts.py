@@ -6,8 +6,8 @@ from src.f05_listen.hub_path import (
     create_deal_node_found_facts_path as found_facts_path,
     create_deal_node_quota_ledger_path as quota_path,
 )
-from src.f07_fisc.fisc_tool import uphill_deal_node_budevent_facts
-from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
+from src.f11_world.world import worldunit_shop
+from src.f11_world.examples.world_env import env_dir_setup_cleanup, get_test_worlds_dir
 from os.path import exists as os_path_exists
 
 
@@ -15,9 +15,10 @@ def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
-    bob_str = "Bob"
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
+    bob_str = "Bob"
     time5 = 5
     das = []
     bob_t5_be_facts_path = bude_facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
@@ -29,7 +30,7 @@ def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(
     assert os_path_exists(bob_t5_found_path) is False
 
     # WHEN
-    uphill_deal_node_budevent_facts(fisc_mstr_dir, a23_str)
+    fizz_world.uphill_deal_node_budevent_facts()
 
     # THEN
     assert os_path_exists(bob_t5_found_path)
@@ -40,7 +41,8 @@ def test_uphill_deal_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    fizz_world = worldunit_shop("fizz")
+    mstr_dir = fizz_world._fisc_mstr_dir
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"
@@ -65,7 +67,7 @@ def test_uphill_deal_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     assert os_path_exists(bob_t5_found_path) is False
 
     # WHEN
-    uphill_deal_node_budevent_facts(mstr_dir, a23_str)
+    fizz_world.uphill_deal_node_budevent_facts()
 
     # THEN
     assert os_path_exists(bob_t5_found_path)
@@ -76,7 +78,8 @@ def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssigne
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    fizz_world = worldunit_shop("fizz")
+    mstr_dir = fizz_world._fisc_mstr_dir
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"
@@ -110,7 +113,7 @@ def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssigne
     assert os_path_exists(bob_t5_yao_sue_found) is False
 
     # WHEN
-    uphill_deal_node_budevent_facts(mstr_dir, a23_str)
+    fizz_world.uphill_deal_node_budevent_facts()
 
     # THEN
     assert os_path_exists(bob_t5_found)

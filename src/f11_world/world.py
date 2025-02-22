@@ -51,6 +51,9 @@ from src.f10_etl.transformers import (
     etl_fisc_ote1_agg_csvs2jsons,
     etl_create_root_deal_nodes,
     etl_create_fisc_deal_trees,
+    etl_uphill_deal_node_budevent_facts,
+    etl_create_deal_trees_acct_adjust_ledgers,
+    etl_create_fiscs_deals_net_ledgers,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -225,6 +228,15 @@ class WorldUnit:
 
     def create_fisc_deal_trees(self):
         etl_create_fisc_deal_trees(self._fisc_mstr_dir)
+
+    def uphill_deal_node_budevent_facts(self):
+        etl_uphill_deal_node_budevent_facts(self._fisc_mstr_dir)
+
+    def create_deal_trees_acct_adjust_ledgers(self):
+        etl_create_deal_trees_acct_adjust_ledgers(self._fisc_mstr_dir)
+
+    def create_fiscs_deals_net_ledgers(self):
+        etl_create_fiscs_deals_net_ledgers(self._fisc_mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")

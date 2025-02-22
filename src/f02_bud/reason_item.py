@@ -107,6 +107,12 @@ def get_factunit_from_tuple(
     return factunit_shop(fact_tuple[0], fact_tuple[1], fact_tuple[2], fact_tuple[3])
 
 
+def get_dict_from_factunits(
+    factunits: dict[RoadUnit, FactUnit]
+) -> dict[RoadUnit, dict[str,]]:
+    return {hc.base: hc.get_dict() for hc in factunits.values()}
+
+
 @dataclass
 class FactHeir(FactCore):
     def mold(self, factunit: FactUnit):

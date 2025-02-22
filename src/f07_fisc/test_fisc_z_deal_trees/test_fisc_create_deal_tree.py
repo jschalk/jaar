@@ -8,7 +8,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_quota_ledger_path as quota_path,
 )
 from src.f05_listen.hub_tool import save_arbitrary_budevent as save_budevent
-from src.f07_fisc.fisc import create_deal_tree
+from src.f07_fisc.fisc_tool import create_deal_tree
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
