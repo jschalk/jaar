@@ -140,11 +140,13 @@ def allot_nested_scale(
     scale_number: GrainFloat,
     grain_unit: float,
     depth: int,
+    dst_filename: str = None,
 ) -> dict[str, GrainFloat]:
     root_file_path = create_path(x_dir, src_filename)
     root_ledger = open_json(root_file_path)
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)
-    dst_filename = "alloted.json"
+    if not dst_filename:
+        dst_filename = "alloted.json"
     save_json(x_dir, dst_filename, root_allot)
     evalutable_allot_dirs = [x_dir]
     final_allots = {(): root_allot}

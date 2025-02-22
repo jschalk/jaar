@@ -2,6 +2,7 @@ from src.f00_instrument.file import open_json, save_json, count_dirs_files, save
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f02_bud.bud_tool import get_acct_agenda_ledger
+from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_budevent_path,
     create_deal_node_found_facts_path as found_facts_path,
@@ -100,7 +101,9 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 # create a world with, deal_node.json, found facts and bud events
 # for every found_fact change budevent to that fact
 # create agenda (different than if found_fact was not applied)
-def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cleanup):
+def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario0_RootOnlyNoFacts(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     mstr_dir = get_test_fisc_mstr_dir()
     a23_str = "accord"
@@ -129,7 +132,9 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     assert os_path_exists(bob5_adjust_path)
 
 
-def test_create_budadjusts_SetsFiles_Scenario1_TwoNodesNoFacts(env_dir_setup_cleanup):
+def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario1_TwoNodesNoFacts(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     mstr_dir = get_test_fisc_mstr_dir()
     a23_str = "accord"
@@ -176,7 +181,9 @@ def test_create_budadjusts_SetsFiles_Scenario1_TwoNodesNoFacts(env_dir_setup_cle
     assert os_path_exists(bob5_yao_adjust_ledg)
 
 
-def test_create_budadjusts_SetsFiles_Scenario2_TwoNodesWithFacts(env_dir_setup_cleanup):
+def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario2_TwoNodesWithFacts(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     mstr_dir = get_test_fisc_mstr_dir()
     a23_str = "accord"
@@ -202,8 +209,8 @@ def test_create_budadjusts_SetsFiles_Scenario2_TwoNodesWithFacts(env_dir_setup_c
     dirty_road = bob_mop_budunit.make_road(floor_road, "dirty")
     weather_road = yao_run_budunit.make_l1_road("weather")
     snow_road = yao_run_budunit.make_road(weather_road, "snowing")
-    bob5_found_facts = {floor_road: {"base": floor_road, "pick": dirty_road}}
-    bob5_yao_found_facts = {weather_road: {"base": weather_road, "pick": snow_road}}
+    bob5_found_facts = {floor_road: {base_str(): floor_road, "pick": dirty_road}}
+    bob5_yao_found_facts = {weather_road: {base_str(): weather_road, "pick": snow_road}}
     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
     bob5_yao_found_path = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
     print(f"{bob5_yao_found_path=}")
@@ -242,7 +249,7 @@ def test_create_budadjusts_SetsFiles_Scenario2_TwoNodesWithFacts(env_dir_setup_c
     assert open_json(bob5_yao_adjust_ledg) == {}
 
 
-def test_create_budadjusts_SetsFiles_Scenario3_Populated_adjust_ledger(
+def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario3_Populated_adjust_ledger(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -294,8 +301,8 @@ def test_create_budadjusts_SetsFiles_Scenario3_Populated_adjust_ledger(
     # create found_facts files
     weather_road = yao_run_budunit.make_l1_road("weather")
     snow_road = yao_run_budunit.make_road(weather_road, "snowing")
-    bob5_found_facts = {floor_road: {"base": floor_road, "pick": dirty_road}}
-    bob5_yao_found_facts = {weather_road: {"base": weather_road, "pick": snow_road}}
+    bob5_found_facts = {floor_road: {base_str(): floor_road, "pick": dirty_road}}
+    bob5_yao_found_facts = {weather_road: {base_str(): weather_road, "pick": snow_road}}
     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
     bob5_yao_found_path = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
     print(f"{bob5_yao_found_path=}")
@@ -330,5 +337,5 @@ def test_create_budadjusts_SetsFiles_Scenario3_Populated_adjust_ledger(
     assert bob5_yao_budadjust.get_factunits_dict() != {}
     assert bob5_found_facts == bob5_budadjust.get_factunits_dict()
     assert bob5_yao_found_facts == bob5_yao_budadjust.get_factunits_dict()
-    assert open_json(bob5_adjust_ledger) == {"Sue": -144444444, "Yao": 144444444}
+    assert open_json(bob5_adjust_ledger) == {sue_str: -144444444, yao_str: 144444444}
     assert open_json(bob5_yao_adjust_ledg) == {}

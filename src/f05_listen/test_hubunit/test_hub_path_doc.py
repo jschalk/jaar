@@ -9,7 +9,7 @@ from src.f05_listen.hub_path import (
     create_deals_dir_path,
     create_timepoint_dir_path,
     create_root_deal_json_path,
-    create_root_acct_ledger_json_path,
+    create_dealunit_net_ledger_json_path,
     create_budpoint_path,
     create_deal_node_dir_path,
     create_deal_node_json_path,
@@ -250,9 +250,9 @@ def test_create_root_deal_json_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_root_deal_json_path) == doc_str
 
 
-def test_create_root_acct_ledger_json_path_HasDocString():
+def test_create_dealunit_net_ledger_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_root_acct_ledger_json_path(
+    doc_str = create_dealunit_net_ledger_json_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -261,7 +261,7 @@ def test_create_root_acct_ledger_json_path_HasDocString():
     doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_root_acct_ledger_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_dealunit_net_ledger_json_path) == doc_str
 
 
 def test_create_budpoint_path_HasDocString():

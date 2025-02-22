@@ -1,4 +1,4 @@
-from src.f00_instrument.file import open_json, save_json, count_dirs_files, save_file
+from src.f00_instrument.file import save_json, save_file
 from src.f05_listen.hub_path import (
     create_budevent_path,
     create_deal_node_budadjust_path as budadjust_path,
@@ -40,7 +40,7 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     assert os_path_exists(bob5_adjust_ledger_path) is False
 
     # WHEN
-    fizz_world.create_acct_adjust_ledgers()
+    fizz_world.create_deal_trees_acct_adjust_ledgers()
 
     # THEN
     assert os_path_exists(bob5_budadjust_path)

@@ -84,7 +84,7 @@ def create_root_deal_json_path(
     return create_path(timepoint_dir, "dealunit.json")
 
 
-def create_root_acct_ledger_json_path(
+def create_dealunit_net_ledger_json_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\deal_acct_ledger.json"""

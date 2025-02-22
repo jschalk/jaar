@@ -31,7 +31,7 @@ from src.f05_listen.hub_path import (
     create_deals_dir_path,
     create_timepoint_dir_path,
     create_root_deal_json_path,
-    create_root_acct_ledger_json_path,
+    create_dealunit_net_ledger_json_path,
     create_budpoint_path,
     create_deal_node_dir_path,
     create_deal_node_json_path,
@@ -212,7 +212,7 @@ def test_create_root_deal_json_path_ReturnObj():
     assert gen_deal_path == expected_deal_path_dir
 
 
-def test_create_root_acct_ledger_json_path_ReturnObj():
+def test_create_dealunit_net_ledger_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -220,7 +220,7 @@ def test_create_root_acct_ledger_json_path_ReturnObj():
     timepoint7 = 7
 
     # WHEN
-    gen_deal_path = create_root_acct_ledger_json_path(
+    gen_deal_path = create_dealunit_net_ledger_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
