@@ -27,6 +27,7 @@ from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_budevent_facts,
     save_arbitrary_budevent,
+    save_deal_node_file,
     save_arbitrary_dealnode,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
@@ -417,6 +418,80 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
     assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
 
 
+def test_save_deal_node_file_SetsFile_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    time7 = 777000
+    sue_str = "Sue"
+    sue7_dealnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7)
+    event3 = 3
+    das = []
+    quota500 = 500
+    deal_depth4 = 4
+    penny6 = 6
+    assert os_path_exists(sue7_dealnode_path) is False
+
+    # WHEN
+    save_deal_node_file(
+        fisc_mstr_dir=fisc_mstr_dir,
+        fisc_title=a23_str,
+        time_owner_name=sue_str,
+        time_int=time7,
+        quota=quota500,
+        event_int=event3,
+        dealdepth=deal_depth4,
+        penny=penny6,
+        deal_ancestors=das,
+    )
+
+    # THEN
+    print(f"{sue7_dealnode_path=}")
+    assert os_path_exists(sue7_dealnode_path)
+    expected_sue7_dealnode = {
+        "ancestors": das,
+        "event_int": event3,
+        "dealdepth": deal_depth4,
+        "owner_name": sue_str,
+        "penny": penny6,
+        "quota": quota500,
+    }
+    assert open_json(sue7_dealnode_path) == expected_sue7_dealnode
+
+
+def test_save_deal_node_file_SetsFile_Scenario1_ManyParametersEmpty(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    time7 = 777000
+    sue_str = "Sue"
+    bob_str = "Bob"
+    das = [bob_str, sue_str]
+    sue7_dealnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    event3 = 3
+    assert os_path_exists(sue7_dealnode_path) is False
+
+    # WHEN
+    save_deal_node_file(
+        fisc_mstr_dir, a23_str, sue_str, time7, event3, deal_ancestors=das
+    )
+
+    # THEN
+    print(f"{sue7_dealnode_path=}")
+    assert os_path_exists(sue7_dealnode_path)
+    expected_sue7_dealnode = {
+        "ancestors": das,
+        "event_int": event3,
+        "dealdepth": 0,
+        "owner_name": sue_str,
+        "penny": 1,
+        "quota": 150,
+    }
+    assert open_json(sue7_dealnode_path) == expected_sue7_dealnode
+
+
 def test_save_arbitrary_dealnode_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
@@ -429,7 +504,7 @@ def test_save_arbitrary_dealnode_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert os_path_exists(sue7_dealnode_path) is False
 
     # WHEN
-    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, das, event3)
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, event3, das)
 
     # THEN
     print(f"{sue7_dealnode_path=}")
@@ -458,7 +533,7 @@ def test_save_arbitrary_dealnode_SetsFile_Scenario1(env_dir_setup_cleanup):
     assert os_path_exists(sue7_dealnode_path) is False
 
     # WHEN
-    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, das, event3)
+    save_arbitrary_dealnode(fisc_mstr_dir, a23_str, sue_str, time7, event3, das)
 
     # THEN
     print(f"{sue7_dealnode_path=}")

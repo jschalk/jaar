@@ -5,13 +5,8 @@ from src.f05_listen.hub_path import (
     create_deal_node_budevent_facts_path as bude_facts_path,
     create_deal_node_found_facts_path as found_facts_path,
     create_deal_node_quota_ledger_path as quota_path,
-    create_budevent_path,
 )
-from src.f05_listen.hub_tool import save_arbitrary_budevent, save_arbitrary_dealnode
-from src.f07_fisc.fisc_tool import (
-    create_all_deal_node_facts_files,
-    uphill_deal_node_budevent_facts,
-)
+from src.f07_fisc.fisc_tool import uphill_deal_node_budevent_facts
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
@@ -124,27 +119,3 @@ def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssigne
     assert open_json(bob_t5_found) == bob_t5_yao_sue_be_facts
     assert open_json(bob_t5_yao_found) == bob_t5_yao_sue_be_facts
     assert open_json(bob_t5_yao_sue_found) == bob_t5_yao_sue_be_facts
-
-
-# def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     fisc_mstr_dir = get_test_fisc_mstr_dir()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     event300 = 300
-#     time5 = 5
-#     casa_road = create_road(a23_str, "casa")
-#     clean_road = create_road(casa_road, "clean")
-#     x_facts = [(casa_road, clean_road, None, None)]
-#     save_arbitrary_budevent(fisc_mstr_dir, a23_str, bob_str, event300, facts=x_facts)
-#     bob3_budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, bob_str, event300)
-#     yao_str = "Yao"
-#     das = [yao_str, bob_str]
-#     bob_5_yao_bob_deal_node = node_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
-#     assert os_path_exists(bob_5_yao_bob_deal_node) is False
-#     save_arbitrary_dealnode(fisc_mstr_dir, a23_str, bob_str, time5, das, event300)
-#     print(f"{bob_5_yao_bob_deal_node=}")
-#     assert os_path_exists(bob_5_yao_bob_deal_node)
-#     bob_t5_facts_path = facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
-#     print(f" {bob_t5_facts_path=}")
-#     assert os_path_exists(bob_t5_facts_path) is False

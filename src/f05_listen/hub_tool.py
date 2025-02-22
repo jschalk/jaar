@@ -5,7 +5,11 @@ from src.f00_instrument.file import (
     set_dir,
     save_json,
 )
-from src.f00_instrument.dict_toolbox import get_empty_list_if_None
+from src.f00_instrument.dict_toolbox import (
+    get_empty_list_if_None,
+    get_0_if_None,
+    get_1_if_None,
+)
 from src.f01_road.deal import TimeLinePoint
 from src.f01_road.finance import RespectNum
 from src.f01_road.road import AcctName, OwnerName, TitleUnit, EventInt, RoadUnit
@@ -146,23 +150,47 @@ def save_arbitrary_budevent(
     return x_budevent_path
 
 
+def save_deal_node_file(
+    fisc_mstr_dir: str,
+    fisc_title: str,
+    time_owner_name: str,
+    time_int: int,
+    event_int: int,
+    deal_ancestors: list[OwnerName] = None,
+    quota: int = None,
+    dealdepth: int = None,
+    penny: int = None,
+):
+    deal_ancestors = get_empty_list_if_None(deal_ancestors)
+    dealnode_path = create_deal_node_json_path(
+        fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
+    )
+    if not quota:
+        quota = 150
+    dealnode_dict = {
+        "ancestors": deal_ancestors,
+        "event_int": event_int,
+        "dealdepth": get_0_if_None(dealdepth),
+        "owner_name": time_owner_name,
+        "penny": get_1_if_None(penny),
+        "quota": quota,
+    }
+    save_json(dealnode_path, None, dealnode_dict)
+
+
 def save_arbitrary_dealnode(
     fisc_mstr_dir: str,
     fisc_title: str,
     time_owner_name: str,
     time_int: int,
-    deal_ancestors: list[OwnerName],
     event_int: int,
+    deal_ancestors: list[OwnerName],
 ):
-    dealnode_path = create_deal_node_json_path(
-        fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
+    save_deal_node_file(
+        fisc_mstr_dir=fisc_mstr_dir,
+        fisc_title=fisc_title,
+        time_owner_name=time_owner_name,
+        time_int=time_int,
+        deal_ancestors=deal_ancestors,
+        event_int=event_int,
     )
-    dealnode_dict = {
-        "ancestors": deal_ancestors,
-        "event_int": event_int,
-        "dealdepth": 0,
-        "owner_name": time_owner_name,
-        "penny": 1,
-        "quota": 150,
-    }
-    save_json(dealnode_path, None, dealnode_dict)

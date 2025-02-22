@@ -22,7 +22,7 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     das = []
     event7 = 7
     # create deal_node files
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, das, event7)
+    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das)
     mop_budunit = get_mop_with_reason_budunit_example()
     # create budevent files
     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
