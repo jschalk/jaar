@@ -192,12 +192,10 @@ def create_l2nested_csv_dict(
     io_dict = {}
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     for row in x_reader:
-        fisc_owner_io = (
-            get_from_nested_dict(io_dict, [row[2], row[3]], True) or io_StringIO()
-        )
-        new_csv_writer = csv_writer(fisc_owner_io, delimiter=",")
+        csv_io = get_from_nested_dict(io_dict, [row[2], row[3]], True) or io_StringIO()
+        new_csv_writer = csv_writer(csv_io, delimiter=",")
         new_csv_writer.writerow(row)
-        set_in_nested_dict(io_dict, [row[2], row[3]], fisc_owner_io)
+        set_in_nested_dict(io_dict, [row[2], row[3]], csv_io)
 
     x_dict = {}
     for l1_key, l1_dict in io_dict.items():
