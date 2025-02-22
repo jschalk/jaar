@@ -189,7 +189,7 @@ def _create_found_facts(
         save_json(output_dir, DEAL_FOUND_FACTS_FILENAME, output_facts_dict)
 
 
-def create_deal_node_budadjusts(fisc_mstr_dir: str, fisc_title: str):
+def create_deal_node_acct_adjust_ledgers(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")

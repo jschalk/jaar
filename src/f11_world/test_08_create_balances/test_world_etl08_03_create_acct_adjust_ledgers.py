@@ -40,7 +40,7 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     assert os_path_exists(bob5_adjust_ledger_path) is False
 
     # WHEN
-    fizz_world.create_budadjusts_SetsFiles()
+    fizz_world.create_acct_adjust_ledgers()
 
     # THEN
     assert os_path_exists(bob5_budadjust_path)
