@@ -5,7 +5,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_found_facts_path as found_facts_path,
     create_deal_node_adjust_ledger_path as adjust_ledger_path,
 )
-from src.f05_listen.hub_tool import save_arbitrary_dealnode
+from src.f05_listen.hub_tool import save_deal_node_file
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.example_worlds import get_mop_with_reason_budunit_example
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
@@ -22,7 +22,7 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     das = []
     event7 = 7
     # create deal_node files
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
     mop_budunit = get_mop_with_reason_budunit_example()
     # create budevent files
     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)

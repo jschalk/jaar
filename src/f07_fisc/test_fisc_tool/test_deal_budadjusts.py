@@ -9,7 +9,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_budadjust_path as budadjust_path,
     create_deal_node_adjust_ledger_path as adjust_ledger_path,
 )
-from src.f05_listen.hub_tool import save_arbitrary_dealnode, open_bud_file
+from src.f05_listen.hub_tool import save_deal_node_file, open_bud_file
 from src.f07_fisc.fisc_tool import create_deal_node_acct_adjust_ledgers
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
@@ -112,7 +112,7 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario0_RootOnlyNoFact
     das = []
     event7 = 7
     # create deal_node files
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
     # create budevent files
     mop_budunit = get_bob_mop_without_reason_budunit_example()
     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
@@ -145,8 +145,8 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario1_TwoNodesNoFact
     das_yao = [yao_str]
     event7 = 7
     # create deal_node files
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das)
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
     # create budevent files
     mop_budunit = get_bob_mop_with_reason_budunit_example()
     sport_budunit = get_yao_run_with_reason_budunit_example()
@@ -194,8 +194,8 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario2_TwoNodesWithFa
     das_yao = [yao_str]
     event7 = 7
     # create deal_node files
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das)
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
     # create budevent files
     bob_mop_budunit = get_bob_mop_fact_clean_budunit_example()
     yao_run_budunit = get_yao_run_rain_fact_budunit_example()
@@ -289,8 +289,8 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario3_Populated_adju
     das_yao = [yao_str]
     event7 = 7
     # create deal_node files
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das)
-    save_arbitrary_dealnode(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
     # create budevent files
     bob_mop_budunit
     yao_run_budunit = get_yao_run_rain_fact_budunit_example()

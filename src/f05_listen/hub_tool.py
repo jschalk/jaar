@@ -176,21 +176,3 @@ def save_deal_node_file(
         "quota": quota,
     }
     save_json(dealnode_path, None, dealnode_dict)
-
-
-def save_arbitrary_dealnode(
-    fisc_mstr_dir: str,
-    fisc_title: str,
-    time_owner_name: str,
-    time_int: int,
-    event_int: int,
-    deal_ancestors: list[OwnerName],
-):
-    save_deal_node_file(
-        fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=fisc_title,
-        time_owner_name=time_owner_name,
-        time_int=time_int,
-        deal_ancestors=deal_ancestors,
-        event_int=event_int,
-    )
