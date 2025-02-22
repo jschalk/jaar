@@ -3,6 +3,7 @@ from src.f05_listen.hub_path import (
     create_budevent_path,
     create_deal_node_budadjust_path as budadjust_path,
     create_deal_node_found_facts_path as found_facts_path,
+    create_deal_node_adjust_ledger_path as adjust_ledger_path,
 )
 from src.f05_listen.hub_tool import save_arbitrary_dealnode
 from src.f11_world.world import worldunit_shop
@@ -11,9 +12,6 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-# create a world with, deal_node.json, found facts and bud events
-# for every found_fact change budevent to that fact
-# create agenda (different than if found_fact was not applied)
 def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz")
@@ -30,15 +28,28 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
     save_file(bob7_budevent_path, None, mop_budunit.get_json())
     # create found_facts files
-    bob_tp5_found_facts = {}
-    bob_tp5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
-    save_json(bob_tp5_found, None, bob_tp5_found_facts)
+    bob5_found_facts = {}
+    bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
+    save_json(bob5_found, None, bob5_found_facts)
     # create paths for budadjusts
-    bob_tp5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-    assert os_path_exists(bob_tp5_budadjust_path) is False
+    bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+    # create paths for adjust_ledger_paths
+    bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+    bob5_adjust_ledger_path = adjust_ledger_path(mstr_dir, a23_str, bob_str, tp5, das)
+    assert os_path_exists(bob5_budadjust_path) is False
+    assert os_path_exists(bob5_adjust_ledger_path) is False
 
     # WHEN
     fizz_world.create_budadjusts_SetsFiles()
 
     # THEN
-    assert os_path_exists(bob_tp5_budadjust_path)
+    assert os_path_exists(bob5_budadjust_path)
+    assert os_path_exists(bob5_adjust_ledger_path)
+
+
+# create a world with, deal_node.json, found facts and bud events
+# for every found_fact change budevent to that fact
+# create agenda (different than if found_fact was not applied)
+# create a budevent such that changing facts changes agenda output
+
+# use graphics_bool to figure out what agenda_ledger output we want to measure
