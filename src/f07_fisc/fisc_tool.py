@@ -207,12 +207,14 @@ def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, d
     deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
     deal_node_dict = open_json(deal_node_json_path)
     ancestors = deal_node_dict.get("ancestors")
+    deal_node_quota = deal_node_dict.get("quota")
     deal_node_owner_name = ancestors.pop() if ancestors else owner_name
     deal_node_event_int = deal_node_dict.get("event_int")
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int
     )
     budadjust_unit = open_bud_file(budevent_json_path)
+    budadjust_unit.set_fund_pool(deal_node_quota)
     found_facts_path = create_path(dirpath, DEAL_FOUND_FACTS_FILENAME)
     found_facts_dict = open_json(found_facts_path)
     set_factunits_to_bud(budadjust_unit, found_facts_dict)

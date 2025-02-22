@@ -288,9 +288,11 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario3_Populated_adju
     das = []
     das_yao = [yao_str]
     event7 = 7
+    quota700 = 70088
+    quota900 = 900
     # create deal_node files
-    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
-    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das, quota700)
+    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao, quota900)
     # create budevent files
     bob_mop_budunit
     yao_run_budunit = get_yao_run_rain_fact_budunit_example()
@@ -337,5 +339,5 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario3_Populated_adju
     assert bob5_yao_budadjust.get_factunits_dict() != {}
     assert bob5_found_facts == bob5_budadjust.get_factunits_dict()
     assert bob5_yao_found_facts == bob5_yao_budadjust.get_factunits_dict()
-    assert open_json(bob5_adjust_ledger) == {sue_str: -144444444, yao_str: 144444444}
+    assert open_json(bob5_adjust_ledger) == {sue_str: -10124, yao_str: 10124}
     assert open_json(bob5_yao_adjust_ledg) == {}
