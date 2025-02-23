@@ -150,6 +150,9 @@ def save_arbitrary_budevent(
     return x_budevent_path
 
 
+DEAL_NODE_QUOTA_DEFAULT = 1000
+
+
 def save_deal_node_file(
     fisc_mstr_dir: str,
     fisc_title: str,
@@ -165,8 +168,8 @@ def save_deal_node_file(
     dealnode_path = create_deal_node_json_path(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
     )
-    if not quota:
-        quota = 150
+    if quota is None:
+        quota = DEAL_NODE_QUOTA_DEFAULT
     dealnode_dict = {
         "ancestors": deal_ancestors,
         "event_int": event_int,

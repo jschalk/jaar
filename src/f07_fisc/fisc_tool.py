@@ -208,7 +208,7 @@ def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, d
     deal_node_dict = open_json(deal_node_json_path)
     ancestors = deal_node_dict.get("ancestors")
     deal_node_quota = deal_node_dict.get("quota")
-    deal_node_owner_name = ancestors.pop() if ancestors else owner_name
+    deal_node_owner_name = ancestors[-1] if ancestors else owner_name
     deal_node_event_int = deal_node_dict.get("event_int")
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int

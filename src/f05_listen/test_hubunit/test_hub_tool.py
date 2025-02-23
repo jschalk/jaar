@@ -28,6 +28,7 @@ from src.f05_listen.hub_tool import (
     get_budevent_facts,
     save_arbitrary_budevent,
     save_deal_node_file,
+    DEAL_NODE_QUOTA_DEFAULT,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
@@ -417,6 +418,11 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
     assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
 
 
+def test_DEAL_NODE_QUOTA_DEFAULT_value():
+    # ESTABLISH / WHEN / THEN
+    assert DEAL_NODE_QUOTA_DEFAULT == 1000
+
+
 def test_save_deal_node_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
@@ -486,6 +492,6 @@ def test_save_deal_node_file_SetsFile_Scenario1_ManyParametersEmpty(
         "dealdepth": 0,
         "owner_name": sue_str,
         "penny": 1,
-        "quota": 150,
+        "quota": DEAL_NODE_QUOTA_DEFAULT,
     }
     assert open_json(sue7_dealnode_path) == expected_sue7_dealnode
