@@ -166,11 +166,11 @@ def get_inx_obj(class_type, x_row) -> str:
 
 
 def etl_mine_to_train_staging(mine_dir: str, train_dir: str):
-    transformer = mineTotrainTransformer(mine_dir, train_dir)
+    transformer = MineToTrainTransformer(mine_dir, train_dir)
     transformer.transform()
 
 
-class mineTotrainTransformer:
+class MineToTrainTransformer:
     def __init__(self, mine_dir: str, train_dir: str):
         self.mine_dir = mine_dir
         self.train_dir = train_dir
