@@ -10,7 +10,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_adjust_ledger_path as adjust_ledger_path,
 )
 from src.f05_listen.hub_tool import save_deal_node_file, open_bud_file
-from src.f07_fisc.fisc_tool import create_deal_node_acct_adjust_ledgers
+from src.f07_fisc.fisc_tool import modify_deal_tree_create_boss_facts
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
@@ -101,7 +101,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 # create a world with, deal_node.json, found facts and bud events
 # for every found_fact change budevent to that fact
 # create agenda (different than if found_fact was not applied)
-def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario0_RootOnlyNoFacts(
+def test_modify_deal_tree_create_boss_facts_SetsFiles_Scenario0_RootOnlyNoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -126,13 +126,13 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario0_RootOnlyNoFact
     assert os_path_exists(bob5_adjust_path) is False
 
     # WHEN
-    create_deal_node_acct_adjust_ledgers(mstr_dir, a23_str)
+    modify_deal_tree_create_boss_facts(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob5_adjust_path)
 
 
-def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario1_TwoNodesNoFacts(
+def test_modify_deal_tree_create_boss_facts_SetsFiles_Scenario1_TwoNodesNoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -172,7 +172,7 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario1_TwoNodesNoFact
     assert os_path_exists(bob5_yao_adjust_ledg) is False
 
     # WHEN
-    create_deal_node_acct_adjust_ledgers(mstr_dir, a23_str)
+    modify_deal_tree_create_boss_facts(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob5_budadjust_path)
@@ -181,7 +181,7 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario1_TwoNodesNoFact
     assert os_path_exists(bob5_yao_adjust_ledg)
 
 
-def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario2_TwoNodesWithFacts(
+def test_modify_deal_tree_create_boss_facts_SetsFiles_Scenario2_TwoNodesWithFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -229,7 +229,7 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario2_TwoNodesWithFa
     assert yao_run_budunit.get_factunits_dict() != bob5_yao_found_facts
 
     # WHEN
-    create_deal_node_acct_adjust_ledgers(mstr_dir, a23_str)
+    modify_deal_tree_create_boss_facts(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob5_adjust_path)
@@ -249,7 +249,7 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario2_TwoNodesWithFa
     assert open_json(bob5_yao_adjust_ledg) == {}
 
 
-def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario3_Populated_adjust_ledger(
+def test_modify_deal_tree_create_boss_facts_SetsFiles_Scenario3_Populated_adjust_ledger(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -323,7 +323,7 @@ def test_create_deal_node_acct_adjust_ledgers_SetsFiles_Scenario3_Populated_adju
     assert yao_run_budunit.get_factunits_dict() != bob5_yao_found_facts
 
     # WHEN
-    create_deal_node_acct_adjust_ledgers(mstr_dir, a23_str)
+    modify_deal_tree_create_boss_facts(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob5_adjust_path)

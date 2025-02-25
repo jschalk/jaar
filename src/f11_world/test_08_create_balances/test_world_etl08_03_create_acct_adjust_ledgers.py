@@ -40,7 +40,7 @@ def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cle
     assert os_path_exists(bob5_adjust_ledger_path) is False
 
     # WHEN
-    fizz_world.create_deal_trees_acct_adjust_ledgers()
+    fizz_world.modify_deal_trees_with_boss_facts()
 
     # THEN
     assert os_path_exists(bob5_budadjust_path)

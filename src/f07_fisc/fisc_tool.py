@@ -187,7 +187,7 @@ def _create_found_facts(
         save_json(output_dir, DEAL_FOUND_FACTS_FILENAME, output_facts_dict)
 
 
-def create_deal_node_acct_adjust_ledgers(fisc_mstr_dir: str, fisc_title: str):
+def modify_deal_tree_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -223,26 +223,3 @@ def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, d
     adjust_ledger_path = create_path(dirpath, DEAL_ADJUST_LEDGER_FILENAME)
     save_file(budadjust_path, None, budadjust_unit.get_json())
     save_json(adjust_ledger_path, None, adjust_acct_agenda_ledger)
-
-
-def create_deals_net_ledgers(fisc_mstr_dir: str, fisc_title: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_title)
-    owners_dir = create_path(fisc_dir, "owners")
-    for owner_name in get_level1_dirs(owners_dir):
-        owner_dir = create_path(owners_dir, owner_name)
-        deals_dir = create_path(owner_dir, "deals")
-        for time_int in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, time_int)
-            deal_node_json_path = create_path(deal_time_dir, DEALNODE_FILENAME)
-            deal_root_node_dict = open_json(deal_node_json_path)
-            deal_root_node_quota = deal_root_node_dict.get("quota")
-            allot_nested_scale(
-                x_dir=deal_time_dir,
-                src_filename=DEAL_ADJUST_LEDGER_FILENAME,
-                scale_number=deal_root_node_quota,
-                grain_unit=1,
-                depth=5,
-                dst_filename=DEAL_ACCT_LEDGER_FILENAME,
-            )
-            print(f"{deal_root_node_quota=}")
