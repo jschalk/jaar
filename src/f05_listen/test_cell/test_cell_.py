@@ -29,16 +29,18 @@ def test_CellUnit_Exists():
 
 
 def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
-    # ESTABLISH / WHEN
-    x_cellunit = cellunit_shop()
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    x_cellunit = cellunit_shop(bob_str)
     # THEN
+    assert x_cellunit.deal_owner_name == bob_str
     assert x_cellunit.ancestors == []
     assert not x_cellunit.event_int
     assert x_cellunit.celldepth == 0
-    assert not x_cellunit.deal_owner_name
     assert x_cellunit.penny == 1
     assert x_cellunit.quota == CELL_NODE_QUOTA_DEFAULT
-    assert not x_cellunit.budadjust
+    assert x_cellunit.budadjust == budunit_shop(bob_str)
     assert x_cellunit.budevent_facts == {}
     assert x_cellunit.found_facts == {}
     assert x_cellunit.boss_facts == {}
@@ -66,10 +68,10 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
 
     # WHEN
     x_cellunit = cellunit_shop(
+        bob_sue_deal_owner,
         bob_sue_ancestors,
         bob_sue_event7,
         bob_sue_celldepth3,
-        bob_sue_deal_owner,
         bob_sue_penny2,
         bob_sue_quota300,
         bob_sue_bud,
@@ -103,10 +105,10 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
     bob_sue_penny2 = 2
     bob_sue_quota300 = 300
     x_cellunit = cellunit_shop(
+        bob_sue_deal_owner,
         bob_sue_ancestors,
         bob_sue_event7,
         bob_sue_celldepth3,
-        bob_sue_deal_owner,
         bob_sue_penny2,
         bob_sue_quota300,
     )
@@ -133,7 +135,8 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
     assert x_cell_dict.get("deal_owner_name") == bob_sue_deal_owner
     assert x_cell_dict.get("penny") == bob_sue_penny2
     assert x_cell_dict.get("quota") == bob_sue_quota300
-    assert x_cell_dict.get("budadjust") is None
+    bob_sue_bud = budunit_shop(bob_sue_deal_owner)
+    assert x_cell_dict.get("budadjust") == bob_sue_bud.get_dict()
     assert x_cell_dict.get("budevent_facts") == {}
     assert x_cell_dict.get("found_facts") == {}
     assert x_cell_dict.get("boss_facts") == {}
@@ -157,10 +160,10 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
     x_cellunit = cellunit_shop(
+        bob_sue_deal_owner,
         bob_sue_ancestors,
         bob_sue_event7,
         bob_sue_celldepth3,
-        bob_sue_deal_owner,
         bob_sue_penny2,
         bob_sue_quota300,
         None,
@@ -191,10 +194,47 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert x_cell_dict.get("deal_owner_name") == bob_sue_deal_owner
     assert x_cell_dict.get("penny") == bob_sue_penny2
     assert x_cell_dict.get("quota") == bob_sue_quota300
-    assert x_cell_dict.get("budadjust") is None
+    assert x_cell_dict.get("budadjust") == budunit_shop(bob_sue_deal_owner).get_dict()
     bob_sue_budevent_fact_dicts = {clean_fact.base: clean_fact.get_dict()}
     bob_sue_found_fact_dicts = {dirty_fact.base: dirty_fact.get_dict()}
     bob_sue_boss_fact_dicts = {sky_blue_fact.base: sky_blue_fact.get_dict()}
     assert x_cell_dict.get("budevent_facts") == bob_sue_budevent_fact_dicts
     assert x_cell_dict.get("found_facts") == bob_sue_found_fact_dicts
     assert x_cell_dict.get("boss_facts") == bob_sue_boss_fact_dicts
+
+
+def test_CellUnit_get_json_ReturnsObj():
+    # ESTABLISH
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_sue_ancestors = [bob_str, sue_str]
+    bob_sue_event7 = 7
+    bob_sue_deal_owner = yao_str
+    bob_sue_celldepth3 = 3
+    bob_sue_penny2 = 2
+    bob_sue_quota300 = 300
+    clean_fact = clean_factunit()
+    dirty_fact = dirty_factunit()
+    sky_blue_fact = sky_blue_factunit()
+    bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
+    bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
+    bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    x_cellunit = cellunit_shop(
+        bob_sue_deal_owner,
+        bob_sue_ancestors,
+        bob_sue_event7,
+        bob_sue_celldepth3,
+        bob_sue_penny2,
+        bob_sue_quota300,
+        None,
+        bob_sue_budevent_factunits,
+        bob_sue_found_factunits,
+        bob_sue_boss_factunits,
+    )
+
+    # WHEN
+    x_cell_json = x_cellunit.get_json()
+
+    # THEN
+    assert len(x_cell_json) == 963

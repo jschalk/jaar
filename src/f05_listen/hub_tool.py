@@ -162,6 +162,6 @@ def save_cell_node_file(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
     )
     x_cellunit = cellunit_shop(
-        deal_ancestors, event_int, celldepth, time_owner_name, penny, quota
+        time_owner_name, deal_ancestors, event_int, celldepth, penny, quota
     )
     save_json(cellnode_path, None, x_cellunit.get_dict())

@@ -3,6 +3,7 @@ from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_None,
     get_0_if_None,
     get_1_if_None,
+    get_json_from_dict,
 )
 from src.f01_road.finance import PennyNum
 from src.f01_road.road import OwnerName, EventInt, RoadUnit
@@ -43,18 +44,21 @@ class CellUnit:
             "deal_owner_name": self.deal_owner_name,
             "penny": self.penny,
             "quota": self.quota,
-            "budadjust": self.budadjust,
+            "budadjust": self.budadjust.get_dict(),
             "budevent_facts": get_dict_from_factunits(self.budevent_facts),
             "found_facts": get_dict_from_factunits(self.found_facts),
             "boss_facts": get_dict_from_factunits(self.boss_facts),
         }
 
+    def get_json(self) -> str:
+        return get_json_from_dict(self.get_dict())
+
 
 def cellunit_shop(
+    deal_owner_name: OwnerName,
     ancestors: list[OwnerName] = None,
     event_int: EventInt = None,
     celldepth: int = None,
-    deal_owner_name: OwnerName = None,
     penny: PennyNum = None,
     quota: float = None,
     budadjust: BudUnit = None,
@@ -64,6 +68,8 @@ def cellunit_shop(
 ) -> CellUnit:
     if quota is None:
         quota = CELL_NODE_QUOTA_DEFAULT
+    if budadjust is None:
+        budadjust = budunit_shop(deal_owner_name)
     return CellUnit(
         ancestors=get_empty_list_if_None(ancestors),
         event_int=event_int,
