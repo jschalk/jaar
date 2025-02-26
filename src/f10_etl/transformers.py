@@ -40,7 +40,7 @@ from src.f07_fisc.fisc import (
 from src.f07_fisc.fisc_tool import (
     create_fisc_owners_deal_trees,
     uphill_deal_node_budevent_facts,
-    modify_deal_tree_create_boss_facts,
+    modify_deal_trees_create_boss_facts,
 )
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -926,7 +926,7 @@ def etl_uphill_deal_node_budevent_facts(fisc_mstr_dir: str):
 def etl_modify_deal_trees_with_boss_facts(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        modify_deal_tree_create_boss_facts(fisc_mstr_dir, fisc_title)
+        modify_deal_trees_create_boss_facts(fisc_mstr_dir, fisc_title)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):

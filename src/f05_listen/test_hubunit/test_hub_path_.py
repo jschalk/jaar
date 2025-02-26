@@ -19,6 +19,7 @@ from src.f05_listen.hub_path import (
     DEAL_BUDADJUST_FILENAME,
     DEAL_ADJUST_LEDGER_FILENAME,
     DEAL_FOUND_FACTS_FILENAME,
+    DEAL_BOSS_FACTS_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
@@ -40,6 +41,7 @@ from src.f05_listen.hub_path import (
     create_deal_node_budevent_facts_path,
     create_deal_node_budadjust_path,
     create_deal_node_found_facts_path,
+    create_deal_node_boss_facts_path,
     create_deal_node_adjust_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
@@ -66,6 +68,7 @@ def test_hub_path_constants_are_values():
     assert DEAL_BUDADJUST_FILENAME == "budadjust.json"
     assert DEAL_ADJUST_LEDGER_FILENAME == "adjust_acct_agenda_ledger.json"
     assert DEAL_FOUND_FACTS_FILENAME == "found_facts.json"
+    assert DEAL_BOSS_FACTS_FILENAME == "boss_facts.json"
     assert BUDPOINT_FILENAME == "budpoint.json"
     assert BUDEVENT_FILENAME == "bud.json"
     assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
@@ -481,6 +484,29 @@ def test_create_deal_node_found_facts_path_ReturnObj_Scenario0_Three_deal_ancest
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_FOUND_FACTS_FILENAME)
+    assert gen_deal_facts_path == expected_deal_facts_path
+
+
+def test_create_deal_node_boss_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    tp7 = 7
+    yao_str = "Yao"
+    bob_str = "Bob"
+    deal_ancestors = [yao_str, bob_str]
+
+    # WHEN
+    gen_deal_facts_path = create_deal_node_boss_facts_path(
+        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
+    )
+
+    # THEN
+    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(timepoint_dir, yao_str)
+    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
+    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_BOSS_FACTS_FILENAME)
     assert gen_deal_facts_path == expected_deal_facts_path
 
 

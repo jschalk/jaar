@@ -187,7 +187,7 @@ def _create_found_facts(
         save_json(output_dir, DEAL_FOUND_FACTS_FILENAME, output_facts_dict)
 
 
-def modify_deal_tree_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
+def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -196,30 +196,47 @@ def modify_deal_tree_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
         deals_dir = create_path(owner_dir, "deals")
         for time_int in get_level1_dirs(deals_dir):
             deal_time_dir = create_path(deals_dir, time_int)
-            for dirpath, dirnames, filenames in os_walk(deal_time_dir):
-                if DEALNODE_FILENAME in set(filenames):
-                    _create_and_save_acct_adjust_ledger(
-                        fisc_mstr_dir, fisc_title, owner_name, dirpath
-                    )
+            modify_deal_tree_create_boss_facts()
 
 
-def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-    deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
-    deal_node_dict = open_json(deal_node_json_path)
-    ancestors = deal_node_dict.get("ancestors")
-    deal_node_quota = deal_node_dict.get("quota")
-    deal_node_owner_name = ancestors[-1] if ancestors else owner_name
-    deal_node_event_int = deal_node_dict.get("event_int")
-    budevent_json_path = create_budevent_path(
-        fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int
-    )
-    budadjust_unit = open_bud_file(budevent_json_path)
-    budadjust_unit.set_fund_pool(deal_node_quota)
-    found_facts_path = create_path(dirpath, DEAL_FOUND_FACTS_FILENAME)
-    found_facts_dict = open_json(found_facts_path)
-    set_factunits_to_bud(budadjust_unit, found_facts_dict)
-    adjust_acct_agenda_ledger = get_acct_agenda_ledger(budadjust_unit, settle_bud=True)
-    budadjust_path = create_path(dirpath, DEAL_BUDADJUST_FILENAME)
-    adjust_ledger_path = create_path(dirpath, DEAL_ADJUST_LEDGER_FILENAME)
-    save_file(budadjust_path, None, budadjust_unit.get_json())
-    save_json(adjust_ledger_path, None, adjust_acct_agenda_ledger)
+def modify_deal_tree_create_boss_facts():
+    # get_deal_root budevent
+    # if exists as budevent.reason_base add found_facts to budevent
+    # set boss_facts to budadjust.root facts
+    # save boss_facts
+    # 0 set found facts to deal tree root
+    # evaluate every deal tree node, start with root
+
+    # while not every deal tree node has been evaluated
+    # pick a closest to root deal tree node
+    # grab boss facts from parent_deal_node
+    # grab found facts for that deal_node
+    # grab budevent for that deal_node
+    # add all found_facts that exist in budevent to budevent
+    # add all boss facts that exist in budevent to budevent
+    # calculate budadjust
+    # grab acct_agenda_fund_agenda_give ledger
+    # add nodes to to_evalute_dealnodes based on acct_agenda_fund_give owners
+    pass
+
+
+# def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, dirpath):
+#     deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
+#     deal_node_dict = open_json(deal_node_json_path)
+#     ancestors = deal_node_dict.get("ancestors")
+#     deal_node_quota = deal_node_dict.get("quota")
+#     deal_node_owner_name = ancestors[-1] if ancestors else owner_name
+#     deal_node_event_int = deal_node_dict.get("event_int")
+#     budevent_json_path = create_budevent_path(
+#         fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int
+#     )
+#     budadjust_unit = open_bud_file(budevent_json_path)
+#     budadjust_unit.set_fund_pool(deal_node_quota)
+#     found_facts_path = create_path(dirpath, DEAL_FOUND_FACTS_FILENAME)
+#     found_facts_dict = open_json(found_facts_path)
+#     set_factunits_to_bud(budadjust_unit, found_facts_dict)
+#     adjust_acct_agenda_ledger = get_acct_agenda_ledger(budadjust_unit, settle_bud=True)
+#     budadjust_path = create_path(dirpath, DEAL_BUDADJUST_FILENAME)
+#     adjust_ledger_path = create_path(dirpath, DEAL_ADJUST_LEDGER_FILENAME)
+#     save_file(budadjust_path, None, budadjust_unit.get_json())
+#     save_json(adjust_ledger_path, None, adjust_acct_agenda_ledger)

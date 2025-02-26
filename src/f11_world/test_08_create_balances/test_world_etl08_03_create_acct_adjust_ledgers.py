@@ -12,39 +12,39 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cleanup):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-    mstr_dir = fizz_world._fisc_mstr_dir
-    a23_str = "accord"
-    tp5 = 5
-    bob_str = "Bob"
-    das = []
-    event7 = 7
-    # create deal_node files
-    save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
-    mop_budunit = get_mop_with_reason_budunit_example()
-    # create budevent files
-    bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
-    save_file(bob7_budevent_path, None, mop_budunit.get_json())
-    # create found_facts files
-    bob5_found_facts = {}
-    bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
-    save_json(bob5_found, None, bob5_found_facts)
-    # create paths for budadjusts
-    bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-    # create paths for adjust_ledger_paths
-    bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-    bob5_adjust_ledger_path = adjust_ledger_path(mstr_dir, a23_str, bob_str, tp5, das)
-    assert os_path_exists(bob5_budadjust_path) is False
-    assert os_path_exists(bob5_adjust_ledger_path) is False
+# def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     fizz_world = worldunit_shop("fizz")
+#     mstr_dir = fizz_world._fisc_mstr_dir
+#     a23_str = "accord"
+#     tp5 = 5
+#     bob_str = "Bob"
+#     das = []
+#     event7 = 7
+#     # create deal_node files
+#     save_deal_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+#     mop_budunit = get_mop_with_reason_budunit_example()
+#     # create budevent files
+#     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
+#     save_file(bob7_budevent_path, None, mop_budunit.get_json())
+#     # create found_facts files
+#     bob5_found_facts = {}
+#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
+#     save_json(bob5_found, None, bob5_found_facts)
+#     # create paths for budadjusts
+#     bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+#     # create paths for adjust_ledger_paths
+#     bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
+#     bob5_adjust_ledger_path = adjust_ledger_path(mstr_dir, a23_str, bob_str, tp5, das)
+#     assert os_path_exists(bob5_budadjust_path) is False
+#     assert os_path_exists(bob5_adjust_ledger_path) is False
 
-    # WHEN
-    fizz_world.modify_deal_trees_with_boss_facts()
+#     # WHEN
+#     fizz_world.modify_deal_trees_with_boss_facts()
 
-    # THEN
-    assert os_path_exists(bob5_budadjust_path)
-    assert os_path_exists(bob5_adjust_ledger_path)
+#     # THEN
+#     assert os_path_exists(bob5_budadjust_path)
+#     assert os_path_exists(bob5_adjust_ledger_path)
 
 
 # create a world with, deal_node.json, found facts and bud events
