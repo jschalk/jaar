@@ -5,7 +5,7 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
-    dealdepth_str,
+    celldepth_str,
     DealUnit,
     dealunit_shop,
     get_dealunit_from_dict,
@@ -14,7 +14,7 @@ from src.f01_road.deal import (
 from pytest import raises as pytest_raises
 
 
-# def test_set_dealunit_deal_nets_SetsAttrScenario0_dealdepth_0():
+# def test_set_dealunit_deal_nets_SetsAttrScenario0_celldepth_0():
 #     # ESTABLISH
 #     x_deal = dealunit_shop(time_int=7, quota=45)
 

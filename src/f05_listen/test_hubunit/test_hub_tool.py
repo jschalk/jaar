@@ -2,6 +2,7 @@ from src.f00_instrument.file import create_path, set_dir, open_json
 from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import base_str
+from src.f05_listen.cell import CELL_NODE_QUOTA_DEFAULT
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -27,8 +28,7 @@ from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_budevent_facts,
     save_arbitrary_budevent,
-    save_deal_node_file,
-    DEAL_NODE_QUOTA_DEFAULT,
+    save_cell_node_file,
 )
 from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
@@ -418,53 +418,46 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
     assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
 
 
-def test_DEAL_NODE_QUOTA_DEFAULT_value():
-    # ESTABLISH / WHEN / THEN
-    assert DEAL_NODE_QUOTA_DEFAULT == 1000
-
-
-def test_save_deal_node_file_SetsFile_Scenario0(env_dir_setup_cleanup):
+def test_save_cell_node_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
-    sue7_dealnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7)
+    sue7_cellnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7)
     event3 = 3
     das = []
     quota500 = 500
-    deal_depth4 = 4
+    celldepth4 = 4
     penny6 = 6
-    assert os_path_exists(sue7_dealnode_path) is False
+    assert os_path_exists(sue7_cellnode_path) is False
 
     # WHEN
-    save_deal_node_file(
+    save_cell_node_file(
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_title=a23_str,
         time_owner_name=sue_str,
         time_int=time7,
         quota=quota500,
         event_int=event3,
-        dealdepth=deal_depth4,
+        celldepth=celldepth4,
         penny=penny6,
         deal_ancestors=das,
     )
 
     # THEN
-    print(f"{sue7_dealnode_path=}")
-    assert os_path_exists(sue7_dealnode_path)
-    expected_sue7_dealnode = {
-        "ancestors": das,
-        "event_int": event3,
-        "dealdepth": deal_depth4,
-        "owner_name": sue_str,
-        "penny": penny6,
-        "quota": quota500,
-    }
-    assert open_json(sue7_dealnode_path) == expected_sue7_dealnode
+    print(f"{sue7_cellnode_path=}")
+    assert os_path_exists(sue7_cellnode_path)
+    generated_cell_dict = open_json(sue7_cellnode_path)
+    assert generated_cell_dict.get("ancestors") == das
+    assert generated_cell_dict.get("event_int") == event3
+    assert generated_cell_dict.get("celldepth") == celldepth4
+    assert generated_cell_dict.get("deal_owner_name") == sue_str
+    assert generated_cell_dict.get("penny") == penny6
+    assert generated_cell_dict.get("quota") == quota500
 
 
-def test_save_deal_node_file_SetsFile_Scenario1_ManyParametersEmpty(
+def test_save_cell_node_file_SetsFile_Scenario1_ManyParametersEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -474,24 +467,22 @@ def test_save_deal_node_file_SetsFile_Scenario1_ManyParametersEmpty(
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_dealnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cellnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
-    assert os_path_exists(sue7_dealnode_path) is False
+    assert os_path_exists(sue7_cellnode_path) is False
 
     # WHEN
-    save_deal_node_file(
+    save_cell_node_file(
         fisc_mstr_dir, a23_str, sue_str, time7, event3, deal_ancestors=das
     )
 
     # THEN
-    print(f"{sue7_dealnode_path=}")
-    assert os_path_exists(sue7_dealnode_path)
-    expected_sue7_dealnode = {
-        "ancestors": das,
-        "event_int": event3,
-        "dealdepth": 0,
-        "owner_name": sue_str,
-        "penny": 1,
-        "quota": DEAL_NODE_QUOTA_DEFAULT,
-    }
-    assert open_json(sue7_dealnode_path) == expected_sue7_dealnode
+    print(f"{sue7_cellnode_path=}")
+    assert os_path_exists(sue7_cellnode_path)
+    generated_cell_dict = open_json(sue7_cellnode_path)
+    assert generated_cell_dict.get("ancestors") == das
+    assert generated_cell_dict.get("event_int") == event3
+    assert generated_cell_dict.get("celldepth") == 0
+    assert generated_cell_dict.get("deal_owner_name") == sue_str
+    assert generated_cell_dict.get("penny") == 1
+    assert generated_cell_dict.get("quota") == CELL_NODE_QUOTA_DEFAULT

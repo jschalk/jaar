@@ -1,5 +1,5 @@
 from src.f00_instrument.file import open_json, save_json, count_dirs_files
-from src.f01_road.deal import owner_name_str, quota_str, dealdepth_str
+from src.f01_road.deal import owner_name_str, quota_str, celldepth_str
 from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.hub_path import (
     create_cell_dir_path as node_dir,
@@ -45,11 +45,11 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro1_LedgerDepth0(
     yao_str = "Yao"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_dealdepth = 0
+    deal1_celldepth = 0
     event56 = 56
-    deal_node = {
+    cell_node = {
         "ancestors": [],
-        dealdepth_str(): deal1_dealdepth,
+        celldepth_str(): deal1_celldepth,
         owner_name_str(): bob_str,
         event_int_str(): event56,
         quota_str(): deal1_quota,
@@ -60,7 +60,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro1_LedgerDepth0(
         owner_name=bob_str,
         time_int=tp37,
     )
-    save_json(a23_bob_ledger_state_path, None, deal_node)
+    save_json(a23_bob_ledger_state_path, None, cell_node)
     save_budevent(fisc_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
 
     bob_tp37_credit_ledger_path = credit_path(fisc_mstr_dir, a23_str, bob_str, tp37)
@@ -93,12 +93,12 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro2_LedgerDepth1(
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_dealdepth = 1
+    deal1_celldepth = 1
     event56 = 56
-    deal_node = {
+    cell_node = {
         "ancestors": [bob_str],
         event_int_str(): event56,
-        dealdepth_str(): deal1_dealdepth,
+        celldepth_str(): deal1_celldepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -109,7 +109,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro2_LedgerDepth1(
         owner_name=bob_str,
         time_int=tp37,
     )
-    save_json(a23_bob_ledger_state_path, None, deal_node)
+    save_json(a23_bob_ledger_state_path, None, cell_node)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -172,7 +172,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro2_LedgerDepth1(
     assert open_json(bob_tp37_bob_node_path) == {
         "ancestors": ["Bob", "Bob"],
         "event_int": 56,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Bob",
         "penny": 1,
         "quota": 150,
@@ -180,7 +180,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro2_LedgerDepth1(
     assert open_json(bob_tp37_yao_node_path) == {
         "ancestors": ["Bob", "Yao"],
         "event_int": 56,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Yao",
         "penny": 1,
         "quota": 150,
@@ -188,7 +188,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro2_LedgerDepth1(
     assert open_json(bob_tp37_zia_node_path) == {
         "ancestors": ["Bob", "Zia"],
         "event_int": 56,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Zia",
         "penny": 1,
         "quota": 150,
@@ -214,14 +214,14 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_dealdepth = 1
+    deal1_celldepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
-    deal_node = {
+    cell_node = {
         "ancestors": [bob_str],
         event_int_str(): event55,
-        dealdepth_str(): deal1_dealdepth,
+        celldepth_str(): deal1_celldepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -232,7 +232,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
         owner_name=bob_str,
         time_int=tp37,
     )
-    save_json(a23_bob_ledger_state_path, None, deal_node)
+    save_json(a23_bob_ledger_state_path, None, cell_node)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -296,7 +296,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
     assert open_json(tp37_bob_node_path) == {
         "ancestors": ["Bob", "Bob"],
         "event_int": 55,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Bob",
         "penny": 1,
         "quota": 150,
@@ -304,7 +304,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
     assert open_json(tp37_yao_node_path) == {
         "ancestors": ["Bob", "Yao"],
         "event_int": 44,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Yao",
         "penny": 1,
         "quota": 150,
@@ -312,7 +312,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
     assert open_json(tp37_zia_node_path) == {
         "ancestors": ["Bob", "Zia"],
         "event_int": 33,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Zia",
         "penny": 1,
         "quota": 150,
@@ -338,15 +338,15 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPas
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 450
-    deal1_dealdepth = 1
+    deal1_celldepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
     event66 = 66
-    deal_node = {
+    cell_node = {
         "ancestors": [bob_str],
         event_int_str(): event55,
-        dealdepth_str(): deal1_dealdepth,
+        celldepth_str(): deal1_celldepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -357,7 +357,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPas
         owner_name=bob_str,
         time_int=tp37,
     )
-    save_json(a23_bob_ledger_state_path, None, deal_node)
+    save_json(a23_bob_ledger_state_path, None, cell_node)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -421,7 +421,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPas
     assert open_json(tp37_bob_node_path) == {
         "ancestors": ["Bob", "Bob"],
         "event_int": 55,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Bob",
         "penny": 1,
         "quota": 150,
@@ -429,7 +429,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPas
     assert open_json(tp37_yao_node_path) == {
         "ancestors": ["Bob", "Yao"],
         "event_int": 44,
-        "dealdepth": 0,
+        "celldepth": 0,
         "owner_name": "Yao",
         "penny": 1,
         "quota": 150,
@@ -453,14 +453,14 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
     zia_str = "Zia"
     tp37 = 37  # timepoint
     deal1_quota = 2
-    deal1_dealdepth = 1
+    deal1_celldepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
-    deal_node = {
+    cell_node = {
         "ancestors": [bob_str],
         event_int_str(): event55,
-        dealdepth_str(): deal1_dealdepth,
+        celldepth_str(): deal1_celldepth,
         owner_name_str(): bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
@@ -471,7 +471,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
         owner_name=bob_str,
         time_int=tp37,
     )
-    save_json(a23_bob_ledger_state_path, None, deal_node)
+    save_json(a23_bob_ledger_state_path, None, cell_node)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -551,12 +551,12 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
 #     zia_str = "Zia"
 #     tp37 = 37  # timepoint
 #     deal1_quota = 450
-#     deal1_dealdepth = 1
+#     deal1_celldepth = 1
 #     event56 = 56
-#     deal_node = {
+#     cell_node = {
 #         "ancestors": [bob_str],
 #         event_int_str(): event56,
-#         dealdepth_str(): deal1_dealdepth,
+#         celldepth_str(): deal1_celldepth,
 #         owner_name_str(): bob_str,
 #         penny_str(): 1,
 #         quota_str(): deal1_quota,
@@ -567,7 +567,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
 #         owner_name=bob_str,
 #         time_int=tp37,
 #     )
-#     save_json(a23_bob_ledger_state_path, None, deal_node)
+#     save_json(a23_bob_ledger_state_path, None, cell_node)
 #     bob_accts = [[yao_str, 100], [bob_str], [zia_str]]
 #     yao_accts = [[zia_str]]
 #     zia_accts = [[bob_str, 100], [yao_str]]
@@ -630,7 +630,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
 #     assert open_json(bob_tp37_bob_node_path) == {
 #         "ancestors": ["Bob", "Bob"],
 #         "event_int": 56,
-#         "dealdepth": 0,
+#         "celldepth": 0,
 #         "owner_name": "Bob",
 #         "penny": 1,
 #         "quota": 150,
@@ -638,7 +638,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
 #     assert open_json(bob_tp37_yao_node_path) == {
 #         "ancestors": ["Bob", "Yao"],
 #         "event_int": 56,
-#         "dealdepth": 0,
+#         "celldepth": 0,
 #         "owner_name": "Yao",
 #         "penny": 1,
 #         "quota": 150,
@@ -646,7 +646,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
 #     assert open_json(bob_tp37_zia_node_path) == {
 #         "ancestors": ["Bob", "Zia"],
 #         "event_int": 56,
-#         "dealdepth": 0,
+#         "celldepth": 0,
 #         "owner_name": "Zia",
 #         "penny": 1,
 #         "quota": 150,

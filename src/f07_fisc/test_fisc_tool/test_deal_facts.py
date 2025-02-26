@@ -6,12 +6,12 @@ from src.f05_listen.hub_path import (
     create_cell_found_facts_path as found_facts_path,
     create_cell_quota_ledger_path as quota_path,
 )
-from src.f07_fisc.fisc_tool import uphill_deal_node_budevent_facts
+from src.f07_fisc.fisc_tool import uphill_cell_node_budevent_facts
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
 
-def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(
+def test_uphill_cell_node_budevent_facts_Scenario0_RootOnly_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -29,14 +29,14 @@ def test_uphill_deal_node_budevent_facts_Scenario0_RootOnly_NoFacts(
     assert os_path_exists(bob_t5_found_path) is False
 
     # WHEN
-    uphill_deal_node_budevent_facts(fisc_mstr_dir, a23_str)
+    uphill_cell_node_budevent_facts(fisc_mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob_t5_found_path)
     assert open_json(bob_t5_found_path) == {}
 
 
-def test_uphill_deal_node_budevent_facts_Scenario1_ChildNode_NoFacts(
+def test_uphill_cell_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -65,14 +65,14 @@ def test_uphill_deal_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     assert os_path_exists(bob_t5_found_path) is False
 
     # WHEN
-    uphill_deal_node_budevent_facts(mstr_dir, a23_str)
+    uphill_cell_node_budevent_facts(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob_t5_found_path)
     assert open_json(bob_t5_found_path) == {}
 
 
-def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
+def test_uphill_cell_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -110,7 +110,7 @@ def test_uphill_deal_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssigne
     assert os_path_exists(bob_t5_yao_sue_found) is False
 
     # WHEN
-    uphill_deal_node_budevent_facts(mstr_dir, a23_str)
+    uphill_cell_node_budevent_facts(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob_t5_found)

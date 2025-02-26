@@ -186,7 +186,7 @@ def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_present_time_entr
     assert accord_fisc.get_brokerunit(bob_str) == bob_brokerunit
 
 
-def test_FiscUnit_add_dealunit_SetsAttr_dealdepth():
+def test_FiscUnit_add_dealunit_SetsAttr_celldepth():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
@@ -195,13 +195,13 @@ def test_FiscUnit_add_dealunit_SetsAttr_dealdepth():
     sue_x4_quota = 55
     sue_x7_time_int = 7
     sue_x7_quota = 66
-    sue_x7_dealdepth = 5
+    sue_x7_celldepth = 5
     assert accord_fisc.brokerunits == {}
 
     # WHEN
     accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
     accord_fisc.add_dealunit(
-        sue_str, sue_x7_time_int, sue_x7_quota, dealdepth=sue_x7_dealdepth
+        sue_str, sue_x7_time_int, sue_x7_quota, celldepth=sue_x7_celldepth
     )
 
     # THEN
@@ -209,7 +209,7 @@ def test_FiscUnit_add_dealunit_SetsAttr_dealdepth():
     expected_sue_brokerunit = brokerunit_shop(sue_str)
     expected_sue_brokerunit.add_deal(sue_x4_time_int, sue_x4_quota)
     expected_sue_brokerunit.add_deal(
-        sue_x7_time_int, sue_x7_quota, dealdepth=sue_x7_dealdepth
+        sue_x7_time_int, sue_x7_quota, celldepth=sue_x7_celldepth
     )
     # print(f"{expected_sue_brokerunit=}")
     gen_sue_brokerunit = accord_fisc.get_brokerunit(sue_str)

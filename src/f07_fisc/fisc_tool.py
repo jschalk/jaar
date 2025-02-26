@@ -60,7 +60,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
         while deals_to_evaluate != []:
             parent_deal = deals_to_evaluate.pop()
             parent_event_int = parent_deal.get("event_int")
-            parent_dealdepth = parent_deal.get("dealdepth")
+            parent_celldepth = parent_deal.get("celldepth")
             parent_owner_name = parent_deal.get("owner_name")
             parent_quota = parent_deal.get("quota")
             parent_penny = parent_deal.get("penny")
@@ -78,8 +78,8 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
             )
             parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
             save_json(parent_quota_ledger_path, None, parent_quota_ledger)
-            if parent_dealdepth > 0:
-                child_dealdepth = parent_dealdepth - 1
+            if parent_celldepth > 0:
+                child_celldepth = parent_celldepth - 1
                 parent_credit_owners = set(parent_credit_ledger.keys())
                 owners_downhill_events_ints = get_owners_downhill_event_ints(
                     owner_events_sets, parent_credit_owners, parent_event_int
@@ -91,10 +91,10 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                         if quota_amount > 0:
                             child_ancestors = list(copy_copy(parent_ancestors))
                             child_ancestors.append(quota_owner)
-                            child_deal_node = {
+                            child_cell_node = {
                                 "ancestors": child_ancestors,
                                 "event_int": downhill_event_int,
-                                "dealdepth": child_dealdepth,
+                                "celldepth": child_celldepth,
                                 "owner_name": quota_owner,
                                 "penny": parent_penny,
                                 "quota": quota_amount,
@@ -106,11 +106,11 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                                 time_int,
                                 child_ancestors[1:],
                             )
-                            save_json(child_deal_json_path, None, child_deal_node)
-                            deals_to_evaluate.append(child_deal_node)
+                            save_json(child_deal_json_path, None, child_cell_node)
+                            deals_to_evaluate.append(child_cell_node)
 
 
-def create_all_deal_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
+def create_all_cell_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -127,17 +127,17 @@ def create_all_deal_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
 
 
 def create_and_save_facts_file(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-    deal_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
-    deal_node_dict = open_json(deal_node_json_path)
-    deal_event_int = deal_node_dict.get("event_int")
+    cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
+    cell_node_dict = open_json(cell_node_json_path)
+    deal_event_int = cell_node_dict.get("event_int")
     budevent_fact_dict = get_budevent_facts(
         fisc_mstr_dir, fisc_title, owner_name, deal_event_int
     )
-    deal_node_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
-    save_json(deal_node_facts_path, None, budevent_fact_dict)
+    cell_node_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
+    save_json(cell_node_facts_path, None, budevent_fact_dict)
 
 
-def uphill_deal_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
+def uphill_cell_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -209,29 +209,29 @@ def modify_deal_tree_create_boss_facts():
 
     # while not every deal tree node has been evaluated
     # pick a closest to root deal tree node
-    # grab boss facts from parent_deal_node
-    # grab found facts for that deal_node
-    # grab budevent for that deal_node
+    # grab boss facts from parent_cell_node
+    # grab found facts for that cell_node
+    # grab budevent for that cell_node
     # add all found_facts that exist in budevent to budevent
     # add all boss facts that exist in budevent to budevent
     # calculate budadjust
     # grab acct_agenda_fund_agenda_give ledger
-    # add nodes to to_evalute_dealnodes based on acct_agenda_fund_give owners
+    # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
     pass
 
 
 # def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-#     deal_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
-#     deal_node_dict = open_json(deal_node_json_path)
-#     ancestors = deal_node_dict.get("ancestors")
-#     deal_node_quota = deal_node_dict.get("quota")
-#     deal_node_owner_name = ancestors[-1] if ancestors else owner_name
-#     deal_node_event_int = deal_node_dict.get("event_int")
+#     cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
+#     cell_node_dict = open_json(cell_node_json_path)
+#     ancestors = cell_node_dict.get("ancestors")
+#     cell_node_quota = cell_node_dict.get("quota")
+#     cell_node_owner_name = ancestors[-1] if ancestors else owner_name
+#     cell_node_event_int = cell_node_dict.get("event_int")
 #     budevent_json_path = create_budevent_path(
-#         fisc_mstr_dir, fisc_title, deal_node_owner_name, deal_node_event_int
+#         fisc_mstr_dir, fisc_title, cell_node_owner_name, cell_node_event_int
 #     )
 #     budadjust_unit = open_bud_file(budevent_json_path)
-#     budadjust_unit.set_fund_pool(deal_node_quota)
+#     budadjust_unit.set_fund_pool(cell_node_quota)
 #     found_facts_path = create_path(dirpath, CELL_FOUND_FACTS_FILENAME)
 #     found_facts_dict = open_json(found_facts_path)
 #     set_factunits_to_bud(budadjust_unit, found_facts_dict)

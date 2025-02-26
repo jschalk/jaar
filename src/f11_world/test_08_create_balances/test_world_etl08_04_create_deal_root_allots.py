@@ -5,12 +5,12 @@ from src.f05_listen.hub_path import (
     create_cell_adjust_ledger_path as node_ledger,
     create_dealunit_net_ledger_json_path as deal_net_ledger,
 )
-from src.f05_listen.hub_tool import save_deal_node_file
+from src.f05_listen.hub_tool import save_cell_node_file
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.example_worlds import get_mop_with_reason_budunit_example
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
-# set acct_adjust_ledgers in deal_node
+# set acct_adjust_ledgers in cell_node
 # run allot_nested_scale to get root allotment
 # save root allotment as json

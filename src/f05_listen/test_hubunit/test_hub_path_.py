@@ -269,13 +269,13 @@ def test_create_cell_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
     tp7 = 7
 
     # WHEN
-    gen_deal_node_path = create_cell_dir_path(
+    gen_cell_node_path = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, []
     )
 
     # THEN
     timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    assert gen_deal_node_path == timepoint_dir
+    assert gen_cell_node_path == timepoint_dir
 
 
 def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
@@ -288,14 +288,14 @@ def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
     x_deal_ancestors = [yao_str]
 
     # WHEN
-    gen_deal_node_path = create_cell_dir_path(
+    gen_cell_node_path = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=x_deal_ancestors
     )
 
     # THEN
     timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
-    assert gen_deal_node_path == tp_yao_dir
+    assert gen_cell_node_path == tp_yao_dir
 
 
 def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
@@ -310,7 +310,7 @@ def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
     x_deal_ancestors = [yao_str, bob_str, zia_str]
 
     # WHEN
-    gen_deal_dealdepth_dir_path = create_cell_dir_path(
+    gen_deal_celldepth_dir_path = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=x_deal_ancestors
     )
 
@@ -319,7 +319,7 @@ def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_tp_yao_bob_zia_dir = create_path(tp_yao_bob_dir, zia_str)
-    assert gen_deal_dealdepth_dir_path == expected_tp_yao_bob_zia_dir
+    assert gen_deal_celldepth_dir_path == expected_tp_yao_bob_zia_dir
 
 
 def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
@@ -330,7 +330,7 @@ def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     timepoint7 = 7
 
     # WHEN
-    gen_deal_node_path = create_cell_node_json_path(
+    gen_cell_node_path = create_cell_node_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -341,8 +341,8 @@ def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_deal_node_path_dir = create_path(timepoint_dir, CELLNODE_FILENAME)
-    assert gen_deal_node_path == expected_deal_node_path_dir
+    expected_cell_node_path_dir = create_path(timepoint_dir, CELLNODE_FILENAME)
+    assert gen_cell_node_path == expected_cell_node_path_dir
 
 
 def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
@@ -356,7 +356,7 @@ def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_node_path = create_cell_node_json_path(
+    gen_cell_node_path = create_cell_node_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
@@ -364,8 +364,8 @@ def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_node_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
-    assert gen_deal_node_path == expected_deal_node_path
+    expected_cell_node_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
+    assert gen_cell_node_path == expected_cell_node_path
 
 
 def test_create_cell_credit_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
