@@ -5,10 +5,10 @@ from src.f02_bud.bud_tool import get_acct_agenda_ledger
 from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_budevent_path,
-    create_deal_node_found_facts_path as found_facts_path,
-    create_deal_node_boss_facts_path as boss_facts_path,
-    create_deal_node_budadjust_path as budadjust_path,
-    create_deal_node_adjust_ledger_path as adjust_ledger_path,
+    create_cell_found_facts_path as found_facts_path,
+    create_cell_boss_facts_path as boss_facts_path,
+    create_cell_budadjust_path as budadjust_path,
+    create_cell_adjust_ledger_path as adjust_ledger_path,
 )
 from src.f05_listen.hub_tool import save_deal_node_file, open_bud_file
 from src.f07_fisc.fisc_tool import modify_deal_trees_create_boss_facts
@@ -99,7 +99,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
     return yao_bud
 
 
-# # # create a world with, deal_node.json, found facts and bud events
+# # # create a world with, cell_node.json, found facts and bud events
 # # # for every found_fact change budevent to that fact
 # # # create agenda (different than if found_fact was not applied)
 # def test_modify_deal_tree_create_boss_facts_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly():

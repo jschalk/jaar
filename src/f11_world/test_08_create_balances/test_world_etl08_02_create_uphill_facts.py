@@ -2,9 +2,9 @@ from src.f00_instrument.file import open_json, save_json
 from src.f01_road.road import create_road
 from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
-    create_deal_node_budevent_facts_path as bude_facts_path,
-    create_deal_node_found_facts_path as found_facts_path,
-    create_deal_node_quota_ledger_path as quota_path,
+    create_cell_budevent_facts_path as bude_facts_path,
+    create_cell_found_facts_path as found_facts_path,
+    create_cell_quota_ledger_path as quota_path,
 )
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup, get_test_worlds_dir

@@ -23,7 +23,7 @@ from src.f05_listen.hub_path import (
     create_budpoint_path,
     create_budevent_path,
     create_owners_dir_path,
-    create_deal_node_json_path,
+    create_cell_node_json_path,
 )
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
@@ -165,7 +165,7 @@ def save_deal_node_file(
     penny: int = None,
 ):
     deal_ancestors = get_empty_list_if_None(deal_ancestors)
-    dealnode_path = create_deal_node_json_path(
+    dealnode_path = create_cell_node_json_path(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
     )
     if quota is None:

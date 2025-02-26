@@ -1,9 +1,9 @@
 from src.f00_instrument.file import save_json, save_file
 from src.f05_listen.hub_path import (
     create_budevent_path,
-    create_deal_node_budadjust_path as budadjust_path,
-    create_deal_node_found_facts_path as found_facts_path,
-    create_deal_node_adjust_ledger_path as adjust_ledger_path,
+    create_cell_budadjust_path as budadjust_path,
+    create_cell_found_facts_path as found_facts_path,
+    create_cell_adjust_ledger_path as adjust_ledger_path,
 )
 from src.f05_listen.hub_tool import save_deal_node_file
 from src.f11_world.world import worldunit_shop
@@ -47,7 +47,7 @@ from os.path import exists as os_path_exists
 #     assert os_path_exists(bob5_adjust_ledger_path)
 
 
-# create a world with, deal_node.json, found facts and bud events
+# create a world with, cell_node.json, found facts and bud events
 # for every found_fact change budevent to that fact
 # create agenda (different than if found_fact was not applied)
 # create a budevent such that changing facts changes agenda output

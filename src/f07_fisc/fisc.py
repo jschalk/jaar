@@ -48,7 +48,7 @@ from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f05_listen.basis_buds import get_default_forecast_bud
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_deal_node_json_path,
+    create_cell_node_json_path,
 )
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
@@ -399,7 +399,7 @@ class FiscUnit:
             "penny": self.penny,
             "ancestors": [owner_name],
         }
-        deal_node_json_path = create_deal_node_json_path(
+        deal_node_json_path = create_cell_node_json_path(
             self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
         )
         save_json(deal_node_json_path, None, deal_node)

@@ -10,20 +10,20 @@ from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
 from src.f02_bud.bud_tool import set_factunits_to_bud, get_acct_agenda_ledger
 from src.f05_listen.hub_path import (
-    DEALNODE_FILENAME,
-    DEAL_ACCT_LEDGER_FILENAME,
-    DEAL_BUDEVENT_FACTS_FILENAME,
-    DEAL_BUDADJUST_FILENAME,
-    DEAL_ADJUST_LEDGER_FILENAME,
-    DEAL_FOUND_FACTS_FILENAME,
-    DEAL_QUOTA_LEDGER_FILENAME,
-    create_deal_node_json_path,
+    CELLNODE_FILENAME,
+    CELL_ACCT_LEDGER_FILENAME,
+    CELL_BUDEVENT_FACTS_FILENAME,
+    CELL_BUDADJUST_FILENAME,
+    CELL_ADJUST_LEDGER_FILENAME,
+    CELL_FOUND_FACTS_FILENAME,
+    CELL_QUOTA_LEDGER_FILENAME,
+    create_cell_node_json_path,
     create_budevent_path,
-    create_deal_node_budadjust_path,
-    create_deal_node_budevent_facts_path,
-    create_deal_node_found_facts_path,
-    create_deal_node_credit_ledger_path,
-    create_deal_node_quota_ledger_path,
+    create_cell_budadjust_path,
+    create_cell_budevent_facts_path,
+    create_cell_found_facts_path,
+    create_cell_credit_ledger_path,
+    create_cell_quota_ledger_path,
 )
 from src.f05_listen.hub_tool import (
     open_bud_file,
@@ -50,7 +50,7 @@ def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
 
 
 def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
-    root_deal_json_path = create_deal_node_json_path(
+    root_deal_json_path = create_cell_node_json_path(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int
     )
     if os_path_exists(root_deal_json_path):
@@ -69,11 +69,11 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                 fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
             )
             path_ancestors = parent_ancestors[1:]
-            parent_credit_ledger_json_path = create_deal_node_credit_ledger_path(
+            parent_credit_ledger_json_path = create_cell_credit_ledger_path(
                 fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
             )
             save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
-            parent_quota_ledger_path = create_deal_node_quota_ledger_path(
+            parent_quota_ledger_path = create_cell_quota_ledger_path(
                 fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
             )
             parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
@@ -99,7 +99,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                                 "penny": parent_penny,
                                 "quota": quota_amount,
                             }
-                            child_deal_json_path = create_deal_node_json_path(
+                            child_deal_json_path = create_cell_node_json_path(
                                 fisc_mstr_dir,
                                 fisc_title,
                                 time_owner_name,
@@ -120,20 +120,20 @@ def create_all_deal_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
         for time_int in get_level1_dirs(deals_dir):
             deal_time_dir = create_path(deals_dir, time_int)
             for dirpath, dirnames, filenames in os_walk(deal_time_dir):
-                if DEALNODE_FILENAME in set(filenames):
+                if CELLNODE_FILENAME in set(filenames):
                     create_and_save_facts_file(
                         fisc_mstr_dir, fisc_title, owner_name, dirpath
                     )
 
 
 def create_and_save_facts_file(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-    deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
+    deal_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
     deal_node_dict = open_json(deal_node_json_path)
     deal_event_int = deal_node_dict.get("event_int")
     budevent_fact_dict = get_budevent_facts(
         fisc_mstr_dir, fisc_title, owner_name, deal_event_int
     )
-    deal_node_facts_path = create_path(dirpath, DEAL_BUDEVENT_FACTS_FILENAME)
+    deal_node_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
     save_json(deal_node_facts_path, None, budevent_fact_dict)
 
 
@@ -149,12 +149,12 @@ def uphill_deal_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
             budevent_facts_dirs = [
                 dirpath
                 for dirpath, dirnames, filenames in os_walk(deal_time_dir)
-                if DEAL_BUDEVENT_FACTS_FILENAME in set(filenames)
+                if CELL_BUDEVENT_FACTS_FILENAME in set(filenames)
             ]
             quota_ledger_dirs = [
                 dirpath
                 for dirpath, dirnames, filenames in os_walk(deal_time_dir)
-                if DEAL_QUOTA_LEDGER_FILENAME in set(filenames)
+                if CELL_QUOTA_LEDGER_FILENAME in set(filenames)
             ]
             _create_found_facts(deal_time_dir, budevent_facts_dirs, quota_ledger_dirs)
 
@@ -164,7 +164,7 @@ def _create_found_facts(
 ):
     nodes_facts_dict = {}
     for dirpath in budevent_facts_dirs:
-        budevent_facts_path = create_path(dirpath, DEAL_BUDEVENT_FACTS_FILENAME)
+        budevent_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
         budevent_facts_dict = factunits_get_from_dict(open_json(budevent_facts_path))
         deal_path = dirpath.replace(deal_time_dir, "")
         deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
@@ -172,7 +172,7 @@ def _create_found_facts(
 
     nodes_quotas_dict = {}
     for dirpath in quota_ledger_dirs:
-        quota_ledger_path = create_path(dirpath, DEAL_QUOTA_LEDGER_FILENAME)
+        quota_ledger_path = create_path(dirpath, CELL_QUOTA_LEDGER_FILENAME)
         quota_ledger_dict = open_json(quota_ledger_path)
         deal_path = dirpath.replace(deal_time_dir, "")
         deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
@@ -184,7 +184,7 @@ def _create_found_facts(
         for node_addr, facts in nodes_wgt_facts.items()
     }
     for output_dir, output_facts_dict in output_dir_facts.items():
-        save_json(output_dir, DEAL_FOUND_FACTS_FILENAME, output_facts_dict)
+        save_json(output_dir, CELL_FOUND_FACTS_FILENAME, output_facts_dict)
 
 
 def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
@@ -221,7 +221,7 @@ def modify_deal_tree_create_boss_facts():
 
 
 # def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-#     deal_node_json_path = create_path(dirpath, DEALNODE_FILENAME)
+#     deal_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
 #     deal_node_dict = open_json(deal_node_json_path)
 #     ancestors = deal_node_dict.get("ancestors")
 #     deal_node_quota = deal_node_dict.get("quota")
@@ -232,11 +232,11 @@ def modify_deal_tree_create_boss_facts():
 #     )
 #     budadjust_unit = open_bud_file(budevent_json_path)
 #     budadjust_unit.set_fund_pool(deal_node_quota)
-#     found_facts_path = create_path(dirpath, DEAL_FOUND_FACTS_FILENAME)
+#     found_facts_path = create_path(dirpath, CELL_FOUND_FACTS_FILENAME)
 #     found_facts_dict = open_json(found_facts_path)
 #     set_factunits_to_bud(budadjust_unit, found_facts_dict)
 #     adjust_acct_agenda_ledger = get_acct_agenda_ledger(budadjust_unit, settle_bud=True)
-#     budadjust_path = create_path(dirpath, DEAL_BUDADJUST_FILENAME)
-#     adjust_ledger_path = create_path(dirpath, DEAL_ADJUST_LEDGER_FILENAME)
+#     budadjust_path = create_path(dirpath, CELL_BUDADJUST_FILENAME)
+#     adjust_ledger_path = create_path(dirpath, CELL_ADJUST_LEDGER_FILENAME)
 #     save_file(budadjust_path, None, budadjust_unit.get_json())
 #     save_json(adjust_ledger_path, None, adjust_acct_agenda_ledger)
