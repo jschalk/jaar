@@ -1,5 +1,10 @@
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.cell import CellUnit, cellunit_shop, CELL_NODE_QUOTA_DEFAULT
+from src.f05_listen.cell import (
+    CellUnit,
+    cellunit_shop,
+    CELL_NODE_QUOTA_DEFAULT,
+    get_cellunit_from_dict,
+)
 from src.f05_listen.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
@@ -238,3 +243,109 @@ def test_CellUnit_get_json_ReturnsObj():
 
     # THEN
     assert len(x_cell_json) == 963
+
+
+def test_CellUnit_set_budevent_facts_from_budevent_SetsAttr():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_cellunit = cellunit_shop(yao_str)
+    assert yao_cellunit.budevent_facts == {}
+
+    # WHEN
+    yao_cellunit.set_budevent_facts_from_budevent(yao_bud)
+
+    # THEN
+    expected_factunits = {clean_fact.base: clean_fact}
+    assert yao_cellunit.budevent_facts == expected_factunits
+
+
+def test_CellUnit_set_found_facts_from_dict_SetsAttr():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    assert yao_cellunit.found_facts == {}
+
+    # WHEN
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+
+    # THEN
+    expected_factunits = {clean_fact.base: clean_fact}
+    assert yao_cellunit.found_facts == expected_factunits
+
+
+def test_CellUnit_set_boss_facts_from_found_facts_SetsAttr():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.found_facts) == 1
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.set_boss_facts_from_found_facts()
+
+    # THEN
+    assert yao_cellunit.boss_facts == yao_cellunit.found_facts
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_get_cellunit_from_dict_ReturnsObj_Scenario0_NoParameters():
+    # ESTABLISH
+    yao_str = "Yao"
+    x_dict = {"deal_owner_name": yao_str}
+
+    # WHEN
+    gen_cellunit = get_cellunit_from_dict(x_dict)
+
+    # THEN
+    assert gen_cellunit == cellunit_shop(yao_str)
+
+
+def test_get_cellunit_from_dict_ReturnsObj_Scenario1():
+    # ESTABLISH
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_sue_ancestors = [bob_str, sue_str]
+    bob_sue_event7 = 7
+    bob_sue_deal_owner = yao_str
+    bob_sue_celldepth3 = 3
+    bob_sue_penny2 = 2
+    bob_sue_quota300 = 300
+    clean_fact = clean_factunit()
+    dirty_fact = dirty_factunit()
+    sky_blue_fact = sky_blue_factunit()
+    bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
+    bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
+    bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    bob_sue_cellunit = cellunit_shop(
+        bob_sue_deal_owner,
+        bob_sue_ancestors,
+        bob_sue_event7,
+        bob_sue_celldepth3,
+        bob_sue_penny2,
+        bob_sue_quota300,
+        None,
+        bob_sue_budevent_factunits,
+        bob_sue_found_factunits,
+        bob_sue_boss_factunits,
+    )
+    x_cell_dict = bob_sue_cellunit.get_dict()
+
+    # WHEN
+    gen_cellunit = get_cellunit_from_dict(x_cell_dict)
+
+    # THEN
+    assert gen_cellunit == bob_sue_cellunit

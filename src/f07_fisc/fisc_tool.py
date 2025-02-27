@@ -5,7 +5,7 @@ from src.f00_instrument.file import (
     open_json,
     save_file,
 )
-from src.f01_road.allot import allot_scale, allot_nested_scale
+from src.f01_road.allot import allot_scale
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
 from src.f02_bud.bud_tool import set_factunits_to_bud, get_acct_agenda_ledger
@@ -27,10 +27,12 @@ from src.f05_listen.hub_path import (
 )
 from src.f05_listen.hub_tool import (
     open_bud_file,
+    get_budevent_obj,
     get_budevent_facts,
     collect_owner_event_dir_sets,
     get_budevents_credit_ledger,
     get_owners_downhill_event_ints,
+    get_cellunit_from_json,
 )
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
@@ -196,10 +198,23 @@ def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
         deals_dir = create_path(owner_dir, "deals")
         for time_int in get_level1_dirs(deals_dir):
             deal_time_dir = create_path(deals_dir, time_int)
-            modify_deal_tree_create_boss_facts()
+            modify_deal_tree_create_boss_facts(
+                fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
+            )
 
 
-def modify_deal_tree_create_boss_facts():
+def modify_deal_tree_create_boss_facts(
+    fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
+):
+    cellunit = get_cellunit_from_json(deal_time_dir)
+    cell_event_int = cellunit.event_int
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
+    cellunit.set_budevent_facts_from_budevent(budevent)
+    found_facts_path = create_path(deal_time_dir, CELL_FOUND_FACTS_FILENAME)
+    cellunit.set_found_facts_from_dict(open_json(found_facts_path))
+    cellunit.set_boss_facts_from_found_facts()
+    print(f"{cellunit=}")
+
     # get_deal_root budevent
     # if exists as budevent.reason_base add found_facts to budevent
     # set boss_facts to budadjust.root facts
@@ -217,7 +232,6 @@ def modify_deal_tree_create_boss_facts():
     # calculate budadjust
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
-    pass
 
 
 # def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, dirpath):

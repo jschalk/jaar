@@ -4,6 +4,7 @@ from src.f00_instrument.file import (
     open_file,
     set_dir,
     save_json,
+    open_json,
 )
 from src.f00_instrument.dict_toolbox import get_empty_list_if_None
 from src.f01_road.deal import TimeLinePoint
@@ -15,8 +16,9 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_credit_ledger, get_bud_root_facts_dict
-from src.f05_listen.cell import cellunit_shop
+from src.f05_listen.cell import cellunit_shop, CellUnit, get_cellunit_from_dict
 from src.f05_listen.hub_path import (
+    CELLNODE_FILENAME,
     create_budpoint_path,
     create_budevent_path,
     create_owners_dir_path,
@@ -48,23 +50,26 @@ def get_timepoint_credit_ledger(
     return get_credit_ledger(budpoint) if budpoint else {}
 
 
-def get_budevents_credit_ledger(
+def get_budevent_obj(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
-) -> dict[AcctName, RespectNum]:
+) -> BudUnit:
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
-    budevent = open_bud_file(budevent_json_path)
+    return open_bud_file(budevent_json_path)
+
+
+def get_budevents_credit_ledger(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
+) -> dict[AcctName, RespectNum]:
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, event_int)
     return get_credit_ledger(budevent) if budevent else {}
 
 
 def get_budevent_facts(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ) -> dict[RoadUnit, dict[str,]]:
-    budevent_json_path = create_budevent_path(
-        fisc_mstr_dir, fisc_title, owner_name, event_int
-    )
-    budevent = open_bud_file(budevent_json_path)
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, event_int)
     return get_bud_root_facts_dict(budevent) if budevent else {}
 
 
@@ -165,3 +170,8 @@ def save_cell_node_file(
         time_owner_name, deal_ancestors, event_int, celldepth, penny, quota
     )
     save_json(cellnode_path, None, x_cellunit.get_dict())
+
+
+def get_cellunit_from_json(dirpath: str) -> CellUnit:
+    cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
+    return get_cellunit_from_dict(open_json(cell_node_json_path))
