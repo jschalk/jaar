@@ -32,6 +32,7 @@ def test_CellUnit_Exists():
     assert not x_cellunit.quota
     assert not x_cellunit.budadjust
     assert not x_cellunit._reason_bases
+    assert not x_cellunit._acct_agenda_give_ledger
     assert not x_cellunit.budevent_facts
     assert not x_cellunit.found_facts
     assert not x_cellunit.boss_facts
@@ -52,6 +53,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.budadjust.get_dict() == budunit_shop(bob_str).get_dict()
     assert x_cellunit.budevent_facts == {}
     assert x_cellunit._reason_bases == set()
+    assert x_cellunit._acct_agenda_give_ledger == {}
     assert x_cellunit.found_facts == {}
     assert x_cellunit.boss_facts == {}
 
@@ -437,3 +439,37 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
     casa_road = create_road(a23_str, "casa")
     sue_bud_casa_fact_dict = sue_bud_facts.get(casa_road)
     assert sue_bud_casa_fact_dict.get("pick") == casa_grimy_fact.pick
+
+
+def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario3():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_bud.add_acctunit(sue_str, 3, 5)
+    sue_bud.add_acctunit(yao_str, 7, 2)
+    sue_cell = cellunit_shop(
+        yao_str,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        budadjust=sue_bud,
+    )
+    assert sue_cell.budadjust.fund_pool != sue_quota300
+    assert sue_cell._acct_agenda_give_ledger == {}
+
+    # WHEN
+    sue_cell.set_acct_agenda_give_ledger()
+
+    # THEN
+    assert sue_cell.budadjust.fund_pool == sue_quota300
+    assert sue_cell._acct_agenda_give_ledger != {}
+    assert sue_cell._acct_agenda_give_ledger == {yao_str: 210, sue_str: 90}

@@ -8,7 +8,7 @@ from src.f00_instrument.file import (
 from src.f01_road.allot import allot_scale
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
-from src.f02_bud.bud_tool import set_factunits_to_bud, get_acct_agenda_ledger
+from src.f02_bud.bud_tool import set_factunits_to_bud, get_acct_agenda_net_ledger
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     CELL_ACCT_LEDGER_FILENAME,
@@ -213,6 +213,7 @@ def modify_deal_tree_create_boss_facts(
     found_facts_path = create_path(deal_time_dir, CELL_FOUND_FACTS_FILENAME)
     cellunit.set_found_facts_from_dict(open_json(found_facts_path))
     cellunit.set_boss_facts_from_found_facts()
+    cellunit.set_budadjust_facts()
     print(f"{cellunit=}")
 
     # get_deal_root budevent
@@ -249,7 +250,7 @@ def modify_deal_tree_create_boss_facts(
 #     found_facts_path = create_path(dirpath, CELL_FOUND_FACTS_FILENAME)
 #     found_facts_dict = open_json(found_facts_path)
 #     set_factunits_to_bud(budadjust_unit, found_facts_dict)
-#     adjust_acct_agenda_ledger = get_acct_agenda_ledger(budadjust_unit, settle_bud=True)
+#     adjust_acct_agenda_ledger = get_acct_agenda_net_ledger(budadjust_unit, settle_bud=True)
 #     budadjust_path = create_path(dirpath, CELL_BUDADJUST_FILENAME)
 #     adjust_ledger_path = create_path(dirpath, CELL_ADJUST_LEDGER_FILENAME)
 #     save_file(budadjust_path, None, budadjust_unit.get_json())

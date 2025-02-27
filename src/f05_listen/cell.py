@@ -5,7 +5,7 @@ from src.f00_instrument.dict_toolbox import (
     get_1_if_None,
     get_json_from_dict,
 )
-from src.f01_road.finance import PennyNum
+from src.f01_road.finance import PennyNum, FundNum
 from src.f01_road.road import OwnerName, EventInt, RoadUnit
 from src.f02_bud.reason_item import (
     FactUnit,
@@ -17,7 +17,11 @@ from src.f02_bud.bud import (
     budunit_shop,
     get_from_dict as budunit_get_from_dict,
 )
-from src.f02_bud.bud_tool import get_bud_root_facts_dict, clear_factunits_from_bud
+from src.f02_bud.bud_tool import (
+    get_bud_root_facts_dict,
+    clear_factunits_from_bud,
+    get_acct_agenda_give_ledger,
+)
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
 
@@ -37,6 +41,7 @@ class CellUnit:
     found_facts: dict[RoadUnit, FactUnit] = None
     boss_facts: dict[RoadUnit, FactUnit] = None
     _reason_bases: set[RoadUnit] = None
+    _acct_agenda_give_ledger: dict[OwnerName, FundNum] = None
 
     def load_budevent(self, x_bud: BudUnit):
         self._reason_bases = x_bud.get_reason_bases()
@@ -73,6 +78,11 @@ class CellUnit:
             self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
         for fact in self.boss_facts.values():
             self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+
+    def set_acct_agenda_give_ledger(self):
+        self.budadjust.set_fund_pool(self.quota)
+        acct_agenda_give_ledger = get_acct_agenda_give_ledger(self.budadjust, True)
+        self._acct_agenda_give_ledger = acct_agenda_give_ledger
 
     def get_dict(self) -> dict[str]:
         return {
@@ -125,6 +135,7 @@ def cellunit_shop(
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
         _reason_bases=reason_bases,
+        _acct_agenda_give_ledger={},
     )
 
 

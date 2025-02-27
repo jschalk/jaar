@@ -2,7 +2,8 @@ from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import (
     get_bud_acct_agenda_award_array,
     get_bud_acct_agenda_award_csv,
-    get_acct_agenda_ledger,
+    get_acct_agenda_give_ledger,
+    get_acct_agenda_net_ledger,
     get_credit_ledger,
 )
 
@@ -132,7 +133,7 @@ def test_get_bud_acct_agenda_award_csv_ReturnsObj_settle_bud_True():
     assert bud_acct_agenda_award_csv_str == example_csv_str
 
 
-def test_get_acct_agenda_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_acct_agenda_give_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_agenda_give = 42
@@ -151,7 +152,75 @@ def test_get_acct_agenda_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_bud.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    bud_deal_net_dict = get_acct_agenda_ledger(sue_bud)
+    bud_deal_net_dict = get_acct_agenda_give_ledger(sue_bud)
+
+    # THEN
+    print(f"{bud_deal_net_dict=}")
+    print("")
+    example_deal_net_dict = {
+        bob_str: bob_fund_agenda_give,
+        yao_str: yao_fund_agenda_give,
+        zia_str: 0,
+    }
+    print(f"{example_deal_net_dict=}")
+    assert example_deal_net_dict == bud_deal_net_dict
+
+
+def test_get_acct_agenda_give_ledger_ReturnsObj_settle_bud_True():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    yao_str = "Yao"
+    bob_str = "Bob"
+    xio_str = "Xio"
+    zia_str = "Zia"
+    sue_bud.add_acctunit(yao_str, 13, 5)
+    sue_bud.add_acctunit(bob_str, 5, 7)
+    sue_bud.add_acctunit(xio_str, 2, 3)
+    sue_bud.add_acctunit(zia_str, 0, 0)
+    empty_acct_agenda_give_ledger = {bob_str: 0, xio_str: 0, yao_str: 0, zia_str: 0}
+    assert get_acct_agenda_give_ledger(sue_bud) == empty_acct_agenda_give_ledger
+
+    # WHEN
+    sue_bud_settle_net_dict = get_acct_agenda_give_ledger(sue_bud, settle_bud=True)
+
+    # THEN
+    assert sue_bud_settle_net_dict != empty_acct_agenda_give_ledger
+    print(f"{sue_bud_settle_net_dict=}")
+    print("")
+    example_deal_net_dict = {
+        yao_str: 650000000,
+        bob_str: 250000000,
+        xio_str: 100000000,
+        zia_str: 0,
+    }
+    print(f"{example_deal_net_dict=}")
+    assert sue_bud_settle_net_dict.get(yao_str) != None
+    assert sue_bud_settle_net_dict.get(bob_str) != None
+    assert sue_bud_settle_net_dict.get(xio_str) != None
+    assert sue_bud_settle_net_dict.get(zia_str) != None
+    assert sue_bud_settle_net_dict == example_deal_net_dict
+
+
+def test_get_acct_agenda_net_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_fund_agenda_give = 42
+    yao_fund_agenda_take = 23
+    bob_str = "Bob"
+    bob_fund_agenda_give = 17
+    bob_fund_agenda_take = 23
+    zia_str = "Zia"
+    sue_bud = budunit_shop("Sue")
+    sue_bud.add_acctunit(yao_str)
+    sue_bud.add_acctunit(bob_str)
+    sue_bud.add_acctunit(zia_str)
+    sue_bud.get_acct(yao_str)._fund_agenda_give = yao_fund_agenda_give
+    sue_bud.get_acct(yao_str)._fund_agenda_take = yao_fund_agenda_take
+    sue_bud.get_acct(bob_str)._fund_agenda_give = bob_fund_agenda_give
+    sue_bud.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
+
+    # WHEN
+    bud_deal_net_dict = get_acct_agenda_net_ledger(sue_bud)
 
     # THEN
     print(f"{bud_deal_net_dict=}")
@@ -164,7 +233,7 @@ def test_get_acct_agenda_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     assert example_deal_net_dict == bud_deal_net_dict
 
 
-def test_get_acct_agenda_ledger_ReturnsObj_settle_bud_True():
+def test_get_acct_agenda_net_ledger_ReturnsObj_settle_bud_True():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -175,10 +244,10 @@ def test_get_acct_agenda_ledger_ReturnsObj_settle_bud_True():
     sue_bud.add_acctunit(bob_str, 5, 7)
     sue_bud.add_acctunit(xio_str, 2, 3)
     sue_bud.add_acctunit(zia_str, 0, 0)
-    assert get_acct_agenda_ledger(sue_bud) == {}
+    assert get_acct_agenda_net_ledger(sue_bud) == {}
 
     # WHEN
-    sue_bud_settle_net_dict = get_acct_agenda_ledger(sue_bud, settle_bud=True)
+    sue_bud_settle_net_dict = get_acct_agenda_net_ledger(sue_bud, settle_bud=True)
 
     # THEN
     print(f"{sue_bud_settle_net_dict=}")
