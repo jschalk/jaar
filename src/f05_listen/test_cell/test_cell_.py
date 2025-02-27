@@ -1,3 +1,4 @@
+from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import (
     CellUnit,
@@ -8,6 +9,7 @@ from src.f05_listen.cell import (
 from src.f05_listen.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
+    example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from copy import deepcopy as copy_deepcopy
@@ -217,8 +219,8 @@ def test_CellUnit_set_boss_facts_from_found_facts_SetsAttr():
     assert yao_cellunit.boss_facts != yao_cellunit.found_facts
 
 
-# TODO create tool that clears all facts attributes of facts not connected to reason
 def test_CellUnit_filter_facts_by_reason_bases_ReturnsObj_Scenario1():
+    """create tool that clears all facts attributes of facts not connected to reason"""
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -276,3 +278,162 @@ def test_CellUnit_filter_facts_by_reason_bases_ReturnsObj_Scenario1():
     assert sue_cell.budevent_facts == {}
     assert sue_cell.found_facts == {}
     assert sue_cell.boss_facts == {}
+
+
+def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario0():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_deal_owner = yao_str
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_cell = cellunit_shop(
+        sue_deal_owner,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        budadjust=sue_bud,
+    )
+    assert sue_cell.budadjust.get_factunits_dict() == {}
+
+    # WHEN
+    sue_cell.set_budadjust_facts()
+
+    # THEN
+    assert sue_cell.budadjust.get_factunits_dict() == {}
+
+
+def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario1():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_deal_owner = yao_str
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    casa_clean_fact = clean_factunit()
+    clean_facts = {casa_clean_fact.base: casa_clean_fact}
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_bud.add_item(casa_clean_fact.pick)
+    sue_cell = cellunit_shop(
+        sue_deal_owner,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        budadjust=sue_bud,
+        budevent_facts=clean_facts,
+    )
+    assert sue_cell.budadjust.get_factunits_dict() == {}
+
+    # WHEN
+    sue_cell.set_budadjust_facts()
+
+    # THEN
+    assert sue_cell.budadjust.get_factunits_dict() != {}
+    sue_bud_facts = sue_cell.budadjust.get_factunits_dict()
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    sue_bud_casa_fact_dict = sue_bud_facts.get(casa_road)
+    assert sue_bud_casa_fact_dict.get("pick") == casa_clean_fact.pick
+
+
+def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario2():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_deal_owner = yao_str
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    casa_clean_fact = clean_factunit()
+    casa_dirty_fact = dirty_factunit()
+    clean_facts = {casa_clean_fact.base: casa_clean_fact}
+    dirty_facts = {casa_dirty_fact.base: casa_dirty_fact}
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_bud.add_item(casa_clean_fact.pick)
+    sue_bud.add_item(casa_dirty_fact.pick)
+    sue_cell = cellunit_shop(
+        sue_deal_owner,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        budadjust=sue_bud,
+        budevent_facts=clean_facts,
+        found_facts=dirty_facts,
+    )
+    assert sue_cell.budadjust.get_factunits_dict() == {}
+
+    # WHEN
+    sue_cell.set_budadjust_facts()
+
+    # THEN
+    assert sue_cell.budadjust.get_factunits_dict() != {}
+    sue_bud_facts = sue_cell.budadjust.get_factunits_dict()
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    sue_bud_casa_fact_dict = sue_bud_facts.get(casa_road)
+    assert sue_bud_casa_fact_dict.get("pick") == casa_dirty_fact.pick
+
+
+def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_deal_owner = yao_str
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    casa_clean_fact = clean_factunit()
+    casa_dirty_fact = dirty_factunit()
+    casa_grimy_fact = grimy_factunit()
+    clean_facts = {casa_clean_fact.base: casa_clean_fact}
+    dirty_facts = {casa_dirty_fact.base: casa_dirty_fact}
+    grimy_facts = {casa_grimy_fact.base: casa_grimy_fact}
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_bud.add_item(casa_clean_fact.pick)
+    sue_bud.add_item(casa_dirty_fact.pick)
+    sue_bud.add_item(casa_grimy_fact.pick)
+    sue_cell = cellunit_shop(
+        sue_deal_owner,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        budadjust=sue_bud,
+        budevent_facts=clean_facts,
+        found_facts=dirty_facts,
+        boss_facts=grimy_facts,
+    )
+    assert sue_cell.budadjust.get_factunits_dict() == {}
+
+    # WHEN
+    sue_cell.set_budadjust_facts()
+
+    # THEN
+    assert sue_cell.budadjust.get_factunits_dict() != {}
+    sue_bud_facts = sue_cell.budadjust.get_factunits_dict()
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    sue_bud_casa_fact_dict = sue_bud_facts.get(casa_road)
+    assert sue_bud_casa_fact_dict.get("pick") == casa_grimy_fact.pick

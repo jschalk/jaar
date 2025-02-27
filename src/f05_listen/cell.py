@@ -66,6 +66,14 @@ class CellUnit:
         for boss_fact_key in to_delete_boss_fact_keys:
             self.boss_facts.pop(boss_fact_key)
 
+    def set_budadjust_facts(self):
+        for fact in self.budevent_facts.values():
+            self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+        for fact in self.found_facts.values():
+            self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+        for fact in self.boss_facts.values():
+            self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+
     def get_dict(self) -> dict[str]:
         return {
             "ancestors": self.ancestors,
