@@ -271,3 +271,8 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
                 factunit.fnigh,
                 create_missing_items=True,
             )
+
+
+def clear_factunits_from_bud(x_bud: BudUnit):
+    for fact_base in get_bud_root_facts_dict(x_bud).keys():
+        x_bud.del_fact(fact_base)

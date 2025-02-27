@@ -17,7 +17,7 @@ from src.f02_bud.bud import (
     budunit_shop,
     get_from_dict as budunit_get_from_dict,
 )
-from src.f02_bud.bud_tool import get_bud_root_facts_dict
+from src.f02_bud.bud_tool import get_bud_root_facts_dict, clear_factunits_from_bud
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
 
@@ -36,9 +36,15 @@ class CellUnit:
     budevent_facts: dict[RoadUnit, FactUnit] = None
     found_facts: dict[RoadUnit, FactUnit] = None
     boss_facts: dict[RoadUnit, FactUnit] = None
+    _reason_bases: set[RoadUnit] = None
 
-    def set_budevent_facts_from_budevent(self, x_bud: BudUnit):
+    def load_budevent(self, x_bud: BudUnit):
+        self._reason_bases = x_bud.get_reason_bases()
         self.budevent_facts = factunits_get_from_dict(get_bud_root_facts_dict(x_bud))
+        y_bud = copy_deepcopy(x_bud)
+        clear_factunits_from_bud(y_bud)
+        y_bud.settle_bud()
+        self.budadjust = y_bud
 
     def set_found_facts_from_dict(self, found_fact_dict: dict[RoadUnit, dict]):
         self.found_facts = factunits_get_from_dict(found_fact_dict)
@@ -80,6 +86,11 @@ def cellunit_shop(
         quota = CELL_NODE_QUOTA_DEFAULT
     if budadjust is None:
         budadjust = budunit_shop(deal_owner_name)
+    reason_bases = budadjust.get_reason_bases() if budadjust else set()
+    if budadjust:
+        budadjust = copy_deepcopy(budadjust)
+        clear_factunits_from_bud(budadjust)
+
     return CellUnit(
         ancestors=get_empty_list_if_None(ancestors),
         event_int=event_int,
@@ -91,6 +102,7 @@ def cellunit_shop(
         budevent_facts=get_empty_dict_if_None(budevent_facts),
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
+        _reason_bases=reason_bases,
     )
 
 

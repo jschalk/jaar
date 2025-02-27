@@ -209,7 +209,7 @@ def modify_deal_tree_create_boss_facts(
     cellunit = get_cellunit_from_json(deal_time_dir)
     cell_event_int = cellunit.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
-    cellunit.set_budevent_facts_from_budevent(budevent)
+    cellunit.load_budevent(budevent)
     found_facts_path = create_path(deal_time_dir, CELL_FOUND_FACTS_FILENAME)
     cellunit.set_found_facts_from_dict(open_json(found_facts_path))
     cellunit.set_boss_facts_from_found_facts()

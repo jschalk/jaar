@@ -546,9 +546,8 @@ class BudUnit:
             level_count = 0
         return level_count
 
-    def get_reason_bases(self) -> dict[RoadUnit, int]:
-        tree_metrics = self.get_tree_metrics()
-        return tree_metrics.reason_bases
+    def get_reason_bases(self) -> set[RoadUnit]:
+        return set(self.get_tree_metrics().reason_bases.keys())
 
     def get_missing_fact_bases(self) -> dict[RoadUnit, int]:
         tree_metrics = self.get_tree_metrics()
