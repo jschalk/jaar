@@ -18,7 +18,7 @@ from src.f02_bud.bud import (
     get_from_dict as budunit_get_from_dict,
 )
 from src.f02_bud.bud_tool import (
-    get_bud_root_facts_dict,
+    get_bud_root_facts_dict as get_facts_dict,
     clear_factunits_from_bud,
     get_acct_agenda_give_ledger,
 )
@@ -45,7 +45,7 @@ class CellUnit:
 
     def load_budevent(self, x_bud: BudUnit):
         self._reason_bases = x_bud.get_reason_bases()
-        self.budevent_facts = factunits_get_from_dict(get_bud_root_facts_dict(x_bud))
+        self.budevent_facts = factunits_get_from_dict(get_facts_dict(x_bud))
         y_bud = copy_deepcopy(x_bud)
         clear_factunits_from_bud(y_bud)
         y_bud.settle_bud()
@@ -164,3 +164,22 @@ def get_cellunit_from_dict(x_dict: dict) -> CellUnit:
         found_facts=found_facts,
         boss_facts=boss_facts,
     )
+
+
+def create_child_cellunits(parent_cell: CellUnit) -> dict[OwnerName, CellUnit]:
+    x_dict = {}
+    for child_owner_name, child_quota in parent_cell._acct_agenda_give_ledger.items():
+        if child_quota > 0 and parent_cell.celldepth > 0:
+            child_ancestors = copy_deepcopy(parent_cell.ancestors)
+            child_ancestors.append(child_owner_name)
+            boss_facts = factunits_get_from_dict(get_facts_dict(parent_cell.budadjust))
+            x_dict[child_owner_name] = cellunit_shop(
+                deal_owner_name=parent_cell.deal_owner_name,
+                ancestors=child_ancestors,
+                event_int=parent_cell.event_int,
+                celldepth=parent_cell.celldepth - 1,
+                penny=parent_cell.penny,
+                quota=child_quota,
+                boss_facts=boss_facts,
+            )
+    return x_dict

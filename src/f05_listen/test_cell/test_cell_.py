@@ -5,6 +5,7 @@ from src.f05_listen.cell import (
     cellunit_shop,
     CELL_NODE_QUOTA_DEFAULT,
     get_cellunit_from_dict,
+    create_child_cellunits,
 )
 from src.f05_listen.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
@@ -441,7 +442,38 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
     assert sue_bud_casa_fact_dict.get("pick") == casa_grimy_fact.pick
 
 
-def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario3():
+def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario0():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_cell = cellunit_shop(
+        yao_str,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        budadjust=sue_bud,
+    )
+    assert sue_cell.budadjust.fund_pool != sue_quota300
+    assert sue_cell._acct_agenda_give_ledger == {}
+
+    # WHEN
+    sue_cell.set_acct_agenda_give_ledger()
+
+    # THEN
+    assert sue_cell.budadjust.fund_pool == sue_quota300
+    assert sue_cell._acct_agenda_give_ledger == {}
+
+
+def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario1():
     """create tool that clears all facts attributes of facts not connected to reason"""
     # ESTABLISH
     yao_str = "Yao"
@@ -473,3 +505,125 @@ def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario3():
     assert sue_cell.budadjust.fund_pool == sue_quota300
     assert sue_cell._acct_agenda_give_ledger != {}
     assert sue_cell._acct_agenda_give_ledger == {yao_str: 210, sue_str: 90}
+
+
+def test_create_child_cellunits_ReturnsObj_Scenario0():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_cell = cellunit_shop(
+        yao_str,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        sue_bud,
+    )
+    yao_give_quota = 210
+    sue_give_quota = 90
+    sue_cell._acct_agenda_give_ledger = {
+        yao_str: yao_give_quota,
+        sue_str: sue_give_quota,
+        bob_str: 0,
+    }
+
+    # WHEN
+    sue_child_cellunits = create_child_cellunits(sue_cell)
+
+    # THEN
+    assert sue_child_cellunits
+    assert set(sue_child_cellunits.keys()) == {yao_str, sue_str}
+    sue_yao_cell = sue_child_cellunits.get(yao_str)
+    assert sue_yao_cell.deal_owner_name == yao_str
+    assert sue_yao_cell.ancestors == [sue_str, yao_str]
+    assert sue_yao_cell.event_int == sue_event7
+    assert sue_yao_cell.celldepth == sue_celldepth3 - 1
+    assert sue_yao_cell.penny == sue_penny2
+    assert sue_yao_cell.quota == yao_give_quota
+    # assert sue_yao_cell.budadjust
+    assert sue_yao_cell.budevent_facts == {}
+    assert sue_yao_cell.found_facts == {}
+    assert sue_yao_cell.boss_facts == {}
+
+    sue_sue_cell = sue_child_cellunits.get(sue_str)
+    assert sue_sue_cell.deal_owner_name == yao_str
+    assert sue_sue_cell.ancestors == [sue_str, sue_str]
+    assert sue_sue_cell.event_int == sue_event7
+    assert sue_sue_cell.celldepth == sue_celldepth3 - 1
+    assert sue_sue_cell.penny == sue_penny2
+    assert sue_sue_cell.quota == sue_give_quota
+    # assert not sue_sue_cell.budadjust
+    assert sue_sue_cell.budevent_facts == {}
+    assert sue_sue_cell.found_facts == {}
+    assert sue_sue_cell.boss_facts == {}
+
+
+def test_create_child_cellunits_ReturnsObj_Scenario1_DealDepth0():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_celldepth = 0
+    sue_cell = cellunit_shop(yao_str, celldepth=sue_celldepth)
+    yao_give_quota = 210
+    sue_give_quota = 90
+    sue_cell._acct_agenda_give_ledger = {
+        yao_str: yao_give_quota,
+        sue_str: sue_give_quota,
+        bob_str: 0,
+    }
+
+    # WHEN
+    sue_child_cellunits = create_child_cellunits(sue_cell)
+
+    # THEN
+    assert sue_child_cellunits == {}
+
+
+def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
+    """create tool that clears all facts attributes of facts not connected to reason"""
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    yao_str = "Yao"
+    sue_celldepth = 3
+    clean_fact = clean_factunit()
+    dirty_fact = dirty_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    casa_road = yao_bud.make_l1_road("casa")
+    mop_road = yao_bud.make_road(casa_road, "mop")
+    clean_fact = clean_factunit()
+    yao_bud.add_item(clean_factunit().pick)
+    yao_bud.add_item(mop_road, pledge=True)
+    yao_bud.add_item(dirty_fact.pick)
+    yao_bud.edit_reason(mop_road, dirty_fact.base, dirty_fact.pick)
+    sue_cell = cellunit_shop(yao_str, celldepth=sue_celldepth, budadjust=yao_bud)
+    sue_cell.budadjust.add_fact(clean_fact.base, clean_fact.pick, None, None, True)
+    sue_cell._acct_agenda_give_ledger = {yao_str: 210, sue_str: 90, bob_str: 0}
+
+    # WHEN
+    sue_child_cellunits = create_child_cellunits(sue_cell)
+
+    # THEN
+    assert sue_child_cellunits
+    assert set(sue_child_cellunits.keys()) == {yao_str, sue_str}
+    sue_yao_cell = sue_child_cellunits.get(yao_str)
+    assert sue_yao_cell.budevent_facts == {}
+    assert sue_yao_cell.found_facts == {}
+    assert sue_yao_cell.boss_facts == {clean_fact.base: clean_fact}
+
+    sue_sue_cell = sue_child_cellunits.get(sue_str)
+    assert sue_sue_cell.budevent_facts == {}
+    assert sue_sue_cell.found_facts == {}
+    assert sue_sue_cell.boss_facts == {clean_fact.base: clean_fact}
