@@ -52,6 +52,20 @@ class CellUnit:
     def set_boss_facts_from_found_facts(self):
         self.boss_facts = copy_deepcopy(self.found_facts)
 
+    def filter_facts_by_reason_bases(self):
+        to_delete_budevent_fact_keys = set(self.budevent_facts.keys())
+        to_delete_found_fact_keys = set(self.found_facts.keys())
+        to_delete_boss_fact_keys = set(self.boss_facts.keys())
+        to_delete_budevent_fact_keys.difference_update(self._reason_bases)
+        to_delete_found_fact_keys.difference_update(self._reason_bases)
+        to_delete_boss_fact_keys.difference_update(self._reason_bases)
+        for budevent_fact_key in to_delete_budevent_fact_keys:
+            self.budevent_facts.pop(budevent_fact_key)
+        for found_fact_key in to_delete_found_fact_keys:
+            self.found_facts.pop(found_fact_key)
+        for boss_fact_key in to_delete_boss_fact_keys:
+            self.boss_facts.pop(boss_fact_key)
+
     def get_dict(self) -> dict[str]:
         return {
             "ancestors": self.ancestors,

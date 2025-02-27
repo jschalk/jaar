@@ -218,3 +218,61 @@ def test_CellUnit_set_boss_facts_from_found_facts_SetsAttr():
 
 
 # TODO create tool that clears all facts attributes of facts not connected to reason
+def test_CellUnit_filter_facts_by_reason_bases_ReturnsObj_Scenario1():
+    # ESTABLISH
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_deal_owner = yao_str
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    clean_fact = clean_factunit()
+    dirty_fact = dirty_factunit()
+    sky_blue_fact = sky_blue_factunit()
+    sue_budevent_factunits = {clean_fact.base: clean_fact}
+    sue_found_factunits = {dirty_fact.base: dirty_fact}
+    sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    sue_cell = cellunit_shop(
+        sue_deal_owner,
+        sue_ancestors,
+        sue_event7,
+        sue_celldepth3,
+        sue_penny2,
+        sue_quota300,
+        None,
+        sue_budevent_factunits,
+        sue_found_factunits,
+        sue_boss_factunits,
+    )
+    sue_cell._reason_bases = {clean_fact.base, sky_blue_fact.base}
+    assert sue_cell.budevent_facts == sue_budevent_factunits
+    assert sue_cell.found_facts == sue_found_factunits
+    assert sue_cell.boss_facts == sue_boss_factunits
+
+    # WHEN
+    sue_cell.filter_facts_by_reason_bases()
+
+    # THEN
+    assert sue_cell.budevent_facts == sue_budevent_factunits
+    assert sue_cell.found_facts == sue_found_factunits
+    assert sue_cell.boss_facts == sue_boss_factunits
+
+    # WHEN
+    sue_cell._reason_bases = {clean_fact.base}
+    sue_cell.filter_facts_by_reason_bases()
+
+    # THEN
+    assert sue_cell.budevent_facts == sue_budevent_factunits
+    assert sue_cell.found_facts == sue_found_factunits
+    assert sue_cell.boss_facts == {}
+
+    # WHEN
+    sue_cell._reason_bases = {}
+    sue_cell.filter_facts_by_reason_bases()
+
+    # THEN
+    assert sue_cell.budevent_facts == {}
+    assert sue_cell.found_facts == {}
+    assert sue_cell.boss_facts == {}
