@@ -11,7 +11,6 @@ CELL_ACCT_LEDGER_FILENAME = "deal_acct_ledger.json"
 CELL_CREDIT_LEDGER_FILENAME = "credit_ledger.json"
 CELL_QUOTA_LEDGER_FILENAME = "quota_ledger.json"
 CELL_BUDEVENT_FACTS_FILENAME = "budevent_facts.json"
-CELL_BUDADJUST_FILENAME = "budadjust.json"
 CELL_ADJUST_LEDGER_FILENAME = "adjust_acct_agenda_ledger.json"
 CELL_FOUND_FACTS_FILENAME = "found_facts.json"
 BUDPOINT_FILENAME = "budpoint.json"
@@ -176,20 +175,6 @@ def create_cell_budevent_facts_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
     return create_path(timepoint_dir, "budevent_facts.json")
-
-
-def create_cell_budadjust_path(
-    fisc_mstr_dir: str,
-    fisc_title: TitleUnit,
-    owner_name: OwnerName,
-    time_int: int,
-    deal_ancestors: list[OwnerName] = None,
-):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\budadjust.json"""
-    timepoint_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
-    )
-    return create_path(timepoint_dir, "budadjust.json")
 
 
 def create_cell_found_facts_path(

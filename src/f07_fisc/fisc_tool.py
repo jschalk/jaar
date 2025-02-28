@@ -14,13 +14,11 @@ from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     CELL_ACCT_LEDGER_FILENAME,
     CELL_BUDEVENT_FACTS_FILENAME,
-    CELL_BUDADJUST_FILENAME,
     CELL_ADJUST_LEDGER_FILENAME,
     CELL_FOUND_FACTS_FILENAME,
     CELL_QUOTA_LEDGER_FILENAME,
     create_cell_node_json_path,
     create_budevent_path,
-    create_cell_budadjust_path,
     create_cell_budevent_facts_path,
     create_cell_found_facts_path,
     create_cell_credit_ledger_path,
@@ -256,7 +254,6 @@ def modify_deal_tree_create_boss_facts(
 #     found_facts_dict = open_json(found_facts_path)
 #     set_factunits_to_bud(budadjust_unit, found_facts_dict)
 #     adjust_acct_agenda_ledger = get_acct_agenda_net_ledger(budadjust_unit, settle_bud=True)
-#     budadjust_path = create_path(dirpath, CELL_BUDADJUST_FILENAME)
 #     adjust_ledger_path = create_path(dirpath, CELL_ADJUST_LEDGER_FILENAME)
 #     save_file(budadjust_path, None, budadjust_unit.get_json())
 #     save_json(adjust_ledger_path, None, adjust_acct_agenda_ledger)
