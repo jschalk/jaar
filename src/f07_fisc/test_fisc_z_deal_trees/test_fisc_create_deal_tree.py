@@ -44,7 +44,7 @@ def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     cell_node = {
         "ancestors": [],
         celldepth_str(): deal1_celldepth,
-        owner_name_str(): bob_str,
+        "deal_owner_name": bob_str,
         event_int_str(): event56,
         quota_str(): deal1_quota,
     }

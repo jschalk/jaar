@@ -50,7 +50,7 @@ def test_WorldUnit_create_fisc_deal_trees_Scenaro1_LedgerDepth0(
     cell_node = {
         "ancestors": [],
         celldepth_str(): deal1_celldepth,
-        owner_name_str(): bob_str,
+        "deal_owner_name": bob_str,
         event_int_str(): event56,
         quota_str(): deal1_quota,
     }

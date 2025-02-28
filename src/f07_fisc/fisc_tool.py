@@ -2,7 +2,11 @@ from src.f00_instrument.file import create_path, save_json, get_level1_dirs, ope
 from src.f01_road.allot import allot_scale
 from src.f01_road.road import TitleUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
-from src.f05_listen.cell import create_child_cellunits, cellunit_shop
+from src.f05_listen.cell import (
+    create_child_cellunits,
+    cellunit_shop,
+    cellunit_get_from_dict,
+)
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     CELL_BUDEVENT_FACTS_FILENAME,
@@ -21,7 +25,7 @@ from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_budevents_credit_ledger,
     get_owners_downhill_event_ints,
-    get_cellunit_from_json,
+    cellunit_get_from_json,
 )
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
@@ -41,23 +45,16 @@ def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
 
 
 def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
-    root_deal_json_path = create_cell_node_json_path(
+    root_cell_json_path = create_cell_node_json_path(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int
     )
-    if os_path_exists(root_deal_json_path):
-        root_deal_dict = open_json(root_deal_json_path)
-        deals_to_evaluate = [root_deal_dict]
+    if os_path_exists(root_cell_json_path):
+        root_cell_dict = open_json(root_cell_json_path)
+        root_cellunit = cellunit_get_from_dict(root_cell_dict)
+        cells_to_evaluate = [root_cellunit]
         owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
-        while deals_to_evaluate != []:
-            parent_deal = deals_to_evaluate.pop()
-            parent_cell = cellunit_shop(
-                deal_owner_name=time_owner_name,
-                ancestors=parent_deal.get("ancestors"),
-                event_int=parent_deal.get("event_int"),
-                celldepth=parent_deal.get("celldepth"),
-                quota=parent_deal.get("quota"),
-                penny=parent_deal.get("penny"),
-            )
+        while cells_to_evaluate != []:
+            parent_cell = cells_to_evaluate.pop()
             parent_credit_ledger = get_budevents_credit_ledger(
                 fisc_mstr_dir,
                 fisc_title,
@@ -89,14 +86,6 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                         if quota_amount > 0:
                             child_ancestors = list(copy_copy(parent_cell.ancestors))
                             child_ancestors.append(quota_owner)
-                            child_cell_node = {
-                                "ancestors": child_ancestors,
-                                "event_int": downhill_event_int,
-                                "celldepth": child_celldepth,
-                                "deal_owner_name": time_owner_name,
-                                "penny": parent_cell.penny,
-                                "quota": quota_amount,
-                            }
                             child_cellunit = cellunit_shop(
                                 ancestors=child_ancestors,
                                 event_int=downhill_event_int,
@@ -112,11 +101,10 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                                 time_int,
                                 child_ancestors[1:],
                             )
-                            # save_json(child_cell_json_path, None, child_cell_node)
                             save_json(
                                 child_cell_json_path, None, child_cellunit.get_dict()
                             )
-                            deals_to_evaluate.append(child_cell_node)
+                            cells_to_evaluate.append(child_cellunit)
 
 
 def create_all_cell_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
@@ -213,7 +201,7 @@ def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
 def modify_deal_tree_create_boss_facts(
     fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
 ):
-    root_cell = get_cellunit_from_json(deal_time_dir)
+    root_cell = cellunit_get_from_json(deal_time_dir)
     cell_event_int = root_cell.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
     root_cell.load_budevent(budevent)

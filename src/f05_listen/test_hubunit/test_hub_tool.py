@@ -29,7 +29,7 @@ from src.f05_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_budevent_obj,
     get_budevent_facts,
-    get_cellunit_from_json,
+    cellunit_get_from_json,
     save_arbitrary_budevent,
     save_cell_node_file,
 )
@@ -523,7 +523,7 @@ def test_save_cell_node_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get("quota") == CELL_NODE_QUOTA_DEFAULT
 
 
-def test_get_cellunit_from_json_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_cellunit_get_from_json_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -542,7 +542,7 @@ def test_get_cellunit_from_json_ReturnsObj_Scenario1_FileExists(env_dir_setup_cl
     )
 
     # WHEN
-    gen_cellunit = get_cellunit_from_json(cell_dir)
+    gen_cellunit = cellunit_get_from_json(cell_dir)
 
     # THEN
     expected_cellunit = cellunit_shop(

@@ -172,6 +172,6 @@ def save_cell_node_file(
     save_json(cellnode_path, None, x_cellunit.get_dict())
 
 
-def get_cellunit_from_json(dirpath: str) -> CellUnit:
+def cellunit_get_from_json(dirpath: str) -> CellUnit:
     cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
     return cellunit_get_from_dict(open_json(cell_node_json_path))
