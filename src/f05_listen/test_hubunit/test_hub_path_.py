@@ -19,7 +19,6 @@ from src.f05_listen.hub_path import (
     CELL_BUDADJUST_FILENAME,
     CELL_ADJUST_LEDGER_FILENAME,
     CELL_FOUND_FACTS_FILENAME,
-    CELL_BOSS_FACTS_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
@@ -41,7 +40,6 @@ from src.f05_listen.hub_path import (
     create_cell_budevent_facts_path,
     create_cell_budadjust_path,
     create_cell_found_facts_path,
-    create_cell_boss_facts_path,
     create_cell_adjust_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
@@ -68,7 +66,6 @@ def test_hub_path_constants_are_values():
     assert CELL_BUDADJUST_FILENAME == "budadjust.json"
     assert CELL_ADJUST_LEDGER_FILENAME == "adjust_acct_agenda_ledger.json"
     assert CELL_FOUND_FACTS_FILENAME == "found_facts.json"
-    assert CELL_BOSS_FACTS_FILENAME == "boss_facts.json"
     assert BUDPOINT_FILENAME == "budpoint.json"
     assert BUDEVENT_FILENAME == "bud.json"
     assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
@@ -484,29 +481,6 @@ def test_create_cell_found_facts_path_ReturnObj_Scenario0_Three_deal_ancestors()
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_deal_facts_path = create_path(tp_yao_bob_dir, CELL_FOUND_FACTS_FILENAME)
-    assert gen_deal_facts_path == expected_deal_facts_path
-
-
-def test_create_cell_boss_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord23"
-    sue_str = "Sue"
-    tp7 = 7
-    yao_str = "Yao"
-    bob_str = "Bob"
-    deal_ancestors = [yao_str, bob_str]
-
-    # WHEN
-    gen_deal_facts_path = create_cell_boss_facts_path(
-        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
-    )
-
-    # THEN
-    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(timepoint_dir, yao_str)
-    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_facts_path = create_path(tp_yao_bob_dir, CELL_BOSS_FACTS_FILENAME)
     assert gen_deal_facts_path == expected_deal_facts_path
 
 

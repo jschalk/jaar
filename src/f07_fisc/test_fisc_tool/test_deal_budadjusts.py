@@ -6,7 +6,6 @@ from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_budevent_path,
     create_cell_found_facts_path as found_facts_path,
-    create_cell_boss_facts_path as boss_facts_path,
     create_cell_budadjust_path as budadjust_path,
     create_cell_adjust_ledger_path as adjust_ledger_path,
 )
