@@ -174,7 +174,27 @@ def test_Cellunit_get_cell_owner_name_ReturnsObj_Scenario1_WithAncestors():
     assert bob_sue_cell_owner_name == sue_str
 
 
-def test_CellUnit_load_budevent_SetsAttr():
+def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.budadjust = "testing_place_holder"
+    yao_cellunit.budevent_facts = "testing_place_holder"
+    yao_cellunit._reason_bases = "testing_place_holder"
+    assert yao_cellunit.budadjust
+    assert yao_cellunit.budevent_facts != {}
+    assert yao_cellunit._reason_bases != set()
+
+    # WHEN
+    yao_cellunit.load_budevent(None)
+
+    # THEN
+    assert yao_cellunit.budadjust is None
+    assert yao_cellunit.budevent_facts == {}
+    assert yao_cellunit._reason_bases == set()
+
+
+def test_CellUnit_load_budevent_SetsAttr_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
@@ -182,7 +202,7 @@ def test_CellUnit_load_budevent_SetsAttr():
     casa_road = yao_bud.make_l1_road("casa")
     mop_road = yao_bud.make_road(casa_road, "mop")
     clean_fact = clean_factunit()
-    yao_bud.add_item(clean_factunit().pick)
+    yao_bud.add_item(clean_fact.pick)
     yao_bud.add_item(mop_road, pledge=True)
     yao_bud.edit_reason(mop_road, clean_fact.base, clean_fact.pick)
     yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
@@ -206,6 +226,35 @@ def test_CellUnit_load_budevent_SetsAttr():
     assert yao_cellunit.budadjust.get_dict() != yao_bud.get_dict()
     assert generated_itemroot.get_dict() == expected_itemroot.get_dict()
     assert yao_cellunit.budadjust.get_dict() == expected_adjust_bud.get_dict()
+
+
+def test_CellUnit_get_budevents_credit_ledger_ReturnsObj_Scenario0_NoBud():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_cellunit = cellunit_shop(yao_str)
+
+    # WHEN
+    gen_credit_ledger = yao_cellunit.get_budevents_credit_ledger()
+
+    # THEN
+    assert gen_credit_ledger == {}
+
+
+def test_get_budevents_credit_ledger_ReturnsObj_Scenario1_FileExists():
+    # ESTABLISH
+    sue_str = "Sue"
+    yao_str = "Yao"
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_bud.add_acctunit(sue_str, 3, 5)
+    sue_bud.add_acctunit(yao_str, 7, 2)
+    sue_cell = cellunit_shop(yao_str, quota=55, budadjust=sue_bud)
+
+    # WHEN
+    gen_credit_ledger = sue_cell.get_budevents_credit_ledger()
+
+    # THEN
+    expected_credit_ledger = {sue_str: 3, yao_str: 7}
+    assert gen_credit_ledger == expected_credit_ledger
 
 
 def test_CellUnit_set_found_facts_from_dict_SetsAttr():

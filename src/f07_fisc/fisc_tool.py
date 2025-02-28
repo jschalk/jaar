@@ -55,12 +55,14 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
         owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
         while cells_to_evaluate != []:
             parent_cell = cells_to_evaluate.pop()
-            parent_credit_ledger = get_budevents_credit_ledger(
+            budevent = get_budevent_obj(
                 fisc_mstr_dir,
                 fisc_title,
                 parent_cell.get_cell_owner_name(),
                 parent_cell.event_int,
             )
+            parent_cell.load_budevent(budevent)
+            parent_credit_ledger = parent_cell.get_budevents_credit_ledger()
             path_ancestors = copy_copy(parent_cell.ancestors)[1:]
             parent_credit_ledger_json_path = create_cell_credit_ledger_path(
                 fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
@@ -75,9 +77,9 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
             save_json(parent_quota_ledger_path, None, parent_quota_ledger)
             if parent_cell.celldepth > 0:
                 child_celldepth = parent_cell.celldepth - 1
-                parent_credit_owners = set(parent_credit_ledger.keys())
+                parent_quota_owners = set(parent_quota_ledger.keys())
                 owners_downhill_events_ints = get_owners_downhill_event_ints(
-                    owner_events_sets, parent_credit_owners, parent_cell.event_int
+                    owner_events_sets, parent_quota_owners, parent_cell.event_int
                 )
                 for quota_owner, quota_amount in parent_quota_ledger.items():
                     if downhill_event_int := owners_downhill_events_ints.get(

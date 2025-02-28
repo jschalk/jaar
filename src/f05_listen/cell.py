@@ -21,6 +21,7 @@ from src.f02_bud.bud_tool import (
     get_bud_root_facts_dict as get_facts_dict,
     clear_factunits_from_bud,
     get_acct_agenda_give_ledger,
+    get_credit_ledger,
 )
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy, copy as copy_copy
@@ -47,12 +48,23 @@ class CellUnit:
         return self.deal_owner_name if self.ancestors == [] else self.ancestors[-1]
 
     def load_budevent(self, x_bud: BudUnit):
+        if not x_bud:
+            self.budadjust = None
+            self.budevent_facts = {}
+            self._reason_bases = set()
+        else:
+            self._load_existing_budevent(x_bud)
+
+    def _load_existing_budevent(self, x_bud: BudUnit):
         self._reason_bases = x_bud.get_reason_bases()
         self.budevent_facts = factunits_get_from_dict(get_facts_dict(x_bud))
         y_bud = copy_deepcopy(x_bud)
         clear_factunits_from_bud(y_bud)
         y_bud.settle_bud()
         self.budadjust = y_bud
+
+    def get_budevents_credit_ledger(self) -> dict[OwnerName, float]:
+        return {} if self.budadjust is None else get_credit_ledger(self.budadjust)
 
     def set_budevent_facts_from_dict(self, fact_dict: dict[RoadUnit, dict]):
         self.budevent_facts = factunits_get_from_dict(fact_dict)
