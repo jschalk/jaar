@@ -99,9 +99,9 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
     return yao_bud
 
 
-# # # create a world with, cell_node.json, found facts and bud events
-# # # for every found_fact change budevent to that fact
-# # # create agenda (different than if found_fact was not applied)
+# # create a world with, cell_node.json, found facts and bud events
+# # for every found_fact change budevent to that fact
+# # create agenda (different than if found_fact was not applied)
 # def test_modify_deal_tree_create_boss_facts_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
 #     env_dir_setup_cleanup,
 # ):
@@ -113,9 +113,9 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     das = []
 #     event7 = 7
 #     q3 = 3
-#     cd4 = 4
+#     cd0 = 0
 #     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das, q3, cd4)
+#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das, q3, cd0)
 #     # create budevent files
 #     mop_budunit = get_bob_mop_without_reason_budunit_example()
 #     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)

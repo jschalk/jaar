@@ -9,6 +9,7 @@ from src.f01_road.allot import allot_scale
 from src.f01_road.road import TitleUnit, OwnerName, RoadUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
 from src.f02_bud.bud_tool import set_factunits_to_bud, get_acct_agenda_net_ledger
+from src.f05_listen.cell import create_child_cellunits
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     CELL_ACCT_LEDGER_FILENAME,
@@ -212,8 +213,12 @@ def modify_deal_tree_create_boss_facts(
     root_cell.load_budevent(budevent)
     found_facts_path = create_path(deal_time_dir, CELL_FOUND_FACTS_FILENAME)
     root_cell.set_found_facts_from_dict(open_json(found_facts_path))
-    root_cell.set_boss_facts_from_found_facts()
-    root_cell.set_budadjust_facts()
+    root_cell.set_boss_facts_from_other_facts()
+    to_evaluate_cells = [root_cell]
+    while to_evaluate_cells != []:
+        curr_cell = to_evaluate_cells.pop()
+        to_evaluate_cells.extend(create_child_cellunits(curr_cell))
+
     print(f"{root_cell=}")
 
     # get_deal_root budevent
