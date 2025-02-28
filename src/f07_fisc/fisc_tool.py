@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, save_json, get_level1_dirs, ope
 from src.f01_road.allot import allot_scale
 from src.f01_road.road import TitleUnit
 from src.f02_bud.reason_item import factunits_get_from_dict, get_dict_from_factunits
-from src.f05_listen.cell import create_child_cellunits
+from src.f05_listen.cell import create_child_cellunits, cellunit_shop
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     CELL_BUDEVENT_FACTS_FILENAME,
@@ -50,16 +50,21 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
         owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
         while deals_to_evaluate != []:
             parent_deal = deals_to_evaluate.pop()
-            parent_event_int = parent_deal.get("event_int")
-            parent_celldepth = parent_deal.get("celldepth")
-            parent_owner_name = parent_deal.get("owner_name")
-            parent_quota = parent_deal.get("quota")
-            parent_penny = parent_deal.get("penny")
-            parent_ancestors = parent_deal.get("ancestors")
-            parent_credit_ledger = get_budevents_credit_ledger(
-                fisc_mstr_dir, fisc_title, parent_owner_name, parent_event_int
+            parent_cell = cellunit_shop(
+                deal_owner_name=parent_deal.get("owner_name"),
+                ancestors=parent_deal.get("ancestors"),
+                event_int=parent_deal.get("event_int"),
+                celldepth=parent_deal.get("celldepth"),
+                quota=parent_deal.get("quota"),
+                penny=parent_deal.get("penny"),
             )
-            path_ancestors = parent_ancestors[1:]
+            parent_credit_ledger = get_budevents_credit_ledger(
+                fisc_mstr_dir,
+                fisc_title,
+                parent_cell.deal_owner_name,
+                parent_cell.event_int,
+            )
+            path_ancestors = copy_copy(parent_cell.ancestors)[1:]
             parent_credit_ledger_json_path = create_cell_credit_ledger_path(
                 fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
             )
@@ -67,27 +72,29 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
             parent_quota_ledger_path = create_cell_quota_ledger_path(
                 fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
             )
-            parent_quota_ledger = allot_scale(parent_credit_ledger, parent_quota, 1)
+            parent_quota_ledger = allot_scale(
+                parent_credit_ledger, parent_cell.quota, 1
+            )
             save_json(parent_quota_ledger_path, None, parent_quota_ledger)
-            if parent_celldepth > 0:
-                child_celldepth = parent_celldepth - 1
+            if parent_cell.celldepth > 0:
+                child_celldepth = parent_cell.celldepth - 1
                 parent_credit_owners = set(parent_credit_ledger.keys())
                 owners_downhill_events_ints = get_owners_downhill_event_ints(
-                    owner_events_sets, parent_credit_owners, parent_event_int
+                    owner_events_sets, parent_credit_owners, parent_cell.event_int
                 )
                 for quota_owner, quota_amount in parent_quota_ledger.items():
                     if downhill_event_int := owners_downhill_events_ints.get(
                         quota_owner
                     ):
                         if quota_amount > 0:
-                            child_ancestors = list(copy_copy(parent_ancestors))
+                            child_ancestors = list(copy_copy(parent_cell.ancestors))
                             child_ancestors.append(quota_owner)
                             child_cell_node = {
                                 "ancestors": child_ancestors,
                                 "event_int": downhill_event_int,
                                 "celldepth": child_celldepth,
                                 "owner_name": quota_owner,
-                                "penny": parent_penny,
+                                "penny": parent_cell.penny,
                                 "quota": quota_amount,
                             }
                             child_deal_json_path = create_cell_node_json_path(

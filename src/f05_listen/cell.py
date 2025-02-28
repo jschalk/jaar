@@ -43,6 +43,9 @@ class CellUnit:
     _reason_bases: set[RoadUnit] = None
     _acct_agenda_give_ledger: dict[OwnerName, FundNum] = None
 
+    def get_cell_owner_name(self) -> OwnerName:
+        return self.deal_owner_name if self.ancestors == [] else self.ancestors[-1]
+
     def load_budevent(self, x_bud: BudUnit):
         self._reason_bases = x_bud.get_reason_bases()
         self.budevent_facts = factunits_get_from_dict(get_facts_dict(x_bud))

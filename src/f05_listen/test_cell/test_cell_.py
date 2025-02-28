@@ -149,6 +149,31 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     assert x_cellunit.budadjust != sue_bud
 
 
+def test_Cellunit_get_cell_owner_name_ReturnsObj_Scenario0_NoAncestors():
+    # ESTABLISH
+    yao_str = "Yao"
+    root_cellunit = cellunit_shop(yao_str, [])
+
+    # WHEN / THEN
+    assert root_cellunit.get_cell_owner_name() == yao_str
+
+
+def test_Cellunit_get_cell_owner_name_ReturnsObj_Scenario1_WithAncestors():
+    # ESTABLISH
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_sue_ancestors = [bob_str, sue_str]
+    bob_sue_deal_owner = yao_str
+    bob_sue_cellunit = cellunit_shop(bob_sue_deal_owner, bob_sue_ancestors)
+
+    # WHEN
+    bob_sue_cell_owner_name = bob_sue_cellunit.get_cell_owner_name()
+
+    # THEN
+    assert bob_sue_cell_owner_name == sue_str
+
+
 def test_CellUnit_load_budevent_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
