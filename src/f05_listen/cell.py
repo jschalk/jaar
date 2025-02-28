@@ -79,12 +79,18 @@ class CellUnit:
         for fact in self.boss_facts.values():
             self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
 
-    def set_acct_agenda_give_ledger(self):
+    def _set_acct_agenda_give_ledger(self):
         self.budadjust.set_fund_pool(self.quota)
         acct_agenda_give_ledger = get_acct_agenda_give_ledger(self.budadjust, True)
         self._acct_agenda_give_ledger = acct_agenda_give_ledger
 
-    def get_dict(self) -> dict[str]:
+    def calc_acct_agenda_give_ledger(self):
+        self._reason_bases = self.budadjust.get_reason_bases()
+        self.filter_facts_by_reason_bases()
+        self.set_budadjust_facts()
+        self._set_acct_agenda_give_ledger()
+
+    def get_dict(self) -> dict[str, str | dict]:
         return {
             "ancestors": self.ancestors,
             "event_int": self.event_int,
@@ -167,6 +173,7 @@ def get_cellunit_from_dict(x_dict: dict) -> CellUnit:
 
 
 def create_child_cellunits(parent_cell: CellUnit) -> dict[OwnerName, CellUnit]:
+    parent_cell.calc_acct_agenda_give_ledger()
     x_dict = {}
     for child_owner_name, child_quota in parent_cell._acct_agenda_give_ledger.items():
         if child_quota > 0 and parent_cell.celldepth > 0:

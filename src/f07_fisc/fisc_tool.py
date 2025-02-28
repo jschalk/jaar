@@ -206,15 +206,15 @@ def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
 def modify_deal_tree_create_boss_facts(
     fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
 ):
-    cellunit = get_cellunit_from_json(deal_time_dir)
-    cell_event_int = cellunit.event_int
+    root_cell = get_cellunit_from_json(deal_time_dir)
+    cell_event_int = root_cell.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
-    cellunit.load_budevent(budevent)
+    root_cell.load_budevent(budevent)
     found_facts_path = create_path(deal_time_dir, CELL_FOUND_FACTS_FILENAME)
-    cellunit.set_found_facts_from_dict(open_json(found_facts_path))
-    cellunit.set_boss_facts_from_found_facts()
-    cellunit.set_budadjust_facts()
-    print(f"{cellunit=}")
+    root_cell.set_found_facts_from_dict(open_json(found_facts_path))
+    root_cell.set_boss_facts_from_found_facts()
+    root_cell.set_budadjust_facts()
+    print(f"{root_cell=}")
 
     # get_deal_root budevent
     # if exists as budevent.reason_base add found_facts to budevent
