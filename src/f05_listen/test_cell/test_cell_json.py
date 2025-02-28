@@ -134,6 +134,8 @@ def test_CellUnit_get_json_ReturnsObj():
     bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
     bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    bob_sue_bud = budunit_shop(bob_sue_deal_owner)
+    bob_sue_bud.add_acctunit(sue_str)
     x_cellunit = cellunit_shop(
         bob_sue_deal_owner,
         bob_sue_ancestors,
@@ -141,7 +143,7 @@ def test_CellUnit_get_json_ReturnsObj():
         bob_sue_celldepth3,
         bob_sue_penny2,
         bob_sue_quota300,
-        None,
+        bob_sue_bud,
         bob_sue_budevent_factunits,
         bob_sue_found_factunits,
         bob_sue_boss_factunits,
@@ -151,7 +153,7 @@ def test_CellUnit_get_json_ReturnsObj():
     x_cell_json = x_cellunit.get_json()
 
     # THEN
-    assert len(x_cell_json) == 963
+    assert len(x_cell_json) == 1235
 
 
 def test_get_cellunit_from_dict_ReturnsObj_Scenario0_NoParameters():
@@ -183,6 +185,8 @@ def test_get_cellunit_from_dict_ReturnsObj_Scenario1():
     bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
     bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    bob_sue_bud = budunit_shop(bob_sue_deal_owner)
+    bob_sue_bud.add_acctunit(sue_str)
     bob_sue_cellunit = cellunit_shop(
         bob_sue_deal_owner,
         bob_sue_ancestors,
@@ -190,7 +194,7 @@ def test_get_cellunit_from_dict_ReturnsObj_Scenario1():
         bob_sue_celldepth3,
         bob_sue_penny2,
         bob_sue_quota300,
-        None,
+        bob_sue_bud,
         bob_sue_budevent_factunits,
         bob_sue_found_factunits,
         bob_sue_boss_factunits,

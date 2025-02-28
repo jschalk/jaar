@@ -157,7 +157,11 @@ def get_cellunit_from_dict(x_dict: dict) -> CellUnit:
     celldepth = x_dict.get("celldepth")
     penny = x_dict.get("penny")
     quota = x_dict.get("quota")
-    budadjust = x_dict.get("budadjust")
+    budadjust_dict = x_dict.get("budadjust")
+    if budadjust_dict:
+        budadjust_obj = budunit_get_from_dict(budadjust_dict)
+    else:
+        budadjust_obj = None
     budevent_fact_dict = get_empty_dict_if_None(x_dict.get("budevent_facts"))
     found_fact_dict = get_empty_dict_if_None(x_dict.get("found_facts"))
     boss_fact_dict = get_empty_dict_if_None(x_dict.get("boss_facts"))
@@ -171,6 +175,7 @@ def get_cellunit_from_dict(x_dict: dict) -> CellUnit:
         celldepth=celldepth,
         penny=penny,
         quota=quota,
+        budadjust=budadjust_obj,
         budevent_facts=budevent_facts,
         found_facts=found_facts,
         boss_facts=boss_facts,
