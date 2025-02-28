@@ -23,7 +23,7 @@ from src.f02_bud.bud_tool import (
     get_acct_agenda_give_ledger,
 )
 from dataclasses import dataclass
-from copy import deepcopy as copy_deepcopy
+from copy import deepcopy as copy_deepcopy, copy as copy_copy
 
 CELL_NODE_QUOTA_DEFAULT = 1000
 
@@ -51,11 +51,16 @@ class CellUnit:
         y_bud.settle_bud()
         self.budadjust = y_bud
 
-    def set_found_facts_from_dict(self, found_fact_dict: dict[RoadUnit, dict]):
-        self.found_facts = factunits_get_from_dict(found_fact_dict)
+    def set_budevent_facts_from_dict(self, fact_dict: dict[RoadUnit, dict]):
+        self.budevent_facts = factunits_get_from_dict(fact_dict)
 
-    def set_boss_facts_from_found_facts(self):
-        self.boss_facts = copy_deepcopy(self.found_facts)
+    def set_found_facts_from_dict(self, fact_dict: dict[RoadUnit, dict]):
+        self.found_facts = factunits_get_from_dict(fact_dict)
+
+    def set_boss_facts_from_other_facts(self):
+        self.boss_facts = copy_deepcopy(self.budevent_facts)
+        for x_fact in self.found_facts.values():
+            self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
 
     def filter_facts_by_reason_bases(self):
         to_delete_budevent_fact_keys = set(self.budevent_facts.keys())

@@ -201,7 +201,25 @@ def test_CellUnit_set_found_facts_from_dict_SetsAttr():
     assert yao_cellunit.found_facts == expected_factunits
 
 
-def test_CellUnit_set_boss_facts_from_found_facts_SetsAttr():
+def test_CellUnit_set_budevent_facts_from_dict_SetsAttr():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    assert yao_cellunit.budevent_facts == {}
+
+    # WHEN
+    yao_cellunit.set_budevent_facts_from_dict(yao_found_fact_dict)
+
+    # THEN
+    expected_factunits = {clean_fact.base: clean_fact}
+    assert yao_cellunit.budevent_facts == expected_factunits
+
+
+def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts_only():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
@@ -214,10 +232,59 @@ def test_CellUnit_set_boss_facts_from_found_facts_SetsAttr():
     assert yao_cellunit.boss_facts == {}
 
     # WHEN
-    yao_cellunit.set_boss_facts_from_found_facts()
+    yao_cellunit.set_boss_facts_from_other_facts()
 
     # THEN
     assert yao_cellunit.boss_facts == yao_cellunit.found_facts
+    assert yao_cellunit.boss_facts == {clean_fact.base: clean_fact}
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_budevent_facts_only():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.budevent_facts) == 1
+    assert yao_cellunit.found_facts == {}
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.set_boss_facts_from_other_facts()
+
+    # THEN
+    assert yao_cellunit.boss_facts == yao_cellunit.budevent_facts
+    assert yao_cellunit.boss_facts == {clean_fact.base: clean_fact}
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_budevent_facts_And_found_facts():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    sky_fact = sky_blue_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_budevent_fact_dict = {sky_fact.base: sky_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_budevent_fact_dict)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.found_facts) == 1
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.set_boss_facts_from_other_facts()
+
+    # THEN
+    expected_boss_facts = {clean_fact.base: clean_fact, sky_fact.base: sky_fact}
+    assert yao_cellunit.boss_facts == expected_boss_facts
     yao_cellunit.boss_facts["testing"] = 1
     assert yao_cellunit.boss_facts != yao_cellunit.found_facts
 
