@@ -51,7 +51,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
         while deals_to_evaluate != []:
             parent_deal = deals_to_evaluate.pop()
             parent_cell = cellunit_shop(
-                deal_owner_name=parent_deal.get("owner_name"),
+                deal_owner_name=time_owner_name,
                 ancestors=parent_deal.get("ancestors"),
                 event_int=parent_deal.get("event_int"),
                 celldepth=parent_deal.get("celldepth"),
@@ -61,7 +61,7 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
             parent_credit_ledger = get_budevents_credit_ledger(
                 fisc_mstr_dir,
                 fisc_title,
-                parent_cell.deal_owner_name,
+                parent_cell.get_cell_owner_name(),
                 parent_cell.event_int,
             )
             path_ancestors = copy_copy(parent_cell.ancestors)[1:]
@@ -93,18 +93,29 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                                 "ancestors": child_ancestors,
                                 "event_int": downhill_event_int,
                                 "celldepth": child_celldepth,
-                                "owner_name": quota_owner,
+                                "deal_owner_name": time_owner_name,
                                 "penny": parent_cell.penny,
                                 "quota": quota_amount,
                             }
-                            child_deal_json_path = create_cell_node_json_path(
+                            child_cellunit = cellunit_shop(
+                                ancestors=child_ancestors,
+                                event_int=downhill_event_int,
+                                celldepth=child_celldepth,
+                                deal_owner_name=time_owner_name,
+                                penny=parent_cell.penny,
+                                quota=quota_amount,
+                            )
+                            child_cell_json_path = create_cell_node_json_path(
                                 fisc_mstr_dir,
                                 fisc_title,
                                 time_owner_name,
                                 time_int,
                                 child_ancestors[1:],
                             )
-                            save_json(child_deal_json_path, None, child_cell_node)
+                            # save_json(child_cell_json_path, None, child_cell_node)
+                            save_json(
+                                child_cell_json_path, None, child_cellunit.get_dict()
+                            )
                             deals_to_evaluate.append(child_cell_node)
 
 

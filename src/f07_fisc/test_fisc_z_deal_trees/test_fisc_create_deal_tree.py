@@ -69,9 +69,9 @@ def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(bob_tp37_credit_ledger_path)
-    assert open_json(bob_tp37_credit_ledger_path) == {"Bob": 1, "Yao": 1}
+    assert open_json(bob_tp37_credit_ledger_path) == {"Bob": 1, yao_str: 1}
     assert os_path_exists(bob_tp37_quota_ledger_path)
-    assert open_json(bob_tp37_quota_ledger_path) == {"Bob": 225, "Yao": 225}
+    assert open_json(bob_tp37_quota_ledger_path) == {"Bob": 225, yao_str: 225}
     assert count_dirs_files(bob_tp37_dir) == 3
 
 
@@ -90,7 +90,7 @@ def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
         "ancestors": [bob_str],
         event_int_str(): event56,
         celldepth_str(): deal1_celldepth,
-        owner_name_str(): bob_str,
+        "deal_owner_name": bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
     }
@@ -160,37 +160,34 @@ def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert os_path_exists(tp37_yao_quota)
     assert os_path_exists(tp37_zia_quota)
     assert count_dirs_files(tp37_dir) == 15
-    assert open_json(bob_tp37_bob_node_path) == {
-        "ancestors": ["Bob", "Bob"],
-        "event_int": 56,
-        "celldepth": 0,
-        "owner_name": "Bob",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(bob_tp37_yao_node_path) == {
-        "ancestors": ["Bob", "Yao"],
-        "event_int": 56,
-        "celldepth": 0,
-        "owner_name": "Yao",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(bob_tp37_zia_node_path) == {
-        "ancestors": ["Bob", "Zia"],
-        "event_int": 56,
-        "celldepth": 0,
-        "owner_name": "Zia",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(tp37_bob_credit) == {"Bob": 1, "Yao": 1, "Zia": 1}
-    assert open_json(tp37_yao_credit) == {"Zia": 1}
-    assert open_json(tp37_zia_credit) == {"Bob": 1, "Yao": 1}
-    assert open_json(tp37_quota) == {"Bob": 150, "Yao": 150, "Zia": 150}
-    assert open_json(tp37_bob_quota) == {"Bob": 50, "Yao": 50, "Zia": 50}
-    assert open_json(tp37_yao_quota) == {"Zia": 150}
-    assert open_json(tp37_zia_quota) == {"Bob": 75, "Yao": 75}
+    bob_tp37_bob_dict = open_json(bob_tp37_bob_node_path)
+    assert bob_tp37_bob_dict.get("ancestors") == [bob_str, bob_str]
+    assert bob_tp37_bob_dict.get("event_int") == 56
+    assert bob_tp37_bob_dict.get("celldepth") == 0
+    assert bob_tp37_bob_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_bob_dict.get("penny") == 1
+    assert bob_tp37_bob_dict.get("quota") == 150
+    bob_tp37_yao_dict = open_json(bob_tp37_yao_node_path)
+    assert bob_tp37_yao_dict.get("ancestors") == [bob_str, yao_str]
+    assert bob_tp37_yao_dict.get("event_int") == 56
+    assert bob_tp37_yao_dict.get("celldepth") == 0
+    assert bob_tp37_yao_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_yao_dict.get("penny") == 1
+    assert bob_tp37_yao_dict.get("quota") == 150
+    bob_tp37_zia_dict = open_json(bob_tp37_zia_node_path)
+    assert bob_tp37_zia_dict.get("ancestors") == [bob_str, zia_str]
+    assert bob_tp37_zia_dict.get("event_int") == 56
+    assert bob_tp37_zia_dict.get("celldepth") == 0
+    assert bob_tp37_zia_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_zia_dict.get("penny") == 1
+    assert bob_tp37_zia_dict.get("quota") == 150
+    assert open_json(tp37_bob_credit) == {bob_str: 1, yao_str: 1, zia_str: 1}
+    assert open_json(tp37_yao_credit) == {zia_str: 1}
+    assert open_json(tp37_zia_credit) == {bob_str: 1, yao_str: 1}
+    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
+    assert open_json(tp37_bob_quota) == {bob_str: 50, yao_str: 50, zia_str: 50}
+    assert open_json(tp37_yao_quota) == {zia_str: 150}
+    assert open_json(tp37_zia_quota) == {bob_str: 75, yao_str: 75}
 
 
 def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
@@ -210,7 +207,7 @@ def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
         "ancestors": [bob_str],
         event_int_str(): event55,
         celldepth_str(): deal1_celldepth,
-        owner_name_str(): bob_str,
+        "deal_owner_name": bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
     }
@@ -281,37 +278,34 @@ def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert os_path_exists(tp37_yao_quota)
     assert os_path_exists(tp37_zia_quota)
     assert count_dirs_files(tp37_dir) == 15
-    assert open_json(tp37_bob_node_path) == {
-        "ancestors": ["Bob", "Bob"],
-        "event_int": 55,
-        "celldepth": 0,
-        "owner_name": "Bob",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(tp37_yao_node_path) == {
-        "ancestors": ["Bob", "Yao"],
-        "event_int": 44,
-        "celldepth": 0,
-        "owner_name": "Yao",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(tp37_zia_node_path) == {
-        "ancestors": ["Bob", "Zia"],
-        "event_int": 33,
-        "celldepth": 0,
-        "owner_name": "Zia",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(tp37_bob_credit) == {"Bob": 1, "Yao": 1, "Zia": 1}
-    assert open_json(tp37_yao_credit) == {"Zia": 1}
-    assert open_json(tp37_zia_credit) == {"Bob": 1, "Yao": 1}
-    assert open_json(tp37_quota) == {"Bob": 150, "Yao": 150, "Zia": 150}
-    assert open_json(tp37_bob_quota) == {"Bob": 50, "Yao": 50, "Zia": 50}
-    assert open_json(tp37_yao_quota) == {"Zia": 150}
-    assert open_json(tp37_zia_quota) == {"Bob": 75, "Yao": 75}
+    bob_tp37_bob_dict = open_json(tp37_bob_node_path)
+    assert bob_tp37_bob_dict.get("ancestors") == [bob_str, bob_str]
+    assert bob_tp37_bob_dict.get("event_int") == 55
+    assert bob_tp37_bob_dict.get("celldepth") == 0
+    assert bob_tp37_bob_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_bob_dict.get("penny") == 1
+    assert bob_tp37_bob_dict.get("quota") == 150
+    bob_tp37_yao_dict = open_json(tp37_yao_node_path)
+    assert bob_tp37_yao_dict.get("ancestors") == [bob_str, yao_str]
+    assert bob_tp37_yao_dict.get("event_int") == 44
+    assert bob_tp37_yao_dict.get("celldepth") == 0
+    assert bob_tp37_yao_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_yao_dict.get("penny") == 1
+    assert bob_tp37_yao_dict.get("quota") == 150
+    bob_tp37_zia_dict = open_json(tp37_zia_node_path)
+    assert bob_tp37_zia_dict.get("ancestors") == [bob_str, zia_str]
+    assert bob_tp37_zia_dict.get("event_int") == 33
+    assert bob_tp37_zia_dict.get("celldepth") == 0
+    assert bob_tp37_zia_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_zia_dict.get("penny") == 1
+    assert bob_tp37_zia_dict.get("quota") == 150
+    assert open_json(tp37_bob_credit) == {bob_str: 1, yao_str: 1, zia_str: 1}
+    assert open_json(tp37_yao_credit) == {zia_str: 1}
+    assert open_json(tp37_zia_credit) == {bob_str: 1, yao_str: 1}
+    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
+    assert open_json(tp37_bob_quota) == {bob_str: 50, yao_str: 50, zia_str: 50}
+    assert open_json(tp37_yao_quota) == {zia_str: 150}
+    assert open_json(tp37_zia_quota) == {bob_str: 75, yao_str: 75}
 
 
 def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
@@ -334,7 +328,7 @@ def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
         "ancestors": [bob_str],
         event_int_str(): event55,
         celldepth_str(): deal1_celldepth,
-        owner_name_str(): bob_str,
+        "deal_owner_name": bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
     }
@@ -405,27 +399,25 @@ def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     assert os_path_exists(tp37_yao_quota)
     assert os_path_exists(tp37_zia_quota) is False
     assert count_dirs_files(tp37_dir) == 11
-    assert open_json(tp37_bob_node_path) == {
-        "ancestors": ["Bob", "Bob"],
-        "event_int": 55,
-        "celldepth": 0,
-        "owner_name": "Bob",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(tp37_yao_node_path) == {
-        "ancestors": ["Bob", "Yao"],
-        "event_int": 44,
-        "celldepth": 0,
-        "owner_name": "Yao",
-        "penny": 1,
-        "quota": 150,
-    }
-    assert open_json(tp37_bob_credit) == {"Bob": 1, "Yao": 1, "Zia": 1}
-    assert open_json(tp37_yao_credit) == {"Zia": 1}
-    assert open_json(tp37_quota) == {"Bob": 150, "Yao": 150, "Zia": 150}
-    assert open_json(tp37_bob_quota) == {"Bob": 50, "Yao": 50, "Zia": 50}
-    assert open_json(tp37_yao_quota) == {"Zia": 150}
+    bob_tp37_bob_dict = open_json(tp37_bob_node_path)
+    assert bob_tp37_bob_dict.get("ancestors") == [bob_str, bob_str]
+    assert bob_tp37_bob_dict.get("event_int") == 55
+    assert bob_tp37_bob_dict.get("celldepth") == 0
+    assert bob_tp37_bob_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_bob_dict.get("penny") == 1
+    assert bob_tp37_bob_dict.get("quota") == 150
+    bob_tp37_yao_dict = open_json(tp37_yao_node_path)
+    assert bob_tp37_yao_dict.get("ancestors") == [bob_str, yao_str]
+    assert bob_tp37_yao_dict.get("event_int") == 44
+    assert bob_tp37_yao_dict.get("celldepth") == 0
+    assert bob_tp37_yao_dict.get("deal_owner_name") == bob_str
+    assert bob_tp37_yao_dict.get("penny") == 1
+    assert bob_tp37_yao_dict.get("quota") == 150
+    assert open_json(tp37_bob_credit) == {bob_str: 1, yao_str: 1, zia_str: 1}
+    assert open_json(tp37_yao_credit) == {zia_str: 1}
+    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
+    assert open_json(tp37_bob_quota) == {bob_str: 50, yao_str: 50, zia_str: 50}
+    assert open_json(tp37_yao_quota) == {zia_str: 150}
 
 
 def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
@@ -447,7 +439,7 @@ def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
         "ancestors": [bob_str],
         event_int_str(): event55,
         celldepth_str(): deal1_celldepth,
-        owner_name_str(): bob_str,
+        "deal_owner_name": bob_str,
         penny_str(): 1,
         quota_str(): deal1_quota,
     }
@@ -518,8 +510,8 @@ def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     assert os_path_exists(tp37_yao_quota)
     assert os_path_exists(tp37_zia_quota)
     assert count_dirs_files(tp37_dir) == 11
-    assert open_json(tp37_yao_credit) == {"Zia": 1}
-    assert open_json(tp37_zia_credit) == {"Bob": 1, "Yao": 1}
+    assert open_json(tp37_yao_credit) == {zia_str: 1}
+    assert open_json(tp37_zia_credit) == {bob_str: 1, yao_str: 1}
     assert open_json(tp37_quota) == {bob_str: 0, yao_str: 1, zia_str: 1}
-    assert open_json(tp37_yao_quota) == {"Zia": 1}
-    assert open_json(tp37_zia_quota) == {"Bob": 1, "Yao": 0}
+    assert open_json(tp37_yao_quota) == {zia_str: 1}
+    assert open_json(tp37_zia_quota) == {bob_str: 1, yao_str: 0}
