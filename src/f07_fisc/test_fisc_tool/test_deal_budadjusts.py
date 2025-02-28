@@ -6,7 +6,6 @@ from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_budevent_path,
     create_cell_found_facts_path as found_facts_path,
-    create_cell_adjust_ledger_path as adjust_ledger_path,
 )
 from src.f05_listen.hub_tool import save_cell_node_file, open_bud_file
 from src.f07_fisc.fisc_tool import modify_deal_trees_create_boss_facts
