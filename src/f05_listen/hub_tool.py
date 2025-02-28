@@ -16,7 +16,7 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_credit_ledger, get_bud_root_facts_dict
-from src.f05_listen.cell import cellunit_shop, CellUnit, get_cellunit_from_dict
+from src.f05_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     create_budpoint_path,
@@ -174,4 +174,4 @@ def save_cell_node_file(
 
 def get_cellunit_from_json(dirpath: str) -> CellUnit:
     cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
-    return get_cellunit_from_dict(open_json(cell_node_json_path))
+    return cellunit_get_from_dict(open_json(cell_node_json_path))

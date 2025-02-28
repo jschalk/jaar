@@ -1,5 +1,5 @@
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.cell import cellunit_shop, get_cellunit_from_dict
+from src.f05_listen.cell import cellunit_shop, cellunit_get_from_dict
 from src.f05_listen.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
@@ -156,19 +156,19 @@ def test_CellUnit_get_json_ReturnsObj():
     assert len(x_cell_json) == 1235
 
 
-def test_get_cellunit_from_dict_ReturnsObj_Scenario0_NoParameters():
+def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
     # ESTABLISH
     yao_str = "Yao"
     x_dict = {"deal_owner_name": yao_str}
 
     # WHEN
-    gen_cellunit = get_cellunit_from_dict(x_dict)
+    gen_cellunit = cellunit_get_from_dict(x_dict)
 
     # THEN
     assert gen_cellunit == cellunit_shop(yao_str)
 
 
-def test_get_cellunit_from_dict_ReturnsObj_Scenario1():
+def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -202,7 +202,7 @@ def test_get_cellunit_from_dict_ReturnsObj_Scenario1():
     x_cell_dict = bob_sue_cellunit.get_dict()
 
     # WHEN
-    gen_cellunit = get_cellunit_from_dict(x_cell_dict)
+    gen_cellunit = cellunit_get_from_dict(x_cell_dict)
 
     # THEN
     assert gen_cellunit == bob_sue_cellunit

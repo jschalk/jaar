@@ -150,7 +150,7 @@ def cellunit_shop(
     )
 
 
-def get_cellunit_from_dict(x_dict: dict) -> CellUnit:
+def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     deal_owner_name = x_dict.get("deal_owner_name")
     ancestors = x_dict.get("ancestors")
     event_int = x_dict.get("event_int")
