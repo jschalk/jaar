@@ -24,7 +24,6 @@ from src.f05_listen.hub_tool import (
     save_bud_file,
     open_bud_file,
     get_timepoint_credit_ledger,
-    get_budevents_credit_ledger,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
     get_budevent_obj,
@@ -202,46 +201,6 @@ def test_get_budevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup)
 
     # THEN
     assert gen_a3_budevent == sue_bud
-
-
-def test_get_budevents_credit_ledger_ReturnsObj_Scenario0_NoFile(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord"
-    sue_str = "Sue"
-    t3 = 3
-
-    # WHEN
-    gen_a3_credit_ledger = get_budevents_credit_ledger(
-        fisc_mstr_dir, a23_str, sue_str, t3
-    )
-
-    # THEN
-    assert gen_a3_credit_ledger == {}
-
-
-def test_get_budevents_credit_ledger_ReturnsObj_Scenario1_FileExists(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord"
-    sue_str = "Sue"
-    t3 = 3
-    t3_json_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, t3)
-    a3_bud = get_budunit_3_acct()
-    save_bud_file(t3_json_path, None, a3_bud)
-
-    # WHEN
-    gen_a3_credit_ledger = get_budevents_credit_ledger(
-        fisc_mstr_dir, a23_str, sue_str, t3
-    )
-
-    # THEN
-    expected_a3_credit_ledger = {sue_str: 5, "Yao": 2, "Zia": 33}
-    assert gen_a3_credit_ledger == expected_a3_credit_ledger
 
 
 def test_get_budevent_facts_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):

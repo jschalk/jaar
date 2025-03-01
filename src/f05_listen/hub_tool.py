@@ -59,13 +59,6 @@ def get_budevent_obj(
     return open_bud_file(budevent_json_path)
 
 
-def get_budevents_credit_ledger(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
-) -> dict[AcctName, RespectNum]:
-    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, event_int)
-    return get_credit_ledger(budevent) if budevent else {}
-
-
 def get_budevent_facts(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ) -> dict[RoadUnit, dict[str,]]:
