@@ -12,7 +12,6 @@ from src.f05_listen.hub_path import (
     FISC_AGENDA_FULL_LISTING_FILENAME,
     DEALUNIT_FILENAME,
     CELLNODE_FILENAME,
-    CELL_CREDIT_LEDGER_FILENAME,
     CELL_QUOTA_LEDGER_FILENAME,
     CELL_BUDEVENT_FACTS_FILENAME,
     CELL_FOUND_FACTS_FILENAME,
@@ -31,7 +30,6 @@ from src.f05_listen.hub_path import (
     create_budpoint_path,
     create_cell_dir_path,
     create_cell_node_json_path,
-    create_cell_credit_ledger_path,
     create_cell_quota_ledger_path,
     create_cell_budevent_facts_path,
     create_cell_found_facts_path,
@@ -53,7 +51,6 @@ def test_hub_path_constants_are_values():
     assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
     assert DEALUNIT_FILENAME == "dealunit.json"
     assert CELLNODE_FILENAME == "cell_node.json"
-    assert CELL_CREDIT_LEDGER_FILENAME == "credit_ledger.json"
     assert CELL_QUOTA_LEDGER_FILENAME == "quota_ledger.json"
     assert CELL_BUDEVENT_FACTS_FILENAME == "budevent_facts.json"
     assert CELL_FOUND_FACTS_FILENAME == "found_facts.json"
@@ -331,31 +328,6 @@ def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_cell_node_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
     assert gen_cell_node_path == expected_cell_node_path
-
-
-def test_create_cell_credit_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord23"
-    sue_str = "Sue"
-    tp7 = 7
-    yao_str = "Yao"
-    bob_str = "Bob"
-    deal_ancestors = [yao_str, bob_str]
-
-    # WHEN
-    gen_deal_credit_ledger_path = create_cell_credit_ledger_path(
-        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
-    )
-
-    # THEN
-    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(timepoint_dir, yao_str)
-    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_credit_ledger_path = create_path(
-        tp_yao_bob_dir, CELL_CREDIT_LEDGER_FILENAME
-    )
-    assert gen_deal_credit_ledger_path == expected_deal_credit_ledger_path
 
 
 def test_create_cell_quota_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():

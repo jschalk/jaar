@@ -16,7 +16,6 @@ from src.f05_listen.hub_path import (
     create_budevent_path,
     create_cell_budevent_facts_path,
     create_cell_found_facts_path,
-    create_cell_credit_ledger_path,
     create_cell_quota_ledger_path,
 )
 from src.f05_listen.hub_tool import (
@@ -62,18 +61,11 @@ def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
                 parent_cell.event_int,
             )
             parent_cell.load_budevent(budevent)
-            parent_credit_ledger = parent_cell.get_budevents_credit_ledger()
             path_ancestors = copy_copy(parent_cell.ancestors)[1:]
-            parent_credit_ledger_json_path = create_cell_credit_ledger_path(
-                fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
-            )
-            save_json(parent_credit_ledger_json_path, None, parent_credit_ledger)
             parent_quota_ledger_path = create_cell_quota_ledger_path(
                 fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
             )
-            parent_quota_ledger = allot_scale(
-                parent_credit_ledger, parent_cell.quota, 1
-            )
+            parent_quota_ledger = parent_cell.get_budevents_quota_ledger()
             save_json(parent_quota_ledger_path, None, parent_quota_ledger)
             if parent_cell.celldepth > 0:
                 child_celldepth = parent_cell.celldepth - 1

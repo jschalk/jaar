@@ -5,6 +5,7 @@ from src.f00_instrument.dict_toolbox import (
     get_1_if_None,
     get_json_from_dict,
 )
+from src.f01_road.allot import allot_scale
 from src.f01_road.finance import PennyNum, FundNum
 from src.f01_road.road import OwnerName, EventInt, RoadUnit
 from src.f02_bud.reason_item import (
@@ -65,6 +66,12 @@ class CellUnit:
 
     def get_budevents_credit_ledger(self) -> dict[OwnerName, float]:
         return {} if self.budadjust is None else get_credit_ledger(self.budadjust)
+
+    def get_budevents_quota_ledger(self) -> dict[OwnerName, float]:
+        if not self.budadjust:
+            return None
+        credit_ledger = self.get_budevents_credit_ledger()
+        return allot_scale(credit_ledger, self.quota, self.penny)
 
     def set_budevent_facts_from_dict(self, fact_dict: dict[RoadUnit, dict]):
         self.budevent_facts = factunits_get_from_dict(fact_dict)

@@ -247,13 +247,42 @@ def test_get_budevents_credit_ledger_ReturnsObj_Scenario1_FileExists():
     sue_bud = budunit_shop(sue_str, "accord23")
     sue_bud.add_acctunit(sue_str, 3, 5)
     sue_bud.add_acctunit(yao_str, 7, 2)
-    sue_cell = cellunit_shop(yao_str, quota=55, budadjust=sue_bud)
+    sue_cell = cellunit_shop(yao_str, budadjust=sue_bud)
 
     # WHEN
     gen_credit_ledger = sue_cell.get_budevents_credit_ledger()
 
     # THEN
     expected_credit_ledger = {sue_str: 3, yao_str: 7}
+    assert gen_credit_ledger == expected_credit_ledger
+
+
+def test_CellUnit_get_budevents_quota_ledger_ReturnsObj_Scenario0_NoBud():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_cellunit = cellunit_shop(yao_str)
+
+    # WHEN
+    gen_credit_ledger = yao_cellunit.get_budevents_quota_ledger()
+
+    # THEN
+    assert gen_credit_ledger == {}
+
+
+def test_get_budevents_quota_ledger_ReturnsObj_Scenario1_FileExists():
+    # ESTABLISH
+    sue_str = "Sue"
+    yao_str = "Yao"
+    sue_bud = budunit_shop(sue_str, "accord23")
+    sue_bud.add_acctunit(sue_str, 3, 5)
+    sue_bud.add_acctunit(yao_str, 7, 2)
+    sue_cell = cellunit_shop(yao_str, quota=55, budadjust=sue_bud)
+
+    # WHEN
+    gen_credit_ledger = sue_cell.get_budevents_quota_ledger()
+
+    # THEN
+    expected_credit_ledger = {sue_str: 16, yao_str: 39}
     assert gen_credit_ledger == expected_credit_ledger
 
 
