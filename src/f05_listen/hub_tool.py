@@ -22,6 +22,7 @@ from src.f05_listen.hub_path import (
     create_budpoint_path,
     create_budevent_path,
     create_owners_dir_path,
+    create_cell_dir_path,
     create_cell_node_json_path,
 )
 from os import listdir as os_listdir
@@ -57,13 +58,6 @@ def get_budevent_obj(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
     return open_bud_file(budevent_json_path)
-
-
-def get_budevent_facts(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
-) -> dict[RoadUnit, dict[str,]]:
-    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, event_int)
-    return get_bud_root_facts_dict(budevent) if budevent else {}
 
 
 def collect_owner_event_dir_sets(
@@ -145,7 +139,7 @@ def save_arbitrary_budevent(
     return x_budevent_path
 
 
-def save_cell_node_file(
+def cellunit_add_json_file(
     fisc_mstr_dir: str,
     fisc_title: str,
     time_owner_name: str,
@@ -156,15 +150,19 @@ def save_cell_node_file(
     celldepth: int = None,
     penny: int = None,
 ):
-    cellnode_path = create_cell_node_json_path(
+    cell_dir = create_cell_dir_path(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
     )
-    x_cellunit = cellunit_shop(
+    x_cell = cellunit_shop(
         time_owner_name, deal_ancestors, event_int, celldepth, penny, quota
     )
-    save_json(cellnode_path, None, x_cellunit.get_dict())
+    cellunit_save_to_dir(cell_dir, x_cell)
 
 
-def cellunit_get_from_json(dirpath: str) -> CellUnit:
+def cellunit_save_to_dir(dirpath: str, x_cell: CellUnit):
+    save_json(dirpath, CELLNODE_FILENAME, x_cell.get_dict())
+
+
+def cellunit_get_from_dir(dirpath: str) -> CellUnit:
     cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
     return cellunit_get_from_dict(open_json(cell_node_json_path))

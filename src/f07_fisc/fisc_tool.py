@@ -19,10 +19,10 @@ from src.f05_listen.hub_path import (
 )
 from src.f05_listen.hub_tool import (
     get_budevent_obj,
-    get_budevent_facts,
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
-    cellunit_get_from_json,
+    cellunit_get_from_dir,
+    cellunit_save_to_dir,
 )
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
@@ -116,14 +116,12 @@ def create_all_cell_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
 
 
 def create_and_save_facts_file(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-    cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
-    cell_node_dict = open_json(cell_node_json_path)
-    deal_event_int = cell_node_dict.get("event_int")
-    budevent_fact_dict = get_budevent_facts(
-        fisc_mstr_dir, fisc_title, owner_name, deal_event_int
-    )
-    cell_node_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
-    save_json(cell_node_facts_path, None, budevent_fact_dict)
+    x_cellunit = cellunit_get_from_dir(dirpath)
+    cell_owner_name = x_cellunit.get_cell_owner_name()
+    event_int = x_cellunit.event_int
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, cell_owner_name, event_int)
+    x_cellunit.load_budevent(budevent)
+    cellunit_save_to_dir(dirpath, x_cellunit)
 
 
 def uphill_cell_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
@@ -156,16 +154,16 @@ def _create_found_facts(
         budevent_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
         budevent_facts_dict = factunits_get_from_dict(open_json(budevent_facts_path))
         deal_path = dirpath.replace(deal_time_dir, "")
-        deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
-        nodes_facts_dict[deal_owners_tuple] = budevent_facts_dict
+        cell_owners_tuple = tuple(deal_path.split(os_sep)[1:])
+        nodes_facts_dict[cell_owners_tuple] = budevent_facts_dict
 
     nodes_quotas_dict = {}
     for dirpath in quota_ledger_dirs:
         quota_ledger_path = create_path(dirpath, CELL_QUOTA_LEDGER_FILENAME)
         quota_ledger_dict = open_json(quota_ledger_path)
         deal_path = dirpath.replace(deal_time_dir, "")
-        deal_owners_tuple = tuple(deal_path.split(os_sep)[1:])
-        nodes_quotas_dict[deal_owners_tuple] = quota_ledger_dict
+        cell_owners_tuple = tuple(deal_path.split(os_sep)[1:])
+        nodes_quotas_dict[cell_owners_tuple] = quota_ledger_dict
 
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quotas_dict)
     output_dir_facts = {
@@ -193,7 +191,7 @@ def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
 def modify_deal_tree_create_boss_facts(
     fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
 ):
-    root_cell = cellunit_get_from_json(deal_time_dir)
+    root_cell = cellunit_get_from_dir(deal_time_dir)
     cell_event_int = root_cell.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
     root_cell.load_budevent(budevent)
@@ -224,23 +222,3 @@ def modify_deal_tree_create_boss_facts(
     # calculate budadjust
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
-
-
-# def _create_and_save_acct_adjust_ledger(fisc_mstr_dir, fisc_title, owner_name, dirpath):
-#     cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
-#     cell_node_dict = open_json(cell_node_json_path)
-#     ancestors = cell_node_dict.get("ancestors")
-#     cell_node_quota = cell_node_dict.get("quota")
-#     cell_node_owner_name = ancestors[-1] if ancestors else owner_name
-#     cell_node_event_int = cell_node_dict.get("event_int")
-#     budevent_json_path = create_budevent_path(
-#         fisc_mstr_dir, fisc_title, cell_node_owner_name, cell_node_event_int
-#     )
-#     budadjust_unit = open_bud_file(budevent_json_path)
-#     budadjust_unit.set_fund_pool(cell_node_quota)
-#     found_facts_path = create_path(dirpath, CELL_FOUND_FACTS_FILENAME)
-#     found_facts_dict = open_json(found_facts_path)
-#     set_factunits_to_bud(budadjust_unit, found_facts_dict)
-#     adjust_acct_agenda_ledger = get_acct_agenda_net_ledger(budadjust_unit, settle_bud=True)
-#     save_file(budadjust_path, None, budadjust_unit.get_json())
-#     save_json(adjust_ledger_path, None, adjust_acct_agenda_ledger)
