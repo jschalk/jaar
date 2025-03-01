@@ -3,7 +3,7 @@ from src.f01_road.deal import (
     quota_str,
     time_int_str,
     bridge_str,
-    dealdepth_str,
+    celldepth_str,
     owner_name_str,
     fisc_title_str,
 )
@@ -241,7 +241,7 @@ def test_get_fisc_args_set_ReturnsObj():
         penny_str(),
         owner_name_str(),
         quota_str(),
-        dealdepth_str(),
+        celldepth_str(),
         respect_bit_str(),
         time_int_str(),
         timeline_title_str(),

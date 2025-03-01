@@ -234,7 +234,16 @@ def get_bud_acct_agenda_award_csv(x_bud: BudUnit, settle_bud: bool = None) -> st
     return create_csv(x_headers, x_acct_agenda_award_array)
 
 
-def get_acct_agenda_ledger(
+def get_acct_agenda_give_ledger(
+    x_bud: BudUnit, settle_bud: bool = None
+) -> dict[AcctName, FundNum]:
+    if settle_bud:
+        x_bud.settle_bud()
+    bud_accts = x_bud.accts.values()
+    return {x_acct.acct_name: x_acct._fund_agenda_give for x_acct in bud_accts}
+
+
+def get_acct_agenda_net_ledger(
     x_bud: BudUnit, settle_bud: bool = None
 ) -> dict[AcctName, FundNum]:
     if settle_bud:
@@ -271,3 +280,8 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
                 factunit.fnigh,
                 create_missing_items=True,
             )
+
+
+def clear_factunits_from_bud(x_bud: BudUnit):
+    for fact_base in get_bud_root_facts_dict(x_bud).keys():
+        x_bud.del_fact(fact_base)

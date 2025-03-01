@@ -5,7 +5,7 @@ from src.f01_road.deal import (
     brokerunit_shop,
     get_brokerunit_from_dict,
     time_int_str,
-    dealdepth_str,
+    celldepth_str,
     owner_name_str,
     deal_net_str,
 )
@@ -117,7 +117,7 @@ def test_BrokerUnit_add_deal_SetsAttr():
     assert sue_brokerunit.deals.get(t1_int) == t1_dealunit
 
 
-def test_BrokerUnit_add_deal_SetsAttr_dealdepth():
+def test_BrokerUnit_add_deal_SetsAttr_celldepth():
     # ESTABLISH
     sue_brokerunit = brokerunit_shop("sue")
     assert sue_brokerunit.deals == {}
@@ -125,12 +125,12 @@ def test_BrokerUnit_add_deal_SetsAttr_dealdepth():
     # WHEN
     t1_int = 145
     t1_quota = 500
-    t1_dealdepth = 3
-    sue_brokerunit.add_deal(t1_int, t1_quota, t1_dealdepth)
+    t1_celldepth = 3
+    sue_brokerunit.add_deal(t1_int, t1_quota, t1_celldepth)
 
     # THEN
     assert sue_brokerunit.deals != {}
-    t1_dealunit = dealunit_shop(t1_int, t1_quota, dealdepth=t1_dealdepth)
+    t1_dealunit = dealunit_shop(t1_int, t1_quota, celldepth=t1_celldepth)
     assert sue_brokerunit.deals.get(t1_int) == t1_dealunit
 
 
@@ -211,9 +211,9 @@ def test_BrokerUnit_get_dict_ReturnsObj_Scenario0():
     x4_quota = 55
     x7_time_int = 7
     x7_quota = 66
-    x7_dealdepth = 22
+    x7_celldepth = 22
     sue_brokerunit.add_deal(x4_time_int, x4_quota)
-    sue_brokerunit.add_deal(x7_time_int, x7_quota, dealdepth=x7_dealdepth)
+    sue_brokerunit.add_deal(x7_time_int, x7_quota, celldepth=x7_celldepth)
 
     # WHEN
     sue_deals_dict = sue_brokerunit.get_dict()
@@ -226,7 +226,7 @@ def test_BrokerUnit_get_dict_ReturnsObj_Scenario0():
             x7_time_int: {
                 quota_str(): x7_quota,
                 time_int_str(): x7_time_int,
-                dealdepth_str(): x7_dealdepth,
+                celldepth_str(): x7_celldepth,
             },
         },
     }

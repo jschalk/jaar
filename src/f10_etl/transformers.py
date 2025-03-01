@@ -39,9 +39,8 @@ from src.f07_fisc.fisc import (
 )
 from src.f07_fisc.fisc_tool import (
     create_fisc_owners_deal_trees,
-    uphill_deal_node_budevent_facts,
-    create_deal_node_acct_adjust_ledgers,
-    create_deals_net_ledgers,
+    uphill_cell_node_budevent_facts,
+    modify_deal_trees_create_boss_facts,
 )
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -167,11 +166,11 @@ def get_inx_obj(class_type, x_row) -> str:
 
 
 def etl_mine_to_train_staging(mine_dir: str, train_dir: str):
-    transformer = mineTotrainTransformer(mine_dir, train_dir)
+    transformer = MineToTrainTransformer(mine_dir, train_dir)
     transformer.transform()
 
 
-class mineTotrainTransformer:
+class MineToTrainTransformer:
     def __init__(self, mine_dir: str, train_dir: str):
         self.mine_dir = mine_dir
         self.train_dir = train_dir
@@ -901,7 +900,7 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         save_json(json_path, None, x_dict)
 
 
-def etl_create_root_deal_nodes(fisc_mstr_dir: str):
+def etl_create_root_cell_nodes(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_dir = create_path(fiscs_dir, fisc_title)
@@ -909,7 +908,7 @@ def etl_create_root_deal_nodes(fisc_mstr_dir: str):
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
             x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
-            x_fiscunit.create_root_deal_nodes(ote1_dict)
+            x_fiscunit.create_root_cell_nodes(ote1_dict)
 
 
 def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
@@ -918,22 +917,16 @@ def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
         create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title)
 
 
-def etl_uphill_deal_node_budevent_facts(fisc_mstr_dir: str):
+def etl_uphill_cell_node_budevent_facts(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        uphill_deal_node_budevent_facts(fisc_mstr_dir, fisc_title)
+        uphill_cell_node_budevent_facts(fisc_mstr_dir, fisc_title)
 
 
-def etl_create_deal_trees_acct_adjust_ledgers(fisc_mstr_dir: str):
+def etl_modify_deal_trees_with_boss_facts(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        create_deal_node_acct_adjust_ledgers(fisc_mstr_dir, fisc_title)
-
-
-def etl_create_fiscs_deals_net_ledgers(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        create_deals_net_ledgers(fisc_mstr_dir, fisc_title)
+        modify_deal_trees_create_boss_facts(fisc_mstr_dir, fisc_title)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):

@@ -179,7 +179,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "quota": "int",
         "respect_bit": "float",
         "road": "RoadUnit",
-        "dealdepth": "int",
+        "celldepth": "int",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",

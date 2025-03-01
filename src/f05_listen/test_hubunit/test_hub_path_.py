@@ -11,14 +11,10 @@ from src.f05_listen.hub_path import (
     FISC_OTE1_AGG_JSON_FILENAME,
     FISC_AGENDA_FULL_LISTING_FILENAME,
     DEALUNIT_FILENAME,
-    DEAL_ACCT_LEDGER_FILENAME,
-    DEALNODE_FILENAME,
-    DEAL_CREDIT_LEDGER_FILENAME,
-    DEAL_QUOTA_LEDGER_FILENAME,
-    DEAL_BUDEVENT_FACTS_FILENAME,
-    DEAL_BUDADJUST_FILENAME,
-    DEAL_ADJUST_LEDGER_FILENAME,
-    DEAL_FOUND_FACTS_FILENAME,
+    CELLNODE_FILENAME,
+    CELL_QUOTA_LEDGER_FILENAME,
+    CELL_BUDEVENT_FACTS_FILENAME,
+    CELL_FOUND_FACTS_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
@@ -29,18 +25,14 @@ from src.f05_listen.hub_path import (
     fisc_agenda_list_report_path,
     create_owners_dir_path,
     create_deals_dir_path,
-    create_timepoint_dir_path,
-    create_root_deal_json_path,
-    create_dealunit_net_ledger_json_path,
+    create_deal_dir_path,
+    create_dealunit_json_path,
     create_budpoint_path,
-    create_deal_node_dir_path,
-    create_deal_node_json_path,
-    create_deal_node_credit_ledger_path,
-    create_deal_node_quota_ledger_path,
-    create_deal_node_budevent_facts_path,
-    create_deal_node_budadjust_path,
-    create_deal_node_found_facts_path,
-    create_deal_node_adjust_ledger_path,
+    create_cell_dir_path,
+    create_cell_node_json_path,
+    create_cell_quota_ledger_path,
+    create_cell_budevent_facts_path,
+    create_cell_found_facts_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -58,14 +50,10 @@ def test_hub_path_constants_are_values():
     assert FISC_OTE1_AGG_JSON_FILENAME == "fisc_ote1_agg.json"
     assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
     assert DEALUNIT_FILENAME == "dealunit.json"
-    assert DEAL_ACCT_LEDGER_FILENAME == "deal_acct_ledger.json"
-    assert DEALNODE_FILENAME == "deal_node.json"
-    assert DEAL_CREDIT_LEDGER_FILENAME == "credit_ledger.json"
-    assert DEAL_QUOTA_LEDGER_FILENAME == "quota_ledger.json"
-    assert DEAL_BUDEVENT_FACTS_FILENAME == "budevent_facts.json"
-    assert DEAL_BUDADJUST_FILENAME == "budadjust.json"
-    assert DEAL_ADJUST_LEDGER_FILENAME == "adjust_acct_agenda_ledger.json"
-    assert DEAL_FOUND_FACTS_FILENAME == "found_facts.json"
+    assert CELLNODE_FILENAME == "cell_node.json"
+    assert CELL_QUOTA_LEDGER_FILENAME == "quota_ledger.json"
+    assert CELL_BUDEVENT_FACTS_FILENAME == "budevent_facts.json"
+    assert CELL_FOUND_FACTS_FILENAME == "found_facts.json"
     assert BUDPOINT_FILENAME == "budpoint.json"
     assert BUDEVENT_FILENAME == "bud.json"
     assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
@@ -167,7 +155,7 @@ def test_create_deals_dir_path_ReturnObj():
     assert deals_dir == expected_deals_dir
 
 
-def test_create_timepoint_dir_path_ReturnObj():
+def test_create_deal_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -175,7 +163,7 @@ def test_create_timepoint_dir_path_ReturnObj():
     timepoint7 = 7
 
     # WHEN
-    generated_timepoint_dir = create_timepoint_dir_path(
+    generated_timepoint_dir = create_deal_dir_path(
         x_fisc_mstr_dir, accord23_str, sue_str, timepoint7
     )
 
@@ -189,7 +177,7 @@ def test_create_timepoint_dir_path_ReturnObj():
     assert generated_timepoint_dir == expected_timepoint_dir
 
 
-def test_create_root_deal_json_path_ReturnObj():
+def test_create_dealunit_json_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -197,7 +185,7 @@ def test_create_root_deal_json_path_ReturnObj():
     timepoint7 = 7
 
     # WHEN
-    gen_deal_path = create_root_deal_json_path(
+    gen_deal_path = create_dealunit_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -209,29 +197,6 @@ def test_create_root_deal_json_path_ReturnObj():
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
     expected_deal_path_dir = create_path(timepoint_dir, DEALUNIT_FILENAME)
-    assert gen_deal_path == expected_deal_path_dir
-
-
-def test_create_dealunit_net_ledger_json_path_ReturnObj():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord23"
-    sue_str = "Sue"
-    timepoint7 = 7
-
-    # WHEN
-    gen_deal_path = create_dealunit_net_ledger_json_path(
-        x_fisc_mstr_dir, a23_str, sue_str, timepoint7
-    )
-
-    # THEN
-    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
-    accord23_dir = create_path(x_fiscs_dir, a23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
-    sue_dir = create_path(owners_dir, sue_str)
-    deals_dir = create_path(sue_dir, "deals")
-    timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_deal_path_dir = create_path(timepoint_dir, DEAL_ACCT_LEDGER_FILENAME)
     assert gen_deal_path == expected_deal_path_dir
 
 
@@ -258,7 +223,7 @@ def test_create_budpoint_path_ReturnObj():
     assert gen_budpoint_path == expected_budpoint_path_dir
 
 
-def test_create_deal_node_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
+def test_create_cell_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -266,16 +231,16 @@ def test_create_deal_node_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
     tp7 = 7
 
     # WHEN
-    gen_deal_node_path = create_deal_node_dir_path(
+    gen_cell_node_path = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, []
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    assert gen_deal_node_path == timepoint_dir
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    assert gen_cell_node_path == timepoint_dir
 
 
-def test_create_deal_node_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
+def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -285,17 +250,17 @@ def test_create_deal_node_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
     x_deal_ancestors = [yao_str]
 
     # WHEN
-    gen_deal_node_path = create_deal_node_dir_path(
+    gen_cell_node_path = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=x_deal_ancestors
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
-    assert gen_deal_node_path == tp_yao_dir
+    assert gen_cell_node_path == tp_yao_dir
 
 
-def test_create_deal_node_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
+def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -307,19 +272,19 @@ def test_create_deal_node_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
     x_deal_ancestors = [yao_str, bob_str, zia_str]
 
     # WHEN
-    gen_deal_dealdepth_dir_path = create_deal_node_dir_path(
+    gen_deal_celldepth_dir_path = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=x_deal_ancestors
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_tp_yao_bob_zia_dir = create_path(tp_yao_bob_dir, zia_str)
-    assert gen_deal_dealdepth_dir_path == expected_tp_yao_bob_zia_dir
+    assert gen_deal_celldepth_dir_path == expected_tp_yao_bob_zia_dir
 
 
-def test_create_deal_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
+def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -327,7 +292,7 @@ def test_create_deal_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     timepoint7 = 7
 
     # WHEN
-    gen_deal_node_path = create_deal_node_json_path(
+    gen_cell_node_path = create_cell_node_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -338,11 +303,11 @@ def test_create_deal_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_deal_node_path_dir = create_path(timepoint_dir, DEALNODE_FILENAME)
-    assert gen_deal_node_path == expected_deal_node_path_dir
+    expected_cell_node_path_dir = create_path(timepoint_dir, CELLNODE_FILENAME)
+    assert gen_cell_node_path == expected_cell_node_path_dir
 
 
-def test_create_deal_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
+def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -353,19 +318,19 @@ def test_create_deal_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_node_path = create_deal_node_json_path(
+    gen_cell_node_path = create_cell_node_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_node_path = create_path(tp_yao_bob_dir, DEALNODE_FILENAME)
-    assert gen_deal_node_path == expected_deal_node_path
+    expected_cell_node_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
+    assert gen_cell_node_path == expected_cell_node_path
 
 
-def test_create_deal_node_credit_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
+def test_create_cell_quota_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -376,46 +341,21 @@ def test_create_deal_node_credit_ledger_path_ReturnObj_Scenario1_Three_deal_ance
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_credit_ledger_path = create_deal_node_credit_ledger_path(
+    gen_deal_quota_ledger_path = create_cell_quota_ledger_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(timepoint_dir, yao_str)
-    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_credit_ledger_path = create_path(
-        tp_yao_bob_dir, DEAL_CREDIT_LEDGER_FILENAME
-    )
-    assert gen_deal_credit_ledger_path == expected_deal_credit_ledger_path
-
-
-def test_create_deal_node_quota_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord23"
-    sue_str = "Sue"
-    tp7 = 7
-    yao_str = "Yao"
-    bob_str = "Bob"
-    deal_ancestors = [yao_str, bob_str]
-
-    # WHEN
-    gen_deal_quota_ledger_path = create_deal_node_quota_ledger_path(
-        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
-    )
-
-    # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_deal_quota_ledger_path = create_path(
-        tp_yao_bob_dir, DEAL_QUOTA_LEDGER_FILENAME
+        tp_yao_bob_dir, CELL_QUOTA_LEDGER_FILENAME
     )
     assert gen_deal_quota_ledger_path == expected_deal_quota_ledger_path
 
 
-def test_create_deal_node_budevent_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
+def test_create_cell_budevent_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -426,19 +366,19 @@ def test_create_deal_node_budevent_facts_path_ReturnObj_Scenario0_Three_deal_anc
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_facts_path = create_deal_node_budevent_facts_path(
+    gen_deal_facts_path = create_cell_budevent_facts_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_BUDEVENT_FACTS_FILENAME)
+    expected_deal_facts_path = create_path(tp_yao_bob_dir, CELL_BUDEVENT_FACTS_FILENAME)
     assert gen_deal_facts_path == expected_deal_facts_path
 
 
-def test_create_deal_node_budadjust_path_ReturnObj_Scenario0_Three_deal_ancestors():
+def test_create_cell_found_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -449,61 +389,15 @@ def test_create_deal_node_budadjust_path_ReturnObj_Scenario0_Three_deal_ancestor
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_deal_facts_path = create_deal_node_budadjust_path(
+    gen_deal_facts_path = create_cell_found_facts_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
     # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_BUDADJUST_FILENAME)
-    assert gen_deal_facts_path == expected_deal_facts_path
-
-
-def test_create_deal_node_found_facts_path_ReturnObj_Scenario0_Three_deal_ancestors():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord23"
-    sue_str = "Sue"
-    tp7 = 7
-    yao_str = "Yao"
-    bob_str = "Bob"
-    deal_ancestors = [yao_str, bob_str]
-
-    # WHEN
-    gen_deal_facts_path = create_deal_node_found_facts_path(
-        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
-    )
-
-    # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(timepoint_dir, yao_str)
-    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_FOUND_FACTS_FILENAME)
-    assert gen_deal_facts_path == expected_deal_facts_path
-
-
-def test_create_deal_node_adjust_ledger_path_ReturnObj_Scenario0_Three_deal_ancestors():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord23"
-    sue_str = "Sue"
-    tp7 = 7
-    yao_str = "Yao"
-    bob_str = "Bob"
-    deal_ancestors = [yao_str, bob_str]
-
-    # WHEN
-    gen_deal_facts_path = create_deal_node_adjust_ledger_path(
-        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
-    )
-
-    # THEN
-    timepoint_dir = create_timepoint_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(timepoint_dir, yao_str)
-    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_deal_facts_path = create_path(tp_yao_bob_dir, DEAL_ADJUST_LEDGER_FILENAME)
+    expected_deal_facts_path = create_path(tp_yao_bob_dir, CELL_FOUND_FACTS_FILENAME)
     assert gen_deal_facts_path == expected_deal_facts_path
 
 

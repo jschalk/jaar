@@ -4,12 +4,9 @@ from src.f00_instrument.file import (
     open_file,
     set_dir,
     save_json,
+    open_json,
 )
-from src.f00_instrument.dict_toolbox import (
-    get_empty_list_if_None,
-    get_0_if_None,
-    get_1_if_None,
-)
+from src.f00_instrument.dict_toolbox import get_empty_list_if_None
 from src.f01_road.deal import TimeLinePoint
 from src.f01_road.finance import RespectNum
 from src.f01_road.road import AcctName, OwnerName, TitleUnit, EventInt, RoadUnit
@@ -19,11 +16,13 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_credit_ledger, get_bud_root_facts_dict
+from src.f05_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f05_listen.hub_path import (
+    CELLNODE_FILENAME,
     create_budpoint_path,
     create_budevent_path,
     create_owners_dir_path,
-    create_deal_node_json_path,
+    create_cell_node_json_path,
 )
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
@@ -51,23 +50,26 @@ def get_timepoint_credit_ledger(
     return get_credit_ledger(budpoint) if budpoint else {}
 
 
-def get_budevents_credit_ledger(
+def get_budevent_obj(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
-) -> dict[AcctName, RespectNum]:
+) -> BudUnit:
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
-    budevent = open_bud_file(budevent_json_path)
+    return open_bud_file(budevent_json_path)
+
+
+def get_budevents_credit_ledger(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
+) -> dict[AcctName, RespectNum]:
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, event_int)
     return get_credit_ledger(budevent) if budevent else {}
 
 
 def get_budevent_facts(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ) -> dict[RoadUnit, dict[str,]]:
-    budevent_json_path = create_budevent_path(
-        fisc_mstr_dir, fisc_title, owner_name, event_int
-    )
-    budevent = open_bud_file(budevent_json_path)
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, event_int)
     return get_bud_root_facts_dict(budevent) if budevent else {}
 
 
@@ -150,7 +152,7 @@ def save_arbitrary_budevent(
     return x_budevent_path
 
 
-def save_deal_node_file(
+def save_cell_node_file(
     fisc_mstr_dir: str,
     fisc_title: str,
     time_owner_name: str,
@@ -158,39 +160,18 @@ def save_deal_node_file(
     event_int: int,
     deal_ancestors: list[OwnerName] = None,
     quota: int = None,
-    dealdepth: int = None,
+    celldepth: int = None,
     penny: int = None,
 ):
-    deal_ancestors = get_empty_list_if_None(deal_ancestors)
-    dealnode_path = create_deal_node_json_path(
+    cellnode_path = create_cell_node_json_path(
         fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
     )
-    if not quota:
-        quota = 150
-    dealnode_dict = {
-        "ancestors": deal_ancestors,
-        "event_int": event_int,
-        "dealdepth": get_0_if_None(dealdepth),
-        "owner_name": time_owner_name,
-        "penny": get_1_if_None(penny),
-        "quota": quota,
-    }
-    save_json(dealnode_path, None, dealnode_dict)
-
-
-def save_arbitrary_dealnode(
-    fisc_mstr_dir: str,
-    fisc_title: str,
-    time_owner_name: str,
-    time_int: int,
-    event_int: int,
-    deal_ancestors: list[OwnerName],
-):
-    save_deal_node_file(
-        fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=fisc_title,
-        time_owner_name=time_owner_name,
-        time_int=time_int,
-        deal_ancestors=deal_ancestors,
-        event_int=event_int,
+    x_cellunit = cellunit_shop(
+        time_owner_name, deal_ancestors, event_int, celldepth, penny, quota
     )
+    save_json(cellnode_path, None, x_cellunit.get_dict())
+
+
+def cellunit_get_from_json(dirpath: str) -> CellUnit:
+    cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
+    return cellunit_get_from_dict(open_json(cell_node_json_path))

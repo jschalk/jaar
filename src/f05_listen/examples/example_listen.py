@@ -131,6 +131,13 @@ def example_casa_dirty_factunit() -> FactUnit:
     return factunit_shop(casa_road, dirty_road)
 
 
+def example_casa_grimy_factunit() -> FactUnit:
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    grimy_road = create_road(casa_road, "grimy")
+    return factunit_shop(casa_road, grimy_road)
+
+
 def example_sky_blue_factunit() -> FactUnit:
     a23_str = "accord23"
     sky_road = create_road(a23_str, "sky color")

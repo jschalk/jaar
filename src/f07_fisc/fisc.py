@@ -48,7 +48,7 @@ from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f05_listen.basis_buds import get_default_forecast_bud
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_deal_node_json_path,
+    create_cell_node_json_path,
 )
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
@@ -285,7 +285,7 @@ class FiscUnit:
         time_int: TimeLinePoint,
         quota: int,
         allow_prev_to_present_time_entry: bool = False,
-        dealdepth: int = None,
+        celldepth: int = None,
     ):
         if time_int < self.present_time and not allow_prev_to_present_time_entry:
             exception_str = f"Cannot set dealunit because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
@@ -293,7 +293,7 @@ class FiscUnit:
         if self.brokerunit_exists(owner_name) is False:
             self.set_brokerunit(brokerunit_shop(owner_name))
         x_brokerunit = self.get_brokerunit(owner_name)
-        x_brokerunit.add_deal(time_int, quota, dealdepth)
+        x_brokerunit.add_deal(time_int, quota, celldepth)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
@@ -378,12 +378,12 @@ class FiscUnit:
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
-    def create_root_deal_nodes(self, ote1_dict):
+    def create_root_cell_nodes(self, ote1_dict):
         for owner_name, brokerunit in self.brokerunits.items():
             for time_int in brokerunit.deals.keys():
-                self.create_and_save_root_deal_node(owner_name, ote1_dict, time_int)
+                self.create_and_save_root_cell_node(owner_name, ote1_dict, time_int)
 
-    def create_and_save_root_deal_node(
+    def create_and_save_root_cell_node(
         self,
         owner_name: OwnerName,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
@@ -391,18 +391,18 @@ class FiscUnit:
     ):
         past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
         dealunit = self.get_brokerunit(owner_name).get_deal(time_int)
-        deal_node = {
+        cell_node = {
             "owner_name": owner_name,
             "event_int": past_event_int,
-            "dealdepth": dealunit.dealdepth,
+            "celldepth": dealunit.celldepth,
             "quota": dealunit.quota,
             "penny": self.penny,
             "ancestors": [owner_name],
         }
-        deal_node_json_path = create_deal_node_json_path(
+        cell_node_json_path = create_cell_node_json_path(
             self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
         )
-        save_json(deal_node_json_path, None, deal_node)
+        save_json(cell_node_json_path, None, cell_node)
 
 
 def _get_ote1_max_past_event_int(

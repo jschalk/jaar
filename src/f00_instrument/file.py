@@ -350,7 +350,7 @@ def count_dirs_files(x_dir: str) -> int:
 
 
 def get_level1_dirs(x_dir: str) -> list[str]:
-    """returns sorted list of all first level directorys"""
+    """returns sorted list of all first level directories"""
     try:
         level1_dirs = get_dir_file_strs(x_dir, include_dirs=True, include_files=False)
         return sorted(list(level1_dirs.keys()))
