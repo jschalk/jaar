@@ -3,7 +3,6 @@ from src.f01_road.road import create_road
 from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import (
     create_cell_node_json_path,
-    create_cell_budevent_facts_path as bude_facts_path,
     create_budevent_path,
 )
 from src.f05_listen.hub_tool import (

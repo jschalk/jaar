@@ -9,7 +9,6 @@ from src.f05_listen.cell import (
 )
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
-    CELL_BUDEVENT_FACTS_FILENAME,
     CELL_FOUND_FACTS_FILENAME,
     CELL_QUOTA_LEDGER_FILENAME,
     create_cell_node_json_path,
@@ -136,7 +135,7 @@ def uphill_cell_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
             budevent_facts_dirs = [
                 dirpath
                 for dirpath, dirnames, filenames in os_walk(deal_time_dir)
-                if CELL_BUDEVENT_FACTS_FILENAME in set(filenames)
+                if CELLNODE_FILENAME in set(filenames)
             ]
             quota_ledger_dirs = [
                 dirpath
@@ -151,11 +150,10 @@ def _create_found_facts(
 ):
     nodes_facts_dict = {}
     for dirpath in budevent_facts_dirs:
-        budevent_facts_path = create_path(dirpath, CELL_BUDEVENT_FACTS_FILENAME)
-        budevent_facts_dict = factunits_get_from_dict(open_json(budevent_facts_path))
+        x_cell = cellunit_get_from_dir(dirpath)
         deal_path = dirpath.replace(deal_time_dir, "")
         cell_owners_tuple = tuple(deal_path.split(os_sep)[1:])
-        nodes_facts_dict[cell_owners_tuple] = budevent_facts_dict
+        nodes_facts_dict[cell_owners_tuple] = x_cell.budevent_facts
 
     nodes_quotas_dict = {}
     for dirpath in quota_ledger_dirs:
