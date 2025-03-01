@@ -7,7 +7,6 @@ FISC_OTE1_AGG_JSON_FILENAME = "fisc_ote1_agg.json"
 FISC_AGENDA_FULL_LISTING_FILENAME = "agenda_full_listing.csv"
 DEALUNIT_FILENAME = "dealunit.json"
 CELLNODE_FILENAME = "cell_node.json"
-CELL_FOUND_FACTS_FILENAME = "found_facts.json"
 CELL_QUOTA_LEDGER_FILENAME = "quota_ledger.json"
 BUDPOINT_FILENAME = "budpoint.json"
 BUDEVENT_FILENAME = "bud.json"
@@ -133,20 +132,6 @@ def create_cell_quota_ledger_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
     return create_path(timepoint_dir, "quota_ledger.json")
-
-
-def create_cell_found_facts_path(
-    fisc_mstr_dir: str,
-    fisc_title: TitleUnit,
-    owner_name: OwnerName,
-    time_int: int,
-    deal_ancestors: list[OwnerName] = None,
-):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\found_facts.json"""
-    timepoint_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
-    )
-    return create_path(timepoint_dir, "found_facts.json")
 
 
 def create_owner_event_dir_path(

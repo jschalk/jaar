@@ -1,7 +1,6 @@
 from src.f00_instrument.file import save_json, save_file
 from src.f05_listen.hub_path import (
     create_budevent_path,
-    create_cell_found_facts_path as found_facts_path,
 )
 from src.f05_listen.hub_tool import cellunit_add_json_file
 from src.f11_world.world import worldunit_shop
@@ -27,7 +26,6 @@ from os.path import exists as os_path_exists
 #     save_file(bob7_budevent_path, None, mop_budunit.get_json())
 #     # create found_facts files
 #     bob5_found_facts = {}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
 #     save_json(bob5_found, None, bob5_found_facts)
 #     # create paths for budadjusts
 #     bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)

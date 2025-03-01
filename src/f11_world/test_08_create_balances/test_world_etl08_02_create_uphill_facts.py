@@ -5,10 +5,9 @@ from src.f04_gift.atom_config import base_str
 from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import (
     create_cell_dir_path as cell_dir,
-    create_cell_found_facts_path as found_facts_path,
     create_cell_quota_ledger_path as quota_path,
 )
-from src.f05_listen.hub_tool import cellunit_save_to_dir
+from src.f05_listen.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup, get_test_worlds_dir
 from os.path import exists as os_path_exists
@@ -51,21 +50,15 @@ def test_uphill_cell_node_budevent_facts_ChildNodeWithOneFactIsAssignedToAncesto
     save_json(bob_t5_quota_path, None, {yao_str: 1})
     save_json(bob_t5_yao_quota_path, None, {sue_str: 1})
     save_json(bob_t5_yao_sue_quota_path, None, {bob_str: 1})
-    bob_t5_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_yao_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
-    bob_t5_yao_sue_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-    assert os_path_exists(bob_t5_found) is False
-    assert os_path_exists(bob_t5_yao_found) is False
-    assert os_path_exists(bob_t5_yao_sue_found) is False
+    assert cellunit_get_from_dir(bob_t5_dir).found_facts == {}
+    assert cellunit_get_from_dir(bob_t5_yao_dir).found_facts == {}
+    assert cellunit_get_from_dir(bob_t5_yao_sue_dir).found_facts == {}
 
     # WHEN
     fizz_world.uphill_cell_node_budevent_facts()
 
     # THEN
-    assert os_path_exists(bob_t5_found)
-    assert os_path_exists(bob_t5_yao_found)
-    assert os_path_exists(bob_t5_yao_sue_found)
-    expected_found_facts = {clean_fact.base: clean_fact.get_dict()}
-    assert open_json(bob_t5_found) == expected_found_facts
-    assert open_json(bob_t5_yao_found) == expected_found_facts
-    assert open_json(bob_t5_yao_sue_found) == expected_found_facts
+    expected_found_facts = {clean_fact.base: clean_fact}
+    assert cellunit_get_from_dir(bob_t5_dir).found_facts == expected_found_facts
+    assert cellunit_get_from_dir(bob_t5_yao_dir).found_facts == expected_found_facts
+    assert cellunit_get_from_dir(bob_t5_yao_sue_dir).found_facts == expected_found_facts

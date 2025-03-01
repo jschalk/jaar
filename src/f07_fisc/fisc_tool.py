@@ -9,11 +9,9 @@ from src.f05_listen.cell import (
 )
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
-    CELL_FOUND_FACTS_FILENAME,
     CELL_QUOTA_LEDGER_FILENAME,
     create_cell_node_json_path,
     create_budevent_path,
-    create_cell_found_facts_path,
     create_cell_quota_ledger_path,
 )
 from src.f05_listen.hub_tool import (
@@ -169,7 +167,9 @@ def _create_found_facts(
         for node_addr, facts in nodes_wgt_facts.items()
     }
     for output_dir, output_facts_dict in output_dir_facts.items():
-        save_json(output_dir, CELL_FOUND_FACTS_FILENAME, output_facts_dict)
+        output_cell = cellunit_get_from_dir(output_dir)
+        output_cell.set_found_facts_from_dict(output_facts_dict)
+        cellunit_save_to_dir(output_dir, output_cell)
 
 
 def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
@@ -193,8 +193,6 @@ def modify_deal_tree_create_boss_facts(
     cell_event_int = root_cell.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
     root_cell.load_budevent(budevent)
-    found_facts_path = create_path(deal_time_dir, CELL_FOUND_FACTS_FILENAME)
-    root_cell.set_found_facts_from_dict(open_json(found_facts_path))
     root_cell.set_boss_facts_from_other_facts()
     to_evaluate_cells = [root_cell]
     while to_evaluate_cells != []:
