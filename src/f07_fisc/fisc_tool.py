@@ -9,10 +9,9 @@ from src.f05_listen.cell import (
 )
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
-    CELL_QUOTA_LEDGER_FILENAME,
+    create_cell_dir_path,
     create_cell_node_json_path,
     create_budevent_path,
-    create_cell_quota_ledger_path,
 )
 from src.f05_listen.hub_tool import (
     get_budevent_obj,
@@ -38,62 +37,55 @@ def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
             create_deal_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
 
 
-def create_deal_tree(fisc_mstr_dir, fisc_title, time_owner_name, time_int):
+def create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
     root_cell_json_path = create_cell_node_json_path(
-        fisc_mstr_dir, fisc_title, time_owner_name, time_int
+        fisc_mstr_dir, fisc_title, deal_owner_name, time_int
     )
     if os_path_exists(root_cell_json_path):
-        root_cell_dict = open_json(root_cell_json_path)
-        root_cellunit = cellunit_get_from_dict(root_cell_dict)
-        cells_to_evaluate = [root_cellunit]
-        owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
-        while cells_to_evaluate != []:
-            parent_cell = cells_to_evaluate.pop()
-            budevent = get_budevent_obj(
-                fisc_mstr_dir,
-                fisc_title,
-                parent_cell.get_cell_owner_name(),
-                parent_cell.event_int,
+        _exists_create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int)
+
+
+def _exists_create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
+    root_cell_dir = create_cell_dir_path(
+        fisc_mstr_dir, fisc_title, deal_owner_name, time_int, []
+    )
+    cells_to_evaluate = [cellunit_get_from_dir(root_cell_dir)]
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
+    while cells_to_evaluate != []:
+        parent_cell = cells_to_evaluate.pop()
+        cell_owner_name = parent_cell.get_cell_owner_name()
+        e_int = parent_cell.event_int
+        budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, cell_owner_name, e_int)
+        parent_cell.load_budevent(budevent)
+        parent_cell_dir = create_cell_dir_path(
+            fisc_mstr_dir,
+            fisc_title,
+            deal_owner_name,
+            time_int,
+            parent_cell.ancestors,
+        )
+        cellunit_save_to_dir(parent_cell_dir, parent_cell)
+        parent_quota_ledger = parent_cell.get_budevents_quota_ledger()
+        if parent_cell.celldepth > 0:
+            child_celldepth = parent_cell.celldepth - 1
+            parent_quota_owners = set(parent_quota_ledger.keys())
+            owners_downhill_events_ints = get_owners_downhill_event_ints(
+                owner_events_sets, parent_quota_owners, parent_cell.event_int
             )
-            parent_cell.load_budevent(budevent)
-            path_ancestors = copy_copy(parent_cell.ancestors)[1:]
-            parent_quota_ledger_path = create_cell_quota_ledger_path(
-                fisc_mstr_dir, fisc_title, time_owner_name, time_int, path_ancestors
-            )
-            parent_quota_ledger = parent_cell.get_budevents_quota_ledger()
-            save_json(parent_quota_ledger_path, None, parent_quota_ledger)
-            if parent_cell.celldepth > 0:
-                child_celldepth = parent_cell.celldepth - 1
-                parent_quota_owners = set(parent_quota_ledger.keys())
-                owners_downhill_events_ints = get_owners_downhill_event_ints(
-                    owner_events_sets, parent_quota_owners, parent_cell.event_int
-                )
-                for quota_owner, quota_amount in parent_quota_ledger.items():
-                    if downhill_event_int := owners_downhill_events_ints.get(
-                        quota_owner
-                    ):
-                        if quota_amount > 0:
-                            child_ancestors = list(copy_copy(parent_cell.ancestors))
-                            child_ancestors.append(quota_owner)
-                            child_cellunit = cellunit_shop(
-                                ancestors=child_ancestors,
-                                event_int=downhill_event_int,
-                                celldepth=child_celldepth,
-                                deal_owner_name=time_owner_name,
-                                penny=parent_cell.penny,
-                                quota=quota_amount,
-                            )
-                            child_cell_json_path = create_cell_node_json_path(
-                                fisc_mstr_dir,
-                                fisc_title,
-                                time_owner_name,
-                                time_int,
-                                child_ancestors[1:],
-                            )
-                            save_json(
-                                child_cell_json_path, None, child_cellunit.get_dict()
-                            )
-                            cells_to_evaluate.append(child_cellunit)
+            for quota_owner, quota_amount in parent_quota_ledger.items():
+                if downhill_event_int := owners_downhill_events_ints.get(quota_owner):
+                    if quota_amount > 0:
+                        child_ancestors = list(copy_copy(parent_cell.ancestors))
+                        child_ancestors.append(quota_owner)
+                        child_cellunit = cellunit_shop(
+                            ancestors=child_ancestors,
+                            event_int=downhill_event_int,
+                            celldepth=child_celldepth,
+                            deal_owner_name=deal_owner_name,
+                            penny=parent_cell.penny,
+                            quota=quota_amount,
+                        )
+                        cells_to_evaluate.append(child_cellunit)
 
 
 def create_all_cell_node_facts_files(fisc_mstr_dir: str, fisc_title: TitleUnit):
@@ -138,7 +130,7 @@ def uphill_cell_node_budevent_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
             quota_ledger_dirs = [
                 dirpath
                 for dirpath, dirnames, filenames in os_walk(deal_time_dir)
-                if CELL_QUOTA_LEDGER_FILENAME in set(filenames)
+                if CELLNODE_FILENAME in set(filenames)
             ]
             _create_found_facts(deal_time_dir, budevent_facts_dirs, quota_ledger_dirs)
 
@@ -155,8 +147,8 @@ def _create_found_facts(
 
     nodes_quotas_dict = {}
     for dirpath in quota_ledger_dirs:
-        quota_ledger_path = create_path(dirpath, CELL_QUOTA_LEDGER_FILENAME)
-        quota_ledger_dict = open_json(quota_ledger_path)
+        x_cell = cellunit_get_from_dir(dirpath)
+        quota_ledger_dict = x_cell.get_budevents_quota_ledger()
         deal_path = dirpath.replace(deal_time_dir, "")
         cell_owners_tuple = tuple(deal_path.split(os_sep)[1:])
         nodes_quotas_dict[cell_owners_tuple] = quota_ledger_dict
