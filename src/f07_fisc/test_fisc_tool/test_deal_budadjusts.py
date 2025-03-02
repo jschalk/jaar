@@ -3,11 +3,8 @@ from src.f02_bud.group import awardlink_shop
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
 from src.f04_gift.atom_config import base_str
-from src.f05_listen.hub_path import (
-    create_budevent_path,
-    create_cell_found_facts_path as found_facts_path,
-)
-from src.f05_listen.hub_tool import save_cell_node_file, open_bud_file
+from src.f05_listen.hub_path import create_budevent_path
+from src.f05_listen.hub_tool import cellunit_add_json_file, open_bud_file
 from src.f07_fisc.fisc_tool import modify_deal_trees_create_boss_facts
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
@@ -96,7 +93,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
     return yao_bud
 
 
-# # create a world with, cell_node.json, found facts and bud events
+# # create a world with, cell.json, found facts and bud events
 # # for every found_fact change budevent to that fact
 # # create agenda (different than if found_fact was not applied)
 # def test_modify_deal_tree_create_boss_facts_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
@@ -111,15 +108,14 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     event7 = 7
 #     q3 = 3
 #     cd0 = 0
-#     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das, q3, cd0)
+#     # create cell files
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das, q3, cd0)
 #     # create budevent files
 #     mop_budunit = get_bob_mop_without_reason_budunit_example()
 #     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
 #     save_file(bob7_budevent_path, None, mop_budunit.get_json())
 #     # create found_facts files
 #     bob5_found_facts = {}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
 #     save_json(bob5_found, None, bob5_found_facts)
 #     # create paths for budadjusts
 #     bob5_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
@@ -154,15 +150,14 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     bob_str = "Bob"
 #     das = []
 #     event7 = 7
-#     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+#     # create cell files
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
 #     # create budevent files
 #     mop_budunit = get_bob_mop_without_reason_budunit_example()
 #     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
 #     save_file(bob7_budevent_path, None, mop_budunit.get_json())
 #     # create found_facts files
 #     bob5_found_facts = {}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
 #     save_json(bob5_found, None, bob5_found_facts)
 #     # create paths for budadjusts
 #     bob5_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
@@ -192,9 +187,9 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     das = []
 #     das_yao = [yao_str]
 #     event7 = 7
-#     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
+#     # create cell files
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
 #     # create budevent files
 #     mop_budunit = get_bob_mop_with_reason_budunit_example()
 #     sport_budunit = get_yao_run_with_reason_budunit_example()
@@ -205,8 +200,6 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     # create found_facts files
 #     bob5_found_facts = {}
 #     bob5_yao_found_facts = {}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     bob5_yao_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
 #     save_json(bob5_found, None, bob5_found_facts)
 #     save_json(bob5_yao_found, None, bob5_yao_found_facts)
 #     # create paths for budadjusts, acct_agenda_adjust_ledgers
@@ -242,9 +235,9 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     das = []
 #     das_yao = [yao_str]
 #     event7 = 7
-#     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
+#     # create cell files
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
 #     # create budevent files
 #     bob_mop_budunit = get_bob_mop_fact_clean_budunit_example()
 #     yao_run_budunit = get_yao_run_rain_fact_budunit_example()
@@ -260,8 +253,6 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     snow_road = yao_run_budunit.make_road(weather_road, "snowing")
 #     bob5_found_facts = {floor_road: {base_str(): floor_road, "pick": dirty_road}}
 #     bob5_yao_found_facts = {weather_road: {base_str(): weather_road, "pick": snow_road}}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     bob5_yao_found_path = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
 #     print(f"{bob5_yao_found_path=}")
 #     save_json(bob5_found, None, bob5_found_facts)
 #     save_json(bob5_yao_found_path, None, bob5_yao_found_facts)
@@ -339,9 +330,9 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     event7 = 7
 #     quota700 = 70088
 #     quota900 = 900
-#     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das, quota700)
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao, quota900)
+#     # create cell files
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das, quota700)
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao, quota900)
 #     # create budevent files
 #     bob_mop_budunit
 #     yao_run_budunit = get_yao_run_rain_fact_budunit_example()
@@ -354,8 +345,6 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     snow_road = yao_run_budunit.make_road(weather_road, "snowing")
 #     bob5_found_facts = {floor_road: {base_str(): floor_road, "pick": dirty_road}}
 #     bob5_yao_found_facts = {weather_road: {base_str(): weather_road, "pick": snow_road}}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     bob5_yao_found_path = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das_yao)
 #     print(f"{bob5_yao_found_path=}")
 #     save_json(bob5_found, None, bob5_found_facts)
 #     save_json(bob5_yao_found_path, None, bob5_yao_found_facts)

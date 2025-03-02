@@ -1,9 +1,8 @@
 from src.f00_instrument.file import save_json, save_file
 from src.f05_listen.hub_path import (
     create_budevent_path,
-    create_cell_found_facts_path as found_facts_path,
 )
-from src.f05_listen.hub_tool import save_cell_node_file
+from src.f05_listen.hub_tool import cellunit_add_json_file
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.example_worlds import get_mop_with_reason_budunit_example
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
@@ -19,15 +18,14 @@ from os.path import exists as os_path_exists
 #     bob_str = "Bob"
 #     das = []
 #     event7 = 7
-#     # create cell_node files
-#     save_cell_node_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
+#     # create cell files
+#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
 #     mop_budunit = get_mop_with_reason_budunit_example()
 #     # create budevent files
 #     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
 #     save_file(bob7_budevent_path, None, mop_budunit.get_json())
 #     # create found_facts files
 #     bob5_found_facts = {}
-#     bob5_found = found_facts_path(mstr_dir, a23_str, bob_str, tp5, das)
 #     save_json(bob5_found, None, bob5_found_facts)
 #     # create paths for budadjusts
 #     bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
@@ -45,7 +43,7 @@ from os.path import exists as os_path_exists
 #     assert os_path_exists(bob5_adjust_ledger_path)
 
 
-# create a world with, cell_node.json, found facts and bud events
+# create a world with, cell.json, found facts and bud events
 # for every found_fact change budevent to that fact
 # create agenda (different than if found_fact was not applied)
 # create a budevent such that changing facts changes agenda output

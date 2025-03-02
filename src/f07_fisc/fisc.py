@@ -46,10 +46,13 @@ from src.f01_road.road import (
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f05_listen.basis_buds import get_default_forecast_bud
+from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_cell_node_json_path,
+    create_cell_dir_path,
+    create_cell_json_path,
 )
+from src.f05_listen.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
     listen_to_speaker_agenda,
@@ -378,12 +381,12 @@ class FiscUnit:
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
-    def create_root_cell_nodes(self, ote1_dict):
+    def create_deals_root_cells(self, ote1_dict):
         for owner_name, brokerunit in self.brokerunits.items():
             for time_int in brokerunit.deals.keys():
-                self.create_and_save_root_cell_node(owner_name, ote1_dict, time_int)
+                self._create_deal_root_cell(owner_name, ote1_dict, time_int)
 
-    def create_and_save_root_cell_node(
+    def _create_deal_root_cell(
         self,
         owner_name: OwnerName,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
@@ -391,18 +394,18 @@ class FiscUnit:
     ):
         past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
         dealunit = self.get_brokerunit(owner_name).get_deal(time_int)
-        cell_node = {
-            "owner_name": owner_name,
-            "event_int": past_event_int,
-            "celldepth": dealunit.celldepth,
-            "quota": dealunit.quota,
-            "penny": self.penny,
-            "ancestors": [owner_name],
-        }
-        cell_node_json_path = create_cell_node_json_path(
-            self.fisc_mstr_dir, self.fisc_title, owner_name, time_int
+        cellunit = cellunit_shop(
+            owner_name,
+            [owner_name],
+            past_event_int,
+            celldepth=dealunit.celldepth,
+            quota=dealunit.quota,
+            penny=self.penny,
         )
-        save_json(cell_node_json_path, None, cell_node)
+        root_cell_dir = create_cell_dir_path(
+            self.fisc_mstr_dir, self.fisc_title, owner_name, time_int, []
+        )
+        cellunit_save_to_dir(root_cell_dir, cellunit)
 
 
 def _get_ote1_max_past_event_int(

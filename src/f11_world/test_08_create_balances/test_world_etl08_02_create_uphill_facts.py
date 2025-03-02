@@ -1,80 +1,17 @@
 from src.f00_instrument.file import open_json, save_json
 from src.f01_road.road import create_road
+from src.f02_bud.reason_item import factunit_shop
+from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import base_str
-from src.f05_listen.hub_path import (
-    create_cell_budevent_facts_path as bude_facts_path,
-    create_cell_found_facts_path as found_facts_path,
-    create_cell_quota_ledger_path as quota_path,
-)
+from src.f05_listen.cell import cellunit_shop
+from src.f05_listen.hub_path import create_cell_dir_path as cell_dir
+from src.f05_listen.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup, get_test_worlds_dir
 from os.path import exists as os_path_exists
 
 
-def test_uphill_cell_node_budevent_facts_Scenario0_RootOnly_NoFacts(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-    fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    a23_str = "accord23"
-    bob_str = "Bob"
-    time5 = 5
-    das = []
-    bob_t5_be_facts_path = bude_facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_be_quota_path = quota_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
-    be_facts_dict = {}
-    save_json(bob_t5_be_facts_path, None, be_facts_dict)
-    save_json(bob_t5_be_quota_path, None, {})
-    bob_t5_found_path = found_facts_path(fisc_mstr_dir, a23_str, bob_str, time5, das)
-    assert os_path_exists(bob_t5_found_path) is False
-
-    # WHEN
-    fizz_world.uphill_cell_node_budevent_facts()
-
-    # THEN
-    assert os_path_exists(bob_t5_found_path)
-    assert open_json(bob_t5_found_path) == {}
-
-
-def test_uphill_cell_node_budevent_facts_Scenario1_ChildNode_NoFacts(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
-    mstr_dir = fizz_world._fisc_mstr_dir
-    bob_str = "Bob"
-    yao_str = "Yao"
-    sue_str = "Sue"
-    a23_str = "accord23"
-    time5 = 5
-    das = []
-    das_y = [yao_str]
-    das_ys = [yao_str, sue_str]
-    bob_t5_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_yao_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
-    bob_t5_yao_sue_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-    bob_t5_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_yao_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_y)
-    bob_t5_yao_sue_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-    save_json(bob_t5_bef_path, None, {})
-    save_json(bob_t5_yao_bef_path, None, {})
-    save_json(bob_t5_yao_sue_bef_path, None, {})
-    save_json(bob_t5_quota_path, None, {})
-    save_json(bob_t5_yao_quota_path, None, {})
-    save_json(bob_t5_yao_sue_quota_path, None, {})
-    bob_t5_found_path = found_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-    assert os_path_exists(bob_t5_found_path) is False
-
-    # WHEN
-    fizz_world.uphill_cell_node_budevent_facts()
-
-    # THEN
-    assert os_path_exists(bob_t5_found_path)
-    assert open_json(bob_t5_found_path) == {}
-
-
-def test_uphill_cell_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
+def test_set_deal_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -87,38 +24,44 @@ def test_uphill_cell_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssigne
     time5 = 5
     casa_road = create_road(a23_str, "casa")
     clean_road = create_road(casa_road, "clean")
-    bob_t5_be_facts = {}
-    bob_t5_yao_be_facts = {}
-    bob_t5_yao_sue_be_facts = {casa_road: {base_str(): casa_road, "pick": clean_road}}
+    clean_fact = factunit_shop(casa_road, clean_road)
     das = []
     das_y = [yao_str]
     das_ys = [yao_str, sue_str]
-    bob_t5_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_yao_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
-    bob_t5_yao_sue_bef_path = bude_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-    bob_t5_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_yao_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_y)
-    bob_t5_yao_sue_quota_path = quota_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-    save_json(bob_t5_bef_path, None, bob_t5_be_facts)
-    save_json(bob_t5_yao_bef_path, None, bob_t5_yao_be_facts)
-    save_json(bob_t5_yao_sue_bef_path, None, bob_t5_yao_sue_be_facts)
-    save_json(bob_t5_quota_path, None, {yao_str: 1})
-    save_json(bob_t5_yao_quota_path, None, {sue_str: 1})
-    save_json(bob_t5_yao_sue_quota_path, None, {bob_str: 1})
-    bob_t5_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das)
-    bob_t5_yao_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_y)
-    bob_t5_yao_sue_found = found_facts_path(mstr_dir, a23_str, bob_str, time5, das_ys)
-    assert os_path_exists(bob_t5_found) is False
-    assert os_path_exists(bob_t5_yao_found) is False
-    assert os_path_exists(bob_t5_yao_sue_found) is False
+    bob5_dir = cell_dir(mstr_dir, a23_str, bob_str, time5, das)
+    bob5_yao_dir = cell_dir(mstr_dir, a23_str, bob_str, time5, das_y)
+    bob5_yao_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, time5, das_ys)
+    bob5_budevent = budunit_shop(bob_str, a23_str)
+    bob5_yao_budevent = budunit_shop(yao_str, a23_str)
+    bob5_yao_sue_budevent = budunit_shop(sue_str, a23_str)
+    bob5_budevent.add_acctunit(yao_str)
+    bob5_yao_budevent.add_acctunit(sue_str)
+    bob5_yao_sue_budevent.add_acctunit(bob_str)
+    bob5_yao_sue_budevent.add_item(clean_fact.pick, 1)
+    bob5_yao_sue_budevent.add_fact(clean_fact.base, clean_fact.pick)
+    bob5_cell = cellunit_shop(bob_str, das, budadjust=bob5_budevent)
+    bob5_yao_cell = cellunit_shop(bob_str, das_y, budadjust=bob5_yao_budevent)
+    clean_facts = {clean_fact.base: clean_fact}
+    bob5_yao_sue_cell = cellunit_shop(
+        bob_str, das_ys, budadjust=bob5_yao_sue_budevent, budevent_facts=clean_facts
+    )
+    assert bob5_cell.get_budevents_quota_ledger() == {yao_str: 1000}
+    assert bob5_yao_cell.get_budevents_quota_ledger() == {sue_str: 1000}
+    assert bob5_yao_sue_cell.get_budevents_quota_ledger() == {bob_str: 1000}
+    assert bob5_cell.budevent_facts == {}
+    assert bob5_yao_cell.budevent_facts == {}
+    assert bob5_yao_sue_cell.budevent_facts == clean_facts
+    cellunit_save_to_dir(bob5_dir, bob5_cell)
+    cellunit_save_to_dir(bob5_yao_dir, bob5_yao_cell)
+    cellunit_save_to_dir(bob5_yao_sue_dir, bob5_yao_sue_cell)
+    assert cellunit_get_from_dir(bob5_dir).found_facts == {}
+    assert cellunit_get_from_dir(bob5_yao_dir).found_facts == {}
+    assert cellunit_get_from_dir(bob5_yao_sue_dir).found_facts == {}
 
     # WHEN
-    fizz_world.uphill_cell_node_budevent_facts()
+    fizz_world.set_deal_trees_found_facts()
 
     # THEN
-    assert os_path_exists(bob_t5_found)
-    assert os_path_exists(bob_t5_yao_found)
-    assert os_path_exists(bob_t5_yao_sue_found)
-    assert open_json(bob_t5_found) == bob_t5_yao_sue_be_facts
-    assert open_json(bob_t5_yao_found) == bob_t5_yao_sue_be_facts
-    assert open_json(bob_t5_yao_sue_found) == bob_t5_yao_sue_be_facts
+    assert cellunit_get_from_dir(bob5_dir).found_facts == clean_facts
+    assert cellunit_get_from_dir(bob5_yao_dir).found_facts == clean_facts
+    assert cellunit_get_from_dir(bob5_yao_sue_dir).found_facts == clean_facts

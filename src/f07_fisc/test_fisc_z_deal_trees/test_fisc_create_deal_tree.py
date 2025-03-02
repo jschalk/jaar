@@ -1,12 +1,16 @@
-from src.f00_instrument.file import open_json, save_json, count_dirs_files, create_path
+from src.f00_instrument.file import open_json, save_json, create_path
 from src.f01_road.deal import owner_name_str, quota_str, celldepth_str
 from src.f04_gift.atom_config import event_int_str, penny_str
+from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import (
-    create_cell_dir_path as node_dir,
-    create_cell_node_json_path as node_path,
-    create_cell_quota_ledger_path as quota_path,
+    create_cell_dir_path as cell_dir,
+    create_cell_json_path as node_path,
 )
-from src.f05_listen.hub_tool import save_arbitrary_budevent as save_budevent
+from src.f05_listen.hub_tool import (
+    save_arbitrary_budevent as save_budevent,
+    cellunit_save_to_dir,
+    cellunit_get_from_dir,
+)
 from src.f07_fisc.fisc_tool import create_deal_tree
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
@@ -19,15 +23,15 @@ def test_create_deal_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
     bob_str = "Bob"
     tp37 = 37
 
-    a23_bob_tp37_path = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    a23_bob_tp37_path = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
     print(f"{a23_bob_tp37_path=}")
-    assert count_dirs_files(a23_bob_tp37_path) == 0
+    assert os_path_exists(a23_bob_tp37_path) is False
 
     # WHEN
     create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
 
     # THEN
-    assert count_dirs_files(a23_bob_tp37_path) == 0
+    assert os_path_exists(a23_bob_tp37_path) is False
 
 
 def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
@@ -40,29 +44,19 @@ def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     deal1_quota = 450
     deal1_celldepth = 0
     event56 = 56
-    cell_node = {
-        "ancestors": [],
-        celldepth_str(): deal1_celldepth,
-        "deal_owner_name": bob_str,
-        event_int_str(): event56,
-        quota_str(): deal1_quota,
-    }
-    a23_bob_root_cell_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37)
-    save_json(a23_bob_root_cell_path, None, cell_node)
+    x_cell = cellunit_shop(bob_str, [], event56, deal1_celldepth, quota=deal1_quota)
+    bob37_root_cell_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    cellunit_save_to_dir(bob37_root_cell_dir, x_cell)
     save_budevent(fisc_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
-
-    bob_tp37_quota_ledger_path = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37)
-    bob_tp37_dir = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    assert os_path_exists(bob_tp37_quota_ledger_path) is False
-    assert count_dirs_files(bob_tp37_dir) == 1
+    assert cellunit_get_from_dir(bob37_root_cell_dir).get_budevents_quota_ledger() == {}
 
     # WHEN
     create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
 
     # THEN
-    assert os_path_exists(bob_tp37_quota_ledger_path)
-    assert open_json(bob_tp37_quota_ledger_path) == {"Bob": 225, yao_str: 225}
-    assert count_dirs_files(bob_tp37_dir) == 2
+    bob37_root_cell = cellunit_get_from_dir(bob37_root_cell_dir)
+    generated_bob37_quota_ledger = bob37_root_cell.get_budevents_quota_ledger()
+    assert generated_bob37_quota_ledger == {"Bob": 225, yao_str: 225}
 
 
 def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
@@ -73,24 +67,12 @@ def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     yao_str = "Yao"
     zia_str = "Zia"
     tp37 = 37  # timepoint
-    deal1_quota = 450
-    deal1_celldepth = 1
+    x_quota = 450
+    x_celldepth = 1
     event56 = 56
-    cell_node = {
-        "ancestors": [bob_str],
-        event_int_str(): event56,
-        celldepth_str(): deal1_celldepth,
-        "deal_owner_name": bob_str,
-        penny_str(): 1,
-        quota_str(): deal1_quota,
-    }
-    a23_bob_ledger_state_path = node_path(
-        fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=a23_str,
-        owner_name=bob_str,
-        time_int=tp37,
-    )
-    save_json(a23_bob_ledger_state_path, None, cell_node)
+    x_cell = cellunit_shop(bob_str, [], event56, x_celldepth, quota=x_quota)
+    bob37_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    cellunit_save_to_dir(bob37_dir, x_cell)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -100,68 +82,66 @@ def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert os_path_exists(bob_e56_path)
     assert os_path_exists(yao_e56_path)
     assert os_path_exists(zia_e56_path)
-    tp37_dir = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    bob_tp37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    bob_tp37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    bob_tp37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    bob_tp37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    tp37_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37)
-    tp37_bob_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    assert os_path_exists(bob_tp37_node_path)
-    assert os_path_exists(bob_tp37_bob_node_path) is False
-    assert os_path_exists(bob_tp37_yao_node_path) is False
-    assert os_path_exists(bob_tp37_zia_node_path) is False
-    assert os_path_exists(tp37_quota) is False
-    assert os_path_exists(tp37_bob_quota) is False
-    assert os_path_exists(tp37_yao_quota) is False
-    assert os_path_exists(tp37_zia_quota) is False
-    assert count_dirs_files(tp37_dir) == 1
+    bob37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    bob37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path) is False
+    assert os_path_exists(bob37_yao_node_path) is False
+    assert os_path_exists(bob37_zia_node_path) is False
+    assert cellunit_get_from_dir(bob37_dir).get_budevents_quota_ledger() == {}
 
     # WHEN
     create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
 
     # THEN
-    assert os_path_exists(tp37_quota)
-    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
-    print(f"{bob_tp37_bob_node_path=}")
-    print(f"{bob_tp37_yao_node_path=}")
-    print(f"{bob_tp37_zia_node_path=}")
-    assert os_path_exists(bob_tp37_node_path)
-    assert os_path_exists(bob_tp37_bob_node_path)
-    assert os_path_exists(bob_tp37_yao_node_path)
-    assert os_path_exists(bob_tp37_zia_node_path)
-    assert os_path_exists(tp37_quota)
-    assert os_path_exists(tp37_bob_quota)
-    assert os_path_exists(tp37_yao_quota)
-    assert os_path_exists(tp37_zia_quota)
-    assert count_dirs_files(tp37_dir) == 11
-    bob_tp37_bob_dict = open_json(bob_tp37_bob_node_path)
-    assert bob_tp37_bob_dict.get("ancestors") == [bob_str, bob_str]
-    assert bob_tp37_bob_dict.get("event_int") == 56
-    assert bob_tp37_bob_dict.get("celldepth") == 0
-    assert bob_tp37_bob_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_bob_dict.get("penny") == 1
-    assert bob_tp37_bob_dict.get("quota") == 150
-    bob_tp37_yao_dict = open_json(bob_tp37_yao_node_path)
-    assert bob_tp37_yao_dict.get("ancestors") == [bob_str, yao_str]
-    assert bob_tp37_yao_dict.get("event_int") == 56
-    assert bob_tp37_yao_dict.get("celldepth") == 0
-    assert bob_tp37_yao_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_yao_dict.get("penny") == 1
-    assert bob_tp37_yao_dict.get("quota") == 150
-    bob_tp37_zia_dict = open_json(bob_tp37_zia_node_path)
-    assert bob_tp37_zia_dict.get("ancestors") == [bob_str, zia_str]
-    assert bob_tp37_zia_dict.get("event_int") == 56
-    assert bob_tp37_zia_dict.get("celldepth") == 0
-    assert bob_tp37_zia_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_zia_dict.get("penny") == 1
-    assert bob_tp37_zia_dict.get("quota") == 150
-    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
-    assert open_json(tp37_bob_quota) == {bob_str: 50, yao_str: 50, zia_str: 50}
-    assert open_json(tp37_yao_quota) == {zia_str: 150}
-    assert open_json(tp37_zia_quota) == {bob_str: 75, yao_str: 75}
+    print(f"{bob37_bob_node_path=}")
+    print(f"{bob37_yao_node_path=}")
+    print(f"{bob37_zia_node_path=}")
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path)
+    assert os_path_exists(bob37_yao_node_path)
+    assert os_path_exists(bob37_zia_node_path)
+    bob37_bob_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    bob37_cell = cellunit_get_from_dir(bob37_dir)
+    bob37_bob_cell = cellunit_get_from_dir(bob37_bob_dir)
+    bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
+    bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
+    assert bob37_cell.ancestors == []
+    assert bob37_cell.event_int == 56
+    assert bob37_cell.celldepth == 1
+    assert bob37_cell.deal_owner_name == bob_str
+    assert bob37_cell.penny == 1
+    assert bob37_cell.quota == 450
+    assert bob37_bob_cell.ancestors == [bob_str]
+    assert bob37_bob_cell.event_int == 56
+    assert bob37_bob_cell.celldepth == 0
+    assert bob37_bob_cell.deal_owner_name == bob_str
+    assert bob37_bob_cell.penny == 1
+    assert bob37_bob_cell.quota == 150
+    assert bob37_yao_cell.ancestors == [yao_str]
+    assert bob37_yao_cell.event_int == 56
+    assert bob37_yao_cell.celldepth == 0
+    assert bob37_yao_cell.deal_owner_name == bob_str
+    assert bob37_yao_cell.penny == 1
+    assert bob37_yao_cell.quota == 150
+    assert bob37_zia_cell.ancestors == [zia_str]
+    assert bob37_zia_cell.event_int == 56
+    assert bob37_zia_cell.celldepth == 0
+    assert bob37_zia_cell.deal_owner_name == bob_str
+    assert bob37_zia_cell.penny == 1
+    assert bob37_zia_cell.quota == 150
+    gen_bob37_quota_ledger = bob37_cell.get_budevents_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_budevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_budevents_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_budevents_quota_ledger()
+    assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
+    assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
+    assert gen_bob37_yao_quota_ledger == {zia_str: 150}
+    assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
 def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
@@ -172,26 +152,14 @@ def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     yao_str = "Yao"
     zia_str = "Zia"
     tp37 = 37  # timepoint
-    deal1_quota = 450
-    deal1_celldepth = 1
+    x_quota = 450
+    x_celldepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
-    cell_node = {
-        "ancestors": [bob_str],
-        event_int_str(): event55,
-        celldepth_str(): deal1_celldepth,
-        "deal_owner_name": bob_str,
-        penny_str(): 1,
-        quota_str(): deal1_quota,
-    }
-    a23_bob_ledger_state_path = node_path(
-        fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=a23_str,
-        owner_name=bob_str,
-        time_int=tp37,
-    )
-    save_json(a23_bob_ledger_state_path, None, cell_node)
+    x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
+    bob37_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    cellunit_save_to_dir(bob37_dir, x_cell)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -202,68 +170,65 @@ def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
     assert os_path_exists(zia_e33_path)
-    tp37_dir = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    tp37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    tp37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    tp37_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37)
-    tp37_bob_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    assert os_path_exists(tp37_node_path)
-    assert os_path_exists(tp37_bob_node_path) is False
-    assert os_path_exists(tp37_yao_node_path) is False
-    assert os_path_exists(tp37_zia_node_path) is False
-    assert os_path_exists(tp37_quota) is False
-    assert os_path_exists(tp37_bob_quota) is False
-    assert os_path_exists(tp37_yao_quota) is False
-    assert os_path_exists(tp37_zia_quota) is False
-    assert count_dirs_files(tp37_dir) == 1
+    bob37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    bob37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path) is False
+    assert os_path_exists(bob37_yao_node_path) is False
+    assert os_path_exists(bob37_zia_node_path) is False
 
     # WHEN
     create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
 
     # THEN
-    assert os_path_exists(tp37_quota)
-    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
-    print(f"{tp37_bob_node_path=}")
-    print(f"{tp37_yao_node_path=}")
-    print(f"{tp37_zia_node_path=}")
-    assert os_path_exists(tp37_node_path)
-    assert os_path_exists(tp37_bob_node_path)
-    assert os_path_exists(tp37_yao_node_path)
-    assert os_path_exists(tp37_zia_node_path)
-    assert os_path_exists(tp37_quota)
-    assert os_path_exists(tp37_bob_quota)
-    assert os_path_exists(tp37_yao_quota)
-    assert os_path_exists(tp37_zia_quota)
-    assert count_dirs_files(tp37_dir) == 11
-    bob_tp37_bob_dict = open_json(tp37_bob_node_path)
-    assert bob_tp37_bob_dict.get("ancestors") == [bob_str, bob_str]
-    assert bob_tp37_bob_dict.get("event_int") == 55
-    assert bob_tp37_bob_dict.get("celldepth") == 0
-    assert bob_tp37_bob_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_bob_dict.get("penny") == 1
-    assert bob_tp37_bob_dict.get("quota") == 150
-    bob_tp37_yao_dict = open_json(tp37_yao_node_path)
-    assert bob_tp37_yao_dict.get("ancestors") == [bob_str, yao_str]
-    assert bob_tp37_yao_dict.get("event_int") == 44
-    assert bob_tp37_yao_dict.get("celldepth") == 0
-    assert bob_tp37_yao_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_yao_dict.get("penny") == 1
-    assert bob_tp37_yao_dict.get("quota") == 150
-    bob_tp37_zia_dict = open_json(tp37_zia_node_path)
-    assert bob_tp37_zia_dict.get("ancestors") == [bob_str, zia_str]
-    assert bob_tp37_zia_dict.get("event_int") == 33
-    assert bob_tp37_zia_dict.get("celldepth") == 0
-    assert bob_tp37_zia_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_zia_dict.get("penny") == 1
-    assert bob_tp37_zia_dict.get("quota") == 150
-    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
-    assert open_json(tp37_bob_quota) == {bob_str: 50, yao_str: 50, zia_str: 50}
-    assert open_json(tp37_yao_quota) == {zia_str: 150}
-    assert open_json(tp37_zia_quota) == {bob_str: 75, yao_str: 75}
+    print(f"{bob37_bob_node_path=}")
+    print(f"{bob37_yao_node_path=}")
+    print(f"{bob37_zia_node_path=}")
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path)
+    assert os_path_exists(bob37_yao_node_path)
+    assert os_path_exists(bob37_zia_node_path)
+    bob37_bob_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    bob37_cell = cellunit_get_from_dir(bob37_dir)
+    bob37_bob_cell = cellunit_get_from_dir(bob37_bob_dir)
+    bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
+    bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
+    assert bob37_cell.ancestors == []
+    assert bob37_cell.event_int == 55
+    assert bob37_cell.celldepth == 1
+    assert bob37_cell.deal_owner_name == bob_str
+    assert bob37_cell.penny == 1
+    assert bob37_cell.quota == 450
+    assert bob37_bob_cell.ancestors == [bob_str]
+    assert bob37_bob_cell.event_int == 55
+    assert bob37_bob_cell.celldepth == 0
+    assert bob37_bob_cell.deal_owner_name == bob_str
+    assert bob37_bob_cell.penny == 1
+    assert bob37_bob_cell.quota == 150
+    assert bob37_yao_cell.ancestors == [yao_str]
+    assert bob37_yao_cell.event_int == 44
+    assert bob37_yao_cell.celldepth == 0
+    assert bob37_yao_cell.deal_owner_name == bob_str
+    assert bob37_yao_cell.penny == 1
+    assert bob37_yao_cell.quota == 150
+    assert bob37_zia_cell.ancestors == [zia_str]
+    assert bob37_zia_cell.event_int == 33
+    assert bob37_zia_cell.celldepth == 0
+    assert bob37_zia_cell.deal_owner_name == bob_str
+    assert bob37_zia_cell.penny == 1
+    assert bob37_zia_cell.quota == 150
+    gen_bob37_quota_ledger = bob37_cell.get_budevents_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_budevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_budevents_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_budevents_quota_ledger()
+    assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
+    assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
+    assert gen_bob37_yao_quota_ledger == {zia_str: 150}
+    assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
 def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
@@ -276,27 +241,15 @@ def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     yao_str = "Yao"
     zia_str = "Zia"
     tp37 = 37  # timepoint
-    deal1_quota = 450
-    deal1_celldepth = 1
+    x_quota = 450
+    x_celldepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
     event66 = 66
-    cell_node = {
-        "ancestors": [bob_str],
-        event_int_str(): event55,
-        celldepth_str(): deal1_celldepth,
-        "deal_owner_name": bob_str,
-        penny_str(): 1,
-        quota_str(): deal1_quota,
-    }
-    a23_bob_ledger_state_path = node_path(
-        fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=a23_str,
-        owner_name=bob_str,
-        time_int=tp37,
-    )
-    save_json(a23_bob_ledger_state_path, None, cell_node)
+    x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
+    bob37_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    cellunit_save_to_dir(bob37_dir, x_cell)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -307,60 +260,50 @@ def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
     assert os_path_exists(zia_e66_path)
-    tp37_dir = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    tp37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    tp37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    tp37_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37)
-    tp37_bob_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    assert os_path_exists(tp37_node_path)
-    assert os_path_exists(tp37_bob_node_path) is False
-    assert os_path_exists(tp37_yao_node_path) is False
-    assert os_path_exists(tp37_zia_node_path) is False
-    assert os_path_exists(tp37_quota) is False
-    assert os_path_exists(tp37_bob_quota) is False
-    assert os_path_exists(tp37_yao_quota) is False
-    assert os_path_exists(tp37_zia_quota) is False
-    assert count_dirs_files(tp37_dir) == 1
+    bob37_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    bob37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    bob37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path) is False
+    assert os_path_exists(bob37_yao_node_path) is False
+    assert os_path_exists(bob37_zia_node_path) is False
 
     # WHEN
     create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
 
     # THEN
-    assert os_path_exists(tp37_quota)
-    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
-    print(f"{tp37_bob_node_path=}")
-    print(f"{tp37_yao_node_path=}")
-    print(f"{tp37_zia_node_path=}")
-    assert os_path_exists(tp37_node_path)
-    assert os_path_exists(tp37_bob_node_path)
-    assert os_path_exists(tp37_yao_node_path)
-    assert os_path_exists(tp37_zia_node_path) is False
-    assert os_path_exists(tp37_quota)
-    assert os_path_exists(tp37_bob_quota)
-    assert os_path_exists(tp37_yao_quota)
-    assert os_path_exists(tp37_zia_quota) is False
-    assert count_dirs_files(tp37_dir) == 8
-    bob_tp37_bob_dict = open_json(tp37_bob_node_path)
-    assert bob_tp37_bob_dict.get("ancestors") == [bob_str, bob_str]
-    assert bob_tp37_bob_dict.get("event_int") == 55
-    assert bob_tp37_bob_dict.get("celldepth") == 0
-    assert bob_tp37_bob_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_bob_dict.get("penny") == 1
-    assert bob_tp37_bob_dict.get("quota") == 150
-    bob_tp37_yao_dict = open_json(tp37_yao_node_path)
-    assert bob_tp37_yao_dict.get("ancestors") == [bob_str, yao_str]
-    assert bob_tp37_yao_dict.get("event_int") == 44
-    assert bob_tp37_yao_dict.get("celldepth") == 0
-    assert bob_tp37_yao_dict.get("deal_owner_name") == bob_str
-    assert bob_tp37_yao_dict.get("penny") == 1
-    assert bob_tp37_yao_dict.get("quota") == 150
-    assert open_json(tp37_quota) == {bob_str: 150, yao_str: 150, zia_str: 150}
-    assert open_json(tp37_bob_quota) == {bob_str: 50, yao_str: 50, zia_str: 50}
-    assert open_json(tp37_yao_quota) == {zia_str: 150}
+    print(f"{bob37_bob_node_path=}")
+    print(f"{bob37_yao_node_path=}")
+    print(f"{bob37_zia_node_path=}")
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path)
+    assert os_path_exists(bob37_yao_node_path)
+    assert os_path_exists(bob37_zia_node_path) is False
+    bob37_bob_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_cell = cellunit_get_from_dir(bob37_dir)
+    bob37_bob_cell = cellunit_get_from_dir(bob37_bob_dir)
+    bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
+    assert bob37_bob_cell.ancestors == [bob_str]
+    assert bob37_bob_cell.event_int == 55
+    assert bob37_bob_cell.celldepth == 0
+    assert bob37_bob_cell.deal_owner_name == bob_str
+    assert bob37_bob_cell.penny == 1
+    assert bob37_bob_cell.quota == 150
+    assert bob37_yao_cell.ancestors == [yao_str]
+    assert bob37_yao_cell.event_int == 44
+    assert bob37_yao_cell.celldepth == 0
+    assert bob37_yao_cell.deal_owner_name == bob_str
+    assert bob37_yao_cell.penny == 1
+    assert bob37_yao_cell.quota == 150
+    gen_bob37_quota_ledger = bob37_cell.get_budevents_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_budevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_budevents_quota_ledger()
+    assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
+    assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
+    assert gen_bob37_yao_quota_ledger == {zia_str: 150}
 
 
 def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
@@ -373,26 +316,14 @@ def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     yao_str = "Yao"
     zia_str = "Zia"
     tp37 = 37  # timepoint
-    deal1_quota = 2
-    deal1_celldepth = 1
+    x_quota = 2
+    x_celldepth = 1
     event33 = 33
     event44 = 44
     event55 = 55
-    cell_node = {
-        "ancestors": [bob_str],
-        event_int_str(): event55,
-        celldepth_str(): deal1_celldepth,
-        "deal_owner_name": bob_str,
-        penny_str(): 1,
-        quota_str(): deal1_quota,
-    }
-    a23_bob_ledger_state_path = node_path(
-        fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=a23_str,
-        owner_name=bob_str,
-        time_int=tp37,
-    )
-    save_json(a23_bob_ledger_state_path, None, cell_node)
+    x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
+    bob37_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    cellunit_save_to_dir(bob37_dir, x_cell)
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
@@ -403,43 +334,36 @@ def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
     assert os_path_exists(zia_e33_path)
-    tp37_dir = node_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    tp37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
-    tp37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    tp37_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37)
-    tp37_bob_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
-    tp37_yao_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
-    tp37_zia_quota = quota_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
-    assert os_path_exists(tp37_node_path)
-    assert os_path_exists(tp37_bob_node_path) is False
-    assert os_path_exists(tp37_yao_node_path) is False
-    assert os_path_exists(tp37_zia_node_path) is False
-    assert os_path_exists(tp37_quota) is False
-    assert os_path_exists(tp37_bob_quota) is False
-    assert os_path_exists(tp37_yao_quota) is False
-    assert os_path_exists(tp37_zia_quota) is False
-    assert count_dirs_files(tp37_dir) == 1
+    bob37_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    bob37_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [])
+    bob37_bob_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_node_path = node_path(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path) is False
+    assert os_path_exists(bob37_yao_node_path) is False
+    assert os_path_exists(bob37_zia_node_path) is False
 
     # WHEN
     create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
 
     # THEN
-    assert os_path_exists(tp37_quota)
-    assert open_json(tp37_quota) == {bob_str: 0, yao_str: 1, zia_str: 1}
-    print(f"{tp37_bob_node_path=}")
-    print(f"{tp37_yao_node_path=}")
-    print(f"{tp37_zia_node_path=}")
-    assert os_path_exists(tp37_node_path)
-    assert os_path_exists(tp37_bob_node_path) is False
-    assert os_path_exists(tp37_yao_node_path)
-    assert os_path_exists(tp37_zia_node_path)
-    assert os_path_exists(tp37_quota)
-    assert os_path_exists(tp37_bob_quota) is False
-    assert os_path_exists(tp37_yao_quota)
-    assert os_path_exists(tp37_zia_quota)
-    assert count_dirs_files(tp37_dir) == 8
-    assert open_json(tp37_quota) == {bob_str: 0, yao_str: 1, zia_str: 1}
-    assert open_json(tp37_yao_quota) == {zia_str: 1}
-    assert open_json(tp37_zia_quota) == {bob_str: 1, yao_str: 0}
+    print(f"{bob37_bob_node_path=}")
+    print(f"{bob37_yao_node_path=}")
+    print(f"{bob37_zia_node_path=}")
+    assert os_path_exists(bob37_node_path)
+    assert os_path_exists(bob37_bob_node_path) is False
+    assert os_path_exists(bob37_yao_node_path)
+    assert os_path_exists(bob37_zia_node_path)
+    bob37_bob_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [bob_str])
+    bob37_yao_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [yao_str])
+    bob37_zia_dir = cell_dir(fisc_mstr_dir, a23_str, bob_str, tp37, [zia_str])
+    bob37_cell = cellunit_get_from_dir(bob37_dir)
+    bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
+    bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
+    gen_bob37_quota_ledger = bob37_cell.get_budevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_budevents_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_budevents_quota_ledger()
+    assert gen_bob37_quota_ledger == {bob_str: 0, yao_str: 1, zia_str: 1}
+    assert gen_bob37_yao_quota_ledger == {zia_str: 1}
+    assert gen_bob37_zia_quota_ledger == {bob_str: 1, yao_str: 0}

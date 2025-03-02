@@ -39,7 +39,7 @@ from src.f07_fisc.fisc import (
 )
 from src.f07_fisc.fisc_tool import (
     create_fisc_owners_deal_trees,
-    uphill_cell_node_budevent_facts,
+    set_deal_trees_found_facts,
     modify_deal_trees_create_boss_facts,
 )
 from src.f07_fisc.fisc_config import get_fisc_dimens
@@ -900,7 +900,7 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         save_json(json_path, None, x_dict)
 
 
-def etl_create_root_cell_nodes(fisc_mstr_dir: str):
+def etl_create_deals_root_cells(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_dir = create_path(fiscs_dir, fisc_title)
@@ -908,7 +908,7 @@ def etl_create_root_cell_nodes(fisc_mstr_dir: str):
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
             x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
-            x_fiscunit.create_root_cell_nodes(ote1_dict)
+            x_fiscunit.create_deals_root_cells(ote1_dict)
 
 
 def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
@@ -917,10 +917,10 @@ def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
         create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title)
 
 
-def etl_uphill_cell_node_budevent_facts(fisc_mstr_dir: str):
+def etl_set_deal_trees_found_facts(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        uphill_cell_node_budevent_facts(fisc_mstr_dir, fisc_title)
+        set_deal_trees_found_facts(fisc_mstr_dir, fisc_title)
 
 
 def etl_modify_deal_trees_with_boss_facts(fisc_mstr_dir: str):

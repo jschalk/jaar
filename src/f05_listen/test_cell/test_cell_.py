@@ -3,7 +3,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import (
     CellUnit,
     cellunit_shop,
-    CELL_NODE_QUOTA_DEFAULT,
+    CELLNODE_QUOTA_DEFAULT,
     create_child_cellunits,
 )
 from src.f05_listen.examples.example_listen import (
@@ -15,9 +15,9 @@ from src.f05_listen.examples.example_listen import (
 from copy import deepcopy as copy_deepcopy
 
 
-def test_CELL_NODE_QUOTA_DEFAULT_value():
+def test_CELLNODE_QUOTA_DEFAULT_value():
     # ESTABLISH / WHEN / THEN
-    assert CELL_NODE_QUOTA_DEFAULT == 1000
+    assert CELLNODE_QUOTA_DEFAULT == 1000
 
 
 def test_CellUnit_Exists():
@@ -49,7 +49,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert not x_cellunit.event_int
     assert x_cellunit.celldepth == 0
     assert x_cellunit.penny == 1
-    assert x_cellunit.quota == CELL_NODE_QUOTA_DEFAULT
+    assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.budadjust.get_dict() == budunit_shop(bob_str).get_dict()
     assert x_cellunit.budevent_facts == {}
     assert x_cellunit._reason_bases == set()
