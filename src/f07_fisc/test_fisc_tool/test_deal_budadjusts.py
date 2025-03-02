@@ -5,7 +5,7 @@ from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
 from src.f04_gift.atom_config import base_str
 from src.f05_listen.hub_path import create_budevent_path
 from src.f05_listen.hub_tool import cellunit_add_json_file, open_bud_file
-from src.f07_fisc.fisc_tool import modify_deal_trees_create_boss_facts
+from src.f07_fisc.fisc_tool import set_deal_trees_decrees
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
@@ -96,7 +96,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 # # create a world with, cell.json, found facts and bud events
 # # for every found_fact change budevent to that fact
 # # create agenda (different than if found_fact was not applied)
-# def test_modify_deal_tree_create_boss_facts_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
+# def test_set_deal_tree_decrees_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -124,7 +124,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert os_path_exists(bob5_adjust_ledger_path) is False
 
 #     # WHEN
-#     modify_deal_trees_create_boss_facts(mstr_dir, a23_str)
+#     set_deal_trees_decrees(mstr_dir, a23_str)
 
 #     # THEN
 #     assert os_path_exists(bob5_adjust_path)
@@ -132,15 +132,15 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert 1 == 2
 
 
-# def test_modify_deal_tree_create_boss_facts_Scenario1_SetsFilesRootBossFactsCreatedWithFoundFactsOnly():
+# def test_set_deal_tree_decrees_Scenario1_SetsFilesRootBossFactsCreatedWithFoundFactsOnly():
 #     assert 1 == 2
 
 
-# def test_modify_deal_tree_create_boss_facts_Scenario2_SetsFilesRootBossFactsCreatedWithFoundFactsAndBudEventFacts():
+# def test_set_deal_tree_decrees_Scenario2_SetsFilesRootBossFactsCreatedWithFoundFactsAndBudEventFacts():
 #     assert 1 == 2
 
 
-# def test_modify_deal_trees_create_boss_facts_SetsFiles_Scenario0_RootOnlyNoFacts(
+# def test_set_deal_trees_decrees_SetsFiles_Scenario0_RootOnlyNoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -166,7 +166,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert os_path_exists(bob5_adjust_ledger_path) is False
 
 #     # WHEN
-#     modify_deal_trees_create_boss_facts(mstr_dir, a23_str)
+#     set_deal_trees_decrees(mstr_dir, a23_str)
 
 #     # THEN
 #     assert os_path_exists(bob5_adjust_path)
@@ -175,7 +175,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 
 # # The way acct_agenda_ledgers work is that parent_deal node has it's facts
 # #
-# def test_modify_deal_trees_create_boss_facts_SetsFiles_Scenario1_TwoNodesNoFacts(
+# def test_set_deal_trees_decrees_SetsFiles_Scenario1_TwoNodesNoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -213,7 +213,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert os_path_exists(bob5_yao_adjust_ledg) is False
 
 #     # WHEN
-#     modify_deal_trees_create_boss_facts(mstr_dir, a23_str)
+#     set_deal_trees_decrees(mstr_dir, a23_str)
 
 #     # THEN
 #     assert os_path_exists(bob5_budadjust_path)
@@ -223,7 +223,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert 1 == 2
 
 
-# def test_modify_deal_trees_create_boss_facts_SetsFiles_Scenario2_TwoNodesWithFacts(
+# def test_set_deal_trees_decrees_SetsFiles_Scenario2_TwoNodesWithFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -269,7 +269,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert yao_run_budunit.get_factunits_dict() != bob5_yao_found_facts
 
 #     # WHEN
-#     modify_deal_trees_create_boss_facts(mstr_dir, a23_str)
+#     set_deal_trees_decrees(mstr_dir, a23_str)
 
 #     # THEN
 #     assert os_path_exists(bob5_adjust_path)
@@ -289,7 +289,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert open_json(bob5_yao_adjust_ledg) == {}
 
 
-# def test_modify_deal_trees_create_boss_facts_SetsFiles_Scenario3_Populated_adjust_ledger(
+# def test_set_deal_trees_decrees_SetsFiles_Scenario3_Populated_adjust_ledger(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -361,7 +361,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     assert yao_run_budunit.get_factunits_dict() != bob5_yao_found_facts
 
 #     # WHEN
-#     modify_deal_trees_create_boss_facts(mstr_dir, a23_str)
+#     set_deal_trees_decrees(mstr_dir, a23_str)
 
 #     # THEN
 #     assert os_path_exists(bob5_adjust_path)

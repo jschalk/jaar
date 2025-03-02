@@ -147,7 +147,7 @@ def _set_cell_found_facts(deal_time_dir: str, cell_dirs: list[str]):
         cellunit_save_to_dir(output_dir, output_cell)
 
 
-def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
+def set_deal_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -156,14 +156,10 @@ def modify_deal_trees_create_boss_facts(fisc_mstr_dir: str, fisc_title: str):
         deals_dir = create_path(owner_dir, "deals")
         for time_int in get_level1_dirs(deals_dir):
             deal_time_dir = create_path(deals_dir, time_int)
-            modify_deal_tree_create_boss_facts(
-                fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
-            )
+            set_deal_tree_decrees(fisc_mstr_dir, fisc_title, owner_name, deal_time_dir)
 
 
-def modify_deal_tree_create_boss_facts(
-    fisc_mstr_dir, fisc_title, owner_name, deal_time_dir
-):
+def set_deal_tree_decrees(fisc_mstr_dir, fisc_title, owner_name, deal_time_dir):
     root_cell = cellunit_get_from_dir(deal_time_dir)
     cell_event_int = root_cell.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)

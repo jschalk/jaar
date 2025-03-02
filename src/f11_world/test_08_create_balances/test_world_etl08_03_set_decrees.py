@@ -36,7 +36,7 @@ from os.path import exists as os_path_exists
 #     assert os_path_exists(bob5_adjust_ledger_path) is False
 
 #     # WHEN
-#     fizz_world.modify_deal_trees_with_boss_facts()
+#     fizz_world.downhill_deal_trees_with_boss_facts()
 
 #     # THEN
 #     assert os_path_exists(bob5_budadjust_path)
