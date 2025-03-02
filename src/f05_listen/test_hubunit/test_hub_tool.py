@@ -1,29 +1,16 @@
 from src.f00_instrument.file import create_path, set_dir, open_json
 from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.atom_config import base_str
 from src.f05_listen.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.f05_listen.hub_path import (
-    create_fisc_json_path,
-    create_fisc_ote1_csv_path,
-    create_fisc_ote1_json_path,
-    fisc_agenda_list_report_path,
-    create_owners_dir_path,
-    create_deals_dir_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
-    create_deal_dir_path,
-    create_budpoint_path,
     create_owner_event_dir_path,
     create_budevent_path,
-    create_dealunit_json_path,
-    create_voice_path,
-    create_forecast_path,
 )
 from src.f05_listen.hub_tool import (
     save_bud_file,
     open_bud_file,
-    get_timepoint_credit_ledger,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
     get_budevent_obj,
@@ -32,7 +19,6 @@ from src.f05_listen.hub_tool import (
     save_arbitrary_budevent,
     cellunit_add_json_file,
 )
-from src.f05_listen.examples.example_listen_buds import get_budunit_3_acct
 from src.f05_listen.examples.listen_env import (
     get_listen_temp_env_dir,
     env_dir_setup_cleanup,
@@ -131,44 +117,6 @@ def test_save_arbitrary_budevent_SetsFile_Scenario1_includes_facts(
     gen_sue_bud = open_bud_file(budevent_path)
     assert gen_sue_bud.get_factunits_dict() == expected_sue_bud.get_factunits_dict()
     assert gen_sue_bud.get_dict() == expected_sue_bud.get_dict()
-
-
-def test_get_timepoint_credit_ledger_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord"
-    sue_str = "Sue"
-    t3 = 3
-
-    # WHEN
-    gen_a3_credit_ledger = get_timepoint_credit_ledger(
-        fisc_mstr_dir, a23_str, sue_str, t3
-    )
-
-    # THEN
-    assert gen_a3_credit_ledger == {}
-
-
-def test_get_timepoint_credit_ledger_ReturnsObj_Scenario1_FileExists(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fisc_mstr_dir = get_listen_temp_env_dir()
-    a23_str = "accord"
-    sue_str = "Sue"
-    t3 = 3
-    t3_json_path = create_budpoint_path(fisc_mstr_dir, a23_str, sue_str, t3)
-    a3_bud = get_budunit_3_acct()
-    save_bud_file(t3_json_path, None, a3_bud)
-
-    # WHEN
-    gen_a3_credit_ledger = get_timepoint_credit_ledger(
-        fisc_mstr_dir, a23_str, sue_str, t3
-    )
-
-    # THEN
-    expected_a3_credit_ledger = {sue_str: 5, "Yao": 2, "Zia": 33}
-    assert gen_a3_credit_ledger == expected_a3_credit_ledger
 
 
 def test_get_budevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):

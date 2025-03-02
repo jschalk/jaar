@@ -25,7 +25,7 @@ from src.f02_bud.bud_tool import (
     get_credit_ledger,
 )
 from dataclasses import dataclass
-from copy import deepcopy as copy_deepcopy, copy as copy_copy
+from copy import deepcopy as copy_deepcopy
 
 CELLNODE_QUOTA_DEFAULT = 1000
 
@@ -222,3 +222,6 @@ def create_child_cellunits(parent_cell: CellUnit) -> dict[OwnerName, CellUnit]:
                 boss_facts=boss_facts,
             )
     return x_dict
+
+
+# TODO create tool that takes current cell, compares it to parent's generated child cell and takes only boss facts
