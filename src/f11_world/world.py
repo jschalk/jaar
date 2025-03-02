@@ -49,9 +49,9 @@ from src.f10_etl.transformers import (
     etl_fisc_agg_tables2fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
-    etl_create_root_cell_nodes,
+    etl_create_deals_root_cells,
     etl_create_fisc_deal_trees,
-    etl_uphill_cell_node_budevent_facts,
+    etl_set_deal_trees_found_facts,
     etl_modify_deal_trees_with_boss_facts,
 )
 from dataclasses import dataclass
@@ -222,14 +222,14 @@ class WorldUnit:
     def fisc_ote1_agg_csvs2jsons(self):
         etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
 
-    def create_root_cell_nodes(self):
-        etl_create_root_cell_nodes(self._fisc_mstr_dir)
+    def create_deals_root_cells(self):
+        etl_create_deals_root_cells(self._fisc_mstr_dir)
 
     def create_fisc_deal_trees(self):
         etl_create_fisc_deal_trees(self._fisc_mstr_dir)
 
-    def uphill_cell_node_budevent_facts(self):
-        etl_uphill_cell_node_budevent_facts(self._fisc_mstr_dir)
+    def set_deal_trees_found_facts(self):
+        etl_set_deal_trees_found_facts(self._fisc_mstr_dir)
 
     def modify_deal_trees_with_boss_facts(self):
         etl_modify_deal_trees_with_boss_facts(self._fisc_mstr_dir)

@@ -93,7 +93,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
     return yao_bud
 
 
-# # create a world with, cell_node.json, found facts and bud events
+# # create a world with, cell.json, found facts and bud events
 # # for every found_fact change budevent to that fact
 # # create agenda (different than if found_fact was not applied)
 # def test_modify_deal_tree_create_boss_facts_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
@@ -108,7 +108,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     event7 = 7
 #     q3 = 3
 #     cd0 = 0
-#     # create cell_node files
+#     # create cell files
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das, q3, cd0)
 #     # create budevent files
 #     mop_budunit = get_bob_mop_without_reason_budunit_example()
@@ -150,7 +150,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     bob_str = "Bob"
 #     das = []
 #     event7 = 7
-#     # create cell_node files
+#     # create cell files
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
 #     # create budevent files
 #     mop_budunit = get_bob_mop_without_reason_budunit_example()
@@ -187,7 +187,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     das = []
 #     das_yao = [yao_str]
 #     event7 = 7
-#     # create cell_node files
+#     # create cell files
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
 #     # create budevent files
@@ -235,7 +235,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     das = []
 #     das_yao = [yao_str]
 #     event7 = 7
-#     # create cell_node files
+#     # create cell files
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao)
 #     # create budevent files
@@ -330,7 +330,7 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     event7 = 7
 #     quota700 = 70088
 #     quota900 = 900
-#     # create cell_node files
+#     # create cell files
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das, quota700)
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das_yao, quota900)
 #     # create budevent files

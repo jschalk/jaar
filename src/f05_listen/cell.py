@@ -27,7 +27,7 @@ from src.f02_bud.bud_tool import (
 from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy, copy as copy_copy
 
-CELL_NODE_QUOTA_DEFAULT = 1000
+CELLNODE_QUOTA_DEFAULT = 1000
 
 
 @dataclass
@@ -148,7 +148,7 @@ def cellunit_shop(
     boss_facts: dict[RoadUnit, FactUnit] = None,
 ) -> CellUnit:
     if quota is None:
-        quota = CELL_NODE_QUOTA_DEFAULT
+        quota = CELLNODE_QUOTA_DEFAULT
     if budadjust is None:
         budadjust = budunit_shop(deal_owner_name)
     reason_bases = budadjust.get_reason_bases() if budadjust else set()

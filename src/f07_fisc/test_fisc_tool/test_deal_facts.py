@@ -5,13 +5,13 @@ from src.f04_gift.atom_config import base_str
 from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import create_cell_dir_path as cell_dir
 from src.f05_listen.hub_tool import cellunit_get_from_dir, cellunit_save_to_dir
-from src.f07_fisc.fisc_tool import uphill_cell_node_budevent_facts
+from src.f07_fisc.fisc_tool import set_deal_trees_found_facts
 from src.f07_fisc.examples.example_fiscs import example_casa_clean_factunit
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
 
-def test_uphill_cell_node_budevent_facts_Scenario0_RootOnly_NoFacts(
+def test_set_deal_trees_found_facts_Scenario0_RootOnly_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -27,13 +27,13 @@ def test_uphill_cell_node_budevent_facts_Scenario0_RootOnly_NoFacts(
     assert cellunit_get_from_dir(bob5_dir).found_facts == {}
 
     # WHEN
-    uphill_cell_node_budevent_facts(fisc_mstr_dir, a23_str)
+    set_deal_trees_found_facts(fisc_mstr_dir, a23_str)
 
     # THEN
     assert cellunit_get_from_dir(bob5_dir).found_facts == {}
 
 
-def test_uphill_cell_node_budevent_facts_Scenario1_ChildNode_NoFacts(
+def test_set_deal_trees_found_facts_Scenario1_ChildNode_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -58,13 +58,13 @@ def test_uphill_cell_node_budevent_facts_Scenario1_ChildNode_NoFacts(
     assert cellunit_get_from_dir(bob5_dir).found_facts == {}
 
     # WHEN
-    uphill_cell_node_budevent_facts(mstr_dir, a23_str)
+    set_deal_trees_found_facts(mstr_dir, a23_str)
 
     # THEN
     assert cellunit_get_from_dir(bob5_dir).found_facts == {}
 
 
-def test_uphill_cell_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
+def test_set_deal_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -109,7 +109,7 @@ def test_uphill_cell_node_budevent_facts_Scenario2_ChildNodeWithOneFactIsAssigne
     assert cellunit_get_from_dir(bob5_yao_sue_dir).found_facts == {}
 
     # WHEN
-    uphill_cell_node_budevent_facts(mstr_dir, a23_str)
+    set_deal_trees_found_facts(mstr_dir, a23_str)
 
     # THEN
     assert cellunit_get_from_dir(bob5_dir).found_facts == clean_facts

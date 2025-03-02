@@ -18,7 +18,7 @@ from os.path import exists as os_path_exists
 #     bob_str = "Bob"
 #     das = []
 #     event7 = 7
-#     # create cell_node files
+#     # create cell files
 #     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
 #     mop_budunit = get_mop_with_reason_budunit_example()
 #     # create budevent files
@@ -43,7 +43,7 @@ from os.path import exists as os_path_exists
 #     assert os_path_exists(bob5_adjust_ledger_path)
 
 
-# create a world with, cell_node.json, found facts and bud events
+# create a world with, cell.json, found facts and bud events
 # for every found_fact change budevent to that fact
 # create agenda (different than if found_fact was not applied)
 # create a budevent such that changing facts changes agenda output

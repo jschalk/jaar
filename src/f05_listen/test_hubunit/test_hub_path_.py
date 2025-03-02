@@ -26,7 +26,7 @@ from src.f05_listen.hub_path import (
     create_dealunit_json_path,
     create_budpoint_path,
     create_cell_dir_path,
-    create_cell_node_json_path,
+    create_cell_json_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -44,7 +44,7 @@ def test_hub_path_constants_are_values():
     assert FISC_OTE1_AGG_JSON_FILENAME == "fisc_ote1_agg.json"
     assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
     assert DEALUNIT_FILENAME == "dealunit.json"
-    assert CELLNODE_FILENAME == "cell_node.json"
+    assert CELLNODE_FILENAME == "cell.json"
     assert BUDPOINT_FILENAME == "budpoint.json"
     assert BUDEVENT_FILENAME == "bud.json"
     assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
@@ -222,13 +222,11 @@ def test_create_cell_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
     tp7 = 7
 
     # WHEN
-    gen_cell_node_path = create_cell_dir_path(
-        x_fisc_mstr_dir, a23_str, sue_str, tp7, []
-    )
+    gen_cell_dir = create_cell_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7, [])
 
     # THEN
     timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
-    assert gen_cell_node_path == timepoint_dir
+    assert gen_cell_dir == timepoint_dir
 
 
 def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
@@ -241,14 +239,14 @@ def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
     x_deal_ancestors = [yao_str]
 
     # WHEN
-    gen_cell_node_path = create_cell_dir_path(
+    gen_cell_dir = create_cell_dir_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=x_deal_ancestors
     )
 
     # THEN
     timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
-    assert gen_cell_node_path == tp_yao_dir
+    assert gen_cell_dir == tp_yao_dir
 
 
 def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
@@ -275,7 +273,7 @@ def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
     assert gen_deal_celldepth_dir_path == expected_tp_yao_bob_zia_dir
 
 
-def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
+def test_create_cell_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -283,7 +281,7 @@ def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     timepoint7 = 7
 
     # WHEN
-    gen_cell_node_path = create_cell_node_json_path(
+    gen_cell_json_path = create_cell_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -294,11 +292,11 @@ def test_create_cell_node_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
-    expected_cell_node_path_dir = create_path(timepoint_dir, CELLNODE_FILENAME)
-    assert gen_cell_node_path == expected_cell_node_path_dir
+    expected_cell_json_path = create_path(timepoint_dir, CELLNODE_FILENAME)
+    assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
+def test_create_cell_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -309,7 +307,7 @@ def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_cell_node_path = create_cell_node_json_path(
+    gen_cell_json_path = create_cell_json_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 
@@ -317,8 +315,8 @@ def test_create_cell_node_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
-    expected_cell_node_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
-    assert gen_cell_node_path == expected_cell_node_path
+    expected_cell_json_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
+    assert gen_cell_json_path == expected_cell_json_path
 
 
 def test_create_owner_event_dir_path_ReturnObj():

@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, set_dir, open_json
 from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
 from src.f04_gift.atom_config import base_str
-from src.f05_listen.cell import CELL_NODE_QUOTA_DEFAULT, cellunit_shop
+from src.f05_listen.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -11,7 +11,7 @@ from src.f05_listen.hub_path import (
     create_owners_dir_path,
     create_deals_dir_path,
     create_cell_dir_path,
-    create_cell_node_json_path as node_path,
+    create_cell_json_path as node_path,
     create_deal_dir_path,
     create_budpoint_path,
     create_owner_event_dir_path,
@@ -382,13 +382,13 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
-    sue7_cellnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7)
+    sue7_cell_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7)
     event3 = 3
     das = []
     quota500 = 500
     celldepth4 = 4
     penny6 = 6
-    assert os_path_exists(sue7_cellnode_path) is False
+    assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
     cellunit_add_json_file(
@@ -404,9 +404,9 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     )
 
     # THEN
-    print(f"{sue7_cellnode_path=}")
-    assert os_path_exists(sue7_cellnode_path)
-    generated_cell_dict = open_json(sue7_cellnode_path)
+    print(f"{sue7_cell_path=}")
+    assert os_path_exists(sue7_cell_path)
+    generated_cell_dict = open_json(sue7_cell_path)
     assert generated_cell_dict.get("ancestors") == das
     assert generated_cell_dict.get("event_int") == event3
     assert generated_cell_dict.get("celldepth") == celldepth4
@@ -425,9 +425,9 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cellnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
-    assert os_path_exists(sue7_cellnode_path) is False
+    assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
     cellunit_add_json_file(
@@ -435,15 +435,15 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     )
 
     # THEN
-    print(f"{sue7_cellnode_path=}")
-    assert os_path_exists(sue7_cellnode_path)
-    generated_cell_dict = open_json(sue7_cellnode_path)
+    print(f"{sue7_cell_path=}")
+    assert os_path_exists(sue7_cell_path)
+    generated_cell_dict = open_json(sue7_cell_path)
     assert generated_cell_dict.get("ancestors") == das
     assert generated_cell_dict.get("event_int") == event3
     assert generated_cell_dict.get("celldepth") == 0
     assert generated_cell_dict.get("deal_owner_name") == sue_str
     assert generated_cell_dict.get("penny") == 1
-    assert generated_cell_dict.get("quota") == CELL_NODE_QUOTA_DEFAULT
+    assert generated_cell_dict.get("quota") == CELLNODE_QUOTA_DEFAULT
 
 
 def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
@@ -454,9 +454,9 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cellnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
-    assert os_path_exists(sue7_cellnode_path) is False
+    assert os_path_exists(sue7_cell_path) is False
     cellunit_add_json_file(
         fisc_mstr_dir, a23_str, sue_str, time7, event3, deal_ancestors=das
     )
@@ -480,15 +480,15 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cellnode_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
     sue_cell = cellunit_shop(sue_str, ancestors=das, event_int=event3)
     cell_dir = create_cell_dir_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
-    assert os_path_exists(sue7_cellnode_path) is False
+    assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
     cellunit_save_to_dir(cell_dir, sue_cell)
 
     # THEN
-    assert os_path_exists(sue7_cellnode_path)
+    assert os_path_exists(sue7_cell_path)
     assert cellunit_get_from_dir(cell_dir) == sue_cell

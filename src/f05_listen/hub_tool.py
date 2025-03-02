@@ -23,7 +23,7 @@ from src.f05_listen.hub_path import (
     create_budevent_path,
     create_owners_dir_path,
     create_cell_dir_path,
-    create_cell_node_json_path,
+    create_cell_json_path,
 )
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
@@ -164,5 +164,5 @@ def cellunit_save_to_dir(dirpath: str, x_cell: CellUnit):
 
 
 def cellunit_get_from_dir(dirpath: str) -> CellUnit:
-    cell_node_json_path = create_path(dirpath, CELLNODE_FILENAME)
-    return cellunit_get_from_dict(open_json(cell_node_json_path))
+    cell_json_path = create_path(dirpath, CELLNODE_FILENAME)
+    return cellunit_get_from_dict(open_json(cell_json_path))

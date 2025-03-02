@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import (
     create_cell_dir_path as cell_dir,
-    create_cell_node_json_path as node_path,
+    create_cell_json_path as node_path,
 )
 from src.f05_listen.hub_tool import (
     save_arbitrary_budevent as save_budevent,
