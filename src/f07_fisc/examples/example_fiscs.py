@@ -257,5 +257,14 @@ def create_example_fisc4() -> FiscUnit:
 def example_casa_clean_factunit() -> FactUnit:
     a23_str = "accord23"
     casa_road = create_road(a23_str, "casa")
-    clean_road = create_road(casa_road, "clean")
-    return factunit_shop(casa_road, clean_road)
+    floor_road = create_road(casa_road, "floor status")
+    clean_road = create_road(floor_road, "clean")
+    return factunit_shop(floor_road, clean_road)
+
+
+def example_casa_dirty_factunit() -> FactUnit:
+    a23_str = "accord23"
+    casa_road = create_road(a23_str, "casa")
+    floor_road = create_road(casa_road, "floor status")
+    dirty_road = create_road(floor_road, "dirty")
+    return factunit_shop(floor_road, dirty_road)

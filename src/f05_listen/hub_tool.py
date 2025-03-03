@@ -147,4 +147,5 @@ def cellunit_save_to_dir(dirpath: str, x_cell: CellUnit):
 
 def cellunit_get_from_dir(dirpath: str) -> CellUnit:
     cell_json_path = create_path(dirpath, CELLNODE_FILENAME)
-    return cellunit_get_from_dict(open_json(cell_json_path))
+    if os_path_exists(cell_json_path):
+        return cellunit_get_from_dict(open_json(cell_json_path))

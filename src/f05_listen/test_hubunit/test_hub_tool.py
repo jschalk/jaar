@@ -394,6 +394,25 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get("quota") == CELLNODE_QUOTA_DEFAULT
 
 
+def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    time7 = 777000
+    sue_str = "Sue"
+    bob_str = "Bob"
+    das = [bob_str, sue_str]
+    sue7_cell_path = node_path(fisc_mstr_dir, a23_str, sue_str, time7, das)
+    event3 = 3
+    assert os_path_exists(sue7_cell_path) is False
+    cell_dir = create_cell_dir_path(
+        fisc_mstr_dir, a23_str, sue_str, time7, deal_ancestors=das
+    )
+
+    # WHEN / THEN
+    assert cellunit_get_from_dir(cell_dir) is None
+
+
 def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
