@@ -161,14 +161,12 @@ def set_deal_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
 
 def set_deal_tree_decrees(fisc_mstr_dir, fisc_title, owner_name, deal_time_dir):
     root_cell = cellunit_get_from_dir(deal_time_dir)
-    cell_event_int = root_cell.event_int
-    budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, owner_name, cell_event_int)
-    root_cell.load_budevent(budevent)
     root_cell.set_boss_facts_from_other_facts()
+    cellunit_save_to_dir(deal_time_dir, root_cell)
     to_evaluate_cells = [root_cell]
     while to_evaluate_cells != []:
         curr_cell = to_evaluate_cells.pop()
-        to_evaluate_cells.extend(create_child_cellunits(curr_cell))
+        # to_evaluate_cells.extend(create_child_cellunits(curr_cell))
 
     print(f"{root_cell=}")
 

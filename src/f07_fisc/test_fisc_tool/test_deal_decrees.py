@@ -1,11 +1,19 @@
-from src.f00_instrument.file import open_json, save_json, count_dirs_files, save_file
+from src.f00_instrument.file import save_json, count_dirs_files, save_file
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.bud import budunit_shop, BudUnit
-from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
 from src.f04_gift.atom_config import base_str
-from src.f05_listen.hub_path import create_budevent_path
-from src.f05_listen.hub_tool import cellunit_add_json_file, open_bud_file
+from src.f05_listen.cell import cellunit_shop
+from src.f05_listen.hub_path import (
+    create_budevent_path,
+    create_cell_dir_path as cell_dir,
+)
+from src.f05_listen.hub_tool import (
+    cellunit_save_to_dir,
+    cellunit_get_from_dir,
+    save_arbitrary_budevent,
+)
 from src.f07_fisc.fisc_tool import set_deal_trees_decrees
+from src.f07_fisc.examples.example_fiscs import example_casa_clean_factunit
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
@@ -93,10 +101,85 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
     return yao_bud
 
 
-# # create a world with, cell.json, found facts and bud events
-# # for every found_fact change budevent to that fact
-# # create agenda (different than if found_fact was not applied)
-# def test_set_deal_tree_decrees_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
+# create a world with, cell.json, found facts and bud events
+# for every found_fact change budevent to that fact
+# create agenda (different than if found_fact was not applied)
+def test_set_deal_tree_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord"
+    tp5 = 5
+    bob_str = "Bob"
+    das = []
+    event7 = 7
+    # create cell file
+    bob_cell = cellunit_shop(bob_str, [], event7, celldepth=0)
+    bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
+    cellunit_save_to_dir(bob_root_dir, bob_cell)
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+
+    # WHEN
+    set_deal_trees_decrees(mstr_dir, a23_str)
+
+    # THEN
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+
+
+def test_set_deal_tree_decrees_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fact(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord"
+    tp5 = 5
+    bob_str = "Bob"
+    das = []
+    event7 = 7
+    # create cell file
+    clean_fact = example_casa_clean_factunit()
+    clean_facts = {clean_fact.base: clean_fact}
+    bob_cell = cellunit_shop(
+        bob_str, [], event7, celldepth=0, budevent_facts=clean_facts
+    )
+    bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
+    cellunit_save_to_dir(bob_root_dir, bob_cell)
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+
+    # WHEN
+    set_deal_trees_decrees(mstr_dir, a23_str)
+
+    # THEN
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
+
+
+def test_set_deal_tree_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord"
+    tp5 = 5
+    bob_str = "Bob"
+    das = []
+    event7 = 7
+    # create cell file
+    clean_fact = example_casa_clean_factunit()
+    clean_facts = {clean_fact.base: clean_fact}
+    bob_cell = cellunit_shop(bob_str, [], event7, celldepth=0, found_facts=clean_facts)
+    bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
+    cellunit_save_to_dir(bob_root_dir, bob_cell)
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+
+    # WHEN
+    set_deal_trees_decrees(mstr_dir, a23_str)
+
+    # THEN
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
+
+
+# def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -106,32 +189,44 @@ def get_yao_run_rain_fact_budunit_example() -> BudUnit:
 #     bob_str = "Bob"
 #     das = []
 #     event7 = 7
-#     q3 = 3
-#     cd0 = 0
-#     # create cell files
-#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das, q3, cd0)
-#     # create budevent files
-#     mop_budunit = get_bob_mop_without_reason_budunit_example()
-#     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
-#     save_file(bob7_budevent_path, None, mop_budunit.get_json())
-#     # create found_facts files
-#     bob5_found_facts = {}
-#     save_json(bob5_found, None, bob5_found_facts)
-#     # create paths for budadjusts
-#     bob5_adjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     bob5_adjust_ledger_path = adjust_ledger_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     assert os_path_exists(bob5_adjust_path) is False
-#     assert os_path_exists(bob5_adjust_ledger_path) is False
+#     # create cell file
+#     clean_fact = example_casa_clean_factunit()
+#     clean_facts = {clean_fact.base: clean_fact}
+#     bob_cell = cellunit_shop(bob_str, [], event7, celldepth=0, found_facts=clean_facts)
+#     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
+#     cellunit_save_to_dir(bob_root_dir, bob_cell)
+#     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 
 #     # WHEN
 #     set_deal_trees_decrees(mstr_dir, a23_str)
 
 #     # THEN
-#     assert os_path_exists(bob5_adjust_path)
-#     assert os_path_exists(bob5_adjust_ledger_path)
-#     assert 1 == 2
+#     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
 
 
+# def test_set_deal_tree_decrees_Scenario0_NoFacts(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     mstr_dir = get_test_fisc_mstr_dir()
+#     a23_str = "accord"
+#     tp5 = 5
+#     bob_str = "Bob"
+#     das = []
+#     event7 = 7
+#     # create cell file
+#     bob_cell = cellunit_shop(bob_str, [], event7, celldepth=0)
+#     bob_cell.load_budevent(budunit_shop("Bob", a23_str))
+#     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
+#     cellunit_save_to_dir(bob_root_dir, bob_cell)
+#     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+
+#     # WHEN
+#     set_deal_trees_decrees(mstr_dir, a23_str)
+
+#     # THEN
+#     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+
+
+# def test_set_deal_tree_decrees_Scenario0_SetsFilesRootBossFactsCreatedWithBudEventFactsOnly(
 # def test_set_deal_tree_decrees_Scenario1_SetsFilesRootBossFactsCreatedWithFoundFactsOnly():
 #     assert 1 == 2
 
