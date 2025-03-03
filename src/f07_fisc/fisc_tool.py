@@ -168,8 +168,6 @@ def set_deal_tree_decrees(fisc_mstr_dir, fisc_title, owner_name, deal_time_dir):
         curr_cell = to_evaluate_cells.pop()
         # to_evaluate_cells.extend(create_child_cellunits(curr_cell))
 
-    print(f"{root_cell=}")
-
     # get_deal_root budevent
     # if exists as budevent.reason_base add found_facts to budevent
     # set boss_facts to budadjust.root facts

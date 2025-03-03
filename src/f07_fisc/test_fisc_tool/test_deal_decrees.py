@@ -179,22 +179,81 @@ def test_set_deal_tree_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
 
 
+def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    tp5 = 5
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_ancs = []
+    bob_sue_ancs = [sue_str]
+    e7 = 7
+    bob_budadjust = get_bob_mop_without_reason_budunit_example()
+    bob_budadjust.add_acctunit(sue_str, 1)
+    bob_sue_budadjust = budunit_shop(sue_str, a23_str)
+    # create cell file
+    bob_cell = cellunit_shop(
+        bob_str, bob_ancs, event_int=e7, celldepth=1, budadjust=bob_budadjust
+    )
+    bob_sue_cell = cellunit_shop(
+        bob_str, bob_sue_ancs, event_int=e7, celldepth=0, budadjust=bob_sue_budadjust
+    )
+    bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
+    bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_sue_ancs)
+    cellunit_save_to_dir(bob_root_dir, bob_cell)
+    cellunit_save_to_dir(bob_sue_dir, bob_sue_cell)
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+    assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
+
+    # WHEN
+    set_deal_trees_decrees(mstr_dir, a23_str)
+
+    # THEN
+    assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
+    assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
+
+
 # def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
 #     mstr_dir = get_test_fisc_mstr_dir()
-#     a23_str = "accord"
+#     a23_str = "accord23"
 #     tp5 = 5
 #     bob_str = "Bob"
-#     das = []
-#     event7 = 7
+#     sue_str = "Sue"
+#     bob_ancs = []
+#     bob_sue_ancs = [sue_str]
+#     e7 = 7
+#     bob_budadjust = get_bob_mop_without_reason_budunit_example()
+#     bob_budadjust.add_acctunit(sue_str, 1)
+#     bob_sue_budadjust = budunit_shop(sue_str, a23_str)
 #     # create cell file
 #     clean_fact = example_casa_clean_factunit()
 #     clean_facts = {clean_fact.base: clean_fact}
-#     bob_cell = cellunit_shop(bob_str, [], event7, celldepth=0, found_facts=clean_facts)
-#     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
+#     bob_cell = cellunit_shop(
+#         bob_str,
+#         bob_ancs,
+#         event_int=e7,
+#         celldepth=1,
+#         budadjust=bob_budadjust,
+#         budevent_facts=clean_facts,
+#     )
+#     bob_sue_cell = cellunit_shop(
+#         bob_str, bob_sue_ancs, event_int=e7, celldepth=0, budadjust=bob_sue_budadjust
+#     )
+#     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
+#     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_sue_ancs)
 #     cellunit_save_to_dir(bob_root_dir, bob_cell)
+#     cellunit_save_to_dir(bob_sue_dir, bob_sue_cell)
+#     print(f"{clean_facts=}")
+#     bob_cell.calc_acct_agenda_give_ledger()
+#     print(f"{clean_facts=}")
+#     assert sue_str in bob_cell._acct_agenda_give_ledger.keys()
+
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 
 #     # WHEN
@@ -202,6 +261,7 @@ def test_set_deal_tree_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
+#     assert 1 == 2
 
 
 # def test_set_deal_tree_decrees_Scenario0_NoFacts(env_dir_setup_cleanup):
