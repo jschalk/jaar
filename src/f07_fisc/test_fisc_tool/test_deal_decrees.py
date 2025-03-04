@@ -30,6 +30,7 @@ def test_DecreeUnit_Exists():
     assert not x_decreeunit.cell_ancestors
     assert not x_decreeunit.cell_mandate
     assert not x_decreeunit.cell_celldepth
+    assert not x_decreeunit.root_cell
 
 
 def _example_empty_bob_budunit() -> BudUnit:
@@ -383,13 +384,13 @@ def test_set_deal_tree_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
         bob_str,
         bob_ancs,
         event_int=e7,
-        celldepth=3,
+        celldepth=2,
         budadjust=bob_budadjust,
         budevent_facts=dirty_facts,
     )
     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, budadjust=b_sue_ba)
     bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0, budadjust=bs_yao_ba)
-    bsy_zia_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0, budadjust=bsy_zia_ba)
+    bsy_zia_cell = cellunit_shop(bob_str, bsy_zia_ancs, e7, 0, budadjust=bsy_zia_ba)
     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, b_sue_ancs)
     bob_sue_yao_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bs_yao_ancs)
