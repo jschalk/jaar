@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_path, get_level1_dirs
-from src.f01_road.road import TitleUnit
+from src.f01_road.road import TitleUnit, OwnerName
+from src.f01_road.finance import FundNum
 from src.f02_bud.reason_item import get_dict_from_factunits
 from src.f05_listen.cell import (
     create_child_cellunits,
@@ -22,6 +23,7 @@ from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
 from os.path import exists as os_path_exists, join as os_path_join
 from copy import copy as copy_copy
+from dataclasses import dataclass
 
 
 def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
@@ -161,64 +163,56 @@ def set_deal_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
             )
 
 
+@dataclass
+class DecreeUnit:
+    parent_cell_dir: str = None
+    cell_dir: str = None
+    cell_ancestors: list[OwnerName] = None
+    cell_mandate: dict[OwnerName, FundNum] = None
+    cell_celldepth: int = None
+
+
 def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_dir):
     root_cell = cellunit_get_from_dir(deal_time_dir)
     root_cell.set_boss_facts_from_other_facts()
     root_cell.calc_acct_mandate_ledger()
     cellunit_save_to_dir(deal_time_dir, root_cell)
     root_cell_dir = create_cell_dir_path(mstr_dir, fisc_title, owner_name, time_int, [])
-    to_evaluate_boss_tuples = []
-    for child_owner_name in sorted(root_cell._acct_mandate_ledger):
-        child_mandata = root_cell._acct_mandate_ledger.get(child_owner_name)
-        child_dir = create_cell_dir_path(
-            mstr_dir, fisc_title, owner_name, time_int, [child_owner_name]
-        )
-        boss_tuple = (
-            root_cell_dir,
-            child_dir,
-            [child_owner_name],
-            child_mandata,
-            root_cell.celldepth,
-        )
-        to_evaluate_boss_tuples.append(boss_tuple)
-        # bossunit = BossUnit()
-        # bossunit.quota =
-        # bossunit.parent_dir
-        # bossunit.child_dir
-        # bossunit.boss_facts
-        # bossunit.parent_ancs
-        # bossunit.child_owner_name
-    while to_evaluate_boss_tuples != []:
-        boss_tuple = to_evaluate_boss_tuples.pop()
-        parent_cell_dir = boss_tuple[0]
-        cell_dir = boss_tuple[1]
-        cell_ancestors = boss_tuple[2]
-        cell_mandate = boss_tuple[3]
-        cell_celldepth = boss_tuple[4]
-        print(f"{cell_ancestors=} {cell_celldepth=}")
-        parent_cell = cellunit_get_from_dir(parent_cell_dir)
-        curr_cell = cellunit_get_from_dir(cell_dir)
-        if curr_cell:
-            curr_cell.mandate = cell_mandate
-            curr_cell.boss_facts = parent_cell.boss_facts
-            if cell_celldepth > 0:
-                cellunit_save_to_dir(cell_dir, curr_cell)
-            curr_cell.calc_acct_mandate_ledger()
-            for child_owner_name in sorted(curr_cell._acct_mandate_ledger):
-                child_cell_ancestors = copy_copy(cell_ancestors)
-                child_cell_ancestors.append(child_owner_name)
-                child_mandata = curr_cell._acct_mandate_ledger.get(child_owner_name)
-                child_dir = create_cell_dir_path(
-                    mstr_dir, fisc_title, owner_name, time_int, child_cell_ancestors
-                )
-                boss_tuple = (
-                    root_cell_dir,
-                    child_dir,
-                    child_cell_ancestors,
-                    child_mandata,
-                    cell_celldepth - 1,
-                )
-                to_evaluate_boss_tuples.append(boss_tuple)
+    root_decree = DecreeUnit(
+        parent_cell_dir=None,
+        cell_dir=root_cell_dir,
+        cell_ancestors=[],
+        cell_mandate=root_cell.quota,
+        cell_celldepth=root_cell.celldepth,
+    )
+    to_evaluate_decreeunits = [root_decree]
+    while to_evaluate_decreeunits != []:
+        x_decree = to_evaluate_decreeunits.pop()
+        parent_cell = cellunit_get_from_dir(x_decree.parent_cell_dir)
+        if curr_cell := cellunit_get_from_dir(x_decree.cell_dir):
+            curr_cell.mandate = x_decree.cell_mandate
+            if parent_cell:
+                curr_cell.boss_facts = parent_cell.boss_facts
+            else:
+                curr_cell.set_boss_facts_from_other_facts()
+            if x_decree.cell_celldepth > 0:
+                curr_cell.calc_acct_mandate_ledger()
+                cellunit_save_to_dir(x_decree.cell_dir, curr_cell)
+                for child_owner_name in sorted(curr_cell._acct_mandate_ledger):
+                    child_cell_ancestors = copy_copy(x_decree.cell_ancestors)
+                    child_cell_ancestors.append(child_owner_name)
+                    child_mandate = curr_cell._acct_mandate_ledger.get(child_owner_name)
+                    child_dir = create_cell_dir_path(
+                        mstr_dir, fisc_title, owner_name, time_int, child_cell_ancestors
+                    )
+                    child_decreeunit = DecreeUnit(
+                        parent_cell_dir=x_decree.cell_dir,
+                        cell_dir=child_dir,
+                        cell_ancestors=child_cell_ancestors,
+                        cell_mandate=child_mandate,
+                        cell_celldepth=x_decree.cell_celldepth - 1,
+                    )
+                    to_evaluate_decreeunits.append(child_decreeunit)
 
         # print(f"{curr_cell._acct_mandate_ledger=}")
         # child_cells = create_child_cellunits(curr_cell)
