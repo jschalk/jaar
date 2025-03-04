@@ -170,6 +170,16 @@ class DecreeUnit:
 
 
 def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_dir):
+    # create root deal tree node
+    # grab boss facts from parent_cell (does not apply to root)
+    # grab found facts for that cell
+    # grab budevent for that cell
+    # add all found_facts that exist in budevent to budevent
+    # add all boss facts that exist in budevent to budevent
+    # calculate budadjust
+    # grab acct_agenda_fund_agenda_give ledger
+    # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
+
     root_cell = cellunit_get_from_dir(deal_time_dir)
     root_cell_dir = create_cell_dir_path(mstr_dir, fisc_title, owner_name, time_int, [])
     root_decree = DecreeUnit(
@@ -183,49 +193,51 @@ def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_
     to_evaluate_decreeunits = [root_decree]
     while to_evaluate_decreeunits != []:
         x_decree = to_evaluate_decreeunits.pop()
-        if curr_cell := cellunit_get_from_dir(x_decree.cell_dir):
-            curr_cell.mandate = x_decree.cell_mandate
-            _set_boss_facts(curr_cell, x_decree.parent_cell_dir, x_decree.root_cell)
-            curr_cell.calc_acct_mandate_ledger()
-            cellunit_save_to_dir(x_decree.cell_dir, curr_cell)
+        if x_cell := cellunit_get_from_dir(x_decree.cell_dir):
+            x_cell.mandate = x_decree.cell_mandate
+            parent_cell_dir = x_decree.parent_cell_dir
+            _set_cell_boss_facts(x_cell, parent_cell_dir, x_decree.root_cell)
+            x_cell.calc_acct_mandate_ledger()
+            cellunit_save_to_dir(x_decree.cell_dir, x_cell)
             if x_decree.cell_celldepth > 0:
-                for child_owner_name in sorted(curr_cell._acct_mandate_ledger):
-                    child_cell_ancestors = copy_copy(x_decree.cell_ancestors)
-                    child_cell_ancestors.append(child_owner_name)
-                    child_mandate = curr_cell._acct_mandate_ledger.get(child_owner_name)
-                    child_dir = create_cell_dir_path(
-                        mstr_dir, fisc_title, owner_name, time_int, child_cell_ancestors
-                    )
-                    child_decreeunit = DecreeUnit(
-                        parent_cell_dir=x_decree.cell_dir,
-                        cell_dir=child_dir,
-                        cell_ancestors=child_cell_ancestors,
-                        cell_mandate=child_mandate,
-                        cell_celldepth=x_decree.cell_celldepth - 1,
-                    )
-                    to_evaluate_decreeunits.append(child_decreeunit)
-
-    # get_deal_root budevent
-    # if exists as budevent.reason_base add found_facts to budevent
-    # set boss_facts to budadjust.root facts
-    # save boss_facts
-    # 0 set found facts to deal tree root
-    # evaluate every deal tree node, start with root
-
-    # while not every deal tree node has been evaluated
-    # pick a closest to root deal tree node
-    # grab boss facts from parent_cell
-    # grab found facts for that cell
-    # grab budevent for that cell
-    # add all found_facts that exist in budevent to budevent
-    # add all boss facts that exist in budevent to budevent
-    # calculate budadjust
-    # grab acct_agenda_fund_agenda_give ledger
-    # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
+                _add_child_decrees(
+                    to_evaluate_decreeunits,
+                    x_cell=x_cell,
+                    x_decree=x_decree,
+                    mstr_dir=mstr_dir,
+                    fisc_title=fisc_title,
+                    owner_name=owner_name,
+                    time_int=time_int,
+                )
 
 
-def _set_boss_facts(curr_cell: CellUnit, parent_cell_dir: str, root_cell: bool):
+def _add_child_decrees(
+    to_evaluate_decreeunits: list[DecreeUnit],
+    x_cell: CellUnit,
+    x_decree: DecreeUnit,
+    mstr_dir,
+    fisc_title: str,
+    owner_name: str,
+    time_int: int,
+):
+    for child_owner_name, child_mandate in x_cell._acct_mandate_ledger.items():
+        child_cell_ancestors = copy_copy(x_decree.cell_ancestors)
+        child_cell_ancestors.append(child_owner_name)
+        child_dir = create_cell_dir_path(
+            mstr_dir, fisc_title, owner_name, time_int, child_cell_ancestors
+        )
+        child_decreeunit = DecreeUnit(
+            parent_cell_dir=x_decree.cell_dir,
+            cell_dir=child_dir,
+            cell_ancestors=child_cell_ancestors,
+            cell_mandate=child_mandate,
+            cell_celldepth=x_decree.cell_celldepth - 1,
+        )
+        to_evaluate_decreeunits.append(child_decreeunit)
+
+
+def _set_cell_boss_facts(cell: CellUnit, parent_cell_dir: str, root_cell: bool):
     if root_cell:
-        curr_cell.set_boss_facts_from_other_facts()
+        cell.set_boss_facts_from_other_facts()
     else:
-        curr_cell.boss_facts = cellunit_get_from_dir(parent_cell_dir).boss_facts
+        cell.boss_facts = cellunit_get_from_dir(parent_cell_dir).boss_facts
