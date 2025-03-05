@@ -1,4 +1,9 @@
-from src.f00_instrument.file import create_path, get_level1_dirs
+from src.f00_instrument.file import (
+    create_path,
+    get_level1_dirs,
+    delete_dir,
+    get_dir_file_strs,
+)
 from src.f01_road.road import TitleUnit, OwnerName
 from src.f01_road.finance import FundNum
 from src.f02_bud.reason_item import get_dict_from_factunits
@@ -170,6 +175,7 @@ class DecreeUnit:
 
 
 def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_dir):
+    # clear all current child directorys
     # create root deal tree node
     # grab boss facts from parent_cell (does not apply to root)
     # grab found facts for that cell
@@ -179,7 +185,6 @@ def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_
     # calculate budadjust
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
-
     root_cell = cellunit_get_from_dir(deal_time_dir)
     root_cell_dir = create_cell_dir_path(mstr_dir, fisc_title, owner_name, time_int, [])
     root_decree = DecreeUnit(
@@ -241,3 +246,4 @@ def _set_cell_boss_facts(cell: CellUnit, parent_cell_dir: str, root_cell: bool):
         cell.set_boss_facts_from_other_facts()
     else:
         cell.boss_facts = cellunit_get_from_dir(parent_cell_dir).boss_facts
+        cell.add_other_facts_to_boss_facts()

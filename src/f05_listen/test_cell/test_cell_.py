@@ -1,4 +1,5 @@
 from src.f01_road.road import create_road
+from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import (
     CellUnit,
@@ -336,8 +337,9 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
     yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    yao_cellunit.boss_facts = "testing_str"
     assert len(yao_cellunit.found_facts) == 1
-    assert yao_cellunit.boss_facts == {}
+    assert yao_cellunit.boss_facts == "testing_str"
 
     # WHEN
     yao_cellunit.set_boss_facts_from_other_facts()
@@ -392,6 +394,115 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_budevent_fa
 
     # THEN
     expected_boss_facts = {clean_fact.base: clean_fact, sky_fact.base: sky_fact}
+    assert yao_cellunit.boss_facts == expected_boss_facts
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_only():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.found_facts) == 1
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    assert yao_cellunit.boss_facts == yao_cellunit.found_facts
+    assert yao_cellunit.boss_facts == {clean_fact.base: clean_fact}
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_budevent_facts_only():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.budevent_facts) == 1
+    assert yao_cellunit.found_facts == {}
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    assert yao_cellunit.boss_facts == yao_cellunit.budevent_facts
+    assert yao_cellunit.boss_facts == {clean_fact.base: clean_fact}
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_budevent_facts_And_found_facts():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    sky_fact = sky_blue_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    run_road = yao_bud.make_l1_road("run")
+    run_fact = factunit_shop(run_road, run_road)
+    run_facts = {run_fact.base: run_fact}
+    yao_budevent_fact_dict = {sky_fact.base: sky_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_budevent_fact_dict)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    yao_cellunit.boss_facts = run_facts
+    assert len(yao_cellunit.found_facts) == 1
+    assert set(yao_cellunit.boss_facts.keys()) == {run_road}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    expected_boss_facts = {
+        run_fact.base: run_fact,
+        clean_fact.base: clean_fact,
+        sky_fact.base: sky_fact,
+    }
+    assert set(yao_cellunit.boss_facts.keys()) == set(expected_boss_facts.keys())
+    assert yao_cellunit.boss_facts == expected_boss_facts
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_AreNotOverwritten():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_bud = budunit_shop(yao_str, "accord23")
+    run_road = yao_bud.make_l1_road("run")
+    fast_road = yao_bud.make_road(run_road, "fast")
+    run_fact = factunit_shop(run_road, run_road)
+    fast_fact = factunit_shop(run_road, fast_road)
+    run_facts = {run_fact.base: run_fact}
+
+    yao_budevent_fact_dict = {fast_fact.base: fast_fact.get_dict()}
+    yao_found_fact_dict = {fast_fact.base: fast_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_budevent_fact_dict)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    yao_cellunit.boss_facts = run_facts
+    assert len(yao_cellunit.found_facts) == 1
+    assert set(yao_cellunit.boss_facts.keys()) == {run_road}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    expected_boss_facts = {run_fact.base: run_fact}
+    assert set(yao_cellunit.boss_facts.keys()) == set(expected_boss_facts.keys())
     assert yao_cellunit.boss_facts == expected_boss_facts
     yao_cellunit.boss_facts["testing"] = 1
     assert yao_cellunit.boss_facts != yao_cellunit.found_facts

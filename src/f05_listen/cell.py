@@ -85,6 +85,14 @@ class CellUnit:
         for x_fact in self.found_facts.values():
             self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
 
+    def add_other_facts_to_boss_facts(self):
+        for x_fact in self.found_facts.values():
+            if not self.boss_facts.get(x_fact.base):
+                self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+        for x_fact in self.budevent_facts.values():
+            if not self.boss_facts.get(x_fact.base):
+                self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+
     def filter_facts_by_reason_bases(self):
         to_delete_budevent_fact_keys = set(self.budevent_facts.keys())
         to_delete_found_fact_keys = set(self.found_facts.keys())
