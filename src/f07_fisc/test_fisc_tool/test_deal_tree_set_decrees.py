@@ -1,7 +1,4 @@
-from src.f00_instrument.file import save_json, count_dirs_files, save_file
-from src.f02_bud.group import awardlink_shop
 from src.f02_bud.bud import budunit_shop, BudUnit
-from src.f04_gift.atom_config import base_str
 from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import (
     create_budevent_path,
@@ -18,7 +15,6 @@ from src.f07_fisc.examples.example_fiscs import (
     example_casa_dirty_factunit,
 )
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
-from os.path import exists as os_path_exists
 
 
 def test_DecreeUnit_Exists():
@@ -30,7 +26,7 @@ def test_DecreeUnit_Exists():
     assert not x_decreeunit.cell_ancestors
     assert not x_decreeunit.cell_mandate
     assert not x_decreeunit.cell_celldepth
-    assert not x_decreeunit.root_cell
+    assert not x_decreeunit.root_cell_bool
 
 
 def _example_empty_bob_budunit() -> BudUnit:

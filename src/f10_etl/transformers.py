@@ -923,7 +923,7 @@ def etl_set_deal_trees_found_facts(fisc_mstr_dir: str):
         set_deal_trees_found_facts(fisc_mstr_dir, fisc_title)
 
 
-def etl_downhill_deal_trees_with_boss_facts(fisc_mstr_dir: str):
+def etl_set_deal_trees_decrees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         set_deal_trees_decrees(fisc_mstr_dir, fisc_title)

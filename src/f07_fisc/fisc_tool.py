@@ -1,9 +1,6 @@
-from src.f00_instrument.file import (
-    create_path,
-    get_level1_dirs,
-    delete_dir,
-    get_dir_file_strs,
-)
+from src.f00_instrument.file import create_path, get_level1_dirs
+from src.f01_road.finance import TimeLinePoint
+from src.f01_road.deal import FiscTitle
 from src.f01_road.road import TitleUnit, OwnerName
 from src.f01_road.finance import FundNum
 from src.f02_bud.reason_item import get_dict_from_factunits
@@ -171,10 +168,16 @@ class DecreeUnit:
     cell_ancestors: list[OwnerName] = None
     cell_mandate: dict[OwnerName, FundNum] = None
     cell_celldepth: int = None
-    root_cell: bool = None
+    root_cell_bool: bool = None
 
 
-def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_dir):
+def set_deal_tree_decrees(
+    mstr_dir: str,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    time_int: TimeLinePoint,
+    deal_time_dir: str,
+):
     # clear all current child directorys
     # create root deal tree node
     # grab boss facts from parent_cell (does not apply to root)
@@ -193,7 +196,7 @@ def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_
         cell_ancestors=[],
         cell_mandate=root_cell.quota,
         cell_celldepth=root_cell.celldepth,
-        root_cell=True,
+        root_cell_bool=True,
     )
     to_evaluate_decreeunits = [root_decree]
     while to_evaluate_decreeunits != []:
@@ -201,7 +204,7 @@ def set_deal_tree_decrees(mstr_dir, fisc_title, owner_name, time_int, deal_time_
         if x_cell := cellunit_get_from_dir(x_decree.cell_dir):
             x_cell.mandate = x_decree.cell_mandate
             parent_cell_dir = x_decree.parent_cell_dir
-            _set_cell_boss_facts(x_cell, parent_cell_dir, x_decree.root_cell)
+            _set_cell_boss_facts(x_cell, parent_cell_dir, x_decree.root_cell_bool)
             x_cell.calc_acct_mandate_ledger()
             cellunit_save_to_dir(x_decree.cell_dir, x_cell)
             if x_decree.cell_celldepth > 0:
@@ -241,8 +244,8 @@ def _add_child_decrees(
         to_evaluate_decreeunits.append(child_decreeunit)
 
 
-def _set_cell_boss_facts(cell: CellUnit, parent_cell_dir: str, root_cell: bool):
-    if root_cell:
+def _set_cell_boss_facts(cell: CellUnit, parent_cell_dir: str, root_cell_bool: bool):
+    if root_cell_bool:
         cell.set_boss_facts_from_other_facts()
     else:
         cell.boss_facts = cellunit_get_from_dir(parent_cell_dir).boss_facts

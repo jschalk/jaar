@@ -5,7 +5,9 @@ from src.f05_listen.hub_path import (
 )
 from src.f05_listen.hub_tool import cellunit_add_json_file
 from src.f11_world.world import worldunit_shop
-from src.f11_world.examples.example_worlds import get_mop_with_reason_budunit_example
+from src.f11_world.examples.example_worlds import (
+    get_bob_mop_with_reason_budunit_example,
+)
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
