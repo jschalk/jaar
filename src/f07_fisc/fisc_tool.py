@@ -9,9 +9,11 @@ from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     create_cell_dir_path,
     create_cell_json_path,
+    create_budevent_path,
 )
 from src.f05_listen.hub_tool import (
     get_budevent_obj,
+    open_bud_file,
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     cellunit_get_from_dir,
@@ -166,9 +168,16 @@ class DecreeUnit:
     parent_cell_dir: str = None
     cell_dir: str = None
     cell_ancestors: list[OwnerName] = None
+    cell_owner_name: OwnerName = None
     cell_mandate: dict[OwnerName, FundNum] = None
     cell_celldepth: int = None
     root_cell_bool: bool = None
+    event_int: int = None
+
+    def get_child_cell_ancestors(self, child_owner_name: OwnerName):
+        child_cell_ancestors = copy_copy(self.cell_ancestors)
+        child_cell_ancestors.append(child_owner_name)
+        return child_cell_ancestors
 
 
 def set_deal_tree_decrees(
@@ -194,14 +203,18 @@ def set_deal_tree_decrees(
         parent_cell_dir=None,
         cell_dir=root_cell_dir,
         cell_ancestors=[],
+        cell_owner_name=owner_name,
         cell_mandate=root_cell.quota,
         cell_celldepth=root_cell.celldepth,
         root_cell_bool=True,
+        event_int=root_cell.event_int,
     )
     to_evaluate_decreeunits = [root_decree]
     while to_evaluate_decreeunits != []:
         x_decree = to_evaluate_decreeunits.pop()
-        if x_cell := cellunit_get_from_dir(x_decree.cell_dir):
+        if x_cell := cellunit_get_from_dir(
+            x_decree.cell_dir
+        ) or generate_cell_from_decree(x_decree, mstr_dir, fisc_title, owner_name):
             x_cell.mandate = x_decree.cell_mandate
             parent_cell_dir = x_decree.parent_cell_dir
             _set_cell_boss_facts(x_cell, parent_cell_dir, x_decree.root_cell_bool)
@@ -229,8 +242,7 @@ def _add_child_decrees(
     time_int: int,
 ):
     for child_owner_name, child_mandate in x_cell._acct_mandate_ledger.items():
-        child_cell_ancestors = copy_copy(x_decree.cell_ancestors)
-        child_cell_ancestors.append(child_owner_name)
+        child_cell_ancestors = x_decree.get_child_cell_ancestors(child_owner_name)
         child_dir = create_cell_dir_path(
             mstr_dir, fisc_title, owner_name, time_int, child_cell_ancestors
         )
@@ -238,8 +250,10 @@ def _add_child_decrees(
             parent_cell_dir=x_decree.cell_dir,
             cell_dir=child_dir,
             cell_ancestors=child_cell_ancestors,
+            cell_owner_name=child_owner_name,
             cell_mandate=child_mandate,
             cell_celldepth=x_decree.cell_celldepth - 1,
+            event_int=x_cell.event_int,
         )
         to_evaluate_decreeunits.append(child_decreeunit)
 
@@ -250,3 +264,30 @@ def _set_cell_boss_facts(cell: CellUnit, parent_cell_dir: str, root_cell_bool: b
     else:
         cell.boss_facts = cellunit_get_from_dir(parent_cell_dir).boss_facts
         cell.add_other_facts_to_boss_facts()
+
+
+def generate_cell_from_decree(
+    x_decree: DecreeUnit, mstr_dir: str, fisc_title: str, owner_name: OwnerName
+) -> CellUnit:
+    cell_owner_name = x_decree.cell_owner_name
+    owners_downhill_events_ints = get_owners_downhill_event_ints(
+        owner_events_sets=collect_owner_event_dir_sets(mstr_dir, fisc_title),
+        downhill_owners={cell_owner_name},
+        ref_event_int=x_decree.event_int,
+    )
+    if downhill_event_int := owners_downhill_events_ints.get(cell_owner_name):
+        budevent_path = create_budevent_path(
+            mstr_dir, fisc_title, cell_owner_name, downhill_event_int
+        )
+        budevent = open_bud_file(budevent_path)
+        x_cell = cellunit_shop(
+            deal_owner_name=owner_name,
+            ancestors=x_decree.get_child_cell_ancestors(cell_owner_name),
+            event_int=downhill_event_int,
+            celldepth=x_decree.cell_celldepth,
+            penny=budevent.penny,
+            quota=None,
+            mandate=x_decree.cell_mandate,
+        )
+        x_cell.load_budevent(budevent)
+        return x_cell
