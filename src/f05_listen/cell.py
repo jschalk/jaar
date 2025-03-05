@@ -134,6 +134,7 @@ class CellUnit:
             "deal_owner_name": self.deal_owner_name,
             "penny": self.penny,
             "quota": self.quota,
+            "mandate": self.mandate,
             "budadjust": self.budadjust.get_dict(),
             "budevent_facts": get_dict_from_factunits(self.budevent_facts),
             "found_facts": get_dict_from_factunits(self.found_facts),
@@ -192,6 +193,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     celldepth = x_dict.get("celldepth")
     penny = x_dict.get("penny")
     quota = x_dict.get("quota")
+    mandate = x_dict.get("mandate")
     budadjust_dict = x_dict.get("budadjust")
     if budadjust_dict:
         budadjust_obj = budunit_get_from_dict(budadjust_dict)
@@ -214,6 +216,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
         budevent_facts=budevent_facts,
         found_facts=found_facts,
         boss_facts=boss_facts,
+        mandate=mandate,
     )
 
 

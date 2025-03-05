@@ -5,6 +5,7 @@ from src.f05_listen.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.f05_listen.hub_path import (
     create_cell_dir_path,
     create_cell_json_path as node_path,
+    create_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
 )
@@ -18,10 +19,17 @@ from src.f05_listen.hub_tool import (
     cellunit_get_from_dir,
     save_arbitrary_budevent,
     cellunit_add_json_file,
+    create_acct_mandate_ledger_json,
 )
 from src.f05_listen.examples.listen_env import (
     get_listen_temp_env_dir,
     env_dir_setup_cleanup,
+)
+from src.f05_listen.examples.example_listen import (
+    example_casa_clean_factunit as clean_factunit,
+    example_casa_dirty_factunit as dirty_factunit,
+    example_casa_grimy_factunit as grimy_factunit,
+    example_sky_blue_factunit as sky_blue_factunit,
 )
 from os.path import exists as os_path_exists
 
@@ -459,3 +467,85 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(sue7_cell_path)
     assert cellunit_get_from_dir(cell_dir) == sue_cell
+
+
+def test_create_acct_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    a23_str = "accord23"
+    bob_str = "Bob"
+    tp6 = 6
+    sue_acct_mandate_ledger_path = create_acct_mandate_ledger_path(
+        mstr_dir, a23_str, bob_str, tp6, sue_ancestors
+    )
+    sue_cell_dir = create_cell_dir_path(mstr_dir, a23_str, bob_str, tp6, sue_ancestors)
+    assert os_path_exists(sue_acct_mandate_ledger_path) is False
+
+    # WHEN
+    create_acct_mandate_ledger_json(sue_cell_dir)
+
+    # THEN
+    assert os_path_exists(sue_acct_mandate_ledger_path) is False
+
+
+def test_create_acct_mandate_ledger_json_CreatesFile_Scenario1(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    yao_str = "Yao"
+    sue_str = "Sue"
+    sue_ancestors = [sue_str]
+    sue_event7 = 7
+    sue_celldepth3 = 3
+    sue_penny2 = 2
+    sue_quota300 = 300
+    sue_mandate = 444
+    a23_str = "accord23"
+    sue_bud = budunit_shop(sue_str, a23_str)
+    sue_bud.add_acctunit(sue_str, 3, 5)
+    sue_bud.add_acctunit(yao_str, 7, 2)
+    clean_fact = clean_factunit()
+    dirty_fact = dirty_factunit()
+    sue_bud.add_item(clean_fact.pick)
+    sue_bud.add_item(dirty_fact.pick)
+    casa_road = sue_bud.make_l1_road("casa")
+    mop_road = sue_bud.make_road(casa_road, "mop")
+    sue_bud.add_item(mop_road, 1, pledge=True)
+    sue_bud.edit_reason(mop_road, dirty_fact.base, dirty_fact.pick)
+    sue_bud.add_fact(dirty_fact.base, dirty_fact.pick, create_missing_items=True)
+    sky_blue_fact = sky_blue_factunit()
+    sue_budevent_factunits = {clean_fact.base: clean_fact}
+    sue_found_factunits = {dirty_fact.base: dirty_fact}
+    sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    sue_cell = cellunit_shop(
+        deal_owner_name=yao_str,
+        ancestors=sue_ancestors,
+        event_int=sue_event7,
+        celldepth=sue_celldepth3,
+        penny=sue_penny2,
+        quota=sue_quota300,
+        budadjust=sue_bud,
+        budevent_facts=sue_budevent_factunits,
+        found_facts=sue_found_factunits,
+        boss_facts=sue_boss_factunits,
+        mandate=sue_mandate,
+    )
+    sue_cell._reason_bases = set()
+    bob_str = "Bob"
+    tp6 = 6
+    sue_acct_mandate_ledger_path = create_acct_mandate_ledger_path(
+        mstr_dir, a23_str, bob_str, tp6, sue_ancestors
+    )
+    sue_cell_dir = create_cell_dir_path(mstr_dir, a23_str, bob_str, tp6, sue_ancestors)
+    cellunit_save_to_dir(sue_cell_dir, sue_cell)
+    assert os_path_exists(sue_acct_mandate_ledger_path) is False
+
+    # WHEN
+    create_acct_mandate_ledger_json(sue_cell_dir)
+
+    # THEN
+    assert os_path_exists(sue_acct_mandate_ledger_path)
+    assert open_json(sue_acct_mandate_ledger_path) == {yao_str: 311, sue_str: 133}

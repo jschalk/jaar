@@ -12,6 +12,7 @@ from src.f05_listen.hub_path import (
     FISC_AGENDA_FULL_LISTING_FILENAME,
     DEALUNIT_FILENAME,
     CELLNODE_FILENAME,
+    CELL_MANDATE_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
@@ -27,6 +28,7 @@ from src.f05_listen.hub_path import (
     create_budpoint_path,
     create_cell_dir_path,
     create_cell_json_path,
+    create_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -45,6 +47,7 @@ def test_hub_path_constants_are_values():
     assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
     assert DEALUNIT_FILENAME == "dealunit.json"
     assert CELLNODE_FILENAME == "cell.json"
+    assert CELL_MANDATE_FILENAME == "acct_mandate_ledger.json"
     assert BUDPOINT_FILENAME == "budpoint.json"
     assert BUDEVENT_FILENAME == "bud.json"
     assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
@@ -316,6 +319,29 @@ def test_create_cell_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     tp_yao_dir = create_path(timepoint_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_cell_json_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
+    assert gen_cell_json_path == expected_cell_json_path
+
+
+def test_create_acct_mandate_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    tp7 = 7
+    yao_str = "Yao"
+    bob_str = "Bob"
+    deal_ancestors = [yao_str, bob_str]
+
+    # WHEN
+    gen_cell_json_path = create_acct_mandate_ledger_path(
+        x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
+    )
+
+    # THEN
+    timepoint_dir = create_deal_dir_path(x_fisc_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(timepoint_dir, yao_str)
+    tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
+    expected_cell_json_path = create_path(tp_yao_bob_dir, CELL_MANDATE_FILENAME)
     assert gen_cell_json_path == expected_cell_json_path
 
 
