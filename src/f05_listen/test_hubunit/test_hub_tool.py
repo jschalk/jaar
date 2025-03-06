@@ -5,7 +5,7 @@ from src.f05_listen.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.f05_listen.hub_path import (
     create_cell_dir_path,
     create_cell_json_path as node_path,
-    create_acct_mandate_ledger_path,
+    create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
 )
@@ -19,7 +19,7 @@ from src.f05_listen.hub_tool import (
     cellunit_get_from_dir,
     save_arbitrary_budevent,
     cellunit_add_json_file,
-    create_acct_mandate_ledger_json,
+    create_cell_acct_mandate_ledger_json,
 )
 from src.f05_listen.examples.listen_env import (
     get_listen_temp_env_dir,
@@ -469,7 +469,7 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     assert cellunit_get_from_dir(cell_dir) == sue_cell
 
 
-def test_create_acct_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
+def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -479,20 +479,22 @@ def test_create_acct_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
     a23_str = "accord23"
     bob_str = "Bob"
     tp6 = 6
-    sue_acct_mandate_ledger_path = create_acct_mandate_ledger_path(
+    sue_acct_mandate_ledger_path = create_cell_acct_mandate_ledger_path(
         mstr_dir, a23_str, bob_str, tp6, sue_ancestors
     )
     sue_cell_dir = create_cell_dir_path(mstr_dir, a23_str, bob_str, tp6, sue_ancestors)
     assert os_path_exists(sue_acct_mandate_ledger_path) is False
 
     # WHEN
-    create_acct_mandate_ledger_json(sue_cell_dir)
+    create_cell_acct_mandate_ledger_json(sue_cell_dir)
 
     # THEN
     assert os_path_exists(sue_acct_mandate_ledger_path) is False
 
 
-def test_create_acct_mandate_ledger_json_CreatesFile_Scenario1(env_dir_setup_cleanup):
+def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     mstr_dir = get_listen_temp_env_dir()
     yao_str = "Yao"
@@ -536,7 +538,7 @@ def test_create_acct_mandate_ledger_json_CreatesFile_Scenario1(env_dir_setup_cle
     sue_cell._reason_bases = set()
     bob_str = "Bob"
     tp6 = 6
-    sue_acct_mandate_ledger_path = create_acct_mandate_ledger_path(
+    sue_acct_mandate_ledger_path = create_cell_acct_mandate_ledger_path(
         mstr_dir, a23_str, bob_str, tp6, sue_ancestors
     )
     sue_cell_dir = create_cell_dir_path(mstr_dir, a23_str, bob_str, tp6, sue_ancestors)
@@ -544,7 +546,7 @@ def test_create_acct_mandate_ledger_json_CreatesFile_Scenario1(env_dir_setup_cle
     assert os_path_exists(sue_acct_mandate_ledger_path) is False
 
     # WHEN
-    create_acct_mandate_ledger_json(sue_cell_dir)
+    create_cell_acct_mandate_ledger_json(sue_cell_dir)
 
     # THEN
     assert os_path_exists(sue_acct_mandate_ledger_path)

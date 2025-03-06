@@ -11,6 +11,7 @@ from src.f05_listen.hub_path import (
     FISC_OTE1_AGG_JSON_FILENAME,
     FISC_AGENDA_FULL_LISTING_FILENAME,
     DEALUNIT_FILENAME,
+    DEAL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
     CELL_MANDATE_FILENAME,
     BUDPOINT_FILENAME,
@@ -25,10 +26,11 @@ from src.f05_listen.hub_path import (
     create_deals_dir_path,
     create_deal_dir_path,
     create_dealunit_json_path,
+    create_deal_acct_mandate_ledger_path,
     create_budpoint_path,
     create_cell_dir_path,
     create_cell_json_path,
-    create_acct_mandate_ledger_path,
+    create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_gift_path,
@@ -46,8 +48,9 @@ def test_hub_path_constants_are_values():
     assert FISC_OTE1_AGG_JSON_FILENAME == "fisc_ote1_agg.json"
     assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
     assert DEALUNIT_FILENAME == "dealunit.json"
+    assert DEAL_MANDATE_FILENAME == "deal_acct_mandate_ledger.json"
     assert CELLNODE_FILENAME == "cell.json"
-    assert CELL_MANDATE_FILENAME == "acct_mandate_ledger.json"
+    assert CELL_MANDATE_FILENAME == "cell_acct_mandate_ledger.json"
     assert BUDPOINT_FILENAME == "budpoint.json"
     assert BUDEVENT_FILENAME == "bud.json"
     assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
@@ -194,6 +197,29 @@ def test_create_dealunit_json_path_ReturnObj():
     assert gen_deal_path == expected_deal_path_dir
 
 
+def test_create_deal_acct_mandate_ledger_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    timepoint7 = 7
+
+    # WHEN
+    gen_deal_path = create_deal_acct_mandate_ledger_path(
+        x_fisc_mstr_dir, a23_str, sue_str, timepoint7
+    )
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, a23_str)
+    owners_dir = create_path(accord23_dir, get_owners_folder())
+    sue_dir = create_path(owners_dir, sue_str)
+    deals_dir = create_path(sue_dir, "deals")
+    timepoint_dir = create_path(deals_dir, timepoint7)
+    expected_deal_path_dir = create_path(timepoint_dir, DEAL_MANDATE_FILENAME)
+    assert gen_deal_path == expected_deal_path_dir
+
+
 def test_create_budpoint_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
@@ -322,7 +348,7 @@ def test_create_cell_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_acct_mandate_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
+def test_create_cell_acct_mandate_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
@@ -333,7 +359,7 @@ def test_create_acct_mandate_ledger_path_ReturnObj_Scenario1_Three_deal_ancestor
     deal_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_cell_json_path = create_acct_mandate_ledger_path(
+    gen_cell_json_path = create_cell_acct_mandate_ledger_path(
         x_fisc_mstr_dir, a23_str, sue_str, tp7, deal_ancestors=deal_ancestors
     )
 

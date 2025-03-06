@@ -6,8 +6,9 @@ FISC_OTE1_AGG_CSV_FILENAME = "fisc_ote1_agg.csv"
 FISC_OTE1_AGG_JSON_FILENAME = "fisc_ote1_agg.json"
 FISC_AGENDA_FULL_LISTING_FILENAME = "agenda_full_listing.csv"
 DEALUNIT_FILENAME = "dealunit.json"
+DEAL_MANDATE_FILENAME = "deal_acct_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"
-CELL_MANDATE_FILENAME = "acct_mandate_ledger.json"
+CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
 BUDPOINT_FILENAME = "budpoint.json"
 BUDEVENT_FILENAME = "bud.json"
 EVENT_ALL_GIFT_FILENAME = "all_gift.json"
@@ -78,6 +79,16 @@ def create_dealunit_json_path(
     return create_path(timepoint_dir, "dealunit.json")
 
 
+def create_deal_acct_mandate_ledger_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
+) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\deal_acct_mandate_ledger.json"""
+    timepoint_dir = create_deal_dir_path(
+        fisc_mstr_dir, fisc_title, owner_name, time_int
+    )
+    return create_path(timepoint_dir, "deal_acct_mandate_ledger.json")
+
+
 def create_budpoint_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
 ) -> str:
@@ -120,18 +131,18 @@ def create_cell_json_path(
     return create_path(cell_dir, "cell.json")
 
 
-def create_acct_mandate_ledger_path(
+def create_cell_acct_mandate_ledger_path(
     fisc_mstr_dir: str,
     fisc_title: TitleUnit,
     owner_name: OwnerName,
     time_int: int,
     deal_ancestors: list[OwnerName] = None,
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\acct_mandate_ledger.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell_acct_mandate_ledger.json"""
     cell_dir = create_cell_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
     )
-    return create_path(cell_dir, "acct_mandate_ledger.json")
+    return create_path(cell_dir, "cell_acct_mandate_ledger.json")
 
 
 def create_owner_event_dir_path(
