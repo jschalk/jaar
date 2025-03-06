@@ -91,7 +91,9 @@ def test_HubUnit_save_valid_deal_file_RaisesError(env_dir_setup_cleanup):
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         yao_hubunit._save_valid_deal_file(t_deal)
-    exception_str = "magnitude cannot be calculated: debt_deal_net=-5, cred_deal_net=3"
+    exception_str = (
+        "magnitude cannot be calculated: debt_deal_acct_net=-5, cred_deal_acct_net=3"
+    )
     assert str(excinfo.value) == exception_str
 
 
@@ -155,7 +157,7 @@ def test_HubUnit_get_brokerunit_ReturnsObj(env_dir_setup_cleanup):
     # WHEN / THEN
     assert yao_hubunit.get_brokerunit().deal_exists(t55_time_int)
     assert yao_hubunit.get_brokerunit().deal_exists(t66_time_int)
-    assert yao_hubunit.get_brokerunit().get_deal(t66_time_int).get_deal_net("Sue")
+    assert yao_hubunit.get_brokerunit().get_deal(t66_time_int).get_deal_acct_net("Sue")
 
 
 def test_HubUnit_budpoint_filename_ReturnsObj():
@@ -287,9 +289,9 @@ def test_HubUnit_calc_timepoint_deal_Sets_deal_file_Scenario0(
     assert t55_deal.time_int == t55_time_int
     assert t55_deal.quota == default_fund_pool()
     assert t55_deal._magnitude == 283333333
-    assert t55_deal.get_deal_net("Sue") == 77380952
-    assert t55_deal.get_deal_net("Yao") == -283333333
-    assert t55_deal.get_deal_net("Zia") == 205952381
+    assert t55_deal.get_deal_acct_net("Sue") == 77380952
+    assert t55_deal.get_deal_acct_net("Yao") == -283333333
+    assert t55_deal.get_deal_acct_net("Zia") == 205952381
 
 
 def test_HubUnit_calc_timepoint_deal_Sets_deal_file_Scenario1(
@@ -308,9 +310,9 @@ def test_HubUnit_calc_timepoint_deal_Sets_deal_file_Scenario1(
     assert before_t88_deal.time_int == t88_time_int
     assert before_t88_deal.quota == 800
     assert before_t88_deal._magnitude == 0
-    assert not before_t88_deal.get_deal_net("Sue")
-    assert not before_t88_deal.get_deal_net("Yao")
-    assert not before_t88_deal.get_deal_net("Zia")
+    assert not before_t88_deal.get_deal_acct_net("Sue")
+    assert not before_t88_deal.get_deal_acct_net("Yao")
+    assert not before_t88_deal.get_deal_acct_net("Zia")
 
     # WHEN
     yao_hubunit.calc_timepoint_deal(t88_time_int)
@@ -323,9 +325,9 @@ def test_HubUnit_calc_timepoint_deal_Sets_deal_file_Scenario1(
     assert after_t88_deal.time_int == t88_time_int
     assert after_t88_deal.quota == 800
     assert after_t88_deal.quota == yao_budpoint.fund_pool
-    assert after_t88_deal.get_deal_net("Sue") == 62
-    assert after_t88_deal.get_deal_net("Yao") == -227
-    assert after_t88_deal.get_deal_net("Zia") == 165
+    assert after_t88_deal.get_deal_acct_net("Sue") == 62
+    assert after_t88_deal.get_deal_acct_net("Yao") == -227
+    assert after_t88_deal.get_deal_acct_net("Zia") == 165
     assert after_t88_deal._magnitude == 227
 
 
@@ -370,16 +372,16 @@ def test_HubUnit_calc_timepoint_deals_Sets_deal_files_Scenario0(
     assert before_t66_deal.time_int == t66_time_int
     assert before_t66_deal.quota == default_fund_pool()
     assert before_t66_deal._magnitude == 5
-    assert before_t66_deal.get_deal_net("Sue") == -5
-    assert not before_t66_deal.get_deal_net("Yao")
-    assert not before_t66_deal.get_deal_net("Zia")
+    assert before_t66_deal.get_deal_acct_net("Sue") == -5
+    assert not before_t66_deal.get_deal_acct_net("Yao")
+    assert not before_t66_deal.get_deal_acct_net("Zia")
     before_t88_deal = yao_hubunit.get_deal_file(t88_time_int)
     assert before_t88_deal.time_int == t88_time_int
     assert before_t88_deal.quota == 800
     assert before_t88_deal._magnitude == 0
-    assert not before_t88_deal.get_deal_net("Sue")
-    assert not before_t88_deal.get_deal_net("Yao")
-    assert not before_t88_deal.get_deal_net("Zia")
+    assert not before_t88_deal.get_deal_acct_net("Sue")
+    assert not before_t88_deal.get_deal_acct_net("Yao")
+    assert not before_t88_deal.get_deal_acct_net("Zia")
 
     # WHEN
     yao_hubunit.calc_timepoint_deals()
@@ -392,14 +394,14 @@ def test_HubUnit_calc_timepoint_deals_Sets_deal_files_Scenario0(
     assert after_t88_deal.time_int == t88_time_int
     assert after_t88_deal.quota == 800
     assert after_t88_deal.quota == yao_budpoint.fund_pool
-    assert after_t88_deal.get_deal_net("Sue") == 62
-    assert after_t88_deal.get_deal_net("Yao") == -227
-    assert after_t88_deal.get_deal_net("Zia") == 165
+    assert after_t88_deal.get_deal_acct_net("Sue") == 62
+    assert after_t88_deal.get_deal_acct_net("Yao") == -227
+    assert after_t88_deal.get_deal_acct_net("Zia") == 165
     assert after_t88_deal._magnitude == 227
     after_t66_deal = yao_hubunit.get_deal_file(t66_time_int)
     assert after_t66_deal.time_int == t66_time_int
     assert after_t66_deal.quota == default_fund_pool()
-    assert after_t66_deal.get_deal_net("Sue") == 77380952
-    assert after_t66_deal.get_deal_net("Yao") == -283333333
-    assert after_t66_deal.get_deal_net("Zia") == 205952381
+    assert after_t66_deal.get_deal_acct_net("Sue") == 77380952
+    assert after_t66_deal.get_deal_acct_net("Yao") == -283333333
+    assert after_t66_deal.get_deal_acct_net("Zia") == 205952381
     assert after_t66_deal._magnitude == 283333333

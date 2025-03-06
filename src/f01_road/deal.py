@@ -48,8 +48,8 @@ def magnitude_str() -> str:
     return "magnitude"
 
 
-def deal_net_str() -> str:
-    return "deal_net"
+def deal_acct_nets_str() -> str:
+    return "deal_acct_nets"
 
 
 def owner_name_str() -> str:
@@ -225,33 +225,33 @@ class DealUnit:
     quota: FundNum = None
     celldepth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
-    _deal_net: dict[AcctName, FundNum] = None  # ledger of deal outcome
+    _deal_acct_nets: dict[AcctName, FundNum] = None  # ledger of deal outcome
 
-    def set_deal_net(self, x_acct_name: AcctName, deal_net: FundNum):
-        self._deal_net[x_acct_name] = deal_net
+    def set_deal_acct_net(self, x_acct_name: AcctName, deal_acct_net: FundNum):
+        self._deal_acct_nets[x_acct_name] = deal_acct_net
 
-    def deal_net_exists(self, x_acct_name: AcctName) -> bool:
-        return self._deal_net.get(x_acct_name) != None
+    def deal_acct_net_exists(self, x_acct_name: AcctName) -> bool:
+        return self._deal_acct_nets.get(x_acct_name) != None
 
-    def get_deal_net(self, x_acct_name: AcctName) -> FundNum:
-        return self._deal_net.get(x_acct_name)
+    def get_deal_acct_net(self, x_acct_name: AcctName) -> FundNum:
+        return self._deal_acct_nets.get(x_acct_name)
 
-    def del_deal_net(self, x_acct_name: AcctName):
-        self._deal_net.pop(x_acct_name)
+    def del_deal_acct_net(self, x_acct_name: AcctName):
+        self._deal_acct_nets.pop(x_acct_name)
 
     def calc_magnitude(self):
-        deal_net = self._deal_net.values()
-        x_cred_sum = sum(deal_net for deal_net in deal_net if deal_net > 0)
-        x_debt_sum = sum(deal_net for deal_net in deal_net if deal_net < 0)
+        deal_acct_nets = self._deal_acct_nets.values()
+        x_cred_sum = sum(da_net for da_net in deal_acct_nets if da_net > 0)
+        x_debt_sum = sum(da_net for da_net in deal_acct_nets if da_net < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_deal_net={x_debt_sum}, cred_deal_net={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_deal_acct_net={x_debt_sum}, cred_deal_acct_net={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
         x_dict = {"time_int": self.time_int, "quota": self.quota}
-        if self._deal_net:
-            x_dict["deal_net"] = self._deal_net
+        if self._deal_acct_nets:
+            x_dict["deal_acct_nets"] = self._deal_acct_nets
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         if self.celldepth != DEFAULT_celldepth:
@@ -265,7 +265,7 @@ class DealUnit:
 def dealunit_shop(
     time_int: TimeLinePoint,
     quota: FundNum = None,
-    deal_net: dict[AcctName, FundNum] = None,
+    deal_acct_nets: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
     celldepth: int = None,
 ) -> DealUnit:
@@ -278,7 +278,7 @@ def dealunit_shop(
         time_int=time_int,
         quota=quota,
         celldepth=celldepth,
-        _deal_net=get_empty_dict_if_None(deal_net),
+        _deal_acct_nets=get_empty_dict_if_None(deal_acct_nets),
         _magnitude=get_0_if_None(magnitude),
     )
 
@@ -333,7 +333,7 @@ class BrokerUnit:
     def get_tranbook(self, fisc_title: FiscTitle) -> TranBook:
         x_tranbook = tranbook_shop(fisc_title)
         for x_time_int, x_deal in self.deals.items():
-            for dst_acct_name, x_quota in x_deal._deal_net.items():
+            for dst_acct_name, x_quota in x_deal._deal_acct_nets.items():
                 x_tranbook.add_tranunit(
                     owner_name=self.owner_name,
                     acct_name=dst_acct_name,
@@ -350,7 +350,7 @@ def brokerunit_shop(owner_name: OwnerName) -> BrokerUnit:
 def get_dealunit_from_dict(x_dict: dict) -> DealUnit:
     x_time_int = x_dict.get("time_int")
     x_quota = x_dict.get("quota")
-    x_deal_net = x_dict.get("deal_net")
+    x_deal_net = x_dict.get("deal_acct_nets")
     x_magnitude = x_dict.get("magnitude")
     x_celldepth = x_dict.get("celldepth")
     return dealunit_shop(

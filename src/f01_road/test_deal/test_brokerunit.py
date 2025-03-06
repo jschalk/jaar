@@ -7,7 +7,7 @@ from src.f01_road.deal import (
     time_int_str,
     celldepth_str,
     owner_name_str,
-    deal_net_str,
+    deal_acct_nets_str,
 )
 
 
@@ -292,10 +292,10 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
     sue_brokerunit.add_deal(x4_time_int, x4_quota)
     sue_brokerunit.add_deal(x7_time_int, x7_quota)
     zia_str = "Zia"
-    zia_deal_net = 887
-    sue_deal_net = 445
-    sue_brokerunit.get_deal(x7_time_int).set_deal_net(sue_str, sue_deal_net)
-    sue_brokerunit.get_deal(x7_time_int).set_deal_net(zia_str, zia_deal_net)
+    zia_deal_acct_net = 887
+    sue_deal_acct_net = 445
+    sue_brokerunit.get_deal(x7_time_int).set_deal_acct_net(sue_str, sue_deal_acct_net)
+    sue_brokerunit.get_deal(x7_time_int).set_deal_acct_net(zia_str, zia_deal_acct_net)
     sue_deals_dict = sue_brokerunit.get_dict()
     assert sue_deals_dict == {
         owner_name_str(): sue_str,
@@ -304,7 +304,10 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
             x7_time_int: {
                 time_int_str(): x7_time_int,
                 quota_str(): x7_quota,
-                deal_net_str(): {sue_str: sue_deal_net, zia_str: zia_deal_net},
+                deal_acct_nets_str(): {
+                    sue_str: sue_deal_acct_net,
+                    zia_str: zia_deal_acct_net,
+                },
             },
         },
     }
@@ -317,8 +320,8 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
     assert x_brokerunit.owner_name == sue_str
     assert x_brokerunit.get_deal(x4_time_int) != None
     assert x_brokerunit.get_deal(x7_time_int) != None
-    assert x_brokerunit.get_deal(x7_time_int)._deal_net != {}
-    assert len(x_brokerunit.get_deal(x7_time_int)._deal_net) == 2
+    assert x_brokerunit.get_deal(x7_time_int)._deal_acct_nets != {}
+    assert len(x_brokerunit.get_deal(x7_time_int)._deal_acct_nets) == 2
     assert x_brokerunit.deals == sue_brokerunit.deals
     assert x_brokerunit == sue_brokerunit
 
@@ -335,10 +338,10 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     sue_brokerunit.add_deal(x7_time_int, x7_quota)
     bob_str = "Bob"
     zia_str = "Zia"
-    zia_deal_net = 887
-    bob_deal_net = 445
-    sue_brokerunit.get_deal(x4_time_int).set_deal_net(bob_str, bob_deal_net)
-    sue_brokerunit.get_deal(x7_time_int).set_deal_net(zia_str, zia_deal_net)
+    zia_deal_acct_net = 887
+    bob_deal_acct_net = 445
+    sue_brokerunit.get_deal(x4_time_int).set_deal_acct_net(bob_str, bob_deal_acct_net)
+    sue_brokerunit.get_deal(x7_time_int).set_deal_acct_net(zia_str, zia_deal_acct_net)
     sue_deals_dict = sue_brokerunit.get_dict()
     assert sue_deals_dict == {
         owner_name_str(): sue_str,
@@ -346,12 +349,12 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
             x4_time_int: {
                 time_int_str(): x4_time_int,
                 quota_str(): x4_quota,
-                deal_net_str(): {bob_str: bob_deal_net},
+                deal_acct_nets_str(): {bob_str: bob_deal_acct_net},
             },
             x7_time_int: {
                 time_int_str(): x7_time_int,
                 quota_str(): x7_quota,
-                deal_net_str(): {zia_str: zia_deal_net},
+                deal_acct_nets_str(): {zia_str: zia_deal_acct_net},
             },
         },
     }
@@ -365,5 +368,5 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     assert sue_tranbook.fisc_title == x_fisc_title
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_time_int)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_time_int)
-    assert sue_tranbook.get_amount(sue_str, zia_str, x7_time_int) == zia_deal_net
-    assert sue_tranbook.get_amount(sue_str, bob_str, x4_time_int) == bob_deal_net
+    assert sue_tranbook.get_amount(sue_str, zia_str, x7_time_int) == zia_deal_acct_net
+    assert sue_tranbook.get_amount(sue_str, bob_str, x4_time_int) == bob_deal_acct_net

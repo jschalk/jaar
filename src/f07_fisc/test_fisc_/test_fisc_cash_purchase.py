@@ -227,8 +227,8 @@ def test_FiscUnit_set_all_tranbook_SetsAttr():
     bob_deal_net = 445
     sue_x40000_deal = x_fisc.get_brokerunit(sue_str).get_deal(x40000_time_int)
     sue_x70000_deal = x_fisc.get_brokerunit(sue_str).get_deal(x70000_time_int)
-    sue_x40000_deal.set_deal_net(bob_str, bob_deal_net)
-    sue_x70000_deal.set_deal_net(zia_str, zia_deal_net)
+    sue_x40000_deal.set_deal_acct_net(bob_str, bob_deal_net)
+    sue_x70000_deal.set_deal_acct_net(zia_str, zia_deal_net)
 
     assert x_fisc._all_tranbook == tranbook_shop(x_fisc.fisc_title)
     assert x_fisc.cashpurchase_exists(sue_str, bob_str, t55_t)
@@ -237,8 +237,8 @@ def test_FiscUnit_set_all_tranbook_SetsAttr():
     assert x_fisc.cashpurchase_exists(sue_str, yao_str, t88_t)
     assert x_fisc.cashpurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_deal.deal_net_exists(bob_str)
-    assert sue_x70000_deal.deal_net_exists(zia_str)
+    assert sue_x40000_deal.deal_acct_net_exists(bob_str)
+    assert sue_x70000_deal.deal_acct_net_exists(zia_str)
     # x_fisc.add_dealunit()
 
     # WHEN

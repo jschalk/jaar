@@ -20,10 +20,8 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
         zia_bud.set_item(
             itemunit_shop(casa_str), parent_road=invalid_roottitle_swim_road
         )
-    assert (
-        str(excinfo.value)
-        == f"set_item failed because parent_road '{invalid_roottitle_swim_road}' has an invalid root title"
-    )
+    exception_str = f"set_item failed because parent_road '{invalid_roottitle_swim_road}' has an invalid root title. Should be {zia_bud.fisc_title}."
+    assert str(excinfo.value) == exception_str
 
 
 def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
@@ -39,10 +37,8 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
             parent_road=swim_road,
             create_missing_ancestors=False,
         )
-    assert (
-        str(excinfo.value)
-        == f"set_item failed because '{swim_road}' item does not exist."
-    )
+    exception_str = f"set_item failed because '{swim_road}' item does not exist."
+    assert str(excinfo.value) == exception_str
 
 
 def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotTitle():
@@ -57,10 +53,8 @@ def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotTitle():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(itemunit_shop(run_road), parent_road=swim_road)
-    assert (
-        str(excinfo.value)
-        == f"set_item failed because '{run_road}' is not a TitleUnit."
-    )
+    exception_str = f"set_item failed because '{run_road}' is not a TitleUnit."
+    assert str(excinfo.value) == exception_str
 
 
 def test_BudUnit_set_item_CorrectlySetsAttr():

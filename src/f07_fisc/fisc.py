@@ -4,7 +4,6 @@ from src.f00_instrument.file import (
     get_dir_file_strs,
     create_path,
     open_file,
-    save_json,
 )
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
@@ -47,11 +46,7 @@ from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f05_listen.basis_buds import get_default_forecast_bud
 from src.f05_listen.cell import cellunit_shop
-from src.f05_listen.hub_path import (
-    create_fisc_json_path,
-    create_cell_dir_path,
-    create_cell_json_path,
-)
+from src.f05_listen.hub_path import create_fisc_json_path, create_cell_dir_path
 from src.f05_listen.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.f05_listen.hubunit import hubunit_shop, HubUnit
 from src.f05_listen.listen import (
@@ -377,7 +372,7 @@ class FiscUnit:
         x_tranbook = tranbook_shop(self.fisc_title, x_tranunits)
         for owner_name, x_brokerunit in self.brokerunits.items():
             for x_time_int, x_dealunit in x_brokerunit.deals.items():
-                for acct_name, x_amount in x_dealunit._deal_net.items():
+                for acct_name, x_amount in x_dealunit._deal_acct_nets.items():
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
@@ -410,7 +405,7 @@ class FiscUnit:
 
 def _get_ote1_max_past_event_int(
     owner_name: str, ote1_dict: dict[str, dict[str, int]], time_int: int
-):
+) -> EventInt:
     """Using the fisc_ote1_agg grab most recent event int before a given time_int"""
     ote1_owner_dict = ote1_dict.get(owner_name)
     event_timepoints = set(ote1_owner_dict.keys())

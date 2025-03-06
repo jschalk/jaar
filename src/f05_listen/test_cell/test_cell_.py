@@ -1,4 +1,5 @@
 from src.f01_road.road import create_road
+from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import (
     CellUnit,
@@ -30,9 +31,10 @@ def test_CellUnit_Exists():
     assert not x_cellunit.deal_owner_name
     assert not x_cellunit.penny
     assert not x_cellunit.quota
+    assert not x_cellunit.mandate
     assert not x_cellunit.budadjust
     assert not x_cellunit._reason_bases
-    assert not x_cellunit._acct_agenda_give_ledger
+    assert not x_cellunit._acct_mandate_ledger
     assert not x_cellunit.budevent_facts
     assert not x_cellunit.found_facts
     assert not x_cellunit.boss_facts
@@ -50,10 +52,11 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.celldepth == 0
     assert x_cellunit.penny == 1
     assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
+    assert x_cellunit.mandate == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.budadjust.get_dict() == budunit_shop(bob_str).get_dict()
     assert x_cellunit.budevent_facts == {}
     assert x_cellunit._reason_bases == set()
-    assert x_cellunit._acct_agenda_give_ledger == {}
+    assert x_cellunit._acct_mandate_ledger == {}
     assert x_cellunit.found_facts == {}
     assert x_cellunit.boss_facts == {}
 
@@ -69,6 +72,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     bob_sue_celldepth3 = 3
     bob_sue_penny2 = 2
     bob_sue_quota300 = 300
+    bob_sue_mandate = 444
     bob_sue_bud = budunit_shop(sue_str)
     bob_sue_bud.add_acctunit(bob_str, 7, 13)
     clean_fact = clean_factunit()
@@ -90,6 +94,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
         bob_sue_budevent_factunits,
         bob_sue_found_factunits,
         bob_sue_boss_factunits,
+        bob_sue_mandate,
     )
 
     # THEN
@@ -99,6 +104,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_cellunit.deal_owner_name == bob_sue_deal_owner
     assert x_cellunit.penny == bob_sue_penny2
     assert x_cellunit.quota == bob_sue_quota300
+    assert x_cellunit.mandate == bob_sue_mandate
     assert x_cellunit.budadjust == bob_sue_bud
     assert x_cellunit._reason_bases == set()
     assert x_cellunit.budevent_facts == bob_sue_budevent_factunits
@@ -331,8 +337,9 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
     yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    yao_cellunit.boss_facts = "testing_str"
     assert len(yao_cellunit.found_facts) == 1
-    assert yao_cellunit.boss_facts == {}
+    assert yao_cellunit.boss_facts == "testing_str"
 
     # WHEN
     yao_cellunit.set_boss_facts_from_other_facts()
@@ -387,6 +394,115 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_budevent_fa
 
     # THEN
     expected_boss_facts = {clean_fact.base: clean_fact, sky_fact.base: sky_fact}
+    assert yao_cellunit.boss_facts == expected_boss_facts
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_only():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.found_facts) == 1
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    assert yao_cellunit.boss_facts == yao_cellunit.found_facts
+    assert yao_cellunit.boss_facts == {clean_fact.base: clean_fact}
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_budevent_facts_only():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_found_fact_dict)
+    assert len(yao_cellunit.budevent_facts) == 1
+    assert yao_cellunit.found_facts == {}
+    assert yao_cellunit.boss_facts == {}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    assert yao_cellunit.boss_facts == yao_cellunit.budevent_facts
+    assert yao_cellunit.boss_facts == {clean_fact.base: clean_fact}
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_budevent_facts_And_found_facts():
+    # ESTABLISH
+    yao_str = "Yao"
+    clean_fact = clean_factunit()
+    sky_fact = sky_blue_factunit()
+    yao_bud = budunit_shop(yao_str, "accord23")
+    yao_bud.add_fact(clean_fact.base, clean_fact.pick, create_missing_items=True)
+    run_road = yao_bud.make_l1_road("run")
+    run_fact = factunit_shop(run_road, run_road)
+    run_facts = {run_fact.base: run_fact}
+    yao_budevent_fact_dict = {sky_fact.base: sky_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.base: clean_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_budevent_fact_dict)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    yao_cellunit.boss_facts = run_facts
+    assert len(yao_cellunit.found_facts) == 1
+    assert set(yao_cellunit.boss_facts.keys()) == {run_road}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    expected_boss_facts = {
+        run_fact.base: run_fact,
+        clean_fact.base: clean_fact,
+        sky_fact.base: sky_fact,
+    }
+    assert set(yao_cellunit.boss_facts.keys()) == set(expected_boss_facts.keys())
+    assert yao_cellunit.boss_facts == expected_boss_facts
+    yao_cellunit.boss_facts["testing"] = 1
+    assert yao_cellunit.boss_facts != yao_cellunit.found_facts
+
+
+def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_AreNotOverwritten():
+    # ESTABLISH
+    yao_str = "Yao"
+    yao_bud = budunit_shop(yao_str, "accord23")
+    run_road = yao_bud.make_l1_road("run")
+    fast_road = yao_bud.make_road(run_road, "fast")
+    run_fact = factunit_shop(run_road, run_road)
+    fast_fact = factunit_shop(run_road, fast_road)
+    run_facts = {run_fact.base: run_fact}
+
+    yao_budevent_fact_dict = {fast_fact.base: fast_fact.get_dict()}
+    yao_found_fact_dict = {fast_fact.base: fast_fact.get_dict()}
+    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit.set_budevent_facts_from_dict(yao_budevent_fact_dict)
+    yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
+    yao_cellunit.boss_facts = run_facts
+    assert len(yao_cellunit.found_facts) == 1
+    assert set(yao_cellunit.boss_facts.keys()) == {run_road}
+
+    # WHEN
+    yao_cellunit.add_other_facts_to_boss_facts()
+
+    # THEN
+    expected_boss_facts = {run_fact.base: run_fact}
+    assert set(yao_cellunit.boss_facts.keys()) == set(expected_boss_facts.keys())
     assert yao_cellunit.boss_facts == expected_boss_facts
     yao_cellunit.boss_facts["testing"] = 1
     assert yao_cellunit.boss_facts != yao_cellunit.found_facts
@@ -607,7 +723,7 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
     assert sue_bud_casa_fact_dict.get("pick") == casa_grimy_fact.pick
 
 
-def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario0():
+def test_CellUnit_set_acct_mandate_ledger_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -616,6 +732,7 @@ def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario0():
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
+    sue_mandate = 444
     sue_bud = budunit_shop(sue_str, "accord23")
     sue_cell = cellunit_shop(
         yao_str,
@@ -625,19 +742,22 @@ def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario0():
         sue_penny2,
         sue_quota300,
         budadjust=sue_bud,
+        mandate=sue_mandate,
     )
     assert sue_cell.budadjust.fund_pool != sue_quota300
-    assert sue_cell._acct_agenda_give_ledger == {}
+    assert sue_cell.budadjust.fund_pool != sue_mandate
+    assert sue_cell._acct_mandate_ledger == {}
 
     # WHEN
-    sue_cell._set_acct_agenda_give_ledger()
+    sue_cell._set_acct_mandate_ledger()
 
     # THEN
-    assert sue_cell.budadjust.fund_pool == sue_quota300
-    assert sue_cell._acct_agenda_give_ledger == {}
+    assert sue_cell.budadjust.fund_pool != sue_quota300
+    assert sue_cell.budadjust.fund_pool == sue_mandate
+    assert sue_cell._acct_mandate_ledger == {sue_str: sue_mandate}
 
 
-def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario1():
+def test_CellUnit_set_acct_mandate_ledger_ReturnsObj_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -646,6 +766,7 @@ def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario1():
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
+    sue_mandate = 444
     sue_bud = budunit_shop(sue_str, "accord23")
     sue_bud.add_acctunit(sue_str, 3, 5)
     sue_bud.add_acctunit(yao_str, 7, 2)
@@ -657,20 +778,23 @@ def test_CellUnit_set_acct_agenda_give_ledger_ReturnsObj_Scenario1():
         sue_penny2,
         sue_quota300,
         budadjust=sue_bud,
+        mandate=sue_mandate,
     )
     assert sue_cell.budadjust.fund_pool != sue_quota300
-    assert sue_cell._acct_agenda_give_ledger == {}
+    assert sue_cell.budadjust.fund_pool != sue_mandate
+    assert sue_cell._acct_mandate_ledger == {}
 
     # WHEN
-    sue_cell._set_acct_agenda_give_ledger()
+    sue_cell._set_acct_mandate_ledger()
 
     # THEN
-    assert sue_cell.budadjust.fund_pool == sue_quota300
-    assert sue_cell._acct_agenda_give_ledger != {}
-    assert sue_cell._acct_agenda_give_ledger == {yao_str: 210, sue_str: 90}
+    assert sue_cell.budadjust.fund_pool != sue_quota300
+    assert sue_cell.budadjust.fund_pool == sue_mandate
+    assert sue_cell._acct_mandate_ledger != {}
+    assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 
 
-def test_CellUnit_calc_acct_agenda_give_ledger_ReturnsObj_Scenario0():
+def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -679,6 +803,7 @@ def test_CellUnit_calc_acct_agenda_give_ledger_ReturnsObj_Scenario0():
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
+    sue_mandate = 444
     sue_bud = budunit_shop(sue_str, "accord23")
     sue_bud.add_acctunit(sue_str, 3, 5)
     sue_bud.add_acctunit(yao_str, 7, 2)
@@ -706,15 +831,16 @@ def test_CellUnit_calc_acct_agenda_give_ledger_ReturnsObj_Scenario0():
         budevent_facts=sue_budevent_factunits,
         found_facts=sue_found_factunits,
         boss_facts=sue_boss_factunits,
+        mandate=sue_mandate,
     )
     sue_cell._reason_bases = set()
     assert not sue_cell._reason_bases
     assert sue_cell.boss_facts == {sky_blue_fact.base: sky_blue_fact}
     assert sue_cell.budadjust.get_factunits_dict() == {}
-    assert sue_cell._acct_agenda_give_ledger == {}
+    assert sue_cell._acct_mandate_ledger == {}
 
     # WHEN
-    sue_cell.calc_acct_agenda_give_ledger()
+    sue_cell.calc_acct_mandate_ledger()
 
     # THEN
     assert sue_cell._reason_bases == {clean_fact.base}
@@ -724,8 +850,8 @@ def test_CellUnit_calc_acct_agenda_give_ledger_ReturnsObj_Scenario0():
     # item_dict = sue_cell.budadjust.get_item_dict()
     # for item_road, item_obj in item_dict.items():
     #     print(f"{item_road=} {item_obj._fund_onset=} {item_obj._fund_cease}")
-    assert sue_cell._acct_agenda_give_ledger != {}
-    assert sue_cell._acct_agenda_give_ledger == {yao_str: 210, sue_str: 90}
+    assert sue_cell._acct_mandate_ledger != {}
+    assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 
 
 def test_create_child_cellunits_ReturnsObj_Scenario0():
@@ -738,6 +864,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
+    sue_mandate = 444
     sue_bud = budunit_shop(sue_str, "accord23")
     sue_bud.add_acctunit(sue_str, 3, 5)
     sue_bud.add_acctunit(yao_str, 7, 2)
@@ -750,37 +877,37 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
         sue_penny2,
         sue_quota300,
         budadjust=sue_bud,
+        mandate=sue_mandate,
     )
 
     # WHEN
     sue_child_cellunits = create_child_cellunits(sue_cell)
 
     # THEN
-    assert sue_child_cellunits
-    assert set(sue_child_cellunits.keys()) == {yao_str, sue_str}
-    sue_yao_cell = sue_child_cellunits.get(yao_str)
-    assert sue_yao_cell.deal_owner_name == yao_str
-    assert sue_yao_cell.ancestors == [sue_str, yao_str]
-    assert sue_yao_cell.event_int == sue_event7
-    assert sue_yao_cell.celldepth == sue_celldepth3 - 1
-    assert sue_yao_cell.penny == sue_penny2
-    assert sue_yao_cell.quota == 210
-    # assert sue_yao_cell.budadjust
-    assert sue_yao_cell.budevent_facts == {}
-    assert sue_yao_cell.found_facts == {}
-    assert sue_yao_cell.boss_facts == {}
-
-    sue_sue_cell = sue_child_cellunits.get(sue_str)
+    assert len(sue_child_cellunits) == 2
+    sue_sue_cell = sue_child_cellunits[0]
     assert sue_sue_cell.deal_owner_name == yao_str
     assert sue_sue_cell.ancestors == [sue_str, sue_str]
     assert sue_sue_cell.event_int == sue_event7
     assert sue_sue_cell.celldepth == sue_celldepth3 - 1
     assert sue_sue_cell.penny == sue_penny2
-    assert sue_sue_cell.quota == 90
+    assert sue_sue_cell.mandate == 133
     # assert not sue_sue_cell.budadjust
     assert sue_sue_cell.budevent_facts == {}
     assert sue_sue_cell.found_facts == {}
     assert sue_sue_cell.boss_facts == {}
+
+    sue_yao_cell = sue_child_cellunits[1]
+    assert sue_yao_cell.deal_owner_name == yao_str
+    assert sue_yao_cell.ancestors == [sue_str, yao_str]
+    assert sue_yao_cell.event_int == sue_event7
+    assert sue_yao_cell.celldepth == sue_celldepth3 - 1
+    assert sue_yao_cell.penny == sue_penny2
+    assert sue_yao_cell.mandate == 311
+    # assert sue_yao_cell.budadjust
+    assert sue_yao_cell.budevent_facts == {}
+    assert sue_yao_cell.found_facts == {}
+    assert sue_yao_cell.boss_facts == {}
 
 
 def test_create_child_cellunits_ReturnsObj_Scenario1_DealDepth0():
@@ -812,7 +939,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_DealDepth0():
     sue_child_cellunits = create_child_cellunits(sue_cell)
 
     # THEN
-    assert sue_child_cellunits == {}
+    assert sue_child_cellunits == []
 
 
 def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
@@ -841,20 +968,19 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
         yao_str, celldepth=yao_celldepth, quota=yao_quota, budadjust=yao_bud
     )
     yao_cell.budevent_facts = {dirty_fact.base: dirty_fact}
-    # sue_cell._acct_agenda_give_ledger = {yao_str: 210, sue_str: 90, bob_str: 0}
+    # sue_cell._acct_mandate_ledger = {yao_str: 210, sue_str: 90, bob_str: 0}
 
     # WHEN
     sue_child_cellunits = create_child_cellunits(yao_cell)
 
     # THEN
-    assert sue_child_cellunits
-    assert set(sue_child_cellunits.keys()) == {yao_str, sue_str}
-    sue_yao_cell = sue_child_cellunits.get(yao_str)
+    assert len(sue_child_cellunits) == 2
+    sue_yao_cell = sue_child_cellunits[1]
     assert sue_yao_cell.budevent_facts == {}
     assert sue_yao_cell.found_facts == {}
     assert sue_yao_cell.boss_facts == {dirty_fact.base: dirty_fact}
 
-    sue_sue_cell = sue_child_cellunits.get(sue_str)
+    sue_sue_cell = sue_child_cellunits[0]
     assert sue_sue_cell.budevent_facts == {}
     assert sue_sue_cell.found_facts == {}
     assert sue_sue_cell.boss_facts == {dirty_fact.base: dirty_fact}
@@ -868,7 +994,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_event7 = 7
     sue_celldepth3 = 3
     sue_penny2 = 2
-    sue_quota300 = 300
+    sue_mandate = 444
     sue_bud = budunit_shop(sue_str, "accord23")
     sue_bud.add_acctunit(sue_str, 3, 5)
     sue_bud.add_acctunit(yao_str, 7, 2)
@@ -891,23 +1017,23 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
         sue_event7,
         sue_celldepth3,
         sue_penny2,
-        sue_quota300,
         budadjust=sue_bud,
         budevent_facts=sue_budevent_factunits,
         found_facts=sue_found_factunits,
         boss_facts=sue_boss_factunits,
+        mandate=sue_mandate,
     )
     sue_cell._reason_bases = set()
     assert not sue_cell._reason_bases
     assert sue_cell.boss_facts == {sky_blue_fact.base: sky_blue_fact}
     assert sue_cell.budadjust.get_factunits_dict() == {}
-    assert sue_cell._acct_agenda_give_ledger == {}
+    assert sue_cell._acct_mandate_ledger == {}
 
     # WHEN
     sue_child_cellunits = create_child_cellunits(sue_cell)
 
     # # WHEN
-    # sue_cell.calc_acct_agenda_give_ledger()
+    # sue_cell.calc_acct_mandate_ledger()
 
     # # THEN
     assert sue_cell._reason_bases == {dirty_fact.base}
@@ -917,20 +1043,19 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     # item_dict = sue_cell.budadjust.get_item_dict()
     # for item_road, item_obj in item_dict.items():
     #     print(f"{item_road=} {item_obj._fund_onset=} {item_obj._fund_cease}")
-    assert sue_cell._acct_agenda_give_ledger != {}
-    assert sue_cell._acct_agenda_give_ledger == {yao_str: 210, sue_str: 90}
+    assert sue_cell._acct_mandate_ledger != {}
+    assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 
     # THEN
-    assert sue_child_cellunits
-    assert set(sue_child_cellunits.keys()) == {yao_str, sue_str}
-    sue_yao_cell = sue_child_cellunits.get(yao_str)
+    assert len(sue_child_cellunits) == 2
+    sue_yao_cell = sue_child_cellunits[1]
     assert sue_yao_cell.budevent_facts == {}
     assert sue_yao_cell.found_facts == {}
     assert sue_yao_cell.boss_facts == {dirty_fact.base: dirty_fact}
-    assert sue_yao_cell.quota == 210
+    assert sue_yao_cell.mandate == 311
 
-    sue_sue_cell = sue_child_cellunits.get(sue_str)
+    sue_sue_cell = sue_child_cellunits[0]
     assert sue_sue_cell.budevent_facts == {}
     assert sue_sue_cell.found_facts == {}
     assert sue_sue_cell.boss_facts == {dirty_fact.base: dirty_fact}
-    assert sue_sue_cell.quota == 90
+    assert sue_sue_cell.mandate == 133

@@ -13,6 +13,8 @@ from src.f04_gift.atom_config import (
     debtit_belief_str,
     acct_name_str,
     atom_insert,
+    atom_delete,
+    atom_update,
 )
 from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.gift import (
@@ -591,3 +593,25 @@ def test_GiftUnit_is_empty_ReturnsObj():
 
     # THEN
     assert bob_giftunit.is_empty()
+
+    # Test for atom_update operation
+    bob_giftunit_update = giftunit_shop(bob_str)
+    bob_giftunit_update.add_atomunit(
+        dimen=bud_acctunit_str(),
+        crud_str=atom_update(),
+        jkeys=bob_required_dict,
+        jvalues=bob_optional_dict,
+    )
+    assert len(bob_giftunit_update._buddelta.atomunits) == 1
+    assert bob_giftunit_update.is_empty() is False
+
+    # Test for atom_delete operation
+    bob_giftunit_delete = giftunit_shop(bob_str)
+    bob_giftunit_delete.add_atomunit(
+        dimen=bud_acctunit_str(),
+        crud_str=atom_delete(),
+        jkeys=bob_required_dict,
+        jvalues={},
+    )
+    assert len(bob_giftunit_delete._buddelta.atomunits) == 1
+    assert bob_giftunit_delete.is_empty() is False

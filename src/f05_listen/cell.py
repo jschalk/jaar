@@ -21,11 +21,11 @@ from src.f02_bud.bud import (
 from src.f02_bud.bud_tool import (
     get_bud_root_facts_dict as get_facts_dict,
     clear_factunits_from_bud,
-    get_acct_agenda_give_ledger,
+    get_acct_mandate_ledger,
     get_credit_ledger,
 )
 from dataclasses import dataclass
-from copy import deepcopy as copy_deepcopy, copy as copy_copy
+from copy import deepcopy as copy_deepcopy
 
 CELLNODE_QUOTA_DEFAULT = 1000
 
@@ -38,12 +38,13 @@ class CellUnit:
     deal_owner_name: OwnerName = None
     penny: PennyNum = None
     quota: float = None
+    mandate: float = None
     budadjust: BudUnit = None
     budevent_facts: dict[RoadUnit, FactUnit] = None
     found_facts: dict[RoadUnit, FactUnit] = None
     boss_facts: dict[RoadUnit, FactUnit] = None
     _reason_bases: set[RoadUnit] = None
-    _acct_agenda_give_ledger: dict[OwnerName, FundNum] = None
+    _acct_mandate_ledger: dict[OwnerName, FundNum] = None
 
     def get_cell_owner_name(self) -> OwnerName:
         return self.deal_owner_name if self.ancestors == [] else self.ancestors[-1]
@@ -84,6 +85,14 @@ class CellUnit:
         for x_fact in self.found_facts.values():
             self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
 
+    def add_other_facts_to_boss_facts(self):
+        for x_fact in self.found_facts.values():
+            if not self.boss_facts.get(x_fact.base):
+                self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+        for x_fact in self.budevent_facts.values():
+            if not self.boss_facts.get(x_fact.base):
+                self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+
     def filter_facts_by_reason_bases(self):
         to_delete_budevent_fact_keys = set(self.budevent_facts.keys())
         to_delete_found_fact_keys = set(self.found_facts.keys())
@@ -106,16 +115,16 @@ class CellUnit:
         for fact in self.boss_facts.values():
             self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
 
-    def _set_acct_agenda_give_ledger(self):
-        self.budadjust.set_fund_pool(self.quota)
-        acct_agenda_give_ledger = get_acct_agenda_give_ledger(self.budadjust, True)
-        self._acct_agenda_give_ledger = acct_agenda_give_ledger
+    def _set_acct_mandate_ledger(self):
+        self.budadjust.set_fund_pool(self.mandate)
+        acct_agenda_give_ledger = get_acct_mandate_ledger(self.budadjust, True)
+        self._acct_mandate_ledger = acct_agenda_give_ledger
 
-    def calc_acct_agenda_give_ledger(self):
+    def calc_acct_mandate_ledger(self):
         self._reason_bases = self.budadjust.get_reason_bases()
         self.filter_facts_by_reason_bases()
         self.set_budadjust_facts()
-        self._set_acct_agenda_give_ledger()
+        self._set_acct_mandate_ledger()
 
     def get_dict(self) -> dict[str, str | dict]:
         return {
@@ -125,6 +134,7 @@ class CellUnit:
             "deal_owner_name": self.deal_owner_name,
             "penny": self.penny,
             "quota": self.quota,
+            "mandate": self.mandate,
             "budadjust": self.budadjust.get_dict(),
             "budevent_facts": get_dict_from_factunits(self.budevent_facts),
             "found_facts": get_dict_from_factunits(self.found_facts),
@@ -146,9 +156,12 @@ def cellunit_shop(
     budevent_facts: dict[RoadUnit, FactUnit] = None,
     found_facts: dict[RoadUnit, FactUnit] = None,
     boss_facts: dict[RoadUnit, FactUnit] = None,
+    mandate: float = None,
 ) -> CellUnit:
     if quota is None:
         quota = CELLNODE_QUOTA_DEFAULT
+    if mandate is None:
+        mandate = CELLNODE_QUOTA_DEFAULT
     if budadjust is None:
         budadjust = budunit_shop(deal_owner_name)
     reason_bases = budadjust.get_reason_bases() if budadjust else set()
@@ -163,12 +176,13 @@ def cellunit_shop(
         deal_owner_name=deal_owner_name,
         penny=get_1_if_None(penny),
         quota=quota,
+        mandate=mandate,
         budadjust=budadjust,
         budevent_facts=get_empty_dict_if_None(budevent_facts),
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
         _reason_bases=reason_bases,
-        _acct_agenda_give_ledger={},
+        _acct_mandate_ledger={},
     )
 
 
@@ -179,6 +193,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     celldepth = x_dict.get("celldepth")
     penny = x_dict.get("penny")
     quota = x_dict.get("quota")
+    mandate = x_dict.get("mandate")
     budadjust_dict = x_dict.get("budadjust")
     if budadjust_dict:
         budadjust_obj = budunit_get_from_dict(budadjust_dict)
@@ -201,24 +216,30 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
         budevent_facts=budevent_facts,
         found_facts=found_facts,
         boss_facts=boss_facts,
+        mandate=mandate,
     )
 
 
-def create_child_cellunits(parent_cell: CellUnit) -> dict[OwnerName, CellUnit]:
-    parent_cell.calc_acct_agenda_give_ledger()
-    x_dict = {}
-    for child_owner_name, child_quota in parent_cell._acct_agenda_give_ledger.items():
-        if child_quota > 0 and parent_cell.celldepth > 0:
+def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
+    parent_cell.calc_acct_mandate_ledger()
+    x_list = []
+    for child_owner_name in sorted(parent_cell._acct_mandate_ledger):
+        child_mandate = parent_cell._acct_mandate_ledger.get(child_owner_name)
+        if child_mandate > 0 and parent_cell.celldepth > 0:
             child_ancestors = copy_deepcopy(parent_cell.ancestors)
             child_ancestors.append(child_owner_name)
             boss_facts = factunits_get_from_dict(get_facts_dict(parent_cell.budadjust))
-            x_dict[child_owner_name] = cellunit_shop(
+            child_cell = cellunit_shop(
                 deal_owner_name=parent_cell.deal_owner_name,
                 ancestors=child_ancestors,
                 event_int=parent_cell.event_int,
                 celldepth=parent_cell.celldepth - 1,
                 penny=parent_cell.penny,
-                quota=child_quota,
+                mandate=child_mandate,
                 boss_facts=boss_facts,
             )
-    return x_dict
+            x_list.append(child_cell)
+    return x_list
+
+
+# TODO create tool that takes current cell, compares it to parent's generated child cell and takes only boss facts

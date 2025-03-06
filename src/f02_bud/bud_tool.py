@@ -1,4 +1,5 @@
 from src.f00_instrument.dict_toolbox import create_csv
+from src.f01_road.allot import allot_scale
 from src.f01_road.finance import FundNum, get_net, RespectNum
 from src.f01_road.road import AcctName, FiscTitle, RoadUnit
 from src.f02_bud.acct import AcctUnit
@@ -234,13 +235,22 @@ def get_bud_acct_agenda_award_csv(x_bud: BudUnit, settle_bud: bool = None) -> st
     return create_csv(x_headers, x_acct_agenda_award_array)
 
 
-def get_acct_agenda_give_ledger(
+def get_acct_mandate_ledger(
     x_bud: BudUnit, settle_bud: bool = None
 ) -> dict[AcctName, FundNum]:
+    if not x_bud:
+        return {}
+    if len(x_bud.accts) == 0:
+        return {x_bud.owner_name: x_bud.fund_pool}
+
     if settle_bud:
         x_bud.settle_bud()
     bud_accts = x_bud.accts.values()
-    return {x_acct.acct_name: x_acct._fund_agenda_give for x_acct in bud_accts}
+    mandates = {x_acct.acct_name: x_acct._fund_agenda_give for x_acct in bud_accts}
+    mandate_sum = sum(mandates.values())
+    if mandate_sum != x_bud.fund_pool:
+        mandates = allot_scale(mandates, x_bud.fund_pool, x_bud.fund_coin)
+    return mandates
 
 
 def get_acct_agenda_net_ledger(

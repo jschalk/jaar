@@ -608,7 +608,7 @@ class BudUnit:
 
         x_root_title = get_root_title_from_road(parent_road, self.bridge)
         if self.itemroot._item_title != x_root_title:
-            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root title"
+            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root title. Should be {self.itemroot._item_title}."
             raise InvalidBudException(exception_str)
 
         item_kid._bridge = self.bridge

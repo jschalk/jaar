@@ -7,23 +7,18 @@ from src.f00_instrument.file import (
     open_json,
 )
 from src.f00_instrument.dict_toolbox import get_empty_list_if_None
-from src.f01_road.deal import TimeLinePoint
-from src.f01_road.finance import RespectNum
-from src.f01_road.road import AcctName, OwnerName, TitleUnit, EventInt, RoadUnit
+from src.f01_road.road import OwnerName, TitleUnit, EventInt, RoadUnit
 from src.f02_bud.bud import (
     BudUnit,
     get_from_json as budunit_get_from_json,
     budunit_shop,
 )
-from src.f02_bud.bud_tool import get_credit_ledger, get_bud_root_facts_dict
 from src.f05_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
-    create_budpoint_path,
     create_budevent_path,
     create_owners_dir_path,
     create_cell_dir_path,
-    create_cell_json_path,
 )
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
@@ -36,19 +31,6 @@ def save_bud_file(dest_dir: str, filename: str = None, budunit: BudUnit = None):
 def open_bud_file(dest_dir: str, filename: str = None) -> BudUnit:
     if os_path_exists(create_path(dest_dir, filename)):
         return budunit_get_from_json(open_file(dest_dir, filename))
-
-
-def get_timepoint_credit_ledger(
-    fisc_mstr_dir: str,
-    fisc_title: TitleUnit,
-    owner_name: OwnerName,
-    timepoint: TimeLinePoint,
-) -> dict[AcctName, RespectNum]:
-    timepoint_json_path = create_budpoint_path(
-        fisc_mstr_dir, fisc_title, owner_name, timepoint
-    )
-    budpoint = open_bud_file(timepoint_json_path)
-    return get_credit_ledger(budpoint) if budpoint else {}
 
 
 def get_budevent_obj(
@@ -165,4 +147,11 @@ def cellunit_save_to_dir(dirpath: str, x_cell: CellUnit):
 
 def cellunit_get_from_dir(dirpath: str) -> CellUnit:
     cell_json_path = create_path(dirpath, CELLNODE_FILENAME)
-    return cellunit_get_from_dict(open_json(cell_json_path))
+    if os_path_exists(cell_json_path):
+        return cellunit_get_from_dict(open_json(cell_json_path))
+
+
+def create_acct_mandate_ledger_json(dirpath: str):
+    if cell := cellunit_get_from_dir(dirpath):
+        cell.calc_acct_mandate_ledger()
+        save_json(dirpath, "acct_mandate_ledger.json", cell._acct_mandate_ledger)

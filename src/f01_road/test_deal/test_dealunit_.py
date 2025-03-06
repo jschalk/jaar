@@ -5,7 +5,7 @@ from src.f01_road.deal import (
     bridge_str,
     celldepth_str,
     magnitude_str,
-    deal_net_str,
+    deal_acct_nets_str,
     DealUnit,
     dealunit_shop,
     get_dealunit_from_dict,
@@ -21,7 +21,7 @@ def test_str_functions_ReturnObj():
     assert time_int_str() == "time_int"
     assert quota_str() == "quota"
     assert magnitude_str() == "magnitude"
-    assert deal_net_str() == "deal_net"
+    assert deal_acct_nets_str() == "deal_acct_nets"
 
 
 def test_DEFAULT_celldepth():
@@ -38,7 +38,7 @@ def test_DealUnit_Exists():
     assert not x_dealunit.time_int
     assert not x_dealunit.quota
     assert not x_dealunit.celldepth
-    assert not x_dealunit._deal_net
+    assert not x_dealunit._deal_acct_nets
     assert not x_dealunit._magnitude
 
 
@@ -55,14 +55,14 @@ def test_dealunit_shop_ReturnsObj():
     assert t4_dealunit.quota == default_fund_pool()
     assert t4_dealunit._magnitude == 0
     assert t4_dealunit.celldepth == 2
-    assert not t4_dealunit._deal_net
+    assert not t4_dealunit._deal_acct_nets
 
 
-def test_dealunit_shop_ReturnsObjWith_deal_net():
+def test_dealunit_shop_ReturnsObjWith_deal_acct_net():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_deal_net = {"Sue": -4}
+    t4_deal_acct_nets = {"Sue": -4}
     t4_magnitude = 677
     t4_celldepth = 88
 
@@ -70,7 +70,7 @@ def test_dealunit_shop_ReturnsObjWith_deal_net():
     x_dealunit = dealunit_shop(
         time_int=t4_time_int,
         quota=t4_quota,
-        deal_net=t4_deal_net,
+        deal_acct_nets=t4_deal_acct_nets,
         magnitude=t4_magnitude,
         celldepth=t4_celldepth,
     )
@@ -81,63 +81,63 @@ def test_dealunit_shop_ReturnsObjWith_deal_net():
     assert x_dealunit.quota == t4_quota
     assert x_dealunit.celldepth == t4_celldepth
     assert x_dealunit._magnitude == 677
-    assert x_dealunit._deal_net == t4_deal_net
+    assert x_dealunit._deal_acct_nets == t4_deal_acct_nets
 
 
-def test_DealUnit_set_deal_net_SetsAttr():
+def test_DealUnit_set_deal_acct_net_SetsAttr():
     # ESTABLISH
     yao_dealunit = dealunit_shop("yao", 33)
-    assert yao_dealunit._deal_net == {}
+    assert yao_dealunit._deal_acct_nets == {}
 
     # WHEN
     sue_str = "Sue"
-    sue_deal_net = -44
-    yao_dealunit.set_deal_net(sue_str, sue_deal_net)
+    sue_deal_acct_net = -44
+    yao_dealunit.set_deal_acct_net(sue_str, sue_deal_acct_net)
 
     # THEN
-    assert yao_dealunit._deal_net != {}
-    assert yao_dealunit._deal_net.get(sue_str) == sue_deal_net
+    assert yao_dealunit._deal_acct_nets != {}
+    assert yao_dealunit._deal_acct_nets.get(sue_str) == sue_deal_acct_net
 
 
-def test_DealUnit_deal_net_exists_ReturnsObj():
+def test_DealUnit_deal_acct_net_exists_ReturnsObj():
     # ESTABLISH
     yao_dealunit = dealunit_shop("yao", 33)
     sue_str = "Sue"
-    sue_deal_net = -44
-    assert yao_dealunit.deal_net_exists(sue_str) is False
+    sue_deal_acct_net = -44
+    assert yao_dealunit.deal_acct_net_exists(sue_str) is False
 
     # WHEN
-    yao_dealunit.set_deal_net(sue_str, sue_deal_net)
+    yao_dealunit.set_deal_acct_net(sue_str, sue_deal_acct_net)
 
     # THEN
-    assert yao_dealunit.deal_net_exists(sue_str)
+    assert yao_dealunit.deal_acct_net_exists(sue_str)
 
 
-def test_DealUnit_get_deal_net_ReturnsObj():
+def test_DealUnit_get_deal_acct_net_ReturnsObj():
     # ESTABLISH
     yao_dealunit = dealunit_shop("yao", 33)
     sue_str = "Sue"
-    sue_deal_net = -44
-    yao_dealunit.set_deal_net(sue_str, sue_deal_net)
+    sue_deal_acct_net = -44
+    yao_dealunit.set_deal_acct_net(sue_str, sue_deal_acct_net)
 
     # WHEN / THEN
-    assert yao_dealunit.get_deal_net(sue_str)
-    assert yao_dealunit.get_deal_net(sue_str) == sue_deal_net
+    assert yao_dealunit.get_deal_acct_net(sue_str)
+    assert yao_dealunit.get_deal_acct_net(sue_str) == sue_deal_acct_net
 
 
-def test_DealUnit_del_deal_net_SetsAttr():
+def test_DealUnit_del_deal_acct_net_SetsAttr():
     # ESTABLISH
     yao_dealunit = dealunit_shop("yao", 33)
     sue_str = "Sue"
-    sue_deal_net = -44
-    yao_dealunit.set_deal_net(sue_str, sue_deal_net)
-    assert yao_dealunit.deal_net_exists(sue_str)
+    sue_deal_acct_net = -44
+    yao_dealunit.set_deal_acct_net(sue_str, sue_deal_acct_net)
+    assert yao_dealunit.deal_acct_net_exists(sue_str)
 
     # WHEN
-    yao_dealunit.del_deal_net(sue_str)
+    yao_dealunit.del_deal_acct_net(sue_str)
 
     # THEN
-    assert yao_dealunit.deal_net_exists(sue_str) is False
+    assert yao_dealunit.deal_acct_net_exists(sue_str) is False
 
 
 def test_DealUnit_get_dict_ReturnsObj():
@@ -169,9 +169,9 @@ def test_DealUnit_calc_magnitude_SetsAttr_Scenario0():
 def test_DealUnit_calc_magnitude_SetsAttr_Scenario1():
     # ESTABLISH
     t4_time_int = 4
-    t4_deal_net = {"Sue": -4, "Yao": 2, "Zia": 2}
+    t4_deal_acct_nets = {"Sue": -4, "Yao": 2, "Zia": 2}
 
-    t4_dealunit = dealunit_shop(t4_time_int, deal_net=t4_deal_net)
+    t4_dealunit = dealunit_shop(t4_time_int, deal_acct_nets=t4_deal_acct_nets)
     assert t4_dealunit._magnitude == 0
 
     # WHEN
@@ -184,9 +184,9 @@ def test_DealUnit_calc_magnitude_SetsAttr_Scenario1():
 def test_DealUnit_calc_magnitude_SetsAttr_Scenario2():
     # ESTABLISH
     t4_time_int = 4
-    t4_deal_net = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
+    t4_deal_acct_nets = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
 
-    t4_dealunit = dealunit_shop(t4_time_int, deal_net=t4_deal_net)
+    t4_dealunit = dealunit_shop(t4_time_int, deal_acct_nets=t4_deal_acct_nets)
     assert t4_dealunit._magnitude == 0
 
     # WHEN
@@ -199,32 +199,32 @@ def test_DealUnit_calc_magnitude_SetsAttr_Scenario2():
 def test_DealUnit_calc_magnitude_SetsAttr_Scenario3_RaisesError():
     # ESTABLISH
     t4_time_int = 4
-    bob_deal_net = -13
-    sue_deal_net = -3
-    yao_deal_net = 100
-    t4_deal_net = {
-        "Bob": bob_deal_net,
-        "Sue": sue_deal_net,
-        "Yao": yao_deal_net,
+    bob_deal_acct_net = -13
+    sue_deal_acct_net = -3
+    yao_deal_acct_net = 100
+    t4_deal_acct_nets = {
+        "Bob": bob_deal_acct_net,
+        "Sue": sue_deal_acct_net,
+        "Yao": yao_deal_acct_net,
     }
-    t4_dealunit = dealunit_shop(t4_time_int, deal_net=t4_deal_net)
+    t4_dealunit = dealunit_shop(t4_time_int, deal_acct_nets=t4_deal_acct_nets)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         t4_dealunit.calc_magnitude()
-    exception_str = f"magnitude cannot be calculated: debt_deal_net={bob_deal_net+sue_deal_net}, cred_deal_net={yao_deal_net}"
+    exception_str = f"magnitude cannot be calculated: debt_deal_acct_net={bob_deal_acct_net+sue_deal_acct_net}, cred_deal_acct_net={yao_deal_acct_net}"
     assert str(excinfo.value) == exception_str
 
 
-def test_DealUnit_get_dict_ReturnsObjWith_deal_net():
+def test_DealUnit_get_dict_ReturnsObjWith_deal_acct_net():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_deal_net = {"Sue": -4}
+    t4_deal_acct_nets = {"Sue": -4}
     t4_magnitude = 67
     t4_celldepth = 5
     t4_dealunit = dealunit_shop(
-        t4_time_int, t4_quota, t4_deal_net, t4_magnitude, t4_celldepth
+        t4_time_int, t4_quota, t4_deal_acct_nets, t4_magnitude, t4_celldepth
     )
 
     # WHEN
@@ -235,7 +235,7 @@ def test_DealUnit_get_dict_ReturnsObjWith_deal_net():
         time_int_str(): t4_time_int,
         quota_str(): t4_quota,
         magnitude_str(): t4_magnitude,
-        deal_net_str(): t4_deal_net,
+        deal_acct_nets_str(): t4_deal_acct_nets,
         celldepth_str(): t4_celldepth,
     }
 
@@ -244,8 +244,8 @@ def test_DealUnit_get_json_ReturnsObj():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_deal_net = {"Sue": -77}
-    t4_dealunit = dealunit_shop(t4_time_int, t4_quota, t4_deal_net)
+    t4_deal_acct_nets = {"Sue": -77}
+    t4_dealunit = dealunit_shop(t4_time_int, t4_quota, t4_deal_acct_nets)
     t4_dealunit._magnitude = 67
 
     # WHEN
@@ -253,7 +253,7 @@ def test_DealUnit_get_json_ReturnsObj():
 
     # THEN
     static_t4_json = """{
-  "deal_net": {
+  "deal_acct_nets": {
     "Sue": -77
   },
   "magnitude": 67,
@@ -289,11 +289,11 @@ def test_get_dealunit_from_dict_ReturnsObj_Scenario1():
     t4_quota = 55
     t4_magnitude = 65
     t4_celldepth = 33
-    t4_deal_net = {"Sue": -77}
+    t4_deal_acct_nets = {"Sue": -77}
     t4_dealunit = dealunit_shop(
         t4_time_int,
         t4_quota,
-        t4_deal_net,
+        t4_deal_acct_nets,
         t4_magnitude,
         celldepth=t4_celldepth,
     )
@@ -307,7 +307,7 @@ def test_get_dealunit_from_dict_ReturnsObj_Scenario1():
     assert x_dealunit.time_int == t4_time_int
     assert x_dealunit.quota == t4_quota
     assert x_dealunit._magnitude == t4_magnitude
-    assert x_dealunit._deal_net == t4_deal_net
+    assert x_dealunit._deal_acct_nets == t4_deal_acct_nets
     assert x_dealunit.celldepth == t4_celldepth
     assert x_dealunit == t4_dealunit
 
@@ -316,8 +316,8 @@ def test_get_dealunit_from_json_ReturnsObj():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
-    t4_deal_net = {"Sue": -57}
-    t4_dealunit = dealunit_shop(t4_time_int, t4_quota, t4_deal_net)
+    t4_deal_acct_nets = {"Sue": -57}
+    t4_dealunit = dealunit_shop(t4_time_int, t4_quota, t4_deal_acct_nets)
     t4_json = t4_dealunit.get_json()
 
     # WHEN
@@ -327,5 +327,5 @@ def test_get_dealunit_from_json_ReturnsObj():
     assert x_dealunit
     assert x_dealunit.time_int == t4_time_int
     assert x_dealunit.quota == t4_quota
-    assert x_dealunit._deal_net == t4_deal_net
+    assert x_dealunit._deal_acct_nets == t4_deal_acct_nets
     assert x_dealunit == t4_dealunit
