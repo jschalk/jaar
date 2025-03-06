@@ -123,6 +123,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert x_cell_dict.get("budevent_facts") == bob_sue_budevent_fact_dicts
     assert x_cell_dict.get("found_facts") == bob_sue_found_fact_dicts
     assert x_cell_dict.get("boss_facts") == bob_sue_boss_fact_dicts
+    assert len(x_cell_dict) == 11
 
 
 def test_CellUnit_get_json_ReturnsObj():

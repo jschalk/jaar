@@ -152,8 +152,6 @@ def cellunit_get_from_dir(dirpath: str) -> CellUnit:
 
 
 def create_acct_mandate_ledger_json(dirpath: str):
-    cell = cellunit_get_from_dir(dirpath)
-    if cell:
-        print(f"{cell.budadjust.fund_pool=} {cell.mandate=}")
+    if cell := cellunit_get_from_dir(dirpath):
         cell.calc_acct_mandate_ledger()
         save_json(dirpath, "acct_mandate_ledger.json", cell._acct_mandate_ledger)
