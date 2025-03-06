@@ -1,14 +1,7 @@
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import cellunit_shop
-from src.f05_listen.hub_path import (
-    create_budevent_path,
-    create_cell_dir_path as cell_dir,
-)
-from src.f05_listen.hub_tool import (
-    cellunit_save_to_dir,
-    cellunit_get_from_dir,
-    save_arbitrary_budevent,
-)
+from src.f05_listen.hub_path import create_cell_dir_path as cell_dir
+from src.f05_listen.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.example_worlds import (
     get_bob_mop_with_reason_budunit_example,
@@ -18,7 +11,6 @@ from src.f11_world.examples.example_worlds import (
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 
 
-# TODO
 def test_WorldUnit_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
     env_dir_setup_cleanup,
 ):
@@ -85,45 +77,3 @@ def test_WorldUnit_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_Res
     clean_facts = {clean_fact.base: clean_fact}
     assert cellunit_get_from_dir(bob_sue_yao_dir).boss_facts == clean_facts
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == clean_facts
-
-
-# def test_create_budadjusts_SetsFiles_Scenario0_RootOnlyNoFacts(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
-#     mstr_dir = fizz_world._fisc_mstr_dir
-#     a23_str = "accord"
-#     tp5 = 5
-#     bob_str = "Bob"
-#     das = []
-#     event7 = 7
-#     # create cell files
-#     cellunit_add_json_file(mstr_dir, a23_str, bob_str, tp5, event7, das)
-#     mop_budunit = get_bob_mop_with_reason_budunit_example()
-#     # create budevent files
-#     bob7_budevent_path = create_budevent_path(mstr_dir, a23_str, bob_str, event7)
-#     save_file(bob7_budevent_path, None, mop_budunit.get_json())
-#     # create found_facts files
-#     bob5_found_facts = {}
-#     save_json(bob5_found, None, bob5_found_facts)
-#     # create paths for budadjusts
-#     bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     # create paths for adjust_ledger_paths
-#     bob5_budadjust_path = budadjust_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     bob5_adjust_ledger_path = adjust_ledger_path(mstr_dir, a23_str, bob_str, tp5, das)
-#     assert os_path_exists(bob5_budadjust_path) is False
-#     assert os_path_exists(bob5_adjust_ledger_path) is False
-
-#     # WHEN
-#     fizz_world.set_deal_trees_decrees()
-
-#     # THEN
-#     assert os_path_exists(bob5_budadjust_path)
-#     assert os_path_exists(bob5_adjust_ledger_path)
-
-
-# create a world with, cell.json, found facts and bud events
-# for every found_fact change budevent to that fact
-# create agenda (different than if found_fact was not applied)
-# create a budevent such that changing facts changes agenda output
-
-# use graphics_bool to figure out what agenda_ledger output we want to measure

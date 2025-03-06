@@ -13,6 +13,8 @@ from src.f07_fisc.fisc_tool import set_deal_trees_decrees, DecreeUnit
 from src.f07_fisc.examples.example_fiscs import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
+    get_bob_mop_without_reason_budunit_example,
+    get_bob_mop_with_reason_budunit_example,
 )
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 
@@ -46,95 +48,10 @@ def test_DecreeUnit_get_child_cell_ancestors_ReturnsObj_Scenario0():
     assert x_decreeunit.cell_ancestors != child_cell_ancestors
 
 
-def _example_empty_bob_budunit() -> BudUnit:
-    a23_str = "accord23"
-    return budunit_shop("Bob", a23_str)
-
-
-def get_bob_mop_without_reason_budunit_example() -> BudUnit:
-    bob_bud = _example_empty_bob_budunit()
-    casa_str = "casa"
-    floor_str = "floor status"
-    clean_str = "clean"
-    dirty_str = "dirty"
-    mop_str = "mop"
-    casa_road = bob_bud.make_l1_road(casa_str)
-    floor_road = bob_bud.make_road(casa_road, floor_str)
-    clean_road = bob_bud.make_road(floor_road, clean_str)
-    dirty_road = bob_bud.make_road(floor_road, dirty_str)
-    mop_road = bob_bud.make_road(casa_road, mop_str)
-    bob_bud.add_item(casa_road, 1)
-    bob_bud.add_item(floor_road, 1)
-    bob_bud.add_item(clean_road, 1)
-    bob_bud.add_item(dirty_road, 1)
-    bob_bud.add_item(mop_road, 1, pledge=True)
-    return bob_bud
-
-
-def get_bob_mop_with_reason_budunit_example() -> BudUnit:
-    """owner_name: bob, fisc_title: accord23"""
-    bob_bud = get_bob_mop_without_reason_budunit_example()
-    casa_str = "casa"
-    floor_str = "floor status"
-    dirty_str = "dirty"
-    mop_str = "mop"
-    casa_road = bob_bud.make_l1_road(casa_str)
-    floor_road = bob_bud.make_road(casa_road, floor_str)
-    dirty_road = bob_bud.make_road(floor_road, dirty_str)
-    mop_road = bob_bud.make_road(casa_road, mop_str)
-    bob_bud.edit_item_attr(mop_road, reason_base=floor_road, reason_premise=dirty_road)
-    return bob_bud
-
-
-def get_bob_mop_fact_clean_budunit_example() -> BudUnit:
-    bob_bud = get_bob_mop_with_reason_budunit_example()
-    bob_bud.add_acctunit("Bob")
-    casa_road = bob_bud.make_l1_road("casa")
-    floor_road = bob_bud.make_road(casa_road, "floor status")
-    clean_road = bob_bud.make_road(floor_road, "clean")
-    bob_bud.add_fact(floor_road, clean_road)
-    return bob_bud
-
-
-def get_yao_run_with_reason_budunit_example() -> BudUnit:
-    yao_bud = budunit_shop("Yao", "accord23")
-    sport_str = "sport"
-    participate_str = "participate"
-    ski_str = "skiing"
-    run_str = "running"
-    weather_str = "weather"
-    raining_str = "raining"
-    snowing_str = "snowing"
-    sport_road = yao_bud.make_l1_road(sport_str)
-    participate_road = yao_bud.make_road(sport_road, participate_str)
-    ski_road = yao_bud.make_road(participate_road, ski_str)
-    run_road = yao_bud.make_road(participate_road, run_str)
-    weather_road = yao_bud.make_l1_road(weather_str)
-    rain_road = yao_bud.make_road(weather_road, raining_str)
-    snow_road = yao_bud.make_road(weather_road, snowing_str)
-    yao_bud.add_item(participate_road)
-    yao_bud.add_item(ski_road, 5, pledge=True)
-    yao_bud.add_item(run_road, 1, pledge=True)
-    yao_bud.add_item(weather_road)
-    yao_bud.add_item(rain_road)
-    yao_bud.add_item(snow_road)
-    yao_bud.edit_item_attr(ski_road, reason_base=weather_road, reason_premise=snow_road)
-    yao_bud.edit_item_attr(run_road, reason_base=weather_road, reason_premise=rain_road)
-    return yao_bud
-
-
-def get_yao_run_rain_fact_budunit_example() -> BudUnit:
-    yao_bud = get_yao_run_with_reason_budunit_example()
-    weather_road = yao_bud.make_l1_road("weather")
-    rain_road = yao_bud.make_road(weather_road, "raining")
-    yao_bud.add_fact(weather_road, rain_road)
-    return yao_bud
-
-
 # create a world with, cell.json, found facts and bud events
 # for every found_fact change budevent to that fact
 # create agenda (different than if found_fact was not applied)
-def test_set_deal_tree_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
+def test_set_deal_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -159,7 +76,7 @@ def test_set_deal_tree_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 
 
-def test_set_deal_tree_decrees_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fact(
+def test_set_deal_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fact(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -187,7 +104,7 @@ def test_set_deal_tree_decrees_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fact
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
 
 
-def test_set_deal_tree_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
+def test_set_deal_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -220,7 +137,7 @@ def test_set_deal_tree_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
 
 
-def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
+def test_set_deal_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -257,7 +174,7 @@ def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts
     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
 
 
-def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
+def test_set_deal_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -302,7 +219,7 @@ def test_set_deal_tree_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == dirty_facts
 
 
-def test_set_deal_tree_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
+def test_set_deal_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -365,7 +282,7 @@ def test_set_deal_tree_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == dirty_facts
 
 
-def test_set_deal_tree_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
+def test_set_deal_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -428,7 +345,7 @@ def test_set_deal_tree_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
 
-def test_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
+def test_set_deal_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -495,8 +412,7 @@ def test_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCe
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == clean_facts
 
 
-# TODO add test with budevent
-def test_set_deal_tree_decrees_SetsChildCells_Scenario7_NoCell_GetBudEvent(
+def test_set_deal_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBudEvent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

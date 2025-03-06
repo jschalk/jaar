@@ -18,6 +18,7 @@ from src.f05_listen.hub_tool import (
     get_owners_downhill_event_ints,
     cellunit_get_from_dir,
     cellunit_save_to_dir,
+    create_acct_mandate_ledger_json,
 )
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from os import walk as os_walk, sep as os_sep
@@ -291,3 +292,17 @@ def generate_cell_from_decree(
         )
         x_cell.load_budevent(budevent)
         return x_cell
+
+
+def set_deal_tree_mandates(fisc_mstr_dir: str, fisc_title: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    for owner_name in get_level1_dirs(owners_dir):
+        owner_dir = create_path(owners_dir, owner_name)
+        deals_dir = create_path(owner_dir, "deals")
+        for time_int in get_level1_dirs(deals_dir):
+            deal_time_dir = create_path(deals_dir, time_int)
+            for dirpath, dirnames, filenames in os_walk(deal_time_dir):
+                if CELLNODE_FILENAME in set(filenames):
+                    create_acct_mandate_ledger_json(dirpath)

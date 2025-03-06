@@ -41,6 +41,7 @@ from src.f07_fisc.fisc_tool import (
     create_fisc_owners_deal_trees,
     set_deal_trees_found_facts,
     set_deal_trees_decrees,
+    set_deal_tree_mandates,
 )
 from src.f07_fisc.fisc_config import get_fisc_dimens
 from src.f08_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
@@ -927,6 +928,12 @@ def etl_set_deal_trees_decrees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         set_deal_trees_decrees(fisc_mstr_dir, fisc_title)
+
+
+def etl_set_deal_tree_mandates(fisc_mstr_dir: str):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        set_deal_tree_mandates(fisc_mstr_dir, fisc_title)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
