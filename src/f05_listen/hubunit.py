@@ -478,7 +478,7 @@ class HubUnit:
             x_budpoint.set_fund_pool(x_dealunit.quota)
         else:
             x_dealunit = dealunit_shop(x_time_int)
-        x_dealunit._deal_net = get_acct_agenda_net_ledger(x_budpoint, True)
+        x_dealunit._deal_acct_nets = get_acct_agenda_net_ledger(x_budpoint, True)
         self._save_valid_budpoint_file(x_time_int, x_budpoint)
         self._save_valid_deal_file(x_dealunit)
 
