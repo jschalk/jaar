@@ -315,7 +315,6 @@ def set_deal_tree_cell_mandates(fisc_mstr_dir: str, fisc_title: str):
 
 
 def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_title: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
     fiscunit = fiscunit_get_from_dict(open_json(fisc_json_path))
     for brokerunit in fiscunit.brokerunits.values():

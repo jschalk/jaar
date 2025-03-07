@@ -1,19 +1,12 @@
-from src.f00_instrument.file import open_json, save_json, count_dirs_files
-from src.f01_road.allot import allot_nested_scale
-from src.f05_listen.cell import cellunit_shop
+from src.f00_instrument.file import open_json, save_json
+from src.f01_road.deal import tranbook_shop
 from src.f05_listen.hub_path import (
-    CELL_MANDATE_FILENAME,
-    create_cell_dir_path as cell_dir,
     create_cell_acct_mandate_ledger_path as cell_mandate_path,
     create_deal_acct_mandate_ledger_path as deal_mandate_path,
     create_fisc_json_path,
 )
-from src.f05_listen.hub_tool import cellunit_save_to_dir
 from src.f07_fisc.fisc import fiscunit_shop, get_from_dict as fiscunit_get_from_dict
 from src.f07_fisc.fisc_tool import create_deal_mandate_ledgers
-from src.f11_world.examples.example_worlds import (
-    get_bob_mop_with_reason_budunit_example,
-)
 from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
 from os.path import exists as os_path_exists
 
@@ -65,8 +58,12 @@ def test_create_deals_root_cells_Scenaro1_DealExists(env_dir_setup_cleanup):
     expected_deal_acct_nets = {bob_str: deal1_quota}
     assert open_json(bob37_deal_mandate_path) == expected_deal_acct_nets
     gen_a23_fiscunit = fiscunit_get_from_dict(open_json(a23_json_path))
+    gen_a23_fiscunit.set_all_tranbook()
     gen_bob37_dealunit = gen_a23_fiscunit.get_dealunit(bob_str, tp37)
     assert gen_bob37_dealunit._deal_acct_nets == expected_deal_acct_nets
+    expected_a23_all_tranbook = tranbook_shop(a23_str)
+    expected_a23_all_tranbook.add_tranunit(bob_str, bob_str, tp37, 450)
+    assert gen_a23_fiscunit._all_tranbook == expected_a23_all_tranbook
 
 
 def test_create_deals_root_cells_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
@@ -116,3 +113,11 @@ def test_create_deals_root_cells_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
     gen_a23_fiscunit = fiscunit_get_from_dict(open_json(a23_json_path))
     gen_bob37_dealunit = gen_a23_fiscunit.get_dealunit(bob_str, tp37)
     assert gen_bob37_dealunit._deal_acct_nets == expected_deal_acct_nets
+    expected_a23_all_tranbook = tranbook_shop(a23_str)
+    expected_a23_all_tranbook.add_tranunit(bob_str, sue_str, tp37, 84)
+    expected_a23_all_tranbook.add_tranunit(bob_str, xio_str, tp37, 84)
+    expected_a23_all_tranbook.add_tranunit(bob_str, zia_str, tp37, 28)
+    expected_a23_all_tranbook.add_tranunit(bob_str, yao_str, tp37, 254)
+    gen_a23_fiscunit.set_all_tranbook()
+    gen_all_tranbook = gen_a23_fiscunit._all_tranbook
+    assert gen_all_tranbook.tranunits == expected_a23_all_tranbook.tranunits
