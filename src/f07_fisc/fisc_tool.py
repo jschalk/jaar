@@ -316,13 +316,10 @@ def set_deal_tree_cell_mandates(fisc_mstr_dir: str, fisc_title: str):
 
 def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_title)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
     fiscunit = fiscunit_get_from_dict(open_json(fisc_json_path))
     for brokerunit in fiscunit.brokerunits.values():
         for dealunit in brokerunit.deals.values():
-
-            print(f"{dealunit.quota=} {dealunit=}")
             deal_root_dir = create_deal_dir_path(
                 fisc_mstr_dir,
                 fisc_title,
@@ -337,9 +334,6 @@ def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_title: str):
                 depth=dealunit.celldepth,
                 dst_filename=DEAL_MANDATE_FILENAME,
             )
-            print(f"{deal_acct_mandate_ledger=}")
-    #         open_json()
-    #         save_json()
-    # owners_dir = create_path(fisc_dir, "owners")
-    # for owner_name in get_level1_dirs(owners_dir):
-    #     pass
+            save_json(deal_root_dir, DEAL_MANDATE_FILENAME, deal_acct_mandate_ledger)
+            dealunit._deal_acct_nets = deal_acct_mandate_ledger
+    save_json(fisc_json_path, None, fiscunit.get_dict())
