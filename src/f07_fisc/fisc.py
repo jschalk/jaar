@@ -383,7 +383,10 @@ class FiscUnit:
                     x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
         self._all_tranbook = x_tranbook
 
-    def create_deals_root_cells(self, ote1_dict):
+    def create_deals_root_cells(
+        self,
+        ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
+    ):
         for owner_name, brokerunit in self.brokerunits.items():
             for time_int in brokerunit.deals.keys():
                 self._create_deal_root_cell(owner_name, ote1_dict, time_int)

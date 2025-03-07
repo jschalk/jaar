@@ -244,14 +244,21 @@ class WorldUnit:
 
     def calc_fiscal_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
+        print(f"Starting files {count_dirs_files(mstr_dir)}")
         etl_create_deals_root_cells(mstr_dir)
+        print(f"{count_dirs_files(mstr_dir)} etl_create_deals_root_cells")
         etl_create_fisc_cell_trees(mstr_dir)
+        print(f"{count_dirs_files(mstr_dir)} etl_create_fisc_cell_trees")
         etl_set_cell_trees_found_facts(mstr_dir)
+        print(f"{count_dirs_files(mstr_dir)} etl_set_cell_trees_found_facts")
         etl_set_cell_trees_decrees(mstr_dir)
+        print(f"{count_dirs_files(mstr_dir)} etl_set_cell_trees_decrees")
         etl_set_cell_tree_cell_mandates(mstr_dir)
+        print(f"{count_dirs_files(mstr_dir)} etl_set_cell_tree_cell_mandates")
         etl_create_deal_mandate_ledgers(mstr_dir)
+        print(f"{count_dirs_files(mstr_dir)} etl_create_deal_mandate_ledgers")
 
-    def mine_to_forecasts(self):  # sourcery skip: extract-method
+    def mine_to_burdens(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         delete_dir(fisc_mstr_dir)
         print(f"{fisc_mstr_dir=}")
@@ -276,7 +283,7 @@ class WorldUnit:
         # "otz_inx_event_ideas_to_inz_faces 04.5"),
         # "inz_face_ideas_to_csv_files step 05"),
 
-        mine_to_forecasts_steps = [
+        mine_to_burdens_steps = [
             (self.mine_to_train_staging, "step 00.0"),
             (self.train_staging_to_train_agg, "step 01.0"),
             (self.train_agg_to_train_events, "step 02.0"),
@@ -297,7 +304,7 @@ class WorldUnit:
             (self.inz_face_ideas_to_csv_files, "step 05.0"),
         ]
 
-        for etl_func, step_msg in mine_to_forecasts_steps:
+        for etl_func, step_msg in mine_to_burdens_steps:
             if step_msg:
                 print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
             etl_func()
@@ -311,6 +318,9 @@ class WorldUnit:
             self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
             print(f"step 05.2 {count_dirs_files(self.worlds_dir)}")
             self.fisc_csvs_to_jsons()
+            self.fisc_agg_tables2fisc_ote1_agg(cursor)
+            self.fisc_table2fisc_ote1_agg_csvs(cursor)
+            self.fisc_ote1_agg_csvs2jsons()
             print(f"step 06.0 {count_dirs_files(self.worlds_dir)}")
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
@@ -321,6 +331,7 @@ class WorldUnit:
         self.event_inherited_budunits_to_fisc_voice()
         self.fisc_voice_to_fisc_forecast()
         # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
+        self.calc_fiscal_deal_acct_mandate_net_ledgers()
 
     def get_dict(self) -> dict:
         return {
