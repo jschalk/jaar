@@ -26,6 +26,7 @@ from src.f01_road.finance import (
     FundNum,
 )
 from src.f01_road.deal import (
+    DealUnit,
     BrokerUnit,
     brokerunit_shop,
     get_brokerunit_from_dict,
@@ -293,6 +294,12 @@ class FiscUnit:
         x_brokerunit = self.get_brokerunit(owner_name)
         x_brokerunit.add_deal(time_int, quota, celldepth)
 
+    def get_dealunit(self, owner_name: OwnerName, time_int: TimeLinePoint) -> DealUnit:
+        if not self.get_brokerunit(owner_name):
+            return None
+        x_brokerunit = self.get_brokerunit(owner_name)
+        return x_brokerunit.get_deal(time_int)
+
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
             "fisc_title": self.fisc_title,
@@ -388,7 +395,7 @@ class FiscUnit:
         time_int: TimeLinePoint,
     ):
         past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
-        dealunit = self.get_brokerunit(owner_name).get_deal(time_int)
+        dealunit = self.get_dealunit(owner_name, time_int)
         cellunit = cellunit_shop(
             owner_name,
             [owner_name],

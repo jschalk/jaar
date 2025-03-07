@@ -53,7 +53,8 @@ from src.f10_etl.transformers import (
     etl_create_fisc_deal_trees,
     etl_set_deal_trees_found_facts,
     etl_set_deal_trees_decrees,
-    etl_set_deal_tree_mandates,
+    etl_set_deal_tree_cell_mandates,
+    etl_create_deal_mandate_ledgers,
 )
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -235,8 +236,11 @@ class WorldUnit:
     def set_deal_trees_decrees(self):
         etl_set_deal_trees_decrees(self._fisc_mstr_dir)
 
-    def set_deal_tree_mandates(self):
-        etl_set_deal_tree_mandates(self._fisc_mstr_dir)
+    def set_deal_tree_cell_mandates(self):
+        etl_set_deal_tree_cell_mandates(self._fisc_mstr_dir)
+
+    def create_deal_mandate_ledgers(self):
+        etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")

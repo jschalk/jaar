@@ -225,7 +225,6 @@ def test_allot_nested_scale_SetsFiles_Scenario0(env_dir_setup_cleanup):
     sue_alloted_dict = open_json(sue_alloted_path)
     bob_yao_alloted_dict = open_json(bob_yao_alloted_path)
     sue_yao_alloted_dict = open_json(sue_yao_alloted_path)
-
     assert x_alloted_dict == {sue_str: 160, bob_str: 40}
     assert bob_alloted_dict == {sue_str: 20, yao_str: 20}
     assert sue_alloted_dict == {sue_str: 40, yao_str: 120}
@@ -288,13 +287,8 @@ def test_allot_nested_scale_SetsFiles_Scenario1_Custom_output_filename(
     assert os_path_exists(sue_output_path)
     assert os_path_exists(bob_yao_output_path)
     assert os_path_exists(sue_yao_output_path)
-    x_output_dict = open_json(x_output_path)
-    bob_output_dict = open_json(bob_output_path)
-    sue_output_dict = open_json(sue_output_path)
-    bob_yao_output_dict = open_json(bob_yao_output_path)
-    sue_yao_output_dict = open_json(sue_yao_output_path)
-    assert x_output_dict == {sue_str: 160, bob_str: 40}
-    assert bob_output_dict == {sue_str: 20, yao_str: 20}
-    assert sue_output_dict == {sue_str: 40, yao_str: 120}
-    assert bob_yao_output_dict == {sue_str: 4, yao_str: 4, zia_str: 12}
-    assert sue_yao_output_dict == {sue_str: 24, yao_str: 24, xio_str: 72}
+    assert open_json(x_output_path) == {sue_str: 160, bob_str: 40}
+    assert open_json(bob_output_path) == {sue_str: 20, yao_str: 20}
+    assert open_json(sue_output_path) == {sue_str: 40, yao_str: 120}
+    assert open_json(bob_yao_output_path) == {sue_str: 4, yao_str: 4, zia_str: 12}
+    assert open_json(sue_yao_output_path) == {sue_str: 24, yao_str: 24, xio_str: 72}

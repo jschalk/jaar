@@ -117,8 +117,7 @@ class CellUnit:
 
     def _set_acct_mandate_ledger(self):
         self.budadjust.set_fund_pool(self.mandate)
-        acct_agenda_give_ledger = get_acct_mandate_ledger(self.budadjust, True)
-        self._acct_mandate_ledger = acct_agenda_give_ledger
+        self._acct_mandate_ledger = get_acct_mandate_ledger(self.budadjust, True)
 
     def calc_acct_mandate_ledger(self):
         self._reason_bases = self.budadjust.get_reason_bases()
@@ -240,6 +239,3 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
             )
             x_list.append(child_cell)
     return x_list
-
-
-# TODO create tool that takes current cell, compares it to parent's generated child cell and takes only boss facts

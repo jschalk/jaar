@@ -151,7 +151,7 @@ def cellunit_get_from_dir(dirpath: str) -> CellUnit:
         return cellunit_get_from_dict(open_json(cell_json_path))
 
 
-def create_acct_mandate_ledger_json(dirpath: str):
+def create_cell_acct_mandate_ledger_json(dirpath: str):
     if cell := cellunit_get_from_dir(dirpath):
         cell.calc_acct_mandate_ledger()
-        save_json(dirpath, "acct_mandate_ledger.json", cell._acct_mandate_ledger)
+        save_json(dirpath, "cell_acct_mandate_ledger.json", cell._acct_mandate_ledger)

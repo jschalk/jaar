@@ -1,4 +1,5 @@
-from src.f00_instrument.file import create_path, get_level1_dirs
+from src.f00_instrument.file import create_path, get_level1_dirs, open_json, save_json
+from src.f01_road.allot import allot_nested_scale
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.deal import FiscTitle
 from src.f01_road.road import TitleUnit, OwnerName
@@ -7,9 +8,13 @@ from src.f02_bud.reason_item import get_dict_from_factunits
 from src.f05_listen.cell import CellUnit, cellunit_shop
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
+    CELL_MANDATE_FILENAME,
+    DEAL_MANDATE_FILENAME,
     create_cell_dir_path,
     create_cell_json_path,
+    create_deal_dir_path,
     create_budevent_path,
+    create_fisc_json_path,
 )
 from src.f05_listen.hub_tool import (
     get_budevent_obj,
@@ -18,9 +23,10 @@ from src.f05_listen.hub_tool import (
     get_owners_downhill_event_ints,
     cellunit_get_from_dir,
     cellunit_save_to_dir,
-    create_acct_mandate_ledger_json,
+    create_cell_acct_mandate_ledger_json,
 )
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
+from src.f07_fisc.fisc import get_from_dict as fiscunit_get_from_dict
 from os import walk as os_walk, sep as os_sep
 from os.path import exists as os_path_exists, join as os_path_join
 from copy import copy as copy_copy
@@ -294,7 +300,7 @@ def generate_cell_from_decree(
         return x_cell
 
 
-def set_deal_tree_mandates(fisc_mstr_dir: str, fisc_title: str):
+def set_deal_tree_cell_mandates(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -305,4 +311,28 @@ def set_deal_tree_mandates(fisc_mstr_dir: str, fisc_title: str):
             deal_time_dir = create_path(deals_dir, time_int)
             for dirpath, dirnames, filenames in os_walk(deal_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
-                    create_acct_mandate_ledger_json(dirpath)
+                    create_cell_acct_mandate_ledger_json(dirpath)
+
+
+def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_title: str):
+    fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
+    fiscunit = fiscunit_get_from_dict(open_json(fisc_json_path))
+    for brokerunit in fiscunit.brokerunits.values():
+        for dealunit in brokerunit.deals.values():
+            deal_root_dir = create_deal_dir_path(
+                fisc_mstr_dir,
+                fisc_title,
+                owner_name=brokerunit.owner_name,
+                time_int=dealunit.time_int,
+            )
+            deal_acct_mandate_ledger = allot_nested_scale(
+                deal_root_dir,
+                src_filename=CELL_MANDATE_FILENAME,
+                scale_number=dealunit.quota,
+                grain_unit=fiscunit.penny,
+                depth=dealunit.celldepth,
+                dst_filename=DEAL_MANDATE_FILENAME,
+            )
+            save_json(deal_root_dir, DEAL_MANDATE_FILENAME, deal_acct_mandate_ledger)
+            dealunit._deal_acct_nets = deal_acct_mandate_ledger
+    save_json(fisc_json_path, None, fiscunit.get_dict())
