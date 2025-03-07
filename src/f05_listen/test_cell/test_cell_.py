@@ -2,6 +2,14 @@ from src.f01_road.road import create_road
 from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import (
+    ancestors_str,
+    celldepth_str,
+    deal_owner_name_str,
+    mandate_str,
+    budadjust_str,
+    budevent_facts_str,
+    found_facts_str,
+    boss_facts_str,
     CellUnit,
     cellunit_shop,
     CELLNODE_QUOTA_DEFAULT,
@@ -19,6 +27,18 @@ from copy import deepcopy as copy_deepcopy
 def test_CELLNODE_QUOTA_DEFAULT_value():
     # ESTABLISH / WHEN / THEN
     assert CELLNODE_QUOTA_DEFAULT == 1000
+
+
+def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert ancestors_str() == "ancestors"
+    assert celldepth_str() == "celldepth"
+    assert deal_owner_name_str() == "deal_owner_name"
+    assert mandate_str() == "mandate"
+    assert budadjust_str() == "budadjust"
+    assert budevent_facts_str() == "budevent_facts"
+    assert found_facts_str() == "found_facts"
+    assert boss_facts_str() == "boss_facts"
 
 
 def test_CellUnit_Exists():

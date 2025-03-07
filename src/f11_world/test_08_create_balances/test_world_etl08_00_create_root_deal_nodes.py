@@ -1,6 +1,7 @@
 from src.f00_instrument.file import save_file, open_json, save_json, count_dirs_files
 from src.f01_road.deal import celldepth_str, quota_str, DEFAULT_celldepth
 from src.f04_gift.atom_config import event_int_str, penny_str
+from src.f05_listen.cell import deal_owner_name_str, ancestors_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_owners_dir_path,
@@ -76,7 +77,7 @@ def test_WorldUnit_create_deals_root_cells_Scenaro1_DealExists(
     ledger_state_dict = open_json(tp37_cell_json_path)
     print(f"{ledger_state_dict=}")
     assert ledger_state_dict.get(celldepth_str()) == DEFAULT_celldepth
-    assert ledger_state_dict.get("deal_owner_name") == bob_str
+    assert ledger_state_dict.get(deal_owner_name_str()) == bob_str
     assert ledger_state_dict.get(quota_str()) == deal1_quota
     assert ledger_state_dict.get(event_int_str()) == event3
 
@@ -121,10 +122,10 @@ def test_WorldUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEv
     assert os_path_exists(tp37_cell_json_path)
     ledger_state_dict = open_json(tp37_cell_json_path)
     print(f"{ledger_state_dict=}")
-    assert ledger_state_dict.get("ancestors") == [bob_str]
+    assert ledger_state_dict.get(ancestors_str()) == [bob_str]
     assert not ledger_state_dict.get(event_int_str())
     assert ledger_state_dict.get(celldepth_str()) == DEFAULT_celldepth
-    assert ledger_state_dict.get("deal_owner_name") == bob_str
+    assert ledger_state_dict.get(deal_owner_name_str()) == bob_str
     assert ledger_state_dict.get(quota_str()) == deal1_quota
 
 
@@ -174,9 +175,9 @@ def test_WorldUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_ti
     # THEN
     assert os_path_exists(tp37_cell_json_path)
     cell_dict = open_json(tp37_cell_json_path)
-    assert cell_dict.get("ancestors") == [bob_str]
+    assert cell_dict.get(ancestors_str()) == [bob_str]
     assert cell_dict.get(event_int_str()) == event3
     assert cell_dict.get(celldepth_str()) == deal1_celldepth
-    assert cell_dict.get("deal_owner_name") == bob_str
+    assert cell_dict.get(deal_owner_name_str()) == bob_str
     assert cell_dict.get(penny_str()) == a23_penny
     assert cell_dict.get(quota_str()) == deal1_quota
