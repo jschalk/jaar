@@ -200,7 +200,7 @@ def test_Cellunit_get_cell_owner_name_ReturnsObj_Scenario1_WithAncestors():
     assert bob_sue_cell_owner_name == sue_str
 
 
-def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
+def test_CellUnit_eval_budevent_SetsAttr_Scenario0_ParameterIsNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_cellunit = cellunit_shop(yao_str)
@@ -212,7 +212,7 @@ def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
     assert yao_cellunit._reason_bases != set()
 
     # WHEN
-    yao_cellunit.load_budevent(None)
+    yao_cellunit.eval_budevent(None)
 
     # THEN
     assert yao_cellunit.budadjust is None
@@ -220,7 +220,7 @@ def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
     assert yao_cellunit._reason_bases == set()
 
 
-def test_CellUnit_load_budevent_SetsAttr_Scenario1():
+def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
@@ -237,7 +237,7 @@ def test_CellUnit_load_budevent_SetsAttr_Scenario1():
     assert yao_cellunit._reason_bases == set()
 
     # WHEN
-    yao_cellunit.load_budevent(yao_bud)
+    yao_cellunit.eval_budevent(yao_bud)
 
     # THEN
     expected_factunits = {clean_fact.base: clean_fact}

@@ -14,7 +14,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
+def test_WorldUnit_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -37,7 +37,7 @@ def test_WorldUnit_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFa
     assert os_path_exists(bob_bob_mandate_path) is False
 
     # WHEN
-    fizz_world.set_deal_tree_cell_mandates()
+    fizz_world.set_cell_tree_cell_mandates()
 
     # THEN
     assert os_path_exists(bob_root_mandate_path)

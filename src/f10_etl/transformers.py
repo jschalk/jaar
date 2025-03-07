@@ -38,10 +38,10 @@ from src.f07_fisc.fisc import (
     get_from_standard as fiscunit_get_from_standard,
 )
 from src.f07_fisc.fisc_tool import (
-    create_fisc_owners_deal_trees,
-    set_deal_trees_found_facts,
-    set_deal_trees_decrees,
-    set_deal_tree_cell_mandates,
+    create_fisc_owners_cell_trees,
+    set_cell_trees_found_facts,
+    set_cell_trees_decrees,
+    set_cell_tree_cell_mandates,
     create_deal_mandate_ledgers,
 )
 from src.f07_fisc.fisc_config import get_fisc_dimens
@@ -913,28 +913,28 @@ def etl_create_deals_root_cells(fisc_mstr_dir: str):
             x_fiscunit.create_deals_root_cells(ote1_dict)
 
 
-def etl_create_fisc_deal_trees(fisc_mstr_dir: str):
+def etl_create_fisc_cell_trees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title)
+        create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_title)
 
 
-def etl_set_deal_trees_found_facts(fisc_mstr_dir: str):
+def etl_set_cell_trees_found_facts(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        set_deal_trees_found_facts(fisc_mstr_dir, fisc_title)
+        set_cell_trees_found_facts(fisc_mstr_dir, fisc_title)
 
 
-def etl_set_deal_trees_decrees(fisc_mstr_dir: str):
+def etl_set_cell_trees_decrees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        set_deal_trees_decrees(fisc_mstr_dir, fisc_title)
+        set_cell_trees_decrees(fisc_mstr_dir, fisc_title)
 
 
-def etl_set_deal_tree_cell_mandates(fisc_mstr_dir: str):
+def etl_set_cell_tree_cell_mandates(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        set_deal_tree_cell_mandates(fisc_mstr_dir, fisc_title)
+        set_cell_tree_cell_mandates(fisc_mstr_dir, fisc_title)
 
 
 def etl_create_deal_mandate_ledgers(fisc_mstr_dir: str):

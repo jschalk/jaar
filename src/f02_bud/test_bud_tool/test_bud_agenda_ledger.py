@@ -177,14 +177,20 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario1_settle_bud_True():
     sue_bud.add_acctunit(bob_str, 5, 7)
     sue_bud.add_acctunit(xio_str, 2, 3)
     sue_bud.add_acctunit(zia_str, 0, 0)
-    empty_acct_mandate_ledger = {bob_str: 0, xio_str: 0, yao_str: 0, zia_str: 0}
-    assert get_acct_mandate_ledger(sue_bud) == empty_acct_mandate_ledger
+    pool4th = sue_bud.fund_pool / 4
+    pre_settle_acct_mandate_ledger = {
+        bob_str: pool4th,
+        xio_str: pool4th,
+        yao_str: pool4th,
+        zia_str: pool4th,
+    }
+    assert get_acct_mandate_ledger(sue_bud) == pre_settle_acct_mandate_ledger
 
     # WHEN
     sue_bud_settle_net_dict = get_acct_mandate_ledger(sue_bud, settle_bud=True)
 
     # THEN
-    assert sue_bud_settle_net_dict != empty_acct_mandate_ledger
+    assert sue_bud_settle_net_dict != pre_settle_acct_mandate_ledger
     print(f"{sue_bud_settle_net_dict=}")
     print("")
     example_deal_net_dict = {
@@ -227,14 +233,20 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool(
     sue_bud.add_acctunit(bob_str, 5, 7)
     sue_bud.add_acctunit(xio_str, 2, 3)
     sue_bud.add_acctunit(zia_str, 0, 0)
-    empty_acct_mandate_ledger = {bob_str: 0, xio_str: 0, yao_str: 0, zia_str: 0}
-    assert get_acct_mandate_ledger(sue_bud) == empty_acct_mandate_ledger
+    pool4th = sue_bud.fund_pool / 4
+    pre_settle_acct_mandate_ledger = {
+        bob_str: pool4th,
+        xio_str: pool4th,
+        yao_str: pool4th,
+        zia_str: pool4th,
+    }
+    assert get_acct_mandate_ledger(sue_bud) == pre_settle_acct_mandate_ledger
 
     # WHEN
     sue_bud_settle_net_dict = get_acct_mandate_ledger(sue_bud, settle_bud=True)
 
     # THEN
-    assert sue_bud_settle_net_dict != empty_acct_mandate_ledger
+    assert sue_bud_settle_net_dict != pre_settle_acct_mandate_ledger
     print(f"{sue_bud_settle_net_dict=}")
     print("")
     example_deal_net_dict = {
@@ -249,6 +261,36 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool(
     assert sue_bud_settle_net_dict.get(xio_str) != None
     assert sue_bud_settle_net_dict.get(zia_str) != None
     assert sue_bud_settle_net_dict == example_deal_net_dict
+
+
+def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    sue_fund_pool = 800
+    sue_bud.set_fund_pool(sue_fund_pool)
+    casa_str = "casa"
+    floor_str = "floor status"
+    clean_str = "clean"
+    dirty_str = "dirty"
+    mop_str = "mop"
+    casa_road = sue_bud.make_l1_road(casa_str)
+    floor_road = sue_bud.make_road(casa_road, floor_str)
+    clean_road = sue_bud.make_road(floor_road, clean_str)
+    dirty_road = sue_bud.make_road(floor_road, dirty_str)
+    mop_road = sue_bud.make_road(casa_road, mop_str)
+    sue_bud.add_item(floor_road)
+    sue_bud.add_item(clean_road)
+    sue_bud.add_item(dirty_road)
+    sue_bud.add_item(mop_road, pledge=True)
+    sue_bud.edit_item_attr(mop_road, reason_base=floor_road, reason_premise=clean_road)
+    yao_str = "Yao"
+    sue_bud.add_acctunit(yao_str, 13, 5)
+
+    # WHEN
+    sue_bud_settle_net_dict = get_acct_mandate_ledger(sue_bud, settle_bud=True)
+
+    # THEN
+    assert sue_bud_settle_net_dict == {yao_str: sue_fund_pool}
 
 
 def test_get_acct_agenda_net_ledger_ReturnsObj_ScenarioMultipleAcctUnit():

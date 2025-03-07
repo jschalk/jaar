@@ -81,7 +81,7 @@ class CellUnit:
     def get_cell_owner_name(self) -> OwnerName:
         return self.deal_owner_name if self.ancestors == [] else self.ancestors[-1]
 
-    def load_budevent(self, x_bud: BudUnit):
+    def eval_budevent(self, x_bud: BudUnit):
         if not x_bud:
             self.budadjust = None
             self.budevent_facts = {}
@@ -158,6 +158,8 @@ class CellUnit:
         self._set_acct_mandate_ledger()
 
     def get_dict(self) -> dict[str, str | dict]:
+        if not self.budadjust:
+            self.budadjust = budunit_shop(self.get_cell_owner_name())
         return {
             "ancestors": self.ancestors,
             "event_int": self.event_int,

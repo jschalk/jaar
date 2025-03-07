@@ -397,9 +397,9 @@ class FiscUnit:
         past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
         dealunit = self.get_dealunit(owner_name, time_int)
         cellunit = cellunit_shop(
-            owner_name,
-            [owner_name],
-            past_event_int,
+            deal_owner_name=owner_name,
+            ancestors=[],
+            event_int=past_event_int,
             celldepth=dealunit.celldepth,
             quota=dealunit.quota,
             penny=self.penny,
@@ -415,6 +415,8 @@ def _get_ote1_max_past_event_int(
 ) -> EventInt:
     """Using the fisc_ote1_agg grab most recent event int before a given time_int"""
     ote1_owner_dict = ote1_dict.get(owner_name)
+    if not ote1_owner_dict:
+        return None
     event_timepoints = set(ote1_owner_dict.keys())
     if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
         max_past_timepoint = max(past_timepoints)

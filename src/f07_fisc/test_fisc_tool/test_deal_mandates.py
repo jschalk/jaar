@@ -30,7 +30,7 @@ def test_create_deal_mandate_ledgers_Scenaro0_DealEmpty(env_dir_setup_cleanup):
     assert os_path_exists(bob9_deal_mandate_path) is False
 
 
-def test_create_deals_root_cells_Scenaro1_DealExists(env_dir_setup_cleanup):
+def test_create_deal_mandate_ledgers_Scenaro1_DealExists(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
     mstr_dir = get_test_fisc_mstr_dir()
@@ -66,7 +66,7 @@ def test_create_deals_root_cells_Scenaro1_DealExists(env_dir_setup_cleanup):
     assert gen_a23_fiscunit._all_tranbook == expected_a23_all_tranbook
 
 
-def test_create_deals_root_cells_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
+def test_create_deal_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
