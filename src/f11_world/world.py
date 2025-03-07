@@ -242,6 +242,15 @@ class WorldUnit:
     def create_deal_mandate_ledgers(self):
         etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
 
+    def calc_fiscal_deal_acct_mandate_net_ledgers(self):
+        # etl_create_deals_root_cells(self._fisc_mstr_dir)
+        # etl_create_fisc_deal_trees(self._fisc_mstr_dir)
+        # etl_set_deal_trees_found_facts(self._fisc_mstr_dir)
+        # etl_set_deal_trees_decrees(self._fisc_mstr_dir)
+        # etl_set_deal_tree_cell_mandates(self._fisc_mstr_dir)
+        # etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
+        pass
+
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         delete_dir(fisc_mstr_dir)

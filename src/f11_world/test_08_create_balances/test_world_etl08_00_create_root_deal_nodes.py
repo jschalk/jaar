@@ -1,5 +1,5 @@
 from src.f00_instrument.file import save_file, open_json, save_json, count_dirs_files
-from src.f01_road.deal import celldepth_str, quota_str, DEFAULT_celldepth
+from src.f01_road.deal import celldepth_str, quota_str, DEFAULT_CELLDEPTH
 from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import deal_owner_name_str, ancestors_str
 from src.f05_listen.hub_path import (
@@ -74,12 +74,12 @@ def test_WorldUnit_create_deals_root_cells_Scenaro1_DealExists(
 
     # THEN
     assert os_path_exists(tp37_cell_json_path)
-    ledger_state_dict = open_json(tp37_cell_json_path)
-    print(f"{ledger_state_dict=}")
-    assert ledger_state_dict.get(celldepth_str()) == DEFAULT_celldepth
-    assert ledger_state_dict.get(deal_owner_name_str()) == bob_str
-    assert ledger_state_dict.get(quota_str()) == deal1_quota
-    assert ledger_state_dict.get(event_int_str()) == event3
+    cell_dict = open_json(tp37_cell_json_path)
+    print(f"{cell_dict=}")
+    assert cell_dict.get(celldepth_str()) == DEFAULT_CELLDEPTH
+    assert cell_dict.get(deal_owner_name_str()) == bob_str
+    assert cell_dict.get(quota_str()) == deal1_quota
+    assert cell_dict.get(event_int_str()) == event3
 
 
 def test_WorldUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEventsPast(
@@ -120,13 +120,13 @@ def test_WorldUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEv
 
     # THEN
     assert os_path_exists(tp37_cell_json_path)
-    ledger_state_dict = open_json(tp37_cell_json_path)
-    print(f"{ledger_state_dict=}")
-    assert ledger_state_dict.get(ancestors_str()) == [bob_str]
-    assert not ledger_state_dict.get(event_int_str())
-    assert ledger_state_dict.get(celldepth_str()) == DEFAULT_celldepth
-    assert ledger_state_dict.get(deal_owner_name_str()) == bob_str
-    assert ledger_state_dict.get(quota_str()) == deal1_quota
+    cell_dict = open_json(tp37_cell_json_path)
+    print(f"{cell_dict=}")
+    assert cell_dict.get(ancestors_str()) == [bob_str]
+    assert not cell_dict.get(event_int_str())
+    assert cell_dict.get(celldepth_str()) == DEFAULT_CELLDEPTH
+    assert cell_dict.get(deal_owner_name_str()) == bob_str
+    assert cell_dict.get(quota_str()) == deal1_quota
 
 
 def test_WorldUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(

@@ -60,7 +60,7 @@ def fisc_title_str() -> str:
     return "fisc_title"
 
 
-DEFAULT_celldepth = 2
+DEFAULT_CELLDEPTH = 2
 
 
 @dataclass
@@ -254,7 +254,7 @@ class DealUnit:
             x_dict["deal_acct_nets"] = self._deal_acct_nets
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
-        if self.celldepth != DEFAULT_celldepth:
+        if self.celldepth != DEFAULT_CELLDEPTH:
             x_dict["celldepth"] = self.celldepth
         return x_dict
 
@@ -272,7 +272,7 @@ def dealunit_shop(
     if quota is None:
         quota = default_fund_pool()
     if celldepth is None:
-        celldepth = DEFAULT_celldepth
+        celldepth = DEFAULT_CELLDEPTH
 
     return DealUnit(
         time_int=time_int,
