@@ -30,6 +30,38 @@ from copy import deepcopy as copy_deepcopy
 CELLNODE_QUOTA_DEFAULT = 1000
 
 
+def ancestors_str() -> str:
+    return "ancestors"
+
+
+def celldepth_str() -> str:
+    return "celldepth"
+
+
+def deal_owner_name_str() -> str:
+    return "deal_owner_name"
+
+
+def mandate_str() -> str:
+    return "mandate"
+
+
+def budadjust_str() -> str:
+    return "budadjust"
+
+
+def budevent_facts_str() -> str:
+    return "budevent_facts"
+
+
+def found_facts_str() -> str:
+    return "found_facts"
+
+
+def boss_facts_str() -> str:
+    return "boss_facts"
+
+
 @dataclass
 class CellUnit:
     ancestors: list[OwnerName] = None
@@ -49,7 +81,7 @@ class CellUnit:
     def get_cell_owner_name(self) -> OwnerName:
         return self.deal_owner_name if self.ancestors == [] else self.ancestors[-1]
 
-    def load_budevent(self, x_bud: BudUnit):
+    def eval_budevent(self, x_bud: BudUnit):
         if not x_bud:
             self.budadjust = None
             self.budevent_facts = {}
@@ -126,6 +158,8 @@ class CellUnit:
         self._set_acct_mandate_ledger()
 
     def get_dict(self) -> dict[str, str | dict]:
+        if not self.budadjust:
+            self.budadjust = budunit_shop(self.get_cell_owner_name())
         return {
             "ancestors": self.ancestors,
             "event_int": self.event_int,

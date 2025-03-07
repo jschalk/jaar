@@ -2,6 +2,14 @@ from src.f01_road.road import create_road
 from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f05_listen.cell import (
+    ancestors_str,
+    celldepth_str,
+    deal_owner_name_str,
+    mandate_str,
+    budadjust_str,
+    budevent_facts_str,
+    found_facts_str,
+    boss_facts_str,
     CellUnit,
     cellunit_shop,
     CELLNODE_QUOTA_DEFAULT,
@@ -19,6 +27,18 @@ from copy import deepcopy as copy_deepcopy
 def test_CELLNODE_QUOTA_DEFAULT_value():
     # ESTABLISH / WHEN / THEN
     assert CELLNODE_QUOTA_DEFAULT == 1000
+
+
+def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert ancestors_str() == "ancestors"
+    assert celldepth_str() == "celldepth"
+    assert deal_owner_name_str() == "deal_owner_name"
+    assert mandate_str() == "mandate"
+    assert budadjust_str() == "budadjust"
+    assert budevent_facts_str() == "budevent_facts"
+    assert found_facts_str() == "found_facts"
+    assert boss_facts_str() == "boss_facts"
 
 
 def test_CellUnit_Exists():
@@ -180,7 +200,7 @@ def test_Cellunit_get_cell_owner_name_ReturnsObj_Scenario1_WithAncestors():
     assert bob_sue_cell_owner_name == sue_str
 
 
-def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
+def test_CellUnit_eval_budevent_SetsAttr_Scenario0_ParameterIsNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_cellunit = cellunit_shop(yao_str)
@@ -192,7 +212,7 @@ def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
     assert yao_cellunit._reason_bases != set()
 
     # WHEN
-    yao_cellunit.load_budevent(None)
+    yao_cellunit.eval_budevent(None)
 
     # THEN
     assert yao_cellunit.budadjust is None
@@ -200,7 +220,7 @@ def test_CellUnit_load_budevent_SetsAttr_Scenario0_ParameterIsNone():
     assert yao_cellunit._reason_bases == set()
 
 
-def test_CellUnit_load_budevent_SetsAttr_Scenario1():
+def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
@@ -217,7 +237,7 @@ def test_CellUnit_load_budevent_SetsAttr_Scenario1():
     assert yao_cellunit._reason_bases == set()
 
     # WHEN
-    yao_cellunit.load_budevent(yao_bud)
+    yao_cellunit.eval_budevent(yao_bud)
 
     # THEN
     expected_factunits = {clean_fact.base: clean_fact}

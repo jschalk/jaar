@@ -11,7 +11,7 @@ from src.f11_world.examples.example_worlds import (
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 
 
-def test_WorldUnit_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
+def test_WorldUnit_set_cell_tree_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -53,7 +53,7 @@ def test_WorldUnit_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_Res
     )
     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, budadjust=b_sue_ba)
     bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0)
-    bs_yao_cell.load_budevent(bs_yao_ba)
+    bs_yao_cell.eval_budevent(bs_yao_ba)
     bsy_zia_cell = cellunit_shop(bob_str, bsy_zia_ancs, e7, 0, budadjust=bsy_zia_ba)
     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, b_sue_ancs)
@@ -69,7 +69,7 @@ def test_WorldUnit_set_deal_tree_decrees_SetsChildCells_Scenario6_boss_facts_Res
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
     # WHEN
-    fizz_world.set_deal_trees_decrees()
+    fizz_world.set_cell_trees_decrees()
 
     # THEN
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts

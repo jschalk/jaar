@@ -248,8 +248,19 @@ def get_acct_mandate_ledger(
     bud_accts = x_bud.accts.values()
     mandates = {x_acct.acct_name: x_acct._fund_agenda_give for x_acct in bud_accts}
     mandate_sum = sum(mandates.values())
+    if mandate_sum == 0:
+        mandates = set_each_mandate_acct_to_penny_weight(mandates, x_bud.penny)
     if mandate_sum != x_bud.fund_pool:
         mandates = allot_scale(mandates, x_bud.fund_pool, x_bud.fund_coin)
+    return mandates
+
+
+def set_each_mandate_acct_to_penny_weight(
+    mandates: dict[AcctName, FundNum], penny: FundNum
+) -> dict[AcctName, FundNum]:
+    acct_names = set(mandates.keys())
+    for acct_name in acct_names:
+        mandates[acct_name] = penny
     return mandates
 
 

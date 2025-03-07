@@ -10,7 +10,7 @@ from src.f01_road.deal import (
     dealunit_shop,
     get_dealunit_from_dict,
     get_dealunit_from_json,
-    DEFAULT_celldepth,
+    DEFAULT_CELLDEPTH,
 )
 from pytest import raises as pytest_raises
 
@@ -24,9 +24,9 @@ def test_str_functions_ReturnObj():
     assert deal_acct_nets_str() == "deal_acct_nets"
 
 
-def test_DEFAULT_celldepth():
+def test_DEFAULT_CELLDEPTH():
     # ESTABLISH / WHEN / THEN
-    assert DEFAULT_celldepth == 2
+    assert DEFAULT_CELLDEPTH == 2
 
 
 def test_DealUnit_Exists():

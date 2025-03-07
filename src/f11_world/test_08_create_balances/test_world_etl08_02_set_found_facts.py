@@ -11,7 +11,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup, get_test_wor
 from os.path import exists as os_path_exists
 
 
-def test_set_deal_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
+def test_set_cell_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -59,7 +59,7 @@ def test_set_deal_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
     assert cellunit_get_from_dir(bob5_yao_sue_dir).found_facts == {}
 
     # WHEN
-    fizz_world.set_deal_trees_found_facts()
+    fizz_world.set_cell_trees_found_facts()
 
     # THEN
     assert cellunit_get_from_dir(bob5_dir).found_facts == clean_facts

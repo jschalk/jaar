@@ -1,7 +1,20 @@
 from src.f00_instrument.file import create_path, set_dir, open_json
+from src.f01_road.deal import quota_str
 from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
+from src.f04_gift.atom_config import penny_str, event_int_str
+from src.f05_listen.cell import (
+    CELLNODE_QUOTA_DEFAULT,
+    cellunit_shop,
+    ancestors_str,
+    celldepth_str,
+    deal_owner_name_str,
+    mandate_str,
+    budadjust_str,
+    budevent_facts_str,
+    found_facts_str,
+    boss_facts_str,
+)
 from src.f05_listen.hub_path import (
     create_cell_dir_path,
     create_cell_json_path as node_path,
@@ -363,12 +376,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     print(f"{sue7_cell_path=}")
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
-    assert generated_cell_dict.get("ancestors") == das
-    assert generated_cell_dict.get("event_int") == event3
-    assert generated_cell_dict.get("celldepth") == celldepth4
-    assert generated_cell_dict.get("deal_owner_name") == sue_str
-    assert generated_cell_dict.get("penny") == penny6
-    assert generated_cell_dict.get("quota") == quota500
+    assert generated_cell_dict.get(ancestors_str()) == das
+    assert generated_cell_dict.get(event_int_str()) == event3
+    assert generated_cell_dict.get(celldepth_str()) == celldepth4
+    assert generated_cell_dict.get(deal_owner_name_str()) == sue_str
+    assert generated_cell_dict.get(penny_str()) == penny6
+    assert generated_cell_dict.get(quota_str()) == quota500
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
@@ -394,12 +407,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     print(f"{sue7_cell_path=}")
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
-    assert generated_cell_dict.get("ancestors") == das
-    assert generated_cell_dict.get("event_int") == event3
-    assert generated_cell_dict.get("celldepth") == 0
-    assert generated_cell_dict.get("deal_owner_name") == sue_str
-    assert generated_cell_dict.get("penny") == 1
-    assert generated_cell_dict.get("quota") == CELLNODE_QUOTA_DEFAULT
+    assert generated_cell_dict.get(ancestors_str()) == das
+    assert generated_cell_dict.get(event_int_str()) == event3
+    assert generated_cell_dict.get(celldepth_str()) == 0
+    assert generated_cell_dict.get(deal_owner_name_str()) == sue_str
+    assert generated_cell_dict.get(penny_str()) == 1
+    assert generated_cell_dict.get(quota_str()) == CELLNODE_QUOTA_DEFAULT
 
 
 def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):

@@ -11,7 +11,7 @@ from src.f05_listen.hub_tool import (
     cellunit_get_from_dir,
     save_bud_file,
 )
-from src.f07_fisc.fisc_tool import set_deal_tree_cell_mandates
+from src.f07_fisc.fisc_tool import set_cell_tree_cell_mandates
 from src.f07_fisc.examples.example_fiscs import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
@@ -21,7 +21,7 @@ from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_
 from os.path import exists as os_path_exists
 
 
-def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
+def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -43,7 +43,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
     assert os_path_exists(bob_bob_mandate_path) is False
 
     # WHEN
-    set_deal_tree_cell_mandates(mstr_dir, a23_str)
+    set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob_root_mandate_path)
@@ -52,7 +52,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
     assert open_json(bob_bob_mandate_path) == {bob_str: 1000}
 
 
-# def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fact(
+# def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fact(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -74,13 +74,13 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
 
 
-# def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
+# def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -107,13 +107,13 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == clean_facts
 
 
-# def test_set_deal_tree_cell_mandates_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
+# def test_set_cell_tree_cell_mandates_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -143,14 +143,14 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 #     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
 
 
-# def test_set_deal_tree_cell_mandates_SetsChildCells_Scenario3_Depth1And_boss_facts(
+# def test_set_cell_tree_cell_mandates_SetsChildCells_Scenario3_Depth1And_boss_facts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -188,14 +188,14 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts
 #     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == dirty_facts
 
 
-# def test_set_deal_tree_cell_mandates_SetsChildCells_Scenario4_Depth3And_boss_facts(
+# def test_set_cell_tree_cell_mandates_SetsChildCells_Scenario4_Depth3And_boss_facts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -249,7 +249,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts
@@ -258,7 +258,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == dirty_facts
 
 
-# def test_set_deal_tree_cell_mandates_SetsChildCells_Scenario5_Depth2And_boss_facts(
+# def test_set_cell_tree_cell_mandates_SetsChildCells_Scenario5_Depth2And_boss_facts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -312,7 +312,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts
@@ -321,7 +321,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
 
-# def test_set_deal_tree_cell_mandates_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
+# def test_set_cell_tree_cell_mandates_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -362,7 +362,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     )
 #     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, budadjust=b_sue_ba)
 #     bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0)
-#     bs_yao_cell.load_budevent(bs_yao_ba)
+#     bs_yao_cell.eval_budevent(bs_yao_ba)
 #     bsy_zia_cell = cellunit_shop(bob_str, bsy_zia_ancs, e7, 0, budadjust=bsy_zia_ba)
 #     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
 #     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, b_sue_ancs)
@@ -378,7 +378,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts
@@ -388,7 +388,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == clean_facts
 
 
-# def test_set_deal_tree_cell_mandates_SetsChildCells_Scenario7_NoCell_GetBudEvent(
+# def test_set_cell_tree_cell_mandates_SetsChildCells_Scenario7_NoCell_GetBudEvent(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -444,7 +444,7 @@ def test_set_deal_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == {}
 
 #     # WHEN
-#     set_deal_tree_cell_mandates(mstr_dir, a23_str)
+#     set_cell_tree_cell_mandates(mstr_dir, a23_str)
 
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts

@@ -50,10 +50,10 @@ from src.f10_etl.transformers import (
     etl_fisc_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
     etl_create_deals_root_cells,
-    etl_create_fisc_deal_trees,
-    etl_set_deal_trees_found_facts,
-    etl_set_deal_trees_decrees,
-    etl_set_deal_tree_cell_mandates,
+    etl_create_fisc_cell_trees,
+    etl_set_cell_trees_found_facts,
+    etl_set_cell_trees_decrees,
+    etl_set_cell_tree_cell_mandates,
     etl_create_deal_mandate_ledgers,
 )
 from dataclasses import dataclass
@@ -227,20 +227,29 @@ class WorldUnit:
     def create_deals_root_cells(self):
         etl_create_deals_root_cells(self._fisc_mstr_dir)
 
-    def create_fisc_deal_trees(self):
-        etl_create_fisc_deal_trees(self._fisc_mstr_dir)
+    def create_fisc_cell_trees(self):
+        etl_create_fisc_cell_trees(self._fisc_mstr_dir)
 
-    def set_deal_trees_found_facts(self):
-        etl_set_deal_trees_found_facts(self._fisc_mstr_dir)
+    def set_cell_trees_found_facts(self):
+        etl_set_cell_trees_found_facts(self._fisc_mstr_dir)
 
-    def set_deal_trees_decrees(self):
-        etl_set_deal_trees_decrees(self._fisc_mstr_dir)
+    def set_cell_trees_decrees(self):
+        etl_set_cell_trees_decrees(self._fisc_mstr_dir)
 
-    def set_deal_tree_cell_mandates(self):
-        etl_set_deal_tree_cell_mandates(self._fisc_mstr_dir)
+    def set_cell_tree_cell_mandates(self):
+        etl_set_cell_tree_cell_mandates(self._fisc_mstr_dir)
 
     def create_deal_mandate_ledgers(self):
         etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
+
+    def calc_fiscal_deal_acct_mandate_net_ledgers(self):
+        mstr_dir = self._fisc_mstr_dir
+        etl_create_deals_root_cells(mstr_dir)
+        etl_create_fisc_cell_trees(mstr_dir)
+        etl_set_cell_trees_found_facts(mstr_dir)
+        etl_set_cell_trees_decrees(mstr_dir)
+        etl_set_cell_tree_cell_mandates(mstr_dir)
+        etl_create_deal_mandate_ledgers(mstr_dir)
 
     def mine_to_forecasts(self):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")

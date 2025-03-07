@@ -33,7 +33,7 @@ from copy import copy as copy_copy
 from dataclasses import dataclass
 
 
-def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
+def create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_title):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -41,18 +41,18 @@ def create_fisc_owners_deal_trees(fisc_mstr_dir, fisc_title):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
         for time_int in get_level1_dirs(deals_dir):
-            create_deal_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
+            create_cell_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
 
 
-def create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
+def create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
     root_cell_json_path = create_cell_json_path(
         fisc_mstr_dir, fisc_title, deal_owner_name, time_int
     )
     if os_path_exists(root_cell_json_path):
-        _exists_create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int)
+        _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int)
 
 
-def _exists_create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
+def _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
     root_cell_dir = create_cell_dir_path(
         fisc_mstr_dir, fisc_title, deal_owner_name, time_int, []
     )
@@ -63,7 +63,7 @@ def _exists_create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_in
         cell_owner_name = parent_cell.get_cell_owner_name()
         e_int = parent_cell.event_int
         budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, cell_owner_name, e_int)
-        parent_cell.load_budevent(budevent)
+        parent_cell.eval_budevent(budevent)
         parent_cell_dir = create_cell_dir_path(
             fisc_mstr_dir,
             fisc_title,
@@ -71,6 +71,7 @@ def _exists_create_deal_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_in
             time_int,
             parent_cell.ancestors,
         )
+        print(f"{parent_cell.ancestors=}")
         cellunit_save_to_dir(parent_cell_dir, parent_cell)
         parent_quota_ledger = parent_cell.get_budevents_quota_ledger()
         if parent_cell.celldepth > 0:
@@ -114,11 +115,11 @@ def _load_cell_budevent(fisc_mstr_dir, fisc_title, dirpath):
     cell_owner_name = x_cellunit.get_cell_owner_name()
     event_int = x_cellunit.event_int
     budevent = get_budevent_obj(fisc_mstr_dir, fisc_title, cell_owner_name, event_int)
-    x_cellunit.load_budevent(budevent)
+    x_cellunit.eval_budevent(budevent)
     cellunit_save_to_dir(dirpath, x_cellunit)
 
 
-def set_deal_trees_found_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
+def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -156,7 +157,7 @@ def _set_cell_found_facts(deal_time_dir: str, cell_dirs: list[str]):
         cellunit_save_to_dir(output_dir, output_cell)
 
 
-def set_deal_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
+def set_cell_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
@@ -165,7 +166,7 @@ def set_deal_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
         deals_dir = create_path(owner_dir, "deals")
         for time_int in get_level1_dirs(deals_dir):
             deal_time_dir = create_path(deals_dir, time_int)
-            set_deal_tree_decrees(
+            set_cell_tree_decrees(
                 fisc_mstr_dir, fisc_title, owner_name, time_int, deal_time_dir
             )
 
@@ -187,7 +188,7 @@ class DecreeUnit:
         return child_cell_ancestors
 
 
-def set_deal_tree_decrees(
+def set_cell_tree_decrees(
     mstr_dir: str,
     fisc_title: FiscTitle,
     owner_name: OwnerName,
@@ -296,11 +297,11 @@ def generate_cell_from_decree(
             quota=None,
             mandate=x_decree.cell_mandate,
         )
-        x_cell.load_budevent(budevent)
+        x_cell.eval_budevent(budevent)
         return x_cell
 
 
-def set_deal_tree_cell_mandates(fisc_mstr_dir: str, fisc_title: str):
+def set_cell_tree_cell_mandates(fisc_mstr_dir: str, fisc_title: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")

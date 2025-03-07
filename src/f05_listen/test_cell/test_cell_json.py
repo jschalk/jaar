@@ -1,5 +1,18 @@
+from src.f01_road.deal import quota_str
 from src.f02_bud.bud import budunit_shop
-from src.f05_listen.cell import cellunit_shop, cellunit_get_from_dict
+from src.f04_gift.atom_config import event_int_str, penny_str
+from src.f05_listen.cell import (
+    cellunit_shop,
+    cellunit_get_from_dict,
+    ancestors_str,
+    celldepth_str,
+    deal_owner_name_str,
+    mandate_str,
+    budadjust_str,
+    budevent_facts_str,
+    found_facts_str,
+    boss_facts_str,
+)
 from src.f05_listen.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
@@ -34,30 +47,83 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        "ancestors",
-        "event_int",
-        "celldepth",
-        "deal_owner_name",
-        "penny",
-        "quota",
-        "mandate",
-        "budadjust",
-        "budevent_facts",
-        "found_facts",
-        "boss_facts",
+        ancestors_str(),
+        event_int_str(),
+        celldepth_str(),
+        deal_owner_name_str(),
+        penny_str(),
+        quota_str(),
+        mandate_str(),
+        budadjust_str(),
+        budevent_facts_str(),
+        found_facts_str(),
+        boss_facts_str(),
     ]
-    assert x_cell_dict.get("ancestors") == bob_sue_ancestors
-    assert x_cell_dict.get("event_int") == bob_sue_event7
-    assert x_cell_dict.get("celldepth") == bob_sue_celldepth3
-    assert x_cell_dict.get("deal_owner_name") == bob_sue_deal_owner
-    assert x_cell_dict.get("penny") == bob_sue_penny2
-    assert x_cell_dict.get("quota") == bob_sue_quota300
-    assert x_cell_dict.get("mandate") == bob_sue_mandate444
+    assert x_cell_dict.get(ancestors_str()) == bob_sue_ancestors
+    assert x_cell_dict.get(event_int_str()) == bob_sue_event7
+    assert x_cell_dict.get(celldepth_str()) == bob_sue_celldepth3
+    assert x_cell_dict.get(deal_owner_name_str()) == bob_sue_deal_owner
+    assert x_cell_dict.get(penny_str()) == bob_sue_penny2
+    assert x_cell_dict.get(quota_str()) == bob_sue_quota300
+    assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
     bob_sue_bud = budunit_shop(bob_sue_deal_owner)
-    assert x_cell_dict.get("budadjust") == bob_sue_bud.get_dict()
-    assert x_cell_dict.get("budevent_facts") == {}
-    assert x_cell_dict.get("found_facts") == {}
-    assert x_cell_dict.get("boss_facts") == {}
+    assert x_cell_dict.get(budadjust_str()) == bob_sue_bud.get_dict()
+    assert x_cell_dict.get(budevent_facts_str()) == {}
+    assert x_cell_dict.get(found_facts_str()) == {}
+    assert x_cell_dict.get(boss_facts_str()) == {}
+
+
+def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyBudAdjust():
+    # ESTABLISH
+    yao_str = "Yao"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_sue_ancestors = [bob_str, sue_str]
+    bob_sue_event7 = 7
+    bob_sue_celldepth3 = 3
+    bob_sue_penny2 = 2
+    bob_sue_quota300 = 300
+    bob_sue_mandate444 = 444
+    x_cellunit = cellunit_shop(
+        yao_str,
+        bob_sue_ancestors,
+        bob_sue_event7,
+        bob_sue_celldepth3,
+        bob_sue_penny2,
+        bob_sue_quota300,
+        mandate=bob_sue_mandate444,
+    )
+    x_cellunit.budadjust = None
+
+    # WHEN
+    x_cell_dict = x_cellunit.get_dict()
+
+    # THEN
+    assert list(x_cell_dict.keys()) == [
+        ancestors_str(),
+        event_int_str(),
+        celldepth_str(),
+        deal_owner_name_str(),
+        penny_str(),
+        quota_str(),
+        mandate_str(),
+        budadjust_str(),
+        budevent_facts_str(),
+        found_facts_str(),
+        boss_facts_str(),
+    ]
+    assert x_cell_dict.get(ancestors_str()) == bob_sue_ancestors
+    assert x_cell_dict.get(event_int_str()) == bob_sue_event7
+    assert x_cell_dict.get(celldepth_str()) == bob_sue_celldepth3
+    assert x_cell_dict.get(deal_owner_name_str()) == yao_str
+    assert x_cell_dict.get(penny_str()) == bob_sue_penny2
+    assert x_cell_dict.get(quota_str()) == bob_sue_quota300
+    assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
+    bob_sue_bud = budunit_shop(sue_str)
+    assert x_cell_dict.get(budadjust_str()) == bob_sue_bud.get_dict()
+    assert x_cell_dict.get(budevent_facts_str()) == {}
+    assert x_cell_dict.get(found_facts_str()) == {}
+    assert x_cell_dict.get(boss_facts_str()) == {}
 
 
 def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
@@ -97,32 +163,34 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        "ancestors",
-        "event_int",
-        "celldepth",
-        "deal_owner_name",
-        "penny",
-        "quota",
-        "mandate",
-        "budadjust",
-        "budevent_facts",
-        "found_facts",
-        "boss_facts",
+        ancestors_str(),
+        event_int_str(),
+        celldepth_str(),
+        deal_owner_name_str(),
+        penny_str(),
+        quota_str(),
+        mandate_str(),
+        budadjust_str(),
+        budevent_facts_str(),
+        found_facts_str(),
+        boss_facts_str(),
     ]
-    assert x_cell_dict.get("ancestors") == bob_sue_ancestors
-    assert x_cell_dict.get("event_int") == bob_sue_event7
-    assert x_cell_dict.get("celldepth") == bob_sue_celldepth3
-    assert x_cell_dict.get("deal_owner_name") == bob_sue_deal_owner
-    assert x_cell_dict.get("penny") == bob_sue_penny2
-    assert x_cell_dict.get("quota") == bob_sue_quota300
-    assert x_cell_dict.get("mandate") == bob_sue_mandate444
-    assert x_cell_dict.get("budadjust") == budunit_shop(bob_sue_deal_owner).get_dict()
+    assert x_cell_dict.get(ancestors_str()) == bob_sue_ancestors
+    assert x_cell_dict.get(event_int_str()) == bob_sue_event7
+    assert x_cell_dict.get(celldepth_str()) == bob_sue_celldepth3
+    assert x_cell_dict.get(deal_owner_name_str()) == bob_sue_deal_owner
+    assert x_cell_dict.get(penny_str()) == bob_sue_penny2
+    assert x_cell_dict.get(quota_str()) == bob_sue_quota300
+    assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
+    assert (
+        x_cell_dict.get(budadjust_str()) == budunit_shop(bob_sue_deal_owner).get_dict()
+    )
     bob_sue_budevent_fact_dicts = {clean_fact.base: clean_fact.get_dict()}
     bob_sue_found_fact_dicts = {dirty_fact.base: dirty_fact.get_dict()}
     bob_sue_boss_fact_dicts = {sky_blue_fact.base: sky_blue_fact.get_dict()}
-    assert x_cell_dict.get("budevent_facts") == bob_sue_budevent_fact_dicts
-    assert x_cell_dict.get("found_facts") == bob_sue_found_fact_dicts
-    assert x_cell_dict.get("boss_facts") == bob_sue_boss_fact_dicts
+    assert x_cell_dict.get(budevent_facts_str()) == bob_sue_budevent_fact_dicts
+    assert x_cell_dict.get(found_facts_str()) == bob_sue_found_fact_dicts
+    assert x_cell_dict.get(boss_facts_str()) == bob_sue_boss_fact_dicts
     assert len(x_cell_dict) == 11
 
 
@@ -168,7 +236,7 @@ def test_CellUnit_get_json_ReturnsObj():
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
     # ESTABLISH
     yao_str = "Yao"
-    x_dict = {"deal_owner_name": yao_str}
+    x_dict = {deal_owner_name_str(): yao_str}
 
     # WHEN
     gen_cellunit = cellunit_get_from_dict(x_dict)

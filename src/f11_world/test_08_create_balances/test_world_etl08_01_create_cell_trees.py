@@ -1,4 +1,6 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file import open_json, save_json, create_path
+from src.f01_road.deal import owner_name_str, quota_str, celldepth_str
+from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import cellunit_shop
 from src.f05_listen.hub_path import (
     create_cell_dir_path as cell_dir,
@@ -9,14 +11,17 @@ from src.f05_listen.hub_tool import (
     cellunit_save_to_dir,
     cellunit_get_from_dir,
 )
-from src.f07_fisc.fisc_tool import create_deal_tree
-from src.f07_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
+from src.f11_world.world import worldunit_shop
+from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_create_deal_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
+def test_worldunit_create_fisc_cell_trees_Scenaro0_timepoint_Empty(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
     tp37 = 37
@@ -26,15 +31,16 @@ def test_create_deal_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
     assert os_path_exists(a23_bob_tp37_path) is False
 
     # WHEN
-    create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
+    fizz_world.create_fisc_cell_trees()
 
     # THEN
     assert os_path_exists(a23_bob_tp37_path) is False
 
 
-def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
+def test_worldunit_create_fisc_cell_trees_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -49,7 +55,7 @@ def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     assert cellunit_get_from_dir(bob37_root_cell_dir).get_budevents_quota_ledger() == {}
 
     # WHEN
-    create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
+    fizz_world.create_fisc_cell_trees()
 
     # THEN
     bob37_root_cell = cellunit_get_from_dir(bob37_root_cell_dir)
@@ -57,9 +63,10 @@ def test_create_deal_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     assert generated_bob37_quota_ledger == {"Bob": 225, yao_str: 225}
 
 
-def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
+def test_worldunit_create_fisc_cell_trees_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -91,7 +98,7 @@ def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert cellunit_get_from_dir(bob37_dir).get_budevents_quota_ledger() == {}
 
     # WHEN
-    create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
+    fizz_world.create_fisc_cell_trees()
 
     # THEN
     print(f"{bob37_bob_node_path=}")
@@ -142,9 +149,12 @@ def test_create_deal_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
-def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
+def test_worldunit_create_fisc_cell_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -178,7 +188,7 @@ def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert os_path_exists(bob37_zia_node_path) is False
 
     # WHEN
-    create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
+    fizz_world.create_fisc_cell_trees()
 
     # THEN
     print(f"{bob37_bob_node_path=}")
@@ -229,11 +239,12 @@ def test_create_deal_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
-def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
+def test_worldunit_create_fisc_cell_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -269,7 +280,7 @@ def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     assert os_path_exists(bob37_zia_node_path) is False
 
     # WHEN
-    create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
+    fizz_world.create_fisc_cell_trees()
 
     # THEN
     print(f"{bob37_bob_node_path=}")
@@ -304,11 +315,12 @@ def test_create_deal_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
 
 
-def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
+def test_worldunit_create_fisc_cell_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fizz_world = worldunit_shop("fizz")
+    fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -343,7 +355,7 @@ def test_create_deal_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     assert os_path_exists(bob37_zia_node_path) is False
 
     # WHEN
-    create_deal_tree(fisc_mstr_dir, a23_str, bob_str, tp37)
+    fizz_world.create_fisc_cell_trees()
 
     # THEN
     print(f"{bob37_bob_node_path=}")
