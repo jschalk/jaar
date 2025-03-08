@@ -87,7 +87,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     print(f"{x_cols.unit_agg_csv_header=}")
     fiscunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
-{accord45_str},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_present_time},{a45_bridge},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_timeline_title}
+{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_present_time},{a45_bridge}
 """
     save_file(fisc_mstr_dir, x_fisc.unit_agg_csv_filename, fiscunit_agg_csv_str)
     save_file(fisc_mstr_dir, x_fisc.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)

@@ -326,7 +326,7 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
 def create_idea_brick_csvs_from_fisc_objs(
     x_fiscs=dict[FiscTitle, FiscUnit]
 ) -> dict[str, str]:
-    br00000_csv = "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title\n"
+    br00000_csv = "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge\n"
     br00001_csv = "fisc_title,owner_name,time_int,quota,celldepth\n"
     br00002_csv = "fisc_title,owner_name,acct_name,time_int,amount\n"
     br00003_csv = "fisc_title,hour_title,cumlative_minute\n"
@@ -341,15 +341,15 @@ def create_idea_brick_csvs_from_fisc_objs(
             x_bridge = x_fisc.bridge
         br00000_row = [
             x_fisc.fisc_title,
+            str(x_fisc.timeline.timeline_title),
+            str(x_fisc.timeline.c400_number),
+            str(x_fisc.timeline.yr1_jan1_offset),
+            str(x_fisc.timeline.monthday_distortion),
             str(x_fisc.fund_coin),
             str(x_fisc.penny),
             str(x_fisc.respect_bit),
             str(x_fisc.present_time),
             x_bridge,
-            str(x_fisc.timeline.c400_number),
-            str(x_fisc.timeline.yr1_jan1_offset),
-            str(x_fisc.timeline.monthday_distortion),
-            str(x_fisc.timeline.timeline_title),
         ]
         br00000_csv += csv_delimiter.join(br00000_row)
         br00000_csv += "\n"

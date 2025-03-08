@@ -20,15 +20,15 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 def get_fiscunit_sorted_args() -> list[str]:
     return [
         "fisc_title",
+        "timeline_title",
+        "c400_number",
+        "yr1_jan1_offset",
+        "monthday_distortion",
         "fund_coin",
         "penny",
         "respect_bit",
         "present_time",
         "bridge",
-        "c400_number",
-        "yr1_jan1_offset",
-        "monthday_distortion",
-        "timeline_title",
     ]
 
 
@@ -109,15 +109,15 @@ class FiscPrimeColumnsRef:
     def __init__(self):
         self.unit_agg_columns = [
             "fisc_title",
+            "timeline_title",
+            "c400_number",
+            "yr1_jan1_offset",
+            "monthday_distortion",
             "fund_coin",
             "penny",
             "respect_bit",
             "present_time",
             "bridge",
-            "c400_number",
-            "yr1_jan1_offset",
-            "monthday_distortion",
-            "timeline_title",
         ]
         self.deal_agg_columns = [
             "fisc_title",
@@ -139,7 +139,7 @@ class FiscPrimeColumnsRef:
 
         _front_cols = ["idea_number", "face_name", "event_int"]
         _back_cols = ["error_message"]
-        self.unit_agg_csv_header = "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title"
+        self.unit_agg_csv_header = "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge"
         self.deal_agg_csv_header = "fisc_title,owner_name,time_int,quota,celldepth"
         self.cash_agg_csv_header = "fisc_title,owner_name,acct_name,time_int,amount"
         self.hour_agg_csv_header = "fisc_title,hour_title,cumlative_minute"
@@ -151,7 +151,7 @@ class FiscPrimeColumnsRef:
         self.hour_staging_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
         self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
-        self.unit_staging_csv_header = """idea_number,face_name,event_int,fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title,error_message"""
+        self.unit_staging_csv_header = """idea_number,face_name,event_int,fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge,error_message"""
         self.deal_staging_csv_header = """idea_number,face_name,event_int,fisc_title,owner_name,time_int,quota,celldepth,error_message"""
         self.cash_staging_csv_header = """idea_number,face_name,event_int,fisc_title,owner_name,acct_name,time_int,amount,error_message"""
         self.hour_staging_csv_header = """idea_number,face_name,event_int,fisc_title,hour_title,cumlative_minute,error_message"""

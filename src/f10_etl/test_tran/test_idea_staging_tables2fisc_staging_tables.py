@@ -252,7 +252,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario2_Idea_br00000_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
+INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()})
 VALUES
   ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
 , ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
@@ -349,11 +349,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{timeline_title_str()})
+INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
-, ('{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
-, ('{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}')
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -374,15 +374,15 @@ VALUES
             sue_inx,  # face_name
             event3,  # event_int
             accord23_str,  # fisc_title
+            a23_timeline_title,  # timeline_title
+            a23_c400_number,  # c400_number
+            a23_yr1_jan1_offset,  # yr1_jan1_offset
+            a23_monthday_distortion,  # monthday_distortion
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
             a23_present_time,  # present_time
             a23_bridge,  # bridge
-            a23_c400_number,  # c400_number
-            a23_yr1_jan1_offset,  # yr1_jan1_offset
-            a23_monthday_distortion,  # monthday_distortion
-            a23_timeline_title,  # timeline_title
             None,  # note
         )
         expected_row1 = (
@@ -390,15 +390,15 @@ VALUES
             sue_inx,  # face_name
             event7,  # event_int
             accord23_str,  # fisc_title
+            a23_timeline_title,  # timeline_title
+            a23_c400_number,  # c400_number
+            a23_yr1_jan1_offset,  # yr1_jan1_offset
+            a23_monthday_distortion,  # monthday_distortion
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
             a23_present_time,  # present_time
             a23_bridge,  # bridge
-            a23_c400_number,  # c400_number
-            a23_yr1_jan1_offset,  # yr1_jan1_offset
-            a23_monthday_distortion,  # monthday_distortion
-            a23_timeline_title,  # timeline_title
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")

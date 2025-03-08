@@ -413,15 +413,15 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     accord56_bridge = "/"
     accord56 = [
         accord56_str,
+        "",  # accord56_timeline_title_str,
+        "",  # accord56_c400_number_str,
+        "",  # accord56_yr1_jan1_offset_str,
+        "",  # accord56_monthday_distortion_str,
         accord56_fund_coin,
         accord56_penny,
         accord56_respect_bit,
         accord56_present_time,
         accord56_bridge,
-        "",  # accord56_c400_number_str,
-        "",  # accord56_yr1_jan1_offset_str,
-        "",  # accord56_monthday_distortion_str,
-        "",  # accord56_timeline_title_str,
     ]
     print(f"{xc.unit_agg_columns=}")
     fiscunit_rows = [accord56]
@@ -470,15 +470,15 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     accord56_yr1_jan1_offset = 555
     accord56 = [
         accord56_str,
+        accord56_timeline_title,
+        accord56_c400_number,
+        accord56_yr1_jan1_offset,
+        accord56_monthday_distortion,
         "",  # accord56_fund_coin,
         "",  # accord56_penny,
         "",  # accord56_respect_bit,
         "",  # accord56_present_time,
         "",  # accord56_bridge,
-        accord56_c400_number,
-        accord56_yr1_jan1_offset,
-        accord56_monthday_distortion,
-        accord56_timeline_title,
     ]
     fiscunit_rows = [accord56]
     fiscunit_df = DataFrame(fiscunit_rows, columns=xc.unit_agg_columns)

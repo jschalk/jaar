@@ -325,15 +325,15 @@
       "fisc_title": {}
     },
     "jvalues": {
+      "timeline_title": {},
       "c400_number": {},
+      "monthday_distortion": {},
+      "yr1_jan1_offset": {},
       "present_time": {},
       "fund_coin": {},
-      "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "timeline_title": {},
-      "bridge": {},
-      "yr1_jan1_offset": {}
+      "bridge": {}
     }
   }
 }
