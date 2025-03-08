@@ -715,5 +715,6 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario7_fisc_dealunit(
     expected_fiscunit.add_dealunit(sue_str, t3, quota3)
     expected_fiscunit.add_dealunit(sue_str, t7, quota7)
     print(f"{expected_fiscunit.brokerunits=}")
-    print(f"{expected_fiscunit=}")
+    print(f"{accord56_fiscunit.brokerunits=}")
+    # print(f"{expected_fiscunit=}")
     assert accord56_fiscunit.brokerunits == expected_fiscunit.brokerunits

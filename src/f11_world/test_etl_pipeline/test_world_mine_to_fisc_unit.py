@@ -82,7 +82,7 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
     accord23_str = "accord23"
     tp37 = 37
     sue_quota = 235
-    sue_celldepth = 1
+    sue_celldepth = 3
     br1row0 = [sue_str, event_2, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
@@ -133,7 +133,7 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
     assert os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 87
+    assert count_dirs_files(fizz_world.worlds_dir) == 91
 
 
 # def test_WorldUnit_mine_to_burdens_CreatestrainFiles(env_dir_setup_cleanup):

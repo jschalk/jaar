@@ -18,7 +18,11 @@ from src.f09_idea.idea_config import (
     get_idearef_from_file,
     get_idea_format_headers,
 )
-from src.f09_idea.idea_db_tool import save_dataframe_to_csv, get_custom_sorted_list
+from src.f09_idea.idea_db_tool import (
+    save_dataframe_to_csv,
+    get_custom_sorted_list,
+    if_nan_return_None,
+)
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
@@ -303,6 +307,7 @@ def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
             owner_name=row["owner_name"],
             time_int=row["time_int"],
             quota=row["quota"],
+            celldepth=if_nan_return_None(row["celldepth"]),
             allow_prev_to_present_time_entry=True,
         )
 
@@ -321,14 +326,69 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
 def create_idea_brick_csvs_from_fisc_objs(
     x_fiscs=dict[FiscTitle, FiscUnit]
 ) -> dict[str, str]:
-    br00000_csv = "c400_number,present_time,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset"
-    br00001_csv = ""
-    br00002_csv = ""
-    br00003_csv = ""
-    br00004_csv = ""
-    br00005_csv = ""
+    br00000_csv = "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title\n"
+    br00001_csv = "fisc_title,owner_name,time_int,quota,celldepth\n"
+    br00002_csv = "fisc_title,owner_name,acct_name,time_int,amount\n"
+    br00003_csv = "fisc_title,hour_title,cumlative_minute\n"
+    br00004_csv = "fisc_title,month_title,cumlative_day\n"
+    br00005_csv = "fisc_title,weekday_title,weekday_order\n"
 
-    x_dict = {
+    csv_delimiter = ","
+    for x_fisc in x_fiscs.values():
+        if x_fisc.bridge == csv_delimiter:
+            x_bridge = f"""\"{str(x_fisc.bridge)}\""""
+        else:
+            x_bridge = x_fisc.bridge
+        br00000_row = [
+            x_fisc.fisc_title,
+            str(x_fisc.fund_coin),
+            str(x_fisc.penny),
+            str(x_fisc.respect_bit),
+            str(x_fisc.present_time),
+            x_bridge,
+            str(x_fisc.timeline.c400_number),
+            str(x_fisc.timeline.yr1_jan1_offset),
+            str(x_fisc.timeline.monthday_distortion),
+            str(x_fisc.timeline.timeline_title),
+        ]
+        br00000_csv += csv_delimiter.join(br00000_row)
+        br00000_csv += "\n"
+
+        for broker_owner_name, brokerunits in x_fisc.brokerunits.items():
+            for time_int, dealunit in brokerunits.deals.items():
+                br00001_row = [
+                    x_fisc.fisc_title,
+                    broker_owner_name,
+                    str(time_int),
+                    str(dealunit.quota),
+                    str(dealunit.celldepth),
+                ]
+                br00001_csv += csv_delimiter.join(br00001_row)
+                br00001_csv += "\n"
+
+        for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
+            for acct_name, time_dict in tranunit.items():
+                for time_int, amount in time_dict.items():
+                    br00002_row = [
+                        x_fisc.fisc_title,
+                        owner_name,
+                        acct_name,
+                        str(time_int),
+                        str(amount),
+                    ]
+                    br00002_csv += csv_delimiter.join(br00002_row)
+                    br00002_csv += "\n"
+
+        for hour_item in x_fisc.timeline.hours_config:
+            br00003_row = [
+                x_fisc.fisc_title,
+                hour_item[0],
+                str(hour_item[1]),
+            ]
+            br00003_csv += csv_delimiter.join(br00003_row)
+            br00003_csv += "\n"
+
+    return {
         "br00000": br00000_csv,
         "br00001": br00001_csv,
         "br00002": br00002_csv,
@@ -336,4 +396,3 @@ def create_idea_brick_csvs_from_fisc_objs(
         "br00004": br00004_csv,
         "br00005": br00005_csv,
     }
-    return x_dict

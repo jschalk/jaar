@@ -57,7 +57,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert x_fiscunits
     assert x_fiscunits.get(accord23_str) != None
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
-    accord23_fiscunit = fiscunit_shop(
+    expected_accord23_fiscunit = fiscunit_shop(
         present_time=5500,
         fisc_title=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
@@ -67,13 +67,14 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
         bridge=slash_str,
         timeline=creg_timelineunit,
     )
-    accord23_fiscunit.add_dealunit(
+    expected_accord23_fiscunit.add_dealunit(
         owner_name="Sue",
         time_int=777,
         quota=445,
         allow_prev_to_present_time_entry=True,
+        celldepth=5,
     )
-    accord23_fiscunit.add_cashpurchase(
+    expected_accord23_fiscunit.add_cashpurchase(
         owner_name="Zia",
         acct_name="Bob",
         time_int=777,
@@ -85,13 +86,14 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert gen_fiscunit.penny == x_penny
     assert gen_fiscunit.fisc_title == accord23_str
     assert gen_fiscunit.fisc_mstr_dir == x_fiscs_dir
-    assert gen_fiscunit.timeline == accord23_fiscunit.timeline
-    assert gen_fiscunit.brokerunits == accord23_fiscunit.brokerunits
-    assert gen_fiscunit.cashbook.tranunits == accord23_fiscunit.cashbook.tranunits
+    assert gen_fiscunit.timeline == expected_accord23_fiscunit.timeline
+    assert gen_fiscunit.brokerunits == expected_accord23_fiscunit.brokerunits
+    a23_tranunits = expected_accord23_fiscunit.cashbook.tranunits
+    assert gen_fiscunit.cashbook.tranunits == a23_tranunits
     print(f"{gen_fiscunit.brokerunits=}")
     assert len(gen_fiscunit.brokerunits) == 1
     assert len(gen_fiscunit.cashbook.tranunits) == 1
-    assert gen_fiscunit == accord23_fiscunit
+    assert gen_fiscunit == expected_accord23_fiscunit
 
 
 # given a dataframe, build a fisc unit
@@ -178,57 +180,48 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     # assert five_fiscunit == jeffy45_fiscunit
 
 
-# # given a dataframe, build a fisc unit
-# def test_create_idea_brick_csvs_from_fisc_objs_ReturnsObj_Scenario0_EmptyFiscUnit(
-#     idea_env_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     br00000_df = get_ex2_br00000_df()
-#     br00001_df = get_ex2_br00001_df()
-#     br00002_df = get_ex2_br00002_df()
-#     br00003_df = get_ex2_br00003_df()
-#     br00004_df = get_ex2_br00004_df()
-#     br00005_df = get_ex2_br00005_df()
-#     x_fund_coin = 55
-#     x_respect_bit = 66
-#     x_penny = 77
-#     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
-#     accord23_str = "accord23"
-#     slash_str = "/"
-#     x_fiscunits = fisc_build_from_df(
-#         br00000_df,
-#         br00001_df,
-#         br00002_df,
-#         br00003_df,
-#         br00004_df,
-#         br00005_df,
-#         x_fund_coin,
-#         x_respect_bit,
-#         x_penny,
-#         x_fiscs_dir,
-#     )
+# given a dataframe, build a fisc unit
+def test_create_idea_brick_csvs_from_fisc_objs_ReturnsObj_Scenario0_EmptyFiscUnit(
+    idea_env_setup_cleanup,
+):
+    # ESTABLISH
+    x_fiscunits = {}
 
-#     # WHEN
-#     x_ideabricks = create_idea_brick_csvs_from_fisc_objs(x_fiscunits)
+    # WHEN
+    x_ideabricks = create_idea_brick_csvs_from_fisc_objs(x_fiscunits)
 
-#     # THEN
-#     ex2_br00000_csv = get_ordered_csv(get_ex2_br00000_df())
-#     ex2_br00001_csv = get_ordered_csv(get_ex2_br00001_df())
-#     ex2_br00002_csv = get_ordered_csv(get_ex2_br00002_df())
-#     ex2_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
-#     ex2_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
-#     ex2_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
-#     print(f"{ex2_br00000_csv=}")
+    # THEN
+    br00000_df = get_ex2_br00000_df()
+    br00001_df = get_ex2_br00001_df()
+    br00002_df = get_ex2_br00002_df()
+    br00003_df = get_ex2_br00003_df()
+    br00004_df = get_ex2_br00004_df()
+    br00005_df = get_ex2_br00005_df()
+    br00000_df = br00000_df.drop(br00000_df.index)
+    br00001_df = br00001_df.drop(br00001_df.index)
+    br00002_df = br00002_df.drop(br00002_df.index)
+    br00003_df = br00003_df.drop(br00003_df.index)
+    br00004_df = br00004_df.drop(br00004_df.index)
+    br00005_df = br00005_df.drop(br00005_df.index)
+    print(f"{br00001_df=}")
+    expected_br00000_csv = get_ordered_csv(br00000_df)
+    expected_br00001_csv = get_ordered_csv(br00001_df)
+    expected_br00002_csv = get_ordered_csv(br00002_df)
+    expected_br00003_csv = get_ordered_csv(br00003_df)
+    expected_br00004_csv = get_ordered_csv(br00004_df)
+    expected_br00005_csv = get_ordered_csv(br00005_df)
+    print(f"{expected_br00001_csv=}")
 
-#     assert len(x_ideabricks) == 6
-#     assert x_ideabricks.get("br00000") == ex2_br00000_csv
-#     assert x_ideabricks.get("br00001") == ex2_br00001_csv
-#     assert x_ideabricks.get("br00002") == ex2_br00002_csv
-#     assert x_ideabricks.get("br00003") == ex2_br00003_csv
-#     assert x_ideabricks.get("br00004") == ex2_br00004_csv
-#     assert x_ideabricks.get("br00005") == ex2_br00005_csv
+    assert len(x_ideabricks) == 6
+    assert x_ideabricks.get("br00000") == expected_br00000_csv
+    assert x_ideabricks.get("br00001") == expected_br00001_csv
+    assert x_ideabricks.get("br00002") == expected_br00002_csv
+    assert x_ideabricks.get("br00003") == expected_br00003_csv
+    assert x_ideabricks.get("br00004") == expected_br00004_csv
+    assert x_ideabricks.get("br00005") == expected_br00005_csv
 
 
+# TODO pass this test
 # def test_create_idea_brick_csvs_from_fisc_objs_ReturnsObj_Scenario1_TwoFiscTitles(
 #     idea_env_setup_cleanup,
 # ):
@@ -239,9 +232,9 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
 #     br00003_df = get_ex2_br00003_df()
 #     br00004_df = get_ex2_br00004_df()
 #     br00005_df = get_ex2_br00005_df()
-#     x_fund_coin = 55
-#     x_respect_bit = 66
-#     x_penny = 77
+#     x_fund_coin = 1
+#     x_respect_bit = 1
+#     x_penny = 1
 #     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
 #     accord23_str = "accord23"
 #     slash_str = "/"
@@ -262,17 +255,25 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
 #     x_ideabricks = create_idea_brick_csvs_from_fisc_objs(x_fiscunits)
 
 #     # THEN
-#     ex2_br00000_csv = get_ordered_csv(get_ex2_br00000_df())
-#     ex2_br00001_csv = get_ordered_csv(get_ex2_br00001_df())
-#     ex2_br00002_csv = get_ordered_csv(get_ex2_br00002_df())
-#     ex2_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
-#     ex2_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
-#     ex2_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
+#     expected_br00000_csv = get_ordered_csv(get_ex2_br00000_df())
+#     expected_br00001_csv = get_ordered_csv(get_ex2_br00001_df())
+#     expected_br00002_csv = get_ordered_csv(get_ex2_br00002_df())
+#     expected_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
+#     expected_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
+#     expected_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
 
 #     assert len(x_ideabricks) == 6
-#     assert x_ideabricks.get("br00000") == ex2_br00000_csv
-#     assert x_ideabricks.get("br00001") == ex2_br00001_csv
-#     assert x_ideabricks.get("br00002") == ex2_br00002_csv
-#     assert x_ideabricks.get("br00003") == ex2_br00003_csv
-#     assert x_ideabricks.get("br00004") == ex2_br00004_csv
-#     assert x_ideabricks.get("br00005") == ex2_br00005_csv
+#     generated_br00000_csv = x_ideabricks.get("br00000")
+#     generated_br00001_csv = x_ideabricks.get("br00001")
+#     generated_br00002_csv = x_ideabricks.get("br00002")
+#     generated_br00003_csv = x_ideabricks.get("br00003")
+#     generated_br00004_csv = x_ideabricks.get("br00004")
+#     generated_br00005_csv = x_ideabricks.get("br00005")
+#     print(f" {expected_br00004_csv=}")
+#     print(f"{generated_br00004_csv=}")
+#     assert generated_br00000_csv == expected_br00000_csv
+#     assert generated_br00001_csv == expected_br00001_csv
+#     assert generated_br00002_csv == expected_br00002_csv
+#     assert len(generated_br00003_csv) == len(expected_br00003_csv)
+#     assert generated_br00004_csv == expected_br00004_csv
+#     assert generated_br00005_csv == expected_br00005_csv
