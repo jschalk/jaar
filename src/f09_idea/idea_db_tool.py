@@ -43,12 +43,12 @@ from os.path import exists as os_path_exists, dirname as os_path_dirname
 
 
 def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
-    print(f"{x_dir=} {x_filename=}")
     save_file(x_dir, x_filename, get_ordered_csv(x_df))
 
 
 def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
     new_sorting_columns = get_custom_sorted_list(set(x_df.columns), sorting_columns)
+    x_df = x_df.reindex(columns=new_sorting_columns)
     x_df.sort_values(new_sorting_columns, inplace=True)
     x_df.reset_index(inplace=True)
     x_df.drop(columns=["index"], inplace=True)

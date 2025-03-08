@@ -316,3 +316,24 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
             time_int=row["time_int"],
             amount=row["amount"],
         )
+
+
+def create_idea_brick_csvs_from_fisc_objs(
+    x_fiscs=dict[FiscTitle, FiscUnit]
+) -> dict[str, str]:
+    br00000_csv = "c400_number,present_time,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset"
+    br00001_csv = ""
+    br00002_csv = ""
+    br00003_csv = ""
+    br00004_csv = ""
+    br00005_csv = ""
+
+    x_dict = {
+        "br00000": br00000_csv,
+        "br00001": br00001_csv,
+        "br00002": br00002_csv,
+        "br00003": br00003_csv,
+        "br00004": br00004_csv,
+        "br00005": br00005_csv,
+    }
+    return x_dict

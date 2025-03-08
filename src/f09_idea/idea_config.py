@@ -189,9 +189,7 @@ def get_custom_sorted_list(
     if sorting_columns is None:
         sorting_columns = get_idea_elements_sort_order()
     sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
-    return [
-        sort_col for sort_col in sorting_columns if sort_col in sort_columns_in_existing
-    ]
+    return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
 
 
 def get_idea_sqlite_types() -> dict[str, str]:

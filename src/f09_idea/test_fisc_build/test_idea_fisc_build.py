@@ -2,6 +2,8 @@ from src.f00_instrument.file import create_path
 from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
 from src.f07_fisc.fisc import fiscunit_shop
+from src.f09_idea.idea import fisc_build_from_df, create_idea_brick_csvs_from_fisc_objs
+from src.f09_idea.idea_db_tool import get_ordered_csv
 from src.f09_idea.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
 from src.f09_idea.examples.idea_df_examples import (
     get_ex1_br00000_df,
@@ -17,7 +19,6 @@ from src.f09_idea.examples.idea_df_examples import (
     get_ex2_br00004_df,
     get_ex2_br00005_df,
 )
-from src.f09_idea.idea import fisc_build_from_df
 
 
 # given a dataframe, build a fisc unit
@@ -175,3 +176,103 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     assert five_fiscunit.timeline.months_config == jeffy45_timeline.months_config
     assert five_fiscunit.timeline == jeffy45_timeline
     # assert five_fiscunit == jeffy45_fiscunit
+
+
+# # given a dataframe, build a fisc unit
+# def test_create_idea_brick_csvs_from_fisc_objs_ReturnsObj_Scenario0_EmptyFiscUnit(
+#     idea_env_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     br00000_df = get_ex2_br00000_df()
+#     br00001_df = get_ex2_br00001_df()
+#     br00002_df = get_ex2_br00002_df()
+#     br00003_df = get_ex2_br00003_df()
+#     br00004_df = get_ex2_br00004_df()
+#     br00005_df = get_ex2_br00005_df()
+#     x_fund_coin = 55
+#     x_respect_bit = 66
+#     x_penny = 77
+#     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
+#     accord23_str = "accord23"
+#     slash_str = "/"
+#     x_fiscunits = fisc_build_from_df(
+#         br00000_df,
+#         br00001_df,
+#         br00002_df,
+#         br00003_df,
+#         br00004_df,
+#         br00005_df,
+#         x_fund_coin,
+#         x_respect_bit,
+#         x_penny,
+#         x_fiscs_dir,
+#     )
+
+#     # WHEN
+#     x_ideabricks = create_idea_brick_csvs_from_fisc_objs(x_fiscunits)
+
+#     # THEN
+#     ex2_br00000_csv = get_ordered_csv(get_ex2_br00000_df())
+#     ex2_br00001_csv = get_ordered_csv(get_ex2_br00001_df())
+#     ex2_br00002_csv = get_ordered_csv(get_ex2_br00002_df())
+#     ex2_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
+#     ex2_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
+#     ex2_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
+#     print(f"{ex2_br00000_csv=}")
+
+#     assert len(x_ideabricks) == 6
+#     assert x_ideabricks.get("br00000") == ex2_br00000_csv
+#     assert x_ideabricks.get("br00001") == ex2_br00001_csv
+#     assert x_ideabricks.get("br00002") == ex2_br00002_csv
+#     assert x_ideabricks.get("br00003") == ex2_br00003_csv
+#     assert x_ideabricks.get("br00004") == ex2_br00004_csv
+#     assert x_ideabricks.get("br00005") == ex2_br00005_csv
+
+
+# def test_create_idea_brick_csvs_from_fisc_objs_ReturnsObj_Scenario1_TwoFiscTitles(
+#     idea_env_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     br00000_df = get_ex2_br00000_df()
+#     br00001_df = get_ex2_br00001_df()
+#     br00002_df = get_ex2_br00002_df()
+#     br00003_df = get_ex2_br00003_df()
+#     br00004_df = get_ex2_br00004_df()
+#     br00005_df = get_ex2_br00005_df()
+#     x_fund_coin = 55
+#     x_respect_bit = 66
+#     x_penny = 77
+#     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
+#     accord23_str = "accord23"
+#     slash_str = "/"
+#     x_fiscunits = fisc_build_from_df(
+#         br00000_df,
+#         br00001_df,
+#         br00002_df,
+#         br00003_df,
+#         br00004_df,
+#         br00005_df,
+#         x_fund_coin,
+#         x_respect_bit,
+#         x_penny,
+#         x_fiscs_dir,
+#     )
+
+#     # WHEN
+#     x_ideabricks = create_idea_brick_csvs_from_fisc_objs(x_fiscunits)
+
+#     # THEN
+#     ex2_br00000_csv = get_ordered_csv(get_ex2_br00000_df())
+#     ex2_br00001_csv = get_ordered_csv(get_ex2_br00001_df())
+#     ex2_br00002_csv = get_ordered_csv(get_ex2_br00002_df())
+#     ex2_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
+#     ex2_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
+#     ex2_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
+
+#     assert len(x_ideabricks) == 6
+#     assert x_ideabricks.get("br00000") == ex2_br00000_csv
+#     assert x_ideabricks.get("br00001") == ex2_br00001_csv
+#     assert x_ideabricks.get("br00002") == ex2_br00002_csv
+#     assert x_ideabricks.get("br00003") == ex2_br00003_csv
+#     assert x_ideabricks.get("br00004") == ex2_br00004_csv
+#     assert x_ideabricks.get("br00005") == ex2_br00005_csv
