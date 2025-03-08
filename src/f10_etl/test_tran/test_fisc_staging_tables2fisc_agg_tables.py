@@ -250,11 +250,11 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario2_fischour_Some_error_messa
         insert_staging_sqlstr = f"""
 INSERT INTO {staging_tablename} ({x_cols.hour_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{_4pm_str}',{cumlative_minute_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{_4pm_str}',{cumlative_minute_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{_4pm_str}',{cumlative_minute_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{_4pm_str}',{cumlative_minute_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{_8pm_str}',{cumlative_minute_2},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{cumlative_minute_1},'{_4pm_str}','{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord45_str}',{cumlative_minute_2},'{_4pm_str}','{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord23_str}',{cumlative_minute_2},'{_8pm_str}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -270,8 +270,8 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.hour_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, _4pm_str, cumlative_minute_1)
-        expected_agg_row1 = (accord23_str, _8pm_str, cumlative_minute_2)
+        expected_agg_row0 = (accord23_str, cumlative_minute_1, _4pm_str)
+        expected_agg_row1 = (accord23_str, cumlative_minute_2, _8pm_str)
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
@@ -297,11 +297,11 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_messa
         insert_staging_sqlstr = f"""
 INSERT INTO {x_objs.mont_stage_tablename} ({x_cols.mont_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{apr_str}',{cumlative_day_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{apr_str}',{cumlative_day_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{aug_str}',{cumlative_day_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{aug_str}',{cumlative_day_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{aug_str}',{cumlative_day_2},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{cumlative_day_1},'{aug_str}','{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord45_str}',{cumlative_day_2},'{aug_str}','{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord23_str}',{cumlative_day_2},'{aug_str}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -317,8 +317,8 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.mont_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, apr_str, cumlative_day_1)
-        expected_agg_row1 = (accord23_str, aug_str, cumlative_day_2)
+        expected_agg_row0 = (accord23_str, cumlative_day_1, apr_str)
+        expected_agg_row1 = (accord23_str, cumlative_day_2, aug_str)
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
@@ -344,11 +344,11 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_messa
         insert_staging_sqlstr = f"""
 INSERT INTO {x_objs.week_stage_tablename} ({x_cols.week_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{mon_str}',{weekday_order_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{mon_str}',{weekday_order_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{wed_str}',{weekday_order_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{wed_str}',{weekday_order_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{wed_str}',{weekday_order_2},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{weekday_order_1},'{wed_str}','{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord45_str}',{weekday_order_2},'{wed_str}','{x_error_message}')
+, ('br00333','{sue_inx}',{event9},'{accord23_str}',{weekday_order_2},'{wed_str}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -364,8 +364,8 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.week_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, mon_str, weekday_order_1)
-        expected_agg_row1 = (accord23_str, wed_str, weekday_order_2)
+        expected_agg_row0 = (accord23_str, weekday_order_1, mon_str)
+        expected_agg_row1 = (accord23_str, weekday_order_2, wed_str)
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 

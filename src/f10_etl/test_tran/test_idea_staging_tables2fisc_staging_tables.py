@@ -619,8 +619,8 @@ VALUES
             sue_inx,  # face_name
             event3,  # event_int
             accord23_str,  # fisc_title
-            a23_hour_title,
             a23_cumlative_minute,
+            a23_hour_title,
             None,  # note
         )
         expected_row1 = (
@@ -628,8 +628,8 @@ VALUES
             sue_inx,  # face_name
             event7,  # event_int
             accord23_str,  # fisc_title
-            a23_hour_title,
             a23_cumlative_minute,
+            a23_hour_title,
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
@@ -691,8 +691,8 @@ VALUES
             sue_inx,  # face_name
             event3,  # event_int
             accord23_str,  # fisc_title
-            a23_month_title,
             a23_cumlative_day,
+            a23_month_title,
             None,  # note
         )
         expected_row1 = (
@@ -700,8 +700,8 @@ VALUES
             sue_inx,  # face_name
             event7,  # event_int
             accord23_str,  # fisc_title
-            a23_month_title,
             a23_cumlative_day,
+            a23_month_title,
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
@@ -763,8 +763,8 @@ VALUES
             sue_inx,  # face_name
             event3,  # event_int
             accord23_str,  # fisc_title
-            a23_weekday_title,
             a23_weekday_order,
+            a23_weekday_title,
             None,  # note
         )
         expected_row1 = (
@@ -772,8 +772,8 @@ VALUES
             sue_inx,  # face_name
             event7,  # event_int
             accord23_str,  # fisc_title
-            a23_weekday_title,
             a23_weekday_order,
+            a23_weekday_title,
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
@@ -1062,9 +1062,9 @@ def test_set_fisc_staging_error_message_Scenario2_fischour_Some_error_message(
     event7 = 7
     accord23_str = "accord23"
     accord45_str = "accord45"
-    a23_hour_title = "4pm"
+    a23_4hour_title = "4pm"
+    a23_5hour_title = "5pm"
     a23_cumlative_minute_1 = 44
-    a23_cumlative_minute_2 = 77
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -1076,9 +1076,9 @@ def test_set_fisc_staging_error_message_Scenario2_fischour_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.hour_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_hour_title}',{a23_cumlative_minute_2},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_hour_title}',{a23_cumlative_minute_1},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_cumlative_minute_1},'{a23_4hour_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_cumlative_minute_1},'{a23_5hour_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_cumlative_minute_1},'{a23_4hour_title}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1122,7 +1122,6 @@ def test_set_fisc_staging_error_message_Scenario3_fischour_Some_error_message(
     a23_month_title_1 = "March"
     a23_month_title_2 = "Marche"
     _44_cumlative_day = 44
-    _55_cumlative_day = 55
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -1134,9 +1133,9 @@ def test_set_fisc_staging_error_message_Scenario3_fischour_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.mont_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_month_title_1}',{_44_cumlative_day},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_month_title_1}',{_55_cumlative_day},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_month_title_2}',{_55_cumlative_day},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{_44_cumlative_day},'{a23_month_title_1}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{_44_cumlative_day},'{a23_month_title_2}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{_44_cumlative_day},'{a23_month_title_2}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1193,25 +1192,25 @@ def test_set_fisc_staging_error_message_Scenario4_fiscweek_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.week_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{mon_str}',{order1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{tue_str}',{order2},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{tue_str}',{order3},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{wed_str}',{order3},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{mon_str}',{order3},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{order1},'{mon_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{order2},'{tue_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{order2},'{wed_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{order1},'{mon_str}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{order3},'{wed_str}',NULL)
 ;
 """
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {weekday_title_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {weekday_order_str()}, error_message FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         # print(f"{rows=}")
         assert rows == [
-            (event3, accord23_str, mon_str, None),
-            (event7, accord23_str, tue_str, None),
-            (event7, accord23_str, tue_str, None),
-            (event7, accord45_str, wed_str, None),
-            (event7, accord45_str, mon_str, None),
+            (event3, accord23_str, order1, None),
+            (event7, accord23_str, order2, None),
+            (event7, accord23_str, order2, None),
+            (event7, accord45_str, order1, None),
+            (event7, accord45_str, order3, None),
         ]
 
         # WHEN
@@ -1223,11 +1222,11 @@ VALUES
         print(f"{rows=}")
         x_error_message = "Inconsistent fisc data"
         assert rows == [
-            (event3, accord23_str, mon_str, None),
-            (event7, accord23_str, tue_str, x_error_message),
-            (event7, accord23_str, tue_str, x_error_message),
-            (event7, accord45_str, wed_str, None),
-            (event7, accord45_str, mon_str, None),
+            (event3, accord23_str, order1, None),
+            (event7, accord23_str, order2, x_error_message),
+            (event7, accord23_str, order2, x_error_message),
+            (event7, accord45_str, order1, None),
+            (event7, accord45_str, order3, None),
         ]
 
 

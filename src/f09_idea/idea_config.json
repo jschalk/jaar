@@ -281,10 +281,10 @@
       "event_int": {},
       "face_name": {},
       "fisc_title": {},
-      "hour_title": {}
+      "cumlative_minute": {}
     },
     "jvalues": {
-      "cumlative_minute": {}
+      "hour_title": {}
     }
   },
   "fisc_timeline_month": {
@@ -295,10 +295,10 @@
       "event_int": {},
       "face_name": {},
       "fisc_title": {},
-      "month_title": {}
+      "cumlative_day": {}
     },
     "jvalues": {
-      "cumlative_day": {}
+      "month_title": {}
     }
   },
   "fisc_timeline_weekday": {
@@ -309,10 +309,10 @@
       "event_int": {},
       "face_name": {},
       "fisc_title": {},
-      "weekday_title": {}
+      "weekday_order": {}
     },
     "jvalues": {
-      "weekday_order": {}
+      "weekday_title": {}
     }
   },
   "fiscunit": {

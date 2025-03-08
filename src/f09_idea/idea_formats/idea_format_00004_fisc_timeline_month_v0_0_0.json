@@ -1,7 +1,7 @@
 {
     "attributes": {
         "cumlative_day": {
-            "otx_key": false
+            "otx_key": true
         },
         "event_int": {
             "otx_key": true
@@ -13,7 +13,7 @@
             "otx_key": true
         },
         "month_title": {
-            "otx_key": true
+            "otx_key": false
         }
     },
     "idea_number": "br00004",

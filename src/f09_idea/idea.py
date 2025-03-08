@@ -329,9 +329,9 @@ def create_idea_brick_csvs_from_fisc_objs(
     br00000_csv = "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge\n"
     br00001_csv = "fisc_title,owner_name,time_int,quota,celldepth\n"
     br00002_csv = "fisc_title,owner_name,acct_name,time_int,amount\n"
-    br00003_csv = "fisc_title,hour_title,cumlative_minute\n"
-    br00004_csv = "fisc_title,month_title,cumlative_day\n"
-    br00005_csv = "fisc_title,weekday_title,weekday_order\n"
+    br00003_csv = "fisc_title,cumlative_minute,hour_title\n"
+    br00004_csv = "fisc_title,cumlative_day,month_title\n"
+    br00005_csv = "fisc_title,weekday_order,weekday_title\n"
 
     csv_delimiter = ","
     for x_fisc in x_fiscs.values():
