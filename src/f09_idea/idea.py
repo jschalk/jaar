@@ -382,11 +382,31 @@ def create_idea_brick_csvs_from_fisc_objs(
         for hour_item in x_fisc.timeline.hours_config:
             br00003_row = [
                 x_fisc.fisc_title,
-                hour_item[0],
                 str(hour_item[1]),
+                hour_item[0],
             ]
             br00003_csv += csv_delimiter.join(br00003_row)
             br00003_csv += "\n"
+
+        for month_item in x_fisc.timeline.months_config:
+            br00004_row = [
+                x_fisc.fisc_title,
+                str(month_item[1]),
+                month_item[0],
+            ]
+            br00004_csv += csv_delimiter.join(br00004_row)
+            br00004_csv += "\n"
+
+        count_x = 0
+        for weekday_title in x_fisc.timeline.weekdays_config:
+            br00005_row = [
+                x_fisc.fisc_title,
+                str(count_x),
+                weekday_title,
+            ]
+            br00005_csv += csv_delimiter.join(br00005_row)
+            br00005_csv += "\n"
+            count_x += 1
 
     return {
         "br00000": br00000_csv,
