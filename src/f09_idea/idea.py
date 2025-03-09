@@ -334,81 +334,7 @@ def create_idea_brick_csvs_from_fisc_objs(
     br00005_csv = "fisc_title,weekday_order,weekday_title\n"
 
     csv_delimiter = ","
-    for x_fisc in x_fiscs.values():
-        if x_fisc.bridge == csv_delimiter:
-            x_bridge = f"""\"{str(x_fisc.bridge)}\""""
-        else:
-            x_bridge = x_fisc.bridge
-        br00000_row = [
-            x_fisc.fisc_title,
-            str(x_fisc.timeline.timeline_title),
-            str(x_fisc.timeline.c400_number),
-            str(x_fisc.timeline.yr1_jan1_offset),
-            str(x_fisc.timeline.monthday_distortion),
-            str(x_fisc.fund_coin),
-            str(x_fisc.penny),
-            str(x_fisc.respect_bit),
-            str(x_fisc.present_time),
-            x_bridge,
-        ]
-        br00000_csv += csv_delimiter.join(br00000_row)
-        br00000_csv += "\n"
-
-        for broker_owner_name, brokerunits in x_fisc.brokerunits.items():
-            for time_int, dealunit in brokerunits.deals.items():
-                br00001_row = [
-                    x_fisc.fisc_title,
-                    broker_owner_name,
-                    str(time_int),
-                    str(dealunit.quota),
-                    str(dealunit.celldepth),
-                ]
-                br00001_csv += csv_delimiter.join(br00001_row)
-                br00001_csv += "\n"
-
-        for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
-            for acct_name, time_dict in tranunit.items():
-                for time_int, amount in time_dict.items():
-                    br00002_row = [
-                        x_fisc.fisc_title,
-                        owner_name,
-                        acct_name,
-                        str(time_int),
-                        str(amount),
-                    ]
-                    br00002_csv += csv_delimiter.join(br00002_row)
-                    br00002_csv += "\n"
-
-        for hour_item in x_fisc.timeline.hours_config:
-            br00003_row = [
-                x_fisc.fisc_title,
-                str(hour_item[1]),
-                hour_item[0],
-            ]
-            br00003_csv += csv_delimiter.join(br00003_row)
-            br00003_csv += "\n"
-
-        for month_item in x_fisc.timeline.months_config:
-            br00004_row = [
-                x_fisc.fisc_title,
-                str(month_item[1]),
-                month_item[0],
-            ]
-            br00004_csv += csv_delimiter.join(br00004_row)
-            br00004_csv += "\n"
-
-        count_x = 0
-        for weekday_title in x_fisc.timeline.weekdays_config:
-            br00005_row = [
-                x_fisc.fisc_title,
-                str(count_x),
-                weekday_title,
-            ]
-            br00005_csv += csv_delimiter.join(br00005_row)
-            br00005_csv += "\n"
-            count_x += 1
-
-    return {
+    fisc_csv_strs = {
         "br00000": br00000_csv,
         "br00001": br00001_csv,
         "br00002": br00002_csv,
@@ -416,3 +342,110 @@ def create_idea_brick_csvs_from_fisc_objs(
         "br00004": br00004_csv,
         "br00005": br00005_csv,
     }
+    for x_fisc in x_fiscs.values():
+        add_fiscunit_to_csv_strs(x_fisc, fisc_csv_strs, csv_delimiter)
+    return fisc_csv_strs
+
+
+def add_fiscunit_to_csv_strs(
+    x_fisc: FiscUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
+) -> dict[str, str]:
+    br00000_csv = fisc_csv_strs.get("br00000")
+    br00001_csv = fisc_csv_strs.get("br00001")
+    br00002_csv = fisc_csv_strs.get("br00002")
+    br00003_csv = fisc_csv_strs.get("br00003")
+    br00004_csv = fisc_csv_strs.get("br00004")
+    br00005_csv = fisc_csv_strs.get("br00005")
+    br00000_csv = _add_fiscunit_to_br00000_csv(br00000_csv, x_fisc, csv_delimiter)
+    br00001_csv = _add_dealunit_to_br00001_csv(br00001_csv, x_fisc, csv_delimiter)
+    br00002_csv = _add_cashbook_to_br00002_csv(br00002_csv, x_fisc, csv_delimiter)
+    br00003_csv = _add_hours_to_br00003_csv(br00003_csv, x_fisc, csv_delimiter)
+    br00004_csv = _add_months_to_br00004_csv(br00004_csv, x_fisc, csv_delimiter)
+    br00005_csv = _add_weekdays_to_br00005_csv(br00005_csv, x_fisc, csv_delimiter)
+    fisc_csv_strs["br00000"] = br00000_csv
+    fisc_csv_strs["br00001"] = br00001_csv
+    fisc_csv_strs["br00002"] = br00002_csv
+    fisc_csv_strs["br00003"] = br00003_csv
+    fisc_csv_strs["br00004"] = br00004_csv
+    fisc_csv_strs["br00005"] = br00005_csv
+
+
+def _add_fiscunit_to_br00000_csv(
+    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+) -> str:
+    if x_fisc.bridge == csv_delimiter:
+        x_bridge = f"""\"{str(x_fisc.bridge)}\""""
+    else:
+        x_bridge = x_fisc.bridge
+
+    x_row = [
+        x_fisc.fisc_title,
+        x_fisc.timeline.timeline_title,
+        str(x_fisc.timeline.c400_number),
+        str(x_fisc.timeline.yr1_jan1_offset),
+        str(x_fisc.timeline.monthday_distortion),
+        str(x_fisc.fund_coin),
+        str(x_fisc.penny),
+        str(x_fisc.respect_bit),
+        str(x_fisc.present_time),
+        x_bridge,
+    ]
+    x_csv += csv_delimiter.join(x_row)
+    x_csv += "\n"
+    return x_csv
+
+
+def _add_dealunit_to_br00001_csv(
+    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+) -> str:
+    for broker_owner_name, brokerunits in x_fisc.brokerunits.items():
+        for time_int, dealunit in brokerunits.deals.items():
+            x_row = [
+                x_fisc.fisc_title,
+                broker_owner_name,
+                str(time_int),
+                str(dealunit.quota),
+                str(dealunit.celldepth),
+            ]
+            x_csv += csv_delimiter.join(x_row)
+            x_csv += "\n"
+    return x_csv
+
+
+def _add_cashbook_to_br00002_csv(
+    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+) -> str:
+    for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
+        for acct_name, time_dict in tranunit.items():
+            for time_int, amount in time_dict.items():
+                fisc_title = x_fisc.fisc_title
+                x_row = [fisc_title, owner_name, acct_name, str(time_int), str(amount)]
+                x_csv += csv_delimiter.join(x_row)
+                x_csv += "\n"
+    return x_csv
+
+
+def _add_hours_to_br00003_csv(x_csv: str, x_fisc: FiscUnit, csv_delimiter: str) -> str:
+    for hour_item in x_fisc.timeline.hours_config:
+        x_row = [x_fisc.fisc_title, str(hour_item[1]), hour_item[0]]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def _add_months_to_br00004_csv(x_csv: str, x_fisc: FiscUnit, csv_delimiter: str) -> str:
+    for month_item in x_fisc.timeline.months_config:
+        x_row = [x_fisc.fisc_title, str(month_item[1]), month_item[0]]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def _add_weekdays_to_br00005_csv(
+    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+) -> str:
+    for count_x, weekday_title in enumerate(x_fisc.timeline.weekdays_config):
+        x_row = [x_fisc.fisc_title, str(count_x), weekday_title]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
