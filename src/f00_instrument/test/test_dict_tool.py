@@ -1,6 +1,7 @@
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_1_if_None,
+    get_empty_str_if_None,
     add_nested_dict_if_missing,
     set_in_nested_dict,
     get_all_nondictionary_objs,
@@ -42,6 +43,14 @@ def test_get_1_if_None():
     assert get_1_if_None(None) == 1
     assert get_1_if_None(2) == 2
     assert get_1_if_None(-3) == -3
+
+
+def test_get_empty_str_if_None():
+    # ESTABLISH / WHEN / THEN
+    assert get_empty_str_if_None(None) == ""
+    assert get_empty_str_if_None(2) == "2"
+    assert get_empty_str_if_None(-3) == "-3"
+    assert get_empty_str_if_None("fizz") == "fizz"
 
 
 def test_get_0_if_None():
