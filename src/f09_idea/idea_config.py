@@ -622,35 +622,6 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 
 
 def get_idea_dimen_ref() -> dict[str, set[str]]:
-    # return {
-    #     "fiscunit": ["br00000"],
-    #     "fisc_dealunit": ["br00001"],
-    #     "fisc_cashbook": ["br00002"],
-    #     "fisc_timeline_hour": ["br00003"],
-    #     "fisc_timeline_month": ["br00004"],
-    #     "fisc_timeline_weekday": ["br00005"],
-    #     "bud_acctunit": [
-    #         "br00011",
-    #         "br00021",
-    #         "br00113",
-    #         "br00115",
-    #         "br00116",
-    #         "br00117",
-    #     ],
-    #     "bud_acct_membership": ["br00012", "br00020", "br00050"],
-    #     "bud_itemunit": ["br00013", "br00019", "br00028", "br00036"],
-    #     "bud_item_awardlink": ["br00022"],
-    #     "bud_item_factunit": ["br00023"],
-    #     "bud_item_teamlink": ["br00024"],
-    #     "bud_item_healerlink": ["br00025", "br00036"],
-    #     "bud_item_reason_premiseunit": ["br00026"],
-    #     "bud_item_reasonunit": ["br00027"],
-    #     "budunit": ["br00029"],
-    #     "map_label": ["br00042", "br00115"],
-    #     "map_name": ["br00043", "br00113"],
-    #     "map_title": ["br00044", "br00116"],
-    #     "map_road": ["br00045", "br00117"],
-    # }
     return {
         "fiscunit": ["br00000"],
         "fisc_dealunit": ["br00001"],

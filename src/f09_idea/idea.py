@@ -17,6 +17,9 @@ from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f09_idea.idea_config import (
     get_idearef_from_file,
     get_idea_format_headers,
+    get_idea_config_dict,
+    get_idea_format_filename,
+    get_idea_format_headers,
 )
 from src.f09_idea.idea_db_tool import (
     save_dataframe_to_csv,
@@ -225,10 +228,10 @@ def fisc_build_from_df(
     br00003_df: DataFrame,
     br00004_df: DataFrame,
     br00005_df: DataFrame,
-    x_fund_coin,
-    x_respect_bit,
-    x_penny,
-    x_fiscs_dir,
+    x_fund_coin: float,
+    x_respect_bit: float,
+    x_penny: float,
+    x_fiscs_dir: str,
 ) -> dict[FiscTitle, FiscUnit]:
     fisc_hours_dict = _get_fisc_hours_dict(br00003_df)
     fisc_months_dict = _get_fisc_months_dict(br00004_df)
@@ -323,33 +326,54 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
         )
 
 
-def create_idea_brick_csvs_from_fisc_objs(
-    x_fiscs=dict[FiscTitle, FiscUnit]
-) -> dict[str, str]:
-    br00000_csv = "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge\n"
-    br00001_csv = "fisc_title,owner_name,time_int,quota,celldepth\n"
-    br00002_csv = "fisc_title,owner_name,acct_name,time_int,amount\n"
-    br00003_csv = "fisc_title,cumlative_minute,hour_title\n"
-    br00004_csv = "fisc_title,cumlative_day,month_title\n"
-    br00005_csv = "fisc_title,weekday_order,weekday_title\n"
+def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
+    """Returns strings of csv headers with comma delimiter"""
+    stance_idea_bricks = [
+        "br00000",
+        "br00001",
+        "br00002",
+        "br00003",
+        "br00004",
+        "br00005",
+        "br00020",
+        "br00021",
+        "br00022",
+        "br00023",
+        "br00024",
+        "br00025",
+        "br00026",
+        "br00027",
+        "br00028",
+        "br00029",
+        "br00042",
+        "br00043",
+        "br00044",
+        "br00045",
+    ]
+    idea_format_headers = get_idea_format_headers()
 
-    csv_delimiter = ","
-    fisc_csv_strs = {
-        "br00000": br00000_csv,
-        "br00001": br00001_csv,
-        "br00002": br00002_csv,
-        "br00003": br00003_csv,
-        "br00004": br00004_csv,
-        "br00005": br00005_csv,
-    }
-    for x_fisc in x_fiscs.values():
-        add_fiscunit_to_csv_strs(x_fisc, fisc_csv_strs, csv_delimiter)
+    fisc_csv_strs = {}
+    for idea_brick in stance_idea_bricks:
+        idea_format_filename = get_idea_format_filename(idea_brick)
+        for idea_columns, idea_file_name in idea_format_headers.items():
+            if idea_file_name == idea_format_filename:
+                fisc_csv_strs[idea_brick] = f"{idea_columns}\n"
     return fisc_csv_strs
 
 
-def add_fiscunit_to_csv_strs(
+def add_fiscunits_to_stance_csv_strs(
+    fiscs_dict: dict[FiscTitle, FiscUnit],
+    fisc_csv_strs: dict[str, str],
+    csv_delimiter: str,
+):
+    for x_fisc in fiscs_dict.values():
+        add_fiscunit_to_stance_csv_strs(x_fisc, fisc_csv_strs, csv_delimiter)
+
+
+def add_fiscunit_to_stance_csv_strs(
     x_fisc: FiscUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
 ) -> dict[str, str]:
+
     br00000_csv = fisc_csv_strs.get("br00000")
     br00001_csv = fisc_csv_strs.get("br00001")
     br00002_csv = fisc_csv_strs.get("br00002")
