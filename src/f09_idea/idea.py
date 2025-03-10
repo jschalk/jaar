@@ -15,6 +15,7 @@ from src.f04_gift.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelt
 from src.f04_gift.gift import giftunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
+from src.f08_pidgin.pidgin import PidginUnit
 from src.f09_idea.idea_config import (
     get_idearef_from_file,
     get_idea_format_headers,
@@ -663,3 +664,84 @@ def add_budunit_to_stance_csv_strs(
     fisc_csv_strs["br00027"] = br00027_csv
     fisc_csv_strs["br00028"] = br00028_csv
     fisc_csv_strs["br00029"] = br00029_csv
+
+
+def add_to_br00042_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
+    for x_otx, x_inx in x_pidginunit.labelmap.otx2inx.items():
+        x_row = [
+            x_pidginunit.face_name,
+            str(x_pidginunit.event_int),
+            x_otx,
+            x_pidginunit.otx_bridge,
+            x_inx,
+            x_pidginunit.inx_bridge,
+            x_pidginunit.unknown_word,
+        ]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_to_br00043_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
+    for x_otx, x_inx in x_pidginunit.namemap.otx2inx.items():
+        x_row = [
+            x_pidginunit.face_name,
+            str(x_pidginunit.event_int),
+            x_otx,
+            x_pidginunit.otx_bridge,
+            x_inx,
+            x_pidginunit.inx_bridge,
+            x_pidginunit.unknown_word,
+        ]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_to_br00044_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
+    for x_otx, x_inx in x_pidginunit.titlemap.otx2inx.items():
+        x_row = [
+            x_pidginunit.face_name,
+            str(x_pidginunit.event_int),
+            x_otx,
+            x_pidginunit.otx_bridge,
+            x_inx,
+            x_pidginunit.inx_bridge,
+            x_pidginunit.unknown_word,
+        ]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_to_br00045_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
+    for x_otx, x_inx in x_pidginunit.roadmap.otx2inx.items():
+        x_row = [
+            x_pidginunit.face_name,
+            str(x_pidginunit.event_int),
+            x_otx,
+            x_pidginunit.otx_bridge,
+            x_inx,
+            x_pidginunit.inx_bridge,
+            x_pidginunit.unknown_word,
+        ]
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_pidginunit_to_stance_csv_strs(
+    x_pidgin: PidginUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
+) -> str:
+    br00042_csv = fisc_csv_strs.get("br00042")
+    br00043_csv = fisc_csv_strs.get("br00043")
+    br00044_csv = fisc_csv_strs.get("br00044")
+    br00045_csv = fisc_csv_strs.get("br00045")
+    br00042_csv = add_to_br00042_csv(br00042_csv, x_pidgin, csv_delimiter)
+    br00043_csv = add_to_br00043_csv(br00043_csv, x_pidgin, csv_delimiter)
+    br00044_csv = add_to_br00044_csv(br00044_csv, x_pidgin, csv_delimiter)
+    br00045_csv = add_to_br00045_csv(br00045_csv, x_pidgin, csv_delimiter)
+    fisc_csv_strs["br00042"] = br00042_csv
+    fisc_csv_strs["br00043"] = br00043_csv
+    fisc_csv_strs["br00044"] = br00044_csv
+    fisc_csv_strs["br00045"] = br00045_csv

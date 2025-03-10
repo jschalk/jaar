@@ -4,6 +4,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
 from src.f07_fisc.fisc import fiscunit_shop
+from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_idea.idea_config import get_idea_format_filename
 from src.f09_idea.idea import (
     fisc_build_from_df,
@@ -21,16 +22,15 @@ from src.f09_idea.idea import (
     add_to_br00028_csv,
     add_to_br00029_csv,
     add_budunit_to_stance_csv_strs,
+    add_to_br00042_csv,
+    add_to_br00043_csv,
+    add_to_br00044_csv,
+    add_to_br00045_csv,
+    add_pidginunit_to_stance_csv_strs,
 )
 from src.f09_idea.idea_db_tool import get_ordered_csv
 from src.f09_idea.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
 from src.f09_idea.examples.idea_df_examples import (
-    get_ex1_br00000_df,
-    get_ex1_br00001_df,
-    get_ex1_br00002_df,
-    get_ex1_br00003_df,
-    get_ex1_br00004_df,
-    get_ex1_br00005_df,
     get_ex2_br00000_df,
     get_ex2_br00001_df,
     get_ex2_br00002_df,
@@ -232,21 +232,6 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
     generated_br00003_csv = x_ideabricks.get("br00003")
     generated_br00004_csv = x_ideabricks.get("br00004")
     generated_br00005_csv = x_ideabricks.get("br00005")
-    generated_br00020_csv = x_ideabricks.get("br00020")
-    generated_br00021_csv = x_ideabricks.get("br00021")
-    generated_br00022_csv = x_ideabricks.get("br00022")
-    generated_br00023_csv = x_ideabricks.get("br00023")
-    generated_br00024_csv = x_ideabricks.get("br00024")
-    generated_br00025_csv = x_ideabricks.get("br00025")
-    generated_br00026_csv = x_ideabricks.get("br00026")
-    generated_br00027_csv = x_ideabricks.get("br00027")
-    generated_br00028_csv = x_ideabricks.get("br00028")
-    generated_br00029_csv = x_ideabricks.get("br00029")
-    generated_br00042_csv = x_ideabricks.get("br00042")
-    generated_br00043_csv = x_ideabricks.get("br00043")
-    generated_br00044_csv = x_ideabricks.get("br00044")
-    generated_br00045_csv = x_ideabricks.get("br00045")
-
     # print(f" {expected_br00005_csv=}")
     # print(f"{generated_br00005_csv=}")
     assert generated_br00000_csv == expected_br00000_csv
@@ -597,3 +582,146 @@ def test_add_budunit_to_stance_csv_strs_ReturnsObj():
     assert x_ideabricks.get("br00027") != br00027_header
     assert x_ideabricks.get("br00028") != br00028_header
     assert x_ideabricks.get("br00029") != br00029_header
+
+
+def test_add_to_br00042_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    event7 = 7
+    bob_otx_bridge = ";"
+    bob_inx_bridge = "/"
+    bob_unknown_word = "UNKNOWN"
+    bob7_pidginunit = pidginunit_shop(
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+    )
+    run_otx = "run"
+    run_inx = "cours"
+    bob7_pidginunit.set_otx2inx("LabelUnit", run_otx, run_inx)
+    csv_header = x_ideabricks.get("br00042")
+    print(f"{csv_header=}")
+
+    # WHEN
+    x_csv = add_to_br00042_csv(csv_header, bob7_pidginunit, csv_delimiter)
+
+    # THEN
+    run_row = f"{bob_str},{event7},{run_otx},{bob_otx_bridge},{run_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    assert x_csv == f"{csv_header}{run_row}"
+
+
+def test_add_to_br00043_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    event7 = 7
+    bob_otx_bridge = ";"
+    bob_inx_bridge = "/"
+    bob_unknown_word = "UNKNOWN"
+    bob7_pidginunit = pidginunit_shop(
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+    )
+    yao_otx = "Yao"
+    yao_inx = "YaoMing"
+    bob7_pidginunit.set_otx2inx("NameUnit", yao_otx, yao_inx)
+    csv_header = x_ideabricks.get("br00043")
+    print(f"{csv_header=}")
+
+    # WHEN
+    x_csv = add_to_br00043_csv(csv_header, bob7_pidginunit, csv_delimiter)
+
+    # THEN
+    bob_row = f"{bob_str},{event7},{yao_otx},{bob_otx_bridge},{yao_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    assert x_csv == f"{csv_header}{bob_row}"
+
+
+def test_add_to_br00044_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    event7 = 7
+    bob_otx_bridge = ";"
+    bob_inx_bridge = "/"
+    bob_unknown_word = "UNKNOWN"
+    bob7_pidginunit = pidginunit_shop(
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+    )
+    clean_otx = "clean"
+    clean_inx = "prope"
+    bob7_pidginunit.set_otx2inx("TitleUnit", clean_otx, clean_inx)
+    csv_header = x_ideabricks.get("br00044")
+    print(f"{csv_header=}")
+
+    # WHEN
+    x_csv = add_to_br00044_csv(csv_header, bob7_pidginunit, csv_delimiter)
+
+    # THEN
+    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    assert x_csv == f"{csv_header}{bob_row}"
+
+
+def test_add_to_br00045_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    event7 = 7
+    bob_otx_bridge = ";"
+    bob_inx_bridge = "/"
+    bob_unknown_word = "UNKNOWN"
+    bob7_pidginunit = pidginunit_shop(
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+    )
+    clean_otx = "clean"
+    clean_inx = "prope"
+    bob7_pidginunit.set_otx2inx("RoadUnit", clean_otx, clean_inx)
+    csv_header = x_ideabricks.get("br00045")
+    print(f"{csv_header=}")
+
+    # WHEN
+    x_csv = add_to_br00045_csv(csv_header, bob7_pidginunit, csv_delimiter)
+
+    # THEN
+    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    assert x_csv == f"{csv_header}{bob_row}"
+
+
+def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    event7 = 7
+    bob_otx_bridge = ";"
+    bob_inx_bridge = "/"
+    bob_unknown_word = "UNKNOWN"
+    bob7_pidginunit = pidginunit_shop(
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+    )
+    clean_otx = "clean"
+    clean_inx = "prope"
+    bob7_pidginunit.set_otx2inx("RoadUnit", clean_otx, clean_inx)
+    yao_otx = "Yao"
+    yao_inx = "YaoMing"
+    bob7_pidginunit.set_otx2inx("NameUnit", yao_otx, yao_inx)
+    run_otx = "run"
+    run_inx = "cours"
+    bob7_pidginunit.set_otx2inx("LabelUnit", run_otx, run_inx)
+    clean_otx = "clean"
+    clean_inx = "prope"
+    bob7_pidginunit.set_otx2inx("TitleUnit", clean_otx, clean_inx)
+    br00042_header = x_ideabricks.get("br00042")
+    br00043_header = x_ideabricks.get("br00043")
+    br00044_header = x_ideabricks.get("br00044")
+    br00045_header = x_ideabricks.get("br00045")
+
+    # WHEN
+    add_pidginunit_to_stance_csv_strs(bob7_pidginunit, x_ideabricks, csv_delimiter)
+
+    # THEN
+    assert x_ideabricks.get("br00042") != br00042_header
+    assert x_ideabricks.get("br00043") != br00043_header
+    assert x_ideabricks.get("br00044") != br00044_header
+    assert x_ideabricks.get("br00045") != br00045_header
