@@ -46,13 +46,13 @@
             "fisc_title": {
                 "class_type": "TitleUnit"
             },
-            "hour_title": {
-                "class_type": "TitleUnit"
+            "cumlative_minute": {
+                "class_type": "int"
             }
         },
         "jvalues": {
-            "cumlative_minute": {
-                "class_type": "int"
+            "hour_title": {
+                "class_type": "TitleUnit"
             }
         }
     },
@@ -61,13 +61,13 @@
             "fisc_title": {
                 "class_type": "TitleUnit"
             },
-            "month_title": {
-                "class_type": "TitleUnit"
+            "cumlative_day": {
+                "class_type": "int"
             }
         },
         "jvalues": {
-            "cumlative_day": {
-                "class_type": "int"
+            "month_title": {
+                "class_type": "TitleUnit"
             }
         }
     },
@@ -76,13 +76,13 @@
             "fisc_title": {
                 "class_type": "TitleUnit"
             },
-            "weekday_title": {
-                "class_type": "TitleUnit"
+            "weekday_order": {
+                "class_type": "int"
             }
         },
         "jvalues": {
-            "weekday_order": {
-                "class_type": "int"
+            "weekday_title": {
+                "class_type": "TitleUnit"
             }
         }
     },

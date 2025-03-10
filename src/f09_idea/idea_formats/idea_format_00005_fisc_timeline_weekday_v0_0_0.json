@@ -10,10 +10,10 @@
             "otx_key": true
         },
         "weekday_title": {
-            "otx_key": true
+            "otx_key": false
         },
         "weekday_order": {
-            "otx_key": false
+            "otx_key": true
         }
     },
     "idea_number": "br00005",

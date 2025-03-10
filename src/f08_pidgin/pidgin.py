@@ -184,6 +184,7 @@ class PidginUnit:
         )
 
     def set_otx2inx(self, x_class_type: str, x_otx: str, x_inx: str):
+        """class_type: NameUnit, LabelUnit, TitleUnit, RoadUnit"""
         if x_class_type == "NameUnit":
             self.namemap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "LabelUnit":
@@ -194,6 +195,7 @@ class PidginUnit:
             self.roadmap.set_otx2inx(x_otx, x_inx)
 
     def _get_inx_value(self, x_class_type: str, x_otx: str) -> str:
+        """class_type: NameUnit, LabelUnit, TitleUnit, RoadUnit"""
         if x_class_type == "NameUnit":
             return self.namemap._get_inx_value(x_otx)
         elif x_class_type == "LabelUnit":
@@ -204,6 +206,7 @@ class PidginUnit:
             return self.roadmap._get_inx_value(x_otx)
 
     def otx2inx_exists(self, x_class_type: str, x_otx: str, x_inx: str) -> bool:
+        """class_type: NameUnit, LabelUnit, TitleUnit, RoadUnit"""
         if x_class_type == "NameUnit":
             return self.namemap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "LabelUnit":
@@ -214,6 +217,7 @@ class PidginUnit:
             return self.roadmap.otx2inx_exists(x_otx, x_inx)
 
     def del_otx2inx(self, x_class_type: str, x_otx: str):
+        """class_type: NameUnit, LabelUnit, TitleUnit, RoadUnit"""
         if x_class_type == "NameUnit":
             self.namemap.del_otx2inx(x_otx)
         elif x_class_type == "LabelUnit":

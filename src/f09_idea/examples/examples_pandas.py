@@ -51,29 +51,29 @@ fizz3,buzz0,False,20
 
 
 def get_ex01_ordered_by_count_csv() -> str:
-    return """fizz,buzz,x_boolean,count
-fizz1,buzz2,True,10
-fizz2,buzz1,False,10
-fizz0,buzz3,True,20
-fizz3,buzz0,False,20
+    return """count,fizz,buzz,x_boolean
+10,fizz1,buzz2,True
+10,fizz2,buzz1,False
+20,fizz0,buzz3,True
+20,fizz3,buzz0,False
 """
 
 
 def get_ex01_ordered_by_count_buzz_csv() -> str:
-    return """fizz,buzz,x_boolean,count
-fizz2,buzz1,False,10
-fizz1,buzz2,True,10
-fizz3,buzz0,False,20
-fizz0,buzz3,True,20
+    return """count,buzz,fizz,x_boolean
+10,buzz1,fizz2,False
+10,buzz2,fizz1,True
+20,buzz0,fizz3,False
+20,buzz3,fizz0,True
 """
 
 
 def get_ex01_ordered_by_count_x_boolean_csv() -> str:
-    return """fizz,buzz,x_boolean,count
-fizz2,buzz1,False,10
-fizz1,buzz2,True,10
-fizz3,buzz0,False,20
-fizz0,buzz3,True,20
+    return """count,x_boolean,fizz,buzz
+10,False,fizz2,buzz1
+10,True,fizz1,buzz2
+20,False,fizz3,buzz0
+20,True,fizz0,buzz3
 """
 
 
@@ -95,9 +95,9 @@ def get_ex02_atom_dataframe() -> DataFrame:
     # x_dt.loc[5] = ["fizz3", "buzz0", False, 20]
     # x_dt.loc[6] = ["fizz3", "buzz0", False, 20]
     # x_dt.loc[7] = ["fizz3", "buzz0", False, 20]
-    x_dt.loc[2] = [";yao4", "sue2", ";swim1", ";team5", "aw1", "accord45;casa"]
-    x_dt.loc[1] = [";yao3", "sue2", ";swim1", ";team4", "aw1", "accord45;casa;clean"]
     x_dt.loc[0] = [";yao4", "sue2", ";swim2", ";team5", "aw1", "accord45;casa"]
+    x_dt.loc[1] = [";yao3", "sue2", ";swim1", ";team4", "aw1", "accord45;casa;clean"]
+    x_dt.loc[2] = [";yao4", "sue2", ";swim1", ";team5", "aw1", "accord45;casa"]
     x_dt.loc[3] = [";yao3", "sue2", ";swim2", ";team4", "aw1", "accord45;casa;clean"]
     x_dt.loc[4] = [";yao4", "sue1", ";swim1", ";team5", "aw1", "accord45;casa"]
     x_dt.loc[5] = [";yao3", "sue1", ";swim1", ";team4", "aw1", "accord45;casa;clean"]
@@ -108,13 +108,13 @@ def get_ex02_atom_dataframe() -> DataFrame:
 
 
 def get_ex02_atom_csv() -> str:
-    return """healer_name,acct_name,group_label,team_tag,awardee_tag,parent_road
-;yao4,sue1,;swim1,;team5,aw1,accord45;casa
-;yao3,sue1,;swim1,;team4,aw1,accord45;casa;clean
-;yao4,sue1,;swim2,;team5,aw1,accord45;casa
-;yao3,sue1,;swim2,;team4,aw1,accord45;casa;clean
-;yao4,sue2,;swim1,;team5,aw1,accord45;casa
-;yao3,sue2,;swim1,;team4,aw1,accord45;casa;clean
-;yao4,sue2,;swim2,;team5,aw1,accord45;casa
-;yao3,sue2,;swim2,;team4,aw1,accord45;casa;clean
+    return """acct_name,group_label,parent_road,team_tag,awardee_tag,healer_name
+sue1,;swim1,accord45;casa,;team5,aw1,;yao4
+sue1,;swim1,accord45;casa;clean,;team4,aw1,;yao3
+sue1,;swim2,accord45;casa,;team5,aw1,;yao4
+sue1,;swim2,accord45;casa;clean,;team4,aw1,;yao3
+sue2,;swim1,accord45;casa,;team5,aw1,;yao4
+sue2,;swim1,accord45;casa;clean,;team4,aw1,;yao3
+sue2,;swim2,accord45;casa,;team5,aw1,;yao4
+sue2,;swim2,accord45;casa;clean,;team4,aw1,;yao3
 """

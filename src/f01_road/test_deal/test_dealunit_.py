@@ -244,8 +244,11 @@ def test_DealUnit_get_json_ReturnsObj():
     # ESTABLISH
     t4_time_int = 4
     t4_quota = 55
+    t4_celldepth = 11
     t4_deal_acct_nets = {"Sue": -77}
-    t4_dealunit = dealunit_shop(t4_time_int, t4_quota, t4_deal_acct_nets)
+    t4_dealunit = dealunit_shop(
+        t4_time_int, t4_quota, t4_deal_acct_nets, celldepth=t4_celldepth
+    )
     t4_dealunit._magnitude = 67
 
     # WHEN
@@ -253,6 +256,7 @@ def test_DealUnit_get_json_ReturnsObj():
 
     # THEN
     static_t4_json = """{
+  "celldepth": 11,
   "deal_acct_nets": {
     "Sue": -77
   },

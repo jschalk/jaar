@@ -29,11 +29,17 @@ def get_ex1_br00000_df() -> DataFrame:
 
 def get_ex1_br00001_df() -> DataFrame:
     """idea_format_00001_fisc_dealunit_v0_0_0
-    acct_name,fisc_title,owner_name,quota,time_int"""
+    fisc_title,owner_name,quota,time_int,celldepth"""
     x_df = DataFrame(
-        columns=["acct_name", "fisc_title", "owner_name", "quota", "time_int"]
+        columns=[
+            "fisc_title",
+            "owner_name",
+            "quota",
+            "time_int",
+            "celldepth",
+        ]
     )
-    x_df.loc[0] = ["Bob", ACCORD23_STR, "Sue", 445, 777]
+    x_df.loc[0] = [ACCORD23_STR, "Sue", 445, 777, 5]
     return x_df
 
 
@@ -136,15 +142,21 @@ def get_ex2_br00000_df() -> DataFrame:
 
 def get_ex2_br00001_df() -> DataFrame:
     """idea_format_00001_fisc_dealunit_v0_0_0
-    acct_name,fisc_title,owner_name,quota,time_int"""
+    fisc_title,owner_name,quota,time_int"""
     x_df = DataFrame(
-        columns=["acct_name", "fisc_title", "owner_name", "quota", "time_int"]
+        columns=[
+            "fisc_title",
+            "owner_name",
+            "quota",
+            "time_int",
+            "celldepth",
+        ]
     )
-    x_df.loc[0] = ["Bob", ACCORD23_STR, "Sue", 445, 777]
-    x_df.loc[1] = ["Yao", ACCORD23_STR, "Bob", 332, 999]
-    x_df.loc[2] = ["Bob", ACCORD23_STR, "Yao", 700, 222]
-    x_df.loc[3] = ["Yao", JEFFY45_STR, "Xio", 332, 999]
-    x_df.loc[4] = ["Bob", JEFFY45_STR, "Zia", 700, 222]
+    x_df.loc[0] = [ACCORD23_STR, "Bob", 332, 999, 3]
+    x_df.loc[1] = [ACCORD23_STR, "Sue", 445, 777, 3]
+    x_df.loc[2] = [ACCORD23_STR, "Yao", 700, 222, 3]
+    x_df.loc[3] = [JEFFY45_STR, "Xio", 332, 999, 3]
+    x_df.loc[4] = [JEFFY45_STR, "Zia", 700, 222, 3]
     return x_df
 
 
@@ -154,11 +166,11 @@ def get_ex2_br00002_df() -> DataFrame:
     x_df = DataFrame(
         columns=["acct_name", "amount", "fisc_title", "owner_name", "time_int"]
     )
-    x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
+    x_df.loc[0] = ["Zia", 888, ACCORD23_STR, "Bob", 777]
     x_df.loc[1] = ["Zia", 234, ACCORD23_STR, "Sue", 999]
-    x_df.loc[2] = ["Zia", 888, ACCORD23_STR, "Bob", 777]
-    x_df.loc[3] = ["Zia", 234, ACCORD23_STR, "Yao", 999]
-    x_df.loc[4] = ["Zia", 234, JEFFY45_STR, "Yao", 999]
+    x_df.loc[2] = ["Zia", 234, ACCORD23_STR, "Yao", 999]
+    x_df.loc[3] = ["Zia", 234, JEFFY45_STR, "Yao", 999]
+    x_df.loc[4] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     return x_df
 
 

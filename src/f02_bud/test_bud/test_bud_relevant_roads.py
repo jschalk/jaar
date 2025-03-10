@@ -145,15 +145,15 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     min_range_item = itemunit_shop(min_range_x_str, begin=0, close=2880)
     yao_bud.set_l1_item(min_range_item)
 
-    day_distance_str = "day_1ce"
-    day_distance_road = yao_bud.make_l1_road(day_distance_str)
-    day_distance_item = itemunit_shop(day_distance_str, begin=0, close=1440)
-    yao_bud.set_l1_item(day_distance_item)
+    day_length_str = "day_1ce"
+    day_length_road = yao_bud.make_l1_road(day_length_str)
+    day_length_item = itemunit_shop(day_length_str, begin=0, close=1440)
+    yao_bud.set_l1_item(day_length_item)
 
-    hour_distance_str = "hour_distance"
-    hour_distance_road = yao_bud.make_l1_road(hour_distance_str)
-    hour_distance_item = itemunit_shop(hour_distance_str)
-    yao_bud.set_l1_item(hour_distance_item)
+    hour_length_str = "hour_length"
+    hour_length_road = yao_bud.make_l1_road(hour_length_str)
+    hour_length_item = itemunit_shop(hour_length_str)
+    yao_bud.set_l1_item(hour_length_item)
 
     min_days_str = "days in minute_range"
     min_days_road = yao_bud.make_road(min_range_x_road, min_days_str)
@@ -169,8 +169,8 @@ def test_BudUnit_get_relevant_roads_ReturnSimple():
     print(f"{relevant_roads=}")
     assert len(relevant_roads) == 3
     assert min_range_x_road in relevant_roads
-    assert day_distance_road not in relevant_roads
-    assert hour_distance_road not in relevant_roads
+    assert day_length_road not in relevant_roads
+    assert hour_length_road not in relevant_roads
     assert min_days_road in relevant_roads
     assert yao_bud.fisc_title in relevant_roads
     # min_days_item = yao_bud.get_item_obj(min_days_road)

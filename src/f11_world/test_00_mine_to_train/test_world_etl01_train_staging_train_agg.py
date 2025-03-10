@@ -33,13 +33,13 @@ def test_WorldUnit_train_staging_to_train_agg_CreatesOtxSheets_Scenario0_GroupBy
         face_name_str(),
         event_int_str(),
         fisc_title_str(),
-        hour_title_str(),
         cumlative_minute_str(),
+        hour_title_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event_1, accord23_str, hour6am, minute_360]
-    row2 = [sue_str, event_1, accord23_str, hour7am, minute_420]
-    row3 = [sue_str, event_1, accord23_str, hour7am, minute_420]
+    row1 = [sue_str, event_1, accord23_str, minute_360, hour6am]
+    row2 = [sue_str, event_1, accord23_str, minute_420, hour7am]
+    row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(mine_file_path, "example1_br00003", df1)
     fizz_world.mine_to_train_staging()
@@ -74,23 +74,23 @@ def test_WorldUnit_train_staging_to_train_agg_CreatesOtxSheets_Scenario1_GroupBy
     event7 = 7
     minute_360 = 360
     minute_420 = 420
-    minute_480 = 480
     hour6am = "6am"
     hour7am = "7am"
+    hour8am = "8am"
     ex_filename = "fizzbuzz.xlsx"
     mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
         fisc_title_str(),
-        hour_title_str(),
         cumlative_minute_str(),
+        hour_title_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
-    row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
-    row3 = [sue_str, event3, accord23_str, hour7am, minute_480]
-    row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
+    row1 = [sue_str, event3, accord23_str, minute_360, hour6am]
+    row2 = [sue_str, event3, accord23_str, minute_420, hour7am]
+    row3 = [sue_str, event3, accord23_str, minute_420, hour8am]
+    row4 = [sue_str, event7, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(mine_file_path, "example1_br00003", df1)
     fizz_world.mine_to_train_staging()

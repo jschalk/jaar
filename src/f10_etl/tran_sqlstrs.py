@@ -49,14 +49,14 @@ CREATE_FISC_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_ag
 CREATE_FISC_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, time_int INTEGER, amount REAL, error_message TEXT)"""
 CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, celldepth INT)"""
 CREATE_FISC_DEALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, time_int INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_title TEXT, hour_title TEXT, cumlative_minute INTEGER)"""
-CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, hour_title TEXT, cumlative_minute INTEGER, error_message TEXT)"""
-CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_title TEXT, month_title TEXT, cumlative_day INTEGER)"""
-CREATE_FISC_TIMELINE_MONTH_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, month_title TEXT, cumlative_day INTEGER, error_message TEXT)"""
-CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_title TEXT, weekday_title TEXT, weekday_order INTEGER)"""
-CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, weekday_title TEXT, weekday_order INTEGER, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, fund_coin REAL, penny REAL, respect_bit REAL, present_time INTEGER, bridge TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, timeline_title TEXT)"""
-CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, fund_coin REAL, penny REAL, respect_bit REAL, present_time INTEGER, bridge TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, timeline_title TEXT, error_message TEXT)"""
+CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_title TEXT, cumlative_minute INTEGER, hour_title TEXT)"""
+CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, cumlative_minute INTEGER, hour_title TEXT, error_message TEXT)"""
+CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_title TEXT, cumlative_day INTEGER, month_title TEXT)"""
+CREATE_FISC_TIMELINE_MONTH_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, cumlative_day INTEGER, month_title TEXT, error_message TEXT)"""
+CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT)"""
+CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT, error_message TEXT)"""
+CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, present_time INTEGER, bridge TEXT)"""
+CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, present_time INTEGER, bridge TEXT, error_message TEXT)"""
 
 
 def get_fisc_create_table_sqlstrs() -> dict[str, str]:
@@ -226,33 +226,33 @@ GROUP BY fisc_title, owner_name, time_int
 HAVING MIN(quota) != MAX(quota)
     OR MIN(celldepth) != MAX(celldepth)
 """
-FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_title, hour_title
+FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_title, cumlative_minute
 FROM fisc_timeline_hour_staging
-GROUP BY fisc_title, hour_title
-HAVING MIN(cumlative_minute) != MAX(cumlative_minute)
+GROUP BY fisc_title, cumlative_minute
+HAVING MIN(hour_title) != MAX(hour_title)
 """
-FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_title, month_title
+FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_title, cumlative_day
 FROM fisc_timeline_month_staging
-GROUP BY fisc_title, month_title
-HAVING MIN(cumlative_day) != MAX(cumlative_day)
+GROUP BY fisc_title, cumlative_day
+HAVING MIN(month_title) != MAX(month_title)
 """
-FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_title, weekday_title
+FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_title, weekday_order
 FROM fisc_timeline_weekday_staging
-GROUP BY fisc_title, weekday_title
-HAVING MIN(weekday_order) != MAX(weekday_order)
+GROUP BY fisc_title, weekday_order
+HAVING MIN(weekday_title) != MAX(weekday_title)
 """
 FISCUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_title
 FROM fiscunit_staging
 GROUP BY fisc_title
-HAVING MIN(fund_coin) != MAX(fund_coin)
+HAVING MIN(timeline_title) != MAX(timeline_title)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
     OR MIN(present_time) != MAX(present_time)
     OR MIN(bridge) != MAX(bridge)
-    OR MIN(c400_number) != MAX(c400_number)
-    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
-    OR MIN(monthday_distortion) != MAX(monthday_distortion)
-    OR MIN(timeline_title) != MAX(timeline_title)
 """
 
 
@@ -576,57 +576,57 @@ WHERE inconsistency_rows.fisc_title = fisc_dealunit_staging.fisc_title
 ;
 """
 FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, hour_title
+SELECT fisc_title, cumlative_minute
 FROM fisc_timeline_hour_staging
-GROUP BY fisc_title, hour_title
-HAVING MIN(cumlative_minute) != MAX(cumlative_minute)
+GROUP BY fisc_title, cumlative_minute
+HAVING MIN(hour_title) != MAX(hour_title)
 )
 UPDATE fisc_timeline_hour_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_title = fisc_timeline_hour_staging.fisc_title
-    AND inconsistency_rows.hour_title = fisc_timeline_hour_staging.hour_title
+    AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_staging.cumlative_minute
 ;
 """
 FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, month_title
+SELECT fisc_title, cumlative_day
 FROM fisc_timeline_month_staging
-GROUP BY fisc_title, month_title
-HAVING MIN(cumlative_day) != MAX(cumlative_day)
+GROUP BY fisc_title, cumlative_day
+HAVING MIN(month_title) != MAX(month_title)
 )
 UPDATE fisc_timeline_month_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_title = fisc_timeline_month_staging.fisc_title
-    AND inconsistency_rows.month_title = fisc_timeline_month_staging.month_title
+    AND inconsistency_rows.cumlative_day = fisc_timeline_month_staging.cumlative_day
 ;
 """
 FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, weekday_title
+SELECT fisc_title, weekday_order
 FROM fisc_timeline_weekday_staging
-GROUP BY fisc_title, weekday_title
-HAVING MIN(weekday_order) != MAX(weekday_order)
+GROUP BY fisc_title, weekday_order
+HAVING MIN(weekday_title) != MAX(weekday_title)
 )
 UPDATE fisc_timeline_weekday_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_title = fisc_timeline_weekday_staging.fisc_title
-    AND inconsistency_rows.weekday_title = fisc_timeline_weekday_staging.weekday_title
+    AND inconsistency_rows.weekday_order = fisc_timeline_weekday_staging.weekday_order
 ;
 """
 FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_title
 FROM fiscunit_staging
 GROUP BY fisc_title
-HAVING MIN(fund_coin) != MAX(fund_coin)
+HAVING MIN(timeline_title) != MAX(timeline_title)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
     OR MIN(present_time) != MAX(present_time)
     OR MIN(bridge) != MAX(bridge)
-    OR MIN(c400_number) != MAX(c400_number)
-    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
-    OR MIN(monthday_distortion) != MAX(monthday_distortion)
-    OR MIN(timeline_title) != MAX(timeline_title)
 )
 UPDATE fiscunit_staging
 SET error_message = 'Inconsistent fisc data'
@@ -747,29 +747,29 @@ WHERE error_message IS NULL
 GROUP BY fisc_title, owner_name, time_int
 ;
 """
-FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_title, hour_title, cumlative_minute)
-SELECT fisc_title, hour_title, MAX(cumlative_minute)
+FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_title, cumlative_minute, hour_title)
+SELECT fisc_title, cumlative_minute, MAX(hour_title)
 FROM fisc_timeline_hour_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, hour_title
+GROUP BY fisc_title, cumlative_minute
 ;
 """
-FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_title, month_title, cumlative_day)
-SELECT fisc_title, month_title, MAX(cumlative_day)
+FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_title, cumlative_day, month_title)
+SELECT fisc_title, cumlative_day, MAX(month_title)
 FROM fisc_timeline_month_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, month_title
+GROUP BY fisc_title, cumlative_day
 ;
 """
-FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_title, weekday_title, weekday_order)
-SELECT fisc_title, weekday_title, MAX(weekday_order)
+FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_title, weekday_order, weekday_title)
+SELECT fisc_title, weekday_order, MAX(weekday_title)
 FROM fisc_timeline_weekday_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, weekday_title
+GROUP BY fisc_title, weekday_order
 ;
 """
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, fund_coin, penny, respect_bit, present_time, bridge, c400_number, yr1_jan1_offset, monthday_distortion, timeline_title)
-SELECT fisc_title, MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(timeline_title)
+FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, present_time, bridge)
+SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge)
 FROM fiscunit_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title

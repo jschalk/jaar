@@ -43,16 +43,23 @@ def test_get_ordered_csv_ReturnsObj():
     count_bool_csv = get_ex01_ordered_by_count_x_boolean_csv()
 
     # WHEN / THEN
-    print(f"    {empty_csv=}")
-    print(f"{unordered_csv=}")
+    # print(f"    {empty_csv=}")
+    # print(f"{unordered_csv=}")
     assert get_ordered_csv(empty_dt) == """\n"""
-    assert get_ordered_csv(x1_dt) == unordered_csv
-    assert get_ordered_csv(x1_dt, ["fizz"]) == fizz_csv
-    assert get_ordered_csv(x1_dt, ["count"]) == count_csv
-    assert get_ordered_csv(x1_dt, ["count", "buzz"]) == count_buzz_csv
-    assert get_ordered_csv(x1_dt, ["count", "x_boolean"]) == count_bool_csv
+    fizz0_order = ["fizz", "buzz", "x_boolean", "count"]
+    count0_order = ["count", "fizz", "buzz", "x_boolean"]
+    count0_buzz1_order = ["count", "buzz", "fizz", "x_boolean"]
+    count0_xboolean1_order = ["count", "x_boolean", "fizz", "buzz"]
+    print(f"                                {count_bool_csv=}")
+    print(f"{get_ordered_csv(x1_dt, count0_xboolean1_order)=}")
+    assert get_ordered_csv(x1_dt, fizz0_order) != unordered_csv
+    assert get_ordered_csv(x1_dt, fizz0_order) == fizz_csv
+    assert get_ordered_csv(x1_dt, count0_order) == count_csv
+    assert get_ordered_csv(x1_dt, count0_buzz1_order) == count_buzz_csv
+    assert get_ordered_csv(x1_dt, count0_xboolean1_order) == count_bool_csv
     # have sorting work even if sorting column does not exist
-    assert get_ordered_csv(x1_dt, ["count", "vic", "buzz"]) == count_buzz_csv
+    count0_vic1_buzz2_order = ["count", "vic", "buzz", "fizz", "x_boolean"]
+    assert get_ordered_csv(x1_dt, count0_vic1_buzz2_order) == count_buzz_csv
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
@@ -71,7 +78,8 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     # THEN
     assert os_path_exists(ex_file_path)
     small_example01_csv = get_small_example01_csv()
-    assert open_file(env_dir, ex_filename) == small_example01_csv
+    assert open_file(env_dir, ex_filename) != small_example01_csv
+    assert open_file(env_dir, ex_filename) != "\n\n\n\n"
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(

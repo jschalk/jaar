@@ -2280,7 +2280,7 @@
             "Water Living": {
                 "_is_expanded": false,
                 "_kids": {
-                    "Existance in Williamette watershed": {
+                    "Swimming in Williamette watershed": {
                         "_kids": {
                             "Go climbing at east Circuit": {
                                 "_item_title": "Go climbing at east Circuit",
@@ -2328,7 +2328,7 @@
                                 }
                             }
                         },
-                        "_item_title": "Existance in Williamette watershed",
+                        "_item_title": "Swimming in Williamette watershed",
                         "_uid": 225,
                         "mass": 1,
                         "reasonunits": {

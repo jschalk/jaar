@@ -97,6 +97,16 @@ def get_idea_elements_sort_order() -> list[str]:
         "face_name",
         "event_int",
         "fisc_title",
+        "timeline_title",
+        "c400_number",
+        "yr1_jan1_offset",
+        "monthday_distortion",
+        "cumlative_day",
+        "month_title",
+        "cumlative_minute",
+        "hour_title",
+        "weekday_order",
+        "weekday_title",
         "owner_name",
         "owner_name_ERASE",
         "acct_name",
@@ -155,12 +165,6 @@ def get_idea_elements_sort_order() -> list[str]:
         "respect_bit",
         "present_time",
         "amount",
-        "month_title",
-        "hour_title",
-        "cumlative_minute",
-        "cumlative_day",
-        "weekday_title",
-        "weekday_order",
         "otx_title",
         "inx_title",
         "otx_road",
@@ -173,12 +177,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "inx_bridge",
         "bridge",
         "unknown_word",
-        "c400_number",
-        "yr1_jan1_offset",
         "quota",
         "celldepth",
-        "monthday_distortion",
-        "timeline_title",
         "error_message",
     ]
 
@@ -189,9 +189,7 @@ def get_custom_sorted_list(
     if sorting_columns is None:
         sorting_columns = get_idea_elements_sort_order()
     sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
-    return [
-        sort_col for sort_col in sorting_columns if sort_col in sort_columns_in_existing
-    ]
+    return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
@@ -567,12 +565,12 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fisc_title,fund_coin,penny,respect_bit,present_time,bridge,c400_number,yr1_jan1_offset,monthday_distortion,timeline_title": idea_format_00000_fiscunit_v0_0_0(),
+        "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge": idea_format_00000_fiscunit_v0_0_0(),
         "fisc_title,owner_name,time_int,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
         "fisc_title,owner_name,acct_name,time_int,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
-        "fisc_title,hour_title,cumlative_minute": idea_format_00003_fisc_timeline_hour_v0_0_0(),
-        "fisc_title,month_title,cumlative_day": idea_format_00004_fisc_timeline_month_v0_0_0(),
-        "fisc_title,weekday_title,weekday_order": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
+        "fisc_title,cumlative_minute,hour_title": idea_format_00003_fisc_timeline_hour_v0_0_0(),
+        "fisc_title,cumlative_day,month_title": idea_format_00004_fisc_timeline_month_v0_0_0(),
+        "fisc_title,weekday_order,weekday_title": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
         "fisc_title,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
         "fisc_title,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
         "fisc_title,owner_name,parent_road,item_title,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
@@ -624,35 +622,6 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 
 
 def get_idea_dimen_ref() -> dict[str, set[str]]:
-    # return {
-    #     "fiscunit": ["br00000"],
-    #     "fisc_dealunit": ["br00001"],
-    #     "fisc_cashbook": ["br00002"],
-    #     "fisc_timeline_hour": ["br00003"],
-    #     "fisc_timeline_month": ["br00004"],
-    #     "fisc_timeline_weekday": ["br00005"],
-    #     "bud_acctunit": [
-    #         "br00011",
-    #         "br00021",
-    #         "br00113",
-    #         "br00115",
-    #         "br00116",
-    #         "br00117",
-    #     ],
-    #     "bud_acct_membership": ["br00012", "br00020", "br00050"],
-    #     "bud_itemunit": ["br00013", "br00019", "br00028", "br00036"],
-    #     "bud_item_awardlink": ["br00022"],
-    #     "bud_item_factunit": ["br00023"],
-    #     "bud_item_teamlink": ["br00024"],
-    #     "bud_item_healerlink": ["br00025", "br00036"],
-    #     "bud_item_reason_premiseunit": ["br00026"],
-    #     "bud_item_reasonunit": ["br00027"],
-    #     "budunit": ["br00029"],
-    #     "map_label": ["br00042", "br00115"],
-    #     "map_name": ["br00043", "br00113"],
-    #     "map_title": ["br00044", "br00116"],
-    #     "map_road": ["br00045", "br00117"],
-    # }
     return {
         "fiscunit": ["br00000"],
         "fisc_dealunit": ["br00001"],

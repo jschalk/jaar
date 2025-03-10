@@ -413,15 +413,15 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     accord56_bridge = "/"
     accord56 = [
         accord56_str,
+        "",  # accord56_timeline_title_str,
+        "",  # accord56_c400_number_str,
+        "",  # accord56_yr1_jan1_offset_str,
+        "",  # accord56_monthday_distortion_str,
         accord56_fund_coin,
         accord56_penny,
         accord56_respect_bit,
         accord56_present_time,
         accord56_bridge,
-        "",  # accord56_c400_number_str,
-        "",  # accord56_yr1_jan1_offset_str,
-        "",  # accord56_monthday_distortion_str,
-        "",  # accord56_timeline_title_str,
     ]
     print(f"{xc.unit_agg_columns=}")
     fiscunit_rows = [accord56]
@@ -470,15 +470,15 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
     accord56_yr1_jan1_offset = 555
     accord56 = [
         accord56_str,
+        accord56_timeline_title,
+        accord56_c400_number,
+        accord56_yr1_jan1_offset,
+        accord56_monthday_distortion,
         "",  # accord56_fund_coin,
         "",  # accord56_penny,
         "",  # accord56_respect_bit,
         "",  # accord56_present_time,
         "",  # accord56_bridge,
-        accord56_c400_number,
-        accord56_yr1_jan1_offset,
-        accord56_monthday_distortion,
-        accord56_timeline_title,
     ]
     fiscunit_rows = [accord56]
     fiscunit_df = DataFrame(fiscunit_rows, columns=xc.unit_agg_columns)
@@ -524,8 +524,8 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario3_fisc_timeline_weekday(
     tuesday_str = "Tuesday"
     accord56_fisc_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscunit_df = DataFrame([accord56_fisc_row], columns=xc.unit_agg_columns)
-    a56_weekday_t3 = [accord56_str, monday_str, 3]
-    a56_weekday_t7 = [accord56_str, tuesday_str, 4]
+    a56_weekday_t3 = [accord56_str, 3, monday_str]
+    a56_weekday_t7 = [accord56_str, 4, tuesday_str]
     a56_weekday_rows = [a56_weekday_t3, a56_weekday_t7]
     a56_weekday_df = DataFrame(a56_weekday_rows, columns=xc.week_agg_columns)
     print(f"{a56_weekday_df=}")
@@ -563,8 +563,8 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario4_fisc_timeline_month(
     june_str = "June"
     accord56_fisc_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscunit_df = DataFrame([accord56_fisc_row], columns=xc.unit_agg_columns)
-    a56_june = [accord56_str, june_str, 150]
-    a56_july = [accord56_str, july_str, 365]
+    a56_june = [accord56_str, 150, june_str]
+    a56_july = [accord56_str, 365, july_str]
     a56_month_rows = [a56_july, a56_june]
     a56_month_df = DataFrame(a56_month_rows, columns=xc.mont_agg_columns)
     print(f"{a56_month_df=}")
@@ -606,9 +606,9 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario5_fisc_timeline_hour(
     a56_8hr = "8hour"
     accord56_fisc_row = [accord56_str, "", "", "", "", "", "", "", "", ""]
     fiscunit_df = DataFrame([accord56_fisc_row], columns=xc.unit_agg_columns)
-    a56_0hour_row = [accord56_str, a56_0hr, 60]
-    a56_5hour_row = [accord56_str, a56_5hr, 500]
-    a56_8hour_row = [accord56_str, a56_8hr, 1440]
+    a56_0hour_row = [accord56_str, 60, a56_0hr]
+    a56_5hour_row = [accord56_str, 500, a56_5hr]
+    a56_8hour_row = [accord56_str, 1440, a56_8hr]
     a56_hour_rows = [a56_0hour_row, a56_5hour_row, a56_8hour_row]
     a56_hour_df = DataFrame(a56_hour_rows, columns=xc.hour_agg_columns)
     print(f"{a56_hour_df=}")
@@ -715,5 +715,6 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario7_fisc_dealunit(
     expected_fiscunit.add_dealunit(sue_str, t3, quota3)
     expected_fiscunit.add_dealunit(sue_str, t7, quota7)
     print(f"{expected_fiscunit.brokerunits=}")
-    print(f"{expected_fiscunit=}")
+    print(f"{accord56_fiscunit.brokerunits=}")
+    # print(f"{expected_fiscunit=}")
     assert accord56_fiscunit.brokerunits == expected_fiscunit.brokerunits

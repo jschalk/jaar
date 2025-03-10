@@ -2,6 +2,7 @@ from src.f00_instrument.file import create_path
 from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
 from src.f07_fisc.fisc import fiscunit_shop
+from src.f09_idea.idea import fisc_build_from_df
 from src.f09_idea.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
 from src.f09_idea.examples.idea_df_examples import (
     get_ex1_br00000_df,
@@ -17,7 +18,6 @@ from src.f09_idea.examples.idea_df_examples import (
     get_ex2_br00004_df,
     get_ex2_br00005_df,
 )
-from src.f09_idea.idea import fisc_build_from_df
 
 
 # given a dataframe, build a fisc unit
@@ -56,7 +56,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert x_fiscunits
     assert x_fiscunits.get(accord23_str) != None
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
-    accord23_fiscunit = fiscunit_shop(
+    expected_accord23_fiscunit = fiscunit_shop(
         present_time=5500,
         fisc_title=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
@@ -66,13 +66,14 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
         bridge=slash_str,
         timeline=creg_timelineunit,
     )
-    accord23_fiscunit.add_dealunit(
+    expected_accord23_fiscunit.add_dealunit(
         owner_name="Sue",
         time_int=777,
         quota=445,
         allow_prev_to_present_time_entry=True,
+        celldepth=5,
     )
-    accord23_fiscunit.add_cashpurchase(
+    expected_accord23_fiscunit.add_cashpurchase(
         owner_name="Zia",
         acct_name="Bob",
         time_int=777,
@@ -84,13 +85,14 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert gen_fiscunit.penny == x_penny
     assert gen_fiscunit.fisc_title == accord23_str
     assert gen_fiscunit.fisc_mstr_dir == x_fiscs_dir
-    assert gen_fiscunit.timeline == accord23_fiscunit.timeline
-    assert gen_fiscunit.brokerunits == accord23_fiscunit.brokerunits
-    assert gen_fiscunit.cashbook.tranunits == accord23_fiscunit.cashbook.tranunits
+    assert gen_fiscunit.timeline == expected_accord23_fiscunit.timeline
+    assert gen_fiscunit.brokerunits == expected_accord23_fiscunit.brokerunits
+    a23_tranunits = expected_accord23_fiscunit.cashbook.tranunits
+    assert gen_fiscunit.cashbook.tranunits == a23_tranunits
     print(f"{gen_fiscunit.brokerunits=}")
     assert len(gen_fiscunit.brokerunits) == 1
     assert len(gen_fiscunit.cashbook.tranunits) == 1
-    assert gen_fiscunit == accord23_fiscunit
+    assert gen_fiscunit == expected_accord23_fiscunit
 
 
 # given a dataframe, build a fisc unit
