@@ -6,8 +6,8 @@ from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config
 from src.f07_fisc.fisc import fiscunit_shop
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_idea.idea_config import get_idea_format_filename
-from src.f09_idea.idea import (
-    fisc_build_from_df,
+from src.f09_idea.idea import fisc_build_from_df
+from src.f09_idea.idea_csv_tool import (
     create_init_stance_idea_brick_csv_strs,
     add_fiscunit_to_stance_csv_strs,
     add_fiscunits_to_stance_csv_strs,
