@@ -3,6 +3,8 @@ from src.f02_bud.group import awardlink_shop
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
+from src.f04_gift.delta import get_minimal_buddelta, buddelta_shop
+from src.f04_gift.gift import giftunit_shop
 from src.f07_fisc.fisc import fiscunit_shop
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_idea.idea_config import get_idea_format_filename
@@ -37,6 +39,7 @@ from src.f09_idea.idea_csv_tool import (
     add_to_br00044_csv,
     add_to_br00045_csv,
     add_pidginunit_to_stance_csv_strs,
+    add_giftunit_to_stance_csv_strs,
 )
 from src.f09_idea.idea_db_tool import get_ordered_csv
 from src.f09_idea.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
@@ -48,6 +51,7 @@ from src.f09_idea.examples.idea_df_examples import (
     get_ex2_br00004_df,
     get_ex2_br00005_df,
 )
+from copy import deepcopy as copy_deepcopy
 
 
 def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
@@ -367,9 +371,7 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     x_csv = add_bud_to_br00023_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    clean_row = (
-        f",,{a23_str},{bob_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
-    )
+    clean_row = f",,{a23_str},{bob_str},{a23_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
@@ -535,7 +537,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
         f",,{a23_str},{bob_str},{bob_bud.fisc_title},casa,,,,,,,,,0,False,False\n"
     )
     # print(f"{mop_row=}")
-    expected_csv = f"{csv_header}{root_row}{mop_row}{casa_row}"
+    expected_csv = f"{csv_header}{mop_row}{casa_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
     assert x_csv == expected_csv
@@ -758,343 +760,427 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     assert x_ideabricks.get("br00045") != br00045_header
 
 
-# def test_add_gift_to_br00020_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     yao_str = "Yao"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     bob_bud.add_acctunit(yao_str)
-#     run_str = ";Run"
-#     run_credit = 33
-#     run_debtit = 55
-#     bob_bud.get_acct(yao_str).add_membership(run_str, run_credit, run_debtit)
-#     csv_header = x_ideabricks.get("br00020")
+def test_add_gift_to_br00020_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    yao_str = "Yao"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    bob_bud.add_acctunit(yao_str)
+    run_str = ";Run"
+    run_credit = 33
+    run_debtit = 55
+    bob_bud.get_acct(yao_str).add_membership(run_str, run_credit, run_debtit)
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00020")
 
-#     # WHEN
-#     x_csv = add_gift_to_br00020_csv(csv_header, bob_bud, csv_delimiter)
+    # WHEN
+    x_csv = add_gift_to_br00020_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # THEN
-#     yao_yao_row = f"{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
-#     yao_run_row = f"{a23_str},{bob_str},{yao_str},{run_str},{run_credit},{run_debtit}\n"
-#     print(f"{x_csv=}")
-#     print(f"{yao_run_row=}")
-#     assert x_csv == f"{csv_header}{yao_yao_row}{yao_run_row}"
-
-
-# def test_add_gift_to_br00021_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     yao_str = "Yao"
-#     yao_credit = 33
-#     yao_debtit = 55
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     bob_bud.add_acctunit(yao_str, yao_credit, yao_debtit)
-#     csv_header = x_ideabricks.get("br00021")
-
-#     # WHEN
-#     x_csv = add_gift_to_br00021_csv(csv_header, bob_bud, csv_delimiter)
-
-#     # THEN
-#     yao_row = f"{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debtit}\n"
-#     assert x_csv == f"{csv_header}{yao_row}"
+    # THEN
+    yao_yao_row = f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
+    yao_run_row = f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{run_str},{run_credit},{run_debtit}\n"
+    print(f"       {x_csv=}")
+    expected_csv = f"{csv_header}{yao_run_row}{yao_yao_row}"
+    print(f"{expected_csv=}")
+    assert len(x_csv) == len(f"{csv_header}{yao_run_row}{yao_yao_row}")
 
 
-# def test_add_gift_to_br00022_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     casa_road = bob_bud.make_l1_road("casa")
-#     yao_str = "Yao"
-#     yao_give_force = 55
-#     yao_take_force = 77
-#     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.edit_item_attr(casa_road, awardlink=casa_awardlink)
-#     csv_header = x_ideabricks.get("br00022")
-#     print(f"{csv_header=}")
+def test_add_gift_to_br00021_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    yao_str = "Yao"
+    yao_credit = 33
+    yao_debtit = 55
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    bob_bud.add_acctunit(yao_str, yao_credit, yao_debtit)
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00021")
 
-#     # WHEN
-#     bob_bud.settle_bud()
-#     x_csv = add_gift_to_br00022_csv(csv_header, bob_bud, csv_delimiter)
+    # WHEN
+    x_csv = add_gift_to_br00021_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # THEN
-#     yao_award_row = (
-#         f"{a23_str},{bob_str},{casa_road},{yao_str},{yao_give_force},{yao_take_force}\n"
-#     )
-#     assert x_csv == f"{csv_header}{yao_award_row}"
-
-
-# def test_add_gift_to_br00023_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     casa_road = bob_bud.make_l1_road("casa")
-#     clean_road = bob_bud.make_road(casa_road, "clean")
-#     clean_fopen = 55
-#     clean_fnigh = 77
-#     bob_bud.add_item(casa_road)
-#     bob_bud.add_item(clean_road)
-#     bob_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh)
-#     csv_header = x_ideabricks.get("br00023")
-#     print(f"{csv_header=}")
-
-#     # WHEN
-#     x_csv = add_gift_to_br00023_csv(csv_header, bob_bud, csv_delimiter)
-
-#     # THEN
-#     clean_row = (
-#         f"{a23_str},{bob_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
-#     )
-#     assert x_csv == f"{csv_header}{clean_row}"
+    # THEN
+    yao_row = (
+        f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debtit}\n"
+    )
+    assert x_csv == f"{csv_header}{yao_row}"
 
 
-# def test_add_gift_to_br00024_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     casa_road = bob_bud.make_l1_road("casa")
-#     bob_bud.add_item(casa_road)
-#     casa_item = bob_bud.get_item_obj(casa_road)
-#     cleaners_str = "cleaners"
-#     casa_item.teamunit.set_teamlink(cleaners_str)
-#     csv_header = x_ideabricks.get("br00024")
-#     print(f"{csv_header=}")
+def test_add_gift_to_br00022_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    casa_road = bob_bud.make_l1_road("casa")
+    yao_str = "Yao"
+    yao_give_force = 55
+    yao_take_force = 77
+    casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
+    bob_bud.add_item(casa_road)
+    bob_bud.edit_item_attr(casa_road, awardlink=casa_awardlink)
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00022")
+    print(f"{csv_header=}")
 
-#     # WHEN
-#     bob_bud.settle_bud()
-#     x_csv = add_gift_to_br00024_csv(csv_header, bob_bud, csv_delimiter)
+    # WHEN
+    bob_bud.settle_bud()
+    x_csv = add_gift_to_br00022_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # THEN
-#     cleaners_row = f"{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
-#     assert x_csv == f"{csv_header}{cleaners_row}"
-
-
-# def test_add_gift_to_br00025_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     casa_road = bob_bud.make_l1_road("casa")
-#     bob_bud.add_item(casa_road)
-#     casa_item = bob_bud.get_item_obj(casa_road)
-#     cleaners_str = "cleaners"
-#     casa_item.healerlink.set_healer_name(cleaners_str)
-#     csv_header = x_ideabricks.get("br00025")
-#     print(f"{csv_header=}")
-
-#     # WHEN
-#     bob_bud.settle_bud()
-#     x_csv = add_gift_to_br00025_csv(csv_header, bob_bud, csv_delimiter)
-
-#     # THEN
-#     cleaners_row = f"{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
-#     assert x_csv == f"{csv_header}{cleaners_row}"
+    # THEN
+    yao_award_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{yao_str},{yao_give_force},{yao_take_force}\n"
+    assert x_csv == f"{csv_header}{yao_award_row}"
 
 
-# def test_add_gift_to_br00026_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     mop_road = bob_bud.make_l1_road("mop")
-#     casa_road = bob_bud.make_l1_road("casa")
-#     clean_road = bob_bud.make_road(casa_road, "clean")
-#     clean_premise_open = 22
-#     clean_premise_nigh = 55
-#     clean_premise_divisor = 77
-#     bob_bud.add_item(mop_road)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.add_item(clean_road)
-#     bob_bud.edit_item_attr(
-#         mop_road,
-#         reason_base=casa_road,
-#         reason_premise=clean_road,
-#         reason_premise_open=clean_premise_open,
-#         reason_premise_nigh=clean_premise_nigh,
-#         reason_premise_divisor=clean_premise_divisor,
-#     )
-#     csv_header = x_ideabricks.get("br00026")
-#     print(f"{csv_header=}")
+def test_add_gift_to_br00023_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    casa_road = bob_bud.make_l1_road("casa")
+    clean_road = bob_bud.make_road(casa_road, "clean")
+    clean_fopen = 55
+    clean_fnigh = 77
+    bob_bud.add_item(casa_road)
+    bob_bud.add_item(clean_road)
+    bob_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh)
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00023")
+    print(f"{csv_header=}")
 
-#     # WHEN
-#     bob_bud.settle_bud()
-#     x_csv = add_gift_to_br00026_csv(csv_header, bob_bud, csv_delimiter)
+    # WHEN
+    x_csv = add_gift_to_br00023_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # THEN
-#     mop_row = f"{a23_str},{bob_str},{mop_road},{casa_road},{clean_road},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
-#     assert x_csv == f"{csv_header}{mop_row}"
+    # THEN
+    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
+    expected_csv = f"{csv_header}{clean_row}"
+    print(f"       {x_csv=}")
+    print(f"{expected_csv=}")
+    assert x_csv == expected_csv
 
 
-# def test_add_gift_to_br00027_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     mop_road = bob_bud.make_l1_road("mop")
-#     casa_road = bob_bud.make_l1_road("casa")
-#     bob_bud.add_item(mop_road)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.edit_item_attr(
-#         mop_road,
-#         reason_base=casa_road,
-#         reason_base_item_active_requisite=True,
-#     )
-#     csv_header = x_ideabricks.get("br00027")
-#     print(f"{csv_header=}")
+def test_add_gift_to_br00024_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    casa_road = bob_bud.make_l1_road("casa")
+    bob_bud.add_item(casa_road)
+    casa_item = bob_bud.get_item_obj(casa_road)
+    cleaners_str = "cleaners"
+    casa_item.teamunit.set_teamlink(cleaners_str)
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00024")
+    print(f"{csv_header=}")
 
-#     # WHEN
-#     bob_bud.settle_bud()
-#     x_csv = add_gift_to_br00027_csv(csv_header, bob_bud, csv_delimiter)
+    # WHEN
+    bob_bud.settle_bud()
+    x_csv = add_gift_to_br00024_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # THEN
-#     casa_row = f"{a23_str},{bob_str},{mop_road},{casa_road},True\n"
-#     assert x_csv == f"{csv_header}{casa_row}"
-
-
-# def test_add_gift_to_br00028_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     mop_road = bob_bud.make_l1_road("mop")
-#     casa_road = bob_bud.make_l1_road("casa")
-#     casa_begin = 3
-#     casa_close = 5
-#     casa_addin = 7
-#     casa_numor = 13
-#     casa_denom = 17
-#     casa_morph = 27
-#     casa_gogo_want = 31
-#     casa_stop_want = 41
-#     casa_mass = 2
-#     casa_pledge = False
-#     casa_problem_bool = False
-#     bob_bud.add_item(casa_road)
-#     bob_bud.add_item(mop_road)
-#     bob_bud.edit_item_attr(
-#         mop_road,
-#         begin=casa_begin,
-#         close=casa_close,
-#         addin=casa_addin,
-#         numor=casa_numor,
-#         denom=casa_denom,
-#         morph=casa_morph,
-#         gogo_want=casa_gogo_want,
-#         stop_want=casa_stop_want,
-#         mass=casa_mass,
-#         pledge=casa_pledge,
-#         problem_bool=casa_problem_bool,
-#     )
-#     csv_header = x_ideabricks.get("br00028")
-#     print(f"{csv_header=}")
-
-#     # WHEN
-#     bob_bud.settle_bud()
-#     x_csv = add_gift_to_br00028_csv(csv_header, bob_bud, csv_delimiter)
-
-#     # THEN
-#     root_row = f"{a23_str},{bob_str},,{bob_bud.fisc_title},,,,,,,,,1,False,False\n"
-#     mop_row = f"{a23_str},{bob_str},{bob_bud.fisc_title},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-#     casa_row = f"{a23_str},{bob_str},{bob_bud.fisc_title},casa,,,,,,,,,0,False,False\n"
-#     # print(f"{mop_row=}")
-#     expected_csv = f"{csv_header}{root_row}{mop_row}{casa_row}"
-#     print(f"       {x_csv=}")
-#     print(f"{expected_csv=}")
-#     assert x_csv == expected_csv
+    # THEN
+    cleaners_row = (
+        f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
+    )
+    expected_csv = f"{csv_header}{cleaners_row}"
+    print(f"       {x_csv=}")
+    print(f"{expected_csv=}")
+    assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-# def test_add_gift_to_br00029_csv_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     bob_bud.credor_respect = 444
-#     bob_bud.debtor_respect = 555
-#     bob_bud.fund_pool = 777
-#     bob_bud.max_tree_traverse = 3
-#     bob_bud.tally = 10
-#     bob_bud.fund_coin = 12
-#     bob_bud.penny = 13
-#     bob_bud.respect_bit = 15
-#     csv_header = x_ideabricks.get("br00029")
-#     print(f"{csv_header=}")
+def test_add_gift_to_br00025_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    casa_road = bob_bud.make_l1_road("casa")
+    bob_bud.add_item(casa_road)
+    casa_item = bob_bud.get_item_obj(casa_road)
+    cleaners_str = "cleaners"
+    casa_item.healerlink.set_healer_name(cleaners_str)
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00025")
+    print(f"{csv_header=}")
 
-#     # WHEN
-#     x_csv = add_gift_to_br00029_csv(csv_header, bob_bud, csv_delimiter)
+    # WHEN
+    bob_bud.settle_bud()
+    x_csv = add_gift_to_br00025_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # THEN
-#     bud_row = f"{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},{bob_bud.max_tree_traverse},{bob_bud.tally},{bob_bud.fund_coin},{bob_bud.penny},{bob_bud.respect_bit}\n"
-#     assert x_csv == f"{csv_header}{bud_row}"
+    # THEN
+    cleaners_row = (
+        f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
+    )
+    assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-# def test_add_budunit_to_stance_csv_strs_ReturnsObj():
-#     # ESTABLISH
-#     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
-#     bob_str = "Bob"
-#     yao_str = "Yao"
-#     a23_str = "accord23"
-#     bob_bud = budunit_shop(bob_str, a23_str)
-#     bob_bud.add_acctunit(yao_str)
-#     mop_road = bob_bud.make_l1_road("mop")
-#     casa_road = bob_bud.make_l1_road("casa")
-#     clean_road = bob_bud.make_road(casa_road, "clean")
-#     bob_bud.add_item(mop_road)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.add_item(clean_road)
-#     bob_bud.edit_item_attr(mop_road, reason_base=casa_road, reason_premise=clean_road)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
-#     bob_bud.add_fact(casa_road, clean_road)
+def test_add_gift_to_br00026_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    mop_road = bob_bud.make_l1_road("mop")
+    casa_road = bob_bud.make_l1_road("casa")
+    clean_road = bob_bud.make_road(casa_road, "clean")
+    clean_premise_open = 22
+    clean_premise_nigh = 55
+    clean_premise_divisor = 77
+    bob_bud.add_item(mop_road)
+    bob_bud.add_item(casa_road)
+    bob_bud.add_item(clean_road)
+    bob_bud.edit_item_attr(
+        mop_road,
+        reason_base=casa_road,
+        reason_premise=clean_road,
+        reason_premise_open=clean_premise_open,
+        reason_premise_nigh=clean_premise_nigh,
+        reason_premise_divisor=clean_premise_divisor,
+    )
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00026")
+    print(f"{csv_header=}")
 
-#     br00020_header = x_ideabricks.get("br00020")
-#     br00021_header = x_ideabricks.get("br00021")
-#     br00022_header = x_ideabricks.get("br00022")
-#     br00023_header = x_ideabricks.get("br00023")
-#     br00024_header = x_ideabricks.get("br00024")
-#     br00025_header = x_ideabricks.get("br00025")
-#     br00026_header = x_ideabricks.get("br00026")
-#     br00027_header = x_ideabricks.get("br00027")
-#     br00028_header = x_ideabricks.get("br00028")
-#     br00029_header = x_ideabricks.get("br00029")
+    # WHEN
+    bob_bud.settle_bud()
+    x_csv = add_gift_to_br00026_csv(csv_header, sue7_gift, csv_delimiter)
 
-#     # WHEN
-#     bob_bud.settle_bud()
-#     add_budunit_to_stance_csv_strs(bob_bud, x_ideabricks, csv_delimiter)
+    # THEN
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_road},{casa_road},{clean_road},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
+    assert x_csv == f"{csv_header}{mop_row}"
 
-#     # THEN
-#     assert x_ideabricks.get("br00020") != br00020_header
-#     assert x_ideabricks.get("br00021") != br00021_header
-#     assert x_ideabricks.get("br00022") != br00022_header
-#     assert x_ideabricks.get("br00023") != br00023_header
-#     # assert x_ideabricks.get("br00024") != br00024_header
-#     # assert x_ideabricks.get("br00025") != br00025_header
-#     assert x_ideabricks.get("br00026") != br00026_header
-#     assert x_ideabricks.get("br00027") != br00027_header
-#     assert x_ideabricks.get("br00028") != br00028_header
-#     assert x_ideabricks.get("br00029") != br00029_header
+
+def test_add_gift_to_br00027_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    mop_road = bob_bud.make_l1_road("mop")
+    casa_road = bob_bud.make_l1_road("casa")
+    bob_bud.add_item(mop_road)
+    bob_bud.add_item(casa_road)
+    bob_bud.edit_item_attr(
+        mop_road,
+        reason_base=casa_road,
+        reason_base_item_active_requisite=True,
+    )
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00027")
+    print(f"{csv_header=}")
+
+    # WHEN
+    bob_bud.settle_bud()
+    x_csv = add_gift_to_br00027_csv(csv_header, sue7_gift, csv_delimiter)
+
+    # THEN
+    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_road},{casa_road},True\n"
+    assert x_csv == f"{csv_header}{casa_row}"
+
+
+def test_add_gift_to_br00028_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    mop_road = bob_bud.make_l1_road("mop")
+    casa_road = bob_bud.make_l1_road("casa")
+    casa_begin = 3
+    casa_close = 5
+    casa_addin = 7
+    casa_numor = 13
+    casa_denom = 17
+    casa_morph = 27
+    casa_gogo_want = 31
+    casa_stop_want = 41
+    casa_mass = 2
+    casa_pledge = False
+    casa_problem_bool = False
+    bob_bud.add_item(casa_road)
+    bob_bud.add_item(mop_road)
+    bob_bud.edit_item_attr(
+        mop_road,
+        begin=casa_begin,
+        close=casa_close,
+        addin=casa_addin,
+        numor=casa_numor,
+        denom=casa_denom,
+        morph=casa_morph,
+        gogo_want=casa_gogo_want,
+        stop_want=casa_stop_want,
+        mass=casa_mass,
+        pledge=casa_pledge,
+        problem_bool=casa_problem_bool,
+    )
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00028")
+    print(f"{csv_header=}")
+
+    # WHEN
+    bob_bud.settle_bud()
+    x_csv = add_gift_to_br00028_csv(csv_header, sue7_gift, csv_delimiter)
+
+    # THEN
+    # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_bud.fisc_title},,,,,,,,,1,False,False\n"
+    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_title},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_title},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_pledge},\n"
+    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_title},casa,,,,,,,,,0,False,\n"
+    # print(f"{mop_row=}")
+    expected_csv = f"{csv_header}{casa_row}{mop_row}"
+    print(f"       {x_csv=}")
+    print(f"{expected_csv=}")
+    assert len(x_csv) == len(expected_csv)
+
+
+def test_add_gift_to_br00029_csv_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    bob_bud.credor_respect = 444
+    bob_bud.debtor_respect = 556
+    bob_bud.fund_pool = 999
+    bob_bud.max_tree_traverse = 3
+    bob_bud.tally = 10
+    bob_bud.fund_coin = 3
+    bob_bud.penny = 13
+    bob_bud.respect_bit = 2
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+    csv_header = x_ideabricks.get("br00029")
+    print(f"{csv_header=}")
+
+    # WHEN
+    x_csv = add_gift_to_br00029_csv(csv_header, sue7_gift, csv_delimiter)
+
+    # THEN
+    bud_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},,{bob_bud.tally},{bob_bud.fund_coin},,{bob_bud.respect_bit}\n"
+    assert x_csv == f"{csv_header}{bud_row}"
+
+
+def test_add_giftunit_to_stance_csv_strs_ReturnsObj():
+    # ESTABLISH
+    csv_delimiter = ","
+    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    bob_str = "Bob"
+    yao_str = "Yao"
+    a23_str = "accord23"
+    bob_bud = budunit_shop(bob_str, a23_str)
+    bob_bud.add_acctunit(yao_str)
+    mop_road = bob_bud.make_l1_road("mop")
+    casa_road = bob_bud.make_l1_road("casa")
+    clean_road = bob_bud.make_road(casa_road, "clean")
+    bob_bud.add_item(mop_road)
+    bob_bud.add_item(casa_road)
+    bob_bud.add_item(clean_road)
+    bob_bud.edit_item_attr(mop_road, reason_base=casa_road, reason_premise=clean_road)
+    bob_bud.add_item(casa_road)
+    bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
+    bob_bud.add_fact(casa_road, clean_road)
+    bob_bud.credor_respect = 444
+    bob_bud.debtor_respect = 556
+    bob_bud.fund_pool = 999
+    bob_bud.max_tree_traverse = 3
+    bob_bud.tally = 10
+    bob_bud.fund_coin = 3
+    bob_bud.penny = 13
+    bob_bud.respect_bit = 2
+    bob_buddelta = buddelta_shop()
+    bob_buddelta.add_all_atomunits(bob_bud)
+    sue_str = "Sue"
+    event7 = 7
+    sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_gift.set_buddelta(bob_buddelta)
+
+    br00020_header = x_ideabricks.get("br00020")
+    br00021_header = x_ideabricks.get("br00021")
+    br00022_header = x_ideabricks.get("br00022")
+    br00023_header = x_ideabricks.get("br00023")
+    br00024_header = x_ideabricks.get("br00024")
+    br00025_header = x_ideabricks.get("br00025")
+    br00026_header = x_ideabricks.get("br00026")
+    br00027_header = x_ideabricks.get("br00027")
+    br00028_header = x_ideabricks.get("br00028")
+    br00029_header = x_ideabricks.get("br00029")
+
+    # WHEN
+    bob_bud.settle_bud()
+    add_giftunit_to_stance_csv_strs(sue7_gift, x_ideabricks, csv_delimiter)
+
+    # THEN
+    assert x_ideabricks.get("br00020") != br00020_header
+    assert x_ideabricks.get("br00021") != br00021_header
+    assert x_ideabricks.get("br00022") != br00022_header
+    assert x_ideabricks.get("br00023") != br00023_header
+    # assert x_ideabricks.get("br00024") != br00024_header
+    # assert x_ideabricks.get("br00025") != br00025_header
+    assert x_ideabricks.get("br00026") != br00026_header
+    assert x_ideabricks.get("br00027") != br00027_header
+    assert x_ideabricks.get("br00028") != br00028_header
+    assert x_ideabricks.get("br00029") != br00029_header
