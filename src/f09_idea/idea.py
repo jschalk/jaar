@@ -7,12 +7,12 @@ from src.f00_instrument.dict_toolbox import (
     add_headers_to_csv,
     get_empty_str_if_None as if_none_str,
 )
-from src.f01_road.road import FiscTitle, OwnerName
+from src.f01_road.road import FiscTitle, OwnerName, FaceName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
 from src.f04_gift.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
-from src.f04_gift.gift import giftunit_shop
+from src.f04_gift.gift import giftunit_shop, GiftUnit
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f08_pidgin.pidgin import PidginUnit
@@ -359,7 +359,7 @@ def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
         idea_format_filename = get_idea_format_filename(idea_brick)
         for idea_columns, idea_file_name in idea_format_headers.items():
             if idea_file_name == idea_format_filename:
-                fisc_csv_strs[idea_brick] = f"{idea_columns}\n"
+                fisc_csv_strs[idea_brick] = f"face_name,event_int,{idea_columns}\n"
     return fisc_csv_strs
 
 
@@ -396,7 +396,11 @@ def add_fiscunit_to_stance_csv_strs(
 
 
 def _add_fiscunit_to_br00000_csv(
-    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+    x_csv: str,
+    x_fisc: FiscUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
 ) -> str:
     if x_fisc.bridge == csv_delimiter:
         x_bridge = f"""\"{str(x_fisc.bridge)}\""""
@@ -404,6 +408,8 @@ def _add_fiscunit_to_br00000_csv(
         x_bridge = x_fisc.bridge
 
     x_row = [
+        if_none_str(face_name),
+        if_none_str(event_int),
         x_fisc.fisc_title,
         x_fisc.timeline.timeline_title,
         str(x_fisc.timeline.c400_number),
@@ -421,211 +427,339 @@ def _add_fiscunit_to_br00000_csv(
 
 
 def _add_dealunit_to_br00001_csv(
-    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+    x_csv: str,
+    x_fisc: FiscUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
 ) -> str:
     for broker_owner_name, brokerunits in x_fisc.brokerunits.items():
         for time_int, dealunit in brokerunits.deals.items():
-            x_row = [
-                x_fisc.fisc_title,
-                broker_owner_name,
-                str(time_int),
-                str(dealunit.quota),
-                str(dealunit.celldepth),
-            ]
+            x_row = [if_none_str(face_name), if_none_str(event_int)]
+            x_row.extend(
+                [
+                    x_fisc.fisc_title,
+                    broker_owner_name,
+                    str(time_int),
+                    str(dealunit.quota),
+                    str(dealunit.celldepth),
+                ]
+            )
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
 def _add_cashbook_to_br00002_csv(
-    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
+    x_csv: str,
+    x_fisc: FiscUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
 ) -> str:
     for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
         for acct_name, time_dict in tranunit.items():
             for time_int, amount in time_dict.items():
                 fisc_title = x_fisc.fisc_title
-                x_row = [fisc_title, owner_name, acct_name, str(time_int), str(amount)]
-                x_csv += csv_delimiter.join(x_row)
-                x_csv += "\n"
-    return x_csv
-
-
-def _add_hours_to_br00003_csv(x_csv: str, x_fisc: FiscUnit, csv_delimiter: str) -> str:
-    for hour_item in x_fisc.timeline.hours_config:
-        x_row = [x_fisc.fisc_title, str(hour_item[1]), hour_item[0]]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
-    return x_csv
-
-
-def _add_months_to_br00004_csv(x_csv: str, x_fisc: FiscUnit, csv_delimiter: str) -> str:
-    for month_item in x_fisc.timeline.months_config:
-        x_row = [x_fisc.fisc_title, str(month_item[1]), month_item[0]]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
-    return x_csv
-
-
-def _add_weekdays_to_br00005_csv(
-    x_csv: str, x_fisc: FiscUnit, csv_delimiter: str
-) -> str:
-    for count_x, weekday_title in enumerate(x_fisc.timeline.weekdays_config):
-        x_row = [x_fisc.fisc_title, str(count_x), weekday_title]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00020_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for acctunit in x_bud.accts.values():
-        for membership in acctunit._memberships.values():
-            x_row = [
-                x_bud.fisc_title,
-                x_bud.owner_name,
-                acctunit.acct_name,
-                membership.group_label,
-                if_none_str(membership.credit_vote),
-                if_none_str(membership.debtit_vote),
-            ]
-            x_csv += csv_delimiter.join(x_row)
-            x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00021_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for acctunit in x_bud.accts.values():
-        x_row = [
-            x_bud.fisc_title,
-            x_bud.owner_name,
-            acctunit.acct_name,
-            if_none_str(acctunit.credit_belief),
-            if_none_str(acctunit.debtit_belief),
-        ]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00022_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for itemunit in x_bud._item_dict.values():
-        for awardlink in itemunit.awardlinks.values():
-            x_row = [
-                x_bud.fisc_title,
-                x_bud.owner_name,
-                itemunit.get_road(),
-                awardlink.awardee_tag,
-                if_none_str(awardlink.give_force),
-                if_none_str(awardlink.take_force),
-            ]
-            x_csv += csv_delimiter.join(x_row)
-            x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00023_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for factunit in x_bud.itemroot.factunits.values():
-        x_row = [
-            x_bud.fisc_title,
-            x_bud.owner_name,
-            factunit.base,
-            factunit.pick,
-            if_none_str(factunit.fopen),
-            if_none_str(factunit.fnigh),
-        ]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00024_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for itemunit in x_bud._item_dict.values():
-        for group_tag in itemunit.teamunit._teamlinks:
-            x_row = [x_bud.fisc_title, x_bud.owner_name, itemunit.get_road(), group_tag]
-            x_csv += csv_delimiter.join(x_row)
-            x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00025_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for itemunit in x_bud._item_dict.values():
-        for group_tag in itemunit.healerlink._healer_names:
-            x_row = [x_bud.fisc_title, x_bud.owner_name, itemunit.get_road(), group_tag]
-            x_csv += csv_delimiter.join(x_row)
-            x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00026_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for itemunit in x_bud._item_dict.values():
-        for reasonunit in itemunit.reasonunits.values():
-            for premiseunit in reasonunit.premises.values():
                 x_row = [
-                    x_bud.fisc_title,
-                    x_bud.owner_name,
-                    itemunit.get_road(),
-                    reasonunit.base,
-                    premiseunit.need,
-                    if_none_str(premiseunit.open),
-                    if_none_str(premiseunit.nigh),
-                    if_none_str(premiseunit.divisor),
+                    if_none_str(face_name),
+                    if_none_str(event_int),
+                    fisc_title,
+                    owner_name,
+                    acct_name,
+                    str(time_int),
+                    str(amount),
                 ]
                 x_csv += csv_delimiter.join(x_row)
                 x_csv += "\n"
     return x_csv
 
 
-def add_to_br00027_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for itemunit in x_bud._item_dict.values():
-        for reasonunit in itemunit.reasonunits.values():
-            x_row = [
-                x_bud.fisc_title,
-                x_bud.owner_name,
-                itemunit.get_road(),
-                reasonunit.base,
-                if_none_str(reasonunit.base_item_active_requisite),
-            ]
-            x_csv += csv_delimiter.join(x_row)
-            x_csv += "\n"
-    return x_csv
-
-
-def add_to_br00028_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    for itemunit in x_bud._item_dict.values():
-        x_row = [
-            x_bud.fisc_title,
-            x_bud.owner_name,
-            itemunit._parent_road,
-            itemunit._item_title,
-            if_none_str(itemunit.begin),
-            if_none_str(itemunit.close),
-            if_none_str(itemunit.addin),
-            if_none_str(itemunit.numor),
-            if_none_str(itemunit.denom),
-            if_none_str(itemunit.morph),
-            if_none_str(itemunit.gogo_want),
-            if_none_str(itemunit.stop_want),
-            if_none_str(itemunit.mass),
-            if_none_str(itemunit.pledge),
-            if_none_str(itemunit.problem_bool),
-        ]
+def _add_hours_to_br00003_csv(
+    x_csv: str,
+    x_fisc: FiscUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for hour_item in x_fisc.timeline.hours_config:
+        x_row = [if_none_str(face_name), if_none_str(event_int)]
+        x_row.extend([x_fisc.fisc_title, str(hour_item[1]), hour_item[0]])
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
     return x_csv
 
 
-def add_to_br00029_csv(x_csv: str, x_bud: BudUnit, csv_delimiter: str) -> str:
-    x_row = [
-        x_bud.fisc_title,
-        x_bud.owner_name,
-        if_none_str(x_bud.credor_respect),
-        if_none_str(x_bud.debtor_respect),
-        if_none_str(x_bud.fund_pool),
-        if_none_str(x_bud.max_tree_traverse),
-        if_none_str(x_bud.tally),
-        if_none_str(x_bud.fund_coin),
-        if_none_str(x_bud.penny),
-        if_none_str(x_bud.respect_bit),
-    ]
+def _add_months_to_br00004_csv(
+    x_csv: str,
+    x_fisc: FiscUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for month_item in x_fisc.timeline.months_config:
+        x_row = [if_none_str(face_name), if_none_str(event_int)]
+        x_row.extend([x_fisc.fisc_title, str(month_item[1]), month_item[0]])
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def _add_weekdays_to_br00005_csv(
+    x_csv: str,
+    x_fisc: FiscUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for count_x, weekday_title in enumerate(x_fisc.timeline.weekdays_config):
+        x_row = [if_none_str(face_name), if_none_str(event_int)]
+        x_row.extend([x_fisc.fisc_title, str(count_x), weekday_title])
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00020_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for acctunit in x_bud.accts.values():
+        for membership in acctunit._memberships.values():
+            x_row = [if_none_str(face_name), if_none_str(event_int)]
+            x_row.extend(
+                [
+                    x_bud.fisc_title,
+                    x_bud.owner_name,
+                    acctunit.acct_name,
+                    membership.group_label,
+                    if_none_str(membership.credit_vote),
+                    if_none_str(membership.debtit_vote),
+                ]
+            )
+            x_csv += csv_delimiter.join(x_row)
+            x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00021_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for acctunit in x_bud.accts.values():
+        x_row = [if_none_str(face_name), if_none_str(event_int)]
+        x_row.extend(
+            [
+                x_bud.fisc_title,
+                x_bud.owner_name,
+                acctunit.acct_name,
+                if_none_str(acctunit.credit_belief),
+                if_none_str(acctunit.debtit_belief),
+            ]
+        )
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00022_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for itemunit in x_bud._item_dict.values():
+        for awardlink in itemunit.awardlinks.values():
+            x_row = [if_none_str(face_name), if_none_str(event_int)]
+            x_row.extend(
+                [
+                    x_bud.fisc_title,
+                    x_bud.owner_name,
+                    itemunit.get_road(),
+                    awardlink.awardee_tag,
+                    if_none_str(awardlink.give_force),
+                    if_none_str(awardlink.take_force),
+                ]
+            )
+            x_csv += csv_delimiter.join(x_row)
+            x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00023_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for factunit in x_bud.itemroot.factunits.values():
+        x_row = [if_none_str(face_name), if_none_str(event_int)]
+        x_row.extend(
+            [
+                x_bud.fisc_title,
+                x_bud.owner_name,
+                factunit.base,
+                factunit.pick,
+                if_none_str(factunit.fopen),
+                if_none_str(factunit.fnigh),
+            ]
+        )
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00024_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for itemunit in x_bud._item_dict.values():
+        for group_tag in itemunit.teamunit._teamlinks:
+            x_row = [if_none_str(face_name), if_none_str(event_int)]
+            x_row.extend(
+                [x_bud.fisc_title, x_bud.owner_name, itemunit.get_road(), group_tag]
+            )
+            x_csv += csv_delimiter.join(x_row)
+            x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00025_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for itemunit in x_bud._item_dict.values():
+        for group_tag in itemunit.healerlink._healer_names:
+            x_row = [if_none_str(face_name), if_none_str(event_int)]
+            x_row.extend(
+                [x_bud.fisc_title, x_bud.owner_name, itemunit.get_road(), group_tag]
+            )
+            x_csv += csv_delimiter.join(x_row)
+            x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00026_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for itemunit in x_bud._item_dict.values():
+        for reasonunit in itemunit.reasonunits.values():
+            for premiseunit in reasonunit.premises.values():
+                x_row = [if_none_str(face_name), if_none_str(event_int)]
+                x_row.extend(
+                    [
+                        x_bud.fisc_title,
+                        x_bud.owner_name,
+                        itemunit.get_road(),
+                        reasonunit.base,
+                        premiseunit.need,
+                        if_none_str(premiseunit.open),
+                        if_none_str(premiseunit.nigh),
+                        if_none_str(premiseunit.divisor),
+                    ]
+                )
+                x_csv += csv_delimiter.join(x_row)
+                x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00027_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for itemunit in x_bud._item_dict.values():
+        for reasonunit in itemunit.reasonunits.values():
+            x_row = [if_none_str(face_name), if_none_str(event_int)]
+            x_row.extend(
+                [
+                    x_bud.fisc_title,
+                    x_bud.owner_name,
+                    itemunit.get_road(),
+                    reasonunit.base,
+                    if_none_str(reasonunit.base_item_active_requisite),
+                ]
+            )
+            x_csv += csv_delimiter.join(x_row)
+            x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00028_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    for itemunit in x_bud._item_dict.values():
+        x_row = [if_none_str(face_name), if_none_str(event_int)]
+        x_row.extend(
+            [
+                x_bud.fisc_title,
+                x_bud.owner_name,
+                itemunit._parent_road,
+                itemunit._item_title,
+                if_none_str(itemunit.begin),
+                if_none_str(itemunit.close),
+                if_none_str(itemunit.addin),
+                if_none_str(itemunit.numor),
+                if_none_str(itemunit.denom),
+                if_none_str(itemunit.morph),
+                if_none_str(itemunit.gogo_want),
+                if_none_str(itemunit.stop_want),
+                if_none_str(itemunit.mass),
+                if_none_str(itemunit.pledge),
+                if_none_str(itemunit.problem_bool),
+            ]
+        )
+        x_csv += csv_delimiter.join(x_row)
+        x_csv += "\n"
+    return x_csv
+
+
+def add_bud_to_br00029_csv(
+    x_csv: str,
+    x_bud: BudUnit,
+    csv_delimiter: str,
+    face_name: FaceName = None,
+    event_int: int = None,
+) -> str:
+    x_row = [if_none_str(face_name), if_none_str(event_int)]
+    x_row.extend(
+        [
+            x_bud.fisc_title,
+            x_bud.owner_name,
+            if_none_str(x_bud.credor_respect),
+            if_none_str(x_bud.debtor_respect),
+            if_none_str(x_bud.fund_pool),
+            if_none_str(x_bud.max_tree_traverse),
+            if_none_str(x_bud.tally),
+            if_none_str(x_bud.fund_coin),
+            if_none_str(x_bud.penny),
+            if_none_str(x_bud.respect_bit),
+        ]
+    )
     x_csv += csv_delimiter.join(x_row)
     x_csv += "\n"
     return x_csv
@@ -644,16 +778,16 @@ def add_budunit_to_stance_csv_strs(
     br00027_csv = fisc_csv_strs.get("br00027")
     br00028_csv = fisc_csv_strs.get("br00028")
     br00029_csv = fisc_csv_strs.get("br00029")
-    br00020_csv = add_to_br00020_csv(br00020_csv, x_bud, csv_delimiter)
-    br00021_csv = add_to_br00021_csv(br00021_csv, x_bud, csv_delimiter)
-    br00022_csv = add_to_br00022_csv(br00022_csv, x_bud, csv_delimiter)
-    br00023_csv = add_to_br00023_csv(br00023_csv, x_bud, csv_delimiter)
-    br00024_csv = add_to_br00024_csv(br00024_csv, x_bud, csv_delimiter)
-    br00025_csv = add_to_br00025_csv(br00025_csv, x_bud, csv_delimiter)
-    br00026_csv = add_to_br00026_csv(br00026_csv, x_bud, csv_delimiter)
-    br00027_csv = add_to_br00027_csv(br00027_csv, x_bud, csv_delimiter)
-    br00028_csv = add_to_br00028_csv(br00028_csv, x_bud, csv_delimiter)
-    br00029_csv = add_to_br00029_csv(br00029_csv, x_bud, csv_delimiter)
+    br00020_csv = add_bud_to_br00020_csv(br00020_csv, x_bud, csv_delimiter)
+    br00021_csv = add_bud_to_br00021_csv(br00021_csv, x_bud, csv_delimiter)
+    br00022_csv = add_bud_to_br00022_csv(br00022_csv, x_bud, csv_delimiter)
+    br00023_csv = add_bud_to_br00023_csv(br00023_csv, x_bud, csv_delimiter)
+    br00024_csv = add_bud_to_br00024_csv(br00024_csv, x_bud, csv_delimiter)
+    br00025_csv = add_bud_to_br00025_csv(br00025_csv, x_bud, csv_delimiter)
+    br00026_csv = add_bud_to_br00026_csv(br00026_csv, x_bud, csv_delimiter)
+    br00027_csv = add_bud_to_br00027_csv(br00027_csv, x_bud, csv_delimiter)
+    br00028_csv = add_bud_to_br00028_csv(br00028_csv, x_bud, csv_delimiter)
+    br00029_csv = add_bud_to_br00029_csv(br00029_csv, x_bud, csv_delimiter)
     fisc_csv_strs["br00020"] = br00020_csv
     fisc_csv_strs["br00021"] = br00021_csv
     fisc_csv_strs["br00022"] = br00022_csv
@@ -745,3 +879,63 @@ def add_pidginunit_to_stance_csv_strs(
     fisc_csv_strs["br00043"] = br00043_csv
     fisc_csv_strs["br00044"] = br00044_csv
     fisc_csv_strs["br00045"] = br00045_csv
+
+
+def add_gift_to_br00020_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00021_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00022_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00023_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00024_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00025_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00026_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00027_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00028_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
+
+
+def add_gift_to_br00029_csv(
+    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+) -> str:
+    return ""
