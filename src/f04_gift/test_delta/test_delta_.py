@@ -253,38 +253,6 @@ def test_BudDelta_get_dimen_sorted_atomunits_list_ReturnsObj_Scenario0_road():
     assert sue_atoms_list[1] == zia_acctunit_delete
 
 
-def test_BudDelta_get_dimen_sorted_atomunits_list_ReturnsObj_Scenario0_road():
-    # ESTABLISH
-    ex1_buddelta = get_buddelta_sue_example()
-    update_dict = ex1_buddelta.atomunits.get(atom_update())
-    assert len(update_dict.keys()) == 1
-    print(f"{update_dict.keys()=}")
-    assert ex1_buddelta.atomunits.get(atom_insert()) is None
-    delete_dict = ex1_buddelta.atomunits.get(atom_delete())
-    assert len(delete_dict.keys()) == 1
-
-    # WHEN
-    sue_atoms_list = ex1_buddelta.get_dimen_sorted_atomunits_list()
-
-    # THEN
-    assert len(sue_atoms_list) == 2
-    assert sue_atoms_list[0] == update_dict.get(budunit_str())
-    z_atom = sue_atoms_list[1]
-    print(f"{z_atom=}")
-    print(delete_dict.get(bud_acctunit_str()).keys())
-    zia_acctunit_delete = delete_dict.get(bud_acctunit_str()).get("Zia")
-    assert sue_atoms_list[1] == zia_acctunit_delete
-    # print(f"{sue_atom_order_dict.keys()=}")
-    # # print(f"{sue_atom_order_dict.get(atom_update())=}")
-    # assert len(sue_atom_order_dict.get(atom_update())) == 1
-    # assert len(sue_atom_order_dict.get(atom_delete())) == 1
-    # for crud_str, atom_list in sue_atom_order_dict.items():
-    #     print(f"{crud_str=}")
-    #     print(f"{len(atom_list)=}")
-    #     for x_atom in atom_list:
-    #         print(f"{x_atom.dimen=}")
-
-
 # def test_BudDelta_add_atomunit_CorrectlySets_BudUnit_max_tree_traverse():
 #     # ESTABLISH
 #     ex1_buddelta = buddelta_shop(get_sue_road())
