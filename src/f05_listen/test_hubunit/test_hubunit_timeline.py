@@ -172,7 +172,6 @@ def test_HubUnit_budpoint_filename_ReturnsObj():
     assert x_deal_filename == "budpoint.json"
 
 
-# TODO
 def test_HubUnit_budpoint_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
