@@ -422,7 +422,7 @@ def _get_keys_where_str(x_jkeys: set[str], dst_columns: list[str]) -> str:
     return "" if keys_where_str is None else keys_where_str
 
 
-def csv_dict_to_excel(csv_dict, file_path):
+def csv_dict_to_excel(csv_dict: dict[str, str], file_path: str):
     """
     Converts a dictionary of CSV strings into an Excel file.
 
@@ -433,9 +433,7 @@ def csv_dict_to_excel(csv_dict, file_path):
 
     for sheet_name, csv_str in csv_dict.items():
         df = pandas_read_csv(io_StringIO(csv_str))  # Convert CSV string to DataFrame
-        df.to_excel(
-            output, sheet_name=sheet_name[:31], index=False
-        )  # Excel sheet names max length is 31 chars
+        # Excel sheet names max length is 31 chars
+        df.to_excel(output, sheet_name=sheet_name[:31], index=False)
 
     output.close()
-    return output

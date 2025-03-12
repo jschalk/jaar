@@ -846,7 +846,6 @@ def test_add_gift_to_br00022_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_bud.settle_bud()
     x_csv = add_gift_to_br00022_csv(csv_header, sue7_gift, csv_delimiter)
 
     # THEN
@@ -910,7 +909,6 @@ def test_add_gift_to_br00024_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_bud.settle_bud()
     x_csv = add_gift_to_br00024_csv(csv_header, sue7_gift, csv_delimiter)
 
     # THEN
@@ -945,7 +943,6 @@ def test_add_gift_to_br00025_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_bud.settle_bud()
     x_csv = add_gift_to_br00025_csv(csv_header, sue7_gift, csv_delimiter)
 
     # THEN
@@ -989,7 +986,6 @@ def test_add_gift_to_br00026_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_bud.settle_bud()
     x_csv = add_gift_to_br00026_csv(csv_header, sue7_gift, csv_delimiter)
 
     # THEN
@@ -1023,7 +1019,6 @@ def test_add_gift_to_br00027_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_bud.settle_bud()
     x_csv = add_gift_to_br00027_csv(csv_header, sue7_gift, csv_delimiter)
 
     # THEN
@@ -1077,7 +1072,6 @@ def test_add_gift_to_br00028_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_bud.settle_bud()
     x_csv = add_gift_to_br00028_csv(csv_header, sue7_gift, csv_delimiter)
 
     # THEN
@@ -1170,7 +1164,6 @@ def test_add_giftunit_to_stance_csv_strs_ReturnsObj():
     br00029_header = x_ideabricks.get("br00029")
 
     # WHEN
-    bob_bud.settle_bud()
     add_giftunit_to_stance_csv_strs(sue7_gift, x_ideabricks, csv_delimiter)
 
     # THEN
@@ -1184,3 +1177,65 @@ def test_add_giftunit_to_stance_csv_strs_ReturnsObj():
     assert x_ideabricks.get("br00027") != br00027_header
     assert x_ideabricks.get("br00028") != br00028_header
     assert x_ideabricks.get("br00029") != br00029_header
+
+
+# TODO create function that saves excel file with all x_ideabricks
+# def test_add_giftunit_to_stance_csv_strs_ReturnsObj():
+#     # ESTABLISH
+#     csv_delimiter = ","
+#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
+#     bob_str = "Bob"
+#     yao_str = "Yao"
+#     a23_str = "accord23"
+#     bob_bud = budunit_shop(bob_str, a23_str)
+#     bob_bud.add_acctunit(yao_str)
+#     mop_road = bob_bud.make_l1_road("mop")
+#     casa_road = bob_bud.make_l1_road("casa")
+#     clean_road = bob_bud.make_road(casa_road, "clean")
+#     bob_bud.add_item(mop_road)
+#     bob_bud.add_item(casa_road)
+#     bob_bud.add_item(clean_road)
+#     bob_bud.edit_item_attr(mop_road, reason_base=casa_road, reason_premise=clean_road)
+#     bob_bud.add_item(casa_road)
+#     bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
+#     bob_bud.add_fact(casa_road, clean_road)
+#     bob_bud.credor_respect = 444
+#     bob_bud.debtor_respect = 556
+#     bob_bud.fund_pool = 999
+#     bob_bud.max_tree_traverse = 3
+#     bob_bud.tally = 10
+#     bob_bud.fund_coin = 3
+#     bob_bud.penny = 13
+#     bob_bud.respect_bit = 2
+#     bob_buddelta = buddelta_shop()
+#     bob_buddelta.add_all_atomunits(bob_bud)
+#     sue_str = "Sue"
+#     event7 = 7
+#     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+#     sue7_gift.set_buddelta(bob_buddelta)
+
+#     br00020_header = x_ideabricks.get("br00020")
+#     br00021_header = x_ideabricks.get("br00021")
+#     br00022_header = x_ideabricks.get("br00022")
+#     br00023_header = x_ideabricks.get("br00023")
+#     br00024_header = x_ideabricks.get("br00024")
+#     br00025_header = x_ideabricks.get("br00025")
+#     br00026_header = x_ideabricks.get("br00026")
+#     br00027_header = x_ideabricks.get("br00027")
+#     br00028_header = x_ideabricks.get("br00028")
+#     br00029_header = x_ideabricks.get("br00029")
+#     add_giftunit_to_stance_csv_strs(sue7_gift, x_ideabricks, csv_delimiter)
+
+#     # WHEN
+#     assert 1 == 2
+
+#     # assert x_ideabricks.get("br00020") != br00020_header
+#     # assert x_ideabricks.get("br00021") != br00021_header
+#     # assert x_ideabricks.get("br00022") != br00022_header
+#     # assert x_ideabricks.get("br00023") != br00023_header
+#     # # assert x_ideabricks.get("br00024") != br00024_header
+#     # # assert x_ideabricks.get("br00025") != br00025_header
+#     # assert x_ideabricks.get("br00026") != br00026_header
+#     # assert x_ideabricks.get("br00027") != br00027_header
+#     # assert x_ideabricks.get("br00028") != br00028_header
+#     # assert x_ideabricks.get("br00029") != br00029_header
