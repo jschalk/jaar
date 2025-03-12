@@ -26,12 +26,6 @@ from src.f10_etl.fisc_etl_tool import (
     FiscPrimeColumnsRef,
     create_init_fisc_prime_files,
     create_fiscunit_jsons_from_prime_files,
-    get_fiscunit_sorted_args,
-    get_fiscdeal_sorted_args,
-    get_fisccash_sorted_args,
-    get_fischour_sorted_args,
-    get_fiscmont_sorted_args,
-    get_fiscweek_sorted_args,
 )
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -44,78 +38,6 @@ from os.path import exists as os_path_exists
 # br00003 fisc_title hour_title,cumlative_minute
 # br00004 fisc_title month_title,cumlative_day
 # br00005 fisc_title weekday_title,weekday_order
-
-
-def test_get_fiscunit_sorted_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    unit_sorted_args = get_fiscunit_sorted_args()
-    # THEN
-    expected_unit_args = set(get_fisc_config_args(fiscunit_str()).keys())
-    # expected_unit_args.add(face_name_str())
-    # expected_unit_args.add(event_int_str())
-    expected_unit_sorted_args = get_custom_sorted_list(expected_unit_args)
-    print(f"{expected_unit_sorted_args=}")
-    assert unit_sorted_args == expected_unit_sorted_args
-
-
-def test_get_fiscdeal_sorted_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    deal_sorted_args = get_fiscdeal_sorted_args()
-    # THEN
-    expected_deal_args = set(get_fisc_config_args(fisc_dealunit_str()).keys())
-    # expected_deal_args.add(face_name_str())
-    # expected_deal_args.add(event_int_str())
-    expected_deal_sorted_args = get_custom_sorted_list(expected_deal_args)
-    print(f"{expected_deal_sorted_args=}")
-    assert deal_sorted_args == expected_deal_sorted_args
-
-
-def test_get_fisccash_sorted_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    cash_sorted_args = get_fisccash_sorted_args()
-    # THEN
-    expected_cash_args = set(get_fisc_config_args(fisc_cashbook_str()).keys())
-    # expected_cash_args.add(face_name_str())
-    # expected_cash_args.add(event_int_str())
-    expected_cash_sorted_args = get_custom_sorted_list(expected_cash_args)
-    print(f"{expected_cash_sorted_args=}")
-    assert cash_sorted_args == expected_cash_sorted_args
-
-
-def test_get_fischour_sorted_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    hour_sorted_args = get_fischour_sorted_args()
-    # THEN
-    expected_hour_args = set(get_fisc_config_args(fisc_timeline_hour_str()).keys())
-    # expected_hour_args.add(face_name_str())
-    # expected_hour_args.add(event_int_str())
-    expected_hour_sorted_args = get_custom_sorted_list(expected_hour_args)
-    print(f"{expected_hour_sorted_args=}")
-    assert hour_sorted_args == expected_hour_sorted_args
-
-
-def test_get_fiscmont_sorted_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    mont_sorted_args = get_fiscmont_sorted_args()
-    # THEN
-    expected_mont_args = set(get_fisc_config_args(fisc_timeline_month_str()).keys())
-    # expected_mont_args.add(face_name_str())
-    # expected_mont_args.add(event_int_str())
-    expected_mont_sorted_args = get_custom_sorted_list(expected_mont_args)
-    print(f"{expected_mont_sorted_args=}")
-    assert mont_sorted_args == expected_mont_sorted_args
-
-
-def test_get_fiscweek_sorted_args_ReturnsObj():
-    # ESTABLISH / WHEN
-    week_sorted_args = get_fiscweek_sorted_args()
-    # THEN
-    expected_week_args = set(get_fisc_config_args(fisc_timeline_weekday_str()).keys())
-    # expected_week_args.add(face_name_str())
-    # expected_week_args.add(event_int_str())
-    expected_week_sorted_args = get_custom_sorted_list(expected_week_args)
-    print(f"{expected_week_sorted_args=}")
-    assert week_sorted_args == expected_week_sorted_args
 
 
 def test_FiscPrimeObjsRef_Exists():

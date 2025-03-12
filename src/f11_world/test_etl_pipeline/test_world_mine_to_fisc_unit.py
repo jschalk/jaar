@@ -48,7 +48,6 @@ def test_WorldUnit_mine_to_burdens_DeletesPreviousFiles(env_dir_setup_cleanup):
     assert count_dirs_files(fizz_world.worlds_dir) == 27
 
 
-# TODO add deal to
 def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
