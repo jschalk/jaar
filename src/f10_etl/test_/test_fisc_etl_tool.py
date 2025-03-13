@@ -32,14 +32,6 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-# br00000 fisc_title c400_number,present_time,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
-# br00001 fisc_title owner_name,acct_name,time_int,quota
-# br00002 fisc_title owner_name,acct_name,time_int,amount
-# br00003 fisc_title hour_title,cumlative_minute
-# br00004 fisc_title month_title,cumlative_day
-# br00005 fisc_title weekday_title,weekday_order
-
-
 def test_FiscPrimeObjsRef_Exists():
     # ESTABLISH
     x_dir = get_test_etl_dir()
