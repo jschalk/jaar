@@ -25,7 +25,6 @@ from src.f08_pidgin.pidgin_config import get_pidgin_args_class_types
 from src.f09_idea.idea_config import (
     get_idea_elements_sort_order,
     get_idea_dimen_ref,
-    get_idea_format_filename,
     get_idea_sqlite_types,
     get_custom_sorted_list,
 )
@@ -422,13 +421,15 @@ def _get_keys_where_str(x_jkeys: set[str], dst_columns: list[str]) -> str:
     return "" if keys_where_str is None else keys_where_str
 
 
-def csv_dict_to_excel(csv_dict: dict[str, str], file_path: str):
+def csv_dict_to_excel(csv_dict: dict[str, str], dir: str, filename: str):
     """
     Converts a dictionary of CSV strings into an Excel file.
 
     :param csv_dict: Dictionary where keys are sheet names and values are CSV strings
     :param file_path: Path to save the Excel file
     """
+    set_dir(dir)
+    file_path = create_path(dir, filename)
     output = ExcelWriter(file_path, engine="xlsxwriter")
 
     for sheet_name, csv_str in csv_dict.items():

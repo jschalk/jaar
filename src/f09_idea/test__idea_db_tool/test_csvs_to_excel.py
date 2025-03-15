@@ -8,11 +8,13 @@ from os.path import exists as os_path_exists
 def test_csv_dict_to_excel_SavesFile(idea_env_setup_cleanup):
     # ESTABLISH
     test_data = {"TestSheet": "A,B\n5,6\n7,8"}
-    file_path = f"{idea_examples_dir()}/test_output.xlsx"
+    x_file_dir = idea_examples_dir()
+    x_filename = "test_output.xlsx"
+    file_path = f"{x_file_dir}/{x_filename}"
     assert os_path_exists(file_path) is False
 
     # WHEN
-    excel_file = csv_dict_to_excel(test_data, file_path)
+    csv_dict_to_excel(test_data, x_file_dir, x_filename)
 
     # THEN
     assert os_path_exists(file_path)

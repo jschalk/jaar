@@ -23,11 +23,7 @@ from src.f09_idea.idea_config import (
     get_idea_format_filename,
     get_idea_format_headers,
 )
-from src.f09_idea.idea_db_tool import (
-    save_dataframe_to_csv,
-    get_custom_sorted_list,
-    if_nan_return_None,
-)
+from src.f09_idea.idea_db_tool import csv_dict_to_excel
 from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass

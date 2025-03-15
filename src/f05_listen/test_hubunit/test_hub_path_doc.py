@@ -1,11 +1,13 @@
 from src.f01_road.deal import owner_name_str, time_int_str, fisc_title_str
 from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
+    create_stances_owner_dir_path,
+    create_stance0001_path,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
     fisc_agenda_list_report_path,
-    create_owners_dir_path,
+    create_fisc_owners_dir_path,
     create_deals_dir_path,
     create_deal_dir_path,
     create_dealunit_json_path,
@@ -27,6 +29,26 @@ from platform import system as platform_system
 LINUX_OS = platform_system() == "Linux"
 
 
+def test_create_stances_owner_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_stances_owner_dir_path(
+        fisc_mstr_dir="fisc_mstr_dir", owner_name=owner_name_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_stances_owner_dir_path) == doc_str
+
+
+def test_create_stance0001_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_stance0001_path(
+        fisc_mstr_dir="fisc_mstr_dir", owner_name=owner_name_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_stance0001_path) == doc_str
+
+
 def test_create_fisc_json_path_HasDocString():
     # ESTABLISH
     doc_str = create_fisc_json_path(
@@ -34,7 +56,7 @@ def test_create_fisc_json_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or LINUX_OS or inspect_getdoc(create_fisc_json_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_fisc_json_path) == doc_str
 
 
 def test_create_fisc_ote1_csv_path_HasDocString():
@@ -67,14 +89,14 @@ def test_fisc_agenda_list_report_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(fisc_agenda_list_report_path) == doc_str
 
 
-def test_create_owners_dir_path_HasDocString():
+def test_create_fisc_owners_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_owners_dir_path(
+    doc_str = create_fisc_owners_dir_path(
         fisc_mstr_dir="fisc_mstr_dir", fisc_title=fisc_title_str()
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_owners_dir_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_fisc_owners_dir_path) == doc_str
 
 
 def test_create_deals_dir_path_HasDocString():
