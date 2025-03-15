@@ -17,7 +17,7 @@ from src.f05_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f05_listen.hub_path import (
     CELLNODE_FILENAME,
     create_budevent_path,
-    create_owners_dir_path,
+    create_fisc_owners_dir_path,
     create_cell_dir_path,
 )
 from os import listdir as os_listdir
@@ -46,7 +46,7 @@ def collect_owner_event_dir_sets(
     fisc_mstr_dir: str, fisc_title: TitleUnit
 ) -> dict[OwnerName, set[EventInt]]:
     x_dict = {}
-    owners_dir = create_owners_dir_path(fisc_mstr_dir, fisc_title)
+    owners_dir = create_fisc_owners_dir_path(fisc_mstr_dir, fisc_title)
     set_dir(owners_dir)
     for owner_name in os_listdir(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)

@@ -4,7 +4,7 @@ from src.f04_gift.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import deal_owner_name_str, ancestors_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
-    create_owners_dir_path,
+    create_fisc_owners_dir_path,
     create_cell_json_path,
 )
 from src.f07_fisc.fisc import fiscunit_shop, _get_ote1_max_past_event_int
@@ -34,7 +34,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro0_DealEmpty(
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
     print(f"{a23_json_path=}")
-    a23_owners_path = create_owners_dir_path(fisc_mstr_dir, a23_str)
+    a23_owners_path = create_fisc_owners_dir_path(fisc_mstr_dir, a23_str)
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN

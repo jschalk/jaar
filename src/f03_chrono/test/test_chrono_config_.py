@@ -194,7 +194,6 @@ def test_is_timeline_config_valid_ReturnsObj_CheckObjsRepeat():
     assert validate_timeline_config(creg_config)
 
 
-# TODO change timeline_config_shop so that any missing parts are given default hreg config
 def test_timeline_config_shop_ReturnsObj_AllParameters():
     # ESTABLISH
     five_c400_number = 25

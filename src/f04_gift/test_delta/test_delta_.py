@@ -27,7 +27,10 @@ from src.f04_gift.delta import (
     get_buddelta_from_ordered_dict,
 )
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.examples.example_deltas import get_buddelta_example1
+from src.f04_gift.examples.example_deltas import (
+    get_buddelta_example1,
+    get_buddelta_sue_example,
+)
 from src.f00_instrument.dict_toolbox import x_is_json
 from pytest import raises as pytest_raises
 
@@ -227,7 +230,7 @@ def test_BudDelta_get_crud_atomunits_list_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_BudDelta_get_dimen_sorted_atomunits_list_ReturnsObj():
+def test_BudDelta_get_dimen_sorted_atomunits_list_ReturnsObj_Scenario0_road():
     # ESTABLISH
     ex1_buddelta = get_buddelta_example1()
     update_dict = ex1_buddelta.atomunits.get(atom_update())
@@ -248,15 +251,6 @@ def test_BudDelta_get_dimen_sorted_atomunits_list_ReturnsObj():
     print(delete_dict.get(bud_acctunit_str()).keys())
     zia_acctunit_delete = delete_dict.get(bud_acctunit_str()).get("Zia")
     assert sue_atoms_list[1] == zia_acctunit_delete
-    # print(f"{sue_atom_order_dict.keys()=}")
-    # # print(f"{sue_atom_order_dict.get(atom_update())=}")
-    # assert len(sue_atom_order_dict.get(atom_update())) == 1
-    # assert len(sue_atom_order_dict.get(atom_delete())) == 1
-    # for crud_str, atom_list in sue_atom_order_dict.items():
-    #     print(f"{crud_str=}")
-    #     print(f"{len(atom_list)=}")
-    #     for x_atom in atom_list:
-    #         print(f"{x_atom.dimen=}")
 
 
 # def test_BudDelta_add_atomunit_CorrectlySets_BudUnit_max_tree_traverse():

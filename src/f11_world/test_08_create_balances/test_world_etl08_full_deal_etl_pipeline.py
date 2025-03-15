@@ -10,7 +10,7 @@ from src.f05_listen.hub_path import (
     create_cell_json_path,
     create_cell_acct_mandate_ledger_path as cell_mandate_path,
     create_deal_acct_mandate_ledger_path as deal_mandate_path,
-    create_owners_dir_path,
+    create_fisc_owners_dir_path,
     create_fisc_json_path,
     create_fisc_ote1_json_path,
 )
@@ -36,7 +36,9 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
     a23_json_path = create_fisc_json_path(fizz_world._fisc_mstr_dir, accord23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
     print(f"{a23_json_path=}")
-    a23_owners_path = create_owners_dir_path(fizz_world._fisc_mstr_dir, accord23_str)
+    a23_owners_path = create_fisc_owners_dir_path(
+        fizz_world._fisc_mstr_dir, accord23_str
+    )
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN

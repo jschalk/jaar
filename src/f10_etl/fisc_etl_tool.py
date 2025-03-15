@@ -17,41 +17,6 @@ from src.f09_idea.idea_db_tool import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def get_fiscunit_sorted_args() -> list[str]:
-    return [
-        "fisc_title",
-        "timeline_title",
-        "c400_number",
-        "yr1_jan1_offset",
-        "monthday_distortion",
-        "fund_coin",
-        "penny",
-        "respect_bit",
-        "present_time",
-        "bridge",
-    ]
-
-
-def get_fisccash_sorted_args() -> list[str]:
-    return ["fisc_title", "owner_name", "acct_name", "time_int", "amount"]
-
-
-def get_fiscdeal_sorted_args() -> list[str]:
-    return ["fisc_title", "owner_name", "time_int", "quota", "celldepth"]
-
-
-def get_fischour_sorted_args() -> list[str]:
-    return ["fisc_title", "cumlative_minute", "hour_title"]
-
-
-def get_fiscmont_sorted_args() -> list[str]:
-    return ["fisc_title", "cumlative_day", "month_title"]
-
-
-def get_fiscweek_sorted_args() -> list[str]:
-    return ["fisc_title", "weekday_order", "weekday_title"]
-
-
 class FiscPrimeObjsRef:
     def __init__(self, x_dir: str = ""):
         self.unit_agg_tablename = "fiscunit_agg"
