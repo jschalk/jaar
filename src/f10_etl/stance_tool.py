@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, get_level1_dirs
 from src.f01_road.road import OwnerName
-from src.f05_listen.hub_path import create_stances_owner_dir_path, STANCE0001_FILENAME
+from src.f05_listen.hub_path import create_stances_dir_path, STANCE0001_FILENAME
 from src.f05_listen.hub_tool import open_bud_file
 from src.f07_fisc.fisc import (
     get_from_standard as fiscunit_get_from_standard,
@@ -15,9 +15,7 @@ from src.f09_idea.idea_db_tool import csv_dict_to_excel
 from os.path import exists as os_path_exists
 
 
-def collect_stance_csv_strs(
-    fisc_mstr_dir: str, owner_name: OwnerName
-) -> dict[str, str]:
+def collect_stance_csv_strs(fisc_mstr_dir: str) -> dict[str, str]:
     x_csv_strs = create_init_stance_idea_brick_csv_strs()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
@@ -35,7 +33,7 @@ def collect_stance_csv_strs(
     return x_csv_strs
 
 
-def create_stance0001_file(fisc_mstr_dir: str, owner_name: OwnerName):
-    stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir, owner_name)
-    owner_stance_dir = create_stances_owner_dir_path(fisc_mstr_dir, owner_name)
+def create_stance0001_file(fisc_mstr_dir: str):
+    stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
+    owner_stance_dir = create_stances_dir_path(fisc_mstr_dir)
     csv_dict_to_excel(stance_csv_strs, owner_stance_dir, STANCE0001_FILENAME)

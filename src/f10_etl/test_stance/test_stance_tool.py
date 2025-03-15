@@ -48,7 +48,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoFiscUnits(
     bob_str = "Bob"
 
     # WHEN
-    gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir, bob_str)
+    gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_brick_csv_strs()
@@ -60,14 +60,13 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleFiscUnit_NoBudUnits(
 ):
     # ESTABLISH
     fisc_mstr_dir = get_test_etl_dir()
-    bob_str = "Bob"
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(fisc_json_path, None, a23_fisc.get_json())
 
     # WHEN
-    gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir, bob_str)
+    gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_brick_csv_strs()
@@ -92,7 +91,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_VoiceBudUnits(
     save_file(a23_bob_voice_path, None, bob_voice.get_json())
 
     # WHEN
-    gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir, bob_str)
+    gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_brick_csv_strs()
@@ -106,15 +105,14 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoFiscUnits(
 ):
     # ESTABLISH
     fisc_mstr_dir = get_test_etl_dir()
-    bob_str = "Bob"
-    bob_stance0001_path = create_stance0001_path(fisc_mstr_dir, bob_str)
-    assert os_path_exists(bob_stance0001_path) is False
+    stance0001_path = create_stance0001_path(fisc_mstr_dir)
+    assert os_path_exists(stance0001_path) is False
 
     # WHEN
-    create_stance0001_file(fisc_mstr_dir, bob_str)
+    create_stance0001_file(fisc_mstr_dir)
 
     # THEN
-    assert os_path_exists(bob_stance0001_path)
-    bob_stance0001_sheetnames = get_sheet_names(bob_stance0001_path)
+    assert os_path_exists(stance0001_path)
+    bob_stance0001_sheetnames = get_sheet_names(stance0001_path)
     stance_csv_strs = create_init_stance_idea_brick_csv_strs()
     assert set(bob_stance0001_sheetnames) == set(stance_csv_strs.keys())

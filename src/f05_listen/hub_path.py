@@ -16,17 +16,21 @@ EVENT_ALL_GIFT_FILENAME = "all_gift.json"
 EVENT_EXPRESSED_GIFT_FILENAME = "expressed_gift.json"
 
 
+def create_stances_dir_path(fisc_mstr_dir: str) -> str:
+    """Returns path: fisc_mstr_dir\\stances"""
+    return create_path(fisc_mstr_dir, "stances")
+
+
 def create_stances_owner_dir_path(fisc_mstr_dir: str, owner_name: OwnerName) -> str:
     """Returns path: fisc_mstr_dir\\stances\\owner_name"""
     stances_dir = create_path(fisc_mstr_dir, "stances")
     return create_path(stances_dir, owner_name)
 
 
-def create_stance0001_path(fisc_mstr_dir: str, owner_name: OwnerName) -> str:
-    """Returns path: fisc_mstr_dir\\stances\\owner_name\\stance0001.xlsx"""
+def create_stance0001_path(fisc_mstr_dir: str) -> str:
+    """Returns path: fisc_mstr_dir\\stances\\stance0001.xlsx"""
     stances_dir = create_path(fisc_mstr_dir, "stances")
-    owner_dir = create_path(stances_dir, owner_name)
-    return create_path(owner_dir, "stance0001.xlsx")
+    return create_path(stances_dir, "stance0001.xlsx")
 
 
 def create_fisc_json_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:

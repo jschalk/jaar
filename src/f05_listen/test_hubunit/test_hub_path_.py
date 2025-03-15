@@ -19,6 +19,7 @@ from src.f05_listen.hub_path import (
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
     EVENT_EXPRESSED_GIFT_FILENAME,
+    create_stances_dir_path,
     create_stances_owner_dir_path,
     create_stance0001_path,
     create_fisc_json_path,
@@ -61,6 +62,18 @@ def test_hub_path_constants_are_values():
     assert EVENT_EXPRESSED_GIFT_FILENAME == "expressed_gift.json"
 
 
+def test_create_stances_dir_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+
+    # WHEN
+    gen_bob_stance_dir = create_stances_dir_path(x_fisc_mstr_dir)
+
+    # THEN
+    expected_stances_dir = create_path(x_fisc_mstr_dir, "stances")
+    assert gen_bob_stance_dir == expected_stances_dir
+
+
 def test_create_stances_owner_dir_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
@@ -78,15 +91,13 @@ def test_create_stances_owner_dir_path_ReturnObj():
 def test_create_stance0001_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
-    bob_str = "Bob"
 
     # WHEN
-    gen_stance0001_xlsx_path = create_stance0001_path(x_fisc_mstr_dir, bob_str)
+    gen_stance0001_xlsx_path = create_stance0001_path(x_fisc_mstr_dir)
 
     # THEN
     stances_dir = create_path(x_fisc_mstr_dir, "stances")
-    bob_stance_dir = create_path(stances_dir, bob_str)
-    expected_stance000001_path = create_path(bob_stance_dir, STANCE0001_FILENAME)
+    expected_stance000001_path = create_path(stances_dir, STANCE0001_FILENAME)
     assert gen_stance0001_xlsx_path == expected_stance000001_path
 
 
