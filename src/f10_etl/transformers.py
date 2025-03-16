@@ -56,6 +56,7 @@ from src.f09_idea.idea_config import (
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.idea_db_tool import (
+    if_nan_return_None,
     get_custom_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,
@@ -387,6 +388,17 @@ def get_events_dict_from_events_agg_file(train_dir) -> dict[EventInt, FaceName]:
             if x_note != "invalid because of conflicting event_int":
                 x_dict[event_agg_row["event_int"]] = event_agg_row["face_name"]
     return x_dict
+
+
+def get_train_events_max_event_int(train_dir: str) -> int:
+    events_file_path = create_train_events_path(train_dir)
+    if not os_path_exists(events_file_path):
+        return 0
+    events_df = pandas_read_excel(events_file_path)
+    max_event_id = events_df["event_int"].max()
+    if not if_nan_return_None(max_event_id):
+        return 0
+    return max_event_id
 
 
 def train_agg_single_to_pidgin_staging(

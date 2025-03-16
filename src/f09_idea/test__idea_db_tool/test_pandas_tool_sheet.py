@@ -395,7 +395,7 @@ def test_if_nan_return_None_ReturnsObj(idea_env_setup_cleanup):
 
 
 def test_set_dataframe_first_two_columns_Scenario0_BasicFunctionality():
-    # Given a DataFrame with three columns
+    # ESTABLISH a DataFrame with three columns
     df = DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
 
     # When we set the first and second columns to specific values
@@ -407,7 +407,7 @@ def test_set_dataframe_first_two_columns_Scenario0_BasicFunctionality():
 
 
 def test_set_dataframe_first_two_columns_Scenario1_TwoColumns():
-    # Given a DataFrame with exactly two columns
+    # ESTABLISH a DataFrame with exactly two columns
     df = DataFrame({"A": [0, 0], "B": [0, 0]})
 
     # When we set the first and second columns to specific values
@@ -423,7 +423,7 @@ def test_set_dataframe_first_two_columns_Scenario1_TwoColumns():
 
 
 def test_set_dataframe_first_two_columns_Scenario2_MoreThanTwoColumns():
-    # Given a DataFrame with more than two columns
+    # ESTABLISH a DataFrame with more than two columns
     df = DataFrame({"A": [1], "B": [2], "C": [3], "D": [4]})
 
     # When we set the first and second columns to specific values
@@ -439,7 +439,7 @@ def test_set_dataframe_first_two_columns_Scenario2_MoreThanTwoColumns():
 
 
 def test_set_dataframe_first_two_columns_Scenario3_EmptyDataframe():
-    # Given an empty DataFrame with two columns
+    # ESTABLISH an empty DataFrame with two columns
     df = DataFrame({"A": [], "B": []})
 
     # When we set the first and second columns to specific values
@@ -450,7 +450,7 @@ def test_set_dataframe_first_two_columns_Scenario3_EmptyDataframe():
 
 
 def test_set_dataframe_first_two_columns_Scenario4_LessThanTwoColumns():
-    # Given a DataFrame with less than two columns
+    # ESTABLISH a DataFrame with less than two columns
     df = DataFrame({"A": [1, 2, 3]})
 
     # When we attempt to set the first and second columns
@@ -460,7 +460,7 @@ def test_set_dataframe_first_two_columns_Scenario4_LessThanTwoColumns():
 
 
 def test_check_dataframe_column_names_ScenarioCorrectColumnNames():
-    # Given a DataFrame with the correct first two column names
+    # ESTABLISH a DataFrame with the correct first two column names
     df = DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
 
     # When we check the first two column names
@@ -471,7 +471,7 @@ def test_check_dataframe_column_names_ScenarioCorrectColumnNames():
 
 
 def test_check_dataframe_column_names_ScenarioIncorrectColumnNames():
-    # Given a DataFrame with incorrect first two column names
+    # ESTABLISH a DataFrame with incorrect first two column names
     df = DataFrame({"X": [1, 2, 3], "Y": [4, 5, 6]})
 
     # When we check the first two column names
@@ -482,7 +482,7 @@ def test_check_dataframe_column_names_ScenarioIncorrectColumnNames():
 
 
 def test_check_dataframe_column_names_ScenarioPartialColumnMatch():
-    # Given a DataFrame where only the first column matches
+    # ESTABLISH a DataFrame where only the first column matches
     df = DataFrame({"A": [1, 2, 3], "Y": [4, 5, 6]})
 
     # When we check the first two column names
@@ -493,7 +493,7 @@ def test_check_dataframe_column_names_ScenarioPartialColumnMatch():
 
 
 def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
-    # Given a DataFrame with less than two columns
+    # ESTABLISH a DataFrame with less than two columns
     df = DataFrame({"A": [1, 2, 3]})
 
     # When we check the first two column names
@@ -505,7 +505,7 @@ def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
 def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     idea_env_setup_cleanup,
 ):
-    # GIVEN
+    # ESTABLISH
     excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
     set_dir(idea_fisc_mstr_dir())
     yao_str = "Yao"
@@ -556,7 +556,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
 def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
     idea_env_setup_cleanup,
 ):
-    # GIVEN: A workbook with no matching headers
+    # ESTABLISH: A workbook with no matching headers
     excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
     set_dir(idea_fisc_mstr_dir())
     workbook = openpyxl_Workbook()
