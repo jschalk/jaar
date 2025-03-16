@@ -9,6 +9,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet, train_agg_str
+from src.f10_etl.tran_path import create_train_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_train_agg_to_pidgin_label_staging
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -43,7 +44,7 @@ def test_etl_train_agg_to_pidgin_label_staging_CreatesFile_Scenario0_SingleIdea(
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
     upsert_sheet(br00115_file_path, train_agg_str(), br00115_df)
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
@@ -117,7 +118,7 @@ def test_etl_train_agg_to_pidgin_label_staging_CreatesFile_Scenario1_MultipleIde
     br00042_rows = [sue2, sue3, yao1]
     br00042_df = DataFrame(br00042_rows, columns=br00042_columns)
     upsert_sheet(br00042_file_path, train_agg_str(), br00042_df)
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
@@ -195,7 +196,7 @@ def test_etl_train_agg_to_pidgin_label_staging_CreatesFile_Scenario2_WorldUnit_e
     b40_rows = [sue2, sue3, yao1]
     br00042_df = DataFrame(b40_rows, columns=br00042_columns)
     upsert_sheet(br00042_file_path, train_agg_str(), br00042_df)
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     assert os_path_exists(pidgin_path) is False
 
     # WHEN

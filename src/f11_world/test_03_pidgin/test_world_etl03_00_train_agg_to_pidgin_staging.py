@@ -20,6 +20,7 @@ from src.f09_idea.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     train_agg_str,
 )
+from src.f10_etl.tran_path import create_train_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -90,7 +91,7 @@ def test_WorldUnit_train_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup
     br00043_df = [sue2, sue3, yao1]
     br00043_df = DataFrame(br00043_df, columns=br00043_columns)
     upsert_sheet(br00043_file_path, train_agg_str(), br00043_df)
-    pidgin_path = create_path(fizz_world._train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(fizz_world._train_dir)
 
     br00115_file_path = create_path(fizz_world._train_dir, "br00115.xlsx")
     br00115_columns = [

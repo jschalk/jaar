@@ -1,8 +1,10 @@
 from src.f00_instrument.file import create_path
 from src.f10_etl.tran_path import (
     TRAIN_EVENTS_FILENAME,
+    TRAIN_PIDGIN_FILENAME,
     STANCE0001_FILENAME,
     create_train_events_path,
+    create_train_pidgin_path,
     create_stances_dir_path,
     create_stances_owner_dir_path,
     create_stance0001_path,
@@ -13,6 +15,7 @@ from src.f05_listen.examples.listen_env import get_listen_temp_env_dir
 def test_hub_path_constants_are_values():
     # ESTABLISH / WHEN / THEN
     assert TRAIN_EVENTS_FILENAME == "events.xlsx"
+    assert TRAIN_PIDGIN_FILENAME == "pidgin.xlsx"
     assert STANCE0001_FILENAME == "stance0001.xlsx"
 
 
@@ -25,6 +28,18 @@ def test_create_train_events_path_ReturnObj():
 
     # THEN
     expected_train_event_path = create_path(x_train_dir, TRAIN_EVENTS_FILENAME)
+    assert gen_train_event_path == expected_train_event_path
+
+
+def test_create_train_pidgin_path_ReturnObj():
+    # ESTABLISH
+    x_train_dir = get_listen_temp_env_dir()
+
+    # WHEN
+    gen_train_event_path = create_train_pidgin_path(x_train_dir)
+
+    # THEN
+    expected_train_event_path = create_path(x_train_dir, TRAIN_PIDGIN_FILENAME)
     assert gen_train_event_path == expected_train_event_path
 
 

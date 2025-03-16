@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
+from src.f10_etl.tran_path import create_train_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import (
     etl_pidgin_name_staging_to_name_agg,
@@ -35,7 +36,7 @@ def test_etl_pidgin_name_staging_to_name_agg_Scenario0_CreatesEmptyFileBecauseOf
     e1_name_rows = [e1_name0, e1_name1]
     staging_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
     x_train_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_staging_str)
@@ -74,7 +75,7 @@ def test_etl_pidgin_name_staging_to_name_agg_Scenario1_CreatesFileFromSingleIdea
     e1_name_rows = [e1_name0, e1_name1]
     staging_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
     x_train_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_staging_str)
@@ -118,7 +119,7 @@ def test_etl_pidgin_label_staging_to_label_agg_Scenario0_CreatesFileFromSingleId
     e1_label_rows = [e1_label0, e1_label1]
     staging_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
     x_train_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, label_staging_str)
@@ -162,7 +163,7 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleIdea
     e1_road_rows = [e1_road0, e1_road1]
     staging_road_df = DataFrame(e1_road_rows, columns=road_staging_columns)
     x_train_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, road_staging_str)
@@ -206,7 +207,7 @@ def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleId
     e1_title_rows = [e1_title0, e1_title1]
     staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
     x_train_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     upsert_sheet(pidgin_path, title_staging_str, staging_title_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, title_staging_str)
@@ -293,7 +294,7 @@ def test_etl_train_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
 
     x_train_dir = get_test_etl_dir()
-    pidgin_path = create_path(x_train_dir, "pidgin.xlsx")
+    pidgin_path = create_train_pidgin_path(x_train_dir)
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)

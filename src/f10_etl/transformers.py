@@ -70,7 +70,7 @@ from src.f09_idea.idea_db_tool import (
     get_idea_into_dimen_staging_query,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
-from src.f10_etl.tran_path import create_train_events_path
+from src.f10_etl.tran_path import create_train_events_path, create_train_pidgin_path
 from src.f10_etl.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
     create_fisc_tables,
@@ -452,7 +452,7 @@ class TrainAggToStagingTransformer:
                     pidgin_df, idea_number, train_idea_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_path(self.train_dir, "pidgin.xlsx")
+        pidgin_file_path = create_train_pidgin_path(self.train_dir)
         upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.class_type), pidgin_df)
 
     def insert_staging_rows(
@@ -534,7 +534,7 @@ class PidginStagingToAggTransformer:
     def __init__(self, train_dir: str, pidgin_dimen: str):
         self.train_dir = train_dir
         self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_path(self.train_dir, "pidgin.xlsx")
+        self.file_path = create_train_pidgin_path(self.train_dir)
         self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
@@ -546,7 +546,7 @@ class PidginStagingToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_path(self.train_dir, "pidgin.xlsx")
+        pidgin_file_path = create_train_pidgin_path(self.train_dir)
         stage_sheet_name = get_sheet_stage_name(self.class_type)
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
@@ -581,7 +581,7 @@ class PidginStagingToAggTransformer:
 
 
 def etl_train_pidgin_agg_to_otz_face_dirs(train_dir: str, faces_dir: str):
-    agg_pidgin = create_path(train_dir, "pidgin.xlsx")
+    agg_pidgin = create_train_pidgin_path(train_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
@@ -595,7 +595,7 @@ def etl_train_pidgin_agg_to_otz_face_dirs(train_dir: str, faces_dir: str):
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
+    face_pidgin_path = create_train_pidgin_path(face_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
@@ -613,7 +613,7 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
-    event_pidgin_path = create_path(event_pidgin_dir, "pidgin.xlsx")
+    event_pidgin_path = create_train_pidgin_path(event_pidgin_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         csv_filename = class_typeS[class_type]["csv_filename"]

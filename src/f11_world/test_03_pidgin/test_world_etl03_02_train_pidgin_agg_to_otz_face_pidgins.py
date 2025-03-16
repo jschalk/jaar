@@ -14,6 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_idea.idea_db_tool import sheet_exists, upsert_sheet
+from src.f10_etl.tran_path import create_train_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -94,7 +95,7 @@ def test_WorldUnit_train_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     e1_title_rows = [e1_title0, e1_title1]
     e1_title_agg_df = DataFrame(e1_title_rows, columns=title_file_columns)
 
-    agg_pidgin_path = create_path(fizz_world._train_dir, "pidgin.xlsx")
+    agg_pidgin_path = create_train_pidgin_path(fizz_world._train_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
