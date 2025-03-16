@@ -70,6 +70,7 @@ from src.f09_idea.idea_db_tool import (
     get_idea_into_dimen_staging_query,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
+from src.f10_etl.tran_path import create_train_events_path
 from src.f10_etl.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
     create_fisc_tables,
@@ -341,7 +342,7 @@ class TrainEventsToEventsLogTransformer:
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_path(self.train_dir, "events.xlsx")
+        events_file_path = create_train_events_path(self.train_dir)
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -369,15 +370,15 @@ class EventsLogToEventsAggTransformer:
         self.train_dir = train_dir
 
     def transform(self):
-        events_file_path = create_path(self.train_dir, "events.xlsx")
+        events_file_path = create_train_events_path(self.train_dir)
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, "events_log")
             events_agg_df = _create_events_agg_df(events_log_df)
             upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def get_events_dict_from_events_agg_file(train_dir) -> dict[int, str]:
-    events_file_path = create_path(train_dir, "events.xlsx")
+def get_events_dict_from_events_agg_file(train_dir) -> dict[EventInt, FaceName]:
+    events_file_path = create_train_events_path(train_dir)
     x_dict = {}
     if os_path_exists(events_file_path):
         events_agg_df = pandas_read_excel(events_file_path, "events_agg")

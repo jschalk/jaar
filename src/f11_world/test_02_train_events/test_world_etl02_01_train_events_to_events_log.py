@@ -8,6 +8,7 @@ from src.f07_fisc.fisc_config import (
     weekday_order_str,
 )
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
+from src.f10_etl.tran_path import create_train_events_path
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -50,8 +51,7 @@ def test_WorldUnit_train_events_to_events_log_CreatesSheets_Scenario0(
     fizz_world.mine_to_train_staging()
     fizz_world.train_staging_to_train_agg()
     fizz_world.train_agg_to_train_events()
-    events_filename = "events.xlsx"
-    events_file_path = create_path(fizz_world._train_dir, events_filename)
+    events_file_path = create_train_events_path(fizz_world._train_dir)
     assert os_path_exists(events_file_path) is False
 
     # WHEN
@@ -140,8 +140,7 @@ def test_WorldUnit_train_events_to_events_log_CreatesSheets_Scenario1_MultipleId
     fizz_world.mine_to_train_staging()
     fizz_world.train_staging_to_train_agg()
     fizz_world.train_agg_to_train_events()
-    events_filename = "events.xlsx"
-    events_file_path = create_path(fizz_world._train_dir, events_filename)
+    events_file_path = create_train_events_path(fizz_world._train_dir)
     assert os_path_exists(events_file_path) is False
 
     # WHEN

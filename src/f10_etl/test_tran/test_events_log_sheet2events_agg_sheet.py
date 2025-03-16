@@ -1,6 +1,7 @@
 from src.f00_instrument.file import create_path, count_dirs_files, count_files
 from src.f04_gift.atom_config import face_name_str, event_int_str
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
+from src.f10_etl.tran_path import create_train_events_path
 from src.f10_etl.transformers import (
     _create_events_agg_df,
     etl_train_events_log_to_events_agg,
@@ -112,7 +113,7 @@ def test_etl_train_events_log_to_events_agg_CreatesSheets_Scenario1(
     # el_rows = [train_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
-    events_file_path = create_path(train_dir, "events.xlsx")
+    events_file_path = create_train_events_path(train_dir)
     events_log_str = "events_log"
     upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
@@ -174,7 +175,7 @@ def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario1(
     events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_path(train_dir, "events.xlsx")
+    events_file_path = create_train_events_path(train_dir)
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
 
     # WHEN
