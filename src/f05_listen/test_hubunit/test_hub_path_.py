@@ -6,7 +6,6 @@ from src.f01_road.jaar_config import (
     get_owners_folder,
 )
 from src.f05_listen.hub_path import (
-    STANCE0001_FILENAME,
     FISC_FILENAME,
     FISC_OTE1_AGG_CSV_FILENAME,
     FISC_OTE1_AGG_JSON_FILENAME,
@@ -19,9 +18,6 @@ from src.f05_listen.hub_path import (
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
     EVENT_EXPRESSED_GIFT_FILENAME,
-    create_stances_dir_path,
-    create_stances_owner_dir_path,
-    create_stance0001_path,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
@@ -43,62 +39,6 @@ from src.f05_listen.hub_path import (
     create_forecast_path,
 )
 from src.f05_listen.examples.listen_env import get_listen_temp_env_dir
-
-
-def test_hub_path_constants_are_values():
-    # ESTABLISH / WHEN / THEN
-    assert STANCE0001_FILENAME == "stance0001.xlsx"
-    assert FISC_FILENAME == "fisc.json"
-    assert FISC_OTE1_AGG_CSV_FILENAME == "fisc_ote1_agg.csv"
-    assert FISC_OTE1_AGG_JSON_FILENAME == "fisc_ote1_agg.json"
-    assert FISC_AGENDA_FULL_LISTING_FILENAME == "agenda_full_listing.csv"
-    assert DEALUNIT_FILENAME == "dealunit.json"
-    assert DEAL_MANDATE_FILENAME == "deal_acct_mandate_ledger.json"
-    assert CELLNODE_FILENAME == "cell.json"
-    assert CELL_MANDATE_FILENAME == "cell_acct_mandate_ledger.json"
-    assert BUDPOINT_FILENAME == "budpoint.json"
-    assert BUDEVENT_FILENAME == "bud.json"
-    assert EVENT_ALL_GIFT_FILENAME == "all_gift.json"
-    assert EVENT_EXPRESSED_GIFT_FILENAME == "expressed_gift.json"
-
-
-def test_create_stances_dir_path_ReturnObj():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-
-    # WHEN
-    gen_bob_stance_dir = create_stances_dir_path(x_fisc_mstr_dir)
-
-    # THEN
-    expected_stances_dir = create_path(x_fisc_mstr_dir, "stances")
-    assert gen_bob_stance_dir == expected_stances_dir
-
-
-def test_create_stances_owner_dir_path_ReturnObj():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-    bob_str = "Bob"
-
-    # WHEN
-    gen_bob_stance_dir = create_stances_owner_dir_path(x_fisc_mstr_dir, bob_str)
-
-    # THEN
-    stances_dir = create_path(x_fisc_mstr_dir, "stances")
-    expected_bob_stance_dir = create_path(stances_dir, bob_str)
-    assert gen_bob_stance_dir == expected_bob_stance_dir
-
-
-def test_create_stance0001_path_ReturnObj():
-    # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
-
-    # WHEN
-    gen_stance0001_xlsx_path = create_stance0001_path(x_fisc_mstr_dir)
-
-    # THEN
-    stances_dir = create_path(x_fisc_mstr_dir, "stances")
-    expected_stance000001_path = create_path(stances_dir, STANCE0001_FILENAME)
-    assert gen_stance0001_xlsx_path == expected_stance000001_path
 
 
 def test_create_fisc_json_path_ReturnObj():
