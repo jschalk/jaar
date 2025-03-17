@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
-from src.f10_etl.tran_path import create_train_pidgin_path
+from src.f10_etl.tran_path import create_cart_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -71,7 +71,7 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllDimens
     e1_title_rows = [e1_title0, e1_title1]
     staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
 
-    pidgin_path = create_train_pidgin_path(fizz_world._train_dir)
+    pidgin_path = create_cart_pidgin_path(fizz_world._cart_dir)
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
@@ -87,7 +87,7 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllDimens
     assert sheet_exists(pidgin_path, title_agg_str) is False
 
     # WHEN
-    fizz_world.train_pidgin_staging_to_agg()
+    fizz_world.cart_pidgin_staging_to_agg()
 
     # THEN
     assert os_path_exists(pidgin_path)

@@ -1,19 +1,19 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.road import OwnerName, TitleUnit
 
-TRAIN_EVENTS_FILENAME = "events.xlsx"
-TRAIN_PIDGIN_FILENAME = "pidgin.xlsx"
+cart_EVENTS_FILENAME = "events.xlsx"
+cart_PIDGIN_FILENAME = "pidgin.xlsx"
 STANCE0001_FILENAME = "stance0001.xlsx"
 
 
-def create_train_events_path(train_dir: str) -> str:
-    """Returns path: train_dir\\events.xlsx"""
-    return create_path(train_dir, "events.xlsx")
+def create_cart_events_path(cart_dir: str) -> str:
+    """Returns path: cart_dir\\events.xlsx"""
+    return create_path(cart_dir, "events.xlsx")
 
 
-def create_train_pidgin_path(train_dir: str) -> str:
-    """Returns path: train_dir\\pidgin.xlsx"""
-    return create_path(train_dir, "pidgin.xlsx")
+def create_cart_pidgin_path(cart_dir: str) -> str:
+    """Returns path: cart_dir\\pidgin.xlsx"""
+    return create_path(cart_dir, "pidgin.xlsx")
 
 
 def create_stances_dir_path(fisc_mstr_dir: str) -> str:

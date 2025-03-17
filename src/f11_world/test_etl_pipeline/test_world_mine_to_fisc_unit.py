@@ -125,9 +125,9 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
+    cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     assert os_path_exists(mine_file_path)
-    assert os_path_exists(train_file_path)
+    assert os_path_exists(cart_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
@@ -135,7 +135,7 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
     assert count_dirs_files(fizz_world.worlds_dir) == 91
 
 
-# def test_WorldUnit_mine_to_burdens_CreatestrainFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mine_to_burdens_CreatescartFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str)
@@ -190,9 +190,9 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
 #     fizz_world.mine_to_burdens()
 
 #     # THEN
-#     train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
+#     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
 #     assert os_path_exists(mine_file_path)
-#     assert os_path_exists(train_file_path)
+#     assert os_path_exists(cart_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_voice_path)
 #     assert os_path_exists(a23_sue_forecast_path)

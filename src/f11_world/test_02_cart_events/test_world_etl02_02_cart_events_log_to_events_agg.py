@@ -1,14 +1,14 @@
 from src.f00_instrument.file import create_path
 from src.f04_gift.atom_config import face_name_str, event_int_str
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
-from src.f10_etl.tran_path import create_train_events_path
+from src.f10_etl.tran_path import create_cart_events_path
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_train_events_log_to_events_agg_CreatesSheets_Scenario0(
+def test_WorldUnit_cart_events_log_to_events_agg_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -30,25 +30,25 @@ def test_WorldUnit_train_events_log_to_events_agg_CreatesSheets_Scenario0(
     ]
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
-    train_dir = fizz_world._train_dir
+    cart_dir = fizz_world._cart_dir
     src3_filename = "br00003.xlsx"
     src5_filename = "br00005.xlsx"
-    oe_str = "train_events"
-    bob_row = [train_dir, src3_filename, oe_str, bob_str, event3, ""]
-    sue_row = [train_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
-    yao1_row = [train_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
-    yao9_row = [train_dir, src3_filename, oe_str, yao_str, event9, ""]
-    s5_0_row = [train_dir, src5_filename, oe_str, bob_str, event3, ""]
-    s5_1_row = [train_dir, src5_filename, oe_str, yao_str, event9, ""]
-    # el_rows = [train_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
+    oe_str = "cart_events"
+    bob_row = [cart_dir, src3_filename, oe_str, bob_str, event3, ""]
+    sue_row = [cart_dir, src3_filename, oe_str, sue_str, event1, invalid_error_str]
+    yao1_row = [cart_dir, src3_filename, oe_str, yao_str, event1, invalid_error_str]
+    yao9_row = [cart_dir, src3_filename, oe_str, yao_str, event9, ""]
+    s5_0_row = [cart_dir, src5_filename, oe_str, bob_str, event3, ""]
+    s5_1_row = [cart_dir, src5_filename, oe_str, yao_str, event9, ""]
+    # el_rows = [cart_dir, events_filename, elog, bob_row, sue_row, yao1_row, yao9_row]
     el_rows = [bob_row, sue_row, yao1_row, yao9_row, s5_0_row, s5_1_row]
     ex_events_log_df = DataFrame(el_rows, columns=events_otx_columns)
-    events_file_path = create_train_events_path(fizz_world._train_dir)
+    events_file_path = create_cart_events_path(fizz_world._cart_dir)
     events_log_str = "events_log"
     upsert_sheet(events_file_path, events_log_str, ex_events_log_df)
 
     # WHEN
-    fizz_world.train_events_log_to_events_agg()
+    fizz_world.cart_events_log_to_events_agg()
 
     # THEN
     e3_row = [bob_str, event3, ""]
@@ -85,7 +85,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     event9 = 9
     invalid_error_str = "invalid because of conflicting event_int"
     invalid_error_str = "invalid because of conflicting event_int"
-    train_dir = fizz_world._train_dir
+    cart_dir = fizz_world._cart_dir
     e3_row = [bob_str, event3, ""]
     e1_sue_row = [sue_str, event1, invalid_error_str]
     e1_yao_row = [yao_str, event1, invalid_error_str]
@@ -94,7 +94,7 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame(el_rows, columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_train_events_path(fizz_world._train_dir)
+    events_file_path = create_cart_events_path(fizz_world._cart_dir)
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
     assert len(fizz_world.events) != 2
 
@@ -112,7 +112,7 @@ def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_clea
     events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
     ex_events_agg_df = DataFrame([], columns=events_agg_columns)
     events_agg_str = "events_agg"
-    events_file_path = create_train_events_path(fizz_world._train_dir)
+    events_file_path = create_cart_events_path(fizz_world._cart_dir)
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
     fizz_world.events = {2: "Sue", 44: "Bob"}
     assert fizz_world.events == {2: "Sue", 44: "Bob"}

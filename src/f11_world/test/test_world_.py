@@ -27,7 +27,7 @@ def test_WorldUnit_Exists():
     assert not x_world._faces_inz_dir
     assert not x_world._world_dir
     assert not x_world._mine_dir
-    assert not x_world._train_dir
+    assert not x_world._cart_dir
     assert not x_world._fisc_mstr_dir
     assert not x_world._fiscunits
     assert not x_world._pidgin_events
@@ -42,7 +42,7 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._world_dir is None
     assert fizz_world._faces_otz_dir is None
     assert fizz_world._mine_dir is None
-    assert fizz_world._train_dir is None
+    assert fizz_world._cart_dir is None
     assert fizz_world._fisc_mstr_dir is None
     assert os_path_exists(x_mine_dir) is False
 
@@ -53,7 +53,7 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._world_dir is None
     assert fizz_world._faces_otz_dir is None
     assert fizz_world._mine_dir == x_mine_dir
-    assert fizz_world._train_dir is None
+    assert fizz_world._cart_dir is None
     assert fizz_world._fisc_mstr_dir is None
     assert os_path_exists(x_mine_dir)
 
@@ -66,20 +66,20 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_faces_otz_dir = create_path(x_world_dir, "faces_otz")
     x_faces_inz_dir = create_path(x_world_dir, "faces_inz")
     x_mine_dir = create_path(x_world_dir, "mine")
-    x_train_dir = create_path(x_world_dir, "train")
+    x_cart_dir = create_path(x_world_dir, "cart")
     x_fisc_mstr_dir = create_path(x_world_dir, "fisc_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._faces_otz_dir
     assert not fizz_world._faces_inz_dir
     assert not fizz_world._mine_dir
-    assert not fizz_world._train_dir
+    assert not fizz_world._cart_dir
     assert not fizz_world._fisc_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_faces_otz_dir) is False
     assert os_path_exists(x_faces_inz_dir) is False
     assert os_path_exists(x_mine_dir) is False
-    assert os_path_exists(x_train_dir) is False
+    assert os_path_exists(x_cart_dir) is False
     assert os_path_exists(x_fisc_mstr_dir) is False
 
     # WHEN
@@ -90,12 +90,12 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert fizz_world._faces_otz_dir == x_faces_otz_dir
     assert fizz_world._faces_inz_dir == x_faces_inz_dir
     assert not fizz_world._mine_dir
-    assert fizz_world._train_dir == x_train_dir
+    assert fizz_world._cart_dir == x_cart_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_faces_otz_dir)
     assert os_path_exists(x_faces_inz_dir)
     assert os_path_exists(x_mine_dir) is False
-    assert os_path_exists(x_train_dir)
+    assert os_path_exists(x_cart_dir)
     assert os_path_exists(x_fisc_mstr_dir)
 
 

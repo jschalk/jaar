@@ -22,10 +22,10 @@ from src.f09_idea.idea_db_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_relevant_columns_dataframe,
-    train_staging_str,
-    train_agg_str,
-    train_valid_str,
-    get_train_staging_grouping_with_all_values_equal_df,
+    cart_staging_str,
+    cart_agg_str,
+    cart_valid_str,
+    get_cart_staging_grouping_with_all_values_equal_df,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -175,20 +175,20 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_label_str()]
 
 
-def test_train_staging_str_ReturnsObj():
+def test_cart_staging_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert train_staging_str() == "train_staging"
-    assert train_agg_str() == "train_agg"
-    assert train_valid_str() == "train_valid"
+    assert cart_staging_str() == "cart_staging"
+    assert cart_agg_str() == "cart_agg"
+    assert cart_valid_str() == "cart_valid"
 
 
-def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
+def test_get_cart_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
     groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    groupby_dataframe = get_train_staging_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_cart_staging_grouping_with_all_values_equal_df(
         df1, groupby_list
     )
 
@@ -199,7 +199,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert groupby_dataframe.columns.to_list() == []
 
 
-def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
+def test_get_cart_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -207,7 +207,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     groupby_list = [group_label_str()]
 
     # WHEN
-    groupby_dataframe = get_train_staging_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_cart_staging_grouping_with_all_values_equal_df(
         df1, groupby_list
     )
     print(f"{groupby_dataframe=}")
@@ -222,7 +222,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
+def test_get_cart_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -230,7 +230,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    groupby_dataframe = get_train_staging_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_cart_staging_grouping_with_all_values_equal_df(
         df1, groupby_list
     )
     print(f"{groupby_dataframe=}")
@@ -245,7 +245,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
+def test_get_cart_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
@@ -253,7 +253,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    groupby_dataframe = get_train_staging_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_cart_staging_grouping_with_all_values_equal_df(
         df1, groupby_list
     )
     print(f"{groupby_dataframe=}")
@@ -268,7 +268,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
+def test_get_cart_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [
@@ -280,7 +280,7 @@ def test_get_train_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario
     groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    groupby_dataframe = get_train_staging_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_cart_staging_grouping_with_all_values_equal_df(
         df1, groupby_list
     )
     print(f"{groupby_dataframe=}")

@@ -15,22 +15,22 @@ from src.f01_road.road import (
 )
 from src.f07_fisc.fisc import FiscUnit
 from src.f10_etl.transformers import (
-    etl_mine_to_train_staging,
-    etl_train_staging_to_train_agg,
-    etl_train_agg_to_train_valid,
-    etl_train_agg_to_train_events,
-    etl_train_events_to_events_log,
-    etl_train_pidgin_staging_to_agg,
-    etl_train_agg_to_pidgin_staging,
-    etl_train_events_log_to_events_agg,
+    etl_mine_to_cart_staging,
+    etl_cart_staging_to_cart_agg,
+    etl_cart_agg_to_cart_valid,
+    etl_cart_agg_to_cart_events,
+    etl_cart_events_to_events_log,
+    etl_cart_pidgin_staging_to_agg,
+    etl_cart_agg_to_pidgin_staging,
+    etl_cart_events_log_to_events_agg,
     get_events_dict_from_events_agg_file,
-    etl_train_pidgin_agg_to_otz_face_dirs,
+    etl_cart_pidgin_agg_to_otz_face_dirs,
     etl_otz_face_pidgins_to_otz_event_pidgins,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_train_ideas_to_otz_face_ideas,
+    etl_cart_ideas_to_otz_face_ideas,
     etl_otz_face_ideas_to_otz_event_otx_ideas,
     etl_otz_event_ideas_to_inx_events,
     etl_otz_inx_event_ideas_to_inz_faces,
@@ -79,7 +79,7 @@ class WorldUnit:
     _faces_inz_dir: str = None
     _world_dir: str = None
     _mine_dir: str = None
-    _train_dir: str = None
+    _cart_dir: str = None
     _fisc_mstr_dir: str = None
     _fiscunits: set[FiscTitle] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
@@ -111,46 +111,46 @@ class WorldUnit:
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._faces_otz_dir = create_path(self._world_dir, "faces_otz")
         self._faces_inz_dir = create_path(self._world_dir, "faces_inz")
-        self._train_dir = create_path(self._world_dir, "train")
+        self._cart_dir = create_path(self._world_dir, "cart")
         self._fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         set_dir(self._world_dir)
         set_dir(self._faces_otz_dir)
         set_dir(self._faces_inz_dir)
-        set_dir(self._train_dir)
+        set_dir(self._cart_dir)
         set_dir(self._fisc_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
         return self.timeconversions
 
-    def mine_to_train_staging(self):
-        etl_mine_to_train_staging(self._mine_dir, self._train_dir)
+    def mine_to_cart_staging(self):
+        etl_mine_to_cart_staging(self._mine_dir, self._cart_dir)
 
-    def train_staging_to_train_agg(self):
-        etl_train_staging_to_train_agg(self._train_dir)
+    def cart_staging_to_cart_agg(self):
+        etl_cart_staging_to_cart_agg(self._cart_dir)
 
-    def train_agg_to_train_valid(self):
-        etl_train_agg_to_train_valid(self._train_dir, self.legitimate_events())
+    def cart_agg_to_cart_valid(self):
+        etl_cart_agg_to_cart_valid(self._cart_dir, self.legitimate_events())
 
-    def train_agg_to_train_events(self):
-        etl_train_agg_to_train_events(self._train_dir)
+    def cart_agg_to_cart_events(self):
+        etl_cart_agg_to_cart_events(self._cart_dir)
 
-    def train_events_to_events_log(self):
-        etl_train_events_to_events_log(self._train_dir)
+    def cart_events_to_events_log(self):
+        etl_cart_events_to_events_log(self._cart_dir)
 
-    def train_events_log_to_events_agg(self):
-        etl_train_events_log_to_events_agg(self._train_dir)
+    def cart_events_log_to_events_agg(self):
+        etl_cart_events_log_to_events_agg(self._cart_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._train_dir)
+        self.events = get_events_dict_from_events_agg_file(self._cart_dir)
 
-    def train_agg_to_pidgin_staging(self):
-        etl_train_agg_to_pidgin_staging(self.legitimate_events(), self._train_dir)
+    def cart_agg_to_pidgin_staging(self):
+        etl_cart_agg_to_pidgin_staging(self.legitimate_events(), self._cart_dir)
 
-    def train_pidgin_staging_to_agg(self):
-        etl_train_pidgin_staging_to_agg(self._train_dir)
+    def cart_pidgin_staging_to_agg(self):
+        etl_cart_pidgin_staging_to_agg(self._cart_dir)
 
-    def train_pidgin_agg_to_otz_face_dirs(self):
-        etl_train_pidgin_agg_to_otz_face_dirs(self._train_dir, self._faces_otz_dir)
+    def cart_pidgin_agg_to_otz_face_dirs(self):
+        etl_cart_pidgin_agg_to_otz_face_dirs(self._cart_dir, self._faces_otz_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -167,8 +167,8 @@ class WorldUnit:
         etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._faces_otz_dir)
         self._set_pidgin_events()
 
-    def train_ideas_to_otz_face_ideas(self):
-        etl_train_ideas_to_otz_face_ideas(self._train_dir, self._faces_otz_dir)
+    def cart_ideas_to_otz_face_ideas(self):
+        etl_cart_ideas_to_otz_face_ideas(self._cart_dir, self._faces_otz_dir)
 
     def otz_face_ideas_to_otz_event_otx_ideas(self):
         etl_otz_face_ideas_to_otz_event_otx_ideas(self._faces_otz_dir)
@@ -264,40 +264,40 @@ class WorldUnit:
         print(f"{fisc_mstr_dir=}")
         set_dir(fisc_mstr_dir)
 
-        # "mine_to_train_staging step 00"),
-        # "train_staging_to_train_agg step 01"),
-        # "train_agg_to_train_events step 02"),
-        # "train_events_to_events_log step 02.1"),
-        # "train_events_log_to_events_agg step 02.2"),
+        # "mine_to_cart_staging step 00"),
+        # "cart_staging_to_cart_agg step 01"),
+        # "cart_agg_to_cart_events step 02"),
+        # "cart_events_to_events_log step 02.1"),
+        # "cart_events_log_to_events_agg step 02.2"),
         # "set_events_from_events_agg_file step 03"),
-        # "train_agg_to_pidgin_staging step 03.1"),
-        # "train_pidgin_staging_to_agg step 03.2"),
-        # "train_pidgin_agg_to_otz_face_dirs step 03.3"),
+        # "cart_agg_to_pidgin_staging step 03.1"),
+        # "cart_pidgin_staging_to_agg step 03.2"),
+        # "cart_pidgin_agg_to_otz_face_dirs step 03.3"),
         # "otz_face_pidgins_to_otz_event_pidgins step 03.4"),
         # "otz_event_pidgins_csvs_to_otz_pidgin_jsons step 03.5"),
         # "pidgin_jsons_inherit_younger_pidgins step 04"),
-        # "train_agg_to_train_valid step 04.1"),
-        # "train_ideas_to_otz_face_ideas step 04.2"),
+        # "cart_agg_to_cart_valid step 04.1"),
+        # "cart_ideas_to_otz_face_ideas step 04.2"),
         # "otz_face_ideas_to_otz_event_otx_ideas step 04.3"),
         # "otz_event_ideas_to_inx_events 04.4"),
         # "otz_inx_event_ideas_to_inz_faces 04.5"),
         # "inz_face_ideas_to_csv_files step 05"),
 
         mine_to_burdens_steps = [
-            (self.mine_to_train_staging, "step 00.0"),
-            (self.train_staging_to_train_agg, "step 01.0"),
-            (self.train_agg_to_train_events, "step 02.0"),
-            (self.train_events_to_events_log, "step 02.1"),
-            (self.train_events_log_to_events_agg, "step 02.2"),
+            (self.mine_to_cart_staging, "step 00.0"),
+            (self.cart_staging_to_cart_agg, "step 01.0"),
+            (self.cart_agg_to_cart_events, "step 02.0"),
+            (self.cart_events_to_events_log, "step 02.1"),
+            (self.cart_events_log_to_events_agg, "step 02.2"),
             (self.set_events_from_events_agg_file, "step 03.0"),
-            (self.train_agg_to_pidgin_staging, "step 03.1"),
-            (self.train_pidgin_staging_to_agg, "step 03.2"),
-            (self.train_pidgin_agg_to_otz_face_dirs, "step 03.3"),
+            (self.cart_agg_to_pidgin_staging, "step 03.1"),
+            (self.cart_pidgin_staging_to_agg, "step 03.2"),
+            (self.cart_pidgin_agg_to_otz_face_dirs, "step 03.3"),
             (self.otz_face_pidgins_to_otz_event_pidgins, "step 03.4"),
             (self.otz_event_pidgins_csvs_to_otz_pidgin_jsons, "step 03.5"),
             (self.pidgin_jsons_inherit_younger_pidgins, "step 04.0"),
-            (self.train_agg_to_train_valid, "step 04.1"),
-            (self.train_ideas_to_otz_face_ideas, "step 04.2"),
+            (self.cart_agg_to_cart_valid, "step 04.1"),
+            (self.cart_ideas_to_otz_face_ideas, "step 04.2"),
             (self.otz_face_ideas_to_otz_event_otx_ideas, "step 04.3"),
             (self.otz_event_ideas_to_inx_events, "step 04.4"),
             (self.otz_inx_event_ideas_to_inz_faces, "step 04.5"),
