@@ -1,5 +1,6 @@
 from src.f00_instrument.file import create_path, set_dir, get_dir_filenames
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists, open_csv
+from src.f10_etl.tran_path import create_otx_event_pidgin_path as otx_event_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import (
     event_pidgin_to_pidgin_csv_files,
@@ -17,9 +18,10 @@ def test_etl_event_pidgin_to_pidgin_csv_files_Scenario0_Nofile(env_dir_setup_cle
     sue_str = "Sue"
     sue_face_dir = create_path(faces_dir, sue_str)
     event3 = 3
-    event3_dir = create_path(faces_dir, event3)
+    event3_dir = create_path(sue_face_dir, event3)
     name_agg_str = "name_agg"
-    event3_pidgin_file_path = create_path(event3_dir, "pidgin.xlsx")
+    event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event3)
+    print(f"{event3_pidgin_file_path=}")
 
     assert os_path_exists(sue_face_dir) is False
     assert os_path_exists(event3_pidgin_file_path) is False
@@ -69,7 +71,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario1_1Event_name(env_dir_setup_cl
     faces_dir = get_test_etl_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event3_dir = create_path(sue_dir, event3)
-    event3_pidgin_file_path = create_path(event3_dir, "pidgin.xlsx")
+    event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event3)
     event3_name_csv_file_path = create_path(event3_dir, "name.csv")
     name_agg_str = "name_agg"
     upsert_sheet(event3_pidgin_file_path, name_agg_str, e3_name_df)
@@ -104,7 +106,8 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cl
     faces_dir = get_test_etl_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event7_dir = create_path(sue_dir, event7)
-    event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
+    event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
+    print(f"{event7_pidgin_file_path=}")
     event7_road_csv_file_path = create_path(event7_dir, "road.csv")
     road_agg_str = "road_agg"
     upsert_sheet(event7_pidgin_file_path, road_agg_str, e7_road_df)
@@ -159,9 +162,9 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(zia_dir, event9)
-    event3_pidgin_file_path = create_path(event3_dir, "pidgin.xlsx")
-    event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-    event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+    event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, bob_str, event3)
+    event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
+    event9_pidgin_file_path = otx_event_pidgin_path(faces_dir, zia_str, event9)
     event3_road_csv_file_path = create_path(event3_dir, "road.csv")
     event7_road_csv_file_path = create_path(event7_dir, "road.csv")
     event9_road_csv_file_path = create_path(event9_dir, "road.csv")
@@ -222,9 +225,9 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
 #     event3_dir = create_path(sue_dir, event3)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     event3_pidgin_file_path = create_path(event3_dir, "pidgin.xlsx")
-#     event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-#     event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+#     event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event3)
+#     event7_pidgin_file_path = otx_event_pidgin_path(event7_dir, )
+#     event9_pidgin_file_path = otx_event_pidgin_path(event9_dir, )
 #     event3_name_csv_file_path = create_path(event3_dir, "name.csv")
 #     event7_road_csv_file_path = create_path(event7_dir, "name.csv")
 #     event9_name_csv_file_path = create_path(event9_dir, "name.csv")
@@ -285,9 +288,9 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
 #     sue_dir = create_path(faces_dir, sue_str)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
-#     event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-#     event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+#     sue_pidgin_file_path = otx_face_pidgin_path(sue_dir)
+#     event7_pidgin_file_path = otx_event_pidgin_path(event7_dir)
+#     event9_pidgin_file_path = otx_event_pidgin_path(event9_dir)
 #     label_agg_str = "label_agg"
 #     upsert_sheet(sue_pidgin_file_path, label_agg_str, sue_label_agg_df)
 #     assert os_path_exists(sue_dir)
@@ -341,9 +344,9 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
 #     sue_dir = create_path(faces_dir, sue_str)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
-#     event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-#     event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+#     sue_pidgin_file_path = create_path(sue_dir, )
+#     event7_pidgin_file_path = create_path(event7_dir, )
+#     event9_pidgin_file_path = create_path(event9_dir, )
 #     title_agg_str = "title_agg"
 #     upsert_sheet(sue_pidgin_file_path, title_agg_str, e1_title_agg_df)
 #     assert os_path_exists(sue_dir)
@@ -398,9 +401,9 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
 #     sue_dir = create_path(faces_dir, sue_str)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
-#     event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-#     event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+#     sue_pidgin_file_path = create_path(sue_dir, )
+#     event7_pidgin_file_path = create_path(event7_dir, )
+#     event9_pidgin_file_path = create_path(event9_dir, )
 #     road_agg_str = "road_agg"
 #     upsert_sheet(sue_pidgin_file_path, road_agg_str, sue_road_agg_df)
 #     assert os_path_exists(sue_dir)
@@ -463,11 +466,11 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
 #     event3_dir = create_path(zia_dir, event3)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
-#     zia_pidgin_file_path = create_path(zia_dir, "pidgin.xlsx")
-#     event3_pidgin_file_path = create_path(event3_dir, "pidgin.xlsx")
-#     event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-#     event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+#     sue_pidgin_file_path = create_path(sue_dir,
+#     zia_pidgin_file_path = create_path(zia_dir,
+#     event3_pidgin_file_path = create_otx_event_pidgin_path(faces_dir, sue_str, event3)
+#     event7_pidgin_file_path = create_path(event7_dir, )
+#     event9_pidgin_file_path = create_path(event9_dir, )
 #     road_agg_str = "road_agg"
 #     upsert_sheet(sue_pidgin_file_path, road_agg_str, sue_road_agg_df)
 #     upsert_sheet(zia_pidgin_file_path, road_agg_str, zia_road_agg_df)

@@ -8,6 +8,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_idea.idea_db_tool import sheet_exists, upsert_sheet, open_csv
+from src.f10_etl.tran_path import create_otx_event_pidgin_path as otx_event_pidgin_path
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame
@@ -61,9 +62,10 @@ def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_ro
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(zia_dir, event9)
-    event3_pidgin_file_path = create_path(event3_dir, "pidgin.xlsx")
-    event7_pidgin_file_path = create_path(event7_dir, "pidgin.xlsx")
-    event9_pidgin_file_path = create_path(event9_dir, "pidgin.xlsx")
+    faces_otz_dir = fizz_world._faces_otz_dir
+    event3_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, bob_str, event3)
+    event7_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, sue_str, event7)
+    event9_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, zia_str, event9)
     event3_road_csv_file_path = create_path(event3_dir, "road.csv")
     event7_road_csv_file_path = create_path(event7_dir, "road.csv")
     event9_road_csv_file_path = create_path(event9_dir, "road.csv")
