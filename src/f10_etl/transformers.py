@@ -218,11 +218,11 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
 
 
 def etl_cart_staging_to_cart_agg(cart_dir):
-    transformer = cartStagingTocartAggTransformer(cart_dir)
+    transformer = CartStagingToCartAggTransformer(cart_dir)
     transformer.transform()
 
 
-class cartStagingTocartAggTransformer:
+class CartStagingToCartAggTransformer:
     def __init__(self, cart_dir: str):
         self.cart_dir = cart_dir
 

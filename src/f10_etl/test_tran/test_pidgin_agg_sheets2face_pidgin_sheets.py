@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
-from src.f10_etl.tran_path import create_cart_pidgin_path
+from src.f10_etl.tran_path import create_cart_pidgin_path, create_otx_face_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f10_etl.transformers import etl_cart_pidgin_agg_to_otz_face_dirs
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -47,6 +47,12 @@ def test_etl_cart_pidgin_agg_to_otz_face_dirs_Scenario0_Two_face_names(
     assert os_path_exists(zia_dir)
     sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
     zia_pidgin_file_path = create_path(zia_dir, "pidgin.xlsx")
+    sue_pidgin_file_path2 = create_otx_face_pidgin_path(faces_dir, sue_dir)
+    zia_pidgin_file_path2 = create_otx_face_pidgin_path(faces_dir, zia_dir)
+    print(f"{sue_pidgin_file_path=}")
+    print(f"{zia_pidgin_file_path=}")
+    print(f"{sue_pidgin_file_path2=}")
+    print(f"{zia_pidgin_file_path2=}")
     assert os_path_exists(sue_pidgin_file_path)
     assert os_path_exists(zia_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
@@ -131,7 +137,9 @@ def test_etl_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
     assert os_path_exists(sue_dir)
-    sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
+    sue_pidgin_file_path = create_otx_face_pidgin_path(faces_dir, sue_str)
+    print(f"{sue_pidgin_file_path=}")
+
     assert os_path_exists(sue_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
     assert sheet_exists(sue_pidgin_file_path, label_agg_str)

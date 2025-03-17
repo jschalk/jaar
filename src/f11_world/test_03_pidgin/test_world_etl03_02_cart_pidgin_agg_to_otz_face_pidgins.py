@@ -14,7 +14,7 @@ from src.f08_pidgin.pidgin_config import (
     unknown_word_str,
 )
 from src.f09_idea.idea_db_tool import sheet_exists, upsert_sheet
-from src.f10_etl.tran_path import create_cart_pidgin_path
+from src.f10_etl.tran_path import create_cart_pidgin_path, create_otx_face_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -100,14 +100,16 @@ def test_WorldUnit_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, title_agg_str, e1_title_agg_df)
+    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
+    faces_otz_dir = fizz_world._faces_otz_dir
+    sue_pidgin_file_path = create_otx_face_pidgin_path(faces_otz_dir, sue_str)
+    assert os_path_exists(sue_pidgin_file_path) is False
 
     # WHEN
     fizz_world.cart_pidgin_agg_to_otz_face_dirs()
 
     # THEN
-    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
     assert os_path_exists(sue_dir)
-    sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
     assert os_path_exists(sue_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
     assert sheet_exists(sue_pidgin_file_path, label_agg_str)
