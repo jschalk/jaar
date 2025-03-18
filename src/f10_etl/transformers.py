@@ -889,7 +889,13 @@ def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_fisc_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
+    empty_ote1_csv_str = """fisc_title,owner_name,event_int,time_int,error_message
+"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_title)
+        save_file(ote1_csv_path, None, empty_ote1_csv_str)
+
     save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_title"], fiscs_dir)
 
 

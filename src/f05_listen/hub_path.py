@@ -15,6 +15,12 @@ EVENT_ALL_GIFT_FILENAME = "all_gift.json"
 EVENT_EXPRESSED_GIFT_FILENAME = "expressed_gift.json"
 
 
+def create_fisc_dir_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title"""
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    return create_path(fiscs_dir, fisc_title)
+
+
 def create_fisc_json_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\fisc.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")

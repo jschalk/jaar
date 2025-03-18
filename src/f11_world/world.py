@@ -14,6 +14,8 @@ from src.f01_road.road import (
     get_default_world_id,
 )
 from src.f07_fisc.fisc import FiscUnit
+
+# from src.f10_etl.stance_tool import create_stance0001_file
 from src.f10_etl.transformers import (
     etl_mine_to_cart_staging,
     etl_cart_staging_to_cart_agg,
@@ -332,6 +334,9 @@ class WorldUnit:
         self.fisc_voice_to_fisc_forecast()
         # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
         self.calc_fiscal_deal_acct_mandate_net_ledgers()
+
+    # def create_stances(self):
+    #     create_stance0001_file(self._fisc_mstr_dir)
 
     def get_dict(self) -> dict:
         return {

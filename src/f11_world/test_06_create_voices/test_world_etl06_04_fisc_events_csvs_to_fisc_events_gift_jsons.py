@@ -13,7 +13,7 @@ from src.f04_gift.atom_config import (
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json
 from src.f05_listen.hub_path import (
     create_owner_event_dir_path,
-    create_event_all_gift_path,
+    create_event_all_gift_path as event_all_gift_path,
 )
 
 from src.f11_world.world import worldunit_shop
@@ -56,12 +56,8 @@ def test_WorldUnit_event_bud_csvs_to_gift_json_CreatesFiles(
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
     save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)
-    e3_all_gift_path = create_event_all_gift_path(
-        fisc_mstr_dir, a23_str, bob_inx, event3
-    )
-    e7_all_gift_path = create_event_all_gift_path(
-        fisc_mstr_dir, a23_str, bob_inx, event7
-    )
+    e3_all_gift_path = event_all_gift_path(fisc_mstr_dir, a23_str, bob_inx, event3)
+    e7_all_gift_path = event_all_gift_path(fisc_mstr_dir, a23_str, bob_inx, event7)
     assert os_path_exists(e3_all_gift_path) is False
     assert os_path_exists(e7_all_gift_path) is False
 

@@ -18,6 +18,7 @@ from src.f05_listen.hub_path import (
     BUDEVENT_FILENAME,
     EVENT_ALL_GIFT_FILENAME,
     EVENT_EXPRESSED_GIFT_FILENAME,
+    create_fisc_dir_path,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
@@ -39,6 +40,20 @@ from src.f05_listen.hub_path import (
     create_forecast_path,
 )
 from src.f05_listen.examples.listen_env import get_listen_temp_env_dir
+
+
+def test_create_fisc_dir_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+
+    # WHEN
+    gen_a23_dir_path = create_fisc_dir_path(x_fisc_mstr_dir, a23_str)
+
+    # THEN
+    fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    expected_a23_path = create_path(fiscs_dir, a23_str)
+    assert gen_a23_dir_path == expected_a23_path
 
 
 def test_create_fisc_json_path_ReturnObj():
