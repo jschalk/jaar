@@ -20,7 +20,7 @@ from src.f09_idea.examples.idea_df_examples import (
 )
 
 
-# given a dataframe, build a fisc unit
+# ESTABLISH a dataframe, build a fisc unit
 def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     idea_env_setup_cleanup,
 ):
@@ -95,7 +95,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert gen_fiscunit == expected_accord23_fiscunit
 
 
-# given a dataframe, build a fisc unit
+# ESTABLISH a dataframe, build a fisc unit
 def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     idea_env_setup_cleanup,
 ):

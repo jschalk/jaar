@@ -15,6 +15,7 @@ from src.f00_instrument.db_toolbox import (
     create_table_from_columns,
 )
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
+from src.f01_road.road import FaceName, EventInt
 from src.f08_pidgin.map import MapCore
 from src.f08_pidgin.pidgin import (
     PidginUnit,
@@ -102,19 +103,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def train_staging_str():
-    return "train_staging"
+def cart_staging_str():
+    return "cart_staging"
 
 
-def train_agg_str():
-    return "train_agg"
+def cart_agg_str():
+    return "cart_agg"
 
 
-def train_valid_str():
-    return "train_valid"
+def cart_valid_str():
+    return "cart_valid"
 
 
-def get_train_staging_grouping_with_all_values_equal_df(
+def get_cart_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, groupby_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -124,9 +125,9 @@ def get_train_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(train_staging_str(), conn, index=False)
+        x_df.to_sql(cart_staging_str(), conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=train_staging_str(),
+            x_table=cart_staging_str(),
             groupby_columns=grouping_columns,
             value_columns=value_columns,
         )
@@ -438,3 +439,57 @@ def csv_dict_to_excel(csv_dict: dict[str, str], dir: str, filename: str):
         df.to_excel(output, sheet_name=sheet_name[:31], index=False)
 
     output.close()
+
+
+def set_dataframe_first_two_columns(df: DataFrame, value_col1, value_col2) -> DataFrame:
+    """
+    Sets the first and second columns of a pandas DataFrame to specified values.
+
+    Parameters:
+    - df (pd.DataFrame): The DataFrame to modify.
+    - value_col1: The value to set in the first column.
+    - value_col2: The value to set in the second column.
+
+    Returns:
+    - pd.DataFrame: The modified DataFrame.
+    """
+    if df.shape[1] < 2:
+        raise ValueError("DataFrame must have at least two columns.")
+
+    df.iloc[:, 0] = value_col1
+    df.iloc[:, 1] = value_col2
+    return df
+
+
+def check_dataframe_column_names(df: DataFrame, name_col1: str, name_col2: str) -> bool:
+    """
+    Checks if the first two columns of a pandas DataFrame have the specified names.
+
+    Parameters:
+    - df (pd.DataFrame): The DataFrame to check.
+    - name_col1 (str): Expected name of the first column.
+    - name_col2 (str): Expected name of the second column.
+
+    Returns:
+    - bool: True if the first two columns have the correct names, False otherwise.
+    """
+    if df.shape[1] < 2:
+        raise ValueError("DataFrame must have at least two columns.")
+
+    return df.columns[0] == name_col1 and df.columns[1] == name_col2
+
+
+def update_all_face_name_event_int_columns(
+    excel_file_path: str, face_name: FaceName, event_int: EventInt
+):
+    workbook = openpyxl_load_workbook(excel_file_path)
+    # Loop through all sheets in the workbook
+    for sheet in workbook.sheetnames:
+        ws = workbook[sheet]
+        if ws["A1"].value == "face_name" and ws["B1"].value == "event_int":
+            for row in range(2, ws.max_row + 1):
+                ws.cell(row=row, column=1, value=face_name)
+                ws.cell(row=row, column=2, value=event_int)
+
+            # Save the updated sheet
+            workbook.save(excel_file_path)

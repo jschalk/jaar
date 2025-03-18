@@ -5,8 +5,8 @@ from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
 from src.f09_idea.idea_db_tool import (
     sheet_exists,
     upsert_sheet,
-    train_agg_str,
-    train_valid_str,
+    cart_agg_str,
+    cart_valid_str,
 )
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -16,7 +16,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_train_agg_to_train_valid_CreatesSheets_Scenario0(
+def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -46,30 +46,28 @@ def test_WorldUnit_train_agg_to_train_valid_CreatesSheets_Scenario0(
     fizz_world.set_event(event9, yao_str)
     legitimate_events = {event1, event9}
     assert fizz_world.legitimate_events() == legitimate_events
-    train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
-    train_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(train_file_path, train_agg_str(), train_agg_df)
-    assert sheet_exists(train_file_path, train_valid_str()) is False
+    cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
+    cart_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(cart_file_path, cart_agg_str(), cart_agg_df)
+    assert sheet_exists(cart_file_path, cart_valid_str()) is False
 
     # WHEN
-    fizz_world.train_agg_to_train_valid()
+    fizz_world.cart_agg_to_cart_valid()
 
     # THEN
-    assert sheet_exists(train_file_path, train_valid_str())
-    gen_train_valid_df = pandas_read_excel(
-        train_file_path, sheet_name=train_valid_str()
-    )
-    print(f"{gen_train_valid_df.columns=}")
-    example_train_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_train_valid_df.columns) == len(example_train_valid_df.columns)
-    assert list(gen_train_valid_df.columns) == list(example_train_valid_df.columns)
-    assert len(gen_train_valid_df) > 0
-    assert len(gen_train_valid_df) == 3
-    assert len(gen_train_valid_df) == len(example_train_valid_df)
-    pandas_assert_frame_equal(gen_train_valid_df, example_train_valid_df)
+    assert sheet_exists(cart_file_path, cart_valid_str())
+    gen_cart_valid_df = pandas_read_excel(cart_file_path, sheet_name=cart_valid_str())
+    print(f"{gen_cart_valid_df.columns=}")
+    example_cart_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_cart_valid_df.columns) == len(example_cart_valid_df.columns)
+    assert list(gen_cart_valid_df.columns) == list(example_cart_valid_df.columns)
+    assert len(gen_cart_valid_df) > 0
+    assert len(gen_cart_valid_df) == 3
+    assert len(gen_cart_valid_df) == len(example_cart_valid_df)
+    pandas_assert_frame_equal(gen_cart_valid_df, example_cart_valid_df)
 
 
-# def test_WorldUnit_train_agg_to_train_valid_CreatesSheets_Scenario1(
+# def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -86,9 +84,9 @@ def test_WorldUnit_train_agg_to_train_valid_CreatesSheets_Scenario0(
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
 #     mine_dir = create_path(get_test_etl_dir(), "mine")
-#     train_dir = create_path(get_test_etl_dir(), "train")
+#     cart_dir = create_path(get_test_etl_dir(), "cart")
 #     mine_file_path = create_path(mine_dir, ex_filename)
-#     train_file_path = create_path(train_dir, "br00003.xlsx")
+#     cart_file_path = create_path(cart_dir, "br00003.xlsx")
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -104,14 +102,14 @@ def test_WorldUnit_train_agg_to_train_valid_CreatesSheets_Scenario0(
 #     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
 #     upsert_sheet(mine_file_path, "example1_br00003", df1)
-#     etl_mine_to_train_staging(mine_dir, train_dir)
-#     etl_train_staging_to_train_agg(train_dir)
+#     etl_mine_to_cart_staging(mine_dir, cart_dir)
+#     etl_cart_staging_to_cart_agg(cart_dir)
 
 #     # WHEN
-#     etl_train_agg_to_train_valid(train_dir)
+#     etl_cart_agg_to_cart_valid(cart_dir)
 
 #     # THEN
-#     gen_otx_events_df = pandas_read_excel(train_file_path, sheet_name="train_valid")
+#     gen_otx_events_df = pandas_read_excel(cart_file_path, sheet_name="cart_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
 #     bob_row = [bob_str, event3, ""]

@@ -689,7 +689,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_upd
     bend_str = "bendable"
     bend_road = before_sue_bud.make_road(knee_road, bend_str)
     before_sue_bud.set_item(itemunit_shop(bend_str), knee_road)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
     before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
@@ -732,7 +732,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_ins
     before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
     before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
@@ -770,7 +770,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_del
     before_sue_bud.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
     before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
@@ -813,7 +813,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     bend_str = "bend"
@@ -871,7 +871,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     bend_str = "bend"
@@ -930,7 +930,7 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
     knee_str = "knee"
     knee_road = before_sue_bud.make_l1_road(knee_str)
     before_sue_bud.set_l1_item(itemunit_shop(knee_str))
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_bud.make_road(knee_road, damaged_str)
     before_sue_bud.set_item(itemunit_shop(damaged_str), knee_road)
     bend_str = "bend"

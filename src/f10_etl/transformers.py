@@ -56,12 +56,13 @@ from src.f09_idea.idea_config import (
 )
 from src.f09_idea.idea import get_idearef_obj
 from src.f09_idea.idea_db_tool import (
+    if_nan_return_None,
     get_custom_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_train_staging_grouping_with_all_values_equal_df,
+    get_cart_staging_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
@@ -70,6 +71,7 @@ from src.f09_idea.idea_db_tool import (
     get_idea_into_dimen_staging_query,
 )
 from src.f09_idea.pidgin_toolbox import init_pidginunit_from_dir
+from src.f10_etl.tran_path import create_cart_events_path, create_cart_pidgin_path
 from src.f10_etl.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
     create_fisc_tables,
@@ -167,19 +169,19 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_typeS[class_type]["inx_obj"]]
 
 
-def etl_mine_to_train_staging(mine_dir: str, train_dir: str):
-    transformer = MineToTrainTransformer(mine_dir, train_dir)
+def etl_mine_to_cart_staging(mine_dir: str, cart_dir: str):
+    transformer = MineTocartTransformer(mine_dir, cart_dir)
     transformer.transform()
 
 
-class MineToTrainTransformer:
-    def __init__(self, mine_dir: str, train_dir: str):
+class MineTocartTransformer:
+    def __init__(self, mine_dir: str, cart_dir: str):
         self.mine_dir = mine_dir
-        self.train_dir = train_dir
+        self.cart_dir = cart_dir
 
     def transform(self):
         for idea_number, dfs in self._group_mine_data().items():
-            self._save_to_train_staging(idea_number, dfs)
+            self._save_to_cart_staging(idea_number, dfs)
 
     def _group_mine_data(self):
         grouped_data = {}
@@ -196,10 +198,10 @@ class MineToTrainTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_to_train_staging(self, idea_number: str, dfs: list):
+    def _save_to_cart_staging(self, idea_number: str, dfs: list):
         forecast_df = pandas_concat(dfs)
-        train_path = create_path(self.train_dir, f"{idea_number}.xlsx")
-        upsert_sheet(train_path, "train_staging", forecast_df)
+        cart_path = create_path(self.cart_dir, f"{idea_number}.xlsx")
+        upsert_sheet(cart_path, "cart_staging", forecast_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -215,87 +217,85 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_train_staging_to_train_agg(train_dir):
-    transformer = TrainStagingToTrainAggTransformer(train_dir)
+def etl_cart_staging_to_cart_agg(cart_dir):
+    transformer = CartStagingToCartAggTransformer(cart_dir)
     transformer.transform()
 
 
-class TrainStagingToTrainAggTransformer:
-    def __init__(self, train_dir: str):
-        self.train_dir = train_dir
+class CartStagingToCartAggTransformer:
+    def __init__(self, cart_dir: str):
+        self.cart_dir = cart_dir
 
     def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.train_dir):
-            train_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            train_staging_df = pandas_read_excel(train_idea_path, "train_staging")
-            otx_df = self._groupby_idea_columns(train_staging_df, br_ref.idea_number)
-            upsert_sheet(train_idea_path, "train_agg", otx_df)
+        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
+            cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+            cart_staging_df = pandas_read_excel(cart_idea_path, "cart_staging")
+            otx_df = self._groupby_idea_columns(cart_staging_df, br_ref.idea_number)
+            upsert_sheet(cart_idea_path, "cart_agg", otx_df)
 
     def _groupby_idea_columns(
-        self, train_staging_df: DataFrame, idea_number: str
+        self, cart_staging_df: DataFrame, idea_number: str
     ) -> DataFrame:
         idea_filename = get_idea_format_filename(idea_number)
         idearef = get_idearef_obj(idea_filename)
         required_columns = idearef.get_otx_keys_list()
         idea_columns_set = set(idearef._attributes.keys())
         idea_columns_list = get_custom_sorted_list(idea_columns_set)
-        train_staging_df = train_staging_df[idea_columns_list]
-        return get_train_staging_grouping_with_all_values_equal_df(
-            train_staging_df, required_columns
+        cart_staging_df = cart_staging_df[idea_columns_list]
+        return get_cart_staging_grouping_with_all_values_equal_df(
+            cart_staging_df, required_columns
         )
 
 
-def etl_train_agg_to_train_valid(train_dir: str, legitimate_events: set[EventInt]):
-    transformer = TrainAggToTrainValidTransformer(train_dir, legitimate_events)
+def etl_cart_agg_to_cart_valid(cart_dir: str, legitimate_events: set[EventInt]):
+    transformer = cartAggTocartValidTransformer(cart_dir, legitimate_events)
     transformer.transform()
 
 
-class TrainAggToTrainValidTransformer:
-    def __init__(self, train_dir: str, legitimate_events: set[EventInt]):
-        self.train_dir = train_dir
+class cartAggTocartValidTransformer:
+    def __init__(self, cart_dir: str, legitimate_events: set[EventInt]):
+        self.cart_dir = cart_dir
         self.legitimate_events = legitimate_events
 
     def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.train_dir):
-            train_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            train_agg = pandas_read_excel(train_idea_path, "train_agg")
-            train_valid_df = train_agg[
-                train_agg["event_int"].isin(self.legitimate_events)
-            ]
-            upsert_sheet(train_idea_path, "train_valid", train_valid_df)
+        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
+            cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+            cart_agg = pandas_read_excel(cart_idea_path, "cart_agg")
+            cart_valid_df = cart_agg[cart_agg["event_int"].isin(self.legitimate_events)]
+            upsert_sheet(cart_idea_path, "cart_valid", cart_valid_df)
 
     # def _groupby_idea_columns(
-    #     self, train_staging_df: DataFrame, idea_number: str
+    #     self, cart_staging_df: DataFrame, idea_number: str
     # ) -> DataFrame:
     #     idea_filename = get_idea_format_filename(idea_number)
     #     idearef = get_idearef_obj(idea_filename)
     #     required_columns = idearef.get_otx_keys_list()
     #     idea_columns_set = set(idearef._attributes.keys())
     #     idea_columns_list = get_custom_sorted_list(idea_columns_set)
-    #     train_staging_df = train_staging_df[idea_columns_list]
-    #     return get_train_staging_grouping_with_all_values_equal_df(
-    #         train_staging_df, required_columns
+    #     cart_staging_df = cart_staging_df[idea_columns_list]
+    #     return get_cart_staging_grouping_with_all_values_equal_df(
+    #         cart_staging_df, required_columns
     #     )
 
 
-def etl_train_agg_to_train_events(train_dir):
-    transformer = TrainAggToTrainEventsTransformer(train_dir)
+def etl_cart_agg_to_cart_events(cart_dir):
+    transformer = cartAggTocartEventsTransformer(cart_dir)
     transformer.transform()
 
 
-class TrainAggToTrainEventsTransformer:
-    def __init__(self, train_dir: str):
-        self.train_dir = train_dir
+class cartAggTocartEventsTransformer:
+    def __init__(self, cart_dir: str):
+        self.cart_dir = cart_dir
 
     def transform(self):
-        for file_ref in get_existing_excel_idea_file_refs(self.train_dir):
-            train_idea_path = create_path(self.train_dir, file_ref.filename)
-            train_agg_df = pandas_read_excel(train_idea_path, "train_agg")
-            events_df = self.get_unique_events(train_agg_df)
-            upsert_sheet(train_idea_path, "train_events", events_df)
+        for file_ref in get_existing_excel_idea_file_refs(self.cart_dir):
+            cart_idea_path = create_path(self.cart_dir, file_ref.filename)
+            cart_agg_df = pandas_read_excel(cart_idea_path, "cart_agg")
+            events_df = self.get_unique_events(cart_agg_df)
+            upsert_sheet(cart_idea_path, "cart_events", events_df)
 
-    def get_unique_events(self, train_agg_df: DataFrame) -> DataFrame:
-        events_df = train_agg_df[["face_name", "event_int"]].drop_duplicates()
+    def get_unique_events(self, cart_agg_df: DataFrame) -> DataFrame:
+        events_df = cart_agg_df[["face_name", "event_int"]].drop_duplicates()
         events_df["error_message"] = (
             events_df["event_int"]
             .duplicated(keep=False)
@@ -304,22 +304,22 @@ class TrainAggToTrainEventsTransformer:
         return events_df.sort_values(["face_name", "event_int"])
 
 
-def etl_train_events_to_events_log(train_dir: str):
-    transformer = TrainEventsToEventsLogTransformer(train_dir)
+def etl_cart_events_to_events_log(cart_dir: str):
+    transformer = cartEventsToEventsLogTransformer(cart_dir)
     transformer.transform()
 
 
-class TrainEventsToEventsLogTransformer:
-    def __init__(self, train_dir: str):
-        self.train_dir = train_dir
+class cartEventsToEventsLogTransformer:
+    def __init__(self, cart_dir: str):
+        self.cart_dir = cart_dir
 
     def transform(self):
-        sheet_name = "train_events"
-        for br_ref in get_existing_excel_idea_file_refs(self.train_dir):
-            train_idea_path = create_path(self.train_dir, br_ref.filename)
-            otx_events_df = pandas_read_excel(train_idea_path, sheet_name)
+        sheet_name = "cart_events"
+        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
+            cart_idea_path = create_path(self.cart_dir, br_ref.filename)
+            otx_events_df = pandas_read_excel(cart_idea_path, sheet_name)
             events_log_df = self.get_event_log_df(
-                otx_events_df, self.train_dir, br_ref.filename
+                otx_events_df, self.cart_dir, br_ref.filename
             )
             self._save_events_log_file(events_log_df)
 
@@ -328,7 +328,7 @@ class TrainEventsToEventsLogTransformer:
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["filename"]] = x_filename
-        otx_events_df[["sheet_name"]] = "train_events"
+        otx_events_df[["sheet_name"]] = "cart_events"
         cols = [
             "file_dir",
             "filename",
@@ -341,7 +341,7 @@ class TrainEventsToEventsLogTransformer:
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_path(self.train_dir, "events.xlsx")
+        events_file_path = create_cart_events_path(self.cart_dir)
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -359,25 +359,25 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     return events_agg_df.sort_values(["event_int", "face_name"])
 
 
-def etl_train_events_log_to_events_agg(train_dir):
-    transformer = EventsLogToEventsAggTransformer(train_dir)
+def etl_cart_events_log_to_events_agg(cart_dir):
+    transformer = EventsLogToEventsAggTransformer(cart_dir)
     transformer.transform()
 
 
 class EventsLogToEventsAggTransformer:
-    def __init__(self, train_dir: str):
-        self.train_dir = train_dir
+    def __init__(self, cart_dir: str):
+        self.cart_dir = cart_dir
 
     def transform(self):
-        events_file_path = create_path(self.train_dir, "events.xlsx")
+        events_file_path = create_cart_events_path(self.cart_dir)
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, "events_log")
             events_agg_df = _create_events_agg_df(events_log_df)
             upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def get_events_dict_from_events_agg_file(train_dir) -> dict[int, str]:
-    events_file_path = create_path(train_dir, "events.xlsx")
+def get_events_dict_from_events_agg_file(cart_dir) -> dict[EventInt, FaceName]:
+    events_file_path = create_cart_events_path(cart_dir)
     x_dict = {}
     if os_path_exists(events_file_path):
         events_agg_df = pandas_read_excel(events_file_path, "events_agg")
@@ -388,50 +388,61 @@ def get_events_dict_from_events_agg_file(train_dir) -> dict[int, str]:
     return x_dict
 
 
-def train_agg_single_to_pidgin_staging(
-    pidgin_dimen: str, legitimate_events: set[EventInt], train_dir: str
+def get_cart_events_max_event_int(cart_dir: str) -> int:
+    events_file_path = create_cart_events_path(cart_dir)
+    if not os_path_exists(events_file_path):
+        return 0
+    events_df = pandas_read_excel(events_file_path)
+    max_event_id = events_df["event_int"].max()
+    if not if_nan_return_None(max_event_id):
+        return 0
+    return max_event_id
+
+
+def cart_agg_single_to_pidgin_staging(
+    pidgin_dimen: str, legitimate_events: set[EventInt], cart_dir: str
 ):
     x_events = legitimate_events
-    transformer = TrainAggToStagingTransformer(train_dir, pidgin_dimen, x_events)
+    transformer = cartAggToStagingTransformer(cart_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-def etl_train_agg_to_pidgin_name_staging(
-    legitimate_events: set[EventInt], train_dir: str
+def etl_cart_agg_to_pidgin_name_staging(
+    legitimate_events: set[EventInt], cart_dir: str
 ):
-    train_agg_single_to_pidgin_staging("map_name", legitimate_events, train_dir)
+    cart_agg_single_to_pidgin_staging("map_name", legitimate_events, cart_dir)
 
 
-def etl_train_agg_to_pidgin_label_staging(
-    legitimate_events: set[EventInt], train_dir: str
+def etl_cart_agg_to_pidgin_label_staging(
+    legitimate_events: set[EventInt], cart_dir: str
 ):
-    train_agg_single_to_pidgin_staging("map_label", legitimate_events, train_dir)
+    cart_agg_single_to_pidgin_staging("map_label", legitimate_events, cart_dir)
 
 
-def etl_train_agg_to_pidgin_title_staging(
-    legitimate_events: set[EventInt], train_dir: str
+def etl_cart_agg_to_pidgin_title_staging(
+    legitimate_events: set[EventInt], cart_dir: str
 ):
-    train_agg_single_to_pidgin_staging("map_title", legitimate_events, train_dir)
+    cart_agg_single_to_pidgin_staging("map_title", legitimate_events, cart_dir)
 
 
-def etl_train_agg_to_pidgin_road_staging(
-    legitimate_events: set[EventInt], train_dir: str
+def etl_cart_agg_to_pidgin_road_staging(
+    legitimate_events: set[EventInt], cart_dir: str
 ):
-    train_agg_single_to_pidgin_staging("map_road", legitimate_events, train_dir)
+    cart_agg_single_to_pidgin_staging("map_road", legitimate_events, cart_dir)
 
 
-def etl_train_agg_to_pidgin_staging(legitimate_events: set[EventInt], train_dir: str):
-    etl_train_agg_to_pidgin_name_staging(legitimate_events, train_dir)
-    etl_train_agg_to_pidgin_label_staging(legitimate_events, train_dir)
-    etl_train_agg_to_pidgin_title_staging(legitimate_events, train_dir)
-    etl_train_agg_to_pidgin_road_staging(legitimate_events, train_dir)
+def etl_cart_agg_to_pidgin_staging(legitimate_events: set[EventInt], cart_dir: str):
+    etl_cart_agg_to_pidgin_name_staging(legitimate_events, cart_dir)
+    etl_cart_agg_to_pidgin_label_staging(legitimate_events, cart_dir)
+    etl_cart_agg_to_pidgin_title_staging(legitimate_events, cart_dir)
+    etl_cart_agg_to_pidgin_road_staging(legitimate_events, cart_dir)
 
 
-class TrainAggToStagingTransformer:
+class cartAggToStagingTransformer:
     def __init__(
-        self, train_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
+        self, cart_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
-        self.train_dir = train_dir
+        self.cart_dir = cart_dir
         self.legitmate_events = legitmate_events
         self.pidgin_dimen = pidgin_dimen
         self.class_type = get_class_type(pidgin_dimen)
@@ -445,26 +456,26 @@ class TrainAggToStagingTransformer:
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
-            train_idea_path = create_path(self.train_dir, idea_filename)
-            if os_path_exists(train_idea_path):
+            cart_idea_path = create_path(self.cart_dir, idea_filename)
+            if os_path_exists(cart_idea_path):
                 self.insert_staging_rows(
-                    pidgin_df, idea_number, train_idea_path, pidgin_columns
+                    pidgin_df, idea_number, cart_idea_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_path(self.train_dir, "pidgin.xlsx")
+        pidgin_file_path = create_cart_pidgin_path(self.cart_dir)
         upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.class_type), pidgin_df)
 
     def insert_staging_rows(
         self,
         stage_df: DataFrame,
         idea_number: str,
-        train_idea_path: str,
+        cart_idea_path: str,
         df_columns: list[str],
     ):
-        train_agg_df = pandas_read_excel(train_idea_path, sheet_name="train_agg")
-        df_missing_cols = set(df_columns).difference(train_agg_df.columns)
+        cart_agg_df = pandas_read_excel(cart_idea_path, sheet_name="cart_agg")
+        df_missing_cols = set(df_columns).difference(cart_agg_df.columns)
 
-        for index, x_row in train_agg_df.iterrows():
+        for index, x_row in cart_agg_df.iterrows():
             event_int = x_row["event_int"]
             if event_int in self.legitmate_events:
                 face_name = x_row["face_name"]
@@ -501,39 +512,39 @@ class TrainAggToStagingTransformer:
         return None
 
 
-def etl_pidgin_name_staging_to_name_agg(train_dir: str):
-    etl_pidgin_single_staging_to_agg(train_dir, "map_name")
+def etl_pidgin_name_staging_to_name_agg(cart_dir: str):
+    etl_pidgin_single_staging_to_agg(cart_dir, "map_name")
 
 
-def etl_pidgin_label_staging_to_label_agg(train_dir: str):
-    etl_pidgin_single_staging_to_agg(train_dir, "map_label")
+def etl_pidgin_label_staging_to_label_agg(cart_dir: str):
+    etl_pidgin_single_staging_to_agg(cart_dir, "map_label")
 
 
-def etl_pidgin_road_staging_to_road_agg(train_dir: str):
-    etl_pidgin_single_staging_to_agg(train_dir, "map_road")
+def etl_pidgin_road_staging_to_road_agg(cart_dir: str):
+    etl_pidgin_single_staging_to_agg(cart_dir, "map_road")
 
 
-def etl_pidgin_title_staging_to_title_agg(train_dir: str):
-    etl_pidgin_single_staging_to_agg(train_dir, "map_title")
+def etl_pidgin_title_staging_to_title_agg(cart_dir: str):
+    etl_pidgin_single_staging_to_agg(cart_dir, "map_title")
 
 
-def etl_pidgin_single_staging_to_agg(train_dir: str, map_dimen: str):
-    transformer = PidginStagingToAggTransformer(train_dir, map_dimen)
+def etl_pidgin_single_staging_to_agg(cart_dir: str, map_dimen: str):
+    transformer = PidginStagingToAggTransformer(cart_dir, map_dimen)
     transformer.transform()
 
 
-def etl_train_pidgin_staging_to_agg(train_dir):
-    etl_pidgin_name_staging_to_name_agg(train_dir)
-    etl_pidgin_label_staging_to_label_agg(train_dir)
-    etl_pidgin_road_staging_to_road_agg(train_dir)
-    etl_pidgin_title_staging_to_title_agg(train_dir)
+def etl_cart_pidgin_staging_to_agg(cart_dir):
+    etl_pidgin_name_staging_to_name_agg(cart_dir)
+    etl_pidgin_label_staging_to_label_agg(cart_dir)
+    etl_pidgin_road_staging_to_road_agg(cart_dir)
+    etl_pidgin_title_staging_to_title_agg(cart_dir)
 
 
 class PidginStagingToAggTransformer:
-    def __init__(self, train_dir: str, pidgin_dimen: str):
-        self.train_dir = train_dir
+    def __init__(self, cart_dir: str, pidgin_dimen: str):
+        self.cart_dir = cart_dir
         self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_path(self.train_dir, "pidgin.xlsx")
+        self.file_path = create_cart_pidgin_path(self.cart_dir)
         self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
@@ -545,7 +556,7 @@ class PidginStagingToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_path(self.train_dir, "pidgin.xlsx")
+        pidgin_file_path = create_cart_pidgin_path(self.cart_dir)
         stage_sheet_name = get_sheet_stage_name(self.class_type)
         staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
@@ -579,8 +590,8 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_train_pidgin_agg_to_otz_face_dirs(train_dir: str, faces_dir: str):
-    agg_pidgin = create_path(train_dir, "pidgin.xlsx")
+def etl_cart_pidgin_agg_to_otz_face_dirs(cart_dir: str, faces_dir: str):
+    agg_pidgin = create_cart_pidgin_path(cart_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
@@ -594,7 +605,7 @@ def etl_train_pidgin_agg_to_otz_face_dirs(train_dir: str, faces_dir: str):
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    face_pidgin_path = create_path(face_dir, "pidgin.xlsx")
+    face_pidgin_path = create_cart_pidgin_path(face_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
@@ -612,7 +623,7 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
-    event_pidgin_path = create_path(event_pidgin_dir, "pidgin.xlsx")
+    event_pidgin_path = create_cart_pidgin_path(event_pidgin_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         csv_filename = class_typeS[class_type]["csv_filename"]
@@ -672,16 +683,16 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_train_ideas_to_otz_face_ideas(train_dir: str, faces_dir: str):
-    for train_br_ref in get_existing_excel_idea_file_refs(train_dir):
-        train_idea_path = create_path(train_dir, train_br_ref.filename)
-        if train_br_ref.filename not in _get_pidgen_idea_format_filenames():
+def etl_cart_ideas_to_otz_face_ideas(cart_dir: str, faces_dir: str):
+    for cart_br_ref in get_existing_excel_idea_file_refs(cart_dir):
+        cart_idea_path = create_path(cart_dir, cart_br_ref.filename)
+        if cart_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=train_idea_path,
+                input_file=cart_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                filename=train_br_ref.idea_number,
-                sheet_name="train_valid",
+                filename=cart_br_ref.idea_number,
+                sheet_name="cart_valid",
             )
 
 
@@ -695,7 +706,7 @@ def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_int",
                 filename=face_br_ref.idea_number,
-                sheet_name="train_valid",
+                sheet_name="cart_valid",
             )
 
 
@@ -736,7 +747,7 @@ def etl_otz_event_ideas_to_inx_events(
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
-                idea_df = pandas_read_excel(event_idea_path, "train_valid")
+                idea_df = pandas_read_excel(event_idea_path, "cart_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
@@ -878,7 +889,13 @@ def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_fisc_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
+    empty_ote1_csv_str = """fisc_title,owner_name,event_int,time_int,error_message
+"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_title)
+        save_file(ote1_csv_path, None, empty_ote1_csv_str)
+
     save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_title"], fiscs_dir)
 
 

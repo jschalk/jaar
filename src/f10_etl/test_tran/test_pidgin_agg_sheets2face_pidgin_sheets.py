@@ -1,14 +1,15 @@
 from src.f00_instrument.file import create_path
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
+from src.f10_etl.tran_path import create_cart_pidgin_path, create_otx_face_pidgin_path
 from src.f10_etl.pidgin_agg import PidginPrimeColumns
-from src.f10_etl.transformers import etl_train_pidgin_agg_to_otz_face_dirs
+from src.f10_etl.transformers import etl_cart_pidgin_agg_to_otz_face_dirs
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 
 
-def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario0_Two_face_names(
+def test_etl_cart_pidgin_agg_to_otz_face_dirs_Scenario0_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -30,22 +31,22 @@ def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario0_Two_face_names(
     name_rows = [name0, name1, name2, name3]
     e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
-    train_dir = create_path(get_test_etl_dir(), "train")
-    agg_pidgin_path = create_path(train_dir, "pidgin.xlsx")
+    cart_dir = create_path(get_test_etl_dir(), "cart")
+    agg_pidgin_path = create_cart_pidgin_path(cart_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
 
     faces_dir = create_path(get_test_etl_dir(), "faces_otz")
 
     # WHEN
-    etl_train_pidgin_agg_to_otz_face_dirs(train_dir, faces_dir)
+    etl_cart_pidgin_agg_to_otz_face_dirs(cart_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
     zia_dir = create_path(faces_dir, zia_str)
     assert os_path_exists(sue_dir)
     assert os_path_exists(zia_dir)
-    sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
-    zia_pidgin_file_path = create_path(zia_dir, "pidgin.xlsx")
+    sue_pidgin_file_path = create_otx_face_pidgin_path(faces_dir, sue_str)
+    zia_pidgin_file_path = create_otx_face_pidgin_path(faces_dir, zia_str)
     assert os_path_exists(sue_pidgin_file_path)
     assert os_path_exists(zia_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
@@ -60,7 +61,7 @@ def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario0_Two_face_names(
     pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
-def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
+def test_etl_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -115,8 +116,8 @@ def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     e1_title_rows = [e1_title0, e1_title1]
     e1_title_agg_df = DataFrame(e1_title_rows, columns=title_agg_columns)
 
-    train_dir = create_path(get_test_etl_dir(), "train")
-    agg_pidgin_path = create_path(train_dir, "pidgin.xlsx")
+    cart_dir = create_path(get_test_etl_dir(), "cart")
+    agg_pidgin_path = create_cart_pidgin_path(cart_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
@@ -125,12 +126,14 @@ def test_etl_train_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     faces_dir = create_path(get_test_etl_dir(), "faces_otz")
 
     # WHEN
-    etl_train_pidgin_agg_to_otz_face_dirs(train_dir, faces_dir)
+    etl_cart_pidgin_agg_to_otz_face_dirs(cart_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
     assert os_path_exists(sue_dir)
-    sue_pidgin_file_path = create_path(sue_dir, "pidgin.xlsx")
+    sue_pidgin_file_path = create_otx_face_pidgin_path(faces_dir, sue_str)
+    print(f"{sue_pidgin_file_path=}")
+
     assert os_path_exists(sue_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
     assert sheet_exists(sue_pidgin_file_path, label_agg_str)

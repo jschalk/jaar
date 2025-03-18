@@ -582,7 +582,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
     before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
@@ -624,7 +624,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_factunit():
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
     before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
@@ -660,7 +660,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     medical_str = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_str)
@@ -710,7 +710,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_reason_premiseun
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
     before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
@@ -767,7 +767,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_reason_premiseun
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     medical_str = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_str)
@@ -822,7 +822,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_reason_premiseun
     before_sue_au.set_item(itemunit_shop(ball_str), sports_road)
     knee_str = "knee"
     knee_road = before_sue_au.make_l1_road(knee_str)
-    damaged_str = "damaged cartilage"
+    damaged_str = "damaged mcl"
     damaged_road = before_sue_au.make_road(knee_road, damaged_str)
     medical_str = "get medical attention"
     medical_road = before_sue_au.make_road(knee_road, medical_str)

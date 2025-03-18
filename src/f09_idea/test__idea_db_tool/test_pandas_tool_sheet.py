@@ -7,11 +7,17 @@ from src.f09_idea.idea_db_tool import (
     split_excel_into_dirs,
     if_nan_return_None,
     append_df_to_excel,
+    set_dataframe_first_two_columns,
+    check_dataframe_column_names,
+    update_all_face_name_event_int_columns,
 )
 from pytest import fixture as pytest_fixture, raises as pytest_raises
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from openpyxl import load_workbook
+from openpyxl import (
+    load_workbook as openpyxl_load_workbook,
+    Workbook as openpyxl_Workbook,
+)
 from os.path import exists as os_path_exists
 from numpy import nan as numpy_nan, float64
 
@@ -33,7 +39,7 @@ def test_append_df_to_excel_CreatesSheet(idea_env_setup_cleanup):
 
     # THEN
     assert os_path_exists(test_file)
-    workbook = load_workbook(test_file)
+    workbook = openpyxl_load_workbook(test_file)
     sheet = workbook["Sheet1"]
     rows = list(sheet.iter_rows(values_only=True))
     expected_rows = [
@@ -66,7 +72,7 @@ def test_append_df_to_excel_AppendsToSheet(idea_env_setup_cleanup):
     append_df_to_excel(file_path=test_file, sheet_name="Sheet1", dataframe=append_df)
 
     # THEN
-    workbook = load_workbook(test_file)
+    workbook = openpyxl_load_workbook(test_file)
     sheet = workbook["Sheet1"]
     rows = list(sheet.iter_rows(values_only=True))
     expected_rows = [
@@ -386,3 +392,188 @@ def test_if_nan_return_None_ReturnsObj(idea_env_setup_cleanup):
     print(f"  {nan_example=}")
     # assert float64(None) == nan_example
     # assert numpy_nan == nan_example
+
+
+def test_set_dataframe_first_two_columns_Scenario0_BasicFunctionality():
+    # ESTABLISH a DataFrame with three columns
+    df = DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
+
+    # When we set the first and second columns to specific values
+    updated_df = set_dataframe_first_two_columns(df, 100, 200)
+
+    # Then the first and second columns should reflect the new values
+    assert (updated_df["A"] == 100).all(), "First column values are incorrect."
+    assert (updated_df["B"] == 200).all(), "Second column values are incorrect."
+
+
+def test_set_dataframe_first_two_columns_Scenario1_TwoColumns():
+    # ESTABLISH a DataFrame with exactly two columns
+    df = DataFrame({"A": [0, 0], "B": [0, 0]})
+
+    # When we set the first and second columns to specific values
+    updated_df = set_dataframe_first_two_columns(df, -1, -2)
+
+    # Then the first and second columns should reflect the new values
+    assert (
+        updated_df["A"] == -1
+    ).all(), "First column values are incorrect for two columns."
+    assert (
+        updated_df["B"] == -2
+    ).all(), "Second column values are incorrect for two columns."
+
+
+def test_set_dataframe_first_two_columns_Scenario2_MoreThanTwoColumns():
+    # ESTABLISH a DataFrame with more than two columns
+    df = DataFrame({"A": [1], "B": [2], "C": [3], "D": [4]})
+
+    # When we set the first and second columns to specific values
+    updated_df = set_dataframe_first_two_columns(df, 999, 888)
+
+    # Then the first and second columns should reflect the new values
+    assert (
+        updated_df["A"] == 999
+    ).all(), "First column values are incorrect for multiple columns."
+    assert (
+        updated_df["B"] == 888
+    ).all(), "Second column values are incorrect for multiple columns."
+
+
+def test_set_dataframe_first_two_columns_Scenario3_EmptyDataframe():
+    # ESTABLISH an empty DataFrame with two columns
+    df = DataFrame({"A": [], "B": []})
+
+    # When we set the first and second columns to specific values
+    updated_df = set_dataframe_first_two_columns(df, 42, 43)
+
+    # Then the DataFrame should remain empty
+    assert updated_df.empty, "Empty DataFrame should remain empty."
+
+
+def test_set_dataframe_first_two_columns_Scenario4_LessThanTwoColumns():
+    # ESTABLISH a DataFrame with less than two columns
+    df = DataFrame({"A": [1, 2, 3]})
+
+    # When we attempt to set the first and second columns
+    # Then a ValueError should be raised
+    with pytest_raises(ValueError, match="DataFrame must have at least two columns."):
+        set_dataframe_first_two_columns(df, 10, 20)
+
+
+def test_check_dataframe_column_names_ScenarioCorrectColumnNames():
+    # ESTABLISH a DataFrame with the correct first two column names
+    df = DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
+
+    # When we check the first two column names
+    result = check_dataframe_column_names(df, "A", "B")
+
+    # Then the result should be True
+    assert result == True, "Expected True when column names match."
+
+
+def test_check_dataframe_column_names_ScenarioIncorrectColumnNames():
+    # ESTABLISH a DataFrame with incorrect first two column names
+    df = DataFrame({"X": [1, 2, 3], "Y": [4, 5, 6]})
+
+    # When we check the first two column names
+    result = check_dataframe_column_names(df, "A", "B")
+
+    # Then the result should be False
+    assert result == False, "Expected False when column names do not match."
+
+
+def test_check_dataframe_column_names_ScenarioPartialColumnMatch():
+    # ESTABLISH a DataFrame where only the first column matches
+    df = DataFrame({"A": [1, 2, 3], "Y": [4, 5, 6]})
+
+    # When we check the first two column names
+    result = check_dataframe_column_names(df, "A", "B")
+
+    # Then the result should be False
+    assert result == False, "Expected False when only one column name matches."
+
+
+def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
+    # ESTABLISH a DataFrame with less than two columns
+    df = DataFrame({"A": [1, 2, 3]})
+
+    # When we check the first two column names
+    # Then a ValueError should be raised
+    with pytest_raises(ValueError, match="DataFrame must have at least two columns."):
+        check_dataframe_column_names(df, "A", "B")
+
+
+def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
+    idea_env_setup_cleanup,
+):
+    # ESTABLISH
+    excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
+    set_dir(idea_fisc_mstr_dir())
+    yao_str = "Yao"
+    event3 = 3
+    # A workbook with valid and invalid sheets
+    workbook = openpyxl_Workbook()
+    ws1 = workbook.active
+    validsheet_str = "ValidSheet"
+    invalidsheet_str = "InvalidSheet"
+    ws1.title = validsheet_str
+    ws1.append(["face_name", "event_int", "other"])
+    for _ in range(5):
+        ws1.append([yao_str, event3, "value4"])
+
+    ws2 = workbook.create_sheet(title=invalidsheet_str)
+    ws2.append(["wrong", "headers", "data"])
+    for _ in range(5):
+        ws2.append([yao_str, event3, "value3"])
+
+    workbook.save(excel_path)
+    bob_str = "Bob"
+    event7 = 7
+    workbook = openpyxl_load_workbook(excel_path)
+    ws1 = workbook[validsheet_str]
+    for row in range(2, ws1.max_row + 1):
+        assert ws1.cell(row=row, column=1).value != bob_str
+        assert ws1.cell(row=row, column=2).value != event7
+    ws2 = workbook[invalidsheet_str]
+    for row in range(2, ws2.max_row + 1):
+        assert ws2.cell(row=row, column=1).value == yao_str
+        assert ws2.cell(row=row, column=2).value == event3
+
+    # WHEN: We update the workbook
+    update_all_face_name_event_int_columns(excel_path, bob_str, event7)
+
+    # THEN: Only the valid sheet should be updated
+    workbook = openpyxl_load_workbook(excel_path)
+    ws1 = workbook[validsheet_str]
+    for row in range(2, ws1.max_row + 1):
+        assert ws1.cell(row=row, column=1).value == bob_str
+        assert ws1.cell(row=row, column=2).value == event7
+    ws2 = workbook["InvalidSheet"]
+    for row in range(2, ws2.max_row + 1):
+        assert ws2.cell(row=row, column=1).value == yao_str
+        assert ws2.cell(row=row, column=2).value == event3
+
+
+def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
+    idea_env_setup_cleanup,
+):
+    # ESTABLISH: A workbook with no matching headers
+    excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
+    set_dir(idea_fisc_mstr_dir())
+    workbook = openpyxl_Workbook()
+    ws = workbook.active
+    ws.append(["foo", "bar"])
+    workbook.save(excel_path)
+    # Ensure initial state is correct
+    workbook = openpyxl_load_workbook(excel_path)
+    ws = workbook.active
+    assert ws.cell(row=1, column=1).value == "foo"
+    assert ws.cell(row=1, column=2).value == "bar"
+
+    # WHEN: We attempt to update the workbook
+    update_all_face_name_event_int_columns(excel_path, "Bob", 7)
+
+    # THEN: No updates should be made
+    workbook = openpyxl_load_workbook(excel_path)
+    ws = workbook.active
+    assert ws.cell(row=1, column=1).value == "foo"
+    assert ws.cell(row=1, column=2).value == "bar"

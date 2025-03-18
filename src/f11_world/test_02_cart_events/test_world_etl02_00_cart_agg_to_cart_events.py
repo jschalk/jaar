@@ -5,15 +5,15 @@ from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
 from src.f09_idea.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    train_staging_str,
-    train_agg_str,
+    cart_staging_str,
+    cart_agg_str,
 )
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario0(
+def test_WorldUnit_cart_agg_to_cart_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -30,7 +30,7 @@ def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario0(
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
-    train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
+    cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -45,14 +45,14 @@ def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_train_staging()
-    fizz_world.train_staging_to_train_agg()
+    fizz_world.mine_to_cart_staging()
+    fizz_world.cart_staging_to_cart_agg()
 
     # WHEN
-    fizz_world.train_agg_to_train_events()
+    fizz_world.cart_agg_to_cart_events()
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(train_file_path, sheet_name="train_events")
+    gen_otx_events_df = pandas_read_excel(cart_file_path, sheet_name="cart_events")
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
     sue_r = [sue_str, event1, ""]
@@ -65,14 +65,14 @@ def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario0(
     assert len(gen_otx_events_df) == 3
     assert len(gen_otx_events_df) == len(ex_otx_events_df)
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
-    assert get_sheet_names(train_file_path) == [
-        train_staging_str(),
-        train_agg_str(),
-        "train_events",
+    assert get_sheet_names(cart_file_path) == [
+        cart_staging_str(),
+        cart_agg_str(),
+        "cart_events",
     ]
 
 
-def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario1(
+def test_WorldUnit_cart_agg_to_cart_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -90,7 +90,7 @@ def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario1(
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
-    train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
+    cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -106,14 +106,14 @@ def test_WorldUnit_train_agg_to_train_events_CreatesSheets_Scenario1(
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_train_staging()
-    fizz_world.train_staging_to_train_agg()
+    fizz_world.mine_to_cart_staging()
+    fizz_world.cart_staging_to_cart_agg()
 
     # WHEN
-    fizz_world.train_agg_to_train_events()
+    fizz_world.cart_agg_to_cart_events()
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(train_file_path, sheet_name="train_events")
+    gen_otx_events_df = pandas_read_excel(cart_file_path, sheet_name="cart_events")
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
     bob_row = [bob_str, event3, ""]

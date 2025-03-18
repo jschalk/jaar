@@ -12,6 +12,7 @@ from src.f05_listen.hub_path import (
     create_forecast_path,
     create_voice_path,
     create_deal_acct_mandate_ledger_path as deal_mandate,
+    create_fisc_ote1_csv_path,
 )
 from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
 from src.f09_idea.idea_db_tool import upsert_sheet
@@ -21,7 +22,9 @@ from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_mine_to_burdens_DeletesPreviousFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mine_to_burdens_Scenario0_DeletesPreviousFiles(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)
@@ -48,7 +51,7 @@ def test_WorldUnit_mine_to_burdens_DeletesPreviousFiles(env_dir_setup_cleanup):
     assert count_dirs_files(fizz_world.worlds_dir) == 27
 
 
-def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str)
@@ -125,9 +128,9 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
+    cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     assert os_path_exists(mine_file_path)
-    assert os_path_exists(train_file_path)
+    assert os_path_exists(cart_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
@@ -135,7 +138,39 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
     assert count_dirs_files(fizz_world.worlds_dir) == 91
 
 
-# def test_WorldUnit_mine_to_burdens_CreatestrainFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
+    sue_str = "Sue"
+    event_2 = 2
+    ex_filename = "fizzbuzz.xlsx"
+    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    accord23_str = "accord23"
+    br00011_columns = [
+        face_name_str(),
+        event_int_str(),
+        fisc_title_str(),
+        owner_name_str(),
+        acct_name_str(),
+    ]
+    br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
+    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
+    upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
+    fisc_mstr = fizz_world._fisc_mstr_dir
+    a23_ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr, accord23_str)
+    assert os_path_exists(a23_ote1_csv_path) is False
+
+    # WHEN
+    fizz_world.mine_to_burdens()
+
+    # THEN
+    assert os_path_exists(a23_ote1_csv_path)
+
+
+# def test_WorldUnit_mine_to_burdens_CreatescartFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str)
@@ -190,9 +225,9 @@ def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
 #     fizz_world.mine_to_burdens()
 
 #     # THEN
-#     train_file_path = create_path(fizz_world._train_dir, "br00003.xlsx")
+#     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
 #     assert os_path_exists(mine_file_path)
-#     assert os_path_exists(train_file_path)
+#     assert os_path_exists(cart_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_voice_path)
 #     assert os_path_exists(a23_sue_forecast_path)

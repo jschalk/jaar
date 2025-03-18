@@ -71,7 +71,6 @@ def _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_in
             time_int,
             parent_cell.ancestors,
         )
-        print(f"{parent_cell.ancestors=}")
         cellunit_save_to_dir(parent_cell_dir, parent_cell)
         parent_quota_ledger = parent_cell.get_budevents_quota_ledger()
         if parent_cell.celldepth > 0:
