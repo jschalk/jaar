@@ -1,4 +1,10 @@
-from src.f00_instrument.file import create_path, count_dirs_files, delete_dir, save_file
+from src.f00_instrument.file import (
+    create_path,
+    count_dirs_files,
+    delete_dir,
+    save_file,
+    set_dir,
+)
 from src.f01_road.deal import (
     owner_name_str,
     fisc_title_str,
@@ -14,84 +20,113 @@ from src.f05_listen.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate,
 )
 from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
-from src.f09_idea.idea_db_tool import upsert_sheet
-from src.f10_etl.tran_path import create_stance0001_path
+from src.f09_idea.idea_db_tool import upsert_sheet, get_sheet_names
+from src.f10_etl.tran_path import create_stances_dir_path, create_stance0001_path
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
+from pandas.testing import assert_frame_equal
 from os.path import exists as os_path_exists
+from shutil import copy2 as shutil_copy2
 
 
-# # # def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
-# # #     env_dir_setup_cleanup,
-# # # ):
-# # #     # ESTABLISH
-# # #     fizz_str = "fizz"
-# # #     fizz_world = worldunit_shop(fizz_str)
-# # #     fizz_world.mine_to_burdens()
-# # #     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
-# # #     assert os_path_exists(fizz_stance0001_path) is False
+def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
+    fizz_world.mine_to_burdens()
+    fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
+    assert os_path_exists(fizz_stance0001_path) is False
 
-# # #     # WHEN
-# # #     fizz_world.create_stances()
+    # WHEN
+    fizz_world.create_stances()
 
-# # #     # THEN
-# # #     assert os_path_exists(fizz_stance0001_path)
-
-
-# # # def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
-# # #     # ESTABLISH
-# # #     fizz_str = "fizz"
-# # #     fizz_world = worldunit_shop(fizz_str)
-# # #     sue_str = "Sue"
-# # #     event_2 = 2
-# # #     ex_filename = "fizzbuzz.xlsx"
-# # #     mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
-# # #     accord23_str = "accord23"
-# # #     br00011_columns = [
-# # #         face_name_str(),
-# # #         event_int_str(),
-# # #         fisc_title_str(),
-# # #         owner_name_str(),
-# # #         acct_name_str(),
-# # #     ]
-# # #     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
-# # #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-# # #     upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
-# # #     fizz_world.mine_to_burdens()
-# # #     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
-# # #     assert os_path_exists(fizz_stance0001_path) is False
-
-# # #     # WHEN
-# # #     fizz_world.create_stances()
-
-# # #     # THEN
-# # #     assert os_path_exists(fizz_stance0001_path)
-# # #     print(pandas_read_excel(fizz_stance0001_path))
-# # #     assert 1 == 2
+    # THEN
+    assert os_path_exists(fizz_stance0001_path)
 
 
-# # # def test_WorldUnit_create_stances_CreatesFile(env_dir_setup_cleanup):
-# # #     # ESTABLISH
-# # #     fizz_str = "fizz"
-# # #     fizz_world = worldunit_shop(fizz_str)
-# # #     print(f"{fizz_world.worlds_dir=}")
-# # #     mstr_dir = fizz_world._fisc_mstr_dir
-# # #     fiscs_dir = create_path(mstr_dir, "fiscs")
-# # #     testing2_filename = "testing2.txt"
-# # #     testing3_filename = "testing3.txt"
-# # #     save_file(fizz_world.worlds_dir, testing2_filename, "")
-# # #     save_file(fiscs_dir, testing3_filename, "")
-# # #     fizz_world.mine_to_burdens()
-# # #     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
-# # #     assert os_path_exists(fizz_stance0001_path) is False
+def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
+    sue_str = "Sue"
+    event_2 = 2
+    ex_filename = "fizzbuzz.xlsx"
+    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    accord23_str = "accord23"
+    br00011_columns = [
+        face_name_str(),
+        event_int_str(),
+        fisc_title_str(),
+        owner_name_str(),
+        acct_name_str(),
+    ]
+    br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
+    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
+    upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
+    fizz_world.mine_to_burdens()
+    fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
+    assert os_path_exists(fizz_stance0001_path) is False
 
-# # #     # WHEN
-# # #     fizz_world.create_stances()
+    # WHEN
+    fizz_world.create_stances()
 
-# # #     # THEN
-# # #     assert os_path_exists(fizz_stance0001_path)
-# # #     assert 1 == 2
+    # THEN
+    assert os_path_exists(fizz_stance0001_path)
+
+
+def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUnit(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str)
+    sue_str = "Sue"
+    event_2 = 2
+    ex_filename = "fizzbuzz.xlsx"
+    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    accord23_str = "accord23"
+    br00011_columns = [
+        face_name_str(),
+        event_int_str(),
+        fisc_title_str(),
+        owner_name_str(),
+        acct_name_str(),
+    ]
+    br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
+    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
+    upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
+    fizz_world.mine_to_burdens()
+    fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
+    fizz_world.create_stances()
+    buzz_world = worldunit_shop("buzz")
+    buzz_mine_st0001_path = create_path(buzz_world._fisc_mstr_dir, "buzz_mine.xlsx")
+    set_dir(create_stances_dir_path(buzz_world._fisc_mstr_dir))
+    shutil_copy2(fizz_stance0001_path, dst=buzz_mine_st0001_path)
+    # print(f" {pandas_read_excel(fizz_stance0001_path)=}")
+    # print(f"{pandas_read_excel(buzz_mine_st0001_path)=}")
+    print(f"{buzz_mine_st0001_path=}")
+    print(f"{get_sheet_names(buzz_mine_st0001_path)=}")
+    buzz_world.mine_to_burdens()
+    buzz_stance0001_path = create_stance0001_path(buzz_world._fisc_mstr_dir)
+    assert os_path_exists(buzz_stance0001_path) is False
+
+    # WHEN
+    buzz_world.create_stances()
+
+    # THEN
+    assert os_path_exists(buzz_stance0001_path)
+    print(f"{get_sheet_names(buzz_stance0001_path)=}")
+    for sheetname in get_sheet_names(buzz_stance0001_path):
+        print(f"comparing {sheetname=}...")
+        fizz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
+        buzz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
+        if sheetname == "br00021":
+            print(f"{fizz_sheet_df=}")
+            print(f"{buzz_sheet_df=}")
+        assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
 
 
 # def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
