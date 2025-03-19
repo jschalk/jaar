@@ -18,7 +18,8 @@
             "amount": {
                 "class_type": "float"
             }
-        }
+        },
+        "static": "True"
     },
     "fisc_dealunit": {
         "jkeys": {
@@ -33,43 +34,46 @@
             }
         },
         "jvalues": {
-            "quota": {
-                "class_type": "int"
-            },
             "celldepth": {
                 "class_type": "int"
+            },
+            "quota": {
+                "class_type": "int"
             }
-        }
+        },
+        "static": "True"
     },
     "fisc_timeline_hour": {
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit"
-            },
             "cumlative_minute": {
                 "class_type": "int"
+            },
+            "fisc_title": {
+                "class_type": "TitleUnit"
             }
         },
         "jvalues": {
             "hour_title": {
                 "class_type": "TitleUnit"
             }
-        }
+        },
+        "static": "True"
     },
     "fisc_timeline_month": {
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit"
-            },
             "cumlative_day": {
                 "class_type": "int"
+            },
+            "fisc_title": {
+                "class_type": "TitleUnit"
             }
         },
         "jvalues": {
             "month_title": {
                 "class_type": "TitleUnit"
             }
-        }
+        },
+        "static": "True"
     },
     "fisc_timeline_weekday": {
         "jkeys": {
@@ -84,7 +88,24 @@
             "weekday_title": {
                 "class_type": "TitleUnit"
             }
-        }
+        },
+        "static": "True"
+    },
+    "fisc_timeoffi": {
+        "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit"
+            },
+            "offi_time_open": {
+                "class_type": "TimeLinePoint"
+            }
+        },
+        "jvalues": {
+            "offi_time_nigh": {
+                "class_type": "TimeLinePoint"
+            }
+        },
+        "static": "False"
     },
     "fiscunit": {
         "jkeys": {
@@ -117,6 +138,7 @@
             "yr1_jan1_offset": {
                 "class_type": "int"
             }
-        }
+        },
+        "static": "True"
     }
 }

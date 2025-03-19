@@ -7,6 +7,10 @@ def timeline_str() -> str:
     return "timeline"
 
 
+def offi_time_open_str() -> str:
+    return "offi_time_open"
+
+
 def offi_time_nigh_str() -> str:
     return "offi_time_nigh"
 
@@ -86,6 +90,10 @@ def fisc_timeline_weekday_str() -> str:
     return "fisc_timeline_weekday"
 
 
+def fisc_timeoffi_str() -> str:
+    return "fisc_timeoffi"
+
+
 def get_fisc_config_dict() -> dict:
     return open_json(config_file_dir(), get_fisc_config_filename())
 
@@ -98,6 +106,7 @@ def get_fisc_dimens() -> set[str]:
         "fisc_timeline_hour",
         "fisc_timeline_month",
         "fisc_timeline_weekday",
+        "fisc_timeoffi",
     }
 
 
@@ -145,6 +154,8 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "month_title": "TitleUnit",
         "monthday_distortion": "int",
         "penny": "float",
+        "offi_time_open": "TimeLinePoint",
+        "offi_time_nigh": "TimeLinePoint",
         "owner_name": "NameUnit",
         "quota": "int",
         "respect_bit": "float",
@@ -171,6 +182,8 @@ def get_fisc_args_set() -> set[str]:
         "month_title",
         "monthday_distortion",
         "penny",
+        "offi_time_open",
+        "offi_time_nigh",
         "owner_name",
         "quota",
         "respect_bit",

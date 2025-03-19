@@ -315,6 +315,20 @@
       "weekday_title": {}
     }
   },
+  "fisc_timeoffi": {
+    "allowed_crud": "INSERT_MULITPLE",
+    "idea_category": "fisc",
+    "build_order": 8,
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "fisc_title": {},
+      "offi_time_open": {}
+    },
+    "jvalues": {
+      "offi_time_nigh": {}
+    }
+  },
   "fiscunit": {
     "allowed_crud": "INSERT_ONE_TIME",
     "idea_category": "fisc",
