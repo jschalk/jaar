@@ -123,9 +123,9 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
         print(f"comparing {sheetname=}...")
         fizz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
         buzz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
-        if sheetname == "br00021":
-            print(f"{fizz_sheet_df=}")
-            print(f"{buzz_sheet_df=}")
+        # if sheetname == "br00021":
+        #     print(f"{fizz_sheet_df=}")
+        #     print(f"{buzz_sheet_df=}")
         assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
 
 

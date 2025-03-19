@@ -1353,8 +1353,8 @@
                                                             "accord45;Nation-States": {
                                                                 "base": "accord45;Nation-States",
                                                                 "premises": {
-                                                                    "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Office": {
-                                                                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Office"
+                                                                    "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace": {
+                                                                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace"
                                                                     }
                                                                 }
                                                             }
@@ -2100,8 +2100,8 @@
                                                         "_uid": 248,
                                                         "mass": 1
                                                     },
-                                                    "Office": {
-                                                        "_item_title": "Office",
+                                                    "workspace": {
+                                                        "_item_title": "workspace",
                                                         "_uid": 249,
                                                         "mass": 1
                                                     }

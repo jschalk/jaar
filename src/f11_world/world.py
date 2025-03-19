@@ -243,7 +243,7 @@ class WorldUnit:
     def create_deal_mandate_ledgers(self):
         etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
 
-    def calc_fiscal_deal_acct_mandate_net_ledgers(self):
+    def calc_fisc_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
         print(f"Starting files {count_dirs_files(mstr_dir)}")
         etl_create_deals_root_cells(mstr_dir)
@@ -332,7 +332,7 @@ class WorldUnit:
         self.event_inherited_budunits_to_fisc_voice()
         self.fisc_voice_to_fisc_forecast()
         # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
-        self.calc_fiscal_deal_acct_mandate_net_ledgers()
+        self.calc_fisc_deal_acct_mandate_net_ledgers()
 
     def create_stances(self):
         create_stance0001_file(self._fisc_mstr_dir)
