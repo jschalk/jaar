@@ -7,8 +7,8 @@ def timeline_str() -> str:
     return "timeline"
 
 
-def present_time_str() -> str:
-    return "present_time"
+def offi_time_nigh_str() -> str:
+    return "offi_time_nigh"
 
 
 def brokerunits_str() -> str:
@@ -139,7 +139,7 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "c400_number": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "present_time": "int",
+        "offi_time_nigh": "int",
         "hour_title": "TitleUnit",
         "fisc_title": "TitleUnit",
         "fund_coin": "float",
@@ -166,7 +166,7 @@ def get_fisc_args_set() -> set[str]:
         "c400_number",
         "cumlative_day",
         "cumlative_minute",
-        "present_time",
+        "offi_time_nigh",
         "hour_title",
         "fisc_title",
         "fund_coin",

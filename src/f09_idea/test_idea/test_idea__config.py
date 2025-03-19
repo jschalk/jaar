@@ -85,7 +85,7 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
-    present_time_str,
+    offi_time_nigh_str,
     amount_str,
     month_title_str,
     hour_title_str,
@@ -257,7 +257,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[67] == fund_coin_str()
     assert table_sorting_priority[68] == penny_str()
     assert table_sorting_priority[69] == respect_bit_str()
-    assert table_sorting_priority[70] == present_time_str()
+    assert table_sorting_priority[70] == offi_time_nigh_str()
     assert table_sorting_priority[71] == amount_str()
     assert table_sorting_priority[72] == otx_title_str()
     assert table_sorting_priority[73] == inx_title_str()
@@ -341,7 +341,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fund_coin_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
-    assert sqlite_types.get(present_time_str()) == "INTEGER"
+    assert sqlite_types.get(offi_time_nigh_str()) == "INTEGER"
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_title_str()) == "TEXT"
     assert sqlite_types.get(hour_title_str()) == "TEXT"
@@ -716,7 +716,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         face_name_str(),
         event_int_str(),
         c400_number_str(),
-        present_time_str(),
+        offi_time_nigh_str(),
         fisc_title_str(),
         fund_coin_str(),
         monthday_distortion_str(),

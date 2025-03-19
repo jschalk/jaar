@@ -26,7 +26,8 @@ def test_FiscUnit_Exists():
     # THEN
     assert not accord_fisc.fisc_title
     assert not accord_fisc.timeline
-    assert not accord_fisc.present_time
+    assert not accord_fisc.offi_time_open
+    assert not accord_fisc.offi_time_nigh
     assert not accord_fisc.brokerunits
     assert not accord_fisc.cashbook
     assert not accord_fisc.bridge
@@ -48,7 +49,8 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     # THEN
     assert accord_fisc.fisc_title == get_test_fisc_title()
     assert accord_fisc.timeline == timelineunit_shop()
-    assert accord_fisc.present_time == 0
+    assert accord_fisc.offi_time_open == 0
+    assert accord_fisc.offi_time_nigh == 0
     assert accord_fisc.brokerunits == {}
     assert accord_fisc.cashbook == tranbook_shop(get_test_fisc_title())
     assert accord_fisc.bridge == default_bridge_if_None()
@@ -83,13 +85,15 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     x_fund_coin = 7.0
     x_respect_bit = 9
     x_penny = 3
-    x_present_time = 78000000
+    x_offi_time_open = 60000000
+    x_offi_time_nigh = 78000000
 
     # WHEN
     accord_fisc = fiscunit_shop(
         fisc_title=accord45_str,
         fisc_mstr_dir=get_test_fisc_mstr_dir(),
-        present_time=x_present_time,
+        offi_time_open=x_offi_time_open,
+        offi_time_nigh=x_offi_time_nigh,
         in_memory_journal=True,
         bridge=slash_str,
         fund_coin=x_fund_coin,
@@ -98,7 +102,8 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert accord_fisc.present_time == x_present_time
+    assert accord_fisc.offi_time_open == x_offi_time_open
+    assert accord_fisc.offi_time_nigh == x_offi_time_nigh
     assert accord_fisc.bridge == slash_str
     assert accord_fisc.fund_coin == x_fund_coin
     assert accord_fisc.respect_bit == x_respect_bit

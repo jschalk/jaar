@@ -87,7 +87,7 @@ class TranBook:
         self,
         tranunit: TranUnit,
         blocked_time_ints: set[TimeLinePoint] = None,
-        present_time: TimeLinePoint = None,
+        offi_time_nigh: TimeLinePoint = None,
     ):
         self.add_tranunit(
             owner_name=tranunit.src,
@@ -95,7 +95,7 @@ class TranBook:
             time_int=tranunit.time_int,
             amount=tranunit.amount,
             blocked_time_ints=blocked_time_ints,
-            present_time=present_time,
+            offi_time_nigh=offi_time_nigh,
         )
 
     def add_tranunit(
@@ -105,15 +105,15 @@ class TranBook:
         time_int: TimeLinePoint,
         amount: FundNum,
         blocked_time_ints: set[TimeLinePoint] = None,
-        present_time: TimeLinePoint = None,
+        offi_time_nigh: TimeLinePoint = None,
     ):
         if time_int in get_empty_set_if_None(blocked_time_ints):
             exception_str = (
                 f"Cannot set tranunit for time_int={time_int}, timelinepoint is blocked"
             )
             raise time_int_Exception(exception_str)
-        if present_time != None and time_int >= present_time:
-            exception_str = f"Cannot set tranunit for time_int={time_int}, timelinepoint is greater than current time={present_time}"
+        if offi_time_nigh != None and time_int >= offi_time_nigh:
+            exception_str = f"Cannot set tranunit for time_int={time_int}, timelinepoint is greater than current time={offi_time_nigh}"
             raise time_int_Exception(exception_str)
         x_keylist = [owner_name, acct_name, time_int]
         set_in_nested_dict(self.tranunits, x_keylist, amount)

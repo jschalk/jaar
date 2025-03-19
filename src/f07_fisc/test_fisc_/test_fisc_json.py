@@ -17,7 +17,7 @@ from src.f07_fisc.fisc import (
 )
 from src.f07_fisc.fisc_config import (
     timeline_str,
-    present_time_str,
+    offi_time_nigh_str,
     brokerunits_str,
     cashbook_str,
 )
@@ -31,7 +31,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
-    accord_present_time_int = 23
+    accord_offi_time_nigh_int = 23
     bob_str = "Bob"
     bob_x0_time_int = 702
     bob_x0_quota = 33
@@ -42,7 +42,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     sue_x7_quota = 66
     cash_time_int = 15
     bob_sue_amount = 30000
-    accord_fisc.set_present_time(accord_present_time_int)
+    accord_fisc.set_offi_time_nigh(accord_offi_time_nigh_int)
     accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
     accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
     accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
@@ -61,7 +61,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     print(f"{ accord_fisc.cashbook.get_dict()=}")
     assert x_dict.get(fisc_title_str()) == accord45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
-    assert x_dict.get(present_time_str()) == accord_present_time_int
+    assert x_dict.get(offi_time_nigh_str()) == accord_offi_time_nigh_int
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
     assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
     assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
@@ -71,7 +71,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     assert set(x_dict.keys()) == {
         fisc_title_str(),
         timeline_str(),
-        present_time_str(),
+        offi_time_nigh_str(),
         brokerunits_str(),
         bridge_str(),
         fund_coin_str(),
@@ -94,7 +94,7 @@ def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
     assert set(x_dict.keys()) == {
         fisc_title_str(),
         timeline_str(),
-        present_time_str(),
+        offi_time_nigh_str(),
         brokerunits_str(),
         bridge_str(),
         fund_coin_str(),
@@ -134,7 +134,7 @@ def test_get_from_dict_ReturnsFiscUnit():
     accord_fisc = fiscunit_shop(accord45_str)
     sue_timeline_title = "sue casa"
     accord_fisc.timeline.timeline_title = sue_timeline_title
-    sue_present_time = 23
+    sue_offi_time_nigh = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
@@ -152,7 +152,7 @@ def test_get_from_dict_ReturnsFiscUnit():
     accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
     accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
     accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
-    accord_fisc.present_time = sue_present_time
+    accord_fisc.offi_time_nigh = sue_offi_time_nigh
     accord_fisc.bridge = sue_bridge
     accord_fisc.fund_coin = sue_fund_coin
     accord_fisc.respect_bit = sue_respect_bit
@@ -171,7 +171,7 @@ def test_get_from_dict_ReturnsFiscUnit():
     # THEN
     assert x_fisc.fisc_title == accord45_str
     assert x_fisc.timeline.timeline_title == sue_timeline_title
-    assert x_fisc.present_time == sue_present_time
+    assert x_fisc.offi_time_nigh == sue_offi_time_nigh
     assert x_fisc.bridge == sue_bridge
     assert x_fisc.fund_coin == sue_fund_coin
     assert x_fisc.respect_bit == sue_respect_bit
@@ -188,7 +188,7 @@ def test_get_from_json_ReturnsFiscUnit():
     accord_fisc = fiscunit_shop(accord45_str)
     sue_timeline_title = "sue casa"
     accord_fisc.timeline.timeline_title = sue_timeline_title
-    sue_present_time = 23
+    sue_offi_time_nigh = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
     sue_respect_bit = 0.5
@@ -204,7 +204,7 @@ def test_get_from_json_ReturnsFiscUnit():
     accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
     accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
     accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
-    accord_fisc.present_time = sue_present_time
+    accord_fisc.offi_time_nigh = sue_offi_time_nigh
     accord_fisc.bridge = sue_bridge
     accord_fisc.fund_coin = sue_fund_coin
     accord_fisc.respect_bit = sue_respect_bit
@@ -217,7 +217,7 @@ def test_get_from_json_ReturnsFiscUnit():
     # THEN
     assert x_fisc.fisc_title == accord45_str
     assert x_fisc.timeline.timeline_title == sue_timeline_title
-    assert x_fisc.present_time == sue_present_time
+    assert x_fisc.offi_time_nigh == sue_offi_time_nigh
     assert x_fisc.bridge == sue_bridge
     assert x_fisc.fund_coin == sue_fund_coin
     assert x_fisc.respect_bit == sue_respect_bit
@@ -233,9 +233,9 @@ def test_get_from_file_ReturnsFiscUnitWith_fisc_mstr_dir(env_dir_setup_cleanup):
     accord45_fisc = fiscunit_shop(accord45_str)
     sue_timeline_title = "sue casa"
     accord45_fisc.timeline.timeline_title = sue_timeline_title
-    sue_present_time = 23
+    sue_offi_time_nigh = 23
     sue_respect_bit = 0.5
-    accord45_fisc.present_time = sue_present_time
+    accord45_fisc.offi_time_nigh = sue_offi_time_nigh
     accord45_fisc.respect_bit = sue_respect_bit
     x_fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_buzz")
     accord45_json_path = create_fisc_json_path(x_fisc_mstr_dir, accord45_str)
@@ -249,7 +249,7 @@ def test_get_from_file_ReturnsFiscUnitWith_fisc_mstr_dir(env_dir_setup_cleanup):
     assert generated_a45_fisc.fisc_mstr_dir == x_fisc_mstr_dir
     assert generated_a45_fisc.fisc_title == accord45_str
     assert generated_a45_fisc.timeline.timeline_title == sue_timeline_title
-    assert generated_a45_fisc.present_time == sue_present_time
+    assert generated_a45_fisc.offi_time_nigh == sue_offi_time_nigh
     assert generated_a45_fisc.respect_bit == sue_respect_bit
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     expected_a45_fisc_dir = create_path(x_fiscs_dir, accord45_str)

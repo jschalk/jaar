@@ -20,7 +20,7 @@ from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f07_fisc.fisc_config import fiscunit_str, present_time_str
+from src.f07_fisc.fisc_config import fiscunit_str, offi_time_nigh_str
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeColumnsRef,
     FiscPrimeObjsRef,
@@ -78,7 +78,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     a45_fund_coin = 3
     a45_penny = 5
     a45_respect_bit = 7
-    a45_present_time = 11
+    a45_offi_time_nigh = 11
     a45_bridge = "/"
     a45_c400_number = 88
     a45_yr1_jan1_offset = 501
@@ -87,7 +87,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     print(f"{x_cols.unit_agg_csv_header=}")
     fiscunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
 {accord23_str},,,,,,,,,
-{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_present_time},{a45_bridge}
+{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_offi_time_nigh},{a45_bridge}
 """
     save_file(fisc_mstr_dir, x_fisc.unit_agg_csv_filename, fiscunit_agg_csv_str)
     save_file(fisc_mstr_dir, x_fisc.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
@@ -129,7 +129,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
         fund_coin=a45_fund_coin,
         penny=a45_penny,
         respect_bit=a45_respect_bit,
-        present_time=a45_present_time,
+        offi_time_nigh=a45_offi_time_nigh,
         bridge=a45_bridge,
         timeline=expected_45_tl,
     )

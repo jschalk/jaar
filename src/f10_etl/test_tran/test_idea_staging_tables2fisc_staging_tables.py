@@ -33,7 +33,7 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fiscunit_str,
-    present_time_str,
+    offi_time_nigh_str,
     amount_str,
     hour_title_str,
     cumlative_minute_str,
@@ -111,7 +111,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -127,7 +127,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -193,7 +193,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -209,7 +209,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -240,7 +240,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario2_Idea_br00000_Table_Wi
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
-        present_time_str(),
+        offi_time_nigh_str(),
         bridge_str(),
         c400_number_str(),
         yr1_jan1_offset_str(),
@@ -252,7 +252,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario2_Idea_br00000_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()})
+INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{offi_time_nigh_str()},{bridge_str()})
 VALUES
   ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
 , ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
@@ -279,7 +279,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -295,7 +295,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -327,7 +327,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
-        present_time_str(),
+        offi_time_nigh_str(),
         bridge_str(),
         c400_number_str(),
         yr1_jan1_offset_str(),
@@ -337,7 +337,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
     a23_fund_coin = 11
     a23_penny = 22
     a23_respect_bit = 33
-    a23_present_time = 44
+    a23_offi_time_nigh = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -349,11 +349,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()})
+INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{offi_time_nigh_str()},{bridge_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}')
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}')
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}')
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -381,7 +381,7 @@ VALUES
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
-            a23_present_time,  # present_time
+            a23_offi_time_nigh,  # offi_time_nigh
             a23_bridge,  # bridge
             None,  # note
         )
@@ -397,7 +397,7 @@ VALUES
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
-            a23_present_time,  # present_time
+            a23_offi_time_nigh,  # offi_time_nigh
             a23_bridge,  # bridge
             None,  # note
         )
@@ -948,7 +948,7 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
     a23_fund_coin = 11
     a23_penny = 22
     a23_respect_bit = 33
-    a23_present_time = 44
+    a23_offi_time_nigh = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -965,8 +965,8 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1002,7 +1002,7 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
     a23_penny_1 = 22
     a23_penny_2 = 99
     a23_respect_bit = 33
-    a23_present_time = 44
+    a23_offi_time_nigh = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -1019,9 +1019,9 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_offi_time_nigh},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")

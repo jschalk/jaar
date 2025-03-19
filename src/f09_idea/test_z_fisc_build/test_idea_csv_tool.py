@@ -65,7 +65,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
 
     # THEN
     expected_stance_csv_strs = {
-        "br00000": "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge\n",
+        "br00000": "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,offi_time_nigh,bridge\n",
         "br00001": "fisc_title,owner_name,time_int,quota,celldepth\n",
         "br00002": "fisc_title,owner_name,acct_name,time_int,amount\n",
         "br00003": "fisc_title,cumlative_minute,hour_title\n",

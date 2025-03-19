@@ -180,12 +180,12 @@ def test_FiscUnit_get_brokerunits_time_ints_ReturnsObj():
     assert accord_fisc.get_brokerunits_time_ints() == all_time_ints
 
 
-def test_FiscUnit_add_dealunit_RaisesErrorWhen_time_int_IsLessThan_present_time():
+def test_FiscUnit_add_dealunit_RaisesErrorWhen_time_int_IsLessThan_offi_time_nigh():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
-    accord_present_time = 606
-    accord_fisc.present_time = accord_present_time
+    accord_offi_time_nigh = 606
+    accord_fisc.offi_time_nigh = accord_offi_time_nigh
     bob_str = "Bob"
     bob_x0_time_int = 707
     bob_x0_quota = 33
@@ -201,16 +201,16 @@ def test_FiscUnit_add_dealunit_RaisesErrorWhen_time_int_IsLessThan_present_time(
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
-    exception_str = f"Cannot set dealunit because time_int {sue_x4_time_int} is less than FiscUnit.present_time {accord_present_time}."
+    exception_str = f"Cannot set dealunit because time_int {sue_x4_time_int} is less than FiscUnit.offi_time_nigh {accord_offi_time_nigh}."
     assert str(excinfo.value) == exception_str
 
 
-def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_present_time_entry_IsTrue():
+def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_offi_time_nigh_entry_IsTrue():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
-    accord_present_time = 606
-    accord_fisc.present_time = accord_present_time
+    accord_offi_time_nigh = 606
+    accord_fisc.offi_time_nigh = accord_offi_time_nigh
     bob_str = "Bob"
     bob_x0_time_int = 707
     bob_x0_quota = 33
@@ -233,7 +233,7 @@ def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_present_time_entr
         owner_name=sue_str,
         time_int=sue_x4_time_int,
         quota=sue_x4_quota,
-        allow_prev_to_present_time_entry=True,
+        allow_prev_to_offi_time_nigh_entry=True,
     )
 
     # THEN

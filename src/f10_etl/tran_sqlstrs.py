@@ -55,8 +55,8 @@ CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timel
 CREATE_FISC_TIMELINE_MONTH_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, cumlative_day INTEGER, month_title TEXT, error_message TEXT)"""
 CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT)"""
 CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, present_time INTEGER, bridge TEXT)"""
-CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, present_time INTEGER, bridge TEXT, error_message TEXT)"""
+CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, offi_time_nigh INTEGER, bridge TEXT)"""
+CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, offi_time_nigh INTEGER, bridge TEXT, error_message TEXT)"""
 
 
 def get_fisc_create_table_sqlstrs() -> dict[str, str]:
@@ -251,7 +251,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
     OR MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
-    OR MIN(present_time) != MAX(present_time)
+    OR MIN(offi_time_nigh) != MAX(offi_time_nigh)
     OR MIN(bridge) != MAX(bridge)
 """
 
@@ -625,7 +625,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
     OR MIN(fund_coin) != MAX(fund_coin)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
-    OR MIN(present_time) != MAX(present_time)
+    OR MIN(offi_time_nigh) != MAX(offi_time_nigh)
     OR MIN(bridge) != MAX(bridge)
 )
 UPDATE fiscunit_staging
@@ -768,8 +768,8 @@ WHERE error_message IS NULL
 GROUP BY fisc_title, weekday_order
 ;
 """
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, present_time, bridge)
-SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge)
+FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, offi_time_nigh, bridge)
+SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(offi_time_nigh), MAX(bridge)
 FROM fiscunit_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title

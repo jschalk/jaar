@@ -252,7 +252,7 @@ def fisc_build_from_df(
             fisc_title=x_fisc_title,
             fisc_mstr_dir=x_fiscs_dir,
             timeline=x_timeline,
-            present_time=row["present_time"],
+            offi_time_nigh=row["offi_time_nigh"],
             # in_memory_journal=row["in_memory_journal"],
             bridge=row["bridge"],
             fund_coin=x_fund_coin,
@@ -309,7 +309,7 @@ def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
             time_int=row["time_int"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
-            allow_prev_to_present_time_entry=True,
+            allow_prev_to_offi_time_nigh_entry=True,
         )
 
 
