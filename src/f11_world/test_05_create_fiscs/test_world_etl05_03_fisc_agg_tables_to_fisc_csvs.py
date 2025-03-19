@@ -53,8 +53,8 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateStagingFiles(
         generated_fiscunit_csv = open_file(fisc_objs.unit_stage_csv_path)
         fisc_cols = FiscPrimeColumnsRef()
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
 """
         print(f"   {expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
@@ -101,8 +101,8 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
         generated_fiscunit_csv = open_file(fiz_objs.unit_agg_csv_path)
         fisc_cols = FiscPrimeColumnsRef()
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_agg_csv_header}
-{accord23_str},,,,,,,,,
-{accord45_str},,,,,,,,,
+{accord23_str},,,,,,,,
+{accord45_str},,,,,,,,
 """
         print(f"{expected_fiscunit_csv_str=}")
         print(f"   {generated_fiscunit_csv=}")

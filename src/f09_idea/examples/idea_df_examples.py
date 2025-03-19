@@ -7,12 +7,11 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_fiscunit_v0_0_0
-    c400_number,offi_time_nigh,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "offi_time_nigh",
             "fisc_title",
             "fund_coin",
             "monthday_distortion",
@@ -23,7 +22,7 @@ def get_ex1_br00000_df() -> DataFrame:
             "yr1_jan1_offset",
         ]
     )
-    x_df.loc[0] = [7, 5500, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
+    x_df.loc[0] = [7, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
     return x_df
 
 
@@ -119,12 +118,11 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_fiscunit_v0_0_0
-    c400_number,offi_time_nigh,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "offi_time_nigh",
             "fisc_title",
             "fund_coin",
             "monthday_distortion",
@@ -135,8 +133,8 @@ def get_ex2_br00000_df() -> DataFrame:
             "yr1_jan1_offset",
         ]
     )
-    x_df.loc[0] = [7, 5500, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
-    x_df.loc[1] = [25, 444, JEFFY45_STR, 1, 0, 1, 1, ",", "five", 1683478080]
+    x_df.loc[0] = [7, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
+    x_df.loc[1] = [25, JEFFY45_STR, 1, 0, 1, 1, ",", "five", 1683478080]
     return x_df
 
 

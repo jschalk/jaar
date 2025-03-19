@@ -143,7 +143,6 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "credor_respect": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "offi_time_nigh": "int",
         "debtit_belief": "int",
         "debtit_vote": "int",
         "debtor_respect": "int",

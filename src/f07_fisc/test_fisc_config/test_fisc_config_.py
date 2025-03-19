@@ -96,7 +96,6 @@ def test_get_fisc_config_dict_ReturnsObj():
 
     x_fiscunit_jvalues = {
         c400_number_str(),
-        offi_time_nigh_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
@@ -108,7 +107,7 @@ def test_get_fisc_config_dict_ReturnsObj():
     print(f"{fiscunit_dict.get(jvalues_str()).keys()=}")
     gen_jvalues = set(fiscunit_dict.get(jvalues_str()).keys())
     assert gen_jvalues == x_fiscunit_jvalues
-    assert len(fiscunit_dict.get(jvalues_str())) == 9
+    assert len(fiscunit_dict.get(jvalues_str())) == 8
     assert len(fisc_dealunit_dict.get(jvalues_str())) == 2
     assert len(fisc_cashbook_dict.get(jvalues_str())) == 1
     assert len(fisc_timeline_hour_dict.get(jvalues_str())) == 1
@@ -165,7 +164,6 @@ def test_get_fisc_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_fisc_args_dimen_mapping
-    assert x_fisc_args_dimen_mapping.get(offi_time_nigh_str())
     x_hour = {fisc_timeline_hour_str()}
     assert x_fisc_args_dimen_mapping.get(cumlative_minute_str()) == x_hour
     assert x_fisc_args_dimen_mapping.get(fund_coin_str())
@@ -173,7 +171,7 @@ def test_get_fisc_args_dimen_mapping_ReturnsObj():
     assert fisc_timeline_hour_str() in fisc_title_dimens
     assert fiscunit_str() in fisc_title_dimens
     assert len(fisc_title_dimens) == 6
-    assert len(x_fisc_args_dimen_mapping) == 22
+    assert len(x_fisc_args_dimen_mapping) == 21
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -224,7 +222,7 @@ def test_get_fisc_args_set_ReturnsObj():
     mapping_args_set = set(get_fisc_args_dimen_mapping().keys())
     print(f"{mapping_args_set=}")
     assert fisc_args_set == mapping_args_set
-    assert len(fisc_args_set) == 22
+    assert len(fisc_args_set) == 21
     expected_fisc_args_set = {
         acct_name_str(),
         amount_str(),
@@ -232,7 +230,6 @@ def test_get_fisc_args_set_ReturnsObj():
         c400_number_str(),
         cumlative_day_str(),
         cumlative_minute_str(),
-        offi_time_nigh_str(),
         hour_title_str(),
         fisc_title_str(),
         fund_coin_str(),

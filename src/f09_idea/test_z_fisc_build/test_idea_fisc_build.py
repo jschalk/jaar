@@ -57,7 +57,6 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     assert x_fiscunits.get(accord23_str) != None
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     expected_accord23_fiscunit = fiscunit_shop(
-        offi_time_nigh=5500,
         fisc_title=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
@@ -130,7 +129,6 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     # THEN
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_fiscunit = fiscunit_shop(
-        offi_time_nigh=5500,
         fisc_title=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
@@ -141,7 +139,6 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTitles(
     )
     five_timelineunit = timelineunit_shop(get_five_config())
     jeffy45_fiscunit = fiscunit_shop(
-        offi_time_nigh=444,
         fisc_title="jeffy45",
         fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,

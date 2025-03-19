@@ -252,7 +252,6 @@ def fisc_build_from_df(
             fisc_title=x_fisc_title,
             fisc_mstr_dir=x_fiscs_dir,
             timeline=x_timeline,
-            offi_time_nigh=row["offi_time_nigh"],
             # in_memory_journal=row["in_memory_journal"],
             bridge=row["bridge"],
             fund_coin=x_fund_coin,

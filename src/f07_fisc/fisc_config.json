@@ -108,9 +108,6 @@
             "penny": {
                 "class_type": "float"
             },
-            "offi_time_nigh": {
-                "class_type": "int"
-            },
             "respect_bit": {
                 "class_type": "float"
             },

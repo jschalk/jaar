@@ -81,7 +81,6 @@ class FiscPrimeColumnsRef:
             "fund_coin",
             "penny",
             "respect_bit",
-            "offi_time_nigh",
             "bridge",
         ]
         self.deal_agg_columns = [
@@ -104,7 +103,7 @@ class FiscPrimeColumnsRef:
 
         _front_cols = ["idea_number", "face_name", "event_int"]
         _back_cols = ["error_message"]
-        self.unit_agg_csv_header = "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,offi_time_nigh,bridge"
+        self.unit_agg_csv_header = "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge"
         self.deal_agg_csv_header = "fisc_title,owner_name,time_int,quota,celldepth"
         self.cash_agg_csv_header = "fisc_title,owner_name,acct_name,time_int,amount"
         self.hour_agg_csv_header = "fisc_title,cumlative_minute,hour_title"
@@ -116,7 +115,7 @@ class FiscPrimeColumnsRef:
         self.hour_staging_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
         self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
-        self.unit_staging_csv_header = """idea_number,face_name,event_int,fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,offi_time_nigh,bridge,error_message"""
+        self.unit_staging_csv_header = """idea_number,face_name,event_int,fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,error_message"""
         self.deal_staging_csv_header = """idea_number,face_name,event_int,fisc_title,owner_name,time_int,quota,celldepth,error_message"""
         self.cash_staging_csv_header = """idea_number,face_name,event_int,fisc_title,owner_name,acct_name,time_int,amount,error_message"""
         self.hour_staging_csv_header = """idea_number,face_name,event_int,fisc_title,cumlative_minute,hour_title,error_message"""
@@ -217,7 +216,7 @@ def create_fiscunit_jsons_from_prime_files(fisc_mstr_dir: str):
             fisc_title=x_fisc_title,
             fisc_mstr_dir=fisc_mstr_dir,
             timeline=fisc_timelineunit,
-            offi_time_nigh=if_nan_return_None(fisc_attrs.get("offi_time_nigh")),
+            # offi_time_nigh=if_nan_return_None(fisc_attrs.get("offi_time_nigh")),
             bridge=fisc_attrs.get("bridge"),
             fund_coin=if_nan_return_None(fisc_attrs.get("fund_coin")),
             penny=if_nan_return_None(fisc_attrs.get("penny")),

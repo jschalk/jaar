@@ -54,7 +54,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # offi_time_nigh
+            # None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -66,7 +66,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # offi_time_nigh
+            # None,  # offi_time_nigh
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset

@@ -85,7 +85,6 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
-    offi_time_nigh_str,
     amount_str,
     month_title_str,
     hour_title_str,
@@ -257,24 +256,23 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[67] == fund_coin_str()
     assert table_sorting_priority[68] == penny_str()
     assert table_sorting_priority[69] == respect_bit_str()
-    assert table_sorting_priority[70] == offi_time_nigh_str()
-    assert table_sorting_priority[71] == amount_str()
-    assert table_sorting_priority[72] == otx_title_str()
-    assert table_sorting_priority[73] == inx_title_str()
-    assert table_sorting_priority[74] == otx_road_str()
-    assert table_sorting_priority[75] == inx_road_str()
-    assert table_sorting_priority[76] == otx_name_str()
-    assert table_sorting_priority[77] == inx_name_str()
-    assert table_sorting_priority[78] == otx_label_str()
-    assert table_sorting_priority[79] == inx_label_str()
-    assert table_sorting_priority[80] == otx_bridge_str()
-    assert table_sorting_priority[81] == inx_bridge_str()
-    assert table_sorting_priority[82] == bridge_str()
-    assert table_sorting_priority[83] == unknown_word_str()
-    assert table_sorting_priority[84] == quota_str()
-    assert table_sorting_priority[85] == celldepth_str()
-    assert table_sorting_priority[86] == "error_message"
-    assert len(table_sorting_priority) == 87
+    assert table_sorting_priority[70] == amount_str()
+    assert table_sorting_priority[71] == otx_title_str()
+    assert table_sorting_priority[72] == inx_title_str()
+    assert table_sorting_priority[73] == otx_road_str()
+    assert table_sorting_priority[74] == inx_road_str()
+    assert table_sorting_priority[75] == otx_name_str()
+    assert table_sorting_priority[76] == inx_name_str()
+    assert table_sorting_priority[77] == otx_label_str()
+    assert table_sorting_priority[78] == inx_label_str()
+    assert table_sorting_priority[79] == otx_bridge_str()
+    assert table_sorting_priority[80] == inx_bridge_str()
+    assert table_sorting_priority[81] == bridge_str()
+    assert table_sorting_priority[82] == unknown_word_str()
+    assert table_sorting_priority[83] == quota_str()
+    assert table_sorting_priority[84] == celldepth_str()
+    assert table_sorting_priority[85] == "error_message"
+    assert len(table_sorting_priority) == 86
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)
@@ -341,7 +339,6 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fund_coin_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
-    assert sqlite_types.get(offi_time_nigh_str()) == "INTEGER"
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_title_str()) == "TEXT"
     assert sqlite_types.get(hour_title_str()) == "TEXT"
@@ -716,7 +713,6 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         face_name_str(),
         event_int_str(),
         c400_number_str(),
-        offi_time_nigh_str(),
         fisc_title_str(),
         fund_coin_str(),
         monthday_distortion_str(),
