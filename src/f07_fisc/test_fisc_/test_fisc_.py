@@ -18,6 +18,7 @@ from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f07_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists, isdir as os_path_isdir
+from pytest import raises as pytest_raises
 
 
 def test_FiscUnit_Exists():
@@ -330,3 +331,87 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert accord_all_owners.get(sue_str) == sue_hubunit
     assert accord_all_owners.get(yao_str) == yao_hubunit
     assert len(accord_fisc.get_owner_hubunits()) == 2
+
+
+def test_FiscUnit_set_offi_time_open_Scenario0_SetsAttr():
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    time56 = 56
+    a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir, offi_time_nigh=time56)
+    assert a23_fisc.offi_time_open == 0
+    assert a23_fisc.offi_time_nigh == time56
+
+    # WHEN
+    time23 = 23
+    a23_fisc.set_offi_time_open(time23)
+
+    # THEN
+    assert a23_fisc.offi_time_open == time23
+    assert a23_fisc.offi_time_nigh == time56
+
+
+def test_FiscUnit_set_offi_time_open_Scenario1_SetsAttr():
+    # ESTABLISH
+    a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+    assert a23_fisc.offi_time_open == 0
+    assert a23_fisc.offi_time_nigh == 0
+
+    # WHEN
+    time23 = 23
+    a23_fisc.set_offi_time_open(time23)
+
+    # THEN
+    assert a23_fisc.offi_time_open == time23
+    assert a23_fisc.offi_time_nigh == time23
+
+
+def test_FiscUnit_set_offi_time_nigh_Scenario0_SetsAttr():
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    time7 = 7
+    a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir, offi_time_nigh=time7)
+    assert a23_fisc.offi_time_open == 0
+    assert a23_fisc.offi_time_nigh == time7
+
+    # WHEN
+    time23 = 23
+    a23_fisc.set_offi_time_nigh(time23)
+
+    # THEN
+    assert a23_fisc.offi_time_open == 0
+    assert a23_fisc.offi_time_nigh == time23
+
+
+def test_FiscUnit_set_offi_time_nigh_Scenario1_SetsAttr():
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    time21 = 21
+    time77 = 77
+    a23_fisc = fiscunit_shop(
+        "accord23", fisc_mstr_dir, offi_time_open=time21, offi_time_nigh=time77
+    )
+    assert a23_fisc.offi_time_open == time21
+    assert a23_fisc.offi_time_nigh == time77
+
+    # WHEN / THEN
+    time11 = 11
+    with pytest_raises(Exception) as excinfo:
+        a23_fisc.set_offi_time_nigh(time11)
+    exception_str = f"Cannot set offi_time_nigh={time11} because it is less than offi_time_open={time21}"
+    assert str(excinfo.value) == exception_str
+
+
+def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
+    # ESTABLISH
+    a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+    assert a23_fisc.offi_time_open == 0
+    assert a23_fisc.offi_time_nigh == 0
+
+    # WHEN
+    time23 = 23
+    time55 = 55
+    a23_fisc.set_offi_time(time23, time55)
+
+    # THEN
+    assert a23_fisc.offi_time_open == time23
+    assert a23_fisc.offi_time_nigh == time55
