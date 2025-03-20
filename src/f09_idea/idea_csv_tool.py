@@ -38,6 +38,7 @@ def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
         "br00003",
         "br00004",
         "br00005",
+        # "br00006",
         "br00020",
         "br00021",
         "br00022",

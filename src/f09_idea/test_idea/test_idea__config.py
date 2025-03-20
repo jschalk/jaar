@@ -287,6 +287,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add(face_name_str())
     all_args.add("error_message")
     all_args.add(f"{base_str()}_EXCISE")
+    all_args.add(offi_time_open_str())  # TODO delete this line
+    all_args.add(offi_time_nigh_str())  # TODO delete this line
     assert all_args == set(table_sorting_priority)
 
 
@@ -421,7 +423,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert get_bud_dimens().issubset(idea_config_dimens)
     assert get_fisc_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
-    assert len(x_idea_config) == 21
+    assert len(x_idea_config) == 20
     _validate_idea_config(x_idea_config)
 
 

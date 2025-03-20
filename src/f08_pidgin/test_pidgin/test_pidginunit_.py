@@ -100,8 +100,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("need") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("nigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
-    assert pidgin_args_class_types.get("offi_time_open") == "TimeLinePoint"
-    assert pidgin_args_class_types.get("offi_time_nigh") == "TimeLinePoint"
+    # assert pidgin_args_class_types.get("offi_time_open") == "TimeLinePoint"
+    # assert pidgin_args_class_types.get("offi_time_nigh") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_AcctName_str()
     assert pidgin_args_class_types.get("open") == "float"
     assert pidgin_args_class_types.get("parent_road") == type_RoadUnit_str()

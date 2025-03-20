@@ -274,3 +274,15 @@ def get_ex2_br00005_df() -> DataFrame:
     x_df.loc[10] = [JEFFY45_STR, "Danceday", 3]
     x_df.loc[11] = [JEFFY45_STR, "Elonday", 4]
     return x_df
+
+
+# def get_ex2_br00006_df() -> DataFrame:
+#     """idea_format_00006_fisc_timeoffi_v0_0_0
+#     fisc_title,offi_time_open,offi_time_night"""
+#     x_df = DataFrame(columns=["fisc_title", "offi_time_open", "offi_time_nigh"])
+#     x_df.loc[0] = [ACCORD23_STR, 100, 300]
+#     x_df.loc[1] = [ACCORD23_STR, 110, 320]
+#     x_df.loc[2] = [ACCORD23_STR, 120, 330]
+#     x_df.loc[3] = [ACCORD23_STR, 130, 340]
+#     x_df.loc[4] = [ACCORD23_STR, 140, 350]
+#     return x_df

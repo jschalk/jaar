@@ -91,22 +91,6 @@
         },
         "static": "True"
     },
-    "fisc_timeoffi": {
-        "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit"
-            },
-            "offi_time_open": {
-                "class_type": "TimeLinePoint"
-            }
-        },
-        "jvalues": {
-            "offi_time_nigh": {
-                "class_type": "TimeLinePoint"
-            }
-        },
-        "static": "False"
-    },
     "fiscunit": {
         "jkeys": {
             "fisc_title": {

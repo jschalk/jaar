@@ -50,6 +50,7 @@ from src.f09_idea.examples.idea_df_examples import (
     get_ex2_br00003_df,
     get_ex2_br00004_df,
     get_ex2_br00005_df,
+    # get_ex2_br00006_df,
 )
 from copy import deepcopy as copy_deepcopy
 
@@ -71,6 +72,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
         "br00003": "fisc_title,cumlative_minute,hour_title\n",
         "br00004": "fisc_title,cumlative_day,month_title\n",
         "br00005": "fisc_title,weekday_order,weekday_title\n",
+        # "br00006": "fisc_title,offi_time_open,offi_time_nigh\n",
         "br00020": "fisc_title,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
         "br00021": "fisc_title,owner_name,acct_name,credit_belief,debtit_belief\n",
         "br00022": "fisc_title,owner_name,road,awardee_tag,give_force,take_force\n",
@@ -92,6 +94,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
     expected_br00003_csv = expected_stance_csv_strs.get("br00003")
     expected_br00004_csv = expected_stance_csv_strs.get("br00004")
     expected_br00005_csv = expected_stance_csv_strs.get("br00005")
+    # expected_br00006_csv = expected_stance_csv_strs.get("br00006")
     expected_br00020_csv = expected_stance_csv_strs.get("br00020")
     expected_br00021_csv = expected_stance_csv_strs.get("br00021")
     expected_br00022_csv = expected_stance_csv_strs.get("br00022")
@@ -115,6 +118,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
     assert x_ideabricks.get("br00003") == f"{face_event_str}{expected_br00003_csv}"
     assert x_ideabricks.get("br00004") == f"{face_event_str}{expected_br00004_csv}"
     assert x_ideabricks.get("br00005") == f"{face_event_str}{expected_br00005_csv}"
+    # assert x_ideabricks.get("br00006") == f"{face_event_str}{expected_br00006_csv}"
     print(f"{expected_br00020_csv=}")
     print(x_ideabricks.get("br00020"))
     assert x_ideabricks.get("br00020") == f"{face_event_str}{expected_br00020_csv}"
@@ -144,6 +148,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     br00003_df = get_ex2_br00003_df()
     br00004_df = get_ex2_br00004_df()
     br00005_df = get_ex2_br00005_df()
+    # br00006_df = get_ex2_br00006_df()
     x_fund_coin = 1
     x_respect_bit = 1
     x_penny = 1
@@ -168,6 +173,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     br03_csv_header = x_csvs.get("br00003")
     br04_csv_header = x_csvs.get("br00004")
     br05_csv_header = x_csvs.get("br00005")
+    # br06_csv_header = x_csvs.get("br00006")
     a23_fiscunit = x_fiscunits.get("accord23")
 
     # WHEN
@@ -180,6 +186,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     gen_br00003_csv = x_csvs.get("br00003")
     gen_br00004_csv = x_csvs.get("br00004")
     gen_br00005_csv = x_csvs.get("br00005")
+    # gen_br00006_csv = x_csvs.get("br00006")
     expected_br00000_csv = ",,accord23,creg,7,440640,1,1,1,1,/\n"
     expected_br00001_csv = (
         ",,accord23,Bob,999,332,3\n,,accord23,Sue,777,445,3\n,,accord23,Yao,222,700,3\n"
@@ -188,16 +195,18 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     expected_br00003_csv = ",,accord23,60,0-12am\n,,accord23,120,1-1am\n,,accord23,180,2-2am\n,,accord23,240,3-3am\n,,accord23,300,4-4am\n,,accord23,360,5-5am\n,,accord23,420,6-6am\n,,accord23,480,7-7am\n,,accord23,540,8-8am\n,,accord23,600,9-9am\n,,accord23,660,10-10am\n,,accord23,720,11-11am\n,,accord23,780,12-12pm\n,,accord23,840,13-1pm\n,,accord23,900,14-2pm\n,,accord23,960,15-3pm\n,,accord23,1020,16-4pm\n,,accord23,1080,17-5pm\n,,accord23,1140,18-6pm\n,,accord23,1200,19-7pm\n,,accord23,1260,20-8pm\n,,accord23,1320,21-9pm\n,,accord23,1380,22-10pm\n,,accord23,1440,23-11pm\n"
     expected_br00004_csv = ",,accord23,31,March\n,,accord23,61,April\n,,accord23,92,May\n,,accord23,122,June\n,,accord23,153,July\n,,accord23,184,August\n,,accord23,214,September\n,,accord23,245,October\n,,accord23,275,November\n,,accord23,306,December\n,,accord23,337,January\n,,accord23,365,February\n"
     expected_br00005_csv = ",,accord23,0,Wednesday\n,,accord23,1,Thursday\n,,accord23,2,Friday\n,,accord23,3,Saturday\n,,accord23,4,Sunday\n,,accord23,5,Monday\n,,accord23,6,Tuesday\n"
+    # expected_br00006_csv = ",,accord23,0,Wednesday\n,,accord23,1,Thursday\n,,accord23,2,Friday\n,,accord23,3,Saturday\n,,accord23,4,Sunday\n,,accord23,5,Monday\n,,accord23,6,Tuesday\n"
 
     print(f"      {br01_csv_header=}")
-    print(f" {expected_br00000_csv=}")
-    print(f"      {gen_br00000_csv=}")
+    # print(f" {expected_br00006_csv=}")
+    # print(f"      {gen_br00006_csv=}")
     assert gen_br00000_csv == f"{br00_csv_header}{expected_br00000_csv}"
     assert gen_br00001_csv == f"{br01_csv_header}{expected_br00001_csv}"
     assert gen_br00002_csv == f"{br02_csv_header}{expected_br00002_csv}"
     assert gen_br00003_csv == f"{br03_csv_header}{expected_br00003_csv}"
     assert gen_br00004_csv == f"{br04_csv_header}{expected_br00004_csv}"
     assert gen_br00005_csv == f"{br05_csv_header}{expected_br00005_csv}"
+    # assert gen_br00006_csv == f"{br06_csv_header}{expected_br00006_csv}"
 
 
 def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
