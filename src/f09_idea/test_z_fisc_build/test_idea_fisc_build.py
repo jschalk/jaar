@@ -69,7 +69,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
         owner_name="Sue",
         time_int=777,
         quota=445,
-        allow_prev_to_offi_time_nigh_entry=True,
+        allow_prev_to_offi_time_max_entry=True,
         celldepth=5,
     )
     expected_accord23_fiscunit.add_cashpurchase(

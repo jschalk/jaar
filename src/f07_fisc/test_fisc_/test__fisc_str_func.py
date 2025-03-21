@@ -1,6 +1,6 @@
 from src.f07_fisc.fisc_config import (
     timeline_str,
-    offi_time_nigh_str,
+    _offi_time_max_str,
     brokerunits_str,
     cashbook_str,
     amount_str,
@@ -21,7 +21,7 @@ from src.f07_fisc.fisc_config import (
 
 def test_str_functions_ReturnsObj():
     assert timeline_str() == "timeline"
-    assert offi_time_nigh_str() == "offi_time_nigh"
+    assert _offi_time_max_str() == "_offi_time_max"
     assert brokerunits_str() == "brokerunits"
     assert cashbook_str() == "cashbook"
     assert amount_str() == "amount"

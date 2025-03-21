@@ -20,7 +20,7 @@ from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f07_fisc.fisc_config import fiscunit_str, offi_time_nigh_str
+from src.f07_fisc.fisc_config import fiscunit_str, _offi_time_max_str
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeColumnsRef,
     FiscPrimeObjsRef,

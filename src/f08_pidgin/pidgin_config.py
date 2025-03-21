@@ -171,7 +171,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "numor": "int",
         "open": "float",
         # "offi_time_open": "TimeLinePoint",
-        # "offi_time_nigh": "TimeLinePoint",
+        # "_offi_time_max": "TimeLinePoint",
         "owner_name": "NameUnit",
         "parent_road": "RoadUnit",
         "penny": "float",

@@ -278,8 +278,8 @@ def get_ex2_br00005_df() -> DataFrame:
 
 # def get_ex2_br00006_df() -> DataFrame:
 #     """idea_format_00006_fisc_timeoffi_v0_0_0
-#     fisc_title,offi_time_open,offi_time_night"""
-#     x_df = DataFrame(columns=["fisc_title", "offi_time_open", "offi_time_nigh"])
+#     fisc_title,offi_time_open,_offi_time_maxt"""
+#     x_df = DataFrame(columns=["fisc_title", "offi_time_open", "_offi_time_max"])
 #     x_df.loc[0] = [ACCORD23_STR, 100, 300]
 #     x_df.loc[1] = [ACCORD23_STR, 110, 320]
 #     x_df.loc[2] = [ACCORD23_STR, 120, 330]

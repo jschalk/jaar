@@ -69,7 +69,7 @@ class set_cashpurchase_Exception(Exception):
     pass
 
 
-class set_offi_time_nigh_Exception(Exception):
+class set_offi_time_max_Exception(Exception):
     pass
 
 
@@ -88,13 +88,13 @@ class FiscUnit:
     fisc_title: FiscTitle = None
     fisc_mstr_dir: str = None
     timeline: TimeLineUnit = None
-    offi_time_nigh: TimeLinePoint = None
     brokerunits: dict[OwnerName, BrokerUnit] = None
     cashbook: TranBook = None
     bridge: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
     penny: PennyNum = None
+    _offi_time_max: TimeLinePoint = None
     _fisc_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
@@ -283,11 +283,12 @@ class FiscUnit:
         owner_name: OwnerName,
         time_int: TimeLinePoint,
         quota: int,
-        allow_prev_to_offi_time_nigh_entry: bool = False,
+        allow_prev_to_offi_time_max_entry: bool = False,
         celldepth: int = None,
     ):
-        if time_int < self.offi_time_nigh and not allow_prev_to_offi_time_nigh_entry:
-            exception_str = f"Cannot set dealunit because time_int {time_int} is less than FiscUnit.offi_time_nigh {self.offi_time_nigh}."
+        self._offi_time_max = get_0_if_None(self._offi_time_max)
+        if time_int < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
+            exception_str = f"Cannot set dealunit because time_int {time_int} is less than FiscUnit._offi_time_max {self._offi_time_max}."
             raise dealunit_Exception(exception_str)
         if self.brokerunit_exists(owner_name) is False:
             self.set_brokerunit(brokerunit_shop(owner_name))
@@ -304,7 +305,6 @@ class FiscUnit:
         x_dict = {
             "fisc_title": self.fisc_title,
             "bridge": self.bridge,
-            "offi_time_nigh": self.offi_time_nigh,
             "fund_coin": self.fund_coin,
             "penny": self.penny,
             "brokerunits": self._get_brokerunits_dict(),
@@ -333,7 +333,7 @@ class FiscUnit:
         self.cashbook.set_tranunit(
             tranunit=x_cashpurchase,
             blocked_time_ints=self.get_brokerunits_time_ints(),
-            offi_time_nigh=self.offi_time_nigh,
+            _offi_time_max=self._offi_time_max,
         )
 
     def add_cashpurchase(
@@ -343,7 +343,7 @@ class FiscUnit:
         time_int: TimeLinePoint,
         amount: FundNum,
         blocked_time_ints: set[TimeLinePoint] = None,
-        offi_time_nigh: TimeLinePoint = None,
+        _offi_time_max: TimeLinePoint = None,
     ):
         self.cashbook.add_tranunit(
             owner_name=owner_name,
@@ -351,7 +351,7 @@ class FiscUnit:
             time_int=time_int,
             amount=amount,
             blocked_time_ints=blocked_time_ints,
-            offi_time_nigh=offi_time_nigh,
+            _offi_time_max=_offi_time_max,
         )
 
     def cashpurchase_exists(
@@ -369,24 +369,24 @@ class FiscUnit:
 
     # def set_offi_time_open(self, offi_time_open: TimeLinePoint):
     #     self.offi_time_open = offi_time_open
-    #     if self.offi_time_nigh < self.offi_time_open:
-    #         self.offi_time_nigh = self.offi_time_open
+    #     if self._offi_time_max < self.offi_time_open:
+    #         self._offi_time_max = self.offi_time_open
 
-    def set_offi_time_nigh(self, x_offi_time_nigh: TimeLinePoint):
+    def set_offi_time_max(self, x_offi_time_max: TimeLinePoint):
         x_time_ints = self.cashbook.get_time_ints()
-        if x_time_ints != set() and max(x_time_ints) >= x_offi_time_nigh:
-            exception_str = f"Cannot set offi_time_nigh {x_offi_time_nigh}, cashpurchase with greater time_int exists"
-            raise set_offi_time_nigh_Exception(exception_str)
-        # if self.offi_time_open > x_offi_time_nigh:
-        #     exception_str = f"Cannot set offi_time_nigh={x_offi_time_nigh} because it is less than offi_time_open={self.offi_time_open}"
-        #     raise set_offi_time_nigh_Exception(exception_str)
-        self.offi_time_nigh = x_offi_time_nigh
+        if x_time_ints != set() and max(x_time_ints) >= x_offi_time_max:
+            exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, cashpurchase with greater time_int exists"
+            raise set_offi_time_max_Exception(exception_str)
+        # if self.offi_time_open > x_offi_time_max:
+        #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time_open={self.offi_time_open}"
+        #     raise set_offi_time_max_Exception(exception_str)
+        self._offi_time_max = x_offi_time_max
 
     # def set_offi_time(
-    #     self, offi_time_open: TimeLinePoint, offi_time_nigh: TimeLinePoint
+    #     self, offi_time_open: TimeLinePoint, _offi_time_max: TimeLinePoint
     # ):
     #     self.set_offi_time_open(offi_time_open)
-    #     self.set_offi_time_nigh(offi_time_nigh)
+    #     self.set_offi_time_max(_offi_time_max)
 
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
@@ -444,7 +444,6 @@ def fiscunit_shop(
     fisc_title: FiscTitle = None,
     fisc_mstr_dir: str = None,
     timeline: TimeLineUnit = None,
-    offi_time_nigh: int = None,
     in_memory_journal: bool = None,
     bridge: str = None,
     fund_coin: float = None,
@@ -460,7 +459,6 @@ def fiscunit_shop(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
         timeline=timeline,
-        offi_time_nigh=get_0_if_None(offi_time_nigh),
         brokerunits={},
         cashbook=tranbook_shop(fisc_title),
         bridge=default_bridge_if_None(bridge),
@@ -484,7 +482,6 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
     x_fisc_title = fisc_dict.get("fisc_title")
     x_fisc = fiscunit_shop(x_fisc_title, None)
     x_fisc.timeline = timelineunit_shop(fisc_dict.get("timeline"))
-    x_fisc.offi_time_nigh = fisc_dict.get("offi_time_nigh")
     x_fisc.bridge = fisc_dict.get("bridge")
     x_fisc.fund_coin = fisc_dict.get("fund_coin")
     x_fisc.respect_bit = fisc_dict.get("respect_bit")

@@ -11,8 +11,8 @@ def offi_time_open_str() -> str:
     return "offi_time_open"
 
 
-def offi_time_nigh_str() -> str:
-    return "offi_time_nigh"
+def _offi_time_max_str() -> str:
+    return "_offi_time_max"
 
 
 def brokerunits_str() -> str:
@@ -155,7 +155,7 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "monthday_distortion": "int",
         "penny": "float",
         # "offi_time_open": "TimeLinePoint",
-        # "offi_time_nigh": "TimeLinePoint",
+        # "_offi_time_max": "TimeLinePoint",
         "owner_name": "NameUnit",
         "quota": "int",
         "respect_bit": "float",
@@ -183,7 +183,7 @@ def get_fisc_args_set() -> set[str]:
         "monthday_distortion",
         "penny",
         # "offi_time_open",
-        # "offi_time_nigh",
+        # "_offi_time_max",
         "owner_name",
         "quota",
         "respect_bit",

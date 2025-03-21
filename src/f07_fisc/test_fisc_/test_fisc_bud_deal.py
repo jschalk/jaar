@@ -180,12 +180,12 @@ def test_FiscUnit_get_brokerunits_time_ints_ReturnsObj():
     assert accord_fisc.get_brokerunits_time_ints() == all_time_ints
 
 
-def test_FiscUnit_add_dealunit_RaisesErrorWhen_time_int_IsLessThan_offi_time_nigh():
+def test_FiscUnit_add_dealunit_RaisesErrorWhen_time_int_IsLessThan_offi_time_max():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
-    accord_offi_time_nigh = 606
-    accord_fisc.offi_time_nigh = accord_offi_time_nigh
+    accord_offi_time_max = 606
+    accord_fisc._offi_time_max = accord_offi_time_max
     bob_str = "Bob"
     bob_x0_time_int = 707
     bob_x0_quota = 33
@@ -201,16 +201,16 @@ def test_FiscUnit_add_dealunit_RaisesErrorWhen_time_int_IsLessThan_offi_time_nig
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
-    exception_str = f"Cannot set dealunit because time_int {sue_x4_time_int} is less than FiscUnit.offi_time_nigh {accord_offi_time_nigh}."
+    exception_str = f"Cannot set dealunit because time_int {sue_x4_time_int} is less than FiscUnit._offi_time_max {accord_offi_time_max}."
     assert str(excinfo.value) == exception_str
 
 
-def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_offi_time_nigh_entry_IsTrue():
+def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_offi_time_max_entry_IsTrue():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
-    accord_offi_time_nigh = 606
-    accord_fisc.offi_time_nigh = accord_offi_time_nigh
+    accord_offi_time_max = 606
+    accord_fisc._offi_time_max = accord_offi_time_max
     bob_str = "Bob"
     bob_x0_time_int = 707
     bob_x0_quota = 33
@@ -233,7 +233,7 @@ def test_FiscUnit_add_dealunit_DoesNotRaiseError_allow_prev_to_offi_time_nigh_en
         owner_name=sue_str,
         time_int=sue_x4_time_int,
         quota=sue_x4_quota,
-        allow_prev_to_offi_time_nigh_entry=True,
+        allow_prev_to_offi_time_max_entry=True,
     )
 
     # THEN

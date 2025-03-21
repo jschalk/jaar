@@ -319,7 +319,7 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     xc = FiscPrimeColumnsRef()
     agg_str = "agg"
     accord56_str = "accord56"
-    # accord56_offi_time_nigh = 77
+    # accord56_offi_time_max = 77
     accord56_fund_coin = 3
     accord56_penny = 2
     accord56_respect_bit = 55
@@ -351,7 +351,7 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     accord56_fiscunit = fisc_get_from_json(open_file(accord56_json_path))
     assert accord56_fiscunit
     assert accord56_fiscunit.fisc_title == accord56_str
-    # assert accord56_fiscunit.offi_time_nigh == accord56_offi_time_nigh
+    # assert accord56_fiscunit._offi_time_max == accord56_offi_time_max
     assert accord56_fiscunit.fund_coin == accord56_fund_coin
     assert accord56_fiscunit.penny == accord56_penny
     assert accord56_fiscunit.respect_bit == accord56_respect_bit
@@ -359,7 +359,7 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario1_IncludeNoneTimeLineUni
     default_fiscunit = fiscunit_shop(accord56_str)
     assert accord56_fiscunit.timeline == default_fiscunit.timeline
     assert accord56_fiscunit.fisc_title == accord56_str
-    # assert accord56_fiscunit.offi_time_nigh != default_fiscunit.offi_time_nigh
+    # assert accord56_fiscunit._offi_time_max != default_fiscunit._offi_time_max
     assert accord56_fiscunit.fund_coin != default_fiscunit.fund_coin
     assert accord56_fiscunit.penny != default_fiscunit.penny
     assert accord56_fiscunit.respect_bit != default_fiscunit.respect_bit
@@ -390,7 +390,7 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario2_PartialTimeLineUnitPar
         "",  # accord56_fund_coin,
         "",  # accord56_penny,
         "",  # accord56_respect_bit,
-        # "",  # accord56_offi_time_nigh,
+        # "",  # accord56_offi_time_max,
         "",  # accord56_bridge,
     ]
     fiscunit_rows = [accord56]

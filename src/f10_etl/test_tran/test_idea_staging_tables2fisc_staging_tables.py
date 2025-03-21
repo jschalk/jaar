@@ -33,7 +33,7 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fiscunit_str,
-    offi_time_nigh_str,
+    _offi_time_max_str,
     amount_str,
     hour_title_str,
     cumlative_minute_str,
@@ -111,7 +111,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -127,7 +127,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -193,7 +193,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -209,7 +209,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -240,7 +240,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario2_Idea_br00000_Table_Wi
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
-        offi_time_nigh_str(),
+        _offi_time_max_str(),
         bridge_str(),
         c400_number_str(),
         yr1_jan1_offset_str(),
@@ -279,7 +279,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -295,7 +295,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -379,7 +379,7 @@ VALUES
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
-            # a23_offi_time_nigh,  # offi_time_nigh
+            # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
             None,  # note
         )
@@ -395,7 +395,7 @@ VALUES
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
-            # a23_offi_time_nigh,  # offi_time_nigh
+            # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
             None,  # note
         )
@@ -946,7 +946,7 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
     a23_fund_coin = 11
     a23_penny = 22
     a23_respect_bit = 33
-    # a23_offi_time_nigh = 44
+    # a23_offi_time_max = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -1000,7 +1000,7 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
     a23_penny_1 = 22
     a23_penny_2 = 99
     a23_respect_bit = 33
-    # a23_offi_time_nigh = 44
+    # a23_offi_time_max = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66

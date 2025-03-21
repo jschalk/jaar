@@ -94,7 +94,7 @@ from src.f07_fisc.fisc_config import (
     weekday_title_str,
     weekday_order_str,
     offi_time_open_str,
-    offi_time_nigh_str,
+    _offi_time_max_str,
 )
 from src.f08_pidgin.pidgin_config import (
     pidginunit_str,
@@ -195,7 +195,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[3] == fisc_title_str()
     assert table_sorting_priority[4] == timeline_title_str()
     assert table_sorting_priority[5] == offi_time_open_str()
-    assert table_sorting_priority[6] == offi_time_nigh_str()
+    assert table_sorting_priority[6] == _offi_time_max_str()
     assert table_sorting_priority[7] == c400_number_str()
     assert table_sorting_priority[8] == yr1_jan1_offset_str()
     assert table_sorting_priority[9] == monthday_distortion_str()
@@ -288,7 +288,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add("error_message")
     all_args.add(f"{base_str()}_EXCISE")
     all_args.add(offi_time_open_str())  # TODO delete this line
-    all_args.add(offi_time_nigh_str())  # TODO delete this line
+    all_args.add(_offi_time_max_str())  # TODO delete this line
     assert all_args == set(table_sorting_priority)
 
 
@@ -315,7 +315,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(awardee_tag_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_open_str()) == "INTEGER"
-    assert sqlite_types.get(offi_time_nigh_str()) == "INTEGER"
+    assert sqlite_types.get(_offi_time_max_str()) == "INTEGER"
     assert sqlite_types.get(time_int_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"
     assert sqlite_types.get(close_str()) == "REAL"

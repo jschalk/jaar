@@ -308,7 +308,7 @@ def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
             time_int=row["time_int"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
-            allow_prev_to_offi_time_nigh_entry=True,
+            allow_prev_to_offi_time_max_entry=True,
         )
 
 

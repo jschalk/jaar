@@ -216,7 +216,7 @@ def create_fiscunit_jsons_from_prime_files(fisc_mstr_dir: str):
             fisc_title=x_fisc_title,
             fisc_mstr_dir=fisc_mstr_dir,
             timeline=fisc_timelineunit,
-            # offi_time_nigh=if_nan_return_None(fisc_attrs.get("offi_time_nigh")),
+            # _offi_time_max=if_nan_return_None(fisc_attrs.get("_offi_time_max")),
             bridge=fisc_attrs.get("bridge"),
             fund_coin=if_nan_return_None(fisc_attrs.get("fund_coin")),
             penny=if_nan_return_None(fisc_attrs.get("penny")),

@@ -12,7 +12,7 @@ from src.f04_gift.atom_config import (
     penny_str,
     respect_bit_str,
 )
-from src.f07_fisc.fisc_config import offi_time_nigh_str
+from src.f07_fisc.fisc_config import _offi_time_max_str
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeObjsRef,
     FiscPrimeColumnsRef,
@@ -65,7 +65,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -77,7 +77,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            # None,  # offi_time_nigh
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset

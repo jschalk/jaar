@@ -5,8 +5,9 @@ from pytest import raises as pytest_raises
 
 def test_FiscUnit_set_cashpurchase_SetsAttr():
     # ESTABLISH
-    t6606_offi_time_nigh = 6606
-    x_fisc = fiscunit_shop(offi_time_nigh=t6606_offi_time_nigh)
+    t6606_offi_time_max = 6606
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -23,8 +24,9 @@ def test_FiscUnit_set_cashpurchase_SetsAttr():
 
 def test_FiscUnit_add_cashpurchase_SetsAttr():
     # ESTABLISH
-    t6606_offi_time_nigh = 6606
-    x_fisc = fiscunit_shop(offi_time_nigh=t6606_offi_time_nigh)
+    t6606_offi_time_max = 6606
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -38,18 +40,19 @@ def test_FiscUnit_add_cashpurchase_SetsAttr():
     assert x_fisc.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanOrEqual_offi_time_nigh():
+def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThanOrEqual_offi_time_max():
     # ESTABLISH
-    t6606_offi_time_nigh = 6606
-    x_fisc = fiscunit_shop(offi_time_nigh=t6606_offi_time_nigh)
+    t6606_offi_time_max = 6606
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert x_fisc.offi_time_nigh == t6606_offi_time_nigh
+    assert x_fisc._offi_time_max == t6606_offi_time_max
     assert sue_bob_t55_tranunit.time_int == t55_t
-    assert sue_bob_t55_tranunit.time_int < x_fisc.offi_time_nigh
+    assert sue_bob_t55_tranunit.time_int < x_fisc._offi_time_max
 
     # WHEN
     x_fisc.set_cashpurchase(sue_bob_t55_tranunit)
@@ -64,28 +67,30 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_time_int_GreaterThan
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_fisc.set_cashpurchase(sue_bob_t77_tranunit)
-    exception_str = f"Cannot set tranunit for time_int={t77_t}, timelinepoint is greater than current time={t6606_offi_time_nigh}"
+    exception_str = f"Cannot set tranunit for time_int={t77_t}, timelinepoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
-    sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_offi_time_nigh, t77_amount)
+    sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_offi_time_max, t77_amount)
     with pytest_raises(Exception) as excinfo:
         x_fisc.set_cashpurchase(sue_bob_t6606)
-    exception_str = f"Cannot set tranunit for time_int={t6606_offi_time_nigh}, timelinepoint is greater than current time={t6606_offi_time_nigh}"
+    exception_str = f"Cannot set tranunit for time_int={t6606_offi_time_max}, timelinepoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
 
 def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_time_int():
     # ESTABLISH
-    x_fisc = fiscunit_shop(offi_time_nigh=0)
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = 0
+    x_fisc._offi_time_max = 0
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_quota = 100
     x_fisc.add_dealunit("yao", t55_t, t55_quota)
     t55_amount = 37
-    t6606_offi_time_nigh = 6606
-    x_fisc.offi_time_nigh = t6606_offi_time_nigh
+    t6606_offi_time_max = 6606
+    x_fisc._offi_time_max = t6606_offi_time_max
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
 
     # WHEN / THEN
@@ -99,7 +104,8 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_time_int():
 
 def test_FiscUnit_cashpurchase_exists_ReturnsObj():
     # ESTABLISH
-    x_fisc = fiscunit_shop(offi_time_nigh=6606)
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -115,7 +121,8 @@ def test_FiscUnit_cashpurchase_exists_ReturnsObj():
 
 def test_FiscUnit_get_cashpurchase_ReturnsObj():
     # ESTABLISH
-    x_fisc = fiscunit_shop(offi_time_nigh=6606)
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -134,7 +141,8 @@ def test_FiscUnit_get_cashpurchase_ReturnsObj():
 
 def test_FiscUnit_del_cashpurchase_SetsAttr():
     # ESTABLISH
-    x_fisc = fiscunit_shop(offi_time_nigh=6606)
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -149,50 +157,53 @@ def test_FiscUnit_del_cashpurchase_SetsAttr():
     assert x_fisc.cashpurchase_exists(sue_str, bob_str, t55_t) is False
 
 
-def test_FiscUnit_set_offi_time_nigh_SetsAttr():
+def test_FiscUnit_set_offi_time_max_SetsAttr():
     # ESTABLISH
-    t6606_offi_time_nigh = 6606
-    x_fisc = fiscunit_shop(offi_time_nigh=t6606_offi_time_nigh)
+    t6606_offi_time_max = 6606
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t22_t = 2202
     t22_amount = 27
     x_fisc.set_cashpurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
-    assert x_fisc.offi_time_nigh == t6606_offi_time_nigh
+    assert x_fisc._offi_time_max == t6606_offi_time_max
 
     # WHEN
-    t4404_offi_time_nigh = 4404
-    x_fisc.set_offi_time_nigh(t4404_offi_time_nigh)
+    t4404_offi_time_max = 4404
+    x_fisc.set_offi_time_max(t4404_offi_time_max)
 
     # THEN
-    assert x_fisc.offi_time_nigh == t4404_offi_time_nigh
+    assert x_fisc._offi_time_max == t4404_offi_time_max
 
 
-def test_FiscUnit_set_offi_time_nigh_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_int():
+def test_FiscUnit_set_offi_time_max_RaisesErrorWhen_cashpurchase_ExistsWithGreatertime_int():
     # ESTABLISH
-    t6606_offi_time_nigh = 6606
-    x_fisc = fiscunit_shop(offi_time_nigh=t6606_offi_time_nigh)
+    t6606_offi_time_max = 6606
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
     x_fisc.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_fisc.offi_time_nigh == t6606_offi_time_nigh
+    assert x_fisc._offi_time_max == t6606_offi_time_max
 
     # WHEN / THEN
-    t4404_offi_time_nigh = 4404
+    t4404_offi_time_max = 4404
     with pytest_raises(Exception) as excinfo:
-        x_fisc.set_offi_time_nigh(t4404_offi_time_nigh)
-    exception_str = f"Cannot set offi_time_nigh {t4404_offi_time_nigh}, cashpurchase with greater time_int exists"
+        x_fisc.set_offi_time_max(t4404_offi_time_max)
+    exception_str = f"Cannot set _offi_time_max {t4404_offi_time_max}, cashpurchase with greater time_int exists"
     assert str(excinfo.value) == exception_str
 
     # THEN
-    assert x_fisc.offi_time_nigh == t6606_offi_time_nigh
+    assert x_fisc._offi_time_max == t6606_offi_time_max
 
 
 def test_FiscUnit_set_all_tranbook_SetsAttr():
     # ESTABLISH
-    x_fisc = fiscunit_shop(offi_time_nigh=10101)
+    x_fisc = fiscunit_shop()
+    x_fisc._offi_time_max = 10101
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
