@@ -351,7 +351,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
 
 
 def test_insert_csv_ChangesDBState(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test the insert_csv function using pytest."""
     # ESTABLISH
@@ -377,7 +377,7 @@ def test_insert_csv_ChangesDBState(
 
 
 def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test the insert_csv function using pytest."""
     # ESTABLISH
@@ -401,7 +401,7 @@ def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
 
 
 def test_insert_csv_ChangesNotCommitted(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test that changes are committed to the database."""
     conn, test_table, test_csv = setup_database_and_csv
@@ -413,18 +413,17 @@ def test_insert_csv_ChangesNotCommitted(
     conn.close()
     conn = sqlite3_connect("test_database.db")
 
-    # Verify the data is still present
+    # Verify no data committed
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM {test_table}")
     rows = cursor.fetchall()
     conn.close()
-
     # Expected data
     assert rows == []
 
 
 def test_create_table_from_csv_ChangesDBState(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test the create_table_from_csv_with_types function."""
     conn, test_table, test_csv_filepath = setup_database_and_csv
@@ -459,7 +458,7 @@ def test_create_table_from_csv_ChangesDBState(
 
 
 def test_create_idea_table_from_csv_DoesNothingIfTableExists(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH
     conn, test_table, test_csv_filepath = setup_database_and_csv
@@ -536,7 +535,7 @@ def test_sqlite_version():
 
 
 def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test the create_table_from_csv_with_types function."""
     conn, test_table, test_csv_filepath = setup_database_and_csv
@@ -548,7 +547,7 @@ def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist(
 
 
 def test_get_table_columns_ReturnsObj_Scenario1_TableExists(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     conn, test_table, test_csv_filepath = setup_database_and_csv
     x_tablename = "something_dark_side_table"
@@ -559,7 +558,7 @@ def test_get_table_columns_ReturnsObj_Scenario1_TableExists(
 
 
 def test_get_table_columns_ReturnsObj_Scenario2_TableExists_PassCursorObj(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     conn, test_table, test_csv_filepath = setup_database_and_csv
     x_tablename = "something_dark_side_table"

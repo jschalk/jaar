@@ -7,7 +7,7 @@ class InvalidRoadUnitException(Exception):
 
 
 class TitleUnit(str):
-    """A string presentation of a tree node. Nodes cannot contain RoadUnit bridge"""
+    """A string representation of a tree node. Nodes cannot contain RoadUnit bridge"""
 
     def is_title(self, bridge: str = None) -> bool:
         return len(self) > 0 and self.contains_bridge(bridge)
@@ -55,13 +55,13 @@ class TimeLineTitle(TitleUnit):
 
 
 class RoadUnit(str):
-    """A string presentation of a tree path. TitleUnits are seperated by road bridge"""
+    """A string representation of a tree path. TitleUnits are seperated by road bridge"""
 
     pass
 
 
 class DoarUnit(str):
-    """DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. TitleUnits are seperated by road bridge."""
+    """DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TitleUnits are seperated by road bridge."""
 
     pass
 

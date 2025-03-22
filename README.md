@@ -85,9 +85,8 @@ BudUnit ItemUnit FactHeir objects1
 
 ## 1.3 Test-Driven-Development
 
-Jaar was developed using Test-Driven-Development so every feature should have a test
-that could represent an example. Tests can be hard to comprehend. Some tests have many 
-variables and can be hard to follow.
+Jaar was developed using Test-Driven-Development so every feature should have a test. 
+Tests can be hard to comprehend. Some tests have many variables and can be hard to follow.
 
 <!-- TODO: Add examples 
 Should examples be in a separate repository to ensure the `jaar` repository stays 
