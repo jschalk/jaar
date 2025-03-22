@@ -1,7 +1,8 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.deal import (
     quota_str,
-    time_int_str,
+    deal_time_str,
+    tran_time_str,
     bridge_str,
     celldepth_str,
     owner_name_str,
@@ -181,7 +182,7 @@ def test_get_fisc_args_dimen_mapping_ReturnsObj():
     assert fisc_timeline_hour_str() in fisc_title_dimens
     assert fiscunit_str() in fisc_title_dimens
     assert len(fisc_title_dimens) == 6
-    assert len(x_fisc_args_dimen_mapping) == 21
+    assert len(x_fisc_args_dimen_mapping) == 22
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -232,7 +233,7 @@ def test_get_fisc_args_set_ReturnsObj():
     mapping_args_set = set(get_fisc_args_dimen_mapping().keys())
     print(f"{mapping_args_set=}")
     assert fisc_args_set == mapping_args_set
-    assert len(fisc_args_set) == 21
+    assert len(fisc_args_set) == 22
     expected_fisc_args_set = {
         acct_name_str(),
         amount_str(),
@@ -250,7 +251,8 @@ def test_get_fisc_args_set_ReturnsObj():
         quota_str(),
         celldepth_str(),
         respect_bit_str(),
-        time_int_str(),
+        deal_time_str(),
+        tran_time_str(),
         # offi_time_open_str(),
         # _offi_time_max_str(),
         timeline_title_str(),

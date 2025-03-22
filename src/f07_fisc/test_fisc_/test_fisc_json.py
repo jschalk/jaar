@@ -33,23 +33,23 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     accord_offi_time_max_int = 23
     bob_str = "Bob"
-    bob_x0_time_int = 702
+    bob_x0_tran_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_time_int = 404
+    sue_x4_tran_time = 404
     sue_x4_quota = 55
-    sue_x7_time_int = 505
+    sue_x7_tran_time = 505
     sue_x7_quota = 66
-    cash_time_int = 15
+    cash_tran_time = 15
     bob_sue_amount = 30000
     accord_fisc.set_offi_time_max(accord_offi_time_max_int)
-    accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
+    accord_fisc.add_dealunit(bob_str, bob_x0_tran_time, bob_x0_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x4_tran_time, sue_x4_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x7_tran_time, sue_x7_quota)
     accord_fisc.add_cashpurchase(
         owner_name=bob_str,
         acct_name=sue_str,
-        time_int=cash_time_int,
+        tran_time=cash_tran_time,
         amount=bob_sue_amount,
     )
 
@@ -106,16 +106,16 @@ def test_FiscUnit_get_json_ReturnsObj():
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
     bob_str = "Bob"
-    bob_x0_time_int = 702
+    bob_x0_deal_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_time_int = 4
+    sue_x4_deal_time = 4
     sue_x4_quota = 55
-    sue_x7_time_int = 7
+    sue_x7_deal_time = 7
     sue_x7_quota = 66
-    accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
+    accord_fisc.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
 
     # WHEN
     x_json = accord_fisc.get_json()
@@ -137,18 +137,18 @@ def test_get_from_dict_ReturnsFiscUnit():
     sue_respect_bit = 0.5
     sue_penny = 0.8
     bob_str = "Bob"
-    bob_x0_time_int = 702
+    bob_x0_deal_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_time_int = 4
+    sue_x4_deal_time = 4
     sue_x4_quota = 55
-    sue_x7_time_int = 7
+    sue_x7_deal_time = 7
     sue_x7_quota = 66
-    cash_time_int = 15
+    cash_tran_time = 15
     bob_sue_amount = 30000
-    accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
+    accord_fisc.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
     accord_fisc.bridge = sue_bridge
     accord_fisc.fund_coin = sue_fund_coin
     accord_fisc.respect_bit = sue_respect_bit
@@ -156,7 +156,7 @@ def test_get_from_dict_ReturnsFiscUnit():
     accord_fisc.add_cashpurchase(
         owner_name=bob_str,
         acct_name=sue_str,
-        time_int=cash_time_int,
+        tran_time=cash_tran_time,
         amount=bob_sue_amount,
     )
     x_dict = accord_fisc.get_dict()
@@ -191,16 +191,16 @@ def test_get_from_json_ReturnsFiscUnit():
     sue_respect_bit = 0.5
     sue_penny = 0.8
     bob_str = "Bob"
-    bob_x0_time_int = 702
+    bob_x0_deal_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_time_int = 4
+    sue_x4_deal_time = 4
     sue_x4_quota = 55
-    sue_x7_time_int = 7
+    sue_x7_deal_time = 7
     sue_x7_quota = 66
-    accord_fisc.add_dealunit(bob_str, bob_x0_time_int, bob_x0_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x4_time_int, sue_x4_quota)
-    accord_fisc.add_dealunit(sue_str, sue_x7_time_int, sue_x7_quota)
+    accord_fisc.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
+    accord_fisc.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
     accord_fisc.bridge = sue_bridge
     accord_fisc.fund_coin = sue_fund_coin
     accord_fisc.respect_bit = sue_respect_bit

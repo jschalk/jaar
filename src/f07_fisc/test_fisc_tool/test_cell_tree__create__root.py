@@ -124,7 +124,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEve
     assert cell_dict.get(quota_str()) == deal1_quota
 
 
-def test_FiscUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
+def test_FiscUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_deal_time_event_int(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -251,7 +251,7 @@
       "face_name": {},
       "fisc_title": {},
       "owner_name": {},
-      "time_int": {}
+      "tran_time": {}
     },
     "jvalues": {
       "amount": {}
@@ -266,7 +266,7 @@
       "face_name": {},
       "fisc_title": {},
       "owner_name": {},
-      "time_int": {}
+      "deal_time": {}
     },
     "jvalues": {
       "quota": {},

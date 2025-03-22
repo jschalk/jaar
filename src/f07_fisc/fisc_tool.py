@@ -40,21 +40,21 @@ def create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_title):
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
-        for time_int in get_level1_dirs(deals_dir):
-            create_cell_tree(fisc_mstr_dir, fisc_title, owner_name, time_int)
+        for deal_time in get_level1_dirs(deals_dir):
+            create_cell_tree(fisc_mstr_dir, fisc_title, owner_name, deal_time)
 
 
-def create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
+def create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, deal_time):
     root_cell_json_path = create_cell_json_path(
-        fisc_mstr_dir, fisc_title, deal_owner_name, time_int
+        fisc_mstr_dir, fisc_title, deal_owner_name, deal_time
     )
     if os_path_exists(root_cell_json_path):
-        _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int)
+        _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, deal_time)
 
 
-def _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_int):
+def _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, deal_time):
     root_cell_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_title, deal_owner_name, time_int, []
+        fisc_mstr_dir, fisc_title, deal_owner_name, deal_time, []
     )
     cells_to_evaluate = [cellunit_get_from_dir(root_cell_dir)]
     owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
@@ -68,7 +68,7 @@ def _exists_create_cell_tree(fisc_mstr_dir, fisc_title, deal_owner_name, time_in
             fisc_mstr_dir,
             fisc_title,
             deal_owner_name,
-            time_int,
+            deal_time,
             parent_cell.ancestors,
         )
         cellunit_save_to_dir(parent_cell_dir, parent_cell)
@@ -102,8 +102,8 @@ def load_cells_budevent(fisc_mstr_dir: str, fisc_title: TitleUnit):
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
-        for time_int in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, time_int)
+        for deal_time in get_level1_dirs(deals_dir):
+            deal_time_dir = create_path(deals_dir, deal_time)
             for dirpath, dirnames, filenames in os_walk(deal_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
                     _load_cell_budevent(fisc_mstr_dir, fisc_title, dirpath)
@@ -125,8 +125,8 @@ def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_title: TitleUnit):
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
-        for time_int in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, time_int)
+        for deal_time in get_level1_dirs(deals_dir):
+            deal_time_dir = create_path(deals_dir, deal_time)
             cell_dirs = [
                 dirpath
                 for dirpath, dirnames, filenames in os_walk(deal_time_dir)
@@ -163,10 +163,10 @@ def set_cell_trees_decrees(fisc_mstr_dir: str, fisc_title: str):
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
-        for time_int in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, time_int)
+        for deal_time in get_level1_dirs(deals_dir):
+            deal_time_dir = create_path(deals_dir, deal_time)
             set_cell_tree_decrees(
-                fisc_mstr_dir, fisc_title, owner_name, time_int, deal_time_dir
+                fisc_mstr_dir, fisc_title, owner_name, deal_time, deal_time_dir
             )
 
 
@@ -191,7 +191,7 @@ def set_cell_tree_decrees(
     mstr_dir: str,
     fisc_title: FiscTitle,
     owner_name: OwnerName,
-    time_int: TimeLinePoint,
+    deal_time: TimeLinePoint,
     deal_time_dir: str,
 ):
     # clear all current child directorys
@@ -205,7 +205,9 @@ def set_cell_tree_decrees(
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
     root_cell = cellunit_get_from_dir(deal_time_dir)
-    root_cell_dir = create_cell_dir_path(mstr_dir, fisc_title, owner_name, time_int, [])
+    root_cell_dir = create_cell_dir_path(
+        mstr_dir, fisc_title, owner_name, deal_time, []
+    )
     root_decree = DecreeUnit(
         parent_cell_dir=None,
         cell_dir=root_cell_dir,
@@ -235,7 +237,7 @@ def set_cell_tree_decrees(
                     mstr_dir=mstr_dir,
                     fisc_title=fisc_title,
                     owner_name=owner_name,
-                    time_int=time_int,
+                    deal_time=deal_time,
                 )
 
 
@@ -246,12 +248,12 @@ def _add_child_decrees(
     mstr_dir,
     fisc_title: str,
     owner_name: str,
-    time_int: int,
+    deal_time: int,
 ):
     for child_owner_name, child_mandate in x_cell._acct_mandate_ledger.items():
         child_cell_ancestors = x_decree.get_child_cell_ancestors(child_owner_name)
         child_dir = create_cell_dir_path(
-            mstr_dir, fisc_title, owner_name, time_int, child_cell_ancestors
+            mstr_dir, fisc_title, owner_name, deal_time, child_cell_ancestors
         )
         child_decreeunit = DecreeUnit(
             parent_cell_dir=x_decree.cell_dir,
@@ -307,8 +309,8 @@ def set_cell_tree_cell_mandates(fisc_mstr_dir: str, fisc_title: str):
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
-        for time_int in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, time_int)
+        for deal_time in get_level1_dirs(deals_dir):
+            deal_time_dir = create_path(deals_dir, deal_time)
             for dirpath, dirnames, filenames in os_walk(deal_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
                     create_cell_acct_mandate_ledger_json(dirpath)
@@ -323,7 +325,7 @@ def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_title: str):
                 fisc_mstr_dir,
                 fisc_title,
                 owner_name=brokerunit.owner_name,
-                time_int=dealunit.time_int,
+                deal_time=dealunit.deal_time,
             )
             deal_acct_mandate_ledger = allot_nested_scale(
                 deal_root_dir,

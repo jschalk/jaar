@@ -889,7 +889,7 @@ def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_fisc_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    empty_ote1_csv_str = """fisc_title,owner_name,event_int,time_int,error_message
+    empty_ote1_csv_str = """fisc_title,owner_name,event_int,deal_time,error_message
 """
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
@@ -910,11 +910,11 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         for row in csv_arrays:
             owner_name = row[1]
             event_int = row[2]
-            time_int = row[3]
+            deal_time = row[3]
             if x_dict.get(owner_name) is None:
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
-            owner_dict[int(time_int)] = event_int
+            owner_dict[int(deal_time)] = event_int
         json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_title)
         save_json(json_path, None, x_dict)
 

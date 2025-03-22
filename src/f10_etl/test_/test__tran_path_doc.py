@@ -1,4 +1,4 @@
-from src.f01_road.deal import owner_name_str, time_int_str, fisc_title_str
+from src.f01_road.deal import owner_name_str, deal_time_str, fisc_title_str
 from src.f04_gift.atom_config import event_int_str, face_name_str
 from src.f10_etl.tran_path import (
     create_cart_events_path,

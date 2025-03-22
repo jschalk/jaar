@@ -394,34 +394,34 @@ class HubUnit:
         return self.get_voice_bud()
 
     # Deal methods
-    def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self._deals_dir, str(x_time_int))
+    def timepoint_dir(self, x_deal_time: TimeLinePoint) -> str:
+        return f_path(self._deals_dir, str(x_deal_time))
 
     def deal_filename(self) -> str:
         return "dealunit.json"
 
-    def deal_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.deal_filename())
+    def deal_file_path(self, x_deal_time: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_deal_time), self.deal_filename())
 
     def _save_valid_deal_file(self, x_deal: DealUnit):
         x_deal.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_deal.time_int),
+            self.timepoint_dir(x_deal.deal_time),
             self.deal_filename(),
             x_deal.get_json(),
             replace=True,
         )
 
-    def deal_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.deal_file_path(x_time_int))
+    def deal_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
+        return os_path_exists(self.deal_file_path(x_deal_time))
 
-    def get_deal_file(self, x_time_int: TimeLinePoint) -> DealUnit:
-        if self.deal_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.deal_filename())
+    def get_deal_file(self, x_deal_time: TimeLinePoint) -> DealUnit:
+        if self.deal_file_exists(x_deal_time):
+            x_json = open_file(self.timepoint_dir(x_deal_time), self.deal_filename())
             return get_dealunit_from_json(x_json)
 
-    def delete_deal_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.deal_file_path(x_time_int))
+    def delete_deal_file(self, x_deal_time: TimeLinePoint):
+        delete_dir(self.deal_file_path(x_deal_time))
 
     def get_brokerunit(self) -> BrokerUnit:
         x_brokerunit = brokerunit_shop(self.owner_name)
@@ -440,46 +440,48 @@ class HubUnit:
     def budpoint_filename(self) -> str:
         return "budpoint.json"
 
-    def budpoint_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.budpoint_filename())
+    def budpoint_file_path(self, x_deal_time: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_deal_time), self.budpoint_filename())
 
-    def _save_valid_budpoint_file(self, x_time_int: TimeLinePoint, x_budpoint: BudUnit):
+    def _save_valid_budpoint_file(
+        self, x_deal_time: TimeLinePoint, x_budpoint: BudUnit
+    ):
         x_budpoint.settle_bud()
         if x_budpoint._rational is False:
             raise _save_valid_budpoint_Exception(
                 "BudPoint could not be saved BudUnit._rational is False"
             )
         save_file(
-            self.timepoint_dir(x_time_int),
+            self.timepoint_dir(x_deal_time),
             self.budpoint_filename(),
             x_budpoint.get_json(),
             replace=True,
         )
 
-    def budpoint_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.budpoint_file_path(x_time_int))
+    def budpoint_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
+        return os_path_exists(self.budpoint_file_path(x_deal_time))
 
-    def get_budpoint_file(self, x_time_int: TimeLinePoint) -> BudUnit:
-        if self.budpoint_file_exists(x_time_int):
-            timepoint_dir = self.timepoint_dir(x_time_int)
+    def get_budpoint_file(self, x_deal_time: TimeLinePoint) -> BudUnit:
+        if self.budpoint_file_exists(x_deal_time):
+            timepoint_dir = self.timepoint_dir(x_deal_time)
             file_content = open_file(timepoint_dir, self.budpoint_filename())
             return budunit_get_from_json(file_content)
 
-    def delete_budpoint_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.budpoint_file_path(x_time_int))
+    def delete_budpoint_file(self, x_deal_time: TimeLinePoint):
+        delete_dir(self.budpoint_file_path(x_deal_time))
 
-    def calc_timepoint_deal(self, x_time_int: TimeLinePoint):
-        if self.budpoint_file_exists(x_time_int) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_int} deals without saved BudPoint file"
+    def calc_timepoint_deal(self, x_deal_time: TimeLinePoint):
+        if self.budpoint_file_exists(x_deal_time) is False:
+            exception_str = f"Cannot calculate timepoint {x_deal_time} deals without saved BudPoint file"
             raise calc_timepoint_deal_Exception(exception_str)
-        x_budpoint = self.get_budpoint_file(x_time_int)
-        if self.deal_file_exists(x_time_int):
-            x_dealunit = self.get_deal_file(x_time_int)
+        x_budpoint = self.get_budpoint_file(x_deal_time)
+        if self.deal_file_exists(x_deal_time):
+            x_dealunit = self.get_deal_file(x_deal_time)
             x_budpoint.set_fund_pool(x_dealunit.quota)
         else:
-            x_dealunit = dealunit_shop(x_time_int)
+            x_dealunit = dealunit_shop(x_deal_time)
         x_dealunit._deal_acct_nets = get_acct_agenda_net_ledger(x_budpoint, True)
-        self._save_valid_budpoint_file(x_time_int, x_budpoint)
+        self._save_valid_budpoint_file(x_deal_time, x_budpoint)
         self._save_valid_deal_file(x_dealunit)
 
     def calc_timepoint_deals(self):

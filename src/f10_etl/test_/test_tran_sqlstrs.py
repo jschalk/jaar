@@ -784,7 +784,7 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
     assert idea_dimen_combo_checked_count == 624
-    assert idea_stage2dimen_count == 99
+    assert idea_stage2dimen_count == 98
     assert IDEA_STAGEABLE_PUT_DIMENS == expected_idea_stagable_dimens
 
 
@@ -859,7 +859,7 @@ def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
 CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
   fisc_title TEXT
 , event_int INTEGER
-, time_int INTEGER
+, agg_time INTEGER
 , error_message TEXT
 )
 ;
@@ -871,18 +871,18 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
-INSERT INTO fisc_event_time_agg (fisc_title, event_int, time_int)
-SELECT fisc_title, event_int, time_int
+INSERT INTO fisc_event_time_agg (fisc_title, event_int, agg_time)
+SELECT fisc_title, event_int, agg_time
 FROM (
-    SELECT fisc_title, event_int, time_int
+    SELECT fisc_title, event_int, tran_time as agg_time
     FROM fisc_cashbook_staging
-    GROUP BY fisc_title, event_int, time_int
+    GROUP BY fisc_title, event_int, tran_time
     UNION 
-    SELECT fisc_title, event_int, time_int
+    SELECT fisc_title, event_int, deal_time as agg_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, event_int, time_int
+    GROUP BY fisc_title, event_int, deal_time
 )
-ORDER BY fisc_title, event_int, time_int
+ORDER BY fisc_title, event_int, agg_time
 ;
 """
     # WHEN / THEN
@@ -893,20 +893,20 @@ def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = """
 WITH EventTimeOrdered AS (
-    SELECT fisc_title, event_int, time_int,
-           LAG(time_int) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_time_int
+    SELECT fisc_title, event_int, agg_time,
+           LAG(agg_time) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
 SET error_message = CASE 
-         WHEN EventTimeOrdered.prev_time_int > EventTimeOrdered.time_int
+         WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
     AND EventTimeOrdered.fisc_title = fisc_event_time_agg.fisc_title
-    AND EventTimeOrdered.time_int = fisc_event_time_agg.time_int
+    AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
     # WHEN / THEN
@@ -920,7 +920,7 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
   fisc_title TEXT
 , owner_name TEXT
 , event_int INTEGER
-, time_int INTEGER
+, deal_time INTEGER
 , error_message TEXT
 )
 ;
@@ -932,14 +932,14 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
-INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, time_int)
-SELECT fisc_title, owner_name, event_int, time_int
+INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, deal_time)
+SELECT fisc_title, owner_name, event_int, deal_time
 FROM (
-    SELECT fisc_title, owner_name, event_int, time_int
+    SELECT fisc_title, owner_name, event_int, deal_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, owner_name, event_int, time_int
+    GROUP BY fisc_title, owner_name, event_int, deal_time
 )
-ORDER BY fisc_title, owner_name, event_int, time_int
+ORDER BY fisc_title, owner_name, event_int, deal_time
 ;
 """
     # WHEN / THEN

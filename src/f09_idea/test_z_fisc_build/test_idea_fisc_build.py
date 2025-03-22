@@ -67,7 +67,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     )
     expected_accord23_fiscunit.add_dealunit(
         owner_name="Sue",
-        time_int=777,
+        deal_time=777,
         quota=445,
         allow_prev_to_offi_time_max_entry=True,
         celldepth=5,
@@ -75,7 +75,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     expected_accord23_fiscunit.add_cashpurchase(
         owner_name="Zia",
         acct_name="Bob",
-        time_int=777,
+        tran_time=777,
         amount=888,
     )
     gen_fiscunit = x_fiscunits.get(accord23_str)

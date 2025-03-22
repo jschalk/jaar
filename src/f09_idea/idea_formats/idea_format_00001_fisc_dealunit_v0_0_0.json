@@ -18,7 +18,7 @@
         "celldepth": {
             "otx_key": false
         },
-        "time_int": {
+        "deal_time": {
             "otx_key": true
         }
     },

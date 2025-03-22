@@ -68,39 +68,39 @@ def create_deals_dir_path(
 
 
 def create_deal_dir_path(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, deal_time: int
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time"""
     timeline_dir = create_deals_dir_path(fisc_mstr_dir, fisc_title, owner_name)
-    return create_path(timeline_dir, time_int)
+    return create_path(timeline_dir, deal_time)
 
 
 def create_dealunit_json_path(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, deal_time: int
 ) -> str:
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\dealunit.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time\\dealunit.json"""
     timepoint_dir = create_deal_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
+        fisc_mstr_dir, fisc_title, owner_name, deal_time
     )
     return create_path(timepoint_dir, "dealunit.json")
 
 
 def create_deal_acct_mandate_ledger_path(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, deal_time: int
 ) -> str:
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\deal_acct_mandate_ledger.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time\\deal_acct_mandate_ledger.json"""
     timepoint_dir = create_deal_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
+        fisc_mstr_dir, fisc_title, owner_name, deal_time
     )
     return create_path(timepoint_dir, "deal_acct_mandate_ledger.json")
 
 
 def create_budpoint_path(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, time_int: int
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, deal_time: int
 ) -> str:
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\budpoint.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time\\budpoint.json"""
     timepoint_dir = create_deal_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
+        fisc_mstr_dir, fisc_title, owner_name, deal_time
     )
     return create_path(timepoint_dir, "budpoint.json")
 
@@ -109,12 +109,12 @@ def create_cell_dir_path(
     fisc_mstr_dir: str,
     fisc_title: TitleUnit,
     owner_name: OwnerName,
-    time_int: int,
+    deal_time: int,
     deal_ancestors: list[OwnerName],
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time\\ledger_owner1\\ledger_owner2\\ledger_owner3"""
     deal_celldepth_dir = create_deal_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int
+        fisc_mstr_dir, fisc_title, owner_name, deal_time
     )
     if deal_ancestors is None:
         deal_ancestors = []
@@ -127,12 +127,12 @@ def create_cell_json_path(
     fisc_mstr_dir: str,
     fisc_title: TitleUnit,
     owner_name: OwnerName,
-    time_int: int,
+    deal_time: int,
     deal_ancestors: list[OwnerName] = None,
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell.json"""
     cell_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
+        fisc_mstr_dir, fisc_title, owner_name, deal_time, deal_ancestors
     )
     return create_path(cell_dir, "cell.json")
 
@@ -141,12 +141,12 @@ def create_cell_acct_mandate_ledger_path(
     fisc_mstr_dir: str,
     fisc_title: TitleUnit,
     owner_name: OwnerName,
-    time_int: int,
+    deal_time: int,
     deal_ancestors: list[OwnerName] = None,
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\time_int\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell_acct_mandate_ledger.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\deals\n\\deal_time\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell_acct_mandate_ledger.json"""
     cell_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_title, owner_name, time_int, deal_ancestors
+        fisc_mstr_dir, fisc_title, owner_name, deal_time, deal_ancestors
     )
     return create_path(cell_dir, "cell_acct_mandate_ledger.json")
 

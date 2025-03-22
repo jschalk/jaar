@@ -305,7 +305,7 @@ def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
     for index, row in br00001_df.query(query_str).iterrows():
         x_fiscunit.add_dealunit(
             owner_name=row["owner_name"],
-            time_int=row["time_int"],
+            deal_time=row["deal_time"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
             allow_prev_to_offi_time_max_entry=True,
@@ -318,6 +318,6 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
         x_fiscunit.add_cashpurchase(
             owner_name=row["owner_name"],
             acct_name=row["acct_name"],
-            time_int=row["time_int"],
+            tran_time=row["tran_time"],
             amount=row["amount"],
         )

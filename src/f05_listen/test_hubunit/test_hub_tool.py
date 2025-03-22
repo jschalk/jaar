@@ -364,7 +364,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_title=a23_str,
         time_owner_name=sue_str,
-        time_int=time7,
+        deal_time=time7,
         quota=quota500,
         event_int=event3,
         celldepth=celldepth4,

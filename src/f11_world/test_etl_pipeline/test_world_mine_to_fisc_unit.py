@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, count_dirs_files, delete_dir, s
 from src.f01_road.deal import (
     owner_name_str,
     fisc_title_str,
-    time_int_str,
+    deal_time_str,
     quota_str,
     celldepth_str,
 )
@@ -77,7 +77,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
         event_int_str(),
         fisc_title_str(),
         owner_name_str(),
-        time_int_str(),
+        deal_time_str(),
         quota_str(),
         celldepth_str(),
     ]

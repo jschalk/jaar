@@ -8,7 +8,7 @@ from src.f00_instrument.file import (
 from src.f01_road.deal import (
     owner_name_str,
     fisc_title_str,
-    time_int_str,
+    deal_time_str,
     quota_str,
     celldepth_str,
 )
@@ -155,7 +155,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #         event_int_str(),
 #         fisc_title_str(),
 #         owner_name_str(),
-#         time_int_str(),
+#         deal_time(),
 #         quota_str(),
 #         celldepth_str(),
 #     ]

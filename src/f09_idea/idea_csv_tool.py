@@ -135,13 +135,13 @@ def _add_dealunit_to_br00001_csv(
     event_int: int = None,
 ) -> str:
     for broker_owner_name, brokerunits in x_fisc.brokerunits.items():
-        for time_int, dealunit in brokerunits.deals.items():
+        for deal_time, dealunit in brokerunits.deals.items():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_fisc.fisc_title,
                 broker_owner_name,
-                str(time_int),
+                str(deal_time),
                 str(dealunit.quota),
                 str(dealunit.celldepth),
             ]
@@ -159,7 +159,7 @@ def _add_cashbook_to_br00002_csv(
 ) -> str:
     for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
         for acct_name, time_dict in tranunit.items():
-            for time_int, amount in time_dict.items():
+            for tran_time, amount in time_dict.items():
                 fisc_title = x_fisc.fisc_title
                 x_row = [
                     if_none_str(face_name),
@@ -167,7 +167,7 @@ def _add_cashbook_to_br00002_csv(
                     fisc_title,
                     owner_name,
                     acct_name,
-                    str(time_int),
+                    str(tran_time),
                     str(amount),
                 ]
                 x_csv += csv_delimiter.join(x_row)

@@ -1,5 +1,5 @@
 from src.f00_instrument.db_toolbox import get_row_count, db_table_exists
-from src.f01_road.deal import time_int_str, owner_name_str, fisc_title_str
+from src.f01_road.deal import deal_time_str, owner_name_str, fisc_title_str
 from src.f04_gift.atom_config import event_int_str
 from src.f10_etl.fisc_etl_tool import FiscPrimeObjsRef
 from src.f10_etl.transformers import create_fisc_tables
@@ -46,7 +46,7 @@ def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro1_SetsTableAttr():
 
         x_fisc = FiscPrimeObjsRef()
         insert_staging_sqlstr = f"""
-INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {time_int_str()})
+INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})

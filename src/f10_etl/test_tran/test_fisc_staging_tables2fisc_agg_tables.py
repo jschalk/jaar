@@ -374,10 +374,10 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_messa
     accord23_str = "accord23"
     accord45_str = "accord45"
     bob_inx = "Bobby"
-    t1_time_int = 33
+    t1_deal_time = 33
     t1_quota_1 = 200
     t1_quota_2 = 300
-    t2_time_int = 55
+    t2_deal_time = 55
     t2_quota = 400
     x_error_message = "Inconsistent fisc data"
     x_objs = FiscPrimeObjsRef()
@@ -389,12 +389,12 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_messa
         insert_staging_sqlstr = f"""
 INSERT INTO {x_objs.deal_stage_tablename} ({x_cols.deal_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_1},NULL,'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_time_int},{t1_quota_2},NULL,'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}',{t1_time_int},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_time_int},{t2_quota},NULL,NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_2},NULL,'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -410,9 +410,9 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.deal_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, bob_inx, t2_time_int, t2_quota, None)
-        expected_agg_row1 = (accord45_str, bob_inx, t1_time_int, t1_quota_1, None)
-        expected_agg_row2 = (accord45_str, bob_inx, t2_time_int, t2_quota, None)
+        expected_agg_row0 = (accord23_str, bob_inx, t2_deal_time, t2_quota, None)
+        expected_agg_row1 = (accord45_str, bob_inx, t1_deal_time, t1_quota_1, None)
+        expected_agg_row2 = (accord45_str, bob_inx, t2_deal_time, t2_quota, None)
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 
@@ -426,10 +426,10 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_messa
     accord45_str = "accord45"
     bob_inx = "Bobby"
     yao_inx = "Yao"
-    t1_time_int = 33
+    t1_tran_time = 33
     t1_amount_1 = 200
     t1_amount_2 = 300
-    t2_time_int = 55
+    t2_tran_time = 55
     t2_amount = 400
     x_error_message = "Inconsistent fisc data"
     x_objs = FiscPrimeObjsRef()
@@ -441,13 +441,13 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_messa
         insert_staging_sqlstr = f"""
 INSERT INTO {x_objs.cash_stage_tablename} ({x_cols.cash_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_amount_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_amount_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}','{yao_inx}',{t1_time_int},{t1_amount_1},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_time_int},NULL,NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_2},'{x_error_message}')
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -463,9 +463,9 @@ VALUES
         select_agg_sqlstr = f"SELECT {x_cols.cash_agg_csv_header} FROM {agg_tablename};"
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
-        expected_agg_row0 = (accord23_str, bob_inx, yao_inx, t2_time_int, t2_amount)
-        expected_agg_row1 = (accord45_str, bob_inx, yao_inx, t1_time_int, t1_amount_1)
-        expected_agg_row2 = (accord45_str, bob_inx, yao_inx, t2_time_int, t2_amount)
+        expected_agg_row0 = (accord23_str, bob_inx, yao_inx, t2_tran_time, t2_amount)
+        expected_agg_row1 = (accord45_str, bob_inx, yao_inx, t1_tran_time, t1_amount_1)
+        expected_agg_row2 = (accord45_str, bob_inx, yao_inx, t2_tran_time, t2_amount)
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 

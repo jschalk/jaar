@@ -10,7 +10,7 @@
             "owner_name": {
                 "class_type": "NameUnit"
             },
-            "time_int": {
+            "tran_time": {
                 "class_type": "TimeLinePoint"
             }
         },
@@ -29,7 +29,7 @@
             "owner_name": {
                 "class_type": "NameUnit"
             },
-            "time_int": {
+            "deal_time": {
                 "class_type": "TimeLinePoint"
             }
         },

@@ -1,6 +1,6 @@
 from src.f00_instrument.db_toolbox import get_row_count
 from src.f00_instrument.file import open_file, set_dir
-from src.f01_road.deal import time_int_str, owner_name_str, fisc_title_str
+from src.f01_road.deal import deal_time_str, owner_name_str, fisc_title_str
 from src.f04_gift.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_dir_path,
@@ -36,7 +36,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
         etl_fisc_agg_tables2fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_staging_sqlstr = f"""
-INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {time_int_str()})
+INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord45_str}', '{sue_str}', {timepoint55})
@@ -61,16 +61,16 @@ VALUES
     # a45_event_time_csv = open_csv_with_types(a45_event_time_p, idea_types)
     a23_event_time_csv = open_file(a23_event_time_p)
     a45_event_time_csv = open_file(a45_event_time_p)
-    #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {time_int_str()}
+    #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {deal_time_str()}
     #   '{accord23_str}', '{bob_str}', {event3}, {timepoint55}, NULL)
     # , '{accord45_str}', '{sue_str}', {event3}, {timepoint55}, NULL)
     # , '{accord45_str}', '{sue_str}', {event7}, {timepoint66}, NULL)
     # ;
     # """
-    expected_a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+    expected_a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord23_str},{bob_str},{event3},{timepoint55},
 """
-    expected_a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+    expected_a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord45_str},{sue_str},{event3},{timepoint55},
 {accord45_str},{sue_str},{event7},{timepoint66},
 """
@@ -97,7 +97,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro2_ote1_agg_TableIsEmpty(
         etl_fisc_agg_tables2fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_staging_sqlstr = f"""
-INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {time_int_str()})
+INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 ;
@@ -120,16 +120,16 @@ VALUES
     # a45_event_time_csv = open_csv_with_types(a45_event_time_p, idea_types)
     a23_event_time_csv = open_file(a23_event_time_p)
     a45_event_time_csv = open_file(a45_event_time_p)
-    #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {time_int_str()}
+    #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_title_str()}, {owner_name_str()}, agg_time
     #   '{accord23_str}', '{bob_str}', {event3}, {timepoint55}, NULL)
     # , '{accord45_str}', '{sue_str}', {event3}, {timepoint55}, NULL)
     # , '{accord45_str}', '{sue_str}', {event7}, {timepoint66}, NULL)
     # ;
     # """
-    expected_a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+    expected_a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord23_str},{bob_str},{event3},{timepoint55},
 """
-    expected_a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+    expected_a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 """
     assert a23_event_time_csv == expected_a23_event_time_csv
     assert a45_event_time_csv == expected_a45_event_time_csv

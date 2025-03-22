@@ -150,10 +150,10 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
 #         ]
 #     )
 #     expected_br1_columns.extend(
-#         [owner_name_str(), acct_name_str(), time_int_str(), quota_str()]
+#         [owner_name_str(), acct_name_str(), deal_time_str(), quota_str()]
 #     )
 #     expected_br2_columns.extend(
-#         [owner_name_str(), acct_name_str(), time_int_str(), amount_str()]
+#         [owner_name_str(), acct_name_str(), tran_time_str(), amount_str()]
 #     )
 #     expected_br3_columns.extend([hour_title_str(), cumlative_minute_str()])
 #     expected_br4_columns.extend([month_title_str(), cumlative_day_str()])

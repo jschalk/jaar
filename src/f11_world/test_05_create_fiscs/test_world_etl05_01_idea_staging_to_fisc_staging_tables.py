@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
-from src.f01_road.deal import time_int_str, owner_name_str, fisc_title_str
+from src.f01_road.deal import deal_time_str, owner_name_str, fisc_title_str
 from src.f04_gift.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f09_idea.idea_db_tool import get_pragma_table_fetchall
 from src.f10_etl.tran_sqlstrs import create_fisc_tables
@@ -164,10 +164,10 @@ def test_WorldUnit_set_idea_staging_error_message_ChangeAttrs(env_dir_setup_clea
     accord23_str = "accord23"
     accord45_str = "accord45"
     a23_owner_name = bob_inx
-    t1_time_int = 33
+    t1_deal_time = 33
     t1_quota_1 = 200
     t1_quota_2 = 300
-    t2_time_int = 55
+    t2_deal_time = 55
     t2_quota = 400
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
@@ -181,28 +181,28 @@ def test_WorldUnit_set_idea_staging_error_message_ChangeAttrs(env_dir_setup_clea
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_2},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL,NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         # print(f"{select_sqlstr=}")
         rows = cursor.fetchall()
         # print(f"{rows=}")
         assert rows == [
-            (event3, accord23_str, t1_time_int, None),
-            (event7, accord23_str, t1_time_int, None),
-            (event7, accord23_str, t2_time_int, None),
-            (event7, accord45_str, t1_time_int, None),
-            (event7, accord45_str, t2_time_int, None),
+            (event3, accord23_str, t1_deal_time, None),
+            (event7, accord23_str, t1_deal_time, None),
+            (event7, accord23_str, t2_deal_time, None),
+            (event7, accord45_str, t1_deal_time, None),
+            (event7, accord45_str, t2_deal_time, None),
         ]
 
         # WHEN
@@ -214,9 +214,9 @@ VALUES
         print(f"{rows=}")
         x_error_message = "Inconsistent fisc data"
         assert rows == [
-            (event3, accord23_str, t1_time_int, x_error_message),
-            (event7, accord23_str, t1_time_int, x_error_message),
-            (event7, accord23_str, t2_time_int, None),
-            (event7, accord45_str, t1_time_int, None),
-            (event7, accord45_str, t2_time_int, None),
+            (event3, accord23_str, t1_deal_time, x_error_message),
+            (event7, accord23_str, t1_deal_time, x_error_message),
+            (event7, accord23_str, t2_deal_time, None),
+            (event7, accord45_str, t1_deal_time, None),
+            (event7, accord45_str, t2_deal_time, None),
         ]
