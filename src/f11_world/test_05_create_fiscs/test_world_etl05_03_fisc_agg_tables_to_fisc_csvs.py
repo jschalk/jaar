@@ -139,7 +139,6 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
 #     expected_br0_columns.extend(
 #         [
 #             c400_number_str(),
-#             _offi_time_max_str(),
 #             fund_coin_str(),
 #             monthday_distortion_str(),
 #             penny_str(),

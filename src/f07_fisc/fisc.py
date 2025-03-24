@@ -7,6 +7,7 @@ from src.f00_instrument.file import (
 )
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
+    get_empty_set_if_None,
     get_dict_from_json,
     get_json_from_dict,
 )
@@ -90,6 +91,7 @@ class FiscUnit:
     timeline: TimeLineUnit = None
     brokerunits: dict[OwnerName, BrokerUnit] = None
     cashbook: TranBook = None
+    offi_times: set[TimeLinePoint] = None
     bridge: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
@@ -310,6 +312,7 @@ class FiscUnit:
             "brokerunits": self._get_brokerunits_dict(),
             "respect_bit": self.respect_bit,
             "timeline": self.timeline.get_dict(),
+            "offi_times": list(self.offi_times),
         }
         if include_cashbook:
             x_dict["cashbook"] = self.cashbook.get_dict()
@@ -369,25 +372,25 @@ class FiscUnit:
     ):
         return self.cashbook.del_tranunit(src, dst, x_tran_time)
 
-    # def set_offi_time_open(self, offi_time_open: TimeLinePoint):
-    #     self.offi_time_open = offi_time_open
-    #     if self._offi_time_max < self.offi_time_open:
-    #         self._offi_time_max = self.offi_time_open
+    # def set_offi_time(self, offi_time: TimeLinePoint):
+    #     self.offi_time = offi_time
+    #     if self._offi_time_max < self.offi_time:
+    #         self._offi_time_max = self.offi_time
 
     def set_offi_time_max(self, x_offi_time_max: TimeLinePoint):
         x_tran_times = self.cashbook.get_tran_times()
         if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
             exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, cashpurchase with greater tran_time exists"
             raise set_offi_time_max_Exception(exception_str)
-        # if self.offi_time_open > x_offi_time_max:
-        #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time_open={self.offi_time_open}"
+        # if self.offi_time > x_offi_time_max:
+        #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
         #     raise set_offi_time_max_Exception(exception_str)
         self._offi_time_max = x_offi_time_max
 
     # def set_offi_time(
-    #     self, offi_time_open: TimeLinePoint, _offi_time_max: TimeLinePoint
+    #     self, offi_time: TimeLinePoint, _offi_time_max: TimeLinePoint
     # ):
-    #     self.set_offi_time_open(offi_time_open)
+    #     self.set_offi_time(offi_time)
     #     self.set_offi_time_max(_offi_time_max)
 
     def set_all_tranbook(self):
@@ -448,6 +451,7 @@ def fiscunit_shop(
     fisc_title: FiscTitle = None,
     fisc_mstr_dir: str = None,
     timeline: TimeLineUnit = None,
+    offi_times: set[TimeLinePoint] = None,
     in_memory_journal: bool = None,
     bridge: str = None,
     fund_coin: float = None,
@@ -465,6 +469,7 @@ def fiscunit_shop(
         timeline=timeline,
         brokerunits={},
         cashbook=tranbook_shop(fisc_title),
+        offi_times=get_empty_set_if_None(offi_times),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
@@ -486,6 +491,7 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
     x_fisc_title = fisc_dict.get("fisc_title")
     x_fisc = fiscunit_shop(x_fisc_title, None)
     x_fisc.timeline = timelineunit_shop(fisc_dict.get("timeline"))
+    x_fisc.offi_times = set(fisc_dict.get("offi_times"))
     x_fisc.bridge = fisc_dict.get("bridge")
     x_fisc.fund_coin = fisc_dict.get("fund_coin")
     x_fisc.respect_bit = fisc_dict.get("respect_bit")

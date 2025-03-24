@@ -23,14 +23,14 @@
     },
     "fisc_dealunit": {
         "jkeys": {
+            "deal_time": {
+                "class_type": "TimeLinePoint"
+            },
             "fisc_title": {
                 "class_type": "TitleUnit"
             },
             "owner_name": {
                 "class_type": "NameUnit"
-            },
-            "deal_time": {
-                "class_type": "TimeLinePoint"
             }
         },
         "jvalues": {
@@ -90,6 +90,18 @@
             }
         },
         "static": "True"
+    },
+    "fisc_timeoffi": {
+        "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit"
+            },
+            "offi_time": {
+                "class_type": "TimeLinePoint"
+            }
+        },
+        "jvalues": {},
+        "static": "False"
     },
     "fiscunit": {
         "jkeys": {

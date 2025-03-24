@@ -18,6 +18,7 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
+    fisc_timeoffi_str,
     get_fisc_config_args,
 )
 from src.f09_idea.idea_db_tool import sheet_exists, upsert_sheet, get_custom_sorted_list
@@ -48,6 +49,7 @@ def test_FiscPrimeObjsRef_Exists():
     assert xp.hour_agg_tablename == f"{fisc_timeline_hour_str()}{agg_str}"
     assert xp.mont_agg_tablename == f"{fisc_timeline_month_str()}{agg_str}"
     assert xp.week_agg_tablename == f"{fisc_timeline_weekday_str()}{agg_str}"
+    assert xp.offi_agg_tablename == f"{fisc_timeoffi_str()}{agg_str}"
     staging_str = "_staging"
     assert xp.unit_stage_tablename == f"{fiscunit_str()}{staging_str}"
     assert xp.deal_stage_tablename == f"{fisc_dealunit_str()}{staging_str}"
@@ -55,42 +57,49 @@ def test_FiscPrimeObjsRef_Exists():
     assert xp.hour_stage_tablename == f"{fisc_timeline_hour_str()}{staging_str}"
     assert xp.mont_stage_tablename == f"{fisc_timeline_month_str()}{staging_str}"
     assert xp.week_stage_tablename == f"{fisc_timeline_weekday_str()}{staging_str}"
+    assert xp.offi_stage_tablename == f"{fisc_timeoffi_str()}{staging_str}"
     assert xp.unit_agg_csv_filename == f"{xp.unit_agg_tablename}.csv"
     assert xp.deal_agg_csv_filename == f"{xp.deal_agg_tablename}.csv"
     assert xp.cash_agg_csv_filename == f"{xp.cash_agg_tablename}.csv"
     assert xp.hour_agg_csv_filename == f"{xp.hour_agg_tablename}.csv"
     assert xp.mont_agg_csv_filename == f"{xp.mont_agg_tablename}.csv"
     assert xp.week_agg_csv_filename == f"{xp.week_agg_tablename}.csv"
+    assert xp.offi_agg_csv_filename == f"{xp.offi_agg_tablename}.csv"
     assert xp.unit_stage_csv_filename == f"{xp.unit_stage_tablename}.csv"
     assert xp.deal_stage_csv_filename == f"{xp.deal_stage_tablename}.csv"
     assert xp.cash_stage_csv_filename == f"{xp.cash_stage_tablename}.csv"
     assert xp.hour_stage_csv_filename == f"{xp.hour_stage_tablename}.csv"
     assert xp.mont_stage_csv_filename == f"{xp.mont_stage_tablename}.csv"
     assert xp.week_stage_csv_filename == f"{xp.week_stage_tablename}.csv"
+    assert xp.offi_stage_csv_filename == f"{xp.offi_stage_tablename}.csv"
     assert xp.unit_agg_csv_path == create_path(x_dir, xp.unit_agg_csv_filename)
     assert xp.deal_agg_csv_path == create_path(x_dir, xp.deal_agg_csv_filename)
     assert xp.cash_agg_csv_path == create_path(x_dir, xp.cash_agg_csv_filename)
     assert xp.hour_agg_csv_path == create_path(x_dir, xp.hour_agg_csv_filename)
     assert xp.mont_agg_csv_path == create_path(x_dir, xp.mont_agg_csv_filename)
     assert xp.week_agg_csv_path == create_path(x_dir, xp.week_agg_csv_filename)
+    assert xp.offi_agg_csv_path == create_path(x_dir, xp.offi_agg_csv_filename)
     assert xp.unit_stage_csv_path == create_path(x_dir, xp.unit_stage_csv_filename)
     assert xp.deal_stage_csv_path == create_path(x_dir, xp.deal_stage_csv_filename)
     assert xp.cash_stage_csv_path == create_path(x_dir, xp.cash_stage_csv_filename)
     assert xp.hour_stage_csv_path == create_path(x_dir, xp.hour_stage_csv_filename)
     assert xp.mont_stage_csv_path == create_path(x_dir, xp.mont_stage_csv_filename)
     assert xp.week_stage_csv_path == create_path(x_dir, xp.week_stage_csv_filename)
+    assert xp.offi_stage_csv_path == create_path(x_dir, xp.offi_stage_csv_filename)
     assert xp.unit_excel_filename == f"{fiscunit_str()}.xlsx"
     assert xp.deal_excel_filename == f"{fisc_dealunit_str()}.xlsx"
     assert xp.cash_excel_filename == f"{fisc_cashbook_str()}.xlsx"
     assert xp.hour_excel_filename == f"{fisc_timeline_hour_str()}.xlsx"
     assert xp.mont_excel_filename == f"{fisc_timeline_month_str()}.xlsx"
     assert xp.week_excel_filename == f"{fisc_timeline_weekday_str()}.xlsx"
+    assert xp.offi_excel_filename == f"{fisc_timeoffi_str()}.xlsx"
     assert xp.unit_excel_path == create_path(x_dir, xp.unit_excel_filename)
     assert xp.deal_excel_path == create_path(x_dir, xp.deal_excel_filename)
     assert xp.cash_excel_path == create_path(x_dir, xp.cash_excel_filename)
     assert xp.hour_excel_path == create_path(x_dir, xp.hour_excel_filename)
     assert xp.mont_excel_path == create_path(x_dir, xp.mont_excel_filename)
     assert xp.week_excel_path == create_path(x_dir, xp.week_excel_filename)
+    assert xp.offi_excel_path == create_path(x_dir, xp.offi_excel_filename)
 
 
 def test_FiscPrimeColumnsRef_Exists():
@@ -104,6 +113,7 @@ def test_FiscPrimeColumnsRef_Exists():
     hour_args = set(get_fisc_config_args(fisc_timeline_hour_str()).keys())
     mont_args = set(get_fisc_config_args(fisc_timeline_month_str()).keys())
     week_args = set(get_fisc_config_args(fisc_timeline_weekday_str()).keys())
+    offi_args = set(get_fisc_config_args(fisc_timeoffi_str()).keys())
     print(f"           {fisc_cols.cash_agg_columns=}")
     print(f"{get_custom_sorted_list(list(cash_args))=}")
     assert fisc_cols.unit_agg_columns == get_custom_sorted_list(unit_args)
@@ -112,6 +122,7 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.hour_agg_columns == get_custom_sorted_list(hour_args)
     assert fisc_cols.mont_agg_columns == get_custom_sorted_list(mont_args)
     assert fisc_cols.week_agg_columns == get_custom_sorted_list(week_args)
+    assert fisc_cols.offi_agg_columns == get_custom_sorted_list(offi_args)
 
     staging_args = {"idea_number", face_name_str(), event_int_str(), "error_message"}
     unit_staging_args = unit_args.union(staging_args)
@@ -120,12 +131,14 @@ def test_FiscPrimeColumnsRef_Exists():
     hour_staging_args = hour_args.union(staging_args)
     mont_staging_args = mont_args.union(staging_args)
     week_staging_args = week_args.union(staging_args)
+    offi_staging_args = offi_args.union(staging_args)
     assert fisc_cols.unit_staging_columns == get_custom_sorted_list(unit_staging_args)
     assert fisc_cols.cash_staging_columns == get_custom_sorted_list(cash_staging_args)
     assert fisc_cols.deal_staging_columns == get_custom_sorted_list(deal_staging_args)
     assert fisc_cols.hour_staging_columns == get_custom_sorted_list(hour_staging_args)
     assert fisc_cols.mont_staging_columns == get_custom_sorted_list(mont_staging_args)
     assert fisc_cols.week_staging_columns == get_custom_sorted_list(week_staging_args)
+    assert fisc_cols.offi_staging_columns == get_custom_sorted_list(offi_staging_args)
 
     # unit_staging_csv_header = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}"""
     unit_staging_csv_header = ",".join(fisc_cols.unit_staging_columns)
@@ -134,6 +147,7 @@ def test_FiscPrimeColumnsRef_Exists():
     hour_staging_csv_header = ",".join(fisc_cols.hour_staging_columns)
     mont_staging_csv_header = ",".join(fisc_cols.mont_staging_columns)
     week_staging_csv_header = ",".join(fisc_cols.week_staging_columns)
+    offi_staging_csv_header = ",".join(fisc_cols.offi_staging_columns)
 
     assert fisc_cols.unit_staging_csv_header == unit_staging_csv_header
     assert fisc_cols.deal_staging_csv_header == deal_staging_csv_header
@@ -141,12 +155,14 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.hour_staging_csv_header == hour_staging_csv_header
     assert fisc_cols.mont_staging_csv_header == mont_staging_csv_header
     assert fisc_cols.week_staging_csv_header == week_staging_csv_header
+    assert fisc_cols.offi_staging_csv_header == offi_staging_csv_header
     unit_agg_csv_header = ",".join(fisc_cols.unit_agg_columns)
     deal_agg_csv_header = ",".join(fisc_cols.deal_agg_columns)
     cash_agg_csv_header = ",".join(fisc_cols.cash_agg_columns)
     hour_agg_csv_header = ",".join(fisc_cols.hour_agg_columns)
     mont_agg_csv_header = ",".join(fisc_cols.mont_agg_columns)
     week_agg_csv_header = ",".join(fisc_cols.week_agg_columns)
+    offi_agg_csv_header = ",".join(fisc_cols.offi_agg_columns)
 
     assert fisc_cols.unit_agg_csv_header == unit_agg_csv_header
     assert fisc_cols.deal_agg_csv_header == deal_agg_csv_header
@@ -154,12 +170,14 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.hour_agg_csv_header == hour_agg_csv_header
     assert fisc_cols.mont_agg_csv_header == mont_agg_csv_header
     assert fisc_cols.week_agg_csv_header == week_agg_csv_header
+    assert fisc_cols.offi_agg_csv_header == offi_agg_csv_header
     assert fisc_cols.unit_agg_empty_csv == f"{unit_agg_csv_header}\n"
     assert fisc_cols.deal_agg_empty_csv == f"{deal_agg_csv_header}\n"
     assert fisc_cols.cash_agg_empty_csv == f"{cash_agg_csv_header}\n"
     assert fisc_cols.hour_agg_empty_csv == f"{hour_agg_csv_header}\n"
     assert fisc_cols.mont_agg_empty_csv == f"{mont_agg_csv_header}\n"
     assert fisc_cols.week_agg_empty_csv == f"{week_agg_csv_header}\n"
+    assert fisc_cols.offi_agg_empty_csv == f"{offi_agg_csv_header}\n"
 
 
 def test_create_init_fisc_prime_files_CreatesFiles_staging(env_dir_setup_cleanup):
@@ -173,6 +191,7 @@ def test_create_init_fisc_prime_files_CreatesFiles_staging(env_dir_setup_cleanup
     assert sheet_exists(fiscref.hour_excel_path, staging_str) is False
     assert sheet_exists(fiscref.mont_excel_path, staging_str) is False
     assert sheet_exists(fiscref.week_excel_path, staging_str) is False
+    assert sheet_exists(fiscref.offi_excel_path, staging_str) is False
 
     # WHEN
     create_init_fisc_prime_files(x_dir)
@@ -184,6 +203,7 @@ def test_create_init_fisc_prime_files_CreatesFiles_staging(env_dir_setup_cleanup
     assert sheet_exists(fiscref.hour_excel_path, staging_str)
     assert sheet_exists(fiscref.mont_excel_path, staging_str)
     assert sheet_exists(fiscref.week_excel_path, staging_str)
+    assert sheet_exists(fiscref.offi_excel_path, staging_str)
 
 
 def test_create_init_fisc_prime_files_HasCorrectColumns_staging(
@@ -204,6 +224,7 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_staging(
     fischour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=staging_str)
     fiscmont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=staging_str)
     fiscweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=staging_str)
+    fiscoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=staging_str)
 
     expected_cols = FiscPrimeColumnsRef()
     print(f"{list(fiscunit_df.columns)=}")
@@ -213,6 +234,7 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_staging(
     assert list(fischour_df.columns) == expected_cols.hour_staging_columns
     assert list(fiscmont_df.columns) == expected_cols.mont_staging_columns
     assert list(fiscweek_df.columns) == expected_cols.week_staging_columns
+    assert list(fiscoffi_df.columns) == expected_cols.offi_staging_columns
 
 
 def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
@@ -226,6 +248,7 @@ def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
     assert sheet_exists(xp.hour_excel_path, agg_str) is False
     assert sheet_exists(xp.mont_excel_path, agg_str) is False
     assert sheet_exists(xp.week_excel_path, agg_str) is False
+    assert sheet_exists(xp.offi_excel_path, agg_str) is False
 
     # WHEN
     create_init_fisc_prime_files(x_dir)
@@ -237,6 +260,7 @@ def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
     assert sheet_exists(xp.hour_excel_path, agg_str)
     assert sheet_exists(xp.mont_excel_path, agg_str)
     assert sheet_exists(xp.week_excel_path, agg_str)
+    assert sheet_exists(xp.offi_excel_path, agg_str)
 
 
 def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
@@ -255,6 +279,7 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     fischour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=agg_str)
     fiscmont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=agg_str)
     fiscweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=agg_str)
+    fiscoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=agg_str)
 
     expected_cols = FiscPrimeColumnsRef()
     print(f"{list(fiscunit_df.columns)=}")
@@ -264,6 +289,7 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     assert list(fischour_df.columns) == expected_cols.hour_agg_columns
     assert list(fiscmont_df.columns) == expected_cols.mont_agg_columns
     assert list(fiscweek_df.columns) == expected_cols.week_agg_columns
+    assert list(fiscoffi_df.columns) == expected_cols.offi_agg_columns
 
 
 def test_create_fiscunit_jsons_from_prime_files_Scenario0_MinimumNecessaryParameters(
@@ -631,3 +657,45 @@ def test_create_fiscunit_jsons_from_prime_files_Scenario7_fisc_dealunit(
     print(f"{accord56_fiscunit.brokerunits=}")
     # print(f"{expected_fiscunit=}")
     assert accord56_fiscunit.brokerunits == expected_fiscunit.brokerunits
+
+
+def test_create_fiscunit_jsons_from_prime_files_Scenario8_fisc_timeoffi(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = create_path(get_test_etl_dir(), "fisc_mstr")
+    create_init_fisc_prime_files(fisc_mstr_dir)
+    xp = FiscPrimeObjsRef(fisc_mstr_dir)
+    xc = FiscPrimeColumnsRef()
+    agg_str = "agg"
+    accord56_str = "accord56"
+    accord56_str
+    sue_str = "Sue"
+    t3 = 3
+    t7 = 7
+    accord56_fisc_row = [accord56_str, "", "", "", "", "", "", "", ""]
+    fiscunit_df = DataFrame([accord56_fisc_row], columns=xc.unit_agg_columns)
+    a56_offi_t3 = [accord56_str, t3]
+    a56_offi_t7 = [accord56_str, t7]
+    a56_offi_rows = [a56_offi_t3, a56_offi_t7]
+    fisc_offi_df = DataFrame(a56_offi_rows, columns=xc.offi_agg_columns)
+    print(f"{fisc_offi_df=}")
+    upsert_sheet(xp.unit_excel_path, agg_str, fiscunit_df)
+    upsert_sheet(xp.offi_excel_path, agg_str, fisc_offi_df)
+    accord56_json_path = create_fisc_json_path(fisc_mstr_dir, accord56_str)
+    assert os_path_exists(accord56_json_path) is False
+
+    # WHEN
+    create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
+
+    # THEN
+    assert os_path_exists(accord56_json_path)
+    accord56_fiscunit = fisc_get_from_json(open_file(accord56_json_path))
+    x_timelineunit = timelineunit_shop(timeline_config_shop())
+    expected_fiscunit = fiscunit_shop(accord56_str, fisc_mstr_dir, x_timelineunit)
+    expected_fiscunit.offi_times.add(t3)
+    expected_fiscunit.offi_times.add(t7)
+    print(f"{expected_fiscunit.offi_times=}")
+    print(f"{accord56_fiscunit.offi_times=}")
+    # print(f"{expected_fiscunit=}")
+    assert accord56_fiscunit.offi_times == expected_fiscunit.offi_times

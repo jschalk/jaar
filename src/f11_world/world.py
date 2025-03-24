@@ -306,8 +306,8 @@ class WorldUnit:
         ]
 
         for etl_func, step_msg in mine_to_burdens_steps:
-            if step_msg:
-                print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
+            # if step_msg:
+            #     print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
             etl_func()
 
         with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -328,10 +328,10 @@ class WorldUnit:
         print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
         self.event_bud_csvs_to_gift_json()
         self.event_gift_json_to_event_inherited_budunits()
-        # print(f"step 07 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 07 {count_dirs_files(self.worlds_dir)}")
         self.event_inherited_budunits_to_fisc_voice()
         self.fisc_voice_to_fisc_forecast()
-        # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
+        print(f"step 08 {count_dirs_files(self.worlds_dir)}")
         self.calc_fisc_deal_acct_mandate_net_ledgers()
 
     def create_stances(self):

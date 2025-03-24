@@ -20,7 +20,7 @@ from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f07_fisc.fisc_config import fiscunit_str, _offi_time_max_str
+from src.f07_fisc.fisc_config import fiscunit_str
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeColumnsRef,
     FiscPrimeObjsRef,
@@ -49,6 +49,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTitle(
     save_file(fisc_mstr_dir, x_fisc.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fisc_mstr_dir, x_fisc.offi_agg_csv_filename, x_cols.offi_agg_empty_csv)
     accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
     accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)
     assert os_path_exists(accord23_json_path) is False
@@ -94,6 +95,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     save_file(fisc_mstr_dir, x_fisc.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fisc_mstr_dir, x_fisc.offi_agg_csv_filename, x_cols.offi_agg_empty_csv)
 
     accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
     accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)

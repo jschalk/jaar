@@ -633,7 +633,7 @@ def test_create_select_inconsistency_query_ReturnsObj_Scenario2():
         expected_sqlstr = """SELECT id, name, age, email, hair
 FROM dark_side
 GROUP BY id, name, age, email, hair
-
+HAVING 1=2
 """
         assert gen_sqlstr == expected_sqlstr
 

@@ -45,8 +45,7 @@ from src.f07_fisc.fisc_config import (
     get_fisc_dimens,
     get_fisc_args_class_types,
     get_fisc_args_set,
-    offi_time_open_str,
-    _offi_time_max_str,
+    offi_time_str,
     amount_str,
     cumlative_day_str,
     cumlative_minute_str,
@@ -81,8 +80,8 @@ def test_get_fisc_config_dict_ReturnsObj():
     assert fisc_timeline_hour_str() in fisc_config_dimens
     assert fisc_timeline_month_str() in fisc_config_dimens
     assert fisc_timeline_weekday_str() in fisc_config_dimens
-    # assert fisc_timeoffi_str() in fisc_config_dimens
-    assert len(fisc_config) == 6
+    assert fisc_timeoffi_str() in fisc_config_dimens
+    assert len(fisc_config) == 7
     _validate_fisc_config(fisc_config)
     fiscunit_dict = fisc_config.get(fiscunit_str())
     fisc_dealunit_dict = fisc_config.get(fisc_dealunit_str())
@@ -164,8 +163,8 @@ def test_get_fisc_dimens_ReturnsObj():
     assert fisc_timeline_hour_str() in fisc_config_dimens
     assert fisc_timeline_month_str() in fisc_config_dimens
     assert fisc_timeline_weekday_str() in fisc_config_dimens
-    # assert fisc_timeoffi_str() in fisc_config_dimens
-    assert len(fisc_config_dimens) == 6
+    assert fisc_timeoffi_str() in fisc_config_dimens
+    assert len(fisc_config_dimens) == 7
     assert fisc_config_dimens == set(get_fisc_config_dict().keys())
 
 
@@ -181,8 +180,8 @@ def test_get_fisc_args_dimen_mapping_ReturnsObj():
     fisc_title_dimens = x_fisc_args_dimen_mapping.get(fisc_title_str())
     assert fisc_timeline_hour_str() in fisc_title_dimens
     assert fiscunit_str() in fisc_title_dimens
-    assert len(fisc_title_dimens) == 6
-    assert len(x_fisc_args_dimen_mapping) == 22
+    assert len(fisc_title_dimens) == 7
+    assert len(x_fisc_args_dimen_mapping) == 23
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -233,7 +232,7 @@ def test_get_fisc_args_set_ReturnsObj():
     mapping_args_set = set(get_fisc_args_dimen_mapping().keys())
     print(f"{mapping_args_set=}")
     assert fisc_args_set == mapping_args_set
-    assert len(fisc_args_set) == 22
+    assert len(fisc_args_set) == 23
     expected_fisc_args_set = {
         acct_name_str(),
         amount_str(),
@@ -253,8 +252,7 @@ def test_get_fisc_args_set_ReturnsObj():
         respect_bit_str(),
         deal_time_str(),
         tran_time_str(),
-        # offi_time_open_str(),
-        # _offi_time_max_str(),
+        offi_time_str(),
         timeline_title_str(),
         weekday_title_str(),
         weekday_order_str(),

@@ -321,3 +321,9 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
             tran_time=row["tran_time"],
             amount=row["amount"],
         )
+
+
+def _add_time_offis_from_df(x_fiscunit: FiscUnit, br00006_df: DataFrame):
+    query_str = f"fisc_title == '{x_fiscunit.fisc_title}'"
+    for index, row in br00006_df.query(query_str).iterrows():
+        x_fiscunit.offi_times.add(row["offi_time"])

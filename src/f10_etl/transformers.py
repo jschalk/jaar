@@ -394,9 +394,7 @@ def get_cart_events_max_event_int(cart_dir: str) -> int:
         return 0
     events_df = pandas_read_excel(events_file_path)
     max_event_id = events_df["event_int"].max()
-    if not if_nan_return_None(max_event_id):
-        return 0
-    return max_event_id
+    return max_event_id if if_nan_return_None(max_event_id) else 0
 
 
 def cart_agg_single_to_pidgin_staging(
@@ -1007,6 +1005,7 @@ def etl_fisc_csvs_to_fisc_jsons(fisc_mstr_dir: str):
     for fisc_dimen in get_fisc_dimens():
         x_excel_path = create_path(fisc_mstr_dir, f"{fisc_dimen}.xlsx")
         dimen_df = open_csv(fisc_mstr_dir, f"{fisc_dimen}_agg.csv")
+        print(f"{fisc_dimen=} {x_excel_path=}")
         upsert_sheet(x_excel_path, "agg", dimen_df)
     create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
 

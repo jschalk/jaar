@@ -72,7 +72,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
         "br00003": "fisc_title,cumlative_minute,hour_title\n",
         "br00004": "fisc_title,cumlative_day,month_title\n",
         "br00005": "fisc_title,weekday_order,weekday_title\n",
-        # "br00006": "fisc_title,offi_time_open,_offi_time_max\n",
+        # "br00006": "fisc_title,offi_time,_offi_time_max\n",
         "br00020": "fisc_title,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
         "br00021": "fisc_title,owner_name,acct_name,credit_belief,debtit_belief\n",
         "br00022": "fisc_title,owner_name,road,awardee_tag,give_force,take_force\n",

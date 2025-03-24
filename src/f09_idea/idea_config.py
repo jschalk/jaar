@@ -98,8 +98,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "event_int",
         "fisc_title",
         "timeline_title",
-        "offi_time_open",
-        "_offi_time_max",
+        "offi_time",
         "c400_number",
         "yr1_jan1_offset",
         "monthday_distortion",
@@ -226,8 +225,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "healer_name_ERASE": "TEXT",
         "deal_time": "INTEGER",
         "tran_time": "INTEGER",
-        "offi_time_open": "INTEGER",
-        "_offi_time_max": "INTEGER",
+        "offi_time": "INTEGER",
         "begin": "REAL",
         "close": "REAL",
         "addin": "REAL",
@@ -320,8 +318,8 @@ def idea_format_00005_fisc_timeline_weekday_v0_0_0() -> str:
     return "idea_format_00005_fisc_timeline_weekday_v0_0_0"
 
 
-# def idea_format_00006_fisc_timeoffi_v0_0_0() -> str:
-#     return "idea_format_00006_fisc_timeoffi_v0_0_0"
+def idea_format_00006_fisc_timeoffi_v0_0_0() -> str:
+    return "idea_format_00006_fisc_timeoffi_v0_0_0"
 
 
 def idea_format_00011_acct_v0_0_0() -> str:
@@ -484,7 +482,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00003_fisc_timeline_hour_v0_0_0(),
         idea_format_00004_fisc_timeline_month_v0_0_0(),
         idea_format_00005_fisc_timeline_weekday_v0_0_0(),
-        # idea_format_00006_fisc_timeoffi_v0_0_0(),
+        idea_format_00006_fisc_timeoffi_v0_0_0(),
         idea_format_00011_acct_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_itemunit_v0_0_0(),
@@ -529,7 +527,7 @@ def get_idea_numbers() -> set[str]:
         "br00003",
         "br00004",
         "br00005",
-        # "br00006",
+        "br00006",
         "br00011",
         "br00012",
         "br00013",
@@ -581,7 +579,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "fisc_title,cumlative_minute,hour_title": idea_format_00003_fisc_timeline_hour_v0_0_0(),
         "fisc_title,cumlative_day,month_title": idea_format_00004_fisc_timeline_month_v0_0_0(),
         "fisc_title,weekday_order,weekday_title": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
-        # "fisc_title,offi_time_open,_offi_time_max": idea_format_00006_fisc_timeoffi_v0_0_0(),
+        "fisc_title,offi_time": idea_format_00006_fisc_timeoffi_v0_0_0(),
         "fisc_title,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
         "fisc_title,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
         "fisc_title,owner_name,parent_road,item_title,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
@@ -640,7 +638,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         "fisc_timeline_hour": ["br00003"],
         "fisc_timeline_month": ["br00004"],
         "fisc_timeline_weekday": ["br00005"],
-        # "fisc_timeoffi": ["br00006"],
+        "fisc_timeoffi": ["br00006"],
         "bud_acctunit": [
             "br00011",
             "br00021",

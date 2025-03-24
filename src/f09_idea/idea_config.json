@@ -1,72 +1,8 @@
 {
-  "map_name": {
-    "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "pidgin",
-    "build_order": 0,
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "otx_name": {}
-    },
-    "jvalues": {
-      "inx_name": {},
-      "inx_bridge": {},
-      "otx_bridge": {},
-      "unknown_word": {}
-    }
-  },
-  "map_label": {
-    "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "pidgin",
-    "build_order": 1,
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "otx_label": {}
-    },
-    "jvalues": {
-      "inx_label": {},
-      "inx_bridge": {},
-      "otx_bridge": {},
-      "unknown_word": {}
-    }
-  },
-  "map_title": {
-    "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "pidgin",
-    "build_order": 2,
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "otx_title": {}
-    },
-    "jvalues": {
-      "inx_title": {},
-      "inx_bridge": {},
-      "otx_bridge": {},
-      "unknown_word": {}
-    }
-  },
-  "map_road": {
-    "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "pidgin",
-    "build_order": 3,
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "otx_road": {}
-    },
-    "jvalues": {
-      "inx_road": {},
-      "inx_bridge": {},
-      "otx_bridge": {},
-      "unknown_word": {}
-    }
-  },
   "bud_acct_membership": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 9,
+    "idea_category": "bud",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
@@ -82,8 +18,8 @@
   },
   "bud_acctunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 10,
+    "idea_category": "bud",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
@@ -98,8 +34,8 @@
   },
   "bud_item_awardlink": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 11,
+    "idea_category": "bud",
     "jkeys": {
       "awardee_tag": {},
       "event_int": {},
@@ -115,8 +51,8 @@
   },
   "bud_item_factunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 12,
+    "idea_category": "bud",
     "jkeys": {
       "base": {},
       "event_int": {},
@@ -133,8 +69,8 @@
   },
   "bud_item_healerlink": {
     "allowed_crud": "DELETE_INSERT",
-    "idea_category": "bud",
     "build_order": 15,
+    "idea_category": "bud",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -147,8 +83,8 @@
   },
   "bud_item_reason_premiseunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 16,
+    "idea_category": "bud",
     "jkeys": {
       "base": {},
       "event_int": {},
@@ -166,8 +102,8 @@
   },
   "bud_item_reasonunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 17,
+    "idea_category": "bud",
     "jkeys": {
       "base": {},
       "event_int": {},
@@ -182,8 +118,8 @@
   },
   "bud_item_teamlink": {
     "allowed_crud": "DELETE_INSERT",
-    "idea_category": "bud",
     "build_order": 14,
+    "idea_category": "bud",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -196,15 +132,15 @@
   },
   "bud_itemunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
-    "idea_category": "bud",
     "build_order": 18,
+    "idea_category": "bud",
     "jkeys": {
       "event_int": {},
       "face_name": {},
       "fisc_title": {},
       "item_title": {},
-      "parent_road": {},
-      "owner_name": {}
+      "owner_name": {},
+      "parent_road": {}
     },
     "jvalues": {
       "addin": {},
@@ -222,8 +158,8 @@
   },
   "budunit": {
     "allowed_crud": "UPDATE",
-    "idea_category": "bud",
     "build_order": 19,
+    "idea_category": "bud",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -243,8 +179,8 @@
   },
   "fisc_cashbook": {
     "allowed_crud": "INSERT_MULITPLE",
-    "idea_category": "fisc",
     "build_order": 21,
+    "idea_category": "fisc",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
@@ -259,29 +195,29 @@
   },
   "fisc_dealunit": {
     "allowed_crud": "INSERT_MULITPLE",
-    "idea_category": "fisc",
     "build_order": 20,
+    "idea_category": "fisc",
     "jkeys": {
+      "deal_time": {},
       "event_int": {},
       "face_name": {},
       "fisc_title": {},
-      "owner_name": {},
-      "deal_time": {}
+      "owner_name": {}
     },
     "jvalues": {
-      "quota": {},
-      "celldepth": {}
+      "celldepth": {},
+      "quota": {}
     }
   },
   "fisc_timeline_hour": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "fisc",
     "build_order": 6,
+    "idea_category": "fisc",
     "jkeys": {
+      "cumlative_minute": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
-      "cumlative_minute": {}
+      "fisc_title": {}
     },
     "jvalues": {
       "hour_title": {}
@@ -289,13 +225,13 @@
   },
   "fisc_timeline_month": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "fisc",
     "build_order": 7,
+    "idea_category": "fisc",
     "jkeys": {
+      "cumlative_day": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
-      "cumlative_day": {}
+      "fisc_title": {}
     },
     "jvalues": {
       "month_title": {}
@@ -303,8 +239,8 @@
   },
   "fisc_timeline_weekday": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "fisc",
     "build_order": 8,
+    "idea_category": "fisc",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -315,24 +251,100 @@
       "weekday_title": {}
     }
   },
+  "fisc_timeoffi": {
+    "allowed_crud": "INSERT_MULITPLE",
+    "build_order": 8,
+    "idea_category": "fisc",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "fisc_title": {},
+      "offi_time": {}
+    },
+    "jvalues": {}
+  },
   "fiscunit": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "idea_category": "fisc",
     "build_order": 5,
+    "idea_category": "fisc",
     "jkeys": {
       "event_int": {},
       "face_name": {},
       "fisc_title": {}
     },
     "jvalues": {
-      "timeline_title": {},
+      "bridge": {},
       "c400_number": {},
-      "monthday_distortion": {},
-      "yr1_jan1_offset": {},
       "fund_coin": {},
+      "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "bridge": {}
+      "timeline_title": {},
+      "yr1_jan1_offset": {}
+    }
+  },
+  "map_label": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "build_order": 1,
+    "idea_category": "pidgin",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_label": {}
+    },
+    "jvalues": {
+      "inx_bridge": {},
+      "inx_label": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "map_name": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "build_order": 0,
+    "idea_category": "pidgin",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_name": {}
+    },
+    "jvalues": {
+      "inx_bridge": {},
+      "inx_name": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "map_road": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "build_order": 3,
+    "idea_category": "pidgin",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_road": {}
+    },
+    "jvalues": {
+      "inx_bridge": {},
+      "inx_road": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "map_title": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "build_order": 2,
+    "idea_category": "pidgin",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_title": {}
+    },
+    "jvalues": {
+      "inx_bridge": {},
+      "inx_title": {},
+      "otx_bridge": {},
+      "unknown_word": {}
     }
   }
 }

@@ -552,13 +552,13 @@ def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
             generated_dimen_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
-            # print(
-            #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
-            # )
-            # print(
-            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
-            # )
-            # print(f"""            {x_sqlstr=}""")
+            print(
+                f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
+            )
+            print(
+                f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            )
+            print(f"""            {x_sqlstr=}""")
             assert x_sqlstr == generated_dimen_sqlstr
 
 
@@ -783,8 +783,8 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
 
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
-    assert idea_dimen_combo_checked_count == 624
-    assert idea_stage2dimen_count == 98
+    assert idea_dimen_combo_checked_count == 680
+    assert idea_stage2dimen_count == 100
     assert IDEA_STAGEABLE_PUT_DIMENS == expected_idea_stagable_dimens
 
 
@@ -848,7 +848,7 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     }
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
-    assert idea_dimen_combo_checked_count == 624
+    assert idea_dimen_combo_checked_count == 680
     assert idea_stage2dimen_count == 10
     assert IDEA_STAGEABLE_DEL_DIMENS == expected_idea_stagable_dimens
 

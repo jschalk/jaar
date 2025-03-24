@@ -27,15 +27,16 @@ def test_FiscUnit_Exists():
     # THEN
     assert not accord_fisc.fisc_title
     assert not accord_fisc.timeline
-    assert not accord_fisc._offi_time_max
     assert not accord_fisc.brokerunits
     assert not accord_fisc.cashbook
+    assert not accord_fisc.offi_times
     assert not accord_fisc.bridge
     assert not accord_fisc.fund_coin
     assert not accord_fisc.respect_bit
     assert not accord_fisc.penny
     assert not accord_fisc.fisc_mstr_dir
     # Calculated fields
+    assert not accord_fisc._offi_time_max
     assert not accord_fisc._owners_dir
     assert not accord_fisc._journal_db
     assert not accord_fisc._gifts_dir
@@ -51,6 +52,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.timeline == timelineunit_shop()
     assert accord_fisc.brokerunits == {}
     assert accord_fisc.cashbook == tranbook_shop(get_test_fisc_title())
+    assert accord_fisc.offi_times == set()
     assert accord_fisc.bridge == default_bridge_if_None()
     assert accord_fisc.fund_coin == default_fund_coin_if_None()
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
@@ -83,11 +85,13 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     x_fund_coin = 7.0
     x_respect_bit = 9
     x_penny = 3
+    a45_offi_times = {12, 15}
 
     # WHEN
     accord_fisc = fiscunit_shop(
         fisc_title=accord45_str,
         fisc_mstr_dir=get_test_fisc_mstr_dir(),
+        offi_times=a45_offi_times,
         in_memory_journal=True,
         bridge=slash_str,
         fund_coin=x_fund_coin,
@@ -100,6 +104,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     assert accord_fisc.fund_coin == x_fund_coin
     assert accord_fisc.respect_bit == x_respect_bit
     assert accord_fisc.penny == x_penny
+    assert accord_fisc.offi_times == a45_offi_times
 
 
 def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -324,35 +329,35 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert len(accord_fisc.get_owner_hubunits()) == 2
 
 
-# def test_FiscUnit_set_offi_time_open_Scenario0_SetsAttr():
+# def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
 #     fisc_mstr_dir = get_test_fisc_mstr_dir()
 #     time56 = 56
 #     a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir, _offi_time_max=time56)
-#     assert a23_fisc.offi_time_open == 0
+#     assert a23_fisc.offi_time == 0
 #     assert a23_fisc._offi_time_max == time56
 
 #     # WHEN
 #     time23 = 23
-#     a23_fisc.set_offi_time_open(time23)
+#     a23_fisc.set_offi_time(time23)
 
 #     # THEN
-#     assert a23_fisc.offi_time_open == time23
+#     assert a23_fisc.offi_time == time23
 #     assert a23_fisc._offi_time_max == time56
 
 
-# def test_FiscUnit_set_offi_time_open_Scenario1_SetsAttr():
+# def test_FiscUnit_set_offi_time_Scenario1_SetsAttr():
 #     # ESTABLISH
 #     a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
-#     assert a23_fisc.offi_time_open == 0
+#     assert a23_fisc.offi_time == 0
 #     assert a23_fisc._offi_time_max == 0
 
 #     # WHEN
 #     time23 = 23
-#     a23_fisc.set_offi_time_open(time23)
+#     a23_fisc.set_offi_time(time23)
 
 #     # THEN
-#     assert a23_fisc.offi_time_open == time23
+#     assert a23_fisc.offi_time == time23
 #     assert a23_fisc._offi_time_max == time23
 
 
@@ -362,7 +367,7 @@ def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
     time7 = 7
     a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir)
     a23_fisc._offi_time_max = time7
-    # assert a23_fisc.offi_time_open == 0
+    # assert a23_fisc.offi_time == 0
     assert a23_fisc._offi_time_max == time7
 
     # WHEN
@@ -370,7 +375,7 @@ def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
     a23_fisc.set_offi_time_max(time23)
 
     # THEN
-    # assert a23_fisc.offi_time_open == 0
+    # assert a23_fisc.offi_time == 0
     assert a23_fisc._offi_time_max == time23
 
 
@@ -380,23 +385,23 @@ def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
 #     time21 = 21
 #     time77 = 77
 #     a23_fisc = fiscunit_shop(
-#         "accord23", fisc_mstr_dir, offi_time_open=time21, _offi_time_max=time77
+#         "accord23", fisc_mstr_dir, offi_time=time21, _offi_time_max=time77
 #     )
-#     assert a23_fisc.offi_time_open == time21
+#     assert a23_fisc.offi_time == time21
 #     assert a23_fisc._offi_time_max == time77
 
 #     # WHEN / THEN
 #     time11 = 11
 #     with pytest_raises(Exception) as excinfo:
 #         a23_fisc.set_offi_time_max(time11)
-#     exception_str = f"Cannot set _offi_time_max={time11} because it is less than offi_time_open={time21}"
+#     exception_str = f"Cannot set _offi_time_max={time11} because it is less than offi_time={time21}"
 #     assert str(excinfo.value) == exception_str
 
 
 # def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
 #     a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
-#     assert a23_fisc.offi_time_open == 0
+#     assert a23_fisc.offi_time == 0
 #     assert a23_fisc._offi_time_max == 0
 
 #     # WHEN
@@ -405,5 +410,5 @@ def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
 #     a23_fisc.set_offi_time(time23, time55)
 
 #     # THEN
-#     assert a23_fisc.offi_time_open == time23
+#     assert a23_fisc.offi_time == time23
 #     assert a23_fisc._offi_time_max == time55

@@ -7,16 +7,8 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
     timeline_title_str,
 )
-from src.f04_gift.atom_config import (
-    fund_coin_str,
-    penny_str,
-    respect_bit_str,
-)
-from src.f07_fisc.fisc_config import _offi_time_max_str
-from src.f10_etl.fisc_etl_tool import (
-    FiscPrimeObjsRef,
-    FiscPrimeColumnsRef,
-)
+from src.f04_gift.atom_config import fund_coin_str, penny_str, respect_bit_str
+from src.f10_etl.fisc_etl_tool import FiscPrimeObjsRef, FiscPrimeColumnsRef
 from src.f10_etl.transformers import (
     create_fisc_tables,
     fisc_staging_tables2fisc_agg_tables,
