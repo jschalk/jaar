@@ -8,7 +8,7 @@ from src.f01_road.road import (
     get_default_fisc_title,
 )
 from src.f02_bud.bud import BudUnit
-from src.f04_gift.atom import AtomUnit, get_from_json as atomunit_get_from_json
+from src.f04_gift.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.f04_gift.delta import (
     BudDelta,
     buddelta_shop,
@@ -49,8 +49,8 @@ class GiftUnit:
     def set_delta_start(self, x_delta_start: int):
         self._delta_start = get_init_gift_id_if_None(x_delta_start)
 
-    def atomunit_exists(self, x_atomunit: AtomUnit):
-        return self._buddelta.atomunit_exists(x_atomunit)
+    def budatom_exists(self, x_budatom: BudAtom):
+        return self._buddelta.budatom_exists(x_budatom)
 
     def get_step_dict(self) -> dict[str, any]:
         return {
@@ -58,7 +58,7 @@ class GiftUnit:
             "fisc_title": self.fisc_title,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
-            "delta": self._buddelta.get_ordered_atomunits(self._delta_start),
+            "delta": self._buddelta.get_ordered_budatoms(self._delta_start),
         }
 
     def get_serializable_dict(self) -> dict[str, dict]:
@@ -88,7 +88,7 @@ class GiftUnit:
     def _get_num_filename(self, x_number: int) -> str:
         return get_json_filename(x_number)
 
-    def _save_atom_file(self, atom_number: int, x_atom: AtomUnit):
+    def _save_atom_file(self, atom_number: int, x_atom: BudAtom):
         x_filename = self._get_num_filename(atom_number)
         save_file(self._atoms_dir, x_filename, x_atom.get_json())
 
@@ -96,9 +96,9 @@ class GiftUnit:
         x_filename = self._get_num_filename(atom_number)
         return os_path_exists(create_path(self._atoms_dir, x_filename))
 
-    def _open_atom_file(self, atom_number: int) -> AtomUnit:
+    def _open_atom_file(self, atom_number: int) -> BudAtom:
         x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
-        return atomunit_get_from_json(x_json)
+        return budatom_get_from_json(x_json)
 
     def _save_gift_file(self):
         x_filename = self._get_num_filename(self._gift_id)
@@ -110,9 +110,9 @@ class GiftUnit:
 
     def _save_atom_files(self):
         step_dict = self.get_step_dict()
-        ordered_atomunits = step_dict.get("delta")
-        for order_int, atomunit in ordered_atomunits.items():
-            self._save_atom_file(order_int, atomunit)
+        ordered_budatoms = step_dict.get("delta")
+        for order_int, budatom in ordered_budatoms.items():
+            self._save_atom_file(order_int, budatom)
 
     def save_files(self):
         self._save_gift_file()
@@ -121,18 +121,18 @@ class GiftUnit:
     def _create_buddelta_from_atom_files(self, atom_number_list: list) -> BudDelta:
         x_buddelta = buddelta_shop()
         for atom_number in atom_number_list:
-            x_atomunit = self._open_atom_file(atom_number)
-            x_buddelta.set_atomunit(x_atomunit)
+            x_budatom = self._open_atom_file(atom_number)
+            x_buddelta.set_budatom(x_budatom)
         self._buddelta = x_buddelta
 
-    def add_atomunit(
+    def add_budatom(
         self,
         dimen: str,
         crud_str: str,
         jkeys: dict[str, str] = None,
         jvalues: dict[str, str] = None,
     ):
-        self._buddelta.add_atomunit(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
+        self._buddelta.add_budatom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
 
     def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
         if (

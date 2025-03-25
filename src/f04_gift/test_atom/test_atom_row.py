@@ -6,7 +6,7 @@ from src.f02_bud.bud_tool import (
     bud_item_healerlink_str,
 )
 from src.f04_gift.atom_config import atom_insert, atom_delete, acct_name_str
-from src.f04_gift.atom import AtomRow, atomrow_shop, atomunit_shop
+from src.f04_gift.atom import AtomRow, atomrow_shop, budatom_shop
 
 
 def test_AtomRow_exists():
@@ -141,23 +141,23 @@ def test_AtomRow_set_class_types_SetsAttr():
     assert x_atomrow.road == create_road(x_parent_road, x_item_title)
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_dimen}, atom_insert())
     x_atomrow.acct_name = "Bob"
 
     # WHEN
-    x_atomunits = x_atomrow.get_atomunits()
+    x_budatoms = x_atomrow.get_budatoms()
 
     # THEN
-    assert len(x_atomunits) == 1
-    static_atom = atomunit_shop(x_dimen, atom_insert())
+    assert len(x_budatoms) == 1
+    static_atom = budatom_shop(x_dimen, atom_insert())
     static_atom.set_arg(acct_name_str(), "Bob")
-    assert x_atomunits[0] == static_atom
+    assert x_budatoms[0] == static_atom
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_dimen}, atom_insert())
@@ -165,29 +165,29 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     x_atomrow.credit_belief = 5
 
     # WHEN
-    x_atomunits = x_atomrow.get_atomunits()
+    x_budatoms = x_atomrow.get_budatoms()
 
     # THEN
-    assert len(x_atomunits) == 1
-    static_atom = atomunit_shop(x_dimen, atom_insert())
+    assert len(x_budatoms) == 1
+    static_atom = budatom_shop(x_dimen, atom_insert())
     static_atom.set_arg(acct_name_str(), "Bob")
     static_atom.set_arg("credit_belief", 5)
-    assert x_atomunits[0] == static_atom
+    assert x_budatoms[0] == static_atom
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_NSERT_Fails():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_NSERT_Fails():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_dimen}, atom_insert())
 
     # WHEN
-    x_atomunits = x_atomrow.get_atomunits()
+    x_budatoms = x_atomrow.get_budatoms()
 
     # THEN
-    assert len(x_atomunits) == 0
+    assert len(x_budatoms) == 0
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
     x_atomrow = atomrow_shop({x_dimen}, atom_insert())
@@ -196,54 +196,54 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     x_atomrow.credit_belief = four_str
 
     # WHEN
-    x_atomunits = x_atomrow.get_atomunits()
+    x_budatoms = x_atomrow.get_budatoms()
 
     # THEN
-    assert len(x_atomunits) == 1
-    static_atom = atomunit_shop(x_dimen, atom_insert())
+    assert len(x_budatoms) == 1
+    static_atom = budatom_shop(x_dimen, atom_insert())
     static_atom.set_arg(acct_name_str(), "Bob")
     four_int = 4
     static_atom.set_arg("credit_belief", four_int)
-    assert x_atomunits[0] == static_atom
+    assert x_budatoms[0] == static_atom
 
 
-def test_AtomRow_get_atomunits_ReturnsObjIfDimenIsCorrect():
+def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), atom_insert())
     x_atomrow.acct_name = "Bob"
     four_str = "4"
     x_atomrow.credit_belief = four_str
-    assert len(x_atomrow.get_atomunits()) == 0
+    assert len(x_atomrow.get_budatoms()) == 0
 
     # WHEN / THEN
     x_atomrow.set_atom_dimen(bud_acct_membership_str())
-    assert len(x_atomrow.get_atomunits()) == 0
+    assert len(x_atomrow.get_budatoms()) == 0
 
     # THEN
     x_atomrow.set_atom_dimen(bud_acctunit_str())
-    assert len(x_atomrow.get_atomunits()) == 1
+    assert len(x_atomrow.get_budatoms()) == 1
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_itemunit_str()}, atom_insert())
     x_atomrow.parent_road = "accord78"
     x_atomrow.item_title = "casa"
     x_atomrow.pledge = False
-    assert len(x_atomrow.get_atomunits()) == 1
+    assert len(x_atomrow.get_budatoms()) == 1
 
     # WHEN / THEN
-    x_atomunit = x_atomrow.get_atomunits()[0]
+    x_budatom = x_atomrow.get_budatoms()[0]
 
     # THEN
-    static_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    static_atomunit.set_arg("parent_road", "accord78")
-    static_atomunit.set_arg("item_title", "casa")
-    static_atomunit.set_arg("pledge", False)
-    assert x_atomunit == static_atomunit
+    static_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    static_budatom.set_arg("parent_road", "accord78")
+    static_budatom.set_arg("item_title", "casa")
+    static_budatom.set_arg("pledge", False)
+    assert x_budatom == static_budatom
 
 
-def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_dimens = {bud_itemunit_str(), bud_item_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, atom_insert())
@@ -253,16 +253,16 @@ def test_AtomRow_get_atomunits_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     x_atomrow.healer_name = "Bob"
 
     # WHEN / THEN
-    x_atomunits = x_atomrow.get_atomunits()
+    x_budatoms = x_atomrow.get_budatoms()
 
     # THEN
-    assert len(x_atomunits) == 2
-    y_item_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    y_item_atomunit.set_arg("parent_road", "accord78")
-    y_item_atomunit.set_arg("item_title", "casa")
-    y_item_atomunit.set_arg("pledge", False)
-    assert y_item_atomunit in x_atomunits
-    healerlink_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_insert())
-    healerlink_atomunit.set_arg("road", "accord78;casa")
-    healerlink_atomunit.set_arg("healer_name", "Bob")
-    assert healerlink_atomunit in x_atomunits
+    assert len(x_budatoms) == 2
+    y_item_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    y_item_budatom.set_arg("parent_road", "accord78")
+    y_item_budatom.set_arg("item_title", "casa")
+    y_item_budatom.set_arg("pledge", False)
+    assert y_item_budatom in x_budatoms
+    healerlink_budatom = budatom_shop(bud_item_healerlink_str(), atom_insert())
+    healerlink_budatom.set_arg("road", "accord78;casa")
+    healerlink_budatom.set_arg("healer_name", "Bob")
+    assert healerlink_budatom in x_budatoms

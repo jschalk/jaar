@@ -19,7 +19,7 @@ from src.f02_bud.bud import (
     get_from_json as budunit_get_from_json,
     BudUnit,
 )
-from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom import budatom_shop
 from src.f04_gift.atom_config import get_bud_dimens
 from src.f04_gift.delta import get_minimal_buddelta
 from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
@@ -35,7 +35,7 @@ from src.f05_listen.hub_tool import (
     get_owners_downhill_event_ints,
 )
 from src.f07_fisc.fisc import (
-    get_from_standard as fiscunit_get_from_standard,
+    get_from_default_path as fiscunit_get_from_default_path,
 )
 from src.f07_fisc.fisc_tool import (
     create_fisc_owners_cell_trees,
@@ -924,7 +924,7 @@ def etl_create_deals_root_cells(fisc_mstr_dir: str):
         ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
-            x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
+            x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
             x_fiscunit.create_deals_root_cells(ote1_dict)
 
 
@@ -1026,11 +1026,11 @@ def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
                     fisc_title=fisc_title,
                     event_int=event_int,
                 )
-                add_atomunits_from_csv(event_gift, event_path)
+                add_budatoms_from_csv(event_gift, event_path)
                 save_file(event_path, "all_gift.json", event_gift.get_json())
 
 
-def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
+def add_budatoms_from_csv(owner_gift: GiftUnit, owner_path: str):
     idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
@@ -1043,7 +1043,7 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
             for put_row in put_rows:
-                x_atom = atomunit_shop(bud_dimen, "INSERT")
+                x_atom = budatom_shop(bud_dimen, "INSERT")
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
@@ -1052,13 +1052,13 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._buddelta.set_atomunit(x_atom)
+                owner_gift._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
             headers = del_rows.pop(0)
             for del_row in del_rows:
-                x_atom = atomunit_shop(bud_dimen, "DELETE")
+                x_atom = budatom_shop(bud_dimen, "DELETE")
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
@@ -1067,7 +1067,7 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._buddelta.set_atomunit(x_atom)
+                owner_gift._buddelta.set_budatom(x_atom)
 
 
 def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
@@ -1128,5 +1128,5 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
 def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
+        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
         x_fiscunit.generate_all_forecast_buds()

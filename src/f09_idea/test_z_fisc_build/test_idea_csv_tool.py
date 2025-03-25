@@ -783,7 +783,7 @@ def test_add_gift_to_br00020_csv_ReturnsObj():
     run_debtit = 55
     bob_bud.get_acct(yao_str).add_membership(run_str, run_credit, run_debtit)
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -814,7 +814,7 @@ def test_add_gift_to_br00021_csv_ReturnsObj():
     bob_bud = budunit_shop(bob_str, a23_str)
     bob_bud.add_acctunit(yao_str, yao_credit, yao_debtit)
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -846,7 +846,7 @@ def test_add_gift_to_br00022_csv_ReturnsObj():
     bob_bud.add_item(casa_road)
     bob_bud.edit_item_attr(casa_road, awardlink=casa_awardlink)
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -877,7 +877,7 @@ def test_add_gift_to_br00023_csv_ReturnsObj():
     bob_bud.add_item(clean_road)
     bob_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh)
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -909,7 +909,7 @@ def test_add_gift_to_br00024_csv_ReturnsObj():
     cleaners_str = "cleaners"
     casa_item.teamunit.set_teamlink(cleaners_str)
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -943,7 +943,7 @@ def test_add_gift_to_br00025_csv_ReturnsObj():
     cleaners_str = "cleaners"
     casa_item.healerlink.set_healer_name(cleaners_str)
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -986,7 +986,7 @@ def test_add_gift_to_br00026_csv_ReturnsObj():
         reason_premise_divisor=clean_premise_divisor,
     )
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -1019,7 +1019,7 @@ def test_add_gift_to_br00027_csv_ReturnsObj():
         reason_base_item_active_requisite=True,
     )
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -1072,7 +1072,7 @@ def test_add_gift_to_br00028_csv_ReturnsObj():
         problem_bool=casa_problem_bool,
     )
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -1111,7 +1111,7 @@ def test_add_gift_to_br00029_csv_ReturnsObj():
     bob_bud.penny = 13
     bob_bud.respect_bit = 2
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -1155,7 +1155,7 @@ def test_add_giftunit_to_stance_csv_strs_ReturnsObj():
     bob_bud.penny = 13
     bob_bud.respect_bit = 2
     bob_buddelta = buddelta_shop()
-    bob_buddelta.add_all_atomunits(bob_bud)
+    bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)
@@ -1217,7 +1217,7 @@ def test_add_giftunit_to_stance_csv_strs_ReturnsObj():
 #     bob_bud.penny = 13
 #     bob_bud.respect_bit = 2
 #     bob_buddelta = buddelta_shop()
-#     bob_buddelta.add_all_atomunits(bob_bud)
+#     bob_buddelta.add_all_budatoms(bob_bud)
 #     sue_str = "Sue"
 #     event7 = 7
 #     sue7_gift = giftunit_shop(bob_str, sue_str, a23_str, event_int=event7)

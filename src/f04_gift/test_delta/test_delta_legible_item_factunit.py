@@ -6,7 +6,7 @@ from src.f04_gift.atom_config import (
     fnigh_str,
     fopen_str,
 )
-from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom import budatom_shop
 from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
@@ -24,13 +24,13 @@ def test_create_legible_list_ReturnsObj_item_factunit_INSERT_WithOutNumberArgs()
     base_value = sue_bud.make_road(casa_road, "fridge status")
     pick_str = "pick"
     pick_value = sue_bud.make_road(base_value, "dirty")
-    swim_atomunit = atomunit_shop(dimen, atom_insert())
-    swim_atomunit.set_arg(road_str, road_value)
-    swim_atomunit.set_arg(base_str, base_value)
-    swim_atomunit.set_arg(pick_str, pick_value)
-    # print(f"{swim_atomunit=}")
+    swim_budatom = budatom_shop(dimen, atom_insert())
+    swim_budatom.set_arg(road_str, road_value)
+    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(pick_str, pick_value)
+    # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(swim_atomunit)
+    x_buddelta.set_budatom(swim_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -55,15 +55,15 @@ def test_create_legible_list_ReturnsObj_item_factunit_INSERT_WithNumberArgs():
     pick_value = sue_bud.make_road(base_value, "dirty")
     fnigh_value = 13
     fopen_value = 17
-    swim_atomunit = atomunit_shop(dimen, atom_insert())
-    swim_atomunit.set_arg(road_str, road_value)
-    swim_atomunit.set_arg(base_str, base_value)
-    swim_atomunit.set_arg(pick_str, pick_value)
-    swim_atomunit.set_arg(fnigh_str(), fnigh_value)
-    swim_atomunit.set_arg(fopen_str(), fopen_value)
-    # print(f"{swim_atomunit=}")
+    swim_budatom = budatom_shop(dimen, atom_insert())
+    swim_budatom.set_arg(road_str, road_value)
+    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(pick_str, pick_value)
+    swim_budatom.set_arg(fnigh_str(), fnigh_value)
+    swim_budatom.set_arg(fopen_str(), fopen_value)
+    # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(swim_atomunit)
+    x_buddelta.set_budatom(swim_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -86,13 +86,13 @@ def test_create_legible_list_ReturnsObj_item_factunit_UPDATE_WithOutNumberArgs()
     base_value = sue_bud.make_road(casa_road, "fridge status")
     pick_str = "pick"
     pick_value = sue_bud.make_road(base_value, "dirty")
-    swim_atomunit = atomunit_shop(dimen, atom_update())
-    swim_atomunit.set_arg(road_str, road_value)
-    swim_atomunit.set_arg(base_str, base_value)
-    swim_atomunit.set_arg(pick_str, pick_value)
-    # print(f"{swim_atomunit=}")
+    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom.set_arg(road_str, road_value)
+    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(pick_str, pick_value)
+    # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(swim_atomunit)
+    x_buddelta.set_budatom(swim_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -117,15 +117,15 @@ def test_create_legible_list_ReturnsObj_item_factunit_UPDATE_WithNumberArgs():
     pick_value = sue_bud.make_road(base_value, "dirty")
     fnigh_value = 13
     fopen_value = 17
-    swim_atomunit = atomunit_shop(dimen, atom_update())
-    swim_atomunit.set_arg(road_str, road_value)
-    swim_atomunit.set_arg(base_str, base_value)
-    swim_atomunit.set_arg(pick_str, pick_value)
-    swim_atomunit.set_arg(fnigh_str(), fnigh_value)
-    swim_atomunit.set_arg(fopen_str(), fopen_value)
-    # print(f"{swim_atomunit=}")
+    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom.set_arg(road_str, road_value)
+    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(pick_str, pick_value)
+    swim_budatom.set_arg(fnigh_str(), fnigh_value)
+    swim_budatom.set_arg(fopen_str(), fopen_value)
+    # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(swim_atomunit)
+    x_buddelta.set_budatom(swim_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -146,12 +146,12 @@ def test_create_legible_list_ReturnsObj_item_factunit_DELETE():
     base_str = "base"
     casa_road = sue_bud.make_l1_road("casa")
     base_value = sue_bud.make_road(casa_road, "fridge status")
-    swim_atomunit = atomunit_shop(dimen, atom_delete())
-    swim_atomunit.set_arg(road_str, road_value)
-    swim_atomunit.set_arg(base_str, base_value)
-    # print(f"{swim_atomunit=}")
+    swim_budatom = budatom_shop(dimen, atom_delete())
+    swim_budatom.set_arg(road_str, road_value)
+    swim_budatom.set_arg(base_str, base_value)
+    # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(swim_atomunit)
+    x_buddelta.set_budatom(swim_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)

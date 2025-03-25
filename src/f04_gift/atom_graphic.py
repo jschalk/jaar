@@ -16,14 +16,14 @@ from src.f04_gift.atom_config import (
     atom_update,
     get_normal_table_name,
 )
-from src.f04_gift.atom import atomunit_shop, AtomUnit
+from src.f04_gift.atom import budatom_shop, BudAtom
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from dataclasses import dataclass
 
 
 @dataclass
 class AtomPlotlyShape:
-    x_atomunit: AtomUnit
+    x_budatom: BudAtom
     base_width: float = None
     base_h: float = None
     level: float = None
@@ -38,7 +38,7 @@ class AtomPlotlyShape:
         self.level = 0
         self.level_width0 = 0.1
         self.level_width1 = 0.9
-        self.display_str = f"{get_normal_table_name(self.x_atomunit.dimen)} {self.x_atomunit.crud_str} Order: {self.x_atomunit.atom_order}"
+        self.display_str = f"{get_normal_table_name(self.x_budatom.dimen)} {self.x_budatom.crud_str} Order: {self.x_budatom.atom_order}"
 
     def set_level(self, x_level, x_width0, x_width1, color=None):
         self.level = x_level
@@ -48,25 +48,25 @@ class AtomPlotlyShape:
 
 
 def get_insert_rect(dimen: str) -> AtomPlotlyShape:
-    x_atomunit = atomunit_shop(dimen, atom_insert())
-    x_atomunit.set_atom_order()
-    atom_rect = AtomPlotlyShape(x_atomunit=x_atomunit)
+    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom.set_atom_order()
+    atom_rect = AtomPlotlyShape(x_budatom=x_budatom)
     atom_rect.set_attrs()
     return atom_rect
 
 
 def get_update_rect(dimen: str) -> AtomPlotlyShape:
-    x_atomunit = atomunit_shop(dimen, atom_update())
-    x_atomunit.set_atom_order()
-    atom_rect = AtomPlotlyShape(x_atomunit=x_atomunit)
+    x_budatom = budatom_shop(dimen, atom_update())
+    x_budatom.set_atom_order()
+    atom_rect = AtomPlotlyShape(x_budatom=x_budatom)
     atom_rect.set_attrs()
     return atom_rect
 
 
 def get_delete_rect(dimen: str) -> AtomPlotlyShape:
-    x_atomunit = atomunit_shop(dimen, atom_delete())
-    x_atomunit.set_atom_order()
-    atom_rect = AtomPlotlyShape(x_atomunit=x_atomunit)
+    x_budatom = budatom_shop(dimen, atom_delete())
+    x_budatom.set_atom_order()
+    atom_rect = AtomPlotlyShape(x_budatom=x_budatom)
     atom_rect.set_attrs()
     return atom_rect
 
@@ -167,15 +167,15 @@ def add_different_items_circle(fig: plotly_Figure):
     add_rect_str(fig, x=text_x, y=text_y, text="Different Items")
 
 
-def get_atomunit_base_fig() -> plotly_Figure:
+def get_budatom_base_fig() -> plotly_Figure:
     fig = plotly_Figure()
     fig.update_xaxes(range=[0, 4])
     fig.update_yaxes(range=[0, 15])
     return fig
 
 
-def atomunit_periodic_table0() -> plotly_Figure:
-    fig = get_atomunit_base_fig()
+def budatom_periodic_table0() -> plotly_Figure:
+    fig = get_budatom_base_fig()
 
     premise_str = bud_item_reason_premiseunit_str()
     bud_acctunit_insert = get_insert_rect(bud_acctunit_str())
@@ -290,7 +290,7 @@ def atomunit_periodic_table0() -> plotly_Figure:
         plotly_Scatter(
             x=[2.0],
             y=[13],
-            text=["Periodic Table of AtomUnits"],
+            text=["Periodic Table of BudAtoms"],
             mode="text",
         )
     )

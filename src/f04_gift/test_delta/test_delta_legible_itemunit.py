@@ -14,7 +14,7 @@ from src.f04_gift.atom_config import (
     morph_str,
     mass_str,
 )
-from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom import budatom_shop
 from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
@@ -36,21 +36,21 @@ def test_create_legible_list_ReturnsObj_itemunit_INSERT():
     morph_value = 37
     mass_value = 43
     pledge_value = False
-    clean_atomunit = atomunit_shop(dimen, atom_insert())
-    clean_atomunit.set_arg(item_title_str(), item_title_value)
-    clean_atomunit.set_arg(parent_road_str(), parent_road_value)
-    clean_atomunit.set_arg(addin_str(), addin_value)
-    clean_atomunit.set_arg(begin_str(), begin_value)
-    clean_atomunit.set_arg(close_str(), close_value)
-    clean_atomunit.set_arg(denom_str(), denom_value)
-    clean_atomunit.set_arg(numor_str(), numor_value)
-    clean_atomunit.set_arg(_problem_bool_str, problem_bool_value)
-    clean_atomunit.set_arg(morph_str(), morph_value)
-    clean_atomunit.set_arg(mass_str(), mass_value)
-    clean_atomunit.set_arg(pledge_str(), pledge_value)
+    clean_budatom = budatom_shop(dimen, atom_insert())
+    clean_budatom.set_arg(item_title_str(), item_title_value)
+    clean_budatom.set_arg(parent_road_str(), parent_road_value)
+    clean_budatom.set_arg(addin_str(), addin_value)
+    clean_budatom.set_arg(begin_str(), begin_value)
+    clean_budatom.set_arg(close_str(), close_value)
+    clean_budatom.set_arg(denom_str(), denom_value)
+    clean_budatom.set_arg(numor_str(), numor_value)
+    clean_budatom.set_arg(_problem_bool_str, problem_bool_value)
+    clean_budatom.set_arg(morph_str(), morph_value)
+    clean_budatom.set_arg(mass_str(), mass_value)
+    clean_budatom.set_arg(pledge_str(), pledge_value)
 
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(clean_atomunit)
+    x_buddelta.set_budatom(clean_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -77,21 +77,21 @@ def test_create_legible_list_ReturnsObj_itemunit_UPDATE():
     morph_value = 37
     mass_value = 43
     pledge_value = False
-    clean_atomunit = atomunit_shop(dimen, atom_update())
-    clean_atomunit.set_arg(item_title_str(), item_title_value)
-    clean_atomunit.set_arg(parent_road_str(), parent_road_value)
-    clean_atomunit.set_arg(addin_str(), addin_value)
-    clean_atomunit.set_arg(begin_str(), begin_value)
-    clean_atomunit.set_arg(close_str(), close_value)
-    clean_atomunit.set_arg(denom_str(), denom_value)
-    clean_atomunit.set_arg(numor_str(), numor_value)
-    clean_atomunit.set_arg(_problem_bool_str, problem_bool_value)
-    clean_atomunit.set_arg(morph_str(), morph_value)
-    clean_atomunit.set_arg(mass_str(), mass_value)
-    clean_atomunit.set_arg(pledge_str(), pledge_value)
+    clean_budatom = budatom_shop(dimen, atom_update())
+    clean_budatom.set_arg(item_title_str(), item_title_value)
+    clean_budatom.set_arg(parent_road_str(), parent_road_value)
+    clean_budatom.set_arg(addin_str(), addin_value)
+    clean_budatom.set_arg(begin_str(), begin_value)
+    clean_budatom.set_arg(close_str(), close_value)
+    clean_budatom.set_arg(denom_str(), denom_value)
+    clean_budatom.set_arg(numor_str(), numor_value)
+    clean_budatom.set_arg(_problem_bool_str, problem_bool_value)
+    clean_budatom.set_arg(morph_str(), morph_value)
+    clean_budatom.set_arg(mass_str(), mass_value)
+    clean_budatom.set_arg(pledge_str(), pledge_value)
 
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(clean_atomunit)
+    x_buddelta.set_budatom(clean_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -108,12 +108,12 @@ def test_create_legible_list_ReturnsObj_itemunit_DELETE():
     dimen = bud_itemunit_str()
     item_title_value = "clean fridge"
     parent_road_value = sue_bud.make_l1_road("casa")
-    clean_atomunit = atomunit_shop(dimen, atom_delete())
-    clean_atomunit.set_arg(item_title_str(), item_title_value)
-    clean_atomunit.set_arg(parent_road_str(), parent_road_value)
+    clean_budatom = budatom_shop(dimen, atom_delete())
+    clean_budatom.set_arg(item_title_str(), item_title_value)
+    clean_budatom.set_arg(parent_road_str(), parent_road_value)
 
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(clean_atomunit)
+    x_buddelta.set_budatom(clean_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)

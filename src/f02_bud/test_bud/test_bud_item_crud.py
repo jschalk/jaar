@@ -149,7 +149,7 @@ def test_BudUnit_add_item_ReturnsObj():
     assert casa_itemunit.mass == casa_mass
 
 
-def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonstandard_bridge():
+def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonDefault_bridge():
     # ESTABLISH
     slash_str = "/"
     assert slash_str != default_bridge_if_None()

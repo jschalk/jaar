@@ -1,5 +1,5 @@
 from src.f02_bud.bud_tool import bud_acct_membership_str
-from src.f04_gift.atom import atomunit_shop, atom_update, atom_insert, atom_delete
+from src.f04_gift.atom import budatom_shop, atom_update, atom_insert, atom_delete
 from src.f04_gift.atom_config import acct_name_str, group_label_str
 from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
@@ -16,14 +16,14 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     yao_str = "Yao"
     credit_vote_value = 81
     debtit_vote_value = 43
-    yao_atomunit = atomunit_shop(dimen, atom_insert())
-    yao_atomunit.set_arg(group_label_str(), swim_str)
-    yao_atomunit.set_arg(acct_name_str(), yao_str)
-    yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
-    yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
-    # print(f"{yao_atomunit=}")
+    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(acct_name_str(), yao_str)
+    yao_budatom.set_arg(credit_vote_str, credit_vote_value)
+    yao_budatom.set_arg(debtit_vote_str, debtit_vote_value)
+    # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(yao_atomunit)
+    x_buddelta.set_budatom(yao_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -44,14 +44,14 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
     yao_str = "Yao"
     credit_vote_value = 81
     debtit_vote_value = 43
-    yao_atomunit = atomunit_shop(dimen, atom_update())
-    yao_atomunit.set_arg(group_label_str(), swim_str)
-    yao_atomunit.set_arg(acct_name_str(), yao_str)
-    yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
-    yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
-    # print(f"{yao_atomunit=}")
+    yao_budatom = budatom_shop(dimen, atom_update())
+    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(acct_name_str(), yao_str)
+    yao_budatom.set_arg(credit_vote_str, credit_vote_value)
+    yao_budatom.set_arg(debtit_vote_str, debtit_vote_value)
+    # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(yao_atomunit)
+    x_buddelta.set_budatom(yao_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -70,13 +70,13 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
-    yao_atomunit = atomunit_shop(dimen, atom_update())
-    yao_atomunit.set_arg(group_label_str(), swim_str)
-    yao_atomunit.set_arg(acct_name_str(), yao_str)
-    yao_atomunit.set_arg(credit_vote_str, credit_vote_value)
-    # print(f"{yao_atomunit=}")
+    yao_budatom = budatom_shop(dimen, atom_update())
+    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(acct_name_str(), yao_str)
+    yao_budatom.set_arg(credit_vote_str, credit_vote_value)
+    # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(yao_atomunit)
+    x_buddelta.set_budatom(yao_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -95,13 +95,13 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     debtit_vote_value = 43
-    yao_atomunit = atomunit_shop(dimen, atom_update())
-    yao_atomunit.set_arg(group_label_str(), swim_str)
-    yao_atomunit.set_arg(acct_name_str(), yao_str)
-    yao_atomunit.set_arg(debtit_vote_str, debtit_vote_value)
-    # print(f"{yao_atomunit=}")
+    yao_budatom = budatom_shop(dimen, atom_update())
+    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(acct_name_str(), yao_str)
+    yao_budatom.set_arg(debtit_vote_str, debtit_vote_value)
+    # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(yao_atomunit)
+    x_buddelta.set_budatom(yao_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)
@@ -118,12 +118,12 @@ def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     dimen = bud_acct_membership_str()
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
-    yao_atomunit = atomunit_shop(dimen, atom_delete())
-    yao_atomunit.set_arg(group_label_str(), swim_str)
-    yao_atomunit.set_arg(acct_name_str(), yao_str)
-    # print(f"{yao_atomunit=}")
+    yao_budatom = budatom_shop(dimen, atom_delete())
+    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(acct_name_str(), yao_str)
+    # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(yao_atomunit)
+    x_buddelta.set_budatom(yao_budatom)
 
     # WHEN
     legible_list = create_legible_list(x_buddelta, sue_bud)

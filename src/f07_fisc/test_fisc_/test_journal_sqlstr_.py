@@ -7,7 +7,7 @@ from src.f04_gift.atom_config import (
     base_str,
     road_str,
 )
-from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom import budatom_shop
 from src.f07_fisc.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
@@ -189,10 +189,10 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
 
     # WHEN
     x_dimen = bud_item_factunit_str()
-    update_disc_atomunit = atomunit_shop(x_dimen, atom_insert())
-    update_disc_atomunit.set_jkey(road_str(), ball_road)
-    update_disc_atomunit.set_jkey(base_str(), knee_road)
-    update_disc_atomunit.set_jvalue(fopen_str(), knee_fopen)
+    update_disc_budatom = budatom_shop(x_dimen, atom_insert())
+    update_disc_budatom.set_jkey(road_str(), ball_road)
+    update_disc_budatom.set_jkey(base_str(), knee_road)
+    update_disc_budatom.set_jvalue(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""
@@ -207,7 +207,7 @@ VALUES (
 , {knee_fopen}
 )
 ;"""
-    assert get_atom_hx_table_insert_sqlstr(update_disc_atomunit) == example_sqlstr
+    assert get_atom_hx_table_insert_sqlstr(update_disc_budatom) == example_sqlstr
 
 
 def test_get_atom_mstr_table_create_sqlstr_ReturnsCorrectStr():

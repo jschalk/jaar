@@ -1086,8 +1086,8 @@
                                                     }
                                                 }
                                             },
-                                            "go to daily stand-up ": {
-                                                "_item_title": "go to daily stand-up ",
+                                            "go to daily meeting ": {
+                                                "_item_title": "go to daily meeting ",
                                                 "_uid": 232,
                                                 "mass": 1,
                                                 "pledge": true,

@@ -1,6 +1,6 @@
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_acct_membership_str
-from src.f04_gift.atom import atom_insert, atomunit_shop
+from src.f04_gift.atom import atom_insert, budatom_shop
 from src.f04_gift.atom_config import acct_name_str, group_label_str
 from src.f04_gift.delta import buddelta_shop, get_minimal_buddelta
 
@@ -15,23 +15,23 @@ def test_get_minimal_buddelta_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
     sue_bud.add_acctunit(bob_str)
 
     accts_buddelta = buddelta_shop()
-    bob_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
+    bob_atom = budatom_shop(bud_acctunit_str(), atom_insert())
     bob_atom.set_arg(acct_name_str(), bob_str)
-    yao_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
+    yao_atom = budatom_shop(bud_acctunit_str(), atom_insert())
     yao_atom.set_arg(acct_name_str(), yao_str)
-    zia_atom = atomunit_shop(bud_acctunit_str(), atom_insert())
+    zia_atom = budatom_shop(bud_acctunit_str(), atom_insert())
     zia_atom.set_arg(acct_name_str(), zia_str)
-    accts_buddelta.set_atomunit(bob_atom)
-    accts_buddelta.set_atomunit(yao_atom)
-    accts_buddelta.set_atomunit(zia_atom)
-    assert len(accts_buddelta.get_sorted_atomunits()) == 3
+    accts_buddelta.set_budatom(bob_atom)
+    accts_buddelta.set_budatom(yao_atom)
+    accts_buddelta.set_budatom(zia_atom)
+    assert len(accts_buddelta.get_sorted_budatoms()) == 3
     assert len(sue_bud.accts) == 2
 
     # WHEN
     new_buddelta = get_minimal_buddelta(accts_buddelta, sue_bud)
 
     # THEN
-    assert len(new_buddelta.get_sorted_atomunits()) == 1
+    assert len(new_buddelta.get_sorted_budatoms()) == 1
 
 
 def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
@@ -49,26 +49,26 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
     print(f"{yao_acctunit._memberships.keys()=}")
 
     accts_buddelta = buddelta_shop()
-    bob_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
+    bob_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
     bob_run_atom.set_arg(group_label_str(), run_str)
-    yao_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
+    yao_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
     yao_run_atom.set_arg(group_label_str(), run_str)
-    zia_run_atom = atomunit_shop(bud_acct_membership_str(), atom_insert())
+    zia_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     zia_run_atom.set_arg(acct_name_str(), zia_str)
     zia_run_atom.set_arg(group_label_str(), run_str)
-    accts_buddelta.set_atomunit(bob_run_atom)
-    accts_buddelta.set_atomunit(yao_run_atom)
-    accts_buddelta.set_atomunit(zia_run_atom)
-    print(f"{len(accts_buddelta.get_dimen_sorted_atomunits_list())=}")
-    assert len(accts_buddelta.get_dimen_sorted_atomunits_list()) == 3
+    accts_buddelta.set_budatom(bob_run_atom)
+    accts_buddelta.set_budatom(yao_run_atom)
+    accts_buddelta.set_budatom(zia_run_atom)
+    print(f"{len(accts_buddelta.get_dimen_sorted_budatoms_list())=}")
+    assert len(accts_buddelta.get_dimen_sorted_budatoms_list()) == 3
 
     # WHEN
     new_buddelta = get_minimal_buddelta(accts_buddelta, sue_bud)
 
     # THEN
-    assert len(new_buddelta.get_dimen_sorted_atomunits_list()) == 2
+    assert len(new_buddelta.get_dimen_sorted_budatoms_list()) == 2
 
 
 # all atom dimens are covered by "sift_atom" tests

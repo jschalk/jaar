@@ -52,9 +52,9 @@ from src.f02_bud.bud import (
 )
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
 from src.f04_gift.atom import (
-    AtomUnit,
-    get_from_json as atomunit_get_from_json,
-    modify_bud_with_atomunit,
+    BudAtom,
+    get_from_json as budatom_get_from_json,
+    modify_bud_with_budatom,
 )
 from src.f05_listen.basis_buds import get_default_forecast_bud
 from src.f04_gift.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
@@ -220,7 +220,7 @@ class HubUnit:
     def atom_file_path(self, atom_number: int) -> str:
         return f_path(self._atoms_dir, self.atom_filename(atom_number))
 
-    def _save_valid_atom_file(self, x_atom: AtomUnit, file_number: int):
+    def _save_valid_atom_file(self, x_atom: BudAtom, file_number: int):
         save_file(
             self._atoms_dir,
             self.atom_filename(file_number),
@@ -229,7 +229,7 @@ class HubUnit:
         )
         return file_number
 
-    def save_atom_file(self, x_atom: AtomUnit):
+    def save_atom_file(self, x_atom: BudAtom):
         x_atom_filename = self._get_next_atom_file_number()
         return self._save_valid_atom_file(x_atom, x_atom_filename)
 
@@ -247,8 +247,8 @@ class HubUnit:
 
             for x_atom_filename in sorted_atom_filenames:
                 x_file_str = x_atom_files.get(x_atom_filename)
-                x_atom = atomunit_get_from_json(x_file_str)
-                modify_bud_with_atomunit(x_bud, x_atom)
+                x_atom = budatom_get_from_json(x_file_str)
+                modify_bud_with_budatom(x_bud, x_atom)
         return x_bud
 
     def get_max_gift_file_number(self) -> int:
@@ -325,7 +325,7 @@ class HubUnit:
     def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
         new_giftunit = self._default_giftunit()
         new_buddelta = new_giftunit._buddelta
-        new_buddelta.add_all_different_atomunits(before_bud, after_bud)
+        new_buddelta.add_all_different_budatoms(before_bud, after_bud)
         self.save_gift_file(new_giftunit)
 
     def get_giftunit(self, gift_id: int) -> GiftUnit:
@@ -355,7 +355,7 @@ class HubUnit:
             _gifts_dir=self._gifts_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_giftunit._buddelta.add_all_different_atomunits(
+        x_giftunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.default_voice_bud(),
         )
@@ -371,7 +371,7 @@ class HubUnit:
 
     def _create_initial_gift_files_from_voice(self):
         x_giftunit = self._default_giftunit()
-        x_giftunit._buddelta.add_all_different_atomunits(
+        x_giftunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.get_voice_bud(),
         )

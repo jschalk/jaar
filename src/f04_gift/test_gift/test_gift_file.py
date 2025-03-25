@@ -187,8 +187,8 @@ def test_GiftUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     int5 = 5
     sports_atom = get_atom_example_itemunit_sports()
     knee_atom = get_atom_example_itemunit_knee()
-    sue_giftunit._buddelta.set_atomunit(sports_atom)
-    sue_giftunit._buddelta.set_atomunit(knee_atom)
+    sue_giftunit._buddelta.set_budatom(sports_atom)
+    sue_giftunit._buddelta.set_budatom(knee_atom)
     assert sue_giftunit.gift_file_exists() is False
     assert sue_giftunit.atom_file_exists(int4) is False
     assert sue_giftunit.atom_file_exists(int5) is False
@@ -228,9 +228,9 @@ def test_GiftUnit_create_buddelta_from_atom_files_SetsAttr(env_dir_setup_cleanup
 
     # THEN
     static_buddelta = buddelta_shop()
-    static_buddelta.set_atomunit(spor_atom)
-    static_buddelta.set_atomunit(knee_atom)
-    static_buddelta.set_atomunit(ball_atom)
+    static_buddelta.set_budatom(spor_atom)
+    static_buddelta.set_budatom(knee_atom)
+    static_buddelta.set_budatom(ball_atom)
     assert sue_giftunit._buddelta != buddelta_shop()
     assert sue_giftunit._buddelta == static_buddelta
 
@@ -254,9 +254,9 @@ def test_create_giftunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     sports_atom = get_atom_example_itemunit_sports()
     knee_atom = get_atom_example_itemunit_knee()
     ball_atom = get_atom_example_itemunit_ball()
-    src_sue_giftunit._buddelta.set_atomunit(sports_atom)
-    src_sue_giftunit._buddelta.set_atomunit(knee_atom)
-    src_sue_giftunit._buddelta.set_atomunit(ball_atom)
+    src_sue_giftunit._buddelta.set_budatom(sports_atom)
+    src_sue_giftunit._buddelta.set_budatom(knee_atom)
+    src_sue_giftunit._buddelta.set_budatom(ball_atom)
     src_sue_giftunit.save_files()
 
     # WHEN

@@ -12,10 +12,10 @@ from src.f05_listen.hubunit import hubunit_shop
 from src.f05_listen.examples.example_listen_atoms import get_atom_example_itemunit_knee
 from src.f05_listen.examples.example_listen_gifts import (
     get_sue_giftunit,
-    sue_1atomunits_giftunit,
-    sue_2atomunits_giftunit,
-    sue_3atomunits_giftunit,
-    sue_4atomunits_giftunit,
+    sue_1budatoms_giftunit,
+    sue_2budatoms_giftunit,
+    sue_3budatoms_giftunit,
+    sue_4budatoms_giftunit,
 )
 from src.f05_listen.examples.listen_env import (
     env_dir_setup_cleanup,
@@ -357,7 +357,7 @@ def test_HubUnit_get_giftunit_RaisesExceptionWhenFileDoesNotExist(
     )
 
 
-def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
+def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotBudAtomjsons(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -370,7 +370,7 @@ def test_HubUnit_del_gift_file_DeletesgiftjsonAndNotAtomUnitjsons(
         _atoms_dir=sue_hubunit._atoms_dir,
         _gifts_dir=sue_hubunit._gifts_dir,
     )
-    sue_giftunit._buddelta.set_atomunit(get_atom_example_itemunit_knee())
+    sue_giftunit._buddelta.set_budatom(get_atom_example_itemunit_knee())
     zero_int = 0
     assert sue_hubunit.gift_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
@@ -404,9 +404,9 @@ def test_HubUnit_save_gift_file_CanCreateAndModify3giftunits(
     assert len(get_dir_file_strs(sue_hubunit._atoms_dir)) == 0
 
     # WHEN
-    sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
-    sue_hubunit.save_gift_file(sue_3atomunits_giftunit())
-    sue_hubunit.save_gift_file(sue_4atomunits_giftunit())
+    sue_hubunit.save_gift_file(sue_2budatoms_giftunit())
+    sue_hubunit.save_gift_file(sue_3budatoms_giftunit())
+    sue_hubunit.save_gift_file(sue_4budatoms_giftunit())
 
     # THEN
     assert len(get_dir_file_strs(sue_hubunit._gifts_dir)) == 3
@@ -417,7 +417,7 @@ def test_HubUnit_save_gift_file_ReturnsValidObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    sue2_giftunit = sue_2atomunits_giftunit()
+    sue2_giftunit = sue_2budatoms_giftunit()
     sue2_giftunit._atoms_dir = create_path(sue_hubunit._keeps_dir, "swimming")
     sue2_giftunit._gifts_dir = create_path(sue_hubunit._keeps_dir, "swimming")
     sue2_giftunit.owner_name = "Bob"
@@ -485,7 +485,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_1atom(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    sue_hubunit.save_gift_file(sue_1atomunits_giftunit())
+    sue_hubunit.save_gift_file(sue_1budatoms_giftunit())
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
     print(f"{voice_bud.fisc_title=}")
@@ -510,7 +510,7 @@ def test_HubUnit_merge_any_gifts_ReturnsObj_WithSinglegiftModifies_2atoms(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
+    sue_hubunit.save_gift_file(sue_2budatoms_giftunit())
     sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
     voice_bud = sue_hubunit.get_voice_bud()
     print(f"{voice_bud.fisc_title=}")

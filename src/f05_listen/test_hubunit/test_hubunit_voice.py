@@ -1,7 +1,7 @@
 from src.f00_instrument.file import delete_dir, create_path
 from src.f01_road.jaar_config import init_gift_id, get_test_fisc_title as fisc_title
 from src.f05_listen.hubunit import hubunit_shop
-from src.f05_listen.examples.example_listen_gifts import sue_2atomunits_giftunit
+from src.f05_listen.examples.example_listen_gifts import sue_2budatoms_giftunit
 from src.f05_listen.examples.listen_env import (
     env_dir_setup_cleanup,
     get_listen_temp_env_dir as env_dir,
@@ -222,7 +222,7 @@ def test_HubUnit_append_gifts_to_voice_file_AddsgiftsTovoiceFile(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.initialize_gift_voice_files()
-    sue_hubunit.save_gift_file(sue_2atomunits_giftunit())
+    sue_hubunit.save_gift_file(sue_2budatoms_giftunit())
     voice_bud = sue_hubunit.get_voice_bud()
     print(f"{voice_bud.fisc_title=}")
     sports_str = "sports"

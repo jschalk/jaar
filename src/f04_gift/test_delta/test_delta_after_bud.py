@@ -15,7 +15,7 @@ from src.f02_bud.bud_tool import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.f04_gift.atom import atom_update, atom_delete, atom_insert, atomunit_shop
+from src.f04_gift.atom import atom_update, atom_delete, atom_insert, budatom_shop
 from src.f04_gift.atom_config import (
     acct_name_str,
     awardee_tag_str,
@@ -65,40 +65,40 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     before_sue_budunit = budunit_shop(sue_str, tally=sue_tally)
 
     dimen = budunit_str()
-    x_atomunit = atomunit_shop(dimen, atom_update())
+    x_budatom = budatom_shop(dimen, atom_update())
     new1_value = 55
     new1_arg = "tally"
-    x_atomunit.set_jvalue(new1_arg, new1_value)
+    x_budatom.set_jvalue(new1_arg, new1_value)
     new2_value = 66
     new2_arg = "max_tree_traverse"
-    x_atomunit.set_jvalue(new2_arg, new2_value)
+    x_budatom.set_jvalue(new2_arg, new2_value)
     new3_value = 77
     new3_arg = "credor_respect"
-    x_atomunit.set_jvalue(new3_arg, new3_value)
+    x_budatom.set_jvalue(new3_arg, new3_value)
     new4_value = 88
     new4_arg = "debtor_respect"
-    x_atomunit.set_jvalue(new4_arg, new4_value)
+    x_budatom.set_jvalue(new4_arg, new4_value)
     new9_value = 55550000
     new9_arg = "fund_pool"
-    x_atomunit.set_jvalue(new9_arg, new9_value)
+    x_budatom.set_jvalue(new9_arg, new9_value)
     new8_value = 0.5555
     new8_arg = "fund_coin"
-    x_atomunit.set_jvalue(new8_arg, new8_value)
-    sue_buddelta.set_atomunit(x_atomunit)
+    x_budatom.set_jvalue(new8_arg, new8_value)
+    sue_buddelta.set_budatom(x_budatom)
     new6_value = 0.5
     new6_arg = "respect_bit"
-    x_atomunit.set_jvalue(new6_arg, new6_value)
-    sue_buddelta.set_atomunit(x_atomunit)
+    x_budatom.set_jvalue(new6_arg, new6_value)
+    sue_buddelta.set_budatom(x_budatom)
     new7_value = 0.025
     new7_arg = "penny"
-    x_atomunit.set_jvalue(new7_arg, new7_value)
-    sue_buddelta.set_atomunit(x_atomunit)
+    x_budatom.set_jvalue(new7_arg, new7_value)
+    sue_buddelta.set_budatom(x_budatom)
 
     # WHEN
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
-    print(f"{sue_buddelta.atomunits.keys()=}")
+    print(f"{sue_buddelta.budatoms.keys()=}")
     assert after_sue_budunit.max_tree_traverse == new2_value
     assert after_sue_budunit.credor_respect == new3_value
     assert after_sue_budunit.debtor_respect == new4_value
@@ -126,15 +126,15 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_acct():
     before_sue_budunit.add_acctunit(zia_str)
 
     dimen = bud_acctunit_str()
-    x_atomunit = atomunit_shop(dimen, atom_delete())
-    x_atomunit.set_jkey(acct_name_str(), zia_str)
-    sue_buddelta.set_atomunit(x_atomunit)
+    x_budatom = budatom_shop(dimen, atom_delete())
+    x_budatom.set_jkey(acct_name_str(), zia_str)
+    sue_buddelta.set_budatom(x_budatom)
 
     # WHEN
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
-    print(f"{sue_buddelta.atomunits=}")
+    print(f"{sue_buddelta.budatoms=}")
     assert after_sue_budunit != before_sue_budunit
     assert after_sue_budunit.acct_exists(yao_str)
     assert after_sue_budunit.acct_exists(zia_str) is False
@@ -154,14 +154,14 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_acct():
 
     # WHEN
     dimen = bud_acctunit_str()
-    x_atomunit = atomunit_shop(dimen, atom_insert())
-    x_atomunit.set_jkey(acct_name_str(), zia_str)
+    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom.set_jkey(acct_name_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
-    x_atomunit.set_jvalue("credit_belief", x_credit_belief)
-    x_atomunit.set_jvalue("debtit_belief", x_debtit_belief)
-    sue_buddelta.set_atomunit(x_atomunit)
-    print(f"{sue_buddelta.atomunits.keys()=}")
+    x_budatom.set_jvalue("credit_belief", x_credit_belief)
+    x_budatom.set_jvalue("debtit_belief", x_debtit_belief)
+    sue_buddelta.set_budatom(x_budatom)
+    print(f"{sue_buddelta.budatoms.keys()=}")
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -185,12 +185,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_acct():
 
     # WHEN
     dimen = bud_acctunit_str()
-    x_atomunit = atomunit_shop(dimen, atom_update())
-    x_atomunit.set_jkey(acct_name_str(), yao_str)
+    x_budatom = budatom_shop(dimen, atom_update())
+    x_budatom.set_jkey(acct_name_str(), yao_str)
     yao_credit_belief = 55
-    x_atomunit.set_jvalue("credit_belief", yao_credit_belief)
-    sue_buddelta.set_atomunit(x_atomunit)
-    print(f"{sue_buddelta.atomunits.keys()=}")
+    x_budatom.set_jvalue("credit_belief", yao_credit_belief)
+    sue_buddelta.set_budatom(x_budatom)
+    print(f"{sue_buddelta.budatoms.keys()=}")
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -223,17 +223,17 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_membership():
     assert len(before_group_labels_dict.get(fly_str)) == 3
 
     # WHEN
-    yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    yao_atomunit.set_jkey(group_label_str(), run_str)
-    yao_atomunit.set_jkey(acct_name_str(), yao_str)
-    # print(f"{yao_atomunit=}")
-    zia_atomunit = atomunit_shop(bud_acct_membership_str(), atom_delete())
-    zia_atomunit.set_jkey(group_label_str(), fly_str)
-    zia_atomunit.set_jkey(acct_name_str(), zia_str)
-    # print(f"{zia_atomunit=}")
+    yao_budatom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    yao_budatom.set_jkey(group_label_str(), run_str)
+    yao_budatom.set_jkey(acct_name_str(), yao_str)
+    # print(f"{yao_budatom=}")
+    zia_budatom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    zia_budatom.set_jkey(group_label_str(), fly_str)
+    zia_budatom.set_jkey(acct_name_str(), zia_str)
+    # print(f"{zia_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(yao_atomunit)
-    sue_buddelta.set_atomunit(zia_atomunit)
+    sue_buddelta.set_budatom(yao_budatom)
+    sue_buddelta.set_budatom(zia_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -259,14 +259,14 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_membership():
     assert len(before_group_labels.get(run_str)) == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    yao_atomunit.set_jkey(group_label_str(), run_str)
-    yao_atomunit.set_jkey(acct_name_str(), yao_str)
+    yao_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    yao_budatom.set_jkey(group_label_str(), run_str)
+    yao_budatom.set_jkey(acct_name_str(), yao_str)
     yao_run_credit_vote = 17
-    yao_atomunit.set_jvalue("credit_vote", yao_run_credit_vote)
-    print(f"{yao_atomunit=}")
+    yao_budatom.set_jvalue("credit_vote", yao_run_credit_vote)
+    print(f"{yao_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(yao_atomunit)
+    sue_buddelta.set_budatom(yao_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -293,15 +293,15 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_membership():
     assert yao_run_membership.debtit_vote == 1
 
     # WHEN
-    yao_atomunit = atomunit_shop(bud_acct_membership_str(), atom_update())
-    yao_atomunit.set_jkey(group_label_str(), run_str)
-    yao_atomunit.set_jkey(acct_name_str(), yao_str)
+    yao_budatom = budatom_shop(bud_acct_membership_str(), atom_update())
+    yao_budatom.set_jkey(group_label_str(), run_str)
+    yao_budatom.set_jkey(acct_name_str(), yao_str)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
-    yao_atomunit.set_jvalue(credit_vote_str(), new_yao_run_credit_vote)
-    yao_atomunit.set_jvalue(debtit_vote_str(), new_yao_run_debtit_vote)
+    yao_budatom.set_jvalue(credit_vote_str(), new_yao_run_credit_vote)
+    yao_budatom.set_jvalue(debtit_vote_str(), new_yao_run_debtit_vote)
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(yao_atomunit)
+    sue_buddelta.set_budatom(yao_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -327,18 +327,18 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_itemunit():
     assert before_sue_budunit.item_exists(disc_road)
 
     # WHEN
-    delete_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_delete())
-    delete_disc_atomunit.set_jkey(
+    delete_disc_budatom = budatom_shop(bud_itemunit_str(), atom_delete())
+    delete_disc_budatom.set_jkey(
         item_title_str(), get_terminus_title(disc_road, before_sue_budunit.bridge)
     )
     print(f"{disc_road=}")
-    delete_disc_atomunit.set_jkey(
+    delete_disc_budatom.set_jkey(
         parent_road_str(),
         get_parent_road(disc_road, before_sue_budunit.bridge),
     )
-    print(f"{delete_disc_atomunit=}")
+    print(f"{delete_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(delete_disc_atomunit)
+    sue_buddelta.set_budatom(delete_disc_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -367,21 +367,21 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_itemunit():
     # x_denom = 17
     # x_numor = 10
     x_pledge = True
-    insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    insert_disc_atomunit.set_jkey(item_title_str(), disc_str)
-    insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
-    # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
-    # insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
-    # insert_disc_atomunit.set_jvalue(close_str(), x_close)
-    # insert_disc_atomunit.set_jvalue(denom_str(), x_denom)
-    # insert_disc_atomunit.set_jvalue(numor_str(), x_numor)
-    insert_disc_atomunit.set_jvalue(pledge_str(), x_pledge)
-    insert_disc_atomunit.set_jvalue(gogo_want_str(), x_gogo_want)
-    insert_disc_atomunit.set_jvalue(stop_want_str(), x_stop_want)
+    insert_disc_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    insert_disc_budatom.set_jkey(item_title_str(), disc_str)
+    insert_disc_budatom.set_jkey(parent_road_str(), sports_road)
+    # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
+    # insert_disc_budatom.set_jvalue(begin_str(), x_begin)
+    # insert_disc_budatom.set_jvalue(close_str(), x_close)
+    # insert_disc_budatom.set_jvalue(denom_str(), x_denom)
+    # insert_disc_budatom.set_jvalue(numor_str(), x_numor)
+    insert_disc_budatom.set_jvalue(pledge_str(), x_pledge)
+    insert_disc_budatom.set_jvalue(gogo_want_str(), x_gogo_want)
+    insert_disc_budatom.set_jvalue(stop_want_str(), x_stop_want)
 
-    print(f"{insert_disc_atomunit=}")
+    print(f"{insert_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(insert_disc_atomunit)
+    sue_buddelta.set_budatom(insert_disc_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -410,21 +410,21 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_itemunit_SimpleAttrib
     x_gogo_want = 1222
     x_stop_want = 1333
     x_pledge = True
-    insert_disc_atomunit = atomunit_shop(bud_itemunit_str(), atom_update())
-    insert_disc_atomunit.set_jkey(item_title_str(), ball_str)
-    insert_disc_atomunit.set_jkey(parent_road_str(), sports_road)
-    # insert_disc_atomunit.set_jvalue(addin_str(), x_addin)
-    insert_disc_atomunit.set_jvalue(begin_str(), x_begin)
-    insert_disc_atomunit.set_jvalue(close_str(), x_close)
-    # insert_disc_atomunit.set_jvalue(denom_str(), x_denom)
-    # insert_disc_atomunit.set_jvalue(numor_str(), x_numor)
-    insert_disc_atomunit.set_jvalue(pledge_str(), x_pledge)
-    insert_disc_atomunit.set_jvalue(gogo_want_str(), x_gogo_want)
-    insert_disc_atomunit.set_jvalue(stop_want_str(), x_stop_want)
+    insert_disc_budatom = budatom_shop(bud_itemunit_str(), atom_update())
+    insert_disc_budatom.set_jkey(item_title_str(), ball_str)
+    insert_disc_budatom.set_jkey(parent_road_str(), sports_road)
+    # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
+    insert_disc_budatom.set_jvalue(begin_str(), x_begin)
+    insert_disc_budatom.set_jvalue(close_str(), x_close)
+    # insert_disc_budatom.set_jvalue(denom_str(), x_denom)
+    # insert_disc_budatom.set_jvalue(numor_str(), x_numor)
+    insert_disc_budatom.set_jvalue(pledge_str(), x_pledge)
+    insert_disc_budatom.set_jvalue(gogo_want_str(), x_gogo_want)
+    insert_disc_budatom.set_jvalue(stop_want_str(), x_stop_want)
 
-    print(f"{insert_disc_atomunit=}")
+    print(f"{insert_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(insert_disc_atomunit)
+    sue_buddelta.set_budatom(insert_disc_budatom)
     assert before_sue_budunit.get_item_obj(ball_road).begin is None
     assert before_sue_budunit.get_item_obj(ball_road).close is None
     assert before_sue_budunit.get_item_obj(ball_road).pledge is False
@@ -479,12 +479,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_awardlink():
     assert len(before_sue_budunit.get_item_obj(disc_road).awardlinks) == 2
 
     # WHEN
-    delete_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_delete())
-    delete_disc_atomunit.set_jkey("road", disc_road)
-    delete_disc_atomunit.set_jkey(awardee_tag_str(), fly_str)
-    print(f"{delete_disc_atomunit=}")
+    delete_disc_budatom = budatom_shop(bud_item_awardlink_str(), atom_delete())
+    delete_disc_budatom.set_jkey("road", disc_road)
+    delete_disc_budatom.set_jkey(awardee_tag_str(), fly_str)
+    print(f"{delete_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(delete_disc_atomunit)
+    sue_buddelta.set_budatom(delete_disc_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -517,14 +517,14 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_awardlink():
     # WHEN
     x_give_force = 55
     x_take_force = 66
-    update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_update())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(awardee_tag_str(), run_str)
-    update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
-    update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_awardlink_str(), atom_update())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey(awardee_tag_str(), run_str)
+    update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
+    update_disc_budatom.set_jvalue(take_force_str(), x_take_force)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -556,14 +556,14 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_awardlink():
     # WHEN
     x_give_force = 55
     x_take_force = 66
-    update_disc_atomunit = atomunit_shop(bud_item_awardlink_str(), atom_insert())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(awardee_tag_str(), run_str)
-    update_disc_atomunit.set_jvalue(give_force_str(), x_give_force)
-    update_disc_atomunit.set_jvalue(take_force_str(), x_take_force)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_awardlink_str(), atom_insert())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey(awardee_tag_str(), run_str)
+    update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
+    update_disc_budatom.set_jvalue(take_force_str(), x_take_force)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -592,15 +592,15 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     # WHEN
     damaged_fopen = 55
     damaged_fnigh = 66
-    update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_insert())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jvalue("pick", damaged_road)
-    update_disc_atomunit.set_jvalue(fopen_str(), damaged_fopen)
-    update_disc_atomunit.set_jvalue(fnigh_str(), damaged_fnigh)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_factunit_str(), atom_insert())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jvalue("pick", damaged_road)
+    update_disc_budatom.set_jvalue(fopen_str(), damaged_fopen)
+    update_disc_budatom.set_jvalue(fnigh_str(), damaged_fnigh)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -636,12 +636,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_factunit():
     assert before_ball_item.factunits.get(knee_road) is not None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_delete())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_factunit_str(), atom_delete())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -679,15 +679,15 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     # WHEN
     medical_fopen = 45
     medical_fnigh = 77
-    update_disc_atomunit = atomunit_shop(bud_item_factunit_str(), atom_update())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jvalue("pick", medical_road)
-    update_disc_atomunit.set_jvalue(fopen_str(), medical_fopen)
-    update_disc_atomunit.set_jvalue(fnigh_str(), medical_fnigh)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_factunit_str(), atom_update())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jvalue("pick", medical_road)
+    update_disc_budatom.set_jvalue(fopen_str(), medical_fopen)
+    update_disc_budatom.set_jvalue(fnigh_str(), medical_fnigh)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -731,18 +731,16 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_reason_premiseun
     damaged_open = 45
     damaged_nigh = 77
     damaged_divisor = 3
-    update_disc_atomunit = atomunit_shop(
-        bud_item_reason_premiseunit_str(), atom_update()
-    )
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jkey("need", damaged_road)
-    update_disc_atomunit.set_jvalue("open", damaged_open)
-    update_disc_atomunit.set_jvalue("nigh", damaged_nigh)
-    update_disc_atomunit.set_jvalue("divisor", damaged_divisor)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_reason_premiseunit_str(), atom_update())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jkey("need", damaged_road)
+    update_disc_budatom.set_jvalue("open", damaged_open)
+    update_disc_budatom.set_jvalue("nigh", damaged_nigh)
+    update_disc_budatom.set_jvalue("divisor", damaged_divisor)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -786,18 +784,16 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_reason_premiseun
     medical_open = 45
     medical_nigh = 77
     medical_divisor = 3
-    update_disc_atomunit = atomunit_shop(
-        bud_item_reason_premiseunit_str(), atom_insert()
-    )
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jkey("need", medical_road)
-    update_disc_atomunit.set_jvalue("open", medical_open)
-    update_disc_atomunit.set_jvalue("nigh", medical_nigh)
-    update_disc_atomunit.set_jvalue("divisor", medical_divisor)
-    # print(f"{update_disc_atomunit=}")
+    update_disc_budatom = budatom_shop(bud_item_reason_premiseunit_str(), atom_insert())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jkey("need", medical_road)
+    update_disc_budatom.set_jvalue("open", medical_open)
+    update_disc_budatom.set_jvalue("nigh", medical_nigh)
+    update_disc_budatom.set_jvalue("divisor", medical_divisor)
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -841,14 +837,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_reason_premiseun
     assert before_knee_reasonunit.get_premise(medical_road) is not None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(
-        bud_item_reason_premiseunit_str(), atom_delete()
-    )
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jkey("need", medical_road)
+    update_disc_budatom = budatom_shop(bud_item_reason_premiseunit_str(), atom_delete())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jkey("need", medical_road)
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -878,15 +872,15 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_reasonunit():
 
     # WHEN
     medical_base_item_active_requisite = True
-    update_disc_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_insert())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jvalue(
+    update_disc_budatom = budatom_shop(bud_item_reasonunit_str(), atom_insert())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jvalue(
         base_item_active_requisite_str(), medical_base_item_active_requisite
     )
-    # print(f"{update_disc_atomunit=}")
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -931,15 +925,15 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_reasonunit():
 
     # WHEN
     after_medical_base_item_active_requisite = True
-    update_disc_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_update())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
-    update_disc_atomunit.set_jvalue(
+    update_disc_budatom = budatom_shop(bud_item_reasonunit_str(), atom_update())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
+    update_disc_budatom.set_jvalue(
         base_item_active_requisite_str(), after_medical_base_item_active_requisite
     )
-    # print(f"{update_disc_atomunit=}")
+    # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -975,11 +969,11 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_reasonunit():
     assert before_ball_item.get_reasonunit(knee_road) is not None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(bud_item_reasonunit_str(), atom_delete())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey("base", knee_road)
+    update_disc_budatom = budatom_shop(bud_item_reasonunit_str(), atom_delete())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey("base", knee_road)
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -1002,11 +996,11 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_teamlink():
     assert before_ball_itemunit.teamunit._teamlinks == set()
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_insert())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(team_tag_str(), yao_str)
+    update_disc_budatom = budatom_shop(bud_item_teamlink_str(), atom_insert())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey(team_tag_str(), yao_str)
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -1032,11 +1026,11 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_teamlink():
     assert before_ball_itemunit.teamunit.get_teamlink(yao_str) is not None
 
     # WHEN
-    update_disc_atomunit = atomunit_shop(bud_item_teamlink_str(), atom_delete())
-    update_disc_atomunit.set_jkey("road", ball_road)
-    update_disc_atomunit.set_jkey(team_tag_str(), yao_str)
+    update_disc_budatom = budatom_shop(bud_item_teamlink_str(), atom_delete())
+    update_disc_budatom.set_jkey("road", ball_road)
+    update_disc_budatom.set_jkey(team_tag_str(), yao_str)
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(update_disc_atomunit)
+    sue_buddelta.set_budatom(update_disc_budatom)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
@@ -1061,12 +1055,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_healerlink():
     assert not before_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
-    x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_insert())
-    x_atomunit.set_jkey("road", ball_road)
-    x_atomunit.set_jkey(healer_name_str(), yao_str)
-    print(f"{x_atomunit=}")
+    x_budatom = budatom_shop(bud_item_healerlink_str(), atom_insert())
+    x_budatom.set_jkey("road", ball_road)
+    x_budatom.set_jkey(healer_name_str(), yao_str)
+    print(f"{x_budatom=}")
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(x_atomunit)
+    sue_buddelta.set_budatom(x_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
@@ -1092,11 +1086,11 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_healerlink():
     assert before_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
-    x_atomunit = atomunit_shop(bud_item_healerlink_str(), atom_delete())
-    x_atomunit.set_jkey("road", ball_road)
-    x_atomunit.set_jkey(healer_name_str(), yao_str)
+    x_budatom = budatom_shop(bud_item_healerlink_str(), atom_delete())
+    x_budatom.set_jkey("road", ball_road)
+    x_budatom.set_jkey(healer_name_str(), yao_str)
     sue_buddelta = buddelta_shop()
-    sue_buddelta.set_atomunit(x_atomunit)
+    sue_buddelta.set_budatom(x_budatom)
     print(f"{before_sue_au.get_item_obj(ball_road).teamunit=}")
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
@@ -1106,7 +1100,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_healerlink():
     assert not after_ball_itemunit.healerlink.healer_name_exists(yao_str)
 
 
-def test_BudDelta_get_buddelta_example1_ContainsAtomUnits():
+def test_BudDelta_get_buddelta_example1_ContainsBudAtoms():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_budunit = budunit_shop(sue_str)

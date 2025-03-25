@@ -41,56 +41,56 @@ from src.f00_instrument.dict_toolbox import get_from_nested_dict, get_empty_list
 from copy import deepcopy as copy_deepcopy
 
 
-def print_atomunit_keys(x_buddelta: BudDelta):
-    for x_atomunit in get_delete_atomunit_list(x_buddelta):
-        print(f"DELETE {x_atomunit.dimen} {list(x_atomunit.jkeys.values())}")
-    for x_atomunit in get_update_atomunit_list(x_buddelta):
-        print(f"UPDATE {x_atomunit.dimen} {list(x_atomunit.jkeys.values())}")
-    for x_atomunit in get_insert_atomunit_list(x_buddelta):
-        print(f"INSERT {x_atomunit.dimen} {list(x_atomunit.jkeys.values())}")
+def print_budatom_keys(x_buddelta: BudDelta):
+    for x_budatom in get_delete_budatom_list(x_buddelta):
+        print(f"DELETE {x_budatom.dimen} {list(x_budatom.jkeys.values())}")
+    for x_budatom in get_update_budatom_list(x_buddelta):
+        print(f"UPDATE {x_budatom.dimen} {list(x_budatom.jkeys.values())}")
+    for x_budatom in get_insert_budatom_list(x_buddelta):
+        print(f"INSERT {x_budatom.dimen} {list(x_budatom.jkeys.values())}")
 
 
-def get_delete_atomunit_list(x_buddelta: BudDelta) -> list:
+def get_delete_budatom_list(x_buddelta: BudDelta) -> list:
     return get_empty_list_if_None(
-        x_buddelta._get_crud_atomunits_list().get(atom_delete())
+        x_buddelta._get_crud_budatoms_list().get(atom_delete())
     )
 
 
-def get_insert_atomunit_list(x_buddelta: BudDelta):
+def get_insert_budatom_list(x_buddelta: BudDelta):
     return get_empty_list_if_None(
-        x_buddelta._get_crud_atomunits_list().get(atom_insert())
+        x_buddelta._get_crud_budatoms_list().get(atom_insert())
     )
 
 
-def get_update_atomunit_list(x_buddelta: BudDelta):
+def get_update_budatom_list(x_buddelta: BudDelta):
     return get_empty_list_if_None(
-        x_buddelta._get_crud_atomunits_list().get(atom_update())
+        x_buddelta._get_crud_budatoms_list().get(atom_update())
     )
 
 
-def get_atomunit_total_count(x_buddelta: BudDelta) -> int:
+def get_budatom_total_count(x_buddelta: BudDelta) -> int:
     return (
-        len(get_delete_atomunit_list(x_buddelta))
-        + len(get_insert_atomunit_list(x_buddelta))
-        + len(get_update_atomunit_list(x_buddelta))
+        len(get_delete_budatom_list(x_buddelta))
+        + len(get_insert_budatom_list(x_buddelta))
+        + len(get_update_budatom_list(x_buddelta))
     )
 
 
-def test_BudDelta_create_atomunits_EmptyBuds():
+def test_BudDelta_create_budatoms_EmptyBuds():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     sue_buddelta = buddelta_shop()
-    assert sue_buddelta.atomunits == {}
+    assert sue_buddelta.budatoms == {}
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(sue_bud, sue_bud)
+    sue_buddelta.add_all_different_budatoms(sue_bud, sue_bud)
 
     # THEN
-    assert sue_buddelta.atomunits == {}
+    assert sue_buddelta.budatoms == {}
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acctunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -103,22 +103,22 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acctunit_insert()
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    assert len(sue_buddelta.atomunits.get(atom_insert()).get(bud_acctunit_str())) == 1
-    sue_insert_dict = sue_buddelta.atomunits.get(atom_insert())
+    assert len(sue_buddelta.budatoms.get(atom_insert()).get(bud_acctunit_str())) == 1
+    sue_insert_dict = sue_buddelta.budatoms.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
-    xio_atomunit = sue_acctunit_dict.get(xio_str)
-    assert xio_atomunit.get_value(acct_name_str()) == xio_str
-    assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
-    assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
+    xio_budatom = sue_acctunit_dict.get(xio_str)
+    assert xio_budatom.get_value(acct_name_str()) == xio_str
+    assert xio_budatom.get_value("credit_belief") == xio_credit_belief
+    assert xio_budatom.get_value("debtit_belief") == xio_debtit_belief
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acctunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -132,20 +132,20 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acctunit_delete()
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    xio_atomunit = get_from_nested_dict(
-        sue_buddelta.atomunits, [atom_delete(), bud_acctunit_str(), xio_str]
+    xio_budatom = get_from_nested_dict(
+        sue_buddelta.budatoms, [atom_delete(), bud_acctunit_str(), xio_str]
     )
-    assert xio_atomunit.get_value(acct_name_str()) == xio_str
+    assert xio_budatom.get_value(acct_name_str()) == xio_str
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    print_atomunit_keys(sue_buddelta)
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    print_budatom_keys(sue_buddelta)
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acctunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acctunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -158,20 +158,20 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acctunit_update()
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
     x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
-    xio_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_name_str()) == xio_str
-    assert xio_atomunit.get_value("credit_belief") == xio_credit_belief
-    assert xio_atomunit.get_value("debtit_belief") == xio_debtit_belief
+    xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert xio_budatom.get_value(acct_name_str()) == xio_str
+    assert xio_budatom.get_value("credit_belief") == xio_credit_belief
+    assert xio_budatom.get_value("debtit_belief") == xio_debtit_belief
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_attrs_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_BudUnit_simple_attrs_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -193,24 +193,24 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_BudUnit_simple_at
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
     x_keylist = [atom_update(), budunit_str()]
-    xio_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert xio_atomunit.get_value("max_tree_traverse") == x_max_tree_traverse
-    assert xio_atomunit.get_value("credor_respect") == x_credor_respect
-    assert xio_atomunit.get_value("debtor_respect") == x_debtor_respect
-    assert xio_atomunit.get_value("tally") == x_budunit_tally
-    assert xio_atomunit.get_value("fund_pool") == x_fund_pool
-    assert xio_atomunit.get_value("fund_coin") == x_fund_coin
-    assert xio_atomunit.get_value("respect_bit") == x_respect_bit
+    xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert xio_budatom.get_value("max_tree_traverse") == x_max_tree_traverse
+    assert xio_budatom.get_value("credor_respect") == x_credor_respect
+    assert xio_budatom.get_value("debtor_respect") == x_debtor_respect
+    assert xio_budatom.get_value("tally") == x_budunit_tally
+    assert xio_budatom.get_value("fund_pool") == x_fund_pool
+    assert xio_budatom.get_value("fund_coin") == x_fund_coin
+    assert xio_budatom.get_value("respect_bit") == x_respect_bit
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acct_membership_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -232,39 +232,39 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acct_membership_i
     # WHEN
     sue_buddelta = buddelta_shop()
     print(f"{after_sue_bud.get_acct(zia_str)._memberships=}")
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
-    # print(f"{sue_buddelta.atomunits.get(atom_insert()).keys()=}")
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
+    # print(f"{sue_buddelta.budatoms.get(atom_insert()).keys()=}")
     # print(
-    #     sue_buddelta.atomunits.get(atom_insert()).get(bud_acct_membership_str()).keys()
+    #     sue_buddelta.budatoms.get(atom_insert()).get(bud_acct_membership_str()).keys()
     # )
 
     # THEN
     x_keylist = [atom_insert(), bud_acctunit_str(), yao_str]
-    yao_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert yao_atomunit.get_value(acct_name_str()) == yao_str
+    yao_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert yao_budatom.get_value(acct_name_str()) == yao_str
 
     x_keylist = [atom_insert(), bud_acctunit_str(), zia_str]
-    zia_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert zia_atomunit.get_value(acct_name_str()) == zia_str
-    print(f"\n{sue_buddelta.atomunits=}")
-    # print(f"\n{zia_atomunit=}")
+    zia_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert zia_budatom.get_value(acct_name_str()) == zia_str
+    print(f"\n{sue_buddelta.budatoms=}")
+    # print(f"\n{zia_budatom=}")
 
     x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
-    run_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert run_atomunit.get_value(acct_name_str()) == zia_str
-    assert run_atomunit.get_value(group_label_str()) == run_str
-    assert run_atomunit.get_value("credit_vote") == zia_run_credit_w
-    assert run_atomunit.get_value("debtit_vote") == zia_run_debtit_w
+    run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert run_budatom.get_value(acct_name_str()) == zia_str
+    assert run_budatom.get_value(group_label_str()) == run_str
+    assert run_budatom.get_value("credit_vote") == zia_run_credit_w
+    assert run_budatom.get_value("debtit_vote") == zia_run_debtit_w
 
-    print_atomunit_keys(sue_buddelta)
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    assert len(get_delete_atomunit_list(sue_buddelta)) == 0
-    assert len(get_insert_atomunit_list(sue_buddelta)) == 3
-    assert len(get_delete_atomunit_list(sue_buddelta)) == 0
-    assert get_atomunit_total_count(sue_buddelta) == 3
+    print_budatom_keys(sue_buddelta)
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    assert len(get_delete_budatom_list(sue_buddelta)) == 0
+    assert len(get_insert_budatom_list(sue_buddelta)) == 3
+    assert len(get_delete_budatom_list(sue_buddelta)) == 0
+    assert get_budatom_total_count(sue_buddelta) == 3
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acct_membership_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -285,27 +285,27 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acct_membership_u
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
     # x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
-    # xio_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    # assert xio_atomunit.get_value(acct_name_str()) == xio_str
-    # print(f"\n{sue_buddelta.atomunits=}")
-    # print(f"\n{xio_atomunit=}")
+    # xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    # assert xio_budatom.get_value(acct_name_str()) == xio_str
+    # print(f"\n{sue_buddelta.budatoms=}")
+    # print(f"\n{xio_budatom=}")
 
     x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
-    xio_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_name_str()) == xio_str
-    assert xio_atomunit.get_value(group_label_str()) == run_str
-    assert xio_atomunit.get_value("credit_vote") == after_xio_credit_w
-    assert xio_atomunit.get_value("debtit_vote") == after_xio_debtit_w
+    xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert xio_budatom.get_value(acct_name_str()) == xio_str
+    assert xio_budatom.get_value(group_label_str()) == run_str
+    assert xio_budatom.get_value("credit_vote") == after_xio_credit_w
+    assert xio_budatom.get_value("debtit_vote") == after_xio_debtit_w
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acct_membership_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -342,23 +342,23 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_acct_membership_d
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
     x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
-    xio_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert xio_atomunit.get_value(acct_name_str()) == bob_str
-    assert xio_atomunit.get_value(group_label_str()) == fly_str
+    xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert xio_budatom.get_value(acct_name_str()) == bob_str
+    assert xio_budatom.get_value(group_label_str()) == fly_str
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    print_atomunit_keys(sue_buddelta)
-    assert len(get_delete_atomunit_list(sue_buddelta)) == 3
-    assert len(get_insert_atomunit_list(sue_buddelta)) == 0
-    assert len(get_update_atomunit_list(sue_buddelta)) == 0
-    assert get_atomunit_total_count(sue_buddelta) == 3
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    print_budatom_keys(sue_buddelta)
+    assert len(get_delete_budatom_list(sue_buddelta)) == 3
+    assert len(get_insert_budatom_list(sue_buddelta)) == 0
+    assert len(get_update_budatom_list(sue_buddelta)) == 0
+    assert get_budatom_total_count(sue_buddelta) == 3
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -381,27 +381,27 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_delete():
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
     x_dimen = bud_itemunit_str()
-    print(f"{sue_buddelta.atomunits.get(atom_delete()).get(x_dimen).keys()=}")
+    print(f"{sue_buddelta.budatoms.get(atom_delete()).get(x_dimen).keys()=}")
 
     x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
-    street_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert street_atomunit.get_value(parent_road_str()) == ball_road
-    assert street_atomunit.get_value(item_title_str()) == street_str
+    street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert street_budatom.get_value(parent_road_str()) == ball_road
+    assert street_budatom.get_value(item_title_str()) == street_str
 
     x_keylist = [atom_delete(), bud_itemunit_str(), sports_road, ball_str]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(parent_road_str()) == sports_road
-    assert ball_atomunit.get_value(item_title_str()) == ball_str
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(parent_road_str()) == sports_road
+    assert ball_budatom.get_value(item_title_str()) == ball_str
 
-    print(f"{get_atomunit_total_count(sue_buddelta)=}")
-    assert get_atomunit_total_count(sue_buddelta) == 2
+    print(f"{get_budatom_total_count(sue_buddelta)=}")
+    assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -436,15 +436,15 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_insert():
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print_atomunit_keys(sue_buddelta)
+    print_budatom_keys(sue_buddelta)
 
     x_keylist = [atom_insert(), bud_itemunit_str(), sports_road, disc_str]
-    street_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert street_atomunit.get_value(parent_road_str()) == sports_road
-    assert street_atomunit.get_value(item_title_str()) == disc_str
+    street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert street_budatom.get_value(parent_road_str()) == sports_road
+    assert street_budatom.get_value(item_title_str()) == disc_str
 
     x_keylist = [
         atom_insert(),
@@ -452,18 +452,18 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_insert():
         after_sue_bud.fisc_title,
         accord45_str,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(item_title_str()) == accord45_str
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud.fisc_title
-    assert ball_atomunit.get_value(begin_str()) == accord_begin
-    assert ball_atomunit.get_value(close_str()) == accord_close
-    assert ball_atomunit.get_value(mass_str()) == accord_mass
-    assert ball_atomunit.get_value(pledge_str()) == accord_pledge
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(item_title_str()) == accord45_str
+    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_title
+    assert ball_budatom.get_value(begin_str()) == accord_begin
+    assert ball_budatom.get_value(close_str()) == accord_close
+    assert ball_budatom.get_value(mass_str()) == accord_mass
+    assert ball_budatom.get_value(pledge_str()) == accord_pledge
 
-    assert get_atomunit_total_count(sue_buddelta) == 2
+    assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -500,10 +500,10 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_update():
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print_atomunit_keys(sue_buddelta)
+    print_budatom_keys(sue_buddelta)
 
     x_keylist = [
         atom_update(),
@@ -511,18 +511,18 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_update():
         after_sue_bud.fisc_title,
         accord45_str,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(parent_road_str()) == after_sue_bud.fisc_title
-    assert ball_atomunit.get_value(item_title_str()) == accord45_str
-    assert ball_atomunit.get_value(begin_str()) == after_accord_begin
-    assert ball_atomunit.get_value(close_str()) == after_accord_close
-    assert ball_atomunit.get_value(mass_str()) == after_accord_mass
-    assert ball_atomunit.get_value(pledge_str()) == after_accord_pledge
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_title
+    assert ball_budatom.get_value(item_title_str()) == accord45_str
+    assert ball_budatom.get_value(begin_str()) == after_accord_begin
+    assert ball_budatom.get_value(close_str()) == after_accord_close
+    assert ball_budatom.get_value(mass_str()) == after_accord_mass
+    assert ball_budatom.get_value(pledge_str()) == after_accord_pledge
 
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -560,20 +560,20 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_de
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_au, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_au, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
 
     x_keylist = [atom_delete(), bud_item_awardlink_str(), disc_road, run_str]
-    run_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert run_atomunit.get_value(road_str()) == disc_road
-    assert run_atomunit.get_value(awardee_tag_str()) == run_str
+    run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert run_budatom.get_value(road_str()) == disc_road
+    assert run_budatom.get_value(awardee_tag_str()) == run_str
 
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -612,24 +612,24 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_in
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_au, after_sue_au)
+    sue_buddelta.add_all_different_budatoms(before_sue_au, after_sue_au)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
 
     x_keylist = [atom_insert(), bud_item_awardlink_str(), disc_road, run_str]
-    run_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert run_atomunit.get_value(road_str()) == disc_road
-    assert run_atomunit.get_value(awardee_tag_str()) == run_str
-    assert run_atomunit.get_value(road_str()) == disc_road
-    assert run_atomunit.get_value(awardee_tag_str()) == run_str
-    assert run_atomunit.get_value(give_force_str()) == after_run_give_force
-    assert run_atomunit.get_value(take_force_str()) == after_run_take_force
+    run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert run_budatom.get_value(road_str()) == disc_road
+    assert run_budatom.get_value(awardee_tag_str()) == run_str
+    assert run_budatom.get_value(road_str()) == disc_road
+    assert run_budatom.get_value(awardee_tag_str()) == run_str
+    assert run_budatom.get_value(give_force_str()) == after_run_give_force
+    assert run_budatom.get_value(take_force_str()) == after_run_take_force
 
-    assert get_atomunit_total_count(sue_buddelta) == 2
+    assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -661,21 +661,21 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_awardlink_up
     )
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_au, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_au, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
 
     x_keylist = [atom_update(), bud_item_awardlink_str(), ball_road, run_str]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(awardee_tag_str()) == run_str
-    assert ball_atomunit.get_value(give_force_str()) == after_give_force
-    assert ball_atomunit.get_value(take_force_str()) == after_take_force
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(awardee_tag_str()) == run_str
+    assert ball_budatom.get_value(give_force_str()) == after_give_force
+    assert ball_budatom.get_value(take_force_str()) == after_take_force
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -706,22 +706,22 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_upd
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
 
     x_keylist = [atom_update(), bud_item_factunit_str(), ball_road, knee_road]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("pick") == damaged_road
-    assert ball_atomunit.get_value(fopen_str()) == after_fopen
-    assert ball_atomunit.get_value(fnigh_str()) == after_fnigh
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value("pick") == damaged_road
+    assert ball_budatom.get_value(fopen_str()) == after_fopen
+    assert ball_budatom.get_value(fnigh_str()) == after_fnigh
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -745,21 +745,21 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_ins
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [atom_insert(), bud_item_factunit_str(), ball_road, knee_road]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("pick") == damaged_road
-    assert ball_atomunit.get_value(fopen_str()) == after_fopen
-    assert ball_atomunit.get_value(fnigh_str()) == after_fnigh
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value("pick") == damaged_road
+    assert ball_budatom.get_value(fopen_str()) == after_fopen
+    assert ball_budatom.get_value(fnigh_str()) == after_fnigh
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -788,20 +788,20 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_factunit_del
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [atom_delete(), bud_item_factunit_str(), ball_road, knee_road]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premiseunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_reason_premiseunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -838,10 +838,10 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
         bud_item_reason_premiseunit_str(),
@@ -849,17 +849,17 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
         knee_road,
         damaged_road,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("need") == damaged_road
-    assert ball_atomunit.get_value("open") == damaged_open
-    assert ball_atomunit.get_value("nigh") == damaged_nigh
-    assert ball_atomunit.get_value("divisor") == damaged_divisor
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value("need") == damaged_road
+    assert ball_budatom.get_value("open") == damaged_open
+    assert ball_budatom.get_value("nigh") == damaged_nigh
+    assert ball_budatom.get_value("divisor") == damaged_divisor
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premiseunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_reason_premiseunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -900,10 +900,10 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
         bud_item_reason_premiseunit_str(),
@@ -911,14 +911,14 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
         knee_road,
         damaged_road,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("need") == damaged_road
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value("need") == damaged_road
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premiseunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_reason_premiseunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -966,10 +966,10 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_update(),
         bud_item_reason_premiseunit_str(),
@@ -977,17 +977,17 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reason_premi
         knee_road,
         damaged_road,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == knee_road
-    assert ball_atomunit.get_value("need") == damaged_road
-    assert ball_atomunit.get_value("open") == after_damaged_open
-    assert ball_atomunit.get_value("nigh") == after_damaged_nigh
-    assert ball_atomunit.get_value("divisor") == after_damaged_divisor
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value("need") == damaged_road
+    assert ball_budatom.get_value("open") == after_damaged_open
+    assert ball_budatom.get_value("nigh") == after_damaged_nigh
+    assert ball_budatom.get_value("divisor") == after_damaged_divisor
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_reasonunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1012,27 +1012,27 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_i
     )
 
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
         bud_item_reasonunit_str(),
         ball_road,
         medical_road,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == medical_road
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == medical_road
     assert (
-        ball_atomunit.get_value(base_item_active_requisite_str())
+        ball_budatom.get_value(base_item_active_requisite_str())
         == after_medical_base_item_active_requisite
     )
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_reasonunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1064,27 +1064,27 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_u
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_update(),
         bud_item_reasonunit_str(),
         ball_road,
         medical_road,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == medical_road
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == medical_road
     assert (
-        ball_atomunit.get_value(base_item_active_requisite_str())
+        ball_budatom.get_value(base_item_active_requisite_str())
         == after_medical_base_item_active_requisite
     )
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_reasonunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1112,23 +1112,23 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_reasonunit_d
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
         bud_item_reasonunit_str(),
         ball_road,
         medical_road,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value("base") == medical_road
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value("base") == medical_road
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_teamlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1146,23 +1146,23 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_ins
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
         bud_item_teamlink_str(),
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(team_tag_str()) == xio_str
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(team_tag_str()) == xio_str
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_teamlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1182,23 +1182,23 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_teamlink_del
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
         bud_item_teamlink_str(),
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(team_tag_str()) == xio_str
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(team_tag_str()) == xio_str
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_insert_ItemUnitUpdate():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_healerlink_insert_ItemUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1216,23 +1216,23 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_i
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
         bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist)
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_name_str()) == xio_str
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(healer_name_str()) == xio_str
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_insert_ItemUnitInsert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_healerlink_insert_ItemUnitInsert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1250,24 +1250,24 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_i
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
         bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_from_nested_dict(sue_buddelta.atomunits, x_keylist, True)
-    assert ball_atomunit
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_name_str()) == xio_str
-    assert get_atomunit_total_count(sue_buddelta) == 3
+    ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist, True)
+    assert ball_budatom
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(healer_name_str()) == xio_str
+    assert get_budatom_total_count(sue_buddelta) == 3
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_delete_ItemUnitUpdate():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_healerlink_delete_ItemUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1287,26 +1287,26 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_d
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
         bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_from_nested_dict(
-        sue_buddelta.atomunits, x_keylist, if_missing_return_None=True
+    ball_budatom = get_from_nested_dict(
+        sue_buddelta.budatoms, x_keylist, if_missing_return_None=True
     )
-    assert ball_atomunit
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_name_str()) == xio_str
-    assert get_atomunit_total_count(sue_buddelta) == 1
+    assert ball_budatom
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(healer_name_str()) == xio_str
+    assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_delete_ItemUnitDelete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_healerlink_delete_ItemUnitDelete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1325,26 +1325,26 @@ def test_BudDelta_add_all_different_atomunits_Creates_AtomUnit_item_healerlink_d
 
     # WHEN
     sue_buddelta = buddelta_shop()
-    sue_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    print(f"{print_atomunit_keys(sue_buddelta)=}")
+    print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
         bud_item_healerlink_str(),
         ball_road,
         xio_str,
     ]
-    ball_atomunit = get_from_nested_dict(
-        sue_buddelta.atomunits, x_keylist, if_missing_return_None=True
+    ball_budatom = get_from_nested_dict(
+        sue_buddelta.budatoms, x_keylist, if_missing_return_None=True
     )
-    assert ball_atomunit
-    assert ball_atomunit.get_value(road_str()) == ball_road
-    assert ball_atomunit.get_value(healer_name_str()) == xio_str
-    assert get_atomunit_total_count(sue_buddelta) == 2
+    assert ball_budatom
+    assert ball_budatom.get_value(road_str()) == ball_road
+    assert ball_budatom.get_value(healer_name_str()) == xio_str
+    assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_atomunits_CorrectlyCreates_AtomUnits():
+def test_BudDelta_add_all_budatoms_CorrectlyCreates_BudAtoms():
     # ESTABLISH
     sue_str = "Sue"
 
@@ -1362,14 +1362,14 @@ def test_BudDelta_add_all_atomunits_CorrectlyCreates_AtomUnits():
 
     before_sue_bud = budunit_shop(sue_str)
     sue1_buddelta = buddelta_shop()
-    sue1_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
-    print(f"{sue1_buddelta.get_ordered_atomunits()}")
-    assert len(sue1_buddelta.get_ordered_atomunits()) == 4
+    sue1_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
+    print(f"{sue1_buddelta.get_ordered_budatoms()}")
+    assert len(sue1_buddelta.get_ordered_budatoms()) == 4
 
     # WHEN
     sue2_buddelta = buddelta_shop()
-    sue2_buddelta.add_all_atomunits(after_sue_bud)
+    sue2_buddelta.add_all_budatoms(after_sue_bud)
 
     # THEN
-    assert len(sue2_buddelta.get_ordered_atomunits()) == 4
+    assert len(sue2_buddelta.get_ordered_budatoms()) == 4
     assert sue2_buddelta == sue1_buddelta

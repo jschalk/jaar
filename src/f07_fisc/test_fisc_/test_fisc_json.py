@@ -13,7 +13,7 @@ from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_dict as fiscunit_get_from_dict,
     get_from_json as fiscunit_get_from_json,
-    get_from_standard as fiscunit_get_from_standard,
+    get_from_default_path as fiscunit_get_from_default_path,
 )
 from src.f07_fisc.fisc_config import (
     timeline_str,
@@ -245,7 +245,7 @@ def test_get_from_file_ReturnsFiscUnitWith_fisc_mstr_dir(env_dir_setup_cleanup):
     assert accord45_fisc.fisc_mstr_dir != x_fisc_mstr_dir
 
     # WHEN
-    generated_a45_fisc = fiscunit_get_from_standard(x_fisc_mstr_dir, accord45_str)
+    generated_a45_fisc = fiscunit_get_from_default_path(x_fisc_mstr_dir, accord45_str)
 
     # THEN
     assert generated_a45_fisc.fisc_mstr_dir == x_fisc_mstr_dir

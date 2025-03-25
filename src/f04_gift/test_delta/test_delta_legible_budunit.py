@@ -1,6 +1,6 @@
 from src.f02_bud.bud_tool import budunit_str
 from src.f04_gift.atom_config import atom_update
-from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom import budatom_shop
 from src.f04_gift.delta import buddelta_shop
 from src.f04_gift.legible import create_legible_list
 from src.f02_bud.bud import budunit_shop
@@ -20,10 +20,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     dimen = budunit_str()
     tally_str = "tally"
     tally_int = 55
-    tally_atomunit = atomunit_shop(dimen, atom_update())
-    tally_atomunit.set_arg(tally_str, tally_int)
+    tally_budatom = budatom_shop(dimen, atom_update())
+    tally_budatom.set_arg(tally_str, tally_int)
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(tally_atomunit)
+    x_buddelta.set_budatom(tally_budatom)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
@@ -39,12 +39,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     dimen = budunit_str()
     acct_credor_pool_str = "credor_respect"
     acct_credor_pool_int = 71
-    acct_credor_pool_atomunit = atomunit_shop(dimen, atom_update())
-    acct_credor_pool_atomunit.set_arg(acct_credor_pool_str, acct_credor_pool_int)
+    acct_credor_pool_budatom = budatom_shop(dimen, atom_update())
+    acct_credor_pool_budatom.set_arg(acct_credor_pool_str, acct_credor_pool_int)
 
-    print(f"{acct_credor_pool_atomunit=}")
+    print(f"{acct_credor_pool_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(acct_credor_pool_atomunit)
+    x_buddelta.set_budatom(acct_credor_pool_budatom)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
@@ -60,12 +60,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     dimen = budunit_str()
     acct_debtor_pool_str = "debtor_respect"
     acct_debtor_pool_int = 78
-    acct_debtor_pool_atomunit = atomunit_shop(dimen, atom_update())
-    acct_debtor_pool_atomunit.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
+    acct_debtor_pool_budatom = budatom_shop(dimen, atom_update())
+    acct_debtor_pool_budatom.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
 
-    print(f"{acct_debtor_pool_atomunit=}")
+    print(f"{acct_debtor_pool_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(acct_debtor_pool_atomunit)
+    x_buddelta.set_budatom(acct_debtor_pool_budatom)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
@@ -83,10 +83,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     acct_credor_pool_str = "credor_respect"
     acct_debtor_pool_str = "debtor_respect"
     acct_pool_int = 83
-    budunit_atomunit = atomunit_shop(dimen, atom_update())
-    budunit_atomunit.set_arg(acct_credor_pool_str, acct_pool_int)
-    budunit_atomunit.set_arg(acct_debtor_pool_str, acct_pool_int)
-    x_buddelta.set_atomunit(budunit_atomunit)
+    budunit_budatom = budatom_shop(dimen, atom_update())
+    budunit_budatom.set_arg(acct_credor_pool_str, acct_pool_int)
+    budunit_budatom.set_arg(acct_debtor_pool_str, acct_pool_int)
+    x_buddelta.set_budatom(budunit_budatom)
     sue_bud = budunit_shop("Sue")
 
     # WHEN
@@ -103,12 +103,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse(
     dimen = budunit_str()
     max_tree_traverse_str = "max_tree_traverse"
     max_tree_traverse_int = 71
-    max_tree_traverse_atomunit = atomunit_shop(dimen, atom_update())
-    max_tree_traverse_atomunit.set_arg(max_tree_traverse_str, max_tree_traverse_int)
+    max_tree_traverse_budatom = budatom_shop(dimen, atom_update())
+    max_tree_traverse_budatom.set_arg(max_tree_traverse_str, max_tree_traverse_int)
 
-    print(f"{max_tree_traverse_atomunit=}")
+    print(f"{max_tree_traverse_budatom=}")
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(max_tree_traverse_atomunit)
+    x_buddelta.set_budatom(max_tree_traverse_budatom)
     sue_bud = budunit_shop("Sue")
 
     # WHEN

@@ -505,7 +505,7 @@ def get_from_json(x_fisc_json: str) -> FiscUnit:
     return get_from_dict(get_dict_from_json(x_fisc_json))
 
 
-def get_from_standard(fisc_mstr_dir: str, fisc_title: FiscTitle) -> FiscUnit:
+def get_from_default_path(fisc_mstr_dir: str, fisc_title: FiscTitle) -> FiscUnit:
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
     x_fiscunit = get_from_json(open_file(fisc_json_path))
     x_fiscunit.fisc_mstr_dir = fisc_mstr_dir

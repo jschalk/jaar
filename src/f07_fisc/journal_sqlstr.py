@@ -3,7 +3,7 @@ from src.f04_gift.atom_config import (
     atom_hx_table_name,
     atom_mstr_table_name,
 )
-from src.f04_gift.atom import AtomUnit
+from src.f04_gift.atom import BudAtom
 from src.f01_road.road import RoadUnit
 
 # from src.f00_instrument.sqlite import (
@@ -33,12 +33,12 @@ CREATE TABLE IF NOT EXISTS {atom_hx_table_name()} (
     return x_str
 
 
-def get_atom_hx_table_insert_sqlstr(x_atom: AtomUnit) -> str:
+def get_atom_hx_table_insert_sqlstr(x_atom: BudAtom) -> str:
     return x_atom.get_insert_sqlstr()
 
 
 def get_atom_mstr_table_create_sqlstr() -> str:
-    """Create table that holds atomunits."""
+    """Create table that holds budatoms."""
     x_str = f"""
 CREATE TABLE IF NOT EXISTS {atom_mstr_table_name()} (
   owner_name VARCHAR(255) NOT NULL

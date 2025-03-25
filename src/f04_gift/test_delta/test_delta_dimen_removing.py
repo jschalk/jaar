@@ -19,18 +19,18 @@ def test_BudDelta_get_dimens_cruds_buddelta_ReturnsObjWithCorrectDimensAndCRUDsB
     after_sue_bud.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     after_sue_bud.set_l1_item(itemunit_shop("casa"))
     old_buddelta = buddelta_shop()
-    old_buddelta.add_all_different_atomunits(before_sue_bud, after_sue_bud)
+    old_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     dimen_set = [bud_acctunit_str()]
     curd_set = {atom_insert()}
     new_buddelta = get_dimens_cruds_buddelta(old_buddelta, dimen_set, curd_set)
 
     # THEN
-    new_buddelta.get_dimen_sorted_atomunits_list()
-    assert len(new_buddelta.get_dimen_sorted_atomunits_list()) == 1
-    sue_insert_dict = new_buddelta.atomunits.get(atom_insert())
+    new_buddelta.get_dimen_sorted_budatoms_list()
+    assert len(new_buddelta.get_dimen_sorted_budatoms_list()) == 1
+    sue_insert_dict = new_buddelta.budatoms.get(atom_insert())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
-    bob_atomunit = sue_acctunit_dict.get(bob_str)
-    assert bob_atomunit.get_value(acct_name_str()) == bob_str
-    assert bob_atomunit.get_value("credit_belief") == bob_credit_belief
-    assert bob_atomunit.get_value("debtit_belief") == bob_debtit_belief
+    bob_budatom = sue_acctunit_dict.get(bob_str)
+    assert bob_budatom.get_value(acct_name_str()) == bob_str
+    assert bob_budatom.get_value("credit_belief") == bob_credit_belief
+    assert bob_budatom.get_value("debtit_belief") == bob_debtit_belief

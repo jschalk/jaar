@@ -12,7 +12,7 @@ from src.f02_bud.bud_tool import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.f04_gift.atom import AtomUnit
+from src.f04_gift.atom import BudAtom
 from src.f04_gift.atom_config import (
     atom_delete,
     atom_insert,
@@ -47,7 +47,7 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
 
 
 def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
-    atoms_dict = x_delta.atomunits
+    atoms_dict = x_delta.budatoms
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_str()])
 
     acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_str()])
@@ -215,7 +215,7 @@ def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     return leg_list
 
 
-def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: BudUnit):
+def add_budunit_legible_list(legible_list: list[str], x_atom: BudAtom, x_bud: BudUnit):
     jvalues = x_atom.jvalues
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
@@ -246,7 +246,7 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: AtomUnit, x_bud: B
 
 
 def add_bud_acctunit_insert_to_legible_list(
-    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
+    legible_list: list[str], acctunit_dict: BudAtom, x_bud: BudUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value(acct_name_str())
@@ -257,7 +257,7 @@ def add_bud_acctunit_insert_to_legible_list(
 
 
 def add_bud_acctunit_update_to_legible_list(
-    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
+    legible_list: list[str], acctunit_dict: BudAtom, x_bud: BudUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value(acct_name_str())
@@ -273,7 +273,7 @@ def add_bud_acctunit_update_to_legible_list(
 
 
 def add_bud_acctunit_delete_to_legible_list(
-    legible_list: list[str], acctunit_dict: AtomUnit, x_bud: BudUnit
+    legible_list: list[str], acctunit_dict: BudAtom, x_bud: BudUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value(acct_name_str())

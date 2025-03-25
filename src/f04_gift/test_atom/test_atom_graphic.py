@@ -1,5 +1,5 @@
 from src.f00_instrument.plotly_toolbox import conditional_fig_show
-from src.f04_gift.atom_graphic import atomunit_periodic_table0
+from src.f04_gift.atom_graphic import budatom_periodic_table0
 
 # from src.f02_bud.examples.example_buds import (
 #     budunit_v001_with_large_agenda,
@@ -10,9 +10,9 @@ from src.f04_gift.atom_graphic import atomunit_periodic_table0
 # from src.f02_bud.bud import budunit_shop
 
 
-def test_atomunit_periodic_table0_ShowsExplanation0Graph(graphics_bool):
+def test_budatom_periodic_table0_ShowsExplanation0Graph(graphics_bool):
     # ESTABLISH / WHEN
-    atomunit_periodic_table0_fig = atomunit_periodic_table0()
+    budatom_periodic_table0_fig = budatom_periodic_table0()
 
     # THEN
-    conditional_fig_show(atomunit_periodic_table0_fig, graphics_bool)
+    conditional_fig_show(budatom_periodic_table0_fig, graphics_bool)

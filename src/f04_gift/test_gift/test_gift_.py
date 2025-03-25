@@ -5,7 +5,7 @@ from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.atom import atomunit_shop
+from src.f04_gift.atom import budatom_shop
 from src.f04_gift.atom_config import (
     face_name_str,
     event_int_str,
@@ -169,7 +169,7 @@ def test_GiftUnit_set_buddelta_SetsAttribute():
 
     # WHEN
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(get_atom_example_itemunit_sports())
+    x_buddelta.set_budatom(get_atom_example_itemunit_sports())
     bob_giftunit.set_buddelta(x_buddelta)
 
     # THEN
@@ -190,7 +190,7 @@ def test_GiftUnit_set_delta_start_SetsAttribute():
     assert bob_giftunit._delta_start == x_delta_start
 
 
-def test_GiftUnit_atomunit_exists_ReturnsObj():
+def test_GiftUnit_budatom_exists_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     x_buddelta = buddelta_shop()
@@ -198,24 +198,24 @@ def test_GiftUnit_atomunit_exists_ReturnsObj():
     bob_giftunit.set_buddelta(x_buddelta)
 
     # WHEN
-    sports_atomunit = get_atom_example_itemunit_sports()
+    sports_budatom = get_atom_example_itemunit_sports()
 
     # THEN
-    assert bob_giftunit.atomunit_exists(sports_atomunit) is False
+    assert bob_giftunit.budatom_exists(sports_budatom) is False
 
     # WHEN
-    x_buddelta.set_atomunit(sports_atomunit)
+    x_buddelta.set_budatom(sports_budatom)
     bob_giftunit.set_buddelta(x_buddelta)
 
     # THEN
-    assert bob_giftunit.atomunit_exists(sports_atomunit)
+    assert bob_giftunit.budatom_exists(sports_budatom)
 
 
 def test_GiftUnit_del_buddelta_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
     x_buddelta = buddelta_shop()
-    x_buddelta.set_atomunit(get_atom_example_itemunit_sports())
+    x_buddelta.set_budatom(get_atom_example_itemunit_sports())
     bob_giftunit = giftunit_shop(owner_name=bob_str, _buddelta=x_buddelta)
     assert bob_giftunit._buddelta != buddelta_shop()
     assert bob_giftunit._buddelta == x_buddelta
@@ -253,7 +253,7 @@ def test_GiftUnit_get_step_dict_ReturnsObj_Simple():
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
-    assert x_dict.get(delta_str) == buddelta_shop().get_ordered_atomunits()
+    assert x_dict.get(delta_str) == buddelta_shop().get_ordered_budatoms()
     assert x_dict.get(delta_str) == {}
 
 
@@ -269,14 +269,14 @@ def test_GiftUnit_get_step_dict_ReturnsObj_WithBudDeltaPopulated():
     # THEN
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
-    assert x_dict.get(delta_str) == sue_buddelta.get_ordered_atomunits()
-    sue_atomunits_dict = x_dict.get(delta_str)
-    print(f"{len(sue_buddelta.get_sorted_atomunits())=}")
-    print(f"{sue_atomunits_dict.keys()=}")
-    # print(f"{sue_atomunits_dict.get(0)=}")
-    assert sue_atomunits_dict.get(2) is None
-    assert sue_atomunits_dict.get(0) is not None
-    assert sue_atomunits_dict.get(1) is not None
+    assert x_dict.get(delta_str) == sue_buddelta.get_ordered_budatoms()
+    sue_budatoms_dict = x_dict.get(delta_str)
+    print(f"{len(sue_buddelta.get_sorted_budatoms())=}")
+    print(f"{sue_budatoms_dict.keys()=}")
+    # print(f"{sue_budatoms_dict.get(0)=}")
+    assert sue_budatoms_dict.get(2) is None
+    assert sue_budatoms_dict.get(0) is not None
+    assert sue_budatoms_dict.get(1) is not None
 
 
 def test_GiftUnit_get_step_dict_ReturnsObj_delta_start():
@@ -294,14 +294,14 @@ def test_GiftUnit_get_step_dict_ReturnsObj_delta_start():
     # THEN
     delta_str = "delta"
     assert step_dict.get(delta_str) is not None
-    assert step_dict.get(delta_str) == sue_buddelta.get_ordered_atomunits(x_delta_start)
-    sue_atomunits_dict = step_dict.get(delta_str)
-    print(f"{len(sue_buddelta.get_sorted_atomunits())=}")
-    print(f"{sue_atomunits_dict.keys()=}")
-    # print(f"{sue_atomunits_dict.get(0)=}")
-    assert sue_atomunits_dict.get(x_delta_start + 2) is None
-    assert sue_atomunits_dict.get(x_delta_start + 0) is not None
-    assert sue_atomunits_dict.get(x_delta_start + 1) is not None
+    assert step_dict.get(delta_str) == sue_buddelta.get_ordered_budatoms(x_delta_start)
+    sue_budatoms_dict = step_dict.get(delta_str)
+    print(f"{len(sue_buddelta.get_sorted_budatoms())=}")
+    print(f"{sue_budatoms_dict.keys()=}")
+    # print(f"{sue_budatoms_dict.get(0)=}")
+    assert sue_budatoms_dict.get(x_delta_start + 2) is None
+    assert sue_budatoms_dict.get(x_delta_start + 0) is not None
+    assert sue_budatoms_dict.get(x_delta_start + 1) is not None
 
 
 def test_GiftUnit_get_serializable_dict_ReturnsObj_Simple():
@@ -476,7 +476,7 @@ def test_GiftUnit_get_deltametric_json_ReturnsObj():
     assert x_is_json(delta_json)
 
 
-def test_GiftUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
+def test_GiftUnit_add_budatom_CorrectlySets_BudUnit_acctunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_giftunit = giftunit_shop(bob_str)
@@ -490,10 +490,10 @@ def test_GiftUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
-    assert bob_giftunit._buddelta.atomunits == {}
+    assert bob_giftunit._buddelta.budatoms == {}
 
     # WHEN
-    bob_giftunit.add_atomunit(
+    bob_giftunit.add_budatom(
         dimen=bud_acctunit_str(),
         crud_str=atom_insert(),
         jkeys=bob_required_dict,
@@ -501,9 +501,9 @@ def test_GiftUnit_add_atomunit_CorrectlySets_BudUnit_acctunits():
     )
 
     # THEN
-    assert len(bob_giftunit._buddelta.atomunits) == 1
+    assert len(bob_giftunit._buddelta.budatoms) == 1
     assert (
-        bob_giftunit._buddelta.atomunits.get(atom_insert())
+        bob_giftunit._buddelta.budatoms.get(atom_insert())
         .get(bud_acctunit_str())
         .get(bob_str)
         is not None
@@ -522,14 +522,14 @@ def test_GiftUnit_get_edited_bud_ReturnsObj_BudUnit_insert_acct():
     assert before_sue_budunit.acct_exists(yao_str)
     assert before_sue_budunit.acct_exists(zia_str) is False
     dimen = bud_acctunit_str()
-    x_atomunit = atomunit_shop(dimen, atom_insert())
-    x_atomunit.set_jkey(acct_name_str(), zia_str)
+    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom.set_jkey(acct_name_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
-    x_atomunit.set_jvalue("credit_belief", x_credit_belief)
-    x_atomunit.set_jvalue("debtit_belief", x_debtit_belief)
-    sue_giftunit._buddelta.set_atomunit(x_atomunit)
-    print(f"{sue_giftunit._buddelta.atomunits.keys()=}")
+    x_budatom.set_jvalue("credit_belief", x_credit_belief)
+    x_budatom.set_jvalue("debtit_belief", x_debtit_belief)
+    sue_giftunit._buddelta.set_budatom(x_budatom)
+    print(f"{sue_giftunit._buddelta.budatoms.keys()=}")
 
     # WHEN
     after_sue_budunit = sue_giftunit.get_edited_bud(before_sue_budunit)
@@ -573,11 +573,11 @@ def test_GiftUnit_is_empty_ReturnsObj():
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
-    assert bob_giftunit._buddelta.atomunits == {}
+    assert bob_giftunit._buddelta.budatoms == {}
     assert bob_giftunit.is_empty()
 
     # WHEN
-    bob_giftunit.add_atomunit(
+    bob_giftunit.add_budatom(
         dimen=bud_acctunit_str(),
         crud_str=atom_insert(),
         jkeys=bob_required_dict,
@@ -585,33 +585,33 @@ def test_GiftUnit_is_empty_ReturnsObj():
     )
 
     # THEN
-    assert len(bob_giftunit._buddelta.atomunits) == 1
+    assert len(bob_giftunit._buddelta.budatoms) == 1
     assert bob_giftunit.is_empty() is False
 
     # WHEN
-    bob_giftunit._buddelta.atomunits = {}
+    bob_giftunit._buddelta.budatoms = {}
 
     # THEN
     assert bob_giftunit.is_empty()
 
     # Test for atom_update operation
     bob_giftunit_update = giftunit_shop(bob_str)
-    bob_giftunit_update.add_atomunit(
+    bob_giftunit_update.add_budatom(
         dimen=bud_acctunit_str(),
         crud_str=atom_update(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
-    assert len(bob_giftunit_update._buddelta.atomunits) == 1
+    assert len(bob_giftunit_update._buddelta.budatoms) == 1
     assert bob_giftunit_update.is_empty() is False
 
     # Test for atom_delete operation
     bob_giftunit_delete = giftunit_shop(bob_str)
-    bob_giftunit_delete.add_atomunit(
+    bob_giftunit_delete.add_budatom(
         dimen=bud_acctunit_str(),
         crud_str=atom_delete(),
         jkeys=bob_required_dict,
         jvalues={},
     )
-    assert len(bob_giftunit_delete._buddelta.atomunits) == 1
+    assert len(bob_giftunit_delete._buddelta.budatoms) == 1
     assert bob_giftunit_delete.is_empty() is False
