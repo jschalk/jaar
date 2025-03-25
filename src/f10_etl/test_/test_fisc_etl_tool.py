@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, open_file, set_dir
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f03_chrono.chrono import timelineunit_shop, timeline_config_shop
-from src.f04_gift.atom_config import (
+from src.f04_favor.atom_config import (
     face_name_str,
     event_int_str,
     acct_name_str,

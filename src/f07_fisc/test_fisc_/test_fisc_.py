@@ -5,7 +5,7 @@ from src.f01_road.finance import (
     filter_penny,
 )
 from src.f01_road.jaar_config import (
-    get_gifts_folder,
+    get_favors_folder,
     get_json_filename,
     get_test_fisc_title,
 )
@@ -39,7 +39,7 @@ def test_FiscUnit_Exists():
     assert not accord_fisc._offi_time_max
     assert not accord_fisc._owners_dir
     assert not accord_fisc._journal_db
-    assert not accord_fisc._gifts_dir
+    assert not accord_fisc._favors_dir
     assert not accord_fisc._all_tranbook
 
 
@@ -60,7 +60,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     # Calculated fields
     assert accord_fisc._owners_dir != None
-    assert accord_fisc._gifts_dir != None
+    assert accord_fisc._favors_dir != None
     assert accord_fisc._all_tranbook == tranbook_shop(get_test_fisc_title())
 
 
@@ -75,7 +75,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     assert accord_fisc.fisc_title == accord45_str
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     assert accord_fisc._owners_dir is not None
-    assert accord_fisc._gifts_dir is not None
+    assert accord_fisc._favors_dir is not None
 
 
 def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
@@ -114,17 +114,17 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
     x_fisc_dir = create_path(x_fiscs_dir, accord45_str)
     x_owners_dir = create_path(x_fisc_dir, "owners")
-    x_gifts_dir = create_path(x_fisc_dir, get_gifts_folder())
+    x_favors_dir = create_path(x_fisc_dir, get_favors_folder())
     journal_filename = "journal.db"
     journal_file_path = create_path(x_fisc_dir, journal_filename)
 
     assert not accord_fisc._fisc_dir
     assert not accord_fisc._owners_dir
-    assert not accord_fisc._gifts_dir
+    assert not accord_fisc._favors_dir
     assert os_path_exists(x_fisc_dir) is False
     assert os_path_isdir(x_fisc_dir) is False
     assert os_path_exists(x_owners_dir) is False
-    assert os_path_exists(x_gifts_dir) is False
+    assert os_path_exists(x_favors_dir) is False
     assert os_path_exists(journal_file_path) is False
 
     # WHEN
@@ -133,11 +133,11 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # THEN
     assert accord_fisc._fisc_dir == x_fisc_dir
     assert accord_fisc._owners_dir == x_owners_dir
-    assert accord_fisc._gifts_dir == x_gifts_dir
+    assert accord_fisc._favors_dir == x_favors_dir
     assert os_path_exists(x_fisc_dir)
     assert os_path_isdir(x_fisc_dir)
     assert os_path_exists(x_owners_dir)
-    assert os_path_exists(x_gifts_dir)
+    assert os_path_exists(x_favors_dir)
     assert os_path_exists(journal_file_path)
 
 

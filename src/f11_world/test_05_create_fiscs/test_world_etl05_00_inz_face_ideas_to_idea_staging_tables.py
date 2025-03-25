@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_gift.atom_config import face_name_str, acct_name_str, event_int_str
+from src.f04_favor.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect

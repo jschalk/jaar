@@ -1,9 +1,9 @@
-from src.f04_gift.atom_config import (
+from src.f04_favor.atom_config import (
     get_flattened_atom_table_build,
     atom_hx_table_name,
     atom_mstr_table_name,
 )
-from src.f04_gift.atom import BudAtom
+from src.f04_favor.atom import BudAtom
 from src.f01_road.road import RoadUnit
 
 # from src.f00_instrument.sqlite import (
@@ -78,37 +78,37 @@ CREATE TABLE IF NOT EXISTS delta_mstr (
 ;"""
 
 
-def get_delta2gift_table_create_sqlstr() -> str:
+def get_delta2favor_table_create_sqlstr() -> str:
     return """
-CREATE TABLE delta2gift
+CREATE TABLE delta2favor
 (
   delta_rowid INT NOT NULL
-, gift_rowid INT NOT NULL
-, UNIQUE(delta_rowid, gift_rowid)
+, favor_rowid INT NOT NULL
+, UNIQUE(delta_rowid, favor_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (favor_rowid) REFERENCES favor_mstr (rowid)
 )
 ;"""
 
 
-def get_gift_table_create_sqlstr() -> str:
+def get_favor_table_create_sqlstr() -> str:
     return """
-CREATE TABLE IF NOT EXISTS gift_mstr (
+CREATE TABLE IF NOT EXISTS favor_mstr (
   author_owner_name VARCHAR(255) NOT NULL
-, author_gift_number INT NOT NULL
-, UNIQUE(author_owner_name, author_gift_number)
+, author_favor_number INT NOT NULL
+, UNIQUE(author_owner_name, author_favor_number)
 )
 ;"""
 
 
-def get_gift2owner_table_create_sqlstr() -> str:
+def get_favor2owner_table_create_sqlstr() -> str:
     return """
-CREATE TABLE gift2owner
+CREATE TABLE favor2owner
 (
-  gift_rowid INT NOT NULL
+  favor_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
-, UNIQUE(gift_rowid, owner_rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (gift_rowid) REFERENCES gift_mstr (rowid)
+, UNIQUE(favor_rowid, owner_rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (favor_rowid) REFERENCES favor_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
@@ -158,9 +158,9 @@ def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x.append(get_atom_mstr_table_create_sqlstr())
     list_x.append(get_atom2delta_table_create_sqlstr())
     list_x.append(get_delta_table_create_sqlstr())
-    list_x.append(get_delta2gift_table_create_sqlstr())
-    list_x.append(get_gift_table_create_sqlstr())
-    list_x.append(get_gift2owner_table_create_sqlstr())
+    list_x.append(get_delta2favor_table_create_sqlstr())
+    list_x.append(get_favor_table_create_sqlstr())
+    list_x.append(get_favor2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())
     list_x.append(get_road_ref_table_create_sqlstr())
     return list_x

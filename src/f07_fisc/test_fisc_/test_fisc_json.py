@@ -7,7 +7,7 @@ from src.f01_road.finance import (
 )
 from src.f01_road.deal import bridge_str, fisc_title_str
 from src.f03_chrono.chrono import get_default_timeline_config_dict
-from src.f04_gift.atom_config import fund_coin_str, respect_bit_str, penny_str
+from src.f04_favor.atom_config import fund_coin_str, respect_bit_str, penny_str
 from src.f05_listen.hub_path import create_fisc_json_path
 from src.f07_fisc.fisc import (
     fiscunit_shop,

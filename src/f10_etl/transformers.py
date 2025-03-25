@@ -19,10 +19,10 @@ from src.f02_bud.bud import (
     get_from_json as budunit_get_from_json,
     BudUnit,
 )
-from src.f04_gift.atom import budatom_shop
-from src.f04_gift.atom_config import get_bud_dimens
-from src.f04_gift.delta import get_minimal_buddelta
-from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
+from src.f04_favor.atom import budatom_shop
+from src.f04_favor.atom_config import get_bud_dimens
+from src.f04_favor.delta import get_minimal_buddelta
+from src.f04_favor.favor import favorunit_shop, get_favorunit_from_json, FavorUnit
 from src.f05_listen.hub_path import (
     create_voice_path,
     create_fisc_ote1_csv_path,
@@ -1010,7 +1010,7 @@ def etl_fisc_csvs_to_fisc_jsons(fisc_mstr_dir: str):
     create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
 
 
-def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
+def etl_event_bud_csvs_to_favor_json(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1020,17 +1020,17 @@ def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
             events_path = create_path(owner_path, "events")
             for event_int in get_level1_dirs(events_path):
                 event_path = create_path(events_path, event_int)
-                event_gift = giftunit_shop(
+                event_favor = favorunit_shop(
                     owner_name=owner_name,
                     face_name=None,
                     fisc_title=fisc_title,
                     event_int=event_int,
                 )
-                add_budatoms_from_csv(event_gift, event_path)
-                save_file(event_path, "all_gift.json", event_gift.get_json())
+                add_budatoms_from_csv(event_favor, event_path)
+                save_file(event_path, "all_favor.json", event_favor.get_json())
 
 
-def add_budatoms_from_csv(owner_gift: GiftUnit, owner_path: str):
+def add_budatoms_from_csv(owner_favor: FavorUnit, owner_path: str):
     idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
@@ -1052,7 +1052,7 @@ def add_budatoms_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._buddelta.set_budatom(x_atom)
+                owner_favor._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -1067,10 +1067,10 @@ def add_budatoms_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._buddelta.set_budatom(x_atom)
+                owner_favor._buddelta.set_budatom(x_atom)
 
 
-def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
+def etl_event_favor_json_to_event_inherited_budunits(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1089,14 +1089,14 @@ def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 event_dir = create_owner_event_dir_path(
                     fisc_mstr_dir, fisc_title, owner_name, event_int
                 )
-                gift_path = create_path(event_dir, "all_gift.json")
-                event_gift = get_giftunit_from_json(open_file(gift_path))
-                sift_delta = get_minimal_buddelta(event_gift._buddelta, prev_bud)
-                curr_bud = event_gift.get_edited_bud(prev_bud)
+                favor_path = create_path(event_dir, "all_favor.json")
+                event_favor = get_favorunit_from_json(open_file(favor_path))
+                sift_delta = get_minimal_buddelta(event_favor._buddelta, prev_bud)
+                curr_bud = event_favor.get_edited_bud(prev_bud)
                 save_file(budevent_path, None, curr_bud.get_json())
-                expressed_gift = copy_deepcopy(event_gift)
-                expressed_gift.set_buddelta(sift_delta)
-                save_file(event_dir, "expressed_gift.json", expressed_gift.get_json())
+                expressed_favor = copy_deepcopy(event_favor)
+                expressed_favor.set_buddelta(sift_delta)
+                save_file(event_dir, "expressed_favor.json", expressed_favor.get_json())
                 prev_event_int = event_int
 
 

@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, event_int_str
+from src.f04_favor.atom_config import face_name_str, event_int_str
 from src.f08_pidgin.pidgin_config import (
     inx_bridge_str,
     otx_bridge_str,

@@ -15,10 +15,10 @@ from src.f01_road.jaar_config import (
     grades_folder,
     get_rootpart_of_keep_dir,
     treasury_filename,
-    get_gifts_folder,
-    get_init_gift_id_if_None,
+    get_favors_folder,
+    get_init_favor_id_if_None,
     get_json_filename,
-    init_gift_id,
+    init_favor_id,
 )
 from src.f01_road.finance import (
     default_fund_coin_if_None,
@@ -51,13 +51,13 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
-from src.f04_gift.atom import (
+from src.f04_favor.atom import (
     BudAtom,
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,
 )
 from src.f05_listen.basis_buds import get_default_forecast_bud
-from src.f04_gift.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
+from src.f04_favor.favor import FavorUnit, favorunit_shop, create_favorunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -72,11 +72,11 @@ class Invalid_forecast_Exception(Exception):
     pass
 
 
-class SaveGiftFileException(Exception):
+class SaveFavorFileException(Exception):
     pass
 
 
-class GiftFileMissingException(Exception):
+class FavorFileMissingException(Exception):
     pass
 
 
@@ -125,7 +125,7 @@ class HubUnit:
     _owner_dir: str = None
     _keeps_dir: str = None
     _atoms_dir: str = None
-    _gifts_dir: str = None
+    _favors_dir: str = None
     _voice_dir: str = None
     _forecast_dir: str = None
     _deals_dir: str = None
@@ -141,7 +141,7 @@ class HubUnit:
         self._owner_dir = f_path(self._owners_dir, self.owner_name)
         self._keeps_dir = f_path(self._owner_dir, "keeps")
         self._atoms_dir = f_path(self._owner_dir, "atoms")
-        self._gifts_dir = f_path(self._owner_dir, get_gifts_folder())
+        self._favors_dir = f_path(self._owner_dir, get_favors_folder())
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._deals_dir = f_path(self._owner_dir, "deals")
@@ -197,7 +197,7 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_budunit.last_gift_id = init_gift_id()
+        x_budunit.last_favor_id = init_favor_id()
         return x_budunit
 
     def delete_voice_file(self):
@@ -206,7 +206,7 @@ class HubUnit:
     def open_file_forecast(self) -> str:
         return open_file(self._forecast_dir, self._forecast_filename)
 
-    # Gift methods
+    # Favor methods
     def get_max_atom_file_number(self) -> int:
         return get_max_file_number(self._atoms_dir)
 
@@ -251,145 +251,145 @@ class HubUnit:
                 modify_bud_with_budatom(x_bud, x_atom)
         return x_bud
 
-    def get_max_gift_file_number(self) -> int:
-        return get_max_file_number(self._gifts_dir)
+    def get_max_favor_file_number(self) -> int:
+        return get_max_file_number(self._favors_dir)
 
-    def _get_next_gift_file_number(self) -> int:
-        max_file_number = self.get_max_gift_file_number()
-        init_gift_id = get_init_gift_id_if_None()
-        return init_gift_id if max_file_number is None else max_file_number + 1
+    def _get_next_favor_file_number(self) -> int:
+        max_file_number = self.get_max_favor_file_number()
+        init_favor_id = get_init_favor_id_if_None()
+        return init_favor_id if max_file_number is None else max_file_number + 1
 
-    def gift_filename(self, gift_id: int) -> str:
-        return get_json_filename(gift_id)
+    def favor_filename(self, favor_id: int) -> str:
+        return get_json_filename(favor_id)
 
-    def gift_file_path(self, gift_id: int) -> bool:
-        gift_filename = self.gift_filename(gift_id)
-        return f_path(self._gifts_dir, gift_filename)
+    def favor_file_path(self, favor_id: int) -> bool:
+        favor_filename = self.favor_filename(favor_id)
+        return f_path(self._favors_dir, favor_filename)
 
-    def gift_file_exists(self, gift_id: int) -> bool:
-        return os_path_exists(self.gift_file_path(gift_id))
+    def favor_file_exists(self, favor_id: int) -> bool:
+        return os_path_exists(self.favor_file_path(favor_id))
 
-    def validate_giftunit(self, x_giftunit: GiftUnit) -> GiftUnit:
-        if x_giftunit._atoms_dir != self._atoms_dir:
-            x_giftunit._atoms_dir = self._atoms_dir
-        if x_giftunit._gifts_dir != self._gifts_dir:
-            x_giftunit._gifts_dir = self._gifts_dir
-        if x_giftunit._gift_id != self._get_next_gift_file_number():
-            x_giftunit._gift_id = self._get_next_gift_file_number()
-        if x_giftunit.owner_name != self.owner_name:
-            x_giftunit.owner_name = self.owner_name
-        if x_giftunit._delta_start != self._get_next_atom_file_number():
-            x_giftunit._delta_start = self._get_next_atom_file_number()
-        return x_giftunit
+    def validate_favorunit(self, x_favorunit: FavorUnit) -> FavorUnit:
+        if x_favorunit._atoms_dir != self._atoms_dir:
+            x_favorunit._atoms_dir = self._atoms_dir
+        if x_favorunit._favors_dir != self._favors_dir:
+            x_favorunit._favors_dir = self._favors_dir
+        if x_favorunit._favor_id != self._get_next_favor_file_number():
+            x_favorunit._favor_id = self._get_next_favor_file_number()
+        if x_favorunit.owner_name != self.owner_name:
+            x_favorunit.owner_name = self.owner_name
+        if x_favorunit._delta_start != self._get_next_atom_file_number():
+            x_favorunit._delta_start = self._get_next_atom_file_number()
+        return x_favorunit
 
-    def save_gift_file(
+    def save_favor_file(
         self,
-        x_gift: GiftUnit,
+        x_favor: FavorUnit,
         replace: bool = True,
         correct_invalid_attrs: bool = True,
-    ) -> GiftUnit:
+    ) -> FavorUnit:
         if correct_invalid_attrs:
-            x_gift = self.validate_giftunit(x_gift)
+            x_favor = self.validate_favorunit(x_favor)
 
-        if x_gift._atoms_dir != self._atoms_dir:
-            raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit._atoms_dir is incorrect: {x_gift._atoms_dir}. It must be {self._atoms_dir}."
+        if x_favor._atoms_dir != self._atoms_dir:
+            raise SaveFavorFileException(
+                f"FavorUnit file cannot be saved because favorunit._atoms_dir is incorrect: {x_favor._atoms_dir}. It must be {self._atoms_dir}."
             )
-        if x_gift._gifts_dir != self._gifts_dir:
-            raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {x_gift._gifts_dir}. It must be {self._gifts_dir}."
+        if x_favor._favors_dir != self._favors_dir:
+            raise SaveFavorFileException(
+                f"FavorUnit file cannot be saved because favorunit._favors_dir is incorrect: {x_favor._favors_dir}. It must be {self._favors_dir}."
             )
-        if x_gift.owner_name != self.owner_name:
-            raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit.owner_name is incorrect: {x_gift.owner_name}. It must be {self.owner_name}."
+        if x_favor.owner_name != self.owner_name:
+            raise SaveFavorFileException(
+                f"FavorUnit file cannot be saved because favorunit.owner_name is incorrect: {x_favor.owner_name}. It must be {self.owner_name}."
             )
-        gift_filename = self.gift_filename(x_gift._gift_id)
-        if not replace and self.gift_file_exists(x_gift._gift_id):
-            raise SaveGiftFileException(
-                f"GiftUnit file {gift_filename} exists and cannot be saved over."
+        favor_filename = self.favor_filename(x_favor._favor_id)
+        if not replace and self.favor_file_exists(x_favor._favor_id):
+            raise SaveFavorFileException(
+                f"FavorUnit file {favor_filename} exists and cannot be saved over."
             )
-        x_gift.save_files()
-        return x_gift
+        x_favor.save_files()
+        return x_favor
 
-    def _del_gift_file(self, gift_id: int):
-        delete_dir(self.gift_file_path(gift_id))
+    def _del_favor_file(self, favor_id: int):
+        delete_dir(self.favor_file_path(favor_id))
 
-    def _default_giftunit(self) -> GiftUnit:
-        return giftunit_shop(
+    def _default_favorunit(self) -> FavorUnit:
+        return favorunit_shop(
             owner_name=self.owner_name,
-            _gift_id=self._get_next_gift_file_number(),
+            _favor_id=self._get_next_favor_file_number(),
             _atoms_dir=self._atoms_dir,
-            _gifts_dir=self._gifts_dir,
+            _favors_dir=self._favors_dir,
         )
 
-    def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
-        new_giftunit = self._default_giftunit()
-        new_buddelta = new_giftunit._buddelta
+    def create_save_favor_file(self, before_bud: BudUnit, after_bud: BudUnit):
+        new_favorunit = self._default_favorunit()
+        new_buddelta = new_favorunit._buddelta
         new_buddelta.add_all_different_budatoms(before_bud, after_bud)
-        self.save_gift_file(new_giftunit)
+        self.save_favor_file(new_favorunit)
 
-    def get_giftunit(self, gift_id: int) -> GiftUnit:
-        if self.gift_file_exists(gift_id) is False:
-            raise GiftFileMissingException(
-                f"GiftUnit file_number {gift_id} does not exist."
+    def get_favorunit(self, favor_id: int) -> FavorUnit:
+        if self.favor_file_exists(favor_id) is False:
+            raise FavorFileMissingException(
+                f"FavorUnit file_number {favor_id} does not exist."
             )
-        x_gifts_dir = self._gifts_dir
+        x_favors_dir = self._favors_dir
         x_atoms_dir = self._atoms_dir
-        return create_giftunit_from_files(x_gifts_dir, gift_id, x_atoms_dir)
+        return create_favorunit_from_files(x_favors_dir, favor_id, x_atoms_dir)
 
-    def _merge_any_gifts(self, x_bud: BudUnit) -> BudUnit:
-        gifts_dir = self._gifts_dir
-        gift_ints = get_integer_filenames(gifts_dir, x_bud.last_gift_id)
-        if len(gift_ints) == 0:
+    def _merge_any_favors(self, x_bud: BudUnit) -> BudUnit:
+        favors_dir = self._favors_dir
+        favor_ints = get_integer_filenames(favors_dir, x_bud.last_favor_id)
+        if len(favor_ints) == 0:
             return copy_deepcopy(x_bud)
 
-        for gift_int in gift_ints:
-            x_gift = self.get_giftunit(gift_int)
-            new_bud = x_gift._buddelta.get_edited_bud(x_bud)
+        for favor_int in favor_ints:
+            x_favor = self.get_favorunit(favor_int)
+            new_bud = x_favor._buddelta.get_edited_bud(x_bud)
         return new_bud
 
-    def _create_initial_gift_files_from_default(self):
-        x_giftunit = giftunit_shop(
+    def _create_initial_favor_files_from_default(self):
+        x_favorunit = favorunit_shop(
             owner_name=self.owner_name,
-            _gift_id=get_init_gift_id_if_None(),
-            _gifts_dir=self._gifts_dir,
+            _favor_id=get_init_favor_id_if_None(),
+            _favors_dir=self._favors_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_giftunit._buddelta.add_all_different_budatoms(
+        x_favorunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.default_voice_bud(),
         )
-        x_giftunit.save_files()
+        x_favorunit.save_files()
 
-    def _create_voice_from_gifts(self):
-        x_bud = self._merge_any_gifts(self.default_voice_bud())
+    def _create_voice_from_favors(self):
+        x_bud = self._merge_any_favors(self.default_voice_bud())
         self.save_voice_bud(x_bud)
 
-    def _create_initial_gift_and_voice_files(self):
-        self._create_initial_gift_files_from_default()
-        self._create_voice_from_gifts()
+    def _create_initial_favor_and_voice_files(self):
+        self._create_initial_favor_files_from_default()
+        self._create_voice_from_favors()
 
-    def _create_initial_gift_files_from_voice(self):
-        x_giftunit = self._default_giftunit()
-        x_giftunit._buddelta.add_all_different_budatoms(
+    def _create_initial_favor_files_from_voice(self):
+        x_favorunit = self._default_favorunit()
+        x_favorunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.get_voice_bud(),
         )
-        x_giftunit.save_files()
+        x_favorunit.save_files()
 
-    def initialize_gift_voice_files(self):
+    def initialize_favor_voice_files(self):
         x_voice_file_exists = self.voice_file_exists()
-        gift_file_exists = self.gift_file_exists(init_gift_id())
-        if x_voice_file_exists is False and gift_file_exists is False:
-            self._create_initial_gift_and_voice_files()
-        elif x_voice_file_exists is False and gift_file_exists:
-            self._create_voice_from_gifts()
-        elif x_voice_file_exists and gift_file_exists is False:
-            self._create_initial_gift_files_from_voice()
+        favor_file_exists = self.favor_file_exists(init_favor_id())
+        if x_voice_file_exists is False and favor_file_exists is False:
+            self._create_initial_favor_and_voice_files()
+        elif x_voice_file_exists is False and favor_file_exists:
+            self._create_voice_from_favors()
+        elif x_voice_file_exists and favor_file_exists is False:
+            self._create_initial_favor_files_from_voice()
 
-    def append_gifts_to_voice_file(self):
+    def append_favors_to_voice_file(self):
         voice_bud = self.get_voice_bud()
-        voice_bud = self._merge_any_gifts(voice_bud)
+        voice_bud = self._merge_any_favors(voice_bud)
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 

@@ -1,5 +1,5 @@
 from src.f01_road.deal import owner_name_str, deal_time_str, fisc_title_str
-from src.f04_gift.atom_config import event_int_str
+from src.f04_favor.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_dir_path,
     create_fisc_json_path,
@@ -17,8 +17,8 @@ from src.f05_listen.hub_path import (
     create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
-    create_event_all_gift_path,
-    create_event_expressed_gift_path,
+    create_event_all_favor_path,
+    create_event_expressed_favor_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -218,9 +218,9 @@ def test_create_budevent_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_budevent_path) == doc_str
 
 
-def test_create_event_all_gift_path_HasDocString():
+def test_create_event_all_favor_path_HasDocString():
     # ESTABLISH
-    doc_str = create_event_all_gift_path(
+    doc_str = create_event_all_favor_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -228,12 +228,12 @@ def test_create_event_all_gift_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_event_all_gift_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_event_all_favor_path) == doc_str
 
 
-def test_create_event_expressed_gift_path_HasDocString():
+def test_create_event_expressed_favor_path_HasDocString():
     # ESTABLISH
-    doc_str = create_event_expressed_gift_path(
+    doc_str = create_event_expressed_favor_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -241,7 +241,7 @@ def test_create_event_expressed_gift_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_event_expressed_gift_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_event_expressed_favor_path) == doc_str
 
 
 def test_create_voice_path_HasDocString():

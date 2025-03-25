@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.jaar_config import (
-    get_gifts_folder,
+    get_favors_folder,
     get_rootpart_of_keep_dir,
     get_fisc_title_if_None,
     get_owners_folder,
@@ -16,8 +16,8 @@ from src.f05_listen.hub_path import (
     CELL_MANDATE_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
-    EVENT_ALL_GIFT_FILENAME,
-    EVENT_EXPRESSED_GIFT_FILENAME,
+    EVENT_ALL_FAVOR_FILENAME,
+    EVENT_EXPRESSED_FAVOR_FILENAME,
     create_fisc_dir_path,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -34,8 +34,8 @@ from src.f05_listen.hub_path import (
     create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
-    create_event_all_gift_path,
-    create_event_expressed_gift_path,
+    create_event_all_favor_path,
+    create_event_expressed_favor_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -415,7 +415,7 @@ def test_create_budevent_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_bud_path
 
 
-def test_create_event_all_gift_path_ReturnObj():
+def test_create_event_all_favor_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -423,7 +423,7 @@ def test_create_event_all_gift_path_ReturnObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_bud_path = create_event_all_gift_path(
+    gen_a23_e3_bud_path = create_event_all_favor_path(
         x_fisc_mstr_dir, accord23_str, bob_str, event3
     )
 
@@ -434,13 +434,13 @@ def test_create_event_all_gift_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_all_gift_path = create_path(
-        a23_bob_e3_dir, EVENT_ALL_GIFT_FILENAME
+    expected_a23_bob_e3_all_favor_path = create_path(
+        a23_bob_e3_dir, EVENT_ALL_FAVOR_FILENAME
     )
-    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_gift_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_favor_path
 
 
-def test_create_event_expressed_gift_path_ReturnObj():
+def test_create_event_expressed_favor_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -448,7 +448,7 @@ def test_create_event_expressed_gift_path_ReturnObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_bud_path = create_event_expressed_gift_path(
+    gen_a23_e3_bud_path = create_event_expressed_favor_path(
         x_fisc_mstr_dir, accord23_str, bob_str, event3
     )
 
@@ -459,10 +459,10 @@ def test_create_event_expressed_gift_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_expressed_gift_path = create_path(
-        a23_bob_e3_dir, EVENT_EXPRESSED_GIFT_FILENAME
+    expected_a23_bob_e3_expressed_favor_path = create_path(
+        a23_bob_e3_dir, EVENT_EXPRESSED_FAVOR_FILENAME
     )
-    assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_gift_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_favor_path
 
 
 def test_create_voice_path_ReturnObj():

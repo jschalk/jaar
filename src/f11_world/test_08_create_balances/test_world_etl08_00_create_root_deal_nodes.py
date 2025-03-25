@@ -1,6 +1,6 @@
 from src.f00_instrument.file import save_file, open_json, save_json, count_dirs_files
 from src.f01_road.deal import celldepth_str, quota_str, DEFAULT_CELLDEPTH
-from src.f04_gift.atom_config import event_int_str, penny_str
+from src.f04_favor.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import deal_owner_name_str, ancestors_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,

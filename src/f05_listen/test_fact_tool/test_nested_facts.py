@@ -1,5 +1,5 @@
 from src.f01_road.road import create_road
-from src.f04_gift.atom_config import base_str
+from src.f04_favor.atom_config import base_str
 from src.f05_listen.fact_tool import get_nodes_with_weighted_facts
 from src.f05_listen.examples.example_listen import (
     example_casa_clean_factunit,

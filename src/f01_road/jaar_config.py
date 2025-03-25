@@ -14,16 +14,16 @@ def get_owners_folder() -> str:
     return "owners"
 
 
-def get_gifts_folder() -> str:
-    return "gifts"
+def get_favors_folder() -> str:
+    return "favors"
 
 
-def init_gift_id() -> int:
+def init_favor_id() -> int:
     return 0
 
 
-def get_init_gift_id_if_None(x_gift_id: int = None) -> int:
-    return init_gift_id() if x_gift_id is None else x_gift_id
+def get_init_favor_id_if_None(x_favor_id: int = None) -> int:
+    return init_favor_id() if x_favor_id is None else x_favor_id
 
 
 def get_json_filename(filename_without_extention) -> str:

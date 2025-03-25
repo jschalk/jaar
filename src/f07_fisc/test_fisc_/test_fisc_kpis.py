@@ -1,6 +1,6 @@
 from src.f00_instrument.plotly_toolbox import conditional_fig_show
 from src.f01_road.deal import owner_name_str
-from src.f04_gift.atom_config import acct_name_str
+from src.f04_favor.atom_config import acct_name_str
 from src.f07_fisc.fisc_report import (
     get_fisc_voices_accts_dataframe,
     get_fisc_voices_accts_plotly_fig,

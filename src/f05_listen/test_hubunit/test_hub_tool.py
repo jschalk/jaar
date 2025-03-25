@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, set_dir, open_json
 from src.f01_road.deal import quota_str
 from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.atom_config import penny_str, event_int_str
+from src.f04_favor.atom_config import penny_str, event_int_str
 from src.f05_listen.cell import (
     CELLNODE_QUOTA_DEFAULT,
     cellunit_shop,

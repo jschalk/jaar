@@ -8,7 +8,7 @@ from src.f03_chrono.chrono import (
     timeline_config_shop,
     timelineunit_shop,
 )
-from src.f04_gift.atom_config import (
+from src.f04_favor.atom_config import (
     acct_name_str,
     face_name_str,
     fund_coin_str,

@@ -9,9 +9,9 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.road import FiscTitle, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
-from src.f04_gift.atom import atom_insert, BudAtom, atomrow_shop
-from src.f04_gift.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
-from src.f04_gift.gift import giftunit_shop
+from src.f04_favor.atom import atom_insert, BudAtom, atomrow_shop
+from src.f04_favor.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
+from src.f04_favor.favor import favorunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f09_idea.idea_config import (
@@ -185,14 +185,14 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
-    x_hubunit.initialize_gift_voice_files()
+    x_hubunit.initialize_favor_voice_files()
     x_voice = x_hubunit.get_voice_bud()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
-    x_giftunit = giftunit_shop(x_owner_name, x_fisc_title)
-    x_giftunit.set_buddelta(x_buddelta)
-    x_hubunit.save_gift_file(x_giftunit)
-    x_hubunit._create_voice_from_gifts()
+    x_favorunit = favorunit_shop(x_owner_name, x_fisc_title)
+    x_favorunit.set_buddelta(x_buddelta)
+    x_hubunit.save_favor_file(x_favorunit)
+    x_hubunit._create_voice_from_favors()
 
 
 def load_idea_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):

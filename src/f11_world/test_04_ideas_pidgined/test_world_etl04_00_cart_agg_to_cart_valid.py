@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.deal import fisc_title_str
-from src.f04_gift.atom_config import face_name_str, event_int_str
+from src.f04_favor.atom_config import face_name_str, event_int_str
 from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
 from src.f09_idea.idea_db_tool import (
     sheet_exists,

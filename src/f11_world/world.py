@@ -43,8 +43,8 @@ from src.f10_etl.transformers import (
     etl_fisc_csvs_to_fisc_jsons,
     etl_idea_staging_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
-    etl_event_bud_csvs_to_gift_json,
-    etl_event_gift_json_to_event_inherited_budunits,
+    etl_event_bud_csvs_to_favor_json,
+    etl_event_favor_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_voice,
     etl_fisc_voice_to_fisc_forecast,
     etl_fisc_agg_tables2fisc_ote1_agg,
@@ -210,11 +210,11 @@ class WorldUnit:
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
-    def event_bud_csvs_to_gift_json(self):
-        etl_event_bud_csvs_to_gift_json(self._fisc_mstr_dir)
+    def event_bud_csvs_to_favor_json(self):
+        etl_event_bud_csvs_to_favor_json(self._fisc_mstr_dir)
 
-    def event_gift_json_to_event_inherited_budunits(self):
-        etl_event_gift_json_to_event_inherited_budunits(self._fisc_mstr_dir)
+    def event_favor_json_to_event_inherited_budunits(self):
+        etl_event_favor_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
     def event_inherited_budunits_to_fisc_voice(self):
         etl_event_inherited_budunits_to_fisc_voice(self._fisc_mstr_dir)
@@ -326,8 +326,8 @@ class WorldUnit:
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
         print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
-        self.event_bud_csvs_to_gift_json()
-        self.event_gift_json_to_event_inherited_budunits()
+        self.event_bud_csvs_to_favor_json()
+        self.event_favor_json_to_event_inherited_budunits()
         print(f"step 07 {count_dirs_files(self.worlds_dir)}")
         self.event_inherited_budunits_to_fisc_voice()
         self.fisc_voice_to_fisc_forecast()
