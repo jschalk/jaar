@@ -6,7 +6,7 @@ from src.f02_bud.bud_tool import (
     bud_itemunit_str,
     bud_item_factunit_str,
 )
-from src.f04_favor.atom_config import (
+from src.f04_stand.atom_config import (
     atom_insert,
     atom_update,
     atom_delete,
@@ -16,8 +16,8 @@ from src.f04_favor.atom_config import (
     fopen_str,
     fnigh_str,
 )
-from src.f04_favor.atom import budatom_shop, BudAtom
-from src.f04_favor.delta import buddelta_shop, BudDelta
+from src.f04_stand.atom import budatom_shop, BudAtom
+from src.f04_stand.delta import buddelta_shop, BudDelta
 
 
 def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> BudAtom:

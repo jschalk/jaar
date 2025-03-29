@@ -12,7 +12,7 @@ from src.f01_road.finance import (
     validate_fund_pool,
 )
 from src.f01_road.jaar_config import (
-    get_favors_folder,
+    get_stands_folder,
     get_test_fisc_mstr_dir,
     get_rootpart_of_keep_dir,
 )
@@ -55,7 +55,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit._voice_dir
     assert not x_hubunit._forecast_dir
     assert not x_hubunit._deals_dir
-    assert not x_hubunit._favors_dir
+    assert not x_hubunit._stands_dir
     assert not x_hubunit._voice_filename
     assert not x_hubunit._voice_path
     assert not x_hubunit._forecast_filename
@@ -127,8 +127,8 @@ def test_hubunit_shop_ReturnsObj():
     print(f"{x_hubunit._deals_dir=}")
     print(f"{func_deals_dir=}")
     assert x_hubunit._deals_dir == func_deals_dir
-    assert x_hubunit._favors_dir == create_path(
-        x_hubunit._owner_dir, get_favors_folder()
+    assert x_hubunit._stands_dir == create_path(
+        x_hubunit._owner_dir, get_stands_folder()
     )
 
     # voice

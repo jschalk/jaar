@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_favor.atom_config import (
+from src.f04_stand.atom_config import (
     jkeys_str,
     jvalues_str,
     atom_update,

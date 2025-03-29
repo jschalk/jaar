@@ -1,6 +1,6 @@
 # from src.f00_instrument.db_toolbox import create_table_from_columns
 from src.f01_road.deal import fisc_title_str, owner_name_str
-from src.f04_favor.atom_config import (
+from src.f04_stand.atom_config import (
     event_int_str,
     face_name_str,
     road_str,

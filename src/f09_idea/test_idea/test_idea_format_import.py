@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path as f_path
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud import budunit_shop
-from src.f04_favor.atom_config import (
+from src.f04_stand.atom_config import (
     acct_name_str,
     debtit_belief_str,
     credit_belief_str,
@@ -205,17 +205,17 @@ def test_load_idea_csv_csvToForecast(
 #     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
 #     sue_hubunit = hubunit_shop(idea_examples_dir(), accord_fisc_title, owner_name=sue_str)
 #     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_fisc_title))
-#     sue_hubunit._create_initial_favor_files_from_voice()
+#     sue_hubunit._create_initial_stand_files_from_voice()
 #     old_sue_voice = sue_hubunit.get_voice_bud()
 #     old_sue_voice.add_acctunit(sue_str)
 #     sue_hubunit.save_voice_bud(old_sue_voice)
 
-#     sue_hubunit.initialize_favor_voice_files()
+#     sue_hubunit.initialize_stand_voice_files()
 #     # Open FiscUnit and confirm voice BudUnit does not exist
 #     assert sue_hubunit.voice_file_exists()
 #     assert sue_hubunit.get_voice_bud().acct_exists(sue_str)
 #     assert not sue_hubunit.get_voice_bud().acct_exists(bob_str)
-#     assert sue_hubunit.get_max_favor_file_number() == 3
+#     assert sue_hubunit.get_max_stand_file_number() == 3
 
 #     # WHEN
 #     load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
@@ -228,7 +228,7 @@ def test_load_idea_csv_csvToForecast(
 #     # assert voice Budunit acctunit.credit_belief is correct
 #     sue_acctunit = new_sue_voice.get_acct(sue_str)
 #     bob_acctunit = new_sue_voice.get_acct(bob_str)
-#     assert sue_hubunit.get_max_favor_file_number() != 3
+#     assert sue_hubunit.get_max_stand_file_number() != 3
 #     assert 1 == 2
 
 

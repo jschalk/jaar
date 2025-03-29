@@ -1,6 +1,6 @@
 from src.f01_road.deal import quota_str
 from src.f02_bud.bud import budunit_shop
-from src.f04_favor.atom_config import event_int_str, penny_str
+from src.f04_stand.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import (
     cellunit_shop,
     cellunit_get_from_dict,

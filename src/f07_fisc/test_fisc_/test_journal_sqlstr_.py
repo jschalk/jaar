@@ -1,23 +1,23 @@
 from src.f01_road.road import create_road
 from src.f02_bud.bud_tool import bud_item_factunit_str
-from src.f04_favor.atom_config import (
+from src.f04_stand.atom_config import (
     fopen_str,
     atom_insert,
     atom_hx_table_name,
     base_str,
     road_str,
 )
-from src.f04_favor.atom import budatom_shop
+from src.f04_stand.atom import budatom_shop
 from src.f07_fisc.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
     get_atom_hx_table_insert_sqlstr,
     get_atom_mstr_table_create_sqlstr,
     get_create_table_if_not_exist_sqlstrs,
-    get_delta2favor_table_create_sqlstr,
+    get_delta2stand_table_create_sqlstr,
     get_delta_table_create_sqlstr,
-    get_favor_table_create_sqlstr,
-    get_favor2owner_table_create_sqlstr,
+    get_stand_table_create_sqlstr,
+    get_stand2owner_table_create_sqlstr,
     get_owner_mstr_table_create_sqlstr,
     get_road_ref_table_create_sqlstr,
     get_road_ref_table_single_insert_sqlstr,
@@ -52,46 +52,46 @@ CREATE TABLE atom2delta
     assert example_sqlstr == get_atom2delta_table_create_sqlstr()
 
 
-def test_get_favor_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_stand_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE IF NOT EXISTS favor_mstr (
+CREATE TABLE IF NOT EXISTS stand_mstr (
   author_owner_name VARCHAR(255) NOT NULL
-, author_favor_number INT NOT NULL
-, UNIQUE(author_owner_name, author_favor_number)
+, author_stand_number INT NOT NULL
+, UNIQUE(author_owner_name, author_stand_number)
 )
 ;"""
-    assert example_sqlstr == get_favor_table_create_sqlstr()
+    assert example_sqlstr == get_stand_table_create_sqlstr()
 
 
-def test_get_delta2favor_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_delta2stand_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE delta2favor
+CREATE TABLE delta2stand
 (
   delta_rowid INT NOT NULL
-, favor_rowid INT NOT NULL
-, UNIQUE(delta_rowid, favor_rowid)
+, stand_rowid INT NOT NULL
+, UNIQUE(delta_rowid, stand_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (favor_rowid) REFERENCES favor_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (stand_rowid) REFERENCES stand_mstr (rowid)
 )
 ;"""
-    assert example_sqlstr == get_delta2favor_table_create_sqlstr()
+    assert example_sqlstr == get_delta2stand_table_create_sqlstr()
 
 
-def test_get_favor2owner_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_stand2owner_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE favor2owner
+CREATE TABLE stand2owner
 (
-  favor_rowid INT NOT NULL
+  stand_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
-, UNIQUE(favor_rowid, owner_rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (favor_rowid) REFERENCES favor_mstr (rowid)
+, UNIQUE(stand_rowid, owner_rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (stand_rowid) REFERENCES stand_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
-    assert example_sqlstr == get_favor2owner_table_create_sqlstr()
+    assert example_sqlstr == get_stand2owner_table_create_sqlstr()
 
 
 def test_get_owner_mstr_table_create_sqlstr_ReturnsCorrectStr():

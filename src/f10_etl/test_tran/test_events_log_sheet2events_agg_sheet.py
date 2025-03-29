@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, count_dirs_files, count_files
-from src.f04_favor.atom_config import face_name_str, event_int_str
+from src.f04_stand.atom_config import face_name_str, event_int_str
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
 from src.f10_etl.tran_path import create_cart_events_path
 from src.f10_etl.transformers import (

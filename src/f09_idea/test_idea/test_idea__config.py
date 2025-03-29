@@ -26,7 +26,7 @@ from src.f03_chrono.chrono import (
     timeline_title_str,
     yr1_jan1_offset_str,
 )
-from src.f04_favor.atom_config import (
+from src.f04_stand.atom_config import (
     get_atom_args_dimen_mapping,
     get_atom_config_dict,
     get_bud_dimens,

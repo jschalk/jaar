@@ -6,7 +6,7 @@ from src.f01_road.deal import (
     quota_str,
     celldepth_str,
 )
-from src.f04_favor.atom_config import face_name_str, event_int_str, acct_name_str
+from src.f04_stand.atom_config import face_name_str, event_int_str, acct_name_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_forecast_path,
