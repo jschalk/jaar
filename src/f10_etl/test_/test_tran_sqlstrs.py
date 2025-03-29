@@ -53,6 +53,7 @@ from src.f10_etl.tran_sqlstrs import (
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
+    get_fisc_fu1_select_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -944,3 +945,57 @@ ORDER BY fisc_title, owner_name, event_int, deal_time
 """
     # WHEN / THEN
     assert INSERT_FISC_OTE1_AGG_SQLSTR == expected_INSERT_sqlstr
+
+
+def test_get_fisc_fu1_select_sqlstrs_ReturnsObj_HasAllNeededKeys():
+    # ESTABLISH
+    a23_str = "accord23"
+
+    # WHEN
+    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(a23_str)
+
+    # THEN
+    assert fu1_select_sqlstrs
+    expected_fu1_select_dimens = set(get_fisc_dimens())
+    assert set(fu1_select_sqlstrs.keys()) == expected_fu1_select_dimens
+
+
+def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    a23_str = "accord23"
+
+    # WHEN
+    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_title=a23_str)
+
+    # THEN
+    fisccash_str = "fisc_cashbook"
+    fiscdeal_str = "fisc_dealunit"
+    fischour_str = "fisc_timeline_hour"
+    fiscmont_str = "fisc_timeline_month"
+    fiscweek_str = "fisc_timeline_weekday"
+    fiscoffi_str = "fisc_timeoffi"
+    fiscunit_str = "fiscunit"
+    gen_fisccash_sqlstr = fu1_select_sqlstrs.get(fisccash_str)
+    gen_fiscdeal_sqlstr = fu1_select_sqlstrs.get(fiscdeal_str)
+    gen_fischour_sqlstr = fu1_select_sqlstrs.get(fischour_str)
+    gen_fiscmont_sqlstr = fu1_select_sqlstrs.get(fiscmont_str)
+    gen_fiscweek_sqlstr = fu1_select_sqlstrs.get(fiscweek_str)
+    gen_fiscoffi_sqlstr = fu1_select_sqlstrs.get(fiscoffi_str)
+    gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str)
+
+    expected_fisccash_sqlstr = f"SELECT fisc_title, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscdeal_sqlstr = f"SELECT fisc_title, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_title = '{a23_str}'"
+    expected_fischour_sqlstr = f"SELECT fisc_title, cumlative_minute, hour_title FROM fisc_timeline_hour_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscmont_sqlstr = f"SELECT fisc_title, cumlative_day, month_title FROM fisc_timeline_month_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscweek_sqlstr = f"SELECT fisc_title, weekday_order, weekday_title FROM fisc_timeline_weekday_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscoffi_sqlstr = f"SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscunit_sqlstr = f"SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge FROM fiscunit_agg WHERE fisc_title = '{a23_str}'"
+
+    assert gen_fisccash_sqlstr == expected_fisccash_sqlstr
+    assert gen_fiscdeal_sqlstr == expected_fiscdeal_sqlstr
+    assert gen_fischour_sqlstr == expected_fischour_sqlstr
+    assert gen_fiscmont_sqlstr == expected_fiscmont_sqlstr
+    assert gen_fiscweek_sqlstr == expected_fiscweek_sqlstr
+    assert gen_fiscoffi_sqlstr == expected_fiscoffi_sqlstr
+    assert gen_fiscunit_sqlstr == expected_fiscunit_sqlstr

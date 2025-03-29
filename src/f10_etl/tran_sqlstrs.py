@@ -975,3 +975,26 @@ FROM (
 ORDER BY fisc_title, owner_name, event_int, deal_time
 ;
 """
+
+
+FISCCASH_FU1_SELECT_SQLSTR = "SELECT fisc_title, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_title = "
+FISCDEAL_FU1_SELECT_SQLSTR = "SELECT fisc_title, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_title = "
+FISCHOUR_FU1_SELECT_SQLSTR = "SELECT fisc_title, cumlative_minute, hour_title FROM fisc_timeline_hour_agg WHERE fisc_title = "
+FISCMONT_FU1_SELECT_SQLSTR = "SELECT fisc_title, cumlative_day, month_title FROM fisc_timeline_month_agg WHERE fisc_title = "
+FISCWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_title, weekday_order, weekday_title FROM fisc_timeline_weekday_agg WHERE fisc_title = "
+FISCOFFI_FU1_SELECT_SQLSTR = (
+    "SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = "
+)
+FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge FROM fiscunit_agg WHERE fisc_title = "
+
+
+def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:
+    return {
+        "fiscunit": f"{FISCUNIT_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fisc_dealunit": f"{FISCDEAL_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fisc_cashbook": f"{FISCCASH_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fisc_timeline_hour": f"{FISCHOUR_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fisc_timeline_month": f"{FISCMONT_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fisc_timeline_weekday": f"{FISCWEEK_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fisc_timeoffi": f"{FISCOFFI_FU1_SELECT_SQLSTR}'{fisc_title}'",
+    }
