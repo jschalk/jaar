@@ -3,9 +3,6 @@
         "c400_number": {
             "otx_key": false
         },
-        "present_time": {
-            "otx_key": false
-        },
         "event_int": {
             "otx_key": true
         },

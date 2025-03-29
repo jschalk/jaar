@@ -2,7 +2,7 @@ from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     get_atom_args_class_types,
     type_AcctName_str,
     type_LabelUnit_str,
@@ -75,7 +75,6 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("credor_respect") == "int"
     assert pidgin_args_class_types.get("cumlative_day") == "int"
     assert pidgin_args_class_types.get("cumlative_minute") == "int"
-    assert pidgin_args_class_types.get("present_time") == "int"
     assert pidgin_args_class_types.get("debtit_belief") == "int"
     assert pidgin_args_class_types.get("debtit_vote") == "int"
     assert pidgin_args_class_types.get("debtor_respect") == "int"
@@ -101,6 +100,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("need") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("nigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
+    assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_AcctName_str()
     assert pidgin_args_class_types.get("open") == "float"
     assert pidgin_args_class_types.get("parent_road") == type_RoadUnit_str()
@@ -116,7 +116,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
     assert pidgin_args_class_types.get("team_tag") == type_LabelUnit_str()
-    assert pidgin_args_class_types.get("time_int") == "TimeLinePoint"
+    assert pidgin_args_class_types.get("deal_time") == "TimeLinePoint"
+    assert pidgin_args_class_types.get("tran_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("timeline_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("weekday_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("weekday_order") == "int"

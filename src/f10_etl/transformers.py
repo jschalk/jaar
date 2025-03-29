@@ -19,10 +19,10 @@ from src.f02_bud.bud import (
     get_from_json as budunit_get_from_json,
     BudUnit,
 )
-from src.f04_gift.atom import atomunit_shop
-from src.f04_gift.atom_config import get_bud_dimens
-from src.f04_gift.delta import get_minimal_buddelta
-from src.f04_gift.gift import giftunit_shop, get_giftunit_from_json, GiftUnit
+from src.f04_stand.atom import budatom_shop
+from src.f04_stand.atom_config import get_bud_dimens
+from src.f04_stand.delta import get_minimal_buddelta
+from src.f04_stand.stand import standunit_shop, get_standunit_from_json, StandUnit
 from src.f05_listen.hub_path import (
     create_voice_path,
     create_fisc_ote1_csv_path,
@@ -35,7 +35,7 @@ from src.f05_listen.hub_tool import (
     get_owners_downhill_event_ints,
 )
 from src.f07_fisc.fisc import (
-    get_from_standard as fiscunit_get_from_standard,
+    get_from_default_path as fiscunit_get_from_default_path,
 )
 from src.f07_fisc.fisc_tool import (
     create_fisc_owners_cell_trees,
@@ -394,9 +394,7 @@ def get_cart_events_max_event_int(cart_dir: str) -> int:
         return 0
     events_df = pandas_read_excel(events_file_path)
     max_event_id = events_df["event_int"].max()
-    if not if_nan_return_None(max_event_id):
-        return 0
-    return max_event_id
+    return max_event_id if if_nan_return_None(max_event_id) else 0
 
 
 def cart_agg_single_to_pidgin_staging(
@@ -889,7 +887,7 @@ def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_fisc_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    empty_ote1_csv_str = """fisc_title,owner_name,event_int,time_int,error_message
+    empty_ote1_csv_str = """fisc_title,owner_name,event_int,deal_time,error_message
 """
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
@@ -910,11 +908,11 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
         for row in csv_arrays:
             owner_name = row[1]
             event_int = row[2]
-            time_int = row[3]
+            deal_time = row[3]
             if x_dict.get(owner_name) is None:
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
-            owner_dict[int(time_int)] = event_int
+            owner_dict[int(deal_time)] = event_int
         json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_title)
         save_json(json_path, None, x_dict)
 
@@ -926,7 +924,7 @@ def etl_create_deals_root_cells(fisc_mstr_dir: str):
         ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
-            x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
+            x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
             x_fiscunit.create_deals_root_cells(ote1_dict)
 
 
@@ -1011,7 +1009,7 @@ def etl_fisc_csvs_to_fisc_jsons(fisc_mstr_dir: str):
     create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
 
 
-def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
+def etl_event_bud_csvs_to_stand_json(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1021,17 +1019,17 @@ def etl_event_bud_csvs_to_gift_json(fisc_mstr_dir: str):
             events_path = create_path(owner_path, "events")
             for event_int in get_level1_dirs(events_path):
                 event_path = create_path(events_path, event_int)
-                event_gift = giftunit_shop(
+                event_stand = standunit_shop(
                     owner_name=owner_name,
                     face_name=None,
                     fisc_title=fisc_title,
                     event_int=event_int,
                 )
-                add_atomunits_from_csv(event_gift, event_path)
-                save_file(event_path, "all_gift.json", event_gift.get_json())
+                add_budatoms_from_csv(event_stand, event_path)
+                save_file(event_path, "all_stand.json", event_stand.get_json())
 
 
-def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
+def add_budatoms_from_csv(owner_stand: StandUnit, owner_path: str):
     idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
@@ -1044,7 +1042,7 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
             for put_row in put_rows:
-                x_atom = atomunit_shop(bud_dimen, "INSERT")
+                x_atom = budatom_shop(bud_dimen, "INSERT")
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
@@ -1053,13 +1051,13 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._buddelta.set_atomunit(x_atom)
+                owner_stand._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
             headers = del_rows.pop(0)
             for del_row in del_rows:
-                x_atom = atomunit_shop(bud_dimen, "DELETE")
+                x_atom = budatom_shop(bud_dimen, "DELETE")
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
@@ -1068,10 +1066,10 @@ def add_atomunits_from_csv(owner_gift: GiftUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_gift._buddelta.set_atomunit(x_atom)
+                owner_stand._buddelta.set_budatom(x_atom)
 
 
-def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
+def etl_event_stand_json_to_event_inherited_budunits(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1090,14 +1088,14 @@ def etl_event_gift_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 event_dir = create_owner_event_dir_path(
                     fisc_mstr_dir, fisc_title, owner_name, event_int
                 )
-                gift_path = create_path(event_dir, "all_gift.json")
-                event_gift = get_giftunit_from_json(open_file(gift_path))
-                sift_delta = get_minimal_buddelta(event_gift._buddelta, prev_bud)
-                curr_bud = event_gift.get_edited_bud(prev_bud)
+                stand_path = create_path(event_dir, "all_stand.json")
+                event_stand = get_standunit_from_json(open_file(stand_path))
+                sift_delta = get_minimal_buddelta(event_stand._buddelta, prev_bud)
+                curr_bud = event_stand.get_edited_bud(prev_bud)
                 save_file(budevent_path, None, curr_bud.get_json())
-                expressed_gift = copy_deepcopy(event_gift)
-                expressed_gift.set_buddelta(sift_delta)
-                save_file(event_dir, "expressed_gift.json", expressed_gift.get_json())
+                expressed_stand = copy_deepcopy(event_stand)
+                expressed_stand.set_buddelta(sift_delta)
+                save_file(event_dir, "expressed_stand.json", expressed_stand.get_json())
                 prev_event_int = event_int
 
 
@@ -1129,5 +1127,5 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
 def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
-        x_fiscunit = fiscunit_get_from_standard(fisc_mstr_dir, fisc_title)
+        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
         x_fiscunit.generate_all_forecast_buds()

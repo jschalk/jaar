@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_json, save_file
-from src.f01_road.deal import time_int_str, owner_name_str, fisc_title_str
-from src.f04_gift.atom_config import event_int_str
+from src.f01_road.deal import deal_time_str, owner_name_str, fisc_title_str
+from src.f04_stand.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
@@ -28,10 +28,10 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
     a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
-    a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+    a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord23_str},{bob_str},{event3},{timepoint55},
 """
-    a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+    a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord45_str},{sue_str},{event3},{timepoint55},
 {accord45_str},{sue_str},{event7},{timepoint66},
 """

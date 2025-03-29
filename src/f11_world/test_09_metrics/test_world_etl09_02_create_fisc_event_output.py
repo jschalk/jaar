@@ -17,10 +17,10 @@
 #     fisc_mstr_dir = fizz_world._fisc_mstr_dir
 #     a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
 #     a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
-#     a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+#     a23_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 # {accord23_str},{bob_str},{event3},{timepoint55},
 # """
-#     a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{time_int_str()},error_message
+#     a45_event_time_csv = f"""{fisc_title_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 # {accord45_str},{sue_str},{event3},{timepoint55},
 # {accord45_str},{sue_str},{event7},{timepoint66},
 # """

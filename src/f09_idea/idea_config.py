@@ -98,6 +98,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "event_int",
         "fisc_title",
         "timeline_title",
+        "offi_time",
         "c400_number",
         "yr1_jan1_offset",
         "monthday_distortion",
@@ -131,7 +132,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "awardee_tag_ERASE",
         "healer_name",
         "healer_name_ERASE",
-        "time_int",
+        "deal_time",
+        "tran_time",
         "begin",
         "close",
         "addin",
@@ -163,7 +165,6 @@ def get_idea_elements_sort_order() -> list[str]:
         "fund_coin",
         "penny",
         "respect_bit",
-        "present_time",
         "amount",
         "otx_title",
         "inx_title",
@@ -222,7 +223,9 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "awardee_tag_ERASE": "TEXT",
         "healer_name": "TEXT",
         "healer_name_ERASE": "TEXT",
-        "time_int": "INTEGER",
+        "deal_time": "INTEGER",
+        "tran_time": "INTEGER",
+        "offi_time": "INTEGER",
         "begin": "REAL",
         "close": "REAL",
         "addin": "REAL",
@@ -254,7 +257,6 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "fund_coin": "REAL",
         "penny": "REAL",
         "respect_bit": "REAL",
-        "present_time": "INTEGER",
         "amount": "REAL",
         "month_title": "TEXT",
         "hour_title": "TEXT",
@@ -314,6 +316,10 @@ def idea_format_00004_fisc_timeline_month_v0_0_0() -> str:
 
 def idea_format_00005_fisc_timeline_weekday_v0_0_0() -> str:
     return "idea_format_00005_fisc_timeline_weekday_v0_0_0"
+
+
+def idea_format_00006_fisc_timeoffi_v0_0_0() -> str:
+    return "idea_format_00006_fisc_timeoffi_v0_0_0"
 
 
 def idea_format_00011_acct_v0_0_0() -> str:
@@ -476,6 +482,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00003_fisc_timeline_hour_v0_0_0(),
         idea_format_00004_fisc_timeline_month_v0_0_0(),
         idea_format_00005_fisc_timeline_weekday_v0_0_0(),
+        idea_format_00006_fisc_timeoffi_v0_0_0(),
         idea_format_00011_acct_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_itemunit_v0_0_0(),
@@ -520,6 +527,7 @@ def get_idea_numbers() -> set[str]:
         "br00003",
         "br00004",
         "br00005",
+        "br00006",
         "br00011",
         "br00012",
         "br00013",
@@ -565,12 +573,13 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,present_time,bridge": idea_format_00000_fiscunit_v0_0_0(),
-        "fisc_title,owner_name,time_int,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
-        "fisc_title,owner_name,acct_name,time_int,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
+        "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge": idea_format_00000_fiscunit_v0_0_0(),
+        "fisc_title,owner_name,deal_time,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
+        "fisc_title,owner_name,acct_name,tran_time,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
         "fisc_title,cumlative_minute,hour_title": idea_format_00003_fisc_timeline_hour_v0_0_0(),
         "fisc_title,cumlative_day,month_title": idea_format_00004_fisc_timeline_month_v0_0_0(),
         "fisc_title,weekday_order,weekday_title": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
+        "fisc_title,offi_time": idea_format_00006_fisc_timeoffi_v0_0_0(),
         "fisc_title,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
         "fisc_title,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
         "fisc_title,owner_name,parent_road,item_title,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
@@ -629,6 +638,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         "fisc_timeline_hour": ["br00003"],
         "fisc_timeline_month": ["br00004"],
         "fisc_timeline_weekday": ["br00005"],
+        "fisc_timeoffi": ["br00006"],
         "bud_acctunit": [
             "br00011",
             "br00021",

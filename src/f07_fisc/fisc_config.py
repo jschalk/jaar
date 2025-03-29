@@ -7,8 +7,8 @@ def timeline_str() -> str:
     return "timeline"
 
 
-def present_time_str() -> str:
-    return "present_time"
+def offi_time_str() -> str:
+    return "offi_time"
 
 
 def brokerunits_str() -> str:
@@ -86,6 +86,10 @@ def fisc_timeline_weekday_str() -> str:
     return "fisc_timeline_weekday"
 
 
+def fisc_timeoffi_str() -> str:
+    return "fisc_timeoffi"
+
+
 def get_fisc_config_dict() -> dict:
     return open_json(config_file_dir(), get_fisc_config_filename())
 
@@ -98,6 +102,7 @@ def get_fisc_dimens() -> set[str]:
         "fisc_timeline_hour",
         "fisc_timeline_month",
         "fisc_timeline_weekday",
+        "fisc_timeoffi",
     }
 
 
@@ -139,18 +144,19 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "c400_number": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "present_time": "int",
         "hour_title": "TitleUnit",
         "fisc_title": "TitleUnit",
         "fund_coin": "float",
         "month_title": "TitleUnit",
         "monthday_distortion": "int",
         "penny": "float",
+        "offi_time": "TimeLinePoint",
         "owner_name": "NameUnit",
         "quota": "int",
         "respect_bit": "float",
         "celldepth": "int",
-        "time_int": "TimeLinePoint",
+        "deal_time": "TimeLinePoint",
+        "tran_time": "TimeLinePoint",
         "timeline_title": "TitleUnit",
         "weekday_title": "TitleUnit",
         "weekday_order": "int",
@@ -166,18 +172,19 @@ def get_fisc_args_set() -> set[str]:
         "c400_number",
         "cumlative_day",
         "cumlative_minute",
-        "present_time",
         "hour_title",
         "fisc_title",
         "fund_coin",
         "month_title",
         "monthday_distortion",
         "penny",
+        "offi_time",
         "owner_name",
         "quota",
         "respect_bit",
         "celldepth",
-        "time_int",
+        "deal_time",
+        "tran_time",
         "timeline_title",
         "weekday_title",
         "weekday_order",

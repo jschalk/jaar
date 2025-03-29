@@ -8,11 +8,11 @@ from src.f00_instrument.file import (
 from src.f01_road.deal import (
     owner_name_str,
     fisc_title_str,
-    time_int_str,
+    deal_time_str,
     quota_str,
     celldepth_str,
 )
-from src.f04_gift.atom_config import face_name_str, event_int_str, acct_name_str
+from src.f04_stand.atom_config import face_name_str, event_int_str, acct_name_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_forecast_path,
@@ -123,9 +123,9 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
         print(f"comparing {sheetname=}...")
         fizz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
         buzz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
-        if sheetname == "br00021":
-            print(f"{fizz_sheet_df=}")
-            print(f"{buzz_sheet_df=}")
+        # if sheetname == "br00021":
+        #     print(f"{fizz_sheet_df=}")
+        #     print(f"{buzz_sheet_df=}")
         assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
 
 
@@ -155,7 +155,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #         event_int_str(),
 #         fisc_title_str(),
 #         owner_name_str(),
-#         time_int_str(),
+#         deal_time(),
 #         quota_str(),
 #         celldepth_str(),
 #     ]

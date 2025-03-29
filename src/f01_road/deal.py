@@ -24,12 +24,16 @@ class calc_magnitudeException(Exception):
     pass
 
 
-class time_int_Exception(Exception):
+class tran_time_Exception(Exception):
     pass
 
 
-def time_int_str() -> str:
-    return "time_int"
+def tran_time_str() -> str:
+    return "tran_time"
+
+
+def deal_time_str() -> str:
+    return "deal_time"
 
 
 def bridge_str() -> str:
@@ -67,14 +71,14 @@ DEFAULT_CELLDEPTH = 2
 class TranUnit:
     src: AcctName = None
     dst: AcctName = None
-    time_int: TimeLinePoint = None
+    tran_time: TimeLinePoint = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: AcctName, dst: AcctName, time_int: TimeLinePoint, amount: FundNum
+    src: AcctName, dst: AcctName, tran_time: TimeLinePoint, amount: FundNum
 ) -> TranUnit:
-    return TranUnit(src=src, dst=dst, time_int=time_int, amount=amount)
+    return TranUnit(src=src, dst=dst, tran_time=tran_time, amount=amount)
 
 
 @dataclass
@@ -86,67 +90,65 @@ class TranBook:
     def set_tranunit(
         self,
         tranunit: TranUnit,
-        blocked_time_ints: set[TimeLinePoint] = None,
-        present_time: TimeLinePoint = None,
+        blocked_tran_times: set[TimeLinePoint] = None,
+        _offi_time_max: TimeLinePoint = None,
     ):
         self.add_tranunit(
             owner_name=tranunit.src,
             acct_name=tranunit.dst,
-            time_int=tranunit.time_int,
+            tran_time=tranunit.tran_time,
             amount=tranunit.amount,
-            blocked_time_ints=blocked_time_ints,
-            present_time=present_time,
+            blocked_tran_times=blocked_tran_times,
+            _offi_time_max=_offi_time_max,
         )
 
     def add_tranunit(
         self,
         owner_name: OwnerName,
         acct_name: AcctName,
-        time_int: TimeLinePoint,
+        tran_time: TimeLinePoint,
         amount: FundNum,
-        blocked_time_ints: set[TimeLinePoint] = None,
-        present_time: TimeLinePoint = None,
+        blocked_tran_times: set[TimeLinePoint] = None,
+        _offi_time_max: TimeLinePoint = None,
     ):
-        if time_int in get_empty_set_if_None(blocked_time_ints):
-            exception_str = (
-                f"Cannot set tranunit for time_int={time_int}, timelinepoint is blocked"
-            )
-            raise time_int_Exception(exception_str)
-        if present_time != None and time_int >= present_time:
-            exception_str = f"Cannot set tranunit for time_int={time_int}, timelinepoint is greater than current time={present_time}"
-            raise time_int_Exception(exception_str)
-        x_keylist = [owner_name, acct_name, time_int]
+        if tran_time in get_empty_set_if_None(blocked_tran_times):
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, timelinepoint is blocked"
+            raise tran_time_Exception(exception_str)
+        if _offi_time_max != None and tran_time >= _offi_time_max:
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, timelinepoint is greater than current time={_offi_time_max}"
+            raise tran_time_Exception(exception_str)
+        x_keylist = [owner_name, acct_name, tran_time]
         set_in_nested_dict(self.tranunits, x_keylist, amount)
 
     def tranunit_exists(
-        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
     ) -> bool:
-        return get_from_nested_dict(self.tranunits, [src, dst, time_int], True) != None
+        return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True) != None
 
     def get_tranunit(
-        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
     ) -> TranUnit:
-        x_amount = get_from_nested_dict(self.tranunits, [src, dst, time_int], True)
+        x_amount = get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
         if x_amount != None:
-            return tranunit_shop(src, dst, time_int, x_amount)
+            return tranunit_shop(src, dst, tran_time, x_amount)
 
     def get_amount(
-        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
     ) -> TranUnit:
-        return get_from_nested_dict(self.tranunits, [src, dst, time_int], True)
+        return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
 
     def del_tranunit(
-        self, src: AcctName, dst: AcctName, time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
     ) -> TranUnit:
-        x_keylist = [src, dst, time_int]
+        x_keylist = [src, dst, tran_time]
         if exists_in_nested_dict(self.tranunits, x_keylist):
             del_in_nested_dict(self.tranunits, x_keylist)
 
-    def get_time_ints(self) -> set[TimeLinePoint]:
+    def get_tran_times(self) -> set[TimeLinePoint]:
         x_set = set()
         for dst_dict in self.tranunits.values():
-            for time_int_dict in dst_dict.values():
-                x_set.update(set(time_int_dict.keys()))
+            for tran_time_dict in dst_dict.values():
+                x_set.update(set(tran_time_dict.keys()))
         return x_set
 
     def get_owners_accts_net(self) -> dict[OwnerName, dict[AcctName, FundNum]]:
@@ -185,10 +187,10 @@ class TranBook:
             key=lambda x: next(iter(next(iter(x[1].values())).keys())),
         )
         for src_acct_name, dst_dict in sorted_tranunits:
-            for dst_acct_name, time_int_dict in dst_dict.items():
-                for x_time_int, x_amount in time_int_dict.items():
+            for dst_acct_name, tran_time_dict in dst_dict.items():
+                for x_tran_time, x_amount in tran_time_dict.items():
                     self.add_tranunit(
-                        src_acct_name, dst_acct_name, x_time_int, x_amount
+                        src_acct_name, dst_acct_name, x_tran_time, x_amount
                     )
 
     def get_dict(
@@ -212,16 +214,16 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
     x_tranunits = x_dict.get("tranunits")
     new_tranunits = {}
     for x_owner_name, x_acct_dict in x_tranunits.items():
-        for x_acct_name, x_time_int_dict in x_acct_dict.items():
-            for x_time_int, x_amount in x_time_int_dict.items():
-                x_key_list = [x_owner_name, x_acct_name, int(x_time_int)]
+        for x_acct_name, x_tran_time_dict in x_acct_dict.items():
+            for x_tran_time, x_amount in x_tran_time_dict.items():
+                x_key_list = [x_owner_name, x_acct_name, int(x_tran_time)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
     return tranbook_shop(x_dict.get("fisc_title"), new_tranunits)
 
 
 @dataclass
 class DealUnit:
-    time_int: TimeLinePoint = None
+    deal_time: TimeLinePoint = None
     quota: FundNum = None
     celldepth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
@@ -249,7 +251,7 @@ class DealUnit:
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
-        x_dict = {"time_int": self.time_int, "quota": self.quota}
+        x_dict = {"deal_time": self.deal_time, "quota": self.quota}
         if self._deal_acct_nets:
             x_dict["deal_acct_nets"] = self._deal_acct_nets
         if self._magnitude:
@@ -263,7 +265,7 @@ class DealUnit:
 
 
 def dealunit_shop(
-    time_int: TimeLinePoint,
+    deal_time: TimeLinePoint,
     quota: FundNum = None,
     deal_acct_nets: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
@@ -275,7 +277,7 @@ def dealunit_shop(
         celldepth = DEFAULT_CELLDEPTH
 
     return DealUnit(
-        time_int=time_int,
+        deal_time=deal_time,
         quota=quota,
         celldepth=celldepth,
         _deal_acct_nets=get_empty_dict_if_None(deal_acct_nets),
@@ -289,55 +291,55 @@ class BrokerUnit:
     deals: dict[TimeLinePoint, DealUnit] = None
     _sum_dealunit_quota: FundNum = None
     _sum_acct_deal_nets: int = None
-    _time_int_min: TimeLinePoint = None
-    _time_int_max: TimeLinePoint = None
+    _deal_time_min: TimeLinePoint = None
+    _deal_time_max: TimeLinePoint = None
 
     def set_deal(self, x_deal: DealUnit):
-        self.deals[x_deal.time_int] = x_deal
+        self.deals[x_deal.deal_time] = x_deal
 
     def add_deal(
-        self, x_time_int: TimeLinePoint, x_quota: FundNum, celldepth: int = None
+        self, x_deal_time: TimeLinePoint, x_quota: FundNum, celldepth: int = None
     ):
         dealunit = dealunit_shop(
-            time_int=x_time_int, quota=x_quota, celldepth=celldepth
+            deal_time=x_deal_time, quota=x_quota, celldepth=celldepth
         )
         self.set_deal(dealunit)
 
-    def deal_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return self.deals.get(x_time_int) != None
+    def deal_exists(self, x_deal_time: TimeLinePoint) -> bool:
+        return self.deals.get(x_deal_time) != None
 
-    def get_deal(self, x_time_int: TimeLinePoint) -> DealUnit:
-        return self.deals.get(x_time_int)
+    def get_deal(self, x_deal_time: TimeLinePoint) -> DealUnit:
+        return self.deals.get(x_deal_time)
 
-    def del_deal(self, x_time_int: TimeLinePoint):
-        self.deals.pop(x_time_int)
+    def del_deal(self, x_deal_time: TimeLinePoint):
+        self.deals.pop(x_deal_time)
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_name, x_deal.time_int, x_deal.quota]
+            [self.owner_name, x_deal.deal_time, x_deal.quota]
             for x_deal in self.deals.values()
         ]
 
     def get_headers(self) -> list:
-        return ["owner_name", "time_int", "quota"]
+        return ["owner_name", "deal_time", "quota"]
 
     def get_dict(self) -> dict:
         return {"owner_name": self.owner_name, "deals": self._get_deals_dict()}
 
     def _get_deals_dict(self) -> dict:
-        return {x_deal.time_int: x_deal.get_dict() for x_deal in self.deals.values()}
+        return {x_deal.deal_time: x_deal.get_dict() for x_deal in self.deals.values()}
 
-    def get_time_ints(self) -> set[TimeLinePoint]:
+    def get_deal_times(self) -> set[TimeLinePoint]:
         return set(self.deals.keys())
 
     def get_tranbook(self, fisc_title: FiscTitle) -> TranBook:
         x_tranbook = tranbook_shop(fisc_title)
-        for x_time_int, x_deal in self.deals.items():
+        for x_deal_time, x_deal in self.deals.items():
             for dst_acct_name, x_quota in x_deal._deal_acct_nets.items():
                 x_tranbook.add_tranunit(
                     owner_name=self.owner_name,
                     acct_name=dst_acct_name,
-                    time_int=x_time_int,
+                    tran_time=x_deal_time,
                     amount=x_quota,
                 )
         return x_tranbook
@@ -348,13 +350,13 @@ def brokerunit_shop(owner_name: OwnerName) -> BrokerUnit:
 
 
 def get_dealunit_from_dict(x_dict: dict) -> DealUnit:
-    x_time_int = x_dict.get("time_int")
+    x_deal_time = x_dict.get("deal_time")
     x_quota = x_dict.get("quota")
     x_deal_net = x_dict.get("deal_acct_nets")
     x_magnitude = x_dict.get("magnitude")
     x_celldepth = x_dict.get("celldepth")
     return dealunit_shop(
-        x_time_int, x_quota, x_deal_net, x_magnitude, celldepth=x_celldepth
+        x_deal_time, x_quota, x_deal_net, x_magnitude, celldepth=x_celldepth
     )
 
 
@@ -373,7 +375,7 @@ def get_deals_from_dict(deals_dict: dict) -> dict[TimeLinePoint, DealUnit]:
     x_dict = {}
     for x_deal_dict in deals_dict.values():
         x_dealunit = get_dealunit_from_dict(x_deal_dict)
-        x_dict[x_dealunit.time_int] = x_dealunit
+        x_dict[x_dealunit.deal_time] = x_dealunit
     return x_dict
 
 

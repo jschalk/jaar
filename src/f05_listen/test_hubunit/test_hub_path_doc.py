@@ -1,5 +1,5 @@
-from src.f01_road.deal import owner_name_str, time_int_str, fisc_title_str
-from src.f04_gift.atom_config import event_int_str
+from src.f01_road.deal import owner_name_str, deal_time_str, fisc_title_str
+from src.f04_stand.atom_config import event_int_str
 from src.f05_listen.hub_path import (
     create_fisc_dir_path,
     create_fisc_json_path,
@@ -17,8 +17,8 @@ from src.f05_listen.hub_path import (
     create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
-    create_event_all_gift_path,
-    create_event_expressed_gift_path,
+    create_event_all_stand_path,
+    create_event_expressed_stand_path,
     create_voice_path,
     create_forecast_path,
 )
@@ -94,9 +94,9 @@ def test_create_deal_dir_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_deal_dir_path) == doc_str
@@ -108,10 +108,10 @@ def test_create_cell_dir_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
         deal_ancestors=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
@@ -124,10 +124,10 @@ def test_create_cell_json_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
         deal_ancestors=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
@@ -140,10 +140,10 @@ def test_create_cell_acct_mandate_ledger_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
         deal_ancestors=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
@@ -156,9 +156,9 @@ def test_create_dealunit_json_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_dealunit_json_path) == doc_str
@@ -170,9 +170,9 @@ def test_create_deal_acct_mandate_ledger_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_deal_acct_mandate_ledger_path) == doc_str
@@ -184,9 +184,9 @@ def test_create_budpoint_path_HasDocString():
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
-        time_int=time_int_str(),
+        deal_time=deal_time_str(),
     )
-    doc_str = doc_str.replace("deals\\time_int", "deals\n\\time_int")
+    doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_budpoint_path) == doc_str
@@ -218,9 +218,9 @@ def test_create_budevent_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_budevent_path) == doc_str
 
 
-def test_create_event_all_gift_path_HasDocString():
+def test_create_event_all_stand_path_HasDocString():
     # ESTABLISH
-    doc_str = create_event_all_gift_path(
+    doc_str = create_event_all_stand_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -228,12 +228,12 @@ def test_create_event_all_gift_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_event_all_gift_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_event_all_stand_path) == doc_str
 
 
-def test_create_event_expressed_gift_path_HasDocString():
+def test_create_event_expressed_stand_path_HasDocString():
     # ESTABLISH
-    doc_str = create_event_expressed_gift_path(
+    doc_str = create_event_expressed_stand_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -241,7 +241,7 @@ def test_create_event_expressed_gift_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_event_expressed_gift_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_event_expressed_stand_path) == doc_str
 
 
 def test_create_voice_path_HasDocString():

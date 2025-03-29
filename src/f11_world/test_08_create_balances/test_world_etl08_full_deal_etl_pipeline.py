@@ -1,7 +1,7 @@
 from src.f00_instrument.file import open_json, save_json, count_dirs_files, save_file
 from src.f01_road.deal import quota_str, DEFAULT_CELLDEPTH
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.atom_config import event_int_str, penny_str
+from src.f04_stand.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import celldepth_str, deal_owner_name_str, ancestors_str
 from src.f05_listen.hub_path import (
     CELL_MANDATE_FILENAME,
@@ -25,7 +25,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
+def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -42,13 +42,13 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    fizz_world.calc_fiscal_deal_acct_mandate_net_ledgers()
+    fizz_world.calc_fisc_deal_acct_mandate_net_ledgers()
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal(
+def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -71,7 +71,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal
     bob37_deal_mandate_path = deal_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_deal_mandate_path) is False
     # WHEN
-    fizz_world.calc_fiscal_deal_acct_mandate_net_ledgers()
+    fizz_world.calc_fisc_deal_acct_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_deal_mandate_path)
@@ -82,7 +82,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal
     assert gen_bob37_dealunit._deal_acct_nets == expected_deal_acct_nets
 
 
-def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
+def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -144,7 +144,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists
     assert os_path_exists(bob37_deal_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_fiscal_deal_acct_mandate_net_ledgers()
+    fizz_world.calc_fisc_deal_acct_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_deal_mandate_path)
@@ -155,7 +155,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists
     assert gen_bob37_dealunit._deal_acct_nets == expected_deal_acct_nets
 
 
-# def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExistsButNoBudExistsInEventsPast(
+# def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExistsButNoBudExistsInEventsPast(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -189,7 +189,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists
 #     assert os_path_exists(tp37_cell_json_path) is False
 
 #     # WHEN
-#     fizz_world.calc_fiscal_deal_acct_mandate_net_ledgers()
+#     fizz_world.calc_fisc_deal_acct_mandate_net_ledgers()
 
 #     # THEN
 #     assert os_path_exists(tp37_cell_json_path)
@@ -202,7 +202,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists
 #     assert cell_dict.get(quota_str()) == deal1_quota
 
 
-# def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
+# def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro3_DealExistsNotPerfectMatch_deal_time_event_int(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -243,7 +243,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists
 #     assert os_path_exists(tp37_cell_json_path) is False
 
 #     # WHEN
-#     fizz_world.calc_fiscal_deal_acct_mandate_net_ledgers()
+#     fizz_world.calc_fisc_deal_acct_mandate_net_ledgers()
 
 #     # THEN
 #     assert os_path_exists(tp37_cell_json_path)
@@ -278,7 +278,7 @@ def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro2_DealExists
 #     assert os_path_exists(bob9_deal_mandate_path) is False
 
 
-# def test_WorldUnit_calc_fiscal_deal_acct_mandate_net_ledgers_Scenaro1_DealExists(env_dir_setup_cleanup):
+# def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro1_DealExists(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_world = worldunit_shop("fizz")
 #     mstr_dir = fizz_world._fisc_mstr_dir

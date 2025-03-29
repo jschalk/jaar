@@ -15,10 +15,10 @@ from src.f01_road.jaar_config import (
     grades_folder,
     get_rootpart_of_keep_dir,
     treasury_filename,
-    get_gifts_folder,
-    get_init_gift_id_if_None,
+    get_stands_folder,
+    get_init_stand_id_if_None,
     get_json_filename,
-    init_gift_id,
+    init_stand_id,
 )
 from src.f01_road.finance import (
     default_fund_coin_if_None,
@@ -51,13 +51,13 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
-from src.f04_gift.atom import (
-    AtomUnit,
-    get_from_json as atomunit_get_from_json,
-    modify_bud_with_atomunit,
+from src.f04_stand.atom import (
+    BudAtom,
+    get_from_json as budatom_get_from_json,
+    modify_bud_with_budatom,
 )
 from src.f05_listen.basis_buds import get_default_forecast_bud
-from src.f04_gift.gift import GiftUnit, giftunit_shop, create_giftunit_from_files
+from src.f04_stand.stand import StandUnit, standunit_shop, create_standunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -72,11 +72,11 @@ class Invalid_forecast_Exception(Exception):
     pass
 
 
-class SaveGiftFileException(Exception):
+class SaveStandFileException(Exception):
     pass
 
 
-class GiftFileMissingException(Exception):
+class StandFileMissingException(Exception):
     pass
 
 
@@ -125,7 +125,7 @@ class HubUnit:
     _owner_dir: str = None
     _keeps_dir: str = None
     _atoms_dir: str = None
-    _gifts_dir: str = None
+    _stands_dir: str = None
     _voice_dir: str = None
     _forecast_dir: str = None
     _deals_dir: str = None
@@ -141,7 +141,7 @@ class HubUnit:
         self._owner_dir = f_path(self._owners_dir, self.owner_name)
         self._keeps_dir = f_path(self._owner_dir, "keeps")
         self._atoms_dir = f_path(self._owner_dir, "atoms")
-        self._gifts_dir = f_path(self._owner_dir, get_gifts_folder())
+        self._stands_dir = f_path(self._owner_dir, get_stands_folder())
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._deals_dir = f_path(self._owner_dir, "deals")
@@ -197,7 +197,7 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_budunit.last_gift_id = init_gift_id()
+        x_budunit.last_stand_id = init_stand_id()
         return x_budunit
 
     def delete_voice_file(self):
@@ -206,7 +206,7 @@ class HubUnit:
     def open_file_forecast(self) -> str:
         return open_file(self._forecast_dir, self._forecast_filename)
 
-    # Gift methods
+    # Stand methods
     def get_max_atom_file_number(self) -> int:
         return get_max_file_number(self._atoms_dir)
 
@@ -220,7 +220,7 @@ class HubUnit:
     def atom_file_path(self, atom_number: int) -> str:
         return f_path(self._atoms_dir, self.atom_filename(atom_number))
 
-    def _save_valid_atom_file(self, x_atom: AtomUnit, file_number: int):
+    def _save_valid_atom_file(self, x_atom: BudAtom, file_number: int):
         save_file(
             self._atoms_dir,
             self.atom_filename(file_number),
@@ -229,7 +229,7 @@ class HubUnit:
         )
         return file_number
 
-    def save_atom_file(self, x_atom: AtomUnit):
+    def save_atom_file(self, x_atom: BudAtom):
         x_atom_filename = self._get_next_atom_file_number()
         return self._save_valid_atom_file(x_atom, x_atom_filename)
 
@@ -247,181 +247,181 @@ class HubUnit:
 
             for x_atom_filename in sorted_atom_filenames:
                 x_file_str = x_atom_files.get(x_atom_filename)
-                x_atom = atomunit_get_from_json(x_file_str)
-                modify_bud_with_atomunit(x_bud, x_atom)
+                x_atom = budatom_get_from_json(x_file_str)
+                modify_bud_with_budatom(x_bud, x_atom)
         return x_bud
 
-    def get_max_gift_file_number(self) -> int:
-        return get_max_file_number(self._gifts_dir)
+    def get_max_stand_file_number(self) -> int:
+        return get_max_file_number(self._stands_dir)
 
-    def _get_next_gift_file_number(self) -> int:
-        max_file_number = self.get_max_gift_file_number()
-        init_gift_id = get_init_gift_id_if_None()
-        return init_gift_id if max_file_number is None else max_file_number + 1
+    def _get_next_stand_file_number(self) -> int:
+        max_file_number = self.get_max_stand_file_number()
+        init_stand_id = get_init_stand_id_if_None()
+        return init_stand_id if max_file_number is None else max_file_number + 1
 
-    def gift_filename(self, gift_id: int) -> str:
-        return get_json_filename(gift_id)
+    def stand_filename(self, stand_id: int) -> str:
+        return get_json_filename(stand_id)
 
-    def gift_file_path(self, gift_id: int) -> bool:
-        gift_filename = self.gift_filename(gift_id)
-        return f_path(self._gifts_dir, gift_filename)
+    def stand_file_path(self, stand_id: int) -> bool:
+        stand_filename = self.stand_filename(stand_id)
+        return f_path(self._stands_dir, stand_filename)
 
-    def gift_file_exists(self, gift_id: int) -> bool:
-        return os_path_exists(self.gift_file_path(gift_id))
+    def stand_file_exists(self, stand_id: int) -> bool:
+        return os_path_exists(self.stand_file_path(stand_id))
 
-    def validate_giftunit(self, x_giftunit: GiftUnit) -> GiftUnit:
-        if x_giftunit._atoms_dir != self._atoms_dir:
-            x_giftunit._atoms_dir = self._atoms_dir
-        if x_giftunit._gifts_dir != self._gifts_dir:
-            x_giftunit._gifts_dir = self._gifts_dir
-        if x_giftunit._gift_id != self._get_next_gift_file_number():
-            x_giftunit._gift_id = self._get_next_gift_file_number()
-        if x_giftunit.owner_name != self.owner_name:
-            x_giftunit.owner_name = self.owner_name
-        if x_giftunit._delta_start != self._get_next_atom_file_number():
-            x_giftunit._delta_start = self._get_next_atom_file_number()
-        return x_giftunit
+    def validate_standunit(self, x_standunit: StandUnit) -> StandUnit:
+        if x_standunit._atoms_dir != self._atoms_dir:
+            x_standunit._atoms_dir = self._atoms_dir
+        if x_standunit._stands_dir != self._stands_dir:
+            x_standunit._stands_dir = self._stands_dir
+        if x_standunit._stand_id != self._get_next_stand_file_number():
+            x_standunit._stand_id = self._get_next_stand_file_number()
+        if x_standunit.owner_name != self.owner_name:
+            x_standunit.owner_name = self.owner_name
+        if x_standunit._delta_start != self._get_next_atom_file_number():
+            x_standunit._delta_start = self._get_next_atom_file_number()
+        return x_standunit
 
-    def save_gift_file(
+    def save_stand_file(
         self,
-        x_gift: GiftUnit,
+        x_stand: StandUnit,
         replace: bool = True,
         correct_invalid_attrs: bool = True,
-    ) -> GiftUnit:
+    ) -> StandUnit:
         if correct_invalid_attrs:
-            x_gift = self.validate_giftunit(x_gift)
+            x_stand = self.validate_standunit(x_stand)
 
-        if x_gift._atoms_dir != self._atoms_dir:
-            raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit._atoms_dir is incorrect: {x_gift._atoms_dir}. It must be {self._atoms_dir}."
+        if x_stand._atoms_dir != self._atoms_dir:
+            raise SaveStandFileException(
+                f"StandUnit file cannot be saved because standunit._atoms_dir is incorrect: {x_stand._atoms_dir}. It must be {self._atoms_dir}."
             )
-        if x_gift._gifts_dir != self._gifts_dir:
-            raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit._gifts_dir is incorrect: {x_gift._gifts_dir}. It must be {self._gifts_dir}."
+        if x_stand._stands_dir != self._stands_dir:
+            raise SaveStandFileException(
+                f"StandUnit file cannot be saved because standunit._stands_dir is incorrect: {x_stand._stands_dir}. It must be {self._stands_dir}."
             )
-        if x_gift.owner_name != self.owner_name:
-            raise SaveGiftFileException(
-                f"GiftUnit file cannot be saved because giftunit.owner_name is incorrect: {x_gift.owner_name}. It must be {self.owner_name}."
+        if x_stand.owner_name != self.owner_name:
+            raise SaveStandFileException(
+                f"StandUnit file cannot be saved because standunit.owner_name is incorrect: {x_stand.owner_name}. It must be {self.owner_name}."
             )
-        gift_filename = self.gift_filename(x_gift._gift_id)
-        if not replace and self.gift_file_exists(x_gift._gift_id):
-            raise SaveGiftFileException(
-                f"GiftUnit file {gift_filename} exists and cannot be saved over."
+        stand_filename = self.stand_filename(x_stand._stand_id)
+        if not replace and self.stand_file_exists(x_stand._stand_id):
+            raise SaveStandFileException(
+                f"StandUnit file {stand_filename} exists and cannot be saved over."
             )
-        x_gift.save_files()
-        return x_gift
+        x_stand.save_files()
+        return x_stand
 
-    def _del_gift_file(self, gift_id: int):
-        delete_dir(self.gift_file_path(gift_id))
+    def _del_stand_file(self, stand_id: int):
+        delete_dir(self.stand_file_path(stand_id))
 
-    def _default_giftunit(self) -> GiftUnit:
-        return giftunit_shop(
+    def _default_standunit(self) -> StandUnit:
+        return standunit_shop(
             owner_name=self.owner_name,
-            _gift_id=self._get_next_gift_file_number(),
+            _stand_id=self._get_next_stand_file_number(),
             _atoms_dir=self._atoms_dir,
-            _gifts_dir=self._gifts_dir,
+            _stands_dir=self._stands_dir,
         )
 
-    def create_save_gift_file(self, before_bud: BudUnit, after_bud: BudUnit):
-        new_giftunit = self._default_giftunit()
-        new_buddelta = new_giftunit._buddelta
-        new_buddelta.add_all_different_atomunits(before_bud, after_bud)
-        self.save_gift_file(new_giftunit)
+    def create_save_stand_file(self, before_bud: BudUnit, after_bud: BudUnit):
+        new_standunit = self._default_standunit()
+        new_buddelta = new_standunit._buddelta
+        new_buddelta.add_all_different_budatoms(before_bud, after_bud)
+        self.save_stand_file(new_standunit)
 
-    def get_giftunit(self, gift_id: int) -> GiftUnit:
-        if self.gift_file_exists(gift_id) is False:
-            raise GiftFileMissingException(
-                f"GiftUnit file_number {gift_id} does not exist."
+    def get_standunit(self, stand_id: int) -> StandUnit:
+        if self.stand_file_exists(stand_id) is False:
+            raise StandFileMissingException(
+                f"StandUnit file_number {stand_id} does not exist."
             )
-        x_gifts_dir = self._gifts_dir
+        x_stands_dir = self._stands_dir
         x_atoms_dir = self._atoms_dir
-        return create_giftunit_from_files(x_gifts_dir, gift_id, x_atoms_dir)
+        return create_standunit_from_files(x_stands_dir, stand_id, x_atoms_dir)
 
-    def _merge_any_gifts(self, x_bud: BudUnit) -> BudUnit:
-        gifts_dir = self._gifts_dir
-        gift_ints = get_integer_filenames(gifts_dir, x_bud.last_gift_id)
-        if len(gift_ints) == 0:
+    def _merge_any_stands(self, x_bud: BudUnit) -> BudUnit:
+        stands_dir = self._stands_dir
+        stand_ints = get_integer_filenames(stands_dir, x_bud.last_stand_id)
+        if len(stand_ints) == 0:
             return copy_deepcopy(x_bud)
 
-        for gift_int in gift_ints:
-            x_gift = self.get_giftunit(gift_int)
-            new_bud = x_gift._buddelta.get_edited_bud(x_bud)
+        for stand_int in stand_ints:
+            x_stand = self.get_standunit(stand_int)
+            new_bud = x_stand._buddelta.get_edited_bud(x_bud)
         return new_bud
 
-    def _create_initial_gift_files_from_default(self):
-        x_giftunit = giftunit_shop(
+    def _create_initial_stand_files_from_default(self):
+        x_standunit = standunit_shop(
             owner_name=self.owner_name,
-            _gift_id=get_init_gift_id_if_None(),
-            _gifts_dir=self._gifts_dir,
+            _stand_id=get_init_stand_id_if_None(),
+            _stands_dir=self._stands_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_giftunit._buddelta.add_all_different_atomunits(
+        x_standunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.default_voice_bud(),
         )
-        x_giftunit.save_files()
+        x_standunit.save_files()
 
-    def _create_voice_from_gifts(self):
-        x_bud = self._merge_any_gifts(self.default_voice_bud())
+    def _create_voice_from_stands(self):
+        x_bud = self._merge_any_stands(self.default_voice_bud())
         self.save_voice_bud(x_bud)
 
-    def _create_initial_gift_and_voice_files(self):
-        self._create_initial_gift_files_from_default()
-        self._create_voice_from_gifts()
+    def _create_initial_stand_and_voice_files(self):
+        self._create_initial_stand_files_from_default()
+        self._create_voice_from_stands()
 
-    def _create_initial_gift_files_from_voice(self):
-        x_giftunit = self._default_giftunit()
-        x_giftunit._buddelta.add_all_different_atomunits(
+    def _create_initial_stand_files_from_voice(self):
+        x_standunit = self._default_standunit()
+        x_standunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.get_voice_bud(),
         )
-        x_giftunit.save_files()
+        x_standunit.save_files()
 
-    def initialize_gift_voice_files(self):
+    def initialize_stand_voice_files(self):
         x_voice_file_exists = self.voice_file_exists()
-        gift_file_exists = self.gift_file_exists(init_gift_id())
-        if x_voice_file_exists is False and gift_file_exists is False:
-            self._create_initial_gift_and_voice_files()
-        elif x_voice_file_exists is False and gift_file_exists:
-            self._create_voice_from_gifts()
-        elif x_voice_file_exists and gift_file_exists is False:
-            self._create_initial_gift_files_from_voice()
+        stand_file_exists = self.stand_file_exists(init_stand_id())
+        if x_voice_file_exists is False and stand_file_exists is False:
+            self._create_initial_stand_and_voice_files()
+        elif x_voice_file_exists is False and stand_file_exists:
+            self._create_voice_from_stands()
+        elif x_voice_file_exists and stand_file_exists is False:
+            self._create_initial_stand_files_from_voice()
 
-    def append_gifts_to_voice_file(self):
+    def append_stands_to_voice_file(self):
         voice_bud = self.get_voice_bud()
-        voice_bud = self._merge_any_gifts(voice_bud)
+        voice_bud = self._merge_any_stands(voice_bud)
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 
     # Deal methods
-    def timepoint_dir(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self._deals_dir, str(x_time_int))
+    def timepoint_dir(self, x_deal_time: TimeLinePoint) -> str:
+        return f_path(self._deals_dir, str(x_deal_time))
 
     def deal_filename(self) -> str:
         return "dealunit.json"
 
-    def deal_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.deal_filename())
+    def deal_file_path(self, x_deal_time: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_deal_time), self.deal_filename())
 
     def _save_valid_deal_file(self, x_deal: DealUnit):
         x_deal.calc_magnitude()
         save_file(
-            self.timepoint_dir(x_deal.time_int),
+            self.timepoint_dir(x_deal.deal_time),
             self.deal_filename(),
             x_deal.get_json(),
             replace=True,
         )
 
-    def deal_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.deal_file_path(x_time_int))
+    def deal_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
+        return os_path_exists(self.deal_file_path(x_deal_time))
 
-    def get_deal_file(self, x_time_int: TimeLinePoint) -> DealUnit:
-        if self.deal_file_exists(x_time_int):
-            x_json = open_file(self.timepoint_dir(x_time_int), self.deal_filename())
+    def get_deal_file(self, x_deal_time: TimeLinePoint) -> DealUnit:
+        if self.deal_file_exists(x_deal_time):
+            x_json = open_file(self.timepoint_dir(x_deal_time), self.deal_filename())
             return get_dealunit_from_json(x_json)
 
-    def delete_deal_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.deal_file_path(x_time_int))
+    def delete_deal_file(self, x_deal_time: TimeLinePoint):
+        delete_dir(self.deal_file_path(x_deal_time))
 
     def get_brokerunit(self) -> BrokerUnit:
         x_brokerunit = brokerunit_shop(self.owner_name)
@@ -440,46 +440,48 @@ class HubUnit:
     def budpoint_filename(self) -> str:
         return "budpoint.json"
 
-    def budpoint_file_path(self, x_time_int: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_time_int), self.budpoint_filename())
+    def budpoint_file_path(self, x_deal_time: TimeLinePoint) -> str:
+        return f_path(self.timepoint_dir(x_deal_time), self.budpoint_filename())
 
-    def _save_valid_budpoint_file(self, x_time_int: TimeLinePoint, x_budpoint: BudUnit):
+    def _save_valid_budpoint_file(
+        self, x_deal_time: TimeLinePoint, x_budpoint: BudUnit
+    ):
         x_budpoint.settle_bud()
         if x_budpoint._rational is False:
             raise _save_valid_budpoint_Exception(
                 "BudPoint could not be saved BudUnit._rational is False"
             )
         save_file(
-            self.timepoint_dir(x_time_int),
+            self.timepoint_dir(x_deal_time),
             self.budpoint_filename(),
             x_budpoint.get_json(),
             replace=True,
         )
 
-    def budpoint_file_exists(self, x_time_int: TimeLinePoint) -> bool:
-        return os_path_exists(self.budpoint_file_path(x_time_int))
+    def budpoint_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
+        return os_path_exists(self.budpoint_file_path(x_deal_time))
 
-    def get_budpoint_file(self, x_time_int: TimeLinePoint) -> BudUnit:
-        if self.budpoint_file_exists(x_time_int):
-            timepoint_dir = self.timepoint_dir(x_time_int)
+    def get_budpoint_file(self, x_deal_time: TimeLinePoint) -> BudUnit:
+        if self.budpoint_file_exists(x_deal_time):
+            timepoint_dir = self.timepoint_dir(x_deal_time)
             file_content = open_file(timepoint_dir, self.budpoint_filename())
             return budunit_get_from_json(file_content)
 
-    def delete_budpoint_file(self, x_time_int: TimeLinePoint):
-        delete_dir(self.budpoint_file_path(x_time_int))
+    def delete_budpoint_file(self, x_deal_time: TimeLinePoint):
+        delete_dir(self.budpoint_file_path(x_deal_time))
 
-    def calc_timepoint_deal(self, x_time_int: TimeLinePoint):
-        if self.budpoint_file_exists(x_time_int) is False:
-            exception_str = f"Cannot calculate timepoint {x_time_int} deals without saved BudPoint file"
+    def calc_timepoint_deal(self, x_deal_time: TimeLinePoint):
+        if self.budpoint_file_exists(x_deal_time) is False:
+            exception_str = f"Cannot calculate timepoint {x_deal_time} deals without saved BudPoint file"
             raise calc_timepoint_deal_Exception(exception_str)
-        x_budpoint = self.get_budpoint_file(x_time_int)
-        if self.deal_file_exists(x_time_int):
-            x_dealunit = self.get_deal_file(x_time_int)
+        x_budpoint = self.get_budpoint_file(x_deal_time)
+        if self.deal_file_exists(x_deal_time):
+            x_dealunit = self.get_deal_file(x_deal_time)
             x_budpoint.set_fund_pool(x_dealunit.quota)
         else:
-            x_dealunit = dealunit_shop(x_time_int)
+            x_dealunit = dealunit_shop(x_deal_time)
         x_dealunit._deal_acct_nets = get_acct_agenda_net_ledger(x_budpoint, True)
-        self._save_valid_budpoint_file(x_time_int, x_budpoint)
+        self._save_valid_budpoint_file(x_deal_time, x_budpoint)
         self._save_valid_deal_file(x_dealunit)
 
     def calc_timepoint_deals(self):

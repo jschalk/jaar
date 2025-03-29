@@ -1,32 +1,14 @@
-from src.f00_instrument.file import open_file
-from src.f00_instrument.dict_toolbox import (
-    extract_csv_headers,
-    get_csv_column1_column2_metrics,
-    create_l2nested_csv_dict,
-    get_positional_dict,
-    add_headers_to_csv,
-    get_empty_str_if_None as if_none_str,
-)
-from src.f01_road.road import FiscTitle, OwnerName, FaceName
+from src.f00_instrument.dict_toolbox import get_empty_str_if_None as if_none_str
+from src.f01_road.road import FiscTitle, FaceName
 from src.f02_bud.bud import BudUnit
-from src.f03_chrono.chrono import timelineunit_shop
-from src.f04_gift.atom import atom_insert, atom_delete, AtomUnit, atomrow_shop
-from src.f04_gift.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
-from src.f04_gift.gift import giftunit_shop, GiftUnit
-from src.f05_listen.hubunit import hubunit_shop
-from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
+from src.f04_stand.stand import StandUnit
+from src.f07_fisc.fisc import FiscUnit
 from src.f08_pidgin.pidgin import PidginUnit
 from src.f09_idea.idea_config import (
-    get_idearef_from_file,
     get_idea_format_headers,
-    get_idea_config_dict,
     get_idea_format_filename,
     get_idea_format_headers,
 )
-from src.f09_idea.idea_db_tool import csv_dict_to_excel
-from pandas import DataFrame
-from csv import reader as csv_reader
-from dataclasses import dataclass
 
 
 def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
@@ -38,6 +20,7 @@ def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
         "br00003",
         "br00004",
         "br00005",
+        # "br00006",
         "br00020",
         "br00021",
         "br00022",
@@ -119,7 +102,6 @@ def _add_fiscunit_to_br00000_csv(
         str(x_fisc.fund_coin),
         str(x_fisc.penny),
         str(x_fisc.respect_bit),
-        str(x_fisc.present_time),
         x_bridge,
     ]
     x_csv += csv_delimiter.join(x_row)
@@ -135,13 +117,13 @@ def _add_dealunit_to_br00001_csv(
     event_int: int = None,
 ) -> str:
     for broker_owner_name, brokerunits in x_fisc.brokerunits.items():
-        for time_int, dealunit in brokerunits.deals.items():
+        for deal_time, dealunit in brokerunits.deals.items():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_fisc.fisc_title,
                 broker_owner_name,
-                str(time_int),
+                str(deal_time),
                 str(dealunit.quota),
                 str(dealunit.celldepth),
             ]
@@ -159,7 +141,7 @@ def _add_cashbook_to_br00002_csv(
 ) -> str:
     for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
         for acct_name, time_dict in tranunit.items():
-            for time_int, amount in time_dict.items():
+            for tran_time, amount in time_dict.items():
                 fisc_title = x_fisc.fisc_title
                 x_row = [
                     if_none_str(face_name),
@@ -167,7 +149,7 @@ def _add_cashbook_to_br00002_csv(
                     fisc_title,
                     owner_name,
                     acct_name,
-                    str(time_int),
+                    str(tran_time),
                     str(amount),
                 ]
                 x_csv += csv_delimiter.join(x_row)
@@ -598,219 +580,219 @@ def add_pidginunit_to_stance_csv_strs(
     fisc_csv_strs["br00045"] = br00045_csv
 
 
-def add_gift_to_br00020_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00020_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_acct_membership":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_acct_membership":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("acct_name"),
-                atomunit.jkeys.get("group_label"),
-                if_none_str(atomunit.jvalues.get("credit_vote")),
-                if_none_str(atomunit.jvalues.get("debtit_vote")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("acct_name"),
+                budatom.jkeys.get("group_label"),
+                if_none_str(budatom.jvalues.get("credit_vote")),
+                if_none_str(budatom.jvalues.get("debtit_vote")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00021_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00021_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_acctunit":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_acctunit":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("acct_name"),
-                if_none_str(atomunit.jvalues.get("credit_belief")),
-                if_none_str(atomunit.jvalues.get("debtit_belief")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("acct_name"),
+                if_none_str(budatom.jvalues.get("credit_belief")),
+                if_none_str(budatom.jvalues.get("debtit_belief")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00022_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00022_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_item_awardlink":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_item_awardlink":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("road"),
-                atomunit.jkeys.get("awardee_tag"),
-                if_none_str(atomunit.jvalues.get("give_force")),
-                if_none_str(atomunit.jvalues.get("take_force")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("road"),
+                budatom.jkeys.get("awardee_tag"),
+                if_none_str(budatom.jvalues.get("give_force")),
+                if_none_str(budatom.jvalues.get("take_force")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00023_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00023_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_item_factunit":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_item_factunit":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("road"),
-                atomunit.jkeys.get("base"),
-                if_none_str(atomunit.jvalues.get("pick")),
-                if_none_str(atomunit.jvalues.get("fopen")),
-                if_none_str(atomunit.jvalues.get("fnigh")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("road"),
+                budatom.jkeys.get("base"),
+                if_none_str(budatom.jvalues.get("pick")),
+                if_none_str(budatom.jvalues.get("fopen")),
+                if_none_str(budatom.jvalues.get("fnigh")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00024_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00024_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_item_teamlink":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_item_teamlink":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("road"),
-                atomunit.jkeys.get("team_tag"),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("road"),
+                budatom.jkeys.get("team_tag"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00025_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00025_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_item_healerlink":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_item_healerlink":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("road"),
-                atomunit.jkeys.get("healer_name"),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("road"),
+                budatom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00026_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00026_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_item_reason_premiseunit":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_item_reason_premiseunit":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("road"),
-                atomunit.jkeys.get("base"),
-                atomunit.jkeys.get("need"),
-                if_none_str(atomunit.jvalues.get("open")),
-                if_none_str(atomunit.jvalues.get("nigh")),
-                if_none_str(atomunit.jvalues.get("divisor")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("road"),
+                budatom.jkeys.get("base"),
+                budatom.jkeys.get("need"),
+                if_none_str(budatom.jvalues.get("open")),
+                if_none_str(budatom.jvalues.get("nigh")),
+                if_none_str(budatom.jvalues.get("divisor")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00027_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00027_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_item_reasonunit":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_item_reasonunit":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("road"),
-                atomunit.jkeys.get("base"),
-                if_none_str(atomunit.jvalues.get("base_item_active_requisite")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("road"),
+                budatom.jkeys.get("base"),
+                if_none_str(budatom.jvalues.get("base_item_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00028_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00028_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "bud_itemunit":
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "bud_itemunit":
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                atomunit.jkeys.get("parent_road"),
-                atomunit.jkeys.get("item_title"),
-                if_none_str(atomunit.jvalues.get("begin")),
-                if_none_str(atomunit.jvalues.get("close")),
-                if_none_str(atomunit.jvalues.get("addin")),
-                if_none_str(atomunit.jvalues.get("numor")),
-                if_none_str(atomunit.jvalues.get("denom")),
-                if_none_str(atomunit.jvalues.get("morph")),
-                if_none_str(atomunit.jvalues.get("gogo_want")),
-                if_none_str(atomunit.jvalues.get("stop_want")),
-                if_none_str(atomunit.jvalues.get("mass")),
-                if_none_str(atomunit.jvalues.get("pledge")),
-                if_none_str(atomunit.jvalues.get("problem_bool")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                budatom.jkeys.get("parent_road"),
+                budatom.jkeys.get("item_title"),
+                if_none_str(budatom.jvalues.get("begin")),
+                if_none_str(budatom.jvalues.get("close")),
+                if_none_str(budatom.jvalues.get("addin")),
+                if_none_str(budatom.jvalues.get("numor")),
+                if_none_str(budatom.jvalues.get("denom")),
+                if_none_str(budatom.jvalues.get("morph")),
+                if_none_str(budatom.jvalues.get("gogo_want")),
+                if_none_str(budatom.jvalues.get("stop_want")),
+                if_none_str(budatom.jvalues.get("mass")),
+                if_none_str(budatom.jvalues.get("pledge")),
+                if_none_str(budatom.jvalues.get("problem_bool")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_gift_to_br00029_csv(
-    x_csv: str, x_giftunit: GiftUnit, csv_delimiter: str
+def add_stand_to_br00029_csv(
+    x_csv: str, x_standunit: StandUnit, csv_delimiter: str
 ) -> str:
-    for atomunit in x_giftunit._buddelta.get_ordered_atomunits().values():
-        if atomunit.dimen == "budunit":
-            print(f"{atomunit=} {x_giftunit.owner_name=}")
+    for budatom in x_standunit._buddelta.get_ordered_budatoms().values():
+        if budatom.dimen == "budunit":
+            print(f"{budatom=} {x_standunit.owner_name=}")
             x_row = [
-                x_giftunit.face_name,
-                str(x_giftunit.event_int),
-                x_giftunit.fisc_title,
-                x_giftunit.owner_name,
-                if_none_str(atomunit.jvalues.get("credor_respect")),
-                if_none_str(atomunit.jvalues.get("debtor_respect")),
-                if_none_str(atomunit.jvalues.get("fund_pool")),
-                if_none_str(atomunit.jvalues.get("max_tree_traverse")),
-                if_none_str(atomunit.jvalues.get("tally")),
-                if_none_str(atomunit.jvalues.get("fund_coin")),
-                if_none_str(atomunit.jvalues.get("penny")),
-                if_none_str(atomunit.jvalues.get("respect_bit")),
+                x_standunit.face_name,
+                str(x_standunit.event_int),
+                x_standunit.fisc_title,
+                x_standunit.owner_name,
+                if_none_str(budatom.jvalues.get("credor_respect")),
+                if_none_str(budatom.jvalues.get("debtor_respect")),
+                if_none_str(budatom.jvalues.get("fund_pool")),
+                if_none_str(budatom.jvalues.get("max_tree_traverse")),
+                if_none_str(budatom.jvalues.get("tally")),
+                if_none_str(budatom.jvalues.get("fund_coin")),
+                if_none_str(budatom.jvalues.get("penny")),
+                if_none_str(budatom.jvalues.get("respect_bit")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
     return x_csv
 
 
-def add_giftunit_to_stance_csv_strs(
-    x_gift: GiftUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
+def add_standunit_to_stance_csv_strs(
+    x_stand: StandUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
 ):
     br00020_csv = fisc_csv_strs.get("br00020")
     br00021_csv = fisc_csv_strs.get("br00021")
@@ -822,16 +804,16 @@ def add_giftunit_to_stance_csv_strs(
     br00027_csv = fisc_csv_strs.get("br00027")
     br00028_csv = fisc_csv_strs.get("br00028")
     br00029_csv = fisc_csv_strs.get("br00029")
-    br00020_csv = add_gift_to_br00020_csv(br00020_csv, x_gift, csv_delimiter)
-    br00021_csv = add_gift_to_br00021_csv(br00021_csv, x_gift, csv_delimiter)
-    br00022_csv = add_gift_to_br00022_csv(br00022_csv, x_gift, csv_delimiter)
-    br00023_csv = add_gift_to_br00023_csv(br00023_csv, x_gift, csv_delimiter)
-    br00024_csv = add_gift_to_br00024_csv(br00024_csv, x_gift, csv_delimiter)
-    br00025_csv = add_gift_to_br00025_csv(br00025_csv, x_gift, csv_delimiter)
-    br00026_csv = add_gift_to_br00026_csv(br00026_csv, x_gift, csv_delimiter)
-    br00027_csv = add_gift_to_br00027_csv(br00027_csv, x_gift, csv_delimiter)
-    br00028_csv = add_gift_to_br00028_csv(br00028_csv, x_gift, csv_delimiter)
-    br00029_csv = add_gift_to_br00029_csv(br00029_csv, x_gift, csv_delimiter)
+    br00020_csv = add_stand_to_br00020_csv(br00020_csv, x_stand, csv_delimiter)
+    br00021_csv = add_stand_to_br00021_csv(br00021_csv, x_stand, csv_delimiter)
+    br00022_csv = add_stand_to_br00022_csv(br00022_csv, x_stand, csv_delimiter)
+    br00023_csv = add_stand_to_br00023_csv(br00023_csv, x_stand, csv_delimiter)
+    br00024_csv = add_stand_to_br00024_csv(br00024_csv, x_stand, csv_delimiter)
+    br00025_csv = add_stand_to_br00025_csv(br00025_csv, x_stand, csv_delimiter)
+    br00026_csv = add_stand_to_br00026_csv(br00026_csv, x_stand, csv_delimiter)
+    br00027_csv = add_stand_to_br00027_csv(br00027_csv, x_stand, csv_delimiter)
+    br00028_csv = add_stand_to_br00028_csv(br00028_csv, x_stand, csv_delimiter)
+    br00029_csv = add_stand_to_br00029_csv(br00029_csv, x_stand, csv_delimiter)
     fisc_csv_strs["br00020"] = br00020_csv
     fisc_csv_strs["br00021"] = br00021_csv
     fisc_csv_strs["br00022"] = br00022_csv

@@ -2,7 +2,7 @@ from src.f00_instrument.file import create_path, set_dir, open_json
 from src.f01_road.deal import quota_str
 from src.f01_road.road import create_road
 from src.f02_bud.bud import budunit_shop
-from src.f04_gift.atom_config import penny_str, event_int_str
+from src.f04_stand.atom_config import penny_str, event_int_str
 from src.f05_listen.cell import (
     CELLNODE_QUOTA_DEFAULT,
     cellunit_shop,
@@ -364,7 +364,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_title=a23_str,
         time_owner_name=sue_str,
-        time_int=time7,
+        deal_time=time7,
         quota=quota500,
         event_int=event3,
         celldepth=celldepth4,

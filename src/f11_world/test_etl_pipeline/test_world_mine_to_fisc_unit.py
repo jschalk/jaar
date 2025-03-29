@@ -2,11 +2,11 @@ from src.f00_instrument.file import create_path, count_dirs_files, delete_dir, s
 from src.f01_road.deal import (
     owner_name_str,
     fisc_title_str,
-    time_int_str,
+    deal_time_str,
     quota_str,
     celldepth_str,
 )
-from src.f04_gift.atom_config import face_name_str, event_int_str, acct_name_str
+from src.f04_stand.atom_config import face_name_str, event_int_str, acct_name_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
     create_forecast_path,
@@ -48,7 +48,7 @@ def test_WorldUnit_mine_to_burdens_Scenario0_DeletesPreviousFiles(
     # THEN
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path) is False
-    assert count_dirs_files(fizz_world.worlds_dir) == 27
+    assert count_dirs_files(fizz_world.worlds_dir) == 30
 
 
 def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup):
@@ -77,7 +77,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
         event_int_str(),
         fisc_title_str(),
         owner_name_str(),
-        time_int_str(),
+        deal_time_str(),
         quota_str(),
         celldepth_str(),
     ]
@@ -135,7 +135,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
     assert os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 91
+    assert count_dirs_files(fizz_world.worlds_dir) == 94
 
 
 def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(

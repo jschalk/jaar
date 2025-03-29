@@ -1,4 +1,4 @@
-# from src.f04_gift.atom import atom_hx_table_name
+# from src.f04_stand.atom import atom_hx_table_name
 # from src.f00_instrument.sqlite import check_table_column_existence
 # from src.f07_fisc.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.f07_fisc.fisc import fiscunit_shop

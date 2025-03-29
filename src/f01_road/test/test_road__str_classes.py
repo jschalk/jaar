@@ -107,7 +107,7 @@ def test_TitleUnit_exists():
     # THEN
     assert x_road == empty_str
     doc_str = (
-        "A string presentation of a tree node. Nodes cannot contain RoadUnit bridge"
+        "A string representation of a tree node. Nodes cannot contain RoadUnit bridge"
     )
     assert inspect_getdoc(x_road) == doc_str
 
@@ -155,9 +155,7 @@ def test_RoadUnit_exists():
     x_road = RoadUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = (
-        "A string presentation of a tree path. TitleUnits are seperated by road bridge"
-    )
+    doc_str = "A string representation of a tree path. TitleUnits are seperated by road bridge"
     assert inspect_getdoc(x_road) == doc_str
 
 
@@ -168,7 +166,7 @@ def test_DoarUnit_exists():
     x_road = DoarUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string presentation of a tree path. TitleUnits are seperated by road bridge."
+    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TitleUnits are seperated by road bridge."
     assert inspect_getdoc(x_road) == doc_str
 
 

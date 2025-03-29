@@ -1013,8 +1013,8 @@
                                                     }
                                                 }
                                             },
-                                            "go to daily stand-up ": {
-                                                "_item_title": "go to daily stand-up ",
+                                            "go to daily meeting ": {
+                                                "_item_title": "go to daily meeting ",
                                                 "_uid": 232,
                                                 "mass": 1,
                                                 "pledge": true,
@@ -1288,8 +1288,8 @@
                                                             "A;Nation-States": {
                                                                 "base": "A;Nation-States",
                                                                 "premises": {
-                                                                    "A;Nation-States;USA;Portland OR;Downtown;Flats;Office": {
-                                                                        "need": "A;Nation-States;USA;Portland OR;Downtown;Flats;Office"
+                                                                    "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace": {
+                                                                        "need": "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
                                                                     }
                                                                 }
                                                             }
@@ -1974,8 +1974,8 @@
                                                         "_uid": 248,
                                                         "mass": 1
                                                     },
-                                                    "Office": {
-                                                        "_item_title": "Office",
+                                                    "workspace": {
+                                                        "_item_title": "workspace",
                                                         "_uid": 249,
                                                         "mass": 1
                                                     }

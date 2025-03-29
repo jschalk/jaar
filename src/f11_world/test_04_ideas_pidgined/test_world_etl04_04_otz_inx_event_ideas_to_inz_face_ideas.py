@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_gift.atom_config import acct_name_str, face_name_str, event_int_str
+from src.f04_stand.atom_config import acct_name_str, face_name_str, event_int_str
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup

@@ -9,16 +9,16 @@
         "atom_hx": {
             "columns": {}
         },
-        "delta2gift": {
+        "delta2stand": {
             "columns": {}
         },
         "delta_mstr": {
             "columns": {}
         },
-        "gift_mstr": {
+        "stand_mstr": {
             "columns": {}
         },
-        "gift2owner": {
+        "stand2owner": {
             "columns": {
                 "owner_name": {}
             }

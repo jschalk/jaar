@@ -7,12 +7,11 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_fiscunit_v0_0_0
-    c400_number,present_time,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "present_time",
             "fisc_title",
             "fund_coin",
             "monthday_distortion",
@@ -23,19 +22,19 @@ def get_ex1_br00000_df() -> DataFrame:
             "yr1_jan1_offset",
         ]
     )
-    x_df.loc[0] = [7, 5500, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
+    x_df.loc[0] = [7, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
     return x_df
 
 
 def get_ex1_br00001_df() -> DataFrame:
     """idea_format_00001_fisc_dealunit_v0_0_0
-    fisc_title,owner_name,quota,time_int,celldepth"""
+    fisc_title,owner_name,quota,deal_time,celldepth"""
     x_df = DataFrame(
         columns=[
             "fisc_title",
             "owner_name",
             "quota",
-            "time_int",
+            "deal_time",
             "celldepth",
         ]
     )
@@ -45,9 +44,9 @@ def get_ex1_br00001_df() -> DataFrame:
 
 def get_ex1_br00002_df() -> DataFrame:
     """idea_format_00002_fisc_cashbook_v0_0_0
-    acct_name,amount,fisc_title,owner_name,time_int"""
+    acct_name,amount,fisc_title,owner_name,tran_time"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "fisc_title", "owner_name", "time_int"]
+        columns=["acct_name", "amount", "fisc_title", "owner_name", "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     return x_df
@@ -119,12 +118,11 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_fiscunit_v0_0_0
-    c400_number,present_time,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "present_time",
             "fisc_title",
             "fund_coin",
             "monthday_distortion",
@@ -135,20 +133,20 @@ def get_ex2_br00000_df() -> DataFrame:
             "yr1_jan1_offset",
         ]
     )
-    x_df.loc[0] = [7, 5500, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
-    x_df.loc[1] = [25, 444, JEFFY45_STR, 1, 0, 1, 1, ",", "five", 1683478080]
+    x_df.loc[0] = [7, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640]
+    x_df.loc[1] = [25, JEFFY45_STR, 1, 0, 1, 1, ",", "five", 1683478080]
     return x_df
 
 
 def get_ex2_br00001_df() -> DataFrame:
     """idea_format_00001_fisc_dealunit_v0_0_0
-    fisc_title,owner_name,quota,time_int"""
+    fisc_title,owner_name,quota,deal_time"""
     x_df = DataFrame(
         columns=[
             "fisc_title",
             "owner_name",
             "quota",
-            "time_int",
+            "deal_time",
             "celldepth",
         ]
     )
@@ -162,9 +160,9 @@ def get_ex2_br00001_df() -> DataFrame:
 
 def get_ex2_br00002_df() -> DataFrame:
     """idea_format_00002_fisc_cashbook_v0_0_0
-    acct_name,amount,fisc_title,owner_name,time_int"""
+    acct_name,amount,fisc_title,owner_name,tran_time"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "fisc_title", "owner_name", "time_int"]
+        columns=["acct_name", "amount", "fisc_title", "owner_name", "tran_time"]
     )
     x_df.loc[0] = ["Zia", 888, ACCORD23_STR, "Bob", 777]
     x_df.loc[1] = ["Zia", 234, ACCORD23_STR, "Sue", 999]
@@ -276,3 +274,15 @@ def get_ex2_br00005_df() -> DataFrame:
     x_df.loc[10] = [JEFFY45_STR, "Danceday", 3]
     x_df.loc[11] = [JEFFY45_STR, "Elonday", 4]
     return x_df
+
+
+# def get_ex2_br00006_df() -> DataFrame:
+#     """idea_format_00006_fisc_timeoffi_v0_0_0
+#     fisc_title,offi_time,_offi_time_maxt"""
+#     x_df = DataFrame(columns=["fisc_title", "offi_time", "_offi_time_max"])
+#     x_df.loc[0] = [ACCORD23_STR, 100, 300]
+#     x_df.loc[1] = [ACCORD23_STR, 110, 320]
+#     x_df.loc[2] = [ACCORD23_STR, 120, 330]
+#     x_df.loc[3] = [ACCORD23_STR, 130, 340]
+#     x_df.loc[4] = [ACCORD23_STR, 140, 350]
+#     return x_df

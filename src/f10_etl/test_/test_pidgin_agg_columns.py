@@ -1,4 +1,4 @@
-from src.f04_gift.atom_config import face_name_str, event_int_str
+from src.f04_stand.atom_config import face_name_str, event_int_str
 from src.f08_pidgin.pidgin_config import (
     get_pidgin_config_args,
     map_name_str,

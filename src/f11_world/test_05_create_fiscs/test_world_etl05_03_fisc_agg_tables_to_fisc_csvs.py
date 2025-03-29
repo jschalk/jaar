@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f00_instrument.db_toolbox import db_table_exists, get_row_count
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_gift.atom_config import face_name_str, acct_name_str, event_int_str
+from src.f04_stand.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f09_idea.idea_db_tool import get_pragma_table_fetchall
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeColumnsRef,
@@ -53,8 +53,8 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateStagingFiles(
         generated_fiscunit_csv = open_file(fisc_objs.unit_stage_csv_path)
         fisc_cols = FiscPrimeColumnsRef()
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
 """
         print(f"   {expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
@@ -101,8 +101,8 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
         generated_fiscunit_csv = open_file(fiz_objs.unit_agg_csv_path)
         fisc_cols = FiscPrimeColumnsRef()
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_agg_csv_header}
-{accord23_str},,,,,,,,,
-{accord45_str},,,,,,,,,
+{accord23_str},,,,,,,,
+{accord45_str},,,,,,,,
 """
         print(f"{expected_fiscunit_csv_str=}")
         print(f"   {generated_fiscunit_csv=}")
@@ -139,7 +139,6 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
 #     expected_br0_columns.extend(
 #         [
 #             c400_number_str(),
-#             present_time_str(),
 #             fund_coin_str(),
 #             monthday_distortion_str(),
 #             penny_str(),
@@ -150,10 +149,10 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
 #         ]
 #     )
 #     expected_br1_columns.extend(
-#         [owner_name_str(), acct_name_str(), time_int_str(), quota_str()]
+#         [owner_name_str(), acct_name_str(), deal_time_str(), quota_str()]
 #     )
 #     expected_br2_columns.extend(
-#         [owner_name_str(), acct_name_str(), time_int_str(), amount_str()]
+#         [owner_name_str(), acct_name_str(), tran_time_str(), amount_str()]
 #     )
 #     expected_br3_columns.extend([hour_title_str(), cumlative_minute_str()])
 #     expected_br4_columns.extend([month_title_str(), cumlative_day_str()])

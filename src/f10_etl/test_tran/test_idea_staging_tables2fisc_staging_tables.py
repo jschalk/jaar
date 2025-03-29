@@ -7,7 +7,8 @@ from src.f00_instrument.db_toolbox import (
 from src.f01_road.deal import (
     bridge_str,
     quota_str,
-    time_int_str,
+    deal_time_str,
+    tran_time_str,
     celldepth_str,
     owner_name_str,
     fisc_title_str,
@@ -18,7 +19,7 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
     timeline_title_str,
 )
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     acct_name_str,
     face_name_str,
     fund_coin_str,
@@ -33,7 +34,7 @@ from src.f07_fisc.fisc_config import (
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fiscunit_str,
-    present_time_str,
+    offi_time_str,
     amount_str,
     hour_title_str,
     cumlative_minute_str,
@@ -111,7 +112,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -127,7 +128,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -193,7 +194,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -209,7 +210,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -240,7 +241,6 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario2_Idea_br00000_Table_Wi
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
-        present_time_str(),
         bridge_str(),
         c400_number_str(),
         yr1_jan1_offset_str(),
@@ -252,11 +252,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario2_Idea_br00000_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()})
+INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
 VALUES
-  ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
-, ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
-, ('{sue_inx}', {event7}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+  ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+, ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+, ('{sue_inx}', {event7}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
 ;
 """
         cursor.execute(insert_staging_sqlstr)
@@ -279,7 +279,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -295,7 +295,7 @@ VALUES
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -327,7 +327,6 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
         fund_coin_str(),
         penny_str(),
         respect_bit_str(),
-        present_time_str(),
         bridge_str(),
         c400_number_str(),
         yr1_jan1_offset_str(),
@@ -337,7 +336,6 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
     a23_fund_coin = 11
     a23_penny = 22
     a23_respect_bit = 33
-    a23_present_time = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -349,11 +347,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario3_Idea_br00000_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{present_time_str()},{bridge_str()})
+INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}')
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_timeline_title}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -381,7 +379,7 @@ VALUES
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
-            a23_present_time,  # present_time
+            # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
             None,  # note
         )
@@ -397,7 +395,7 @@ VALUES
             a23_fund_coin,  # fund_coin
             a23_penny,  # penny
             a23_respect_bit,  # respect_bit
-            a23_present_time,  # present_time
+            # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
             None,  # note
         )
@@ -425,12 +423,12 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario4_Idea_br00001_Table_Wi
         event_int_str(),
         fisc_title_str(),
         owner_name_str(),
-        time_int_str(),
+        deal_time_str(),
         quota_str(),
         celldepth_str(),
     ]
     a23_owner_name = bob_inx
-    a23_time_int = 22
+    a23_deal_time = 22
     a23_quota = 33
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -438,11 +436,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario4_Idea_br00001_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00001_tablename, br00001_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{time_int_str()},{quota_str()}, {celldepth_str()})
+INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{deal_time_str()},{quota_str()}, {celldepth_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{a23_time_int},{a23_quota}, NULL)
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -464,7 +462,7 @@ VALUES
             event3,  # event_int
             accord23_str,  # fisc_title
             a23_owner_name,
-            a23_time_int,
+            a23_deal_time,
             a23_quota,
             None,  # celldepth
             None,  # note
@@ -475,7 +473,7 @@ VALUES
             event7,  # event_int
             accord23_str,  # fisc_title
             a23_owner_name,
-            a23_time_int,
+            a23_deal_time,
             a23_quota,
             None,  # celldepth
             None,  # note
@@ -505,12 +503,12 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario5_Idea_br00002_Table_Wi
         fisc_title_str(),
         owner_name_str(),
         acct_name_str(),
-        time_int_str(),
+        tran_time_str(),
         amount_str(),
     ]
     a23_owner_name = bob_inx
     a23_acct_name = "Yao"
-    a23_time_int = 33
+    a23_tran_time = 33
     a23_amount = 44
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -518,11 +516,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario5_Idea_br00002_Table_Wi
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00002_tablename, br00002_columns)
         insert_staging_sqlstr = f"""
-INSERT INTO {br00002_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{time_int_str()},{amount_str()})
+INSERT INTO {br00002_tablename} ({face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{tran_time_str()},{amount_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_time_int},{a23_amount})
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_time_int},{a23_amount})
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_time_int},{a23_amount})
+  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
+, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
+, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -545,7 +543,7 @@ VALUES
             accord23_str,  # fisc_title
             a23_owner_name,
             a23_acct_name,
-            a23_time_int,
+            a23_tran_time,
             a23_amount,
             None,  # note
         )
@@ -556,7 +554,7 @@ VALUES
             accord23_str,  # fisc_title
             a23_owner_name,
             a23_acct_name,
-            a23_time_int,
+            a23_tran_time,
             a23_amount,
             None,  # note
         )
@@ -831,20 +829,20 @@ VALUES
         unit_stage_csv_filename = x_fisc.unit_stage_csv_filename
         generated_fiscunit_csv = open_file(fiscs_dir, unit_stage_csv_filename)
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
 """
         print(f"   {generated_fiscunit_csv=}")
         print(f"{expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fisc.deal_stage_csv_path)) == 93
-        assert len(open_file(x_fisc.cash_stage_csv_path)) == 85
-        assert len(open_file(x_fisc.hour_stage_csv_path)) == 76
-        assert len(open_file(x_fisc.mont_stage_csv_path)) == 74
-        assert len(open_file(x_fisc.week_stage_csv_path)) == 76
+        assert len(open_file(x_fisc.deal_stage_csv_path)) == 94
+        assert len(open_file(x_fisc.cash_stage_csv_path)) == 86
+        assert len(open_file(x_fisc.hour_stage_csv_path)) == 77
+        assert len(open_file(x_fisc.mont_stage_csv_path)) == 75
+        assert len(open_file(x_fisc.week_stage_csv_path)) == 77
 
 
 def test_etl_fisc_staging_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
@@ -893,17 +891,17 @@ VALUES
         unit_stage_csv_filename = x_fisc.unit_stage_csv_filename
         generated_fiscunit_csv = open_file(fiscs_dir, unit_stage_csv_filename)
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
 """
         print(f"   {generated_fiscunit_csv=}")
         print(f"{expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
         # confirming file is non-zero length, has column headers
-        assert len(open_file(x_fisc.deal_stage_csv_path)) == 93
-        assert len(open_file(x_fisc.cash_stage_csv_path)) == 94
+        assert len(open_file(x_fisc.deal_stage_csv_path)) == 94
+        assert len(open_file(x_fisc.cash_stage_csv_path)) == 95
         assert len(open_file(x_fisc.hour_stage_csv_path)) == 85
         assert len(open_file(x_fisc.mont_stage_csv_path)) == 83
         assert len(open_file(x_fisc.week_stage_csv_path)) == 85
@@ -948,7 +946,7 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
     a23_fund_coin = 11
     a23_penny = 22
     a23_respect_bit = 33
-    a23_present_time = 44
+    # a23_offi_time_max = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -965,8 +963,8 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1002,7 +1000,7 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
     a23_penny_1 = 22
     a23_penny_2 = 99
     a23_respect_bit = 33
-    a23_present_time = 44
+    # a23_offi_time_max = 44
     a23_bridge = ";"
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
@@ -1019,9 +1017,9 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},{a23_present_time},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1241,10 +1239,10 @@ def test_set_fisc_staging_error_message_Scenario5_fiscdeal_Some_error_message(
     accord23_str = "accord23"
     accord45_str = "accord45"
     a23_owner_name = bob_inx
-    t1_time_int = 33
+    t1_deal_time = 33
     t1_quota_1 = 200
     t1_quota_2 = 300
-    t2_time_int = 55
+    t2_deal_time = 55
     t2_quota = 400
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
@@ -1257,28 +1255,28 @@ def test_set_fisc_staging_error_message_Scenario5_fiscdeal_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_time_int},{t1_quota_2},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_time_int},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_time_int},{t2_quota},NULL,NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         # print(f"{select_sqlstr=}")
         rows = cursor.fetchall()
         # print(f"{rows=}")
         assert rows == [
-            (event3, accord23_str, t1_time_int, None),
-            (event7, accord23_str, t1_time_int, None),
-            (event7, accord23_str, t2_time_int, None),
-            (event7, accord45_str, t1_time_int, None),
-            (event7, accord45_str, t2_time_int, None),
+            (event3, accord23_str, t1_deal_time, None),
+            (event7, accord23_str, t1_deal_time, None),
+            (event7, accord23_str, t2_deal_time, None),
+            (event7, accord45_str, t1_deal_time, None),
+            (event7, accord45_str, t2_deal_time, None),
         ]
 
         # WHEN
@@ -1290,11 +1288,11 @@ VALUES
         print(f"{rows=}")
         x_error_message = "Inconsistent fisc data"
         assert rows == [
-            (event3, accord23_str, t1_time_int, x_error_message),
-            (event7, accord23_str, t1_time_int, x_error_message),
-            (event7, accord23_str, t2_time_int, None),
-            (event7, accord45_str, t1_time_int, None),
-            (event7, accord45_str, t2_time_int, None),
+            (event3, accord23_str, t1_deal_time, x_error_message),
+            (event7, accord23_str, t1_deal_time, x_error_message),
+            (event7, accord23_str, t2_deal_time, None),
+            (event7, accord45_str, t1_deal_time, None),
+            (event7, accord45_str, t2_deal_time, None),
         ]
 
 
@@ -1309,8 +1307,8 @@ def test_set_fisc_staging_error_message_Scenario6_fisccash_Some_error_message(
     event7 = 7
     accord23_str = "accord23"
     accord45_str = "accord45"
-    t1_time_int = 33
-    t2_time_int = 55
+    t1_tran_time = 33
+    t2_tran_time = 55
     t1_amount_1 = 200
     t1_amount_2 = 300
     t2_amount = 400
@@ -1325,28 +1323,28 @@ def test_set_fisc_staging_error_message_Scenario6_fisccash_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.cash_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_time_int},{t1_amount_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_time_int},{t1_amount_2},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t2_time_int},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t1_time_int},{t1_amount_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t2_time_int},{t2_amount},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_2},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_1},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t2_tran_time},{t2_amount},NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {time_int_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {tran_time_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         # print(f"{select_sqlstr=}")
         rows = cursor.fetchall()
         # print(f"{rows=}")
         assert rows == [
-            (event3, accord23_str, t1_time_int, None),
-            (event7, accord23_str, t1_time_int, None),
-            (event7, accord23_str, t2_time_int, None),
-            (event7, accord45_str, t1_time_int, None),
-            (event7, accord45_str, t2_time_int, None),
+            (event3, accord23_str, t1_tran_time, None),
+            (event7, accord23_str, t1_tran_time, None),
+            (event7, accord23_str, t2_tran_time, None),
+            (event7, accord45_str, t1_tran_time, None),
+            (event7, accord45_str, t2_tran_time, None),
         ]
 
         # WHEN
@@ -1358,9 +1356,9 @@ VALUES
         print(f"{rows=}")
         x_error_message = "Inconsistent fisc data"
         assert rows == [
-            (event3, accord23_str, t1_time_int, x_error_message),
-            (event7, accord23_str, t1_time_int, x_error_message),
-            (event7, accord23_str, t2_time_int, None),
-            (event7, accord45_str, t1_time_int, None),
-            (event7, accord45_str, t2_time_int, None),
+            (event3, accord23_str, t1_tran_time, x_error_message),
+            (event7, accord23_str, t1_tran_time, x_error_message),
+            (event7, accord23_str, t2_tran_time, None),
+            (event7, accord45_str, t1_tran_time, None),
+            (event7, accord45_str, t2_tran_time, None),
         ]

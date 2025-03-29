@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_gift.atom_config import face_name_str, event_int_str
+from src.f04_stand.atom_config import face_name_str, event_int_str
 from src.f09_idea.idea_db_tool import get_sheet_names, upsert_sheet
 from src.f10_etl.tran_path import create_cart_events_path
 from src.f11_world.world import worldunit_shop

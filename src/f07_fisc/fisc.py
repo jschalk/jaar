@@ -7,11 +7,12 @@ from src.f00_instrument.file import (
 )
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
+    get_empty_set_if_None,
     get_dict_from_json,
     get_json_from_dict,
 )
 from src.f01_road.jaar_config import (
-    get_gifts_folder,
+    get_stands_folder,
     get_fisc_title_if_None,
     get_test_fisc_mstr_dir,
 )
@@ -69,36 +70,37 @@ class set_cashpurchase_Exception(Exception):
     pass
 
 
-class set_present_time_Exception(Exception):
+class set_offi_time_max_Exception(Exception):
     pass
 
 
 @dataclass
 class FiscUnit:
     """Data pipelines:
-    pipeline1: gifts->voice
+    pipeline1: stands->voice
     pipeline2: voice->dutys
     pipeline3: duty->job
     pipeline4: job->forecast
     pipeline5: voice->forecast (direct)
     pipeline6: voice->job->forecast (through jobs)
-    pipeline7: gifts->forecast (could be 5 of 6)
+    pipeline7: stands->forecast (could be 5 of 6)
     """
 
     fisc_title: FiscTitle = None
     fisc_mstr_dir: str = None
     timeline: TimeLineUnit = None
-    present_time: int = None
     brokerunits: dict[OwnerName, BrokerUnit] = None
     cashbook: TranBook = None
+    offi_times: set[TimeLinePoint] = None
     bridge: str = None
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
     penny: PennyNum = None
+    _offi_time_max: TimeLinePoint = None
     _fisc_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
-    _gifts_dir: str = None
+    _stands_dir: str = None
     _all_tranbook: TranBook = None
 
     # directory setup
@@ -106,10 +108,10 @@ class FiscUnit:
         fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
         self._fisc_dir = create_path(fiscs_dir, self.fisc_title)
         self._owners_dir = create_path(self._fisc_dir, "owners")
-        self._gifts_dir = create_path(self._fisc_dir, get_gifts_folder())
+        self._stands_dir = create_path(self._fisc_dir, get_stands_folder())
         set_dir(x_path=self._fisc_dir)
         set_dir(x_path=self._owners_dir)
-        set_dir(x_path=self._gifts_dir)
+        set_dir(x_path=self._stands_dir)
         self._create_journal_db(in_memory=in_memory_journal)
 
     def _get_owner_dir(self, owner_name):
@@ -183,7 +185,7 @@ class FiscUnit:
 
     def init_owner_keeps(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
-        x_hubunit.initialize_gift_voice_files()
+        x_hubunit.initialize_stand_voice_files()
         x_hubunit.initialize_forecast_file(self.get_owner_voice_from_file(owner_name))
 
     def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:
@@ -281,35 +283,36 @@ class FiscUnit:
     def add_dealunit(
         self,
         owner_name: OwnerName,
-        time_int: TimeLinePoint,
+        deal_time: TimeLinePoint,
         quota: int,
-        allow_prev_to_present_time_entry: bool = False,
+        allow_prev_to_offi_time_max_entry: bool = False,
         celldepth: int = None,
     ):
-        if time_int < self.present_time and not allow_prev_to_present_time_entry:
-            exception_str = f"Cannot set dealunit because time_int {time_int} is less than FiscUnit.present_time {self.present_time}."
+        self._offi_time_max = get_0_if_None(self._offi_time_max)
+        if deal_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
+            exception_str = f"Cannot set dealunit because deal_time {deal_time} is less than FiscUnit._offi_time_max {self._offi_time_max}."
             raise dealunit_Exception(exception_str)
         if self.brokerunit_exists(owner_name) is False:
             self.set_brokerunit(brokerunit_shop(owner_name))
         x_brokerunit = self.get_brokerunit(owner_name)
-        x_brokerunit.add_deal(time_int, quota, celldepth)
+        x_brokerunit.add_deal(deal_time, quota, celldepth)
 
-    def get_dealunit(self, owner_name: OwnerName, time_int: TimeLinePoint) -> DealUnit:
+    def get_dealunit(self, owner_name: OwnerName, deal_time: TimeLinePoint) -> DealUnit:
         if not self.get_brokerunit(owner_name):
             return None
         x_brokerunit = self.get_brokerunit(owner_name)
-        return x_brokerunit.get_deal(time_int)
+        return x_brokerunit.get_deal(deal_time)
 
     def get_dict(self, include_cashbook: bool = True) -> dict:
         x_dict = {
             "fisc_title": self.fisc_title,
             "bridge": self.bridge,
-            "present_time": self.present_time,
             "fund_coin": self.fund_coin,
             "penny": self.penny,
             "brokerunits": self._get_brokerunits_dict(),
             "respect_bit": self.respect_bit,
             "timeline": self.timeline.get_dict(),
+            "offi_times": list(self.offi_times),
         }
         if include_cashbook:
             x_dict["cashbook"] = self.cashbook.get_dict()
@@ -323,64 +326,82 @@ class FiscUnit:
             x_deal.owner_name: x_deal.get_dict() for x_deal in self.brokerunits.values()
         }
 
-    def get_brokerunits_time_ints(self) -> set[TimeLinePoint]:
-        all_dealunit_time_ints = set()
+    def get_brokerunits_deal_times(self) -> set[TimeLinePoint]:
+        all_dealunit_deal_times = set()
         for x_brokerunit in self.brokerunits.values():
-            all_dealunit_time_ints.update(x_brokerunit.get_time_ints())
-        return all_dealunit_time_ints
+            all_dealunit_deal_times.update(x_brokerunit.get_deal_times())
+        return all_dealunit_deal_times
 
     def set_cashpurchase(self, x_cashpurchase: TranUnit):
         self.cashbook.set_tranunit(
             tranunit=x_cashpurchase,
-            blocked_time_ints=self.get_brokerunits_time_ints(),
-            present_time=self.present_time,
+            blocked_tran_times=self.get_brokerunits_deal_times(),
+            _offi_time_max=self._offi_time_max,
         )
 
     def add_cashpurchase(
         self,
         owner_name: OwnerName,
         acct_name: AcctName,
-        time_int: TimeLinePoint,
+        tran_time: TimeLinePoint,
         amount: FundNum,
-        blocked_time_ints: set[TimeLinePoint] = None,
-        present_time: TimeLinePoint = None,
+        blocked_tran_times: set[TimeLinePoint] = None,
+        _offi_time_max: TimeLinePoint = None,
     ):
         self.cashbook.add_tranunit(
             owner_name=owner_name,
             acct_name=acct_name,
-            time_int=time_int,
+            tran_time=tran_time,
             amount=amount,
-            blocked_time_ints=blocked_time_ints,
-            present_time=present_time,
+            blocked_tran_times=blocked_tran_times,
+            _offi_time_max=_offi_time_max,
         )
 
     def cashpurchase_exists(
-        self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> bool:
-        return self.cashbook.tranunit_exists(src, dst, x_time_int)
+        return self.cashbook.tranunit_exists(src, dst, x_tran_time)
 
     def get_cashpurchase(
-        self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint
+        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
-        return self.cashbook.get_tranunit(src, dst, x_time_int)
+        return self.cashbook.get_tranunit(src, dst, x_tran_time)
 
-    def del_cashpurchase(self, src: AcctName, dst: AcctName, x_time_int: TimeLinePoint):
-        return self.cashbook.del_tranunit(src, dst, x_time_int)
+    def del_cashpurchase(
+        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+    ):
+        return self.cashbook.del_tranunit(src, dst, x_tran_time)
 
-    def set_present_time(self, x_present_time: TimeLinePoint):
-        x_time_ints = self.cashbook.get_time_ints()
-        if x_time_ints != set() and max(x_time_ints) >= x_present_time:
-            exception_str = f"Cannot set present_time {x_present_time}, cashpurchase with greater time_int exists"
-            raise set_present_time_Exception(exception_str)
-        self.present_time = x_present_time
+    # def set_offi_time(self, offi_time: TimeLinePoint):
+    #     self.offi_time = offi_time
+    #     if self._offi_time_max < self.offi_time:
+    #         self._offi_time_max = self.offi_time
+
+    def set_offi_time_max(self, x_offi_time_max: TimeLinePoint):
+        x_tran_times = self.cashbook.get_tran_times()
+        if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
+            exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, cashpurchase with greater tran_time exists"
+            raise set_offi_time_max_Exception(exception_str)
+        # if self.offi_time > x_offi_time_max:
+        #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
+        #     raise set_offi_time_max_Exception(exception_str)
+        self._offi_time_max = x_offi_time_max
+
+    # def set_offi_time(
+    #     self, offi_time: TimeLinePoint, _offi_time_max: TimeLinePoint
+    # ):
+    #     self.set_offi_time(offi_time)
+    #     self.set_offi_time_max(_offi_time_max)
 
     def set_all_tranbook(self):
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.fisc_title, x_tranunits)
         for owner_name, x_brokerunit in self.brokerunits.items():
-            for x_time_int, x_dealunit in x_brokerunit.deals.items():
+            for x_deal_time, x_dealunit in x_brokerunit.deals.items():
                 for acct_name, x_amount in x_dealunit._deal_acct_nets.items():
-                    x_tranbook.add_tranunit(owner_name, acct_name, x_time_int, x_amount)
+                    x_tranbook.add_tranunit(
+                        owner_name, acct_name, x_deal_time, x_amount
+                    )
         self._all_tranbook = x_tranbook
 
     def create_deals_root_cells(
@@ -388,17 +409,17 @@ class FiscUnit:
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
     ):
         for owner_name, brokerunit in self.brokerunits.items():
-            for time_int in brokerunit.deals.keys():
-                self._create_deal_root_cell(owner_name, ote1_dict, time_int)
+            for deal_time in brokerunit.deals.keys():
+                self._create_deal_root_cell(owner_name, ote1_dict, deal_time)
 
     def _create_deal_root_cell(
         self,
         owner_name: OwnerName,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
-        time_int: TimeLinePoint,
+        deal_time: TimeLinePoint,
     ):
-        past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, time_int)
-        dealunit = self.get_dealunit(owner_name, time_int)
+        past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, deal_time)
+        dealunit = self.get_dealunit(owner_name, deal_time)
         cellunit = cellunit_shop(
             deal_owner_name=owner_name,
             ancestors=[],
@@ -408,20 +429,20 @@ class FiscUnit:
             penny=self.penny,
         )
         root_cell_dir = create_cell_dir_path(
-            self.fisc_mstr_dir, self.fisc_title, owner_name, time_int, []
+            self.fisc_mstr_dir, self.fisc_title, owner_name, deal_time, []
         )
         cellunit_save_to_dir(root_cell_dir, cellunit)
 
 
 def _get_ote1_max_past_event_int(
-    owner_name: str, ote1_dict: dict[str, dict[str, int]], time_int: int
+    owner_name: str, ote1_dict: dict[str, dict[str, int]], deal_time: int
 ) -> EventInt:
-    """Using the fisc_ote1_agg grab most recent event int before a given time_int"""
+    """Using the fisc_ote1_agg grab most recent event int before a given deal_time"""
     ote1_owner_dict = ote1_dict.get(owner_name)
     if not ote1_owner_dict:
         return None
     event_timepoints = set(ote1_owner_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= time_int}:
+    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= deal_time}:
         max_past_timepoint = max(past_timepoints)
         return ote1_owner_dict.get(max_past_timepoint)
 
@@ -430,7 +451,7 @@ def fiscunit_shop(
     fisc_title: FiscTitle = None,
     fisc_mstr_dir: str = None,
     timeline: TimeLineUnit = None,
-    present_time: int = None,
+    offi_times: set[TimeLinePoint] = None,
     in_memory_journal: bool = None,
     bridge: str = None,
     fund_coin: float = None,
@@ -446,9 +467,9 @@ def fiscunit_shop(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
         timeline=timeline,
-        present_time=get_0_if_None(present_time),
         brokerunits={},
         cashbook=tranbook_shop(fisc_title),
+        offi_times=get_empty_set_if_None(offi_times),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
@@ -470,7 +491,7 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
     x_fisc_title = fisc_dict.get("fisc_title")
     x_fisc = fiscunit_shop(x_fisc_title, None)
     x_fisc.timeline = timelineunit_shop(fisc_dict.get("timeline"))
-    x_fisc.present_time = fisc_dict.get("present_time")
+    x_fisc.offi_times = set(fisc_dict.get("offi_times"))
     x_fisc.bridge = fisc_dict.get("bridge")
     x_fisc.fund_coin = fisc_dict.get("fund_coin")
     x_fisc.respect_bit = fisc_dict.get("respect_bit")
@@ -484,7 +505,7 @@ def get_from_json(x_fisc_json: str) -> FiscUnit:
     return get_from_dict(get_dict_from_json(x_fisc_json))
 
 
-def get_from_standard(fisc_mstr_dir: str, fisc_title: FiscTitle) -> FiscUnit:
+def get_from_default_path(fisc_mstr_dir: str, fisc_title: FiscTitle) -> FiscUnit:
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_title)
     x_fiscunit = get_from_json(open_file(fisc_json_path))
     x_fiscunit.fisc_mstr_dir = fisc_mstr_dir

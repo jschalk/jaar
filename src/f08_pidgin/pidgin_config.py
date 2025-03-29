@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_json, create_path
 from src.f00_instrument.dict_toolbox import get_from_nested_dict
-from src.f04_gift.atom_config import jkeys_str, jvalues_str
+from src.f04_stand.atom_config import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
 
@@ -137,13 +137,13 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "base_item_active_requisite": "bool",
         "begin": "float",
         "c400_number": "int",
+        "celldepth": "int",
         "close": "float",
         "credit_belief": "int",
         "credit_vote": "int",
         "credor_respect": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "present_time": "int",
         "debtit_belief": "int",
         "debtit_vote": "int",
         "debtor_respect": "int",
@@ -169,8 +169,9 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "need": "RoadUnit",
         "nigh": "float",
         "numor": "int",
-        "owner_name": "NameUnit",
         "open": "float",
+        "offi_time": "TimeLinePoint",
+        "owner_name": "NameUnit",
         "parent_road": "RoadUnit",
         "penny": "float",
         "pick": "RoadUnit",
@@ -179,12 +180,12 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "quota": "int",
         "respect_bit": "float",
         "road": "RoadUnit",
-        "celldepth": "int",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
         "team_tag": "LabelUnit",
-        "time_int": "TimeLinePoint",
+        "tran_time": "TimeLinePoint",
+        "deal_time": "TimeLinePoint",
         "timeline_title": "TitleUnit",
         "weekday_title": "TitleUnit",
         "weekday_order": "int",

@@ -1,4 +1,4 @@
-from src.f04_gift.atom_config import type_AcctName_str
+from src.f04_stand.atom_config import type_AcctName_str
 from src.f08_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
 from src.f08_pidgin.examples.example_pidgins import (
     get_clean_roadmap,

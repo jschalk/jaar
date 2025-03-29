@@ -1,5 +1,5 @@
 from src.f00_instrument.file import get_dir_file_strs, create_path
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     type_AcctName_str,
     type_TitleUnit_str,
     type_RoadUnit_str,

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.deal import fisc_title_str, owner_name_str
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     face_name_str,
     event_int_str,
     acct_name_str,
@@ -66,7 +66,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
 
 
 def test_create_idea_table_from_csv_ChangesDBState(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test the create_idea_table_from_csv_with_types function."""
     # ESTABLISH
@@ -111,7 +111,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
 
 
 def test_insert_idea_csv_ChangesDBState_add_to_empty_table(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH
     conn, test_csv_filepath = setup_database_and_csv
@@ -180,7 +180,7 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
 
 
 def test_insert_idea_csv_ChangesDBState_CanCreateTable(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     """Test the insert_csv function using pytest."""
     # ESTABLISH
@@ -216,8 +216,8 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
         os_remove(zia_csv_filepath)
 
 
-def test_create_idea_table_from_csv_DoesNothingIfTableExists(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str]
+def test_create_idea_table_from_csv_DoesNothinstandableExists(
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH
     conn, test_csv_filepath = setup_database_and_csv

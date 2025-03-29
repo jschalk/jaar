@@ -5,7 +5,7 @@ from src.f01_road.finance import (
     filter_penny,
 )
 from src.f01_road.jaar_config import (
-    get_gifts_folder,
+    get_stands_folder,
     get_json_filename,
     get_test_fisc_title,
 )
@@ -18,6 +18,7 @@ from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f07_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists, isdir as os_path_isdir
+from pytest import raises as pytest_raises
 
 
 def test_FiscUnit_Exists():
@@ -26,18 +27,19 @@ def test_FiscUnit_Exists():
     # THEN
     assert not accord_fisc.fisc_title
     assert not accord_fisc.timeline
-    assert not accord_fisc.present_time
     assert not accord_fisc.brokerunits
     assert not accord_fisc.cashbook
+    assert not accord_fisc.offi_times
     assert not accord_fisc.bridge
     assert not accord_fisc.fund_coin
     assert not accord_fisc.respect_bit
     assert not accord_fisc.penny
     assert not accord_fisc.fisc_mstr_dir
     # Calculated fields
+    assert not accord_fisc._offi_time_max
     assert not accord_fisc._owners_dir
     assert not accord_fisc._journal_db
-    assert not accord_fisc._gifts_dir
+    assert not accord_fisc._stands_dir
     assert not accord_fisc._all_tranbook
 
 
@@ -48,9 +50,9 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     # THEN
     assert accord_fisc.fisc_title == get_test_fisc_title()
     assert accord_fisc.timeline == timelineunit_shop()
-    assert accord_fisc.present_time == 0
     assert accord_fisc.brokerunits == {}
     assert accord_fisc.cashbook == tranbook_shop(get_test_fisc_title())
+    assert accord_fisc.offi_times == set()
     assert accord_fisc.bridge == default_bridge_if_None()
     assert accord_fisc.fund_coin == default_fund_coin_if_None()
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
@@ -58,7 +60,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     # Calculated fields
     assert accord_fisc._owners_dir != None
-    assert accord_fisc._gifts_dir != None
+    assert accord_fisc._stands_dir != None
     assert accord_fisc._all_tranbook == tranbook_shop(get_test_fisc_title())
 
 
@@ -73,7 +75,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     assert accord_fisc.fisc_title == accord45_str
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     assert accord_fisc._owners_dir is not None
-    assert accord_fisc._gifts_dir is not None
+    assert accord_fisc._stands_dir is not None
 
 
 def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
@@ -83,13 +85,13 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     x_fund_coin = 7.0
     x_respect_bit = 9
     x_penny = 3
-    x_present_time = 78000000
+    a45_offi_times = {12, 15}
 
     # WHEN
     accord_fisc = fiscunit_shop(
         fisc_title=accord45_str,
         fisc_mstr_dir=get_test_fisc_mstr_dir(),
-        present_time=x_present_time,
+        offi_times=a45_offi_times,
         in_memory_journal=True,
         bridge=slash_str,
         fund_coin=x_fund_coin,
@@ -98,11 +100,11 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert accord_fisc.present_time == x_present_time
     assert accord_fisc.bridge == slash_str
     assert accord_fisc.fund_coin == x_fund_coin
     assert accord_fisc.respect_bit == x_respect_bit
     assert accord_fisc.penny == x_penny
+    assert accord_fisc.offi_times == a45_offi_times
 
 
 def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -112,17 +114,17 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
     x_fisc_dir = create_path(x_fiscs_dir, accord45_str)
     x_owners_dir = create_path(x_fisc_dir, "owners")
-    x_gifts_dir = create_path(x_fisc_dir, get_gifts_folder())
+    x_stands_dir = create_path(x_fisc_dir, get_stands_folder())
     journal_filename = "journal.db"
     journal_file_path = create_path(x_fisc_dir, journal_filename)
 
     assert not accord_fisc._fisc_dir
     assert not accord_fisc._owners_dir
-    assert not accord_fisc._gifts_dir
+    assert not accord_fisc._stands_dir
     assert os_path_exists(x_fisc_dir) is False
     assert os_path_isdir(x_fisc_dir) is False
     assert os_path_exists(x_owners_dir) is False
-    assert os_path_exists(x_gifts_dir) is False
+    assert os_path_exists(x_stands_dir) is False
     assert os_path_exists(journal_file_path) is False
 
     # WHEN
@@ -131,11 +133,11 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # THEN
     assert accord_fisc._fisc_dir == x_fisc_dir
     assert accord_fisc._owners_dir == x_owners_dir
-    assert accord_fisc._gifts_dir == x_gifts_dir
+    assert accord_fisc._stands_dir == x_stands_dir
     assert os_path_exists(x_fisc_dir)
     assert os_path_isdir(x_fisc_dir)
     assert os_path_exists(x_owners_dir)
-    assert os_path_exists(x_gifts_dir)
+    assert os_path_exists(x_stands_dir)
     assert os_path_exists(journal_file_path)
 
 
@@ -325,3 +327,88 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert accord_all_owners.get(sue_str) == sue_hubunit
     assert accord_all_owners.get(yao_str) == yao_hubunit
     assert len(accord_fisc.get_owner_hubunits()) == 2
+
+
+# def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
+#     # ESTABLISH
+#     fisc_mstr_dir = get_test_fisc_mstr_dir()
+#     time56 = 56
+#     a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir, _offi_time_max=time56)
+#     assert a23_fisc.offi_time == 0
+#     assert a23_fisc._offi_time_max == time56
+
+#     # WHEN
+#     time23 = 23
+#     a23_fisc.set_offi_time(time23)
+
+#     # THEN
+#     assert a23_fisc.offi_time == time23
+#     assert a23_fisc._offi_time_max == time56
+
+
+# def test_FiscUnit_set_offi_time_Scenario1_SetsAttr():
+#     # ESTABLISH
+#     a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+#     assert a23_fisc.offi_time == 0
+#     assert a23_fisc._offi_time_max == 0
+
+#     # WHEN
+#     time23 = 23
+#     a23_fisc.set_offi_time(time23)
+
+#     # THEN
+#     assert a23_fisc.offi_time == time23
+#     assert a23_fisc._offi_time_max == time23
+
+
+def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    time7 = 7
+    a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir)
+    a23_fisc._offi_time_max = time7
+    # assert a23_fisc.offi_time == 0
+    assert a23_fisc._offi_time_max == time7
+
+    # WHEN
+    time23 = 23
+    a23_fisc.set_offi_time_max(time23)
+
+    # THEN
+    # assert a23_fisc.offi_time == 0
+    assert a23_fisc._offi_time_max == time23
+
+
+# def test_FiscUnit_set_offi_time_max_Scenario1_SetsAttr():
+#     # ESTABLISH
+#     fisc_mstr_dir = get_test_fisc_mstr_dir()
+#     time21 = 21
+#     time77 = 77
+#     a23_fisc = fiscunit_shop(
+#         "accord23", fisc_mstr_dir, offi_time=time21, _offi_time_max=time77
+#     )
+#     assert a23_fisc.offi_time == time21
+#     assert a23_fisc._offi_time_max == time77
+
+#     # WHEN / THEN
+#     time11 = 11
+#     with pytest_raises(Exception) as excinfo:
+#         a23_fisc.set_offi_time_max(time11)
+#     exception_str = f"Cannot set _offi_time_max={time11} because it is less than offi_time={time21}"
+#     assert str(excinfo.value) == exception_str
+
+
+# def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
+#     # ESTABLISH
+#     a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+#     assert a23_fisc.offi_time == 0
+#     assert a23_fisc._offi_time_max == 0
+
+#     # WHEN
+#     time23 = 23
+#     time55 = 55
+#     a23_fisc.set_offi_time(time23, time55)
+
+#     # THEN
+#     assert a23_fisc.offi_time == time23
+#     assert a23_fisc._offi_time_max == time55

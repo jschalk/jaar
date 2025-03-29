@@ -43,8 +43,8 @@ from src.f10_etl.transformers import (
     etl_fisc_csvs_to_fisc_jsons,
     etl_idea_staging_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
-    etl_event_bud_csvs_to_gift_json,
-    etl_event_gift_json_to_event_inherited_budunits,
+    etl_event_bud_csvs_to_stand_json,
+    etl_event_stand_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_voice,
     etl_fisc_voice_to_fisc_forecast,
     etl_fisc_agg_tables2fisc_ote1_agg,
@@ -73,7 +73,7 @@ class _set_fisc_pidgin_Exception(Exception):
 class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
-    present_time: TimeLinePoint = None
+    world_time_nigh: TimeLinePoint = None
     events: dict[EventInt, FaceName] = None
     timeconversions: dict[TimeLineTitle, TimeConversion] = None
     _faces_otz_dir: str = None
@@ -210,11 +210,11 @@ class WorldUnit:
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
-    def event_bud_csvs_to_gift_json(self):
-        etl_event_bud_csvs_to_gift_json(self._fisc_mstr_dir)
+    def event_bud_csvs_to_stand_json(self):
+        etl_event_bud_csvs_to_stand_json(self._fisc_mstr_dir)
 
-    def event_gift_json_to_event_inherited_budunits(self):
-        etl_event_gift_json_to_event_inherited_budunits(self._fisc_mstr_dir)
+    def event_stand_json_to_event_inherited_budunits(self):
+        etl_event_stand_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
     def event_inherited_budunits_to_fisc_voice(self):
         etl_event_inherited_budunits_to_fisc_voice(self._fisc_mstr_dir)
@@ -243,7 +243,7 @@ class WorldUnit:
     def create_deal_mandate_ledgers(self):
         etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
 
-    def calc_fiscal_deal_acct_mandate_net_ledgers(self):
+    def calc_fisc_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
         print(f"Starting files {count_dirs_files(mstr_dir)}")
         etl_create_deals_root_cells(mstr_dir)
@@ -306,8 +306,8 @@ class WorldUnit:
         ]
 
         for etl_func, step_msg in mine_to_burdens_steps:
-            if step_msg:
-                print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
+            # if step_msg:
+            #     print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
             etl_func()
 
         with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -326,13 +326,13 @@ class WorldUnit:
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
         print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
-        self.event_bud_csvs_to_gift_json()
-        self.event_gift_json_to_event_inherited_budunits()
-        # print(f"step 07 {count_dirs_files(self.worlds_dir)}")
+        self.event_bud_csvs_to_stand_json()
+        self.event_stand_json_to_event_inherited_budunits()
+        print(f"step 07 {count_dirs_files(self.worlds_dir)}")
         self.event_inherited_budunits_to_fisc_voice()
         self.fisc_voice_to_fisc_forecast()
-        # print(f"step 08 {count_dirs_files(self.worlds_dir)}")
-        self.calc_fiscal_deal_acct_mandate_net_ledgers()
+        print(f"step 08 {count_dirs_files(self.worlds_dir)}")
+        self.calc_fisc_deal_acct_mandate_net_ledgers()
 
     def create_stances(self):
         create_stance0001_file(self._fisc_mstr_dir)
@@ -340,7 +340,7 @@ class WorldUnit:
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,
-            "present_time": self.present_time,
+            "world_time_nigh": self.world_time_nigh,
             "timeconversions": self.get_timeconversions_dict(),
             "events": self.events,
         }
@@ -350,7 +350,7 @@ def worldunit_shop(
     world_id: WorldID = None,
     worlds_dir: str = None,
     mine_dir: str = None,
-    present_time: TimeLinePoint = None,
+    world_time_nigh: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
     _fiscunits: set[FiscTitle] = None,
 ) -> WorldUnit:
@@ -361,7 +361,7 @@ def worldunit_shop(
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
-        present_time=get_0_if_None(present_time),
+        world_time_nigh=get_0_if_None(world_time_nigh),
         timeconversions=get_empty_dict_if_None(timeconversions),
         events={},
         _fiscunits=get_empty_set_if_None(_fiscunits),

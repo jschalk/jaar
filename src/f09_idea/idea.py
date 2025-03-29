@@ -9,9 +9,9 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.road import FiscTitle, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
-from src.f04_gift.atom import atom_insert, AtomUnit, atomrow_shop
-from src.f04_gift.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
-from src.f04_gift.gift import giftunit_shop
+from src.f04_stand.atom import atom_insert, BudAtom, atomrow_shop
+from src.f04_stand.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
+from src.f04_stand.stand import standunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f09_idea.idea_config import (
@@ -83,35 +83,35 @@ def _generate_idea_dataframe(d2_list: list[list[str]], idea_name: str) -> DataFr
 
 def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
     x_buddelta = buddelta_shop()
-    x_buddelta.add_all_atomunits(x_budunit)
+    x_buddelta.add_all_budatoms(x_budunit)
     x_idearef = get_idearef_obj(idea_name)
     x_fisc_title = x_budunit.fisc_title
     x_owner_name = x_budunit.owner_name
-    sorted_atomunits = _get_sorted_atom_insert_atomunits(x_buddelta, x_idearef)
-    d2_list = _create_d2_list(sorted_atomunits, x_idearef, x_fisc_title, x_owner_name)
+    sorted_budatoms = _get_sorted_atom_insert_budatoms(x_buddelta, x_idearef)
+    d2_list = _create_d2_list(sorted_budatoms, x_idearef, x_fisc_title, x_owner_name)
     d2_list = _delta_all_pledge_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
     sorting_columns = x_idearef.get_headers_list()
     return _sort_dataframe(x_idea, sorting_columns)
 
 
-def _get_sorted_atom_insert_atomunits(
+def _get_sorted_atom_insert_budatoms(
     x_buddelta: BudDelta, x_idearef: IdeaRef
-) -> list[AtomUnit]:
+) -> list[BudAtom]:
     dimen_set = set(x_idearef.dimens)
     curd_set = {atom_insert()}
     limited_delta = get_dimens_cruds_buddelta(x_buddelta, dimen_set, curd_set)
-    return limited_delta.get_dimen_sorted_atomunits_list()
+    return limited_delta.get_dimen_sorted_budatoms_list()
 
 
 def _create_d2_list(
-    sorted_atomunits: list[AtomUnit],
+    sorted_budatoms: list[BudAtom],
     x_idearef: IdeaRef,
     x_fisc_title: FiscTitle,
     x_owner_name: OwnerName,
 ):
     d2_list = []
-    for x_atomunit in sorted_atomunits:
+    for x_budatom in sorted_budatoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
             if x_attribute == "fisc_title":
@@ -119,7 +119,7 @@ def _create_d2_list(
             elif x_attribute == "owner_name":
                 d1_list.append(x_owner_name)
             else:
-                d1_list.append(x_atomunit.get_value(x_attribute))
+                d1_list.append(x_budatom.get_value(x_attribute))
         d2_list.append(d1_list)
     return d2_list
 
@@ -173,8 +173,8 @@ def make_buddelta(x_csv: str) -> BudDelta:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]
 
-        for x_atomunit in x_atomrow.get_atomunits():
-            x_buddelta.set_atomunit(x_atomunit)
+        for x_budatom in x_atomrow.get_budatoms():
+            x_buddelta.set_budatom(x_budatom)
     return x_buddelta
 
 
@@ -185,14 +185,14 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
-    x_hubunit.initialize_gift_voice_files()
+    x_hubunit.initialize_stand_voice_files()
     x_voice = x_hubunit.get_voice_bud()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
-    x_giftunit = giftunit_shop(x_owner_name, x_fisc_title)
-    x_giftunit.set_buddelta(x_buddelta)
-    x_hubunit.save_gift_file(x_giftunit)
-    x_hubunit._create_voice_from_gifts()
+    x_standunit = standunit_shop(x_owner_name, x_fisc_title)
+    x_standunit.set_buddelta(x_buddelta)
+    x_hubunit.save_stand_file(x_standunit)
+    x_hubunit._create_voice_from_stands()
 
 
 def load_idea_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):
@@ -252,7 +252,6 @@ def fisc_build_from_df(
             fisc_title=x_fisc_title,
             fisc_mstr_dir=x_fiscs_dir,
             timeline=x_timeline,
-            present_time=row["present_time"],
             # in_memory_journal=row["in_memory_journal"],
             bridge=row["bridge"],
             fund_coin=x_fund_coin,
@@ -306,10 +305,10 @@ def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
     for index, row in br00001_df.query(query_str).iterrows():
         x_fiscunit.add_dealunit(
             owner_name=row["owner_name"],
-            time_int=row["time_int"],
+            deal_time=row["deal_time"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
-            allow_prev_to_present_time_entry=True,
+            allow_prev_to_offi_time_max_entry=True,
         )
 
 
@@ -319,6 +318,12 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
         x_fiscunit.add_cashpurchase(
             owner_name=row["owner_name"],
             acct_name=row["acct_name"],
-            time_int=row["time_int"],
+            tran_time=row["tran_time"],
             amount=row["amount"],
         )
+
+
+def _add_time_offis_from_df(x_fiscunit: FiscUnit, br00006_df: DataFrame):
+    query_str = f"fisc_title == '{x_fiscunit.fisc_title}'"
+    for index, row in br00006_df.query(query_str).iterrows():
+        x_fiscunit.offi_times.add(row["offi_time"])

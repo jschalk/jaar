@@ -6,7 +6,7 @@ from src.f02_bud.bud_tool import (
     bud_itemunit_str,
 )
 from src.f02_bud.examples.example_buds import budunit_v001
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     atom_insert,
     acct_name_str,
     group_label_str,
@@ -19,7 +19,7 @@ from src.f04_gift.atom_config import (
     debtit_vote_str,
     credit_vote_str,
 )
-from src.f04_gift.atom import atomunit_shop
+from src.f04_stand.atom import budatom_shop
 from src.f09_idea.idea import create_idea_df, make_buddelta, get_idearef_obj
 from src.f09_idea.idea_config import (
     idea_format_00021_bud_acctunit_v0_0_0,
@@ -54,24 +54,24 @@ def test_make_buddelta_Arg_idea_format_00021_bud_acctunit_v0_0_0():
 
     # THEN
     assert sue_acct_buddelta
-    sue_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    sue_atomunit.set_arg(acct_name_str(), sue_str)
-    sue_atomunit.set_arg(credit_belief_str(), sue_credit_belief)
-    sue_atomunit.set_arg(debtit_belief_str(), sue_debtit_belief)
-    sue_atomunit.set_atom_order()
-    bob_atomunit = atomunit_shop(bud_acctunit_str(), atom_insert())
-    bob_atomunit.set_arg(acct_name_str(), bob_str)
-    bob_atomunit.set_arg(credit_belief_str(), bob_credit_belief)
-    bob_atomunit.set_arg(debtit_belief_str(), bob_debtit_belief)
-    bob_atomunit.set_atom_order()
+    sue_budatom = budatom_shop(bud_acctunit_str(), atom_insert())
+    sue_budatom.set_arg(acct_name_str(), sue_str)
+    sue_budatom.set_arg(credit_belief_str(), sue_credit_belief)
+    sue_budatom.set_arg(debtit_belief_str(), sue_debtit_belief)
+    sue_budatom.set_atom_order()
+    bob_budatom = budatom_shop(bud_acctunit_str(), atom_insert())
+    bob_budatom.set_arg(acct_name_str(), bob_str)
+    bob_budatom.set_arg(credit_belief_str(), bob_credit_belief)
+    bob_budatom.set_arg(debtit_belief_str(), bob_debtit_belief)
+    bob_budatom.set_atom_order()
     # print(f"{sue_acct_buddelta.get_ordered_dict()=}")
     # print(
-    #     f"{sue_acct_buddelta.atomunits.get(atom_insert()).get(bud_acctunit_str()).get(sue_str)=}"
+    #     f"{sue_acct_buddelta.budatoms.get(atom_insert()).get(bud_acctunit_str()).get(sue_str)=}"
     # )
-    print(f"{sue_atomunit=}")
-    assert sue_acct_buddelta.atomunit_exists(sue_atomunit)
-    assert sue_acct_buddelta.atomunit_exists(bob_atomunit)
-    assert len(sue_acct_buddelta.get_ordered_atomunits()) == 3
+    print(f"{sue_budatom=}")
+    assert sue_acct_buddelta.budatom_exists(sue_budatom)
+    assert sue_acct_buddelta.budatom_exists(bob_budatom)
+    assert len(sue_acct_buddelta.get_ordered_budatoms()) == 3
 
 
 def test_make_buddelta_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
@@ -112,36 +112,36 @@ def test_make_buddelta_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
 
     # THEN
     assert membership_changunit
-    sue_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    bob_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    yao_iowa_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    yao_ohio_atomunit = atomunit_shop(bud_acct_membership_str(), atom_insert())
-    sue_iowa_atomunit.set_arg(group_label_str(), iowa_str)
-    bob_iowa_atomunit.set_arg(group_label_str(), iowa_str)
-    yao_iowa_atomunit.set_arg(group_label_str(), iowa_str)
-    yao_ohio_atomunit.set_arg(group_label_str(), ohio_str)
-    sue_iowa_atomunit.set_arg(acct_name_str(), sue_str)
-    bob_iowa_atomunit.set_arg(acct_name_str(), bob_str)
-    yao_iowa_atomunit.set_arg(acct_name_str(), yao_str)
-    yao_ohio_atomunit.set_arg(acct_name_str(), yao_str)
-    sue_iowa_atomunit.set_arg(credit_vote_str(), sue_iowa_credit_vote)
-    bob_iowa_atomunit.set_arg(credit_vote_str(), bob_iowa_credit_vote)
-    yao_iowa_atomunit.set_arg(credit_vote_str(), yao_iowa_credit_vote)
-    yao_ohio_atomunit.set_arg(credit_vote_str(), yao_ohio_credit_vote)
-    sue_iowa_atomunit.set_arg(debtit_vote_str(), sue_iowa_debtit_vote)
-    bob_iowa_atomunit.set_arg(debtit_vote_str(), bob_iowa_debtit_vote)
-    yao_iowa_atomunit.set_arg(debtit_vote_str(), yao_iowa_debtit_vote)
-    yao_ohio_atomunit.set_arg(debtit_vote_str(), yao_ohio_debtit_vote)
-    bob_iowa_atomunit.set_atom_order()
-    # print(f"{membership_changunit.get_ordered_atomunits()[2]=}")
-    # print(f"{sue_iowa_atomunit=}")
-    assert len(membership_changunit.get_ordered_atomunits()) == 7
-    assert membership_changunit.get_ordered_atomunits()[0] == bob_iowa_atomunit
-    assert membership_changunit.atomunit_exists(sue_iowa_atomunit)
-    assert membership_changunit.atomunit_exists(bob_iowa_atomunit)
-    assert membership_changunit.atomunit_exists(yao_iowa_atomunit)
-    assert membership_changunit.atomunit_exists(yao_ohio_atomunit)
-    assert len(membership_changunit.get_ordered_atomunits()) == 7
+    sue_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    bob_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    yao_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    yao_ohio_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    sue_iowa_budatom.set_arg(group_label_str(), iowa_str)
+    bob_iowa_budatom.set_arg(group_label_str(), iowa_str)
+    yao_iowa_budatom.set_arg(group_label_str(), iowa_str)
+    yao_ohio_budatom.set_arg(group_label_str(), ohio_str)
+    sue_iowa_budatom.set_arg(acct_name_str(), sue_str)
+    bob_iowa_budatom.set_arg(acct_name_str(), bob_str)
+    yao_iowa_budatom.set_arg(acct_name_str(), yao_str)
+    yao_ohio_budatom.set_arg(acct_name_str(), yao_str)
+    sue_iowa_budatom.set_arg(credit_vote_str(), sue_iowa_credit_vote)
+    bob_iowa_budatom.set_arg(credit_vote_str(), bob_iowa_credit_vote)
+    yao_iowa_budatom.set_arg(credit_vote_str(), yao_iowa_credit_vote)
+    yao_ohio_budatom.set_arg(credit_vote_str(), yao_ohio_credit_vote)
+    sue_iowa_budatom.set_arg(debtit_vote_str(), sue_iowa_debtit_vote)
+    bob_iowa_budatom.set_arg(debtit_vote_str(), bob_iowa_debtit_vote)
+    yao_iowa_budatom.set_arg(debtit_vote_str(), yao_iowa_debtit_vote)
+    yao_ohio_budatom.set_arg(debtit_vote_str(), yao_ohio_debtit_vote)
+    bob_iowa_budatom.set_atom_order()
+    # print(f"{membership_changunit.get_ordered_budatoms()[2]=}")
+    # print(f"{sue_iowa_budatom=}")
+    assert len(membership_changunit.get_ordered_budatoms()) == 7
+    assert membership_changunit.get_ordered_budatoms()[0] == bob_iowa_budatom
+    assert membership_changunit.budatom_exists(sue_iowa_budatom)
+    assert membership_changunit.budatom_exists(bob_iowa_budatom)
+    assert membership_changunit.budatom_exists(yao_iowa_budatom)
+    assert membership_changunit.budatom_exists(yao_ohio_budatom)
+    assert len(membership_changunit.get_ordered_budatoms()) == 7
 
 
 def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
@@ -165,21 +165,21 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     itemunit_changunit = make_buddelta(itemunit_csv)
 
     # THEN
-    casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    casa_atomunit.set_arg(parent_road_str(), sue_budunit.fisc_title)
-    casa_atomunit.set_arg(item_title_str(), casa_str)
-    casa_atomunit.set_arg(pledge_str(), False)
-    casa_atomunit.set_arg(mass_str(), casa_mass)
-    print(f"{casa_atomunit=}")
-    assert casa_atomunit.get_value(mass_str()) == casa_mass
-    clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    clean_atomunit.set_arg(parent_road_str(), casa_road)
-    clean_atomunit.set_arg(item_title_str(), clean_str)
-    clean_atomunit.set_arg(pledge_str(), True)
-    clean_atomunit.set_arg(mass_str(), 1)
-    assert itemunit_changunit.atomunit_exists(casa_atomunit)
-    assert itemunit_changunit.atomunit_exists(clean_atomunit)
-    assert len(itemunit_changunit.get_ordered_atomunits()) == 2
+    casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_title)
+    casa_budatom.set_arg(item_title_str(), casa_str)
+    casa_budatom.set_arg(pledge_str(), False)
+    casa_budatom.set_arg(mass_str(), casa_mass)
+    print(f"{casa_budatom=}")
+    assert casa_budatom.get_value(mass_str()) == casa_mass
+    clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    clean_budatom.set_arg(parent_road_str(), casa_road)
+    clean_budatom.set_arg(item_title_str(), clean_str)
+    clean_budatom.set_arg(pledge_str(), True)
+    clean_budatom.set_arg(mass_str(), 1)
+    assert itemunit_changunit.budatom_exists(casa_budatom)
+    assert itemunit_changunit.budatom_exists(clean_budatom)
+    assert len(itemunit_changunit.get_ordered_budatoms()) == 2
 
 
 def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0_Scenario_budunit_v001(
@@ -220,18 +220,18 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     itemunit_changunit = make_buddelta(itemunit_csv)
 
     # THEN
-    casa_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    casa_atomunit.set_arg(parent_road_str(), sue_budunit.fisc_title)
-    casa_atomunit.set_arg(item_title_str(), casa_str)
-    casa_atomunit.set_arg(pledge_str(), False)
-    casa_atomunit.set_arg(mass_str(), casa_mass)
-    print(f"{casa_atomunit=}")
-    assert casa_atomunit.get_value(mass_str()) == casa_mass
-    clean_atomunit = atomunit_shop(bud_itemunit_str(), atom_insert())
-    clean_atomunit.set_arg(parent_road_str(), casa_road)
-    clean_atomunit.set_arg(item_title_str(), clean_str)
-    clean_atomunit.set_arg(pledge_str(), True)
-    clean_atomunit.set_arg(mass_str(), 1)
-    assert itemunit_changunit.atomunit_exists(casa_atomunit)
-    assert itemunit_changunit.atomunit_exists(clean_atomunit)
-    assert len(itemunit_changunit.get_ordered_atomunits()) == 2
+    casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_title)
+    casa_budatom.set_arg(item_title_str(), casa_str)
+    casa_budatom.set_arg(pledge_str(), False)
+    casa_budatom.set_arg(mass_str(), casa_mass)
+    print(f"{casa_budatom=}")
+    assert casa_budatom.get_value(mass_str()) == casa_mass
+    clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
+    clean_budatom.set_arg(parent_road_str(), casa_road)
+    clean_budatom.set_arg(item_title_str(), clean_str)
+    clean_budatom.set_arg(pledge_str(), True)
+    clean_budatom.set_arg(mass_str(), 1)
+    assert itemunit_changunit.budatom_exists(casa_budatom)
+    assert itemunit_changunit.budatom_exists(clean_budatom)
+    assert len(itemunit_changunit.get_ordered_budatoms()) == 2

@@ -25,8 +25,8 @@ def test_WorldUnit_fisc_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscTitle(
     x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
     x_cols = FiscPrimeColumnsRef()
     fiscunit_csv_str = f"""{x_cols.unit_agg_csv_header}
-{accord23_str},,,,,,,,,
-{accord45_str},,,,,,,,,
+{accord23_str},,,,,,,,
+{accord45_str},,,,,,,,
 """
     save_file(fisc_mstr_dir, x_fisc.unit_agg_csv_filename, fiscunit_csv_str)
     save_file(fisc_mstr_dir, x_fisc.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
@@ -34,6 +34,7 @@ def test_WorldUnit_fisc_csvs_to_jsons_Scenario0_CreateFilesWithOnlyFiscTitle(
     save_file(fisc_mstr_dir, x_fisc.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fisc_mstr_dir, x_fisc.offi_agg_csv_filename, x_cols.offi_agg_empty_csv)
 
     # accord23_json_filename = f"{accord23_str}.json"
     # accord45_json_filename = f"{accord45_str}.json"
@@ -64,7 +65,6 @@ def test_WorldUnit_fisc_csvs_to_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     a45_fund_coin = 3
     a45_penny = 5
     a45_respect_bit = 7
-    a45_present_time = 11
     a45_bridge = "/"
     a45_c400_number = 88
     a45_yr1_jan1_offset = 501
@@ -75,8 +75,8 @@ def test_WorldUnit_fisc_csvs_to_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
     x_cols = FiscPrimeColumnsRef()
     fiscunit_csv_str = f"""{x_cols.unit_agg_csv_header}
-{accord23_str},,,,,,,,,
-{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_present_time},{a45_bridge}
+{accord23_str},,,,,,,,
+{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_bridge}
 """
     fizz_world = worldunit_shop("fizz")
     save_file(fisc_mstr_dir, x_fisc.unit_agg_csv_filename, fiscunit_csv_str)
@@ -85,6 +85,7 @@ def test_WorldUnit_fisc_csvs_to_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     save_file(fisc_mstr_dir, x_fisc.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fisc_mstr_dir, x_fisc.offi_agg_csv_filename, x_cols.offi_agg_empty_csv)
 
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
@@ -120,7 +121,6 @@ def test_WorldUnit_fisc_csvs_to_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
         fund_coin=a45_fund_coin,
         penny=a45_penny,
         respect_bit=a45_respect_bit,
-        present_time=a45_present_time,
         bridge=a45_bridge,
         timeline=expected_45_tl,
     )

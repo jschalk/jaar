@@ -125,7 +125,7 @@ def cellunit_add_json_file(
     fisc_mstr_dir: str,
     fisc_title: str,
     time_owner_name: str,
-    time_int: int,
+    deal_time: int,
     event_int: int,
     deal_ancestors: list[OwnerName] = None,
     quota: int = None,
@@ -133,7 +133,7 @@ def cellunit_add_json_file(
     penny: int = None,
 ):
     cell_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_title, time_owner_name, time_int, deal_ancestors
+        fisc_mstr_dir, fisc_title, time_owner_name, deal_time, deal_ancestors
     )
     x_cell = cellunit_shop(
         time_owner_name, deal_ancestors, event_int, celldepth, penny, quota

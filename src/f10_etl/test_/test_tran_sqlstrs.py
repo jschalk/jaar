@@ -9,7 +9,7 @@ from src.f00_instrument.db_toolbox import (
 )
 from src.f01_road.deal import fisc_title_str
 from src.f02_bud.bud_tool import budunit_str
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     event_int_str,
     face_name_str,
     get_bud_dimens,
@@ -53,6 +53,7 @@ from src.f10_etl.tran_sqlstrs import (
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
+    get_fisc_fu1_select_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -552,13 +553,13 @@ def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
             generated_dimen_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
-            # print(
-            #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
-            # )
-            # print(
-            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
-            # )
-            # print(f"""            {x_sqlstr=}""")
+            print(
+                f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
+            )
+            print(
+                f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            )
+            print(f"""            {x_sqlstr=}""")
             assert x_sqlstr == generated_dimen_sqlstr
 
 
@@ -619,10 +620,10 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             exclude_cols=x_exclude_cols,
         )
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = """fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, present_time, bridge"""
+        columns_header = """fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(present_time), MAX(bridge)
+SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge)
 FROM {tablename}_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title
@@ -783,8 +784,8 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
 
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
-    assert idea_dimen_combo_checked_count == 624
-    assert idea_stage2dimen_count == 99
+    assert idea_dimen_combo_checked_count == 680
+    assert idea_stage2dimen_count == 100
     assert IDEA_STAGEABLE_PUT_DIMENS == expected_idea_stagable_dimens
 
 
@@ -848,7 +849,7 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     }
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
-    assert idea_dimen_combo_checked_count == 624
+    assert idea_dimen_combo_checked_count == 680
     assert idea_stage2dimen_count == 10
     assert IDEA_STAGEABLE_DEL_DIMENS == expected_idea_stagable_dimens
 
@@ -859,7 +860,7 @@ def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
 CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
   fisc_title TEXT
 , event_int INTEGER
-, time_int INTEGER
+, agg_time INTEGER
 , error_message TEXT
 )
 ;
@@ -871,18 +872,18 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
-INSERT INTO fisc_event_time_agg (fisc_title, event_int, time_int)
-SELECT fisc_title, event_int, time_int
+INSERT INTO fisc_event_time_agg (fisc_title, event_int, agg_time)
+SELECT fisc_title, event_int, agg_time
 FROM (
-    SELECT fisc_title, event_int, time_int
+    SELECT fisc_title, event_int, tran_time as agg_time
     FROM fisc_cashbook_staging
-    GROUP BY fisc_title, event_int, time_int
+    GROUP BY fisc_title, event_int, tran_time
     UNION 
-    SELECT fisc_title, event_int, time_int
+    SELECT fisc_title, event_int, deal_time as agg_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, event_int, time_int
+    GROUP BY fisc_title, event_int, deal_time
 )
-ORDER BY fisc_title, event_int, time_int
+ORDER BY fisc_title, event_int, agg_time
 ;
 """
     # WHEN / THEN
@@ -893,20 +894,20 @@ def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = """
 WITH EventTimeOrdered AS (
-    SELECT fisc_title, event_int, time_int,
-           LAG(time_int) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_time_int
+    SELECT fisc_title, event_int, agg_time,
+           LAG(agg_time) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
 SET error_message = CASE 
-         WHEN EventTimeOrdered.prev_time_int > EventTimeOrdered.time_int
+         WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
     AND EventTimeOrdered.fisc_title = fisc_event_time_agg.fisc_title
-    AND EventTimeOrdered.time_int = fisc_event_time_agg.time_int
+    AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
     # WHEN / THEN
@@ -920,7 +921,7 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
   fisc_title TEXT
 , owner_name TEXT
 , event_int INTEGER
-, time_int INTEGER
+, deal_time INTEGER
 , error_message TEXT
 )
 ;
@@ -932,15 +933,69 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = """
-INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, time_int)
-SELECT fisc_title, owner_name, event_int, time_int
+INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, deal_time)
+SELECT fisc_title, owner_name, event_int, deal_time
 FROM (
-    SELECT fisc_title, owner_name, event_int, time_int
+    SELECT fisc_title, owner_name, event_int, deal_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, owner_name, event_int, time_int
+    GROUP BY fisc_title, owner_name, event_int, deal_time
 )
-ORDER BY fisc_title, owner_name, event_int, time_int
+ORDER BY fisc_title, owner_name, event_int, deal_time
 ;
 """
     # WHEN / THEN
     assert INSERT_FISC_OTE1_AGG_SQLSTR == expected_INSERT_sqlstr
+
+
+def test_get_fisc_fu1_select_sqlstrs_ReturnsObj_HasAllNeededKeys():
+    # ESTABLISH
+    a23_str = "accord23"
+
+    # WHEN
+    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(a23_str)
+
+    # THEN
+    assert fu1_select_sqlstrs
+    expected_fu1_select_dimens = set(get_fisc_dimens())
+    assert set(fu1_select_sqlstrs.keys()) == expected_fu1_select_dimens
+
+
+def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    a23_str = "accord23"
+
+    # WHEN
+    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_title=a23_str)
+
+    # THEN
+    fisccash_str = "fisc_cashbook"
+    fiscdeal_str = "fisc_dealunit"
+    fischour_str = "fisc_timeline_hour"
+    fiscmont_str = "fisc_timeline_month"
+    fiscweek_str = "fisc_timeline_weekday"
+    fiscoffi_str = "fisc_timeoffi"
+    fiscunit_str = "fiscunit"
+    gen_fisccash_sqlstr = fu1_select_sqlstrs.get(fisccash_str)
+    gen_fiscdeal_sqlstr = fu1_select_sqlstrs.get(fiscdeal_str)
+    gen_fischour_sqlstr = fu1_select_sqlstrs.get(fischour_str)
+    gen_fiscmont_sqlstr = fu1_select_sqlstrs.get(fiscmont_str)
+    gen_fiscweek_sqlstr = fu1_select_sqlstrs.get(fiscweek_str)
+    gen_fiscoffi_sqlstr = fu1_select_sqlstrs.get(fiscoffi_str)
+    gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str)
+
+    expected_fisccash_sqlstr = f"SELECT fisc_title, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscdeal_sqlstr = f"SELECT fisc_title, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_title = '{a23_str}'"
+    expected_fischour_sqlstr = f"SELECT fisc_title, cumlative_minute, hour_title FROM fisc_timeline_hour_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscmont_sqlstr = f"SELECT fisc_title, cumlative_day, month_title FROM fisc_timeline_month_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscweek_sqlstr = f"SELECT fisc_title, weekday_order, weekday_title FROM fisc_timeline_weekday_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscoffi_sqlstr = f"SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = '{a23_str}'"
+    expected_fiscunit_sqlstr = f"SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge FROM fiscunit_agg WHERE fisc_title = '{a23_str}'"
+
+    assert gen_fisccash_sqlstr == expected_fisccash_sqlstr
+    assert gen_fiscdeal_sqlstr == expected_fiscdeal_sqlstr
+    assert gen_fischour_sqlstr == expected_fischour_sqlstr
+    assert gen_fiscmont_sqlstr == expected_fiscmont_sqlstr
+    assert gen_fiscweek_sqlstr == expected_fiscweek_sqlstr
+    assert gen_fiscoffi_sqlstr == expected_fiscoffi_sqlstr
+    assert gen_fiscunit_sqlstr == expected_fiscunit_sqlstr

@@ -17,26 +17,26 @@ def test_TranUnit_Exists():
     assert x_tranunit
     assert not x_tranunit.src
     assert not x_tranunit.dst
-    assert not x_tranunit.time_int
+    assert not x_tranunit.tran_time
     assert not x_tranunit.amount
 
 
 def test_tranunit_shop_WithParametersReturnsObj():
     # ESTABLISH
     accord23_str = "accord23"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_fundnum = -45
     sue_str = "Sue"
     yao_str = "Yao"
 
     # WHEN
-    x_tranunit = tranunit_shop(sue_str, yao_str, t55_time_int, t55_fundnum)
+    x_tranunit = tranunit_shop(sue_str, yao_str, t55_tran_time, t55_fundnum)
 
     # THEN
     assert x_tranunit
     assert x_tranunit.src == sue_str
     assert x_tranunit.dst == yao_str
-    assert x_tranunit.time_int == t55_time_int
+    assert x_tranunit.tran_time == t55_tran_time
     assert x_tranunit.amount == t55_fundnum
 
 
@@ -150,7 +150,7 @@ def test_TranBook_set_tranunit_SetsAttr():
     }
 
 
-def test_TranBook_set_tranunit_SetsAttrWithBlocktime_int():
+def test_TranBook_set_tranunit_SetsAttrWithBlocktran_time():
     # ESTABLISH
     accord23_str = "accord23"
     x_tranbook = tranbook_shop(accord23_str)
@@ -162,15 +162,15 @@ def test_TranBook_set_tranunit_SetsAttrWithBlocktime_int():
     assert x_tranbook.tranunits == {}
 
     # WHEN
-    x_blocked_time_ints = {44}
-    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_time_ints)
+    x_blocked_tran_times = {44}
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_tran_times)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
 
 
-def test_TranBook_set_tranunit_SetsAttrWithBlocktime_int_RaisesError():
+def test_TranBook_set_tranunit_SetsAttrWithBlocktran_time_RaisesError():
     # ESTABLISH
     accord23_str = "accord23"
     x_tranbook = tranbook_shop(accord23_str)
@@ -178,20 +178,20 @@ def test_TranBook_set_tranunit_SetsAttrWithBlocktime_int_RaisesError():
     yao_str = "Yao"
     t55_t = 5505
     t55_yao_amount = -55
-    x_blocked_time_ints = {t55_t}
+    x_blocked_tran_times = {t55_t}
     sue_yao_t55_tranunit = tranunit_shop(sue_str, yao_str, t55_t, t55_yao_amount)
     assert x_tranbook.tranunits == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_time_ints)
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, x_blocked_tran_times)
     exception_str = (
-        f"Cannot set tranunit for time_int={t55_t}, timelinepoint is blocked"
+        f"Cannot set tranunit for tran_time={t55_t}, timelinepoint is blocked"
     )
     assert str(excinfo.value) == exception_str
 
 
-def test_TranBook_set_tranunit_SetsAttrWithCurrenttime_int():
+def test_TranBook_set_tranunit_SetsAttrWithCurrenttran_time():
     # ESTABLISH
     accord23_str = "accord23"
     x_tranbook = tranbook_shop(accord23_str)
@@ -203,15 +203,15 @@ def test_TranBook_set_tranunit_SetsAttrWithCurrenttime_int():
     assert x_tranbook.tranunits == {}
 
     # WHEN
-    x_present_time = 8808
-    x_tranbook.set_tranunit(sue_yao_t55_tranunit, present_time=x_present_time)
+    x_offi_time_max = 8808
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, _offi_time_max=x_offi_time_max)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_t: t55_yao_amount}}}
 
 
-def test_TranBook_set_tranunit_SetsAttrWithCurrenttime_int_RaisesError():
+def test_TranBook_set_tranunit_SetsAttrWithCurrenttran_time_RaisesError():
     # ESTABLISH
     accord23_str = "accord23"
     x_tranbook = tranbook_shop(accord23_str)
@@ -224,14 +224,14 @@ def test_TranBook_set_tranunit_SetsAttrWithCurrenttime_int_RaisesError():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_tranbook.set_tranunit(sue_yao_t55_tranunit, present_time=t55_t)
-    exception_str = f"Cannot set tranunit for time_int={t55_t}, timelinepoint is greater than current time={t55_t}"
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, _offi_time_max=t55_t)
+    exception_str = f"Cannot set tranunit for tran_time={t55_t}, timelinepoint is greater than current time={t55_t}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_tranbook.set_tranunit(sue_yao_t55_tranunit, present_time=33)
-    exception_str = f"Cannot set tranunit for time_int={t55_t}, timelinepoint is greater than current time=33"
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, _offi_time_max=33)
+    exception_str = f"Cannot set tranunit for tran_time={t55_t}, timelinepoint is greater than current time=33"
     assert str(excinfo.value) == exception_str
 
 
@@ -244,56 +244,56 @@ def test_TranBook_add_tranunit_SetsAttr():
     # WHEN
     sue_str = "Sue"
     yao_str = "Yao"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
-    x_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
+    x_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
 
     # THEN
     assert x_tranbook.tranunits != {}
-    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_time_int: t55_yao_amount}}}
+    assert x_tranbook.tranunits == {sue_str: {yao_str: {t55_tran_time: t55_yao_amount}}}
 
     # WHEN
     bob_str = "Bob"
     t55_bob_amount = 600
-    x_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    x_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         }
     }
 
     # WHEN
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    x_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
+    x_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
 
     # THEN
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         }
     }
 
     # WHEN
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_yao_amount = -77
-    x_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
+    x_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
     # THEN
     print(f"{x_tranbook.tranunits=}")
     assert x_tranbook.tranunits != {}
     assert x_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_time_int: t77_yao_amount}},
+        yao_str: {yao_str: {t77_tran_time: t77_yao_amount}},
     }
 
 
@@ -333,7 +333,7 @@ def test_TranBook_get_tranunit_ReturnsObj():
     assert sue_yao_t55_tranunit
     assert sue_yao_t55_tranunit.src == sue_str
     assert sue_yao_t55_tranunit.dst == yao_str
-    assert sue_yao_t55_tranunit.time_int == t55_t
+    assert sue_yao_t55_tranunit.tran_time == t55_t
     assert sue_yao_t55_tranunit.amount == t55_yao_amount
 
     # WHEN / THEN
@@ -378,31 +378,31 @@ def test_TranBook_del_tranunit_SetsAttr():
     assert accord23_tranbook.tranunit_exists(sue_str, yao_str, t55_t) is False
 
 
-def test_TranBook_get_time_ints_ReturnsObj():
+def test_TranBook_get_tran_times_ReturnsObj():
     # ESTABLISH
     accord23_str = "accord23"
     accord23_tranbook = tranbook_shop(accord23_str)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_bob_amount = -77
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t77_time_int, t77_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t77_tran_time, t77_bob_amount)
 
     # WHEN
-    accord23_time_ints = accord23_tranbook.get_time_ints()
+    accord23_tran_times = accord23_tranbook.get_tran_times()
 
     # THEN
-    assert accord23_time_ints
-    assert len(accord23_time_ints)
-    assert accord23_time_ints == {t55_time_int, t66_time_int, t77_time_int}
+    assert accord23_tran_times
+    assert len(accord23_tran_times)
+    assert accord23_tran_times == {t55_tran_time, t66_tran_time, t77_tran_time}
 
 
 def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
@@ -411,11 +411,11 @@ def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
     accord23_tranbook = tranbook_shop(accord23_str)
     sue_str = "Sue"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_bob_amount = 600
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
     assert accord23_tranbook.tranunits == {
-        sue_str: {bob_str: {t55_time_int: t55_bob_amount}}
+        sue_str: {bob_str: {t55_tran_time: t55_bob_amount}}
     }
 
     # WHEN
@@ -433,18 +433,18 @@ def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario1():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
     assert accord23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         }
     }
 
@@ -464,11 +464,11 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario0():
     accord23_tranbook = tranbook_shop(accord23_str)
     sue_str = "Sue"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_bob_amount = 600
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
     assert accord23_tranbook.tranunits == {
-        sue_str: {bob_str: {t55_time_int: t55_bob_amount}}
+        sue_str: {bob_str: {t55_tran_time: t55_bob_amount}}
     }
 
     # WHEN
@@ -486,24 +486,24 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario1():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_yao_amount = -77
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
 
-    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
+    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     assert accord23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_time_int: t77_yao_amount}},
+        yao_str: {yao_str: {t77_tran_time: t77_yao_amount}},
     }
 
     # WHEN
@@ -524,24 +524,24 @@ def test_TranBook_get_accts_net_array_ReturnsObj():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_yao_amount = -77
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
 
-    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
+    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     assert accord23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_time_int: t77_yao_amount}},
+        yao_str: {yao_str: {t77_tran_time: t77_yao_amount}},
     }
 
     # WHEN
@@ -571,24 +571,24 @@ def test_TranBook_get_accts_csv_ReturnsObj():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_yao_amount = -77
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
 
-    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
+    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     assert accord23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_time_int: t77_yao_amount}},
+        yao_str: {yao_str: {t77_tran_time: t77_yao_amount}},
     }
 
     # WHEN
@@ -637,23 +637,23 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_yao_amount = -77
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
-    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
+    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     assert accord23_tranbook.tranunits == {
         sue_str: {
-            yao_str: {t55_time_int: t55_yao_amount, t66_time_int: t66_yao_amount},
-            bob_str: {t55_time_int: t55_bob_amount},
+            yao_str: {t55_tran_time: t55_yao_amount, t66_tran_time: t66_yao_amount},
+            bob_str: {t55_tran_time: t55_bob_amount},
         },
-        yao_str: {yao_str: {t77_time_int: t77_yao_amount}},
+        yao_str: {yao_str: {t77_tran_time: t77_yao_amount}},
     }
     accord23_dict = accord23_tranbook.get_dict()
 
@@ -674,34 +674,34 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
-    t55_time_int = 5505
+    t55_tran_time = 5505
     t55_yao_amount = -55
     t55_bob_amount = 600
-    t66_time_int = 6606
+    t66_tran_time = 6606
     t66_yao_amount = -66
-    t77_time_int = 7707
+    t77_tran_time = 7707
     t77_yao_amount = -77
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_time_int, t55_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_time_int, t66_yao_amount)
-    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_time_int, t55_bob_amount)
-    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_time_int, t77_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t55_tran_time, t55_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, yao_str, t66_tran_time, t66_yao_amount)
+    accord23_tranbook.add_tranunit(sue_str, bob_str, t55_tran_time, t55_bob_amount)
+    accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
-    str_time_int_accord23_dict = {
+    str_tran_time_accord23_dict = {
         "fisc_title": accord23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {
-                    str(t55_time_int): t55_yao_amount,
-                    str(t66_time_int): t66_yao_amount,
+                    str(t55_tran_time): t55_yao_amount,
+                    str(t66_tran_time): t66_yao_amount,
                 },
-                bob_str: {str(t55_time_int): t55_bob_amount},
+                bob_str: {str(t55_tran_time): t55_bob_amount},
             },
-            yao_str: {yao_str: {str(t77_time_int): t77_yao_amount}},
+            yao_str: {yao_str: {str(t77_tran_time): t77_yao_amount}},
         },
     }
 
     # WHEN
-    generated_tranbook = get_tranbook_from_dict(str_time_int_accord23_dict)
+    generated_tranbook = get_tranbook_from_dict(str_tran_time_accord23_dict)
 
     # THEN
     assert generated_tranbook
@@ -712,10 +712,10 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 
 # def test_get_tranbook_from_json_ReturnsObj():
 #     # ESTABLISH
-#     x_time_int = 4
+#     x_tran_time = 4
 #     x_amount = 55
 #     x_deal_nets = {"Sue": -57}
-#     x_tranbook = tranbook_shop(x_time_int, x_amount, x_deal_nets)
+#     x_tranbook = tranbook_shop(x_tran_time, x_amount, x_deal_nets)
 #     x_json = x_tranbook.get_json()
 
 #     # WHEN
@@ -723,7 +723,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 
 #     # THEN
 #     assert x_tranbook
-#     assert x_tranbook.time_int == x_time_int
+#     assert x_tranbook.tran_time == x_tran_time
 #     assert x_tranbook.amount == x_amount
 #     assert x_tranbook._deal_nets == x_deal_nets
 #     assert x_tranbook == x_tranbook

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import save_file, open_json, count_dirs_files
 from src.f01_road.deal import celldepth_str, quota_str, DEFAULT_CELLDEPTH
-from src.f04_gift.atom_config import event_int_str, penny_str
+from src.f04_stand.atom_config import event_int_str, penny_str
 from src.f05_listen.cell import deal_owner_name_str, ancestors_str
 from src.f05_listen.hub_path import (
     create_fisc_json_path,
@@ -124,7 +124,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEve
     assert cell_dict.get(quota_str()) == deal1_quota
 
 
-def test_FiscUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_time_int_event_int(
+def test_FiscUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_deal_time_event_int(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f00_instrument.db_toolbox import db_table_exists
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_gift.atom_config import face_name_str, acct_name_str, event_int_str
+from src.f04_stand.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f10_etl.fisc_etl_tool import FiscPrimeObjsRef
 from src.f11_world.world import worldunit_shop
 from src.f11_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
@@ -54,7 +54,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -66,7 +66,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
-            None,  # present_time
+            # None,  # _offi_time_max
             None,  # bridge
             None,  # c400_number
             None,  # yr1_jan1_offset
@@ -107,13 +107,13 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
     br00002_str = "br00002"
     br00001_csv_filename = f"{br00001_str}.csv"
     br00002_csv_filename = f"{br00002_str}.csv"
-    br00001_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,time_int,quota,celldepth
+    br00001_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,deal_time,quota,celldepth
 {sue_inx},{event3},{accord23_str},{bob_inx},{timepoint800},{quota_t8},{x_celldepth}
 {sue_inx},{event3},{accord23_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
 {sue_inx},{event3},{accord45_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
 {sue_inx},{event7},{accord45_str},{yao_inx},{timepoint900},{quota_t9},{x_celldepth}
 """
-    br00002_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,acct_name,time_int,amount
+    br00002_csv_str = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,acct_name,tran_time,amount
 {sue_inx},{event2},{accord23_str},{bob_inx},{sue_inx},{timepoint22},{amount_t22}
 {sue_inx},{event2},{accord23_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
 {sue_inx},{event2},{accord45_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
@@ -137,7 +137,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
         # cursor.execute(f"SELECT * FROM {fiscunit_stage_tablename};")
         # fiscunit_stage_rows = cursor.fetchall()
         # assert len(fiscunit_stage_rows) == 4
-        event_time_select_sql = f"""SELECT fisc_title, event_int, time_int, error_message 
+        event_time_select_sql = f"""SELECT fisc_title, event_int, agg_time, error_message 
 FROM {event_time_tablename}
 ;
 """

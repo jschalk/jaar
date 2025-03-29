@@ -9,7 +9,7 @@ from src.f03_chrono.chrono import (
     timeline_config_shop,
     timelineunit_shop,
 )
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     acct_name_str,
     face_name_str,
     fund_coin_str,
@@ -21,7 +21,7 @@ from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f07_fisc.fisc_config import fiscunit_str, present_time_str
+from src.f07_fisc.fisc_config import fiscunit_str
 from src.f09_idea.idea_db_tool import get_sheet_names
 from src.f09_idea.idea_csv_tool import (
     create_init_stance_idea_brick_csv_strs,

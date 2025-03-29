@@ -8,7 +8,7 @@ from src.f03_chrono.chrono import (
     timeline_config_shop,
     timelineunit_shop,
 )
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     acct_name_str,
     face_name_str,
     fund_coin_str,
@@ -20,7 +20,7 @@ from src.f07_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f07_fisc.fisc_config import fiscunit_str, present_time_str
+from src.f07_fisc.fisc_config import fiscunit_str
 from src.f10_etl.fisc_etl_tool import (
     FiscPrimeColumnsRef,
     FiscPrimeObjsRef,
@@ -40,8 +40,8 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTitle(
     x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
     x_cols = FiscPrimeColumnsRef()
     fiscunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
-{accord23_str},,,,,,,,,
-{accord45_str},,,,,,,,,
+{accord23_str},,,,,,,,
+{accord45_str},,,,,,,,
 """
     save_file(fisc_mstr_dir, x_fisc.unit_agg_csv_filename, fiscunit_agg_csv_str)
     save_file(fisc_mstr_dir, x_fisc.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
@@ -49,6 +49,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTitle(
     save_file(fisc_mstr_dir, x_fisc.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fisc_mstr_dir, x_fisc.offi_agg_csv_filename, x_cols.offi_agg_empty_csv)
     accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
     accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)
     assert os_path_exists(accord23_json_path) is False
@@ -78,7 +79,6 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     a45_fund_coin = 3
     a45_penny = 5
     a45_respect_bit = 7
-    a45_present_time = 11
     a45_bridge = "/"
     a45_c400_number = 88
     a45_yr1_jan1_offset = 501
@@ -86,8 +86,8 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     a45_timeline_title = "a45_timeline"
     print(f"{x_cols.unit_agg_csv_header=}")
     fiscunit_agg_csv_str = f"""{x_cols.unit_agg_csv_header}
-{accord23_str},,,,,,,,,
-{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_present_time},{a45_bridge}
+{accord23_str},,,,,,,,
+{accord45_str},{a45_timeline_title},{a45_c400_number},{a45_yr1_jan1_offset},{a45_monthday_distortion},{a45_fund_coin},{a45_penny},{a45_respect_bit},{a45_bridge}
 """
     save_file(fisc_mstr_dir, x_fisc.unit_agg_csv_filename, fiscunit_agg_csv_str)
     save_file(fisc_mstr_dir, x_fisc.deal_agg_csv_filename, x_cols.deal_agg_empty_csv)
@@ -95,6 +95,7 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
     save_file(fisc_mstr_dir, x_fisc.hour_agg_csv_filename, x_cols.hour_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.mont_agg_csv_filename, x_cols.mont_agg_empty_csv)
     save_file(fisc_mstr_dir, x_fisc.week_agg_csv_filename, x_cols.week_agg_empty_csv)
+    save_file(fisc_mstr_dir, x_fisc.offi_agg_csv_filename, x_cols.offi_agg_empty_csv)
 
     accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
     accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)
@@ -129,7 +130,6 @@ def test_etl_fisc_csvs_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
         fund_coin=a45_fund_coin,
         penny=a45_penny,
         respect_bit=a45_respect_bit,
-        present_time=a45_present_time,
         bridge=a45_bridge,
         timeline=expected_45_tl,
     )

@@ -38,7 +38,7 @@ def test_create_empty_bud_ReturnsObj():
     assert yao_empty_job.owner_name != yao_voice.owner_name
     assert yao_empty_job.owner_name == zia_str
     assert yao_empty_job.fisc_title == yao_voice.fisc_title
-    assert yao_empty_job.last_gift_id is None
+    assert yao_empty_job.last_stand_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
     assert yao_empty_job.bridge == yao_voice.bridge
     assert yao_empty_job.fund_pool == yao_voice.fund_pool
@@ -81,7 +81,7 @@ def test_create_listen_basis_ReturnsObj():
     # THEN
     assert yao_basis_job.owner_name == yao_duty.owner_name
     assert yao_basis_job.fisc_title == yao_duty.fisc_title
-    assert yao_basis_job.last_gift_id == yao_duty.last_gift_id
+    assert yao_basis_job.last_stand_id == yao_duty.last_stand_id
     assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_job.bridge == yao_duty.bridge
     assert yao_basis_job.fund_pool == yao_duty.fund_pool
@@ -112,12 +112,12 @@ def test_get_default_forecast_bud_ReturnsObj():
     sue_acct_pool = 800
     casa_str = "casa"
     bob_str = "Bob"
-    last_gift_id = 7
+    last_stand_id = 7
     sue_max_tree_traverse = 9
     sue_budunit = budunit_shop(
         sue_str, blue_str, slash_str, x_fund_pool, x_fund_coin, x_respect_bit
     )
-    sue_budunit.set_last_gift_id(last_gift_id)
+    sue_budunit.set_last_stand_id(last_stand_id)
     sue_budunit.add_acctunit(bob_str, 3, 4)
     bob_acctunit = sue_budunit.get_acct(bob_str)
     bob_acctunit.add_membership(f"{slash_str}swimmers")

@@ -6,7 +6,7 @@ from src.f02_bud.bud_tool import (
     bud_itemunit_str,
     bud_item_factunit_str,
 )
-from src.f04_gift.atom_config import (
+from src.f04_stand.atom_config import (
     atom_insert,
     atom_update,
     atom_delete,
@@ -16,33 +16,33 @@ from src.f04_gift.atom_config import (
     fopen_str,
     fnigh_str,
 )
-from src.f04_gift.atom import atomunit_shop, AtomUnit
-from src.f04_gift.delta import buddelta_shop, BudDelta
+from src.f04_stand.atom import budatom_shop, BudAtom
+from src.f04_stand.delta import buddelta_shop, BudDelta
 
 
-def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> AtomUnit:
+def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> BudAtom:
     fisc_title = get_fisc_title_if_None(fisc_title)
     sports_str = "sports"
     x_dimen = bud_itemunit_str()
-    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
-    insert_itemunit_atomunit.set_jkey(item_title_str(), sports_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), fisc_title)
-    return insert_itemunit_atomunit
+    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_itemunit_budatom.set_jkey(item_title_str(), sports_str)
+    insert_itemunit_budatom.set_jkey(parent_road_str(), fisc_title)
+    return insert_itemunit_budatom
 
 
-def get_atom_example_itemunit_ball(fisc_title: FiscTitle = None) -> AtomUnit:
+def get_atom_example_itemunit_ball(fisc_title: FiscTitle = None) -> BudAtom:
     fisc_title = get_fisc_title_if_None(fisc_title)
     sports_str = "sports"
     sports_road = create_road(fisc_title, sports_str)
     ball_str = "basketball"
     x_dimen = bud_itemunit_str()
-    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
-    insert_itemunit_atomunit.set_jkey(item_title_str(), ball_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
-    return insert_itemunit_atomunit
+    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_itemunit_budatom.set_jkey(item_title_str(), ball_str)
+    insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)
+    return insert_itemunit_budatom
 
 
-def get_atom_example_itemunit_knee(fisc_title: FiscTitle = None) -> AtomUnit:
+def get_atom_example_itemunit_knee(fisc_title: FiscTitle = None) -> BudAtom:
     fisc_title = get_fisc_title_if_None(fisc_title)
     sports_str = "sports"
     sports_road = create_road(fisc_title, sports_str)
@@ -52,15 +52,15 @@ def get_atom_example_itemunit_knee(fisc_title: FiscTitle = None) -> AtomUnit:
     x_dimen = bud_itemunit_str()
     begin_str = "begin"
     close_str = "close"
-    insert_itemunit_atomunit = atomunit_shop(x_dimen, atom_insert())
-    insert_itemunit_atomunit.set_jkey(item_title_str(), knee_str)
-    insert_itemunit_atomunit.set_jkey(parent_road_str(), sports_road)
-    insert_itemunit_atomunit.set_jvalue(begin_str, knee_begin)
-    insert_itemunit_atomunit.set_jvalue(close_str, knee_close)
-    return insert_itemunit_atomunit
+    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_itemunit_budatom.set_jkey(item_title_str(), knee_str)
+    insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)
+    insert_itemunit_budatom.set_jvalue(begin_str, knee_begin)
+    insert_itemunit_budatom.set_jvalue(close_str, knee_close)
+    return insert_itemunit_budatom
 
 
-def get_atom_example_factunit_knee(fisc_title: FiscTitle = None) -> AtomUnit:
+def get_atom_example_factunit_knee(fisc_title: FiscTitle = None) -> BudAtom:
     fisc_title = get_fisc_title_if_None(fisc_title)
     sports_str = "sports"
     sports_road = create_road(fisc_title, sports_str)
@@ -73,25 +73,25 @@ def get_atom_example_factunit_knee(fisc_title: FiscTitle = None) -> AtomUnit:
     x_dimen = bud_item_factunit_str()
     road_str = "road"
     base_str = "base"
-    insert_factunit_atomunit = atomunit_shop(x_dimen, atom_insert())
-    insert_factunit_atomunit.set_jkey(road_str, ball_road)
-    insert_factunit_atomunit.set_jkey(base_str, knee_road)
-    insert_factunit_atomunit.set_jvalue(fopen_str(), knee_fopen)
-    insert_factunit_atomunit.set_jvalue(fnigh_str(), knee_fnigh)
-    return insert_factunit_atomunit
+    insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_factunit_budatom.set_jkey(road_str, ball_road)
+    insert_factunit_budatom.set_jkey(base_str, knee_road)
+    insert_factunit_budatom.set_jvalue(fopen_str(), knee_fopen)
+    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_fnigh)
+    return insert_factunit_budatom
 
 
 def get_buddelta_sue_example() -> BudDelta:
     sue_buddelta = buddelta_shop()
 
-    pool_atomunit = atomunit_shop(budunit_str(), atom_update())
+    pool_budatom = budatom_shop(budunit_str(), atom_update())
     pool_attribute = "credor_respect"
-    pool_atomunit.set_jvalue(pool_attribute, 77)
-    sue_buddelta.set_atomunit(pool_atomunit)
+    pool_budatom.set_jvalue(pool_attribute, 77)
+    sue_buddelta.set_budatom(pool_budatom)
 
     dimen = bud_acctunit_str()
     sue_str = "Sue"
-    sue_atomunit = atomunit_shop(dimen, atom_delete())
-    sue_atomunit.set_jkey(acct_name_str(), sue_str)
-    sue_buddelta.set_atomunit(sue_atomunit)
+    sue_budatom = budatom_shop(dimen, atom_delete())
+    sue_budatom.set_jkey(acct_name_str(), sue_str)
+    sue_buddelta.set_budatom(sue_budatom)
     return sue_buddelta
