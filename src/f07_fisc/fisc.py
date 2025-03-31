@@ -489,13 +489,20 @@ def _get_brokerunits_from_dict(brokerunits_dict: dict) -> dict[OwnerName, Broker
 
 def get_from_dict(fisc_dict: dict) -> FiscUnit:
     x_fisc_title = fisc_dict.get("fisc_title")
-    x_fisc = fiscunit_shop(x_fisc_title, None)
-    x_fisc.timeline = timelineunit_shop(fisc_dict.get("timeline"))
-    x_fisc.offi_times = set(fisc_dict.get("offi_times"))
-    x_fisc.bridge = fisc_dict.get("bridge")
-    x_fisc.fund_coin = fisc_dict.get("fund_coin")
-    x_fisc.respect_bit = fisc_dict.get("respect_bit")
-    x_fisc.penny = fisc_dict.get("penny")
+    x_fisc = fiscunit_shop(
+        fisc_title=x_fisc_title,
+        fisc_mstr_dir=None,
+        offi_times=set(fisc_dict.get("offi_times")),
+        bridge=fisc_dict.get("bridge"),
+        fund_coin=fisc_dict.get("fund_coin"),
+        respect_bit=fisc_dict.get("respect_bit"),
+        penny=fisc_dict.get("penny"),
+    )
+    fisc_dict_timeline_value = fisc_dict.get("timeline")
+    if fisc_dict_timeline_value:
+        x_fisc.timeline = timelineunit_shop(fisc_dict_timeline_value)
+    else:
+        x_fisc.timeline = timelineunit_shop(None)
     x_fisc.brokerunits = _get_brokerunits_from_dict(fisc_dict.get("brokerunits"))
     x_fisc.cashbook = get_tranbook_from_dict(fisc_dict.get("cashbook"))
     return x_fisc

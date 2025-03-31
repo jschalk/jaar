@@ -8,6 +8,7 @@ from src.f00_instrument.db_toolbox import (
     is_stageable,
 )
 from src.f01_road.deal import fisc_title_str
+from src.f02_bud.bud import budunit_shop, get_from_dict as budunit_get_from_dict
 from src.f02_bud.bud_tool import budunit_str
 from src.f04_stand.atom_config import (
     event_int_str,
@@ -16,7 +17,13 @@ from src.f04_stand.atom_config import (
     get_delete_key_name,
 )
 from src.f07_fisc.fisc import fiscunit_shop, get_from_dict as fiscunit_get_from_dict
-from src.f07_fisc.fisc_config import fiscunit_str, get_fisc_dimens
+from src.f07_fisc.fisc_config import (
+    fiscunit_str,
+    get_fisc_dimens,
+    cashbook_str,
+    brokerunits_str,
+    timeline_str,
+)
 from src.f09_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
@@ -55,11 +62,11 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.f10_etl.db2obj_tool import get_fiscunit_dict_from_db
+from src.f10_etl.db2obj_tool import get_fisc_dict_from_db
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     a23_timeline_title = "timeline88"
@@ -100,7 +107,7 @@ VALUES (
         cursor.execute(fiscunit_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     assert a23_dict
@@ -119,7 +126,7 @@ VALUES (
     assert a23_dict.get("bridge") == a23_bridge
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario1():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     with sqlite3_connect(":memory:") as conn:
@@ -131,7 +138,7 @@ def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario1():
         cursor.execute(fiscunit_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     assert a23_dict
@@ -141,9 +148,16 @@ def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario1():
     assert a23_dict.get("penny") is None
     assert a23_dict.get("respect_bit") is None
     assert a23_dict.get("bridge") is None
+    assert set(a23_dict.keys()) == {
+        fisc_title_str(),
+        "offi_times",
+        timeline_str(),
+        cashbook_str(),
+        brokerunits_str(),
+    }
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fisccash_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fisccash_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -164,7 +178,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_cashbook_dict = a23_dict.get("cashbook")
@@ -179,7 +193,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     assert a23_trans_bob_sue_dict.get(tp55) == bob_sue_tp55_amount
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fisccash_Attrs_Scenario1():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fisccash_Attrs_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     a45_str = "accord45"
@@ -204,7 +218,7 @@ VALUES
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_cashbook_dict = a23_dict.get("cashbook")
@@ -219,7 +233,7 @@ VALUES
     assert a23_trans_bob_sue_dict == {tp55: a23_bob_sue_tp55_amount}
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscdeal_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fiscdeal_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -240,7 +254,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_brokerunit_dict = a23_dict.get("brokerunits")
@@ -260,7 +274,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     assert a23_brokerunit_bob_tp55_dict == expected_a23_brokerunit_bob_tp55_dict
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     hour3_min = 300
@@ -283,7 +297,7 @@ VALUES
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_timeline_dict = a23_dict.get("timeline")
@@ -294,7 +308,7 @@ VALUES
     assert a23_hours_config_dict == [[hour3_title, hour3_min], [hour4_title, hour4_min]]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscmont_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fiscmont_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     day111_min = 111
@@ -317,7 +331,7 @@ VALUES
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_timeline_dict = a23_dict.get("timeline")
@@ -329,7 +343,7 @@ VALUES
     ]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscweek_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fiscweek_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     ana_order = 1
@@ -352,7 +366,7 @@ VALUES
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_timeline_dict = a23_dict.get("timeline")
@@ -361,7 +375,7 @@ VALUES
     assert a23_weekdays_config_dict == [ana_title, bee_title]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fiscoffi_Attrs_Scenario0():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fiscoffi_Attrs_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
     a23_str = "accord23"
@@ -383,7 +397,7 @@ VALUES
         cursor.execute(fisccash_insert_sqlstr)
 
         # WHEN
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # THEN
     a23_offi_times_config_dict = a23_dict.get("offi_times")
@@ -391,7 +405,7 @@ VALUES
     assert a23_offi_times_config_dict == [offi_time5, offi_time7]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario0_fiscunit():
+def test_get_fisc_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario0_fiscunit():
     # ESTABLISH
     a23_str = "accord23"
     a23_timeline_title = "timeline88"
@@ -430,7 +444,7 @@ VALUES (
 )
 ;"""
         cursor.execute(fiscunit_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)
@@ -446,7 +460,7 @@ VALUES (
     assert a23_fiscunit.bridge == a23_bridge
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario1_fisccash():
+def test_get_fisc_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario1_fisccash():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -465,7 +479,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
         cursor.execute(fisccash_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)
@@ -477,7 +491,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     assert bob_tranunit == {sue_str: {tp55: bob_sue_tp55_amount}}
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario2_fiscdeal():
+def test_get_fisc_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario2_fiscdeal():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -496,7 +510,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
 ;
 """
         cursor.execute(fisccash_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)
@@ -511,7 +525,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     assert a23_bob_55_deal.celldepth == bob_tp55_celldepth
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario3_fischour():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario3_fischour():
     # ESTABLISH
     a23_str = "accord23"
     hour3_min = 300
@@ -532,7 +546,7 @@ VALUES
 ;
 """
         cursor.execute(fisccash_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)
@@ -544,7 +558,7 @@ VALUES
     ]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario4_fiscmont():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario4_fiscmont():
     # ESTABLISH
     a23_str = "accord23"
     day111_min = 111
@@ -565,7 +579,7 @@ VALUES
 ;
 """
         cursor.execute(fisccash_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)
@@ -577,7 +591,7 @@ VALUES
     ]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario5_fiscweek():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario5_fiscweek():
     # ESTABLISH
     a23_str = "accord23"
     ana_order = 1
@@ -598,7 +612,7 @@ VALUES
 ;
 """
         cursor.execute(fisccash_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)
@@ -607,7 +621,7 @@ VALUES
     assert a23_fiscunit.timeline.weekdays_config == [ana_title, bee_title]
 
 
-def test_get_fiscunit_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario5_fiscweek():
+def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario5_fiscweek():
     # sourcery skip: extract-method
     # ESTABLISH
     a23_str = "accord23"
@@ -627,7 +641,7 @@ VALUES
 ;
 """
         cursor.execute(fisccash_insert_sqlstr)
-        a23_dict = get_fiscunit_dict_from_db(cursor, a23_str)
+        a23_dict = get_fisc_dict_from_db(cursor, a23_str)
 
     # WHEN
     a23_fiscunit = fiscunit_get_from_dict(a23_dict)

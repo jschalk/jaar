@@ -40,7 +40,7 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateStagingFiles(
     fizz_world.inz_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         fizz_world.idea_staging_to_fisc_tables(cursor)
         assert os_path_exists(fisc_objs.unit_stage_csv_path) is False
 
@@ -87,7 +87,7 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
     fizz_world.inz_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         fizz_world.idea_staging_to_fisc_tables(cursor)
         fiz_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         assert os_path_exists(fiz_objs.unit_agg_csv_path) is False

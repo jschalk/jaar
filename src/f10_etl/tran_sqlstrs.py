@@ -998,3 +998,30 @@ def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:
         "fisc_timeline_weekday": f"{FISCWEEK_FU1_SELECT_SQLSTR}'{fisc_title}'",
         "fisc_timeoffi": f"{FISCOFFI_FU1_SELECT_SQLSTR}'{fisc_title}'",
     }
+
+
+# CREATE_BUDMEMB_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, acct_name, group_label, credit_vote, debtit_vote FROM bud_acct_membership_put_agg"""
+# CREATE_BUDACCT_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, acct_name, credit_belief, debtit_belief FROM bud_acctunit_put_agg"""
+# CREATE_BUDAWAR_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, awardee_tag, give_force, take_force FROM bud_item_awardlink_put_agg"""
+# CREATE_BUDFACT_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, base, pick, fopen, fnigh FROM bud_item_factunit_put_agg"""
+# CREATE_BUDHEAL_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, healer_name FROM bud_item_healerlink_put_agg"""
+# CREATE_BUDPREM_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, base, need, nigh, open, divisor FROM bud_item_reason_premiseunit_put_agg"""
+# CREATE_BUDREAS_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, base, base_item_active_requisite FROM bud_item_reasonunit_put_agg"""
+# CREATE_BUDTEAM_PUT_AGG_SQLSTR =     """SELECT fisc_title, owner_name, road, team_tag FROM bud_item_teamlink_put_agg"""
+# CREATE_BUDITEM_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool FROM bud_itemunit_put_agg"""
+# CREATE_BUDUNIT_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit FROM budunit_put_agg"""
+
+
+# def get_bud_bu1_select_sqlstrs(fisc_title: str, owner_name: str) -> dict[str, str]:
+#     return {
+#         "budunit": "huh",
+#         "bud_acctunit": "huh",
+#         "bud_acct_membership": "huh",
+#         "bud_itemunit": "huh",
+#         "bud_item_awardlink": "huh",
+#         "bud_item_reasonunit": "huh",
+#         "bud_item_reason_premiseunit": "huh",
+#         "bud_item_teamlink": "huh",
+#         "bud_item_healerlink": "huh",
+#         "bud_item_factunit": "huh",
+#     }
