@@ -109,7 +109,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         fisc_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         assert not db_table_exists(cursor, fisc_objs.unit_stage_tablename)
 

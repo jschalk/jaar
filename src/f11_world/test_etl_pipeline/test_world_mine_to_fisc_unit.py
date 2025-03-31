@@ -43,12 +43,12 @@ def test_WorldUnit_mine_to_burdens_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 9
 
     # WHEN
-    fizz_world.mine_to_burdens()
+    fizz_world.mine_to_burdens(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path) is False
-    assert count_dirs_files(fizz_world.worlds_dir) == 30
+    assert count_dirs_files(fizz_world.worlds_dir) == 23
 
 
 def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup):
@@ -124,7 +124,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
     # WHEN
-    fizz_world.mine_to_burdens()
+    fizz_world.mine_to_burdens(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
@@ -135,7 +135,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
     assert os_path_exists(a23_sue_voice_path)
     assert os_path_exists(a23_sue_forecast_path)
     assert os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 94
+    assert count_dirs_files(fizz_world.worlds_dir) == 87
 
 
 def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(

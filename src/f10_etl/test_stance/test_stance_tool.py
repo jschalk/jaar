@@ -31,7 +31,7 @@ from src.f09_idea.idea_csv_tool import (
 )
 from src.f10_etl.tran_path import create_stances_owner_dir_path, create_stance0001_path
 from src.f10_etl.stance_tool import collect_stance_csv_strs, create_stance0001_file
-from src.f10_etl.transformers import etl_fisc_csvs_to_fisc_jsons
+from src.f10_etl.transformers import etl_fisc_agg_tables_to_fisc_jsons
 from src.f10_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 

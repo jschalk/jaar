@@ -131,7 +131,7 @@ def test_FiscUnit_get_json_ReturnsObj():
     assert x_json.find(fisc_title_str()) > 0
 
 
-def test_get_from_dict_ReturnsFiscUnit():
+def test_get_from_dict_ReturnsFiscUnit_Scenario0_WithParameters():
     # ESTABLISH
     accord45_str = "accord45"
     a45_offi_times = {17, 37}
@@ -140,8 +140,8 @@ def test_get_from_dict_ReturnsFiscUnit():
     accord_fisc.timeline.timeline_title = sue_timeline_title
     sue_bridge = "/"
     sue_fund_coin = 0.3
-    sue_respect_bit = 0.5
-    sue_penny = 0.8
+    sue_respect_bit = 2
+    sue_penny = 3
     bob_str = "Bob"
     bob_x0_deal_time = 702
     bob_x0_quota = 33
@@ -186,6 +186,36 @@ def test_get_from_dict_ReturnsFiscUnit():
     assert x_fisc == accord_fisc
 
 
+def test_get_from_dict_ReturnsFiscUnit_Scenario1_WithOutParameters():
+    # ESTABLISH
+    accord45_str = "accord45"
+    accord_fisc = fiscunit_shop(accord45_str)
+    x_dict = accord_fisc.get_dict()
+    x_dict["timeline"] = {}
+    x_dict.pop("bridge")
+    x_dict.pop("fund_coin")
+    x_dict.pop("respect_bit")
+    x_dict.pop("penny")
+
+    # WHEN
+    generated_fisc = fiscunit_get_from_dict(x_dict)
+
+    # THEN
+    assert generated_fisc.fisc_title == accord45_str
+    print(f"{generated_fisc.timeline=}")
+    print(f"   {accord_fisc.timeline=}")
+    assert generated_fisc.timeline == accord_fisc.timeline
+    assert generated_fisc.offi_times == set()
+    assert generated_fisc.bridge == default_bridge_if_None()
+    assert generated_fisc.fund_coin == default_fund_coin_if_None()
+    assert generated_fisc.respect_bit == default_respect_bit_if_None()
+    assert generated_fisc.penny == 1
+    assert generated_fisc.brokerunits == accord_fisc.brokerunits
+    assert generated_fisc.cashbook == accord_fisc.cashbook
+    assert generated_fisc.fisc_mstr_dir == accord_fisc.fisc_mstr_dir
+    assert generated_fisc == accord_fisc
+
+
 def test_get_from_json_ReturnsFiscUnit():
     # ESTABLISH
     accord45_str = "accord45"
@@ -195,8 +225,8 @@ def test_get_from_json_ReturnsFiscUnit():
     sue_offi_time_max = 23
     sue_bridge = "/"
     sue_fund_coin = 0.3
-    sue_respect_bit = 0.5
-    sue_penny = 0.8
+    sue_respect_bit = 2
+    sue_penny = 3
     bob_str = "Bob"
     bob_x0_deal_time = 702
     bob_x0_quota = 33
@@ -237,7 +267,7 @@ def test_get_from_file_ReturnsFiscUnitWith_fisc_mstr_dir(env_dir_setup_cleanup):
     accord45_fisc = fiscunit_shop(accord45_str)
     sue_timeline_title = "sue casa"
     accord45_fisc.timeline.timeline_title = sue_timeline_title
-    sue_respect_bit = 0.5
+    sue_respect_bit = 2
     accord45_fisc.respect_bit = sue_respect_bit
     x_fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_buzz")
     accord45_json_path = create_fisc_json_path(x_fisc_mstr_dir, accord45_str)

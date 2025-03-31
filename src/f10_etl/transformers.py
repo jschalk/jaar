@@ -88,6 +88,7 @@ from src.f10_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
+from src.f10_etl.db2obj_tool import get_fisc_dict_from_db
 from src.f10_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f10_etl.fisc_etl_tool import create_fiscunit_jsons_from_prime_files
 from src.f10_etl.pidgin_agg import (
@@ -100,7 +101,7 @@ from src.f10_etl.pidgin_agg import (
 )
 from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
 from os.path import exists as os_path_exists
-from sqlite3 import Connection as sqlite3_Connection
+from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 from copy import deepcopy as copy_deepcopy
 
 
@@ -1001,12 +1002,16 @@ def etl_fisc_agg_tables_to_fisc_csvs(
         save_table_to_csv(conn_or_cursor, fisc_mstr_dir, f"{fisc_dimen}_agg")
 
 
-def etl_fisc_csvs_to_fisc_jsons(fisc_mstr_dir: str):
-    for fisc_dimen in get_fisc_dimens():
-        x_excel_path = create_path(fisc_mstr_dir, f"{fisc_dimen}.xlsx")
-        dimen_df = open_csv(fisc_mstr_dir, f"{fisc_dimen}_agg.csv")
-        upsert_sheet(x_excel_path, "agg", dimen_df)
-    create_fiscunit_jsons_from_prime_files(fisc_mstr_dir)
+def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
+    fisc_filename = "fisc.json"
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    insert_staging_sqlstr = """SELECT fisc_title FROM fiscunit_agg;"""
+    cursor.execute(insert_staging_sqlstr)
+    for fisc_title_set in cursor.fetchall():
+        fisc_title = fisc_title_set[0]
+        fisc_dict = get_fisc_dict_from_db(cursor, fisc_title)
+        fiscunit_dir = create_path(fiscs_dir, fisc_title)
+        save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
 
 def etl_event_bud_csvs_to_stand_json(fisc_mstr_dir: str):

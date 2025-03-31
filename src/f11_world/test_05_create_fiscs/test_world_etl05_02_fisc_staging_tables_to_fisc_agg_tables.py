@@ -35,7 +35,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         fisc_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         assert not db_table_exists(cursor, fisc_objs.unit_agg_tablename)
 
@@ -125,7 +125,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         event_time_tablename = "fisc_event_time_agg"
         assert not db_table_exists(cursor, event_time_tablename)
 

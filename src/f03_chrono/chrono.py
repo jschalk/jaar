@@ -628,8 +628,22 @@ class TimeLineUnit:
 
 
 def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
-    if timeline_config is None:
-        timeline_config = get_default_timeline_config_dict()
+    default_timeline = get_default_timeline_config_dict()
+    if not timeline_config:
+        timeline_config = default_timeline
+    if timeline_config.get("c400_number") is None:
+        timeline_config["c400_number"] = default_timeline.get("c400_number")
+    if timeline_config.get("monthday_distortion") is None:
+        x_monthday_distortion = default_timeline.get("monthday_distortion")
+        timeline_config["monthday_distortion"] = x_monthday_distortion
+    if timeline_config.get("hours_config") is None:
+        timeline_config["hours_config"] = default_timeline.get("hours_config")
+    if timeline_config.get("months_config") is None:
+        timeline_config["months_config"] = default_timeline.get("months_config")
+    if timeline_config.get("weekdays_config") is None:
+        timeline_config["weekdays_config"] = default_timeline.get("weekdays_config")
+    if timeline_config.get("yr1_jan1_offset") is None:
+        timeline_config["yr1_jan1_offset"] = default_timeline.get("yr1_jan1_offset")
     return TimeLineUnit(
         c400_number=timeline_config.get(c400_number_str()),
         hours_config=timeline_config.get(hours_config_str()),

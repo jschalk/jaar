@@ -4,7 +4,7 @@ from src.f10_etl.tran_sqlstrs import get_fisc_fu1_select_sqlstrs
 from sqlite3 import Cursor as sqlite3_Cursor
 
 
-def get_fiscunit_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> dict:
+def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> dict:
     """Fetches a FiscUnit's data from multiple tables and returns it as a dictionary."""
 
     fu1_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_title)
@@ -13,19 +13,35 @@ def get_fiscunit_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> 
     if not fiscunit_row:
         return None  # fiscunit not found
 
-    fisc_dict: dict[str, any] = {
-        "fisc_title": fiscunit_row[0],
-        "timeline": {
-            "timeline_title": fiscunit_row[1],
-            "c400_number": fiscunit_row[2],
-            "yr1_jan1_offset": fiscunit_row[3],
-            "monthday_distortion": fiscunit_row[4],
-        },
-        "fund_coin": fiscunit_row[5],
-        "penny": fiscunit_row[6],
-        "respect_bit": fiscunit_row[7],
-        "bridge": fiscunit_row[8],
-    }
+    timeline_title = fiscunit_row[1]
+    c400_number = fiscunit_row[2]
+    yr1_jan1_offset = fiscunit_row[3]
+    monthday_distortion = fiscunit_row[4]
+
+    fisc_dict: dict[str, any] = {"fisc_title": fiscunit_row[0], "timeline": {}}
+    if (
+        timeline_title is not None
+        and c400_number is not None
+        and yr1_jan1_offset is not None
+        and monthday_distortion is not None
+    ):
+        if timeline_title:
+            fisc_dict["timeline"]["timeline_title"] = timeline_title
+        if c400_number:
+            fisc_dict["timeline"]["c400_number"] = c400_number
+        if yr1_jan1_offset:
+            fisc_dict["timeline"]["yr1_jan1_offset"] = yr1_jan1_offset
+        if monthday_distortion:
+            fisc_dict["timeline"]["monthday_distortion"] = monthday_distortion
+
+    if fund_coin := fiscunit_row[5]:
+        fisc_dict["fund_coin"] = fund_coin
+    if penny := fiscunit_row[6]:
+        fisc_dict["penny"] = penny
+    if respect_bit := fiscunit_row[7]:
+        fisc_dict["respect_bit"] = respect_bit
+    if bridge := fiscunit_row[8]:
+        fisc_dict["bridge"] = bridge
 
     cursor.execute(fu1_sqlstrs.get("fisc_cashbook"))
     _set_fisc_dict_fisccash(cursor, fisc_dict, fisc_title)
@@ -88,7 +104,8 @@ def _set_fisc_dict_fischour(cursor: sqlite3_Cursor, fisc_dict: dict):
         row_cumlative_minute = fisccash_row[1]
         row_hour_title = fisccash_row[2]
         hours_config_list.append([row_hour_title, row_cumlative_minute])
-    fisc_dict["timeline"]["hours_config"] = hours_config_list
+    if hours_config_list:
+        fisc_dict["timeline"]["hours_config"] = hours_config_list
 
 
 def _set_fisc_dict_fiscmont(cursor: sqlite3_Cursor, fisc_dict: dict):
@@ -98,7 +115,8 @@ def _set_fisc_dict_fiscmont(cursor: sqlite3_Cursor, fisc_dict: dict):
         row_cumlative_day = fisccash_row[1]
         row_month_title = fisccash_row[2]
         months_config_list.append([row_month_title, row_cumlative_day])
-    fisc_dict["timeline"]["months_config"] = months_config_list
+    if months_config_list:
+        fisc_dict["timeline"]["months_config"] = months_config_list
 
 
 def _set_fisc_dict_fiscweek(cursor: sqlite3_Cursor, fisc_dict: dict):
@@ -109,7 +127,8 @@ def _set_fisc_dict_fiscweek(cursor: sqlite3_Cursor, fisc_dict: dict):
         row_weekday_title = fisccash_row[2]
         weekday_dict[row_weekday_order] = row_weekday_title
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
-    fisc_dict["timeline"]["weekdays_config"] = weekday_config_list
+    if weekday_dict:
+        fisc_dict["timeline"]["weekdays_config"] = weekday_config_list
 
 
 def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):

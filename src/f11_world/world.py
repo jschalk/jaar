@@ -40,7 +40,7 @@ from src.f10_etl.transformers import (
     etl_idea_staging_to_fisc_tables,
     etl_fisc_staging_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_csvs,
-    etl_fisc_csvs_to_fisc_jsons,
+    etl_fisc_agg_tables_to_fisc_jsons,
     etl_idea_staging_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_stand_json,
@@ -183,7 +183,7 @@ class WorldUnit:
     def inz_face_ideas_to_csv_files(self):
         etl_inz_face_ideas_to_csv_files(self._faces_inz_dir)
 
-    def etl_inz_face_csv_files2idea_staging_tables(
+    def inz_face_csv_files2idea_staging_tables(
         self, conn_or_cursor: sqlite3_Connection
     ):
         etl_inz_face_csv_files2idea_staging_tables(conn_or_cursor, self._faces_inz_dir)
@@ -198,8 +198,8 @@ class WorldUnit:
         etl_fisc_staging_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
         etl_fisc_agg_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
-    def fisc_csvs_to_jsons(self):
-        etl_fisc_csvs_to_fisc_jsons(self._fisc_mstr_dir)
+    def fisc_agg_tables_to_fisc_jsons(self, cursor: sqlite3_Connection):
+        etl_fisc_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
 
     def fisc_agg_tables2fisc_ote1_agg(self, conn_or_cursor: sqlite3_Connection):
         etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor)
@@ -259,7 +259,9 @@ class WorldUnit:
         etl_create_deal_mandate_ledgers(mstr_dir)
         print(f"{count_dirs_files(mstr_dir)} etl_create_deal_mandate_ledgers")
 
-    def mine_to_burdens(self):  # sourcery skip: extract-method
+    def mine_to_burdens(
+        self, store_tracing_files: bool = False
+    ):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         delete_dir(fisc_mstr_dir)
         print(f"{fisc_mstr_dir=}")
@@ -312,13 +314,14 @@ class WorldUnit:
 
         with sqlite3_connect(":memory:") as fisc_db_conn:
             cursor = fisc_db_conn.cursor()
-            self.etl_inz_face_csv_files2idea_staging_tables(cursor)
+            self.inz_face_csv_files2idea_staging_tables(cursor)
             self.idea_staging_to_fisc_tables(cursor)
             print(f"step 05.1 {count_dirs_files(self.worlds_dir)}")
-            self.idea_staging_to_fisc_tables(cursor)
-            self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
+            # Save for reference, change be skipped
+            if store_tracing_files:
+                self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
             print(f"step 05.2 {count_dirs_files(self.worlds_dir)}")
-            self.fisc_csvs_to_jsons()
+            self.fisc_agg_tables_to_fisc_jsons(cursor)
             self.fisc_agg_tables2fisc_ote1_agg(cursor)
             self.fisc_table2fisc_ote1_agg_csvs(cursor)
             self.fisc_ote1_agg_csvs2jsons()

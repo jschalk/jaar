@@ -6,7 +6,7 @@ from src.f11_world.examples.world_env import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_etl_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
+def test_WorldUnit_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -34,7 +34,7 @@ def test_WorldUnit_etl_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV
     br00011_staging_tablename = f"{br00011_str}_staging"
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
         br00011_db_columns = cursor.fetchall()
         br00011_expected_columns = [

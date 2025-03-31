@@ -79,7 +79,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagin
     fizz_world = worldunit_shop("fizz")
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        fizz_world.etl_inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
         budunit_staging_tablename = f"{budunit_str()}_put_staging"
         assert not db_table_exists(cursor, budunit_staging_tablename)
 
