@@ -72,11 +72,11 @@
 #     type_TitleUnit_str,
 #     type_RoadUnit_str,
 # )
-# from src.f05_fund_metrics.
+from src.f05_fund_metrics.fund_config import fund_take_str
 
 
-# def test_str_functions_ReturnsObj():
-#     assert fund_take_str() == "fund_take"
+def test_str_functions_ReturnsObj():
+    assert fund_take_str() == "fund_take"
 
 
 # def test_get_bud_dimens_ReturnsObj():
