@@ -9,6 +9,7 @@ from src.f02_bud.bud_tool import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
+    bud_groupunit_str,
 )
 
 
@@ -22,6 +23,10 @@ def test_bud_acctunit_str_ReturnsObj():
 
 def test_bud_acct_membership_str_ReturnsObj():
     assert bud_acct_membership_str() == "bud_acct_membership"
+
+
+def test_bud_groupunit_str_ReturnsObj():
+    assert bud_groupunit_str() == "bud_groupunit"
 
 
 def test_bud_itemunit_str_ReturnsObj():

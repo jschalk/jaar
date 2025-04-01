@@ -8,7 +8,7 @@ def get_test_world_id() -> WorldID:
 
 
 def get_test_etl_dir():
-    return "src/f10_etl/examples/etls"
+    return "src/f11_etl/examples/etls"
 
 
 @pytest_fixture()

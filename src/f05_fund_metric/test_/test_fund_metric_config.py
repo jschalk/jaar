@@ -1,89 +1,225 @@
 # from src.f00_instrument.dict_toolbox import get_from_nested_dict
-# from src.f02_bud.bud_tool import (
-#     budunit_str,
-#     bud_acctunit_str,
-#     bud_acct_membership_str,
-#     bud_itemunit_str,
-#     bud_item_awardlink_str,
-#     bud_item_reasonunit_str,
-#     bud_item_reason_premiseunit_str,
-#     bud_item_teamlink_str,
-#     bud_item_healerlink_str,
-#     bud_item_factunit_str,
-# )
-# from src.f04_vow.atom_config import (
-#     get_bud_dimens,
-#     get_all_bud_dimen_keys,
-#     get_delete_key_name,
-#     get_all_bud_dimen_delete_keys,
-#     is_bud_dimen,
-#     get_atom_config_dict,
-#     get_atom_args_dimen_mapping,
-#     get_allowed_class_types,
-#     get_atom_args_class_types,
-#     get_atom_order as q_order,
-#     get_sorted_jkey_keys,
-#     set_mog,
-#     get_flattened_atom_table_build,
-#     get_normalized_bud_table_build,
-#     acct_name_str,
-#     addin_str,
-#     atom_insert,
-#     atom_delete,
-#     atom_update,
-#     awardee_tag_str,
-#     base_str,
-#     begin_str,
-#     dimen_str,
-#     close_str,
-#     column_order_str,
-#     credit_belief_str,
-#     credor_respect_str,
-#     credit_vote_str,
-#     crud_str,
-#     debtit_belief_str,
-#     debtor_respect_str,
-#     debtit_vote_str,
-#     denom_str,
-#     event_int_str,
-#     fnigh_str,
-#     fopen_str,
-#     fund_coin_str,
-#     gogo_want_str,
-#     group_label_str,
-#     healer_name_str,
-#     class_type_str,
-#     jkeys_str,
-#     jvalues_str,
-#     morph_str,
-#     nesting_order_str,
-#     normal_specs_str,
-#     normal_table_name_str,
-#     numor_str,
-#     parent_road_str,
-#     penny_str,
-#     respect_bit_str,
-#     road_str,
-#     sqlite_datatype_str,
-#     stop_want_str,
-#     team_tag_str,
-#     type_AcctName_str,
-#     type_LabelUnit_str,
-#     type_TitleUnit_str,
-#     type_RoadUnit_str,
-# )
-from src.f05_fund_metrics.fund_config import fund_take_str
+from src.f00_instrument.file import open_json, save_json, create_path
+from src.f02_bud.bud_tool import (
+    budunit_str,
+    bud_acctunit_str,
+    bud_acct_membership_str,
+    bud_itemunit_str,
+    bud_item_awardlink_str,
+    bud_item_reasonunit_str,
+    bud_item_reason_premiseunit_str,
+    bud_item_teamlink_str,
+    bud_item_healerlink_str,
+    bud_item_factunit_str,
+    bud_groupunit_str,
+)
+
+from src.f04_vow.atom_config import (
+    get_bud_dimens,
+    get_all_bud_dimen_keys,
+    get_delete_key_name,
+    get_all_bud_dimen_delete_keys,
+    is_bud_dimen,
+    get_atom_config_dict,
+    get_atom_args_dimen_mapping,
+    get_allowed_class_types,
+    get_atom_args_class_types,
+    get_atom_order as q_order,
+    get_sorted_jkey_keys,
+    set_mog,
+    get_flattened_atom_table_build,
+    get_normalized_bud_table_build,
+    acct_name_str,
+    addin_str,
+    atom_insert,
+    atom_delete,
+    atom_update,
+    awardee_tag_str,
+    base_str,
+    begin_str,
+    dimen_str,
+    close_str,
+    column_order_str,
+    credit_belief_str,
+    credor_respect_str,
+    credit_vote_str,
+    crud_str,
+    debtit_belief_str,
+    debtor_respect_str,
+    debtit_vote_str,
+    denom_str,
+    event_int_str,
+    fnigh_str,
+    fopen_str,
+    fund_coin_str,
+    gogo_want_str,
+    group_label_str,
+    healer_name_str,
+    class_type_str,
+    jkeys_str,
+    jvalues_str,
+    morph_str,
+    nesting_order_str,
+    normal_specs_str,
+    normal_table_name_str,
+    numor_str,
+    parent_road_str,
+    penny_str,
+    respect_bit_str,
+    road_str,
+    sqlite_datatype_str,
+    stop_want_str,
+    team_tag_str,
+    type_AcctName_str,
+    type_LabelUnit_str,
+    type_TitleUnit_str,
+    type_RoadUnit_str,
+)
+from src.f05_fund_metric.fund_metric_config import (
+    jmetrics_str,
+    fund_take_str,
+    fund_give_str,
+    get_fund_metric_config_filename,
+    config_file_path,
+    get_fund_metric_config_dict,
+)
+from os.path import exists as os_path_exists
+from os import getcwd as os_getcwd
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert jmetrics_str() == "jmetrics"
     assert fund_take_str() == "fund_take"
+    assert fund_give_str() == "fund_give"
 
 
-# def test_get_bud_dimens_ReturnsObj():
-#     # ESTABLISH / WHEN / THEN
-#     assert get_bud_dimens() == set(get_atom_config_dict().keys())
-#     assert bud_acctunit_str() in get_bud_dimens()
-#     assert is_bud_dimen("itemroot") is False
+def test_get_fund_metric_config_dict_Exists():
+    # ESTABLISH
+    src_dir = create_path(os_getcwd(), "src")
+    expected_dir = create_path(src_dir, "f05_fund_metric")
+
+    # WHEN / THEN
+    assert get_fund_metric_config_filename() == "fund_metric_config.json"
+    expected_path = create_path(expected_dir, get_fund_metric_config_filename())
+    assert config_file_path() == expected_path
+    assert os_path_exists(config_file_path())
+
+
+def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel0Keys():
+    # ESTABLISH / WHEN
+    fund_metric_config = get_fund_metric_config_dict()
+    fund_metric_config_keys = set(fund_metric_config.keys())
+
+    # THEN
+    assert budunit_str() in fund_metric_config_keys
+    assert bud_acctunit_str() in fund_metric_config_keys
+    assert bud_acct_membership_str() in fund_metric_config_keys
+    assert bud_itemunit_str() in fund_metric_config_keys
+    assert bud_item_awardlink_str() in fund_metric_config_keys
+    assert bud_item_reasonunit_str() in fund_metric_config_keys
+    assert bud_item_reason_premiseunit_str() in fund_metric_config_keys
+    assert bud_item_teamlink_str() in fund_metric_config_keys
+    assert bud_item_healerlink_str() in fund_metric_config_keys
+    assert bud_item_factunit_str() in fund_metric_config_keys
+    assert bud_groupunit_str() in fund_metric_config_keys
+    assert len(get_fund_metric_config_dict()) == 11
+    atom_config_dict = get_atom_config_dict()
+    atom_config_dimens = set(atom_config_dict.keys())
+    assert atom_config_dimens.issubset(fund_metric_config_keys)
+    assert fund_metric_config_keys.difference(atom_config_dimens) == {
+        bud_groupunit_str()
+    }
+
+
+def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel1Keys():
+    # ESTABLISH / WHEN
+    fund_metric_config = get_fund_metric_config_dict()
+
+    # THEN
+    # sourcery skip: no-loop-in-tests
+    for level1_key, aspect_dict in fund_metric_config.items():
+        aspect_keys = set(aspect_dict.keys())
+        print(f"{level1_key=} {aspect_keys=}")
+        assert "abbreviation" in aspect_keys
+        assert jkeys_str() in aspect_keys
+        assert jvalues_str() in aspect_keys
+        assert jmetrics_str() in aspect_keys
+        assert len(aspect_keys) == 4
+
+
+def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
+    # ESTABLISH / WHEN
+    fund_metric_config = get_fund_metric_config_dict()
+
+    # THEN
+    atom_config = get_atom_config_dict()
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    for level1_key, aspect_dict in fund_metric_config.items():
+        if level1_key in atom_config.keys():
+            atom_dimen = atom_config.get(level1_key)
+            for level2_key, fm_aspect_dict in aspect_dict.items():
+                if level2_key == jkeys_str():
+                    atom_attributes = atom_dimen.get(jkeys_str())
+                    atom_attribute_keys = set(atom_attributes)
+                    fm_aspect_keys = set(fm_aspect_dict.keys())
+                    assert fm_aspect_keys == atom_attribute_keys
+                elif level2_key == jvalues_str():
+                    atom_attributes = atom_dimen.get(jvalues_str())
+                    atom_attribute_keys = set(atom_attributes)
+                    fm_aspect_keys = set(fm_aspect_dict.keys())
+                    assert fm_aspect_keys == atom_attribute_keys
+
+    budunit_aspect = fund_metric_config.get(budunit_str())
+    budacct_aspect = fund_metric_config.get(bud_acctunit_str())
+    budmemb_aspect = fund_metric_config.get(bud_acct_membership_str())
+    buditem_aspect = fund_metric_config.get(bud_itemunit_str())
+    budawar_aspect = fund_metric_config.get(bud_item_awardlink_str())
+    budreas_aspect = fund_metric_config.get(bud_item_reasonunit_str())
+    budprem_aspect = fund_metric_config.get(bud_item_reason_premiseunit_str())
+    budteam_aspect = fund_metric_config.get(bud_item_teamlink_str())
+    budheal_aspect = fund_metric_config.get(bud_item_healerlink_str())
+    budfact_aspect = fund_metric_config.get(bud_item_factunit_str())
+    budgrou_aspect = fund_metric_config.get(bud_groupunit_str())
+
+    abbr_str = "abbreviation"
+    assert budunit_aspect.get(abbr_str) == "budunit"
+    assert budacct_aspect.get(abbr_str) == "budacct"
+    assert budmemb_aspect.get(abbr_str) == "budmemb"
+    assert buditem_aspect.get(abbr_str) == "buditem"
+    assert budawar_aspect.get(abbr_str) == "budawar"
+    assert budreas_aspect.get(abbr_str) == "budreas"
+    assert budprem_aspect.get(abbr_str) == "budprem"
+    assert budteam_aspect.get(abbr_str) == "budteam"
+    assert budheal_aspect.get(abbr_str) == "budheal"
+    assert budfact_aspect.get(abbr_str) == "budfact"
+    assert budgrou_aspect.get(abbr_str) == "budgrou"
+
+    budunit_jmetrics_keys = set(budunit_aspect.get(jmetrics_str()))
+    budacct_jmetrics_keys = set(budacct_aspect.get(jmetrics_str()))
+    budmemb_jmetrics_keys = set(budmemb_aspect.get(jmetrics_str()))
+    buditem_jmetrics_keys = set(buditem_aspect.get(jmetrics_str()))
+    budawar_jmetrics_keys = set(budawar_aspect.get(jmetrics_str()))
+    budreas_jmetrics_keys = set(budreas_aspect.get(jmetrics_str()))
+    budprem_jmetrics_keys = set(budprem_aspect.get(jmetrics_str()))
+    budteam_jmetrics_keys = set(budteam_aspect.get(jmetrics_str()))
+    budheal_jmetrics_keys = set(budheal_aspect.get(jmetrics_str()))
+    budfact_jmetrics_keys = set(budfact_aspect.get(jmetrics_str()))
+    budgrou_jmetrics_keys = set(budgrou_aspect.get(jmetrics_str()))
+
+    # assert budunit_jmetrics_keys == {"huh"}
+    # assert budacct_jmetrics_keys == {"huh"}
+    # assert budmemb_jmetrics_keys == {"huh"}
+    # assert buditem_jmetrics_keys == {"huh"}
+    # assert budawar_jmetrics_keys == {"huh"}
+    # assert budreas_jmetrics_keys == {"huh"}
+    # assert budprem_jmetrics_keys == {"huh"}
+    # assert budteam_jmetrics_keys == {"huh"}
+    # assert budheal_jmetrics_keys == {"huh"}
+    # assert budfact_jmetrics_keys == {"huh"}
+    # assert budgrou_jmetrics_keys == {"huh"}
+
+    # assert 1 == 2
 
 
 # def test_get_all_bud_dimen_keys_ReturnsObj():

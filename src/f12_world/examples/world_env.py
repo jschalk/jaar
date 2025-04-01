@@ -8,7 +8,7 @@ def get_test_world_id() -> WorldID:
 
 
 def get_test_worlds_dir():
-    return "src/f11_world/examples/worlds"
+    return "src/f12_world/examples/worlds"
 
 
 @pytest_fixture()

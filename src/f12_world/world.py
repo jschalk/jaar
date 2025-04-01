@@ -62,7 +62,7 @@ from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 
 def get_default_worlds_dir() -> str:
-    return "src/f11_world/examples/worlds"
+    return "src/f12_world/examples/worlds"
 
 
 class _set_fisc_pidgin_Exception(Exception):
