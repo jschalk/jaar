@@ -7,17 +7,17 @@ from src.f05_listen.examples.listen_env import (
 )
 
 
-def test_add_voice_pledge_Addspledgestand(env_dir_setup_cleanup):
+def test_add_voice_pledge_Addspledgevow(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
-    sue_hubunit.initialize_stand_voice_files()
+    sue_hubunit.initialize_vow_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     clean_str = "clean"
     clean_road = old_sue_voice.make_l1_road(clean_str)
     one_int = 1
-    print(f"{sue_hubunit.stand_file_path(one_int)=}")
-    assert sue_hubunit.stand_file_exists(one_int) is False
+    print(f"{sue_hubunit.vow_file_path(one_int)=}")
+    assert sue_hubunit.vow_file_exists(one_int) is False
     old_sue_voice = sue_hubunit.get_voice_bud()
     assert old_sue_voice.item_exists(clean_road) is False
 
@@ -25,7 +25,7 @@ def test_add_voice_pledge_Addspledgestand(env_dir_setup_cleanup):
     add_voice_pledge(sue_hubunit, clean_road)
 
     # THEN
-    assert sue_hubunit.stand_file_exists(one_int)
+    assert sue_hubunit.vow_file_exists(one_int)
     new_sue_voice = sue_hubunit.get_voice_bud()
     assert new_sue_voice.item_exists(clean_road)
 
@@ -34,7 +34,7 @@ def test_add_voice_pledge_SetsvoiceBudpledgeItem_teamlink(env_dir_setup_cleanup)
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
-    sue_hubunit.initialize_stand_voice_files()
+    sue_hubunit.initialize_vow_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     clean_str = "clean"
     clean_road = old_sue_voice.make_l1_road(clean_str)
@@ -56,7 +56,7 @@ def test_add_voice_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
-    sue_hubunit.initialize_stand_voice_files()
+    sue_hubunit.initialize_vow_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     clean_str = "clean"
     clean_road = old_sue_voice.make_l1_road(clean_str)
@@ -82,7 +82,7 @@ def test_add_voice_fact_CanAdd_factunit(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str)
-    sue_hubunit.initialize_stand_voice_files()
+    sue_hubunit.initialize_vow_voice_files()
     old_sue_voice = sue_hubunit.get_voice_bud()
     house_estimation_str = "house_estimation"
     house_estimation_road = old_sue_voice.make_l1_road(house_estimation_str)

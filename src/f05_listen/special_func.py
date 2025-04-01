@@ -34,10 +34,10 @@ def add_voice_pledge(
     voice_bud = x_hubunit.get_voice_bud()
     old_voice_bud = copy_deepcopy(voice_bud)
     create_pledge(voice_bud, pledge_road, x_teamlink, reason_premise)
-    next_standunit = x_hubunit._default_standunit()
-    next_standunit._buddelta.add_all_different_budatoms(old_voice_bud, voice_bud)
-    next_standunit.save_files()
-    x_hubunit.append_stands_to_voice_file()
+    next_vowunit = x_hubunit._default_vowunit()
+    next_vowunit._buddelta.add_all_different_budatoms(old_voice_bud, voice_bud)
+    next_vowunit.save_files()
+    x_hubunit.append_vows_to_voice_file()
 
 
 def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
@@ -51,7 +51,7 @@ def add_voice_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
     voice_bud = x_hubunit.get_voice_bud()
     old_voice_bud = copy_deepcopy(voice_bud)
     create_fact(voice_bud, fact_pick)
-    next_standunit = x_hubunit._default_standunit()
-    next_standunit._buddelta.add_all_different_budatoms(old_voice_bud, voice_bud)
-    next_standunit.save_files()
-    x_hubunit.append_stands_to_voice_file()
+    next_vowunit = x_hubunit._default_vowunit()
+    next_vowunit._buddelta.add_all_different_budatoms(old_voice_bud, voice_bud)
+    next_vowunit.save_files()
+    x_hubunit.append_vows_to_voice_file()

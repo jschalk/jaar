@@ -1,6 +1,6 @@
 from src.f00_instrument.db_toolbox import get_row_count, db_table_exists
 from src.f01_road.deal import deal_time_str, fisc_title_str
-from src.f04_stand.atom_config import event_int_str
+from src.f04_vow.atom_config import event_int_str
 from src.f10_etl.fisc_etl_tool import FiscPrimeObjsRef
 from src.f10_etl.transformers import (
     create_fisc_tables,

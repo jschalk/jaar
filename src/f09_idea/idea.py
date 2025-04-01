@@ -9,9 +9,9 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.road import FiscTitle, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
-from src.f04_stand.atom import atom_insert, BudAtom, atomrow_shop
-from src.f04_stand.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
-from src.f04_stand.stand import standunit_shop
+from src.f04_vow.atom import atom_insert, BudAtom, atomrow_shop
+from src.f04_vow.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
+from src.f04_vow.vow import vowunit_shop
 from src.f05_listen.hubunit import hubunit_shop
 from src.f07_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f09_idea.idea_config import (
@@ -185,14 +185,14 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
-    x_hubunit.initialize_stand_voice_files()
+    x_hubunit.initialize_vow_voice_files()
     x_voice = x_hubunit.get_voice_bud()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
-    x_standunit = standunit_shop(x_owner_name, x_fisc_title)
-    x_standunit.set_buddelta(x_buddelta)
-    x_hubunit.save_stand_file(x_standunit)
-    x_hubunit._create_voice_from_stands()
+    x_vowunit = vowunit_shop(x_owner_name, x_fisc_title)
+    x_vowunit.set_buddelta(x_buddelta)
+    x_hubunit.save_vow_file(x_vowunit)
+    x_hubunit._create_voice_from_vows()
 
 
 def load_idea_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):

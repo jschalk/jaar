@@ -1,7 +1,7 @@
 from src.f00_instrument.db_toolbox import get_row_count
 from src.f00_instrument.file import open_file
 from src.f01_road.deal import deal_time_str, owner_name_str, fisc_title_str
-from src.f04_stand.atom_config import event_int_str
+from src.f04_vow.atom_config import event_int_str
 from src.f05_listen.hub_path import create_fisc_ote1_csv_path
 from src.f10_etl.transformers import create_fisc_tables
 from src.f11_world.world import worldunit_shop

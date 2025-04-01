@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.deal import fisc_title_str
-from src.f04_stand.atom_config import face_name_str, event_int_str
+from src.f04_vow.atom_config import face_name_str, event_int_str
 from src.f07_fisc.fisc_config import cumlative_minute_str, hour_title_str
 from src.f08_pidgin.pidgin_config import (
     inx_bridge_str,

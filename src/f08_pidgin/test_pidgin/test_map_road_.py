@@ -1,6 +1,6 @@
 from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.road import default_bridge_if_None, create_road
-from src.f04_stand.atom_config import event_int_str, face_name_str
+from src.f04_vow.atom_config import event_int_str, face_name_str
 from src.f08_pidgin.pidgin_config import (
     inx_bridge_str,
     otx2inx_str,

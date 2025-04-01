@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, open_file, save_file
-from src.f04_stand.atom_config import type_AcctName_str
+from src.f04_vow.atom_config import type_AcctName_str
 from src.f08_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.f08_pidgin.pidgin_config import pidgin_filename
 from src.f10_etl.transformers import (

@@ -33,7 +33,7 @@ def test_BudUnit_Exists():
     assert x_bud.fund_coin is None
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
-    assert x_bud.last_stand_id is None
+    assert x_bud.last_vow_id is None
     assert x_bud.originunit is None
     # calculated attr
     assert x_bud._item_dict is None
@@ -87,7 +87,7 @@ def test_BudUnit_shop_ReturnsObjectWithFilledFields():
     assert x_bud.penny == x_penny
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
-    assert not x_bud.last_stand_id
+    assert not x_bud.last_vow_id
     assert x_bud.originunit == originunit_shop()
     # calculated attr
     assert x_bud._item_dict == {}
@@ -205,48 +205,48 @@ def test_BudUnit_make_road_ReturnsObj():
     assert v1_casa_road == v2_casa_road
 
 
-def test_BudUnit_set_last_stand_id_SetsAttrCorrectly():
+def test_BudUnit_set_last_vow_id_SetsAttrCorrectly():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
-    assert sue_bud.last_stand_id is None
+    assert sue_bud.last_vow_id is None
 
     # WHEN
-    x_last_stand_id = 89
-    sue_bud.set_last_stand_id(x_last_stand_id)
+    x_last_vow_id = 89
+    sue_bud.set_last_vow_id(x_last_vow_id)
 
     # THEN
-    assert sue_bud.last_stand_id == x_last_stand_id
+    assert sue_bud.last_vow_id == x_last_vow_id
 
 
-def test_BudUnit_set_last_stand_id_RaisesError():
+def test_BudUnit_set_last_vow_id_RaisesError():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
-    old_last_stand_id = 89
-    sue_bud.set_last_stand_id(old_last_stand_id)
+    old_last_vow_id = 89
+    sue_bud.set_last_vow_id(old_last_vow_id)
 
     # WHEN / THEN
-    new_last_stand_id = 72
-    assert new_last_stand_id < old_last_stand_id
+    new_last_vow_id = 72
+    assert new_last_vow_id < old_last_vow_id
     with pytest_raises(Exception) as excinfo:
-        sue_bud.set_last_stand_id(new_last_stand_id)
+        sue_bud.set_last_vow_id(new_last_vow_id)
     assert (
         str(excinfo.value)
-        == f"Cannot set _last_stand_id to {new_last_stand_id} because it is less than {old_last_stand_id}."
+        == f"Cannot set _last_vow_id to {new_last_vow_id} because it is less than {old_last_vow_id}."
     )
 
 
-def test_BudUnit_del_last_stand_id_SetsAttrCorrectly():
+def test_BudUnit_del_last_vow_id_SetsAttrCorrectly():
     # ESTABLISH
     sue_bud = budunit_shop("Sue", "Texas")
-    old_last_stand_id = 89
-    sue_bud.set_last_stand_id(old_last_stand_id)
-    assert sue_bud.last_stand_id is not None
+    old_last_vow_id = 89
+    sue_bud.set_last_vow_id(old_last_vow_id)
+    assert sue_bud.last_vow_id is not None
 
     # WHEN
-    sue_bud.del_last_stand_id()
+    sue_bud.del_last_vow_id()
 
     # WHEN
-    assert sue_bud.last_stand_id is None
+    assert sue_bud.last_vow_id is None
 
 
 def test_BudUnit_set_fund_pool_CorrectlySetsAttr():

@@ -3,8 +3,8 @@ from src.f02_bud.group import awardlink_shop
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import get_five_config
 from src.f03_chrono.chrono import timelineunit_shop, get_default_timeline_config_dict
-from src.f04_stand.delta import get_minimal_buddelta, buddelta_shop
-from src.f04_stand.stand import standunit_shop
+from src.f04_vow.delta import get_minimal_buddelta, buddelta_shop
+from src.f04_vow.vow import vowunit_shop
 from src.f07_fisc.fisc import fiscunit_shop
 from src.f08_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f09_idea.idea_config import get_idea_format_filename
@@ -23,23 +23,23 @@ from src.f09_idea.idea_csv_tool import (
     add_bud_to_br00027_csv,
     add_bud_to_br00028_csv,
     add_bud_to_br00029_csv,
-    add_stand_to_br00020_csv,
-    add_stand_to_br00021_csv,
-    add_stand_to_br00022_csv,
-    add_stand_to_br00023_csv,
-    add_stand_to_br00024_csv,
-    add_stand_to_br00025_csv,
-    add_stand_to_br00026_csv,
-    add_stand_to_br00027_csv,
-    add_stand_to_br00028_csv,
-    add_stand_to_br00029_csv,
+    add_vow_to_br00020_csv,
+    add_vow_to_br00021_csv,
+    add_vow_to_br00022_csv,
+    add_vow_to_br00023_csv,
+    add_vow_to_br00024_csv,
+    add_vow_to_br00025_csv,
+    add_vow_to_br00026_csv,
+    add_vow_to_br00027_csv,
+    add_vow_to_br00028_csv,
+    add_vow_to_br00029_csv,
     add_budunit_to_stance_csv_strs,
     add_to_br00042_csv,
     add_to_br00043_csv,
     add_to_br00044_csv,
     add_to_br00045_csv,
     add_pidginunit_to_stance_csv_strs,
-    add_standunit_to_stance_csv_strs,
+    add_vowunit_to_stance_csv_strs,
 )
 from src.f09_idea.idea_db_tool import get_ordered_csv
 from src.f09_idea.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
@@ -769,7 +769,7 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     assert x_ideabricks.get("br00045") != br00045_header
 
 
-def test_add_stand_to_br00020_csv_ReturnsObj():
+def test_add_vow_to_br00020_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -786,12 +786,12 @@ def test_add_stand_to_br00020_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00020")
 
     # WHEN
-    x_csv = add_stand_to_br00020_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00020_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     yao_yao_row = f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
@@ -802,7 +802,7 @@ def test_add_stand_to_br00020_csv_ReturnsObj():
     assert len(x_csv) == len(f"{csv_header}{yao_run_row}{yao_yao_row}")
 
 
-def test_add_stand_to_br00021_csv_ReturnsObj():
+def test_add_vow_to_br00021_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -817,12 +817,12 @@ def test_add_stand_to_br00021_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00021")
 
     # WHEN
-    x_csv = add_stand_to_br00021_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00021_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     yao_row = (
@@ -831,7 +831,7 @@ def test_add_stand_to_br00021_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{yao_row}"
 
 
-def test_add_stand_to_br00022_csv_ReturnsObj():
+def test_add_vow_to_br00022_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -849,20 +849,20 @@ def test_add_stand_to_br00022_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00022")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00022_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00022_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     yao_award_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
-def test_add_stand_to_br00023_csv_ReturnsObj():
+def test_add_vow_to_br00023_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -880,13 +880,13 @@ def test_add_stand_to_br00023_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00023")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00023_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00023_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
@@ -896,7 +896,7 @@ def test_add_stand_to_br00023_csv_ReturnsObj():
     assert x_csv == expected_csv
 
 
-def test_add_stand_to_br00024_csv_ReturnsObj():
+def test_add_vow_to_br00024_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -912,13 +912,13 @@ def test_add_stand_to_br00024_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00024")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00024_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00024_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     cleaners_row = (
@@ -930,7 +930,7 @@ def test_add_stand_to_br00024_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-def test_add_stand_to_br00025_csv_ReturnsObj():
+def test_add_vow_to_br00025_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -946,13 +946,13 @@ def test_add_stand_to_br00025_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00025")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00025_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00025_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     cleaners_row = (
@@ -961,7 +961,7 @@ def test_add_stand_to_br00025_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-def test_add_stand_to_br00026_csv_ReturnsObj():
+def test_add_vow_to_br00026_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -989,20 +989,20 @@ def test_add_stand_to_br00026_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00026")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00026_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00026_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_road},{casa_road},{clean_road},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
-def test_add_stand_to_br00027_csv_ReturnsObj():
+def test_add_vow_to_br00027_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -1022,20 +1022,20 @@ def test_add_stand_to_br00027_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00027")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00027_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00027_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_road},{casa_road},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
-def test_add_stand_to_br00028_csv_ReturnsObj():
+def test_add_vow_to_br00028_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -1075,13 +1075,13 @@ def test_add_stand_to_br00028_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00028")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00028_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00028_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_bud.fisc_title},,,,,,,,,1,False,False\n"
@@ -1095,7 +1095,7 @@ def test_add_stand_to_br00028_csv_ReturnsObj():
     assert len(x_csv) == len(expected_csv)
 
 
-def test_add_stand_to_br00029_csv_ReturnsObj():
+def test_add_vow_to_br00029_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -1114,20 +1114,20 @@ def test_add_stand_to_br00029_csv_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
     csv_header = x_ideabricks.get("br00029")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_stand_to_br00029_csv(csv_header, sue7_stand, csv_delimiter)
+    x_csv = add_vow_to_br00029_csv(csv_header, sue7_vow, csv_delimiter)
 
     # THEN
     bud_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},,{bob_bud.tally},{bob_bud.fund_coin},,{bob_bud.respect_bit}\n"
     assert x_csv == f"{csv_header}{bud_row}"
 
 
-def test_add_standunit_to_stance_csv_strs_ReturnsObj():
+def test_add_vowunit_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -1158,8 +1158,8 @@ def test_add_standunit_to_stance_csv_strs_ReturnsObj():
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
     event7 = 7
-    sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_stand.set_buddelta(bob_buddelta)
+    sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_vow.set_buddelta(bob_buddelta)
 
     br00020_header = x_ideabricks.get("br00020")
     br00021_header = x_ideabricks.get("br00021")
@@ -1173,7 +1173,7 @@ def test_add_standunit_to_stance_csv_strs_ReturnsObj():
     br00029_header = x_ideabricks.get("br00029")
 
     # WHEN
-    add_standunit_to_stance_csv_strs(sue7_stand, x_ideabricks, csv_delimiter)
+    add_vowunit_to_stance_csv_strs(sue7_vow, x_ideabricks, csv_delimiter)
 
     # THEN
     assert x_ideabricks.get("br00020") != br00020_header
@@ -1189,7 +1189,7 @@ def test_add_standunit_to_stance_csv_strs_ReturnsObj():
 
 
 # TODO create function that saves excel file with all x_ideabricks
-# def test_add_standunit_to_stance_csv_strs_ReturnsObj():
+# def test_add_vowunit_to_stance_csv_strs_ReturnsObj():
 #     # ESTABLISH
 #     csv_delimiter = ","
 #     x_ideabricks = create_init_stance_idea_brick_csv_strs()
@@ -1220,8 +1220,8 @@ def test_add_standunit_to_stance_csv_strs_ReturnsObj():
 #     bob_buddelta.add_all_budatoms(bob_bud)
 #     sue_str = "Sue"
 #     event7 = 7
-#     sue7_stand = standunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-#     sue7_stand.set_buddelta(bob_buddelta)
+#     sue7_vow = vowunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+#     sue7_vow.set_buddelta(bob_buddelta)
 
 #     br00020_header = x_ideabricks.get("br00020")
 #     br00021_header = x_ideabricks.get("br00021")
@@ -1233,7 +1233,7 @@ def test_add_standunit_to_stance_csv_strs_ReturnsObj():
 #     br00027_header = x_ideabricks.get("br00027")
 #     br00028_header = x_ideabricks.get("br00028")
 #     br00029_header = x_ideabricks.get("br00029")
-#     add_standunit_to_stance_csv_strs(sue7_stand, x_ideabricks, csv_delimiter)
+#     add_vowunit_to_stance_csv_strs(sue7_vow, x_ideabricks, csv_delimiter)
 
 #     # WHEN
 #     assert 1 == 2

@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_stand.atom_config import acct_name_str, face_name_str, event_int_str
+from src.f04_vow.atom_config import acct_name_str, face_name_str, event_int_str
 from src.f09_idea.idea_db_tool import upsert_sheet, sheet_exists
 from src.f10_etl.transformers import (
     etl_otz_inx_event_ideas_to_inz_faces,

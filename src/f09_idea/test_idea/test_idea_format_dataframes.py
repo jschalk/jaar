@@ -6,7 +6,7 @@ from src.f03_chrono.examples.chrono_examples import (
     add_time_creg_itemunit,
     add_time_five_itemunit,
 )
-from src.f04_stand.atom_config import (
+from src.f04_vow.atom_config import (
     acct_name_str,
     group_label_str,
     parent_road_str,
