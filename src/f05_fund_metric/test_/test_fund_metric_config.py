@@ -207,19 +207,86 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     budfact_jmetrics_keys = set(budfact_aspect.get(jmetrics_str()))
     budgrou_jmetrics_keys = set(budgrou_aspect.get(jmetrics_str()))
 
-    # assert budunit_jmetrics_keys == {"huh"}
-    # assert budacct_jmetrics_keys == {"huh"}
-    # assert budmemb_jmetrics_keys == {"huh"}
-    # assert buditem_jmetrics_keys == {"huh"}
-    # assert budawar_jmetrics_keys == {"huh"}
-    # assert budreas_jmetrics_keys == {"huh"}
-    # assert budprem_jmetrics_keys == {"huh"}
-    # assert budteam_jmetrics_keys == {"huh"}
-    # assert budheal_jmetrics_keys == {"huh"}
-    # assert budfact_jmetrics_keys == {"huh"}
-    # assert budgrou_jmetrics_keys == {"huh"}
+    expected_budunit_jmetrics_keys = {
+        "_tree_traverse_count",
+        "_rational",
+        "_keeps_justified",
+        "_keeps_buildable",
+        "_sum_healerlink_share",
+        "_offtrack_fund",
+    }
+    assert expected_budunit_jmetrics_keys == budunit_jmetrics_keys
+    expected_budacct_jmetrics_keys = {
+        "_credor_pool",
+        "_debtor_pool",
+        "_irrational_debtit_belief",
+        "_inallocable_debtit_belief",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
+    }
+    assert expected_budacct_jmetrics_keys == budacct_jmetrics_keys
+    expected_budmemb_jmetrics_keys = {
+        "_credor_pool",
+        "_debtor_pool",
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
+    }
+    assert expected_budmemb_jmetrics_keys == budmemb_jmetrics_keys
+    expected_buditem_jmetrics_keys = {
+        "_active",
+        "_all_acct_cred",
+        "_all_acct_debt",
+        "_descendant_pledge_count",
+        "_fund_ratio",
+        "_fund_coin",
+        "_fund_onset",
+        "_fund_cease",
+        "_healerlink_ratio",
+        "_level",
+        "_range_evaluated",
+        "_task",
+        "_gogo_calc",
+        "_stop_calc",
+    }
+    assert expected_buditem_jmetrics_keys == buditem_jmetrics_keys
+    expected_budawar_jmetrics_keys = {"_fund_give", "_fund_take"}
+    assert expected_budawar_jmetrics_keys == budawar_jmetrics_keys
+    expected_budreas_jmetrics_keys = {"_status", "_task", "_base_item_active_value"}
+    assert expected_budreas_jmetrics_keys == budreas_jmetrics_keys
+    expected_budprem_jmetrics_keys = {"_status", "_task"}
+    assert expected_budprem_jmetrics_keys == budprem_jmetrics_keys
+    expected_budteam_jmetrics_keys = {"_owner_name_team"}
+    assert expected_budteam_jmetrics_keys == budteam_jmetrics_keys
+    expected_budgrou_jmetrics_keys = {
+        "_fund_give",
+        "_fund_take",
+        "_fund_agenda_give",
+        "_fund_agenda_take",
+        "_credor_pool",
+        "_debtor_pool",
+        "_fund_coin",
+    }
+    assert expected_budgrou_jmetrics_keys == budgrou_jmetrics_keys
 
-    # assert 1 == 2
+    assert budunit_jmetrics_keys  # Non-empty
+    assert budacct_jmetrics_keys  # Non-empty
+    assert budmemb_jmetrics_keys  # Non-empty
+    assert buditem_jmetrics_keys  # Non-empty
+    assert budawar_jmetrics_keys  # Non-empty
+    assert budreas_jmetrics_keys  # Non-empty
+    assert budprem_jmetrics_keys  # Non-empty
+    assert budteam_jmetrics_keys  # Non-empty
+    assert not budheal_jmetrics_keys  # empty
+    assert not budfact_jmetrics_keys  # empty
+    assert budgrou_jmetrics_keys  # Non-empty
 
 
 # def test_get_all_bud_dimen_keys_ReturnsObj():
