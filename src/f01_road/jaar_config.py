@@ -7,7 +7,7 @@ def get_fisc_title_if_None(fisc_title: str = None):
 
 
 def get_test_fisc_mstr_dir():
-    return "src/f07_fisc/examples/fisc_mstr"
+    return "src/f08_fisc/examples/fisc_mstr"
 
 
 def get_owners_folder() -> str:
