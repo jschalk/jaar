@@ -15,10 +15,10 @@ from src.f01_road.jaar_config import (
     grades_folder,
     get_rootpart_of_keep_dir,
     treasury_filename,
-    get_stands_folder,
-    get_init_stand_id_if_None,
+    get_vows_folder,
+    get_init_vow_id_if_None,
     get_json_filename,
-    init_stand_id,
+    init_vow_id,
 )
 from src.f01_road.finance import (
     default_fund_coin_if_None,
@@ -51,13 +51,13 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
-from src.f04_stand.atom import (
+from src.f04_vow.atom import (
     BudAtom,
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,
 )
 from src.f05_listen.basis_buds import get_default_forecast_bud
-from src.f04_stand.stand import StandUnit, standunit_shop, create_standunit_from_files
+from src.f04_vow.vow import vowUnit, vowunit_shop, create_vowunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -72,11 +72,11 @@ class Invalid_forecast_Exception(Exception):
     pass
 
 
-class SaveStandFileException(Exception):
+class SavevowFileException(Exception):
     pass
 
 
-class StandFileMissingException(Exception):
+class vowFileMissingException(Exception):
     pass
 
 
@@ -125,7 +125,7 @@ class HubUnit:
     _owner_dir: str = None
     _keeps_dir: str = None
     _atoms_dir: str = None
-    _stands_dir: str = None
+    _vows_dir: str = None
     _voice_dir: str = None
     _forecast_dir: str = None
     _deals_dir: str = None
@@ -141,7 +141,7 @@ class HubUnit:
         self._owner_dir = f_path(self._owners_dir, self.owner_name)
         self._keeps_dir = f_path(self._owner_dir, "keeps")
         self._atoms_dir = f_path(self._owner_dir, "atoms")
-        self._stands_dir = f_path(self._owner_dir, get_stands_folder())
+        self._vows_dir = f_path(self._owner_dir, get_vows_folder())
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._deals_dir = f_path(self._owner_dir, "deals")
@@ -197,7 +197,7 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_budunit.last_stand_id = init_stand_id()
+        x_budunit.last_vow_id = init_vow_id()
         return x_budunit
 
     def delete_voice_file(self):
@@ -206,7 +206,7 @@ class HubUnit:
     def open_file_forecast(self) -> str:
         return open_file(self._forecast_dir, self._forecast_filename)
 
-    # Stand methods
+    # vow methods
     def get_max_atom_file_number(self) -> int:
         return get_max_file_number(self._atoms_dir)
 
@@ -251,145 +251,145 @@ class HubUnit:
                 modify_bud_with_budatom(x_bud, x_atom)
         return x_bud
 
-    def get_max_stand_file_number(self) -> int:
-        return get_max_file_number(self._stands_dir)
+    def get_max_vow_file_number(self) -> int:
+        return get_max_file_number(self._vows_dir)
 
-    def _get_next_stand_file_number(self) -> int:
-        max_file_number = self.get_max_stand_file_number()
-        init_stand_id = get_init_stand_id_if_None()
-        return init_stand_id if max_file_number is None else max_file_number + 1
+    def _get_next_vow_file_number(self) -> int:
+        max_file_number = self.get_max_vow_file_number()
+        init_vow_id = get_init_vow_id_if_None()
+        return init_vow_id if max_file_number is None else max_file_number + 1
 
-    def stand_filename(self, stand_id: int) -> str:
-        return get_json_filename(stand_id)
+    def vow_filename(self, vow_id: int) -> str:
+        return get_json_filename(vow_id)
 
-    def stand_file_path(self, stand_id: int) -> bool:
-        stand_filename = self.stand_filename(stand_id)
-        return f_path(self._stands_dir, stand_filename)
+    def vow_file_path(self, vow_id: int) -> bool:
+        vow_filename = self.vow_filename(vow_id)
+        return f_path(self._vows_dir, vow_filename)
 
-    def stand_file_exists(self, stand_id: int) -> bool:
-        return os_path_exists(self.stand_file_path(stand_id))
+    def vow_file_exists(self, vow_id: int) -> bool:
+        return os_path_exists(self.vow_file_path(vow_id))
 
-    def validate_standunit(self, x_standunit: StandUnit) -> StandUnit:
-        if x_standunit._atoms_dir != self._atoms_dir:
-            x_standunit._atoms_dir = self._atoms_dir
-        if x_standunit._stands_dir != self._stands_dir:
-            x_standunit._stands_dir = self._stands_dir
-        if x_standunit._stand_id != self._get_next_stand_file_number():
-            x_standunit._stand_id = self._get_next_stand_file_number()
-        if x_standunit.owner_name != self.owner_name:
-            x_standunit.owner_name = self.owner_name
-        if x_standunit._delta_start != self._get_next_atom_file_number():
-            x_standunit._delta_start = self._get_next_atom_file_number()
-        return x_standunit
+    def validate_vowunit(self, x_vowunit: vowUnit) -> vowUnit:
+        if x_vowunit._atoms_dir != self._atoms_dir:
+            x_vowunit._atoms_dir = self._atoms_dir
+        if x_vowunit._vows_dir != self._vows_dir:
+            x_vowunit._vows_dir = self._vows_dir
+        if x_vowunit._vow_id != self._get_next_vow_file_number():
+            x_vowunit._vow_id = self._get_next_vow_file_number()
+        if x_vowunit.owner_name != self.owner_name:
+            x_vowunit.owner_name = self.owner_name
+        if x_vowunit._delta_start != self._get_next_atom_file_number():
+            x_vowunit._delta_start = self._get_next_atom_file_number()
+        return x_vowunit
 
-    def save_stand_file(
+    def save_vow_file(
         self,
-        x_stand: StandUnit,
+        x_vow: vowUnit,
         replace: bool = True,
         correct_invalid_attrs: bool = True,
-    ) -> StandUnit:
+    ) -> vowUnit:
         if correct_invalid_attrs:
-            x_stand = self.validate_standunit(x_stand)
+            x_vow = self.validate_vowunit(x_vow)
 
-        if x_stand._atoms_dir != self._atoms_dir:
-            raise SaveStandFileException(
-                f"StandUnit file cannot be saved because standunit._atoms_dir is incorrect: {x_stand._atoms_dir}. It must be {self._atoms_dir}."
+        if x_vow._atoms_dir != self._atoms_dir:
+            raise SavevowFileException(
+                f"vowUnit file cannot be saved because vowunit._atoms_dir is incorrect: {x_vow._atoms_dir}. It must be {self._atoms_dir}."
             )
-        if x_stand._stands_dir != self._stands_dir:
-            raise SaveStandFileException(
-                f"StandUnit file cannot be saved because standunit._stands_dir is incorrect: {x_stand._stands_dir}. It must be {self._stands_dir}."
+        if x_vow._vows_dir != self._vows_dir:
+            raise SavevowFileException(
+                f"vowUnit file cannot be saved because vowunit._vows_dir is incorrect: {x_vow._vows_dir}. It must be {self._vows_dir}."
             )
-        if x_stand.owner_name != self.owner_name:
-            raise SaveStandFileException(
-                f"StandUnit file cannot be saved because standunit.owner_name is incorrect: {x_stand.owner_name}. It must be {self.owner_name}."
+        if x_vow.owner_name != self.owner_name:
+            raise SavevowFileException(
+                f"vowUnit file cannot be saved because vowunit.owner_name is incorrect: {x_vow.owner_name}. It must be {self.owner_name}."
             )
-        stand_filename = self.stand_filename(x_stand._stand_id)
-        if not replace and self.stand_file_exists(x_stand._stand_id):
-            raise SaveStandFileException(
-                f"StandUnit file {stand_filename} exists and cannot be saved over."
+        vow_filename = self.vow_filename(x_vow._vow_id)
+        if not replace and self.vow_file_exists(x_vow._vow_id):
+            raise SavevowFileException(
+                f"vowUnit file {vow_filename} exists and cannot be saved over."
             )
-        x_stand.save_files()
-        return x_stand
+        x_vow.save_files()
+        return x_vow
 
-    def _del_stand_file(self, stand_id: int):
-        delete_dir(self.stand_file_path(stand_id))
+    def _del_vow_file(self, vow_id: int):
+        delete_dir(self.vow_file_path(vow_id))
 
-    def _default_standunit(self) -> StandUnit:
-        return standunit_shop(
+    def _default_vowunit(self) -> vowUnit:
+        return vowunit_shop(
             owner_name=self.owner_name,
-            _stand_id=self._get_next_stand_file_number(),
+            _vow_id=self._get_next_vow_file_number(),
             _atoms_dir=self._atoms_dir,
-            _stands_dir=self._stands_dir,
+            _vows_dir=self._vows_dir,
         )
 
-    def create_save_stand_file(self, before_bud: BudUnit, after_bud: BudUnit):
-        new_standunit = self._default_standunit()
-        new_buddelta = new_standunit._buddelta
+    def create_save_vow_file(self, before_bud: BudUnit, after_bud: BudUnit):
+        new_vowunit = self._default_vowunit()
+        new_buddelta = new_vowunit._buddelta
         new_buddelta.add_all_different_budatoms(before_bud, after_bud)
-        self.save_stand_file(new_standunit)
+        self.save_vow_file(new_vowunit)
 
-    def get_standunit(self, stand_id: int) -> StandUnit:
-        if self.stand_file_exists(stand_id) is False:
-            raise StandFileMissingException(
-                f"StandUnit file_number {stand_id} does not exist."
+    def get_vowunit(self, vow_id: int) -> vowUnit:
+        if self.vow_file_exists(vow_id) is False:
+            raise vowFileMissingException(
+                f"vowUnit file_number {vow_id} does not exist."
             )
-        x_stands_dir = self._stands_dir
+        x_vows_dir = self._vows_dir
         x_atoms_dir = self._atoms_dir
-        return create_standunit_from_files(x_stands_dir, stand_id, x_atoms_dir)
+        return create_vowunit_from_files(x_vows_dir, vow_id, x_atoms_dir)
 
-    def _merge_any_stands(self, x_bud: BudUnit) -> BudUnit:
-        stands_dir = self._stands_dir
-        stand_ints = get_integer_filenames(stands_dir, x_bud.last_stand_id)
-        if len(stand_ints) == 0:
+    def _merge_any_vows(self, x_bud: BudUnit) -> BudUnit:
+        vows_dir = self._vows_dir
+        vow_ints = get_integer_filenames(vows_dir, x_bud.last_vow_id)
+        if len(vow_ints) == 0:
             return copy_deepcopy(x_bud)
 
-        for stand_int in stand_ints:
-            x_stand = self.get_standunit(stand_int)
-            new_bud = x_stand._buddelta.get_edited_bud(x_bud)
+        for vow_int in vow_ints:
+            x_vow = self.get_vowunit(vow_int)
+            new_bud = x_vow._buddelta.get_edited_bud(x_bud)
         return new_bud
 
-    def _create_initial_stand_files_from_default(self):
-        x_standunit = standunit_shop(
+    def _create_initial_vow_files_from_default(self):
+        x_vowunit = vowunit_shop(
             owner_name=self.owner_name,
-            _stand_id=get_init_stand_id_if_None(),
-            _stands_dir=self._stands_dir,
+            _vow_id=get_init_vow_id_if_None(),
+            _vows_dir=self._vows_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_standunit._buddelta.add_all_different_budatoms(
+        x_vowunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.default_voice_bud(),
         )
-        x_standunit.save_files()
+        x_vowunit.save_files()
 
-    def _create_voice_from_stands(self):
-        x_bud = self._merge_any_stands(self.default_voice_bud())
+    def _create_voice_from_vows(self):
+        x_bud = self._merge_any_vows(self.default_voice_bud())
         self.save_voice_bud(x_bud)
 
-    def _create_initial_stand_and_voice_files(self):
-        self._create_initial_stand_files_from_default()
-        self._create_voice_from_stands()
+    def _create_initial_vow_and_voice_files(self):
+        self._create_initial_vow_files_from_default()
+        self._create_voice_from_vows()
 
-    def _create_initial_stand_files_from_voice(self):
-        x_standunit = self._default_standunit()
-        x_standunit._buddelta.add_all_different_budatoms(
+    def _create_initial_vow_files_from_voice(self):
+        x_vowunit = self._default_vowunit()
+        x_vowunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.get_voice_bud(),
         )
-        x_standunit.save_files()
+        x_vowunit.save_files()
 
-    def initialize_stand_voice_files(self):
+    def initialize_vow_voice_files(self):
         x_voice_file_exists = self.voice_file_exists()
-        stand_file_exists = self.stand_file_exists(init_stand_id())
-        if x_voice_file_exists is False and stand_file_exists is False:
-            self._create_initial_stand_and_voice_files()
-        elif x_voice_file_exists is False and stand_file_exists:
-            self._create_voice_from_stands()
-        elif x_voice_file_exists and stand_file_exists is False:
-            self._create_initial_stand_files_from_voice()
+        vow_file_exists = self.vow_file_exists(init_vow_id())
+        if x_voice_file_exists is False and vow_file_exists is False:
+            self._create_initial_vow_and_voice_files()
+        elif x_voice_file_exists is False and vow_file_exists:
+            self._create_voice_from_vows()
+        elif x_voice_file_exists and vow_file_exists is False:
+            self._create_initial_vow_files_from_voice()
 
-    def append_stands_to_voice_file(self):
+    def append_vows_to_voice_file(self):
         voice_bud = self.get_voice_bud()
-        voice_bud = self._merge_any_stands(voice_bud)
+        voice_bud = self._merge_any_vows(voice_bud)
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 

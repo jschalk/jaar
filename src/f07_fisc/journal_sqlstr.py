@@ -1,9 +1,9 @@
-from src.f04_stand.atom_config import (
+from src.f04_vow.atom_config import (
     get_flattened_atom_table_build,
     atom_hx_table_name,
     atom_mstr_table_name,
 )
-from src.f04_stand.atom import BudAtom
+from src.f04_vow.atom import BudAtom
 from src.f01_road.road import RoadUnit
 
 # from src.f00_instrument.sqlite import (
@@ -78,37 +78,37 @@ CREATE TABLE IF NOT EXISTS delta_mstr (
 ;"""
 
 
-def get_delta2stand_table_create_sqlstr() -> str:
+def get_delta2vow_table_create_sqlstr() -> str:
     return """
-CREATE TABLE delta2stand
+CREATE TABLE delta2vow
 (
   delta_rowid INT NOT NULL
-, stand_rowid INT NOT NULL
-, UNIQUE(delta_rowid, stand_rowid)
+, vow_rowid INT NOT NULL
+, UNIQUE(delta_rowid, vow_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (stand_rowid) REFERENCES stand_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (vow_rowid) REFERENCES vow_mstr (rowid)
 )
 ;"""
 
 
-def get_stand_table_create_sqlstr() -> str:
+def get_vow_table_create_sqlstr() -> str:
     return """
-CREATE TABLE IF NOT EXISTS stand_mstr (
+CREATE TABLE IF NOT EXISTS vow_mstr (
   author_owner_name VARCHAR(255) NOT NULL
-, author_stand_number INT NOT NULL
-, UNIQUE(author_owner_name, author_stand_number)
+, author_vow_number INT NOT NULL
+, UNIQUE(author_owner_name, author_vow_number)
 )
 ;"""
 
 
-def get_stand2owner_table_create_sqlstr() -> str:
+def get_vow2owner_table_create_sqlstr() -> str:
     return """
-CREATE TABLE stand2owner
+CREATE TABLE vow2owner
 (
-  stand_rowid INT NOT NULL
+  vow_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
-, UNIQUE(stand_rowid, owner_rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (stand_rowid) REFERENCES stand_mstr (rowid)
+, UNIQUE(vow_rowid, owner_rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (vow_rowid) REFERENCES vow_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
@@ -158,9 +158,9 @@ def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x.append(get_atom_mstr_table_create_sqlstr())
     list_x.append(get_atom2delta_table_create_sqlstr())
     list_x.append(get_delta_table_create_sqlstr())
-    list_x.append(get_delta2stand_table_create_sqlstr())
-    list_x.append(get_stand_table_create_sqlstr())
-    list_x.append(get_stand2owner_table_create_sqlstr())
+    list_x.append(get_delta2vow_table_create_sqlstr())
+    list_x.append(get_vow_table_create_sqlstr())
+    list_x.append(get_vow2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())
     list_x.append(get_road_ref_table_create_sqlstr())
     return list_x

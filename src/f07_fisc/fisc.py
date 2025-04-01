@@ -12,7 +12,7 @@ from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
 )
 from src.f01_road.jaar_config import (
-    get_stands_folder,
+    get_vows_folder,
     get_fisc_title_if_None,
     get_test_fisc_mstr_dir,
 )
@@ -77,13 +77,13 @@ class set_offi_time_max_Exception(Exception):
 @dataclass
 class FiscUnit:
     """Data pipelines:
-    pipeline1: stands->voice
+    pipeline1: vows->voice
     pipeline2: voice->dutys
     pipeline3: duty->job
     pipeline4: job->forecast
     pipeline5: voice->forecast (direct)
     pipeline6: voice->job->forecast (through jobs)
-    pipeline7: stands->forecast (could be 5 of 6)
+    pipeline7: vows->forecast (could be 5 of 6)
     """
 
     fisc_title: FiscTitle = None
@@ -100,7 +100,7 @@ class FiscUnit:
     _fisc_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
-    _stands_dir: str = None
+    _vows_dir: str = None
     _all_tranbook: TranBook = None
 
     # directory setup
@@ -108,10 +108,10 @@ class FiscUnit:
         fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
         self._fisc_dir = create_path(fiscs_dir, self.fisc_title)
         self._owners_dir = create_path(self._fisc_dir, "owners")
-        self._stands_dir = create_path(self._fisc_dir, get_stands_folder())
+        self._vows_dir = create_path(self._fisc_dir, get_vows_folder())
         set_dir(x_path=self._fisc_dir)
         set_dir(x_path=self._owners_dir)
-        set_dir(x_path=self._stands_dir)
+        set_dir(x_path=self._vows_dir)
         self._create_journal_db(in_memory=in_memory_journal)
 
     def _get_owner_dir(self, owner_name):
@@ -185,7 +185,7 @@ class FiscUnit:
 
     def init_owner_keeps(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
-        x_hubunit.initialize_stand_voice_files()
+        x_hubunit.initialize_vow_voice_files()
         x_hubunit.initialize_forecast_file(self.get_owner_voice_from_file(owner_name))
 
     def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:

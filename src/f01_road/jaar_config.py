@@ -14,16 +14,16 @@ def get_owners_folder() -> str:
     return "owners"
 
 
-def get_stands_folder() -> str:
-    return "stands"
+def get_vows_folder() -> str:
+    return "vows"
 
 
-def init_stand_id() -> int:
+def init_vow_id() -> int:
     return 0
 
 
-def get_init_stand_id_if_None(x_stand_id: int = None) -> int:
-    return init_stand_id() if x_stand_id is None else x_stand_id
+def get_init_vow_id_if_None(x_vow_id: int = None) -> int:
+    return init_vow_id() if x_vow_id is None else x_vow_id
 
 
 def get_json_filename(filename_without_extention) -> str:
