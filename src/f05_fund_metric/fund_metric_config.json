@@ -4,36 +4,54 @@
         "jkeys": {
             "acct_name": {
                 "class_type": "NameUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
                 "class_type": "LabelUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_credor_pool": {},
-            "_debtor_pool": {},
-            "_fund_agenda_give": {},
-            "_fund_agenda_ratio_give": {},
-            "_fund_agenda_ratio_take": {},
-            "_fund_agenda_take": {},
-            "_fund_give": {},
-            "_fund_take": {}
+            "_credor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_debtor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_ratio_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_ratio_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            }
         },
         "jvalues": {
             "credit_vote": {
                 "class_type": "int",
-                "column_order": 3,
                 "sqlite_datatype": "INTEGER"
             },
             "debtit_vote": {
                 "class_type": "int",
-                "column_order": 2,
                 "sqlite_datatype": "INTEGER"
             }
         }
@@ -43,32 +61,59 @@
         "jkeys": {
             "acct_name": {
                 "class_type": "NameUnit",
-                "column_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_credor_pool": {},
-            "_debtor_pool": {},
-            "_fund_agenda_give": {},
-            "_fund_agenda_ratio_give": {},
-            "_fund_agenda_ratio_take": {},
-            "_fund_agenda_take": {},
-            "_fund_give": {},
-            "_fund_take": {},
-            "_inallocable_debtit_belief": {},
-            "_irrational_debtit_belief": {}
+            "_credor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_debtor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_ratio_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_ratio_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_inallocable_debtit_belief": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_irrational_debtit_belief": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            }
         },
         "jvalues": {
             "credit_belief": {
-                "class_type": "int",
-                "column_order": 2,
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "debtit_belief": {
-                "class_type": "int",
-                "column_order": 1,
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             }
         }
     },
@@ -77,80 +122,86 @@
         "jkeys": {
             "item_title": {
                 "class_type": "TitleUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_credor_pool": {},
-            "_debtor_pool": {},
-            "_fund_agenda_give": {},
-            "_fund_agenda_take": {},
-            "_fund_coin": {},
-            "_fund_give": {},
-            "_fund_take": {}
+            "_credor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_debtor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_coin": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            }
         },
         "jvalues": {
             "addin": {
                 "class_type": "float",
-                "column_order": 10,
                 "sqlite_datatype": "REAL"
             },
             "begin": {
                 "class_type": "float",
-                "column_order": 5,
                 "sqlite_datatype": "REAL"
             },
             "close": {
                 "class_type": "float",
-                "column_order": 6,
                 "sqlite_datatype": "REAL"
             },
             "denom": {
                 "class_type": "int",
-                "column_order": 8,
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
                 "class_type": "float",
-                "column_order": 11,
                 "sqlite_datatype": "REAL"
             },
             "mass": {
                 "class_type": "int",
-                "column_order": 3,
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
                 "class_type": "bool",
-                "column_order": 9,
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
                 "class_type": "int",
-                "column_order": 7,
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
                 "class_type": "bool",
-                "column_order": 2,
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
                 "class_type": "bool",
-                "column_order": 4,
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
                 "class_type": "float",
-                "column_order": 12,
                 "sqlite_datatype": "REAL"
             }
         }
@@ -160,30 +211,30 @@
         "jkeys": {
             "awardee_tag": {
                 "class_type": "LabelUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_fund_give": {},
-            "_fund_take": {}
+            "_fund_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            }
         },
         "jvalues": {
             "give_force": {
                 "class_type": "float",
-                "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
             "take_force": {
                 "class_type": "float",
-                "column_order": 2,
                 "sqlite_datatype": "REAL"
             }
         }
@@ -193,14 +244,10 @@
         "jkeys": {
             "base": {
                 "class_type": "RoadUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -208,17 +255,14 @@
         "jvalues": {
             "fnigh": {
                 "class_type": "float",
-                "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
             "fopen": {
                 "class_type": "float",
-                "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
             "pick": {
                 "class_type": "RoadUnit",
-                "column_order": 2,
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -228,14 +272,10 @@
         "jkeys": {
             "healer_name": {
                 "class_type": "NameUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -247,41 +287,38 @@
         "jkeys": {
             "base": {
                 "class_type": "RoadUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "need": {
                 "class_type": "RoadUnit",
-                "column_order": 2,
-                "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_status": {},
-            "_task": {}
+            "_status": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_task": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
         },
         "jvalues": {
             "divisor": {
                 "class_type": "int",
-                "column_order": 5,
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
                 "class_type": "float",
-                "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
             "open": {
                 "class_type": "float",
-                "column_order": 3,
                 "sqlite_datatype": "REAL"
             }
         }
@@ -291,26 +328,30 @@
         "jkeys": {
             "base": {
                 "class_type": "RoadUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_base_item_active_value": {},
-            "_status": {},
-            "_task": {}
+            "_base_item_active_value": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_status": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_task": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
         },
         "jvalues": {
             "base_item_active_requisite": {
                 "class_type": "bool",
-                "column_order": 2,
                 "sqlite_datatype": "INTEGER"
             }
         }
@@ -320,19 +361,18 @@
         "jkeys": {
             "road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "team_tag": {
                 "class_type": "LabelUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_owner_name_team": {}
+            "_owner_name_team": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
         },
         "jvalues": {}
     },
@@ -341,87 +381,114 @@
         "jkeys": {
             "item_title": {
                 "class_type": "TitleUnit",
-                "column_order": 1,
-                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
                 "class_type": "RoadUnit",
-                "column_order": 0,
-                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_active": {},
-            "_all_acct_cred": {},
-            "_all_acct_debt": {},
-            "_descendant_pledge_count": {},
-            "_fund_cease": {},
-            "_fund_coin": {},
-            "_fund_onset": {},
-            "_fund_ratio": {},
-            "_gogo_calc": {},
-            "_healerlink_ratio": {},
-            "_level": {},
-            "_range_evaluated": {},
-            "_stop_calc": {},
-            "_task": {}
+            "_active": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_all_acct_cred": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_all_acct_debt": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_descendant_pledge_count": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_fund_cease": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_coin": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_onset": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_ratio": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_gogo_calc": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_healerlink_ratio": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_level": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_range_evaluated": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_stop_calc": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_task": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
         },
         "jvalues": {
             "addin": {
                 "class_type": "float",
-                "column_order": 10,
                 "sqlite_datatype": "REAL"
             },
             "begin": {
                 "class_type": "float",
-                "column_order": 5,
                 "sqlite_datatype": "REAL"
             },
             "close": {
                 "class_type": "float",
-                "column_order": 6,
                 "sqlite_datatype": "REAL"
             },
             "denom": {
                 "class_type": "int",
-                "column_order": 8,
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
                 "class_type": "float",
-                "column_order": 11,
                 "sqlite_datatype": "REAL"
             },
             "mass": {
                 "class_type": "int",
-                "column_order": 3,
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
                 "class_type": "bool",
-                "column_order": 9,
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
                 "class_type": "int",
-                "column_order": 7,
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
                 "class_type": "bool",
-                "column_order": 2,
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
                 "class_type": "bool",
-                "column_order": 4,
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
                 "class_type": "float",
-                "column_order": 12,
                 "sqlite_datatype": "REAL"
             }
         }
@@ -430,52 +497,62 @@
         "abbreviation": "budunit",
         "jkeys": {},
         "jmetrics": {
-            "_keeps_buildable": {},
-            "_keeps_justified": {},
-            "_offtrack_fund": {},
-            "_rational": {},
-            "_sum_healerlink_share": {},
-            "_tree_traverse_count": {}
+            "_keeps_buildable": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_keeps_justified": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_offtrack_fund": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_rational": {
+                "class_type": "bool",
+                "sqlite_datatype": "INTEGER"
+            },
+            "_sum_healerlink_share": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_tree_traverse_count": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
         },
         "jvalues": {
             "credor_respect": {
-                "class_type": "int",
-                "column_order": 3,
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "debtor_respect": {
-                "class_type": "int",
-                "column_order": 2,
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "fund_coin": {
                 "class_type": "float",
-                "column_order": 1,
                 "sqlite_datatype": "REAL"
             },
             "fund_pool": {
                 "class_type": "float",
-                "column_order": 0,
                 "sqlite_datatype": "REAL"
             },
             "max_tree_traverse": {
                 "class_type": "int",
-                "column_order": 5,
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
                 "class_type": "float",
-                "column_order": 6,
                 "sqlite_datatype": "REAL"
             },
             "respect_bit": {
                 "class_type": "float",
-                "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
             "tally": {
                 "class_type": "int",
-                "column_order": 7,
                 "sqlite_datatype": "INTEGER"
             }
         }

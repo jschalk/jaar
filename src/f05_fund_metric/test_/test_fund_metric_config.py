@@ -82,6 +82,7 @@ from src.f05_fund_metric.fund_metric_config import (
     get_fund_metric_config_filename,
     config_file_path,
     get_fund_metric_config_dict,
+    get_all_fund_metric_args,
 )
 from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
@@ -160,15 +161,18 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
             atom_dimen = atom_config.get(level1_key)
             for level2_key, fm_aspect_dict in aspect_dict.items():
                 if level2_key == jkeys_str():
-                    atom_attributes = atom_dimen.get(jkeys_str())
-                    atom_attribute_keys = set(atom_attributes)
+                    atom_args = atom_dimen.get(jkeys_str())
+                    atom_arg_keys = set(atom_args)
                     fm_aspect_keys = set(fm_aspect_dict.keys())
-                    assert fm_aspect_keys == atom_attribute_keys
+                    print(
+                        f"{level1_key=} {level2_key=} {fm_aspect_keys=} {atom_arg_keys=}"
+                    )
+                    assert fm_aspect_keys == atom_arg_keys
                 elif level2_key == jvalues_str():
-                    atom_attributes = atom_dimen.get(jvalues_str())
-                    atom_attribute_keys = set(atom_attributes)
+                    atom_args = atom_dimen.get(jvalues_str())
+                    atom_arg_keys = set(atom_args)
                     fm_aspect_keys = set(fm_aspect_dict.keys())
-                    assert fm_aspect_keys == atom_attribute_keys
+                    assert fm_aspect_keys == atom_arg_keys
 
     budunit_aspect = fund_metric_config.get(budunit_str())
     budacct_aspect = fund_metric_config.get(bud_acctunit_str())
@@ -181,19 +185,6 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     budheal_aspect = fund_metric_config.get(bud_item_healerlink_str())
     budfact_aspect = fund_metric_config.get(bud_item_factunit_str())
     budgrou_aspect = fund_metric_config.get(bud_groupunit_str())
-
-    abbr_str = "abbreviation"
-    assert budunit_aspect.get(abbr_str) == "budunit"
-    assert budacct_aspect.get(abbr_str) == "budacct"
-    assert budmemb_aspect.get(abbr_str) == "budmemb"
-    assert buditem_aspect.get(abbr_str) == "buditem"
-    assert budawar_aspect.get(abbr_str) == "budawar"
-    assert budreas_aspect.get(abbr_str) == "budreas"
-    assert budprem_aspect.get(abbr_str) == "budprem"
-    assert budteam_aspect.get(abbr_str) == "budteam"
-    assert budheal_aspect.get(abbr_str) == "budheal"
-    assert budfact_aspect.get(abbr_str) == "budfact"
-    assert budgrou_aspect.get(abbr_str) == "budgrou"
 
     budunit_jmetrics_keys = set(budunit_aspect.get(jmetrics_str()))
     budacct_jmetrics_keys = set(budacct_aspect.get(jmetrics_str()))
@@ -287,6 +278,355 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert not budheal_jmetrics_keys  # empty
     assert not budfact_jmetrics_keys  # empty
     assert budgrou_jmetrics_keys  # Non-empty
+
+
+def test_get_fund_metric_config_dict_ReturnsObj_CheckAbbreviations():
+    # ESTABLISH / WHEN
+    fund_metric_config = get_fund_metric_config_dict()
+
+    # THEN
+    budunit_aspect = fund_metric_config.get(budunit_str())
+    budacct_aspect = fund_metric_config.get(bud_acctunit_str())
+    budmemb_aspect = fund_metric_config.get(bud_acct_membership_str())
+    buditem_aspect = fund_metric_config.get(bud_itemunit_str())
+    budawar_aspect = fund_metric_config.get(bud_item_awardlink_str())
+    budreas_aspect = fund_metric_config.get(bud_item_reasonunit_str())
+    budprem_aspect = fund_metric_config.get(bud_item_reason_premiseunit_str())
+    budteam_aspect = fund_metric_config.get(bud_item_teamlink_str())
+    budheal_aspect = fund_metric_config.get(bud_item_healerlink_str())
+    budfact_aspect = fund_metric_config.get(bud_item_factunit_str())
+    budgrou_aspect = fund_metric_config.get(bud_groupunit_str())
+    abbr_str = "abbreviation"
+    assert budunit_aspect.get(abbr_str) == "budunit"
+    assert budacct_aspect.get(abbr_str) == "budacct"
+    assert budmemb_aspect.get(abbr_str) == "budmemb"
+    assert buditem_aspect.get(abbr_str) == "buditem"
+    assert budawar_aspect.get(abbr_str) == "budawar"
+    assert budreas_aspect.get(abbr_str) == "budreas"
+    assert budprem_aspect.get(abbr_str) == "budprem"
+    assert budteam_aspect.get(abbr_str) == "budteam"
+    assert budheal_aspect.get(abbr_str) == "budheal"
+    assert budfact_aspect.get(abbr_str) == "budfact"
+    assert budgrou_aspect.get(abbr_str) == "budgrou"
+
+
+def test_get_all_fund_metric_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    all_fund_metric_args = get_all_fund_metric_args()
+
+    # THEN
+    assert all_fund_metric_args
+    assert stop_want_str() in all_fund_metric_args
+    assert parent_road_str() in all_fund_metric_args
+    assert "_fund_give" in all_fund_metric_args
+
+    # fund_metric_config = get_fund_metric_config_dict()
+    # bud_acctunit_aspects = fund_metric_config.get("bud_acctunit")
+    # budacct_jmetrics_dict = bud_acctunit_aspects.get("jmetrics")
+    # road_fund_metric_aspects = budacct_jmetrics_dict.get("_fund_give")
+    # assert bud_item_factunit_str() in road_fund_metric_aspects
+    # assert bud_item_teamlink_str() in road_fund_metric_aspects
+    # assert len(road_fund_metric_aspects) == 6
+    assert len(all_fund_metric_args) == 75
+
+
+def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
+    # ESTABLISH / WHEN
+    fund_metric_config = get_fund_metric_config_dict()
+
+    # THEN
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    for level1_key, aspect_dict in fund_metric_config.items():
+        for level2_key, fm_aspect_dict in aspect_dict.items():
+            if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
+                for level3_key, attr_dict in fm_aspect_dict.items():
+                    print(
+                        f"{level1_key=} {level2_key=} {level3_key=} {set(attr_dict.keys())=}"
+                    )
+                    assert set(attr_dict.keys()) == {"class_type", "sqlite_datatype"}
+
+
+def g_class_type(
+    config: dict[str, dict[str, dict]], key1: str, key2: str, key3: str
+) -> str:
+    dimen = config.get(key1)
+    j_dict = dimen.get(key2)
+    j_arg = j_dict.get(key3)
+    return j_arg.get("class_type")
+
+
+def g_sqlitetype(
+    config: dict[str, dict[str, dict]], key1: str, key2: str, key3: str
+) -> str:
+    dimen = config.get(key1)
+    j_dict = dimen.get(key2)
+    j_arg = j_dict.get(key3)
+    return j_arg.get("sqlite_datatype")
+
+
+def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
+    # ESTABLISH / WHEN
+    config = get_fund_metric_config_dict()
+    # for level1_key, aspect_dict in config.items():
+    #     for level2_key, fm_aspect_dict in aspect_dict.items():
+    #         if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
+    #             for level3_key, attr_dict in fm_aspect_dict.items():
+    #                 dimem = aspect_dict.get("abbreviation")
+    #                 x_class_type = attr_dict.get("class_type")
+    #                 x_sqlite_datatype = attr_dict.get("sqlite_datatype")
+    #                 print(
+    #                     f"""    assert g_class_type(config, {dimem}, {level2_key[0:2]}, "{level3_key}") == "{x_class_type}" """
+    #                 )
+    #                 print(
+    #                     f"""    assert g_sqlitetype(config, {dimem}, {level2_key[0:2]}, "{level3_key}") == "{x_sqlite_datatype}" """
+    #                 )
+
+    jk = "jkeys"
+    jv = "jvalues"
+    jm = "jmetrics"
+    budunit = budunit_str()
+    budacct = bud_acctunit_str()
+    budmemb = bud_acct_membership_str()
+    buditem = bud_itemunit_str()
+    budawar = bud_item_awardlink_str()
+    budreas = bud_item_reasonunit_str()
+    budprem = bud_item_reason_premiseunit_str()
+    budteam = bud_item_teamlink_str()
+    budheal = bud_item_healerlink_str()
+    budfact = bud_item_factunit_str()
+    budgrou = bud_groupunit_str()
+    assert g_class_type(config, budmemb, jk, "acct_name") == "NameUnit"
+    assert g_sqlitetype(config, budmemb, jk, "acct_name") == "TEXT"
+    assert g_class_type(config, budmemb, jk, "group_label") == "LabelUnit"
+    assert g_sqlitetype(config, budmemb, jk, "group_label") == "TEXT"
+    assert g_class_type(config, budmemb, jm, "_credor_pool") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_credor_pool") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_debtor_pool") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_debtor_pool") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_fund_agenda_give") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_fund_agenda_give") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_fund_agenda_ratio_give") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_fund_agenda_ratio_give") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_fund_agenda_ratio_take") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_fund_agenda_ratio_take") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_fund_agenda_take") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_fund_agenda_take") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_fund_give") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_fund_give") == "REAL"
+    assert g_class_type(config, budmemb, jm, "_fund_take") == "float"
+    assert g_sqlitetype(config, budmemb, jm, "_fund_take") == "REAL"
+    assert g_class_type(config, budmemb, jv, "credit_vote") == "int"
+    assert g_sqlitetype(config, budmemb, jv, "credit_vote") == "INTEGER"
+    assert g_class_type(config, budmemb, jv, "debtit_vote") == "int"
+    assert g_sqlitetype(config, budmemb, jv, "debtit_vote") == "INTEGER"
+    assert g_class_type(config, budacct, jk, "acct_name") == "NameUnit"
+    assert g_sqlitetype(config, budacct, jk, "acct_name") == "TEXT"
+    assert g_class_type(config, budacct, jm, "_credor_pool") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_credor_pool") == "REAL"
+    assert g_class_type(config, budacct, jm, "_debtor_pool") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_debtor_pool") == "REAL"
+    assert g_class_type(config, budacct, jm, "_fund_agenda_give") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_fund_agenda_give") == "REAL"
+    assert g_class_type(config, budacct, jm, "_fund_agenda_ratio_give") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_fund_agenda_ratio_give") == "REAL"
+    assert g_class_type(config, budacct, jm, "_fund_agenda_ratio_take") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_fund_agenda_ratio_take") == "REAL"
+    assert g_class_type(config, budacct, jm, "_fund_agenda_take") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_fund_agenda_take") == "REAL"
+    assert g_class_type(config, budacct, jm, "_fund_give") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_fund_give") == "REAL"
+    assert g_class_type(config, budacct, jm, "_fund_take") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_fund_take") == "REAL"
+    assert g_class_type(config, budacct, jm, "_inallocable_debtit_belief") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_inallocable_debtit_belief") == "REAL"
+    assert g_class_type(config, budacct, jm, "_irrational_debtit_belief") == "float"
+    assert g_sqlitetype(config, budacct, jm, "_irrational_debtit_belief") == "REAL"
+    assert g_class_type(config, budacct, jv, "credit_belief") == "float"
+    assert g_sqlitetype(config, budacct, jv, "credit_belief") == "REAL"
+    assert g_class_type(config, budacct, jv, "debtit_belief") == "float"
+    assert g_sqlitetype(config, budacct, jv, "debtit_belief") == "REAL"
+    assert g_class_type(config, budgrou, jk, "item_title") == "TitleUnit"
+    assert g_sqlitetype(config, budgrou, jk, "item_title") == "TEXT"
+    assert g_class_type(config, budgrou, jk, "parent_road") == "RoadUnit"
+    assert g_sqlitetype(config, budgrou, jk, "parent_road") == "TEXT"
+    assert g_class_type(config, budgrou, jm, "_credor_pool") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_credor_pool") == "REAL"
+    assert g_class_type(config, budgrou, jm, "_debtor_pool") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_debtor_pool") == "REAL"
+    assert g_class_type(config, budgrou, jm, "_fund_agenda_give") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_fund_agenda_give") == "REAL"
+    assert g_class_type(config, budgrou, jm, "_fund_agenda_take") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_fund_agenda_take") == "REAL"
+    assert g_class_type(config, budgrou, jm, "_fund_coin") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_fund_coin") == "REAL"
+    assert g_class_type(config, budgrou, jm, "_fund_give") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_fund_give") == "REAL"
+    assert g_class_type(config, budgrou, jm, "_fund_take") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "_fund_take") == "REAL"
+    assert g_class_type(config, budgrou, jv, "addin") == "float"
+    assert g_sqlitetype(config, budgrou, jv, "addin") == "REAL"
+    assert g_class_type(config, budgrou, jv, "begin") == "float"
+    assert g_sqlitetype(config, budgrou, jv, "begin") == "REAL"
+    assert g_class_type(config, budgrou, jv, "close") == "float"
+    assert g_sqlitetype(config, budgrou, jv, "close") == "REAL"
+    assert g_class_type(config, budgrou, jv, "denom") == "int"
+    assert g_sqlitetype(config, budgrou, jv, "denom") == "INTEGER"
+    assert g_class_type(config, budgrou, jv, "gogo_want") == "float"
+    assert g_sqlitetype(config, budgrou, jv, "gogo_want") == "REAL"
+    assert g_class_type(config, budgrou, jv, "mass") == "int"
+    assert g_sqlitetype(config, budgrou, jv, "mass") == "INTEGER"
+    assert g_class_type(config, budgrou, jv, "morph") == "bool"
+    assert g_sqlitetype(config, budgrou, jv, "morph") == "INTEGER"
+    assert g_class_type(config, budgrou, jv, "numor") == "int"
+    assert g_sqlitetype(config, budgrou, jv, "numor") == "INTEGER"
+    assert g_class_type(config, budgrou, jv, "pledge") == "bool"
+    assert g_sqlitetype(config, budgrou, jv, "pledge") == "INTEGER"
+    assert g_class_type(config, budgrou, jv, "problem_bool") == "bool"
+    assert g_sqlitetype(config, budgrou, jv, "problem_bool") == "INTEGER"
+    assert g_class_type(config, budgrou, jv, "stop_want") == "float"
+    assert g_sqlitetype(config, budgrou, jv, "stop_want") == "REAL"
+    assert g_class_type(config, budawar, jk, "awardee_tag") == "LabelUnit"
+    assert g_sqlitetype(config, budawar, jk, "awardee_tag") == "TEXT"
+    assert g_class_type(config, budawar, jk, "road") == "RoadUnit"
+    assert g_sqlitetype(config, budawar, jk, "road") == "TEXT"
+    assert g_class_type(config, budawar, jm, "_fund_give") == "float"
+    assert g_sqlitetype(config, budawar, jm, "_fund_give") == "REAL"
+    assert g_class_type(config, budawar, jm, "_fund_take") == "float"
+    assert g_sqlitetype(config, budawar, jm, "_fund_take") == "REAL"
+    assert g_class_type(config, budawar, jv, "give_force") == "float"
+    assert g_sqlitetype(config, budawar, jv, "give_force") == "REAL"
+    assert g_class_type(config, budawar, jv, "take_force") == "float"
+    assert g_sqlitetype(config, budawar, jv, "take_force") == "REAL"
+    assert g_class_type(config, budfact, jk, "base") == "RoadUnit"
+    assert g_sqlitetype(config, budfact, jk, "base") == "TEXT"
+    assert g_class_type(config, budfact, jk, "road") == "RoadUnit"
+    assert g_sqlitetype(config, budfact, jk, "road") == "TEXT"
+    assert g_class_type(config, budfact, jv, "fnigh") == "float"
+    assert g_sqlitetype(config, budfact, jv, "fnigh") == "REAL"
+    assert g_class_type(config, budfact, jv, "fopen") == "float"
+    assert g_sqlitetype(config, budfact, jv, "fopen") == "REAL"
+    assert g_class_type(config, budfact, jv, "pick") == "RoadUnit"
+    assert g_sqlitetype(config, budfact, jv, "pick") == "TEXT"
+    assert g_class_type(config, budheal, jk, "healer_name") == "NameUnit"
+    assert g_sqlitetype(config, budheal, jk, "healer_name") == "TEXT"
+    assert g_class_type(config, budheal, jk, "road") == "RoadUnit"
+    assert g_sqlitetype(config, budheal, jk, "road") == "TEXT"
+    assert g_class_type(config, budprem, jk, "base") == "RoadUnit"
+    assert g_sqlitetype(config, budprem, jk, "base") == "TEXT"
+    assert g_class_type(config, budprem, jk, "need") == "RoadUnit"
+    assert g_sqlitetype(config, budprem, jk, "need") == "TEXT"
+    assert g_class_type(config, budprem, jk, "road") == "RoadUnit"
+    assert g_sqlitetype(config, budprem, jk, "road") == "TEXT"
+    assert g_class_type(config, budprem, jm, "_status") == "int"
+    assert g_sqlitetype(config, budprem, jm, "_status") == "INTEGER"
+    assert g_class_type(config, budprem, jm, "_task") == "int"
+    assert g_sqlitetype(config, budprem, jm, "_task") == "INTEGER"
+    assert g_class_type(config, budprem, jv, "divisor") == "int"
+    assert g_sqlitetype(config, budprem, jv, "divisor") == "INTEGER"
+    assert g_class_type(config, budprem, jv, "nigh") == "float"
+    assert g_sqlitetype(config, budprem, jv, "nigh") == "REAL"
+    assert g_class_type(config, budprem, jv, "open") == "float"
+    assert g_sqlitetype(config, budprem, jv, "open") == "REAL"
+    assert g_class_type(config, budreas, jk, "base") == "RoadUnit"
+    assert g_sqlitetype(config, budreas, jk, "base") == "TEXT"
+    assert g_class_type(config, budreas, jk, "road") == "RoadUnit"
+    assert g_sqlitetype(config, budreas, jk, "road") == "TEXT"
+    assert g_class_type(config, budreas, jm, "_base_item_active_value") == "int"
+    assert g_sqlitetype(config, budreas, jm, "_base_item_active_value") == "INTEGER"
+    assert g_class_type(config, budreas, jm, "_status") == "int"
+    assert g_sqlitetype(config, budreas, jm, "_status") == "INTEGER"
+    assert g_class_type(config, budreas, jm, "_task") == "int"
+    assert g_sqlitetype(config, budreas, jm, "_task") == "INTEGER"
+    assert g_class_type(config, budreas, jv, "base_item_active_requisite") == "bool"
+    assert g_sqlitetype(config, budreas, jv, "base_item_active_requisite") == "INTEGER"
+    assert g_class_type(config, budteam, jk, "road") == "RoadUnit"
+    assert g_sqlitetype(config, budteam, jk, "road") == "TEXT"
+    assert g_class_type(config, budteam, jk, "team_tag") == "LabelUnit"
+    assert g_sqlitetype(config, budteam, jk, "team_tag") == "TEXT"
+    assert g_class_type(config, budteam, jm, "_owner_name_team") == "int"
+    assert g_sqlitetype(config, budteam, jm, "_owner_name_team") == "INTEGER"
+    assert g_class_type(config, buditem, jk, "item_title") == "TitleUnit"
+    assert g_sqlitetype(config, buditem, jk, "item_title") == "TEXT"
+    assert g_class_type(config, buditem, jk, "parent_road") == "RoadUnit"
+    assert g_sqlitetype(config, buditem, jk, "parent_road") == "TEXT"
+    assert g_class_type(config, buditem, jm, "_active") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_active") == "INTEGER"
+    assert g_class_type(config, buditem, jm, "_all_acct_cred") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_all_acct_cred") == "INTEGER"
+    assert g_class_type(config, buditem, jm, "_all_acct_debt") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_all_acct_debt") == "INTEGER"
+    assert g_class_type(config, buditem, jm, "_descendant_pledge_count") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_descendant_pledge_count") == "INTEGER"
+    assert g_class_type(config, buditem, jm, "_fund_cease") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_fund_cease") == "REAL"
+    assert g_class_type(config, buditem, jm, "_fund_coin") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_fund_coin") == "REAL"
+    assert g_class_type(config, buditem, jm, "_fund_onset") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_fund_onset") == "REAL"
+    assert g_class_type(config, buditem, jm, "_fund_ratio") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_fund_ratio") == "REAL"
+    assert g_class_type(config, buditem, jm, "_gogo_calc") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_gogo_calc") == "REAL"
+    assert g_class_type(config, buditem, jm, "_healerlink_ratio") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_healerlink_ratio") == "REAL"
+    assert g_class_type(config, buditem, jm, "_level") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_level") == "INTEGER"
+    assert g_class_type(config, buditem, jm, "_range_evaluated") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_range_evaluated") == "INTEGER"
+    assert g_class_type(config, buditem, jm, "_stop_calc") == "float"
+    assert g_sqlitetype(config, buditem, jm, "_stop_calc") == "REAL"
+    assert g_class_type(config, buditem, jm, "_task") == "int"
+    assert g_sqlitetype(config, buditem, jm, "_task") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "addin") == "float"
+    assert g_sqlitetype(config, buditem, jv, "addin") == "REAL"
+    assert g_class_type(config, buditem, jv, "begin") == "float"
+    assert g_sqlitetype(config, buditem, jv, "begin") == "REAL"
+    assert g_class_type(config, buditem, jv, "close") == "float"
+    assert g_sqlitetype(config, buditem, jv, "close") == "REAL"
+    assert g_class_type(config, buditem, jv, "denom") == "int"
+    assert g_sqlitetype(config, buditem, jv, "denom") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "gogo_want") == "float"
+    assert g_sqlitetype(config, buditem, jv, "gogo_want") == "REAL"
+    assert g_class_type(config, buditem, jv, "mass") == "int"
+    assert g_sqlitetype(config, buditem, jv, "mass") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "morph") == "bool"
+    assert g_sqlitetype(config, buditem, jv, "morph") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "numor") == "int"
+    assert g_sqlitetype(config, buditem, jv, "numor") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "pledge") == "bool"
+    assert g_sqlitetype(config, buditem, jv, "pledge") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "problem_bool") == "bool"
+    assert g_sqlitetype(config, buditem, jv, "problem_bool") == "INTEGER"
+    assert g_class_type(config, buditem, jv, "stop_want") == "float"
+    assert g_sqlitetype(config, buditem, jv, "stop_want") == "REAL"
+    assert g_class_type(config, budunit, jm, "_keeps_buildable") == "int"
+    assert g_sqlitetype(config, budunit, jm, "_keeps_buildable") == "INTEGER"
+    assert g_class_type(config, budunit, jm, "_keeps_justified") == "int"
+    assert g_sqlitetype(config, budunit, jm, "_keeps_justified") == "INTEGER"
+    assert g_class_type(config, budunit, jm, "_offtrack_fund") == "int"
+    assert g_sqlitetype(config, budunit, jm, "_offtrack_fund") == "INTEGER"
+    assert g_class_type(config, budunit, jm, "_rational") == "bool"
+    assert g_sqlitetype(config, budunit, jm, "_rational") == "INTEGER"
+    assert g_class_type(config, budunit, jm, "_sum_healerlink_share") == "float"
+    assert g_sqlitetype(config, budunit, jm, "_sum_healerlink_share") == "REAL"
+    assert g_class_type(config, budunit, jm, "_tree_traverse_count") == "int"
+    assert g_sqlitetype(config, budunit, jm, "_tree_traverse_count") == "INTEGER"
+    assert g_class_type(config, budunit, jv, "credor_respect") == "float"
+    assert g_sqlitetype(config, budunit, jv, "credor_respect") == "REAL"
+    assert g_class_type(config, budunit, jv, "debtor_respect") == "float"
+    assert g_sqlitetype(config, budunit, jv, "debtor_respect") == "REAL"
+    assert g_class_type(config, budunit, jv, "fund_coin") == "float"
+    assert g_sqlitetype(config, budunit, jv, "fund_coin") == "REAL"
+    assert g_class_type(config, budunit, jv, "fund_pool") == "float"
+    assert g_sqlitetype(config, budunit, jv, "fund_pool") == "REAL"
+    assert g_class_type(config, budunit, jv, "max_tree_traverse") == "int"
+    assert g_sqlitetype(config, budunit, jv, "max_tree_traverse") == "INTEGER"
+    assert g_class_type(config, budunit, jv, "penny") == "float"
+    assert g_sqlitetype(config, budunit, jv, "penny") == "REAL"
+    assert g_class_type(config, budunit, jv, "respect_bit") == "float"
+    assert g_sqlitetype(config, budunit, jv, "respect_bit") == "REAL"
+    assert g_class_type(config, budunit, jv, "tally") == "int"
+    assert g_sqlitetype(config, budunit, jv, "tally") == "INTEGER"
 
 
 # def test_get_all_bud_dimen_keys_ReturnsObj():

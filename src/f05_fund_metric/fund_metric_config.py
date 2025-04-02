@@ -27,3 +27,13 @@ def config_file_path() -> str:
 
 def get_fund_metric_config_dict() -> dict[str, dict]:
     return open_json(config_file_path())
+
+
+def get_all_fund_metric_args() -> dict[str, set[str]]:
+    fund_metric_config_dict = get_fund_metric_config_dict()
+    all_args = set()
+    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+        for dimen_key, arg_dict in dimen_dict.items():
+            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+                all_args = all_args.union(set(arg_dict.keys()))
+    return all_args
