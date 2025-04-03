@@ -82,7 +82,9 @@ from src.f05_fund_metric.fund_metric_config import (
     get_fund_metric_config_filename,
     config_file_path,
     get_fund_metric_config_dict,
+    get_fund_metric_dimen_args,
     get_all_fund_metric_args,
+    get_fund_metric_args_type_dict,
 )
 from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
@@ -319,6 +321,12 @@ def test_get_all_fund_metric_args_ReturnsObj():
     assert stop_want_str() in all_fund_metric_args
     assert parent_road_str() in all_fund_metric_args
     assert "_fund_give" in all_fund_metric_args
+    assert all_fund_metric_args.get("_fund_give") == {
+        "bud_item_awardlink",
+        "bud_acct_membership",
+        "bud_groupunit",
+        "bud_acctunit",
+    }
 
     # fund_metric_config = get_fund_metric_config_dict()
     # bud_acctunit_aspects = fund_metric_config.get("bud_acctunit")
@@ -344,6 +352,53 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
                         f"{level1_key=} {level2_key=} {level3_key=} {set(attr_dict.keys())=}"
                     )
                     assert set(attr_dict.keys()) == {"class_type", "sqlite_datatype"}
+
+
+def test_get_fund_metric_dimen_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    bud_acctunit_args = get_fund_metric_dimen_args(bud_acctunit_str())
+    bud_groupunit_args = get_fund_metric_dimen_args(bud_groupunit_str())
+
+    #  THEN
+    print(f"{bud_acctunit_args=}")
+    print(f"{bud_groupunit_args=}")
+    assert bud_acctunit_args == {
+        "_fund_agenda_give",
+        "_credor_pool",
+        "_fund_give",
+        "credit_belief",
+        "acct_name",
+        "debtit_belief",
+        "_fund_agenda_ratio_take",
+        "_inallocable_debtit_belief",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_take",
+        "_fund_take",
+        "_debtor_pool",
+        "_irrational_debtit_belief",
+    }
+    assert bud_groupunit_args == {
+        "morph",
+        "_debtor_pool",
+        "_credor_pool",
+        "denom",
+        "item_title",
+        "pledge",
+        "close",
+        "addin",
+        "numor",
+        "_fund_agenda_give",
+        "mass",
+        "_fund_coin",
+        "stop_want",
+        "_fund_give",
+        "_fund_agenda_take",
+        "problem_bool",
+        "gogo_want",
+        "_fund_take",
+        "parent_road",
+        "begin",
+    }
 
 
 def g_class_type(
@@ -627,6 +682,128 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budunit, jv, "respect_bit") == "REAL"
     assert g_class_type(config, budunit, jv, "tally") == "int"
     assert g_sqlitetype(config, budunit, jv, "tally") == "INTEGER"
+
+
+def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOneType():
+    # ESTABLISH
+    fund_metric_config_dict = get_fund_metric_config_dict()
+    all_args = {}
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+        for dimen_key, args_dict in dimen_dict.items():
+            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+                for x_arg, arg_dict in args_dict.items():
+                    arg_type = arg_dict.get("class_type")
+                    if all_args.get(x_arg) is None:
+                        all_args[x_arg] = set()
+                    all_args.get(x_arg).add(arg_type)
+
+    for x_arg, arg_types in all_args.items():
+        print(f"{x_arg=} {arg_types=}")
+        assert len(arg_types) == 1
+
+
+def test_get_fund_metric_args_type_dict_ReturnObj():
+    # ESTABLISH
+    fund_metric_config_dict = get_fund_metric_config_dict()
+    all_args = {}
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+        for dimen_key, args_dict in dimen_dict.items():
+            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+                for x_arg, arg_dict in args_dict.items():
+                    arg_type = arg_dict.get("class_type")
+                    if all_args.get(x_arg) is None:
+                        all_args[x_arg] = set()
+                    all_args.get(x_arg).add(arg_type)
+
+    # for x_arg, arg_types in all_args.items():
+    #     # print(
+    #     #     f"""assert fund_metric_args_type_dict.get("{x_arg}") == "{list(arg_types)[0]}" """
+    #     # )
+    #     print(f""""{x_arg}": "{list(arg_types)[0]}",""")
+    #     assert len(arg_types) == 1
+
+    # WHEN
+    fund_metric_args_type_dict = get_fund_metric_args_type_dict()
+
+    # THEN
+    assert fund_metric_args_type_dict.get("acct_name") == "NameUnit"
+    assert fund_metric_args_type_dict.get("group_label") == "LabelUnit"
+    assert fund_metric_args_type_dict.get("_credor_pool") == "float"
+    assert fund_metric_args_type_dict.get("_debtor_pool") == "float"
+    assert fund_metric_args_type_dict.get("_fund_agenda_give") == "float"
+    assert fund_metric_args_type_dict.get("_fund_agenda_ratio_give") == "float"
+    assert fund_metric_args_type_dict.get("_fund_agenda_ratio_take") == "float"
+    assert fund_metric_args_type_dict.get("_fund_agenda_take") == "float"
+    assert fund_metric_args_type_dict.get("_fund_give") == "float"
+    assert fund_metric_args_type_dict.get("_fund_take") == "float"
+    assert fund_metric_args_type_dict.get("credit_vote") == "int"
+    assert fund_metric_args_type_dict.get("debtit_vote") == "int"
+    assert fund_metric_args_type_dict.get("_inallocable_debtit_belief") == "float"
+    assert fund_metric_args_type_dict.get("_irrational_debtit_belief") == "float"
+    assert fund_metric_args_type_dict.get("credit_belief") == "float"
+    assert fund_metric_args_type_dict.get("debtit_belief") == "float"
+    assert fund_metric_args_type_dict.get("item_title") == "TitleUnit"
+    assert fund_metric_args_type_dict.get("parent_road") == "RoadUnit"
+    assert fund_metric_args_type_dict.get("_fund_coin") == "float"
+    assert fund_metric_args_type_dict.get("addin") == "float"
+    assert fund_metric_args_type_dict.get("begin") == "float"
+    assert fund_metric_args_type_dict.get("close") == "float"
+    assert fund_metric_args_type_dict.get("denom") == "int"
+    assert fund_metric_args_type_dict.get("gogo_want") == "float"
+    assert fund_metric_args_type_dict.get("mass") == "int"
+    assert fund_metric_args_type_dict.get("morph") == "bool"
+    assert fund_metric_args_type_dict.get("numor") == "int"
+    assert fund_metric_args_type_dict.get("pledge") == "bool"
+    assert fund_metric_args_type_dict.get("problem_bool") == "bool"
+    assert fund_metric_args_type_dict.get("stop_want") == "float"
+    assert fund_metric_args_type_dict.get("awardee_tag") == "LabelUnit"
+    assert fund_metric_args_type_dict.get("road") == "RoadUnit"
+    assert fund_metric_args_type_dict.get("give_force") == "float"
+    assert fund_metric_args_type_dict.get("take_force") == "float"
+    assert fund_metric_args_type_dict.get("base") == "RoadUnit"
+    assert fund_metric_args_type_dict.get("fnigh") == "float"
+    assert fund_metric_args_type_dict.get("fopen") == "float"
+    assert fund_metric_args_type_dict.get("pick") == "RoadUnit"
+    assert fund_metric_args_type_dict.get("healer_name") == "NameUnit"
+    assert fund_metric_args_type_dict.get("need") == "RoadUnit"
+    assert fund_metric_args_type_dict.get("_status") == "int"
+    assert fund_metric_args_type_dict.get("_task") == "int"
+    assert fund_metric_args_type_dict.get("divisor") == "int"
+    assert fund_metric_args_type_dict.get("nigh") == "float"
+    assert fund_metric_args_type_dict.get("open") == "float"
+    assert fund_metric_args_type_dict.get("_base_item_active_value") == "int"
+    assert fund_metric_args_type_dict.get("base_item_active_requisite") == "bool"
+    assert fund_metric_args_type_dict.get("team_tag") == "LabelUnit"
+    assert fund_metric_args_type_dict.get("_owner_name_team") == "int"
+    assert fund_metric_args_type_dict.get("_active") == "int"
+    assert fund_metric_args_type_dict.get("_all_acct_cred") == "int"
+    assert fund_metric_args_type_dict.get("_all_acct_debt") == "int"
+    assert fund_metric_args_type_dict.get("_descendant_pledge_count") == "int"
+    assert fund_metric_args_type_dict.get("_fund_cease") == "float"
+    assert fund_metric_args_type_dict.get("_fund_onset") == "float"
+    assert fund_metric_args_type_dict.get("_fund_ratio") == "float"
+    assert fund_metric_args_type_dict.get("_gogo_calc") == "float"
+    assert fund_metric_args_type_dict.get("_healerlink_ratio") == "float"
+    assert fund_metric_args_type_dict.get("_level") == "int"
+    assert fund_metric_args_type_dict.get("_range_evaluated") == "int"
+    assert fund_metric_args_type_dict.get("_stop_calc") == "float"
+    assert fund_metric_args_type_dict.get("_keeps_buildable") == "int"
+    assert fund_metric_args_type_dict.get("_keeps_justified") == "int"
+    assert fund_metric_args_type_dict.get("_offtrack_fund") == "int"
+    assert fund_metric_args_type_dict.get("_rational") == "bool"
+    assert fund_metric_args_type_dict.get("_sum_healerlink_share") == "float"
+    assert fund_metric_args_type_dict.get("_tree_traverse_count") == "int"
+    assert fund_metric_args_type_dict.get("credor_respect") == "float"
+    assert fund_metric_args_type_dict.get("debtor_respect") == "float"
+    assert fund_metric_args_type_dict.get("fund_coin") == "float"
+    assert fund_metric_args_type_dict.get("fund_pool") == "float"
+    assert fund_metric_args_type_dict.get("max_tree_traverse") == "int"
+    assert fund_metric_args_type_dict.get("penny") == "float"
+    assert fund_metric_args_type_dict.get("respect_bit") == "float"
+    assert fund_metric_args_type_dict.get("tally") == "int"
+    assert len(fund_metric_args_type_dict) == 75
 
 
 # def test_get_all_bud_dimen_keys_ReturnsObj():
