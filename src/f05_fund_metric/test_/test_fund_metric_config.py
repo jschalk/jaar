@@ -85,6 +85,7 @@ from src.f05_fund_metric.fund_metric_config import (
     get_fund_metric_dimen_args,
     get_all_fund_metric_args,
     get_fund_metric_args_type_dict,
+    get_fund_metric_args_sqlite_datatype_dict,
 )
 from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
@@ -684,7 +685,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budunit, jv, "tally") == "INTEGER"
 
 
-def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOneType():
+def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOneClassType():
     # ESTABLISH
     fund_metric_config_dict = get_fund_metric_config_dict()
     all_args = {}
@@ -703,6 +704,33 @@ def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOneType():
         assert len(arg_types) == 1
 
 
+def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
+    # ESTABLISH
+    fund_metric_config_dict = get_fund_metric_config_dict()
+    all_args = {}
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+        for dimen_key, args_dict in dimen_dict.items():
+            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+                for x_arg, arg_dict in args_dict.items():
+                    arg_type = arg_dict.get("sqlite_datatype")
+                    if all_args.get(x_arg) is None:
+                        all_args[x_arg] = set()
+                    all_args.get(x_arg).add(arg_type)
+
+    for x_arg, arg_types in all_args.items():
+        print(f"{x_arg=} {arg_types=}")
+        assert len(arg_types) == 1
+
+    sqlite_datatype_dict = get_fund_metric_args_sqlite_datatype_dict()
+    for x_arg, arg_types in all_args.items():
+        # print(
+        #     f"""assert fund_metric_args_type_dict.get("{x_arg}") == "{list(arg_types)[0]}" """
+        # )
+        # print(f""""{x_arg}": "{list(arg_types)[0]}",""")
+        assert list(arg_types)[0] == sqlite_datatype_dict.get(x_arg)
+
+
 def test_get_fund_metric_args_type_dict_ReturnObj():
     # ESTABLISH
     fund_metric_config_dict = get_fund_metric_config_dict()
@@ -716,13 +744,6 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
                     if all_args.get(x_arg) is None:
                         all_args[x_arg] = set()
                     all_args.get(x_arg).add(arg_type)
-
-    # for x_arg, arg_types in all_args.items():
-    #     # print(
-    #     #     f"""assert fund_metric_args_type_dict.get("{x_arg}") == "{list(arg_types)[0]}" """
-    #     # )
-    #     print(f""""{x_arg}": "{list(arg_types)[0]}",""")
-    #     assert len(arg_types) == 1
 
     # WHEN
     fund_metric_args_type_dict = get_fund_metric_args_type_dict()
