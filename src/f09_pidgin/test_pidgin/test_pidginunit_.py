@@ -4,7 +4,7 @@ from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
 from src.f04_vow.atom_config import (
     get_atom_args_class_types,
-    type_AcctName_str,
+    type_NameUnit_str,
     type_LabelUnit_str,
     type_TitleUnit_str,
     type_RoadUnit_str,
@@ -61,7 +61,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     pidgin_args_class_types = get_pidgin_args_class_types()
 
     # THEN
-    assert pidgin_args_class_types.get("acct_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("acct_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_tag") == type_LabelUnit_str()
@@ -80,7 +80,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("debtor_respect") == "int"
     assert pidgin_args_class_types.get("denom") == "int"
     assert pidgin_args_class_types.get("divisor") == "int"
-    assert pidgin_args_class_types.get("face_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("face_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("fisc_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
@@ -89,7 +89,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("give_force") == "float"
     assert pidgin_args_class_types.get("gogo_want") == "float"
     assert pidgin_args_class_types.get("group_label") == type_LabelUnit_str()
-    assert pidgin_args_class_types.get("healer_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("healer_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("hour_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("item_title") == type_TitleUnit_str()
     assert pidgin_args_class_types.get("mass") == "int"
@@ -101,7 +101,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("nigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
-    assert pidgin_args_class_types.get("owner_name") == type_AcctName_str()
+    assert pidgin_args_class_types.get("owner_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("open") == "float"
     assert pidgin_args_class_types.get("parent_road") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("penny") == "float"
@@ -169,7 +169,7 @@ def test_pidginable_class_types_ReturnsObj():
     # THEN
     assert len(x_pidginable_class_types) == 4
     assert x_pidginable_class_types == {
-        type_AcctName_str(),
+        type_NameUnit_str(),
         type_LabelUnit_str(),
         type_TitleUnit_str(),
         type_RoadUnit_str(),
@@ -450,12 +450,12 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     sue_pu.set_namemap(static_namemap)
 
     # WHEN / THEN
-    assert sue_pu.get_mapunit(type_AcctName_str()) == sue_pu.namemap
+    assert sue_pu.get_mapunit(type_NameUnit_str()) == sue_pu.namemap
     assert sue_pu.get_mapunit(type_LabelUnit_str()) == sue_pu.labelmap
     assert sue_pu.get_mapunit(type_TitleUnit_str()) == sue_pu.titlemap
     assert sue_pu.get_mapunit(type_RoadUnit_str()) == sue_pu.roadmap
 
-    assert sue_pu.get_mapunit(type_AcctName_str()) != sue_pu.roadmap
+    assert sue_pu.get_mapunit(type_NameUnit_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_LabelUnit_str()) != sue_pu.roadmap
     assert sue_pu.get_mapunit(type_TitleUnit_str()) != sue_pu.roadmap
 
@@ -502,7 +502,7 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctName_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_NameUnit_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -512,7 +512,7 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_AcctName_str():
     assert namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
 
     # THEN
     assert namemap.otx2inx_exists(sue_otx, sue_inx)
@@ -572,13 +572,13 @@ def test_PidginUnit_get_inx_value_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_value(type_AcctName_str(), sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_value(type_NameUnit_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_value(type_AcctName_str(), sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_value(type_NameUnit_str(), sue_otx) == sue_inx
 
 
 def test_PidginUnit_del_otx2inx_ReturnsObj():

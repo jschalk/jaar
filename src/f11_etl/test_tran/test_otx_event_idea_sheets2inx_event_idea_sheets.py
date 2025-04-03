@@ -3,7 +3,7 @@ from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f04_vow.atom_config import (
     acct_name_str,
     face_name_str,
-    type_AcctName_str,
+    type_NameUnit_str,
     type_TitleUnit_str,
     event_int_str,
 )
@@ -135,15 +135,15 @@ def test_etl_otz_event_ideas_to_inx_events_Scenario1_MultpleFaceNames_CreatesEve
     e3_pidginunit = pidginunit_shop(sue_otx, event3)
     e7_pidginunit = pidginunit_shop(zia_otx, event7)
     e9_pidginunit = pidginunit_shop(zia_otx, event9)
-    e3_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
-    e3_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob0_inx)
-    e3_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao0_inx)
-    e7_pidginunit.set_otx2inx(type_AcctName_str(), zia_otx, zia_inx)
-    e7_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob1_inx)
-    e7_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao1_inx)
-    e9_pidginunit.set_otx2inx(type_AcctName_str(), zia_otx, zia_inx)
-    e9_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob2_inx)
-    e9_pidginunit.set_otx2inx(type_AcctName_str(), yao_otx, yao2_inx)
+    e3_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
+    e3_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob0_inx)
+    e3_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao0_inx)
+    e7_pidginunit.set_otx2inx(type_NameUnit_str(), zia_otx, zia_inx)
+    e7_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob1_inx)
+    e7_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao1_inx)
+    e9_pidginunit.set_otx2inx(type_NameUnit_str(), zia_otx, zia_inx)
+    e9_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob2_inx)
+    e9_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao2_inx)
     e9_pidginunit.set_otx2inx(type_TitleUnit_str(), accord55_inx, accord55_otx)
     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())

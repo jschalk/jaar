@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path, open_file, save_file
-from src.f04_vow.atom_config import type_AcctName_str
+from src.f04_vow.atom_config import type_NameUnit_str
 from src.f09_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.f09_pidgin.pidgin_config import pidgin_filename
 from src.f11_etl.transformers import (
@@ -19,7 +19,7 @@ def test_etl_pidgin_jsons_inherit_younger_pidgins_Scenario0_TwoPidginUnitFile(
     e7_pidginunit = pidginunit_shop(bob_str, event7)
     sue_otx = "Sue"
     sue_inx = "Suzy"
-    e3_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
+    e3_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
     x_faces_otz_dir = get_test_etl_dir()
     bob_dir = create_path(x_faces_otz_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
@@ -34,7 +34,7 @@ def test_etl_pidgin_jsons_inherit_younger_pidgins_Scenario0_TwoPidginUnitFile(
     assert before_e3_pidgin == e3_pidginunit
     assert before_e7_pidgin == e7_pidginunit
     assert (
-        before_e7_pidgin.otx2inx_exists(type_AcctName_str(), sue_otx, sue_inx) is False
+        before_e7_pidgin.otx2inx_exists(type_NameUnit_str(), sue_otx, sue_inx) is False
     )
 
     # WHEN
@@ -45,4 +45,4 @@ def test_etl_pidgin_jsons_inherit_younger_pidgins_Scenario0_TwoPidginUnitFile(
     after_e7_pidgin = get_pidginunit_from_json(open_file(e7_json_file_path))
     assert after_e3_pidgin == before_e3_pidgin
     assert after_e7_pidgin != before_e7_pidgin
-    assert after_e7_pidgin.otx2inx_exists(type_AcctName_str(), sue_otx, sue_inx)
+    assert after_e7_pidgin.otx2inx_exists(type_NameUnit_str(), sue_otx, sue_inx)

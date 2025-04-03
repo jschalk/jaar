@@ -47,7 +47,7 @@ def class_type_str() -> str:
     return "class_type"
 
 
-def type_AcctName_str() -> str:
+def type_NameUnit_str() -> str:
     return "NameUnit"
 
 

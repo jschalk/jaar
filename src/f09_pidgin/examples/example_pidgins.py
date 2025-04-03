@@ -71,7 +71,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_labelmap = mapunit_shop(type_AcctName_str(), face_name="Sue")
+#     x_labelmap = mapunit_shop(type_NameUnit_str(), face_name="Sue")
 #     x_labelmap.set_otx2inx(sue_otx, sue_inx)
 #     x_labelmap.set_otx2inx(zia_otx, zia_inx)
 #     return x_labelmap

@@ -1,4 +1,4 @@
-from src.f04_vow.atom_config import type_AcctName_str
+from src.f04_vow.atom_config import type_NameUnit_str
 from src.f09_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
 from src.f09_pidgin.examples.example_pidgins import (
     get_clean_roadmap,
@@ -124,7 +124,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
-    new_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob_inx)
+    new_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob_inx)
     assert new_pidginunit.namemap != get_suita_namemap()
     assert new_pidginunit.nameunit_exists(bob_otx, bob_inx)
 

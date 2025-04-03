@@ -4,7 +4,7 @@ from src.f04_vow.atom_config import (
     acct_name_str,
     credit_belief_str,
     base_str,
-    type_AcctName_str,
+    type_NameUnit_str,
 )
 from src.f09_pidgin.map import namemap_shop
 from src.f09_pidgin.pidgin import pidginunit_shop
@@ -176,9 +176,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
     sue_inx = "Suita"
     bob_inx = "Bobita"
     yao_pidginunit = pidginunit_shop(yao_str)
-    yao_pidginunit.set_otx2inx(type_AcctName_str(), xio_otx, xio_inx)
-    yao_pidginunit.set_otx2inx(type_AcctName_str(), sue_otx, sue_inx)
-    yao_pidginunit.set_otx2inx(type_AcctName_str(), bob_otx, bob_inx)
+    yao_pidginunit.set_otx2inx(type_NameUnit_str(), xio_otx, xio_inx)
+    yao_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
+    yao_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fisc_title_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]

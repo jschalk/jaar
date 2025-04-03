@@ -67,7 +67,7 @@ from src.f04_vow.atom_config import (
     sqlite_datatype_str,
     stop_want_str,
     team_tag_str,
-    type_AcctName_str,
+    type_NameUnit_str,
     type_LabelUnit_str,
     type_TitleUnit_str,
     type_RoadUnit_str,
@@ -115,7 +115,7 @@ def test_str_functions_ReturnsObj():
     assert sqlite_datatype_str() == "sqlite_datatype"
     assert stop_want_str() == "stop_want"
     assert team_tag_str() == "team_tag"
-    assert type_AcctName_str() == "NameUnit"
+    assert type_NameUnit_str() == "NameUnit"
     assert type_LabelUnit_str() == "LabelUnit"
     assert type_TitleUnit_str() == "TitleUnit"
     assert type_RoadUnit_str() == "RoadUnit"
@@ -598,7 +598,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_AcctName_str()
+    assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_NameUnit_str()
     assert get_class_type(bud_itemunit_str(), gogo_want_str()) == "float"
 
 
@@ -606,7 +606,7 @@ def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
     x_allowed_class_types = {
         "int",
-        type_AcctName_str(),
+        type_NameUnit_str(),
         type_LabelUnit_str(),
         type_TitleUnit_str(),
         type_RoadUnit_str(),
@@ -666,7 +666,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(acct_name_str()) == type_AcctName_str()
+    assert x_class_types.get(acct_name_str()) == type_NameUnit_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_tag_str()) == type_LabelUnit_str()
     assert x_class_types.get(base_str()) == type_RoadUnit_str()
@@ -689,7 +689,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
     assert x_class_types.get(group_label_str()) == type_LabelUnit_str()
-    assert x_class_types.get(healer_name_str()) == type_AcctName_str()
+    assert x_class_types.get(healer_name_str()) == type_NameUnit_str()
     assert x_class_types.get("item_title") == type_TitleUnit_str()
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
