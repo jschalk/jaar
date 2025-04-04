@@ -61,6 +61,7 @@ from src.f05_fund_metric.fund_metric_config import (
     get_fund_metric_dimen_args,
     get_all_fund_metric_args,
     get_fund_metric_args_type_dict,
+    get_fund_metric_dimens,
     get_fund_metric_args_sqlite_datatype_dict,
 )
 from os.path import exists as os_path_exists
@@ -332,6 +333,28 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
                         class_type_str(),
                         sqlite_datatype_str(),
                     }
+
+
+def test_get_fund_metric_dimens_ReturnsObj():
+    # ESTABLISH / WHEN
+    fund_metric_dimens = get_fund_metric_dimens()
+
+    # THEN
+    expected_fund_metric_dimens = {
+        budunit_str(),
+        bud_acctunit_str(),
+        bud_acct_membership_str(),
+        bud_itemunit_str(),
+        bud_item_awardlink_str(),
+        bud_item_reasonunit_str(),
+        bud_item_reason_premiseunit_str(),
+        bud_item_teamlink_str(),
+        bud_item_healerlink_str(),
+        bud_item_factunit_str(),
+        bud_groupunit_str(),
+    }
+    assert fund_metric_dimens == expected_fund_metric_dimens
+    assert fund_metric_dimens == set(get_fund_metric_config_dict().keys())
 
 
 def test_get_fund_metric_dimen_args_ReturnsObj():

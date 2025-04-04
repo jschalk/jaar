@@ -7,7 +7,7 @@ from src.f00_instrument.db_toolbox import (
     get_table_columns,
     is_stageable,
 )
-from src.f01_road.deal import fisc_title_str
+from src.f01_road.deal import fisc_title_str, owner_name_str
 from src.f02_bud.bud_tool import budunit_str
 from src.f04_vow.atom_config import (
     event_int_str,
@@ -15,6 +15,7 @@ from src.f04_vow.atom_config import (
     get_bud_dimens,
     get_delete_key_name,
 )
+from src.f05_fund_metric.fund_metric_config import get_fund_metric_config_dict
 from src.f08_fisc.fisc_config import fiscunit_str, get_fisc_dimens
 from src.f10_idea.idea_config import (
     idea_number_str,
@@ -54,6 +55,7 @@ from src.f11_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
     get_fisc_fu1_select_sqlstrs,
+    get_fund_metric_create_table_sqlstrs,
     # get_bud_bu1_select_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -1000,6 +1002,36 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     assert gen_fiscweek_sqlstr == expected_fiscweek_sqlstr
     assert gen_fiscoffi_sqlstr == expected_fiscoffi_sqlstr
     assert gen_fiscunit_sqlstr == expected_fiscunit_sqlstr
+
+
+def test_get_fund_metric_create_table_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    create_table_sqlstrs = get_fund_metric_create_table_sqlstrs()
+
+    # THEN
+    s_types = get_idea_sqlite_types()
+    fund_metric_config = get_fund_metric_config_dict()
+    for x_dimen in fund_metric_config.keys():
+        # print(f"{x_dimen} checking...")
+        x_config = fund_metric_config.get(x_dimen)
+
+        forecast_table = f"{x_dimen}_forecast"
+        forecast_cols = {fisc_title_str(), owner_name_str()}
+        forecast_cols.update(set(x_config.get("jkeys").keys()))
+        forecast_cols.update(set(x_config.get("jvalues").keys()))
+        forecast_cols.update(set(x_config.get("jmetrics").keys()))
+        forecast_cols = get_custom_sorted_list(forecast_cols)
+        expected_create_sqlstr = get_create_table_sqlstr(
+            forecast_table, forecast_cols, s_types
+        )
+        assert create_table_sqlstrs.get(forecast_table) == expected_create_sqlstr
+
+        forecast_dimen_abbr = x_config.get("abbreviation").upper()
+        print(
+            f'CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""'
+        )
+        # print(f'"{forecast_table}": CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR,')
 
 
 # def test_get_bud_bu1_select_sqlstrs_ReturnsObj_HasAllNeededKeys():

@@ -1000,28 +1000,30 @@ def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:
     }
 
 
-# CREATE_BUDMEMB_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, acct_name, group_label, credit_vote, debtit_vote FROM bud_acct_membership_put_agg"""
-# CREATE_BUDACCT_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, acct_name, credit_belief, debtit_belief FROM bud_acctunit_put_agg"""
-# CREATE_BUDAWAR_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, awardee_tag, give_force, take_force FROM bud_item_awardlink_put_agg"""
-# CREATE_BUDFACT_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, base, pick, fopen, fnigh FROM bud_item_factunit_put_agg"""
-# CREATE_BUDHEAL_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, healer_name FROM bud_item_healerlink_put_agg"""
-# CREATE_BUDPREM_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, base, need, nigh, open, divisor FROM bud_item_reason_premiseunit_put_agg"""
-# CREATE_BUDREAS_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, road, base, base_item_active_requisite FROM bud_item_reasonunit_put_agg"""
-# CREATE_BUDTEAM_PUT_AGG_SQLSTR =     """SELECT fisc_title, owner_name, road, team_tag FROM bud_item_teamlink_put_agg"""
-# CREATE_BUDITEM_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool FROM bud_itemunit_put_agg"""
-# CREATE_BUDUNIT_PUT_AGG_SQLSTR = """SELECT fisc_title, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit FROM budunit_put_agg"""
+CREATE_FORECAST_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_forecast (fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
+CREATE_FORECAST_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_forecast (fisc_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
+CREATE_FORECAST_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_forecast (fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER, _credor_pool REAL, _debtor_pool REAL, _fund_coin REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
+CREATE_FORECAST_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_forecast (fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
+CREATE_FORECAST_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_forecast (fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
+CREATE_FORECAST_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_forecast (fisc_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
+CREATE_FORECAST_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_forecast (fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor REAL, _task INTEGER, _status INTEGER)"""
+CREATE_FORECAST_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_forecast (fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite TEXT, _task INTEGER, _status INTEGER, _base_item_active_value INTEGER)"""
+CREATE_FORECAST_BUDTEAM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_forecast (fisc_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT, _owner_name_team INTEGER)"""
+CREATE_FORECAST_BUDITEM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_forecast (fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER, _active INTEGER, _task INTEGER, _fund_coin REAL, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
+CREATE_FORECAST_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_forecast (fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund INTEGER, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
-# def get_bud_bu1_select_sqlstrs(fisc_title: str, owner_name: str) -> dict[str, str]:
-#     return {
-#         "budunit": "huh",
-#         "bud_acctunit": "huh",
-#         "bud_acct_membership": "huh",
-#         "bud_itemunit": "huh",
-#         "bud_item_awardlink": "huh",
-#         "bud_item_reasonunit": "huh",
-#         "bud_item_reason_premiseunit": "huh",
-#         "bud_item_teamlink": "huh",
-#         "bud_item_healerlink": "huh",
-#         "bud_item_factunit": "huh",
-#     }
+def get_fund_metric_create_table_sqlstrs() -> dict[str, str]:
+    return {
+        "bud_acct_membership_forecast": CREATE_FORECAST_BUDMEMB_SQLSTR,
+        "bud_acctunit_forecast": CREATE_FORECAST_BUDACCT_SQLSTR,
+        "bud_groupunit_forecast": CREATE_FORECAST_BUDGROU_SQLSTR,
+        "bud_item_awardlink_forecast": CREATE_FORECAST_BUDAWAR_SQLSTR,
+        "bud_item_factunit_forecast": CREATE_FORECAST_BUDFACT_SQLSTR,
+        "bud_item_healerlink_forecast": CREATE_FORECAST_BUDHEAL_SQLSTR,
+        "bud_item_reason_premiseunit_forecast": CREATE_FORECAST_BUDPREM_SQLSTR,
+        "bud_item_reasonunit_forecast": CREATE_FORECAST_BUDREAS_SQLSTR,
+        "bud_item_teamlink_forecast": CREATE_FORECAST_BUDTEAM_SQLSTR,
+        "bud_itemunit_forecast": CREATE_FORECAST_BUDITEM_SQLSTR,
+        "budunit_forecast": CREATE_FORECAST_BUDUNIT_SQLSTR,
+    }

@@ -209,3 +209,19 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "respect_bit": "REAL",
         "tally": "INTEGER",
     }
+
+
+def get_fund_metric_dimens() -> dict[str, str]:
+    return {
+        "budunit",
+        "bud_acctunit",
+        "bud_acct_membership",
+        "bud_itemunit",
+        "bud_item_awardlink",
+        "bud_item_reasonunit",
+        "bud_item_reason_premiseunit",
+        "bud_item_teamlink",
+        "bud_item_healerlink",
+        "bud_item_factunit",
+        "bud_groupunit",
+    }

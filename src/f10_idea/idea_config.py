@@ -92,6 +92,7 @@ def get_idea_formats_dir() -> str:
 
 
 def get_idea_elements_sort_order() -> list[str]:
+    """Contains the standard sort order for all idea and fund_metric columns"""
     return [
         "idea_number",
         "face_name",
@@ -227,6 +228,8 @@ def get_custom_sorted_list(
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
+    """Contains the sqlite_type for all idea and fund_metric columns"""
+
     return {
         "idea_number": "TEXT",
         "face_name": "TEXT",
