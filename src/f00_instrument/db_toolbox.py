@@ -44,7 +44,14 @@ def check_connection(conn: Connection) -> bool:
         return False
 
 
-def create_insert_sqlstr(
+def get_sorted_intersection_list(
+    existing_columns: set[str], sorting_columns: list[str]
+) -> list[str]:
+    sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
+    return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
+
+
+def create_class_type_reference_insert_sqlstr(
     x_table: str, x_columns: list[str], x_values: list[str]
 ) -> str:
     x_str = f"""

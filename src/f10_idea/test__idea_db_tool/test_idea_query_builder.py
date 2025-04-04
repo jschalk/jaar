@@ -14,7 +14,7 @@ from src.f10_idea.idea_config import get_idea_config_dict
 from src.f10_idea.idea_db_tool import (
     create_idea_sorted_table,
     get_idea_into_dimen_staging_query,
-    get_custom_sorted_list,
+    get_default_sorted_list,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -43,7 +43,7 @@ def test_get_idea_into_dimen_staging_query_ReturnsObj_Scenario0_bud_item_teamlin
         budteam_jkeys = budteam_config.get("jkeys")
         budteam_jvals = budteam_config.get("jvalues")
         budteam_args = set(budteam_jkeys.keys()).union(set(budteam_jvals.keys()))
-        budteam_args = get_custom_sorted_list(budteam_args)
+        budteam_args = get_default_sorted_list(budteam_args)
         print(f"{budteam_jkeys=}")
         print(f"{budteam_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)

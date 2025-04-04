@@ -3,7 +3,10 @@ from src.f00_instrument.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.f00_instrument.db_toolbox import create_insert_sqlstr, RowData
+from src.f00_instrument.db_toolbox import (
+    create_class_type_reference_insert_sqlstr,
+    RowData,
+)
 from src.f01_road.finance import TimeLinePoint
 from src.f01_road.road import (
     create_road,
@@ -64,7 +67,9 @@ class BudAtom:
         )
         x_values = self.get_nesting_order_args()
         x_values.extend(iter(self.jvalues.values()))
-        return create_insert_sqlstr(atom_hx_table_name(), x_columns, x_values)
+        return create_class_type_reference_insert_sqlstr(
+            atom_hx_table_name(), x_columns, x_values
+        )
 
     def get_all_args_in_list(self):
         x_list = self.get_nesting_order_args()

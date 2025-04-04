@@ -21,7 +21,7 @@ from src.f10_idea.idea_config import (
 )
 from src.f10_idea.idea_db_tool import (
     save_dataframe_to_csv,
-    get_custom_sorted_list,
+    get_default_sorted_list,
     if_nan_return_None,
 )
 from pandas import DataFrame
@@ -39,7 +39,7 @@ class IdeaRef:
         self._attributes[x_attribute] = {"otx_key": otx_key}
 
     def get_headers_list(self) -> list[str]:
-        return get_custom_sorted_list(self._attributes)
+        return get_default_sorted_list(self._attributes)
 
     def get_otx_keys_list(self) -> list[str]:
         x_set = {
@@ -47,7 +47,7 @@ class IdeaRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is True
         }
-        return get_custom_sorted_list(x_set)
+        return get_default_sorted_list(x_set)
 
     def get_otx_values_list(self) -> list[str]:
         x_set = {
@@ -55,7 +55,7 @@ class IdeaRef:
             for x_attr, otx_dict in self._attributes.items()
             if otx_dict.get("otx_key") is False
         }
-        return get_custom_sorted_list(x_set)
+        return get_default_sorted_list(x_set)
 
 
 def idearef_shop(x_idea_name: str, x_dimens: list[str]) -> IdeaRef:
@@ -151,7 +151,7 @@ def save_idea_csv(x_ideaname: str, x_budunit: BudUnit, x_dir: str, x_filename: s
 
 
 def get_csv_idearef(header_row: list[str]) -> IdeaRef:
-    header_row = get_custom_sorted_list(header_row)
+    header_row = get_default_sorted_list(header_row)
     headers_str = "".join(f",{x_header}" for x_header in header_row)
     headers_str = headers_str[1:]
     headers_str = headers_str.replace("face_name,", "")

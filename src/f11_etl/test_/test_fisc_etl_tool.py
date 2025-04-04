@@ -21,7 +21,11 @@ from src.f08_fisc.fisc_config import (
     fisc_timeoffi_str,
     get_fisc_config_args,
 )
-from src.f10_idea.idea_db_tool import sheet_exists, upsert_sheet, get_custom_sorted_list
+from src.f10_idea.idea_db_tool import (
+    sheet_exists,
+    upsert_sheet,
+    get_default_sorted_list,
+)
 from src.f11_etl.fisc_etl_tool import (
     FiscPrimeObjsRef,
     FiscPrimeColumnsRef,
@@ -114,14 +118,14 @@ def test_FiscPrimeColumnsRef_Exists():
     week_args = set(get_fisc_config_args(fisc_timeline_weekday_str()).keys())
     offi_args = set(get_fisc_config_args(fisc_timeoffi_str()).keys())
     print(f"           {fisc_cols.cash_agg_columns=}")
-    print(f"{get_custom_sorted_list(list(cash_args))=}")
-    assert fisc_cols.unit_agg_columns == get_custom_sorted_list(unit_args)
-    assert fisc_cols.cash_agg_columns == get_custom_sorted_list(cash_args)
-    assert fisc_cols.deal_agg_columns == get_custom_sorted_list(deal_args)
-    assert fisc_cols.hour_agg_columns == get_custom_sorted_list(hour_args)
-    assert fisc_cols.mont_agg_columns == get_custom_sorted_list(mont_args)
-    assert fisc_cols.week_agg_columns == get_custom_sorted_list(week_args)
-    assert fisc_cols.offi_agg_columns == get_custom_sorted_list(offi_args)
+    print(f"{get_default_sorted_list(list(cash_args))=}")
+    assert fisc_cols.unit_agg_columns == get_default_sorted_list(unit_args)
+    assert fisc_cols.cash_agg_columns == get_default_sorted_list(cash_args)
+    assert fisc_cols.deal_agg_columns == get_default_sorted_list(deal_args)
+    assert fisc_cols.hour_agg_columns == get_default_sorted_list(hour_args)
+    assert fisc_cols.mont_agg_columns == get_default_sorted_list(mont_args)
+    assert fisc_cols.week_agg_columns == get_default_sorted_list(week_args)
+    assert fisc_cols.offi_agg_columns == get_default_sorted_list(offi_args)
 
     staging_args = {"idea_number", face_name_str(), event_int_str(), "error_message"}
     unit_staging_args = unit_args.union(staging_args)
@@ -131,13 +135,13 @@ def test_FiscPrimeColumnsRef_Exists():
     mont_staging_args = mont_args.union(staging_args)
     week_staging_args = week_args.union(staging_args)
     offi_staging_args = offi_args.union(staging_args)
-    assert fisc_cols.unit_staging_columns == get_custom_sorted_list(unit_staging_args)
-    assert fisc_cols.cash_staging_columns == get_custom_sorted_list(cash_staging_args)
-    assert fisc_cols.deal_staging_columns == get_custom_sorted_list(deal_staging_args)
-    assert fisc_cols.hour_staging_columns == get_custom_sorted_list(hour_staging_args)
-    assert fisc_cols.mont_staging_columns == get_custom_sorted_list(mont_staging_args)
-    assert fisc_cols.week_staging_columns == get_custom_sorted_list(week_staging_args)
-    assert fisc_cols.offi_staging_columns == get_custom_sorted_list(offi_staging_args)
+    assert fisc_cols.unit_staging_columns == get_default_sorted_list(unit_staging_args)
+    assert fisc_cols.cash_staging_columns == get_default_sorted_list(cash_staging_args)
+    assert fisc_cols.deal_staging_columns == get_default_sorted_list(deal_staging_args)
+    assert fisc_cols.hour_staging_columns == get_default_sorted_list(hour_staging_args)
+    assert fisc_cols.mont_staging_columns == get_default_sorted_list(mont_staging_args)
+    assert fisc_cols.week_staging_columns == get_default_sorted_list(week_staging_args)
+    assert fisc_cols.offi_staging_columns == get_default_sorted_list(offi_staging_args)
 
     # unit_staging_csv_header = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}"""
     unit_staging_csv_header = ",".join(fisc_cols.unit_staging_columns)

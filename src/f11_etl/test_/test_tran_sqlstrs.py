@@ -27,7 +27,7 @@ from src.f10_idea.idea_config import (
 )
 from src.f10_idea.idea_db_tool import (
     get_pragma_table_fetchall,
-    get_custom_sorted_list,
+    get_default_sorted_list,
     get_idea_into_dimen_staging_query,
 )
 from src.f11_etl.fisc_etl_tool import (
@@ -132,7 +132,7 @@ def test_get_fisc_create_table_sqlstrs_ReturnsObj():
         ag_cols.update(set(x_config.get("jvalues").keys()))
         ag_cols.remove(event_int_str())
         ag_cols.remove(face_name_str())
-        ag_cols = get_custom_sorted_list(ag_cols)
+        ag_cols = get_default_sorted_list(ag_cols)
         print(f"{ag_cols=}")
         gen_dimen_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
         assert ag_sqlstr == gen_dimen_agg_sqlstr
@@ -143,7 +143,7 @@ def test_get_fisc_create_table_sqlstrs_ReturnsObj():
         st_cols.update(set(x_config.get("jvalues").keys()))
         st_cols.add(idea_number_str())
         st_cols.add("error_message")
-        st_cols = get_custom_sorted_list(st_cols)
+        st_cols = get_default_sorted_list(st_cols)
         gen_dimen_stage_sqlstr = get_create_table_sqlstr(
             st_table, st_cols, sqlite_types
         )
@@ -175,7 +175,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         ag_put_table = f"{x_dimen}_put_agg"
         ag_put_cols = set(x_config.get("jkeys").keys())
         ag_put_cols.update(set(x_config.get("jvalues").keys()))
-        ag_put_cols = get_custom_sorted_list(ag_put_cols)
+        ag_put_cols = get_default_sorted_list(ag_put_cols)
         ex_ag_put_sqlstr = get_create_table_sqlstr(ag_put_table, ag_put_cols, s_types)
         assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
 
@@ -184,13 +184,13 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         st_put_cols.update(set(x_config.get("jvalues").keys()))
         st_put_cols.add(idea_number_str())
         st_put_cols.add("error_message")
-        st_put_cols = get_custom_sorted_list(st_put_cols)
+        st_put_cols = get_default_sorted_list(st_put_cols)
         ex_st_put_sqlstr = get_create_table_sqlstr(st_put_table, st_put_cols, s_types)
         assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
 
         ag_del_table = f"{x_dimen}_del_agg"
         ag_del_cols = set(x_config.get("jkeys").keys())
-        ag_del_cols = get_custom_sorted_list(ag_del_cols)
+        ag_del_cols = get_default_sorted_list(ag_del_cols)
         ag_del_cols[-1] = get_delete_key_name(ag_del_cols[-1])
         ex_ag_del_sqlstr = get_create_table_sqlstr(ag_del_table, ag_del_cols, s_types)
         # print(f" {ex_ag_del_sqlstr}")
@@ -200,7 +200,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         st_del_cols = set(x_config.get("jkeys").keys())
         st_del_cols.add(idea_number_str())
         st_del_cols.add("error_message")
-        st_del_cols = get_custom_sorted_list(st_del_cols)
+        st_del_cols = get_default_sorted_list(st_del_cols)
         st_del_cols[-2] = get_delete_key_name(st_del_cols[-2])
         ex_st_del_sqlstr = get_create_table_sqlstr(st_del_table, st_del_cols, s_types)
         # print(f" {ex_st_del_sqlstr}")
@@ -597,7 +597,7 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
             dimen_focus_columns.remove(event_int_str())
             dimen_focus_columns.remove(face_name_str())
-            dimen_focus_columns = get_custom_sorted_list(dimen_focus_columns)
+            dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
             stage_tablename = f"{x_dimen}_staging"
             agg_tablename = f"{x_dimen}_agg"
 
@@ -664,7 +664,7 @@ def test_get_bud_insert_put_agg_from_staging_sqlstrs_ReturnsObj():
             print(f"{x_dimen} checking...")
             dimen_config = idea_config.get(x_dimen)
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-            dimen_focus_columns = get_custom_sorted_list(dimen_focus_columns)
+            dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
             stage_tablename = f"{x_dimen}_put_staging"
             agg_tablename = f"{x_dimen}_put_agg"
 
@@ -710,7 +710,7 @@ def test_get_bud_insert_del_agg_from_staging_sqlstrs_ReturnsObj():
             # print(f"{x_dimen} checking...")
             dimen_config = idea_config.get(x_dimen)
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-            dimen_focus_columns = get_custom_sorted_list(dimen_focus_columns)
+            dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
             dimen_focus_columns[-1] = get_delete_key_name(dimen_focus_columns[-1])
             stage_tablename = f"{x_dimen}_del_staging"
             agg_tablename = f"{x_dimen}_del_agg"
@@ -818,7 +818,7 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         for x_dimen in sorted(idea_config):
             dimen_config = idea_config.get(x_dimen)
             dimen_key_columns = set(dimen_config.get("jkeys").keys())
-            dimen_key_columns = get_custom_sorted_list(dimen_key_columns)
+            dimen_key_columns = get_default_sorted_list(dimen_key_columns)
             dimen_key_columns[-1] = get_delete_key_name(dimen_key_columns[-1])
             dimen_key_columns = set(dimen_key_columns)
             for idea_number in sorted_idea_numbers:
@@ -1032,7 +1032,7 @@ def test_get_forecast_create_table_sqlstrs_ReturnsObj():
         forecast_cols.update(set(x_config.get("jkeys").keys()))
         forecast_cols.update(set(x_config.get("jvalues").keys()))
         forecast_cols.update(set(x_config.get("jmetrics").keys()))
-        forecast_cols = get_custom_sorted_list(forecast_cols)
+        forecast_cols = get_default_sorted_list(forecast_cols)
         expected_create_sqlstr = get_create_table_sqlstr(
             forecast_table, forecast_cols, s_types
         )

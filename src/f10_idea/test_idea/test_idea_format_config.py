@@ -49,7 +49,7 @@ from src.f10_idea.idea_config import (
     get_idea_format_headers,
     attributes_str,
     get_idea_elements_sort_order,
-    get_custom_sorted_list,
+    get_default_sorted_list,
 )
 from src.f10_idea.examples.idea_env import src_idea_dir
 
@@ -116,7 +116,7 @@ def get_sorted_headers_str(idea_filename):
     idea_attributes.remove(face_name_str())
     idea_attributes.remove(event_int_str())
     attr_sort = get_idea_elements_sort_order()
-    idea_attributes = get_custom_sorted_list(idea_attributes, attr_sort)
+    idea_attributes = get_default_sorted_list(idea_attributes, attr_sort)
     header_str = "".join(f",{x_header}" for x_header in idea_attributes)
     return header_str[1:]
     # return create_sorted_concatenated_str(list(idea_attributes))

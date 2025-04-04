@@ -2,7 +2,7 @@ from src.f00_instrument.db_toolbox import (
     sqlite_bool,
     sqlite_str,
     sqlite_null,
-    create_insert_sqlstr,
+    create_class_type_reference_insert_sqlstr,
     RowData,
     rowdata_shop,
     get_rowdata,
@@ -55,7 +55,7 @@ def test_sqlite_str_ReturnsObj():
     assert str(excinfo.value) == "function requires boolean"
 
 
-def test_sqlite_create_insert_sqlstr_ReturnsObj():
+def test_sqlite_create_class_type_reference_insert_sqlstr_ReturnsObj():
     # ESTABLISH
     x_table = "kubo_casas"
     eagle_id_str = "eagle_id"
@@ -68,7 +68,7 @@ def test_sqlite_create_insert_sqlstr_ReturnsObj():
     x_values = [eagle_id_value, casa_id_value, casa_color_value]
 
     # WHEN
-    gen_sqlstr = create_insert_sqlstr(x_table, x_columns, x_values)
+    gen_sqlstr = create_class_type_reference_insert_sqlstr(x_table, x_columns, x_values)
 
     # THEN
     example_sqlstr = f"""

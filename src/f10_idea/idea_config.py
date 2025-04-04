@@ -1,4 +1,5 @@
 from src.f00_instrument.file import open_json, create_path
+from src.f00_instrument.db_toolbox import get_sorted_intersection_list
 from src.f01_road.jaar_config import get_json_filename
 from os import getcwd as os_getcwd
 
@@ -218,13 +219,12 @@ def get_idea_elements_sort_order() -> list[str]:
     ]
 
 
-def get_custom_sorted_list(
+def get_default_sorted_list(
     existing_columns: set[str], sorting_columns: list[str] = None
 ) -> list[str]:
     if sorting_columns is None:
         sorting_columns = get_idea_elements_sort_order()
-    sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
-    return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
+    return get_sorted_intersection_list(existing_columns, sorting_columns)
 
 
 def get_idea_sqlite_types() -> dict[str, str]:

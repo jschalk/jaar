@@ -27,7 +27,7 @@ from src.f10_idea.idea_config import (
     get_idea_elements_sort_order,
     get_idea_dimen_ref,
     get_idea_sqlite_types,
-    get_custom_sorted_list,
+    get_default_sorted_list,
 )
 from numpy import float64, nan as numpy_nan
 from pandas import (
@@ -48,7 +48,7 @@ def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
 
 
 def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
-    new_sorting_columns = get_custom_sorted_list(set(x_df.columns), sorting_columns)
+    new_sorting_columns = get_default_sorted_list(set(x_df.columns), sorting_columns)
     x_df = x_df.reindex(columns=new_sorting_columns)
     x_df.sort_values(new_sorting_columns, inplace=True)
     x_df.reset_index(inplace=True)
@@ -119,7 +119,7 @@ def get_cart_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, groupby_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
-    grouping_columns = get_custom_sorted_list(df_columns, groupby_list)
+    grouping_columns = get_default_sorted_list(df_columns, groupby_list)
     value_columns = df_columns.difference(grouping_columns)
 
     if grouping_columns == []:
@@ -382,7 +382,7 @@ def save_table_to_csv(
 def create_idea_sorted_table(
     conn: sqlite3_Connection, tablename: str, columns_list: list[str]
 ):
-    columns_list = get_custom_sorted_list(columns_list)
+    columns_list = get_default_sorted_list(columns_list)
     create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
 
 

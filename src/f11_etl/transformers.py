@@ -57,7 +57,7 @@ from src.f10_idea.idea_config import (
 from src.f10_idea.idea import get_idearef_obj
 from src.f10_idea.idea_db_tool import (
     if_nan_return_None,
-    get_custom_sorted_list,
+    get_default_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
@@ -240,7 +240,7 @@ class CartStagingToCartAggTransformer:
         idearef = get_idearef_obj(idea_filename)
         required_columns = idearef.get_otx_keys_list()
         idea_columns_set = set(idearef._attributes.keys())
-        idea_columns_list = get_custom_sorted_list(idea_columns_set)
+        idea_columns_list = get_default_sorted_list(idea_columns_set)
         cart_staging_df = cart_staging_df[idea_columns_list]
         return get_cart_staging_grouping_with_all_values_equal_df(
             cart_staging_df, required_columns
@@ -271,7 +271,7 @@ class cartAggTocartValidTransformer:
     #     idearef = get_idearef_obj(idea_filename)
     #     required_columns = idearef.get_otx_keys_list()
     #     idea_columns_set = set(idearef._attributes.keys())
-    #     idea_columns_list = get_custom_sorted_list(idea_columns_set)
+    #     idea_columns_list = get_default_sorted_list(idea_columns_set)
     #     cart_staging_df = cart_staging_df[idea_columns_list]
     #     return get_cart_staging_grouping_with_all_values_equal_df(
     #         cart_staging_df, required_columns
@@ -449,7 +449,7 @@ class cartAggToStagingTransformer:
         dimen_ideas = get_idea_dimen_ref().get(self.pidgin_dimen)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"face_name", "event_int"})
-        pidgin_columns = get_custom_sorted_list(pidgin_columns)
+        pidgin_columns = get_default_sorted_list(pidgin_columns)
         pidgin_columns.insert(0, "src_idea")
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
@@ -548,7 +548,7 @@ class PidginStagingToAggTransformer:
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"face_name", "event_int"})
-        pidgin_columns = get_custom_sorted_list(pidgin_columns)
+        pidgin_columns = get_default_sorted_list(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
