@@ -9,7 +9,6 @@ from dataclasses import dataclass
 from contextlib import contextmanager
 from csv import reader as csv_reader, writer as csv_writer
 from os.path import join as os_path_join
-from copy import copy as copy_copy
 
 
 def sqlite_null(x_obj: any):
@@ -119,14 +118,29 @@ def get_db_tables(x_conn: Connection) -> dict[str, int]:
 
 
 def get_db_columns(x_conn: Connection) -> dict[str : dict[str, int]]:
-    table_names = get_db_tables(x_conn)
-    table_column_dict = {}
-    for table_name in table_names.keys():
-        sqlstr = f"SELECT name FROM PRAGMA_TABLE_INFO('{table_name}');"
-        results = x_conn.execute(sqlstr)
-        table_column_dict[table_name] = {row[0]: 1 for row in results}
+    return {
+        table_name: get_table_columns(x_conn, table_name)
+        for table_name in get_db_tables(x_conn).keys()
+    }
 
-    return table_column_dict
+
+def get_column_data_type(cursor: sqlite3_Connection, table_name: str, column_name: str):
+    """
+    Given a cursor object, table name, and column name, return the column's data type for SQLite.
+
+    :param cursor: Database cursor object
+    :param table_name: Name of the table
+    :param column_name: Name of the column
+    :return: Data type of the column as a string
+    """
+    try:
+        # Query to fetch column info for SQLite
+        query = f"PRAGMA table_info({table_name})"
+        cursor.execute(query)
+        columns = cursor.fetchall()
+        return next((col[2] for col in columns if col[1] == column_name), None)
+    except Exception as e:
+        return None
 
 
 def get_single_result(db_conn: Connection, sqlstr: str) -> str:
@@ -415,6 +429,33 @@ WHERE error_message IS NULL
 GROUP BY {groupby_columns_str}
 ;
 """
+
+
+def create_select_query(
+    cursor: sqlite3_Connection,
+    x_tablename: str,
+    select_columns: list[str],
+    where_dict: dict[str,] = None,
+    flat_bool: bool = False,
+):
+    if where_dict is None:
+        where_dict = {}
+    table_columns = get_table_columns(cursor, x_tablename)
+    if not select_columns:
+        select_columns = table_columns
+    select_columns_str = ", ".join(list(select_columns))
+    where_str = ""
+    for where_column, where_value in where_dict.items():
+        column_type = get_column_data_type(cursor, x_tablename, where_column)
+        value_str = f"'{where_value}'" if column_type == "TEXT" else where_value
+        if where_str == "":
+            where_str = f"WHERE {where_column} = {value_str}"
+        else:
+            where_str += f"""\n  AND {where_column} = {value_str}"""
+    sqlstr = f"""SELECT {select_columns_str}\nFROM {x_tablename}\n{where_str}\n"""
+    if flat_bool:
+        sqlstr = sqlstr[:-1].replace("\n", " ").replace("  ", " ").replace("  ", " ")
+    return sqlstr
 
 
 def is_stageable(

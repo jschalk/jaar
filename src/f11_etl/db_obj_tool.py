@@ -1,5 +1,6 @@
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
 from src.f01_road.road import FiscTitle
+from src.f02_bud.bud import BudUnit
 from src.f11_etl.tran_sqlstrs import get_fisc_fu1_select_sqlstrs
 from sqlite3 import Cursor as sqlite3_Cursor
 
@@ -138,3 +139,7 @@ def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
         row_offi_time = fisccash_row[1]
         offi_times_set.add(row_offi_time)
     fisc_dict["offi_times"] = list(offi_times_set)
+
+
+def insert_forecast_obj(cursor: sqlite3_Cursor, fisc_dict: BudUnit):
+    pass

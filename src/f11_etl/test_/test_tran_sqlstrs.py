@@ -6,6 +6,7 @@ from src.f00_instrument.db_toolbox import (
     create_table2table_agg_insert_query,
     get_table_columns,
     is_stageable,
+    create_select_query,
 )
 from src.f01_road.deal import fisc_title_str, owner_name_str
 from src.f02_bud.bud_tool import budunit_str
@@ -987,22 +988,31 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     gen_fiscweek_sqlstr = fu1_select_sqlstrs.get(fiscweek_str)
     gen_fiscoffi_sqlstr = fu1_select_sqlstrs.get(fiscoffi_str)
     gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str)
-
-    expected_fisccash_sqlstr = f"SELECT fisc_title, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_title = '{a23_str}'"
-    expected_fiscdeal_sqlstr = f"SELECT fisc_title, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_title = '{a23_str}'"
-    expected_fischour_sqlstr = f"SELECT fisc_title, cumlative_minute, hour_title FROM fisc_timeline_hour_agg WHERE fisc_title = '{a23_str}'"
-    expected_fiscmont_sqlstr = f"SELECT fisc_title, cumlative_day, month_title FROM fisc_timeline_month_agg WHERE fisc_title = '{a23_str}'"
-    expected_fiscweek_sqlstr = f"SELECT fisc_title, weekday_order, weekday_title FROM fisc_timeline_weekday_agg WHERE fisc_title = '{a23_str}'"
-    expected_fiscoffi_sqlstr = f"SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = '{a23_str}'"
-    expected_fiscunit_sqlstr = f"SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge FROM fiscunit_agg WHERE fisc_title = '{a23_str}'"
-
-    assert gen_fisccash_sqlstr == expected_fisccash_sqlstr
-    assert gen_fiscdeal_sqlstr == expected_fiscdeal_sqlstr
-    assert gen_fischour_sqlstr == expected_fischour_sqlstr
-    assert gen_fiscmont_sqlstr == expected_fiscmont_sqlstr
-    assert gen_fiscweek_sqlstr == expected_fiscweek_sqlstr
-    assert gen_fiscoffi_sqlstr == expected_fiscoffi_sqlstr
-    assert gen_fiscunit_sqlstr == expected_fiscunit_sqlstr
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
+        create_fisc_tables(cursor)
+        fisccash_agg = "fisc_cashbook_agg"
+        fiscdeal_agg = "fisc_dealunit_agg"
+        fischour_agg = "fisc_timeline_hour_agg"
+        fiscmont_agg = "fisc_timeline_month_agg"
+        fiscweek_agg = "fisc_timeline_weekday_agg"
+        fiscoffi_agg = "fisc_timeoffi_agg"
+        fiscunit_agg = "fiscunit_agg"
+        where_dict = {fisc_title_str(): a23_str}
+        fisccash_sql = create_select_query(cursor, fisccash_agg, [], where_dict, True)
+        fiscdeal_sql = create_select_query(cursor, fiscdeal_agg, [], where_dict, True)
+        fischour_sql = create_select_query(cursor, fischour_agg, [], where_dict, True)
+        fiscmont_sql = create_select_query(cursor, fiscmont_agg, [], where_dict, True)
+        fiscweek_sql = create_select_query(cursor, fiscweek_agg, [], where_dict, True)
+        fiscoffi_sql = create_select_query(cursor, fiscoffi_agg, [], where_dict, True)
+        fiscunit_sql = create_select_query(cursor, fiscunit_agg, [], where_dict, True)
+        assert gen_fisccash_sqlstr == fisccash_sql
+        assert gen_fiscdeal_sqlstr == fiscdeal_sql
+        assert gen_fischour_sqlstr == fischour_sql
+        assert gen_fiscmont_sqlstr == fiscmont_sql
+        assert gen_fiscweek_sqlstr == fiscweek_sql
+        assert gen_fiscoffi_sqlstr == fiscoffi_sql
+        assert gen_fiscunit_sqlstr == fiscunit_sql
 
 
 def test_get_forecast_create_table_sqlstrs_ReturnsObj():

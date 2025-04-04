@@ -22,6 +22,7 @@ from src.f00_instrument.db_toolbox import (
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
     is_stageable,
+    create_select_query,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -635,6 +636,100 @@ FROM dark_side
 GROUP BY id, name, age, email, hair
 HAVING 1=2
 """
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_select_query_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age"]
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
+        x_select_columns = []
+
+        # WHEN
+        gen_sqlstr = create_select_query(cursor, x_tablename, x_select_columns)
+
+        # THEN
+        expected_sqlstr = f"""SELECT id, name, age
+FROM {x_tablename}
+
+"""
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_select_query_ReturnsObj_Scenario1():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        x_columns = ["id", "name", "age"]
+        create_table_from_columns(cursor, x_tablename, x_columns, {})
+        x_select_columns = []
+        x_where = {"name": "bob"}
+
+        # WHEN
+        gen_sqlstr = create_select_query(cursor, x_tablename, x_select_columns, x_where)
+
+        # THEN
+        expected_sqlstr = f"""SELECT id, name, age
+FROM {x_tablename}
+WHERE name = 'bob'
+"""
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_select_query_ReturnsObj_Scenario2():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        id_str = "id"
+        name_str = "name"
+        age_str = "age"
+        x_columns = [id_str, name_str, age_str]
+        column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
+        create_table_from_columns(cursor, x_tablename, x_columns, column_types)
+        x_select_columns = []
+        x_where = {id_str: 3, name_str: "bob", age_str: 23.5}
+
+        # WHEN
+        gen_sqlstr = create_select_query(cursor, x_tablename, x_select_columns, x_where)
+
+        # THEN
+        expected_sqlstr = f"""SELECT {id_str}, {name_str}, {age_str}
+FROM {x_tablename}
+WHERE {id_str} = 3
+  AND {name_str} = 'bob'
+  AND {age_str} = 23.5
+"""
+        print(f"{gen_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_select_query_ReturnsObj_Scenario3():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        id_str = "id"
+        name_str = "name"
+        age_str = "age"
+        x_columns = [id_str, name_str, age_str]
+        column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
+        create_table_from_columns(cursor, x_tablename, x_columns, column_types)
+        x_select_columns = []
+        x_where = {id_str: 3, name_str: "bob", age_str: 23.5}
+
+        # WHEN
+        gen_sqlstr = create_select_query(
+            cursor, x_tablename, x_select_columns, x_where, flat_bool=True
+        )
+
+        # THEN
+        expected_sqlstr = f"""SELECT {id_str}, {name_str}, {age_str} FROM {x_tablename} WHERE {id_str} = 3 AND {name_str} = 'bob' AND {age_str} = 23.5"""
+        print(f"{gen_sqlstr=}")
         assert gen_sqlstr == expected_sqlstr
 
 
