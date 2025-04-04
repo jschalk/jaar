@@ -88,9 +88,8 @@ from src.f11_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.f11_etl.db2obj_tool import get_fisc_dict_from_db
+from src.f11_etl.db_obj_tool import get_fisc_dict_from_db
 from src.f11_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.f11_etl.fisc_etl_tool import create_fiscunit_jsons_from_prime_files
 from src.f11_etl.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,

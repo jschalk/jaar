@@ -1,68 +1,8 @@
-from src.f00_instrument.db_toolbox import (
-    db_table_exists,
-    create_select_inconsistency_query,
-    create_update_inconsistency_error_query,
-    get_create_table_sqlstr,
-    create_table2table_agg_insert_query,
-    get_table_columns,
-    is_stageable,
-)
 from src.f01_road.deal import fisc_title_str
-from src.f02_bud.bud import budunit_shop, get_from_dict as budunit_get_from_dict
-from src.f02_bud.bud_tool import budunit_str
-from src.f04_vow.atom_config import (
-    event_int_str,
-    face_name_str,
-    get_bud_dimens,
-    get_delete_key_name,
-)
 from src.f08_fisc.fisc import fiscunit_shop, get_from_dict as fiscunit_get_from_dict
-from src.f08_fisc.fisc_config import (
-    fiscunit_str,
-    get_fisc_dimens,
-    cashbook_str,
-    brokerunits_str,
-    timeline_str,
-)
-from src.f10_idea.idea_config import (
-    idea_number_str,
-    get_idea_sqlite_types,
-    get_idea_config_dict,
-    idea_category_str,
-    get_idea_numbers,
-)
-from src.f10_idea.idea_db_tool import (
-    get_pragma_table_fetchall,
-    get_custom_sorted_list,
-    get_idea_into_dimen_staging_query,
-)
-from src.f11_etl.fisc_etl_tool import (
-    FiscPrimeObjsRef,
-    FiscPrimeColumnsRef,
-)
-from src.f11_etl.tran_sqlstrs import (
-    get_fisc_create_table_sqlstrs,
-    get_bud_create_table_sqlstrs,
-    create_fisc_tables,
-    create_bud_tables,
-    create_all_idea_tables,
-    get_bud_inconsistency_sqlstrs,
-    get_fisc_inconsistency_sqlstrs,
-    get_bud_put_update_inconsist_error_message_sqlstrs,
-    get_fisc_update_inconsist_error_message_sqlstrs,
-    get_bud_insert_put_agg_from_staging_sqlstrs,
-    get_bud_insert_del_agg_from_staging_sqlstrs,
-    get_fisc_insert_agg_from_staging_sqlstrs,
-    FISCUNIT_AGG_INSERT_SQLSTR,
-    IDEA_STAGEABLE_PUT_DIMENS,
-    IDEA_STAGEABLE_DEL_DIMENS,
-    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISC_OTE1_AGG_SQLSTR,
-    INSERT_FISC_OTE1_AGG_SQLSTR,
-)
-from src.f11_etl.db2obj_tool import get_fisc_dict_from_db
+from src.f08_fisc.fisc_config import cashbook_str, brokerunits_str, timeline_str
+from src.f11_etl.tran_sqlstrs import create_fisc_tables
+from src.f11_etl.db_obj_tool import get_fisc_dict_from_db
 from sqlite3 import connect as sqlite3_connect
 
 
