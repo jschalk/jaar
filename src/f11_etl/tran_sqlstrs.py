@@ -1013,7 +1013,7 @@ CREATE_FORECAST_BUDITEM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_fore
 CREATE_FORECAST_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_forecast (fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund INTEGER, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
-def get_fund_metric_create_table_sqlstrs() -> dict[str, str]:
+def get_forecast_create_table_sqlstrs() -> dict[str, str]:
     return {
         "bud_acct_membership_forecast": CREATE_FORECAST_BUDMEMB_SQLSTR,
         "bud_acctunit_forecast": CREATE_FORECAST_BUDACCT_SQLSTR,
@@ -1027,3 +1027,8 @@ def get_fund_metric_create_table_sqlstrs() -> dict[str, str]:
         "bud_itemunit_forecast": CREATE_FORECAST_BUDITEM_SQLSTR,
         "budunit_forecast": CREATE_FORECAST_BUDUNIT_SQLSTR,
     }
+
+
+def create_forecast_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_forecast_create_table_sqlstrs().values():
+        conn_or_cursor.execute(create_table_sqlstr)

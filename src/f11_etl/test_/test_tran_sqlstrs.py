@@ -55,7 +55,8 @@ from src.f11_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
     get_fisc_fu1_select_sqlstrs,
-    get_fund_metric_create_table_sqlstrs,
+    get_forecast_create_table_sqlstrs,
+    create_forecast_tables,
     # get_bud_bu1_select_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -1004,10 +1005,10 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     assert gen_fiscunit_sqlstr == expected_fiscunit_sqlstr
 
 
-def test_get_fund_metric_create_table_sqlstrs_ReturnsObj():
+def test_get_forecast_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_fund_metric_create_table_sqlstrs()
+    create_table_sqlstrs = get_forecast_create_table_sqlstrs()
 
     # THEN
     s_types = get_idea_sqlite_types()
@@ -1032,6 +1033,50 @@ def test_get_fund_metric_create_table_sqlstrs_ReturnsObj():
             f'CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""'
         )
         # print(f'"{forecast_table}": CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR,')
+
+
+def test_create_forecast_tables_CreatesTables():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
+        assert cursor.fetchone()[0] == 0
+
+        assert db_table_exists(cursor, "bud_acct_membership_forecast") is False
+        assert db_table_exists(cursor, "bud_acctunit_forecast") is False
+        assert db_table_exists(cursor, "bud_groupunit_forecast") is False
+        assert db_table_exists(cursor, "bud_item_awardlink_forecast") is False
+        assert db_table_exists(cursor, "bud_item_factunit_forecast") is False
+        assert db_table_exists(cursor, "bud_item_healerlink_forecast") is False
+        assert db_table_exists(cursor, "bud_item_reason_premiseunit_forecast") is False
+        assert db_table_exists(cursor, "bud_item_reasonunit_forecast") is False
+        assert db_table_exists(cursor, "bud_item_teamlink_forecast") is False
+        assert db_table_exists(cursor, "bud_itemunit_forecast") is False
+        assert db_table_exists(cursor, "budunit_forecast") is False
+
+        # WHEN
+        create_forecast_tables(cursor)
+
+        # THEN
+        cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
+        # print(f"{cursor.fetchall()=}")
+        # x_count = 0
+        # for x_row in cursor.fetchall():
+        #     print(f"{x_count} {x_row[1]=}")
+        #     x_count += 1
+        assert db_table_exists(cursor, "bud_acct_membership_forecast")
+        assert db_table_exists(cursor, "bud_acctunit_forecast")
+        assert db_table_exists(cursor, "bud_groupunit_forecast")
+        assert db_table_exists(cursor, "bud_item_awardlink_forecast")
+        assert db_table_exists(cursor, "bud_item_factunit_forecast")
+        assert db_table_exists(cursor, "bud_item_healerlink_forecast")
+        assert db_table_exists(cursor, "bud_item_reason_premiseunit_forecast")
+        assert db_table_exists(cursor, "bud_item_reasonunit_forecast")
+        assert db_table_exists(cursor, "bud_item_teamlink_forecast")
+        assert db_table_exists(cursor, "bud_itemunit_forecast")
+        assert db_table_exists(cursor, "budunit_forecast")
+        cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
+        assert cursor.fetchone()[0] == 11
 
 
 # def test_get_bud_bu1_select_sqlstrs_ReturnsObj_HasAllNeededKeys():
