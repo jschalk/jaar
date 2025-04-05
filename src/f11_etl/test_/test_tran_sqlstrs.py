@@ -177,6 +177,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         ag_put_cols.update(set(x_config.get("jvalues").keys()))
         ag_put_cols = get_default_sorted_list(ag_put_cols)
         ex_ag_put_sqlstr = get_create_table_sqlstr(ag_put_table, ag_put_cols, s_types)
+        print(f"{ex_ag_put_sqlstr=}")
         assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
 
         st_put_table = f"{x_dimen}_put_staging"
@@ -186,6 +187,7 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         st_put_cols.add("error_message")
         st_put_cols = get_default_sorted_list(st_put_cols)
         ex_st_put_sqlstr = get_create_table_sqlstr(st_put_table, st_put_cols, s_types)
+        print(f"{ex_st_put_sqlstr=}")
         assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
 
         ag_del_table = f"{x_dimen}_del_agg"

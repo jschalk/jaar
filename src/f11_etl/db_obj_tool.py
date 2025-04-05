@@ -1,4 +1,5 @@
 from src.f00_instrument.dict_toolbox import set_in_nested_dict
+from src.f00_instrument.db_toolbox import sqlite_obj_str
 from src.f01_road.road import FiscTitle
 from src.f02_bud.bud import BudUnit
 from src.f11_etl.tran_sqlstrs import get_fisc_fu1_select_sqlstrs
@@ -139,6 +140,85 @@ def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
         row_offi_time = fisccash_row[1]
         offi_times_set.add(row_offi_time)
     fisc_dict["offi_times"] = list(offi_times_set)
+
+
+def create_budmemb_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budacct_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budgrou_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budawar_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budfact_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budheal_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budprem_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budreas_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budteam_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_buditem_insert_sqlstr(values_dict: dict[str,]):
+    return """INSERT INTO"""
+
+
+def create_budunit_metrics_insert_sqlstr(values_dict: dict[str,]):
+    integer_str = "INTEGER"
+    real_str = "REAL"
+    _keeps_buildable = values_dict.get("_keeps_buildable")
+    _keeps_justified = values_dict.get("_keeps_justified")
+    _offtrack_fund = values_dict.get("_offtrack_fund")
+    _rational = values_dict.get("_rational")
+    _sum_healerlink_share = values_dict.get("_sum_healerlink_share")
+    _tree_traverse_count = values_dict.get("_tree_traverse_count")
+    credor_respect = values_dict.get("credor_respect")
+    debtor_respect = values_dict.get("debtor_respect")
+    fund_coin = values_dict.get("fund_coin")
+    fund_pool = values_dict.get("fund_pool")
+    max_tree_traverse = values_dict.get("max_tree_traverse")
+    penny = values_dict.get("penny")
+    respect_bit = values_dict.get("respect_bit")
+    tally = values_dict.get("tally")
+
+    return f"""INSERT INTO budunit_forecast (credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerlink_share, _keeps_buildable, _tree_traverse_count)
+VALUES (
+  {sqlite_obj_str(credor_respect, real_str)}
+, {sqlite_obj_str(debtor_respect, real_str)}
+, {sqlite_obj_str(fund_pool, real_str)}
+, {sqlite_obj_str(max_tree_traverse, integer_str)}
+, {sqlite_obj_str(tally, real_str)}
+, {sqlite_obj_str(fund_coin, real_str)}
+, {sqlite_obj_str(penny, real_str)}
+, {sqlite_obj_str(respect_bit, real_str)}
+, {sqlite_obj_str(_rational, integer_str)}
+, {sqlite_obj_str(_keeps_justified, integer_str)}
+, {sqlite_obj_str(_offtrack_fund, real_str)}
+, {sqlite_obj_str(_sum_healerlink_share, real_str)}
+, {sqlite_obj_str(_keeps_buildable, integer_str)}
+, {sqlite_obj_str(_tree_traverse_count, integer_str)}
+)
+;
+"""
 
 
 def insert_forecast_obj(cursor: sqlite3_Cursor, fisc_dict: BudUnit):

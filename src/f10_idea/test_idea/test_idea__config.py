@@ -75,7 +75,10 @@ from src.f04_vow.atom_config import (
     give_force_str,
     take_force_str,
 )
-from src.f05_fund_metric.fund_metric_config import get_all_fund_metric_args
+from src.f05_fund_metric.fund_metric_config import (
+    get_all_fund_metric_args,
+    get_fund_metric_args_sqlite_datatype_dict,
+)
 from src.f08_fisc.fisc_config import (
     get_fisc_args_dimen_mapping,
     get_fisc_config_dict,
@@ -191,7 +194,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     fund_metric_args = set(get_all_fund_metric_args().keys())
     # for fund_metric_arg in fund_metric_args.difference(table_sorting_priority):
     #     print(f"{fund_metric_arg=}")
-    # print(f"{fund_metric_args.difference(table_sorting_priority)=}")
+    print(f"{fund_metric_args.difference(table_sorting_priority)=}")
     assert fund_metric_args.issubset(table_sorting_priority)
 
     assert table_sorting_priority[0] == idea_number_str()
@@ -315,7 +318,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[118] == "_keeps_buildable"
     assert table_sorting_priority[119] == "_all_acct_debt"
     assert table_sorting_priority[120] == "_tree_traverse_count"
-    assert len(table_sorting_priority) == 121
+    assert table_sorting_priority[121] == "_bridge"
+    assert len(table_sorting_priority) == 122
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)
@@ -357,12 +361,12 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(begin_str()) == "REAL"
     assert sqlite_types.get(close_str()) == "REAL"
     assert sqlite_types.get(addin_str()) == "REAL"
-    assert sqlite_types.get(numor_str()) == "REAL"
-    assert sqlite_types.get(denom_str()) == "REAL"
+    assert sqlite_types.get(numor_str()) == "INTEGER"
+    assert sqlite_types.get(denom_str()) == "INTEGER"
     assert sqlite_types.get(morph_str()) == "INTEGER"
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
-    assert sqlite_types.get(base_item_active_requisite_str()) == "TEXT"
+    assert sqlite_types.get(base_item_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(credit_belief_str()) == "REAL"
     assert sqlite_types.get(debtit_belief_str()) == "REAL"
     assert sqlite_types.get(credit_vote_str()) == "REAL"
@@ -373,14 +377,14 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fnigh_str()) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
     assert sqlite_types.get(give_force_str()) == "REAL"
-    assert sqlite_types.get(mass_str()) == "REAL"
+    assert sqlite_types.get(mass_str()) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
     assert sqlite_types.get("nigh") == "REAL"
     assert sqlite_types.get("open") == "REAL"
-    assert sqlite_types.get("divisor") == "REAL"
+    assert sqlite_types.get("divisor") == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
-    assert sqlite_types.get("tally") == "REAL"
+    assert sqlite_types.get("tally") == "INTEGER"
     assert sqlite_types.get(fund_coin_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
@@ -403,6 +407,10 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_title_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"
+
+    for x_arg, datatype in get_fund_metric_args_sqlite_datatype_dict().items():
+        print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
+        assert sqlite_types.get(x_arg) == datatype
 
 
 def test_get_allowed_curds_ReturnObj():

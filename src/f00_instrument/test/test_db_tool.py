@@ -1,7 +1,5 @@
 from src.f00_instrument.db_toolbox import (
-    sqlite_bool,
-    sqlite_str,
-    sqlite_null,
+    sqlite_obj_str,
     create_class_type_reference_insert_sqlstr,
     RowData,
     rowdata_shop,
@@ -23,6 +21,7 @@ from src.f00_instrument.db_toolbox import (
     create_table2table_agg_insert_query,
     is_stageable,
     create_select_query,
+    create_insert_query,
 )
 from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
@@ -34,25 +33,16 @@ from sqlite3 import (
 )
 
 
-def test_sqlite_null_ReturnsObj():
-    assert sqlite_null(True)
-    assert sqlite_null("yea") == "yea"
-    assert sqlite_null(None) == "NULL"
-
-
-def test_sqlite_bool_ReturnsObj():
-    assert sqlite_bool(x_int=0) is False
-    assert sqlite_bool(x_int=1)
-    assert sqlite_bool(x_int=None) == "NULL"
-
-
-def test_sqlite_str_ReturnsObj():
-    assert sqlite_str(True) == "TRUE"
-    assert sqlite_str(False) == "FALSE"
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        sqlite_str("Bob")
-    assert str(excinfo.value) == "function requires boolean"
+def test_sqlite_obj_str_ReturnsObj():
+    assert sqlite_obj_str(True, "TEXT") == """'TRUE'"""
+    assert sqlite_obj_str(False, "TEXT") == """'FALSE'"""
+    assert sqlite_obj_str(True, "INTEGER") == "1"
+    assert sqlite_obj_str(False, "INTEGER") == "0"
+    assert sqlite_obj_str("yea", "TEXT") == """'yea'"""
+    assert sqlite_obj_str(None, "TEXT") == "NULL"
+    assert sqlite_obj_str(12.5, "INTEGER") == "12"
+    assert sqlite_obj_str(12.5, "REAL") == "12.5"
+    assert sqlite_obj_str(None, "REAL") == "NULL"
 
 
 def test_sqlite_create_class_type_reference_insert_sqlstr_ReturnsObj():
@@ -646,7 +636,7 @@ def test_create_select_query_ReturnsObj_Scenario0():
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age"]
         create_table_from_columns(cursor, x_tablename, x_columns, {})
-        x_select_columns = []
+        x_select_columns = set()
 
         # WHEN
         gen_sqlstr = create_select_query(cursor, x_tablename, x_select_columns)
@@ -659,14 +649,14 @@ FROM {x_tablename}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_select_query_ReturnsObj_Scenario1():
+def test_create_select_query_ReturnsObj_Scenario1_WhereClauseExists():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age"]
         create_table_from_columns(cursor, x_tablename, x_columns, {})
-        x_select_columns = []
+        x_select_columns = set()
         x_where = {"name": "bob"}
 
         # WHEN
@@ -680,7 +670,7 @@ WHERE name = 'bob'
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_select_query_ReturnsObj_Scenario2():
+def test_create_select_query_ReturnsObj_Scenario2_WhereClauseHasAllElements():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -691,7 +681,7 @@ def test_create_select_query_ReturnsObj_Scenario2():
         x_columns = [id_str, name_str, age_str]
         column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
         create_table_from_columns(cursor, x_tablename, x_columns, column_types)
-        x_select_columns = []
+        x_select_columns = set()
         x_where = {id_str: 3, name_str: "bob", age_str: 23.5}
 
         # WHEN
@@ -708,7 +698,7 @@ WHERE {id_str} = 3
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_select_query_ReturnsObj_Scenario3():
+def test_create_select_query_ReturnsObj_Scenario3_StringIsFlat():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -719,7 +709,7 @@ def test_create_select_query_ReturnsObj_Scenario3():
         x_columns = [id_str, name_str, age_str]
         column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
         create_table_from_columns(cursor, x_tablename, x_columns, column_types)
-        x_select_columns = []
+        x_select_columns = set()
         x_where = {id_str: 3, name_str: "bob", age_str: 23.5}
 
         # WHEN
@@ -729,6 +719,108 @@ def test_create_select_query_ReturnsObj_Scenario3():
 
         # THEN
         expected_sqlstr = f"""SELECT {id_str}, {name_str}, {age_str} FROM {x_tablename} WHERE {id_str} = 3 AND {name_str} = 'bob' AND {age_str} = 23.5"""
+        print(f"{gen_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_select_query_ReturnsObj_Scenario4_ColumnOrdering():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        id_str = "id"
+        name_str = "name"
+        age_str = "age"
+        x_columns = [id_str, name_str, age_str]
+        column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
+        create_table_from_columns(cursor, x_tablename, x_columns, column_types)
+        x_select_columns = {age_str, id_str}
+        x_where = {id_str: 3, name_str: "bob", age_str: 23.5}
+
+        # WHEN
+        gen_sqlstr = create_select_query(
+            cursor, x_tablename, x_select_columns, x_where, flat_bool=True
+        )
+
+        # THEN
+        expected_sqlstr = f"""SELECT {id_str}, {age_str} FROM {x_tablename} WHERE {id_str} = 3 AND {name_str} = 'bob' AND {age_str} = 23.5"""
+        print(f"{gen_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_select_query_ReturnsObj_Scenario4():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        id_str = "id"
+        name_str = "name"
+        age_str = "age"
+        x_columns = [id_str, name_str, age_str]
+        column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
+        create_table_from_columns(cursor, x_tablename, x_columns, column_types)
+        x_select_columns = {age_str, id_str}
+        x_where = {id_str: 3, name_str: "bob", age_str: 23.5}
+
+        # WHEN
+        gen_sqlstr = create_select_query(
+            cursor, x_tablename, x_select_columns, x_where, flat_bool=True
+        )
+
+        # THEN
+        expected_sqlstr = f"""SELECT {id_str}, {age_str} FROM {x_tablename} WHERE {id_str} = 3 AND {name_str} = 'bob' AND {age_str} = 23.5"""
+        print(f"{gen_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_insert_query_ReturnsObj_Scenario0():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        id_str = "id"
+        name_str = "name"
+        age_str = "age"
+        x_columns = [id_str, name_str, age_str]
+        column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
+        create_table_from_columns(cursor, x_tablename, x_columns, column_types)
+        x_insert_values = {id_str: 3, name_str: "bob", age_str: 23.5}
+
+        # WHEN
+        gen_sqlstr = create_insert_query(cursor, x_tablename, x_insert_values)
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {x_tablename} ({id_str}, {name_str}, {age_str})
+VALUES (
+  3
+, 'bob'
+, 23.5
+)
+;
+"""
+        print(f"{gen_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_insert_query_ReturnsObj_Scenario1():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_tablename = "dark_side"
+        id_str = "id"
+        name_str = "name"
+        age_str = "age"
+        x_columns = [id_str, name_str, age_str]
+        column_types = {id_str: "INTEGER", name_str: "TEXT", age_str: "REAL"}
+        create_table_from_columns(cursor, x_tablename, x_columns, column_types)
+        x_insert_values = {id_str: 3, name_str: "bob", age_str: 23.5}
+
+        # WHEN
+        gen_sqlstr = create_insert_query(cursor, x_tablename, x_insert_values, True)
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {x_tablename} ({id_str}, {name_str}, {age_str})
+VALUES (3, 'bob', 23.5);"""
         print(f"{gen_sqlstr=}")
         assert gen_sqlstr == expected_sqlstr
 

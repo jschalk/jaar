@@ -11,24 +11,30 @@ from csv import reader as csv_reader, writer as csv_writer
 from os.path import join as os_path_join
 
 
-def sqlite_null(x_obj: any):
-    return "NULL" if x_obj is None else x_obj
-
-
-def sqlite_bool(x_int: int) -> bool:
-    """sqlite_true_to_python_true"""
-    return "NULL" if x_int is None else x_int == 1
-
-
-def sqlite_str(x_bool: any) -> str:
-    """python_bool_to_SQLITE_bool"""
-    if x_bool is True:
-        x_str = "TRUE"
-    elif not x_bool:
-        x_str = "FALSE"
-    else:
-        raise TypeError("function requires boolean")
-    return x_str
+def sqlite_obj_str(x_obj: any, sqlite_datatype: str):
+    if x_obj is None:
+        return "NULL"
+    elif sqlite_datatype == "TEXT":
+        if x_obj == True:
+            return """'TRUE'"""
+        elif x_obj == False:
+            return """'FALSE'"""
+        else:
+            return f"""'{x_obj}'"""
+    elif sqlite_datatype == "INTEGER":
+        if x_obj == True:
+            return "1"
+        elif x_obj == False:
+            return "0"
+        else:
+            return f"{int(x_obj)}"
+    elif sqlite_datatype == "REAL":
+        if x_obj == True:
+            return "1"
+        elif x_obj == False:
+            return "0"
+        else:
+            return f"{x_obj}"
 
 
 def sqlite_to_python(query_value) -> str:
@@ -450,6 +456,8 @@ def create_select_query(
     table_columns = get_table_columns(cursor, x_tablename)
     if not select_columns:
         select_columns = table_columns
+    else:
+        select_columns = get_sorted_intersection_list(select_columns, table_columns)
     select_columns_str = ", ".join(list(select_columns))
     where_str = ""
     for where_column, where_value in where_dict.items():
@@ -463,6 +471,32 @@ def create_select_query(
     if flat_bool:
         sqlstr = sqlstr[:-1].replace("\n", " ").replace("  ", " ").replace("  ", " ")
     return sqlstr
+
+
+def create_insert_query(
+    cursor: sqlite3_Connection,
+    x_tablename: str,
+    values_dict: dict[str,],
+    flat_bool: bool = False,
+) -> str:
+    columns_set = set(values_dict.keys())
+    table_columns = get_table_columns(cursor, x_tablename)
+    columns_list = get_sorted_intersection_list(columns_set, table_columns)
+    values_str = ""
+    for x_column in columns_list:
+        column_type = get_column_data_type(cursor, x_tablename, x_column)
+        x_value = values_dict.get(x_column)
+        value_str = sqlite_obj_str(x_value, column_type)
+        if values_str == "":
+            values_str += f"""\n  {value_str}"""
+        else:
+            values_str += f"""\n, {value_str}"""
+    values_str += "\n)\n;\n"
+    into_columns_str = ", ".join(columns_list)
+    if flat_bool:
+        values_str = values_str.replace("\n", "").replace("  ", "")
+    return f"""INSERT INTO {x_tablename} ({into_columns_str})
+VALUES ({values_str}"""
 
 
 def is_stageable(

@@ -47,12 +47,12 @@
         },
         "jvalues": {
             "credit_vote": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "debtit_vote": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             }
         }
     },
@@ -120,21 +120,17 @@
     "bud_groupunit": {
         "abbreviation": "budgrou",
         "jkeys": {
-            "item_title": {
-                "class_type": "TitleUnit",
-                "sqlite_datatype": "TEXT"
-            },
-            "parent_road": {
-                "class_type": "RoadUnit",
+            "group_label": {
+                "class_type": "LabelUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_credor_pool": {
+            "_fund_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_debtor_pool": {
+            "_fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -146,63 +142,23 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
+            "_credor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_debtor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
             "_fund_coin": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_give": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {
-            "addin": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "begin": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "close": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "denom": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
-            },
-            "gogo_want": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "mass": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
-            },
-            "morph": {
-                "class_type": "bool",
-                "sqlite_datatype": "INTEGER"
-            },
-            "numor": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
-            },
-            "pledge": {
-                "class_type": "bool",
-                "sqlite_datatype": "INTEGER"
-            },
-            "problem_bool": {
-                "class_type": "bool",
-                "sqlite_datatype": "INTEGER"
-            },
-            "stop_want": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
+            "_bridge": {
+                "class_type": "str",
+                "sqlite_datatype": "TEXT"
             }
         }
     },
@@ -506,8 +462,8 @@
                 "sqlite_datatype": "INTEGER"
             },
             "_offtrack_fund": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "_rational": {
                 "class_type": "bool",
