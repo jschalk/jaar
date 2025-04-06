@@ -332,6 +332,16 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add(f"{base_str()}_EXCISE")
     assert all_args == set(table_sorting_priority)
 
+    x_no_underscore_set = {x_arg.replace("_", "") for x_arg in table_sorting_priority}
+    # x_dict = {}
+    # for x_arg in sorted(table_sorting_priority):
+    #     y_arg = x_arg.replace("_", "")
+    #     if x_dict.get(y_arg) is None:
+    #         x_dict[y_arg] = 0
+    #     x_dict[y_arg] = x_dict.get(y_arg) + 1
+    # print(f"{x_dict=}")
+    # assert len(x_no_underscore_set) == len(table_sorting_priority)
+
 
 def test_get_idea_sqlite_types_ReturnsObj():
     # ESTABLISH / WHEN
@@ -408,6 +418,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(timeline_title_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"
 
+    # sourcery skip: no-loop-in-tests
     for x_arg, datatype in get_fund_metric_args_sqlite_datatype_dict().items():
         print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
         assert sqlite_types.get(x_arg) == datatype

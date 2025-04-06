@@ -28,10 +28,13 @@ from sqlite3 import connect as sqlite3_connect
 
 
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method, inline-variable
     # ESTABLISH
     x_args = get_fund_metric_dimen_args("budunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
     x__offtrack_fund = 55.5
@@ -47,6 +50,8 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x_respect_bit = 0.2
     x_tally = 6
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "_keeps_buildable": x__keeps_buildable,
         "_keeps_justified": x__keeps_justified,
         "_offtrack_fund": x__offtrack_fund,
@@ -94,6 +99,8 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     #     # b0_str = "{"
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x__active = 1
     x__all_acct_cred = 2
     x__all_acct_debt = 3
@@ -122,6 +129,8 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     x_problem_bool = 26
     x_stop_want = 27
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "_active": x__active,
         "_all_acct_cred": x__all_acct_cred,
         "_all_acct_debt": x__all_acct_debt,
@@ -191,6 +200,8 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     #     b0_str = "{"
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_road = 1
     x_base = 2
     x_base_item_active_requisite = 3
@@ -198,6 +209,8 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x__status = 5
     x__base_item_active_value = 6
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "road": x_road,
         "base": x_base,
         "base_item_active_requisite": x_base_item_active_requisite,
@@ -249,6 +262,8 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_road = 1
     x_base = 2
     x_need = 3
@@ -258,6 +273,8 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x__task = 7
     x__status = 8
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "road": x_road,
         "base": x_base,
         "need": x_need,
@@ -311,6 +328,8 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_road = 1
     x_awardee_tag = 2
     x_give_force = 3
@@ -318,6 +337,8 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     x__fund_give = 5
     x__fund_take = 6
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "road": x_road,
         "awardee_tag": x_awardee_tag,
         "give_force": x_give_force,
@@ -369,12 +390,16 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_road = 1
     x_base = 2
     x_pick = 3
     x_fopen = 4
     x_fnigh = 5
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "road": x_road,
         "base": x_base,
         "pick": x_pick,
@@ -425,9 +450,13 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_road = 1
     x_healer_name = 2
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "road": x_road,
         "healer_name": x_healer_name,
     }
@@ -475,10 +504,14 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_road = 1
     x_team_tag = 2
     x__owner_name_team = 3
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "road": x_road,
         "team_tag": x_team_tag,
         "_owner_name_team": x__owner_name_team,
@@ -527,6 +560,8 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_acct_name = 1
     x_credit_belief = 2
     x_debtit_belief = 3
@@ -541,6 +576,8 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     x__inallocable_debtit_belief = 12
     x__irrational_debtit_belief = 13
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "credit_belief": x_credit_belief,
         "debtit_belief": x_debtit_belief,
@@ -599,6 +636,8 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_acct_name = 1
     x_group_label = 2
     x_credit_vote = 3
@@ -612,6 +651,8 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_give = 11
     x__fund_agenda_ratio_take = 12
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "group_label": x_group_label,
         "credit_vote": x_credit_vote,
@@ -669,6 +710,8 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
     x_group_label = 1
     x__credor_pool = 2
     x__debtor_pool = 3
@@ -679,6 +722,8 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_take = 8
     x__bridge = 9
     values_dict = {
+        "fisc_title": x_fisc_title,
+        "owner_name": x_owner_name,
         "group_label": x_group_label,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,

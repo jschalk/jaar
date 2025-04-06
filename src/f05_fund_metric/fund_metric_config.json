@@ -6,8 +6,16 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "group_label": {
                 "class_type": "LabelUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -60,6 +68,14 @@
         "abbreviation": "budacct",
         "jkeys": {
             "acct_name": {
+                "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             }
@@ -120,17 +136,25 @@
     "bud_groupunit": {
         "abbreviation": "budgrou",
         "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "group_label": {
                 "class_type": "LabelUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
-            "_fund_give": {
+            "_credor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_take": {
+            "_debtor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -142,15 +166,15 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_credor_pool": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_debtor_pool": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
             "_fund_coin": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -167,6 +191,14 @@
         "jkeys": {
             "awardee_tag": {
                 "class_type": "LabelUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
@@ -202,6 +234,14 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -226,7 +266,15 @@
     "bud_item_healerlink": {
         "abbreviation": "budheal",
         "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "healer_name": {
+                "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -245,8 +293,16 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "need": {
                 "class_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
             "road": {
@@ -286,6 +342,14 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -315,6 +379,14 @@
     "bud_item_teamlink": {
         "abbreviation": "budteam",
         "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
@@ -335,8 +407,16 @@
     "bud_itemunit": {
         "abbreviation": "buditem",
         "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "item_title": {
                 "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
             "parent_road": {
@@ -451,7 +531,16 @@
     },
     "budunit": {
         "abbreviation": "budunit",
-        "jkeys": {},
+        "jkeys": {
+            "fisc_title": {
+                "class_type": "TitleUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            }
+        },
         "jmetrics": {
             "_keeps_buildable": {
                 "class_type": "int",

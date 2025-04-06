@@ -1,5 +1,6 @@
 # from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from src.f00_instrument.file import create_path
+from src.f01_road.deal import fisc_title_str, owner_name_str
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -142,17 +143,19 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
             for level2_key, fm_aspect_dict in aspect_dict.items():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
-                    atom_arg_keys = set(atom_args)
+                    dimen_keys = set(atom_args)
+                    dimen_keys.add(fisc_title_str())
+                    dimen_keys.add(owner_name_str())
                     fm_aspect_keys = set(fm_aspect_dict.keys())
                     print(
-                        f"{level1_key=} {level2_key=} {fm_aspect_keys=} {atom_arg_keys=}"
+                        f"{level1_key=} {level2_key=} {fm_aspect_keys=} {dimen_keys=}"
                     )
-                    assert fm_aspect_keys == atom_arg_keys
+                    assert fm_aspect_keys == dimen_keys
                 elif level2_key == jvalues_str():
                     atom_args = atom_dimen.get(jvalues_str())
-                    atom_arg_keys = set(atom_args)
+                    dimen_keys = set(atom_args)
                     fm_aspect_keys = set(fm_aspect_dict.keys())
-                    assert fm_aspect_keys == atom_arg_keys
+                    assert fm_aspect_keys == dimen_keys
 
     budunit_aspect = fund_metric_config.get(budunit_str())
     budacct_aspect = fund_metric_config.get(bud_acctunit_str())
@@ -313,7 +316,7 @@ def test_get_all_fund_metric_args_ReturnsObj():
     # assert bud_item_factunit_str() in road_fund_metric_aspects
     # assert bud_item_teamlink_str() in road_fund_metric_aspects
     # assert len(road_fund_metric_aspects) == 6
-    assert len(all_fund_metric_args) == 76
+    assert len(all_fund_metric_args) == 78
 
 
 def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
@@ -367,6 +370,8 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
     print(f"{bud_acctunit_args=}")
     print(f"{bud_groupunit_args=}")
     assert bud_acctunit_args == {
+        fisc_title_str(),
+        owner_name_str(),
         "_fund_agenda_give",
         "_credor_pool",
         "_fund_give",
@@ -382,6 +387,8 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_irrational_debtit_belief",
     }
     assert bud_itemunit_args == {
+        fisc_title_str(),
+        owner_name_str(),
         morph_str(),
         denom_str(),
         "item_title",
@@ -411,6 +418,8 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         begin_str(),
     }
     assert bud_groupunit_args == {
+        fisc_title_str(),
+        owner_name_str(),
         "_debtor_pool",
         "_credor_pool",
         "_fund_give",
@@ -723,7 +732,10 @@ def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
         print(f"{x_arg=} {arg_types=}")
         assert len(arg_types) == 1
 
+    # WHEN
     sqlite_datatype_dict = get_fund_metric_args_sqlite_datatype_dict()
+
+    # THEN
     for x_arg, arg_types in all_args.items():
         # print(
         #     f"""assert fund_metric_args_type_dict.get("{x_arg}") == "{list(arg_types)[0]}" """
