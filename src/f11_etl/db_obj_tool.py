@@ -142,44 +142,105 @@ def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
     fisc_dict["offi_times"] = list(offi_times_set)
 
 
-def create_budmemb_insert_sqlstr(values_dict: dict[str,]):
+def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budacct_insert_sqlstr(values_dict: dict[str,]):
+def create_budacct_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budgrou_insert_sqlstr(values_dict: dict[str,]):
+def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budawar_insert_sqlstr(values_dict: dict[str,]):
+def create_budawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budfact_insert_sqlstr(values_dict: dict[str,]):
+def create_budfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budheal_insert_sqlstr(values_dict: dict[str,]):
+def create_budheal_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budprem_insert_sqlstr(values_dict: dict[str,]):
+def create_budprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budreas_insert_sqlstr(values_dict: dict[str,]):
+def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_budteam_insert_sqlstr(values_dict: dict[str,]):
+def create_budteam_metrics_insert_sqlstr(values_dict: dict[str,]):
     return """INSERT INTO"""
 
 
-def create_buditem_insert_sqlstr(values_dict: dict[str,]):
-    return """INSERT INTO"""
+def create_buditem_metrics_insert_sqlstr(values_dict: dict[str,]):
+    parent_road = values_dict.get("parent_road")
+    item_title = values_dict.get("item_title")
+    begin = values_dict.get("begin")
+    close = values_dict.get("close")
+    addin = values_dict.get("addin")
+    numor = values_dict.get("numor")
+    denom = values_dict.get("denom")
+    morph = values_dict.get("morph")
+    gogo_want = values_dict.get("gogo_want")
+    stop_want = values_dict.get("stop_want")
+    mass = values_dict.get("mass")
+    pledge = values_dict.get("pledge")
+    problem_bool = values_dict.get("problem_bool")
+    _active = values_dict.get("_active")
+    _task = values_dict.get("_task")
+    _fund_coin = values_dict.get("_fund_coin")
+    _fund_onset = values_dict.get("_fund_onset")
+    _fund_cease = values_dict.get("_fund_cease")
+    _fund_ratio = values_dict.get("_fund_ratio")
+    _gogo_calc = values_dict.get("_gogo_calc")
+    _stop_calc = values_dict.get("_stop_calc")
+    _level = values_dict.get("_level")
+    _range_evaluated = values_dict.get("_range_evaluated")
+    _descendant_pledge_count = values_dict.get("_descendant_pledge_count")
+    _healerlink_ratio = values_dict.get("_healerlink_ratio")
+    _all_acct_cred = values_dict.get("_all_acct_cred")
+    _all_acct_debt = values_dict.get("_all_acct_debt")
+    integer_str = "INTEGER"
+    real_str = "REAL"
+
+    return f"""INSERT INTO bud_itemunit_forecast (parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, _active, _task, _fund_coin, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+VALUES (
+  {sqlite_obj_str(parent_road, "TEXT")}
+, {sqlite_obj_str(item_title, "TEXT")}
+, {sqlite_obj_str(begin, real_str)}
+, {sqlite_obj_str(close, real_str)}
+, {sqlite_obj_str(addin, real_str)}
+, {sqlite_obj_str(numor, real_str)}
+, {sqlite_obj_str(denom, real_str)}
+, {sqlite_obj_str(morph, real_str)}
+, {sqlite_obj_str(gogo_want, real_str)}
+, {sqlite_obj_str(stop_want, real_str)}
+, {sqlite_obj_str(mass, real_str)}
+, {sqlite_obj_str(pledge, real_str)}
+, {sqlite_obj_str(problem_bool, real_str)}
+, {sqlite_obj_str(_active, real_str)}
+, {sqlite_obj_str(_task, real_str)}
+, {sqlite_obj_str(_fund_coin, real_str)}
+, {sqlite_obj_str(_fund_onset, real_str)}
+, {sqlite_obj_str(_fund_cease, real_str)}
+, {sqlite_obj_str(_fund_ratio, real_str)}
+, {sqlite_obj_str(_gogo_calc, real_str)}
+, {sqlite_obj_str(_stop_calc, real_str)}
+, {sqlite_obj_str(_level, real_str)}
+, {sqlite_obj_str(_range_evaluated, real_str)}
+, {sqlite_obj_str(_descendant_pledge_count, real_str)}
+, {sqlite_obj_str(_healerlink_ratio, real_str)}
+, {sqlite_obj_str(_all_acct_cred, real_str)}
+, {sqlite_obj_str(_all_acct_debt, real_str)}
+)
+;
+"""
 
 
 def create_budunit_metrics_insert_sqlstr(values_dict: dict[str,]):
