@@ -29,7 +29,7 @@ from sqlite3 import connect as sqlite3_connect
 
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("budunit")
+    x_args = get_fund_metric_dimen_args("budunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
     x__keeps_buildable = True
@@ -62,6 +62,8 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
         "respect_bit": x_respect_bit,
         "tally": x_tally,
     }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
 
     # WHEN
     insert_sqlstr = create_budunit_metrics_insert_sqlstr(values_dict)
@@ -82,7 +84,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
 def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_itemunit")
+    x_args = get_fund_metric_dimen_args("bud_itemunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -148,6 +150,8 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
     }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
 
     # WHEN
     insert_sqlstr = create_buditem_metrics_insert_sqlstr(values_dict)
@@ -165,102 +169,543 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-# def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     x_config = get_fund_metric_config_dict()
-#     x_dimens = {}
-#     x_args = x_config.get()
-#     for x_dimen in fund_metric_config.keys():
-#         # print(f"{x_dimen} checking...")
-#         x_config = fund_metric_config.get(x_dimen)
-#         dimen_abv = x_config.get("abbreviation")
-#         print(f"create_{dimen_abv}_insert_sqlstr")
-#     # x_dimens[x_dimen] = create_insert_forecast(x_dimen)
+def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_reasonunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    x_road = 1
+    x_base = 2
+    x_base_item_active_requisite = 3
+    x__task = 4
+    x__status = 5
+    x__base_item_active_value = 6
+    values_dict = {
+        "road": x_road,
+        "base": x_base,
+        "base_item_active_requisite": x_base_item_active_requisite,
+        "_task": x__task,
+        "_status": x__status,
+        "_base_item_active_value": x__base_item_active_value,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
 
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_forecast_tables(cursor)
-#         for x_dimen in x_dimens:
-#             print(f"{x_dimen=}")
-#             table_name = f"{x_dimen}_forecast"
-#             values_dict = {}
-#             expected_insert_sqlstr = create_insert_query(
-#                 cursor, table_name, values_dict
-#             )
-#         x_table_name = "budunit_forecast"
+    # WHEN
+    insert_sqlstr = create_budreas_metrics_insert_sqlstr(values_dict)
 
-#     assert create_budmemb_metrics_insert_sqlstr() == 2
-
-
-# def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budacct_metrics_insert_sqlstr() == 2
-
-
-# def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budgrou_metrics_insert_sqlstr() == 2
-
-
-# def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budawar_metrics_insert_sqlstr() == 2
-
-
-# def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budfact_metrics_insert_sqlstr() == 2
-
-
-# def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budheal_metrics_insert_sqlstr() == 2
-
-
-# def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budprem_metrics_insert_sqlstr() == 2
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_item_reasonunit_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print(expected_sqlstr)
+        print("")
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
 
 
-# def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budreas_metrics_insert_sqlstr() == 2
+def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_reason_premiseunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_road = 1
+    x_base = 2
+    x_need = 3
+    x_nigh = 4
+    x_open = 5
+    x_divisor = 6
+    x__task = 7
+    x__status = 8
+    values_dict = {
+        "road": x_road,
+        "base": x_base,
+        "need": x_need,
+        "nigh": x_nigh,
+        "open": x_open,
+        "divisor": x_divisor,
+        "_task": x__task,
+        "_status": x__status,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budprem_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_item_reason_premiseunit_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        # print(expected_sqlstr)
+        print("")
+        print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
 
 
-# def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_budteam_metrics_insert_sqlstr() == 2
+def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_awardlink")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_road = 1
+    x_awardee_tag = 2
+    x_give_force = 3
+    x_take_force = 4
+    x__fund_give = 5
+    x__fund_take = 6
+    values_dict = {
+        "road": x_road,
+        "awardee_tag": x_awardee_tag,
+        "give_force": x_give_force,
+        "take_force": x_take_force,
+        "_fund_give": x__fund_give,
+        "_fund_take": x__fund_take,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budawar_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_item_awardlink_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
 
 
-# def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
-#     # ESTABLISH
-#     assert create_buditem_metrics_insert_sqlstr() == 2
+def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_factunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_road = 1
+    x_base = 2
+    x_pick = 3
+    x_fopen = 4
+    x_fnigh = 5
+    values_dict = {
+        "road": x_road,
+        "base": x_base,
+        "pick": x_pick,
+        "fopen": x_fopen,
+        "fnigh": x_fnigh,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budfact_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_item_factunit_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
 
 
-# def test_create_insert_forecast_sqlstr_ReturnsObj():
-#     # ESTABLISH sourcery skip: no-loop-in-tests
-#     fund_metric_config = get_fund_metric_config_dict()
-#     x_dimens = {}
-#     for x_dimen in fund_metric_config.keys():
-#         # print(f"{x_dimen} checking...")
-#         x_config = fund_metric_config.get(x_dimen)
-#         dimen_abv = x_config.get("abbreviation")
-#         print(f"create_{dimen_abv}_insert_sqlstr")
-#     # x_dimens[x_dimen] = create_insert_forecast(x_dimen)
+def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_healerlink")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_road = 1
+    x_healer_name = 2
+    values_dict = {
+        "road": x_road,
+        "healer_name": x_healer_name,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
 
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_forecast_tables(cursor)
-#         for x_dimen in x_dimens:
-#             print(f"{x_dimen=}")
-#             table_name = f"{x_dimen}_forecast"
-#             values_dict = {}
-#             expected_insert_sqlstr = create_insert_query(
-#                 cursor, table_name, values_dict
-#             )
-#         x_table_name = "budunit_forecast"
+    # WHEN
+    insert_sqlstr = create_budheal_metrics_insert_sqlstr(values_dict)
 
-#     assert 1 == 2
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_item_healerlink_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
+
+
+def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_teamlink")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_road = 1
+    x_team_tag = 2
+    x__owner_name_team = 3
+    values_dict = {
+        "road": x_road,
+        "team_tag": x_team_tag,
+        "_owner_name_team": x__owner_name_team,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budteam_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_item_teamlink_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
+
+
+def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_acctunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_acct_name = 1
+    x_credit_belief = 2
+    x_debtit_belief = 3
+    x__credor_pool = 4
+    x__debtor_pool = 5
+    x__fund_give = 6
+    x__fund_take = 7
+    x__fund_agenda_give = 8
+    x__fund_agenda_take = 9
+    x__fund_agenda_ratio_give = 10
+    x__fund_agenda_ratio_take = 11
+    x__inallocable_debtit_belief = 12
+    x__irrational_debtit_belief = 13
+    values_dict = {
+        "acct_name": x_acct_name,
+        "credit_belief": x_credit_belief,
+        "debtit_belief": x_debtit_belief,
+        "_credor_pool": x__credor_pool,
+        "_debtor_pool": x__debtor_pool,
+        "_fund_give": x__fund_give,
+        "_fund_take": x__fund_take,
+        "_fund_agenda_give": x__fund_agenda_give,
+        "_fund_agenda_take": x__fund_agenda_take,
+        "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
+        "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
+        "_inallocable_debtit_belief": x__inallocable_debtit_belief,
+        "_irrational_debtit_belief": x__irrational_debtit_belief,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budacct_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_acctunit_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
+
+
+def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_acct_membership")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_acct_name = 1
+    x_group_label = 2
+    x_credit_vote = 3
+    x_debtit_vote = 4
+    x__credor_pool = 5
+    x__debtor_pool = 6
+    x__fund_give = 7
+    x__fund_take = 8
+    x__fund_agenda_give = 9
+    x__fund_agenda_take = 10
+    x__fund_agenda_ratio_give = 11
+    x__fund_agenda_ratio_take = 12
+    values_dict = {
+        "acct_name": x_acct_name,
+        "group_label": x_group_label,
+        "credit_vote": x_credit_vote,
+        "debtit_vote": x_debtit_vote,
+        "_credor_pool": x__credor_pool,
+        "_debtor_pool": x__debtor_pool,
+        "_fund_give": x__fund_give,
+        "_fund_take": x__fund_take,
+        "_fund_agenda_give": x__fund_agenda_give,
+        "_fund_agenda_take": x__fund_agenda_take,
+        "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
+        "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budmemb_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_acct_membership_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
+
+
+def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_groupunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    "{x_arg}": x_{x_arg},""")
+    # print("")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+    # print("")
+    # print("VALUES (")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     b0_str = "{"
+    #     b1_str = "}"
+    #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    # print(")")
+    # print(";")
+    x_group_label = 1
+    x__credor_pool = 2
+    x__debtor_pool = 3
+    x__fund_coin = 4
+    x__fund_give = 5
+    x__fund_take = 6
+    x__fund_agenda_give = 7
+    x__fund_agenda_take = 8
+    x__bridge = 9
+    values_dict = {
+        "group_label": x_group_label,
+        "_credor_pool": x__credor_pool,
+        "_debtor_pool": x__debtor_pool,
+        "_fund_coin": x__fund_coin,
+        "_fund_give": x__fund_give,
+        "_fund_take": x__fund_take,
+        "_fund_agenda_give": x__fund_agenda_give,
+        "_fund_agenda_take": x__fund_agenda_take,
+        "_bridge": x__bridge,
+    }
+    # all args included in values dict
+    assert x_args == set(values_dict.keys())
+
+    # WHEN
+    insert_sqlstr = create_budgrou_metrics_insert_sqlstr(values_dict)
+
+    # THEN
+    assert insert_sqlstr
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        table_name = "bud_groupunit_forecast"
+        expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
+        print("")
+        print(expected_sqlstr)
+        # print(insert_sqlstr)
+        assert insert_sqlstr == expected_sqlstr
 
 
 # # create tests to convert settled budunit to database

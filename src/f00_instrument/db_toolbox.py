@@ -15,10 +15,11 @@ def sqlite_obj_str(x_obj: any, sqlite_datatype: str):
     if x_obj is None:
         return "NULL"
     elif sqlite_datatype == "TEXT":
-        if x_obj == True:
-            return """'TRUE'"""
-        elif x_obj == False:
-            return """'FALSE'"""
+        if isinstance(x_obj, bool):
+            if x_obj == True:
+                return """'TRUE'"""
+            elif x_obj == False:
+                return """'FALSE'"""
         else:
             return f"""'{x_obj}'"""
     elif sqlite_datatype == "INTEGER":
