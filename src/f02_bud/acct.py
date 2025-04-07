@@ -169,7 +169,7 @@ class AcctUnit(AcctCore):
                 f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_label}'."
             )
 
-        x_membership._acct_name = self.acct_name
+        x_membership.acct_name = self.acct_name
         self._memberships[x_membership.group_label] = x_membership
 
     def get_membership(self, group_label: GroupLabel) -> MemberShip:

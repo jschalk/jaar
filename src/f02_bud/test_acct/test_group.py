@@ -90,8 +90,8 @@ def test_GroupUnit_set_membership_CorrectlySetsAttr():
     swim_str = ";swimmers"
     yao_swim_membership = membership_shop(swim_str)
     sue_swim_membership = membership_shop(swim_str)
-    yao_swim_membership._acct_name = yao_str
-    sue_swim_membership._acct_name = sue_str
+    yao_swim_membership.acct_name = yao_str
+    sue_swim_membership.acct_name = sue_str
     swimmers_groupunit = groupunit_shop(swim_str)
 
     # WHEN
@@ -100,8 +100,8 @@ def test_GroupUnit_set_membership_CorrectlySetsAttr():
 
     # THEN
     swimmers_memberships = {
-        yao_swim_membership._acct_name: yao_swim_membership,
-        sue_swim_membership._acct_name: sue_swim_membership,
+        yao_swim_membership.acct_name: yao_swim_membership,
+        sue_swim_membership.acct_name: sue_swim_membership,
     }
     assert swimmers_groupunit._memberships == swimmers_memberships
 
@@ -113,9 +113,9 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     ohio_str = ";Ohio"
     yao_ohio_membership = membership_shop(ohio_str)
     sue_ohio_membership = membership_shop(ohio_str)
-    yao_ohio_membership._acct_name = yao_str
-    yao_ohio_membership._acct_name = yao_str
-    sue_ohio_membership._acct_name = sue_str
+    yao_ohio_membership.acct_name = yao_str
+    yao_ohio_membership.acct_name = yao_str
+    sue_ohio_membership.acct_name = sue_str
     yao_ohio_membership._credor_pool = 66
     sue_ohio_membership._credor_pool = 22
     yao_ohio_membership._debtor_pool = 6600
@@ -143,8 +143,8 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_label_IsWrong()
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
     yao_ohio_membership = membership_shop(ohio_str)
-    yao_ohio_membership._acct_name = yao_str
-    yao_ohio_membership._acct_name = yao_str
+    yao_ohio_membership.acct_name = yao_str
+    yao_ohio_membership.acct_name = yao_str
     yao_ohio_membership._credor_pool = 66
     yao_ohio_membership._debtor_pool = 6600
     iowa_groupunit = groupunit_shop(iowa_str)
@@ -163,7 +163,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_acct_name_IsNone():
     ohio_str = ";Ohio"
     ohio_groupunit = groupunit_shop(ohio_str)
     yao_ohio_membership = membership_shop(ohio_str)
-    assert yao_ohio_membership._acct_name is None
+    assert yao_ohio_membership.acct_name is None
 
     with pytest_raises(Exception) as excinfo:
         ohio_groupunit.set_membership(yao_ohio_membership)

@@ -51,7 +51,7 @@ def test_MemberShip_exists():
     assert swim_membership._fund_agenda_take is None
     assert swim_membership._fund_agenda_ratio_give is None
     assert swim_membership._fund_agenda_ratio_take is None
-    assert swim_membership._acct_name is None
+    assert swim_membership.acct_name is None
 
 
 def test_membership_shop_ReturnsObj():
@@ -78,7 +78,7 @@ def test_membership_shop_ReturnsObj():
     assert swim_membership._fund_agenda_take is None
     assert swim_membership._fund_agenda_ratio_give is None
     assert swim_membership._fund_agenda_ratio_take is None
-    assert swim_membership._acct_name is None
+    assert swim_membership.acct_name is None
 
 
 def test_membership_shop_ReturnsObjAttr_acct_name():
@@ -87,10 +87,10 @@ def test_membership_shop_ReturnsObjAttr_acct_name():
     yao_str = "Yao"
 
     # WHEN
-    swim_membership = membership_shop(swim_str, _acct_name=yao_str)
+    swim_membership = membership_shop(swim_str, acct_name=yao_str)
 
     # THEN
-    assert swim_membership._acct_name == yao_str
+    assert swim_membership.acct_name == yao_str
 
 
 # def test_MemberShip_set_group_label_RaisesErrorIf_group_label_IsNotAcctNameAndIsTitleUnit():
@@ -103,7 +103,7 @@ def test_membership_shop_ReturnsObjAttr_acct_name():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_str, _acct_name=bob_str, bridge=slash_str)
+#         membership_shop(swim_str, acct_name=bob_str, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_str}' needs to not be a TitleUnit. Must contain bridge: '{slash_str}'"
@@ -215,7 +215,7 @@ def test_membership_get_from_dict_ReturnsObj():
         group_label=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
-        _acct_name=yao_str,
+        acct_name=yao_str,
     )
     swim_membership_dict = before_swim_membership.get_dict()
 
@@ -237,7 +237,7 @@ def test_memberships_get_from_dict_ReturnsObj():
         group_label=swim_str,
         credit_vote=swim_credit_vote,
         debtit_vote=swim_debtit_vote,
-        _acct_name=yao_str,
+        acct_name=yao_str,
     )
     before_swim_memberships_objs = {swim_str: before_swim_membership}
     swim_memberships_dict = {swim_str: before_swim_membership.get_dict()}

@@ -23,7 +23,7 @@ def test_AcctUnit_set_membership_SetsAttr_memberships():
     assert run_membership.group_label == run_str
     assert run_membership.credit_vote == run_credit_vote
     assert run_membership.debtit_vote == run_debtit_vote
-    assert run_membership._acct_name == yao_str
+    assert run_membership.acct_name == yao_str
 
 
 def test_AcctUnit_set_membership_SetsMultipleAttr():

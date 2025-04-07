@@ -31,7 +31,7 @@ class MemberShip(GroupCore):
     _fund_agenda_take: float = None
     _fund_agenda_ratio_give: float = None
     _fund_agenda_ratio_take: float = None
-    _acct_name: AcctName = None
+    acct_name: AcctName = None
 
     def set_credit_vote(self, x_credit_vote: float):
         if x_credit_vote is not None:
@@ -61,7 +61,7 @@ def membership_shop(
     group_label: GroupLabel,
     credit_vote: float = None,
     debtit_vote: float = None,
-    _acct_name: AcctName = None,
+    acct_name: AcctName = None,
 ) -> MemberShip:
     return MemberShip(
         group_label=group_label,
@@ -69,7 +69,7 @@ def membership_shop(
         debtit_vote=get_1_if_None(debtit_vote),
         _credor_pool=0,
         _debtor_pool=0,
-        _acct_name=_acct_name,
+        acct_name=acct_name,
     )
 
 
@@ -78,7 +78,7 @@ def membership_get_from_dict(x_dict: dict, x_acct_name: AcctName) -> MemberShip:
         group_label=x_dict.get("group_label"),
         credit_vote=x_dict.get("credit_vote"),
         debtit_vote=x_dict.get("debtit_vote"),
-        _acct_name=x_acct_name,
+        acct_name=x_acct_name,
     )
 
 
@@ -194,12 +194,12 @@ class GroupUnit(GroupCore):
             raise membership_group_label_Exception(
                 f"GroupUnit.group_label={self.group_label} cannot set membership.group_label={x_membership.group_label}"
             )
-        if x_membership._acct_name is None:
+        if x_membership.acct_name is None:
             raise membership_group_label_Exception(
                 f"membership group_label={x_membership.group_label} cannot be set when _acct_name is None."
             )
 
-        self._memberships[x_membership._acct_name] = x_membership
+        self._memberships[x_membership.acct_name] = x_membership
         self._add_credor_pool(x_membership._credor_pool)
         self._add_debtor_pool(x_membership._debtor_pool)
 

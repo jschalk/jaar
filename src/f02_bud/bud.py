@@ -397,7 +397,7 @@ class BudUnit:
                 group_label=x_group_label,
                 credit_vote=x_acctunit.credit_belief,
                 debtit_vote=x_acctunit.debtit_belief,
-                _acct_name=x_acctunit.acct_name,
+                acct_name=x_acctunit.acct_name,
             )
             x_groupunit.set_membership(x_membership)
         return x_groupunit
@@ -949,7 +949,7 @@ class BudUnit:
             x_groupunit._set_membership_fund_give_fund_take()
             for x_membership in x_groupunit._memberships.values():
                 self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_name=x_membership._acct_name,
+                    acctunit_acct_name=x_membership.acct_name,
                     fund_give=x_membership._fund_give,
                     fund_take=x_membership._fund_take,
                     fund_agenda_give=x_membership._fund_agenda_give,
