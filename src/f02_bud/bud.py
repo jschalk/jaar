@@ -625,7 +625,7 @@ class BudUnit:
             x_str = f"set_item failed because '{parent_road}' item does not exist."
             raise InvalidBudException(x_str)
         parent_road_item = self.get_item_obj(parent_road, create_missing_ancestors)
-        if parent_road_item._root is False:
+        if parent_road_item.root is False:
             parent_road_item
         parent_road_item.add_kid(item_kid)
 
@@ -1193,7 +1193,7 @@ class BudUnit:
 
     def _set_itemtree_factheirs_teamheirs_awardheirs(self):
         for x_item in get_sorted_item_list(list(self._item_dict.values())):
-            if x_item._root:
+            if x_item.root:
                 x_item.set_factheirs(x_item.factunits)
                 x_item.set_itemroot_inherit_reasonheirs()
                 x_item.set_teamheir(None, self._groupunits)
@@ -1227,7 +1227,7 @@ class BudUnit:
 
     def _set_itemtree_active_status_attrs(self):
         for x_item in get_sorted_item_list(list(self._item_dict.values())):
-            if x_item._root:
+            if x_item.root:
                 tt_count = self._tree_traverse_count
                 root_item = self.itemroot
                 root_item.set_active_attrs(tt_count, self._groupunits, self.owner_name)
@@ -1435,7 +1435,7 @@ def budunit_shop(
         _range_inheritors={},
     )
     x_bud.itemroot = itemunit_shop(
-        _root=True,
+        root=True,
         _uid=1,
         _level=0,
         fisc_title=x_bud.fisc_title,
@@ -1485,7 +1485,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
 def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     itemroot_dict = bud_dict.get("itemroot")
     x_bud.itemroot = itemunit_shop(
-        _root=True,
+        root=True,
         item_title=x_bud.fisc_title,
         parent_road="",
         _level=0,

@@ -198,7 +198,7 @@ class ItemUnit:
     item_title: TitleUnit = None
     mass: int = None
     parent_road: RoadUnit = None
-    _root: bool = None
+    root: bool = None
     _kids: dict[RoadUnit,] = None
     fisc_title: FiscTitle = None
     _uid: int = None  # Calculated field?
@@ -478,7 +478,7 @@ class ItemUnit:
 
     def set_item_title(self, item_title: str):
         if (
-            self._root
+            self.root
             and item_title is not None
             and item_title != self.fisc_title
             and self.fisc_title is not None
@@ -486,7 +486,7 @@ class ItemUnit:
             raise Item_root_TitleNotEmptyException(
                 f"Cannot set itemroot to string different than '{self.fisc_title}'"
             )
-        elif self._root and self.fisc_title is None:
+        elif self.root and self.fisc_title is None:
             self.item_title = root_title()
         # elif item_title is not None:
         else:
@@ -977,7 +977,7 @@ def itemunit_shop(
     morph: bool = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
-    _root: bool = None,
+    root: bool = None,
     fisc_title: FiscTitle = None,
     problem_bool: bool = None,
     # Calculated fields
@@ -1026,7 +1026,7 @@ def itemunit_shop(
         pledge=get_False_if_None(pledge),
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
-        _root=get_False_if_None(_root),
+        root=get_False_if_None(root),
         fisc_title=fisc_title,
         # Calculated fields
         _level=_level,
@@ -1044,7 +1044,7 @@ def itemunit_shop(
         _bridge=default_bridge_if_None(_bridge),
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
-    if x_itemkid._root:
+    if x_itemkid.root:
         x_itemkid.set_item_title(item_title=fisc_title)
     else:
         x_itemkid.set_item_title(item_title=item_title)

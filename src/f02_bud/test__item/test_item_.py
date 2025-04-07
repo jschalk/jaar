@@ -54,7 +54,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._fund_coin is None
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
-    assert x_itemunit._root is None
+    assert x_itemunit.root is None
     assert x_itemunit.fisc_title is None
     assert x_itemunit._healerlink_ratio is None
 
@@ -100,7 +100,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._teamheir is None
     assert x_itemunit._originunit == originunit_shop()
     assert x_itemunit._bridge == default_bridge_if_None()
-    assert x_itemunit._root is False
+    assert x_itemunit.root is False
     assert x_itemunit._all_acct_cred is None
     assert x_itemunit._all_acct_debt is None
     assert x_itemunit._healerlink_ratio == 0
