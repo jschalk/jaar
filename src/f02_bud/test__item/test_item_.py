@@ -51,7 +51,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._level is None
     assert x_itemunit._active_hx is None
     assert x_itemunit._fund_ratio is None
-    assert x_itemunit._fund_coin is None
+    assert x_itemunit.fund_coin is None
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit.root is None
@@ -91,7 +91,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._level is None
     assert x_itemunit._active_hx == {}
     assert x_itemunit._fund_ratio is None
-    assert x_itemunit._fund_coin == default_fund_coin_if_None()
+    assert x_itemunit.fund_coin == default_fund_coin_if_None()
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit.reasonunits == {}
@@ -133,13 +133,13 @@ def test_itemunit_shop_NonNoneParametersReturnsObj():
 
     # WHEN
     x_itemunit = itemunit_shop(
-        healerlink=x_healerlink, problem_bool=x_problem_bool, _fund_coin=x_fund_coin
+        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_coin=x_fund_coin
     )
 
     # THEN
     assert x_itemunit.healerlink == x_healerlink
     assert x_itemunit.problem_bool == x_problem_bool
-    assert x_itemunit._fund_coin == x_fund_coin
+    assert x_itemunit.fund_coin == x_fund_coin
 
 
 def test_itemunit_shop_ReturnsObjWith_awardlinks():

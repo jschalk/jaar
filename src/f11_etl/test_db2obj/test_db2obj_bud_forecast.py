@@ -141,7 +141,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         "_all_acct_debt": x__all_acct_debt,
         "_descendant_pledge_count": x__descendant_pledge_count,
         "_fund_cease": x__fund_cease,
-        "_fund_coin": x__fund_coin,
+        "fund_coin": x__fund_coin,
         "_fund_onset": x__fund_onset,
         "_fund_ratio": x__fund_ratio,
         "_gogo_calc": x__gogo_calc,
@@ -732,7 +732,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
         "group_label": x_group_label,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
-        "_fund_coin": x__fund_coin,
+        "fund_coin": x__fund_coin,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,
         "_fund_agenda_give": x__fund_agenda_give,
@@ -909,7 +909,7 @@ def test_insert_forecast_obj_CreatesTableRowsFor_budunit_forecast():
 #     x_item.problem_bool = x_problem_bool
 #     x_item._active = x__active
 #     x_item._task = x__task
-#     x_item._fund_coin = x__fund_coin
+#     x_item.fund_coin = x__fund_coin
 #     x_item._fund_onset = x__fund_onset
 #     x_item._fund_cease = x__fund_cease
 #     x_item._fund_ratio = x__fund_ratio
@@ -934,7 +934,7 @@ def test_insert_forecast_obj_CreatesTableRowsFor_budunit_forecast():
 #     x_item.problem_bool = x_problem_bool
 #     x_item._active = x__active
 #     x_item._task = x__task
-#     x_item._fund_coin = x__fund_coin
+#     x_item.fund_coin = x__fund_coin
 #     x_item._fund_onset = x__fund_onset
 #     x_item._fund_cease = x__fund_cease
 #     x_item._fund_ratio = x__fund_ratio

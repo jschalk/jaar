@@ -220,7 +220,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_all_acct_debt",
         "_descendant_pledge_count",
         "_fund_ratio",
-        "_fund_coin",
+        "fund_coin",
         "_fund_onset",
         "_fund_cease",
         "_healerlink_ratio",
@@ -246,7 +246,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_fund_agenda_take",
         "_credor_pool",
         "_debtor_pool",
-        "_fund_coin",
+        "fund_coin",
     }
     assert expected_budgrou_jmetrics_keys == budgrou_jmetrics_keys
 
@@ -316,7 +316,7 @@ def test_get_all_fund_metric_args_ReturnsObj():
     # assert bud_item_factunit_str() in road_fund_metric_aspects
     # assert bud_item_teamlink_str() in road_fund_metric_aspects
     # assert len(road_fund_metric_aspects) == 6
-    assert len(all_fund_metric_args) == 78
+    assert len(all_fund_metric_args) == 77
 
 
 def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
@@ -409,7 +409,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_healerlink_ratio",
         "_level",
         "_task",
-        "_fund_coin",
+        "fund_coin",
         "_fund_ratio",
         "_range_evaluated",
         "problem_bool",
@@ -428,7 +428,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_fund_agenda_give",
         "_fund_agenda_take",
         "_fund_take",
-        "_fund_coin",
+        "fund_coin",
     }
 
 
@@ -548,8 +548,8 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budgrou, jm, "_fund_agenda_take") == "REAL"
     assert g_class_type(config, budgrou, jm, "_fund_take") == "float"
     assert g_sqlitetype(config, budgrou, jm, "_fund_take") == "REAL"
-    assert g_class_type(config, budgrou, jm, "_fund_coin") == "float"
-    assert g_sqlitetype(config, budgrou, jm, "_fund_coin") == "REAL"
+    assert g_class_type(config, budgrou, jm, "fund_coin") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "fund_coin") == "REAL"
 
     assert g_class_type(config, budawar, jk, awardee_tag_str()) == type_LabelUnit_str()
     assert g_sqlitetype(config, budawar, jk, awardee_tag_str()) == "TEXT"
@@ -625,8 +625,8 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, buditem, jm, "_descendant_pledge_count") == "INTEGER"
     assert g_class_type(config, buditem, jm, "_fund_cease") == "float"
     assert g_sqlitetype(config, buditem, jm, "_fund_cease") == "REAL"
-    assert g_class_type(config, buditem, jm, "_fund_coin") == "float"
-    assert g_sqlitetype(config, buditem, jm, "_fund_coin") == "REAL"
+    assert g_class_type(config, buditem, jm, "fund_coin") == "float"
+    assert g_sqlitetype(config, buditem, jm, "fund_coin") == "REAL"
     assert g_class_type(config, buditem, jm, "_fund_onset") == "float"
     assert g_sqlitetype(config, buditem, jm, "_fund_onset") == "REAL"
     assert g_class_type(config, buditem, jm, "_fund_ratio") == "float"
@@ -780,7 +780,6 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
     assert fund_metric_args_type_dict.get(debtit_belief_str()) == "float"
     assert fund_metric_args_type_dict.get("item_title") == type_TitleUnit_str()
     assert fund_metric_args_type_dict.get(parent_road_str()) == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get("_fund_coin") == "float"
     assert fund_metric_args_type_dict.get(addin_str()) == "float"
     assert fund_metric_args_type_dict.get(begin_str()) == "float"
     assert fund_metric_args_type_dict.get(close_str()) == "float"
@@ -837,7 +836,7 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
     assert fund_metric_args_type_dict.get(penny_str()) == "float"
     assert fund_metric_args_type_dict.get(respect_bit_str()) == "float"
     assert fund_metric_args_type_dict.get("tally") == "int"
-    assert len(fund_metric_args_type_dict) == 75
+    assert len(fund_metric_args_type_dict) == 74
 
 
 # def test_get_all_bud_dimen_keys_ReturnsObj():

@@ -224,22 +224,22 @@ def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     group_label = values_dict.get("group_label")
     _credor_pool = values_dict.get("_credor_pool")
     _debtor_pool = values_dict.get("_debtor_pool")
-    _fund_coin = values_dict.get("_fund_coin")
+    fund_coin = values_dict.get("fund_coin")
     _fund_give = values_dict.get("_fund_give")
     _fund_take = values_dict.get("_fund_take")
     _fund_agenda_give = values_dict.get("_fund_agenda_give")
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
     bridge = values_dict.get("bridge")
     real_str = "REAL"
-    return f"""INSERT INTO bud_groupunit_forecast (fisc_title, owner_name, group_label, bridge, _credor_pool, _debtor_pool, _fund_coin, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
+    return f"""INSERT INTO bud_groupunit_forecast (fisc_title, owner_name, group_label, fund_coin, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
 VALUES (
   {sqlite_obj_str(fisc_title, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(group_label, "TEXT")}
+, {sqlite_obj_str(fund_coin, real_str)}
 , {sqlite_obj_str(bridge, "TEXT")}
 , {sqlite_obj_str(_credor_pool, real_str)}
 , {sqlite_obj_str(_debtor_pool, real_str)}
-, {sqlite_obj_str(_fund_coin, real_str)}
 , {sqlite_obj_str(_fund_give, real_str)}
 , {sqlite_obj_str(_fund_take, real_str)}
 , {sqlite_obj_str(_fund_agenda_give, real_str)}
@@ -399,7 +399,7 @@ def create_buditem_metrics_insert_sqlstr(values_dict: dict[str,]):
     problem_bool = values_dict.get("problem_bool")
     _active = values_dict.get("_active")
     _task = values_dict.get("_task")
-    _fund_coin = values_dict.get("_fund_coin")
+    fund_coin = values_dict.get("fund_coin")
     _fund_onset = values_dict.get("_fund_onset")
     _fund_cease = values_dict.get("_fund_cease")
     _fund_ratio = values_dict.get("_fund_ratio")
@@ -414,7 +414,7 @@ def create_buditem_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO bud_itemunit_forecast (fisc_title, owner_name, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, _active, _task, _fund_coin, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+    return f"""INSERT INTO bud_itemunit_forecast (fisc_title, owner_name, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_coin, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
 VALUES (
   {sqlite_obj_str(fisc_title, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -431,9 +431,9 @@ VALUES (
 , {sqlite_obj_str(mass, real_str)}
 , {sqlite_obj_str(pledge, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
+, {sqlite_obj_str(fund_coin, real_str)}
 , {sqlite_obj_str(_active, "INTEGER")}
 , {sqlite_obj_str(_task, "INTEGER")}
-, {sqlite_obj_str(_fund_coin, real_str)}
 , {sqlite_obj_str(_fund_onset, real_str)}
 , {sqlite_obj_str(_fund_cease, real_str)}
 , {sqlite_obj_str(_fund_ratio, real_str)}

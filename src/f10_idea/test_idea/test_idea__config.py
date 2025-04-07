@@ -292,33 +292,32 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[92] == "_credor_pool"
     assert table_sorting_priority[93] == "_debtor_pool"
     assert table_sorting_priority[94] == "_rational"
-    assert table_sorting_priority[95] == "_fund_coin"
-    assert table_sorting_priority[96] == "_fund_give"
-    assert table_sorting_priority[97] == "_fund_take"
-    assert table_sorting_priority[98] == "_fund_onset"
-    assert table_sorting_priority[99] == "_fund_cease"
-    assert table_sorting_priority[100] == "_fund_ratio"
-    assert table_sorting_priority[101] == "_fund_agenda_give"
-    assert table_sorting_priority[102] == "_fund_agenda_take"
-    assert table_sorting_priority[103] == "_fund_agenda_ratio_give"
-    assert table_sorting_priority[104] == "_fund_agenda_ratio_take"
-    assert table_sorting_priority[105] == "_inallocable_debtit_belief"
-    assert table_sorting_priority[106] == "_gogo_calc"
-    assert table_sorting_priority[107] == "_stop_calc"
-    assert table_sorting_priority[108] == "_level"
-    assert table_sorting_priority[109] == "_range_evaluated"
-    assert table_sorting_priority[110] == "_descendant_pledge_count"
-    assert table_sorting_priority[111] == "_healerlink_ratio"
-    assert table_sorting_priority[112] == "_all_acct_cred"
-    assert table_sorting_priority[113] == "_keeps_justified"
-    assert table_sorting_priority[114] == "_offtrack_fund"
-    assert table_sorting_priority[115] == "_base_item_active_value"
-    assert table_sorting_priority[116] == "_irrational_debtit_belief"
-    assert table_sorting_priority[117] == "_sum_healerlink_share"
-    assert table_sorting_priority[118] == "_keeps_buildable"
-    assert table_sorting_priority[119] == "_all_acct_debt"
-    assert table_sorting_priority[120] == "_tree_traverse_count"
-    assert len(table_sorting_priority) == 121
+    assert table_sorting_priority[95] == "_fund_give"
+    assert table_sorting_priority[96] == "_fund_take"
+    assert table_sorting_priority[97] == "_fund_onset"
+    assert table_sorting_priority[98] == "_fund_cease"
+    assert table_sorting_priority[99] == "_fund_ratio"
+    assert table_sorting_priority[100] == "_fund_agenda_give"
+    assert table_sorting_priority[101] == "_fund_agenda_take"
+    assert table_sorting_priority[102] == "_fund_agenda_ratio_give"
+    assert table_sorting_priority[103] == "_fund_agenda_ratio_take"
+    assert table_sorting_priority[104] == "_inallocable_debtit_belief"
+    assert table_sorting_priority[105] == "_gogo_calc"
+    assert table_sorting_priority[106] == "_stop_calc"
+    assert table_sorting_priority[107] == "_level"
+    assert table_sorting_priority[108] == "_range_evaluated"
+    assert table_sorting_priority[109] == "_descendant_pledge_count"
+    assert table_sorting_priority[110] == "_healerlink_ratio"
+    assert table_sorting_priority[111] == "_all_acct_cred"
+    assert table_sorting_priority[112] == "_keeps_justified"
+    assert table_sorting_priority[113] == "_offtrack_fund"
+    assert table_sorting_priority[114] == "_base_item_active_value"
+    assert table_sorting_priority[115] == "_irrational_debtit_belief"
+    assert table_sorting_priority[116] == "_sum_healerlink_share"
+    assert table_sorting_priority[117] == "_keeps_buildable"
+    assert table_sorting_priority[118] == "_all_acct_debt"
+    assert table_sorting_priority[119] == "_tree_traverse_count"
+    assert len(table_sorting_priority) == 120
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)
@@ -339,7 +338,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     #         x_dict[y_arg] = 0
     #     x_dict[y_arg] = x_dict.get(y_arg) + 1
     # print(f"{x_dict=}")
-    # assert len(x_no_underscore_set) == len(table_sorting_priority)
+    assert len(x_no_underscore_set) == len(table_sorting_priority)
 
 
 def test_get_idea_sqlite_types_ReturnsObj():

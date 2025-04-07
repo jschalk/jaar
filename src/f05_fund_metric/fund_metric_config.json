@@ -166,7 +166,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_coin": {
+            "fund_coin": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -445,7 +445,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_coin": {
+            "fund_coin": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

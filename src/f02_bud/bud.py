@@ -381,7 +381,7 @@ class BudUnit:
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
-        x_groupunit._fund_coin = self.fund_coin
+        x_groupunit.fund_coin = self.fund_coin
         self._groupunits[x_groupunit.group_label] = x_groupunit
 
     def groupunit_exists(self, group_label: GroupLabel) -> bool:
@@ -614,8 +614,8 @@ class BudUnit:
         item_kid.bridge = self.bridge
         if item_kid.fisc_title != self.fisc_title:
             item_kid.fisc_title = self.fisc_title
-        if item_kid._fund_coin != self.fund_coin:
-            item_kid._fund_coin = self.fund_coin
+        if item_kid.fund_coin != self.fund_coin:
+            item_kid.fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_tags:
             item_kid = self._get_filtered_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
@@ -1440,7 +1440,7 @@ def budunit_shop(
         _level=0,
         fisc_title=x_bud.fisc_title,
         bridge=x_bud.bridge,
-        _fund_coin=x_bud.fund_coin,
+        fund_coin=x_bud.fund_coin,
         parent_road="",
     )
     x_bud.set_max_tree_traverse(3)
@@ -1507,7 +1507,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
         fisc_title=x_bud.fisc_title,
-        _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
+        fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
 

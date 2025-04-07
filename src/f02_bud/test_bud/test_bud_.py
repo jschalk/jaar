@@ -118,7 +118,7 @@ def test_BudUnit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.fund_coin == default_fund_coin_if_None()
     assert x_bud.respect_bit == default_respect_bit_if_None()
     assert x_bud.penny == filter_penny()
-    assert x_bud.itemroot._fund_coin == x_bud.fund_coin
+    assert x_bud.itemroot.fund_coin == x_bud.fund_coin
     assert x_bud.itemroot.bridge == x_bud.bridge
     assert x_bud.itemroot.root
     assert x_bud.itemroot._uid == 1

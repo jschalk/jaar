@@ -230,7 +230,7 @@ class ItemUnit:
     _descendant_pledge_count: int = None
     _factheirs: dict[RoadUnit, FactHeir] = None
     _fund_ratio: float = None
-    _fund_coin: FundCoin = None
+    fund_coin: FundCoin = None
     _fund_onset: FundNum = None
     _fund_cease: FundNum = None
     _healerlink_ratio: float = None
@@ -467,8 +467,8 @@ class ItemUnit:
             give_ledger[x_awardee_tag] = x_awardheir.give_force
             take_ledger[x_awardee_tag] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
-        give_allot = allot_scale(give_ledger, x_fund_share, self._fund_coin)
-        take_allot = allot_scale(take_ledger, x_fund_share, self._fund_coin)
+        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_coin)
+        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_coin)
         for x_awardee_tag, x_awardheir in self._awardheirs.items():
             x_awardheir._fund_give = give_allot.get(x_awardee_tag)
             x_awardheir._fund_take = take_allot.get(x_awardee_tag)
@@ -983,7 +983,7 @@ def itemunit_shop(
     # Calculated fields
     _level: int = None,
     _fund_ratio: float = None,
-    _fund_coin: FundCoin = None,
+    fund_coin: FundCoin = None,
     _fund_onset: FundNum = None,
     _fund_cease: FundNum = None,
     _task: bool = None,
@@ -1031,7 +1031,7 @@ def itemunit_shop(
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
-        _fund_coin=default_fund_coin_if_None(_fund_coin),
+        fund_coin=default_fund_coin_if_None(fund_coin),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
         _task=_task,

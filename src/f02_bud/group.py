@@ -187,7 +187,7 @@ class GroupUnit(GroupCore):
     _fund_agenda_take: float = None
     _credor_pool: float = None
     _debtor_pool: float = None
-    _fund_coin: FundCoin = None
+    fund_coin: FundCoin = None
 
     def set_membership(self, x_membership: MemberShip):
         if x_membership.group_label != self.group_label:
@@ -232,22 +232,22 @@ class GroupUnit(GroupCore):
         for x_acct_name, x_membership in self._memberships.items():
             credit_ledger[x_acct_name] = x_membership.credit_vote
             debtit_ledger[x_acct_name] = x_membership.debtit_vote
-        fund_give_allot = allot_scale(credit_ledger, self._fund_give, self._fund_coin)
-        fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self._fund_coin)
+        fund_give_allot = allot_scale(credit_ledger, self._fund_give, self.fund_coin)
+        fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self.fund_coin)
         for acct_name, x_membership in self._memberships.items():
             x_membership._fund_give = fund_give_allot.get(acct_name)
             x_membership._fund_take = fund_take_allot.get(acct_name)
         x_a_give = self._fund_agenda_give
         x_a_take = self._fund_agenda_take
-        fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self._fund_coin)
-        fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self._fund_coin)
+        fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self.fund_coin)
+        fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self.fund_coin)
         for acct_name, x_membership in self._memberships.items():
             x_membership._fund_agenda_give = fund_agenda_give_allot.get(acct_name)
             x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_name)
 
 
 def groupunit_shop(
-    group_label: GroupLabel, bridge: str = None, _fund_coin: FundCoin = None
+    group_label: GroupLabel, bridge: str = None, fund_coin: FundCoin = None
 ) -> GroupUnit:
     return GroupUnit(
         group_label=group_label,
@@ -259,7 +259,7 @@ def groupunit_shop(
         _credor_pool=0,
         _debtor_pool=0,
         bridge=default_bridge_if_None(bridge),
-        _fund_coin=default_fund_coin_if_None(_fund_coin),
+        fund_coin=default_fund_coin_if_None(fund_coin),
     )
     # x_groupunit.set_group_label(group_label=group_label)
     # return x_groupunit

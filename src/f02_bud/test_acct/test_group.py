@@ -25,7 +25,7 @@ def test_GroupUnit_exists():
     assert swim_groupunit._credor_pool is None
     assert swim_groupunit._debtor_pool is None
     assert swim_groupunit.bridge is None
-    assert swim_groupunit._fund_coin is None
+    assert swim_groupunit.fund_coin is None
 
 
 def test_groupunit_shop_ReturnsObj():
@@ -50,7 +50,7 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
     assert swim_groupunit.bridge == default_bridge_if_None()
-    assert swim_groupunit._fund_coin == default_fund_coin_if_None()
+    assert swim_groupunit.fund_coin == default_fund_coin_if_None()
 
 
 def test_groupunit_shop_ReturnsObj_bridge():
@@ -61,12 +61,12 @@ def test_groupunit_shop_ReturnsObj_bridge():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_label=swim_str, bridge=slash_str, _fund_coin=x_fund_coin
+        group_label=swim_str, bridge=slash_str, fund_coin=x_fund_coin
     )
 
     # THEN
     assert swim_groupunit.bridge == slash_str
-    assert swim_groupunit._fund_coin == x_fund_coin
+    assert swim_groupunit.fund_coin == x_fund_coin
 
 
 # def test_GroupUnit_set_group_label_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
