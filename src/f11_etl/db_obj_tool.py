@@ -646,3 +646,37 @@ def insert_forecast_buditem(
 def insert_forecast_budunit(cursor: sqlite3_Cursor, x_bud: BudUnit):
     insert_sqlstr = create_budunit_metrics_insert_sqlstr(x_bud.__dict__)
     cursor.execute(insert_sqlstr)
+
+
+def insert_forecast_obj(cursor: sqlite3_Cursor, x_bud: BudUnit):
+    x_bud.settle_bud()
+    fisc_title = x_bud.fisc_title
+    owner_name = x_bud.owner_name
+    insert_forecast_budunit(cursor, x_bud)
+    for x_item in x_bud.get_item_dict().values():
+        road = x_item.get_road()
+        healerlink = x_item.healerlink
+        teamheir = x_item._teamheir
+        insert_forecast_buditem(cursor, owner_name, x_item)
+        insert_forecast_budheal(cursor, fisc_title, owner_name, road, healerlink)
+        insert_forecast_budteam(cursor, fisc_title, owner_name, road, teamheir)
+        for x_awardheir in x_item._awardheirs.values():
+            insert_forecast_budawar(cursor, fisc_title, owner_name, road, x_awardheir)
+        for base, reasonheir in x_item._reasonheirs.items():
+            insert_forecast_budreas(cursor, fisc_title, owner_name, road, reasonheir)
+            for prem in reasonheir.premises.values():
+                insert_forecast_budprem(
+                    cursor, fisc_title, owner_name, road, base, prem
+                )
+
+    for x_acct in x_bud.accts.values():
+        insert_forecast_budacct(cursor, fisc_title, owner_name, x_acct)
+        for x_membership in x_acct._memberships.values():
+            insert_forecast_budmemb(cursor, fisc_title, owner_name, x_membership)
+
+    for x_groupunit in x_bud._groupunits.values():
+        insert_forecast_budgrou(cursor, fisc_title, owner_name, x_groupunit)
+
+    for x_factheir in x_bud.itemroot._factheirs.values():
+        fact_road = x_bud.itemroot.get_road()
+        insert_forecast_budfact(cursor, fisc_title, owner_name, fact_road, x_factheir)

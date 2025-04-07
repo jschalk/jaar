@@ -21,17 +21,6 @@ from src.f10_idea.idea_config import get_default_sorted_list
 from src.f11_etl.tran_sqlstrs import create_forecast_tables
 from src.f11_etl.db_obj_tool import (
     get_fisc_dict_from_db,
-    insert_forecast_budmemb,
-    insert_forecast_budacct,
-    insert_forecast_budgrou,
-    insert_forecast_budawar,
-    insert_forecast_budfact,
-    insert_forecast_budheal,
-    insert_forecast_budprem,
-    insert_forecast_budreas,
-    insert_forecast_budteam,
-    insert_forecast_buditem,
-    insert_forecast_budunit,
     create_budmemb_metrics_insert_sqlstr,
     create_budacct_metrics_insert_sqlstr,
     create_budgrou_metrics_insert_sqlstr,
@@ -43,6 +32,18 @@ from src.f11_etl.db_obj_tool import (
     create_budteam_metrics_insert_sqlstr,
     create_buditem_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
+    insert_forecast_budmemb,
+    insert_forecast_budacct,
+    insert_forecast_budgrou,
+    insert_forecast_budawar,
+    insert_forecast_budfact,
+    insert_forecast_budheal,
+    insert_forecast_budprem,
+    insert_forecast_budreas,
+    insert_forecast_budteam,
+    insert_forecast_buditem,
+    insert_forecast_budunit,
+    insert_forecast_obj,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -1514,17 +1515,17 @@ def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
 def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_teamlink")
-    x_count = 0
-    for x_arg in get_default_sorted_list(x_args):
-        x_count += 1
-        print(f"    x_{x_arg} = {x_count}")
-    print("")
-    for x_arg in get_default_sorted_list(x_args):
-        print(f"""    x_teamheir.{x_arg} = x_{x_arg}""")
-    print("")
-    for x_arg in get_default_sorted_list(x_args):
-        print(f"""            x_{x_arg},""")
+    # x_args = get_fund_metric_dimen_args("bud_item_teamlink")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_teamheir.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
 
     x_fisc_title = 1
     x_owner_name = 2
@@ -1568,14 +1569,68 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
         assert rows == expected_data
 
 
-# "budunit_forecast"
-# "bud_acct_membership_forecast"
-# "bud_acctunit_forecast"
-# "bud_groupunit_forecast"
-# "bud_item_awardlink_forecast"
-# "bud_item_factunit_forecast"
-# "bud_item_healerlink_forecast"
-# "bud_item_reason_premiseunit_forecast"
-# "bud_item_reasonunit_forecast"
-# "bud_item_teamlink_forecast"
-# "bud_itemunit_forecast"
+def test_insert_forecast_obj_CreatesTableRows_Scenario0():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    run_str = ";run"
+    sue_bud = budunit_shop(sue_str)
+    sue_bud.add_acctunit(bob_str)
+    sue_bud.get_acct(bob_str).add_membership(run_str)
+    casa_road = sue_bud.make_l1_road("casa")
+    status_road = sue_bud.make_l1_road("status")
+    clean_road = sue_bud.make_road(status_road, "clean")
+    dirty_road = sue_bud.make_road(status_road, "dirty")
+    sue_bud.add_item(casa_road)
+    sue_bud.add_item(clean_road)
+    sue_bud.add_item(dirty_road)
+    sue_bud.edit_item_attr(
+        road=casa_road, reason_base=status_road, reason_premise=dirty_road
+    )
+    sue_bud.edit_item_attr(road=casa_road, awardlink=awardheir_shop(run_str))
+    sue_bud.edit_item_attr(road=casa_road, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(road=casa_road, teamunit=teamheir_shop({sue_str}))
+    sue_bud.add_fact(status_road, clean_road)
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        budmemb_forecast_table = "bud_acct_membership_forecast"
+        budacct_forecast_table = "bud_acctunit_forecast"
+        budgrou_forecast_table = "bud_groupunit_forecast"
+        budawar_forecast_table = "bud_item_awardlink_forecast"
+        budfact_forecast_table = "bud_item_factunit_forecast"
+        budheal_forecast_table = "bud_item_healerlink_forecast"
+        budprem_forecast_table = "bud_item_reason_premiseunit_forecast"
+        budreas_forecast_table = "bud_item_reasonunit_forecast"
+        budteam_forecast_table = "bud_item_teamlink_forecast"
+        buditem_forecast_table = "bud_itemunit_forecast"
+        budunit_forecast_table = "budunit_forecast"
+        assert get_row_count(cursor, budunit_forecast_table) == 0
+        assert get_row_count(cursor, buditem_forecast_table) == 0
+        assert get_row_count(cursor, budacct_forecast_table) == 0
+        assert get_row_count(cursor, budmemb_forecast_table) == 0
+        assert get_row_count(cursor, budgrou_forecast_table) == 0
+        assert get_row_count(cursor, budawar_forecast_table) == 0
+        assert get_row_count(cursor, budfact_forecast_table) == 0
+        assert get_row_count(cursor, budheal_forecast_table) == 0
+        assert get_row_count(cursor, budreas_forecast_table) == 0
+        assert get_row_count(cursor, budprem_forecast_table) == 0
+        assert get_row_count(cursor, budteam_forecast_table) == 0
+
+        # WHEN
+        insert_forecast_obj(cursor, sue_bud)
+
+        # THEN
+        assert get_row_count(cursor, budunit_forecast_table) == 1
+        assert get_row_count(cursor, buditem_forecast_table) == 5
+        assert get_row_count(cursor, budacct_forecast_table) == 1
+        assert get_row_count(cursor, budmemb_forecast_table) == 2
+        assert get_row_count(cursor, budgrou_forecast_table) == 2
+        assert get_row_count(cursor, budawar_forecast_table) == 1
+        assert get_row_count(cursor, budfact_forecast_table) == 1
+        assert get_row_count(cursor, budheal_forecast_table) == 1
+        assert get_row_count(cursor, budreas_forecast_table) == 1
+        assert get_row_count(cursor, budprem_forecast_table) == 1
+        assert get_row_count(cursor, budteam_forecast_table) == 1
