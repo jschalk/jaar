@@ -6,8 +6,9 @@ from src.f00_instrument.db_toolbox import (
 from src.f01_road.deal import fisc_title_str
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.group import awardheir_shop, groupunit_shop, membership_shop
+from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.reason_team import teamheir_shop
-from src.f02_bud.reason_item import reasonheir_shop, premiseunit_shop
+from src.f02_bud.reason_item import reasonheir_shop, premiseunit_shop, factheir_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f05_fund_metric.fund_metric_config import (
@@ -23,12 +24,12 @@ from src.f11_etl.db_obj_tool import (
     insert_forecast_budmemb,
     insert_forecast_budacct,
     insert_forecast_budgrou,
-    # insert_forecast_budawar,
-    # insert_forecast_budfact,
-    # insert_forecast_budheal,
+    insert_forecast_budawar,
+    insert_forecast_budfact,
+    insert_forecast_budheal,
     insert_forecast_budprem,
     insert_forecast_budreas,
-    # insert_forecast_budteam,
+    insert_forecast_budteam,
     insert_forecast_buditem,
     insert_forecast_budunit,
     create_budmemb_metrics_insert_sqlstr,
@@ -1286,17 +1287,17 @@ def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
 def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_groupunit")
-    x_count = 0
-    for x_arg in get_default_sorted_list(x_args):
-        x_count += 1
-        print(f"    x_{x_arg} = {x_count}")
-    print("")
-    for x_arg in get_default_sorted_list(x_args):
-        print(f"""    x_group.{x_arg} = x_{x_arg}""")
-    print("")
-    for x_arg in get_default_sorted_list(x_args):
-        print(f"""            x_{x_arg},""")
+    # x_args = get_fund_metric_dimen_args("bud_groupunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_group.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
 
     x_fisc_title = 1
     x_owner_name = 2
@@ -1348,6 +1349,222 @@ def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
             x__fund_agenda_take,
         )
         expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    # x_args = get_fund_metric_dimen_args("bud_item_awardlink")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_awardheir.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_road = 3
+    x_awardee_tag = 4
+    x_give_force = 5
+    x_take_force = 6
+    x__fund_give = 7
+    x__fund_take = 8
+    x_awardheir = awardheir_shop(x_awardee_tag)
+    x_awardheir.awardee_tag = x_awardee_tag
+    x_awardheir.give_force = x_give_force
+    x_awardheir.take_force = x_take_force
+    x_awardheir._fund_give = x__fund_give
+    x_awardheir._fund_take = x__fund_take
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_item_awardlink_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budawar(cursor, x_fisc_title, x_owner_name, x_road, x_awardheir)
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            str(x_awardee_tag),
+            x_give_force,
+            x_take_force,
+            x__fund_give,
+            x__fund_take,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    # x_args = get_fund_metric_dimen_args("bud_item_factunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_factheir.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_road = 3
+    x_base = 4
+    x_pick = 5
+    x_fopen = 6
+    x_fnigh = 7
+    x_factheir = factheir_shop()
+    x_factheir.base = x_base
+    x_factheir.pick = x_pick
+    x_factheir.fopen = x_fopen
+    x_factheir.fnigh = x_fnigh
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_item_factunit_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budfact(cursor, x_fisc_title, x_owner_name, x_road, x_factheir)
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            str(x_base),
+            str(x_pick),
+            x_fopen,
+            x_fnigh,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    # x_args = get_fund_metric_dimen_args("bud_item_healerlink")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_healerlink.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_road = 3
+    bob_str = "Bob"
+    sue_str = "Sue"
+    x_healerlink = healerlink_shop()
+    x_healerlink.set_healer_name(bob_str)
+    x_healerlink.set_healer_name(sue_str)
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_item_healerlink_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budheal(
+            cursor, x_fisc_title, x_owner_name, x_road, x_healerlink
+        )
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 2
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (str(x_fisc_title), str(x_owner_name), str(x_road), bob_str)
+        expected_row2 = (str(x_fisc_title), str(x_owner_name), str(x_road), sue_str)
+        expected_data = [expected_row1, expected_row2]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_teamlink")
+    x_count = 0
+    for x_arg in get_default_sorted_list(x_args):
+        x_count += 1
+        print(f"    x_{x_arg} = {x_count}")
+    print("")
+    for x_arg in get_default_sorted_list(x_args):
+        print(f"""    x_teamheir.{x_arg} = x_{x_arg}""")
+    print("")
+    for x_arg in get_default_sorted_list(x_args):
+        print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_road = 3
+    x__owner_name_team = 5
+    x_teamheir = teamheir_shop()
+    x_teamheir._owner_name_team = x__owner_name_team
+    bob_str = "Bob"
+    sue_str = "Sue"
+    x_teamheir._teamlinks = {bob_str, sue_str}
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_item_teamlink_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budteam(cursor, x_fisc_title, x_owner_name, x_road, x_teamheir)
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 2
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            bob_str,
+            x__owner_name_team,
+        )
+        expected_row2 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            sue_str,
+            x__owner_name_team,
+        )
+        expected_data = [expected_row1, expected_row2]
         assert rows == expected_data
 
 

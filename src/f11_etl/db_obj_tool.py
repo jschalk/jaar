@@ -540,19 +540,48 @@ def insert_forecast_budgrou(
     cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budawar(cursor: sqlite3_Cursor, x_awardheir: AwardHeir):
-#     insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_awardheir.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budawar(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    road: RoadUnit,
+    x_awardheir: AwardHeir,
+):
+    x_dict = copy_deepcopy(x_awardheir.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    x_dict["road"] = road
+    insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_dict)
+    cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budfact(cursor: sqlite3_Cursor, x_factheir: FactHeir):
-#     insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_factheir.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budfact(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    road: RoadUnit,
+    x_factheir: FactHeir,
+):
+    x_dict = copy_deepcopy(x_factheir.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    x_dict["road"] = road
+    insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_dict)
+    cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budheal(cursor: sqlite3_Cursor, x_healer: HealerLink):
-#     insert_sqlstr = create_budheal_metrics_insert_sqlstr(x_healer.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budheal(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    road: RoadUnit,
+    x_healer: HealerLink,
+):
+    x_dict = {"fisc_title": fisc_title, "owner_name": owner_name, "road": road}
+    for healer_name in sorted(x_healer._healer_names):
+        x_dict["healer_name"] = healer_name
+        insert_sqlstr = create_budheal_metrics_insert_sqlstr(x_dict)
+        cursor.execute(insert_sqlstr)
 
 
 def insert_forecast_budprem(
@@ -587,9 +616,22 @@ def insert_forecast_budreas(
     cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budteam(cursor: sqlite3_Cursor, x_teamheir: TeamHeir):
-#     insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_teamheir.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budteam(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    road: RoadUnit,
+    x_teamheir: TeamHeir,
+):
+
+    x_dict = copy_deepcopy(x_teamheir.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    x_dict["road"] = road
+    for team_tag in sorted(x_teamheir._teamlinks):
+        x_dict["team_tag"] = team_tag
+        insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
+        cursor.execute(insert_sqlstr)
 
 
 def insert_forecast_buditem(
