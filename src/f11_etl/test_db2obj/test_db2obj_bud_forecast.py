@@ -1,5 +1,10 @@
-from src.f00_instrument.db_toolbox import get_row_count, create_insert_query
+from src.f00_instrument.db_toolbox import (
+    get_row_count,
+    create_insert_query,
+    create_select_query,
+)
 from src.f01_road.deal import fisc_title_str
+from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f05_fund_metric.fund_metric_config import (
     get_fund_metric_config_dict,
@@ -28,7 +33,7 @@ from sqlite3 import connect as sqlite3_connect
 
 
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
-    # sourcery skip: extract-method, inline-variable
+    # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_fund_metric_dimen_args("budunit")
     # for x_arg in sorted(x_args):
@@ -762,27 +767,185 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
 # # prove selected row = obj __dict__
 
 
-# def test_insert_forecast_obj_CreatesTableRowsFor_budunit_forecast():
+def test_insert_forecast_obj_CreatesTableRowsFor_budunit_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_fisc_title = "accord23"
+    x_owner_name = "Sue"
+    x__keeps_buildable = 99
+    x__keeps_justified = 77
+    x__offtrack_fund = 55.5
+    x__rational = 92
+    x__sum_healerlink_share = 66.6
+    x__tree_traverse_count = 7
+    x_credor_respect = 88.2
+    x_debtor_respect = 88.4
+    x_fund_coin = 3.0
+    x_fund_pool = 3000.0
+    x_max_tree_traverse = 22
+    x_penny = 4.0
+    x_respect_bit = 0.2
+    x_tally = 6
+    sue_bud = budunit_shop(owner_name=x_owner_name, fisc_title=x_fisc_title)
+    sue_bud.fund_pool = x_fund_pool
+    sue_bud.fund_coin = x_fund_coin
+    sue_bud.penny = x_penny
+    sue_bud.tally = x_tally
+    sue_bud.respect_bit = x_respect_bit
+    sue_bud.max_tree_traverse = x_max_tree_traverse
+    sue_bud._keeps_buildable = x__keeps_buildable
+    sue_bud._keeps_justified = x__keeps_justified
+    sue_bud._offtrack_fund = x__offtrack_fund
+    sue_bud._rational = x__rational
+    sue_bud._sum_healerlink_share = x__sum_healerlink_share
+    sue_bud._tree_traverse_count = x__tree_traverse_count
+    sue_bud.credor_respect = x_credor_respect
+    sue_bud.debtor_respect = x_debtor_respect
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "budunit_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_obj(cursor, sue_bud)
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            x_fisc_title,
+            x_owner_name,
+            x_credor_respect,
+            x_debtor_respect,
+            x_fund_pool,
+            x_max_tree_traverse,
+            x_tally,
+            x_fund_coin,
+            x_penny,
+            x_respect_bit,
+            x__rational,
+            x__keeps_justified,
+            x__offtrack_fund,
+            x__sum_healerlink_share,
+            x__keeps_buildable,
+            x__tree_traverse_count,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+# def test_insert_forecast_obj_CreatesTableRowsFor_buditem_forecast():
+#     # sourcery skip: extract-method
 #     # ESTABLISH
-#     sue_str = "Sue"
-#     iowa_fisc_title = "Iowa"
-#     slash_bridge = "/"
-#     x_fund_pool = 777
-#     x_fund_coin = 7
-#     x_respect_bit = 5
-#     x_penny = 1
-#     x_tally = 55
-#     sue_bud = budunit_shop(
-#         owner_name=sue_str,
-#         fisc_title=iowa_fisc_title,
-#         bridge=slash_bridge,
-#         fund_pool=x_fund_pool,
-#         fund_coin=x_fund_coin,
-#         respect_bit=x_respect_bit,
-#         penny=x_penny,
-#         tally=x_tally,
-#     )
-#     sue_bud.settle_bud()
+#     x_args = get_fund_metric_dimen_args("bud_itemunit")
+#     x_count = 0
+#     for x_arg in get_default_sorted_list(x_args):
+#         x_count += 1
+#         print(f"    x_{x_arg} = {x_count}")
+#     print("")
+#     x_count = 0
+#     for x_arg in get_default_sorted_list(x_args):
+#         print(f"""    x_item.{x_arg} = x_{x_arg}""")
+#     print("")
+#     x_count = 0
+#     # for x_arg in get_default_sorted_list(x_args):
+#     #     print(f"""    {x_arg} = values_dict.get("{x_arg}")""")
+#     # print("")
+#     # print("VALUES (")
+#     # x_count = 0
+#     # for x_arg in get_default_sorted_list(x_args):
+#     #     b0_str = "{"
+#     #     b1_str = "}"
+#     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+#     # print(")")
+#     # print(";")
+
+#     x_fisc_title = 1
+#     x_owner_name = 2
+#     x_parent_road = 3
+#     x_item_title = 4
+#     x_begin = 5
+#     x_close = 6
+#     x_addin = 7
+#     x_numor = 8
+#     x_denom = 9
+#     x_morph = 10
+#     x_gogo_want = 11
+#     x_stop_want = 12
+#     x_mass = 13
+#     x_pledge = 14
+#     x_problem_bool = 15
+#     x__active = 16
+#     x__task = 17
+#     x__fund_coin = 18
+#     x__fund_onset = 19
+#     x__fund_cease = 20
+#     x__fund_ratio = 21
+#     x__gogo_calc = 22
+#     x__stop_calc = 23
+#     x__level = 24
+#     x__range_evaluated = 25
+#     x__descendant_pledge_count = 26
+#     x__healerlink_ratio = 27
+#     x__all_acct_cred = 28
+#     x__all_acct_debt = 29
+#     x_item = itemunit_shop()
+#     x_item.parent_road = x_parent_road
+#     x_item._item_title = x_item_title
+#     x_item.begin = x_begin
+#     x_item.close = x_close
+#     x_item.addin = x_addin
+#     x_item.numor = x_numor
+#     x_item.denom = x_denom
+#     x_item.morph = x_morph
+#     x_item.gogo_want = x_gogo_want
+#     x_item.stop_want = x_stop_want
+#     x_item.mass = x_mass
+#     x_item.pledge = x_pledge
+#     x_item.problem_bool = x_problem_bool
+#     x_item._active = x__active
+#     x_item._task = x__task
+#     x_item._fund_coin = x__fund_coin
+#     x_item._fund_onset = x__fund_onset
+#     x_item._fund_cease = x__fund_cease
+#     x_item._fund_ratio = x__fund_ratio
+#     x_item._gogo_calc = x__gogo_calc
+#     x_item._stop_calc = x__stop_calc
+#     x_item._level = x__level
+#     x_item._range_evaluated = x__range_evaluated
+#     x_item._descendant_pledge_count = x__descendant_pledge_count
+#     x_item._healerlink_ratio = x__healerlink_ratio
+#     x_item._all_acct_cred = x__all_acct_cred
+#     x_item._all_acct_debt = x__all_acct_debt
+#     x_item.begin = x_begin
+#     x_item.close = x_close
+#     x_item.addin = x_addin
+#     x_item.numor = x_numor
+#     x_item.denom = x_denom
+#     x_item.morph = x_morph
+#     x_item.gogo_want = x_gogo_want
+#     x_item.stop_want = x_stop_want
+#     x_item.mass = x_mass
+#     x_item.pledge = x_pledge
+#     x_item.problem_bool = x_problem_bool
+#     x_item._active = x__active
+#     x_item._task = x__task
+#     x_item._fund_coin = x__fund_coin
+#     x_item._fund_onset = x__fund_onset
+#     x_item._fund_cease = x__fund_cease
+#     x_item._fund_ratio = x__fund_ratio
+#     x_item._gogo_calc = x__gogo_calc
+#     x_item._stop_calc = x__stop_calc
+#     x_item._level = x__level
+#     x_item._range_evaluated = x__range_evaluated
+#     x_item._descendant_pledge_count = x__descendant_pledge_count
+#     x_item._healerlink_ratio = x__healerlink_ratio
+#     x_item._all_acct_cred = x__all_acct_cred
+#     x_item._all_acct_debt = x__all_acct_debt
 
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
@@ -798,9 +961,26 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
 #         select_sqlstr = f"SELECT * FROM {x_table_name};"
 #         cursor.execute(select_sqlstr)
 #         rows = cursor.fetchall()
-#         expected_data = [(1, "John Doe", 30, "john@example.com")]
+#         expected_row1 = (
+#             x_fisc_title,
+#             x_owner_name,
+#             x_credor_respect,
+#             x_debtor_respect,
+#             x_fund_pool,
+#             x_max_tree_traverse,
+#             x_tally,
+#             x_fund_coin,
+#             x_penny,
+#             x_respect_bit,
+#             x__rational,
+#             x__keeps_justified,
+#             x__offtrack_fund,
+#             x__sum_healerlink_share,
+#             x__keeps_buildable,
+#             x__tree_traverse_count,
+#         )
+#         expected_data = [expected_row1]
 #         assert rows == expected_data
-
 
 #     assert 1 == 2
 

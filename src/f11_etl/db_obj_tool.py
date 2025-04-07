@@ -493,5 +493,6 @@ VALUES (
 """
 
 
-def insert_forecast_obj(cursor: sqlite3_Cursor, fisc_dict: BudUnit):
-    pass
+def insert_forecast_obj(cursor: sqlite3_Cursor, x_bud: BudUnit):
+    budunit_insert_sqlstr = create_budunit_metrics_insert_sqlstr(x_bud.__dict__)
+    cursor.execute(budunit_insert_sqlstr)
