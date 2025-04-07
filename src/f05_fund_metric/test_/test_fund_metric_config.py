@@ -424,7 +424,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_credor_pool",
         "_fund_give",
         "group_label",
-        "_bridge",
+        "bridge",
         "_fund_agenda_give",
         "_fund_agenda_take",
         "_fund_take",
@@ -534,8 +534,8 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     assert g_class_type(config, budgrou, jk, group_label_str()) == "LabelUnit"
     assert g_sqlitetype(config, budgrou, jk, group_label_str()) == "TEXT"
-    assert g_class_type(config, budgrou, jv, "_bridge") == "str"
-    assert g_sqlitetype(config, budgrou, jv, "_bridge") == "TEXT"
+    assert g_class_type(config, budgrou, jv, "bridge") == "str"
+    assert g_sqlitetype(config, budgrou, jv, "bridge") == "TEXT"
     assert g_class_type(config, budgrou, jm, "_debtor_pool") == "float"
     assert g_sqlitetype(config, budgrou, jm, "_debtor_pool") == "REAL"
     assert g_class_type(config, budgrou, jm, "_credor_pool") == "float"

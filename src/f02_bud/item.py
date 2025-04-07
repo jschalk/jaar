@@ -218,7 +218,7 @@ class ItemUnit:
     pledge: bool = None
     _originunit: OriginUnit = None
     problem_bool: bool = None
-    _bridge: str = None
+    bridge: str = None
     _is_expanded: bool = None
     # Calculated fields
     _active: bool = None
@@ -369,10 +369,10 @@ class ItemUnit:
 
     def get_road(self) -> RoadUnit:
         if self.parent_road in (None, ""):
-            return road_create_road(self.item_title, bridge=self._bridge)
+            return road_create_road(self.item_title, bridge=self.bridge)
         else:
             return road_create_road(
-                self.parent_road, self.item_title, bridge=self._bridge
+                self.parent_road, self.item_title, bridge=self.bridge
             )
 
     def clear_descendant_pledge_count(self):
@@ -493,24 +493,24 @@ class ItemUnit:
             self.item_title = item_title
 
     def set_bridge(self, new_bridge: str):
-        old_bridge = deepcopy(self._bridge)
+        old_bridge = deepcopy(self.bridge)
         if old_bridge is None:
             old_bridge = default_bridge_if_None()
-        self._bridge = default_bridge_if_None(new_bridge)
-        if old_bridge != self._bridge:
+        self.bridge = default_bridge_if_None(new_bridge)
+        if old_bridge != self.bridge:
             self._find_replace_bridge(old_bridge)
 
     def _find_replace_bridge(self, old_bridge):
-        self.parent_road = replace_bridge(self.parent_road, old_bridge, self._bridge)
+        self.parent_road = replace_bridge(self.parent_road, old_bridge, self.bridge)
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self.reasonunits.items():
             new_reasonunit_road = replace_bridge(
                 road=reasonunit_road,
                 old_bridge=old_bridge,
-                new_bridge=self._bridge,
+                new_bridge=self.bridge,
             )
-            reasonunit_obj.set_bridge(self._bridge)
+            reasonunit_obj.set_bridge(self.bridge)
             new_reasonunits[new_reasonunit_road] = reasonunit_obj
         self.reasonunits = new_reasonunits
 
@@ -519,13 +519,13 @@ class ItemUnit:
             new_base_road = replace_bridge(
                 road=factunit_road,
                 old_bridge=old_bridge,
-                new_bridge=self._bridge,
+                new_bridge=self.bridge,
             )
             factunit_obj.base = new_base_road
             new_pick_road = replace_bridge(
                 road=factunit_obj.pick,
                 old_bridge=old_bridge,
-                new_bridge=self._bridge,
+                new_bridge=self.bridge,
             )
             factunit_obj.set_attr(pick=new_pick_road)
             new_factunits[new_base_road] = factunit_obj
@@ -671,7 +671,7 @@ class ItemUnit:
         try:
             x_reasonunit = self.reasonunits[base]
         except Exception:
-            x_reasonunit = reasonunit_shop(base, bridge=self._bridge)
+            x_reasonunit = reasonunit_shop(base, bridge=self.bridge)
             self.reasonunits[base] = x_reasonunit
         return x_reasonunit
 
@@ -736,7 +736,7 @@ class ItemUnit:
         return self.awardlinks.get(x_awardee_tag) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
-        reason.bridge = self._bridge
+        reason.bridge = self.bridge
         self.reasonunits[reason.base] = reason
 
     def reasonunit_exists(self, x_base: RoadUnit) -> bool:
@@ -993,7 +993,7 @@ def itemunit_shop(
     _all_acct_debt: bool = None,
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
-    _bridge: str = None,
+    bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
     fisc_title = root_title() if fisc_title is None else fisc_title
@@ -1041,7 +1041,7 @@ def itemunit_shop(
         _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_None(_active_hx),
-        _bridge=default_bridge_if_None(_bridge),
+        bridge=default_bridge_if_None(bridge),
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid.root:

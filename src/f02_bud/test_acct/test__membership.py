@@ -103,7 +103,7 @@ def test_membership_shop_ReturnsObjAttr_acct_name():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_str, _acct_name=bob_str, _bridge=slash_str)
+#         membership_shop(swim_str, _acct_name=bob_str, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_str}' needs to not be a TitleUnit. Must contain bridge: '{slash_str}'"

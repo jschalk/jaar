@@ -31,11 +31,11 @@ class Bad_acct_nameMemberShipException(Exception):
 @dataclass
 class AcctCore:
     acct_name: AcctName = None
-    _bridge: str = None
+    bridge: str = None
     _respect_bit: float = None
 
     def set_nameunit(self, x_acct_name: AcctName):
-        self.acct_name = validate_titleunit(x_acct_name, self._bridge)
+        self.acct_name = validate_titleunit(x_acct_name, self.bridge)
 
 
 @dataclass
@@ -163,7 +163,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_label = x_membership.group_label
-        group_label_is_acct_name = is_titleunit(x_group_label, self._bridge)
+        group_label_is_acct_name = is_titleunit(x_group_label, self.bridge)
         if group_label_is_acct_name and self.acct_name != x_group_label:
             raise Bad_acct_nameMemberShipException(
                 f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_label}'."
@@ -270,7 +270,7 @@ def acctunit_shop(
     acct_name: AcctName,
     credit_belief: int = None,
     debtit_belief: int = None,
-    _bridge: str = None,
+    bridge: str = None,
     _respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
@@ -287,7 +287,7 @@ def acctunit_shop(
         _fund_agenda_take=0,
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
-        _bridge=default_bridge_if_None(_bridge),
+        bridge=default_bridge_if_None(bridge),
         _respect_bit=default_respect_bit_if_None(_respect_bit),
     )
     x_acctunit.set_nameunit(x_acct_name=acct_name)

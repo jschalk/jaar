@@ -468,7 +468,7 @@ def test_budunit_get_from_json_ReturnsObj_bridge_AcctExample():
 
     # THEN
     after_bob_acctunit = after_bob_bud.get_acct(bob_str)
-    assert after_bob_acctunit._bridge == slash_bridge
+    assert after_bob_acctunit.bridge == slash_bridge
 
 
 def test_budunit_get_from_json_ReturnsObj_bridge_GroupExample():
@@ -487,7 +487,7 @@ def test_budunit_get_from_json_ReturnsObj_bridge_GroupExample():
 
     # THEN
     after_yao_acctunit = after_bob_bud.get_acct(yao_str)
-    assert after_yao_acctunit._bridge == slash_bridge
+    assert after_yao_acctunit.bridge == slash_bridge
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():

@@ -28,7 +28,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._awardlines is None  # calculated field'
     assert x_itemunit._awardheirs is None  # calculated field'
     assert x_itemunit._originunit is None
-    assert x_itemunit._bridge is None
+    assert x_itemunit.bridge is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None
     assert x_itemunit.addin is None
@@ -99,7 +99,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit.teamunit == teamunit_shop()
     assert x_itemunit._teamheir is None
     assert x_itemunit._originunit == originunit_shop()
-    assert x_itemunit._bridge == default_bridge_if_None()
+    assert x_itemunit.bridge == default_bridge_if_None()
     assert x_itemunit.root is False
     assert x_itemunit._all_acct_cred is None
     assert x_itemunit._all_acct_debt is None
@@ -201,7 +201,7 @@ def test_ItemUnit_get_road_ReturnsObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, bridge=slash_str)
 
     # THEN
     ball_road = create_road(round_road, ball_str, bridge=slash_str)
@@ -214,7 +214,7 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     slash_str = "/"
     round_road = create_road(root_title(), round_str, bridge=slash_str)
     ball_str = "ball"
-    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, bridge=slash_str)
     assert ball_item.parent_road == round_road
 
     # WHEN

@@ -318,8 +318,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[118] == "_keeps_buildable"
     assert table_sorting_priority[119] == "_all_acct_debt"
     assert table_sorting_priority[120] == "_tree_traverse_count"
-    assert table_sorting_priority[121] == "_bridge"
-    assert len(table_sorting_priority) == 122
+    assert len(table_sorting_priority) == 121
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)

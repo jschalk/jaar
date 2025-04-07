@@ -24,7 +24,7 @@ def test_GroupUnit_exists():
     assert swim_groupunit._fund_agenda_take is None
     assert swim_groupunit._credor_pool is None
     assert swim_groupunit._debtor_pool is None
-    assert swim_groupunit._bridge is None
+    assert swim_groupunit.bridge is None
     assert swim_groupunit._fund_coin is None
 
 
@@ -49,7 +49,7 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit._fund_agenda_take == 0
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
-    assert swim_groupunit._bridge == default_bridge_if_None()
+    assert swim_groupunit.bridge == default_bridge_if_None()
     assert swim_groupunit._fund_coin == default_fund_coin_if_None()
 
 
@@ -61,11 +61,11 @@ def test_groupunit_shop_ReturnsObj_bridge():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_label=swim_str, _bridge=slash_str, _fund_coin=x_fund_coin
+        group_label=swim_str, bridge=slash_str, _fund_coin=x_fund_coin
     )
 
     # THEN
-    assert swim_groupunit._bridge == slash_str
+    assert swim_groupunit.bridge == slash_str
     assert swim_groupunit._fund_coin == x_fund_coin
 
 
@@ -76,7 +76,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupunit_shop(bob_str, _acct_mirror=True, _bridge=slash_str)
+#         groupunit_shop(bob_str, _acct_mirror=True, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{bob_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"

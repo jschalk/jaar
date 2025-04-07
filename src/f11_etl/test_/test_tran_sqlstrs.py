@@ -1038,13 +1038,12 @@ def test_get_forecast_create_table_sqlstrs_ReturnsObj():
         expected_create_sqlstr = get_create_table_sqlstr(
             forecast_table, forecast_cols, s_types
         )
-        assert create_table_sqlstrs.get(forecast_table) == expected_create_sqlstr
-
         forecast_dimen_abbr = x_config.get("abbreviation").upper()
         print(
             f'CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""'
         )
         # print(f'"{forecast_table}": CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR,')
+        assert create_table_sqlstrs.get(forecast_table) == expected_create_sqlstr
 
 
 def test_create_forecast_tables_CreatesTables():

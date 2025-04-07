@@ -179,7 +179,7 @@ def awardline_shop(awardee_tag: GroupLabel, _fund_give: float, _fund_take: float
 @dataclass
 class GroupUnit(GroupCore):
     _memberships: dict[AcctName, MemberShip] = None  # set by BudUnit.set_acctunit()
-    _bridge: str = None  # calculated by BudUnit
+    bridge: str = None  # calculated by BudUnit
     # calculated by BudUnit.settle_bud()
     _fund_give: float = None
     _fund_take: float = None
@@ -247,7 +247,7 @@ class GroupUnit(GroupCore):
 
 
 def groupunit_shop(
-    group_label: GroupLabel, _bridge: str = None, _fund_coin: FundCoin = None
+    group_label: GroupLabel, bridge: str = None, _fund_coin: FundCoin = None
 ) -> GroupUnit:
     return GroupUnit(
         group_label=group_label,
@@ -258,7 +258,7 @@ def groupunit_shop(
         _fund_agenda_take=0,
         _credor_pool=0,
         _debtor_pool=0,
-        _bridge=default_bridge_if_None(_bridge),
+        bridge=default_bridge_if_None(bridge),
         _fund_coin=default_fund_coin_if_None(_fund_coin),
     )
     # x_groupunit.set_group_label(group_label=group_label)

@@ -183,7 +183,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "_base_item_active_value": "INTEGER",
         "base_item_active_requisite": "INTEGER",
         "team_tag": "TEXT",
-        "_bridge": "TEXT",
+        "bridge": "TEXT",
         "_owner_name_team": "INTEGER",
         "_active": "INTEGER",
         "_all_acct_cred": "INTEGER",

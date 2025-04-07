@@ -229,13 +229,14 @@ def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_take = values_dict.get("_fund_take")
     _fund_agenda_give = values_dict.get("_fund_agenda_give")
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
-    _bridge = values_dict.get("_bridge")
+    bridge = values_dict.get("bridge")
     real_str = "REAL"
-    return f"""INSERT INTO bud_groupunit_forecast (fisc_title, owner_name, group_label, _credor_pool, _debtor_pool, _fund_coin, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _bridge)
+    return f"""INSERT INTO bud_groupunit_forecast (fisc_title, owner_name, group_label, bridge, _credor_pool, _debtor_pool, _fund_coin, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
 VALUES (
   {sqlite_obj_str(fisc_title, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(group_label, "TEXT")}
+, {sqlite_obj_str(bridge, "TEXT")}
 , {sqlite_obj_str(_credor_pool, real_str)}
 , {sqlite_obj_str(_debtor_pool, real_str)}
 , {sqlite_obj_str(_fund_coin, real_str)}
@@ -243,7 +244,6 @@ VALUES (
 , {sqlite_obj_str(_fund_take, real_str)}
 , {sqlite_obj_str(_fund_agenda_give, real_str)}
 , {sqlite_obj_str(_fund_agenda_take, real_str)}
-, {sqlite_obj_str(_bridge, "TEXT")}
 )
 ;
 """

@@ -71,15 +71,15 @@ def test_BudUnit_edit_item_attr_reason_base_CorrectlySets_bridge():
     bob_bud.set_item(itemunit_shop(wed_str), week_road)
     print(f"{bob_bud.itemroot._kids.keys()=}")
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._bridge == slash_str
-    assert wed_item._bridge == bob_bud.bridge
+    assert wed_item.bridge == slash_str
+    assert wed_item.bridge == bob_bud.bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)
 
     # THEN
     casa_item = bob_bud.get_item_obj(casa_road)
-    assert casa_item._bridge == slash_str
+    assert casa_item.bridge == slash_str
     week_reasonunit = casa_item.reasonunits.get(week_road)
     assert week_reasonunit.bridge != ","
     assert week_reasonunit.bridge == bob_bud.bridge

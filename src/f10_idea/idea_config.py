@@ -216,7 +216,6 @@ def get_idea_elements_sort_order() -> list[str]:
         "_keeps_buildable",
         "_all_acct_debt",
         "_tree_traverse_count",
-        "_bridge",
     ]
 
 
@@ -337,7 +336,6 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_all_acct_cred": "INTEGER",
         "_all_acct_debt": "INTEGER",
         "_base_item_active_value": "INTEGER",
-        "_bridge": "TEXT",
         "_inallocable_debtit_belief": "REAL",
         "_irrational_debtit_belief": "REAL",
         "_status": "INTEGER",

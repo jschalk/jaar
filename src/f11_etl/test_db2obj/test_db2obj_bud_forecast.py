@@ -725,7 +725,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x__fund_take = 6
     x__fund_agenda_give = 7
     x__fund_agenda_take = 8
-    x__bridge = 9
+    x_bridge = 9
     values_dict = {
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
@@ -737,7 +737,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
         "_fund_take": x__fund_take,
         "_fund_agenda_give": x__fund_agenda_give,
         "_fund_agenda_take": x__fund_agenda_take,
-        "_bridge": x__bridge,
+        "bridge": x_bridge,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

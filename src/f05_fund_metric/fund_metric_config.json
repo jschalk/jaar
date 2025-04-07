@@ -180,7 +180,7 @@
             }
         },
         "jvalues": {
-            "_bridge": {
+            "bridge": {
                 "class_type": "str",
                 "sqlite_datatype": "TEXT"
             }

@@ -338,8 +338,8 @@ class BudUnit:
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
-        if x_acctunit._bridge != self.bridge:
-            x_acctunit._bridge = self.bridge
+        if x_acctunit.bridge != self.bridge:
+            x_acctunit.bridge = self.bridge
         if x_acctunit._respect_bit != self.respect_bit:
             x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
@@ -611,7 +611,7 @@ class BudUnit:
             exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root title. Should be {self.itemroot.item_title}."
             raise InvalidBudException(exception_str)
 
-        item_kid._bridge = self.bridge
+        item_kid.bridge = self.bridge
         if item_kid.fisc_title != self.fisc_title:
             item_kid.fisc_title = self.fisc_title
         if item_kid._fund_coin != self.fund_coin:
@@ -1159,7 +1159,7 @@ class BudUnit:
     def _create_groupunits_metrics(self):
         self._groupunits = {}
         for group_label, acct_name_set in self.get_acctunit_group_labels_dict().items():
-            x_groupunit = groupunit_shop(group_label, _bridge=self.bridge)
+            x_groupunit = groupunit_shop(group_label, bridge=self.bridge)
             for x_acct_name in acct_name_set:
                 x_membership = self.get_acct(x_acct_name).get_membership(group_label)
                 x_groupunit.set_membership(x_membership)
@@ -1439,7 +1439,7 @@ def budunit_shop(
         _uid=1,
         _level=0,
         fisc_title=x_bud.fisc_title,
-        _bridge=x_bud.bridge,
+        bridge=x_bud.bridge,
         _fund_coin=x_bud.fund_coin,
         parent_road="",
     )
@@ -1505,7 +1505,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
-        _bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
+        bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
         fisc_title=x_bud.fisc_title,
         _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
