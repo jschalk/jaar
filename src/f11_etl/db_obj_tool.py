@@ -501,19 +501,43 @@ VALUES (
 """
 
 
-def insert_forecast_budmemb(cursor: sqlite3_Cursor, x_membership: MemberShip):
-    insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_membership.__dict__)
+def insert_forecast_budmemb(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    x_membership: MemberShip,
+):
+    x_dict = copy_deepcopy(x_membership.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budacct(cursor: sqlite3_Cursor, x_acct: AcctUnit):
-#     insert_sqlstr = create_budacct_metrics_insert_sqlstr(x_acct.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budacct(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    x_acct: AcctUnit,
+):
+    x_dict = copy_deepcopy(x_acct.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    insert_sqlstr = create_budacct_metrics_insert_sqlstr(x_dict)
+    cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budgrou(cursor: sqlite3_Cursor, x_groupunit: GroupUnit):
-#     insert_sqlstr = create_budgrou_metrics_insert_sqlstr(x_groupunit.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budgrou(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    x_groupunit: GroupUnit,
+):
+    x_dict = copy_deepcopy(x_groupunit.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    insert_sqlstr = create_budgrou_metrics_insert_sqlstr(x_dict)
+    cursor.execute(insert_sqlstr)
 
 
 # def insert_forecast_budawar(cursor: sqlite3_Cursor, x_awardheir: AwardHeir):

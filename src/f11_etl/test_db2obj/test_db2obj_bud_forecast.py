@@ -21,8 +21,8 @@ from src.f11_etl.tran_sqlstrs import create_forecast_tables
 from src.f11_etl.db_obj_tool import (
     get_fisc_dict_from_db,
     insert_forecast_budmemb,
-    # insert_forecast_budacct,
-    # insert_forecast_budgrou,
+    insert_forecast_budacct,
+    insert_forecast_budgrou,
     # insert_forecast_budawar,
     # insert_forecast_budfact,
     # insert_forecast_budheal,
@@ -1127,81 +1127,228 @@ def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
         assert rows == expected_data
 
 
-# def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
-#     # sourcery skip: extract-method
-#     # ESTABLISH
-#     x_args = get_fund_metric_dimen_args("bud_acct_membership")
-#     x_count = 0
-#     for x_arg in get_default_sorted_list(x_args):
-#         x_count += 1
-#         print(f"    x_{x_arg} = {x_count}")
-#     print("")
-#     for x_arg in get_default_sorted_list(x_args):
-#         print(f"""    x_membership.{x_arg} = x_{x_arg}""")
-#     print("")
-#     for x_arg in get_default_sorted_list(x_args):
-#         print(f"""            x_{x_arg},""")
+def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    # x_args = get_fund_metric_dimen_args("bud_acct_membership")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_membership.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
 
-#     x_fisc_title = 1
-#     x_owner_name = 2
-#     x_acct_name = 3
-#     x_group_label = 4
-#     x_credit_vote = 5
-#     x_debtit_vote = 6
-#     x__credor_pool = 7
-#     x__debtor_pool = 8
-#     x__fund_give = 9
-#     x__fund_take = 10
-#     x__fund_agenda_give = 11
-#     x__fund_agenda_take = 12
-#     x__fund_agenda_ratio_give = 13
-#     x__fund_agenda_ratio_take = 14
-#     x_membership = membership_shop()
-#     x_membership.fisc_title = x_fisc_title
-#     x_membership.owner_name = x_owner_name
-#     x_membership.acct_name = x_acct_name
-#     x_membership.group_label = x_group_label
-#     x_membership.credit_vote = x_credit_vote
-#     x_membership.debtit_vote = x_debtit_vote
-#     x_membership._credor_pool = x__credor_pool
-#     x_membership._debtor_pool = x__debtor_pool
-#     x_membership._fund_give = x__fund_give
-#     x_membership._fund_take = x__fund_take
-#     x_membership._fund_agenda_give = x__fund_agenda_give
-#     x_membership._fund_agenda_take = x__fund_agenda_take
-#     x_membership._fund_agenda_ratio_give = x__fund_agenda_ratio_give
-#     x_membership._fund_agenda_ratio_take = x__fund_agenda_ratio_take
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_acct_name = 3
+    x_group_label = 4
+    x_credit_vote = 5.0
+    x_debtit_vote = 6.0
+    x__credor_pool = 7.0
+    x__debtor_pool = 8.0
+    x__fund_give = 9.0
+    x__fund_take = 10.0
+    x__fund_agenda_give = 11.0
+    x__fund_agenda_take = 12.0
+    x__fund_agenda_ratio_give = 13.0
+    x__fund_agenda_ratio_take = 14.0
+    x_membership = membership_shop(x_group_label)
+    x_membership.acct_name = x_acct_name
+    x_membership.credit_vote = x_credit_vote
+    x_membership.debtit_vote = x_debtit_vote
+    x_membership._credor_pool = x__credor_pool
+    x_membership._debtor_pool = x__debtor_pool
+    x_membership._fund_give = x__fund_give
+    x_membership._fund_take = x__fund_take
+    x_membership._fund_agenda_give = x__fund_agenda_give
+    x_membership._fund_agenda_take = x__fund_agenda_take
+    x_membership._fund_agenda_ratio_give = x__fund_agenda_ratio_give
+    x_membership._fund_agenda_ratio_take = x__fund_agenda_ratio_take
 
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_forecast_tables(cursor)
-#         x_table_name = "bud_acct_membership_forecast"
-#         assert get_row_count(cursor, x_table_name) == 0
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_acct_membership_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
 
-#         # WHEN
-#         insert_forecast_budmemb(
-#             cursor, x_fisc_title, x_owner_name, x_acct_name, x_memberunit
-#         )
+        # WHEN
+        insert_forecast_budmemb(cursor, x_fisc_title, x_owner_name, x_membership)
 
-#         # THEN
-#         assert get_row_count(cursor, x_table_name) == 1
-#         select_sqlstr = f"SELECT * FROM {x_table_name};"
-#         cursor.execute(select_sqlstr)
-#         rows = cursor.fetchall()
-#         expected_row1 = (
-#             str(x_fisc_title),
-#             str(x_owner_name),
-#             str(x_road),
-#             str(x_base),
-#             str(x_need),
-#             x_nigh,
-#             x_open,
-#             x_divisor,
-#             x__task,
-#             x__status,
-#         )
-#         expected_data = [expected_row1]
-#         assert rows == expected_data
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_acct_name),
+            str(x_group_label),
+            x_credit_vote,
+            x_debtit_vote,
+            x__credor_pool,
+            x__debtor_pool,
+            x__fund_give,
+            x__fund_take,
+            x__fund_agenda_give,
+            x__fund_agenda_take,
+            x__fund_agenda_ratio_give,
+            x__fund_agenda_ratio_take,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    # x_args = get_fund_metric_dimen_args("bud_acctunit")
+    # x_count = 0
+    # for x_arg in get_default_sorted_list(x_args):
+    #     x_count += 1
+    #     print(f"    x_{x_arg} = {x_count}")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""    x_acct.{x_arg} = x_{x_arg}""")
+    # print("")
+    # for x_arg in get_default_sorted_list(x_args):
+    #     print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_acct_name = 3
+    x_credit_belief = 4
+    x_debtit_belief = 5
+    x__credor_pool = 6
+    x__debtor_pool = 7
+    x__fund_give = 8
+    x__fund_take = 9
+    x__fund_agenda_give = 10
+    x__fund_agenda_take = 11
+    x__fund_agenda_ratio_give = 12
+    x__fund_agenda_ratio_take = 13
+    x__inallocable_debtit_belief = 14
+    x__irrational_debtit_belief = 15
+    x_acct = acctunit_shop(x_acct_name)
+    x_acct.acct_name = x_acct_name
+    x_acct.credit_belief = x_credit_belief
+    x_acct.debtit_belief = x_debtit_belief
+    x_acct._credor_pool = x__credor_pool
+    x_acct._debtor_pool = x__debtor_pool
+    x_acct._fund_give = x__fund_give
+    x_acct._fund_take = x__fund_take
+    x_acct._fund_agenda_give = x__fund_agenda_give
+    x_acct._fund_agenda_take = x__fund_agenda_take
+    x_acct._fund_agenda_ratio_give = x__fund_agenda_ratio_give
+    x_acct._fund_agenda_ratio_take = x__fund_agenda_ratio_take
+    x_acct._inallocable_debtit_belief = x__inallocable_debtit_belief
+    x_acct._irrational_debtit_belief = x__irrational_debtit_belief
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_acctunit_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budacct(cursor, x_fisc_title, x_owner_name, x_acct)
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_acct_name),
+            x_credit_belief,
+            x_debtit_belief,
+            x__credor_pool,
+            x__debtor_pool,
+            x__fund_give,
+            x__fund_take,
+            x__fund_agenda_give,
+            x__fund_agenda_take,
+            x__fund_agenda_ratio_give,
+            x__fund_agenda_ratio_take,
+            x__inallocable_debtit_belief,
+            x__irrational_debtit_belief,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_groupunit")
+    x_count = 0
+    for x_arg in get_default_sorted_list(x_args):
+        x_count += 1
+        print(f"    x_{x_arg} = {x_count}")
+    print("")
+    for x_arg in get_default_sorted_list(x_args):
+        print(f"""    x_group.{x_arg} = x_{x_arg}""")
+    print("")
+    for x_arg in get_default_sorted_list(x_args):
+        print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_group_label = 3
+    x_fund_coin = 4
+    x_bridge = 5
+    x__credor_pool = 6
+    x__debtor_pool = 7
+    x__fund_give = 8
+    x__fund_take = 9
+    x__fund_agenda_give = 10
+    x__fund_agenda_take = 11
+    x_group = groupunit_shop(x_group_label)
+    x_group.group_label = x_group_label
+    x_group.fund_coin = x_fund_coin
+    x_group.bridge = x_bridge
+    x_group._credor_pool = x__credor_pool
+    x_group._debtor_pool = x__debtor_pool
+    x_group._fund_give = x__fund_give
+    x_group._fund_take = x__fund_take
+    x_group._fund_agenda_give = x__fund_agenda_give
+    x_group._fund_agenda_take = x__fund_agenda_take
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_groupunit_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budgrou(cursor, x_fisc_title, x_owner_name, x_group)
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_group_label),
+            x_fund_coin,
+            str(x_bridge),
+            x__credor_pool,
+            x__debtor_pool,
+            x__fund_give,
+            x__fund_take,
+            x__fund_agenda_give,
+            x__fund_agenda_take,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
 
 
 # "budunit_forecast"
