@@ -29,7 +29,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
             columns=[
                 "owner_name",
                 "fund_ratio",
-                "_item_title",
+                "item_title",
                 "_parent_road",
                 "begin",
                 "close",
@@ -44,7 +44,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
         item_dict = {
             "owner_name": x_bud.owner_name,
             "fund_ratio": x_item._fund_ratio,
-            "_item_title": x_item._item_title,
+            "item_title": x_item.item_title,
             "_parent_road": x_item._parent_road,
             "begin": x_item.begin,
             "close": x_item.close,

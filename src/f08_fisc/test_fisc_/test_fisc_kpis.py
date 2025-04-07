@@ -121,7 +121,7 @@ def test_get_fisc_voices_agenda_dataframe_ReturnsObj(
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "_item_title",
+        "item_title",
         "_parent_road",
         "begin",
         "close",
@@ -162,7 +162,7 @@ def test_get_fisc_forecasts_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "_item_title",
+        "item_title",
         "_parent_road",
         "begin",
         "close",

@@ -272,7 +272,7 @@ def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.set_item(
         item_kid=itemunit_shop(
-            _item_title=x_atom.get_value("item_title"),
+            item_title=x_atom.get_value("item_title"),
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),

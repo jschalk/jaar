@@ -145,7 +145,7 @@ def test_BudUnit_add_item_ReturnsObj():
     casa_itemunit = bob_budunit.add_item(casa_road, mass=casa_mass)
 
     # THEN
-    assert casa_itemunit._item_title == "casa"
+    assert casa_itemunit.item_title == "casa"
     assert casa_itemunit.mass == casa_mass
 
 
@@ -487,7 +487,7 @@ def test_BudUnit_set_item_MustReorderKidsDictToBeAlphabetical():
     item_list = list(bob_bud.itemroot._kids.values())
 
     # THEN
-    assert item_list[0]._item_title == casa_str
+    assert item_list[0].item_title == casa_str
 
 
 def test_BudUnit_set_item_adoptee_RaisesErrorIfAdopteeItemDoesNotHaveCorrectParent():
@@ -684,7 +684,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
 
     # THEN
     swim_item = yao_bud.get_item_obj(swim_road)
-    print(f"{swim_item._item_title=}")
+    print(f"{swim_item.item_title=}")
     print(f"{swim_item.awardlinks=}")
     print(f"{swim_item._awardheirs=}")
 
@@ -792,7 +792,7 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert brazil_item is not None
-    assert brazil_item._item_title == brazil_str
+    assert brazil_item.item_title == brazil_str
 
     # WHEN
     week_str = "weekdays"
@@ -801,14 +801,14 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert week_item is not None
-    assert week_item._item_title == week_str
+    assert week_item.item_title == week_str
 
     # WHEN
     root_item = sue_bud.get_item_obj(road=sue_bud.fisc_title)
 
     # THEN
     assert root_item is not None
-    assert root_item._item_title == sue_bud.fisc_title
+    assert root_item.item_title == sue_bud.fisc_title
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"

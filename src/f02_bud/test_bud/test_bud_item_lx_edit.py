@@ -36,7 +36,7 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0ItemWhen_fisc_title_isNone(
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.itemroot._item_title == yao_bud.fisc_title
+    assert yao_bud.itemroot.item_title == yao_bud.fisc_title
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item._parent_road == yao_bud.fisc_title
     swim_item = yao_bud.get_item_obj(swim_road)
@@ -55,8 +55,8 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0ItemWhen_fisc_title_isNone(
     #     == f"Cannot set itemroot to string other than '{yao_bud.fisc_title}'"
     # )
 
-    assert yao_bud.itemroot._item_title != moon_str
-    assert yao_bud.itemroot._item_title == yao_bud.fisc_title
+    assert yao_bud.itemroot.item_title != moon_str
+    assert yao_bud.itemroot.item_title == yao_bud.fisc_title
 
 
 def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fisc_title_IsDifferent():
@@ -75,7 +75,7 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fisc_title_IsDifferent
     assert yao_bud.owner_name == yao_str
     assert yao_bud.fisc_title == sun_str
     assert yao_bud.itemroot._bud_fisc_title == sun_str
-    assert yao_bud.itemroot._item_title == root_title()
+    assert yao_bud.itemroot.item_title == root_title()
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item._parent_road == root_title()
     swim_item = yao_bud.get_item_obj(swim_road)
@@ -216,12 +216,12 @@ def test_bud_edit_item_title_ModifiesItemReasonUnitsScenario1():
     # WHEN
     # for key_x, reason_x in casa_item.reasonunits.items():
     #     print(f"Before {key_x=} {reason_x.base=}")
-    print(f"before {wednesday_item._item_title=}")
+    print(f"before {wednesday_item.item_title=}")
     print(f"before {wednesday_item._parent_road=}")
     sue_bud.edit_item_title(old_road=old_weekday_road, new_item_title=new_weekday_str)
     # for key_x, reason_x in casa_item.reasonunits.items():
     #     print(f"after {key_x=} {reason_x.base=}")
-    print(f"after  {wednesday_item._item_title=}")
+    print(f"after  {wednesday_item.item_title=}")
     print(f"after  {wednesday_item._parent_road=}")
 
     # THEN
@@ -239,11 +239,11 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud.owner_name == "Sue"
-    assert sue_bud.itemroot._item_title == sue_bud.fisc_title
+    assert sue_bud.itemroot.item_title == sue_bud.fisc_title
     # mid_item_title1 = "Yao"
     # sue_bud.edit_item_title(old_road=old_item_title, new_item_title=mid_item_title1)
     # assert sue_bud.owner_name == old_item_title
-    # assert sue_bud.itemroot._item_title == mid_item_title1
+    # assert sue_bud.itemroot.item_title == mid_item_title1
 
     # WHEN
     bob_str = "Bob"
@@ -251,7 +251,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud.owner_name == bob_str
-    assert sue_bud.itemroot._item_title == sue_bud.fisc_title
+    assert sue_bud.itemroot.item_title == sue_bud.fisc_title
 
 
 def test_bud_edit_item_title_RaisesErrorIfbridgeIsInTitle():

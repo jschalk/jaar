@@ -10,7 +10,7 @@ def test_itemunit_shop_With_root_TrueReturnsObj():
     # THEN
     assert x_itemroot
     assert x_itemroot._root
-    assert x_itemroot._item_title == root_title()
+    assert x_itemroot.item_title == root_title()
     assert x_itemroot._kids == {}
     assert x_itemroot._root is True
 
@@ -20,10 +20,10 @@ def test_ItemUnit_set_item_title_get_default_fisc_title_DoesNotRaisesError():
     x_itemroot = itemunit_shop(_root=True)
 
     # WHEN
-    x_itemroot.set_item_title(_item_title=root_title())
+    x_itemroot.set_item_title(item_title=root_title())
 
     # THEN
-    assert x_itemroot._item_title == root_title()
+    assert x_itemroot.item_title == root_title()
 
 
 def test_ItemUnit_set_item_title_DoesNotRaisesError():
@@ -32,10 +32,10 @@ def test_ItemUnit_set_item_title_DoesNotRaisesError():
     x_itemroot = itemunit_shop(_root=True, _bud_fisc_title=el_paso_str)
 
     # WHEN
-    x_itemroot.set_item_title(_item_title=el_paso_str)
+    x_itemroot.set_item_title(item_title=el_paso_str)
 
     # THEN
-    assert x_itemroot._item_title == el_paso_str
+    assert x_itemroot.item_title == el_paso_str
 
 
 def test_ItemUnit_set_item_title_DoesRaisesError():
@@ -46,7 +46,7 @@ def test_ItemUnit_set_item_title_DoesRaisesError():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         casa_str = "casa"
-        x_itemroot.set_item_title(_item_title=casa_str)
+        x_itemroot.set_item_title(item_title=casa_str)
     assert (
         str(excinfo.value)
         == f"Cannot set itemroot to string different than '{el_paso_str}'"
@@ -60,7 +60,7 @@ def test_ItemUnit_set_item_title_RaisesErrorWhen_bud_fisc_title_IsNone():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         casa_str = "casa"
-        x_itemroot.set_item_title(_item_title=casa_str)
+        x_itemroot.set_item_title(item_title=casa_str)
     assert (
         str(excinfo.value)
         == f"Cannot set itemroot to string different than '{root_title()}'"

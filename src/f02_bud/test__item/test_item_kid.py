@@ -143,7 +143,7 @@ def test_ItemUnit_get_kid_ReturnsObj():
     france_item = nation_item.get_kid(france_str)
 
     # THEN
-    assert france_item._item_title == france_str
+    assert france_item.item_title == france_str
 
 
 def test_ItemUnit_del_kid_CorrectModifiesAttr():

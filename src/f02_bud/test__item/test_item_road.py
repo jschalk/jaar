@@ -13,7 +13,7 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():
     old_roses_road = create_road(old_bloomers_road, roses_str)
     x_item = itemunit_shop(roses_str, _parent_road=old_bloomers_road)
     assert create_road(x_item._parent_road) == old_bloomers_road
-    assert create_road(x_item._parent_road, x_item._item_title) == old_roses_road
+    assert create_road(x_item._parent_road, x_item.item_title) == old_roses_road
 
     # WHEN
     new_casa = "casa2"
@@ -24,7 +24,7 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():
     new_bloomers_road = create_road(new_casa_road, bloomers_str)
     new_roses_road = create_road(new_bloomers_road, roses_str)
     assert create_road(x_item._parent_road) == new_bloomers_road
-    assert create_road(x_item._parent_road, x_item._item_title) == new_roses_road
+    assert create_road(x_item._parent_road, x_item.item_title) == new_roses_road
 
 
 def test_ItemUnit_find_replace_road_CorrectlyModifies_reasonunits():

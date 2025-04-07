@@ -895,7 +895,7 @@ def test_insert_forecast_obj_CreatesTableRowsFor_budunit_forecast():
 #     x__all_acct_debt = 29
 #     x_item = itemunit_shop()
 #     x_item.parent_road = x_parent_road
-#     x_item._item_title = x_item_title
+#     x_item.item_title = x_item_title
 #     x_item.begin = x_begin
 #     x_item.close = x_close
 #     x_item.addin = x_addin

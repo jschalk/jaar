@@ -135,7 +135,7 @@ def get_fisc_voices_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "_item_title",
+        "item_title",
         "_parent_road",
         "begin",
         "close",
@@ -154,7 +154,7 @@ def get_fisc_voices_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df._item_title,
+                df.item_title,
                 df._parent_road,
                 df.begin,
                 df.close,
@@ -193,7 +193,7 @@ def get_fisc_forecasts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "_item_title",
+        "item_title",
         "_parent_road",
         "begin",
         "close",
@@ -212,7 +212,7 @@ def get_fisc_forecasts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df._item_title,
+                df.item_title,
                 df._parent_road,
                 df.begin,
                 df.close,
