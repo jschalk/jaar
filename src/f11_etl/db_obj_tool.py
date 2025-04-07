@@ -531,9 +531,21 @@ VALUES (
 #     cursor.execute(insert_sqlstr)
 
 
-# def insert_forecast_budprem(cursor: sqlite3_Cursor, x_premiseunit: PremiseUnit):
-#     insert_sqlstr = create_budprem_metrics_insert_sqlstr(x_premiseunit.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budprem(
+    cursor: sqlite3_Cursor,
+    fisc_title: FiscTitle,
+    owner_name: OwnerName,
+    road: RoadUnit,
+    base: RoadUnit,
+    x_premiseunit: PremiseUnit,
+):
+    x_dict = copy_deepcopy(x_premiseunit.__dict__)
+    x_dict["fisc_title"] = fisc_title
+    x_dict["owner_name"] = owner_name
+    x_dict["road"] = road
+    x_dict["base"] = base
+    insert_sqlstr = create_budprem_metrics_insert_sqlstr(x_dict)
+    cursor.execute(insert_sqlstr)
 
 
 def insert_forecast_budreas(

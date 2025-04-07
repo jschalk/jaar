@@ -26,7 +26,7 @@ from src.f11_etl.db_obj_tool import (
     # insert_forecast_budawar,
     # insert_forecast_budfact,
     # insert_forecast_budheal,
-    # insert_forecast_budprem,
+    insert_forecast_budprem,
     insert_forecast_budreas,
     # insert_forecast_budteam,
     insert_forecast_buditem,
@@ -1025,7 +1025,7 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
     x__task = 6
     x__status = 7
     x__base_item_active_value = 8
-    x_reasonheir = reasonheir_shop(base=x_road)
+    x_reasonheir = reasonheir_shop(base=x_base)
     x_reasonheir.base = x_base
     x_reasonheir.base_item_active_requisite = x_base_item_active_requisite
     x_reasonheir._task = x__task
@@ -1057,6 +1057,71 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
             x__task,
             x__status,
             x__base_item_active_value,
+        )
+        expected_data = [expected_row1]
+        assert rows == expected_data
+
+
+def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    x_args = get_fund_metric_dimen_args("bud_item_reason_premiseunit")
+    x_count = 0
+    for x_arg in get_default_sorted_list(x_args):
+        x_count += 1
+        print(f"    x_{x_arg} = {x_count}")
+    print("")
+    for x_arg in get_default_sorted_list(x_args):
+        print(f"""    x_premiseunit.{x_arg} = x_{x_arg}""")
+    print("")
+    for x_arg in get_default_sorted_list(x_args):
+        print(f"""            x_{x_arg},""")
+
+    x_fisc_title = 1
+    x_owner_name = 2
+    x_road = 3
+    x_base = 4
+    x_need = 5
+    x_nigh = 6.0
+    x_open = 7.0
+    x_divisor = 8
+    x__task = 9
+    x__status = 10
+    x_premiseunit = premiseunit_shop(need=x_need)
+    x_premiseunit.need = x_need
+    x_premiseunit.nigh = x_nigh
+    x_premiseunit.open = x_open
+    x_premiseunit.divisor = x_divisor
+    x_premiseunit._task = x__task
+    x_premiseunit._status = x__status
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_forecast_tables(cursor)
+        x_table_name = "bud_item_reason_premiseunit_forecast"
+        assert get_row_count(cursor, x_table_name) == 0
+
+        # WHEN
+        insert_forecast_budprem(
+            cursor, x_fisc_title, x_owner_name, x_road, x_base, x_premiseunit
+        )
+
+        # THEN
+        assert get_row_count(cursor, x_table_name) == 1
+        select_sqlstr = f"SELECT * FROM {x_table_name};"
+        cursor.execute(select_sqlstr)
+        rows = cursor.fetchall()
+        expected_row1 = (
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            str(x_base),
+            str(x_need),
+            x_nigh,
+            x_open,
+            x_divisor,
+            x__task,
+            x__status,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
