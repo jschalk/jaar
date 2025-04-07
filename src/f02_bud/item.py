@@ -197,7 +197,7 @@ def itemattrholder_shop(
 class ItemUnit:
     item_title: TitleUnit = None
     mass: int = None
-    _parent_road: RoadUnit = None
+    parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
     _bud_fisc_title: FiscTitle = None
@@ -368,11 +368,11 @@ class ItemUnit:
         return self.item_title
 
     def get_road(self) -> RoadUnit:
-        if self._parent_road in (None, ""):
+        if self.parent_road in (None, ""):
             return road_create_road(self.item_title, bridge=self._bridge)
         else:
             return road_create_road(
-                self._parent_road, self.item_title, bridge=self._bridge
+                self.parent_road, self.item_title, bridge=self._bridge
             )
 
     def clear_descendant_pledge_count(self):
@@ -412,7 +412,7 @@ class ItemUnit:
         self._level = parent_level + 1
 
     def set_parent_road(self, parent_road):
-        self._parent_road = parent_road
+        self.parent_road = parent_road
 
     def inherit_awardheirs(self, parent_awardheirs: dict[GroupLabel, AwardHeir] = None):
         parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
@@ -501,7 +501,7 @@ class ItemUnit:
             self._find_replace_bridge(old_bridge)
 
     def _find_replace_bridge(self, old_bridge):
-        self._parent_road = replace_bridge(self._parent_road, old_bridge, self._bridge)
+        self.parent_road = replace_bridge(self.parent_road, old_bridge, self._bridge)
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self.reasonunits.items():
@@ -920,8 +920,8 @@ class ItemUnit:
         return x_dict
 
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        if is_sub_road(ref_road=self._parent_road, sub_road=old_road):
-            self._parent_road = rebuild_road(self._parent_road, old_road, new_road)
+        if is_sub_road(ref_road=self.parent_road, sub_road=old_road):
+            self.parent_road = rebuild_road(self.parent_road, old_road, new_road)
 
         self.reasonunits == find_replace_road_key_dict(
             dict_x=self.reasonunits, old_road=old_road, new_road=new_road
@@ -954,7 +954,7 @@ class ItemUnit:
 def itemunit_shop(
     item_title: TitleUnit = None,
     _uid: int = None,  # Calculated field?
-    _parent_road: RoadUnit = None,
+    parent_road: RoadUnit = None,
     _kids: dict = None,
     mass: int = 1,
     awardlinks: dict[GroupLabel, AwardLink] = None,
@@ -1002,7 +1002,7 @@ def itemunit_shop(
     x_itemkid = ItemUnit(
         item_title=None,
         _uid=_uid,
-        _parent_road=_parent_road,
+        parent_road=parent_road,
         _kids=get_empty_dict_if_None(_kids),
         mass=get_positive_int(mass),
         awardlinks=get_empty_dict_if_None(awardlinks),

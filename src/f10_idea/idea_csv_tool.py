@@ -419,7 +419,7 @@ def add_bud_to_br00028_csv(
                 if_none_str(event_int),
                 x_bud.fisc_title,
                 x_bud.owner_name,
-                itemunit._parent_road,
+                itemunit.parent_road,
                 itemunit.item_title,
                 if_none_str(itemunit.begin),
                 if_none_str(itemunit.close),

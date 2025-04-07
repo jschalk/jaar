@@ -213,10 +213,10 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     #     print(f"{base=}")
 
     # for agenda_item in item_pledge_list:
-    #     print(f"{agenda_item._uid=} {agenda_item._parent_road=}")
+    #     print(f"{agenda_item._uid=} {agenda_item.parent_road=}")
 
     # for agenda_item in item_pledge_list:
-    #     # print(f"{agenda_item._parent_road=}")
+    #     # print(f"{agenda_item.parent_road=}")
     #     pass
 
     print(len(item_pledge_list))
@@ -233,7 +233,7 @@ def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnBase_budunit_v001_with_large_a
 
     # for agenda_item in yao_bud.get_agenda_dict():
     #     print(
-    #         f"{agenda_item._parent_road=} {agenda_item.item_title} {len(agenda_item.reasonunits)=}"
+    #         f"{agenda_item.parent_road=} {agenda_item.item_title} {len(agenda_item.reasonunits)=}"
     #     )
     #     for reason in agenda_item.reasonunits.values():
     #         if reason.base == weekdays:

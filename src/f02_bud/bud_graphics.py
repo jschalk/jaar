@@ -194,7 +194,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         "owner_name",
         "fund_ratio",
         "item_title",
-        "_parent_road",
+        "parent_road",
     ]
     df = get_bud_agenda_dataframe(x_bud)
     header_dict = dict(
@@ -207,7 +207,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
                 df.owner_name,
                 df.fund_ratio,
                 df.item_title,
-                df._parent_road,
+                df.parent_road,
             ],
             fill_color="lavender",
             align="left",

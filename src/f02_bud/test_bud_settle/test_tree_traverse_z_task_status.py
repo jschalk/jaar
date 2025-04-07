@@ -156,7 +156,7 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     # THEN
     casa_item = sue_budunit._item_dict.get(casa_road)
     print(f"\nlook at {casa_item.get_road()=}")
-    assert casa_item._parent_road == sue_budunit.fisc_title
+    assert casa_item.parent_road == sue_budunit.fisc_title
     assert casa_item._kids == {}
     assert casa_item.mass == 30
     assert casa_item.item_title == casa_str
@@ -490,7 +490,7 @@ def test_BudUnit_settle_bud_CorrectlySetsItemUnitsActiveWithEvery6WeeksReason_bu
     assert clean_sheet_item._active is False
 
     # for item in item_dict:
-    #     # print(f"{item._parent_road=}")
+    #     # print(f"{item.parent_road=}")
     #     if item.item_title == "clean sheets couch blankets":
     #         print(f"{item.get_road()=}")
 

@@ -312,7 +312,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     shave_item_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_item_y1.problem_bool = True
     # print(f"{shave_road=}")
-    # print(f"{json_shave_item.item_title=} {json_shave_item._parent_road=}")
+    # print(f"{json_shave_item.item_title=} {json_shave_item.parent_road=}")
 
     sue_str = "Sue"
     zia_bud.add_acctunit(acct_name=sue_str, credit_belief=199, debtit_belief=199)
@@ -375,8 +375,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     # assert json_bud._groups == zia_bud._groups
 
     json_itemroot = json_bud.itemroot
-    assert json_itemroot._parent_road == ""
-    assert json_itemroot._parent_road == zia_bud.itemroot._parent_road
+    assert json_itemroot.parent_road == ""
+    assert json_itemroot.parent_road == zia_bud.itemroot.parent_road
     assert json_itemroot.reasonunits == {}
     assert json_itemroot.teamunit == zia_bud.itemroot.teamunit
     assert json_itemroot.teamunit == run_teamunit
@@ -534,7 +534,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
     assert ccn2_bud.itemroot.item_title == x2_bud.itemroot.item_title
-    assert ccn2_bud.itemroot._parent_road == x2_bud.itemroot._parent_road
+    assert ccn2_bud.itemroot.parent_road == x2_bud.itemroot.parent_road
     assert ccn2_bud.itemroot._fund_coin == x2_bud.itemroot._fund_coin
     shave_road = ccn2_bud.make_l1_road("shave")
     week_road = ccn2_bud.make_l1_road("weekdays")

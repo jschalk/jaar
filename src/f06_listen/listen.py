@@ -67,7 +67,7 @@ def _ingest_single_itemunit(listener: BudUnit, ingest_itemunit: ItemUnit):
     mass_data = _create_mass_data(listener, ingest_itemunit.get_road())
 
     if listener.item_exists(ingest_itemunit.get_road()) is False:
-        x_parent_road = ingest_itemunit._parent_road
+        x_parent_road = ingest_itemunit.parent_road
         listener.set_item(ingest_itemunit, x_parent_road, create_missing_items=True)
 
     _add_and_replace_itemunit_masss(
@@ -132,10 +132,10 @@ def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
         pick_road = x_factunit.pick
         if dst_listener.item_exists(base_road) is False:
             base_item = src_listener.get_item_obj(base_road)
-            dst_listener.set_item(base_item, base_item._parent_road)
+            dst_listener.set_item(base_item, base_item.parent_road)
         if dst_listener.item_exists(pick_road) is False:
             pick_item = src_listener.get_item_obj(pick_road)
-            dst_listener.set_item(pick_item, pick_item._parent_road)
+            dst_listener.set_item(pick_item, pick_item.parent_road)
         dst_listener.add_fact(base_road, pick_road)
 
 
@@ -296,9 +296,9 @@ def pick_keep_job_and_listen(
 def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
     for x_item in job._item_dict.values():
         if listener.item_exists(x_item.get_road()) is False:
-            listener.set_item(x_item, x_item._parent_road)
+            listener.set_item(x_item, x_item.parent_road)
         if listener.get_fact(x_item.get_road()) is False:
-            listener.set_item(x_item, x_item._parent_road)
+            listener.set_item(x_item, x_item.parent_road)
     for x_fact_road, x_fact_unit in job.itemroot.factunits.items():
         listener.itemroot.set_factunit(x_fact_unit)
     listener.settle_bud()

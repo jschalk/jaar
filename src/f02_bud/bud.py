@@ -724,7 +724,7 @@ class BudUnit:
     ):
         x_item = self.get_item_obj(old_road)
         x_item.set_item_title(new_item_title)
-        x_item._parent_road = parent_road
+        x_item.parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
         item_parent._kids.pop(get_terminus_title(old_road, self.bridge))
         item_parent._kids[x_item.item_title] = x_item
@@ -739,9 +739,9 @@ class BudUnit:
             if listed_item._kids is not None:
                 for item_kid in listed_item._kids.values():
                     item_iter_list.append(item_kid)
-                    if is_sub_road(item_kid._parent_road, sub_road=old_road):
-                        item_kid._parent_road = rebuild_road(
-                            subj_road=item_kid._parent_road,
+                    if is_sub_road(item_kid.parent_road, sub_road=old_road):
+                        item_kid.parent_road = rebuild_road(
+                            subj_road=item_kid.parent_road,
                             old_road=old_road,
                             new_road=new_road,
                         )
@@ -1199,7 +1199,7 @@ class BudUnit:
                 x_item.set_teamheir(None, self._groupunits)
                 x_item.inherit_awardheirs()
             else:
-                parent_item = self.get_item_obj(x_item._parent_road)
+                parent_item = self.get_item_obj(x_item.parent_road)
                 x_item.set_factheirs(parent_item._factheirs)
                 x_item.set_teamheir(parent_item._teamheir, self._groupunits)
                 x_item.inherit_awardheirs(parent_item._awardheirs)
@@ -1232,7 +1232,7 @@ class BudUnit:
                 root_item = self.itemroot
                 root_item.set_active_attrs(tt_count, self._groupunits, self.owner_name)
             else:
-                parent_item = self.get_item_obj(x_item._parent_road)
+                parent_item = self.get_item_obj(x_item.parent_road)
                 self._set_kids_active_status_attrs(x_item, parent_item)
 
     def _set_itemtree_fund_attrs(self, root_item: ItemUnit):
@@ -1387,7 +1387,7 @@ class BudUnit:
         item_kid.pledge = True
         self.set_item(
             item_kid=item_kid,
-            parent_road=self.make_road(item_kid._parent_road),
+            parent_road=self.make_road(item_kid.parent_road),
             get_rid_of_missing_awardlinks_awardee_tags=True,
             create_missing_items=True,
         )
@@ -1441,7 +1441,7 @@ def budunit_shop(
         _bud_fisc_title=x_bud.fisc_title,
         _bridge=x_bud.bridge,
         _fund_coin=x_bud.fund_coin,
-        _parent_road="",
+        parent_road="",
     )
     x_bud.set_max_tree_traverse(3)
     x_bud._rational = False
@@ -1487,7 +1487,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     x_bud.itemroot = itemunit_shop(
         _root=True,
         item_title=x_bud.fisc_title,
-        _parent_road="",
+        parent_road="",
         _level=0,
         _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
         mass=get_obj_from_item_dict(itemroot_dict, "mass"),

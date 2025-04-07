@@ -38,9 +38,9 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0ItemWhen_fisc_title_isNone(
     assert yao_bud.owner_name == yao_str
     assert yao_bud.itemroot.item_title == yao_bud.fisc_title
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item._parent_road == yao_bud.fisc_title
+    assert casa_item.parent_road == yao_bud.fisc_title
     swim_item = yao_bud.get_item_obj(swim_road)
-    assert swim_item._parent_road == casa_road
+    assert swim_item.parent_road == casa_road
 
     # WHEN
     moon_str = "moon"
@@ -77,9 +77,9 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fisc_title_IsDifferent
     assert yao_bud.itemroot._bud_fisc_title == sun_str
     assert yao_bud.itemroot.item_title == root_title()
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item._parent_road == root_title()
+    assert casa_item.parent_road == root_title()
     swim_item = yao_bud.get_item_obj(swim_road)
-    assert swim_item._parent_road == casa_road
+    assert swim_item.parent_road == casa_road
 
     # WHEN
 
@@ -114,10 +114,10 @@ def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     r_item_bloomers = yao_bud.get_item_obj(old_bloomers_road)
 
     assert r_item_bloomers._kids.get(roses_str) is not None
-    assert r_item_roses._parent_road == old_bloomers_road
+    assert r_item_roses.parent_road == old_bloomers_road
     assert r_item_roses._kids.get(red_str) is not None
     r_item_red = r_item_roses._kids.get(red_str)
-    assert r_item_red._parent_road == old_roses_road
+    assert r_item_red.parent_road == old_roses_road
 
     # WHEN
     new_casa_str = "casita"
@@ -128,16 +128,16 @@ def test_BudUnit_find_replace_road_CorrectlyModifies_kids_Scenario1():
     assert yao_bud.itemroot._kids.get(new_casa_str) is not None
     assert yao_bud.itemroot._kids.get(old_casa_str) is None
 
-    assert r_item_bloomers._parent_road == new_casa_road
+    assert r_item_bloomers.parent_road == new_casa_road
     assert r_item_bloomers._kids.get(roses_str) is not None
 
     r_item_roses = r_item_bloomers._kids.get(roses_str)
     new_bloomers_road = yao_bud.make_road(new_casa_road, bloomers_str)
-    assert r_item_roses._parent_road == new_bloomers_road
+    assert r_item_roses.parent_road == new_bloomers_road
     assert r_item_roses._kids.get(red_str) is not None
     r_item_red = r_item_roses._kids.get(red_str)
     new_roses_road = yao_bud.make_road(new_bloomers_road, roses_str)
-    assert r_item_red._parent_road == new_roses_road
+    assert r_item_red.parent_road == new_roses_road
 
 
 def test_bud_edit_item_title_Modifies_factunits():
@@ -217,12 +217,12 @@ def test_bud_edit_item_title_ModifiesItemReasonUnitsScenario1():
     # for key_x, reason_x in casa_item.reasonunits.items():
     #     print(f"Before {key_x=} {reason_x.base=}")
     print(f"before {wednesday_item.item_title=}")
-    print(f"before {wednesday_item._parent_road=}")
+    print(f"before {wednesday_item.parent_road=}")
     sue_bud.edit_item_title(old_road=old_weekday_road, new_item_title=new_weekday_str)
     # for key_x, reason_x in casa_item.reasonunits.items():
     #     print(f"after {key_x=} {reason_x.base=}")
     print(f"after  {wednesday_item.item_title=}")
-    print(f"after  {wednesday_item._parent_road=}")
+    print(f"after  {wednesday_item.parent_road=}")
 
     # THEN
     assert casa_item.reasonunits.get(new_weekday_road) is not None

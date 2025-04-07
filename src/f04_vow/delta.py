@@ -325,7 +325,7 @@ class BudDelta:
         for insert_item_road in insert_item_roads:
             insert_itemunit = after_bud.get_item_obj(insert_item_road)
             x_budatom = budatom_shop("bud_itemunit", atom_insert())
-            x_budatom.set_jkey("parent_road", insert_itemunit._parent_road)
+            x_budatom.set_jkey("parent_road", insert_itemunit.parent_road)
             x_budatom.set_jkey("item_title", insert_itemunit.item_title)
             x_budatom.set_jvalue("addin", insert_itemunit.addin)
             x_budatom.set_jvalue("begin", insert_itemunit.begin)
@@ -366,7 +366,7 @@ class BudDelta:
             before_itemunit = before_bud.get_item_obj(item_road)
             if jvalues_different("bud_itemunit", before_itemunit, after_itemunit):
                 x_budatom = budatom_shop("bud_itemunit", atom_update())
-                x_budatom.set_jkey("parent_road", after_itemunit._parent_road)
+                x_budatom.set_jkey("parent_road", after_itemunit.parent_road)
                 x_budatom.set_jkey("item_title", after_itemunit.item_title)
                 if before_itemunit.addin != after_itemunit.addin:
                     x_budatom.set_jvalue("addin", after_itemunit.addin)

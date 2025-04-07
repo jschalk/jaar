@@ -187,7 +187,7 @@ def test_ItemUnit_get_obj_key_ReturnsObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(item_title=ball_str, _parent_road=round_road)
+    ball_item = itemunit_shop(item_title=ball_str, parent_road=round_road)
 
     # THEN
     assert ball_item.get_obj_key() == ball_str
@@ -201,7 +201,7 @@ def test_ItemUnit_get_road_ReturnsObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(ball_str, _parent_road=round_road, _bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
 
     # THEN
     ball_road = create_road(round_road, ball_str, bridge=slash_str)
@@ -214,15 +214,15 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     slash_str = "/"
     round_road = create_road(root_title(), round_str, bridge=slash_str)
     ball_str = "ball"
-    ball_item = itemunit_shop(ball_str, _parent_road=round_road, _bridge=slash_str)
-    assert ball_item._parent_road == round_road
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
+    assert ball_item.parent_road == round_road
 
     # WHEN
     sports_road = create_road(root_title(), "sports", bridge=slash_str)
     ball_item.set_parent_road(parent_road=sports_road)
 
     # THEN
-    assert ball_item._parent_road == sports_road
+    assert ball_item.parent_road == sports_road
 
 
 def test_ItemUnit_clear_descendant_pledge_count_ClearsCorrectly():

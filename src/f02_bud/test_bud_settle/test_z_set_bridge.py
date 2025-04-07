@@ -56,9 +56,9 @@ def test_bud_set_fisc_title_CorrectlySetsAttr():
     assert yao_bud.owner_name == yao_str
     assert yao_bud.itemroot.item_title == yao_bud.fisc_title
     casa_item = yao_bud.get_item_obj(old_casa_road)
-    assert casa_item._parent_road == yao_bud.fisc_title
+    assert casa_item.parent_road == yao_bud.fisc_title
     swim_item = yao_bud.get_item_obj(old_swim_road)
-    assert swim_item._parent_road == old_casa_road
+    assert swim_item.parent_road == old_casa_road
     assert yao_bud.fisc_title == yao_bud.fisc_title
 
     # WHEN
@@ -72,9 +72,9 @@ def test_bud_set_fisc_title_CorrectlySetsAttr():
     assert yao_bud.fisc_title == x_fisc_title
     assert yao_bud.itemroot.item_title == x_fisc_title
     casa_item = yao_bud.get_item_obj(new_casa_road)
-    assert casa_item._parent_road == x_fisc_title
+    assert casa_item.parent_road == x_fisc_title
     swim_item = yao_bud.get_item_obj(new_swim_road)
-    assert swim_item._parent_road == new_casa_road
+    assert swim_item.parent_road == new_casa_road
 
 
 def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_title():
@@ -113,9 +113,9 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
     assert zia_bud.bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
     # print(f"{zia_bud.fisc_title=} {zia_bud.itemroot.item_title=} {casa_road=}")
-    # print(f"{cook_item._parent_road=} {cook_item.item_title=}")
+    # print(f"{cook_item.parent_road=} {cook_item.item_title=}")
     # semicolon_casa_item = zia_bud.get_item_obj(semicolon_casa_road)
-    # print(f"{semicolon_casa_item._parent_road=} {semicolon_casa_item.item_title=}")
+    # print(f"{semicolon_casa_item.parent_road=} {semicolon_casa_item.item_title=}")
     assert cook_item.get_road() == semicolon_cook_road
 
     # WHEN

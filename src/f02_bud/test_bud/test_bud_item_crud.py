@@ -248,7 +248,7 @@ def test_BudUnit_del_item_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_item_obj(new_sunday_road)
     new_sunday_item = sue_bud.get_item_obj(new_sunday_road)
-    assert new_sunday_item._parent_road == sue_bud.fisc_title
+    assert new_sunday_item.parent_road == sue_bud.fisc_title
 
 
 def test_BudUnit_del_item_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -891,9 +891,9 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit.fisc_title
-    week_item._parent_road = bob_budunit.fisc_title
-    wed_item._parent_road = week_road
+    casa_item.parent_road = bob_budunit.fisc_title
+    week_item.parent_road = bob_budunit.fisc_title
+    wed_item.parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
     bob_budunit.set_item(wed_item, week_road)
@@ -948,9 +948,9 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit.fisc_title
-    week_item._parent_road = bob_budunit.fisc_title
-    wed_item._parent_road = week_road
+    casa_item.parent_road = bob_budunit.fisc_title
+    week_item.parent_road = bob_budunit.fisc_title
+    wed_item.parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
     bob_budunit.set_item(wed_item, week_road)

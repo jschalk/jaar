@@ -127,7 +127,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_road = create_road(root_title(), casa_str)
     x_problem_bool = True
     casa_item = itemunit_shop(
-        _parent_road=casa_road,
+        parent_road=casa_road,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,

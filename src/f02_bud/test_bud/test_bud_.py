@@ -125,7 +125,7 @@ def test_BudUnit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.itemroot._level == 0
     assert x_bud.itemroot._bud_fisc_title == x_bud.fisc_title
     assert x_bud.itemroot._bridge == x_bud.bridge
-    assert x_bud.itemroot._parent_road == ""
+    assert x_bud.itemroot.parent_road == ""
 
 
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():

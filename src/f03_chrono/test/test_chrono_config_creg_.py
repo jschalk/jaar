@@ -620,7 +620,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     clean_road = sue_bud.make_l1_road(clean_str)
     sweep_str = "sweep"
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
-    sweep_item = itemunit_shop(sweep_str, _parent_road=clean_road)
+    sweep_item = itemunit_shop(sweep_str, parent_road=clean_road)
     print(f"{sweep_item.get_road()=}")
     house_str = "house"
     house_road = sue_bud.make_l1_road(house_str)
