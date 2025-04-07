@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, open_file, save_file, set_dir
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.jaar_config import default_unknown_word_if_None
-from src.f04_vow.atom_config import type_RoadUnit_str
+from src.f04_kick.atom_config import type_RoadUnit_str
 from src.f09_pidgin.pidgin import get_pidginunit_from_json
 from src.f09_pidgin.pidgin_config import pidgin_filename
 from src.f12_world.world import worldunit_shop

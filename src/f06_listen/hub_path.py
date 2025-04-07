@@ -11,8 +11,8 @@ CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
 BUDPOINT_FILENAME = "budpoint.json"
 BUDEVENT_FILENAME = "bud.json"
-EVENT_ALL_vow_FILENAME = "all_vow.json"
-EVENT_EXPRESSED_vow_FILENAME = "expressed_vow.json"
+EVENT_ALL_kick_FILENAME = "all_kick.json"
+EVENT_EXPRESSED_kick_FILENAME = "expressed_kick.json"
 
 
 def create_fisc_dir_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
@@ -174,26 +174,26 @@ def create_budevent_path(
     return create_path(owner_event_dir_path, bud_filename)
 
 
-def create_event_all_vow_path(
+def create_event_all_kick_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\all_vow.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\all_kick.json"""
     owner_event_dir_path = create_owner_event_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
-    all_vow_filename = "all_vow.json"
-    return create_path(owner_event_dir_path, all_vow_filename)
+    all_kick_filename = "all_kick.json"
+    return create_path(owner_event_dir_path, all_kick_filename)
 
 
-def create_event_expressed_vow_path(
+def create_event_expressed_kick_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName, event_int: int
 ):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\expressed_vow.json"""
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\events\\event_int\\expressed_kick.json"""
     owner_event_dir_path = create_owner_event_dir_path(
         fisc_mstr_dir, fisc_title, owner_name, event_int
     )
-    expressed_vow_filename = "expressed_vow.json"
-    return create_path(owner_event_dir_path, expressed_vow_filename)
+    expressed_kick_filename = "expressed_kick.json"
+    return create_path(owner_event_dir_path, expressed_kick_filename)
 
 
 def create_voice_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):

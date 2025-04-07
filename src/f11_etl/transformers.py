@@ -19,10 +19,10 @@ from src.f02_bud.bud import (
     get_from_json as budunit_get_from_json,
     BudUnit,
 )
-from src.f04_vow.atom import budatom_shop
-from src.f04_vow.atom_config import get_bud_dimens
-from src.f04_vow.delta import get_minimal_buddelta
-from src.f04_vow.vow import vowunit_shop, get_vowunit_from_json, vowUnit
+from src.f04_kick.atom import budatom_shop
+from src.f04_kick.atom_config import get_bud_dimens
+from src.f04_kick.delta import get_minimal_buddelta
+from src.f04_kick.kick import kickunit_shop, get_kickunit_from_json, KickUnit
 from src.f06_listen.hub_path import (
     create_voice_path,
     create_fisc_ote1_csv_path,
@@ -1013,7 +1013,7 @@ def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str
         save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
 
-def etl_event_bud_csvs_to_vow_json(fisc_mstr_dir: str):
+def etl_event_bud_csvs_to_kick_json(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1023,17 +1023,17 @@ def etl_event_bud_csvs_to_vow_json(fisc_mstr_dir: str):
             events_path = create_path(owner_path, "events")
             for event_int in get_level1_dirs(events_path):
                 event_path = create_path(events_path, event_int)
-                event_vow = vowunit_shop(
+                event_kick = kickunit_shop(
                     owner_name=owner_name,
                     face_name=None,
                     fisc_title=fisc_title,
                     event_int=event_int,
                 )
-                add_budatoms_from_csv(event_vow, event_path)
-                save_file(event_path, "all_vow.json", event_vow.get_json())
+                add_budatoms_from_csv(event_kick, event_path)
+                save_file(event_path, "all_kick.json", event_kick.get_json())
 
 
-def add_budatoms_from_csv(owner_vow: vowUnit, owner_path: str):
+def add_budatoms_from_csv(owner_kick: KickUnit, owner_path: str):
     idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
@@ -1055,7 +1055,7 @@ def add_budatoms_from_csv(owner_vow: vowUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_vow._buddelta.set_budatom(x_atom)
+                owner_kick._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -1070,10 +1070,10 @@ def add_budatoms_from_csv(owner_vow: vowUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_vow._buddelta.set_budatom(x_atom)
+                owner_kick._buddelta.set_budatom(x_atom)
 
 
-def etl_event_vow_json_to_event_inherited_budunits(fisc_mstr_dir: str):
+def etl_event_kick_json_to_event_inherited_budunits(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1092,14 +1092,14 @@ def etl_event_vow_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 event_dir = create_owner_event_dir_path(
                     fisc_mstr_dir, fisc_title, owner_name, event_int
                 )
-                vow_path = create_path(event_dir, "all_vow.json")
-                event_vow = get_vowunit_from_json(open_file(vow_path))
-                sift_delta = get_minimal_buddelta(event_vow._buddelta, prev_bud)
-                curr_bud = event_vow.get_edited_bud(prev_bud)
+                kick_path = create_path(event_dir, "all_kick.json")
+                event_kick = get_kickunit_from_json(open_file(kick_path))
+                sift_delta = get_minimal_buddelta(event_kick._buddelta, prev_bud)
+                curr_bud = event_kick.get_edited_bud(prev_bud)
                 save_file(budevent_path, None, curr_bud.get_json())
-                expressed_vow = copy_deepcopy(event_vow)
-                expressed_vow.set_buddelta(sift_delta)
-                save_file(event_dir, "expressed_vow.json", expressed_vow.get_json())
+                expressed_kick = copy_deepcopy(event_kick)
+                expressed_kick.set_buddelta(sift_delta)
+                save_file(event_dir, "expressed_kick.json", expressed_kick.get_json())
                 prev_event_int = event_int
 
 

@@ -1,7 +1,7 @@
 from src.f00_instrument.file import open_json, save_json, count_dirs_files, save_file
 from src.f01_road.deal import quota_str, DEFAULT_CELLDEPTH
 from src.f02_bud.bud import budunit_shop
-from src.f04_vow.atom_config import event_int_str, penny_str
+from src.f04_kick.atom_config import event_int_str, penny_str
 from src.f06_listen.cell import celldepth_str, deal_owner_name_str, ancestors_str
 from src.f06_listen.hub_path import (
     CELL_MANDATE_FILENAME,

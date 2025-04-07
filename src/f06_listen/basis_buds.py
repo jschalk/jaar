@@ -40,7 +40,7 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
 
 def get_default_forecast_bud(voice: BudUnit) -> BudUnit:
     default_forecast_bud = create_listen_basis(voice)
-    default_forecast_bud.last_vow_id = voice.last_vow_id
+    default_forecast_bud.last_kick_id = voice.last_kick_id
     default_forecast_bud.credor_respect = None
     default_forecast_bud.debtor_respect = None
     return default_forecast_bud

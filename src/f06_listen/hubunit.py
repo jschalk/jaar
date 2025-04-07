@@ -15,10 +15,10 @@ from src.f01_road.jaar_config import (
     grades_folder,
     get_rootpart_of_keep_dir,
     treasury_filename,
-    get_vows_folder,
-    get_init_vow_id_if_None,
+    get_kicks_folder,
+    get_init_kick_id_if_None,
     get_json_filename,
-    init_vow_id,
+    init_kick_id,
 )
 from src.f01_road.finance import (
     default_fund_coin_if_None,
@@ -51,13 +51,13 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
-from src.f04_vow.atom import (
+from src.f04_kick.atom import (
     BudAtom,
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,
 )
 from src.f06_listen.basis_buds import get_default_forecast_bud
-from src.f04_vow.vow import vowUnit, vowunit_shop, create_vowunit_from_files
+from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -72,11 +72,11 @@ class Invalid_forecast_Exception(Exception):
     pass
 
 
-class SavevowFileException(Exception):
+class SavekickFileException(Exception):
     pass
 
 
-class vowFileMissingException(Exception):
+class kickFileMissingException(Exception):
     pass
 
 
@@ -125,7 +125,7 @@ class HubUnit:
     _owner_dir: str = None
     _keeps_dir: str = None
     _atoms_dir: str = None
-    _vows_dir: str = None
+    _kicks_dir: str = None
     _voice_dir: str = None
     _forecast_dir: str = None
     _deals_dir: str = None
@@ -141,7 +141,7 @@ class HubUnit:
         self._owner_dir = f_path(self._owners_dir, self.owner_name)
         self._keeps_dir = f_path(self._owner_dir, "keeps")
         self._atoms_dir = f_path(self._owner_dir, "atoms")
-        self._vows_dir = f_path(self._owner_dir, get_vows_folder())
+        self._kicks_dir = f_path(self._owner_dir, get_kicks_folder())
         self._voice_dir = f_path(self._owner_dir, "voice")
         self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._deals_dir = f_path(self._owner_dir, "deals")
@@ -197,7 +197,7 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_budunit.last_vow_id = init_vow_id()
+        x_budunit.last_kick_id = init_kick_id()
         return x_budunit
 
     def delete_voice_file(self):
@@ -206,7 +206,7 @@ class HubUnit:
     def open_file_forecast(self) -> str:
         return open_file(self._forecast_dir, self._forecast_filename)
 
-    # vow methods
+    # kick methods
     def get_max_atom_file_number(self) -> int:
         return get_max_file_number(self._atoms_dir)
 
@@ -251,145 +251,145 @@ class HubUnit:
                 modify_bud_with_budatom(x_bud, x_atom)
         return x_bud
 
-    def get_max_vow_file_number(self) -> int:
-        return get_max_file_number(self._vows_dir)
+    def get_max_kick_file_number(self) -> int:
+        return get_max_file_number(self._kicks_dir)
 
-    def _get_next_vow_file_number(self) -> int:
-        max_file_number = self.get_max_vow_file_number()
-        init_vow_id = get_init_vow_id_if_None()
-        return init_vow_id if max_file_number is None else max_file_number + 1
+    def _get_next_kick_file_number(self) -> int:
+        max_file_number = self.get_max_kick_file_number()
+        init_kick_id = get_init_kick_id_if_None()
+        return init_kick_id if max_file_number is None else max_file_number + 1
 
-    def vow_filename(self, vow_id: int) -> str:
-        return get_json_filename(vow_id)
+    def kick_filename(self, kick_id: int) -> str:
+        return get_json_filename(kick_id)
 
-    def vow_file_path(self, vow_id: int) -> bool:
-        vow_filename = self.vow_filename(vow_id)
-        return f_path(self._vows_dir, vow_filename)
+    def kick_file_path(self, kick_id: int) -> bool:
+        kick_filename = self.kick_filename(kick_id)
+        return f_path(self._kicks_dir, kick_filename)
 
-    def vow_file_exists(self, vow_id: int) -> bool:
-        return os_path_exists(self.vow_file_path(vow_id))
+    def kick_file_exists(self, kick_id: int) -> bool:
+        return os_path_exists(self.kick_file_path(kick_id))
 
-    def validate_vowunit(self, x_vowunit: vowUnit) -> vowUnit:
-        if x_vowunit._atoms_dir != self._atoms_dir:
-            x_vowunit._atoms_dir = self._atoms_dir
-        if x_vowunit._vows_dir != self._vows_dir:
-            x_vowunit._vows_dir = self._vows_dir
-        if x_vowunit._vow_id != self._get_next_vow_file_number():
-            x_vowunit._vow_id = self._get_next_vow_file_number()
-        if x_vowunit.owner_name != self.owner_name:
-            x_vowunit.owner_name = self.owner_name
-        if x_vowunit._delta_start != self._get_next_atom_file_number():
-            x_vowunit._delta_start = self._get_next_atom_file_number()
-        return x_vowunit
+    def validate_kickunit(self, x_kickunit: KickUnit) -> KickUnit:
+        if x_kickunit._atoms_dir != self._atoms_dir:
+            x_kickunit._atoms_dir = self._atoms_dir
+        if x_kickunit._kicks_dir != self._kicks_dir:
+            x_kickunit._kicks_dir = self._kicks_dir
+        if x_kickunit._kick_id != self._get_next_kick_file_number():
+            x_kickunit._kick_id = self._get_next_kick_file_number()
+        if x_kickunit.owner_name != self.owner_name:
+            x_kickunit.owner_name = self.owner_name
+        if x_kickunit._delta_start != self._get_next_atom_file_number():
+            x_kickunit._delta_start = self._get_next_atom_file_number()
+        return x_kickunit
 
-    def save_vow_file(
+    def save_kick_file(
         self,
-        x_vow: vowUnit,
+        x_kick: KickUnit,
         replace: bool = True,
         correct_invalid_attrs: bool = True,
-    ) -> vowUnit:
+    ) -> KickUnit:
         if correct_invalid_attrs:
-            x_vow = self.validate_vowunit(x_vow)
+            x_kick = self.validate_kickunit(x_kick)
 
-        if x_vow._atoms_dir != self._atoms_dir:
-            raise SavevowFileException(
-                f"vowUnit file cannot be saved because vowunit._atoms_dir is incorrect: {x_vow._atoms_dir}. It must be {self._atoms_dir}."
+        if x_kick._atoms_dir != self._atoms_dir:
+            raise SavekickFileException(
+                f"KickUnit file cannot be saved because kickunit._atoms_dir is incorrect: {x_kick._atoms_dir}. It must be {self._atoms_dir}."
             )
-        if x_vow._vows_dir != self._vows_dir:
-            raise SavevowFileException(
-                f"vowUnit file cannot be saved because vowunit._vows_dir is incorrect: {x_vow._vows_dir}. It must be {self._vows_dir}."
+        if x_kick._kicks_dir != self._kicks_dir:
+            raise SavekickFileException(
+                f"KickUnit file cannot be saved because kickunit._kicks_dir is incorrect: {x_kick._kicks_dir}. It must be {self._kicks_dir}."
             )
-        if x_vow.owner_name != self.owner_name:
-            raise SavevowFileException(
-                f"vowUnit file cannot be saved because vowunit.owner_name is incorrect: {x_vow.owner_name}. It must be {self.owner_name}."
+        if x_kick.owner_name != self.owner_name:
+            raise SavekickFileException(
+                f"KickUnit file cannot be saved because kickunit.owner_name is incorrect: {x_kick.owner_name}. It must be {self.owner_name}."
             )
-        vow_filename = self.vow_filename(x_vow._vow_id)
-        if not replace and self.vow_file_exists(x_vow._vow_id):
-            raise SavevowFileException(
-                f"vowUnit file {vow_filename} exists and cannot be saved over."
+        kick_filename = self.kick_filename(x_kick._kick_id)
+        if not replace and self.kick_file_exists(x_kick._kick_id):
+            raise SavekickFileException(
+                f"KickUnit file {kick_filename} exists and cannot be saved over."
             )
-        x_vow.save_files()
-        return x_vow
+        x_kick.save_files()
+        return x_kick
 
-    def _del_vow_file(self, vow_id: int):
-        delete_dir(self.vow_file_path(vow_id))
+    def _del_kick_file(self, kick_id: int):
+        delete_dir(self.kick_file_path(kick_id))
 
-    def _default_vowunit(self) -> vowUnit:
-        return vowunit_shop(
+    def _default_kickunit(self) -> KickUnit:
+        return kickunit_shop(
             owner_name=self.owner_name,
-            _vow_id=self._get_next_vow_file_number(),
+            _kick_id=self._get_next_kick_file_number(),
             _atoms_dir=self._atoms_dir,
-            _vows_dir=self._vows_dir,
+            _kicks_dir=self._kicks_dir,
         )
 
-    def create_save_vow_file(self, before_bud: BudUnit, after_bud: BudUnit):
-        new_vowunit = self._default_vowunit()
-        new_buddelta = new_vowunit._buddelta
+    def create_save_kick_file(self, before_bud: BudUnit, after_bud: BudUnit):
+        new_kickunit = self._default_kickunit()
+        new_buddelta = new_kickunit._buddelta
         new_buddelta.add_all_different_budatoms(before_bud, after_bud)
-        self.save_vow_file(new_vowunit)
+        self.save_kick_file(new_kickunit)
 
-    def get_vowunit(self, vow_id: int) -> vowUnit:
-        if self.vow_file_exists(vow_id) is False:
-            raise vowFileMissingException(
-                f"vowUnit file_number {vow_id} does not exist."
+    def get_kickunit(self, kick_id: int) -> KickUnit:
+        if self.kick_file_exists(kick_id) is False:
+            raise kickFileMissingException(
+                f"KickUnit file_number {kick_id} does not exist."
             )
-        x_vows_dir = self._vows_dir
+        x_kicks_dir = self._kicks_dir
         x_atoms_dir = self._atoms_dir
-        return create_vowunit_from_files(x_vows_dir, vow_id, x_atoms_dir)
+        return create_kickunit_from_files(x_kicks_dir, kick_id, x_atoms_dir)
 
-    def _merge_any_vows(self, x_bud: BudUnit) -> BudUnit:
-        vows_dir = self._vows_dir
-        vow_ints = get_integer_filenames(vows_dir, x_bud.last_vow_id)
-        if len(vow_ints) == 0:
+    def _merge_any_kicks(self, x_bud: BudUnit) -> BudUnit:
+        kicks_dir = self._kicks_dir
+        kick_ints = get_integer_filenames(kicks_dir, x_bud.last_kick_id)
+        if len(kick_ints) == 0:
             return copy_deepcopy(x_bud)
 
-        for vow_int in vow_ints:
-            x_vow = self.get_vowunit(vow_int)
-            new_bud = x_vow._buddelta.get_edited_bud(x_bud)
+        for kick_int in kick_ints:
+            x_kick = self.get_kickunit(kick_int)
+            new_bud = x_kick._buddelta.get_edited_bud(x_bud)
         return new_bud
 
-    def _create_initial_vow_files_from_default(self):
-        x_vowunit = vowunit_shop(
+    def _create_initial_kick_files_from_default(self):
+        x_kickunit = kickunit_shop(
             owner_name=self.owner_name,
-            _vow_id=get_init_vow_id_if_None(),
-            _vows_dir=self._vows_dir,
+            _kick_id=get_init_kick_id_if_None(),
+            _kicks_dir=self._kicks_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_vowunit._buddelta.add_all_different_budatoms(
+        x_kickunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.default_voice_bud(),
         )
-        x_vowunit.save_files()
+        x_kickunit.save_files()
 
-    def _create_voice_from_vows(self):
-        x_bud = self._merge_any_vows(self.default_voice_bud())
+    def _create_voice_from_kicks(self):
+        x_bud = self._merge_any_kicks(self.default_voice_bud())
         self.save_voice_bud(x_bud)
 
-    def _create_initial_vow_and_voice_files(self):
-        self._create_initial_vow_files_from_default()
-        self._create_voice_from_vows()
+    def _create_initial_kick_and_voice_files(self):
+        self._create_initial_kick_files_from_default()
+        self._create_voice_from_kicks()
 
-    def _create_initial_vow_files_from_voice(self):
-        x_vowunit = self._default_vowunit()
-        x_vowunit._buddelta.add_all_different_budatoms(
+    def _create_initial_kick_files_from_voice(self):
+        x_kickunit = self._default_kickunit()
+        x_kickunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
             after_bud=self.get_voice_bud(),
         )
-        x_vowunit.save_files()
+        x_kickunit.save_files()
 
-    def initialize_vow_voice_files(self):
+    def initialize_kick_voice_files(self):
         x_voice_file_exists = self.voice_file_exists()
-        vow_file_exists = self.vow_file_exists(init_vow_id())
-        if x_voice_file_exists is False and vow_file_exists is False:
-            self._create_initial_vow_and_voice_files()
-        elif x_voice_file_exists is False and vow_file_exists:
-            self._create_voice_from_vows()
-        elif x_voice_file_exists and vow_file_exists is False:
-            self._create_initial_vow_files_from_voice()
+        kick_file_exists = self.kick_file_exists(init_kick_id())
+        if x_voice_file_exists is False and kick_file_exists is False:
+            self._create_initial_kick_and_voice_files()
+        elif x_voice_file_exists is False and kick_file_exists:
+            self._create_voice_from_kicks()
+        elif x_voice_file_exists and kick_file_exists is False:
+            self._create_initial_kick_files_from_voice()
 
-    def append_vows_to_voice_file(self):
+    def append_kicks_to_voice_file(self):
         voice_bud = self.get_voice_bud()
-        voice_bud = self._merge_any_vows(voice_bud)
+        voice_bud = self._merge_any_kicks(voice_bud)
         self.save_voice_bud(voice_bud)
         return self.get_voice_bud()
 

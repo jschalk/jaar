@@ -451,7 +451,7 @@ def test_create_table_from_csv_ChangesDBState(
     assert columns == expected_columns
 
 
-def test_create_idea_table_from_csv_DoesNothinvowableExists(
+def test_create_idea_table_from_csv_DoesNothinkickableExists(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH

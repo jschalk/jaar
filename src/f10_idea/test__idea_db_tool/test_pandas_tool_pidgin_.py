@@ -1,6 +1,6 @@
 from src.f01_road.road import create_road
 from src.f01_road.deal import fisc_title_str
-from src.f04_vow.atom_config import (
+from src.f04_kick.atom_config import (
     acct_name_str,
     credit_belief_str,
     base_str,

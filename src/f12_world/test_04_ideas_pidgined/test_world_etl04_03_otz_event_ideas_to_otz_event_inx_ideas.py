@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_vow.atom_config import (
+from src.f04_kick.atom_config import (
     acct_name_str,
     face_name_str,
     event_int_str,

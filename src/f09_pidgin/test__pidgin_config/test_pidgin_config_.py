@@ -1,5 +1,5 @@
 from src.f00_instrument.file import create_path
-from src.f04_vow.atom_config import (
+from src.f04_kick.atom_config import (
     jkeys_str,
     jvalues_str,
     atom_update,

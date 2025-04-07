@@ -1,6 +1,6 @@
 from src.f00_instrument.file import open_json, save_json, create_path
 from src.f01_road.deal import owner_name_str, quota_str, celldepth_str
-from src.f04_vow.atom_config import event_int_str, penny_str
+from src.f04_kick.atom_config import event_int_str, penny_str
 from src.f06_listen.cell import cellunit_shop
 from src.f06_listen.hub_path import (
     create_cell_dir_path as cell_dir,

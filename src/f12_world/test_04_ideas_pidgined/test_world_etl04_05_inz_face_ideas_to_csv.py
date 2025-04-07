@@ -1,6 +1,6 @@
 from src.f00_instrument.file import create_path, open_file
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_vow.atom_config import acct_name_str, face_name_str, event_int_str
+from src.f04_kick.atom_config import acct_name_str, face_name_str, event_int_str
 
 from src.f10_idea.idea_db_tool import upsert_sheet
 from src.f12_world.world import worldunit_shop

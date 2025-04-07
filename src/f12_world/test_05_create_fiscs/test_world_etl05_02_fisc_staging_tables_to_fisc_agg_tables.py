@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, save_file
 from src.f00_instrument.db_toolbox import db_table_exists
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_vow.atom_config import face_name_str, acct_name_str, event_int_str
+from src.f04_kick.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f11_etl.fisc_etl_tool import FiscPrimeObjsRef
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup

@@ -15,7 +15,7 @@ from src.f02_bud.bud_tool import (
     bud_groupunit_str,
 )
 
-from src.f04_vow.atom_config import (
+from src.f04_kick.atom_config import (
     get_atom_config_dict,
     acct_name_str,
     addin_str,

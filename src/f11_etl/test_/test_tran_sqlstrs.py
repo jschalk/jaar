@@ -10,7 +10,7 @@ from src.f00_instrument.db_toolbox import (
 )
 from src.f01_road.deal import fisc_title_str, owner_name_str
 from src.f02_bud.bud_tool import budunit_str
-from src.f04_vow.atom_config import (
+from src.f04_kick.atom_config import (
     event_int_str,
     face_name_str,
     get_bud_dimens,

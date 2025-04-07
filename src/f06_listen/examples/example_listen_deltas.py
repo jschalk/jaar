@@ -1,15 +1,15 @@
 from src.f01_road.jaar_config import get_fisc_title_if_None
 from src.f01_road.road import FiscTitle
 from src.f02_bud.bud_tool import bud_acctunit_str, bud_itemunit_str
-from src.f04_vow.atom_config import acct_name_str, parent_road_str, item_title_str
-from src.f04_vow.atom import (
+from src.f04_kick.atom_config import acct_name_str, parent_road_str, item_title_str
+from src.f04_kick.atom import (
     BudAtom,
     atom_delete,
     atom_update,
     atom_insert,
     budatom_shop,
 )
-from src.f04_vow.delta import BudDelta, buddelta_shop
+from src.f04_kick.delta import BudDelta, buddelta_shop
 
 
 def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> BudAtom:
