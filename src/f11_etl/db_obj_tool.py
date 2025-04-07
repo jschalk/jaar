@@ -501,9 +501,9 @@ VALUES (
 """
 
 
-# def insert_forecast_budmemb(cursor: sqlite3_Cursor, x_membership: MemberShip):
-#     insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_membership.__dict__)
-#     cursor.execute(insert_sqlstr)
+def insert_forecast_budmemb(cursor: sqlite3_Cursor, x_membership: MemberShip):
+    insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_membership.__dict__)
+    cursor.execute(insert_sqlstr)
 
 
 # def insert_forecast_budacct(cursor: sqlite3_Cursor, x_acct: AcctUnit):
