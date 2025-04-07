@@ -55,7 +55,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit._root is None
-    assert x_itemunit._bud_fisc_title is None
+    assert x_itemunit.fisc_title is None
     assert x_itemunit._healerlink_ratio is None
 
 
@@ -68,7 +68,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
     assert x_itemunit.item_title is None
-    assert x_itemunit._bud_fisc_title == root_title()
+    assert x_itemunit.fisc_title == root_title()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None

@@ -20,7 +20,7 @@ def test_BudUnit_set_fisc_title_CorrectlySetsAttr():
     assert sue_bud.fisc_title == x_fisc_title
 
 
-def test_BudUnit_set_item_CorrectlySets_bud_fisc_title_AND_fund_coin():
+def test_BudUnit_set_item_CorrectlySetsfisc_title_AND_fund_coin():
     # ESTABLISH'
     x_fund_coin = 500
     sue_bud = get_budunit_with_4_levels()
@@ -39,7 +39,7 @@ def test_BudUnit_set_item_CorrectlySets_bud_fisc_title_AND_fund_coin():
 
     # THEN
     cookery_item = sue_bud.get_item_obj(cookery_road)
-    assert cookery_item._bud_fisc_title == bud_fisc_title
+    assert cookery_item.fisc_title == bud_fisc_title
     assert cookery_item._fund_coin == x_fund_coin
 
 

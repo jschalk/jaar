@@ -212,7 +212,7 @@ class BudUnit:
         old_fisc_title = copy_deepcopy(self.fisc_title)
         self.settle_bud()
         for item_obj in self._item_dict.values():
-            item_obj._bud_fisc_title = fisc_title
+            item_obj.fisc_title = fisc_title
         self.fisc_title = fisc_title
         self.edit_item_title(old_road=old_fisc_title, new_item_title=self.fisc_title)
         self.settle_bud()
@@ -612,8 +612,8 @@ class BudUnit:
             raise InvalidBudException(exception_str)
 
         item_kid._bridge = self.bridge
-        if item_kid._bud_fisc_title != self.fisc_title:
-            item_kid._bud_fisc_title = self.fisc_title
+        if item_kid.fisc_title != self.fisc_title:
+            item_kid.fisc_title = self.fisc_title
         if item_kid._fund_coin != self.fund_coin:
             item_kid._fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_tags:
@@ -1438,7 +1438,7 @@ def budunit_shop(
         _root=True,
         _uid=1,
         _level=0,
-        _bud_fisc_title=x_bud.fisc_title,
+        fisc_title=x_bud.fisc_title,
         _bridge=x_bud.bridge,
         _fund_coin=x_bud.fund_coin,
         parent_road="",
@@ -1506,7 +1506,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         _bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
-        _bud_fisc_title=x_bud.fisc_title,
+        fisc_title=x_bud.fisc_title,
         _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)

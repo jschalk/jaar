@@ -200,7 +200,7 @@ class ItemUnit:
     parent_road: RoadUnit = None
     _root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_fisc_title: FiscTitle = None
+    fisc_title: FiscTitle = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupLabel, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -480,13 +480,13 @@ class ItemUnit:
         if (
             self._root
             and item_title is not None
-            and item_title != self._bud_fisc_title
-            and self._bud_fisc_title is not None
+            and item_title != self.fisc_title
+            and self.fisc_title is not None
         ):
             raise Item_root_TitleNotEmptyException(
-                f"Cannot set itemroot to string different than '{self._bud_fisc_title}'"
+                f"Cannot set itemroot to string different than '{self.fisc_title}'"
             )
-        elif self._root and self._bud_fisc_title is None:
+        elif self._root and self.fisc_title is None:
             self.item_title = root_title()
         # elif item_title is not None:
         else:
@@ -978,7 +978,7 @@ def itemunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     _root: bool = None,
-    _bud_fisc_title: FiscTitle = None,
+    fisc_title: FiscTitle = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -996,7 +996,7 @@ def itemunit_shop(
     _bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_fisc_title = root_title() if _bud_fisc_title is None else _bud_fisc_title
+    fisc_title = root_title() if fisc_title is None else fisc_title
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
@@ -1027,7 +1027,7 @@ def itemunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         _root=get_False_if_None(_root),
-        _bud_fisc_title=_bud_fisc_title,
+        fisc_title=fisc_title,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1045,7 +1045,7 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid._root:
-        x_itemkid.set_item_title(item_title=_bud_fisc_title)
+        x_itemkid.set_item_title(item_title=fisc_title)
     else:
         x_itemkid.set_item_title(item_title=item_title)
     x_itemkid.set_teamunit_empty_if_None()

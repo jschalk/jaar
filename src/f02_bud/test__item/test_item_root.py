@@ -29,7 +29,7 @@ def test_ItemUnit_set_item_title_get_default_fisc_title_DoesNotRaisesError():
 def test_ItemUnit_set_item_title_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_fisc_title=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, fisc_title=el_paso_str)
 
     # WHEN
     x_itemroot.set_item_title(item_title=el_paso_str)
@@ -41,7 +41,7 @@ def test_ItemUnit_set_item_title_DoesNotRaisesError():
 def test_ItemUnit_set_item_title_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_itemroot = itemunit_shop(_root=True, _bud_fisc_title=el_paso_str)
+    x_itemroot = itemunit_shop(_root=True, fisc_title=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -53,7 +53,7 @@ def test_ItemUnit_set_item_title_DoesRaisesError():
     )
 
 
-def test_ItemUnit_set_item_title_RaisesErrorWhen_bud_fisc_title_IsNone():
+def test_ItemUnit_set_item_title_RaisesErrorWhenfisc_title_IsNone():
     # ESTABLISH
     x_itemroot = itemunit_shop(_root=True)
 

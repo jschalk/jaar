@@ -137,6 +137,6 @@ def test_WorldUnit_fisc_voice_to_fisc_forecast_SetsFiles_Scenario1(
     assert generate_bob_items == expected_bob_items
     expected_clean_item = expected_bob_forecast.get_item_obj(clean_road)
     gen_clean_item = gen_bob_forecast.get_item_obj(clean_road)
-    assert gen_clean_item._bud_fisc_title == expected_clean_item._bud_fisc_title
+    assert gen_clean_item.fisc_title == expected_clean_item.fisc_title
     assert gen_clean_item == expected_clean_item
     assert gen_bob_forecast.get_item_obj(clean_road) == expected_clean_item

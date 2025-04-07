@@ -123,7 +123,7 @@ def test_BudUnit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.itemroot._root
     assert x_bud.itemroot._uid == 1
     assert x_bud.itemroot._level == 0
-    assert x_bud.itemroot._bud_fisc_title == x_bud.fisc_title
+    assert x_bud.itemroot.fisc_title == x_bud.fisc_title
     assert x_bud.itemroot._bridge == x_bud.bridge
     assert x_bud.itemroot.parent_road == ""
 

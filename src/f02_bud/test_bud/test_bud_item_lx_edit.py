@@ -71,10 +71,10 @@ def test_BudUnit_edit_item_title_RaisesErrorForLevel0When_fisc_title_IsDifferent
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=casa_road)
     sun_str = "sun"
     yao_bud.fisc_title = sun_str
-    yao_bud.itemroot._bud_fisc_title = sun_str
+    yao_bud.itemroot.fisc_title = sun_str
     assert yao_bud.owner_name == yao_str
     assert yao_bud.fisc_title == sun_str
-    assert yao_bud.itemroot._bud_fisc_title == sun_str
+    assert yao_bud.itemroot.fisc_title == sun_str
     assert yao_bud.itemroot.item_title == root_title()
     casa_item = yao_bud.get_item_obj(casa_road)
     assert casa_item.parent_road == root_title()
