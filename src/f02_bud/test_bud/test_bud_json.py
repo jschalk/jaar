@@ -41,8 +41,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     yao_bud.set_credor_respect(x_credor_respect)
     yao_bud.set_debtor_respect(x_debtor_respect)
     override_str = "override"
-    x_last_vow_id = 77
-    yao_bud.set_last_vow_id(x_last_vow_id)
+    x_last_kick_id = 77
+    yao_bud.set_last_kick_id(x_last_kick_id)
 
     # WHEN
     bud_dict = yao_bud.get_dict()
@@ -60,7 +60,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["bridge"] == yao_bud.bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
-    assert bud_dict["last_vow_id"] == yao_bud.last_vow_id
+    assert bud_dict["last_kick_id"] == yao_bud.last_kick_id
     assert len(bud_dict["accts"]) == len(yao_bud.accts)
     assert len(bud_dict["accts"]) != 12
     assert bud_dict.get("_groups") is None
@@ -68,8 +68,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_itemroot = yao_bud.itemroot
     itemroot_dict = bud_dict["itemroot"]
     _kids = "_kids"
-    assert x_itemroot._item_title == yao_bud.fisc_title
-    assert itemroot_dict["_item_title"] == x_itemroot._item_title
+    assert x_itemroot.item_title == yao_bud.fisc_title
+    assert itemroot_dict["item_title"] == x_itemroot.item_title
     assert itemroot_dict["mass"] == x_itemroot.mass
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
 
@@ -204,7 +204,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     #     bud_dict["_debtor_respect"]
     # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
-        bud_dict["last_vow_id"]
+        bud_dict["last_kick_id"]
 
     x_itemroot = zia_bud.itemroot
     itemroot_dict = bud_dict.get("itemroot")
@@ -303,8 +303,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     zia_debtor_respect = 200
     zia_bud.set_credor_respect(zia_credor_respect)
     zia_bud.set_debtor_respect(zia_debtor_respect)
-    zia_last_vow_id = 73
-    zia_bud.set_last_vow_id(zia_last_vow_id)
+    zia_last_kick_id = 73
+    zia_bud.set_last_kick_id(zia_last_kick_id)
 
     shave_str = "shave"
     shave_road = zia_bud.make_l1_road(shave_str)
@@ -312,7 +312,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     shave_item_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_item_y1.problem_bool = True
     # print(f"{shave_road=}")
-    # print(f"{json_shave_item._item_title=} {json_shave_item._parent_road=}")
+    # print(f"{json_shave_item.item_title=} {json_shave_item.parent_road=}")
 
     sue_str = "Sue"
     zia_bud.add_acctunit(acct_name=sue_str, credit_belief=199, debtit_belief=199)
@@ -370,13 +370,13 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert json_bud.debtor_respect == zia_bud.debtor_respect
     assert json_bud.credor_respect == zia_credor_respect
     assert json_bud.debtor_respect == zia_debtor_respect
-    assert json_bud.last_vow_id == zia_bud.last_vow_id
-    assert json_bud.last_vow_id == zia_last_vow_id
+    assert json_bud.last_kick_id == zia_bud.last_kick_id
+    assert json_bud.last_kick_id == zia_last_kick_id
     # assert json_bud._groups == zia_bud._groups
 
     json_itemroot = json_bud.itemroot
-    assert json_itemroot._parent_road == ""
-    assert json_itemroot._parent_road == zia_bud.itemroot._parent_road
+    assert json_itemroot.parent_road == ""
+    assert json_itemroot.parent_road == zia_bud.itemroot.parent_road
     assert json_itemroot.reasonunits == {}
     assert json_itemroot.teamunit == zia_bud.itemroot.teamunit
     assert json_itemroot.teamunit == run_teamunit
@@ -533,8 +533,8 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_dict_of_obj.get(x3_bud.owner_name) is not None
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
-    assert ccn2_bud.itemroot._item_title == x2_bud.itemroot._item_title
-    assert ccn2_bud.itemroot._parent_road == x2_bud.itemroot._parent_road
+    assert ccn2_bud.itemroot.item_title == x2_bud.itemroot.item_title
+    assert ccn2_bud.itemroot.parent_road == x2_bud.itemroot.parent_road
     assert ccn2_bud.itemroot._fund_coin == x2_bud.itemroot._fund_coin
     shave_road = ccn2_bud.make_l1_road("shave")
     week_road = ccn2_bud.make_l1_road("weekdays")

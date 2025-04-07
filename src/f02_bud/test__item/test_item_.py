@@ -16,7 +16,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit
     assert x_itemunit._kids is None
     assert x_itemunit.mass is None
-    assert x_itemunit._item_title is None
+    assert x_itemunit.item_title is None
     assert x_itemunit._uid is None
     assert x_itemunit.reasonunits is None
     assert x_itemunit._reasonheirs is None  # calculated field
@@ -54,8 +54,8 @@ def test_ItemUnit_Exists():
     assert x_itemunit._fund_coin is None
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
-    assert x_itemunit._root is None
-    assert x_itemunit._bud_fisc_title is None
+    assert x_itemunit.root is None
+    assert x_itemunit.fisc_title is None
     assert x_itemunit._healerlink_ratio is None
 
 
@@ -67,8 +67,8 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit
     assert x_itemunit._kids == {}
     assert x_itemunit.mass == 1
-    assert x_itemunit._item_title is None
-    assert x_itemunit._bud_fisc_title == root_title()
+    assert x_itemunit.item_title is None
+    assert x_itemunit.fisc_title == root_title()
     assert x_itemunit._uid is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None
@@ -100,7 +100,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._teamheir is None
     assert x_itemunit._originunit == originunit_shop()
     assert x_itemunit._bridge == default_bridge_if_None()
-    assert x_itemunit._root is False
+    assert x_itemunit.root is False
     assert x_itemunit._all_acct_cred is None
     assert x_itemunit._all_acct_debt is None
     assert x_itemunit._healerlink_ratio == 0
@@ -158,7 +158,7 @@ def test_itemunit_shop_ReturnsObjWith_awardlinks():
 
     # WHEN
     sport_str = "sport"
-    sport_item = itemunit_shop(_item_title=sport_str, awardlinks=x_awardlinks)
+    sport_item = itemunit_shop(item_title=sport_str, awardlinks=x_awardlinks)
 
     # THEN
     assert sport_item.awardlinks == x_awardlinks
@@ -187,7 +187,7 @@ def test_ItemUnit_get_obj_key_ReturnsObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(_item_title=ball_str, _parent_road=round_road)
+    ball_item = itemunit_shop(item_title=ball_str, parent_road=round_road)
 
     # THEN
     assert ball_item.get_obj_key() == ball_str
@@ -201,7 +201,7 @@ def test_ItemUnit_get_road_ReturnsObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(ball_str, _parent_road=round_road, _bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
 
     # THEN
     ball_road = create_road(round_road, ball_str, bridge=slash_str)
@@ -214,15 +214,15 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     slash_str = "/"
     round_road = create_road(root_title(), round_str, bridge=slash_str)
     ball_str = "ball"
-    ball_item = itemunit_shop(ball_str, _parent_road=round_road, _bridge=slash_str)
-    assert ball_item._parent_road == round_road
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
+    assert ball_item.parent_road == round_road
 
     # WHEN
     sports_road = create_road(root_title(), "sports", bridge=slash_str)
     ball_item.set_parent_road(parent_road=sports_road)
 
     # THEN
-    assert ball_item._parent_road == sports_road
+    assert ball_item.parent_road == sports_road
 
 
 def test_ItemUnit_clear_descendant_pledge_count_ClearsCorrectly():

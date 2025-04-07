@@ -127,11 +127,11 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_road = create_road(root_title(), casa_str)
     x_problem_bool = True
     casa_item = itemunit_shop(
-        _parent_road=casa_road,
+        parent_road=casa_road,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
-        _item_title=casa_str,
+        item_title=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
@@ -178,7 +178,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["originunit"] == casa_item.get_originunit_dict()
     assert casa_dict["mass"] == casa_item.mass
-    assert casa_dict["_item_title"] == casa_item._item_title
+    assert casa_dict["item_title"] == casa_item.item_title
     assert casa_dict["_uid"] == casa_item._uid
     assert casa_dict["begin"] == casa_item.begin
     assert casa_dict["close"] == casa_item.close

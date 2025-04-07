@@ -54,6 +54,11 @@ def bud_item_factunit_str() -> str:
     return "bud_item_factunit"
 
 
+def bud_groupunit_str() -> str:
+    """Is not saved to raw data budunit json"""
+    return "bud_groupunit"
+
+
 def budunit_exists(x_bud: BudUnit) -> bool:
     return x_bud is not None
 

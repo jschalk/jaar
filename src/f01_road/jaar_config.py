@@ -7,23 +7,23 @@ def get_fisc_title_if_None(fisc_title: str = None):
 
 
 def get_test_fisc_mstr_dir():
-    return "src/f07_fisc/examples/fisc_mstr"
+    return "src/f08_fisc/examples/fisc_mstr"
 
 
 def get_owners_folder() -> str:
     return "owners"
 
 
-def get_vows_folder() -> str:
-    return "vows"
+def get_kicks_folder() -> str:
+    return "kicks"
 
 
-def init_vow_id() -> int:
+def init_kick_id() -> int:
     return 0
 
 
-def get_init_vow_id_if_None(x_vow_id: int = None) -> int:
-    return init_vow_id() if x_vow_id is None else x_vow_id
+def get_init_kick_id_if_None(x_kick_id: int = None) -> int:
+    return init_kick_id() if x_kick_id is None else x_kick_id
 
 
 def get_json_filename(filename_without_extention) -> str:

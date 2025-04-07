@@ -145,7 +145,7 @@ def test_BudUnit_add_item_ReturnsObj():
     casa_itemunit = bob_budunit.add_item(casa_road, mass=casa_mass)
 
     # THEN
-    assert casa_itemunit._item_title == "casa"
+    assert casa_itemunit.item_title == "casa"
     assert casa_itemunit.mass == casa_mass
 
 
@@ -248,7 +248,7 @@ def test_BudUnit_del_item_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_item_obj(new_sunday_road)
     new_sunday_item = sue_bud.get_item_obj(new_sunday_road)
-    assert new_sunday_item._parent_road == sue_bud.fisc_title
+    assert new_sunday_item.parent_road == sue_bud.fisc_title
 
 
 def test_BudUnit_del_item_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -487,7 +487,7 @@ def test_BudUnit_set_item_MustReorderKidsDictToBeAlphabetical():
     item_list = list(bob_bud.itemroot._kids.values())
 
     # THEN
-    assert item_list[0]._item_title == casa_str
+    assert item_list[0].item_title == casa_str
 
 
 def test_BudUnit_set_item_adoptee_RaisesErrorIfAdopteeItemDoesNotHaveCorrectParent():
@@ -684,7 +684,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
 
     # THEN
     swim_item = yao_bud.get_item_obj(swim_road)
-    print(f"{swim_item._item_title=}")
+    print(f"{swim_item.item_title=}")
     print(f"{swim_item.awardlinks=}")
     print(f"{swim_item._awardheirs=}")
 
@@ -792,7 +792,7 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert brazil_item is not None
-    assert brazil_item._item_title == brazil_str
+    assert brazil_item.item_title == brazil_str
 
     # WHEN
     week_str = "weekdays"
@@ -801,14 +801,14 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert week_item is not None
-    assert week_item._item_title == week_str
+    assert week_item.item_title == week_str
 
     # WHEN
     root_item = sue_bud.get_item_obj(road=sue_bud.fisc_title)
 
     # THEN
     assert root_item is not None
-    assert root_item._item_title == sue_bud.fisc_title
+    assert root_item.item_title == sue_bud.fisc_title
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -891,9 +891,9 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit.fisc_title
-    week_item._parent_road = bob_budunit.fisc_title
-    wed_item._parent_road = week_road
+    casa_item.parent_road = bob_budunit.fisc_title
+    week_item.parent_road = bob_budunit.fisc_title
+    wed_item.parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
     bob_budunit.set_item(wed_item, week_road)
@@ -948,9 +948,9 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item._parent_road = bob_budunit.fisc_title
-    week_item._parent_road = bob_budunit.fisc_title
-    wed_item._parent_road = week_road
+    casa_item.parent_road = bob_budunit.fisc_title
+    week_item.parent_road = bob_budunit.fisc_title
+    wed_item.parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
     bob_budunit.set_item(wed_item, week_road)

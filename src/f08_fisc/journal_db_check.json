@@ -1,0 +1,38 @@
+{
+    "tables": {
+        "atom2delta": {
+            "columns": {}
+        },
+        "atom_mstr": {
+            "columns": {}
+        },
+        "atom_hx": {
+            "columns": {}
+        },
+        "delta2kick": {
+            "columns": {}
+        },
+        "delta_mstr": {
+            "columns": {}
+        },
+        "kick_mstr": {
+            "columns": {}
+        },
+        "kick2owner": {
+            "columns": {
+                "owner_name": {}
+            }
+        },
+        "owner_mstr": {
+            "columns": {
+                "owner_name": {}
+            }
+        },
+        "road_ref": {
+            "columns": {
+                "bridge": {},
+                "road": {}
+            }
+        }
+    }
+}

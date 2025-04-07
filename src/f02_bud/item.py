@@ -195,12 +195,12 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    _item_title: TitleUnit = None
+    item_title: TitleUnit = None
     mass: int = None
-    _parent_road: RoadUnit = None
-    _root: bool = None
+    parent_road: RoadUnit = None
+    root: bool = None
     _kids: dict[RoadUnit,] = None
-    _bud_fisc_title: FiscTitle = None
+    fisc_title: FiscTitle = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupLabel, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -361,18 +361,18 @@ class ItemUnit:
             both_in_range = x_gogo <= x_item._gogo_calc and x_stop >= x_item._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_dict[x_item._item_title] = x_item
+                x_dict[x_item.item_title] = x_item
         return x_dict
 
     def get_obj_key(self) -> TitleUnit:
-        return self._item_title
+        return self.item_title
 
     def get_road(self) -> RoadUnit:
-        if self._parent_road in (None, ""):
-            return road_create_road(self._item_title, bridge=self._bridge)
+        if self.parent_road in (None, ""):
+            return road_create_road(self.item_title, bridge=self._bridge)
         else:
             return road_create_road(
-                self._parent_road, self._item_title, bridge=self._bridge
+                self.parent_road, self.item_title, bridge=self._bridge
             )
 
     def clear_descendant_pledge_count(self):
@@ -412,7 +412,7 @@ class ItemUnit:
         self._level = parent_level + 1
 
     def set_parent_road(self, parent_road):
-        self._parent_road = parent_road
+        self.parent_road = parent_road
 
     def inherit_awardheirs(self, parent_awardheirs: dict[GroupLabel, AwardHeir] = None):
         parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
@@ -476,21 +476,21 @@ class ItemUnit:
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_item_title(self, _item_title: str):
+    def set_item_title(self, item_title: str):
         if (
-            self._root
-            and _item_title is not None
-            and _item_title != self._bud_fisc_title
-            and self._bud_fisc_title is not None
+            self.root
+            and item_title is not None
+            and item_title != self.fisc_title
+            and self.fisc_title is not None
         ):
             raise Item_root_TitleNotEmptyException(
-                f"Cannot set itemroot to string different than '{self._bud_fisc_title}'"
+                f"Cannot set itemroot to string different than '{self.fisc_title}'"
             )
-        elif self._root and self._bud_fisc_title is None:
-            self._item_title = root_title()
-        # elif _item_title is not None:
+        elif self.root and self.fisc_title is None:
+            self.item_title = root_title()
+        # elif item_title is not None:
         else:
-            self._item_title = _item_title
+            self.item_title = item_title
 
     def set_bridge(self, new_bridge: str):
         old_bridge = deepcopy(self._bridge)
@@ -501,7 +501,7 @@ class ItemUnit:
             self._find_replace_bridge(old_bridge)
 
     def _find_replace_bridge(self, old_bridge):
-        self._parent_road = replace_bridge(self._parent_road, old_bridge, self._bridge)
+        self.parent_road = replace_bridge(self.parent_road, old_bridge, self._bridge)
 
         new_reasonunits = {}
         for reasonunit_road, reasonunit_obj in self.reasonunits.items():
@@ -697,7 +697,7 @@ class ItemUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, item_kid):
-        self._kids[item_kid._item_title] = item_kid
+        self._kids[item_kid.item_title] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
     def get_kid(self, item_kid_item_title: TitleUnit, if_missing_create=False):
@@ -876,8 +876,8 @@ class ItemUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
-        if self._item_title is not None:
-            x_dict["_item_title"] = self._item_title
+        if self.item_title is not None:
+            x_dict["item_title"] = self.item_title
         if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
@@ -920,8 +920,8 @@ class ItemUnit:
         return x_dict
 
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        if is_sub_road(ref_road=self._parent_road, sub_road=old_road):
-            self._parent_road = rebuild_road(self._parent_road, old_road, new_road)
+        if is_sub_road(ref_road=self.parent_road, sub_road=old_road):
+            self.parent_road = rebuild_road(self.parent_road, old_road, new_road)
 
         self.reasonunits == find_replace_road_key_dict(
             dict_x=self.reasonunits, old_road=old_road, new_road=new_road
@@ -952,9 +952,9 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    _item_title: TitleUnit = None,
+    item_title: TitleUnit = None,
     _uid: int = None,  # Calculated field?
-    _parent_road: RoadUnit = None,
+    parent_road: RoadUnit = None,
     _kids: dict = None,
     mass: int = 1,
     awardlinks: dict[GroupLabel, AwardLink] = None,
@@ -977,8 +977,8 @@ def itemunit_shop(
     morph: bool = None,
     pledge: bool = None,
     _originunit: OriginUnit = None,
-    _root: bool = None,
-    _bud_fisc_title: FiscTitle = None,
+    root: bool = None,
+    fisc_title: FiscTitle = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -996,13 +996,13 @@ def itemunit_shop(
     _bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    _bud_fisc_title = root_title() if _bud_fisc_title is None else _bud_fisc_title
+    fisc_title = root_title() if fisc_title is None else fisc_title
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
-        _item_title=None,
+        item_title=None,
         _uid=_uid,
-        _parent_road=_parent_road,
+        parent_road=parent_road,
         _kids=get_empty_dict_if_None(_kids),
         mass=get_positive_int(mass),
         awardlinks=get_empty_dict_if_None(awardlinks),
@@ -1026,8 +1026,8 @@ def itemunit_shop(
         pledge=get_False_if_None(pledge),
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
-        _root=get_False_if_None(_root),
-        _bud_fisc_title=_bud_fisc_title,
+        root=get_False_if_None(root),
+        fisc_title=fisc_title,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1044,10 +1044,10 @@ def itemunit_shop(
         _bridge=default_bridge_if_None(_bridge),
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
-    if x_itemkid._root:
-        x_itemkid.set_item_title(_item_title=_bud_fisc_title)
+    if x_itemkid.root:
+        x_itemkid.set_item_title(item_title=fisc_title)
     else:
-        x_itemkid.set_item_title(_item_title=_item_title)
+        x_itemkid.set_item_title(item_title=item_title)
     x_itemkid.set_teamunit_empty_if_None()
     x_itemkid.set_originunit_empty_if_None()
     return x_itemkid
