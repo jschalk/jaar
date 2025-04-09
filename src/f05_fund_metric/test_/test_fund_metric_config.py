@@ -1,6 +1,6 @@
 # from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from src.f00_instrument.file import create_path
-from src.f01_road.deal import fisc_title_str, owner_name_str
+from src.f01_road.deal import fisc_title_str, owner_name_str, world_id_str
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -144,6 +144,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
                     dimen_keys = set(atom_args)
+                    dimen_keys.add(world_id_str())
                     dimen_keys.add(fisc_title_str())
                     dimen_keys.add(owner_name_str())
                     fm_aspect_keys = set(fm_aspect_dict.keys())
@@ -316,7 +317,7 @@ def test_get_all_fund_metric_args_ReturnsObj():
     # assert bud_item_factunit_str() in road_fund_metric_aspects
     # assert bud_item_teamlink_str() in road_fund_metric_aspects
     # assert len(road_fund_metric_aspects) == 6
-    assert len(all_fund_metric_args) == 77
+    assert len(all_fund_metric_args) == 78
 
 
 def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
@@ -370,6 +371,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
     print(f"{bud_acctunit_args=}")
     print(f"{bud_groupunit_args=}")
     assert bud_acctunit_args == {
+        world_id_str(),
         fisc_title_str(),
         owner_name_str(),
         "_fund_agenda_give",
@@ -387,6 +389,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_irrational_debtit_belief",
     }
     assert bud_itemunit_args == {
+        world_id_str(),
         fisc_title_str(),
         owner_name_str(),
         morph_str(),
@@ -418,6 +421,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         begin_str(),
     }
     assert bud_groupunit_args == {
+        world_id_str(),
         fisc_title_str(),
         owner_name_str(),
         "_debtor_pool",
@@ -1285,7 +1289,8 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
 #     # THEN
 #     assert x_atom_args_dimen_mapping
 #     assert x_atom_args_dimen_mapping.get(stop_want_str())
-#     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
+#     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {
+# world_id_str(),bud_itemunit_str()}
 #     assert x_atom_args_dimen_mapping.get(parent_road_str())
 #     road_dimens = x_atom_args_dimen_mapping.get(road_str())
 #     assert bud_item_factunit_str() in road_dimens
@@ -1365,7 +1370,8 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
 #         x_dimen = x_dimens[0]
 #         x_class_type = get_class_type(x_dimen, x_atom_arg)
 #         print(
-#             f"assert x_class_types.get({x_atom_arg}) == {x_class_type} {x_class_types.get(x_atom_arg)=}"
+#             f"assert x_class_types.get({x_atom_arg}) == {
+# world_id_str(),x_class_type} {x_class_types.get(x_atom_arg)=}"
 #         )
 #         if x_class_types.get(x_atom_arg) != x_class_type:
 #             return False

@@ -54,6 +54,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x_args = get_fund_metric_dimen_args("budunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = True
@@ -71,6 +72,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x_respect_bit = 0.2
     x_tally = 6
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "_keeps_buildable": x__keeps_buildable,
@@ -120,6 +122,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     #     # b0_str = "{"
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x__active = 1
@@ -150,6 +153,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     x_problem_bool = 26
     x_stop_want = 27
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "_active": x__active,
@@ -221,6 +225,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     #     b0_str = "{"
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_road = 1
@@ -230,6 +235,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x__status = 5
     x__base_item_active_value = 6
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "road": x_road,
@@ -283,6 +289,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_road = 1
@@ -294,6 +301,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x__task = 7
     x__status = 8
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "road": x_road,
@@ -349,6 +357,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_road = 1
@@ -358,6 +367,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     x__fund_give = 5
     x__fund_take = 6
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "road": x_road,
@@ -411,6 +421,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_road = 1
@@ -419,6 +430,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_fopen = 4
     x_fnigh = 5
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "road": x_road,
@@ -471,11 +483,13 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_road = 1
     x_healer_name = 2
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "road": x_road,
@@ -525,12 +539,14 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_road = 1
     x_team_tag = 2
     x__owner_name_team = 3
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "road": x_road,
@@ -581,6 +597,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
@@ -597,6 +614,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     x__inallocable_debtit_belief = 12
     x__irrational_debtit_belief = 13
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
@@ -657,6 +675,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
@@ -672,6 +691,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_give = 11
     x__fund_agenda_ratio_take = 12
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
@@ -731,6 +751,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     # print(")")
     # print(";")
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x_group_label = 1
@@ -743,6 +764,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_take = 8
     x_bridge = 9
     values_dict = {
+        "world_id": x_world_id,
         "fisc_title": x_fisc_title,
         "owner_name": x_owner_name,
         "group_label": x_group_label,
@@ -786,6 +808,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
 def test_insert_forecast_budunit_CreatesTableRowsFor_budunit_forecast():
     # sourcery skip: extract-method
     # ESTABLISH
+    x_world_id = "music23"
     x_fisc_title = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = 99
@@ -825,7 +848,7 @@ def test_insert_forecast_budunit_CreatesTableRowsFor_budunit_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budunit(cursor, sue_bud)
+        insert_forecast_budunit(cursor, x_world_id, sue_bud)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -833,6 +856,7 @@ def test_insert_forecast_budunit_CreatesTableRowsFor_budunit_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            x_world_id,
             x_fisc_title,
             x_owner_name,
             x_credor_respect,
@@ -870,6 +894,7 @@ def test_insert_forecast_buditem_CreatesTableRowsFor_buditem_forecast():
     #     print(f"""            x_{x_arg},""")
     # print("")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_parent_road = 3
@@ -961,7 +986,7 @@ def test_insert_forecast_buditem_CreatesTableRowsFor_buditem_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_buditem(cursor, x_owner_name, x_item)
+        insert_forecast_buditem(cursor, x_world_id, x_owner_name, x_item)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -969,6 +994,7 @@ def test_insert_forecast_buditem_CreatesTableRowsFor_buditem_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_parent_road),
@@ -1019,6 +1045,7 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
     #     print(f"""            x_{x_arg},""")
     # print("")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_road = 3
@@ -1042,7 +1069,7 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
 
         # WHEN
         insert_forecast_budreas(
-            cursor, x_fisc_title, x_owner_name, x_road, x_reasonheir
+            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_reasonheir
         )
 
         # THEN
@@ -1051,6 +1078,7 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_road),
@@ -1079,6 +1107,7 @@ def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_road = 3
@@ -1105,7 +1134,13 @@ def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
 
         # WHEN
         insert_forecast_budprem(
-            cursor, x_fisc_title, x_owner_name, x_road, x_base, x_premiseunit
+            cursor,
+            x_world_id,
+            x_fisc_title,
+            x_owner_name,
+            x_road,
+            x_base,
+            x_premiseunit,
         )
 
         # THEN
@@ -1114,6 +1149,7 @@ def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_road),
@@ -1144,6 +1180,7 @@ def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_acct_name = 3
@@ -1178,7 +1215,9 @@ def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budmemb(cursor, x_fisc_title, x_owner_name, x_membership)
+        insert_forecast_budmemb(
+            cursor, x_world_id, x_fisc_title, x_owner_name, x_membership
+        )
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1186,6 +1225,7 @@ def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_acct_name),
@@ -1220,6 +1260,7 @@ def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_acct_name = 3
@@ -1257,7 +1298,7 @@ def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budacct(cursor, x_fisc_title, x_owner_name, x_acct)
+        insert_forecast_budacct(cursor, x_world_id, x_fisc_title, x_owner_name, x_acct)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1265,6 +1306,7 @@ def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_acct_name),
@@ -1300,6 +1342,7 @@ def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_group_label = 3
@@ -1329,7 +1372,7 @@ def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budgrou(cursor, x_fisc_title, x_owner_name, x_group)
+        insert_forecast_budgrou(cursor, x_world_id, x_fisc_title, x_owner_name, x_group)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1337,6 +1380,7 @@ def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_group_label),
@@ -1368,6 +1412,7 @@ def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_road = 3
@@ -1390,7 +1435,9 @@ def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budawar(cursor, x_fisc_title, x_owner_name, x_road, x_awardheir)
+        insert_forecast_budawar(
+            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_awardheir
+        )
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1398,6 +1445,7 @@ def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_road),
@@ -1426,6 +1474,7 @@ def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_road = 3
@@ -1446,7 +1495,9 @@ def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budfact(cursor, x_fisc_title, x_owner_name, x_road, x_factheir)
+        insert_forecast_budfact(
+            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_factheir
+        )
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1454,6 +1505,7 @@ def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_road),
@@ -1481,6 +1533,7 @@ def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_road = 3
@@ -1498,7 +1551,7 @@ def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
 
         # WHEN
         insert_forecast_budheal(
-            cursor, x_fisc_title, x_owner_name, x_road, x_healerlink
+            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_healerlink
         )
 
         # THEN
@@ -1506,8 +1559,20 @@ def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
         select_sqlstr = f"SELECT * FROM {x_table_name};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
-        expected_row1 = (str(x_fisc_title), str(x_owner_name), str(x_road), bob_str)
-        expected_row2 = (str(x_fisc_title), str(x_owner_name), str(x_road), sue_str)
+        expected_row1 = (
+            str(x_world_id),
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            bob_str,
+        )
+        expected_row2 = (
+            str(x_world_id),
+            str(x_fisc_title),
+            str(x_owner_name),
+            str(x_road),
+            sue_str,
+        )
         expected_data = [expected_row1, expected_row2]
         assert rows == expected_data
 
@@ -1527,6 +1592,7 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
+    x_world_id = 0
     x_fisc_title = 1
     x_owner_name = 2
     x_road = 3
@@ -1544,7 +1610,9 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budteam(cursor, x_fisc_title, x_owner_name, x_road, x_teamheir)
+        insert_forecast_budteam(
+            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_teamheir
+        )
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -1552,6 +1620,7 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_road),
@@ -1559,6 +1628,7 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
             x__owner_name_team,
         )
         expected_row2 = (
+            str(x_world_id),
             str(x_fisc_title),
             str(x_owner_name),
             str(x_road),
@@ -1572,6 +1642,7 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
 def test_insert_forecast_obj_CreatesTableRows_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
+    x_world_id = "music23"
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
@@ -1620,7 +1691,7 @@ def test_insert_forecast_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budteam_forecast_table) == 0
 
         # WHEN
-        insert_forecast_obj(cursor, sue_bud)
+        insert_forecast_obj(cursor, x_world_id, sue_bud)
 
         # THEN
         assert get_row_count(cursor, budunit_forecast_table) == 1

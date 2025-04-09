@@ -65,10 +65,6 @@ def get_default_worlds_dir() -> str:
     return "src/f12_world/examples/worlds"
 
 
-class _set_fisc_pidgin_Exception(Exception):
-    pass
-
-
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
