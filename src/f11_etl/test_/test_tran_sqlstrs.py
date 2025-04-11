@@ -8,7 +8,12 @@ from src.f00_instrument.db_toolbox import (
     is_stageable,
     create_select_query,
 )
-from src.f01_road.deal import fisc_title_str, owner_name_str, deal_time_str
+from src.f01_road.deal import (
+    fisc_title_str,
+    owner_name_str,
+    deal_time_str,
+    tran_time_str,
+)
 from src.f02_bud.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -21,6 +26,12 @@ from src.f02_bud.bud_tool import (
     bud_itemunit_str,
     budunit_str,
     bud_groupunit_str,
+)
+from src.f03_chrono.chrono import (
+    timeline_title_str,
+    c400_number_str,
+    monthday_distortion_str,
+    yr1_jan1_offset_str,
 )
 from src.f04_kick.atom_config import (
     event_int_str,
@@ -667,13 +678,13 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             exclude_cols=x_exclude_cols,
         )
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = f"""{fisc_title_str()}, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge"""
+        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT {fisc_title_str()}, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge)
+SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge)
 FROM {tablename}_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title
+GROUP BY {fisc_title_str()}
 ;
 """
         assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
@@ -922,13 +933,13 @@ def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
 INSERT INTO fisc_event_time_agg ({fisc_title_str()}, {event_int_str()}, agg_time)
 SELECT {fisc_title_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {fisc_title_str()}, {event_int_str()}, tran_time as agg_time
+    SELECT {fisc_title_str()}, {event_int_str()}, {tran_time_str()} as agg_time
     FROM fisc_cashbook_staging
-    GROUP BY {fisc_title_str()}, {event_int_str()}, tran_time
+    GROUP BY {fisc_title_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {fisc_title_str()}, {event_int_str()}, deal_time as agg_time
+    SELECT {fisc_title_str()}, {event_int_str()}, {deal_time_str()} as agg_time
     FROM fisc_dealunit_staging
-    GROUP BY {fisc_title_str()}, {event_int_str()}, deal_time
+    GROUP BY {fisc_title_str()}, {event_int_str()}, {deal_time_str()}
 )
 ORDER BY {fisc_title_str()}, {event_int_str()}, agg_time
 ;
@@ -942,7 +953,7 @@ def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
     SELECT {fisc_title_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_agg_time
+           LAG(agg_time) OVER (PARTITION BY {fisc_title_str()} ORDER BY {event_int_str()}) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
@@ -952,8 +963,8 @@ SET error_message = CASE
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
-    AND EventTimeOrdered.fisc_title = fisc_event_time_agg.fisc_title
+WHERE EventTimeOrdered.{event_int_str()} = fisc_event_time_agg.{event_int_str()}
+    AND EventTimeOrdered.{fisc_title_str()} = fisc_event_time_agg.{fisc_title_str()}
     AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
@@ -980,14 +991,14 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_ote1_agg ({fisc_title_str()}, owner_name, {event_int_str()}, deal_time)
-SELECT {fisc_title_str()}, owner_name, {event_int_str()}, deal_time
+INSERT INTO fisc_ote1_agg ({fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+SELECT {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 FROM (
-    SELECT {fisc_title_str()}, owner_name, {event_int_str()}, deal_time
+    SELECT {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
     FROM fisc_dealunit_staging
-    GROUP BY {fisc_title_str()}, owner_name, {event_int_str()}, deal_time
+    GROUP BY {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_title_str()}, owner_name, {event_int_str()}, deal_time
+ORDER BY {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 ;
 """
     # WHEN / THEN
