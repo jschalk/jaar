@@ -11,7 +11,7 @@ from src.f02_bud.bud_graphics import (
     display_itemtree,
     get_bud_accts_plotly_fig,
     get_bud_agenda_plotly_fig,
-    fund_explanation0,
+    fund_graph0,
 )
 
 
@@ -109,4 +109,4 @@ def test_BudUnit_fund_flow(graphics_bool):
     sue_bud.add_item(dinner_road, mass=30, pledge=True)
 
     # WHEN / THEN
-    fund_explanation0(sue_bud, "Task", graphics_bool)
+    fund_graph0(sue_bud, "Task", graphics_bool)

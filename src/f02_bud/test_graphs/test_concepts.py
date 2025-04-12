@@ -5,21 +5,21 @@ from src.f02_bud.examples.example_buds import (
 )
 from src.f02_bud.bud_graphics import (
     display_itemtree,
-    budunit_explanation0,
-    budunit_explanation1,
-    budunit_explanation2,
-    budunit_explanation3,
-    budunit_explanation4,
+    budunit_graph0,
+    budunit_graph1,
+    budunit_graph2,
+    budunit_graph3,
+    budunit_graph4,
 )
 
 
-def test_budunit_explanation_ShowsExplanation0BudGraph(graphics_bool):
+def test_budunit_graph_Showsgraph0BudGraph(graphics_bool):
     # ESTABLISH / WHEN / THEN
     display_itemtree(get_budunit_with_4_levels(), graphics_bool)
     display_itemtree(get_budunit_with_4_levels_and_2reasons(), "Task", graphics_bool)
     display_itemtree(get_budunit_x1_3levels_1reason_1facts(), graphics_bool)
-    budunit_explanation0(graphics_bool)
-    budunit_explanation1(graphics_bool)
-    budunit_explanation2(graphics_bool)
-    budunit_explanation3(graphics_bool)
-    budunit_explanation4(graphics_bool)
+    budunit_graph0(graphics_bool)
+    budunit_graph1(graphics_bool)
+    budunit_graph2(graphics_bool)
+    budunit_graph3(graphics_bool)
+    budunit_graph4(graphics_bool)

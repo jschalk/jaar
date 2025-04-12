@@ -269,7 +269,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def fund_explanation0(
+def fund_graph0(
     x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
     fig = display_itemtree(x_bud, mode, False)
