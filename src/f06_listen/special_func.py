@@ -1,6 +1,6 @@
 from src.f01_road.road import RoadUnit, get_terminus_title, get_parent_road, LabelUnit
 from src.f02_bud.bud import BudUnit
-from src.f06_listen.hub_tool import open_voice_file
+from src.f06_listen.hub_tool import open_gut_file
 from src.f06_listen.hubunit import HubUnit
 from copy import deepcopy as copy_deepcopy
 
@@ -26,23 +26,23 @@ def create_pledge(
             x_bud.edit_reason(pledge_road, reason_base, reason_premise)
 
 
-def add_voice_pledge(
+def add_gut_pledge(
     x_hubunit: HubUnit,
     pledge_road: RoadUnit,
     x_teamlink: LabelUnit = None,
     reason_premise: RoadUnit = None,
 ):
-    voice_bud = open_voice_file(
+    gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
         x_hubunit.fisc_title,
         x_hubunit.owner_name,
     )
-    old_voice_bud = copy_deepcopy(voice_bud)
-    create_pledge(voice_bud, pledge_road, x_teamlink, reason_premise)
+    old_gut_bud = copy_deepcopy(gut_bud)
+    create_pledge(gut_bud, pledge_road, x_teamlink, reason_premise)
     next_kickunit = x_hubunit._default_kickunit()
-    next_kickunit._buddelta.add_all_different_budatoms(old_voice_bud, voice_bud)
+    next_kickunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
     next_kickunit.save_files()
-    x_hubunit.append_kicks_to_voice_file()
+    x_hubunit.append_kicks_to_gut_file()
 
 
 def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
@@ -52,15 +52,15 @@ def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
     x_bud.add_fact(fact_base, fact_pick)
 
 
-def add_voice_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
-    voice_bud = open_voice_file(
+def add_gut_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
+    gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
         x_hubunit.fisc_title,
         x_hubunit.owner_name,
     )
-    old_voice_bud = copy_deepcopy(voice_bud)
-    create_fact(voice_bud, fact_pick)
+    old_gut_bud = copy_deepcopy(gut_bud)
+    create_fact(gut_bud, fact_pick)
     next_kickunit = x_hubunit._default_kickunit()
-    next_kickunit._buddelta.add_all_different_budatoms(old_voice_bud, voice_bud)
+    next_kickunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
     next_kickunit.save_files()
-    x_hubunit.append_kicks_to_voice_file()
+    x_hubunit.append_kicks_to_gut_file()

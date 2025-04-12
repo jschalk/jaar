@@ -16,7 +16,7 @@ from src.f04_kick.atom_config import (
     penny_str,
     respect_bit_str,
 )
-from src.f06_listen.hub_path import create_fisc_json_path, create_voice_path
+from src.f06_listen.hub_path import create_fisc_json_path, create_gut_path
 from src.f08_fisc.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
@@ -70,7 +70,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleFiscUnit_NoBudUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_VoiceBudUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BudUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -80,11 +80,11 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_VoiceBudUnits(
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(fisc_json_path, None, a23_fisc.get_json())
-    # create bud voice file
-    bob_voice = budunit_shop(bob_str, a23_str)
-    bob_voice.add_acctunit("Yao", 44, 55)
-    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_str)
-    save_file(a23_bob_voice_path, None, bob_voice.get_json())
+    # create bud gut file
+    bob_gut = budunit_shop(bob_str, a23_str)
+    bob_gut.add_acctunit("Yao", 44, 55)
+    a23_bob_gut_path = create_gut_path(fisc_mstr_dir, a23_str, bob_str)
+    save_file(a23_bob_gut_path, None, bob_gut.get_json())
 
     # WHEN
     gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
@@ -92,7 +92,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_VoiceBudUnits(
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_brick_csv_strs()
     add_fiscunit_to_stance_csv_strs(a23_fisc, expected_stance_csv_strs, ",")
-    add_budunit_to_stance_csv_strs(bob_voice, expected_stance_csv_strs, ",")
+    add_budunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 

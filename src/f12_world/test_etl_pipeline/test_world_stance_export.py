@@ -172,12 +172,12 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
 #     assert os_path_exists(wrong_a23_fisc_dir) is False
 #     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
-#     a23_sue_voice_path = create_voice_path(mstr_dir, accord23_str, sue_str)
+#     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
 #     a23_sue_plan_path = create_plan_path(mstr_dir, accord23_str, sue_str)
 #     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
 #     assert os_path_exists(mine_file_path)
 #     assert os_path_exists(a23_json_path) is False
-#     assert os_path_exists(a23_sue_voice_path) is False
+#     assert os_path_exists(a23_sue_gut_path) is False
 #     assert os_path_exists(a23_sue_plan_path) is False
 #     assert os_path_exists(sue37_mandate_path) is False
 #     assert count_dirs_files(fizz_world.worlds_dir) == 7
@@ -191,7 +191,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #     assert os_path_exists(mine_file_path)
 #     assert os_path_exists(cart_file_path)
 #     assert os_path_exists(a23_json_path)
-#     assert os_path_exists(a23_sue_voice_path)
+#     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_plan_path)
 #     assert os_path_exists(sue37_mandate_path)
 #     assert count_dirs_files(fizz_world.worlds_dir) == 91

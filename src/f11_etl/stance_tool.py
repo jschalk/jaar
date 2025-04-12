@@ -25,11 +25,11 @@ def collect_stance_csv_strs(fisc_mstr_dir: str) -> dict[str, str]:
         owners_dir = create_path(fisc_dir, "owners")
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)
-            voice_dir = create_path(owner_dir, "voice")
-            voice_bud_path = create_path(voice_dir, f"{owner_name}.json")
-            if os_path_exists(voice_bud_path):
-                voice_bud = open_bud_file(voice_bud_path)
-                add_budunit_to_stance_csv_strs(voice_bud, x_csv_strs, ",")
+            gut_dir = create_path(owner_dir, "gut")
+            gut_bud_path = create_path(gut_dir, f"{owner_name}.json")
+            if os_path_exists(gut_bud_path):
+                gut_bud = open_bud_file(gut_bud_path)
+                add_budunit_to_stance_csv_strs(gut_bud, x_csv_strs, ",")
     return x_csv_strs
 
 

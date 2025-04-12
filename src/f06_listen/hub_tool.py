@@ -15,7 +15,7 @@ from src.f02_bud.bud import (
 )
 from src.f06_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f06_listen.hub_path import (
-    create_voice_path,
+    create_gut_path,
     create_plan_path,
     CELLNODE_FILENAME,
     create_budevent_path,
@@ -35,25 +35,21 @@ def open_bud_file(dest_dir: str, filename: str = None) -> BudUnit:
         return budunit_get_from_json(open_file(dest_dir, filename))
 
 
-def save_voice_file(fisc_mstr_dir: str, budunit: BudUnit = None):
-    voice_path = create_voice_path(
-        fisc_mstr_dir, budunit.fisc_title, budunit.owner_name
-    )
-    save_bud_file(voice_path, None, budunit)
+def save_gut_file(fisc_mstr_dir: str, budunit: BudUnit = None):
+    gut_path = create_gut_path(fisc_mstr_dir, budunit.fisc_title, budunit.owner_name)
+    save_bud_file(gut_path, None, budunit)
 
 
-def open_voice_file(
+def open_gut_file(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> BudUnit:
-    voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
-    return open_bud_file(voice_path)
+    gut_path = create_gut_path(fisc_mstr_dir, fisc_title, owner_name)
+    return open_bud_file(gut_path)
 
 
-def voice_file_exists(
-    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
-) -> bool:
-    voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
-    return os_path_exists(voice_path)
+def gut_file_exists(fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName) -> bool:
+    gut_path = create_gut_path(fisc_mstr_dir, fisc_title, owner_name)
+    return os_path_exists(gut_path)
 
 
 def plan_file_exists(

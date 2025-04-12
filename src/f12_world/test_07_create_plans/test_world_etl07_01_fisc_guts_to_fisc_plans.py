@@ -2,7 +2,7 @@ from src.f00_instrument.file import save_file, open_file
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f06_listen.hub_path import (
     create_fisc_json_path,
-    create_voice_path,
+    create_gut_path,
     create_plan_path,
 )
 from src.f08_fisc.fisc import fiscunit_shop
@@ -11,7 +11,7 @@ from src.f12_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_fisc_voice_to_fisc_plan_SetsFiles_Scenario0(
+def test_WorldUnit_fisc_gut_to_fisc_plan_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -24,22 +24,22 @@ def test_WorldUnit_fisc_voice_to_fisc_plan_SetsFiles_Scenario0(
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    bob_voice = budunit_shop(bob_inx, a23_str)
-    bob_voice.add_acctunit(bob_inx, credit77)
-    bob_voice.add_acctunit(yao_inx, credit44)
-    bob_voice.add_acctunit(bob_inx, credit77)
-    bob_voice.add_acctunit(sue_inx, credit88)
-    bob_voice.add_acctunit(yao_inx, credit44)
-    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
-    save_file(a23_bob_voice_path, None, bob_voice.get_json())
+    bob_gut = budunit_shop(bob_inx, a23_str)
+    bob_gut.add_acctunit(bob_inx, credit77)
+    bob_gut.add_acctunit(yao_inx, credit44)
+    bob_gut.add_acctunit(bob_inx, credit77)
+    bob_gut.add_acctunit(sue_inx, credit88)
+    bob_gut.add_acctunit(yao_inx, credit44)
+    a23_bob_gut_path = create_gut_path(fisc_mstr_dir, a23_str, bob_inx)
+    save_file(a23_bob_gut_path, None, bob_gut.get_json())
     a23_bob_plan_path = create_plan_path(fisc_mstr_dir, a23_str, bob_inx)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
-    assert os_path_exists(a23_bob_voice_path)
+    assert os_path_exists(a23_bob_gut_path)
     assert os_path_exists(a23_bob_plan_path) is False
 
     # WHEN
-    fizz_world.fisc_voice_to_fisc_plan()
+    fizz_world.fisc_gut_to_fisc_plan()
 
     # THEN
     assert os_path_exists(a23_bob_plan_path)
@@ -56,7 +56,7 @@ def test_WorldUnit_fisc_voice_to_fisc_plan_SetsFiles_Scenario0(
     # assert generated_plan == expected_plan
 
 
-def test_WorldUnit_fisc_voice_to_fisc_plan_SetsFiles_Scenario1(
+def test_WorldUnit_fisc_gut_to_fisc_plan_SetsFiles_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -66,41 +66,41 @@ def test_WorldUnit_fisc_voice_to_fisc_plan_SetsFiles_Scenario1(
     a23_str = "accord23"
     fizz_world = worldunit_shop("fizz")
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
-    bob_voice = budunit_shop(bob_inx, a23_str)
-    bob_voice.add_acctunit(bob_inx)
-    bob_voice.add_acctunit(yao_inx)
-    bob_voice.add_acctunit(bob_inx)
-    bob_voice.add_acctunit(sue_inx)
-    bob_voice.add_acctunit(yao_inx)
-    clean_road = bob_voice.make_l1_road("clean")
-    bob_voice.add_item(clean_road, pledge=True)
+    bob_gut = budunit_shop(bob_inx, a23_str)
+    bob_gut.add_acctunit(bob_inx)
+    bob_gut.add_acctunit(yao_inx)
+    bob_gut.add_acctunit(bob_inx)
+    bob_gut.add_acctunit(sue_inx)
+    bob_gut.add_acctunit(yao_inx)
+    clean_road = bob_gut.make_l1_road("clean")
+    bob_gut.add_item(clean_road, pledge=True)
 
-    yao_voice = budunit_shop(yao_inx, a23_str)
-    yao_voice.add_acctunit(bob_inx)
-    yao_voice.add_acctunit(yao_inx)
-    run_road = bob_voice.make_l1_road("run")
-    fly_road = bob_voice.make_l1_road("fly")
-    yao_voice.add_item(run_road, pledge=True)
-    yao_voice.add_item(fly_road, pledge=True)
-    assert bob_voice.item_exists(clean_road)
-    assert yao_voice.item_exists(clean_road) is False
+    yao_gut = budunit_shop(yao_inx, a23_str)
+    yao_gut.add_acctunit(bob_inx)
+    yao_gut.add_acctunit(yao_inx)
+    run_road = bob_gut.make_l1_road("run")
+    fly_road = bob_gut.make_l1_road("fly")
+    yao_gut.add_item(run_road, pledge=True)
+    yao_gut.add_item(fly_road, pledge=True)
+    assert bob_gut.item_exists(clean_road)
+    assert yao_gut.item_exists(clean_road) is False
 
-    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
-    a23_yao_voice_path = create_voice_path(fisc_mstr_dir, a23_str, yao_inx)
-    save_file(a23_bob_voice_path, None, bob_voice.get_json())
-    save_file(a23_yao_voice_path, None, yao_voice.get_json())
+    a23_bob_gut_path = create_gut_path(fisc_mstr_dir, a23_str, bob_inx)
+    a23_yao_gut_path = create_gut_path(fisc_mstr_dir, a23_str, yao_inx)
+    save_file(a23_bob_gut_path, None, bob_gut.get_json())
+    save_file(a23_yao_gut_path, None, yao_gut.get_json())
     a23_bob_plan_path = create_plan_path(fisc_mstr_dir, a23_str, bob_inx)
     a23_yao_plan_path = create_plan_path(fisc_mstr_dir, a23_str, yao_inx)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(fisc_json_path, None, fiscunit_shop(a23_str, fisc_mstr_dir).get_json())
-    assert os_path_exists(a23_bob_voice_path)
-    assert os_path_exists(a23_yao_voice_path)
+    assert os_path_exists(a23_bob_gut_path)
+    assert os_path_exists(a23_yao_gut_path)
     assert os_path_exists(a23_bob_plan_path) is False
     assert os_path_exists(a23_yao_plan_path) is False
 
     # WHEN
-    fizz_world.fisc_voice_to_fisc_plan()
-    fizz_world.fisc_voice_to_fisc_plan()
+    fizz_world.fisc_gut_to_fisc_plan()
+    fizz_world.fisc_gut_to_fisc_plan()
 
     # THEN
     assert os_path_exists(a23_bob_plan_path)

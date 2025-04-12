@@ -51,20 +51,20 @@ from src.f06_listen.cell import cellunit_shop
 from src.f06_listen.hub_path import (
     create_fisc_json_path,
     create_cell_dir_path,
-    create_voice_path,
+    create_gut_path,
 )
 from src.f06_listen.hub_tool import (
     cellunit_save_to_dir,
     open_bud_file,
-    open_voice_file,
+    open_gut_file,
     open_plan_file,
-    save_voice_file,
+    save_gut_file,
     save_plan_file,
 )
 from src.f06_listen.hubunit import hubunit_shop, HubUnit
 from src.f06_listen.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_voice_plan,
+    listen_to_debtors_roll_gut_plan,
     create_job_file_from_duty_file,
 )
 from src.f08_fisc.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
@@ -88,12 +88,12 @@ class set_offi_time_max_Exception(Exception):
 @dataclass
 class FiscUnit:
     """Data pipelines:
-    pipeline1: kicks->voice
-    pipeline2: voice->dutys
+    pipeline1: kicks->gut
+    pipeline2: gut->dutys
     pipeline3: duty->job
     pipeline4: job->plan
-    pipeline5: voice->plan (direct)
-    pipeline6: voice->job->plan (through jobs)
+    pipeline5: gut->plan (direct)
+    pipeline6: gut->job->plan (through jobs)
     pipeline7: kicks->plan (could be 5 of 6)
     """
 
@@ -196,16 +196,16 @@ class FiscUnit:
 
     def init_owner_keeps(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
-        x_hubunit.initialize_kick_voice_files()
-        x_hubunit.initialize_plan_file(self.get_owner_voice_from_file(owner_name))
+        x_hubunit.initialize_kick_gut_files()
+        x_hubunit.initialize_plan_file(self.get_owner_gut_from_file(owner_name))
 
-    def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:
-        return open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+    def get_owner_gut_from_file(self, owner_name: OwnerName) -> BudUnit:
+        return open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
 
     def _set_all_healer_dutys(self, owner_name: OwnerName):
-        x_voice = self.get_owner_voice_from_file(owner_name)
-        x_voice.settle_bud()
-        for healer_name, healer_dict in x_voice._healers_dict.items():
+        x_gut = self.get_owner_gut_from_file(owner_name)
+        x_gut.settle_bud()
+        for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.fisc_mstr_dir,
                 self.fisc_title,
@@ -216,21 +216,21 @@ class FiscUnit:
                 respect_bit=self.respect_bit,
             )
             for keep_road in healer_dict.keys():
-                self._set_owner_duty(healer_hubunit, keep_road, x_voice)
+                self._set_owner_duty(healer_hubunit, keep_road, x_gut)
 
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
         keep_road: RoadUnit,
-        voice_bud: BudUnit,
+        gut_bud: BudUnit,
     ):
         healer_hubunit.keep_road = keep_road
         healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_bud(voice_bud)
+        healer_hubunit.save_duty_bud(gut_bud)
 
-    def generate_healers_authored_plan(self, owner_name: OwnerName, x_voice: BudUnit):
-        x_plan = get_default_plan(x_voice)
-        for healer_name, healer_dict in x_voice._healers_dict.items():
+    def generate_healers_authored_plan(self, owner_name: OwnerName, x_gut: BudUnit):
+        x_plan = get_default_plan(x_gut)
+        for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 fisc_mstr_dir=self.fisc_mstr_dir,
                 fisc_title=self.fisc_title,
@@ -239,7 +239,7 @@ class FiscUnit:
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
-            healer_hubunit.create_voice_treasury_db_files()
+            healer_hubunit.create_gut_treasury_db_files()
             for keep_road in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
                     fisc_mstr_dir=self.fisc_mstr_dir,
@@ -250,7 +250,7 @@ class FiscUnit:
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
-                keep_hubunit.save_duty_bud(x_voice)
+                keep_hubunit.save_duty_bud(x_gut)
                 create_job_file_from_duty_file(keep_hubunit, owner_name)
                 x_job = keep_hubunit.get_job_bud(owner_name)
                 x_plan = listen_to_speaker_agenda(x_plan, x_job)
@@ -258,13 +258,13 @@ class FiscUnit:
 
     # plan bud management
     def generate_plan(self, owner_name: OwnerName) -> BudUnit:
-        x_voice = open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
-        x_voice.settle_bud()
-        if len(x_voice._healers_dict) > 0:
-            x_plan = self.generate_healers_authored_plan(owner_name, x_voice)
+        x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+        x_gut.settle_bud()
+        if len(x_gut._healers_dict) > 0:
+            x_plan = self.generate_healers_authored_plan(owner_name, x_gut)
         else:
-            x_plan = get_default_plan(x_voice)
-        x_plan = listen_to_debtors_roll_voice_plan(
+            x_plan = get_default_plan(x_gut)
+        x_plan = listen_to_debtors_roll_gut_plan(
             self.fisc_mstr_dir, self.fisc_title, owner_name
         )
         return x_plan

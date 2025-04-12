@@ -3,8 +3,8 @@ from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f06_listen.hub_tool import (
-    save_voice_file,
-    open_voice_file,
+    save_gut_file,
+    open_gut_file,
     open_plan_file,
     save_plan_file,
 )
@@ -74,9 +74,9 @@ def test_FiscUnit_generate_plan_SetsCorrectFileWithout_healerlink(
     assert before_bob_plan.acct_exists(sue_str) is False
 
     # WHEN
-    bob_voice_bud = open_voice_file(fisc_mstr_dir, a23_str, bob_str)
-    bob_voice_bud.add_acctunit(sue_str)
-    save_voice_file(a23_fisc.fisc_mstr_dir, bob_voice_bud)
+    bob_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, bob_str)
+    bob_gut_bud.add_acctunit(sue_str)
+    save_gut_file(a23_fisc.fisc_mstr_dir, bob_gut_bud)
 
     # WHEN
     after_bob_plan = a23_fisc.generate_plan(bob_str)
@@ -99,17 +99,17 @@ def test_FiscUnit_generate_plan_SetsFileWith_healerlink(
     assert after_bob_plan.acct_exists(bob_str) is False
 
     # WHEN
-    bob_voice_bud = open_voice_file(fisc_mstr_dir, a23_str, bob_str)
-    bob_voice_bud.add_acctunit(bob_str)
-    bob_voice_bud.set_acct_respect(100)
+    bob_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, bob_str)
+    bob_gut_bud.add_acctunit(bob_str)
+    bob_gut_bud.set_acct_respect(100)
     texas_str = "Texas"
-    texas_road = bob_voice_bud.make_l1_road(texas_str)
+    texas_road = bob_gut_bud.make_l1_road(texas_str)
     elpaso_str = "el paso"
-    elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_str)
+    elpaso_road = bob_gut_bud.make_road(texas_road, elpaso_str)
     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
-    bob_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    bob_voice_bud.set_item(elpaso_item, texas_road)
-    save_voice_file(a23_fisc.fisc_mstr_dir, bob_voice_bud)
+    bob_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    bob_gut_bud.set_item(elpaso_item, texas_road)
+    save_gut_file(a23_fisc.fisc_mstr_dir, bob_gut_bud)
 
     after_bob_plan = a23_fisc.generate_plan(bob_str)
 
@@ -130,27 +130,27 @@ def test_FiscUnit_generate_all_plans_SetsCorrectFiles(
     a23_fisc.init_owner_keeps(bob_str)
     fisc_mstr_dir = a23_fisc.fisc_mstr_dir
     a23_fisc.init_owner_keeps(sue_str)
-    bob_voice_bud = a23_fisc.generate_plan(bob_str)
-    sue_voice_bud = a23_fisc.generate_plan(sue_str)
+    bob_gut_bud = a23_fisc.generate_plan(bob_str)
+    sue_gut_bud = a23_fisc.generate_plan(sue_str)
 
     texas_str = "Texas"
-    texas_road = bob_voice_bud.make_l1_road(texas_str)
+    texas_road = bob_gut_bud.make_l1_road(texas_str)
     elpaso_str = "el paso"
-    elpaso_road = bob_voice_bud.make_road(texas_road, elpaso_str)
+    elpaso_road = bob_gut_bud.make_road(texas_road, elpaso_str)
     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
 
-    bob_voice_bud = open_voice_file(fisc_mstr_dir, a23_str, bob_str)
-    bob_voice_bud.add_acctunit(bob_str)
-    bob_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    bob_voice_bud.set_item(elpaso_item, texas_road)
-    save_voice_file(a23_fisc.fisc_mstr_dir, bob_voice_bud)
+    bob_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, bob_str)
+    bob_gut_bud.add_acctunit(bob_str)
+    bob_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    bob_gut_bud.set_item(elpaso_item, texas_road)
+    save_gut_file(a23_fisc.fisc_mstr_dir, bob_gut_bud)
 
-    sue_voice_bud = open_voice_file(fisc_mstr_dir, a23_str, sue_str)
-    sue_voice_bud.add_acctunit(sue_str)
-    sue_voice_bud.add_acctunit(bob_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    sue_voice_bud.set_item(elpaso_item, texas_road)
-    save_voice_file(a23_fisc.fisc_mstr_dir, sue_voice_bud)
+    sue_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
+    sue_gut_bud.add_acctunit(sue_str)
+    sue_gut_bud.add_acctunit(bob_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_item(elpaso_item, texas_road)
+    save_gut_file(a23_fisc.fisc_mstr_dir, sue_gut_bud)
 
     before_bob_plan = a23_fisc.get_plan_file_bud(bob_str)
     before_sue_plan = a23_fisc.get_plan_file_bud(sue_str)

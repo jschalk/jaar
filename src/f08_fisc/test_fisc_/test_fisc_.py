@@ -15,8 +15,8 @@ from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f06_listen.hub_tool import (
-    save_voice_file,
-    open_voice_file,
+    save_gut_file,
+    open_gut_file,
     plan_file_exists,
 )
 from src.f06_listen.hubunit import hubunit_shop
@@ -191,7 +191,7 @@ def test_FiscUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
     assert plan_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
 
-def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):
+def test_FiscUnit_get_owner_gut_from_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
@@ -199,16 +199,16 @@ def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     accord_fisc.init_owner_keeps(sue_str)
     bob_str = "Bob"
-    sue_voice = open_voice_file(x_fisc_mstr_dir, accord45_str, sue_str)
-    sue_voice.add_acctunit(bob_str)
-    save_voice_file(x_fisc_mstr_dir, sue_voice)
+    sue_gut = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
+    sue_gut.add_acctunit(bob_str)
+    save_gut_file(x_fisc_mstr_dir, sue_gut)
 
     # WHEN
-    gen_sue_voice = accord_fisc.get_owner_voice_from_file(sue_str)
+    gen_sue_gut = accord_fisc.get_owner_gut_from_file(sue_str)
 
     # THEN
-    assert gen_sue_voice is not None
-    assert gen_sue_voice.acct_exists(bob_str)
+    assert gen_sue_gut is not None
+    assert gen_sue_gut.acct_exists(bob_str)
 
 
 def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
@@ -222,33 +222,33 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_str = "Yao"
     accord_fisc.init_owner_keeps(sue_str)
     accord_fisc.init_owner_keeps(yao_str)
-    sue_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, sue_str)
-    yao_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, yao_str)
+    sue_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
+    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
 
-    sue_voice_bud.add_acctunit(sue_str)
-    sue_voice_bud.add_acctunit(yao_str)
-    yao_voice_bud.add_acctunit(sue_str)
-    yao_voice_bud.add_acctunit(yao_str)
+    sue_gut_bud.add_acctunit(sue_str)
+    sue_gut_bud.add_acctunit(yao_str)
+    yao_gut_bud.add_acctunit(sue_str)
+    yao_gut_bud.add_acctunit(yao_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    yao_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    yao_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
+    dallas_road = sue_gut_bud.make_road(texas_road, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
     dallas_item = itemunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
-    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
+    elpaso_road = sue_gut_bud.make_road(texas_road, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
     elpaso_item = itemunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_voice_bud.set_item(dallas_item, texas_road)
-    sue_voice_bud.set_item(elpaso_item, texas_road)
-    yao_voice_bud.set_item(dallas_item, texas_road)
-    yao_voice_bud.set_item(elpaso_item, texas_road)
+    sue_gut_bud.set_item(dallas_item, texas_road)
+    sue_gut_bud.set_item(elpaso_item, texas_road)
+    yao_gut_bud.set_item(dallas_item, texas_road)
+    yao_gut_bud.set_item(elpaso_item, texas_road)
 
-    save_voice_file(x_fisc_mstr_dir, sue_voice_bud)
-    save_voice_file(x_fisc_mstr_dir, yao_voice_bud)
+    save_gut_file(x_fisc_mstr_dir, sue_gut_bud)
+    save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(

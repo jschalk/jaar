@@ -3,7 +3,7 @@ from src.f00_instrument.db_toolbox import check_connection
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud_graphics import display_itemtree
-from src.f06_listen.hub_tool import save_voice_file, open_voice_file
+from src.f06_listen.hub_tool import save_gut_file, open_gut_file
 from src.f06_listen.hubunit import hubunit_shop, treasury_filename
 from src.f06_listen.examples.listen_env import (
     env_dir_setup_cleanup,
@@ -22,27 +22,27 @@ def test_HubUnit_get_keep_roads_RaisesErrorWhen__keeps_justified_IsFalse(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
-    sue_voice_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
     dallas_str = "dallas"
-    dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    sue_voice_bud.set_item(itemunit_shop(dallas_str), texas_road)
-    sue_voice_bud.edit_item_attr(texas_road, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.edit_item_attr(dallas_road, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.settle_bud()
-    assert sue_voice_bud._keeps_justified is False
-    save_voice_file(env_dir(), sue_voice_bud)
+    dallas_road = sue_gut_bud.make_road(texas_road, dallas_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_item(itemunit_shop(dallas_str), texas_road)
+    sue_gut_bud.edit_item_attr(texas_road, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.edit_item_attr(dallas_road, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.settle_bud()
+    assert sue_gut_bud._keeps_justified is False
+    save_gut_file(env_dir(), sue_gut_bud)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_keep_roads()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_roads from '{sue_str}' voice bud because 'BudUnit._keeps_justified' is False."
+        == f"Cannot get_keep_roads from '{sue_str}' gut bud because 'BudUnit._keeps_justified' is False."
     )
 
 
@@ -53,24 +53,24 @@ def test_HubUnit_get_keep_roads_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
-    sue_voice_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Tex/as"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    sue_voice_bud.edit_item_attr(texas_road, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.settle_bud()
-    assert sue_voice_bud._keeps_justified
-    assert sue_voice_bud._keeps_buildable is False
-    save_voice_file(env_dir(), sue_voice_bud)
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.edit_item_attr(texas_road, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.settle_bud()
+    assert sue_gut_bud._keeps_justified
+    assert sue_gut_bud._keeps_buildable is False
+    save_gut_file(env_dir(), sue_gut_bud)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_keep_roads()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_roads from '{sue_str}' voice bud because 'BudUnit._keeps_buildable' is False."
+        == f"Cannot get_keep_roads from '{sue_str}' gut bud because 'BudUnit._keeps_buildable' is False."
     )
 
 
@@ -79,23 +79,23 @@ def test_HubUnit_get_keep_roads_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
-    sue_voice_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
-    dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
-    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
+    dallas_road = sue_gut_bud.make_road(texas_road, dallas_str)
+    elpaso_road = sue_gut_bud.make_road(texas_road, elpaso_str)
     dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_item(dallas_item, texas_road)
-    sue_voice_bud.set_item(elpaso_item, texas_road)
-    sue_voice_bud.settle_bud()
-    display_itemtree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
-    save_voice_file(env_dir(), sue_voice_bud)
+    sue_gut_bud.set_item(dallas_item, texas_road)
+    sue_gut_bud.set_item(elpaso_item, texas_road)
+    sue_gut_bud.settle_bud()
+    display_itemtree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_bud)
 
     # WHEN
     sue_keep_roads = sue_hubunit.get_keep_roads()
@@ -106,31 +106,31 @@ def test_HubUnit_get_keep_roads_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     assert elpaso_road in sue_keep_roads
 
 
-def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
+def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
-    sue_voice_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_bud.add_acctunit(sue_str)
     bob_str = "Bob"
-    sue_voice_bud.add_acctunit(bob_str)
+    sue_gut_bud.add_acctunit(bob_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
+    dallas_road = sue_gut_bud.make_road(texas_road, dallas_str)
     dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_item(dallas_item, texas_road)
+    sue_gut_bud.set_item(dallas_item, texas_road)
     elpaso_str = "el paso"
-    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
+    elpaso_road = sue_gut_bud.make_road(texas_road, elpaso_str)
     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_item(elpaso_item, texas_road)
-    display_itemtree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
-    save_voice_file(env_dir(), sue_voice_bud)
+    sue_gut_bud.set_item(elpaso_item, texas_road)
+    display_itemtree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_bud)
     sue_dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_road)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_road)
     assert os_path_exists(sue_dallas_hubunit.duty_path(sue_str)) is False
@@ -138,7 +138,7 @@ def test_HubUnit_save_all_voice_dutys_CorrectlySetsdutys(
     assert sue_hubunit.keep_road is None
 
     # WHEN
-    sue_hubunit.save_all_voice_dutys()
+    sue_hubunit.save_all_gut_dutys()
 
     # THEN
     assert os_path_exists(sue_dallas_hubunit.duty_path(sue_str))
@@ -153,10 +153,10 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
     sue_hubunit.keep_road = texas_road
     assert os_path_exists(sue_hubunit.treasury_db_path()) is False
 
@@ -201,10 +201,10 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
     sue_hubunit.keep_road = texas_road
     assert sue_hubunit.treasury_db_file_exists() is False
 
@@ -251,30 +251,30 @@ def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_keep_road(
     )
 
 
-def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(
+def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    sue_voice_bud = open_voice_file(env_dir(), a23_str, sue_str)
-    sue_voice_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Texas"
-    texas_road = sue_voice_bud.make_l1_road(texas_str)
-    sue_voice_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    texas_road = sue_gut_bud.make_l1_road(texas_str)
+    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
-    dallas_road = sue_voice_bud.make_road(texas_road, dallas_str)
-    elpaso_road = sue_voice_bud.make_road(texas_road, elpaso_str)
+    dallas_road = sue_gut_bud.make_road(texas_road, dallas_str)
+    elpaso_road = sue_gut_bud.make_road(texas_road, elpaso_str)
     dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_voice_bud.set_item(dallas_item, texas_road)
-    sue_voice_bud.set_item(elpaso_item, texas_road)
-    sue_voice_bud.settle_bud()
-    display_itemtree(sue_voice_bud, mode="Keep", graphics_bool=graphics_bool)
-    save_voice_file(env_dir(), sue_voice_bud)
+    sue_gut_bud.set_item(dallas_item, texas_road)
+    sue_gut_bud.set_item(elpaso_item, texas_road)
+    sue_gut_bud.settle_bud()
+    display_itemtree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_bud)
 
     dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_road)
     elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_road)
@@ -285,7 +285,7 @@ def test_HubUnit_create_voice_treasury_db_files_CreatesDatabases(
     assert sue_hubunit.keep_road is None
 
     # WHEN
-    sue_hubunit.create_voice_treasury_db_files()
+    sue_hubunit.create_gut_treasury_db_files()
 
     # THEN
     assert os_path_exists(dallas_hubunit.treasury_db_path())

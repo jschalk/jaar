@@ -1,7 +1,7 @@
 from src.f00_instrument.file import create_path, save_file, open_file
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.f06_listen.hub_path import create_owner_event_dir_path, create_voice_path
-from src.f11_etl.transformers import etl_event_inherited_budunits_to_fisc_voice
+from src.f06_listen.hub_path import create_owner_event_dir_path, create_gut_path
+from src.f11_etl.transformers import etl_event_inherited_budunits_to_fisc_gut
 from src.f11_etl.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
 from os.path import exists as os_path_exists
 
@@ -10,7 +10,7 @@ from os.path import exists as os_path_exists
 # test that dealunit with depth 1 is able to create nested budunits directories and populate with event relevant
 
 
-def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
+def test_etl_event_inherited_budunits_to_fisc_gut_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -46,15 +46,15 @@ def test_etl_event_inherited_budunits_to_fisc_voice_SetsFiles_Scenario0(
     assert os_path_exists(e7_bud_path)
     print(e3_bud_path)
     print(e7_bud_path)
-    a23_bob_voice_path = create_voice_path(fisc_mstr_dir, a23_str, bob_inx)
-    assert os_path_exists(a23_bob_voice_path) is False
+    a23_bob_gut_path = create_gut_path(fisc_mstr_dir, a23_str, bob_inx)
+    assert os_path_exists(a23_bob_gut_path) is False
 
     # WHEN
-    etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir)
+    etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir)
 
     # THEN
-    assert os_path_exists(a23_bob_voice_path)
-    generated_voice_bud = budunit_get_from_json(open_file(a23_bob_voice_path))
-    assert generated_voice_bud.accts == e7_bob_bud.accts
-    assert generated_voice_bud == e7_bob_bud
-    assert generated_voice_bud.get_dict() == e7_bob_bud.get_dict()
+    assert os_path_exists(a23_bob_gut_path)
+    generated_gut_bud = budunit_get_from_json(open_file(a23_bob_gut_path))
+    assert generated_gut_bud.accts == e7_bob_bud.accts
+    assert generated_gut_bud == e7_bob_bud
+    assert generated_gut_bud.get_dict() == e7_bob_bud.get_dict()

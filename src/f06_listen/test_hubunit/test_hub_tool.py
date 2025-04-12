@@ -16,7 +16,7 @@ from src.f06_listen.cell import (
     boss_facts_str,
 )
 from src.f06_listen.hub_path import (
-    create_voice_path,
+    create_gut_path,
     create_plan_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
@@ -27,11 +27,11 @@ from src.f06_listen.hub_path import (
 from src.f06_listen.hub_tool import (
     save_bud_file,
     open_bud_file,
-    save_voice_file,
-    open_voice_file,
+    save_gut_file,
+    open_gut_file,
     save_plan_file,
     open_plan_file,
-    voice_file_exists,
+    gut_file_exists,
     plan_file_exists,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
@@ -102,61 +102,61 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists():
     assert gen_sue_bud == expected_sue_bud
 
 
-def test_save_voice_file_SetsFile(env_dir_setup_cleanup):
+def test_save_gut_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_voice_path = create_voice_path(fisc_mstr_dir, a23_str, sue_str)
+    sue_gut_path = create_gut_path(fisc_mstr_dir, a23_str, sue_str)
     sue_bud = budunit_shop(sue_str, a23_str)
-    assert os_path_exists(sue_voice_path) is False
+    assert os_path_exists(sue_gut_path) is False
 
     # WHEN
-    save_voice_file(fisc_mstr_dir, sue_bud)
+    save_gut_file(fisc_mstr_dir, sue_bud)
 
     # THEN
-    assert os_path_exists(sue_voice_path)
+    assert os_path_exists(sue_gut_path)
 
 
-def test_voice_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_gut_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str, a23_str)
-    assert voice_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
+    assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_voice_file(fisc_mstr_dir, sue_bud)
+    save_gut_file(fisc_mstr_dir, sue_bud)
 
     # THEN
-    assert voice_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_open_voice_file_ReturnsObj_Scenario0_noFile():
+def test_open_gut_file_ReturnsObj_Scenario0_noFile():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_voice_path = create_voice_path(fisc_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_voice_path) is False
+    sue_gut_path = create_gut_path(fisc_mstr_dir, a23_str, sue_str)
+    assert os_path_exists(sue_gut_path) is False
 
     # WHEN / THEN
-    assert not open_voice_file(fisc_mstr_dir, a23_str, sue_str)
+    assert not open_gut_file(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_open_voice_file_ReturnsObj_Scenario1_FileExists():
+def test_open_gut_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_voice_path = create_voice_path(fisc_mstr_dir, a23_str, sue_str)
+    sue_gut_path = create_gut_path(fisc_mstr_dir, a23_str, sue_str)
     sue_bud = budunit_shop(sue_str, a23_str)
-    save_voice_file(fisc_mstr_dir, sue_bud)
-    assert os_path_exists(sue_voice_path)
+    save_gut_file(fisc_mstr_dir, sue_bud)
+    assert os_path_exists(sue_gut_path)
 
     # WHEN / THEN
-    assert sue_bud == open_voice_file(fisc_mstr_dir, a23_str, sue_str)
+    assert sue_bud == open_gut_file(fisc_mstr_dir, a23_str, sue_str)
 
 
 def test_save_plan_file_SetsFile(env_dir_setup_cleanup):

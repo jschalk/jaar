@@ -11,7 +11,7 @@ from src.f06_listen.basis_buds import create_empty_bud, create_listen_basis
 from src.f06_listen.hub_tool import (
     save_plan_file,
     open_plan_file,
-    open_voice_file,
+    open_gut_file,
 )
 from src.f06_listen.hubunit import HubUnit, hubunit_shop
 from copy import deepcopy as copy_deepcopy
@@ -182,13 +182,13 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     return _ingest_perspective_agenda(listener, agenda)
 
 
-def listen_to_agendas_voice_plan(fisc_mstr_dir: str, listener_plan: BudUnit):
+def listen_to_agendas_gut_plan(fisc_mstr_dir: str, listener_plan: BudUnit):
     fisc_title = listener_plan.fisc_title
     owner_name = listener_plan.owner_name
     for x_acctunit in get_ordered_debtors_roll(listener_plan):
         if x_acctunit.acct_name == owner_name:
-            voice_bud = open_voice_file(fisc_mstr_dir, fisc_title, owner_name)
-            listen_to_speaker_agenda(listener_plan, voice_bud)
+            gut_bud = open_gut_file(fisc_mstr_dir, fisc_title, owner_name)
+            listen_to_speaker_agenda(listener_plan, gut_bud)
         else:
             speaker_id = x_acctunit.acct_name
             speaker_plan = open_plan_file(fisc_mstr_dir, fisc_title, speaker_id)
@@ -222,10 +222,10 @@ def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
-def listen_to_facts_voice_plan(fisc_mstr_dir: str, new_plan: BudUnit):
+def listen_to_facts_gut_plan(fisc_mstr_dir: str, new_plan: BudUnit):
     fisc_title = new_plan.fisc_title
-    voice_bud = open_voice_file(fisc_mstr_dir, fisc_title, new_plan.owner_name)
-    migrate_all_facts(voice_bud, new_plan)
+    gut_bud = open_gut_file(fisc_mstr_dir, fisc_title, new_plan.owner_name)
+    migrate_all_facts(gut_bud, new_plan)
     for x_acctunit in get_ordered_debtors_roll(new_plan):
         speaker_id = x_acctunit.acct_name
         if speaker_id != new_plan.owner_name:
@@ -234,15 +234,15 @@ def listen_to_facts_voice_plan(fisc_mstr_dir: str, new_plan: BudUnit):
                 listen_to_speaker_fact(new_plan, speaker_plan)
 
 
-def listen_to_debtors_roll_voice_plan(
+def listen_to_debtors_roll_gut_plan(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> BudUnit:
-    voice = open_voice_file(fisc_mstr_dir, fisc_title, owner_name)
-    new_bud = create_listen_basis(voice)
-    if voice.debtor_respect is None:
+    gut = open_gut_file(fisc_mstr_dir, fisc_title, owner_name)
+    new_bud = create_listen_basis(gut)
+    if gut.debtor_respect is None:
         return new_bud
-    listen_to_agendas_voice_plan(fisc_mstr_dir, new_bud)
-    listen_to_facts_voice_plan(fisc_mstr_dir, new_bud)
+    listen_to_agendas_gut_plan(fisc_mstr_dir, new_bud)
+    listen_to_facts_gut_plan(fisc_mstr_dir, new_bud)
     return new_bud
 
 
@@ -259,26 +259,26 @@ def listen_to_debtors_roll_duty_job(
 
 
 def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
-    voice = open_voice_file(
+    gut = open_gut_file(
         listener_hubunit.fisc_mstr_dir,
         listener_hubunit.fisc_title,
         listener_hubunit.owner_name,
     )
-    new_plan = create_listen_basis(voice)
+    new_plan = create_listen_basis(gut)
     pre_plan_dict = new_plan.get_dict()
-    voice.settle_bud()
+    gut.settle_bud()
     new_plan.settle_bud()
 
-    for x_healer_name, keep_dict in voice._healers_dict.items():
+    for x_healer_name, keep_dict in gut._healers_dict.items():
         listener_id = listener_hubunit.owner_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_name = x_healer_name
         _pick_keep_jobs_and_listen(listener_id, keep_dict, healer_hubunit, new_plan)
 
     if new_plan.get_dict() == pre_plan_dict:
-        agenda = list(voice.get_agenda_dict().values())
+        agenda = list(gut.get_agenda_dict().values())
         _ingest_perspective_agenda(new_plan, agenda)
-        listen_to_speaker_fact(new_plan, voice)
+        listen_to_speaker_fact(new_plan, gut)
 
     save_plan_file(listener_hubunit.fisc_mstr_dir, new_plan)
 

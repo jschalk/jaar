@@ -30,8 +30,8 @@ def get_json_filename(filename_without_extention) -> str:
     return f"{filename_without_extention}.json"
 
 
-def voice_str() -> str:
-    return "voice"
+def gut_str() -> str:
+    return "gut"
 
 
 def plan_str() -> str:

@@ -8,7 +8,7 @@ from src.f00_instrument.file import (
 )
 from src.f01_road.jaar_config import init_kick_id, get_test_fisc_title as fisc_title
 from src.f04_kick.kick import kickunit_shop, get_json_filename
-from src.f06_listen.hub_tool import save_voice_file, open_voice_file
+from src.f06_listen.hub_tool import save_gut_file, open_gut_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_atoms import get_atom_example_itemunit_knee
 from src.f06_listen.examples.example_listen_kicks import (
@@ -455,7 +455,7 @@ def test_HubUnit_create_save_kick_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.kick_file_exists(three_int) is False
 
     # WHEN
-    before_bud = sue_hubunit.default_voice_bud()
+    before_bud = sue_hubunit.default_gut_bud()
     bob_str = "Bob"
     after_bud = copy_deepcopy(before_bud)
     after_bud.add_acctunit(bob_str)
@@ -469,15 +469,15 @@ def test_HubUnit_merge_any_kicks_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    voice_bud = open_voice_file(env_dir(), fisc_title(), sue_str)
-    voice_bud.last_kick_id is None
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud.last_kick_id is None
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_kicks(voice_bud)
+    new_bud = sue_hubunit._merge_any_kicks(gut_bud)
 
     # THEN
-    assert new_bud == voice_bud
+    assert new_bud == gut_bud
 
 
 def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_1atom(
@@ -487,21 +487,21 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_1atom(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_kick_file(sue_1budatoms_kickunit())
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    voice_bud = open_voice_file(env_dir(), fisc_title(), sue_str)
-    print(f"{voice_bud.fisc_title=}")
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    print(f"{gut_bud.fisc_title=}")
     print(f"{sue_hubunit.fisc_title=}")
     sports_str = "sports"
-    sports_road = voice_bud.make_l1_road(sports_str)
+    sports_road = gut_bud.make_l1_road(sports_str)
     knee_str = "knee"
-    knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.item_exists(sports_road) is False
+    knee_road = gut_bud.make_road(sports_road, knee_str)
+    assert gut_bud.item_exists(sports_road) is False
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_kicks(voice_bud)
+    new_bud = sue_hubunit._merge_any_kicks(gut_bud)
 
     # THEN
-    assert new_bud != voice_bud
+    assert new_bud != gut_bud
     assert new_bud.item_exists(sports_road)
 
 
@@ -512,20 +512,20 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_2atoms(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_kick_file(sue_2budatoms_kickunit())
-    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
-    voice_bud = open_voice_file(env_dir(), fisc_title(), sue_str)
-    print(f"{voice_bud.fisc_title=}")
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    print(f"{gut_bud.fisc_title=}")
     sports_str = "sports"
-    sports_road = voice_bud.make_l1_road(sports_str)
+    sports_road = gut_bud.make_l1_road(sports_str)
     knee_str = "knee"
-    knee_road = voice_bud.make_road(sports_road, knee_str)
-    assert voice_bud.item_exists(sports_road) is False
-    assert voice_bud.item_exists(knee_road) is False
+    knee_road = gut_bud.make_road(sports_road, knee_str)
+    assert gut_bud.item_exists(sports_road) is False
+    assert gut_bud.item_exists(knee_road) is False
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_kicks(voice_bud)
+    new_bud = sue_hubunit._merge_any_kicks(gut_bud)
 
     # THEN
-    assert new_bud != voice_bud
+    assert new_bud != gut_bud
     assert new_bud.item_exists(sports_road)
     assert new_bud.item_exists(knee_road)
