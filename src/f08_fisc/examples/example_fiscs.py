@@ -122,17 +122,15 @@ def create_example_fisc3() -> FiscUnit:
 
 def create_example_fisc4() -> FiscUnit:
     # ESTABLISH
+    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(
-        accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
-    )
+    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
     accord_fisc.init_owner_keeps(yao_str)
     accord_fisc.init_owner_keeps(wei_str)
     accord_fisc.init_owner_keeps(zia_str)
-    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
     yao_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, yao_str)
     wei_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, wei_str)
     zia_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, zia_str)

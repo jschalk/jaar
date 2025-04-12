@@ -49,14 +49,17 @@ def test_FiscUnit_Exists():
 
 
 def test_fiscunit_shop_ReturnsFiscUnit():
-    # ESTABLISH / WHEN
-    accord_fisc = fiscunit_shop()
+    # ESTABLISH
+    a23_str = "accord23"
+
+    # WHEN
+    accord_fisc = fiscunit_shop(a23_str)
 
     # THEN
-    assert accord_fisc.fisc_title == get_test_fisc_title()
+    assert accord_fisc.fisc_title == a23_str
     assert accord_fisc.timeline == timelineunit_shop()
     assert accord_fisc.brokerunits == {}
-    assert accord_fisc.cashbook == tranbook_shop(get_test_fisc_title())
+    assert accord_fisc.cashbook == tranbook_shop(a23_str)
     assert accord_fisc.offi_times == set()
     assert accord_fisc.bridge == default_bridge_if_None()
     assert accord_fisc.fund_coin == default_fund_coin_if_None()
@@ -66,7 +69,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     # Calculated fields
     assert accord_fisc._owners_dir != None
     assert accord_fisc._kicks_dir != None
-    assert accord_fisc._all_tranbook == tranbook_shop(get_test_fisc_title())
+    assert accord_fisc._all_tranbook == tranbook_shop(a23_str)
 
 
 def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):

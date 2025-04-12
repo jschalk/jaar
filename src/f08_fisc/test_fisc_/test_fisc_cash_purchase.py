@@ -6,7 +6,7 @@ from pytest import raises as pytest_raises
 def test_FiscUnit_set_cashpurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -25,7 +25,7 @@ def test_FiscUnit_set_cashpurchase_SetsAttr():
 def test_FiscUnit_add_cashpurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -43,7 +43,7 @@ def test_FiscUnit_add_cashpurchase_SetsAttr():
 def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThanOrEqual_offi_time_max():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -80,7 +80,7 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_tran_time_GreaterTha
 
 def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_tran_time():
     # ESTABLISH
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = 0
     x_fisc._offi_time_max = 0
     sue_str = "Sue"
@@ -104,7 +104,7 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_tran_time():
 
 def test_FiscUnit_cashpurchase_exists_ReturnsObj():
     # ESTABLISH
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
@@ -121,7 +121,7 @@ def test_FiscUnit_cashpurchase_exists_ReturnsObj():
 
 def test_FiscUnit_get_cashpurchase_ReturnsObj():
     # ESTABLISH
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
@@ -141,7 +141,7 @@ def test_FiscUnit_get_cashpurchase_ReturnsObj():
 
 def test_FiscUnit_del_cashpurchase_SetsAttr():
     # ESTABLISH
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
@@ -160,7 +160,7 @@ def test_FiscUnit_del_cashpurchase_SetsAttr():
 def test_FiscUnit_set_offi_time_max_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -180,7 +180,7 @@ def test_FiscUnit_set_offi_time_max_SetsAttr():
 def test_FiscUnit_set_offi_time_max_RaisesErrorWhen_cashpurchase_ExistsWithGreatertran_time():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -202,7 +202,7 @@ def test_FiscUnit_set_offi_time_max_RaisesErrorWhen_cashpurchase_ExistsWithGreat
 
 def test_FiscUnit_set_all_tranbook_SetsAttr():
     # ESTABLISH
-    x_fisc = fiscunit_shop()
+    x_fisc = fiscunit_shop("accord23")
     x_fisc._offi_time_max = 10101
     sue_str = "Sue"
     bob_str = "Bob"

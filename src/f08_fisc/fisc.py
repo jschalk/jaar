@@ -461,7 +461,7 @@ def _get_ote1_max_past_event_int(
 
 
 def fiscunit_shop(
-    fisc_title: FiscTitle = None,
+    fisc_title: FiscTitle,
     fisc_mstr_dir: str = None,
     timeline: TimeLineUnit = None,
     offi_times: set[TimeLinePoint] = None,
@@ -473,7 +473,6 @@ def fiscunit_shop(
 ) -> FiscUnit:
     if timeline is None:
         timeline = timelineunit_shop()
-    fisc_title = get_fisc_title_if_None(fisc_title)
     if fisc_mstr_dir is None:
         fisc_mstr_dir = get_test_fisc_mstr_dir()
     x_fiscunit = FiscUnit(
