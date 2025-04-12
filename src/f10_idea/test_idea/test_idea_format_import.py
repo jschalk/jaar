@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path as f_path
+from src.f00_instrument.file import create_path
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud import budunit_shop
 from src.f04_kick.atom_config import (
@@ -103,7 +103,7 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToForecast(
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_ideaname = idea_format_00021_bud_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = f_path(idea_examples_dir(), name_filename)
+    csv_example_path = create_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
     sue_hubunit = hubunit_shop(
@@ -157,7 +157,7 @@ def test_load_idea_csv_csvToForecast(
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_ideaname = idea_format_00021_bud_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = f_path(idea_examples_dir(), name_filename)
+    csv_example_path = create_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
     sue_hubunit = hubunit_shop(

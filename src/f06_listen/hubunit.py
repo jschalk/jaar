@@ -1,5 +1,5 @@
 from src.f00_instrument.file import (
-    create_path as f_path,
+    create_path,
     get_directory_path,
     save_file,
     open_file,
@@ -104,15 +104,15 @@ class calc_timepoint_deal_Exception(Exception):
 
 
 def get_keep_dutys_dir(x_keep_dir: str) -> str:
-    return f_path(x_keep_dir, "dutys")
+    return create_path(x_keep_dir, "dutys")
 
 
 def get_keep_jobs_dir(x_keep_dir: str) -> str:
-    return f_path(x_keep_dir, "jobs")
+    return create_path(x_keep_dir, "jobs")
 
 
 def get_keep_grades_dir(x_keep_dir: str) -> str:
-    return f_path(x_keep_dir, grades_folder())
+    return create_path(x_keep_dir, grades_folder())
 
 
 @dataclass
@@ -136,14 +136,14 @@ class HubUnit:
     _deals_dir: str = None
 
     def set_dir_attrs(self):
-        fiscs_dir = f_path(self.fisc_mstr_dir, "fiscs")
-        self._fisc_dir = f_path(fiscs_dir, self.fisc_title)
-        self._owners_dir = f_path(self._fisc_dir, "owners")
-        self._owner_dir = f_path(self._owners_dir, self.owner_name)
-        self._keeps_dir = f_path(self._owner_dir, "keeps")
-        self._atoms_dir = f_path(self._owner_dir, "atoms")
-        self._kicks_dir = f_path(self._owner_dir, get_kicks_folder())
-        self._deals_dir = f_path(self._owner_dir, "deals")
+        fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
+        self._fisc_dir = create_path(fiscs_dir, self.fisc_title)
+        self._owners_dir = create_path(self._fisc_dir, "owners")
+        self._owner_dir = create_path(self._owners_dir, self.owner_name)
+        self._keeps_dir = create_path(self._owner_dir, "keeps")
+        self._atoms_dir = create_path(self._owner_dir, "atoms")
+        self._kicks_dir = create_path(self._owner_dir, get_kicks_folder())
+        self._deals_dir = create_path(self._owner_dir, "deals")
 
     def voice_file_exists(self) -> bool:
         voice_path = create_voice_path(
@@ -182,7 +182,7 @@ class HubUnit:
         return f"{atom_number}.json"
 
     def atom_file_path(self, atom_number: int) -> str:
-        return f_path(self._atoms_dir, self.atom_filename(atom_number))
+        return create_path(self._atoms_dir, self.atom_filename(atom_number))
 
     def _save_valid_atom_file(self, x_atom: BudAtom, file_number: int):
         save_file(
@@ -228,7 +228,7 @@ class HubUnit:
 
     def kick_file_path(self, kick_id: int) -> bool:
         kick_filename = self.kick_filename(kick_id)
-        return f_path(self._kicks_dir, kick_filename)
+        return create_path(self._kicks_dir, kick_filename)
 
     def kick_file_exists(self, kick_id: int) -> bool:
         return os_path_exists(self.kick_file_path(kick_id))
@@ -363,13 +363,13 @@ class HubUnit:
 
     # Deal methods
     def timepoint_dir(self, x_deal_time: TimeLinePoint) -> str:
-        return f_path(self._deals_dir, str(x_deal_time))
+        return create_path(self._deals_dir, str(x_deal_time))
 
     def deal_filename(self) -> str:
         return "dealunit.json"
 
     def deal_file_path(self, x_deal_time: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_deal_time), self.deal_filename())
+        return create_path(self.timepoint_dir(x_deal_time), self.deal_filename())
 
     def _save_valid_deal_file(self, x_deal: DealUnit):
         x_deal.calc_magnitude()
@@ -409,7 +409,7 @@ class HubUnit:
         return "budpoint.json"
 
     def budpoint_file_path(self, x_deal_time: TimeLinePoint) -> str:
-        return f_path(self.timepoint_dir(x_deal_time), self.budpoint_filename())
+        return create_path(self.timepoint_dir(x_deal_time), self.budpoint_filename())
 
     def _save_valid_budpoint_file(
         self, x_deal_time: TimeLinePoint, x_budpoint: BudUnit
@@ -473,16 +473,16 @@ class HubUnit:
         return treasury_filename()
 
     def treasury_db_path(self) -> str:
-        return f_path(self.keep_dir(), treasury_filename())
+        return create_path(self.keep_dir(), treasury_filename())
 
     def duty_path(self, owner_name: OwnerName) -> str:
-        return f_path(self.dutys_dir(), self.owner_filename(owner_name))
+        return create_path(self.dutys_dir(), self.owner_filename(owner_name))
 
     def job_path(self, owner_name: OwnerName) -> str:
-        return f_path(self.jobs_dir(), self.owner_filename(owner_name))
+        return create_path(self.jobs_dir(), self.owner_filename(owner_name))
 
     def grade_path(self, owner_name: OwnerName) -> str:
-        return f_path(self.grades_dir(), self.owner_filename(owner_name))
+        return create_path(self.grades_dir(), self.owner_filename(owner_name))
 
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
@@ -649,4 +649,4 @@ def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
     x_road = rebuild_road(x_road, x_hubunit.fisc_title, keep_root)
     x_list = get_all_road_titles(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
-    return f_path(x_hubunit._keeps_dir, keep_sub_path)
+    return create_path(x_hubunit._keeps_dir, keep_sub_path)

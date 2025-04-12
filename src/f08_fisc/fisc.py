@@ -231,8 +231,7 @@ class FiscUnit:
     # forecast bud management
     def generate_forecast_bud(self, owner_name: OwnerName) -> BudUnit:
         mstr_dir = self.fisc_mstr_dir
-        owner_voice_path = create_voice_path(mstr_dir, self.fisc_title, owner_name)
-        x_voice = open_bud_file(owner_voice_path)
+        x_voice = open_voice_file(mstr_dir, self.fisc_title, owner_name)
         x_voice.settle_bud()
         x_forecast = get_default_forecast_bud(x_voice)
         for healer_name, healer_dict in x_voice._healers_dict.items():
