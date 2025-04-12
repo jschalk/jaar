@@ -88,8 +88,8 @@ from src.f11_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
     get_fisc_fu1_select_sqlstrs,
-    get_forecast_create_table_sqlstrs,
-    create_forecast_tables,
+    get_plan_create_table_sqlstrs,
+    create_plan_tables,
     # get_bud_bu1_select_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -1061,10 +1061,10 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
         assert gen_fiscunit_sqlstr == fiscunit_sql
 
 
-def test_get_forecast_create_table_sqlstrs_ReturnsObj():
+def test_get_plan_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_forecast_create_table_sqlstrs()
+    create_table_sqlstrs = get_plan_create_table_sqlstrs()
 
     # THEN
     s_types = get_idea_sqlite_types()
@@ -1073,56 +1073,52 @@ def test_get_forecast_create_table_sqlstrs_ReturnsObj():
         # print(f"{x_dimen} checking...")
         x_config = fund_metric_config.get(x_dimen)
 
-        forecast_table = f"{x_dimen}_forecast"
-        forecast_cols = {fisc_title_str(), owner_name_str()}
-        forecast_cols.update(set(x_config.get("jkeys").keys()))
-        forecast_cols.update(set(x_config.get("jvalues").keys()))
-        forecast_cols.update(set(x_config.get("jmetrics").keys()))
-        forecast_cols = get_default_sorted_list(forecast_cols)
-        expected_create_sqlstr = get_create_table_sqlstr(
-            forecast_table, forecast_cols, s_types
-        )
-        forecast_dimen_abbr = x_config.get("abbreviation").upper()
-        print(
-            f'CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""'
-        )
-        # print(f'"{forecast_table}": CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR,')
-        assert create_table_sqlstrs.get(forecast_table) == expected_create_sqlstr
+        plan_table = f"{x_dimen}_plan"
+        plan_cols = {fisc_title_str(), owner_name_str()}
+        plan_cols.update(set(x_config.get("jkeys").keys()))
+        plan_cols.update(set(x_config.get("jvalues").keys()))
+        plan_cols.update(set(x_config.get("jmetrics").keys()))
+        plan_cols = get_default_sorted_list(plan_cols)
+        expected_create_sqlstr = get_create_table_sqlstr(plan_table, plan_cols, s_types)
+        plan_dimen_abbr = x_config.get("abbreviation").upper()
+        print(f'CREATE_PLAN_{plan_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""')
+        # print(f'"{plan_table}": CREATE_PLAN_{plan_dimen_abbr}_SQLSTR,')
+        assert create_table_sqlstrs.get(plan_table) == expected_create_sqlstr
 
 
-def test_create_forecast_tables_CreatesTables():
+def test_create_plan_tables_CreatesTables():
     # ESTABLISH
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        budmemb_forecast_table = f"{bud_acct_membership_str()}_forecast"
-        budacct_forecast_table = f"{bud_acctunit_str()}_forecast"
-        budgrou_forecast_table = f"{bud_groupunit_str()}_forecast"
-        budawar_forecast_table = f"{bud_item_awardlink_str()}_forecast"
-        budfact_forecast_table = f"{bud_item_factunit_str()}_forecast"
-        budheal_forecast_table = f"{bud_item_healerlink_str()}_forecast"
-        budprem_forecast_table = f"{bud_item_reason_premiseunit_str()}_forecast"
-        budares_forecast_table = f"{bud_item_reasonunit_str()}_forecast"
-        budteam_forecast_table = f"{bud_item_teamlink_str()}_forecast"
-        buditem_forecast_table = f"{bud_itemunit_str()}_forecast"
-        budunit_forecast_table = f"{budunit_str()}_forecast"
+        budmemb_plan_table = f"{bud_acct_membership_str()}_plan"
+        budacct_plan_table = f"{bud_acctunit_str()}_plan"
+        budgrou_plan_table = f"{bud_groupunit_str()}_plan"
+        budawar_plan_table = f"{bud_item_awardlink_str()}_plan"
+        budfact_plan_table = f"{bud_item_factunit_str()}_plan"
+        budheal_plan_table = f"{bud_item_healerlink_str()}_plan"
+        budprem_plan_table = f"{bud_item_reason_premiseunit_str()}_plan"
+        budares_plan_table = f"{bud_item_reasonunit_str()}_plan"
+        budteam_plan_table = f"{bud_item_teamlink_str()}_plan"
+        buditem_plan_table = f"{bud_itemunit_str()}_plan"
+        budunit_plan_table = f"{budunit_str()}_plan"
 
-        assert db_table_exists(cursor, budmemb_forecast_table) is False
-        assert db_table_exists(cursor, budacct_forecast_table) is False
-        assert db_table_exists(cursor, budgrou_forecast_table) is False
-        assert db_table_exists(cursor, budawar_forecast_table) is False
-        assert db_table_exists(cursor, budfact_forecast_table) is False
-        assert db_table_exists(cursor, budheal_forecast_table) is False
-        assert db_table_exists(cursor, budprem_forecast_table) is False
-        assert db_table_exists(cursor, budares_forecast_table) is False
-        assert db_table_exists(cursor, budteam_forecast_table) is False
-        assert db_table_exists(cursor, buditem_forecast_table) is False
-        assert db_table_exists(cursor, budunit_forecast_table) is False
+        assert db_table_exists(cursor, budmemb_plan_table) is False
+        assert db_table_exists(cursor, budacct_plan_table) is False
+        assert db_table_exists(cursor, budgrou_plan_table) is False
+        assert db_table_exists(cursor, budawar_plan_table) is False
+        assert db_table_exists(cursor, budfact_plan_table) is False
+        assert db_table_exists(cursor, budheal_plan_table) is False
+        assert db_table_exists(cursor, budprem_plan_table) is False
+        assert db_table_exists(cursor, budares_plan_table) is False
+        assert db_table_exists(cursor, budteam_plan_table) is False
+        assert db_table_exists(cursor, buditem_plan_table) is False
+        assert db_table_exists(cursor, budunit_plan_table) is False
 
         # WHEN
-        create_forecast_tables(cursor)
+        create_plan_tables(cursor)
 
         # THEN
         cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
@@ -1131,17 +1127,17 @@ def test_create_forecast_tables_CreatesTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, budmemb_forecast_table)
-        assert db_table_exists(cursor, budacct_forecast_table)
-        assert db_table_exists(cursor, budgrou_forecast_table)
-        assert db_table_exists(cursor, budawar_forecast_table)
-        assert db_table_exists(cursor, budfact_forecast_table)
-        assert db_table_exists(cursor, budheal_forecast_table)
-        assert db_table_exists(cursor, budprem_forecast_table)
-        assert db_table_exists(cursor, budares_forecast_table)
-        assert db_table_exists(cursor, budteam_forecast_table)
-        assert db_table_exists(cursor, buditem_forecast_table)
-        assert db_table_exists(cursor, budunit_forecast_table)
+        assert db_table_exists(cursor, budmemb_plan_table)
+        assert db_table_exists(cursor, budacct_plan_table)
+        assert db_table_exists(cursor, budgrou_plan_table)
+        assert db_table_exists(cursor, budawar_plan_table)
+        assert db_table_exists(cursor, budfact_plan_table)
+        assert db_table_exists(cursor, budheal_plan_table)
+        assert db_table_exists(cursor, budprem_plan_table)
+        assert db_table_exists(cursor, budares_plan_table)
+        assert db_table_exists(cursor, budteam_plan_table)
+        assert db_table_exists(cursor, buditem_plan_table)
+        assert db_table_exists(cursor, budunit_plan_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11
 

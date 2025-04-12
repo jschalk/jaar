@@ -17,7 +17,7 @@ from src.f06_listen.cell import (
 )
 from src.f06_listen.hub_path import (
     create_voice_path,
-    create_forecast_path,
+    create_plan_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
     create_cell_acct_mandate_ledger_path,
@@ -29,10 +29,10 @@ from src.f06_listen.hub_tool import (
     open_bud_file,
     save_voice_file,
     open_voice_file,
-    save_forecast_file,
-    open_forecast_file,
+    save_plan_file,
+    open_plan_file,
     voice_file_exists,
-    forecast_file_exists,
+    plan_file_exists,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
     get_budevent_obj,
@@ -159,61 +159,61 @@ def test_open_voice_file_ReturnsObj_Scenario1_FileExists():
     assert sue_bud == open_voice_file(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_save_forecast_file_SetsFile(env_dir_setup_cleanup):
+def test_save_plan_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_forecast_path = create_forecast_path(fisc_mstr_dir, a23_str, sue_str)
+    sue_plan_path = create_plan_path(fisc_mstr_dir, a23_str, sue_str)
     sue_bud = budunit_shop(sue_str, a23_str)
-    assert os_path_exists(sue_forecast_path) is False
+    assert os_path_exists(sue_plan_path) is False
 
     # WHEN
-    save_forecast_file(fisc_mstr_dir, sue_bud)
+    save_plan_file(fisc_mstr_dir, sue_bud)
 
     # THEN
-    assert os_path_exists(sue_forecast_path)
+    assert os_path_exists(sue_plan_path)
 
 
-def test_forecast_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_plan_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str, a23_str)
-    assert forecast_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
+    assert plan_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_forecast_file(fisc_mstr_dir, sue_bud)
+    save_plan_file(fisc_mstr_dir, sue_bud)
 
     # THEN
-    assert forecast_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert plan_file_exists(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_open_forecast_file_ReturnsObj_Scenario0_noFile():
+def test_open_plan_file_ReturnsObj_Scenario0_noFile():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_forecast_path = create_forecast_path(fisc_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_forecast_path) is False
+    sue_plan_path = create_plan_path(fisc_mstr_dir, a23_str, sue_str)
+    assert os_path_exists(sue_plan_path) is False
 
     # WHEN / THEN
-    assert not open_forecast_file(fisc_mstr_dir, a23_str, sue_str)
+    assert not open_plan_file(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_open_forecast_file_ReturnsObj_Scenario1_FileExists():
+def test_open_plan_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_forecast_path = create_forecast_path(fisc_mstr_dir, a23_str, sue_str)
+    sue_plan_path = create_plan_path(fisc_mstr_dir, a23_str, sue_str)
     sue_bud = budunit_shop(sue_str, a23_str)
-    save_forecast_file(fisc_mstr_dir, sue_bud)
-    assert os_path_exists(sue_forecast_path)
+    save_plan_file(fisc_mstr_dir, sue_bud)
+    assert os_path_exists(sue_plan_path)
 
     # WHEN / THEN
-    assert sue_bud == open_forecast_file(fisc_mstr_dir, a23_str, sue_str)
+    assert sue_bud == open_plan_file(fisc_mstr_dir, a23_str, sue_str)
 
 
 def test_save_arbitrary_budevent_SetsFile_Scenario0(env_dir_setup_cleanup):

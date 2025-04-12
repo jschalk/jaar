@@ -16,7 +16,7 @@ from src.f02_bud.bud import (
 from src.f06_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f06_listen.hub_path import (
     create_voice_path,
-    create_forecast_path,
+    create_plan_path,
     CELLNODE_FILENAME,
     create_budevent_path,
     create_fisc_owners_dir_path,
@@ -56,25 +56,23 @@ def voice_file_exists(
     return os_path_exists(voice_path)
 
 
-def forecast_file_exists(
+def plan_file_exists(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> bool:
-    forecast_path = create_forecast_path(fisc_mstr_dir, fisc_title, owner_name)
-    return os_path_exists(forecast_path)
+    plan_path = create_plan_path(fisc_mstr_dir, fisc_title, owner_name)
+    return os_path_exists(plan_path)
 
 
-def save_forecast_file(fisc_mstr_dir: str, budunit: BudUnit = None):
-    forecast_path = create_forecast_path(
-        fisc_mstr_dir, budunit.fisc_title, budunit.owner_name
-    )
-    save_bud_file(forecast_path, None, budunit)
+def save_plan_file(fisc_mstr_dir: str, budunit: BudUnit = None):
+    plan_path = create_plan_path(fisc_mstr_dir, budunit.fisc_title, budunit.owner_name)
+    save_bud_file(plan_path, None, budunit)
 
 
-def open_forecast_file(
+def open_plan_file(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> BudUnit:
-    forecast_path = create_forecast_path(fisc_mstr_dir, fisc_title, owner_name)
-    return open_bud_file(forecast_path)
+    plan_path = create_plan_path(fisc_mstr_dir, fisc_title, owner_name)
+    return open_bud_file(plan_path)
 
 
 def get_budevent_obj(

@@ -46,7 +46,7 @@ from src.f01_road.road import (
 )
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
-from src.f06_listen.basis_buds import get_default_forecast
+from src.f06_listen.basis_buds import get_default_plan
 from src.f06_listen.cell import cellunit_shop
 from src.f06_listen.hub_path import (
     create_fisc_json_path,
@@ -57,14 +57,14 @@ from src.f06_listen.hub_tool import (
     cellunit_save_to_dir,
     open_bud_file,
     open_voice_file,
-    open_forecast_file,
+    open_plan_file,
     save_voice_file,
-    save_forecast_file,
+    save_plan_file,
 )
 from src.f06_listen.hubunit import hubunit_shop, HubUnit
 from src.f06_listen.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_voice_forecast,
+    listen_to_debtors_roll_voice_plan,
     create_job_file_from_duty_file,
 )
 from src.f08_fisc.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
@@ -91,10 +91,10 @@ class FiscUnit:
     pipeline1: kicks->voice
     pipeline2: voice->dutys
     pipeline3: duty->job
-    pipeline4: job->forecast
-    pipeline5: voice->forecast (direct)
-    pipeline6: voice->job->forecast (through jobs)
-    pipeline7: kicks->forecast (could be 5 of 6)
+    pipeline4: job->plan
+    pipeline5: voice->plan (direct)
+    pipeline6: voice->job->plan (through jobs)
+    pipeline7: kicks->plan (could be 5 of 6)
     """
 
     fisc_title: FiscTitle = None
@@ -197,7 +197,7 @@ class FiscUnit:
     def init_owner_keeps(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
         x_hubunit.initialize_kick_voice_files()
-        x_hubunit.initialize_forecast_file(self.get_owner_voice_from_file(owner_name))
+        x_hubunit.initialize_plan_file(self.get_owner_voice_from_file(owner_name))
 
     def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:
         return open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
@@ -228,10 +228,8 @@ class FiscUnit:
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(voice_bud)
 
-    def generate_healers_authored_forecast(
-        self, owner_name: OwnerName, x_voice: BudUnit
-    ):
-        x_forecast = get_default_forecast(x_voice)
+    def generate_healers_authored_plan(self, owner_name: OwnerName, x_voice: BudUnit):
+        x_plan = get_default_plan(x_voice)
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 fisc_mstr_dir=self.fisc_mstr_dir,
@@ -255,30 +253,30 @@ class FiscUnit:
                 keep_hubunit.save_duty_bud(x_voice)
                 create_job_file_from_duty_file(keep_hubunit, owner_name)
                 x_job = keep_hubunit.get_job_bud(owner_name)
-                x_forecast = listen_to_speaker_agenda(x_forecast, x_job)
-        return x_forecast
+                x_plan = listen_to_speaker_agenda(x_plan, x_job)
+        return x_plan
 
-    # forecast bud management
-    def generate_forecast(self, owner_name: OwnerName) -> BudUnit:
+    # plan bud management
+    def generate_plan(self, owner_name: OwnerName) -> BudUnit:
         x_voice = open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_voice.settle_bud()
         if len(x_voice._healers_dict) > 0:
-            x_forecast = self.generate_healers_authored_forecast(owner_name, x_voice)
+            x_plan = self.generate_healers_authored_plan(owner_name, x_voice)
         else:
-            x_forecast = get_default_forecast(x_voice)
-        x_forecast = listen_to_debtors_roll_voice_forecast(
+            x_plan = get_default_plan(x_voice)
+        x_plan = listen_to_debtors_roll_voice_plan(
             self.fisc_mstr_dir, self.fisc_title, owner_name
         )
-        return x_forecast
+        return x_plan
 
-    def generate_all_forecasts(self):
+    def generate_all_plans(self):
         for x_owner_name in self._get_owner_folder_names():
             self.init_owner_keeps(x_owner_name)
-            x_forecast = self.generate_forecast(x_owner_name)
-            save_forecast_file(self.fisc_mstr_dir, x_forecast)
+            x_plan = self.generate_plan(x_owner_name)
+            save_plan_file(self.fisc_mstr_dir, x_plan)
 
-    def get_forecast_file_bud(self, owner_name: OwnerName) -> BudUnit:
-        return open_forecast_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+    def get_plan_file_bud(self, owner_name: OwnerName) -> BudUnit:
+        return open_plan_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
 
     # brokerunits
     def set_brokerunit(self, x_brokerunit: BrokerUnit):

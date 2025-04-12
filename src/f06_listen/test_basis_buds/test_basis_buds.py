@@ -4,7 +4,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f06_listen.basis_buds import (
     create_empty_bud,
     create_listen_basis,
-    get_default_forecast,
+    get_default_plan,
 )
 
 
@@ -101,7 +101,7 @@ def test_create_listen_basis_ReturnsObj():
     assert job_zia_acctunit._inallocable_debtit_belief == 0
 
 
-def test_get_default_forecast_ReturnsObj():
+def test_get_default_plan_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     blue_str = "blue"
@@ -126,20 +126,20 @@ def test_get_default_forecast_ReturnsObj():
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
-    default_forecast = get_default_forecast(sue_budunit)
+    default_plan = get_default_plan(sue_budunit)
 
     # THEN
-    default_forecast.settle_bud()
-    assert default_forecast.owner_name == sue_budunit.owner_name
-    assert default_forecast.owner_name == sue_str
-    assert default_forecast.fisc_title == sue_budunit.fisc_title
-    assert default_forecast.fisc_title == blue_str
-    assert default_forecast.bridge == slash_str
-    assert default_forecast.fund_pool == sue_acct_pool
-    assert default_forecast.fund_coin == x_fund_coin
-    assert default_forecast.respect_bit == x_respect_bit
-    assert default_forecast.credor_respect == default_respect_num()
-    assert default_forecast.debtor_respect == default_respect_num()
-    assert default_forecast.max_tree_traverse == sue_max_tree_traverse
-    assert len(default_forecast.get_acctunits_dict()) == 1
-    assert len(default_forecast._item_dict) == 1
+    default_plan.settle_bud()
+    assert default_plan.owner_name == sue_budunit.owner_name
+    assert default_plan.owner_name == sue_str
+    assert default_plan.fisc_title == sue_budunit.fisc_title
+    assert default_plan.fisc_title == blue_str
+    assert default_plan.bridge == slash_str
+    assert default_plan.fund_pool == sue_acct_pool
+    assert default_plan.fund_coin == x_fund_coin
+    assert default_plan.respect_bit == x_respect_bit
+    assert default_plan.credor_respect == default_respect_num()
+    assert default_plan.debtor_respect == default_respect_num()
+    assert default_plan.max_tree_traverse == sue_max_tree_traverse
+    assert len(default_plan.get_acctunits_dict()) == 1
+    assert len(default_plan._item_dict) == 1

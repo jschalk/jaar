@@ -6,7 +6,7 @@ from src.f00_instrument.plotly_toolbox import (
     add_rect_arrow,
     add_keep__rect,
 )
-from src.f01_road.jaar_config import voice_str, forecast_str
+from src.f01_road.jaar_config import voice_str, plan_str
 from src.f01_road.finance import default_money_magnitude
 from src.f02_bud.bud import BudUnit
 from src.f02_bud.bud_graphics import display_itemtree
@@ -27,20 +27,20 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
         yao_str = "Yao"
         fig = get_hubunit_base_fig()
         sue_voice_str = f"{sue_str}.{voice_str()}"
-        sue_forecast_str = f"{sue_str}.{forecast_str()}"
-        yao_forecast_str = f"{yao_str}.{forecast_str()}"
-        bob_forecast_str = f"{bob_str}.{forecast_str()}"
-        dir_forecast_str = f"{forecast_str()}s directory"
+        sue_plan_str = f"{sue_str}.{plan_str()}"
+        yao_plan_str = f"{yao_str}.{plan_str()}"
+        bob_plan_str = f"{bob_str}.{plan_str()}"
+        dir_plan_str = f"{plan_str()}s directory"
         dir_voice_str = f"{voice_str()}s directory"
 
         green_str = "Green"
         med_purple = "MediumPurple"
         add_simp_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_str, green_str)
         add_direc_rect(fig, 0.7, 6.7, 6.3, 8.3, dir_voice_str)
-        add_simp_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_forecast_str, green_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_forecast_str)
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_forecast_str)
-        add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_forecast_str)
+        add_simp_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_plan_str, green_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_plan_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_plan_str)
+        add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_plan_str)
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 5,4 5.5,2", color=med_purple)
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3,4 3.5,2", color=med_purple)
         add_rect_arrow(fig, 1.75, 2, 1.75, 6.8, green_str)
@@ -53,7 +53,7 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
                 y=[9.0, 8.75],
                 text=[
                     "fiscity Bud Listening Structures",
-                    "The voice bud listens to other's forecast buds and builds a new bud from itself and others",
+                    "The voice bud listens to other's plan buds and builds a new bud from itself and others",
                 ],
                 mode="text",
             )
@@ -133,16 +133,16 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_str = "Sue"
         bob_str = "Bob"
         sue_voice_str = f"{sue_str}.{voice_str()}"
-        sue_forecast_str = f"{sue_str}.{forecast_str()}"
-        dir_forecast_str = f"{forecast_str()}s dir"
+        sue_plan_str = f"{sue_str}.{plan_str()}"
+        dir_plan_str = f"{plan_str()}s dir"
         dir_voice_str = f"{voice_str()}s dir"
 
         green_str = "Green"
         blue_str = "blue"
         add_simp_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_str, green_str)
         add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_str)
-        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_forecast_str, green_str)
-        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_forecast_str)
+        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_plan_str, green_str)
+        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_plan_str)
 
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_str)
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_str)
@@ -212,8 +212,8 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         bob_str = "Bob"
         yao_str = "Yao"
         sue_voice_str = f"{sue_str}.{voice_str()}"
-        sue_forecast_str = f"{sue_str}.{forecast_str()}"
-        dir_forecast_str = f"{forecast_str()}s dir"
+        sue_plan_str = f"{sue_str}.{plan_str()}"
+        dir_plan_str = f"{plan_str()}s dir"
         dir_voice_str = f"{voice_str()}s dir"
 
         green_str = "Green"
@@ -221,8 +221,8 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         blue_str = "blue"
         add_simp_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_voice_str, green_str)
         add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_voice_str)
-        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_forecast_str, green_str)
-        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_forecast_str)
+        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_plan_str, green_str)
+        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_plan_str)
 
         add_rect_arrow(fig, 3.85, 3.8, 4, 3.6, blue_str)
         add_2_curve(fig, path="M 4,3.6 C 4.3,3.4 7.4,2.1 7.5,2", color=blue_str)

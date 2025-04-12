@@ -199,9 +199,9 @@ class MineTocartTransformer:
         return df
 
     def _save_to_cart_staging(self, idea_number: str, dfs: list):
-        forecast_df = pandas_concat(dfs)
+        plan_df = pandas_concat(dfs)
         cart_path = create_path(self.cart_dir, f"{idea_number}.xlsx")
-        upsert_sheet(cart_path, "cart_staging", forecast_df)
+        upsert_sheet(cart_path, "cart_staging", plan_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -1128,8 +1128,8 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
             save_file(voice_path, None, max_event_bud_json)
 
 
-def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
+def etl_fisc_voice_to_fisc_plan(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
-        x_fiscunit.generate_all_forecasts()
+        x_fiscunit.generate_all_plans()

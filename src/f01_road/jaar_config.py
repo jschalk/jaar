@@ -34,8 +34,8 @@ def voice_str() -> str:
     return "voice"
 
 
-def forecast_str() -> str:
-    return "forecast"
+def plan_str() -> str:
+    return "plan"
 
 
 def jobs_str() -> str:

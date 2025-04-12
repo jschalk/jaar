@@ -24,9 +24,9 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     assert fizz_world._pidgin_events == {}
 
     # Verify no files were created or modified
-    forecast_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
+    plan_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
     state_change_str = "File system state changed during test execution"
-    assert before_files == forecast_files, state_change_str
+    assert before_files == plan_files, state_change_str
 
 
 def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario1_OnePidginUnitFile(

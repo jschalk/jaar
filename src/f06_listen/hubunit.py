@@ -57,15 +57,15 @@ from src.f04_kick.atom import (
     modify_bud_with_budatom,
 )
 from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
-from src.f06_listen.basis_buds import get_default_forecast
-from src.f06_listen.hub_path import create_voice_path, create_forecast_path
+from src.f06_listen.basis_buds import get_default_plan
+from src.f06_listen.hub_path import create_voice_path, create_plan_path
 from src.f06_listen.hub_tool import (
     save_voice_file,
     open_voice_file,
-    save_forecast_file,
-    open_forecast_file,
+    save_plan_file,
+    open_plan_file,
     voice_file_exists,
-    forecast_file_exists,
+    plan_file_exists,
 )
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
@@ -77,7 +77,7 @@ class Invalid_voice_Exception(Exception):
     pass
 
 
-class Invalid_forecast_Exception(Exception):
+class Invalid_plan_Exception(Exception):
     pass
 
 
@@ -499,11 +499,9 @@ class HubUnit:
         x_filename = self.owner_filename(x_bud.owner_name)
         save_file(self.jobs_dir(), x_filename, x_bud.get_json())
 
-    def initialize_forecast_file(self, voice: BudUnit):
-        if not forecast_file_exists(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        ):
-            save_forecast_file(self.fisc_mstr_dir, get_default_forecast(voice))
+    def initialize_plan_file(self, voice: BudUnit):
+        if not plan_file_exists(self.fisc_mstr_dir, self.fisc_title, self.owner_name):
+            save_plan_file(self.fisc_mstr_dir, get_default_plan(voice))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))
@@ -540,10 +538,8 @@ class HubUnit:
         return perspective_bud
 
     def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
-        speaker_forecast = open_forecast_file(
-            self.fisc_mstr_dir, self.fisc_title, speaker_id
-        )
-        return self.get_perspective_bud(speaker_forecast)
+        speaker_plan = open_plan_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
+        return self.get_perspective_bud(speaker_plan)
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
