@@ -182,20 +182,16 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     return _ingest_perspective_agenda(listener, agenda)
 
 
-def listen_to_agendas_voice_forecast(
-    listener_forecast: BudUnit, listener_hubunit: HubUnit
-):
+def listen_to_agendas_voice_forecast(fisc_mstr_dir: str, listener_forecast: BudUnit):
+    fisc_title = listener_forecast.fisc_title
+    owner_name = listener_forecast.owner_name
     for x_acctunit in get_ordered_debtors_roll(listener_forecast):
-        if x_acctunit.acct_name == listener_forecast.owner_name:
-            voice_bud = open_voice_file(
-                listener_hubunit.fisc_mstr_dir,
-                listener_hubunit.fisc_title,
-                listener_hubunit.owner_name,
-            )
+        if x_acctunit.acct_name == owner_name:
+            voice_bud = open_voice_file(fisc_mstr_dir, fisc_title, owner_name)
             listen_to_speaker_agenda(listener_forecast, voice_bud)
         else:
             speaker_id = x_acctunit.acct_name
-            speaker_forecast = listener_hubunit.dw_speaker_bud(speaker_id)
+            speaker_forecast = open_forecast_file(fisc_mstr_dir, fisc_title, speaker_id)
             if speaker_forecast is None:
                 speaker_forecast = create_empty_bud(listener_forecast, speaker_id)
             listen_to_speaker_agenda(listener_forecast, speaker_forecast)
@@ -226,32 +222,27 @@ def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
                 listen_to_speaker_fact(new_job, speaker_job)
 
 
-def listen_to_facts_voice_forecast(new_forecast: BudUnit, listener_hubunit: HubUnit):
-    voice_bud = open_voice_file(
-        listener_hubunit.fisc_mstr_dir,
-        listener_hubunit.fisc_title,
-        listener_hubunit.owner_name,
-    )
+def listen_to_facts_voice_forecast(fisc_mstr_dir: str, new_forecast: BudUnit):
+    fisc_title = new_forecast.fisc_title
+    voice_bud = open_voice_file(fisc_mstr_dir, fisc_title, new_forecast.owner_name)
     migrate_all_facts(voice_bud, new_forecast)
     for x_acctunit in get_ordered_debtors_roll(new_forecast):
         speaker_id = x_acctunit.acct_name
         if speaker_id != new_forecast.owner_name:
-            speaker_forecast = listener_hubunit.dw_speaker_bud(speaker_id)
+            speaker_forecast = open_forecast_file(fisc_mstr_dir, fisc_title, speaker_id)
             if speaker_forecast is not None:
                 listen_to_speaker_fact(new_forecast, speaker_forecast)
 
 
-def listen_to_debtors_roll_voice_forecast(listener_hubunit: HubUnit) -> BudUnit:
-    voice = open_voice_file(
-        listener_hubunit.fisc_mstr_dir,
-        listener_hubunit.fisc_title,
-        listener_hubunit.owner_name,
-    )
+def listen_to_debtors_roll_voice_forecast(
+    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
+) -> BudUnit:
+    voice = open_voice_file(fisc_mstr_dir, fisc_title, owner_name)
     new_bud = create_listen_basis(voice)
     if voice.debtor_respect is None:
         return new_bud
-    listen_to_agendas_voice_forecast(new_bud, listener_hubunit)
-    listen_to_facts_voice_forecast(new_bud, listener_hubunit)
+    listen_to_agendas_voice_forecast(fisc_mstr_dir, new_bud)
+    listen_to_facts_voice_forecast(fisc_mstr_dir, new_bud)
     return new_bud
 
 
@@ -328,8 +319,3 @@ def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
 def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_name: OwnerName):
     x_job = listen_to_debtors_roll_duty_job(healer_hubunit, listener_id=owner_name)
     healer_hubunit.save_job_bud(x_job)
-
-
-def create_forecast_file_from_voice_file(hubunit: HubUnit):
-    x_forecast = listen_to_debtors_roll_voice_forecast(hubunit)
-    save_forecast_file(hubunit.fisc_mstr_dir, x_forecast)

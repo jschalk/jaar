@@ -228,10 +228,9 @@ class FiscUnit:
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(voice_bud)
 
-    # forecast bud management
-    def generate_forecast(self, owner_name: OwnerName) -> BudUnit:
-        x_voice = open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
-        x_voice.settle_bud()
+    def generate_healers_authored_forecast(
+        self, owner_name: OwnerName, x_voice: BudUnit
+    ):
         x_forecast = get_default_forecast(x_voice)
         for healer_name, healer_dict in x_voice._healers_dict.items():
             healer_hubunit = hubunit_shop(
@@ -239,7 +238,6 @@ class FiscUnit:
                 fisc_title=self.fisc_title,
                 owner_name=healer_name,
                 keep_road=None,
-                # "duty_job",
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
@@ -258,22 +256,27 @@ class FiscUnit:
                 create_job_file_from_duty_file(keep_hubunit, owner_name)
                 x_job = keep_hubunit.get_job_bud(owner_name)
                 x_forecast = listen_to_speaker_agenda(x_forecast, x_job)
+        return x_forecast
 
-        # if no budunit has come from voice->duty->job->forecast pipeline use voice->forecast pipeline
-        x_forecast.settle_bud()
-        listener_hubunit = self._get_hubunit(owner_name)
-        if len(x_forecast._item_dict) == 1:
-            x_forecast = listen_to_debtors_roll_voice_forecast(listener_hubunit)
-        if len(x_forecast._item_dict) == 1:
-            x_forecast = x_voice
+    # forecast bud management
+    def generate_forecast(self, owner_name: OwnerName) -> BudUnit:
+        x_voice = open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+        x_voice.settle_bud()
+        if len(x_voice._healers_dict) > 0:
+            x_forecast = self.generate_healers_authored_forecast(owner_name, x_voice)
+        else:
+            x_forecast = get_default_forecast(x_voice)
+        x_forecast = listen_to_debtors_roll_voice_forecast(
+            self.fisc_mstr_dir, self.fisc_title, owner_name
+        )
         save_forecast_file(self.fisc_mstr_dir, x_forecast)
-
         return self.get_forecast_file_bud(owner_name)
 
     def generate_all_forecasts(self):
         for x_owner_name in self._get_owner_folder_names():
             self.init_owner_keeps(x_owner_name)
-            self.generate_forecast(x_owner_name)
+            x_forecast = self.generate_forecast(x_owner_name)
+            save_forecast_file(self.fisc_mstr_dir, x_forecast)
 
     def get_forecast_file_bud(self, owner_name: OwnerName) -> BudUnit:
         return open_forecast_file(self.fisc_mstr_dir, self.fisc_title, owner_name)

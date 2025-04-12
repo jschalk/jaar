@@ -532,9 +532,6 @@ class HubUnit:
     def delete_treasury_db_file(self):
         delete_dir(self.treasury_db_path())
 
-    def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
-        return open_forecast_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
-
     def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
         # get copy of bud without any metrics
         perspective_bud = budunit_get_from_json(speaker.get_json())
@@ -543,7 +540,10 @@ class HubUnit:
         return perspective_bud
 
     def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
-        return self.get_perspective_bud(self.dw_speaker_bud(speaker_id))
+        speaker_forecast = open_forecast_file(
+            self.fisc_mstr_dir, self.fisc_title, speaker_id
+        )
+        return self.get_perspective_bud(speaker_forecast)
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
