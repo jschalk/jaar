@@ -1,5 +1,6 @@
 from src.f01_road.jaar_config import get_test_fisc_title as fisc_title
 from src.f01_road.road import create_road
+from src.f06_listen.hub_tool import save_forecast_file, open_forecast_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f06_listen.examples.listen_env import (
@@ -37,7 +38,7 @@ def test_HubUnit_get_dw_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_ow
     bob_budunit = get_budunit_with_4_levels()
     bob_budunit.set_owner_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    bob_hubunit.save_file_forecast(bob_budunit)
+    save_forecast_file(bob_hubunit.fisc_mstr_dir, bob_budunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)

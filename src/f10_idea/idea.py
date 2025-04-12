@@ -12,6 +12,7 @@ from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_kick.atom import atom_insert, BudAtom, atomrow_shop
 from src.f04_kick.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
 from src.f04_kick.kick import kickunit_shop
+from src.f06_listen.hub_tool import open_voice_file, save_voice_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f10_idea.idea_config import (
@@ -186,7 +187,6 @@ def _load_individual_idea_csv(
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
     x_hubunit.initialize_kick_voice_files()
-    x_voice = x_hubunit.open_file_voice()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
     x_kickunit = kickunit_shop(x_owner_name, x_fisc_title)

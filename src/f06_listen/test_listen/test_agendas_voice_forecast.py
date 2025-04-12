@@ -3,6 +3,7 @@ from src.f01_road.jaar_config import get_json_filename
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f06_listen.hub_path import create_voice_path
+from src.f06_listen.hub_tool import save_voice_file, save_forecast_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.listen import create_listen_basis, listen_to_agendas_voice_forecast
 from src.f06_listen.examples.listen_env import (
@@ -41,21 +42,20 @@ def test_listen_to_agendas_voice_forecast_AddsTasksToBudWhenNo_teamlinkIsSet(
     zia_pool = 87
     yao_voice.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     yao_voice.set_acct_respect(zia_pool)
-    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
-    yao_hubunit.save_file_voice(yao_voice)
+    save_voice_file(env_dir(), yao_voice)
 
     zia_forecast = budunit_shop(zia_str, a23_str)
     zia_forecast.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
     zia_forecast.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
     zia_forecast.add_acctunit(yao_str, debtit_belief=12)
-    zia_hubunit = hubunit_shop(env_dir(), a23_str, zia_str)
-    zia_hubunit.save_file_forecast(zia_forecast)
+    save_forecast_file(env_dir(), zia_forecast)
 
     new_yao_forecast = create_listen_basis(yao_voice)
     assert len(new_yao_forecast.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_forecast.get_item_dict())=}")
+    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     listen_to_agendas_voice_forecast(new_yao_forecast, yao_hubunit)
 
     # THEN
@@ -74,8 +74,7 @@ def test_listen_to_agendas_voice_forecast_AddsTasksToBud(env_dir_setup_cleanup):
     yao_voice.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     yao_voice.set_acct_respect(zia_pool)
     a23_str = "accord23"
-    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
-    yao_hubunit.save_file_voice(yao_voice)
+    save_forecast_file(env_dir(), yao_voice)
 
     zia_forecast = budunit_shop(zia_str, a23_str)
     zia_forecast.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
@@ -85,13 +84,13 @@ def test_listen_to_agendas_voice_forecast_AddsTasksToBud(env_dir_setup_cleanup):
     cook_itemunit = zia_forecast.get_item_obj(cook_road())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
-    zia_hubunit = hubunit_shop(env_dir(), a23_str, zia_str)
-    zia_hubunit.save_file_forecast(zia_forecast)
+    save_forecast_file(env_dir(), zia_forecast)
     new_yao_forecast = create_listen_basis(yao_voice)
     assert len(new_yao_forecast.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_forecast.get_item_dict())=}")
+    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     listen_to_agendas_voice_forecast(new_yao_forecast, yao_hubunit)
 
     # THEN
@@ -117,20 +116,18 @@ def test_listen_to_agendas_voice_forecast_AddsTasksToBudWithDetailsDecidedBy_deb
     zia_str = zia_forecast.owner_name
     bob_str = bob_forecast.owner_name
     a23_str = "accord23"
-    zia_hubunit = hubunit_shop(env_dir(), a23_str, zia_str)
-    bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    zia_hubunit.save_file_forecast(zia_forecast)
-    bob_hubunit.save_file_forecast(bob_forecast)
+    save_forecast_file(env_dir(), zia_forecast)
+    save_forecast_file(env_dir(), bob_forecast)
 
     yao_voice = get_example_yao_speaker()
     yao_str = yao_voice.owner_name
-    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
-    yao_hubunit.save_file_voice(yao_voice)
+    save_voice_file(env_dir(), yao_voice)
 
     new_yao_forecast1 = create_listen_basis(yao_voice)
     assert new_yao_forecast1.item_exists(cook_road()) is False
 
     # WHEN
+    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     listen_to_agendas_voice_forecast(new_yao_forecast1, yao_hubunit)
 
     # THEN
@@ -178,8 +175,7 @@ def test_listen_to_agendas_voice_forecast_ProcessesIrrationalBud(env_dir_setup_c
     yao_pool = 92
     yao_voice.set_acct_respect(yao_pool)
     a23_str = "accord23"
-    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
-    yao_hubunit.save_file_voice(yao_voice)
+    save_voice_file(env_dir(), yao_voice)
 
     zia_str = "Zia"
     zia_forecast = budunit_shop(zia_str, a23_str)
@@ -190,8 +186,7 @@ def test_listen_to_agendas_voice_forecast_ProcessesIrrationalBud(env_dir_setup_c
     cook_itemunit = zia_forecast.get_item_obj(cook_road())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
-    zia_hubunit = hubunit_shop(env_dir(), a23_str, zia_str)
-    zia_hubunit.save_file_forecast(zia_forecast)
+    save_forecast_file(env_dir(), zia_forecast)
 
     sue_forecast = budunit_shop(sue_str, a23_str)
     sue_forecast.set_max_tree_traverse(5)
@@ -222,11 +217,11 @@ def test_listen_to_agendas_voice_forecast_ProcessesIrrationalBud(env_dir_setup_c
         reason_base=egg_road,
         reason_base_item_active_requisite=False,
     )
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    sue_hubunit.save_file_forecast(sue_forecast)
+    save_forecast_file(env_dir(), sue_forecast)
 
     # WHEN
     new_yao_forecast = create_listen_basis(yao_voice)
+    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     listen_to_agendas_voice_forecast(new_yao_forecast, yao_hubunit)
 
     # THEN irrational bud is ignored
@@ -246,7 +241,6 @@ def test_listen_to_agendas_voice_forecast_ProcessesMissingDebtorBud(
     # ESTABLISH
     yao_str = "Yao"
     a23_str = "accord23"
-    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     yao_voice_path = create_voice_path(env_dir(), a23_str, yao_str)
     delete_dir(yao_voice_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_voice_path)=}")
@@ -261,7 +255,7 @@ def test_listen_to_agendas_voice_forecast_ProcessesMissingDebtorBud(
     yao_voice.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     yao_pool = 92
     yao_voice.set_acct_respect(yao_pool)
-    yao_hubunit.save_file_voice(yao_voice)
+    save_voice_file(env_dir(), yao_voice)
 
     zia_forecast = budunit_shop(zia_str, a23_str)
     zia_forecast.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
@@ -271,11 +265,11 @@ def test_listen_to_agendas_voice_forecast_ProcessesMissingDebtorBud(
     cook_itemunit = zia_forecast.get_item_obj(cook_road())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
-    zia_hubunit = hubunit_shop(env_dir(), a23_str, zia_str)
-    zia_hubunit.save_file_forecast(zia_forecast)
+    save_forecast_file(env_dir(), zia_forecast)
 
     # WHEN
     new_yao_forecast = create_listen_basis(yao_voice)
+    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     listen_to_agendas_voice_forecast(new_yao_forecast, yao_hubunit)
 
     # THEN irrational bud is ignored
@@ -307,8 +301,7 @@ def test_listen_to_agendas_voice_forecast_ListensToOwner_voice_AndNotOwner_forec
     yao_pool = 87
     yao_voice.set_acct_respect(yao_pool)
     # save yao without task to dutys
-    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
-    yao_hubunit.save_file_voice(yao_voice)
+    save_voice_file(env_dir(), yao_voice)
 
     # Save Zia to forecast
     zia_str = "Zia"
@@ -320,20 +313,20 @@ def test_listen_to_agendas_voice_forecast_ListensToOwner_voice_AndNotOwner_forec
     cook_itemunit = zia_forecast.get_item_obj(cook_road())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
-    zia_hubunit = hubunit_shop(env_dir(), a23_str, zia_str)
-    zia_hubunit.save_file_forecast(zia_forecast)
+    save_forecast_file(env_dir(), zia_forecast)
 
     # save yao with task to dutys
-    yao_old_forecast = budunit_shop(yao_str)
+    yao_old_forecast = budunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_road = yao_old_forecast.make_l1_road(vacuum_str)
     yao_old_forecast.set_l1_item(itemunit_shop(vacuum_str, pledge=True))
     vacuum_itemunit = yao_old_forecast.get_item_obj(vacuum_road)
     vacuum_itemunit.teamunit.set_teamlink(yao_str)
-    yao_hubunit.save_file_forecast(yao_old_forecast)
+    save_forecast_file(env_dir(), yao_old_forecast)
 
     # WHEN
     new_yao_forecast = create_listen_basis(yao_voice)
+    yao_hubunit = hubunit_shop(env_dir(), a23_str, yao_str)
     listen_to_agendas_voice_forecast(new_yao_forecast, yao_hubunit)
 
     # THEN irrational bud is ignored

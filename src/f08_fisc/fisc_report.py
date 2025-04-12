@@ -2,6 +2,7 @@ from src.f02_bud.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
+from src.f06_listen.hub_tool import open_voice_file, open_forecast_file
 from src.f08_fisc.fisc import FiscUnit
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
@@ -13,7 +14,9 @@ def get_fisc_voices_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # for all owners get voice
     voice_dfs = []
     for x_hubunit in owner_hubunits.values():
-        voice_bud = x_hubunit.open_file_voice()
+        voice_bud = open_voice_file(
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
+        )
         voice_bud.settle_bud()
         df = get_bud_acctunits_dataframe(voice_bud)
         df.insert(0, "owner_name", voice_bud.owner_name)
@@ -69,7 +72,9 @@ def get_fisc_forecasts_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # for all owners get forecast
     forecast_dfs = []
     for x_hubunit in owner_hubunits.values():
-        forecast_bud = x_hubunit.open_file_forecast()
+        forecast_bud = open_forecast_file(
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
+        )
         forecast_bud.settle_bud()
         forecast_df = get_bud_acctunits_dataframe(forecast_bud)
         forecast_df.insert(0, "owner_name", forecast_bud.owner_name)
@@ -124,7 +129,9 @@ def get_fisc_voices_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # for all owners get voice
     voice_dfs = []
     for x_hubunit in owner_hubunits.values():
-        voice_bud = x_hubunit.open_file_voice()
+        voice_bud = open_voice_file(
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
+        )
         voice_bud.settle_bud()
         df = get_bud_agenda_dataframe(voice_bud)
         voice_dfs.append(df)
@@ -182,7 +189,9 @@ def get_fisc_forecasts_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # for all owners get forecast
     forecast_dfs = []
     for x_hubunit in owner_hubunits.values():
-        forecast_bud = x_hubunit.open_file_forecast()
+        forecast_bud = open_forecast_file(
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
+        )
         forecast_bud.settle_bud()
         forecast_df = get_bud_agenda_dataframe(forecast_bud)
         forecast_dfs.append(forecast_df)

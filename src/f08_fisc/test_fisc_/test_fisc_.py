@@ -14,7 +14,7 @@ from src.f01_road.deal import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop
-from src.f06_listen.hub_tool import save_voice_file
+from src.f06_listen.hub_tool import save_voice_file, open_voice_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
@@ -198,9 +198,8 @@ def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     accord_fisc.init_owner_keeps(sue_str)
-    sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
     bob_str = "Bob"
-    sue_voice = sue_hubunit.open_file_voice()
+    sue_voice = open_voice_file(x_fisc_mstr_dir, accord45_str, sue_str)
     sue_voice.add_acctunit(bob_str)
     save_voice_file(x_fisc_mstr_dir, sue_voice)
 
@@ -223,10 +222,8 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_str = "Yao"
     accord_fisc.init_owner_keeps(sue_str)
     accord_fisc.init_owner_keeps(yao_str)
-    sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
-    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
-    sue_voice_bud = sue_hubunit.open_file_voice()
-    yao_voice_bud = yao_hubunit.open_file_voice()
+    sue_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, sue_str)
+    yao_voice_bud = open_voice_file(x_fisc_mstr_dir, accord45_str, yao_str)
 
     sue_voice_bud.add_acctunit(sue_str)
     sue_voice_bud.add_acctunit(yao_str)

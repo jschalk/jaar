@@ -25,42 +25,6 @@ def test_HubUnit_forecast_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     assert sue_hubunit.forecast_file_exists()
 
 
-def test_HubUnit_save_forecast_file_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str, None)
-    assert sue_hubunit.forecast_file_exists() is False
-
-    # WHEN
-    sue_bud = budunit_shop(sue_str)
-    bob_str = "Bob"
-    sue_bud.add_acctunit(bob_str)
-    sue_hubunit.save_file_forecast(sue_bud)
-
-    # THEN
-    assert sue_hubunit.forecast_file_exists()
-
-    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
-    assert sue_bud == forecast_bud
-
-
-def test_HubUnit_save_forecast_file_RaisesErrorWhenBud_owner_name_IsWrong(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), root_title(), sue_str, None)
-
-    # WHEN / THEN
-    yao_str = "Yao"
-    with pytest_raises(Exception) as excinfo:
-        sue_hubunit.save_file_forecast(budunit_shop(yao_str))
-    assert (
-        str(excinfo.value)
-        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s forecast bud."
-    )
-
-
 def test_HubUnit_initialize_forecast_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
@@ -72,7 +36,7 @@ def test_HubUnit_initialize_forecast_file_CorrectlySavesFile(env_dir_setup_clean
     sue_hubunit.initialize_forecast_file(sue_bud)
 
     # THEN
-    forecast_bud = sue_hubunit.open_file_forecast()
+    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
     assert forecast_bud.fisc_title == root_title()
     assert forecast_bud.owner_name == sue_str
     bob_str = "Bob"
@@ -81,15 +45,15 @@ def test_HubUnit_initialize_forecast_file_CorrectlySavesFile(env_dir_setup_clean
     # ESTABLISH
     sue_bud = budunit_shop(sue_str)
     sue_bud.add_acctunit(bob_str)
-    sue_hubunit.save_file_forecast(sue_bud)
-    forecast_bud = sue_hubunit.open_file_forecast()
+    save_forecast_file(env_dir(), sue_bud)
+    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
     assert forecast_bud.get_acct(bob_str)
 
     # WHEN
     sue_hubunit.initialize_forecast_file(sue_bud)
 
     # THEN
-    forecast_bud = sue_hubunit.open_file_forecast()
+    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
     assert forecast_bud.get_acct(bob_str)
 
 

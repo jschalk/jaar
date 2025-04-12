@@ -6,6 +6,7 @@ from src.f04_kick.atom_config import (
     debtit_belief_str,
     credit_belief_str,
 )
+from src.f06_listen.hub_tool import open_voice_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f10_idea.idea import (
     create_idea_df,
@@ -118,7 +119,8 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToForecast(
     # assert voice Budunit now exists
     assert sue_hubunit.voice_file_exists()
     # assert voice Budunit acctunit now exists
-    sue_voice = sue_hubunit.open_file_voice()
+    sue_voice = open_voice_file(idea_examples_dir(), accord_fisc_title, sue_str)
+
     assert sue_voice.acct_exists(sue_str)
     assert sue_voice.acct_exists(bob_str)
     assert sue_voice.acct_exists(yao_str)
@@ -171,7 +173,7 @@ def test_load_idea_csv_csvToForecast(
     # assert voice Budunit now exists
     assert sue_hubunit.voice_file_exists()
     # assert voice Budunit acctunit now exists
-    sue_voice = sue_hubunit.open_file_voice()
+    sue_voice = open_voice_file(idea_examples_dir(), accord_fisc_title, sue_str)
     assert sue_voice.acct_exists(sue_str)
     assert sue_voice.acct_exists(bob_str)
     assert sue_voice.acct_exists(yao_str)
@@ -186,63 +188,3 @@ def test_load_idea_csv_csvToForecast(
     assert sue_acctunit.debtit_belief == sue_debtit_belief
     assert bob_acctunit.debtit_belief == bob_debtit_belief
     assert yao_acctunit.debtit_belief == yao_debtit_belief
-
-
-# def test_load_idea_csv_csvToForecast(
-#     idea_env_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     accord_fisc_title = "accord56"
-#     sue_budunit = budunit_shop(sue_str, accord_fisc_title)
-#     sue_budunit.add_acctunit(sue_str)
-#     sue_budunit.add_acctunit(bob_str)
-#     j1_ideaname = idea_format_00021_bud_acctunit_v0_0_0()
-#     name_filename = f"{sue_str}_acct_example_02.csv"
-#     csv_example_path = f_path(idea_examples_dir(), name_filename)
-#     print(f"{csv_example_path}")
-#     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-#     sue_hubunit = hubunit_shop(idea_examples_dir(), accord_fisc_title, owner_name=sue_str)
-# save_voice_file(a23_fisc.fisc_mstr_dir,  bob_voice_bud)
-#     sue_hubunit._create_initial_kick_files_from_voice()
-#     old_sue_voice = sue_hubunit.open_file_voice()
-#     old_sue_voice.add_acctunit(sue_str)
-# save_voice_file(a23_fisc.fisc_mstr_dir,  old_sue_voice)
-
-#     sue_hubunit.initialize_kick_voice_files()
-#     # Open FiscUnit and confirm voice BudUnit does not exist
-#     assert sue_hubunit.voice_file_exists()
-#     assert sue_hubunit.open_file_voice().acct_exists(sue_str)
-#     assert not sue_hubunit.open_file_voice().acct_exists(bob_str)
-#     assert sue_hubunit.get_max_kick_file_number() == 3
-
-#     # WHEN
-#     load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
-
-#     # THEN
-#     # assert voice Budunit acctunit now exists
-#     new_sue_voice = sue_hubunit.open_file_voice()
-#     assert new_sue_voice.acct_exists(sue_str)
-#     assert new_sue_voice.acct_exists(bob_str)
-#     # assert voice Budunit acctunit.credit_belief is correct
-#     sue_acctunit = new_sue_voice.get_acct(sue_str)
-#     bob_acctunit = new_sue_voice.get_acct(bob_str)
-#     assert sue_hubunit.get_max_kick_file_number() != 3
-#     assert 1 == 2
-
-
-# def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0_Scenario_budunit_v001(
-#     big_volume,
-# ):
-#     if big_volume:
-#         # ESTABLISH / WHEN
-#         x_idea_name = idea_format_00013_itemunit_v0_0_0()
-
-#         # WHEN
-#         itemunit_format = create_idea_df(budunit_v001(), x_idea_name)
-
-#         # THEN
-#         array_headers = list(itemunit_format.columns)
-#         assert array_headers == get_idearef_obj(x_idea_name).get_headers_list()
-#         assert len(itemunit_format) == 251
