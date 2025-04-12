@@ -186,7 +186,7 @@ def _load_individual_idea_csv(
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
     x_hubunit.initialize_kick_voice_files()
-    x_voice = x_hubunit.get_voice_bud()
+    x_voice = x_hubunit.open_file_voice()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
     x_kickunit = kickunit_shop(x_owner_name, x_fisc_title)

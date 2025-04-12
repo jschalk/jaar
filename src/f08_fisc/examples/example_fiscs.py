@@ -15,7 +15,7 @@ from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir
 #     yao_str = "Yao"
 #     accord_fisc.init_owner_keeps(yao_str)
 #     yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
-#     yao_voice_bud = yao_hubunit.get_voice_bud()
+#     yao_voice_bud = yao_hubunit.open_file_voice()
 
 #     yao_voice_bud.set_credor_respect(101)
 #     yao_voice_bud.set_debtor_respect(1000)
@@ -45,7 +45,7 @@ from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir
 #         bridge=yao_hubunit.bridge,
 #         respect_bit=yao_hubunit.respect_bit,
 #     )
-#     x_hubunit.save_voice_bud(yao_voice_bud)
+#     x_hubunit.save_file_voice(yao_voice_bud)
 #     yao_hubunit.create_voice_treasury_db_files()
 
 #     # WHEN
@@ -70,9 +70,9 @@ def create_example_fisc2() -> FiscUnit:
     zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
     accord_fisc.init_owner_keeps(wei_str)
     accord_fisc.init_owner_keeps(zia_str)
-    yao_voice_bud = yao_hubunit.get_voice_bud()
-    wei_voice_bud = wei_hubunit.get_voice_bud()
-    zia_voice_bud = zia_hubunit.get_voice_bud()
+    yao_voice_bud = yao_hubunit.open_file_voice()
+    wei_voice_bud = wei_hubunit.open_file_voice()
+    zia_voice_bud = zia_hubunit.open_file_voice()
 
     yao_voice_bud.set_credor_respect(101)
     wei_voice_bud.set_credor_respect(75)
@@ -109,9 +109,9 @@ def create_example_fisc2() -> FiscUnit:
     wei_voice_bud.set_item(elpaso_item, texas_road)
     zia_voice_bud.set_item(dallas_item, texas_road)
     zia_voice_bud.set_item(elpaso_item, texas_road)
-    yao_hubunit.save_voice_bud(yao_voice_bud)
-    wei_hubunit.save_voice_bud(wei_voice_bud)
-    zia_hubunit.save_voice_bud(zia_voice_bud)
+    yao_hubunit.save_file_voice(yao_voice_bud)
+    wei_hubunit.save_file_voice(wei_voice_bud)
+    zia_hubunit.save_file_voice(zia_voice_bud)
     yao_hubunit.create_voice_treasury_db_files()
     wei_hubunit.create_voice_treasury_db_files()
     zia_hubunit.create_voice_treasury_db_files()
@@ -138,9 +138,9 @@ def create_example_fisc3() -> FiscUnit:
     yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
     wei_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, wei_str, None)
     zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
-    yao_voice_bud = yao_hubunit.get_voice_bud()
-    wei_voice_bud = wei_hubunit.get_voice_bud()
-    zia_voice_bud = zia_hubunit.get_voice_bud()
+    yao_voice_bud = yao_hubunit.open_file_voice()
+    wei_voice_bud = wei_hubunit.open_file_voice()
+    zia_voice_bud = zia_hubunit.open_file_voice()
 
     casa_str = "casa"
     casa_road = yao_voice_bud.make_l1_road(casa_str)
@@ -163,9 +163,9 @@ def create_example_fisc3() -> FiscUnit:
     zia_voice_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_road)
     zia_voice_bud.set_item(itemunit_shop(hall_str, pledge=True), clean_road)
 
-    yao_hubunit.save_voice_bud(yao_voice_bud)
-    wei_hubunit.save_voice_bud(wei_voice_bud)
-    zia_hubunit.save_voice_bud(zia_voice_bud)
+    yao_hubunit.save_file_voice(yao_voice_bud)
+    wei_hubunit.save_file_voice(wei_voice_bud)
+    zia_hubunit.save_file_voice(zia_voice_bud)
 
     return accord_fisc
 
@@ -186,9 +186,9 @@ def create_example_fisc4() -> FiscUnit:
     yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
     wei_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, wei_str, None)
     zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
-    yao_voice_bud = yao_hubunit.get_voice_bud()
-    wei_voice_bud = wei_hubunit.get_voice_bud()
-    zia_voice_bud = zia_hubunit.get_voice_bud()
+    yao_voice_bud = yao_hubunit.open_file_voice()
+    wei_voice_bud = wei_hubunit.open_file_voice()
+    zia_voice_bud = zia_hubunit.open_file_voice()
 
     casa_str = "casa"
     casa_road = yao_voice_bud.make_l1_road(casa_str)
@@ -248,9 +248,9 @@ def create_example_fisc4() -> FiscUnit:
     zia_voice_bud.set_item(dallas_item, texas_road)
     zia_voice_bud.set_item(elpaso_item, texas_road)
 
-    yao_hubunit.save_voice_bud(yao_voice_bud)
-    wei_hubunit.save_voice_bud(wei_voice_bud)
-    zia_hubunit.save_voice_bud(zia_voice_bud)
+    yao_hubunit.save_file_voice(yao_voice_bud)
+    wei_hubunit.save_file_voice(wei_voice_bud)
+    zia_hubunit.save_file_voice(zia_voice_bud)
 
     return accord_fisc
 

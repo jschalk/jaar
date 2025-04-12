@@ -468,8 +468,8 @@ def test_HubUnit_merge_any_kicks_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
+    sue_hubunit.save_file_voice(sue_hubunit.default_voice_bud())
+    voice_bud = sue_hubunit.open_file_voice()
     voice_bud.last_kick_id is None
 
     # WHEN
@@ -486,8 +486,8 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_1atom(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_kick_file(sue_1budatoms_kickunit())
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
+    sue_hubunit.save_file_voice(sue_hubunit.default_voice_bud())
+    voice_bud = sue_hubunit.open_file_voice()
     print(f"{voice_bud.fisc_title=}")
     print(f"{sue_hubunit.fisc_title=}")
     sports_str = "sports"
@@ -511,8 +511,8 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_2atoms(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_kick_file(sue_2budatoms_kickunit())
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
+    sue_hubunit.save_file_voice(sue_hubunit.default_voice_bud())
+    voice_bud = sue_hubunit.open_file_voice()
     print(f"{voice_bud.fisc_title=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)

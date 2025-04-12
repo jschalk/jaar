@@ -118,7 +118,7 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToForecast(
     # assert voice Budunit now exists
     assert sue_hubunit.voice_file_exists()
     # assert voice Budunit acctunit now exists
-    sue_voice = sue_hubunit.get_voice_bud()
+    sue_voice = sue_hubunit.open_file_voice()
     assert sue_voice.acct_exists(sue_str)
     assert sue_voice.acct_exists(bob_str)
     assert sue_voice.acct_exists(yao_str)
@@ -171,7 +171,7 @@ def test_load_idea_csv_csvToForecast(
     # assert voice Budunit now exists
     assert sue_hubunit.voice_file_exists()
     # assert voice Budunit acctunit now exists
-    sue_voice = sue_hubunit.get_voice_bud()
+    sue_voice = sue_hubunit.open_file_voice()
     assert sue_voice.acct_exists(sue_str)
     assert sue_voice.acct_exists(bob_str)
     assert sue_voice.acct_exists(yao_str)
@@ -204,17 +204,17 @@ def test_load_idea_csv_csvToForecast(
 #     print(f"{csv_example_path}")
 #     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
 #     sue_hubunit = hubunit_shop(idea_examples_dir(), accord_fisc_title, owner_name=sue_str)
-#     sue_hubunit.save_voice_bud(budunit_shop(sue_str, accord_fisc_title))
+# save_voice_file(a23_fisc.fisc_mstr_dir,  bob_voice_bud)
 #     sue_hubunit._create_initial_kick_files_from_voice()
-#     old_sue_voice = sue_hubunit.get_voice_bud()
+#     old_sue_voice = sue_hubunit.open_file_voice()
 #     old_sue_voice.add_acctunit(sue_str)
-#     sue_hubunit.save_voice_bud(old_sue_voice)
+# save_voice_file(a23_fisc.fisc_mstr_dir,  old_sue_voice)
 
 #     sue_hubunit.initialize_kick_voice_files()
 #     # Open FiscUnit and confirm voice BudUnit does not exist
 #     assert sue_hubunit.voice_file_exists()
-#     assert sue_hubunit.get_voice_bud().acct_exists(sue_str)
-#     assert not sue_hubunit.get_voice_bud().acct_exists(bob_str)
+#     assert sue_hubunit.open_file_voice().acct_exists(sue_str)
+#     assert not sue_hubunit.open_file_voice().acct_exists(bob_str)
 #     assert sue_hubunit.get_max_kick_file_number() == 3
 
 #     # WHEN
@@ -222,7 +222,7 @@ def test_load_idea_csv_csvToForecast(
 
 #     # THEN
 #     # assert voice Budunit acctunit now exists
-#     new_sue_voice = sue_hubunit.get_voice_bud()
+#     new_sue_voice = sue_hubunit.open_file_voice()
 #     assert new_sue_voice.acct_exists(sue_str)
 #     assert new_sue_voice.acct_exists(bob_str)
 #     # assert voice Budunit acctunit.credit_belief is correct

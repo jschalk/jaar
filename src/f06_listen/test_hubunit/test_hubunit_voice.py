@@ -46,7 +46,7 @@ def test_HubUnit_delete_voice_file_DeletesvoiceFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
+    sue_hubunit.save_file_voice(sue_hubunit.default_voice_bud())
     assert sue_hubunit.voice_file_exists()
 
     # WHEN
@@ -93,7 +93,7 @@ def test_HubUnit_create_voice_from_kicks_CreatesvoiceFileFromkickFiles(
     # THEN
     assert sue_hubunit.voice_file_exists()
     static_sue_voice = sue_hubunit._merge_any_kicks(sue_hubunit.default_voice_bud())
-    assert sue_hubunit.get_voice_bud().get_dict() == static_sue_voice.get_dict()
+    assert sue_hubunit.open_file_voice().get_dict() == static_sue_voice.get_dict()
 
 
 def test_HubUnit_create_initial_kick_and_voice_files_CreateskickFilesAndvoiceFile(
@@ -114,7 +114,7 @@ def test_HubUnit_create_initial_kick_and_voice_files_CreateskickFilesAndvoiceFil
     assert os_path_exists(init_kick_file_path)
     assert sue_hubunit.voice_file_exists()
     static_sue_voice = sue_hubunit._merge_any_kicks(sue_hubunit.default_voice_bud())
-    assert sue_hubunit.get_voice_bud().get_dict() == static_sue_voice.get_dict()
+    assert sue_hubunit.open_file_voice().get_dict() == static_sue_voice.get_dict()
 
 
 def test_HubUnit_create_initial_kick_files_from_voice_SavesOnlykickFiles(
@@ -127,7 +127,7 @@ def test_HubUnit_create_initial_kick_files_from_voice_SavesOnlykickFiles(
     bob_str = "Bob"
     sue_voice_bud.add_acctunit(bob_str)
     assert sue_hubunit.voice_file_exists() is False
-    sue_hubunit.save_voice_bud(sue_voice_bud)
+    sue_hubunit.save_file_voice(sue_voice_bud)
     assert sue_hubunit.voice_file_exists()
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, f"{init_kick_id()}.json")
     assert os_path_exists(init_kick_file_path) is False
@@ -155,7 +155,7 @@ def test_HubUnit_initialize_kick_voice_files_CorrectlySavesvoiceFileAndkickFile(
     sue_hubunit.initialize_kick_voice_files()
 
     # THEN
-    voice_bud = sue_hubunit.get_voice_bud()
+    voice_bud = sue_hubunit.open_file_voice()
     assert voice_bud.fisc_title == fisc_title()
     assert voice_bud.owner_name == sue_str
     assert voice_bud.respect_bit == seven_int
@@ -180,7 +180,7 @@ def test_HubUnit_initialize_kick_voice_files_CorrectlySavesOnlyvoiceFile(
     sue_hubunit.initialize_kick_voice_files()
 
     # THEN
-    voice_bud = sue_hubunit.get_voice_bud()
+    voice_bud = sue_hubunit.open_file_voice()
     assert voice_bud.fisc_title == fisc_title()
     assert voice_bud.owner_name == sue_str
     assert voice_bud.respect_bit == seven_int
@@ -195,10 +195,10 @@ def test_HubUnit_initialize_kick_voice_files_CorrectlySavesOnlykickFile(
     seven_int = 25
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_kick_voice_files()
-    sue_voice_bud = sue_hubunit.get_voice_bud()
+    sue_voice_bud = sue_hubunit.open_file_voice()
     bob_str = "Bob"
     sue_voice_bud.add_acctunit(bob_str)
-    sue_hubunit.save_voice_bud(sue_voice_bud)
+    sue_hubunit.save_file_voice(sue_voice_bud)
     assert sue_hubunit.voice_file_exists()
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, f"{init_kick_id()}.json")
     delete_dir(sue_hubunit._kicks_dir)
@@ -223,7 +223,7 @@ def test_HubUnit_append_kicks_to_voice_file_AddskicksTovoiceFile(
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.initialize_kick_voice_files()
     sue_hubunit.save_kick_file(sue_2budatoms_kickunit())
-    voice_bud = sue_hubunit.get_voice_bud()
+    voice_bud = sue_hubunit.open_file_voice()
     print(f"{voice_bud.fisc_title=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)

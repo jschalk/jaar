@@ -31,7 +31,7 @@ def add_voice_pledge(
     x_teamlink: LabelUnit = None,
     reason_premise: RoadUnit = None,
 ):
-    voice_bud = x_hubunit.get_voice_bud()
+    voice_bud = x_hubunit.open_file_voice()
     old_voice_bud = copy_deepcopy(voice_bud)
     create_pledge(voice_bud, pledge_road, x_teamlink, reason_premise)
     next_kickunit = x_hubunit._default_kickunit()
@@ -48,7 +48,7 @@ def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
 
 
 def add_voice_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
-    voice_bud = x_hubunit.get_voice_bud()
+    voice_bud = x_hubunit.open_file_voice()
     old_voice_bud = copy_deepcopy(voice_bud)
     create_fact(voice_bud, fact_pick)
     next_kickunit = x_hubunit._default_kickunit()

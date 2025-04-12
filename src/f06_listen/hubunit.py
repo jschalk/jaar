@@ -56,8 +56,15 @@ from src.f04_kick.atom import (
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,
 )
-from src.f06_listen.basis_buds import get_default_forecast_bud
 from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
+from src.f06_listen.basis_buds import get_default_forecast_bud
+from src.f06_listen.hub_path import create_voice_path, create_forecast_path
+from src.f06_listen.hub_tool import (
+    save_voice_file,
+    open_voice_file,
+    save_forecast_file,
+    open_forecast_file,
+)
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
@@ -126,13 +133,7 @@ class HubUnit:
     _keeps_dir: str = None
     _atoms_dir: str = None
     _kicks_dir: str = None
-    _voice_dir: str = None
-    _forecast_dir: str = None
     _deals_dir: str = None
-    _voice_filename: str = None
-    _voice_path: str = None
-    _forecast_filename: str = None
-    _forecast_path: str = None
 
     def set_dir_attrs(self):
         fiscs_dir = f_path(self.fisc_mstr_dir, "fiscs")
@@ -142,50 +143,36 @@ class HubUnit:
         self._keeps_dir = f_path(self._owner_dir, "keeps")
         self._atoms_dir = f_path(self._owner_dir, "atoms")
         self._kicks_dir = f_path(self._owner_dir, get_kicks_folder())
-        self._voice_dir = f_path(self._owner_dir, "voice")
-        self._forecast_dir = f_path(self._owner_dir, "forecast")
         self._deals_dir = f_path(self._owner_dir, "deals")
-        self._voice_filename = get_json_filename(self.owner_name)
-        self._voice_path = f_path(self._voice_dir, self._voice_filename)
-        self._forecast_filename = get_json_filename(self.owner_name)
-        self._forecast_path = f_path(self._forecast_dir, self._forecast_filename)
 
-    def save_file_voice(self, file_str: str, replace: bool):
-        save_file(
-            dest_dir=self._voice_dir,
-            filename=self._voice_filename,
-            file_str=file_str,
-            replace=replace,
-        )
+    def save_file_voice(self, budunit: BudUnit):
+        if budunit.owner_name != self.owner_name:
+            raise Invalid_forecast_Exception(
+                f"BudUnit with owner_name '{budunit.owner_name}' cannot be saved as owner_name '{self.owner_name}''s voice bud."
+            )
+        save_voice_file(self.fisc_mstr_dir, budunit)
 
-    def save_file_forecast(self, file_str: str, replace: bool):
-        save_file(
-            dest_dir=self._forecast_dir,
-            filename=self._forecast_filename,
-            file_str=file_str,
-            replace=replace,
-        )
+    def save_file_forecast(self, budunit: BudUnit):
+        if budunit.owner_name != self.owner_name:
+            raise Invalid_forecast_Exception(
+                f"BudUnit with owner_name '{budunit.owner_name}' cannot be saved as owner_name '{self.owner_name}''s forecast bud."
+            )
+        save_forecast_file(self.fisc_mstr_dir, budunit)
 
     def voice_file_exists(self) -> bool:
-        return os_path_exists(self._voice_path)
+        voice_path = create_voice_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+        )
+        return os_path_exists(voice_path)
 
     def forecast_file_exists(self) -> bool:
-        return os_path_exists(self._forecast_path)
+        forecast_path = create_forecast_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+        )
+        return os_path_exists(forecast_path)
 
-    def open_file_voice(self) -> str:
-        return open_file(self._voice_dir, self._voice_filename)
-
-    def save_voice_bud(self, x_bud: BudUnit):
-        if x_bud.owner_name != self.owner_name:
-            raise Invalid_voice_Exception(
-                f"BudUnit with owner_name '{x_bud.owner_name}' cannot be saved as owner_name '{self.owner_name}''s voice bud."
-            )
-        self.save_file_voice(x_bud.get_json(), True)
-
-    def get_voice_bud(self) -> BudUnit:
-        if self.voice_file_exists() is False:
-            return None
-        return budunit_get_from_json(self.open_file_voice())
+    def open_file_voice(self) -> BudUnit:
+        return open_voice_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
 
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
@@ -201,10 +188,13 @@ class HubUnit:
         return x_budunit
 
     def delete_voice_file(self):
-        delete_dir(self._voice_path)
+        voice_path = create_voice_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+        )
+        delete_dir(voice_path)
 
-    def open_file_forecast(self) -> str:
-        return open_file(self._forecast_dir, self._forecast_filename)
+    def open_file_forecast(self) -> BudUnit:
+        return open_forecast_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
 
     # kick methods
     def get_max_atom_file_number(self) -> int:
@@ -363,7 +353,7 @@ class HubUnit:
 
     def _create_voice_from_kicks(self):
         x_bud = self._merge_any_kicks(self.default_voice_bud())
-        self.save_voice_bud(x_bud)
+        save_voice_file(self.fisc_mstr_dir, x_bud)
 
     def _create_initial_kick_and_voice_files(self):
         self._create_initial_kick_files_from_default()
@@ -373,7 +363,7 @@ class HubUnit:
         x_kickunit = self._default_kickunit()
         x_kickunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_voice_bud(),
-            after_bud=self.get_voice_bud(),
+            after_bud=self.open_file_voice(),
         )
         x_kickunit.save_files()
 
@@ -388,10 +378,10 @@ class HubUnit:
             self._create_initial_kick_files_from_voice()
 
     def append_kicks_to_voice_file(self):
-        voice_bud = self.get_voice_bud()
+        voice_bud = self.open_file_voice()
         voice_bud = self._merge_any_kicks(voice_bud)
-        self.save_voice_bud(voice_bud)
-        return self.get_voice_bud()
+        save_voice_file(self.fisc_mstr_dir, voice_bud)
+        return voice_bud
 
     # Deal methods
     def timepoint_dir(self, x_deal_time: TimeLinePoint) -> str:
@@ -539,16 +529,9 @@ class HubUnit:
         x_filename = self.owner_filename(x_bud.owner_name)
         save_file(self.jobs_dir(), x_filename, x_bud.get_json())
 
-    def save_forecast_bud(self, x_bud: BudUnit):
-        if x_bud.owner_name != self.owner_name:
-            raise Invalid_forecast_Exception(
-                f"BudUnit with owner_name '{x_bud.owner_name}' cannot be saved as owner_name '{self.owner_name}''s forecast bud."
-            )
-        self.save_file_forecast(x_bud.get_json(), True)
-
     def initialize_forecast_file(self, voice: BudUnit):
         if self.forecast_file_exists() is False:
-            self.save_forecast_bud(get_default_forecast_bud(voice))
+            self.save_file_forecast(get_default_forecast_bud(voice))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))
@@ -568,12 +551,6 @@ class HubUnit:
         file_content = open_file(self.jobs_dir(), self.owner_filename(owner_name))
         return budunit_get_from_json(file_content)
 
-    def get_forecast_bud(self) -> BudUnit:
-        if self.forecast_file_exists() is False:
-            return None
-        file_content = self.open_file_forecast()
-        return budunit_get_from_json(file_content)
-
     def delete_duty_file(self, owner_name: OwnerName):
         delete_dir(self.duty_path(owner_name))
 
@@ -591,7 +568,7 @@ class HubUnit:
             bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
-        return speaker_hubunit.get_forecast_bud()
+        return speaker_hubunit.open_file_forecast()
 
     def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
         # get copy of bud without any metrics
@@ -621,7 +598,7 @@ class HubUnit:
         return self.get_perspective_bud(speaker_job)
 
     def get_keep_roads(self) -> set[RoadUnit]:
-        x_voice_bud = self.get_voice_bud()
+        x_voice_bud = self.open_file_voice()
         x_voice_bud.settle_bud()
         if x_voice_bud._keeps_justified is False:
             x_str = f"Cannot get_keep_roads from '{self.owner_name}' voice bud because 'BudUnit._keeps_justified' is False."
@@ -636,7 +613,7 @@ class HubUnit:
         return get_empty_set_if_None(keep_roads)
 
     def save_all_voice_dutys(self):
-        voice = self.get_voice_bud()
+        voice = self.open_file_voice()
         for x_keep_road in self.get_keep_roads():
             self.keep_road = x_keep_road
             self.save_duty_bud(voice)

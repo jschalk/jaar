@@ -14,6 +14,7 @@ from src.f01_road.deal import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop
+from src.f06_listen.hub_tool import save_voice_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
@@ -180,14 +181,14 @@ def test_FiscUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanu
         respect_bit=x_respect_bit,
         fund_coin=x_fund_coin,
     )
-    assert os_path_exists(sue_hubunit._forecast_path) is False
+    assert sue_hubunit.forecast_file_exists() is False
 
     # WHEN
     accord_fisc.init_owner_keeps(sue_str)
 
     # THEN
     print(f"{get_test_fisc_mstr_dir()=}")
-    assert os_path_exists(sue_hubunit._forecast_path)
+    assert sue_hubunit.forecast_file_exists()
 
 
 def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):
@@ -199,9 +200,9 @@ def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):
     accord_fisc.init_owner_keeps(sue_str)
     sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
     bob_str = "Bob"
-    sue_voice = sue_hubunit.get_voice_bud()
+    sue_voice = sue_hubunit.open_file_voice()
     sue_voice.add_acctunit(bob_str)
-    sue_hubunit.save_voice_bud(sue_voice)
+    save_voice_file(x_fisc_mstr_dir, sue_voice)
 
     # WHEN
     gen_sue_voice = accord_fisc.get_owner_voice_from_file(sue_str)
@@ -224,8 +225,8 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     accord_fisc.init_owner_keeps(yao_str)
     sue_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, sue_str, None)
     yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
-    sue_voice_bud = sue_hubunit.get_voice_bud()
-    yao_voice_bud = yao_hubunit.get_voice_bud()
+    sue_voice_bud = sue_hubunit.open_file_voice()
+    yao_voice_bud = yao_hubunit.open_file_voice()
 
     sue_voice_bud.add_acctunit(sue_str)
     sue_voice_bud.add_acctunit(yao_str)
@@ -249,8 +250,8 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_voice_bud.set_item(dallas_item, texas_road)
     yao_voice_bud.set_item(elpaso_item, texas_road)
 
-    sue_hubunit.save_voice_bud(sue_voice_bud)
-    yao_hubunit.save_voice_bud(yao_voice_bud)
+    save_voice_file(x_fisc_mstr_dir, sue_voice_bud)
+    save_voice_file(x_fisc_mstr_dir, yao_voice_bud)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(

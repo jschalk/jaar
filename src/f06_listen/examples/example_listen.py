@@ -33,7 +33,7 @@ def run_str():
 
 
 def casa_road() -> RoadUnit:
-    return create_road(get_default_fisc_title(), casa_str())
+    return create_road("accord23", casa_str())
 
 
 def cook_road() -> RoadUnit:
@@ -62,7 +62,8 @@ def run_road() -> RoadUnit:
 
 def get_example_zia_speaker() -> BudUnit:
     zia_str = "Zia"
-    zia_speaker = budunit_shop(zia_str)
+    a23_str = "accord23"
+    zia_speaker = budunit_shop(zia_str, a23_str)
     zia_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
     zia_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
     zia_speaker.set_item(itemunit_shop(full_str()), eat_road())
@@ -80,7 +81,8 @@ def get_example_zia_speaker() -> BudUnit:
 
 def get_example_bob_speaker() -> BudUnit:
     bob_str = "Bob"
-    bob_speaker = budunit_shop(bob_str)
+    a23_str = "accord23"
+    bob_speaker = budunit_shop(bob_str, a23_str)
     bob_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
     bob_speaker.set_item(itemunit_shop(hungry_str()), eat_road())
     bob_speaker.set_item(itemunit_shop(full_str()), eat_road())
@@ -100,7 +102,8 @@ def get_example_yao_speaker() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str)
+    a23_str = "accord23"
+    yao_speaker = budunit_shop(yao_str, a23_str)
     yao_speaker.add_acctunit(yao_str, debtit_belief=12)
     yao_speaker.add_acctunit(zia_str, debtit_belief=36)
     yao_speaker.add_acctunit(bob_str, debtit_belief=48)

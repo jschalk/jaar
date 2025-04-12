@@ -183,7 +183,7 @@ def listen_to_agendas_voice_forecast(
     for x_acctunit in get_ordered_debtors_roll(listener_forecast):
         if x_acctunit.acct_name == listener_forecast.owner_name:
             listen_to_speaker_agenda(
-                listener_forecast, listener_hubunit.get_voice_bud()
+                listener_forecast, listener_hubunit.open_file_voice()
             )
         else:
             speaker_id = x_acctunit.acct_name
@@ -219,7 +219,7 @@ def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
 
 
 def listen_to_facts_voice_forecast(new_forecast: BudUnit, listener_hubunit: HubUnit):
-    migrate_all_facts(listener_hubunit.get_voice_bud(), new_forecast)
+    migrate_all_facts(listener_hubunit.open_file_voice(), new_forecast)
     for x_acctunit in get_ordered_debtors_roll(new_forecast):
         speaker_id = x_acctunit.acct_name
         if speaker_id != new_forecast.owner_name:
@@ -229,7 +229,7 @@ def listen_to_facts_voice_forecast(new_forecast: BudUnit, listener_hubunit: HubU
 
 
 def listen_to_debtors_roll_voice_forecast(listener_hubunit: HubUnit) -> BudUnit:
-    voice = listener_hubunit.get_voice_bud()
+    voice = listener_hubunit.open_file_voice()
     new_bud = create_listen_basis(voice)
     if voice.debtor_respect is None:
         return new_bud
@@ -251,7 +251,7 @@ def listen_to_debtors_roll_duty_job(
 
 
 def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
-    voice = listener_hubunit.get_voice_bud()
+    voice = listener_hubunit.open_file_voice()
     new_forecast = create_listen_basis(voice)
     pre_forecast_dict = new_forecast.get_dict()
     voice.settle_bud()
@@ -268,7 +268,7 @@ def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
         _ingest_perspective_agenda(new_forecast, agenda)
         listen_to_speaker_fact(new_forecast, voice)
 
-    listener_hubunit.save_forecast_bud(new_forecast)
+    listener_hubunit.save_file_forecast(new_forecast)
 
 
 def _pick_keep_jobs_and_listen(
@@ -311,4 +311,4 @@ def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_name: OwnerNam
 
 def create_forecast_file_from_voice_file(hubunit: HubUnit):
     x_forecast = listen_to_debtors_roll_voice_forecast(hubunit)
-    hubunit.save_forecast_bud(x_forecast)
+    hubunit.save_file_forecast(x_forecast)
