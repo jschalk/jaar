@@ -17,6 +17,10 @@
             "owner_name": {
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -77,6 +81,10 @@
             },
             "owner_name": {
                 "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -147,6 +155,10 @@
             "owner_name": {
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -166,7 +178,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_coin": {
+            "fund_coin": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -180,7 +192,7 @@
             }
         },
         "jvalues": {
-            "_bridge": {
+            "bridge": {
                 "class_type": "str",
                 "sqlite_datatype": "TEXT"
             }
@@ -203,6 +215,10 @@
             },
             "road": {
                 "class_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -245,6 +261,10 @@
             "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {},
@@ -281,6 +301,10 @@
             "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {},
@@ -307,6 +331,10 @@
             },
             "road": {
                 "class_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -353,6 +381,10 @@
             "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -394,6 +426,10 @@
             "team_tag": {
                 "class_type": "LabelUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -422,6 +458,10 @@
             "parent_road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
+                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -445,7 +485,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_coin": {
+            "fund_coin": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -538,6 +578,10 @@
             },
             "owner_name": {
                 "class_type": "NameUnit",
+                "sqlite_datatype": "TEXT"
+            },
+            "world_id": {
+                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },

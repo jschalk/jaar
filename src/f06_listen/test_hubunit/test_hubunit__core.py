@@ -22,6 +22,7 @@ from src.f06_listen.hub_path import (
     create_voice_path,
     create_forecast_path,
 )
+from src.f06_listen.hub_tool import save_voice_file, save_forecast_file
 from src.f06_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.f06_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f06_listen.examples.listen_env import (
@@ -52,14 +53,8 @@ def test_HubUnit_Exists():
     assert not x_hubunit._owner_dir
     assert not x_hubunit._keeps_dir
     assert not x_hubunit._atoms_dir
-    assert not x_hubunit._voice_dir
-    assert not x_hubunit._forecast_dir
     assert not x_hubunit._deals_dir
     assert not x_hubunit._kicks_dir
-    assert not x_hubunit._voice_filename
-    assert not x_hubunit._voice_path
-    assert not x_hubunit._forecast_filename
-    assert not x_hubunit._forecast_path
 
 
 def test_HubUnit_RaisesError_keep_road_DoesNotExist():
@@ -118,8 +113,6 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit._owner_dir == create_path(x_hubunit._owners_dir, sue_str)
     assert x_hubunit._keeps_dir == create_path(x_hubunit._owner_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(x_hubunit._owner_dir, "atoms")
-    assert x_hubunit._voice_dir == create_path(x_hubunit._owner_dir, "voice")
-    assert x_hubunit._forecast_dir == create_path(x_hubunit._owner_dir, "forecast")
     assert x_hubunit._deals_dir == create_path(x_hubunit._owner_dir, "deals")
     func_deals_dir = create_deals_dir_path(
         x_fisc_mstr_dir, x_fisc_title, x_hubunit.owner_name
@@ -128,23 +121,6 @@ def test_hubunit_shop_ReturnsObj():
     print(f"{func_deals_dir=}")
     assert x_hubunit._deals_dir == func_deals_dir
     assert x_hubunit._kicks_dir == create_path(x_hubunit._owner_dir, get_kicks_folder())
-
-    # voice
-    assert x_hubunit._voice_filename == f"{sue_str}.json"
-    x_voice_path = create_path(x_hubunit._voice_dir, x_hubunit._voice_filename)
-    assert x_hubunit._voice_path == x_voice_path
-    func_voice_path = create_voice_path(x_fisc_mstr_dir, x_hubunit.fisc_title, sue_str)
-    assert x_hubunit._voice_path == func_voice_path
-    print(f"{x_hubunit._voice_path=}")
-
-    # forecast
-    assert x_hubunit._forecast_filename == f"{sue_str}.json"
-    x_forecastpath = create_path(x_hubunit._forecast_dir, x_hubunit._forecast_filename)
-    assert x_hubunit._forecast_path == x_forecastpath
-    func_forecast_path = create_forecast_path(
-        x_fisc_mstr_dir, x_hubunit.fisc_title, sue_str
-    )
-    assert x_hubunit._forecast_path == func_forecast_path
 
 
 def test_hubunit_shop_ReturnsObjWhenEmpty():
@@ -255,58 +231,19 @@ def test_get_keep_path_ReturnsObj():
     assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
 
 
-def test_HubUnit_save_file_voice_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    assert os_path_exists(sue_hubunit._voice_path) is False
-
-    # WHEN
-    sue_hubunit.save_file_voice(file_str="fooboo", replace=True)
-
-    # THEN
-    assert os_path_exists(sue_hubunit._voice_path)
-
-
 def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
+    sue_bud = budunit_shop(sue_str, a23_str)
     assert sue_hubunit.voice_file_exists() is False
 
     # WHEN
-    sue_hubunit.save_file_voice(file_str="fooboo", replace=True)
+    save_voice_file(env_dir(), sue_bud)
 
     # THEN
     assert sue_hubunit.voice_file_exists()
-
-
-def test_HubUnit_open_file_voice_OpensFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    example_str = "fooboo"
-    sue_hubunit.save_file_voice(example_str, replace=True)
-
-    # WHEN / THEN
-    assert sue_hubunit.open_file_voice() == example_str
-
-
-def test_HubUnit_save_file_forecast_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    assert os_path_exists(sue_hubunit._forecast_path) is False
-
-    # WHEN
-    sue_hubunit.save_file_forecast(file_str="fooboo", replace=True)
-
-    # THEN
-    assert os_path_exists(sue_hubunit._forecast_path)
 
 
 def test_HubUnit_forecast_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
@@ -317,139 +254,8 @@ def test_HubUnit_forecast_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     assert sue_hubunit.forecast_file_exists() is False
 
     # WHEN
-    sue_hubunit.save_file_forecast(file_str="fooboo", replace=True)
+    sue_bud = budunit_shop(sue_str, a23_str)
+    save_forecast_file(env_dir(), sue_bud)
 
     # THEN
     assert sue_hubunit.forecast_file_exists()
-
-
-def test_HubUnit_open_file_forecast_OpensFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    example_str = "fooboo"
-    sue_hubunit.save_file_forecast(example_str, replace=True)
-
-    # WHEN / THEN
-    assert sue_hubunit.open_file_forecast() == example_str
-
-
-def test_HubUnit_save_voice_bud_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-    fisc_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
-
-    print(f"{sue_hubunit._voice_path=}")
-    assert sue_hubunit.voice_file_exists() is False
-
-    # WHEN
-    sue_hubunit.save_voice_bud(sue_budunit)
-
-    # THEN
-    assert sue_hubunit.voice_file_exists()
-
-
-def test_HubUnit_save_voice_bud_RaisesErrorWhenBud_forecast_id_IsWrong(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-
-    fisc_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
-
-    # WHEN / THEN
-    yao_str = "Yao"
-    with pytest_raises(Exception) as excinfo:
-        sue_hubunit.save_voice_bud(budunit_shop(yao_str))
-    assert (
-        str(excinfo.value)
-        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s voice bud."
-    )
-
-
-def test_HubUnit_get_voice_bud_OpensFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-    nation_str = "nation-state"
-    nation_road = create_road(root_title(), nation_str)
-    usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
-    texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
-    sue_hubunit.save_voice_bud(sue_budunit)
-
-    # WHEN / THEN
-    assert sue_hubunit.get_voice_bud().get_dict() == sue_budunit.get_dict()
-
-
-def test_HubUnit_save_forecast_bud_CorrectlySavesFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-
-    fisc_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
-
-    print(f"{sue_hubunit._forecast_path=}")
-    assert sue_hubunit.forecast_file_exists() is False
-
-    # WHEN
-    sue_hubunit.save_forecast_bud(sue_budunit)
-
-    # THEN
-    assert sue_hubunit.forecast_file_exists()
-
-
-def test_HubUnit_get_forecast_bud_OpensFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-    nation_str = "nation-state"
-    nation_road = create_road(root_title(), nation_str)
-    usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
-    texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
-    sue_hubunit.save_forecast_bud(sue_budunit)
-
-    # WHEN / THEN
-    assert sue_hubunit.get_forecast_bud().get_dict() == sue_budunit.get_dict()
-
-
-def test_HubUnit_get_forecast_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_budunit = get_budunit_with_4_levels()
-    sue_str = sue_budunit.owner_name
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-
-    # WHEN / THEN
-    assert sue_hubunit.get_forecast_bud() is None
-
-
-def test_HubUnit_save_forecast_bud_RaisesErrorWhenBud_forecast_id_IsWrong(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-
-    fisc_title = root_title()
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title, sue_str, None)
-
-    # WHEN / THEN
-    yao_str = "Yao"
-    with pytest_raises(Exception) as excinfo:
-        sue_hubunit.save_forecast_bud(budunit_shop(yao_str))
-    assert (
-        str(excinfo.value)
-        == f"BudUnit with owner_name '{yao_str}' cannot be saved as owner_name '{sue_str}''s forecast bud."
-    )

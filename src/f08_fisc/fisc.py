@@ -48,8 +48,19 @@ from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f06_listen.basis_buds import get_default_forecast_bud
 from src.f06_listen.cell import cellunit_shop
-from src.f06_listen.hub_path import create_fisc_json_path, create_cell_dir_path
-from src.f06_listen.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
+from src.f06_listen.hub_path import (
+    create_fisc_json_path,
+    create_cell_dir_path,
+    create_voice_path,
+)
+from src.f06_listen.hub_tool import (
+    cellunit_save_to_dir,
+    open_bud_file,
+    open_voice_file,
+    open_forecast_file,
+    save_voice_file,
+    save_forecast_file,
+)
 from src.f06_listen.hubunit import hubunit_shop, HubUnit
 from src.f06_listen.listen import (
     listen_to_speaker_agenda,
@@ -189,7 +200,7 @@ class FiscUnit:
         x_hubunit.initialize_forecast_file(self.get_owner_voice_from_file(owner_name))
 
     def get_owner_voice_from_file(self, owner_name: OwnerName) -> BudUnit:
-        return self._get_hubunit(owner_name).get_voice_bud()
+        return open_voice_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
 
     def _set_all_healer_dutys(self, owner_name: OwnerName):
         x_voice = self.get_owner_voice_from_file(owner_name)
@@ -219,8 +230,8 @@ class FiscUnit:
 
     # forecast bud management
     def generate_forecast_bud(self, owner_name: OwnerName) -> BudUnit:
-        listener_hubunit = self._get_hubunit(owner_name)
-        x_voice = listener_hubunit.get_voice_bud()
+        mstr_dir = self.fisc_mstr_dir
+        x_voice = open_voice_file(mstr_dir, self.fisc_title, owner_name)
         x_voice.settle_bud()
         x_forecast = get_default_forecast_bud(x_voice)
         for healer_name, healer_dict in x_voice._healers_dict.items():
@@ -251,11 +262,12 @@ class FiscUnit:
 
         # if no budunit has come from voice->duty->job->forecast pipeline use voice->forecast pipeline
         x_forecast.settle_bud()
+        listener_hubunit = self._get_hubunit(owner_name)
         if len(x_forecast._item_dict) == 1:
             x_forecast = listen_to_debtors_roll_voice_forecast(listener_hubunit)
         if len(x_forecast._item_dict) == 1:
             x_forecast = x_voice
-        listener_hubunit.save_forecast_bud(x_forecast)
+        save_forecast_file(self.fisc_mstr_dir, x_forecast)
 
         return self.get_forecast_file_bud(owner_name)
 
@@ -265,7 +277,7 @@ class FiscUnit:
             self.generate_forecast_bud(x_owner_name)
 
     def get_forecast_file_bud(self, owner_name: OwnerName) -> BudUnit:
-        return self._get_hubunit(owner_name).get_forecast_bud()
+        return open_forecast_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
 
     # brokerunits
     def set_brokerunit(self, x_brokerunit: BrokerUnit):

@@ -100,7 +100,7 @@ def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     }
     sport_str = "sport"
     sport_item = itemunit_shop(sport_str, _awardheirs=x_awardheirs)
-    assert sport_item._fund_coin == 1
+    assert sport_item.fund_coin == 1
     assert len(sport_item._awardheirs) == 2
     swim_awardheir = sport_item._awardheirs.get(swim_str)
     assert not swim_awardheir._fund_give

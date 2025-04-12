@@ -6,6 +6,7 @@ from src.f01_road.road import (
 )
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import BudUnit, budunit_shop
+from src.f06_listen.hub_tool import save_voice_file, open_forecast_file
 from src.f06_listen.hubunit import hubunit_shop, HubUnit
 from src.f06_listen.listen import listen_to_owner_jobs, create_job_file_from_duty_file
 from src.f06_listen.examples.listen_env import (
@@ -301,7 +302,7 @@ def get_example_yao_voice_with_3_healers():
 #     assert yao_iowa_hubunit.job_file_exists(yao_str) is False
 #     assert yao_ohio_hubunit.job_file_exists(yao_str) is False
 #     assert zia_utah_hubunit.job_file_exists(yao_str) is False
-#     yao_iowa_hubunit.save_voice_bud(yao_voice0)
+# save_voice_file(env_dir(), yao_voice0)
 #     yao_iowa_hubunit.save_job_bud(yao_job1)
 #     yao_ohio_hubunit.save_job_bud(yao_job2)
 #     zia_utah_hubunit.save_job_bud(yao_job3)
@@ -315,7 +316,7 @@ def get_example_yao_voice_with_3_healers():
 #     listen_to_owner_jobs(yao_iowa_hubunit)
 #     assert yao_iowa_hubunit.forecast_file_exists()
 
-#     yao_forecast = yao_iowa_hubunit.get_forecast_bud()
+#     yao_forecast = yao_iowa_hubunit.open_file_forecast()
 #     yao_forecast.settle_bud()
 #     assert yao_forecast.accts.keys() == yao_voice0.accts.keys()
 #     assert yao_forecast.get_acct(yao_str)._irrational_debtit_belief == 0
@@ -378,7 +379,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     assert yao_ohio_hubunit.job_file_exists(yao_str) is False
     assert zia_utah_hubunit.job_file_exists(yao_str) is False
     print(f"{yao_voice0.get_fact(get_location_road())=}")
-    yao_iowa_hubunit.save_voice_bud(yao_voice0)
+    save_voice_file(env_dir(), yao_voice0)
     # yao_iowa_hubunit.save_job_bud(yao_job1)
     # yao_ohio_hubunit.save_job_bud(yao_job2)
     # zia_utah_hubunit.save_job_bud(yao_job3)
@@ -392,7 +393,7 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     listen_to_owner_jobs(yao_iowa_hubunit)
     assert yao_iowa_hubunit.forecast_file_exists()
 
-    yao_forecast = yao_iowa_hubunit.get_forecast_bud()
+    yao_forecast = open_forecast_file(env_dir(), get_default_fisc_title(), yao_str)
     yao_forecast.settle_bud()
     assert yao_forecast.accts.keys() == yao_voice0.accts.keys()
     assert yao_forecast.get_acct(yao_str)._irrational_debtit_belief == 0

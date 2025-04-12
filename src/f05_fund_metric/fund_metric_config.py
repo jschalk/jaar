@@ -71,7 +71,7 @@ def get_fund_metric_args_type_dict() -> dict[str, str]:
         "debtit_belief": "float",
         "item_title": "TitleUnit",
         "parent_road": "RoadUnit",
-        "_fund_coin": "float",
+        "fund_coin": "float",
         "addin": "float",
         "begin": "float",
         "close": "float",
@@ -151,7 +151,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "debtit_belief": "REAL",
         "item_title": "TEXT",
         "parent_road": "TEXT",
-        "_fund_coin": "REAL",
+        "fund_coin": "REAL",
         "addin": "REAL",
         "begin": "REAL",
         "close": "REAL",
@@ -183,7 +183,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "_base_item_active_value": "INTEGER",
         "base_item_active_requisite": "INTEGER",
         "team_tag": "TEXT",
-        "_bridge": "TEXT",
+        "bridge": "TEXT",
         "_owner_name_team": "INTEGER",
         "_active": "INTEGER",
         "_all_acct_cred": "INTEGER",
@@ -211,6 +211,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "penny": "REAL",
         "respect_bit": "REAL",
         "tally": "INTEGER",
+        "world_id": "TEXT",
     }
 
 

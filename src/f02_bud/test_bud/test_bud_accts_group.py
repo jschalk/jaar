@@ -58,7 +58,7 @@ def test_BudUnit_set_groupunit_Sets_road_fund_coin():
     bob_bud.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_bud._groupunits.get(run_str)._fund_coin == x_fund_coin
+    assert bob_bud._groupunits.get(run_str).fund_coin == x_fund_coin
 
 
 def test_BudUnit_groupunit_exists_ReturnsObj():

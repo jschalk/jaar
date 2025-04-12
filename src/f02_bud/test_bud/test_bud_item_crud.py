@@ -113,7 +113,7 @@ def test_BudUnit_add_item_SetsAttr_Scenario0():
     # THEN
     assert bob_budunit.item_exists(casa_road)
     casa_itemunit = bob_budunit.get_item_obj(casa_road)
-    assert casa_itemunit._bridge == bob_budunit.bridge
+    assert casa_itemunit.bridge == bob_budunit.bridge
     assert not casa_itemunit.pledge
 
 
@@ -166,8 +166,8 @@ def test_BudUnit_set_item_CorrectlyAddsItemObjWithNonDefault_bridge():
     print(f"{bob_bud.itemroot._kids.keys()=}")
     assert len(bob_bud.itemroot._kids) == 2
     wed_item = bob_bud.get_item_obj(wed_road)
-    assert wed_item._bridge == slash_str
-    assert wed_item._bridge == bob_bud.bridge
+    assert wed_item.bridge == slash_str
+    assert wed_item.bridge == bob_bud.bridge
 
     # WHEN
     bob_bud.edit_item_attr(casa_road, reason_base=week_road, reason_premise=wed_road)

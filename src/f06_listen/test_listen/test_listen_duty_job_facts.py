@@ -27,8 +27,9 @@ from src.f06_listen.examples.example_listen import (
 
 def test_listen_to_facts_duty_job_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     # ESTABLISH
+    a23_str = "accord23"
     yao_str = "Yao"
-    yao_duty = budunit_shop(yao_str)
+    yao_duty = budunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
@@ -58,8 +59,9 @@ def test_listen_to_facts_duty_job_SetsSingleFactUnitWithDifferentTask(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
+    a23_str = "accord23"
     yao_str = "Yao"
-    yao_duty = budunit_shop(yao_str)
+    yao_duty = budunit_shop(yao_str, a23_str)
     yao_credit_belief = 47
     yao_debtit_belief = 41
     yao_pool = 87

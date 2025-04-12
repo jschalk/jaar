@@ -140,4 +140,4 @@ def test_ItemUnit_set_bridge_CorrectlyModifiesReasonRoadUnits():
     casa_item.set_bridge(slash_str)
 
     # THEN
-    assert casa_item._bridge == slash_str
+    assert casa_item.bridge == slash_str

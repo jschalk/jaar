@@ -1,6 +1,6 @@
 # from src.f00_instrument.dict_toolbox import get_from_nested_dict
 from src.f00_instrument.file import create_path
-from src.f01_road.deal import fisc_title_str, owner_name_str
+from src.f01_road.deal import fisc_title_str, owner_name_str, world_id_str
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,
@@ -144,6 +144,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
                     dimen_keys = set(atom_args)
+                    dimen_keys.add(world_id_str())
                     dimen_keys.add(fisc_title_str())
                     dimen_keys.add(owner_name_str())
                     fm_aspect_keys = set(fm_aspect_dict.keys())
@@ -220,7 +221,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_all_acct_debt",
         "_descendant_pledge_count",
         "_fund_ratio",
-        "_fund_coin",
+        "fund_coin",
         "_fund_onset",
         "_fund_cease",
         "_healerlink_ratio",
@@ -246,7 +247,7 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_fund_agenda_take",
         "_credor_pool",
         "_debtor_pool",
-        "_fund_coin",
+        "fund_coin",
     }
     assert expected_budgrou_jmetrics_keys == budgrou_jmetrics_keys
 
@@ -370,6 +371,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
     print(f"{bud_acctunit_args=}")
     print(f"{bud_groupunit_args=}")
     assert bud_acctunit_args == {
+        world_id_str(),
         fisc_title_str(),
         owner_name_str(),
         "_fund_agenda_give",
@@ -387,6 +389,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_irrational_debtit_belief",
     }
     assert bud_itemunit_args == {
+        world_id_str(),
         fisc_title_str(),
         owner_name_str(),
         morph_str(),
@@ -409,7 +412,7 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         "_healerlink_ratio",
         "_level",
         "_task",
-        "_fund_coin",
+        "fund_coin",
         "_fund_ratio",
         "_range_evaluated",
         "problem_bool",
@@ -418,17 +421,18 @@ def test_get_fund_metric_dimen_args_ReturnsObj():
         begin_str(),
     }
     assert bud_groupunit_args == {
+        world_id_str(),
         fisc_title_str(),
         owner_name_str(),
         "_debtor_pool",
         "_credor_pool",
         "_fund_give",
         "group_label",
-        "_bridge",
+        "bridge",
         "_fund_agenda_give",
         "_fund_agenda_take",
         "_fund_take",
-        "_fund_coin",
+        "fund_coin",
     }
 
 
@@ -534,8 +538,8 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     assert g_class_type(config, budgrou, jk, group_label_str()) == "LabelUnit"
     assert g_sqlitetype(config, budgrou, jk, group_label_str()) == "TEXT"
-    assert g_class_type(config, budgrou, jv, "_bridge") == "str"
-    assert g_sqlitetype(config, budgrou, jv, "_bridge") == "TEXT"
+    assert g_class_type(config, budgrou, jv, "bridge") == "str"
+    assert g_sqlitetype(config, budgrou, jv, "bridge") == "TEXT"
     assert g_class_type(config, budgrou, jm, "_debtor_pool") == "float"
     assert g_sqlitetype(config, budgrou, jm, "_debtor_pool") == "REAL"
     assert g_class_type(config, budgrou, jm, "_credor_pool") == "float"
@@ -548,8 +552,8 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budgrou, jm, "_fund_agenda_take") == "REAL"
     assert g_class_type(config, budgrou, jm, "_fund_take") == "float"
     assert g_sqlitetype(config, budgrou, jm, "_fund_take") == "REAL"
-    assert g_class_type(config, budgrou, jm, "_fund_coin") == "float"
-    assert g_sqlitetype(config, budgrou, jm, "_fund_coin") == "REAL"
+    assert g_class_type(config, budgrou, jm, "fund_coin") == "float"
+    assert g_sqlitetype(config, budgrou, jm, "fund_coin") == "REAL"
 
     assert g_class_type(config, budawar, jk, awardee_tag_str()) == type_LabelUnit_str()
     assert g_sqlitetype(config, budawar, jk, awardee_tag_str()) == "TEXT"
@@ -625,8 +629,8 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, buditem, jm, "_descendant_pledge_count") == "INTEGER"
     assert g_class_type(config, buditem, jm, "_fund_cease") == "float"
     assert g_sqlitetype(config, buditem, jm, "_fund_cease") == "REAL"
-    assert g_class_type(config, buditem, jm, "_fund_coin") == "float"
-    assert g_sqlitetype(config, buditem, jm, "_fund_coin") == "REAL"
+    assert g_class_type(config, buditem, jm, "fund_coin") == "float"
+    assert g_sqlitetype(config, buditem, jm, "fund_coin") == "REAL"
     assert g_class_type(config, buditem, jm, "_fund_onset") == "float"
     assert g_sqlitetype(config, buditem, jm, "_fund_onset") == "REAL"
     assert g_class_type(config, buditem, jm, "_fund_ratio") == "float"
@@ -780,7 +784,6 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
     assert fund_metric_args_type_dict.get(debtit_belief_str()) == "float"
     assert fund_metric_args_type_dict.get("item_title") == type_TitleUnit_str()
     assert fund_metric_args_type_dict.get(parent_road_str()) == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get("_fund_coin") == "float"
     assert fund_metric_args_type_dict.get(addin_str()) == "float"
     assert fund_metric_args_type_dict.get(begin_str()) == "float"
     assert fund_metric_args_type_dict.get(close_str()) == "float"
@@ -837,7 +840,7 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
     assert fund_metric_args_type_dict.get(penny_str()) == "float"
     assert fund_metric_args_type_dict.get(respect_bit_str()) == "float"
     assert fund_metric_args_type_dict.get("tally") == "int"
-    assert len(fund_metric_args_type_dict) == 75
+    assert len(fund_metric_args_type_dict) == 74
 
 
 # def test_get_all_bud_dimen_keys_ReturnsObj():
@@ -1286,7 +1289,8 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
 #     # THEN
 #     assert x_atom_args_dimen_mapping
 #     assert x_atom_args_dimen_mapping.get(stop_want_str())
-#     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
+#     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {
+# world_id_str(),bud_itemunit_str()}
 #     assert x_atom_args_dimen_mapping.get(parent_road_str())
 #     road_dimens = x_atom_args_dimen_mapping.get(road_str())
 #     assert bud_item_factunit_str() in road_dimens
@@ -1366,7 +1370,8 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
 #         x_dimen = x_dimens[0]
 #         x_class_type = get_class_type(x_dimen, x_atom_arg)
 #         print(
-#             f"assert x_class_types.get({x_atom_arg}) == {x_class_type} {x_class_types.get(x_atom_arg)=}"
+#             f"assert x_class_types.get({x_atom_arg}) == {
+# world_id_str(),x_class_type} {x_class_types.get(x_atom_arg)=}"
 #         )
 #         if x_class_types.get(x_atom_arg) != x_class_type:
 #             return False

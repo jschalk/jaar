@@ -338,8 +338,8 @@ class BudUnit:
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
-        if x_acctunit._bridge != self.bridge:
-            x_acctunit._bridge = self.bridge
+        if x_acctunit.bridge != self.bridge:
+            x_acctunit.bridge = self.bridge
         if x_acctunit._respect_bit != self.respect_bit:
             x_acctunit._respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
@@ -381,7 +381,7 @@ class BudUnit:
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
-        x_groupunit._fund_coin = self.fund_coin
+        x_groupunit.fund_coin = self.fund_coin
         self._groupunits[x_groupunit.group_label] = x_groupunit
 
     def groupunit_exists(self, group_label: GroupLabel) -> bool:
@@ -397,7 +397,7 @@ class BudUnit:
                 group_label=x_group_label,
                 credit_vote=x_acctunit.credit_belief,
                 debtit_vote=x_acctunit.debtit_belief,
-                _acct_name=x_acctunit.acct_name,
+                acct_name=x_acctunit.acct_name,
             )
             x_groupunit.set_membership(x_membership)
         return x_groupunit
@@ -611,11 +611,11 @@ class BudUnit:
             exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root title. Should be {self.itemroot.item_title}."
             raise InvalidBudException(exception_str)
 
-        item_kid._bridge = self.bridge
+        item_kid.bridge = self.bridge
         if item_kid.fisc_title != self.fisc_title:
             item_kid.fisc_title = self.fisc_title
-        if item_kid._fund_coin != self.fund_coin:
-            item_kid._fund_coin = self.fund_coin
+        if item_kid.fund_coin != self.fund_coin:
+            item_kid.fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_tags:
             item_kid = self._get_filtered_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
@@ -949,7 +949,7 @@ class BudUnit:
             x_groupunit._set_membership_fund_give_fund_take()
             for x_membership in x_groupunit._memberships.values():
                 self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_name=x_membership._acct_name,
+                    acctunit_acct_name=x_membership.acct_name,
                     fund_give=x_membership._fund_give,
                     fund_take=x_membership._fund_take,
                     fund_agenda_give=x_membership._fund_agenda_give,
@@ -1159,7 +1159,7 @@ class BudUnit:
     def _create_groupunits_metrics(self):
         self._groupunits = {}
         for group_label, acct_name_set in self.get_acctunit_group_labels_dict().items():
-            x_groupunit = groupunit_shop(group_label, _bridge=self.bridge)
+            x_groupunit = groupunit_shop(group_label, bridge=self.bridge)
             for x_acct_name in acct_name_set:
                 x_membership = self.get_acct(x_acct_name).get_membership(group_label)
                 x_groupunit.set_membership(x_membership)
@@ -1439,8 +1439,8 @@ def budunit_shop(
         _uid=1,
         _level=0,
         fisc_title=x_bud.fisc_title,
-        _bridge=x_bud.bridge,
-        _fund_coin=x_bud.fund_coin,
+        bridge=x_bud.bridge,
+        fund_coin=x_bud.fund_coin,
         parent_road="",
     )
     x_bud.set_max_tree_traverse(3)
@@ -1505,9 +1505,9 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
-        _bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
+        bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
         fisc_title=x_bud.fisc_title,
-        _fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
+        fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
 

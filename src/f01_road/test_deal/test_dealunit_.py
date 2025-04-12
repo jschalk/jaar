@@ -7,6 +7,7 @@ from src.f01_road.deal import (
     celldepth_str,
     magnitude_str,
     deal_acct_nets_str,
+    world_id_str,
     DealUnit,
     dealunit_shop,
     get_dealunit_from_dict,
@@ -24,6 +25,7 @@ def test_str_functions_ReturnObj():
     assert quota_str() == "quota"
     assert magnitude_str() == "magnitude"
     assert deal_acct_nets_str() == "deal_acct_nets"
+    assert world_id_str() == "world_id"
 
 
 def test_DEFAULT_CELLDEPTH():

@@ -17,10 +17,10 @@ def test_BudUnit_set_acctunit_SetObjCorrectly():
     bob_bud.set_acctunit(yao_acctunit)
 
     # THEN
-    assert bob_bud.accts.get(yao_str)._bridge == slash_str
+    assert bob_bud.accts.get(yao_str).bridge == slash_str
     x_accts = {yao_acctunit.acct_name: deepcopy_yao_acctunit}
     assert bob_bud.accts != x_accts
-    deepcopy_yao_acctunit._bridge = bob_bud.bridge
+    deepcopy_yao_acctunit.bridge = bob_bud.bridge
     assert bob_bud.accts == x_accts
 
 

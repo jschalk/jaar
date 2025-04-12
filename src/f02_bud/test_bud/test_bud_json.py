@@ -380,8 +380,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert json_itemroot.reasonunits == {}
     assert json_itemroot.teamunit == zia_bud.itemroot.teamunit
     assert json_itemroot.teamunit == run_teamunit
-    assert json_itemroot._fund_coin == 8
-    assert json_itemroot._fund_coin == zia_fund_coin
+    assert json_itemroot.fund_coin == 8
+    assert json_itemroot.fund_coin == zia_fund_coin
     assert len(json_itemroot.factunits) == 1
     assert len(json_itemroot.awardlinks) == 1
 
@@ -468,7 +468,7 @@ def test_budunit_get_from_json_ReturnsObj_bridge_AcctExample():
 
     # THEN
     after_bob_acctunit = after_bob_bud.get_acct(bob_str)
-    assert after_bob_acctunit._bridge == slash_bridge
+    assert after_bob_acctunit.bridge == slash_bridge
 
 
 def test_budunit_get_from_json_ReturnsObj_bridge_GroupExample():
@@ -487,7 +487,7 @@ def test_budunit_get_from_json_ReturnsObj_bridge_GroupExample():
 
     # THEN
     after_yao_acctunit = after_bob_bud.get_acct(yao_str)
-    assert after_yao_acctunit._bridge == slash_bridge
+    assert after_yao_acctunit.bridge == slash_bridge
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():
@@ -535,7 +535,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
     assert ccn2_bud.itemroot.item_title == x2_bud.itemroot.item_title
     assert ccn2_bud.itemroot.parent_road == x2_bud.itemroot.parent_road
-    assert ccn2_bud.itemroot._fund_coin == x2_bud.itemroot._fund_coin
+    assert ccn2_bud.itemroot.fund_coin == x2_bud.itemroot.fund_coin
     shave_road = ccn2_bud.make_l1_road("shave")
     week_road = ccn2_bud.make_l1_road("weekdays")
     # assert ccn2_bud.get_item_obj(shave_road) == x2_bud.get_item_obj(shave_road)

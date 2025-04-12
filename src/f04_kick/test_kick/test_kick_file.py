@@ -1,4 +1,4 @@
-from src.f00_instrument.file import create_path as f_path, open_json
+from src.f00_instrument.file import create_path, open_json
 from src.f01_road.deal import owner_name_str
 from src.f01_road.jaar_config import (
     get_kicks_folder,
@@ -21,17 +21,17 @@ from os.path import exists as os_path_exists
 
 def test_KickUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_atoms_dir = f_path(sue_owner_dir, "atoms")
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_atoms_dir = create_path(sue_owner_dir, "atoms")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
     six_filename = f"{six_int}.json"
-    sue_atom2_path = f_path(sue_atoms_dir, two_filename)
-    sue_atom6_path = f_path(sue_atoms_dir, six_filename)
+    sue_atom2_path = create_path(sue_atoms_dir, two_filename)
+    sue_atom6_path = create_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
     sue_kickunit = kickunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
@@ -51,17 +51,17 @@ def test_KickUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_KickUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_atoms_dir = f_path(sue_owner_dir, "atoms")
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_atoms_dir = create_path(sue_owner_dir, "atoms")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
     six_filename = f"{six_int}.json"
-    sue_atom2_path = f_path(sue_atoms_dir, two_filename)
-    sue_atom6_path = f_path(sue_atoms_dir, six_filename)
+    sue_atom2_path = create_path(sue_atoms_dir, two_filename)
+    sue_atom6_path = create_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
     sue_kickunit = kickunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
@@ -78,17 +78,17 @@ def test_KickUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_KickUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_atoms_dir = f_path(sue_owner_dir, "atoms")
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_atoms_dir = create_path(sue_owner_dir, "atoms")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
     six_filename = f"{six_int}.json"
-    sue_atom2_path = f_path(sue_atoms_dir, two_filename)
-    sue_atom6_path = f_path(sue_atoms_dir, six_filename)
+    sue_atom2_path = create_path(sue_atoms_dir, two_filename)
+    sue_atom6_path = create_path(sue_atoms_dir, six_filename)
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
     sue_kickunit = kickunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
@@ -105,18 +105,18 @@ def test_KickUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
 
 def test_KickUnit_save_kick_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
     sue_kick_id = 2
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_kicks_dir = f_path(sue_owner_dir, get_kicks_folder())
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
     six_filename = f"{six_int}.json"
-    sue_kick2_path = f_path(sue_kicks_dir, two_filename)
-    sue_kick6_path = f_path(sue_kicks_dir, six_filename)
+    sue_kick2_path = create_path(sue_kicks_dir, two_filename)
+    sue_kick6_path = create_path(sue_kicks_dir, six_filename)
     print(f"{sue_kick2_path=}")
     print(f"{sue_kick6_path=}")
     sue_kickunit = kickunit_shop(
@@ -141,17 +141,17 @@ def test_KickUnit_save_kick_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_KickUnit_kick_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_kicks_dir = f_path(sue_owner_dir, get_kicks_folder())
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
     six_filename = f"{six_int}.json"
-    sue_kick2_path = f_path(sue_kicks_dir, two_filename)
-    sue_kick6_path = f_path(sue_kicks_dir, six_filename)
+    sue_kick2_path = create_path(sue_kicks_dir, two_filename)
+    sue_kick6_path = create_path(sue_kicks_dir, six_filename)
     print(f"{sue_kick2_path=}")
     print(f"{sue_kick6_path=}")
     sue_kickunit = kickunit_shop(sue_str, _kicks_dir=sue_kicks_dir)
@@ -167,12 +167,12 @@ def test_KickUnit_kick_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_KickUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_atoms_dir = f_path(sue_owner_dir, "atoms")
-    sue_kicks_dir = f_path(sue_owner_dir, get_kicks_folder())
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_atoms_dir = create_path(sue_owner_dir, "atoms")
+    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
 
     zia_str = "Zia"
     yao_str = "Yao"
@@ -204,11 +204,11 @@ def test_KickUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
 
 def test_KickUnit_create_buddelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_atoms_dir = f_path(sue_owner_dir, "atoms")
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_atoms_dir = create_path(sue_owner_dir, "atoms")
 
     sue_kickunit = kickunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     int4 = 4
@@ -237,12 +237,12 @@ def test_KickUnit_create_buddelta_from_atom_files_SetsAttr(env_dir_setup_cleanup
 
 def test_create_kickunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = f_path(fiscs_dir(), fisc_title())
-    x_owners_dir = f_path(x_fisc_dir, "owners")
+    x_fisc_dir = create_path(fiscs_dir(), fisc_title())
+    x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
-    sue_owner_dir = f_path(x_owners_dir, sue_str)
-    sue_atoms_dir = f_path(sue_owner_dir, "atoms")
-    sue_kicks_dir = f_path(sue_owner_dir, get_kicks_folder())
+    sue_owner_dir = create_path(x_owners_dir, sue_str)
+    sue_atoms_dir = create_path(sue_owner_dir, "atoms")
+    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
 
     yao_str = "Yao"
     sue_delta_start = 4

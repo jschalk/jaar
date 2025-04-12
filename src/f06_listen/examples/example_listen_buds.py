@@ -3,7 +3,8 @@ from src.f02_bud.bud import BudUnit, budunit_shop
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop(owner_name="Sue", tally=10)
+    a23_str = "accord23"
+    sue_bud = budunit_shop(owner_name="Sue", fisc_title=a23_str, tally=10)
 
     casa = "casa"
     sue_bud.set_l1_item(itemunit_shop(casa, mass=30, pledge=True))

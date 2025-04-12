@@ -115,8 +115,10 @@ def get_sorted_headers_str(idea_filename):
     idea_attributes = set(x_idearef.get(attributes_str()).keys())
     idea_attributes.remove(face_name_str())
     idea_attributes.remove(event_int_str())
+    print(f"{idea_attributes=}")
     attr_sort = get_idea_elements_sort_order()
     idea_attributes = get_default_sorted_list(idea_attributes, attr_sort)
+    print(f"{idea_attributes=}")
     header_str = "".join(f",{x_header}" for x_header in idea_attributes)
     return header_str[1:]
     # return create_sorted_concatenated_str(list(idea_attributes))

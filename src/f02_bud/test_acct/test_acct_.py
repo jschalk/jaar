@@ -28,7 +28,7 @@ def test_AcctUnit_exists():
     assert bob_acctunit._fund_take is None
     assert bob_acctunit._fund_agenda_give is None
     assert bob_acctunit._fund_agenda_take is None
-    assert bob_acctunit._bridge is None
+    assert bob_acctunit.bridge is None
     assert bob_acctunit._respect_bit is None
 
 
@@ -51,7 +51,7 @@ def test_AcctUnit_set_nameunit_RaisesErrorIfParameterContains_bridge():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acctunit_shop(acct_name=texas_str, _bridge=slash_str)
+        acctunit_shop(acct_name=texas_str, bridge=slash_str)
     assert (
         str(excinfo.value)
         == f"'{texas_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"
@@ -81,7 +81,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_take == 0
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
-    assert yao_acctunit._bridge == default_bridge_if_None()
+    assert yao_acctunit.bridge == default_bridge_if_None()
     assert yao_acctunit._respect_bit == default_respect_bit_if_None()
 
 
@@ -90,10 +90,10 @@ def test_acctunit_shop_CorrectlySetsAttributes_bridge():
     slash_str = "/"
 
     # WHEN
-    yao_acctunit = acctunit_shop("Yao", _bridge=slash_str)
+    yao_acctunit = acctunit_shop("Yao", bridge=slash_str)
 
     # THEN
-    assert yao_acctunit._bridge == slash_str
+    assert yao_acctunit.bridge == slash_str
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_respect_bit():

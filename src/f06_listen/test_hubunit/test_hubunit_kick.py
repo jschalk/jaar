@@ -8,6 +8,7 @@ from src.f00_instrument.file import (
 )
 from src.f01_road.jaar_config import init_kick_id, get_test_fisc_title as fisc_title
 from src.f04_kick.kick import kickunit_shop, get_json_filename
+from src.f06_listen.hub_tool import save_voice_file, open_voice_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_atoms import get_atom_example_itemunit_knee
 from src.f06_listen.examples.example_listen_kicks import (
@@ -468,8 +469,8 @@ def test_HubUnit_merge_any_kicks_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
+    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
+    voice_bud = open_voice_file(env_dir(), fisc_title(), sue_str)
     voice_bud.last_kick_id is None
 
     # WHEN
@@ -486,8 +487,8 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_1atom(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_kick_file(sue_1budatoms_kickunit())
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
+    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
+    voice_bud = open_voice_file(env_dir(), fisc_title(), sue_str)
     print(f"{voice_bud.fisc_title=}")
     print(f"{sue_hubunit.fisc_title=}")
     sports_str = "sports"
@@ -511,8 +512,8 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_2atoms(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
     sue_hubunit.save_kick_file(sue_2budatoms_kickunit())
-    sue_hubunit.save_voice_bud(sue_hubunit.default_voice_bud())
-    voice_bud = sue_hubunit.get_voice_bud()
+    save_voice_file(env_dir(), sue_hubunit.default_voice_bud())
+    voice_bud = open_voice_file(env_dir(), fisc_title(), sue_str)
     print(f"{voice_bud.fisc_title=}")
     sports_str = "sports"
     sports_road = voice_bud.make_l1_road(sports_str)

@@ -8,8 +8,31 @@ from src.f00_instrument.db_toolbox import (
     is_stageable,
     create_select_query,
 )
-from src.f01_road.deal import fisc_title_str, owner_name_str
-from src.f02_bud.bud_tool import budunit_str
+from src.f01_road.deal import (
+    fisc_title_str,
+    owner_name_str,
+    deal_time_str,
+    tran_time_str,
+)
+from src.f02_bud.bud_tool import (
+    bud_acct_membership_str,
+    bud_acctunit_str,
+    bud_item_awardlink_str,
+    bud_item_factunit_str,
+    bud_item_healerlink_str,
+    bud_item_reason_premiseunit_str,
+    bud_item_reasonunit_str,
+    bud_item_teamlink_str,
+    bud_itemunit_str,
+    budunit_str,
+    bud_groupunit_str,
+)
+from src.f03_chrono.chrono import (
+    timeline_title_str,
+    c400_number_str,
+    monthday_distortion_str,
+    yr1_jan1_offset_str,
+)
 from src.f04_kick.atom_config import (
     event_int_str,
     face_name_str,
@@ -17,7 +40,16 @@ from src.f04_kick.atom_config import (
     get_delete_key_name,
 )
 from src.f05_fund_metric.fund_metric_config import get_fund_metric_config_dict
-from src.f08_fisc.fisc_config import fiscunit_str, get_fisc_dimens
+from src.f08_fisc.fisc_config import (
+    get_fisc_dimens,
+    fiscunit_str,
+    fisc_cashbook_str,
+    fisc_dealunit_str,
+    fisc_timeline_hour_str,
+    fisc_timeline_month_str,
+    fisc_timeline_weekday_str,
+    fisc_timeoffi_str,
+)
 from src.f10_idea.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
@@ -65,46 +97,46 @@ from sqlite3 import connect as sqlite3_connect
 
 def abbv(tablename: str) -> str:
     abbrevions = {
-        "bud_acct_membership_put_agg": "BUDMEMB_PUT_AGG",
-        "bud_acct_membership_put_staging": "BUDMEMB_PUT_STAGING",
-        "bud_acctunit_put_agg": "BUDACCT_PUT_AGG",
-        "bud_acctunit_put_staging": "BUDACCT_PUT_STAGING",
-        "bud_item_awardlink_put_agg": "BUDAWAR_PUT_AGG",
-        "bud_item_awardlink_put_staging": "BUDAWAR_PUT_STAGING",
-        "bud_item_factunit_put_agg": "BUDFACT_PUT_AGG",
-        "bud_item_factunit_put_staging": "BUDFACT_PUT_STAGING",
-        "bud_item_healerlink_put_agg": "BUDHEAL_PUT_AGG",
-        "bud_item_healerlink_put_staging": "BUDHEAL_PUT_STAGING",
-        "bud_item_reason_premiseunit_put_agg": "BUDPREM_PUT_AGG",
-        "bud_item_reason_premiseunit_put_staging": "BUDPREM_PUT_STAGING",
-        "bud_item_reasonunit_put_agg": "BUDREAS_PUT_AGG",
-        "bud_item_reasonunit_put_staging": "BUDREAS_PUT_STAGING",
-        "bud_item_teamlink_put_agg": "BUDTEAM_PUT_AGG",
-        "bud_item_teamlink_put_staging": "BUDTEAM_PUT_STAGING",
-        "bud_itemunit_put_agg": "BUDITEM_PUT_AGG",
-        "bud_itemunit_put_staging": "BUDITEM_PUT_STAGING",
-        "budunit_put_agg": "BUDUNIT_PUT_AGG",
-        "budunit_put_staging": "BUDUNIT_PUT_STAGING",
-        "bud_acct_membership_del_agg": "BUDMEMB_DEL_AGG",
-        "bud_acct_membership_del_staging": "BUDMEMB_DEL_STAGING",
-        "bud_acctunit_del_agg": "BUDACCT_DEL_AGG",
-        "bud_acctunit_del_staging": "BUDACCT_DEL_STAGING",
-        "bud_item_awardlink_del_agg": "BUDAWAR_DEL_AGG",
-        "bud_item_awardlink_del_staging": "BUDAWAR_DEL_STAGING",
-        "bud_item_factunit_del_agg": "BUDFACT_DEL_AGG",
-        "bud_item_factunit_del_staging": "BUDFACT_DEL_STAGING",
-        "bud_item_healerlink_del_agg": "BUDHEAL_DEL_AGG",
-        "bud_item_healerlink_del_staging": "BUDHEAL_DEL_STAGING",
-        "bud_item_reason_premiseunit_del_agg": "BUDPREM_DEL_AGG",
-        "bud_item_reason_premiseunit_del_staging": "BUDPREM_DEL_STAGING",
-        "bud_item_reasonunit_del_agg": "BUDREAS_DEL_AGG",
-        "bud_item_reasonunit_del_staging": "BUDREAS_DEL_STAGING",
-        "bud_item_teamlink_del_agg": "BUDTEAM_DEL_AGG",
-        "bud_item_teamlink_del_staging": "BUDTEAM_DEL_STAGING",
-        "bud_itemunit_del_agg": "BUDITEM_DEL_AGG",
-        "bud_itemunit_del_staging": "BUDITEM_DEL_STAGING",
-        "budunit_del_agg": "BUDUNIT_DEL_AGG",
-        "budunit_del_staging": "BUDUNIT_DEL_STAGING",
+        f"{bud_acct_membership_str()}_put_agg": "BUDMEMB_PUT_AGG",
+        f"{bud_acct_membership_str()}_put_staging": "BUDMEMB_PUT_STAGING",
+        f"{bud_acctunit_str()}_put_agg": "BUDACCT_PUT_AGG",
+        f"{bud_acctunit_str()}_put_staging": "BUDACCT_PUT_STAGING",
+        f"{bud_item_awardlink_str()}_put_agg": "BUDAWAR_PUT_AGG",
+        f"{bud_item_awardlink_str()}_put_staging": "BUDAWAR_PUT_STAGING",
+        f"{bud_item_factunit_str()}_put_agg": "BUDFACT_PUT_AGG",
+        f"{bud_item_factunit_str()}_put_staging": "BUDFACT_PUT_STAGING",
+        f"{bud_item_healerlink_str()}_put_agg": "BUDHEAL_PUT_AGG",
+        f"{bud_item_healerlink_str()}_put_staging": "BUDHEAL_PUT_STAGING",
+        f"{bud_item_reason_premiseunit_str()}_put_agg": "BUDPREM_PUT_AGG",
+        f"{bud_item_reason_premiseunit_str()}_put_staging": "BUDPREM_PUT_STAGING",
+        f"{bud_item_reasonunit_str()}_put_agg": "BUDREAS_PUT_AGG",
+        f"{bud_item_reasonunit_str()}_put_staging": "BUDREAS_PUT_STAGING",
+        f"{bud_item_teamlink_str()}_put_agg": "BUDTEAM_PUT_AGG",
+        f"{bud_item_teamlink_str()}_put_staging": "BUDTEAM_PUT_STAGING",
+        f"{bud_itemunit_str()}_put_agg": "BUDITEM_PUT_AGG",
+        f"{bud_itemunit_str()}_put_staging": "BUDITEM_PUT_STAGING",
+        f"{budunit_str()}_put_agg": "BUDUNIT_PUT_AGG",
+        f"{budunit_str()}_put_staging": "BUDUNIT_PUT_STAGING",
+        f"{bud_acct_membership_str()}_del_agg": "BUDMEMB_DEL_AGG",
+        f"{bud_acct_membership_str()}_del_staging": "BUDMEMB_DEL_STAGING",
+        f"{bud_acctunit_str()}_del_agg": "BUDACCT_DEL_AGG",
+        f"{bud_acctunit_str()}_del_staging": "BUDACCT_DEL_STAGING",
+        f"{bud_item_awardlink_str()}_del_agg": "BUDAWAR_DEL_AGG",
+        f"{bud_item_awardlink_str()}_del_staging": "BUDAWAR_DEL_STAGING",
+        f"{bud_item_factunit_str()}_del_agg": "BUDFACT_DEL_AGG",
+        f"{bud_item_factunit_str()}_del_staging": "BUDFACT_DEL_STAGING",
+        f"{bud_item_healerlink_str()}_del_agg": "BUDHEAL_DEL_AGG",
+        f"{bud_item_healerlink_str()}_del_staging": "BUDHEAL_DEL_STAGING",
+        f"{bud_item_reason_premiseunit_str()}_del_agg": "BUDPREM_DEL_AGG",
+        f"{bud_item_reason_premiseunit_str()}_del_staging": "BUDPREM_DEL_STAGING",
+        f"{bud_item_reasonunit_str()}_del_agg": "BUDREAS_DEL_AGG",
+        f"{bud_item_reasonunit_str()}_del_staging": "BUDREAS_DEL_STAGING",
+        f"{bud_item_teamlink_str()}_del_agg": "BUDTEAM_DEL_AGG",
+        f"{bud_item_teamlink_str()}_del_staging": "BUDTEAM_DEL_STAGING",
+        f"{bud_itemunit_str()}_del_agg": "BUDITEM_DEL_AGG",
+        f"{bud_itemunit_str()}_del_staging": "BUDITEM_DEL_STAGING",
+        f"{budunit_str()}_del_agg": "BUDUNIT_DEL_AGG",
+        f"{budunit_str()}_del_staging": "BUDUNIT_DEL_STAGING",
     }
     return abbrevions.get(tablename)
 
@@ -269,28 +301,47 @@ def test_create_bud_tables_CreatesFiscStagingTables():
         cursor = fisc_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
-        assert db_table_exists(cursor, "bud_acct_membership_put_agg") is False
-        assert db_table_exists(cursor, "bud_acct_membership_put_staging") is False
-        assert db_table_exists(cursor, "bud_acctunit_put_agg") is False
-        assert db_table_exists(cursor, "bud_acctunit_put_staging") is False
-        assert db_table_exists(cursor, "bud_item_awardlink_put_agg") is False
-        assert db_table_exists(cursor, "bud_item_awardlink_put_staging") is False
-        assert db_table_exists(cursor, "bud_item_factunit_put_agg") is False
-        assert db_table_exists(cursor, "bud_item_factunit_put_staging") is False
-        assert db_table_exists(cursor, "bud_item_healerlink_put_agg") is False
-        assert db_table_exists(cursor, "bud_item_healerlink_put_staging") is False
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_put_agg") is False
-        assert (
-            db_table_exists(cursor, "bud_item_reason_premiseunit_put_staging") is False
-        )
-        assert db_table_exists(cursor, "bud_item_reasonunit_put_agg") is False
-        assert db_table_exists(cursor, "bud_item_reasonunit_put_staging") is False
-        assert db_table_exists(cursor, "bud_item_teamlink_put_agg") is False
-        assert db_table_exists(cursor, "bud_item_teamlink_put_staging") is False
-        assert db_table_exists(cursor, "bud_itemunit_put_agg") is False
-        assert db_table_exists(cursor, "bud_itemunit_put_staging") is False
-        assert db_table_exists(cursor, "budunit_put_agg") is False
-        assert db_table_exists(cursor, "budunit_put_staging") is False
+        budmemb_pud_agg_table = f"{bud_acct_membership_str()}_put_agg"
+        budmemb_pud_staging_table = f"{bud_acct_membership_str()}_put_staging"
+        budacct_pud_agg_table = f"{bud_acctunit_str()}_put_agg"
+        budacct_pud_staging_table = f"{bud_acctunit_str()}_put_staging"
+        budawar_pud_agg_table = f"{bud_item_awardlink_str()}_put_agg"
+        budawar_pud_staging_table = f"{bud_item_awardlink_str()}_put_staging"
+        budfact_pud_agg_table = f"{bud_item_factunit_str()}_put_agg"
+        budfact_pud_staging_table = f"{bud_item_factunit_str()}_put_staging"
+        budheal_pud_agg_table = f"{bud_item_healerlink_str()}_put_agg"
+        budheal_pud_staging_table = f"{bud_item_healerlink_str()}_put_staging"
+        budprem_pud_agg_table = f"{bud_item_reason_premiseunit_str()}_put_agg"
+        budprem_pud_staging_table = f"{bud_item_reason_premiseunit_str()}_put_staging"
+        budreas_pud_agg_table = f"{bud_item_reasonunit_str()}_put_agg"
+        budreas_pud_staging_table = f"{bud_item_reasonunit_str()}_put_staging"
+        budteam_pud_agg_table = f"{bud_item_teamlink_str()}_put_agg"
+        budteam_pud_staging_table = f"{bud_item_teamlink_str()}_put_staging"
+        buditem_pud_agg_table = f"{bud_itemunit_str()}_put_agg"
+        buditem_pud_staging_table = f"{bud_itemunit_str()}_put_staging"
+        budunit_pud_agg_table = f"{budunit_str()}_put_agg"
+        budunit_pud_staging_table = f"{budunit_str()}_put_staging"
+
+        assert db_table_exists(cursor, budmemb_pud_agg_table) is False
+        assert db_table_exists(cursor, budmemb_pud_staging_table) is False
+        assert db_table_exists(cursor, budacct_pud_agg_table) is False
+        assert db_table_exists(cursor, budacct_pud_staging_table) is False
+        assert db_table_exists(cursor, budawar_pud_agg_table) is False
+        assert db_table_exists(cursor, budawar_pud_staging_table) is False
+        assert db_table_exists(cursor, budfact_pud_agg_table) is False
+        assert db_table_exists(cursor, budfact_pud_staging_table) is False
+        assert db_table_exists(cursor, budheal_pud_agg_table) is False
+        assert db_table_exists(cursor, budheal_pud_staging_table) is False
+        assert db_table_exists(cursor, budprem_pud_agg_table) is False
+        assert db_table_exists(cursor, budprem_pud_staging_table) is False
+        assert db_table_exists(cursor, budreas_pud_agg_table) is False
+        assert db_table_exists(cursor, budreas_pud_staging_table) is False
+        assert db_table_exists(cursor, budteam_pud_agg_table) is False
+        assert db_table_exists(cursor, budteam_pud_staging_table) is False
+        assert db_table_exists(cursor, buditem_pud_agg_table) is False
+        assert db_table_exists(cursor, buditem_pud_staging_table) is False
+        assert db_table_exists(cursor, budunit_pud_agg_table) is False
+        assert db_table_exists(cursor, budunit_pud_staging_table) is False
 
         # WHEN
         create_bud_tables(cursor)
@@ -304,26 +355,26 @@ def test_create_bud_tables_CreatesFiscStagingTables():
         #     x_count += 1
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 40
-        assert db_table_exists(cursor, "bud_acct_membership_put_agg")
-        assert db_table_exists(cursor, "bud_acct_membership_put_staging")
-        assert db_table_exists(cursor, "bud_acctunit_put_agg")
-        assert db_table_exists(cursor, "bud_acctunit_put_staging")
-        assert db_table_exists(cursor, "bud_item_awardlink_put_agg")
-        assert db_table_exists(cursor, "bud_item_awardlink_put_staging")
-        assert db_table_exists(cursor, "bud_item_factunit_put_agg")
-        assert db_table_exists(cursor, "bud_item_factunit_put_staging")
-        assert db_table_exists(cursor, "bud_item_healerlink_put_agg")
-        assert db_table_exists(cursor, "bud_item_healerlink_put_staging")
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_put_agg")
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_put_staging")
-        assert db_table_exists(cursor, "bud_item_reasonunit_put_agg")
-        assert db_table_exists(cursor, "bud_item_reasonunit_put_staging")
-        assert db_table_exists(cursor, "bud_item_teamlink_put_agg")
-        assert db_table_exists(cursor, "bud_item_teamlink_put_staging")
-        assert db_table_exists(cursor, "bud_itemunit_put_agg")
-        assert db_table_exists(cursor, "bud_itemunit_put_staging")
-        assert db_table_exists(cursor, "budunit_put_agg")
-        assert db_table_exists(cursor, "budunit_put_staging")
+        assert db_table_exists(cursor, budmemb_pud_agg_table)
+        assert db_table_exists(cursor, budmemb_pud_staging_table)
+        assert db_table_exists(cursor, budacct_pud_agg_table)
+        assert db_table_exists(cursor, budacct_pud_staging_table)
+        assert db_table_exists(cursor, budawar_pud_agg_table)
+        assert db_table_exists(cursor, budawar_pud_staging_table)
+        assert db_table_exists(cursor, budfact_pud_agg_table)
+        assert db_table_exists(cursor, budfact_pud_staging_table)
+        assert db_table_exists(cursor, budheal_pud_agg_table)
+        assert db_table_exists(cursor, budheal_pud_staging_table)
+        assert db_table_exists(cursor, budprem_pud_agg_table)
+        assert db_table_exists(cursor, budprem_pud_staging_table)
+        assert db_table_exists(cursor, budreas_pud_agg_table)
+        assert db_table_exists(cursor, budreas_pud_staging_table)
+        assert db_table_exists(cursor, budteam_pud_agg_table)
+        assert db_table_exists(cursor, budteam_pud_staging_table)
+        assert db_table_exists(cursor, buditem_pud_agg_table)
+        assert db_table_exists(cursor, buditem_pud_staging_table)
+        assert db_table_exists(cursor, budunit_pud_agg_table)
+        assert db_table_exists(cursor, budunit_pud_staging_table)
 
 
 def test_create_fisc_tables_CreatesFiscStagingTables():
@@ -627,13 +678,13 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             exclude_cols=x_exclude_cols,
         )
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = """fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge"""
+        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge)
+SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge)
 FROM {tablename}_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title
+GROUP BY {fisc_title_str()}
 ;
 """
         assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
@@ -863,10 +914,10 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
 
 def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_create_table_sqlstr = """
+    expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
-  fisc_title TEXT
-, event_int INTEGER
+  {fisc_title_str()} TEXT
+, {event_int_str()} INTEGER
 , agg_time INTEGER
 , error_message TEXT
 )
@@ -878,19 +929,19 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 
 def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_INSERT_sqlstr = """
-INSERT INTO fisc_event_time_agg (fisc_title, event_int, agg_time)
-SELECT fisc_title, event_int, agg_time
+    expected_INSERT_sqlstr = f"""
+INSERT INTO fisc_event_time_agg ({fisc_title_str()}, {event_int_str()}, agg_time)
+SELECT {fisc_title_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT fisc_title, event_int, tran_time as agg_time
+    SELECT {fisc_title_str()}, {event_int_str()}, {tran_time_str()} as agg_time
     FROM fisc_cashbook_staging
-    GROUP BY fisc_title, event_int, tran_time
+    GROUP BY {fisc_title_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT fisc_title, event_int, deal_time as agg_time
+    SELECT {fisc_title_str()}, {event_int_str()}, {deal_time_str()} as agg_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, event_int, deal_time
+    GROUP BY {fisc_title_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY fisc_title, event_int, agg_time
+ORDER BY {fisc_title_str()}, {event_int_str()}, agg_time
 ;
 """
     # WHEN / THEN
@@ -899,10 +950,10 @@ ORDER BY fisc_title, event_int, agg_time
 
 def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_UPDATE_sqlstr = """
+    expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT fisc_title, event_int, agg_time,
-           LAG(agg_time) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_agg_time
+    SELECT {fisc_title_str()}, {event_int_str()}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {fisc_title_str()} ORDER BY {event_int_str()}) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
@@ -912,8 +963,8 @@ SET error_message = CASE
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
-    AND EventTimeOrdered.fisc_title = fisc_event_time_agg.fisc_title
+WHERE EventTimeOrdered.{event_int_str()} = fisc_event_time_agg.{event_int_str()}
+    AND EventTimeOrdered.{fisc_title_str()} = fisc_event_time_agg.{fisc_title_str()}
     AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
@@ -923,12 +974,12 @@ WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
 
 def test_CREATE_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_create_table_sqlstr = """
+    expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
-  fisc_title TEXT
-, owner_name TEXT
-, event_int INTEGER
-, deal_time INTEGER
+  {fisc_title_str()} TEXT
+, {owner_name_str()} TEXT
+, {event_int_str()} INTEGER
+, {deal_time_str()} INTEGER
 , error_message TEXT
 )
 ;
@@ -939,15 +990,15 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 
 def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
-    expected_INSERT_sqlstr = """
-INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, deal_time)
-SELECT fisc_title, owner_name, event_int, deal_time
+    expected_INSERT_sqlstr = f"""
+INSERT INTO fisc_ote1_agg ({fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+SELECT {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 FROM (
-    SELECT fisc_title, owner_name, event_int, deal_time
+    SELECT {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, owner_name, event_int, deal_time
+    GROUP BY {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY fisc_title, owner_name, event_int, deal_time
+ORDER BY {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 ;
 """
     # WHEN / THEN
@@ -976,30 +1027,23 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_title=a23_str)
 
     # THEN
-    fisccash_str = "fisc_cashbook"
-    fiscdeal_str = "fisc_dealunit"
-    fischour_str = "fisc_timeline_hour"
-    fiscmont_str = "fisc_timeline_month"
-    fiscweek_str = "fisc_timeline_weekday"
-    fiscoffi_str = "fisc_timeoffi"
-    fiscunit_str = "fiscunit"
-    gen_fisccash_sqlstr = fu1_select_sqlstrs.get(fisccash_str)
-    gen_fiscdeal_sqlstr = fu1_select_sqlstrs.get(fiscdeal_str)
-    gen_fischour_sqlstr = fu1_select_sqlstrs.get(fischour_str)
-    gen_fiscmont_sqlstr = fu1_select_sqlstrs.get(fiscmont_str)
-    gen_fiscweek_sqlstr = fu1_select_sqlstrs.get(fiscweek_str)
-    gen_fiscoffi_sqlstr = fu1_select_sqlstrs.get(fiscoffi_str)
-    gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str)
+    gen_fisccash_sqlstr = fu1_select_sqlstrs.get(fisc_cashbook_str())
+    gen_fiscdeal_sqlstr = fu1_select_sqlstrs.get(fisc_dealunit_str())
+    gen_fischour_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_hour_str())
+    gen_fiscmont_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_month_str())
+    gen_fiscweek_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_weekday_str())
+    gen_fiscoffi_sqlstr = fu1_select_sqlstrs.get(fisc_timeoffi_str())
+    gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        fisccash_agg = "fisc_cashbook_agg"
-        fiscdeal_agg = "fisc_dealunit_agg"
-        fischour_agg = "fisc_timeline_hour_agg"
-        fiscmont_agg = "fisc_timeline_month_agg"
-        fiscweek_agg = "fisc_timeline_weekday_agg"
-        fiscoffi_agg = "fisc_timeoffi_agg"
-        fiscunit_agg = "fiscunit_agg"
+        fisccash_agg = f"{fisc_cashbook_str()}_agg"
+        fiscdeal_agg = f"{fisc_dealunit_str()}_agg"
+        fischour_agg = f"{fisc_timeline_hour_str()}_agg"
+        fiscmont_agg = f"{fisc_timeline_month_str()}_agg"
+        fiscweek_agg = f"{fisc_timeline_weekday_str()}_agg"
+        fiscoffi_agg = f"{fisc_timeoffi_str()}_agg"
+        fiscunit_agg = f"{fiscunit_str()}_agg"
         where_dict = {fisc_title_str(): a23_str}
         fisccash_sql = create_select_query(cursor, fisccash_agg, [], where_dict, True)
         fiscdeal_sql = create_select_query(cursor, fiscdeal_agg, [], where_dict, True)
@@ -1038,13 +1082,12 @@ def test_get_forecast_create_table_sqlstrs_ReturnsObj():
         expected_create_sqlstr = get_create_table_sqlstr(
             forecast_table, forecast_cols, s_types
         )
-        assert create_table_sqlstrs.get(forecast_table) == expected_create_sqlstr
-
         forecast_dimen_abbr = x_config.get("abbreviation").upper()
         print(
             f'CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""'
         )
         # print(f'"{forecast_table}": CREATE_FORECAST_{forecast_dimen_abbr}_SQLSTR,')
+        assert create_table_sqlstrs.get(forecast_table) == expected_create_sqlstr
 
 
 def test_create_forecast_tables_CreatesTables():
@@ -1054,17 +1097,29 @@ def test_create_forecast_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        assert db_table_exists(cursor, "bud_acct_membership_forecast") is False
-        assert db_table_exists(cursor, "bud_acctunit_forecast") is False
-        assert db_table_exists(cursor, "bud_groupunit_forecast") is False
-        assert db_table_exists(cursor, "bud_item_awardlink_forecast") is False
-        assert db_table_exists(cursor, "bud_item_factunit_forecast") is False
-        assert db_table_exists(cursor, "bud_item_healerlink_forecast") is False
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_forecast") is False
-        assert db_table_exists(cursor, "bud_item_reasonunit_forecast") is False
-        assert db_table_exists(cursor, "bud_item_teamlink_forecast") is False
-        assert db_table_exists(cursor, "bud_itemunit_forecast") is False
-        assert db_table_exists(cursor, "budunit_forecast") is False
+        budmemb_forecast_table = f"{bud_acct_membership_str()}_forecast"
+        budacct_forecast_table = f"{bud_acctunit_str()}_forecast"
+        budgrou_forecast_table = f"{bud_groupunit_str()}_forecast"
+        budawar_forecast_table = f"{bud_item_awardlink_str()}_forecast"
+        budfact_forecast_table = f"{bud_item_factunit_str()}_forecast"
+        budheal_forecast_table = f"{bud_item_healerlink_str()}_forecast"
+        budprem_forecast_table = f"{bud_item_reason_premiseunit_str()}_forecast"
+        budares_forecast_table = f"{bud_item_reasonunit_str()}_forecast"
+        budteam_forecast_table = f"{bud_item_teamlink_str()}_forecast"
+        buditem_forecast_table = f"{bud_itemunit_str()}_forecast"
+        budunit_forecast_table = f"{budunit_str()}_forecast"
+
+        assert db_table_exists(cursor, budmemb_forecast_table) is False
+        assert db_table_exists(cursor, budacct_forecast_table) is False
+        assert db_table_exists(cursor, budgrou_forecast_table) is False
+        assert db_table_exists(cursor, budawar_forecast_table) is False
+        assert db_table_exists(cursor, budfact_forecast_table) is False
+        assert db_table_exists(cursor, budheal_forecast_table) is False
+        assert db_table_exists(cursor, budprem_forecast_table) is False
+        assert db_table_exists(cursor, budares_forecast_table) is False
+        assert db_table_exists(cursor, budteam_forecast_table) is False
+        assert db_table_exists(cursor, buditem_forecast_table) is False
+        assert db_table_exists(cursor, budunit_forecast_table) is False
 
         # WHEN
         create_forecast_tables(cursor)
@@ -1076,17 +1131,17 @@ def test_create_forecast_tables_CreatesTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, "bud_acct_membership_forecast")
-        assert db_table_exists(cursor, "bud_acctunit_forecast")
-        assert db_table_exists(cursor, "bud_groupunit_forecast")
-        assert db_table_exists(cursor, "bud_item_awardlink_forecast")
-        assert db_table_exists(cursor, "bud_item_factunit_forecast")
-        assert db_table_exists(cursor, "bud_item_healerlink_forecast")
-        assert db_table_exists(cursor, "bud_item_reason_premiseunit_forecast")
-        assert db_table_exists(cursor, "bud_item_reasonunit_forecast")
-        assert db_table_exists(cursor, "bud_item_teamlink_forecast")
-        assert db_table_exists(cursor, "bud_itemunit_forecast")
-        assert db_table_exists(cursor, "budunit_forecast")
+        assert db_table_exists(cursor, budmemb_forecast_table)
+        assert db_table_exists(cursor, budacct_forecast_table)
+        assert db_table_exists(cursor, budgrou_forecast_table)
+        assert db_table_exists(cursor, budawar_forecast_table)
+        assert db_table_exists(cursor, budfact_forecast_table)
+        assert db_table_exists(cursor, budheal_forecast_table)
+        assert db_table_exists(cursor, budprem_forecast_table)
+        assert db_table_exists(cursor, budares_forecast_table)
+        assert db_table_exists(cursor, budteam_forecast_table)
+        assert db_table_exists(cursor, buditem_forecast_table)
+        assert db_table_exists(cursor, budunit_forecast_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11
 
@@ -1134,16 +1189,16 @@ def test_create_forecast_tables_CreatesTables():
 #     gen_budheal_sqlstr = bu1_select_sqlstrs.get(budheal_str)
 #     gen_budfact_sqlstr = bu1_select_sqlstrs.get(budfact_str)
 
-#     expected_budunit_unit_select_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL)"""
-#     expected_budACCT_acct_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"""
-#     expected_budMEMB_memb_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
-#     expected_budITEM_item_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER)"""
-#     expected_budAWAR_awar_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL)"""
-#     expected_budPREM_reas_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor REAL)"""
-#     expected_budREAS_prem_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite TEXT)"""
-#     expected_budTEAM_team_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT)"""
-#     expected_budHEAL_heal_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
-#     expected_budFACT_fact_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
+#     expected_budunit_unit_select_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally REAL, fund_coin REAL, penny REAL, respect_bit REAL)"""
+#     expected_budACCT_acct_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"""
+#     expected_budMEMB_memb_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
+#     expected_budITEM_item_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor REAL, denom REAL, morph INTEGER, gogo_want REAL, stop_want REAL, mass REAL, pledge INTEGER, problem_bool INTEGER)"""
+#     expected_budAWAR_awar_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL)"""
+#     expected_budPREM_reas_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor REAL)"""
+#     expected_budREAS_prem_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, road TEXT, base TEXT, base_item_active_requisite TEXT)"""
+#     expected_budTEAM_team_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, road TEXT, team_tag TEXT)"""
+#     expected_budHEAL_heal_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, road TEXT, healer_name TEXT)"""
+#     expected_budFACT_fact_select_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_agg (face_name TEXT, {event_int_str()} INTEGER, {fisc_title_str()} TEXT, {owner_name_str()} TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
 
 #     assert gen_budcash_sqlstr == expected_budcash_sqlstr
 #     assert gen_buddeal_sqlstr == expected_buddeal_sqlstr

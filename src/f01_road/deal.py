@@ -28,6 +28,10 @@ class tran_time_Exception(Exception):
     pass
 
 
+def world_id_str() -> str:
+    return "world_id"
+
+
 def tran_time_str() -> str:
     return "tran_time"
 

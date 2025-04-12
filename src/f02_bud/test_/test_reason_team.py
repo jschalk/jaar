@@ -166,8 +166,8 @@ def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_NonEmptyx_teamlinks
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     bud_owner_name = yao_str
 
@@ -188,8 +188,8 @@ def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_NonEmptyx_teamlinks
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     x_teamlinks = {sue_str}
     x_teamheir = teamheir_shop(_teamlinks=x_teamlinks)
@@ -211,13 +211,13 @@ def test_TeamHeir_set_owner_name_team_CorrectlySetsAttribute_NonEmptyx_teamlinks
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
 
     swim_str = ",swim"
     swim_groupunit = groupunit_shop(group_label=swim_str)
-    swim_groupunit.set_membership(membership_shop(swim_str, _acct_name=yao_str))
-    swim_groupunit.set_membership(membership_shop(swim_str, _acct_name=sue_str))
+    swim_groupunit.set_membership(membership_shop(swim_str, acct_name=yao_str))
+    swim_groupunit.set_membership(membership_shop(swim_str, acct_name=sue_str))
     x_groupunits = {
         yao_str: yao_groupunit,
         sue_str: sue_groupunit,
@@ -344,19 +344,19 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
     bob_groupunit = groupunit_shop(zia_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, _acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, _acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
 
     swim2_str = ",swim2"
     swim2_groupunit = groupunit_shop(group_label=swim2_str)
-    swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=yao_str))
-    swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=sue_str))
+    swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=yao_str))
+    swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=sue_str))
 
     swim3_str = ",swim3"
     swim3_groupunit = groupunit_shop(group_label=swim3_str)
-    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=yao_str))
-    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=sue_str))
-    swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=zia_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=yao_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=sue_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=zia_str))
 
     x_groupunits = {
         yao_str: yao_groupunit,
@@ -401,14 +401,14 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 
 #     swim2_str = ",swim2"
 #     swim2_groupunit = groupunit_shop(swim2_str)
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=yao_str))
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, _acct_name=sue_str))
+#     swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=yao_str))
+#     swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=sue_str))
 
 #     swim3_str = ",swim3"
 #     swim3_groupunit = groupunit_shop(team_tag=swim3_str)
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=yao_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=sue_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, _acct_name=zia_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=yao_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=sue_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=zia_str))
 
 #     x_groupunits = {
 #         yao_str: yao_groupunit,

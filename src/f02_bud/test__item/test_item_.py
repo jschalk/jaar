@@ -28,7 +28,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._awardlines is None  # calculated field'
     assert x_itemunit._awardheirs is None  # calculated field'
     assert x_itemunit._originunit is None
-    assert x_itemunit._bridge is None
+    assert x_itemunit.bridge is None
     assert x_itemunit.begin is None
     assert x_itemunit.close is None
     assert x_itemunit.addin is None
@@ -51,7 +51,7 @@ def test_ItemUnit_Exists():
     assert x_itemunit._level is None
     assert x_itemunit._active_hx is None
     assert x_itemunit._fund_ratio is None
-    assert x_itemunit._fund_coin is None
+    assert x_itemunit.fund_coin is None
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit.root is None
@@ -91,7 +91,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit._level is None
     assert x_itemunit._active_hx == {}
     assert x_itemunit._fund_ratio is None
-    assert x_itemunit._fund_coin == default_fund_coin_if_None()
+    assert x_itemunit.fund_coin == default_fund_coin_if_None()
     assert x_itemunit._fund_onset is None
     assert x_itemunit._fund_cease is None
     assert x_itemunit.reasonunits == {}
@@ -99,7 +99,7 @@ def test_itemunit_shop_WithNoParametersReturnsObj():
     assert x_itemunit.teamunit == teamunit_shop()
     assert x_itemunit._teamheir is None
     assert x_itemunit._originunit == originunit_shop()
-    assert x_itemunit._bridge == default_bridge_if_None()
+    assert x_itemunit.bridge == default_bridge_if_None()
     assert x_itemunit.root is False
     assert x_itemunit._all_acct_cred is None
     assert x_itemunit._all_acct_debt is None
@@ -133,13 +133,13 @@ def test_itemunit_shop_NonNoneParametersReturnsObj():
 
     # WHEN
     x_itemunit = itemunit_shop(
-        healerlink=x_healerlink, problem_bool=x_problem_bool, _fund_coin=x_fund_coin
+        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_coin=x_fund_coin
     )
 
     # THEN
     assert x_itemunit.healerlink == x_healerlink
     assert x_itemunit.problem_bool == x_problem_bool
-    assert x_itemunit._fund_coin == x_fund_coin
+    assert x_itemunit.fund_coin == x_fund_coin
 
 
 def test_itemunit_shop_ReturnsObjWith_awardlinks():
@@ -201,7 +201,7 @@ def test_ItemUnit_get_road_ReturnsObj():
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, bridge=slash_str)
 
     # THEN
     ball_road = create_road(round_road, ball_str, bridge=slash_str)
@@ -214,7 +214,7 @@ def test_ItemUnit_set_parent_road_SetsAttr():
     slash_str = "/"
     round_road = create_road(root_title(), round_str, bridge=slash_str)
     ball_str = "ball"
-    ball_item = itemunit_shop(ball_str, parent_road=round_road, _bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_road=round_road, bridge=slash_str)
     assert ball_item.parent_road == round_road
 
     # WHEN

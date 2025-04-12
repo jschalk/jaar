@@ -95,6 +95,7 @@ def get_idea_formats_dir() -> str:
 def get_idea_elements_sort_order() -> list[str]:
     """Contains the standard sort order for all idea and fund_metric columns"""
     return [
+        "world_id",
         "idea_number",
         "face_name",
         "event_int",
@@ -190,7 +191,6 @@ def get_idea_elements_sort_order() -> list[str]:
         "_credor_pool",
         "_debtor_pool",
         "_rational",
-        "_fund_coin",
         "_fund_give",
         "_fund_take",
         "_fund_onset",
@@ -216,7 +216,6 @@ def get_idea_elements_sort_order() -> list[str]:
         "_keeps_buildable",
         "_all_acct_debt",
         "_tree_traverse_count",
-        "_bridge",
     ]
 
 
@@ -232,6 +231,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
     """Contains the sqlite_type for all idea and fund_metric columns"""
 
     return {
+        "world_id": "TEXT",
         "idea_number": "TEXT",
         "face_name": "TEXT",
         "event_int": "INTEGER",
@@ -325,7 +325,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_fund_cease": "REAL",
         "_fund_onset": "REAL",
         "_fund_ratio": "REAL",
-        "_fund_coin": "REAL",
+        "fund_coin": "REAL",
         "_fund_agenda_give": "REAL",
         "_fund_agenda_ratio_give": "REAL",
         "_fund_agenda_ratio_take": "REAL",
@@ -337,7 +337,6 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_all_acct_cred": "INTEGER",
         "_all_acct_debt": "INTEGER",
         "_base_item_active_value": "INTEGER",
-        "_bridge": "TEXT",
         "_inallocable_debtit_belief": "REAL",
         "_irrational_debtit_belief": "REAL",
         "_status": "INTEGER",
