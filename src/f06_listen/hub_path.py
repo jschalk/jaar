@@ -196,23 +196,21 @@ def create_event_expressed_kick_path(
     return create_path(owner_event_dir_path, expressed_kick_filename)
 
 
-def create_voice_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\voice\\owner_name.json"""
+def create_gut_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\gut\\owner_name.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
     owner_dir = create_path(owners_dir, owner_name)
-    voice_dir = create_path(owner_dir, "voice")
-    return create_path(voice_dir, f"{owner_name}.json")
+    gut_dir = create_path(owner_dir, "gut")
+    return create_path(gut_dir, f"{owner_name}.json")
 
 
-def create_forecast_path(
-    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
-):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\forecast\\owner_name.json"""
+def create_plan_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\plan\\owner_name.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
     owner_dir = create_path(owners_dir, owner_name)
-    forecast_dir = create_path(owner_dir, "forecast")
-    return create_path(forecast_dir, f"{owner_name}.json")
+    plan_dir = create_path(owner_dir, "plan")
+    return create_path(plan_dir, f"{owner_name}.json")

@@ -36,8 +36,8 @@ from src.f06_listen.hub_path import (
     create_budevent_path,
     create_event_all_kick_path,
     create_event_expressed_kick_path,
-    create_voice_path,
-    create_forecast_path,
+    create_gut_path,
+    create_plan_path,
 )
 from src.f06_listen.examples.listen_env import get_listen_temp_env_dir
 
@@ -465,45 +465,43 @@ def test_create_event_expressed_kick_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_kick_path
 
 
-def test_create_voice_path_ReturnObj():
+def test_create_gut_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_bud_path = create_voice_path(x_fisc_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_bud_path = create_gut_path(x_fisc_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
-    a23_bob_voice_dir = create_path(a23_bob_dir, "voice")
-    expected_a23_bob_voice_json_path = create_path(a23_bob_voice_dir, f"{bob_str}.json")
+    a23_bob_gut_dir = create_path(a23_bob_dir, "gut")
+    expected_a23_bob_gut_json_path = create_path(a23_bob_gut_dir, f"{bob_str}.json")
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
-    assert gen_a23_e3_bud_path == expected_a23_bob_voice_json_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_gut_json_path
 
 
-def test_create_forecast_path_ReturnObj():
+def test_create_plan_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_bud_path = create_forecast_path(x_fisc_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_bud_path = create_plan_path(x_fisc_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
-    a23_bob_forecast_dir = create_path(a23_bob_dir, "forecast")
-    expected_a23_bob_forecast_json_path = create_path(
-        a23_bob_forecast_dir, f"{bob_str}.json"
-    )
+    a23_bob_plan_dir = create_path(a23_bob_dir, "plan")
+    expected_a23_bob_plan_json_path = create_path(a23_bob_plan_dir, f"{bob_str}.json")
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
-    assert gen_a23_e3_bud_path == expected_a23_bob_forecast_json_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_plan_json_path

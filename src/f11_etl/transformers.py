@@ -24,7 +24,7 @@ from src.f04_kick.atom_config import get_bud_dimens
 from src.f04_kick.delta import get_minimal_buddelta
 from src.f04_kick.kick import kickunit_shop, get_kickunit_from_json, KickUnit
 from src.f06_listen.hub_path import (
-    create_voice_path,
+    create_gut_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
@@ -199,9 +199,9 @@ class MineTocartTransformer:
         return df
 
     def _save_to_cart_staging(self, idea_number: str, dfs: list):
-        forecast_df = pandas_concat(dfs)
+        plan_df = pandas_concat(dfs)
         cart_path = create_path(self.cart_dir, f"{idea_number}.xlsx")
-        upsert_sheet(cart_path, "cart_staging", forecast_df)
+        upsert_sheet(cart_path, "cart_staging", plan_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -1114,7 +1114,7 @@ def _get_prev_event_int_budunit(
     return budunit_get_from_json(open_file(prev_budevent_path))
 
 
-def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
+def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         owner_events = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
@@ -1124,12 +1124,12 @@ def etl_event_inherited_budunits_to_fisc_voice(fisc_mstr_dir: str):
                 fisc_mstr_dir, fisc_title, owner_name, max_event_int
             )
             max_event_bud_json = open_file(max_budevent_path)
-            voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
-            save_file(voice_path, None, max_event_bud_json)
+            gut_path = create_gut_path(fisc_mstr_dir, fisc_title, owner_name)
+            save_file(gut_path, None, max_event_bud_json)
 
 
-def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
+def etl_fisc_gut_to_fisc_plan(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
-        x_fiscunit.generate_all_forecasts()
+        x_fiscunit.generate_all_plans()

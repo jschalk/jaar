@@ -52,8 +52,6 @@ VALUES (
     # THEN
     assert a23_dict
     assert a23_dict.get("fisc_title") == a23_str
-    example_fiscunit = fiscunit_shop()
-    print(f"{example_fiscunit.get_dict()=}")
     print(f"{a23_dict=}")
     a23_timeline_dict = a23_dict.get("timeline")
     assert a23_timeline_dict.get("timeline_title") == a23_timeline_title

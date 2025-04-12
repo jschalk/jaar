@@ -38,9 +38,9 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
     return x_listen
 
 
-def get_default_forecast(voice: BudUnit) -> BudUnit:
-    default_forecast = create_listen_basis(voice)
-    default_forecast.last_kick_id = voice.last_kick_id
-    default_forecast.credor_respect = None
-    default_forecast.debtor_respect = None
-    return default_forecast
+def get_default_plan(gut: BudUnit) -> BudUnit:
+    default_plan = create_listen_basis(gut)
+    default_plan.last_kick_id = gut.last_kick_id
+    default_plan.credor_respect = None
+    default_plan.debtor_respect = None
+    return default_plan

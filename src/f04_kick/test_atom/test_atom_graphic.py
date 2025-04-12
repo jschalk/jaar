@@ -10,7 +10,7 @@ from src.f04_kick.atom_graphic import budatom_periodic_table0
 # from src.f02_bud.bud import budunit_shop
 
 
-def test_budatom_periodic_table0_ShowsExplanation0Graph(graphics_bool):
+def test_budatom_periodic_table0_ShowsGraph0(graphics_bool):
     # ESTABLISH / WHEN
     budatom_periodic_table0_fig = budatom_periodic_table0()
 

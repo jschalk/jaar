@@ -12,7 +12,7 @@ from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_kick.atom import atom_insert, BudAtom, atomrow_shop
 from src.f04_kick.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
 from src.f04_kick.kick import kickunit_shop
-from src.f06_listen.hub_tool import open_voice_file, save_voice_file
+from src.f06_listen.hub_tool import open_gut_file, save_gut_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import fiscunit_shop, FiscUnit
 from src.f10_idea.idea_config import (
@@ -186,13 +186,13 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
-    x_hubunit.initialize_kick_voice_files()
+    x_hubunit.initialize_kick_gut_files()
     x_buddelta = make_buddelta(complete_csv)
-    # x_buddelta = get_minimal_buddelta(x_buddelta, x_voice)
+    # x_buddelta = get_minimal_buddelta(x_buddelta, x_gut)
     x_kickunit = kickunit_shop(x_owner_name, x_fisc_title)
     x_kickunit.set_buddelta(x_buddelta)
     x_hubunit.save_kick_file(x_kickunit)
-    x_hubunit._create_voice_from_kicks()
+    x_hubunit._create_gut_from_kicks()
 
 
 def load_idea_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):

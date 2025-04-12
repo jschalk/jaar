@@ -4,7 +4,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f06_listen.basis_buds import (
     create_empty_bud,
     create_listen_basis,
-    get_default_forecast,
+    get_default_plan,
 )
 
 
@@ -13,41 +13,41 @@ def test_create_empty_bud_ReturnsObj():
     yao_str = "Yao"
     slash_str = "/"
     penny_float = 0.7
-    yao_voice = budunit_shop(yao_str, bridge=slash_str, penny=penny_float)
-    yao_voice.set_l1_item(itemunit_shop("Iowa"))
+    yao_gut = budunit_shop(yao_str, bridge=slash_str, penny=penny_float)
+    yao_gut.set_l1_item(itemunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_voice.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    yao_gut.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     zia_irrational_debtit_belief = 11
     zia_inallocable_debtit_belief = 22
-    duty_zia_acctunit = yao_voice.get_acct(zia_str)
+    duty_zia_acctunit = yao_gut.get_acct(zia_str)
     duty_zia_acctunit.add_irrational_debtit_belief(zia_irrational_debtit_belief)
     duty_zia_acctunit.add_inallocable_debtit_belief(zia_inallocable_debtit_belief)
-    zia_acctunit = yao_voice.get_acct(zia_str)
+    zia_acctunit = yao_gut.get_acct(zia_str)
     zia_acctunit.add_membership(f"{slash_str}swimmers")
-    yao_voice.set_credor_respect(zia_credor_pool)
-    yao_voice.set_debtor_respect(zia_debtor_pool)
+    yao_gut.set_credor_respect(zia_credor_pool)
+    yao_gut.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_empty_job = create_empty_bud(yao_voice, x_owner_name=zia_str)
+    yao_empty_job = create_empty_bud(yao_gut, x_owner_name=zia_str)
 
     # THEN
-    assert yao_empty_job.owner_name != yao_voice.owner_name
+    assert yao_empty_job.owner_name != yao_gut.owner_name
     assert yao_empty_job.owner_name == zia_str
-    assert yao_empty_job.fisc_title == yao_voice.fisc_title
+    assert yao_empty_job.fisc_title == yao_gut.fisc_title
     assert yao_empty_job.last_kick_id is None
     assert yao_empty_job.get_acctunits_dict() == {}
-    assert yao_empty_job.bridge == yao_voice.bridge
-    assert yao_empty_job.fund_pool == yao_voice.fund_pool
-    assert yao_empty_job.fund_coin == yao_voice.fund_coin
-    assert yao_empty_job.respect_bit == yao_voice.respect_bit
-    assert yao_empty_job.penny == yao_voice.penny
-    assert yao_empty_job.credor_respect != yao_voice.credor_respect
+    assert yao_empty_job.bridge == yao_gut.bridge
+    assert yao_empty_job.fund_pool == yao_gut.fund_pool
+    assert yao_empty_job.fund_coin == yao_gut.fund_coin
+    assert yao_empty_job.respect_bit == yao_gut.respect_bit
+    assert yao_empty_job.penny == yao_gut.penny
+    assert yao_empty_job.credor_respect != yao_gut.credor_respect
     assert yao_empty_job.credor_respect == validate_respect_num()
-    assert yao_empty_job.debtor_respect != yao_voice.debtor_respect
+    assert yao_empty_job.debtor_respect != yao_gut.debtor_respect
     assert yao_empty_job.debtor_respect == validate_respect_num()
     yao_empty_job.settle_bud()
     assert yao_empty_job.accts == {}
@@ -101,7 +101,7 @@ def test_create_listen_basis_ReturnsObj():
     assert job_zia_acctunit._inallocable_debtit_belief == 0
 
 
-def test_get_default_forecast_ReturnsObj():
+def test_get_default_plan_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     blue_str = "blue"
@@ -126,20 +126,20 @@ def test_get_default_forecast_ReturnsObj():
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
-    default_forecast = get_default_forecast(sue_budunit)
+    default_plan = get_default_plan(sue_budunit)
 
     # THEN
-    default_forecast.settle_bud()
-    assert default_forecast.owner_name == sue_budunit.owner_name
-    assert default_forecast.owner_name == sue_str
-    assert default_forecast.fisc_title == sue_budunit.fisc_title
-    assert default_forecast.fisc_title == blue_str
-    assert default_forecast.bridge == slash_str
-    assert default_forecast.fund_pool == sue_acct_pool
-    assert default_forecast.fund_coin == x_fund_coin
-    assert default_forecast.respect_bit == x_respect_bit
-    assert default_forecast.credor_respect == default_respect_num()
-    assert default_forecast.debtor_respect == default_respect_num()
-    assert default_forecast.max_tree_traverse == sue_max_tree_traverse
-    assert len(default_forecast.get_acctunits_dict()) == 1
-    assert len(default_forecast._item_dict) == 1
+    default_plan.settle_bud()
+    assert default_plan.owner_name == sue_budunit.owner_name
+    assert default_plan.owner_name == sue_str
+    assert default_plan.fisc_title == sue_budunit.fisc_title
+    assert default_plan.fisc_title == blue_str
+    assert default_plan.bridge == slash_str
+    assert default_plan.fund_pool == sue_acct_pool
+    assert default_plan.fund_coin == x_fund_coin
+    assert default_plan.respect_bit == x_respect_bit
+    assert default_plan.credor_respect == default_respect_num()
+    assert default_plan.debtor_respect == default_respect_num()
+    assert default_plan.max_tree_traverse == sue_max_tree_traverse
+    assert len(default_plan.get_acctunits_dict()) == 1
+    assert len(default_plan._item_dict) == 1

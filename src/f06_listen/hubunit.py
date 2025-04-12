@@ -57,15 +57,15 @@ from src.f04_kick.atom import (
     modify_bud_with_budatom,
 )
 from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
-from src.f06_listen.basis_buds import get_default_forecast
-from src.f06_listen.hub_path import create_voice_path, create_forecast_path
+from src.f06_listen.basis_buds import get_default_plan
+from src.f06_listen.hub_path import create_gut_path, create_plan_path
 from src.f06_listen.hub_tool import (
-    save_voice_file,
-    open_voice_file,
-    save_forecast_file,
-    open_forecast_file,
-    voice_file_exists,
-    forecast_file_exists,
+    save_gut_file,
+    open_gut_file,
+    save_plan_file,
+    open_plan_file,
+    gut_file_exists,
+    plan_file_exists,
 )
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
@@ -73,11 +73,11 @@ from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
 
 
-class Invalid_voice_Exception(Exception):
+class Invalid_gut_Exception(Exception):
     pass
 
 
-class Invalid_forecast_Exception(Exception):
+class Invalid_plan_Exception(Exception):
     pass
 
 
@@ -147,7 +147,7 @@ class HubUnit:
         self._kicks_dir = create_path(self._owner_dir, get_kicks_folder())
         self._deals_dir = create_path(self._owner_dir, "deals")
 
-    def default_voice_bud(self) -> BudUnit:
+    def default_gut_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
             fisc_title=self.fisc_title,
@@ -310,48 +310,46 @@ class HubUnit:
             _atoms_dir=self._atoms_dir,
         )
         x_kickunit._buddelta.add_all_different_budatoms(
-            before_bud=self.default_voice_bud(),
-            after_bud=self.default_voice_bud(),
+            before_bud=self.default_gut_bud(),
+            after_bud=self.default_gut_bud(),
         )
         x_kickunit.save_files()
 
-    def _create_voice_from_kicks(self):
-        x_bud = self._merge_any_kicks(self.default_voice_bud())
-        save_voice_file(self.fisc_mstr_dir, x_bud)
+    def _create_gut_from_kicks(self):
+        x_bud = self._merge_any_kicks(self.default_gut_bud())
+        save_gut_file(self.fisc_mstr_dir, x_bud)
 
-    def _create_initial_kick_and_voice_files(self):
+    def _create_initial_kick_and_gut_files(self):
         self._create_initial_kick_files_from_default()
-        self._create_voice_from_kicks()
+        self._create_gut_from_kicks()
 
-    def _create_initial_kick_files_from_voice(self):
+    def _create_initial_kick_files_from_gut(self):
         x_kickunit = self._default_kickunit()
         x_kickunit._buddelta.add_all_different_budatoms(
-            before_bud=self.default_voice_bud(),
-            after_bud=open_voice_file(
+            before_bud=self.default_gut_bud(),
+            after_bud=open_gut_file(
                 self.fisc_mstr_dir, self.fisc_title, self.owner_name
             ),
         )
         x_kickunit.save_files()
 
-    def initialize_kick_voice_files(self):
-        x_voice_file_exists = voice_file_exists(
+    def initialize_kick_gut_files(self):
+        x_gut_file_exists = gut_file_exists(
             self.fisc_mstr_dir, self.fisc_title, self.owner_name
         )
         kick_file_exists = self.kick_file_exists(init_kick_id())
-        if x_voice_file_exists is False and kick_file_exists is False:
-            self._create_initial_kick_and_voice_files()
-        elif x_voice_file_exists is False and kick_file_exists:
-            self._create_voice_from_kicks()
-        elif x_voice_file_exists and kick_file_exists is False:
-            self._create_initial_kick_files_from_voice()
+        if x_gut_file_exists is False and kick_file_exists is False:
+            self._create_initial_kick_and_gut_files()
+        elif x_gut_file_exists is False and kick_file_exists:
+            self._create_gut_from_kicks()
+        elif x_gut_file_exists and kick_file_exists is False:
+            self._create_initial_kick_files_from_gut()
 
-    def append_kicks_to_voice_file(self):
-        voice_bud = open_voice_file(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        )
-        voice_bud = self._merge_any_kicks(voice_bud)
-        save_voice_file(self.fisc_mstr_dir, voice_bud)
-        return voice_bud
+    def append_kicks_to_gut_file(self):
+        gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
+        gut_bud = self._merge_any_kicks(gut_bud)
+        save_gut_file(self.fisc_mstr_dir, gut_bud)
+        return gut_bud
 
     # Deal methods
     def timepoint_dir(self, x_deal_time: TimeLinePoint) -> str:
@@ -499,11 +497,9 @@ class HubUnit:
         x_filename = self.owner_filename(x_bud.owner_name)
         save_file(self.jobs_dir(), x_filename, x_bud.get_json())
 
-    def initialize_forecast_file(self, voice: BudUnit):
-        if not forecast_file_exists(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        ):
-            save_forecast_file(self.fisc_mstr_dir, get_default_forecast(voice))
+    def initialize_plan_file(self, gut: BudUnit):
+        if not plan_file_exists(self.fisc_mstr_dir, self.fisc_title, self.owner_name):
+            save_plan_file(self.fisc_mstr_dir, get_default_plan(gut))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))
@@ -540,10 +536,8 @@ class HubUnit:
         return perspective_bud
 
     def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
-        speaker_forecast = open_forecast_file(
-            self.fisc_mstr_dir, self.fisc_title, speaker_id
-        )
-        return self.get_perspective_bud(speaker_forecast)
+        speaker_plan = open_plan_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
+        return self.get_perspective_bud(speaker_plan)
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
@@ -563,27 +557,25 @@ class HubUnit:
         return self.get_perspective_bud(speaker_job)
 
     def get_keep_roads(self) -> set[RoadUnit]:
-        x_voice_bud = open_voice_file(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        )
-        x_voice_bud.settle_bud()
-        if x_voice_bud._keeps_justified is False:
-            x_str = f"Cannot get_keep_roads from '{self.owner_name}' voice bud because 'BudUnit._keeps_justified' is False."
+        x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
+        x_gut_bud.settle_bud()
+        if x_gut_bud._keeps_justified is False:
+            x_str = f"Cannot get_keep_roads from '{self.owner_name}' gut bud because 'BudUnit._keeps_justified' is False."
             raise get_keep_roadsException(x_str)
-        if x_voice_bud._keeps_buildable is False:
-            x_str = f"Cannot get_keep_roads from '{self.owner_name}' voice bud because 'BudUnit._keeps_buildable' is False."
+        if x_gut_bud._keeps_buildable is False:
+            x_str = f"Cannot get_keep_roads from '{self.owner_name}' gut bud because 'BudUnit._keeps_buildable' is False."
             raise get_keep_roadsException(x_str)
-        owner_healer_dict = x_voice_bud._healers_dict.get(self.owner_name)
+        owner_healer_dict = x_gut_bud._healers_dict.get(self.owner_name)
         if owner_healer_dict is None:
             return get_empty_set_if_None(None)
-        keep_roads = x_voice_bud._healers_dict.get(self.owner_name).keys()
+        keep_roads = x_gut_bud._healers_dict.get(self.owner_name).keys()
         return get_empty_set_if_None(keep_roads)
 
-    def save_all_voice_dutys(self):
-        voice = open_voice_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
+    def save_all_gut_dutys(self):
+        gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
         for x_keep_road in self.get_keep_roads():
             self.keep_road = x_keep_road
-            self.save_duty_bud(voice)
+            self.save_duty_bud(gut)
         self.keep_road = None
 
     def create_treasury_db_file(self):
@@ -603,7 +595,7 @@ class HubUnit:
             self.create_treasury_db_file()
         return sqlite_connection(self.treasury_db_path())
 
-    def create_voice_treasury_db_files(self):
+    def create_gut_treasury_db_files(self):
         for x_keep_road in self.get_keep_roads():
             self.keep_road = x_keep_road
             self.create_treasury_db_file()

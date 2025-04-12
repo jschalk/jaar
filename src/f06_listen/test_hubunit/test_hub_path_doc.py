@@ -19,8 +19,8 @@ from src.f06_listen.hub_path import (
     create_budevent_path,
     create_event_all_kick_path,
     create_event_expressed_kick_path,
-    create_voice_path,
-    create_forecast_path,
+    create_gut_path,
+    create_plan_path,
 )
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
@@ -244,9 +244,9 @@ def test_create_event_expressed_kick_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_event_expressed_kick_path) == doc_str
 
 
-def test_create_voice_path_HasDocString():
+def test_create_gut_path_HasDocString():
     # ESTABLISH
-    doc_str = create_voice_path(
+    doc_str = create_gut_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
@@ -254,18 +254,18 @@ def test_create_voice_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     print(f"{doc_str=}")
-    print(f"{inspect_getdoc(create_voice_path)=}")
-    print(inspect_getdoc(create_voice_path))
-    assert LINUX_OS or inspect_getdoc(create_voice_path) == doc_str
+    print(f"{inspect_getdoc(create_gut_path)=}")
+    print(inspect_getdoc(create_gut_path))
+    assert LINUX_OS or inspect_getdoc(create_gut_path) == doc_str
 
 
-def test_create_forecast_path_HasDocString():
+def test_create_plan_path_HasDocString():
     # ESTABLISH
-    doc_str = create_forecast_path(
+    doc_str = create_plan_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_forecast_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_plan_path) == doc_str

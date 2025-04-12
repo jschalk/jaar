@@ -18,7 +18,7 @@ from src.f05_fund_metric.fund_metric_config import (
 from src.f08_fisc.fisc import fiscunit_shop, get_from_dict as fiscunit_get_from_dict
 from src.f08_fisc.fisc_config import cashbook_str, brokerunits_str, timeline_str
 from src.f10_idea.idea_config import get_default_sorted_list
-from src.f11_etl.tran_sqlstrs import create_forecast_tables
+from src.f11_etl.tran_sqlstrs import create_plan_tables
 from src.f11_etl.db_obj_tool import (
     get_fisc_dict_from_db,
     create_budmemb_metrics_insert_sqlstr,
@@ -32,18 +32,18 @@ from src.f11_etl.db_obj_tool import (
     create_budteam_metrics_insert_sqlstr,
     create_buditem_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
-    insert_forecast_budmemb,
-    insert_forecast_budacct,
-    insert_forecast_budgrou,
-    insert_forecast_budawar,
-    insert_forecast_budfact,
-    insert_forecast_budheal,
-    insert_forecast_budprem,
-    insert_forecast_budreas,
-    insert_forecast_budteam,
-    insert_forecast_buditem,
-    insert_forecast_budunit,
-    insert_forecast_obj,
+    insert_plan_budmemb,
+    insert_plan_budacct,
+    insert_plan_budgrou,
+    insert_plan_budawar,
+    insert_plan_budfact,
+    insert_plan_budheal,
+    insert_plan_budprem,
+    insert_plan_budreas,
+    insert_plan_budteam,
+    insert_plan_buditem,
+    insert_plan_budunit,
+    insert_plan_obj,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -100,8 +100,8 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "budunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "budunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -194,8 +194,8 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_itemunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_itemunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")
@@ -255,8 +255,8 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_item_reasonunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_item_reasonunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -323,8 +323,8 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_item_reason_premiseunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_item_reason_premiseunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")
@@ -387,8 +387,8 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_item_awardlink_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_item_awardlink_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -449,8 +449,8 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_item_factunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_item_factunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -505,8 +505,8 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_item_healerlink_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_item_healerlink_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -563,8 +563,8 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_item_teamlink_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_item_teamlink_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -641,8 +641,8 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_acctunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_acctunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -717,8 +717,8 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_acct_membership_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_acct_membership_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -787,8 +787,8 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        table_name = "bud_groupunit_forecast"
+        create_plan_tables(cursor)
+        table_name = "bud_groupunit_plan"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -805,7 +805,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
 # # prove selected row = obj __dict__
 
 
-def test_insert_forecast_budunit_CreatesTableRowsFor_budunit_forecast():
+def test_insert_plan_budunit_CreatesTableRowsFor_budunit_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     x_world_id = "music23"
@@ -843,12 +843,12 @@ def test_insert_forecast_budunit_CreatesTableRowsFor_budunit_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "budunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "budunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budunit(cursor, x_world_id, sue_bud)
+        insert_plan_budunit(cursor, x_world_id, sue_bud)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -878,7 +878,7 @@ def test_insert_forecast_budunit_CreatesTableRowsFor_budunit_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_buditem_CreatesTableRowsFor_buditem_forecast():
+def test_insert_plan_buditem_CreatesTableRowsFor_buditem_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_itemunit")
@@ -981,12 +981,12 @@ def test_insert_forecast_buditem_CreatesTableRowsFor_buditem_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_itemunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_itemunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_buditem(cursor, x_world_id, x_owner_name, x_item)
+        insert_plan_buditem(cursor, x_world_id, x_owner_name, x_item)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1029,7 +1029,7 @@ def test_insert_forecast_buditem_CreatesTableRowsFor_buditem_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
+def test_insert_plan_budreas_CreatesTableRowsFor_budreas_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_item_reasonunit")
@@ -1063,12 +1063,12 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_item_reasonunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_item_reasonunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budreas(
+        insert_plan_budreas(
             cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_reasonheir
         )
 
@@ -1092,7 +1092,7 @@ def test_insert_forecast_budreas_CreatesTableRowsFor_budreas_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
+def test_insert_plan_budprem_CreatesTableRowsFor_budprem_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_item_reason_premiseunit")
@@ -1128,12 +1128,12 @@ def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_item_reason_premiseunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_item_reason_premiseunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budprem(
+        insert_plan_budprem(
             cursor,
             x_world_id,
             x_fisc_title,
@@ -1165,7 +1165,7 @@ def test_insert_forecast_budprem_CreatesTableRowsFor_budprem_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
+def test_insert_plan_budmemb_CreatesTableRowsFor_budmemb_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_acct_membership")
@@ -1210,12 +1210,12 @@ def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_acct_membership_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_acct_membership_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budmemb(
+        insert_plan_budmemb(
             cursor, x_world_id, x_fisc_title, x_owner_name, x_membership
         )
 
@@ -1245,7 +1245,7 @@ def test_insert_forecast_budmemb_CreatesTableRowsFor_budmemb_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
+def test_insert_plan_budacct_CreatesTableRowsFor_budacct_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_acctunit")
@@ -1293,12 +1293,12 @@ def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_acctunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_acctunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budacct(cursor, x_world_id, x_fisc_title, x_owner_name, x_acct)
+        insert_plan_budacct(cursor, x_world_id, x_fisc_title, x_owner_name, x_acct)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1327,7 +1327,7 @@ def test_insert_forecast_budacct_CreatesTableRowsFor_budacct_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
+def test_insert_plan_budgrou_CreatesTableRowsFor_budgrou_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_groupunit")
@@ -1367,12 +1367,12 @@ def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_groupunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_groupunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budgrou(cursor, x_world_id, x_fisc_title, x_owner_name, x_group)
+        insert_plan_budgrou(cursor, x_world_id, x_fisc_title, x_owner_name, x_group)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1397,7 +1397,7 @@ def test_insert_forecast_budgrou_CreatesTableRowsFor_budgrou_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
+def test_insert_plan_budawar_CreatesTableRowsFor_budawar_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_item_awardlink")
@@ -1430,12 +1430,12 @@ def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_item_awardlink_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_item_awardlink_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budawar(
+        insert_plan_budawar(
             cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_awardheir
         )
 
@@ -1459,7 +1459,7 @@ def test_insert_forecast_budawar_CreatesTableRowsFor_budawar_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
+def test_insert_plan_budfact_CreatesTableRowsFor_budfact_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_item_factunit")
@@ -1490,12 +1490,12 @@ def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_item_factunit_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_item_factunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budfact(
+        insert_plan_budfact(
             cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_factheir
         )
 
@@ -1518,7 +1518,7 @@ def test_insert_forecast_budfact_CreatesTableRowsFor_budfact_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
+def test_insert_plan_budheal_CreatesTableRowsFor_budheal_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_item_healerlink")
@@ -1545,12 +1545,12 @@ def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_item_healerlink_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_item_healerlink_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budheal(
+        insert_plan_budheal(
             cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_healerlink
         )
 
@@ -1577,7 +1577,7 @@ def test_insert_forecast_budheal_CreatesTableRowsFor_budheal_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
+def test_insert_plan_budteam_CreatesTableRowsFor_budteam_plan():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_fund_metric_dimen_args("bud_item_teamlink")
@@ -1605,12 +1605,12 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        x_table_name = "bud_item_teamlink_forecast"
+        create_plan_tables(cursor)
+        x_table_name = "bud_item_teamlink_plan"
         assert get_row_count(cursor, x_table_name) == 0
 
         # WHEN
-        insert_forecast_budteam(
+        insert_plan_budteam(
             cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_teamheir
         )
 
@@ -1639,7 +1639,7 @@ def test_insert_forecast_budteam_CreatesTableRowsFor_budteam_forecast():
         assert rows == expected_data
 
 
-def test_insert_forecast_obj_CreatesTableRows_Scenario0():
+def test_insert_plan_obj_CreatesTableRows_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
     x_world_id = "music23"
@@ -1666,42 +1666,42 @@ def test_insert_forecast_obj_CreatesTableRows_Scenario0():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_forecast_tables(cursor)
-        budmemb_forecast_table = "bud_acct_membership_forecast"
-        budacct_forecast_table = "bud_acctunit_forecast"
-        budgrou_forecast_table = "bud_groupunit_forecast"
-        budawar_forecast_table = "bud_item_awardlink_forecast"
-        budfact_forecast_table = "bud_item_factunit_forecast"
-        budheal_forecast_table = "bud_item_healerlink_forecast"
-        budprem_forecast_table = "bud_item_reason_premiseunit_forecast"
-        budreas_forecast_table = "bud_item_reasonunit_forecast"
-        budteam_forecast_table = "bud_item_teamlink_forecast"
-        buditem_forecast_table = "bud_itemunit_forecast"
-        budunit_forecast_table = "budunit_forecast"
-        assert get_row_count(cursor, budunit_forecast_table) == 0
-        assert get_row_count(cursor, buditem_forecast_table) == 0
-        assert get_row_count(cursor, budacct_forecast_table) == 0
-        assert get_row_count(cursor, budmemb_forecast_table) == 0
-        assert get_row_count(cursor, budgrou_forecast_table) == 0
-        assert get_row_count(cursor, budawar_forecast_table) == 0
-        assert get_row_count(cursor, budfact_forecast_table) == 0
-        assert get_row_count(cursor, budheal_forecast_table) == 0
-        assert get_row_count(cursor, budreas_forecast_table) == 0
-        assert get_row_count(cursor, budprem_forecast_table) == 0
-        assert get_row_count(cursor, budteam_forecast_table) == 0
+        create_plan_tables(cursor)
+        budmemb_plan_table = "bud_acct_membership_plan"
+        budacct_plan_table = "bud_acctunit_plan"
+        budgrou_plan_table = "bud_groupunit_plan"
+        budawar_plan_table = "bud_item_awardlink_plan"
+        budfact_plan_table = "bud_item_factunit_plan"
+        budheal_plan_table = "bud_item_healerlink_plan"
+        budprem_plan_table = "bud_item_reason_premiseunit_plan"
+        budreas_plan_table = "bud_item_reasonunit_plan"
+        budteam_plan_table = "bud_item_teamlink_plan"
+        buditem_plan_table = "bud_itemunit_plan"
+        budunit_plan_table = "budunit_plan"
+        assert get_row_count(cursor, budunit_plan_table) == 0
+        assert get_row_count(cursor, buditem_plan_table) == 0
+        assert get_row_count(cursor, budacct_plan_table) == 0
+        assert get_row_count(cursor, budmemb_plan_table) == 0
+        assert get_row_count(cursor, budgrou_plan_table) == 0
+        assert get_row_count(cursor, budawar_plan_table) == 0
+        assert get_row_count(cursor, budfact_plan_table) == 0
+        assert get_row_count(cursor, budheal_plan_table) == 0
+        assert get_row_count(cursor, budreas_plan_table) == 0
+        assert get_row_count(cursor, budprem_plan_table) == 0
+        assert get_row_count(cursor, budteam_plan_table) == 0
 
         # WHEN
-        insert_forecast_obj(cursor, x_world_id, sue_bud)
+        insert_plan_obj(cursor, x_world_id, sue_bud)
 
         # THEN
-        assert get_row_count(cursor, budunit_forecast_table) == 1
-        assert get_row_count(cursor, buditem_forecast_table) == 5
-        assert get_row_count(cursor, budacct_forecast_table) == 1
-        assert get_row_count(cursor, budmemb_forecast_table) == 2
-        assert get_row_count(cursor, budgrou_forecast_table) == 2
-        assert get_row_count(cursor, budawar_forecast_table) == 1
-        assert get_row_count(cursor, budfact_forecast_table) == 1
-        assert get_row_count(cursor, budheal_forecast_table) == 1
-        assert get_row_count(cursor, budreas_forecast_table) == 1
-        assert get_row_count(cursor, budprem_forecast_table) == 1
-        assert get_row_count(cursor, budteam_forecast_table) == 1
+        assert get_row_count(cursor, budunit_plan_table) == 1
+        assert get_row_count(cursor, buditem_plan_table) == 5
+        assert get_row_count(cursor, budacct_plan_table) == 1
+        assert get_row_count(cursor, budmemb_plan_table) == 2
+        assert get_row_count(cursor, budgrou_plan_table) == 2
+        assert get_row_count(cursor, budawar_plan_table) == 1
+        assert get_row_count(cursor, budfact_plan_table) == 1
+        assert get_row_count(cursor, budheal_plan_table) == 1
+        assert get_row_count(cursor, budreas_plan_table) == 1
+        assert get_row_count(cursor, budprem_plan_table) == 1
+        assert get_row_count(cursor, budteam_plan_table) == 1

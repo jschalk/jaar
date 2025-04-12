@@ -66,7 +66,7 @@ def get_budunit_with_4_levels() -> BudUnit:
     return sue_bud
 
 
-def get_fund_explanation_bud() -> BudUnit:
+def get_fund_breakdown_bud() -> BudUnit:
     sue_bud = budunit_shop(owner_name="Sue")
 
     casa_str = "casa"
