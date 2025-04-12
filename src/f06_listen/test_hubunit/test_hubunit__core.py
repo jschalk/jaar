@@ -229,33 +229,3 @@ def test_get_keep_path_ReturnsObj():
     assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
     assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
     assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
-
-
-def test_HubUnit_voice_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    sue_bud = budunit_shop(sue_str, a23_str)
-    assert sue_hubunit.voice_file_exists() is False
-
-    # WHEN
-    save_voice_file(env_dir(), sue_bud)
-
-    # THEN
-    assert sue_hubunit.voice_file_exists()
-
-
-def test_HubUnit_forecast_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
-    assert sue_hubunit.forecast_file_exists() is False
-
-    # WHEN
-    sue_bud = budunit_shop(sue_str, a23_str)
-    save_forecast_file(env_dir(), sue_bud)
-
-    # THEN
-    assert sue_hubunit.forecast_file_exists()

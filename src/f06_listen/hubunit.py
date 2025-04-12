@@ -57,13 +57,15 @@ from src.f04_kick.atom import (
     modify_bud_with_budatom,
 )
 from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
-from src.f06_listen.basis_buds import get_default_forecast_bud
+from src.f06_listen.basis_buds import get_default_forecast
 from src.f06_listen.hub_path import create_voice_path, create_forecast_path
 from src.f06_listen.hub_tool import (
     save_voice_file,
     open_voice_file,
     save_forecast_file,
     open_forecast_file,
+    voice_file_exists,
+    forecast_file_exists,
 )
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
@@ -144,18 +146,6 @@ class HubUnit:
         self._atoms_dir = create_path(self._owner_dir, "atoms")
         self._kicks_dir = create_path(self._owner_dir, get_kicks_folder())
         self._deals_dir = create_path(self._owner_dir, "deals")
-
-    def voice_file_exists(self) -> bool:
-        voice_path = create_voice_path(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        )
-        return os_path_exists(voice_path)
-
-    def forecast_file_exists(self) -> bool:
-        forecast_path = create_forecast_path(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        )
-        return os_path_exists(forecast_path)
 
     def default_voice_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
@@ -344,7 +334,9 @@ class HubUnit:
         x_kickunit.save_files()
 
     def initialize_kick_voice_files(self):
-        x_voice_file_exists = self.voice_file_exists()
+        x_voice_file_exists = voice_file_exists(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+        )
         kick_file_exists = self.kick_file_exists(init_kick_id())
         if x_voice_file_exists is False and kick_file_exists is False:
             self._create_initial_kick_and_voice_files()
@@ -508,8 +500,10 @@ class HubUnit:
         save_file(self.jobs_dir(), x_filename, x_bud.get_json())
 
     def initialize_forecast_file(self, voice: BudUnit):
-        if self.forecast_file_exists() is False:
-            save_forecast_file(self.fisc_mstr_dir, get_default_forecast_bud(voice))
+        if not forecast_file_exists(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+        ):
+            save_forecast_file(self.fisc_mstr_dir, get_default_forecast(voice))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))
@@ -538,9 +532,6 @@ class HubUnit:
     def delete_treasury_db_file(self):
         delete_dir(self.treasury_db_path())
 
-    def dw_speaker_bud(self, speaker_id: OwnerName) -> BudUnit:
-        return open_forecast_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
-
     def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
         # get copy of bud without any metrics
         perspective_bud = budunit_get_from_json(speaker.get_json())
@@ -549,7 +540,10 @@ class HubUnit:
         return perspective_bud
 
     def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
-        return self.get_perspective_bud(self.dw_speaker_bud(speaker_id))
+        speaker_forecast = open_forecast_file(
+            self.fisc_mstr_dir, self.fisc_title, speaker_id
+        )
+        return self.get_perspective_bud(speaker_forecast)
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(

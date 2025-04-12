@@ -14,7 +14,11 @@ from src.f01_road.deal import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop
-from src.f06_listen.hub_tool import save_voice_file, open_voice_file
+from src.f06_listen.hub_tool import (
+    save_voice_file,
+    open_voice_file,
+    forecast_file_exists,
+)
 from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
@@ -160,35 +164,28 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
 
 def test_FiscUnit_init_owner_keeps_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord45_str = "accord45"
     slash_str = "/"
     x_fund_coin = 4
     x_respect_bit = 5
     accord_fisc = fiscunit_shop(
         accord45_str,
-        get_test_fisc_mstr_dir(),
+        fisc_mstr_dir,
         bridge=slash_str,
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
         in_memory_journal=True,
     )
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(
-        get_test_fisc_mstr_dir(),
-        accord45_str,
-        sue_str,
-        None,
-        respect_bit=x_respect_bit,
-        fund_coin=x_fund_coin,
-    )
-    assert sue_hubunit.forecast_file_exists() is False
+    assert not forecast_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
     # WHEN
     accord_fisc.init_owner_keeps(sue_str)
 
     # THEN
-    print(f"{get_test_fisc_mstr_dir()=}")
-    assert sue_hubunit.forecast_file_exists()
+    print(f"{fisc_mstr_dir=}")
+    assert forecast_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
 
 def test_FiscUnit_get_owner_voice_from_file_ReturnsObj(env_dir_setup_cleanup):

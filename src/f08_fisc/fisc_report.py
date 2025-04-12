@@ -72,12 +72,12 @@ def get_fisc_forecasts_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # for all owners get forecast
     forecast_dfs = []
     for x_hubunit in owner_hubunits.values():
-        forecast_bud = open_forecast_file(
+        forecast = open_forecast_file(
             x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
         )
-        forecast_bud.settle_bud()
-        forecast_df = get_bud_acctunits_dataframe(forecast_bud)
-        forecast_df.insert(0, "owner_name", forecast_bud.owner_name)
+        forecast.settle_bud()
+        forecast_df = get_bud_acctunits_dataframe(forecast)
+        forecast_df.insert(0, "owner_name", forecast.owner_name)
         forecast_dfs.append(forecast_df)
     return pandas_concat(forecast_dfs, ignore_index=True)
 
@@ -189,11 +189,11 @@ def get_fisc_forecasts_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # for all owners get forecast
     forecast_dfs = []
     for x_hubunit in owner_hubunits.values():
-        forecast_bud = open_forecast_file(
+        forecast = open_forecast_file(
             x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
         )
-        forecast_bud.settle_bud()
-        forecast_df = get_bud_agenda_dataframe(forecast_bud)
+        forecast.settle_bud()
+        forecast_df = get_bud_agenda_dataframe(forecast)
         forecast_dfs.append(forecast_df)
     return pandas_concat(forecast_dfs, ignore_index=True)
 

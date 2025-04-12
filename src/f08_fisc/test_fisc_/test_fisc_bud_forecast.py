@@ -17,7 +17,7 @@ from src.f08_fisc.examples.fisc_env import (
 from os.path import exists as os_path_exists
 
 
-def test_FiscUnit_generate_forecast_bud_Sets_forecast_BudFile(env_dir_setup_cleanup):
+def test_FiscUnit_generate_forecast_Sets_forecastFile(env_dir_setup_cleanup):
     # ESTABLISH
     accord23_str = "accord23"
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
@@ -32,7 +32,7 @@ def test_FiscUnit_generate_forecast_bud_Sets_forecast_BudFile(env_dir_setup_clea
     assert os_path_exists(x_sue_forecast_path)
 
     # WHEN
-    sue_forecast = a23_fisc.generate_forecast_bud(sue_str)
+    sue_forecast = a23_fisc.generate_forecast(sue_str)
 
     # THEN
     example_bud = budunit_shop(sue_str, accord23_str)
@@ -40,7 +40,7 @@ def test_FiscUnit_generate_forecast_bud_Sets_forecast_BudFile(env_dir_setup_clea
     assert sue_forecast.owner_name == example_bud.owner_name
 
 
-def test_FiscUnit_generate_forecast_bud_ReturnsRegeneratedObj(env_dir_setup_cleanup):
+def test_FiscUnit_generate_forecast_ReturnsRegeneratedObj(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
@@ -54,13 +54,13 @@ def test_FiscUnit_generate_forecast_bud_ReturnsRegeneratedObj(env_dir_setup_clea
     assert open_forecast_file(fisc_mstr_dir, a23_str, sue_str).acct_exists(bob_str)
 
     # WHEN
-    after_sue_bud = a23_fisc.generate_forecast_bud(sue_str)
+    after_sue_bud = a23_fisc.generate_forecast(sue_str)
 
     # THEN method should wipe over forecast bud
     assert after_sue_bud.acct_exists(bob_str) is False
 
 
-def test_FiscUnit_generate_forecast_bud_SetsCorrectFileWithout_healerlink(
+def test_FiscUnit_generate_forecast_SetsCorrectFileWithout_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -69,9 +69,9 @@ def test_FiscUnit_generate_forecast_bud_SetsCorrectFileWithout_healerlink(
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, True)
     bob_str = "Bob"
     a23_fisc.init_owner_keeps(bob_str)
-    before_bob_forecast_bud = a23_fisc.generate_forecast_bud(bob_str)
+    before_bob_forecast = a23_fisc.generate_forecast(bob_str)
     sue_str = "Sue"
-    assert before_bob_forecast_bud.acct_exists(sue_str) is False
+    assert before_bob_forecast.acct_exists(sue_str) is False
 
     # WHEN
     bob_voice_bud = open_voice_file(fisc_mstr_dir, a23_str, bob_str)
@@ -79,13 +79,13 @@ def test_FiscUnit_generate_forecast_bud_SetsCorrectFileWithout_healerlink(
     save_voice_file(a23_fisc.fisc_mstr_dir, bob_voice_bud)
 
     # WHEN
-    after_bob_forecast_bud = a23_fisc.generate_forecast_bud(bob_str)
+    after_bob_forecast = a23_fisc.generate_forecast(bob_str)
 
     # THEN
-    assert after_bob_forecast_bud.acct_exists(sue_str)
+    assert after_bob_forecast.acct_exists(sue_str)
 
 
-def test_FiscUnit_generate_forecast_bud_SetsFileWith_healerlink(
+def test_FiscUnit_generate_forecast_SetsFileWith_healerlink(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -95,8 +95,8 @@ def test_FiscUnit_generate_forecast_bud_SetsFileWith_healerlink(
 
     bob_str = "Bob"
     a23_fisc.init_owner_keeps(bob_str)
-    after_bob_forecast_bud = a23_fisc.generate_forecast_bud(bob_str)
-    assert after_bob_forecast_bud.acct_exists(bob_str) is False
+    after_bob_forecast = a23_fisc.generate_forecast(bob_str)
+    assert after_bob_forecast.acct_exists(bob_str) is False
 
     # WHEN
     bob_voice_bud = open_voice_file(fisc_mstr_dir, a23_str, bob_str)
@@ -111,13 +111,13 @@ def test_FiscUnit_generate_forecast_bud_SetsFileWith_healerlink(
     bob_voice_bud.set_item(elpaso_item, texas_road)
     save_voice_file(a23_fisc.fisc_mstr_dir, bob_voice_bud)
 
-    after_bob_forecast_bud = a23_fisc.generate_forecast_bud(bob_str)
+    after_bob_forecast = a23_fisc.generate_forecast(bob_str)
 
     # THEN
-    assert after_bob_forecast_bud.acct_exists(bob_str)
+    assert after_bob_forecast.acct_exists(bob_str)
 
 
-def test_FiscUnit_generate_all_forecast_buds_SetsCorrectFiles(
+def test_FiscUnit_generate_all_forecasts_SetsCorrectFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -130,8 +130,8 @@ def test_FiscUnit_generate_all_forecast_buds_SetsCorrectFiles(
     a23_fisc.init_owner_keeps(bob_str)
     fisc_mstr_dir = a23_fisc.fisc_mstr_dir
     a23_fisc.init_owner_keeps(sue_str)
-    bob_voice_bud = a23_fisc.generate_forecast_bud(bob_str)
-    sue_voice_bud = a23_fisc.generate_forecast_bud(sue_str)
+    bob_voice_bud = a23_fisc.generate_forecast(bob_str)
+    sue_voice_bud = a23_fisc.generate_forecast(sue_str)
 
     texas_str = "Texas"
     texas_road = bob_voice_bud.make_l1_road(texas_str)
@@ -152,16 +152,16 @@ def test_FiscUnit_generate_all_forecast_buds_SetsCorrectFiles(
     sue_voice_bud.set_item(elpaso_item, texas_road)
     save_voice_file(a23_fisc.fisc_mstr_dir, sue_voice_bud)
 
-    before_bob_forecast_bud = a23_fisc.get_forecast_file_bud(bob_str)
-    before_sue_forecast_bud = a23_fisc.get_forecast_file_bud(sue_str)
-    assert before_bob_forecast_bud.acct_exists(bob_str) is False
-    assert before_sue_forecast_bud.acct_exists(sue_str) is False
+    before_bob_forecast = a23_fisc.get_forecast_file_bud(bob_str)
+    before_sue_forecast = a23_fisc.get_forecast_file_bud(sue_str)
+    assert before_bob_forecast.acct_exists(bob_str) is False
+    assert before_sue_forecast.acct_exists(sue_str) is False
 
     # WHEN
-    a23_fisc.generate_all_forecast_buds()
+    a23_fisc.generate_all_forecasts()
 
     # THEN
-    after_bob_forecast_bud = a23_fisc.get_forecast_file_bud(bob_str)
-    after_sue_forecast_bud = a23_fisc.get_forecast_file_bud(sue_str)
-    assert after_bob_forecast_bud.acct_exists(bob_str)
-    assert after_sue_forecast_bud.acct_exists(sue_str)
+    after_bob_forecast = a23_fisc.get_forecast_file_bud(bob_str)
+    after_sue_forecast = a23_fisc.get_forecast_file_bud(sue_str)
+    assert after_bob_forecast.acct_exists(bob_str)
+    assert after_sue_forecast.acct_exists(sue_str)

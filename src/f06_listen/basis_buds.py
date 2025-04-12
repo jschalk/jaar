@@ -26,7 +26,7 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_name: OwnerName = None) -> BudUni
 
 
 def create_listen_basis(x_duty: BudUnit) -> BudUnit:
-    x_listen = create_empty_bud(x_duty, x_owner_name=x_duty.owner_name)
+    x_listen = create_empty_bud(x_duty, x_duty.owner_name)
     x_listen.accts = x_duty.accts
     x_listen.set_max_tree_traverse(x_duty.max_tree_traverse)
     if x_duty.credor_respect is not None:
@@ -38,9 +38,9 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
     return x_listen
 
 
-def get_default_forecast_bud(voice: BudUnit) -> BudUnit:
-    default_forecast_bud = create_listen_basis(voice)
-    default_forecast_bud.last_kick_id = voice.last_kick_id
-    default_forecast_bud.credor_respect = None
-    default_forecast_bud.debtor_respect = None
-    return default_forecast_bud
+def get_default_forecast(voice: BudUnit) -> BudUnit:
+    default_forecast = create_listen_basis(voice)
+    default_forecast.last_kick_id = voice.last_kick_id
+    default_forecast.credor_respect = None
+    default_forecast.debtor_respect = None
+    return default_forecast
