@@ -1132,4 +1132,4 @@ def etl_fisc_voice_to_fisc_forecast(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
-        x_fiscunit.generate_all_forecast_buds()
+        x_fiscunit.generate_all_forecasts()

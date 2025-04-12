@@ -57,7 +57,7 @@ from src.f04_kick.atom import (
     modify_bud_with_budatom,
 )
 from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
-from src.f06_listen.basis_buds import get_default_forecast_bud
+from src.f06_listen.basis_buds import get_default_forecast
 from src.f06_listen.hub_path import create_voice_path, create_forecast_path
 from src.f06_listen.hub_tool import (
     save_voice_file,
@@ -503,7 +503,7 @@ class HubUnit:
         if not forecast_file_exists(
             self.fisc_mstr_dir, self.fisc_title, self.owner_name
         ):
-            save_forecast_file(self.fisc_mstr_dir, get_default_forecast_bud(voice))
+            save_forecast_file(self.fisc_mstr_dir, get_default_forecast(voice))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))

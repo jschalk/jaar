@@ -67,7 +67,7 @@ def test_get_fisc_forecasts_accts_dataframe_ReturnsObj(
 ):
     # ESTABLISH
     accord_fisc = create_example_fisc2()
-    accord_fisc.generate_all_forecast_buds()
+    accord_fisc.generate_all_forecasts()
 
     # WHEN
     x_df = get_fisc_forecasts_accts_dataframe(accord_fisc)
@@ -99,7 +99,7 @@ def test_get_fisc_forecasts_accts_plotly_fig_DisplaysCorrectInfo(
 ):
     # ESTABLISH
     accord_fisc = create_example_fisc2()
-    accord_fisc.generate_all_forecast_buds()
+    accord_fisc.generate_all_forecasts()
 
     # WHEN
     x_fig = get_fisc_forecasts_accts_plotly_fig(accord_fisc)
@@ -153,7 +153,7 @@ def test_get_fisc_voices_agenda_plotly_fig_DisplaysCorrectInfo(
 def test_get_fisc_forecasts_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord_fisc = create_example_fisc4()
-    accord_fisc.generate_all_forecast_buds()
+    accord_fisc.generate_all_forecasts()
 
     # WHEN
     x_df = get_fisc_forecasts_agenda_dataframe(accord_fisc)
@@ -183,7 +183,7 @@ def test_get_fisc_forecasts_agenda_plotly_fig_DisplaysCorrectInfo(
 ):
     # ESTABLISH
     accord_fisc = create_example_fisc4()
-    accord_fisc.generate_all_forecast_buds()
+    accord_fisc.generate_all_forecasts()
 
     # WHEN
     x_fig = get_fisc_forecasts_agenda_plotly_fig(accord_fisc)

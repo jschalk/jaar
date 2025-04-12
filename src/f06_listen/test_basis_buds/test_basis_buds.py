@@ -4,7 +4,7 @@ from src.f02_bud.bud import budunit_shop
 from src.f06_listen.basis_buds import (
     create_empty_bud,
     create_listen_basis,
-    get_default_forecast_bud,
+    get_default_forecast,
 )
 
 
@@ -101,7 +101,7 @@ def test_create_listen_basis_ReturnsObj():
     assert job_zia_acctunit._inallocable_debtit_belief == 0
 
 
-def test_get_default_forecast_bud_ReturnsObj():
+def test_get_default_forecast_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     blue_str = "blue"
@@ -126,20 +126,20 @@ def test_get_default_forecast_bud_ReturnsObj():
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
-    default_forecast_bud = get_default_forecast_bud(sue_budunit)
+    default_forecast = get_default_forecast(sue_budunit)
 
     # THEN
-    default_forecast_bud.settle_bud()
-    assert default_forecast_bud.owner_name == sue_budunit.owner_name
-    assert default_forecast_bud.owner_name == sue_str
-    assert default_forecast_bud.fisc_title == sue_budunit.fisc_title
-    assert default_forecast_bud.fisc_title == blue_str
-    assert default_forecast_bud.bridge == slash_str
-    assert default_forecast_bud.fund_pool == sue_acct_pool
-    assert default_forecast_bud.fund_coin == x_fund_coin
-    assert default_forecast_bud.respect_bit == x_respect_bit
-    assert default_forecast_bud.credor_respect == default_respect_num()
-    assert default_forecast_bud.debtor_respect == default_respect_num()
-    assert default_forecast_bud.max_tree_traverse == sue_max_tree_traverse
-    assert len(default_forecast_bud.get_acctunits_dict()) == 1
-    assert len(default_forecast_bud._item_dict) == 1
+    default_forecast.settle_bud()
+    assert default_forecast.owner_name == sue_budunit.owner_name
+    assert default_forecast.owner_name == sue_str
+    assert default_forecast.fisc_title == sue_budunit.fisc_title
+    assert default_forecast.fisc_title == blue_str
+    assert default_forecast.bridge == slash_str
+    assert default_forecast.fund_pool == sue_acct_pool
+    assert default_forecast.fund_coin == x_fund_coin
+    assert default_forecast.respect_bit == x_respect_bit
+    assert default_forecast.credor_respect == default_respect_num()
+    assert default_forecast.debtor_respect == default_respect_num()
+    assert default_forecast.max_tree_traverse == sue_max_tree_traverse
+    assert len(default_forecast.get_acctunits_dict()) == 1
+    assert len(default_forecast._item_dict) == 1

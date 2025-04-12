@@ -27,25 +27,25 @@ def test_HubUnit_initialize_forecast_file_CorrectlySavesFile(env_dir_setup_clean
     sue_hubunit.initialize_forecast_file(sue_bud)
 
     # THEN
-    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
-    assert forecast_bud.fisc_title == root_title()
-    assert forecast_bud.owner_name == sue_str
+    forecast = open_forecast_file(env_dir(), root_title(), sue_str)
+    assert forecast.fisc_title == root_title()
+    assert forecast.owner_name == sue_str
     bob_str = "Bob"
-    assert forecast_bud.acct_exists(bob_str) is False
+    assert forecast.acct_exists(bob_str) is False
 
     # ESTABLISH
     sue_bud = budunit_shop(sue_str)
     sue_bud.add_acctunit(bob_str)
     save_forecast_file(env_dir(), sue_bud)
-    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
-    assert forecast_bud.get_acct(bob_str)
+    forecast = open_forecast_file(env_dir(), root_title(), sue_str)
+    assert forecast.get_acct(bob_str)
 
     # WHEN
     sue_hubunit.initialize_forecast_file(sue_bud)
 
     # THEN
-    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
-    assert forecast_bud.get_acct(bob_str)
+    forecast = open_forecast_file(env_dir(), root_title(), sue_str)
+    assert forecast.get_acct(bob_str)
 
 
 def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
@@ -87,12 +87,12 @@ def test_HubUnit_initialize_forecast_file_CorrectlyDoesNotOverwrite(
 
     # THEN
     assert forecast_file_exists(env_dir(), root_title(), sue_str)
-    forecast_bud = open_forecast_file(env_dir(), root_title(), sue_str)
-    assert forecast_bud.fisc_title == root_title()
-    assert forecast_bud.owner_name == sue_str
-    assert forecast_bud.fund_pool == sue_fund_pool
-    assert forecast_bud.fund_coin == sue_fund_coin
-    assert forecast_bud.respect_bit == sue_bit
+    forecast = open_forecast_file(env_dir(), root_title(), sue_str)
+    assert forecast.fisc_title == root_title()
+    assert forecast.owner_name == sue_str
+    assert forecast.fund_pool == sue_fund_pool
+    assert forecast.fund_coin == sue_fund_coin
+    assert forecast.respect_bit == sue_bit
 
 
 def test_HubUnit_initialize_forecast_file_CreatesDirsAndFiles(env_dir_setup_cleanup):
