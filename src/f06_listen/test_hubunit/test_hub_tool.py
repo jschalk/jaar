@@ -31,6 +31,8 @@ from src.f06_listen.hub_tool import (
     open_voice_file,
     save_forecast_file,
     open_forecast_file,
+    voice_file_exists,
+    forecast_file_exists,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
     get_budevent_obj,
@@ -116,6 +118,21 @@ def test_save_voice_file_SetsFile(env_dir_setup_cleanup):
     assert os_path_exists(sue_voice_path)
 
 
+def test_voice_file_exists_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str, a23_str)
+    assert voice_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
+
+    # WHEN
+    save_voice_file(fisc_mstr_dir, sue_bud)
+
+    # THEN
+    assert voice_file_exists(fisc_mstr_dir, a23_str, sue_str)
+
+
 def test_open_voice_file_ReturnsObj_Scenario0_noFile():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
@@ -156,6 +173,21 @@ def test_save_forecast_file_SetsFile(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(sue_forecast_path)
+
+
+def test_forecast_file_exists_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    fisc_mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str, a23_str)
+    assert forecast_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
+
+    # WHEN
+    save_forecast_file(fisc_mstr_dir, sue_bud)
+
+    # THEN
+    assert forecast_file_exists(fisc_mstr_dir, a23_str, sue_str)
 
 
 def test_open_forecast_file_ReturnsObj_Scenario0_noFile():

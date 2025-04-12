@@ -6,7 +6,7 @@ from src.f04_kick.atom_config import (
     debtit_belief_str,
     credit_belief_str,
 )
-from src.f06_listen.hub_tool import open_voice_file
+from src.f06_listen.hub_tool import open_voice_file, voice_file_exists
 from src.f06_listen.hubunit import hubunit_shop
 from src.f10_idea.idea import (
     create_idea_df,
@@ -110,14 +110,14 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvToForecast(
         idea_examples_dir(), accord_fisc_title, owner_name=sue_str
     )
     # Open FiscUnit and confirm voice BudUnit does not exist
-    assert not sue_hubunit.voice_file_exists()
+    assert not voice_file_exists(idea_examples_dir(), accord_fisc_title, sue_str)
 
     # WHEN
     load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
-    assert sue_hubunit.voice_file_exists()
+    assert voice_file_exists(idea_examples_dir(), accord_fisc_title, sue_str)
     # assert voice Budunit acctunit now exists
     sue_voice = open_voice_file(idea_examples_dir(), accord_fisc_title, sue_str)
 
@@ -164,14 +164,14 @@ def test_load_idea_csv_csvToForecast(
         idea_examples_dir(), accord_fisc_title, owner_name=sue_str
     )
     # Open FiscUnit and confirm voice BudUnit does not exist
-    assert not sue_hubunit.voice_file_exists()
+    assert not voice_file_exists(idea_examples_dir(), accord_fisc_title, sue_str)
 
     # WHEN
     load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert voice Budunit now exists
-    assert sue_hubunit.voice_file_exists()
+    assert voice_file_exists(idea_examples_dir(), accord_fisc_title, sue_str)
     # assert voice Budunit acctunit now exists
     sue_voice = open_voice_file(idea_examples_dir(), accord_fisc_title, sue_str)
     assert sue_voice.acct_exists(sue_str)

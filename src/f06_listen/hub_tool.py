@@ -49,6 +49,20 @@ def open_voice_file(
     return open_bud_file(voice_path)
 
 
+def voice_file_exists(
+    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
+) -> bool:
+    voice_path = create_voice_path(fisc_mstr_dir, fisc_title, owner_name)
+    return os_path_exists(voice_path)
+
+
+def forecast_file_exists(
+    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
+) -> bool:
+    forecast_path = create_forecast_path(fisc_mstr_dir, fisc_title, owner_name)
+    return os_path_exists(forecast_path)
+
+
 def save_forecast_file(fisc_mstr_dir: str, budunit: BudUnit = None):
     forecast_path = create_forecast_path(
         fisc_mstr_dir, budunit.fisc_title, budunit.owner_name

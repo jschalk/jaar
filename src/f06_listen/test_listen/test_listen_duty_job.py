@@ -6,7 +6,12 @@ from src.f01_road.road import (
 )
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import BudUnit, budunit_shop
-from src.f06_listen.hub_tool import save_voice_file, open_forecast_file
+from src.f06_listen.hub_tool import (
+    save_voice_file,
+    open_forecast_file,
+    voice_file_exists,
+    forecast_file_exists,
+)
 from src.f06_listen.hubunit import hubunit_shop, HubUnit
 from src.f06_listen.listen import listen_to_owner_jobs, create_job_file_from_duty_file
 from src.f06_listen.examples.listen_env import (
@@ -268,78 +273,6 @@ def get_example_yao_voice_with_3_healers():
     return yao_voice
 
 
-# def test_listen_to_owner_jobs_Pipeline_Scenario0(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     # yao0_voice with 3 debotors of different credit_beliefs
-#     # yao_job1 with 1 task, fact that doesn't make that task active
-#     # yao_job2 with 2 tasks, one is equal fact that makes task active
-#     # yao_job3 with 1 new task, fact stays with it
-
-#     yao_voice0 = get_example_yao_voice_with_3_healers()
-#     yao_voice0.del_item_obj(run_road())
-#     yao_voice0.set_l1_item(itemunit_shop(get_location_str()))
-#     yao_voice0.set_item(itemunit_shop(get_in_mer_str()), get_location_road())
-#     yao_voice0.set_item(itemunit_shop(get_on_land_str()), get_location_road())
-#     yao_voice0.set_l1_item(itemunit_shop(get_swim_str(), pledge=True))
-#     yao_voice0.edit_reason(get_swim_road(), get_location_road(), get_in_mer_road())
-#     yao_voice0.settle_bud()
-#     assert yao_voice0._keep_dict.get(get_iowa_road())
-#     assert yao_voice0._keep_dict.get(get_ohio_road())
-#     assert yao_voice0._keep_dict.get(get_utah_road())
-#     assert len(yao_voice0._keep_dict) == 3
-#     print(f"{yao_voice0._item_dict.keys()=}")
-
-#     yao_str = yao_voice0.owner_name
-#     yao_job1 = get_example_yao_job1_speaker()
-#     yao_job2 = get_example_yao_job2_speaker()
-#     yao_job3 = get_example_yao_job3_speaker()
-#     yao_iowa_hubunit = get_yao_iowa_hubunit()
-#     yao_ohio_hubunit = get_yao_ohio_hubunit()
-#     zia_utah_hubunit = get_zia_utah_hubunit()
-#     # delete_dir(yao_iowa_hubunit.owners_dir())
-#     assert yao_iowa_hubunit.voice_file_exists() is False
-#     assert yao_iowa_hubunit.forecast_file_exists() is False
-#     assert yao_iowa_hubunit.job_file_exists(yao_str) is False
-#     assert yao_ohio_hubunit.job_file_exists(yao_str) is False
-#     assert zia_utah_hubunit.job_file_exists(yao_str) is False
-# save_voice_file(env_dir(), yao_voice0)
-#     yao_iowa_hubunit.save_job_bud(yao_job1)
-#     yao_ohio_hubunit.save_job_bud(yao_job2)
-#     zia_utah_hubunit.save_job_bud(yao_job3)
-#     assert yao_iowa_hubunit.voice_file_exists()
-#     assert yao_iowa_hubunit.job_file_exists(yao_str)
-#     assert yao_ohio_hubunit.job_file_exists(yao_str)
-#     assert zia_utah_hubunit.job_file_exists(yao_str)
-
-#     # WHEN
-#     assert yao_iowa_hubunit.forecast_file_exists() is False
-#     listen_to_owner_jobs(yao_iowa_hubunit)
-#     assert yao_iowa_hubunit.forecast_file_exists()
-
-#     yao_forecast = yao_iowa_hubunit.open_file_forecast()
-#     yao_forecast.settle_bud()
-#     assert yao_forecast.accts.keys() == yao_voice0.accts.keys()
-#     assert yao_forecast.get_acct(yao_str)._irrational_debtit_belief == 0
-#     yao_forecast_accts = yao_forecast.get_dict().get("accts")
-#     yao_voice0_accts = yao_voice0.get_dict().get("accts")
-#     yao_forecast_bob = yao_forecast_accts.get("Bob")
-#     yao_voice0_bob = yao_voice0_accts.get("Bob")
-#     print(f"{yao_forecast_bob=}")
-#     print(f"{yao_voice0_bob=}")
-#     assert yao_forecast_bob == yao_voice0_bob
-#     assert yao_forecast_accts.keys() == yao_voice0_accts.keys()
-#     assert yao_forecast_accts == yao_voice0_accts
-#     assert len(yao_forecast.get_dict().get("accts")) == 3
-#     assert len(yao_forecast._item_dict) == 10
-#     print(f"{yao_forecast._item_dict.keys()=}")
-#     print(f"{yao_forecast.get_factunits_dict().keys()=}")
-#     assert yao_forecast.item_exists(cook_road())
-#     assert yao_forecast.item_exists(clean_road())
-#     assert yao_forecast.item_exists(run_road()) is False
-#     assert len(yao_forecast.itemroot.factunits) == 2
-#     assert yao_forecast != yao_voice0
-
-
 def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItself(
     env_dir_setup_cleanup,
 ):
@@ -348,7 +281,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     # yao_job1 with 1 task, fact that doesn't make that task active
     # yao_job2 with 2 tasks, one is equal fact that makes task active
     # yao_job3 with 1 new task, fact stays with it
-
+    fisc_mstr_dir = env_dir()
+    fisc_title = get_default_fisc_title()
     yao_voice0 = get_example_yao_voice_with_3_healers()
     yao_voice0.set_l1_item(itemunit_shop(get_location_str()))
     yao_voice0.set_item(itemunit_shop(get_in_mer_str()), get_location_road())
@@ -373,8 +307,8 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     yao_ohio_hubunit = get_yao_ohio_hubunit()
     zia_utah_hubunit = get_zia_utah_hubunit()
     # delete_dir(yao_iowa_hubunit.owners_dir())
-    assert yao_iowa_hubunit.voice_file_exists() is False
-    assert yao_iowa_hubunit.forecast_file_exists() is False
+    assert voice_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
+    assert forecast_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
     assert yao_iowa_hubunit.job_file_exists(yao_str) is False
     assert yao_ohio_hubunit.job_file_exists(yao_str) is False
     assert zia_utah_hubunit.job_file_exists(yao_str) is False
@@ -383,17 +317,17 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_voice_CanOnlyReferenceItsel
     # yao_iowa_hubunit.save_job_bud(yao_job1)
     # yao_ohio_hubunit.save_job_bud(yao_job2)
     # zia_utah_hubunit.save_job_bud(yao_job3)
-    assert yao_iowa_hubunit.voice_file_exists()
+    assert voice_file_exists(fisc_mstr_dir, fisc_title, yao_str)
     assert yao_iowa_hubunit.job_file_exists(yao_str) is False
     assert yao_ohio_hubunit.job_file_exists(yao_str) is False
     assert zia_utah_hubunit.job_file_exists(yao_str) is False
 
     # WHEN
-    assert yao_iowa_hubunit.forecast_file_exists() is False
+    assert forecast_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
     listen_to_owner_jobs(yao_iowa_hubunit)
-    assert yao_iowa_hubunit.forecast_file_exists()
+    assert forecast_file_exists(fisc_mstr_dir, fisc_title, yao_str)
 
-    yao_forecast = open_forecast_file(env_dir(), get_default_fisc_title(), yao_str)
+    yao_forecast = open_forecast_file(fisc_mstr_dir, fisc_title, yao_str)
     yao_forecast.settle_bud()
     assert yao_forecast.accts.keys() == yao_voice0.accts.keys()
     assert yao_forecast.get_acct(yao_str)._irrational_debtit_belief == 0
