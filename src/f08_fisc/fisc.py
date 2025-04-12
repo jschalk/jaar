@@ -269,8 +269,7 @@ class FiscUnit:
         x_forecast = listen_to_debtors_roll_voice_forecast(
             self.fisc_mstr_dir, self.fisc_title, owner_name
         )
-        save_forecast_file(self.fisc_mstr_dir, x_forecast)
-        return self.get_forecast_file_bud(owner_name)
+        return x_forecast
 
     def generate_all_forecasts(self):
         for x_owner_name in self._get_owner_folder_names():
