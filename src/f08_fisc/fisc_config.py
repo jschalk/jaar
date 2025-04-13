@@ -128,11 +128,10 @@ def get_fisc_args_dimen_mapping() -> dict[str, str]:
         args_set = set(get_fisc_config_args(fisc_dimen))
         for x_arg in args_set:
             if x_dict.get(x_arg) is None:
-                x_dict[x_arg] = {fisc_dimen}
-            else:
-                x_dimen_set = x_dict.get(x_arg)
-                x_dimen_set.add(fisc_dimen)
-                x_dict[x_arg] = x_dimen_set
+                x_dict[x_arg] = set()
+            x_dimen_set = x_dict.get(x_arg)
+            x_dimen_set.add(fisc_dimen)
+            x_dict[x_arg] = x_dimen_set
     return x_dict
 
 
@@ -141,9 +140,11 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "acct_name": "NameUnit",
         "amount": "float",
         "bridge": "str",
+        "celldepth": "int",
         "c400_number": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
+        "deal_time": "TimeLinePoint",
         "hour_title": "TitleUnit",
         "fisc_title": "TitleUnit",
         "fund_coin": "float",
@@ -155,8 +156,6 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "quota": "int",
         "plan_listen_rotations": "int",
         "respect_bit": "float",
-        "celldepth": "int",
-        "deal_time": "TimeLinePoint",
         "tran_time": "TimeLinePoint",
         "timeline_title": "TitleUnit",
         "weekday_title": "TitleUnit",
@@ -171,8 +170,10 @@ def get_fisc_args_set() -> set[str]:
         "amount",
         "bridge",
         "c400_number",
+        "celldepth",
         "cumlative_day",
         "cumlative_minute",
+        "deal_time",
         "hour_title",
         "fisc_title",
         "fund_coin",
@@ -184,8 +185,6 @@ def get_fisc_args_set() -> set[str]:
         "owner_name",
         "quota",
         "respect_bit",
-        "celldepth",
-        "deal_time",
         "tran_time",
         "timeline_title",
         "weekday_title",
