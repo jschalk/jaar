@@ -258,7 +258,7 @@ def fisc_build_from_df(
             fund_coin=x_fund_coin,
             respect_bit=x_respect_bit,
             penny=x_penny,
-            plan_listen_count=row["plan_listen_count"],
+            plan_listen_rotations=row["plan_listen_rotations"],
         )
         fiscunit_dict[x_fiscunit.fisc_title] = x_fiscunit
         _add_dealunits_from_df(x_fiscunit, br00001_df)

@@ -107,7 +107,7 @@ def test_get_fisc_config_dict_ReturnsObj():
         "bridge",
         timeline_title_str(),
         yr1_jan1_offset_str(),
-        "plan_listen_count",
+        "plan_listen_rotations",
     }
     print(f"{fiscunit_dict.get(jvalues_str()).keys()=}")
     gen_jvalues = set(fiscunit_dict.get(jvalues_str()).keys())
@@ -246,7 +246,7 @@ def test_get_fisc_args_set_ReturnsObj():
         fund_coin_str(),
         month_title_str(),
         monthday_distortion_str(),
-        "plan_listen_count",
+        "plan_listen_rotations",
         penny_str(),
         owner_name_str(),
         quota_str(),

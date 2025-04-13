@@ -286,7 +286,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[85] == unknown_word_str()
     assert table_sorting_priority[86] == quota_str()
     assert table_sorting_priority[87] == celldepth_str()
-    assert table_sorting_priority[88] == "plan_listen_count"
+    assert table_sorting_priority[88] == "plan_listen_rotations"
     assert table_sorting_priority[89] == "error_message"
     assert table_sorting_priority[90] == "_owner_name_team"
     assert table_sorting_priority[91] == "_active"
@@ -792,7 +792,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         bridge_str(),
         timeline_title_str(),
         yr1_jan1_offset_str(),
-        "plan_listen_count",
+        "plan_listen_rotations",
     }
 
 

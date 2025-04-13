@@ -110,7 +110,7 @@ class FiscUnit:
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
     penny: PennyNum = None
-    plan_listen_count: int = None
+    plan_listen_rotations: int = None
     _offi_time_max: TimeLinePoint = None
     _fisc_dir: str = None
     _owners_dir: str = None
@@ -472,14 +472,14 @@ def fiscunit_shop(
     fund_coin: float = None,
     respect_bit: float = None,
     penny: float = None,
-    plan_listen_count: int = None,
+    plan_listen_rotations: int = None,
 ) -> FiscUnit:
     if timeline is None:
         timeline = timelineunit_shop()
     if fisc_mstr_dir is None:
         fisc_mstr_dir = get_test_fisc_mstr_dir()
-    if not plan_listen_count:
-        plan_listen_count = DEFAULT_PLAN_LISTEN_COUNT
+    if not plan_listen_rotations:
+        plan_listen_rotations = DEFAULT_PLAN_LISTEN_COUNT
     x_fiscunit = FiscUnit(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
@@ -492,7 +492,7 @@ def fiscunit_shop(
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=filter_penny(penny),
         _all_tranbook=tranbook_shop(fisc_title),
-        plan_listen_count=plan_listen_count,
+        plan_listen_rotations=plan_listen_rotations,
     )
     x_fiscunit._set_fisc_dirs(in_memory_journal=in_memory_journal)
     return x_fiscunit

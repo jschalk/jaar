@@ -34,7 +34,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
     x_fund_coin = 55
     x_respect_bit = 66
     x_penny = 77
-    x_plan_listen_count = 7
+    x_plan_listen_rotations = 7
     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
     accord23_str = "accord23"
     slash_str = "/"
@@ -65,7 +65,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTitle(
         respect_bit=x_respect_bit,
         bridge=slash_str,
         timeline=creg_timelineunit,
-        plan_listen_count=x_plan_listen_count,
+        plan_listen_rotations=x_plan_listen_rotations,
     )
     expected_accord23_fiscunit.add_dealunit(
         owner_name="Sue",

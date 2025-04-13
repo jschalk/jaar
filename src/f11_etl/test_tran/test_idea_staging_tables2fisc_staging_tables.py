@@ -118,7 +118,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         expected_row1 = (
@@ -135,7 +135,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         print(f"{fiscunit_db_rows[1]=}")
@@ -202,7 +202,7 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         expected_row1 = (
@@ -219,7 +219,7 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         print(f"{fiscunit_db_rows[1]=}")
@@ -289,7 +289,7 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         expected_row1 = (
@@ -306,7 +306,7 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
@@ -387,7 +387,7 @@ VALUES
             a23_respect_bit,  # respect_bit
             # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         expected_row1 = (
@@ -404,7 +404,7 @@ VALUES
             a23_respect_bit,  # respect_bit
             # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
-            None,  # plan_listen_count
+            None,  # plan_listen_rotations
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
@@ -960,7 +960,7 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
     a23_yr1_jan1_offset = 66
     a23_monthday_distortion = 77
     a23_timeline_title = "accord23_timeline"
-    a23_plan_listen_count = 6
+    a23_plan_listen_rotations = 6
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -972,8 +972,8 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_rotations},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_rotations},NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1015,7 +1015,7 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
     a23_yr1_jan1_offset = 66
     a23_monthday_distortion = 77
     a23_timeline_title = "accord23_timeline"
-    a23_plan_listen_count = 900
+    a23_plan_listen_rotations = 900
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -1027,9 +1027,9 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_rotations},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_rotations},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_rotations},NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")

@@ -57,8 +57,8 @@ CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_tim
 CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT, error_message TEXT)"""
 CREATE_FISC_TIMEOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_title TEXT, offi_time INTEGER)"""
 CREATE_FISC_TIMEOFFI_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, plan_listen_count INTEGER)"""
-CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, plan_listen_count INTEGER, error_message TEXT)"""
+CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, plan_listen_rotations INTEGER)"""
+CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, plan_listen_rotations INTEGER, error_message TEXT)"""
 
 
 def get_fisc_create_table_sqlstrs() -> dict[str, str]:
@@ -261,7 +261,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
     OR MIN(bridge) != MAX(bridge)
-    OR MIN(plan_listen_count) != MAX(plan_listen_count)
+    OR MIN(plan_listen_rotations) != MAX(plan_listen_rotations)
 """
 
 
@@ -649,7 +649,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
     OR MIN(bridge) != MAX(bridge)
-    OR MIN(plan_listen_count) != MAX(plan_listen_count)
+    OR MIN(plan_listen_rotations) != MAX(plan_listen_rotations)
 )
 UPDATE fiscunit_staging
 SET error_message = 'Inconsistent fisc data'
@@ -799,8 +799,8 @@ WHERE error_message IS NULL
 GROUP BY fisc_title, offi_time
 ;
 """
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, plan_listen_count)
-SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(plan_listen_count)
+FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, plan_listen_rotations)
+SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(plan_listen_rotations)
 FROM fiscunit_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title
@@ -987,7 +987,7 @@ FISCWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_title, weekday_order, weekday_title FR
 FISCOFFI_FU1_SELECT_SQLSTR = (
     "SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = "
 )
-FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, plan_listen_count FROM fiscunit_agg WHERE fisc_title = "
+FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, plan_listen_rotations FROM fiscunit_agg WHERE fisc_title = "
 
 
 def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:

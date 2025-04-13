@@ -678,10 +678,10 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             exclude_cols=x_exclude_cols,
         )
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, plan_listen_count"""
+        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, plan_listen_rotations"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(plan_listen_count)
+SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(plan_listen_rotations)
 FROM {tablename}_staging
 WHERE error_message IS NULL
 GROUP BY {fisc_title_str()}
