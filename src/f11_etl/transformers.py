@@ -388,15 +388,6 @@ def get_events_dict_from_events_agg_file(cart_dir) -> dict[EventInt, FaceName]:
     return x_dict
 
 
-def get_cart_events_max_event_int(cart_dir: str) -> int:
-    events_file_path = create_cart_events_path(cart_dir)
-    if not os_path_exists(events_file_path):
-        return 0
-    events_df = pandas_read_excel(events_file_path)
-    max_event_id = events_df["event_int"].max()
-    return max_event_id if if_nan_return_None(max_event_id) else 0
-
-
 def cart_agg_single_to_pidgin_staging(
     pidgin_dimen: str, legitimate_events: set[EventInt], cart_dir: str
 ):
