@@ -198,7 +198,7 @@ class FiscUnit:
             respect_bit=self.respect_bit,
         )
 
-    def init_owner_keeps(self, owner_name: OwnerName):
+    def init_kick_and_plan(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
         x_hubunit.initialize_kick_gut_files()
         x_hubunit.initialize_plan_file(self.get_owner_gut_from_file(owner_name))
@@ -264,20 +264,19 @@ class FiscUnit:
     def generate_plan(self, owner_name: OwnerName) -> BudUnit:
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()
+        # if budunit has healers create plan from healers.
         if len(x_gut._healers_dict) > 0:
-            x_plan = self.generate_healers_authored_plan(owner_name, x_gut)
-        else:
-            x_plan = get_default_plan(x_gut)
-        x_plan = listen_to_debtors_roll_gut_plan(
+            return self.generate_healers_authored_plan(owner_name, x_gut)
+        # create budunit from debtors roll
+        return listen_to_debtors_roll_gut_plan(
             self.fisc_mstr_dir, self.fisc_title, owner_name
         )
-        return x_plan
 
     def generate_all_plans(self):
-        for x_owner_name in self._get_owner_folder_names():
-            self.init_owner_keeps(x_owner_name)
-            x_plan = self.generate_plan(x_owner_name)
-            save_plan_file(self.fisc_mstr_dir, x_plan)
+        for owner_name in self._get_owner_folder_names():
+            self.init_kick_and_plan(owner_name)
+            plan = self.generate_plan(owner_name)
+            save_plan_file(self.fisc_mstr_dir, plan)
 
     def get_plan_file_bud(self, owner_name: OwnerName) -> BudUnit:
         return open_plan_file(self.fisc_mstr_dir, self.fisc_title, owner_name)

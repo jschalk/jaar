@@ -185,13 +185,10 @@ def get_fisc_guts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
 
 def get_fisc_plans_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_fisc.get_owner_hubunits()
-    # for all owners get plan
     plan_dfs = []
-    for x_hubunit in owner_hubunits.values():
-        plan = open_plan_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_title, x_hubunit.owner_name
-        )
+    for x_owner_name in x_fisc._get_owner_folder_names():
+
+        plan = open_plan_file(x_fisc.fisc_mstr_dir, x_fisc.fisc_title, x_owner_name)
         plan.settle_bud()
         plan_df = get_bud_agenda_dataframe(plan)
         plan_dfs.append(plan_df)

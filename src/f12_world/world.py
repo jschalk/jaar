@@ -241,97 +241,59 @@ class WorldUnit:
 
     def calc_fisc_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
-        print(f"Starting files {count_dirs_files(mstr_dir)}")
         etl_create_deals_root_cells(mstr_dir)
-        print(f"{count_dirs_files(mstr_dir)} etl_create_deals_root_cells")
         etl_create_fisc_cell_trees(mstr_dir)
-        print(f"{count_dirs_files(mstr_dir)} etl_create_fisc_cell_trees")
         etl_set_cell_trees_found_facts(mstr_dir)
-        print(f"{count_dirs_files(mstr_dir)} etl_set_cell_trees_found_facts")
         etl_set_cell_trees_decrees(mstr_dir)
-        print(f"{count_dirs_files(mstr_dir)} etl_set_cell_trees_decrees")
         etl_set_cell_tree_cell_mandates(mstr_dir)
-        print(f"{count_dirs_files(mstr_dir)} etl_set_cell_tree_cell_mandates")
         etl_create_deal_mandate_ledgers(mstr_dir)
-        print(f"{count_dirs_files(mstr_dir)} etl_create_deal_mandate_ledgers")
 
     def mine_to_burdens(
         self, store_tracing_files: bool = False
     ):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         delete_dir(fisc_mstr_dir)
-        print(f"{fisc_mstr_dir=}")
         set_dir(fisc_mstr_dir)
-
-        # "mine_to_cart_staging step 00"),
-        # "cart_staging_to_cart_agg step 01"),
-        # "cart_agg_to_cart_events step 02"),
-        # "cart_events_to_events_log step 02.1"),
-        # "cart_events_log_to_events_agg step 02.2"),
-        # "set_events_from_events_agg_file step 03"),
-        # "cart_agg_to_pidgin_staging step 03.1"),
-        # "cart_pidgin_staging_to_agg step 03.2"),
-        # "cart_pidgin_agg_to_otz_face_dirs step 03.3"),
-        # "otz_face_pidgins_to_otz_event_pidgins step 03.4"),
-        # "otz_event_pidgins_csvs_to_otz_pidgin_jsons step 03.5"),
-        # "pidgin_jsons_inherit_younger_pidgins step 04"),
-        # "cart_agg_to_cart_valid step 04.1"),
-        # "cart_ideas_to_otz_face_ideas step 04.2"),
-        # "otz_face_ideas_to_otz_event_otx_ideas step 04.3"),
-        # "otz_event_ideas_to_inx_events 04.4"),
-        # "otz_inx_event_ideas_to_inz_faces 04.5"),
-        # "inz_face_ideas_to_csv_files step 05"),
-
-        mine_to_burdens_steps = [
-            (self.mine_to_cart_staging, "step 00.0"),
-            (self.cart_staging_to_cart_agg, "step 01.0"),
-            (self.cart_agg_to_cart_events, "step 02.0"),
-            (self.cart_events_to_events_log, "step 02.1"),
-            (self.cart_events_log_to_events_agg, "step 02.2"),
-            (self.set_events_from_events_agg_file, "step 03.0"),
-            (self.cart_agg_to_pidgin_staging, "step 03.1"),
-            (self.cart_pidgin_staging_to_agg, "step 03.2"),
-            (self.cart_pidgin_agg_to_otz_face_dirs, "step 03.3"),
-            (self.otz_face_pidgins_to_otz_event_pidgins, "step 03.4"),
-            (self.otz_event_pidgins_csvs_to_otz_pidgin_jsons, "step 03.5"),
-            (self.pidgin_jsons_inherit_younger_pidgins, "step 04.0"),
-            (self.cart_agg_to_cart_valid, "step 04.1"),
-            (self.cart_ideas_to_otz_face_ideas, "step 04.2"),
-            (self.otz_face_ideas_to_otz_event_otx_ideas, "step 04.3"),
-            (self.otz_event_ideas_to_inx_events, "step 04.4"),
-            (self.otz_inx_event_ideas_to_inz_faces, "step 04.5"),
-            (self.inz_face_ideas_to_csv_files, "step 05.0"),
-        ]
-
-        for etl_func, step_msg in mine_to_burdens_steps:
-            # if step_msg:
-            #     print(f"{step_msg} {count_dirs_files(self.worlds_dir)}")
-            etl_func()
 
         with sqlite3_connect(":memory:") as fisc_db_conn:
             cursor = fisc_db_conn.cursor()
+
+            self.mine_to_cart_staging()
+            self.cart_staging_to_cart_agg()
+            self.cart_agg_to_cart_events()
+            self.cart_events_to_events_log()
+            self.cart_events_log_to_events_agg()
+            self.set_events_from_events_agg_file()
+            self.cart_agg_to_pidgin_staging()
+            self.cart_pidgin_staging_to_agg()
+            self.cart_pidgin_agg_to_otz_face_dirs()
+            self.otz_face_pidgins_to_otz_event_pidgins()
+            self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()
+            self.pidgin_jsons_inherit_younger_pidgins()
+            self.cart_agg_to_cart_valid()
+            self.cart_ideas_to_otz_face_ideas()
+            self.otz_face_ideas_to_otz_event_otx_ideas()
+            self.otz_event_ideas_to_inx_events()
+            self.otz_inx_event_ideas_to_inz_faces()
+            self.inz_face_ideas_to_csv_files()
+
             self.inz_face_csv_files2idea_staging_tables(cursor)
             self.idea_staging_to_fisc_tables(cursor)
-            print(f"step 05.1 {count_dirs_files(self.worlds_dir)}")
-            # Save for reference, change be skipped
-            if store_tracing_files:
-                self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
-            print(f"step 05.2 {count_dirs_files(self.worlds_dir)}")
             self.fisc_agg_tables_to_fisc_jsons(cursor)
             self.fisc_agg_tables2fisc_ote1_agg(cursor)
             self.fisc_table2fisc_ote1_agg_csvs(cursor)
             self.fisc_ote1_agg_csvs2jsons()
-            print(f"step 06.0 {count_dirs_files(self.worlds_dir)}")
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
-        print(f"step 06.5 {count_dirs_files(self.worlds_dir)}")
-        self.event_bud_csvs_to_kick_json()
-        self.event_kick_json_to_event_inherited_budunits()
-        print(f"step 07 {count_dirs_files(self.worlds_dir)}")
-        self.event_inherited_budunits_to_fisc_gut()
-        self.fisc_gut_to_fisc_plan()
-        print(f"step 08 {count_dirs_files(self.worlds_dir)}")
-        self.calc_fisc_deal_acct_mandate_net_ledgers()
+
+            self.event_bud_csvs_to_kick_json()
+            self.event_kick_json_to_event_inherited_budunits()
+            self.event_inherited_budunits_to_fisc_gut()
+            self.fisc_gut_to_fisc_plan()
+            self.calc_fisc_deal_acct_mandate_net_ledgers()
+
+            if store_tracing_files:
+                self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):
         create_stance0001_file(self._fisc_mstr_dir)
