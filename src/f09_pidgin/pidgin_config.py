@@ -175,6 +175,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "parent_road": "RoadUnit",
         "penny": "float",
         "pick": "RoadUnit",
+        "plan_listen_rotations": "int",
         "pledge": "bool",
         "problem_bool": "bool",
         "quota": "int",

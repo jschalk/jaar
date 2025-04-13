@@ -181,8 +181,8 @@ def test_get_fisc_create_table_sqlstrs_ReturnsObj():
         )
         assert st_sqlstr == gen_dimen_stage_sqlstr
 
-        # print(f'{ag_table.upper()}_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
-        # print(f'{st_table.upper()}_SQLSTR= """{gen_dimen_stage_sqlstr}"""')
+        # print(f'CREATE_{ag_table.upper()}_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
+        # print(f'CREATE_{st_table.upper()}_SQLSTR= """{gen_dimen_stage_sqlstr}"""')
         # print(f'"{ag_table}": {ag_table.upper()}_SQLSTR,')
         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
 
@@ -654,7 +654,7 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             stage_tablename = f"{x_dimen}_staging"
             agg_tablename = f"{x_dimen}_agg"
 
-            generated_table2table_agg_insert_sqlstr = (
+            expected_table2table_agg_insert_sqlstr = (
                 create_table2table_agg_insert_query(
                     cursor,
                     src_table=stage_tablename,
@@ -666,9 +666,9 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             x_sqlstr = fisc_insert_agg_sqlstrs.get(x_dimen)
             # print(f'"{x_dimen}": BUD_AGG_INSERT_SQLSTR,')
             # print(
-            #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""'
+            #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
             # )
-            assert x_sqlstr == generated_table2table_agg_insert_sqlstr
+            assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
         generated_fiscunit_sqlstr = create_table2table_agg_insert_query(
             cursor,
@@ -678,10 +678,10 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             exclude_cols=x_exclude_cols,
         )
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge"""
+        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, plan_listen_rotations"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge)
+SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(plan_listen_rotations)
 FROM {tablename}_staging
 WHERE error_message IS NULL
 GROUP BY {fisc_title_str()}
@@ -721,7 +721,7 @@ def test_get_bud_insert_put_agg_from_staging_sqlstrs_ReturnsObj():
             stage_tablename = f"{x_dimen}_put_staging"
             agg_tablename = f"{x_dimen}_put_agg"
 
-            generated_table2table_agg_insert_sqlstr = (
+            expected_table2table_agg_insert_sqlstr = (
                 create_table2table_agg_insert_query(
                     cursor,
                     src_table=stage_tablename,
@@ -733,9 +733,9 @@ def test_get_bud_insert_put_agg_from_staging_sqlstrs_ReturnsObj():
             x_sqlstr = bud_insert_agg_sqlstrs.get(x_dimen)
             # print(f'"{x_dimen}": BUD_AGG_INSERT_SQLSTR,')
             # print(
-            #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{generated_table2table_agg_insert_sqlstr}"""'
+            #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
             # )
-            assert x_sqlstr == generated_table2table_agg_insert_sqlstr
+            assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
 def test_get_bud_insert_del_agg_from_staging_sqlstrs_ReturnsObj():
@@ -1052,6 +1052,7 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
         fiscweek_sql = create_select_query(cursor, fiscweek_agg, [], where_dict, True)
         fiscoffi_sql = create_select_query(cursor, fiscoffi_agg, [], where_dict, True)
         fiscunit_sql = create_select_query(cursor, fiscunit_agg, [], where_dict, True)
+        print(f"""FISCUNIT_FU1_SELECT_SQLSTR = "{fiscunit_sql}\"""")
         assert gen_fisccash_sqlstr == fisccash_sql
         assert gen_fiscdeal_sqlstr == fiscdeal_sql
         assert gen_fischour_sqlstr == fischour_sql

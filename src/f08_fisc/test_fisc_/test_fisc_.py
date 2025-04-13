@@ -4,11 +4,7 @@ from src.f01_road.finance import (
     default_respect_bit_if_None,
     filter_penny,
 )
-from src.f01_road.jaar_config import (
-    get_kicks_folder,
-    get_json_filename,
-    get_test_fisc_title,
-)
+from src.f01_road.jaar_config import get_kicks_folder, get_json_filename
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.deal import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
@@ -20,10 +16,15 @@ from src.f06_listen.hub_tool import (
     plan_file_exists,
 )
 from src.f06_listen.hubunit import hubunit_shop
-from src.f08_fisc.fisc import FiscUnit, fiscunit_shop
+from src.f08_fisc.fisc import FiscUnit, fiscunit_shop, DEFAULT_PLAN_LISTEN_COUNT
 from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 from pytest import raises as pytest_raises
+
+
+def test_DEFAULT_PLAN_LISTEN_COUNT_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert DEFAULT_PLAN_LISTEN_COUNT == 3
 
 
 def test_FiscUnit_Exists():
@@ -39,6 +40,7 @@ def test_FiscUnit_Exists():
     assert not accord_fisc.fund_coin
     assert not accord_fisc.respect_bit
     assert not accord_fisc.penny
+    assert not accord_fisc.plan_listen_rotations
     assert not accord_fisc.fisc_mstr_dir
     # Calculated fields
     assert not accord_fisc._offi_time_max
@@ -66,6 +68,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
     assert accord_fisc.penny == filter_penny()
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
+    assert accord_fisc.plan_listen_rotations == DEFAULT_PLAN_LISTEN_COUNT
     # Calculated fields
     assert accord_fisc._owners_dir != None
     assert accord_fisc._kicks_dir != None
@@ -94,6 +97,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     x_respect_bit = 9
     x_penny = 3
     a45_offi_times = {12, 15}
+    x_plan_listen_rotations = 888
 
     # WHEN
     accord_fisc = fiscunit_shop(
@@ -105,6 +109,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
         penny=x_penny,
+        plan_listen_rotations=x_plan_listen_rotations,
     )
 
     # THEN
@@ -113,6 +118,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     assert accord_fisc.respect_bit == x_respect_bit
     assert accord_fisc.penny == x_penny
     assert accord_fisc.offi_times == a45_offi_times
+    assert accord_fisc.plan_listen_rotations == x_plan_listen_rotations
 
 
 def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):

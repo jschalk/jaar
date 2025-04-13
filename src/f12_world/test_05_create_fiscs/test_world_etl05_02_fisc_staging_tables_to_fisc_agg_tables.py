@@ -60,6 +60,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_rotations
         )
         expected_row2 = (
             accord45_str,  # fisc_title
@@ -72,6 +73,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_rotations
         )
         assert fiscunit_agg_rows == [expected_row1, expected_row2]
 
