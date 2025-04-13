@@ -237,6 +237,7 @@ def fisc_build_from_df(
 
     fiscunit_dict = {}
     for index, row in br00000_df.iterrows():
+        print(f"{row=}")
         x_fisc_title = row["fisc_title"]
         x_timeline_config = {
             "c400_number": row["c400_number"],
@@ -257,6 +258,7 @@ def fisc_build_from_df(
             fund_coin=x_fund_coin,
             respect_bit=x_respect_bit,
             penny=x_penny,
+            plan_listen_count=row["plan_listen_count"],
         )
         fiscunit_dict[x_fiscunit.fisc_title] = x_fiscunit
         _add_dealunits_from_df(x_fiscunit, br00001_df)

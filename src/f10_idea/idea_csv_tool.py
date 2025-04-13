@@ -103,6 +103,7 @@ def _add_fiscunit_to_br00000_csv(
         str(x_fisc.penny),
         str(x_fisc.respect_bit),
         x_bridge,
+        str(x_fisc.plan_listen_count),
     ]
     x_csv += csv_delimiter.join(x_row)
     x_csv += "\n"

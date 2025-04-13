@@ -125,6 +125,9 @@
             "penny": {
                 "class_type": "float"
             },
+            "plan_listen_count": {
+                "class_type": "int"
+            },
             "respect_bit": {
                 "class_type": "float"
             },

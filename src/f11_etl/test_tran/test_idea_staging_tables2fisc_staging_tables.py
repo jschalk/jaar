@@ -118,6 +118,7 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_count
             None,  # note
         )
         expected_row1 = (
@@ -134,10 +135,11 @@ def test_idea_staging_tables2fisc_staging_tables_Scenario0_From_br00011_IdeaFile
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_count
             None,  # note
         )
         print(f"{fiscunit_db_rows[1]=}")
-        print(f"        {expected_row1=}")
+        print(f"      {expected_row1=}")
         assert fiscunit_db_rows[0] == expected_row0
         assert fiscunit_db_rows[1] == expected_row1
         assert fiscunit_db_rows == [expected_row0, expected_row1]
@@ -200,6 +202,7 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_count
             None,  # note
         )
         expected_row1 = (
@@ -216,10 +219,11 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_count
             None,  # note
         )
         print(f"{fiscunit_db_rows[1]=}")
-        print(f"        {expected_row1=}")
+        print(f"      {expected_row1=}")
         assert fiscunit_db_rows[0] == expected_row0
         assert fiscunit_db_rows[1] == expected_row1
         assert fiscunit_db_rows == [expected_row0, expected_row1]
@@ -285,6 +289,7 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_count
             None,  # note
         )
         expected_row1 = (
@@ -301,11 +306,12 @@ VALUES
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
             None,  # timeline_title
+            None,  # plan_listen_count
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
         print(f"{fiscunit_db_rows[1]=}")
-        print(f"        {expected_row1=}")
+        print(f"      {expected_row1=}")
         assert fiscunit_db_rows[0] == expected_row0
         assert fiscunit_db_rows[1] == expected_row1
         assert fiscunit_db_rows == [expected_row0, expected_row1]
@@ -381,6 +387,7 @@ VALUES
             a23_respect_bit,  # respect_bit
             # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
+            None,  # plan_listen_count
             None,  # note
         )
         expected_row1 = (
@@ -397,12 +404,13 @@ VALUES
             a23_respect_bit,  # respect_bit
             # a23_offi_time_max,  # _offi_time_max
             a23_bridge,  # bridge
+            None,  # plan_listen_count
             None,  # note
         )
         print(f"{fiscunit_db_rows[0]=}")
         print(f"{fiscunit_db_rows[1]=}")
-        print(f"        {expected_row0=}")
-        print(f"        {expected_row1=}")
+        print(f"      {expected_row0=}")
+        print(f"      {expected_row1=}")
         assert fiscunit_db_rows[0] == expected_row0
         assert fiscunit_db_rows[1] == expected_row1
         assert fiscunit_db_rows == [expected_row0, expected_row1]
@@ -829,10 +837,10 @@ VALUES
         unit_stage_csv_filename = x_fisc.unit_stage_csv_filename
         generated_fiscunit_csv = open_file(fiscs_dir, unit_stage_csv_filename)
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
 """
         print(f"   {generated_fiscunit_csv=}")
         print(f"{expected_fiscunit_csv_str=}")
@@ -891,10 +899,10 @@ VALUES
         unit_stage_csv_filename = x_fisc.unit_stage_csv_filename
         generated_fiscunit_csv = open_file(fiscs_dir, unit_stage_csv_filename)
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,,
+{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
 """
         print(f"   {generated_fiscunit_csv=}")
         print(f"{expected_fiscunit_csv_str=}")
@@ -952,6 +960,7 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
     a23_yr1_jan1_offset = 66
     a23_monthday_distortion = 77
     a23_timeline_title = "accord23_timeline"
+    a23_plan_listen_count = 6
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -963,8 +972,8 @@ def test_set_fisc_staging_error_message_Scenario0_fiscunit_WithNo_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")
@@ -1006,6 +1015,7 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
     a23_yr1_jan1_offset = 66
     a23_monthday_distortion = 77
     a23_timeline_title = "accord23_timeline"
+    a23_plan_listen_count = 900
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -1017,9 +1027,9 @@ def test_set_fisc_staging_error_message_Scenario1_fiscunit_Some_error_message(
         insert_staging_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_staging_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',NULL)
+  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
+, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_title}',{a23_plan_listen_count},NULL)
 ;
 """
         print(f"{insert_staging_sqlstr=}")

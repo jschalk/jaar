@@ -21,6 +21,9 @@
         "penny": {
             "otx_key": false
         },
+        "plan_listen_count": {
+            "otx_key": false
+        },
         "respect_bit": {
             "otx_key": false
         },

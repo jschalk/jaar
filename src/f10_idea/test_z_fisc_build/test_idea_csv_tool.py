@@ -66,7 +66,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
 
     # THEN
     expected_stance_csv_strs = {
-        "br00000": "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge\n",
+        "br00000": "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,plan_listen_count\n",
         "br00001": "fisc_title,owner_name,deal_time,quota,celldepth\n",
         "br00002": "fisc_title,owner_name,acct_name,tran_time,amount\n",
         "br00003": "fisc_title,cumlative_minute,hour_title\n",
@@ -143,6 +143,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()
+    # print(f"{br00000_df=}")
     br00001_df = get_ex2_br00001_df()
     br00002_df = get_ex2_br00002_df()
     br00003_df = get_ex2_br00003_df()
@@ -187,7 +188,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     gen_br00004_csv = x_csvs.get("br00004")
     gen_br00005_csv = x_csvs.get("br00005")
     # gen_br00006_csv = x_csvs.get("br00006")
-    expected_br00000_csv = ",,accord23,creg,7,440640,1,1,1,1,/\n"
+    expected_br00000_csv = ",,accord23,creg,7,440640,1,1,1,1,/,4\n"
     expected_br00001_csv = (
         ",,accord23,Bob,999,332,3\n,,accord23,Sue,777,445,3\n,,accord23,Yao,222,700,3\n"
     )
@@ -197,9 +198,9 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     expected_br00005_csv = ",,accord23,0,Wednesday\n,,accord23,1,Thursday\n,,accord23,2,Friday\n,,accord23,3,Saturday\n,,accord23,4,Sunday\n,,accord23,5,Monday\n,,accord23,6,Tuesday\n"
     # expected_br00006_csv = ",,accord23,0,Wednesday\n,,accord23,1,Thursday\n,,accord23,2,Friday\n,,accord23,3,Saturday\n,,accord23,4,Sunday\n,,accord23,5,Monday\n,,accord23,6,Tuesday\n"
 
-    print(f"      {br01_csv_header=}")
-    # print(f" {expected_br00006_csv=}")
-    # print(f"      {gen_br00006_csv=}")
+    # print(f"      {br01_csv_header=}")
+    # print(f" {expected_br00000_csv=}")
+    # print(f"      {gen_br00000_csv=}")
     assert gen_br00000_csv == f"{br00_csv_header}{expected_br00000_csv}"
     assert gen_br00001_csv == f"{br01_csv_header}{expected_br00001_csv}"
     assert gen_br00002_csv == f"{br02_csv_header}{expected_br00002_csv}"
@@ -274,8 +275,8 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
     generated_br00003_csv = x_ideabricks.get("br00003")
     generated_br00004_csv = x_ideabricks.get("br00004")
     generated_br00005_csv = x_ideabricks.get("br00005")
-    # print(f" {expected_br00005_csv=}")
-    # print(f"{generated_br00005_csv=}")
+    # print(f" {expected_br00000_csv=}")
+    # print(f"{generated_br00000_csv=}")
     assert generated_br00000_csv == expected_br00000_csv
     assert generated_br00001_csv == expected_br00001_csv
     assert generated_br00002_csv == expected_br00002_csv
