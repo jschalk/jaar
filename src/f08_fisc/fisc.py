@@ -264,14 +264,13 @@ class FiscUnit:
     def generate_plan(self, owner_name: OwnerName) -> BudUnit:
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()
+        # if budunit has healers create plan from healers.
         if len(x_gut._healers_dict) > 0:
-            x_plan = self.generate_healers_authored_plan(owner_name, x_gut)
-        else:
-            x_plan = get_default_plan(x_gut)
-            x_plan = listen_to_debtors_roll_gut_plan(
-                self.fisc_mstr_dir, self.fisc_title, owner_name
-            )
-        return x_plan
+            return self.generate_healers_authored_plan(owner_name, x_gut)
+        # create budunit from debtors roll
+        return listen_to_debtors_roll_gut_plan(
+            self.fisc_mstr_dir, self.fisc_title, owner_name
+        )
 
     def generate_all_plans(self):
         for owner_name in self._get_owner_folder_names():
