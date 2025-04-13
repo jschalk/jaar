@@ -28,7 +28,7 @@ def test_FiscUnit_generate_plan_Sets_planFile(env_dir_setup_cleanup):
     x_sue_plan_path = create_path(x_plan_dir, f"{sue_str}.json")
     print(f"        {x_sue_plan_path=}")
     assert os_path_exists(x_sue_plan_path) is False
-    a23_fisc.init_owner_keeps(sue_str)
+    a23_fisc.init_kick_and_plan(sue_str)
     assert os_path_exists(x_sue_plan_path)
 
     # WHEN
@@ -45,7 +45,7 @@ def test_FiscUnit_generate_plan_ReturnsRegeneratedObj(env_dir_setup_cleanup):
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
     sue_str = "Sue"
-    a23_fisc.init_owner_keeps(sue_str)
+    a23_fisc.init_kick_and_plan(sue_str)
     fisc_mstr_dir = get_test_fisc_mstr_dir()
     before_sue_bud = open_plan_file(fisc_mstr_dir, a23_str, sue_str)
     bob_str = "Bob"
@@ -68,7 +68,7 @@ def test_FiscUnit_generate_plan_SetsCorrectFileWithout_healerlink(
     fisc_mstr_dir = get_test_fisc_mstr_dir()
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, True)
     bob_str = "Bob"
-    a23_fisc.init_owner_keeps(bob_str)
+    a23_fisc.init_kick_and_plan(bob_str)
     before_bob_plan = a23_fisc.generate_plan(bob_str)
     sue_str = "Sue"
     assert before_bob_plan.acct_exists(sue_str) is False
@@ -94,7 +94,7 @@ def test_FiscUnit_generate_plan_SetsFileWith_healerlink(
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, True)
 
     bob_str = "Bob"
-    a23_fisc.init_owner_keeps(bob_str)
+    a23_fisc.init_kick_and_plan(bob_str)
     after_bob_plan = a23_fisc.generate_plan(bob_str)
     assert after_bob_plan.acct_exists(bob_str) is False
 
@@ -127,9 +127,9 @@ def test_FiscUnit_generate_all_plans_SetsCorrectFiles(
 
     bob_str = "Bob"
     sue_str = "Sue"
-    a23_fisc.init_owner_keeps(bob_str)
+    a23_fisc.init_kick_and_plan(bob_str)
     fisc_mstr_dir = a23_fisc.fisc_mstr_dir
-    a23_fisc.init_owner_keeps(sue_str)
+    a23_fisc.init_kick_and_plan(sue_str)
     bob_gut_bud = a23_fisc.generate_plan(bob_str)
     sue_gut_bud = a23_fisc.generate_plan(sue_str)
 

@@ -12,17 +12,17 @@ from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir
 def create_example_fisc2() -> FiscUnit:
     # ESTABLISH
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
-    accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
+    a45_str = "accord45"
+    accord_fisc = fiscunit_shop(a45_str, x_fisc_mstr_dir, in_memory_journal=True)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_fisc.init_owner_keeps(yao_str)
-    accord_fisc.init_owner_keeps(wei_str)
-    accord_fisc.init_owner_keeps(zia_str)
-    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
-    wei_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, wei_str)
-    zia_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, zia_str)
+    accord_fisc.init_kick_and_plan(yao_str)
+    accord_fisc.init_kick_and_plan(wei_str)
+    accord_fisc.init_kick_and_plan(zia_str)
+    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, yao_str)
+    wei_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, wei_str)
+    zia_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, zia_str)
 
     yao_gut_bud.set_credor_respect(101)
     wei_gut_bud.set_credor_respect(75)
@@ -62,9 +62,9 @@ def create_example_fisc2() -> FiscUnit:
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     save_gut_file(x_fisc_mstr_dir, wei_gut_bud)
     save_gut_file(x_fisc_mstr_dir, zia_gut_bud)
-    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, yao_str, None)
-    wei_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, wei_str, None)
-    zia_hubunit = hubunit_shop(x_fisc_mstr_dir, accord45_str, zia_str, None)
+    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, a45_str, yao_str, None)
+    wei_hubunit = hubunit_shop(x_fisc_mstr_dir, a45_str, wei_str, None)
+    zia_hubunit = hubunit_shop(x_fisc_mstr_dir, a45_str, zia_str, None)
     yao_hubunit.create_gut_treasury_db_files()
     wei_hubunit.create_gut_treasury_db_files()
     zia_hubunit.create_gut_treasury_db_files()
@@ -77,20 +77,20 @@ def create_example_fisc2() -> FiscUnit:
 
 def create_example_fisc3() -> FiscUnit:
     # ESTABLISH
-    accord45_str = "accord45"
+    a45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        accord45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
+        a45_str, get_test_fisc_mstr_dir(), in_memory_journal=True
     )
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_fisc.init_owner_keeps(yao_str)
-    accord_fisc.init_owner_keeps(wei_str)
-    accord_fisc.init_owner_keeps(zia_str)
+    accord_fisc.init_kick_and_plan(yao_str)
+    accord_fisc.init_kick_and_plan(wei_str)
+    accord_fisc.init_kick_and_plan(zia_str)
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
-    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
-    wei_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, wei_str)
-    zia_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, zia_str)
+    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, yao_str)
+    wei_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, wei_str)
+    zia_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, zia_str)
 
     casa_str = "casa"
     casa_road = yao_gut_bud.make_l1_road(casa_str)
@@ -123,17 +123,17 @@ def create_example_fisc3() -> FiscUnit:
 def create_example_fisc4() -> FiscUnit:
     # ESTABLISH
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
-    accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
+    a45_str = "accord45"
+    accord_fisc = fiscunit_shop(a45_str, x_fisc_mstr_dir, in_memory_journal=True)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_fisc.init_owner_keeps(yao_str)
-    accord_fisc.init_owner_keeps(wei_str)
-    accord_fisc.init_owner_keeps(zia_str)
-    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
-    wei_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, wei_str)
-    zia_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, zia_str)
+    accord_fisc.init_kick_and_plan(yao_str)
+    accord_fisc.init_kick_and_plan(wei_str)
+    accord_fisc.init_kick_and_plan(zia_str)
+    yao_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, yao_str)
+    wei_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, wei_str)
+    zia_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, zia_str)
 
     casa_str = "casa"
     casa_road = yao_gut_bud.make_l1_road(casa_str)
@@ -177,21 +177,20 @@ def create_example_fisc4() -> FiscUnit:
     yao_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     wei_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     zia_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    dallas_str = "dallas"
-    dallas_road = yao_gut_bud.make_road(texas_road, dallas_str)
-    dallas_healerlink = healerlink_shop({yao_str, zia_str})
-    dallas_item = itemunit_shop(dallas_str, healerlink=dallas_healerlink)
-    elpaso_str = "el paso"
-    elpaso_road = yao_gut_bud.make_road(texas_road, elpaso_str)
-    elpaso_healerlink = healerlink_shop({yao_str})
-    elpaso_item = itemunit_shop(elpaso_str, healerlink=elpaso_healerlink)
-
-    yao_gut_bud.set_item(dallas_item, texas_road)
-    yao_gut_bud.set_item(elpaso_item, texas_road)
-    wei_gut_bud.set_item(dallas_item, texas_road)
-    wei_gut_bud.set_item(elpaso_item, texas_road)
-    zia_gut_bud.set_item(dallas_item, texas_road)
-    zia_gut_bud.set_item(elpaso_item, texas_road)
+    # dallas_str = "dallas"
+    # dallas_road = yao_gut_bud.make_road(texas_road, dallas_str)
+    # dallas_healerlink = healerlink_shop({yao_str, zia_str})
+    # dallas_item = itemunit_shop(dallas_str, healerlink=dallas_healerlink)
+    # elpaso_str = "el paso"
+    # elpaso_road = yao_gut_bud.make_road(texas_road, elpaso_str)
+    # elpaso_healerlink = healerlink_shop({yao_str})
+    # # elpaso_item = itemunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    # yao_gut_bud.set_item(dallas_item, texas_road)
+    # yao_gut_bud.set_item(elpaso_item, texas_road)
+    # wei_gut_bud.set_item(dallas_item, texas_road)
+    # wei_gut_bud.set_item(elpaso_item, texas_road)
+    # zia_gut_bud.set_item(dallas_item, texas_road)
+    # zia_gut_bud.set_item(elpaso_item, texas_road)
 
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     save_gut_file(x_fisc_mstr_dir, wei_gut_bud)
