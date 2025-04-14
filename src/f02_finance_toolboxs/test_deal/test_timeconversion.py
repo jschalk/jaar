@@ -1,4 +1,4 @@
-from src.f01_word_logic.road import get_default_fisc_title
+from src.a01_word_logic.road import get_default_fisc_title
 from src.f02_finance_toolboxs.deal import TimeConversion, timeconversion_shop
 
 

@@ -13,7 +13,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_row_count,
     save_to_split_csvs,
 )
-from src.f01_word_logic.road import FaceName, EventInt, OwnerName, FiscTitle
+from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTitle
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f04_pack.atom import budatom_shop
 from src.f04_pack.atom_config import get_bud_dimens

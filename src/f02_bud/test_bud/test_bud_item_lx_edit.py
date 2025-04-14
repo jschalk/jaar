@@ -4,7 +4,7 @@ from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
-from src.f01_word_logic.road import get_default_fisc_title as root_title
+from src.a01_word_logic.road import get_default_fisc_title as root_title
 
 
 def test_BudUnit_edit_item_title_FailsWhenItemDoesNotExist():

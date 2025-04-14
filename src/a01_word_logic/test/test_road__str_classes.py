@@ -1,4 +1,4 @@
-from src.f01_word_logic.road import (
+from src.a01_word_logic.road import (
     TitleUnit,
     NameUnit,
     LabelUnit,
@@ -96,7 +96,7 @@ def test_LabelUnit_exists():
 def test_GroupLabel_exists():
     bikers_group_label = GroupLabel(";bikers")
     assert bikers_group_label is not None
-    assert str(type(bikers_group_label)).find("src.f01_word_logic.road.GroupLabel") > 0
+    assert str(type(bikers_group_label)).find("src.a01_word_logic.road.GroupLabel") > 0
 
 
 def test_TitleUnit_exists():

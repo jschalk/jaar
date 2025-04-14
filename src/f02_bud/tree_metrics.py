@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.dict_toolbox import get_empty_dict_if_None, get_0_if_None
-from src.f01_word_logic.road import GroupLabel
+from src.a01_word_logic.road import GroupLabel
 from src.f02_bud.reason_item import ReasonUnit, RoadUnit
 from src.f02_bud.group import AwardLink
 from dataclasses import dataclass

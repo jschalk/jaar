@@ -15,7 +15,7 @@ from src.f02_finance_toolboxs.finance_config import (
     TimeLinePoint,
     default_fund_pool,
 )
-from src.f01_word_logic.road import (
+from src.a01_word_logic.road import (
     AcctName,
     OwnerName,
     FiscTitle,

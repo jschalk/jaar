@@ -1,4 +1,4 @@
-from src.f01_word_logic.road import default_bridge_if_None
+from src.a01_word_logic.road import default_bridge_if_None
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from src.f02_bud.group import awardlink_shop

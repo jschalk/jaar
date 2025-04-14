@@ -1,4 +1,4 @@
-from src.f01_word_logic.road import create_road
+from src.a01_word_logic.road import create_road
 from src.f09_pidgin.map import roadmap_shop
 
 
