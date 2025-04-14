@@ -11,7 +11,7 @@ from src.f00_data_toolboxs.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.f01_road.finance import (
+from src.f01_road.finance_config import (
     default_respect_bit_if_None,
     filter_penny,
     PennyNum,

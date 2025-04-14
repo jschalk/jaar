@@ -1,6 +1,6 @@
 from src.f00_data_toolboxs.dict_toolbox import create_csv
 from src.f01_road.allot import allot_scale
-from src.f01_road.finance import FundNum, get_net, RespectNum
+from src.f01_road.finance_config import FundNum, get_net, RespectNum
 from src.f01_road.road import AcctName, FiscTitle, RoadUnit
 from src.f02_bud.acct import AcctUnit
 from src.f02_bud.group import MemberShip, AwardLink

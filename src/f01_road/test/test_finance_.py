@@ -1,4 +1,4 @@
-from src.f01_road.finance import (
+from src.f01_road.finance_config import (
     TimeLinePoint,
     FundCoin,
     FundNum,

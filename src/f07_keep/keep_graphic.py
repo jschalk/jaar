@@ -1,5 +1,7 @@
 from src.f00_data_toolboxs.plotly_toolbox import conditional_fig_show
-from src.f01_road.finance import default_money_magnitude as default_point_magnitude
+from src.f01_road.finance_config import (
+    default_money_magnitude as default_point_magnitude,
+)
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 

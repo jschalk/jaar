@@ -1,4 +1,4 @@
-from src.f01_road.finance import default_fund_pool
+from src.f01_road.finance_config import default_fund_pool
 from src.f01_road.deal import (
     quota_str,
     deal_time_str,

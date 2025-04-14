@@ -1,4 +1,4 @@
-from src.f01_road.finance import default_respect_num, validate_respect_num
+from src.f01_road.finance_config import default_respect_num, validate_respect_num
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f06_listen.basis_buds import (

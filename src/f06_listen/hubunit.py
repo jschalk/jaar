@@ -12,7 +12,7 @@ from src.f00_data_toolboxs.file_toolbox import (
 )
 from src.f00_data_toolboxs.dict_toolbox import get_empty_set_if_None
 from src.f00_data_toolboxs.db_toolbox import sqlite_connection
-from src.f01_road.finance import (
+from src.f01_road.finance_config import (
     default_fund_coin_if_None,
     validate_fund_pool,
     default_respect_bit_if_None,

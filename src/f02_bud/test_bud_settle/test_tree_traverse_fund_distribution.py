@@ -1,4 +1,4 @@
-from src.f01_road.finance import default_fund_pool
+from src.f01_road.finance_config import default_fund_pool
 from src.f01_road.road import RoadUnit
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.group import awardlink_shop, awardline_shop
