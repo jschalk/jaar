@@ -6,7 +6,7 @@ from src.f01_road.finance_config import (
     validate_respect_num,
 )
 from src.f02_bud.bud import budunit_shop, BudUnit
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     get_default_fisc_title as root_title,
     default_bridge_if_None,
 )

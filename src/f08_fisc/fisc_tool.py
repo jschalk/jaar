@@ -7,7 +7,7 @@ from src.f00_data_toolboxs.file_toolbox import (
 from src.f01_road.allot import allot_nested_scale
 from src.f01_road.finance_config import TimeLinePoint
 from src.f01_road.deal import FiscTitle
-from src.f01_road.road import TitleUnit, OwnerName
+from src.f01_word_logic.road import TitleUnit, OwnerName
 from src.f01_road.finance_config import FundNum
 from src.f02_bud.reason_item import get_dict_from_factunits
 from src.f06_listen.cell import CellUnit, cellunit_shop

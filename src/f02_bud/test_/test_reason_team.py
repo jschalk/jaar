@@ -1,4 +1,4 @@
-from src.f01_road.road import GroupLabel
+from src.f01_word_logic.road import GroupLabel
 from src.f02_bud.reason_team import (
     TeamUnit,
     teamunit_shop,

@@ -1,5 +1,5 @@
 from src.f01_road.allot import allot_scale
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     get_ancestor_roads,
     RoadUnit,
     get_root_title_from_road,

@@ -1,4 +1,4 @@
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     RoadUnit,
     create_road,
     create_road_from_titles,

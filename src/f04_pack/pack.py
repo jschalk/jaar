@@ -6,7 +6,12 @@ from src.f00_data_toolboxs.file_toolbox import (
     get_json_filename,
 )
 from src.f00_data_toolboxs.dict_toolbox import get_json_from_dict, get_dict_from_json
-from src.f01_road.road import FaceName, OwnerName, FiscTitle, get_default_fisc_title
+from src.f01_word_logic.road import (
+    FaceName,
+    OwnerName,
+    FiscTitle,
+    get_default_fisc_title,
+)
 from src.f02_bud.bud import BudUnit
 from src.f04_pack.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.f04_pack.delta import (

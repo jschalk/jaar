@@ -1,4 +1,4 @@
-from src.f01_road.road import create_road, FiscTitle
+from src.f01_word_logic.road import create_road, FiscTitle
 from src.f02_bud.bud_tool import bud_itemunit_str
 from src.f04_pack.atom_config import atom_insert, parent_road_str, item_title_str
 from src.f04_pack.atom import budatom_shop, BudAtom

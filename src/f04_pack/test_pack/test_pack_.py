@@ -1,6 +1,6 @@
 from src.f00_data_toolboxs.dict_toolbox import x_is_json
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f01_road.road import get_default_fisc_title as root_title
+from src.f01_word_logic.road import get_default_fisc_title as root_title
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f02_bud.bud import budunit_shop

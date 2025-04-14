@@ -1,5 +1,5 @@
 from src.f00_data_toolboxs.file_toolbox import delete_dir
-from src.f01_road.road import WorldID, get_default_world_id
+from src.f01_word_logic.road import WorldID, get_default_world_id
 from pytest import fixture as pytest_fixture
 
 

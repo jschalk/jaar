@@ -27,7 +27,7 @@ from src.f01_road.deal import (
     brokerunit_shop,
     get_dealunit_from_json,
 )
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     OwnerName,
     FiscTitle,
     TitleUnit,

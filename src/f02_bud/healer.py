@@ -1,5 +1,5 @@
 from src.f00_data_toolboxs.dict_toolbox import get_empty_set_if_None
-from src.f01_road.road import GroupLabel
+from src.f01_word_logic.road import GroupLabel
 from dataclasses import dataclass
 
 

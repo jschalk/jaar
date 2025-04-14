@@ -1,4 +1,4 @@
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     create_road,
     get_default_fisc_title as root_title,
 )

@@ -20,7 +20,7 @@ from src.f01_road.finance_config import (
     FundNum,
     validate_respect_num,
 )
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     get_parent_road,
     is_sub_road,
     all_roadunits_between,

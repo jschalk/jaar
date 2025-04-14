@@ -6,7 +6,7 @@ from src.f00_data_toolboxs.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.f01_road.allot import allot_scale
-from src.f01_road.road import AcctName, OwnerName
+from src.f01_word_logic.road import AcctName, OwnerName
 from src.f07_keep.rivercycle import (
     RiverGrade,
     rivergrade_shop,

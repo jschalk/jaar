@@ -15,7 +15,7 @@ from src.f00_data_toolboxs.db_toolbox import (
     create_table_from_columns,
 )
 from src.f00_data_toolboxs.dict_toolbox import set_in_nested_dict
-from src.f01_road.road import FaceName, EventInt
+from src.f01_word_logic.road import FaceName, EventInt
 from src.f09_pidgin.map import MapCore
 from src.f09_pidgin.pidgin import (
     PidginUnit,

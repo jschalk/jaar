@@ -31,7 +31,7 @@ from src.f01_road.deal import (
     tranbook_shop,
     get_tranbook_from_dict,
 )
-from src.f01_road.road import (
+from src.f01_word_logic.road import (
     default_bridge_if_None,
     OwnerName,
     RoadUnit,
