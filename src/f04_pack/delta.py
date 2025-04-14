@@ -13,8 +13,8 @@ from src.a01_word_logic.road import (
     LabelUnit,
 )
 from src.f02_bud.reason_item import FactUnit, ReasonUnit
-from src.f02_bud.acct import MemberShip, AcctName, AcctUnit
-from src.f02_bud.group import MemberShip
+from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
+from src.a03_group_logic.group import MemberShip
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit, budunit_shop
 from src.f04_pack.atom_config import CRUD_command

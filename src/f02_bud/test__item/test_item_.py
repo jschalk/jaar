@@ -5,7 +5,7 @@ from src.a01_word_logic.road import (
     default_bridge_if_None,
 )
 from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.group import awardlink_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.reason_team import teamunit_shop
 from src.f02_bud.origin import originunit_shop
 from src.f02_bud.item import ItemUnit, itemunit_shop

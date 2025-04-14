@@ -1,4 +1,4 @@
-from src.f02_bud.group import groupunit_shop
+from src.a03_group_logic.group import groupunit_shop
 from src.f02_bud.bud import budunit_shop
 
 

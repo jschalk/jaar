@@ -1,7 +1,7 @@
 from src.a01_word_logic.road import default_bridge_if_None
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
-from src.f02_bud.group import awardlink_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.reason_item import reasonunit_shop, factunit_shop
 from src.f02_bud.bud import budunit_shop

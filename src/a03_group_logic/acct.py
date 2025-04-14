@@ -14,7 +14,7 @@ from src.a02_finance_toolboxs.finance_config import (
     default_respect_bit_if_None,
     RespectNum,
 )
-from src.f02_bud.group import (
+from src.a03_group_logic.group import (
     GroupLabel,
     MemberShip,
     memberships_get_from_dict,

@@ -1,5 +1,5 @@
-from src.f02_bud.group import membership_shop
-from src.f02_bud.acct import (
+from src.a03_group_logic.group import membership_shop
+from src.a03_group_logic.acct import (
     acctunit_shop,
     acctunits_get_from_json,
     acctunit_get_from_dict,

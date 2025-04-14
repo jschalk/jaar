@@ -1,5 +1,5 @@
 from contextlib import suppress as contextlib_suppress
-from src.f02_bud.acct import AcctName
+from src.a03_group_logic.acct import AcctName
 from src.a00_data_toolboxs.dict_toolbox import get_empty_dict_if_None
 from dataclasses import dataclass
 

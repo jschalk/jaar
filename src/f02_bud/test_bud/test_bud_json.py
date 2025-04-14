@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.dict_toolbox import x_is_json, get_dict_from_json
 from src.a01_word_logic.road import default_bridge_if_None
-from src.f02_bud.group import awardlink_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.healer import healerlink_shop
 from src.f02_bud.reason_team import teamunit_shop
 from src.f02_bud.reason_item import factunit_shop

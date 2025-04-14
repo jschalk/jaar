@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road, get_default_fisc_title as root_title
-from src.f02_bud.acct import acctunit_shop
+from src.a03_group_logic.acct import acctunit_shop
 from src.f02_bud.bud_tool import (
     budunit_str,
     bud_acctunit_str,

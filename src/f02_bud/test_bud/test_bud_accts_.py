@@ -1,4 +1,4 @@
-from src.f02_bud.acct import acctunit_shop
+from src.a03_group_logic.acct import acctunit_shop
 from src.f02_bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy

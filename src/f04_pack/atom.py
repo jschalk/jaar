@@ -17,8 +17,8 @@ from src.a01_word_logic.road import (
     is_titleunit,
 )
 from src.f02_bud.reason_item import factunit_shop
-from src.f02_bud.acct import acctunit_shop
-from src.f02_bud.group import awardlink_shop
+from src.a03_group_logic.acct import acctunit_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import BudUnit
 from src.f02_bud.bud_tool import bud_attr_exists, bud_get_obj

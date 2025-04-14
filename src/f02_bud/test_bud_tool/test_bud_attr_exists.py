@@ -1,4 +1,4 @@
-from src.f02_bud.group import awardlink_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.reason_item import factunit_shop, reasonunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import (

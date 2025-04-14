@@ -4,8 +4,8 @@ from src.a01_word_logic.road import (
     create_road,
     default_bridge_if_None,
 )
-from src.f02_bud.group import membership_shop
-from src.f02_bud.group import groupunit_shop, GroupUnit
+from src.a03_group_logic.group import membership_shop
+from src.a03_group_logic.group import groupunit_shop, GroupUnit
 from pytest import raises as pytest_raises
 
 

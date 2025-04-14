@@ -52,7 +52,7 @@ from src.f02_bud.reason_item import (
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
-from src.f02_bud.group import (
+from src.a03_group_logic.group import (
     AwardHeir,
     AwardLink,
     awardlinks_get_from_dict,

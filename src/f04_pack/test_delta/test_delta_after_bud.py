@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import get_terminus_title, get_parent_road
-from src.f02_bud.group import awardlink_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.reason_item import factunit_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop

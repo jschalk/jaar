@@ -1,4 +1,5 @@
-from src.f02_bud.group import (
+from src.a00_data_toolboxs.dict_toolbox import x_is_json, get_json_from_dict
+from src.a03_group_logic.group import (
     GroupCore,
     GroupLabel,
     membership_shop,
@@ -13,8 +14,6 @@ from src.f02_bud.group import (
     AwardHeir,
     awardheir_shop,
 )
-from src.a00_data_toolboxs.dict_toolbox import x_is_json, get_json_from_dict
-from pytest import raises as pytest_raises
 
 
 def test_GroupLabel_exists():
