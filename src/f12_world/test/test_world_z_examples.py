@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.f02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_title_str
 from src.f04_pack.atom_config import acct_name_str
 from src.f10_idea.idea_db_tool import upsert_sheet
 from src.f11_etl.idea_collector import get_all_excel_ideasheets

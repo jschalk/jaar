@@ -10,7 +10,7 @@ from src.a00_data_toolboxs.dict_toolbox import (
     exists_in_nested_dict,
     del_in_nested_dict,
 )
-from src.f02_finance_toolboxs.finance_config import (
+from src.a02_finance_toolboxs.finance_config import (
     FundNum,
     TimeLinePoint,
     default_fund_pool,

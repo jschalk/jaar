@@ -1,4 +1,4 @@
-from src.f02_finance_toolboxs.finance_config import (
+from src.a02_finance_toolboxs.finance_config import (
     default_respect_bit_if_None,
     filter_penny,
     default_fund_coin_if_None,

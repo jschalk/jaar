@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
 from src.a00_data_toolboxs.db_toolbox import db_table_exists, get_row_count
-from src.f02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
 from src.f04_pack.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f10_idea.idea_db_tool import get_pragma_table_fetchall
 from src.f11_etl.fisc_etl_tool import (

@@ -1,4 +1,4 @@
-from src.f02_finance_toolboxs.allot import allot_scale
+from src.a02_finance_toolboxs.allot import allot_scale
 from src.a01_word_logic.road import (
     get_ancestor_roads,
     RoadUnit,

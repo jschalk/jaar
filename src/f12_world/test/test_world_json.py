@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.f02_finance_toolboxs.deal import timeconversion_shop
+from src.a02_finance_toolboxs.deal import timeconversion_shop
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 

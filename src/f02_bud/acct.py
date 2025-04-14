@@ -9,8 +9,8 @@ from src.a01_word_logic.road import (
     validate_titleunit,
     is_titleunit,
 )
-from src.f02_finance_toolboxs.allot import allot_scale
-from src.f02_finance_toolboxs.finance_config import (
+from src.a02_finance_toolboxs.allot import allot_scale
+from src.a02_finance_toolboxs.finance_config import (
     default_respect_bit_if_None,
     RespectNum,
 )

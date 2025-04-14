@@ -1,4 +1,4 @@
-from src.f02_finance_toolboxs.deal import (
+from src.a02_finance_toolboxs.deal import (
     quota_str,
     dealunit_shop,
     BrokerUnit,

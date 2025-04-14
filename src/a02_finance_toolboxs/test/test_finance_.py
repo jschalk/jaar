@@ -1,4 +1,4 @@
-from src.f02_finance_toolboxs.finance_config import (
+from src.a02_finance_toolboxs.finance_config import (
     TimeLinePoint,
     FundCoin,
     FundNum,

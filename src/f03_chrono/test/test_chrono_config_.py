@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import save_file
 from src.a00_data_toolboxs.dict_toolbox import get_json_from_dict
-from src.f02_finance_toolboxs.finance_config import TimeLinePoint
+from src.a02_finance_toolboxs.finance_config import TimeLinePoint
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import (
     get_creg_config,

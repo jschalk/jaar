@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
 from src.a00_data_toolboxs.db_toolbox import get_row_count, db_table_exists
-from src.f02_finance_toolboxs.deal import bridge_str, owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import bridge_str, owner_name_str, fisc_title_str
 from src.f03_chrono.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
