@@ -1,5 +1,4 @@
 from src.f00_instrument.file import delete_dir, create_path
-from src.f01_road.jaar_config import get_test_fisc_title as fisc_title
 from src.f04_kick.kick import init_kick_id
 from src.f06_listen.hub_tool import create_gut_path
 from src.f06_listen.hub_tool import save_gut_file, open_gut_file, gut_file_exists
@@ -21,7 +20,7 @@ def test_HubUnit_default_gut_bud_ReturnsObj():
     pfour_float = 0.4
     sue_hubunit = hubunit_shop(
         env_dir(),
-        fisc_title(),
+        "accord23",
         sue_str,
         keep_road=None,
         bridge=slash_str,
@@ -50,18 +49,18 @@ def test_HubUnit_create_initial_kick_files_from_default_CorrectlySavesKickUnitFi
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     init_kick_filename = sue_hubunit.kick_filename(init_kick_id())
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, init_kick_filename)
     assert os_path_exists(init_kick_file_path) is False
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
 
     # WHEN
     sue_hubunit._create_initial_kick_files_from_default()
 
     # THEN
     assert os_path_exists(init_kick_file_path)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
 
 
 def test_HubUnit_create_gut_from_kicks_CreatesgutFileFromkickFiles(
@@ -69,20 +68,20 @@ def test_HubUnit_create_gut_from_kicks_CreatesgutFileFromkickFiles(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     init_kick_filename = sue_hubunit.kick_filename(init_kick_id())
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, init_kick_filename)
     sue_hubunit._create_initial_kick_files_from_default()
     assert os_path_exists(init_kick_file_path)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
 
     # WHEN
     sue_hubunit._create_gut_from_kicks()
 
     # THEN
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str)
+    assert gut_file_exists(env_dir(), "accord23", sue_str)
     static_sue_gut = sue_hubunit._merge_any_kicks(sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     assert gut_bud.get_dict() == static_sue_gut.get_dict()
 
 
@@ -91,20 +90,20 @@ def test_HubUnit_create_initial_kick_and_gut_files_CreateskickFilesAndgutFile(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     init_kick_filename = sue_hubunit.kick_filename(init_kick_id())
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, init_kick_filename)
     assert os_path_exists(init_kick_file_path) is False
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
 
     # WHEN
     sue_hubunit._create_initial_kick_and_gut_files()
 
     # THEN
     assert os_path_exists(init_kick_file_path)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str)
+    assert gut_file_exists(env_dir(), "accord23", sue_str)
     static_sue_gut = sue_hubunit._merge_any_kicks(sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     assert gut_bud.get_dict() == static_sue_gut.get_dict()
 
 
@@ -113,13 +112,13 @@ def test_HubUnit_create_initial_kick_files_from_gut_SavesOnlykickFiles(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue_gut_bud = sue_hubunit.default_gut_bud()
     bob_str = "Bob"
     sue_gut_bud.add_acctunit(bob_str)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
     save_gut_file(env_dir(), sue_gut_bud)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str)
+    assert gut_file_exists(env_dir(), "accord23", sue_str)
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, f"{init_kick_id()}.json")
     assert os_path_exists(init_kick_file_path) is False
 
@@ -136,8 +135,8 @@ def test_HubUnit_initialize_kick_gut_files_CorrectlySavesgutFileAndkickFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str, respect_bit=seven_int)
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, f"{init_kick_id()}.json")
     delete_dir(sue_hubunit._kicks_dir)
     assert os_path_exists(init_kick_file_path) is False
@@ -146,8 +145,8 @@ def test_HubUnit_initialize_kick_gut_files_CorrectlySavesgutFileAndkickFile(
     sue_hubunit.initialize_kick_gut_files()
 
     # THEN
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
-    assert gut_bud.fisc_title == fisc_title()
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
+    assert gut_bud.fisc_title == "accord23"
     assert gut_bud.owner_name == sue_str
     assert gut_bud.respect_bit == seven_int
     assert os_path_exists(init_kick_file_path)
@@ -159,12 +158,12 @@ def test_HubUnit_initialize_kick_gut_files_CorrectlySavesOnlygutFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_kick_gut_files()
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str)
-    gut_path = create_gut_path(env_dir(), fisc_title(), sue_str)
+    assert gut_file_exists(env_dir(), "accord23", sue_str)
+    gut_path = create_gut_path(env_dir(), "accord23", sue_str)
     delete_dir(gut_path)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str) is False
+    assert gut_file_exists(env_dir(), "accord23", sue_str) is False
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, f"{init_kick_id()}.json")
     assert os_path_exists(init_kick_file_path)
 
@@ -172,8 +171,8 @@ def test_HubUnit_initialize_kick_gut_files_CorrectlySavesOnlygutFile(
     sue_hubunit.initialize_kick_gut_files()
 
     # THEN
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
-    assert gut_bud.fisc_title == fisc_title()
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
+    assert gut_bud.fisc_title == "accord23"
     assert gut_bud.owner_name == sue_str
     assert gut_bud.respect_bit == seven_int
     assert os_path_exists(init_kick_file_path)
@@ -185,13 +184,13 @@ def test_HubUnit_initialize_kick_gut_files_CorrectlySavesOnlykickFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str, respect_bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_kick_gut_files()
-    sue_gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    sue_gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     bob_str = "Bob"
     sue_gut_bud.add_acctunit(bob_str)
     save_gut_file(env_dir(), sue_gut_bud)
-    assert gut_file_exists(env_dir(), fisc_title(), sue_str)
+    assert gut_file_exists(env_dir(), "accord23", sue_str)
     init_kick_file_path = create_path(sue_hubunit._kicks_dir, f"{init_kick_id()}.json")
     delete_dir(sue_hubunit._kicks_dir)
     assert os_path_exists(init_kick_file_path) is False
@@ -200,7 +199,7 @@ def test_HubUnit_initialize_kick_gut_files_CorrectlySavesOnlykickFile(
     sue_hubunit.initialize_kick_gut_files()
 
     # THEN
-    assert sue_gut_bud.fisc_title == fisc_title()
+    assert sue_gut_bud.fisc_title == "accord23"
     assert sue_gut_bud.owner_name == sue_str
     assert sue_gut_bud.respect_bit == seven_int
     assert sue_gut_bud.acct_exists(bob_str)
@@ -212,10 +211,10 @@ def test_HubUnit_append_kicks_to_gut_file_AddskicksTogutFile(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue_hubunit.initialize_kick_gut_files()
     sue_hubunit.save_kick_file(sue_2budatoms_kickunit())
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     print(f"{gut_bud.fisc_title=}")
     sports_str = "sports"
     sports_road = gut_bud.make_l1_road(sports_str)

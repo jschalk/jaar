@@ -1,6 +1,5 @@
-from src.f01_road.jaar_config import get_test_fisc_title as fisc_title
 from src.f01_road.road import create_road
-from src.f06_listen.hub_tool import save_plan_file, open_plan_file
+from src.f06_listen.hub_tool import save_plan_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f06_listen.examples.listen_env import (
@@ -58,7 +57,7 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
 ):
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(fisc_title(), nation_str)
+    nation_road = create_road("accord23", nation_str)
     iowa_road = create_road(nation_road, "Iowa")
     a23_str = "accord23"
 

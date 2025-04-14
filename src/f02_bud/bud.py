@@ -20,7 +20,6 @@ from src.f01_road.finance import (
     FundNum,
     validate_respect_num,
 )
-from src.f01_road.jaar_config import max_tree_traverse_default
 from src.f01_road.road import (
     get_parent_road,
     is_sub_road,
@@ -44,6 +43,7 @@ from src.f01_road.road import (
     FiscTitle,
     roadunit_valid_dir_path,
 )
+from src.f02_bud.bud_config import max_tree_traverse_default
 from src.f02_bud.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.f02_bud.group import (
     AwardLink,

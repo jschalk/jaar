@@ -15,6 +15,10 @@ EVENT_ALL_KICK_FILENAME = "all_kick.json"
 EVENT_EXPRESSED_KICK_FILENAME = "expressed_kick.json"
 
 
+def treasury_filename() -> str:
+    return "treasury.db"
+
+
 def gut_str() -> str:
     return "gut"
 

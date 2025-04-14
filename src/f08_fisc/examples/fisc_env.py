@@ -1,6 +1,9 @@
-from src.f01_road.jaar_config import get_test_fisc_mstr_dir
 from src.f00_instrument.file import delete_dir
 from pytest import fixture as pytest_fixture
+
+
+def get_test_fisc_mstr_dir():
+    return "src/f08_fisc/examples/fisc_mstr"
 
 
 @pytest_fixture()

@@ -3,7 +3,6 @@
 # from src.f08_fisc.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.f08_fisc.fisc import fiscunit_shop
 # from src.f08_fisc.examples.fisc_env import (
-#     get_test_fisc_title,
 #     env_dir_setup_cleanup,
 # )
 # from src.f00_instrument.sqlite import get_row_count

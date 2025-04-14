@@ -1,4 +1,3 @@
-from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
@@ -34,7 +33,10 @@ from src.f09_pidgin.map import (
     titlemap_shop,
     roadmap_shop,
 )
-from src.f09_pidgin.pidgin_config import get_pidgin_args_class_types
+from src.f09_pidgin.pidgin_config import (
+    get_pidgin_args_class_types,
+    default_unknown_word_if_None,
+)
 from src.f09_pidgin.pidgin import (
     PidginUnit,
     pidginunit_shop,

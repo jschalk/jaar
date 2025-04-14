@@ -12,7 +12,6 @@ from src.f00_instrument.db_toolbox import (
     check_connection,
     check_table_column_existence,
 )
-from src.f01_road.jaar_config import get_fisc_title_if_None
 from src.f08_fisc.fisc import FiscUnit, fiscunit_shop
 from src.f08_fisc.examples.fisc_env import (
     get_test_fisc_mstr_dir,
@@ -113,7 +112,7 @@ def test_FiscUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH create fisc
-    x_fisc = FiscUnit(get_fisc_title_if_None(), get_test_fisc_mstr_dir())
+    x_fisc = FiscUnit("accord23", get_test_fisc_mstr_dir())
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_fisc.get_journal_conn())
@@ -128,7 +127,7 @@ def test_FiscUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 
 def test_fisc_set_fisc_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # ESTABLISH create fisc
-    x_fisc = fiscunit_shop(get_fisc_title_if_None(), get_test_fisc_mstr_dir())
+    x_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
 
     # WHEN
     x_fisc._set_fisc_dirs(in_memory_journal=True)

@@ -5,7 +5,6 @@ from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     set_in_nested_dict,
 )
-from src.f01_road.jaar_config import get_json_filename
 from src.f01_road.allot import allot_scale
 from src.f01_road.road import AcctName, OwnerName
 from src.f07_keep.rivercycle import (

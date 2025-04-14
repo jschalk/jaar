@@ -35,6 +35,8 @@ from src.f09_pidgin.pidgin_config import (
     map_label_str,
     map_title_str,
     map_road_str,
+    default_unknown_word,
+    default_unknown_word_if_None,
 )
 from os import getcwd as os_getcwd
 
@@ -184,3 +186,20 @@ def test_get_quick_pidgens_column_ref_ReturnsObj():
     assert map_road_str() in set(get_quick_pidgens_column_ref().keys())
     assert len(get_quick_pidgens_column_ref().keys()) == 4
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs
+
+
+def test_default_unknown_word_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert default_unknown_word() == "UNKNOWN"
+
+
+def test_default_unknown_word_if_None_ReturnsObj():
+    # ESTABLISH
+    unknown33_str = "unknown33"
+    x_nan = float("nan")
+
+    # WHEN / THEN
+    assert default_unknown_word_if_None() == default_unknown_word()
+    assert default_unknown_word_if_None(None) == default_unknown_word()
+    assert default_unknown_word_if_None(unknown33_str) == unknown33_str
+    assert default_unknown_word_if_None(x_nan) == default_unknown_word()

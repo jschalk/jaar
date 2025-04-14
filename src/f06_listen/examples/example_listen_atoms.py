@@ -1,4 +1,3 @@
-from src.f01_road.jaar_config import get_fisc_title_if_None
 from src.f01_road.road import create_road, FiscTitle
 from src.f02_bud.bud_tool import (
     budunit_str,
@@ -21,7 +20,8 @@ from src.f04_kick.delta import buddelta_shop, BudDelta
 
 
 def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> BudAtom:
-    fisc_title = get_fisc_title_if_None(fisc_title)
+    if not fisc_title:
+        fisc_title = "accord23"
     sports_str = "sports"
     x_dimen = bud_itemunit_str()
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
@@ -31,7 +31,8 @@ def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> BudAtom:
 
 
 def get_atom_example_itemunit_ball(fisc_title: FiscTitle = None) -> BudAtom:
-    fisc_title = get_fisc_title_if_None(fisc_title)
+    if not fisc_title:
+        fisc_title = "accord23"
     sports_str = "sports"
     sports_road = create_road(fisc_title, sports_str)
     ball_str = "basketball"
@@ -43,7 +44,8 @@ def get_atom_example_itemunit_ball(fisc_title: FiscTitle = None) -> BudAtom:
 
 
 def get_atom_example_itemunit_knee(fisc_title: FiscTitle = None) -> BudAtom:
-    fisc_title = get_fisc_title_if_None(fisc_title)
+    if not fisc_title:
+        fisc_title = "accord23"
     sports_str = "sports"
     sports_road = create_road(fisc_title, sports_str)
     knee_str = "knee"
@@ -61,7 +63,8 @@ def get_atom_example_itemunit_knee(fisc_title: FiscTitle = None) -> BudAtom:
 
 
 def get_atom_example_factunit_knee(fisc_title: FiscTitle = None) -> BudAtom:
-    fisc_title = get_fisc_title_if_None(fisc_title)
+    if not fisc_title:
+        fisc_title = "accord23"
     sports_str = "sports"
     sports_road = create_road(fisc_title, sports_str)
     ball_str = "basketball"
