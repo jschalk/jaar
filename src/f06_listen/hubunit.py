@@ -493,8 +493,7 @@ class HubUnit:
         save_file(self.jobs_dir(), x_filename, x_bud.get_json())
 
     def initialize_plan_file(self, gut: BudUnit):
-        if not plan_file_exists(self.fisc_mstr_dir, self.fisc_title, self.owner_name):
-            save_plan_file(self.fisc_mstr_dir, get_default_plan(gut))
+        save_plan_file(self.fisc_mstr_dir, get_default_plan(gut))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))

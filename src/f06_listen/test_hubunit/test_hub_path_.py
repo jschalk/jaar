@@ -10,8 +10,8 @@ from src.f06_listen.hub_path import (
     CELL_MANDATE_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
-    EVENT_ALL_Pack_FILENAME,
-    EVENT_EXPRESSED_Pack_FILENAME,
+    EVENT_ALL_PACK_FILENAME,
+    EVENT_EXPRESSED_PACK_FILENAME,
     gut_str,
     plan_str,
     create_fisc_dir_path,
@@ -20,6 +20,7 @@ from src.f06_listen.hub_path import (
     create_fisc_ote1_json_path,
     fisc_agenda_list_report_path,
     create_fisc_owners_dir_path,
+    create_owner_dir_path,
     create_deals_dir_path,
     create_deal_dir_path,
     create_dealunit_json_path,
@@ -135,6 +136,23 @@ def test_create_fisc_owners_dir_path_ReturnObj():
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
     expected_owners_dir = create_path(accord23_dir, "owners")
     assert gen_owners_dir == expected_owners_dir
+
+
+def test_create_owner_dir_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    sue_str = "Sue"
+
+    # WHEN
+    sue_dir = create_owner_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, accord23_str)
+    owners_dir = create_path(accord23_dir, "owners")
+    expected_sue_dir = create_path(owners_dir, sue_str)
+    assert sue_dir == expected_sue_dir
 
 
 def test_create_deals_dir_path_ReturnObj():
@@ -439,7 +457,7 @@ def test_create_event_all_pack_path_ReturnObj():
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
     expected_a23_bob_e3_all_pack_path = create_path(
-        a23_bob_e3_dir, EVENT_ALL_Pack_FILENAME
+        a23_bob_e3_dir, EVENT_ALL_PACK_FILENAME
     )
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_pack_path
 
@@ -464,7 +482,7 @@ def test_create_event_expressed_pack_path_ReturnObj():
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
     expected_a23_bob_e3_expressed_pack_path = create_path(
-        a23_bob_e3_dir, EVENT_EXPRESSED_Pack_FILENAME
+        a23_bob_e3_dir, EVENT_EXPRESSED_PACK_FILENAME
     )
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_pack_path
 

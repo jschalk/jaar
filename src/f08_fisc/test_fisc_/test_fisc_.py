@@ -170,7 +170,9 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
     assert accord_fisc._owners_dir == create_path(accord_fisc._fisc_dir, "owners")
 
 
-def test_FiscUnit_init_pack_and_plan_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
+def test_FiscUnit_set_init_pack_and_plan_CorrectlySetsDirAndFiles(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord45_str = "accord45"
@@ -189,7 +191,7 @@ def test_FiscUnit_init_pack_and_plan_CorrectlySetsDirAndFiles(env_dir_setup_clea
     assert not plan_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
     # WHEN
-    accord_fisc.init_pack_and_plan(sue_str)
+    accord_fisc.set_init_pack_and_plan(sue_str)
 
     # THEN
     print(f"{fisc_mstr_dir=}")
@@ -202,7 +204,7 @@ def test_FiscUnit_get_owner_gut_from_file_ReturnsObj(env_dir_setup_cleanup):
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
-    accord_fisc.init_pack_and_plan(sue_str)
+    accord_fisc.set_init_pack_and_plan(sue_str)
     bob_str = "Bob"
     sue_gut = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
     sue_gut.add_acctunit(bob_str)
@@ -225,8 +227,8 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
-    accord_fisc.init_pack_and_plan(sue_str)
-    accord_fisc.init_pack_and_plan(yao_str)
+    accord_fisc.set_init_pack_and_plan(sue_str)
+    accord_fisc.set_init_pack_and_plan(yao_str)
     sue_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
     yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
 
@@ -304,8 +306,8 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert len(accord_fisc.get_owner_hubunits()) == 0
 
     # WHEN
-    accord_fisc.init_pack_and_plan(sue_str)
-    accord_fisc.init_pack_and_plan(yao_str)
+    accord_fisc.set_init_pack_and_plan(sue_str)
+    accord_fisc.set_init_pack_and_plan(yao_str)
     accord_all_owners = accord_fisc.get_owner_hubunits()
 
     # THEN
