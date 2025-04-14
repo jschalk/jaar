@@ -7,8 +7,11 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_owners_dir_path,
     create_cell_json_path,
 )
-from src.f08_fisc.fisc import fiscunit_shop, _get_ote1_max_past_event_int
-from src.f08_fisc.examples.fisc_env import env_dir_setup_cleanup, get_test_fisc_mstr_dir
+from src.a15_fisc_logic.fisc import fiscunit_shop, _get_ote1_max_past_event_int
+from src.a15_fisc_logic.examples.fisc_env import (
+    env_dir_setup_cleanup,
+    get_test_fisc_mstr_dir,
+)
 from os.path import exists as os_path_exists
 
 

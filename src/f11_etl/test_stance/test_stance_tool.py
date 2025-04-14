@@ -17,11 +17,11 @@ from src.a08_bud_atom_logic.atom_config import (
     respect_bit_str,
 )
 from src.a12_hub_tools.hub_path import create_fisc_json_path, create_gut_path
-from src.f08_fisc.fisc import (
+from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f08_fisc.fisc_config import fiscunit_str
+from src.a15_fisc_logic.fisc_config import fiscunit_str
 from src.f10_idea.idea_db_tool import get_sheet_names
 from src.f10_idea.idea_csv_tool import (
     create_init_stance_idea_brick_csv_strs,

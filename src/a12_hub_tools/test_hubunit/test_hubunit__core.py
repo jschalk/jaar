@@ -60,7 +60,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fisc_mstr_dir = "src/f08_fisc/examples"
+    x_fisc_mstr_dir = "src/a15_fisc_logic/examples"
     x_fisc_title = "accord45"
     sue_str = "Sue"
     x_bridge = "/"

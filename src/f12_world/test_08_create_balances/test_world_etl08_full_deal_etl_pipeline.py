@@ -12,7 +12,10 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_json_path,
     create_fisc_ote1_json_path,
 )
-from src.f08_fisc.fisc import fiscunit_shop, get_from_dict as fiscunit_get_from_dict
+from src.a15_fisc_logic.fisc import (
+    fiscunit_shop,
+    get_from_dict as fiscunit_get_from_dict,
+)
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.example_worlds import (
     get_bob_mop_with_reason_budunit_example,

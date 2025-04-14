@@ -3,7 +3,7 @@ from src.a06_bud_logic.report import (
     get_bud_agenda_dataframe,
 )
 from src.a12_hub_tools.hub_tool import open_gut_file, open_plan_file
-from src.f08_fisc.fisc import FiscUnit
+from src.a15_fisc_logic.fisc import FiscUnit
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
 

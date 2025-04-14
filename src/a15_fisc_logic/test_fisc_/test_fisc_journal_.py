@@ -12,8 +12,8 @@ from src.a00_data_toolboxs.db_toolbox import (
     check_connection,
     check_table_column_existence,
 )
-from src.f08_fisc.fisc import FiscUnit, fiscunit_shop
-from src.f08_fisc.examples.fisc_env import (
+from src.a15_fisc_logic.fisc import FiscUnit, fiscunit_shop
+from src.a15_fisc_logic.examples.fisc_env import (
     get_test_fisc_mstr_dir,
     env_dir_setup_cleanup,
 )
@@ -134,7 +134,9 @@ def test_fisc_set_fisc_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
 
     # THEN
     # grab config.json
-    config_dict = open_json(dest_dir="src/f08_fisc", filename="journal_db_check.json")
+    config_dict = open_json(
+        dest_dir="src/a15_fisc_logic", filename="journal_db_check.json"
+    )
     tables_dict = get_from_nested_dict(config_dict, ["tables"])
     print(f"{tables_dict=}")
 

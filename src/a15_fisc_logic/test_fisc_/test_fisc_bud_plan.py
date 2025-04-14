@@ -14,8 +14,11 @@ from src.a12_hub_tools.hub_tool import (
     gut_file_exists,
     plan_file_exists,
 )
-from src.f08_fisc.fisc import fiscunit_shop
-from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
+from src.a15_fisc_logic.fisc import fiscunit_shop
+from src.a15_fisc_logic.examples.fisc_env import (
+    get_test_fisc_mstr_dir,
+    env_dir_setup_cleanup,
+)
 
 
 def test_FiscUnit_generate_plan_ReturnsObj_Scenario1(env_dir_setup_cleanup):

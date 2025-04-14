@@ -7,7 +7,7 @@ from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
     validate_timeline_config,
 )
-from src.f08_fisc.fisc import fiscunit_shop
+from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.f10_idea.idea import (
     _add_cashpurchases_from_df,
     _add_dealunits_from_df,

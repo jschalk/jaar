@@ -29,7 +29,7 @@ from src.a08_bud_atom_logic.atom_config import (
     class_type_str,
     get_allowed_class_types,
 )
-from src.f08_fisc.fisc_config import (
+from src.a15_fisc_logic.fisc_config import (
     config_file_dir,
     get_fisc_config_filename,
     get_fisc_config_dict,
@@ -64,7 +64,7 @@ def test_get_fisc_config_filename_ReturnsObj():
 
 def test_config_file_dir_ReturnsObj() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    assert config_file_dir() == create_path(src_dir, "f08_fisc")
+    assert config_file_dir() == create_path(src_dir, "a15_fisc_logic")
 
 
 def test_get_fisc_config_dict_ReturnsObj():

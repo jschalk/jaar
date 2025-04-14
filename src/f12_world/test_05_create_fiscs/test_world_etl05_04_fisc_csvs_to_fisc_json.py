@@ -17,11 +17,11 @@ from src.a08_bud_atom_logic.atom_config import (
     respect_bit_str,
 )
 from src.a12_hub_tools.hub_path import create_fisc_json_path
-from src.f08_fisc.fisc import (
+from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.f08_fisc.fisc_config import fiscunit_str
+from src.a15_fisc_logic.fisc_config import fiscunit_str
 from src.f11_etl.transformers import (
     create_fisc_tables,
     etl_fisc_agg_tables_to_fisc_jsons,

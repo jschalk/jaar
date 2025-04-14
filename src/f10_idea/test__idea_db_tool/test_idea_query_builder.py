@@ -9,7 +9,7 @@ from src.a08_bud_atom_logic.atom_config import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.f08_fisc.fisc_config import amount_str
+from src.a15_fisc_logic.fisc_config import amount_str
 from src.f10_idea.idea_config import get_idea_config_dict
 from src.f10_idea.idea_db_tool import (
     create_idea_sorted_table,

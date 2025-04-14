@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_test_fisc_mstr_dir():
-    return "src/f08_fisc/examples/fisc_mstr"
+    return "src/a15_fisc_logic/examples/fisc_mstr"
 
 
 @pytest_fixture()

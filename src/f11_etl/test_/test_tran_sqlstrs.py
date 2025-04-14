@@ -40,7 +40,7 @@ from src.a08_bud_atom_logic.atom_config import (
     get_delete_key_name,
 )
 from src.a10_fund_metric.fund_metric_config import get_fund_metric_config_dict
-from src.f08_fisc.fisc_config import (
+from src.a15_fisc_logic.fisc_config import (
     get_fisc_dimens,
     fiscunit_str,
     fisc_cashbook_str,

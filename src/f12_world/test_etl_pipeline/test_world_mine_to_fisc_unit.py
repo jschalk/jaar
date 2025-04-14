@@ -23,7 +23,7 @@ from src.a12_hub_tools.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate,
     create_fisc_ote1_csv_path,
 )
-from src.f08_fisc.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
 from src.f10_idea.idea_db_tool import upsert_sheet
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import env_dir_setup_cleanup

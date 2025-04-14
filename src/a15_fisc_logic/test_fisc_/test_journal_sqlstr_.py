@@ -8,7 +8,7 @@ from src.a08_bud_atom_logic.atom_config import (
     road_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.f08_fisc.journal_sqlstr import (
+from src.a15_fisc_logic.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
     get_atom_hx_table_insert_sqlstr,

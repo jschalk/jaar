@@ -53,7 +53,7 @@ def get_fisc_config_filename() -> str:
 
 def config_file_dir() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "f08_fisc")
+    return create_path(src_dir, "a15_fisc_logic")
 
 
 # def fiscunit_str()-> str: return "fiscunit"

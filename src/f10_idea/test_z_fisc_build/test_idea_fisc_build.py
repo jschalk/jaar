@@ -4,7 +4,7 @@ from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
     get_default_timeline_config_dict,
 )
-from src.f08_fisc.fisc import fiscunit_shop
+from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.f10_idea.idea import fisc_build_from_df
 from src.f10_idea.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
 from src.f10_idea.examples.idea_df_examples import (

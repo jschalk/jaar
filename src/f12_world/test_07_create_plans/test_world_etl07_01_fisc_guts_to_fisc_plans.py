@@ -5,7 +5,7 @@ from src.a12_hub_tools.hub_path import (
     create_gut_path,
     create_plan_path,
 )
-from src.f08_fisc.fisc import fiscunit_shop
+from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import env_dir_setup_cleanup
 from os.path import exists as os_path_exists

@@ -21,7 +21,7 @@ from src.a08_bud_atom_logic.atom_config import (
     road_str,
     team_tag_str,
 )
-from src.f08_fisc.fisc_config import (
+from src.a15_fisc_logic.fisc_config import (
     get_fisc_args_class_types,
     weekday_title_str,
     month_title_str,

@@ -62,7 +62,7 @@ from src.a13_bud_listen_logic.listen import (
     listen_to_debtors_roll_gut_plan,
     create_job_file_from_duty_file,
 )
-from src.f08_fisc.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
+from src.a15_fisc_logic.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
 from copy import deepcopy as copy_deepcopy
@@ -463,7 +463,7 @@ def _get_ote1_max_past_event_int(
 
 
 def get_test_fisc_mstr_dir():
-    return "src/f08_fisc/examples/fisc_mstr"
+    return "src/a15_fisc_logic/examples/fisc_mstr"
 
 
 def fiscunit_shop(

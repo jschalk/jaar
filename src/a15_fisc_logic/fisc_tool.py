@@ -31,7 +31,7 @@ from src.a12_hub_tools.hub_tool import (
     create_cell_acct_mandate_ledger_json,
 )
 from src.a12_hub_tools.fact_tool import get_nodes_with_weighted_facts
-from src.f08_fisc.fisc import get_from_dict as fiscunit_get_from_dict
+from src.a15_fisc_logic.fisc import get_from_dict as fiscunit_get_from_dict
 from os import walk as os_walk, sep as os_sep
 from os.path import exists as os_path_exists, join as os_path_join
 from copy import copy as copy_copy

@@ -80,7 +80,7 @@ from src.a10_fund_metric.fund_metric_config import (
     get_all_fund_metric_args,
     get_fund_metric_args_sqlite_datatype_dict,
 )
-from src.f08_fisc.fisc_config import (
+from src.a15_fisc_logic.fisc_config import (
     get_fisc_args_dimen_mapping,
     get_fisc_config_dict,
     get_fisc_dimens,

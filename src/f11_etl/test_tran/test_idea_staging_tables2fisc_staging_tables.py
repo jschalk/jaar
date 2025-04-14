@@ -27,7 +27,7 @@ from src.a08_bud_atom_logic.atom_config import (
     respect_bit_str,
     event_int_str,
 )
-from src.f08_fisc.fisc_config import (
+from src.a15_fisc_logic.fisc_config import (
     fisc_cashbook_str,
     fisc_dealunit_str,
     fisc_timeline_hour_str,

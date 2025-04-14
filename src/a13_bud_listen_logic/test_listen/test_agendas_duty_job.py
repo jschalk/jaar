@@ -26,7 +26,6 @@ from src.a13_bud_listen_logic.examples.example_listen import (
     get_example_zia_speaker,
     get_example_bob_speaker,
 )
-from os.path import exists as os_path_exists
 
 
 def test_listen_to_agenda_duty_job_agenda_AddsTasksToJob_BudWhenNo_teamlinkIsSet(

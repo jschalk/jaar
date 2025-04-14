@@ -10,8 +10,8 @@ from src.a08_bud_atom_logic.atom_config import (
     respect_bit_str,
 )
 from src.a12_hub_tools.hub_path import create_fisc_json_path
-from src.f08_fisc.fisc import get_from_json as fisc_get_from_json, fiscunit_shop
-from src.f08_fisc.fisc_config import (
+from src.a15_fisc_logic.fisc import get_from_json as fisc_get_from_json, fiscunit_shop
+from src.a15_fisc_logic.fisc_config import (
     fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
