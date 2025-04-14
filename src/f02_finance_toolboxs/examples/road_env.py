@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_road_examples_dir():
-    return "src/_road/examples"
+    return "src/f00_data_toolboxs/examples"
 
 
 def get_road_temp_env_dir():
