@@ -49,7 +49,7 @@ class C400Constants:
 
 
 def get_c400_constants() -> C400Constants:
-    c400_constants_path = create_path("src/f03_chrono/", "c400_constants.json")
+    c400_constants_path = create_path("src/a07_calendar_logic/", "c400_constants.json")
     c400_dict = open_json(c400_constants_path)
     return C400Constants(
         day_length=c400_dict.get(f"{day_str()}_length"),
@@ -593,7 +593,7 @@ def chronounit_shop(x_budunit: BudUnit, time_range_root_road: str, x_min: int):
 
 def config_file_dir() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "f03_chrono")
+    return create_path(src_dir, "a07_calendar_logic")
 
 
 def get_default_timeline_config_filename() -> str:

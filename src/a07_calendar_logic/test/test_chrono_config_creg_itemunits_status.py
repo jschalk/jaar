@@ -1,6 +1,6 @@
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.f03_chrono.examples.chrono_examples import (
+from src.a07_calendar_logic.examples.chrono_examples import (
     get_creg_min_from_dt,
     add_time_creg_itemunit,
     get_cregtime_str,
@@ -8,7 +8,7 @@ from src.f03_chrono.examples.chrono_examples import (
     get_thu,
     creg_weekday_itemunits,
 )
-from src.f03_chrono.chrono import (
+from src.a07_calendar_logic.chrono import (
     time_str,
     day_str,
     days_str,

@@ -2,7 +2,7 @@ from src.a00_data_toolboxs.file_toolbox import open_json
 from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
 from src.a05_item_logic.item import ItemUnit
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
-from src.f03_chrono.chrono import (
+from src.a07_calendar_logic.chrono import (
     create_weekday_itemunits,
     add_newtimeline_itemunit,
     new_timeline_itemunit,
@@ -20,7 +20,7 @@ from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scat
 
 
 def chrono_examples_dir() -> str:
-    return "src/f03_chrono/examples"
+    return "src/a07_calendar_logic/examples"
 
 
 def creg_str() -> str:

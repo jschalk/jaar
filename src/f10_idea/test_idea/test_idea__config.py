@@ -21,7 +21,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_itemunit_str,
     budunit_str,
 )
-from src.f03_chrono.chrono import (
+from src.a07_calendar_logic.chrono import (
     c400_number_str,
     monthday_distortion_str,
     timeline_title_str,

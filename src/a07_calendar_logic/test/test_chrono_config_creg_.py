@@ -3,7 +3,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import reasonunit_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.f03_chrono.chrono import (
+from src.a07_calendar_logic.chrono import (
     time_str,
     year_str,
     get_year_road,
@@ -24,7 +24,7 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
     get_min_from_dt,
 )
-from src.f03_chrono.examples.chrono_examples import (
+from src.a07_calendar_logic.examples.chrono_examples import (
     add_time_creg_itemunit,
     add_time_five_itemunit,
     get_creg_min_from_dt,

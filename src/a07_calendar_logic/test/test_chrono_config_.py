@@ -2,7 +2,7 @@ from src.a00_data_toolboxs.file_toolbox import save_file
 from src.a00_data_toolboxs.dict_toolbox import get_json_from_dict
 from src.a02_finance_toolboxs.finance_config import TimeLinePoint
 from src.a06_bud_logic.bud import budunit_shop
-from src.f03_chrono.examples.chrono_examples import (
+from src.a07_calendar_logic.examples.chrono_examples import (
     get_creg_config,
     get_five_config,
     get_squirt_config,
@@ -10,7 +10,7 @@ from src.f03_chrono.examples.chrono_examples import (
     get_example_timeline_config,
     five_str,
 )
-from src.f03_chrono.chrono import (
+from src.a07_calendar_logic.chrono import (
     C400Constants,
     get_c400_constants,
     day_length,
