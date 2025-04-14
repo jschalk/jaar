@@ -1,4 +1,4 @@
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
 from src.f04_pack.atom_config import acct_name_str

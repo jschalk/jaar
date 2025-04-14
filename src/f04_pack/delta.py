@@ -15,7 +15,7 @@ from src.a01_word_logic.road import (
 from src.a04_reason_logic.reason_item import FactUnit, ReasonUnit
 from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
 from src.a03_group_logic.group import MemberShip
-from src.f02_bud.item import ItemUnit
+from src.a05_item_logic.item import ItemUnit
 from src.f02_bud.bud import BudUnit, budunit_shop
 from src.f04_pack.atom_config import CRUD_command
 from src.f04_pack.atom import (

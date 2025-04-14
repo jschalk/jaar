@@ -1,5 +1,5 @@
 from src.a04_reason_logic.reason_item import factunit_shop, factunit_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_1Task_1CE0MinutesReason_1Fact,

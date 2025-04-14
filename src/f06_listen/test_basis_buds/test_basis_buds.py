@@ -2,7 +2,7 @@ from src.a02_finance_toolboxs.finance_config import (
     default_respect_num,
     validate_respect_num,
 )
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f06_listen.basis_buds import (
     create_empty_bud,

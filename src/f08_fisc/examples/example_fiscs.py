@@ -1,6 +1,6 @@
 from src.a01_word_logic.road import create_road
-from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.healer import healerlink_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop, FactUnit
 from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f06_listen.hub_tool import save_gut_file, open_gut_file

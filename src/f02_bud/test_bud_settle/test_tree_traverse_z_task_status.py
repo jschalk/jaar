@@ -2,14 +2,14 @@ from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
 from src.a02_finance_toolboxs.finance_config import default_fund_pool
 from src.f02_bud.bud_graphics import display_itemtree
 from src.f02_bud.bud import budunit_shop
-from src.f02_bud.healer import healerlink_shop
+from src.a05_item_logic.healer import healerlink_shop
 from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_with7amCleanTableReason,
     budunit_v001,
     from_list_get_active,
 )
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
     reasonunit_shop,

@@ -9,7 +9,7 @@ from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels,
 )
 from src.f02_bud.bud import BudUnit, budunit_shop
-from src.f02_bud.item import itemunit_shop, ItemUnit
+from src.a05_item_logic.item import itemunit_shop, ItemUnit
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
 

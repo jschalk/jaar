@@ -8,7 +8,7 @@ from src.a04_reason_logic.reason_item import (
     factunit_shop,
 )
 from src.a04_reason_logic.reason_team import teamunit_shop, teamheir_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 
 
 def test_ItemUnit_clear_all_acct_cred_debt_ClearsCorrectly():

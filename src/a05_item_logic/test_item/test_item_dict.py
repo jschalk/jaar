@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import get_default_fisc_title as root_title, create_road
-from src.f02_bud.healer import healerlink_shop
+from src.a05_item_logic.healer import healerlink_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import (
     reasonunit_shop,
@@ -8,8 +8,8 @@ from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
 )
 from src.a04_reason_logic.reason_team import teamunit_shop
-from src.f02_bud.origin import originunit_shop
-from src.f02_bud.item import itemunit_shop, get_obj_from_item_dict
+from src.a05_item_logic.origin import originunit_shop
+from src.a05_item_logic.item import itemunit_shop, get_obj_from_item_dict
 
 
 def test_get_obj_from_item_dict_ReturnsObj():

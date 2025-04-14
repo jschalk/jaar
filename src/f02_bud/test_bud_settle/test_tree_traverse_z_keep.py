@@ -1,6 +1,6 @@
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
-from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.healer import healerlink_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from pytest import raises as pytest_raises
 

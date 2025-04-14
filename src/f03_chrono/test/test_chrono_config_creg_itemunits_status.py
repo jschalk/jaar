@@ -1,4 +1,4 @@
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import (
     get_creg_min_from_dt,

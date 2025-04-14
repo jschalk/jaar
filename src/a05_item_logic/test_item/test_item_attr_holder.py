@@ -1,5 +1,5 @@
-from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.item import ItemAttrHolder, itemattrholder_shop
+from src.a05_item_logic.healer import healerlink_shop
+from src.a05_item_logic.item import ItemAttrHolder, itemattrholder_shop
 
 
 def test_ItemAttrHolder_Exists():

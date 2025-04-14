@@ -1,4 +1,8 @@
-from src.f02_bud.healer import HealerLink, healerlink_shop, healerlink_get_from_dict
+from src.a05_item_logic.healer import (
+    HealerLink,
+    healerlink_shop,
+    healerlink_get_from_dict,
+)
 
 
 def test_HealerLink_exists():

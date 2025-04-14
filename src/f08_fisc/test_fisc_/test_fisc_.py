@@ -6,8 +6,8 @@ from src.a02_finance_toolboxs.finance_config import (
 )
 from src.a01_word_logic.road import default_bridge_if_None
 from src.a02_finance_toolboxs.deal import tranbook_shop
-from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.healer import healerlink_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f06_listen.hub_tool import (
     save_gut_file,

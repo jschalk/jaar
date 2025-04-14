@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import open_file, create_path
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import (
     add_time_creg_itemunit,

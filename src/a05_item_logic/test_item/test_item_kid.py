@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import get_default_fisc_title as root_title, create_road
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from pytest import raises as pytest_raises
 
 

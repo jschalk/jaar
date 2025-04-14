@@ -1,6 +1,6 @@
 from src.a01_word_logic.road import create_road, get_default_fisc_title as root_title
 from src.a04_reason_logic.reason_item import reasonunit_shop, factunit_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
 from pytest import raises as pytest_raises

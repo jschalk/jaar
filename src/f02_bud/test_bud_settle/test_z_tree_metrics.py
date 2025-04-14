@@ -2,7 +2,7 @@ from src.f02_bud.examples.example_buds import budunit_v001
 from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.f02_bud.bud import budunit_shop
-from src.f02_bud.item import itemunit_shop
+from src.a05_item_logic.item import itemunit_shop
 from src.a01_word_logic.road import create_road_from_titles
 
 

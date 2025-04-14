@@ -4,11 +4,11 @@ from src.a01_word_logic.road import (
     create_road,
     default_bridge_if_None,
 )
-from src.f02_bud.healer import healerlink_shop
+from src.a05_item_logic.healer import healerlink_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_team import teamunit_shop
-from src.f02_bud.origin import originunit_shop
-from src.f02_bud.item import ItemUnit, itemunit_shop
+from src.a05_item_logic.origin import originunit_shop
+from src.a05_item_logic.item import ItemUnit, itemunit_shop
 
 
 def test_ItemUnit_Exists():
