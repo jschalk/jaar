@@ -1,5 +1,10 @@
 from src.a06_bud_logic.bud_tool import bud_acctunit_str
-from src.f04_pack.atom_config import acct_name_str, group_label_str, road_str, base_str
+from src.a08_bud_atom_logic.atom_config import (
+    acct_name_str,
+    group_label_str,
+    road_str,
+    base_str,
+)
 from src.f10_idea.idea import IdeaRef, idearef_shop
 
 

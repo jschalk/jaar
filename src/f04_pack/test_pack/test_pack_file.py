@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_json
 from src.a02_finance_toolboxs.deal import owner_name_str
-from src.f04_pack.atom_config import face_name_str
+from src.a08_bud_atom_logic.atom_config import face_name_str
 from src.f04_pack.delta import buddelta_shop
 from src.f04_pack.pack import packunit_shop, create_packunit_from_files
 from src.f04_pack.examples.example_atoms import (

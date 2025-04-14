@@ -4,8 +4,8 @@ from src.a01_word_logic.road import get_default_fisc_title as root_title
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic.bud_tool import bud_acctunit_str
 from src.a06_bud_logic.bud import budunit_shop
-from src.f04_pack.atom import budatom_shop
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom import budatom_shop
+from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
     credit_belief_str,

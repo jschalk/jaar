@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, get_dir_filenames
-from src.f04_pack.atom_config import face_name_str, event_int_str
+from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.f09_pidgin.pidgin_config import (
     inx_bridge_str,
     otx_bridge_str,

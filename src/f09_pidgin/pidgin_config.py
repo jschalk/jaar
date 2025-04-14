@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import open_json, create_path
 from src.a00_data_toolboxs.dict_toolbox import get_from_nested_dict
-from src.f04_pack.atom_config import jkeys_str, jvalues_str
+from src.a08_bud_atom_logic.atom_config import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
 

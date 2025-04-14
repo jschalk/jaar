@@ -1,7 +1,7 @@
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
 from src.a01_word_logic.road import default_bridge_if_None
 from src.a07_calendar_logic.chrono import timeline_title_str
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_class_types,
     type_NameUnit_str,
     type_LabelUnit_str,

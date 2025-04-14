@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
-from src.f04_pack.atom_graphic import budatom_periodic_table0
+from src.a08_bud_atom_logic.atom_graphic import budatom_periodic_table0
 
 # from src.a06_bud_logic.examples.example_buds import (
 #     budunit_v001_with_large_agenda,

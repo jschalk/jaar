@@ -6,7 +6,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_itemunit_str,
 )
 from src.a06_bud_logic.examples.example_buds import budunit_v001
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     atom_insert,
     acct_name_str,
     group_label_str,
@@ -19,7 +19,7 @@ from src.f04_pack.atom_config import (
     debtit_vote_str,
     credit_vote_str,
 )
-from src.f04_pack.atom import budatom_shop
+from src.a08_bud_atom_logic.atom import budatom_shop
 from src.f10_idea.idea import create_idea_df, make_buddelta, get_idearef_obj
 from src.f10_idea.idea_config import (
     idea_format_00021_bud_acctunit_v0_0_0,

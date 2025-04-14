@@ -4,7 +4,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_acct_membership_str,
     budunit_str,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     atom_insert,
     atom_delete,
     acct_name_str,
@@ -12,7 +12,7 @@ from src.f04_pack.atom_config import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.f04_pack.atom import BudAtom, budatom_shop
+from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 
 
 def test_BudAtom_exists():

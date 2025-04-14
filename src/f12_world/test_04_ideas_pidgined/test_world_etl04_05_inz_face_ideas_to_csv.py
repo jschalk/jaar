@@ -1,6 +1,10 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_file
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
-from src.f04_pack.atom_config import acct_name_str, face_name_str, event_int_str
+from src.a08_bud_atom_logic.atom_config import (
+    acct_name_str,
+    face_name_str,
+    event_int_str,
+)
 
 from src.f10_idea.idea_db_tool import upsert_sheet
 from src.f12_world.world import worldunit_shop

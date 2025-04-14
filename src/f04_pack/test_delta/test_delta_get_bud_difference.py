@@ -15,7 +15,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     awardee_tag_str,
     group_label_str,
@@ -34,7 +34,7 @@ from src.f04_pack.atom_config import (
     give_force_str,
     take_force_str,
 )
-from src.f04_pack.atom import atom_insert, atom_update, atom_delete
+from src.a08_bud_atom_logic.atom import atom_insert, atom_update, atom_delete
 from src.f04_pack.delta import BudDelta, buddelta_shop
 from src.f06_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.a00_data_toolboxs.dict_toolbox import (

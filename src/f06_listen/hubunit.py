@@ -43,7 +43,7 @@ from src.a06_bud_logic.bud import (
     budunit_shop,
 )
 from src.a06_bud_logic.bud_tool import get_acct_agenda_net_ledger
-from src.f04_pack.atom import (
+from src.a08_bud_atom_logic.atom import (
     BudAtom,
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,

@@ -1,7 +1,11 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, save_file
 from src.a00_data_toolboxs.db_toolbox import db_table_exists
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
-from src.f04_pack.atom_config import acct_name_str, face_name_str, event_int_str
+from src.a08_bud_atom_logic.atom_config import (
+    acct_name_str,
+    face_name_str,
+    event_int_str,
+)
 from src.f11_etl.transformers import etl_inz_face_csv_files2idea_staging_tables
 from src.f11_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect

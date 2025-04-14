@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import open_json, save_file
 from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_title_str
-from src.f04_pack.atom_config import event_int_str
+from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.f06_listen.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,

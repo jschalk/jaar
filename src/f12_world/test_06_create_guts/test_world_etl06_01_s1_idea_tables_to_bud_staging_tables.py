@@ -2,7 +2,7 @@ from src.a00_data_toolboxs.file_toolbox import create_path, save_file
 from src.a00_data_toolboxs.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
 from src.a06_bud_logic.bud_tool import budunit_str, bud_acctunit_str
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     acct_name_str,
     event_int_str,

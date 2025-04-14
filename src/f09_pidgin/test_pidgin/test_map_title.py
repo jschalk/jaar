@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import default_bridge_if_None
-from src.f04_pack.atom_config import face_name_str, event_int_str
+from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.f09_pidgin.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,

@@ -1,5 +1,5 @@
 from src.a06_bud_logic.bud_tool import bud_itemunit_str
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
@@ -14,7 +14,7 @@ from src.f04_pack.atom_config import (
     morph_str,
     mass_str,
 )
-from src.f04_pack.atom import budatom_shop
+from src.a08_bud_atom_logic.atom import budatom_shop
 from src.f04_pack.delta import buddelta_shop
 from src.f04_pack.legible import create_legible_list
 from src.a06_bud_logic.bud import budunit_shop

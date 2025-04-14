@@ -13,7 +13,7 @@ from src.a01_word_logic.road import (
     get_default_fisc_title,
 )
 from src.a06_bud_logic.bud import BudUnit
-from src.f04_pack.atom import BudAtom, get_from_json as budatom_get_from_json
+from src.a08_bud_atom_logic.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.f04_pack.delta import (
     BudDelta,
     buddelta_shop,

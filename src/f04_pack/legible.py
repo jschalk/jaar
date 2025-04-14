@@ -12,8 +12,8 @@ from src.a06_bud_logic.bud_tool import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.f04_pack.atom import BudAtom
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom import BudAtom
+from src.a08_bud_atom_logic.atom_config import (
     atom_delete,
     atom_insert,
     atom_update,

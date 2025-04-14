@@ -11,7 +11,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     get_bud_dimens,
     get_all_bud_dimen_keys,
     get_delete_key_name,

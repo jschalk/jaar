@@ -5,7 +5,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_itemunit_str,
     bud_item_factunit_str,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     atom_insert,
     atom_update,
     atom_delete,
@@ -15,7 +15,7 @@ from src.f04_pack.atom_config import (
     fopen_str,
     fnigh_str,
 )
-from src.f04_pack.atom import budatom_shop, BudAtom
+from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
 from src.f04_pack.delta import buddelta_shop, BudDelta
 
 

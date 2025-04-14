@@ -1,6 +1,6 @@
 # from src.a00_data_toolboxs.db_toolbox import create_table_from_columns
 from src.a02_finance_toolboxs.deal import fisc_title_str, owner_name_str
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
     face_name_str,
     road_str,

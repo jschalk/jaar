@@ -27,7 +27,7 @@ from src.a07_calendar_logic.chrono import (
     timeline_title_str,
     yr1_jan1_offset_str,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_dimen_mapping,
     get_atom_config_dict,
     get_bud_dimens,

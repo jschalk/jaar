@@ -7,7 +7,7 @@ from src.a02_finance_toolboxs.finance_config import (
 )
 from src.a02_finance_toolboxs.deal import bridge_str, fisc_title_str
 from src.a07_calendar_logic.chrono import get_default_timeline_config_dict
-from src.f04_pack.atom_config import fund_coin_str, respect_bit_str, penny_str
+from src.a08_bud_atom_logic.atom_config import fund_coin_str, respect_bit_str, penny_str
 from src.f06_listen.hub_path import create_fisc_json_path
 from src.f08_fisc.fisc import (
     fiscunit_shop,

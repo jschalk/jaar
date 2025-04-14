@@ -1,5 +1,9 @@
 from src.a00_data_toolboxs.file_toolbox import open_file, create_path, get_dir_file_strs
-from src.f04_pack.atom_config import acct_name_str, group_label_str, credor_respect_str
+from src.a08_bud_atom_logic.atom_config import (
+    acct_name_str,
+    group_label_str,
+    credor_respect_str,
+)
 from src.f10_idea.examples.idea_env import (
     idea_env_setup_cleanup,
     idea_fiscs_dir,

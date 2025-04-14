@@ -241,7 +241,7 @@ def get_atom_config_filename() -> str:
 
 def config_file_dir() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "f04_pack")
+    return create_path(src_dir, "a08_bud_atom_logic")
 
 
 def get_atom_config_dict() -> dict:

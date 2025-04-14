@@ -6,7 +6,7 @@ from src.a07_calendar_logic.examples.chrono_examples import (
     add_time_creg_itemunit,
     add_time_five_itemunit,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     group_label_str,
     parent_road_str,

@@ -7,7 +7,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_itemunit_str,
     bud_item_awardlink_str,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
@@ -19,7 +19,7 @@ from src.f04_pack.atom_config import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.f04_pack.atom import budatom_shop
+from src.a08_bud_atom_logic.atom import budatom_shop
 from src.f04_pack.delta import (
     BudDelta,
     buddelta_shop,

@@ -9,7 +9,7 @@ from src.a07_calendar_logic.chrono import (
     timeline_config_shop,
     timelineunit_shop,
 )
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     face_name_str,
     fund_coin_str,

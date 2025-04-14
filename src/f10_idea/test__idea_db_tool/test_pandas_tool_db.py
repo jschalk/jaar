@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a02_finance_toolboxs.deal import fisc_title_str, owner_name_str
-from src.f04_pack.atom_config import (
+from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
     acct_name_str,
