@@ -1,12 +1,13 @@
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_tool import bud_acctunit_str, bud_acct_membership_str
-from src.a08_bud_atom_logic.atom import atom_insert, budatom_shop
+from src.a08_bud_atom_logic.atom import atom_delete, budatom_shop
 from src.a08_bud_atom_logic.atom_config import acct_name_str, group_label_str
-from src.f04_pack.delta import buddelta_shop, get_minimal_buddelta
+from src.a09_pack_logic.delta import buddelta_shop, get_minimal_buddelta
 
 
-def test_get_minimal_buddelta_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
-    # ESTABLISH
+def test_get_minimal_buddelta_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit():
+    # ESTABLISH buddelta with 2 acctunits, buddelta DELETE 3 buddeltas,
+    # assert buddelta has 3 atoms
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
@@ -15,11 +16,11 @@ def test_get_minimal_buddelta_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
     sue_bud.add_acctunit(bob_str)
 
     accts_buddelta = buddelta_shop()
-    bob_atom = budatom_shop(bud_acctunit_str(), atom_insert())
+    bob_atom = budatom_shop(bud_acctunit_str(), atom_delete())
     bob_atom.set_arg(acct_name_str(), bob_str)
-    yao_atom = budatom_shop(bud_acctunit_str(), atom_insert())
+    yao_atom = budatom_shop(bud_acctunit_str(), atom_delete())
     yao_atom.set_arg(acct_name_str(), yao_str)
-    zia_atom = budatom_shop(bud_acctunit_str(), atom_insert())
+    zia_atom = budatom_shop(bud_acctunit_str(), atom_delete())
     zia_atom.set_arg(acct_name_str(), zia_str)
     accts_buddelta.set_budatom(bob_atom)
     accts_buddelta.set_budatom(yao_atom)
@@ -31,11 +32,12 @@ def test_get_minimal_buddelta_ReturnsObjWithoutUnecessaryINSERT_bud_acctunit():
     new_buddelta = get_minimal_buddelta(accts_buddelta, sue_bud)
 
     # THEN
-    assert len(new_buddelta.get_sorted_budatoms()) == 1
+    assert len(new_buddelta.get_sorted_budatoms()) == 2
 
 
-def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
-    # ESTABLISH
+def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
+    # ESTABLISH buddelta with 2 acctunits, buddelta DELETE 3 buddeltas,
+    # assert buddelta has 3 atoms
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
@@ -44,18 +46,20 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
     sue_bud.add_acctunit(bob_str)
     yao_acctunit = sue_bud.get_acct(yao_str)
     run_str = ";run"
+    swim_str = ";swim"
     run_str = ";run"
     yao_acctunit.add_membership(run_str)
+    yao_acctunit.add_membership(swim_str)
     print(f"{yao_acctunit._memberships.keys()=}")
 
     accts_buddelta = buddelta_shop()
-    bob_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    bob_run_atom = budatom_shop(bud_acct_membership_str(), atom_delete())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
     bob_run_atom.set_arg(group_label_str(), run_str)
-    yao_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    yao_run_atom = budatom_shop(bud_acct_membership_str(), atom_delete())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
     yao_run_atom.set_arg(group_label_str(), run_str)
-    zia_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    zia_run_atom = budatom_shop(bud_acct_membership_str(), atom_delete())
     zia_run_atom.set_arg(acct_name_str(), zia_str)
     zia_run_atom.set_arg(group_label_str(), run_str)
     accts_buddelta.set_budatom(bob_run_atom)
@@ -68,7 +72,4 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
     new_buddelta = get_minimal_buddelta(accts_buddelta, sue_bud)
 
     # THEN
-    assert len(new_buddelta.get_dimen_sorted_budatoms_list()) == 2
-
-
-# all atom dimens are covered by "sift_atom" tests
+    assert len(new_buddelta.get_dimen_sorted_budatoms_list()) == 1

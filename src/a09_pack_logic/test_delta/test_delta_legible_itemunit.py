@@ -15,8 +15,8 @@ from src.a08_bud_atom_logic.atom_config import (
     mass_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.f04_pack.delta import buddelta_shop
-from src.f04_pack.legible import create_legible_list
+from src.a09_pack_logic.delta import buddelta_shop
+from src.a09_pack_logic.legible import create_legible_list
 from src.a06_bud_logic.bud import budunit_shop
 
 

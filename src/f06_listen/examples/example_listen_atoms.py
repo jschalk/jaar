@@ -16,7 +16,7 @@ from src.a08_bud_atom_logic.atom_config import (
     fnigh_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
-from src.f04_pack.delta import buddelta_shop, BudDelta
+from src.a09_pack_logic.delta import buddelta_shop, BudDelta
 
 
 def get_atom_example_itemunit_sports(fisc_title: FiscTitle = None) -> BudAtom:

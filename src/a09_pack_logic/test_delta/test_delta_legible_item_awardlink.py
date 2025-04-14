@@ -1,32 +1,33 @@
-from src.a06_bud_logic.bud_tool import bud_item_reasonunit_str
+from src.a06_bud_logic.bud_tool import bud_item_awardlink_str
 from src.a08_bud_atom_logic.atom_config import (
     atom_update,
     atom_insert,
     atom_delete,
-    base_item_active_requisite_str,
+    awardee_tag_str,
+    give_force_str,
+    take_force_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.f04_pack.delta import buddelta_shop
-from src.f04_pack.legible import create_legible_list
+from src.a09_pack_logic.delta import buddelta_shop
+from src.a09_pack_logic.legible import create_legible_list
 from src.a06_bud_logic.bud import budunit_shop
 
 
-def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_active_requisite():
+def test_create_legible_list_ReturnsObj_item_awardlink_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    dimen = bud_item_reasonunit_str()
+    dimen = bud_item_awardlink_str()
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_str = "base"
-    base_value = f"{sue_bud.bridge}Swimmers"
-    base_item_active_requisite_value = True
+    awardee_tag_value = f"{sue_bud.bridge}Swimmers"
+    give_force_value = 81
+    take_force_value = 43
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
-    swim_budatom.set_arg(
-        base_item_active_requisite_str(), base_item_active_requisite_value
-    )
+    swim_budatom.set_arg(awardee_tag_str(), awardee_tag_value)
+    swim_budatom.set_arg(give_force_str(), give_force_value)
+    swim_budatom.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -35,52 +36,27 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_ac
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"ReasonUnit created for item '{road_value}' with base '{base_value}'. base_item_active_requisite={base_item_active_requisite_value}."
+    x_str = f"Awardlink created for group {awardee_tag_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_Without_base_item_active_requisite():
+def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force_take_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    dimen = bud_item_reasonunit_str()
+
+    dimen = bud_item_awardlink_str()
+    awardee_tag_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_str = "base"
-    base_value = f"{sue_bud.bridge}Swimmers"
-    swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
-    # print(f"{swim_budatom=}")
-    x_buddelta = buddelta_shop()
-    x_buddelta.set_budatom(swim_budatom)
-
-    # WHEN
-    legible_list = create_legible_list(x_buddelta, sue_bud)
-
-    # THEN
-    x_str = f"ReasonUnit created for item '{road_value}' with base '{base_value}'."
-    print(f"{x_str=}")
-    assert legible_list[0] == x_str
-
-
-def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_requisite_IsTrue():
-    # ESTABLISH
-    sue_bud = budunit_shop("Sue")
-    dimen = bud_item_reasonunit_str()
-    base_str = "base"
-    base_value = f"{sue_bud.bridge}Swimmers"
-    road_str = "road"
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_item_active_requisite_value = True
+    give_force_value = 81
+    take_force_value = 43
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
-    swim_budatom.set_arg(
-        base_item_active_requisite_str(), base_item_active_requisite_value
-    )
+    swim_budatom.set_arg(awardee_tag_str(), awardee_tag_value)
+    swim_budatom.set_arg(give_force_str(), give_force_value)
+    swim_budatom.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -89,23 +65,24 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' set with base_item_active_requisite={base_item_active_requisite_value}."
+    x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_requisite_IsNone():
+def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_give_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    dimen = bud_item_reasonunit_str()
-    base_str = "base"
-    base_value = f"{sue_bud.bridge}Swimmers"
+    dimen = bud_item_awardlink_str()
+    awardee_tag_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
+    give_force_value = 81
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(awardee_tag_str(), awardee_tag_value)
+    swim_budatom.set_arg(give_force_str(), give_force_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -114,23 +91,49 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' and no longer checks base active mode."
+    x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now give_force={give_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_item_reasonunit_DELETE():
+def test_create_legible_list_ReturnsObj_item_awardlink_UPDATE_take_force():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    dimen = bud_item_reasonunit_str()
+    dimen = bud_item_awardlink_str()
+    awardee_tag_value = f"{sue_bud.bridge}Swimmers"
     road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_str = "base"
-    base_value = f"{sue_bud.bridge}Swimmers"
+
+    take_force_value = 81
+    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom.set_arg(road_str, road_value)
+    swim_budatom.set_arg(awardee_tag_str(), awardee_tag_value)
+    swim_budatom.set_arg(take_force_str(), take_force_value)
+    # print(f"{swim_budatom=}")
+    x_buddelta = buddelta_shop()
+    x_buddelta.set_budatom(swim_budatom)
+
+    # WHEN
+    legible_list = create_legible_list(x_buddelta, sue_bud)
+
+    # THEN
+    x_str = f"Awardlink has been set for group {awardee_tag_value} for item '{road_value}'. Now take_force={take_force_value}."
+    print(f"{x_str=}")
+    assert legible_list[0] == x_str
+
+
+def test_create_legible_list_ReturnsObj_item_awardlink_DELETE():
+    # ESTABLISH
+    sue_bud = budunit_shop("Sue")
+    dimen = bud_item_awardlink_str()
+    road_str = "road"
+    casa_road = sue_bud.make_l1_road("casa")
+    road_value = sue_bud.make_road(casa_road, "clean fridge")
+    awardee_tag_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_delete())
     swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(awardee_tag_str(), awardee_tag_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -139,6 +142,6 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_DELETE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' has been deleted."
+    x_str = f"Awardlink for group {awardee_tag_value}, item '{road_value}' has been deleted."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

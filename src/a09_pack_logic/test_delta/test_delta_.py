@@ -20,14 +20,14 @@ from src.a08_bud_atom_logic.atom_config import (
     debtit_belief_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.f04_pack.delta import (
+from src.a09_pack_logic.delta import (
     BudDelta,
     buddelta_shop,
     bud_built_from_delta_is_valid,
     get_buddelta_from_ordered_dict,
 )
 from src.a06_bud_logic.bud import budunit_shop
-from src.f04_pack.examples.example_deltas import (
+from src.a09_pack_logic.examples.example_deltas import (
     get_buddelta_example1,
     get_buddelta_sue_example,
 )

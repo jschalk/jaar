@@ -39,7 +39,7 @@ from src.a08_bud_atom_logic.atom_config import (
     fnigh_str,
     fopen_str,
 )
-from src.f04_pack.delta import BudDelta
+from src.a09_pack_logic.delta import BudDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:

@@ -42,8 +42,8 @@ from src.a08_bud_atom_logic.atom_config import (
     give_force_str,
     take_force_str,
 )
-from src.f04_pack.delta import buddelta_shop
-from src.f04_pack.examples.example_deltas import get_buddelta_example1
+from src.a09_pack_logic.delta import buddelta_shop
+from src.a09_pack_logic.examples.example_deltas import get_buddelta_example1
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_SimplestScenario():

@@ -6,8 +6,8 @@ from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
     get_default_timeline_config_dict,
 )
-from src.f04_pack.delta import get_minimal_buddelta, buddelta_shop
-from src.f04_pack.pack import packunit_shop
+from src.a09_pack_logic.delta import get_minimal_buddelta, buddelta_shop
+from src.a09_pack_logic.pack import packunit_shop
 from src.f08_fisc.fisc import fiscunit_shop
 from src.f09_pidgin.pidgin import PidginUnit, pidginunit_shop
 from src.f10_idea.idea_config import get_idea_format_filename

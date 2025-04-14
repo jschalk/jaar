@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_codespace_pack_dir() -> str:
-    return "src/f04_pack"
+    return "src/a09_pack_logic"
 
 
 def get_pack_examples_dir():
