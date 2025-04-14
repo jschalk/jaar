@@ -5,8 +5,8 @@ from src.a01_word_logic.road import RoadUnit, WorldID
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.f02_bud.healer import HealerLink
-from src.f02_bud.reason_item import ReasonHeir, PremiseUnit, FactHeir
-from src.f02_bud.reason_team import TeamHeir
+from src.a04_reason_logic.reason_item import ReasonHeir, PremiseUnit, FactHeir
+from src.a04_reason_logic.reason_team import TeamHeir
 from src.f02_bud.item import ItemUnit
 from src.f02_bud.bud import BudUnit
 from src.f11_etl.tran_sqlstrs import get_fisc_fu1_select_sqlstrs

@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import GroupLabel
-from src.f02_bud.reason_team import (
+from src.a04_reason_logic.reason_team import (
     TeamUnit,
     teamunit_shop,
     TeamHeir,

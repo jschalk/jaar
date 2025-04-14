@@ -16,7 +16,7 @@ from src.a01_word_logic.road import (
     AcctName,
     is_titleunit,
 )
-from src.f02_bud.reason_item import factunit_shop
+from src.a04_reason_logic.reason_item import factunit_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.f02_bud.item import itemunit_shop

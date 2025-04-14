@@ -29,14 +29,14 @@ from src.a01_word_logic.road import (
     find_replace_road_key_dict,
 )
 from src.f02_bud.healer import HealerLink, healerlink_shop, healerlink_get_from_dict
-from src.f02_bud.reason_team import (
+from src.a04_reason_logic.reason_team import (
     TeamUnit,
     TeamHeir,
     teamunit_shop,
     teamheir_shop,
     teamunit_get_from_dict,
 )
-from src.f02_bud.reason_item import (
+from src.a04_reason_logic.reason_item import (
     FactCore,
     FactHeir,
     factheir_shop,

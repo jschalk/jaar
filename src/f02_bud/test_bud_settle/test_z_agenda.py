@@ -2,7 +2,7 @@ from datetime import datetime
 from src.a01_word_logic.road import RoadUnit
 from src.f02_bud.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.f02_bud.item import ItemUnit, itemunit_shop
-from src.f02_bud.reason_team import teamunit_shop
+from src.a04_reason_logic.reason_team import teamunit_shop
 from src.f02_bud.examples.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,

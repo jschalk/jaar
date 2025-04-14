@@ -1,5 +1,5 @@
 from src.f02_bud.examples.example_buds import get_budunit_with_4_levels
-from src.f02_bud.reason_item import reasonunit_shop
+from src.a04_reason_logic.reason_item import reasonunit_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop, get_sorted_item_list
 from pytest import raises as pytest_raises
