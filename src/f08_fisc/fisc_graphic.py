@@ -1,4 +1,4 @@
-from src.f00_instrument.plotly_toolbox import conditional_fig_show
+from src.f00_data_toolboxs.plotly_toolbox import conditional_fig_show
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 

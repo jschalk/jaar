@@ -1,4 +1,4 @@
-from src.f00_instrument.dict_toolbox import x_is_json, get_dict_from_json
+from src.f00_data_toolboxs.dict_toolbox import x_is_json, get_dict_from_json
 from src.f01_road.road import default_bridge_if_None
 from src.f02_bud.group import awardlink_shop
 from src.f02_bud.healer import healerlink_shop
