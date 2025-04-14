@@ -11,7 +11,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 
 from src.a17_idea_logic.idea_config import idea_number_str
-from src.f11_etl.tran_sqlstrs import create_bud_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect

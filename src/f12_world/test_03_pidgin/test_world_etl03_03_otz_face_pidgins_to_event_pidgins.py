@@ -14,7 +14,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     unknown_word_str,
 )
 from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet
-from src.f11_etl.tran_path import (
+from src.a18_etl_toolbox.tran_path import (
     create_otx_face_pidgin_path,
     create_otx_event_pidgin_path as otx_event_pidgin_path,
 )

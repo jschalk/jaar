@@ -9,7 +9,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path
 
-from src.f11_etl.tran_sqlstrs import create_bud_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
