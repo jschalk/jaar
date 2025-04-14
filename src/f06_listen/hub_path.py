@@ -11,8 +11,8 @@ CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
 BUDPOINT_FILENAME = "budpoint.json"
 BUDEVENT_FILENAME = "bud.json"
-EVENT_ALL_Pack_FILENAME = "all_pack.json"
-EVENT_EXPRESSED_Pack_FILENAME = "expressed_pack.json"
+EVENT_ALL_PACK_FILENAME = "all_pack.json"
+EVENT_EXPRESSED_PACK_FILENAME = "expressed_pack.json"
 
 
 def treasury_filename() -> str:
@@ -66,6 +66,17 @@ def create_fisc_owners_dir_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> st
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     return create_path(fisc_dir, "owners")
+
+
+def create_owner_dir_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
+) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name"""
+
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    return create_path(owners_dir, owner_name)
 
 
 def create_deals_dir_path(

@@ -193,7 +193,7 @@ class FiscUnit:
             respect_bit=self.respect_bit,
         )
 
-    def init_pack_and_plan(self, owner_name: OwnerName):
+    def set_init_pack_and_plan(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
         x_hubunit.initialize_pack_gut_files()
         x_hubunit.initialize_plan_file(self.get_owner_gut_from_file(owner_name))
@@ -268,8 +268,14 @@ class FiscUnit:
         )
 
     def generate_all_plans(self):
-        for owner_name in self._get_owner_folder_names():
-            self.init_pack_and_plan(owner_name)
+        owner_names = self._get_owner_folder_names()
+        for owner_name in owner_names:
+            self.set_init_pack_and_plan(owner_name)
+
+        print(f"{self.plan_listen_rotations=}")
+        for x_rotation in range(self.plan_listen_rotations):
+            print(f"{x_rotation=}")
+        for owner_name in owner_names:
             plan = self.generate_plan(owner_name)
             save_plan_file(self.fisc_mstr_dir, plan)
 
