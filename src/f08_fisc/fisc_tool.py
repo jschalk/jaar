@@ -10,7 +10,7 @@ from src.a02_finance_toolboxs.deal import FiscTitle
 from src.a01_word_logic.road import TitleUnit, OwnerName
 from src.a02_finance_toolboxs.finance_config import FundNum
 from src.a04_reason_logic.reason_item import get_dict_from_factunits
-from src.f06_listen.cell import CellUnit, cellunit_shop
+from src.a11_deal_cell_logic.cell import CellUnit, cellunit_shop
 from src.f06_listen.hub_path import (
     CELLNODE_FILENAME,
     CELL_MANDATE_FILENAME,

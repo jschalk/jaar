@@ -13,7 +13,7 @@ from src.a06_bud_logic.bud import (
     get_from_json as budunit_get_from_json,
     budunit_shop,
 )
-from src.f06_listen.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
+from src.a11_deal_cell_logic.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.f06_listen.hub_path import (
     create_gut_path,
     create_plan_path,

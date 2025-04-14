@@ -42,7 +42,7 @@ from src.a01_word_logic.road import (
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
 from src.f06_listen.basis_buds import get_default_plan
-from src.f06_listen.cell import cellunit_shop
+from src.a11_deal_cell_logic.cell import cellunit_shop
 from src.f06_listen.hub_path import (
     create_fisc_json_path,
     create_cell_dir_path,
