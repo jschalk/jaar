@@ -40,7 +40,7 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
 
 def get_default_plan(gut: BudUnit) -> BudUnit:
     default_plan = create_listen_basis(gut)
-    default_plan.last_kick_id = gut.last_kick_id
+    default_plan.last_pack_id = gut.last_pack_id
     default_plan.credor_respect = None
     default_plan.debtor_respect = None
     return default_plan

@@ -14,7 +14,7 @@ from src.f03_chrono.chrono import (
     yr1_jan1_offset_str,
     monthday_distortion_str,
 )
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     acct_name_str,
     penny_str,
     fund_coin_str,

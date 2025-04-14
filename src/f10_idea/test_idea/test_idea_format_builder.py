@@ -1,7 +1,7 @@
 from src.f00_instrument.file_toolbox import save_json
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud_tool import bud_itemunit_str
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     parent_road_str,
     item_title_str,
     gogo_want_str,

@@ -1,5 +1,5 @@
 from src.f01_road.road import default_bridge_if_None
-from src.f04_kick.atom_config import face_name_str, event_int_str
+from src.f04_pack.atom_config import face_name_str, event_int_str
 from src.f09_pidgin.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,

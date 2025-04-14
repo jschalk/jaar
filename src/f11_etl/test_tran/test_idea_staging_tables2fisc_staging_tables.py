@@ -19,7 +19,7 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
     timeline_title_str,
 )
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     acct_name_str,
     face_name_str,
     fund_coin_str,

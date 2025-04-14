@@ -5,7 +5,7 @@ from src.f00_instrument.file_toolbox import (
     count_dirs_files,
 )
 from src.f01_road.deal import celldepth_str, quota_str, DEFAULT_CELLDEPTH
-from src.f04_kick.atom_config import event_int_str, penny_str
+from src.f04_pack.atom_config import event_int_str, penny_str
 from src.f06_listen.cell import deal_owner_name_str, ancestors_str
 from src.f06_listen.hub_path import (
     create_fisc_json_path,

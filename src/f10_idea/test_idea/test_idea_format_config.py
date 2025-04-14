@@ -2,7 +2,7 @@ from src.f00_instrument.dict_toolbox import create_sorted_concatenated_str
 from src.f00_instrument.file_toolbox import get_dir_file_strs, create_path
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f02_bud.bud_tool import bud_acctunit_str
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     face_name_str,
     event_int_str,
     acct_name_str,

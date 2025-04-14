@@ -1,5 +1,5 @@
 from src.f01_road.road import default_bridge_if_None, create_road
-from src.f04_kick.atom_config import acct_name_str, base_str, type_RoadUnit_str
+from src.f04_pack.atom_config import acct_name_str, base_str, type_RoadUnit_str
 from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
 from src.f09_pidgin.map import (
     labelmap_shop,

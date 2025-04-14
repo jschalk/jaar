@@ -10,8 +10,8 @@ from src.f06_listen.hub_path import (
     CELL_MANDATE_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
-    EVENT_ALL_KICK_FILENAME,
-    EVENT_EXPRESSED_KICK_FILENAME,
+    EVENT_ALL_Pack_FILENAME,
+    EVENT_EXPRESSED_Pack_FILENAME,
     gut_str,
     plan_str,
     create_fisc_dir_path,
@@ -30,8 +30,8 @@ from src.f06_listen.hub_path import (
     create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
-    create_event_all_kick_path,
-    create_event_expressed_kick_path,
+    create_event_all_pack_path,
+    create_event_expressed_pack_path,
     create_gut_path,
     create_plan_path,
 )
@@ -419,7 +419,7 @@ def test_create_budevent_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_bud_path
 
 
-def test_create_event_all_kick_path_ReturnObj():
+def test_create_event_all_pack_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -427,7 +427,7 @@ def test_create_event_all_kick_path_ReturnObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_bud_path = create_event_all_kick_path(
+    gen_a23_e3_bud_path = create_event_all_pack_path(
         x_fisc_mstr_dir, accord23_str, bob_str, event3
     )
 
@@ -438,13 +438,13 @@ def test_create_event_all_kick_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_all_kick_path = create_path(
-        a23_bob_e3_dir, EVENT_ALL_KICK_FILENAME
+    expected_a23_bob_e3_all_pack_path = create_path(
+        a23_bob_e3_dir, EVENT_ALL_Pack_FILENAME
     )
-    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_kick_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_pack_path
 
 
-def test_create_event_expressed_kick_path_ReturnObj():
+def test_create_event_expressed_pack_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     accord23_str = "accord23"
@@ -452,7 +452,7 @@ def test_create_event_expressed_kick_path_ReturnObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_bud_path = create_event_expressed_kick_path(
+    gen_a23_e3_bud_path = create_event_expressed_pack_path(
         x_fisc_mstr_dir, accord23_str, bob_str, event3
     )
 
@@ -463,10 +463,10 @@ def test_create_event_expressed_kick_path_ReturnObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_expressed_kick_path = create_path(
-        a23_bob_e3_dir, EVENT_EXPRESSED_KICK_FILENAME
+    expected_a23_bob_e3_expressed_pack_path = create_path(
+        a23_bob_e3_dir, EVENT_EXPRESSED_Pack_FILENAME
     )
-    assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_kick_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_pack_path
 
 
 def test_create_gut_path_ReturnObj():

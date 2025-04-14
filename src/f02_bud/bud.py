@@ -102,7 +102,7 @@ class _bit_RatioException(Exception):
     pass
 
 
-class _last_kick_idException(Exception):
+class _last_pack_idException(Exception):
     pass
 
 
@@ -129,7 +129,7 @@ class BudUnit:
     respect_bit: BitNum = None
     bridge: str = None
     max_tree_traverse: int = None
-    last_kick_id: int = None
+    last_pack_id: int = None
     originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
@@ -147,14 +147,14 @@ class BudUnit:
     _range_inheritors: dict[RoadUnit, RoadUnit] = None
     # settle_bud Calculated field end
 
-    def del_last_kick_id(self):
-        self.last_kick_id = None
+    def del_last_pack_id(self):
+        self.last_pack_id = None
 
-    def set_last_kick_id(self, x_last_kick_id: int):
-        if self.last_kick_id is not None and x_last_kick_id < self.last_kick_id:
-            exception_str = f"Cannot set _last_kick_id to {x_last_kick_id} because it is less than {self.last_kick_id}."
-            raise _last_kick_idException(exception_str)
-        self.last_kick_id = x_last_kick_id
+    def set_last_pack_id(self, x_last_pack_id: int):
+        if self.last_pack_id is not None and x_last_pack_id < self.last_pack_id:
+            exception_str = f"Cannot set _last_pack_id to {x_last_pack_id} because it is less than {self.last_pack_id}."
+            raise _last_pack_idException(exception_str)
+        self.last_pack_id = x_last_pack_id
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
@@ -1374,8 +1374,8 @@ class BudUnit:
             x_dict["credor_respect"] = self.credor_respect
         if self.debtor_respect is not None:
             x_dict["debtor_respect"] = self.debtor_respect
-        if self.last_kick_id is not None:
-            x_dict["last_kick_id"] = self.last_kick_id
+        if self.last_pack_id is not None:
+            x_dict["last_pack_id"] = self.last_pack_id
 
         return x_dict
 
@@ -1471,7 +1471,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.penny = filter_penny(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
-    x_bud.last_kick_id = obj_from_bud_dict(bud_dict, "last_kick_id")
+    x_bud.last_pack_id = obj_from_bud_dict(bud_dict, "last_pack_id")
     x_bridge = x_bud.bridge
     x_accts = obj_from_bud_dict(bud_dict, "accts", x_bridge).values()
     for x_acctunit in x_accts:

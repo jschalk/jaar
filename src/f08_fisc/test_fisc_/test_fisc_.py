@@ -45,7 +45,7 @@ def test_FiscUnit_Exists():
     assert not accord_fisc._offi_time_max
     assert not accord_fisc._owners_dir
     assert not accord_fisc._journal_db
-    assert not accord_fisc._kicks_dir
+    assert not accord_fisc._packs_dir
     assert not accord_fisc._all_tranbook
 
 
@@ -70,7 +70,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.plan_listen_rotations == DEFAULT_PLAN_LISTEN_COUNT
     # Calculated fields
     assert accord_fisc._owners_dir != None
-    assert accord_fisc._kicks_dir != None
+    assert accord_fisc._packs_dir != None
     assert accord_fisc._all_tranbook == tranbook_shop(a23_str)
 
 
@@ -85,7 +85,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     assert accord_fisc.fisc_title == accord45_str
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     assert accord_fisc._owners_dir is not None
-    assert accord_fisc._kicks_dir is not None
+    assert accord_fisc._packs_dir is not None
 
 
 def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
@@ -127,17 +127,17 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
     x_fisc_dir = create_path(x_fiscs_dir, accord45_str)
     x_owners_dir = create_path(x_fisc_dir, "owners")
-    x_kicks_dir = create_path(x_fisc_dir, "kicks")
+    x_packs_dir = create_path(x_fisc_dir, "packs")
     journal_filename = "journal.db"
     journal_file_path = create_path(x_fisc_dir, journal_filename)
 
     assert not accord_fisc._fisc_dir
     assert not accord_fisc._owners_dir
-    assert not accord_fisc._kicks_dir
+    assert not accord_fisc._packs_dir
     assert os_path_exists(x_fisc_dir) is False
     assert os_path_isdir(x_fisc_dir) is False
     assert os_path_exists(x_owners_dir) is False
-    assert os_path_exists(x_kicks_dir) is False
+    assert os_path_exists(x_packs_dir) is False
     assert os_path_exists(journal_file_path) is False
 
     # WHEN
@@ -146,11 +146,11 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # THEN
     assert accord_fisc._fisc_dir == x_fisc_dir
     assert accord_fisc._owners_dir == x_owners_dir
-    assert accord_fisc._kicks_dir == x_kicks_dir
+    assert accord_fisc._packs_dir == x_packs_dir
     assert os_path_exists(x_fisc_dir)
     assert os_path_isdir(x_fisc_dir)
     assert os_path_exists(x_owners_dir)
-    assert os_path_exists(x_kicks_dir)
+    assert os_path_exists(x_packs_dir)
     assert os_path_exists(journal_file_path)
 
 
@@ -170,7 +170,7 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
     assert accord_fisc._owners_dir == create_path(accord_fisc._fisc_dir, "owners")
 
 
-def test_FiscUnit_init_kick_and_plan_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
+def test_FiscUnit_init_pack_and_plan_CorrectlySetsDirAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord45_str = "accord45"
@@ -189,7 +189,7 @@ def test_FiscUnit_init_kick_and_plan_CorrectlySetsDirAndFiles(env_dir_setup_clea
     assert not plan_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
     # WHEN
-    accord_fisc.init_kick_and_plan(sue_str)
+    accord_fisc.init_pack_and_plan(sue_str)
 
     # THEN
     print(f"{fisc_mstr_dir=}")
@@ -202,7 +202,7 @@ def test_FiscUnit_get_owner_gut_from_file_ReturnsObj(env_dir_setup_cleanup):
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
-    accord_fisc.init_kick_and_plan(sue_str)
+    accord_fisc.init_pack_and_plan(sue_str)
     bob_str = "Bob"
     sue_gut = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
     sue_gut.add_acctunit(bob_str)
@@ -225,8 +225,8 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
-    accord_fisc.init_kick_and_plan(sue_str)
-    accord_fisc.init_kick_and_plan(yao_str)
+    accord_fisc.init_pack_and_plan(sue_str)
+    accord_fisc.init_pack_and_plan(yao_str)
     sue_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
     yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
 
@@ -304,8 +304,8 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert len(accord_fisc.get_owner_hubunits()) == 0
 
     # WHEN
-    accord_fisc.init_kick_and_plan(sue_str)
-    accord_fisc.init_kick_and_plan(yao_str)
+    accord_fisc.init_pack_and_plan(sue_str)
+    accord_fisc.init_pack_and_plan(yao_str)
     accord_all_owners = accord_fisc.get_owner_hubunits()
 
     # THEN

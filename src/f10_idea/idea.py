@@ -9,9 +9,9 @@ from src.f00_instrument.dict_toolbox import (
 from src.f01_road.road import FiscTitle, OwnerName
 from src.f02_bud.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
-from src.f04_kick.atom import atom_insert, BudAtom, atomrow_shop
-from src.f04_kick.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
-from src.f04_kick.kick import kickunit_shop
+from src.f04_pack.atom import atom_insert, BudAtom, atomrow_shop
+from src.f04_pack.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
+from src.f04_pack.pack import packunit_shop
 from src.f06_listen.hub_tool import open_gut_file, save_gut_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import fiscunit_shop, FiscUnit
@@ -186,13 +186,13 @@ def _load_individual_idea_csv(
     x_owner_name: OwnerName,
 ):
     x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_title, x_owner_name)
-    x_hubunit.initialize_kick_gut_files()
+    x_hubunit.initialize_pack_gut_files()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_gut)
-    x_kickunit = kickunit_shop(x_owner_name, x_fisc_title)
-    x_kickunit.set_buddelta(x_buddelta)
-    x_hubunit.save_kick_file(x_kickunit)
-    x_hubunit._create_gut_from_kicks()
+    x_packunit = packunit_shop(x_owner_name, x_fisc_title)
+    x_packunit.set_buddelta(x_buddelta)
+    x_hubunit.save_pack_file(x_packunit)
+    x_hubunit._create_gut_from_packs()
 
 
 def load_idea_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):

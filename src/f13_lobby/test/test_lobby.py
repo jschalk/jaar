@@ -5,4 +5,4 @@
 #     x_lobbyunit = LobbyUnit()
 
 #     # THEN
-#     assert x_lobbyunit.kicks
+#     assert x_lobbyunit.packs

@@ -1,7 +1,7 @@
 from src.f01_road.deal import owner_name_str, fisc_title_str
 from src.f01_road.road import default_bridge_if_None
 from src.f03_chrono.chrono import timeline_title_str
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     get_atom_args_class_types,
     type_NameUnit_str,
     type_LabelUnit_str,

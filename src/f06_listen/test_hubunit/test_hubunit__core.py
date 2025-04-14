@@ -41,7 +41,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit._keeps_dir
     assert not x_hubunit._atoms_dir
     assert not x_hubunit._deals_dir
-    assert not x_hubunit._kicks_dir
+    assert not x_hubunit._packs_dir
 
 
 def test_HubUnit_RaisesError_keep_road_DoesNotExist():
@@ -107,7 +107,7 @@ def test_hubunit_shop_ReturnsObj():
     print(f"{x_hubunit._deals_dir=}")
     print(f"{func_deals_dir=}")
     assert x_hubunit._deals_dir == func_deals_dir
-    assert x_hubunit._kicks_dir == create_path(x_hubunit._owner_dir, "kicks")
+    assert x_hubunit._packs_dir == create_path(x_hubunit._owner_dir, "packs")
 
 
 def test_hubunit_shop_ReturnsObjWhenEmpty():

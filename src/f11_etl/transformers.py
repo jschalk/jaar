@@ -15,10 +15,10 @@ from src.f00_instrument.db_toolbox import (
 )
 from src.f01_road.road import FaceName, EventInt, OwnerName, FiscTitle
 from src.f02_bud.bud import budunit_shop, BudUnit
-from src.f04_kick.atom import budatom_shop
-from src.f04_kick.atom_config import get_bud_dimens
-from src.f04_kick.delta import get_minimal_buddelta
-from src.f04_kick.kick import kickunit_shop, get_kickunit_from_json, KickUnit
+from src.f04_pack.atom import budatom_shop
+from src.f04_pack.atom_config import get_bud_dimens
+from src.f04_pack.delta import get_minimal_buddelta
+from src.f04_pack.pack import packunit_shop, get_packunit_from_json, PackUnit
 from src.f06_listen.hub_path import (
     create_gut_path,
     create_fisc_ote1_csv_path,
@@ -1000,7 +1000,7 @@ def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str
         save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
 
-def etl_event_bud_csvs_to_kick_json(fisc_mstr_dir: str):
+def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1010,17 +1010,17 @@ def etl_event_bud_csvs_to_kick_json(fisc_mstr_dir: str):
             events_path = create_path(owner_path, "events")
             for event_int in get_level1_dirs(events_path):
                 event_path = create_path(events_path, event_int)
-                event_kick = kickunit_shop(
+                event_pack = packunit_shop(
                     owner_name=owner_name,
                     face_name=None,
                     fisc_title=fisc_title,
                     event_int=event_int,
                 )
-                add_budatoms_from_csv(event_kick, event_path)
-                save_file(event_path, "all_kick.json", event_kick.get_json())
+                add_budatoms_from_csv(event_pack, event_path)
+                save_file(event_path, "all_pack.json", event_pack.get_json())
 
 
-def add_budatoms_from_csv(owner_kick: KickUnit, owner_path: str):
+def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
     idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
@@ -1042,7 +1042,7 @@ def add_budatoms_from_csv(owner_kick: KickUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_kick._buddelta.set_budatom(x_atom)
+                owner_pack._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -1057,10 +1057,10 @@ def add_budatoms_from_csv(owner_kick: KickUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_kick._buddelta.set_budatom(x_atom)
+                owner_pack._buddelta.set_budatom(x_atom)
 
 
-def etl_event_kick_json_to_event_inherited_budunits(fisc_mstr_dir: str):
+def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         fisc_path = create_path(fiscs_dir, fisc_title)
@@ -1079,14 +1079,14 @@ def etl_event_kick_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 event_dir = create_owner_event_dir_path(
                     fisc_mstr_dir, fisc_title, owner_name, event_int
                 )
-                kick_path = create_path(event_dir, "all_kick.json")
-                event_kick = get_kickunit_from_json(open_file(kick_path))
-                sift_delta = get_minimal_buddelta(event_kick._buddelta, prev_bud)
-                curr_bud = event_kick.get_edited_bud(prev_bud)
+                pack_path = create_path(event_dir, "all_pack.json")
+                event_pack = get_packunit_from_json(open_file(pack_path))
+                sift_delta = get_minimal_buddelta(event_pack._buddelta, prev_bud)
+                curr_bud = event_pack.get_edited_bud(prev_bud)
                 save_file(budevent_path, None, curr_bud.get_json())
-                expressed_kick = copy_deepcopy(event_kick)
-                expressed_kick.set_buddelta(sift_delta)
-                save_file(event_dir, "expressed_kick.json", expressed_kick.get_json())
+                expressed_pack = copy_deepcopy(event_pack)
+                expressed_pack.set_buddelta(sift_delta)
+                save_file(event_dir, "expressed_pack.json", expressed_pack.get_json())
                 prev_event_int = event_int
 
 

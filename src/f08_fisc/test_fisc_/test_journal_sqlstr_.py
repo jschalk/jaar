@@ -1,23 +1,23 @@
 from src.f01_road.road import create_road
 from src.f02_bud.bud_tool import bud_item_factunit_str
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     fopen_str,
     atom_insert,
     atom_hx_table_name,
     base_str,
     road_str,
 )
-from src.f04_kick.atom import budatom_shop
+from src.f04_pack.atom import budatom_shop
 from src.f08_fisc.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
     get_atom_hx_table_insert_sqlstr,
     get_atom_mstr_table_create_sqlstr,
     get_create_table_if_not_exist_sqlstrs,
-    get_delta2kick_table_create_sqlstr,
+    get_delta2pack_table_create_sqlstr,
     get_delta_table_create_sqlstr,
-    get_kick_table_create_sqlstr,
-    get_kick2owner_table_create_sqlstr,
+    get_pack_table_create_sqlstr,
+    get_pack2owner_table_create_sqlstr,
     get_owner_mstr_table_create_sqlstr,
     get_road_ref_table_create_sqlstr,
     get_road_ref_table_single_insert_sqlstr,
@@ -52,46 +52,46 @@ CREATE TABLE atom2delta
     assert example_sqlstr == get_atom2delta_table_create_sqlstr()
 
 
-def test_get_kick_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_pack_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE IF NOT EXISTS kick_mstr (
+CREATE TABLE IF NOT EXISTS pack_mstr (
   author_owner_name VARCHAR(255) NOT NULL
-, author_kick_number INT NOT NULL
-, UNIQUE(author_owner_name, author_kick_number)
+, author_pack_number INT NOT NULL
+, UNIQUE(author_owner_name, author_pack_number)
 )
 ;"""
-    assert example_sqlstr == get_kick_table_create_sqlstr()
+    assert example_sqlstr == get_pack_table_create_sqlstr()
 
 
-def test_get_delta2kick_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_delta2pack_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE delta2kick
+CREATE TABLE delta2pack
 (
   delta_rowid INT NOT NULL
-, kick_rowid INT NOT NULL
-, UNIQUE(delta_rowid, kick_rowid)
+, pack_rowid INT NOT NULL
+, UNIQUE(delta_rowid, pack_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (kick_rowid) REFERENCES kick_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (pack_rowid) REFERENCES pack_mstr (rowid)
 )
 ;"""
-    assert example_sqlstr == get_delta2kick_table_create_sqlstr()
+    assert example_sqlstr == get_delta2pack_table_create_sqlstr()
 
 
-def test_get_kick2owner_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_pack2owner_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE kick2owner
+CREATE TABLE pack2owner
 (
-  kick_rowid INT NOT NULL
+  pack_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
-, UNIQUE(kick_rowid, owner_rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (kick_rowid) REFERENCES kick_mstr (rowid)
+, UNIQUE(pack_rowid, owner_rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (pack_rowid) REFERENCES pack_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
-    assert example_sqlstr == get_kick2owner_table_create_sqlstr()
+    assert example_sqlstr == get_pack2owner_table_create_sqlstr()
 
 
 def test_get_owner_mstr_table_create_sqlstr_ReturnsCorrectStr():

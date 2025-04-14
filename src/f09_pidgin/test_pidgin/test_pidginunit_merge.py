@@ -1,4 +1,4 @@
-from src.f04_kick.atom_config import type_NameUnit_str
+from src.f04_pack.atom_config import type_NameUnit_str
 from src.f09_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
 from src.f09_pidgin.examples.example_pidgins import (
     get_clean_roadmap,

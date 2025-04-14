@@ -48,8 +48,8 @@ from src.f11_etl.transformers import (
     etl_fisc_agg_tables_to_fisc_jsons,
     etl_idea_staging_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
-    etl_event_bud_csvs_to_kick_json,
-    etl_event_kick_json_to_event_inherited_budunits,
+    etl_event_bud_csvs_to_pack_json,
+    etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
     etl_fisc_gut_to_fisc_plan,
     etl_fisc_agg_tables2fisc_ote1_agg,
@@ -211,11 +211,11 @@ class WorldUnit:
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
-    def event_bud_csvs_to_kick_json(self):
-        etl_event_bud_csvs_to_kick_json(self._fisc_mstr_dir)
+    def event_bud_csvs_to_pack_json(self):
+        etl_event_bud_csvs_to_pack_json(self._fisc_mstr_dir)
 
-    def event_kick_json_to_event_inherited_budunits(self):
-        etl_event_kick_json_to_event_inherited_budunits(self._fisc_mstr_dir)
+    def event_pack_json_to_event_inherited_budunits(self):
+        etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
     def event_inherited_budunits_to_fisc_gut(self):
         etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
@@ -291,8 +291,8 @@ class WorldUnit:
             self.idea_staging_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
 
-            self.event_bud_csvs_to_kick_json()
-            self.event_kick_json_to_event_inherited_budunits()
+            self.event_bud_csvs_to_pack_json()
+            self.event_pack_json_to_event_inherited_budunits()
             self.event_inherited_budunits_to_fisc_gut()
             self.fisc_gut_to_fisc_plan()
             self.calc_fisc_deal_acct_mandate_net_ledgers()

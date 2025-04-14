@@ -33,7 +33,7 @@ from src.f03_chrono.chrono import (
     monthday_distortion_str,
     yr1_jan1_offset_str,
 )
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     event_int_str,
     face_name_str,
     get_bud_dimens,
