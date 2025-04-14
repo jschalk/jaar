@@ -14,11 +14,11 @@ def temp_fisc_dir():
 
 
 def temp_fisc_mstr_dir():
-    return "src/f07_keep/examples/fisc_mstr"
+    return "src/a14_keep_logic/examples/fisc_mstr"
 
 
 def temp_fiscs_dir():
-    return "src/f07_keep/examples/fisc_mstr/fiscs"
+    return "src/a14_keep_logic/examples/fisc_mstr/fiscs"
 
 
 def temp_owner_name():

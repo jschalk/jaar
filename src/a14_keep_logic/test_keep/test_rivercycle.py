@@ -1,11 +1,11 @@
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hubunit import hubunit_shop
-from src.f07_keep.examples.example_credorledgers import (
+from src.a14_keep_logic.examples.example_credorledgers import (
     example_yao_credorledger,
     example_bob_credorledger,
     example_zia_credorledger,
 )
-from src.f07_keep.rivercycle import (
+from src.a14_keep_logic.rivercycle import (
     get_credorledger,
     create_riverbook,
     RiverCycle,
@@ -13,7 +13,7 @@ from src.f07_keep.rivercycle import (
     create_init_rivercycle,
     create_next_rivercycle,
 )
-from src.f07_keep.examples.keep_env import temp_fisc_mstr_dir
+from src.a14_keep_logic.examples.keep_env import temp_fisc_mstr_dir
 
 
 def test_RiverCylce_Exists():

@@ -1,12 +1,12 @@
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hubunit import hubunit_shop
-from src.f07_keep.rivercycle import (
+from src.a14_keep_logic.rivercycle import (
     RiverBook,
     riverbook_shop,
     create_riverbook,
     get_credorledger,
 )
-from src.f07_keep.examples.keep_env import temp_fisc_mstr_dir
+from src.a14_keep_logic.examples.keep_env import temp_fisc_mstr_dir
 
 
 def test_RiverBook_Exists():
