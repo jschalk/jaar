@@ -1,5 +1,5 @@
 from src.f00_data_toolboxs.file_toolbox import create_path, save_file
-from src.f01_road.deal import owner_name_str, fisc_title_str
+from src.f02_finance_toolboxs.deal import owner_name_str, fisc_title_str
 from src.f04_pack.atom_config import face_name_str, acct_name_str, event_int_str
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import env_dir_setup_cleanup

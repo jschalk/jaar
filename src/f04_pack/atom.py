@@ -7,7 +7,7 @@ from src.f00_data_toolboxs.db_toolbox import (
     create_class_type_reference_insert_sqlstr,
     RowData,
 )
-from src.f01_road.finance_config import TimeLinePoint
+from src.f02_finance_toolboxs.finance_config import TimeLinePoint
 from src.f01_word_logic.road import (
     create_road,
     TitleUnit,

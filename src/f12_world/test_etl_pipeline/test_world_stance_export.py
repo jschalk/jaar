@@ -1,5 +1,5 @@
 from src.f00_data_toolboxs.file_toolbox import create_path, set_dir
-from src.f01_road.deal import owner_name_str, fisc_title_str
+from src.f02_finance_toolboxs.deal import owner_name_str, fisc_title_str
 from src.f04_pack.atom_config import face_name_str, event_int_str, acct_name_str
 from src.f10_idea.idea_db_tool import upsert_sheet, get_sheet_names
 from src.f11_etl.tran_path import create_stances_dir_path, create_stance0001_path

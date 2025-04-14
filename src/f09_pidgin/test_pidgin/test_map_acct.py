@@ -1,5 +1,5 @@
 from src.f01_word_logic.road import default_bridge_if_None
-from src.f01_road.deal import owner_name_str
+from src.f02_finance_toolboxs.deal import owner_name_str
 from src.f04_pack.atom_config import event_int_str, face_name_str
 from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
 from src.f09_pidgin.pidgin_config import (

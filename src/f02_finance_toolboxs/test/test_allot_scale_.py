@@ -1,4 +1,4 @@
-from src.f01_road.allot import (
+from src.f02_finance_toolboxs.allot import (
     allot_scale,
     _create_allot_dict,
     _allot_missing_scale,

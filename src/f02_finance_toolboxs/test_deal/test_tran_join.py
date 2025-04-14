@@ -1,10 +1,4 @@
-from src.f01_road.deal import (
-    TranUnit,
-    tranunit_shop,
-    TranBook,
-    tranbook_shop,
-)
-from pytest import raises as pytest_raises
+from src.f02_finance_toolboxs.deal import tranunit_shop, tranbook_shop
 
 
 def test_TranBook_join_SetsAttr():

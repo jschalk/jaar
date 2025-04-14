@@ -1,4 +1,4 @@
-from src.f01_road.finance_config import default_fund_coin_if_None
+from src.f02_finance_toolboxs.finance_config import default_fund_coin_if_None
 from src.f01_word_logic.road import (
     get_default_fisc_title as root_title,
     create_road,
