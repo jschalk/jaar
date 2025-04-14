@@ -11,11 +11,7 @@ from src.f00_instrument.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.f01_road.jaar_config import (
-    get_kicks_folder,
-    get_fisc_title_if_None,
-    get_test_fisc_mstr_dir,
-)
+from src.f01_road.jaar_config import get_test_fisc_mstr_dir
 from src.f01_road.finance import (
     default_respect_bit_if_None,
     filter_penny,
@@ -123,7 +119,7 @@ class FiscUnit:
         fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
         self._fisc_dir = create_path(fiscs_dir, self.fisc_title)
         self._owners_dir = create_path(self._fisc_dir, "owners")
-        self._kicks_dir = create_path(self._fisc_dir, get_kicks_folder())
+        self._kicks_dir = create_path(self._fisc_dir, "kicks")
         set_dir(x_path=self._fisc_dir)
         set_dir(x_path=self._owners_dir)
         set_dir(x_path=self._kicks_dir)

@@ -1,6 +1,5 @@
 from src.f00_instrument.dict_toolbox import x_is_json
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f01_road.jaar_config import init_kick_id, get_kicks_folder
 from src.f01_road.road import get_default_fisc_title as root_title
 from src.f02_bud.acct import acctunit_shop
 from src.f02_bud.bud_tool import bud_acctunit_str
@@ -18,6 +17,7 @@ from src.f04_kick.atom_config import (
 )
 from src.f04_kick.delta import buddelta_shop
 from src.f04_kick.kick import (
+    init_kick_id,
     KickUnit,
     kickunit_shop,
     get_init_kick_id_if_None,
@@ -26,11 +26,6 @@ from src.f04_kick.kick import (
 from src.f04_kick.examples.example_atoms import get_atom_example_itemunit_sports
 from src.f04_kick.examples.example_deltas import get_buddelta_sue_example
 from pytest import raises as pytest_raises
-
-
-def test_get_kicks_folder_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_kicks_folder() == "kicks"
 
 
 def test_init_kick_id_ReturnsObj():

@@ -4,7 +4,7 @@ from src.f01_road.finance import (
     default_respect_bit_if_None,
     filter_penny,
 )
-from src.f01_road.jaar_config import get_kicks_folder, get_json_filename
+from src.f01_road.jaar_config import get_json_filename
 from src.f01_road.road import default_bridge_if_None
 from src.f01_road.deal import tranbook_shop
 from src.f02_bud.healer import healerlink_shop
@@ -128,7 +128,7 @@ def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
     x_fisc_dir = create_path(x_fiscs_dir, accord45_str)
     x_owners_dir = create_path(x_fisc_dir, "owners")
-    x_kicks_dir = create_path(x_fisc_dir, get_kicks_folder())
+    x_kicks_dir = create_path(x_fisc_dir, "kicks")
     journal_filename = "journal.db"
     journal_file_path = create_path(x_fisc_dir, journal_filename)
 

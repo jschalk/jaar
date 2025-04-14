@@ -1,5 +1,6 @@
 from src.f00_instrument.file import delete_dir, create_path
-from src.f01_road.jaar_config import init_kick_id, get_test_fisc_title as fisc_title
+from src.f01_road.jaar_config import get_test_fisc_title as fisc_title
+from src.f04_kick.kick import init_kick_id
 from src.f06_listen.hub_tool import create_gut_path
 from src.f06_listen.hub_tool import save_gut_file, open_gut_file, gut_file_exists
 from src.f06_listen.hubunit import hubunit_shop

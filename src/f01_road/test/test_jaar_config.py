@@ -1,7 +1,4 @@
 from src.f01_road.jaar_config import (
-    gut_str,
-    plan_str,
-    get_owners_folder,
     get_rootpart_of_keep_dir,
     treasury_filename,
     max_tree_traverse_default,
@@ -9,18 +6,6 @@ from src.f01_road.jaar_config import (
     default_unknown_word,
     default_unknown_word_if_None,
 )
-
-
-def test_get_owners_folder():
-    assert get_owners_folder() == "owners"
-
-
-def test_gut_str():
-    assert gut_str() == "gut"
-
-
-def test_plan_str():
-    assert plan_str() == "plan"
 
 
 def test_get_rootpart_of_keep_dir_ReturnsObj():

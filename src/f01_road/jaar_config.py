@@ -10,32 +10,8 @@ def get_test_fisc_mstr_dir():
     return "src/f08_fisc/examples/fisc_mstr"
 
 
-def get_owners_folder() -> str:
-    return "owners"
-
-
-def get_kicks_folder() -> str:
-    return "kicks"
-
-
-def init_kick_id() -> int:
-    return 0
-
-
-def get_init_kick_id_if_None(x_kick_id: int = None) -> int:
-    return init_kick_id() if x_kick_id is None else x_kick_id
-
-
 def get_json_filename(filename_without_extention) -> str:
     return f"{filename_without_extention}.json"
-
-
-def gut_str() -> str:
-    return "gut"
-
-
-def plan_str() -> str:
-    return "plan"
 
 
 def jobs_str() -> str:

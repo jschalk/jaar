@@ -11,26 +11,14 @@ from src.f01_road.finance import (
     default_fund_coin_if_None,
     validate_fund_pool,
 )
-from src.f01_road.jaar_config import (
-    get_kicks_folder,
-    get_test_fisc_mstr_dir,
-    get_rootpart_of_keep_dir,
-)
-from src.f02_bud.bud import budunit_shop
-from src.f06_listen.hub_path import (
-    create_deals_dir_path,
-    create_gut_path,
-    create_plan_path,
-)
-from src.f06_listen.hub_tool import save_gut_file, save_plan_file
+from src.f01_road.jaar_config import get_test_fisc_mstr_dir, get_rootpart_of_keep_dir
+from src.f06_listen.hub_path import create_deals_dir_path
 from src.f06_listen.hubunit import HubUnit, hubunit_shop, get_keep_path
-from src.f06_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f06_listen.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
     env_dir_setup_cleanup,
 )
 from pytest import raises as pytest_raises
-from os.path import exists as os_path_exists
 
 
 def test_HubUnit_Exists():
@@ -120,7 +108,7 @@ def test_hubunit_shop_ReturnsObj():
     print(f"{x_hubunit._deals_dir=}")
     print(f"{func_deals_dir=}")
     assert x_hubunit._deals_dir == func_deals_dir
-    assert x_hubunit._kicks_dir == create_path(x_hubunit._owner_dir, get_kicks_folder())
+    assert x_hubunit._kicks_dir == create_path(x_hubunit._owner_dir, "kicks")
 
 
 def test_hubunit_shop_ReturnsObjWhenEmpty():

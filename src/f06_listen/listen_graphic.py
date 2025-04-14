@@ -6,10 +6,10 @@ from src.f00_instrument.plotly_toolbox import (
     add_rect_arrow,
     add_keep__rect,
 )
-from src.f01_road.jaar_config import gut_str, plan_str
 from src.f01_road.finance import default_money_magnitude
 from src.f02_bud.bud import BudUnit
 from src.f02_bud.bud_graphics import display_itemtree
+from src.f06_listen.hub_path import gut_str, plan_str
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 

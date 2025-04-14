@@ -1,9 +1,6 @@
 from src.f00_instrument.file import create_path, open_json
 from src.f01_road.deal import owner_name_str
-from src.f01_road.jaar_config import (
-    get_kicks_folder,
-    get_test_fisc_title as fisc_title,
-)
+from src.f01_road.jaar_config import get_test_fisc_title as fisc_title
 from src.f04_kick.atom_config import face_name_str
 from src.f04_kick.delta import buddelta_shop
 from src.f04_kick.kick import kickunit_shop, create_kickunit_from_files
@@ -110,7 +107,7 @@ def test_KickUnit_save_kick_file_SavesCorrectFile(env_dir_setup_cleanup):
     sue_str = "Sue"
     sue_kick_id = 2
     sue_owner_dir = create_path(x_owners_dir, sue_str)
-    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
+    sue_kicks_dir = create_path(sue_owner_dir, "kicks")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -145,7 +142,7 @@ def test_KickUnit_kick_file_exists_ReturnsObj(env_dir_setup_cleanup):
     x_owners_dir = create_path(x_fisc_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
-    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
+    sue_kicks_dir = create_path(sue_owner_dir, "kicks")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -172,7 +169,7 @@ def test_KickUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
-    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
+    sue_kicks_dir = create_path(sue_owner_dir, "kicks")
 
     zia_str = "Zia"
     yao_str = "Yao"
@@ -242,7 +239,7 @@ def test_create_kickunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
-    sue_kicks_dir = create_path(sue_owner_dir, get_kicks_folder())
+    sue_kicks_dir = create_path(sue_owner_dir, "kicks")
 
     yao_str = "Yao"
     sue_delta_start = 4

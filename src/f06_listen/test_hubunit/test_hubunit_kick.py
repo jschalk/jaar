@@ -6,8 +6,8 @@ from src.f00_instrument.file import (
     save_file,
     create_path,
 )
-from src.f01_road.jaar_config import init_kick_id, get_test_fisc_title as fisc_title
-from src.f04_kick.kick import kickunit_shop, get_json_filename
+from src.f01_road.jaar_config import get_test_fisc_title as fisc_title
+from src.f04_kick.kick import init_kick_id, kickunit_shop, get_json_filename
 from src.f06_listen.hub_tool import save_gut_file, open_gut_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_atoms import get_atom_example_itemunit_knee

@@ -1,10 +1,4 @@
 from src.f00_instrument.file import create_path
-from src.f01_road.jaar_config import (
-    get_kicks_folder,
-    get_rootpart_of_keep_dir,
-    get_fisc_title_if_None,
-    get_owners_folder,
-)
 from src.f06_listen.hub_path import (
     FISC_FILENAME,
     FISC_OTE1_AGG_CSV_FILENAME,
@@ -16,8 +10,10 @@ from src.f06_listen.hub_path import (
     CELL_MANDATE_FILENAME,
     BUDPOINT_FILENAME,
     BUDEVENT_FILENAME,
-    EVENT_ALL_kick_FILENAME,
-    EVENT_EXPRESSED_kick_FILENAME,
+    EVENT_ALL_KICK_FILENAME,
+    EVENT_EXPRESSED_KICK_FILENAME,
+    gut_str,
+    plan_str,
     create_fisc_dir_path,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -40,6 +36,14 @@ from src.f06_listen.hub_path import (
     create_plan_path,
 )
 from src.f06_listen.examples.listen_env import get_listen_temp_env_dir
+
+
+def test_gut_str():
+    assert gut_str() == "gut"
+
+
+def test_plan_str():
+    assert plan_str() == "plan"
 
 
 def test_create_fisc_dir_path_ReturnObj():
@@ -129,7 +133,7 @@ def test_create_fisc_owners_dir_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
-    expected_owners_dir = create_path(accord23_dir, get_owners_folder())
+    expected_owners_dir = create_path(accord23_dir, "owners")
     assert gen_owners_dir == expected_owners_dir
 
 
@@ -145,7 +149,7 @@ def test_create_deals_dir_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
+    owners_dir = create_path(accord23_dir, "owners")
     sue_dir = create_path(owners_dir, sue_str)
     expected_deals_dir = create_path(sue_dir, "deals")
     assert deals_dir == expected_deals_dir
@@ -166,7 +170,7 @@ def test_create_deal_dir_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, accord23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
+    owners_dir = create_path(accord23_dir, "owners")
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     expected_timepoint_dir = create_path(deals_dir, timepoint7)
@@ -188,7 +192,7 @@ def test_create_dealunit_json_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
+    owners_dir = create_path(accord23_dir, "owners")
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
@@ -211,7 +215,7 @@ def test_create_deal_acct_mandate_ledger_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
+    owners_dir = create_path(accord23_dir, "owners")
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
@@ -234,7 +238,7 @@ def test_create_budpoint_path_ReturnObj():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
+    owners_dir = create_path(accord23_dir, "owners")
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
@@ -316,7 +320,7 @@ def test_create_cell_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     accord23_dir = create_path(x_fiscs_dir, a23_str)
-    owners_dir = create_path(accord23_dir, get_owners_folder())
+    owners_dir = create_path(accord23_dir, "owners")
     sue_dir = create_path(owners_dir, sue_str)
     deals_dir = create_path(sue_dir, "deals")
     timepoint_dir = create_path(deals_dir, timepoint7)
@@ -435,7 +439,7 @@ def test_create_event_all_kick_path_ReturnObj():
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
     expected_a23_bob_e3_all_kick_path = create_path(
-        a23_bob_e3_dir, EVENT_ALL_kick_FILENAME
+        a23_bob_e3_dir, EVENT_ALL_KICK_FILENAME
     )
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_kick_path
 
@@ -460,7 +464,7 @@ def test_create_event_expressed_kick_path_ReturnObj():
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
     expected_a23_bob_e3_expressed_kick_path = create_path(
-        a23_bob_e3_dir, EVENT_EXPRESSED_kick_FILENAME
+        a23_bob_e3_dir, EVENT_EXPRESSED_KICK_FILENAME
     )
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_kick_path
 
