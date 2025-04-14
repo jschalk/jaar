@@ -21,7 +21,7 @@ def get_fund_metric_config_filename() -> str:
 
 def config_file_path() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    config_file_dir = create_path(src_dir, "f05_fund_metric")
+    config_file_dir = create_path(src_dir, "a10_fund_metric")
     return create_path(config_file_dir, get_fund_metric_config_filename())
 
 

@@ -76,7 +76,7 @@ from src.a08_bud_atom_logic.atom_config import (
     give_force_str,
     take_force_str,
 )
-from src.f05_fund_metric.fund_metric_config import (
+from src.a10_fund_metric.fund_metric_config import (
     get_all_fund_metric_args,
     get_fund_metric_args_sqlite_datatype_dict,
 )

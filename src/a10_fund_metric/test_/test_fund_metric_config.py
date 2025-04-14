@@ -52,7 +52,7 @@ from src.a08_bud_atom_logic.atom_config import (
     type_TitleUnit_str,
     type_RoadUnit_str,
 )
-from src.f05_fund_metric.fund_metric_config import (
+from src.a10_fund_metric.fund_metric_config import (
     jmetrics_str,
     fund_take_str,
     fund_give_str,
@@ -79,7 +79,7 @@ def test_str_functions_ReturnsObj():
 def test_get_fund_metric_config_dict_Exists():
     # ESTABLISH
     src_dir = create_path(os_getcwd(), "src")
-    expected_dir = create_path(src_dir, "f05_fund_metric")
+    expected_dir = create_path(src_dir, "a10_fund_metric")
 
     # WHEN / THEN
     assert get_fund_metric_config_filename() == "fund_metric_config.json"
