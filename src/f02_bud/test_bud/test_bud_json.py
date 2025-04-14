@@ -41,8 +41,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     yao_bud.set_credor_respect(x_credor_respect)
     yao_bud.set_debtor_respect(x_debtor_respect)
     override_str = "override"
-    x_last_kick_id = 77
-    yao_bud.set_last_kick_id(x_last_kick_id)
+    x_last_pack_id = 77
+    yao_bud.set_last_pack_id(x_last_pack_id)
 
     # WHEN
     bud_dict = yao_bud.get_dict()
@@ -60,7 +60,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict["bridge"] == yao_bud.bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
     assert bud_dict["debtor_respect"] == yao_bud.debtor_respect
-    assert bud_dict["last_kick_id"] == yao_bud.last_kick_id
+    assert bud_dict["last_pack_id"] == yao_bud.last_pack_id
     assert len(bud_dict["accts"]) == len(yao_bud.accts)
     assert len(bud_dict["accts"]) != 12
     assert bud_dict.get("_groups") is None
@@ -204,7 +204,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     #     bud_dict["_debtor_respect"]
     # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
-        bud_dict["last_kick_id"]
+        bud_dict["last_pack_id"]
 
     x_itemroot = zia_bud.itemroot
     itemroot_dict = bud_dict.get("itemroot")
@@ -303,8 +303,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     zia_debtor_respect = 200
     zia_bud.set_credor_respect(zia_credor_respect)
     zia_bud.set_debtor_respect(zia_debtor_respect)
-    zia_last_kick_id = 73
-    zia_bud.set_last_kick_id(zia_last_kick_id)
+    zia_last_pack_id = 73
+    zia_bud.set_last_pack_id(zia_last_pack_id)
 
     shave_str = "shave"
     shave_road = zia_bud.make_l1_road(shave_str)
@@ -370,8 +370,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert json_bud.debtor_respect == zia_bud.debtor_respect
     assert json_bud.credor_respect == zia_credor_respect
     assert json_bud.debtor_respect == zia_debtor_respect
-    assert json_bud.last_kick_id == zia_bud.last_kick_id
-    assert json_bud.last_kick_id == zia_last_kick_id
+    assert json_bud.last_pack_id == zia_bud.last_pack_id
+    assert json_bud.last_pack_id == zia_last_pack_id
     # assert json_bud._groups == zia_bud._groups
 
     json_itemroot = json_bud.itemroot

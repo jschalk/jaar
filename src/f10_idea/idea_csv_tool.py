@@ -1,7 +1,7 @@
 from src.f00_instrument.dict_toolbox import get_empty_str_if_None as if_none_str
 from src.f01_road.road import FiscTitle, FaceName
 from src.f02_bud.bud import BudUnit
-from src.f04_kick.kick import KickUnit
+from src.f04_pack.pack import PackUnit
 from src.f08_fisc.fisc import FiscUnit
 from src.f09_pidgin.pidgin import PidginUnit
 from src.f10_idea.idea_config import (
@@ -581,16 +581,16 @@ def add_pidginunit_to_stance_csv_strs(
     fisc_csv_strs["br00045"] = br00045_csv
 
 
-def add_kick_to_br00020_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00020_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_acct_membership":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("acct_name"),
                 budatom.jkeys.get("group_label"),
                 if_none_str(budatom.jvalues.get("credit_vote")),
@@ -601,16 +601,16 @@ def add_kick_to_br00020_csv(
     return x_csv
 
 
-def add_kick_to_br00021_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00021_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_acctunit":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("acct_name"),
                 if_none_str(budatom.jvalues.get("credit_belief")),
                 if_none_str(budatom.jvalues.get("debtit_belief")),
@@ -620,16 +620,16 @@ def add_kick_to_br00021_csv(
     return x_csv
 
 
-def add_kick_to_br00022_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00022_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_item_awardlink":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("awardee_tag"),
                 if_none_str(budatom.jvalues.get("give_force")),
@@ -640,16 +640,16 @@ def add_kick_to_br00022_csv(
     return x_csv
 
 
-def add_kick_to_br00023_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00023_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_item_factunit":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
                 if_none_str(budatom.jvalues.get("pick")),
@@ -661,16 +661,16 @@ def add_kick_to_br00023_csv(
     return x_csv
 
 
-def add_kick_to_br00024_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00024_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_item_teamlink":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("team_tag"),
             ]
@@ -679,16 +679,16 @@ def add_kick_to_br00024_csv(
     return x_csv
 
 
-def add_kick_to_br00025_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00025_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_item_healerlink":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("healer_name"),
             ]
@@ -697,16 +697,16 @@ def add_kick_to_br00025_csv(
     return x_csv
 
 
-def add_kick_to_br00026_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00026_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_item_reason_premiseunit":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
                 budatom.jkeys.get("need"),
@@ -719,16 +719,16 @@ def add_kick_to_br00026_csv(
     return x_csv
 
 
-def add_kick_to_br00027_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00027_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_item_reasonunit":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
                 if_none_str(budatom.jvalues.get("base_item_active_requisite")),
@@ -738,16 +738,16 @@ def add_kick_to_br00027_csv(
     return x_csv
 
 
-def add_kick_to_br00028_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00028_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "bud_itemunit":
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 budatom.jkeys.get("parent_road"),
                 budatom.jkeys.get("item_title"),
                 if_none_str(budatom.jvalues.get("begin")),
@@ -767,17 +767,17 @@ def add_kick_to_br00028_csv(
     return x_csv
 
 
-def add_kick_to_br00029_csv(
-    x_csv: str, x_kickunit: KickUnit, csv_delimiter: str
+def add_pack_to_br00029_csv(
+    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for budatom in x_kickunit._buddelta.get_ordered_budatoms().values():
+    for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
         if budatom.dimen == "budunit":
-            print(f"{budatom=} {x_kickunit.owner_name=}")
+            print(f"{budatom=} {x_packunit.owner_name=}")
             x_row = [
-                x_kickunit.face_name,
-                str(x_kickunit.event_int),
-                x_kickunit.fisc_title,
-                x_kickunit.owner_name,
+                x_packunit.face_name,
+                str(x_packunit.event_int),
+                x_packunit.fisc_title,
+                x_packunit.owner_name,
                 if_none_str(budatom.jvalues.get("credor_respect")),
                 if_none_str(budatom.jvalues.get("debtor_respect")),
                 if_none_str(budatom.jvalues.get("fund_pool")),
@@ -792,8 +792,8 @@ def add_kick_to_br00029_csv(
     return x_csv
 
 
-def add_kickunit_to_stance_csv_strs(
-    x_kick: KickUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
+def add_packunit_to_stance_csv_strs(
+    x_pack: PackUnit, fisc_csv_strs: dict[str, str], csv_delimiter: str
 ):
     br00020_csv = fisc_csv_strs.get("br00020")
     br00021_csv = fisc_csv_strs.get("br00021")
@@ -805,16 +805,16 @@ def add_kickunit_to_stance_csv_strs(
     br00027_csv = fisc_csv_strs.get("br00027")
     br00028_csv = fisc_csv_strs.get("br00028")
     br00029_csv = fisc_csv_strs.get("br00029")
-    br00020_csv = add_kick_to_br00020_csv(br00020_csv, x_kick, csv_delimiter)
-    br00021_csv = add_kick_to_br00021_csv(br00021_csv, x_kick, csv_delimiter)
-    br00022_csv = add_kick_to_br00022_csv(br00022_csv, x_kick, csv_delimiter)
-    br00023_csv = add_kick_to_br00023_csv(br00023_csv, x_kick, csv_delimiter)
-    br00024_csv = add_kick_to_br00024_csv(br00024_csv, x_kick, csv_delimiter)
-    br00025_csv = add_kick_to_br00025_csv(br00025_csv, x_kick, csv_delimiter)
-    br00026_csv = add_kick_to_br00026_csv(br00026_csv, x_kick, csv_delimiter)
-    br00027_csv = add_kick_to_br00027_csv(br00027_csv, x_kick, csv_delimiter)
-    br00028_csv = add_kick_to_br00028_csv(br00028_csv, x_kick, csv_delimiter)
-    br00029_csv = add_kick_to_br00029_csv(br00029_csv, x_kick, csv_delimiter)
+    br00020_csv = add_pack_to_br00020_csv(br00020_csv, x_pack, csv_delimiter)
+    br00021_csv = add_pack_to_br00021_csv(br00021_csv, x_pack, csv_delimiter)
+    br00022_csv = add_pack_to_br00022_csv(br00022_csv, x_pack, csv_delimiter)
+    br00023_csv = add_pack_to_br00023_csv(br00023_csv, x_pack, csv_delimiter)
+    br00024_csv = add_pack_to_br00024_csv(br00024_csv, x_pack, csv_delimiter)
+    br00025_csv = add_pack_to_br00025_csv(br00025_csv, x_pack, csv_delimiter)
+    br00026_csv = add_pack_to_br00026_csv(br00026_csv, x_pack, csv_delimiter)
+    br00027_csv = add_pack_to_br00027_csv(br00027_csv, x_pack, csv_delimiter)
+    br00028_csv = add_pack_to_br00028_csv(br00028_csv, x_pack, csv_delimiter)
+    br00029_csv = add_pack_to_br00029_csv(br00029_csv, x_pack, csv_delimiter)
     fisc_csv_strs["br00020"] = br00020_csv
     fisc_csv_strs["br00021"] = br00021_csv
     fisc_csv_strs["br00022"] = br00022_csv

@@ -1,4 +1,4 @@
-from src.f00_instrument.file import (
+from src.f00_instrument.file_toolbox import (
     create_path,
     get_directory_path,
     save_file,
@@ -43,17 +43,17 @@ from src.f02_bud.bud import (
     budunit_shop,
 )
 from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
-from src.f04_kick.atom import (
+from src.f04_pack.atom import (
     BudAtom,
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,
 )
-from src.f04_kick.kick import (
-    get_init_kick_id_if_None,
-    init_kick_id,
-    KickUnit,
-    kickunit_shop,
-    create_kickunit_from_files,
+from src.f04_pack.pack import (
+    get_init_pack_id_if_None,
+    init_pack_id,
+    PackUnit,
+    packunit_shop,
+    create_packunit_from_files,
 )
 from src.f06_listen.basis_buds import get_default_plan
 from src.f06_listen.hub_path import treasury_filename
@@ -79,11 +79,11 @@ class Invalid_plan_Exception(Exception):
     pass
 
 
-class SavekickFileException(Exception):
+class SavepackFileException(Exception):
     pass
 
 
-class kickFileMissingException(Exception):
+class packFileMissingException(Exception):
     pass
 
 
@@ -132,7 +132,7 @@ class HubUnit:
     _owner_dir: str = None
     _keeps_dir: str = None
     _atoms_dir: str = None
-    _kicks_dir: str = None
+    _packs_dir: str = None
     _deals_dir: str = None
 
     def set_dir_attrs(self):
@@ -142,7 +142,7 @@ class HubUnit:
         self._owner_dir = create_path(self._owners_dir, self.owner_name)
         self._keeps_dir = create_path(self._owner_dir, "keeps")
         self._atoms_dir = create_path(self._owner_dir, "atoms")
-        self._kicks_dir = create_path(self._owner_dir, "kicks")
+        self._packs_dir = create_path(self._owner_dir, "packs")
         self._deals_dir = create_path(self._owner_dir, "deals")
 
     def default_gut_bud(self) -> BudUnit:
@@ -155,10 +155,10 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_budunit.last_kick_id = init_kick_id()
+        x_budunit.last_pack_id = init_pack_id()
         return x_budunit
 
-    # kick methods
+    # pack methods
     def get_max_atom_file_number(self) -> int:
         return get_max_file_number(self._atoms_dir)
 
@@ -203,149 +203,149 @@ class HubUnit:
                 modify_bud_with_budatom(x_bud, x_atom)
         return x_bud
 
-    def get_max_kick_file_number(self) -> int:
-        return get_max_file_number(self._kicks_dir)
+    def get_max_pack_file_number(self) -> int:
+        return get_max_file_number(self._packs_dir)
 
-    def _get_next_kick_file_number(self) -> int:
-        max_file_number = self.get_max_kick_file_number()
-        init_kick_id = get_init_kick_id_if_None()
-        return init_kick_id if max_file_number is None else max_file_number + 1
+    def _get_next_pack_file_number(self) -> int:
+        max_file_number = self.get_max_pack_file_number()
+        init_pack_id = get_init_pack_id_if_None()
+        return init_pack_id if max_file_number is None else max_file_number + 1
 
-    def kick_filename(self, kick_id: int) -> str:
-        return get_json_filename(kick_id)
+    def pack_filename(self, pack_id: int) -> str:
+        return get_json_filename(pack_id)
 
-    def kick_file_path(self, kick_id: int) -> bool:
-        kick_filename = self.kick_filename(kick_id)
-        return create_path(self._kicks_dir, kick_filename)
+    def pack_file_path(self, pack_id: int) -> bool:
+        pack_filename = self.pack_filename(pack_id)
+        return create_path(self._packs_dir, pack_filename)
 
-    def kick_file_exists(self, kick_id: int) -> bool:
-        return os_path_exists(self.kick_file_path(kick_id))
+    def pack_file_exists(self, pack_id: int) -> bool:
+        return os_path_exists(self.pack_file_path(pack_id))
 
-    def validate_kickunit(self, x_kickunit: KickUnit) -> KickUnit:
-        if x_kickunit._atoms_dir != self._atoms_dir:
-            x_kickunit._atoms_dir = self._atoms_dir
-        if x_kickunit._kicks_dir != self._kicks_dir:
-            x_kickunit._kicks_dir = self._kicks_dir
-        if x_kickunit._kick_id != self._get_next_kick_file_number():
-            x_kickunit._kick_id = self._get_next_kick_file_number()
-        if x_kickunit.owner_name != self.owner_name:
-            x_kickunit.owner_name = self.owner_name
-        if x_kickunit._delta_start != self._get_next_atom_file_number():
-            x_kickunit._delta_start = self._get_next_atom_file_number()
-        return x_kickunit
+    def validate_packunit(self, x_packunit: PackUnit) -> PackUnit:
+        if x_packunit._atoms_dir != self._atoms_dir:
+            x_packunit._atoms_dir = self._atoms_dir
+        if x_packunit._packs_dir != self._packs_dir:
+            x_packunit._packs_dir = self._packs_dir
+        if x_packunit._pack_id != self._get_next_pack_file_number():
+            x_packunit._pack_id = self._get_next_pack_file_number()
+        if x_packunit.owner_name != self.owner_name:
+            x_packunit.owner_name = self.owner_name
+        if x_packunit._delta_start != self._get_next_atom_file_number():
+            x_packunit._delta_start = self._get_next_atom_file_number()
+        return x_packunit
 
-    def save_kick_file(
+    def save_pack_file(
         self,
-        x_kick: KickUnit,
+        x_pack: PackUnit,
         replace: bool = True,
         correct_invalid_attrs: bool = True,
-    ) -> KickUnit:
+    ) -> PackUnit:
         if correct_invalid_attrs:
-            x_kick = self.validate_kickunit(x_kick)
+            x_pack = self.validate_packunit(x_pack)
 
-        if x_kick._atoms_dir != self._atoms_dir:
-            raise SavekickFileException(
-                f"KickUnit file cannot be saved because kickunit._atoms_dir is incorrect: {x_kick._atoms_dir}. It must be {self._atoms_dir}."
+        if x_pack._atoms_dir != self._atoms_dir:
+            raise SavepackFileException(
+                f"PackUnit file cannot be saved because packunit._atoms_dir is incorrect: {x_pack._atoms_dir}. It must be {self._atoms_dir}."
             )
-        if x_kick._kicks_dir != self._kicks_dir:
-            raise SavekickFileException(
-                f"KickUnit file cannot be saved because kickunit._kicks_dir is incorrect: {x_kick._kicks_dir}. It must be {self._kicks_dir}."
+        if x_pack._packs_dir != self._packs_dir:
+            raise SavepackFileException(
+                f"PackUnit file cannot be saved because packunit._packs_dir is incorrect: {x_pack._packs_dir}. It must be {self._packs_dir}."
             )
-        if x_kick.owner_name != self.owner_name:
-            raise SavekickFileException(
-                f"KickUnit file cannot be saved because kickunit.owner_name is incorrect: {x_kick.owner_name}. It must be {self.owner_name}."
+        if x_pack.owner_name != self.owner_name:
+            raise SavepackFileException(
+                f"PackUnit file cannot be saved because packunit.owner_name is incorrect: {x_pack.owner_name}. It must be {self.owner_name}."
             )
-        kick_filename = self.kick_filename(x_kick._kick_id)
-        if not replace and self.kick_file_exists(x_kick._kick_id):
-            raise SavekickFileException(
-                f"KickUnit file {kick_filename} exists and cannot be saved over."
+        pack_filename = self.pack_filename(x_pack._pack_id)
+        if not replace and self.pack_file_exists(x_pack._pack_id):
+            raise SavepackFileException(
+                f"PackUnit file {pack_filename} exists and cannot be saved over."
             )
-        x_kick.save_files()
-        return x_kick
+        x_pack.save_files()
+        return x_pack
 
-    def _del_kick_file(self, kick_id: int):
-        delete_dir(self.kick_file_path(kick_id))
+    def _del_pack_file(self, pack_id: int):
+        delete_dir(self.pack_file_path(pack_id))
 
-    def _default_kickunit(self) -> KickUnit:
-        return kickunit_shop(
+    def _default_packunit(self) -> PackUnit:
+        return packunit_shop(
             owner_name=self.owner_name,
-            _kick_id=self._get_next_kick_file_number(),
+            _pack_id=self._get_next_pack_file_number(),
             _atoms_dir=self._atoms_dir,
-            _kicks_dir=self._kicks_dir,
+            _packs_dir=self._packs_dir,
         )
 
-    def create_save_kick_file(self, before_bud: BudUnit, after_bud: BudUnit):
-        new_kickunit = self._default_kickunit()
-        new_buddelta = new_kickunit._buddelta
+    def create_save_pack_file(self, before_bud: BudUnit, after_bud: BudUnit):
+        new_packunit = self._default_packunit()
+        new_buddelta = new_packunit._buddelta
         new_buddelta.add_all_different_budatoms(before_bud, after_bud)
-        self.save_kick_file(new_kickunit)
+        self.save_pack_file(new_packunit)
 
-    def get_kickunit(self, kick_id: int) -> KickUnit:
-        if self.kick_file_exists(kick_id) is False:
-            raise kickFileMissingException(
-                f"KickUnit file_number {kick_id} does not exist."
+    def get_packunit(self, pack_id: int) -> PackUnit:
+        if self.pack_file_exists(pack_id) is False:
+            raise packFileMissingException(
+                f"PackUnit file_number {pack_id} does not exist."
             )
-        x_kicks_dir = self._kicks_dir
+        x_packs_dir = self._packs_dir
         x_atoms_dir = self._atoms_dir
-        return create_kickunit_from_files(x_kicks_dir, kick_id, x_atoms_dir)
+        return create_packunit_from_files(x_packs_dir, pack_id, x_atoms_dir)
 
-    def _merge_any_kicks(self, x_bud: BudUnit) -> BudUnit:
-        kicks_dir = self._kicks_dir
-        kick_ints = get_integer_filenames(kicks_dir, x_bud.last_kick_id)
-        if len(kick_ints) == 0:
+    def _merge_any_packs(self, x_bud: BudUnit) -> BudUnit:
+        packs_dir = self._packs_dir
+        pack_ints = get_integer_filenames(packs_dir, x_bud.last_pack_id)
+        if len(pack_ints) == 0:
             return copy_deepcopy(x_bud)
 
-        for kick_int in kick_ints:
-            x_kick = self.get_kickunit(kick_int)
-            new_bud = x_kick._buddelta.get_edited_bud(x_bud)
+        for pack_int in pack_ints:
+            x_pack = self.get_packunit(pack_int)
+            new_bud = x_pack._buddelta.get_edited_bud(x_bud)
         return new_bud
 
-    def _create_initial_kick_files_from_default(self):
-        x_kickunit = kickunit_shop(
+    def _create_initial_pack_files_from_default(self):
+        x_packunit = packunit_shop(
             owner_name=self.owner_name,
-            _kick_id=get_init_kick_id_if_None(),
-            _kicks_dir=self._kicks_dir,
+            _pack_id=get_init_pack_id_if_None(),
+            _packs_dir=self._packs_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_kickunit._buddelta.add_all_different_budatoms(
+        x_packunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_gut_bud(),
             after_bud=self.default_gut_bud(),
         )
-        x_kickunit.save_files()
+        x_packunit.save_files()
 
-    def _create_gut_from_kicks(self):
-        x_bud = self._merge_any_kicks(self.default_gut_bud())
+    def _create_gut_from_packs(self):
+        x_bud = self._merge_any_packs(self.default_gut_bud())
         save_gut_file(self.fisc_mstr_dir, x_bud)
 
-    def _create_initial_kick_and_gut_files(self):
-        self._create_initial_kick_files_from_default()
-        self._create_gut_from_kicks()
+    def _create_initial_pack_and_gut_files(self):
+        self._create_initial_pack_files_from_default()
+        self._create_gut_from_packs()
 
-    def _create_initial_kick_files_from_gut(self):
-        x_kickunit = self._default_kickunit()
-        x_kickunit._buddelta.add_all_different_budatoms(
+    def _create_initial_pack_files_from_gut(self):
+        x_packunit = self._default_packunit()
+        x_packunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_gut_bud(),
             after_bud=open_gut_file(
                 self.fisc_mstr_dir, self.fisc_title, self.owner_name
             ),
         )
-        x_kickunit.save_files()
+        x_packunit.save_files()
 
-    def initialize_kick_gut_files(self):
+    def initialize_pack_gut_files(self):
         x_gut_file_exists = gut_file_exists(
             self.fisc_mstr_dir, self.fisc_title, self.owner_name
         )
-        kick_file_exists = self.kick_file_exists(init_kick_id())
-        if x_gut_file_exists is False and kick_file_exists is False:
-            self._create_initial_kick_and_gut_files()
-        elif x_gut_file_exists is False and kick_file_exists:
-            self._create_gut_from_kicks()
-        elif x_gut_file_exists and kick_file_exists is False:
-            self._create_initial_kick_files_from_gut()
+        pack_file_exists = self.pack_file_exists(init_pack_id())
+        if x_gut_file_exists is False and pack_file_exists is False:
+            self._create_initial_pack_and_gut_files()
+        elif x_gut_file_exists is False and pack_file_exists:
+            self._create_gut_from_packs()
+        elif x_gut_file_exists and pack_file_exists is False:
+            self._create_initial_pack_files_from_gut()
 
-    def append_kicks_to_gut_file(self):
+    def append_packs_to_gut_file(self):
         gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
-        gut_bud = self._merge_any_kicks(gut_bud)
+        gut_bud = self._merge_any_packs(gut_bud)
         save_gut_file(self.fisc_mstr_dir, gut_bud)
         return gut_bud
 

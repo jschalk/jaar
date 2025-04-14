@@ -9,16 +9,16 @@
         "atom_hx": {
             "columns": {}
         },
-        "delta2kick": {
+        "delta2pack": {
             "columns": {}
         },
         "delta_mstr": {
             "columns": {}
         },
-        "kick_mstr": {
+        "pack_mstr": {
             "columns": {}
         },
-        "kick2owner": {
+        "pack2owner": {
             "columns": {
                 "owner_name": {}
             }

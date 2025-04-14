@@ -102,7 +102,7 @@ class _bit_RatioException(Exception):
     pass
 
 
-class _last_kick_idException(Exception):
+class _last_pack_idException(Exception):
     pass
 
 
@@ -129,7 +129,7 @@ class BudUnit:
     respect_bit: BitNum = None
     bridge: str = None
     max_tree_traverse: int = None
-    last_kick_id: int = None
+    last_pack_id: int = None
     originunit: OriginUnit = None  # In job buds this shows source
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
@@ -147,14 +147,14 @@ class BudUnit:
     _range_inheritors: dict[RoadUnit, RoadUnit] = None
     # settle_bud Calculated field end
 
-    def del_last_kick_id(self):
-        self.last_kick_id = None
+    def del_last_pack_id(self):
+        self.last_pack_id = None
 
-    def set_last_kick_id(self, x_last_kick_id: int):
-        if self.last_kick_id is not None and x_last_kick_id < self.last_kick_id:
-            exception_str = f"Cannot set _last_kick_id to {x_last_kick_id} because it is less than {self.last_kick_id}."
-            raise _last_kick_idException(exception_str)
-        self.last_kick_id = x_last_kick_id
+    def set_last_pack_id(self, x_last_pack_id: int):
+        if self.last_pack_id is not None and x_last_pack_id < self.last_pack_id:
+            exception_str = f"Cannot set _last_pack_id to {x_last_pack_id} because it is less than {self.last_pack_id}."
+            raise _last_pack_idException(exception_str)
+        self.last_pack_id = x_last_pack_id
 
     def set_fund_pool(self, x_fund_pool):
         if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
@@ -378,7 +378,6 @@ class BudUnit:
                 else:
                     acct_name_set.add(x_acctunit.acct_name)
                     x_dict[x_group_label] = acct_name_set
-        print(f"{x_dict=}")
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
@@ -617,10 +616,8 @@ class BudUnit:
             item_kid.fisc_title = self.fisc_title
         if item_kid.fund_coin != self.fund_coin:
             item_kid.fund_coin = self.fund_coin
-        print(f"{item_kid.teamunit=}")
         if not get_rid_of_missing_awardlinks_awardee_tags:
             item_kid = self._get_filtered_awardlinks_item(item_kid)
-        print(f"{item_kid.teamunit=}")
         item_kid.set_parent_road(parent_road=parent_road)
 
         # create any missing items
@@ -658,7 +655,6 @@ class BudUnit:
         ]
         for _awardlink_awardee_tag in _awardlinks_to_delete:
             x_item.awardlinks.pop(_awardlink_awardee_tag)
-        print(f"{x_item.teamunit=}")
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
                 _teamlink_team_tag
@@ -667,7 +663,6 @@ class BudUnit:
             ]
             for _teamlink_team_tag in _teamlinks_to_delete:
                 x_item.teamunit.del_teamlink(_teamlink_team_tag)
-        print(f"{x_item.teamunit=}")
         return x_item
 
     def _create_missing_items(self, road):
@@ -1379,8 +1374,8 @@ class BudUnit:
             x_dict["credor_respect"] = self.credor_respect
         if self.debtor_respect is not None:
             x_dict["debtor_respect"] = self.debtor_respect
-        if self.last_kick_id is not None:
-            x_dict["last_kick_id"] = self.last_kick_id
+        if self.last_pack_id is not None:
+            x_dict["last_pack_id"] = self.last_pack_id
 
         return x_dict
 
@@ -1476,7 +1471,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.penny = filter_penny(obj_from_bud_dict(bud_dict, "penny"))
     x_bud.credor_respect = obj_from_bud_dict(bud_dict, "credor_respect")
     x_bud.debtor_respect = obj_from_bud_dict(bud_dict, "debtor_respect")
-    x_bud.last_kick_id = obj_from_bud_dict(bud_dict, "last_kick_id")
+    x_bud.last_pack_id = obj_from_bud_dict(bud_dict, "last_pack_id")
     x_bridge = x_bud.bridge
     x_accts = obj_from_bud_dict(bud_dict, "accts", x_bridge).values()
     for x_acctunit in x_accts:
@@ -1553,9 +1548,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
             factunits=get_obj_from_item_dict(item_dict, "factunits"),
             _is_expanded=get_obj_from_item_dict(item_dict, "_is_expanded"),
         )
-        print(f"beg {x_itemkid.get_road()=} {x_itemkid.teamunit=}")
         x_bud.set_item(x_itemkid, parent_road=item_dict[parent_road_str])
-        print(f"huh {x_itemkid.get_road()=} {x_itemkid.teamunit=}")
 
 
 def obj_from_bud_dict(

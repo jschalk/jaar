@@ -1,9 +1,9 @@
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     get_flattened_atom_table_build,
     atom_hx_table_name,
     atom_mstr_table_name,
 )
-from src.f04_kick.atom import BudAtom
+from src.f04_pack.atom import BudAtom
 from src.f01_road.road import RoadUnit
 
 # from src.f00_instrument.sqlite import (
@@ -75,37 +75,37 @@ CREATE TABLE IF NOT EXISTS delta_mstr (
 ;"""
 
 
-def get_delta2kick_table_create_sqlstr() -> str:
+def get_delta2pack_table_create_sqlstr() -> str:
     return """
-CREATE TABLE delta2kick
+CREATE TABLE delta2pack
 (
   delta_rowid INT NOT NULL
-, kick_rowid INT NOT NULL
-, UNIQUE(delta_rowid, kick_rowid)
+, pack_rowid INT NOT NULL
+, UNIQUE(delta_rowid, pack_rowid)
 , CONSTRAINT atom_fk FOREIGN KEY (delta_rowid) REFERENCES delta_mstr (rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (kick_rowid) REFERENCES kick_mstr (rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (pack_rowid) REFERENCES pack_mstr (rowid)
 )
 ;"""
 
 
-def get_kick_table_create_sqlstr() -> str:
+def get_pack_table_create_sqlstr() -> str:
     return """
-CREATE TABLE IF NOT EXISTS kick_mstr (
+CREATE TABLE IF NOT EXISTS pack_mstr (
   author_owner_name VARCHAR(255) NOT NULL
-, author_kick_number INT NOT NULL
-, UNIQUE(author_owner_name, author_kick_number)
+, author_pack_number INT NOT NULL
+, UNIQUE(author_owner_name, author_pack_number)
 )
 ;"""
 
 
-def get_kick2owner_table_create_sqlstr() -> str:
+def get_pack2owner_table_create_sqlstr() -> str:
     return """
-CREATE TABLE kick2owner
+CREATE TABLE pack2owner
 (
-  kick_rowid INT NOT NULL
+  pack_rowid INT NOT NULL
 , owner_rowid INT NOT NULL
-, UNIQUE(kick_rowid, owner_rowid)
-, CONSTRAINT delta_fk FOREIGN KEY (kick_rowid) REFERENCES kick_mstr (rowid)
+, UNIQUE(pack_rowid, owner_rowid)
+, CONSTRAINT delta_fk FOREIGN KEY (pack_rowid) REFERENCES pack_mstr (rowid)
 , CONSTRAINT owner_fk FOREIGN KEY (owner_rowid) REFERENCES owner (rowid)
 )
 ;"""
@@ -155,9 +155,9 @@ def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x.append(get_atom_mstr_table_create_sqlstr())
     list_x.append(get_atom2delta_table_create_sqlstr())
     list_x.append(get_delta_table_create_sqlstr())
-    list_x.append(get_delta2kick_table_create_sqlstr())
-    list_x.append(get_kick_table_create_sqlstr())
-    list_x.append(get_kick2owner_table_create_sqlstr())
+    list_x.append(get_delta2pack_table_create_sqlstr())
+    list_x.append(get_pack_table_create_sqlstr())
+    list_x.append(get_pack2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())
     list_x.append(get_road_ref_table_create_sqlstr())
     return list_x

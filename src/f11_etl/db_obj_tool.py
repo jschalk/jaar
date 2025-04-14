@@ -695,8 +695,6 @@ def insert_plan_obj(cursor: sqlite3_Cursor, world_id: WorldID, plan_bud: BudUnit
         teamheir = x_item._teamheir
         insert_plan_buditem(cursor, x_objkeysholder, x_item)
         insert_plan_budheal(cursor, x_objkeysholder, healerlink)
-        print(f"{x_item.teamunit=}")
-        print(f"{x_item.get_road()=} {x_item._teamheir=}")
         insert_plan_budteam(cursor, x_objkeysholder, teamheir)
         for x_awardheir in x_item._awardheirs.values():
             insert_plan_budawar(cursor, x_objkeysholder, x_awardheir)

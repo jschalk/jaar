@@ -39,10 +39,10 @@ def add_gut_pledge(
     )
     old_gut_bud = copy_deepcopy(gut_bud)
     create_pledge(gut_bud, pledge_road, x_teamlink, reason_premise)
-    next_kickunit = x_hubunit._default_kickunit()
-    next_kickunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
-    next_kickunit.save_files()
-    x_hubunit.append_kicks_to_gut_file()
+    next_packunit = x_hubunit._default_packunit()
+    next_packunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
+    next_packunit.save_files()
+    x_hubunit.append_packs_to_gut_file()
 
 
 def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
@@ -60,7 +60,7 @@ def add_gut_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
     )
     old_gut_bud = copy_deepcopy(gut_bud)
     create_fact(gut_bud, fact_pick)
-    next_kickunit = x_hubunit._default_kickunit()
-    next_kickunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
-    next_kickunit.save_files()
-    x_hubunit.append_kicks_to_gut_file()
+    next_packunit = x_hubunit._default_packunit()
+    next_packunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
+    next_packunit.save_files()
+    x_hubunit.append_packs_to_gut_file()

@@ -1,6 +1,6 @@
 from src.f00_instrument.dict_toolbox import extract_csv_headers
 from src.f01_road.deal import owner_name_str, fisc_title_str
-from src.f04_kick.atom_config import acct_name_str
+from src.f04_pack.atom_config import acct_name_str
 from src.f10_idea.idea import (
     get_csv_fisc_title_owner_name_metrics,
     fisc_title_owner_name_nested_csv_dict,

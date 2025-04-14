@@ -1,6 +1,6 @@
-from src.f00_instrument.file import create_path
+from src.f00_instrument.file_toolbox import create_path
 from src.f01_road.deal import fisc_title_str, owner_name_str
-from src.f04_kick.atom_config import (
+from src.f04_pack.atom_config import (
     face_name_str,
     event_int_str,
     acct_name_str,
@@ -216,7 +216,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
         os_remove(zia_csv_filepath)
 
 
-def test_create_idea_table_from_csv_DoesNothinkickableExists(
+def test_create_idea_table_from_csv_DoesNothinpackableExists(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH

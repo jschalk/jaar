@@ -1,4 +1,4 @@
-from src.f00_instrument.file import (
+from src.f00_instrument.file_toolbox import (
     set_dir,
     delete_dir,
     get_dir_file_strs,
@@ -86,13 +86,13 @@ class set_offi_time_max_Exception(Exception):
 @dataclass
 class FiscUnit:
     """Data pipelines:
-    pipeline1: kicks->gut
+    pipeline1: packs->gut
     pipeline2: gut->dutys
     pipeline3: duty->job
     pipeline4: job->plan
     pipeline5: gut->plan (direct)
     pipeline6: gut->job->plan (through jobs)
-    pipeline7: kicks->plan (could be 5 of 6)
+    pipeline7: packs->plan (could be 5 of 6)
     """
 
     fisc_title: FiscTitle = None
@@ -110,7 +110,7 @@ class FiscUnit:
     _fisc_dir: str = None
     _owners_dir: str = None
     _journal_db: str = None
-    _kicks_dir: str = None
+    _packs_dir: str = None
     _all_tranbook: TranBook = None
 
     # directory setup
@@ -118,10 +118,10 @@ class FiscUnit:
         fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
         self._fisc_dir = create_path(fiscs_dir, self.fisc_title)
         self._owners_dir = create_path(self._fisc_dir, "owners")
-        self._kicks_dir = create_path(self._fisc_dir, "kicks")
+        self._packs_dir = create_path(self._fisc_dir, "packs")
         set_dir(x_path=self._fisc_dir)
         set_dir(x_path=self._owners_dir)
-        set_dir(x_path=self._kicks_dir)
+        set_dir(x_path=self._packs_dir)
         self._create_journal_db(in_memory=in_memory_journal)
 
     def _get_owner_dir(self, owner_name):
@@ -193,9 +193,9 @@ class FiscUnit:
             respect_bit=self.respect_bit,
         )
 
-    def init_kick_and_plan(self, owner_name: OwnerName):
+    def init_pack_and_plan(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
-        x_hubunit.initialize_kick_gut_files()
+        x_hubunit.initialize_pack_gut_files()
         x_hubunit.initialize_plan_file(self.get_owner_gut_from_file(owner_name))
 
     def get_owner_gut_from_file(self, owner_name: OwnerName) -> BudUnit:
@@ -269,7 +269,7 @@ class FiscUnit:
 
     def generate_all_plans(self):
         for owner_name in self._get_owner_folder_names():
-            self.init_kick_and_plan(owner_name)
+            self.init_pack_and_plan(owner_name)
             plan = self.generate_plan(owner_name)
             save_plan_file(self.fisc_mstr_dir, plan)
 

@@ -1,5 +1,5 @@
 from src.f00_instrument.dict_toolbox import get_from_nested_dict
-from src.f00_instrument.file import (
+from src.f00_instrument.file_toolbox import (
     delete_dir,
     save_file,
     open_file,
