@@ -8,12 +8,8 @@ from src.f06_listen.hub_tool import (
     open_plan_file,
     save_plan_file,
 )
-from src.f06_listen.hubunit import hubunit_shop
 from src.f08_fisc.fisc import fiscunit_shop
-from src.f08_fisc.examples.fisc_env import (
-    get_test_fisc_mstr_dir,
-    env_dir_setup_cleanup,
-)
+from src.f08_fisc.examples.fisc_env import get_test_fisc_mstr_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 
@@ -165,3 +161,5 @@ def test_FiscUnit_generate_all_plans_SetsCorrectFiles(
     after_sue_plan = a23_fisc.get_plan_file_bud(sue_str)
     assert after_bob_plan.acct_exists(bob_str)
     assert after_sue_plan.acct_exists(sue_str)
+
+    # assert 1 == 2
