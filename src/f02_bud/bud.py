@@ -378,6 +378,7 @@ class BudUnit:
                 else:
                     acct_name_set.add(x_acctunit.acct_name)
                     x_dict[x_group_label] = acct_name_set
+        print(f"{x_dict=}")
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
@@ -616,8 +617,10 @@ class BudUnit:
             item_kid.fisc_title = self.fisc_title
         if item_kid.fund_coin != self.fund_coin:
             item_kid.fund_coin = self.fund_coin
+        print(f"{item_kid.teamunit=}")
         if not get_rid_of_missing_awardlinks_awardee_tags:
             item_kid = self._get_filtered_awardlinks_item(item_kid)
+        print(f"{item_kid.teamunit=}")
         item_kid.set_parent_road(parent_road=parent_road)
 
         # create any missing items
@@ -655,7 +658,7 @@ class BudUnit:
         ]
         for _awardlink_awardee_tag in _awardlinks_to_delete:
             x_item.awardlinks.pop(_awardlink_awardee_tag)
-
+        print(f"{x_item.teamunit=}")
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
                 _teamlink_team_tag
@@ -664,6 +667,7 @@ class BudUnit:
             ]
             for _teamlink_team_tag in _teamlinks_to_delete:
                 x_item.teamunit.del_teamlink(_teamlink_team_tag)
+        print(f"{x_item.teamunit=}")
         return x_item
 
     def _create_missing_items(self, road):
@@ -1549,7 +1553,9 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
             factunits=get_obj_from_item_dict(item_dict, "factunits"),
             _is_expanded=get_obj_from_item_dict(item_dict, "_is_expanded"),
         )
+        print(f"beg {x_itemkid.get_road()=} {x_itemkid.teamunit=}")
         x_bud.set_item(x_itemkid, parent_road=item_dict[parent_road_str])
+        print(f"huh {x_itemkid.get_road()=} {x_itemkid.teamunit=}")
 
 
 def obj_from_bud_dict(

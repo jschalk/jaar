@@ -1,8 +1,13 @@
 from src.f00_instrument.db_toolbox import get_row_count, create_insert_query
 from src.f02_bud.acct import acctunit_shop
-from src.f02_bud.group import awardheir_shop, groupunit_shop, membership_shop
+from src.f02_bud.group import (
+    awardlink_shop,
+    awardheir_shop,
+    groupunit_shop,
+    membership_shop,
+)
 from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.reason_team import teamheir_shop
+from src.f02_bud.reason_team import teamheir_shop, teamunit_shop
 from src.f02_bud.reason_item import reasonheir_shop, premiseunit_shop, factheir_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
@@ -1641,10 +1646,12 @@ def test_insert_plan_obj_CreatesTableRows_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
     x_world_id = "music23"
+    a23_str = "accord23"
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_bud = budunit_shop(sue_str)
+    sue_bud = budunit_shop(sue_str, a23_str)
+    sue_bud.add_acctunit(sue_str)
     sue_bud.add_acctunit(bob_str)
     sue_bud.get_acct(bob_str).add_membership(run_str)
     casa_road = sue_bud.make_l1_road("casa")
@@ -1657,9 +1664,9 @@ def test_insert_plan_obj_CreatesTableRows_Scenario0():
     sue_bud.edit_item_attr(
         road=casa_road, reason_base=status_road, reason_premise=dirty_road
     )
-    sue_bud.edit_item_attr(road=casa_road, awardlink=awardheir_shop(run_str))
+    sue_bud.edit_item_attr(road=casa_road, awardlink=awardlink_shop(run_str))
     sue_bud.edit_item_attr(road=casa_road, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(road=casa_road, teamunit=teamheir_shop({sue_str}))
+    sue_bud.edit_item_attr(road=casa_road, teamunit=teamunit_shop({sue_str}))
     sue_bud.add_fact(status_road, clean_road)
 
     with sqlite3_connect(":memory:") as conn:
@@ -1694,9 +1701,9 @@ def test_insert_plan_obj_CreatesTableRows_Scenario0():
         # THEN
         assert get_row_count(cursor, budunit_plan_table) == 1
         assert get_row_count(cursor, buditem_plan_table) == 5
-        assert get_row_count(cursor, budacct_plan_table) == 1
-        assert get_row_count(cursor, budmemb_plan_table) == 2
-        assert get_row_count(cursor, budgrou_plan_table) == 2
+        assert get_row_count(cursor, budacct_plan_table) == 2
+        assert get_row_count(cursor, budmemb_plan_table) == 3
+        assert get_row_count(cursor, budgrou_plan_table) == 3
         assert get_row_count(cursor, budawar_plan_table) == 1
         assert get_row_count(cursor, budfact_plan_table) == 1
         assert get_row_count(cursor, budheal_plan_table) == 1

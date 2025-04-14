@@ -685,16 +685,18 @@ def insert_plan_budunit(
     cursor.execute(insert_sqlstr)
 
 
-def insert_plan_obj(cursor: sqlite3_Cursor, world_id: WorldID, x_bud: BudUnit):
-    x_bud.settle_bud()
-    x_objkeysholder = ObjKeysHolder(world_id, x_bud.fisc_title, x_bud.owner_name)
-    insert_plan_budunit(cursor, x_objkeysholder, x_bud)
-    for x_item in x_bud.get_item_dict().values():
+def insert_plan_obj(cursor: sqlite3_Cursor, world_id: WorldID, plan_bud: BudUnit):
+    plan_bud.settle_bud()
+    x_objkeysholder = ObjKeysHolder(world_id, plan_bud.fisc_title, plan_bud.owner_name)
+    insert_plan_budunit(cursor, x_objkeysholder, plan_bud)
+    for x_item in plan_bud.get_item_dict().values():
         x_objkeysholder.road = x_item.get_road()
         healerlink = x_item.healerlink
         teamheir = x_item._teamheir
         insert_plan_buditem(cursor, x_objkeysholder, x_item)
         insert_plan_budheal(cursor, x_objkeysholder, healerlink)
+        print(f"{x_item.teamunit=}")
+        print(f"{x_item.get_road()=} {x_item._teamheir=}")
         insert_plan_budteam(cursor, x_objkeysholder, teamheir)
         for x_awardheir in x_item._awardheirs.values():
             insert_plan_budawar(cursor, x_objkeysholder, x_awardheir)
@@ -704,14 +706,14 @@ def insert_plan_obj(cursor: sqlite3_Cursor, world_id: WorldID, x_bud: BudUnit):
             for prem in reasonheir.premises.values():
                 insert_plan_budprem(cursor, x_objkeysholder, prem)
 
-    for x_acct in x_bud.accts.values():
+    for x_acct in plan_bud.accts.values():
         insert_plan_budacct(cursor, x_objkeysholder, x_acct)
         for x_membership in x_acct._memberships.values():
             insert_plan_budmemb(cursor, x_objkeysholder, x_membership)
 
-    for x_groupunit in x_bud._groupunits.values():
+    for x_groupunit in plan_bud._groupunits.values():
         insert_plan_budgrou(cursor, x_objkeysholder, x_groupunit)
 
-    for x_factheir in x_bud.itemroot._factheirs.values():
-        x_objkeysholder.fact_road = x_bud.itemroot.get_road()
+    for x_factheir in plan_bud.itemroot._factheirs.values():
+        x_objkeysholder.fact_road = plan_bud.itemroot.get_road()
         insert_plan_budfact(cursor, x_objkeysholder, x_factheir)
