@@ -1,9 +1,9 @@
-from src.f00_data_toolboxs.file_toolbox import delete_dir
+from src.a00_data_toolboxs.file_toolbox import delete_dir
 from pytest import fixture as pytest_fixture
 
 
 def get_codespace_instrument_dir() -> str:
-    return "src/f00_data_toolboxs"
+    return "src/a00_data_toolboxs"
 
 
 def get_instrument_examples_dir():

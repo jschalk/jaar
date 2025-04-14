@@ -6,7 +6,7 @@ from src.f01_word_logic.road import (
     is_heir_road,
     default_bridge_if_None,
 )
-from src.f00_data_toolboxs.dict_toolbox import get_empty_dict_if_None
+from src.a00_data_toolboxs.dict_toolbox import get_empty_dict_if_None
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 

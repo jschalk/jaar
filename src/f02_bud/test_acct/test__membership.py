@@ -13,7 +13,7 @@ from src.f02_bud.group import (
     AwardHeir,
     awardheir_shop,
 )
-from src.f00_data_toolboxs.dict_toolbox import x_is_json, get_json_from_dict
+from src.a00_data_toolboxs.dict_toolbox import x_is_json, get_json_from_dict
 from pytest import raises as pytest_raises
 
 

@@ -1,4 +1,4 @@
-from src.f00_data_toolboxs.dict_toolbox import get_json_from_dict, get_dict_from_json
+from src.a00_data_toolboxs.dict_toolbox import get_json_from_dict, get_dict_from_json
 from os import (
     name as os_name,
     environ as os_environ,

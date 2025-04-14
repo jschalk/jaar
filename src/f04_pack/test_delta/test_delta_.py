@@ -31,7 +31,7 @@ from src.f04_pack.examples.example_deltas import (
     get_buddelta_example1,
     get_buddelta_sue_example,
 )
-from src.f00_data_toolboxs.dict_toolbox import x_is_json
+from src.a00_data_toolboxs.dict_toolbox import x_is_json
 from pytest import raises as pytest_raises
 
 

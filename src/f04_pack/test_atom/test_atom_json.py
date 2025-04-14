@@ -13,7 +13,7 @@ from src.f04_pack.atom import (
     atom_insert,
     get_from_json as budatom_get_from_json,
 )
-from src.f00_data_toolboxs.dict_toolbox import x_is_json
+from src.a00_data_toolboxs.dict_toolbox import x_is_json
 
 
 def test_BudAtom_get_dict_ReturnsObj():
