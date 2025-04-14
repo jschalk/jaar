@@ -41,14 +41,14 @@ from src.a01_word_logic.road import (
 )
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
-from src.f06_listen.basis_buds import get_default_plan
+from src.a12_hub_tools.basis_buds import get_default_plan
 from src.a11_deal_cell_logic.cell import cellunit_shop
-from src.f06_listen.hub_path import (
+from src.a12_hub_tools.hub_path import (
     create_fisc_json_path,
     create_cell_dir_path,
     create_gut_path,
 )
-from src.f06_listen.hub_tool import (
+from src.a12_hub_tools.hub_tool import (
     cellunit_save_to_dir,
     open_bud_file,
     open_gut_file,
@@ -56,7 +56,7 @@ from src.f06_listen.hub_tool import (
     save_gut_file,
     save_plan_file,
 )
-from src.f06_listen.hubunit import hubunit_shop, HubUnit
+from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from src.f06_listen.listen import (
     listen_to_speaker_agenda,
     listen_to_debtors_roll_gut_plan,

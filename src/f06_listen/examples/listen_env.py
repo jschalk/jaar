@@ -4,7 +4,7 @@ from src.a01_word_logic.road import (
     get_default_fisc_title,
     RoadUnit,
 )
-from src.f06_listen.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from pytest import fixture as pytest_fixture
 
 

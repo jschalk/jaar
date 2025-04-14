@@ -1,6 +1,6 @@
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.f06_listen.hubunit import hubunit_shop
+from src.a12_hub_tools.hubunit import hubunit_shop
 from src.f06_listen.listen import create_listen_basis, listen_to_agendas_duty_job
 from src.f06_listen.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,

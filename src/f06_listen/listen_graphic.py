@@ -9,7 +9,7 @@ from src.a00_data_toolboxs.plotly_toolbox import (
 from src.a02_finance_toolboxs.finance_config import default_money_magnitude
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_graphics import display_itemtree
-from src.f06_listen.hub_path import gut_str, plan_str
+from src.a12_hub_tools.hub_path import gut_str, plan_str
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 

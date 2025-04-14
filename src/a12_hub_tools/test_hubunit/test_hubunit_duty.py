@@ -2,7 +2,7 @@ from src.a01_word_logic.road import (
     create_road,
     get_default_fisc_title as root_title,
 )
-from src.f06_listen.hubunit import hubunit_shop
+from src.a12_hub_tools.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_buds import get_budunit_with_4_levels
 from src.f06_listen.examples.listen_env import (
     get_texas_hubunit,
