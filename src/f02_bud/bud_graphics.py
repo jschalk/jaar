@@ -368,7 +368,7 @@ def budunit_graph0(graphics_bool) -> plotly_Figure:
         plotly_Scatter(
             x=[2.0],
             y=[3.75],
-            text=["What Jaar Buds Are Made: Graph 0"],
+            text=["What Buds Are Made Of: Graph 0"],
             mode="text",
         )
     )
@@ -395,7 +395,7 @@ def budunit_graph1(graphics_bool) -> plotly_Figure:
             x=[2.0, 2.00, 2.00],
             y=[3.75, 3.5, 3.25],
             text=[
-                "What Jaar Buds Are Made: Graph 1",
+                "What Buds Are Made Of: Graph 1",
                 "People are in blue",
                 "Groups are in green",
             ],
@@ -420,7 +420,7 @@ def budunit_graph2(graphics_bool) -> plotly_Figure:
             x=[2.0, 2.00, 2.00],
             y=[3.75, 3.5, 3.25],
             text=[
-                "What Jaar Buds Are Made: Graph 1",
+                "What Buds Are Made Of: Graph 1",
                 "Pledges are from Items",
                 "All items build from one",
             ],
@@ -450,7 +450,7 @@ def budunit_graph3(graphics_bool) -> plotly_Figure:
             x=[2.0, 2.00, 2.00],
             y=[3.75, 3.5, 3.25],
             text=[
-                "What Jaar Buds Are Made: Graph 1",
+                "What Buds Are Made Of: Graph 1",
                 "Pledges are from Items",
                 "All items build from one",
             ],
@@ -480,7 +480,7 @@ def budunit_graph4(graphics_bool) -> plotly_Figure:
             x=[2.0, 2.00, 2.00],
             y=[3.75, 3.5, 3.25],
             text=[
-                "What Jaar Buds Are Made: Graph 1",
+                "What Buds Are Made Of: Graph 1",
                 "Some Items are pledges, others are reasons for pledges",
                 "All items build from one",
             ],
