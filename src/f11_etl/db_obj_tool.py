@@ -12,6 +12,7 @@ from src.f02_bud.bud import BudUnit
 from src.f11_etl.tran_sqlstrs import get_fisc_fu1_select_sqlstrs
 from sqlite3 import Cursor as sqlite3_Cursor
 from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 
 
 def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> dict:
@@ -523,96 +524,98 @@ VALUES (
 """
 
 
+@dataclass
+class ObjKeysHolder:
+    world_id: WorldID = None
+    fisc_title: FiscTitle = None
+    owner_name: OwnerName = None
+    road: RoadUnit = None
+    base: RoadUnit = None
+    acct_name: AcctUnit = None
+    membership: GroupUnit = None
+    group_name: GroupUnit = None
+    fact_road: RoadUnit = None
+
+
 def insert_plan_budmemb(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
+    x_objkeysholder: ObjKeysHolder,
     x_membership: MemberShip,
 ):
     x_dict = copy_deepcopy(x_membership.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budacct(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
+    x_objkeysholder: ObjKeysHolder,
     x_acct: AcctUnit,
 ):
     x_dict = copy_deepcopy(x_acct.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budacct_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budgrou(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
+    x_objkeysholder: ObjKeysHolder,
     x_groupunit: GroupUnit,
 ):
     x_dict = copy_deepcopy(x_groupunit.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budgrou_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budawar(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
-    road: RoadUnit,
+    x_objkeysholder: ObjKeysHolder,
     x_awardheir: AwardHeir,
 ):
     x_dict = copy_deepcopy(x_awardheir.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
-    x_dict["road"] = road
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
+    x_dict["road"] = x_objkeysholder.road
     insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budfact(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
-    road: RoadUnit,
+    x_objkeysholder: ObjKeysHolder,
     x_factheir: FactHeir,
 ):
     x_dict = copy_deepcopy(x_factheir.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
-    x_dict["road"] = road
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
+    x_dict["road"] = x_objkeysholder.road
     insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budheal(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
-    road: RoadUnit,
+    x_objkeysholder: ObjKeysHolder,
     x_healer: HealerLink,
 ):
-    x_dict = {"fisc_title": fisc_title, "owner_name": owner_name, "road": road}
+    x_dict = {
+        "world_id": x_objkeysholder.world_id,
+        "fisc_title": x_objkeysholder.fisc_title,
+        "owner_name": x_objkeysholder.owner_name,
+        "road": x_objkeysholder.road,
+    }
     for healer_name in sorted(x_healer._healer_names):
-        x_dict["world_id"] = world_id
         x_dict["healer_name"] = healer_name
         insert_sqlstr = create_budheal_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
@@ -620,54 +623,43 @@ def insert_plan_budheal(
 
 def insert_plan_budprem(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
-    road: RoadUnit,
-    base: RoadUnit,
+    x_objkeysholder: ObjKeysHolder,
     x_premiseunit: PremiseUnit,
 ):
     x_dict = copy_deepcopy(x_premiseunit.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
-    x_dict["road"] = road
-    x_dict["base"] = base
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
+    x_dict["road"] = x_objkeysholder.road
+    x_dict["base"] = x_objkeysholder.base
     insert_sqlstr = create_budprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budreas(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
-    road: RoadUnit,
+    x_objkeysholder: ObjKeysHolder,
     x_reasonheir: ReasonHeir,
 ):
     x_dict = copy_deepcopy(x_reasonheir.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
-    x_dict["road"] = road
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
+    x_dict["road"] = x_objkeysholder.road
     insert_sqlstr = create_budreas_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
 def insert_plan_budteam(
     cursor: sqlite3_Cursor,
-    world_id: WorldID,
-    fisc_title: FiscTitle,
-    owner_name: OwnerName,
-    road: RoadUnit,
+    x_objkeysholder: ObjKeysHolder,
     x_teamheir: TeamHeir,
 ):
-
     x_dict = copy_deepcopy(x_teamheir.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["fisc_title"] = fisc_title
-    x_dict["owner_name"] = owner_name
-    x_dict["road"] = road
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["owner_name"] = x_objkeysholder.owner_name
+    x_dict["road"] = x_objkeysholder.road
     for team_tag in sorted(x_teamheir._teamlinks):
         x_dict["team_tag"] = team_tag
         insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
@@ -675,57 +667,53 @@ def insert_plan_budteam(
 
 
 def insert_plan_buditem(
-    cursor: sqlite3_Cursor, world_id: WorldID, owner_name: OwnerName, x_item: ItemUnit
+    cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_item: ItemUnit
 ):
     x_dict = copy_deepcopy(x_item.__dict__)
-    x_dict["world_id"] = world_id
-    x_dict["owner_name"] = owner_name
+    x_dict["world_id"] = x_objkeysholder.world_id
+    x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_buditem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_plan_budunit(cursor: sqlite3_Cursor, world_id: WorldID, x_bud: BudUnit):
+def insert_plan_budunit(
+    cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_bud: BudUnit
+):
     x_dict = copy_deepcopy(x_bud.__dict__)
-    x_dict["world_id"] = world_id
+    x_dict["world_id"] = x_objkeysholder.world_id
     insert_sqlstr = create_budunit_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_plan_obj(cursor: sqlite3_Cursor, world_id: WorldID, x_bud: BudUnit):
-    x_bud.settle_bud()
-    fisc_title = x_bud.fisc_title
-    owner_name = x_bud.owner_name
-    insert_plan_budunit(cursor, world_id, x_bud)
-    for x_item in x_bud.get_item_dict().values():
-        road = x_item.get_road()
+def insert_plan_obj(cursor: sqlite3_Cursor, world_id: WorldID, plan_bud: BudUnit):
+    plan_bud.settle_bud()
+    x_objkeysholder = ObjKeysHolder(world_id, plan_bud.fisc_title, plan_bud.owner_name)
+    insert_plan_budunit(cursor, x_objkeysholder, plan_bud)
+    for x_item in plan_bud.get_item_dict().values():
+        x_objkeysholder.road = x_item.get_road()
         healerlink = x_item.healerlink
         teamheir = x_item._teamheir
-        insert_plan_buditem(cursor, world_id, owner_name, x_item)
-        insert_plan_budheal(cursor, world_id, fisc_title, owner_name, road, healerlink)
-        insert_plan_budteam(cursor, world_id, fisc_title, owner_name, road, teamheir)
+        insert_plan_buditem(cursor, x_objkeysholder, x_item)
+        insert_plan_budheal(cursor, x_objkeysholder, healerlink)
+        print(f"{x_item.teamunit=}")
+        print(f"{x_item.get_road()=} {x_item._teamheir=}")
+        insert_plan_budteam(cursor, x_objkeysholder, teamheir)
         for x_awardheir in x_item._awardheirs.values():
-            insert_plan_budawar(
-                cursor, world_id, fisc_title, owner_name, road, x_awardheir
-            )
+            insert_plan_budawar(cursor, x_objkeysholder, x_awardheir)
         for base, reasonheir in x_item._reasonheirs.items():
-            insert_plan_budreas(
-                cursor, world_id, fisc_title, owner_name, road, reasonheir
-            )
+            insert_plan_budreas(cursor, x_objkeysholder, reasonheir)
+            x_objkeysholder.base = base
             for prem in reasonheir.premises.values():
-                insert_plan_budprem(
-                    cursor, world_id, fisc_title, owner_name, road, base, prem
-                )
+                insert_plan_budprem(cursor, x_objkeysholder, prem)
 
-    for x_acct in x_bud.accts.values():
-        insert_plan_budacct(cursor, world_id, fisc_title, owner_name, x_acct)
+    for x_acct in plan_bud.accts.values():
+        insert_plan_budacct(cursor, x_objkeysholder, x_acct)
         for x_membership in x_acct._memberships.values():
-            insert_plan_budmemb(cursor, world_id, fisc_title, owner_name, x_membership)
+            insert_plan_budmemb(cursor, x_objkeysholder, x_membership)
 
-    for x_groupunit in x_bud._groupunits.values():
-        insert_plan_budgrou(cursor, world_id, fisc_title, owner_name, x_groupunit)
+    for x_groupunit in plan_bud._groupunits.values():
+        insert_plan_budgrou(cursor, x_objkeysholder, x_groupunit)
 
-    for x_factheir in x_bud.itemroot._factheirs.values():
-        fact_road = x_bud.itemroot.get_road()
-        insert_plan_budfact(
-            cursor, world_id, fisc_title, owner_name, fact_road, x_factheir
-        )
+    for x_factheir in plan_bud.itemroot._factheirs.values():
+        x_objkeysholder.fact_road = plan_bud.itemroot.get_road()
+        insert_plan_budfact(cursor, x_objkeysholder, x_factheir)

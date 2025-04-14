@@ -5,9 +5,9 @@ from src.f00_instrument.file import (
     set_dir,
     save_file,
     create_path,
+    get_json_filename,
 )
-from src.f01_road.jaar_config import init_kick_id, get_test_fisc_title as fisc_title
-from src.f04_kick.kick import kickunit_shop, get_json_filename
+from src.f04_kick.kick import init_kick_id, kickunit_shop
 from src.f06_listen.hub_tool import save_gut_file, open_gut_file
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.examples.example_listen_atoms import get_atom_example_itemunit_knee
@@ -29,7 +29,7 @@ from copy import deepcopy as copy_deepcopy
 def test_HubUnit_get_max_kick_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
 
     # WHEN / THEN
     delete_dir(sue_hubunit._kicks_dir)
@@ -49,7 +49,7 @@ def test_HubUnit_get_max_kick_file_number_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_kick_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     assert sue_hubunit.kick_file_exists(None) is False
     assert sue_hubunit.kick_file_exists(0) is False
     six_int = 6
@@ -67,7 +67,7 @@ def test_HubUnit_kick_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_HubUnit_save_kick_file_SaveCorrectObj(env_dir_setup_cleanup):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     two_int = 2
     six_int = 6
     two_filename = get_json_filename(two_int)
@@ -99,7 +99,7 @@ def test_HubUnit_save_kick_file_RaisesErrorIfKickUnit_atoms_dir_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     x_kick_id = 6
     six_filename = get_json_filename(x_kick_id)
     sue_kick0_path = create_path(sue_hubunit._kicks_dir, six_filename)
@@ -124,7 +124,7 @@ def test_HubUnit_save_kick_file_RaisesErrorIfKickUnit_kicks_dir_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     x_kick_id = 6
     six_filename = get_json_filename(x_kick_id)
     sue_kick0_path = create_path(sue_hubunit._kicks_dir, six_filename)
@@ -149,7 +149,7 @@ def test_HubUnit_save_kick_file_RaisesErrorIfKickUnit_owner_name_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     x_kick_id = 6
     six_filename = get_json_filename(x_kick_id)
     sue_kick0_path = create_path(sue_hubunit._kicks_dir, six_filename)
@@ -176,7 +176,7 @@ def test_HubUnit_save_kick_file_RaisesErrorIf_replace_IsFalse(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     x_kick_id = 0
     six_filename = get_json_filename(x_kick_id)
     sue_kickunit = kickunit_shop(
@@ -205,7 +205,7 @@ def test_HubUnit_validate_kickunit_ReturnsObjWithAttributesFixed(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     two_int = 2
     two_filename = get_json_filename(two_int)
     sue_kick2_path = create_path(sue_hubunit._kicks_dir, two_filename)
@@ -238,7 +238,7 @@ def test_HubUnit_save_kick_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     next_int = sue_hubunit._get_next_kick_file_number()
     next_filename = get_json_filename(next_int)
     sue_kick2_path = create_path(sue_hubunit._kicks_dir, next_filename)
@@ -264,7 +264,7 @@ def test_HubUnit_default_kickunit_ReturnsObjWithCorrect_kick_id_WhenNokickFilesE
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
 
     # WHEN
     delete_dir(sue_hubunit._kicks_dir)
@@ -285,7 +285,7 @@ def test_HubUnit_default_kickunit_ReturnsObjWithCorrect_kick_id_WhenkickFilesExi
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     delete_dir(sue_hubunit._kicks_dir)
 
     zero_kickunit = get_sue_kickunit()
@@ -312,7 +312,7 @@ def test_HubUnit_get_kickunit_ReturnsObjWhenFilesDoesExist(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     yao_str = "Yao"
     x0_kickunit = sue_hubunit._default_kickunit()
     x0_kickunit.set_face(yao_str)
@@ -339,7 +339,7 @@ def test_HubUnit_get_kickunit_RaisesExceptionWhenFileDoesNotExist(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     yao_str = "Yao"
     x0_kickunit = sue_hubunit._default_kickunit()
     x0_kickunit.set_face(yao_str)
@@ -363,7 +363,7 @@ def test_HubUnit_del_kick_file_DeleteskickjsonAndNotBudAtomjsons(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     six_int = 6
     sue_kickunit = kickunit_shop(
         owner_name=sue_str,
@@ -376,7 +376,7 @@ def test_HubUnit_del_kick_file_DeleteskickjsonAndNotBudAtomjsons(
     assert sue_hubunit.kick_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
 
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue_hubunit.save_kick_file(sue_kickunit, correct_invalid_attrs=False)
 
     print(f"{get_dir_file_strs(sue_hubunit._atoms_dir)}")
@@ -396,7 +396,7 @@ def test_HubUnit_save_kick_file_CanCreateAndModify3kickunits(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     delete_dir(sue_hubunit._kicks_dir)
     delete_dir(sue_hubunit._atoms_dir)
     set_dir(sue_hubunit._kicks_dir)
@@ -417,7 +417,7 @@ def test_HubUnit_save_kick_file_CanCreateAndModify3kickunits(
 def test_HubUnit_save_kick_file_ReturnsValidObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue2_kickunit = sue_2budatoms_kickunit()
     sue2_kickunit._atoms_dir = create_path(sue_hubunit._keeps_dir, "swimming")
     sue2_kickunit._kicks_dir = create_path(sue_hubunit._keeps_dir, "swimming")
@@ -438,7 +438,7 @@ def test_HubUnit_save_kick_file_ReturnsValidObj(env_dir_setup_cleanup):
 def test_HubUnit_create_save_kick_file_SaveCorrectObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     two_int = 2
     three_int = 3
     print(f"{sue_hubunit.kick_file_path(two_int)=}")
@@ -449,7 +449,7 @@ def test_HubUnit_create_save_kick_file_SaveCorrectObj(env_dir_setup_cleanup):
         _atoms_dir=sue_hubunit._atoms_dir,
         _kicks_dir=sue_hubunit._kicks_dir,
     )
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue_hubunit.save_kick_file(sue_kickunit, correct_invalid_attrs=False)
     assert sue_hubunit.kick_file_exists(two_int)
     assert sue_hubunit.kick_file_exists(three_int) is False
@@ -468,9 +468,9 @@ def test_HubUnit_create_save_kick_file_SaveCorrectObj(env_dir_setup_cleanup):
 def test_HubUnit_merge_any_kicks_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     gut_bud.last_kick_id is None
 
     # WHEN
@@ -485,10 +485,10 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_1atom(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue_hubunit.save_kick_file(sue_1budatoms_kickunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     print(f"{gut_bud.fisc_title=}")
     print(f"{sue_hubunit.fisc_title=}")
     sports_str = "sports"
@@ -510,10 +510,10 @@ def test_HubUnit_merge_any_kicks_ReturnsObj_WithSinglekickModifies_2atoms(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_title(), sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
     sue_hubunit.save_kick_file(sue_2budatoms_kickunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), fisc_title(), sue_str)
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
     print(f"{gut_bud.fisc_title=}")
     sports_str = "sports"
     sports_road = gut_bud.make_l1_road(sports_str)

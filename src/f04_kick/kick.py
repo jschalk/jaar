@@ -1,12 +1,12 @@
-from src.f00_instrument.file import save_file, open_file, open_json, create_path
-from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
-from src.f01_road.jaar_config import get_init_kick_id_if_None, get_json_filename
-from src.f01_road.road import (
-    FaceName,
-    OwnerName,
-    FiscTitle,
-    get_default_fisc_title,
+from src.f00_instrument.file import (
+    save_file,
+    open_file,
+    open_json,
+    create_path,
+    get_json_filename,
 )
+from src.f00_instrument.dict_toolbox import get_json_from_dict, get_dict_from_json
+from src.f01_road.road import FaceName, OwnerName, FiscTitle, get_default_fisc_title
 from src.f02_bud.bud import BudUnit
 from src.f04_kick.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.f04_kick.delta import (
@@ -20,6 +20,14 @@ from os.path import exists as os_path_exists
 
 class kick_bud_conflict_Exception(Exception):
     pass
+
+
+def init_kick_id() -> int:
+    return 0
+
+
+def get_init_kick_id_if_None(x_kick_id: int = None) -> int:
+    return init_kick_id() if x_kick_id is None else x_kick_id
 
 
 @dataclass

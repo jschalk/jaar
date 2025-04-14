@@ -1,6 +1,5 @@
-from src.f00_instrument.file import open_json, create_path
+from src.f00_instrument.file import open_json, create_path, get_json_filename
 from src.f00_instrument.db_toolbox import get_sorted_intersection_list
-from src.f01_road.jaar_config import get_json_filename
 from os import getcwd as os_getcwd
 
 

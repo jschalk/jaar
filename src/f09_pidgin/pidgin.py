@@ -1,10 +1,10 @@
-from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f00_instrument.dict_toolbox import (
     get_0_if_None,
     get_json_from_dict,
     get_dict_from_json,
 )
 from src.f01_road.road import default_bridge_if_None, OwnerName, EventInt
+from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
 from src.f09_pidgin.map import (
     MapCore,
     LabelMap,

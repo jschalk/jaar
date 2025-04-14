@@ -11,8 +11,20 @@ CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
 BUDPOINT_FILENAME = "budpoint.json"
 BUDEVENT_FILENAME = "bud.json"
-EVENT_ALL_kick_FILENAME = "all_kick.json"
-EVENT_EXPRESSED_kick_FILENAME = "expressed_kick.json"
+EVENT_ALL_KICK_FILENAME = "all_kick.json"
+EVENT_EXPRESSED_KICK_FILENAME = "expressed_kick.json"
+
+
+def treasury_filename() -> str:
+    return "treasury.db"
+
+
+def gut_str() -> str:
+    return "gut"
+
+
+def plan_str() -> str:
+    return "plan"
 
 
 def create_fisc_dir_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:

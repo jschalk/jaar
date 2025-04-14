@@ -97,6 +97,18 @@ def map_road_str() -> str:
     return "map_road"
 
 
+def default_unknown_word() -> str:
+    return "UNKNOWN"
+
+
+def default_unknown_word_if_None(unknown_word: any = None) -> str:
+    if unknown_word != unknown_word:
+        unknown_word = None
+    if unknown_word is None:
+        unknown_word = default_unknown_word()
+    return unknown_word
+
+
 def get_pidgin_config_jkeys(x_dimen: str) -> dict:
     jkeys_key_list = [x_dimen, jkeys_str()]
     return get_from_nested_dict(get_pidgin_config_dict(), jkeys_key_list)

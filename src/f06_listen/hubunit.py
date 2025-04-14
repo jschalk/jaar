@@ -8,18 +8,10 @@ from src.f00_instrument.file import (
     set_dir,
     get_integer_filenames,
     get_max_file_number,
+    get_json_filename,
 )
 from src.f00_instrument.dict_toolbox import get_empty_set_if_None
 from src.f00_instrument.db_toolbox import sqlite_connection
-from src.f01_road.jaar_config import (
-    grades_folder,
-    get_rootpart_of_keep_dir,
-    treasury_filename,
-    get_kicks_folder,
-    get_init_kick_id_if_None,
-    get_json_filename,
-    init_kick_id,
-)
 from src.f01_road.finance import (
     default_fund_coin_if_None,
     validate_fund_pool,
@@ -56,9 +48,15 @@ from src.f04_kick.atom import (
     get_from_json as budatom_get_from_json,
     modify_bud_with_budatom,
 )
-from src.f04_kick.kick import KickUnit, kickunit_shop, create_kickunit_from_files
+from src.f04_kick.kick import (
+    get_init_kick_id_if_None,
+    init_kick_id,
+    KickUnit,
+    kickunit_shop,
+    create_kickunit_from_files,
+)
 from src.f06_listen.basis_buds import get_default_plan
-from src.f06_listen.hub_path import create_gut_path, create_plan_path
+from src.f06_listen.hub_path import treasury_filename
 from src.f06_listen.hub_tool import (
     save_gut_file,
     open_gut_file,
@@ -114,7 +112,7 @@ def get_keep_jobs_dir(x_keep_dir: str) -> str:
 
 
 def get_keep_grades_dir(x_keep_dir: str) -> str:
-    return create_path(x_keep_dir, grades_folder())
+    return create_path(x_keep_dir, "grades")
 
 
 @dataclass
@@ -144,7 +142,7 @@ class HubUnit:
         self._owner_dir = create_path(self._owners_dir, self.owner_name)
         self._keeps_dir = create_path(self._owner_dir, "keeps")
         self._atoms_dir = create_path(self._owner_dir, "atoms")
-        self._kicks_dir = create_path(self._owner_dir, get_kicks_folder())
+        self._kicks_dir = create_path(self._owner_dir, "kicks")
         self._deals_dir = create_path(self._owner_dir, "deals")
 
     def default_gut_bud(self) -> BudUnit:
@@ -459,9 +457,6 @@ class HubUnit:
     def owner_filename(self, owner_name: OwnerName) -> str:
         return get_json_filename(owner_name)
 
-    def treasury_filename(self) -> str:
-        return treasury_filename()
-
     def treasury_db_path(self) -> str:
         return create_path(self.keep_dir(), treasury_filename())
 
@@ -631,7 +626,7 @@ def hubunit_shop(
 
 
 def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
-    keep_root = get_rootpart_of_keep_dir()
+    keep_root = "itemroot"
     x_road = rebuild_road(x_road, x_hubunit.fisc_title, keep_root)
     x_list = get_all_road_titles(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])

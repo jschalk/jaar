@@ -14,11 +14,7 @@ from src.f00_instrument.db_toolbox import (
     save_to_split_csvs,
 )
 from src.f01_road.road import FaceName, EventInt, OwnerName, FiscTitle
-from src.f02_bud.bud import (
-    budunit_shop,
-    get_from_json as budunit_get_from_json,
-    BudUnit,
-)
+from src.f02_bud.bud import budunit_shop, BudUnit
 from src.f04_kick.atom import budatom_shop
 from src.f04_kick.atom_config import get_bud_dimens
 from src.f04_kick.delta import get_minimal_buddelta
@@ -33,6 +29,8 @@ from src.f06_listen.hub_path import (
 from src.f06_listen.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
+    open_bud_file,
+    open_plan_file,
 )
 from src.f08_fisc.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
@@ -56,7 +54,6 @@ from src.f10_idea.idea_config import (
 )
 from src.f10_idea.idea import get_idearef_obj
 from src.f10_idea.idea_db_tool import (
-    if_nan_return_None,
     get_default_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,
@@ -66,7 +63,6 @@ from src.f10_idea.idea_db_tool import (
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
-    open_csv,
     get_ordered_csv,
     get_idea_into_dimen_staging_query,
 )
@@ -88,7 +84,7 @@ from src.f11_etl.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.f11_etl.db_obj_tool import get_fisc_dict_from_db
+from src.f11_etl.db_obj_tool import get_fisc_dict_from_db, insert_plan_obj
 from src.f11_etl.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.f11_etl.pidgin_agg import (
     pidginheartbook_shop,
@@ -1102,7 +1098,7 @@ def _get_prev_event_int_budunit(
     prev_budevent_path = create_budevent_path(
         fisc_mstr_dir, fisc_title, owner_name, prev_event_int
     )
-    return budunit_get_from_json(open_file(prev_budevent_path))
+    return open_bud_file(prev_budevent_path)
 
 
 def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
@@ -1124,3 +1120,15 @@ def etl_fisc_gut_to_fisc_plan(fisc_mstr_dir: str):
     for fisc_title in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
         x_fiscunit.generate_all_plans()
+
+
+def etl_fisc_plan_jsons_to_fisc_db(
+    conn_or_cursor: sqlite3_Connection, world_id: str, fisc_mstr_dir: str
+):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_title in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_title)
+        owners_dir = create_path(fisc_path, "owners")
+        for owner_name in get_level1_dirs(owners_dir):
+            plan_obj = open_plan_file(fisc_mstr_dir, fisc_title, owner_name)
+            insert_plan_obj(conn_or_cursor, world_id, plan_obj)

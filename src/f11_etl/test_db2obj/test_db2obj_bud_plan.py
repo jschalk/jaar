@@ -1,26 +1,19 @@
-from src.f00_instrument.db_toolbox import (
-    get_row_count,
-    create_insert_query,
-    create_select_query,
-)
-from src.f01_road.deal import fisc_title_str
+from src.f00_instrument.db_toolbox import get_row_count, create_insert_query
 from src.f02_bud.acct import acctunit_shop
-from src.f02_bud.group import awardheir_shop, groupunit_shop, membership_shop
+from src.f02_bud.group import (
+    awardlink_shop,
+    awardheir_shop,
+    groupunit_shop,
+    membership_shop,
+)
 from src.f02_bud.healer import healerlink_shop
-from src.f02_bud.reason_team import teamheir_shop
+from src.f02_bud.reason_team import teamheir_shop, teamunit_shop
 from src.f02_bud.reason_item import reasonheir_shop, premiseunit_shop, factheir_shop
 from src.f02_bud.item import itemunit_shop
 from src.f02_bud.bud import budunit_shop
-from src.f05_fund_metric.fund_metric_config import (
-    get_fund_metric_config_dict,
-    get_fund_metric_dimen_args,
-)
-from src.f08_fisc.fisc import fiscunit_shop, get_from_dict as fiscunit_get_from_dict
-from src.f08_fisc.fisc_config import cashbook_str, brokerunits_str, timeline_str
-from src.f10_idea.idea_config import get_default_sorted_list
+from src.f05_fund_metric.fund_metric_config import get_fund_metric_dimen_args
 from src.f11_etl.tran_sqlstrs import create_plan_tables
 from src.f11_etl.db_obj_tool import (
-    get_fisc_dict_from_db,
     create_budmemb_metrics_insert_sqlstr,
     create_budacct_metrics_insert_sqlstr,
     create_budgrou_metrics_insert_sqlstr,
@@ -32,6 +25,7 @@ from src.f11_etl.db_obj_tool import (
     create_budteam_metrics_insert_sqlstr,
     create_buditem_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
+    ObjKeysHolder,
     insert_plan_budmemb,
     insert_plan_budacct,
     insert_plan_budgrou,
@@ -46,6 +40,22 @@ from src.f11_etl.db_obj_tool import (
     insert_plan_obj,
 )
 from sqlite3 import connect as sqlite3_connect
+
+
+def test_ObjKeysHolder_Exists():
+    # ESTABLISH / WHEN
+    x_objkeyholder = ObjKeysHolder()
+
+    # THEN
+    assert not x_objkeyholder.world_id
+    assert not x_objkeyholder.fisc_title
+    assert not x_objkeyholder.owner_name
+    assert not x_objkeyholder.road
+    assert not x_objkeyholder.base
+    assert not x_objkeyholder.acct_name
+    assert not x_objkeyholder.membership
+    assert not x_objkeyholder.group_name
+    assert not x_objkeyholder.fact_road
 
 
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
@@ -846,9 +856,10 @@ def test_insert_plan_budunit_CreatesTableRowsFor_budunit_plan():
         create_plan_tables(cursor)
         x_table_name = "budunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        objkeysholder = ObjKeysHolder(world_id=x_world_id)
 
         # WHEN
-        insert_plan_budunit(cursor, x_world_id, sue_bud)
+        insert_plan_budunit(cursor, objkeysholder, sue_bud)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -984,9 +995,10 @@ def test_insert_plan_buditem_CreatesTableRowsFor_buditem_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_itemunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
 
         # WHEN
-        insert_plan_buditem(cursor, x_world_id, x_owner_name, x_item)
+        insert_plan_buditem(cursor, x_objkeysholder, x_item)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1066,11 +1078,10 @@ def test_insert_plan_budreas_CreatesTableRowsFor_budreas_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_item_reasonunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
 
         # WHEN
-        insert_plan_budreas(
-            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_reasonheir
-        )
+        insert_plan_budreas(cursor, x_objkeysholder, x_reasonheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1131,17 +1142,12 @@ def test_insert_plan_budprem_CreatesTableRowsFor_budprem_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_item_reason_premiseunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(
+            x_world_id, x_fisc_title, x_owner_name, x_road, x_base
+        )
 
         # WHEN
-        insert_plan_budprem(
-            cursor,
-            x_world_id,
-            x_fisc_title,
-            x_owner_name,
-            x_road,
-            x_base,
-            x_premiseunit,
-        )
+        insert_plan_budprem(cursor, x_objkeysholder, x_premiseunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1213,11 +1219,10 @@ def test_insert_plan_budmemb_CreatesTableRowsFor_budmemb_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_acct_membership_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
 
         # WHEN
-        insert_plan_budmemb(
-            cursor, x_world_id, x_fisc_title, x_owner_name, x_membership
-        )
+        insert_plan_budmemb(cursor, x_objkeysholder, x_membership)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1296,9 +1301,10 @@ def test_insert_plan_budacct_CreatesTableRowsFor_budacct_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_acctunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
 
         # WHEN
-        insert_plan_budacct(cursor, x_world_id, x_fisc_title, x_owner_name, x_acct)
+        insert_plan_budacct(cursor, x_objkeysholder, x_acct)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1370,9 +1376,10 @@ def test_insert_plan_budgrou_CreatesTableRowsFor_budgrou_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_groupunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
 
         # WHEN
-        insert_plan_budgrou(cursor, x_world_id, x_fisc_title, x_owner_name, x_group)
+        insert_plan_budgrou(cursor, x_objkeysholder, x_group)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1433,11 +1440,10 @@ def test_insert_plan_budawar_CreatesTableRowsFor_budawar_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_item_awardlink_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
 
         # WHEN
-        insert_plan_budawar(
-            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_awardheir
-        )
+        insert_plan_budawar(cursor, x_objkeysholder, x_awardheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1493,11 +1499,10 @@ def test_insert_plan_budfact_CreatesTableRowsFor_budfact_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_item_factunit_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
 
         # WHEN
-        insert_plan_budfact(
-            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_factheir
-        )
+        insert_plan_budfact(cursor, x_objkeysholder, x_factheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -1548,11 +1553,10 @@ def test_insert_plan_budheal_CreatesTableRowsFor_budheal_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_item_healerlink_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
 
         # WHEN
-        insert_plan_budheal(
-            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_healerlink
-        )
+        insert_plan_budheal(cursor, x_objkeysholder, x_healerlink)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -1608,11 +1612,10 @@ def test_insert_plan_budteam_CreatesTableRowsFor_budteam_plan():
         create_plan_tables(cursor)
         x_table_name = "bud_item_teamlink_plan"
         assert get_row_count(cursor, x_table_name) == 0
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
 
         # WHEN
-        insert_plan_budteam(
-            cursor, x_world_id, x_fisc_title, x_owner_name, x_road, x_teamheir
-        )
+        insert_plan_budteam(cursor, x_objkeysholder, x_teamheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -1643,10 +1646,12 @@ def test_insert_plan_obj_CreatesTableRows_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
     x_world_id = "music23"
+    a23_str = "accord23"
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_bud = budunit_shop(sue_str)
+    sue_bud = budunit_shop(sue_str, a23_str)
+    sue_bud.add_acctunit(sue_str)
     sue_bud.add_acctunit(bob_str)
     sue_bud.get_acct(bob_str).add_membership(run_str)
     casa_road = sue_bud.make_l1_road("casa")
@@ -1659,9 +1664,9 @@ def test_insert_plan_obj_CreatesTableRows_Scenario0():
     sue_bud.edit_item_attr(
         road=casa_road, reason_base=status_road, reason_premise=dirty_road
     )
-    sue_bud.edit_item_attr(road=casa_road, awardlink=awardheir_shop(run_str))
+    sue_bud.edit_item_attr(road=casa_road, awardlink=awardlink_shop(run_str))
     sue_bud.edit_item_attr(road=casa_road, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(road=casa_road, teamunit=teamheir_shop({sue_str}))
+    sue_bud.edit_item_attr(road=casa_road, teamunit=teamunit_shop({sue_str}))
     sue_bud.add_fact(status_road, clean_road)
 
     with sqlite3_connect(":memory:") as conn:
@@ -1696,9 +1701,9 @@ def test_insert_plan_obj_CreatesTableRows_Scenario0():
         # THEN
         assert get_row_count(cursor, budunit_plan_table) == 1
         assert get_row_count(cursor, buditem_plan_table) == 5
-        assert get_row_count(cursor, budacct_plan_table) == 1
-        assert get_row_count(cursor, budmemb_plan_table) == 2
-        assert get_row_count(cursor, budgrou_plan_table) == 2
+        assert get_row_count(cursor, budacct_plan_table) == 2
+        assert get_row_count(cursor, budmemb_plan_table) == 3
+        assert get_row_count(cursor, budgrou_plan_table) == 3
         assert get_row_count(cursor, budawar_plan_table) == 1
         assert get_row_count(cursor, budfact_plan_table) == 1
         assert get_row_count(cursor, budheal_plan_table) == 1

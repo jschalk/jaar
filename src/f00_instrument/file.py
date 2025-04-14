@@ -356,3 +356,7 @@ def get_level1_dirs(x_dir: str) -> list[str]:
         return sorted(list(level1_dirs.keys()))
     except OSError as e:
         return []
+
+
+def get_json_filename(filename_without_extention) -> str:
+    return f"{filename_without_extention}.json"

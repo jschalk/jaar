@@ -1,4 +1,3 @@
-from src.f01_road.jaar_config import default_unknown_word_if_None
 from src.f00_instrument.dict_toolbox import (
     get_empty_dict_if_None,
     str_in_dict,
@@ -24,6 +23,7 @@ from src.f01_road.road import (
     FaceName,
     EventInt,
 )
+from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
 from dataclasses import dataclass
 from copy import copy as copy_copy
 
