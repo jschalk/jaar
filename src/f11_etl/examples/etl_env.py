@@ -1,4 +1,4 @@
-from src.f00_instrument.file import delete_dir
+from src.f00_instrument.file_toolbox import delete_dir
 from src.f01_road.road import WorldID, get_default_world_id
 from pytest import fixture as pytest_fixture
 

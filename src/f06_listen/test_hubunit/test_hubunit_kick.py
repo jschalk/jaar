@@ -1,4 +1,4 @@
-from src.f00_instrument.file import (
+from src.f00_instrument.file_toolbox import (
     open_file,
     get_dir_file_strs,
     delete_dir,
