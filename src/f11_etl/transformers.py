@@ -43,8 +43,8 @@ from src.a15_fisc_logic.fisc_tool import (
     create_deal_mandate_ledgers,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.f09_pidgin.pidgin import get_pidginunit_from_json, inherit_pidginunit
-from src.f09_pidgin.pidgin_config import get_quick_pidgens_column_ref
+from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json, inherit_pidginunit
+from src.a16_pidgin_logic.pidgin_config import get_quick_pidgens_column_ref
 from src.f10_idea.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,

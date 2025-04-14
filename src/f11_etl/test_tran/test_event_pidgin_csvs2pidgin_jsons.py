@@ -7,8 +7,11 @@ from src.a00_data_toolboxs.file_toolbox import (
 )
 from src.a01_word_logic.road import default_bridge_if_None
 from src.a08_bud_atom_logic.atom_config import type_RoadUnit_str
-from src.f09_pidgin.pidgin_config import pidgin_filename, default_unknown_word_if_None
-from src.f09_pidgin.pidgin import get_pidginunit_from_json
+from src.a16_pidgin_logic.pidgin_config import (
+    pidgin_filename,
+    default_unknown_word_if_None,
+)
+from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json
 from src.f11_etl.transformers import (
     etl_event_pidgin_csvs_to_pidgin_json,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,

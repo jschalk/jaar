@@ -1,17 +1,17 @@
 from src.a01_word_logic.road import default_bridge_if_None
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
     default_unknown_word_if_None,
 )
-from src.f09_pidgin.pidgin import (
+from src.a16_pidgin_logic.pidgin import (
     pidginunit_shop,
     get_pidginunit_from_dict,
     get_pidginunit_from_json,
 )
-from src.f09_pidgin.examples.example_pidgins import (
+from src.a16_pidgin_logic.examples.example_pidgins import (
     get_clean_roadmap,
     get_clean_titlemap,
     get_swim_labelmap,

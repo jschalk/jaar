@@ -23,7 +23,7 @@ from src.a01_word_logic.road import (
     FaceName,
     EventInt,
 )
-from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from dataclasses import dataclass
 from copy import copy as copy_copy
 

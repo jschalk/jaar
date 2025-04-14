@@ -1,6 +1,6 @@
 from src.a08_bud_atom_logic.atom_config import type_NameUnit_str
-from src.f09_pidgin.pidgin import pidginunit_shop, inherit_pidginunit
-from src.f09_pidgin.examples.example_pidgins import (
+from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
+from src.a16_pidgin_logic.examples.example_pidgins import (
     get_clean_roadmap,
     get_clean_titlemap,
     get_swim_labelmap,

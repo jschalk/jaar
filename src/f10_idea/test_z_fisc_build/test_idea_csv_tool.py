@@ -9,7 +9,7 @@ from src.a07_calendar_logic.chrono import (
 from src.a09_pack_logic.delta import get_minimal_buddelta, buddelta_shop
 from src.a09_pack_logic.pack import packunit_shop
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.f09_pidgin.pidgin import PidginUnit, pidginunit_shop
+from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.f10_idea.idea_config import get_idea_format_filename
 from src.f10_idea.idea import fisc_build_from_df
 from src.f10_idea.idea_csv_tool import (

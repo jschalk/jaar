@@ -27,23 +27,23 @@ from src.a15_fisc_logic.fisc_config import (
     month_title_str,
     hour_title_str,
 )
-from src.f09_pidgin.map import (
+from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
     titlemap_shop,
     roadmap_shop,
 )
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     default_unknown_word_if_None,
 )
-from src.f09_pidgin.pidgin import (
+from src.a16_pidgin_logic.pidgin import (
     PidginUnit,
     pidginunit_shop,
     pidginable_class_types,
     pidginable_atom_args,
 )
-from src.f09_pidgin.examples.example_pidgins import (
+from src.a16_pidgin_logic.examples.example_pidgins import (
     get_invalid_namemap,
     get_invalid_labelmap,
     get_invalid_titlemap,

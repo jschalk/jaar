@@ -1,5 +1,5 @@
-from src.f09_pidgin.map import namemap_shop
-from src.f09_pidgin.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.map import namemap_shop
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from pytest import raises as pytest_raises
 
 

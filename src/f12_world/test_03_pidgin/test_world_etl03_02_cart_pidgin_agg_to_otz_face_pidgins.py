@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     inx_bridge_str,
     otx_bridge_str,
     inx_name_str,

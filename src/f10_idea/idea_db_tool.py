@@ -16,13 +16,13 @@ from src.a00_data_toolboxs.db_toolbox import (
 )
 from src.a00_data_toolboxs.dict_toolbox import set_in_nested_dict
 from src.a01_word_logic.road import FaceName, EventInt
-from src.f09_pidgin.map import MapCore
-from src.f09_pidgin.pidgin import (
+from src.a16_pidgin_logic.map import MapCore
+from src.a16_pidgin_logic.pidgin import (
     PidginUnit,
     pidginable_atom_args,
     get_pidginunit_from_json,
 )
-from src.f09_pidgin.pidgin_config import get_pidgin_args_class_types
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_args_class_types
 from src.f10_idea.idea_config import (
     get_idea_elements_sort_order,
     get_idea_dimen_ref,

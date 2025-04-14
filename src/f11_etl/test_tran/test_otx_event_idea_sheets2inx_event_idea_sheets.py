@@ -7,8 +7,8 @@ from src.a08_bud_atom_logic.atom_config import (
     type_TitleUnit_str,
     event_int_str,
 )
-from src.f09_pidgin.pidgin_config import pidgin_filename
-from src.f09_pidgin.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.pidgin_config import pidgin_filename
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.f10_idea.idea_db_tool import upsert_sheet, cart_valid_str, sheet_exists
 from src.f11_etl.transformers import (
     etl_otz_event_ideas_to_inx_events,

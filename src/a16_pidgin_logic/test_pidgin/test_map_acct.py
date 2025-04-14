@@ -1,14 +1,14 @@
 from src.a01_word_logic.road import default_bridge_if_None
 from src.a02_finance_toolboxs.deal import owner_name_str
 from src.a08_bud_atom_logic.atom_config import event_int_str, face_name_str
-from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
     otx2inx_str,
 )
-from src.f09_pidgin.map import (
+from src.a16_pidgin_logic.map import (
     NameMap,
     namemap_shop,
     get_namemap_from_dict,

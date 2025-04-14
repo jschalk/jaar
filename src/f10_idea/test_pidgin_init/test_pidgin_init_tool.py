@@ -10,17 +10,17 @@ from src.a08_bud_atom_logic.atom_config import (
     type_NameUnit_str,
     type_LabelUnit_str,
 )
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
 )
-from src.f09_pidgin.pidgin import pidginunit_shop
-from src.f09_pidgin.examples.pidgin_env import (
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.examples.pidgin_env import (
     env_dir_setup_cleanup,
     get_example_face_dir,
 )
-from src.f09_pidgin.examples.example_pidgins import (
+from src.a16_pidgin_logic.examples.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
     get_casa_maison_pidginunit_set_by_title,
     get_casa_maison_road_otx2inx_dt,

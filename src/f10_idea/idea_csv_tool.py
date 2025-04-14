@@ -3,7 +3,7 @@ from src.a01_word_logic.road import FiscTitle, FaceName
 from src.a06_bud_logic.bud import BudUnit
 from src.a09_pack_logic.pack import PackUnit
 from src.a15_fisc_logic.fisc import FiscUnit
-from src.f09_pidgin.pidgin import PidginUnit
+from src.a16_pidgin_logic.pidgin import PidginUnit
 from src.f10_idea.idea_config import (
     get_idea_format_headers,
     get_idea_format_filename,

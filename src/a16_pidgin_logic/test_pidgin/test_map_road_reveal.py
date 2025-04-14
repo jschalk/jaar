@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road
-from src.f09_pidgin.map import roadmap_shop
+from src.a16_pidgin_logic.map import roadmap_shop
 
 
 def test_RoadMap_reveal_inx_ReturnsObjAndSetsAttr_road_Scenario0():

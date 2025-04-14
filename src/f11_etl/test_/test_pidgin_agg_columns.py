@@ -1,5 +1,5 @@
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_args,
     map_name_str,
     map_label_str,

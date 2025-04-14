@@ -9,7 +9,7 @@ from src.a08_bud_atom_logic.atom_config import (
     class_type_str,
     event_int_str,
 )
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     config_file_dir,
     get_pidgin_dimens,
     get_pidgin_config_filename,
@@ -70,7 +70,7 @@ def test_get_pidgin_config_filename_ReturnsObj():
 
 def test_config_file_dir_ReturnsObj() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    assert config_file_dir() == create_path(src_dir, "f09_pidgin")
+    assert config_file_dir() == create_path(src_dir, "a16_pidgin_logic")
 
 
 def test_get_pidgin_config_dict_ReturnsObj():

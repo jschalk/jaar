@@ -6,7 +6,7 @@ from os import getcwd as os_getcwd
 
 def config_file_dir() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "f09_pidgin")
+    return create_path(src_dir, "a16_pidgin_logic")
 
 
 def get_pidgin_config_filename() -> str:

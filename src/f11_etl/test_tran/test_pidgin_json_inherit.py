@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_file, save_file
 from src.a08_bud_atom_logic.atom_config import type_NameUnit_str
-from src.f09_pidgin.pidgin import pidginunit_shop, get_pidginunit_from_json
-from src.f09_pidgin.pidgin_config import pidgin_filename
+from src.a16_pidgin_logic.pidgin import pidginunit_shop, get_pidginunit_from_json
+from src.a16_pidgin_logic.pidgin_config import pidgin_filename
 from src.f11_etl.transformers import (
     etl_pidgin_jsons_inherit_younger_pidgins,
 )

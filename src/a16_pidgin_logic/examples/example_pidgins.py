@@ -4,8 +4,8 @@ from src.a08_bud_atom_logic.atom_config import (
     base_str,
     type_RoadUnit_str,
 )
-from src.f09_pidgin.pidgin_config import default_unknown_word_if_None
-from src.f09_pidgin.map import (
+from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
     titlemap_shop,
@@ -15,7 +15,7 @@ from src.f09_pidgin.map import (
     TitleMap,
     RoadMap,
 )
-from src.f09_pidgin.pidgin import PidginUnit, pidginunit_shop
+from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from pandas import DataFrame
 
 

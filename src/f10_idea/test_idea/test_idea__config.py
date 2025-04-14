@@ -100,7 +100,7 @@ from src.a15_fisc_logic.fisc_config import (
     weekday_order_str,
     offi_time_str,
 )
-from src.f09_pidgin.pidgin_config import (
+from src.a16_pidgin_logic.pidgin_config import (
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
