@@ -11,7 +11,7 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
 )
 from src.a15_fisc_logic.fisc_config import fiscunit_str
-from src.f10_idea.idea_config import idea_number_str
+from src.a17_idea_logic.idea_config import idea_number_str
 from src.f11_etl.tran_sqlstrs import create_bud_tables
 from src.f11_etl.transformers import (
     etl_idea_staging_to_bud_tables,

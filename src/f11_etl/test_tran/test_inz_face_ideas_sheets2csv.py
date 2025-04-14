@@ -5,7 +5,7 @@ from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
 )
-from src.f10_idea.idea_db_tool import upsert_sheet
+from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.f11_etl.transformers import etl_inz_face_ideas_to_csv_files
 from src.f11_etl.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame

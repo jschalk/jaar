@@ -45,15 +45,15 @@ from src.a15_fisc_logic.fisc_tool import (
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json, inherit_pidginunit
 from src.a16_pidgin_logic.pidgin_config import get_quick_pidgens_column_ref
-from src.f10_idea.idea_config import (
+from src.a17_idea_logic.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
     get_idea_dimen_ref,
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
-from src.f10_idea.idea import get_idearef_obj
-from src.f10_idea.idea_db_tool import (
+from src.a17_idea_logic.idea import get_idearef_obj
+from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     upsert_sheet,
     split_excel_into_dirs,
@@ -66,7 +66,7 @@ from src.f10_idea.idea_db_tool import (
     get_ordered_csv,
     get_idea_into_dimen_staging_query,
 )
-from src.f10_idea.pidgin_toolbox import init_pidginunit_from_dir
+from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.f11_etl.tran_path import create_cart_events_path, create_cart_pidgin_path
 from src.f11_etl.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,

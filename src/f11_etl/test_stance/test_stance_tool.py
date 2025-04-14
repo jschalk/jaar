@@ -22,8 +22,8 @@ from src.a15_fisc_logic.fisc import (
     get_from_json as fiscunit_get_from_json,
 )
 from src.a15_fisc_logic.fisc_config import fiscunit_str
-from src.f10_idea.idea_db_tool import get_sheet_names
-from src.f10_idea.idea_csv_tool import (
+from src.a17_idea_logic.idea_db_tool import get_sheet_names
+from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_brick_csv_strs,
     add_budunit_to_stance_csv_strs,
     add_fiscunit_to_stance_csv_strs,

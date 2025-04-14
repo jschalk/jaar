@@ -5,7 +5,7 @@ from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
 )
-from src.f10_idea.idea_db_tool import upsert_sheet, sheet_exists
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas.testing import (

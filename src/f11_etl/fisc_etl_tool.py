@@ -8,12 +8,12 @@ from src.a07_calendar_logic.chrono import (
     validate_timeline_config,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.f10_idea.idea import (
+from src.a17_idea_logic.idea import (
     _add_cashpurchases_from_df,
     _add_dealunits_from_df,
     _add_time_offis_from_df,
 )
-from src.f10_idea.idea_db_tool import (
+from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     dataframe_to_dict,
     if_nan_return_None,

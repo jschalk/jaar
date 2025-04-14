@@ -43,13 +43,13 @@ from src.a15_fisc_logic.fisc_config import (
     weekday_order_str,
     weekday_title_str,
 )
-from src.f10_idea.idea_config import (
+from src.a17_idea_logic.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
     idea_category_str,
 )
-from src.f10_idea.idea_db_tool import create_idea_sorted_table
+from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.f11_etl.fisc_etl_tool import (
     FiscPrimeObjsRef,
     FiscPrimeColumnsRef,

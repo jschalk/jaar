@@ -5,7 +5,7 @@ from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
 )
-from src.f10_idea.idea_db_tool import upsert_sheet, sheet_exists
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.f11_etl.transformers import (
     etl_otz_inx_event_ideas_to_inz_faces,
 )

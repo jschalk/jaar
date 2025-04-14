@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.f10_idea.idea_config import get_idea_numbers, get_quick_ideas_column_ref
-from src.f10_idea.idea_db_tool import get_all_excel_sheet_names
+from src.a17_idea_logic.idea_config import get_idea_numbers, get_quick_ideas_column_ref
+from src.a17_idea_logic.idea_db_tool import get_all_excel_sheet_names
 from pandas import read_excel as pandas_read_excel, DataFrame, Series as PandaSeries
 from dataclasses import dataclass
 

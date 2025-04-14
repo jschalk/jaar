@@ -12,7 +12,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     otx_name_str,
     unknown_word_str,
 )
-from src.f10_idea.idea_db_tool import get_sheet_names, upsert_sheet, cart_agg_str
+from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, cart_agg_str
 from src.f11_etl.tran_path import create_cart_pidgin_path
 from src.f11_etl.pidgin_agg import PidginPrimeColumns
 from src.f11_etl.transformers import etl_cart_agg_to_pidgin_name_staging

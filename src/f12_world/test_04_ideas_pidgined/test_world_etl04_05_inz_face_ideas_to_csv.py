@@ -6,7 +6,7 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
 )
 
-from src.f10_idea.idea_db_tool import upsert_sheet
+from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import env_dir_setup_cleanup
 from pandas import DataFrame

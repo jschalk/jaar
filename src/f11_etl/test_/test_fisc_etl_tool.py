@@ -21,7 +21,7 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeoffi_str,
     get_fisc_config_args,
 )
-from src.f10_idea.idea_db_tool import (
+from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
     upsert_sheet,
     get_default_sorted_list,

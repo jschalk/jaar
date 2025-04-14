@@ -5,7 +5,7 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
     acct_name_str,
 )
-from src.f10_idea.idea_db_tool import upsert_sheet, get_sheet_names
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, get_sheet_names
 from src.f11_etl.tran_path import create_stances_dir_path, create_stance0001_path
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import env_dir_setup_cleanup

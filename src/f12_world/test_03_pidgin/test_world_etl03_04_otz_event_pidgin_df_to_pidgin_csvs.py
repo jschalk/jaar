@@ -7,7 +7,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     otx_road_str,
     unknown_word_str,
 )
-from src.f10_idea.idea_db_tool import sheet_exists, upsert_sheet, open_csv
+from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet, open_csv
 from src.f11_etl.tran_path import create_otx_event_pidgin_path as otx_event_pidgin_path
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup

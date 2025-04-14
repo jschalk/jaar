@@ -50,14 +50,14 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
 )
-from src.f10_idea.idea_config import (
+from src.a17_idea_logic.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
     idea_category_str,
     get_idea_numbers,
 )
-from src.f10_idea.idea_db_tool import (
+from src.a17_idea_logic.idea_db_tool import (
     get_pragma_table_fetchall,
     get_default_sorted_list,
     get_idea_into_dimen_staging_query,

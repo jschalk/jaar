@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a02_finance_toolboxs.deal import fisc_title_str
 from src.a08_bud_atom_logic.atom_config import acct_name_str
-from src.f10_idea.idea_db_tool import upsert_sheet
+from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.f11_etl.idea_collector import get_all_excel_ideasheets
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
 from pandas import DataFrame

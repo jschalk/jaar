@@ -4,13 +4,13 @@ from src.a12_hub_tools.hub_tool import open_bud_file
 from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
 )
-from src.f10_idea.idea_csv_tool import (
+from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_brick_csv_strs,
     add_fiscunit_to_stance_csv_strs,
     add_budunit_to_stance_csv_strs,
     add_pidginunit_to_stance_csv_strs,
 )
-from src.f10_idea.idea_db_tool import csv_dict_to_excel
+from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel
 from src.f11_etl.tran_path import create_stances_dir_path, STANCE0001_FILENAME
 from os.path import exists as os_path_exists
 

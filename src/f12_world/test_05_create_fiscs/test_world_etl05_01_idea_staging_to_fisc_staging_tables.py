@@ -6,7 +6,7 @@ from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     event_int_str,
 )
-from src.f10_idea.idea_db_tool import get_pragma_table_fetchall
+from src.a17_idea_logic.idea_db_tool import get_pragma_table_fetchall
 from src.f11_etl.tran_sqlstrs import create_fisc_tables
 from src.f11_etl.fisc_etl_tool import FiscPrimeColumnsRef, FiscPrimeObjsRef
 from src.f12_world.world import worldunit_shop

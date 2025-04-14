@@ -7,7 +7,7 @@ from src.a15_fisc_logic.fisc_config import (
     weekday_title_str,
     weekday_order_str,
 )
-from src.f10_idea.idea_db_tool import get_sheet_names, upsert_sheet
+from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.f11_etl.tran_path import create_cart_events_path
 from src.f12_world.world import worldunit_shop
 from src.f12_world.examples.world_env import get_test_worlds_dir, env_dir_setup_cleanup
