@@ -1,6 +1,6 @@
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.f06_listen.listen import listen_to_speaker_agenda, create_empty_bud
+from src.a13_bud_listen_logic.listen import listen_to_speaker_agenda, create_empty_bud
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 

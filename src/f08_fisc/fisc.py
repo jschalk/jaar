@@ -57,7 +57,7 @@ from src.a12_hub_tools.hub_tool import (
     save_plan_file,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
-from src.f06_listen.listen import (
+from src.a13_bud_listen_logic.listen import (
     listen_to_speaker_agenda,
     listen_to_debtors_roll_gut_plan,
     create_job_file_from_duty_file,

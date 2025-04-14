@@ -36,7 +36,7 @@ from src.a12_hub_tools.hub_path import (
     create_gut_path,
     create_plan_path,
 )
-from src.f06_listen.examples.listen_env import get_listen_temp_env_dir
+from src.a13_bud_listen_logic.examples.listen_env import get_listen_temp_env_dir
 
 
 def test_gut_str():
