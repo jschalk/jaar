@@ -1,7 +1,7 @@
 from src.a01_word_logic.road import RoadUnit, create_road, get_default_fisc_title
 from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop, FactUnit
-from src.f02_bud.bud import budunit_shop, BudUnit
+from src.a06_bud_logic.bud import budunit_shop, BudUnit
 
 
 def casa_str() -> str:

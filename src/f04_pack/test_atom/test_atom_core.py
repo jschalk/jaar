@@ -1,5 +1,5 @@
 from src.a03_group_logic.acct import acctunit_shop
-from src.f02_bud.bud_tool import (
+from src.a06_bud_logic.bud_tool import (
     bud_acctunit_str,
     bud_acct_membership_str,
     budunit_str,

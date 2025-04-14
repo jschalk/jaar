@@ -39,7 +39,7 @@ from src.a01_word_logic.road import (
     AcctName,
     EventInt,
 )
-from src.f02_bud.bud import BudUnit
+from src.a06_bud_logic.bud import BudUnit
 from src.f03_chrono.chrono import TimeLineUnit, timelineunit_shop
 from src.f06_listen.basis_buds import get_default_plan
 from src.f06_listen.cell import cellunit_shop

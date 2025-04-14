@@ -1,13 +1,13 @@
 from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
 from src.f04_pack.atom_graphic import budatom_periodic_table0
 
-# from src.f02_bud.examples.example_buds import (
+# from src.a06_bud_logic.examples.example_buds import (
 #     budunit_v001_with_large_agenda,
 #     get_budunit_with_4_levels,
 #     get_budunit_with_4_levels_and_2reasons,
 #     get_budunit_x1_3levels_1reason_1facts,
 # )
-# from src.f02_bud.bud import budunit_shop
+# from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_budatom_periodic_table0_ShowsGraph0(graphics_bool):

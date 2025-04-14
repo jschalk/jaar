@@ -7,7 +7,7 @@ from src.a00_data_toolboxs.dict_toolbox import (
     add_headers_to_csv,
 )
 from src.a01_word_logic.road import FiscTitle, OwnerName
-from src.f02_bud.bud import BudUnit
+from src.a06_bud_logic.bud import BudUnit
 from src.f03_chrono.chrono import timelineunit_shop
 from src.f04_pack.atom import atom_insert, BudAtom, atomrow_shop
 from src.f04_pack.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta

@@ -4,7 +4,7 @@ from src.a01_word_logic.road import (
     get_parent_road,
     LabelUnit,
 )
-from src.f02_bud.bud import BudUnit
+from src.a06_bud_logic.bud import BudUnit
 from src.f06_listen.hub_tool import open_gut_file
 from src.f06_listen.hubunit import HubUnit
 from copy import deepcopy as copy_deepcopy

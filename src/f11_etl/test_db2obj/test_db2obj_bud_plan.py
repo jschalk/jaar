@@ -14,7 +14,7 @@ from src.a04_reason_logic.reason_item import (
     factheir_shop,
 )
 from src.a05_item_logic.item import itemunit_shop
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f05_fund_metric.fund_metric_config import get_fund_metric_dimen_args
 from src.f11_etl.tran_sqlstrs import create_plan_tables
 from src.f11_etl.db_obj_tool import (

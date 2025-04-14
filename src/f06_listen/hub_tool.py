@@ -8,7 +8,7 @@ from src.a00_data_toolboxs.file_toolbox import (
 )
 from src.a00_data_toolboxs.dict_toolbox import get_empty_list_if_None
 from src.a01_word_logic.road import OwnerName, TitleUnit, EventInt, RoadUnit
-from src.f02_bud.bud import (
+from src.a06_bud_logic.bud import (
     BudUnit,
     get_from_json as budunit_get_from_json,
     budunit_shop,

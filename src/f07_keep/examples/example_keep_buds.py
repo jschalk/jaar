@@ -1,4 +1,4 @@
-from src.f02_bud.bud import BudUnit, budunit_shop, itemunit_shop, FiscTitle
+from src.a06_bud_logic.bud import BudUnit, budunit_shop, itemunit_shop, FiscTitle
 from src.f07_keep.examples.keep_env import temp_fisc_title
 
 

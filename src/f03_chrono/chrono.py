@@ -7,7 +7,7 @@ from src.a05_item_logic.item import (
     items_calculated_range as calc_range,
     all_items_between as all_between,
 )
-from src.f02_bud.bud import BudUnit
+from src.a06_bud_logic.bud import BudUnit
 from datetime import datetime
 from dataclasses import dataclass
 from os import getcwd as os_getcwd

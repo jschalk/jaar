@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import OwnerName
-from src.f02_bud.bud import BudUnit, budunit_shop
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
 def _is_empty_bud(x_bud: BudUnit) -> bool:

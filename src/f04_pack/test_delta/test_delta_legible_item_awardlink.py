@@ -1,4 +1,4 @@
-from src.f02_bud.bud_tool import bud_item_awardlink_str
+from src.a06_bud_logic.bud_tool import bud_item_awardlink_str
 from src.f04_pack.atom_config import (
     atom_update,
     atom_insert,
@@ -10,7 +10,7 @@ from src.f04_pack.atom_config import (
 from src.f04_pack.atom import budatom_shop
 from src.f04_pack.delta import buddelta_shop
 from src.f04_pack.legible import create_legible_list
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_create_legible_list_ReturnsObj_item_awardlink_INSERT():

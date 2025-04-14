@@ -1,4 +1,4 @@
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f03_chrono.examples.chrono_examples import (
     add_time_creg_itemunit,
     get_cregtime_str,

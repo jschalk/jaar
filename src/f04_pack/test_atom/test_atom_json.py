@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road
-from src.f02_bud.bud_tool import bud_item_factunit_str
+from src.a06_bud_logic.bud_tool import bud_item_factunit_str
 from src.f04_pack.atom_config import (
     jkeys_str,
     jvalues_str,

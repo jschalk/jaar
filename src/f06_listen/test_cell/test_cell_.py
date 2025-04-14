@@ -1,6 +1,6 @@
 from src.a01_word_logic.road import create_road
 from src.a04_reason_logic.reason_item import factunit_shop
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f06_listen.cell import (
     ancestors_str,
     celldepth_str,

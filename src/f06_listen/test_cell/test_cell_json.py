@@ -1,5 +1,5 @@
 from src.a02_finance_toolboxs.deal import quota_str
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f04_pack.atom_config import event_int_str, penny_str
 from src.f06_listen.cell import (
     cellunit_shop,

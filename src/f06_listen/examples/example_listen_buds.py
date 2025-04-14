@@ -1,5 +1,5 @@
 from src.a05_item_logic.item import itemunit_shop
-from src.f02_bud.bud import BudUnit, budunit_shop
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
 def get_budunit_with_4_levels() -> BudUnit:

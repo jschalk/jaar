@@ -1,4 +1,4 @@
-from src.f02_bud.bud import BudUnit, budunit_shop
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.f03_chrono.chrono import ChronoUnit, chronounit_shop
 from src.f03_chrono.examples.chrono_examples import (
     five_str,

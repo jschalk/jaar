@@ -13,12 +13,12 @@ from src.a04_reason_logic.reason_item import (
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
-from src.f02_bud.bud import (
+from src.a06_bud_logic.bud import (
     BudUnit,
     budunit_shop,
     get_from_dict as budunit_get_from_dict,
 )
-from src.f02_bud.bud_tool import (
+from src.a06_bud_logic.bud_tool import (
     get_bud_root_facts_dict as get_facts_dict,
     clear_factunits_from_bud,
     get_acct_mandate_ledger,

@@ -20,8 +20,8 @@ from src.a04_reason_logic.reason_item import factunit_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a05_item_logic.item import itemunit_shop
-from src.f02_bud.bud import BudUnit
-from src.f02_bud.bud_tool import bud_attr_exists, bud_get_obj
+from src.a06_bud_logic.bud import BudUnit
+from src.a06_bud_logic.bud_tool import bud_attr_exists, bud_get_obj
 from src.f04_pack.atom_config import (
     get_dimen_from_dict,
     get_atom_config_jkeys,

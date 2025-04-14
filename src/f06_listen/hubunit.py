@@ -37,12 +37,12 @@ from src.a01_word_logic.road import (
     validate_titleunit,
     default_bridge_if_None,
 )
-from src.f02_bud.bud import (
+from src.a06_bud_logic.bud import (
     BudUnit,
     get_from_json as budunit_get_from_json,
     budunit_shop,
 )
-from src.f02_bud.bud_tool import get_acct_agenda_net_ledger
+from src.a06_bud_logic.bud_tool import get_acct_agenda_net_ledger
 from src.f04_pack.atom import (
     BudAtom,
     get_from_json as budatom_get_from_json,

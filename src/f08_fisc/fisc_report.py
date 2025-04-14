@@ -1,4 +1,4 @@
-from src.f02_bud.report import (
+from src.a06_bud_logic.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )

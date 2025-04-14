@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_file, save_file
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
-from src.f02_bud.bud_tool import bud_acctunit_str
+from src.a06_bud_logic.bud_tool import bud_acctunit_str
 from src.f04_pack.atom_config import (
     face_name_str,
     acct_name_str,

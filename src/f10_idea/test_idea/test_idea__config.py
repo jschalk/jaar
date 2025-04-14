@@ -9,7 +9,7 @@ from src.a02_finance_toolboxs.deal import (
     fisc_title_str,
     world_id_str,
 )
-from src.f02_bud.bud_tool import (
+from src.a06_bud_logic.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
     bud_item_awardlink_str,

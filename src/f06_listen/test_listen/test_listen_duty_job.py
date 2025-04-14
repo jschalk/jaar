@@ -5,7 +5,7 @@ from src.a01_word_logic.road import (
     TitleUnit,
 )
 from src.a05_item_logic.item import itemunit_shop
-from src.f02_bud.bud import BudUnit, budunit_shop
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.f06_listen.hub_tool import (
     save_gut_file,
     open_plan_file,

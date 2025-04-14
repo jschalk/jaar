@@ -1,5 +1,5 @@
 from src.a05_item_logic.item import itemunit_shop
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f06_listen.hubunit import hubunit_shop
 from src.f06_listen.listen import create_listen_basis, listen_to_agendas_duty_job
 from src.f06_listen.examples.listen_env import (

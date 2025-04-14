@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road, FiscTitle
-from src.f02_bud.bud_tool import (
+from src.a06_bud_logic.bud_tool import (
     budunit_str,
     bud_acctunit_str,
     bud_itemunit_str,

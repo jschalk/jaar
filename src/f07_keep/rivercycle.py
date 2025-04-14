@@ -5,7 +5,7 @@ from src.a00_data_toolboxs.dict_toolbox import (
 )
 from src.a02_finance_toolboxs.allot import allot_scale
 from src.a01_word_logic.road import AcctName, OwnerName
-from src.f02_bud.bud import BudUnit
+from src.a06_bud_logic.bud import BudUnit
 from src.f06_listen.hubunit import HubUnit
 from dataclasses import dataclass
 

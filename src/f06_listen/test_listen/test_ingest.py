@@ -1,5 +1,5 @@
 from src.a05_item_logic.item import itemunit_shop
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f06_listen.listen import (
     generate_ingest_list,
     _allocate_irrational_debtit_belief,

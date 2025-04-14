@@ -1,6 +1,6 @@
 from src.a01_word_logic.road import create_road, get_default_fisc_title as root_title
 from src.a03_group_logic.acct import acctunit_shop
-from src.f02_bud.bud_tool import (
+from src.a06_bud_logic.bud_tool import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -26,7 +26,7 @@ from src.f04_pack.delta import (
     bud_built_from_delta_is_valid,
     get_buddelta_from_ordered_dict,
 )
-from src.f02_bud.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.f04_pack.examples.example_deltas import (
     get_buddelta_example1,
     get_buddelta_sue_example,
