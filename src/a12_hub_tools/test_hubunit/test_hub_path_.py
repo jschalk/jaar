@@ -14,6 +14,7 @@ from src.a12_hub_tools.hub_path import (
     EVENT_EXPRESSED_PACK_FILENAME,
     gut_str,
     plan_str,
+    treasury_filename,
     create_fisc_dir_path,
     create_fisc_json_path,
     create_fisc_ote1_csv_path,
@@ -21,6 +22,9 @@ from src.a12_hub_tools.hub_path import (
     fisc_agenda_list_report_path,
     create_fisc_owners_dir_path,
     create_owner_dir_path,
+    create_keeps_dir_path,
+    create_atoms_dir_path,
+    create_packs_dir_path,
     create_deals_dir_path,
     create_deal_dir_path,
     create_dealunit_json_path,
@@ -45,6 +49,10 @@ def test_gut_str():
 
 def test_plan_str():
     assert plan_str() == "plan"
+
+
+def test_treasury_filename_ReturnsObj():
+    assert treasury_filename() == "treasury.db"
 
 
 def test_create_fisc_dir_path_ReturnObj():
@@ -153,6 +161,60 @@ def test_create_owner_dir_path_ReturnObj():
     owners_dir = create_path(accord23_dir, "owners")
     expected_sue_dir = create_path(owners_dir, sue_str)
     assert sue_dir == expected_sue_dir
+
+
+def test_create_keeps_dir_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    sue_str = "Sue"
+
+    # WHEN
+    keeps_dir = create_keeps_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, accord23_str)
+    owners_dir = create_path(accord23_dir, "owners")
+    sue_dir = create_path(owners_dir, sue_str)
+    expected_keeps_dir = create_path(sue_dir, "keeps")
+    assert keeps_dir == expected_keeps_dir
+
+
+def test_create_atoms_dir_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    sue_str = "Sue"
+
+    # WHEN
+    atoms_dir = create_atoms_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, accord23_str)
+    owners_dir = create_path(accord23_dir, "owners")
+    sue_dir = create_path(owners_dir, sue_str)
+    expected_atoms_dir = create_path(sue_dir, "atoms")
+    assert atoms_dir == expected_atoms_dir
+
+
+def test_create_packs_dir_path_ReturnObj():
+    # ESTABLISH
+    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    accord23_str = "accord23"
+    sue_str = "Sue"
+
+    # WHEN
+    packs_dir = create_packs_dir_path(x_fisc_mstr_dir, accord23_str, sue_str)
+
+    # THEN
+    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
+    accord23_dir = create_path(x_fiscs_dir, accord23_str)
+    owners_dir = create_path(accord23_dir, "owners")
+    sue_dir = create_path(owners_dir, sue_str)
+    expected_packs_dir = create_path(sue_dir, "packs")
+    assert packs_dir == expected_packs_dir
 
 
 def test_create_deals_dir_path_ReturnObj():

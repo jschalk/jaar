@@ -79,6 +79,39 @@ def create_owner_dir_path(
     return create_path(owners_dir, owner_name)
 
 
+def create_keeps_dir_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
+) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\keeps"""
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    owner_dir = create_path(owners_dir, owner_name)
+    return create_path(owner_dir, "keeps")
+
+
+def create_atoms_dir_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
+) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\atoms"""
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    owner_dir = create_path(owners_dir, owner_name)
+    return create_path(owner_dir, "atoms")
+
+
+def create_packs_dir_path(
+    fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
+) -> str:
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\packs"""
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    fisc_dir = create_path(fiscs_dir, fisc_title)
+    owners_dir = create_path(fisc_dir, "owners")
+    owner_dir = create_path(owners_dir, owner_name)
+    return create_path(owner_dir, "packs")
+
+
 def create_deals_dir_path(
     fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName
 ) -> str:

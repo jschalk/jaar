@@ -11,7 +11,10 @@ from src.a02_finance_toolboxs.finance_config import (
     default_fund_coin_if_None,
     validate_fund_pool,
 )
-from src.a12_hub_tools.hub_path import create_deals_dir_path
+from src.a12_hub_tools.hub_path import (
+    create_owner_dir_path,
+    create_deals_dir_path,
+)
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.a13_bud_listen_logic.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
@@ -35,9 +38,6 @@ def test_HubUnit_Exists():
     assert not x_hubunit.respect_bit
     assert not x_hubunit.penny
     assert not x_hubunit.keep_point_magnitude
-    assert not x_hubunit._fisc_dir
-    assert not x_hubunit._owners_dir
-    assert not x_hubunit._owner_dir
     assert not x_hubunit._keeps_dir
     assert not x_hubunit._atoms_dir
     assert not x_hubunit._deals_dir
@@ -86,7 +86,6 @@ def test_hubunit_shop_ReturnsObj():
 
     # THEN
     assert x_hubunit.fisc_mstr_dir == x_fisc_mstr_dir
-    x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     assert x_hubunit.fisc_title == x_fisc_title
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
@@ -95,19 +94,15 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    assert x_hubunit._fisc_dir == create_path(x_fiscs_dir, x_fisc_title)
-    assert x_hubunit._owners_dir == create_path(x_hubunit._fisc_dir, "owners")
-    assert x_hubunit._owner_dir == create_path(x_hubunit._owners_dir, sue_str)
-    assert x_hubunit._keeps_dir == create_path(x_hubunit._owner_dir, "keeps")
-    assert x_hubunit._atoms_dir == create_path(x_hubunit._owner_dir, "atoms")
-    assert x_hubunit._deals_dir == create_path(x_hubunit._owner_dir, "deals")
-    func_deals_dir = create_deals_dir_path(
-        x_fisc_mstr_dir, x_fisc_title, x_hubunit.owner_name
-    )
+    sue_dir = create_owner_dir_path(x_fisc_mstr_dir, x_fisc_title, sue_str)
+    assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
+    assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
+    assert x_hubunit._deals_dir == create_path(sue_dir, "deals")
+    func_deals_dir = create_deals_dir_path(x_fisc_mstr_dir, x_fisc_title, sue_str)
     print(f"{x_hubunit._deals_dir=}")
     print(f"{func_deals_dir=}")
     assert x_hubunit._deals_dir == func_deals_dir
-    assert x_hubunit._packs_dir == create_path(x_hubunit._owner_dir, "packs")
+    assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
 
 
 def test_hubunit_shop_ReturnsObjWhenEmpty():
@@ -126,23 +121,18 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     sue_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str, texas_road)
 
     # THEN
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    x_fisc_path = create_path(fiscs_dir, accord23_str)
-    x_owners_path = create_path(sue_hubunit._fisc_dir, "owners")
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_jobs_path = create_path(sue_hubunit.keep_dir(), "jobs")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
     assert sue_hubunit.fisc_mstr_dir == fisc_mstr_dir
     assert sue_hubunit.fisc_title == accord23_str
-    assert sue_hubunit._fisc_dir == x_fisc_path
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_None()
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
     assert sue_hubunit.penny == filter_penny()
-    assert sue_hubunit._owners_dir == x_owners_path
     x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_road == texas_road
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)

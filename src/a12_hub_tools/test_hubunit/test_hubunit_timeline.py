@@ -1,6 +1,11 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a02_finance_toolboxs.finance_config import default_fund_pool
-from src.a12_hub_tools.hub_path import create_dealunit_json_path, create_budpoint_path
+from src.a12_hub_tools.hub_path import (
+    create_dealunit_json_path,
+    create_budpoint_path,
+    BUDPOINT_FILENAME,
+    DEALUNIT_FILENAME,
+)
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic.examples.example_listen_buds import (
     get_budunit_with_4_levels,
@@ -36,18 +41,6 @@ def test_HubUnit_timepoint_dir_ReturnsObj():
     assert one_timepoint_dir == create_path(x_deals_dir, str(t88_deal_time))
 
 
-def test_HubUnit_deal_filename_ReturnsObj():
-    # ESTABLISH
-    yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_title(), yao_str)
-
-    # WHEN
-    x_deal_filename = yao_hubunit.deal_filename()
-
-    # THEN
-    assert x_deal_filename == "dealunit.json"
-
-
 def test_HubUnit_deal_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
@@ -59,7 +52,7 @@ def test_HubUnit_deal_file_path_ReturnsObj():
 
     # THEN
     x_timepoint_dir = yao_hubunit.timepoint_dir(t88_deal_time)
-    x_file_path = create_path(x_timepoint_dir, yao_hubunit.deal_filename())
+    x_file_path = create_path(x_timepoint_dir, DEALUNIT_FILENAME)
     assert t88_deal_file_path == x_file_path
     f_deal_path = create_dealunit_json_path(
         fisc_mstr_dir(), fisc_title(), yao_str, t88_deal_time
@@ -160,18 +153,6 @@ def test_HubUnit_get_brokerunit_ReturnsObj(env_dir_setup_cleanup):
     assert yao_hubunit.get_brokerunit().get_deal(t66_deal_time).get_deal_acct_net("Sue")
 
 
-def test_HubUnit_budpoint_filename_ReturnsObj():
-    # ESTABLISH
-    yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_title(), yao_str)
-
-    # WHEN
-    x_deal_filename = yao_hubunit.budpoint_filename()
-
-    # THEN
-    assert x_deal_filename == "budpoint.json"
-
-
 def test_HubUnit_budpoint_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
@@ -183,7 +164,7 @@ def test_HubUnit_budpoint_file_path_ReturnsObj():
 
     # THEN
     x_timepoint_dir = yao_hubunit.timepoint_dir(t88_deal_time)
-    x_file_path = create_path(x_timepoint_dir, yao_hubunit.budpoint_filename())
+    x_file_path = create_path(x_timepoint_dir, BUDPOINT_FILENAME)
     assert t88_budpoint_file_path == x_file_path
     f_budpoint_path = create_budpoint_path(
         fisc_mstr_dir(), fisc_title(), yao_str, t88_deal_time
