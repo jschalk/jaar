@@ -15,7 +15,11 @@ from src.a12_hub_tools.hub_tool import (
     plan_file_exists,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop
-from src.a15_fisc_logic.fisc import FiscUnit, fiscunit_shop, DEFAULT_PLAN_LISTEN_COUNT
+from src.a15_fisc_logic.fisc import (
+    FiscUnit,
+    fiscunit_shop,
+    get_default_plan_listen_count,
+)
 from src.a15_fisc_logic.examples.fisc_env import (
     get_test_fisc_mstr_dir,
     env_dir_setup_cleanup,
@@ -24,9 +28,9 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 from pytest import raises as pytest_raises
 
 
-def test_DEFAULT_PLAN_LISTEN_COUNT_Exists():
+def test_get_default_plan_listen_count_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert DEFAULT_PLAN_LISTEN_COUNT == 3
+    assert get_default_plan_listen_count() == 3
 
 
 def test_FiscUnit_Exists():
@@ -70,7 +74,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
     assert accord_fisc.penny == filter_penny()
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
-    assert accord_fisc.plan_listen_rotations == DEFAULT_PLAN_LISTEN_COUNT
+    assert accord_fisc.plan_listen_rotations == get_default_plan_listen_count()
     # Calculated fields
     assert accord_fisc._owners_dir != None
     assert accord_fisc._packs_dir != None

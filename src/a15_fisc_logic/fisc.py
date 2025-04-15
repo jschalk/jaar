@@ -68,7 +68,8 @@ from sqlite3 import connect as sqlite3_connect, Connection
 from copy import deepcopy as copy_deepcopy
 
 
-DEFAULT_PLAN_LISTEN_COUNT = 3
+def get_default_plan_listen_count() -> int:
+    return 3
 
 
 class dealunit_Exception(Exception):
@@ -483,7 +484,7 @@ def fiscunit_shop(
     if fisc_mstr_dir is None:
         fisc_mstr_dir = get_test_fisc_mstr_dir()
     if not plan_listen_rotations:
-        plan_listen_rotations = DEFAULT_PLAN_LISTEN_COUNT
+        plan_listen_rotations = get_default_plan_listen_count()
     x_fiscunit = FiscUnit(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
