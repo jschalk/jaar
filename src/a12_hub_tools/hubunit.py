@@ -84,10 +84,6 @@ class _keep_roadMissingException(Exception):
     pass
 
 
-class calc_timepoint_deal_Exception(Exception):
-    pass
-
-
 def get_keep_dutys_dir(x_keep_dir: str) -> str:
     return create_path(x_keep_dir, "dutys")
 
