@@ -8,6 +8,9 @@ from src.a12_hub_tools.hub_path import (
     fisc_agenda_list_report_path,
     create_fisc_owners_dir_path,
     create_owner_dir_path,
+    create_keeps_dir_path,
+    create_atoms_dir_path,
+    create_packs_dir_path,
     create_deals_dir_path,
     create_deal_dir_path,
     create_dealunit_json_path,
@@ -87,6 +90,42 @@ def test_create_owner_dir_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_owner_dir_path) == doc_str
+
+
+def test_create_keeps_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_keeps_dir_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_keeps_dir_path) == doc_str
+
+
+def test_create_atoms_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_atoms_dir_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_atoms_dir_path) == doc_str
+
+
+def test_create_packs_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_packs_dir_path(
+        fisc_mstr_dir="fisc_mstr_dir",
+        fisc_title=fisc_title_str(),
+        owner_name=owner_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_packs_dir_path) == doc_str
 
 
 def test_create_deals_dir_path_HasDocString():

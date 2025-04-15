@@ -23,6 +23,8 @@ from src.a12_hub_tools.hub_path import (
     create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
+    create_dealunit_json_path,
+    create_budpoint_path,
 )
 from src.a12_hub_tools.hub_tool import (
     save_bud_file,
@@ -41,10 +43,25 @@ from src.a12_hub_tools.hub_tool import (
     save_arbitrary_budevent,
     cellunit_add_json_file,
     create_cell_acct_mandate_ledger_json,
+    save_deal_file,
+    deal_file_exists,
+    open_deal_file,
+    save_budpoint_file,
+    budpoint_file_exists,
+    open_budpoint_file,
+    get_timepoint_dirs,
 )
 from src.a13_bud_listen_logic.examples.listen_env import (
     get_listen_temp_env_dir,
     env_dir_setup_cleanup,
+)
+from src.a13_bud_listen_logic.examples.example_listen_deals import (
+    get_dealunit_55_example,
+    get_dealunit_invalid_example,
+)
+from src.a13_bud_listen_logic.examples.example_listen_buds import (
+    get_budunit_with_4_levels,
+    get_budunit_irrational_example,
 )
 from src.a13_bud_listen_logic.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
@@ -53,6 +70,7 @@ from src.a13_bud_listen_logic.examples.example_listen import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from os.path import exists as os_path_exists
+from pytest import raises as pytest_raises
 
 
 def test_save_bud_file_SetsFile(env_dir_setup_cleanup):
@@ -686,3 +704,172 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     # THEN
     assert os_path_exists(sue_acct_mandate_ledger_path)
     assert open_json(sue_acct_mandate_ledger_path) == {yao_str: 311, sue_str: 133}
+
+
+def test_save_valid_deal_file_Scenario0_SavesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    t55_deal_time = t55_deal.deal_time
+    t55_deal_path = create_dealunit_json_path(mstr_dir, a23_str, yao_str, t55_deal_time)
+    assert os_path_exists(t55_deal_path) is False
+
+    # WHEN
+    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+
+    # THEN
+    assert os_path_exists(t55_deal_path)
+
+
+def test_save_valid_deal_file_Scenario1_RaisesError(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    invalid_deal = get_dealunit_invalid_example()
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        save_deal_file(mstr_dir, a23_str, yao_str, invalid_deal)
+    exception_str = (
+        "magnitude cannot be calculated: debt_deal_acct_net=-5, cred_deal_acct_net=3"
+    )
+    assert str(excinfo.value) == exception_str
+
+
+def test_deal_file_exists_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    assert not deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal.deal_time)
+
+    # WHEN
+    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+
+    # THEN
+    assert deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal.deal_time)
+
+
+def test_open_deal_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    t55_deal_time = t55_deal.deal_time
+    assert not deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal_time)
+
+    # WHEN / THEN
+    assert not open_deal_file(mstr_dir, a23_str, yao_str, t55_deal_time)
+
+
+def test_open_deal_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    t55_deal_time = t55_deal.deal_time
+    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+    assert deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal_time)
+
+    # WHEN / THEN
+    assert open_deal_file(mstr_dir, a23_str, yao_str, t55_deal_time) == t55_deal
+
+
+def test_save_budpoint_file_SavesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    t55_budpoint = get_budunit_with_4_levels()
+    t55_deal_time = 55
+    t55_budpoint_path = create_budpoint_path(mstr_dir, a23_str, sue_str, t55_deal_time)
+    print(f"{t55_budpoint_path=}")
+    assert os_path_exists(t55_budpoint_path) is False
+
+    # WHEN
+    save_budpoint_file(mstr_dir, t55_budpoint, t55_deal_time)
+
+    # THEN
+    assert os_path_exists(t55_budpoint_path)
+
+
+def test_save_budpoint_file_RaisesError(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    irrational_budpoint = get_budunit_irrational_example()
+    t55_deal_time = 55
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        save_budpoint_file(mstr_dir, irrational_budpoint, t55_deal_time)
+    exception_str = "BudPoint could not be saved BudUnit._rational is False"
+    assert str(excinfo.value) == exception_str
+
+
+def test_budpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    t55_deal_time = 55
+    assert budpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time) is False
+
+    # WHEN
+    t55_budpoint = get_budunit_with_4_levels()
+    save_budpoint_file(mstr_dir, t55_budpoint, t55_deal_time)
+
+    # THEN
+    assert budpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time)
+
+
+def test_open_budpoint_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    t55_deal_time = 55
+    assert not budpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time)
+
+    # WHEN / THEN
+    assert not open_budpoint_file(mstr_dir, a23_str, sue_str, t55_deal_time)
+
+
+def test_open_budpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    t55_deal_time = 55
+    t55_budpoint = get_budunit_with_4_levels()
+    save_budpoint_file(mstr_dir, t55_budpoint, t55_deal_time)
+    assert budpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time)
+
+    # WHEN
+    file_budpoint = open_budpoint_file(mstr_dir, a23_str, sue_str, t55_deal_time)
+
+    # THEN
+    assert file_budpoint.get_dict() == t55_budpoint.get_dict()
+
+
+def test_get_timepoint_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    sue_str = "Sue"
+    t55_deal_time = 55
+    t77_deal_time = 77
+    budpoint = get_budunit_with_4_levels()
+    save_budpoint_file(mstr_dir, budpoint, t55_deal_time)
+    save_budpoint_file(mstr_dir, budpoint, t77_deal_time)
+
+    # WHEN
+    timepoint_dirs = get_timepoint_dirs(mstr_dir, a23_str, sue_str)
+
+    # THEN
+    assert timepoint_dirs == [t55_deal_time, t77_deal_time]
