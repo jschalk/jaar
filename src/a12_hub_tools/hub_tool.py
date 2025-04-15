@@ -290,6 +290,6 @@ def get_timepoint_dirs(
     deals_dir = create_deals_dir_path(fisc_mstr_dir, fisc_title, owner_name)
     x_dict = get_dir_file_strs(deals_dir, include_dirs=True, include_files=False)
     x_list = []
-    for x_timepoint in list(x_dict.keys()):
+    for x_timepoint in sorted(list(x_dict.keys())):
         x_list.append(int(x_timepoint))
     return x_list
