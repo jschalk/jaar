@@ -352,31 +352,6 @@ class HubUnit:
         save_gut_file(self.fisc_mstr_dir, gut_bud)
         return gut_bud
 
-    # Deal methods
-    def calc_timepoint_deal(self, x_deal_time: TimeLinePoint):
-        mstr_dir = self.fisc_mstr_dir
-        fisc_title = self.fisc_title
-        owner_name = self.owner_name
-        if not budpoint_file_exists(mstr_dir, fisc_title, owner_name, x_deal_time):
-            exception_str = f"Cannot calculate timepoint {x_deal_time} deals without saved BudPoint file"
-            raise calc_timepoint_deal_Exception(exception_str)
-        x_budpoint = open_budpoint_file(mstr_dir, fisc_title, owner_name, x_deal_time)
-        if deal_file_exists(mstr_dir, fisc_title, owner_name, x_deal_time):
-            x_dealunit = open_deal_file(mstr_dir, fisc_title, owner_name, x_deal_time)
-            x_budpoint.set_fund_pool(x_dealunit.quota)
-        else:
-            x_dealunit = dealunit_shop(x_deal_time)
-        x_dealunit._deal_acct_nets = get_acct_agenda_net_ledger(x_budpoint, True)
-        save_budpoint_file(self.fisc_mstr_dir, x_budpoint, x_deal_time)
-        save_deal_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_dealunit)
-
-    def calc_timepoint_deals(self):
-        timepoint_dirs = get_timepoint_dirs(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
-        )
-        for x_timepoint in timepoint_dirs:
-            self.calc_timepoint_deal(x_timepoint)
-
     # keep management
     def keep_dir(self) -> str:
         if self.keep_road is None:
