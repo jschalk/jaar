@@ -3,6 +3,8 @@ from src.a00_data_toolboxs.file_toolbox import (
     get_directory_path,
     save_file,
     open_file,
+    save_json,
+    open_json,
     delete_dir,
     get_dir_file_strs,
     set_dir,
@@ -25,7 +27,7 @@ from src.a02_finance_toolboxs.deal import (
     dealunit_shop,
     BrokerUnit,
     brokerunit_shop,
-    get_dealunit_from_json,
+    get_dealunit_from_dict,
 )
 from src.a01_word_logic.road import (
     OwnerName,
@@ -58,20 +60,25 @@ from src.a09_pack_logic.pack import (
 from src.a12_hub_tools.basis_buds import get_default_plan
 from src.a12_hub_tools.hub_path import (
     treasury_filename,
-    BUDPOINT_FILENAME,
-    DEALUNIT_FILENAME,
     create_keeps_dir_path,
     create_atoms_dir_path,
     create_packs_dir_path,
     create_deals_dir_path,
+    create_dealunit_json_path,
+    create_budpoint_path,
 )
 from src.a12_hub_tools.hub_tool import (
+    open_bud_file,
+    save_bud_file,
     save_gut_file,
     open_gut_file,
     save_plan_file,
     open_plan_file,
     gut_file_exists,
     plan_file_exists,
+    deal_file_exists,
+    save_deal_file,
+    open_deal_file,
 )
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
@@ -354,37 +361,13 @@ class HubUnit:
         return gut_bud
 
     # Deal methods
-    def timepoint_dir(self, x_deal_time: TimeLinePoint) -> str:
-        return create_path(self._deals_dir, str(x_deal_time))
-
-    def deal_file_path(self, x_deal_time: TimeLinePoint) -> str:
-        return create_path(self.timepoint_dir(x_deal_time), DEALUNIT_FILENAME)
-
-    def _save_valid_deal_file(self, x_deal: DealUnit):
-        x_deal.calc_magnitude()
-        save_file(
-            self.timepoint_dir(x_deal.deal_time),
-            DEALUNIT_FILENAME,
-            x_deal.get_json(),
-            replace=True,
-        )
-
-    def deal_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
-        return os_path_exists(self.deal_file_path(x_deal_time))
-
-    def get_deal_file(self, x_deal_time: TimeLinePoint) -> DealUnit:
-        if self.deal_file_exists(x_deal_time):
-            x_json = open_file(self.timepoint_dir(x_deal_time), DEALUNIT_FILENAME)
-            return get_dealunit_from_json(x_json)
-
-    def delete_deal_file(self, x_deal_time: TimeLinePoint):
-        delete_dir(self.deal_file_path(x_deal_time))
-
     def get_brokerunit(self) -> BrokerUnit:
         x_brokerunit = brokerunit_shop(self.owner_name)
         x_dirs = self._get_timepoint_dirs()
         for x_deal_folder_name in x_dirs:
-            x_dealunit = self.get_deal_file(x_deal_folder_name)
+            x_dealunit = open_deal_file(
+                self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_folder_name
+            )
             x_brokerunit.set_deal(x_dealunit)
         return x_brokerunit
 
@@ -394,9 +377,6 @@ class HubUnit:
         )
         return list(x_dict.keys())
 
-    def budpoint_file_path(self, x_deal_time: TimeLinePoint) -> str:
-        return create_path(self.timepoint_dir(x_deal_time), BUDPOINT_FILENAME)
-
     def _save_valid_budpoint_file(
         self, x_deal_time: TimeLinePoint, x_budpoint: BudUnit
     ):
@@ -405,43 +385,53 @@ class HubUnit:
             raise _save_valid_budpoint_Exception(
                 "BudPoint could not be saved BudUnit._rational is False"
             )
-        save_file(
-            self.timepoint_dir(x_deal_time),
-            BUDPOINT_FILENAME,
-            x_budpoint.get_json(),
-            replace=True,
+        budpoint_json_path = create_budpoint_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
         )
+        save_bud_file(budpoint_json_path, None, x_budpoint)
 
     def budpoint_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
-        return os_path_exists(self.budpoint_file_path(x_deal_time))
+        budpoint_json_path = create_budpoint_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
+        )
+        return os_path_exists(budpoint_json_path)
 
     def get_budpoint_file(self, x_deal_time: TimeLinePoint) -> BudUnit:
+        budpoint_json_path = create_budpoint_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
+        )
         if self.budpoint_file_exists(x_deal_time):
-            timepoint_dir = self.timepoint_dir(x_deal_time)
-            file_content = open_file(timepoint_dir, BUDPOINT_FILENAME)
-            return budunit_get_from_json(file_content)
+            return open_bud_file(budpoint_json_path)
 
     def delete_budpoint_file(self, x_deal_time: TimeLinePoint):
-        delete_dir(self.budpoint_file_path(x_deal_time))
+        budpoint_json_path = create_budpoint_path(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
+        )
+        delete_dir(budpoint_json_path)
 
     def calc_timepoint_deal(self, x_deal_time: TimeLinePoint):
         if self.budpoint_file_exists(x_deal_time) is False:
             exception_str = f"Cannot calculate timepoint {x_deal_time} deals without saved BudPoint file"
             raise calc_timepoint_deal_Exception(exception_str)
         x_budpoint = self.get_budpoint_file(x_deal_time)
-        if self.deal_file_exists(x_deal_time):
-            x_dealunit = self.get_deal_file(x_deal_time)
+        if deal_file_exists(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
+        ):
+            x_dealunit = open_deal_file(
+                self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
+            )
             x_budpoint.set_fund_pool(x_dealunit.quota)
         else:
             x_dealunit = dealunit_shop(x_deal_time)
         x_dealunit._deal_acct_nets = get_acct_agenda_net_ledger(x_budpoint, True)
         self._save_valid_budpoint_file(x_deal_time, x_budpoint)
-        self._save_valid_deal_file(x_dealunit)
+        save_deal_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_dealunit)
 
     def calc_timepoint_deals(self):
         for x_timepoint in self._get_timepoint_dirs():
             self.calc_timepoint_deal(x_timepoint)
 
+    # keep management
     def keep_dir(self) -> str:
         if self.keep_road is None:
             raise _keep_roadMissingException(

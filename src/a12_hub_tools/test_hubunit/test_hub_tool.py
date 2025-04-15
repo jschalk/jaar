@@ -23,6 +23,7 @@ from src.a12_hub_tools.hub_path import (
     create_cell_acct_mandate_ledger_path,
     create_owner_event_dir_path,
     create_budevent_path,
+    create_dealunit_json_path,
 )
 from src.a12_hub_tools.hub_tool import (
     save_bud_file,
@@ -41,10 +42,17 @@ from src.a12_hub_tools.hub_tool import (
     save_arbitrary_budevent,
     cellunit_add_json_file,
     create_cell_acct_mandate_ledger_json,
+    save_deal_file,
+    deal_file_exists,
+    open_deal_file,
 )
 from src.a13_bud_listen_logic.examples.listen_env import (
     get_listen_temp_env_dir,
     env_dir_setup_cleanup,
+)
+from src.a13_bud_listen_logic.examples.example_listen_deals import (
+    get_dealunit_55_example,
+    get_dealunit_invalid_example,
 )
 from src.a13_bud_listen_logic.examples.example_listen import (
     example_casa_clean_factunit as clean_factunit,
@@ -53,6 +61,7 @@ from src.a13_bud_listen_logic.examples.example_listen import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from os.path import exists as os_path_exists
+from pytest import raises as pytest_raises
 
 
 def test_save_bud_file_SetsFile(env_dir_setup_cleanup):
@@ -686,3 +695,78 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     # THEN
     assert os_path_exists(sue_acct_mandate_ledger_path)
     assert open_json(sue_acct_mandate_ledger_path) == {yao_str: 311, sue_str: 133}
+
+
+def test_save_valid_deal_file_Scenario0_SavesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    t55_deal_time = t55_deal.deal_time
+    t55_deal_path = create_dealunit_json_path(mstr_dir, a23_str, yao_str, t55_deal_time)
+    assert os_path_exists(t55_deal_path) is False
+
+    # WHEN
+    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+
+    # THEN
+    assert os_path_exists(t55_deal_path)
+
+
+def test_save_valid_deal_file_Scenario1_RaisesError(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    invalid_deal = get_dealunit_invalid_example()
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        save_deal_file(mstr_dir, a23_str, yao_str, invalid_deal)
+    exception_str = (
+        "magnitude cannot be calculated: debt_deal_acct_net=-5, cred_deal_acct_net=3"
+    )
+    assert str(excinfo.value) == exception_str
+
+
+def test_deal_file_exists_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    assert not deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal.deal_time)
+
+    # WHEN
+    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+
+    # THEN
+    assert deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal.deal_time)
+
+
+def test_open_deal_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    t55_deal_time = t55_deal.deal_time
+    assert not deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal_time)
+
+    # WHEN / THEN
+    assert not open_deal_file(mstr_dir, a23_str, yao_str, t55_deal_time)
+
+
+def test_open_deal_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+    # ESTABLISH
+    mstr_dir = get_listen_temp_env_dir()
+    a23_str = "accord23"
+    yao_str = "Yao"
+    t55_deal = get_dealunit_55_example()
+    t55_deal_time = t55_deal.deal_time
+    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+    assert deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal_time)
+
+    # WHEN / THEN
+    assert open_deal_file(mstr_dir, a23_str, yao_str, t55_deal_time) == t55_deal

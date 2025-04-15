@@ -8,6 +8,11 @@ from src.a00_data_toolboxs.file_toolbox import (
 )
 from src.a00_data_toolboxs.dict_toolbox import get_empty_list_if_None
 from src.a01_word_logic.road import OwnerName, TitleUnit, EventInt, RoadUnit
+from src.a02_finance_toolboxs.deal import (
+    DealUnit,
+    TimeLinePoint,
+    get_dealunit_from_dict,
+)
 from src.a06_bud_logic.bud import (
     BudUnit,
     get_from_json as budunit_get_from_json,
@@ -21,6 +26,7 @@ from src.a12_hub_tools.hub_path import (
     create_budevent_path,
     create_fisc_owners_dir_path,
     create_cell_dir_path,
+    create_dealunit_json_path,
 )
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
@@ -193,3 +199,38 @@ def create_cell_acct_mandate_ledger_json(dirpath: str):
     if cell := cellunit_get_from_dir(dirpath):
         cell.calc_acct_mandate_ledger()
         save_json(dirpath, "cell_acct_mandate_ledger.json", cell._acct_mandate_ledger)
+
+
+def save_deal_file(
+    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName, x_deal: DealUnit = None
+):
+    x_deal.calc_magnitude()
+    deal_json_path = create_dealunit_json_path(
+        fisc_mstr_dir, fisc_title, owner_name, x_deal.deal_time
+    )
+    save_json(deal_json_path, None, x_deal.get_dict(), replace=True)
+
+
+def deal_file_exists(
+    fisc_mstr_dir: str,
+    fisc_title: str,
+    owner_name: OwnerName,
+    x_deal_time: TimeLinePoint = None,
+) -> bool:
+    deal_json_path = create_dealunit_json_path(
+        fisc_mstr_dir, fisc_title, owner_name, x_deal_time
+    )
+    return os_path_exists(deal_json_path)
+
+
+def open_deal_file(
+    fisc_mstr_dir: str,
+    fisc_title: str,
+    owner_name: OwnerName,
+    x_deal_time: TimeLinePoint = None,
+) -> DealUnit:
+    deal_json_path = create_dealunit_json_path(
+        fisc_mstr_dir, fisc_title, owner_name, x_deal_time
+    )
+    if deal_file_exists(fisc_mstr_dir, fisc_title, owner_name, x_deal_time):
+        return get_dealunit_from_dict(open_json(deal_json_path))
