@@ -79,19 +79,15 @@ from src.a12_hub_tools.hub_tool import (
     deal_file_exists,
     save_deal_file,
     open_deal_file,
+    save_budpoint_file,
+    budpoint_file_exists,
+    open_budpoint_file,
+    get_timepoint_dirs,
 )
 from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
-
-
-class Invalid_gut_Exception(Exception):
-    pass
-
-
-class Invalid_plan_Exception(Exception):
-    pass
 
 
 class SavepackFileException(Exception):
@@ -107,10 +103,6 @@ class get_keep_roadsException(Exception):
 
 
 class _keep_roadMissingException(Exception):
-    pass
-
-
-class _save_valid_budpoint_Exception(Exception):
     pass
 
 
@@ -361,74 +353,28 @@ class HubUnit:
         return gut_bud
 
     # Deal methods
-    def get_brokerunit(self) -> BrokerUnit:
-        x_brokerunit = brokerunit_shop(self.owner_name)
-        x_dirs = self._get_timepoint_dirs()
-        for x_deal_folder_name in x_dirs:
-            x_dealunit = open_deal_file(
-                self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_folder_name
-            )
-            x_brokerunit.set_deal(x_dealunit)
-        return x_brokerunit
-
-    def _get_timepoint_dirs(self) -> list[str]:
-        x_dict = get_dir_file_strs(
-            self._deals_dir, include_dirs=True, include_files=False
-        )
-        return list(x_dict.keys())
-
-    def _save_valid_budpoint_file(
-        self, x_deal_time: TimeLinePoint, x_budpoint: BudUnit
-    ):
-        x_budpoint.settle_bud()
-        if x_budpoint._rational is False:
-            raise _save_valid_budpoint_Exception(
-                "BudPoint could not be saved BudUnit._rational is False"
-            )
-        budpoint_json_path = create_budpoint_path(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
-        )
-        save_bud_file(budpoint_json_path, None, x_budpoint)
-
-    def budpoint_file_exists(self, x_deal_time: TimeLinePoint) -> bool:
-        budpoint_json_path = create_budpoint_path(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
-        )
-        return os_path_exists(budpoint_json_path)
-
-    def get_budpoint_file(self, x_deal_time: TimeLinePoint) -> BudUnit:
-        budpoint_json_path = create_budpoint_path(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
-        )
-        if self.budpoint_file_exists(x_deal_time):
-            return open_bud_file(budpoint_json_path)
-
-    def delete_budpoint_file(self, x_deal_time: TimeLinePoint):
-        budpoint_json_path = create_budpoint_path(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
-        )
-        delete_dir(budpoint_json_path)
-
     def calc_timepoint_deal(self, x_deal_time: TimeLinePoint):
-        if self.budpoint_file_exists(x_deal_time) is False:
+        mstr_dir = self.fisc_mstr_dir
+        fisc_title = self.fisc_title
+        owner_name = self.owner_name
+        if not budpoint_file_exists(mstr_dir, fisc_title, owner_name, x_deal_time):
             exception_str = f"Cannot calculate timepoint {x_deal_time} deals without saved BudPoint file"
             raise calc_timepoint_deal_Exception(exception_str)
-        x_budpoint = self.get_budpoint_file(x_deal_time)
-        if deal_file_exists(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
-        ):
-            x_dealunit = open_deal_file(
-                self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_deal_time
-            )
+        x_budpoint = open_budpoint_file(mstr_dir, fisc_title, owner_name, x_deal_time)
+        if deal_file_exists(mstr_dir, fisc_title, owner_name, x_deal_time):
+            x_dealunit = open_deal_file(mstr_dir, fisc_title, owner_name, x_deal_time)
             x_budpoint.set_fund_pool(x_dealunit.quota)
         else:
             x_dealunit = dealunit_shop(x_deal_time)
         x_dealunit._deal_acct_nets = get_acct_agenda_net_ledger(x_budpoint, True)
-        self._save_valid_budpoint_file(x_deal_time, x_budpoint)
+        save_budpoint_file(self.fisc_mstr_dir, x_budpoint, x_deal_time)
         save_deal_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name, x_dealunit)
 
     def calc_timepoint_deals(self):
-        for x_timepoint in self._get_timepoint_dirs():
+        timepoint_dirs = get_timepoint_dirs(
+            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+        )
+        for x_timepoint in timepoint_dirs:
             self.calc_timepoint_deal(x_timepoint)
 
     # keep management

@@ -1,4 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import (
+    get_dir_file_strs,
     create_path,
     save_file,
     open_file,
@@ -26,7 +27,9 @@ from src.a12_hub_tools.hub_path import (
     create_budevent_path,
     create_fisc_owners_dir_path,
     create_cell_dir_path,
+    create_deals_dir_path,
     create_dealunit_json_path,
+    create_budpoint_path,
 )
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
@@ -234,3 +237,59 @@ def open_deal_file(
     )
     if deal_file_exists(fisc_mstr_dir, fisc_title, owner_name, x_deal_time):
         return get_dealunit_from_dict(open_json(deal_json_path))
+
+
+class _save_valid_budpoint_Exception(Exception):
+    pass
+
+
+def save_budpoint_file(
+    fisc_mstr_dir: str,
+    x_budpoint: BudUnit,
+    x_deal_time: TimeLinePoint = None,
+):
+    x_budpoint.settle_bud()
+    if x_budpoint._rational is False:
+        raise _save_valid_budpoint_Exception(
+            "BudPoint could not be saved BudUnit._rational is False"
+        )
+    budpoint_json_path = create_budpoint_path(
+        fisc_mstr_dir, x_budpoint.fisc_title, x_budpoint.owner_name, x_deal_time
+    )
+    save_bud_file(budpoint_json_path, None, x_budpoint)
+
+
+def budpoint_file_exists(
+    fisc_mstr_dir: str,
+    fisc_title: str,
+    owner_name: OwnerName,
+    x_deal_time: TimeLinePoint = None,
+) -> bool:
+    budpoint_json_path = create_budpoint_path(
+        fisc_mstr_dir, fisc_title, owner_name, x_deal_time
+    )
+    return os_path_exists(budpoint_json_path)
+
+
+def open_budpoint_file(
+    fisc_mstr_dir: str,
+    fisc_title: str,
+    owner_name: OwnerName,
+    x_deal_time: TimeLinePoint = None,
+) -> bool:
+    budpoint_json_path = create_budpoint_path(
+        fisc_mstr_dir, fisc_title, owner_name, x_deal_time
+    )
+    # if self.budpoint_file_exists(x_deal_time):
+    return open_bud_file(budpoint_json_path)
+
+
+def get_timepoint_dirs(
+    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
+) -> list[TimeLinePoint]:
+    deals_dir = create_deals_dir_path(fisc_mstr_dir, fisc_title, owner_name)
+    x_dict = get_dir_file_strs(deals_dir, include_dirs=True, include_files=False)
+    x_list = []
+    for x_timepoint in list(x_dict.keys()):
+        x_list.append(int(x_timepoint))
+    return x_list
