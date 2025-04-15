@@ -11,10 +11,7 @@ from src.a02_finance_toolboxs.finance_config import (
     default_fund_coin_if_None,
     validate_fund_pool,
 )
-from src.a12_hub_tools.hub_path import (
-    create_owner_dir_path,
-    create_deals_dir_path,
-)
+from src.a12_hub_tools.hub_path import create_owner_dir_path
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.a13_bud_listen_logic.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
@@ -40,7 +37,6 @@ def test_HubUnit_Exists():
     assert not x_hubunit.keep_point_magnitude
     assert not x_hubunit._keeps_dir
     assert not x_hubunit._atoms_dir
-    assert not x_hubunit._deals_dir
     assert not x_hubunit._packs_dir
 
 
@@ -97,11 +93,6 @@ def test_hubunit_shop_ReturnsObj():
     sue_dir = create_owner_dir_path(x_fisc_mstr_dir, x_fisc_title, sue_str)
     assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
-    assert x_hubunit._deals_dir == create_path(sue_dir, "deals")
-    func_deals_dir = create_deals_dir_path(x_fisc_mstr_dir, x_fisc_title, sue_str)
-    print(f"{x_hubunit._deals_dir=}")
-    print(f"{func_deals_dir=}")
-    assert x_hubunit._deals_dir == func_deals_dir
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
 
 
