@@ -1,6 +1,9 @@
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a13_bud_listen_logic.listen import listen_to_speaker_agenda, create_empty_bud
+from src.a13_bud_listen_logic.listen import (
+    listen_to_speaker_agenda,
+    create_empty_bud_from_bud,
+)
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 
@@ -271,7 +274,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     assert len(sue_budunit.get_agenda_dict()) == 3
 
     # WHEN
-    yao_plan = create_empty_bud(yao_duty, yao_str)
+    yao_plan = create_empty_bud_from_bud(yao_duty, yao_str)
     yao_plan.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     yao_plan.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     yao_plan.set_acct_respect(yao_pool)
@@ -305,8 +308,8 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBud():
     yao_duty.set_acct_respect(yao_pool)
 
     # WHEN
-    sue_plan = create_empty_bud(yao_duty, sue_str)
-    yao_plan = create_empty_bud(yao_duty, yao_str)
+    sue_plan = create_empty_bud_from_bud(yao_duty, sue_str)
+    yao_plan = create_empty_bud_from_bud(yao_duty, yao_str)
     yao_plan.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     yao_plan.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     yao_plan.set_acct_respect(yao_pool)

@@ -205,26 +205,6 @@ def test_FiscUnit_set_init_pack_and_job_CorrectlySetsDirAndFiles(
     assert job_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
 
-def test_FiscUnit_get_owner_gut_from_file_ReturnsObj(env_dir_setup_cleanup):
-    # ESTABLISH
-    accord45_str = "accord45"
-    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
-    accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
-    sue_str = "Sue"
-    accord_fisc.set_init_pack_and_job(sue_str)
-    bob_str = "Bob"
-    sue_gut = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
-    sue_gut.add_acctunit(bob_str)
-    save_gut_file(x_fisc_mstr_dir, sue_gut)
-
-    # WHEN
-    gen_sue_gut = accord_fisc.get_owner_gut_from_file(sue_str)
-
-    # THEN
-    assert gen_sue_gut is not None
-    assert gen_sue_gut.acct_exists(bob_str)
-
-
 def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):

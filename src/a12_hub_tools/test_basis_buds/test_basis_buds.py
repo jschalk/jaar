@@ -5,13 +5,13 @@ from src.a02_finance_toolboxs.finance_config import (
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.basis_buds import (
-    create_empty_bud,
+    create_empty_bud_from_bud,
     create_listen_basis,
     get_default_job,
 )
 
 
-def test_create_empty_bud_ReturnsObj():
+def test_create_empty_bud_from_bud_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
@@ -35,7 +35,7 @@ def test_create_empty_bud_ReturnsObj():
     yao_gut.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_empty_plan = create_empty_bud(yao_gut, x_owner_name=zia_str)
+    yao_empty_plan = create_empty_bud_from_bud(yao_gut, x_owner_name=zia_str)
 
     # THEN
     assert yao_empty_plan.owner_name != yao_gut.owner_name

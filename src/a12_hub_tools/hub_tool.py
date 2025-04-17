@@ -44,7 +44,7 @@ def open_bud_file(dest_dir: str, filename: str = None) -> BudUnit:
         return budunit_get_from_json(open_file(dest_dir, filename))
 
 
-def save_gut_file(fisc_mstr_dir: str, budunit: BudUnit = None):
+def save_gut_file(fisc_mstr_dir: str, budunit: BudUnit):
     gut_path = create_gut_path(fisc_mstr_dir, budunit.fisc_title, budunit.owner_name)
     save_bud_file(gut_path, None, budunit)
 
@@ -66,7 +66,7 @@ def job_file_exists(fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName) 
     return os_path_exists(job_path)
 
 
-def save_job_file(fisc_mstr_dir: str, budunit: BudUnit = None):
+def save_job_file(fisc_mstr_dir: str, budunit: BudUnit):
     job_path = create_job_path(fisc_mstr_dir, budunit.fisc_title, budunit.owner_name)
     save_bud_file(job_path, None, budunit)
 
@@ -287,7 +287,4 @@ def get_timepoint_dirs(
 ) -> list[TimeLinePoint]:
     deals_dir = create_deals_dir_path(fisc_mstr_dir, fisc_title, owner_name)
     x_dict = get_dir_file_strs(deals_dir, include_dirs=True, include_files=False)
-    x_list = []
-    for x_timepoint in sorted(list(x_dict.keys())):
-        x_list.append(int(x_timepoint))
-    return x_list
+    return [int(x_timepoint) for x_timepoint in sorted(list(x_dict.keys()))]

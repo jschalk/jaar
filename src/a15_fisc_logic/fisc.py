@@ -197,13 +197,11 @@ class FiscUnit:
     def set_init_pack_and_job(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
         x_hubunit.initialize_pack_gut_files()
-        x_hubunit.initialize_job_file(self.get_owner_gut_from_file(owner_name))
-
-    def get_owner_gut_from_file(self, owner_name: OwnerName) -> BudUnit:
-        return open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+        x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+        x_hubunit.initialize_job_file(x_gut)
 
     def _set_all_healer_dutys(self, owner_name: OwnerName):
-        x_gut = self.get_owner_gut_from_file(owner_name)
+        x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(

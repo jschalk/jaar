@@ -7,7 +7,7 @@ from src.a01_word_logic.road import (
 )
 from src.a05_item_logic.item import ItemUnit
 from src.a06_bud_logic.bud import BudUnit, AcctUnit
-from src.a12_hub_tools.basis_buds import create_empty_bud, create_listen_basis
+from src.a12_hub_tools.basis_buds import create_empty_bud_from_bud, create_listen_basis
 from src.a12_hub_tools.hub_tool import (
     save_job_file,
     open_job_file,
@@ -193,7 +193,7 @@ def listen_to_agendas_gut_job(fisc_mstr_dir: str, listener_job: BudUnit):
             speaker_id = x_acctunit.acct_name
             speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
             if speaker_job is None:
-                speaker_job = create_empty_bud(listener_job, speaker_id)
+                speaker_job = create_empty_bud_from_bud(listener_job, speaker_id)
             listen_to_speaker_agenda(listener_job, speaker_job)
 
 
@@ -208,7 +208,7 @@ def listen_to_agendas_duty_plan(listener_plan: BudUnit, healer_hubunit: HubUnit)
             healer_name = healer_hubunit.owner_name
             speaker_plan = healer_hubunit.rj_speaker_bud(healer_name, speaker_id)
             if speaker_plan is None:
-                speaker_plan = create_empty_bud(listener_plan, speaker_id)
+                speaker_plan = create_empty_bud_from_bud(listener_plan, speaker_id)
             listen_to_speaker_agenda(listener_plan, speaker_plan)
 
 
@@ -301,7 +301,7 @@ def pick_keep_plan_and_listen(
     if healer_hubunit.plan_file_exists(listener_id):
         keep_plan = healer_hubunit.get_plan_bud(listener_id)
     else:
-        keep_plan = create_empty_bud(new_job, new_job.owner_name)
+        keep_plan = create_empty_bud_from_bud(new_job, new_job.owner_name)
     listen_to_plan_agenda(new_job, keep_plan)
 
 
