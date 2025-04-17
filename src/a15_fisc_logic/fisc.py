@@ -41,14 +41,9 @@ from src.a01_word_logic.road import (
 )
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
-from src.a12_hub_tools.basis_buds import get_default_job
+from src.a12_hub_tools.basis_buds import get_default_job, create_listen_basis
 from src.a11_deal_cell_logic.cell import cellunit_shop
-from src.a12_hub_tools.basis_buds import create_listen_basis
-from src.a12_hub_tools.hub_path import (
-    create_fisc_json_path,
-    create_cell_dir_path,
-    create_gut_path,
-)
+from src.a12_hub_tools.hub_path import create_fisc_json_path, create_cell_dir_path
 from src.a12_hub_tools.hub_tool import (
     cellunit_save_to_dir,
     open_bud_file,
@@ -62,6 +57,7 @@ from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from src.a13_bud_listen_logic.listen import (
     listen_to_speaker_agenda,
     listen_to_debtors_roll_gut_job,
+    listen_to_agendas_create_init_job_from_guts,
     create_plan_file_from_duty_file,
 )
 from src.a15_fisc_logic.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
@@ -186,22 +182,6 @@ class FiscUnit:
             return self._journal_db
 
     # owner management
-    def _get_hubunit(self, owner_name: OwnerName) -> HubUnit:
-        return hubunit_shop(
-            owner_name=owner_name,
-            fisc_title=self.fisc_title,
-            fisc_mstr_dir=self.fisc_mstr_dir,
-            keep_road=None,
-            bridge=self.bridge,
-            respect_bit=self.respect_bit,
-        )
-
-    def set_init_pack_and_job(self, owner_name: OwnerName):
-        x_hubunit = self._get_hubunit(owner_name)
-        x_hubunit.initialize_pack_gut_files()
-        x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
-        x_hubunit.initialize_job_file(x_gut)
-
     def _set_all_healer_dutys(self, owner_name: OwnerName):
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()
@@ -257,19 +237,29 @@ class FiscUnit:
         return x_job
 
     # job bud management
-    def save_if_none_gut_file(self, owner_name: OwnerName):
+    def create_empty_bud_from_fisc(self, owner_name: OwnerName) -> BudUnit:
+        return budunit_shop(
+            owner_name,
+            self.fisc_title,
+            bridge=self.bridge,
+            fund_coin=self.fund_coin,
+            respect_bit=self.respect_bit,
+            penny=self.penny,
+        )
+
+    def create_gut_file_if_none(self, owner_name: OwnerName):
         if not gut_file_exists(self.fisc_mstr_dir, self.fisc_title, owner_name):
-            empty_bud = budunit_shop(
-                owner_name,
-                self.fisc_title,
-                bridge=self.bridge,
-                fund_coin=self.fund_coin,
-                respect_bit=self.respect_bit,
-                penny=self.penny,
-            )
+            empty_bud = self.create_empty_bud_from_fisc(owner_name)
             save_gut_file(self.fisc_mstr_dir, empty_bud)
 
-    def generate_job(self, owner_name: OwnerName) -> BudUnit:
+    def create_init_job_from_guts(self, owner_name: OwnerName):
+        self.create_gut_file_if_none(owner_name)
+        x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+        x_job = create_listen_basis(x_gut)
+        listen_to_agendas_create_init_job_from_guts(self.fisc_mstr_dir, x_job)
+        save_job_file(self.fisc_mstr_dir, x_job)
+
+    def rotate_job(self, owner_name: OwnerName) -> BudUnit:
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()
         # if budunit has healers create job from healers.
@@ -283,14 +273,17 @@ class FiscUnit:
     def generate_all_jobs(self):
         owner_names = self._get_owner_folder_names()
         for owner_name in owner_names:
-            self.set_init_pack_and_job(owner_name)
+            self.create_init_job_from_guts(owner_name)
 
-        print(f"{self.job_listen_rotations=}")
-        for x_rotation in range(self.job_listen_rotations):
-            print(f"{x_rotation=}")
-        for owner_name in owner_names:
-            job = self.generate_job(owner_name)
-            save_job_file(self.fisc_mstr_dir, job)
+        # print(f"{self.job_listen_rotations=}")
+        # for x_rotation in range(self.job_listen_rotations):
+        #     print(f"{x_rotation=}")
+        #     for owner_name in owner_names:
+        #         job = self.rotate_job(owner_name)
+        #         save_job_file(self.fisc_mstr_dir, job)
+        # for owner_name in owner_names:
+        #     job = self.rotate_job(owner_name)
+        #     save_job_file(self.fisc_mstr_dir, job)
 
     def get_job_file_bud(self, owner_name: OwnerName) -> BudUnit:
         return open_job_file(self.fisc_mstr_dir, self.fisc_title, owner_name)

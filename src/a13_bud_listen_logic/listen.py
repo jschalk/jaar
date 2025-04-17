@@ -182,6 +182,19 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     return _ingest_perspective_agenda(listener, agenda)
 
 
+def listen_to_agendas_create_init_job_from_guts(
+    fisc_mstr_dir: str, listener_job: BudUnit
+):
+    fisc_title = listener_job.fisc_title
+    for x_acctunit in get_ordered_debtors_roll(listener_job):
+        speaker_id = x_acctunit.acct_name
+        speaker_gut = open_gut_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if speaker_gut is None:
+            speaker_gut = create_empty_bud_from_bud(listener_job, speaker_id)
+        if speaker_gut:
+            listen_to_speaker_agenda(listener_job, speaker_gut)
+
+
 def listen_to_agendas_gut_job(fisc_mstr_dir: str, listener_job: BudUnit):
     fisc_title = listener_job.fisc_title
     owner_name = listener_job.owner_name
