@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road
-from src.a12_hub_tools.hub_tool import save_plan_file
+from src.a12_hub_tools.hub_tool import save_job_file
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic.examples.example_listen_buds import (
     get_budunit_with_4_levels,
@@ -39,7 +39,7 @@ def test_HubUnit_get_dw_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_ow
     bob_budunit = get_budunit_with_4_levels()
     bob_budunit.set_owner_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    save_plan_file(bob_hubunit.fisc_mstr_dir, bob_budunit)
+    save_job_file(bob_hubunit.fisc_mstr_dir, bob_budunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
@@ -69,7 +69,7 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
     yao_budunit.set_owner_name(yao_str)
 
     bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_road)
-    bob_iowa_hubunit.save_job_bud(yao_budunit)
+    bob_iowa_hubunit.save_plan_bud(yao_budunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_road)

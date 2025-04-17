@@ -17,9 +17,9 @@ def create_example_fisc2() -> FiscUnit:
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_fisc.set_init_pack_and_plan(yao_str)
-    accord_fisc.set_init_pack_and_plan(wei_str)
-    accord_fisc.set_init_pack_and_plan(zia_str)
+    accord_fisc.set_init_pack_and_job(yao_str)
+    accord_fisc.set_init_pack_and_job(wei_str)
+    accord_fisc.set_init_pack_and_job(zia_str)
     yao_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, yao_str)
     wei_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, wei_str)
     zia_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, zia_str)
@@ -84,9 +84,9 @@ def create_example_fisc3() -> FiscUnit:
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_fisc.set_init_pack_and_plan(yao_str)
-    accord_fisc.set_init_pack_and_plan(wei_str)
-    accord_fisc.set_init_pack_and_plan(zia_str)
+    accord_fisc.set_init_pack_and_job(yao_str)
+    accord_fisc.set_init_pack_and_job(wei_str)
+    accord_fisc.set_init_pack_and_job(zia_str)
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
     yao_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, yao_str)
     wei_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, wei_str)
@@ -128,9 +128,9 @@ def create_example_fisc4() -> FiscUnit:
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_fisc.set_init_pack_and_plan(yao_str)
-    accord_fisc.set_init_pack_and_plan(wei_str)
-    accord_fisc.set_init_pack_and_plan(zia_str)
+    accord_fisc.set_init_pack_and_job(yao_str)
+    accord_fisc.set_init_pack_and_job(wei_str)
+    accord_fisc.set_init_pack_and_job(zia_str)
     yao_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, yao_str)
     wei_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, wei_str)
     zia_gut_bud = open_gut_file(x_fisc_mstr_dir, a45_str, zia_str)

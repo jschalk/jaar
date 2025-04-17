@@ -8,14 +8,14 @@ from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a12_hub_tools.hub_tool import (
     save_gut_file,
-    open_plan_file,
+    open_job_file,
     gut_file_exists,
-    plan_file_exists,
+    job_file_exists,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from src.a13_bud_listen_logic.listen import (
-    listen_to_owner_jobs,
-    create_job_file_from_duty_file,
+    listen_to_owner_plans,
+    create_plan_file_from_duty_file,
 )
 from src.a13_bud_listen_logic.examples.listen_env import (
     env_dir_setup_cleanup,
@@ -117,7 +117,7 @@ def get_example_yao_bud() -> BudUnit:
     return yao_speaker
 
 
-def get_example_yao_job1_speaker() -> BudUnit:
+def get_example_yao_plan1_speaker() -> BudUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_item_obj(run_road())
@@ -132,7 +132,7 @@ def get_example_yao_job1_speaker() -> BudUnit:
     return yao_speaker
 
 
-def get_example_yao_job2_speaker() -> BudUnit:
+def get_example_yao_plan2_speaker() -> BudUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_item_obj(run_road())
@@ -153,7 +153,7 @@ def get_example_yao_job2_speaker() -> BudUnit:
     return yao_speaker
 
 
-def get_example_yao_job3_speaker() -> BudUnit:
+def get_example_yao_plan3_speaker() -> BudUnit:
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_item_obj(run_road())
     yao_speaker.set_acct_respect(10)
@@ -232,7 +232,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
         fisc_title=yao_bud.fisc_title,
         owner_name=yao_bud.owner_name,
         keep_road=get_ohio_road(),
-        # pipeline_gut_plan_str(),
+        # pipeline_gut_job_str(),
     )
 
 
@@ -243,7 +243,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
         fisc_title=yao_bud.fisc_title,
         owner_name=yao_bud.owner_name,
         keep_road=get_iowa_road(),
-        # pipeline_gut_plan_str(),
+        # pipeline_gut_job_str(),
     )
 
 
@@ -254,7 +254,7 @@ def get_zia_utah_hubunit() -> HubUnit:
         fisc_title=yao_bud.fisc_title,
         owner_name="Zia",
         keep_road=get_utah_road(),
-        # pipeline_gut_plan_str(),
+        # pipeline_gut_job_str(),
     )
 
 
@@ -276,14 +276,14 @@ def get_example_yao_gut_with_3_healers():
     return yao_gut
 
 
-def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
+def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     # yao0_gut with 3 debotors of different credit_beliefs
-    # yao_job1 with 1 task, fact that doesn't make that task active
-    # yao_job2 with 2 tasks, one is equal fact that makes task active
-    # yao_job3 with 1 new task, fact stays with it
+    # yao_plan1 with 1 task, fact that doesn't make that task active
+    # yao_plan2 with 2 tasks, one is equal fact that makes task active
+    # yao_plan3 with 1 new task, fact stays with it
     fisc_mstr_dir = env_dir()
     fisc_title = get_default_fisc_title()
     yao_gut0 = get_example_yao_gut_with_3_healers()
@@ -303,77 +303,77 @@ def test_listen_to_owner_jobs_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
     # print(f"{yao_gut0._item_dict.keys()=}")
 
     yao_str = yao_gut0.owner_name
-    yao_job1 = get_example_yao_job1_speaker()
-    yao_job2 = get_example_yao_job2_speaker()
-    yao_job3 = get_example_yao_job3_speaker()
+    yao_plan1 = get_example_yao_plan1_speaker()
+    yao_plan2 = get_example_yao_plan2_speaker()
+    yao_plan3 = get_example_yao_plan3_speaker()
     yao_iowa_hubunit = get_yao_iowa_hubunit()
     yao_ohio_hubunit = get_yao_ohio_hubunit()
     zia_utah_hubunit = get_zia_utah_hubunit()
     # delete_dir(yao_iowa_hubunit.owners_dir())
     assert gut_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
-    assert plan_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
-    assert yao_iowa_hubunit.job_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.job_file_exists(yao_str) is False
-    assert zia_utah_hubunit.job_file_exists(yao_str) is False
+    assert job_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
+    assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
+    assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
+    assert zia_utah_hubunit.plan_file_exists(yao_str) is False
     print(f"{yao_gut0.get_fact(get_location_road())=}")
     save_gut_file(env_dir(), yao_gut0)
-    # yao_iowa_hubunit.save_job_bud(yao_job1)
-    # yao_ohio_hubunit.save_job_bud(yao_job2)
-    # zia_utah_hubunit.save_job_bud(yao_job3)
+    # yao_iowa_hubunit.save_plan_bud(yao_plan1)
+    # yao_ohio_hubunit.save_plan_bud(yao_plan2)
+    # zia_utah_hubunit.save_plan_bud(yao_plan3)
     assert gut_file_exists(fisc_mstr_dir, fisc_title, yao_str)
-    assert yao_iowa_hubunit.job_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.job_file_exists(yao_str) is False
-    assert zia_utah_hubunit.job_file_exists(yao_str) is False
+    assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
+    assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
+    assert zia_utah_hubunit.plan_file_exists(yao_str) is False
 
     # WHEN
-    assert plan_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
-    listen_to_owner_jobs(yao_iowa_hubunit)
-    assert plan_file_exists(fisc_mstr_dir, fisc_title, yao_str)
+    assert job_file_exists(fisc_mstr_dir, fisc_title, yao_str) is False
+    listen_to_owner_plans(yao_iowa_hubunit)
+    assert job_file_exists(fisc_mstr_dir, fisc_title, yao_str)
 
-    yao_plan = open_plan_file(fisc_mstr_dir, fisc_title, yao_str)
-    yao_plan.settle_bud()
-    assert yao_plan.accts.keys() == yao_gut0.accts.keys()
-    assert yao_plan.get_acct(yao_str)._irrational_debtit_belief == 0
-    yao_plan_accts = yao_plan.get_dict().get("accts")
+    yao_job = open_job_file(fisc_mstr_dir, fisc_title, yao_str)
+    yao_job.settle_bud()
+    assert yao_job.accts.keys() == yao_gut0.accts.keys()
+    assert yao_job.get_acct(yao_str)._irrational_debtit_belief == 0
+    yao_job_accts = yao_job.get_dict().get("accts")
     yao_gut0_accts = yao_gut0.get_dict().get("accts")
-    yao_plan_bob = yao_plan_accts.get("Bob")
+    yao_job_bob = yao_job_accts.get("Bob")
     yao_gut0_bob = yao_gut0_accts.get("Bob")
-    print(f"{yao_plan_bob=}")
+    print(f"{yao_job_bob=}")
     print(f"{yao_gut0_bob=}")
-    assert yao_plan_bob == yao_gut0_bob
-    assert yao_plan_accts.keys() == yao_gut0_accts.keys()
-    assert yao_plan_accts == yao_gut0_accts
-    assert len(yao_plan.get_dict().get("accts")) == 3
-    assert len(yao_plan._item_dict) == 4
-    print(f"{yao_plan._item_dict.keys()=}")
-    print(f"{yao_plan.get_factunits_dict().keys()=}")
-    assert yao_plan.item_exists(cook_road()) is False
-    assert yao_plan.item_exists(clean_road()) is False
-    assert yao_plan.item_exists(run_road()) is False
-    assert yao_plan.item_exists(get_swim_road())
-    assert yao_plan.item_exists(get_in_mer_road())
-    assert yao_plan.item_exists(get_on_land_road()) is False
-    assert yao_plan.get_fact(get_location_road()) is not None
-    assert yao_plan.get_fact(get_location_road()).pick == get_in_mer_road()
-    assert len(yao_plan.get_agenda_dict()) == 1
-    assert len(yao_plan.itemroot.factunits) == 1
-    assert yao_plan != yao_gut0
+    assert yao_job_bob == yao_gut0_bob
+    assert yao_job_accts.keys() == yao_gut0_accts.keys()
+    assert yao_job_accts == yao_gut0_accts
+    assert len(yao_job.get_dict().get("accts")) == 3
+    assert len(yao_job._item_dict) == 4
+    print(f"{yao_job._item_dict.keys()=}")
+    print(f"{yao_job.get_factunits_dict().keys()=}")
+    assert yao_job.item_exists(cook_road()) is False
+    assert yao_job.item_exists(clean_road()) is False
+    assert yao_job.item_exists(run_road()) is False
+    assert yao_job.item_exists(get_swim_road())
+    assert yao_job.item_exists(get_in_mer_road())
+    assert yao_job.item_exists(get_on_land_road()) is False
+    assert yao_job.get_fact(get_location_road()) is not None
+    assert yao_job.get_fact(get_location_road()).pick == get_in_mer_road()
+    assert len(yao_job.get_agenda_dict()) == 1
+    assert len(yao_job.itemroot.factunits) == 1
+    assert yao_job != yao_gut0
 
 
-def test_create_job_file_from_duty_file_CreatesEmptyJob(env_dir_setup_cleanup):
+def test_create_plan_file_from_duty_file_CreatesEmptyplan(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = budunit_shop(yao_str)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
-    assert sue_texas_hubunit.job_file_exists(yao_str) is False
+    assert sue_texas_hubunit.plan_file_exists(yao_str) is False
 
     # WHEN
-    create_job_file_from_duty_file(sue_texas_hubunit, yao_str)
+    create_plan_file_from_duty_file(sue_texas_hubunit, yao_str)
 
     # ESTABLISH
-    assert sue_texas_hubunit.job_file_exists(yao_str)
-    yao_job = sue_texas_hubunit.get_job_bud(yao_str)
-    assert yao_job.owner_name is not None
-    assert yao_job.owner_name == yao_str
-    assert yao_job.get_dict() == yao_duty.get_dict()
+    assert sue_texas_hubunit.plan_file_exists(yao_str)
+    yao_plan = sue_texas_hubunit.get_plan_bud(yao_str)
+    assert yao_plan.owner_name is not None
+    assert yao_plan.owner_name == yao_str
+    assert yao_plan.get_dict() == yao_duty.get_dict()

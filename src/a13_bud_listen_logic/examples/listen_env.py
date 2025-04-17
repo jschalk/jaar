@@ -43,7 +43,7 @@ def get_texas_hubunit() -> HubUnit:
         fisc_title,
         owner_name="Sue",
         keep_road=get_texas_road(),
-        # pipeline_duty_job_str(),
+        # pipeline_duty_plan_str(),
     )
 
 
@@ -62,5 +62,5 @@ def get_dakota_hubunit() -> HubUnit:
         fisc_title,
         owner_name="Sue",
         keep_road=get_dakota_road(),
-        # pipeline_duty_job_str(),
+        # pipeline_duty_plan_str(),
     )

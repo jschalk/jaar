@@ -41,7 +41,7 @@ from src.a01_word_logic.road import (
 )
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
-from src.a12_hub_tools.basis_buds import get_default_plan
+from src.a12_hub_tools.basis_buds import get_default_job
 from src.a11_deal_cell_logic.cell import cellunit_shop
 from src.a12_hub_tools.hub_path import (
     create_fisc_json_path,
@@ -52,15 +52,15 @@ from src.a12_hub_tools.hub_tool import (
     cellunit_save_to_dir,
     open_bud_file,
     open_gut_file,
-    open_plan_file,
+    open_job_file,
     save_gut_file,
-    save_plan_file,
+    save_job_file,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from src.a13_bud_listen_logic.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_gut_plan,
-    create_job_file_from_duty_file,
+    listen_to_debtors_roll_gut_job,
+    create_plan_file_from_duty_file,
 )
 from src.a15_fisc_logic.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
 from dataclasses import dataclass
@@ -68,7 +68,7 @@ from sqlite3 import connect as sqlite3_connect, Connection
 from copy import deepcopy as copy_deepcopy
 
 
-def get_default_plan_listen_count() -> int:
+def get_default_job_listen_count() -> int:
     return 3
 
 
@@ -89,11 +89,11 @@ class FiscUnit:
     """Data pipelines:
     pipeline1: packs->gut
     pipeline2: gut->dutys
-    pipeline3: duty->job
-    pipeline4: job->plan
-    pipeline5: gut->plan (direct)
-    pipeline6: gut->job->plan (through jobs)
-    pipeline7: packs->plan (could be 5 of 6)
+    pipeline3: duty->plan
+    pipeline4: plan->job
+    pipeline5: gut->job (direct)
+    pipeline6: gut->plan->job (through plans)
+    pipeline7: packs->job (could be 5 of 6)
     """
 
     fisc_title: FiscTitle = None
@@ -106,7 +106,7 @@ class FiscUnit:
     fund_coin: FundCoin = None
     respect_bit: BitNum = None
     penny: PennyNum = None
-    plan_listen_rotations: int = None
+    job_listen_rotations: int = None
     _offi_time_max: TimeLinePoint = None
     _fisc_dir: str = None
     _owners_dir: str = None
@@ -194,10 +194,10 @@ class FiscUnit:
             respect_bit=self.respect_bit,
         )
 
-    def set_init_pack_and_plan(self, owner_name: OwnerName):
+    def set_init_pack_and_job(self, owner_name: OwnerName):
         x_hubunit = self._get_hubunit(owner_name)
         x_hubunit.initialize_pack_gut_files()
-        x_hubunit.initialize_plan_file(self.get_owner_gut_from_file(owner_name))
+        x_hubunit.initialize_job_file(self.get_owner_gut_from_file(owner_name))
 
     def get_owner_gut_from_file(self, owner_name: OwnerName) -> BudUnit:
         return open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
@@ -211,7 +211,7 @@ class FiscUnit:
                 self.fisc_title,
                 healer_name,
                 keep_road=None,
-                # "duty_job",
+                # "duty_plan",
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
@@ -228,8 +228,8 @@ class FiscUnit:
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(gut_bud)
 
-    def generate_healers_authored_plan(self, owner_name: OwnerName, x_gut: BudUnit):
-        x_plan = get_default_plan(x_gut)
+    def generate_healers_authored_job(self, owner_name: OwnerName, x_gut: BudUnit):
+        x_job = get_default_job(x_gut)
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 fisc_mstr_dir=self.fisc_mstr_dir,
@@ -246,42 +246,42 @@ class FiscUnit:
                     fisc_title=self.fisc_title,
                     owner_name=healer_name,
                     keep_road=keep_road,
-                    # "duty_job",
+                    # "duty_plan",
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
                 keep_hubunit.save_duty_bud(x_gut)
-                create_job_file_from_duty_file(keep_hubunit, owner_name)
-                x_job = keep_hubunit.get_job_bud(owner_name)
-                x_plan = listen_to_speaker_agenda(x_plan, x_job)
-        return x_plan
+                create_plan_file_from_duty_file(keep_hubunit, owner_name)
+                x_plan = keep_hubunit.get_plan_bud(owner_name)
+                x_job = listen_to_speaker_agenda(x_job, x_plan)
+        return x_job
 
-    # plan bud management
-    def generate_plan(self, owner_name: OwnerName) -> BudUnit:
+    # job bud management
+    def generate_job(self, owner_name: OwnerName) -> BudUnit:
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()
-        # if budunit has healers create plan from healers.
+        # if budunit has healers create job from healers.
         if len(x_gut._healers_dict) > 0:
-            return self.generate_healers_authored_plan(owner_name, x_gut)
+            return self.generate_healers_authored_job(owner_name, x_gut)
         # create budunit from debtors roll
-        return listen_to_debtors_roll_gut_plan(
+        return listen_to_debtors_roll_gut_job(
             self.fisc_mstr_dir, self.fisc_title, owner_name
         )
 
-    def generate_all_plans(self):
+    def generate_all_jobs(self):
         owner_names = self._get_owner_folder_names()
         for owner_name in owner_names:
-            self.set_init_pack_and_plan(owner_name)
+            self.set_init_pack_and_job(owner_name)
 
-        print(f"{self.plan_listen_rotations=}")
-        for x_rotation in range(self.plan_listen_rotations):
+        print(f"{self.job_listen_rotations=}")
+        for x_rotation in range(self.job_listen_rotations):
             print(f"{x_rotation=}")
         for owner_name in owner_names:
-            plan = self.generate_plan(owner_name)
-            save_plan_file(self.fisc_mstr_dir, plan)
+            job = self.generate_job(owner_name)
+            save_job_file(self.fisc_mstr_dir, job)
 
-    def get_plan_file_bud(self, owner_name: OwnerName) -> BudUnit:
-        return open_plan_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+    def get_job_file_bud(self, owner_name: OwnerName) -> BudUnit:
+        return open_job_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
 
     # brokerunits
     def set_brokerunit(self, x_brokerunit: BrokerUnit):
@@ -477,14 +477,14 @@ def fiscunit_shop(
     fund_coin: float = None,
     respect_bit: float = None,
     penny: float = None,
-    plan_listen_rotations: int = None,
+    job_listen_rotations: int = None,
 ) -> FiscUnit:
     if timeline is None:
         timeline = timelineunit_shop()
     if fisc_mstr_dir is None:
         fisc_mstr_dir = get_test_fisc_mstr_dir()
-    if not plan_listen_rotations:
-        plan_listen_rotations = get_default_plan_listen_count()
+    if not job_listen_rotations:
+        job_listen_rotations = get_default_job_listen_count()
     x_fiscunit = FiscUnit(
         fisc_title=fisc_title,
         fisc_mstr_dir=fisc_mstr_dir,
@@ -497,7 +497,7 @@ def fiscunit_shop(
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=filter_penny(penny),
         _all_tranbook=tranbook_shop(fisc_title),
-        plan_listen_rotations=plan_listen_rotations,
+        job_listen_rotations=job_listen_rotations,
     )
     x_fiscunit._set_fisc_dirs(in_memory_journal=in_memory_journal)
     return x_fiscunit

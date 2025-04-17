@@ -7,7 +7,7 @@ from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.basis_buds import (
     create_empty_bud,
     create_listen_basis,
-    get_default_plan,
+    get_default_job,
 )
 
 
@@ -35,25 +35,25 @@ def test_create_empty_bud_ReturnsObj():
     yao_gut.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_empty_job = create_empty_bud(yao_gut, x_owner_name=zia_str)
+    yao_empty_plan = create_empty_bud(yao_gut, x_owner_name=zia_str)
 
     # THEN
-    assert yao_empty_job.owner_name != yao_gut.owner_name
-    assert yao_empty_job.owner_name == zia_str
-    assert yao_empty_job.fisc_title == yao_gut.fisc_title
-    assert yao_empty_job.last_pack_id is None
-    assert yao_empty_job.get_acctunits_dict() == {}
-    assert yao_empty_job.bridge == yao_gut.bridge
-    assert yao_empty_job.fund_pool == yao_gut.fund_pool
-    assert yao_empty_job.fund_coin == yao_gut.fund_coin
-    assert yao_empty_job.respect_bit == yao_gut.respect_bit
-    assert yao_empty_job.penny == yao_gut.penny
-    assert yao_empty_job.credor_respect != yao_gut.credor_respect
-    assert yao_empty_job.credor_respect == validate_respect_num()
-    assert yao_empty_job.debtor_respect != yao_gut.debtor_respect
-    assert yao_empty_job.debtor_respect == validate_respect_num()
-    yao_empty_job.settle_bud()
-    assert yao_empty_job.accts == {}
+    assert yao_empty_plan.owner_name != yao_gut.owner_name
+    assert yao_empty_plan.owner_name == zia_str
+    assert yao_empty_plan.fisc_title == yao_gut.fisc_title
+    assert yao_empty_plan.last_pack_id is None
+    assert yao_empty_plan.get_acctunits_dict() == {}
+    assert yao_empty_plan.bridge == yao_gut.bridge
+    assert yao_empty_plan.fund_pool == yao_gut.fund_pool
+    assert yao_empty_plan.fund_coin == yao_gut.fund_coin
+    assert yao_empty_plan.respect_bit == yao_gut.respect_bit
+    assert yao_empty_plan.penny == yao_gut.penny
+    assert yao_empty_plan.credor_respect != yao_gut.credor_respect
+    assert yao_empty_plan.credor_respect == validate_respect_num()
+    assert yao_empty_plan.debtor_respect != yao_gut.debtor_respect
+    assert yao_empty_plan.debtor_respect == validate_respect_num()
+    yao_empty_plan.settle_bud()
+    assert yao_empty_plan.accts == {}
 
 
 def test_create_listen_basis_ReturnsObj():
@@ -79,32 +79,32 @@ def test_create_listen_basis_ReturnsObj():
     yao_duty.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_basis_job = create_listen_basis(yao_duty)
+    yao_basis_plan = create_listen_basis(yao_duty)
 
     # THEN
-    assert yao_basis_job.owner_name == yao_duty.owner_name
-    assert yao_basis_job.fisc_title == yao_duty.fisc_title
-    assert yao_basis_job.last_pack_id == yao_duty.last_pack_id
-    assert yao_basis_job.get_acctunits_dict() == yao_duty.get_acctunits_dict()
-    assert yao_basis_job.bridge == yao_duty.bridge
-    assert yao_basis_job.fund_pool == yao_duty.fund_pool
-    assert yao_basis_job.fund_coin == yao_duty.fund_coin
-    assert yao_basis_job.respect_bit == yao_duty.respect_bit
-    assert yao_basis_job.credor_respect == yao_duty.credor_respect
-    assert yao_basis_job.debtor_respect == yao_duty.debtor_respect
-    yao_basis_job.settle_bud()
-    assert len(yao_basis_job._item_dict) != len(yao_duty._item_dict)
-    assert len(yao_basis_job._item_dict) == 1
-    job_zia_acctunit = yao_basis_job.get_acct(zia_str)
+    assert yao_basis_plan.owner_name == yao_duty.owner_name
+    assert yao_basis_plan.fisc_title == yao_duty.fisc_title
+    assert yao_basis_plan.last_pack_id == yao_duty.last_pack_id
+    assert yao_basis_plan.get_acctunits_dict() == yao_duty.get_acctunits_dict()
+    assert yao_basis_plan.bridge == yao_duty.bridge
+    assert yao_basis_plan.fund_pool == yao_duty.fund_pool
+    assert yao_basis_plan.fund_coin == yao_duty.fund_coin
+    assert yao_basis_plan.respect_bit == yao_duty.respect_bit
+    assert yao_basis_plan.credor_respect == yao_duty.credor_respect
+    assert yao_basis_plan.debtor_respect == yao_duty.debtor_respect
+    yao_basis_plan.settle_bud()
+    assert len(yao_basis_plan._item_dict) != len(yao_duty._item_dict)
+    assert len(yao_basis_plan._item_dict) == 1
+    plan_zia_acctunit = yao_basis_plan.get_acct(zia_str)
     assert (
-        yao_basis_job.get_acctunits_dict().keys()
+        yao_basis_plan.get_acctunits_dict().keys()
         == yao_duty.get_acctunits_dict().keys()
     )
-    assert job_zia_acctunit._irrational_debtit_belief == 0
-    assert job_zia_acctunit._inallocable_debtit_belief == 0
+    assert plan_zia_acctunit._irrational_debtit_belief == 0
+    assert plan_zia_acctunit._inallocable_debtit_belief == 0
 
 
-def test_get_default_plan_ReturnsObj():
+def test_get_default_job_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     blue_str = "blue"
@@ -129,20 +129,20 @@ def test_get_default_plan_ReturnsObj():
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
-    default_plan = get_default_plan(sue_budunit)
+    default_job = get_default_job(sue_budunit)
 
     # THEN
-    default_plan.settle_bud()
-    assert default_plan.owner_name == sue_budunit.owner_name
-    assert default_plan.owner_name == sue_str
-    assert default_plan.fisc_title == sue_budunit.fisc_title
-    assert default_plan.fisc_title == blue_str
-    assert default_plan.bridge == slash_str
-    assert default_plan.fund_pool == sue_acct_pool
-    assert default_plan.fund_coin == x_fund_coin
-    assert default_plan.respect_bit == x_respect_bit
-    assert default_plan.credor_respect == default_respect_num()
-    assert default_plan.debtor_respect == default_respect_num()
-    assert default_plan.max_tree_traverse == sue_max_tree_traverse
-    assert len(default_plan.get_acctunits_dict()) == 1
-    assert len(default_plan._item_dict) == 1
+    default_job.settle_bud()
+    assert default_job.owner_name == sue_budunit.owner_name
+    assert default_job.owner_name == sue_str
+    assert default_job.fisc_title == sue_budunit.fisc_title
+    assert default_job.fisc_title == blue_str
+    assert default_job.bridge == slash_str
+    assert default_job.fund_pool == sue_acct_pool
+    assert default_job.fund_coin == x_fund_coin
+    assert default_job.respect_bit == x_respect_bit
+    assert default_job.credor_respect == default_respect_num()
+    assert default_job.debtor_respect == default_respect_num()
+    assert default_job.max_tree_traverse == sue_max_tree_traverse
+    assert len(default_job.get_acctunits_dict()) == 1
+    assert len(default_job._item_dict) == 1

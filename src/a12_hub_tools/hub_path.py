@@ -23,8 +23,8 @@ def gut_str() -> str:
     return "gut"
 
 
-def plan_str() -> str:
-    return "plan"
+def job_str() -> str:
+    return "job"
 
 
 def create_fisc_dir_path(fisc_mstr_dir: str, fisc_title: TitleUnit) -> str:
@@ -262,11 +262,11 @@ def create_gut_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: Owner
     return create_path(gut_dir, f"{owner_name}.json")
 
 
-def create_plan_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):
-    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\plan\\owner_name.json"""
+def create_job_path(fisc_mstr_dir: str, fisc_title: TitleUnit, owner_name: OwnerName):
+    """Returns path: fisc_mstr_dir\\fiscs\\fisc_title\\owners\\owner_name\\job\\owner_name.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_title)
     owners_dir = create_path(fisc_dir, "owners")
     owner_dir = create_path(owners_dir, owner_name)
-    plan_dir = create_path(owner_dir, "plan")
-    return create_path(plan_dir, f"{owner_name}.json")
+    job_dir = create_path(owner_dir, "job")
+    return create_path(job_dir, f"{owner_name}.json")

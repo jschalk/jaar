@@ -12,13 +12,13 @@ from src.a07_calendar_logic.chrono import timelineunit_shop
 from src.a12_hub_tools.hub_tool import (
     save_gut_file,
     open_gut_file,
-    plan_file_exists,
+    job_file_exists,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a15_fisc_logic.fisc import (
     FiscUnit,
     fiscunit_shop,
-    get_default_plan_listen_count,
+    get_default_job_listen_count,
 )
 from src.a15_fisc_logic.examples.fisc_env import (
     get_test_fisc_mstr_dir,
@@ -28,9 +28,9 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 from pytest import raises as pytest_raises
 
 
-def test_get_default_plan_listen_count_ReturnsObj():
+def test_get_default_job_listen_count_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_default_plan_listen_count() == 3
+    assert get_default_job_listen_count() == 3
 
 
 def test_FiscUnit_Exists():
@@ -46,7 +46,7 @@ def test_FiscUnit_Exists():
     assert not accord_fisc.fund_coin
     assert not accord_fisc.respect_bit
     assert not accord_fisc.penny
-    assert not accord_fisc.plan_listen_rotations
+    assert not accord_fisc.job_listen_rotations
     assert not accord_fisc.fisc_mstr_dir
     # Calculated fields
     assert not accord_fisc._offi_time_max
@@ -74,7 +74,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert accord_fisc.respect_bit == default_respect_bit_if_None()
     assert accord_fisc.penny == filter_penny()
     assert accord_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
-    assert accord_fisc.plan_listen_rotations == get_default_plan_listen_count()
+    assert accord_fisc.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
     assert accord_fisc._owners_dir != None
     assert accord_fisc._packs_dir != None
@@ -103,7 +103,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     x_respect_bit = 9
     x_penny = 3
     a45_offi_times = {12, 15}
-    x_plan_listen_rotations = 888
+    x_job_listen_rotations = 888
 
     # WHEN
     accord_fisc = fiscunit_shop(
@@ -115,7 +115,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
         fund_coin=x_fund_coin,
         respect_bit=x_respect_bit,
         penny=x_penny,
-        plan_listen_rotations=x_plan_listen_rotations,
+        job_listen_rotations=x_job_listen_rotations,
     )
 
     # THEN
@@ -124,7 +124,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     assert accord_fisc.respect_bit == x_respect_bit
     assert accord_fisc.penny == x_penny
     assert accord_fisc.offi_times == a45_offi_times
-    assert accord_fisc.plan_listen_rotations == x_plan_listen_rotations
+    assert accord_fisc.job_listen_rotations == x_job_listen_rotations
 
 
 def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -177,7 +177,7 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
     assert accord_fisc._owners_dir == create_path(accord_fisc._fisc_dir, "owners")
 
 
-def test_FiscUnit_set_init_pack_and_plan_CorrectlySetsDirAndFiles(
+def test_FiscUnit_set_init_pack_and_job_CorrectlySetsDirAndFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -195,14 +195,14 @@ def test_FiscUnit_set_init_pack_and_plan_CorrectlySetsDirAndFiles(
         in_memory_journal=True,
     )
     sue_str = "Sue"
-    assert not plan_file_exists(fisc_mstr_dir, accord45_str, sue_str)
+    assert not job_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
     # WHEN
-    accord_fisc.set_init_pack_and_plan(sue_str)
+    accord_fisc.set_init_pack_and_job(sue_str)
 
     # THEN
     print(f"{fisc_mstr_dir=}")
-    assert plan_file_exists(fisc_mstr_dir, accord45_str, sue_str)
+    assert job_file_exists(fisc_mstr_dir, accord45_str, sue_str)
 
 
 def test_FiscUnit_get_owner_gut_from_file_ReturnsObj(env_dir_setup_cleanup):
@@ -211,7 +211,7 @@ def test_FiscUnit_get_owner_gut_from_file_ReturnsObj(env_dir_setup_cleanup):
     x_fisc_mstr_dir = get_test_fisc_mstr_dir()
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
-    accord_fisc.set_init_pack_and_plan(sue_str)
+    accord_fisc.set_init_pack_and_job(sue_str)
     bob_str = "Bob"
     sue_gut = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
     sue_gut.add_acctunit(bob_str)
@@ -234,8 +234,8 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     accord_fisc = fiscunit_shop(accord45_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
-    accord_fisc.set_init_pack_and_plan(sue_str)
-    accord_fisc.set_init_pack_and_plan(yao_str)
+    accord_fisc.set_init_pack_and_job(sue_str)
+    accord_fisc.set_init_pack_and_job(yao_str)
     sue_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, sue_str)
     yao_gut_bud = open_gut_file(x_fisc_mstr_dir, accord45_str, yao_str)
 
@@ -313,8 +313,8 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert len(accord_fisc.get_owner_hubunits()) == 0
 
     # WHEN
-    accord_fisc.set_init_pack_and_plan(sue_str)
-    accord_fisc.set_init_pack_and_plan(yao_str)
+    accord_fisc.set_init_pack_and_job(sue_str)
+    accord_fisc.set_init_pack_and_job(yao_str)
     accord_all_owners = accord_fisc.get_owner_hubunits()
 
     # THEN

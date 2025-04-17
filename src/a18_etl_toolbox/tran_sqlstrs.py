@@ -60,8 +60,8 @@ CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_tim
 CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT, error_message TEXT)"""
 CREATE_FISC_TIMEOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_title TEXT, offi_time INTEGER)"""
 CREATE_FISC_TIMEOFFI_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, plan_listen_rotations INTEGER)"""
-CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, plan_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 
 
 def get_fisc_create_table_sqlstrs() -> dict[str, str]:
@@ -264,7 +264,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
     OR MIN(bridge) != MAX(bridge)
-    OR MIN(plan_listen_rotations) != MAX(plan_listen_rotations)
+    OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
 """
 
 
@@ -652,7 +652,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
     OR MIN(penny) != MAX(penny)
     OR MIN(respect_bit) != MAX(respect_bit)
     OR MIN(bridge) != MAX(bridge)
-    OR MIN(plan_listen_rotations) != MAX(plan_listen_rotations)
+    OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
 )
 UPDATE fiscunit_staging
 SET error_message = 'Inconsistent fisc data'
@@ -802,8 +802,8 @@ WHERE error_message IS NULL
 GROUP BY fisc_title, offi_time
 ;
 """
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, plan_listen_rotations)
-SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(plan_listen_rotations)
+FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
+SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
 FROM fiscunit_staging
 WHERE error_message IS NULL
 GROUP BY fisc_title
@@ -990,7 +990,7 @@ FISCWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_title, weekday_order, weekday_title FR
 FISCOFFI_FU1_SELECT_SQLSTR = (
     "SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = "
 )
-FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, plan_listen_rotations FROM fiscunit_agg WHERE fisc_title = "
+FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_agg WHERE fisc_title = "
 
 
 def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:
@@ -1005,35 +1005,35 @@ def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:
     }
 
 
-CREATE_PLAN_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
-CREATE_PLAN_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
-CREATE_PLAN_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, group_label TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
-CREATE_PLAN_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
-CREATE_PLAN_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
-CREATE_PLAN_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
-CREATE_PLAN_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, _task INTEGER, _status INTEGER)"""
-CREATE_PLAN_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, _task INTEGER, _status INTEGER, _base_item_active_value INTEGER)"""
-CREATE_PLAN_BUDTEAM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT, _owner_name_team INTEGER)"""
-CREATE_PLAN_BUDITEM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
-CREATE_PLAN_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_plan (world_id TEXT, fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
+CREATE_job_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
+CREATE_job_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
+CREATE_job_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, group_label TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
+CREATE_job_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
+CREATE_job_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
+CREATE_job_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
+CREATE_job_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, _task INTEGER, _status INTEGER)"""
+CREATE_job_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, _task INTEGER, _status INTEGER, _base_item_active_value INTEGER)"""
+CREATE_job_BUDTEAM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT, _owner_name_team INTEGER)"""
+CREATE_job_BUDITEM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
+CREATE_job_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (world_id TEXT, fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
-def get_plan_create_table_sqlstrs() -> dict[str, str]:
+def get_job_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "bud_acct_membership_plan": CREATE_PLAN_BUDMEMB_SQLSTR,
-        "bud_acctunit_plan": CREATE_PLAN_BUDACCT_SQLSTR,
-        "bud_groupunit_plan": CREATE_PLAN_BUDGROU_SQLSTR,
-        "bud_item_awardlink_plan": CREATE_PLAN_BUDAWAR_SQLSTR,
-        "bud_item_factunit_plan": CREATE_PLAN_BUDFACT_SQLSTR,
-        "bud_item_healerlink_plan": CREATE_PLAN_BUDHEAL_SQLSTR,
-        "bud_item_reason_premiseunit_plan": CREATE_PLAN_BUDPREM_SQLSTR,
-        "bud_item_reasonunit_plan": CREATE_PLAN_BUDREAS_SQLSTR,
-        "bud_item_teamlink_plan": CREATE_PLAN_BUDTEAM_SQLSTR,
-        "bud_itemunit_plan": CREATE_PLAN_BUDITEM_SQLSTR,
-        "budunit_plan": CREATE_PLAN_BUDUNIT_SQLSTR,
+        "bud_acct_membership_job": CREATE_job_BUDMEMB_SQLSTR,
+        "bud_acctunit_job": CREATE_job_BUDACCT_SQLSTR,
+        "bud_groupunit_job": CREATE_job_BUDGROU_SQLSTR,
+        "bud_item_awardlink_job": CREATE_job_BUDAWAR_SQLSTR,
+        "bud_item_factunit_job": CREATE_job_BUDFACT_SQLSTR,
+        "bud_item_healerlink_job": CREATE_job_BUDHEAL_SQLSTR,
+        "bud_item_reason_premiseunit_job": CREATE_job_BUDPREM_SQLSTR,
+        "bud_item_reasonunit_job": CREATE_job_BUDREAS_SQLSTR,
+        "bud_item_teamlink_job": CREATE_job_BUDTEAM_SQLSTR,
+        "bud_itemunit_job": CREATE_job_BUDITEM_SQLSTR,
+        "budunit_job": CREATE_job_BUDUNIT_SQLSTR,
     }
 
 
-def create_plan_tables(conn_or_cursor: sqlite3_Connection):
-    for create_table_sqlstr in get_plan_create_table_sqlstrs().values():
+def create_job_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_job_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)

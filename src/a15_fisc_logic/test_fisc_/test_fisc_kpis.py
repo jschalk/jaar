@@ -4,12 +4,12 @@ from src.a08_bud_atom_logic.atom_config import acct_name_str
 from src.a15_fisc_logic.fisc_report import (
     get_fisc_guts_accts_dataframe,
     get_fisc_guts_accts_plotly_fig,
-    get_fisc_plans_accts_dataframe,
-    get_fisc_plans_accts_plotly_fig,
+    get_fisc_jobs_accts_dataframe,
+    get_fisc_jobs_accts_plotly_fig,
     get_fisc_guts_agenda_dataframe,
     get_fisc_guts_agenda_plotly_fig,
-    get_fisc_plans_agenda_dataframe,
-    get_fisc_plans_agenda_plotly_fig,
+    get_fisc_jobs_agenda_dataframe,
+    get_fisc_jobs_agenda_plotly_fig,
 )
 from src.a15_fisc_logic.examples.example_fiscs import (
     create_example_fisc2,
@@ -60,15 +60,13 @@ def test_get_fisc_guts_accts_plotly_fig_DisplaysCorrectInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_fisc_plans_accts_dataframe_ReturnsObj(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_fisc_jobs_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     # ESTABLISH
     accord_fisc = create_example_fisc2()
-    accord_fisc.generate_all_plans()
+    accord_fisc.generate_all_jobs()
 
     # WHEN
-    x_df = get_fisc_plans_accts_dataframe(accord_fisc)
+    x_df = get_fisc_jobs_accts_dataframe(accord_fisc)
 
     # THEN
     acctunit_colums = {
@@ -92,15 +90,15 @@ def test_get_fisc_plans_accts_dataframe_ReturnsObj(
     assert set(x_df.columns) == acctunit_colums
 
 
-def test_get_fisc_plans_accts_plotly_fig_DisplaysCorrectInfo(
+def test_get_fisc_jobs_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fisc = create_example_fisc2()
-    accord_fisc.generate_all_plans()
+    accord_fisc.generate_all_jobs()
 
     # WHEN
-    x_fig = get_fisc_plans_accts_plotly_fig(accord_fisc)
+    x_fig = get_fisc_jobs_accts_plotly_fig(accord_fisc)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -148,13 +146,13 @@ def test_get_fisc_guts_agenda_plotly_fig_DisplaysCorrectInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_fisc_plans_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
+def test_get_fisc_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     accord_fisc = create_example_fisc4()
-    accord_fisc.generate_all_plans()
+    accord_fisc.generate_all_jobs()
 
     # WHEN
-    x_df = get_fisc_plans_agenda_dataframe(accord_fisc)
+    x_df = get_fisc_jobs_agenda_dataframe(accord_fisc)
 
     # THEN
     agenda_colums = {
@@ -176,15 +174,15 @@ def test_get_fisc_plans_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     assert x_df.shape[0] in [8, 9]
 
 
-def test_get_fisc_plans_agenda_plotly_fig_DisplaysCorrectInfo(
+def test_get_fisc_jobs_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     accord_fisc = create_example_fisc4()
-    accord_fisc.generate_all_plans()
+    accord_fisc.generate_all_jobs()
 
     # WHEN
-    x_fig = get_fisc_plans_agenda_plotly_fig(accord_fisc)
+    x_fig = get_fisc_jobs_agenda_plotly_fig(accord_fisc)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

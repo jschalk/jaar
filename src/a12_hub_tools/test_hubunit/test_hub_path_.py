@@ -13,7 +13,7 @@ from src.a12_hub_tools.hub_path import (
     EVENT_ALL_PACK_FILENAME,
     EVENT_EXPRESSED_PACK_FILENAME,
     gut_str,
-    plan_str,
+    job_str,
     treasury_filename,
     create_fisc_dir_path,
     create_fisc_json_path,
@@ -38,7 +38,7 @@ from src.a12_hub_tools.hub_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
     create_gut_path,
-    create_plan_path,
+    create_job_path,
 )
 from src.a13_bud_listen_logic.examples.listen_env import get_listen_temp_env_dir
 
@@ -47,8 +47,8 @@ def test_gut_str():
     assert gut_str() == "gut"
 
 
-def test_plan_str():
-    assert plan_str() == "plan"
+def test_job_str():
+    assert job_str() == "job"
 
 
 def test_treasury_filename_ReturnsObj():
@@ -570,22 +570,22 @@ def test_create_gut_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_gut_json_path
 
 
-def test_create_plan_path_ReturnObj():
+def test_create_job_path_ReturnObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_bud_path = create_plan_path(x_fisc_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_bud_path = create_job_path(x_fisc_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_fiscs_dir = create_path(x_fisc_mstr_dir, "fiscs")
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
-    a23_bob_plan_dir = create_path(a23_bob_dir, "plan")
-    expected_a23_bob_plan_json_path = create_path(a23_bob_plan_dir, f"{bob_str}.json")
+    a23_bob_job_dir = create_path(a23_bob_dir, "job")
+    expected_a23_bob_job_json_path = create_path(a23_bob_job_dir, f"{bob_str}.json")
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
-    assert gen_a23_e3_bud_path == expected_a23_bob_plan_json_path
+    assert gen_a23_e3_bud_path == expected_a23_bob_job_json_path

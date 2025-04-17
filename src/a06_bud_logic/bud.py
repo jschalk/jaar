@@ -134,7 +134,7 @@ class BudUnit:
     bridge: str = None
     max_tree_traverse: int = None
     last_pack_id: int = None
-    originunit: OriginUnit = None  # In job buds this shows source
+    originunit: OriginUnit = None  # In plan buds this shows source
     # settle_bud Calculated field begin
     _item_dict: dict[RoadUnit, ItemUnit] = None
     _keep_dict: dict[RoadUnit, ItemUnit] = None

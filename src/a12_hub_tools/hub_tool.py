@@ -22,7 +22,7 @@ from src.a06_bud_logic.bud import (
 from src.a11_deal_cell_logic.cell import cellunit_shop, CellUnit, cellunit_get_from_dict
 from src.a12_hub_tools.hub_path import (
     create_gut_path,
-    create_plan_path,
+    create_job_path,
     CELLNODE_FILENAME,
     create_budevent_path,
     create_fisc_owners_dir_path,
@@ -61,23 +61,21 @@ def gut_file_exists(fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName) 
     return os_path_exists(gut_path)
 
 
-def plan_file_exists(
-    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
-) -> bool:
-    plan_path = create_plan_path(fisc_mstr_dir, fisc_title, owner_name)
-    return os_path_exists(plan_path)
+def job_file_exists(fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName) -> bool:
+    job_path = create_job_path(fisc_mstr_dir, fisc_title, owner_name)
+    return os_path_exists(job_path)
 
 
-def save_plan_file(fisc_mstr_dir: str, budunit: BudUnit = None):
-    plan_path = create_plan_path(fisc_mstr_dir, budunit.fisc_title, budunit.owner_name)
-    save_bud_file(plan_path, None, budunit)
+def save_job_file(fisc_mstr_dir: str, budunit: BudUnit = None):
+    job_path = create_job_path(fisc_mstr_dir, budunit.fisc_title, budunit.owner_name)
+    save_bud_file(job_path, None, budunit)
 
 
-def open_plan_file(
+def open_job_file(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> BudUnit:
-    plan_path = create_plan_path(fisc_mstr_dir, fisc_title, owner_name)
-    return open_bud_file(plan_path)
+    job_path = create_job_path(fisc_mstr_dir, fisc_title, owner_name)
+    return open_bud_file(job_path)
 
 
 def get_budevent_obj(

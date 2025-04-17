@@ -38,9 +38,9 @@ def create_listen_basis(x_duty: BudUnit) -> BudUnit:
     return x_listen
 
 
-def get_default_plan(gut: BudUnit) -> BudUnit:
-    default_plan = create_listen_basis(gut)
-    default_plan.last_pack_id = gut.last_pack_id
-    default_plan.credor_respect = None
-    default_plan.debtor_respect = None
-    return default_plan
+def get_default_job(gut: BudUnit) -> BudUnit:
+    default_job = create_listen_basis(gut)
+    default_job.last_pack_id = gut.last_pack_id
+    default_job.credor_respect = None
+    default_job.debtor_respect = None
+    return default_job

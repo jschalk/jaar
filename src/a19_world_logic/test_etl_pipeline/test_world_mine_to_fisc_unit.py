@@ -18,7 +18,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 from src.a12_hub_tools.hub_path import (
     create_fisc_json_path,
-    create_plan_path,
+    create_job_path,
     create_gut_path,
     create_deal_acct_mandate_ledger_path as deal_mandate,
     create_fisc_ote1_csv_path,
@@ -123,12 +123,12 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
     assert os_path_exists(wrong_a23_fisc_dir) is False
     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
-    a23_sue_plan_path = create_plan_path(mstr_dir, accord23_str, sue_str)
+    a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
     assert os_path_exists(mine_file_path)
     assert os_path_exists(a23_json_path) is False
     assert os_path_exists(a23_sue_gut_path) is False
-    assert os_path_exists(a23_sue_plan_path) is False
+    assert os_path_exists(a23_sue_job_path) is False
     assert os_path_exists(sue37_mandate_path) is False
     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
@@ -142,7 +142,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
     assert os_path_exists(cart_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_gut_path)
-    assert os_path_exists(a23_sue_plan_path)
+    assert os_path_exists(a23_sue_job_path)
     assert os_path_exists(sue37_mandate_path)
     assert count_dirs_files(fizz_world.worlds_dir) == 87
 
@@ -224,11 +224,11 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
 #     fiscs_dir = create_path(mstr_dir, "fiscs")
 #     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
 #     a23_sue_gut_path = create_gut_path(fiscs_dir, accord23_str, sue_str)
-#     a23_sue_plan_path = create_plan_path(fiscs_dir, accord23_str, sue_str)
+#     a23_sue_job_path = create_job_path(fiscs_dir, accord23_str, sue_str)
 #     assert os_path_exists(mine_file_path)
 #     assert os_path_exists(a23_json_path) is False
 #     assert os_path_exists(a23_sue_gut_path) is False
-#     assert os_path_exists(a23_sue_plan_path) is False
+#     assert os_path_exists(a23_sue_job_path) is False
 
 #     # WHEN
 #     fizz_world.mine_to_burdens()
@@ -239,4 +239,4 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
 #     assert os_path_exists(cart_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
-#     assert os_path_exists(a23_sue_plan_path)
+#     assert os_path_exists(a23_sue_job_path)
