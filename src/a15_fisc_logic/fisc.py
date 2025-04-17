@@ -39,10 +39,11 @@ from src.a01_word_logic.road import (
     AcctName,
     EventInt,
 )
-from src.a06_bud_logic.bud import BudUnit
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
 from src.a12_hub_tools.basis_buds import get_default_job
 from src.a11_deal_cell_logic.cell import cellunit_shop
+from src.a12_hub_tools.basis_buds import create_listen_basis
 from src.a12_hub_tools.hub_path import (
     create_fisc_json_path,
     create_cell_dir_path,
@@ -55,6 +56,7 @@ from src.a12_hub_tools.hub_tool import (
     open_job_file,
     save_gut_file,
     save_job_file,
+    gut_file_exists,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from src.a13_bud_listen_logic.listen import (
@@ -255,6 +257,18 @@ class FiscUnit:
         return x_job
 
     # job bud management
+    def save_if_none_gut_file(self, owner_name: OwnerName):
+        if not gut_file_exists(self.fisc_mstr_dir, self.fisc_title, owner_name):
+            empty_bud = budunit_shop(
+                owner_name,
+                self.fisc_title,
+                bridge=self.bridge,
+                fund_coin=self.fund_coin,
+                respect_bit=self.respect_bit,
+                penny=self.penny,
+            )
+            save_gut_file(self.fisc_mstr_dir, empty_bud)
+
     def generate_job(self, owner_name: OwnerName) -> BudUnit:
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
         x_gut.settle_bud()

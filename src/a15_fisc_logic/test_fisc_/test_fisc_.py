@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import create_path, get_json_filename
+from src.a00_data_toolboxs.file_toolbox import create_path, get_json_filename, set_dir
 from src.a02_finance_toolboxs.finance_config import (
     default_fund_coin_if_None,
     default_respect_bit_if_None,
@@ -8,10 +8,13 @@ from src.a01_word_logic.road import default_bridge_if_None
 from src.a02_finance_toolboxs.deal import tranbook_shop
 from src.a05_item_logic.healer import healerlink_shop
 from src.a05_item_logic.item import itemunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic.chrono import timelineunit_shop
+from src.a12_hub_tools.hub_path import create_path, create_owner_dir_path
 from src.a12_hub_tools.hub_tool import (
     save_gut_file,
     open_gut_file,
+    gut_file_exists,
     job_file_exists,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop
@@ -319,6 +322,90 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     assert accord_all_owners.get(sue_str) == sue_hubunit
     assert accord_all_owners.get(yao_str) == yao_hubunit
     assert len(accord_fisc.get_owner_hubunits()) == 2
+
+
+def test_FiscUnit_save_if_none_gut_file_SetsDirAndFiles_Scenario1_owner_dir_ExistsNoFile(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
+    sue_str = "Sue"
+    sue_owner_dir = create_owner_dir_path(fisc_mstr_dir, a23_str, sue_str)
+    assert not os_path_exists(sue_owner_dir)
+    assert not gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
+
+    # WHEN
+    a23_fisc.save_if_none_gut_file(sue_str)
+
+    # THEN
+    print(f"{fisc_mstr_dir=}")
+    assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    expected_sue_gut = budunit_shop(sue_str, a23_str)
+    assert open_gut_file(fisc_mstr_dir, a23_str, sue_str) == expected_sue_gut
+
+
+def test_FiscUnit_save_if_none_gut_file_SetsDirAndFiles_Scenario2_owner_dir_ExistsNoFile_Create_gut_AndConfirmFiscAttributesPassed(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    slash_str = "/"
+    x_fund_coin = 4
+    x_respect_bit = 5
+    x_penny = 6
+    a23_fisc = fiscunit_shop(
+        a23_str,
+        fisc_mstr_dir,
+        bridge=slash_str,
+        fund_coin=x_fund_coin,
+        respect_bit=x_respect_bit,
+        penny=x_penny,
+    )
+    sue_str = "Sue"
+    sue_owner_dir = create_owner_dir_path(fisc_mstr_dir, a23_str, sue_str)
+    set_dir(sue_owner_dir)
+    assert os_path_exists(sue_owner_dir)
+    assert not gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
+
+    # WHEN
+    a23_fisc.save_if_none_gut_file(sue_str)
+
+    # THEN
+    print(f"{fisc_mstr_dir=}")
+    assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    generated_gut = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
+    assert generated_gut.bridge == slash_str
+    assert generated_gut.fund_coin == x_fund_coin
+    assert generated_gut.respect_bit == x_respect_bit
+    assert generated_gut.penny == x_penny
+
+
+def test_FiscUnit_save_if_none_gut_file_SetsDirAndFiles_Scenario3_FileExistsIsNotReplaced(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut.add_acctunit(bob_str)
+    save_gut_file(fisc_mstr_dir, sue_gut)
+    sue_owner_dir = create_owner_dir_path(fisc_mstr_dir, a23_str, sue_str)
+    assert os_path_exists(sue_owner_dir)
+    assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
+
+    # WHEN
+    a23_fisc.save_if_none_gut_file(sue_str)
+
+    # THEN
+    print(f"{fisc_mstr_dir=}")
+    assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert open_gut_file(fisc_mstr_dir, a23_str, sue_str) == sue_gut
 
 
 # def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
