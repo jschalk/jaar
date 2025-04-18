@@ -1,6 +1,18 @@
 from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
 from src.a02_finance_toolboxs.deal import owner_name_str
-from src.a08_bud_atom_logic.atom_config import acct_name_str
+from src.a08_bud_atom_logic.atom_config import (
+    acct_name_str,
+    credit_belief_str,
+    debtit_belief_str,
+    item_title_str,
+    parent_road_str,
+    begin_str,
+    close_str,
+    addin_str,
+    denom_str,
+    numor_str,
+    morph_str,
+)
 from src.a15_fisc_logic.fisc_report import (
     get_fisc_guts_accts_dataframe,
     get_fisc_guts_accts_plotly_fig,
@@ -30,8 +42,8 @@ def test_get_fisc_guts_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphic
     acctunit_colums = {
         owner_name_str(),
         acct_name_str(),
-        "credit_belief",
-        "debtit_belief",
+        credit_belief_str(),
+        debtit_belief_str(),
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -72,8 +84,8 @@ def test_get_fisc_jobs_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphic
     acctunit_colums = {
         owner_name_str(),
         acct_name_str(),
-        "credit_belief",
-        "debtit_belief",
+        credit_belief_str(),
+        debtit_belief_str(),
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -117,14 +129,14 @@ def test_get_fisc_guts_agenda_dataframe_ReturnsObj(
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "item_title",
-        "parent_road",
-        "begin",
-        "close",
-        "addin",
-        "denom",
-        "numor",
-        "morph",
+        item_title_str(),
+        parent_road_str(),
+        begin_str(),
+        close_str(),
+        addin_str(),
+        denom_str(),
+        numor_str(),
+        morph_str(),
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -159,13 +171,13 @@ def test_get_fisc_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
         owner_name_str(),
         "fund_ratio",
         "item_title",
-        "parent_road",
-        "begin",
-        "close",
-        "addin",
-        "denom",
-        "numor",
-        "morph",
+        parent_road_str(),
+        begin_str(),
+        close_str(),
+        addin_str(),
+        denom_str(),
+        numor_str(),
+        morph_str(),
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
