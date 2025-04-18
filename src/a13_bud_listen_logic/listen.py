@@ -195,19 +195,14 @@ def listen_to_agendas_create_init_job_from_guts(
             listen_to_speaker_agenda(listener_job, speaker_gut)
 
 
-def listen_to_agendas_gut_job(fisc_mstr_dir: str, listener_job: BudUnit):
+def listen_to_agendas_jobs_into_job(fisc_mstr_dir: str, listener_job: BudUnit):
     fisc_title = listener_job.fisc_title
-    owner_name = listener_job.owner_name
     for x_acctunit in get_ordered_debtors_roll(listener_job):
-        if x_acctunit.acct_name == owner_name:
-            gut_bud = open_gut_file(fisc_mstr_dir, fisc_title, owner_name)
-            listen_to_speaker_agenda(listener_job, gut_bud)
-        else:
-            speaker_id = x_acctunit.acct_name
-            speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
-            if speaker_job is None:
-                speaker_job = create_empty_bud_from_bud(listener_job, speaker_id)
-            listen_to_speaker_agenda(listener_job, speaker_job)
+        speaker_id = x_acctunit.acct_name
+        speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if speaker_job is None:
+            speaker_job = create_empty_bud_from_bud(listener_job, speaker_id)
+        listen_to_speaker_agenda(listener_job, speaker_job)
 
 
 def listen_to_agendas_duty_plan(listener_plan: BudUnit, healer_hubunit: HubUnit):
@@ -237,26 +232,24 @@ def listen_to_facts_duty_plan(new_plan: BudUnit, healer_hubunit: HubUnit):
 
 def listen_to_facts_gut_job(fisc_mstr_dir: str, new_job: BudUnit):
     fisc_title = new_job.fisc_title
-    gut_bud = open_gut_file(fisc_mstr_dir, fisc_title, new_job.owner_name)
-    migrate_all_facts(gut_bud, new_job)
-    for x_acctunit in get_ordered_debtors_roll(new_job):
+    old_job = open_job_file(fisc_mstr_dir, fisc_title, new_job.owner_name)
+    for x_acctunit in get_ordered_debtors_roll(old_job):
         speaker_id = x_acctunit.acct_name
-        if speaker_id != new_job.owner_name:
-            speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
-            if speaker_job is not None:
-                listen_to_speaker_fact(new_job, speaker_job)
+        speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if speaker_job is not None:
+            listen_to_speaker_fact(new_job, speaker_job)
 
 
-def listen_to_debtors_roll_gut_job(
+def listen_to_debtors_roll_jobs_into_job(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> BudUnit:
-    gut = open_gut_file(fisc_mstr_dir, fisc_title, owner_name)
-    new_bud = create_listen_basis(gut)
-    if gut.debtor_respect is None:
-        return new_bud
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_bud)
-    listen_to_facts_gut_job(fisc_mstr_dir, new_bud)
-    return new_bud
+    old_job = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
+    new_job = create_listen_basis(old_job)
+    if old_job.debtor_respect is None:
+        return new_job
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_job)
+    listen_to_facts_gut_job(fisc_mstr_dir, new_job)
+    return new_job
 
 
 def listen_to_debtors_roll_duty_plan(

@@ -56,7 +56,7 @@ from src.a12_hub_tools.hub_tool import (
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from src.a13_bud_listen_logic.listen import (
     listen_to_speaker_agenda,
-    listen_to_debtors_roll_gut_job,
+    listen_to_debtors_roll_jobs_into_job,
     listen_to_agendas_create_init_job_from_guts,
     create_plan_file_from_duty_file,
 )
@@ -260,13 +260,13 @@ class FiscUnit:
         save_job_file(self.fisc_mstr_dir, x_job)
 
     def rotate_job(self, owner_name: OwnerName) -> BudUnit:
-        x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
-        x_gut.settle_bud()
-        # if budunit has healers create job from healers.
-        if len(x_gut._healers_dict) > 0:
-            return self.generate_healers_authored_job(owner_name, x_gut)
+        x_job = open_job_file(self.fisc_mstr_dir, self.fisc_title, owner_name)
+        x_job.settle_bud()
+        # # if budunit has healers create job from healers.
+        # if len(x_gut._healers_dict) > 0:
+        #     return self.generate_healers_authored_job(owner_name, x_gut)
         # create budunit from debtors roll
-        return listen_to_debtors_roll_gut_job(
+        return listen_to_debtors_roll_jobs_into_job(
             self.fisc_mstr_dir, self.fisc_title, owner_name
         )
 
@@ -275,7 +275,7 @@ class FiscUnit:
         for owner_name in owner_names:
             self.create_init_job_from_guts(owner_name)
 
-        # print(f"{self.job_listen_rotations=}")
+        print(f"{self.job_listen_rotations=}")
         # for x_rotation in range(self.job_listen_rotations):
         #     print(f"{x_rotation=}")
         #     for owner_name in owner_names:

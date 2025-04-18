@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import set_dir
 from src.a05_item_logic.healer import healerlink_shop
 from src.a05_item_logic.item import itemunit_shop
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a12_hub_tools.hub_path import create_owner_dir_path
 from src.a12_hub_tools.hub_tool import (
     save_gut_file,
@@ -18,46 +18,90 @@ from src.a15_fisc_logic.examples.fisc_env import (
 )
 
 
-# def test_FiscUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     a23_str = "accord23"
-#     fisc_mstr_dir = get_test_fisc_mstr_dir()
-#     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
-#     sue_str = "Sue"
-#     assert not job_file_exists(fisc_mstr_dir, a23_str, sue_str)
-#     a23_fisc.create_init_job_from_guts(sue_str)
-#     assert job_file_exists(fisc_mstr_dir, a23_str, sue_str)
+def test_FiscUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
+    # ESTABLISH
+    a23_str = "accord23"
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
+    sue_str = "Sue"
+    assert not job_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    a23_fisc.create_init_job_from_guts(sue_str)
+    assert job_file_exists(fisc_mstr_dir, a23_str, sue_str)
 
-#     # WHEN
-#     sue_job = a23_fisc.rotate_job(sue_str)
+    # WHEN
+    sue_job = a23_fisc.rotate_job(sue_str)
 
-#     # THEN
-#     example_bud = budunit_shop(sue_str, a23_str)
-#     assert sue_job.fisc_title == example_bud.fisc_title
-#     assert sue_job.owner_name == example_bud.owner_name
+    # THEN
+    example_bud = budunit_shop(sue_str, a23_str)
+    assert sue_job.fisc_title == example_bud.fisc_title
+    assert sue_job.owner_name == example_bud.owner_name
 
 
-# def test_FiscUnit_rotate_job_ReturnsObj_Scenario2_job_changed(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     a23_str = "accord23"
-#     a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
-#     sue_str = "Sue"
-#     a23_fisc.create_init_job_from_guts(sue_str)
-#     fisc_mstr_dir = get_test_fisc_mstr_dir()
-#     before_sue_job = open_job_file(fisc_mstr_dir, a23_str, sue_str)
-#     bob_str = "Bob"
-#     before_sue_job.add_acctunit(bob_str)
-#     save_job_file(fisc_mstr_dir, before_sue_job)
-#     assert open_job_file(fisc_mstr_dir, a23_str, sue_str).acct_exists(bob_str)
+def test_FiscUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_debtit_belief(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    init_sue_job = budunit_shop(sue_str, a23_str)
+    init_sue_job.add_acctunit(yao_str)
+    init_sue_job.add_acctunit(bob_str)
+    init_sue_job.add_acctunit(zia_str)
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    save_job_file(fisc_mstr_dir, init_sue_job)
+    assert job_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert job_file_exists(fisc_mstr_dir, a23_str, yao_str) is False
+    assert job_file_exists(fisc_mstr_dir, a23_str, bob_str) is False
+    assert job_file_exists(fisc_mstr_dir, a23_str, zia_str) is False
 
-#     # WHEN
-#     rotated_sue_job = a23_fisc.rotate_job(sue_str)
+    # WHEN
+    rotated_sue_job = a23_fisc.rotate_job(sue_str)
 
-#     # THEN method should wipe over job bud
-#     assert rotated_sue_job.acct_exists(bob_str)
-#     assert rotated_sue_job == before_sue_job
+    # THEN method should wipe over job bud
+    assert rotated_sue_job.acct_exists(bob_str)
+    assert rotated_sue_job.get_dict() != init_sue_job.get_dict()
+    assert init_sue_job.get_acct(bob_str)._inallocable_debtit_belief == 0
+    assert rotated_sue_job.get_acct(bob_str)._inallocable_debtit_belief == 1
+
+
+def a23_job(owner_name: str) -> BudUnit:
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    return open_job_file(fisc_mstr_dir, "accord23", owner_name)
+
+
+def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    init_sue_job = budunit_shop(sue_str, a23_str)
+    init_sue_job.add_acctunit(yao_str)
+    init_yao_job = budunit_shop(yao_str, a23_str)
+    init_yao_job.add_acctunit(bob_str)
+    init_bob_job = budunit_shop(bob_str, a23_str)
+    casa_road = init_bob_job.make_l1_road("casa")
+    clean_road = init_bob_job.make_road(casa_road, "clean")
+    init_bob_job.add_item(clean_road, pledge=True)
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    save_job_file(fisc_mstr_dir, init_sue_job)
+    save_job_file(fisc_mstr_dir, init_yao_job)
+    save_job_file(fisc_mstr_dir, init_bob_job)
+    assert len(a23_job(sue_str).get_agenda_dict()) == 0
+    assert len(a23_job(yao_str).get_agenda_dict()) == 0
+    assert len(a23_job(bob_str).get_agenda_dict()) == 1
+
+    # WHEN / THEN
+    assert len(a23_fisc.rotate_job(sue_str).get_agenda_dict()) == 0
+    assert len(a23_fisc.rotate_job(yao_str).get_agenda_dict()) == 1
+    assert len(a23_fisc.rotate_job(bob_str).get_agenda_dict()) == 0
 
 
 # def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_Without_healerlink(

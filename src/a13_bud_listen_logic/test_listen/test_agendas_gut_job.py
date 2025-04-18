@@ -6,7 +6,7 @@ from src.a12_hub_tools.hub_tool import save_gut_file, save_job_file
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic.listen import (
     create_listen_basis,
-    listen_to_agendas_gut_job,
+    listen_to_agendas_jobs_into_job,
 )
 from src.a13_bud_listen_logic.examples.listen_env import (
     get_listen_temp_env_dir as env_dir,
@@ -31,7 +31,7 @@ from src.a13_bud_listen_logic.examples.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_gut_job_AddsTasksToBudWhenNo_teamlinkIsSet(
+def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWhenNo_teamlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -58,13 +58,13 @@ def test_listen_to_agendas_gut_job_AddsTasksToBudWhenNo_teamlinkIsSet(
 
     # WHEN
     print(f"{len(new_yao_job.get_item_dict())=}")
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_gut_job_AddsTasksToBud(env_dir_setup_cleanup):
+def test_listen_to_agendas_jobs_into_job_AddsTasksToBud(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = env_dir()
     a23_str = "accord23"
@@ -93,13 +93,13 @@ def test_listen_to_agendas_gut_job_AddsTasksToBud(env_dir_setup_cleanup):
 
     # WHEN
     print(f"{len(new_yao_job.get_item_dict())=}")
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_gut_job_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
+def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -131,7 +131,7 @@ def test_listen_to_agendas_gut_job_AddsTasksToBudWithDetailsDecidedBy_debtit_bel
 
     # WHEN
     yao_hubunit = hubunit_shop(fisc_mstr_dir, a23_str, yao_str)
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job1)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job1)
 
     # THEN
     assert new_yao_job1.item_exists(cook_road())
@@ -150,7 +150,7 @@ def test_listen_to_agendas_gut_job_AddsTasksToBudWithDetailsDecidedBy_debtit_bel
     assert new_yao_job2.item_exists(cook_road()) is False
 
     # WHEN
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job2)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job2)
 
     # THEN
     assert new_yao_job2.item_exists(cook_road())
@@ -162,7 +162,7 @@ def test_listen_to_agendas_gut_job_AddsTasksToBudWithDetailsDecidedBy_debtit_bel
     assert new_cook_item.get_reasonunit(eat_road()) == zia_eat_reasonunit
 
 
-def test_listen_to_agendas_gut_job_ProcessesIrrationalBud(env_dir_setup_cleanup):
+def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = env_dir()
     a23_str = "accord23"
@@ -225,7 +225,7 @@ def test_listen_to_agendas_gut_job_ProcessesIrrationalBud(env_dir_setup_cleanup)
 
     # WHEN
     new_yao_job = create_listen_basis(yao_gut)
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job)
 
     # THEN irrational bud is ignored
     assert len(new_yao_job.get_agenda_dict()) != 3
@@ -238,7 +238,7 @@ def test_listen_to_agendas_gut_job_ProcessesIrrationalBud(env_dir_setup_cleanup)
     assert sue_acctunit._irrational_debtit_belief == 51
 
 
-def test_listen_to_agendas_gut_job_ProcessesMissingDebtorBud(
+def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -273,7 +273,7 @@ def test_listen_to_agendas_gut_job_ProcessesMissingDebtorBud(
 
     # WHEN
     new_yao_job = create_listen_basis(yao_gut)
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job)
 
     # THEN irrational bud is ignored
     assert len(new_yao_job.get_agenda_dict()) != 3
@@ -286,7 +286,7 @@ def test_listen_to_agendas_gut_job_ProcessesMissingDebtorBud(
     assert sue_acctunit._inallocable_debtit_belief == 51
 
 
-def test_listen_to_agendas_gut_job_ListensToOwner_gut_AndNotOwner_job(
+def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -330,8 +330,8 @@ def test_listen_to_agendas_gut_job_ListensToOwner_gut_AndNotOwner_job(
 
     # WHEN
     new_yao_job = create_listen_basis(yao_gut)
-    listen_to_agendas_gut_job(fisc_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job)
 
     # THEN irrational bud is ignored
-    assert len(new_yao_job.get_agenda_dict()) != 3
-    assert len(new_yao_job.get_agenda_dict()) == 2
+    assert len(new_yao_job.get_agenda_dict()) != 2
+    assert len(new_yao_job.get_agenda_dict()) == 3
