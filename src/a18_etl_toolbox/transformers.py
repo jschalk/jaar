@@ -247,11 +247,11 @@ class CartStagingToCartAggTransformer:
 
 
 def etl_cart_agg_to_cart_valid(cart_dir: str, legitimate_events: set[EventInt]):
-    transformer = cartAggTocartValidTransformer(cart_dir, legitimate_events)
+    transformer = CartAggTocartValidTransformer(cart_dir, legitimate_events)
     transformer.transform()
 
 
-class cartAggTocartValidTransformer:
+class CartAggTocartValidTransformer:
     def __init__(self, cart_dir: str, legitimate_events: set[EventInt]):
         self.cart_dir = cart_dir
         self.legitimate_events = legitimate_events
@@ -278,11 +278,11 @@ class cartAggTocartValidTransformer:
 
 
 def etl_cart_agg_to_cart_events(cart_dir):
-    transformer = cartAggTocartEventsTransformer(cart_dir)
+    transformer = CartAggTocartEventsTransformer(cart_dir)
     transformer.transform()
 
 
-class cartAggTocartEventsTransformer:
+class CartAggTocartEventsTransformer:
     def __init__(self, cart_dir: str):
         self.cart_dir = cart_dir
 
@@ -304,11 +304,11 @@ class cartAggTocartEventsTransformer:
 
 
 def etl_cart_events_to_events_log(cart_dir: str):
-    transformer = cartEventsToEventsLogTransformer(cart_dir)
+    transformer = CartEventsToEventsLogTransformer(cart_dir)
     transformer.transform()
 
 
-class cartEventsToEventsLogTransformer:
+class CartEventsToEventsLogTransformer:
     def __init__(self, cart_dir: str):
         self.cart_dir = cart_dir
 
@@ -391,7 +391,7 @@ def cart_agg_single_to_pidgin_staging(
     pidgin_dimen: str, legitimate_events: set[EventInt], cart_dir: str
 ):
     x_events = legitimate_events
-    transformer = cartAggToStagingTransformer(cart_dir, pidgin_dimen, x_events)
+    transformer = CartAggToStagingTransformer(cart_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
@@ -426,7 +426,7 @@ def etl_cart_agg_to_pidgin_staging(legitimate_events: set[EventInt], cart_dir: s
     etl_cart_agg_to_pidgin_road_staging(legitimate_events, cart_dir)
 
 
-class cartAggToStagingTransformer:
+class CartAggToStagingTransformer:
     def __init__(
         self, cart_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
