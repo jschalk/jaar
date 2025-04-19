@@ -169,11 +169,11 @@ def get_inx_obj(class_type, x_row) -> str:
 
 
 def etl_mine_to_cart_staging(mine_dir: str, cart_dir: str):
-    transformer = MineTocartTransformer(mine_dir, cart_dir)
+    transformer = MineToCartTransformer(mine_dir, cart_dir)
     transformer.transform()
 
 
-class MineTocartTransformer:
+class MineToCartTransformer:
     def __init__(self, mine_dir: str, cart_dir: str):
         self.mine_dir = mine_dir
         self.cart_dir = cart_dir
@@ -247,11 +247,11 @@ class CartStagingToCartAggTransformer:
 
 
 def etl_cart_agg_to_cart_valid(cart_dir: str, legitimate_events: set[EventInt]):
-    transformer = CartAggTocartValidTransformer(cart_dir, legitimate_events)
+    transformer = CartAggToCartValidTransformer(cart_dir, legitimate_events)
     transformer.transform()
 
 
-class CartAggTocartValidTransformer:
+class CartAggToCartValidTransformer:
     def __init__(self, cart_dir: str, legitimate_events: set[EventInt]):
         self.cart_dir = cart_dir
         self.legitimate_events = legitimate_events
@@ -278,11 +278,11 @@ class CartAggTocartValidTransformer:
 
 
 def etl_cart_agg_to_cart_events(cart_dir):
-    transformer = CartAggTocartEventsTransformer(cart_dir)
+    transformer = CartAggToCartEventsTransformer(cart_dir)
     transformer.transform()
 
 
-class CartAggTocartEventsTransformer:
+class CartAggToCartEventsTransformer:
     def __init__(self, cart_dir: str):
         self.cart_dir = cart_dir
 
