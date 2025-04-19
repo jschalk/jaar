@@ -8,7 +8,7 @@ from src.a08_bud_atom_logic.atom_config import (
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas.testing import (
@@ -37,7 +37,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     otz_sue_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
     otz_e3_dir = create_path(otz_sue_dir, event3)
     otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
@@ -82,7 +82,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     e7_accord23_df = DataFrame([sue3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     otz_sue_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
     otz_e3_dir = create_path(otz_sue_dir, event3)
     otz_e7_dir = create_path(otz_sue_dir, event7)

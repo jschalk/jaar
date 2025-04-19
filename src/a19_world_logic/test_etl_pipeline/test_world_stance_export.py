@@ -11,7 +11,10 @@ from src.a18_etl_toolbox.tran_path import (
     create_stance0001_path,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal
 from os.path import exists as os_path_exists
@@ -23,7 +26,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     fizz_world.mine_to_burdens()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
@@ -38,7 +41,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
 def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     event_2 = 2
     ex_filename = "fizzbuzz.xlsx"
@@ -70,7 +73,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     event_2 = 2
     ex_filename = "fizzbuzz.xlsx"
@@ -89,7 +92,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
     fizz_world.mine_to_burdens()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     fizz_world.create_stances()
-    buzz_world = worldunit_shop("buzz")
+    buzz_world = worldunit_shop("buzz", worlds_dir())
     buzz_mine_st0001_path = create_path(buzz_world._fisc_mstr_dir, "buzz_mine.xlsx")
     set_dir(create_stances_dir_path(buzz_world._fisc_mstr_dir))
     shutil_copy2(fizz_stance0001_path, dst=buzz_mine_st0001_path)
@@ -120,7 +123,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 # def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
-#     fizz_world = worldunit_shop(fizz_str)
+#     fizz_world = worldunit_shop(fizz_str, worlds_dir())
 #     # delete_dir(fizz_world.worlds_dir)
 #     sue_str = "Sue"
 #     event_1 = 1

@@ -11,7 +11,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_tables
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeColumnsRef, FiscPrimeObjsRef
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -22,7 +22,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_CreatesFiscStagingTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         fizz_world.idea_staging_to_fisc_tables(cursor)
@@ -103,7 +103,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
@@ -180,7 +180,7 @@ def test_WorldUnit_set_idea_staging_error_message_ChangeAttrs(env_dir_setup_clea
     t2_quota = 400
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()

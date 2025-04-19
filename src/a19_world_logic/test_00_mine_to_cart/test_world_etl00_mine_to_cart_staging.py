@@ -9,17 +9,17 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_mine_to_cart_staging_CreatescartFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     event_1 = 1
     event_2 = 2

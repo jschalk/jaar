@@ -20,7 +20,7 @@ from src.a18_etl_toolbox.tran_path import (
 )
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -59,7 +59,7 @@ def test_WorldUnit_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face
     z1_road3 = [zia_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     zia_road_agg_df = DataFrame([z1_road3], columns=road_file_columns)
 
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)

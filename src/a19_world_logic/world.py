@@ -16,7 +16,6 @@ from src.a01_word_logic.road import (
     FiscTitle,
     WorldID,
     TimeLineTitle,
-    get_default_world_id,
 )
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
@@ -66,16 +65,11 @@ from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 
-def get_default_worlds_dir() -> str:
-    return "src/a19_world_logic/examples/worlds"
-
-
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     world_time_nigh: TimeLinePoint = None
-    events: dict[EventInt, FaceName] = None
     timeconversions: dict[TimeLineTitle, TimeConversion] = None
     _faces_otz_dir: str = None
     _faces_inz_dir: str = None
@@ -84,19 +78,17 @@ class WorldUnit:
     _cart_dir: str = None
     _fisc_mstr_dir: str = None
     _fiscunits: set[FiscTitle] = None
+    _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
-        self.events[event_int] = face_name
+        self._events[event_int] = face_name
 
     def event_exists(self, event_int: EventInt) -> bool:
-        return self.events.get(event_int) != None
+        return self._events.get(event_int) != None
 
     def get_event(self, event_int: EventInt) -> FaceName:
-        return self.events.get(event_int)
-
-    def legitimate_events(self) -> set[EventInt]:
-        return set(self.events.keys())
+        return self._events.get(event_int)
 
     def _event_dir(self, face_name: FaceName, event_int: EventInt) -> str:
         face_dir = create_path(self._faces_otz_dir, face_name)
@@ -131,7 +123,7 @@ class WorldUnit:
         etl_cart_staging_to_cart_agg(self._cart_dir)
 
     def cart_agg_to_cart_valid(self):
-        etl_cart_agg_to_cart_valid(self._cart_dir, self.legitimate_events())
+        etl_cart_agg_to_cart_valid(self._cart_dir, set(self._events.keys()))
 
     def cart_agg_to_cart_events(self):
         etl_cart_agg_to_cart_events(self._cart_dir)
@@ -143,10 +135,10 @@ class WorldUnit:
         etl_cart_events_log_to_events_agg(self._cart_dir)
 
     def set_events_from_events_agg_file(self):
-        self.events = get_events_dict_from_events_agg_file(self._cart_dir)
+        self._events = get_events_dict_from_events_agg_file(self._cart_dir)
 
     def cart_agg_to_pidgin_staging(self):
-        etl_cart_agg_to_pidgin_staging(self.legitimate_events(), self._cart_dir)
+        etl_cart_agg_to_pidgin_staging(set(self._events.keys()), self._cart_dir)
 
     def cart_pidgin_staging_to_agg(self):
         etl_cart_pidgin_staging_to_agg(self._cart_dir)
@@ -268,17 +260,17 @@ class WorldUnit:
             self.cart_agg_to_cart_events()
             self.cart_events_to_events_log()
             self.cart_events_log_to_events_agg()
-            self.set_events_from_events_agg_file()
-            self.cart_agg_to_pidgin_staging()
+            self.set_events_from_events_agg_file()  # self._events
+            self.cart_agg_to_pidgin_staging()  # self._events.keys()
             self.cart_pidgin_staging_to_agg()
             self.cart_pidgin_agg_to_otz_face_dirs()
             self.otz_face_pidgins_to_otz_event_pidgins()
-            self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()
-            self.pidgin_jsons_inherit_younger_pidgins()
-            self.cart_agg_to_cart_valid()
+            self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
+            self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
+            self.cart_agg_to_cart_valid()  # self._events.keys()
             self.cart_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()
-            self.otz_event_ideas_to_inx_events()
+            self.otz_event_ideas_to_inx_events()  # self._pidgin_events
             self.otz_inx_event_ideas_to_inz_faces()
             self.inz_face_ideas_to_csv_files()
 
@@ -308,28 +300,23 @@ class WorldUnit:
             "world_id": self.world_id,
             "world_time_nigh": self.world_time_nigh,
             "timeconversions": self.get_timeconversions_dict(),
-            "events": self.events,
         }
 
 
 def worldunit_shop(
-    world_id: WorldID = None,
-    worlds_dir: str = None,
+    world_id: WorldID,
+    worlds_dir: str,
     mine_dir: str = None,
     world_time_nigh: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
     _fiscunits: set[FiscTitle] = None,
 ) -> WorldUnit:
-    if world_id is None:
-        world_id = get_default_world_id()
-    if worlds_dir is None:
-        worlds_dir = get_default_worlds_dir()
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
         world_time_nigh=get_0_if_None(world_time_nigh),
         timeconversions=get_empty_dict_if_None(timeconversions),
-        events={},
+        _events={},
         _fiscunits=get_empty_set_if_None(_fiscunits),
         _mine_dir=mine_dir,
         _pidgin_events={},

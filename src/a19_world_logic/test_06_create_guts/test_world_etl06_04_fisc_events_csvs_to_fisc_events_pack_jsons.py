@@ -17,7 +17,10 @@ from src.a12_hub_tools.hub_path import (
 )
 
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -34,7 +37,7 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles(
     credit88 = 88
     debtit_empty = ""
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = fizz_world._fisc_mstr_dir

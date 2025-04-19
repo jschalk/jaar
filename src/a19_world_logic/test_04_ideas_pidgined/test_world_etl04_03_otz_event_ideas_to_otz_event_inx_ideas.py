@@ -12,7 +12,7 @@ from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, cart_valid_str, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas.testing import (
@@ -42,7 +42,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0_NoPidginUnit(
     sue2 = [sue_otx, event3, accord23_str, yao_otx, yao_otx]
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fizz_world._pidgin_events = {}
     sue_otz_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
     otz_e3_dir = create_path(sue_otz_dir, event3)
@@ -106,7 +106,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario1_MultpleFaceNames_CreatesEv
     e7_accord23_df = DataFrame([zia0], columns=br00011_columns)
     e9_accord23_df = DataFrame([zia1, zia2, zia3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fizz_world._pidgin_events = {sue_otx: {event3}, zia_otx: {event7, event9}}
     sue_otz_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
     zia_otz_dir = create_path(fizz_world._faces_otz_dir, zia_otx)

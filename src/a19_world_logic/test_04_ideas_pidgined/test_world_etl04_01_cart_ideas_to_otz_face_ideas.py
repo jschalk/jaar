@@ -10,7 +10,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -21,7 +21,7 @@ def test_WorldUnit_cart_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     event3 = 3
     minute_360 = 360
@@ -69,7 +69,7 @@ def test_WorldUnit_cart_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     sue_str = "Sue"
 #     event3 = 3
 #     event7 = 7

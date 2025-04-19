@@ -11,7 +11,7 @@ from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import create_cart_events_path
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -23,7 +23,7 @@ def test_WorldUnit_cart_events_to_events_log_CreatesSheets_Scenario0(
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -101,7 +101,7 @@ def test_WorldUnit_cart_events_to_events_log_CreatesSheets_Scenario1_MultipleIde
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"

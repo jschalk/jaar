@@ -39,6 +39,26 @@ def create_path(x_dir: any, filename: any) -> str:
     return os_path_join(x_dir, str(filename)) if filename else x_dir
 
 
+def is_subdirectory(sub_path: str, focus_path: str) -> bool:
+    try:
+        # Resolve both paths to their absolute canonical form
+        child_path = pathlib_Path(sub_path).resolve()
+        parent_path = pathlib_Path(focus_path).resolve()
+        return True if child_path == parent_path else parent_path in child_path.parents
+    except Exception:
+        return False
+
+
+def get_immediate_subdir(focus_path: str, sub_path: str) -> str:
+    try:
+        focus_path = pathlib_Path(focus_path).resolve()
+        sub_path = pathlib_Path(sub_path).resolve()
+        relative = sub_path.relative_to(focus_path)
+        return str(focus_path / relative.parts[0]) if relative.parts else None
+    except Exception:
+        return None
+
+
 def set_dir(x_path: str):
     if not os_path_exists(x_path):
         os_makedirs(x_path)

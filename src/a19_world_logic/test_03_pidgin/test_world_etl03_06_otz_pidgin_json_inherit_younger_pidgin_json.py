@@ -3,7 +3,10 @@ from src.a08_bud_atom_logic.atom_config import type_NameUnit_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, get_pidginunit_from_json
 from src.a16_pidgin_logic.pidgin_config import pidgin_filename
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 from pathlib import Path
 
@@ -12,7 +15,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     assert fizz_world._pidgin_events == {}
     faces_dir = Path(fizz_world._faces_otz_dir)
     before_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
@@ -33,7 +36,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario1_OnePidginUnitF
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
     event3 = 3
     e3_pidginunit = pidginunit_shop(bob_str, event3)
@@ -60,7 +63,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
     event3 = 3
     event7 = 7

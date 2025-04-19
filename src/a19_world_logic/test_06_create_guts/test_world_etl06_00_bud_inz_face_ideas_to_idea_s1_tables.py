@@ -20,7 +20,7 @@ from sqlite3 import connect as sqlite3_connect
 #     event3 = 3
 #     event7 = 7
 #     accord23_str = "accord23"
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
 #     br00011_str = "br00011"
 #     br00011_csv_filename = f"{br00011_str}.csv"
@@ -32,7 +32,7 @@ from sqlite3 import connect as sqlite3_connect
 # """
 #     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
 #     print(f"{sue_inz_dir=}")
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 
 #     # WHEN / THEN
 #     br00011_staging_tablename = f"{br00011_str}_staging"

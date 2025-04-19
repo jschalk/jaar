@@ -8,14 +8,17 @@ from src.a19_world_logic.examples.example_worlds import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
 )
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 
 
 def test_WorldUnit_set_cell_tree_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     tp5 = 5

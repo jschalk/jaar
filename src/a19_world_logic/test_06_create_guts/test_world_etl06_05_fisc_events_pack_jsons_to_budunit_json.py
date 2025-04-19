@@ -15,7 +15,10 @@ from src.a12_hub_tools.hub_path import (
     create_event_expressed_pack_path,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -32,7 +35,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_jso
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
@@ -106,7 +109,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_express
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)

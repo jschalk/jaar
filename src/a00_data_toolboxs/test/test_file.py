@@ -1,5 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import (
     create_path,
+    is_subdirectory,
+    get_immediate_subdir,
     set_dir,
     get_dir_file_strs,
     save_file,
@@ -25,7 +27,11 @@ from src.a00_data_toolboxs.examples.instrument_env import (
 )
 from pytest import raises as pytest_raises
 from platform import system as platform_system
-from os.path import exists as os_path_exist, join as os_path_join
+from os.path import (
+    exists as os_path_exist,
+    join as os_path_join,
+)
+from pathlib import Path as pathlib_Path
 
 
 def test_create_path_ReturnsObj():
@@ -41,6 +47,26 @@ def test_create_path_ReturnsObj():
     assert create_path(x_dir, None) == x_dir
     assert create_path(x_dir, x_filename) == os_path_join(x_dir, x_filename)
     assert create_path(x_dir, 1) == os_path_join(x_dir, str(1))
+
+
+def test_is_subdirectory_ReturnsObj(env_dir_setup_cleanup):
+    env_dir = get_instrument_temp_env_dir()
+    sub = os_path_join(env_dir, "subdir")
+    assert is_subdirectory(sub, env_dir)
+    assert is_subdirectory(env_dir, sub) is False
+    assert is_subdirectory(env_dir, env_dir)
+
+
+def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
+    env_dir = get_instrument_temp_env_dir()
+    level1 = os_path_join(env_dir, "level1")
+    level2 = os_path_join(level1, "level2")
+    expected_path = str(pathlib_Path(level1).resolve())
+    assert get_immediate_subdir(env_dir, level1) == expected_path
+    assert get_immediate_subdir(env_dir, level2) == expected_path
+    assert get_immediate_subdir(env_dir, level2) == expected_path
+    assert get_immediate_subdir(env_dir, env_dir) is None
+    assert get_immediate_subdir(level2, env_dir) is None
 
 
 def test_set_dir_SetsFile(env_dir_setup_cleanup):

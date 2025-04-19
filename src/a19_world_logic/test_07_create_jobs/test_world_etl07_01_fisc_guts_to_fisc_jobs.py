@@ -7,7 +7,10 @@ from src.a12_hub_tools.hub_path import (
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -22,7 +25,7 @@ def test_WorldUnit_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     bob_gut = budunit_shop(bob_inx, a23_str)
     bob_gut.add_acctunit(bob_inx, credit77)
@@ -64,7 +67,7 @@ def test_WorldUnit_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
 #     bob_inx = "Bobby"
 #     yao_inx = "Yao"
 #     a23_str = "accord23"
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     fisc_mstr_dir = fizz_world._fisc_mstr_dir
 #     bob_gut = budunit_shop(bob_inx, a23_str)
 #     bob_gut.add_acctunit(bob_inx)

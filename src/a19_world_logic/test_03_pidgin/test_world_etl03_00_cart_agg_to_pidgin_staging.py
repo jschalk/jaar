@@ -28,7 +28,7 @@ from src.a18_etl_toolbox.tran_path import create_cart_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -55,7 +55,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
 
 def test_WorldUnit_cart_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -196,12 +196,12 @@ def test_WorldUnit_cart_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
     upsert_sheet(br00045_file_path, cart_agg_str(), br00045_df)
 
-    assert fizz_world.events == {}
+    assert fizz_world._events == {}
     fizz_world.cart_agg_to_cart_events()
     fizz_world.cart_events_to_events_log()
     fizz_world.cart_events_log_to_events_agg()
     fizz_world.set_events_from_events_agg_file()
-    assert fizz_world.events == {event2: sue_str, event5: sue_str}
+    assert fizz_world._events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
