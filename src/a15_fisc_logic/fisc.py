@@ -275,15 +275,9 @@ class FiscUnit:
         for owner_name in owner_names:
             self.create_init_job_from_guts(owner_name)
 
-        print(f"{self.job_listen_rotations=}")
-        # for x_rotation in range(self.job_listen_rotations):
-        #     print(f"{x_rotation=}")
-        #     for owner_name in owner_names:
-        #         job = self.rotate_job(owner_name)
-        #         save_job_file(self.fisc_mstr_dir, job)
-        # for owner_name in owner_names:
-        #     job = self.rotate_job(owner_name)
-        #     save_job_file(self.fisc_mstr_dir, job)
+        for _ in range(self.job_listen_rotations):
+            for owner_name in owner_names:
+                save_job_file(self.fisc_mstr_dir, self.rotate_job(owner_name))
 
     def get_job_file_bud(self, owner_name: OwnerName) -> BudUnit:
         return open_job_file(self.fisc_mstr_dir, self.fisc_title, owner_name)

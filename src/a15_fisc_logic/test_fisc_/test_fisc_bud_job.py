@@ -41,8 +41,9 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_de
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
     a23_str = "accord23"
-    a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -51,7 +52,6 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_de
     init_sue_job.add_acctunit(yao_str)
     init_sue_job.add_acctunit(bob_str)
     init_sue_job.add_acctunit(zia_str)
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
     save_job_file(fisc_mstr_dir, init_sue_job)
     assert job_file_exists(fisc_mstr_dir, a23_str, sue_str)
     assert job_file_exists(fisc_mstr_dir, a23_str, yao_str) is False
@@ -77,8 +77,9 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
     a23_str = "accord23"
-    a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), True)
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -90,7 +91,6 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
     casa_road = init_bob_job.make_l1_road("casa")
     clean_road = init_bob_job.make_road(casa_road, "clean")
     init_bob_job.add_item(clean_road, pledge=True)
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
     save_job_file(fisc_mstr_dir, init_sue_job)
     save_job_file(fisc_mstr_dir, init_yao_job)
     save_job_file(fisc_mstr_dir, init_bob_job)
@@ -102,6 +102,38 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
     assert len(a23_fisc.rotate_job(sue_str).get_agenda_dict()) == 0
     assert len(a23_fisc.rotate_job(yao_str).get_agenda_dict()) == 1
     assert len(a23_fisc.rotate_job(bob_str).get_agenda_dict()) == 0
+
+
+def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    init_bob_job = budunit_shop(bob_str, a23_str)
+    init_bob_job.add_acctunit(bob_str)
+    init_sue_job = budunit_shop(sue_str, a23_str)
+    init_sue_job.add_acctunit(yao_str)
+    init_yao_job = budunit_shop(yao_str, a23_str)
+    init_yao_job.add_acctunit(bob_str)
+    casa_road = init_bob_job.make_l1_road("casa")
+    clean_road = init_bob_job.make_road(casa_road, "clean")
+    init_bob_job.add_item(clean_road, pledge=True)
+    save_job_file(fisc_mstr_dir, init_sue_job)
+    save_job_file(fisc_mstr_dir, init_yao_job)
+    save_job_file(fisc_mstr_dir, init_bob_job)
+    assert len(a23_job(bob_str).get_agenda_dict()) == 1
+    assert len(a23_job(sue_str).get_agenda_dict()) == 0
+    assert len(a23_job(yao_str).get_agenda_dict()) == 0
+
+    # WHEN / THEN
+    assert len(a23_fisc.rotate_job(bob_str).get_agenda_dict()) == 1
+    assert len(a23_fisc.rotate_job(sue_str).get_agenda_dict()) == 0
+    assert len(a23_fisc.rotate_job(yao_str).get_agenda_dict()) == 1
 
 
 # def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_Without_healerlink(
@@ -285,7 +317,7 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
 #     assert 1 == 2
 
 
-def test_FiscUnit_generate_all_jobs_Scenario0_Initial_job_IsCreated(
+def test_FiscUnit_generate_all_jobs_Scenario0_init_job_IsCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -313,54 +345,151 @@ def test_FiscUnit_generate_all_jobs_Scenario0_Initial_job_IsCreated(
     assert job_file_exists(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_FiscUnit_generate_all_jobs_Scenario1_SetsCorrectFiles(
+def test_FiscUnit_generate_all_jobs_Scenario1_jobs_rotated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
     fisc_mstr_dir = get_test_fisc_mstr_dir()
-    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
-
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"
     sue_str = "Sue"
-    a23_fisc.create_init_job_from_guts(bob_str)
-    fisc_mstr_dir = a23_fisc.fisc_mstr_dir
-    a23_fisc.create_init_job_from_guts(sue_str)
-    bob_gut_bud = a23_fisc.rotate_job(bob_str)
-    sue_gut_bud = a23_fisc.rotate_job(sue_str)
+    yao_str = "Yao"
+    bob_gut = budunit_shop(bob_str, a23_str)
+    bob_gut.add_acctunit(bob_str)
+    bob_gut.add_acctunit(sue_str)
+    casa_road = bob_gut.make_l1_road("casa")
+    clean_road = bob_gut.make_road(casa_road, "clean")
+    bob_gut.add_item(clean_road, pledge=True)
 
-    texas_str = "Texas"
-    texas_road = bob_gut_bud.make_l1_road(texas_str)
-    elpaso_str = "el paso"
-    elpaso_road = bob_gut_bud.make_road(texas_road, elpaso_str)
-    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
-
-    bob_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, bob_str)
-    bob_gut_bud.add_acctunit(bob_str)
-    bob_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    bob_gut_bud.set_item(elpaso_item, texas_road)
-    save_gut_file(a23_fisc.fisc_mstr_dir, bob_gut_bud)
-
-    sue_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
-    sue_gut_bud.add_acctunit(sue_str)
-    sue_gut_bud.add_acctunit(bob_str)
-    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    sue_gut_bud.set_item(elpaso_item, texas_road)
-    save_gut_file(a23_fisc.fisc_mstr_dir, sue_gut_bud)
-
-    before_bob_job = a23_fisc.get_job_file_bud(bob_str)
-    before_sue_job = a23_fisc.get_job_file_bud(sue_str)
-    assert before_bob_job.acct_exists(bob_str) is False
-    assert before_sue_job.acct_exists(sue_str) is False
+    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut.add_acctunit(sue_str)
+    sue_gut.add_acctunit(bob_str)
+    yao_gut = budunit_shop(yao_str, a23_str)
+    yao_gut.add_acctunit(sue_str)
+    save_gut_file(fisc_mstr_dir, bob_gut)
+    save_gut_file(fisc_mstr_dir, sue_gut)
+    save_gut_file(fisc_mstr_dir, yao_gut)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, bob_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, yao_str)
 
     # WHEN
     a23_fisc.generate_all_jobs()
 
     # THEN
-    after_bob_job = a23_fisc.get_job_file_bud(bob_str)
-    after_sue_job = a23_fisc.get_job_file_bud(sue_str)
-    assert after_bob_job.acct_exists(bob_str)
-    assert after_sue_job.acct_exists(sue_str)
+    assert len(a23_job(bob_str).get_agenda_dict()) == 1
+    assert len(a23_job(sue_str).get_agenda_dict()) == 1
+    assert len(a23_job(yao_str).get_agenda_dict()) == 1
+
+
+def test_FiscUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, job_listen_rotations=1)
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    zia_str = "Zia"
+    bob_gut = budunit_shop(bob_str, a23_str)
+    bob_gut.add_acctunit(bob_str)
+    bob_gut.add_acctunit(sue_str)
+
+    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut.add_acctunit(sue_str)
+    sue_gut.add_acctunit(bob_str)
+    sue_gut.add_acctunit(yao_str)
+
+    yao_gut = budunit_shop(yao_str, a23_str)
+    yao_gut.add_acctunit(sue_str)
+    yao_gut.add_acctunit(yao_str)
+    yao_gut.add_acctunit(zia_str)
+
+    zia_gut = budunit_shop(zia_str, a23_str)
+    zia_gut.add_acctunit(zia_str)
+    casa_road = zia_gut.make_l1_road("casa")
+    clean_road = zia_gut.make_road(casa_road, "clean")
+    zia_gut.add_item(clean_road, pledge=True)
+    save_gut_file(fisc_mstr_dir, bob_gut)
+    save_gut_file(fisc_mstr_dir, sue_gut)
+    save_gut_file(fisc_mstr_dir, yao_gut)
+    save_gut_file(fisc_mstr_dir, zia_gut)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, bob_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, yao_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, zia_str)
+
+    # WHEN
+    a23_fisc.generate_all_jobs()
+
+    # THEN
+    assert len(a23_job(bob_str).get_agenda_dict()) == 0
+    assert len(a23_job(sue_str).get_agenda_dict()) == 1
+    assert len(a23_job(yao_str).get_agenda_dict()) == 1
+    assert len(a23_job(zia_str).get_agenda_dict()) == 1
+
+
+def test_FiscUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    a23_str = "accord23"
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir, job_listen_rotations=1)
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    zia_str = "Zia"
+    bob_gut = budunit_shop(bob_str, a23_str)
+    bob_gut.add_acctunit(bob_str)
+    bob_gut.add_acctunit(sue_str)
+
+    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut.add_acctunit(sue_str)
+    sue_gut.add_acctunit(bob_str)
+    sue_gut.add_acctunit(yao_str)
+
+    yao_gut = budunit_shop(yao_str, a23_str)
+    yao_gut.add_acctunit(sue_str)
+    yao_gut.add_acctunit(yao_str)
+    yao_gut.add_acctunit(zia_str)
+
+    zia_gut = budunit_shop(zia_str, a23_str)
+    zia_gut.add_acctunit(zia_str)
+    casa_road = zia_gut.make_l1_road("casa")
+    clean_road = zia_gut.make_road(casa_road, "clean")
+    zia_gut.add_item(clean_road, pledge=True)
+    save_gut_file(fisc_mstr_dir, bob_gut)
+    save_gut_file(fisc_mstr_dir, sue_gut)
+    save_gut_file(fisc_mstr_dir, yao_gut)
+    save_gut_file(fisc_mstr_dir, zia_gut)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, bob_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, yao_str)
+    assert not job_file_exists(fisc_mstr_dir, a23_str, zia_str)
+    assert a23_fisc.job_listen_rotations == 1
+
+    # WHEN
+    a23_fisc.generate_all_jobs()
+
+    # THEN
+    assert len(a23_job(bob_str).get_agenda_dict()) == 0
+    assert len(a23_job(sue_str).get_agenda_dict()) == 1
+    assert len(a23_job(yao_str).get_agenda_dict()) == 1
+    assert len(a23_job(zia_str).get_agenda_dict()) == 1
+
+    # WHEN
+    a23_fisc.job_listen_rotations = 2
+    a23_fisc.generate_all_jobs()
+
+    # THEN
+    assert len(a23_job(bob_str).get_agenda_dict()) == 1
+    assert len(a23_job(sue_str).get_agenda_dict()) == 1
+    assert len(a23_job(yao_str).get_agenda_dict()) == 1
+    assert len(a23_job(zia_str).get_agenda_dict()) == 1
 
 
 # def test_FiscUnit_generate_all_jobs_Scenario2_job_limit_rotation_Changes_job(
