@@ -22,12 +22,10 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
         "world_id",
         "world_time_nigh",
         "timeconversions",
-        "events",
     }
     assert x_world_dict.get("world_id") == five_world_id
     assert x_world_dict.get("world_time_nigh") == 0
     assert x_world_dict.get("timeconversions") == {}
-    assert x_world_dict.get("events") == {}
 
 
 def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
@@ -54,4 +52,3 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     assert x_world_dict.get("world_id") == five_world_id
     assert x_world_dict.get("world_time_nigh") == world2_time_nigh
     assert x_world_dict.get("timeconversions") == world2_timeconversions
-    assert x_world_dict.get("events") == {}

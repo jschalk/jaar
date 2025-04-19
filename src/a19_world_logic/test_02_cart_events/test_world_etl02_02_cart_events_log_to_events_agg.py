@@ -99,14 +99,14 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     events_agg_str = "events_agg"
     events_file_path = create_cart_events_path(fizz_world._cart_dir)
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
-    assert len(fizz_world.events) != 2
+    assert len(fizz_world._events) != 2
 
     # WHEN
     fizz_world.set_events_from_events_agg_file()
 
     # THEN
-    assert len(fizz_world.events) == 2
-    assert fizz_world.events == {event3: bob_str, event9: yao_str}
+    assert len(fizz_world._events) == 2
+    assert fizz_world._events == {event3: bob_str, event9: yao_str}
 
 
 def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_cleanup):
@@ -117,11 +117,11 @@ def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_clea
     events_agg_str = "events_agg"
     events_file_path = create_cart_events_path(fizz_world._cart_dir)
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
-    fizz_world.events = {2: "Sue", 44: "Bob"}
-    assert fizz_world.events == {2: "Sue", 44: "Bob"}
+    fizz_world._events = {2: "Sue", 44: "Bob"}
+    assert fizz_world._events == {2: "Sue", 44: "Bob"}
 
     # WHEN
     fizz_world.set_events_from_events_agg_file()
 
     # THEN
-    assert not fizz_world.events
+    assert not fizz_world._events
