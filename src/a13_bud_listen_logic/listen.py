@@ -7,10 +7,10 @@ from src.a01_word_logic.road import (
 )
 from src.a05_item_logic.item import ItemUnit
 from src.a06_bud_logic.bud import BudUnit, AcctUnit
-from src.a12_hub_tools.basis_buds import create_empty_bud, create_listen_basis
+from src.a12_hub_tools.basis_buds import create_empty_bud_from_bud, create_listen_basis
 from src.a12_hub_tools.hub_tool import (
-    save_plan_file,
-    open_plan_file,
+    save_job_file,
+    open_job_file,
     open_gut_file,
 )
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
@@ -182,140 +182,146 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     return _ingest_perspective_agenda(listener, agenda)
 
 
-def listen_to_agendas_gut_plan(fisc_mstr_dir: str, listener_plan: BudUnit):
-    fisc_title = listener_plan.fisc_title
-    owner_name = listener_plan.owner_name
-    for x_acctunit in get_ordered_debtors_roll(listener_plan):
-        if x_acctunit.acct_name == owner_name:
-            gut_bud = open_gut_file(fisc_mstr_dir, fisc_title, owner_name)
-            listen_to_speaker_agenda(listener_plan, gut_bud)
-        else:
-            speaker_id = x_acctunit.acct_name
-            speaker_plan = open_plan_file(fisc_mstr_dir, fisc_title, speaker_id)
-            if speaker_plan is None:
-                speaker_plan = create_empty_bud(listener_plan, speaker_id)
-            listen_to_speaker_agenda(listener_plan, speaker_plan)
-
-
-def listen_to_agendas_duty_job(listener_job: BudUnit, healer_hubunit: HubUnit):
-    listener_id = listener_job.owner_name
+def listen_to_agendas_create_init_job_from_guts(
+    fisc_mstr_dir: str, listener_job: BudUnit
+):
+    fisc_title = listener_job.fisc_title
     for x_acctunit in get_ordered_debtors_roll(listener_job):
+        speaker_id = x_acctunit.acct_name
+        speaker_gut = open_gut_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if speaker_gut is None:
+            speaker_gut = create_empty_bud_from_bud(listener_job, speaker_id)
+        if speaker_gut:
+            listen_to_speaker_agenda(listener_job, speaker_gut)
+
+
+def listen_to_agendas_jobs_into_job(fisc_mstr_dir: str, listener_job: BudUnit):
+    fisc_title = listener_job.fisc_title
+    for x_acctunit in get_ordered_debtors_roll(listener_job):
+        speaker_id = x_acctunit.acct_name
+        speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if speaker_job is None:
+            speaker_job = create_empty_bud_from_bud(listener_job, speaker_id)
+        listen_to_speaker_agenda(listener_job, speaker_job)
+
+
+def listen_to_agendas_duty_plan(listener_plan: BudUnit, healer_hubunit: HubUnit):
+    listener_id = listener_plan.owner_name
+    for x_acctunit in get_ordered_debtors_roll(listener_plan):
         if x_acctunit.acct_name == listener_id:
             listener_duty = healer_hubunit.get_duty_bud(listener_id)
-            listen_to_speaker_agenda(listener_job, listener_duty)
+            listen_to_speaker_agenda(listener_plan, listener_duty)
         else:
             speaker_id = x_acctunit.acct_name
             healer_name = healer_hubunit.owner_name
-            speaker_job = healer_hubunit.rj_speaker_bud(healer_name, speaker_id)
-            if speaker_job is None:
-                speaker_job = create_empty_bud(listener_job, speaker_id)
-            listen_to_speaker_agenda(listener_job, speaker_job)
+            speaker_plan = healer_hubunit.rj_speaker_bud(healer_name, speaker_id)
+            if speaker_plan is None:
+                speaker_plan = create_empty_bud_from_bud(listener_plan, speaker_id)
+            listen_to_speaker_agenda(listener_plan, speaker_plan)
 
 
-def listen_to_facts_duty_job(new_job: BudUnit, healer_hubunit: HubUnit):
-    duty = healer_hubunit.get_duty_bud(new_job.owner_name)
-    migrate_all_facts(duty, new_job)
-    for x_acctunit in get_ordered_debtors_roll(new_job):
-        if x_acctunit.acct_name != new_job.owner_name:
-            speaker_job = healer_hubunit.get_job_bud(x_acctunit.acct_name)
-            if speaker_job is not None:
-                listen_to_speaker_fact(new_job, speaker_job)
-
-
-def listen_to_facts_gut_plan(fisc_mstr_dir: str, new_plan: BudUnit):
-    fisc_title = new_plan.fisc_title
-    gut_bud = open_gut_file(fisc_mstr_dir, fisc_title, new_plan.owner_name)
-    migrate_all_facts(gut_bud, new_plan)
+def listen_to_facts_duty_plan(new_plan: BudUnit, healer_hubunit: HubUnit):
+    duty = healer_hubunit.get_duty_bud(new_plan.owner_name)
+    migrate_all_facts(duty, new_plan)
     for x_acctunit in get_ordered_debtors_roll(new_plan):
-        speaker_id = x_acctunit.acct_name
-        if speaker_id != new_plan.owner_name:
-            speaker_plan = open_plan_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if x_acctunit.acct_name != new_plan.owner_name:
+            speaker_plan = healer_hubunit.get_plan_bud(x_acctunit.acct_name)
             if speaker_plan is not None:
                 listen_to_speaker_fact(new_plan, speaker_plan)
 
 
-def listen_to_debtors_roll_gut_plan(
+def listen_to_facts_gut_job(fisc_mstr_dir: str, new_job: BudUnit):
+    fisc_title = new_job.fisc_title
+    old_job = open_job_file(fisc_mstr_dir, fisc_title, new_job.owner_name)
+    for x_acctunit in get_ordered_debtors_roll(old_job):
+        speaker_id = x_acctunit.acct_name
+        speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
+        if speaker_job is not None:
+            listen_to_speaker_fact(new_job, speaker_job)
+
+
+def listen_to_debtors_roll_jobs_into_job(
     fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
 ) -> BudUnit:
-    gut = open_gut_file(fisc_mstr_dir, fisc_title, owner_name)
-    new_bud = create_listen_basis(gut)
-    if gut.debtor_respect is None:
-        return new_bud
-    listen_to_agendas_gut_plan(fisc_mstr_dir, new_bud)
-    listen_to_facts_gut_plan(fisc_mstr_dir, new_bud)
-    return new_bud
+    old_job = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
+    new_job = create_listen_basis(old_job)
+    if old_job.debtor_respect is None:
+        return new_job
+    listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_job)
+    listen_to_facts_gut_job(fisc_mstr_dir, new_job)
+    return new_job
 
 
-def listen_to_debtors_roll_duty_job(
+def listen_to_debtors_roll_duty_plan(
     healer_hubunit: HubUnit, listener_id: OwnerName
 ) -> BudUnit:
     duty = healer_hubunit.get_duty_bud(listener_id)
     new_duty = create_listen_basis(duty)
     if duty.debtor_respect is None:
         return new_duty
-    listen_to_agendas_duty_job(new_duty, healer_hubunit)
-    listen_to_facts_duty_job(new_duty, healer_hubunit)
+    listen_to_agendas_duty_plan(new_duty, healer_hubunit)
+    listen_to_facts_duty_plan(new_duty, healer_hubunit)
     return new_duty
 
 
-def listen_to_owner_jobs(listener_hubunit: HubUnit) -> None:
+def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
     gut = open_gut_file(
         listener_hubunit.fisc_mstr_dir,
         listener_hubunit.fisc_title,
         listener_hubunit.owner_name,
     )
-    new_plan = create_listen_basis(gut)
-    pre_plan_dict = new_plan.get_dict()
+    new_job = create_listen_basis(gut)
+    pre_job_dict = new_job.get_dict()
     gut.settle_bud()
-    new_plan.settle_bud()
+    new_job.settle_bud()
 
     for x_healer_name, keep_dict in gut._healers_dict.items():
         listener_id = listener_hubunit.owner_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_name = x_healer_name
-        _pick_keep_jobs_and_listen(listener_id, keep_dict, healer_hubunit, new_plan)
+        _pick_keep_plans_and_listen(listener_id, keep_dict, healer_hubunit, new_job)
 
-    if new_plan.get_dict() == pre_plan_dict:
+    if new_job.get_dict() == pre_job_dict:
         agenda = list(gut.get_agenda_dict().values())
-        _ingest_perspective_agenda(new_plan, agenda)
-        listen_to_speaker_fact(new_plan, gut)
+        _ingest_perspective_agenda(new_job, agenda)
+        listen_to_speaker_fact(new_job, gut)
 
-    save_plan_file(listener_hubunit.fisc_mstr_dir, new_plan)
+    save_job_file(listener_hubunit.fisc_mstr_dir, new_job)
 
 
-def _pick_keep_jobs_and_listen(
+def _pick_keep_plans_and_listen(
     listener_id: OwnerName,
     keep_dict: dict[RoadUnit],
     healer_hubunit: HubUnit,
-    new_plan: BudUnit,
+    new_job: BudUnit,
 ):
     for keep_path in keep_dict:
         healer_hubunit.keep_road = keep_path
-        pick_keep_job_and_listen(listener_id, healer_hubunit, new_plan)
+        pick_keep_plan_and_listen(listener_id, healer_hubunit, new_job)
 
 
-def pick_keep_job_and_listen(
-    listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_plan: BudUnit
+def pick_keep_plan_and_listen(
+    listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_job: BudUnit
 ):
     listener_id = listener_owner_name
-    if healer_hubunit.job_file_exists(listener_id):
-        keep_job = healer_hubunit.get_job_bud(listener_id)
+    if healer_hubunit.plan_file_exists(listener_id):
+        keep_plan = healer_hubunit.get_plan_bud(listener_id)
     else:
-        keep_job = create_empty_bud(new_plan, new_plan.owner_name)
-    listen_to_job_agenda(new_plan, keep_job)
+        keep_plan = create_empty_bud_from_bud(new_job, new_job.owner_name)
+    listen_to_plan_agenda(new_job, keep_plan)
 
 
-def listen_to_job_agenda(listener: BudUnit, job: BudUnit):
-    for x_item in job._item_dict.values():
+def listen_to_plan_agenda(listener: BudUnit, plan: BudUnit):
+    for x_item in plan._item_dict.values():
         if listener.item_exists(x_item.get_road()) is False:
             listener.set_item(x_item, x_item.parent_road)
         if listener.get_fact(x_item.get_road()) is False:
             listener.set_item(x_item, x_item.parent_road)
-    for x_fact_road, x_fact_unit in job.itemroot.factunits.items():
+    for x_fact_road, x_fact_unit in plan.itemroot.factunits.items():
         listener.itemroot.set_factunit(x_fact_unit)
     listener.settle_bud()
 
 
-def create_job_file_from_duty_file(healer_hubunit: HubUnit, owner_name: OwnerName):
-    x_job = listen_to_debtors_roll_duty_job(healer_hubunit, listener_id=owner_name)
-    healer_hubunit.save_job_bud(x_job)
+def create_plan_file_from_duty_file(healer_hubunit: HubUnit, owner_name: OwnerName):
+    x_plan = listen_to_debtors_roll_duty_plan(healer_hubunit, listener_id=owner_name)
+    healer_hubunit.save_plan_bud(x_plan)

@@ -51,7 +51,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_bud_csvs_to_pack_json,
     etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
-    etl_fisc_gut_to_fisc_plan,
+    etl_fisc_gut_to_fisc_job,
     etl_fisc_agg_tables2fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
@@ -220,8 +220,8 @@ class WorldUnit:
     def event_inherited_budunits_to_fisc_gut(self):
         etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
 
-    def fisc_gut_to_fisc_plan(self):
-        etl_fisc_gut_to_fisc_plan(self._fisc_mstr_dir)
+    def fisc_gut_to_fisc_job(self):
+        etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
 
     def fisc_ote1_agg_csvs2jsons(self):
         etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
@@ -294,7 +294,7 @@ class WorldUnit:
             self.event_bud_csvs_to_pack_json()
             self.event_pack_json_to_event_inherited_budunits()
             self.event_inherited_budunits_to_fisc_gut()
-            self.fisc_gut_to_fisc_plan()
+            self.fisc_gut_to_fisc_job()
             self.calc_fisc_deal_acct_mandate_net_ledgers()
 
             if store_tracing_files:

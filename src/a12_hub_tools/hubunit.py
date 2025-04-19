@@ -48,7 +48,7 @@ from src.a09_pack_logic.pack import (
     packunit_shop,
     create_packunit_from_files,
 )
-from src.a12_hub_tools.basis_buds import get_default_plan
+from src.a12_hub_tools.basis_buds import get_default_job
 from src.a12_hub_tools.hub_path import (
     treasury_filename,
     create_keeps_dir_path,
@@ -58,8 +58,8 @@ from src.a12_hub_tools.hub_path import (
 from src.a12_hub_tools.hub_tool import (
     save_gut_file,
     open_gut_file,
-    save_plan_file,
-    open_plan_file,
+    save_job_file,
+    open_job_file,
     gut_file_exists,
 )
 from os.path import exists as os_path_exists
@@ -88,8 +88,8 @@ def get_keep_dutys_dir(x_keep_dir: str) -> str:
     return create_path(x_keep_dir, "dutys")
 
 
-def get_keep_jobs_dir(x_keep_dir: str) -> str:
-    return create_path(x_keep_dir, "jobs")
+def get_keep_plans_dir(x_keep_dir: str) -> str:
+    return create_path(x_keep_dir, "plans")
 
 
 def get_keep_grades_dir(x_keep_dir: str) -> str:
@@ -341,8 +341,8 @@ class HubUnit:
     def duty_path(self, owner_name: OwnerName) -> str:
         return create_path(self.dutys_dir(), get_json_filename(owner_name))
 
-    def job_path(self, owner_name: OwnerName) -> str:
-        return create_path(self.jobs_dir(), get_json_filename(owner_name))
+    def plan_path(self, owner_name: OwnerName) -> str:
+        return create_path(self.plans_dir(), get_json_filename(owner_name))
 
     def grade_path(self, owner_name: OwnerName) -> str:
         return create_path(self.grades_dir(), get_json_filename(owner_name))
@@ -350,15 +350,15 @@ class HubUnit:
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
 
-    def jobs_dir(self) -> str:
-        return get_keep_jobs_dir(self.keep_dir())
+    def plans_dir(self) -> str:
+        return get_keep_plans_dir(self.keep_dir())
 
     def grades_dir(self) -> str:
         return get_keep_grades_dir(self.keep_dir())
 
-    def get_jobs_dir_filenames_list(self) -> list[str]:
+    def get_plans_dir_filenames_list(self) -> list[str]:
         try:
-            return list(get_dir_file_strs(self.jobs_dir(), True).keys())
+            return list(get_dir_file_strs(self.plans_dir(), True).keys())
         except Exception:
             return []
 
@@ -366,18 +366,18 @@ class HubUnit:
         x_filename = get_json_filename(x_bud.owner_name)
         save_file(self.dutys_dir(), x_filename, x_bud.get_json())
 
-    def save_job_bud(self, x_bud: BudUnit):
+    def save_plan_bud(self, x_bud: BudUnit):
         x_filename = get_json_filename(x_bud.owner_name)
-        save_file(self.jobs_dir(), x_filename, x_bud.get_json())
+        save_file(self.plans_dir(), x_filename, x_bud.get_json())
 
-    def initialize_plan_file(self, gut: BudUnit):
-        save_plan_file(self.fisc_mstr_dir, get_default_plan(gut))
+    def initialize_job_file(self, gut: BudUnit):
+        save_job_file(self.fisc_mstr_dir, get_default_job(gut))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))
 
-    def job_file_exists(self, owner_name: OwnerName) -> bool:
-        return os_path_exists(self.job_path(owner_name))
+    def plan_file_exists(self, owner_name: OwnerName) -> bool:
+        return os_path_exists(self.plan_path(owner_name))
 
     def get_duty_bud(self, owner_name: OwnerName) -> BudUnit:
         if self.duty_file_exists(owner_name) is False:
@@ -385,17 +385,17 @@ class HubUnit:
         file_content = open_file(self.dutys_dir(), get_json_filename(owner_name))
         return budunit_get_from_json(file_content)
 
-    def get_job_bud(self, owner_name: OwnerName) -> BudUnit:
-        if self.job_file_exists(owner_name) is False:
+    def get_plan_bud(self, owner_name: OwnerName) -> BudUnit:
+        if self.plan_file_exists(owner_name) is False:
             return None
-        file_content = open_file(self.jobs_dir(), get_json_filename(owner_name))
+        file_content = open_file(self.plans_dir(), get_json_filename(owner_name))
         return budunit_get_from_json(file_content)
 
     def delete_duty_file(self, owner_name: OwnerName):
         delete_dir(self.duty_path(owner_name))
 
-    def delete_job_file(self, owner_name: OwnerName):
-        delete_dir(self.job_path(owner_name))
+    def delete_plan_file(self, owner_name: OwnerName):
+        delete_dir(self.plan_path(owner_name))
 
     def delete_treasury_db_file(self):
         delete_dir(self.treasury_db_path())
@@ -408,8 +408,8 @@ class HubUnit:
         return perspective_bud
 
     def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
-        speaker_plan = open_plan_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
-        return self.get_perspective_bud(speaker_plan)
+        speaker_job = open_job_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
+        return self.get_perspective_bud(speaker_job)
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
@@ -420,13 +420,13 @@ class HubUnit:
             bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
-        return speaker_hubunit.get_job_bud(speaker_id)
+        return speaker_hubunit.get_plan_bud(speaker_id)
 
     def rj_perspective_bud(
         self, healer_name: OwnerName, speaker_id: OwnerName
     ) -> BudUnit:
-        speaker_job = self.rj_speaker_bud(healer_name, speaker_id)
-        return self.get_perspective_bud(speaker_job)
+        speaker_plan = self.rj_speaker_bud(healer_name, speaker_id)
+        return self.get_perspective_bud(speaker_plan)
 
     def get_keep_roads(self) -> set[RoadUnit]:
         x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)

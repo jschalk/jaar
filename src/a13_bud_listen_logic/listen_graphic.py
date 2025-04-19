@@ -9,7 +9,7 @@ from src.a00_data_toolboxs.plotly_toolbox import (
 from src.a02_finance_toolboxs.finance_config import default_money_magnitude
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_graphics import display_itemtree
-from src.a12_hub_tools.hub_path import gut_str, plan_str
+from src.a12_hub_tools.hub_path import gut_str, job_str
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
@@ -27,20 +27,20 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
         yao_str = "Yao"
         fig = get_hubunit_base_fig()
         sue_gut_str = f"{sue_str}.{gut_str()}"
-        sue_plan_str = f"{sue_str}.{plan_str()}"
-        yao_plan_str = f"{yao_str}.{plan_str()}"
-        bob_plan_str = f"{bob_str}.{plan_str()}"
-        dir_plan_str = f"{plan_str()}s directory"
+        sue_job_str = f"{sue_str}.{job_str()}"
+        yao_job_str = f"{yao_str}.{job_str()}"
+        bob_job_str = f"{bob_str}.{job_str()}"
+        dir_job_str = f"{job_str()}s directory"
         dir_gut_str = f"{gut_str()}s directory"
 
         green_str = "Green"
         med_purple = "MediumPurple"
         add_simp_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_gut_str, green_str)
         add_direc_rect(fig, 0.7, 6.7, 6.3, 8.3, dir_gut_str)
-        add_simp_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_plan_str, green_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_plan_str)
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_plan_str)
-        add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_plan_str)
+        add_simp_rect(fig, 1.0, 1.0, 2.0, 2.0, sue_job_str, green_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, yao_job_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, bob_job_str)
+        add_direc_rect(fig, 0.7, 0.7, 6.3, 2.3, dir_job_str)
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 5,4 5.5,2", color=med_purple)
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.5 3,4 3.5,2", color=med_purple)
         add_rect_arrow(fig, 1.75, 2, 1.75, 6.8, green_str)
@@ -53,7 +53,7 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
                 y=[9.0, 8.75],
                 text=[
                     "fiscity Bud Listening Structures",
-                    "The gut bud listens to other's plan buds and builds a new bud from itself and others",
+                    "The gut bud listens to other's job buds and builds a new bud from itself and others",
                 ],
                 mode="text",
             )
@@ -80,7 +80,7 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_str)
 
         sue_duty_str = f"{sue_str} duty"
-        sue_job_str = f"{sue_str} job"
+        sue_plan_str = f"{sue_str} plan"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
@@ -95,19 +95,19 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue2_p4 = f"Money={default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
         add_keep__rect(
             fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_simp_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_str)
         add_keep__rect(
             fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
         add_simp_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_str)
         add_keep__rect(
             fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
@@ -133,16 +133,16 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_str = "Sue"
         bob_str = "Bob"
         sue_gut_str = f"{sue_str}.{gut_str()}"
-        sue_plan_str = f"{sue_str}.{plan_str()}"
-        dir_plan_str = f"{plan_str()}s dir"
+        sue_job_str = f"{sue_str}.{job_str()}"
+        dir_job_str = f"{job_str()}s dir"
         dir_gut_str = f"{gut_str()}s dir"
 
         green_str = "Green"
         blue_str = "blue"
         add_simp_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_gut_str, green_str)
         add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_gut_str)
-        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_plan_str, green_str)
-        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_plan_str)
+        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_job_str, green_str)
+        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_job_str)
 
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 7.4,5.1 7.5,5", color=blue_str)
         add_2_curve(fig, path="M 1.75,6.8 C 2,5.4 5.4,5.2 5.5,5", color=blue_str)
@@ -154,7 +154,7 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_str)
 
         sue_duty_str = f"{sue_str} duty"
-        sue_job_str = f"{sue_str} job"
+        sue_plan_str = f"{sue_str} plan"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
@@ -169,19 +169,19 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue2_p4 = f"Money={default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
         add_keep__rect(
             fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_simp_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_str)
         add_keep__rect(
             fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
         add_simp_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_str)
         add_keep__rect(
             fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
@@ -212,8 +212,8 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         bob_str = "Bob"
         yao_str = "Yao"
         sue_gut_str = f"{sue_str}.{gut_str()}"
-        sue_plan_str = f"{sue_str}.{plan_str()}"
-        dir_plan_str = f"{plan_str()}s dir"
+        sue_job_str = f"{sue_str}.{job_str()}"
+        dir_job_str = f"{job_str()}s dir"
         dir_gut_str = f"{gut_str()}s dir"
 
         green_str = "Green"
@@ -221,8 +221,8 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         blue_str = "blue"
         add_simp_rect(fig, 1.0, 7.0, 2.0, 8.0, sue_gut_str, green_str)
         add_direc_rect(fig, 0.7, 6.7, 2.3, 8.3, dir_gut_str)
-        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_plan_str, green_str)
-        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_plan_str)
+        add_simp_rect(fig, 1.0, -2.0, 2.0, -1.0, sue_job_str, green_str)
+        add_direc_rect(fig, 0.7, -2.3, 2.3, -0.7, dir_job_str)
 
         add_rect_arrow(fig, 3.85, 3.8, 4, 3.6, blue_str)
         add_2_curve(fig, path="M 4,3.6 C 4.3,3.4 7.4,2.1 7.5,2", color=blue_str)
@@ -235,22 +235,22 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_str)
 
         sue_duty_str = f"{sue_str} duty"
-        sue_job_str = f"{sue_str} job"
-        bob_job_str = f"{bob_str} job"
-        yao_job_str = f"{yao_str} job"
+        sue_plan_str = f"{sue_str} plan"
+        bob_plan_str = f"{bob_str} plan"
+        yao_plan_str = f"{yao_str} plan"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_job_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_plan_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
         add_keep__rect(
             fig, 2.7, 0.7, 8.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_job_str)
-        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_job_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_plan_str)
+        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_plan_str)
 
         green_str = "Green"
         fig.add_trace(

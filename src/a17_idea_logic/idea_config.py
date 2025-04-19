@@ -182,7 +182,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "unknown_word",
         "quota",
         "celldepth",
-        "plan_listen_rotations",
+        "job_listen_rotations",
         "error_message",
         "_owner_name_team",
         "_active",
@@ -318,7 +318,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "quota": "REAL",
         "celldepth": "INT",
         "monthday_distortion": "INTEGER",
-        "plan_listen_rotations": "INTEGER",
+        "job_listen_rotations": "INTEGER",
         "timeline_title": "TEXT",
         "error_message": "TEXT",
         "_credor_pool": "REAL",
@@ -644,7 +644,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,plan_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
+        "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
         "fisc_title,owner_name,deal_time,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
         "fisc_title,owner_name,acct_name,tran_time,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
         "fisc_title,cumlative_minute,hour_title": idea_format_00003_fisc_timeline_hour_v0_0_0(),

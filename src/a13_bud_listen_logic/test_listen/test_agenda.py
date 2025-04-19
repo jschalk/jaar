@@ -1,6 +1,9 @@
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a13_bud_listen_logic.listen import listen_to_speaker_agenda, create_empty_bud
+from src.a13_bud_listen_logic.listen import (
+    listen_to_speaker_agenda,
+    create_empty_bud_from_bud,
+)
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 
@@ -271,18 +274,18 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     assert len(sue_budunit.get_agenda_dict()) == 3
 
     # WHEN
-    yao_job = create_empty_bud(yao_duty, yao_str)
-    yao_job.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    yao_job.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
-    yao_job.set_acct_respect(yao_pool)
-    yao_job = listen_to_speaker_agenda(yao_job, sue_budunit)
-    yao_job.settle_bud()
+    yao_plan = create_empty_bud_from_bud(yao_duty, yao_str)
+    yao_plan.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    yao_plan.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
+    yao_plan.set_acct_respect(yao_pool)
+    yao_plan = listen_to_speaker_agenda(yao_plan, sue_budunit)
+    yao_plan.settle_bud()
 
     # THEN irrational bud is ignored
-    assert len(yao_job.get_agenda_dict()) != 3
-    assert len(yao_job.get_agenda_dict()) == 0
-    zia_acctunit = yao_job.get_acct(zia_str)
-    sue_acctunit = yao_job.get_acct(sue_str)
+    assert len(yao_plan.get_agenda_dict()) != 3
+    assert len(yao_plan.get_agenda_dict()) == 0
+    zia_acctunit = yao_plan.get_acct(zia_str)
+    sue_acctunit = yao_plan.get_acct(sue_str)
     print(f"{sue_acctunit.debtit_belief=}")
     print(f"{sue_acctunit._irrational_debtit_belief=}")
     assert zia_acctunit._irrational_debtit_belief == 0
@@ -305,18 +308,18 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBud():
     yao_duty.set_acct_respect(yao_pool)
 
     # WHEN
-    sue_job = create_empty_bud(yao_duty, sue_str)
-    yao_job = create_empty_bud(yao_duty, yao_str)
-    yao_job.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    yao_job.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
-    yao_job.set_acct_respect(yao_pool)
-    yao_job = listen_to_speaker_agenda(yao_job, speaker=sue_job)
+    sue_plan = create_empty_bud_from_bud(yao_duty, sue_str)
+    yao_plan = create_empty_bud_from_bud(yao_duty, yao_str)
+    yao_plan.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    yao_plan.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
+    yao_plan.set_acct_respect(yao_pool)
+    yao_plan = listen_to_speaker_agenda(yao_plan, speaker=sue_plan)
 
     # THEN irrational bud is ignored
-    assert len(yao_job.get_agenda_dict()) != 3
-    assert len(yao_job.get_agenda_dict()) == 0
-    zia_acctunit = yao_job.get_acct(zia_str)
-    sue_acctunit = yao_job.get_acct(sue_str)
+    assert len(yao_plan.get_agenda_dict()) != 3
+    assert len(yao_plan.get_agenda_dict()) == 0
+    zia_acctunit = yao_plan.get_acct(zia_str)
+    sue_acctunit = yao_plan.get_acct(sue_str)
     print(f"{sue_acctunit.debtit_belief=}")
     print(f"{sue_acctunit._irrational_debtit_belief=}")
     assert zia_acctunit._irrational_debtit_belief == 0

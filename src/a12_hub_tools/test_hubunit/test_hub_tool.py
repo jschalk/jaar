@@ -17,7 +17,7 @@ from src.a11_deal_cell_logic.cell import (
 )
 from src.a12_hub_tools.hub_path import (
     create_gut_path,
-    create_plan_path,
+    create_job_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
     create_cell_acct_mandate_ledger_path,
@@ -31,10 +31,10 @@ from src.a12_hub_tools.hub_tool import (
     open_bud_file,
     save_gut_file,
     open_gut_file,
-    save_plan_file,
-    open_plan_file,
+    save_job_file,
+    open_job_file,
     gut_file_exists,
-    plan_file_exists,
+    job_file_exists,
     get_owners_downhill_event_ints,
     collect_owner_event_dir_sets,
     get_budevent_obj,
@@ -177,61 +177,61 @@ def test_open_gut_file_ReturnsObj_Scenario1_FileExists():
     assert sue_bud == open_gut_file(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_save_plan_file_SetsFile(env_dir_setup_cleanup):
+def test_save_job_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_plan_path = create_plan_path(fisc_mstr_dir, a23_str, sue_str)
+    sue_job_path = create_job_path(fisc_mstr_dir, a23_str, sue_str)
     sue_bud = budunit_shop(sue_str, a23_str)
-    assert os_path_exists(sue_plan_path) is False
+    assert os_path_exists(sue_job_path) is False
 
     # WHEN
-    save_plan_file(fisc_mstr_dir, sue_bud)
+    save_job_file(fisc_mstr_dir, sue_bud)
 
     # THEN
-    assert os_path_exists(sue_plan_path)
+    assert os_path_exists(sue_job_path)
 
 
-def test_plan_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_job_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str, a23_str)
-    assert plan_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
+    assert job_file_exists(fisc_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_plan_file(fisc_mstr_dir, sue_bud)
+    save_job_file(fisc_mstr_dir, sue_bud)
 
     # THEN
-    assert plan_file_exists(fisc_mstr_dir, a23_str, sue_str)
+    assert job_file_exists(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_open_plan_file_ReturnsObj_Scenario0_noFile():
+def test_open_job_file_ReturnsObj_Scenario0_noFile():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_plan_path = create_plan_path(fisc_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_plan_path) is False
+    sue_job_path = create_job_path(fisc_mstr_dir, a23_str, sue_str)
+    assert os_path_exists(sue_job_path) is False
 
     # WHEN / THEN
-    assert not open_plan_file(fisc_mstr_dir, a23_str, sue_str)
+    assert not open_job_file(fisc_mstr_dir, a23_str, sue_str)
 
 
-def test_open_plan_file_ReturnsObj_Scenario1_FileExists():
+def test_open_job_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
     fisc_mstr_dir = get_listen_temp_env_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_plan_path = create_plan_path(fisc_mstr_dir, a23_str, sue_str)
+    sue_job_path = create_job_path(fisc_mstr_dir, a23_str, sue_str)
     sue_bud = budunit_shop(sue_str, a23_str)
-    save_plan_file(fisc_mstr_dir, sue_bud)
-    assert os_path_exists(sue_plan_path)
+    save_job_file(fisc_mstr_dir, sue_bud)
+    assert os_path_exists(sue_job_path)
 
     # WHEN / THEN
-    assert sue_bud == open_plan_file(fisc_mstr_dir, a23_str, sue_str)
+    assert sue_bud == open_job_file(fisc_mstr_dir, a23_str, sue_str)
 
 
 def test_save_arbitrary_budevent_SetsFile_Scenario0(env_dir_setup_cleanup):

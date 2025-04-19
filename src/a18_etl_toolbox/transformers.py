@@ -30,7 +30,7 @@ from src.a12_hub_tools.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     open_bud_file,
-    open_plan_file,
+    open_job_file,
 )
 from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
@@ -87,7 +87,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db, insert_plan_obj
+from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db, insert_job_obj
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.a18_etl_toolbox.pidgin_agg import (
     pidginheartbook_shop,
@@ -198,9 +198,9 @@ class MineTocartTransformer:
         return df
 
     def _save_to_cart_staging(self, idea_number: str, dfs: list):
-        plan_df = pandas_concat(dfs)
+        job_df = pandas_concat(dfs)
         cart_path = create_path(self.cart_dir, f"{idea_number}.xlsx")
-        upsert_sheet(cart_path, "cart_staging", plan_df)
+        upsert_sheet(cart_path, "cart_staging", job_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -1118,14 +1118,14 @@ def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
             save_file(gut_path, None, max_event_bud_json)
 
 
-def etl_fisc_gut_to_fisc_plan(fisc_mstr_dir: str):
+def etl_fisc_gut_to_fisc_job(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_title in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
-        x_fiscunit.generate_all_plans()
+        x_fiscunit.generate_all_jobs()
 
 
-def etl_fisc_plan_jsons_to_fisc_db(
+def etl_fisc_job_jsons_to_fisc_db(
     conn_or_cursor: sqlite3_Connection, world_id: str, fisc_mstr_dir: str
 ):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -1133,5 +1133,5 @@ def etl_fisc_plan_jsons_to_fisc_db(
         fisc_path = create_path(fiscs_dir, fisc_title)
         owners_dir = create_path(fisc_path, "owners")
         for owner_name in get_level1_dirs(owners_dir):
-            plan_obj = open_plan_file(fisc_mstr_dir, fisc_title, owner_name)
-            insert_plan_obj(conn_or_cursor, world_id, plan_obj)
+            job_obj = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
+            insert_job_obj(conn_or_cursor, world_id, job_obj)

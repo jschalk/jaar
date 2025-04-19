@@ -3,11 +3,13 @@ from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
 def _is_empty_bud(x_bud: BudUnit) -> bool:
-    empty_bud = create_empty_bud(x_bud)
+    empty_bud = create_empty_bud_from_bud(x_bud)
     return x_bud.get_dict() == empty_bud.get_dict()
 
 
-def create_empty_bud(ref_bud: BudUnit, x_owner_name: OwnerName = None) -> BudUnit:
+def create_empty_bud_from_bud(
+    ref_bud: BudUnit, x_owner_name: OwnerName = None
+) -> BudUnit:
     x_owner_name = ref_bud.owner_name if x_owner_name is None else x_owner_name
     x_bridge = ref_bud.bridge
     x_fund_pool = ref_bud.fund_pool
@@ -25,22 +27,22 @@ def create_empty_bud(ref_bud: BudUnit, x_owner_name: OwnerName = None) -> BudUni
     )
 
 
-def create_listen_basis(x_duty: BudUnit) -> BudUnit:
-    x_listen = create_empty_bud(x_duty, x_duty.owner_name)
-    x_listen.accts = x_duty.accts
-    x_listen.set_max_tree_traverse(x_duty.max_tree_traverse)
-    if x_duty.credor_respect is not None:
-        x_listen.set_credor_respect(x_duty.credor_respect)
-    if x_duty.debtor_respect is not None:
-        x_listen.set_debtor_respect(x_duty.debtor_respect)
+def create_listen_basis(x_bud: BudUnit) -> BudUnit:
+    x_listen = create_empty_bud_from_bud(x_bud, x_bud.owner_name)
+    x_listen.accts = x_bud.accts
+    x_listen.set_max_tree_traverse(x_bud.max_tree_traverse)
+    if x_bud.credor_respect is not None:
+        x_listen.set_credor_respect(x_bud.credor_respect)
+    if x_bud.debtor_respect is not None:
+        x_listen.set_debtor_respect(x_bud.debtor_respect)
     for x_acctunit in x_listen.accts.values():
         x_acctunit.reset_listen_calculated_attrs()
     return x_listen
 
 
-def get_default_plan(gut: BudUnit) -> BudUnit:
-    default_plan = create_listen_basis(gut)
-    default_plan.last_pack_id = gut.last_pack_id
-    default_plan.credor_respect = None
-    default_plan.debtor_respect = None
-    return default_plan
+def get_default_job(gut: BudUnit) -> BudUnit:
+    default_job = create_listen_basis(gut)
+    default_job.last_pack_id = gut.last_pack_id
+    default_job.credor_respect = None
+    default_job.debtor_respect = None
+    return default_job

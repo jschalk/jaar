@@ -24,7 +24,7 @@ from src.a12_hub_tools.hub_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
     create_gut_path,
-    create_plan_path,
+    create_job_path,
 )
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
@@ -311,13 +311,13 @@ def test_create_gut_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_gut_path) == doc_str
 
 
-def test_create_plan_path_HasDocString():
+def test_create_job_path_HasDocString():
     # ESTABLISH
-    doc_str = create_plan_path(
+    doc_str = create_job_path(
         fisc_mstr_dir="fisc_mstr_dir",
         fisc_title=fisc_title_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_plan_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_job_path) == doc_str

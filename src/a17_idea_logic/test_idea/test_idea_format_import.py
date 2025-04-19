@@ -86,7 +86,7 @@ def test_open_csv_ReturnsObjWhenNoFileExists(idea_env_setup_cleanup):
     assert acct_dataframe is None
 
 
-def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvTo_plan(
+def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvTo_job(
     idea_env_setup_cleanup,
 ):
     # ESTABLISH
@@ -140,7 +140,7 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvTo_plan(
     assert yao_acctunit.debtit_belief == yao_debtit_belief
 
 
-def test_load_idea_csv_csvTo_plan(
+def test_load_idea_csv_csvTo_job(
     idea_env_setup_cleanup,
 ):
     # ESTABLISH
