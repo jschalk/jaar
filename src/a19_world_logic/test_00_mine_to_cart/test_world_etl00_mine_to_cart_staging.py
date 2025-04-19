@@ -16,7 +16,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_mine_to_cart_staging_CreatescartFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
