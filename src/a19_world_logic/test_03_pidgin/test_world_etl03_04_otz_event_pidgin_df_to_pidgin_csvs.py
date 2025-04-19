@@ -13,7 +13,7 @@ from src.a18_etl_toolbox.tran_path import (
 )
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame
@@ -60,7 +60,7 @@ def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_ro
     e9_road_rows = [e9_road0, e9_road1]
     e9_road_df = DataFrame(e9_road_rows, columns=road_file_columns)
 
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_dir = create_path(fizz_world._faces_otz_dir, bob_str)
     sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)

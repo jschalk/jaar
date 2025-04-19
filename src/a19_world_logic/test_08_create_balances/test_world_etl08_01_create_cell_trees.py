@@ -9,7 +9,10 @@ from src.a12_hub_tools.hub_tool import (
     cellunit_get_from_dir,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -17,7 +20,7 @@ def test_worldunit_create_fisc_cell_trees_Scenaro0_timepoint_Empty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
@@ -36,7 +39,7 @@ def test_worldunit_create_fisc_cell_trees_Scenaro0_timepoint_Empty(
 
 def test_worldunit_create_fisc_cell_trees_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
@@ -62,7 +65,7 @@ def test_worldunit_create_fisc_cell_trees_Scenaro1_LedgerDepth0(env_dir_setup_cl
 
 def test_worldunit_create_fisc_cell_trees_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
@@ -150,7 +153,7 @@ def test_worldunit_create_fisc_cell_trees_Scenaro3_LedgerDepth1_MostRecentEvent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
@@ -240,7 +243,7 @@ def test_worldunit_create_fisc_cell_trees_Scenaro4_LedgerDepth1_OneOwnerHasNoPas
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"
@@ -316,7 +319,7 @@ def test_worldunit_create_fisc_cell_trees_Scenaro5_LedgerDepth1_ZeroQuotaDoesNot
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     bob_str = "Bob"

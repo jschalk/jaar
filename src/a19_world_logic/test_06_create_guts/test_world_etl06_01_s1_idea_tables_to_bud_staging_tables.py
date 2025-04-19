@@ -15,7 +15,7 @@ from src.a17_idea_logic.idea_config import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
@@ -35,7 +35,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_CreatesBudStagingTables(
     # ESTABLISH
     staging_str = "_put_staging"
     agg_str = "_put_agg"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         assert len(get_existing_bud_x_tables(cursor, staging_str)) == 0
@@ -67,7 +67,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagin
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
@@ -79,7 +79,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagin
 {sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
@@ -158,7 +158,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_Sets_error_message(env_dir_setup_c
     accord45_str = "accord45"
     yao_credit_belief5 = 5
     yao_credit_belief7 = 7
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_bud_tables(cursor)

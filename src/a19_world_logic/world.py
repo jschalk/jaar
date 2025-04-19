@@ -65,10 +65,6 @@ from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 
-def get_default_worlds_dir() -> str:
-    return "src/a19_world_logic/examples/worlds"
-
-
 @dataclass
 class WorldUnit:
     world_id: WorldID = None
@@ -309,14 +305,12 @@ class WorldUnit:
 
 def worldunit_shop(
     world_id: WorldID,
-    worlds_dir: str = None,
+    worlds_dir: str,
     mine_dir: str = None,
     world_time_nigh: TimeLinePoint = None,
     timeconversions: dict[TimeLineTitle, TimeConversion] = None,
     _fiscunits: set[FiscTitle] = None,
 ) -> WorldUnit:
-    if worlds_dir is None:
-        worlds_dir = get_default_worlds_dir()
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,

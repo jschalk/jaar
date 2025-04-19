@@ -8,7 +8,10 @@ from src.a08_bud_atom_logic.atom_config import (
 
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame
 from os.path import exists as os_path_exists
 
@@ -34,7 +37,7 @@ def test_WorldUnit_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
     sue3 = [sue_inx, event7, accord23_str, yao_inx, yao_inx]
     sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     inx_str = "inx"
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_excel_filename = "br00011.xlsx"

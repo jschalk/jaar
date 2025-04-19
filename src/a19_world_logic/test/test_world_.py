@@ -7,7 +7,7 @@ from src.a19_world_logic.world import (
     worldunit_shop,
 )
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -39,7 +39,7 @@ def test_WorldUnit_Exists():
 def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = WorldUnit("fizz")
-    x_example_dir = create_path(get_test_worlds_dir(), "example_dir")
+    x_example_dir = create_path(worlds_dir(), "example_dir")
     x_mine_dir = create_path(x_example_dir, "mine")
 
     assert fizz_world._world_dir is None
@@ -64,8 +64,8 @@ def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=get_test_worlds_dir())
-    x_world_dir = create_path(get_test_worlds_dir(), fizz_str)
+    fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=worlds_dir())
+    x_world_dir = create_path(worlds_dir(), fizz_str)
     x_faces_otz_dir = create_path(x_world_dir, "faces_otz")
     x_faces_inz_dir = create_path(x_world_dir, "faces_inz")
     x_mine_dir = create_path(x_world_dir, "mine")
@@ -104,8 +104,8 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
-    worlds2_dir = create_path(get_test_worlds_dir(), "worlds2")
-    example_mine_dir = create_path(get_test_worlds_dir(), "example_mine")
+    worlds2_dir = create_path(worlds_dir(), "worlds2")
+    example_mine_dir = create_path(worlds_dir(), "example_mine")
     five_world_id = "five"
     world2_time_nigh = 55
     accord45_str = "accord45"
@@ -140,12 +140,12 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     a23_str = "accord23"
 
     # WHEN
-    x_world = worldunit_shop(a23_str)
+    x_world = worldunit_shop(a23_str, worlds_dir())
 
     # THEN
-    world_dir = create_path(get_test_worlds_dir(), x_world.world_id)
+    world_dir = create_path(worlds_dir(), x_world.world_id)
     assert x_world.world_id == a23_str
-    assert x_world.worlds_dir == get_test_worlds_dir()
+    assert x_world.worlds_dir == worlds_dir()
     assert x_world.world_time_nigh == 0
     assert x_world.timeconversions == {}
     assert x_world._events == {}
@@ -211,7 +211,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
 
 def test_init_fiscunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_test_worlds_dir()
+    x_dir = worlds_dir()
 
     # WHEN
     x_fiscunits = init_fiscunits_from_dirs([])
@@ -222,7 +222,7 @@ def test_init_fiscunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
 
 def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop("accord23")
+    x_world = worldunit_shop("accord23", worlds_dir())
     assert x_world._events == {}
 
     # WHEN
@@ -237,7 +237,7 @@ def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
 
 def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop("accord23")
+    x_world = worldunit_shop("accord23", worlds_dir())
     e5_event_int = 5
     e5_face_name = "Sue"
     assert x_world.event_exists(e5_event_int) is False
@@ -251,7 +251,7 @@ def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop("accord23")
+    x_world = worldunit_shop("accord23", worlds_dir())
     e5_event_int = 5
     e5_face_name = "Sue"
     assert x_world.get_event(e5_event_int) is None

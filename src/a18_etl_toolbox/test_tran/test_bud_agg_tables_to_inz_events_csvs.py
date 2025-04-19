@@ -88,7 +88,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 #     event7 = 7
 #     accord23_str = "accord23"
 #     accord45_str = "accord45"
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     x_error_message = "Inconsistent bud data"
 #     acct_name_delete_str = get_delete_key_name(acct_name_str())
 

@@ -5,7 +5,7 @@
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     bob_str = "Bob"
 #     sue_str = "Sue"
 #     event3 = 3

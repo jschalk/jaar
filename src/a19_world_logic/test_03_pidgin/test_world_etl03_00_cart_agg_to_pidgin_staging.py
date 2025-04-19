@@ -28,7 +28,7 @@ from src.a18_etl_toolbox.tran_path import create_cart_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -55,7 +55,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
 
 def test_WorldUnit_cart_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

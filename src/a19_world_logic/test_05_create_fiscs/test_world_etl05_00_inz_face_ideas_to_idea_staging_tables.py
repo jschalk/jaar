@@ -6,7 +6,10 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from sqlite3 import connect as sqlite3_connect
 
 
@@ -20,7 +23,7 @@ def test_WorldUnit_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
@@ -32,7 +35,7 @@ def test_WorldUnit_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     print(f"{sue_inz_dir=}")
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
 
     # WHEN / THEN
     br00011_staging_tablename = f"{br00011_str}_staging"

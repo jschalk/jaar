@@ -26,7 +26,10 @@ from src.a12_hub_tools.hub_path import (
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame
 from os.path import exists as os_path_exists
 
@@ -36,7 +39,7 @@ def test_WorldUnit_mine_to_burdens_Scenario0_DeletesPreviousFiles(
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     print(f"{fizz_world.worlds_dir=}")
     mstr_dir = fizz_world._fisc_mstr_dir
     fiscs_dir = create_path(mstr_dir, "fiscs")
@@ -63,7 +66,7 @@ def test_WorldUnit_mine_to_burdens_Scenario0_DeletesPreviousFiles(
 def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     # delete_dir(fizz_world.worlds_dir)
     sue_str = "Sue"
     event_1 = 1
@@ -152,7 +155,7 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str)
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     event_2 = 2
     ex_filename = "fizzbuzz.xlsx"
@@ -182,7 +185,7 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
 # def test_WorldUnit_mine_to_burdens_CreatescartFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
-#     fizz_world = worldunit_shop(fizz_str)
+#     fizz_world = worldunit_shop(fizz_str, worlds_dir())
 #     delete_dir(fizz_world.worlds_dir)
 #     sue_str = "Sue"
 #     event_1 = 1

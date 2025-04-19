@@ -21,7 +21,10 @@ from src.a19_world_logic.examples.example_worlds import (
     get_bob_mop_with_reason_budunit_example,
     example_casa_clean_factunit,
 )
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -29,7 +32,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     accord23_str = "accord23"
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     accord23_fisc = fiscunit_shop(accord23_str, fisc_mstr_dir)
@@ -52,7 +55,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
     accord23_fisc = fiscunit_shop(a23_str, mstr_dir)
@@ -86,7 +89,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
 
@@ -159,7 +162,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     fisc_mstr_dir = fizz_world._fisc_mstr_dir
 #     a23_str = "accord23"
 
@@ -206,7 +209,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     fisc_mstr_dir = fizz_world._fisc_mstr_dir
 #     a23_str = "accord23"
 #     a23_penny = 2
@@ -260,7 +263,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     a23_str = "accord23"
 #     mstr_dir = fizz_world._fisc_mstr_dir
 #     accord23_fisc = fiscunit_shop(a23_str, mstr_dir)
@@ -280,7 +283,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 
 # def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro1_DealExists(env_dir_setup_cleanup):
 #     # ESTABLISH
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     mstr_dir = fizz_world._fisc_mstr_dir
 #     a23_str = "accord23"
 
@@ -316,7 +319,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     fizz_world = worldunit_shop("fizz")
+# #     fizz_world = worldunit_shop("fizz", worlds_dir())
 # #     mstr_dir = fizz_world._fisc_mstr_dir
 # #     a23_str = "accord"
 # #     tp5 = 5
@@ -347,7 +350,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     fizz_world = worldunit_shop("fizz")
+# #     fizz_world = worldunit_shop("fizz", worlds_dir())
 # #     mstr_dir = fizz_world._fisc_mstr_dir
 # #     a23_str = "accord"
 # #     tp5 = 5

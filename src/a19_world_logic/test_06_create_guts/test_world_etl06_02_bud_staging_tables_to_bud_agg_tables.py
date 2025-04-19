@@ -14,7 +14,7 @@ from src.a17_idea_logic.idea_config import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -34,7 +34,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudPutAggTables(
     accord45_str = "accord45"
     yao_credit_belief5 = 5
     yao_credit_belief7 = 7
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     x_error_message = "Inconsistent bud data"
 
     with sqlite3_connect(":memory:") as bud_db_conn:
@@ -82,7 +82,7 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
     event7 = 7
     accord23_str = "accord23"
     accord45_str = "accord45"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     x_error_message = "Inconsistent bud data"
     acct_name_delete_str = get_delete_key_name(acct_name_str())
 

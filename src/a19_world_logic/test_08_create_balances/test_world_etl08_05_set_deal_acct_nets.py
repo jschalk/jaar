@@ -9,7 +9,10 @@ from src.a15_fisc_logic.fisc import (
     get_from_dict as fiscunit_get_from_dict,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -17,7 +20,7 @@ def test_WorldUnit_create_deal_mandate_ledgers_Scenaro0_DealEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     a23_str = "accord23"
     mstr_dir = fizz_world._fisc_mstr_dir
     accord23_fisc = fiscunit_shop(a23_str, mstr_dir)
@@ -37,7 +40,7 @@ def test_WorldUnit_create_deal_mandate_ledgers_Scenaro0_DealEmpty(
 
 def test_WorldUnit_create_deals_root_cells_Scenaro1_DealExists(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._fisc_mstr_dir
     a23_str = "accord23"
 

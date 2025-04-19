@@ -2,7 +2,10 @@ from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path, create_gut_path
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -19,7 +22,7 @@ def test_WorldUnit_event_inherited_budunits_to_fisc_gut_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3

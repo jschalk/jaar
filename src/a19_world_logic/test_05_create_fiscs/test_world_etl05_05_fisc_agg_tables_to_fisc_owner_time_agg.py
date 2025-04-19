@@ -4,12 +4,16 @@ from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a18_etl_toolbox.transformers import create_fisc_tables
 from src.a19_world_logic.world import worldunit_shop
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from sqlite3 import connect as sqlite3_connect
 
 
 def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro0_SetsTableAttr():
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
@@ -29,7 +33,7 @@ def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro0_SetsTableAttr():
 
 def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro1_SetsTableAttr():
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
     sue_str = "Sue"
     event3 = 3

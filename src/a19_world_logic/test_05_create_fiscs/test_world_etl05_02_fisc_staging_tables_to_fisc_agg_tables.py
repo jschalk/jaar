@@ -9,7 +9,7 @@ from src.a08_bud_atom_logic.atom_config import (
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -27,7 +27,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
     event7 = 7
     accord23_str = "accord23"
     accord45_str = "accord45"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
@@ -38,7 +38,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
 {sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
@@ -108,7 +108,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
     amount_t22 = 2222
     amount_t23 = 2323
     x_celldepth = 2
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     # create deal rows
     # create cash rows
@@ -130,7 +130,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
 """
     save_file(sue_inz_dir, br00001_csv_filename, br00001_csv_str)
     save_file(sue_inz_dir, br00002_csv_filename, br00002_csv_str)
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()

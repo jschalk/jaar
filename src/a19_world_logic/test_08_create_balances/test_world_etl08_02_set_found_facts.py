@@ -5,14 +5,17 @@ from src.a11_deal_cell_logic.cell import cellunit_shop
 from src.a12_hub_tools.hub_path import create_cell_dir_path as cell_dir
 from src.a12_hub_tools.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 
 
 def test_set_cell_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._fisc_mstr_dir
     bob_str = "Bob"
     yao_str = "Yao"

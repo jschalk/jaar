@@ -4,7 +4,10 @@ from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, cart_valid_str, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
@@ -39,7 +42,7 @@ def test_WorldUnit_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_S
     zia2 = [zia_str, event9, accord23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=idea_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     br00003_filename = "br00003.xlsx"
     sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
     zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)

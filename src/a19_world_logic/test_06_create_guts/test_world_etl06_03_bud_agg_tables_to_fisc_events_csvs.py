@@ -11,7 +11,10 @@ from src.a12_hub_tools.hub_path import create_owner_event_dir_path
 
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
@@ -28,7 +31,7 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
     accord23_str = "accord23"
     yao_credit_belief5 = 5
     sue_credit_belief7 = 7
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
@@ -92,7 +95,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 #     event7 = 7
 #     accord23_str = "accord23"
 #     accord45_str = "accord45"
-#     fizz_world = worldunit_shop("fizz")
+#     fizz_world = worldunit_shop("fizz", worlds_dir())
 #     x_error_message = "Inconsistent bud data"
 #     acct_name_delete_str = get_delete_key_name(acct_name_str())
 

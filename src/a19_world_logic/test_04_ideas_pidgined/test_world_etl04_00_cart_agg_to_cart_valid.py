@@ -10,7 +10,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas.testing import (
@@ -44,7 +44,7 @@ def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fizz_world.set_event(event1, sue_str)
     fizz_world.set_event(event9, yao_str)
     legitimate_events = {event1, event9}

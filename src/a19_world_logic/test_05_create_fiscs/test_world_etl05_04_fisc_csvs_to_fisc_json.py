@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
+from src.a00_data_toolboxs.file_toolbox import open_file
 from src.a00_data_toolboxs.db_toolbox import get_row_count, db_table_exists
 from src.a02_finance_toolboxs.deal import bridge_str, owner_name_str, fisc_title_str
 from src.a07_calendar_logic.chrono import (
@@ -9,26 +9,17 @@ from src.a07_calendar_logic.chrono import (
     timeline_config_shop,
     timelineunit_shop,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    acct_name_str,
-    face_name_str,
-    fund_coin_str,
-    penny_str,
-    respect_bit_str,
-)
+from src.a08_bud_atom_logic.atom_config import fund_coin_str, penny_str, respect_bit_str
 from src.a12_hub_tools.hub_path import create_fisc_json_path
 from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
 from src.a15_fisc_logic.fisc_config import fiscunit_str
-from src.a18_etl_toolbox.transformers import (
-    create_fisc_tables,
-    etl_fisc_agg_tables_to_fisc_jsons,
-)
+from src.a18_etl_toolbox.transformers import create_fisc_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir,
+    get_test_worlds_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -41,7 +32,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFi
     # ESTABLISH
     accord23_str = "accord23"
     accord45_str = "accord45"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     fiscunit_agg_tablename = f"{fiscunit_str()}_agg"
 
@@ -92,7 +83,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUn
     a45_yr1_jan1_offset = 501
     a45_monthday_distortion = 17
     a45_timeline_title = "a45_timeline"
-    fizz_world = worldunit_shop("fizz")
+    fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     fiscunit_agg_tablename = f"{fiscunit_str()}_agg"
     with sqlite3_connect(":memory:") as fisc_db_conn:
