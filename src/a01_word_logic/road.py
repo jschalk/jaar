@@ -78,10 +78,6 @@ class WorldID(str):
     pass
 
 
-def get_default_world_id() -> WorldID:
-    return WorldID("TestingWorld3")
-
-
 class FaceName(NameUnit):
     pass
 

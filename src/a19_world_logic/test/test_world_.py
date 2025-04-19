@@ -7,7 +7,6 @@ from src.a19_world_logic.world import (
     worldunit_shop,
 )
 from src.a19_world_logic.examples.world_env import (
-    get_test_world_id,
     get_test_worlds_dir,
     env_dir_setup_cleanup,
 )
@@ -137,12 +136,15 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
 
 
 def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
-    # ESTABLISH / WHEN
-    x_world = worldunit_shop()
+    # ESTABLISH
+    a23_str = "accord23"
+
+    # WHEN
+    x_world = worldunit_shop(a23_str)
 
     # THEN
     world_dir = create_path(get_test_worlds_dir(), x_world.world_id)
-    assert x_world.world_id == get_test_world_id()
+    assert x_world.world_id == a23_str
     assert x_world.worlds_dir == get_test_worlds_dir()
     assert x_world.world_time_nigh == 0
     assert x_world.timeconversions == {}
@@ -220,7 +222,7 @@ def test_init_fiscunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
 
 def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop()
+    x_world = worldunit_shop("accord23")
     assert x_world.events == {}
 
     # WHEN
@@ -235,7 +237,7 @@ def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
 
 def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop()
+    x_world = worldunit_shop("accord23")
     e5_event_int = 5
     e5_face_name = "Sue"
     assert x_world.event_exists(e5_event_int) is False
@@ -249,7 +251,7 @@ def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop()
+    x_world = worldunit_shop("accord23")
     e5_event_int = 5
     e5_face_name = "Sue"
     assert x_world.get_event(e5_event_int) is None

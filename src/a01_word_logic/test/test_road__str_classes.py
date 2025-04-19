@@ -10,7 +10,6 @@ from src.a01_word_logic.road import (
     GroupLabel,
     default_bridge_if_None,
     WorldID,
-    get_default_world_id,
     TimeLineTitle,
     FaceName,
     get_default_face_name,
@@ -185,11 +184,6 @@ def test_WorldID_Exists():
     # ESTABLISH / WHEN / THEN
     assert WorldID() == ""
     assert WorldID("cookie") == "cookie"
-
-
-def test_get_default_world_id_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_default_world_id() == "TestingWorld3"
 
 
 def test_FaceName_Exists():

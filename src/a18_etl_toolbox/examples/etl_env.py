@@ -1,10 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import delete_dir
-from src.a01_word_logic.road import WorldID, get_default_world_id
 from pytest import fixture as pytest_fixture
-
-
-def get_test_world_id() -> WorldID:
-    return get_default_world_id()
 
 
 def get_test_etl_dir():

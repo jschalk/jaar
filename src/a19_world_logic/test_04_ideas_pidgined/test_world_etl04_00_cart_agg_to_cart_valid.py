@@ -48,7 +48,7 @@ def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     fizz_world.set_event(event1, sue_str)
     fizz_world.set_event(event9, yao_str)
     legitimate_events = {event1, event9}
-    assert fizz_world.legitimate_events() == legitimate_events
+    assert set(fizz_world.events.keys()) == legitimate_events
     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     cart_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
     upsert_sheet(cart_file_path, cart_agg_str(), cart_agg_df)
