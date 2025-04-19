@@ -17,17 +17,20 @@ from src.a06_bud_logic.bud_tool import (
     budunit_str,
 )
 from src.a12_hub_tools.hub_tool import save_job_file
-from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
-from src.a18_etl_toolbox.transformers import etl_fisc_job_jsons_to_fisc_db
-from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
+from src.a20_lobby_db_toolbox.lobby_sqlstrs import create_job_tables
+from src.a20_lobby_db_toolbox.lobby_tranformers import etl_fisc_job_jsons_to_db
+from src.a20_lobby_db_toolbox.examples.lobby_db_env import (
+    env_dir_setup_cleanup,
+    get_test_lobby_dir,
+)
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_fisc_job_jsons_to_fisc_db_SetsDB_Scenario0(
+def test_etl_fisc_job_jsons_to_db_SetsDB_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_test_lobby_dir()
     x_world_id = "music23"
     a23_str = "accord23"
     sue_str = "Sue"
@@ -82,7 +85,7 @@ def test_etl_fisc_job_jsons_to_fisc_db_SetsDB_Scenario0(
         assert get_row_count(cursor, budteam_job_table) == 0
 
         # WHEN
-        etl_fisc_job_jsons_to_fisc_db(cursor, x_world_id, fisc_mstr_dir)
+        etl_fisc_job_jsons_to_db(cursor, x_world_id, fisc_mstr_dir)
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1

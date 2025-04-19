@@ -87,7 +87,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db, insert_job_obj
+from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.a18_etl_toolbox.pidgin_agg import (
     pidginheartbook_shop,
@@ -1123,15 +1123,3 @@ def etl_fisc_gut_to_fisc_job(fisc_mstr_dir: str):
     for fisc_title in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
         x_fiscunit.generate_all_jobs()
-
-
-def etl_fisc_job_jsons_to_fisc_db(
-    conn_or_cursor: sqlite3_Connection, world_id: str, fisc_mstr_dir: str
-):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_title)
-        owners_dir = create_path(fisc_path, "owners")
-        for owner_name in get_level1_dirs(owners_dir):
-            job_obj = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
-            insert_job_obj(conn_or_cursor, world_id, job_obj)
