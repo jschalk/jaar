@@ -30,9 +30,11 @@ from src.a06_bud_logic.bud_tool import (
     budunit_str,
 )
 from src.a12_hub_tools.hub_tool import save_job_file
+from src.a20_lobby_db_toolbox.lobby_path import create_fisc_mstr_dir_path
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import create_job_tables
 from src.a20_lobby_db_toolbox.lobby_tranformers import (
-    etl_fisc_job_jsons_to_db,
+    etl_fisc_jobs_json_to_db,
+    etl_fiscs_jobs_json_to_db,
     ObjKeysHolder,
     insert_job_budmemb,
     insert_job_budacct,
@@ -967,12 +969,14 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budteam_job_table) == 1
 
 
-def test_etl_fisc_job_jsons_to_db_SetsDB_Scenario0(
+def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_lobby_dir()
-    x_world_id = "music23"
+    lobby_mstr_dir = get_test_lobby_dir()
+    c23_str = "Chat23"
+    m23_str = "music23"
+    m23_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c23_str, m23_str)
     a23_str = "accord23"
     sue_str = "Sue"
     bob_str = "Bob"
@@ -997,7 +1001,7 @@ def test_etl_fisc_job_jsons_to_db_SetsDB_Scenario0(
     sue_bud.add_fact(status_road, clean_road)
     print(f"{sue_bud.get_item_obj(casa_road).teamunit=}")
     print(f"{sue_bud.get_item_obj(casa_road).get_dict()=}")
-    save_job_file(fisc_mstr_dir, sue_bud)
+    save_job_file(m23_fisc_mstr_dir, sue_bud)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -1026,7 +1030,7 @@ def test_etl_fisc_job_jsons_to_db_SetsDB_Scenario0(
         assert get_row_count(cursor, budteam_job_table) == 0
 
         # WHEN
-        etl_fisc_job_jsons_to_db(cursor, x_world_id, fisc_mstr_dir)
+        etl_fisc_jobs_json_to_db(cursor, m23_str, m23_fisc_mstr_dir)
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1
@@ -1040,3 +1044,52 @@ def test_etl_fisc_job_jsons_to_db_SetsDB_Scenario0(
         assert get_row_count(cursor, budreas_job_table) == 1
         assert get_row_count(cursor, budprem_job_table) == 1
         assert get_row_count(cursor, budteam_job_table) == 1
+
+
+def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    lobby_mstr_dir = get_test_lobby_dir()
+    c77_str = "Chat77"
+    a23_str = "accord23"
+    sue_str = "Sue"
+    a23_sue_bud = budunit_shop(sue_str, a23_str)
+    a23_sue_bud.add_acctunit(sue_str)
+    a23_sue_bud.add_item(a23_sue_bud.make_l1_road("casa"))
+
+    a99_str = "accord99"
+    bob_str = "Bob"
+    a99_sue_bud = budunit_shop(sue_str, a99_str)
+    a99_sue_bud.add_acctunit(sue_str)
+    a99_sue_bud.add_acctunit(bob_str)
+    a99_sue_bud.add_item(a99_sue_bud.make_l1_road("casa"))
+    a99_sue_bud.add_item(a99_sue_bud.make_l1_road("sports"))
+
+    w34_str = "world34"
+    w99_str = "world99"
+    w34_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w34_str)
+    w99_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w99_str)
+    print(f"{w34_fisc_mstr_dir=}")
+    print(f"{w99_fisc_mstr_dir=}")
+    save_job_file(w34_fisc_mstr_dir, a23_sue_bud)
+    save_job_file(w99_fisc_mstr_dir, a99_sue_bud)
+
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_job_tables(cursor)
+        budacct_job_table = f"{bud_acctunit_str()}_job"
+        buditem_job_table = f"{bud_itemunit_str()}_job"
+        budunit_job_table = f"{budunit_str()}_job"
+        assert get_row_count(cursor, budunit_job_table) == 0
+        assert get_row_count(cursor, buditem_job_table) == 0
+        assert get_row_count(cursor, budacct_job_table) == 0
+
+        # WHEN
+        worlds = [w34_str, w99_str]
+        etl_fiscs_jobs_json_to_db(cursor, lobby_mstr_dir, c77_str, worlds)
+
+        # THEN
+        assert get_row_count(cursor, budunit_job_table) == 2
+        assert get_row_count(cursor, buditem_job_table) == 5
+        assert get_row_count(cursor, budacct_job_table) == 3

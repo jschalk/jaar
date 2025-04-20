@@ -18,27 +18,27 @@ def lobby_mstr_dir_str() -> str:
     return "lobby_mstr_dir"
 
 
-def create_lobby_dir_path(lobbys_mstr_dir: str, lobby_id: LobbyID) -> str:
+def create_lobby_dir_path(lobby_mstr_dir: str, lobby_id: LobbyID) -> str:
     """Returns path: lobby_mstr_dir\\lobbys\\lobby_id"""
-    lobbys_dir = create_path(lobbys_mstr_dir, "lobbys")
+    lobbys_dir = create_path(lobby_mstr_dir, "lobbys")
     return create_path(lobbys_dir, lobby_id)
 
 
 def create_world_dir_path(
-    lobbys_mstr_dir: str, lobby_id: LobbyID, world_id: WorldID
+    lobby_mstr_dir: str, lobby_id: LobbyID, world_id: WorldID
 ) -> str:
     """Returns path: lobby_mstr_dir\\lobbys\\lobby_id\\worlds\\world_id"""
-    lobbys_dir = create_path(lobbys_mstr_dir, "lobbys")
+    lobbys_dir = create_path(lobby_mstr_dir, "lobbys")
     lobby_dir = create_path(lobbys_dir, lobby_id)
     worlds_dir = create_path(lobby_dir, "worlds")
     return create_path(worlds_dir, world_id)
 
 
 def create_fisc_mstr_dir_path(
-    lobbys_mstr_dir: str, lobby_id: LobbyID, world_id: WorldID
+    lobby_mstr_dir: str, lobby_id: LobbyID, world_id: WorldID
 ) -> str:
     """Returns path: lobby_mstr_dir\\lobbys\\lobby_id\\worlds\\world_id\\fisc_mstr_dir"""
-    lobbys_dir = create_path(lobbys_mstr_dir, "lobbys")
+    lobbys_dir = create_path(lobby_mstr_dir, "lobbys")
     lobby_dir = create_path(lobbys_dir, lobby_id)
     worlds_dir = create_path(lobby_dir, "worlds")
     world_id_dir = create_path(worlds_dir, world_id)

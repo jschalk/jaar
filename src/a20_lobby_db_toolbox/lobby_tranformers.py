@@ -9,6 +9,7 @@ from src.a05_item_logic.healer import HealerLink
 from src.a05_item_logic.item import ItemUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a12_hub_tools.hub_tool import open_job_file
+from src.a20_lobby_db_toolbox.lobby_path import create_fisc_mstr_dir_path, LobbyID
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
     create_budmemb_metrics_insert_sqlstr,
     create_budacct_metrics_insert_sqlstr,
@@ -220,7 +221,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
 
 
-def etl_fisc_job_jsons_to_db(
+def etl_fisc_jobs_json_to_db(
     conn_or_cursor: sqlite3_Connection, world_id: str, fisc_mstr_dir: str
 ):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -230,3 +231,14 @@ def etl_fisc_job_jsons_to_db(
         for owner_name in get_level1_dirs(owners_dir):
             job_obj = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
             insert_job_obj(conn_or_cursor, world_id, job_obj)
+
+
+def etl_fiscs_jobs_json_to_db(
+    conn_or_cursor: sqlite3_Connection,
+    lobby_mstr_dir,
+    lobby_id: LobbyID,
+    worlds: list[WorldID],
+):
+    for world_id in worlds:
+        fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, lobby_id, world_id)
+        etl_fisc_jobs_json_to_db(conn_or_cursor, world_id, fisc_mstr_dir)
