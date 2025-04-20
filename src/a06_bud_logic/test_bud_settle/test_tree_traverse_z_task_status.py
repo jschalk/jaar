@@ -768,43 +768,6 @@ def test_BudUnit_settle_bud_CorrectlySets_keep_dict_v1(graphics_bool):
     assert sue_budunit._keep_dict == {}
 
 
-# def test_bud_metrics_CorrectlySets_healers_dict():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     sue_budunit = get_budunit_with_4_levels_and_2reasons()
-#     sue_budunit.add_acctunit(sue_str)
-#     sue_budunit.add_acctunit(bob_str)
-#     assert sue_budunit._healers_dict == {}
-
-#     # WHEN
-#     sue_budunit.settle_bud()
-#     # THEN
-#     assert sue_budunit._healers_dict == {}
-
-#     # ESTABLISH
-#     nation_road = sue_budunit.make_l1_road("nation-state")
-#     usa_road = sue_budunit.make_road(nation_road, "USA")
-#     oregon_road = sue_budunit.make_road(usa_road, "Oregon")
-#     sue_healerlink = healerlink_shop({sue_str})
-#     sue_budunit.edit_item_attr(oregon_road, problem_bool=True, healerlink=sue_healerlink)
-
-#     week_road = sue_budunit.make_l1_road("weekdays")
-#     bob_healerlink = healerlink_shop({bob_str})
-#     sue_budunit.edit_item_attr(week_road, problem_bool=True, healerlink=bob_healerlink)
-#     assert sue_budunit._healers_dict == {}
-
-#     # WHEN
-#     sue_budunit.settle_bud()
-
-#     # THEN
-#     assert len(sue_budunit._healers_dict) == 2
-#     week_item = sue_budunit.get_item_obj(week_road)
-#     assert sue_budunit._healers_dict.get(bob_str) == {week_road: week_item}
-#     oregon_item = sue_budunit.get_item_obj(oregon_road)
-#     assert sue_budunit._healers_dict.get(sue_str) == {oregon_road: oregon_item}
-
-
 def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     # ESTABLISH
     sue_str = "Sue"

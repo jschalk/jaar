@@ -115,13 +115,13 @@ def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
     yao_budunit = budunit_v001()
 
     # WHEN
-    yao_bud_metrics = yao_budunit.get_tree_metrics()
+    yao_tree_metrics = yao_budunit.get_tree_metrics()
 
     # THEN
-    print(f"{yao_bud_metrics.level_count=}")
-    print(f"{yao_bud_metrics.reason_bases=}")
-    assert yao_bud_metrics is not None
-    reason_bases_x = yao_bud_metrics.reason_bases
+    print(f"{yao_tree_metrics.level_count=}")
+    print(f"{yao_tree_metrics.reason_bases=}")
+    assert yao_tree_metrics is not None
+    reason_bases_x = yao_tree_metrics.reason_bases
     assert reason_bases_x is not None
     assert len(reason_bases_x) > 0
 
