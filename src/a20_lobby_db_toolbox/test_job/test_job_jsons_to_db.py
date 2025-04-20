@@ -149,7 +149,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
 def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_itemunit")
+    # x_args = get_bud_calc_dimen_args("bud_itemunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -301,7 +301,7 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
 def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_item_reasonunit")
+    # x_args = get_bud_calc_dimen_args("bud_item_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -363,7 +363,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
 def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_item_reason_premiseunit")
+    # x_args = get_bud_calc_dimen_args("bud_item_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -431,7 +431,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
 def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_acct_membership")
+    # x_args = get_bud_calc_dimen_args("bud_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -510,7 +510,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
 def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_acctunit")
+    # x_args = get_bud_calc_dimen_args("bud_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -593,7 +593,7 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
 def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_groupunit")
+    # x_args = get_bud_calc_dimen_args("bud_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -664,7 +664,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
 def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_item_awardlink")
+    # x_args = get_bud_calc_dimen_args("bud_item_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -725,7 +725,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
 def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_item_factunit")
+    # x_args = get_bud_calc_dimen_args("bud_item_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -783,7 +783,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
 def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_item_healerlink")
+    # x_args = get_bud_calc_dimen_args("bud_item_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -841,7 +841,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
 def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_metric_dimen_args("bud_item_teamlink")
+    # x_args = get_bud_calc_dimen_args("bud_item_teamlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1

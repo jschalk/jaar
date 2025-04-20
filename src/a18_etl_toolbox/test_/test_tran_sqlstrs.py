@@ -39,7 +39,7 @@ from src.a08_bud_atom_logic.atom_config import (
     get_bud_dimens,
     get_delete_key_name,
 )
-from src.a10_bud_metric.bud_metric_config import get_bud_metric_config_dict
+from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
 from src.a15_fisc_logic.fisc_config import (
     get_fisc_dimens,
     fiscunit_str,

@@ -76,9 +76,9 @@ from src.a08_bud_atom_logic.atom_config import (
     give_force_str,
     take_force_str,
 )
-from src.a10_bud_metric.bud_metric_config import (
-    get_all_bud_metric_args,
-    get_bud_metric_args_sqlite_datatype_dict,
+from src.a10_bud_calc.bud_calc_config import (
+    get_all_bud_calc_args,
+    get_bud_calc_args_sqlite_datatype_dict,
 )
 from src.a15_fisc_logic.fisc_config import (
     get_fisc_args_dimen_mapping,
@@ -192,11 +192,11 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
     print(f"missing {all_bud_dimen_delete_keys.difference(table_sorting_priority)}")
     assert all_bud_dimen_delete_keys.issubset(table_sorting_priority)
-    bud_metric_args = set(get_all_bud_metric_args().keys())
-    # for bud_metric_arg in bud_metric_args.difference(table_sorting_priority):
-    #     print(f"{bud_metric_arg=}")
-    print(f"{bud_metric_args.difference(table_sorting_priority)=}")
-    assert bud_metric_args.issubset(table_sorting_priority)
+    bud_calc_args = set(get_all_bud_calc_args().keys())
+    # for bud_calc_arg in bud_calc_args.difference(table_sorting_priority):
+    #     print(f"{bud_calc_arg=}")
+    print(f"{bud_calc_args.difference(table_sorting_priority)=}")
+    assert bud_calc_args.issubset(table_sorting_priority)
 
     assert table_sorting_priority[0] == world_id_str()
     assert table_sorting_priority[1] == idea_number_str()
@@ -325,7 +325,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)
     all_args.update(pidgin_args)
-    all_args.update(bud_metric_args)
+    all_args.update(bud_calc_args)
     all_args.add(idea_number_str())
     all_args.add(event_int_str())
     all_args.add(face_name_str())
@@ -420,7 +420,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("error_message") == "TEXT"
 
     # sourcery skip: no-loop-in-tests
-    for x_arg, datatype in get_bud_metric_args_sqlite_datatype_dict().items():
+    for x_arg, datatype in get_bud_calc_args_sqlite_datatype_dict().items():
         print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
         assert sqlite_types.get(x_arg) == datatype
 

@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.db_toolbox import create_insert_query
-from src.a10_bud_metric.bud_metric_config import get_bud_metric_dimen_args
+from src.a10_bud_calc.bud_calc_config import get_bud_calc_dimen_args
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import create_job_tables
 from src.a20_lobby_db_toolbox.lobby_tranformers import (
     create_budmemb_metrics_insert_sqlstr,
@@ -20,7 +20,7 @@ from sqlite3 import connect as sqlite3_connect
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("budunit")
+    x_args = get_bud_calc_dimen_args("budunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
     x_world_id = "music23"
@@ -81,7 +81,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
 def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_itemunit")
+    x_args = get_bud_calc_dimen_args("bud_itemunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -175,7 +175,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_item_reasonunit")
+    x_args = get_bud_calc_dimen_args("bud_item_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -236,7 +236,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_item_reason_premiseunit")
+    x_args = get_bud_calc_dimen_args("bud_item_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -304,7 +304,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_item_awardlink")
+    x_args = get_bud_calc_dimen_args("bud_item_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -368,7 +368,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_item_factunit")
+    x_args = get_bud_calc_dimen_args("bud_item_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -430,7 +430,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_item_healerlink")
+    x_args = get_bud_calc_dimen_args("bud_item_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -486,7 +486,7 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_item_teamlink")
+    x_args = get_bud_calc_dimen_args("bud_item_teamlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -544,7 +544,7 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_acctunit")
+    x_args = get_bud_calc_dimen_args("bud_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -622,7 +622,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_acct_membership")
+    x_args = get_bud_calc_dimen_args("bud_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -698,7 +698,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_metric_dimen_args("bud_groupunit")
+    x_args = get_bud_calc_dimen_args("bud_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1

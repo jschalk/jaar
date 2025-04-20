@@ -92,7 +92,7 @@ def get_idea_formats_dir() -> str:
 
 
 def get_idea_elements_sort_order() -> list[str]:
-    """Contains the standard sort order for all idea and bud_metric columns"""
+    """Contains the standard sort order for all idea and bud_calc columns"""
     return [
         "world_id",
         "idea_number",
@@ -228,7 +228,7 @@ def get_default_sorted_list(
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
-    """Contains the sqlite_type for all idea and bud_metric columns"""
+    """Contains the sqlite_type for all idea and bud_calc columns"""
 
     return {
         "world_id": "TEXT",
