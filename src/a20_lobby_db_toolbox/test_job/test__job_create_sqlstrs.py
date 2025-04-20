@@ -19,7 +19,7 @@ from src.a06_bud_logic.bud_tool import (
     budunit_str,
     bud_groupunit_str,
 )
-from src.a10_fund_metric.fund_metric_config import get_fund_metric_config_dict
+from src.a10_bud_metric.bud_metric_config import get_bud_metric_config_dict
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
@@ -36,10 +36,10 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
 
     # THEN
     s_types = get_idea_sqlite_types()
-    fund_metric_config = get_fund_metric_config_dict()
-    for x_dimen in fund_metric_config.keys():
+    bud_metric_config = get_bud_metric_config_dict()
+    for x_dimen in bud_metric_config.keys():
         # print(f"{x_dimen} checking...")
-        x_config = fund_metric_config.get(x_dimen)
+        x_config = bud_metric_config.get(x_dimen)
 
         job_table = f"{x_dimen}_job"
         job_cols = {fisc_title_str(), owner_name_str()}

@@ -52,18 +52,18 @@ from src.a08_bud_atom_logic.atom_config import (
     type_TitleUnit_str,
     type_RoadUnit_str,
 )
-from src.a10_fund_metric.fund_metric_config import (
+from src.a10_bud_metric.bud_metric_config import (
     jmetrics_str,
     fund_take_str,
     fund_give_str,
-    get_fund_metric_config_filename,
+    get_bud_metric_config_filename,
     config_file_path,
-    get_fund_metric_config_dict,
-    get_fund_metric_dimen_args,
-    get_all_fund_metric_args,
-    get_fund_metric_args_type_dict,
-    get_fund_metric_dimens,
-    get_fund_metric_args_sqlite_datatype_dict,
+    get_bud_metric_config_dict,
+    get_bud_metric_dimen_args,
+    get_all_bud_metric_args,
+    get_bud_metric_args_type_dict,
+    get_bud_metric_dimens,
+    get_bud_metric_args_sqlite_datatype_dict,
 )
 from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
@@ -76,51 +76,51 @@ def test_str_functions_ReturnsObj():
     assert fund_give_str() == "fund_give"
 
 
-def test_get_fund_metric_config_dict_Exists():
+def test_get_bud_metric_config_dict_Exists():
     # ESTABLISH
     src_dir = create_path(os_getcwd(), "src")
-    expected_dir = create_path(src_dir, "a10_fund_metric")
+    expected_dir = create_path(src_dir, "a10_bud_metric")
 
     # WHEN / THEN
-    assert get_fund_metric_config_filename() == "fund_metric_config.json"
-    expected_path = create_path(expected_dir, get_fund_metric_config_filename())
+    assert get_bud_metric_config_filename() == "bud_metric_config.json"
+    expected_path = create_path(expected_dir, get_bud_metric_config_filename())
     assert config_file_path() == expected_path
     assert os_path_exists(config_file_path())
 
 
-def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel0Keys():
+def test_get_bud_metric_config_dict_ReturnsObj_CheckLevel0Keys():
     # ESTABLISH / WHEN
-    fund_metric_config = get_fund_metric_config_dict()
-    fund_metric_config_keys = set(fund_metric_config.keys())
+    bud_metric_config = get_bud_metric_config_dict()
+    bud_metric_config_keys = set(bud_metric_config.keys())
 
     # THEN
-    assert budunit_str() in fund_metric_config_keys
-    assert bud_acctunit_str() in fund_metric_config_keys
-    assert bud_acct_membership_str() in fund_metric_config_keys
-    assert bud_itemunit_str() in fund_metric_config_keys
-    assert bud_item_awardlink_str() in fund_metric_config_keys
-    assert bud_item_reasonunit_str() in fund_metric_config_keys
-    assert bud_item_reason_premiseunit_str() in fund_metric_config_keys
-    assert bud_item_teamlink_str() in fund_metric_config_keys
-    assert bud_item_healerlink_str() in fund_metric_config_keys
-    assert bud_item_factunit_str() in fund_metric_config_keys
-    assert bud_groupunit_str() in fund_metric_config_keys
-    assert len(get_fund_metric_config_dict()) == 11
+    assert budunit_str() in bud_metric_config_keys
+    assert bud_acctunit_str() in bud_metric_config_keys
+    assert bud_acct_membership_str() in bud_metric_config_keys
+    assert bud_itemunit_str() in bud_metric_config_keys
+    assert bud_item_awardlink_str() in bud_metric_config_keys
+    assert bud_item_reasonunit_str() in bud_metric_config_keys
+    assert bud_item_reason_premiseunit_str() in bud_metric_config_keys
+    assert bud_item_teamlink_str() in bud_metric_config_keys
+    assert bud_item_healerlink_str() in bud_metric_config_keys
+    assert bud_item_factunit_str() in bud_metric_config_keys
+    assert bud_groupunit_str() in bud_metric_config_keys
+    assert len(get_bud_metric_config_dict()) == 11
     atom_config_dict = get_atom_config_dict()
     atom_config_dimens = set(atom_config_dict.keys())
-    assert atom_config_dimens.issubset(fund_metric_config_keys)
-    assert fund_metric_config_keys.difference(atom_config_dimens) == {
+    assert atom_config_dimens.issubset(bud_metric_config_keys)
+    assert bud_metric_config_keys.difference(atom_config_dimens) == {
         bud_groupunit_str()
     }
 
 
-def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel1Keys():
+def test_get_bud_metric_config_dict_ReturnsObj_CheckLevel1Keys():
     # ESTABLISH / WHEN
-    fund_metric_config = get_fund_metric_config_dict()
+    bud_metric_config = get_bud_metric_config_dict()
 
     # THEN
     # sourcery skip: no-loop-in-tests
-    for level1_key, aspect_dict in fund_metric_config.items():
+    for level1_key, aspect_dict in bud_metric_config.items():
         aspect_keys = set(aspect_dict.keys())
         print(f"{level1_key=} {aspect_keys=}")
         assert "abbreviation" in aspect_keys
@@ -130,14 +130,14 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel1Keys():
         assert len(aspect_keys) == 4
 
 
-def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
+def test_get_bud_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     # ESTABLISH / WHEN
-    fund_metric_config = get_fund_metric_config_dict()
+    bud_metric_config = get_bud_metric_config_dict()
 
     # THEN
     atom_config = get_atom_config_dict()
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for level1_key, aspect_dict in fund_metric_config.items():
+    for level1_key, aspect_dict in bud_metric_config.items():
         if level1_key in atom_config.keys():
             atom_dimen = atom_config.get(level1_key)
             for level2_key, fm_aspect_dict in aspect_dict.items():
@@ -158,17 +158,17 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                     fm_aspect_keys = set(fm_aspect_dict.keys())
                     assert fm_aspect_keys == dimen_keys
 
-    budunit_aspect = fund_metric_config.get(budunit_str())
-    budacct_aspect = fund_metric_config.get(bud_acctunit_str())
-    budmemb_aspect = fund_metric_config.get(bud_acct_membership_str())
-    buditem_aspect = fund_metric_config.get(bud_itemunit_str())
-    budawar_aspect = fund_metric_config.get(bud_item_awardlink_str())
-    budreas_aspect = fund_metric_config.get(bud_item_reasonunit_str())
-    budprem_aspect = fund_metric_config.get(bud_item_reason_premiseunit_str())
-    budteam_aspect = fund_metric_config.get(bud_item_teamlink_str())
-    budheal_aspect = fund_metric_config.get(bud_item_healerlink_str())
-    budfact_aspect = fund_metric_config.get(bud_item_factunit_str())
-    budgrou_aspect = fund_metric_config.get(bud_groupunit_str())
+    budunit_aspect = bud_metric_config.get(budunit_str())
+    budacct_aspect = bud_metric_config.get(bud_acctunit_str())
+    budmemb_aspect = bud_metric_config.get(bud_acct_membership_str())
+    buditem_aspect = bud_metric_config.get(bud_itemunit_str())
+    budawar_aspect = bud_metric_config.get(bud_item_awardlink_str())
+    budreas_aspect = bud_metric_config.get(bud_item_reasonunit_str())
+    budprem_aspect = bud_metric_config.get(bud_item_reason_premiseunit_str())
+    budteam_aspect = bud_metric_config.get(bud_item_teamlink_str())
+    budheal_aspect = bud_metric_config.get(bud_item_healerlink_str())
+    budfact_aspect = bud_metric_config.get(bud_item_factunit_str())
+    budgrou_aspect = bud_metric_config.get(bud_groupunit_str())
 
     budunit_jmetrics_keys = set(budunit_aspect.get(jmetrics_str()))
     budacct_jmetrics_keys = set(budacct_aspect.get(jmetrics_str()))
@@ -264,22 +264,22 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert budgrou_jmetrics_keys  # Non-empty
 
 
-def test_get_fund_metric_config_dict_ReturnsObj_CheckAbbreviations():
+def test_get_bud_metric_config_dict_ReturnsObj_CheckAbbreviations():
     # ESTABLISH / WHEN
-    fund_metric_config = get_fund_metric_config_dict()
+    bud_metric_config = get_bud_metric_config_dict()
 
     # THEN
-    budunit_aspect = fund_metric_config.get(budunit_str())
-    budacct_aspect = fund_metric_config.get(bud_acctunit_str())
-    budmemb_aspect = fund_metric_config.get(bud_acct_membership_str())
-    buditem_aspect = fund_metric_config.get(bud_itemunit_str())
-    budawar_aspect = fund_metric_config.get(bud_item_awardlink_str())
-    budreas_aspect = fund_metric_config.get(bud_item_reasonunit_str())
-    budprem_aspect = fund_metric_config.get(bud_item_reason_premiseunit_str())
-    budteam_aspect = fund_metric_config.get(bud_item_teamlink_str())
-    budheal_aspect = fund_metric_config.get(bud_item_healerlink_str())
-    budfact_aspect = fund_metric_config.get(bud_item_factunit_str())
-    budgrou_aspect = fund_metric_config.get(bud_groupunit_str())
+    budunit_aspect = bud_metric_config.get(budunit_str())
+    budacct_aspect = bud_metric_config.get(bud_acctunit_str())
+    budmemb_aspect = bud_metric_config.get(bud_acct_membership_str())
+    buditem_aspect = bud_metric_config.get(bud_itemunit_str())
+    budawar_aspect = bud_metric_config.get(bud_item_awardlink_str())
+    budreas_aspect = bud_metric_config.get(bud_item_reasonunit_str())
+    budprem_aspect = bud_metric_config.get(bud_item_reason_premiseunit_str())
+    budteam_aspect = bud_metric_config.get(bud_item_teamlink_str())
+    budheal_aspect = bud_metric_config.get(bud_item_healerlink_str())
+    budfact_aspect = bud_metric_config.get(bud_item_factunit_str())
+    budgrou_aspect = bud_metric_config.get(bud_groupunit_str())
     abbr_str = "abbreviation"
     assert budunit_aspect.get(abbr_str) == "budunit"
     assert budacct_aspect.get(abbr_str) == "budacct"
@@ -294,39 +294,39 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckAbbreviations():
     assert budgrou_aspect.get(abbr_str) == "budgrou"
 
 
-def test_get_all_fund_metric_args_ReturnsObj():
+def test_get_all_bud_metric_args_ReturnsObj():
     # ESTABLISH / WHEN
-    all_fund_metric_args = get_all_fund_metric_args()
+    all_bud_metric_args = get_all_bud_metric_args()
 
     # THEN
-    assert all_fund_metric_args
-    assert stop_want_str() in all_fund_metric_args
-    assert parent_road_str() in all_fund_metric_args
-    assert "_fund_give" in all_fund_metric_args
-    assert all_fund_metric_args.get("_fund_give") == {
+    assert all_bud_metric_args
+    assert stop_want_str() in all_bud_metric_args
+    assert parent_road_str() in all_bud_metric_args
+    assert "_fund_give" in all_bud_metric_args
+    assert all_bud_metric_args.get("_fund_give") == {
         "bud_item_awardlink",
         "bud_acct_membership",
         "bud_groupunit",
         "bud_acctunit",
     }
 
-    # fund_metric_config = get_fund_metric_config_dict()
-    # bud_acctunit_aspects = fund_metric_config.get("bud_acctunit")
+    # bud_metric_config = get_bud_metric_config_dict()
+    # bud_acctunit_aspects = bud_metric_config.get("bud_acctunit")
     # budacct_jmetrics_dict = bud_acctunit_aspects.get("jmetrics")
-    # road_fund_metric_aspects = budacct_jmetrics_dict.get("_fund_give")
-    # assert bud_item_factunit_str() in road_fund_metric_aspects
-    # assert bud_item_teamlink_str() in road_fund_metric_aspects
-    # assert len(road_fund_metric_aspects) == 6
-    assert len(all_fund_metric_args) == 78
+    # road_bud_metric_aspects = budacct_jmetrics_dict.get("_fund_give")
+    # assert bud_item_factunit_str() in road_bud_metric_aspects
+    # assert bud_item_teamlink_str() in road_bud_metric_aspects
+    # assert len(road_bud_metric_aspects) == 6
+    assert len(all_bud_metric_args) == 78
 
 
-def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
+def test_get_bud_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
     # ESTABLISH / WHEN
-    fund_metric_config = get_fund_metric_config_dict()
+    bud_metric_config = get_bud_metric_config_dict()
 
     # THEN
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for level1_key, aspect_dict in fund_metric_config.items():
+    for level1_key, aspect_dict in bud_metric_config.items():
         for level2_key, fm_aspect_dict in aspect_dict.items():
             if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
                 for level3_key, attr_dict in fm_aspect_dict.items():
@@ -339,12 +339,12 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
                     }
 
 
-def test_get_fund_metric_dimens_ReturnsObj():
+def test_get_bud_metric_dimens_ReturnsObj():
     # ESTABLISH / WHEN
-    fund_metric_dimens = get_fund_metric_dimens()
+    bud_metric_dimens = get_bud_metric_dimens()
 
     # THEN
-    expected_fund_metric_dimens = {
+    expected_bud_metric_dimens = {
         budunit_str(),
         bud_acctunit_str(),
         bud_acct_membership_str(),
@@ -357,15 +357,15 @@ def test_get_fund_metric_dimens_ReturnsObj():
         bud_item_factunit_str(),
         bud_groupunit_str(),
     }
-    assert fund_metric_dimens == expected_fund_metric_dimens
-    assert fund_metric_dimens == set(get_fund_metric_config_dict().keys())
+    assert bud_metric_dimens == expected_bud_metric_dimens
+    assert bud_metric_dimens == set(get_bud_metric_config_dict().keys())
 
 
-def test_get_fund_metric_dimen_args_ReturnsObj():
+def test_get_bud_metric_dimen_args_ReturnsObj():
     # ESTABLISH / WHEN
-    bud_acctunit_args = get_fund_metric_dimen_args(bud_acctunit_str())
-    bud_itemunit_args = get_fund_metric_dimen_args(bud_itemunit_str())
-    bud_groupunit_args = get_fund_metric_dimen_args(bud_groupunit_str())
+    bud_acctunit_args = get_bud_metric_dimen_args(bud_acctunit_str())
+    bud_itemunit_args = get_bud_metric_dimen_args(bud_itemunit_str())
+    bud_groupunit_args = get_bud_metric_dimen_args(bud_groupunit_str())
 
     #  THEN
     print(f"{bud_acctunit_args=}")
@@ -454,9 +454,9 @@ def g_sqlitetype(
     return j_arg.get(sqlite_datatype_str())
 
 
-def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
+def test_get_bud_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     # ESTABLISH / WHEN
-    config = get_fund_metric_config_dict()
+    config = get_bud_metric_config_dict()
     # for level1_key, aspect_dict in config.items():
     #     for level2_key, fm_aspect_dict in aspect_dict.items():
     #         if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
@@ -699,12 +699,12 @@ def test_get_fund_metric_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budunit, jv, "tally") == "INTEGER"
 
 
-def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOneClassType():
+def test_get_bud_metric_config_dict_ReturnObj_EachArgHasOneClassType():
     # ESTABLISH
-    fund_metric_config_dict = get_fund_metric_config_dict()
+    bud_metric_config_dict = get_bud_metric_config_dict()
     all_args = {}
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+    for bud_metric_dimen, dimen_dict in bud_metric_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
                 for x_arg, arg_dict in args_dict.items():
@@ -718,12 +718,12 @@ def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOneClassType():
         assert len(arg_types) == 1
 
 
-def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
+def test_get_bud_metric_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
     # ESTABLISH
-    fund_metric_config_dict = get_fund_metric_config_dict()
+    bud_metric_config_dict = get_bud_metric_config_dict()
     all_args = {}
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+    for bud_metric_dimen, dimen_dict in bud_metric_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
                 for x_arg, arg_dict in args_dict.items():
@@ -737,23 +737,23 @@ def test_get_fund_metric_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
         assert len(arg_types) == 1
 
     # WHEN
-    sqlite_datatype_dict = get_fund_metric_args_sqlite_datatype_dict()
+    sqlite_datatype_dict = get_bud_metric_args_sqlite_datatype_dict()
 
     # THEN
     for x_arg, arg_types in all_args.items():
         # print(
-        #     f"""assert fund_metric_args_type_dict.get("{x_arg}") == "{list(arg_types)[0]}" """
+        #     f"""assert bud_metric_args_type_dict.get("{x_arg}") == "{list(arg_types)[0]}" """
         # )
         print(f""""{x_arg}": "{list(arg_types)[0]}",""")
         assert list(arg_types)[0] == sqlite_datatype_dict.get(x_arg)
 
 
-def test_get_fund_metric_args_type_dict_ReturnObj():
+def test_get_bud_metric_args_type_dict_ReturnObj():
     # ESTABLISH
-    fund_metric_config_dict = get_fund_metric_config_dict()
+    bud_metric_config_dict = get_bud_metric_config_dict()
     all_args = {}
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+    for bud_metric_dimen, dimen_dict in bud_metric_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
                 for x_arg, arg_dict in args_dict.items():
@@ -763,81 +763,81 @@ def test_get_fund_metric_args_type_dict_ReturnObj():
                     all_args.get(x_arg).add(arg_type)
 
     # WHEN
-    fund_metric_args_type_dict = get_fund_metric_args_type_dict()
+    bud_metric_args_type_dict = get_bud_metric_args_type_dict()
 
     # THEN
-    assert fund_metric_args_type_dict.get(acct_name_str()) == type_NameUnit_str()
-    assert fund_metric_args_type_dict.get(group_label_str()) == type_LabelUnit_str()
-    assert fund_metric_args_type_dict.get("_credor_pool") == "float"
-    assert fund_metric_args_type_dict.get("_debtor_pool") == "float"
-    assert fund_metric_args_type_dict.get("_fund_agenda_give") == "float"
-    assert fund_metric_args_type_dict.get("_fund_agenda_ratio_give") == "float"
-    assert fund_metric_args_type_dict.get("_fund_agenda_ratio_take") == "float"
-    assert fund_metric_args_type_dict.get("_fund_agenda_take") == "float"
-    assert fund_metric_args_type_dict.get("_fund_give") == "float"
-    assert fund_metric_args_type_dict.get("_fund_take") == "float"
-    assert fund_metric_args_type_dict.get(credit_vote_str()) == "int"
-    assert fund_metric_args_type_dict.get(debtit_vote_str()) == "int"
-    assert fund_metric_args_type_dict.get("_inallocable_debtit_belief") == "float"
-    assert fund_metric_args_type_dict.get("_irrational_debtit_belief") == "float"
-    assert fund_metric_args_type_dict.get(credit_belief_str()) == "float"
-    assert fund_metric_args_type_dict.get(debtit_belief_str()) == "float"
-    assert fund_metric_args_type_dict.get("item_title") == type_TitleUnit_str()
-    assert fund_metric_args_type_dict.get(parent_road_str()) == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get(addin_str()) == "float"
-    assert fund_metric_args_type_dict.get(begin_str()) == "float"
-    assert fund_metric_args_type_dict.get(close_str()) == "float"
-    assert fund_metric_args_type_dict.get(denom_str()) == "int"
-    assert fund_metric_args_type_dict.get(gogo_want_str()) == "float"
-    assert fund_metric_args_type_dict.get("mass") == "int"
-    assert fund_metric_args_type_dict.get(morph_str()) == "bool"
-    assert fund_metric_args_type_dict.get(numor_str()) == "int"
-    assert fund_metric_args_type_dict.get("pledge") == "bool"
-    assert fund_metric_args_type_dict.get("problem_bool") == "bool"
-    assert fund_metric_args_type_dict.get(stop_want_str()) == "float"
-    assert fund_metric_args_type_dict.get(awardee_tag_str()) == type_LabelUnit_str()
-    assert fund_metric_args_type_dict.get(road_str()) == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get("give_force") == "float"
-    assert fund_metric_args_type_dict.get("take_force") == "float"
-    assert fund_metric_args_type_dict.get(base_str()) == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get(fnigh_str()) == "float"
-    assert fund_metric_args_type_dict.get(fopen_str()) == "float"
-    assert fund_metric_args_type_dict.get("pick") == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get(healer_name_str()) == type_NameUnit_str()
-    assert fund_metric_args_type_dict.get("need") == type_RoadUnit_str()
-    assert fund_metric_args_type_dict.get("_status") == "int"
-    assert fund_metric_args_type_dict.get("_task") == "int"
-    assert fund_metric_args_type_dict.get("divisor") == "int"
-    assert fund_metric_args_type_dict.get("nigh") == "float"
-    assert fund_metric_args_type_dict.get("open") == "float"
-    assert fund_metric_args_type_dict.get("_base_item_active_value") == "int"
-    assert fund_metric_args_type_dict.get("base_item_active_requisite") == "bool"
-    assert fund_metric_args_type_dict.get("team_tag") == type_LabelUnit_str()
-    assert fund_metric_args_type_dict.get("_owner_name_team") == "int"
-    assert fund_metric_args_type_dict.get("_active") == "int"
-    assert fund_metric_args_type_dict.get("_all_acct_cred") == "int"
-    assert fund_metric_args_type_dict.get("_all_acct_debt") == "int"
-    assert fund_metric_args_type_dict.get("_descendant_pledge_count") == "int"
-    assert fund_metric_args_type_dict.get("_fund_cease") == "float"
-    assert fund_metric_args_type_dict.get("_fund_onset") == "float"
-    assert fund_metric_args_type_dict.get("_fund_ratio") == "float"
-    assert fund_metric_args_type_dict.get("_gogo_calc") == "float"
-    assert fund_metric_args_type_dict.get("_healerlink_ratio") == "float"
-    assert fund_metric_args_type_dict.get("_level") == "int"
-    assert fund_metric_args_type_dict.get("_range_evaluated") == "int"
-    assert fund_metric_args_type_dict.get("_stop_calc") == "float"
-    assert fund_metric_args_type_dict.get("_keeps_buildable") == "int"
-    assert fund_metric_args_type_dict.get("_keeps_justified") == "int"
-    assert fund_metric_args_type_dict.get("_offtrack_fund") == "int"
-    assert fund_metric_args_type_dict.get("_rational") == "bool"
-    assert fund_metric_args_type_dict.get("_sum_healerlink_share") == "float"
-    assert fund_metric_args_type_dict.get("_tree_traverse_count") == "int"
-    assert fund_metric_args_type_dict.get(credor_respect_str()) == "float"
-    assert fund_metric_args_type_dict.get(debtor_respect_str()) == "float"
-    assert fund_metric_args_type_dict.get(fund_coin_str()) == "float"
-    assert fund_metric_args_type_dict.get("fund_pool") == "float"
-    assert fund_metric_args_type_dict.get("max_tree_traverse") == "int"
-    assert fund_metric_args_type_dict.get(penny_str()) == "float"
-    assert fund_metric_args_type_dict.get(respect_bit_str()) == "float"
-    assert fund_metric_args_type_dict.get("tally") == "int"
-    assert len(fund_metric_args_type_dict) == 74
+    assert bud_metric_args_type_dict.get(acct_name_str()) == type_NameUnit_str()
+    assert bud_metric_args_type_dict.get(group_label_str()) == type_LabelUnit_str()
+    assert bud_metric_args_type_dict.get("_credor_pool") == "float"
+    assert bud_metric_args_type_dict.get("_debtor_pool") == "float"
+    assert bud_metric_args_type_dict.get("_fund_agenda_give") == "float"
+    assert bud_metric_args_type_dict.get("_fund_agenda_ratio_give") == "float"
+    assert bud_metric_args_type_dict.get("_fund_agenda_ratio_take") == "float"
+    assert bud_metric_args_type_dict.get("_fund_agenda_take") == "float"
+    assert bud_metric_args_type_dict.get("_fund_give") == "float"
+    assert bud_metric_args_type_dict.get("_fund_take") == "float"
+    assert bud_metric_args_type_dict.get(credit_vote_str()) == "int"
+    assert bud_metric_args_type_dict.get(debtit_vote_str()) == "int"
+    assert bud_metric_args_type_dict.get("_inallocable_debtit_belief") == "float"
+    assert bud_metric_args_type_dict.get("_irrational_debtit_belief") == "float"
+    assert bud_metric_args_type_dict.get(credit_belief_str()) == "float"
+    assert bud_metric_args_type_dict.get(debtit_belief_str()) == "float"
+    assert bud_metric_args_type_dict.get("item_title") == type_TitleUnit_str()
+    assert bud_metric_args_type_dict.get(parent_road_str()) == type_RoadUnit_str()
+    assert bud_metric_args_type_dict.get(addin_str()) == "float"
+    assert bud_metric_args_type_dict.get(begin_str()) == "float"
+    assert bud_metric_args_type_dict.get(close_str()) == "float"
+    assert bud_metric_args_type_dict.get(denom_str()) == "int"
+    assert bud_metric_args_type_dict.get(gogo_want_str()) == "float"
+    assert bud_metric_args_type_dict.get("mass") == "int"
+    assert bud_metric_args_type_dict.get(morph_str()) == "bool"
+    assert bud_metric_args_type_dict.get(numor_str()) == "int"
+    assert bud_metric_args_type_dict.get("pledge") == "bool"
+    assert bud_metric_args_type_dict.get("problem_bool") == "bool"
+    assert bud_metric_args_type_dict.get(stop_want_str()) == "float"
+    assert bud_metric_args_type_dict.get(awardee_tag_str()) == type_LabelUnit_str()
+    assert bud_metric_args_type_dict.get(road_str()) == type_RoadUnit_str()
+    assert bud_metric_args_type_dict.get("give_force") == "float"
+    assert bud_metric_args_type_dict.get("take_force") == "float"
+    assert bud_metric_args_type_dict.get(base_str()) == type_RoadUnit_str()
+    assert bud_metric_args_type_dict.get(fnigh_str()) == "float"
+    assert bud_metric_args_type_dict.get(fopen_str()) == "float"
+    assert bud_metric_args_type_dict.get("pick") == type_RoadUnit_str()
+    assert bud_metric_args_type_dict.get(healer_name_str()) == type_NameUnit_str()
+    assert bud_metric_args_type_dict.get("need") == type_RoadUnit_str()
+    assert bud_metric_args_type_dict.get("_status") == "int"
+    assert bud_metric_args_type_dict.get("_task") == "int"
+    assert bud_metric_args_type_dict.get("divisor") == "int"
+    assert bud_metric_args_type_dict.get("nigh") == "float"
+    assert bud_metric_args_type_dict.get("open") == "float"
+    assert bud_metric_args_type_dict.get("_base_item_active_value") == "int"
+    assert bud_metric_args_type_dict.get("base_item_active_requisite") == "bool"
+    assert bud_metric_args_type_dict.get("team_tag") == type_LabelUnit_str()
+    assert bud_metric_args_type_dict.get("_owner_name_team") == "int"
+    assert bud_metric_args_type_dict.get("_active") == "int"
+    assert bud_metric_args_type_dict.get("_all_acct_cred") == "int"
+    assert bud_metric_args_type_dict.get("_all_acct_debt") == "int"
+    assert bud_metric_args_type_dict.get("_descendant_pledge_count") == "int"
+    assert bud_metric_args_type_dict.get("_fund_cease") == "float"
+    assert bud_metric_args_type_dict.get("_fund_onset") == "float"
+    assert bud_metric_args_type_dict.get("_fund_ratio") == "float"
+    assert bud_metric_args_type_dict.get("_gogo_calc") == "float"
+    assert bud_metric_args_type_dict.get("_healerlink_ratio") == "float"
+    assert bud_metric_args_type_dict.get("_level") == "int"
+    assert bud_metric_args_type_dict.get("_range_evaluated") == "int"
+    assert bud_metric_args_type_dict.get("_stop_calc") == "float"
+    assert bud_metric_args_type_dict.get("_keeps_buildable") == "int"
+    assert bud_metric_args_type_dict.get("_keeps_justified") == "int"
+    assert bud_metric_args_type_dict.get("_offtrack_fund") == "int"
+    assert bud_metric_args_type_dict.get("_rational") == "bool"
+    assert bud_metric_args_type_dict.get("_sum_healerlink_share") == "float"
+    assert bud_metric_args_type_dict.get("_tree_traverse_count") == "int"
+    assert bud_metric_args_type_dict.get(credor_respect_str()) == "float"
+    assert bud_metric_args_type_dict.get(debtor_respect_str()) == "float"
+    assert bud_metric_args_type_dict.get(fund_coin_str()) == "float"
+    assert bud_metric_args_type_dict.get("fund_pool") == "float"
+    assert bud_metric_args_type_dict.get("max_tree_traverse") == "int"
+    assert bud_metric_args_type_dict.get(penny_str()) == "float"
+    assert bud_metric_args_type_dict.get(respect_bit_str()) == "float"
+    assert bud_metric_args_type_dict.get("tally") == "int"
+    assert len(bud_metric_args_type_dict) == 74
