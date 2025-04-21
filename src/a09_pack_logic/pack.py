@@ -46,6 +46,7 @@ class PackUnit:
     _packs_dir: str = None
     _atoms_dir: str = None
     event_int: int = None
+    """Represents a per fiscunit/event_int BudDelta for a owner_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
