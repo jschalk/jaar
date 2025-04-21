@@ -11,16 +11,14 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
-    invalid_roottitle_swim_road = "swimming"
-    assert invalid_roottitle_swim_road != zia_bud.fisc_title
+    invalid_roottag_swim_road = "swimming"
+    assert invalid_roottag_swim_road != zia_bud.fisc_tag
     casa_str = "casa"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        zia_bud.set_item(
-            itemunit_shop(casa_str), parent_road=invalid_roottitle_swim_road
-        )
-    exception_str = f"set_item failed because parent_road '{invalid_roottitle_swim_road}' has an invalid root title. Should be {zia_bud.fisc_title}."
+        zia_bud.set_item(itemunit_shop(casa_str), parent_road=invalid_roottag_swim_road)
+    exception_str = f"set_item failed because parent_road '{invalid_roottag_swim_road}' has an invalid root tag. Should be {zia_bud.fisc_tag}."
     assert str(excinfo.value) == exception_str
 
 
@@ -41,7 +39,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_parent_road_ItemDoesNotExist():
     assert str(excinfo.value) == exception_str
 
 
-def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotTitle():
+def test_BudUnit_set_item_RaisesErrorWhen_item_tag_IsNotTag():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_road = zia_bud.make_l1_road("swimming")
@@ -53,7 +51,7 @@ def test_BudUnit_set_item_RaisesErrorWhen_item_title_IsNotTitle():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_item(itemunit_shop(run_road), parent_road=swim_road)
-    exception_str = f"set_item failed because '{run_road}' is not a TitleUnit."
+    exception_str = f"set_item failed because '{run_road}' is not a TagUnit."
     assert str(excinfo.value) == exception_str
 
 
@@ -64,7 +62,7 @@ def test_BudUnit_set_item_CorrectlySetsAttr():
     assert not zia_bud.itemroot._kids.get(casa_str)
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.fisc_title)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.fisc_tag)
 
     # THEN
     print(f"{zia_bud.itemroot._kids.keys()=}")
@@ -79,7 +77,7 @@ def test_BudUnit_item_exists_ReturnsObj():
     assert zia_bud.item_exists(casa_road) is False
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.fisc_title)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.fisc_tag)
 
     # THEN
     assert zia_bud.item_exists(casa_road)
@@ -145,7 +143,7 @@ def test_BudUnit_add_item_ReturnsObj():
     casa_itemunit = bob_budunit.add_item(casa_road, mass=casa_mass)
 
     # THEN
-    assert casa_itemunit.item_title == "casa"
+    assert casa_itemunit.item_tag == "casa"
     assert casa_itemunit.mass == casa_mass
 
 
@@ -198,7 +196,7 @@ def test_BudUnit_set_item_CanCreateMissingItemUnits():
 def test_BudUnit_del_item_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_road = sue_bud.fisc_title
+    root_road = sue_bud.fisc_tag
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -248,7 +246,7 @@ def test_BudUnit_del_item_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_item_obj(new_sunday_road)
     new_sunday_item = sue_bud.get_item_obj(new_sunday_road)
-    assert new_sunday_item.parent_road == sue_bud.fisc_title
+    assert new_sunday_item.parent_road == sue_bud.fisc_tag
 
 
 def test_BudUnit_del_item_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -404,13 +402,13 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
 
     # _awardlink: dict = None,
     sue_bud.itemroot._kids[casa_str].awardlinks = {
-        "fun": awardlink_shop(awardee_tag="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
     }
     _awardlinks = sue_bud.itemroot._kids[casa_str].awardlinks
     assert _awardlinks == {
-        "fun": awardlink_shop(awardee_tag="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
     }
-    x_awardlink = awardlink_shop(awardee_tag="fun", give_force=4, take_force=8)
+    x_awardlink = awardlink_shop(awardee_title="fun", give_force=4, take_force=8)
     sue_bud.edit_item_attr(road=casa_road, awardlink=x_awardlink)
     assert sue_bud.itemroot._kids[casa_str].awardlinks == {"fun": x_awardlink}
 
@@ -487,7 +485,7 @@ def test_BudUnit_set_item_MustReorderKidsDictToBeAlphabetical():
     item_list = list(bob_bud.itemroot._kids.values())
 
     # THEN
-    assert item_list[0].item_title == casa_str
+    assert item_list[0].item_tag == casa_str
 
 
 def test_BudUnit_set_item_adoptee_RaisesErrorIfAdopteeItemDoesNotHaveCorrectParent():
@@ -684,7 +682,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
 
     # THEN
     swim_item = yao_bud.get_item_obj(swim_road)
-    print(f"{swim_item.item_title=}")
+    print(f"{swim_item.item_tag=}")
     print(f"{swim_item.awardlinks=}")
     print(f"{swim_item._awardheirs=}")
 
@@ -792,7 +790,7 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert brazil_item is not None
-    assert brazil_item.item_title == brazil_str
+    assert brazil_item.item_tag == brazil_str
 
     # WHEN
     week_str = "weekdays"
@@ -801,14 +799,14 @@ def test_BudUnit_get_item_obj_ReturnsItem():
 
     # THEN
     assert week_item is not None
-    assert week_item.item_title == week_str
+    assert week_item.item_tag == week_str
 
     # WHEN
-    root_item = sue_bud.get_item_obj(road=sue_bud.fisc_title)
+    root_item = sue_bud.get_item_obj(road=sue_bud.fisc_tag)
 
     # THEN
     assert root_item is not None
-    assert root_item.item_title == sue_bud.fisc_title
+    assert root_item.item_tag == sue_bud.fisc_tag
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -846,7 +844,7 @@ def test_BudUnit_item_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_bud.item_exists("") is False
     assert sue_bud.item_exists(None) is False
-    assert sue_bud.item_exists(sue_bud.fisc_title)
+    assert sue_bud.item_exists(sue_bud.fisc_tag)
     assert sue_bud.item_exists(cat_road)
     assert sue_bud.item_exists(week_road)
     assert sue_bud.item_exists(casa_road)
@@ -891,8 +889,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item.parent_road = bob_budunit.fisc_title
-    week_item.parent_road = bob_budunit.fisc_title
+    casa_item.parent_road = bob_budunit.fisc_tag
+    week_item.parent_road = bob_budunit.fisc_tag
     wed_item.parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)
@@ -948,8 +946,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_item = itemunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_item = itemunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_item = itemunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_item.parent_road = bob_budunit.fisc_title
-    week_item.parent_road = bob_budunit.fisc_title
+    casa_item.parent_road = bob_budunit.fisc_tag
+    week_item.parent_road = bob_budunit.fisc_tag
     wed_item.parent_road = week_road
     bob_budunit.set_l1_item(casa_item)
     bob_budunit.set_l1_item(week_item)

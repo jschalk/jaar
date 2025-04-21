@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, get_level1_dirs
 from src.a01_word_logic.road import RoadUnit, WorldID
-from src.a02_finance_toolboxs.deal import OwnerName, FiscTitle
+from src.a02_finance_toolboxs.deal import OwnerName, FiscTag
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a04_reason_logic.reason_item import ReasonHeir, PremiseUnit, FactHeir
@@ -31,7 +31,7 @@ from dataclasses import dataclass
 @dataclass
 class ObjKeysHolder:
     world_id: WorldID = None
-    fisc_title: FiscTitle = None
+    fisc_tag: FiscTag = None
     owner_name: OwnerName = None
     road: RoadUnit = None
     base: RoadUnit = None
@@ -48,7 +48,7 @@ def insert_job_budmemb(
 ):
     x_dict = copy_deepcopy(x_membership.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -61,7 +61,7 @@ def insert_job_budacct(
 ):
     x_dict = copy_deepcopy(x_acct.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budacct_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -74,7 +74,7 @@ def insert_job_budgrou(
 ):
     x_dict = copy_deepcopy(x_groupunit.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budgrou_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -87,7 +87,7 @@ def insert_job_budawar(
 ):
     x_dict = copy_deepcopy(x_awardheir.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["road"] = x_objkeysholder.road
     insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_dict)
@@ -101,7 +101,7 @@ def insert_job_budfact(
 ):
     x_dict = copy_deepcopy(x_factheir.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["road"] = x_objkeysholder.road
     insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_dict)
@@ -115,7 +115,7 @@ def insert_job_budheal(
 ):
     x_dict = {
         "world_id": x_objkeysholder.world_id,
-        "fisc_title": x_objkeysholder.fisc_title,
+        "fisc_tag": x_objkeysholder.fisc_tag,
         "owner_name": x_objkeysholder.owner_name,
         "road": x_objkeysholder.road,
     }
@@ -132,7 +132,7 @@ def insert_job_budprem(
 ):
     x_dict = copy_deepcopy(x_premiseunit.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["road"] = x_objkeysholder.road
     x_dict["base"] = x_objkeysholder.base
@@ -147,7 +147,7 @@ def insert_job_budreas(
 ):
     x_dict = copy_deepcopy(x_reasonheir.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["road"] = x_objkeysholder.road
     insert_sqlstr = create_budreas_metrics_insert_sqlstr(x_dict)
@@ -161,11 +161,11 @@ def insert_job_budteam(
 ):
     x_dict = copy_deepcopy(x_teamheir.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
-    x_dict["fisc_title"] = x_objkeysholder.fisc_title
+    x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["road"] = x_objkeysholder.road
-    for team_tag in sorted(x_teamheir._teamlinks):
-        x_dict["team_tag"] = team_tag
+    for team_title in sorted(x_teamheir._teamlinks):
+        x_dict["team_title"] = team_title
         insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
@@ -191,7 +191,7 @@ def insert_job_budunit(
 
 def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
     job_bud.settle_bud()
-    x_objkeysholder = ObjKeysHolder(world_id, job_bud.fisc_title, job_bud.owner_name)
+    x_objkeysholder = ObjKeysHolder(world_id, job_bud.fisc_tag, job_bud.owner_name)
     insert_job_budunit(cursor, x_objkeysholder, job_bud)
     for x_item in job_bud.get_item_dict().values():
         x_objkeysholder.road = x_item.get_road()
@@ -225,11 +225,11 @@ def etl_fisc_jobs_json_to_db(
     conn_or_cursor: sqlite3_Connection, world_id: str, fisc_mstr_dir: str
 ):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_tag)
         owners_dir = create_path(fisc_path, "owners")
         for owner_name in get_level1_dirs(owners_dir):
-            job_obj = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
+            job_obj = open_job_file(fisc_mstr_dir, fisc_tag, owner_name)
             insert_job_obj(conn_or_cursor, world_id, job_obj)
 
 

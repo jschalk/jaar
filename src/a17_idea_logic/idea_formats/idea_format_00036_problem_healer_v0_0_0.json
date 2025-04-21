@@ -6,13 +6,13 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_title": {
+        "fisc_tag": {
             "otx_key": true
         },
         "healer_name": {
             "otx_key": true
         },
-        "item_title": {
+        "item_tag": {
             "otx_key": true
         },
         "owner_name": {

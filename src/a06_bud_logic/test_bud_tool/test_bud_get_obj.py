@@ -75,7 +75,7 @@ def test_bud_item_awardlink_get_obj_ReturnsObj():
     swim_str = "swim"
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "awardee_tag": swim_str}
+    jkeys = {"road": casa_road, "awardee_title": swim_str}
     sue_bud.add_item(casa_road)
     sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
 
@@ -213,7 +213,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_awardlink_get_obj():
     swim_str = "swim"
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "awardee_tag": swim_str}
+    jkeys = {"road": casa_road, "awardee_title": swim_str}
     sue_bud.add_item(casa_road)
     sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
 

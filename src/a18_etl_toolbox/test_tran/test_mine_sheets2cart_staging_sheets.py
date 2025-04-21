@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
@@ -30,8 +30,8 @@ def test_etl_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
     ]
     accord23_str = "accord23"
     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
@@ -41,7 +41,7 @@ def test_etl_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, accord23_str]
     incom_row2 = [sue_str, event_1, minute_420, accord23_str]
@@ -93,8 +93,8 @@ def test_etl_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
     ]
     accord23_str = "accord23"
     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
@@ -104,7 +104,7 @@ def test_etl_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, accord23_str]
     incom_row2 = [sue_str, event_1, minute_420, accord23_str]

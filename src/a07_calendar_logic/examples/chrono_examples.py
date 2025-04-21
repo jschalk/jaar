@@ -10,7 +10,7 @@ from src.a07_calendar_logic.chrono import (
     hours_config_str,
     weekdays_config_str,
     months_config_str,
-    timeline_title_str,
+    timeline_tag_str,
     yr1_jan1_offset_str,
     c400_number_str,
     chronounit_shop,
@@ -43,8 +43,8 @@ def get_squirt_config() -> dict:
     return get_example_timeline_config("squirt")
 
 
-def get_example_timeline_config(timeline_title: str) -> dict:
-    x_filename = f"timeline_config_{timeline_title}.json"
+def get_example_timeline_config(timeline_tag: str) -> dict:
+    x_filename = f"timeline_config_{timeline_tag}.json"
     return open_json(chrono_examples_dir(), x_filename)
 
 
@@ -94,10 +94,10 @@ def creg_weekday_itemunits() -> dict[str, ItemUnit]:
 
 
 def get_cregtime_str():
-    return get_creg_config().get(timeline_title_str())
+    return get_creg_config().get(timeline_tag_str())
 
 
-def creg_hour_title(x_int: int) -> str:
+def creg_hour_tag(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 

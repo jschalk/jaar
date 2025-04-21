@@ -12,7 +12,7 @@ from src.a08_bud_atom_logic.atom_config import (
     group_label_str,
     parent_road_str,
     pledge_str,
-    item_title_str,
+    item_tag_str,
     mass_str,
     debtit_belief_str,
     credit_belief_str,
@@ -39,8 +39,8 @@ def test_make_buddelta_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -79,8 +79,8 @@ def test_make_buddelta_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
     sue_budunit.add_acctunit(yao_str)
@@ -148,8 +148,8 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -166,15 +166,15 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_title)
-    casa_budatom.set_arg(item_title_str(), casa_str)
+    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_tag)
+    casa_budatom.set_arg(item_tag_str(), casa_str)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
     clean_budatom.set_arg(parent_road_str(), casa_road)
-    clean_budatom.set_arg(item_title_str(), clean_str)
+    clean_budatom.set_arg(item_tag_str(), clean_str)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)
@@ -203,8 +203,8 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -221,15 +221,15 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_title)
-    casa_budatom.set_arg(item_title_str(), casa_str)
+    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_tag)
+    casa_budatom.set_arg(item_tag_str(), casa_str)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
     clean_budatom.set_arg(parent_road_str(), casa_road)
-    clean_budatom.set_arg(item_title_str(), clean_str)
+    clean_budatom.set_arg(item_tag_str(), clean_str)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)

@@ -4,7 +4,7 @@ from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
-    item_title_str,
+    item_tag_str,
     parent_road_str,
     begin_str,
     close_str,
@@ -129,7 +129,7 @@ def test_get_fisc_guts_agenda_dataframe_ReturnsObj(
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        item_title_str(),
+        item_tag_str(),
         parent_road_str(),
         begin_str(),
         close_str(),
@@ -170,7 +170,7 @@ def test_get_fisc_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "item_title",
+        "item_tag",
         parent_road_str(),
         begin_str(),
         close_str(),

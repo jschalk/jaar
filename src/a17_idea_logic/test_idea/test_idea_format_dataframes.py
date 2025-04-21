@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import open_file, create_path
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic.examples.chrono_examples import (
@@ -10,7 +10,7 @@ from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     group_label_str,
     parent_road_str,
-    item_title_str,
+    item_tag_str,
     mass_str,
     pledge_str,
     debtit_belief_str,
@@ -44,8 +44,8 @@ def test_create_idea_df_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -58,19 +58,19 @@ def test_create_idea_df_Arg_idea_format_00021_bud_acctunit_v0_0_0():
     array_headers = list(acct_dataframe.columns)
     acct_idearef = get_idearef_obj(x_idea_name)
     assert array_headers == acct_idearef.get_headers_list()
-    assert acct_dataframe.loc[0, fisc_title_str()] == accord_fisc_title
+    assert acct_dataframe.loc[0, fisc_tag_str()] == accord_fisc_tag
     assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
 
-    assert acct_dataframe.loc[1, fisc_title_str()] == accord_fisc_title
+    assert acct_dataframe.loc[1, fisc_tag_str()] == accord_fisc_tag
     assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
 
-    assert acct_dataframe.loc[2, fisc_title_str()] == accord_fisc_title
+    assert acct_dataframe.loc[2, fisc_tag_str()] == accord_fisc_tag
     assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, debtit_belief_str()] == yao_debtit_belief
@@ -84,8 +84,8 @@ def test_create_idea_df_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     sue_budunit.add_acctunit(sue_str)
     sue_budunit.add_acctunit(bob_str)
     sue_budunit.add_acctunit(yao_str)
@@ -116,28 +116,28 @@ def test_create_idea_df_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     acct_idearef = get_idearef_obj(x_idea_name)
     print(f"{len(membership_dataframe)=}")
     assert array_headers == acct_idearef.get_headers_list()
-    assert membership_dataframe.loc[0, fisc_title_str()] == accord_fisc_title
+    assert membership_dataframe.loc[0, fisc_tag_str()] == accord_fisc_tag
     assert membership_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[0, acct_name_str()] == bob_str
     assert membership_dataframe.loc[0, group_label_str()] == iowa_str
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
 
-    assert membership_dataframe.loc[2, fisc_title_str()] == accord_fisc_title
+    assert membership_dataframe.loc[2, fisc_tag_str()] == accord_fisc_tag
     assert membership_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[2, acct_name_str()] == sue_str
     assert membership_dataframe.loc[2, group_label_str()] == iowa_str
     assert membership_dataframe.loc[2, credit_vote_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[2, debtit_vote_str()] == sue_iowa_debtit_w
 
-    assert membership_dataframe.loc[4, fisc_title_str()] == accord_fisc_title
+    assert membership_dataframe.loc[4, fisc_tag_str()] == accord_fisc_tag
     assert membership_dataframe.loc[4, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[4, acct_name_str()] == yao_str
     assert membership_dataframe.loc[4, group_label_str()] == iowa_str
     assert membership_dataframe.loc[4, credit_vote_str()] == yao_iowa_credit_w
     assert membership_dataframe.loc[4, debtit_vote_str()] == yao_iowa_debtit_w
 
-    assert membership_dataframe.loc[5, fisc_title_str()] == accord_fisc_title
+    assert membership_dataframe.loc[5, fisc_tag_str()] == accord_fisc_tag
     assert membership_dataframe.loc[5, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[5, acct_name_str()] == yao_str
     assert membership_dataframe.loc[5, group_label_str()] == ohio_str
@@ -149,8 +149,8 @@ def test_create_idea_df_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
 def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31
@@ -169,16 +169,16 @@ def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
 
     assert itemunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[0, pledge_str()] == ""
-    assert itemunit_format.loc[0, fisc_title_str()] == accord_fisc_title
-    assert itemunit_format.loc[0, item_title_str()] == casa_str
+    assert itemunit_format.loc[0, fisc_tag_str()] == accord_fisc_tag
+    assert itemunit_format.loc[0, item_tag_str()] == casa_str
     assert itemunit_format.loc[0, mass_str()] == casa_mass
-    assert itemunit_format.loc[0, parent_road_str()] == accord_fisc_title
+    assert itemunit_format.loc[0, parent_road_str()] == accord_fisc_tag
 
     assert itemunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
-    assert itemunit_format.loc[1, fisc_title_str()] == accord_fisc_title
+    assert itemunit_format.loc[1, fisc_tag_str()] == accord_fisc_tag
     assert itemunit_format.loc[1, parent_road_str()] == casa_road
-    assert itemunit_format.loc[1, item_title_str()] == clean_str
+    assert itemunit_format.loc[1, item_tag_str()] == clean_str
     assert itemunit_format.loc[1, mass_str()] == 1
     assert len(itemunit_format) == 2
 
@@ -216,8 +216,8 @@ def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -232,7 +232,7 @@ def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """face_name,event_int,fisc_title,owner_name,acct_name,credit_belief,debtit_belief
+    sue1_name_example_csv = """face_name,event_int,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37
@@ -249,7 +249,7 @@ def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """face_name,event_int,fisc_title,owner_name,acct_name,credit_belief,debtit_belief
+    sue2_acct_example_csv = """face_name,event_int,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37
@@ -262,8 +262,8 @@ def test_save_idea_csv_Arg_idea_format_00013_itemunit_v0_0_0(idea_env_setup_clea
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    accord_fisc_title = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_title)
+    accord_fisc_tag = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
     casa_mass = 31

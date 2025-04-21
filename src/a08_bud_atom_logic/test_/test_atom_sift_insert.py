@@ -15,12 +15,12 @@ from src.a06_bud_logic.bud_tool import (
 from src.a08_bud_atom_logic.atom import atom_insert, budatom_shop, sift_budatom
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
-    awardee_tag_str,
+    awardee_title_str,
     group_label_str,
-    team_tag_str,
+    team_title_str,
     healer_name_str,
     parent_road_str,
-    item_title_str,
+    item_tag_str,
     road_str,
     base_str,
 )
@@ -89,16 +89,16 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_itemunit():
 
     root_atom = budatom_shop(bud_itemunit_str(), atom_insert())
     root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(item_title_str(), sue_bud.fisc_title)
+    root_atom.set_arg(item_tag_str(), sue_bud.fisc_tag)
     casa_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_title)
-    casa_atom.set_arg(item_title_str(), casa_str)
+    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_tag)
+    casa_atom.set_arg(item_tag_str(), casa_str)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_insert())
     clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(item_title_str(), clean_str)
+    clean_atom.set_arg(item_tag_str(), clean_str)
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_insert())
     sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(item_title_str(), sweep_str)
+    sweep_atom.set_arg(item_tag_str(), sweep_str)
     assert not sift_budatom(sue_bud, root_atom)
     assert sift_budatom(sue_bud, casa_atom)
     assert sift_budatom(sue_bud, clean_atom)
@@ -130,10 +130,10 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_item_awardlink():
 
     casa_swim_atom = budatom_shop(bud_item_awardlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(awardee_tag_str(), swim_str)
+    casa_swim_atom.set_arg(awardee_title_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_awardlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(awardee_tag_str(), swim_str)
+    clean_swim_atom.set_arg(awardee_title_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert sift_budatom(sue_bud, casa_swim_atom)
@@ -243,10 +243,10 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_item_teamlink():
 
     casa_swim_atom = budatom_shop(bud_item_teamlink_str(), atom_insert())
     casa_swim_atom.set_arg(road_str(), casa_road)
-    casa_swim_atom.set_arg(team_tag_str(), swim_str)
+    casa_swim_atom.set_arg(team_title_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_teamlink_str(), atom_insert())
     clean_swim_atom.set_arg(road_str(), clean_road)
-    clean_swim_atom.set_arg(team_tag_str(), swim_str)
+    clean_swim_atom.set_arg(team_title_str(), swim_str)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert sift_budatom(sue_bud, casa_swim_atom)

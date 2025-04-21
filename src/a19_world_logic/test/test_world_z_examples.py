@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import acct_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.idea_collector import get_all_excel_ideasheets
@@ -20,7 +20,7 @@ def test_mine_to_cart_staging_PidginsAll(env_dir_setup_cleanup):
     sue_str = "Sue"
     event_int = 55
     df1 = DataFrame(
-        [[accord23_str, sue_str]], columns=[fisc_title_str(), acct_name_str()]
+        [[accord23_str, sue_str]], columns=[fisc_tag_str(), acct_name_str()]
     )
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     br00000_str = "br00000"

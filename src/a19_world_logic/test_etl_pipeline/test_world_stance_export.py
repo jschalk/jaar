@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, set_dir
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
@@ -50,7 +50,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -82,7 +82,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -138,13 +138,13 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #         face_name_str(),
 #         event_int_str(),
 #         cumlative_minute_str(),
-#         fisc_title_str(),
-#         hour_title_str(),
+#         fisc_tag_str(),
+#         hour_tag_str(),
 #     ]
 #     br00001_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_title_str(),
+#         fisc_tag_str(),
 #         owner_name_str(),
 #         deal_time(),
 #         quota_str(),
@@ -171,7 +171,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_title_str(),
+#         fisc_tag_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #     ]

@@ -3,7 +3,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a05_item_logic.item import itemunit_shop
-from src.a01_word_logic.road import create_road_from_titles
+from src.a01_word_logic.road import create_road_from_tags
 
 
 def test_BudUnit_get_tree_metrics_exists():
@@ -14,7 +14,7 @@ def test_BudUnit_get_tree_metrics_exists():
     zia_bud_tree_metrics = zia_bud.get_tree_metrics()
 
     # THEN
-    assert zia_bud_tree_metrics.title_count is not None
+    assert zia_bud_tree_metrics.tag_count is not None
     assert zia_bud_tree_metrics.reason_bases is not None
     assert zia_bud_tree_metrics.level_count is not None
     assert zia_bud_tree_metrics.awardlinks_metrics is not None
@@ -98,9 +98,9 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
     # WHEN / THEN
-    traain_road = create_road_from_titles(
+    traain_road = create_road_from_tags(
         [
-            yao_bud.fisc_title,
+            yao_bud.fisc_tag,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",
@@ -175,9 +175,9 @@ def test_BudUnit_3AdvocatesNoitemunit_shop():
     yao_awardlink = accts_metrics[yao_str]
     sue_awardlink = accts_metrics[sue_str]
     zia_awardlink = accts_metrics[zia_str]
-    assert yao_awardlink.awardee_tag is not None
-    assert sue_awardlink.awardee_tag is not None
-    assert zia_awardlink.awardee_tag is not None
-    assert yao_awardlink.awardee_tag == yao_str
-    assert sue_awardlink.awardee_tag == sue_str
-    assert zia_awardlink.awardee_tag == zia_str
+    assert yao_awardlink.awardee_title is not None
+    assert sue_awardlink.awardee_title is not None
+    assert zia_awardlink.awardee_title is not None
+    assert yao_awardlink.awardee_title == yao_str
+    assert sue_awardlink.awardee_title == sue_str
+    assert zia_awardlink.awardee_title == zia_str

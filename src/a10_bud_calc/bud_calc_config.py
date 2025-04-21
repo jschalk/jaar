@@ -1,5 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import open_json, save_json, create_path
-from src.a00_data_toolboxs.dict_toolbox import get_from_nested_dict
+from src.a00_data_toolboxs.file_toolbox import open_json, create_path
 from os import getcwd as os_getcwd
 
 
@@ -15,22 +14,22 @@ def fund_give_str() -> str:
     return "fund_give"
 
 
-def get_fund_metric_config_filename() -> str:
-    return "fund_metric_config.json"
+def get_bud_calc_config_filename() -> str:
+    return "bud_calc_config.json"
 
 
 def config_file_path() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    config_file_dir = create_path(src_dir, "a10_fund_metric")
-    return create_path(config_file_dir, get_fund_metric_config_filename())
+    config_file_dir = create_path(src_dir, "a10_bud_calc")
+    return create_path(config_file_dir, get_bud_calc_config_filename())
 
 
-def get_fund_metric_config_dict() -> dict[str, dict]:
+def get_bud_calc_config_dict() -> dict[str, dict]:
     return open_json(config_file_path())
 
 
-def get_fund_metric_dimen_args(dimen: str) -> set:
-    config_dict = get_fund_metric_config_dict()
+def get_bud_calc_dimen_args(dimen: str) -> set:
+    config_dict = get_bud_calc_config_dict()
     dimen_dict = config_dict.get(dimen)
     all_args = set(dimen_dict.get("jkeys").keys())
     all_args = all_args.union(set(dimen_dict.get("jvalues").keys()))
@@ -38,20 +37,20 @@ def get_fund_metric_dimen_args(dimen: str) -> set:
     return all_args
 
 
-def get_all_fund_metric_args() -> dict[str, set[str]]:
-    fund_metric_config_dict = get_fund_metric_config_dict()
+def get_all_bud_calc_args() -> dict[str, set[str]]:
+    bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}
-    for fund_metric_dimen, dimen_dict in fund_metric_config_dict.items():
+    for bud_calc_dimen, dimen_dict in bud_calc_config_dict.items():
         for dimen_key, arg_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
                 for x_arg in arg_dict.keys():
                     if all_args.get(x_arg) is None:
                         all_args[x_arg] = set()
-                    all_args.get(x_arg).add(fund_metric_dimen)
+                    all_args.get(x_arg).add(bud_calc_dimen)
     return all_args
 
 
-def get_fund_metric_args_type_dict() -> dict[str, str]:
+def get_bud_calc_args_type_dict() -> dict[str, str]:
     return {
         "acct_name": "NameUnit",
         "group_label": "LabelUnit",
@@ -69,7 +68,7 @@ def get_fund_metric_args_type_dict() -> dict[str, str]:
         "_irrational_debtit_belief": "float",
         "credit_belief": "float",
         "debtit_belief": "float",
-        "item_title": "TitleUnit",
+        "item_tag": "TagUnit",
         "parent_road": "RoadUnit",
         "addin": "float",
         "begin": "float",
@@ -82,7 +81,7 @@ def get_fund_metric_args_type_dict() -> dict[str, str]:
         "pledge": "bool",
         "problem_bool": "bool",
         "stop_want": "float",
-        "awardee_tag": "LabelUnit",
+        "awardee_title": "LabelUnit",
         "road": "RoadUnit",
         "give_force": "float",
         "take_force": "float",
@@ -99,7 +98,7 @@ def get_fund_metric_args_type_dict() -> dict[str, str]:
         "open": "float",
         "_base_item_active_value": "int",
         "base_item_active_requisite": "bool",
-        "team_tag": "LabelUnit",
+        "team_title": "LabelUnit",
         "_owner_name_team": "int",
         "_active": "int",
         "_all_acct_cred": "int",
@@ -130,7 +129,7 @@ def get_fund_metric_args_type_dict() -> dict[str, str]:
     }
 
 
-def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
+def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
     return {
         "acct_name": "TEXT",
         "group_label": "TEXT",
@@ -148,7 +147,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "_irrational_debtit_belief": "REAL",
         "credit_belief": "REAL",
         "debtit_belief": "REAL",
-        "item_title": "TEXT",
+        "item_tag": "TEXT",
         "parent_road": "TEXT",
         "addin": "REAL",
         "begin": "REAL",
@@ -161,12 +160,12 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
         "stop_want": "REAL",
-        "awardee_tag": "TEXT",
+        "awardee_title": "TEXT",
         "road": "TEXT",
         "give_force": "REAL",
         "take_force": "REAL",
         "base": "TEXT",
-        "fisc_title": "TEXT",
+        "fisc_tag": "TEXT",
         "fnigh": "REAL",
         "fopen": "REAL",
         "pick": "TEXT",
@@ -180,7 +179,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
         "owner_name": "TEXT",
         "_base_item_active_value": "INTEGER",
         "base_item_active_requisite": "INTEGER",
-        "team_tag": "TEXT",
+        "team_title": "TEXT",
         "bridge": "TEXT",
         "_owner_name_team": "INTEGER",
         "_active": "INTEGER",
@@ -213,7 +212,7 @@ def get_fund_metric_args_sqlite_datatype_dict() -> dict[str, str]:
     }
 
 
-def get_fund_metric_dimens() -> dict[str, str]:
+def get_bud_calc_dimens() -> dict[str, str]:
     return {
         "budunit",
         "bud_acctunit",

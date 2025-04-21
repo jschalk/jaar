@@ -7,18 +7,18 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_fiscunit_v0_0_0
-    c400_number,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset
+    c400_number,fisc_tag,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_tag,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "fisc_title",
+            "fisc_tag",
             "fund_coin",
             "monthday_distortion",
             "penny",
             "respect_bit",
             "bridge",
-            "timeline_title",
+            "timeline_tag",
             "yr1_jan1_offset",
             "job_listen_rotations",
         ]
@@ -29,10 +29,10 @@ def get_ex1_br00000_df() -> DataFrame:
 
 def get_ex1_br00001_df() -> DataFrame:
     """idea_format_00001_fisc_dealunit_v0_0_0
-    fisc_title,owner_name,quota,deal_time,celldepth"""
+    fisc_tag,owner_name,quota,deal_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            "fisc_title",
+            "fisc_tag",
             "owner_name",
             "quota",
             "deal_time",
@@ -45,9 +45,9 @@ def get_ex1_br00001_df() -> DataFrame:
 
 def get_ex1_br00002_df() -> DataFrame:
     """idea_format_00002_fisc_cashbook_v0_0_0
-    acct_name,amount,fisc_title,owner_name,tran_time"""
+    acct_name,amount,fisc_tag,owner_name,tran_time"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "fisc_title", "owner_name", "tran_time"]
+        columns=["acct_name", "amount", "fisc_tag", "owner_name", "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     return x_df
@@ -55,8 +55,8 @@ def get_ex1_br00002_df() -> DataFrame:
 
 def get_ex1_br00003_df() -> DataFrame:
     """idea_format_00003_fisc_timeline_hour_v0_0_0
-    cumlative_minute,fisc_title,hour_title"""
-    x_df = DataFrame(columns=["fisc_title", "hour_title", "cumlative_minute"])
+    cumlative_minute,fisc_tag,hour_tag"""
+    x_df = DataFrame(columns=["fisc_tag", "hour_tag", "cumlative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -86,8 +86,8 @@ def get_ex1_br00003_df() -> DataFrame:
 
 def get_ex1_br00004_df() -> DataFrame:
     """idea_format_00004_fisc_timeline_month_v0_0_0
-    cumlative_day,fisc_title,month_title"""
-    x_df = DataFrame(columns=["fisc_title", "month_title", "cumlative_day"])
+    cumlative_day,fisc_tag,month_tag"""
+    x_df = DataFrame(columns=["fisc_tag", "month_tag", "cumlative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -105,8 +105,8 @@ def get_ex1_br00004_df() -> DataFrame:
 
 def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_fisc_timeline_weekday_v0_0_0
-    fisc_title,weekday_title,weekday_order"""
-    x_df = DataFrame(columns=["fisc_title", "weekday_title", "weekday_order"])
+    fisc_tag,weekday_tag,weekday_order"""
+    x_df = DataFrame(columns=["fisc_tag", "weekday_tag", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
@@ -119,18 +119,18 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_fiscunit_v0_0_0
-    c400_number,fisc_title,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_title,yr1_jan1_offset,job_listen_rotations
+    c400_number,fisc_tag,fund_coin,monthday_distortion,penny,respect_bit,bridge,timeline_tag,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
             "c400_number",
-            "fisc_title",
+            "fisc_tag",
             "fund_coin",
             "monthday_distortion",
             "penny",
             "respect_bit",
             "bridge",
-            "timeline_title",
+            "timeline_tag",
             "yr1_jan1_offset",
             "job_listen_rotations",
         ]
@@ -142,10 +142,10 @@ def get_ex2_br00000_df() -> DataFrame:
 
 def get_ex2_br00001_df() -> DataFrame:
     """idea_format_00001_fisc_dealunit_v0_0_0
-    fisc_title,owner_name,quota,deal_time"""
+    fisc_tag,owner_name,quota,deal_time"""
     x_df = DataFrame(
         columns=[
-            "fisc_title",
+            "fisc_tag",
             "owner_name",
             "quota",
             "deal_time",
@@ -162,9 +162,9 @@ def get_ex2_br00001_df() -> DataFrame:
 
 def get_ex2_br00002_df() -> DataFrame:
     """idea_format_00002_fisc_cashbook_v0_0_0
-    acct_name,amount,fisc_title,owner_name,tran_time"""
+    acct_name,amount,fisc_tag,owner_name,tran_time"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "fisc_title", "owner_name", "tran_time"]
+        columns=["acct_name", "amount", "fisc_tag", "owner_name", "tran_time"]
     )
     x_df.loc[0] = ["Zia", 888, ACCORD23_STR, "Bob", 777]
     x_df.loc[1] = ["Zia", 234, ACCORD23_STR, "Sue", 999]
@@ -176,8 +176,8 @@ def get_ex2_br00002_df() -> DataFrame:
 
 def get_ex2_br00003_df() -> DataFrame:
     """idea_format_00003_fisc_timeline_hour_v0_0_0
-    cumlative_minute,fisc_title,hour_title"""
-    x_df = DataFrame(columns=["fisc_title", "hour_title", "cumlative_minute"])
+    cumlative_minute,fisc_tag,hour_tag"""
+    x_df = DataFrame(columns=["fisc_tag", "hour_tag", "cumlative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -227,8 +227,8 @@ def get_ex2_br00003_df() -> DataFrame:
 
 def get_ex2_br00004_df() -> DataFrame:
     """idea_format_00004_fisc_timeline_month_v0_0_0
-    cumlative_day,fisc_title,month_title"""
-    x_df = DataFrame(columns=["fisc_title", "month_title", "cumlative_day"])
+    cumlative_day,fisc_tag,month_tag"""
+    x_df = DataFrame(columns=["fisc_tag", "month_tag", "cumlative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -261,8 +261,8 @@ def get_ex2_br00004_df() -> DataFrame:
 
 def get_ex2_br00005_df() -> DataFrame:
     """idea_format_00005_fisc_timeline_weekday_v0_0_0
-    fisc_title,weekday_title,weekday_order"""
-    x_df = DataFrame(columns=["fisc_title", "weekday_title", "weekday_order"])
+    fisc_tag,weekday_tag,weekday_order"""
+    x_df = DataFrame(columns=["fisc_tag", "weekday_tag", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
@@ -280,8 +280,8 @@ def get_ex2_br00005_df() -> DataFrame:
 
 # def get_ex2_br00006_df() -> DataFrame:
 #     """idea_format_00006_fisc_timeoffi_v0_0_0
-#     fisc_title,offi_time,_offi_time_maxt"""
-#     x_df = DataFrame(columns=["fisc_title", "offi_time", "_offi_time_max"])
+#     fisc_tag,offi_time,_offi_time_maxt"""
+#     x_df = DataFrame(columns=["fisc_tag", "offi_time", "_offi_time_max"])
 #     x_df.loc[0] = [ACCORD23_STR, 100, 300]
 #     x_df.loc[1] = [ACCORD23_STR, 110, 320]
 #     x_df.loc[2] = [ACCORD23_STR, 120, 330]

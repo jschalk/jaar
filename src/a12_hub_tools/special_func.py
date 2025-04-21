@@ -1,6 +1,6 @@
 from src.a01_word_logic.road import (
     RoadUnit,
-    get_terminus_title,
+    get_terminus_tag,
     get_parent_road,
     LabelUnit,
 )
@@ -16,7 +16,7 @@ def create_pledge(
     x_teamlink: LabelUnit = None,
     reason_premise: RoadUnit = None,
 ):
-    if pledge_road is not None and get_terminus_title(pledge_road) != "":
+    if pledge_road is not None and get_terminus_tag(pledge_road) != "":
         x_item = x_bud.get_item_obj(pledge_road, if_missing_create=True)
         x_item.pledge = True
         x_item.teamunit.set_teamlink(x_teamlink)
@@ -39,7 +39,7 @@ def add_gut_pledge(
 ):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
-        x_hubunit.fisc_title,
+        x_hubunit.fisc_tag,
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)
@@ -60,7 +60,7 @@ def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
 def add_gut_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
-        x_hubunit.fisc_title,
+        x_hubunit.fisc_tag,
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)

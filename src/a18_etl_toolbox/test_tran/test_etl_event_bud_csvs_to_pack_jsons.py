@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_file, save_file
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a06_bud_logic.bud_tool import bud_acctunit_str, budunit_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
@@ -36,7 +36,7 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV
     a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    e3_put_csv = f"""{face_name_str()},{event_int_str()},fisc_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
+    e3_put_csv = f"""{face_name_str()},{event_int_str()},fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
 {sue_inx},{event3},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
@@ -85,10 +85,10 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
-    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
-    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {sue_inx},{event7},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {sue_inx},{event7},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """

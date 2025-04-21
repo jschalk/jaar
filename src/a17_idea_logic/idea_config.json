@@ -7,7 +7,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "group_label": {},
       "owner_name": {}
     },
@@ -24,7 +24,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -37,10 +37,10 @@
     "build_order": 11,
     "idea_category": "bud",
     "jkeys": {
-      "awardee_tag": {},
+      "awardee_title": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {},
       "road": {}
     },
@@ -57,7 +57,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {},
       "road": {}
     },
@@ -74,7 +74,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "healer_name": {},
       "owner_name": {},
       "road": {}
@@ -89,7 +89,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "need": {},
       "owner_name": {},
       "road": {}
@@ -108,7 +108,7 @@
       "base": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {},
       "road": {}
     },
@@ -123,10 +123,10 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {},
       "road": {},
-      "team_tag": {}
+      "team_title": {}
     },
     "jvalues": {}
   },
@@ -137,8 +137,8 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
-      "item_title": {},
+      "fisc_tag": {},
+      "item_tag": {},
       "owner_name": {},
       "parent_road": {}
     },
@@ -163,7 +163,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -185,7 +185,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {},
       "tran_time": {}
     },
@@ -201,7 +201,7 @@
       "deal_time": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -217,10 +217,10 @@
       "cumlative_minute": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {}
+      "fisc_tag": {}
     },
     "jvalues": {
-      "hour_title": {}
+      "hour_tag": {}
     }
   },
   "fisc_timeline_month": {
@@ -231,10 +231,10 @@
       "cumlative_day": {},
       "event_int": {},
       "face_name": {},
-      "fisc_title": {}
+      "fisc_tag": {}
     },
     "jvalues": {
-      "month_title": {}
+      "month_tag": {}
     }
   },
   "fisc_timeline_weekday": {
@@ -244,11 +244,11 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "weekday_order": {}
     },
     "jvalues": {
-      "weekday_title": {}
+      "weekday_tag": {}
     }
   },
   "fisc_timeoffi": {
@@ -258,7 +258,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {},
+      "fisc_tag": {},
       "offi_time": {}
     },
     "jvalues": {}
@@ -270,7 +270,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_title": {}
+      "fisc_tag": {}
     },
     "jvalues": {
       "bridge": {},
@@ -280,7 +280,7 @@
       "penny": {},
       "job_listen_rotations": {},
       "respect_bit": {},
-      "timeline_title": {},
+      "timeline_tag": {},
       "yr1_jan1_offset": {}
     }
   },
@@ -332,18 +332,18 @@
       "unknown_word": {}
     }
   },
-  "map_title": {
+  "map_tag": {
     "allowed_crud": "INSERT_ONE_TIME",
     "build_order": 2,
     "idea_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_title": {}
+      "otx_tag": {}
     },
     "jvalues": {
       "inx_bridge": {},
-      "inx_title": {},
+      "inx_tag": {},
       "otx_bridge": {},
       "unknown_word": {}
     }

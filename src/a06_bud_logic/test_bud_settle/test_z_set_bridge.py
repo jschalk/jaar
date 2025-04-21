@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road, get_default_fisc_title as root_title
+from src.a01_word_logic.road import create_road, get_default_fisc_tag as root_tag
 from src.a04_reason_logic.reason_item import reasonunit_shop, factunit_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
@@ -6,28 +6,28 @@ from src.a06_bud_logic.examples.example_buds import get_budunit_with_4_levels
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_set_fisc_title_CorrectlySetsAttr():
+def test_BudUnit_set_fisc_tag_CorrectlySetsAttr():
     # ESTABLISH
-    x_fisc_title = "accord45"
+    x_fisc_tag = "accord45"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
-    assert sue_bud.fisc_title == root_title()
+    assert sue_bud.fisc_tag == root_tag()
 
     # WHEN
-    sue_bud.set_fisc_title(fisc_title=x_fisc_title)
+    sue_bud.set_fisc_tag(fisc_tag=x_fisc_tag)
 
     # THEN
-    assert sue_bud.fisc_title == x_fisc_title
+    assert sue_bud.fisc_tag == x_fisc_tag
 
 
-def test_BudUnit_set_item_CorrectlySetsfisc_title_AND_fund_coin():
+def test_BudUnit_set_item_CorrectlySetsfisc_tag_AND_fund_coin():
     # ESTABLISH'
     x_fund_coin = 500
     sue_bud = get_budunit_with_4_levels()
     sue_bud.fund_coin = x_fund_coin
-    bud_fisc_title = "Texas"
-    sue_bud.set_fisc_title(bud_fisc_title)
-    assert sue_bud.fisc_title == bud_fisc_title
+    bud_fisc_tag = "Texas"
+    sue_bud.set_fisc_tag(bud_fisc_tag)
+    assert sue_bud.fisc_tag == bud_fisc_tag
 
     casa_road = sue_bud.make_l1_road("casa")
     clean_road = sue_bud.make_road(casa_road, "cleaning")
@@ -39,11 +39,11 @@ def test_BudUnit_set_item_CorrectlySetsfisc_title_AND_fund_coin():
 
     # THEN
     cookery_item = sue_bud.get_item_obj(cookery_road)
-    assert cookery_item.fisc_title == bud_fisc_title
+    assert cookery_item.fisc_tag == bud_fisc_tag
     assert cookery_item.fund_coin == x_fund_coin
 
 
-def test_bud_set_fisc_title_CorrectlySetsAttr():
+def test_bud_set_fisc_tag_CorrectlySetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -54,30 +54,30 @@ def test_bud_set_fisc_title_CorrectlySetsAttr():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(swim_str), parent_road=old_casa_road)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.itemroot.item_title == yao_bud.fisc_title
+    assert yao_bud.itemroot.item_tag == yao_bud.fisc_tag
     casa_item = yao_bud.get_item_obj(old_casa_road)
-    assert casa_item.parent_road == yao_bud.fisc_title
+    assert casa_item.parent_road == yao_bud.fisc_tag
     swim_item = yao_bud.get_item_obj(old_swim_road)
     assert swim_item.parent_road == old_casa_road
-    assert yao_bud.fisc_title == yao_bud.fisc_title
+    assert yao_bud.fisc_tag == yao_bud.fisc_tag
 
     # WHEN
-    x_fisc_title = "accord45"
-    yao_bud.set_fisc_title(fisc_title=x_fisc_title)
+    x_fisc_tag = "accord45"
+    yao_bud.set_fisc_tag(fisc_tag=x_fisc_tag)
 
     # THEN
     new_casa_road = yao_bud.make_l1_road(casa_str)
     swim_str = "swim"
     new_swim_road = yao_bud.make_road(new_casa_road, swim_str)
-    assert yao_bud.fisc_title == x_fisc_title
-    assert yao_bud.itemroot.item_title == x_fisc_title
+    assert yao_bud.fisc_tag == x_fisc_tag
+    assert yao_bud.itemroot.item_tag == x_fisc_tag
     casa_item = yao_bud.get_item_obj(new_casa_road)
-    assert casa_item.parent_road == x_fisc_title
+    assert casa_item.parent_road == x_fisc_tag
     swim_item = yao_bud.get_item_obj(new_swim_road)
     assert swim_item.parent_road == new_casa_road
 
 
-def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_title():
+def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_tag():
     # ESTABLISH
     zia_bud = budunit_shop("Zia", "Texas")
     print(f"{zia_bud.max_tree_traverse=}")
@@ -95,7 +95,7 @@ def test_bud_set_bridge_RaisesErrorIfNew_bridge_IsAnItem_title():
         zia_bud.set_bridge(slash_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify bridge to '{slash_str}' because it exists an item item_title '{casa_road}'"
+        == f"Cannot modify bridge to '{slash_str}' because it exists an item item_tag '{casa_road}'"
     )
 
 
@@ -112,10 +112,10 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
     semicolon_str = ";"
     assert zia_bud.bridge == semicolon_str
     semicolon_cook_road = zia_bud.make_road(semicolon_casa_road, cook_str)
-    # print(f"{zia_bud.fisc_title=} {zia_bud.itemroot.item_title=} {casa_road=}")
-    # print(f"{cook_item.parent_road=} {cook_item.item_title=}")
+    # print(f"{zia_bud.fisc_tag=} {zia_bud.itemroot.item_tag=} {casa_road=}")
+    # print(f"{cook_item.parent_road=} {cook_item.item_tag=}")
     # semicolon_casa_item = zia_bud.get_item_obj(semicolon_casa_road)
-    # print(f"{semicolon_casa_item.parent_road=} {semicolon_casa_item.item_title=}")
+    # print(f"{semicolon_casa_item.parent_road=} {semicolon_casa_item.item_tag=}")
     assert cook_item.get_road() == semicolon_cook_road
 
     # WHEN
@@ -124,8 +124,8 @@ def test_bud_set_bridge_CorrectlyModifies_parent_road():
 
     # THEN
     assert cook_item.get_road() != semicolon_cook_road
-    zia_fisc_title = zia_bud.fisc_title
-    slash_casa_road = create_road(zia_fisc_title, casa_str, bridge=slash_str)
+    zia_fisc_tag = zia_bud.fisc_tag
+    slash_casa_road = create_road(zia_fisc_tag, casa_str, bridge=slash_str)
     slash_cook_road = create_road(slash_casa_road, cook_str, bridge=slash_str)
     assert cook_item.get_road() == slash_cook_road
 

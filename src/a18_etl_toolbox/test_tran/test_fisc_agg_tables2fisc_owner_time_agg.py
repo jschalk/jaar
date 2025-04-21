@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a18_etl_toolbox.transformers import (
@@ -27,7 +27,7 @@ def test_etl_fisc_agg_tables2fisc_ote1_agg_SetsTableAttr():
 
         x_fisc = FiscPrimeObjsRef()
         insert_staging_sqlstr = f"""
-INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_title_str()}, {owner_name_str()}, {deal_time_str()})
+INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
@@ -73,7 +73,7 @@ VALUES
 
 #         x_fisc = FiscPrimeObjsRef()
 #         insert_staging_sqlstr = f"""
-# INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_title_str()}, {deal_time_str()})
+# INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_tag_str()}, {deal_time_str()})
 # VALUES
 #   ({event3}, '{accord23_str}', {timepoint66})
 # , ({event7}, '{accord23_str}', {timepoint55})
@@ -92,7 +92,7 @@ VALUES
 #         assert db_table_exists(cursor, fisc_ote1_agg_str)
 #         assert get_row_count(cursor, fisc_ote1_agg_str) == 3
 #         cursor.execute(
-#             f"SELECT {event_int_str()}, {fisc_title_str()}, {deal_time_str()}, error_message FROM {fisc_ote1_agg_str};"
+#             f"SELECT {event_int_str()}, {fisc_tag_str()}, {deal_time_str()}, error_message FROM {fisc_ote1_agg_str};"
 #         )
 #         fiscunit_agg_rows = cursor.fetchall()
 #         ex_row0 = (accord23_str, event3, timepoint66, "sorted")

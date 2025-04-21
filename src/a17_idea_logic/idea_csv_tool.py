@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.dict_toolbox import get_empty_str_if_None as if_none_str
-from src.a01_word_logic.road import FiscTitle, FaceName
+from src.a01_word_logic.road import FiscTag, FaceName
 from src.a06_bud_logic.bud import BudUnit
 from src.a09_pack_logic.pack import PackUnit
 from src.a15_fisc_logic.fisc import FiscUnit
@@ -48,7 +48,7 @@ def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
 
 
 def add_fiscunits_to_stance_csv_strs(
-    fiscs_dict: dict[FiscTitle, FiscUnit],
+    fiscs_dict: dict[FiscTag, FiscUnit],
     fisc_csv_strs: dict[str, str],
     csv_delimiter: str,
 ):
@@ -94,8 +94,8 @@ def _add_fiscunit_to_br00000_csv(
     x_row = [
         if_none_str(face_name),
         if_none_str(event_int),
-        x_fisc.fisc_title,
-        x_fisc.timeline.timeline_title,
+        x_fisc.fisc_tag,
+        x_fisc.timeline.timeline_tag,
         str(x_fisc.timeline.c400_number),
         str(x_fisc.timeline.yr1_jan1_offset),
         str(x_fisc.timeline.monthday_distortion),
@@ -122,7 +122,7 @@ def _add_dealunit_to_br00001_csv(
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_fisc.fisc_title,
+                x_fisc.fisc_tag,
                 broker_owner_name,
                 str(deal_time),
                 str(dealunit.quota),
@@ -143,11 +143,11 @@ def _add_cashbook_to_br00002_csv(
     for owner_name, tranunit in x_fisc.cashbook.tranunits.items():
         for acct_name, time_dict in tranunit.items():
             for tran_time, amount in time_dict.items():
-                fisc_title = x_fisc.fisc_title
+                fisc_tag = x_fisc.fisc_tag
                 x_row = [
                     if_none_str(face_name),
                     if_none_str(event_int),
-                    fisc_title,
+                    fisc_tag,
                     owner_name,
                     acct_name,
                     str(tran_time),
@@ -169,7 +169,7 @@ def _add_hours_to_br00003_csv(
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_fisc.fisc_title,
+            x_fisc.fisc_tag,
             str(hour_item[1]),
             hour_item[0],
         ]
@@ -189,7 +189,7 @@ def _add_months_to_br00004_csv(
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_fisc.fisc_title,
+            x_fisc.fisc_tag,
             str(month_item[1]),
             month_item[0],
         ]
@@ -205,13 +205,13 @@ def _add_weekdays_to_br00005_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for count_x, weekday_title in enumerate(x_fisc.timeline.weekdays_config):
+    for count_x, weekday_tag in enumerate(x_fisc.timeline.weekdays_config):
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_fisc.fisc_title,
+            x_fisc.fisc_tag,
             str(count_x),
-            weekday_title,
+            weekday_tag,
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -230,7 +230,7 @@ def add_bud_to_br00020_csv(
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_bud.fisc_title,
+                x_bud.fisc_tag,
                 x_bud.owner_name,
                 acctunit.acct_name,
                 membership.group_label,
@@ -253,7 +253,7 @@ def add_bud_to_br00021_csv(
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_bud.fisc_title,
+            x_bud.fisc_tag,
             x_bud.owner_name,
             acctunit.acct_name,
             if_none_str(acctunit.credit_belief),
@@ -276,10 +276,10 @@ def add_bud_to_br00022_csv(
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_bud.fisc_title,
+                x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_road(),
-                awardlink.awardee_tag,
+                awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
             ]
@@ -299,7 +299,7 @@ def add_bud_to_br00023_csv(
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_bud.fisc_title,
+            x_bud.fisc_tag,
             x_bud.owner_name,
             x_bud.itemroot.get_road(),
             factunit.base,
@@ -320,14 +320,14 @@ def add_bud_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for itemunit in x_bud._item_dict.values():
-        for group_tag in itemunit.teamunit._teamlinks:
+        for group_title in itemunit.teamunit._teamlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_bud.fisc_title,
+                x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_road(),
-                group_tag,
+                group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -342,14 +342,14 @@ def add_bud_to_br00025_csv(
     event_int: int = None,
 ) -> str:
     for itemunit in x_bud._item_dict.values():
-        for group_tag in itemunit.healerlink._healer_names:
+        for group_title in itemunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_bud.fisc_title,
+                x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_road(),
-                group_tag,
+                group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -369,7 +369,7 @@ def add_bud_to_br00026_csv(
                 x_row = [
                     if_none_str(face_name),
                     if_none_str(event_int),
-                    x_bud.fisc_title,
+                    x_bud.fisc_tag,
                     x_bud.owner_name,
                     itemunit.get_road(),
                     reasonunit.base,
@@ -395,7 +395,7 @@ def add_bud_to_br00027_csv(
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_bud.fisc_title,
+                x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_road(),
                 reasonunit.base,
@@ -418,10 +418,10 @@ def add_bud_to_br00028_csv(
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_bud.fisc_title,
+                x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.parent_road,
-                itemunit.item_title,
+                itemunit.item_tag,
                 if_none_str(itemunit.begin),
                 if_none_str(itemunit.close),
                 if_none_str(itemunit.addin),
@@ -449,7 +449,7 @@ def add_bud_to_br00029_csv(
     x_row = [
         if_none_str(face_name),
         if_none_str(event_int),
-        x_bud.fisc_title,
+        x_bud.fisc_tag,
         x_bud.owner_name,
         if_none_str(x_bud.credor_respect),
         if_none_str(x_bud.debtor_respect),
@@ -533,7 +533,7 @@ def add_to_br00043_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
 
 
 def add_to_br00044_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
-    for x_otx, x_inx in x_pidginunit.titlemap.otx2inx.items():
+    for x_otx, x_inx in x_pidginunit.tagmap.otx2inx.items():
         x_row = [
             x_pidginunit.face_name,
             str(x_pidginunit.event_int),
@@ -589,7 +589,7 @@ def add_pack_to_br00020_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("acct_name"),
                 budatom.jkeys.get("group_label"),
@@ -609,7 +609,7 @@ def add_pack_to_br00021_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("acct_name"),
                 if_none_str(budatom.jvalues.get("credit_belief")),
@@ -628,10 +628,10 @@ def add_pack_to_br00022_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
-                budatom.jkeys.get("awardee_tag"),
+                budatom.jkeys.get("awardee_title"),
                 if_none_str(budatom.jvalues.get("give_force")),
                 if_none_str(budatom.jvalues.get("take_force")),
             ]
@@ -648,7 +648,7 @@ def add_pack_to_br00023_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
@@ -669,10 +669,10 @@ def add_pack_to_br00024_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
-                budatom.jkeys.get("team_tag"),
+                budatom.jkeys.get("team_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -687,7 +687,7 @@ def add_pack_to_br00025_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("healer_name"),
@@ -705,7 +705,7 @@ def add_pack_to_br00026_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
@@ -727,7 +727,7 @@ def add_pack_to_br00027_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
@@ -746,10 +746,10 @@ def add_pack_to_br00028_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("parent_road"),
-                budatom.jkeys.get("item_title"),
+                budatom.jkeys.get("item_tag"),
                 if_none_str(budatom.jvalues.get("begin")),
                 if_none_str(budatom.jvalues.get("close")),
                 if_none_str(budatom.jvalues.get("addin")),
@@ -776,7 +776,7 @@ def add_pack_to_br00029_csv(
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
-                x_packunit.fisc_title,
+                x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 if_none_str(budatom.jvalues.get("credor_respect")),
                 if_none_str(budatom.jvalues.get("debtor_respect")),

@@ -23,12 +23,12 @@ from src.a02_finance_toolboxs.finance_config import (
 )
 from src.a01_word_logic.road import (
     OwnerName,
-    FiscTitle,
-    TitleUnit,
+    FiscTag,
+    TagUnit,
     RoadUnit,
     rebuild_road,
-    get_all_road_titles,
-    validate_titleunit,
+    get_all_road_tags,
+    validate_tagunit,
     default_bridge_if_None,
 )
 from src.a06_bud_logic.bud import (
@@ -100,7 +100,7 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 class HubUnit:
     owner_name: OwnerName = None
     fisc_mstr_dir: str = None
-    fisc_title: str = None
+    fisc_tag: str = None
     keep_road: RoadUnit = None
     bridge: str = None
     fund_pool: float = None
@@ -114,16 +114,16 @@ class HubUnit:
 
     def set_dir_attrs(self):
         mstr_dir = self.fisc_mstr_dir
-        fisc_title = self.fisc_title
+        fisc_tag = self.fisc_tag
         owner_name = self.owner_name
-        self._keeps_dir = create_keeps_dir_path(mstr_dir, fisc_title, owner_name)
-        self._atoms_dir = create_atoms_dir_path(mstr_dir, fisc_title, owner_name)
-        self._packs_dir = create_packs_dir_path(mstr_dir, fisc_title, owner_name)
+        self._keeps_dir = create_keeps_dir_path(mstr_dir, fisc_tag, owner_name)
+        self._atoms_dir = create_atoms_dir_path(mstr_dir, fisc_tag, owner_name)
+        self._packs_dir = create_packs_dir_path(mstr_dir, fisc_tag, owner_name)
 
     def default_gut_bud(self) -> BudUnit:
         x_budunit = budunit_shop(
             owner_name=self.owner_name,
-            fisc_title=self.fisc_title,
+            fisc_tag=self.fisc_tag,
             bridge=self.bridge,
             fund_pool=self.fund_pool,
             fund_coin=self.fund_coin,
@@ -167,7 +167,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_bud_from_atom_files(self) -> BudUnit:
-        x_bud = budunit_shop(self.owner_name, self.fisc_title)
+        x_bud = budunit_shop(self.owner_name, self.fisc_tag)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -300,15 +300,13 @@ class HubUnit:
         x_packunit = self._default_packunit()
         x_packunit._buddelta.add_all_different_budatoms(
             before_bud=self.default_gut_bud(),
-            after_bud=open_gut_file(
-                self.fisc_mstr_dir, self.fisc_title, self.owner_name
-            ),
+            after_bud=open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name),
         )
         x_packunit.save_files()
 
     def initialize_pack_gut_files(self):
         x_gut_file_exists = gut_file_exists(
-            self.fisc_mstr_dir, self.fisc_title, self.owner_name
+            self.fisc_mstr_dir, self.fisc_tag, self.owner_name
         )
         pack_file_exists = self.pack_file_exists(init_pack_id())
         if x_gut_file_exists is False and pack_file_exists is False:
@@ -319,7 +317,7 @@ class HubUnit:
             self._create_initial_pack_files_from_gut()
 
     def append_packs_to_gut_file(self):
-        gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
+        gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name)
         gut_bud = self._merge_any_packs(gut_bud)
         save_gut_file(self.fisc_mstr_dir, gut_bud)
         return gut_bud
@@ -408,13 +406,13 @@ class HubUnit:
         return perspective_bud
 
     def get_dw_perspective_bud(self, speaker_id: OwnerName) -> BudUnit:
-        speaker_job = open_job_file(self.fisc_mstr_dir, self.fisc_title, speaker_id)
+        speaker_job = open_job_file(self.fisc_mstr_dir, self.fisc_tag, speaker_id)
         return self.get_perspective_bud(speaker_job)
 
     def rj_speaker_bud(self, healer_name: OwnerName, speaker_id: OwnerName) -> BudUnit:
         speaker_hubunit = hubunit_shop(
             fisc_mstr_dir=self.fisc_mstr_dir,
-            fisc_title=self.fisc_title,
+            fisc_tag=self.fisc_tag,
             owner_name=healer_name,
             keep_road=self.keep_road,
             bridge=self.bridge,
@@ -429,7 +427,7 @@ class HubUnit:
         return self.get_perspective_bud(speaker_plan)
 
     def get_keep_roads(self) -> set[RoadUnit]:
-        x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
+        x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name)
         x_gut_bud.settle_bud()
         if x_gut_bud._keeps_justified is False:
             x_str = f"Cannot get_keep_roads from '{self.owner_name}' gut bud because 'BudUnit._keeps_justified' is False."
@@ -444,7 +442,7 @@ class HubUnit:
         return get_empty_set_if_None(keep_roads)
 
     def save_all_gut_dutys(self):
-        gut = open_gut_file(self.fisc_mstr_dir, self.fisc_title, self.owner_name)
+        gut = open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name)
         for x_keep_road in self.get_keep_roads():
             self.keep_road = x_keep_road
             self.save_duty_bud(gut)
@@ -476,7 +474,7 @@ class HubUnit:
 
 def hubunit_shop(
     fisc_mstr_dir: str,
-    fisc_title: FiscTitle,
+    fisc_tag: FiscTag,
     owner_name: OwnerName = None,
     keep_road: RoadUnit = None,
     bridge: str = None,
@@ -488,8 +486,8 @@ def hubunit_shop(
 ) -> HubUnit:
     x_hubunit = HubUnit(
         fisc_mstr_dir=fisc_mstr_dir,
-        fisc_title=fisc_title,
-        owner_name=validate_titleunit(owner_name, bridge),
+        fisc_tag=fisc_tag,
+        owner_name=validate_tagunit(owner_name, bridge),
         keep_road=keep_road,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
@@ -502,9 +500,9 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_path(x_hubunit: HubUnit, x_road: TitleUnit) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_road: TagUnit) -> str:
     keep_root = "itemroot"
-    x_road = rebuild_road(x_road, x_hubunit.fisc_title, keep_root)
-    x_list = get_all_road_titles(x_road, x_hubunit.bridge)
+    x_road = rebuild_road(x_road, x_hubunit.fisc_tag, keep_root)
+    x_list = get_all_road_tags(x_road, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return create_path(x_hubunit._keeps_dir, keep_sub_path)

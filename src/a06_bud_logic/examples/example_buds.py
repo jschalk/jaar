@@ -44,7 +44,7 @@ def budunit_v001_with_large_agenda() -> BudUnit:
 
 def budunit_v002() -> BudUnit:
     bob_bud = budunit_get_from_json(open_file(env_dir(), "example_bud2.json"))
-    print(f"{bob_bud.fisc_title=} {bob_bud.bridge=}")
+    print(f"{bob_bud.fisc_tag=} {bob_bud.bridge=}")
     return bob_bud
 
 
@@ -223,7 +223,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     tiger_str = "tiger"
-    zia_bud = budunit_shop("Zia", fisc_title=tiger_str)
+    zia_bud = budunit_shop("Zia", fisc_tag=tiger_str)
     shave_str = "shave"
     shave_road = zia_bud.make_l1_road(shave_str)
     item_kid_shave = itemunit_shop(shave_str, mass=30, pledge=True)
@@ -371,7 +371,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     cali_teamunit.set_teamlink(cali_str)
     amos_bud.edit_item_attr(road=laundry_task_road, teamunit=cali_teamunit)
     # print(f"{basket_road=}")
-    # print(f"{amos_bud.fisc_title=}")
+    # print(f"{amos_bud.fisc_tag=}")
     amos_bud.add_fact(base=basket_road, pick=b_full_road)
 
     return amos_bud
@@ -398,7 +398,7 @@ def from_list_get_active(
 
     active = temp_item._active
     print(
-        f"Set active: {item.item_title=} {active} {active_true_count=} {active_false_count=}"
+        f"Set active: {item.item_tag=} {active} {active_true_count=} {active_false_count=}"
     )
 
     return active

@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.dict_toolbox import set_in_nested_dict
 from src.a00_data_toolboxs.db_toolbox import sqlite_obj_str
-from src.a02_finance_toolboxs.deal import OwnerName, FiscTitle
+from src.a02_finance_toolboxs.deal import OwnerName, FiscTag
 from src.a01_word_logic.road import RoadUnit, WorldID
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
@@ -15,29 +15,29 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 
 
-def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> dict:
+def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_tag: FiscTag) -> dict:
     """Fetches a FiscUnit's data from multiple tables and returns it as a dictionary."""
 
-    fu1_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_title)
+    fu1_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_tag)
     cursor.execute(fu1_sqlstrs.get("fiscunit"))
     fiscunit_row = cursor.fetchone()
     if not fiscunit_row:
         return None  # fiscunit not found
 
-    timeline_title = fiscunit_row[1]
+    timeline_tag = fiscunit_row[1]
     c400_number = fiscunit_row[2]
     yr1_jan1_offset = fiscunit_row[3]
     monthday_distortion = fiscunit_row[4]
 
-    fisc_dict: dict[str, any] = {"fisc_title": fiscunit_row[0], "timeline": {}}
+    fisc_dict: dict[str, any] = {"fisc_tag": fiscunit_row[0], "timeline": {}}
     if (
-        timeline_title is not None
+        timeline_tag is not None
         and c400_number is not None
         and yr1_jan1_offset is not None
         and monthday_distortion is not None
     ):
-        if timeline_title:
-            fisc_dict["timeline"]["timeline_title"] = timeline_title
+        if timeline_tag:
+            fisc_dict["timeline"]["timeline_tag"] = timeline_tag
         if c400_number:
             fisc_dict["timeline"]["c400_number"] = c400_number
         if yr1_jan1_offset:
@@ -55,7 +55,7 @@ def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> dict
         fisc_dict["bridge"] = bridge
 
     cursor.execute(fu1_sqlstrs.get("fisc_cashbook"))
-    _set_fisc_dict_fisccash(cursor, fisc_dict, fisc_title)
+    _set_fisc_dict_fisccash(cursor, fisc_dict, fisc_tag)
 
     cursor.execute(fu1_sqlstrs.get("fisc_dealunit"))
     _set_fisc_dict_fiscdeal(cursor, fisc_dict)
@@ -74,24 +74,24 @@ def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_title: FiscTitle) -> dict
     return fisc_dict
 
 
-def _set_fisc_dict_fisccash(cursor: sqlite3_Cursor, fisc_dict: dict, x_fisc_title: str):
+def _set_fisc_dict_fisccash(cursor: sqlite3_Cursor, fisc_dict: dict, x_fisc_tag: str):
     tranunits_dict = {}
     for fisccash_row in cursor.fetchall():
-        row_fisc_title = fisccash_row[0]
+        row_fisc_tag = fisccash_row[0]
         row_owner_name = fisccash_row[1]
         row_acct_name = fisccash_row[2]
         row_tran_time = fisccash_row[3]
         row_amount = fisccash_row[4]
         keylist = [row_owner_name, row_acct_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
-    cashbook_dict = {"fisc_title": x_fisc_title, "tranunits": tranunits_dict}
+    cashbook_dict = {"fisc_tag": x_fisc_tag, "tranunits": tranunits_dict}
     fisc_dict["cashbook"] = cashbook_dict
 
 
 def _set_fisc_dict_fiscdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
     brokerunits_dict = {}
     for fisccash_row in cursor.fetchall():
-        row_fisc_title = fisccash_row[0]
+        row_fisc_tag = fisccash_row[0]
         row_owner_name = fisccash_row[1]
         row_deal_time = fisccash_row[2]
         row_quota = fisccash_row[3]
@@ -111,10 +111,10 @@ def _set_fisc_dict_fiscdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_fischour(cursor: sqlite3_Cursor, fisc_dict: dict):
     hours_config_list = []
     for fisccash_row in cursor.fetchall():
-        row_fisc_title = fisccash_row[0]
+        row_fisc_tag = fisccash_row[0]
         row_cumlative_minute = fisccash_row[1]
-        row_hour_title = fisccash_row[2]
-        hours_config_list.append([row_hour_title, row_cumlative_minute])
+        row_hour_tag = fisccash_row[2]
+        hours_config_list.append([row_hour_tag, row_cumlative_minute])
     if hours_config_list:
         fisc_dict["timeline"]["hours_config"] = hours_config_list
 
@@ -122,10 +122,10 @@ def _set_fisc_dict_fischour(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_fiscmont(cursor: sqlite3_Cursor, fisc_dict: dict):
     months_config_list = []
     for fisccash_row in cursor.fetchall():
-        row_fisc_title = fisccash_row[0]
+        row_fisc_tag = fisccash_row[0]
         row_cumlative_day = fisccash_row[1]
-        row_month_title = fisccash_row[2]
-        months_config_list.append([row_month_title, row_cumlative_day])
+        row_month_tag = fisccash_row[2]
+        months_config_list.append([row_month_tag, row_cumlative_day])
     if months_config_list:
         fisc_dict["timeline"]["months_config"] = months_config_list
 
@@ -133,10 +133,10 @@ def _set_fisc_dict_fiscmont(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_fiscweek(cursor: sqlite3_Cursor, fisc_dict: dict):
     weekday_dict = {}
     for fisccash_row in cursor.fetchall():
-        row_fisc_title = fisccash_row[0]
+        row_fisc_tag = fisccash_row[0]
         row_weekday_order = fisccash_row[1]
-        row_weekday_title = fisccash_row[2]
-        weekday_dict[row_weekday_order] = row_weekday_title
+        row_weekday_tag = fisccash_row[2]
+        weekday_dict[row_weekday_order] = row_weekday_tag
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
     if weekday_dict:
         fisc_dict["timeline"]["weekdays_config"] = weekday_config_list
@@ -145,7 +145,7 @@ def _set_fisc_dict_fiscweek(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
     offi_times_set = set()
     for fisccash_row in cursor.fetchall():
-        row_fisc_title = fisccash_row[0]
+        row_fisc_tag = fisccash_row[0]
         row_offi_time = fisccash_row[1]
         offi_times_set.add(row_offi_time)
     fisc_dict["offi_times"] = list(offi_times_set)

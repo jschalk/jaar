@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
@@ -34,9 +34,9 @@ def test_etl_cart_staging_to_cart_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         cumlative_minute_str(),
-        hour_title_str(),
+        hour_tag_str(),
     ]
     accord23_str = "accord23"
     row1 = [sue_str, event_1, accord23_str, minute_360, hour6am]
@@ -83,9 +83,9 @@ def test_etl_cart_staging_to_cart_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonC
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         cumlative_minute_str(),
-        hour_title_str(),
+        hour_tag_str(),
     ]
     accord23_str = "accord23"
     row1 = [sue_str, event_1, accord23_str, minute_360, hour6am]

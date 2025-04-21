@@ -1,6 +1,6 @@
 from src.a02_finance_toolboxs.finance_config import default_fund_coin_if_None
 from src.a01_word_logic.road import (
-    get_default_fisc_title as root_title,
+    get_default_fisc_tag as root_tag,
     create_road,
     default_bridge_if_None,
 )
@@ -31,7 +31,7 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_road = create_road(root_title(), "nation-states")
+    nation_road = create_road(root_tag(), "nation-states")
     usa_road = create_road(nation_road, "USA")
 
     # WHEN
@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
 #         groupunit_shop(bob_str, _acct_mirror=True, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a TagUnit. Cannot contain bridge: '{slash_str}'"
 #     )
 
 

@@ -6,7 +6,7 @@ from src.a02_finance_toolboxs.deal import (
     bridge_str,
     celldepth_str,
     owner_name_str,
-    fisc_title_str,
+    fisc_tag_str,
     world_id_str,
 )
 from src.a06_bud_logic.bud_tool import (
@@ -24,7 +24,7 @@ from src.a06_bud_logic.bud_tool import (
 from src.a07_calendar_logic.chrono import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_title_str,
+    timeline_tag_str,
     yr1_jan1_offset_str,
 )
 from src.a08_bud_atom_logic.atom_config import (
@@ -45,11 +45,11 @@ from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     group_label_str,
     parent_road_str,
-    item_title_str,
+    item_tag_str,
     road_str,
     base_str,
-    team_tag_str,
-    awardee_tag_str,
+    team_title_str,
+    awardee_title_str,
     healer_name_str,
     numor_str,
     denom_str,
@@ -76,9 +76,9 @@ from src.a08_bud_atom_logic.atom_config import (
     give_force_str,
     take_force_str,
 )
-from src.a10_fund_metric.fund_metric_config import (
-    get_all_fund_metric_args,
-    get_fund_metric_args_sqlite_datatype_dict,
+from src.a10_bud_calc.bud_calc_config import (
+    get_all_bud_calc_args,
+    get_bud_calc_args_sqlite_datatype_dict,
 )
 from src.a15_fisc_logic.fisc_config import (
     get_fisc_args_dimen_mapping,
@@ -92,11 +92,11 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
     amount_str,
-    month_title_str,
-    hour_title_str,
+    month_tag_str,
+    hour_tag_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_title_str,
+    weekday_tag_str,
     weekday_order_str,
     offi_time_str,
 )
@@ -105,8 +105,8 @@ from src.a16_pidgin_logic.pidgin_config import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
-    otx_title_str,
-    inx_title_str,
+    otx_tag_str,
+    inx_tag_str,
     otx_road_str,
     inx_road_str,
     otx_name_str,
@@ -116,7 +116,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     map_otx2inx_str,
     map_name_str,
     map_label_str,
-    map_title_str,
+    map_tag_str,
     map_road_str,
     get_pidgin_dimens,
     get_pidgin_config_dict,
@@ -192,28 +192,28 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
     print(f"missing {all_bud_dimen_delete_keys.difference(table_sorting_priority)}")
     assert all_bud_dimen_delete_keys.issubset(table_sorting_priority)
-    fund_metric_args = set(get_all_fund_metric_args().keys())
-    # for fund_metric_arg in fund_metric_args.difference(table_sorting_priority):
-    #     print(f"{fund_metric_arg=}")
-    print(f"{fund_metric_args.difference(table_sorting_priority)=}")
-    assert fund_metric_args.issubset(table_sorting_priority)
+    bud_calc_args = set(get_all_bud_calc_args().keys())
+    # for bud_calc_arg in bud_calc_args.difference(table_sorting_priority):
+    #     print(f"{bud_calc_arg=}")
+    print(f"{bud_calc_args.difference(table_sorting_priority)=}")
+    assert bud_calc_args.issubset(table_sorting_priority)
 
     assert table_sorting_priority[0] == world_id_str()
     assert table_sorting_priority[1] == idea_number_str()
     assert table_sorting_priority[2] == face_name_str()
     assert table_sorting_priority[3] == event_int_str()
-    assert table_sorting_priority[4] == fisc_title_str()
-    assert table_sorting_priority[5] == timeline_title_str()
+    assert table_sorting_priority[4] == fisc_tag_str()
+    assert table_sorting_priority[5] == timeline_tag_str()
     assert table_sorting_priority[6] == offi_time_str()
     assert table_sorting_priority[7] == c400_number_str()
     assert table_sorting_priority[8] == yr1_jan1_offset_str()
     assert table_sorting_priority[9] == monthday_distortion_str()
     assert table_sorting_priority[10] == cumlative_day_str()
-    assert table_sorting_priority[11] == month_title_str()
+    assert table_sorting_priority[11] == month_tag_str()
     assert table_sorting_priority[12] == cumlative_minute_str()
-    assert table_sorting_priority[13] == hour_title_str()
+    assert table_sorting_priority[13] == hour_tag_str()
     assert table_sorting_priority[14] == weekday_order_str()
-    assert table_sorting_priority[15] == weekday_title_str()
+    assert table_sorting_priority[15] == weekday_tag_str()
     assert table_sorting_priority[16] == owner_name_str()
     assert table_sorting_priority[17] == get_delete_key_name(owner_name_str())
     assert table_sorting_priority[18] == acct_name_str()
@@ -222,8 +222,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[21] == get_delete_key_name(group_label_str())
     assert table_sorting_priority[22] == parent_road_str()
     assert table_sorting_priority[23] == get_delete_key_name(parent_road_str())
-    assert table_sorting_priority[24] == item_title_str()
-    assert table_sorting_priority[25] == get_delete_key_name(item_title_str())
+    assert table_sorting_priority[24] == item_tag_str()
+    assert table_sorting_priority[25] == get_delete_key_name(item_tag_str())
     assert table_sorting_priority[26] == road_str()
     assert table_sorting_priority[27] == get_delete_key_name(road_str())
     assert table_sorting_priority[28] == base_str()
@@ -232,10 +232,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[31] == "need"
     assert table_sorting_priority[32] == get_delete_key_name("need")
     assert table_sorting_priority[33] == "pick"
-    assert table_sorting_priority[34] == team_tag_str()
-    assert table_sorting_priority[35] == get_delete_key_name(team_tag_str())
-    assert table_sorting_priority[36] == awardee_tag_str()
-    assert table_sorting_priority[37] == get_delete_key_name(awardee_tag_str())
+    assert table_sorting_priority[34] == team_title_str()
+    assert table_sorting_priority[35] == get_delete_key_name(team_title_str())
+    assert table_sorting_priority[36] == awardee_title_str()
+    assert table_sorting_priority[37] == get_delete_key_name(awardee_title_str())
     assert table_sorting_priority[38] == healer_name_str()
     assert table_sorting_priority[39] == get_delete_key_name(healer_name_str())
     assert table_sorting_priority[40] == deal_time_str()
@@ -272,8 +272,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[71] == penny_str()
     assert table_sorting_priority[72] == respect_bit_str()
     assert table_sorting_priority[73] == amount_str()
-    assert table_sorting_priority[74] == otx_title_str()
-    assert table_sorting_priority[75] == inx_title_str()
+    assert table_sorting_priority[74] == otx_tag_str()
+    assert table_sorting_priority[75] == inx_tag_str()
     assert table_sorting_priority[76] == otx_road_str()
     assert table_sorting_priority[77] == inx_road_str()
     assert table_sorting_priority[78] == otx_name_str()
@@ -325,7 +325,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)
     all_args.update(pidgin_args)
-    all_args.update(fund_metric_args)
+    all_args.update(bud_calc_args)
     all_args.add(idea_number_str())
     all_args.add(event_int_str())
     all_args.add(face_name_str())
@@ -353,18 +353,18 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(idea_number_str()) == "TEXT"
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(fisc_title_str()) == "TEXT"
+    assert sqlite_types.get(fisc_tag_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
     assert sqlite_types.get(parent_road_str()) == "TEXT"
-    assert sqlite_types.get(item_title_str()) == "TEXT"
+    assert sqlite_types.get(item_tag_str()) == "TEXT"
     assert sqlite_types.get(road_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("pick") == "TEXT"
-    assert sqlite_types.get(team_tag_str()) == "TEXT"
-    assert sqlite_types.get(awardee_tag_str()) == "TEXT"
+    assert sqlite_types.get(team_title_str()) == "TEXT"
+    assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
     assert sqlite_types.get(deal_time_str()) == "INTEGER"
@@ -401,11 +401,11 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(amount_str()) == "REAL"
-    assert sqlite_types.get(month_title_str()) == "TEXT"
-    assert sqlite_types.get(hour_title_str()) == "TEXT"
+    assert sqlite_types.get(month_tag_str()) == "TEXT"
+    assert sqlite_types.get(hour_tag_str()) == "TEXT"
     assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_title_str()) == "TEXT"
+    assert sqlite_types.get(weekday_tag_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"
@@ -416,11 +416,11 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(celldepth_str()) == "INT"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
-    assert sqlite_types.get(timeline_title_str()) == "TEXT"
+    assert sqlite_types.get(timeline_tag_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"
 
     # sourcery skip: no-loop-in-tests
-    for x_arg, datatype in get_fund_metric_args_sqlite_datatype_dict().items():
+    for x_arg, datatype in get_bud_calc_args_sqlite_datatype_dict().items():
         print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
         assert sqlite_types.get(x_arg) == datatype
 
@@ -476,7 +476,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert budunit_str() in idea_config_dimens
     assert map_name_str() in idea_config_dimens
     assert map_label_str() in idea_config_dimens
-    assert map_title_str() in idea_config_dimens
+    assert map_tag_str() in idea_config_dimens
     assert map_road_str() in idea_config_dimens
     assert get_bud_dimens().issubset(idea_config_dimens)
     assert get_fisc_dimens().issubset(idea_config_dimens)
@@ -517,7 +517,7 @@ def _validate_idea_config(x_idea_config: dict):
             map_otx2inx_str(),
             map_label_str(),
             map_name_str(),
-            map_title_str(),
+            map_tag_str(),
             map_road_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
@@ -580,9 +580,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) != "pidgin":
-            assert fisc_title_str() in idea_jkeys_keys
+            assert fisc_tag_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) == "bud":
-            idea_jkeys_keys.remove(fisc_title_str())
+            idea_jkeys_keys.remove(fisc_tag_str())
             idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
@@ -590,8 +590,8 @@ def _validate_idea_config(x_idea_config: dict):
 
         sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if fisc_title_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(fisc_title_str())
+        if fisc_tag_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(fisc_tag_str())
 
         idea_jvalues_dict = idea_dict.get(jvalues_str())
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
@@ -599,7 +599,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"{idea_jvalues_keys=}")
         assert sub_jvalues_keys == idea_jvalues_keys
 
-        assert fisc_title_str() not in idea_jvalues_keys
+        assert fisc_tag_str() not in idea_jvalues_keys
 
         # sort_list = get_idea_elements_sort_order()
         # x_count = 0
@@ -730,7 +730,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     bo = build_order_str()
     # set_idea_config_json(map_name_str(), 0)
     # set_idea_config_json(map_label_str(), 1)
-    # set_idea_config_json(map_title_str(), 2)
+    # set_idea_config_json(map_tag_str(), 2)
     # set_idea_config_json(map_road_str(), 3)
     # set_idea_config_json(fiscunit_str(), 5)
     # set_idea_config_json(fisc_timeline_hour_str(), 6)
@@ -754,7 +754,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # THEN
     assert x_idea_config.get(map_name_str()).get(bo) == 0
     assert x_idea_config.get(map_label_str()).get(bo) == 1
-    assert x_idea_config.get(map_title_str()).get(bo) == 2
+    assert x_idea_config.get(map_tag_str()).get(bo) == 2
     assert x_idea_config.get(map_road_str()).get(bo) == 3
     assert x_idea_config.get(fiscunit_str()).get(bo) == 5
     assert x_idea_config.get(fisc_timeline_hour_str()).get(bo) == 6
@@ -784,13 +784,13 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         face_name_str(),
         event_int_str(),
         c400_number_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
         bridge_str(),
-        timeline_title_str(),
+        timeline_tag_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
     }

@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     acct_name_str,
@@ -37,7 +37,7 @@ def test_etl_cart_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -95,7 +95,7 @@ def test_etl_cart_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -173,7 +173,7 @@ def test_etl_cart_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_eve
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),

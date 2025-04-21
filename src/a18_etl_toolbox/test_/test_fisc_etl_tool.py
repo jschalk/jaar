@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_file, set_dir
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a07_calendar_logic.chrono import timelineunit_shop, timeline_config_shop
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
@@ -143,7 +143,7 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.week_staging_columns == get_default_sorted_list(week_staging_args)
     assert fisc_cols.offi_staging_columns == get_default_sorted_list(offi_staging_args)
 
-    # unit_staging_csv_header = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}"""
+    # unit_staging_csv_header = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}"""
     unit_staging_csv_header = ",".join(fisc_cols.unit_staging_columns)
     deal_staging_csv_header = ",".join(fisc_cols.deal_staging_columns)
     cash_staging_csv_header = ",".join(fisc_cols.cash_staging_columns)

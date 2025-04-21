@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, cart_valid_str, sheet_exists
 from src.a18_etl_toolbox.transformers import etl_otz_face_ideas_to_otz_event_otx_ideas
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -27,8 +27,8 @@ def test_etl_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"

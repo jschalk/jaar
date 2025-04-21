@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import get_default_fisc_title as root_title, create_road
+from src.a01_word_logic.road import get_default_fisc_tag as root_tag, create_road
 from src.a05_item_logic.healer import healerlink_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import (
@@ -64,11 +64,11 @@ def test_get_obj_from_item_dict_ReturnsCorrect_HealerLink():
 def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
     week_str = "weekdays"
-    week_road = create_road(root_title(), week_str)
+    week_road = create_road(root_tag(), week_str)
     wed_str = "Wednesday"
     wed_road = create_road(week_road, wed_str)
     states_str = "nation-state"
-    states_road = create_road(root_title(), states_str)
+    states_road = create_road(root_tag(), states_str)
     usa_str = "USA"
     usa_road = create_road(states_road, usa_str)
 
@@ -87,51 +87,51 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
         week_road: reasonheir_shop(week_road, wed_premises, _status=True),
         states_road: reasonheir_shop(states_road, usa_premises, _status=False),
     }
-    biker_awardee_tag = "bikers"
+    biker_awardee_title = "bikers"
     biker_give_force = 3.0
     biker_take_force = 7.0
     biker_awardlink = awardlink_shop(
-        biker_awardee_tag, biker_give_force, biker_take_force
+        biker_awardee_title, biker_give_force, biker_take_force
     )
-    flyer_awardee_tag = "flyers"
+    flyer_awardee_title = "flyers"
     flyer_give_force = 6.0
     flyer_take_force = 9.0
     flyer_awardlink = awardlink_shop(
-        awardee_tag=flyer_awardee_tag,
+        awardee_title=flyer_awardee_title,
         give_force=flyer_give_force,
         take_force=flyer_take_force,
     )
     biker_and_flyer_awardlinks = {
-        biker_awardlink.awardee_tag: biker_awardlink,
-        flyer_awardlink.awardee_tag: flyer_awardlink,
+        biker_awardlink.awardee_title: biker_awardlink,
+        flyer_awardlink.awardee_title: flyer_awardlink,
     }
     biker_get_dict = {
-        "awardee_tag": biker_awardlink.awardee_tag,
+        "awardee_title": biker_awardlink.awardee_title,
         "give_force": biker_awardlink.give_force,
         "take_force": biker_awardlink.take_force,
     }
     flyer_get_dict = {
-        "awardee_tag": flyer_awardlink.awardee_tag,
+        "awardee_title": flyer_awardlink.awardee_title,
         "give_force": flyer_awardlink.give_force,
         "take_force": flyer_awardlink.take_force,
     }
     x1_awardlinks = {
-        biker_awardee_tag: biker_get_dict,
-        flyer_awardee_tag: flyer_get_dict,
+        biker_awardee_title: biker_get_dict,
+        flyer_awardee_title: flyer_get_dict,
     }
     sue_str = "Sue"
     yao_str = "Yao"
     sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
-    casa_road = create_road(root_title(), casa_str)
+    casa_road = create_road(root_tag(), casa_str)
     x_problem_bool = True
     casa_item = itemunit_shop(
         parent_road=casa_road,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
-        item_title=casa_str,
+        item_tag=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
@@ -178,7 +178,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["originunit"] == casa_item.get_originunit_dict()
     assert casa_dict["mass"] == casa_item.mass
-    assert casa_dict["item_title"] == casa_item.item_title
+    assert casa_dict["item_tag"] == casa_item.item_tag
     assert casa_dict["_uid"] == casa_item._uid
     assert casa_dict["begin"] == casa_item.begin
     assert casa_dict["close"] == casa_item.close
@@ -215,14 +215,14 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     ignore_str = "ignore"
 
     a_str = "a"
-    a_road = create_road(root_title(), a_str)
+    a_road = create_road(root_tag(), a_str)
     casa_item.set_factunit(factunit_shop(a_road, a_road))
 
     yao_str = "Yao"
     casa_item.set_awardlink(awardlink_shop(yao_str))
 
     x_teamunit = casa_item.teamunit
-    x_teamunit.set_teamlink(team_tag=yao_str)
+    x_teamunit.set_teamlink(team_title=yao_str)
 
     x_originunit = casa_item._originunit
     x_originunit.set_originhold(yao_str, 1)

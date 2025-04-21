@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, open_file
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     face_name_str,
@@ -27,7 +27,7 @@ def test_WorldUnit_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -53,7 +53,7 @@ def test_WorldUnit_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(br00011_csv_path)
-    expected_csv = """face_name,event_int,fisc_title,owner_name,acct_name
+    expected_csv = """face_name,event_int,fisc_tag,owner_name,acct_name
 Suzy,3,accord23,Bob,Bob
 Suzy,3,accord23,Yao,Bob
 Suzy,3,accord23,Yao,Yao

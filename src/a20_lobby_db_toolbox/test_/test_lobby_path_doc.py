@@ -1,7 +1,7 @@
 from src.a02_finance_toolboxs.deal import (
     owner_name_str,
     deal_time_str,
-    fisc_title_str,
+    fisc_tag_str,
     world_id_str,
 )
 from src.a08_bud_atom_logic.atom_config import event_int_str

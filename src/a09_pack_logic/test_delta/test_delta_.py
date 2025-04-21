@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road, get_default_fisc_title as root_title
+from src.a01_word_logic.road import create_road, get_default_fisc_tag as root_tag
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic.bud_tool import (
     budunit_str,
@@ -12,10 +12,10 @@ from src.a08_bud_atom_logic.atom_config import (
     atom_insert,
     atom_delete,
     acct_name_str,
-    awardee_tag_str,
+    awardee_title_str,
     group_label_str,
     parent_road_str,
-    item_title_str,
+    item_tag_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -335,16 +335,16 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj():
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
     # ESTABLISH
-    x_fisc_title = root_title()
+    x_fisc_tag = root_tag()
     sports_str = "sports"
-    sports_road = create_road(x_fisc_title, sports_str)
+    sports_road = create_road(x_fisc_tag, sports_str)
     knee_str = "knee"
     x_dimen = bud_itemunit_str()
     sports_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    sports_insert_itemunit_budatom.set_jkey(item_title_str(), sports_str)
-    sports_insert_itemunit_budatom.set_jkey(parent_road_str(), x_fisc_title)
+    sports_insert_itemunit_budatom.set_jkey(item_tag_str(), sports_str)
+    sports_insert_itemunit_budatom.set_jkey(parent_road_str(), x_fisc_tag)
     knee_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    knee_insert_itemunit_budatom.set_jkey(item_title_str(), knee_str)
+    knee_insert_itemunit_budatom.set_jkey(item_tag_str(), knee_str)
     knee_insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_insert_itemunit_budatom)
@@ -368,19 +368,19 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_Road_Sorted():
     # ESTABLISH
-    x_fisc_title = root_title()
+    x_fisc_tag = root_tag()
     sports_str = "sports"
-    sports_road = create_road(x_fisc_title, sports_str)
+    sports_road = create_road(x_fisc_tag, sports_str)
     knee_str = "knee"
     knee_road = create_road(sports_road, knee_str)
     x_dimen = bud_item_awardlink_str()
     road_str = "road"
     swimmers_str = ",Swimmers"
     sports_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
-    sports_awardlink_budatom.set_jkey(awardee_tag_str(), swimmers_str)
+    sports_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
     sports_awardlink_budatom.set_jkey(road_str, sports_road)
     knee_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
-    knee_awardlink_budatom.set_jkey(awardee_tag_str(), swimmers_str)
+    knee_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
     knee_awardlink_budatom.set_jkey(road_str, knee_road)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_awardlink_budatom)

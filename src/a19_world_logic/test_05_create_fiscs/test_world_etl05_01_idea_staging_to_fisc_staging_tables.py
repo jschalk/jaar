@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
 from src.a00_data_toolboxs.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     acct_name_str,
@@ -107,7 +107,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
@@ -131,7 +131,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
             br00011_str,
             sue_inx,
             event3,
-            accord23_str,  # fisc_title
+            accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -140,7 +140,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_title
+            None,  # timeline_tag
             None,  # job_listen_rotations
             None,  # note
         )
@@ -148,7 +148,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
             br00011_str,
             sue_inx,
             event7,
-            accord23_str,  # fisc_title
+            accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -157,7 +157,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_title
+            None,  # timeline_tag
             None,  # job_listen_rotations
             None,  # note
         )
@@ -200,7 +200,7 @@ VALUES
         print(f"{insert_staging_sqlstr=}")
         cursor.execute(insert_staging_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_title_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_tag_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         # print(f"{select_sqlstr=}")

@@ -7,61 +7,61 @@ from src.a17_idea_logic.idea_config import (
 from sqlite3 import Connection as sqlite3_Connection
 
 
-CREATE_BUDMEMB_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
-CREATE_BUDMEMB_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"""
-CREATE_BUDMEMB_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"""
-CREATE_BUDMEMB_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDACCT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"""
-CREATE_BUDACCT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"""
-CREATE_BUDACCT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name_ERASE TEXT)"""
-CREATE_BUDACCT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDAWAR_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL)"""
-CREATE_BUDAWAR_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag TEXT, give_force REAL, take_force REAL, error_message TEXT)"""
-CREATE_BUDAWAR_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag_ERASE TEXT)"""
-CREATE_BUDAWAR_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, awardee_tag_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDFACT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
-CREATE_BUDFACT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL, error_message TEXT)"""
-CREATE_BUDFACT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"""
-CREATE_BUDFACT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDHEAL_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
-CREATE_BUDHEAL_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name TEXT, error_message TEXT)"""
-CREATE_BUDHEAL_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"""
-CREATE_BUDHEAL_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDPREM_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
-CREATE_BUDPREM_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"""
-CREATE_BUDPREM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDREAS_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
-CREATE_BUDREAS_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, error_message TEXT)"
-CREATE_BUDREAS_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"""
-CREATE_BUDREAS_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDTEAM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT)"""
-CREATE_BUDTEAM_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag TEXT, error_message TEXT)"""
-CREATE_BUDTEAM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag_ERASE TEXT)"""
-CREATE_BUDTEAM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, road TEXT, team_tag_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDITEM_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_itemunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDITEM_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_itemunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_BUDITEM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title_ERASE TEXT)"""
-CREATE_BUDITEM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, parent_road TEXT, item_title_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDUNIT_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS budunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_BUDUNIT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_agg (face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name_ERASE TEXT)"""
-CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDMEMB_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
+CREATE_BUDMEMB_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"""
+CREATE_BUDMEMB_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"""
+CREATE_BUDMEMB_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDACCT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"""
+CREATE_BUDACCT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"""
+CREATE_BUDACCT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name_ERASE TEXT)"""
+CREATE_BUDACCT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDAWAR_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"""
+CREATE_BUDAWAR_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"""
+CREATE_BUDAWAR_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title_ERASE TEXT)"""
+CREATE_BUDAWAR_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDFACT_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
+CREATE_BUDFACT_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL, error_message TEXT)"""
+CREATE_BUDFACT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"""
+CREATE_BUDFACT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDHEAL_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
+CREATE_BUDHEAL_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT, error_message TEXT)"""
+CREATE_BUDHEAL_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"""
+CREATE_BUDHEAL_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDPREM_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
+CREATE_BUDPREM_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, error_message TEXT)"
+CREATE_BUDPREM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"""
+CREATE_BUDPREM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDREAS_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
+CREATE_BUDREAS_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, error_message TEXT)"
+CREATE_BUDREAS_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"""
+CREATE_BUDREAS_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDTEAM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"""
+CREATE_BUDTEAM_PUT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT, error_message TEXT)"""
+CREATE_BUDTEAM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"""
+CREATE_BUDTEAM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDITEM_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_itemunit_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
+CREATE_BUDITEM_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS bud_itemunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
+CREATE_BUDITEM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag_ERASE TEXT)"""
+CREATE_BUDITEM_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag_ERASE TEXT, error_message TEXT)"""
+CREATE_BUDUNIT_PUT_AGG_SQLSTR = "CREATE TABLE IF NOT EXISTS budunit_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
+CREATE_BUDUNIT_PUT_STAGING_SQLSTR = "CREATE TABLE IF NOT EXISTS budunit_put_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
+CREATE_BUDUNIT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name_ERASE TEXT)"""
+CREATE_BUDUNIT_DEL_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name_ERASE TEXT, error_message TEXT)"""
 
-CREATE_FISC_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_title TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISC_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_title TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISC_DEALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_title TEXT, cumlative_minute INTEGER, hour_title TEXT)"""
-CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, cumlative_minute INTEGER, hour_title TEXT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_title TEXT, cumlative_day INTEGER, month_title TEXT)"""
-CREATE_FISC_TIMELINE_MONTH_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, cumlative_day INTEGER, month_title TEXT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT)"""
-CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, weekday_order INTEGER, weekday_title TEXT, error_message TEXT)"""
-CREATE_FISC_TIMEOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_title TEXT, offi_time INTEGER)"""
-CREATE_FISC_TIMEOFFI_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_title TEXT, timeline_title TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISC_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISC_CASHBOOK_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISC_DEALUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISC_TIMELINE_HOUR_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISC_TIMELINE_MONTH_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISC_TIMELINE_WEEKDAY_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISC_TIMEOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISC_TIMEOFFI_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISCUNIT_STAGING_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_staging (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 
 
 def get_fisc_create_table_sqlstrs() -> dict[str, str]:
@@ -147,56 +147,56 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
 
 
-BUDMEMB_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, acct_name, group_label
+BUDMEMB_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label
 FROM bud_acct_membership_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name, group_label
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name, group_label
 HAVING MIN(credit_vote) != MAX(credit_vote)
     OR MIN(debtit_vote) != MAX(debtit_vote)
 """
-BUDACCT_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, acct_name
+BUDACCT_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, acct_name
 FROM bud_acctunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name
 HAVING MIN(credit_belief) != MAX(credit_belief)
     OR MIN(debtit_belief) != MAX(debtit_belief)
 """
-BUDAWAR_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, road, awardee_tag
+BUDAWAR_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, road, awardee_title
 FROM bud_item_awardlink_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, awardee_tag
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 """
-BUDFACT_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, road, base
+BUDFACT_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, road, base
 FROM bud_item_factunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 HAVING MIN(pick) != MAX(pick)
     OR MIN(fopen) != MAX(fopen)
     OR MIN(fnigh) != MAX(fnigh)
 """
-BUDHEAL_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, road, healer_name
+BUDHEAL_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, road, healer_name
 FROM bud_item_healerlink_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, healer_name
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, healer_name
 HAVING 1=2
 """
-BUDPREM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, road, base, need
+BUDPREM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, road, base, need
 FROM bud_item_reason_premiseunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base, need
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base, need
 HAVING MIN(nigh) != MAX(nigh)
     OR MIN(open) != MAX(open)
     OR MIN(divisor) != MAX(divisor)
 """
-BUDREAS_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, road, base
+BUDREAS_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, road, base
 FROM bud_item_reasonunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 HAVING MIN(base_item_active_requisite) != MAX(base_item_active_requisite)
 """
-BUDTEAM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, road, team_tag
+BUDTEAM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, road, team_title
 FROM bud_item_teamlink_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, team_tag
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, team_title
 HAVING 1=2
 """
-BUDITEM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name, parent_road, item_title
+BUDITEM_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, parent_road, item_tag
 FROM bud_itemunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, parent_road, item_title
+GROUP BY face_name, event_int, fisc_tag, owner_name, parent_road, item_tag
 HAVING MIN(begin) != MAX(begin)
     OR MIN(close) != MAX(close)
     OR MIN(addin) != MAX(addin)
@@ -209,9 +209,9 @@ HAVING MIN(begin) != MAX(begin)
     OR MIN(pledge) != MAX(pledge)
     OR MIN(problem_bool) != MAX(problem_bool)
 """
-BUDUNIT_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_title, owner_name
+BUDUNIT_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name
 FROM budunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name
+GROUP BY face_name, event_int, fisc_tag, owner_name
 HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(debtor_respect) != MAX(debtor_respect)
     OR MIN(fund_pool) != MAX(fund_pool)
@@ -222,41 +222,41 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(respect_bit) != MAX(respect_bit)
 """
 
-FISCCASH_INCONSISTENCY_SQLSTR = """SELECT fisc_title, owner_name, acct_name, tran_time
+FISCCASH_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, acct_name, tran_time
 FROM fisc_cashbook_staging
-GROUP BY fisc_title, owner_name, acct_name, tran_time
+GROUP BY fisc_tag, owner_name, acct_name, tran_time
 HAVING MIN(amount) != MAX(amount)
 """
-FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_title, owner_name, deal_time
+FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, deal_time
 FROM fisc_dealunit_staging
-GROUP BY fisc_title, owner_name, deal_time
+GROUP BY fisc_tag, owner_name, deal_time
 HAVING MIN(quota) != MAX(quota)
     OR MIN(celldepth) != MAX(celldepth)
 """
-FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_title, cumlative_minute
+FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_minute
 FROM fisc_timeline_hour_staging
-GROUP BY fisc_title, cumlative_minute
-HAVING MIN(hour_title) != MAX(hour_title)
+GROUP BY fisc_tag, cumlative_minute
+HAVING MIN(hour_tag) != MAX(hour_tag)
 """
-FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_title, cumlative_day
+FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_day
 FROM fisc_timeline_month_staging
-GROUP BY fisc_title, cumlative_day
-HAVING MIN(month_title) != MAX(month_title)
+GROUP BY fisc_tag, cumlative_day
+HAVING MIN(month_tag) != MAX(month_tag)
 """
-FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_title, weekday_order
+FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, weekday_order
 FROM fisc_timeline_weekday_staging
-GROUP BY fisc_title, weekday_order
-HAVING MIN(weekday_title) != MAX(weekday_title)
+GROUP BY fisc_tag, weekday_order
+HAVING MIN(weekday_tag) != MAX(weekday_tag)
 """
-FISCOFFI_INCONSISTENCY_SQLSTR = """SELECT fisc_title, offi_time
+FISCOFFI_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, offi_time
 FROM fisc_timeoffi_staging
-GROUP BY fisc_title, offi_time
+GROUP BY fisc_tag, offi_time
 HAVING 1=2
 """
-FISCUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_title
+FISCUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag
 FROM fiscunit_staging
-GROUP BY fisc_title
-HAVING MIN(timeline_title) != MAX(timeline_title)
+GROUP BY fisc_tag
+HAVING MIN(timeline_tag) != MAX(timeline_tag)
     OR MIN(c400_number) != MAX(c400_number)
     OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
     OR MIN(monthday_distortion) != MAX(monthday_distortion)
@@ -296,9 +296,9 @@ def get_fisc_inconsistency_sqlstrs() -> dict[str, str]:
 
 
 BUDMEMB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, acct_name, group_label
+SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label
 FROM bud_acct_membership_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name, group_label
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name, group_label
 HAVING MIN(credit_vote) != MAX(credit_vote)
     OR MIN(debtit_vote) != MAX(debtit_vote)
 )
@@ -307,16 +307,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_acct_membership_put_staging.face_name
     AND inconsistency_rows.event_int = bud_acct_membership_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_acct_membership_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_acct_membership_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_acct_membership_put_staging.owner_name
     AND inconsistency_rows.acct_name = bud_acct_membership_put_staging.acct_name
     AND inconsistency_rows.group_label = bud_acct_membership_put_staging.group_label
 ;
 """
 BUDACCT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, acct_name
+SELECT face_name, event_int, fisc_tag, owner_name, acct_name
 FROM bud_acctunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name
 HAVING MIN(credit_belief) != MAX(credit_belief)
     OR MIN(debtit_belief) != MAX(debtit_belief)
 )
@@ -325,15 +325,15 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_acctunit_put_staging.face_name
     AND inconsistency_rows.event_int = bud_acctunit_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_acctunit_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_acctunit_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_acctunit_put_staging.owner_name
     AND inconsistency_rows.acct_name = bud_acctunit_put_staging.acct_name
 ;
 """
 BUDAWAR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, road, awardee_tag
+SELECT face_name, event_int, fisc_tag, owner_name, road, awardee_title
 FROM bud_item_awardlink_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, awardee_tag
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -342,16 +342,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_awardlink_put_staging.face_name
     AND inconsistency_rows.event_int = bud_item_awardlink_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_item_awardlink_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_item_awardlink_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_awardlink_put_staging.owner_name
     AND inconsistency_rows.road = bud_item_awardlink_put_staging.road
-    AND inconsistency_rows.awardee_tag = bud_item_awardlink_put_staging.awardee_tag
+    AND inconsistency_rows.awardee_title = bud_item_awardlink_put_staging.awardee_title
 ;
 """
 BUDFACT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, road, base
+SELECT face_name, event_int, fisc_tag, owner_name, road, base
 FROM bud_item_factunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 HAVING MIN(pick) != MAX(pick)
     OR MIN(fopen) != MAX(fopen)
     OR MIN(fnigh) != MAX(fnigh)
@@ -361,16 +361,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_factunit_put_staging.face_name
     AND inconsistency_rows.event_int = bud_item_factunit_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_item_factunit_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_item_factunit_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_factunit_put_staging.owner_name
     AND inconsistency_rows.road = bud_item_factunit_put_staging.road
     AND inconsistency_rows.base = bud_item_factunit_put_staging.base
 ;
 """
 BUDHEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, road, healer_name
+SELECT face_name, event_int, fisc_tag, owner_name, road, healer_name
 FROM bud_item_healerlink_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, healer_name
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, healer_name
 HAVING 1=2
 )
 UPDATE bud_item_healerlink_put_staging
@@ -378,16 +378,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_healerlink_put_staging.face_name
     AND inconsistency_rows.event_int = bud_item_healerlink_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_item_healerlink_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_item_healerlink_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_healerlink_put_staging.owner_name
     AND inconsistency_rows.road = bud_item_healerlink_put_staging.road
     AND inconsistency_rows.healer_name = bud_item_healerlink_put_staging.healer_name
 ;
 """
 BUDPREM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, road, base, need
+SELECT face_name, event_int, fisc_tag, owner_name, road, base, need
 FROM bud_item_reason_premiseunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base, need
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base, need
 HAVING MIN(nigh) != MAX(nigh)
     OR MIN(open) != MAX(open)
     OR MIN(divisor) != MAX(divisor)
@@ -397,7 +397,7 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_reason_premiseunit_put_staging.face_name
     AND inconsistency_rows.event_int = bud_item_reason_premiseunit_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_item_reason_premiseunit_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_item_reason_premiseunit_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_reason_premiseunit_put_staging.owner_name
     AND inconsistency_rows.road = bud_item_reason_premiseunit_put_staging.road
     AND inconsistency_rows.base = bud_item_reason_premiseunit_put_staging.base
@@ -405,9 +405,9 @@ WHERE inconsistency_rows.face_name = bud_item_reason_premiseunit_put_staging.fac
 ;
 """
 BUDREAS_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, road, base
+SELECT face_name, event_int, fisc_tag, owner_name, road, base
 FROM bud_item_reasonunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 HAVING MIN(base_item_active_requisite) != MAX(base_item_active_requisite)
 )
 UPDATE bud_item_reasonunit_put_staging
@@ -415,16 +415,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_reasonunit_put_staging.face_name
     AND inconsistency_rows.event_int = bud_item_reasonunit_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_item_reasonunit_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_item_reasonunit_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_reasonunit_put_staging.owner_name
     AND inconsistency_rows.road = bud_item_reasonunit_put_staging.road
     AND inconsistency_rows.base = bud_item_reasonunit_put_staging.base
 ;
 """
 BUDTEAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, road, team_tag
+SELECT face_name, event_int, fisc_tag, owner_name, road, team_title
 FROM bud_item_teamlink_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, road, team_tag
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, team_title
 HAVING 1=2
 )
 UPDATE bud_item_teamlink_put_staging
@@ -432,16 +432,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_teamlink_put_staging.face_name
     AND inconsistency_rows.event_int = bud_item_teamlink_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_item_teamlink_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_item_teamlink_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_teamlink_put_staging.owner_name
     AND inconsistency_rows.road = bud_item_teamlink_put_staging.road
-    AND inconsistency_rows.team_tag = bud_item_teamlink_put_staging.team_tag
+    AND inconsistency_rows.team_title = bud_item_teamlink_put_staging.team_title
 ;
 """
 BUDITEM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name, parent_road, item_title
+SELECT face_name, event_int, fisc_tag, owner_name, parent_road, item_tag
 FROM bud_itemunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name, parent_road, item_title
+GROUP BY face_name, event_int, fisc_tag, owner_name, parent_road, item_tag
 HAVING MIN(begin) != MAX(begin)
     OR MIN(close) != MAX(close)
     OR MIN(addin) != MAX(addin)
@@ -459,16 +459,16 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_itemunit_put_staging.face_name
     AND inconsistency_rows.event_int = bud_itemunit_put_staging.event_int
-    AND inconsistency_rows.fisc_title = bud_itemunit_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = bud_itemunit_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = bud_itemunit_put_staging.owner_name
     AND inconsistency_rows.parent_road = bud_itemunit_put_staging.parent_road
-    AND inconsistency_rows.item_title = bud_itemunit_put_staging.item_title
+    AND inconsistency_rows.item_tag = bud_itemunit_put_staging.item_tag
 ;
 """
 BUDUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT face_name, event_int, fisc_title, owner_name
+SELECT face_name, event_int, fisc_tag, owner_name
 FROM budunit_put_staging
-GROUP BY face_name, event_int, fisc_title, owner_name
+GROUP BY face_name, event_int, fisc_tag, owner_name
 HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(debtor_respect) != MAX(debtor_respect)
     OR MIN(fund_pool) != MAX(fund_pool)
@@ -483,168 +483,168 @@ SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = budunit_put_staging.face_name
     AND inconsistency_rows.event_int = budunit_put_staging.event_int
-    AND inconsistency_rows.fisc_title = budunit_put_staging.fisc_title
+    AND inconsistency_rows.fisc_tag = budunit_put_staging.fisc_tag
     AND inconsistency_rows.owner_name = budunit_put_staging.owner_name
 ;
 """
-BUDMEMB_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_del_agg (face_name, event_int, fisc_title, owner_name, acct_name, group_label_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, acct_name, group_label_ERASE
+BUDMEMB_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_del_agg (face_name, event_int, fisc_tag, owner_name, acct_name, group_label_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label_ERASE
 FROM bud_acct_membership_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name, group_label_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name, group_label_ERASE
 ;
 """
-BUDACCT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_del_agg (face_name, event_int, fisc_title, owner_name, acct_name_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, acct_name_ERASE
+BUDACCT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_del_agg (face_name, event_int, fisc_tag, owner_name, acct_name_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, acct_name_ERASE
 FROM bud_acctunit_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name_ERASE
 ;
 """
-BUDAWAR_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_del_agg (face_name, event_int, fisc_title, owner_name, road, awardee_tag_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, road, awardee_tag_ERASE
+BUDAWAR_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_del_agg (face_name, event_int, fisc_tag, owner_name, road, awardee_title_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, road, awardee_title_ERASE
 FROM bud_item_awardlink_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, awardee_tag_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, awardee_title_ERASE
 ;
 """
-BUDFACT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_del_agg (face_name, event_int, fisc_title, owner_name, road, base_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, road, base_ERASE
+BUDFACT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_del_agg (face_name, event_int, fisc_tag, owner_name, road, base_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, road, base_ERASE
 FROM bud_item_factunit_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base_ERASE
 ;
 """
-BUDHEAL_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_del_agg (face_name, event_int, fisc_title, owner_name, road, healer_name_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, road, healer_name_ERASE
+BUDHEAL_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_del_agg (face_name, event_int, fisc_tag, owner_name, road, healer_name_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, road, healer_name_ERASE
 FROM bud_item_healerlink_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, healer_name_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, healer_name_ERASE
 ;
 """
-BUDPREM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_del_agg (face_name, event_int, fisc_title, owner_name, road, base, need_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, road, base, need_ERASE
+BUDPREM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_del_agg (face_name, event_int, fisc_tag, owner_name, road, base, need_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, road, base, need_ERASE
 FROM bud_item_reason_premiseunit_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base, need_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base, need_ERASE
 ;
 """
-BUDREAS_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_del_agg (face_name, event_int, fisc_title, owner_name, road, base_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, road, base_ERASE
+BUDREAS_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_del_agg (face_name, event_int, fisc_tag, owner_name, road, base_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, road, base_ERASE
 FROM bud_item_reasonunit_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base_ERASE
 ;
 """
-BUDTEAM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_del_agg (face_name, event_int, fisc_title, owner_name, road, team_tag_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, road, team_tag_ERASE
+BUDTEAM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_del_agg (face_name, event_int, fisc_tag, owner_name, road, team_title_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, road, team_title_ERASE
 FROM bud_item_teamlink_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, team_tag_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, team_title_ERASE
 ;
 """
-BUDITEM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_del_agg (face_name, event_int, fisc_title, owner_name, parent_road, item_title_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name, parent_road, item_title_ERASE
+BUDITEM_DEL_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_del_agg (face_name, event_int, fisc_tag, owner_name, parent_road, item_tag_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name, parent_road, item_tag_ERASE
 FROM bud_itemunit_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, parent_road, item_title_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name, parent_road, item_tag_ERASE
 ;
 """
-BUDUNIT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO budunit_del_agg (face_name, event_int, fisc_title, owner_name_ERASE)
-SELECT face_name, event_int, fisc_title, owner_name_ERASE
+BUDUNIT_DEL_AGG_INSERT_SQLSTR = """INSERT INTO budunit_del_agg (face_name, event_int, fisc_tag, owner_name_ERASE)
+SELECT face_name, event_int, fisc_tag, owner_name_ERASE
 FROM budunit_del_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name_ERASE
+GROUP BY face_name, event_int, fisc_tag, owner_name_ERASE
 ;
 """
 
 FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, owner_name, acct_name, tran_time
+SELECT fisc_tag, owner_name, acct_name, tran_time
 FROM fisc_cashbook_staging
-GROUP BY fisc_title, owner_name, acct_name, tran_time
+GROUP BY fisc_tag, owner_name, acct_name, tran_time
 HAVING MIN(amount) != MAX(amount)
 )
 UPDATE fisc_cashbook_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_cashbook_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fisc_cashbook_staging.fisc_tag
     AND inconsistency_rows.owner_name = fisc_cashbook_staging.owner_name
     AND inconsistency_rows.acct_name = fisc_cashbook_staging.acct_name
     AND inconsistency_rows.tran_time = fisc_cashbook_staging.tran_time
 ;
 """
 FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, owner_name, deal_time
+SELECT fisc_tag, owner_name, deal_time
 FROM fisc_dealunit_staging
-GROUP BY fisc_title, owner_name, deal_time
+GROUP BY fisc_tag, owner_name, deal_time
 HAVING MIN(quota) != MAX(quota)
     OR MIN(celldepth) != MAX(celldepth)
 )
 UPDATE fisc_dealunit_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_dealunit_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fisc_dealunit_staging.fisc_tag
     AND inconsistency_rows.owner_name = fisc_dealunit_staging.owner_name
     AND inconsistency_rows.deal_time = fisc_dealunit_staging.deal_time
 ;
 """
 FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, cumlative_minute
+SELECT fisc_tag, cumlative_minute
 FROM fisc_timeline_hour_staging
-GROUP BY fisc_title, cumlative_minute
-HAVING MIN(hour_title) != MAX(hour_title)
+GROUP BY fisc_tag, cumlative_minute
+HAVING MIN(hour_tag) != MAX(hour_tag)
 )
 UPDATE fisc_timeline_hour_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_timeline_hour_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_staging.fisc_tag
     AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_staging.cumlative_minute
 ;
 """
 FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, cumlative_day
+SELECT fisc_tag, cumlative_day
 FROM fisc_timeline_month_staging
-GROUP BY fisc_title, cumlative_day
-HAVING MIN(month_title) != MAX(month_title)
+GROUP BY fisc_tag, cumlative_day
+HAVING MIN(month_tag) != MAX(month_tag)
 )
 UPDATE fisc_timeline_month_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_timeline_month_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fisc_timeline_month_staging.fisc_tag
     AND inconsistency_rows.cumlative_day = fisc_timeline_month_staging.cumlative_day
 ;
 """
 FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, weekday_order
+SELECT fisc_tag, weekday_order
 FROM fisc_timeline_weekday_staging
-GROUP BY fisc_title, weekday_order
-HAVING MIN(weekday_title) != MAX(weekday_title)
+GROUP BY fisc_tag, weekday_order
+HAVING MIN(weekday_tag) != MAX(weekday_tag)
 )
 UPDATE fisc_timeline_weekday_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_timeline_weekday_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fisc_timeline_weekday_staging.fisc_tag
     AND inconsistency_rows.weekday_order = fisc_timeline_weekday_staging.weekday_order
 ;
 """
 FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title, offi_time
+SELECT fisc_tag, offi_time
 FROM fisc_timeoffi_staging
-GROUP BY fisc_title, offi_time
+GROUP BY fisc_tag, offi_time
 HAVING 1=2
 )
 UPDATE fisc_timeoffi_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fisc_timeoffi_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fisc_timeoffi_staging.fisc_tag
     AND inconsistency_rows.offi_time = fisc_timeoffi_staging.offi_time
 ;
 """
 FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_title
+SELECT fisc_tag
 FROM fiscunit_staging
-GROUP BY fisc_title
-HAVING MIN(timeline_title) != MAX(timeline_title)
+GROUP BY fisc_tag
+HAVING MIN(timeline_tag) != MAX(timeline_tag)
     OR MIN(c400_number) != MAX(c400_number)
     OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
     OR MIN(monthday_distortion) != MAX(monthday_distortion)
@@ -657,7 +657,7 @@ HAVING MIN(timeline_title) != MAX(timeline_title)
 UPDATE fiscunit_staging
 SET error_message = 'Inconsistent fisc data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_title = fiscunit_staging.fisc_title
+WHERE inconsistency_rows.fisc_tag = fiscunit_staging.fisc_tag
 ;
 """
 
@@ -689,124 +689,124 @@ def get_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     }
 
 
-BUDMEMB_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_put_agg (face_name, event_int, fisc_title, owner_name, acct_name, group_label, credit_vote, debtit_vote)
-SELECT face_name, event_int, fisc_title, owner_name, acct_name, group_label, MAX(credit_vote), MAX(debtit_vote)
+BUDMEMB_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_put_agg (face_name, event_int, fisc_tag, owner_name, acct_name, group_label, credit_vote, debtit_vote)
+SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label, MAX(credit_vote), MAX(debtit_vote)
 FROM bud_acct_membership_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name, group_label
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name, group_label
 ;
 """
-BUDACCT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_put_agg (face_name, event_int, fisc_title, owner_name, acct_name, credit_belief, debtit_belief)
-SELECT face_name, event_int, fisc_title, owner_name, acct_name, MAX(credit_belief), MAX(debtit_belief)
+BUDACCT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acctunit_put_agg (face_name, event_int, fisc_tag, owner_name, acct_name, credit_belief, debtit_belief)
+SELECT face_name, event_int, fisc_tag, owner_name, acct_name, MAX(credit_belief), MAX(debtit_belief)
 FROM bud_acctunit_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, acct_name
+GROUP BY face_name, event_int, fisc_tag, owner_name, acct_name
 ;
 """
-BUDAWAR_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_put_agg (face_name, event_int, fisc_title, owner_name, road, awardee_tag, give_force, take_force)
-SELECT face_name, event_int, fisc_title, owner_name, road, awardee_tag, MAX(give_force), MAX(take_force)
+BUDAWAR_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_awardlink_put_agg (face_name, event_int, fisc_tag, owner_name, road, awardee_title, give_force, take_force)
+SELECT face_name, event_int, fisc_tag, owner_name, road, awardee_title, MAX(give_force), MAX(take_force)
 FROM bud_item_awardlink_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, awardee_tag
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, awardee_title
 ;
 """
-BUDFACT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_put_agg (face_name, event_int, fisc_title, owner_name, road, base, pick, fopen, fnigh)
-SELECT face_name, event_int, fisc_title, owner_name, road, base, MAX(pick), MAX(fopen), MAX(fnigh)
+BUDFACT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_factunit_put_agg (face_name, event_int, fisc_tag, owner_name, road, base, pick, fopen, fnigh)
+SELECT face_name, event_int, fisc_tag, owner_name, road, base, MAX(pick), MAX(fopen), MAX(fnigh)
 FROM bud_item_factunit_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 ;
 """
-BUDHEAL_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_put_agg (face_name, event_int, fisc_title, owner_name, road, healer_name)
-SELECT face_name, event_int, fisc_title, owner_name, road, healer_name
+BUDHEAL_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_healerlink_put_agg (face_name, event_int, fisc_tag, owner_name, road, healer_name)
+SELECT face_name, event_int, fisc_tag, owner_name, road, healer_name
 FROM bud_item_healerlink_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, healer_name
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, healer_name
 ;
 """
-BUDPREM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_put_agg (face_name, event_int, fisc_title, owner_name, road, base, need, nigh, open, divisor)
-SELECT face_name, event_int, fisc_title, owner_name, road, base, need, MAX(nigh), MAX(open), MAX(divisor)
+BUDPREM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reason_premiseunit_put_agg (face_name, event_int, fisc_tag, owner_name, road, base, need, nigh, open, divisor)
+SELECT face_name, event_int, fisc_tag, owner_name, road, base, need, MAX(nigh), MAX(open), MAX(divisor)
 FROM bud_item_reason_premiseunit_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base, need
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base, need
 ;
 """
-BUDREAS_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_put_agg (face_name, event_int, fisc_title, owner_name, road, base, base_item_active_requisite)
-SELECT face_name, event_int, fisc_title, owner_name, road, base, MAX(base_item_active_requisite)
+BUDREAS_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_reasonunit_put_agg (face_name, event_int, fisc_tag, owner_name, road, base, base_item_active_requisite)
+SELECT face_name, event_int, fisc_tag, owner_name, road, base, MAX(base_item_active_requisite)
 FROM bud_item_reasonunit_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, base
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 ;
 """
-BUDTEAM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_put_agg (face_name, event_int, fisc_title, owner_name, road, team_tag)
-SELECT face_name, event_int, fisc_title, owner_name, road, team_tag
+BUDTEAM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_item_teamlink_put_agg (face_name, event_int, fisc_tag, owner_name, road, team_title)
+SELECT face_name, event_int, fisc_tag, owner_name, road, team_title
 FROM bud_item_teamlink_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, road, team_tag
+GROUP BY face_name, event_int, fisc_tag, owner_name, road, team_title
 ;
 """
-BUDITEM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_put_agg (face_name, event_int, fisc_title, owner_name, parent_road, item_title, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool)
-SELECT face_name, event_int, fisc_title, owner_name, parent_road, item_title, MAX(begin), MAX(close), MAX(addin), MAX(numor), MAX(denom), MAX(morph), MAX(gogo_want), MAX(stop_want), MAX(mass), MAX(pledge), MAX(problem_bool)
+BUDITEM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_itemunit_put_agg (face_name, event_int, fisc_tag, owner_name, parent_road, item_tag, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool)
+SELECT face_name, event_int, fisc_tag, owner_name, parent_road, item_tag, MAX(begin), MAX(close), MAX(addin), MAX(numor), MAX(denom), MAX(morph), MAX(gogo_want), MAX(stop_want), MAX(mass), MAX(pledge), MAX(problem_bool)
 FROM bud_itemunit_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name, parent_road, item_title
+GROUP BY face_name, event_int, fisc_tag, owner_name, parent_road, item_tag
 ;
 """
-BUDUNIT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO budunit_put_agg (face_name, event_int, fisc_title, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit)
-SELECT face_name, event_int, fisc_title, owner_name, MAX(credor_respect), MAX(debtor_respect), MAX(fund_pool), MAX(max_tree_traverse), MAX(tally), MAX(fund_coin), MAX(penny), MAX(respect_bit)
+BUDUNIT_PUT_AGG_INSERT_SQLSTR = """INSERT INTO budunit_put_agg (face_name, event_int, fisc_tag, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit)
+SELECT face_name, event_int, fisc_tag, owner_name, MAX(credor_respect), MAX(debtor_respect), MAX(fund_pool), MAX(max_tree_traverse), MAX(tally), MAX(fund_coin), MAX(penny), MAX(respect_bit)
 FROM budunit_put_staging
 WHERE error_message IS NULL
-GROUP BY face_name, event_int, fisc_title, owner_name
+GROUP BY face_name, event_int, fisc_tag, owner_name
 ;
 """
 
-FISCCASH_AGG_INSERT_SQLSTR = """INSERT INTO fisc_cashbook_agg (fisc_title, owner_name, acct_name, tran_time, amount)
-SELECT fisc_title, owner_name, acct_name, tran_time, MAX(amount)
+FISCCASH_AGG_INSERT_SQLSTR = """INSERT INTO fisc_cashbook_agg (fisc_tag, owner_name, acct_name, tran_time, amount)
+SELECT fisc_tag, owner_name, acct_name, tran_time, MAX(amount)
 FROM fisc_cashbook_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, owner_name, acct_name, tran_time
+GROUP BY fisc_tag, owner_name, acct_name, tran_time
 ;
 """
-FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_title, owner_name, deal_time, quota, celldepth)
-SELECT fisc_title, owner_name, deal_time, MAX(quota), MAX(celldepth)
+FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_tag, owner_name, deal_time, quota, celldepth)
+SELECT fisc_tag, owner_name, deal_time, MAX(quota), MAX(celldepth)
 FROM fisc_dealunit_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, owner_name, deal_time
+GROUP BY fisc_tag, owner_name, deal_time
 ;
 """
-FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_title, cumlative_minute, hour_title)
-SELECT fisc_title, cumlative_minute, MAX(hour_title)
+FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_tag, cumlative_minute, hour_tag)
+SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
 FROM fisc_timeline_hour_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, cumlative_minute
+GROUP BY fisc_tag, cumlative_minute
 ;
 """
-FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_title, cumlative_day, month_title)
-SELECT fisc_title, cumlative_day, MAX(month_title)
+FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_tag, cumlative_day, month_tag)
+SELECT fisc_tag, cumlative_day, MAX(month_tag)
 FROM fisc_timeline_month_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, cumlative_day
+GROUP BY fisc_tag, cumlative_day
 ;
 """
-FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_title, weekday_order, weekday_title)
-SELECT fisc_title, weekday_order, MAX(weekday_title)
+FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_tag, weekday_order, weekday_tag)
+SELECT fisc_tag, weekday_order, MAX(weekday_tag)
 FROM fisc_timeline_weekday_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, weekday_order
+GROUP BY fisc_tag, weekday_order
 ;
 """
-FISCOFFI_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeoffi_agg (fisc_title, offi_time)
-SELECT fisc_title, offi_time
+FISCOFFI_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeoffi_agg (fisc_tag, offi_time)
+SELECT fisc_tag, offi_time
 FROM fisc_timeoffi_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title, offi_time
+GROUP BY fisc_tag, offi_time
 ;
 """
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
-SELECT fisc_title, MAX(timeline_title), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
+FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
+SELECT fisc_tag, MAX(timeline_tag), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
 FROM fiscunit_staging
 WHERE error_message IS NULL
-GROUP BY fisc_title
+GROUP BY fisc_tag
 ;
 """
 
@@ -917,7 +917,7 @@ IDEA_STAGEABLE_DEL_DIMENS = {
 
 CREATE_FISC_EVENT_TIME_AGG_SQLSTR = """
 CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
-  fisc_title TEXT
+  fisc_tag TEXT
 , event_int INTEGER
 , agg_time INTEGER
 , error_message TEXT
@@ -925,24 +925,24 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 ;
 """
 INSERT_FISC_EVENT_TIME_AGG_SQLSTR = """
-INSERT INTO fisc_event_time_agg (fisc_title, event_int, agg_time)
-SELECT fisc_title, event_int, agg_time
+INSERT INTO fisc_event_time_agg (fisc_tag, event_int, agg_time)
+SELECT fisc_tag, event_int, agg_time
 FROM (
-    SELECT fisc_title, event_int, tran_time as agg_time
+    SELECT fisc_tag, event_int, tran_time as agg_time
     FROM fisc_cashbook_staging
-    GROUP BY fisc_title, event_int, tran_time
+    GROUP BY fisc_tag, event_int, tran_time
     UNION 
-    SELECT fisc_title, event_int, deal_time as agg_time
+    SELECT fisc_tag, event_int, deal_time as agg_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, event_int, deal_time
+    GROUP BY fisc_tag, event_int, deal_time
 )
-ORDER BY fisc_title, event_int, agg_time
+ORDER BY fisc_tag, event_int, agg_time
 ;
 """
 UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR = """
 WITH EventTimeOrdered AS (
-    SELECT fisc_title, event_int, agg_time,
-           LAG(agg_time) OVER (PARTITION BY fisc_title ORDER BY event_int) AS prev_agg_time
+    SELECT fisc_tag, event_int, agg_time,
+           LAG(agg_time) OVER (PARTITION BY fisc_tag ORDER BY event_int) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
@@ -953,7 +953,7 @@ SET error_message = CASE
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
-    AND EventTimeOrdered.fisc_title = fisc_event_time_agg.fisc_title
+    AND EventTimeOrdered.fisc_tag = fisc_event_time_agg.fisc_tag
     AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
@@ -961,7 +961,7 @@ WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
 
 CREATE_FISC_OTE1_AGG_SQLSTR = """
 CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
-  fisc_title TEXT
+  fisc_tag TEXT
 , owner_name TEXT
 , event_int INTEGER
 , deal_time INTEGER
@@ -970,36 +970,36 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 ;
 """
 INSERT_FISC_OTE1_AGG_SQLSTR = """
-INSERT INTO fisc_ote1_agg (fisc_title, owner_name, event_int, deal_time)
-SELECT fisc_title, owner_name, event_int, deal_time
+INSERT INTO fisc_ote1_agg (fisc_tag, owner_name, event_int, deal_time)
+SELECT fisc_tag, owner_name, event_int, deal_time
 FROM (
-    SELECT fisc_title, owner_name, event_int, deal_time
+    SELECT fisc_tag, owner_name, event_int, deal_time
     FROM fisc_dealunit_staging
-    GROUP BY fisc_title, owner_name, event_int, deal_time
+    GROUP BY fisc_tag, owner_name, event_int, deal_time
 )
-ORDER BY fisc_title, owner_name, event_int, deal_time
+ORDER BY fisc_tag, owner_name, event_int, deal_time
 ;
 """
 
 
-FISCCASH_FU1_SELECT_SQLSTR = "SELECT fisc_title, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_title = "
-FISCDEAL_FU1_SELECT_SQLSTR = "SELECT fisc_title, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_title = "
-FISCHOUR_FU1_SELECT_SQLSTR = "SELECT fisc_title, cumlative_minute, hour_title FROM fisc_timeline_hour_agg WHERE fisc_title = "
-FISCMONT_FU1_SELECT_SQLSTR = "SELECT fisc_title, cumlative_day, month_title FROM fisc_timeline_month_agg WHERE fisc_title = "
-FISCWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_title, weekday_order, weekday_title FROM fisc_timeline_weekday_agg WHERE fisc_title = "
+FISCCASH_FU1_SELECT_SQLSTR = "SELECT fisc_tag, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_tag = "
+FISCDEAL_FU1_SELECT_SQLSTR = "SELECT fisc_tag, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_tag = "
+FISCHOUR_FU1_SELECT_SQLSTR = "SELECT fisc_tag, cumlative_minute, hour_tag FROM fisc_timeline_hour_agg WHERE fisc_tag = "
+FISCMONT_FU1_SELECT_SQLSTR = "SELECT fisc_tag, cumlative_day, month_tag FROM fisc_timeline_month_agg WHERE fisc_tag = "
+FISCWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_tag, weekday_order, weekday_tag FROM fisc_timeline_weekday_agg WHERE fisc_tag = "
 FISCOFFI_FU1_SELECT_SQLSTR = (
-    "SELECT fisc_title, offi_time FROM fisc_timeoffi_agg WHERE fisc_title = "
+    "SELECT fisc_tag, offi_time FROM fisc_timeoffi_agg WHERE fisc_tag = "
 )
-FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_title, timeline_title, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_agg WHERE fisc_title = "
+FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_agg WHERE fisc_tag = "
 
 
-def get_fisc_fu1_select_sqlstrs(fisc_title: str) -> dict[str, str]:
+def get_fisc_fu1_select_sqlstrs(fisc_tag: str) -> dict[str, str]:
     return {
-        "fiscunit": f"{FISCUNIT_FU1_SELECT_SQLSTR}'{fisc_title}'",
-        "fisc_dealunit": f"{FISCDEAL_FU1_SELECT_SQLSTR}'{fisc_title}'",
-        "fisc_cashbook": f"{FISCCASH_FU1_SELECT_SQLSTR}'{fisc_title}'",
-        "fisc_timeline_hour": f"{FISCHOUR_FU1_SELECT_SQLSTR}'{fisc_title}'",
-        "fisc_timeline_month": f"{FISCMONT_FU1_SELECT_SQLSTR}'{fisc_title}'",
-        "fisc_timeline_weekday": f"{FISCWEEK_FU1_SELECT_SQLSTR}'{fisc_title}'",
-        "fisc_timeoffi": f"{FISCOFFI_FU1_SELECT_SQLSTR}'{fisc_title}'",
+        "fiscunit": f"{FISCUNIT_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_dealunit": f"{FISCDEAL_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_cashbook": f"{FISCCASH_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeline_hour": f"{FISCHOUR_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeline_month": f"{FISCMONT_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeline_weekday": f"{FISCWEEK_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeoffi": f"{FISCOFFI_FU1_SELECT_SQLSTR}'{fisc_tag}'",
     }

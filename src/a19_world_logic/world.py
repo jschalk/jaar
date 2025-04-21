@@ -13,9 +13,9 @@ from src.a02_finance_toolboxs.deal import TimeLinePoint, TimeConversion
 from src.a01_word_logic.road import (
     FaceName,
     EventInt,
-    FiscTitle,
+    FiscTag,
     WorldID,
-    TimeLineTitle,
+    TimeLineTag,
 )
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
@@ -70,14 +70,14 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     world_time_nigh: TimeLinePoint = None
-    timeconversions: dict[TimeLineTitle, TimeConversion] = None
+    timeconversions: dict[TimeLineTag, TimeConversion] = None
     _faces_otz_dir: str = None
     _faces_inz_dir: str = None
     _world_dir: str = None
     _mine_dir: str = None
     _cart_dir: str = None
     _fisc_mstr_dir: str = None
-    _fiscunits: set[FiscTitle] = None
+    _fiscunits: set[FiscTag] = None
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
@@ -113,7 +113,7 @@ class WorldUnit:
         set_dir(self._cart_dir)
         set_dir(self._fisc_mstr_dir)
 
-    def get_timeconversions_dict(self) -> dict[TimeLineTitle, TimeConversion]:
+    def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
     def mine_to_cart_staging(self):
@@ -308,8 +308,8 @@ def worldunit_shop(
     worlds_dir: str,
     mine_dir: str = None,
     world_time_nigh: TimeLinePoint = None,
-    timeconversions: dict[TimeLineTitle, TimeConversion] = None,
-    _fiscunits: set[FiscTitle] = None,
+    timeconversions: dict[TimeLineTag, TimeConversion] = None,
+    _fiscunits: set[FiscTag] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_id=world_id,

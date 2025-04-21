@@ -26,21 +26,21 @@ from src.a01_word_logic.road import (
     all_roadunits_between,
     road_validate,
     rebuild_road,
-    get_terminus_title,
-    get_root_title_from_road,
+    get_terminus_tag,
+    get_root_tag_from_road,
     get_ancestor_roads,
-    get_default_fisc_title,
-    get_all_road_titles,
+    get_default_fisc_tag,
+    get_all_road_tags,
     get_forefather_roads,
     create_road,
     default_bridge_if_None,
-    TitleUnit,
+    TagUnit,
     RoadUnit,
     is_string_in_road,
     OwnerName,
     AcctName,
     HealerName,
-    FiscTitle,
+    FiscTag,
     roadunit_valid_dir_path,
 )
 from src.a06_bud_logic.bud_config import max_tree_traverse_default
@@ -82,7 +82,7 @@ class InvalidBudException(Exception):
     pass
 
 
-class InvalidTitleException(Exception):
+class InvalidTagException(Exception):
     pass
 
 
@@ -120,7 +120,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    fisc_title: FiscTitle = None
+    fisc_tag: FiscTag = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     itemroot: ItemUnit = None
@@ -187,24 +187,24 @@ class BudUnit:
     def make_road(
         self,
         parent_road: RoadUnit = None,
-        terminus_title: TitleUnit = None,
+        terminus_tag: TagUnit = None,
     ) -> RoadUnit:
         x_road = create_road(
             parent_road=parent_road,
-            terminus_title=terminus_title,
+            terminus_tag=terminus_tag,
             bridge=self.bridge,
         )
-        return road_validate(x_road, self.bridge, self.fisc_title)
+        return road_validate(x_road, self.bridge, self.fisc_tag)
 
-    def make_l1_road(self, l1_title: TitleUnit):
-        return self.make_road(self.fisc_title, l1_title)
+    def make_l1_road(self, l1_tag: TagUnit):
+        return self.make_road(self.fisc_tag, l1_tag)
 
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
         if self.bridge != new_bridge:
             for x_item_road in self._item_dict.keys():
                 if is_string_in_road(new_bridge, x_item_road):
-                    exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an item item_title '{x_item_road}'"
+                    exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an item item_tag '{x_item_road}'"
                     raise NewBridgeException(exception_str)
 
             # modify all road attributes in itemunits
@@ -212,13 +212,13 @@ class BudUnit:
             for x_item in self._item_dict.values():
                 x_item.set_bridge(self.bridge)
 
-    def set_fisc_title(self, fisc_title: str):
-        old_fisc_title = copy_deepcopy(self.fisc_title)
+    def set_fisc_tag(self, fisc_tag: str):
+        old_fisc_tag = copy_deepcopy(self.fisc_tag)
         self.settle_bud()
         for item_obj in self._item_dict.values():
-            item_obj.fisc_title = fisc_title
-        self.fisc_title = fisc_title
-        self.edit_item_title(old_road=old_fisc_title, new_item_title=self.fisc_title)
+            item_obj.fisc_tag = fisc_tag
+        self.fisc_tag = fisc_tag
+        self.edit_item_tag(old_road=old_fisc_tag, new_item_tag=self.fisc_tag)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -237,7 +237,7 @@ class BudUnit:
             to_evaluate_hx_dict[x_road] = "to_evaluate"
         evaluated_roads = set()
 
-        # while roads_to_evaluate != [] and count_x <= tree_metrics.title_count:
+        # while roads_to_evaluate != [] and count_x <= tree_metrics.tag_count:
         # Why count_x? because count_x might be wrong attr to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
@@ -412,7 +412,7 @@ class BudUnit:
         return all_group_labels.difference(x_acctunit_group_labels)
 
     def _is_item_rangeroot(self, item_road: RoadUnit) -> bool:
-        if self.fisc_title == item_road:
+        if self.fisc_tag == item_road:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where itemroot is rangeroot"
             )
@@ -443,7 +443,7 @@ class BudUnit:
             self._create_itemkid_if_empty(road=pick)
 
         fact_base_item = self.get_item_obj(base)
-        x_itemroot = self.get_item_obj(self.fisc_title)
+        x_itemroot = self.get_item_obj(self.fisc_tag)
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_itemroot.factunits.get(base).fopen
@@ -496,7 +496,7 @@ class BudUnit:
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
-        tree_metrics.evaluate_title(
+        tree_metrics.evaluate_tag(
             level=self.itemroot._level,
             reasons=self.itemroot.reasonunits,
             awardlinks=self.itemroot.awardlinks,
@@ -516,7 +516,7 @@ class BudUnit:
 
     def _eval_tree_metrics(self, parent_item, item_kid, tree_metrics, x_item_list):
         item_kid._level = parent_item._level + 1
-        tree_metrics.evaluate_title(
+        tree_metrics.evaluate_tag(
             level=item_kid._level,
             reasons=item_kid.reasonunits,
             awardlinks=item_kid.awardlinks,
@@ -567,9 +567,9 @@ class BudUnit:
     def add_item(
         self, item_road: RoadUnit, mass: float = None, pledge: bool = None
     ) -> ItemUnit:
-        x_item_title = get_terminus_title(item_road, self.bridge)
+        x_item_tag = get_terminus_tag(item_road, self.bridge)
         x_parent_road = get_parent_road(item_road, self.bridge)
-        x_itemunit = itemunit_shop(x_item_title, mass=mass)
+        x_itemunit = itemunit_shop(x_item_tag, mass=mass)
         if pledge:
             x_itemunit.pledge = True
         self.set_item(x_itemunit, x_parent_road)
@@ -579,16 +579,16 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         create_missing_items: bool = None,
-        get_rid_of_missing_awardlinks_awardee_tags: bool = None,
+        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
         self.set_item(
             item_kid=item_kid,
-            parent_road=self.fisc_title,
+            parent_road=self.fisc_tag,
             create_missing_items=create_missing_items,
-            get_rid_of_missing_awardlinks_awardee_tags=get_rid_of_missing_awardlinks_awardee_tags,
+            get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -598,29 +598,27 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         parent_road: RoadUnit,
-        get_rid_of_missing_awardlinks_awardee_tags: bool = None,
+        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
         create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        if TitleUnit(item_kid.item_title).is_title(self.bridge) is False:
-            x_str = (
-                f"set_item failed because '{item_kid.item_title}' is not a TitleUnit."
-            )
+        if TagUnit(item_kid.item_tag).is_tag(self.bridge) is False:
+            x_str = f"set_item failed because '{item_kid.item_tag}' is not a TagUnit."
             raise InvalidBudException(x_str)
 
-        x_root_title = get_root_title_from_road(parent_road, self.bridge)
-        if self.itemroot.item_title != x_root_title:
-            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root title. Should be {self.itemroot.item_title}."
+        x_root_tag = get_root_tag_from_road(parent_road, self.bridge)
+        if self.itemroot.item_tag != x_root_tag:
+            exception_str = f"set_item failed because parent_road '{parent_road}' has an invalid root tag. Should be {self.itemroot.item_tag}."
             raise InvalidBudException(exception_str)
 
         item_kid.bridge = self.bridge
-        if item_kid.fisc_title != self.fisc_title:
-            item_kid.fisc_title = self.fisc_title
+        if item_kid.fisc_tag != self.fisc_tag:
+            item_kid.fisc_tag = self.fisc_tag
         if item_kid.fund_coin != self.fund_coin:
             item_kid.fund_coin = self.fund_coin
-        if not get_rid_of_missing_awardlinks_awardee_tags:
+        if not get_rid_of_missing_awardlinks_awardee_titles:
             item_kid = self._get_filtered_awardlinks_item(item_kid)
         item_kid.set_parent_road(parent_road=parent_road)
 
@@ -633,14 +631,14 @@ class BudUnit:
             parent_road_item
         parent_road_item.add_kid(item_kid)
 
-        kid_road = self.make_road(parent_road, item_kid.item_title)
+        kid_road = self.make_road(parent_road, item_kid.item_tag)
         if adoptees is not None:
             mass_sum = 0
-            for adoptee_item_title in adoptees:
-                adoptee_road = self.make_road(parent_road, adoptee_item_title)
+            for adoptee_item_tag in adoptees:
+                adoptee_road = self.make_road(parent_road, adoptee_item_tag)
                 adoptee_item = self.get_item_obj(adoptee_road)
                 mass_sum += adoptee_item.mass
-                new_adoptee_parent_road = self.make_road(kid_road, adoptee_item_title)
+                new_adoptee_parent_road = self.make_road(kid_road, adoptee_item_tag)
                 self.set_item(adoptee_item, new_adoptee_parent_road)
                 self.edit_item_attr(new_adoptee_parent_road, mass=adoptee_item.mass)
                 self.del_item_obj(adoptee_road)
@@ -653,20 +651,22 @@ class BudUnit:
 
     def _get_filtered_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
-            _awardlink_awardee_tag
-            for _awardlink_awardee_tag in x_item.awardlinks.keys()
-            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_tag) is None
+            _awardlink_awardee_title
+            for _awardlink_awardee_title in x_item.awardlinks.keys()
+            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_title)
+            is None
         ]
-        for _awardlink_awardee_tag in _awardlinks_to_delete:
-            x_item.awardlinks.pop(_awardlink_awardee_tag)
+        for _awardlink_awardee_title in _awardlinks_to_delete:
+            x_item.awardlinks.pop(_awardlink_awardee_title)
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
-                _teamlink_team_tag
-                for _teamlink_team_tag in x_item.teamunit._teamlinks
-                if self.get_acctunit_group_labels_dict().get(_teamlink_team_tag) is None
+                _teamlink_team_title
+                for _teamlink_team_title in x_item.teamunit._teamlinks
+                if self.get_acctunit_group_labels_dict().get(_teamlink_team_title)
+                is None
             ]
-            for _teamlink_team_tag in _teamlinks_to_delete:
-                x_item.teamunit.del_teamlink(_teamlink_team_tag)
+            for _teamlink_team_title in _teamlinks_to_delete:
+                x_item.teamunit.del_teamlink(_teamlink_team_title)
         return x_item
 
     def _create_missing_items(self, road):
@@ -690,7 +690,7 @@ class BudUnit:
             if not del_children:
                 self._shift_item_kids(x_road=road)
             parent_item = self.get_item_obj(parent_road)
-            parent_item.del_kid(get_terminus_title(road, self.bridge))
+            parent_item.del_kid(get_terminus_tag(road, self.bridge))
         self.settle_bud()
 
     def _shift_item_kids(self, x_road: RoadUnit):
@@ -702,35 +702,35 @@ class BudUnit:
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_item_title(self, old_road: RoadUnit, new_item_title: TitleUnit):
-        if self.bridge in new_item_title:
-            exception_str = f"Cannot modify '{old_road}' because new_item_title {new_item_title} contains bridge {self.bridge}"
-            raise InvalidTitleException(exception_str)
+    def edit_item_tag(self, old_road: RoadUnit, new_item_tag: TagUnit):
+        if self.bridge in new_item_tag:
+            exception_str = f"Cannot modify '{old_road}' because new_item_tag {new_item_tag} contains bridge {self.bridge}"
+            raise InvalidTagException(exception_str)
         if self.item_exists(old_road) is False:
             raise InvalidBudException(f"Item {old_road=} does not exist")
 
         parent_road = get_parent_road(road=old_road)
         new_road = (
-            self.make_road(new_item_title)
+            self.make_road(new_item_tag)
             if parent_road == ""
-            else self.make_road(parent_road, new_item_title)
+            else self.make_road(parent_road, new_item_tag)
         )
         if old_road != new_road:
             if parent_road == "":
-                self.itemroot.set_item_title(new_item_title)
+                self.itemroot.set_item_tag(new_item_tag)
             else:
-                self._non_root_item_title_edit(old_road, new_item_title, parent_road)
+                self._non_root_item_tag_edit(old_road, new_item_tag, parent_road)
             self._itemroot_find_replace_road(old_road=old_road, new_road=new_road)
 
-    def _non_root_item_title_edit(
-        self, old_road: RoadUnit, new_item_title: TitleUnit, parent_road: RoadUnit
+    def _non_root_item_tag_edit(
+        self, old_road: RoadUnit, new_item_tag: TagUnit, parent_road: RoadUnit
     ):
         x_item = self.get_item_obj(old_road)
-        x_item.set_item_title(new_item_title)
+        x_item.set_item_tag(new_item_tag)
         x_item.parent_road = parent_road
         item_parent = self.get_item_obj(get_parent_road(old_road))
-        item_parent._kids.pop(get_terminus_title(old_road, self.bridge))
-        item_parent._kids[x_item.item_title] = x_item
+        item_parent._kids.pop(get_terminus_tag(old_road, self.bridge))
+        item_parent._kids[x_item.item_tag] = x_item
 
     def _itemroot_find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         self.itemroot.find_replace_road(old_road=old_road, new_road=new_road)
@@ -921,11 +921,11 @@ class BudUnit:
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupLabel, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_awardee_tag = awardlink_obj.awardee_tag
-            if not self.groupunit_exists(x_awardee_tag):
-                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_tag))
+            x_awardee_title = awardlink_obj.awardee_title
+            if not self.groupunit_exists(x_awardee_title):
+                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_title))
             self.add_to_groupunit_fund_give_fund_take(
-                group_label=awardlink_obj.awardee_tag,
+                group_label=awardlink_obj.awardee_title,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -940,7 +940,7 @@ class BudUnit:
                 if item.awardheir_exists():
                     for x_awardline in item._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
-                            group_label=x_awardline.awardee_tag,
+                            group_label=x_awardline.awardee_title,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
@@ -983,22 +983,22 @@ class BudUnit:
     def item_exists(self, road: RoadUnit) -> bool:
         if road is None:
             return False
-        root_road_item_title = get_root_title_from_road(road, bridge=self.bridge)
-        if root_road_item_title != self.itemroot.item_title:
+        root_road_item_tag = get_root_tag_from_road(road, bridge=self.bridge)
+        if root_road_item_tag != self.itemroot.item_tag:
             return False
 
-        titles = get_all_road_titles(road, bridge=self.bridge)
-        root_road_item_title = titles.pop(0)
-        if titles == []:
+        tags = get_all_road_tags(road, bridge=self.bridge)
+        root_road_item_tag = tags.pop(0)
+        if tags == []:
             return True
 
-        item_title = titles.pop(0)
-        x_item = self.itemroot.get_kid(item_title)
+        item_tag = tags.pop(0)
+        x_item = self.itemroot.get_kid(item_tag)
         if x_item is None:
             return False
-        while titles != []:
-            item_title = titles.pop(0)
-            x_item = x_item.get_kid(item_title)
+        while tags != []:
+            item_tag = tags.pop(0)
+            x_item = x_item.get_kid(item_tag)
             if x_item is None:
                 return False
         return True
@@ -1008,15 +1008,15 @@ class BudUnit:
             raise InvalidBudException("get_item_obj received road=None")
         if self.item_exists(road) is False and not if_missing_create:
             raise InvalidBudException(f"get_item_obj failed. no item at '{road}'")
-        titleunits = get_all_road_titles(road, bridge=self.bridge)
-        if len(titleunits) == 1:
+        tagunits = get_all_road_tags(road, bridge=self.bridge)
+        if len(tagunits) == 1:
             return self.itemroot
 
-        titleunits.pop(0)
-        item_title = titleunits.pop(0)
-        x_item = self.itemroot.get_kid(item_title, if_missing_create)
-        while titleunits != []:
-            x_item = x_item.get_kid(titleunits.pop(0), if_missing_create)
+        tagunits.pop(0)
+        item_tag = tagunits.pop(0)
+        x_item = self.itemroot.get_kid(item_tag, if_missing_create)
+        while tagunits != []:
+            x_item = x_item.get_kid(tagunits.pop(0), if_missing_create)
 
         return x_item
 
@@ -1033,7 +1033,7 @@ class BudUnit:
         return [self.get_item_obj(x_item_road) for x_item_road in item_roads]
 
     def _set_item_dict(self):
-        item_list = [self.get_item_obj(self.fisc_title)]
+        item_list = [self.get_item_obj(self.fisc_tag)]
         while item_list != []:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
@@ -1254,10 +1254,10 @@ class BudUnit:
             for x_item in parent_item._kids.values():
                 if fund_onset is None:
                     fund_onset = parent_item._fund_onset
-                    fund_cease = fund_onset + alloted_fund_num.get(x_item.item_title)
+                    fund_cease = fund_onset + alloted_fund_num.get(x_item.item_tag)
                 else:
                     fund_onset = fund_cease
-                    fund_cease += alloted_fund_num.get(x_item.item_title)
+                    fund_cease += alloted_fund_num.get(x_item.item_tag)
                 x_item.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
                 cache_item_list.append(x_item)
 
@@ -1321,14 +1321,14 @@ class BudUnit:
         self, no_range_descendants: bool = False
     ) -> list[RoadUnit]:
         item_list = list(self.get_item_dict().values())
-        title_dict = {item.get_road().lower(): item.get_road() for item in item_list}
-        title_lowercase_ordered_list = sorted(list(title_dict))
-        title_orginalcase_ordered_list = [
-            title_dict[title_l] for title_l in title_lowercase_ordered_list
+        tag_dict = {item.get_road().lower(): item.get_road() for item in item_list}
+        tag_lowercase_ordered_list = sorted(list(tag_dict))
+        tag_orginalcase_ordered_list = [
+            tag_dict[tag_l] for tag_l in tag_lowercase_ordered_list
         ]
 
         list_x = []
-        for road in title_orginalcase_ordered_list:
+        for road in tag_orginalcase_ordered_list:
             if not no_range_descendants:
                 list_x.append(road)
             else:
@@ -1369,7 +1369,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
-            "fisc_title": self.fisc_title,
+            "fisc_tag": self.fisc_tag,
             "max_tree_traverse": self.max_tree_traverse,
             "bridge": self.bridge,
             "itemroot": self.itemroot.get_dict(),
@@ -1391,7 +1391,7 @@ class BudUnit:
         self.set_item(
             item_kid=item_kid,
             parent_road=self.make_road(item_kid.parent_road),
-            get_rid_of_missing_awardlinks_awardee_tags=True,
+            get_rid_of_missing_awardlinks_awardee_titles=True,
             create_missing_items=True,
         )
 
@@ -1404,7 +1404,7 @@ class BudUnit:
 
 def budunit_shop(
     owner_name: OwnerName = None,
-    fisc_title: FiscTitle = None,
+    fisc_tag: FiscTag = None,
     bridge: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
@@ -1413,11 +1413,11 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     owner_name = "" if owner_name is None else owner_name
-    fisc_title = get_default_fisc_title() if fisc_title is None else fisc_title
+    fisc_tag = get_default_fisc_tag() if fisc_tag is None else fisc_tag
     x_bud = BudUnit(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
-        fisc_title=fisc_title,
+        fisc_tag=fisc_tag,
         accts=get_empty_dict_if_None(None),
         _groupunits={},
         bridge=default_bridge_if_None(bridge),
@@ -1441,7 +1441,7 @@ def budunit_shop(
         root=True,
         _uid=1,
         _level=0,
-        fisc_title=x_bud.fisc_title,
+        fisc_tag=x_bud.fisc_tag,
         bridge=x_bud.bridge,
         fund_coin=x_bud.fund_coin,
         parent_road="",
@@ -1461,8 +1461,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud.fisc_title = obj_from_bud_dict(bud_dict, "fisc_title")
-    x_bud.itemroot.item_title = obj_from_bud_dict(bud_dict, "fisc_title")
+    x_bud.fisc_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
+    x_bud.itemroot.item_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1489,7 +1489,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     itemroot_dict = bud_dict.get("itemroot")
     x_bud.itemroot = itemunit_shop(
         root=True,
-        item_title=x_bud.fisc_title,
+        item_tag=x_bud.fisc_tag,
         parent_road="",
         _level=0,
         _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
@@ -1509,7 +1509,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
         bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
-        fisc_title=x_bud.fisc_title,
+        fisc_tag=x_bud.fisc_tag,
         fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_itemroot_kids_from_dict(x_bud, itemroot_dict)
@@ -1520,7 +1520,7 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
     parent_road_str = "parent_road"
     # for every kid dict, set parent_road in dict, add to to_evaluate_list
     for x_dict in get_obj_from_item_dict(itemroot_dict, "_kids").values():
-        x_dict[parent_road_str] = x_bud.fisc_title
+        x_dict[parent_road_str] = x_bud.fisc_tag
         to_evaluate_item_dicts.append(x_dict)
 
     while to_evaluate_item_dicts != []:
@@ -1528,11 +1528,11 @@ def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
         # for every kid dict, set parent_road in dict, add to to_evaluate_list
         for kid_dict in get_obj_from_item_dict(item_dict, "_kids").values():
             parent_road = get_obj_from_item_dict(item_dict, parent_road_str)
-            kid_item_title = get_obj_from_item_dict(item_dict, "item_title")
-            kid_dict[parent_road_str] = x_bud.make_road(parent_road, kid_item_title)
+            kid_item_tag = get_obj_from_item_dict(item_dict, "item_tag")
+            kid_dict[parent_road_str] = x_bud.make_road(parent_road, kid_item_tag)
             to_evaluate_item_dicts.append(kid_dict)
         x_itemkid = itemunit_shop(
-            item_title=get_obj_from_item_dict(item_dict, "item_title"),
+            item_tag=get_obj_from_item_dict(item_dict, "item_tag"),
             mass=get_obj_from_item_dict(item_dict, "mass"),
             _uid=get_obj_from_item_dict(item_dict, "_uid"),
             begin=get_obj_from_item_dict(item_dict, "begin"),

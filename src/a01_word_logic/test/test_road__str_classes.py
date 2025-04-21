@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import (
-    TitleUnit,
+    TagUnit,
     NameUnit,
     LabelUnit,
     HealerName,
@@ -10,7 +10,7 @@ from src.a01_word_logic.road import (
     GroupLabel,
     default_bridge_if_None,
     WorldID,
-    TimeLineTitle,
+    TimeLineTag,
     FaceName,
     get_default_face_name,
     EventInt,
@@ -55,7 +55,7 @@ def test_HealerName_exists():
     bob_healer_name = HealerName(bob_str)
     # THEN
     assert bob_healer_name == bob_str
-    doc_str = "A TitleUnit used to identify a Problem's Healer"
+    doc_str = "A TagUnit used to identify a Problem's Healer"
     assert inspect_getdoc(bob_healer_name) == doc_str
 
 
@@ -66,7 +66,7 @@ def test_OwnerName_exists():
     bob_owner_name = OwnerName(bob_str)
     # THEN
     assert bob_owner_name == bob_str
-    doc_str = "A TitleUnit used to identify a BudUnit's owner_name"
+    doc_str = "A TagUnit used to identify a BudUnit's owner_name"
     assert inspect_getdoc(bob_owner_name) == doc_str
 
 
@@ -88,7 +88,7 @@ def test_LabelUnit_exists():
     bob_nameunit = LabelUnit(bob_str)
     # THEN
     assert bob_nameunit == bob_str
-    doc_str = "Any Label and Tag string classes should inherit from this class"
+    doc_str = "Any Label and _title string classes should inherit from this class"
     assert inspect_getdoc(bob_nameunit) == doc_str
 
 
@@ -98,11 +98,11 @@ def test_GroupLabel_exists():
     assert str(type(bikers_group_label)).find("src.a01_word_logic.road.GroupLabel") > 0
 
 
-def test_TitleUnit_exists():
+def test_TagUnit_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_road = TitleUnit(empty_str)
+    x_road = TagUnit(empty_str)
     # THEN
     assert x_road == empty_str
     doc_str = (
@@ -128,23 +128,23 @@ def test_default_bridge_if_None_ReturnsObj():
     assert default_bridge_if_None(buzz_str) == buzz_str
 
 
-def test_TitleUnit_is_title_ReturnsObj_Scenario0():
+def test_TagUnit_is_tag_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert TitleUnit("").is_title() is False
-    assert TitleUnit("A").is_title()
+    assert TagUnit("").is_tag() is False
+    assert TagUnit("A").is_tag()
 
     # WHEN / THEN
     x_s = default_bridge_if_None()
-    x_titleunit = TitleUnit(f"casa{x_s}kitchen")
-    assert x_titleunit.is_title() is False
+    x_tagunit = TagUnit(f"casa{x_s}kitchen")
+    assert x_tagunit.is_tag() is False
 
 
-def test_TitleUnit_is_title_ReturnsObj_Scenario1():
+def test_TagUnit_is_tag_ReturnsObj_Scenario1():
     # ESTABLISH / WHEN / THEN
     slash_str = "/"
-    x_titleunit = TitleUnit(f"casa{slash_str}kitchen")
-    assert x_titleunit.is_title()
-    assert x_titleunit.is_title(slash_str) is False
+    x_tagunit = TagUnit(f"casa{slash_str}kitchen")
+    assert x_tagunit.is_tag()
+    assert x_tagunit.is_tag(slash_str) is False
 
 
 def test_RoadUnit_exists():
@@ -154,7 +154,9 @@ def test_RoadUnit_exists():
     x_road = RoadUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = "A string representation of a tree path. TitleUnits are seperated by road bridge"
+    doc_str = (
+        "A string representation of a tree path. TagUnits are seperated by road bridge"
+    )
     assert inspect_getdoc(x_road) == doc_str
 
 
@@ -165,19 +167,19 @@ def test_DoarUnit_exists():
     x_road = DoarUnit(empty_str)
     # THEN
     assert x_road == empty_str
-    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TitleUnits are seperated by road bridge."
+    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TagUnits are seperated by road bridge."
     assert inspect_getdoc(x_road) == doc_str
 
 
-def test_TimeLineTitle_exists():
+def test_TimeLineTag_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_timelinetitle = TimeLineTitle(empty_str)
+    x_timelinetag = TimeLineTag(empty_str)
     # THEN
-    assert x_timelinetitle == empty_str
-    doc_str = "TimeLineTitle is required for every TimeLineUnit. It is a TitleUnit that must not container the bridge."
-    assert inspect_getdoc(x_timelinetitle) == doc_str
+    assert x_timelinetag == empty_str
+    doc_str = "TimeLineTag is required for every TimeLineUnit. It is a TagUnit that must not container the bridge."
+    assert inspect_getdoc(x_timelinetag) == doc_str
 
 
 def test_WorldID_Exists():

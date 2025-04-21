@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.idea_collector import (
     get_all_excel_ideasheets,
@@ -117,8 +117,8 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
     ]
     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
     row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
@@ -156,8 +156,8 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
     ]
     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
     row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
@@ -165,7 +165,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
     ]
     incom_row1 = [sue_str, event_1, minute_360, accord23_str]
     incom_row2 = [sue_str, event_1, minute_420, accord23_str]

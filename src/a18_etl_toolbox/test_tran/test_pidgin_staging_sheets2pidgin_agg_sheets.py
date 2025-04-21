@@ -5,7 +5,7 @@ from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
     etl_pidgin_name_staging_to_name_agg,
     etl_pidgin_label_staging_to_label_agg,
-    etl_pidgin_title_staging_to_title_agg,
+    etl_pidgin_tag_staging_to_tag_agg,
     etl_pidgin_road_staging_to_road_agg,
     etl_cart_pidgin_staging_to_agg,
 )
@@ -188,7 +188,7 @@ def test_etl_pidgin_road_staging_to_road_agg_Scenario0_CreatesFileFromSingleIdea
     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
 
 
-def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleIdea(
+def test_etl_pidgin_tag_staging_to_tag_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -198,38 +198,38 @@ def test_etl_pidgin_title_staging_to_title_agg_Scenario0_CreatesFileFromSingleId
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    title_staging_str = "title_staging"
-    title_agg_str = "title_agg"
-    title_staging_columns = PidginPrimeColumns().map_title_staging_columns
+    tag_staging_str = "tag_staging"
+    tag_agg_str = "tag_agg"
+    tag_staging_columns = PidginPrimeColumns().map_tag_staging_columns
     bx = "br00xxx"
-    e1_title0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
-    e1_title1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
-    e1_title_rows = [e1_title0, e1_title1]
-    staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
+    e1_tag0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
+    e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
+    e1_tag_rows = [e1_tag0, e1_tag1]
+    staging_tag_df = DataFrame(e1_tag_rows, columns=tag_staging_columns)
     x_cart_dir = get_test_etl_dir()
     pidgin_path = create_cart_pidgin_path(x_cart_dir)
-    upsert_sheet(pidgin_path, title_staging_str, staging_title_df)
+    upsert_sheet(pidgin_path, tag_staging_str, staging_tag_df)
     assert os_path_exists(pidgin_path)
-    assert sheet_exists(pidgin_path, title_staging_str)
-    assert sheet_exists(pidgin_path, title_agg_str) is False
+    assert sheet_exists(pidgin_path, tag_staging_str)
+    assert sheet_exists(pidgin_path, tag_agg_str) is False
 
     # WHEN
-    etl_pidgin_title_staging_to_title_agg(x_cart_dir)
+    etl_pidgin_tag_staging_to_tag_agg(x_cart_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    assert sheet_exists(pidgin_path, title_agg_str)
-    gen_title_agg_df = pandas_read_excel(pidgin_path, sheet_name=title_agg_str)
-    print(f"{gen_title_agg_df=}")
-    title_agg_columns = PidginPrimeColumns().map_title_agg_columns
-    assert list(gen_title_agg_df.columns) == title_agg_columns
-    assert len(gen_title_agg_df) == 2
+    assert sheet_exists(pidgin_path, tag_agg_str)
+    gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
+    print(f"{gen_tag_agg_df=}")
+    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    assert list(gen_tag_agg_df.columns) == tag_agg_columns
+    assert len(gen_tag_agg_df) == 2
     x_nan = float("nan")
-    e1_title0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_title1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_title_rows = [e1_title0, e1_title1]
-    e1_title_agg_df = DataFrame(e1_title_rows, columns=title_agg_columns)
-    pandas_testing_assert_frame_equal(gen_title_agg_df, e1_title_agg_df)
+    e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_tag1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_tag_rows = [e1_tag0, e1_tag1]
+    e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
+    pandas_testing_assert_frame_equal(gen_tag_agg_df, e1_tag_agg_df)
 
 
 def test_etl_cart_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
@@ -284,30 +284,30 @@ def test_etl_cart_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    title_staging_str = "title_staging"
-    title_agg_str = "title_agg"
-    title_staging_columns = PidginPrimeColumns().map_title_staging_columns
+    tag_staging_str = "tag_staging"
+    tag_agg_str = "tag_agg"
+    tag_staging_columns = PidginPrimeColumns().map_tag_staging_columns
     bx = "br00xxx"
-    e1_title0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
-    e1_title1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
-    e1_title_rows = [e1_title0, e1_title1]
-    staging_title_df = DataFrame(e1_title_rows, columns=title_staging_columns)
+    e1_tag0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
+    e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
+    e1_tag_rows = [e1_tag0, e1_tag1]
+    staging_tag_df = DataFrame(e1_tag_rows, columns=tag_staging_columns)
 
     x_cart_dir = get_test_etl_dir()
     pidgin_path = create_cart_pidgin_path(x_cart_dir)
     upsert_sheet(pidgin_path, name_staging_str, staging_name_df)
     upsert_sheet(pidgin_path, label_staging_str, staging_label_df)
     upsert_sheet(pidgin_path, road_staging_str, staging_road_df)
-    upsert_sheet(pidgin_path, title_staging_str, staging_title_df)
+    upsert_sheet(pidgin_path, tag_staging_str, staging_tag_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_staging_str)
     assert sheet_exists(pidgin_path, label_staging_str)
     assert sheet_exists(pidgin_path, road_staging_str)
-    assert sheet_exists(pidgin_path, title_staging_str)
+    assert sheet_exists(pidgin_path, tag_staging_str)
     assert sheet_exists(pidgin_path, name_agg_str) is False
     assert sheet_exists(pidgin_path, label_agg_str) is False
     assert sheet_exists(pidgin_path, road_agg_str) is False
-    assert sheet_exists(pidgin_path, title_agg_str) is False
+    assert sheet_exists(pidgin_path, tag_agg_str) is False
 
     # WHEN
     etl_cart_pidgin_staging_to_agg(x_cart_dir)
@@ -317,11 +317,11 @@ def test_etl_cart_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     assert sheet_exists(pidgin_path, name_agg_str)
     assert sheet_exists(pidgin_path, label_agg_str)
     assert sheet_exists(pidgin_path, road_agg_str)
-    assert sheet_exists(pidgin_path, title_agg_str)
+    assert sheet_exists(pidgin_path, tag_agg_str)
     gen_name_agg_df = pandas_read_excel(pidgin_path, sheet_name=name_agg_str)
     gen_label_agg_df = pandas_read_excel(pidgin_path, sheet_name=label_agg_str)
     gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
-    gen_title_agg_df = pandas_read_excel(pidgin_path, sheet_name=title_agg_str)
+    gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
 
     name_agg_columns = PidginPrimeColumns().map_name_agg_columns
     assert list(gen_name_agg_df.columns) == name_agg_columns
@@ -348,15 +348,15 @@ def test_etl_cart_pidgin_staging_to_agg_Scenario0_CreatesFileWithAllDimens(
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
 
-    title_agg_columns = PidginPrimeColumns().map_title_agg_columns
-    assert list(gen_title_agg_df.columns) == title_agg_columns
-    assert len(gen_title_agg_df) == 2
-    e1_title0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_title1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_title_rows = [e1_title0, e1_title1]
-    e1_title_agg_df = DataFrame(e1_title_rows, columns=title_agg_columns)
+    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    assert list(gen_tag_agg_df.columns) == tag_agg_columns
+    assert len(gen_tag_agg_df) == 2
+    e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_tag1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_tag_rows = [e1_tag0, e1_tag1]
+    e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
     pandas_testing_assert_frame_equal(gen_label_agg_df, e1_label_agg_df)
     pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
-    pandas_testing_assert_frame_equal(gen_title_agg_df, e1_title_agg_df)
+    pandas_testing_assert_frame_equal(gen_tag_agg_df, e1_tag_agg_df)

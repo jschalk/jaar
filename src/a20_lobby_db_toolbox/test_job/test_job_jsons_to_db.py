@@ -62,7 +62,7 @@ def test_ObjKeysHolder_Exists():
 
     # THEN
     assert not x_objkeyholder.world_id
-    assert not x_objkeyholder.fisc_title
+    assert not x_objkeyholder.fisc_tag
     assert not x_objkeyholder.owner_name
     assert not x_objkeyholder.road
     assert not x_objkeyholder.base
@@ -76,7 +76,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = 99
     x__keeps_justified = 77
@@ -92,7 +92,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
     x_penny = 4.0
     x_respect_bit = 0.2
     x_tally = 6
-    sue_bud = budunit_shop(owner_name=x_owner_name, fisc_title=x_fisc_title)
+    sue_bud = budunit_shop(owner_name=x_owner_name, fisc_tag=x_fisc_tag)
     sue_bud.fund_pool = x_fund_pool
     sue_bud.fund_coin = x_fund_coin
     sue_bud.penny = x_penny
@@ -125,7 +125,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
         rows = cursor.fetchall()
         expected_row1 = (
             x_world_id,
-            x_fisc_title,
+            x_fisc_tag,
             x_owner_name,
             x_credor_respect,
             x_debtor_respect,
@@ -149,7 +149,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
 def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_itemunit")
+    # x_args = get_bud_calc_dimen_args("bud_itemunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -163,10 +163,10 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     # print("")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_parent_road = 3
-    x_item_title = 4
+    x_item_tag = 4
     x_begin = 5.0
     x_close = 6.0
     x_addin = 7.0
@@ -193,9 +193,9 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     x__all_acct_cred = 28
     x__all_acct_debt = 29
     x_item = itemunit_shop()
-    x_item.fisc_title = x_fisc_title
+    x_item.fisc_tag = x_fisc_tag
     x_item.parent_road = x_parent_road
-    x_item.item_title = x_item_title
+    x_item.item_tag = x_item_tag
     x_item.begin = x_begin
     x_item.close = x_close
     x_item.addin = x_addin
@@ -252,7 +252,7 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
         create_job_tables(cursor)
         x_table_name = "bud_itemunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name)
 
         # WHEN
         insert_job_buditem(cursor, x_objkeysholder, x_item)
@@ -264,10 +264,10 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_parent_road),
-            str(x_item_title),
+            str(x_item_tag),
             x_begin,
             x_close,
             x_addin,
@@ -301,7 +301,7 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
 def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_item_reasonunit")
+    # x_args = get_bud_calc_dimen_args("bud_item_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -315,7 +315,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     # print("")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_road = 3
     x_base = 4
@@ -335,7 +335,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
 
         # WHEN
         insert_job_budreas(cursor, x_objkeysholder, x_reasonheir)
@@ -347,7 +347,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             str(x_base),
@@ -363,7 +363,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
 def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_item_reason_premiseunit")
+    # x_args = get_bud_calc_dimen_args("bud_item_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -376,7 +376,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_road = 3
     x_base = 4
@@ -400,7 +400,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         x_table_name = "bud_item_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_world_id, x_fisc_title, x_owner_name, x_road, x_base
+            x_world_id, x_fisc_tag, x_owner_name, x_road, x_base
         )
 
         # WHEN
@@ -413,7 +413,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             str(x_base),
@@ -431,7 +431,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
 def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_acct_membership")
+    # x_args = get_bud_calc_dimen_args("bud_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -444,7 +444,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_acct_name = 3
     x_group_label = 4
@@ -476,7 +476,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
         create_job_tables(cursor)
         x_table_name = "bud_acct_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name)
 
         # WHEN
         insert_job_budmemb(cursor, x_objkeysholder, x_membership)
@@ -488,7 +488,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_acct_name),
             str(x_group_label),
@@ -510,7 +510,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
 def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_acctunit")
+    # x_args = get_bud_calc_dimen_args("bud_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -523,7 +523,7 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_acct_name = 3
     x_credit_belief = 4
@@ -558,7 +558,7 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
         create_job_tables(cursor)
         x_table_name = "bud_acctunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name)
 
         # WHEN
         insert_job_budacct(cursor, x_objkeysholder, x_acct)
@@ -570,7 +570,7 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_acct_name),
             x_credit_belief,
@@ -593,7 +593,7 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
 def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_groupunit")
+    # x_args = get_bud_calc_dimen_args("bud_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -606,7 +606,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_group_label = 3
     x_fund_coin = 4
@@ -633,7 +633,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
         create_job_tables(cursor)
         x_table_name = "bud_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name)
 
         # WHEN
         insert_job_budgrou(cursor, x_objkeysholder, x_group)
@@ -645,7 +645,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_group_label),
             x_fund_coin,
@@ -664,7 +664,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
 def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_item_awardlink")
+    # x_args = get_bud_calc_dimen_args("bud_item_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -677,16 +677,16 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_road = 3
-    x_awardee_tag = 4
+    x_awardee_title = 4
     x_give_force = 5
     x_take_force = 6
     x__fund_give = 7
     x__fund_take = 8
-    x_awardheir = awardheir_shop(x_awardee_tag)
-    x_awardheir.awardee_tag = x_awardee_tag
+    x_awardheir = awardheir_shop(x_awardee_title)
+    x_awardheir.awardee_title = x_awardee_title
     x_awardheir.give_force = x_give_force
     x_awardheir.take_force = x_take_force
     x_awardheir._fund_give = x__fund_give
@@ -697,7 +697,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
 
         # WHEN
         insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
@@ -709,10 +709,10 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
-            str(x_awardee_tag),
+            str(x_awardee_title),
             x_give_force,
             x_take_force,
             x__fund_give,
@@ -725,7 +725,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
 def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_item_factunit")
+    # x_args = get_bud_calc_dimen_args("bud_item_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -738,7 +738,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_road = 3
     x_base = 4
@@ -756,7 +756,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
 
         # WHEN
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
@@ -768,7 +768,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             str(x_base),
@@ -783,7 +783,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
 def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_item_healerlink")
+    # x_args = get_bud_calc_dimen_args("bud_item_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -796,7 +796,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_road = 3
     bob_str = "Bob"
@@ -810,7 +810,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
 
         # WHEN
         insert_job_budheal(cursor, x_objkeysholder, x_healerlink)
@@ -822,14 +822,14 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             bob_str,
         )
         expected_row2 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             sue_str,
@@ -841,7 +841,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
 def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_fund_metric_dimen_args("bud_item_teamlink")
+    # x_args = get_bud_calc_dimen_args("bud_item_teamlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -854,7 +854,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
     #     print(f"""            x_{x_arg},""")
 
     x_world_id = 0
-    x_fisc_title = 1
+    x_fisc_tag = 1
     x_owner_name = 2
     x_road = 3
     x__owner_name_team = 5
@@ -869,7 +869,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_teamlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_title, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
 
         # WHEN
         insert_job_budteam(cursor, x_objkeysholder, x_teamheir)
@@ -881,7 +881,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             bob_str,
@@ -889,7 +889,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
         )
         expected_row2 = (
             str(x_world_id),
-            str(x_fisc_title),
+            str(x_fisc_tag),
             str(x_owner_name),
             str(x_road),
             sue_str,

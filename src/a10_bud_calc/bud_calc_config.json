@@ -6,8 +6,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
@@ -75,8 +75,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -144,8 +144,8 @@
     "bud_groupunit": {
         "abbreviation": "budgrou",
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
@@ -201,12 +201,12 @@
     "bud_item_awardlink": {
         "abbreviation": "budawar",
         "jkeys": {
-            "awardee_tag": {
+            "awardee_title": {
                 "class_type": "LabelUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -250,8 +250,8 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -286,8 +286,8 @@
     "bud_item_healerlink": {
         "abbreviation": "budheal",
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "healer_name": {
@@ -317,8 +317,8 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "need": {
@@ -370,8 +370,8 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -411,8 +411,8 @@
     "bud_item_teamlink": {
         "abbreviation": "budteam",
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -423,7 +423,7 @@
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "team_tag": {
+            "team_title": {
                 "class_type": "LabelUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -443,12 +443,12 @@
     "bud_itemunit": {
         "abbreviation": "buditem",
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_title": {
-                "class_type": "TitleUnit",
+            "item_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -572,8 +572,8 @@
     "budunit": {
         "abbreviation": "budunit",
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit",
+            "fisc_tag": {
+                "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {

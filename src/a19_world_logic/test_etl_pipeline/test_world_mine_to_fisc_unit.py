@@ -6,7 +6,7 @@ from src.a00_data_toolboxs.file_toolbox import (
 )
 from src.a02_finance_toolboxs.deal import (
     owner_name_str,
-    fisc_title_str,
+    fisc_tag_str,
     deal_time_str,
     quota_str,
     celldepth_str,
@@ -23,7 +23,7 @@ from src.a12_hub_tools.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate,
     create_fisc_ote1_csv_path,
 )
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
@@ -81,13 +81,13 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
         face_name_str(),
         event_int_str(),
         cumlative_minute_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
     ]
     br00001_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         deal_time_str(),
         quota_str(),
@@ -114,7 +114,7 @@ def test_WorldUnit_mine_to_burdens_Scenario1_CreatesFiles(env_dir_setup_cleanup)
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -164,7 +164,7 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -200,8 +200,8 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
 #         face_name_str(),
 #         event_int_str(),
 #         cumlative_minute_str(),
-#         fisc_title_str(),
-#         hour_title_str(),
+#         fisc_tag_str(),
+#         hour_tag_str(),
 #     ]
 #     accord23_str = "accord23"
 #     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
@@ -216,7 +216,7 @@ def test_WorldUnit_mine_to_burdens_Senario2_WhenNoFiscBricks_ote1_IsStillCreated
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         "fisc_title",
+#         "fisc_tag",
 #         "owner_name",
 #         "acct_name",
 #     ]

@@ -18,10 +18,10 @@ from os.path import exists as os_path_exists
 def collect_stance_csv_strs(fisc_mstr_dir: str) -> dict[str, str]:
     x_csv_strs = create_init_stance_idea_brick_csv_strs()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_tag)
         add_fiscunit_to_stance_csv_strs(x_fiscunit, x_csv_strs, ",")
-        fisc_dir = create_path(fiscs_dir, fisc_title)
+        fisc_dir = create_path(fiscs_dir, fisc_tag)
         owners_dir = create_path(fisc_dir, "owners")
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)

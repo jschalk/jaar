@@ -23,12 +23,12 @@ def amount_str() -> str:
     return "amount"
 
 
-def month_title_str() -> str:
-    return "month_title"
+def month_tag_str() -> str:
+    return "month_tag"
 
 
-def hour_title_str() -> str:
-    return "hour_title"
+def hour_tag_str() -> str:
+    return "hour_tag"
 
 
 def cumlative_minute_str() -> str:
@@ -39,8 +39,8 @@ def cumlative_day_str() -> str:
     return "cumlative_day"
 
 
-def weekday_title_str() -> str:
-    return "weekday_title"
+def weekday_tag_str() -> str:
+    return "weekday_tag"
 
 
 def weekday_order_str() -> str:
@@ -145,10 +145,10 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "cumlative_day": "int",
         "cumlative_minute": "int",
         "deal_time": "TimeLinePoint",
-        "hour_title": "TitleUnit",
-        "fisc_title": "TitleUnit",
+        "hour_tag": "TagUnit",
+        "fisc_tag": "TagUnit",
         "fund_coin": "float",
-        "month_title": "TitleUnit",
+        "month_tag": "TagUnit",
         "monthday_distortion": "int",
         "penny": "float",
         "offi_time": "TimeLinePoint",
@@ -157,8 +157,8 @@ def get_fisc_args_class_types() -> dict[str, str]:
         "job_listen_rotations": "int",
         "respect_bit": "float",
         "tran_time": "TimeLinePoint",
-        "timeline_title": "TitleUnit",
-        "weekday_title": "TitleUnit",
+        "timeline_tag": "TagUnit",
+        "weekday_tag": "TagUnit",
         "weekday_order": "int",
         "yr1_jan1_offset": "int",
     }
@@ -174,10 +174,10 @@ def get_fisc_args_set() -> set[str]:
         "cumlative_day",
         "cumlative_minute",
         "deal_time",
-        "hour_title",
-        "fisc_title",
+        "hour_tag",
+        "fisc_tag",
         "fund_coin",
-        "month_title",
+        "month_tag",
         "monthday_distortion",
         "job_listen_rotations",
         "penny",
@@ -186,8 +186,8 @@ def get_fisc_args_set() -> set[str]:
         "quota",
         "respect_bit",
         "tran_time",
-        "timeline_title",
-        "weekday_title",
+        "timeline_tag",
+        "weekday_tag",
         "weekday_order",
         "yr1_jan1_offset",
     }

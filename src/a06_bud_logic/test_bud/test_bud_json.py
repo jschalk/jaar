@@ -51,7 +51,7 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["owner_name"] == yao_bud.owner_name
-    assert bud_dict["fisc_title"] == yao_bud.fisc_title
+    assert bud_dict["fisc_tag"] == yao_bud.fisc_tag
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
     assert bud_dict["fund_pool"] == yao_fund_pool
@@ -68,8 +68,8 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     x_itemroot = yao_bud.itemroot
     itemroot_dict = bud_dict["itemroot"]
     _kids = "_kids"
-    assert x_itemroot.item_title == yao_bud.fisc_title
-    assert itemroot_dict["item_title"] == x_itemroot.item_title
+    assert x_itemroot.item_tag == yao_bud.fisc_tag
+    assert itemroot_dict["item_tag"] == x_itemroot.item_tag
     assert itemroot_dict["mass"] == x_itemroot.mass
     assert len(itemroot_dict[_kids]) == len(x_itemroot._kids)
 
@@ -89,9 +89,9 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_teamunit():
     run_str = "runners"
     sue_bud = budunit_shop("Sue")
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_tag=run_str)
-    sue_bud.edit_item_attr(sue_bud.fisc_title, teamunit=x_teamunit)
-    root_item = sue_bud.get_item_obj(sue_bud.fisc_title)
+    x_teamunit.set_teamlink(team_title=run_str)
+    sue_bud.edit_item_attr(sue_bud.fisc_tag, teamunit=x_teamunit)
+    root_item = sue_bud.get_item_obj(sue_bud.fisc_tag)
     x_gogo_want = 5
     x_stop_want = 11
     root_item.gogo_want = x_gogo_want
@@ -118,7 +118,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    sue_bud.edit_item_attr(road=sue_bud.fisc_title, healerlink=run_healerlink)
+    sue_bud.edit_item_attr(road=sue_bud.fisc_tag, healerlink=run_healerlink)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -141,7 +141,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemkid_TeamUnit():
     morn_road = sue_bud.make_l1_road(morn_str)
     sue_bud.set_l1_item(itemunit_shop(morn_str))
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_tag=run_str)
+    x_teamunit.set_teamlink(team_title=run_str)
     sue_bud.edit_item_attr(teamunit=x_teamunit, road=morn_road)
 
     # WHEN
@@ -175,8 +175,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    zia_bud.edit_item_attr(road=zia_bud.fisc_title, healerlink=run_healerlink)
-    zia_bud.edit_item_attr(road=zia_bud.fisc_title, problem_bool=True)
+    zia_bud.edit_item_attr(road=zia_bud.fisc_tag, healerlink=run_healerlink)
+    zia_bud.edit_item_attr(road=zia_bud.fisc_tag, problem_bool=True)
 
     # WHEN
     x_json = zia_bud.get_json()
@@ -189,7 +189,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     bud_dict = get_dict_from_json(x_json)
 
     assert bud_dict["owner_name"] == zia_bud.owner_name
-    assert bud_dict["fisc_title"] == zia_bud.fisc_title
+    assert bud_dict["fisc_tag"] == zia_bud.fisc_tag
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
     assert bud_dict["fund_coin"] == zia_bud.fund_coin
@@ -245,7 +245,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert bud_dict["owner_name"] == yao_bud.owner_name
-    assert bud_dict["fisc_title"] == yao_bud.fisc_title
+    assert bud_dict["fisc_tag"] == yao_bud.fisc_tag
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
@@ -289,8 +289,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    tiger_fisc_title = "tiger"
-    zia_bud.set_fisc_title(tiger_fisc_title)
+    tiger_fisc_tag = "tiger"
+    zia_bud.set_fisc_tag(tiger_fisc_tag)
     zia_fund_pool = 80000
     zia_bud.fund_pool = zia_fund_pool
     zia_fund_coin = 8
@@ -312,7 +312,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     shave_item_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_item_y1.problem_bool = True
     # print(f"{shave_road=}")
-    # print(f"{json_shave_item.item_title=} {json_shave_item.parent_road=}")
+    # print(f"{json_shave_item.item_tag=} {json_shave_item.parent_road=}")
 
     sue_str = "Sue"
     zia_bud.add_acctunit(acct_name=sue_str, credit_belief=199, debtit_belief=199)
@@ -324,14 +324,14 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     sue_acctunit.add_membership(run_str)
     xio_acctunit.add_membership(run_str)
     run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(team_tag=run_str)
-    zia_bud.edit_item_attr(zia_bud.fisc_title, teamunit=run_teamunit)
+    run_teamunit.set_teamlink(team_title=run_str)
+    zia_bud.edit_item_attr(zia_bud.fisc_tag, teamunit=run_teamunit)
     xio_teamunit = teamunit_shop()
-    xio_teamunit.set_teamlink(team_tag=xio_str)
+    xio_teamunit.set_teamlink(team_title=xio_str)
     zia_bud.edit_item_attr(shave_road, teamunit=xio_teamunit)
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(xio_str))
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(sue_str))
-    zia_bud.edit_item_attr(zia_bud.fisc_title, awardlink=awardlink_shop(sue_str))
+    zia_bud.edit_item_attr(zia_bud.fisc_tag, awardlink=awardlink_shop(sue_str))
     # add healerlink to shave itemunit
     run_healerlink = healerlink_shop({run_str})
     zia_bud.edit_item_attr(shave_road, healerlink=run_healerlink)
@@ -354,7 +354,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
     assert json_bud.owner_name is not None
     assert json_bud.owner_name == zia_bud.owner_name
-    assert json_bud.fisc_title == zia_bud.fisc_title
+    assert json_bud.fisc_tag == zia_bud.fisc_tag
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
     assert json_bud.fund_coin == zia_fund_coin
@@ -420,7 +420,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    # root_item = zia_bud.get_item_obj(zia_bud.get_item_obj(zia_bud.fisc_title))
+    # root_item = zia_bud.get_item_obj(zia_bud.get_item_obj(zia_bud.fisc_tag))
     root_item = zia_bud.itemroot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -433,7 +433,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
-    json_itemroot = json_bud.get_item_obj(zia_bud.fisc_title)
+    json_itemroot = json_bud.get_item_obj(zia_bud.fisc_tag)
     assert json_itemroot.gogo_want == zia_gogo_want
     assert json_itemroot.stop_want == zia_stop_want
 
@@ -533,7 +533,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_dict_of_obj.get(x3_bud.owner_name) is not None
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
-    assert ccn2_bud.itemroot.item_title == x2_bud.itemroot.item_title
+    assert ccn2_bud.itemroot.item_tag == x2_bud.itemroot.item_tag
     assert ccn2_bud.itemroot.parent_road == x2_bud.itemroot.parent_road
     assert ccn2_bud.itemroot.fund_coin == x2_bud.itemroot.fund_coin
     shave_road = ccn2_bud.make_l1_road("shave")

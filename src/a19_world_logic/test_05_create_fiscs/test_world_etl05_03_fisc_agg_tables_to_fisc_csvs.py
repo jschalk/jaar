@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
 from src.a00_data_toolboxs.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     acct_name_str,
@@ -35,7 +35,7 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateStagingFiles(
     fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
@@ -83,7 +83,7 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
     fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_title_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
 {sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
 {sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}

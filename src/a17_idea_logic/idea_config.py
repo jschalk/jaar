@@ -92,24 +92,24 @@ def get_idea_formats_dir() -> str:
 
 
 def get_idea_elements_sort_order() -> list[str]:
-    """Contains the standard sort order for all idea and fund_metric columns"""
+    """Contains the standard sort order for all idea and bud_calc columns"""
     return [
         "world_id",
         "idea_number",
         "face_name",
         "event_int",
-        "fisc_title",
-        "timeline_title",
+        "fisc_tag",
+        "timeline_tag",
         "offi_time",
         "c400_number",
         "yr1_jan1_offset",
         "monthday_distortion",
         "cumlative_day",
-        "month_title",
+        "month_tag",
         "cumlative_minute",
-        "hour_title",
+        "hour_tag",
         "weekday_order",
-        "weekday_title",
+        "weekday_tag",
         "owner_name",
         "owner_name_ERASE",
         "acct_name",
@@ -118,8 +118,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "group_label_ERASE",
         "parent_road",
         "parent_road_ERASE",
-        "item_title",
-        "item_title_ERASE",
+        "item_tag",
+        "item_tag_ERASE",
         "road",
         "road_ERASE",
         "base",
@@ -128,10 +128,10 @@ def get_idea_elements_sort_order() -> list[str]:
         "need",
         "need_ERASE",
         "pick",
-        "team_tag",
-        "team_tag_ERASE",
-        "awardee_tag",
-        "awardee_tag_ERASE",
+        "team_title",
+        "team_title_ERASE",
+        "awardee_title",
+        "awardee_title_ERASE",
         "healer_name",
         "healer_name_ERASE",
         "deal_time",
@@ -168,8 +168,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "penny",
         "respect_bit",
         "amount",
-        "otx_title",
-        "inx_title",
+        "otx_tag",
+        "inx_tag",
         "otx_road",
         "inx_road",
         "otx_name",
@@ -228,14 +228,14 @@ def get_default_sorted_list(
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
-    """Contains the sqlite_type for all idea and fund_metric columns"""
+    """Contains the sqlite_type for all idea and bud_calc columns"""
 
     return {
         "world_id": "TEXT",
         "idea_number": "TEXT",
         "face_name": "TEXT",
         "event_int": "INTEGER",
-        "fisc_title": "TEXT",
+        "fisc_tag": "TEXT",
         "owner_name": "TEXT",
         "owner_name_ERASE": "TEXT",
         "acct_name": "TEXT",
@@ -244,8 +244,8 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "group_label_ERASE": "TEXT",
         "parent_road": "TEXT",
         "parent_road_ERASE": "TEXT",
-        "item_title": "TEXT",
-        "item_title_ERASE": "TEXT",
+        "item_tag": "TEXT",
+        "item_tag_ERASE": "TEXT",
         "road": "TEXT",
         "road_ERASE": "TEXT",
         "base": "TEXT",
@@ -254,10 +254,10 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "need": "TEXT",
         "need_ERASE": "TEXT",
         "pick": "TEXT",
-        "team_tag": "TEXT",
-        "team_tag_ERASE": "TEXT",
-        "awardee_tag": "TEXT",
-        "awardee_tag_ERASE": "TEXT",
+        "team_title": "TEXT",
+        "team_title_ERASE": "TEXT",
+        "awardee_title": "TEXT",
+        "awardee_title_ERASE": "TEXT",
         "healer_name": "TEXT",
         "healer_name_ERASE": "TEXT",
         "deal_time": "INTEGER",
@@ -295,17 +295,17 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "penny": "REAL",
         "respect_bit": "REAL",
         "amount": "REAL",
-        "month_title": "TEXT",
-        "hour_title": "TEXT",
+        "month_tag": "TEXT",
+        "hour_tag": "TEXT",
         "cumlative_minute": "INTEGER",
         "cumlative_day": "INTEGER",
-        "weekday_title": "TEXT",
+        "weekday_tag": "TEXT",
         "weekday_order": "INTEGER",
         "otx_bridge": "TEXT",
         "inx_bridge": "TEXT",
         "unknown_word": "TEXT",
-        "otx_title": "TEXT",
-        "inx_title": "TEXT",
+        "otx_tag": "TEXT",
+        "inx_tag": "TEXT",
         "otx_road": "TEXT",
         "inx_road": "TEXT",
         "otx_name": "TEXT",
@@ -319,7 +319,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "celldepth": "INT",
         "monthday_distortion": "INTEGER",
         "job_listen_rotations": "INTEGER",
-        "timeline_title": "TEXT",
+        "timeline_tag": "TEXT",
         "error_message": "TEXT",
         "_credor_pool": "REAL",
         "_debtor_pool": "REAL",
@@ -477,8 +477,8 @@ def idea_format_00043_map_name_v0_0_0() -> str:
     return "idea_format_00043_map_name_v0_0_0"
 
 
-def idea_format_00044_map_title_v0_0_0() -> str:
-    return "idea_format_00044_map_title_v0_0_0"
+def idea_format_00044_map_tag_v0_0_0() -> str:
+    return "idea_format_00044_map_tag_v0_0_0"
 
 
 def idea_format_00045_map_road_v0_0_0() -> str:
@@ -537,8 +537,8 @@ def idea_format_00115_group_map1_v0_0_0() -> str:
     return "idea_format_00115_group_map1_v0_0_0"
 
 
-def idea_format_00116_title_map1_v0_0_0() -> str:
-    return "idea_format_00116_title_map1_v0_0_0"
+def idea_format_00116_tag_map1_v0_0_0() -> str:
+    return "idea_format_00116_tag_map1_v0_0_0"
 
 
 def idea_format_00117_road_map1_v0_0_0() -> str:
@@ -571,7 +571,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00036_problem_healer_v0_0_0(),
         idea_format_00042_map_label_v0_0_0(),
         idea_format_00043_map_name_v0_0_0(),
-        idea_format_00044_map_title_v0_0_0(),
+        idea_format_00044_map_tag_v0_0_0(),
         idea_format_00045_map_road_v0_0_0(),
         idea_format_00050_delete_bud_acct_membership_v0_0_0(),
         idea_format_00051_delete_bud_acctunit_v0_0_0(),
@@ -585,7 +585,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00059_delete_budunit_v0_0_0(),
         idea_format_00113_acct_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
-        idea_format_00116_title_map1_v0_0_0(),
+        idea_format_00116_tag_map1_v0_0_0(),
         idea_format_00117_road_map1_v0_0_0(),
     }
 
@@ -644,46 +644,46 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fisc_title,timeline_title,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
-        "fisc_title,owner_name,deal_time,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
-        "fisc_title,owner_name,acct_name,tran_time,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
-        "fisc_title,cumlative_minute,hour_title": idea_format_00003_fisc_timeline_hour_v0_0_0(),
-        "fisc_title,cumlative_day,month_title": idea_format_00004_fisc_timeline_month_v0_0_0(),
-        "fisc_title,weekday_order,weekday_title": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
-        "fisc_title,offi_time": idea_format_00006_fisc_timeoffi_v0_0_0(),
-        "fisc_title,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
-        "fisc_title,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
-        "fisc_title,owner_name,parent_road,item_title,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
-        "fisc_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_itemunit_v0_0_0(),
-        "fisc_title,owner_name,acct_name,group_label,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
-        "fisc_title,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
-        "fisc_title,owner_name,road,awardee_tag,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
-        "fisc_title,owner_name,road,base,pick,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
-        "fisc_title,owner_name,road,team_tag": idea_format_00024_bud_item_teamlink_v0_0_0(),
-        "fisc_title,owner_name,road,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
-        "fisc_title,owner_name,road,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "fisc_title,owner_name,road,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
-        "fisc_title,owner_name,parent_road,item_title,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
-        "fisc_title,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
-        "fisc_title,owner_name,parent_road,item_title,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
+        "fisc_tag,owner_name,deal_time,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,tran_time,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
+        "fisc_tag,cumlative_minute,hour_tag": idea_format_00003_fisc_timeline_hour_v0_0_0(),
+        "fisc_tag,cumlative_day,month_tag": idea_format_00004_fisc_timeline_month_v0_0_0(),
+        "fisc_tag,weekday_order,weekday_tag": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
+        "fisc_tag,offi_time": idea_format_00006_fisc_timeoffi_v0_0_0(),
+        "fisc_tag,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
+        "fisc_tag,owner_name,parent_road,item_tag,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,parent_road,item_tag,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
+        "fisc_tag,owner_name,road,awardee_title,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
+        "fisc_tag,owner_name,road,base,pick,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
+        "fisc_tag,owner_name,road,team_title": idea_format_00024_bud_item_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,road,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
+        "fisc_tag,owner_name,road,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,road,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
+        "fisc_tag,owner_name,parent_road,item_tag,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
+        "fisc_tag,owner_name,parent_road,item_tag,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word": idea_format_00042_map_label_v0_0_0(),
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": idea_format_00043_map_name_v0_0_0(),
-        "otx_title,inx_title,otx_bridge,inx_bridge,unknown_word": idea_format_00044_map_title_v0_0_0(),
+        "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word": idea_format_00044_map_tag_v0_0_0(),
         "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word": idea_format_00045_map_road_v0_0_0(),
-        "fisc_title,owner_name,acct_name,group_label_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
-        "fisc_title,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        "fisc_title,owner_name,road,awardee_tag_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
-        "fisc_title,owner_name,road,base_EXCISE": idea_format_00053_delete_bud_item_factunit_v0_0_0(),
-        "fisc_title,owner_name,road,team_tag_ERASE": idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
-        "fisc_title,owner_name,road,healer_name_ERASE": idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
-        "fisc_title,owner_name,road,base,need_ERASE": idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
-        "fisc_title,owner_name,road,base_ERASE": idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
-        "fisc_title,owner_name,parent_road,item_title_ERASE": idea_format_00058_delete_bud_itemunit_v0_0_0(),
-        "fisc_title,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
-        "fisc_title,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
-        "fisc_title,owner_name,acct_name,otx_label,inx_label": idea_format_00115_group_map1_v0_0_0(),
-        "fisc_title,owner_name,acct_name,otx_title,inx_title": idea_format_00116_title_map1_v0_0_0(),
-        "fisc_title,owner_name,acct_name,otx_road,inx_road": idea_format_00117_road_map1_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,group_label_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
+        "fisc_tag,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
+        "fisc_tag,owner_name,road,awardee_title_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
+        "fisc_tag,owner_name,road,base_EXCISE": idea_format_00053_delete_bud_item_factunit_v0_0_0(),
+        "fisc_tag,owner_name,road,team_title_ERASE": idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,road,healer_name_ERASE": idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
+        "fisc_tag,owner_name,road,base,need_ERASE": idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,road,base_ERASE": idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
+        "fisc_tag,owner_name,parent_road,item_tag_ERASE": idea_format_00058_delete_bud_itemunit_v0_0_0(),
+        "fisc_tag,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,otx_label,inx_label": idea_format_00115_group_map1_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,otx_tag,inx_tag": idea_format_00116_tag_map1_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,otx_road,inx_road": idea_format_00117_road_map1_v0_0_0(),
     }
 
 
@@ -730,6 +730,6 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         "budunit": ["br00029", "br00059"],
         "map_label": ["br00042", "br00115"],
         "map_name": ["br00043", "br00113"],
-        "map_title": ["br00044", "br00116"],
+        "map_tag": ["br00044", "br00116"],
         "map_road": ["br00045", "br00117"],
     }

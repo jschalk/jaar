@@ -1,28 +1,28 @@
 from src.a01_word_logic.road import (
     RoadUnit,
     create_road,
-    create_road_from_titles,
-    create_road_without_root_title,
+    create_road_from_tags,
+    create_road_without_root_tag,
     combine_roads,
     rebuild_road,
     is_sub_road,
-    get_all_road_titles,
-    get_terminus_title,
+    get_all_road_tags,
+    get_terminus_tag,
     find_replace_road_key_dict,
     get_parent_road,
-    get_root_title_from_road,
+    get_root_tag_from_road,
     road_validate,
     get_ancestor_roads,
     get_forefather_roads,
-    get_default_fisc_title as root_title,
+    get_default_fisc_tag as root_tag,
     get_diff_road,
     is_heir_road,
     default_bridge_if_None,
     replace_bridge,
-    validate_titleunit,
+    validate_tagunit,
     roadunit_valid_dir_path,
     all_roadunits_between,
-    is_titleunit,
+    is_tagunit,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -34,20 +34,20 @@ def test_create_road_ReturnsObj_Scenario0():
     rose_str = "rose"
     semicolon_bridge = ";"
     assert semicolon_bridge == default_bridge_if_None()
-    semicolon_bridge_rose_road = f"{root_title()}{semicolon_bridge}{rose_str}"
+    semicolon_bridge_rose_road = f"{root_tag()}{semicolon_bridge}{rose_str}"
 
     # WHEN / THEN
-    assert create_road(root_title(), rose_str) == semicolon_bridge_rose_road
+    assert create_road(root_tag(), rose_str) == semicolon_bridge_rose_road
 
 
 def test_create_road_ReturnsObj_Scenario1():
     # ESTABLISH
     rose_str = "rose"
     slash_bridge = "/"
-    slash_bridge_rose_road = f"{root_title()}{slash_bridge}{rose_str}"
+    slash_bridge_rose_road = f"{root_tag()}{slash_bridge}{rose_str}"
 
     # WHEN
-    generated_rose_road = create_road(root_title(), rose_str, bridge=slash_bridge)
+    generated_rose_road = create_road(root_tag(), rose_str, bridge=slash_bridge)
     # THEN
     assert generated_rose_road == slash_bridge_rose_road
 
@@ -56,16 +56,16 @@ def test_create_road_ReturnsObj_Scenario2():
     # ESTABLISH
     rose_str = "rose"
     slash_bridge = "/"
-    slash_bridge_rose_road = f"{root_title()}{slash_bridge}{rose_str}"
+    slash_bridge_rose_road = f"{root_tag()}{slash_bridge}{rose_str}"
 
     # WHEN / THEN
-    assert create_road(root_title(), rose_str, slash_bridge) == slash_bridge_rose_road
+    assert create_road(root_tag(), rose_str, slash_bridge) == slash_bridge_rose_road
 
 
 def test_combine_road_ReturnsObj_Scenario0_default_bridge():
     # ESTABLISH
     rose_str = "rose"
-    rose_road = create_road(root_title(), rose_str)
+    rose_road = create_road(root_tag(), rose_str)
     casa_str = "casa"
     clean_str = "clean"
     clean_road = create_road(casa_str, clean_str)
@@ -83,7 +83,7 @@ def test_combine_road_ReturnsObj_Scenario1_():
     # ESTABLISH
     slash_str = "/"
     rose_str = "rose"
-    rose_road = create_road(root_title(), rose_str, slash_str)
+    rose_road = create_road(root_tag(), rose_str, slash_str)
     casa_str = "casa"
     clean_str = "clean"
     clean_road = create_road(casa_str, clean_str, slash_str)
@@ -114,7 +114,7 @@ def test_combine_road_ReturnsObj_Scenario1_():
 def test_road_is_sub_road_correctlyReturnsBool():
     # WHEN
     casa_str = "casa"
-    casa_road = f"{root_title()}{default_bridge_if_None()}{casa_str}"
+    casa_road = f"{root_tag()}{default_bridge_if_None()}{casa_str}"
     cleaning_str = "cleaning"
     cleaning_road = f"{casa_road}{default_bridge_if_None()}{cleaning_str}"
     laundrys_str = "laundrys"
@@ -130,24 +130,24 @@ def test_road_is_sub_road_correctlyReturnsBool():
 
 def test_road_road_validate_correctlyReturnsRoadUnit():
     x_s = default_bridge_if_None()
-    _fisc_title = "x"
-    casa_road = f"{_fisc_title}{x_s}casa"
-    clean_road = f"{_fisc_title}{x_s}clean"
-    fun_road = f"{_fisc_title}{x_s}fun"
-    assert road_validate(None, x_s, _fisc_title) == ""
-    assert road_validate("", x_s, _fisc_title) == ""
-    assert road_validate(f"{_fisc_title}{x_s}casa", x_s, _fisc_title) == casa_road
-    assert road_validate(f"A{x_s}casa", x_s, _fisc_title) == casa_road
-    assert road_validate(f"{x_s}clean", x_s, _fisc_title) == clean_road
-    assert road_validate(f"clean{x_s}fun", x_s, _fisc_title) == fun_road
-    assert road_validate("clean", x_s, _fisc_title) == _fisc_title
-    assert road_validate(f"AA{x_s}casa", x_s, _fisc_title) == casa_road
+    _fisc_tag = "x"
+    casa_road = f"{_fisc_tag}{x_s}casa"
+    clean_road = f"{_fisc_tag}{x_s}clean"
+    fun_road = f"{_fisc_tag}{x_s}fun"
+    assert road_validate(None, x_s, _fisc_tag) == ""
+    assert road_validate("", x_s, _fisc_tag) == ""
+    assert road_validate(f"{_fisc_tag}{x_s}casa", x_s, _fisc_tag) == casa_road
+    assert road_validate(f"A{x_s}casa", x_s, _fisc_tag) == casa_road
+    assert road_validate(f"{x_s}clean", x_s, _fisc_tag) == clean_road
+    assert road_validate(f"clean{x_s}fun", x_s, _fisc_tag) == fun_road
+    assert road_validate("clean", x_s, _fisc_tag) == _fisc_tag
+    assert road_validate(f"AA{x_s}casa", x_s, _fisc_tag) == casa_road
 
 
 def test_road_rebuild_road_ReturnsCorrectRoadUnit():
     # ESTABLISH
     casa_str = "casa"
-    casa_road = create_road(root_title(), casa_str)
+    casa_road = create_road(root_tag(), casa_str)
     bloomers_str = "bloomers"
     bloomers_road = create_road(casa_road, bloomers_str)
     greenery_str = "greenery"
@@ -164,90 +164,90 @@ def test_road_rebuild_road_ReturnsCorrectRoadUnit():
     assert rebuild_road(old_roses_road, "random_str", greenery_road) == old_roses_road
 
 
-def test_road_get_all_road_titles_ReturnsTitleUnits():
+def test_road_get_all_road_tags_ReturnsTagUnits():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
-    bloomers_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}"
     roses_str = "roses"
-    roses_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THENs
-    root_list = [root_title()]
-    assert get_all_road_titles(road=root_title()) == root_list
-    casa_list = [root_title(), casa_str]
-    assert get_all_road_titles(road=casa_road) == casa_list
-    bloomers_list = [root_title(), casa_str, bloomers_str]
-    assert get_all_road_titles(road=bloomers_road) == bloomers_list
-    roses_list = [root_title(), casa_str, bloomers_str, roses_str]
-    assert get_all_road_titles(road=roses_road) == roses_list
+    root_list = [root_tag()]
+    assert get_all_road_tags(road=root_tag()) == root_list
+    casa_list = [root_tag(), casa_str]
+    assert get_all_road_tags(road=casa_road) == casa_list
+    bloomers_list = [root_tag(), casa_str, bloomers_str]
+    assert get_all_road_tags(road=bloomers_road) == bloomers_list
+    roses_list = [root_tag(), casa_str, bloomers_str, roses_str]
+    assert get_all_road_tags(road=roses_road) == roses_list
 
 
-def test_road_get_terminus_title_ReturnsTitleUnit():
+def test_road_get_terminus_tag_ReturnsTagUnit():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
     bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
     roses_str = "roses"
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert get_terminus_title(road=root_title()) == root_title()
-    assert get_terminus_title(road=casa_road) == casa_str
-    assert get_terminus_title(road=bloomers_road) == bloomers_str
-    assert get_terminus_title(road=roses_road) == roses_str
+    assert get_terminus_tag(road=root_tag()) == root_tag()
+    assert get_terminus_tag(road=casa_road) == casa_str
+    assert get_terminus_tag(road=bloomers_road) == bloomers_str
+    assert get_terminus_tag(road=roses_road) == roses_str
 
 
-def test_road_get_terminus_title_ReturnsTitleUnitWhenNonDefaultbridge():
+def test_road_get_terminus_tag_ReturnsTagUnitWhenNonDefaultbridge():
     # ESTABLISH
     casa_str = "casa"
     bloomers_str = "bloomers"
     roses_str = "roses"
     slash_str = default_bridge_if_None()
-    slash_casa_road = f"{root_title()}{slash_str}{casa_str}"
+    slash_casa_road = f"{root_tag()}{slash_str}{casa_str}"
     slash_bloomers_road = f"{slash_casa_road}{slash_str}{bloomers_str}"
     slash_roses_road = f"{slash_bloomers_road}{slash_str}{roses_str}"
 
     # WHEN / THENs
-    assert get_terminus_title(root_title(), slash_str) == root_title()
-    assert get_terminus_title(slash_casa_road, slash_str) == casa_str
-    assert get_terminus_title(slash_bloomers_road, slash_str) == bloomers_str
-    assert get_terminus_title(slash_roses_road, slash_str) == roses_str
+    assert get_terminus_tag(root_tag(), slash_str) == root_tag()
+    assert get_terminus_tag(slash_casa_road, slash_str) == casa_str
+    assert get_terminus_tag(slash_bloomers_road, slash_str) == bloomers_str
+    assert get_terminus_tag(slash_roses_road, slash_str) == roses_str
 
 
-def test_road_get_root_title_from_road_ReturnsTitleUnit():
+def test_road_get_root_tag_from_road_ReturnsTagUnit():
     # ESTABLISH
     casa_str = "casa"
-    casa_road = create_road(root_title(), casa_str)
+    casa_road = create_road(root_tag(), casa_str)
     bloomers_str = "bloomers"
     bloomers_road = create_road(casa_road, bloomers_str)
     roses_str = "roses"
     roses_road = create_road(casa_str, roses_str)
 
     # WHEN / THENs
-    assert get_root_title_from_road(root_title()) == root_title()
-    assert get_root_title_from_road(casa_road) == root_title()
-    assert get_root_title_from_road(bloomers_road) == root_title()
-    assert get_root_title_from_road(roses_road) == casa_str
+    assert get_root_tag_from_road(root_tag()) == root_tag()
+    assert get_root_tag_from_road(casa_road) == root_tag()
+    assert get_root_tag_from_road(bloomers_road) == root_tag()
+    assert get_root_tag_from_road(roses_road) == casa_str
 
 
 def test_road_get_parent_road_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
     bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
     roses_str = "roses"
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert get_parent_road(root_title(), x_s) == ""
-    assert get_parent_road(casa_road, x_s) == root_title()
+    assert get_parent_road(root_tag(), x_s) == ""
+    assert get_parent_road(casa_road, x_s) == root_tag()
     assert get_parent_road(bloomers_road, x_s) == casa_road
     assert get_parent_road(roses_road, x_s) == bloomers_road
 
@@ -256,45 +256,45 @@ def test_road_get_parent_road_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
     bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
     roses_str = "roses"
     roses_road = f"{bloomers_road}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert get_parent_road(root_title(), x_s) == ""
-    assert get_parent_road(casa_road, x_s) == root_title()
+    assert get_parent_road(root_tag(), x_s) == ""
+    assert get_parent_road(casa_road, x_s) == root_tag()
     assert get_parent_road(bloomers_road, x_s) == casa_road
     assert get_parent_road(roses_road, x_s) == bloomers_road
 
 
-def test_road_create_road_without_root_title_ReturnsObj():
+def test_road_create_road_without_root_tag_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     casa_without_root_road = f"{x_s}{casa_str}"
     bloomers_str = "bloomers"
-    bloomers_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}"
     bloomers_without_root_road = f"{x_s}{casa_str}{x_s}{bloomers_str}"
     roses_str = "roses"
-    roses_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
     roses_without_root_road = f"{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert create_road_without_root_title(road=root_title()) == x_s
-    assert create_road_without_root_title(road=casa_road) == casa_without_root_road
+    assert create_road_without_root_tag(road=root_tag()) == x_s
+    assert create_road_without_root_tag(road=casa_road) == casa_without_root_road
     assert (
-        create_road_without_root_title(road=bloomers_road) == bloomers_without_root_road
+        create_road_without_root_tag(road=bloomers_road) == bloomers_without_root_road
     )
-    assert create_road_without_root_title(road=roses_road) == roses_without_root_road
-    road_without_title = create_road_without_root_title(road=roses_road)
+    assert create_road_without_root_tag(road=roses_road) == roses_without_root_road
+    road_without_tag = create_road_without_root_tag(road=roses_road)
     with pytest_raises(Exception) as excinfo:
-        create_road_without_root_title(road=road_without_title)
+        create_road_without_root_tag(road=road_without_tag)
     assert (
         str(excinfo.value)
-        == f"Cannot create_road_without_root_title of '{road_without_title}' because it has no root title."
+        == f"Cannot create_road_without_root_tag of '{road_without_tag}' because it has no root tag."
     )
 
 
@@ -312,12 +312,12 @@ class TempTestingObj:
 def test_road_find_replace_road_key_dict_ReturnsCorrectDict_Scenario1():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    old_seasons_road = f"{root_title()}{x_s}casa{x_s}seasons"
+    old_seasons_road = f"{root_tag()}{x_s}casa{x_s}seasons"
     old_dict_x = {old_seasons_road: TempTestingObj(old_seasons_road)}
     assert old_dict_x.get(old_seasons_road) is not None
 
     # WHEN
-    new_seasons_road = f"{root_title()}{x_s}casa{x_s}kookies"
+    new_seasons_road = f"{root_tag()}{x_s}casa{x_s}kookies"
     new_dict_x = find_replace_road_key_dict(
         dict_x=old_dict_x, old_road=old_seasons_road, new_road=new_seasons_road
     )
@@ -334,7 +334,7 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
     # ESTABLISH
     x_s = default_bridge_if_None()
     nation_str = "nation-state"
-    nation_road = f"{root_title()}{x_s}{nation_str}"
+    nation_road = f"{root_tag()}{x_s}{nation_str}"
     usa_str = "USA"
     usa_road = f"{nation_road}{x_s}{usa_str}"
     texas_str = "Texas"
@@ -350,21 +350,21 @@ def test_road_get_ancestor_roads_ReturnsAncestorRoadUnits():
         texas_road,
         usa_road,
         nation_road,
-        root_title(),
+        root_tag(),
     ]
     assert x_roads == texas_ancestor_roads
 
     # WHEN
     assert get_ancestor_roads(None) == []
     assert get_ancestor_roads("") == [""]
-    assert get_ancestor_roads(root_title()) == [root_title()]
+    assert get_ancestor_roads(root_tag()) == [root_tag()]
 
 
 def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     # ESTABLISH
     x_s = default_bridge_if_None()
     nation_str = "nation-state"
-    nation_road = f"{root_title()}{x_s}{nation_str}"
+    nation_road = f"{root_tag()}{x_s}{nation_str}"
     usa_str = "USA"
     usa_road = f"{nation_road}{x_s}{usa_str}"
     texas_str = "Texas"
@@ -379,72 +379,72 @@ def test_road_get_forefather_roads_ReturnsAncestorRoadUnitsWithoutClean():
     texas_forefather_roads = {
         nation_road: None,
         usa_road: None,
-        root_title(): None,
+        root_tag(): None,
     }
     assert x_roads == texas_forefather_roads
 
 
-def test_road_get_default_fisc_title_ReturnsObj():
-    assert root_title() == "ZZ"
+def test_road_get_default_fisc_tag_ReturnsObj():
+    assert root_tag() == "ZZ"
 
 
-def test_road_create_road_from_titles_ReturnsObj():
+def test_road_create_road_from_tags_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    root_list = get_all_road_titles(root_title())
+    root_list = get_all_road_tags(root_tag())
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
-    casa_list = get_all_road_titles(casa_road)
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
+    casa_list = get_all_road_tags(casa_road)
     bloomers_str = "bloomers"
-    bloomers_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}"
-    bloomers_list = get_all_road_titles(bloomers_road)
+    bloomers_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_list = get_all_road_tags(bloomers_road)
     roses_str = "roses"
-    roses_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
-    roses_list = get_all_road_titles(roses_road)
+    roses_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_list = get_all_road_tags(roses_road)
 
     # WHEN / THEN
-    assert root_title() == create_road_from_titles(root_list)
-    assert casa_road == create_road_from_titles(casa_list)
-    assert bloomers_road == create_road_from_titles(bloomers_list)
-    assert roses_road == create_road_from_titles(roses_list)
+    assert root_tag() == create_road_from_tags(root_list)
+    assert casa_road == create_road_from_tags(casa_list)
+    assert bloomers_road == create_road_from_tags(bloomers_list)
+    assert roses_road == create_road_from_tags(roses_list)
 
 
 def test_road_create_road_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
-    bloomers_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}"
     roses_str = "roses"
-    roses_road = f"{root_title()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_road = f"{root_tag()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THEN
-    assert root_title() == create_road(None, root_title())
-    assert root_title() == create_road("", root_title())
-    assert casa_road == create_road(root_title(), casa_str)
+    assert root_tag() == create_road(None, root_tag())
+    assert root_tag() == create_road("", root_tag())
+    assert casa_road == create_road(root_tag(), casa_str)
     assert bloomers_road == create_road(casa_road, bloomers_str)
     assert roses_road == create_road(bloomers_road, roses_str)
     assert roses_road == create_road(roses_road, None)
 
 
-def test_is_titleunit_ReturnsObj():
+def test_is_tagunit_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
 
     # WHEN / THEN
-    assert is_titleunit("", x_bridge=x_s) is False
-    assert is_titleunit("casa", x_bridge=x_s)
-    assert not is_titleunit(f"ZZ{x_s}casa", x_s)
-    assert not is_titleunit(RoadUnit(f"ZZ{x_s}casa"), x_s)
-    assert is_titleunit(RoadUnit("ZZ"), x_s)
+    assert is_tagunit("", x_bridge=x_s) is False
+    assert is_tagunit("casa", x_bridge=x_s)
+    assert not is_tagunit(f"ZZ{x_s}casa", x_s)
+    assert not is_tagunit(RoadUnit(f"ZZ{x_s}casa"), x_s)
+    assert is_tagunit(RoadUnit("ZZ"), x_s)
 
 
 def test_get_diff_road_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_road = f"{root_title()}{x_s}{casa_str}"
+    casa_road = f"{root_tag()}{x_s}{casa_str}"
     bloomers_str = "bloomers"
     bloomers_road = f"{casa_road}{x_s}{bloomers_str}"
     roses_str = "roses"
@@ -464,7 +464,7 @@ def test_is_heir_road_CorrectlyIdentifiesHeirs():
     # ESTABLISH
     x_s = default_bridge_if_None()
     usa_str = "USA"
-    usa_road = f"{root_title()}{x_s}Nation-States{x_s}{usa_str}"
+    usa_road = f"{root_tag()}{x_s}Nation-States{x_s}{usa_str}"
     texas_str = "Texas"
     texas_road = f"{usa_road}{x_s}{texas_str}"
     # earth_str = "earth"
@@ -484,9 +484,9 @@ def test_is_heir_road_CorrectlyIdentifiesHeirs():
 def test_replace_bridge_ReturnsNewObj():
     # ESTABLISH
     casa_str = "casa"
-    gen_casa_road = create_road(root_title(), casa_str)
+    gen_casa_road = create_road(root_tag(), casa_str)
     semicolon_bridge = default_bridge_if_None()
-    semicolon_bridge_casa_road = f"{root_title()}{semicolon_bridge}{casa_str}"
+    semicolon_bridge_casa_road = f"{root_tag()}{semicolon_bridge}{casa_str}"
     assert semicolon_bridge == ";"
     assert gen_casa_road == semicolon_bridge_casa_road
 
@@ -497,16 +497,16 @@ def test_replace_bridge_ReturnsNewObj():
     )
 
     # THEN
-    slash_bridge_casa_road = f"{root_title()}{slash_bridge}{casa_str}"
+    slash_bridge_casa_road = f"{root_tag()}{slash_bridge}{casa_str}"
     assert gen_casa_road == slash_bridge_casa_road
 
 
 def test_replace_bridge_CorrectlyRaisesError():
     # ESTABLISH
     cooker_str = "cooker/cleaner"
-    gen_cooker_road = create_road(root_title(), cooker_str)
+    gen_cooker_road = create_road(root_tag(), cooker_str)
     semicolon_bridge = default_bridge_if_None()
-    semicolon_bridge_cooker_road = f"{root_title()}{semicolon_bridge}{cooker_str}"
+    semicolon_bridge_cooker_road = f"{root_tag()}{semicolon_bridge}{cooker_str}"
     assert semicolon_bridge == ";"
     assert gen_cooker_road == semicolon_bridge_cooker_road
 
@@ -546,39 +546,39 @@ def test_replace_bridge_WhenNewbridgeIsFirstInRoadUnitRaisesError():
     )
 
 
-def test_validate_titleunit_RaisesErrorWhenNotTitleUnit():
+def test_validate_tagunit_RaisesErrorWhenNotTagUnit():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
-    assert bob_str == validate_titleunit(bob_str, x_bridge=slash_str)
+    assert bob_str == validate_tagunit(bob_str, x_bridge=slash_str)
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_titleunit(bob_str, x_bridge=comma_str)
+        bob_str == validate_tagunit(bob_str, x_bridge=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a TitleUnit. Cannot contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to be a TagUnit. Cannot contain bridge: '{comma_str}'"
     )
 
 
-def test_validate_titleunit_RaisesErrorWhenTitleUnit():
+def test_validate_tagunit_RaisesErrorWhenTagUnit():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
-    assert bob_str == validate_titleunit(
-        bob_str, x_bridge=slash_str, not_titleunit_required=True
+    assert bob_str == validate_tagunit(
+        bob_str, x_bridge=slash_str, not_tagunit_required=True
     )
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_titleunit(
-            bob_str, x_bridge=comma_str, not_titleunit_required=True
+        bob_str == validate_tagunit(
+            bob_str, x_bridge=comma_str, not_tagunit_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a TitleUnit. Must contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to not be a TagUnit. Must contain bridge: '{comma_str}'"
     )
 
 

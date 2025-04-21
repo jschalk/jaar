@@ -33,7 +33,7 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
 
     # THEN
     example_bud = budunit_shop(sue_str, a23_str)
-    assert sue_job.fisc_title == example_bud.fisc_title
+    assert sue_job.fisc_tag == example_bud.fisc_tag
     assert sue_job.owner_name == example_bud.owner_name
 
 
@@ -276,7 +276,7 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     expected_job.add_item(dirty_road)
 #     expected_job.edit_reason(mop_road, casa_road, dirty_road)
 #     expected_job.add_fact(casa_road, dirty_road)
-#     assert sue_job.fisc_title == expected_job.fisc_title
+#     assert sue_job.fisc_tag == expected_job.fisc_tag
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_agenda_dict() == expected_job.get_agenda_dict()
 #     assert sue_job.get_dict() == expected_job.get_dict()
@@ -310,7 +310,7 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     # THEN
 #     expected_job = budunit_shop(sue_str, a23_str)
 #     expected_job.add_fact(casa_road, clean_road, create_missing_items=True)
-#     assert sue_job.fisc_title == expected_job.fisc_title
+#     assert sue_job.fisc_tag == expected_job.fisc_tag
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_factunits_dict() == expected_job.get_factunits_dict()
 #     assert sue_job.get_dict() == expected_job.get_dict()

@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.db_toolbox import create_insert_query
-from src.a10_fund_metric.fund_metric_config import get_fund_metric_dimen_args
+from src.a10_bud_calc.bud_calc_config import get_bud_calc_dimen_args
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import create_job_tables
 from src.a20_lobby_db_toolbox.lobby_tranformers import (
     create_budmemb_metrics_insert_sqlstr,
@@ -20,11 +20,11 @@ from sqlite3 import connect as sqlite3_connect
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("budunit")
+    x_args = get_bud_calc_dimen_args("budunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
@@ -42,7 +42,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x_tally = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "_keeps_buildable": x__keeps_buildable,
         "_keeps_justified": x__keeps_justified,
@@ -81,7 +81,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
 def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_itemunit")
+    x_args = get_bud_calc_dimen_args("bud_itemunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -92,7 +92,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x__active = 1
     x__all_acct_cred = 2
@@ -113,7 +113,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     x_close = 17
     x_denom = 18
     x_gogo_want = 19
-    x_item_title = 20
+    x_item_tag = 20
     x_mass = 21
     x_morph = 22
     x_numor = 23
@@ -123,7 +123,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     x_stop_want = 27
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "_active": x__active,
         "_all_acct_cred": x__all_acct_cred,
@@ -144,7 +144,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         "close": x_close,
         "denom": x_denom,
         "gogo_want": x_gogo_want,
-        "item_title": x_item_title,
+        "item_tag": x_item_tag,
         "mass": x_mass,
         "morph": x_morph,
         "numor": x_numor,
@@ -175,7 +175,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_reasonunit")
+    x_args = get_bud_calc_dimen_args("bud_item_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -195,7 +195,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
     x_base = 2
@@ -205,7 +205,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x__base_item_active_value = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
         "base": x_base,
@@ -236,7 +236,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_reason_premiseunit")
+    x_args = get_bud_calc_dimen_args("bud_item_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -259,7 +259,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
     x_base = 2
@@ -271,7 +271,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x__status = 8
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
         "base": x_base,
@@ -304,7 +304,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_awardlink")
+    x_args = get_bud_calc_dimen_args("bud_item_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -327,20 +327,20 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
-    x_awardee_tag = 2
+    x_awardee_title = 2
     x_give_force = 3
     x_take_force = 4
     x__fund_give = 5
     x__fund_take = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
-        "awardee_tag": x_awardee_tag,
+        "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
         "_fund_give": x__fund_give,
@@ -368,7 +368,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_factunit")
+    x_args = get_bud_calc_dimen_args("bud_item_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -391,7 +391,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
     x_base = 2
@@ -400,7 +400,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_fnigh = 5
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
         "base": x_base,
@@ -430,7 +430,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_healerlink")
+    x_args = get_bud_calc_dimen_args("bud_item_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -453,13 +453,13 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
     x_healer_name = 2
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
         "healer_name": x_healer_name,
@@ -486,7 +486,7 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_item_teamlink")
+    x_args = get_bud_calc_dimen_args("bud_item_teamlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -509,17 +509,17 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
-    x_team_tag = 2
+    x_team_title = 2
     x__owner_name_team = 3
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
-        "team_tag": x_team_tag,
+        "team_title": x_team_title,
         "_owner_name_team": x__owner_name_team,
     }
     # all args included in values dict
@@ -544,7 +544,7 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_acctunit")
+    x_args = get_bud_calc_dimen_args("bud_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -567,7 +567,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_credit_belief = 2
@@ -584,7 +584,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     x__irrational_debtit_belief = 13
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "credit_belief": x_credit_belief,
@@ -622,7 +622,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_acct_membership")
+    x_args = get_bud_calc_dimen_args("bud_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -645,7 +645,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_group_label = 2
@@ -661,7 +661,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_take = 12
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "group_label": x_group_label,
@@ -698,7 +698,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_fund_metric_dimen_args("bud_groupunit")
+    x_args = get_bud_calc_dimen_args("bud_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -721,7 +721,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_title = "accord23"
+    x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_group_label = 1
     x__credor_pool = 2
@@ -734,7 +734,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x_bridge = 9
     values_dict = {
         "world_id": x_world_id,
-        "fisc_title": x_fisc_title,
+        "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "group_label": x_group_label,
         "_credor_pool": x__credor_pool,
