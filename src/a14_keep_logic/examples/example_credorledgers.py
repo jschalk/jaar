@@ -3,18 +3,18 @@ from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic.examples.keep_env import (
     temp_fiscs_dir,
-    temp_fisc_title,
+    temp_fisc_tag,
     get_texas_road,
 )
 from src.a14_keep_logic.rivercycle import get_credorledger
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(temp_fiscs_dir(), temp_fisc_title(), "Yao")
+    return hubunit_shop(temp_fiscs_dir(), temp_fisc_tag(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(temp_fiscs_dir(), temp_fisc_title(), "Yao", get_texas_road())
+    return hubunit_shop(temp_fiscs_dir(), temp_fisc_tag(), "Yao", get_texas_road())
 
 
 def example_yao_credorledger() -> dict[str, float]:

@@ -17,13 +17,13 @@ from src.a06_bud_logic.bud_tool import (
 )
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
-    awardee_tag_str,
+    awardee_title_str,
     group_label_str,
     road_str,
-    team_tag_str,
+    team_title_str,
     healer_name_str,
     parent_road_str,
-    item_title_str,
+    item_tag_str,
     pledge_str,
     begin_str,
     close_str,
@@ -395,12 +395,12 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_delete():
     x_keylist = [atom_delete(), bud_itemunit_str(), ball_road, street_str]
     street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert street_budatom.get_value(parent_road_str()) == ball_road
-    assert street_budatom.get_value(item_title_str()) == street_str
+    assert street_budatom.get_value(item_tag_str()) == street_str
 
     x_keylist = [atom_delete(), bud_itemunit_str(), sports_road, ball_str]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(parent_road_str()) == sports_road
-    assert ball_budatom.get_value(item_title_str()) == ball_str
+    assert ball_budatom.get_value(item_tag_str()) == ball_str
 
     print(f"{get_budatom_total_count(sue_buddelta)=}")
     assert get_budatom_total_count(sue_buddelta) == 2
@@ -449,17 +449,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_insert():
     x_keylist = [atom_insert(), bud_itemunit_str(), sports_road, disc_str]
     street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert street_budatom.get_value(parent_road_str()) == sports_road
-    assert street_budatom.get_value(item_title_str()) == disc_str
+    assert street_budatom.get_value(item_tag_str()) == disc_str
 
     x_keylist = [
         atom_insert(),
         bud_itemunit_str(),
-        after_sue_bud.fisc_title,
+        after_sue_bud.fisc_tag,
         accord45_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(item_title_str()) == accord45_str
-    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_title
+    assert ball_budatom.get_value(item_tag_str()) == accord45_str
+    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_tag
     assert ball_budatom.get_value(begin_str()) == accord_begin
     assert ball_budatom.get_value(close_str()) == accord_close
     assert ball_budatom.get_value(mass_str()) == accord_mass
@@ -513,12 +513,12 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_update():
     x_keylist = [
         atom_update(),
         bud_itemunit_str(),
-        after_sue_bud.fisc_title,
+        after_sue_bud.fisc_tag,
         accord45_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_title
-    assert ball_budatom.get_value(item_title_str()) == accord45_str
+    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_tag
+    assert ball_budatom.get_value(item_tag_str()) == accord45_str
     assert ball_budatom.get_value(begin_str()) == after_accord_begin
     assert ball_budatom.get_value(close_str()) == after_accord_close
     assert ball_budatom.get_value(mass_str()) == after_accord_mass
@@ -573,7 +573,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_dele
     x_keylist = [atom_delete(), bud_item_awardlink_str(), disc_road, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(road_str()) == disc_road
-    assert run_budatom.get_value(awardee_tag_str()) == run_str
+    assert run_budatom.get_value(awardee_title_str()) == run_str
 
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -625,9 +625,9 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_inse
     x_keylist = [atom_insert(), bud_item_awardlink_str(), disc_road, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(road_str()) == disc_road
-    assert run_budatom.get_value(awardee_tag_str()) == run_str
+    assert run_budatom.get_value(awardee_title_str()) == run_str
     assert run_budatom.get_value(road_str()) == disc_road
-    assert run_budatom.get_value(awardee_tag_str()) == run_str
+    assert run_budatom.get_value(awardee_title_str()) == run_str
     assert run_budatom.get_value(give_force_str()) == after_run_give_force
     assert run_budatom.get_value(take_force_str()) == after_run_take_force
 
@@ -659,7 +659,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_upda
     after_sue_bud.edit_item_attr(
         ball_road,
         awardlink=awardlink_shop(
-            awardee_tag=run_str,
+            awardee_title=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -674,7 +674,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_upda
     x_keylist = [atom_update(), bud_item_awardlink_str(), ball_road, run_str]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value(awardee_tag_str()) == run_str
+    assert ball_budatom.get_value(awardee_title_str()) == run_str
     assert ball_budatom.get_value(give_force_str()) == after_give_force
     assert ball_budatom.get_value(take_force_str()) == after_take_force
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -1163,7 +1163,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_teamlink_inser
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value(team_tag_str()) == xio_str
+    assert ball_budatom.get_value(team_title_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
@@ -1199,7 +1199,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_teamlink_delet
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value(team_tag_str()) == xio_str
+    assert ball_budatom.get_value(team_title_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 

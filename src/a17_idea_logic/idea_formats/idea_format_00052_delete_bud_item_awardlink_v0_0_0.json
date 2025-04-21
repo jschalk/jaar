@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "awardee_tag_ERASE": {
+        "awardee_title_ERASE": {
             "otx_key": true
         },
         "event_int": {
@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_title": {
+        "fisc_tag": {
             "otx_key": true
         },
         "owner_name": {

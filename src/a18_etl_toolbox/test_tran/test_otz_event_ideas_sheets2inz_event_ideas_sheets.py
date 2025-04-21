@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     face_name_str,
@@ -26,7 +26,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -79,7 +79,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_title_str(),
+#         fisc_tag_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #     ]
@@ -133,7 +133,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
 #     e9_pidginunit.set_otx2inx(type_NameUnit_str(), zia_otx, zia_inx)
 #     e9_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob2_inx)
 #     e9_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao2_inx)
-#     e9_pidginunit.set_otx2inx(type_TitleUnit_str(), accord55_inx, accord55_otx)
+#     e9_pidginunit.set_otx2inx(type_TagUnit_str(), accord55_inx, accord55_otx)
 #     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
 #     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
 #     save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())

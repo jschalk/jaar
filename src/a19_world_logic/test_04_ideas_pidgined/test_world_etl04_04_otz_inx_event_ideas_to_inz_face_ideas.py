@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     face_name_str,
@@ -27,7 +27,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -70,7 +70,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     br00011_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
+        fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]

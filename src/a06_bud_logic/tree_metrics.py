@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 @dataclass
 class TreeMetrics:
-    title_count: int = None
+    tag_count: int = None
     level_count: dict[int, int] = None
     reason_bases: dict[RoadUnit, int] = None
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None
@@ -16,7 +16,7 @@ class TreeMetrics:
     all_item_uids_are_unique: bool = None
     last_evaluated_pledge_item_road: RoadUnit = None
 
-    def evaluate_title(
+    def evaluate_tag(
         self,
         level: int,
         reasons: dict[RoadUnit, ReasonUnit],
@@ -25,7 +25,7 @@ class TreeMetrics:
         pledge: bool,
         item_road: RoadUnit,
     ):
-        self.title_count += 1
+        self.tag_count += 1
         self.evaluate_pledge(pledge=pledge, item_road=item_road)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
@@ -53,7 +53,7 @@ class TreeMetrics:
     def evaluate_awardlinks(self, awardlinks: dict[GroupLabel, AwardLink]):
         if awardlinks is not None:
             for awardlink in awardlinks.values():
-                self.awardlinks_metrics[awardlink.awardee_tag] = awardlink
+                self.awardlinks_metrics[awardlink.awardee_title] = awardlink
 
     def evaluate_uid_max(self, uid):
         if uid is not None and self.uid_max < uid:
@@ -67,7 +67,7 @@ class TreeMetrics:
 
 
 def treemetrics_shop(
-    title_count: int = None,
+    tag_count: int = None,
     level_count: dict[int, int] = None,
     reason_bases: dict[RoadUnit, int] = None,
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None,
@@ -75,7 +75,7 @@ def treemetrics_shop(
     uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:
     x_treemetrics = TreeMetrics(
-        title_count=get_0_if_None(title_count),
+        tag_count=get_0_if_None(tag_count),
         level_count=get_empty_dict_if_None(level_count),
         reason_bases=get_empty_dict_if_None(reason_bases),
         awardlinks_metrics=get_empty_dict_if_None(awardlinks_metrics),

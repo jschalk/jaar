@@ -18,7 +18,7 @@ from src.a07_calendar_logic.chrono import (
     weekdays_config_str,
     months_config_str,
     monthday_distortion_str,
-    timeline_title_str,
+    timeline_tag_str,
     c400_number_str,
     yr1_jan1_offset_str,
     validate_timeline_config,
@@ -86,7 +86,7 @@ def test_str_functions_ReturnsObj():
     assert weekdays_config_str() == "weekdays_config"
     assert months_config_str() == "months_config"
     assert monthday_distortion_str() == "monthday_distortion"
-    assert timeline_title_str() == "timeline_title"
+    assert timeline_tag_str() == "timeline_tag"
     assert c400_number_str() == "c400_number"
     assert yr1_jan1_offset_str() == "yr1_jan1_offset"
 
@@ -124,7 +124,7 @@ def test_validate_timeline_config_ReturnsObj_CheckEachElementIsNecessary():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(timeline_title_str())
+    creg_config.pop(timeline_tag_str())
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
@@ -227,7 +227,7 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
 
     # WHEN
     five_dict = timeline_config_shop(
-        timeline_title=five_str(),
+        timeline_tag=five_str(),
         c400_number=five_c400_number,
         hour_length=five_hour_length,
         month_length=five_month_length,
@@ -239,7 +239,7 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
 
     # THEN
     assert validate_timeline_config(five_dict)
-    assert five_dict.get(timeline_title_str()) == five_str()
+    assert five_dict.get(timeline_tag_str()) == five_str()
     assert five_dict.get(c400_number_str()) == five_c400_number
     assert five_dict.get(weekdays_config_str()) == five_weekday_list
     x_months_config = five_dict.get(months_config_str())
@@ -312,7 +312,7 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
         ["February", 365],
     ]
     h_monthday_distortion = 1
-    h_timeline_title = "creg"
+    h_timeline_tag = "creg"
     h_weekdays_config = [
         "Wednesday",
         "Thursday",
@@ -330,16 +330,16 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
     # THEN
     print(f"{generated_dict=}")
     print(f"{set(generated_dict.keys())=}")
-    print(f"{timeline_title_str()=}")
-    print(f"{generated_dict.get(timeline_title_str())=}")
+    print(f"{timeline_tag_str()=}")
+    print(f"{generated_dict.get(timeline_tag_str())=}")
     assert generated_dict.get(c400_number_str()) == h_c400_number
 
-    assert generated_dict.get(timeline_title_str()) == h_timeline_title
+    assert generated_dict.get(timeline_tag_str()) == h_timeline_tag
     assert generated_dict.get(c400_number_str()) == h_c400_number
     assert generated_dict.get(hours_config_str()) == h_hours_config
     assert generated_dict.get(months_config_str()) == h_months_config
     assert generated_dict.get(monthday_distortion_str()) == h_monthday_distortion
-    assert generated_dict.get(timeline_title_str()) == h_timeline_title
+    assert generated_dict.get(timeline_tag_str()) == h_timeline_tag
     assert generated_dict.get(weekdays_config_str()) == h_weekdays_config
     assert generated_dict.get(yr1_jan1_offset_str()) == h_yr1_jan1_offset
     assert validate_timeline_config(generated_dict)
@@ -396,7 +396,7 @@ def test_TimeLineUnit_Exists():
     assert not x_timelineunit.hours_config
     assert not x_timelineunit.months_config
     assert not x_timelineunit.monthday_distortion
-    assert not x_timelineunit.timeline_title
+    assert not x_timelineunit.timeline_tag
     assert not x_timelineunit.weekdays_config
     assert not x_timelineunit.yr1_jan1_offset
 
@@ -412,7 +412,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     creg_c400_number = creg_config.get(c400_number_str())
     creg_hours_config = creg_config.get(hours_config_str())
     creg_months_config = creg_config.get(months_config_str())
-    creg_timeline_title = creg_config.get(timeline_title_str())
+    creg_timeline_tag = creg_config.get(timeline_tag_str())
     creg_weekdays_config = creg_config.get(weekdays_config_str())
     creg_monthday_distortion = creg_config.get(monthday_distortion_str())
     creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
@@ -422,7 +422,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
     assert x_timelineunit.monthday_distortion == creg_monthday_distortion
-    assert x_timelineunit.timeline_title == creg_timeline_title
+    assert x_timelineunit.timeline_tag == creg_timeline_tag
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
 
@@ -446,7 +446,7 @@ def test_timelineunit_shop_ReturnsObj_WhenTimeLineUnitAttributesAreNone():
     creg_c400_number = creg_config.get(c400_number_str())
     creg_hours_config = creg_config.get(hours_config_str())
     creg_months_config = creg_config.get(months_config_str())
-    creg_timeline_title = creg_config.get(timeline_title_str())
+    creg_timeline_tag = creg_config.get(timeline_tag_str())
     creg_weekdays_config = creg_config.get(weekdays_config_str())
     creg_monthday_distortion = creg_config.get(monthday_distortion_str())
     creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
@@ -456,7 +456,7 @@ def test_timelineunit_shop_ReturnsObj_WhenTimeLineUnitAttributesAreNone():
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
     assert x_timelineunit.monthday_distortion == creg_monthday_distortion
-    assert x_timelineunit.timeline_title == creg_timeline_title
+    assert x_timelineunit.timeline_tag == creg_timeline_tag
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
 

@@ -112,19 +112,19 @@ def test_etl_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    title_agg_str = "title_agg"
-    title_agg_columns = PidginPrimeColumns().map_title_agg_columns
-    e1_title0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_title1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_title_rows = [e1_title0, e1_title1]
-    e1_title_agg_df = DataFrame(e1_title_rows, columns=title_agg_columns)
+    tag_agg_str = "tag_agg"
+    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_tag1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_tag_rows = [e1_tag0, e1_tag1]
+    e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
     cart_dir = create_path(get_test_etl_dir(), "cart")
     agg_pidgin_path = create_cart_pidgin_path(cart_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
-    upsert_sheet(agg_pidgin_path, title_agg_str, e1_title_agg_df)
+    upsert_sheet(agg_pidgin_path, tag_agg_str, e1_tag_agg_df)
 
     faces_dir = create_path(get_test_etl_dir(), "faces_otz")
 
@@ -140,15 +140,15 @@ def test_etl_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     assert os_path_exists(sue_pidgin_file_path)
     assert sheet_exists(sue_pidgin_file_path, name_agg_str)
     assert sheet_exists(sue_pidgin_file_path, label_agg_str)
-    assert sheet_exists(sue_pidgin_file_path, title_agg_str)
+    assert sheet_exists(sue_pidgin_file_path, tag_agg_str)
     assert sheet_exists(sue_pidgin_file_path, road_agg_str)
     gen_sue_name_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=name_agg_str)
     gen_sue_label_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=label_agg_str)
-    gen_sue_title_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=title_agg_str)
+    gen_sue_tag_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=tag_agg_str)
     gen_sue_road_df = pandas_read_excel(sue_pidgin_file_path, sheet_name=road_agg_str)
-    print(f"{gen_sue_title_df=}")
+    print(f"{gen_sue_tag_df=}")
 
     pandas_testing_assert_frame_equal(gen_sue_name_df, e1_name_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_label_df, e1_label_agg_df)
     pandas_testing_assert_frame_equal(gen_sue_road_df, e1_road_agg_df)
-    pandas_testing_assert_frame_equal(gen_sue_title_df, e1_title_agg_df)
+    pandas_testing_assert_frame_equal(gen_sue_tag_df, e1_tag_agg_df)

@@ -53,12 +53,12 @@ def otx_name_str() -> str:
     return "otx_name"
 
 
-def inx_title_str() -> str:
-    return "inx_title"
+def inx_tag_str() -> str:
+    return "inx_tag"
 
 
-def otx_title_str() -> str:
-    return "otx_title"
+def otx_tag_str() -> str:
+    return "otx_tag"
 
 
 def inx_road_str() -> str:
@@ -89,8 +89,8 @@ def map_label_str() -> str:
     return "map_label"
 
 
-def map_title_str() -> str:
-    return "map_title"
+def map_tag_str() -> str:
+    return "map_tag"
 
 
 def map_road_str() -> str:
@@ -144,7 +144,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "acct_name": "NameUnit",
         "addin": "float",
         "amount": "float",
-        "awardee_tag": "LabelUnit",
+        "awardee_title": "LabelUnit",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -162,7 +162,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "denom": "int",
         "divisor": "int",
         "face_name": "NameUnit",
-        "fisc_title": "TitleUnit",
+        "fisc_tag": "TagUnit",
         "fnigh": "float",
         "fopen": "float",
         "fund_coin": "float",
@@ -171,11 +171,11 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_label": "LabelUnit",
         "healer_name": "NameUnit",
-        "hour_title": "TitleUnit",
-        "item_title": "TitleUnit",
+        "hour_tag": "TagUnit",
+        "item_tag": "TagUnit",
         "mass": "int",
         "max_tree_traverse": "int",
-        "month_title": "TitleUnit",
+        "month_tag": "TagUnit",
         "monthday_distortion": "int",
         "morph": "bool",
         "need": "RoadUnit",
@@ -196,11 +196,11 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_tag": "LabelUnit",
+        "team_title": "LabelUnit",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
-        "timeline_title": "TitleUnit",
-        "weekday_title": "TitleUnit",
+        "timeline_tag": "TagUnit",
+        "weekday_tag": "TagUnit",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",
@@ -224,12 +224,12 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_bridge",
             "otx_name",
         },
-        "map_title": {
-            "inx_title",
+        "map_tag": {
+            "inx_tag",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
-            "otx_title",
+            "otx_tag",
         },
         "map_road": {
             "inx_road",

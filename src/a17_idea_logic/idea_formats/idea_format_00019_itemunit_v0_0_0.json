@@ -18,13 +18,13 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_title": {
+        "fisc_tag": {
             "otx_key": true
         },
         "gogo_want": {
             "otx_key": false
         },
-        "item_title": {
+        "item_tag": {
             "otx_key": true
         },
         "morph": {

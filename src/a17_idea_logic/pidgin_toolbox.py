@@ -4,7 +4,7 @@ from src.a16_pidgin_logic.pidgin import (
     pidginunit_shop,
     NameMap,
     LabelMap,
-    TitleMap,
+    TagMap,
     RoadMap,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv, open_csv
@@ -36,15 +36,15 @@ def get_map_label_dt_columns() -> list[str]:
     ]
 
 
-def get_map_title_dt_columns() -> list[str]:
+def get_map_tag_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
-        "otx_title",
-        "inx_title",
+        "otx_tag",
+        "inx_tag",
     ]
 
 
@@ -92,7 +92,7 @@ def create_map_label_dt(x_map: LabelMap) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_map_label_dt_columns())
 
 
-def create_map_title_dt(x_map: TitleMap) -> DataFrame:
+def create_map_tag_dt(x_map: TagMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -100,12 +100,12 @@ def create_map_title_dt(x_map: TitleMap) -> DataFrame:
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
-            "otx_title": otx_value,
-            "inx_title": inx_value,
+            "otx_tag": otx_value,
+            "inx_tag": inx_value,
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_title_dt_columns())
+    return DataFrame(x_rows_list, columns=get_map_tag_dt_columns())
 
 
 def create_map_road_dt(x_map: RoadMap) -> DataFrame:
@@ -127,7 +127,7 @@ def create_map_road_dt(x_map: RoadMap) -> DataFrame:
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_map_name_csv(x_dir, x_pidginunit.namemap)
     _save_map_label_csv(x_dir, x_pidginunit.labelmap)
-    _save_map_title_csv(x_dir, x_pidginunit.titlemap)
+    _save_map_tag_csv(x_dir, x_pidginunit.tagmap)
     _save_map_road_csv(x_dir, x_pidginunit.roadmap)
 
 
@@ -141,9 +141,9 @@ def _save_map_label_csv(x_dir: str, labelmap: LabelMap):
     save_file(x_dir, "label.csv", get_ordered_csv(x_dt))
 
 
-def _save_map_title_csv(x_dir: str, titlemap: TitleMap):
-    x_dt = create_map_title_dt(titlemap)
-    save_file(x_dir, "title.csv", get_ordered_csv(x_dt))
+def _save_map_tag_csv(x_dir: str, tagmap: TagMap):
+    x_dt = create_map_tag_dt(tagmap)
+    save_file(x_dir, "tag.csv", get_ordered_csv(x_dt))
 
 
 def _save_map_road_csv(x_dir: str, roadmap: RoadMap):
@@ -175,16 +175,16 @@ def _load_labelmap_from_csv(x_dir, x_labelmap: LabelMap) -> LabelMap:
     return x_labelmap
 
 
-def _load_titlemap_from_csv(x_dir, x_titlemap: TitleMap) -> TitleMap:
-    title_filename = "title.csv"
-    if os_path_exists(create_path(x_dir, title_filename)):
-        otx2inx_dt = open_csv(x_dir, "title.csv")
+def _load_tagmap_from_csv(x_dir, x_tagmap: TagMap) -> TagMap:
+    tag_filename = "tag.csv"
+    if os_path_exists(create_path(x_dir, tag_filename)):
+        otx2inx_dt = open_csv(x_dir, "tag.csv")
         for table_row in otx2inx_dt.to_dict("records"):
-            otx_value = table_row.get("otx_title")
-            inx_value = table_row.get("inx_title")
-            if x_titlemap.otx2inx_exists(otx_value, inx_value) is False:
-                x_titlemap.set_otx2inx(otx_value, inx_value)
-    return x_titlemap
+            otx_value = table_row.get("otx_tag")
+            inx_value = table_row.get("inx_tag")
+            if x_tagmap.otx2inx_exists(otx_value, inx_value) is False:
+                x_tagmap.set_otx2inx(otx_value, inx_value)
+    return x_tagmap
 
 
 def _load_roadmap_from_csv(x_dir, x_roadmap: RoadMap) -> RoadMap:
@@ -237,7 +237,7 @@ def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     _load_namemap_from_csv(x_dir, x_pidginunit.namemap)
     _load_labelmap_from_csv(x_dir, x_pidginunit.labelmap)
-    _load_titlemap_from_csv(x_dir, x_pidginunit.titlemap)
+    _load_tagmap_from_csv(x_dir, x_pidginunit.tagmap)
     _load_roadmap_from_csv(x_dir, x_pidginunit.roadmap)
-    x_pidginunit.roadmap.titlemap = x_pidginunit.titlemap
+    x_pidginunit.roadmap.tagmap = x_pidginunit.tagmap
     return x_pidginunit

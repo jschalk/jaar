@@ -6,17 +6,17 @@ class InvalidRoadUnitException(Exception):
     pass
 
 
-class TitleUnit(str):
+class TagUnit(str):
     """A string representation of a tree node. Nodes cannot contain RoadUnit bridge"""
 
-    def is_title(self, bridge: str = None) -> bool:
+    def is_tag(self, bridge: str = None) -> bool:
         return len(self) > 0 and self.contains_bridge(bridge)
 
     def contains_bridge(self, bridge: str = None) -> bool:
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class FiscTitle(TitleUnit):  # Created to help track the concept
+class FiscTag(TagUnit):  # Created to help track the concept
     pass
 
 
@@ -31,7 +31,7 @@ class NameUnit(str):
 
 
 class OwnerName(NameUnit):
-    """A TitleUnit used to identify a BudUnit's owner_name"""
+    """A TagUnit used to identify a BudUnit's owner_name"""
 
     pass
 
@@ -43,31 +43,31 @@ class AcctName(OwnerName):  # Created to help track the concept
 
 
 class HealerName(OwnerName):
-    """A TitleUnit used to identify a Problem's Healer"""
+    """A TagUnit used to identify a Problem's Healer"""
 
     pass
 
 
-class TimeLineTitle(TitleUnit):
-    "TimeLineTitle is required for every TimeLineUnit. It is a TitleUnit that must not container the bridge."
+class TimeLineTag(TagUnit):
+    "TimeLineTag is required for every TimeLineUnit. It is a TagUnit that must not container the bridge."
 
     pass
 
 
 class RoadUnit(str):
-    """A string representation of a tree path. TitleUnits are seperated by road bridge"""
+    """A string representation of a tree path. TagUnits are seperated by road bridge"""
 
     pass
 
 
 class DoarUnit(str):
-    """DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TitleUnits are seperated by road bridge."""
+    """DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TagUnits are seperated by road bridge."""
 
     pass
 
 
 class LabelUnit(str):
-    """Any Label and Tag string classes should inherit from this class"""
+    """Any Label and _title string classes should inherit from this class"""
 
 
 class GroupLabel(LabelUnit):  # Created to help track the concept
@@ -136,49 +136,47 @@ def find_replace_road_key_dict(
     return dict_x
 
 
-def get_all_road_titles(road: RoadUnit, bridge: str = None) -> list[TitleUnit]:
+def get_all_road_tags(road: RoadUnit, bridge: str = None) -> list[TagUnit]:
     return road.split(default_bridge_if_None(bridge))
 
 
-def get_terminus_title(road: RoadUnit, bridge: str = None) -> TitleUnit:
-    return get_all_road_titles(road=road, bridge=bridge)[-1]
+def get_terminus_tag(road: RoadUnit, bridge: str = None) -> TagUnit:
+    return get_all_road_tags(road=road, bridge=bridge)[-1]
 
 
 def get_parent_road(
     road: RoadUnit, bridge: str = None
-) -> RoadUnit:  # road without terminus title
-    parent_titles = get_all_road_titles(road=road, bridge=bridge)[:-1]
-    return create_road_from_titles(parent_titles, bridge=bridge)
+) -> RoadUnit:  # road without terminus tag
+    parent_tags = get_all_road_tags(road=road, bridge=bridge)[:-1]
+    return create_road_from_tags(parent_tags, bridge=bridge)
 
 
-def create_road_without_root_title(
+def create_road_without_root_tag(
     road: RoadUnit, bridge: str = None
-) -> RoadUnit:  # road without terminus titlef
+) -> RoadUnit:  # road without terminus tagf
     if road[:1] == default_bridge_if_None(bridge):
         raise InvalidRoadUnitException(
-            f"Cannot create_road_without_root_title of '{road}' because it has no root title."
+            f"Cannot create_road_without_root_tag of '{road}' because it has no root tag."
         )
-    road_without_root_title = create_road_from_titles(
-        get_all_road_titles(road=road)[1:]
-    )
-    return f"{default_bridge_if_None(bridge)}{road_without_root_title}"
+    road_without_root_tag = create_road_from_tags(get_all_road_tags(road=road)[1:])
+    return f"{default_bridge_if_None(bridge)}{road_without_root_tag}"
 
 
-def get_root_title_from_road(road: RoadUnit, bridge: str = None) -> TitleUnit:
-    return get_all_road_titles(road=road, bridge=bridge)[0]
+def get_root_tag_from_road(road: RoadUnit, bridge: str = None) -> TagUnit:
+    return get_all_road_tags(road=road, bridge=bridge)[0]
 
 
-def road_validate(road: RoadUnit, bridge: str, root_title: TitleUnit) -> RoadUnit:
+def road_validate(road: RoadUnit, bridge: str, root_tag: TagUnit) -> RoadUnit:
     if road == "" or road is None:
         return RoadUnit("")
-    x_root = get_root_title_from_road(road, bridge)
+    x_root = get_root_tag_from_road(road, bridge)
     return (
         rebuild_road(
             subj_road=road,
             old_road=x_root,
-            new_road=root_title,
+            new_road=root_tag,
         )
-        if x_root != root_title
+        if x_root != root_tag
         else road
     )
 
@@ -186,13 +184,13 @@ def road_validate(road: RoadUnit, bridge: str, root_title: TitleUnit) -> RoadUni
 def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit]:
     if road is None:
         return []
-    titles = get_all_road_titles(road)
-    temp_road = titles.pop(0)
+    tags = get_all_road_tags(road)
+    temp_road = tags.pop(0)
 
     temp_roads = [temp_road]
-    if titles != []:
-        while titles != []:
-            temp_road = create_road(temp_road, titles.pop(0))
+    if tags != []:
+        while tags != []:
+            temp_road = create_road(temp_road, tags.pop(0))
             temp_roads.append(temp_road)
 
     x_roads = []
@@ -225,33 +223,33 @@ def get_forefather_roads(road: RoadUnit) -> dict[RoadUnit]:
     return {a_road: None for a_road in ancestor_roads}
 
 
-def get_default_fisc_title() -> FiscTitle:
+def get_default_fisc_tag() -> FiscTag:
     return "ZZ"
 
 
-def create_road_from_titles(titles: list[TitleUnit], bridge: str = None) -> RoadUnit:
-    return default_bridge_if_None(bridge).join(titles)
+def create_road_from_tags(tags: list[TagUnit], bridge: str = None) -> RoadUnit:
+    return default_bridge_if_None(bridge).join(tags)
 
 
-class bridge_in_title_Exception(Exception):
+class bridge_in_tag_Exception(Exception):
     pass
 
 
 def create_road(
-    parent_road: RoadUnit, terminus_title: TitleUnit = None, bridge: str = None
+    parent_road: RoadUnit, terminus_tag: TagUnit = None, bridge: str = None
 ) -> RoadUnit:
 
-    if terminus_title is None:
+    if terminus_tag is None:
         return RoadUnit(parent_road)
     x_bridge = default_bridge_if_None(bridge)
-    terminus_title = TitleUnit(terminus_title)
-    if terminus_title.is_title(x_bridge) is False:
-        raise bridge_in_title_Exception(f"bridge '{x_bridge}' is in {terminus_title}")
+    terminus_tag = TagUnit(terminus_tag)
+    if terminus_tag.is_tag(x_bridge) is False:
+        raise bridge_in_tag_Exception(f"bridge '{x_bridge}' is in {terminus_tag}")
 
     return RoadUnit(
-        terminus_title
+        terminus_tag
         if parent_road in {"", None}
-        else f"{parent_road}{x_bridge}{terminus_title}"
+        else f"{parent_road}{x_bridge}{terminus_tag}"
     )
 
 
@@ -260,10 +258,10 @@ def combine_roads(
 ) -> RoadUnit:
     if parent_road in {""}:
         return ancestor_road
-    parent_road_titles = get_all_road_titles(parent_road, bridge)
-    ancestor_road_titles = get_all_road_titles(ancestor_road, bridge)
-    parent_road_titles.extend(ancestor_road_titles)
-    return create_road_from_titles(parent_road_titles, bridge)
+    parent_road_tags = get_all_road_tags(parent_road, bridge)
+    ancestor_road_tags = get_all_road_tags(ancestor_road, bridge)
+    parent_road_tags.extend(ancestor_road_tags)
+    return create_road_from_tags(parent_road_tags, bridge)
 
 
 def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, bridge: str = None):
@@ -287,36 +285,36 @@ def replace_bridge(road: RoadUnit, old_bridge: str, new_bridge: str):
     return road.replace(old_bridge, new_bridge)
 
 
-class ValidateTitleUnitException(Exception):
+class ValidateTagUnitException(Exception):
     pass
 
 
-def is_titleunit(x_titleunit: TitleUnit, x_bridge: str):
-    x_titleunit = TitleUnit(x_titleunit)
-    return x_titleunit.is_title(bridge=x_bridge)
+def is_tagunit(x_tagunit: TagUnit, x_bridge: str):
+    x_tagunit = TagUnit(x_tagunit)
+    return x_tagunit.is_tag(bridge=x_bridge)
 
 
-def validate_titleunit(
-    x_titleunit: TitleUnit, x_bridge: str, not_titleunit_required: bool = False
+def validate_tagunit(
+    x_tagunit: TagUnit, x_bridge: str, not_tagunit_required: bool = False
 ):
-    if is_titleunit(x_titleunit, x_bridge) and not_titleunit_required:
-        raise ValidateTitleUnitException(
-            f"'{x_titleunit}' needs to not be a TitleUnit. Must contain bridge: '{x_bridge}'"
+    if is_tagunit(x_tagunit, x_bridge) and not_tagunit_required:
+        raise ValidateTagUnitException(
+            f"'{x_tagunit}' needs to not be a TagUnit. Must contain bridge: '{x_bridge}'"
         )
-    elif is_titleunit(x_titleunit, x_bridge) is False and not not_titleunit_required:
-        raise ValidateTitleUnitException(
-            f"'{x_titleunit}' needs to be a TitleUnit. Cannot contain bridge: '{x_bridge}'"
+    elif is_tagunit(x_tagunit, x_bridge) is False and not not_tagunit_required:
+        raise ValidateTagUnitException(
+            f"'{x_tagunit}' needs to be a TagUnit. Cannot contain bridge: '{x_bridge}'"
         )
 
-    return x_titleunit
+    return x_tagunit
 
 
 def roadunit_valid_dir_path(x_roadunit: RoadUnit, bridge: str) -> bool:
-    x_road_titles = get_all_road_titles(x_roadunit, bridge)
+    x_road_tags = get_all_road_tags(x_roadunit, bridge)
     slash_str = "/"
-    x_road_os_path = create_road_from_titles(x_road_titles, bridge=slash_str)
+    x_road_os_path = create_road_from_tags(x_road_tags, bridge=slash_str)
     parts = pathlib_Path(x_road_os_path).parts
-    if len(parts) != len(x_road_titles):
+    if len(parts) != len(x_road_tags):
         return False
 
     return is_path_valid(x_road_os_path)
@@ -324,8 +322,8 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, bridge: str) -> bool:
 
 def get_road_from_doar(x_doarunit: DoarUnit, bridge: str = None) -> RoadUnit:
     x_bridge = default_bridge_if_None(bridge)
-    doar_titles = get_all_road_titles(x_doarunit, x_bridge)
-    return RoadUnit(create_road_from_titles(doar_titles[::-1], x_bridge))
+    doar_tags = get_all_road_tags(x_doarunit, x_bridge)
+    return RoadUnit(create_road_from_tags(doar_tags[::-1], x_bridge))
 
 
 def get_doar_from_road(x_roadunit: RoadUnit, bridge: str = None) -> DoarUnit:

@@ -139,6 +139,6 @@ def test_WorldUnit_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
 #     assert generate_bob_items == expected_bob_items
 #     expected_clean_item = expected_bob_job.get_item_obj(clean_road)
 #     gen_clean_item = gen_bob_job.get_item_obj(clean_road)
-#     assert gen_clean_item.fisc_title == expected_clean_item.fisc_title
+#     assert gen_clean_item.fisc_tag == expected_clean_item.fisc_tag
 #     assert gen_clean_item == expected_clean_item
 #     assert gen_bob_job.get_item_obj(clean_road) == expected_clean_item

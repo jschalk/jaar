@@ -12,14 +12,14 @@ from src.a00_data_toolboxs.dict_toolbox import (
 )
 from src.a01_word_logic.road import (
     default_bridge_if_None,
-    get_all_road_titles,
-    create_road_from_titles,
-    get_terminus_title,
+    get_all_road_tags,
+    create_road_from_tags,
+    get_terminus_tag,
     get_parent_road,
     combine_roads,
-    is_titleunit,
+    is_tagunit,
     RoadUnit,
-    TitleUnit,
+    TagUnit,
     FaceName,
     EventInt,
 )
@@ -32,7 +32,7 @@ class set_all_otx2inxException(Exception):
     pass
 
 
-class set_title_Exception(Exception):
+class set_tag_Exception(Exception):
     pass
 
 
@@ -227,33 +227,33 @@ def get_labelmap_from_json(x_json: str) -> LabelMap:
     return get_labelmap_from_dict(get_dict_from_json(x_json))
 
 
-class TitleMap(MapCore):
-    def set_otx2inx(self, otx_title: str, inx_title: str):
-        self.otx2inx[otx_title] = inx_title
+class TagMap(MapCore):
+    def set_otx2inx(self, otx_tag: str, inx_tag: str):
+        self.otx2inx[otx_tag] = inx_tag
 
-    def _get_inx_value(self, otx_title: str) -> str:
-        return self.otx2inx.get(otx_title)
+    def _get_inx_value(self, otx_tag: str) -> str:
+        return self.otx2inx.get(otx_tag)
 
-    def otx2inx_exists(self, otx_title: str, inx_title: str) -> bool:
-        return self._get_inx_value(otx_title) == inx_title
+    def otx2inx_exists(self, otx_tag: str, inx_tag: str) -> bool:
+        return self._get_inx_value(otx_tag) == inx_tag
 
-    def otx_exists(self, otx_title: str) -> bool:
-        return self._get_inx_value(otx_title) != None
+    def otx_exists(self, otx_tag: str) -> bool:
+        return self._get_inx_value(otx_tag) != None
 
-    def del_otx2inx(self, otx_title: str):
-        self.otx2inx.pop(otx_title)
+    def del_otx2inx(self, otx_tag: str):
+        self.otx2inx.pop(otx_tag)
 
-    def reveal_inx(self, otx_title: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_title) is False:
-            inx_title = copy_copy(otx_title)
-            if self.inx_bridge in otx_title:
+    def reveal_inx(self, otx_tag: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_tag) is False:
+            inx_tag = copy_copy(otx_tag)
+            if self.inx_bridge in otx_tag:
                 return None
             otx_r_bridge = self.otx_bridge
             inx_r_bridge = self.inx_bridge
-            inx_title = inx_title.replace(otx_r_bridge, inx_r_bridge)
-            self.set_otx2inx(otx_title, inx_title)
+            inx_tag = inx_tag.replace(otx_r_bridge, inx_r_bridge)
+            self.set_otx2inx(otx_tag, inx_tag)
 
-        return self._get_inx_value(otx_title)
+        return self._get_inx_value(otx_tag)
 
     def _is_inx_bridge_inclusion_correct(self) -> bool:
         return not str_in_dict_values(self.inx_bridge, self.otx2inx)
@@ -268,19 +268,19 @@ class TitleMap(MapCore):
         )
 
 
-def titlemap_shop(
+def tagmap_shop(
     face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> TitleMap:
+) -> TagMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    return TitleMap(
+    return TagMap(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
@@ -290,8 +290,8 @@ def titlemap_shop(
     )
 
 
-def get_titlemap_from_dict(x_dict: dict) -> TitleMap:
-    return titlemap_shop(
+def get_tagmap_from_dict(x_dict: dict) -> TagMap:
+    return tagmap_shop(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
@@ -301,8 +301,8 @@ def get_titlemap_from_dict(x_dict: dict) -> TitleMap:
     )
 
 
-def get_titlemap_from_json(x_json: str) -> TitleMap:
-    return get_titlemap_from_dict(get_dict_from_json(x_json))
+def get_tagmap_from_json(x_json: str) -> TagMap:
+    return get_tagmap_from_dict(get_dict_from_json(x_json))
 
 
 @dataclass
@@ -313,7 +313,7 @@ class RoadMap:
     unknown_word: str = None
     otx_bridge: str = None
     inx_bridge: str = None
-    titlemap: TitleMap = None
+    tagmap: TagMap = None
 
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
@@ -342,18 +342,18 @@ class RoadMap:
         otx_parent_road = get_parent_road(otx_road, self.otx_bridge)
         if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
             return None
-        otx_terminus = get_terminus_title(otx_road, self.otx_bridge)
-        otx_terminus = self._get_titlemap_titleunit(otx_terminus)
+        otx_terminus = get_terminus_tag(otx_road, self.otx_bridge)
+        otx_terminus = self._get_tagmap_tagunit(otx_terminus)
         if otx_parent_road == "":
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
         return combine_roads(inx_parent_road, otx_terminus, self.inx_bridge)
 
-    def _get_titlemap_titleunit(self, x_titleUnit: TitleUnit) -> TitleUnit:
-        if self.otx_title_exists(x_titleUnit):
-            return self.titlemap.reveal_inx(x_titleUnit)
-        return x_titleUnit
+    def _get_tagmap_tagunit(self, x_tagUnit: TagUnit) -> TagUnit:
+        if self.otx_tag_exists(x_tagUnit):
+            return self.tagmap.reveal_inx(x_tagUnit)
+        return x_tagUnit
 
     def otx2inx_exists(self, otx_road: str, inx_road: str) -> bool:
         return self._get_inx_value(otx_road) == inx_road
@@ -364,44 +364,44 @@ class RoadMap:
     def del_otx2inx(self, otx_road: str):
         self.otx2inx.pop(otx_road)
 
-    def set_title(self, otx_title: TitleUnit, inx_title: TitleUnit):
-        if self.otx_bridge in otx_title:
-            exception_str = f"title cannot have otx_title '{otx_title}'. It must be not have bridge {self.otx_bridge}."
-            raise set_title_Exception(exception_str)
-        if self.inx_bridge in inx_title:
-            exception_str = f"title cannot have inx_title '{inx_title}'. It must be not have bridge {self.inx_bridge}."
-            raise set_title_Exception(exception_str)
+    def set_tag(self, otx_tag: TagUnit, inx_tag: TagUnit):
+        if self.otx_bridge in otx_tag:
+            exception_str = f"tag cannot have otx_tag '{otx_tag}'. It must be not have bridge {self.otx_bridge}."
+            raise set_tag_Exception(exception_str)
+        if self.inx_bridge in inx_tag:
+            exception_str = f"tag cannot have inx_tag '{inx_tag}'. It must be not have bridge {self.inx_bridge}."
+            raise set_tag_Exception(exception_str)
 
-        self.titlemap.set_otx2inx(otx_title, inx_title)
-        self._set_new_title_to_otx_inx(otx_title, inx_title)
+        self.tagmap.set_otx2inx(otx_tag, inx_tag)
+        self._set_new_tag_to_otx_inx(otx_tag, inx_tag)
 
-    def _set_new_title_to_otx_inx(self, otx_title, inx_title):
+    def _set_new_tag_to_otx_inx(self, otx_tag, inx_tag):
         for otx_road, inx_road in self.otx2inx.items():
-            otx_titleunits = get_all_road_titles(otx_road, self.otx_bridge)
-            inx_titleunits = get_all_road_titles(inx_road, self.inx_bridge)
-            for x_count, otx_titleunit in enumerate(otx_titleunits):
-                if otx_titleunit == otx_title:
-                    inx_titleunits[x_count] = inx_title
-            self.set_otx2inx(otx_road, create_road_from_titles(inx_titleunits))
+            otx_tagunits = get_all_road_tags(otx_road, self.otx_bridge)
+            inx_tagunits = get_all_road_tags(inx_road, self.inx_bridge)
+            for x_count, otx_tagunit in enumerate(otx_tagunits):
+                if otx_tagunit == otx_tag:
+                    inx_tagunits[x_count] = inx_tag
+            self.set_otx2inx(otx_road, create_road_from_tags(inx_tagunits))
 
-    def _get_inx_title(self, otx_title: TitleUnit) -> TitleUnit:
-        return self.titlemap.otx2inx.get(otx_title)
+    def _get_inx_tag(self, otx_tag: TagUnit) -> TagUnit:
+        return self.tagmap.otx2inx.get(otx_tag)
 
-    def title_exists(self, otx_title: TitleUnit, inx_title: TitleUnit) -> bool:
-        return self.titlemap.otx2inx_exists(otx_title, inx_title)
+    def tag_exists(self, otx_tag: TagUnit, inx_tag: TagUnit) -> bool:
+        return self.tagmap.otx2inx_exists(otx_tag, inx_tag)
 
-    def otx_title_exists(self, otx_title: TitleUnit) -> bool:
-        return self.titlemap.otx_exists(otx_title)
+    def otx_tag_exists(self, otx_tag: TagUnit) -> bool:
+        return self.tagmap.otx_exists(otx_tag)
 
-    def del_title(self, otx_title: TitleUnit) -> bool:
-        self.titlemap.del_otx2inx(otx_title)
+    def del_tag(self, otx_tag: TagUnit) -> bool:
+        self.tagmap.del_otx2inx(otx_tag)
 
     def _unknown_word_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx2inx)
 
     def all_otx_parent_roads_exist(self) -> bool:
         for x_road in self.otx2inx.keys():
-            if is_titleunit(x_road, self.otx_bridge) is False:
+            if is_tagunit(x_road, self.otx_bridge) is False:
                 parent_road = get_parent_road(x_road, self.otx_bridge)
                 if self.otx_exists(parent_road) is False:
                     return False
@@ -429,7 +429,7 @@ def roadmap_shop(
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
-    x_titlemap: TitleMap = None,
+    x_tagmap: TagMap = None,
     otx2inx: dict = None,
     unknown_word: str = None,
 ) -> RoadMap:
@@ -437,8 +437,8 @@ def roadmap_shop(
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    if x_titlemap is None:
-        x_titlemap = titlemap_shop(
+    if x_tagmap is None:
+        x_tagmap = tagmap_shop(
             otx_bridge=otx_bridge,
             inx_bridge=inx_bridge,
             unknown_word=unknown_word,
@@ -451,7 +451,7 @@ def roadmap_shop(
         unknown_word=unknown_word,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        titlemap=x_titlemap,
+        tagmap=x_tagmap,
         face_name=face_name,
         event_int=get_0_if_None(event_int),
     )
@@ -504,7 +504,7 @@ def inherit_labelmap(new: LabelMap, old: LabelMap) -> LabelMap:
     return _inherit_mapunit(new, old)
 
 
-def inherit_titlemap(new: TitleMap, old: TitleMap) -> TitleMap:
+def inherit_tagmap(new: TagMap, old: TagMap) -> TagMap:
     return _inherit_mapunit(new, old)
 
 

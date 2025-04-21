@@ -93,7 +93,7 @@ def memberships_get_from_dict(
 
 @dataclass
 class AwardCore:
-    awardee_tag: GroupLabel = None
+    awardee_title: GroupLabel = None
 
 
 @dataclass
@@ -103,7 +103,7 @@ class AwardLink(AwardCore):
 
     def get_dict(self) -> dict[str, str]:
         return {
-            "awardee_tag": self.awardee_tag,
+            "awardee_title": self.awardee_title,
             "give_force": self.give_force,
             "take_force": self.take_force,
         }
@@ -119,20 +119,22 @@ def awardlinks_get_from_dict(x_dict: dict) -> dict[GroupLabel, AwardLink]:
     awardlinks = {}
     for awardlinks_dict in x_dict.values():
         x_group = awardlink_shop(
-            awardee_tag=awardlinks_dict["awardee_tag"],
+            awardee_title=awardlinks_dict["awardee_title"],
             give_force=awardlinks_dict["give_force"],
             take_force=awardlinks_dict["take_force"],
         )
-        awardlinks[x_group.awardee_tag] = x_group
+        awardlinks[x_group.awardee_title] = x_group
     return awardlinks
 
 
 def awardlink_shop(
-    awardee_tag: GroupLabel, give_force: float = None, take_force: float = None
+    awardee_title: GroupLabel,
+    give_force: float = None,
+    take_force: float = None,
 ) -> AwardLink:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardLink(awardee_tag, give_force, take_force=take_force)
+    return AwardLink(awardee_title, give_force, take_force=take_force)
 
 
 @dataclass
@@ -144,7 +146,7 @@ class AwardHeir(AwardCore):
 
 
 def awardheir_shop(
-    awardee_tag: GroupLabel,
+    awardee_title: GroupLabel,
     give_force: float = None,
     take_force: float = None,
     _fund_give: float = None,
@@ -152,7 +154,7 @@ def awardheir_shop(
 ) -> AwardHeir:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardHeir(awardee_tag, give_force, take_force, _fund_give, _fund_take)
+    return AwardHeir(awardee_title, give_force, take_force, _fund_give, _fund_take)
 
 
 @dataclass
@@ -172,8 +174,8 @@ class AwardLine(AwardCore):
             self._fund_take = 0
 
 
-def awardline_shop(awardee_tag: GroupLabel, _fund_give: float, _fund_take: float):
-    return AwardLine(awardee_tag, _fund_give=_fund_give, _fund_take=_fund_take)
+def awardline_shop(awardee_title: GroupLabel, _fund_give: float, _fund_take: float):
+    return AwardLine(awardee_title, _fund_give=_fund_give, _fund_take=_fund_take)
 
 
 @dataclass

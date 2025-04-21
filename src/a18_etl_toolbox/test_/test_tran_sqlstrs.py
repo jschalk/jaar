@@ -9,7 +9,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     create_select_query,
 )
 from src.a02_finance_toolboxs.deal import (
-    fisc_title_str,
+    fisc_tag_str,
     owner_name_str,
     deal_time_str,
     tran_time_str,
@@ -28,7 +28,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_groupunit_str,
 )
 from src.a07_calendar_logic.chrono import (
-    timeline_title_str,
+    timeline_tag_str,
     c400_number_str,
     monthday_distortion_str,
     yr1_jan1_offset_str,
@@ -672,17 +672,17 @@ def test_get_fisc_insert_agg_from_staging_sqlstrs_ReturnsObj():
             cursor,
             src_table=f"{fiscunit_str()}_staging",
             dst_table=f"{fiscunit_str()}_agg",
-            focus_cols=[fisc_title_str()],
+            focus_cols=[fisc_tag_str()],
             exclude_cols=x_exclude_cols,
         )
         assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = f"""{fisc_title_str()}, {timeline_title_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, job_listen_rotations"""
+        columns_header = f"""{fisc_tag_str()}, {timeline_tag_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, job_listen_rotations"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT {fisc_title_str()}, MAX({timeline_title_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
+SELECT {fisc_tag_str()}, MAX({timeline_tag_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
 FROM {tablename}_staging
 WHERE error_message IS NULL
-GROUP BY {fisc_title_str()}
+GROUP BY {fisc_tag_str()}
 ;
 """
         assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
@@ -914,7 +914,7 @@ def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
-  {fisc_title_str()} TEXT
+  {fisc_tag_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
 , error_message TEXT
@@ -928,18 +928,18 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_event_time_agg ({fisc_title_str()}, {event_int_str()}, agg_time)
-SELECT {fisc_title_str()}, {event_int_str()}, agg_time
+INSERT INTO fisc_event_time_agg ({fisc_tag_str()}, {event_int_str()}, agg_time)
+SELECT {fisc_tag_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {fisc_title_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    SELECT {fisc_tag_str()}, {event_int_str()}, {tran_time_str()} as agg_time
     FROM fisc_cashbook_staging
-    GROUP BY {fisc_title_str()}, {event_int_str()}, {tran_time_str()}
+    GROUP BY {fisc_tag_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {fisc_title_str()}, {event_int_str()}, {deal_time_str()} as agg_time
+    SELECT {fisc_tag_str()}, {event_int_str()}, {deal_time_str()} as agg_time
     FROM fisc_dealunit_staging
-    GROUP BY {fisc_title_str()}, {event_int_str()}, {deal_time_str()}
+    GROUP BY {fisc_tag_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_title_str()}, {event_int_str()}, agg_time
+ORDER BY {fisc_tag_str()}, {event_int_str()}, agg_time
 ;
 """
     # WHEN / THEN
@@ -950,8 +950,8 @@ def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {fisc_title_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {fisc_title_str()} ORDER BY {event_int_str()}) AS prev_agg_time
+    SELECT {fisc_tag_str()}, {event_int_str()}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {fisc_tag_str()} ORDER BY {event_int_str()}) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
@@ -962,7 +962,7 @@ SET error_message = CASE
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.{event_int_str()} = fisc_event_time_agg.{event_int_str()}
-    AND EventTimeOrdered.{fisc_title_str()} = fisc_event_time_agg.{fisc_title_str()}
+    AND EventTimeOrdered.{fisc_tag_str()} = fisc_event_time_agg.{fisc_tag_str()}
     AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
@@ -974,7 +974,7 @@ def test_CREATE_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
-  {fisc_title_str()} TEXT
+  {fisc_tag_str()} TEXT
 , {owner_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {deal_time_str()} INTEGER
@@ -989,14 +989,14 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_ote1_agg ({fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
-SELECT {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+INSERT INTO fisc_ote1_agg ({fisc_tag_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+SELECT {fisc_tag_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 FROM (
-    SELECT {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+    SELECT {fisc_tag_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
     FROM fisc_dealunit_staging
-    GROUP BY {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+    GROUP BY {fisc_tag_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_title_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+ORDER BY {fisc_tag_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 ;
 """
     # WHEN / THEN
@@ -1022,7 +1022,7 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     a23_str = "accord23"
 
     # WHEN
-    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_title=a23_str)
+    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_tag=a23_str)
 
     # THEN
     gen_fisccash_sqlstr = fu1_select_sqlstrs.get(fisc_cashbook_str())
@@ -1042,7 +1042,7 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
         fiscweek_agg = f"{fisc_timeline_weekday_str()}_agg"
         fiscoffi_agg = f"{fisc_timeoffi_str()}_agg"
         fiscunit_agg = f"{fiscunit_str()}_agg"
-        where_dict = {fisc_title_str(): a23_str}
+        where_dict = {fisc_tag_str(): a23_str}
         fisccash_sql = create_select_query(cursor, fisccash_agg, [], where_dict, True)
         fiscdeal_sql = create_select_query(cursor, fiscdeal_agg, [], where_dict, True)
         fischour_sql = create_select_query(cursor, fischour_agg, [], where_dict, True)

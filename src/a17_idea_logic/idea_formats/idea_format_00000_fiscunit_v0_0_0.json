@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_title": {
+        "fisc_tag": {
             "otx_key": true
         },
         "fund_coin": {
@@ -30,7 +30,7 @@
         "bridge": {
             "otx_key": false
         },
-        "timeline_title": {
+        "timeline_tag": {
             "otx_key": false
         },
         "yr1_jan1_offset": {

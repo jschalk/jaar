@@ -5,7 +5,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     is_stageable,
     create_select_query,
 )
-from src.a02_finance_toolboxs.deal import fisc_title_str, owner_name_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str, owner_name_str
 from src.a06_bud_logic.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -42,7 +42,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         x_config = bud_calc_config.get(x_dimen)
 
         job_table = f"{x_dimen}_job"
-        job_cols = {fisc_title_str(), owner_name_str()}
+        job_cols = {fisc_tag_str(), owner_name_str()}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
         job_cols.update(set(x_config.get("jmetrics").keys()))

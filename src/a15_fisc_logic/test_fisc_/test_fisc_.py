@@ -42,7 +42,7 @@ def test_FiscUnit_Exists():
     # ESTABLISH / WHEN
     accord_fisc = FiscUnit()
     # THEN
-    assert not accord_fisc.fisc_title
+    assert not accord_fisc.fisc_tag
     assert not accord_fisc.timeline
     assert not accord_fisc.brokerunits
     assert not accord_fisc.cashbook
@@ -69,7 +69,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     a23_fisc = fiscunit_shop(a23_str)
 
     # THEN
-    assert a23_fisc.fisc_title == a23_str
+    assert a23_fisc.fisc_tag == a23_str
     assert a23_fisc.timeline == timelineunit_shop()
     assert a23_fisc.brokerunits == {}
     assert a23_fisc.cashbook == tranbook_shop(a23_str)
@@ -94,7 +94,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir=get_test_fisc_mstr_dir())
 
     # THEN
-    assert a23_fisc.fisc_title == a23_str
+    assert a23_fisc.fisc_tag == a23_str
     assert a23_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
     assert a23_fisc._owners_dir is not None
     assert a23_fisc._packs_dir is not None
@@ -112,7 +112,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
 
     # WHEN
     a23_fisc = fiscunit_shop(
-        fisc_title=a23_str,
+        fisc_tag=a23_str,
         fisc_mstr_dir=get_test_fisc_mstr_dir(),
         offi_times=a45_offi_times,
         in_memory_journal=True,
@@ -174,7 +174,7 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
     a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), in_memory_journal=True)
 
     # THEN
-    assert a23_fisc.fisc_title == a23_str
+    assert a23_fisc.fisc_tag == a23_str
     x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
     assert a23_fisc._fisc_dir == create_path(x_fiscs_dir, a23_str)
     assert a23_fisc._owners_dir == create_path(a23_fisc._fisc_dir, "owners")
@@ -521,7 +521,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     sue_hubunit = hubunit_shop(
         fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
-        fisc_title=a23_fisc.fisc_title,
+        fisc_tag=a23_fisc.fisc_tag,
         owner_name=sue_str,
         keep_road=None,
         bridge=a23_fisc.bridge,
@@ -530,7 +530,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     )
     yao_hubunit = hubunit_shop(
         fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
-        fisc_title=a23_fisc.fisc_title,
+        fisc_tag=a23_fisc.fisc_tag,
         owner_name=yao_str,
         keep_road=None,
         bridge=a23_fisc.bridge,

@@ -6,8 +6,8 @@ from src.a00_data_toolboxs.dict_toolbox import (
 from src.a01_word_logic.road import (
     AcctName,
     default_bridge_if_None,
-    validate_titleunit,
-    is_titleunit,
+    validate_tagunit,
+    is_tagunit,
 )
 from src.a02_finance_toolboxs.allot import allot_scale
 from src.a02_finance_toolboxs.finance_config import (
@@ -38,7 +38,7 @@ class AcctCore:
     _respect_bit: float = None
 
     def set_nameunit(self, x_acct_name: AcctName):
-        self.acct_name = validate_titleunit(x_acct_name, self.bridge)
+        self.acct_name = validate_tagunit(x_acct_name, self.bridge)
 
 
 @dataclass
@@ -166,7 +166,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_label = x_membership.group_label
-        group_label_is_acct_name = is_titleunit(x_group_label, self.bridge)
+        group_label_is_acct_name = is_tagunit(x_group_label, self.bridge)
         if group_label_is_acct_name and self.acct_name != x_group_label:
             raise Bad_acct_nameMemberShipException(
                 f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_label}'."

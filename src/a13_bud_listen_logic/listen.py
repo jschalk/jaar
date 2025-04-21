@@ -2,7 +2,7 @@ from src.a02_finance_toolboxs.allot import allot_scale
 from src.a01_word_logic.road import (
     get_ancestor_roads,
     RoadUnit,
-    get_root_title_from_road,
+    get_root_tag_from_road,
     OwnerName,
 )
 from src.a05_item_logic.item import ItemUnit
@@ -94,7 +94,7 @@ def _create_mass_data(listener: BudUnit, x_road: RoadUnit) -> list:
     mass_data.add_to_mass_list = []
     mass_data.replace_mass_list = []
     ancestor_roads = get_ancestor_roads(x_road)
-    root_road = get_root_title_from_road(x_road)
+    root_road = get_root_tag_from_road(x_road)
     for ancestor_road in ancestor_roads:
         if ancestor_road != root_road:
             if listener.item_exists(ancestor_road):
@@ -185,10 +185,10 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
 def listen_to_agendas_create_init_job_from_guts(
     fisc_mstr_dir: str, listener_job: BudUnit
 ):
-    fisc_title = listener_job.fisc_title
+    fisc_tag = listener_job.fisc_tag
     for x_acctunit in get_ordered_debtors_roll(listener_job):
         speaker_id = x_acctunit.acct_name
-        speaker_gut = open_gut_file(fisc_mstr_dir, fisc_title, speaker_id)
+        speaker_gut = open_gut_file(fisc_mstr_dir, fisc_tag, speaker_id)
         if speaker_gut is None:
             speaker_gut = create_empty_bud_from_bud(listener_job, speaker_id)
         if speaker_gut:
@@ -196,10 +196,10 @@ def listen_to_agendas_create_init_job_from_guts(
 
 
 def listen_to_agendas_jobs_into_job(fisc_mstr_dir: str, listener_job: BudUnit):
-    fisc_title = listener_job.fisc_title
+    fisc_tag = listener_job.fisc_tag
     for x_acctunit in get_ordered_debtors_roll(listener_job):
         speaker_id = x_acctunit.acct_name
-        speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
+        speaker_job = open_job_file(fisc_mstr_dir, fisc_tag, speaker_id)
         if speaker_job is None:
             speaker_job = create_empty_bud_from_bud(listener_job, speaker_id)
         listen_to_speaker_agenda(listener_job, speaker_job)
@@ -231,19 +231,19 @@ def listen_to_facts_duty_plan(new_plan: BudUnit, healer_hubunit: HubUnit):
 
 
 def listen_to_facts_gut_job(fisc_mstr_dir: str, new_job: BudUnit):
-    fisc_title = new_job.fisc_title
-    old_job = open_job_file(fisc_mstr_dir, fisc_title, new_job.owner_name)
+    fisc_tag = new_job.fisc_tag
+    old_job = open_job_file(fisc_mstr_dir, fisc_tag, new_job.owner_name)
     for x_acctunit in get_ordered_debtors_roll(old_job):
         speaker_id = x_acctunit.acct_name
-        speaker_job = open_job_file(fisc_mstr_dir, fisc_title, speaker_id)
+        speaker_job = open_job_file(fisc_mstr_dir, fisc_tag, speaker_id)
         if speaker_job is not None:
             listen_to_speaker_fact(new_job, speaker_job)
 
 
 def listen_to_debtors_roll_jobs_into_job(
-    fisc_mstr_dir: str, fisc_title: str, owner_name: OwnerName
+    fisc_mstr_dir: str, fisc_tag: str, owner_name: OwnerName
 ) -> BudUnit:
-    old_job = open_job_file(fisc_mstr_dir, fisc_title, owner_name)
+    old_job = open_job_file(fisc_mstr_dir, fisc_tag, owner_name)
     new_job = create_listen_basis(old_job)
     if old_job.debtor_respect is None:
         return new_job
@@ -267,7 +267,7 @@ def listen_to_debtors_roll_duty_plan(
 def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
     gut = open_gut_file(
         listener_hubunit.fisc_mstr_dir,
-        listener_hubunit.fisc_title,
+        listener_hubunit.fisc_tag,
         listener_hubunit.owner_name,
     )
     new_job = create_listen_basis(gut)

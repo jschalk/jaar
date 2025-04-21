@@ -6,11 +6,11 @@ from src.a02_finance_toolboxs.deal import (
     bridge_str,
     celldepth_str,
     owner_name_str,
-    fisc_title_str,
+    fisc_tag_str,
 )
 from src.a07_calendar_logic.chrono import (
     c400_number_str,
-    timeline_title_str,
+    timeline_tag_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
 )
@@ -49,9 +49,9 @@ from src.a15_fisc_logic.fisc_config import (
     amount_str,
     cumlative_day_str,
     cumlative_minute_str,
-    hour_title_str,
-    month_title_str,
-    weekday_title_str,
+    hour_tag_str,
+    month_tag_str,
+    weekday_tag_str,
     weekday_order_str,
 )
 from os import getcwd as os_getcwd
@@ -105,7 +105,7 @@ def test_get_fisc_config_dict_ReturnsObj():
         penny_str(),
         respect_bit_str(),
         "bridge",
-        timeline_title_str(),
+        timeline_tag_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
     }
@@ -178,10 +178,10 @@ def test_get_fisc_args_dimen_mapping_ReturnsObj():
     x_hour = {fisc_timeline_hour_str()}
     assert x_fisc_args_dimen_mapping.get(cumlative_minute_str()) == x_hour
     assert x_fisc_args_dimen_mapping.get(fund_coin_str())
-    fisc_title_dimens = x_fisc_args_dimen_mapping.get(fisc_title_str())
-    assert fisc_timeline_hour_str() in fisc_title_dimens
-    assert fiscunit_str() in fisc_title_dimens
-    assert len(fisc_title_dimens) == 7
+    fisc_tag_dimens = x_fisc_args_dimen_mapping.get(fisc_tag_str())
+    assert fisc_timeline_hour_str() in fisc_tag_dimens
+    assert fiscunit_str() in fisc_tag_dimens
+    assert len(fisc_tag_dimens) == 7
     assert len(x_fisc_args_dimen_mapping) == 24
 
 
@@ -241,10 +241,10 @@ def test_get_fisc_args_set_ReturnsObj():
         c400_number_str(),
         cumlative_day_str(),
         cumlative_minute_str(),
-        hour_title_str(),
-        fisc_title_str(),
+        hour_tag_str(),
+        fisc_tag_str(),
         fund_coin_str(),
-        month_title_str(),
+        month_tag_str(),
         monthday_distortion_str(),
         "job_listen_rotations",
         penny_str(),
@@ -255,8 +255,8 @@ def test_get_fisc_args_set_ReturnsObj():
         deal_time_str(),
         tran_time_str(),
         offi_time_str(),
-        timeline_title_str(),
-        weekday_title_str(),
+        timeline_tag_str(),
+        weekday_tag_str(),
         weekday_order_str(),
         yr1_jan1_offset_str(),
     }

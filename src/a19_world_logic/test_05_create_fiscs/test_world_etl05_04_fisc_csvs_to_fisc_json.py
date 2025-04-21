@@ -1,11 +1,11 @@
 from src.a00_data_toolboxs.file_toolbox import open_file
 from src.a00_data_toolboxs.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_toolboxs.deal import bridge_str, owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import bridge_str, owner_name_str, fisc_tag_str
 from src.a07_calendar_logic.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
-    timeline_title_str,
+    timeline_tag_str,
     timeline_config_shop,
     timelineunit_shop,
 )
@@ -26,7 +26,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTitle(
+def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTag(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -41,7 +41,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFi
         create_fisc_tables(cursor)
 
         insert_staging_sqlstr = f"""
-INSERT INTO {fiscunit_agg_tablename} ({fisc_title_str()})
+INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()})
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """
@@ -65,8 +65,8 @@ VALUES ('{accord23_str}'), ('{accord45_str}')
     accord45_fisc = fiscunit_get_from_json(open_file(accord45_json_path))
     # assert accord23_fisc == fiscunit_shop(accord23_str)
     # assert accord45_fisc == fiscunit_shop(accord45_str)
-    assert accord23_fisc.fisc_title == accord23_str
-    assert accord45_fisc.fisc_title == accord45_str
+    assert accord23_fisc.fisc_tag == accord23_str
+    assert accord45_fisc.fisc_tag == accord45_str
 
 
 def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(
@@ -82,7 +82,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUn
     a45_c400_number = 88
     a45_yr1_jan1_offset = 501
     a45_monthday_distortion = 17
-    a45_timeline_title = "a45_timeline"
+    a45_timeline_tag = "a45_timeline"
     fizz_world = worldunit_shop("fizz", worlds_dir())
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     fiscunit_agg_tablename = f"{fiscunit_str()}_agg"
@@ -91,10 +91,10 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUn
         create_fisc_tables(cursor)
 
         insert_staging_sqlstr = f"""
-INSERT INTO {fiscunit_agg_tablename} ({fisc_title_str()},{timeline_title_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
+INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
 VALUES (
   '{accord45_str}'
-, '{a45_timeline_title}'
+, '{a45_timeline_tag}'
 , {a45_c400_number}
 , {a45_yr1_jan1_offset}
 , {a45_monthday_distortion}
@@ -123,7 +123,7 @@ VALUES (
     assert accord23_fisc == fiscunit_shop(accord23_str)
     expected_45_tl = timelineunit_shop(
         timeline_config_shop(
-            timeline_title=a45_timeline_title,
+            timeline_tag=a45_timeline_tag,
             c400_number=a45_c400_number,
             yr1_jan1_offset=a45_yr1_jan1_offset,
             monthday_distortion=a45_monthday_distortion,
@@ -132,12 +132,12 @@ VALUES (
     accord_45_timeline = accord45_fisc.timeline
     assert accord_45_timeline.c400_number == expected_45_tl.c400_number
     assert accord_45_timeline.monthday_distortion == expected_45_tl.monthday_distortion
-    assert accord_45_timeline.timeline_title == expected_45_tl.timeline_title
+    assert accord_45_timeline.timeline_tag == expected_45_tl.timeline_tag
     assert accord_45_timeline.yr1_jan1_offset == expected_45_tl.yr1_jan1_offset
     print(f"{accord_45_timeline=}")
     assert accord_45_timeline == expected_45_tl
     assert accord45_fisc == fiscunit_shop(
-        fisc_title=accord45_str,
+        fisc_tag=accord45_str,
         fund_coin=a45_fund_coin,
         penny=a45_penny,
         respect_bit=a45_respect_bit,

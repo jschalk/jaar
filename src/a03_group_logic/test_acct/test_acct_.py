@@ -54,7 +54,7 @@ def test_AcctUnit_set_nameunit_RaisesErrorIfParameterContains_bridge():
         acctunit_shop(acct_name=texas_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a TitleUnit. Cannot contain bridge: '{slash_str}'"
+        == f"'{texas_str}' needs to be a TagUnit. Cannot contain bridge: '{slash_str}'"
     )
 
 

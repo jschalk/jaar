@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_title": {
+        "fisc_tag": {
             "otx_key": true
         },
         "owner_name": {
@@ -15,7 +15,7 @@
         "road": {
             "otx_key": true
         },
-        "team_tag_ERASE": {
+        "team_title_ERASE": {
             "otx_key": true
         }
     },

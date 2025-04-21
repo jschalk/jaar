@@ -4,8 +4,8 @@
             "acct_name": {
                 "class_type": "NameUnit"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             },
             "owner_name": {
                 "class_type": "NameUnit"
@@ -26,8 +26,8 @@
             "deal_time": {
                 "class_type": "TimeLinePoint"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             },
             "owner_name": {
                 "class_type": "NameUnit"
@@ -48,13 +48,13 @@
             "cumlative_minute": {
                 "class_type": "int"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             }
         },
         "jvalues": {
-            "hour_title": {
-                "class_type": "TitleUnit"
+            "hour_tag": {
+                "class_type": "TagUnit"
             }
         },
         "static": "True"
@@ -64,37 +64,37 @@
             "cumlative_day": {
                 "class_type": "int"
             },
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             }
         },
         "jvalues": {
-            "month_title": {
-                "class_type": "TitleUnit"
+            "month_tag": {
+                "class_type": "TagUnit"
             }
         },
         "static": "True"
     },
     "fisc_timeline_weekday": {
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             },
             "weekday_order": {
                 "class_type": "int"
             }
         },
         "jvalues": {
-            "weekday_title": {
-                "class_type": "TitleUnit"
+            "weekday_tag": {
+                "class_type": "TagUnit"
             }
         },
         "static": "True"
     },
     "fisc_timeoffi": {
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             },
             "offi_time": {
                 "class_type": "TimeLinePoint"
@@ -105,8 +105,8 @@
     },
     "fiscunit": {
         "jkeys": {
-            "fisc_title": {
-                "class_type": "TitleUnit"
+            "fisc_tag": {
+                "class_type": "TagUnit"
             }
         },
         "jvalues": {
@@ -131,8 +131,8 @@
             "respect_bit": {
                 "class_type": "float"
             },
-            "timeline_title": {
-                "class_type": "TitleUnit"
+            "timeline_tag": {
+                "class_type": "TagUnit"
             },
             "yr1_jan1_offset": {
                 "class_type": "int"

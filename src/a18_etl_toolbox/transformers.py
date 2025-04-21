@@ -13,7 +13,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_row_count,
     save_to_split_csvs,
 )
-from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTitle
+from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens
@@ -110,7 +110,7 @@ class not_given_pidgin_dimen_Exception(Exception):
 MAPS_DIMENS = {
     "map_name": "NameUnit",
     "map_label": "LabelUnit",
-    "map_title": "TitleUnit",
+    "map_tag": "TagUnit",
     "map_road": "RoadUnit",
 }
 
@@ -129,12 +129,12 @@ class_typeS = {
         "otx_obj": "otx_label",
         "inx_obj": "inx_label",
     },
-    "TitleUnit": {
-        "stage": "title_staging",
-        "agg": "title_agg",
-        "csv_filename": "title.csv",
-        "otx_obj": "otx_title",
-        "inx_obj": "inx_title",
+    "TagUnit": {
+        "stage": "tag_staging",
+        "agg": "tag_agg",
+        "csv_filename": "tag.csv",
+        "otx_obj": "otx_tag",
+        "inx_obj": "inx_tag",
     },
     "RoadUnit": {
         "stage": "road_staging",
@@ -185,11 +185,11 @@ class MineToCartTransformer:
     def _group_mine_data(self):
         grouped_data = {}
         for ref in get_all_idea_dataframes(self.mine_dir):
-            df = self._read_and_tag_dataframe(ref)
+            df = self._read_and_title_dataframe(ref)
             grouped_data.setdefault(ref.idea_number, []).append(df)
         return grouped_data
 
-    def _read_and_tag_dataframe(self, ref):
+    def _read_and_title_dataframe(self, ref):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         df["file_dir"] = ref.file_dir
@@ -407,10 +407,8 @@ def etl_cart_agg_to_pidgin_label_staging(
     cart_agg_single_to_pidgin_staging("map_label", legitimate_events, cart_dir)
 
 
-def etl_cart_agg_to_pidgin_title_staging(
-    legitimate_events: set[EventInt], cart_dir: str
-):
-    cart_agg_single_to_pidgin_staging("map_title", legitimate_events, cart_dir)
+def etl_cart_agg_to_pidgin_tag_staging(legitimate_events: set[EventInt], cart_dir: str):
+    cart_agg_single_to_pidgin_staging("map_tag", legitimate_events, cart_dir)
 
 
 def etl_cart_agg_to_pidgin_road_staging(
@@ -422,7 +420,7 @@ def etl_cart_agg_to_pidgin_road_staging(
 def etl_cart_agg_to_pidgin_staging(legitimate_events: set[EventInt], cart_dir: str):
     etl_cart_agg_to_pidgin_name_staging(legitimate_events, cart_dir)
     etl_cart_agg_to_pidgin_label_staging(legitimate_events, cart_dir)
-    etl_cart_agg_to_pidgin_title_staging(legitimate_events, cart_dir)
+    etl_cart_agg_to_pidgin_tag_staging(legitimate_events, cart_dir)
     etl_cart_agg_to_pidgin_road_staging(legitimate_events, cart_dir)
 
 
@@ -493,8 +491,8 @@ class CartAggToStagingTransformer:
             return x_row["inx_name"]
         elif self.class_type == "LabelUnit" and "inx_label" not in missing_col:
             return x_row["inx_label"]
-        elif self.class_type == "TitleUnit" and "inx_title" not in missing_col:
-            return x_row["inx_title"]
+        elif self.class_type == "TagUnit" and "inx_tag" not in missing_col:
+            return x_row["inx_tag"]
         elif self.class_type == "RoadUnit" and "inx_road" not in missing_col:
             return x_row["inx_road"]
         return None
@@ -512,8 +510,8 @@ def etl_pidgin_road_staging_to_road_agg(cart_dir: str):
     etl_pidgin_single_staging_to_agg(cart_dir, "map_road")
 
 
-def etl_pidgin_title_staging_to_title_agg(cart_dir: str):
-    etl_pidgin_single_staging_to_agg(cart_dir, "map_title")
+def etl_pidgin_tag_staging_to_tag_agg(cart_dir: str):
+    etl_pidgin_single_staging_to_agg(cart_dir, "map_tag")
 
 
 def etl_pidgin_single_staging_to_agg(cart_dir: str, map_dimen: str):
@@ -525,7 +523,7 @@ def etl_cart_pidgin_staging_to_agg(cart_dir):
     etl_pidgin_name_staging_to_name_agg(cart_dir)
     etl_pidgin_label_staging_to_label_agg(cart_dir)
     etl_pidgin_road_staging_to_road_agg(cart_dir)
-    etl_pidgin_title_staging_to_title_agg(cart_dir)
+    etl_pidgin_tag_staging_to_tag_agg(cart_dir)
 
 
 class PidginStagingToAggTransformer:
@@ -877,21 +875,21 @@ def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_fisc_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
-    empty_ote1_csv_str = """fisc_title,owner_name,event_int,deal_time,error_message
+    empty_ote1_csv_str = """fisc_tag,owner_name,event_int,deal_time,error_message
 """
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_tag)
         save_file(ote1_csv_path, None, empty_ote1_csv_str)
 
-    save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_title"], fiscs_dir)
+    save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_tag"], fiscs_dir)
 
 
 def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
     idea_types = get_idea_sqlite_types()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_tag)
         csv_arrays = open_csv_with_types(csv_path, idea_types)
         x_dict = {}
         header_row = csv_arrays.pop(0)
@@ -903,49 +901,49 @@ def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
             owner_dict[int(deal_time)] = event_int
-        json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_title)
+        json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_tag)
         save_json(json_path, None, x_dict)
 
 
 def etl_create_deals_root_cells(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_dir = create_path(fiscs_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        fisc_dir = create_path(fiscs_dir, fisc_tag)
         ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
-            x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
+            x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_tag)
             x_fiscunit.create_deals_root_cells(ote1_dict)
 
 
 def etl_create_fisc_cell_trees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_tag)
 
 
 def etl_set_cell_trees_found_facts(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        set_cell_trees_found_facts(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        set_cell_trees_found_facts(fisc_mstr_dir, fisc_tag)
 
 
 def etl_set_cell_trees_decrees(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        set_cell_trees_decrees(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        set_cell_trees_decrees(fisc_mstr_dir, fisc_tag)
 
 
 def etl_set_cell_tree_cell_mandates(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        set_cell_tree_cell_mandates(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        set_cell_tree_cell_mandates(fisc_mstr_dir, fisc_tag)
 
 
 def etl_create_deal_mandate_ledgers(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        create_deal_mandate_ledgers(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        create_deal_mandate_ledgers(fisc_mstr_dir, fisc_tag)
 
 
 def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
@@ -969,7 +967,7 @@ def etl_bud_tables_to_event_bud_csvs(
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=bud_table,
-                key_columns=["fisc_title", "owner_name", "event_int"],
+                key_columns=["fisc_tag", "owner_name", "event_int"],
                 output_dir=fiscs_dir,
                 col1_prefix="owners",
                 col2_prefix="events",
@@ -994,19 +992,19 @@ def etl_fisc_agg_tables_to_fisc_csvs(
 def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
     fisc_filename = "fisc.json"
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    insert_staging_sqlstr = """SELECT fisc_title FROM fiscunit_agg;"""
+    insert_staging_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
     cursor.execute(insert_staging_sqlstr)
-    for fisc_title_set in cursor.fetchall():
-        fisc_title = fisc_title_set[0]
-        fisc_dict = get_fisc_dict_from_db(cursor, fisc_title)
-        fiscunit_dir = create_path(fiscs_dir, fisc_title)
+    for fisc_tag_set in cursor.fetchall():
+        fisc_tag = fisc_tag_set[0]
+        fisc_dict = get_fisc_dict_from_db(cursor, fisc_tag)
+        fiscunit_dir = create_path(fiscs_dir, fisc_tag)
         save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
 
 def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_tag)
         owners_path = create_path(fisc_path, "owners")
         for owner_name in get_level1_dirs(owners_path):
             owner_path = create_path(owners_path, owner_name)
@@ -1016,7 +1014,7 @@ def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
                 event_pack = packunit_shop(
                     owner_name=owner_name,
                     face_name=None,
-                    fisc_title=fisc_title,
+                    fisc_tag=fisc_tag,
                     event_int=event_int,
                 )
                 add_budatoms_from_csv(event_pack, event_path)
@@ -1041,7 +1039,7 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "fisc_title",
+                        "fisc_tag",
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
@@ -1056,7 +1054,7 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "fisc_title",
+                        "fisc_tag",
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
@@ -1065,8 +1063,8 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
 
 def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_tag)
         owners_dir = create_path(fisc_path, "owners")
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)
@@ -1074,13 +1072,13 @@ def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
             prev_event_int = None
             for event_int in get_level1_dirs(events_dir):
                 prev_bud = _get_prev_event_int_budunit(
-                    fisc_mstr_dir, fisc_title, owner_name, prev_event_int
+                    fisc_mstr_dir, fisc_tag, owner_name, prev_event_int
                 )
                 budevent_path = create_budevent_path(
-                    fisc_mstr_dir, fisc_title, owner_name, event_int
+                    fisc_mstr_dir, fisc_tag, owner_name, event_int
                 )
                 event_dir = create_owner_event_dir_path(
-                    fisc_mstr_dir, fisc_title, owner_name, event_int
+                    fisc_mstr_dir, fisc_tag, owner_name, event_int
                 )
                 pack_path = create_path(event_dir, "all_pack.json")
                 event_pack = get_packunit_from_json(open_file(pack_path))
@@ -1094,32 +1092,32 @@ def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
 
 
 def _get_prev_event_int_budunit(
-    fisc_mstr_dir, fisc_title, owner_name, prev_event_int
+    fisc_mstr_dir, fisc_tag, owner_name, prev_event_int
 ) -> BudUnit:
     if prev_event_int is None:
-        return budunit_shop(owner_name, fisc_title)
+        return budunit_shop(owner_name, fisc_tag)
     prev_budevent_path = create_budevent_path(
-        fisc_mstr_dir, fisc_title, owner_name, prev_event_int
+        fisc_mstr_dir, fisc_tag, owner_name, prev_event_int
     )
     return open_bud_file(prev_budevent_path)
 
 
 def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        owner_events = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        owner_events = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_tag)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
             max_budevent_path = create_budevent_path(
-                fisc_mstr_dir, fisc_title, owner_name, max_event_int
+                fisc_mstr_dir, fisc_tag, owner_name, max_event_int
             )
             max_event_bud_json = open_file(max_budevent_path)
-            gut_path = create_gut_path(fisc_mstr_dir, fisc_title, owner_name)
+            gut_path = create_gut_path(fisc_mstr_dir, fisc_tag, owner_name)
             save_file(gut_path, None, max_event_bud_json)
 
 
 def etl_fisc_gut_to_fisc_job(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_title in get_level1_dirs(fiscs_dir):
-        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_title)
+    for fisc_tag in get_level1_dirs(fiscs_dir):
+        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_tag)
         x_fiscunit.generate_all_jobs()

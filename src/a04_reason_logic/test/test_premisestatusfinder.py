@@ -285,10 +285,10 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         sought_status_str="Task Status",
         premise_divisor=pd,
     )
-    fig_title = "When Fact.range < Premise_divisor: Premise.active Checks."
+    fig_tag = "When Fact.range < Premise_divisor: Premise.active Checks."
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_title, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_tag, title_font_size=20)
     return fig
 
 

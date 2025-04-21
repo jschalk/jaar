@@ -245,8 +245,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud = get_budunit_with_4_levels()
     casa_str = "casa"
     casa_road = a4_bud.make_l1_road(casa_str)
-    week_item_title = "weekdays"
-    week_road = a4_bud.make_l1_road(week_item_title)
+    week_item_tag = "weekdays"
+    week_road = a4_bud.make_l1_road(week_item_tag)
     wed_str = "Wednesday"
     wed_road = a4_bud.make_road(week_road, wed_str)
 
@@ -427,7 +427,7 @@ def test_BudUnit_ReasonUnits_set_premiseItemWithBeginCloseSetsPremiseOpen_Nigh()
     time_road = sue_bud.make_l1_road(time)
     rus_war = "rus_war"
     rus_war_road = sue_bud.make_road(time_road, rus_war)
-    sue_bud.set_item(itemunit_shop(time, begin=100, close=2000), sue_bud.fisc_title)
+    sue_bud.set_item(itemunit_shop(time, begin=100, close=2000), sue_bud.fisc_tag)
     sue_bud.set_item(itemunit_shop(rus_war, begin=22, close=34), time_road)
 
     # WHEN
@@ -515,7 +515,7 @@ def test_BudUnit_edit_item_attr_budIsAbleToEdit_base_item_active_requisite_AnyIt
 
     run_str = "run to casa"
     run_road = sue_bud.make_l1_road(run_str)
-    sue_bud.set_item(itemunit_shop(run_str), sue_bud.fisc_title)
+    sue_bud.set_item(itemunit_shop(run_str), sue_bud.fisc_tag)
     sue_bud.settle_bud()  # set tree metrics
     run_item = sue_bud.get_item_obj(run_road)
     assert len(run_item.reasonunits) == 0
@@ -595,7 +595,7 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     # 5.2. item(...,casa).active = False
     run_str = "run to casa"
     run_road = sue_bud.make_l1_road(run_str)
-    sue_bud.set_item(itemunit_shop(run_str), sue_bud.fisc_title)
+    sue_bud.set_item(itemunit_shop(run_str), sue_bud.fisc_tag)
     sue_bud.edit_item_attr(
         road=run_road,
         reason_base=casa_road,

@@ -8,26 +8,26 @@ from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
-    titlemap_shop,
+    tagmap_shop,
     roadmap_shop,
     LabelMap,
     NameMap,
-    TitleMap,
+    TagMap,
     RoadMap,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from pandas import DataFrame
 
 
-def get_clean_titlemap() -> TitleMap:
+def get_clean_tagmap() -> TagMap:
     clean_otx = "clean"
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    titlemap = titlemap_shop(face_name="Sue")
-    titlemap.set_otx2inx(clean_otx, clean_inx)
-    titlemap.set_otx2inx(casa_otx, casa_inx)
-    return titlemap
+    tagmap = tagmap_shop(face_name="Sue")
+    tagmap.set_otx2inx(clean_otx, clean_inx)
+    tagmap.set_otx2inx(casa_otx, casa_inx)
+    return tagmap
 
 
 def get_clean_roadmap() -> RoadMap:
@@ -38,7 +38,7 @@ def get_clean_roadmap() -> RoadMap:
     bridge = default_bridge_if_None()
     clean_otx_road = f"{otx_accord45_str}{bridge}{clean_otx_str}"
     road_mapunit = roadmap_shop(face_name="Sue")
-    road_mapunit.set_title(clean_otx_str, clean_inx_str)
+    road_mapunit.set_tag(clean_otx_str, clean_inx_str)
     road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
     return road_mapunit
@@ -97,10 +97,10 @@ def get_suita_namemap() -> NameMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_bridge_if_None()}"
 #     casa_inx = "casa"
-#     titlemap = mapunit_shop(type_TitleUnit_str(), face_name="Sue")
-#     titlemap.set_otx2inx(clean_str, clean_inx)
-#     titlemap.set_otx2inx(casa_otx, casa_inx)
-#     return titlemap
+#     tagmap = mapunit_shop(type_TagUnit_str(), face_name="Sue")
+#     tagmap.set_otx2inx(clean_str, clean_inx)
+#     tagmap.set_otx2inx(casa_otx, casa_inx)
+#     return tagmap
 
 
 def get_slash_roadmap() -> RoadMap:
@@ -119,7 +119,7 @@ def get_slash_roadmap() -> RoadMap:
         unknown_word=x_unknown_word,
         face_name="Sue",
     )
-    road_mapunit.set_title(clean_otx_str, clean_inx_str)
+    road_mapunit.set_tag(clean_otx_str, clean_inx_str)
     road_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     road_mapunit.reveal_inx(clean_otx_road)
     return road_mapunit
@@ -171,9 +171,9 @@ def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
     sue_pidginunit.set_namemap(get_suita_namemap())
     sue_pidginunit.set_labelmap(get_swim_labelmap())
-    sue_pidginunit.set_titlemap(get_clean_titlemap())
+    sue_pidginunit.set_tagmap(get_clean_tagmap())
     sue_pidginunit.set_roadmap(get_clean_roadmap())
-    sue_pidginunit.roadmap.titlemap = get_clean_titlemap()
+    sue_pidginunit.roadmap.tagmap = get_clean_tagmap()
     return sue_pidginunit
 
 
@@ -227,7 +227,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_title() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_tag() -> PidginUnit:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     casa_otx_str = "casa"
@@ -243,9 +243,9 @@ def get_casa_maison_pidginunit_set_by_title() -> PidginUnit:
     sweep_inx_road = create_road(clean_inx_road, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_title(otx_accord45_str, inx_accord87_str)
-    sue_pidginunit.set_title(casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_title(clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_tag(otx_accord45_str, inx_accord87_str)
+    sue_pidginunit.set_tag(casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_tag(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -309,7 +309,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_title_dt() -> DataFrame:
+def get_casa_maison_tag_dt() -> DataFrame:
     inx_accord87_str = "accord87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
@@ -329,8 +329,8 @@ def get_casa_maison_title_dt() -> DataFrame:
             "otx_bridge",
             "inx_bridge",
             "unknown_word",
-            "otx_title",
-            "inx_title",
+            "otx_tag",
+            "inx_tag",
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
@@ -361,7 +361,7 @@ def get_invalid_labelmap() -> LabelMap:
     return x_labelmap
 
 
-def get_invalid_titlemap() -> RoadMap:
+def get_invalid_tagmap() -> RoadMap:
     clean_str = "clean"
     clean_inx = "propre"
     casa_otx = f"casa{default_bridge_if_None()}"
@@ -372,7 +372,7 @@ def get_invalid_titlemap() -> RoadMap:
     return roadmap
 
 
-def get_slash_titlemap() -> TitleMap:
+def get_slash_tagmap() -> TagMap:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     clean_otx_str = "clean"
@@ -380,17 +380,17 @@ def get_slash_titlemap() -> TitleMap:
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
-    x_titlemap = titlemap_shop(
+    x_tagmap = tagmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_word=x_unknown_word,
         face_name="Sue",
         event_int=7,
     )
-    x_titlemap.set_otx2inx(otx_accord45_str, inx_accord87_str)
-    x_titlemap.set_otx2inx(clean_otx_str, clean_inx_str)
-    x_titlemap.reveal_inx("running")
-    return x_titlemap
+    x_tagmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_tagmap.set_otx2inx(clean_otx_str, clean_inx_str)
+    x_tagmap.reveal_inx("running")
+    return x_tagmap
 
 
 def get_slash_roadmap() -> RoadMap:
@@ -409,9 +409,9 @@ def get_slash_roadmap() -> RoadMap:
         unknown_word=x_unknown_word,
         face_name="Sue",
         event_int=7,
-        x_titlemap=get_slash_titlemap(),
+        x_tagmap=get_slash_tagmap(),
     )
-    x_roadmap.set_title(clean_otx_str, clean_inx_str)
+    x_roadmap.set_tag(clean_otx_str, clean_inx_str)
     x_roadmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
     x_roadmap.reveal_inx(clean_otx_road)
     return x_roadmap

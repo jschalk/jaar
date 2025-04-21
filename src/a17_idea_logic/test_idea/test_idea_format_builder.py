@@ -1,9 +1,9 @@
 from src.a00_data_toolboxs.file_toolbox import save_json
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_title_str
+from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a06_bud_logic.bud_tool import bud_itemunit_str
 from src.a08_bud_atom_logic.atom_config import (
     parent_road_str,
-    item_title_str,
+    item_tag_str,
     gogo_want_str,
     get_atom_config_args,
 )
@@ -21,7 +21,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get("idea_category") == "bud":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {fisc_title_str(), owner_name_str()}
+            attributes_set = {fisc_tag_str(), owner_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -44,10 +44,10 @@ def test_create_dimens_idea_format_dict_ReturnObj(rebuild_bool):
     assert bud_itemunit_dict.get(dimens_str()) == [bud_itemunit_str()]
     assert bud_itemunit_dict.get(attributes_str())
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
-    assert fisc_title_str() in bud_itemunit_attributes
+    assert fisc_tag_str() in bud_itemunit_attributes
     assert owner_name_str() in bud_itemunit_attributes
     assert parent_road_str() in bud_itemunit_attributes
-    assert item_title_str() in bud_itemunit_attributes
+    assert item_tag_str() in bud_itemunit_attributes
     assert gogo_want_str() in bud_itemunit_attributes
 
     rebuild_format_jsons(rebuild_bool)

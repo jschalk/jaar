@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.dict_toolbox import create_csv
 from src.a02_finance_toolboxs.allot import allot_scale
 from src.a02_finance_toolboxs.finance_config import FundNum, get_net, RespectNum
-from src.a01_word_logic.road import AcctName, FiscTitle, RoadUnit
+from src.a01_word_logic.road import AcctName, FiscTag, RoadUnit
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, AwardLink
 from src.a05_item_logic.item import ItemUnit
@@ -83,11 +83,11 @@ def bud_itemunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_item_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_awardee_tag = jkeys.get("awardee_tag")
+    x_awardee_title = jkeys.get("awardee_title")
     x_road = jkeys.get("road")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).awardlink_exists(x_awardee_tag)
+        and x_bud.get_item_obj(x_road).awardlink_exists(x_awardee_title)
     )
 
 
@@ -111,11 +111,11 @@ def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_team_tag = jkeys.get("team_tag")
+    x_team_title = jkeys.get("team_title")
     x_road = jkeys.get("road")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_tag)
+        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_title)
     )
 
 
@@ -178,8 +178,8 @@ def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
 
 def bud_item_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
     x_road = jkeys.get("road")
-    x_awardee_tag = jkeys.get("awardee_tag")
-    return x_bud.get_item_obj(x_road).get_awardlink(x_awardee_tag)
+    x_awardee_title = jkeys.get("awardee_title")
+    return x_bud.get_item_obj(x_road).get_awardlink(x_awardee_title)
 
 
 def bud_item_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:

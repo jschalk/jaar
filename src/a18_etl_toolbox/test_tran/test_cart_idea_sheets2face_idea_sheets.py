@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a02_finance_toolboxs.deal import fisc_title_str
+from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_title_str
+from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a16_pidgin_logic.pidgin_config import (
     inx_bridge_str,
     inx_name_str,
@@ -36,8 +36,8 @@ def test_etl_cart_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario0_Single
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -89,8 +89,8 @@ def test_etl_cart_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multpl
     idea_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -146,8 +146,8 @@ def test_etl_cart_ideas_to_otz_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded
     br00003_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_title_str(),
-        hour_title_str(),
+        fisc_tag_str(),
+        hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"

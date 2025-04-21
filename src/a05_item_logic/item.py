@@ -7,14 +7,14 @@ from src.a00_data_toolboxs.dict_toolbox import (
 )
 from src.a01_word_logic.road import (
     RoadUnit,
-    TitleUnit,
+    TagUnit,
     is_sub_road,
-    get_default_fisc_title as root_title,
+    get_default_fisc_tag as root_tag,
     all_roadunits_between,
     create_road as road_create_road,
     default_bridge_if_None,
     replace_bridge,
-    FiscTitle,
+    FiscTag,
     AcctName,
     GroupLabel,
     RoadUnit,
@@ -84,7 +84,7 @@ class ItemGetDescendantsException(Exception):
     pass
 
 
-class Item_root_TitleNotEmptyException(Exception):
+class Item_root_TagNotEmptyException(Exception):
     pass
 
 
@@ -208,12 +208,12 @@ def itemattrholder_shop(
 
 @dataclass
 class ItemUnit:
-    item_title: TitleUnit = None
+    item_tag: TagUnit = None
     mass: int = None
     parent_road: RoadUnit = None
     root: bool = None
     _kids: dict[RoadUnit,] = None
-    fisc_title: FiscTitle = None
+    fisc_tag: FiscTag = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupLabel, AwardLink] = None
     reasonunits: dict[RoadUnit, ReasonUnit] = None
@@ -357,7 +357,7 @@ class ItemUnit:
 
     def get_kids_in_range(
         self, x_gogo: float = None, x_stop: float = None
-    ) -> dict[TitleUnit,]:
+    ) -> dict[TagUnit,]:
         if x_gogo is None and x_stop is None:
             x_gogo = self.gogo_want
             x_gogo = self.stop_want
@@ -374,19 +374,17 @@ class ItemUnit:
             both_in_range = x_gogo <= x_item._gogo_calc and x_stop >= x_item._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_dict[x_item.item_title] = x_item
+                x_dict[x_item.item_tag] = x_item
         return x_dict
 
-    def get_obj_key(self) -> TitleUnit:
-        return self.item_title
+    def get_obj_key(self) -> TagUnit:
+        return self.item_tag
 
     def get_road(self) -> RoadUnit:
         if self.parent_road in (None, ""):
-            return road_create_road(self.item_title, bridge=self.bridge)
+            return road_create_road(self.item_tag, bridge=self.bridge)
         else:
-            return road_create_road(
-                self.parent_road, self.item_title, bridge=self.bridge
-            )
+            return road_create_road(self.parent_road, self.item_tag, bridge=self.bridge)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -432,29 +430,29 @@ class ItemUnit:
         self._awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
-                awardee_tag=ib.awardee_tag,
+                awardee_title=ib.awardee_title,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.awardee_tag] = awardheir
+            self._awardheirs[awardheir.awardee_title] = awardheir
 
         for ib in self.awardlinks.values():
             awardheir = awardheir_shop(
-                awardee_tag=ib.awardee_tag,
+                awardee_title=ib.awardee_title,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.awardee_tag] = awardheir
+            self._awardheirs[awardheir.awardee_title] = awardheir
 
     def set_kidless_awardlines(self):
         # get awardlines from self
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
-                awardee_tag=bh.awardee_tag,
+                awardee_title=bh.awardee_title,
                 _fund_give=bh._fund_give,
                 _fund_take=bh._fund_take,
             )
-            self._awardlines[x_awardline.awardee_tag] = x_awardline
+            self._awardlines[x_awardline.awardee_title] = x_awardline
 
     def set_awardlines(self, child_awardlines: dict[GroupLabel, AwardLine] = None):
         if child_awardlines is None:
@@ -462,48 +460,48 @@ class ItemUnit:
 
         # get awardlines from child
         for bl in child_awardlines.values():
-            if self._awardlines.get(bl.awardee_tag) is None:
-                self._awardlines[bl.awardee_tag] = awardline_shop(
-                    awardee_tag=bl.awardee_tag,
+            if self._awardlines.get(bl.awardee_title) is None:
+                self._awardlines[bl.awardee_title] = awardline_shop(
+                    awardee_title=bl.awardee_title,
                     _fund_give=0,
                     _fund_take=0,
                 )
 
-            self._awardlines[bl.awardee_tag].add_fund_give_take(
+            self._awardlines[bl.awardee_title].add_fund_give_take(
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
     def set_awardheirs_fund_give_fund_take(self):
         give_ledger = {}
         take_ledger = {}
-        for x_awardee_tag, x_awardheir in self._awardheirs.items():
-            give_ledger[x_awardee_tag] = x_awardheir.give_force
-            take_ledger[x_awardee_tag] = x_awardheir.take_force
+        for x_awardee_title, x_awardheir in self._awardheirs.items():
+            give_ledger[x_awardee_title] = x_awardheir.give_force
+            take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
         give_allot = allot_scale(give_ledger, x_fund_share, self.fund_coin)
         take_allot = allot_scale(take_ledger, x_fund_share, self.fund_coin)
-        for x_awardee_tag, x_awardheir in self._awardheirs.items():
-            x_awardheir._fund_give = give_allot.get(x_awardee_tag)
-            x_awardheir._fund_take = take_allot.get(x_awardee_tag)
+        for x_awardee_title, x_awardheir in self._awardheirs.items():
+            x_awardheir._fund_give = give_allot.get(x_awardee_title)
+            x_awardheir._fund_take = take_allot.get(x_awardee_title)
 
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_item_title(self, item_title: str):
+    def set_item_tag(self, item_tag: str):
         if (
             self.root
-            and item_title is not None
-            and item_title != self.fisc_title
-            and self.fisc_title is not None
+            and item_tag is not None
+            and item_tag != self.fisc_tag
+            and self.fisc_tag is not None
         ):
-            raise Item_root_TitleNotEmptyException(
-                f"Cannot set itemroot to string different than '{self.fisc_title}'"
+            raise Item_root_TagNotEmptyException(
+                f"Cannot set itemroot to string different than '{self.fisc_tag}'"
             )
-        elif self.root and self.fisc_title is None:
-            self.item_title = root_title()
-        # elif item_title is not None:
+        elif self.root and self.fisc_tag is None:
+            self.item_tag = root_tag()
+        # elif item_tag is not None:
         else:
-            self.item_title = item_title
+            self.item_tag = item_tag
 
     def set_bridge(self, new_bridge: str):
         old_bridge = deepcopy(self.bridge)
@@ -603,7 +601,7 @@ class ItemUnit:
         if item_attr.awardlink is not None:
             self.set_awardlink(awardlink=item_attr.awardlink)
         if item_attr.awardlink_del is not None:
-            self.del_awardlink(awardee_tag=item_attr.awardlink_del)
+            self.del_awardlink(awardee_title=item_attr.awardlink_del)
         if item_attr.is_expanded is not None:
             self._is_expanded = item_attr.is_expanded
         if item_attr.pledge is not None:
@@ -710,22 +708,22 @@ class ItemUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, item_kid):
-        self._kids[item_kid.item_title] = item_kid
+        self._kids[item_kid.item_tag] = item_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, item_kid_item_title: TitleUnit, if_missing_create=False):
+    def get_kid(self, item_kid_item_tag: TagUnit, if_missing_create=False):
         if if_missing_create is False:
-            return self._kids.get(item_kid_item_title)
+            return self._kids.get(item_kid_item_tag)
         try:
-            return self._kids[item_kid_item_title]
+            return self._kids[item_kid_item_tag]
         except Exception:
             KeyError
-            self.add_kid(itemunit_shop(item_kid_item_title))
-            return_item = self._kids.get(item_kid_item_title)
+            self.add_kid(itemunit_shop(item_kid_item_tag))
+            return_item = self._kids.get(item_kid_item_tag)
         return return_item
 
-    def del_kid(self, item_kid_item_title: TitleUnit):
-        self._kids.pop(item_kid_item_title)
+    def del_kid(self, item_kid_item_tag: TagUnit):
+        self._kids.pop(item_kid_item_tag)
 
     def clear_kids(self):
         self._kids = {}
@@ -734,19 +732,19 @@ class ItemUnit:
         return sum(x_kid.mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
-        self.awardlinks[awardlink.awardee_tag] = awardlink
+        self.awardlinks[awardlink.awardee_title] = awardlink
 
-    def get_awardlink(self, awardee_tag: GroupLabel) -> AwardLink:
-        return self.awardlinks.get(awardee_tag)
+    def get_awardlink(self, awardee_title: GroupLabel) -> AwardLink:
+        return self.awardlinks.get(awardee_title)
 
-    def del_awardlink(self, awardee_tag: GroupLabel):
+    def del_awardlink(self, awardee_title: GroupLabel):
         try:
-            self.awardlinks.pop(awardee_tag)
+            self.awardlinks.pop(awardee_title)
         except KeyError as e:
-            raise (f"Cannot delete awardlink '{awardee_tag}'.") from e
+            raise (f"Cannot delete awardlink '{awardee_title}'.") from e
 
-    def awardlink_exists(self, x_awardee_tag: GroupLabel) -> bool:
-        return self.awardlinks.get(x_awardee_tag) != None
+    def awardlink_exists(self, x_awardee_title: GroupLabel) -> bool:
+        return self.awardlinks.get(x_awardee_title) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.bridge = self.bridge
@@ -873,8 +871,8 @@ class ItemUnit:
     def get_awardlinks_dict(self) -> dict[GroupLabel, dict]:
         x_awardlinks = self.awardlinks.items()
         return {
-            x_awardee_tag: awardlink.get_dict()
-            for x_awardee_tag, awardlink in x_awardlinks
+            x_awardee_title: awardlink.get_dict()
+            for x_awardee_title, awardlink in x_awardlinks
         }
 
     def is_kidless(self) -> bool:
@@ -889,8 +887,8 @@ class ItemUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
-        if self.item_title is not None:
-            x_dict["item_title"] = self.item_title
+        if self.item_tag is not None:
+            x_dict["item_tag"] = self.item_tag
         if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
@@ -965,7 +963,7 @@ class ItemUnit:
 
 
 def itemunit_shop(
-    item_title: TitleUnit = None,
+    item_tag: TagUnit = None,
     _uid: int = None,  # Calculated field?
     parent_road: RoadUnit = None,
     _kids: dict = None,
@@ -991,7 +989,7 @@ def itemunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     root: bool = None,
-    fisc_title: FiscTitle = None,
+    fisc_tag: FiscTag = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -1009,11 +1007,11 @@ def itemunit_shop(
     bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ItemUnit:
-    fisc_title = root_title() if fisc_title is None else fisc_title
+    fisc_tag = root_tag() if fisc_tag is None else fisc_tag
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_itemkid = ItemUnit(
-        item_title=None,
+        item_tag=None,
         _uid=_uid,
         parent_road=parent_road,
         _kids=get_empty_dict_if_None(_kids),
@@ -1040,7 +1038,7 @@ def itemunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         root=get_False_if_None(root),
-        fisc_title=fisc_title,
+        fisc_tag=fisc_tag,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1058,9 +1056,9 @@ def itemunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_itemkid.root:
-        x_itemkid.set_item_title(item_title=fisc_title)
+        x_itemkid.set_item_tag(item_tag=fisc_tag)
     else:
-        x_itemkid.set_item_title(item_title=item_title)
+        x_itemkid.set_item_tag(item_tag=item_tag)
     x_itemkid.set_teamunit_empty_if_None()
     x_itemkid.set_originunit_empty_if_None()
     return x_itemkid

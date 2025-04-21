@@ -59,8 +59,8 @@ def type_RoadUnit_str() -> str:
     return "RoadUnit"
 
 
-def type_TitleUnit_str() -> str:
-    return "TitleUnit"
+def type_TagUnit_str() -> str:
+    return "TagUnit"
 
 
 def nullable_str() -> str:
@@ -123,8 +123,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_tag_str() -> str:
-    return "awardee_tag"
+def awardee_title_str() -> str:
+    return "awardee_title"
 
 
 def give_force_str() -> str:
@@ -139,8 +139,8 @@ def group_label_str() -> str:
     return "group_label"
 
 
-def team_tag_str() -> str:
-    return "team_tag"
+def team_title_str() -> str:
+    return "team_title"
 
 
 def healer_name_str() -> str:
@@ -175,8 +175,8 @@ def parent_road_str() -> str:
     return "parent_road"
 
 
-def item_title_str() -> str:
-    return "item_title"
+def item_tag_str() -> str:
+    return "item_tag"
 
 
 def mass_str() -> str:
@@ -285,7 +285,7 @@ def get_allowed_class_types() -> set[str]:
         "float",
         "LabelUnit",
         "int",
-        "TitleUnit",
+        "TagUnit",
         "RoadUnit",
         "TimeLinePoint",
     }
@@ -295,7 +295,7 @@ def get_atom_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "NameUnit",
         "addin": "float",
-        "awardee_tag": "LabelUnit",
+        "awardee_title": "LabelUnit",
         "base": "RoadUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -316,7 +316,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_label": "LabelUnit",
         "healer_name": "NameUnit",
-        "item_title": "TitleUnit",
+        "item_tag": "TagUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "morph": "bool",
@@ -334,7 +334,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_tag": "LabelUnit",
+        "team_title": "LabelUnit",
     }
 
 
@@ -475,16 +475,16 @@ def get_bud_dimens() -> set:
 def get_all_bud_dimen_keys() -> set:
     return {
         "acct_name",
-        "awardee_tag",
+        "awardee_title",
         "base",
         "group_label",
         "healer_name",
-        "item_title",
+        "item_tag",
         "need",
         "owner_name",
         "parent_road",
         "road",
-        "team_tag",
+        "team_title",
     }
 
 
@@ -495,16 +495,16 @@ def get_delete_key_name(key: str) -> str:
 def get_all_bud_dimen_delete_keys() -> set:
     return {
         "acct_name_ERASE",
-        "awardee_tag_ERASE",
+        "awardee_title_ERASE",
         "base_ERASE",
         "group_label_ERASE",
         "healer_name_ERASE",
-        "item_title_ERASE",
+        "item_tag_ERASE",
         "need_ERASE",
         "owner_name_ERASE",
         "parent_road_ERASE",
         "road_ERASE",
-        "team_tag_ERASE",
+        "team_title_ERASE",
     }
 
 

@@ -25,7 +25,7 @@ def test_FiscUnit_get_journal_db_path_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = FiscUnit(
-        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+        fisc_tag=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
     )
 
     # WHEN
@@ -44,7 +44,7 @@ def test_FiscUnit_create_journal_db_CreatesDBIfDoesNotExist(
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+        fisc_tag=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
     )
     assert os_path_exists(accord_fisc.get_journal_db_path())
     delete_dir(accord_fisc.get_journal_db_path())
@@ -63,7 +63,7 @@ def test_FiscUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        fisc_title=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+        fisc_tag=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
     )
     delete_dir(dir=accord_fisc.get_journal_db_path())  # clear out any treasury.db file
     accord_fisc._create_journal_db()
@@ -91,7 +91,7 @@ def test_FiscUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        fisc_title=accord45_str,
+        fisc_tag=accord45_str,
         fisc_mstr_dir=get_test_fisc_mstr_dir(),
         in_memory_journal=True,
     )

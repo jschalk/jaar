@@ -2,7 +2,7 @@ from src.a08_bud_atom_logic.atom_config import type_NameUnit_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
 from src.a16_pidgin_logic.examples.example_pidgins import (
     get_clean_roadmap,
-    get_clean_titlemap,
+    get_clean_tagmap,
     get_swim_labelmap,
     get_suita_namemap,
 )
@@ -89,7 +89,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     old_pidginunit = pidginunit_shop(sue_str, 0)
     old_pidginunit.set_namemap(get_suita_namemap())
     old_pidginunit.set_labelmap(get_swim_labelmap())
-    old_pidginunit.set_titlemap(get_clean_titlemap())
+    old_pidginunit.set_tagmap(get_clean_tagmap())
     old_pidginunit.set_roadmap(get_clean_roadmap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     assert new_pidginunit.namemap != get_suita_namemap()
@@ -105,12 +105,12 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     merged_groupbrigde = get_swim_labelmap()
     merged_groupbrigde.event_int = event1
     assert merged_pidginunit.labelmap == merged_groupbrigde
-    merged_titlebrigde = get_clean_titlemap()
-    merged_titlebrigde.event_int = event1
-    assert merged_pidginunit.titlemap == merged_titlebrigde
+    merged_tagbrigde = get_clean_tagmap()
+    merged_tagbrigde.event_int = event1
+    assert merged_pidginunit.tagmap == merged_tagbrigde
     merged_roadbrigde = get_clean_roadmap()
     merged_roadbrigde.event_int = event1
-    merged_roadbrigde.titlemap = merged_titlebrigde
+    merged_roadbrigde.tagmap = merged_tagbrigde
     assert merged_pidginunit.roadmap == merged_roadbrigde
 
 

@@ -6,10 +6,10 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_title": {
+        "fisc_tag": {
             "otx_key": true
         },
-        "item_title_ERASE": {
+        "item_tag_ERASE": {
             "otx_key": true
         },
         "owner_name": {
