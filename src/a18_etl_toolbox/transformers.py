@@ -330,21 +330,12 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     return events_agg_df.sort_values(["event_int", "face_name"])
 
 
-def etl_drum_events_log_to_events_agg(drum_dir):
-    transformer = EventsLogToEventsAggTransformer(drum_dir)
-    transformer.transform()
-
-
-class EventsLogToEventsAggTransformer:
-    def __init__(self, drum_dir: str):
-        self.drum_dir = drum_dir
-
-    def transform(self):
-        events_file_path = create_drum_events_path(self.drum_dir)
-        if os_path_exists(events_file_path):
-            events_log_df = pandas_read_excel(events_file_path, "events_log")
-            events_agg_df = _create_events_agg_df(events_log_df)
-            upsert_sheet(events_file_path, "events_agg", events_agg_df)
+def etl_drum_events_log_to_drum_events_agg(drum_dir):
+    events_file_path = create_drum_events_path(drum_dir)
+    if os_path_exists(events_file_path):
+        events_log_df = pandas_read_excel(events_file_path, "events_log")
+        events_agg_df = _create_events_agg_df(events_log_df)
+        upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
 def etl_events_agg_file_to_events_dict(drum_dir) -> dict[EventInt, FaceName]:
@@ -383,7 +374,7 @@ def etl_drum_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], drum_dir: 
     drum_agg_single_to_pidgin_raw("map_road", legitimate_events, drum_dir)
 
 
-def etl_drum_agg_to_pidgin_raw(legitimate_events: set[EventInt], drum_dir: str):
+def etl_drum_agg_to_drum_pidgin_raw(legitimate_events: set[EventInt], drum_dir: str):
     etl_drum_agg_to_pidgin_name_raw(legitimate_events, drum_dir)
     etl_drum_agg_to_pidgin_label_raw(legitimate_events, drum_dir)
     etl_drum_agg_to_pidgin_tag_raw(legitimate_events, drum_dir)

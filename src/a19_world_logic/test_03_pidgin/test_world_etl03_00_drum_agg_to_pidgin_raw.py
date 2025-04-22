@@ -53,7 +53,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     }
 
 
-def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
+def test_WorldUnit_drum_agg_to_drum_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
@@ -199,13 +199,13 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     assert fizz_world._events == {}
     fizz_world.drum_agg_to_drum_events()
     fizz_world.drum_events_to_events_log()
-    fizz_world.drum_events_log_to_events_agg()
+    fizz_world.drum_events_log_to_drum_events_agg()
     fizz_world.events_agg_file_to_events_dict()
     assert fizz_world._events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.drum_agg_to_pidgin_raw()
+    fizz_world.drum_agg_to_drum_pidgin_raw()
 
     # THEN
     assert os_path_exists(pidgin_path)

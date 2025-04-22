@@ -26,8 +26,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_drum_agg_to_drum_events,
     etl_drum_events_to_events_log,
     etl_drum_pidgin_raw_to_pidgin_agg,
-    etl_drum_agg_to_pidgin_raw,
-    etl_drum_events_log_to_events_agg,
+    etl_drum_agg_to_drum_pidgin_raw,
+    etl_drum_events_log_to_drum_events_agg,
     etl_events_agg_file_to_events_dict,
     etl_drum_pidgin_agg_to_otz_face_pidgin_agg,
     etl_otz_face_pidgins_to_otz_event_pidgins,
@@ -133,14 +133,14 @@ class WorldUnit:
     def drum_events_to_events_log(self):
         etl_drum_events_to_events_log(self._drum_dir)
 
-    def drum_events_log_to_events_agg(self):
-        etl_drum_events_log_to_events_agg(self._drum_dir)
+    def drum_events_log_to_drum_events_agg(self):
+        etl_drum_events_log_to_drum_events_agg(self._drum_dir)
 
     def events_agg_file_to_events_dict(self):
         self._events = etl_events_agg_file_to_events_dict(self._drum_dir)
 
-    def drum_agg_to_pidgin_raw(self):
-        etl_drum_agg_to_pidgin_raw(set(self._events.keys()), self._drum_dir)
+    def drum_agg_to_drum_pidgin_raw(self):
+        etl_drum_agg_to_drum_pidgin_raw(set(self._events.keys()), self._drum_dir)
 
     def drum_pidgin_raw_to_pidgin_agg(self):
         etl_drum_pidgin_raw_to_pidgin_agg(self._drum_dir)
@@ -259,9 +259,9 @@ class WorldUnit:
             self.drum_raw_to_drum_agg()
             self.drum_agg_to_drum_events()
             self.drum_events_to_events_log()
-            self.drum_events_log_to_events_agg()
+            self.drum_events_log_to_drum_events_agg()
             self.events_agg_file_to_events_dict()  # self._events
-            self.drum_agg_to_pidgin_raw()  # self._events.keys()
+            self.drum_agg_to_drum_pidgin_raw()  # self._events.keys()
             self.drum_pidgin_raw_to_pidgin_agg()
             self.drum_pidgin_agg_to_otz_face_pidgin_agg()
             self.otz_face_pidgins_to_otz_event_pidgins()
