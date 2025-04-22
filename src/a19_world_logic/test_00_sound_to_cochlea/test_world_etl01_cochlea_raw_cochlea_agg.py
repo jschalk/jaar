@@ -5,8 +5,8 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    drum_raw_str,
-    drum_agg_str,
+    cochlea_raw_str,
+    cochlea_agg_str,
     sheet_exists,
 )
 from src.a19_world_logic.world import worldunit_shop
@@ -17,7 +17,7 @@ from src.a19_world_logic.examples.world_env import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -31,7 +31,7 @@ def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
-    drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
+    cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -45,15 +45,15 @@ def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_drum_raw()
-    drum__raw_df = pandas_read_excel(drum_file_path, sheet_name=drum_raw_str())
-    assert len(drum__raw_df) == 3
+    fizz_world.sound_to_cochlea_raw()
+    cochlea__raw_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
+    assert len(cochlea__raw_df) == 3
 
     # WHEN
-    fizz_world.drum_raw_to_drum_agg()
+    fizz_world.cochlea_raw_to_cochlea_agg()
 
     # THEN
-    gen_otx_df = pandas_read_excel(drum_file_path, sheet_name=drum_agg_str())
+    gen_otx_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())
     ex_otx_df = DataFrame([row1, row2], columns=idea_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
@@ -62,10 +62,10 @@ def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(drum_file_path) == [drum_raw_str(), drum_agg_str()]
+    assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str(), cochlea_agg_str()]
 
 
-def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -94,19 +94,19 @@ def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNo
     row4 = [sue_str, event7, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_drum_raw()
-    br00003_agg_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
-    drum_df = pandas_read_excel(br00003_agg_file_path, sheet_name=drum_raw_str())
-    assert len(drum_df) == 4
-    assert sheet_exists(br00003_agg_file_path, drum_agg_str()) is False
+    fizz_world.sound_to_cochlea_raw()
+    br00003_agg_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+    cochlea_df = pandas_read_excel(br00003_agg_file_path, sheet_name=cochlea_raw_str())
+    assert len(cochlea_df) == 4
+    assert sheet_exists(br00003_agg_file_path, cochlea_agg_str()) is False
 
     # WHEN
-    fizz_world.drum_raw_to_drum_agg()
+    fizz_world.cochlea_raw_to_cochlea_agg()
 
     # THEN
-    assert sheet_exists(br00003_agg_file_path, drum_agg_str())
+    assert sheet_exists(br00003_agg_file_path, cochlea_agg_str())
     gen_br00003_agg_df = pandas_read_excel(
-        br00003_agg_file_path, sheet_name=drum_agg_str()
+        br00003_agg_file_path, sheet_name=cochlea_agg_str()
     )
     ex_otx_df = DataFrame([row1, row4], columns=idea_columns)
     # print(f"{gen_otx_df.columns=}")
@@ -119,6 +119,6 @@ def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNo
     assert len(gen_br00003_agg_df) == 2
     assert gen_br00003_agg_df.to_csv() == ex_otx_df.to_csv()
     assert get_sheet_names(br00003_agg_file_path) == [
-        drum_raw_str(),
-        drum_agg_str(),
+        cochlea_raw_str(),
+        cochlea_agg_str(),
     ]

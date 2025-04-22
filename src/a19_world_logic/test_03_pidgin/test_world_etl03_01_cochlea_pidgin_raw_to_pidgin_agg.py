@@ -1,5 +1,5 @@
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
-from src.a18_etl_toolbox.tran_path import create_drum_pidgin_path
+from src.a18_etl_toolbox.tran_path import create_cochlea_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
@@ -73,7 +73,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     e1_tag_rows = [e1_tag0, e1_tag1]
     raw_tag_df = DataFrame(e1_tag_rows, columns=tag_raw_columns)
 
-    pidgin_path = create_drum_pidgin_path(fizz_world._drum_dir)
+    pidgin_path = create_cochlea_pidgin_path(fizz_world._cochlea_dir)
     upsert_sheet(pidgin_path, name_raw_str, raw_name_df)
     upsert_sheet(pidgin_path, label_raw_str, raw_label_df)
     upsert_sheet(pidgin_path, road_raw_str, raw_road_df)
@@ -89,7 +89,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     assert sheet_exists(pidgin_path, tag_agg_str) is False
 
     # WHEN
-    fizz_world.drum_pidgin_raw_to_pidgin_agg()
+    fizz_world.cochlea_pidgin_raw_to_pidgin_agg()
 
     # THEN
     assert os_path_exists(pidgin_path)

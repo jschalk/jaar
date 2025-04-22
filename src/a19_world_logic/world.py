@@ -20,22 +20,22 @@ from src.a01_word_logic.road import (
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_to_drum_raw,
-    etl_drum_raw_to_drum_agg,
-    etl_drum_agg_non_pidgin_ideas_to_drum_valid,
-    etl_drum_agg_to_drum_events,
-    etl_drum_events_to_events_log,
-    etl_drum_pidgin_raw_to_pidgin_agg,
-    etl_drum_agg_to_drum_pidgin_raw,
-    etl_drum_events_log_to_drum_events_agg,
+    etl_sound_to_cochlea_raw,
+    etl_cochlea_raw_to_cochlea_agg,
+    etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
+    etl_cochlea_agg_to_cochlea_events,
+    etl_cochlea_events_to_events_log,
+    etl_cochlea_pidgin_raw_to_pidgin_agg,
+    etl_cochlea_agg_to_cochlea_pidgin_raw,
+    etl_cochlea_events_log_to_cochlea_events_agg,
     etl_events_agg_file_to_events_dict,
-    etl_drum_pidgin_agg_to_otz_face_pidgin_agg,
+    etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg,
     etl_otz_face_pidgins_to_otz_event_pidgins,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_drum_ideas_to_otz_face_ideas,
+    etl_cochlea_ideas_to_otz_face_ideas,
     etl_otz_face_ideas_to_otz_event_otx_ideas,
     etl_otz_event_ideas_to_inz_events,
     etl_otz_inx_event_ideas_to_inz_faces,
@@ -75,7 +75,7 @@ class WorldUnit:
     _syntax_inz_dir: str = None
     _world_dir: str = None
     _sound_dir: str = None
-    _drum_dir: str = None
+    _cochlea_dir: str = None
     _fisc_mstr_dir: str = None
     _fiscunits: set[FiscTag] = None
     _events: dict[EventInt, FaceName] = None
@@ -105,48 +105,52 @@ class WorldUnit:
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
         self._syntax_inz_dir = create_path(self._world_dir, "syntax_inz")
-        self._drum_dir = create_path(self._world_dir, "drum")
+        self._cochlea_dir = create_path(self._world_dir, "cochlea")
         self._fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         set_dir(self._world_dir)
         set_dir(self._syntax_otz_dir)
         set_dir(self._syntax_inz_dir)
-        set_dir(self._drum_dir)
+        set_dir(self._cochlea_dir)
         set_dir(self._fisc_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
-    def sound_to_drum_raw(self):
-        etl_sound_to_drum_raw(self._sound_dir, self._drum_dir)
+    def sound_to_cochlea_raw(self):
+        etl_sound_to_cochlea_raw(self._sound_dir, self._cochlea_dir)
 
-    def drum_raw_to_drum_agg(self):
-        etl_drum_raw_to_drum_agg(self._drum_dir)
+    def cochlea_raw_to_cochlea_agg(self):
+        etl_cochlea_raw_to_cochlea_agg(self._cochlea_dir)
 
-    def drum_agg_non_pidgin_ideas_to_drum_valid(self):
-        etl_drum_agg_non_pidgin_ideas_to_drum_valid(
-            self._drum_dir, set(self._events.keys())
+    def cochlea_agg_non_pidgin_ideas_to_cochlea_valid(self):
+        etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
+            self._cochlea_dir, set(self._events.keys())
         )
 
-    def drum_agg_to_drum_events(self):
-        etl_drum_agg_to_drum_events(self._drum_dir)
+    def cochlea_agg_to_cochlea_events(self):
+        etl_cochlea_agg_to_cochlea_events(self._cochlea_dir)
 
-    def drum_events_to_events_log(self):
-        etl_drum_events_to_events_log(self._drum_dir)
+    def cochlea_events_to_events_log(self):
+        etl_cochlea_events_to_events_log(self._cochlea_dir)
 
-    def drum_events_log_to_drum_events_agg(self):
-        etl_drum_events_log_to_drum_events_agg(self._drum_dir)
+    def cochlea_events_log_to_cochlea_events_agg(self):
+        etl_cochlea_events_log_to_cochlea_events_agg(self._cochlea_dir)
 
     def events_agg_file_to_events_dict(self):
-        self._events = etl_events_agg_file_to_events_dict(self._drum_dir)
+        self._events = etl_events_agg_file_to_events_dict(self._cochlea_dir)
 
-    def drum_agg_to_drum_pidgin_raw(self):
-        etl_drum_agg_to_drum_pidgin_raw(set(self._events.keys()), self._drum_dir)
+    def cochlea_agg_to_cochlea_pidgin_raw(self):
+        etl_cochlea_agg_to_cochlea_pidgin_raw(
+            set(self._events.keys()), self._cochlea_dir
+        )
 
-    def drum_pidgin_raw_to_pidgin_agg(self):
-        etl_drum_pidgin_raw_to_pidgin_agg(self._drum_dir)
+    def cochlea_pidgin_raw_to_pidgin_agg(self):
+        etl_cochlea_pidgin_raw_to_pidgin_agg(self._cochlea_dir)
 
-    def drum_pidgin_agg_to_otz_face_pidgin_agg(self):
-        etl_drum_pidgin_agg_to_otz_face_pidgin_agg(self._drum_dir, self._syntax_otz_dir)
+    def cochlea_pidgin_agg_to_otz_face_pidgin_agg(self):
+        etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(
+            self._cochlea_dir, self._syntax_otz_dir
+        )
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -163,8 +167,8 @@ class WorldUnit:
         etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._syntax_otz_dir)
         self._set_pidgin_events()
 
-    def drum_ideas_to_otz_face_ideas(self):
-        etl_drum_ideas_to_otz_face_ideas(self._drum_dir, self._syntax_otz_dir)
+    def cochlea_ideas_to_otz_face_ideas(self):
+        etl_cochlea_ideas_to_otz_face_ideas(self._cochlea_dir, self._syntax_otz_dir)
 
     def otz_face_ideas_to_otz_event_otx_ideas(self):
         etl_otz_face_ideas_to_otz_event_otx_ideas(self._syntax_otz_dir)
@@ -255,20 +259,20 @@ class WorldUnit:
         with sqlite3_connect(":memory:") as fisc_db_conn:
             cursor = fisc_db_conn.cursor()
 
-            self.sound_to_drum_raw()
-            self.drum_raw_to_drum_agg()
-            self.drum_agg_to_drum_events()
-            self.drum_events_to_events_log()
-            self.drum_events_log_to_drum_events_agg()
+            self.sound_to_cochlea_raw()
+            self.cochlea_raw_to_cochlea_agg()
+            self.cochlea_agg_to_cochlea_events()
+            self.cochlea_events_to_events_log()
+            self.cochlea_events_log_to_cochlea_events_agg()
             self.events_agg_file_to_events_dict()  # self._events
-            self.drum_agg_to_drum_pidgin_raw()  # self._events.keys()
-            self.drum_pidgin_raw_to_pidgin_agg()
-            self.drum_pidgin_agg_to_otz_face_pidgin_agg()
+            self.cochlea_agg_to_cochlea_pidgin_raw()  # self._events.keys()
+            self.cochlea_pidgin_raw_to_pidgin_agg()
+            self.cochlea_pidgin_agg_to_otz_face_pidgin_agg()
             self.otz_face_pidgins_to_otz_event_pidgins()
             self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
             self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
-            self.drum_agg_non_pidgin_ideas_to_drum_valid()  # self._events.keys()
-            self.drum_ideas_to_otz_face_ideas()
+            self.cochlea_agg_non_pidgin_ideas_to_cochlea_valid()  # self._events.keys()
+            self.cochlea_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()
             self.otz_event_ideas_to_inz_events()  # self._pidgin_events
             self.otz_inx_event_ideas_to_inz_faces()

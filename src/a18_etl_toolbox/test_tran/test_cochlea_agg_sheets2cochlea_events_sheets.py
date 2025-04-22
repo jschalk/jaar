@@ -5,23 +5,22 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    drum_raw_str,
-    drum_agg_str,
+    cochlea_raw_str,
+    cochlea_agg_str,
 )
-from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
-    env_dir_setup_cleanup,
+from src.a18_etl_toolbox.transformers import (
+    etl_sound_to_cochlea_raw,
+    etl_cochlea_raw_to_cochlea_agg,
+    etl_cochlea_agg_to_cochlea_events,
 )
+from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario0(
+def test_etl_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     yao_str = "Yao"
     event1 = 1
@@ -32,8 +31,10 @@ def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
-    drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
+    sound_dir = create_path(get_test_etl_dir(), "sound")
+    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
+    sound_file_path = create_path(sound_dir, ex_filename)
+    cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -48,14 +49,16 @@ def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_drum_raw()
-    fizz_world.drum_raw_to_drum_agg()
+    etl_sound_to_cochlea_raw(sound_dir, cochlea_dir)
+    etl_cochlea_raw_to_cochlea_agg(cochlea_dir)
 
     # WHEN
-    fizz_world.drum_agg_to_drum_events()
+    etl_cochlea_agg_to_cochlea_events(cochlea_dir)
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(drum_file_path, sheet_name="drum_events")
+    gen_otx_events_df = pandas_read_excel(
+        cochlea_file_path, sheet_name="cochlea_events"
+    )
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
     sue_r = [sue_str, event1, ""]
@@ -68,19 +71,18 @@ def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario0(
     assert len(gen_otx_events_df) == 3
     assert len(gen_otx_events_df) == len(ex_otx_events_df)
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
-    assert get_sheet_names(drum_file_path) == [
-        drum_raw_str(),
-        drum_agg_str(),
-        "drum_events",
+    assert get_sheet_names(cochlea_file_path) == [
+        cochlea_raw_str(),
+        cochlea_agg_str(),
+        "cochlea_events",
     ]
 
 
-def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario1(
+def test_etl_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"
@@ -92,8 +94,10 @@ def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
-    drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
+    sound_dir = create_path(get_test_etl_dir(), "sound")
+    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
+    sound_file_path = create_path(sound_dir, ex_filename)
+    cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -109,14 +113,16 @@ def test_WorldUnit_drum_agg_to_drum_events_CreatesSheets_Scenario1(
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_drum_raw()
-    fizz_world.drum_raw_to_drum_agg()
+    etl_sound_to_cochlea_raw(sound_dir, cochlea_dir)
+    etl_cochlea_raw_to_cochlea_agg(cochlea_dir)
 
     # WHEN
-    fizz_world.drum_agg_to_drum_events()
+    etl_cochlea_agg_to_cochlea_events(cochlea_dir)
 
     # THEN
-    gen_otx_events_df = pandas_read_excel(drum_file_path, sheet_name="drum_events")
+    gen_otx_events_df = pandas_read_excel(
+        cochlea_file_path, sheet_name="cochlea_events"
+    )
     print(f"{gen_otx_events_df.columns=}")
     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
     bob_row = [bob_str, event3, ""]

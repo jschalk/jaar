@@ -5,7 +5,7 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    drum_valid_str,
+    cochlea_valid_str,
     sheet_exists,
 )
 from src.a19_world_logic.world import worldunit_shop
@@ -16,7 +16,7 @@ from src.a19_world_logic.examples.world_env import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_cochlea_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -38,34 +38,34 @@ def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
     accord23_str = "accord23"
     row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
     row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
-    br00003_drum_agg_df = DataFrame([row1, row2], columns=idea_columns)
-    br00003_agg_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
-    upsert_sheet(br00003_agg_file_path, drum_valid_str(), br00003_drum_agg_df)
-    assert sheet_exists(br00003_agg_file_path, drum_valid_str())
+    br00003_cochlea_agg_df = DataFrame([row1, row2], columns=idea_columns)
+    br00003_agg_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+    upsert_sheet(br00003_agg_file_path, cochlea_valid_str(), br00003_cochlea_agg_df)
+    assert sheet_exists(br00003_agg_file_path, cochlea_valid_str())
     sue_dir = create_path(fizz_world._syntax_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, "br00003.xlsx")
-    assert sheet_exists(sue_br00003_filepath, drum_valid_str()) is False
+    assert sheet_exists(sue_br00003_filepath, cochlea_valid_str()) is False
 
     # WHEN
-    fizz_world.drum_ideas_to_otz_face_ideas()
+    fizz_world.cochlea_ideas_to_otz_face_ideas()
 
     # THEN
-    assert sheet_exists(sue_br00003_filepath, drum_valid_str())
-    assert get_sheet_names(sue_br00003_filepath) == [drum_valid_str()]
+    assert sheet_exists(sue_br00003_filepath, cochlea_valid_str())
+    assert get_sheet_names(sue_br00003_filepath) == [cochlea_valid_str()]
     sue_br3_agg_df = pandas_read_excel(
-        br00003_agg_file_path, sheet_name=drum_valid_str()
+        br00003_agg_file_path, sheet_name=cochlea_valid_str()
     )
     print(f"{sue_br3_agg_df.columns=}")
 
-    assert len(sue_br3_agg_df.columns) == len(br00003_drum_agg_df.columns)
-    assert list(sue_br3_agg_df.columns) == list(br00003_drum_agg_df.columns)
+    assert len(sue_br3_agg_df.columns) == len(br00003_cochlea_agg_df.columns)
+    assert list(sue_br3_agg_df.columns) == list(br00003_cochlea_agg_df.columns)
     assert len(sue_br3_agg_df) > 0
-    assert len(sue_br3_agg_df) == len(br00003_drum_agg_df)
+    assert len(sue_br3_agg_df) == len(br00003_cochlea_agg_df)
     assert len(sue_br3_agg_df) == 2
-    assert sue_br3_agg_df.to_csv() == br00003_drum_agg_df.to_csv()
+    assert sue_br3_agg_df.to_csv() == br00003_cochlea_agg_df.to_csv()
 
 
-# def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+# def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -94,19 +94,19 @@ def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
 #     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
 #     upsert_sheet(sound_file_path, "example1_br00003", df1)
-#     fizz_world.sound_to_drum_raw()
-#     br00003_agg_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
-#     drum_df = pandas_read_excel(br00003_agg_file_path, sheet_name=drum_raw_str())
-#     assert len(drum_df) == 4
-#     assert sheet_exists(br00003_agg_file_path, drum_valid_str()) is False
+#     fizz_world.sound_to_cochlea_raw()
+#     br00003_agg_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+#     cochlea_df = pandas_read_excel(br00003_agg_file_path, sheet_name=cochlea_raw_str())
+#     assert len(cochlea_df) == 4
+#     assert sheet_exists(br00003_agg_file_path, cochlea_valid_str()) is False
 
 #     # WHEN
-#     fizz_world.drum_raw_to_drum_agg()
+#     fizz_world.cochlea_raw_to_cochlea_agg()
 
 #     # THEN
-#     assert sheet_exists(br00003_agg_file_path, drum_valid_str())
+#     assert sheet_exists(br00003_agg_file_path, cochlea_valid_str())
 #     gen_br00003_agg_df = pandas_read_excel(
-#         br00003_agg_file_path, sheet_name=drum_valid_str()
+#         br00003_agg_file_path, sheet_name=cochlea_valid_str()
 #     )
 #     ex_otx_df = DataFrame([row1, row4], columns=idea_columns)
 #     # print(f"{gen_otx_df.columns=}")
@@ -118,6 +118,6 @@ def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     assert len(gen_br00003_agg_df) == len(ex_otx_df)
 #     assert len(gen_br00003_agg_df) == 2
 #     assert gen_br00003_agg_df.to_csv() == ex_otx_df.to_csv()
-#     assert get_sheet_names(br00003_agg_file_path) == [drum_raw_str(), drum_valid_str()]
+#     assert get_sheet_names(br00003_agg_file_path) == [cochlea_raw_str(), cochlea_valid_str()]
 
 #     assert 1 == 2

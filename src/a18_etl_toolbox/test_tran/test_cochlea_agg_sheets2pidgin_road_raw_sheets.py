@@ -12,16 +12,20 @@ from src.a16_pidgin_logic.pidgin_config import (
     otx_road_str,
     unknown_word_str,
 )
-from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, drum_agg_str
-from src.a18_etl_toolbox.tran_path import create_drum_pidgin_path
+from src.a17_idea_logic.idea_db_tool import (
+    get_sheet_names,
+    upsert_sheet,
+    cochlea_agg_str,
+)
+from src.a18_etl_toolbox.tran_path import create_cochlea_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_drum_agg_to_pidgin_road_raw
+from src.a18_etl_toolbox.transformers import etl_cochlea_agg_to_pidgin_road_raw
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
+def test_etl_cochlea_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -32,8 +36,8 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     bob_inx = "Bobito"
     m_str = "accord23"
     event7 = 7
-    x_drum_dir = get_test_etl_dir()
-    br00117_file_path = create_path(x_drum_dir, "br00117.xlsx")
+    x_cochlea_dir = get_test_etl_dir()
+    br00117_file_path = create_path(x_cochlea_dir, "br00117.xlsx")
     br00117_columns = [
         face_name_str(),
         event_int_str(),
@@ -47,12 +51,12 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, drum_agg_str(), br00117_df)
-    pidgin_path = create_drum_pidgin_path(x_drum_dir)
+    upsert_sheet(br00117_file_path, cochlea_agg_str(), br00117_df)
+    pidgin_path = create_cochlea_pidgin_path(x_cochlea_dir)
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_drum_agg_to_pidgin_road_raw({event7}, x_drum_dir)
+    etl_cochlea_agg_to_pidgin_road_raw({event7}, x_cochlea_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -73,7 +77,7 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     assert get_sheet_names(pidgin_path) == [road_raw_str]
 
 
-def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_cochlea_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -89,8 +93,8 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFile
     event2 = 2
     event5 = 5
     event7 = 7
-    x_drum_dir = get_test_etl_dir()
-    br00117_file_path = create_path(x_drum_dir, "br00117.xlsx")
+    x_cochlea_dir = get_test_etl_dir()
+    br00117_file_path = create_path(x_cochlea_dir, "br00117.xlsx")
     br00117_columns = [
         face_name_str(),
         event_int_str(),
@@ -100,7 +104,7 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFile
         otx_road_str(),
         inx_road_str(),
     ]
-    br00045_file_path = create_path(x_drum_dir, "br00045.xlsx")
+    br00045_file_path = create_path(x_cochlea_dir, "br00045.xlsx")
     br00045_columns = [
         face_name_str(),
         event_int_str(),
@@ -117,16 +121,16 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFile
     yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, drum_agg_str(), br00117_df)
+    upsert_sheet(br00117_file_path, cochlea_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, drum_agg_str(), br00045_df)
-    pidgin_path = create_drum_pidgin_path(x_drum_dir)
+    upsert_sheet(br00045_file_path, cochlea_agg_str(), br00045_df)
+    pidgin_path = create_cochlea_pidgin_path(x_cochlea_dir)
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_drum_agg_to_pidgin_road_raw(legitimate_events, x_drum_dir)
+    etl_cochlea_agg_to_pidgin_road_raw(legitimate_events, x_cochlea_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -152,7 +156,7 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFile
     assert get_sheet_names(pidgin_path) == [road_raw_str]
 
 
-def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_cochlea_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -167,8 +171,8 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_
     event1 = 1
     event2 = 2
     event5 = 5
-    x_drum_dir = get_test_etl_dir()
-    br00117_file_path = create_path(x_drum_dir, "br00117.xlsx")
+    x_cochlea_dir = get_test_etl_dir()
+    br00117_file_path = create_path(x_cochlea_dir, "br00117.xlsx")
     br00117_columns = [
         face_name_str(),
         event_int_str(),
@@ -178,7 +182,7 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_
         otx_road_str(),
         inx_road_str(),
     ]
-    br00045_file_path = create_path(x_drum_dir, "br00045.xlsx")
+    br00045_file_path = create_path(x_cochlea_dir, "br00045.xlsx")
     br00045_columns = [
         face_name_str(),
         event_int_str(),
@@ -195,16 +199,16 @@ def test_etl_drum_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, drum_agg_str(), br00117_df)
+    upsert_sheet(br00117_file_path, cochlea_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, drum_agg_str(), br00045_df)
-    pidgin_path = create_drum_pidgin_path(x_drum_dir)
+    upsert_sheet(br00045_file_path, cochlea_agg_str(), br00045_df)
+    pidgin_path = create_cochlea_pidgin_path(x_cochlea_dir)
     legitimate_events = {event2, event5}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_drum_agg_to_pidgin_road_raw(legitimate_events, x_drum_dir)
+    etl_cochlea_agg_to_pidgin_road_raw(legitimate_events, x_cochlea_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

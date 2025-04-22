@@ -59,7 +59,7 @@ from src.a17_idea_logic.idea_db_tool import (
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_drum_raw_grouping_with_all_values_equal_df,
+    get_cochlea_raw_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
@@ -68,8 +68,8 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import (
-    create_drum_events_path,
-    create_drum_pidgin_path,
+    create_cochlea_events_path,
+    create_cochlea_pidgin_path,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
@@ -168,19 +168,19 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_typeS[class_type]["inx_obj"]]
 
 
-def etl_sound_to_drum_raw(sound_dir: str, drum_dir: str):
-    transformer = SoundToDrumTransformer(sound_dir, drum_dir)
+def etl_sound_to_cochlea_raw(sound_dir: str, cochlea_dir: str):
+    transformer = SoundToCochleaTransformer(sound_dir, cochlea_dir)
     transformer.transform()
 
 
-class SoundToDrumTransformer:
-    def __init__(self, sound_dir: str, drum_dir: str):
+class SoundToCochleaTransformer:
+    def __init__(self, sound_dir: str, cochlea_dir: str):
         self.sound_dir = sound_dir
-        self.drum_dir = drum_dir
+        self.cochlea_dir = cochlea_dir
 
     def transform(self):
         for idea_number, dfs in self._group_sound_data().items():
-            self._save_to_drum_raw(idea_number, dfs)
+            self._save_to_cochlea_raw(idea_number, dfs)
 
     def _group_sound_data(self):
         grouped_data = {}
@@ -197,10 +197,10 @@ class SoundToDrumTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_to_drum_raw(self, idea_number: str, dfs: list):
+    def _save_to_cochlea_raw(self, idea_number: str, dfs: list):
         job_df = pandas_concat(dfs)
-        drum_path = create_path(self.drum_dir, f"{idea_number}.xlsx")
-        upsert_sheet(drum_path, "drum_raw", job_df)
+        cochlea_path = create_path(self.cochlea_dir, f"{idea_number}.xlsx")
+        upsert_sheet(cochlea_path, "cochlea_raw", job_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -216,49 +216,49 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_drum_raw_to_drum_agg(drum_dir):
-    for br_ref in get_existing_excel_idea_file_refs(drum_dir):
-        drum_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        drum_raw_df = pandas_read_excel(drum_idea_path, "drum_raw")
-        otx_df = create_df_with_groupby_idea_columns(drum_raw_df, br_ref.idea_number)
-        upsert_sheet(drum_idea_path, "drum_agg", otx_df)
+def etl_cochlea_raw_to_cochlea_agg(cochlea_dir):
+    for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
+        cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cochlea_raw_df = pandas_read_excel(cochlea_idea_path, "cochlea_raw")
+        otx_df = create_df_with_groupby_idea_columns(cochlea_raw_df, br_ref.idea_number)
+        upsert_sheet(cochlea_idea_path, "cochlea_agg", otx_df)
 
 
 def create_df_with_groupby_idea_columns(
-    drum_raw_df: DataFrame, idea_number: str
+    cochlea_raw_df: DataFrame, idea_number: str
 ) -> DataFrame:
     idea_filename = get_idea_format_filename(idea_number)
     idearef = get_idearef_obj(idea_filename)
     required_columns = idearef.get_otx_keys_list()
     idea_columns_set = set(idearef._attributes.keys())
     idea_columns_list = get_default_sorted_list(idea_columns_set)
-    drum_raw_df = drum_raw_df[idea_columns_list]
-    return get_drum_raw_grouping_with_all_values_equal_df(
-        drum_raw_df, required_columns, idea_number
+    cochlea_raw_df = cochlea_raw_df[idea_columns_list]
+    return get_cochlea_raw_grouping_with_all_values_equal_df(
+        cochlea_raw_df, required_columns, idea_number
     )
 
 
-def etl_drum_agg_non_pidgin_ideas_to_drum_valid(
-    drum_dir: str, legitimate_events: set[EventInt]
+def etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
+    cochlea_dir: str, legitimate_events: set[EventInt]
 ):
-    """create drum_legit sheet with each idea's data that is of a legitimate event"""
-    for br_ref in get_existing_excel_idea_file_refs(drum_dir):
-        drum_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        drum_agg = pandas_read_excel(drum_idea_path, "drum_agg")
-        drum_valid_df = drum_agg[drum_agg["event_int"].isin(legitimate_events)]
-        upsert_sheet(drum_idea_path, "drum_valid", drum_valid_df)
+    """create cochlea_legit sheet with each idea's data that is of a legitimate event"""
+    for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
+        cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cochlea_agg = pandas_read_excel(cochlea_idea_path, "cochlea_agg")
+        cochlea_valid_df = cochlea_agg[cochlea_agg["event_int"].isin(legitimate_events)]
+        upsert_sheet(cochlea_idea_path, "cochlea_valid", cochlea_valid_df)
 
 
-def etl_drum_agg_to_drum_events(drum_dir):
-    for file_ref in get_existing_excel_idea_file_refs(drum_dir):
-        drum_idea_path = create_path(drum_dir, file_ref.filename)
-        drum_agg_df = pandas_read_excel(drum_idea_path, "drum_agg")
-        events_df = get_df_of_drum_agg_events(drum_agg_df)
-        upsert_sheet(drum_idea_path, "drum_events", events_df)
+def etl_cochlea_agg_to_cochlea_events(cochlea_dir):
+    for file_ref in get_existing_excel_idea_file_refs(cochlea_dir):
+        cochlea_idea_path = create_path(cochlea_dir, file_ref.filename)
+        cochlea_agg_df = pandas_read_excel(cochlea_idea_path, "cochlea_agg")
+        events_df = get_df_of_cochlea_agg_events(cochlea_agg_df)
+        upsert_sheet(cochlea_idea_path, "cochlea_events", events_df)
 
 
-def get_df_of_drum_agg_events(drum_agg_df: DataFrame) -> DataFrame:
-    events_df = drum_agg_df[["face_name", "event_int"]].drop_duplicates()
+def get_df_of_cochlea_agg_events(cochlea_agg_df: DataFrame) -> DataFrame:
+    events_df = cochlea_agg_df[["face_name", "event_int"]].drop_duplicates()
     events_df["error_message"] = (
         events_df["event_int"]
         .duplicated(keep=False)
@@ -267,22 +267,22 @@ def get_df_of_drum_agg_events(drum_agg_df: DataFrame) -> DataFrame:
     return events_df.sort_values(["face_name", "event_int"])
 
 
-def etl_drum_events_to_events_log(drum_dir: str):
-    transformer = DrumEventsToEventsLogTransformer(drum_dir)
+def etl_cochlea_events_to_events_log(cochlea_dir: str):
+    transformer = CochleaEventsToEventsLogTransformer(cochlea_dir)
     transformer.transform()
 
 
-class DrumEventsToEventsLogTransformer:
-    def __init__(self, drum_dir: str):
-        self.drum_dir = drum_dir
+class CochleaEventsToEventsLogTransformer:
+    def __init__(self, cochlea_dir: str):
+        self.cochlea_dir = cochlea_dir
 
     def transform(self):
-        sheet_name = "drum_events"
-        for br_ref in get_existing_excel_idea_file_refs(self.drum_dir):
-            drum_idea_path = create_path(self.drum_dir, br_ref.filename)
-            otx_events_df = pandas_read_excel(drum_idea_path, sheet_name)
+        sheet_name = "cochlea_events"
+        for br_ref in get_existing_excel_idea_file_refs(self.cochlea_dir):
+            cochlea_idea_path = create_path(self.cochlea_dir, br_ref.filename)
+            otx_events_df = pandas_read_excel(cochlea_idea_path, sheet_name)
             events_log_df = self.get_event_log_df(
-                otx_events_df, self.drum_dir, br_ref.filename
+                otx_events_df, self.cochlea_dir, br_ref.filename
             )
             self._save_events_log_file(events_log_df)
 
@@ -291,7 +291,7 @@ class DrumEventsToEventsLogTransformer:
     ) -> DataFrame:
         otx_events_df[["file_dir"]] = x_dir
         otx_events_df[["filename"]] = x_filename
-        otx_events_df[["sheet_name"]] = "drum_events"
+        otx_events_df[["sheet_name"]] = "cochlea_events"
         cols = [
             "file_dir",
             "filename",
@@ -304,7 +304,7 @@ class DrumEventsToEventsLogTransformer:
         return otx_events_df
 
     def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_drum_events_path(self.drum_dir)
+        events_file_path = create_cochlea_events_path(self.cochlea_dir)
         events_log_str = "events_log"
         if os_path_exists(events_file_path):
             events_log_df = pandas_read_excel(events_file_path, events_log_str)
@@ -322,16 +322,16 @@ def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
     return events_agg_df.sort_values(["event_int", "face_name"])
 
 
-def etl_drum_events_log_to_drum_events_agg(drum_dir):
-    events_file_path = create_drum_events_path(drum_dir)
+def etl_cochlea_events_log_to_cochlea_events_agg(cochlea_dir):
+    events_file_path = create_cochlea_events_path(cochlea_dir)
     if os_path_exists(events_file_path):
         events_log_df = pandas_read_excel(events_file_path, "events_log")
         events_agg_df = _create_events_agg_df(events_log_df)
         upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def etl_events_agg_file_to_events_dict(drum_dir) -> dict[EventInt, FaceName]:
-    events_file_path = create_drum_events_path(drum_dir)
+def etl_events_agg_file_to_events_dict(cochlea_dir) -> dict[EventInt, FaceName]:
+    events_file_path = create_cochlea_events_path(cochlea_dir)
     x_dict = {}
     if os_path_exists(events_file_path):
         events_agg_df = pandas_read_excel(events_file_path, "events_agg")
@@ -342,42 +342,52 @@ def etl_events_agg_file_to_events_dict(drum_dir) -> dict[EventInt, FaceName]:
     return x_dict
 
 
-def drum_agg_single_to_pidgin_raw(
-    pidgin_dimen: str, legitimate_events: set[EventInt], drum_dir: str
+def cochlea_agg_single_to_pidgin_raw(
+    pidgin_dimen: str, legitimate_events: set[EventInt], cochlea_dir: str
 ):
     x_events = legitimate_events
-    transformer = DrumAggToRawTransformer(drum_dir, pidgin_dimen, x_events)
+    transformer = CochleaAggToRawTransformer(cochlea_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-def etl_drum_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], drum_dir: str):
-    drum_agg_single_to_pidgin_raw("map_name", legitimate_events, drum_dir)
+def etl_cochlea_agg_to_pidgin_name_raw(
+    legitimate_events: set[EventInt], cochlea_dir: str
+):
+    cochlea_agg_single_to_pidgin_raw("map_name", legitimate_events, cochlea_dir)
 
 
-def etl_drum_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], drum_dir: str):
-    drum_agg_single_to_pidgin_raw("map_label", legitimate_events, drum_dir)
+def etl_cochlea_agg_to_pidgin_label_raw(
+    legitimate_events: set[EventInt], cochlea_dir: str
+):
+    cochlea_agg_single_to_pidgin_raw("map_label", legitimate_events, cochlea_dir)
 
 
-def etl_drum_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], drum_dir: str):
-    drum_agg_single_to_pidgin_raw("map_tag", legitimate_events, drum_dir)
+def etl_cochlea_agg_to_pidgin_tag_raw(
+    legitimate_events: set[EventInt], cochlea_dir: str
+):
+    cochlea_agg_single_to_pidgin_raw("map_tag", legitimate_events, cochlea_dir)
 
 
-def etl_drum_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], drum_dir: str):
-    drum_agg_single_to_pidgin_raw("map_road", legitimate_events, drum_dir)
+def etl_cochlea_agg_to_pidgin_road_raw(
+    legitimate_events: set[EventInt], cochlea_dir: str
+):
+    cochlea_agg_single_to_pidgin_raw("map_road", legitimate_events, cochlea_dir)
 
 
-def etl_drum_agg_to_drum_pidgin_raw(legitimate_events: set[EventInt], drum_dir: str):
-    etl_drum_agg_to_pidgin_name_raw(legitimate_events, drum_dir)
-    etl_drum_agg_to_pidgin_label_raw(legitimate_events, drum_dir)
-    etl_drum_agg_to_pidgin_tag_raw(legitimate_events, drum_dir)
-    etl_drum_agg_to_pidgin_road_raw(legitimate_events, drum_dir)
+def etl_cochlea_agg_to_cochlea_pidgin_raw(
+    legitimate_events: set[EventInt], cochlea_dir: str
+):
+    etl_cochlea_agg_to_pidgin_name_raw(legitimate_events, cochlea_dir)
+    etl_cochlea_agg_to_pidgin_label_raw(legitimate_events, cochlea_dir)
+    etl_cochlea_agg_to_pidgin_tag_raw(legitimate_events, cochlea_dir)
+    etl_cochlea_agg_to_pidgin_road_raw(legitimate_events, cochlea_dir)
 
 
-class DrumAggToRawTransformer:
+class CochleaAggToRawTransformer:
     def __init__(
-        self, drum_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
+        self, cochlea_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
-        self.drum_dir = drum_dir
+        self.cochlea_dir = cochlea_dir
         self.legitmate_events = legitmate_events
         self.pidgin_dimen = pidgin_dimen
         self.class_type = get_class_type(pidgin_dimen)
@@ -391,26 +401,26 @@ class DrumAggToRawTransformer:
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
-            drum_idea_path = create_path(self.drum_dir, idea_filename)
-            if os_path_exists(drum_idea_path):
+            cochlea_idea_path = create_path(self.cochlea_dir, idea_filename)
+            if os_path_exists(cochlea_idea_path):
                 self.insert_raw_rows(
-                    pidgin_df, idea_number, drum_idea_path, pidgin_columns
+                    pidgin_df, idea_number, cochlea_idea_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_drum_pidgin_path(self.drum_dir)
+        pidgin_file_path = create_cochlea_pidgin_path(self.cochlea_dir)
         upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
 
     def insert_raw_rows(
         self,
         raw_df: DataFrame,
         idea_number: str,
-        drum_idea_path: str,
+        cochlea_idea_path: str,
         df_columns: list[str],
     ):
-        drum_agg_df = pandas_read_excel(drum_idea_path, sheet_name="drum_agg")
-        df_missing_cols = set(df_columns).difference(drum_agg_df.columns)
+        cochlea_agg_df = pandas_read_excel(cochlea_idea_path, sheet_name="cochlea_agg")
+        df_missing_cols = set(df_columns).difference(cochlea_agg_df.columns)
 
-        for index, x_row in drum_agg_df.iterrows():
+        for index, x_row in cochlea_agg_df.iterrows():
             event_int = x_row["event_int"]
             if event_int in self.legitmate_events:
                 face_name = x_row["face_name"]
@@ -447,39 +457,39 @@ class DrumAggToRawTransformer:
         return None
 
 
-def etl_pidgin_name_raw_to_name_agg(drum_dir: str):
-    etl_pidgin_single_raw_to_agg(drum_dir, "map_name")
+def etl_pidgin_name_raw_to_name_agg(cochlea_dir: str):
+    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_name")
 
 
-def etl_pidgin_label_raw_to_label_agg(drum_dir: str):
-    etl_pidgin_single_raw_to_agg(drum_dir, "map_label")
+def etl_pidgin_label_raw_to_label_agg(cochlea_dir: str):
+    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_label")
 
 
-def etl_pidgin_road_raw_to_road_agg(drum_dir: str):
-    etl_pidgin_single_raw_to_agg(drum_dir, "map_road")
+def etl_pidgin_road_raw_to_road_agg(cochlea_dir: str):
+    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_road")
 
 
-def etl_pidgin_tag_raw_to_tag_agg(drum_dir: str):
-    etl_pidgin_single_raw_to_agg(drum_dir, "map_tag")
+def etl_pidgin_tag_raw_to_tag_agg(cochlea_dir: str):
+    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_tag")
 
 
-def etl_pidgin_single_raw_to_agg(drum_dir: str, map_dimen: str):
-    transformer = PidginRawToAggTransformer(drum_dir, map_dimen)
+def etl_pidgin_single_raw_to_agg(cochlea_dir: str, map_dimen: str):
+    transformer = PidginRawToAggTransformer(cochlea_dir, map_dimen)
     transformer.transform()
 
 
-def etl_drum_pidgin_raw_to_pidgin_agg(drum_dir):
-    etl_pidgin_name_raw_to_name_agg(drum_dir)
-    etl_pidgin_label_raw_to_label_agg(drum_dir)
-    etl_pidgin_road_raw_to_road_agg(drum_dir)
-    etl_pidgin_tag_raw_to_tag_agg(drum_dir)
+def etl_cochlea_pidgin_raw_to_pidgin_agg(cochlea_dir):
+    etl_pidgin_name_raw_to_name_agg(cochlea_dir)
+    etl_pidgin_label_raw_to_label_agg(cochlea_dir)
+    etl_pidgin_road_raw_to_road_agg(cochlea_dir)
+    etl_pidgin_tag_raw_to_tag_agg(cochlea_dir)
 
 
 class PidginRawToAggTransformer:
-    def __init__(self, drum_dir: str, pidgin_dimen: str):
-        self.drum_dir = drum_dir
+    def __init__(self, cochlea_dir: str, pidgin_dimen: str):
+        self.cochlea_dir = cochlea_dir
         self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_drum_pidgin_path(self.drum_dir)
+        self.file_path = create_cochlea_pidgin_path(self.cochlea_dir)
         self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
@@ -491,7 +501,7 @@ class PidginRawToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_drum_pidgin_path(self.drum_dir)
+        pidgin_file_path = create_cochlea_pidgin_path(self.cochlea_dir)
         raw_sheet_name = get_sheet_raw_name(self.class_type)
         raw_df = pandas_read_excel(pidgin_file_path, sheet_name=raw_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(raw_df)
@@ -525,8 +535,8 @@ class PidginRawToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_drum_pidgin_agg_to_otz_face_pidgin_agg(drum_dir: str, faces_dir: str):
-    agg_pidgin = create_drum_pidgin_path(drum_dir)
+def etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(cochlea_dir: str, faces_dir: str):
+    agg_pidgin = create_cochlea_pidgin_path(cochlea_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
@@ -540,7 +550,7 @@ def etl_drum_pidgin_agg_to_otz_face_pidgin_agg(drum_dir: str, faces_dir: str):
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    face_pidgin_path = create_drum_pidgin_path(face_dir)
+    face_pidgin_path = create_cochlea_pidgin_path(face_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
@@ -558,7 +568,7 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
-    event_pidgin_path = create_drum_pidgin_path(event_pidgin_dir)
+    event_pidgin_path = create_cochlea_pidgin_path(event_pidgin_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
         csv_filename = class_typeS[class_type]["csv_filename"]
@@ -618,16 +628,16 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_drum_ideas_to_otz_face_ideas(drum_dir: str, faces_dir: str):
-    for drum_br_ref in get_existing_excel_idea_file_refs(drum_dir):
-        drum_idea_path = create_path(drum_dir, drum_br_ref.filename)
-        if drum_br_ref.filename not in _get_pidgen_idea_format_filenames():
+def etl_cochlea_ideas_to_otz_face_ideas(cochlea_dir: str, faces_dir: str):
+    for cochlea_br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
+        cochlea_idea_path = create_path(cochlea_dir, cochlea_br_ref.filename)
+        if cochlea_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=drum_idea_path,
+                input_file=cochlea_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                filename=drum_br_ref.idea_number,
-                sheet_name="drum_valid",
+                filename=cochlea_br_ref.idea_number,
+                sheet_name="cochlea_valid",
             )
 
 
@@ -641,7 +651,7 @@ def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_int",
                 filename=face_br_ref.idea_number,
-                sheet_name="drum_valid",
+                sheet_name="cochlea_valid",
             )
 
 
@@ -682,7 +692,7 @@ def etl_otz_event_ideas_to_inz_events(
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
-                idea_df = pandas_read_excel(event_idea_path, "drum_valid")
+                idea_df = pandas_read_excel(event_idea_path, "cochlea_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
