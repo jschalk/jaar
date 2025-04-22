@@ -35,7 +35,7 @@ def test_WorldUnit_cart_events_to_events_log_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -50,8 +50,8 @@ def test_WorldUnit_cart_events_to_events_log_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_cart_staging()
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    fizz_world.sound_to_cart_staging()
     fizz_world.cart_staging_to_cart_agg()
     fizz_world.cart_agg_to_cart_events()
     events_file_path = create_cart_events_path(fizz_world._cart_dir)
@@ -113,7 +113,7 @@ def test_WorldUnit_cart_events_to_events_log_CreatesSheets_Scenario1_MultipleIde
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     idea3_columns = [
         face_name_str(),
         event_int_str(),
@@ -138,9 +138,9 @@ def test_WorldUnit_cart_events_to_events_log_CreatesSheets_Scenario1_MultipleIde
     b5_0_row = [event3, bob_str, accord23_str, "thu", 1]
     b5_1_row = [event9, yao_str, accord23_str, "wed", 0]
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=idea5_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", b3_df)
-    upsert_sheet(mine_file_path, "example1_br00005", b5_df)
-    fizz_world.mine_to_cart_staging()
+    upsert_sheet(sound_file_path, "example1_br00003", b3_df)
+    upsert_sheet(sound_file_path, "example1_br00005", b5_df)
+    fizz_world.sound_to_cart_staging()
     fizz_world.cart_staging_to_cart_agg()
     fizz_world.cart_agg_to_cart_events()
     events_file_path = create_cart_events_path(fizz_world._cart_dir)

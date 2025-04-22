@@ -20,7 +20,7 @@ from src.a01_word_logic.road import (
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    etl_mine_to_cart_staging,
+    etl_sound_to_cart_staging,
     etl_cart_staging_to_cart_agg,
     etl_cart_agg_non_pidgin_ideas_to_cart_valid,
     etl_cart_agg_to_cart_events,
@@ -74,7 +74,7 @@ class WorldUnit:
     _syntax_otz_dir: str = None
     _syntax_inz_dir: str = None
     _world_dir: str = None
-    _mine_dir: str = None
+    _sound_dir: str = None
     _cart_dir: str = None
     _fisc_mstr_dir: str = None
     _fiscunits: set[FiscTag] = None
@@ -97,9 +97,9 @@ class WorldUnit:
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._syntax_otz_dir)
 
-    def set_mine_dir(self, x_dir: str):
-        self._mine_dir = x_dir
-        set_dir(self._mine_dir)
+    def set_sound_dir(self, x_dir: str):
+        self._sound_dir = x_dir
+        set_dir(self._sound_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
@@ -116,8 +116,8 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
-    def mine_to_cart_staging(self):
-        etl_mine_to_cart_staging(self._mine_dir, self._cart_dir)
+    def sound_to_cart_staging(self):
+        etl_sound_to_cart_staging(self._sound_dir, self._cart_dir)
 
     def cart_staging_to_cart_agg(self):
         etl_cart_staging_to_cart_agg(self._cart_dir)
@@ -247,7 +247,7 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_deal_mandate_ledgers(mstr_dir)
 
-    def mine_to_standings(
+    def sound_to_standings(
         self, store_tracing_files: bool = False
     ):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
@@ -257,7 +257,7 @@ class WorldUnit:
         with sqlite3_connect(":memory:") as fisc_db_conn:
             cursor = fisc_db_conn.cursor()
 
-            self.mine_to_cart_staging()
+            self.sound_to_cart_staging()
             self.cart_staging_to_cart_agg()
             self.cart_agg_to_cart_events()
             self.cart_events_to_events_log()
@@ -308,7 +308,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID,
     worlds_dir: str,
-    mine_dir: str = None,
+    sound_dir: str = None,
     world_time_nigh: TimeLinePoint = None,
     timeconversions: dict[TimeLineTag, TimeConversion] = None,
     _fiscunits: set[FiscTag] = None,
@@ -320,12 +320,12 @@ def worldunit_shop(
         timeconversions=get_empty_dict_if_None(timeconversions),
         _events={},
         _fiscunits=get_empty_set_if_None(_fiscunits),
-        _mine_dir=mine_dir,
+        _sound_dir=sound_dir,
         _pidgin_events={},
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._mine_dir:
-        x_worldunit.set_mine_dir(create_path(x_worldunit._world_dir, "mine"))
+    if not x_worldunit._sound_dir:
+        x_worldunit.set_sound_dir(create_path(x_worldunit._world_dir, "sound"))
     return x_worldunit
 
 

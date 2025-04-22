@@ -16,7 +16,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
+def test_WorldUnit_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -28,7 +28,7 @@ def test_WorldUnit_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -56,13 +56,13 @@ def test_WorldUnit_mine_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(mine_file_path, br00003_ex1_str, df1)
-    upsert_sheet(mine_file_path, br00003_ex2_str, df2)
-    upsert_sheet(mine_file_path, br00003_ex3_str, df3)
+    upsert_sheet(sound_file_path, br00003_ex1_str, df1)
+    upsert_sheet(sound_file_path, br00003_ex2_str, df2)
+    upsert_sheet(sound_file_path, br00003_ex3_str, df3)
     assert os_path_exists(cart_file_path) is False
 
     # WHEN
-    fizz_world.mine_to_cart_staging()
+    fizz_world.sound_to_cart_staging()
 
     # THEN
     print(f"{cart_file_path=}")

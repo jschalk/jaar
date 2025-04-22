@@ -9,7 +9,7 @@ from src.a17_idea_logic.idea_db_tool import (
     cart_agg_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_mine_to_cart_staging,
+    etl_sound_to_cart_staging,
     etl_cart_staging_to_cart_agg,
     etl_cart_agg_to_cart_events,
 )
@@ -31,9 +31,9 @@ def test_etl_cart_agg_to_cart_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_dir = create_path(get_test_etl_dir(), "mine")
+    sound_dir = create_path(get_test_etl_dir(), "sound")
     cart_dir = create_path(get_test_etl_dir(), "cart")
-    mine_file_path = create_path(mine_dir, ex_filename)
+    sound_file_path = create_path(sound_dir, ex_filename)
     cart_file_path = create_path(cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -48,8 +48,8 @@ def test_etl_cart_agg_to_cart_events_CreatesSheets_Scenario0(
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    etl_mine_to_cart_staging(mine_dir, cart_dir)
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    etl_sound_to_cart_staging(sound_dir, cart_dir)
     etl_cart_staging_to_cart_agg(cart_dir)
 
     # WHEN
@@ -92,9 +92,9 @@ def test_etl_cart_agg_to_cart_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_dir = create_path(get_test_etl_dir(), "mine")
+    sound_dir = create_path(get_test_etl_dir(), "sound")
     cart_dir = create_path(get_test_etl_dir(), "cart")
-    mine_file_path = create_path(mine_dir, ex_filename)
+    sound_file_path = create_path(sound_dir, ex_filename)
     cart_file_path = create_path(cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -110,8 +110,8 @@ def test_etl_cart_agg_to_cart_events_CreatesSheets_Scenario1(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    etl_mine_to_cart_staging(mine_dir, cart_dir)
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    etl_sound_to_cart_staging(sound_dir, cart_dir)
     etl_cart_staging_to_cart_agg(cart_dir)
 
     # WHEN

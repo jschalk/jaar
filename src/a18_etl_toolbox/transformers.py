@@ -168,23 +168,23 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_typeS[class_type]["inx_obj"]]
 
 
-def etl_mine_to_cart_staging(mine_dir: str, cart_dir: str):
-    transformer = MineToCartTransformer(mine_dir, cart_dir)
+def etl_sound_to_cart_staging(sound_dir: str, cart_dir: str):
+    transformer = SoundToCartTransformer(sound_dir, cart_dir)
     transformer.transform()
 
 
-class MineToCartTransformer:
-    def __init__(self, mine_dir: str, cart_dir: str):
-        self.mine_dir = mine_dir
+class SoundToCartTransformer:
+    def __init__(self, sound_dir: str, cart_dir: str):
+        self.sound_dir = sound_dir
         self.cart_dir = cart_dir
 
     def transform(self):
-        for idea_number, dfs in self._group_mine_data().items():
+        for idea_number, dfs in self._group_sound_data().items():
             self._save_to_cart_staging(idea_number, dfs)
 
-    def _group_mine_data(self):
+    def _group_sound_data(self):
         grouped_data = {}
-        for ref in get_all_idea_dataframes(self.mine_dir):
+        for ref in get_all_idea_dataframes(self.sound_dir):
             df = self._read_and_title_dataframe(ref)
             grouped_data.setdefault(ref.idea_number, []).append(df)
         return grouped_data

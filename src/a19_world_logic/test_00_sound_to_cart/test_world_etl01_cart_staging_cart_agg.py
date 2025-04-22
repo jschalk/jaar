@@ -30,7 +30,7 @@ def test_WorldUnit_cart_staging_to_cart_agg_CreatesOtxSheets_Scenario0_GroupByWo
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -44,8 +44,8 @@ def test_WorldUnit_cart_staging_to_cart_agg_CreatesOtxSheets_Scenario0_GroupByWo
     row2 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_cart_staging()
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    fizz_world.sound_to_cart_staging()
     cart__staging_df = pandas_read_excel(cart_file_path, sheet_name=cart_staging_str())
     assert len(cart__staging_df) == 3
 
@@ -79,7 +79,7 @@ def test_WorldUnit_cart_staging_to_cart_agg_CreatesOtxSheets_Scenario1_GroupByOn
     hour7am = "7am"
     hour8am = "8am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -93,8 +93,8 @@ def test_WorldUnit_cart_staging_to_cart_agg_CreatesOtxSheets_Scenario1_GroupByOn
     row3 = [sue_str, event3, accord23_str, minute_420, hour8am]
     row4 = [sue_str, event7, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_cart_staging()
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    fizz_world.sound_to_cart_staging()
     br00003_agg_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     cart_df = pandas_read_excel(br00003_agg_file_path, sheet_name=cart_staging_str())
     assert len(cart_df) == 4

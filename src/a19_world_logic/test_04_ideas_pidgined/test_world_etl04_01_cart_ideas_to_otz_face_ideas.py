@@ -79,7 +79,7 @@ def test_WorldUnit_cart_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+#     sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -93,8 +93,8 @@ def test_WorldUnit_cart_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     row3 = [sue_str, event3, accord23_str, hour7am, minute_480]
 #     row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
 #     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-#     upsert_sheet(mine_file_path, "example1_br00003", df1)
-#     fizz_world.mine_to_cart_staging()
+#     upsert_sheet(sound_file_path, "example1_br00003", df1)
+#     fizz_world.sound_to_cart_staging()
 #     br00003_agg_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
 #     cart_df = pandas_read_excel(br00003_agg_file_path, sheet_name=cart_staging_str())
 #     assert len(cart_df) == 4

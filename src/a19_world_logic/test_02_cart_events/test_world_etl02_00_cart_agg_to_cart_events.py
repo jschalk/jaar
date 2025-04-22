@@ -32,7 +32,7 @@ def test_WorldUnit_cart_agg_to_cart_events_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -47,8 +47,8 @@ def test_WorldUnit_cart_agg_to_cart_events_CreatesSheets_Scenario0(
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_cart_staging()
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    fizz_world.sound_to_cart_staging()
     fizz_world.cart_staging_to_cart_agg()
 
     # WHEN
@@ -92,7 +92,7 @@ def test_WorldUnit_cart_agg_to_cart_events_CreatesSheets_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mine_file_path = create_path(fizz_world._mine_dir, ex_filename)
+    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -108,8 +108,8 @@ def test_WorldUnit_cart_agg_to_cart_events_CreatesSheets_Scenario1(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
-    upsert_sheet(mine_file_path, "example1_br00003", df1)
-    fizz_world.mine_to_cart_staging()
+    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    fizz_world.sound_to_cart_staging()
     fizz_world.cart_staging_to_cart_agg()
 
     # WHEN
