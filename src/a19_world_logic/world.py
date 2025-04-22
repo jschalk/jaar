@@ -37,7 +37,7 @@ from src.a18_etl_toolbox.transformers import (
     get_pidgin_events_by_dirs,
     etl_cart_ideas_to_otz_face_ideas,
     etl_otz_face_ideas_to_otz_event_otx_ideas,
-    etl_otz_event_ideas_to_inx_events,
+    etl_otz_event_ideas_to_inz_events,
     etl_otz_inx_event_ideas_to_inz_faces,
     etl_inz_face_ideas_to_csv_files,
     etl_inz_face_csv_files2idea_staging_tables,
@@ -169,8 +169,8 @@ class WorldUnit:
     def otz_face_ideas_to_otz_event_otx_ideas(self):
         etl_otz_face_ideas_to_otz_event_otx_ideas(self._faces_otz_dir)
 
-    def otz_event_ideas_to_inx_events(self):
-        etl_otz_event_ideas_to_inx_events(self._faces_otz_dir, self._pidgin_events)
+    def otz_event_ideas_to_inz_events(self):
+        etl_otz_event_ideas_to_inz_events(self._faces_otz_dir, self._pidgin_events)
 
     def otz_inx_event_ideas_to_inz_faces(self):
         etl_otz_inx_event_ideas_to_inz_faces(self._faces_otz_dir, self._faces_inz_dir)
@@ -272,7 +272,7 @@ class WorldUnit:
             self.cart_agg_non_pidgin_ideas_to_cart_valid()  # self._events.keys()
             self.cart_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()
-            self.otz_event_ideas_to_inx_events()  # self._pidgin_events
+            self.otz_event_ideas_to_inz_events()  # self._pidgin_events
             self.otz_inx_event_ideas_to_inz_faces()
             self.inz_face_ideas_to_csv_files()
 

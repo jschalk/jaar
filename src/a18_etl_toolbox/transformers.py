@@ -699,7 +699,7 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_otz_event_ideas_to_inx_events(
+def etl_otz_event_ideas_to_inz_events(
     faces_otz_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
 ):
     for face_name in get_level1_dirs(faces_otz_dir):

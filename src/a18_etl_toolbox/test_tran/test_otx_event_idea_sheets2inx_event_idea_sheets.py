@@ -11,7 +11,7 @@ from src.a16_pidgin_logic.pidgin_config import pidgin_filename
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, cart_valid_str, sheet_exists
 from src.a18_etl_toolbox.transformers import (
-    etl_otz_event_ideas_to_inx_events,
+    etl_otz_event_ideas_to_inz_events,
     get_most_recent_event_int,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -31,7 +31,7 @@ def test_get_most_recent_event_int_ReturnsObj():
     assert get_most_recent_event_int({0, 1, 7}, 5) == 1
 
 
-def test_etl_otz_event_ideas_to_inx_events_Scenario0_NoPidginUnit():
+def test_etl_otz_event_ideas_to_inz_events_Scenario0_NoPidginUnit():
     # ESTABLISH
     sue_otx = "Sue"
     bob_otx = "Bob"
@@ -62,7 +62,7 @@ def test_etl_otz_event_ideas_to_inx_events_Scenario0_NoPidginUnit():
     assert sheet_exists(cart_e3_br00011_path, inx_str) is False
 
     # WHEN
-    etl_otz_event_ideas_to_inx_events(x_otz_dir, x_event_pidgins)
+    etl_otz_event_ideas_to_inz_events(x_otz_dir, x_event_pidgins)
 
     # THEN
     assert sheet_exists(cart_e3_br00011_path, inx_str)
@@ -74,7 +74,7 @@ def test_etl_otz_event_ideas_to_inx_events_Scenario0_NoPidginUnit():
     pandas_assert_frame_equal(e3_inx_df, example_e3_inx_df)
 
 
-def test_etl_otz_event_ideas_to_inx_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
+def test_etl_otz_event_ideas_to_inz_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -153,7 +153,7 @@ def test_etl_otz_event_ideas_to_inx_events_Scenario1_MultpleFaceNames_CreatesEve
     assert sheet_exists(cart_e9_br00011_path, inx_str) is False
 
     # WHEN
-    etl_otz_event_ideas_to_inx_events(x_otz_dir, x_event_pidgins)
+    etl_otz_event_ideas_to_inz_events(x_otz_dir, x_event_pidgins)
 
     # THEN
     assert sheet_exists(cart_e3_br00011_path, inx_str)
