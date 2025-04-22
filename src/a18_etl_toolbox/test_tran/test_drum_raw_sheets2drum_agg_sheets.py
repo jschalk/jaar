@@ -5,18 +5,18 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    drum_staging_str,
+    drum_raw_str,
     drum_agg_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_to_drum_staging,
-    etl_drum_staging_to_drum_agg,
+    etl_sound_to_drum_raw,
+    etl_drum_raw_to_drum_agg,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_etl_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -44,12 +44,12 @@ def test_etl_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_to_drum_staging(sound_dir, drum_dir)
-    drum__staging_df = pandas_read_excel(drum_file_path, sheet_name=drum_staging_str())
-    assert len(drum__staging_df) == 3
+    etl_sound_to_drum_raw(sound_dir, drum_dir)
+    drum__raw_df = pandas_read_excel(drum_file_path, sheet_name=drum_raw_str())
+    assert len(drum__raw_df) == 3
 
     # WHEN
-    etl_drum_staging_to_drum_agg(drum_dir)
+    etl_drum_raw_to_drum_agg(drum_dir)
 
     # THEN
     gen_otx_df = pandas_read_excel(drum_file_path, sheet_name=drum_agg_str())
@@ -61,10 +61,10 @@ def test_etl_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(drum_file_path) == [drum_staging_str(), drum_agg_str()]
+    assert get_sheet_names(drum_file_path) == [drum_raw_str(), drum_agg_str()]
 
 
-def test_etl_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_etl_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -93,12 +93,12 @@ def test_etl_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonC
     row3 = [sue_str, event_1, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_to_drum_staging(sound_dir, drum_dir)
-    drum_df = pandas_read_excel(drum_file_path, sheet_name=drum_staging_str())
+    etl_sound_to_drum_raw(sound_dir, drum_dir)
+    drum_df = pandas_read_excel(drum_file_path, sheet_name=drum_raw_str())
     assert len(drum_df) == 3
 
     # WHEN
-    etl_drum_staging_to_drum_agg(drum_dir)
+    etl_drum_raw_to_drum_agg(drum_dir)
 
     # THEN
     gen_otx_df = pandas_read_excel(drum_file_path, sheet_name=drum_agg_str())
@@ -111,4 +111,4 @@ def test_etl_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonC
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 1
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(drum_file_path) == [drum_staging_str(), drum_agg_str()]
+    assert get_sheet_names(drum_file_path) == [drum_raw_str(), drum_agg_str()]

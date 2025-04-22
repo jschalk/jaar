@@ -2,7 +2,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     db_table_exists,
     get_create_table_sqlstr,
     get_table_columns,
-    is_stageable,
+    required_columns_exist,
     create_select_query,
 )
 from src.a02_finance_toolboxs.deal import fisc_tag_str, owner_name_str

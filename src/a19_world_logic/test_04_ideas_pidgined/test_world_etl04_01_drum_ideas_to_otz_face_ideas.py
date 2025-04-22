@@ -65,7 +65,7 @@ def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
     assert sue_br3_agg_df.to_csv() == br00003_drum_agg_df.to_csv()
 
 
-# def test_WorldUnit_drum_staging_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+# def test_WorldUnit_drum_raw_to_drum_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -94,14 +94,14 @@ def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
 #     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
 #     upsert_sheet(sound_file_path, "example1_br00003", df1)
-#     fizz_world.sound_to_drum_staging()
+#     fizz_world.sound_to_drum_raw()
 #     br00003_agg_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
-#     drum_df = pandas_read_excel(br00003_agg_file_path, sheet_name=drum_staging_str())
+#     drum_df = pandas_read_excel(br00003_agg_file_path, sheet_name=drum_raw_str())
 #     assert len(drum_df) == 4
 #     assert sheet_exists(br00003_agg_file_path, drum_valid_str()) is False
 
 #     # WHEN
-#     fizz_world.drum_staging_to_drum_agg()
+#     fizz_world.drum_raw_to_drum_agg()
 
 #     # THEN
 #     assert sheet_exists(br00003_agg_file_path, drum_valid_str())
@@ -118,6 +118,6 @@ def test_WorldUnit_drum_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
 #     assert len(gen_br00003_agg_df) == len(ex_otx_df)
 #     assert len(gen_br00003_agg_df) == 2
 #     assert gen_br00003_agg_df.to_csv() == ex_otx_df.to_csv()
-#     assert get_sheet_names(br00003_agg_file_path) == [drum_staging_str(), drum_valid_str()]
+#     assert get_sheet_names(br00003_agg_file_path) == [drum_raw_str(), drum_valid_str()]
 
 #     assert 1 == 2

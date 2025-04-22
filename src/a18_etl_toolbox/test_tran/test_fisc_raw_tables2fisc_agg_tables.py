@@ -11,7 +11,7 @@ from src.a08_bud_atom_logic.atom_config import fund_coin_str, penny_str, respect
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef, FiscPrimeColumnsRef
 from src.a18_etl_toolbox.transformers import (
     create_fisc_tables,
-    fisc_staging_tables2fisc_agg_tables,
+    fisc_raw_tables2fisc_agg_tables,
     etl_fisc_agg_tables_to_fisc_csvs,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir
@@ -19,7 +19,7 @@ from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_fisc_staging_tables2fisc_agg_tables_PassesOnly_fisc_tag():
+def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -32,8 +32,8 @@ def test_fisc_staging_tables2fisc_agg_tables_PassesOnly_fisc_tag():
         create_fisc_tables(cursor)
 
         x_fisc = FiscPrimeObjsRef()
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_fisc.unit_stage_tablename} (idea_number, face_name, event_int, fisc_tag)
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_fisc.unit_raw_tablename} (idea_number, face_name, event_int, fisc_tag)
 VALUES
   ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
 , ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
@@ -41,12 +41,12 @@ VALUES
 , ('{br00011_str}', '{sue_inx}', {event7}, '{accord45_str}')
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(cursor, x_fisc.unit_stage_tablename) == 4
+        cursor.execute(insert_raw_sqlstr)
+        assert get_row_count(cursor, x_fisc.unit_raw_tablename) == 4
         assert get_row_count(cursor, x_fisc.unit_agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, x_fisc.unit_agg_tablename) == 2
@@ -83,7 +83,7 @@ VALUES
         assert fiscunit_agg_rows == [expected_row0, expected_row1]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -105,9 +105,9 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_mes
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        staging_tablename = x_objs.unit_stage_tablename
-        insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({x_cols.unit_staging_csv_header})
+        raw_tablename = x_objs.unit_raw_tablename
+        insert_raw_sqlstr = f"""
+INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
@@ -116,13 +116,13 @@ VALUES
 , ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
-        print(f"{x_objs.unit_stage_tablename=}")
+        cursor.execute(insert_raw_sqlstr)
+        print(f"{x_objs.unit_raw_tablename=}")
         agg_tablename = x_objs.unit_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) != 0
@@ -159,7 +159,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -181,9 +181,9 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_messa
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        staging_tablename = x_objs.unit_stage_tablename
-        insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({x_cols.unit_staging_csv_header})
+        raw_tablename = x_objs.unit_raw_tablename
+        insert_raw_sqlstr = f"""
+INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
@@ -192,13 +192,13 @@ VALUES
 , ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = x_objs.unit_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) != 0
@@ -222,7 +222,7 @@ VALUES
         assert rows == [expected_agg_row0]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -241,9 +241,9 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario2_fischour_Some_error_messa
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        staging_tablename = x_objs.hour_stage_tablename
-        insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({x_cols.hour_staging_csv_header})
+        raw_tablename = x_objs.hour_raw_tablename
+        insert_raw_sqlstr = f"""
+INSERT INTO {raw_tablename} ({x_cols.hour_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
@@ -252,13 +252,13 @@ VALUES
 , ('br00333','{sue_inx}',{event9},'{accord23_str}',{cumlative_minute_2},'{_8pm_str}',NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = x_objs.hour_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
@@ -270,7 +270,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -289,8 +289,8 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_messa
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_objs.mont_stage_tablename} ({x_cols.mont_staging_csv_header})
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_objs.mont_raw_tablename} ({x_cols.mont_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
@@ -299,13 +299,13 @@ VALUES
 , ('br00333','{sue_inx}',{event9},'{accord23_str}',{cumlative_day_2},'{aug_str}',NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = x_objs.mont_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
@@ -317,7 +317,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -336,8 +336,8 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_messa
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_objs.week_stage_tablename} ({x_cols.week_staging_csv_header})
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_objs.week_raw_tablename} ({x_cols.week_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
@@ -346,13 +346,13 @@ VALUES
 , ('br00333','{sue_inx}',{event9},'{accord23_str}',{weekday_order_2},'{wed_str}',NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = x_objs.week_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
@@ -364,7 +364,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -385,8 +385,8 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_messa
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_objs.deal_stage_tablename} ({x_cols.deal_staging_csv_header})
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_objs.deal_raw_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,'{x_error_message}')
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_2},NULL,'{x_error_message}')
@@ -396,13 +396,13 @@ VALUES
 , ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = x_objs.deal_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 3
@@ -415,7 +415,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 
-def test_fisc_staging_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -437,8 +437,8 @@ def test_fisc_staging_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_messa
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_objs.cash_stage_tablename} ({x_cols.cash_staging_csv_header})
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_objs.cash_raw_tablename} ({x_cols.cash_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},'{x_error_message}')
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_2},'{x_error_message}')
@@ -449,13 +449,13 @@ VALUES
 , ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},NULL,NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = x_objs.cash_agg_tablename
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fisc_staging_tables2fisc_agg_tables(cursor)
+        fisc_raw_tables2fisc_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 3

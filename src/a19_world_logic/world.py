@@ -20,13 +20,13 @@ from src.a01_word_logic.road import (
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_to_drum_staging,
-    etl_drum_staging_to_drum_agg,
+    etl_sound_to_drum_raw,
+    etl_drum_raw_to_drum_agg,
     etl_drum_agg_non_pidgin_ideas_to_drum_valid,
     etl_drum_agg_to_drum_events,
     etl_drum_events_to_events_log,
-    etl_drum_pidgin_staging_to_pidgin_agg,
-    etl_drum_agg_to_pidgin_staging,
+    etl_drum_pidgin_raw_to_pidgin_agg,
+    etl_drum_agg_to_pidgin_raw,
     etl_drum_events_log_to_events_agg,
     etl_events_agg_file_to_events_dict,
     etl_drum_pidgin_agg_to_otz_face_pidgin_agg,
@@ -40,12 +40,12 @@ from src.a18_etl_toolbox.transformers import (
     etl_otz_event_ideas_to_inz_events,
     etl_otz_inx_event_ideas_to_inz_faces,
     etl_inz_face_ideas_to_csv_files,
-    etl_inz_face_csv_files2idea_staging_tables,
-    etl_idea_staging_to_fisc_tables,
-    etl_fisc_staging_tables_to_fisc_csvs,
+    etl_inz_face_csv_files2idea_raw_tables,
+    etl_idea_raw_to_fisc_tables,
+    etl_fisc_raw_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_jsons,
-    etl_idea_staging_to_bud_tables,
+    etl_idea_raw_to_bud_tables,
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_pack_json,
     etl_event_pack_json_to_event_inherited_budunits,
@@ -116,11 +116,11 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
-    def sound_to_drum_staging(self):
-        etl_sound_to_drum_staging(self._sound_dir, self._drum_dir)
+    def sound_to_drum_raw(self):
+        etl_sound_to_drum_raw(self._sound_dir, self._drum_dir)
 
-    def drum_staging_to_drum_agg(self):
-        etl_drum_staging_to_drum_agg(self._drum_dir)
+    def drum_raw_to_drum_agg(self):
+        etl_drum_raw_to_drum_agg(self._drum_dir)
 
     def drum_agg_non_pidgin_ideas_to_drum_valid(self):
         etl_drum_agg_non_pidgin_ideas_to_drum_valid(
@@ -139,11 +139,11 @@ class WorldUnit:
     def events_agg_file_to_events_dict(self):
         self._events = etl_events_agg_file_to_events_dict(self._drum_dir)
 
-    def drum_agg_to_pidgin_staging(self):
-        etl_drum_agg_to_pidgin_staging(set(self._events.keys()), self._drum_dir)
+    def drum_agg_to_pidgin_raw(self):
+        etl_drum_agg_to_pidgin_raw(set(self._events.keys()), self._drum_dir)
 
-    def drum_pidgin_staging_to_pidgin_agg(self):
-        etl_drum_pidgin_staging_to_pidgin_agg(self._drum_dir)
+    def drum_pidgin_raw_to_pidgin_agg(self):
+        etl_drum_pidgin_raw_to_pidgin_agg(self._drum_dir)
 
     def drum_pidgin_agg_to_otz_face_pidgin_agg(self):
         etl_drum_pidgin_agg_to_otz_face_pidgin_agg(self._drum_dir, self._syntax_otz_dir)
@@ -178,19 +178,17 @@ class WorldUnit:
     def inz_face_ideas_to_csv_files(self):
         etl_inz_face_ideas_to_csv_files(self._syntax_inz_dir)
 
-    def inz_face_csv_files2idea_staging_tables(
-        self, conn_or_cursor: sqlite3_Connection
-    ):
-        etl_inz_face_csv_files2idea_staging_tables(conn_or_cursor, self._syntax_inz_dir)
+    def inz_face_csv_files2idea_raw_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_inz_face_csv_files2idea_raw_tables(conn_or_cursor, self._syntax_inz_dir)
 
-    def idea_staging_to_fisc_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_staging_to_fisc_tables(conn_or_cursor)
+    def idea_raw_to_fisc_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_raw_to_fisc_tables(conn_or_cursor)
 
-    def idea_staging_to_bud_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_staging_to_bud_tables(conn_or_cursor)
+    def idea_raw_to_bud_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_raw_to_bud_tables(conn_or_cursor)
 
     def inz_faces_ideas_to_fisc_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_staging_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
+        etl_fisc_raw_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
         etl_fisc_agg_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
     def fisc_agg_tables_to_fisc_jsons(self, cursor: sqlite3_Connection):
@@ -257,14 +255,14 @@ class WorldUnit:
         with sqlite3_connect(":memory:") as fisc_db_conn:
             cursor = fisc_db_conn.cursor()
 
-            self.sound_to_drum_staging()
-            self.drum_staging_to_drum_agg()
+            self.sound_to_drum_raw()
+            self.drum_raw_to_drum_agg()
             self.drum_agg_to_drum_events()
             self.drum_events_to_events_log()
             self.drum_events_log_to_events_agg()
             self.events_agg_file_to_events_dict()  # self._events
-            self.drum_agg_to_pidgin_staging()  # self._events.keys()
-            self.drum_pidgin_staging_to_pidgin_agg()
+            self.drum_agg_to_pidgin_raw()  # self._events.keys()
+            self.drum_pidgin_raw_to_pidgin_agg()
             self.drum_pidgin_agg_to_otz_face_pidgin_agg()
             self.otz_face_pidgins_to_otz_event_pidgins()
             self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
@@ -276,13 +274,13 @@ class WorldUnit:
             self.otz_inx_event_ideas_to_inz_faces()
             self.inz_face_ideas_to_csv_files()
 
-            self.inz_face_csv_files2idea_staging_tables(cursor)
-            self.idea_staging_to_fisc_tables(cursor)
+            self.inz_face_csv_files2idea_raw_tables(cursor)
+            self.idea_raw_to_fisc_tables(cursor)
             self.fisc_agg_tables_to_fisc_jsons(cursor)
             self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
             self.fisc_table2fisc_ote1_agg_csvs(cursor)
             self.fisc_ote1_agg_csvs2jsons()
-            self.idea_staging_to_bud_tables(cursor)
+            self.idea_raw_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
 
             self.event_bud_csvs_to_pack_json()

@@ -299,17 +299,17 @@ class PidginPrimeColumns:
         self.map_label_agg_columns = [*f1_columns, "otx_label", "inx_label", *back_cols]
         self.map_tag_agg_columns = [*f1_columns, "otx_tag", "inx_tag", *back_cols]
         self.map_road_agg_columns = [*f1_columns, "otx_road", "inx_road", *back_cols]
-        self.map_name_staging_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
-        self.map_label_staging_columns = [
+        self.map_name_raw_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
+        self.map_label_raw_columns = [
             *f2_cols,
             "otx_label",
             "inx_label",
             *back_cols,
         ]
-        self.map_tag_staging_columns = [
+        self.map_tag_raw_columns = [
             *f2_cols,
             "otx_tag",
             "inx_tag",
             *back_cols,
         ]
-        self.map_road_staging_columns = [*f2_cols, "otx_road", "inx_road", *back_cols]
+        self.map_road_raw_columns = [*f2_cols, "otx_road", "inx_road", *back_cols]

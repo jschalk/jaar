@@ -18,14 +18,14 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_idea_staging_to_fisc_tables_CreatesFiscStagingTables(
+def test_WorldUnit_idea_raw_to_fisc_tables_CreatesFiscRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.idea_staging_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
         fisc_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         fisc_cols = FiscPrimeColumnsRef()
         assert db_table_exists(cursor, fisc_objs.unit_agg_tablename)
@@ -35,12 +35,12 @@ def test_WorldUnit_idea_staging_to_fisc_tables_CreatesFiscStagingTables(
         assert db_table_exists(cursor, fisc_objs.mont_agg_tablename)
         assert db_table_exists(cursor, fisc_objs.week_agg_tablename)
 
-        assert db_table_exists(cursor, fisc_objs.unit_stage_tablename)
-        assert db_table_exists(cursor, fisc_objs.deal_stage_tablename)
-        assert db_table_exists(cursor, fisc_objs.cash_stage_tablename)
-        assert db_table_exists(cursor, fisc_objs.hour_stage_tablename)
-        assert db_table_exists(cursor, fisc_objs.mont_stage_tablename)
-        assert db_table_exists(cursor, fisc_objs.week_stage_tablename)
+        assert db_table_exists(cursor, fisc_objs.unit_raw_tablename)
+        assert db_table_exists(cursor, fisc_objs.deal_raw_tablename)
+        assert db_table_exists(cursor, fisc_objs.cash_raw_tablename)
+        assert db_table_exists(cursor, fisc_objs.hour_raw_tablename)
+        assert db_table_exists(cursor, fisc_objs.mont_raw_tablename)
+        assert db_table_exists(cursor, fisc_objs.week_raw_tablename)
 
         fisc_unit_agg_pragma = get_pragma_table_fetchall(fisc_cols.unit_agg_columns)
         fisc_deal_agg_pragma = get_pragma_table_fetchall(fisc_cols.deal_agg_columns)
@@ -48,24 +48,12 @@ def test_WorldUnit_idea_staging_to_fisc_tables_CreatesFiscStagingTables(
         fisc_hour_agg_pragma = get_pragma_table_fetchall(fisc_cols.hour_agg_columns)
         fisc_mont_agg_pragma = get_pragma_table_fetchall(fisc_cols.mont_agg_columns)
         fisc_week_agg_pragma = get_pragma_table_fetchall(fisc_cols.week_agg_columns)
-        fisc_unit_stage_pragma = get_pragma_table_fetchall(
-            fisc_cols.unit_staging_columns
-        )
-        fisc_deal_stage_pragma = get_pragma_table_fetchall(
-            fisc_cols.deal_staging_columns
-        )
-        fisc_cash_stage_pragma = get_pragma_table_fetchall(
-            fisc_cols.cash_staging_columns
-        )
-        fisc_hour_stage_pragma = get_pragma_table_fetchall(
-            fisc_cols.hour_staging_columns
-        )
-        fisc_mont_stage_pragma = get_pragma_table_fetchall(
-            fisc_cols.mont_staging_columns
-        )
-        fisc_week_stage_pragma = get_pragma_table_fetchall(
-            fisc_cols.week_staging_columns
-        )
+        fisc_unit_raw_pragma = get_pragma_table_fetchall(fisc_cols.unit_raw_columns)
+        fisc_deal_raw_pragma = get_pragma_table_fetchall(fisc_cols.deal_raw_columns)
+        fisc_cash_raw_pragma = get_pragma_table_fetchall(fisc_cols.cash_raw_columns)
+        fisc_hour_raw_pragma = get_pragma_table_fetchall(fisc_cols.hour_raw_columns)
+        fisc_mont_raw_pragma = get_pragma_table_fetchall(fisc_cols.mont_raw_columns)
+        fisc_week_raw_pragma = get_pragma_table_fetchall(fisc_cols.week_raw_columns)
         cursor.execute(f"PRAGMA table_info({fisc_objs.unit_agg_tablename})")
         assert fisc_unit_agg_pragma == cursor.fetchall()
         cursor.execute(f"PRAGMA table_info({fisc_objs.deal_agg_tablename})")
@@ -79,21 +67,21 @@ def test_WorldUnit_idea_staging_to_fisc_tables_CreatesFiscStagingTables(
         cursor.execute(f"PRAGMA table_info({fisc_objs.week_agg_tablename})")
         assert fisc_week_agg_pragma == cursor.fetchall()
 
-        cursor.execute(f"PRAGMA table_info({fisc_objs.unit_stage_tablename})")
-        assert fisc_unit_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fisc_objs.deal_stage_tablename})")
-        assert fisc_deal_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fisc_objs.cash_stage_tablename})")
-        assert fisc_cash_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fisc_objs.hour_stage_tablename})")
-        assert fisc_hour_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fisc_objs.mont_stage_tablename})")
-        assert fisc_mont_stage_pragma == cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info({fisc_objs.week_stage_tablename})")
-        assert fisc_week_stage_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.unit_raw_tablename})")
+        assert fisc_unit_raw_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.deal_raw_tablename})")
+        assert fisc_deal_raw_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.cash_raw_tablename})")
+        assert fisc_cash_raw_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.hour_raw_tablename})")
+        assert fisc_hour_raw_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.mont_raw_tablename})")
+        assert fisc_mont_raw_pragma == cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info({fisc_objs.week_raw_tablename})")
+        assert fisc_week_raw_pragma == cursor.fetchall()
 
 
-def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagingTables(
+def test_WorldUnit_idea_raw_to_fisc_tables_Bud_dimen_idea_PopulatesFiscRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -116,16 +104,16 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_raw_tables(cursor)
         fisc_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
-        assert not db_table_exists(cursor, fisc_objs.unit_stage_tablename)
+        assert not db_table_exists(cursor, fisc_objs.unit_raw_tablename)
 
         # WHEN
-        fizz_world.idea_staging_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, fisc_objs.unit_stage_tablename) == 2
-        cursor.execute(f"SELECT * FROM {fisc_objs.unit_stage_tablename}")
+        assert get_row_count(cursor, fisc_objs.unit_raw_tablename) == 2
+        cursor.execute(f"SELECT * FROM {fisc_objs.unit_raw_tablename}")
         fiscunit_db_rows = cursor.fetchall()
         expected_row1 = (
             br00011_str,
@@ -164,7 +152,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_Bud_dimen_idea_PopulatesFiscStagi
         assert fiscunit_db_rows == [expected_row1, expected_row2]
 
 
-def test_WorldUnit_set_idea_staging_error_message_ChangeAttrs(env_dir_setup_cleanup):
+def test_WorldUnit_set_idea_raw_error_message_ChangeAttrs(env_dir_setup_cleanup):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
@@ -185,10 +173,10 @@ def test_WorldUnit_set_idea_staging_error_message_ChangeAttrs(env_dir_setup_clea
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        x_tablename = x_objs.deal_stage_tablename
+        x_tablename = x_objs.deal_raw_tablename
         assert db_table_exists(cursor, x_tablename)
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_tablename} ({x_cols.deal_staging_csv_header})
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
@@ -197,8 +185,8 @@ VALUES
 , ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
-        print(f"{insert_staging_sqlstr=}")
-        cursor.execute(insert_staging_sqlstr)
+        print(f"{insert_raw_sqlstr=}")
+        cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
         select_sqlstr = f"SELECT {event_int_str()}, {fisc_tag_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
@@ -215,7 +203,7 @@ VALUES
         ]
 
         # WHEN
-        fizz_world.idea_staging_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)

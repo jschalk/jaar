@@ -30,13 +30,13 @@ class FiscPrimeObjsRef:
         self.mont_agg_tablename = "fisc_timeline_month_agg"
         self.week_agg_tablename = "fisc_timeline_weekday_agg"
         self.offi_agg_tablename = "fisc_timeoffi_agg"
-        self.unit_stage_tablename = "fiscunit_staging"
-        self.deal_stage_tablename = "fisc_dealunit_staging"
-        self.cash_stage_tablename = "fisc_cashbook_staging"
-        self.hour_stage_tablename = "fisc_timeline_hour_staging"
-        self.mont_stage_tablename = "fisc_timeline_month_staging"
-        self.week_stage_tablename = "fisc_timeline_weekday_staging"
-        self.offi_stage_tablename = "fisc_timeoffi_staging"
+        self.unit_raw_tablename = "fiscunit_raw"
+        self.deal_raw_tablename = "fisc_dealunit_raw"
+        self.cash_raw_tablename = "fisc_cashbook_raw"
+        self.hour_raw_tablename = "fisc_timeline_hour_raw"
+        self.mont_raw_tablename = "fisc_timeline_month_raw"
+        self.week_raw_tablename = "fisc_timeline_weekday_raw"
+        self.offi_raw_tablename = "fisc_timeoffi_raw"
         self.unit_agg_csv_filename = "fiscunit_agg.csv"
         self.deal_agg_csv_filename = "fisc_dealunit_agg.csv"
         self.cash_agg_csv_filename = "fisc_cashbook_agg.csv"
@@ -51,20 +51,20 @@ class FiscPrimeObjsRef:
         self.mont_agg_csv_path = create_path(x_dir, self.mont_agg_csv_filename)
         self.week_agg_csv_path = create_path(x_dir, self.week_agg_csv_filename)
         self.offi_agg_csv_path = create_path(x_dir, self.offi_agg_csv_filename)
-        self.unit_stage_csv_filename = "fiscunit_staging.csv"
-        self.deal_stage_csv_filename = "fisc_dealunit_staging.csv"
-        self.cash_stage_csv_filename = "fisc_cashbook_staging.csv"
-        self.hour_stage_csv_filename = "fisc_timeline_hour_staging.csv"
-        self.mont_stage_csv_filename = "fisc_timeline_month_staging.csv"
-        self.week_stage_csv_filename = "fisc_timeline_weekday_staging.csv"
-        self.offi_stage_csv_filename = "fisc_timeoffi_staging.csv"
-        self.unit_stage_csv_path = create_path(x_dir, self.unit_stage_csv_filename)
-        self.deal_stage_csv_path = create_path(x_dir, self.deal_stage_csv_filename)
-        self.cash_stage_csv_path = create_path(x_dir, self.cash_stage_csv_filename)
-        self.hour_stage_csv_path = create_path(x_dir, self.hour_stage_csv_filename)
-        self.mont_stage_csv_path = create_path(x_dir, self.mont_stage_csv_filename)
-        self.week_stage_csv_path = create_path(x_dir, self.week_stage_csv_filename)
-        self.offi_stage_csv_path = create_path(x_dir, self.offi_stage_csv_filename)
+        self.unit_raw_csv_filename = "fiscunit_raw.csv"
+        self.deal_raw_csv_filename = "fisc_dealunit_raw.csv"
+        self.cash_raw_csv_filename = "fisc_cashbook_raw.csv"
+        self.hour_raw_csv_filename = "fisc_timeline_hour_raw.csv"
+        self.mont_raw_csv_filename = "fisc_timeline_month_raw.csv"
+        self.week_raw_csv_filename = "fisc_timeline_weekday_raw.csv"
+        self.offi_raw_csv_filename = "fisc_timeoffi_raw.csv"
+        self.unit_raw_csv_path = create_path(x_dir, self.unit_raw_csv_filename)
+        self.deal_raw_csv_path = create_path(x_dir, self.deal_raw_csv_filename)
+        self.cash_raw_csv_path = create_path(x_dir, self.cash_raw_csv_filename)
+        self.hour_raw_csv_path = create_path(x_dir, self.hour_raw_csv_filename)
+        self.mont_raw_csv_path = create_path(x_dir, self.mont_raw_csv_filename)
+        self.week_raw_csv_path = create_path(x_dir, self.week_raw_csv_filename)
+        self.offi_raw_csv_path = create_path(x_dir, self.offi_raw_csv_filename)
 
         self.unit_excel_filename = "fiscunit.xlsx"
         self.deal_excel_filename = "fisc_dealunit.xlsx"
@@ -124,20 +124,20 @@ class FiscPrimeColumnsRef:
         self.mont_agg_csv_header = "fisc_tag,cumlative_day,month_tag"
         self.week_agg_csv_header = "fisc_tag,weekday_order,weekday_tag"
         self.offi_agg_csv_header = "fisc_tag,offi_time"
-        self.unit_staging_columns = [*_front_cols, *self.unit_agg_columns, *_back_cols]
-        self.deal_staging_columns = [*_front_cols, *self.deal_agg_columns, *_back_cols]
-        self.cash_staging_columns = [*_front_cols, *self.cash_agg_columns, *_back_cols]
-        self.hour_staging_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
-        self.mont_staging_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
-        self.week_staging_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
-        self.offi_staging_columns = [*_front_cols, *self.offi_agg_columns, *_back_cols]
-        self.unit_staging_csv_header = """idea_number,face_name,event_int,fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
-        self.deal_staging_csv_header = """idea_number,face_name,event_int,fisc_tag,owner_name,deal_time,quota,celldepth,error_message"""
-        self.cash_staging_csv_header = """idea_number,face_name,event_int,fisc_tag,owner_name,acct_name,tran_time,amount,error_message"""
-        self.hour_staging_csv_header = """idea_number,face_name,event_int,fisc_tag,cumlative_minute,hour_tag,error_message"""
-        self.mont_staging_csv_header = """idea_number,face_name,event_int,fisc_tag,cumlative_day,month_tag,error_message"""
-        self.week_staging_csv_header = """idea_number,face_name,event_int,fisc_tag,weekday_order,weekday_tag,error_message"""
-        self.offi_staging_csv_header = (
+        self.unit_raw_columns = [*_front_cols, *self.unit_agg_columns, *_back_cols]
+        self.deal_raw_columns = [*_front_cols, *self.deal_agg_columns, *_back_cols]
+        self.cash_raw_columns = [*_front_cols, *self.cash_agg_columns, *_back_cols]
+        self.hour_raw_columns = [*_front_cols, *self.hour_agg_columns, *_back_cols]
+        self.mont_raw_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
+        self.week_raw_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
+        self.offi_raw_columns = [*_front_cols, *self.offi_agg_columns, *_back_cols]
+        self.unit_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
+        self.deal_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,owner_name,deal_time,quota,celldepth,error_message"""
+        self.cash_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,owner_name,acct_name,tran_time,amount,error_message"""
+        self.hour_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,cumlative_minute,hour_tag,error_message"""
+        self.mont_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,cumlative_day,month_tag,error_message"""
+        self.week_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,weekday_order,weekday_tag,error_message"""
+        self.offi_raw_csv_header = (
             """idea_number,face_name,event_int,fisc_tag,offi_time,error_message"""
         )
         self.unit_agg_empty_csv = f"{self.unit_agg_csv_header}\n"
@@ -152,20 +152,20 @@ class FiscPrimeColumnsRef:
 def create_init_fisc_prime_files(fiscs_dir: str):
     fiscref = FiscPrimeObjsRef(fiscs_dir)
     xc = FiscPrimeColumnsRef()
-    unit_staging_df = DataFrame([], columns=xc.unit_staging_columns)
-    deal_staging_df = DataFrame([], columns=xc.deal_staging_columns)
-    cash_staging_df = DataFrame([], columns=xc.cash_staging_columns)
-    hour_staging_df = DataFrame([], columns=xc.hour_staging_columns)
-    mont_staging_df = DataFrame([], columns=xc.mont_staging_columns)
-    week_staging_df = DataFrame([], columns=xc.week_staging_columns)
-    offi_staging_df = DataFrame([], columns=xc.offi_staging_columns)
-    upsert_sheet(fiscref.unit_excel_path, "staging", unit_staging_df)
-    upsert_sheet(fiscref.deal_excel_path, "staging", deal_staging_df)
-    upsert_sheet(fiscref.cash_excel_path, "staging", cash_staging_df)
-    upsert_sheet(fiscref.hour_excel_path, "staging", hour_staging_df)
-    upsert_sheet(fiscref.mont_excel_path, "staging", mont_staging_df)
-    upsert_sheet(fiscref.week_excel_path, "staging", week_staging_df)
-    upsert_sheet(fiscref.offi_excel_path, "staging", offi_staging_df)
+    unit_raw_df = DataFrame([], columns=xc.unit_raw_columns)
+    deal_raw_df = DataFrame([], columns=xc.deal_raw_columns)
+    cash_raw_df = DataFrame([], columns=xc.cash_raw_columns)
+    hour_raw_df = DataFrame([], columns=xc.hour_raw_columns)
+    mont_raw_df = DataFrame([], columns=xc.mont_raw_columns)
+    week_raw_df = DataFrame([], columns=xc.week_raw_columns)
+    offi_raw_df = DataFrame([], columns=xc.offi_raw_columns)
+    upsert_sheet(fiscref.unit_excel_path, "raw", unit_raw_df)
+    upsert_sheet(fiscref.deal_excel_path, "raw", deal_raw_df)
+    upsert_sheet(fiscref.cash_excel_path, "raw", cash_raw_df)
+    upsert_sheet(fiscref.hour_excel_path, "raw", hour_raw_df)
+    upsert_sheet(fiscref.mont_excel_path, "raw", mont_raw_df)
+    upsert_sheet(fiscref.week_excel_path, "raw", week_raw_df)
+    upsert_sheet(fiscref.offi_excel_path, "raw", offi_raw_df)
 
     unit_agg_df = DataFrame([], columns=xc.unit_agg_columns)
     deal_agg_df = DataFrame([], columns=xc.deal_agg_columns)

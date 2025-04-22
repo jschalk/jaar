@@ -512,7 +512,7 @@ def create_insert_query(
 VALUES ({values_str}"""
 
 
-def is_stageable(
+def required_columns_exist(
     conn_or_cursor: sqlite3_Connection,
     src_table: str,
     required_columns: set[str],

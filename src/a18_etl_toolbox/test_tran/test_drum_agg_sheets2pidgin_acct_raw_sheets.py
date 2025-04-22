@@ -15,13 +15,13 @@ from src.a16_pidgin_logic.pidgin_config import (
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, drum_agg_str
 from src.a18_etl_toolbox.tran_path import create_drum_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_drum_agg_to_pidgin_name_staging
+from src.a18_etl_toolbox.transformers import etl_drum_agg_to_pidgin_name_raw
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
+def test_etl_drum_agg_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -53,28 +53,28 @@ def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario0_SingleIdea(
 
     # WHEN
     legitimate_events = {event7}
-    etl_drum_agg_to_pidgin_name_staging(legitimate_events, x_drum_dir)
+    etl_drum_agg_to_pidgin_name_raw(legitimate_events, x_drum_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    name_staging_str = "name_staging"
-    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
-    name_staging_columns = PidginPrimeColumns().map_name_staging_columns
-    assert list(gen_name_df.columns) == name_staging_columns
+    name_raw_str = "name_raw"
+    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
+    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    assert list(gen_name_df.columns) == name_raw_columns
     assert len(gen_name_df) == 2
     bx = "br00113"
     e1_name0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_name_rows = [e1_name0, e1_name1]
-    e1_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
+    e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
     assert len(gen_name_df) == len(e1_name_df)
     print(f"{gen_name_df.to_csv()=}")
     print(f" {e1_name_df.to_csv()=}")
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [name_staging_str]
+    assert get_sheet_names(pidgin_path) == [name_raw_str]
 
 
-def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_drum_agg_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -127,14 +127,14 @@ def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
 
     # WHEN
     legitimate_events = {event1, event2, event7, event5}
-    etl_drum_agg_to_pidgin_name_staging(legitimate_events, x_drum_dir)
+    etl_drum_agg_to_pidgin_name_raw(legitimate_events, x_drum_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    name_staging_str = "name_staging"
-    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
-    name_staging_columns = PidginPrimeColumns().map_name_staging_columns
-    assert list(gen_name_df.columns) == name_staging_columns
+    name_raw_str = "name_raw"
+    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
+    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    assert list(gen_name_df.columns) == name_raw_columns
     assert len(gen_name_df) == 5
     b3 = "br00113"
     b4 = "br00043"
@@ -145,15 +145,15 @@ def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario1_MultipleIdeas
     e1_name1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
     e1_name_rows = [e1_name3, e1_name4, e1_name5, e1_name0, e1_name1]
-    e1_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
+    e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
     assert len(gen_name_df) == len(e1_name_df)
     print(f"{gen_name_df.to_csv()=}")
     print(f" {e1_name_df.to_csv()=}")
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [name_staging_str]
+    assert get_sheet_names(pidgin_path) == [name_raw_str]
 
 
-def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_drum_agg_to_pidgin_name_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -205,23 +205,23 @@ def test_etl_drum_agg_to_pidgin_name_staging_CreatesFile_Scenario2_WorldUnit_eve
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_drum_agg_to_pidgin_name_staging(legitimate_events, x_drum_dir)
+    etl_drum_agg_to_pidgin_name_raw(legitimate_events, x_drum_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    name_staging_str = "name_staging"
-    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
-    name_staging_columns = PidginPrimeColumns().map_name_staging_columns
-    assert list(gen_name_df.columns) == name_staging_columns
+    name_raw_str = "name_raw"
+    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
+    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    assert list(gen_name_df.columns) == name_raw_columns
     assert len(gen_name_df) == 2
     b3 = "br00113"
     b4 = "br00043"
     e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     e1_name_rows = [e1_name3, e1_name4]
-    e1_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
+    e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
     assert len(gen_name_df) == len(e1_name_df)
     print(f"{gen_name_df.to_csv()=}")
     print(f" {e1_name_df.to_csv()=}")
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [name_staging_str]
+    assert get_sheet_names(pidgin_path) == [name_raw_str]

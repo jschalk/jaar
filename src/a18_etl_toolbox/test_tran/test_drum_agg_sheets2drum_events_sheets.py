@@ -5,12 +5,12 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    drum_staging_str,
+    drum_raw_str,
     drum_agg_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_to_drum_staging,
-    etl_drum_staging_to_drum_agg,
+    etl_sound_to_drum_raw,
+    etl_drum_raw_to_drum_agg,
     etl_drum_agg_to_drum_events,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -49,8 +49,8 @@ def test_etl_drum_agg_to_drum_events_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_to_drum_staging(sound_dir, drum_dir)
-    etl_drum_staging_to_drum_agg(drum_dir)
+    etl_sound_to_drum_raw(sound_dir, drum_dir)
+    etl_drum_raw_to_drum_agg(drum_dir)
 
     # WHEN
     etl_drum_agg_to_drum_events(drum_dir)
@@ -70,7 +70,7 @@ def test_etl_drum_agg_to_drum_events_CreatesSheets_Scenario0(
     assert len(gen_otx_events_df) == len(ex_otx_events_df)
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
     assert get_sheet_names(drum_file_path) == [
-        drum_staging_str(),
+        drum_raw_str(),
         drum_agg_str(),
         "drum_events",
     ]
@@ -111,8 +111,8 @@ def test_etl_drum_agg_to_drum_events_CreatesSheets_Scenario1(
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_to_drum_staging(sound_dir, drum_dir)
-    etl_drum_staging_to_drum_agg(drum_dir)
+    etl_sound_to_drum_raw(sound_dir, drum_dir)
+    etl_drum_raw_to_drum_agg(drum_dir)
 
     # WHEN
     etl_drum_agg_to_drum_events(drum_dir)

@@ -31,7 +31,7 @@ def test_WorldUnit_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
         create_fisc_tables(cursor)
         fizz_world.fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
-        insert_staging_sqlstr = f"""
+        insert_raw_sqlstr = f"""
 INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
@@ -39,7 +39,7 @@ VALUES
 , ({event7}, '{accord45_str}', '{sue_str}', {timepoint66})
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         fisc_mstr_dir = fizz_world._fisc_mstr_dir
         a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
         a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)

@@ -59,12 +59,12 @@ from src.a17_idea_logic.idea_db_tool import (
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_drum_staging_grouping_with_all_values_equal_df,
+    get_drum_raw_grouping_with_all_values_equal_df,
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
     get_ordered_csv,
-    get_idea_into_dimen_staging_query,
+    get_idea_into_dimen_raw_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import (
@@ -76,11 +76,11 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_fisc_tables,
     create_bud_tables,
     get_fisc_update_inconsist_error_message_sqlstrs,
-    get_fisc_insert_agg_from_staging_sqlstrs,
+    get_fisc_insert_agg_from_raw_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
-    get_bud_insert_put_agg_from_staging_sqlstrs,
-    get_bud_insert_del_agg_from_staging_sqlstrs,
-    IDEA_STAGEABLE_PUT_DIMENS,
+    get_bud_insert_put_agg_from_raw_sqlstrs,
+    get_bud_insert_del_agg_from_raw_sqlstrs,
+    IDEA_RAWABLE_PUT_DIMENS,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -116,28 +116,28 @@ MAPS_DIMENS = {
 
 class_typeS = {
     "NameUnit": {
-        "stage": "name_staging",
+        "raw": "name_raw",
         "agg": "name_agg",
         "csv_filename": "name.csv",
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
     "LabelUnit": {
-        "stage": "label_staging",
+        "raw": "label_raw",
         "agg": "label_agg",
         "csv_filename": "label.csv",
         "otx_obj": "otx_label",
         "inx_obj": "inx_label",
     },
     "TagUnit": {
-        "stage": "tag_staging",
+        "raw": "tag_raw",
         "agg": "tag_agg",
         "csv_filename": "tag.csv",
         "otx_obj": "otx_tag",
         "inx_obj": "inx_tag",
     },
     "RoadUnit": {
-        "stage": "road_staging",
+        "raw": "road_raw",
         "agg": "road_agg",
         "csv_filename": "road.csv",
         "otx_obj": "otx_road",
@@ -152,8 +152,8 @@ def get_class_type(pidgin_dimen: str) -> str:
     return MAPS_DIMENS[pidgin_dimen]
 
 
-def get_sheet_stage_name(class_type: str) -> str:
-    return class_typeS[class_type]["stage"]
+def get_sheet_raw_name(class_type: str) -> str:
+    return class_typeS[class_type]["raw"]
 
 
 def get_sheet_agg_name(class_type: str) -> str:
@@ -168,7 +168,7 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_typeS[class_type]["inx_obj"]]
 
 
-def etl_sound_to_drum_staging(sound_dir: str, drum_dir: str):
+def etl_sound_to_drum_raw(sound_dir: str, drum_dir: str):
     transformer = SoundToDrumTransformer(sound_dir, drum_dir)
     transformer.transform()
 
@@ -180,7 +180,7 @@ class SoundToDrumTransformer:
 
     def transform(self):
         for idea_number, dfs in self._group_sound_data().items():
-            self._save_to_drum_staging(idea_number, dfs)
+            self._save_to_drum_raw(idea_number, dfs)
 
     def _group_sound_data(self):
         grouped_data = {}
@@ -197,10 +197,10 @@ class SoundToDrumTransformer:
         df["sheet_name"] = ref.sheet_name
         return df
 
-    def _save_to_drum_staging(self, idea_number: str, dfs: list):
+    def _save_to_drum_raw(self, idea_number: str, dfs: list):
         job_df = pandas_concat(dfs)
         drum_path = create_path(self.drum_dir, f"{idea_number}.xlsx")
-        upsert_sheet(drum_path, "drum_staging", job_df)
+        upsert_sheet(drum_path, "drum_raw", job_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -216,27 +216,25 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_drum_staging_to_drum_agg(drum_dir):
+def etl_drum_raw_to_drum_agg(drum_dir):
     for br_ref in get_existing_excel_idea_file_refs(drum_dir):
         drum_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        drum_staging_df = pandas_read_excel(drum_idea_path, "drum_staging")
-        otx_df = create_df_with_groupby_idea_columns(
-            drum_staging_df, br_ref.idea_number
-        )
+        drum_raw_df = pandas_read_excel(drum_idea_path, "drum_raw")
+        otx_df = create_df_with_groupby_idea_columns(drum_raw_df, br_ref.idea_number)
         upsert_sheet(drum_idea_path, "drum_agg", otx_df)
 
 
 def create_df_with_groupby_idea_columns(
-    drum_staging_df: DataFrame, idea_number: str
+    drum_raw_df: DataFrame, idea_number: str
 ) -> DataFrame:
     idea_filename = get_idea_format_filename(idea_number)
     idearef = get_idearef_obj(idea_filename)
     required_columns = idearef.get_otx_keys_list()
     idea_columns_set = set(idearef._attributes.keys())
     idea_columns_list = get_default_sorted_list(idea_columns_set)
-    drum_staging_df = drum_staging_df[idea_columns_list]
-    return get_drum_staging_grouping_with_all_values_equal_df(
-        drum_staging_df, required_columns, idea_number
+    drum_raw_df = drum_raw_df[idea_columns_list]
+    return get_drum_raw_grouping_with_all_values_equal_df(
+        drum_raw_df, required_columns, idea_number
     )
 
 
@@ -361,44 +359,38 @@ def etl_events_agg_file_to_events_dict(drum_dir) -> dict[EventInt, FaceName]:
     return x_dict
 
 
-def drum_agg_single_to_pidgin_staging(
+def drum_agg_single_to_pidgin_raw(
     pidgin_dimen: str, legitimate_events: set[EventInt], drum_dir: str
 ):
     x_events = legitimate_events
-    transformer = DrumAggToStagingTransformer(drum_dir, pidgin_dimen, x_events)
+    transformer = DrumAggToRawTransformer(drum_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-def etl_drum_agg_to_pidgin_name_staging(
-    legitimate_events: set[EventInt], drum_dir: str
-):
-    drum_agg_single_to_pidgin_staging("map_name", legitimate_events, drum_dir)
+def etl_drum_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], drum_dir: str):
+    drum_agg_single_to_pidgin_raw("map_name", legitimate_events, drum_dir)
 
 
-def etl_drum_agg_to_pidgin_label_staging(
-    legitimate_events: set[EventInt], drum_dir: str
-):
-    drum_agg_single_to_pidgin_staging("map_label", legitimate_events, drum_dir)
+def etl_drum_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], drum_dir: str):
+    drum_agg_single_to_pidgin_raw("map_label", legitimate_events, drum_dir)
 
 
-def etl_drum_agg_to_pidgin_tag_staging(legitimate_events: set[EventInt], drum_dir: str):
-    drum_agg_single_to_pidgin_staging("map_tag", legitimate_events, drum_dir)
+def etl_drum_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], drum_dir: str):
+    drum_agg_single_to_pidgin_raw("map_tag", legitimate_events, drum_dir)
 
 
-def etl_drum_agg_to_pidgin_road_staging(
-    legitimate_events: set[EventInt], drum_dir: str
-):
-    drum_agg_single_to_pidgin_staging("map_road", legitimate_events, drum_dir)
+def etl_drum_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], drum_dir: str):
+    drum_agg_single_to_pidgin_raw("map_road", legitimate_events, drum_dir)
 
 
-def etl_drum_agg_to_pidgin_staging(legitimate_events: set[EventInt], drum_dir: str):
-    etl_drum_agg_to_pidgin_name_staging(legitimate_events, drum_dir)
-    etl_drum_agg_to_pidgin_label_staging(legitimate_events, drum_dir)
-    etl_drum_agg_to_pidgin_tag_staging(legitimate_events, drum_dir)
-    etl_drum_agg_to_pidgin_road_staging(legitimate_events, drum_dir)
+def etl_drum_agg_to_pidgin_raw(legitimate_events: set[EventInt], drum_dir: str):
+    etl_drum_agg_to_pidgin_name_raw(legitimate_events, drum_dir)
+    etl_drum_agg_to_pidgin_label_raw(legitimate_events, drum_dir)
+    etl_drum_agg_to_pidgin_tag_raw(legitimate_events, drum_dir)
+    etl_drum_agg_to_pidgin_road_raw(legitimate_events, drum_dir)
 
 
-class DrumAggToStagingTransformer:
+class DrumAggToRawTransformer:
     def __init__(
         self, drum_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
@@ -418,16 +410,16 @@ class DrumAggToStagingTransformer:
             idea_filename = f"{idea_number}.xlsx"
             drum_idea_path = create_path(self.drum_dir, idea_filename)
             if os_path_exists(drum_idea_path):
-                self.insert_staging_rows(
+                self.insert_raw_rows(
                     pidgin_df, idea_number, drum_idea_path, pidgin_columns
                 )
 
         pidgin_file_path = create_drum_pidgin_path(self.drum_dir)
-        upsert_sheet(pidgin_file_path, get_sheet_stage_name(self.class_type), pidgin_df)
+        upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
 
-    def insert_staging_rows(
+    def insert_raw_rows(
         self,
-        stage_df: DataFrame,
+        raw_df: DataFrame,
         idea_number: str,
         drum_idea_path: str,
         df_columns: list[str],
@@ -448,8 +440,8 @@ class DrumAggToStagingTransformer:
                 unknown_word = None
                 if "unknown_word" not in df_missing_cols:
                     unknown_word = x_row["unknown_word"]
-                df_len = len(stage_df.index)
-                stage_df.loc[df_len] = [
+                df_len = len(raw_df.index)
+                raw_df.loc[df_len] = [
                     idea_number,
                     face_name,
                     event_int,
@@ -472,35 +464,35 @@ class DrumAggToStagingTransformer:
         return None
 
 
-def etl_pidgin_name_staging_to_name_agg(drum_dir: str):
-    etl_pidgin_single_staging_to_agg(drum_dir, "map_name")
+def etl_pidgin_name_raw_to_name_agg(drum_dir: str):
+    etl_pidgin_single_raw_to_agg(drum_dir, "map_name")
 
 
-def etl_pidgin_label_staging_to_label_agg(drum_dir: str):
-    etl_pidgin_single_staging_to_agg(drum_dir, "map_label")
+def etl_pidgin_label_raw_to_label_agg(drum_dir: str):
+    etl_pidgin_single_raw_to_agg(drum_dir, "map_label")
 
 
-def etl_pidgin_road_staging_to_road_agg(drum_dir: str):
-    etl_pidgin_single_staging_to_agg(drum_dir, "map_road")
+def etl_pidgin_road_raw_to_road_agg(drum_dir: str):
+    etl_pidgin_single_raw_to_agg(drum_dir, "map_road")
 
 
-def etl_pidgin_tag_staging_to_tag_agg(drum_dir: str):
-    etl_pidgin_single_staging_to_agg(drum_dir, "map_tag")
+def etl_pidgin_tag_raw_to_tag_agg(drum_dir: str):
+    etl_pidgin_single_raw_to_agg(drum_dir, "map_tag")
 
 
-def etl_pidgin_single_staging_to_agg(drum_dir: str, map_dimen: str):
-    transformer = PidginStagingToAggTransformer(drum_dir, map_dimen)
+def etl_pidgin_single_raw_to_agg(drum_dir: str, map_dimen: str):
+    transformer = PidginRawToAggTransformer(drum_dir, map_dimen)
     transformer.transform()
 
 
-def etl_drum_pidgin_staging_to_pidgin_agg(drum_dir):
-    etl_pidgin_name_staging_to_name_agg(drum_dir)
-    etl_pidgin_label_staging_to_label_agg(drum_dir)
-    etl_pidgin_road_staging_to_road_agg(drum_dir)
-    etl_pidgin_tag_staging_to_tag_agg(drum_dir)
+def etl_drum_pidgin_raw_to_pidgin_agg(drum_dir):
+    etl_pidgin_name_raw_to_name_agg(drum_dir)
+    etl_pidgin_label_raw_to_label_agg(drum_dir)
+    etl_pidgin_road_raw_to_road_agg(drum_dir)
+    etl_pidgin_tag_raw_to_tag_agg(drum_dir)
 
 
-class PidginStagingToAggTransformer:
+class PidginRawToAggTransformer:
     def __init__(self, drum_dir: str, pidgin_dimen: str):
         self.drum_dir = drum_dir
         self.pidgin_dimen = pidgin_dimen
@@ -517,16 +509,16 @@ class PidginStagingToAggTransformer:
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
         pidgin_file_path = create_drum_pidgin_path(self.drum_dir)
-        stage_sheet_name = get_sheet_stage_name(self.class_type)
-        staging_df = pandas_read_excel(pidgin_file_path, sheet_name=stage_sheet_name)
-        x_pidginbodybook = self.get_validated_pidginbodybook(staging_df)
+        raw_sheet_name = get_sheet_raw_name(self.class_type)
+        raw_df = pandas_read_excel(pidgin_file_path, sheet_name=raw_sheet_name)
+        x_pidginbodybook = self.get_validated_pidginbodybook(raw_df)
         for pidginbodylist in x_pidginbodybook.get_valid_pidginbodylists():
             pidgin_agg_df.loc[len(pidgin_agg_df)] = pidginbodylist
 
-    def get_validated_pidginbodybook(self, staging_df: DataFrame) -> PidginBodyBook:
-        x_pidginheartbook = self.get_validated_pidginheart(staging_df)
+    def get_validated_pidginbodybook(self, raw_df: DataFrame) -> PidginBodyBook:
+        x_pidginheartbook = self.get_validated_pidginheart(raw_df)
         x_pidginbodybook = pidginbodybook_shop(x_pidginheartbook)
-        for index, x_row in staging_df.iterrows():
+        for index, x_row in raw_df.iterrows():
             x_pidginbodyrow = PidginBodyRow(
                 event_int=x_row["event_int"],
                 face_name=x_row["face_name"],
@@ -536,9 +528,9 @@ class PidginStagingToAggTransformer:
             x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
         return x_pidginbodybook
 
-    def get_validated_pidginheart(self, staging_df: DataFrame) -> PidginHeartBook:
+    def get_validated_pidginheart(self, raw_df: DataFrame) -> PidginHeartBook:
         x_pidginheartbook = pidginheartbook_shop()
-        for index, x_row in staging_df.iterrows():
+        for index, x_row in raw_df.iterrows():
             x_pidginheartrow = PidginHeartRow(
                 event_int=x_row["event_int"],
                 face_name=x_row["face_name"],
@@ -742,7 +734,7 @@ def etl_inz_face_ideas_to_csv_files(syntax_inz_dir: str):
             save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_inz_face_csv_files2idea_staging_tables(
+def etl_inz_face_csv_files2idea_raw_tables(
     conn_or_cursor: sqlite3_Connection, syntax_inz_dir: str
 ):
     for face_name in get_level1_dirs(syntax_inz_dir):
@@ -751,36 +743,36 @@ def etl_inz_face_csv_files2idea_staging_tables(
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
-                insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_staging")
+                insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_raw")
 
 
-def etl_idea_staging_to_fisc_tables(conn_or_cursor):
+def etl_idea_raw_to_fisc_tables(conn_or_cursor):
     create_fisc_tables(conn_or_cursor)
-    idea_staging_tables2fisc_staging_tables(conn_or_cursor)
-    set_fisc_staging_error_message(conn_or_cursor)
-    fisc_staging_tables2fisc_agg_tables(conn_or_cursor)
+    idea_raw_tables2fisc_raw_tables(conn_or_cursor)
+    set_fisc_raw_error_message(conn_or_cursor)
+    fisc_raw_tables2fisc_agg_tables(conn_or_cursor)
     fisc_agg_tables2fisc_event_time_agg(conn_or_cursor)
 
 
-def etl_idea_staging_to_bud_tables(conn_or_cursor):
+def etl_idea_raw_to_bud_tables(conn_or_cursor):
     create_bud_tables(conn_or_cursor)
-    idea_staging_tables2bud_staging_tables(conn_or_cursor)
-    set_bud_staging_error_message(conn_or_cursor)
-    bud_staging_tables2bud_agg_tables(conn_or_cursor)
+    idea_raw_tables2bud_raw_tables(conn_or_cursor)
+    set_bud_raw_error_message(conn_or_cursor)
+    bud_raw_tables2bud_agg_tables(conn_or_cursor)
 
 
-def idea_staging_tables2fisc_staging_tables(conn_or_cursor: sqlite3_Connection):
+def idea_raw_tables2fisc_raw_tables(conn_or_cursor: sqlite3_Connection):
     idea_config_dict = get_idea_config_dict()
     for idea_number in get_idea_numbers():
-        idea_staging = f"{idea_number}_staging"
-        if db_table_exists(conn_or_cursor, idea_staging):
+        idea_raw = f"{idea_number}_raw"
+        if db_table_exists(conn_or_cursor, idea_raw):
             # only inserts from pre-identified idea categorys
-            stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
-            for x_dimen in stageable_dimens:
+            rawable_dimens = IDEA_RAWABLE_PUT_DIMENS.get(idea_number)
+            for x_dimen in rawable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "fisc":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-                    gen_sqlstr = get_idea_into_dimen_staging_query(
+                    gen_sqlstr = get_idea_into_dimen_raw_query(
                         conn_or_cursor, idea_number, x_dimen, dimen_jkeys
                     )
                     conn_or_cursor.execute(gen_sqlstr)
@@ -788,26 +780,26 @@ def idea_staging_tables2fisc_staging_tables(conn_or_cursor: sqlite3_Connection):
             # for x_dimen in fisc_dimens:
             #     dimen_config = idea_config_dict.get(x_dimen)
             #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-            #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
-            #         gen_sqlstr = get_idea_into_dimen_staging_query(
+            #     if required_columns_exist(conn_or_cursor, idea_raw, dimen_jkeys):
+            #         gen_sqlstr = get_idea_into_dimen_raw_query(
             #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
             #         )
             #         conn_or_cursor.execute(gen_sqlstr)
 
 
-def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
+def idea_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
     idea_config_dict = get_idea_config_dict()
 
     for idea_number in get_idea_numbers():
-        idea_staging = f"{idea_number}_staging"
-        if db_table_exists(conn_or_cursor, idea_staging):
+        idea_raw = f"{idea_number}_raw"
+        if db_table_exists(conn_or_cursor, idea_raw):
             # only inserts from pre-identified idea categorys
-            stageable_dimens = IDEA_STAGEABLE_PUT_DIMENS.get(idea_number)
-            for x_dimen in stageable_dimens:
+            rawable_dimens = IDEA_RAWABLE_PUT_DIMENS.get(idea_number)
+            for x_dimen in rawable_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "bud":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-                    insert_sqlstr = get_idea_into_dimen_staging_query(
+                    insert_sqlstr = get_idea_into_dimen_raw_query(
                         conn_or_cursor, idea_number, x_dimen, dimen_jkeys, "put"
                     )
                     conn_or_cursor.execute(insert_sqlstr)
@@ -816,19 +808,19 @@ def idea_staging_tables2bud_staging_tables(conn_or_cursor: sqlite3_Connection):
             # for x_dimen in bud_dimens:
             #     dimen_config = idea_config_dict.get(x_dimen)
             #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-            #     if is_stageable(conn_or_cursor, idea_staging, dimen_jkeys):
-            #         insert_sqlstr = get_idea_into_dimen_staging_query(
+            #     if required_columns_exist(conn_or_cursor, idea_raw, dimen_jkeys):
+            #         insert_sqlstr = get_idea_into_dimen_raw_query(
             #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
             #         )
             #         conn_or_cursor.execute(insert_sqlstr)
 
 
-def set_fisc_staging_error_message(conn_or_cursor: sqlite3_Connection):
+def set_fisc_raw_error_message(conn_or_cursor: sqlite3_Connection):
     for set_error_sqlstr in get_fisc_update_inconsist_error_message_sqlstrs().values():
         conn_or_cursor.execute(set_error_sqlstr)
 
 
-def set_bud_staging_error_message(conn_or_cursor: sqlite3_Connection):
+def set_bud_raw_error_message(conn_or_cursor: sqlite3_Connection):
     for (
         set_error_sqlstr
     ) in get_bud_put_update_inconsist_error_message_sqlstrs().values():
@@ -920,15 +912,15 @@ def etl_create_deal_mandate_ledgers(fisc_mstr_dir: str):
         create_deal_mandate_ledgers(fisc_mstr_dir, fisc_tag)
 
 
-def fisc_staging_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
-    for x_sqlstr in get_fisc_insert_agg_from_staging_sqlstrs().values():
+def fisc_raw_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
+    for x_sqlstr in get_fisc_insert_agg_from_raw_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
 
 
-def bud_staging_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
-    for x_sqlstr in get_bud_insert_put_agg_from_staging_sqlstrs().values():
+def bud_raw_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
+    for x_sqlstr in get_bud_insert_put_agg_from_raw_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
-    for x_sqlstr in get_bud_insert_del_agg_from_staging_sqlstrs().values():
+    for x_sqlstr in get_bud_insert_del_agg_from_raw_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
 
 
@@ -948,12 +940,12 @@ def etl_bud_tables_to_event_bud_csvs(
             )
 
 
-def etl_fisc_staging_tables_to_fisc_csvs(
+def etl_fisc_raw_tables_to_fisc_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
     for fisc_dimen in get_fisc_dimens():
-        staging_tablename = f"{fisc_dimen}_staging"
-        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, staging_tablename)
+        raw_tablename = f"{fisc_dimen}_raw"
+        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, raw_tablename)
 
 
 def etl_fisc_agg_tables_to_fisc_csvs(
@@ -966,8 +958,8 @@ def etl_fisc_agg_tables_to_fisc_csvs(
 def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
     fisc_filename = "fisc.json"
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    insert_staging_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
-    cursor.execute(insert_staging_sqlstr)
+    insert_raw_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
+    cursor.execute(insert_raw_sqlstr)
     for fisc_tag_set in cursor.fetchall():
         fisc_tag = fisc_tag_set[0]
         fisc_dict = get_fisc_dict_from_db(cursor, fisc_tag)

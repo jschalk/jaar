@@ -15,7 +15,7 @@ from src.a19_world_logic.examples.world_env import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
+def test_WorldUnit_idea_raw_to_fisc_tables_PopulatesFiscAggTables(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
 
@@ -42,18 +42,18 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_raw_tables(cursor)
         fisc_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         assert not db_table_exists(cursor, fisc_objs.unit_agg_tablename)
 
         # WHEN
-        fizz_world.idea_staging_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, fisc_objs.unit_agg_tablename)
-        # cursor.execute(f"SELECT * FROM {fiscunit_stage_tablename};")
-        # fiscunit_stage_rows = cursor.fetchall()
-        # assert len(fiscunit_stage_rows) == 4
+        # cursor.execute(f"SELECT * FROM {fiscunit_raw_tablename};")
+        # fiscunit_raw_rows = cursor.fetchall()
+        # assert len(fiscunit_raw_rows) == 4
         cursor.execute(f"SELECT * FROM {fisc_objs.unit_agg_tablename};")
         fiscunit_agg_rows = cursor.fetchall()
         expected_row1 = (
@@ -85,7 +85,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
         assert fiscunit_agg_rows == [expected_row1, expected_row2]
 
 
-def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
+def test_WorldUnit_idea_raw_to_fisc_tables_PopulatesTable_fisc_event_time(
     env_dir_setup_cleanup,
 ):
 
@@ -134,18 +134,18 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_raw_tables(cursor)
         event_time_tablename = "fisc_event_time_agg"
         assert not db_table_exists(cursor, event_time_tablename)
 
         # WHEN
-        fizz_world.idea_staging_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, event_time_tablename)
-        # cursor.execute(f"SELECT * FROM {fiscunit_stage_tablename};")
-        # fiscunit_stage_rows = cursor.fetchall()
-        # assert len(fiscunit_stage_rows) == 4
+        # cursor.execute(f"SELECT * FROM {fiscunit_raw_tablename};")
+        # fiscunit_raw_rows = cursor.fetchall()
+        # assert len(fiscunit_raw_rows) == 4
         event_time_select_sql = f"""SELECT fisc_tag, event_int, agg_time, error_message 
 FROM {event_time_tablename}
 ;

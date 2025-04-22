@@ -42,7 +42,7 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
         create_bud_tables(cursor)
-        insert_staging_sqlstr = f"""
+        insert_raw_sqlstr = f"""
 INSERT INTO {put_agg_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
 VALUES
   ('{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
@@ -50,8 +50,8 @@ VALUES
 , ('{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{sue_inx}',{sue_credit_belief7})
 ;
 """
-        print(insert_staging_sqlstr)
-        cursor.execute(insert_staging_sqlstr)
+        print(insert_raw_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         assert os_path_exists(a23_e3_budacct_put_path) is False
         assert os_path_exists(a23_e7_budacct_put_path) is False
 
@@ -76,7 +76,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
         assert e7_put_csv == expected_e7_put_csv
 
 
-# def test_etl_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
+# def test_etl_idea_raw_to_bud_tables_PopulatesBudDelAggTables(
 #     env_dir_setup_cleanup,
 # ):  # sourcery skip: extract-method
 
@@ -95,9 +95,9 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 #     with sqlite3_connect(":memory:") as bud_db_conn:
 #         cursor = bud_db_conn.cursor()
 #         create_bud_tables(cursor)
-#         staging_tablename = f"{bud_acctunit_str()}_del_staging"
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+#         raw_tablename = f"{bud_acctunit_str()}_del_raw"
+#         insert_raw_sqlstr = f"""
+# INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 # VALUES
 #   ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
 # , ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
@@ -106,13 +106,13 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 # , ('br00051','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
 # ;
 # """
-#         print(insert_staging_sqlstr)
-#         cursor.execute(insert_staging_sqlstr)
+#         print(insert_raw_sqlstr)
+#         cursor.execute(insert_raw_sqlstr)
 #         agg_tablename = f"{bud_acctunit_str()}_del_agg"
 #         assert get_row_count(cursor, agg_tablename) == 0
 
 #         # WHEN
-#         fizz_world.idea_staging_to_bud_tables(cursor)
+#         fizz_world.idea_raw_to_bud_tables(cursor)
 
 #         # THEN
 #         assert get_row_count(cursor, agg_tablename) == 2

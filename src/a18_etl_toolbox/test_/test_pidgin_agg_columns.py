@@ -23,17 +23,17 @@ def test_PidginPrimeColumns_Exists():
     pidgin_label_agg_args = pidgin_label_agg_args.union(event_args)
     pidgin_tag_agg_args = pidgin_tag_agg_args.union(event_args)
     pidgin_road_agg_args = pidgin_road_agg_args.union(event_args)
-    staging_args = {"src_idea"}
-    pidgin_name_staging_args = pidgin_name_agg_args.union(staging_args)
-    pidgin_label_staging_args = pidgin_label_agg_args.union(staging_args)
-    pidgin_tag_staging_args = pidgin_tag_agg_args.union(staging_args)
-    pidgin_road_staging_args = pidgin_road_agg_args.union(staging_args)
+    raw_args = {"src_idea"}
+    pidgin_name_raw_args = pidgin_name_agg_args.union(raw_args)
+    pidgin_label_raw_args = pidgin_label_agg_args.union(raw_args)
+    pidgin_tag_raw_args = pidgin_tag_agg_args.union(raw_args)
+    pidgin_road_raw_args = pidgin_road_agg_args.union(raw_args)
     assert set(x_pidginprimecols.map_name_agg_columns) == pidgin_name_agg_args
     assert set(x_pidginprimecols.map_label_agg_columns) == pidgin_label_agg_args
     assert set(x_pidginprimecols.map_tag_agg_columns) == pidgin_tag_agg_args
     assert set(x_pidginprimecols.map_road_agg_columns) == pidgin_road_agg_args
 
-    assert set(x_pidginprimecols.map_name_staging_columns) == pidgin_name_staging_args
-    assert set(x_pidginprimecols.map_label_staging_columns) == pidgin_label_staging_args
-    assert set(x_pidginprimecols.map_tag_staging_columns) == pidgin_tag_staging_args
-    assert set(x_pidginprimecols.map_road_staging_columns) == pidgin_road_staging_args
+    assert set(x_pidginprimecols.map_name_raw_columns) == pidgin_name_raw_args
+    assert set(x_pidginprimecols.map_label_raw_columns) == pidgin_label_raw_args
+    assert set(x_pidginprimecols.map_tag_raw_columns) == pidgin_tag_raw_args
+    assert set(x_pidginprimecols.map_road_raw_columns) == pidgin_road_raw_args
