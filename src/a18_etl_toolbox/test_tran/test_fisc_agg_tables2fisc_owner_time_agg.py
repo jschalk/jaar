@@ -4,12 +4,12 @@ from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a18_etl_toolbox.transformers import (
     create_fisc_tables,
-    etl_fisc_agg_tables2fisc_ote1_agg,
+    etl_fisc_agg_tables_to_fisc_ote1_agg,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_fisc_agg_tables2fisc_ote1_agg_SetsTableAttr():
+def test_etl_fisc_agg_tables_to_fisc_ote1_agg_SetsTableAttr():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -41,7 +41,7 @@ VALUES
         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
         # WHEN
-        etl_fisc_agg_tables2fisc_ote1_agg(cursor)
+        etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
 
         # THEN
         assert db_table_exists(cursor, fisc_ote1_agg_str)
@@ -57,7 +57,7 @@ VALUES
         assert fiscunit_agg_rows == [ex_row0, ex_row1, ex_row2]
 
 
-# def test_etl_fisc_agg_tables2fisc_ote1_agg_SetsTableAttr():
+# def test_etl_fisc_agg_tables_to_fisc_ote1_agg_SetsTableAttr():
 #     # ESTABLISH
 #     event3 = 3
 #     event7 = 7
@@ -86,7 +86,7 @@ VALUES
 #         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
 #         # WHEN
-#         etl_fisc_agg_tables2fisc_ote1_agg(cursor)
+#         etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
 
 #         # THEN
 #         assert db_table_exists(cursor, fisc_ote1_agg_str)

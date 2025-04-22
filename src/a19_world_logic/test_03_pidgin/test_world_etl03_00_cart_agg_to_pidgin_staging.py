@@ -200,7 +200,7 @@ def test_WorldUnit_cart_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     fizz_world.cart_agg_to_cart_events()
     fizz_world.cart_events_to_events_log()
     fizz_world.cart_events_log_to_events_agg()
-    fizz_world.set_events_from_events_agg_file()
+    fizz_world.events_agg_file_to_events_dict()
     assert fizz_world._events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 

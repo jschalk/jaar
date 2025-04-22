@@ -74,7 +74,7 @@ def test_WorldUnit_cart_events_log_to_events_agg_CreatesSheets_Scenario0(
     assert get_sheet_names(events_file_path) == ["events_log", "events_agg"]
 
 
-def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
+def test_WorldUnit_events_agg_file_to_events_dict_SetsAttr_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -102,14 +102,14 @@ def test_WorldUnit_set_events_from_events_agg_file_SetsAttr_Scenario0(
     assert len(fizz_world._events) != 2
 
     # WHEN
-    fizz_world.set_events_from_events_agg_file()
+    fizz_world.events_agg_file_to_events_dict()
 
     # THEN
     assert len(fizz_world._events) == 2
     assert fizz_world._events == {event3: bob_str, event9: yao_str}
 
 
-def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_cleanup):
+def test_WorldUnit_events_agg_file_to_events_dict_ClearsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     events_agg_columns = [face_name_str(), event_int_str(), "error_message"]
@@ -121,7 +121,7 @@ def test_WorldUnit_set_events_from_events_agg_file_ClearsAttr(env_dir_setup_clea
     assert fizz_world._events == {2: "Sue", 44: "Bob"}
 
     # WHEN
-    fizz_world.set_events_from_events_agg_file()
+    fizz_world.events_agg_file_to_events_dict()
 
     # THEN
     assert not fizz_world._events

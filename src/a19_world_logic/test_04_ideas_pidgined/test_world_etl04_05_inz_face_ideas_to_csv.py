@@ -39,7 +39,7 @@ def test_WorldUnit_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
     fizz_world = worldunit_shop("fizz", worlds_dir())
     inx_str = "inx"
-    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_excel_filename = "br00011.xlsx"
     br00011_excel_path = create_path(sue_inz_dir, br00011_excel_filename)
     upsert_sheet(br00011_excel_path, inx_str, sue_accord23_df)

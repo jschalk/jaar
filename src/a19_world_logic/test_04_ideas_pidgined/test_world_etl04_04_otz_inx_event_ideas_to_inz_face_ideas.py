@@ -38,13 +38,13 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    otz_sue_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    otz_sue_dir = create_path(fizz_world._syntax_otz_dir, sue_otx)
     otz_e3_dir = create_path(otz_sue_dir, event3)
     otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
     inx_str = "inx"
     upsert_sheet(otz_e3_br00011_path, inx_str, e3_accord23_df)
     assert sheet_exists(otz_e3_br00011_path, inx_str)
-    inz_sue_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    inz_sue_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     inz_br00011_path = create_path(inz_sue_dir, br00011_filename)
     print(f"{otz_e3_br00011_path=}")
     print(f"{inz_br00011_path=}")
@@ -83,7 +83,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     e7_accord23_df = DataFrame([sue3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    otz_sue_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    otz_sue_dir = create_path(fizz_world._syntax_otz_dir, sue_otx)
     otz_e3_dir = create_path(otz_sue_dir, event3)
     otz_e7_dir = create_path(otz_sue_dir, event7)
     otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
@@ -93,7 +93,7 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     upsert_sheet(otz_e7_br00011_path, inx_str, e7_accord23_df)
     assert sheet_exists(otz_e3_br00011_path, inx_str)
     assert sheet_exists(otz_e7_br00011_path, inx_str)
-    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     inz_br00011_path = create_path(sue_inz_dir, br00011_filename)
     print(f"{otz_e3_br00011_path=}")
     print(f"{inz_br00011_path=}")

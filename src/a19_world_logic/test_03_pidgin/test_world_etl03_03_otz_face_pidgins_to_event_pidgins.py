@@ -15,7 +15,7 @@ from src.a16_pidgin_logic.pidgin_config import (
 )
 from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
-    create_otx_face_pidgin_path,
+    create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path as otx_event_pidgin_path,
 )
 from src.a19_world_logic.world import worldunit_shop
@@ -60,17 +60,17 @@ def test_WorldUnit_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face
     zia_road_agg_df = DataFrame([z1_road3], columns=road_file_columns)
 
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
+    sue_dir = create_path(fizz_world._syntax_otz_dir, sue_str)
+    zia_dir = create_path(fizz_world._syntax_otz_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)
-    faces_otz_dir = fizz_world._faces_otz_dir
-    sue_pidgin_file_path = create_otx_face_pidgin_path(faces_otz_dir, sue_str)
-    zia_pidgin_file_path = create_otx_face_pidgin_path(faces_otz_dir, zia_str)
-    event3_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, zia_str, event3)
-    event7_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, sue_str, event7)
-    event9_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, sue_str, event9)
+    syntax_otz_dir = fizz_world._syntax_otz_dir
+    sue_pidgin_file_path = create_syntax_otx_pidgin_path(syntax_otz_dir, sue_str)
+    zia_pidgin_file_path = create_syntax_otx_pidgin_path(syntax_otz_dir, zia_str)
+    event3_pidgin_file_path = otx_event_pidgin_path(syntax_otz_dir, zia_str, event3)
+    event7_pidgin_file_path = otx_event_pidgin_path(syntax_otz_dir, sue_str, event7)
+    event9_pidgin_file_path = otx_event_pidgin_path(syntax_otz_dir, sue_str, event9)
     road_agg_str = "road_agg"
     upsert_sheet(sue_pidgin_file_path, road_agg_str, sue_road_agg_df)
     upsert_sheet(zia_pidgin_file_path, road_agg_str, zia_road_agg_df)

@@ -835,7 +835,7 @@ def test_IDEA_STAGEABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
                         x_dimen=x_dimen,
                         x_jkeys=dimen_key_columns,
                     )
-                    # check sql syntax is correct?
+                    # check sqlstr is correct?
                     assert generated_sqlstr != ""
 
     idea_stageable_dimen_list = sorted(list(expected_idea_stagable_dimens))
@@ -896,7 +896,7 @@ def test_IDEA_STAGEABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
                         x_dimen=x_dimen,
                         x_jkeys=dimen_key_columns,
                     )
-                    # check sql syntax is correct?
+                    # check sqlstr is correct?
                     assert generated_sqlstr != ""
     expected_idea_stagable_dimens = {
         x_idea_number: stagable_dimens

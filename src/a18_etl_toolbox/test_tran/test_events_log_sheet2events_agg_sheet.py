@@ -9,7 +9,7 @@ from src.a18_etl_toolbox.tran_path import create_cart_events_path
 from src.a18_etl_toolbox.transformers import (
     _create_events_agg_df,
     etl_cart_events_log_to_events_agg,
-    get_events_dict_from_events_agg_file,
+    etl_events_agg_file_to_events_dict,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -145,20 +145,20 @@ def test_etl_cart_events_log_to_events_agg_CreatesSheets_Scenario1(
     assert get_sheet_names(events_file_path) == ["events_log", "events_agg"]
 
 
-def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario0_isEmpty(
+def test_etl_events_agg_file_to_events_dict_ReturnsObj_Scenario0_isEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     cart_dir = get_test_etl_dir()
 
     # WHEN
-    events_dict = get_events_dict_from_events_agg_file(cart_dir)
+    events_dict = etl_events_agg_file_to_events_dict(cart_dir)
 
     # THEN
     assert len(events_dict) == 0
 
 
-def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario1(
+def test_etl_events_agg_file_to_events_dict_ReturnsObj_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -183,7 +183,7 @@ def test_get_events_dict_from_events_agg_file_ReturnsObj_Scenario1(
     upsert_sheet(events_file_path, events_agg_str, ex_events_agg_df)
 
     # WHEN
-    events_dict = get_events_dict_from_events_agg_file(cart_dir)
+    events_dict = etl_events_agg_file_to_events_dict(cart_dir)
 
     # THEN
     assert len(events_dict) == 2

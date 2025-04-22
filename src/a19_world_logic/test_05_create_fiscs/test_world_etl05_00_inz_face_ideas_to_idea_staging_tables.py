@@ -24,7 +24,7 @@ def test_WorldUnit_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
     event7 = 7
     accord23_str = "accord23"
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}

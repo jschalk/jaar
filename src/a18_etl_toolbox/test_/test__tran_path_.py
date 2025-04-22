@@ -5,7 +5,7 @@ from src.a18_etl_toolbox.tran_path import (
     STANCE0001_FILENAME,
     create_cart_events_path,
     create_cart_pidgin_path,
-    create_otx_face_pidgin_path,
+    create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path,
     create_stances_dir_path,
     create_stances_owner_dir_path,
@@ -45,31 +45,31 @@ def test_create_cart_pidgin_path_ReturnObj():
     assert gen_cart_event_path == expected_cart_event_path
 
 
-def test_create_otx_face_pidgin_path_ReturnObj():
+def test_create_syntax_otx_pidgin_path_ReturnObj():
     # ESTABLISH
-    faces_otz_dir = get_listen_temp_env_dir()
+    syntax_otz_dir = get_listen_temp_env_dir()
     bob_str = "Bob"
 
     # WHEN
-    gen_pidgin_path = create_otx_face_pidgin_path(faces_otz_dir, bob_str)
+    gen_pidgin_path = create_syntax_otx_pidgin_path(syntax_otz_dir, bob_str)
 
     # THEN
-    bob_otz_path = create_path(faces_otz_dir, bob_str)
+    bob_otz_path = create_path(syntax_otz_dir, bob_str)
     expected_pidgin_path = create_path(bob_otz_path, CART_PIDGIN_FILENAME)
     assert gen_pidgin_path == expected_pidgin_path
 
 
 def test_create_otx_event_pidgin_path_ReturnObj():
     # ESTABLISH
-    faces_otz_dir = get_listen_temp_env_dir()
+    syntax_otz_dir = get_listen_temp_env_dir()
     bob_str = "Bob"
     event7 = 7
 
     # WHEN
-    gen_pidgin_path = create_otx_event_pidgin_path(faces_otz_dir, bob_str, event7)
+    gen_pidgin_path = create_otx_event_pidgin_path(syntax_otz_dir, bob_str, event7)
 
     # THEN
-    bob_otz_path = create_path(faces_otz_dir, bob_str)
+    bob_otz_path = create_path(syntax_otz_dir, bob_str)
     event_path = create_path(bob_otz_path, event7)
     expected_pidgin_path = create_path(event_path, CART_PIDGIN_FILENAME)
     assert gen_pidgin_path == expected_pidgin_path

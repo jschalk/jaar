@@ -9,7 +9,7 @@ from src.a12_hub_tools.hub_path import (
 )
 from src.a18_etl_toolbox.transformers import create_fisc_tables
 from src.a18_etl_toolbox.transformers import (
-    etl_fisc_agg_tables2fisc_ote1_agg,
+    etl_fisc_agg_tables_to_fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
 )
 from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
@@ -33,7 +33,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        etl_fisc_agg_tables2fisc_ote1_agg(cursor)
+        etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_staging_sqlstr = f"""
 INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})
@@ -94,7 +94,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro2_ote1_agg_TableIsEmpty(
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        etl_fisc_agg_tables2fisc_ote1_agg(cursor)
+        etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_staging_sqlstr = f"""
 INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})

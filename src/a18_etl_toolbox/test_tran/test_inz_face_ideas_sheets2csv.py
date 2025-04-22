@@ -33,8 +33,8 @@ def test_etl_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     sue3 = [sue_inx, event7, accord23_str, yao_inx, yao_inx]
     sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
     inx_str = "inx"
-    x_faces_inz_dir = create_path(get_test_etl_dir(), "inz")
-    sue_inz_dir = create_path(x_faces_inz_dir, sue_inx)
+    x_syntax_inz_dir = create_path(get_test_etl_dir(), "inz")
+    sue_inz_dir = create_path(x_syntax_inz_dir, sue_inx)
     br00011_excel_filename = "br00011.xlsx"
     br00011_excel_path = create_path(sue_inz_dir, br00011_excel_filename)
     upsert_sheet(br00011_excel_path, inx_str, sue_accord23_df)
@@ -44,7 +44,7 @@ def test_etl_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     assert os_path_exists(br00011_csv_path) is False
 
     # WHEN
-    etl_inz_face_ideas_to_csv_files(x_faces_inz_dir)
+    etl_inz_face_ideas_to_csv_files(x_syntax_inz_dir)
 
     # THEN
     assert os_path_exists(br00011_csv_path)

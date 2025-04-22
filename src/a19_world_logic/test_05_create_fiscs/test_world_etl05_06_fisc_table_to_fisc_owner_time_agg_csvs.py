@@ -29,7 +29,7 @@ def test_WorldUnit_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
-        fizz_world.fisc_agg_tables2fisc_ote1_agg(cursor)
+        fizz_world.fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_staging_sqlstr = f"""
 INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})

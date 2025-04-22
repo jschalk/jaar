@@ -16,7 +16,7 @@ from src.a16_pidgin_logic.pidgin_config import (
 from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
     create_cart_pidgin_path,
-    create_otx_face_pidgin_path,
+    create_syntax_otx_pidgin_path,
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a19_world_logic.world import worldunit_shop
@@ -29,7 +29,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
+def test_WorldUnit_cart_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -106,13 +106,13 @@ def test_WorldUnit_cart_pidgin_agg_to_otz_face_dirs_Scenario1_AllMapDimens(
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, tag_agg_str, e1_tag_agg_df)
-    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
-    faces_otz_dir = fizz_world._faces_otz_dir
-    sue_pidgin_file_path = create_otx_face_pidgin_path(faces_otz_dir, sue_str)
+    sue_dir = create_path(fizz_world._syntax_otz_dir, sue_str)
+    syntax_otz_dir = fizz_world._syntax_otz_dir
+    sue_pidgin_file_path = create_syntax_otx_pidgin_path(syntax_otz_dir, sue_str)
     assert os_path_exists(sue_pidgin_file_path) is False
 
     # WHEN
-    fizz_world.cart_pidgin_agg_to_otz_face_dirs()
+    fizz_world.cart_pidgin_agg_to_otz_face_pidgin_agg()
 
     # THEN
     assert os_path_exists(sue_dir)

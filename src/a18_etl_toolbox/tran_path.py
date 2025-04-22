@@ -16,17 +16,17 @@ def create_cart_pidgin_path(cart_dir: str) -> str:
     return create_path(cart_dir, "pidgin.xlsx")
 
 
-def create_otx_face_pidgin_path(faces_otz_dir: str, face_name: FaceName) -> str:
-    """Returns path: faces_otz_dir\\face_name\\pidgin.xlsx"""
-    otz_face_dir = create_path(faces_otz_dir, face_name)
+def create_syntax_otx_pidgin_path(syntax_otz_dir: str, face_name: FaceName) -> str:
+    """Returns path: syntax_otz_dir\\face_name\\pidgin.xlsx"""
+    otz_face_dir = create_path(syntax_otz_dir, face_name)
     return create_path(otz_face_dir, "pidgin.xlsx")
 
 
 def create_otx_event_pidgin_path(
-    faces_otz_dir: str, face_name: FaceName, event_int: EventInt
+    syntax_otz_dir: str, face_name: FaceName, event_int: EventInt
 ) -> str:
-    """Returns path: faces_otz_dir\\face_name\\event_int\\pidgin.xlsx"""
-    otz_face_dir = create_path(faces_otz_dir, face_name)
+    """Returns path: syntax_otz_dir\\face_name\\event_int\\pidgin.xlsx"""
+    otz_face_dir = create_path(syntax_otz_dir, face_name)
     otz_event_int_dir = create_path(otz_face_dir, event_int)
     return create_path(otz_event_int_dir, "pidgin.xlsx")
 

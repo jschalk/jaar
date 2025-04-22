@@ -66,8 +66,8 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagingTable
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    x_faces_inz_dir = create_path(get_test_etl_dir(), "faces_inz")
-    sue_inz_dir = create_path(x_faces_inz_dir, sue_inx)
+    x_syntax_inz_dir = create_path(get_test_etl_dir(), "syntax_inz")
+    sue_inz_dir = create_path(x_syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
@@ -80,7 +80,7 @@ def test_etl_idea_staging_to_bud_tables_Bud_dimen_idea_PopulatesFiscStagingTable
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        etl_inz_face_csv_files2idea_staging_tables(cursor, x_faces_inz_dir)
+        etl_inz_face_csv_files2idea_staging_tables(cursor, x_syntax_inz_dir)
         budunit_staging_tablename = f"{budunit_str()}_put_staging"
         budacct_staging_tablename = f"{bud_acctunit_str()}_put_staging"
         fiscunit_staging_tablename = f"{fiscunit_str()}_staging"

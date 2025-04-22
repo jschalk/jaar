@@ -217,64 +217,38 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
 
 
 def etl_cart_staging_to_cart_agg(cart_dir):
-    transformer = CartStagingToCartAggTransformer(cart_dir)
-    transformer.transform()
-
-
-class CartStagingToCartAggTransformer:
-    def __init__(self, cart_dir: str):
-        self.cart_dir = cart_dir
-
-    def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
-            cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            cart_staging_df = pandas_read_excel(cart_idea_path, "cart_staging")
-            otx_df = self._groupby_idea_columns(cart_staging_df, br_ref.idea_number)
-            upsert_sheet(cart_idea_path, "cart_agg", otx_df)
-
-    def _groupby_idea_columns(
-        self, cart_staging_df: DataFrame, idea_number: str
-    ) -> DataFrame:
-        idea_filename = get_idea_format_filename(idea_number)
-        idearef = get_idearef_obj(idea_filename)
-        required_columns = idearef.get_otx_keys_list()
-        idea_columns_set = set(idearef._attributes.keys())
-        idea_columns_list = get_default_sorted_list(idea_columns_set)
-        cart_staging_df = cart_staging_df[idea_columns_list]
-        return get_cart_staging_grouping_with_all_values_equal_df(
-            cart_staging_df, required_columns
+    for br_ref in get_existing_excel_idea_file_refs(cart_dir):
+        cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cart_staging_df = pandas_read_excel(cart_idea_path, "cart_staging")
+        otx_df = create_df_with_groupby_idea_columns(
+            cart_staging_df, br_ref.idea_number
         )
+        upsert_sheet(cart_idea_path, "cart_agg", otx_df)
 
 
-def etl_cart_agg_to_cart_valid(cart_dir: str, legitimate_events: set[EventInt]):
-    transformer = CartAggToCartValidTransformer(cart_dir, legitimate_events)
-    transformer.transform()
+def create_df_with_groupby_idea_columns(
+    cart_staging_df: DataFrame, idea_number: str
+) -> DataFrame:
+    idea_filename = get_idea_format_filename(idea_number)
+    idearef = get_idearef_obj(idea_filename)
+    required_columns = idearef.get_otx_keys_list()
+    idea_columns_set = set(idearef._attributes.keys())
+    idea_columns_list = get_default_sorted_list(idea_columns_set)
+    cart_staging_df = cart_staging_df[idea_columns_list]
+    return get_cart_staging_grouping_with_all_values_equal_df(
+        cart_staging_df, required_columns
+    )
 
 
-class CartAggToCartValidTransformer:
-    def __init__(self, cart_dir: str, legitimate_events: set[EventInt]):
-        self.cart_dir = cart_dir
-        self.legitimate_events = legitimate_events
-
-    def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
-            cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            cart_agg = pandas_read_excel(cart_idea_path, "cart_agg")
-            cart_valid_df = cart_agg[cart_agg["event_int"].isin(self.legitimate_events)]
-            upsert_sheet(cart_idea_path, "cart_valid", cart_valid_df)
-
-    # def _groupby_idea_columns(
-    #     self, cart_staging_df: DataFrame, idea_number: str
-    # ) -> DataFrame:
-    #     idea_filename = get_idea_format_filename(idea_number)
-    #     idearef = get_idearef_obj(idea_filename)
-    #     required_columns = idearef.get_otx_keys_list()
-    #     idea_columns_set = set(idearef._attributes.keys())
-    #     idea_columns_list = get_default_sorted_list(idea_columns_set)
-    #     cart_staging_df = cart_staging_df[idea_columns_list]
-    #     return get_cart_staging_grouping_with_all_values_equal_df(
-    #         cart_staging_df, required_columns
-    #     )
+def etl_cart_agg_non_pidgin_ideas_to_cart_valid(
+    cart_dir: str, legitimate_events: set[EventInt]
+):
+    """create cart_legit sheet with each idea's data that is of a legitimate event"""
+    for br_ref in get_existing_excel_idea_file_refs(cart_dir):
+        cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cart_agg = pandas_read_excel(cart_idea_path, "cart_agg")
+        cart_valid_df = cart_agg[cart_agg["event_int"].isin(legitimate_events)]
+        upsert_sheet(cart_idea_path, "cart_valid", cart_valid_df)
 
 
 def etl_cart_agg_to_cart_events(cart_dir):
@@ -375,7 +349,7 @@ class EventsLogToEventsAggTransformer:
             upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def get_events_dict_from_events_agg_file(cart_dir) -> dict[EventInt, FaceName]:
+def etl_events_agg_file_to_events_dict(cart_dir) -> dict[EventInt, FaceName]:
     events_file_path = create_cart_events_path(cart_dir)
     x_dict = {}
     if os_path_exists(events_file_path):
@@ -519,7 +493,7 @@ def etl_pidgin_single_staging_to_agg(cart_dir: str, map_dimen: str):
     transformer.transform()
 
 
-def etl_cart_pidgin_staging_to_agg(cart_dir):
+def etl_cart_pidgin_staging_to_pidgin_agg(cart_dir):
     etl_pidgin_name_staging_to_name_agg(cart_dir)
     etl_pidgin_label_staging_to_label_agg(cart_dir)
     etl_pidgin_road_staging_to_road_agg(cart_dir)
@@ -576,7 +550,7 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_cart_pidgin_agg_to_otz_face_dirs(cart_dir: str, faces_dir: str):
+def etl_cart_pidgin_agg_to_otz_face_pidgin_agg(cart_dir: str, faces_dir: str):
     agg_pidgin = create_cart_pidgin_path(cart_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]
@@ -619,7 +593,7 @@ def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
             name_df.to_csv(name_csv_path, index=False)
 
 
-def _get_all_faces_otz_dir_event_dirs(faces_dir) -> list[str]:
+def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
     full_event_dirs = []
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
@@ -631,7 +605,7 @@ def _get_all_faces_otz_dir_event_dirs(faces_dir) -> list[str]:
 
 
 def etl_otz_event_pidgins_to_otz_pidgin_csv_files(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_otz_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_syntax_otz_dir_event_dirs(faces_dir):
         event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
@@ -641,7 +615,7 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
 
 
 def etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(faces_dir: str):
-    for event_pidgin_dir in _get_all_faces_otz_dir_event_dirs(faces_dir):
+    for event_pidgin_dir in _get_all_syntax_otz_dir_event_dirs(faces_dir):
         etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
 
 
@@ -719,14 +693,14 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_otz_event_ideas_to_inx_events(
-    faces_otz_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
+def etl_otz_event_ideas_to_inz_events(
+    syntax_otz_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
 ):
-    for face_name in get_level1_dirs(faces_otz_dir):
+    for face_name in get_level1_dirs(syntax_otz_dir):
         face_pidgin_events = event_pidgins.get(face_name)
         if face_pidgin_events is None:
             face_pidgin_events = set()
-        face_dir = create_path(faces_otz_dir, face_name)
+        face_dir = create_path(syntax_otz_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_dir = create_path(face_dir, event_int)
             event_int = int(event_int)
@@ -742,9 +716,9 @@ def etl_otz_event_ideas_to_inx_events(
                 upsert_sheet(event_idea_path, "inx", idea_df)
 
 
-def etl_otz_inx_event_ideas_to_inz_faces(faces_otz_dir: str, faces_inz_dir: str):
-    for face_name in get_level1_dirs(faces_otz_dir):
-        face_dir = create_path(faces_otz_dir, face_name)
+def etl_otz_inx_event_ideas_to_inz_faces(syntax_otz_dir: str, syntax_inz_dir: str):
+    for face_name in get_level1_dirs(syntax_otz_dir):
+        face_dir = create_path(syntax_otz_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
@@ -752,16 +726,16 @@ def etl_otz_inx_event_ideas_to_inz_faces(faces_otz_dir: str, faces_inz_dir: str)
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
                 split_excel_into_dirs(
                     input_file=event_idea_path,
-                    output_dir=faces_inz_dir,
+                    output_dir=syntax_inz_dir,
                     column_name="face_name",
                     filename=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
 
 
-def etl_inz_face_ideas_to_csv_files(faces_inz_dir: str):
-    for face_name in get_level1_dirs(faces_inz_dir):
-        face_dir = create_path(faces_inz_dir, face_name)
+def etl_inz_face_ideas_to_csv_files(syntax_inz_dir: str):
+    for face_name in get_level1_dirs(syntax_inz_dir):
+        face_dir = create_path(syntax_inz_dir, face_name)
         for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
             face_idea_excel_path = create_path(face_dir, face_br_ref.filename)
             idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
@@ -769,10 +743,10 @@ def etl_inz_face_ideas_to_csv_files(faces_inz_dir: str):
 
 
 def etl_inz_face_csv_files2idea_staging_tables(
-    conn_or_cursor: sqlite3_Connection, faces_inz_dir: str
+    conn_or_cursor: sqlite3_Connection, syntax_inz_dir: str
 ):
-    for face_name in get_level1_dirs(faces_inz_dir):
-        face_dir = create_path(faces_inz_dir, face_name)
+    for face_name in get_level1_dirs(syntax_inz_dir):
+        face_dir = create_path(syntax_inz_dir, face_name)
         for idea_number in sorted(get_idea_numbers()):
             csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
@@ -867,7 +841,7 @@ def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
 
 
-def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
+def etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_SQLSTR)
 
