@@ -44,7 +44,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0_NoPidginUnit(
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz", worlds_dir())
     fizz_world._pidgin_events = {}
-    sue_otz_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
+    sue_otz_dir = create_path(fizz_world._syntax_otz_dir, sue_otx)
     otz_e3_dir = create_path(sue_otz_dir, event3)
     cart_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
     print(f"{cart_e3_br00011_path=}")
@@ -108,8 +108,8 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario1_MultpleFaceNames_CreatesEv
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz", worlds_dir())
     fizz_world._pidgin_events = {sue_otx: {event3}, zia_otx: {event7, event9}}
-    sue_otz_dir = create_path(fizz_world._faces_otz_dir, sue_otx)
-    zia_otz_dir = create_path(fizz_world._faces_otz_dir, zia_otx)
+    sue_otz_dir = create_path(fizz_world._syntax_otz_dir, sue_otx)
+    zia_otz_dir = create_path(fizz_world._syntax_otz_dir, zia_otx)
     otz_e3_dir = create_path(sue_otz_dir, event3)
     otz_e7_dir = create_path(zia_otz_dir, event7)
     otz_e9_dir = create_path(zia_otz_dir, event9)

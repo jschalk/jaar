@@ -44,8 +44,8 @@ def test_WorldUnit_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_S
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
     fizz_world = worldunit_shop("fizz", worlds_dir())
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
+    sue_dir = create_path(fizz_world._syntax_otz_dir, sue_str)
+    zia_dir = create_path(fizz_world._syntax_otz_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     upsert_sheet(sue_br00003_filepath, cart_valid_str(), example_sue_df)

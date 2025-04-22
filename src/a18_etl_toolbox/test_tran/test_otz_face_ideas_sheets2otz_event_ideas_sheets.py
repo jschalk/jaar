@@ -40,10 +40,10 @@ def test_etl_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     example_sue_df = DataFrame([sue0, sue1], columns=idea_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
     x_etl_dir = get_test_etl_dir()
-    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
+    x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
-    sue_dir = create_path(x_faces_otz_dir, sue_str)
-    zia_dir = create_path(x_faces_otz_dir, zia_str)
+    sue_dir = create_path(x_syntax_otz_dir, sue_str)
+    zia_dir = create_path(x_syntax_otz_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     upsert_sheet(sue_br00003_filepath, cart_valid_str(), example_sue_df)
@@ -60,7 +60,7 @@ def test_etl_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     assert sheet_exists(event9_br00003_filepath, cart_valid_str()) is False
 
     # WHEN
-    etl_otz_face_ideas_to_otz_event_otx_ideas(x_faces_otz_dir)
+    etl_otz_face_ideas_to_otz_event_otx_ideas(x_syntax_otz_dir)
 
     # THEN
     assert sheet_exists(event3_br00003_filepath, cart_valid_str())

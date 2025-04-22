@@ -42,7 +42,7 @@ def test_WorldUnit_cart_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Group
     br00003_agg_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
     upsert_sheet(br00003_agg_file_path, cart_valid_str(), br00003_cart_agg_df)
     assert sheet_exists(br00003_agg_file_path, cart_valid_str())
-    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
+    sue_dir = create_path(fizz_world._syntax_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, "br00003.xlsx")
     assert sheet_exists(sue_br00003_filepath, cart_valid_str()) is False
 

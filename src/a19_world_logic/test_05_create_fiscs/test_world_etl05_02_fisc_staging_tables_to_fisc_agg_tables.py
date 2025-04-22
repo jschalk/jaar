@@ -28,7 +28,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesFiscAggTables(
     accord23_str = "accord23"
     accord45_str = "accord45"
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
     br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
@@ -109,7 +109,7 @@ def test_WorldUnit_idea_staging_to_fisc_tables_PopulatesTable_fisc_event_time(
     amount_t23 = 2323
     x_celldepth = 2
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    sue_inz_dir = create_path(fizz_world._faces_inz_dir, sue_inx)
+    sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     # create deal rows
     # create cash rows
     br00001_str = "br00001"

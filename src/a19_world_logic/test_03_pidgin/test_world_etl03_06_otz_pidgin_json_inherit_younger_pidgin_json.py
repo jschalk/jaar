@@ -17,7 +17,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario0_NoPidginUnitFi
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     assert fizz_world._pidgin_events == {}
-    faces_dir = Path(fizz_world._faces_otz_dir)
+    faces_dir = Path(fizz_world._syntax_otz_dir)
     before_files = {f for f in faces_dir.glob("**/*") if f.is_file()}
 
     # WHEN
@@ -43,7 +43,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario1_OnePidginUnitF
     sue_otx = "Sue"
     sue_inx = "Suzy"
     e3_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
-    bob_dir = create_path(fizz_world._faces_otz_dir, bob_str)
+    bob_dir = create_path(fizz_world._syntax_otz_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())
     e3_json_file_path = create_path(event3_dir, pidgin_filename())
@@ -72,7 +72,7 @@ def test_WorldUnit_pidgin_jsons_inherit_younger_pidgins_Scenario2_TwoPidginUnitF
     sue_otx = "Sue"
     sue_inx = "Suzy"
     e3_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
-    bob_dir = create_path(fizz_world._faces_otz_dir, bob_str)
+    bob_dir = create_path(fizz_world._syntax_otz_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     save_file(event3_dir, pidgin_filename(), e3_pidginunit.get_json())

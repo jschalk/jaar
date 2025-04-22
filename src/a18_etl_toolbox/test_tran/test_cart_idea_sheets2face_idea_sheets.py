@@ -46,17 +46,17 @@ def test_etl_cart_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario0_Single
     br00003_cart_agg_df = DataFrame([row1, row2], columns=idea_columns)
     x_etl_dir = get_test_etl_dir()
     x_cart_dir = create_path(x_etl_dir, "cart")
-    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
+    x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_cart_dir, br00003_filename)
     upsert_sheet(br00003_agg_file_path, cart_valid_str(), br00003_cart_agg_df)
     assert sheet_exists(br00003_agg_file_path, cart_valid_str())
-    sue_dir = create_path(x_faces_otz_dir, sue_str)
+    sue_dir = create_path(x_syntax_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     assert sheet_exists(sue_br00003_filepath, cart_valid_str()) is False
 
     # WHEN
-    etl_cart_ideas_to_otz_face_ideas(x_cart_dir, x_faces_otz_dir)
+    etl_cart_ideas_to_otz_face_ideas(x_cart_dir, x_syntax_otz_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, cart_valid_str())
@@ -100,19 +100,19 @@ def test_etl_cart_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multpl
     br00003_cart_agg_df = DataFrame([sue1, sue2, zia3], columns=idea_columns)
     x_etl_dir = get_test_etl_dir()
     x_cart_dir = create_path(x_etl_dir, "cart")
-    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
+    x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
     br00003_agg_file_path = create_path(x_cart_dir, br00003_filename)
     upsert_sheet(br00003_agg_file_path, cart_valid_str(), br00003_cart_agg_df)
-    sue_dir = create_path(x_faces_otz_dir, sue_str)
-    zia_dir = create_path(x_faces_otz_dir, zia_str)
+    sue_dir = create_path(x_syntax_otz_dir, sue_str)
+    zia_dir = create_path(x_syntax_otz_dir, zia_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     zia_br00003_filepath = create_path(zia_dir, br00003_filename)
     assert sheet_exists(sue_br00003_filepath, cart_valid_str()) is False
     assert sheet_exists(zia_br00003_filepath, cart_valid_str()) is False
 
     # WHEN
-    etl_cart_ideas_to_otz_face_ideas(x_cart_dir, x_faces_otz_dir)
+    etl_cart_ideas_to_otz_face_ideas(x_cart_dir, x_syntax_otz_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, cart_valid_str())
@@ -170,7 +170,7 @@ def test_etl_cart_ideas_to_otz_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded
 
     x_etl_dir = get_test_etl_dir()
     x_cart_dir = create_path(x_etl_dir, "cart")
-    x_faces_otz_dir = create_path(x_etl_dir, "faces_otz")
+    x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
     br00043_filename = "br00043.xlsx"
     br00003_agg_file_path = create_path(x_cart_dir, br00003_filename)
@@ -180,14 +180,14 @@ def test_etl_cart_ideas_to_otz_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded
     assert sheet_exists(br00003_agg_file_path, cart_valid_str())
     assert sheet_exists(br00043_agg_file_path, cart_valid_str())
 
-    sue_dir = create_path(x_faces_otz_dir, sue_str)
+    sue_dir = create_path(x_syntax_otz_dir, sue_str)
     sue_br00003_filepath = create_path(sue_dir, br00003_filename)
     sue_br00043_filepath = create_path(sue_dir, br00043_filename)
     assert sheet_exists(sue_br00003_filepath, cart_valid_str()) is False
     assert sheet_exists(sue_br00043_filepath, cart_valid_str()) is False
 
     # WHEN
-    etl_cart_ideas_to_otz_face_ideas(x_cart_dir, x_faces_otz_dir)
+    etl_cart_ideas_to_otz_face_ideas(x_cart_dir, x_syntax_otz_dir)
 
     # THEN
     assert sheet_exists(sue_br00003_filepath, cart_valid_str())

@@ -290,7 +290,7 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
 #     sue_dir = create_path(faces_dir, sue_str)
 #     event7_dir = create_path(sue_dir, event7)
 #     event9_dir = create_path(sue_dir, event9)
-#     sue_pidgin_file_path = otx_face_pidgin_path(sue_dir)
+#     sue_pidgin_file_path = syntax_otx_pidgin_path(sue_dir)
 #     event7_pidgin_file_path = otx_event_pidgin_path(event7_dir)
 #     event9_pidgin_file_path = otx_event_pidgin_path(event9_dir)
 #     label_agg_str = "label_agg"

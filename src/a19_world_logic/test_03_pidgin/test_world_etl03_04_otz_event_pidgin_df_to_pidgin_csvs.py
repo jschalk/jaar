@@ -61,16 +61,16 @@ def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_ro
     e9_road_df = DataFrame(e9_road_rows, columns=road_file_columns)
 
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    bob_dir = create_path(fizz_world._faces_otz_dir, bob_str)
-    sue_dir = create_path(fizz_world._faces_otz_dir, sue_str)
-    zia_dir = create_path(fizz_world._faces_otz_dir, zia_str)
+    bob_dir = create_path(fizz_world._syntax_otz_dir, bob_str)
+    sue_dir = create_path(fizz_world._syntax_otz_dir, sue_str)
+    zia_dir = create_path(fizz_world._syntax_otz_dir, zia_str)
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(zia_dir, event9)
-    faces_otz_dir = fizz_world._faces_otz_dir
-    event3_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, bob_str, event3)
-    event7_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, sue_str, event7)
-    event9_pidgin_file_path = otx_event_pidgin_path(faces_otz_dir, zia_str, event9)
+    syntax_otz_dir = fizz_world._syntax_otz_dir
+    event3_pidgin_file_path = otx_event_pidgin_path(syntax_otz_dir, bob_str, event3)
+    event7_pidgin_file_path = otx_event_pidgin_path(syntax_otz_dir, sue_str, event7)
+    event9_pidgin_file_path = otx_event_pidgin_path(syntax_otz_dir, zia_str, event9)
     event3_road_csv_file_path = create_path(event3_dir, "road.csv")
     event7_road_csv_file_path = create_path(event7_dir, "road.csv")
     event9_road_csv_file_path = create_path(event9_dir, "road.csv")

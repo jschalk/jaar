@@ -71,8 +71,8 @@ class WorldUnit:
     worlds_dir: str = None
     world_time_nigh: TimeLinePoint = None
     timeconversions: dict[TimeLineTag, TimeConversion] = None
-    _faces_otz_dir: str = None
-    _faces_inz_dir: str = None
+    _syntax_otz_dir: str = None
+    _syntax_inz_dir: str = None
     _world_dir: str = None
     _mine_dir: str = None
     _cart_dir: str = None
@@ -91,11 +91,11 @@ class WorldUnit:
         return self._events.get(event_int)
 
     def _event_dir(self, face_name: FaceName, event_int: EventInt) -> str:
-        face_dir = create_path(self._faces_otz_dir, face_name)
+        face_dir = create_path(self._syntax_otz_dir, face_name)
         return create_path(face_dir, event_int)
 
     def _set_pidgin_events(self):
-        self._pidgin_events = get_pidgin_events_by_dirs(self._faces_otz_dir)
+        self._pidgin_events = get_pidgin_events_by_dirs(self._syntax_otz_dir)
 
     def set_mine_dir(self, x_dir: str):
         self._mine_dir = x_dir
@@ -103,13 +103,13 @@ class WorldUnit:
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._faces_otz_dir = create_path(self._world_dir, "faces_otz")
-        self._faces_inz_dir = create_path(self._world_dir, "faces_inz")
+        self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
+        self._syntax_inz_dir = create_path(self._world_dir, "syntax_inz")
         self._cart_dir = create_path(self._world_dir, "cart")
         self._fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         set_dir(self._world_dir)
-        set_dir(self._faces_otz_dir)
-        set_dir(self._faces_inz_dir)
+        set_dir(self._syntax_otz_dir)
+        set_dir(self._syntax_inz_dir)
         set_dir(self._cart_dir)
         set_dir(self._fisc_mstr_dir)
 
@@ -146,42 +146,42 @@ class WorldUnit:
         etl_cart_pidgin_staging_to_pidgin_agg(self._cart_dir)
 
     def cart_pidgin_agg_to_otz_face_pidgin_agg(self):
-        etl_cart_pidgin_agg_to_otz_face_pidgin_agg(self._cart_dir, self._faces_otz_dir)
+        etl_cart_pidgin_agg_to_otz_face_pidgin_agg(self._cart_dir, self._syntax_otz_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
-            self._faces_otz_dir, self._pidgin_events
+            self._syntax_otz_dir, self._pidgin_events
         )
 
     def otz_face_pidgins_to_otz_event_pidgins(self):
-        etl_otz_face_pidgins_to_otz_event_pidgins(self._faces_otz_dir)
+        etl_otz_face_pidgins_to_otz_event_pidgins(self._syntax_otz_dir)
 
     def otz_event_pidgins_to_otz_pidgin_csv_files(self):
-        etl_otz_event_pidgins_to_otz_pidgin_csv_files(self._faces_otz_dir)
+        etl_otz_event_pidgins_to_otz_pidgin_csv_files(self._syntax_otz_dir)
 
     def otz_event_pidgins_csvs_to_otz_pidgin_jsons(self):
-        etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._faces_otz_dir)
+        etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._syntax_otz_dir)
         self._set_pidgin_events()
 
     def cart_ideas_to_otz_face_ideas(self):
-        etl_cart_ideas_to_otz_face_ideas(self._cart_dir, self._faces_otz_dir)
+        etl_cart_ideas_to_otz_face_ideas(self._cart_dir, self._syntax_otz_dir)
 
     def otz_face_ideas_to_otz_event_otx_ideas(self):
-        etl_otz_face_ideas_to_otz_event_otx_ideas(self._faces_otz_dir)
+        etl_otz_face_ideas_to_otz_event_otx_ideas(self._syntax_otz_dir)
 
     def otz_event_ideas_to_inz_events(self):
-        etl_otz_event_ideas_to_inz_events(self._faces_otz_dir, self._pidgin_events)
+        etl_otz_event_ideas_to_inz_events(self._syntax_otz_dir, self._pidgin_events)
 
     def otz_inx_event_ideas_to_inz_faces(self):
-        etl_otz_inx_event_ideas_to_inz_faces(self._faces_otz_dir, self._faces_inz_dir)
+        etl_otz_inx_event_ideas_to_inz_faces(self._syntax_otz_dir, self._syntax_inz_dir)
 
     def inz_face_ideas_to_csv_files(self):
-        etl_inz_face_ideas_to_csv_files(self._faces_inz_dir)
+        etl_inz_face_ideas_to_csv_files(self._syntax_inz_dir)
 
     def inz_face_csv_files2idea_staging_tables(
         self, conn_or_cursor: sqlite3_Connection
     ):
-        etl_inz_face_csv_files2idea_staging_tables(conn_or_cursor, self._faces_inz_dir)
+        etl_inz_face_csv_files2idea_staging_tables(conn_or_cursor, self._syntax_inz_dir)
 
     def idea_staging_to_fisc_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_idea_staging_to_fisc_tables(conn_or_cursor)

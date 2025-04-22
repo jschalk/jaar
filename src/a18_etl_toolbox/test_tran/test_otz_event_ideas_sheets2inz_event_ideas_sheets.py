@@ -36,14 +36,14 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
     sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
-    otz_dir = create_path(get_test_etl_dir(), "faces_otz")
+    otz_dir = create_path(get_test_etl_dir(), "syntax_otz")
     otz_sue_dir = create_path(otz_dir, sue_otx)
     otz_e3_dir = create_path(otz_sue_dir, event3)
     otz_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
     inx_str = "inx"
     upsert_sheet(otz_e3_br00011_path, inx_str, e3_accord23_df)
     assert sheet_exists(otz_e3_br00011_path, inx_str)
-    inz_dir = create_path(get_test_etl_dir(), "faces_inz")
+    inz_dir = create_path(get_test_etl_dir(), "syntax_inz")
     inz_sue_dir = create_path(inz_dir, sue_inx)
     inz_br00011_path = create_path(inz_sue_dir, br00011_filename)
     print(f"{otz_e3_br00011_path=}")
@@ -104,7 +104,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
 #     e9_accord23_df = DataFrame([zia1, zia2, zia3], columns=br00011_columns)
 #     br00011_filename = "br00011.xlsx"
 #     x_event_pidgins = {sue_otx: {event3}, zia_otx: {event7, event9}}
-#     x_otz_dir = create_path(get_test_etl_dir(), "faces_otz")
+#     x_otz_dir = create_path(get_test_etl_dir(), "syntax_otz")
 #     sue_otz_dir = create_path(x_otz_dir, sue_otx)
 #     zia_otz_dir = create_path(x_otz_dir, zia_otx)
 #     otz_e3_dir = create_path(sue_otz_dir, event3)
