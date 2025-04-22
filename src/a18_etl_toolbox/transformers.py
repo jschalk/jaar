@@ -168,8 +168,15 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_types[class_type]["inx_obj"]]
 
 
-def etl_sound_df_to_cochlea_raw_db(sound_dir: str, cochlea_dir: str):
-    pass
+def etl_sound_df_to_cochlea_raw_db(conn: sqlite3_Connection, sound_dir: str):
+    for ref in get_all_idea_dataframes(sound_dir):
+        x_file_path = create_path(ref.file_dir, ref.filename)
+        df = pandas_read_excel(x_file_path, ref.sheet_name)
+        x_tablename = f"cochlea_raw_{ref.idea_number}"
+        df.insert(0, "file_dir", ref.file_dir)
+        df.insert(1, "filename", ref.filename)
+        df.insert(2, "sheet_name", ref.sheet_name)
+        df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
 def etl_sound_df_to_cochlea_raw_df(sound_dir: str, cochlea_dir: str):
