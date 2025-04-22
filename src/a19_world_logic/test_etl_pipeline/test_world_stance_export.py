@@ -27,7 +27,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    fizz_world.mine_to_burdens()
+    fizz_world.mine_to_standings()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
@@ -57,7 +57,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
-    fizz_world.mine_to_burdens()
+    fizz_world.mine_to_standings()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
@@ -89,7 +89,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mine_file_path, "br00011_ex3", br00011_df)
-    fizz_world.mine_to_burdens()
+    fizz_world.mine_to_standings()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     fizz_world.create_stances()
     buzz_world = worldunit_shop("buzz", worlds_dir())
@@ -100,7 +100,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
     # print(f"{pandas_read_excel(buzz_mine_st0001_path)=}")
     print(f"{buzz_mine_st0001_path=}")
     print(f"{get_sheet_names(buzz_mine_st0001_path)=}")
-    buzz_world.mine_to_burdens()
+    buzz_world.mine_to_standings()
     buzz_stance0001_path = create_stance0001_path(buzz_world._fisc_mstr_dir)
     assert os_path_exists(buzz_stance0001_path) is False
 
@@ -120,7 +120,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
         assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
 
 
-# def test_WorldUnit_mine_to_burdens_CreatesFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mine_to_standings_CreatesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -193,7 +193,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeMinedByOtherWorldUn
 #     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
 #     # WHEN
-#     fizz_world.mine_to_burdens()
+#     fizz_world.mine_to_standings()
 
 #     # THEN
 #     assert os_path_exists(wrong_a23_fisc_dir) is False

@@ -247,7 +247,7 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_deal_mandate_ledgers(mstr_dir)
 
-    def mine_to_burdens(
+    def mine_to_standings(
         self, store_tracing_files: bool = False
     ):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")

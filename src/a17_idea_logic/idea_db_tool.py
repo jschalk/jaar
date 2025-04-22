@@ -125,9 +125,9 @@ def get_cart_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql(cart_staging_str(), conn, index=False)
+        x_df.to_sql("cart_staging", conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table=cart_staging_str(),
+            x_table="cart_staging",
             groupby_columns=grouping_columns,
             value_columns=value_columns,
         )
