@@ -246,35 +246,15 @@ class CartStagingToCartAggTransformer:
         )
 
 
-def etl_cart_agg_to_cart_valid(cart_dir: str, legitimate_events: set[EventInt]):
-    transformer = CartAggToCartValidTransformer(cart_dir, legitimate_events)
-    transformer.transform()
-
-
-class CartAggToCartValidTransformer:
-    def __init__(self, cart_dir: str, legitimate_events: set[EventInt]):
-        self.cart_dir = cart_dir
-        self.legitimate_events = legitimate_events
-
-    def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
-            cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            cart_agg = pandas_read_excel(cart_idea_path, "cart_agg")
-            cart_valid_df = cart_agg[cart_agg["event_int"].isin(self.legitimate_events)]
-            upsert_sheet(cart_idea_path, "cart_valid", cart_valid_df)
-
-    # def _groupby_idea_columns(
-    #     self, cart_staging_df: DataFrame, idea_number: str
-    # ) -> DataFrame:
-    #     idea_filename = get_idea_format_filename(idea_number)
-    #     idearef = get_idearef_obj(idea_filename)
-    #     required_columns = idearef.get_otx_keys_list()
-    #     idea_columns_set = set(idearef._attributes.keys())
-    #     idea_columns_list = get_default_sorted_list(idea_columns_set)
-    #     cart_staging_df = cart_staging_df[idea_columns_list]
-    #     return get_cart_staging_grouping_with_all_values_equal_df(
-    #         cart_staging_df, required_columns
-    #     )
+def etl_cart_agg_non_pidgin_ideas_to_cart_valid(
+    cart_dir: str, legitimate_events: set[EventInt]
+):
+    """create cart_legit sheet with each idea's data that is of a legitimate event"""
+    for br_ref in get_existing_excel_idea_file_refs(cart_dir):
+        cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cart_agg = pandas_read_excel(cart_idea_path, "cart_agg")
+        cart_valid_df = cart_agg[cart_agg["event_int"].isin(legitimate_events)]
+        upsert_sheet(cart_idea_path, "cart_valid", cart_valid_df)
 
 
 def etl_cart_agg_to_cart_events(cart_dir):
@@ -375,7 +355,7 @@ class EventsLogToEventsAggTransformer:
             upsert_sheet(events_file_path, "events_agg", events_agg_df)
 
 
-def get_events_dict_from_events_agg_file(cart_dir) -> dict[EventInt, FaceName]:
+def etl_events_agg_file_to_events_dict(cart_dir) -> dict[EventInt, FaceName]:
     events_file_path = create_cart_events_path(cart_dir)
     x_dict = {}
     if os_path_exists(events_file_path):
@@ -519,7 +499,7 @@ def etl_pidgin_single_staging_to_agg(cart_dir: str, map_dimen: str):
     transformer.transform()
 
 
-def etl_cart_pidgin_staging_to_agg(cart_dir):
+def etl_cart_pidgin_staging_to_pidgin_agg(cart_dir):
     etl_pidgin_name_staging_to_name_agg(cart_dir)
     etl_pidgin_label_staging_to_label_agg(cart_dir)
     etl_pidgin_road_staging_to_road_agg(cart_dir)
@@ -576,7 +556,7 @@ class PidginStagingToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_cart_pidgin_agg_to_otz_face_dirs(cart_dir: str, faces_dir: str):
+def etl_cart_pidgin_agg_to_otz_face_pidgin_agg(cart_dir: str, faces_dir: str):
     agg_pidgin = create_cart_pidgin_path(cart_dir)
     for class_type in class_typeS.keys():
         agg_sheet_name = class_typeS[class_type]["agg"]

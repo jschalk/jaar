@@ -22,14 +22,14 @@ from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     etl_mine_to_cart_staging,
     etl_cart_staging_to_cart_agg,
-    etl_cart_agg_to_cart_valid,
+    etl_cart_agg_non_pidgin_ideas_to_cart_valid,
     etl_cart_agg_to_cart_events,
     etl_cart_events_to_events_log,
-    etl_cart_pidgin_staging_to_agg,
+    etl_cart_pidgin_staging_to_pidgin_agg,
     etl_cart_agg_to_pidgin_staging,
     etl_cart_events_log_to_events_agg,
-    get_events_dict_from_events_agg_file,
-    etl_cart_pidgin_agg_to_otz_face_dirs,
+    etl_events_agg_file_to_events_dict,
+    etl_cart_pidgin_agg_to_otz_face_pidgin_agg,
     etl_otz_face_pidgins_to_otz_event_pidgins,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
@@ -122,8 +122,10 @@ class WorldUnit:
     def cart_staging_to_cart_agg(self):
         etl_cart_staging_to_cart_agg(self._cart_dir)
 
-    def cart_agg_to_cart_valid(self):
-        etl_cart_agg_to_cart_valid(self._cart_dir, set(self._events.keys()))
+    def cart_agg_non_pidgin_ideas_to_cart_valid(self):
+        etl_cart_agg_non_pidgin_ideas_to_cart_valid(
+            self._cart_dir, set(self._events.keys())
+        )
 
     def cart_agg_to_cart_events(self):
         etl_cart_agg_to_cart_events(self._cart_dir)
@@ -134,17 +136,17 @@ class WorldUnit:
     def cart_events_log_to_events_agg(self):
         etl_cart_events_log_to_events_agg(self._cart_dir)
 
-    def set_events_from_events_agg_file(self):
-        self._events = get_events_dict_from_events_agg_file(self._cart_dir)
+    def events_agg_file_to_events_dict(self):
+        self._events = etl_events_agg_file_to_events_dict(self._cart_dir)
 
     def cart_agg_to_pidgin_staging(self):
         etl_cart_agg_to_pidgin_staging(set(self._events.keys()), self._cart_dir)
 
-    def cart_pidgin_staging_to_agg(self):
-        etl_cart_pidgin_staging_to_agg(self._cart_dir)
+    def cart_pidgin_staging_to_pidgin_agg(self):
+        etl_cart_pidgin_staging_to_pidgin_agg(self._cart_dir)
 
-    def cart_pidgin_agg_to_otz_face_dirs(self):
-        etl_cart_pidgin_agg_to_otz_face_dirs(self._cart_dir, self._faces_otz_dir)
+    def cart_pidgin_agg_to_otz_face_pidgin_agg(self):
+        etl_cart_pidgin_agg_to_otz_face_pidgin_agg(self._cart_dir, self._faces_otz_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -260,14 +262,14 @@ class WorldUnit:
             self.cart_agg_to_cart_events()
             self.cart_events_to_events_log()
             self.cart_events_log_to_events_agg()
-            self.set_events_from_events_agg_file()  # self._events
+            self.events_agg_file_to_events_dict()  # self._events
             self.cart_agg_to_pidgin_staging()  # self._events.keys()
-            self.cart_pidgin_staging_to_agg()
-            self.cart_pidgin_agg_to_otz_face_dirs()
+            self.cart_pidgin_staging_to_pidgin_agg()
+            self.cart_pidgin_agg_to_otz_face_pidgin_agg()
             self.otz_face_pidgins_to_otz_event_pidgins()
             self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
             self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
-            self.cart_agg_to_cart_valid()  # self._events.keys()
+            self.cart_agg_non_pidgin_ideas_to_cart_valid()  # self._events.keys()
             self.cart_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()
             self.otz_event_ideas_to_inx_events()  # self._pidgin_events

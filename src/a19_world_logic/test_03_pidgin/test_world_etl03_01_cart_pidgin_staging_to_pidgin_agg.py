@@ -89,7 +89,7 @@ def test_WorldUnit_pidgin_staging_to_name_agg_Scenario0_CreatesFileWithAllDimens
     assert sheet_exists(pidgin_path, tag_agg_str) is False
 
     # WHEN
-    fizz_world.cart_pidgin_staging_to_agg()
+    fizz_world.cart_pidgin_staging_to_pidgin_agg()
 
     # THEN
     assert os_path_exists(pidgin_path)

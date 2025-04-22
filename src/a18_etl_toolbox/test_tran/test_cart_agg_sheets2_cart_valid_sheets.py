@@ -8,7 +8,7 @@ from src.a17_idea_logic.idea_db_tool import (
     cart_agg_str,
     cart_valid_str,
 )
-from src.a18_etl_toolbox.transformers import etl_cart_agg_to_cart_valid
+from src.a18_etl_toolbox.transformers import etl_cart_agg_non_pidgin_ideas_to_cart_valid
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
@@ -16,7 +16,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
+def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -49,7 +49,7 @@ def test_etl_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     assert sheet_exists(cart_file_path, cart_valid_str()) is False
 
     # WHEN
-    etl_cart_agg_to_cart_valid(cart_dir, legitimate_events)
+    etl_cart_agg_non_pidgin_ideas_to_cart_valid(cart_dir, legitimate_events)
 
     # THEN
     assert sheet_exists(cart_file_path, cart_valid_str())
@@ -64,7 +64,7 @@ def test_etl_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     pandas_assert_frame_equal(gen_cart_valid_df, example_cart_valid_df)
 
 
-# def test_etl_cart_agg_to_cart_valid_CreatesSheets_Scenario1(
+# def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -103,7 +103,7 @@ def test_etl_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
 #     etl_cart_staging_to_cart_agg(cart_dir)
 
 #     # WHEN
-#     etl_cart_agg_to_cart_valid(cart_dir)
+#     etl_cart_agg_non_pidgin_ideas_to_cart_valid(cart_dir)
 
 #     # THEN
 #     gen_otx_events_df = pandas_read_excel(cart_file_path, sheet_name="cart_valid")

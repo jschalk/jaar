@@ -19,7 +19,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
+def test_WorldUnit_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -55,7 +55,7 @@ def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     assert sheet_exists(cart_file_path, cart_valid_str()) is False
 
     # WHEN
-    fizz_world.cart_agg_to_cart_valid()
+    fizz_world.cart_agg_non_pidgin_ideas_to_cart_valid()
 
     # THEN
     assert sheet_exists(cart_file_path, cart_valid_str())
@@ -70,7 +70,7 @@ def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
     pandas_assert_frame_equal(gen_cart_valid_df, example_cart_valid_df)
 
 
-# def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario1(
+# def test_WorldUnit_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -109,7 +109,7 @@ def test_WorldUnit_cart_agg_to_cart_valid_CreatesSheets_Scenario0(
 #     etl_cart_staging_to_cart_agg(cart_dir)
 
 #     # WHEN
-#     etl_cart_agg_to_cart_valid(cart_dir)
+#     etl_cart_agg_non_pidgin_ideas_to_cart_valid(cart_dir)
 
 #     # THEN
 #     gen_otx_events_df = pandas_read_excel(cart_file_path, sheet_name="cart_valid")
