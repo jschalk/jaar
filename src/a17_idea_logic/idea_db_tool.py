@@ -116,7 +116,7 @@ def drum_valid_str():
 
 
 def get_drum_staging_grouping_with_all_values_equal_df(
-    x_df: DataFrame, groupby_list: list
+    x_df: DataFrame, groupby_list: list, idea_number: str
 ) -> DataFrame:
     df_columns = set(x_df.columns)
     grouping_columns = get_default_sorted_list(df_columns, groupby_list)

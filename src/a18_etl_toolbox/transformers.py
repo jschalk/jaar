@@ -236,7 +236,7 @@ def create_df_with_groupby_idea_columns(
     idea_columns_list = get_default_sorted_list(idea_columns_set)
     drum_staging_df = drum_staging_df[idea_columns_list]
     return get_drum_staging_grouping_with_all_values_equal_df(
-        drum_staging_df, required_columns
+        drum_staging_df, required_columns, idea_number
     )
 
 

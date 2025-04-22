@@ -193,7 +193,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0
 
     # WHEN
     groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+        df1, groupby_list, idea_number="br00004"
     )
 
     # THEN
@@ -212,7 +212,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1
 
     # WHEN
     groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
@@ -235,7 +235,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2
 
     # WHEN
     groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
@@ -258,7 +258,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3
 
     # WHEN
     groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
@@ -285,7 +285,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4
 
     # WHEN
     groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
