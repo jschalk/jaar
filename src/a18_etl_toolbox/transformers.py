@@ -250,29 +250,21 @@ def etl_drum_agg_non_pidgin_ideas_to_drum_valid(
 
 
 def etl_drum_agg_to_drum_events(drum_dir):
-    transformer = DrumAggToDrumEventsTransformer(drum_dir)
-    transformer.transform()
+    for file_ref in get_existing_excel_idea_file_refs(drum_dir):
+        drum_idea_path = create_path(drum_dir, file_ref.filename)
+        drum_agg_df = pandas_read_excel(drum_idea_path, "drum_agg")
+        events_df = get_df_of_drum_agg_events(drum_agg_df)
+        upsert_sheet(drum_idea_path, "drum_events", events_df)
 
 
-class DrumAggToDrumEventsTransformer:
-    def __init__(self, drum_dir: str):
-        self.drum_dir = drum_dir
-
-    def transform(self):
-        for file_ref in get_existing_excel_idea_file_refs(self.drum_dir):
-            drum_idea_path = create_path(self.drum_dir, file_ref.filename)
-            drum_agg_df = pandas_read_excel(drum_idea_path, "drum_agg")
-            events_df = self.get_unique_events(drum_agg_df)
-            upsert_sheet(drum_idea_path, "drum_events", events_df)
-
-    def get_unique_events(self, drum_agg_df: DataFrame) -> DataFrame:
-        events_df = drum_agg_df[["face_name", "event_int"]].drop_duplicates()
-        events_df["error_message"] = (
-            events_df["event_int"]
-            .duplicated(keep=False)
-            .apply(lambda x: "invalid because of conflicting event_int" if x else "")
-        )
-        return events_df.sort_values(["face_name", "event_int"])
+def get_df_of_drum_agg_events(drum_agg_df: DataFrame) -> DataFrame:
+    events_df = drum_agg_df[["face_name", "event_int"]].drop_duplicates()
+    events_df["error_message"] = (
+        events_df["event_int"]
+        .duplicated(keep=False)
+        .apply(lambda x: "invalid because of conflicting event_int" if x else "")
+    )
+    return events_df.sort_values(["face_name", "event_int"])
 
 
 def etl_drum_events_to_events_log(drum_dir: str):
