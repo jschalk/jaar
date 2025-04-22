@@ -14,6 +14,7 @@ from src.a19_world_logic.examples.world_env import (
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
+from sqlite3 import connect as sqlite3_connect
 
 
 def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
@@ -48,7 +49,9 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_cochlea_raw()
+    with sqlite3_connect(":memory:") as db_conn:
+        # WHEN
+        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
     fizz_world.cochlea_raw_to_cochlea_agg()
 
     # WHEN
@@ -111,7 +114,9 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_cochlea_raw()
+    with sqlite3_connect(":memory:") as db_conn:
+        # WHEN
+        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
     fizz_world.cochlea_raw_to_cochlea_agg()
 
     # WHEN

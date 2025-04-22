@@ -14,9 +14,12 @@ from src.a19_world_logic.examples.world_env import (
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
+from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_sound_to_cochlea_raw_CreatesCochleaFiles(env_dir_setup_cleanup):
+def test_WorldUnit_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -61,8 +64,9 @@ def test_WorldUnit_sound_to_cochlea_raw_CreatesCochleaFiles(env_dir_setup_cleanu
     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
     assert os_path_exists(cochlea_file_path) is False
 
-    # WHEN
-    fizz_world.sound_to_cochlea_raw()
+    with sqlite3_connect(":memory:") as db_conn:
+        # WHEN
+        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
 
     # THEN
     print(f"{cochlea_file_path=}")

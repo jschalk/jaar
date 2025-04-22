@@ -14,6 +14,7 @@ from src.a19_world_logic.examples.world_env import (
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
+from sqlite3 import connect as sqlite3_connect
 
 
 def test_WorldUnit_cochlea_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_GroupByWorks(
@@ -94,7 +95,7 @@ def test_WorldUnit_cochlea_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Gr
 #     row4 = [sue_str, event7, accord23_str, hour7am, minute_480]
 #     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
 #     upsert_sheet(sound_file_path, "example1_br00003", df1)
-#     fizz_world.sound_to_cochlea_raw()
+#     fizz_world.sound_df_to_cochlea_raw_df()
 #     br00003_agg_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
 #     cochlea_df = pandas_read_excel(br00003_agg_file_path, sheet_name=cochlea_raw_str())
 #     assert len(cochlea_df) == 4
