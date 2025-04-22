@@ -9,7 +9,7 @@ from src.a17_idea_logic.idea_db_tool import (
     cochlea_agg_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_to_cochlea_raw,
+    etl_sound_df_to_cochlea_raw_df,
     etl_cochlea_raw_to_cochlea_agg,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -44,7 +44,7 @@ def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_to_cochlea_raw(sound_dir, cochlea_dir)
+    etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
     cochlea__raw_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
     assert len(cochlea__raw_df) == 3
 
@@ -93,7 +93,7 @@ def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNo
     row3 = [sue_str, event_1, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_to_cochlea_raw(sound_dir, cochlea_dir)
+    etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
     cochlea_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
     assert len(cochlea_df) == 3
 

@@ -168,7 +168,11 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[class_types[class_type]["inx_obj"]]
 
 
-def etl_sound_to_cochlea_raw(sound_dir: str, cochlea_dir: str):
+def etl_sound_df_to_cochlea_raw_db(sound_dir: str, cochlea_dir: str):
+    pass
+
+
+def etl_sound_df_to_cochlea_raw_df(sound_dir: str, cochlea_dir: str):
     transformer = SoundToCochleaTransformer(sound_dir, cochlea_dir)
     transformer.transform()
 

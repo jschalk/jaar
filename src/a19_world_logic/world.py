@@ -20,7 +20,7 @@ from src.a01_word_logic.road import (
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_to_cochlea_raw,
+    etl_sound_df_to_cochlea_raw_df,
     etl_cochlea_raw_to_cochlea_agg,
     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
     etl_cochlea_agg_to_cochlea_events,
@@ -117,7 +117,7 @@ class WorldUnit:
         return self.timeconversions
 
     def sound_to_cochlea_raw(self):
-        etl_sound_to_cochlea_raw(self._sound_dir, self._cochlea_dir)
+        etl_sound_df_to_cochlea_raw_df(self._sound_dir, self._cochlea_dir)
 
     def cochlea_raw_to_cochlea_agg(self):
         etl_cochlea_raw_to_cochlea_agg(self._cochlea_dir)
