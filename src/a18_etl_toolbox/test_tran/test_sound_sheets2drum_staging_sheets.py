@@ -5,15 +5,15 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    cart_staging_str,
+    drum_staging_str,
 )
-from src.a18_etl_toolbox.transformers import etl_sound_to_cart_staging
+from src.a18_etl_toolbox.transformers import etl_sound_to_drum_staging
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
+def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -24,7 +24,7 @@ def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     sound_dir = create_path(get_test_etl_dir(), "sound")
-    cart_dir = create_path(get_test_etl_dir(), "cart")
+    drum_dir = create_path(get_test_etl_dir(), "drum")
     sound_file_path = create_path(sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
@@ -55,16 +55,16 @@ def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     upsert_sheet(sound_file_path, br00003_ex1_str, df1)
     upsert_sheet(sound_file_path, br00003_ex2_str, df2)
     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
-    cart_file_path = create_path(cart_dir, "br00003.xlsx")
-    assert os_path_exists(cart_file_path) is False
+    drum_file_path = create_path(drum_dir, "br00003.xlsx")
+    assert os_path_exists(drum_file_path) is False
 
     # WHEN
-    etl_sound_to_cart_staging(sound_dir, cart_dir)
+    etl_sound_to_drum_staging(sound_dir, drum_dir)
 
     # THEN
-    print(f"{cart_file_path=}")
-    assert os_path_exists(cart_file_path)
-    x_df = pandas_read_excel(cart_file_path, sheet_name=cart_staging_str())
+    print(f"{drum_file_path=}")
+    assert os_path_exists(drum_file_path)
+    x_df = pandas_read_excel(drum_file_path, sheet_name=drum_staging_str())
     assert set(idea_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     filename_str = "filename"
@@ -73,10 +73,10 @@ def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     assert filename_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(cart_file_path) == [cart_staging_str()]
+    assert get_sheet_names(drum_file_path) == [drum_staging_str()]
 
 
-def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
+def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -87,7 +87,7 @@ def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     sound_dir = create_path(get_test_etl_dir(), "sound")
-    cart_dir = create_path(get_test_etl_dir(), "cart")
+    drum_dir = create_path(get_test_etl_dir(), "drum")
     sound_file_path = create_path(sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
@@ -118,16 +118,16 @@ def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     upsert_sheet(sound_file_path, br00003_ex1_str, df1)
     upsert_sheet(sound_file_path, br00003_ex2_str, df2)
     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
-    cart_file_path = create_path(cart_dir, "br00003.xlsx")
-    assert os_path_exists(cart_file_path) is False
+    drum_file_path = create_path(drum_dir, "br00003.xlsx")
+    assert os_path_exists(drum_file_path) is False
 
     # WHEN
-    etl_sound_to_cart_staging(sound_dir, cart_dir)
+    etl_sound_to_drum_staging(sound_dir, drum_dir)
 
     # THEN
-    print(f"{cart_file_path=}")
-    assert os_path_exists(cart_file_path)
-    x_df = pandas_read_excel(cart_file_path, sheet_name=cart_staging_str())
+    print(f"{drum_file_path=}")
+    assert os_path_exists(drum_file_path)
+    x_df = pandas_read_excel(drum_file_path, sheet_name=drum_staging_str())
     assert set(idea_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     filename_str = "filename"
@@ -136,4 +136,4 @@ def test_etl_sound_to_cart_staging_CreatesCartFiles(env_dir_setup_cleanup):
     assert filename_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(cart_file_path) == [cart_staging_str()]
+    assert get_sheet_names(drum_file_path) == [drum_staging_str()]

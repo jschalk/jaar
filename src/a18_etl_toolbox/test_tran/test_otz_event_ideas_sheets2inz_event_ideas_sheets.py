@@ -16,7 +16,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_otz_event_ideas_to_cart_events_Scenario0():
+def test_etl_otz_event_ideas_to_drum_events_Scenario0():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -63,7 +63,7 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
     pandas_assert_frame_equal(inz_e3_df, e3_accord23_df)
 
 
-# def test_etl_otz_event_ideas_to_cart_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
+# def test_etl_otz_event_ideas_to_drum_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -110,16 +110,16 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
 #     otz_e3_dir = create_path(sue_otz_dir, event3)
 #     otz_e7_dir = create_path(zia_otz_dir, event7)
 #     otz_e9_dir = create_path(zia_otz_dir, event9)
-#     cart_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
-#     cart_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
-#     cart_e9_br00011_path = create_path(otz_e9_dir, br00011_filename)
-#     print(f"{cart_e3_br00011_path=}")
-#     print(f"{cart_e7_br00011_path=}")
-#     print(f"{cart_e9_br00011_path=}")
-#     upsert_sheet(cart_e3_br00011_path, cart_valid_str(), e3_accord23_df)
-#     upsert_sheet(cart_e7_br00011_path, cart_valid_str(), e7_accord23_df)
-#     upsert_sheet(cart_e9_br00011_path, cart_valid_str(), e9_accord23_df)
-#     print(f"{cart_valid_str()=}")
+#     drum_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
+#     drum_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
+#     drum_e9_br00011_path = create_path(otz_e9_dir, br00011_filename)
+#     print(f"{drum_e3_br00011_path=}")
+#     print(f"{drum_e7_br00011_path=}")
+#     print(f"{drum_e9_br00011_path=}")
+#     upsert_sheet(drum_e3_br00011_path, drum_valid_str(), e3_accord23_df)
+#     upsert_sheet(drum_e7_br00011_path, drum_valid_str(), e7_accord23_df)
+#     upsert_sheet(drum_e9_br00011_path, drum_valid_str(), e9_accord23_df)
+#     print(f"{drum_valid_str()=}")
 #     inx_str = "inx"
 #     e3_pidginunit = pidginunit_shop(sue_otx, event3)
 #     e7_pidginunit = pidginunit_shop(zia_otx, event7)
@@ -137,20 +137,20 @@ def test_etl_otz_event_ideas_to_cart_events_Scenario0():
 #     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
 #     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
 #     save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
-#     assert sheet_exists(cart_e3_br00011_path, inx_str) is False
-#     assert sheet_exists(cart_e7_br00011_path, inx_str) is False
-#     assert sheet_exists(cart_e9_br00011_path, inx_str) is False
+#     assert sheet_exists(drum_e3_br00011_path, inx_str) is False
+#     assert sheet_exists(drum_e7_br00011_path, inx_str) is False
+#     assert sheet_exists(drum_e9_br00011_path, inx_str) is False
 
 #     # WHEN
 #     etl_otz_inx_event_ideas_to_inz_faces(x_otz_dir, x_event_pidgins)
 
 #     # THEN
-#     assert sheet_exists(cart_e3_br00011_path, inx_str)
-#     assert sheet_exists(cart_e7_br00011_path, inx_str)
-#     assert sheet_exists(cart_e9_br00011_path, inx_str)
-#     e3_inx_df = pandas_read_excel(cart_e3_br00011_path, sheet_name=inx_str)
-#     e7_inx_df = pandas_read_excel(cart_e7_br00011_path, sheet_name=inx_str)
-#     e9_inx_df = pandas_read_excel(cart_e9_br00011_path, sheet_name=inx_str)
+#     assert sheet_exists(drum_e3_br00011_path, inx_str)
+#     assert sheet_exists(drum_e7_br00011_path, inx_str)
+#     assert sheet_exists(drum_e9_br00011_path, inx_str)
+#     e3_inx_df = pandas_read_excel(drum_e3_br00011_path, sheet_name=inx_str)
+#     e7_inx_df = pandas_read_excel(drum_e7_br00011_path, sheet_name=inx_str)
+#     e9_inx_df = pandas_read_excel(drum_e9_br00011_path, sheet_name=inx_str)
 #     sue_i0 = [sue_inx, event3, accord23_str, bob0_inx, bob0_inx]
 #     sue_i1 = [sue_inx, event3, accord23_str, yao0_inx, bob0_inx]
 #     sue_i2 = [sue_inx, event3, accord23_str, yao0_inx, yao0_inx]

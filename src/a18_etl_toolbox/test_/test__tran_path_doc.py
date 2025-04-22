@@ -1,8 +1,8 @@
 from src.a02_finance_toolboxs.deal import owner_name_str, deal_time_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_path import (
-    create_cart_events_path,
-    create_cart_pidgin_path,
+    create_drum_events_path,
+    create_drum_pidgin_path,
     create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path,
     create_stances_dir_path,
@@ -15,20 +15,20 @@ from platform import system as platform_system
 LINUX_OS = platform_system() == "Linux"
 
 
-def test_create_cart_events_path_HasDocString():
+def test_create_drum_events_path_HasDocString():
     # ESTABLISH
-    doc_str = create_cart_events_path(cart_dir="cart_dir")
+    doc_str = create_drum_events_path(drum_dir="drum_dir")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_cart_events_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_drum_events_path) == doc_str
 
 
-def test_create_cart_pidgin_path_HasDocString():
+def test_create_drum_pidgin_path_HasDocString():
     # ESTABLISH
-    doc_str = create_cart_pidgin_path(cart_dir="cart_dir")
+    doc_str = create_drum_pidgin_path(drum_dir="drum_dir")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_cart_pidgin_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_drum_pidgin_path) == doc_str
 
 
 def test_create_syntax_otx_pidgin_path_HasDocString():

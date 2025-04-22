@@ -197,9 +197,9 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 
 #     # THEN
 #     assert os_path_exists(wrong_a23_fisc_dir) is False
-#     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
+#     drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
 #     assert os_path_exists(sound_file_path)
-#     assert os_path_exists(cart_file_path)
+#     assert os_path_exists(drum_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_job_path)

@@ -103,19 +103,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def cart_staging_str():
-    return "cart_staging"
+def drum_staging_str():
+    return "drum_staging"
 
 
-def cart_agg_str():
-    return "cart_agg"
+def drum_agg_str():
+    return "drum_agg"
 
 
-def cart_valid_str():
-    return "cart_valid"
+def drum_valid_str():
+    return "drum_valid"
 
 
-def get_cart_staging_grouping_with_all_values_equal_df(
+def get_drum_staging_grouping_with_all_values_equal_df(
     x_df: DataFrame, groupby_list: list
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -125,9 +125,9 @@ def get_cart_staging_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql("cart_staging", conn, index=False)
+        x_df.to_sql("drum_staging", conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table="cart_staging",
+            x_table="drum_staging",
             groupby_columns=grouping_columns,
             value_columns=value_columns,
         )

@@ -140,9 +140,9 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
+    drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
     assert os_path_exists(sound_file_path)
-    assert os_path_exists(cart_file_path)
+    assert os_path_exists(drum_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_gut_path)
     assert os_path_exists(a23_sue_job_path)
@@ -182,7 +182,7 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
     assert os_path_exists(a23_ote1_csv_path)
 
 
-# def test_WorldUnit_sound_to_standings_CreatesCartFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_sound_to_standings_CreatesDrumFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -237,9 +237,9 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
 #     fizz_world.sound_to_standings()
 
 #     # THEN
-#     cart_file_path = create_path(fizz_world._cart_dir, "br00003.xlsx")
+#     drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
 #     assert os_path_exists(sound_file_path)
-#     assert os_path_exists(cart_file_path)
+#     assert os_path_exists(drum_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_job_path)
