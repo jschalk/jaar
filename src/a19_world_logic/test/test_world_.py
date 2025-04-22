@@ -29,36 +29,36 @@ def test_WorldUnit_Exists():
     assert not x_world._syntax_otz_dir
     assert not x_world._syntax_inz_dir
     assert not x_world._world_dir
-    assert not x_world._mine_dir
-    assert not x_world._cart_dir
+    assert not x_world._sound_dir
+    assert not x_world._drum_dir
     assert not x_world._fisc_mstr_dir
     assert not x_world._fiscunits
     assert not x_world._pidgin_events
 
 
-def test_WorldUnit_set_mine_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_sound_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = WorldUnit("fizz")
     x_example_dir = create_path(worlds_dir(), "example_dir")
-    x_mine_dir = create_path(x_example_dir, "mine")
+    x_sound_dir = create_path(x_example_dir, "sound")
 
     assert fizz_world._world_dir is None
     assert fizz_world._syntax_otz_dir is None
-    assert fizz_world._mine_dir is None
-    assert fizz_world._cart_dir is None
+    assert fizz_world._sound_dir is None
+    assert fizz_world._drum_dir is None
     assert fizz_world._fisc_mstr_dir is None
-    assert os_path_exists(x_mine_dir) is False
+    assert os_path_exists(x_sound_dir) is False
 
     # WHEN
-    fizz_world.set_mine_dir(x_mine_dir)
+    fizz_world.set_sound_dir(x_sound_dir)
 
     # THEN
     assert fizz_world._world_dir is None
     assert fizz_world._syntax_otz_dir is None
-    assert fizz_world._mine_dir == x_mine_dir
-    assert fizz_world._cart_dir is None
+    assert fizz_world._sound_dir == x_sound_dir
+    assert fizz_world._drum_dir is None
     assert fizz_world._fisc_mstr_dir is None
-    assert os_path_exists(x_mine_dir)
+    assert os_path_exists(x_sound_dir)
 
 
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -68,21 +68,21 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_world_dir = create_path(worlds_dir(), fizz_str)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
     x_syntax_inz_dir = create_path(x_world_dir, "syntax_inz")
-    x_mine_dir = create_path(x_world_dir, "mine")
-    x_cart_dir = create_path(x_world_dir, "cart")
+    x_sound_dir = create_path(x_world_dir, "sound")
+    x_drum_dir = create_path(x_world_dir, "drum")
     x_fisc_mstr_dir = create_path(x_world_dir, "fisc_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
     assert not fizz_world._syntax_inz_dir
-    assert not fizz_world._mine_dir
-    assert not fizz_world._cart_dir
+    assert not fizz_world._sound_dir
+    assert not fizz_world._drum_dir
     assert not fizz_world._fisc_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_syntax_otz_dir) is False
     assert os_path_exists(x_syntax_inz_dir) is False
-    assert os_path_exists(x_mine_dir) is False
-    assert os_path_exists(x_cart_dir) is False
+    assert os_path_exists(x_sound_dir) is False
+    assert os_path_exists(x_drum_dir) is False
     assert os_path_exists(x_fisc_mstr_dir) is False
 
     # WHEN
@@ -92,20 +92,20 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._syntax_otz_dir == x_syntax_otz_dir
     assert fizz_world._syntax_inz_dir == x_syntax_inz_dir
-    assert not fizz_world._mine_dir
-    assert fizz_world._cart_dir == x_cart_dir
+    assert not fizz_world._sound_dir
+    assert fizz_world._drum_dir == x_drum_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_syntax_otz_dir)
     assert os_path_exists(x_syntax_inz_dir)
-    assert os_path_exists(x_mine_dir) is False
-    assert os_path_exists(x_cart_dir)
+    assert os_path_exists(x_sound_dir) is False
+    assert os_path_exists(x_drum_dir)
     assert os_path_exists(x_fisc_mstr_dir)
 
 
 def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
     worlds2_dir = create_path(worlds_dir(), "worlds2")
-    example_mine_dir = create_path(worlds_dir(), "example_mine")
+    example_sound_dir = create_path(worlds_dir(), "example_sound")
     five_world_id = "five"
     world2_time_nigh = 55
     accord45_str = "accord45"
@@ -116,7 +116,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
-        mine_dir=example_mine_dir,
+        sound_dir=example_sound_dir,
         world_time_nigh=world2_time_nigh,
         timeconversions=world2timeconversions,
         _fiscunits=world2_fiscunits,
@@ -126,7 +126,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     world_dir = create_path(worlds2_dir, x_world.world_id)
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
-    assert x_world._mine_dir == example_mine_dir
+    assert x_world._sound_dir == example_sound_dir
     assert x_world.world_time_nigh == world2_time_nigh
     assert x_world.timeconversions == world2timeconversions
     assert x_world._events == {}
@@ -149,7 +149,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.world_time_nigh == 0
     assert x_world.timeconversions == {}
     assert x_world._events == {}
-    assert x_world._mine_dir == create_path(x_world._world_dir, "mine")
+    assert x_world._sound_dir == create_path(x_world._world_dir, "sound")
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
     assert x_world._syntax_inz_dir == create_path(world_dir, "syntax_inz")
     assert x_world._fiscunits == set()

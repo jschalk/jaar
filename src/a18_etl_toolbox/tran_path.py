@@ -1,19 +1,19 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a01_word_logic.road import OwnerName, TagUnit, FaceName, EventInt
 
-CART_EVENTS_FILENAME = "events.xlsx"
-CART_PIDGIN_FILENAME = "pidgin.xlsx"
+DRUM_EVENTS_FILENAME = "events.xlsx"
+DRUM_PIDGIN_FILENAME = "pidgin.xlsx"
 STANCE0001_FILENAME = "stance0001.xlsx"
 
 
-def create_cart_events_path(cart_dir: str) -> str:
-    """Returns path: cart_dir\\events.xlsx"""
-    return create_path(cart_dir, "events.xlsx")
+def create_drum_events_path(drum_dir: str) -> str:
+    """Returns path: drum_dir\\events.xlsx"""
+    return create_path(drum_dir, "events.xlsx")
 
 
-def create_cart_pidgin_path(cart_dir: str) -> str:
-    """Returns path: cart_dir\\pidgin.xlsx"""
-    return create_path(cart_dir, "pidgin.xlsx")
+def create_drum_pidgin_path(drum_dir: str) -> str:
+    """Returns path: drum_dir\\pidgin.xlsx"""
+    return create_path(drum_dir, "pidgin.xlsx")
 
 
 def create_syntax_otx_pidgin_path(syntax_otz_dir: str, face_name: FaceName) -> str:

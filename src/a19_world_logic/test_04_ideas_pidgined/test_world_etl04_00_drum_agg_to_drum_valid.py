@@ -5,18 +5,21 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
     upsert_sheet,
-    cart_agg_str,
-    cart_valid_str,
+    drum_agg_str,
+    drum_valid_str,
 )
-from src.a18_etl_toolbox.transformers import etl_cart_agg_non_pidgin_ideas_to_cart_valid
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a19_world_logic.world import worldunit_shop
+from src.a19_world_logic.examples.world_env import (
+    get_test_worlds_dir as worlds_dir,
+    env_dir_setup_cleanup,
+)
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario0(
+def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -41,30 +44,33 @@ def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario0(
     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-    cart_dir = create_path(get_test_etl_dir(), "cart")
-    cart_file_path = create_path(cart_dir, "br00003.xlsx")
-    cart_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(cart_file_path, cart_agg_str(), cart_agg_df)
+    fizz_world = worldunit_shop("fizz", worlds_dir())
+    fizz_world.set_event(event1, sue_str)
+    fizz_world.set_event(event9, yao_str)
     legitimate_events = {event1, event9}
-    assert sheet_exists(cart_file_path, cart_valid_str()) is False
+    assert set(fizz_world._events.keys()) == legitimate_events
+    drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
+    drum_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(drum_file_path, drum_agg_str(), drum_agg_df)
+    assert sheet_exists(drum_file_path, drum_valid_str()) is False
 
     # WHEN
-    etl_cart_agg_non_pidgin_ideas_to_cart_valid(cart_dir, legitimate_events)
+    fizz_world.drum_agg_non_pidgin_ideas_to_drum_valid()
 
     # THEN
-    assert sheet_exists(cart_file_path, cart_valid_str())
-    gen_cart_valid_df = pandas_read_excel(cart_file_path, sheet_name=cart_valid_str())
-    print(f"{gen_cart_valid_df.columns=}")
-    example_cart_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_cart_valid_df.columns) == len(example_cart_valid_df.columns)
-    assert list(gen_cart_valid_df.columns) == list(example_cart_valid_df.columns)
-    assert len(gen_cart_valid_df) > 0
-    assert len(gen_cart_valid_df) == 3
-    assert len(gen_cart_valid_df) == len(example_cart_valid_df)
-    pandas_assert_frame_equal(gen_cart_valid_df, example_cart_valid_df)
+    assert sheet_exists(drum_file_path, drum_valid_str())
+    gen_drum_valid_df = pandas_read_excel(drum_file_path, sheet_name=drum_valid_str())
+    print(f"{gen_drum_valid_df.columns=}")
+    example_drum_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_drum_valid_df.columns) == len(example_drum_valid_df.columns)
+    assert list(gen_drum_valid_df.columns) == list(example_drum_valid_df.columns)
+    assert len(gen_drum_valid_df) > 0
+    assert len(gen_drum_valid_df) == 3
+    assert len(gen_drum_valid_df) == len(example_drum_valid_df)
+    pandas_assert_frame_equal(gen_drum_valid_df, example_drum_valid_df)
 
 
-# def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario1(
+# def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -80,10 +86,10 @@ def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario0(
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     mine_dir = create_path(get_test_etl_dir(), "mine")
-#     cart_dir = create_path(get_test_etl_dir(), "cart")
-#     mine_file_path = create_path(mine_dir, ex_filename)
-#     cart_file_path = create_path(cart_dir, "br00003.xlsx")
+#     sound_dir = create_path(get_test_etl_dir(), "sound")
+#     drum_dir = create_path(get_test_etl_dir(), "drum")
+#     sound_file_path = create_path(sound_dir, ex_filename)
+#     drum_file_path = create_path(drum_dir, "br00003.xlsx")
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -98,15 +104,15 @@ def test_etl_cart_agg_non_pidgin_ideas_to_cart_valid_CreatesSheets_Scenario0(
 #     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
 #     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
-#     upsert_sheet(mine_file_path, "example1_br00003", df1)
-#     etl_mine_to_cart_staging(mine_dir, cart_dir)
-#     etl_cart_staging_to_cart_agg(cart_dir)
+#     upsert_sheet(sound_file_path, "example1_br00003", df1)
+#     etl_sound_to_drum_staging(sound_dir, drum_dir)
+#     etl_drum_staging_to_drum_agg(drum_dir)
 
 #     # WHEN
-#     etl_cart_agg_non_pidgin_ideas_to_cart_valid(cart_dir)
+#     etl_drum_agg_non_pidgin_ideas_to_drum_valid(drum_dir)
 
 #     # THEN
-#     gen_otx_events_df = pandas_read_excel(cart_file_path, sheet_name="cart_valid")
+#     gen_otx_events_df = pandas_read_excel(drum_file_path, sheet_name="drum_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
 #     bob_row = [bob_str, event3, ""]
