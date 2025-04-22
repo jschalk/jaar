@@ -12,6 +12,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     db_table_exists,
     get_row_count,
     save_to_split_csvs,
+    get_db_tables,
 )
 from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -97,7 +98,12 @@ from src.a18_etl_toolbox.pidgin_agg import (
     PidginBodyRow,
     PidginBodyBook,
 )
-from pandas import read_excel as pandas_read_excel, concat as pandas_concat, DataFrame
+from pandas import (
+    read_excel as pandas_read_excel,
+    concat as pandas_concat,
+    DataFrame,
+    read_sql_query as pandas_read_sql_query,
+)
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 from copy import deepcopy as copy_deepcopy
@@ -179,6 +185,18 @@ def etl_sound_df_to_cochlea_raw_db(conn: sqlite3_Connection, sound_dir: str):
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
+def etl_cochlea_raw_db_to_cochlea_raw_df(conn: sqlite3_Connection, cochlea_dir: str):
+    cochlea_raw_dict = {f"cochlea_raw_{idea}": idea for idea in get_idea_numbers()}
+    cochlea_raw_tables = set(cochlea_raw_dict.keys())
+    for table_name in get_db_tables(conn):
+        if table_name in cochlea_raw_tables:
+            idea_number = cochlea_raw_dict.get(table_name)
+            cochlea_path = create_path(cochlea_dir, f"{idea_number}.xlsx")
+            sqlstr = f"SELECT * FROM {table_name}"
+            cochlea_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(cochlea_path, "cochlea_raw", cochlea_raw_idea_df)
+
+
 def etl_sound_df_to_cochlea_raw_df(sound_dir: str, cochlea_dir: str):
     transformer = SoundToCochleaTransformer(sound_dir, cochlea_dir)
     transformer.transform()
@@ -200,7 +218,7 @@ class SoundToCochleaTransformer:
             grouped_data.setdefault(ref.idea_number, []).append(df)
         return grouped_data
 
-    def _read_and_title_dataframe(self, ref):
+    def _read_and_title_dataframe(self, ref: IdeaFileRef):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         df["file_dir"] = ref.file_dir

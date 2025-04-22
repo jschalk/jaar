@@ -15,6 +15,7 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_cochlea_raw_df,
     etl_sound_df_to_cochlea_raw_db,
+    etl_cochlea_raw_db_to_cochlea_raw_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -171,3 +172,20 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         assert rows[2] == row2
         assert rows[3] == row3
         assert rows[4] == row4
+
+        cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
+        assert os_path_exists(cochlea_file_path) is False
+
+        # WHEN
+        etl_cochlea_raw_db_to_cochlea_raw_df(db_conn, cochlea_dir)
+
+        # THEN
+        print(f"{cochlea_file_path=}")
+        assert os_path_exists(cochlea_file_path)
+        x_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
+        assert set(idea_columns).issubset(set(x_df.columns))
+        assert file_dir_str in set(x_df.columns)
+        assert filename_str in set(x_df.columns)
+        assert sheet_name_str in set(x_df.columns)
+        assert len(x_df) == 5
+        assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str()]
