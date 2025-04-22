@@ -847,7 +847,7 @@ def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
 
 
-def etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
+def etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_SQLSTR)
 

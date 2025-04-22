@@ -51,7 +51,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
     etl_fisc_gut_to_fisc_job,
-    etl_fisc_agg_tables2fisc_ote1_agg,
+    etl_fisc_agg_tables_to_fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
     etl_create_deals_root_cells,
@@ -196,8 +196,8 @@ class WorldUnit:
     def fisc_agg_tables_to_fisc_jsons(self, cursor: sqlite3_Connection):
         etl_fisc_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
 
-    def fisc_agg_tables2fisc_ote1_agg(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_agg_tables2fisc_ote1_agg(conn_or_cursor)
+    def fisc_agg_tables_to_fisc_ote1_agg(self, conn_or_cursor: sqlite3_Connection):
+        etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor)
 
     def fisc_table2fisc_ote1_agg_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_fisc_table2fisc_ote1_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
@@ -279,7 +279,7 @@ class WorldUnit:
             self.inz_face_csv_files2idea_staging_tables(cursor)
             self.idea_staging_to_fisc_tables(cursor)
             self.fisc_agg_tables_to_fisc_jsons(cursor)
-            self.fisc_agg_tables2fisc_ote1_agg(cursor)
+            self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
             self.fisc_table2fisc_ote1_agg_csvs(cursor)
             self.fisc_ote1_agg_csvs2jsons()
             self.idea_staging_to_bud_tables(cursor)

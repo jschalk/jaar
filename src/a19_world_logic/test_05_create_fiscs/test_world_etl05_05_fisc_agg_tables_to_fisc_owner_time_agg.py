@@ -11,7 +11,7 @@ from src.a19_world_logic.examples.world_env import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro0_SetsTableAttr():
+def test_WorldUnit_fisc_agg_tables_to_fisc_ote1_agg_Scenaro0_SetsTableAttr():
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -24,14 +24,14 @@ def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro0_SetsTableAttr():
         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
         # WHEN
-        fizz_world.fisc_agg_tables2fisc_ote1_agg(cursor)
+        fizz_world.fisc_agg_tables_to_fisc_ote1_agg(cursor)
 
         # THEN
         assert db_table_exists(cursor, fisc_ote1_agg_str)
         assert get_row_count(cursor, fisc_ote1_agg_str) == 0
 
 
-def test_WorldUnit_fisc_agg_tables2fisc_ote1_agg_Scenaro1_SetsTableAttr():
+def test_WorldUnit_fisc_agg_tables_to_fisc_ote1_agg_Scenaro1_SetsTableAttr():
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
@@ -64,7 +64,7 @@ VALUES
         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
         # WHEN
-        fizz_world.fisc_agg_tables2fisc_ote1_agg(cursor)
+        fizz_world.fisc_agg_tables_to_fisc_ote1_agg(cursor)
 
         # THEN
         assert db_table_exists(cursor, fisc_ote1_agg_str)
