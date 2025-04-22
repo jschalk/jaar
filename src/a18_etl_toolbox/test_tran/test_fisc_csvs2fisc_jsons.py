@@ -41,12 +41,12 @@ def test_etl_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTag(
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
 
-        insert_staging_sqlstr = f"""
+        insert_raw_sqlstr = f"""
 INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()})
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, fiscunit_agg_tablename) == 2
         fisc_event_time_agg_str = "fisc_event_time_agg"
         assert db_table_exists(cursor, fisc_event_time_agg_str) is False

@@ -26,8 +26,8 @@ def test_etl_fisc_agg_tables_to_fisc_ote1_agg_SetsTableAttr():
         create_fisc_tables(cursor)
 
         x_fisc = FiscPrimeObjsRef()
-        insert_staging_sqlstr = f"""
-INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})
+        insert_raw_sqlstr = f"""
+INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_tag_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
@@ -35,8 +35,8 @@ VALUES
 , ({event7}, '{accord45_str}', '{sue_str}', {timepoint66})
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
-        assert get_row_count(cursor, x_fisc.deal_stage_tablename) == 4
+        cursor.execute(insert_raw_sqlstr)
+        assert get_row_count(cursor, x_fisc.deal_raw_tablename) == 4
         fisc_ote1_agg_str = "fisc_ote1_agg"
         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 
@@ -72,8 +72,8 @@ VALUES
 #         create_fisc_tables(cursor)
 
 #         x_fisc = FiscPrimeObjsRef()
-#         insert_staging_sqlstr = f"""
-# INSERT INTO {x_fisc.deal_stage_tablename} ({event_int_str()}, {fisc_tag_str()}, {deal_time_str()})
+#         insert_raw_sqlstr = f"""
+# INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_tag_str()}, {deal_time_str()})
 # VALUES
 #   ({event3}, '{accord23_str}', {timepoint66})
 # , ({event7}, '{accord23_str}', {timepoint55})
@@ -81,7 +81,7 @@ VALUES
 # , ({event3}, '{accord45_str}', {timepoint55})
 # ;
 # """
-#         cursor.execute(insert_staging_sqlstr)
+#         cursor.execute(insert_raw_sqlstr)
 #         fisc_ote1_agg_str = "fisc_ote1_agg"
 #         assert db_table_exists(cursor, fisc_ote1_agg_str) is False
 

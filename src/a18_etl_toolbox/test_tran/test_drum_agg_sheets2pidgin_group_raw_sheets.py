@@ -15,13 +15,13 @@ from src.a16_pidgin_logic.pidgin_config import (
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, drum_agg_str
 from src.a18_etl_toolbox.tran_path import create_drum_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_drum_agg_to_pidgin_label_staging
+from src.a18_etl_toolbox.transformers import etl_drum_agg_to_pidgin_label_raw
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario0_SingleIdea(
+def test_etl_drum_agg_to_pidgin_label_raw_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -53,28 +53,28 @@ def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario0_SingleIdea(
 
     # WHEN
     legitimate_events = {event7}
-    etl_drum_agg_to_pidgin_label_staging(legitimate_events, x_drum_dir)
+    etl_drum_agg_to_pidgin_label_raw(legitimate_events, x_drum_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_staging_str = "label_staging"
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
-    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
-    assert list(gen_label_df.columns) == label_staging_columns
+    label_raw_str = "label_raw"
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 2
     bx = "br00115"
     e1_label0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_label1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_label_rows = [e1_label0, e1_label1]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
+    e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
     assert len(gen_label_df) == len(e1_label_df)
     print(f"{gen_label_df.to_csv()=}")
     print(f" {e1_label_df.to_csv()=}")
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [label_staging_str]
+    assert get_sheet_names(pidgin_path) == [label_raw_str]
 
 
-def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_drum_agg_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -127,14 +127,14 @@ def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario1_MultipleIdea
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_drum_agg_to_pidgin_label_staging(legitimate_events, x_drum_dir)
+    etl_drum_agg_to_pidgin_label_raw(legitimate_events, x_drum_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_staging_str = "label_staging"
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
-    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
-    assert list(gen_label_df.columns) == label_staging_columns
+    label_raw_str = "label_raw"
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 5
     b3 = "br00115"
     b4 = "br00042"
@@ -145,15 +145,15 @@ def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario1_MultipleIdea
     e1_label1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
 
     e1_label_rows = [e1_label3, e1_label4, e1_label5, e1_label0, e1_label1]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
+    e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
     assert len(gen_label_df) == len(e1_label_df)
     print(f"{gen_label_df.to_csv()=}")
     print(f" {e1_label_df.to_csv()=}")
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [label_staging_str]
+    assert get_sheet_names(pidgin_path) == [label_raw_str]
 
 
-def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_drum_agg_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -205,23 +205,23 @@ def test_etl_drum_agg_to_pidgin_label_staging_CreatesFile_Scenario2_WorldUnit_ev
 
     # WHEN
     legitimate_events = {event2, event5}
-    etl_drum_agg_to_pidgin_label_staging(legitimate_events, x_drum_dir)
+    etl_drum_agg_to_pidgin_label_raw(legitimate_events, x_drum_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_staging_str = "label_staging"
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
-    label_staging_columns = PidginPrimeColumns().map_label_staging_columns
-    assert list(gen_label_df.columns) == label_staging_columns
+    label_raw_str = "label_raw"
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 2
     b3 = "br00115"
     b4 = "br00042"
     e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     e1_label_rows = [e1_label3, e1_label4]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_staging_columns)
+    e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
     assert len(gen_label_df) == len(e1_label_df)
     print(f"{gen_label_df.to_csv()=}")
     print(f" {e1_label_df.to_csv()=}")
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [label_staging_str]
+    assert get_sheet_names(pidgin_path) == [label_raw_str]

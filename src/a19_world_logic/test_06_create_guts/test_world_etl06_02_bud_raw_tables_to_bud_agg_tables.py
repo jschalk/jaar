@@ -20,7 +20,7 @@ from src.a19_world_logic.examples.world_env import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudPutAggTables(
+def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudPutAggTables(
     env_dir_setup_cleanup,
 ):
 
@@ -40,9 +40,9 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudPutAggTables(
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
         create_bud_tables(cursor)
-        staging_tablename = f"{bud_acctunit_str()}_put_staging"
-        insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
+        raw_tablename = f"{bud_acctunit_str()}_put_raw"
+        insert_raw_sqlstr = f"""
+INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
 VALUES
   ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
 , ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL,NULL)
@@ -51,13 +51,13 @@ VALUES
 , ('br00021','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief7},NULL,'{x_error_message}')
 ;
 """
-        print(insert_staging_sqlstr)
-        cursor.execute(insert_staging_sqlstr)
+        print(insert_raw_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = f"{bud_acctunit_str()}_put_agg"
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fizz_world.idea_staging_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
@@ -70,7 +70,7 @@ VALUES
         ]
 
 
-def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
+def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudDelAggTables(
     env_dir_setup_cleanup,
 ):
 
@@ -89,9 +89,9 @@ def test_WorldUnit_idea_staging_to_bud_tables_PopulatesBudDelAggTables(
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
         create_bud_tables(cursor)
-        staging_tablename = f"{bud_acctunit_str()}_del_staging"
-        insert_staging_sqlstr = f"""
-INSERT INTO {staging_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+        raw_tablename = f"{bud_acctunit_str()}_del_raw"
+        insert_raw_sqlstr = f"""
+INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 VALUES
   ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
 , ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
@@ -100,13 +100,13 @@ VALUES
 , ('br00051','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
 ;
 """
-        print(insert_staging_sqlstr)
-        cursor.execute(insert_staging_sqlstr)
+        print(insert_raw_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         agg_tablename = f"{bud_acctunit_str()}_del_agg"
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fizz_world.idea_staging_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2

@@ -20,7 +20,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateStagingFiles(
+def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateRawFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,19 +47,19 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateStagingFiles(
     fizz_world.inz_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
-        fizz_world.idea_staging_to_fisc_tables(cursor)
-        assert os_path_exists(fisc_objs.unit_stage_csv_path) is False
+        fizz_world.inz_face_csv_files2idea_raw_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
+        assert os_path_exists(fisc_objs.unit_raw_csv_path) is False
 
         # WHEN
         fizz_world.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
         # THEN
-        print(f"{fisc_objs.unit_stage_csv_path=}")
-        assert os_path_exists(fisc_objs.unit_stage_csv_path)
-        generated_fiscunit_csv = open_file(fisc_objs.unit_stage_csv_path)
+        print(f"{fisc_objs.unit_raw_csv_path=}")
+        assert os_path_exists(fisc_objs.unit_raw_csv_path)
+        generated_fiscunit_csv = open_file(fisc_objs.unit_raw_csv_path)
         fisc_cols = FiscPrimeColumnsRef()
-        expected_fiscunit_csv_str = f"""{fisc_cols.unit_staging_csv_header}
+        expected_fiscunit_csv_str = f"""{fisc_cols.unit_raw_csv_header}
 {br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
 {br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
 """
@@ -94,8 +94,8 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
     fizz_world.inz_face_ideas_to_csv_files()
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.inz_face_csv_files2idea_staging_tables(cursor)
-        fizz_world.idea_staging_to_fisc_tables(cursor)
+        fizz_world.inz_face_csv_files2idea_raw_tables(cursor)
+        fizz_world.idea_raw_to_fisc_tables(cursor)
         fiz_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         assert os_path_exists(fiz_objs.unit_agg_csv_path) is False
 

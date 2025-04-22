@@ -10,7 +10,7 @@ from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 
-# def test_WorldUnit_inz_face_csv_files2idea_staging_tables_HasIdeaDataFromCSV(
+# def test_WorldUnit_inz_face_csv_files2idea_raw_tables_HasIdeaDataFromCSV(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -35,12 +35,12 @@ from sqlite3 import connect as sqlite3_connect
 #     fizz_world = worldunit_shop("fizz", worlds_dir())
 
 #     # WHEN / THEN
-#     br00011_staging_tablename = f"{br00011_str}_staging"
+#     br00011_raw_tablename = f"{br00011_str}_raw"
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         fizz_world.inz_face_csv_files2idea_staging_tables(fisc_db_conn)
+#         fizz_world.inz_face_csv_files2idea_raw_tables(fisc_db_conn)
 #         assert fisc_db_conn != None
 #         cursor = fisc_db_conn.cursor()
-#         cursor.execute(f"PRAGMA table_info({br00011_staging_tablename})")
+#         cursor.execute(f"PRAGMA table_info({br00011_raw_tablename})")
 #         br00011_db_columns = cursor.fetchall()
 #         br00011_expected_columns = [
 #             (0, face_name_str(), "TEXT", 0, None, 0),
@@ -53,7 +53,7 @@ from sqlite3 import connect as sqlite3_connect
 #         print(f"      {br00011_db_columns=}")
 #         print(f"{br00011_expected_columns=}")
 #         assert br00011_db_columns == br00011_expected_columns
-#         cursor.execute(f"SELECT * FROM {br00011_staging_tablename}")
+#         cursor.execute(f"SELECT * FROM {br00011_raw_tablename}")
 #         br00011_db_rows = cursor.fetchall()
 #         expected_data = [
 #             (sue_inx, event3, accord23_str, bob_inx, bob_inx),
@@ -63,4 +63,4 @@ from sqlite3 import connect as sqlite3_connect
 #         ]
 #         assert br00011_db_rows == expected_data
 
-# already tested in test_world_etl05_00_inz_face_ideas_to_idea_staging_tables
+# already tested in test_world_etl05_00_inz_face_ideas_to_idea_raw_tables

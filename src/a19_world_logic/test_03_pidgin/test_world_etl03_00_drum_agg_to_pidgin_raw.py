@@ -53,7 +53,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     }
 
 
-def test_WorldUnit_drum_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup):
+def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
@@ -205,25 +205,25 @@ def test_WorldUnit_drum_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.drum_agg_to_pidgin_staging()
+    fizz_world.drum_agg_to_pidgin_raw()
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_staging_str = "label_staging"
-    name_staging_str = "name_staging"
-    tag_staging_str = "tag_staging"
-    road_staging_str = "road_staging"
-    assert sheet_exists(pidgin_path, name_staging_str)
-    assert sheet_exists(pidgin_path, label_staging_str)
-    assert sheet_exists(pidgin_path, tag_staging_str)
-    assert sheet_exists(pidgin_path, road_staging_str)
+    label_raw_str = "label_raw"
+    name_raw_str = "name_raw"
+    tag_raw_str = "tag_raw"
+    road_raw_str = "road_raw"
+    assert sheet_exists(pidgin_path, name_raw_str)
+    assert sheet_exists(pidgin_path, label_raw_str)
+    assert sheet_exists(pidgin_path, tag_raw_str)
+    assert sheet_exists(pidgin_path, road_raw_str)
 
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_staging_str)
-    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_staging_str)
-    gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_staging_str)
-    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_staging_str)
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
+    gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_raw_str)
+    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
 
-    label_file_columns = PidginPrimeColumns().map_label_staging_columns
+    label_file_columns = PidginPrimeColumns().map_label_raw_columns
     assert list(gen_label_df.columns) == label_file_columns
     assert len(gen_label_df) == 2
     b3 = "br00115"
@@ -237,15 +237,15 @@ def test_WorldUnit_drum_agg_to_pidgin_staging_CreatesFile(env_dir_setup_cleanup)
     print(f" {e1_label_df.to_csv()=}")
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
-    name_staging_columns = PidginPrimeColumns().map_name_staging_columns
-    assert list(gen_name_df.columns) == name_staging_columns
+    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    assert list(gen_name_df.columns) == name_raw_columns
     assert len(gen_name_df) == 2
     b3 = "br00113"
     b4 = "br00043"
     e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
     e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
     e1_name_rows = [e1_name3, e1_name4]
-    e1_name_df = DataFrame(e1_name_rows, columns=name_staging_columns)
+    e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
     assert len(gen_name_df) == len(e1_name_df)
     print(f"{gen_name_df.to_csv()=}")
     print(f" {e1_name_df.to_csv()=}")

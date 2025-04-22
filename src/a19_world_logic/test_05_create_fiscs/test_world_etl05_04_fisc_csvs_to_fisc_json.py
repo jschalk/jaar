@@ -40,12 +40,12 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFi
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
 
-        insert_staging_sqlstr = f"""
+        insert_raw_sqlstr = f"""
 INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()})
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, fiscunit_agg_tablename) == 2
         fisc_event_time_agg_str = "fisc_event_time_agg"
         assert db_table_exists(cursor, fisc_event_time_agg_str) is False
@@ -90,7 +90,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUn
         cursor = fisc_db_conn.cursor()
         create_fisc_tables(cursor)
 
-        insert_staging_sqlstr = f"""
+        insert_raw_sqlstr = f"""
 INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
 VALUES (
   '{accord45_str}'
@@ -106,7 +106,7 @@ VALUES (
 , ('{accord23_str}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 ;
 """
-        cursor.execute(insert_staging_sqlstr)
+        cursor.execute(insert_raw_sqlstr)
         accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
         accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)
         assert os_path_exists(accord23_json_path) is False

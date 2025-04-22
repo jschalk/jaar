@@ -51,8 +51,8 @@ def test_WorldUnit_drum_events_to_events_log_CreatesSheets_Scenario0(
     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
-    fizz_world.sound_to_drum_staging()
-    fizz_world.drum_staging_to_drum_agg()
+    fizz_world.sound_to_drum_raw()
+    fizz_world.drum_raw_to_drum_agg()
     fizz_world.drum_agg_to_drum_events()
     events_file_path = create_drum_events_path(fizz_world._drum_dir)
     assert os_path_exists(events_file_path) is False
@@ -140,8 +140,8 @@ def test_WorldUnit_drum_events_to_events_log_CreatesSheets_Scenario1_MultipleIde
     b5_df = DataFrame([b5_0_row, b5_1_row], columns=idea5_columns)
     upsert_sheet(sound_file_path, "example1_br00003", b3_df)
     upsert_sheet(sound_file_path, "example1_br00005", b5_df)
-    fizz_world.sound_to_drum_staging()
-    fizz_world.drum_staging_to_drum_agg()
+    fizz_world.sound_to_drum_raw()
+    fizz_world.drum_raw_to_drum_agg()
     fizz_world.drum_agg_to_drum_events()
     events_file_path = create_drum_events_path(fizz_world._drum_dir)
     assert os_path_exists(events_file_path) is False

@@ -19,7 +19,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     create_select_inconsistency_query,
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
-    is_stageable,
+    required_columns_exist,
     create_select_query,
     create_insert_query,
 )
@@ -959,7 +959,7 @@ GROUP BY name
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_is_stageable_ReturnsObj_Scenario0():
+def test_required_columns_exist_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -972,7 +972,7 @@ def test_is_stageable_ReturnsObj_Scenario0():
         create_table_from_columns(cursor, x_table2, dst_columns, {})
 
         # WHEN / THEN
-        assert is_stageable(cursor, x_table1, {"name", "email"})
-        assert is_stageable(cursor, x_table1, {"name", "address"}) is False
-        assert is_stageable(cursor, x_table2, {"name", "email"}) is False
-        assert is_stageable(cursor, x_table2, {"name"})
+        assert required_columns_exist(cursor, x_table1, {"name", "email"})
+        assert required_columns_exist(cursor, x_table1, {"name", "address"}) is False
+        assert required_columns_exist(cursor, x_table2, {"name", "email"}) is False
+        assert required_columns_exist(cursor, x_table2, {"name"})

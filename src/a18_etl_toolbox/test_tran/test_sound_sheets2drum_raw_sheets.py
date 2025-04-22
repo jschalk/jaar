@@ -5,15 +5,15 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    drum_staging_str,
+    drum_raw_str,
 )
-from src.a18_etl_toolbox.transformers import etl_sound_to_drum_staging
+from src.a18_etl_toolbox.transformers import etl_sound_to_drum_raw
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
+def test_etl_sound_to_drum_raw_CreatesDrumFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -59,12 +59,12 @@ def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
     assert os_path_exists(drum_file_path) is False
 
     # WHEN
-    etl_sound_to_drum_staging(sound_dir, drum_dir)
+    etl_sound_to_drum_raw(sound_dir, drum_dir)
 
     # THEN
     print(f"{drum_file_path=}")
     assert os_path_exists(drum_file_path)
-    x_df = pandas_read_excel(drum_file_path, sheet_name=drum_staging_str())
+    x_df = pandas_read_excel(drum_file_path, sheet_name=drum_raw_str())
     assert set(idea_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     filename_str = "filename"
@@ -73,10 +73,10 @@ def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
     assert filename_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(drum_file_path) == [drum_staging_str()]
+    assert get_sheet_names(drum_file_path) == [drum_raw_str()]
 
 
-def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
+def test_etl_sound_to_drum_raw_CreatesDrumFiles(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -122,12 +122,12 @@ def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
     assert os_path_exists(drum_file_path) is False
 
     # WHEN
-    etl_sound_to_drum_staging(sound_dir, drum_dir)
+    etl_sound_to_drum_raw(sound_dir, drum_dir)
 
     # THEN
     print(f"{drum_file_path=}")
     assert os_path_exists(drum_file_path)
-    x_df = pandas_read_excel(drum_file_path, sheet_name=drum_staging_str())
+    x_df = pandas_read_excel(drum_file_path, sheet_name=drum_raw_str())
     assert set(idea_columns).issubset(set(x_df.columns))
     file_dir_str = "file_dir"
     filename_str = "filename"
@@ -136,4 +136,4 @@ def test_etl_sound_to_drum_staging_CreatesDrumFiles(env_dir_setup_cleanup):
     assert filename_str in set(x_df.columns)
     assert sheet_name_str in set(x_df.columns)
     assert len(x_df) == 5
-    assert get_sheet_names(drum_file_path) == [drum_staging_str()]
+    assert get_sheet_names(drum_file_path) == [drum_raw_str()]

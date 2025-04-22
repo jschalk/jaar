@@ -26,10 +26,10 @@ from src.a17_idea_logic.idea_db_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_relevant_columns_dataframe,
-    drum_staging_str,
+    drum_raw_str,
     drum_agg_str,
     drum_valid_str,
-    get_drum_staging_grouping_with_all_values_equal_df,
+    get_drum_raw_grouping_with_all_values_equal_df,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -179,21 +179,21 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_label_str()]
 
 
-def test_drum_staging_str_ReturnsObj():
+def test_drum_raw_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert drum_staging_str() == "drum_staging"
+    assert drum_raw_str() == "drum_raw"
     assert drum_agg_str() == "drum_agg"
     assert drum_valid_str() == "drum_valid"
 
 
-def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
+def test_get_drum_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
     groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+    groupby_dataframe = get_drum_raw_grouping_with_all_values_equal_df(
+        df1, groupby_list, idea_number="br00004"
     )
 
     # THEN
@@ -203,7 +203,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario0
     assert groupby_dataframe.columns.to_list() == []
 
 
-def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
+def test_get_drum_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -211,8 +211,8 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1
     groupby_list = [group_label_str()]
 
     # WHEN
-    groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+    groupby_dataframe = get_drum_raw_grouping_with_all_values_equal_df(
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
@@ -226,7 +226,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario1
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
+def test_get_drum_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -234,8 +234,8 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2
     groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+    groupby_dataframe = get_drum_raw_grouping_with_all_values_equal_df(
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
@@ -249,7 +249,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario2
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
+def test_get_drum_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
@@ -257,8 +257,8 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3
     groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+    groupby_dataframe = get_drum_raw_grouping_with_all_values_equal_df(
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
@@ -272,7 +272,7 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario3
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
+def test_get_drum_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [
@@ -284,8 +284,8 @@ def test_get_drum_staging_grouping_with_all_values_equal_df_ReturnsObj_Scenario4
     groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    groupby_dataframe = get_drum_staging_grouping_with_all_values_equal_df(
-        df1, groupby_list
+    groupby_dataframe = get_drum_raw_grouping_with_all_values_equal_df(
+        df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
 
