@@ -217,33 +217,27 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
 
 
 def etl_cart_staging_to_cart_agg(cart_dir):
-    transformer = CartStagingToCartAggTransformer(cart_dir)
-    transformer.transform()
-
-
-class CartStagingToCartAggTransformer:
-    def __init__(self, cart_dir: str):
-        self.cart_dir = cart_dir
-
-    def transform(self):
-        for br_ref in get_existing_excel_idea_file_refs(self.cart_dir):
-            cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-            cart_staging_df = pandas_read_excel(cart_idea_path, "cart_staging")
-            otx_df = self._groupby_idea_columns(cart_staging_df, br_ref.idea_number)
-            upsert_sheet(cart_idea_path, "cart_agg", otx_df)
-
-    def _groupby_idea_columns(
-        self, cart_staging_df: DataFrame, idea_number: str
-    ) -> DataFrame:
-        idea_filename = get_idea_format_filename(idea_number)
-        idearef = get_idearef_obj(idea_filename)
-        required_columns = idearef.get_otx_keys_list()
-        idea_columns_set = set(idearef._attributes.keys())
-        idea_columns_list = get_default_sorted_list(idea_columns_set)
-        cart_staging_df = cart_staging_df[idea_columns_list]
-        return get_cart_staging_grouping_with_all_values_equal_df(
-            cart_staging_df, required_columns
+    for br_ref in get_existing_excel_idea_file_refs(cart_dir):
+        cart_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cart_staging_df = pandas_read_excel(cart_idea_path, "cart_staging")
+        otx_df = create_df_with_groupby_idea_columns(
+            cart_staging_df, br_ref.idea_number
         )
+        upsert_sheet(cart_idea_path, "cart_agg", otx_df)
+
+
+def create_df_with_groupby_idea_columns(
+    cart_staging_df: DataFrame, idea_number: str
+) -> DataFrame:
+    idea_filename = get_idea_format_filename(idea_number)
+    idearef = get_idearef_obj(idea_filename)
+    required_columns = idearef.get_otx_keys_list()
+    idea_columns_set = set(idearef._attributes.keys())
+    idea_columns_list = get_default_sorted_list(idea_columns_set)
+    cart_staging_df = cart_staging_df[idea_columns_list]
+    return get_cart_staging_grouping_with_all_values_equal_df(
+        cart_staging_df, required_columns
+    )
 
 
 def etl_cart_agg_non_pidgin_ideas_to_cart_valid(
