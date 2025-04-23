@@ -50,9 +50,9 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
-        # WHEN
+        cursor = db_conn.cursor()
         fizz_world.sound_df_to_cochlea_raw_df(db_conn)
-    fizz_world.cochlea_raw_df_to_cochlea_agg_df()
+        fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
 
     # WHEN
     fizz_world.cochlea_agg_to_cochlea_events()
@@ -115,10 +115,9 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
-        # WHEN
+        cursor = db_conn.cursor()
         fizz_world.sound_df_to_cochlea_raw_df(db_conn)
-    fizz_world.cochlea_raw_df_to_cochlea_agg_df()
-
+        fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
     # WHEN
     fizz_world.cochlea_agg_to_cochlea_events()
 

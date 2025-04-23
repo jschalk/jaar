@@ -22,7 +22,8 @@ from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_cochlea_raw_db,
     etl_cochlea_raw_db_to_cochlea_raw_df,
-    etl_cochlea_raw_df_to_cochlea_agg_df,
+    etl_cochlea_raw_db_to_cochlea_agg_db,
+    etl_cochlea_agg_db_to_cochlea_agg_df,
     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
     etl_cochlea_agg_to_cochlea_events,
     etl_cochlea_events_to_events_log,
@@ -63,7 +64,11 @@ from src.a18_etl_toolbox.transformers import (
     etl_create_deal_mandate_ledgers,
 )
 from dataclasses import dataclass
-from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
+from sqlite3 import (
+    connect as sqlite3_connect,
+    Connection as sqlite3_Connection,
+    Cursor as sqlite3_Cursor,
+)
 
 
 @dataclass
@@ -121,8 +126,12 @@ class WorldUnit:
         etl_sound_df_to_cochlea_raw_db(conn, self._sound_dir)
         etl_cochlea_raw_db_to_cochlea_raw_df(conn, self._cochlea_dir)
 
-    def cochlea_raw_df_to_cochlea_agg_df(self):
-        etl_cochlea_raw_df_to_cochlea_agg_df(self._cochlea_dir)
+    def cochlea_raw_df_to_cochlea_agg_df(
+        self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
+    ):
+        # etl_cochlea_raw_df_to_cochlea_agg_df(self._cochlea_dir)
+        etl_cochlea_raw_db_to_cochlea_agg_db(cursor)
+        etl_cochlea_agg_db_to_cochlea_agg_df(conn, self._cochlea_dir)
 
     def cochlea_agg_non_pidgin_ideas_to_cochlea_valid(self):
         etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
@@ -262,7 +271,7 @@ class WorldUnit:
             cursor = db_conn.cursor()
 
             self.sound_df_to_cochlea_raw_df(db_conn)
-            self.cochlea_raw_df_to_cochlea_agg_df()
+            self.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
             self.cochlea_agg_to_cochlea_events()
             self.cochlea_events_to_events_log()
             self.cochlea_events_log_to_cochlea_events_agg()

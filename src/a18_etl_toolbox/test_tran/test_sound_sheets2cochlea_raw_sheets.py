@@ -86,7 +86,7 @@ def test_etl_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(env_dir_setup_cleanu
     assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str()]
 
 
-def test_etl_sound_df_to_cochlea_raw_db_CreatesCochleaFiles(env_dir_setup_cleanup):
+def test_etl_sound_df_to_cochlea_raw_db_PopulatesCochleaTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1

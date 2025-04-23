@@ -261,6 +261,18 @@ def etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir):
         upsert_sheet(cochlea_idea_path, "cochlea_agg", otx_df)
 
 
+def etl_cochlea_agg_db_to_cochlea_agg_df(conn: sqlite3_Connection, cochlea_dir: str):
+    cochlea_agg_dict = {f"cochlea_agg_{idea}": idea for idea in get_idea_numbers()}
+    cochlea_agg_tables = set(cochlea_agg_dict.keys())
+    for table_name in get_db_tables(conn):
+        if table_name in cochlea_agg_tables:
+            idea_number = cochlea_agg_dict.get(table_name)
+            cochlea_path = create_path(cochlea_dir, f"{idea_number}.xlsx")
+            sqlstr = f"SELECT * FROM {table_name}"
+            cochlea_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(cochlea_path, "cochlea_agg", cochlea_agg_idea_df)
+
+
 def etl_cochlea_raw_db_to_cochlea_agg_db(conn_or_cursor: sqlite3_Connection):
     cochlea_raw_dict = {f"cochlea_raw_{idea}": idea for idea in get_idea_numbers()}
     cochlea_raw_tables = set(cochlea_raw_dict.keys())
