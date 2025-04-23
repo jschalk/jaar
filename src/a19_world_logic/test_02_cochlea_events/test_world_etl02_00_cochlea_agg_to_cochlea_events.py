@@ -17,7 +17,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
+def test_WorldUnit_cochlea_agg_to_cochlea_agg_events_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -55,7 +55,7 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
 
     # WHEN
-    fizz_world.cochlea_agg_to_cochlea_events()
+    fizz_world.cochlea_agg_to_cochlea_agg_events()
 
     # THEN
     gen_otx_events_df = pandas_read_excel(
@@ -76,7 +76,7 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
     assert get_sheet_names(cochlea_file_path) == [cochlea_agg_str(), "cochlea_events"]
 
 
-def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
+def test_WorldUnit_cochlea_agg_to_cochlea_agg_events_CreatesSheets_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -115,7 +115,7 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
         fizz_world.sound_df_to_cochlea_raw_db(db_conn)
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
     # WHEN
-    fizz_world.cochlea_agg_to_cochlea_events()
+    fizz_world.cochlea_agg_to_cochlea_agg_events()
 
     # THEN
     gen_otx_events_df = pandas_read_excel(

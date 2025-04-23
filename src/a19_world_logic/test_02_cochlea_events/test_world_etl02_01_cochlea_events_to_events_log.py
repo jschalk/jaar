@@ -56,7 +56,7 @@ def test_WorldUnit_cochlea_events_to_events_log_CreatesSheets_Scenario0(
         cursor = db_conn.cursor()
         fizz_world.sound_df_to_cochlea_raw_db(db_conn)
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
-    fizz_world.cochlea_agg_to_cochlea_events()
+    fizz_world.cochlea_agg_to_cochlea_agg_events()
     events_file_path = create_cochlea_events_path(fizz_world._cochlea_dir)
     assert os_path_exists(events_file_path) is False
 
@@ -147,7 +147,7 @@ def test_WorldUnit_cochlea_events_to_events_log_CreatesSheets_Scenario1_Multiple
         cursor = db_conn.cursor()
         fizz_world.sound_df_to_cochlea_raw_db(db_conn)
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
-    fizz_world.cochlea_agg_to_cochlea_events()
+    fizz_world.cochlea_agg_to_cochlea_agg_events()
     events_file_path = create_cochlea_events_path(fizz_world._cochlea_dir)
     assert os_path_exists(events_file_path) is False
 

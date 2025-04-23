@@ -333,7 +333,68 @@ def etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
         upsert_sheet(cochlea_idea_path, "cochlea_valid", cochlea_valid_df)
 
 
-def etl_cochlea_agg_to_cochlea_events(cochlea_dir):
+def etl_cochlea_raw_db_to_cochlea_agg_events_db(conn_or_cursor: sqlite3_Cursor):
+    cochlea_events_tablename = "cochlea_events"
+    if not db_table_exists(conn_or_cursor, cochlea_events_tablename):
+        cochlea_events_columns = ["face_name", "event_int", "error_message"]
+        create_idea_sorted_table(
+            conn_or_cursor, cochlea_events_tablename, cochlea_events_columns
+        )
+
+    cochlea_agg_tables = {f"cochlea_agg_{idea}" for idea in get_idea_numbers()}
+    for agg_tablename in get_db_tables(conn_or_cursor):
+        if agg_tablename in cochlea_agg_tables:
+            insert_from_select_sqlstr = f"""
+INSERT INTO {cochlea_events_tablename} (face_name, event_int)
+SELECT face_name, event_int 
+FROM {agg_tablename}
+GROUP BY face_name, event_int
+ORDER BY face_name, event_int
+;
+"""
+            conn_or_cursor.execute(insert_from_select_sqlstr)
+
+    update_error_message_sqlstr = f"""
+UPDATE {cochlea_events_tablename}
+SET error_message = 'invalid because of conflicting event_int'
+WHERE event_int IN (
+    SELECT event_int 
+    FROM {cochlea_events_tablename} 
+    GROUP BY event_int 
+    HAVING MAX(face_name) <> MIN(face_name)
+)
+;
+"""
+    conn_or_cursor.execute(update_error_message_sqlstr)
+
+
+#             idea_filename = get_idea_format_filename(idea_number)
+#             idearef = get_idearef_obj(idea_filename)
+#             key_columns_set = set(idearef.get_otx_keys_list())
+#             idea_columns_set = set(idearef._attributes.keys())
+#             value_columns_set = idea_columns_set.difference(key_columns_set)
+#             idea_columns = get_default_sorted_list(idea_columns_set)
+#             key_columns_list = get_default_sorted_list(key_columns_set, idea_columns)
+#             value_columns_list = get_default_sorted_list(
+#                 value_columns_set, idea_columns
+#             )
+#             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
+#                 x_table=raw_tablename,
+#                 groupby_columns=key_columns_list,
+#                 value_columns=value_columns_list,
+#             )
+#             insert_clause_sqlstr = create_insert_into_clause_str(
+#                 conn_or_cursor,
+#                 agg_tablename,
+#                 values_dict=idearef._attributes,
+#             )
+#             insert_from_select_sqlstr = f"""
+# {insert_clause_sqlstr}
+# {select_sqlstr};"""
+#             conn_or_cursor.execute(insert_from_select_sqlstr)
+
+
+def etl_cochlea_agg_df_to_cochlea_agg_events_df(cochlea_dir):
     for file_ref in get_existing_excel_idea_file_refs(cochlea_dir):
         cochlea_idea_path = create_path(cochlea_dir, file_ref.filename)
         cochlea_agg_df = pandas_read_excel(cochlea_idea_path, "cochlea_agg")

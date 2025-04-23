@@ -25,7 +25,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_cochlea_raw_db_to_cochlea_raw_df,
     etl_cochlea_agg_db_to_cochlea_agg_df,
     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
-    etl_cochlea_agg_to_cochlea_events,
+    etl_cochlea_agg_df_to_cochlea_agg_events_df,
     etl_cochlea_events_to_events_log,
     etl_cochlea_pidgin_raw_to_pidgin_agg,
     etl_cochlea_agg_to_cochlea_pidgin_raw,
@@ -136,8 +136,8 @@ class WorldUnit:
             self._cochlea_dir, set(self._events.keys())
         )
 
-    def cochlea_agg_to_cochlea_events(self):
-        etl_cochlea_agg_to_cochlea_events(self._cochlea_dir)
+    def cochlea_agg_to_cochlea_agg_events(self):
+        etl_cochlea_agg_df_to_cochlea_agg_events_df(self._cochlea_dir)
 
     def cochlea_events_to_events_log(self):
         etl_cochlea_events_to_events_log(self._cochlea_dir)
@@ -270,7 +270,7 @@ class WorldUnit:
 
             self.sound_df_to_cochlea_raw_db(db_conn)
             self.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
-            self.cochlea_agg_to_cochlea_events()
+            self.cochlea_agg_to_cochlea_agg_events()
             self.cochlea_events_to_events_log()
             self.cochlea_events_log_to_cochlea_events_agg()
             self.events_agg_file_to_events_dict()  # self._events
