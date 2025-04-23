@@ -66,7 +66,7 @@ def test_WorldUnit_cochlea_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Gr
     assert sue_br3_agg_df.to_csv() == br00003_cochlea_agg_df.to_csv()
 
 
-# def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+# def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -102,7 +102,7 @@ def test_WorldUnit_cochlea_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Gr
 #     assert sheet_exists(br00003_agg_file_path, cochlea_valid_str()) is False
 
 #     # WHEN
-#     fizz_world.cochlea_raw_to_cochlea_agg()
+#     fizz_world.cochlea_raw_df_to_cochlea_agg_df()
 
 #     # THEN
 #     assert sheet_exists(br00003_agg_file_path, cochlea_valid_str())

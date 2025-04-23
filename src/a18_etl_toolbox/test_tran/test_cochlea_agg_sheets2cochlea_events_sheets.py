@@ -10,7 +10,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_cochlea_raw_df,
-    etl_cochlea_raw_to_cochlea_agg,
+    etl_cochlea_raw_df_to_cochlea_agg_df,
     etl_cochlea_agg_to_cochlea_events,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -50,7 +50,7 @@ def test_etl_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
-    etl_cochlea_raw_to_cochlea_agg(cochlea_dir)
+    etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
 
     # WHEN
     etl_cochlea_agg_to_cochlea_events(cochlea_dir)
@@ -114,7 +114,7 @@ def test_etl_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
-    etl_cochlea_raw_to_cochlea_agg(cochlea_dir)
+    etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
 
     # WHEN
     etl_cochlea_agg_to_cochlea_events(cochlea_dir)

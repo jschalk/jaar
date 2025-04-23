@@ -10,13 +10,13 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_cochlea_raw_df,
-    etl_cochlea_raw_to_cochlea_agg,
+    etl_cochlea_raw_df_to_cochlea_agg_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_etl_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -49,7 +49,7 @@ def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert len(cochlea__raw_df) == 3
 
     # WHEN
-    etl_cochlea_raw_to_cochlea_agg(cochlea_dir)
+    etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
 
     # THEN
     gen_otx_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())
@@ -64,7 +64,7 @@ def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
     assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str(), cochlea_agg_str()]
 
 
-def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_etl_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -98,7 +98,7 @@ def test_etl_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNo
     assert len(cochlea_df) == 3
 
     # WHEN
-    etl_cochlea_raw_to_cochlea_agg(cochlea_dir)
+    etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
 
     # THEN
     gen_otx_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())

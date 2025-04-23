@@ -18,7 +18,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -53,7 +53,7 @@ def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupBy
     assert len(cochlea__raw_df) == 3
 
     # WHEN
-    fizz_world.cochlea_raw_to_cochlea_agg()
+    fizz_world.cochlea_raw_df_to_cochlea_agg_df()
 
     # THEN
     gen_otx_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())
@@ -68,7 +68,7 @@ def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario0_GroupBy
     assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str(), cochlea_agg_str()]
 
 
-def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -106,7 +106,7 @@ def test_WorldUnit_cochlea_raw_to_cochlea_agg_CreatesOtxSheets_Scenario1_GroupBy
     assert sheet_exists(br00003_agg_file_path, cochlea_agg_str()) is False
 
     # WHEN
-    fizz_world.cochlea_raw_to_cochlea_agg()
+    fizz_world.cochlea_raw_df_to_cochlea_agg_df()
 
     # THEN
     assert sheet_exists(br00003_agg_file_path, cochlea_agg_str())

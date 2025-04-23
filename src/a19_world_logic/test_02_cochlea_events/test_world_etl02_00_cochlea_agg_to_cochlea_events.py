@@ -52,7 +52,7 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario0(
     with sqlite3_connect(":memory:") as db_conn:
         # WHEN
         fizz_world.sound_df_to_cochlea_raw_df(db_conn)
-    fizz_world.cochlea_raw_to_cochlea_agg()
+    fizz_world.cochlea_raw_df_to_cochlea_agg_df()
 
     # WHEN
     fizz_world.cochlea_agg_to_cochlea_events()
@@ -117,7 +117,7 @@ def test_WorldUnit_cochlea_agg_to_cochlea_events_CreatesSheets_Scenario1(
     with sqlite3_connect(":memory:") as db_conn:
         # WHEN
         fizz_world.sound_df_to_cochlea_raw_df(db_conn)
-    fizz_world.cochlea_raw_to_cochlea_agg()
+    fizz_world.cochlea_raw_df_to_cochlea_agg_df()
 
     # WHEN
     fizz_world.cochlea_agg_to_cochlea_events()
