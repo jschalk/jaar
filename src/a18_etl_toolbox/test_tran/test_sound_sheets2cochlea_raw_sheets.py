@@ -86,7 +86,7 @@ def test_etl_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(env_dir_setup_cleanu
     assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str()]
 
 
-def test_etl_sound_df_to_cochlea_raw_db_CreatesCochleaFiles(env_dir_setup_cleanup):
+def test_etl_sound_df_to_cochlea_raw_db_PopulatesCochleaTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -160,11 +160,11 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         s_dir = create_path(sound_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
-        row0 = (s_dir, file, br00003_ex1_str, sue_str, e1, m_360, a23_str, hour6am)
-        row1 = (s_dir, file, br00003_ex1_str, sue_str, e1, m_420, a23_str, hour7am)
-        row2 = (s_dir, file, br00003_ex3_str, sue_str, e1, m_360, a23_str, hour6am)
-        row3 = (s_dir, file, br00003_ex3_str, sue_str, e1, m_420, a23_str, hour7am)
-        row4 = (s_dir, file, br00003_ex3_str, sue_str, e2, m_420, a23_str, hour7am)
+        row0 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
+        row1 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_420, hour7am)
+        row2 = (s_dir, file, br00003_ex3_str, sue_str, e1, a23_str, m_360, hour6am)
+        row3 = (s_dir, file, br00003_ex3_str, sue_str, e1, a23_str, m_420, hour7am)
+        row4 = (s_dir, file, br00003_ex3_str, sue_str, e2, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0

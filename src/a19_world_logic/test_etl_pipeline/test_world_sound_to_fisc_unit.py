@@ -24,7 +24,12 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
 )
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.a17_idea_logic.idea_db_tool import (
+    upsert_sheet,
+    sheet_exists,
+    cochlea_agg_str,
+    cochlea_raw_str,
+)
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
     get_test_worlds_dir as worlds_dir,
@@ -124,15 +129,17 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     mstr_dir = fizz_world._fisc_mstr_dir
     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
     assert os_path_exists(wrong_a23_fisc_dir) is False
+    cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
     assert os_path_exists(sound_file_path)
-    assert os_path_exists(a23_json_path) is False
-    assert os_path_exists(a23_sue_gut_path) is False
-    assert os_path_exists(a23_sue_job_path) is False
-    assert os_path_exists(sue37_mandate_path) is False
+    assert not os_path_exists(cochlea_file_path)
+    assert not os_path_exists(a23_json_path)
+    assert not os_path_exists(a23_sue_gut_path)
+    assert not os_path_exists(a23_sue_job_path)
+    assert not os_path_exists(sue37_mandate_path)
     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
     # WHEN
@@ -140,8 +147,9 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
     assert os_path_exists(sound_file_path)
+    assert os_path_exists(cochlea_file_path)
+    assert sheet_exists(cochlea_file_path, cochlea_raw_str())
     assert os_path_exists(cochlea_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_gut_path)

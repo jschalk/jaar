@@ -13,6 +13,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_row_count,
     save_to_split_csvs,
     get_db_tables,
+    create_insert_into_clause_str,
 )
 from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -56,11 +57,13 @@ from src.a17_idea_logic.idea_config import (
 from src.a17_idea_logic.idea import get_idearef_obj
 from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
+    create_idea_sorted_table,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
     get_cochlea_raw_grouping_with_all_values_equal_df,
+    get_grouping_with_all_values_equal_sql_query,
     translate_all_columns_dataframe,
     insert_idea_csv,
     save_table_to_csv,
@@ -178,10 +181,15 @@ def etl_sound_df_to_cochlea_raw_db(conn: sqlite3_Connection, sound_dir: str):
     for ref in get_all_idea_dataframes(sound_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
-        x_tablename = f"cochlea_raw_{ref.idea_number}"
+        idea_sorting_columns = get_default_sorted_list(set(df.columns))
+        df = df.reindex(columns=idea_sorting_columns)
+        df.sort_values(idea_sorting_columns, inplace=True)
+        df.reset_index(inplace=True)
+        df.drop(columns=["index"], inplace=True)
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
+        x_tablename = f"cochlea_raw_{ref.idea_number}"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
@@ -253,6 +261,53 @@ def etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir):
         upsert_sheet(cochlea_idea_path, "cochlea_agg", otx_df)
 
 
+def etl_cochlea_agg_db_to_cochlea_agg_df(conn: sqlite3_Connection, cochlea_dir: str):
+    cochlea_agg_dict = {f"cochlea_agg_{idea}": idea for idea in get_idea_numbers()}
+    cochlea_agg_tables = set(cochlea_agg_dict.keys())
+    for table_name in get_db_tables(conn):
+        if table_name in cochlea_agg_tables:
+            idea_number = cochlea_agg_dict.get(table_name)
+            cochlea_path = create_path(cochlea_dir, f"{idea_number}.xlsx")
+            sqlstr = f"SELECT * FROM {table_name}"
+            cochlea_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(cochlea_path, "cochlea_agg", cochlea_agg_idea_df)
+
+
+def etl_cochlea_raw_db_to_cochlea_agg_db(conn_or_cursor: sqlite3_Connection):
+    cochlea_raw_dict = {f"cochlea_raw_{idea}": idea for idea in get_idea_numbers()}
+    cochlea_raw_tables = set(cochlea_raw_dict.keys())
+    for raw_tablename in get_db_tables(conn_or_cursor):
+        if raw_tablename in cochlea_raw_tables:
+            idea_number = cochlea_raw_dict.get(raw_tablename)
+            idea_filename = get_idea_format_filename(idea_number)
+            idearef = get_idearef_obj(idea_filename)
+            key_columns_set = set(idearef.get_otx_keys_list())
+            idea_columns_set = set(idearef._attributes.keys())
+            value_columns_set = idea_columns_set.difference(key_columns_set)
+            idea_columns = get_default_sorted_list(idea_columns_set)
+            key_columns_list = get_default_sorted_list(key_columns_set, idea_columns)
+            value_columns_list = get_default_sorted_list(
+                value_columns_set, idea_columns
+            )
+            agg_tablename = f"cochlea_agg_{idea_number}"
+            if not db_table_exists(conn_or_cursor, agg_tablename):
+                create_idea_sorted_table(conn_or_cursor, agg_tablename, idea_columns)
+            select_sqlstr = get_grouping_with_all_values_equal_sql_query(
+                x_table=raw_tablename,
+                groupby_columns=key_columns_list,
+                value_columns=value_columns_list,
+            )
+            insert_clause_sqlstr = create_insert_into_clause_str(
+                conn_or_cursor,
+                agg_tablename,
+                values_dict=idearef._attributes,
+            )
+            insert_from_select_sqlstr = f"""
+{insert_clause_sqlstr}
+{select_sqlstr};"""
+            conn_or_cursor.execute(insert_from_select_sqlstr)
+
+
 def create_df_with_groupby_idea_columns(
     cochlea_raw_df: DataFrame, idea_number: str
 ) -> DataFrame:
@@ -278,7 +333,68 @@ def etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
         upsert_sheet(cochlea_idea_path, "cochlea_valid", cochlea_valid_df)
 
 
-def etl_cochlea_agg_to_cochlea_events(cochlea_dir):
+def etl_cochlea_raw_db_to_cochlea_agg_events_db(conn_or_cursor: sqlite3_Cursor):
+    cochlea_events_tablename = "cochlea_events"
+    if not db_table_exists(conn_or_cursor, cochlea_events_tablename):
+        cochlea_events_columns = ["face_name", "event_int", "error_message"]
+        create_idea_sorted_table(
+            conn_or_cursor, cochlea_events_tablename, cochlea_events_columns
+        )
+
+    cochlea_agg_tables = {f"cochlea_agg_{idea}" for idea in get_idea_numbers()}
+    for agg_tablename in get_db_tables(conn_or_cursor):
+        if agg_tablename in cochlea_agg_tables:
+            insert_from_select_sqlstr = f"""
+INSERT INTO {cochlea_events_tablename} (face_name, event_int)
+SELECT face_name, event_int 
+FROM {agg_tablename}
+GROUP BY face_name, event_int
+ORDER BY face_name, event_int
+;
+"""
+            conn_or_cursor.execute(insert_from_select_sqlstr)
+
+    update_error_message_sqlstr = f"""
+UPDATE {cochlea_events_tablename}
+SET error_message = 'invalid because of conflicting event_int'
+WHERE event_int IN (
+    SELECT event_int 
+    FROM {cochlea_events_tablename} 
+    GROUP BY event_int 
+    HAVING MAX(face_name) <> MIN(face_name)
+)
+;
+"""
+    conn_or_cursor.execute(update_error_message_sqlstr)
+
+
+#             idea_filename = get_idea_format_filename(idea_number)
+#             idearef = get_idearef_obj(idea_filename)
+#             key_columns_set = set(idearef.get_otx_keys_list())
+#             idea_columns_set = set(idearef._attributes.keys())
+#             value_columns_set = idea_columns_set.difference(key_columns_set)
+#             idea_columns = get_default_sorted_list(idea_columns_set)
+#             key_columns_list = get_default_sorted_list(key_columns_set, idea_columns)
+#             value_columns_list = get_default_sorted_list(
+#                 value_columns_set, idea_columns
+#             )
+#             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
+#                 x_table=raw_tablename,
+#                 groupby_columns=key_columns_list,
+#                 value_columns=value_columns_list,
+#             )
+#             insert_clause_sqlstr = create_insert_into_clause_str(
+#                 conn_or_cursor,
+#                 agg_tablename,
+#                 values_dict=idearef._attributes,
+#             )
+#             insert_from_select_sqlstr = f"""
+# {insert_clause_sqlstr}
+# {select_sqlstr};"""
+#             conn_or_cursor.execute(insert_from_select_sqlstr)
+
+
+def etl_cochlea_agg_df_to_cochlea_agg_events_df(cochlea_dir):
     for file_ref in get_existing_excel_idea_file_refs(cochlea_dir):
         cochlea_idea_path = create_path(cochlea_dir, file_ref.filename)
         cochlea_agg_df = pandas_read_excel(cochlea_idea_path, "cochlea_agg")

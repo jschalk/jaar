@@ -197,7 +197,7 @@ def test_WorldUnit_cochlea_agg_to_cochlea_pidgin_raw_CreatesFile(env_dir_setup_c
     upsert_sheet(br00045_file_path, cochlea_agg_str(), br00045_df)
 
     assert fizz_world._events == {}
-    fizz_world.cochlea_agg_to_cochlea_events()
+    fizz_world.cochlea_agg_to_cochlea_agg_events()
     fizz_world.cochlea_events_to_events_log()
     fizz_world.cochlea_events_log_to_cochlea_events_agg()
     fizz_world.events_agg_file_to_events_dict()
