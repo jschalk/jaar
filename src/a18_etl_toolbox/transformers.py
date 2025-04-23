@@ -178,10 +178,15 @@ def etl_sound_df_to_cochlea_raw_db(conn: sqlite3_Connection, sound_dir: str):
     for ref in get_all_idea_dataframes(sound_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
-        x_tablename = f"cochlea_raw_{ref.idea_number}"
+        idea_sorting_columns = get_default_sorted_list(set(df.columns))
+        df = df.reindex(columns=idea_sorting_columns)
+        df.sort_values(idea_sorting_columns, inplace=True)
+        df.reset_index(inplace=True)
+        df.drop(columns=["index"], inplace=True)
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
+        x_tablename = f"cochlea_raw_{ref.idea_number}"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
@@ -246,6 +251,14 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
 
 
 def etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir):
+    for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
+        cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        cochlea_raw_df = pandas_read_excel(cochlea_idea_path, "cochlea_raw")
+        otx_df = create_df_with_groupby_idea_columns(cochlea_raw_df, br_ref.idea_number)
+        upsert_sheet(cochlea_idea_path, "cochlea_agg", otx_df)
+
+
+def etl_cochlea_raw_db_to_cochlea_agg_db(cochlea_dir):
     for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
         cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
         cochlea_raw_df = pandas_read_excel(cochlea_idea_path, "cochlea_raw")
