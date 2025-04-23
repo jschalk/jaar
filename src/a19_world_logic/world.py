@@ -22,6 +22,7 @@ from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_cochlea_raw_db,
     etl_cochlea_raw_db_to_cochlea_agg_db,
+    etl_cochlea_raw_db_to_cochlea_raw_df,
     etl_cochlea_agg_db_to_cochlea_agg_df,
     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
     etl_cochlea_agg_to_cochlea_events,
@@ -302,7 +303,7 @@ class WorldUnit:
             self.calc_fisc_deal_acct_mandate_net_ledgers()
 
             if store_tracing_files:
-                # etl_cochlea_raw_db_to_cochlea_raw_df(db_conn, self._cochlea_dir)
+                etl_cochlea_raw_db_to_cochlea_raw_df(db_conn, self._cochlea_dir)
                 # etl_cochlea_agg_db_to_cochlea_agg_df(db_conn, self._cochlea_dir)
                 self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
