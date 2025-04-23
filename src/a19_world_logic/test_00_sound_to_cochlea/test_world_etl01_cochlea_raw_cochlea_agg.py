@@ -48,12 +48,7 @@ def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario0_G
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
-
-        cochlea__raw_df = pandas_read_excel(
-            cochlea_file_path, sheet_name=cochlea_raw_str()
-        )
-        assert len(cochlea__raw_df) == 3
+        fizz_world.sound_df_to_cochlea_raw_db(db_conn)
 
         # WHEN
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
@@ -68,7 +63,7 @@ def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario0_G
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str(), cochlea_agg_str()]
+    assert get_sheet_names(cochlea_file_path) == [cochlea_agg_str()]
 
 
 def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
@@ -102,12 +97,8 @@ def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario1_G
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
+        fizz_world.sound_df_to_cochlea_raw_db(db_conn)
         br00003_agg_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
-        cochlea_df = pandas_read_excel(
-            br00003_agg_file_path, sheet_name=cochlea_raw_str()
-        )
-        assert len(cochlea_df) == 4
         assert sheet_exists(br00003_agg_file_path, cochlea_agg_str()) is False
 
         # WHEN
@@ -128,7 +119,4 @@ def test_WorldUnit_cochlea_raw_df_to_cochlea_agg_df_CreatesOtxSheets_Scenario1_G
     assert len(gen_br00003_agg_df) == len(ex_otx_df)
     assert len(gen_br00003_agg_df) == 2
     assert gen_br00003_agg_df.to_csv() == ex_otx_df.to_csv()
-    assert get_sheet_names(br00003_agg_file_path) == [
-        cochlea_raw_str(),
-        cochlea_agg_str(),
-    ]
+    assert get_sheet_names(br00003_agg_file_path) == [cochlea_agg_str()]

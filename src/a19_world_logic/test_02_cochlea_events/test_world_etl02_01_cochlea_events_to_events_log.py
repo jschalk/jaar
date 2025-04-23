@@ -54,7 +54,7 @@ def test_WorldUnit_cochlea_events_to_events_log_CreatesSheets_Scenario0(
     upsert_sheet(sound_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
+        fizz_world.sound_df_to_cochlea_raw_db(db_conn)
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
     fizz_world.cochlea_agg_to_cochlea_events()
     events_file_path = create_cochlea_events_path(fizz_world._cochlea_dir)
@@ -145,7 +145,7 @@ def test_WorldUnit_cochlea_events_to_events_log_CreatesSheets_Scenario1_Multiple
     upsert_sheet(sound_file_path, "example1_br00005", b5_df)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_cochlea_raw_df(db_conn)
+        fizz_world.sound_df_to_cochlea_raw_db(db_conn)
         fizz_world.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
     fizz_world.cochlea_agg_to_cochlea_events()
     events_file_path = create_cochlea_events_path(fizz_world._cochlea_dir)

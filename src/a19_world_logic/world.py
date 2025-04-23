@@ -21,7 +21,6 @@ from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_cochlea_raw_db,
-    etl_cochlea_raw_db_to_cochlea_raw_df,
     etl_cochlea_raw_db_to_cochlea_agg_db,
     etl_cochlea_agg_db_to_cochlea_agg_df,
     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
@@ -122,14 +121,12 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
-    def sound_df_to_cochlea_raw_df(self, conn: sqlite3_Connection):
+    def sound_df_to_cochlea_raw_db(self, conn: sqlite3_Connection):
         etl_sound_df_to_cochlea_raw_db(conn, self._sound_dir)
-        etl_cochlea_raw_db_to_cochlea_raw_df(conn, self._cochlea_dir)
 
     def cochlea_raw_df_to_cochlea_agg_df(
         self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
     ):
-        # etl_cochlea_raw_df_to_cochlea_agg_df(self._cochlea_dir)
         etl_cochlea_raw_db_to_cochlea_agg_db(cursor)
         etl_cochlea_agg_db_to_cochlea_agg_df(conn, self._cochlea_dir)
 
@@ -270,7 +267,7 @@ class WorldUnit:
         with sqlite3_connect(":memory:") as db_conn:
             cursor = db_conn.cursor()
 
-            self.sound_df_to_cochlea_raw_df(db_conn)
+            self.sound_df_to_cochlea_raw_db(db_conn)
             self.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
             self.cochlea_agg_to_cochlea_events()
             self.cochlea_events_to_events_log()
@@ -305,6 +302,8 @@ class WorldUnit:
             self.calc_fisc_deal_acct_mandate_net_ledgers()
 
             if store_tracing_files:
+                # etl_cochlea_raw_db_to_cochlea_raw_df(db_conn, self._cochlea_dir)
+                # etl_cochlea_agg_db_to_cochlea_agg_df(db_conn, self._cochlea_dir)
                 self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):
