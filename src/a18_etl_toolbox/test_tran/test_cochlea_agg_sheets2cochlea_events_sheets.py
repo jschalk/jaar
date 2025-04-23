@@ -19,6 +19,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_cochlea_raw_df_to_cochlea_agg_df,
     etl_cochlea_agg_df_to_cochlea_agg_events_df,
     etl_cochlea_raw_db_to_cochlea_agg_events_db,
+    etl_cochlea_agg_events_db_to_event_dict,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -149,7 +150,7 @@ def test_etl_cochlea_agg_df_to_cochlea_agg_events_df_CreatesSheets_Scenario1(
     assert gen_otx_events_df.to_csv(index=False) == ex_otx_events_df.to_csv(index=False)
 
 
-def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_CreatesSheets_Scenario0(
+def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_PopulatesTables_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -200,7 +201,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        cochlea_events_tablename = "cochlea_events"
+        cochlea_events_tablename = "cochlea_agg_events"
         assert get_row_count(cursor, agg_br00003_tablename) == 4
         assert not db_table_exists(cursor, cochlea_events_tablename)
 
@@ -231,7 +232,7 @@ ORDER BY {face_name_str()}, {event_int_str()};"""
         assert rows[2] == yao9_r
 
 
-def test_etl_cochlea_raw_db_to_cochlea_agg_events_db_CreatesSheets_Scenario1(
+def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_PopulatesTables_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -284,7 +285,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        cochlea_events_tablename = "cochlea_events"
+        cochlea_events_tablename = "cochlea_agg_events"
         assert get_row_count(cursor, agg_br00003_tablename) == 5
         assert not db_table_exists(cursor, cochlea_events_tablename)
 
@@ -311,3 +312,44 @@ ORDER BY {face_name_str()}, {event_int_str()};"""
         assert rows[1] == sue_row
         assert rows[2] == yao1_row
         assert rows[3] == yao9_row
+
+
+def test_etl_cochlea_agg_events_db_to_event_dict_ReturnsObj_Scenario0(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_str = "Sue"
+    yao_str = "Yao"
+    bob_str = "Bob"
+    event1 = 1
+    event3 = 3
+    event9 = 9
+    agg_columns = [face_name_str(), event_int_str(), "error_message"]
+    agg_types = {
+        face_name_str(): "TEXT",
+        event_int_str(): "TEXT",
+        "error_message": "TEXT",
+    }
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        agg_events_tablename = "cochlea_agg_events"
+        create_table_from_columns(cursor, agg_events_tablename, agg_columns, agg_types)
+        insert_into_clause = f"""
+INSERT INTO {agg_events_tablename} ({face_name_str()}, {event_int_str()}, error_message)
+VALUES     
+  ('{bob_str}', '{event3}', NULL)
+, ('{sue_str}', '{event1}', 'invalid because of conflicting event_int')
+, ('{yao_str}', '{event1}', 'invalid because of conflicting event_int')
+, ('{yao_str}', '{event9}', NULL)
+, ('{yao_str}', '{event9}', NULL)
+, ('{yao_str}', '{event9}', NULL)
+;
+"""
+        cursor.execute(insert_into_clause)
+        assert get_row_count(cursor, agg_events_tablename) == 6
+
+        # WHEN
+        events_dict = etl_cochlea_agg_events_db_to_event_dict(cursor)
+
+        # THEN
+        assert events_dict == {event3: bob_str, event9: yao_str}

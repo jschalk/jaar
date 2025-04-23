@@ -155,7 +155,7 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     assert os_path_exists(a23_sue_gut_path)
     assert os_path_exists(a23_sue_job_path)
     assert os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 82
+    assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
 def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(

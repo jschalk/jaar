@@ -334,7 +334,7 @@ def etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
 
 
 def etl_cochlea_raw_db_to_cochlea_agg_events_db(conn_or_cursor: sqlite3_Cursor):
-    cochlea_events_tablename = "cochlea_events"
+    cochlea_events_tablename = "cochlea_agg_events"
     if not db_table_exists(conn_or_cursor, cochlea_events_tablename):
         cochlea_events_columns = ["face_name", "event_int", "error_message"]
         create_idea_sorted_table(
@@ -349,7 +349,6 @@ INSERT INTO {cochlea_events_tablename} (face_name, event_int)
 SELECT face_name, event_int 
 FROM {agg_tablename}
 GROUP BY face_name, event_int
-ORDER BY face_name, event_int
 ;
 """
             conn_or_cursor.execute(insert_from_select_sqlstr)
@@ -368,30 +367,18 @@ WHERE event_int IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
-#             idea_filename = get_idea_format_filename(idea_number)
-#             idearef = get_idearef_obj(idea_filename)
-#             key_columns_set = set(idearef.get_otx_keys_list())
-#             idea_columns_set = set(idearef._attributes.keys())
-#             value_columns_set = idea_columns_set.difference(key_columns_set)
-#             idea_columns = get_default_sorted_list(idea_columns_set)
-#             key_columns_list = get_default_sorted_list(key_columns_set, idea_columns)
-#             value_columns_list = get_default_sorted_list(
-#                 value_columns_set, idea_columns
-#             )
-#             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
-#                 x_table=raw_tablename,
-#                 groupby_columns=key_columns_list,
-#                 value_columns=value_columns_list,
-#             )
-#             insert_clause_sqlstr = create_insert_into_clause_str(
-#                 conn_or_cursor,
-#                 agg_tablename,
-#                 values_dict=idearef._attributes,
-#             )
-#             insert_from_select_sqlstr = f"""
-# {insert_clause_sqlstr}
-# {select_sqlstr};"""
-#             conn_or_cursor.execute(insert_from_select_sqlstr)
+def etl_cochlea_agg_events_db_to_event_dict(
+    conn_or_cursor: sqlite3_Cursor,
+) -> dict[EventInt, FaceName]:
+    select_sqlstr = """
+SELECT event_int, MAX(face_name) 
+FROM cochlea_agg_events
+WHERE error_message IS NULL
+GROUP BY event_int
+;
+"""
+    conn_or_cursor.execute(select_sqlstr)
+    return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
 def etl_cochlea_agg_df_to_cochlea_agg_events_df(cochlea_dir):
@@ -1096,8 +1083,8 @@ def etl_fisc_agg_tables_to_fisc_csvs(
 def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
     fisc_filename = "fisc.json"
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    insert_raw_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
-    cursor.execute(insert_raw_sqlstr)
+    select_fisc_tag_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
+    cursor.execute(select_fisc_tag_sqlstr)
     for fisc_tag_set in cursor.fetchall():
         fisc_tag = fisc_tag_set[0]
         fisc_dict = get_fisc_dict_from_db(cursor, fisc_tag)
