@@ -22,9 +22,9 @@ from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    drum_agg_str,
+    cochlea_agg_str,
 )
-from src.a18_etl_toolbox.tran_path import create_drum_pidgin_path
+from src.a18_etl_toolbox.tran_path import create_cochlea_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
@@ -53,7 +53,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     }
 
 
-def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
+def test_WorldUnit_cochlea_agg_to_cochlea_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
@@ -67,7 +67,7 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     event1 = 1
     event2 = 2
     event5 = 5
-    br00113_file_path = create_path(fizz_world._drum_dir, "br00113.xlsx")
+    br00113_file_path = create_path(fizz_world._cochlea_dir, "br00113.xlsx")
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -77,7 +77,7 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
         otx_name_str(),
         inx_name_str(),
     ]
-    br00043_file_path = create_path(fizz_world._drum_dir, "br00043.xlsx")
+    br00043_file_path = create_path(fizz_world._cochlea_dir, "br00043.xlsx")
     br00043_columns = [
         face_name_str(),
         event_int_str(),
@@ -94,13 +94,13 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
-    upsert_sheet(br00113_file_path, drum_agg_str(), br00113_df)
+    upsert_sheet(br00113_file_path, cochlea_agg_str(), br00113_df)
     br00043_df = [sue2, sue3, yao1]
     br00043_df = DataFrame(br00043_df, columns=br00043_columns)
-    upsert_sheet(br00043_file_path, drum_agg_str(), br00043_df)
-    pidgin_path = create_drum_pidgin_path(fizz_world._drum_dir)
+    upsert_sheet(br00043_file_path, cochlea_agg_str(), br00043_df)
+    pidgin_path = create_cochlea_pidgin_path(fizz_world._cochlea_dir)
 
-    br00115_file_path = create_path(fizz_world._drum_dir, "br00115.xlsx")
+    br00115_file_path = create_path(fizz_world._cochlea_dir, "br00115.xlsx")
     br00115_columns = [
         face_name_str(),
         event_int_str(),
@@ -110,7 +110,7 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
         otx_label_str(),
         inx_label_str(),
     ]
-    br00042_file_path = create_path(fizz_world._drum_dir, "br00042.xlsx")
+    br00042_file_path = create_path(fizz_world._cochlea_dir, "br00042.xlsx")
     br00042_columns = [
         face_name_str(),
         event_int_str(),
@@ -127,12 +127,12 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
-    upsert_sheet(br00115_file_path, drum_agg_str(), br00115_df)
+    upsert_sheet(br00115_file_path, cochlea_agg_str(), br00115_df)
     b40_rows = [sue2, sue3, yao1]
     br00042_df = DataFrame(b40_rows, columns=br00042_columns)
-    upsert_sheet(br00042_file_path, drum_agg_str(), br00042_df)
+    upsert_sheet(br00042_file_path, cochlea_agg_str(), br00042_df)
 
-    br00116_file_path = create_path(fizz_world._drum_dir, "br00116.xlsx")
+    br00116_file_path = create_path(fizz_world._cochlea_dir, "br00116.xlsx")
     br00116_columns = [
         face_name_str(),
         event_int_str(),
@@ -142,7 +142,7 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
         otx_tag_str(),
         inx_tag_str(),
     ]
-    br00044_file_path = create_path(fizz_world._drum_dir, "br00044.xlsx")
+    br00044_file_path = create_path(fizz_world._cochlea_dir, "br00044.xlsx")
     br00044_columns = [
         face_name_str(),
         event_int_str(),
@@ -159,12 +159,12 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, drum_agg_str(), br00116_df)
+    upsert_sheet(br00116_file_path, cochlea_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, drum_agg_str(), br00044_df)
+    upsert_sheet(br00044_file_path, cochlea_agg_str(), br00044_df)
 
-    br00117_file_path = create_path(fizz_world._drum_dir, "br00117.xlsx")
+    br00117_file_path = create_path(fizz_world._cochlea_dir, "br00117.xlsx")
     br00117_columns = [
         face_name_str(),
         event_int_str(),
@@ -174,7 +174,7 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
         otx_road_str(),
         inx_road_str(),
     ]
-    br00045_file_path = create_path(fizz_world._drum_dir, "br00045.xlsx")
+    br00045_file_path = create_path(fizz_world._cochlea_dir, "br00045.xlsx")
     br00045_columns = [
         face_name_str(),
         event_int_str(),
@@ -191,21 +191,21 @@ def test_WorldUnit_drum_agg_to_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, drum_agg_str(), br00117_df)
+    upsert_sheet(br00117_file_path, cochlea_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, drum_agg_str(), br00045_df)
+    upsert_sheet(br00045_file_path, cochlea_agg_str(), br00045_df)
 
     assert fizz_world._events == {}
-    fizz_world.drum_agg_to_drum_events()
-    fizz_world.drum_events_to_events_log()
-    fizz_world.drum_events_log_to_events_agg()
+    fizz_world.cochlea_agg_to_cochlea_events()
+    fizz_world.cochlea_events_to_events_log()
+    fizz_world.cochlea_events_log_to_cochlea_events_agg()
     fizz_world.events_agg_file_to_events_dict()
     assert fizz_world._events == {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.drum_agg_to_pidgin_raw()
+    fizz_world.cochlea_agg_to_cochlea_pidgin_raw()
 
     # THEN
     assert os_path_exists(pidgin_path)

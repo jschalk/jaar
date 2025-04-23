@@ -10,7 +10,7 @@ from src.a19_world_logic.examples.world_env import (
 from pandas import DataFrame
 
 
-def test_sound_to_drum_raw_PidginsAll(env_dir_setup_cleanup):
+def test_sound_df_to_cochlea_raw_df_PidginsAll(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_test_worlds_dir()
     x_dir = create_path(env_dir, "examples_folder")

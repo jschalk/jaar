@@ -5,21 +5,20 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
     upsert_sheet,
-    drum_agg_str,
-    drum_valid_str,
+    cochlea_agg_str,
+    cochlea_valid_str,
 )
-from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
-    env_dir_setup_cleanup,
+from src.a18_etl_toolbox.transformers import (
+    etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
 )
+from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenario0(
+def test_etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -44,33 +43,32 @@ def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenari
     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    fizz_world.set_event(event1, sue_str)
-    fizz_world.set_event(event9, yao_str)
+    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
+    cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
+    cochlea_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(cochlea_file_path, cochlea_agg_str(), cochlea_agg_df)
     legitimate_events = {event1, event9}
-    assert set(fizz_world._events.keys()) == legitimate_events
-    drum_file_path = create_path(fizz_world._drum_dir, "br00003.xlsx")
-    drum_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(drum_file_path, drum_agg_str(), drum_agg_df)
-    assert sheet_exists(drum_file_path, drum_valid_str()) is False
+    assert sheet_exists(cochlea_file_path, cochlea_valid_str()) is False
 
     # WHEN
-    fizz_world.drum_agg_non_pidgin_ideas_to_drum_valid()
+    etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(cochlea_dir, legitimate_events)
 
     # THEN
-    assert sheet_exists(drum_file_path, drum_valid_str())
-    gen_drum_valid_df = pandas_read_excel(drum_file_path, sheet_name=drum_valid_str())
-    print(f"{gen_drum_valid_df.columns=}")
-    example_drum_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_drum_valid_df.columns) == len(example_drum_valid_df.columns)
-    assert list(gen_drum_valid_df.columns) == list(example_drum_valid_df.columns)
-    assert len(gen_drum_valid_df) > 0
-    assert len(gen_drum_valid_df) == 3
-    assert len(gen_drum_valid_df) == len(example_drum_valid_df)
-    pandas_assert_frame_equal(gen_drum_valid_df, example_drum_valid_df)
+    assert sheet_exists(cochlea_file_path, cochlea_valid_str())
+    gen_cochlea_valid_df = pandas_read_excel(
+        cochlea_file_path, sheet_name=cochlea_valid_str()
+    )
+    print(f"{gen_cochlea_valid_df.columns=}")
+    example_cochlea_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_cochlea_valid_df.columns) == len(example_cochlea_valid_df.columns)
+    assert list(gen_cochlea_valid_df.columns) == list(example_cochlea_valid_df.columns)
+    assert len(gen_cochlea_valid_df) > 0
+    assert len(gen_cochlea_valid_df) == 3
+    assert len(gen_cochlea_valid_df) == len(example_cochlea_valid_df)
+    pandas_assert_frame_equal(gen_cochlea_valid_df, example_cochlea_valid_df)
 
 
-# def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenario1(
+# def test_etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -87,9 +85,9 @@ def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenari
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
 #     sound_dir = create_path(get_test_etl_dir(), "sound")
-#     drum_dir = create_path(get_test_etl_dir(), "drum")
+#     cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
 #     sound_file_path = create_path(sound_dir, ex_filename)
-#     drum_file_path = create_path(drum_dir, "br00003.xlsx")
+#     cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -105,14 +103,14 @@ def test_WorldUnit_drum_agg_non_pidgin_ideas_to_drum_valid_CreatesSheets_Scenari
 #     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
 #     upsert_sheet(sound_file_path, "example1_br00003", df1)
-#     etl_sound_to_drum_raw(sound_dir, drum_dir)
-#     etl_drum_raw_to_drum_agg(drum_dir)
+#     etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
+#     etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
 
 #     # WHEN
-#     etl_drum_agg_non_pidgin_ideas_to_drum_valid(drum_dir)
+#     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(cochlea_dir)
 
 #     # THEN
-#     gen_otx_events_df = pandas_read_excel(drum_file_path, sheet_name="drum_valid")
+#     gen_otx_events_df = pandas_read_excel(cochlea_file_path, sheet_name="cochlea_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
 #     bob_row = [bob_str, event3, ""]

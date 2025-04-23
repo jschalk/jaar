@@ -103,19 +103,19 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def drum_raw_str():
-    return "drum_raw"
+def cochlea_raw_str():
+    return "cochlea_raw"
 
 
-def drum_agg_str():
-    return "drum_agg"
+def cochlea_agg_str():
+    return "cochlea_agg"
 
 
-def drum_valid_str():
-    return "drum_valid"
+def cochlea_valid_str():
+    return "cochlea_valid"
 
 
-def get_drum_raw_grouping_with_all_values_equal_df(
+def get_cochlea_raw_grouping_with_all_values_equal_df(
     x_df: DataFrame, groupby_list: list, idea_number: str
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -125,9 +125,9 @@ def get_drum_raw_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql("drum_raw", conn, index=False)
+        x_df.to_sql("cochlea_raw", conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table="drum_raw",
+            x_table="cochlea_raw",
             groupby_columns=grouping_columns,
             value_columns=value_columns,
         )

@@ -1,18 +1,20 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.tran_path import (
-    create_drum_pidgin_path,
+    create_cochlea_pidgin_path,
     create_syntax_otx_pidgin_path,
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_drum_pidgin_agg_to_otz_face_pidgin_agg
+from src.a18_etl_toolbox.transformers import (
+    etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg,
+)
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
 
 
-def test_etl_drum_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
+def test_etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -34,14 +36,14 @@ def test_etl_drum_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
     name_rows = [name0, name1, name2, name3]
     e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
-    drum_dir = create_path(get_test_etl_dir(), "drum")
-    agg_pidgin_path = create_drum_pidgin_path(drum_dir)
+    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
+    agg_pidgin_path = create_cochlea_pidgin_path(cochlea_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
 
     faces_dir = create_path(get_test_etl_dir(), "syntax_otz")
 
     # WHEN
-    etl_drum_pidgin_agg_to_otz_face_pidgin_agg(drum_dir, faces_dir)
+    etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(cochlea_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -64,7 +66,7 @@ def test_etl_drum_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
     pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
-def test_etl_drum_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
+def test_etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -119,8 +121,8 @@ def test_etl_drum_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
-    drum_dir = create_path(get_test_etl_dir(), "drum")
-    agg_pidgin_path = create_drum_pidgin_path(drum_dir)
+    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
+    agg_pidgin_path = create_cochlea_pidgin_path(cochlea_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
@@ -129,7 +131,7 @@ def test_etl_drum_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
     faces_dir = create_path(get_test_etl_dir(), "syntax_otz")
 
     # WHEN
-    etl_drum_pidgin_agg_to_otz_face_pidgin_agg(drum_dir, faces_dir)
+    etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(cochlea_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
