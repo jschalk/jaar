@@ -157,7 +157,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         file = ex_filename
         e1 = event_1
         e2 = event_2
-        s_dir = f"{sound_dir}\\."
+        s_dir = create_path(sound_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         row0 = (s_dir, file, br00003_ex1_str, sue_str, e1, m_360, a23_str, hour6am)
