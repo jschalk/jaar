@@ -268,37 +268,55 @@ class WorldUnit:
         with sqlite3_connect(":memory:") as db_conn:
             cursor = db_conn.cursor()
 
+            # collect excel file data into central location
+            # grab all excel sheets that fit idea format
             self.sound_df_to_cochlea_raw_db(db_conn)
+            # per idea brick filter to only non-conflicting idea data
             self.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
+            # identify all idea data that has conflicting face_name/event_int uniqueness
             self.cochlea_agg_to_cochlea_agg_events()
             self.cochlea_events_to_events_log()
             self.cochlea_events_log_to_cochlea_events_agg()
-            self.events_agg_file_to_events_dict()  # self._events
+            self.events_agg_file_to_events_dict()  # populates self._events
+
+            # build pidgins
+            # collect all pidgin data from all relevant valid idea bricks
             self.cochlea_agg_to_cochlea_pidgin_raw()  # self._events.keys()
+            # per pidgin dimen filter to only non-conflicting pidgin data
             self.cochlea_pidgin_raw_to_pidgin_agg()
             self.cochlea_pidgin_agg_to_otz_face_pidgin_agg()
+            # identify all events that have pidgins
             self.otz_face_pidgins_to_otz_event_pidgins()
+            # per event create isolated pidgin.json
             self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
+            # per event create complete (inherited) pidgin.json
             self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
+
+            # translate all non-pidgin ideas by pidgins
+            # filtered by valid event_int get all non-pidgin cochlea idea bricks
             self.cochlea_agg_non_pidgin_ideas_to_cochlea_valid()  # self._events.keys()
             self.cochlea_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()
             self.otz_event_ideas_to_inz_events()  # self._pidgin_events
             self.otz_inx_event_ideas_to_inz_faces()
             self.inz_face_ideas_to_csv_files()
-
             self.inz_face_csv_files2idea_raw_tables(cursor)
+
+            # create fiscunits
             self.idea_raw_to_fisc_tables(cursor)
             self.fisc_agg_tables_to_fisc_jsons(cursor)
             self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
             self.fisc_table2fisc_ote1_agg_csvs(cursor)
             self.fisc_ote1_agg_csvs2jsons()
+
+            # create budunits
             self.idea_raw_to_bud_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
-
             self.event_bud_csvs_to_pack_json()
             self.event_pack_json_to_event_inherited_budunits()
             self.event_inherited_budunits_to_fisc_gut()
+
+            # create all fisc_job and mandate reports
             self.fisc_gut_to_fisc_job()
             self.calc_fisc_deal_acct_mandate_net_ledgers()
 
