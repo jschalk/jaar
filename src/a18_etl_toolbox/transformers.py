@@ -346,12 +346,11 @@ GROUP BY event_int
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def yell_agg_single_to_pidgin_raw(
-    pidgin_dimen: str, legitimate_events: set[EventInt], yell_dir: str
-):
-    x_events = legitimate_events
-    transformer = YellAggToRawTransformer(yell_dir, pidgin_dimen, x_events)
-    transformer.transform()
+def etl_yell_agg_to_yell_pidgin_raw(legitimate_events: set[EventInt], yell_dir: str):
+    etl_yell_agg_to_pidgin_name_raw(legitimate_events, yell_dir)
+    etl_yell_agg_to_pidgin_label_raw(legitimate_events, yell_dir)
+    etl_yell_agg_to_pidgin_tag_raw(legitimate_events, yell_dir)
+    etl_yell_agg_to_pidgin_road_raw(legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], yell_dir: str):
@@ -370,11 +369,12 @@ def etl_yell_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], yell_dir: 
     yell_agg_single_to_pidgin_raw("map_road", legitimate_events, yell_dir)
 
 
-def etl_yell_agg_to_yell_pidgin_raw(legitimate_events: set[EventInt], yell_dir: str):
-    etl_yell_agg_to_pidgin_name_raw(legitimate_events, yell_dir)
-    etl_yell_agg_to_pidgin_label_raw(legitimate_events, yell_dir)
-    etl_yell_agg_to_pidgin_tag_raw(legitimate_events, yell_dir)
-    etl_yell_agg_to_pidgin_road_raw(legitimate_events, yell_dir)
+def yell_agg_single_to_pidgin_raw(
+    pidgin_dimen: str, legitimate_events: set[EventInt], yell_dir: str
+):
+    x_events = legitimate_events
+    transformer = YellAggToRawTransformer(yell_dir, pidgin_dimen, x_events)
+    transformer.transform()
 
 
 class YellAggToRawTransformer:
