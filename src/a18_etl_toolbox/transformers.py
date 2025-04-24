@@ -343,7 +343,9 @@ GROUP BY event_int
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def etl_yell_agg_to_yell_pidgin_raw(legitimate_events: set[EventInt], yell_dir: str):
+def etl_yell_agg_df_to_yell_pidgin_raw_df(
+    legitimate_events: set[EventInt], yell_dir: str
+):
     etl_yell_agg_to_pidgin_name_raw(legitimate_events, yell_dir)
     etl_yell_agg_to_pidgin_label_raw(legitimate_events, yell_dir)
     etl_yell_agg_to_pidgin_tag_raw(legitimate_events, yell_dir)
@@ -470,7 +472,7 @@ def etl_pidgin_single_raw_to_agg(yell_dir: str, map_dimen: str):
     transformer.transform()
 
 
-def etl_yell_pidgin_raw_to_pidgin_agg(yell_dir):
+def etl_yell_pidgin_raw_df_to_pidgin_agg_df(yell_dir):
     etl_pidgin_name_raw_to_name_agg(yell_dir)
     etl_pidgin_label_raw_to_label_agg(yell_dir)
     etl_pidgin_road_raw_to_road_agg(yell_dir)
@@ -527,7 +529,7 @@ class PidginRawToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_yell_pidgin_agg_to_otz_face_pidgin_agg(yell_dir: str, faces_dir: str):
+def etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir: str, faces_dir: str):
     agg_pidgin = create_yell_pidgin_path(yell_dir)
     for class_type in CLASS_TYPES.keys():
         agg_sheet_name = CLASS_TYPES[class_type]["agg"]
@@ -549,7 +551,7 @@ def etl_face_pidgin_to_event_pidgins(face_dir: str):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
-def etl_otz_face_pidgins_to_otz_event_pidgins(faces_dir: str):
+def etl_otz_face_pidgins_df_to_otz_event_pidgins_df(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
         etl_face_pidgin_to_event_pidgins(face_dir)

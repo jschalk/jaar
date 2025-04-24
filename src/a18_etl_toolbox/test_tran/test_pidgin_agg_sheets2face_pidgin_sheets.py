@@ -6,7 +6,7 @@ from src.a18_etl_toolbox.tran_path import (
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
-    etl_yell_pidgin_agg_to_otz_face_pidgin_agg,
+    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -14,7 +14,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_etl_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
+def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -43,7 +43,7 @@ def test_etl_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
     faces_dir = create_path(get_test_etl_dir(), "syntax_otz")
 
     # WHEN
-    etl_yell_pidgin_agg_to_otz_face_pidgin_agg(yell_dir, faces_dir)
+    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -66,7 +66,7 @@ def test_etl_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario0_Two_face_names(
     pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
-def test_etl_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
+def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -131,7 +131,7 @@ def test_etl_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
     faces_dir = create_path(get_test_etl_dir(), "syntax_otz")
 
     # WHEN
-    etl_yell_pidgin_agg_to_otz_face_pidgin_agg(yell_dir, faces_dir)
+    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)

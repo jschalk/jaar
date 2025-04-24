@@ -7,7 +7,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_pidgin_label_raw_to_label_agg,
     etl_pidgin_tag_raw_to_tag_agg,
     etl_pidgin_road_raw_to_road_agg,
-    etl_yell_pidgin_raw_to_pidgin_agg,
+    etl_yell_pidgin_raw_df_to_pidgin_agg_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -232,7 +232,7 @@ def test_etl_pidgin_tag_raw_to_tag_agg_Scenario0_CreatesFileFromSingleIdea(
     pandas_testing_assert_frame_equal(gen_tag_agg_df, e1_tag_agg_df)
 
 
-def test_etl_yell_pidgin_raw_to_pidgin_agg_Scenario0_CreatesFileWithAllDimens(
+def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -310,7 +310,7 @@ def test_etl_yell_pidgin_raw_to_pidgin_agg_Scenario0_CreatesFileWithAllDimens(
     assert sheet_exists(pidgin_path, tag_agg_str) is False
 
     # WHEN
-    etl_yell_pidgin_raw_to_pidgin_agg(x_yell_dir)
+    etl_yell_pidgin_raw_df_to_pidgin_agg_df(x_yell_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

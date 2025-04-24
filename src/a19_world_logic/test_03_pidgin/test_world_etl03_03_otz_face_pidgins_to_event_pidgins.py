@@ -28,7 +28,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face_names(
+def test_WorldUnit_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -88,7 +88,7 @@ def test_WorldUnit_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face
     assert sheet_exists(event9_pidgin_file_path, road_agg_str) is False
 
     # WHEN
-    fizz_world.otz_face_pidgins_to_otz_event_pidgins()
+    fizz_world.otz_face_pidgins_df_to_otz_event_pidgins_df()
 
     # THEN
     assert os_path_exists(event3_dir)

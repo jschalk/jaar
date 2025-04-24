@@ -137,7 +137,7 @@ def test_WorldUnit_set_pidgin_events_SetsAttr(env_dir_setup_cleanup):
     }
 
 
-def test_WorldUnit_otz_face_pidgins_to_otz_event_pidgins_SetsAttr_pidgin_events(
+def test_WorldUnit_otz_face_pidgins_df_to_otz_event_pidgins_df_SetsAttr_pidgin_events(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -53,7 +53,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     }
 
 
-def test_WorldUnit_yell_agg_to_yell_pidgin_raw_CreatesFile(env_dir_setup_cleanup):
+def test_WorldUnit_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
@@ -200,7 +200,7 @@ def test_WorldUnit_yell_agg_to_yell_pidgin_raw_CreatesFile(env_dir_setup_cleanup
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    fizz_world.yell_agg_to_yell_pidgin_raw()
+    fizz_world.yell_agg_df_to_yell_pidgin_raw_df()
 
     # THEN
     assert os_path_exists(pidgin_path)

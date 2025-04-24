@@ -29,7 +29,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
+def test_WorldUnit_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -112,7 +112,7 @@ def test_WorldUnit_yell_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens
     assert os_path_exists(sue_pidgin_file_path) is False
 
     # WHEN
-    fizz_world.yell_pidgin_agg_to_otz_face_pidgin_agg()
+    fizz_world.yell_pidgin_agg_df_to_otz_face_pidgin_agg_df()
 
     # THEN
     assert os_path_exists(sue_dir)

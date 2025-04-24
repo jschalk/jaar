@@ -27,10 +27,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_yell_raw_db_to_yell_agg_events_db,
     etl_yell_agg_events_db_to_event_dict,
     etl_yell_agg_non_pidgin_ideas_to_yell_valid,
-    etl_yell_pidgin_raw_to_pidgin_agg,
-    etl_yell_agg_to_yell_pidgin_raw,
-    etl_yell_pidgin_agg_to_otz_face_pidgin_agg,
-    etl_otz_face_pidgins_to_otz_event_pidgins,
+    etl_yell_pidgin_raw_df_to_pidgin_agg_df,
+    etl_yell_agg_df_to_yell_pidgin_raw_df,
+    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df,
+    etl_otz_face_pidgins_df_to_otz_event_pidgins_df,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
@@ -134,22 +134,24 @@ class WorldUnit:
             self._yell_dir, set(self._events.keys())
         )
 
-    def yell_agg_to_yell_pidgin_raw(self):
-        etl_yell_agg_to_yell_pidgin_raw(set(self._events.keys()), self._yell_dir)
+    def yell_agg_df_to_yell_pidgin_raw_df(self):
+        etl_yell_agg_df_to_yell_pidgin_raw_df(set(self._events.keys()), self._yell_dir)
 
-    def yell_pidgin_raw_to_pidgin_agg(self):
-        etl_yell_pidgin_raw_to_pidgin_agg(self._yell_dir)
+    def yell_pidgin_raw_df_to_pidgin_agg_df(self):
+        etl_yell_pidgin_raw_df_to_pidgin_agg_df(self._yell_dir)
 
-    def yell_pidgin_agg_to_otz_face_pidgin_agg(self):
-        etl_yell_pidgin_agg_to_otz_face_pidgin_agg(self._yell_dir, self._syntax_otz_dir)
+    def yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(self):
+        etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(
+            self._yell_dir, self._syntax_otz_dir
+        )
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
             self._syntax_otz_dir, self._pidgin_events
         )
 
-    def otz_face_pidgins_to_otz_event_pidgins(self):
-        etl_otz_face_pidgins_to_otz_event_pidgins(self._syntax_otz_dir)
+    def otz_face_pidgins_df_to_otz_event_pidgins_df(self):
+        etl_otz_face_pidgins_df_to_otz_event_pidgins_df(self._syntax_otz_dir)
 
     def otz_event_pidgins_to_otz_pidgin_csv_files(self):
         etl_otz_event_pidgins_to_otz_pidgin_csv_files(self._syntax_otz_dir)
@@ -262,11 +264,11 @@ class WorldUnit:
 
             # build pidgins
             # collect all pidgin data from all relevant valid idea bricks
-            self.yell_agg_to_yell_pidgin_raw()  # self._events.keys()
+            self.yell_agg_df_to_yell_pidgin_raw_df()  # self._events.keys()
             # per pidgin dimen filter to only non-conflicting pidgin data
-            self.yell_pidgin_raw_to_pidgin_agg()
-            self.yell_pidgin_agg_to_otz_face_pidgin_agg()
-            self.otz_face_pidgins_to_otz_event_pidgins()
+            self.yell_pidgin_raw_df_to_pidgin_agg_df()
+            self.yell_pidgin_agg_df_to_otz_face_pidgin_agg_df()
+            self.otz_face_pidgins_df_to_otz_event_pidgins_df()
             # per event create isolated pidgin.json
             self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
             # per event create complete (inherited) pidgin.json
