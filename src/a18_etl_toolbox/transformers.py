@@ -298,17 +298,19 @@ def etl_yell_agg_non_pidgin_ideas_to_yell_valid(
 def etl_yell_raw_db_to_yell_agg_events_db(conn_or_cursor: sqlite3_Cursor):
     yell_events_tablename = "yell_agg_events"
     if not db_table_exists(conn_or_cursor, yell_events_tablename):
-        yell_events_columns = ["face_name", "event_int", "error_message"]
+        yell_events_columns = ["idea_number", "face_name", "event_int", "error_message"]
         create_idea_sorted_table(
             conn_or_cursor, yell_events_tablename, yell_events_columns
         )
 
-    yell_agg_tables = {f"yell_agg_{idea}" for idea in get_idea_numbers()}
+    yell_agg_tables = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
     for agg_tablename in get_db_tables(conn_or_cursor):
         if agg_tablename in yell_agg_tables:
+            idea_number = yell_agg_tables.get(agg_tablename)
+            print(f"{idea_number=}")
             insert_from_select_sqlstr = f"""
-INSERT INTO {yell_events_tablename} (face_name, event_int)
-SELECT face_name, event_int 
+INSERT INTO {yell_events_tablename} (idea_number, face_name, event_int)
+SELECT '{idea_number}', face_name, event_int 
 FROM {agg_tablename}
 GROUP BY face_name, event_int
 ;
@@ -341,6 +343,10 @@ GROUP BY event_int
 """
     conn_or_cursor.execute(select_sqlstr)
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
+
+
+def etl_yell_agg_db_to_yell_pidgin_raw_db(cursor: sqlite3_Cursor):
+    pass
 
 
 def etl_yell_agg_df_to_yell_pidgin_raw_df(

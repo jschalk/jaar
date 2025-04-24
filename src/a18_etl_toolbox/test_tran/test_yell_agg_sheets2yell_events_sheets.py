@@ -7,6 +7,7 @@ from src.a00_data_toolboxs.db_toolbox import (
 from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
+from src.a17_idea_logic.idea_config import idea_number_str
 from src.a17_idea_logic.idea_db_tool import yell_agg_str
 from src.a18_etl_toolbox.transformers import (
     etl_yell_raw_db_to_yell_agg_events_db,
@@ -73,10 +74,12 @@ VALUES
 
         # THEN
         assert db_table_exists(cursor, yell_events_tablename)
-        yell_events_table_cols = get_table_columns(cursor, yell_events_tablename)
-        assert face_name_str() in set(yell_events_table_cols)
-        assert event_int_str() in set(yell_events_table_cols)
-        assert "error_message" in set(yell_events_table_cols)
+        yell_events_table_cols = set(get_table_columns(cursor, yell_events_tablename))
+        assert len(yell_events_table_cols) == 4
+        assert idea_number_str() in yell_events_table_cols
+        assert face_name_str() in yell_events_table_cols
+        assert event_int_str() in yell_events_table_cols
+        assert "error_message" in yell_events_table_cols
         assert get_row_count(cursor, yell_events_tablename) == 3
         select_agg_sqlstr = f"""
 SELECT * 
@@ -86,9 +89,9 @@ ORDER BY {face_name_str()}, {event_int_str()};"""
 
         rows = cursor.fetchall()
         assert len(rows) == 3
-        sue_r = (sue_str, event1, None)
-        yao3_r = (yao_str, event3, None)
-        yao9_r = (yao_str, event9, None)
+        sue_r = ("br00003", sue_str, event1, None)
+        yao3_r = ("br00003", yao_str, event3, None)
+        yao9_r = ("br00003", yao_str, event9, None)
         print(f"{rows[0]=}")
         assert rows[0] == sue_r
         assert rows[1] == yao3_r
@@ -164,10 +167,11 @@ ORDER BY {face_name_str()}, {event_int_str()};"""
 
         rows = cursor.fetchall()
         assert len(rows) == 4
-        bob_row = (bob_str, event3, None)
-        sue_row = (sue_str, event1, "invalid because of conflicting event_int")
-        yao1_row = (yao_str, event1, "invalid because of conflicting event_int")
-        yao9_row = (yao_str, event9, None)
+        invalid_str = "invalid because of conflicting event_int"
+        bob_row = ("br00003", bob_str, event3, None)
+        sue_row = ("br00003", sue_str, event1, invalid_str)
+        yao1_row = ("br00003", yao_str, event1, invalid_str)
+        yao9_row = ("br00003", yao_str, event9, None)
 
         assert rows[0] == bob_row
         assert rows[1] == sue_row
