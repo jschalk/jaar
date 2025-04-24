@@ -18,7 +18,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(
+def test_WorldUnit_sound_df_to_cochlea_raw_db_CreatesCochleaFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

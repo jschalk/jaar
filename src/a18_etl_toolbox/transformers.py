@@ -205,41 +205,6 @@ def etl_cochlea_raw_db_to_cochlea_raw_df(conn: sqlite3_Connection, cochlea_dir: 
             upsert_sheet(cochlea_path, "cochlea_raw", cochlea_raw_idea_df)
 
 
-def etl_sound_df_to_cochlea_raw_df(sound_dir: str, cochlea_dir: str):
-    transformer = SoundToCochleaTransformer(sound_dir, cochlea_dir)
-    transformer.transform()
-
-
-class SoundToCochleaTransformer:
-    def __init__(self, sound_dir: str, cochlea_dir: str):
-        self.sound_dir = sound_dir
-        self.cochlea_dir = cochlea_dir
-
-    def transform(self):
-        for idea_number, dfs in self._group_sound_data().items():
-            self._save_to_cochlea_raw(idea_number, dfs)
-
-    def _group_sound_data(self):
-        grouped_data = {}
-        for ref in get_all_idea_dataframes(self.sound_dir):
-            df = self._read_and_title_dataframe(ref)
-            grouped_data.setdefault(ref.idea_number, []).append(df)
-        return grouped_data
-
-    def _read_and_title_dataframe(self, ref: IdeaFileRef):
-        x_file_path = create_path(ref.file_dir, ref.filename)
-        df = pandas_read_excel(x_file_path, ref.sheet_name)
-        df["file_dir"] = ref.file_dir
-        df["filename"] = ref.filename
-        df["sheet_name"] = ref.sheet_name
-        return df
-
-    def _save_to_cochlea_raw(self, idea_number: str, dfs: list):
-        job_df = pandas_concat(dfs)
-        cochlea_path = create_path(self.cochlea_dir, f"{idea_number}.xlsx")
-        upsert_sheet(cochlea_path, "cochlea_raw", job_df)
-
-
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     existing_excel_idea_filepaths = []
     for idea_number in sorted(get_idea_numbers()):
