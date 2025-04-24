@@ -1,9 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a18_etl_toolbox.tran_path import (
-    YELL_EVENTS_FILENAME,
     YELL_PIDGIN_FILENAME,
     STANCE0001_FILENAME,
-    create_yell_events_path,
     create_yell_pidgin_path,
     create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path,
@@ -16,21 +14,8 @@ from src.a13_bud_listen_logic.examples.listen_env import get_listen_temp_env_dir
 
 def test_hub_path_constants_are_values():
     # ESTABLISH / WHEN / THEN
-    assert YELL_EVENTS_FILENAME == "events.xlsx"
     assert YELL_PIDGIN_FILENAME == "pidgin.xlsx"
     assert STANCE0001_FILENAME == "stance0001.xlsx"
-
-
-def test_create_yell_events_path_ReturnObj():
-    # ESTABLISH
-    x_yell_dir = get_listen_temp_env_dir()
-
-    # WHEN
-    gen_yell_event_path = create_yell_events_path(x_yell_dir)
-
-    # THEN
-    expected_yell_event_path = create_path(x_yell_dir, YELL_EVENTS_FILENAME)
-    assert gen_yell_event_path == expected_yell_event_path
 
 
 def test_create_yell_pidgin_path_ReturnObj():

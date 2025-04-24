@@ -1,7 +1,6 @@
 from src.a02_finance_toolboxs.deal import owner_name_str, deal_time_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_path import (
-    create_yell_events_path,
     create_yell_pidgin_path,
     create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path,
@@ -13,14 +12,6 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 
 LINUX_OS = platform_system() == "Linux"
-
-
-def test_create_yell_events_path_HasDocString():
-    # ESTABLISH
-    doc_str = create_yell_events_path(yell_dir="yell_dir")
-    doc_str = f"Returns path: {doc_str}"
-    # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_yell_events_path) == doc_str
 
 
 def test_create_yell_pidgin_path_HasDocString():

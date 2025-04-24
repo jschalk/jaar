@@ -71,10 +71,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_idea_into_dimen_raw_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
-from src.a18_etl_toolbox.tran_path import (
-    create_yell_events_path,
-    create_yell_pidgin_path,
-)
+from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
     create_fisc_tables,
@@ -123,7 +120,7 @@ MAPS_DIMENS = {
     "map_road": "RoadUnit",
 }
 
-class_types = {
+CLASS_TYPES = {
     "NameUnit": {
         "raw": "name_raw",
         "agg": "name_agg",
@@ -162,19 +159,19 @@ def get_class_type(pidgin_dimen: str) -> str:
 
 
 def get_sheet_raw_name(class_type: str) -> str:
-    return class_types[class_type]["raw"]
+    return CLASS_TYPES[class_type]["raw"]
 
 
 def get_sheet_agg_name(class_type: str) -> str:
-    return class_types[class_type]["agg"]
+    return CLASS_TYPES[class_type]["agg"]
 
 
 def get_otx_obj(class_type, x_row) -> str:
-    return x_row[class_types[class_type]["otx_obj"]]
+    return x_row[CLASS_TYPES[class_type]["otx_obj"]]
 
 
 def get_inx_obj(class_type, x_row) -> str:
-    return x_row[class_types[class_type]["inx_obj"]]
+    return x_row[CLASS_TYPES[class_type]["inx_obj"]]
 
 
 def etl_sound_df_to_yell_raw_db(conn: sqlite3_Connection, sound_dir: str):
@@ -373,11 +370,11 @@ def yell_agg_single_to_pidgin_raw(
     pidgin_dimen: str, legitimate_events: set[EventInt], yell_dir: str
 ):
     x_events = legitimate_events
-    transformer = YellAggToRawTransformer(yell_dir, pidgin_dimen, x_events)
+    transformer = YellAggToPidginRawTransformer(yell_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-class YellAggToRawTransformer:
+class YellAggToPidginRawTransformer:
     def __init__(
         self, yell_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
@@ -392,6 +389,7 @@ class YellAggToRawTransformer:
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
         pidgin_columns.insert(0, "src_idea")
+        # empty df with src_idea, face_name, event_int, idea_columns...
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
@@ -531,8 +529,8 @@ class PidginRawToAggTransformer:
 
 def etl_yell_pidgin_agg_to_otz_face_pidgin_agg(yell_dir: str, faces_dir: str):
     agg_pidgin = create_yell_pidgin_path(yell_dir)
-    for class_type in class_types.keys():
-        agg_sheet_name = class_types[class_type]["agg"]
+    for class_type in CLASS_TYPES.keys():
+        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
             split_excel_into_dirs(
                 input_file=agg_pidgin,
@@ -545,8 +543,8 @@ def etl_yell_pidgin_agg_to_otz_face_pidgin_agg(yell_dir: str, faces_dir: str):
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
     face_pidgin_path = create_yell_pidgin_path(face_dir)
-    for class_type in class_types.keys():
-        agg_sheet_name = class_types[class_type]["agg"]
+    for class_type in CLASS_TYPES.keys():
+        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
@@ -563,9 +561,9 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
     event_pidgin_path = create_yell_pidgin_path(event_pidgin_dir)
-    for class_type in class_types.keys():
-        agg_sheet_name = class_types[class_type]["agg"]
-        csv_filename = class_types[class_type]["csv_filename"]
+    for class_type in CLASS_TYPES.keys():
+        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
+        csv_filename = CLASS_TYPES[class_type]["csv_filename"]
         if sheet_exists(event_pidgin_path, agg_sheet_name):
             name_csv_path = create_path(event_pidgin_dir, csv_filename)
             name_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)

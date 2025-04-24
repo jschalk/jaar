@@ -1,14 +1,9 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a01_word_logic.road import OwnerName, TagUnit, FaceName, EventInt
 
-YELL_EVENTS_FILENAME = "events.xlsx"
+
 YELL_PIDGIN_FILENAME = "pidgin.xlsx"
 STANCE0001_FILENAME = "stance0001.xlsx"
-
-
-def create_yell_events_path(yell_dir: str) -> str:
-    """Returns path: yell_dir\\events.xlsx"""
-    return create_path(yell_dir, "events.xlsx")
 
 
 def create_yell_pidgin_path(yell_dir: str) -> str:
