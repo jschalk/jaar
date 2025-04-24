@@ -20,22 +20,22 @@ from src.a01_word_logic.road import (
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_df_to_cochlea_raw_db,
-    etl_cochlea_raw_db_to_cochlea_agg_db,
-    etl_cochlea_raw_db_to_cochlea_raw_df,
-    etl_cochlea_agg_db_to_cochlea_agg_df,
-    etl_cochlea_raw_db_to_cochlea_agg_events_db,
-    etl_cochlea_agg_events_db_to_event_dict,
-    etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
-    etl_cochlea_pidgin_raw_to_pidgin_agg,
-    etl_cochlea_agg_to_cochlea_pidgin_raw,
-    etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg,
+    etl_sound_df_to_yell_raw_db,
+    etl_yell_raw_db_to_yell_agg_db,
+    etl_yell_raw_db_to_yell_raw_df,
+    etl_yell_agg_db_to_yell_agg_df,
+    etl_yell_raw_db_to_yell_agg_events_db,
+    etl_yell_agg_events_db_to_event_dict,
+    etl_yell_agg_non_pidgin_ideas_to_yell_valid,
+    etl_yell_pidgin_raw_to_pidgin_agg,
+    etl_yell_agg_to_yell_pidgin_raw,
+    etl_yell_pidgin_agg_to_otz_face_pidgin_agg,
     etl_otz_face_pidgins_to_otz_event_pidgins,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_cochlea_ideas_to_otz_face_ideas,
+    etl_yell_ideas_to_otz_face_ideas,
     etl_otz_face_ideas_to_otz_event_otx_ideas,
     etl_otz_event_ideas_to_inz_events,
     etl_otz_inx_event_ideas_to_inz_faces,
@@ -79,7 +79,7 @@ class WorldUnit:
     _syntax_inz_dir: str = None
     _world_dir: str = None
     _sound_dir: str = None
-    _cochlea_dir: str = None
+    _yell_dir: str = None
     _fisc_mstr_dir: str = None
     _fiscunits: set[FiscTag] = None
     _events: dict[EventInt, FaceName] = None
@@ -109,43 +109,39 @@ class WorldUnit:
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
         self._syntax_inz_dir = create_path(self._world_dir, "syntax_inz")
-        self._cochlea_dir = create_path(self._world_dir, "cochlea")
+        self._yell_dir = create_path(self._world_dir, "yell")
         self._fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         set_dir(self._world_dir)
         set_dir(self._syntax_otz_dir)
         set_dir(self._syntax_inz_dir)
-        set_dir(self._cochlea_dir)
+        set_dir(self._yell_dir)
         set_dir(self._fisc_mstr_dir)
 
     def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
-    def sound_df_to_cochlea_raw_db(self, conn: sqlite3_Connection):
-        etl_sound_df_to_cochlea_raw_db(conn, self._sound_dir)
+    def sound_df_to_yell_raw_db(self, conn: sqlite3_Connection):
+        etl_sound_df_to_yell_raw_db(conn, self._sound_dir)
 
-    def cochlea_raw_db_to_cochlea_agg_df(
+    def yell_raw_db_to_yell_agg_df(
         self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
     ):
-        etl_cochlea_raw_db_to_cochlea_agg_db(cursor)
-        etl_cochlea_agg_db_to_cochlea_agg_df(conn, self._cochlea_dir)
+        etl_yell_raw_db_to_yell_agg_db(cursor)
+        etl_yell_agg_db_to_yell_agg_df(conn, self._yell_dir)
 
-    def cochlea_agg_non_pidgin_ideas_to_cochlea_valid(self):
-        etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
-            self._cochlea_dir, set(self._events.keys())
+    def yell_agg_non_pidgin_ideas_to_yell_valid(self):
+        etl_yell_agg_non_pidgin_ideas_to_yell_valid(
+            self._yell_dir, set(self._events.keys())
         )
 
-    def cochlea_agg_to_cochlea_pidgin_raw(self):
-        etl_cochlea_agg_to_cochlea_pidgin_raw(
-            set(self._events.keys()), self._cochlea_dir
-        )
+    def yell_agg_to_yell_pidgin_raw(self):
+        etl_yell_agg_to_yell_pidgin_raw(set(self._events.keys()), self._yell_dir)
 
-    def cochlea_pidgin_raw_to_pidgin_agg(self):
-        etl_cochlea_pidgin_raw_to_pidgin_agg(self._cochlea_dir)
+    def yell_pidgin_raw_to_pidgin_agg(self):
+        etl_yell_pidgin_raw_to_pidgin_agg(self._yell_dir)
 
-    def cochlea_pidgin_agg_to_otz_face_pidgin_agg(self):
-        etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(
-            self._cochlea_dir, self._syntax_otz_dir
-        )
+    def yell_pidgin_agg_to_otz_face_pidgin_agg(self):
+        etl_yell_pidgin_agg_to_otz_face_pidgin_agg(self._yell_dir, self._syntax_otz_dir)
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
@@ -162,8 +158,8 @@ class WorldUnit:
         etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._syntax_otz_dir)
         self._set_pidgin_events()
 
-    def cochlea_ideas_to_otz_face_ideas(self):
-        etl_cochlea_ideas_to_otz_face_ideas(self._cochlea_dir, self._syntax_otz_dir)
+    def yell_ideas_to_otz_face_ideas(self):
+        etl_yell_ideas_to_otz_face_ideas(self._yell_dir, self._syntax_otz_dir)
 
     def otz_face_ideas_to_otz_event_otx_ideas(self):
         etl_otz_face_ideas_to_otz_event_otx_ideas(self._syntax_otz_dir)
@@ -256,20 +252,20 @@ class WorldUnit:
 
             # collect excel file data into central location
             # grab all excel sheets that fit idea format
-            self.sound_df_to_cochlea_raw_db(db_conn)
+            self.sound_df_to_yell_raw_db(db_conn)
             # per idea brick filter to only non-conflicting idea data
-            self.cochlea_raw_db_to_cochlea_agg_df(db_conn, cursor)
+            self.yell_raw_db_to_yell_agg_df(db_conn, cursor)
 
             # identify all idea data that has conflicting face_name/event_int uniqueness
-            etl_cochlea_raw_db_to_cochlea_agg_events_db(cursor)
-            self._events = etl_cochlea_agg_events_db_to_event_dict(cursor)
+            etl_yell_raw_db_to_yell_agg_events_db(cursor)
+            self._events = etl_yell_agg_events_db_to_event_dict(cursor)
 
             # build pidgins
             # collect all pidgin data from all relevant valid idea bricks
-            self.cochlea_agg_to_cochlea_pidgin_raw()  # self._events.keys()
+            self.yell_agg_to_yell_pidgin_raw()  # self._events.keys()
             # per pidgin dimen filter to only non-conflicting pidgin data
-            self.cochlea_pidgin_raw_to_pidgin_agg()
-            self.cochlea_pidgin_agg_to_otz_face_pidgin_agg()
+            self.yell_pidgin_raw_to_pidgin_agg()
+            self.yell_pidgin_agg_to_otz_face_pidgin_agg()
             self.otz_face_pidgins_to_otz_event_pidgins()
             # per event create isolated pidgin.json
             self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
@@ -277,9 +273,9 @@ class WorldUnit:
             self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
 
             # translate all non-pidgin ideas by pidgins
-            # filtered by valid event_int get all non-pidgin cochlea idea bricks
-            self.cochlea_agg_non_pidgin_ideas_to_cochlea_valid()  # self._events.keys()
-            self.cochlea_ideas_to_otz_face_ideas()
+            # filtered by valid event_int get all non-pidgin yell idea bricks
+            self.yell_agg_non_pidgin_ideas_to_yell_valid()  # self._events.keys()
+            self.yell_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()
             self.otz_event_ideas_to_inz_events()  # self._pidgin_events
             self.otz_inx_event_ideas_to_inz_faces()
@@ -305,8 +301,8 @@ class WorldUnit:
             self.calc_fisc_deal_acct_mandate_net_ledgers()
 
             if store_tracing_files:
-                etl_cochlea_raw_db_to_cochlea_raw_df(db_conn, self._cochlea_dir)
-                # etl_cochlea_agg_db_to_cochlea_agg_df(db_conn, self._cochlea_dir)
+                etl_yell_raw_db_to_yell_raw_df(db_conn, self._yell_dir)
+                # etl_yell_agg_db_to_yell_agg_df(db_conn, self._yell_dir)
                 self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):

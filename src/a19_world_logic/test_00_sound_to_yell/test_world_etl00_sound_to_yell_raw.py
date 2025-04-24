@@ -7,7 +7,7 @@ from src.a00_data_toolboxs.db_toolbox import (
 from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic.idea_db_tool import upsert_sheet, cochlea_raw_str
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, yell_raw_str
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
     get_test_worlds_dir as worlds_dir,
@@ -18,7 +18,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_sound_df_to_cochlea_raw_db_CreatesCochleaFiles(
+def test_WorldUnit_sound_df_to_yell_raw_db_CreatesYellFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -33,7 +33,7 @@ def test_WorldUnit_sound_df_to_cochlea_raw_db_CreatesCochleaFiles(
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
-    cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+    yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -63,15 +63,15 @@ def test_WorldUnit_sound_df_to_cochlea_raw_db_CreatesCochleaFiles(
     upsert_sheet(sound_file_path, br00003_ex1_str, df1)
     upsert_sheet(sound_file_path, br00003_ex2_str, df2)
     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
-    assert os_path_exists(cochlea_file_path) is False
+    assert os_path_exists(yell_file_path) is False
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{cochlea_raw_str()}_br00003"
+        br00003_tablename = f"{yell_raw_str()}_br00003"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        fizz_world.sound_df_to_cochlea_raw_db(db_conn)
+        fizz_world.sound_df_to_yell_raw_db(db_conn)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)

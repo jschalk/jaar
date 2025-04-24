@@ -5,11 +5,11 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
     upsert_sheet,
-    cochlea_agg_str,
-    cochlea_valid_str,
+    yell_agg_str,
+    yell_valid_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
+    etl_yell_agg_non_pidgin_ideas_to_yell_valid,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas.testing import (
@@ -18,7 +18,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid_CreatesSheets_Scenario0(
+def test_etl_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -43,26 +43,24 @@ def test_etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid_CreatesSheets_Scenari
     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
-    cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
-    cochlea_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(cochlea_file_path, cochlea_agg_str(), cochlea_agg_df)
+    yell_dir = create_path(get_test_etl_dir(), "yell")
+    yell_file_path = create_path(yell_dir, "br00003.xlsx")
+    yell_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(yell_file_path, yell_agg_str(), yell_agg_df)
     legitimate_events = {event1, event9}
-    assert sheet_exists(cochlea_file_path, cochlea_valid_str()) is False
+    assert sheet_exists(yell_file_path, yell_valid_str()) is False
 
     # WHEN
-    etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(cochlea_dir, legitimate_events)
+    etl_yell_agg_non_pidgin_ideas_to_yell_valid(yell_dir, legitimate_events)
 
     # THEN
-    assert sheet_exists(cochlea_file_path, cochlea_valid_str())
-    gen_cochlea_valid_df = pandas_read_excel(
-        cochlea_file_path, sheet_name=cochlea_valid_str()
-    )
-    print(f"{gen_cochlea_valid_df.columns=}")
-    example_cochlea_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_cochlea_valid_df.columns) == len(example_cochlea_valid_df.columns)
-    assert list(gen_cochlea_valid_df.columns) == list(example_cochlea_valid_df.columns)
-    assert len(gen_cochlea_valid_df) > 0
-    assert len(gen_cochlea_valid_df) == 3
-    assert len(gen_cochlea_valid_df) == len(example_cochlea_valid_df)
-    pandas_assert_frame_equal(gen_cochlea_valid_df, example_cochlea_valid_df)
+    assert sheet_exists(yell_file_path, yell_valid_str())
+    gen_yell_valid_df = pandas_read_excel(yell_file_path, sheet_name=yell_valid_str())
+    print(f"{gen_yell_valid_df.columns=}")
+    example_yell_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_yell_valid_df.columns) == len(example_yell_valid_df.columns)
+    assert list(gen_yell_valid_df.columns) == list(example_yell_valid_df.columns)
+    assert len(gen_yell_valid_df) > 0
+    assert len(gen_yell_valid_df) == 3
+    assert len(gen_yell_valid_df) == len(example_yell_valid_df)
+    pandas_assert_frame_equal(gen_yell_valid_df, example_yell_valid_df)

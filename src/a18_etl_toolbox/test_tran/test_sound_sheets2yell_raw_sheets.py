@@ -10,11 +10,11 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
-    cochlea_raw_str,
+    yell_raw_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_df_to_cochlea_raw_db,
-    etl_cochlea_raw_db_to_cochlea_raw_df,
+    etl_sound_df_to_yell_raw_db,
+    etl_yell_raw_db_to_yell_raw_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -22,7 +22,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_sound_df_to_cochlea_raw_db_PopulatesCochleaTables(env_dir_setup_cleanup):
+def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -33,7 +33,7 @@ def test_etl_sound_df_to_cochlea_raw_db_PopulatesCochleaTables(env_dir_setup_cle
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     sound_dir = create_path(get_test_etl_dir(), "sound")
-    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
+    yell_dir = create_path(get_test_etl_dir(), "yell")
     sound_file_path = create_path(sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
@@ -66,11 +66,11 @@ def test_etl_sound_df_to_cochlea_raw_db_PopulatesCochleaTables(env_dir_setup_cle
     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{cochlea_raw_str()}_br00003"
+        br00003_tablename = f"{yell_raw_str()}_br00003"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        etl_sound_df_to_cochlea_raw_db(db_conn, sound_dir)
+        etl_sound_df_to_yell_raw_db(db_conn, sound_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -109,19 +109,19 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         assert rows[3] == row3
         assert rows[4] == row4
 
-        cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
-        assert os_path_exists(cochlea_file_path) is False
+        yell_file_path = create_path(yell_dir, "br00003.xlsx")
+        assert os_path_exists(yell_file_path) is False
 
         # WHEN
-        etl_cochlea_raw_db_to_cochlea_raw_df(db_conn, cochlea_dir)
+        etl_yell_raw_db_to_yell_raw_df(db_conn, yell_dir)
 
         # THEN
-        print(f"{cochlea_file_path=}")
-        assert os_path_exists(cochlea_file_path)
-        x_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
+        print(f"{yell_file_path=}")
+        assert os_path_exists(yell_file_path)
+        x_df = pandas_read_excel(yell_file_path, sheet_name=yell_raw_str())
         assert set(idea_columns).issubset(set(x_df.columns))
         assert file_dir_str in set(x_df.columns)
         assert filename_str in set(x_df.columns)
         assert sheet_name_str in set(x_df.columns)
         assert len(x_df) == 5
-        assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str()]
+        assert get_sheet_names(yell_file_path) == [yell_raw_str()]

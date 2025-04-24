@@ -7,15 +7,15 @@ from src.a00_data_toolboxs.db_toolbox import (
 from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic.idea_db_tool import cochlea_agg_str
+from src.a17_idea_logic.idea_db_tool import yell_agg_str
 from src.a18_etl_toolbox.transformers import (
-    etl_cochlea_raw_db_to_cochlea_agg_events_db,
-    etl_cochlea_agg_events_db_to_event_dict,
+    etl_yell_raw_db_to_yell_agg_events_db,
+    etl_yell_agg_events_db_to_event_dict,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_PopulatesTables_Scenario0():
+def test_etl_yell_agg_db_to_yell_agg_events_db_PopulatesTables_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -27,7 +27,7 @@ def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_PopulatesTables_Scenario0()
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    agg_br00003_tablename = f"{cochlea_agg_str()}_br00003"
+    agg_br00003_tablename = f"{yell_agg_str()}_br00003"
     agg_br00003_columns = [
         face_name_str(),
         event_int_str(),
@@ -64,23 +64,23 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        cochlea_events_tablename = "cochlea_agg_events"
+        yell_events_tablename = "yell_agg_events"
         assert get_row_count(cursor, agg_br00003_tablename) == 4
-        assert not db_table_exists(cursor, cochlea_events_tablename)
+        assert not db_table_exists(cursor, yell_events_tablename)
 
         # WHEN
-        etl_cochlea_raw_db_to_cochlea_agg_events_db(cursor)
+        etl_yell_raw_db_to_yell_agg_events_db(cursor)
 
         # THEN
-        assert db_table_exists(cursor, cochlea_events_tablename)
-        cochlea_events_table_cols = get_table_columns(cursor, cochlea_events_tablename)
-        assert face_name_str() in set(cochlea_events_table_cols)
-        assert event_int_str() in set(cochlea_events_table_cols)
-        assert "error_message" in set(cochlea_events_table_cols)
-        assert get_row_count(cursor, cochlea_events_tablename) == 3
+        assert db_table_exists(cursor, yell_events_tablename)
+        yell_events_table_cols = get_table_columns(cursor, yell_events_tablename)
+        assert face_name_str() in set(yell_events_table_cols)
+        assert event_int_str() in set(yell_events_table_cols)
+        assert "error_message" in set(yell_events_table_cols)
+        assert get_row_count(cursor, yell_events_tablename) == 3
         select_agg_sqlstr = f"""
 SELECT * 
-FROM {cochlea_events_tablename} 
+FROM {yell_events_tablename} 
 ORDER BY {face_name_str()}, {event_int_str()};"""
         cursor.execute(select_agg_sqlstr)
 
@@ -95,7 +95,7 @@ ORDER BY {face_name_str()}, {event_int_str()};"""
         assert rows[2] == yao9_r
 
 
-def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_PopulatesTables_Scenario1():
+def test_etl_yell_agg_db_to_yell_agg_events_db_PopulatesTables_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -108,7 +108,7 @@ def test_etl_cochlea_agg_db_to_cochlea_agg_events_db_PopulatesTables_Scenario1()
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    agg_br00003_tablename = f"{cochlea_agg_str()}_br00003"
+    agg_br00003_tablename = f"{yell_agg_str()}_br00003"
     agg_br00003_columns = [
         face_name_str(),
         event_int_str(),
@@ -146,19 +146,19 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        cochlea_events_tablename = "cochlea_agg_events"
+        yell_events_tablename = "yell_agg_events"
         assert get_row_count(cursor, agg_br00003_tablename) == 5
-        assert not db_table_exists(cursor, cochlea_events_tablename)
+        assert not db_table_exists(cursor, yell_events_tablename)
 
         # WHEN
-        etl_cochlea_raw_db_to_cochlea_agg_events_db(cursor)
+        etl_yell_raw_db_to_yell_agg_events_db(cursor)
 
         # THEN
-        assert db_table_exists(cursor, cochlea_events_tablename)
-        assert get_row_count(cursor, cochlea_events_tablename) == 4
+        assert db_table_exists(cursor, yell_events_tablename)
+        assert get_row_count(cursor, yell_events_tablename) == 4
         select_agg_sqlstr = f"""
 SELECT * 
-FROM {cochlea_events_tablename} 
+FROM {yell_events_tablename} 
 ORDER BY {face_name_str()}, {event_int_str()};"""
         cursor.execute(select_agg_sqlstr)
 
@@ -175,7 +175,7 @@ ORDER BY {face_name_str()}, {event_int_str()};"""
         assert rows[3] == yao9_row
 
 
-def test_etl_cochlea_agg_events_db_to_event_dict_ReturnsObj_Scenario0():
+def test_etl_yell_agg_events_db_to_event_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -191,7 +191,7 @@ def test_etl_cochlea_agg_events_db_to_event_dict_ReturnsObj_Scenario0():
     }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        agg_events_tablename = "cochlea_agg_events"
+        agg_events_tablename = "yell_agg_events"
         create_table_from_columns(cursor, agg_events_tablename, agg_columns, agg_types)
         insert_into_clause = f"""
 INSERT INTO {agg_events_tablename} ({face_name_str()}, {event_int_str()}, error_message)
@@ -208,7 +208,7 @@ VALUES
         assert get_row_count(cursor, agg_events_tablename) == 6
 
         # WHEN
-        events_dict = etl_cochlea_agg_events_db_to_event_dict(cursor)
+        events_dict = etl_yell_agg_events_db_to_event_dict(cursor)
 
         # THEN
         assert events_dict == {event3: bob_str, event9: yao_str}
