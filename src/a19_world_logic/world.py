@@ -25,6 +25,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_yell_raw_db_to_yell_raw_df,
     etl_yell_agg_db_to_yell_agg_df,
     etl_yell_raw_db_to_yell_agg_events_db,
+    etl_yell_agg_events_db_to_yell_valid_events_db,
     etl_yell_agg_events_db_to_event_dict,
     etl_yell_agg_non_pidgin_ideas_to_yell_valid,
     etl_yell_pidgin_raw_df_to_pidgin_agg_df,
@@ -260,6 +261,7 @@ class WorldUnit:
 
             # identify all idea data that has conflicting face_name/event_int uniqueness
             etl_yell_raw_db_to_yell_agg_events_db(cursor)
+            etl_yell_agg_events_db_to_yell_valid_events_db(cursor)
             self._events = etl_yell_agg_events_db_to_event_dict(cursor)
 
             # build pidgins

@@ -307,7 +307,6 @@ def etl_yell_raw_db_to_yell_agg_events_db(conn_or_cursor: sqlite3_Cursor):
     for agg_tablename in get_db_tables(conn_or_cursor):
         if agg_tablename in yell_agg_tables:
             idea_number = yell_agg_tables.get(agg_tablename)
-            print(f"{idea_number=}")
             insert_from_select_sqlstr = f"""
 INSERT INTO {yell_events_tablename} (idea_number, face_name, event_int)
 SELECT '{idea_number}', face_name, event_int 
@@ -331,14 +330,29 @@ WHERE event_int IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
+def etl_yell_agg_events_db_to_yell_valid_events_db(conn_or_cursor: sqlite3_Cursor):
+    valid_events_tablename = "yell_valid_events"
+    if not db_table_exists(conn_or_cursor, valid_events_tablename):
+        yell_events_columns = ["face_name", "event_int"]
+        create_idea_sorted_table(
+            conn_or_cursor, valid_events_tablename, yell_events_columns
+        )
+    insert_select_sqlstr = f"""
+INSERT INTO {valid_events_tablename} (face_name, event_int)
+SELECT face_name, event_int 
+FROM yell_agg_events
+WHERE error_message IS NULL
+;
+"""
+    conn_or_cursor.execute(insert_select_sqlstr)
+
+
 def etl_yell_agg_events_db_to_event_dict(
     conn_or_cursor: sqlite3_Cursor,
 ) -> dict[EventInt, FaceName]:
     select_sqlstr = """
-SELECT event_int, MAX(face_name) 
-FROM yell_agg_events
-WHERE error_message IS NULL
-GROUP BY event_int
+SELECT event_int, face_name 
+FROM yell_valid_events
 ;
 """
     conn_or_cursor.execute(select_sqlstr)
