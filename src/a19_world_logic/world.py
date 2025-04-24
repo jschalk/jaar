@@ -123,7 +123,7 @@ class WorldUnit:
     def sound_df_to_cochlea_raw_db(self, conn: sqlite3_Connection):
         etl_sound_df_to_cochlea_raw_db(conn, self._sound_dir)
 
-    def cochlea_raw_df_to_cochlea_agg_df(
+    def cochlea_raw_db_to_cochlea_agg_df(
         self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
     ):
         etl_cochlea_raw_db_to_cochlea_agg_db(cursor)
@@ -258,7 +258,7 @@ class WorldUnit:
             # grab all excel sheets that fit idea format
             self.sound_df_to_cochlea_raw_db(db_conn)
             # per idea brick filter to only non-conflicting idea data
-            self.cochlea_raw_df_to_cochlea_agg_df(db_conn, cursor)
+            self.cochlea_raw_db_to_cochlea_agg_df(db_conn, cursor)
 
             # identify all idea data that has conflicting face_name/event_int uniqueness
             etl_cochlea_raw_db_to_cochlea_agg_events_db(cursor)

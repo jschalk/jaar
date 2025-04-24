@@ -107,7 +107,7 @@ def test_WorldUnit_cochlea_agg_non_pidgin_ideas_to_cochlea_valid_CreatesSheets_S
 #     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
 #     upsert_sheet(sound_file_path, "example1_br00003", df1)
-#     etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
+#     etl_cochlea_raw_db_to_cochlea_agg_df(cochlea_dir)
 
 #     # WHEN
 #     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(cochlea_dir)

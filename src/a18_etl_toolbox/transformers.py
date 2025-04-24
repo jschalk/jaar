@@ -218,7 +218,7 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir):
+def etl_cochlea_raw_db_to_cochlea_agg_df(cochlea_dir):
     for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
         cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
         cochlea_raw_df = pandas_read_excel(cochlea_idea_path, "cochlea_raw")
