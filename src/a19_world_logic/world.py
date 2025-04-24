@@ -27,12 +27,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_cochlea_raw_db_to_cochlea_agg_events_db,
     etl_cochlea_agg_events_db_to_event_dict,
     etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid,
-    etl_cochlea_agg_df_to_cochlea_agg_events_df,
-    etl_cochlea_events_to_events_log,
     etl_cochlea_pidgin_raw_to_pidgin_agg,
     etl_cochlea_agg_to_cochlea_pidgin_raw,
-    etl_cochlea_events_log_to_cochlea_events_agg,
-    etl_events_agg_file_to_events_dict,
     etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg,
     etl_otz_face_pidgins_to_otz_event_pidgins,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
@@ -137,18 +133,6 @@ class WorldUnit:
         etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
             self._cochlea_dir, set(self._events.keys())
         )
-
-    def cochlea_agg_to_cochlea_agg_events(self):
-        etl_cochlea_agg_df_to_cochlea_agg_events_df(self._cochlea_dir)
-
-    def cochlea_events_to_events_log(self):
-        etl_cochlea_events_to_events_log(self._cochlea_dir)
-
-    def cochlea_events_log_to_cochlea_events_agg(self):
-        etl_cochlea_events_log_to_cochlea_events_agg(self._cochlea_dir)
-
-    def events_agg_file_to_events_dict(self):
-        self._events = etl_events_agg_file_to_events_dict(self._cochlea_dir)
 
     def cochlea_agg_to_cochlea_pidgin_raw(self):
         etl_cochlea_agg_to_cochlea_pidgin_raw(
@@ -279,10 +263,6 @@ class WorldUnit:
             # identify all idea data that has conflicting face_name/event_int uniqueness
             etl_cochlea_raw_db_to_cochlea_agg_events_db(cursor)
             self._events = etl_cochlea_agg_events_db_to_event_dict(cursor)
-            # self.cochlea_agg_to_cochlea_agg_events()
-            # self.cochlea_events_to_events_log()
-            # self.cochlea_events_log_to_cochlea_events_agg()
-            # self.events_agg_file_to_events_dict()  # populates self._events
 
             # build pidgins
             # collect all pidgin data from all relevant valid idea bricks
