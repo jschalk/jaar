@@ -99,7 +99,6 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
         raw_cols = set(x_config.get("jkeys").keys())
         raw_cols.update(set(x_config.get("jvalues").keys()))
         raw_cols.add("idea_number")
-        raw_cols.add("error_message")
         raw_cols = get_default_sorted_list(raw_cols)
         ex_raw_sqlstr = get_create_table_sqlstr(raw_table, raw_cols, sqlite_types)
         raw_create_sqlstr = create_table_sqlstrs.get(raw_table)
@@ -202,16 +201,40 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 
         print(f"{pidnam_raw_columns=}")
         print(f"{pidnam_agg_columns=}")
-        assert len(pidnam_raw_columns) == 9
+        assert "error_message" not in pidnam_raw_columns
+        assert "error_message" in pidnam_agg_columns
+        assert "error_message" in pidnam_val_columns
+        assert "error_message" not in pidtag_raw_columns
+        assert "error_message" in pidtag_agg_columns
+        assert "error_message" in pidtag_val_columns
+        assert "error_message" not in pidroa_raw_columns
+        assert "error_message" in pidroa_agg_columns
+        assert "error_message" in pidroa_val_columns
+        assert "error_message" not in pidlab_raw_columns
+        assert "error_message" in pidlab_agg_columns
+        assert "error_message" in pidlab_val_columns
+        assert idea_number_str() in pidnam_raw_columns
+        assert idea_number_str() not in pidnam_agg_columns
+        assert idea_number_str() not in pidnam_val_columns
+        assert idea_number_str() in pidtag_raw_columns
+        assert idea_number_str() not in pidtag_agg_columns
+        assert idea_number_str() not in pidtag_val_columns
+        assert idea_number_str() in pidroa_raw_columns
+        assert idea_number_str() not in pidroa_agg_columns
+        assert idea_number_str() not in pidroa_val_columns
+        assert idea_number_str() in pidlab_raw_columns
+        assert idea_number_str() not in pidlab_agg_columns
+        assert idea_number_str() not in pidlab_val_columns
+        assert len(pidnam_raw_columns) == 8
         assert len(pidnam_agg_columns) == 8
         assert len(pidnam_val_columns) == 8
-        assert len(pidtag_raw_columns) == 9
+        assert len(pidtag_raw_columns) == 8
         assert len(pidtag_agg_columns) == 8
         assert len(pidtag_val_columns) == 8
-        assert len(pidroa_raw_columns) == 9
+        assert len(pidroa_raw_columns) == 8
         assert len(pidroa_agg_columns) == 8
         assert len(pidroa_val_columns) == 8
-        assert len(pidlab_raw_columns) == 9
+        assert len(pidlab_raw_columns) == 8
         assert len(pidlab_agg_columns) == 8
         assert len(pidlab_val_columns) == 8
 

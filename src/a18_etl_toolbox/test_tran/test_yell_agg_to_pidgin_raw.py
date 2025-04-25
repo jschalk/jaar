@@ -651,11 +651,11 @@ def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
         assert len(roa_rows) == 7
         br000115_str = "br00115"
         br000042_str = "br00042"
-        row0 = (br000042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
-        row1 = (br000042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
-        row2 = (br000042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
-        row3 = (br000115_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
-        row4 = (br000115_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
+        row0 = (br000042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+        row1 = (br000042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+        row2 = (br000042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+        row3 = (br000115_str, sue_str, event1, bob_str, bob_inx, None, None, None)
+        row4 = (br000115_str, sue_str, event1, yao_str, yao_inx, None, None, None)
         print(f"{lab_rows[4]=}")
         print(f"   {row4=}")
         assert lab_rows[0] == row0
