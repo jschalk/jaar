@@ -29,7 +29,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario0_CreatesEmptyFileBecauseOfConf
     name_agg_str = "name_agg"
     colon_str = ":"
     slash_str = "/"
-    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     bx = "br00xxx"
     e1_name0 = [bx, sue_str, event7, yao_str, yao_inx, None, colon_str, None]
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, slash_str, None]
@@ -49,7 +49,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario0_CreatesEmptyFileBecauseOfConf
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_agg_str)
     gen_name_agg_df = pandas_read_excel(pidgin_path, sheet_name=name_agg_str)
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     assert list(gen_name_agg_df.columns) == name_agg_columns
     assert len(gen_name_agg_df) == 0
     e1_name_agg_df = DataFrame([], columns=name_agg_columns)
@@ -68,7 +68,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario1_CreatesFileFromSingleIdea(
     event7 = 7
     name_raw_str = "name_raw"
     name_agg_str = "name_agg"
-    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     bx = "br00xxx"
     e1_name0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
@@ -89,7 +89,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario1_CreatesFileFromSingleIdea(
     assert sheet_exists(pidgin_path, name_agg_str)
     gen_name_agg_df = pandas_read_excel(pidgin_path, sheet_name=name_agg_str)
     print(f"{gen_name_agg_df=}")
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     assert list(gen_name_agg_df.columns) == name_agg_columns
     assert len(gen_name_agg_df) == 2
     x_nan = float("nan")
@@ -112,7 +112,7 @@ def test_etl_pidgin_label_raw_to_label_agg_Scenario0_CreatesFileFromSingleIdea(
     event7 = 7
     label_raw_str = "label_raw"
     label_agg_str = "label_agg"
-    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     bx = "br00xxx"
     e1_label0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
     e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
@@ -133,7 +133,7 @@ def test_etl_pidgin_label_raw_to_label_agg_Scenario0_CreatesFileFromSingleIdea(
     assert sheet_exists(pidgin_path, label_agg_str)
     gen_label_agg_df = pandas_read_excel(pidgin_path, sheet_name=label_agg_str)
     print(f"{gen_label_agg_df=}")
-    label_agg_columns = PidginPrimeColumns().map_label_agg_columns
+    label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
     assert list(gen_label_agg_df.columns) == label_agg_columns
     assert len(gen_label_agg_df) == 2
     x_nan = float("nan")
@@ -156,7 +156,7 @@ def test_etl_pidgin_road_raw_to_road_agg_Scenario0_CreatesFileFromSingleIdea(
     event7 = 7
     road_raw_str = "road_raw"
     road_agg_str = "road_agg"
-    road_raw_columns = PidginPrimeColumns().map_road_raw_columns
+    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     bx = "br00xxx"
     e1_road0 = [bx, sue_str, event7, casa_otx, casa_inx, None, None, None]
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
@@ -177,7 +177,7 @@ def test_etl_pidgin_road_raw_to_road_agg_Scenario0_CreatesFileFromSingleIdea(
     assert sheet_exists(pidgin_path, road_agg_str)
     gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
     print(f"{gen_road_agg_df=}")
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     assert list(gen_road_agg_df.columns) == road_agg_columns
     assert len(gen_road_agg_df) == 2
     x_nan = float("nan")
@@ -200,7 +200,7 @@ def test_etl_pidgin_tag_raw_to_tag_agg_Scenario0_CreatesFileFromSingleIdea(
     event7 = 7
     tag_raw_str = "tag_raw"
     tag_agg_str = "tag_agg"
-    tag_raw_columns = PidginPrimeColumns().map_tag_raw_columns
+    tag_raw_columns = PidginPrimeColumns().pidgin_tag_raw_columns
     bx = "br00xxx"
     e1_tag0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
     e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
@@ -221,7 +221,7 @@ def test_etl_pidgin_tag_raw_to_tag_agg_Scenario0_CreatesFileFromSingleIdea(
     assert sheet_exists(pidgin_path, tag_agg_str)
     gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
     print(f"{gen_tag_agg_df=}")
-    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     assert list(gen_tag_agg_df.columns) == tag_agg_columns
     assert len(gen_tag_agg_df) == 2
     x_nan = float("nan")
@@ -244,7 +244,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     event7 = 7
     name_raw_str = "name_raw"
     name_agg_str = "name_agg"
-    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     bx = "br00xxx"
     e1_name0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
@@ -258,7 +258,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     event7 = 7
     label_raw_str = "label_raw"
     label_agg_str = "label_agg"
-    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     bx = "br00xxx"
     e1_label0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
     e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
@@ -272,7 +272,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     event7 = 7
     road_raw_str = "road_raw"
     road_agg_str = "road_agg"
-    road_raw_columns = PidginPrimeColumns().map_road_raw_columns
+    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     bx = "br00xxx"
     e1_road0 = [bx, sue_str, event7, casa_otx, casa_inx, None, None, None]
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
@@ -286,7 +286,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     event7 = 7
     tag_raw_str = "tag_raw"
     tag_agg_str = "tag_agg"
-    tag_raw_columns = PidginPrimeColumns().map_tag_raw_columns
+    tag_raw_columns = PidginPrimeColumns().pidgin_tag_raw_columns
     bx = "br00xxx"
     e1_tag0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
     e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
@@ -323,7 +323,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
     gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
 
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     assert list(gen_name_agg_df.columns) == name_agg_columns
     assert len(gen_name_agg_df) == 2
     x_nan = float("nan")
@@ -332,7 +332,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     e1_name_rows = [e1_name0, e1_name1]
     e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
-    label_agg_columns = PidginPrimeColumns().map_label_agg_columns
+    label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
     assert list(gen_label_agg_df.columns) == label_agg_columns
     assert len(gen_label_agg_df) == 2
     e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
@@ -340,7 +340,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     e1_label_rows = [e1_label0, e1_label1]
     e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     assert list(gen_road_agg_df.columns) == road_agg_columns
     assert len(gen_road_agg_df) == 2
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
@@ -348,7 +348,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
 
-    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     assert list(gen_tag_agg_df.columns) == tag_agg_columns
     assert len(gen_tag_agg_df) == 2
     e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]

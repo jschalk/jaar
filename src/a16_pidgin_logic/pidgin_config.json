@@ -1,5 +1,5 @@
 {
-    "map_name": {
+    "pidgin_name": {
         "jkeys": {
             "otx_name": {}
         },
@@ -10,7 +10,7 @@
             "unknown_word": {}
         }
     },
-    "map_label": {
+    "pidgin_label": {
         "jkeys": {
             "otx_label": {}
         },
@@ -21,7 +21,7 @@
             "unknown_word": {}
         }
     },
-    "map_tag": {
+    "pidgin_tag": {
         "jkeys": {
             "otx_tag": {}
         },
@@ -32,7 +32,7 @@
             "unknown_word": {}
         }
     },
-    "map_road": {
+    "pidgin_road": {
         "jkeys": {
             "otx_road": {}
         },

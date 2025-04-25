@@ -12,7 +12,7 @@ from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def get_map_name_dt_columns() -> list[str]:
+def get_pidgin_name_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
@@ -24,7 +24,7 @@ def get_map_name_dt_columns() -> list[str]:
     ]
 
 
-def get_map_label_dt_columns() -> list[str]:
+def get_pidgin_label_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
@@ -36,7 +36,7 @@ def get_map_label_dt_columns() -> list[str]:
     ]
 
 
-def get_map_tag_dt_columns() -> list[str]:
+def get_pidgin_tag_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
@@ -48,7 +48,7 @@ def get_map_tag_dt_columns() -> list[str]:
     ]
 
 
-def get_map_road_dt_columns() -> list[str]:
+def get_pidgin_road_dt_columns() -> list[str]:
     return [
         "face_name",
         "event_int",
@@ -60,7 +60,7 @@ def get_map_road_dt_columns() -> list[str]:
     ]
 
 
-def create_map_name_dt(x_map: NameMap) -> DataFrame:
+def create_pidgin_name_dt(x_map: NameMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -73,10 +73,10 @@ def create_map_name_dt(x_map: NameMap) -> DataFrame:
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_name_dt_columns())
+    return DataFrame(x_rows_list, columns=get_pidgin_name_dt_columns())
 
 
-def create_map_label_dt(x_map: LabelMap) -> DataFrame:
+def create_pidgin_label_dt(x_map: LabelMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -89,10 +89,10 @@ def create_map_label_dt(x_map: LabelMap) -> DataFrame:
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_label_dt_columns())
+    return DataFrame(x_rows_list, columns=get_pidgin_label_dt_columns())
 
 
-def create_map_tag_dt(x_map: TagMap) -> DataFrame:
+def create_pidgin_tag_dt(x_map: TagMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -105,10 +105,10 @@ def create_map_tag_dt(x_map: TagMap) -> DataFrame:
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_tag_dt_columns())
+    return DataFrame(x_rows_list, columns=get_pidgin_tag_dt_columns())
 
 
-def create_map_road_dt(x_map: RoadMap) -> DataFrame:
+def create_pidgin_road_dt(x_map: RoadMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -121,33 +121,33 @@ def create_map_road_dt(x_map: RoadMap) -> DataFrame:
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_map_road_dt_columns())
+    return DataFrame(x_rows_list, columns=get_pidgin_road_dt_columns())
 
 
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
-    _save_map_name_csv(x_dir, x_pidginunit.namemap)
-    _save_map_label_csv(x_dir, x_pidginunit.labelmap)
-    _save_map_tag_csv(x_dir, x_pidginunit.tagmap)
-    _save_map_road_csv(x_dir, x_pidginunit.roadmap)
+    _save_pidgin_name_csv(x_dir, x_pidginunit.namemap)
+    _save_pidgin_label_csv(x_dir, x_pidginunit.labelmap)
+    _save_pidgin_tag_csv(x_dir, x_pidginunit.tagmap)
+    _save_pidgin_road_csv(x_dir, x_pidginunit.roadmap)
 
 
-def _save_map_name_csv(x_dir: str, namemap: NameMap):
-    x_dt = create_map_name_dt(namemap)
+def _save_pidgin_name_csv(x_dir: str, namemap: NameMap):
+    x_dt = create_pidgin_name_dt(namemap)
     save_file(x_dir, "name.csv", get_ordered_csv(x_dt))
 
 
-def _save_map_label_csv(x_dir: str, labelmap: LabelMap):
-    x_dt = create_map_label_dt(labelmap)
+def _save_pidgin_label_csv(x_dir: str, labelmap: LabelMap):
+    x_dt = create_pidgin_label_dt(labelmap)
     save_file(x_dir, "label.csv", get_ordered_csv(x_dt))
 
 
-def _save_map_tag_csv(x_dir: str, tagmap: TagMap):
-    x_dt = create_map_tag_dt(tagmap)
+def _save_pidgin_tag_csv(x_dir: str, tagmap: TagMap):
+    x_dt = create_pidgin_tag_dt(tagmap)
     save_file(x_dir, "tag.csv", get_ordered_csv(x_dt))
 
 
-def _save_map_road_csv(x_dir: str, roadmap: RoadMap):
-    x_dt = create_map_road_dt(roadmap)
+def _save_pidgin_road_csv(x_dir: str, roadmap: RoadMap):
+    x_dt = create_pidgin_road_dt(roadmap)
     save_file(x_dir, "road.csv", get_ordered_csv(x_dt))
 
 

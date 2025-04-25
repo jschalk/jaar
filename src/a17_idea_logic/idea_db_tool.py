@@ -176,10 +176,10 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 
 
 def _get_pidgen_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_dimen_ref().get("map_name"))
-    idea_numbers.update(set(get_idea_dimen_ref().get("map_label")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("map_tag")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("map_road")))
+    idea_numbers = set(get_idea_dimen_ref().get("pidgin_name"))
+    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_label")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_tag")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_road")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 

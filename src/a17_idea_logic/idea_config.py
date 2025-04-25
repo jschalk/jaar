@@ -469,20 +469,20 @@ def idea_format_00040_map_otx2inx_v0_0_0() -> str:
     return "idea_format_00040_map_otx2inx_v0_0_0"
 
 
-def idea_format_00042_map_label_v0_0_0() -> str:
-    return "idea_format_00042_map_label_v0_0_0"
+def idea_format_00042_pidgin_label_v0_0_0() -> str:
+    return "idea_format_00042_pidgin_label_v0_0_0"
 
 
-def idea_format_00043_map_name_v0_0_0() -> str:
-    return "idea_format_00043_map_name_v0_0_0"
+def idea_format_00043_pidgin_name_v0_0_0() -> str:
+    return "idea_format_00043_pidgin_name_v0_0_0"
 
 
-def idea_format_00044_map_tag_v0_0_0() -> str:
-    return "idea_format_00044_map_tag_v0_0_0"
+def idea_format_00044_pidgin_tag_v0_0_0() -> str:
+    return "idea_format_00044_pidgin_tag_v0_0_0"
 
 
-def idea_format_00045_map_road_v0_0_0() -> str:
-    return "idea_format_00045_map_road_v0_0_0"
+def idea_format_00045_pidgin_road_v0_0_0() -> str:
+    return "idea_format_00045_pidgin_road_v0_0_0"
 
 
 def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
@@ -569,10 +569,10 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00028_bud_itemunit_v0_0_0(),
         idea_format_00029_budunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
-        idea_format_00042_map_label_v0_0_0(),
-        idea_format_00043_map_name_v0_0_0(),
-        idea_format_00044_map_tag_v0_0_0(),
-        idea_format_00045_map_road_v0_0_0(),
+        idea_format_00042_pidgin_label_v0_0_0(),
+        idea_format_00043_pidgin_name_v0_0_0(),
+        idea_format_00044_pidgin_tag_v0_0_0(),
+        idea_format_00045_pidgin_road_v0_0_0(),
         idea_format_00050_delete_bud_acct_membership_v0_0_0(),
         idea_format_00051_delete_bud_acctunit_v0_0_0(),
         idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
@@ -666,10 +666,10 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "fisc_tag,owner_name,parent_road,item_tag,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
         "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
         "fisc_tag,owner_name,parent_road,item_tag,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
-        "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word": idea_format_00042_map_label_v0_0_0(),
-        "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": idea_format_00043_map_name_v0_0_0(),
-        "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word": idea_format_00044_map_tag_v0_0_0(),
-        "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word": idea_format_00045_map_road_v0_0_0(),
+        "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word": idea_format_00042_pidgin_label_v0_0_0(),
+        "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": idea_format_00043_pidgin_name_v0_0_0(),
+        "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word": idea_format_00044_pidgin_tag_v0_0_0(),
+        "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word": idea_format_00045_pidgin_road_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
         "fisc_tag,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
         "fisc_tag,owner_name,road,awardee_title_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
@@ -728,8 +728,8 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         "bud_item_reason_premiseunit": ["br00026", "br00056"],
         "bud_item_reasonunit": ["br00027", "br00057"],
         "budunit": ["br00029", "br00059"],
-        "map_label": ["br00042", "br00115"],
-        "map_name": ["br00043", "br00113"],
-        "map_tag": ["br00044", "br00116"],
-        "map_road": ["br00045", "br00117"],
+        "pidgin_label": ["br00042", "br00115"],
+        "pidgin_name": ["br00043", "br00113"],
+        "pidgin_tag": ["br00044", "br00116"],
+        "pidgin_road": ["br00045", "br00117"],
     }

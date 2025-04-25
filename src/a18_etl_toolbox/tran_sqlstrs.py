@@ -63,14 +63,14 @@ CREATE_FISC_TIMEOFFI_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_ra
 CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
 CREATE_FISCUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 
-CREATE_MAP_LABEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_LABEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_NAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_NAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_ROAD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_ROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_TAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_TAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_LABEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_LABEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_NAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_NAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_ROAD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_ROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_TAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_TAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 
 
 def get_fisc_create_table_sqlstrs() -> dict[str, str]:
@@ -139,14 +139,14 @@ def get_bud_create_table_sqlstrs() -> dict[str, str]:
 
 def get_pidgin_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "map_label_raw": CREATE_MAP_LABEL_RAW_SQLSTR,
-        "map_label_agg": CREATE_MAP_LABEL_AGG_SQLSTR,
-        "map_name_raw": CREATE_MAP_NAME_RAW_SQLSTR,
-        "map_name_agg": CREATE_MAP_NAME_AGG_SQLSTR,
-        "map_road_raw": CREATE_MAP_ROAD_RAW_SQLSTR,
-        "map_road_agg": CREATE_MAP_ROAD_AGG_SQLSTR,
-        "map_tag_raw": CREATE_MAP_TAG_RAW_SQLSTR,
-        "map_tag_agg": CREATE_MAP_TAG_AGG_SQLSTR,
+        "pidgin_label_raw": CREATE_PIDGIN_LABEL_RAW_SQLSTR,
+        "pidgin_label_agg": CREATE_PIDGIN_LABEL_AGG_SQLSTR,
+        "pidgin_name_raw": CREATE_PIDGIN_NAME_RAW_SQLSTR,
+        "pidgin_name_agg": CREATE_PIDGIN_NAME_AGG_SQLSTR,
+        "pidgin_road_raw": CREATE_PIDGIN_ROAD_RAW_SQLSTR,
+        "pidgin_road_agg": CREATE_PIDGIN_ROAD_AGG_SQLSTR,
+        "pidgin_tag_raw": CREATE_PIDGIN_TAG_RAW_SQLSTR,
+        "pidgin_tag_agg": CREATE_PIDGIN_TAG_AGG_SQLSTR,
     }
 
 

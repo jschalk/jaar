@@ -117,10 +117,10 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 
 MAPS_DIMENS = {
-    "map_name": "NameUnit",
-    "map_label": "LabelUnit",
-    "map_tag": "TagUnit",
-    "map_road": "RoadUnit",
+    "pidgin_name": "NameUnit",
+    "pidgin_label": "LabelUnit",
+    "pidgin_tag": "TagUnit",
+    "pidgin_road": "RoadUnit",
 }
 
 CLASS_TYPES = {
@@ -408,19 +408,19 @@ def etl_yell_agg_df_to_yell_pidgin_raw_df(
 
 
 def etl_yell_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_name", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_label", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_tag", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_road", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, yell_dir)
 
 
 def yell_agg_single_to_pidgin_raw(
@@ -507,19 +507,19 @@ class YellAggToPidginRawTransformer:
 
 
 def etl_pidgin_name_raw_to_name_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_name")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_name")
 
 
 def etl_pidgin_label_raw_to_label_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_label")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_label")
 
 
 def etl_pidgin_road_raw_to_road_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_road")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_road")
 
 
 def etl_pidgin_tag_raw_to_tag_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_tag")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_tag")
 
 
 def etl_pidgin_single_raw_to_agg(yell_dir: str, map_dimen: str):

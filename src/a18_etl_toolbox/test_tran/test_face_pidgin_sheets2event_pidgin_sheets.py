@@ -67,7 +67,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario1_3Events(env_dir_setup_cleanu
     event3 = 3
     event7 = 7
     event9 = 9
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     x_nan = float("nan")
     name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
     name1 = [sue_str, event7, bob_otx, bob1_inx, x_nan, x_nan, x_nan]
@@ -125,7 +125,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario2_label(env_dir_setup_cleanup)
     jog_inx = ";Yogging"
     run_str = ";Run"
     run_inx = ";Running"
-    label_agg_columns = PidginPrimeColumns().map_label_agg_columns
+    label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
     x_nan = float("nan")
     label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
     label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
@@ -174,7 +174,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_tag(env_dir_setup_cleanup):
     t6am_inx = "T600"
     event7 = 7
     event9 = 9
-    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     x_nan = float("nan")
     e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
     e1_tag1 = [sue_str, event9, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
@@ -222,7 +222,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
     event9 = 9
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     x_nan = float("nan")
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
@@ -275,7 +275,7 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     event3 = 3
     event7 = 7
     event9 = 9
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     x_nan = float("nan")
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]

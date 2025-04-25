@@ -229,7 +229,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_raw_str)
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
 
-    label_file_columns = PidginPrimeColumns().map_label_raw_columns
+    label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_file_columns
     assert len(gen_label_df) == 2
     b3 = "br00115"
@@ -243,7 +243,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     print(f" {e1_label_df.to_csv()=}")
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
-    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     assert list(gen_name_df.columns) == name_raw_columns
     assert len(gen_name_df) == 2
     b3 = "br00113"
@@ -602,10 +602,10 @@ VALUES
 #         assert get_row_count(cursor, br00044_tablename) == 3
 #         assert get_row_count(cursor, br00117_tablename) == 2
 #         assert get_row_count(cursor, br00045_tablename) == 3
-#         pidgin_raw_label = "map_label_raw"
-#         pidgin_raw_name = "map_name_raw"
-#         pidgin_raw_tag = "map_tag_raw"
-#         pidgin_raw_road = "map_road_raw"
+#         pidgin_raw_label = "pidgin_label_raw"
+#         pidgin_raw_name = "pidgin_name_raw"
+#         pidgin_raw_tag = "pidgin_tag_raw"
+#         pidgin_raw_road = "pidgin_road_raw"
 #         assert not db_table_exists(cursor, pidgin_raw_label)
 #         assert not db_table_exists(cursor, pidgin_raw_name)
 #         assert not db_table_exists(cursor, pidgin_raw_tag)
@@ -619,10 +619,10 @@ VALUES
 #         assert db_table_exists(cursor, pidgin_raw_name)
 #         assert db_table_exists(cursor, pidgin_raw_tag)
 #         assert db_table_exists(cursor, pidgin_raw_road)
-#         label_file_columns = PidginPrimeColumns().map_label_raw_columns
-#         name_file_columns = PidginPrimeColumns().map_name_raw_columns
-#         tag_file_columns = PidginPrimeColumns().map_tag_raw_columns
-#         road_file_columns = PidginPrimeColumns().map_road_raw_columns
+#         label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
+#         name_file_columns = PidginPrimeColumns().pidgin_name_raw_columns
+#         tag_file_columns = PidginPrimeColumns().pidgin_tag_raw_columns
+#         road_file_columns = PidginPrimeColumns().pidgin_road_raw_columns
 #         assert get_table_columns(cursor, pidgin_raw_label) == label_file_columns
 #         assert get_table_columns(cursor, pidgin_raw_name) == name_file_columns
 #         assert get_table_columns(cursor, pidgin_raw_tag) == tag_file_columns
@@ -643,7 +643,7 @@ VALUES
 #         assert rows[1] == row1
 
 
-#     label_file_columns = PidginPrimeColumns().map_label_raw_columns
+#     label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
 #     assert list(gen_label_df.columns) == label_file_columns
 #     assert len(gen_label_df) == 2
 #     b3 = "br00115"
@@ -657,7 +657,7 @@ VALUES
 #     print(f" {e1_label_df.to_csv()=}")
 #     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
-#     name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+#     name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
 #     assert list(gen_name_df.columns) == name_raw_columns
 #     assert len(gen_name_df) == 2
 #     b3 = "br00113"

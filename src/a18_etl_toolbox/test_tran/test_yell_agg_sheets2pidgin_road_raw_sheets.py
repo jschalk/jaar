@@ -62,7 +62,7 @@ def test_etl_yell_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     assert os_path_exists(pidgin_path)
     road_raw_str = "road_raw"
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
-    road_raw_columns = PidginPrimeColumns().map_road_raw_columns
+    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     assert list(gen_road_df.columns) == road_raw_columns
     assert len(gen_road_df) == 2
     bx = "br00117"
@@ -136,7 +136,7 @@ def test_etl_yell_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFile
     assert os_path_exists(pidgin_path)
     road_raw_str = "road_raw"
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
-    road_raw_columns = PidginPrimeColumns().map_road_raw_columns
+    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     assert list(gen_road_df.columns) == road_raw_columns
     assert len(gen_road_df) == 5
     b3 = "br00117"
@@ -214,7 +214,7 @@ def test_etl_yell_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_
     assert os_path_exists(pidgin_path)
     road_raw_str = "road_raw"
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
-    road_raw_columns = PidginPrimeColumns().map_road_raw_columns
+    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     assert list(gen_road_df.columns) == road_raw_columns
     assert len(gen_road_df) == 2
     b3 = "br00117"

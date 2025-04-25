@@ -52,10 +52,10 @@ from src.a15_fisc_logic.fisc_config import (
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_config_args,
-    map_label_str,
-    map_road_str,
-    map_tag_str,
-    map_name_str,
+    pidgin_label_str,
+    pidgin_road_str,
+    pidgin_tag_str,
+    pidgin_name_str,
     get_pidgin_dimens,
 )
 from src.a17_idea_logic.idea_config import (
@@ -136,14 +136,14 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
 def test_create_pidgin_tables_CreatesPidginPrimeTables():
     # ESTABLISH
     with sqlite3_connect(":memory:") as fisc_db_conn:
-        pidnam_raw_table = "map_label_raw"
-        pidnam_agg_table = "map_label_agg"
-        pidtag_raw_table = "map_name_raw"
-        pidtag_agg_table = "map_name_agg"
-        pidroa_raw_table = "map_road_raw"
-        pidroa_agg_table = "map_road_agg"
-        pidlab_raw_table = "map_tag_raw"
-        pidlab_agg_table = "map_tag_agg"
+        pidnam_raw_table = "pidgin_label_raw"
+        pidnam_agg_table = "pidgin_label_agg"
+        pidtag_raw_table = "pidgin_name_raw"
+        pidtag_agg_table = "pidgin_name_agg"
+        pidroa_raw_table = "pidgin_road_raw"
+        pidroa_agg_table = "pidgin_road_agg"
+        pidlab_raw_table = "pidgin_tag_raw"
+        pidlab_agg_table = "pidgin_tag_agg"
         cursor = fisc_db_conn.cursor()
         assert not db_table_exists(cursor, pidnam_raw_table)
         assert not db_table_exists(cursor, pidnam_agg_table)

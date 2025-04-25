@@ -31,10 +31,10 @@ from src.a16_pidgin_logic.pidgin_config import (
     unknown_word_str,
     otx2inx_str,
     map_otx2inx_str,
-    map_name_str,
-    map_label_str,
-    map_tag_str,
-    map_road_str,
+    pidgin_name_str,
+    pidgin_label_str,
+    pidgin_tag_str,
+    pidgin_road_str,
     default_unknown_word,
     default_unknown_word_if_None,
 )
@@ -56,10 +56,10 @@ def test_str_functions_ReturnsObj():
     assert otx_road_str() == "otx_road"
     assert unknown_word_str() == "unknown_word"
     assert otx2inx_str() == "otx2inx"
-    assert map_name_str() == "map_name"
-    assert map_label_str() == "map_label"
-    assert map_tag_str() == "map_tag"
-    assert map_road_str() == "map_road"
+    assert pidgin_name_str() == "pidgin_name"
+    assert pidgin_label_str() == "pidgin_label"
+    assert pidgin_tag_str() == "pidgin_tag"
+    assert pidgin_road_str() == "pidgin_road"
     assert map_otx2inx_str() == "map_otx2inx"
 
 
@@ -80,19 +80,19 @@ def test_get_pidgin_config_dict_ReturnsObj():
     # THEN
     assert pidgin_config
     pidgin_config_dimens = set(pidgin_config.keys())
-    assert map_name_str() in pidgin_config_dimens
-    assert map_label_str() in pidgin_config_dimens
-    assert map_tag_str() in pidgin_config_dimens
-    assert map_road_str() in pidgin_config_dimens
+    assert pidgin_name_str() in pidgin_config_dimens
+    assert pidgin_label_str() in pidgin_config_dimens
+    assert pidgin_tag_str() in pidgin_config_dimens
+    assert pidgin_road_str() in pidgin_config_dimens
     assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
-    map_road_dict = pidgin_config.get(map_road_str())
-    map_tag_dict = pidgin_config.get(map_tag_str())
-    assert len(map_road_dict.get(jkeys_str())) == 1
-    assert len(map_tag_dict.get(jkeys_str())) == 1
-    assert len(map_road_dict.get(jvalues_str())) == 4
-    assert len(map_tag_dict.get(jvalues_str())) == 4
+    pidgin_road_dict = pidgin_config.get(pidgin_road_str())
+    pidgin_tag_dict = pidgin_config.get(pidgin_tag_str())
+    assert len(pidgin_road_dict.get(jkeys_str())) == 1
+    assert len(pidgin_tag_dict.get(jkeys_str())) == 1
+    assert len(pidgin_road_dict.get(jvalues_str())) == 4
+    assert len(pidgin_tag_dict.get(jvalues_str())) == 4
 
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
@@ -143,10 +143,10 @@ def test_get_pidgin_dimens_ReturnsObj():
     pidgin_config_dimens = get_pidgin_dimens()
 
     # THEN
-    assert map_name_str() in pidgin_config_dimens
-    assert map_label_str() in pidgin_config_dimens
-    assert map_tag_str() in pidgin_config_dimens
-    assert map_road_str() in pidgin_config_dimens
+    assert pidgin_name_str() in pidgin_config_dimens
+    assert pidgin_label_str() in pidgin_config_dimens
+    assert pidgin_tag_str() in pidgin_config_dimens
+    assert pidgin_road_str() in pidgin_config_dimens
     assert len(pidgin_config_dimens) == 4
 
 
@@ -158,7 +158,7 @@ def test_get_pidgin_args_dimen_mapping_ReturnsObj():
     # THEN
     assert x_pidgin_args_dimen_mapping
     assert x_pidgin_args_dimen_mapping.get(otx_road_str())
-    x_dimens = {map_road_str()}
+    x_dimens = {pidgin_road_str()}
     assert x_pidgin_args_dimen_mapping.get(otx_road_str()) == x_dimens
     assert x_pidgin_args_dimen_mapping.get(inx_bridge_str())
     pidgin_id_dimens = x_pidgin_args_dimen_mapping.get(inx_bridge_str())
@@ -183,7 +183,7 @@ def test_get_quick_pidgens_column_ref_ReturnsObj():
     # print(f"{all_pidgen_config_attrs=}")
 
     # WHEN / THEN
-    assert map_road_str() in set(get_quick_pidgens_column_ref().keys())
+    assert pidgin_road_str() in set(get_quick_pidgens_column_ref().keys())
     assert len(get_quick_pidgens_column_ref().keys()) == 4
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs
 

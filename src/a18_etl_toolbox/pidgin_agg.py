@@ -295,21 +295,26 @@ class PidginPrimeColumns:
         f1_columns = ["face_name", "event_int"]
         f2_cols = ["src_idea", "face_name", "event_int"]
         back_cols = ["otx_bridge", "inx_bridge", "unknown_word"]
-        self.map_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
-        self.map_label_agg_columns = [*f1_columns, "otx_label", "inx_label", *back_cols]
-        self.map_tag_agg_columns = [*f1_columns, "otx_tag", "inx_tag", *back_cols]
-        self.map_road_agg_columns = [*f1_columns, "otx_road", "inx_road", *back_cols]
-        self.map_name_raw_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
-        self.map_label_raw_columns = [
+        self.pidgin_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
+        self.pidgin_label_agg_columns = [
+            *f1_columns,
+            "otx_label",
+            "inx_label",
+            *back_cols,
+        ]
+        self.pidgin_tag_agg_columns = [*f1_columns, "otx_tag", "inx_tag", *back_cols]
+        self.pidgin_road_agg_columns = [*f1_columns, "otx_road", "inx_road", *back_cols]
+        self.pidgin_name_raw_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
+        self.pidgin_label_raw_columns = [
             *f2_cols,
             "otx_label",
             "inx_label",
             *back_cols,
         ]
-        self.map_tag_raw_columns = [
+        self.pidgin_tag_raw_columns = [
             *f2_cols,
             "otx_tag",
             "inx_tag",
             *back_cols,
         ]
-        self.map_road_raw_columns = [*f2_cols, "otx_road", "inx_road", *back_cols]
+        self.pidgin_road_raw_columns = [*f2_cols, "otx_road", "inx_road", *back_cols]

@@ -1,10 +1,10 @@
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_args,
-    map_name_str,
-    map_label_str,
-    map_tag_str,
-    map_road_str,
+    pidgin_name_str,
+    pidgin_label_str,
+    pidgin_tag_str,
+    pidgin_road_str,
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 
@@ -14,10 +14,10 @@ def test_PidginPrimeColumns_Exists():
     x_pidginprimecols = PidginPrimeColumns()
 
     # THEN
-    pidgin_name_agg_args = set(get_pidgin_config_args((map_name_str())).keys())
-    pidgin_label_agg_args = set(get_pidgin_config_args((map_label_str())).keys())
-    pidgin_tag_agg_args = set(get_pidgin_config_args((map_tag_str())).keys())
-    pidgin_road_agg_args = set(get_pidgin_config_args((map_road_str())).keys())
+    pidgin_name_agg_args = set(get_pidgin_config_args((pidgin_name_str())).keys())
+    pidgin_label_agg_args = set(get_pidgin_config_args((pidgin_label_str())).keys())
+    pidgin_tag_agg_args = set(get_pidgin_config_args((pidgin_tag_str())).keys())
+    pidgin_road_agg_args = set(get_pidgin_config_args((pidgin_road_str())).keys())
     event_args = {face_name_str(), event_int_str()}
     pidgin_name_agg_args = pidgin_name_agg_args.union(event_args)
     pidgin_label_agg_args = pidgin_label_agg_args.union(event_args)
@@ -28,12 +28,12 @@ def test_PidginPrimeColumns_Exists():
     pidgin_label_raw_args = pidgin_label_agg_args.union(raw_args)
     pidgin_tag_raw_args = pidgin_tag_agg_args.union(raw_args)
     pidgin_road_raw_args = pidgin_road_agg_args.union(raw_args)
-    assert set(x_pidginprimecols.map_name_agg_columns) == pidgin_name_agg_args
-    assert set(x_pidginprimecols.map_label_agg_columns) == pidgin_label_agg_args
-    assert set(x_pidginprimecols.map_tag_agg_columns) == pidgin_tag_agg_args
-    assert set(x_pidginprimecols.map_road_agg_columns) == pidgin_road_agg_args
+    assert set(x_pidginprimecols.pidgin_name_agg_columns) == pidgin_name_agg_args
+    assert set(x_pidginprimecols.pidgin_label_agg_columns) == pidgin_label_agg_args
+    assert set(x_pidginprimecols.pidgin_tag_agg_columns) == pidgin_tag_agg_args
+    assert set(x_pidginprimecols.pidgin_road_agg_columns) == pidgin_road_agg_args
 
-    assert set(x_pidginprimecols.map_name_raw_columns) == pidgin_name_raw_args
-    assert set(x_pidginprimecols.map_label_raw_columns) == pidgin_label_raw_args
-    assert set(x_pidginprimecols.map_tag_raw_columns) == pidgin_tag_raw_args
-    assert set(x_pidginprimecols.map_road_raw_columns) == pidgin_road_raw_args
+    assert set(x_pidginprimecols.pidgin_name_raw_columns) == pidgin_name_raw_args
+    assert set(x_pidginprimecols.pidgin_label_raw_columns) == pidgin_label_raw_args
+    assert set(x_pidginprimecols.pidgin_tag_raw_columns) == pidgin_tag_raw_args
+    assert set(x_pidginprimecols.pidgin_road_raw_columns) == pidgin_road_raw_args

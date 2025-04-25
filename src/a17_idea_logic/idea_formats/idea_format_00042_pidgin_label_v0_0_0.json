@@ -9,21 +9,21 @@
         "inx_bridge": {
             "otx_key": false
         },
-        "inx_road": {
+        "inx_label": {
             "otx_key": false
         },
         "otx_bridge": {
             "otx_key": false
         },
-        "otx_road": {
+        "otx_label": {
             "otx_key": true
         },
         "unknown_word": {
             "otx_key": false
         }
     },
-    "idea_number": "br00045",
+    "idea_number": "br00042",
     "dimens": [
-        "map_road"
+        "pidgin_label"
     ]
 }

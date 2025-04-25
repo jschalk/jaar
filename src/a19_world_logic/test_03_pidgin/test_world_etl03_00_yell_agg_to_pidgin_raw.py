@@ -218,7 +218,7 @@ def test_WorldUnit_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_c
     gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_raw_str)
     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
 
-    label_file_columns = PidginPrimeColumns().map_label_raw_columns
+    label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_file_columns
     assert len(gen_label_df) == 2
     b3 = "br00115"
@@ -232,7 +232,7 @@ def test_WorldUnit_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_c
     print(f" {e1_label_df.to_csv()=}")
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
-    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     assert list(gen_name_df.columns) == name_raw_columns
     assert len(gen_name_df) == 2
     b3 = "br00113"

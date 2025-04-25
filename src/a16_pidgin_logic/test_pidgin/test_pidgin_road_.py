@@ -353,7 +353,7 @@ def test_RoadMap_get_inx_tag_ReturnsObj():
     assert x_roadmap._get_inx_tag(xio_str) == sue_str
 
 
-def test_RoadMap_tag_exists_ReturnsObj():
+def test_RoadPidgin_tag_exists_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
