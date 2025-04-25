@@ -78,7 +78,7 @@ from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
-    create_pidgin_tables,
+    create_pidgin_prime_tables,
     create_fisc_tables,
     create_bud_tables,
     get_fisc_update_inconsist_error_message_sqlstrs,
@@ -409,7 +409,7 @@ def get_yell_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
 
 
 def etl_yell_valid_db_to_pridgin_prime_raw_db(cursor: sqlite3_Cursor):
-    create_pidgin_tables(cursor)
+    create_pidgin_prime_tables(cursor)
     yell_valid_tables = get_yell_valid_tables(cursor)
     idea_dimen_ref = {
         pidgin_dimen: idea_numbers
