@@ -445,8 +445,8 @@ class YellAggToPidginRawTransformer:
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
-        pidgin_columns.insert(0, "src_idea")
-        # empty df with src_idea, face_name, event_int, idea_columns...
+        pidgin_columns.insert(0, "idea_number")
+        # empty df with idea_number, face_name, event_int, idea_columns...
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"

@@ -247,7 +247,7 @@ def test_WorldUnit_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_c
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
     tag_file_columns = [
-        "src_idea",
+        "idea_number",
         face_name_str(),
         event_int_str(),
         otx_tag_str(),
@@ -270,7 +270,7 @@ def test_WorldUnit_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_c
     assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
 
     road_file_columns = [
-        "src_idea",
+        "idea_number",
         face_name_str(),
         event_int_str(),
         otx_road_str(),

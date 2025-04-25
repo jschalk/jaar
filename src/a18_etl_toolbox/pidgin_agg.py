@@ -293,7 +293,7 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
 class PidginPrimeColumns:
     def __init__(self):
         f1_columns = ["face_name", "event_int"]
-        f2_cols = ["src_idea", "face_name", "event_int"]
+        f2_cols = ["idea_number", "face_name", "event_int"]
         back_cols = ["otx_bridge", "inx_bridge", "unknown_word"]
         self.pidgin_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
         self.pidgin_label_agg_columns = [
