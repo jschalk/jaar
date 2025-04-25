@@ -3,6 +3,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     create_table_from_columns,
     db_table_exists,
     get_row_count,
+    get_table_columns,
 )
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
@@ -28,12 +29,13 @@ from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
     _get_pidgen_idea_format_filenames,
     yell_agg_str,
+    yell_valid_str,
 )
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
     etl_yell_agg_df_to_yell_pidgin_raw_df,
-    etl_yell_agg_db_to_yell_pidgin_raw_db,
+    etl_yell_valid_db_to_yell_pidgin_raw_db,
 )
 from src.a18_etl_toolbox.examples.etl_env import (
     get_test_etl_dir as etl_dir,
@@ -302,7 +304,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
 
 
-def create_yell_agg_table(cursor, idea_number: str):
+def create_yell_valid_table(cursor, idea_number: str):
     if idea_number == "br00113":
         x_columns = [
             face_name_str(),
@@ -384,11 +386,11 @@ def create_yell_agg_table(cursor, idea_number: str):
             unknown_word_str(),
         ]
     x_types = {x_column: "TEXT" for x_column in x_columns}
-    agg_tablename = f"{yell_agg_str()}_{idea_number}"
+    agg_tablename = f"{yell_valid_str()}_{idea_number}"
     create_table_from_columns(cursor, agg_tablename, x_columns, x_types)
 
 
-def populate_yell_agg_table(cursor, idea_number: str):
+def populate_yell_valid_table(cursor, idea_number: str):
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -400,22 +402,23 @@ def populate_yell_agg_table(cursor, idea_number: str):
     event1 = 1
     event2 = 2
     event5 = 5
-    agg_tablename = f"{yell_agg_str()}_{idea_number}"
-    if idea_number == "br00113":
+    agg_tablename = f"{yell_valid_str()}_{idea_number}"
+    if idea_number == "br00042":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {face_name_str()}
 , {event_int_str()}
-, {fisc_tag_str()}
-, {owner_name_str()}
-, {acct_name_str()}
-, {otx_name_str()}
-, {inx_name_str()}
+, {otx_label_str()}
+, {inx_label_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
     elif idea_number == "br00043":
@@ -436,58 +439,6 @@ VALUES
 , ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
-    elif idea_number == "br00115":
-        insert_into_clause = f"""
-INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
-, {fisc_tag_str()}
-, {owner_name_str()}
-, {acct_name_str()}
-, {otx_label_str()}
-, {inx_label_str()}
-)"""
-        values_clause = f"""
-VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
-;
-"""
-    elif idea_number == "br00042":
-        insert_into_clause = f"""
-INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
-, {otx_label_str()}
-, {inx_label_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
-, {unknown_word_str()}
-)"""
-        values_clause = f"""
-VALUES     
-  ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-;
-"""
-    elif idea_number == "br00116":
-        insert_into_clause = f"""
-INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
-, {fisc_tag_str()}
-, {owner_name_str()}
-, {acct_name_str()}
-, {otx_tag_str()}
-, {inx_tag_str()}
-)"""
-        values_clause = f"""
-VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
-;
-"""
     elif idea_number == "br00044":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
@@ -504,23 +455,6 @@ VALUES
   ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
 , ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-;
-"""
-    elif idea_number == "br00117":
-        insert_into_clause = f"""
-INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
-, {fisc_tag_str()}
-, {owner_name_str()}
-, {acct_name_str()}
-, {otx_road_str()}
-, {inx_road_str()}
-)"""
-        values_clause = f"""
-VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00045":
@@ -541,11 +475,79 @@ VALUES
 , ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
+    elif idea_number == "br00113":
+        insert_into_clause = f"""
+INSERT INTO {agg_tablename} (
+  {face_name_str()}
+, {event_int_str()}
+, {fisc_tag_str()}
+, {owner_name_str()}
+, {acct_name_str()}
+, {otx_name_str()}
+, {inx_name_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+;
+"""
+    elif idea_number == "br00115":
+        insert_into_clause = f"""
+INSERT INTO {agg_tablename} (
+  {face_name_str()}
+, {event_int_str()}
+, {fisc_tag_str()}
+, {owner_name_str()}
+, {acct_name_str()}
+, {otx_label_str()}
+, {inx_label_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+;
+"""
+    elif idea_number == "br00116":
+        insert_into_clause = f"""
+INSERT INTO {agg_tablename} (
+  {face_name_str()}
+, {event_int_str()}
+, {fisc_tag_str()}
+, {owner_name_str()}
+, {acct_name_str()}
+, {otx_tag_str()}
+, {inx_tag_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+;
+"""
+    elif idea_number == "br00117":
+        insert_into_clause = f"""
+INSERT INTO {agg_tablename} (
+  {face_name_str()}
+, {event_int_str()}
+, {fisc_tag_str()}
+, {owner_name_str()}
+, {acct_name_str()}
+, {otx_road_str()}
+, {inx_road_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+;
+"""
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor.execute(insert_sqlstr)
 
 
-# def test_etl_yell_agg_db_to_yell_pidgin_raw_db_CreatesFile():
+# def test_etl_yell_valid_db_to_yell_pidgin_raw_db_CreatesFile():
 #     # ESTABLISH
 #     bob_str = "Bob"
 #     sue_str = "Sue"
@@ -568,30 +570,30 @@ VALUES
 #         br00044_str = "br00044"
 #         br00117_str = "br00117"
 #         br00045_str = "br00045"
-#         create_yell_agg_table(cursor, br00113_str)
-#         create_yell_agg_table(cursor, br00043_str)
-#         create_yell_agg_table(cursor, br00115_str)
-#         create_yell_agg_table(cursor, br00042_str)
-#         create_yell_agg_table(cursor, br00116_str)
-#         create_yell_agg_table(cursor, br00044_str)
-#         create_yell_agg_table(cursor, br00117_str)
-#         create_yell_agg_table(cursor, br00045_str)
-#         populate_yell_agg_table(cursor, br00113_str)
-#         populate_yell_agg_table(cursor, br00043_str)
-#         populate_yell_agg_table(cursor, br00115_str)
-#         populate_yell_agg_table(cursor, br00042_str)
-#         populate_yell_agg_table(cursor, br00116_str)
-#         populate_yell_agg_table(cursor, br00044_str)
-#         populate_yell_agg_table(cursor, br00117_str)
-#         populate_yell_agg_table(cursor, br00045_str)
-#         br00113_tablename = f"{yell_agg_str()}_{br00113_str}"
-#         br00043_tablename = f"{yell_agg_str()}_{br00043_str}"
-#         br00115_tablename = f"{yell_agg_str()}_{br00115_str}"
-#         br00042_tablename = f"{yell_agg_str()}_{br00042_str}"
-#         br00116_tablename = f"{yell_agg_str()}_{br00116_str}"
-#         br00044_tablename = f"{yell_agg_str()}_{br00044_str}"
-#         br00117_tablename = f"{yell_agg_str()}_{br00117_str}"
-#         br00045_tablename = f"{yell_agg_str()}_{br00045_str}"
+#         create_yell_valid_table(cursor, br00113_str)
+#         create_yell_valid_table(cursor, br00043_str)
+#         create_yell_valid_table(cursor, br00115_str)
+#         create_yell_valid_table(cursor, br00042_str)
+#         create_yell_valid_table(cursor, br00116_str)
+#         create_yell_valid_table(cursor, br00044_str)
+#         create_yell_valid_table(cursor, br00117_str)
+#         create_yell_valid_table(cursor, br00045_str)
+#         populate_yell_valid_table(cursor, br00113_str)
+#         populate_yell_valid_table(cursor, br00043_str)
+#         populate_yell_valid_table(cursor, br00115_str)
+#         populate_yell_valid_table(cursor, br00042_str)
+#         populate_yell_valid_table(cursor, br00116_str)
+#         populate_yell_valid_table(cursor, br00044_str)
+#         populate_yell_valid_table(cursor, br00117_str)
+#         populate_yell_valid_table(cursor, br00045_str)
+#         br00113_tablename = f"{yell_valid_str()}_{br00113_str}"
+#         br00043_tablename = f"{yell_valid_str()}_{br00043_str}"
+#         br00115_tablename = f"{yell_valid_str()}_{br00115_str}"
+#         br00042_tablename = f"{yell_valid_str()}_{br00042_str}"
+#         br00116_tablename = f"{yell_valid_str()}_{br00116_str}"
+#         br00044_tablename = f"{yell_valid_str()}_{br00044_str}"
+#         br00117_tablename = f"{yell_valid_str()}_{br00117_str}"
+#         br00045_tablename = f"{yell_valid_str()}_{br00045_str}"
 #         assert get_row_count(cursor, br00113_tablename) == 2
 #         assert get_row_count(cursor, br00043_tablename) == 3
 #         assert get_row_count(cursor, br00115_tablename) == 2
@@ -600,26 +602,46 @@ VALUES
 #         assert get_row_count(cursor, br00044_tablename) == 3
 #         assert get_row_count(cursor, br00117_tablename) == 2
 #         assert get_row_count(cursor, br00045_tablename) == 3
+#         pidgin_raw_label = "map_label_raw"
+#         pidgin_raw_name = "map_name_raw"
+#         pidgin_raw_tag = "map_tag_raw"
+#         pidgin_raw_road = "map_road_raw"
+#         assert not db_table_exists(cursor, pidgin_raw_label)
+#         assert not db_table_exists(cursor, pidgin_raw_name)
+#         assert not db_table_exists(cursor, pidgin_raw_tag)
+#         assert not db_table_exists(cursor, pidgin_raw_road)
 
-#         events = {event2: sue_str, event5: sue_str}
+#         # WHEN
+#         etl_yell_valid_db_to_yell_pidgin_raw_db(cursor)
 
-#         etl_yell_agg_db_to_yell_pidgin_raw_db(events, yell_dir)
+#         # THEN
+#         assert db_table_exists(cursor, pidgin_raw_label)
+#         assert db_table_exists(cursor, pidgin_raw_name)
+#         assert db_table_exists(cursor, pidgin_raw_tag)
+#         assert db_table_exists(cursor, pidgin_raw_road)
+#         label_file_columns = PidginPrimeColumns().map_label_raw_columns
+#         name_file_columns = PidginPrimeColumns().map_name_raw_columns
+#         tag_file_columns = PidginPrimeColumns().map_tag_raw_columns
+#         road_file_columns = PidginPrimeColumns().map_road_raw_columns
+#         assert get_table_columns(cursor, pidgin_raw_label) == label_file_columns
+#         assert get_table_columns(cursor, pidgin_raw_name) == name_file_columns
+#         assert get_table_columns(cursor, pidgin_raw_tag) == tag_file_columns
+#         assert get_table_columns(cursor, pidgin_raw_road) == road_file_columns
 
-#     # THEN
-#     assert os_path_exists(pidgin_path)
-#     label_raw_str = "label_raw"
-#     name_raw_str = "name_raw"
-#     tag_raw_str = "tag_raw"
-#     road_raw_str = "road_raw"
-#     assert sheet_exists(pidgin_path, name_raw_str)
-#     assert sheet_exists(pidgin_path, label_raw_str)
-#     assert sheet_exists(pidgin_path, tag_raw_str)
-#     assert sheet_exists(pidgin_path, road_raw_str)
+#         select_label_sqlstr = f"""SELECT * FROM {pidgin_raw_label} ORDER BY {face_name_str()}, {event_int_str()};"""
+#         select_name_sqlstr = f"""SELECT * FROM {pidgin_raw_name} ORDER BY {face_name_str()}, {event_int_str()};"""
+#         select_tag_sqlstr = f"""SELECT * FROM {pidgin_raw_tag} ORDER BY {face_name_str()}, {event_int_str()};"""
+#         select_road_sqlstr = f"""SELECT * FROM {pidgin_raw_road} ORDER BY {face_name_str()}, {event_int_str()};"""
+#         cursor.execute(select_label_sqlstr)
+#         rows = cursor.fetchall()
+#         assert len(rows) == 2
+#         b3 = "br00115"
+#         b4 = "br00042"
+#         row0 = (b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+#         assert rows[0] == row0
+#         assert rows[1] == row1
 
-#     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-#     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
-#     gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_raw_str)
-#     gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
 
 #     label_file_columns = PidginPrimeColumns().map_label_raw_columns
 #     assert list(gen_label_df.columns) == label_file_columns

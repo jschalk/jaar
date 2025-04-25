@@ -394,7 +394,7 @@ FROM yell_valid_events
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def etl_yell_agg_db_to_yell_pidgin_raw_db(cursor: sqlite3_Cursor):
+def etl_yell_valid_db_to_yell_pidgin_raw_db(cursor: sqlite3_Cursor):
     pass
 
 
