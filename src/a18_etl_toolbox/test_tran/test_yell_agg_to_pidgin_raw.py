@@ -403,9 +403,11 @@ def populate_yell_valid_table(cursor, idea_number: str):
     ukx = "Unknown"
     a23_str = "accord23"
     a45_str = "accord45"
+    event0 = 0
     event1 = 1
     event2 = 2
     event5 = 5
+    event9 = 9
     agg_tablename = f"{yell_valid_str()}_{idea_number}"
     if idea_number == "br00042":
         insert_into_clause = f"""
@@ -456,8 +458,8 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ('{sue_str}', '{event0}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{sue_str}', '{event0}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
@@ -494,8 +496,8 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{sue_str}', '{event9}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event9}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00115":
@@ -563,9 +565,11 @@ def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
+    event0 = 0
     event1 = 1
     event2 = 2
     event5 = 5
+    event9 = 9
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         br00113_str = "br00113"
@@ -649,20 +653,64 @@ def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
         assert len(nam_rows) == 5
         assert len(tag_rows) == 5
         assert len(roa_rows) == 7
-        br000115_str = "br00115"
-        br000042_str = "br00042"
-        row0 = (br000042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-        row1 = (br000042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-        row2 = (br000042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-        row3 = (br000115_str, sue_str, event1, bob_str, bob_inx, None, None, None)
-        row4 = (br000115_str, sue_str, event1, yao_str, yao_inx, None, None, None)
-        print(f"{lab_rows[4]=}")
-        print(f"   {row4=}")
+
+        br00115_str = "br00115"
+        br00042_str = "br00042"
+        row0 = (br00042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+        row1 = (br00042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+        row2 = (br00042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+        row3 = (br00115_str, sue_str, event1, bob_str, bob_inx, None, None, None)
+        row4 = (br00115_str, sue_str, event1, yao_str, yao_inx, None, None, None)
         assert lab_rows[0] == row0
         assert lab_rows[1] == row1
         assert lab_rows[2] == row2
         assert lab_rows[3] == row3
         assert lab_rows[4] == row4
+
+        br00113_str = "br00113"
+        br00043_str = "br00043"
+        row0 = (br00043_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+        row1 = (br00043_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+        row2 = (br00043_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+        row3 = (br00113_str, sue_str, event9, bob_str, bob_inx, None, None, None)
+        row4 = (br00113_str, sue_str, event9, yao_str, yao_inx, None, None, None)
+        assert nam_rows[0] == row0
+        assert nam_rows[1] == row1
+        assert nam_rows[2] == row2
+        assert nam_rows[3] == row3
+        assert nam_rows[4] == row4
+
+        br00116_str = "br00116"
+        br00044_str = "br00044"
+        row0 = (br00044_str, sue_str, event0, bob_str, bob_inx, rdx, rdx, ukx)
+        row1 = (br00044_str, sue_str, event0, sue_str, sue_str, rdx, rdx, ukx)
+        row2 = (br00044_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+        row3 = (br00116_str, sue_str, event1, bob_str, bob_inx, None, None, None)
+        row4 = (br00116_str, sue_str, event1, yao_str, yao_inx, None, None, None)
+        assert tag_rows[0] == row0
+        assert tag_rows[1] == row1
+        assert tag_rows[2] == row2
+        assert tag_rows[3] == row3
+        assert tag_rows[4] == row4
+
+        br00117_str = "br00117"
+        br00045_str = "br00045"
+        row0 = (br00045_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+        row1 = (br00045_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+        row2 = (br00045_str, yao_str, event1, bob_str, bob_inx, rdx, rdx, ukx)
+        row3 = (br00045_str, yao_str, event1, sue_str, sue_str, rdx, rdx, ukx)
+        row4 = (br00045_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+        row5 = (br00117_str, sue_str, event1, bob_str, bob_inx, None, None, None)
+        row6 = (br00117_str, sue_str, event1, yao_str, yao_inx, None, None, None)
+        print(f"{roa_rows[5]=}")
+        print(f"       {row5=}")
+        assert roa_rows[0] == row0
+        assert roa_rows[1] == row1
+        assert roa_rows[2] == row2
+        assert roa_rows[3] == row3
+        assert roa_rows[4] == row4
+        assert roa_rows[5] == row5
+        assert roa_rows[6] == row6
 
         # for row in lab_rows:
         #     print(f"{row=}")
