@@ -1,6 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a00_data_toolboxs.db_toolbox import (
     create_table_from_columns,
+    create_select_query,
     db_table_exists,
     get_row_count,
     get_table_columns,
@@ -23,6 +24,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     inx_label_str,
     otx_label_str,
     unknown_word_str,
+    get_pidgin_config_args,
 )
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
@@ -30,12 +32,13 @@ from src.a17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     yell_agg_str,
     yell_valid_str,
+    get_default_sorted_list,
 )
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
     etl_yell_agg_df_to_yell_pidgin_raw_df,
-    etl_yell_valid_db_to_yell_pidgin_raw_db,
+    etl_yell_valid_db_to_pridgin_prime_raw_db,
 )
 from src.a18_etl_toolbox.examples.etl_env import (
     get_test_etl_dir as etl_dir,
@@ -398,7 +401,8 @@ def populate_yell_valid_table(cursor, idea_number: str):
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    m_str = "accord23"
+    a23_str = "accord23"
+    a45_str = "accord45"
     event1 = 1
     event2 = 2
     event5 = 5
@@ -473,6 +477,8 @@ VALUES
   ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
 , ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{yao_str}', '{event1}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{yao_str}', '{event1}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
     elif idea_number == "br00113":
@@ -488,8 +494,8 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00115":
@@ -505,8 +511,9 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00116":
@@ -522,8 +529,8 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00117":
@@ -539,180 +546,183 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{m_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor.execute(insert_sqlstr)
 
 
-# def test_etl_yell_valid_db_to_yell_pidgin_raw_db_CreatesFile():
-#     # ESTABLISH
-#     bob_str = "Bob"
-#     sue_str = "Sue"
-#     yao_str = "Yao"
-#     yao_inx = "Yaoito"
-#     bob_inx = "Bobito"
-#     rdx = ":"
-#     ukx = "Unknown"
-#     m_str = "accord23"
-#     event1 = 1
-#     event2 = 2
-#     event5 = 5
-#     with sqlite3_connect(":memory:") as db_conn:
-#         cursor = db_conn.cursor()
-#         br00113_str = "br00113"
-#         br00043_str = "br00043"
-#         br00115_str = "br00115"
-#         br00042_str = "br00042"
-#         br00116_str = "br00116"
-#         br00044_str = "br00044"
-#         br00117_str = "br00117"
-#         br00045_str = "br00045"
-#         create_yell_valid_table(cursor, br00113_str)
-#         create_yell_valid_table(cursor, br00043_str)
-#         create_yell_valid_table(cursor, br00115_str)
-#         create_yell_valid_table(cursor, br00042_str)
-#         create_yell_valid_table(cursor, br00116_str)
-#         create_yell_valid_table(cursor, br00044_str)
-#         create_yell_valid_table(cursor, br00117_str)
-#         create_yell_valid_table(cursor, br00045_str)
-#         populate_yell_valid_table(cursor, br00113_str)
-#         populate_yell_valid_table(cursor, br00043_str)
-#         populate_yell_valid_table(cursor, br00115_str)
-#         populate_yell_valid_table(cursor, br00042_str)
-#         populate_yell_valid_table(cursor, br00116_str)
-#         populate_yell_valid_table(cursor, br00044_str)
-#         populate_yell_valid_table(cursor, br00117_str)
-#         populate_yell_valid_table(cursor, br00045_str)
-#         br00113_tablename = f"{yell_valid_str()}_{br00113_str}"
-#         br00043_tablename = f"{yell_valid_str()}_{br00043_str}"
-#         br00115_tablename = f"{yell_valid_str()}_{br00115_str}"
-#         br00042_tablename = f"{yell_valid_str()}_{br00042_str}"
-#         br00116_tablename = f"{yell_valid_str()}_{br00116_str}"
-#         br00044_tablename = f"{yell_valid_str()}_{br00044_str}"
-#         br00117_tablename = f"{yell_valid_str()}_{br00117_str}"
-#         br00045_tablename = f"{yell_valid_str()}_{br00045_str}"
-#         assert get_row_count(cursor, br00113_tablename) == 2
-#         assert get_row_count(cursor, br00043_tablename) == 3
-#         assert get_row_count(cursor, br00115_tablename) == 2
-#         assert get_row_count(cursor, br00042_tablename) == 3
-#         assert get_row_count(cursor, br00116_tablename) == 2
-#         assert get_row_count(cursor, br00044_tablename) == 3
-#         assert get_row_count(cursor, br00117_tablename) == 2
-#         assert get_row_count(cursor, br00045_tablename) == 3
-#         pidgin_raw_label = "pidgin_label_raw"
-#         pidgin_raw_name = "pidgin_name_raw"
-#         pidgin_raw_tag = "pidgin_tag_raw"
-#         pidgin_raw_road = "pidgin_road_raw"
-#         assert not db_table_exists(cursor, pidgin_raw_label)
-#         assert not db_table_exists(cursor, pidgin_raw_name)
-#         assert not db_table_exists(cursor, pidgin_raw_tag)
-#         assert not db_table_exists(cursor, pidgin_raw_road)
+def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    yao_inx = "Yaoito"
+    bob_inx = "Bobito"
+    rdx = ":"
+    ukx = "Unknown"
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        br00113_str = "br00113"
+        br00043_str = "br00043"
+        br00115_str = "br00115"
+        br00042_str = "br00042"
+        br00116_str = "br00116"
+        br00044_str = "br00044"
+        br00117_str = "br00117"
+        br00045_str = "br00045"
+        create_yell_valid_table(cursor, br00113_str)
+        create_yell_valid_table(cursor, br00043_str)
+        create_yell_valid_table(cursor, br00115_str)
+        create_yell_valid_table(cursor, br00042_str)
+        create_yell_valid_table(cursor, br00116_str)
+        create_yell_valid_table(cursor, br00044_str)
+        create_yell_valid_table(cursor, br00117_str)
+        create_yell_valid_table(cursor, br00045_str)
+        populate_yell_valid_table(cursor, br00113_str)
+        populate_yell_valid_table(cursor, br00043_str)
+        populate_yell_valid_table(cursor, br00115_str)
+        populate_yell_valid_table(cursor, br00042_str)
+        populate_yell_valid_table(cursor, br00116_str)
+        populate_yell_valid_table(cursor, br00044_str)
+        populate_yell_valid_table(cursor, br00117_str)
+        populate_yell_valid_table(cursor, br00045_str)
+        br00113_tablename = f"{yell_valid_str()}_{br00113_str}"
+        br00043_tablename = f"{yell_valid_str()}_{br00043_str}"
+        br00115_tablename = f"{yell_valid_str()}_{br00115_str}"
+        br00042_tablename = f"{yell_valid_str()}_{br00042_str}"
+        br00116_tablename = f"{yell_valid_str()}_{br00116_str}"
+        br00044_tablename = f"{yell_valid_str()}_{br00044_str}"
+        br00117_tablename = f"{yell_valid_str()}_{br00117_str}"
+        br00045_tablename = f"{yell_valid_str()}_{br00045_str}"
+        assert get_row_count(cursor, br00113_tablename) == 2
+        assert get_row_count(cursor, br00043_tablename) == 3
+        assert get_row_count(cursor, br00115_tablename) == 3
+        assert get_row_count(cursor, br00042_tablename) == 3
+        assert get_row_count(cursor, br00116_tablename) == 2
+        assert get_row_count(cursor, br00044_tablename) == 3
+        assert get_row_count(cursor, br00117_tablename) == 2
+        assert get_row_count(cursor, br00045_tablename) == 5
+        pidgin_raw_label_tablename = "pidgin_label_raw"
+        pidgin_raw_name_tablename = "pidgin_name_raw"
+        pidgin_raw_tag_tablename = "pidgin_tag_raw"
+        pidgin_raw_road_tablename = "pidgin_road_raw"
+        assert not db_table_exists(cursor, pidgin_raw_label_tablename)
+        assert not db_table_exists(cursor, pidgin_raw_name_tablename)
+        assert not db_table_exists(cursor, pidgin_raw_tag_tablename)
+        assert not db_table_exists(cursor, pidgin_raw_road_tablename)
 
-#         # WHEN
-#         etl_yell_valid_db_to_yell_pidgin_raw_db(cursor)
+        # WHEN
+        etl_yell_valid_db_to_pridgin_prime_raw_db(cursor)
 
-#         # THEN
-#         assert db_table_exists(cursor, pidgin_raw_label)
-#         assert db_table_exists(cursor, pidgin_raw_name)
-#         assert db_table_exists(cursor, pidgin_raw_tag)
-#         assert db_table_exists(cursor, pidgin_raw_road)
-#         label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
-#         name_file_columns = PidginPrimeColumns().pidgin_name_raw_columns
-#         tag_file_columns = PidginPrimeColumns().pidgin_tag_raw_columns
-#         road_file_columns = PidginPrimeColumns().pidgin_road_raw_columns
-#         assert get_table_columns(cursor, pidgin_raw_label) == label_file_columns
-#         assert get_table_columns(cursor, pidgin_raw_name) == name_file_columns
-#         assert get_table_columns(cursor, pidgin_raw_tag) == tag_file_columns
-#         assert get_table_columns(cursor, pidgin_raw_road) == road_file_columns
+        # THEN
+        assert db_table_exists(cursor, pidgin_raw_label_tablename)
+        assert db_table_exists(cursor, pidgin_raw_name_tablename)
+        assert db_table_exists(cursor, pidgin_raw_tag_tablename)
+        assert db_table_exists(cursor, pidgin_raw_road_tablename)
+        pidlab_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
+        pidnam_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
+        pidtag_raw_cols = get_table_columns(cursor, pidgin_raw_tag_tablename)
+        pidroa_raw_cols = get_table_columns(cursor, pidgin_raw_road_tablename)
+        lab_table = pidgin_raw_label_tablename
+        nam_table = pidgin_raw_name_tablename
+        tag_table = pidgin_raw_tag_tablename
+        roa_table = pidgin_raw_road_tablename
+        select_pidlab = create_select_query(cursor, lab_table, pidlab_raw_cols)
+        select_pidnam = create_select_query(cursor, nam_table, pidnam_raw_cols)
+        select_pidtag = create_select_query(cursor, tag_table, pidtag_raw_cols)
+        select_pidroa = create_select_query(cursor, roa_table, pidroa_raw_cols)
+        cursor.execute(select_pidlab)
+        lab_rows = cursor.fetchall()
+        cursor.execute(select_pidnam)
+        nam_rows = cursor.fetchall()
+        cursor.execute(select_pidtag)
+        tag_rows = cursor.fetchall()
+        cursor.execute(select_pidroa)
+        roa_rows = cursor.fetchall()
+        assert len(lab_rows) == 5
+        assert len(nam_rows) == 5
+        assert len(tag_rows) == 5
+        assert len(roa_rows) == 7
+        br000115_str = "br00115"
+        br000042_str = "br00042"
+        row0 = (br000042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
+        row1 = (br000042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row2 = (br000042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row3 = (br000115_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
+        row4 = (br000115_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
+        print(f"{lab_rows[4]=}")
+        print(f"   {row4=}")
+        assert lab_rows[0] == row0
+        assert lab_rows[1] == row1
+        assert lab_rows[2] == row2
+        assert lab_rows[3] == row3
+        assert lab_rows[4] == row4
 
-#         select_label_sqlstr = f"""SELECT * FROM {pidgin_raw_label} ORDER BY {face_name_str()}, {event_int_str()};"""
-#         select_name_sqlstr = f"""SELECT * FROM {pidgin_raw_name} ORDER BY {face_name_str()}, {event_int_str()};"""
-#         select_tag_sqlstr = f"""SELECT * FROM {pidgin_raw_tag} ORDER BY {face_name_str()}, {event_int_str()};"""
-#         select_road_sqlstr = f"""SELECT * FROM {pidgin_raw_road} ORDER BY {face_name_str()}, {event_int_str()};"""
-#         cursor.execute(select_label_sqlstr)
-#         rows = cursor.fetchall()
-#         assert len(rows) == 2
-#         b3 = "br00115"
-#         b4 = "br00042"
-#         row0 = (b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-#         row1 = (b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-#         assert rows[0] == row0
-#         assert rows[1] == row1
+        # for row in lab_rows:
+        #     print(f"{row=}")
 
+        # name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
+        # assert list(gen_name_df.columns) == name_raw_columns
+        # assert len(gen_name_df) == 2
+        # b3 = "br00113"
+        # b4 = "br00043"
+        # e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+        # e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+        # e1_name_rows = [e1_name3, e1_name4]
+        # e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
+        # assert len(gen_name_df) == len(e1_name_df)
+        # print(f"{gen_name_df.to_csv()=}")
+        # print(f" {e1_name_df.to_csv()=}")
+        # assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
-#     label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
-#     assert list(gen_label_df.columns) == label_file_columns
-#     assert len(gen_label_df) == 2
-#     b3 = "br00115"
-#     b4 = "br00042"
-#     e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_label_rows = [e1_label3, e1_label4]
-#     e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
-#     assert len(gen_label_df) == len(e1_label_df)
-#     print(f"{gen_label_df.to_csv()=}")
-#     print(f" {e1_label_df.to_csv()=}")
-#     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+        # tag_file_columns = [
+        #     "idea_number",
+        #     face_name_str(),
+        #     event_int_str(),
+        #     otx_tag_str(),
+        #     inx_tag_str(),
+        #     otx_bridge_str(),
+        #     inx_bridge_str(),
+        #     unknown_word_str(),
+        # ]
+        # assert list(gen_tag_df.columns) == tag_file_columns
+        # assert len(gen_tag_df) == 2
+        # b3 = "br00116"
+        # b4 = "br00044"
+        # e1_tag3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+        # e1_tag4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+        # e1_tag_rows = [e1_tag3, e1_tag4]
+        # e1_tag_df = DataFrame(e1_tag_rows, columns=tag_file_columns)
+        # assert len(gen_tag_df) == len(e1_tag_df)
+        # print(f"{gen_tag_df.to_csv()=}")
+        # print(f" {e1_tag_df.to_csv()=}")
+        # assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
 
-#     name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
-#     assert list(gen_name_df.columns) == name_raw_columns
-#     assert len(gen_name_df) == 2
-#     b3 = "br00113"
-#     b4 = "br00043"
-#     e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_name_rows = [e1_name3, e1_name4]
-#     e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
-#     assert len(gen_name_df) == len(e1_name_df)
-#     print(f"{gen_name_df.to_csv()=}")
-#     print(f" {e1_name_df.to_csv()=}")
-#     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
-
-#     tag_file_columns = [
-#         "idea_number",
-#         face_name_str(),
-#         event_int_str(),
-#         otx_tag_str(),
-#         inx_tag_str(),
-#         otx_bridge_str(),
-#         inx_bridge_str(),
-#         unknown_word_str(),
-#     ]
-#     assert list(gen_tag_df.columns) == tag_file_columns
-#     assert len(gen_tag_df) == 2
-#     b3 = "br00116"
-#     b4 = "br00044"
-#     e1_tag3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_tag4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_tag_rows = [e1_tag3, e1_tag4]
-#     e1_tag_df = DataFrame(e1_tag_rows, columns=tag_file_columns)
-#     assert len(gen_tag_df) == len(e1_tag_df)
-#     print(f"{gen_tag_df.to_csv()=}")
-#     print(f" {e1_tag_df.to_csv()=}")
-#     assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
-
-#     road_file_columns = [
-#         "idea_number",
-#         face_name_str(),
-#         event_int_str(),
-#         otx_road_str(),
-#         inx_road_str(),
-#         otx_bridge_str(),
-#         inx_bridge_str(),
-#         unknown_word_str(),
-#     ]
-#     assert list(gen_road_df.columns) == road_file_columns
-#     assert len(gen_road_df) == 2
-#     b3 = "br00117"
-#     b4 = "br00045"
-#     e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-#     e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-#     e1_road_rows = [e1_road3, e1_road4]
-#     e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
-#     assert len(gen_road_df) == len(e1_road_df)
-#     print(f"{gen_road_df.to_csv()=}")
-#     print(f" {e1_road_df.to_csv()=}")
-#     assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
+        # road_file_columns = [
+        #     "idea_number",
+        #     face_name_str(),
+        #     event_int_str(),
+        #     otx_road_str(),
+        #     inx_road_str(),
+        #     otx_bridge_str(),
+        #     inx_bridge_str(),
+        #     unknown_word_str(),
+        # ]
+        # assert list(gen_road_df.columns) == road_file_columns
+        # assert len(gen_road_df) == 2
+        # b3 = "br00117"
+        # b4 = "br00045"
+        # e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
+        # e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+        # e1_road_rows = [e1_road3, e1_road4]
+        # e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
+        # assert len(gen_road_df) == len(e1_road_df)
+        # print(f"{gen_road_df.to_csv()=}")
+        # print(f" {e1_road_df.to_csv()=}")
+        # assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)

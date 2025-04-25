@@ -806,9 +806,9 @@ def _create_expected_idea_dimen_ref() -> dict[str, list[str]]:
         dimens_list = x_idearef.get(dimens_str())
         for x_dimen in dimens_list:
             if expected_idea_dimen_ref.get(x_dimen) is None:
-                expected_idea_dimen_ref[x_dimen] = [idea_number]
+                expected_idea_dimen_ref[x_dimen] = {idea_number}
             else:
-                expected_idea_dimen_ref.get(x_dimen).append(idea_number)
+                expected_idea_dimen_ref.get(x_dimen).add(idea_number)
     return expected_idea_dimen_ref
 
 

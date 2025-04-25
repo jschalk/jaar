@@ -15,6 +15,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_db_tables,
     create_select_query,
     create_insert_into_clause_str,
+    _get_grouping_groupby_clause,
     get_table_columns,
     create_table_from_columns,
 )
@@ -77,6 +78,7 @@ from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
+    create_pidgin_tables,
     create_fisc_tables,
     create_bud_tables,
     get_fisc_update_inconsist_error_message_sqlstrs,
@@ -394,8 +396,56 @@ FROM yell_valid_events
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def etl_yell_valid_db_to_yell_pidgin_raw_db(cursor: sqlite3_Cursor):
-    pass
+def get_yell_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
+    possible_yell_valid_tables = {
+        f"yell_valid_{idea}": idea for idea in get_idea_numbers()
+    }
+    active_tables = get_db_tables(cursor)
+    return {
+        active_table: possible_yell_valid_tables.get(active_table)
+        for active_table in active_tables
+        if active_table in possible_yell_valid_tables
+    }
+
+
+def etl_yell_valid_db_to_pridgin_prime_raw_db(cursor: sqlite3_Cursor):
+    create_pidgin_tables(cursor)
+    yell_valid_tables = get_yell_valid_tables(cursor)
+    idea_dimen_ref = {
+        pidgin_dimen: idea_numbers
+        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
+        if pidgin_dimen[:6] == "pidgin"
+    }
+    pidgin_raw_tables = {}
+    for pidgin_dimen in idea_dimen_ref:
+        idea_numbers = idea_dimen_ref.get(pidgin_dimen)
+        raw_tablename = f"{pidgin_dimen}_raw"
+        pidgin_raw_tables[raw_tablename] = idea_numbers
+
+    for yell_valid_table, idea_number in yell_valid_tables.items():
+        for raw_tablename, idea_numbers in pidgin_raw_tables.items():
+            if idea_number in idea_numbers:
+                etl_yell_valid_table_into_pidgin_prime_raw_table(
+                    cursor, yell_valid_table, raw_tablename, idea_number
+                )
+
+
+def etl_yell_valid_table_into_pidgin_prime_raw_table(
+    cursor: sqlite3_Cursor, yell_valid_table: str, raw_tablename: str, idea_number: str
+):
+    lab_columns = set(get_table_columns(cursor, raw_tablename))
+    valid_columns = set(get_table_columns(cursor, yell_valid_table))
+    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = get_default_sorted_list(common_cols)
+    select_str = create_select_query(cursor, yell_valid_table, common_cols)
+    select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
+    group_by_clause_str = _get_grouping_groupby_clause(common_cols)
+    common_cols.append("idea_number")
+    common_cols = get_default_sorted_list(common_cols)
+    x_dict = {common_col: None for common_col in common_cols}
+    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
+    insert_select_sqlstr = f"{insert_clause_str}\n{select_str}{group_by_clause_str}"
+    cursor.execute(insert_select_sqlstr)
 
 
 def etl_yell_agg_df_to_yell_pidgin_raw_df(
