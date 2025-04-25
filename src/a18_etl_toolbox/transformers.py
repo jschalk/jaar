@@ -13,7 +13,10 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_row_count,
     save_to_split_csvs,
     get_db_tables,
+    create_select_query,
     create_insert_into_clause_str,
+    get_table_columns,
+    create_table_from_columns,
 )
 from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -238,9 +241,9 @@ def etl_yell_agg_db_to_yell_agg_df(conn: sqlite3_Connection, yell_dir: str):
 def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
     yell_raw_dict = {f"yell_raw_{idea}": idea for idea in get_idea_numbers()}
     yell_raw_tables = set(yell_raw_dict.keys())
-    for raw_tablename in get_db_tables(conn_or_cursor):
-        if raw_tablename in yell_raw_tables:
-            idea_number = yell_raw_dict.get(raw_tablename)
+    for x_tablename in get_db_tables(conn_or_cursor):
+        if x_tablename in yell_raw_tables:
+            idea_number = yell_raw_dict.get(x_tablename)
             idea_filename = get_idea_format_filename(idea_number)
             idearef = get_idearef_obj(idea_filename)
             key_columns_set = set(idearef.get_otx_keys_list())
@@ -255,7 +258,7 @@ def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
             if not db_table_exists(conn_or_cursor, agg_tablename):
                 create_idea_sorted_table(conn_or_cursor, agg_tablename, idea_columns)
             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
-                x_table=raw_tablename,
+                x_table=x_tablename,
                 groupby_columns=key_columns_list,
                 value_columns=value_columns_list,
             )
@@ -268,6 +271,38 @@ def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
 {insert_clause_sqlstr}
 {select_sqlstr};"""
             conn_or_cursor.execute(insert_from_select_sqlstr)
+
+
+def etl_yell_agg_db_to_yell_valid_db(conn_or_cursor: sqlite3_Connection):
+    yell_agg_dict = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
+    yell_agg_tables = set(yell_agg_dict.keys())
+    for x_tablename in get_db_tables(conn_or_cursor):
+        if x_tablename in yell_agg_tables:
+            idea_number = yell_agg_dict.get(x_tablename)
+            valid_tablename = f"yell_valid_{idea_number}"
+            agg_columns = get_table_columns(conn_or_cursor, x_tablename)
+            create_table_from_columns(
+                conn_or_cursor,
+                tablename=valid_tablename,
+                columns_list=agg_columns,
+                column_types={},
+            )
+            agg_cols_dict = {agg_col: None for agg_col in agg_columns}
+            insert_clause_str = create_insert_into_clause_str(
+                conn_or_cursor, valid_tablename, agg_cols_dict
+            )
+            select_sqlstr = create_select_query(
+                conn_or_cursor, x_tablename, agg_columns
+            )
+            select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
+            select_sqlstr = select_sqlstr.replace("event_int", "agg.event_int")
+            select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
+            join_clause_str = """JOIN yell_valid_events valid_events ON valid_events.event_int = agg.event_int"""
+            insert_select_into_sqlstr = f"""
+{insert_clause_str}
+{select_sqlstr}{join_clause_str}
+"""
+            conn_or_cursor.execute(insert_select_into_sqlstr)
 
 
 def create_df_with_groupby_idea_columns(

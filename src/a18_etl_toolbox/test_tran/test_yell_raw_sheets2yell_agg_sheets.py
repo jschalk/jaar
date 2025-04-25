@@ -11,10 +11,12 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     yell_raw_str,
     yell_agg_str,
+    yell_valid_str,
     sheet_exists,
 )
 from src.a18_etl_toolbox.transformers import (
     etl_yell_raw_db_to_yell_agg_db,
+    etl_yell_agg_db_to_yell_valid_db,
     etl_yell_agg_db_to_yell_agg_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -254,3 +256,91 @@ VALUES
         assert len(ex_agg_df) == len(agg_df)
         assert len(agg_df) == 3
         assert ex_agg_df.to_csv() == agg_df.to_csv()
+
+
+def test_etl_yell_agg_db_to_yell_valid_db_PopulatesValidTable_Scenario0_Only_valid_events():
+    # ESTABLISH
+    a23_str = "accord23"
+    sue_str = "Sue"
+    event1 = 1
+    event3 = 3
+    event6 = 6
+    minute_360 = 360
+    minute_420 = 420
+    hour6am = "6am"
+    hour7am = "7am"
+    hour8am = "8am"
+
+    agg_br00003_tablename = f"{yell_agg_str()}_br00003"
+    agg_br00003_columns = [
+        face_name_str(),
+        event_int_str(),
+        fisc_tag_str(),
+        cumlative_minute_str(),
+        hour_tag_str(),
+    ]
+    agg_br00003_types = {
+        face_name_str(): "TEXT",
+        event_int_str(): "TEXT",
+        fisc_tag_str(): "TEXT",
+        cumlative_minute_str(): "TEXT",
+        hour_tag_str(): "TEXT",
+    }
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_table_from_columns(
+            cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
+        )
+        insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
+  {face_name_str()}
+, {event_int_str()}
+, {fisc_tag_str()}
+, {cumlative_minute_str()}
+, {hour_tag_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{sue_str}', '{event1}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{sue_str}', '{event3}', '{a23_str}', '{minute_420}', '{hour8am}')
+, ('{sue_str}', '{event6}', '{a23_str}', '{minute_420}', '{hour8am}')
+;
+"""
+        insert_sqlstr = f"{insert_into_clause} {values_clause}"
+        cursor.execute(insert_sqlstr)
+        assert get_row_count(cursor, agg_br00003_tablename) == 3
+
+        valid_events_columns = [face_name_str(), event_int_str()]
+        valid_events_types = {face_name_str(): "TEXT", event_int_str(): "TEXT"}
+        valid_events_tablename = "yell_valid_events"
+        create_table_from_columns(
+            cursor, valid_events_tablename, valid_events_columns, valid_events_types
+        )
+        insert_into_valid_events = f"""
+INSERT INTO {valid_events_tablename} ({face_name_str()}, {event_int_str()})
+VALUES     
+  ('{sue_str}', '{event1}')
+, ('{sue_str}', '{event6}')
+;
+"""
+        cursor.execute(insert_into_valid_events)
+        assert get_row_count(cursor, valid_events_tablename) == 2
+
+        valid_br00003_tablename = f"{yell_valid_str()}_br00003"
+        assert not db_table_exists(cursor, valid_br00003_tablename)
+
+        # WHEN
+        etl_yell_agg_db_to_yell_valid_db(cursor)
+
+        # THEN
+        assert db_table_exists(cursor, valid_br00003_tablename)
+        assert get_table_columns(cursor, valid_br00003_tablename) == agg_br00003_columns
+        assert get_row_count(cursor, valid_br00003_tablename) == 2
+        select_agg_sqlstr = f"""SELECT * FROM {valid_br00003_tablename};"""
+        cursor.execute(select_agg_sqlstr)
+
+        rows = cursor.fetchall()
+        assert len(rows) == 2
+        row0 = (sue_str, str(event1), a23_str, str(minute_360), hour6am)
+        row1 = (sue_str, str(event6), a23_str, str(minute_420), hour8am)
+        assert rows[0] == row0
+        assert rows[1] == row1
