@@ -9,125 +9,22 @@ from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
-    get_sheet_names,
-    upsert_sheet,
-    cochlea_raw_str,
-    cochlea_agg_str,
+    yell_raw_str,
+    yell_agg_str,
+    yell_valid_str,
     sheet_exists,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_df_to_cochlea_raw_df,
-    etl_sound_df_to_cochlea_raw_db,
-    etl_cochlea_raw_df_to_cochlea_agg_df,
-    etl_cochlea_raw_db_to_cochlea_agg_db,
-    etl_cochlea_agg_db_to_cochlea_agg_df,
+    etl_yell_raw_db_to_yell_agg_db,
+    etl_yell_agg_db_to_yell_valid_db,
+    etl_yell_agg_db_to_yell_agg_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_cochlea_raw_df_to_cochlea_agg_df_CreatesSheets_Scenario0_GroupByWorks(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-    event_1 = 1
-    minute_360 = 360
-    minute_420 = 420
-    hour6am = "6am"
-    hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
-    sound_dir = create_path(get_test_etl_dir(), "sound")
-    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
-    sound_file_path = create_path(sound_dir, ex_filename)
-    cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
-    idea_columns = [
-        face_name_str(),
-        event_int_str(),
-        fisc_tag_str(),
-        cumlative_minute_str(),
-        hour_tag_str(),
-    ]
-    a23_str = "accord23"
-    row1 = [sue_str, event_1, a23_str, minute_360, hour6am]
-    row2 = [sue_str, event_1, a23_str, minute_420, hour7am]
-    row3 = [sue_str, event_1, a23_str, minute_420, hour7am]
-    df1 = DataFrame([row1, row2, row3], columns=idea_columns)
-    upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
-    cochlea__raw_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
-    assert len(cochlea__raw_df) == 3
-
-    # WHEN
-    etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
-
-    # THEN
-    gen_otx_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())
-    ex_otx_df = DataFrame([row1, row2], columns=idea_columns)
-    print(f"{gen_otx_df.columns=}")
-    assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
-    assert list(ex_otx_df.columns) == list(gen_otx_df.columns)
-    assert len(gen_otx_df) > 0
-    assert len(ex_otx_df) == len(gen_otx_df)
-    assert len(gen_otx_df) == 2
-    assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str(), cochlea_agg_str()]
-
-
-def test_etl_cochlea_raw_df_to_cochlea_agg_df_CreatesSheets_Scenario1_GroupByOnlyNonConflictingRecords(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-    event_1 = 1
-    minute_360 = 360
-    minute_420 = 420
-    hour6am = "6am"
-    hour7am = "7am"
-    hour8am = "8am"
-    ex_filename = "fizzbuzz.xlsx"
-    sound_dir = create_path(get_test_etl_dir(), "sound")
-    cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
-    sound_file_path = create_path(sound_dir, ex_filename)
-    cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
-    idea_columns = [
-        face_name_str(),
-        event_int_str(),
-        fisc_tag_str(),
-        cumlative_minute_str(),
-        hour_tag_str(),
-    ]
-    a23_str = "accord23"
-    row1 = [sue_str, event_1, a23_str, minute_360, hour6am]
-    row2 = [sue_str, event_1, a23_str, minute_420, hour7am]
-    row3 = [sue_str, event_1, a23_str, minute_420, hour8am]
-    df1 = DataFrame([row1, row2, row3], columns=idea_columns)
-    upsert_sheet(sound_file_path, "example1_br00003", df1)
-    etl_sound_df_to_cochlea_raw_df(sound_dir, cochlea_dir)
-    cochlea_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_raw_str())
-    assert len(cochlea_df) == 3
-
-    # WHEN
-    etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir)
-
-    # THEN
-    gen_otx_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())
-    ex_otx_df = DataFrame([row1], columns=idea_columns)
-    # print(f"{gen_otx_df.columns=}")
-    print(f"{gen_otx_df=}")
-    assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
-    assert list(ex_otx_df.columns) == list(gen_otx_df.columns)
-    assert len(gen_otx_df) > 0
-    assert len(ex_otx_df) == len(gen_otx_df)
-    assert len(gen_otx_df) == 1
-    assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(cochlea_file_path) == [cochlea_raw_str(), cochlea_agg_str()]
-
-
-def test_etl_cochlea_raw_db_to_cochlea_agg_db_PopulatesAggTable_Scenario0_GroupByWorks(
-    env_dir_setup_cleanup,
-):
+def test_etl_yell_raw_db_to_yell_agg_db_PopulatesAggTable_Scenario0_GroupByWorks():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -136,7 +33,7 @@ def test_etl_cochlea_raw_db_to_cochlea_agg_db_PopulatesAggTable_Scenario0_GroupB
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    raw_br00003_tablename = f"{cochlea_raw_str()}_br00003"
+    raw_br00003_tablename = f"{yell_raw_str()}_br00003"
     raw_br00003_columns = [
         face_name_str(),
         event_int_str(),
@@ -172,12 +69,12 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"{cochlea_agg_str()}_br00003"
+        agg_br00003_tablename = f"{yell_agg_str()}_br00003"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
         # WHEN
-        etl_cochlea_raw_db_to_cochlea_agg_db(cursor)
+        etl_yell_raw_db_to_yell_agg_db(cursor)
 
         # THEN
         assert db_table_exists(cursor, agg_br00003_tablename)
@@ -209,9 +106,7 @@ ORDER BY {event_int_str()}, {cumlative_minute_str()};"""
         assert rows[1] == row1
 
 
-def test_etl_cochlea_raw_db_to_cochlea_agg_db_PopulatesAggTable_Scenario1_GroupByOnlyNonConflictingRecords(
-    env_dir_setup_cleanup,
-):
+def test_etl_yell_raw_db_to_yell_agg_db_PopulatesAggTable_Scenario1_GroupByOnlyNonConflictingRecords():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -222,7 +117,7 @@ def test_etl_cochlea_raw_db_to_cochlea_agg_db_PopulatesAggTable_Scenario1_GroupB
     hour7am = "7am"
     hour8am = "8am"
 
-    raw_br00003_tablename = f"{cochlea_raw_str()}_br00003"
+    raw_br00003_tablename = f"{yell_raw_str()}_br00003"
     raw_br00003_columns = [
         face_name_str(),
         event_int_str(),
@@ -258,12 +153,12 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"{cochlea_agg_str()}_br00003"
+        agg_br00003_tablename = f"{yell_agg_str()}_br00003"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
         # WHEN
-        etl_cochlea_raw_db_to_cochlea_agg_db(cursor)
+        etl_yell_raw_db_to_yell_agg_db(cursor)
 
         # THEN
         assert db_table_exists(cursor, agg_br00003_tablename)
@@ -289,7 +184,7 @@ VALUES
         assert rows[0] == row0
 
 
-def test_etl_cochlea_agg_db_to_cochlea_agg_df_PopulatesAggTable_Scenario0_GroupByWorks(
+def test_etl_yell_agg_db_to_yell_agg_df_PopulatesAggTable_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -303,7 +198,7 @@ def test_etl_cochlea_agg_db_to_cochlea_agg_df_PopulatesAggTable_Scenario0_GroupB
     hour6am = "6am"
     hour7am = "7am"
     hour8am = "8am"
-    agg_br00003_tablename = f"{cochlea_agg_str()}_br00003"
+    agg_br00003_tablename = f"{yell_agg_str()}_br00003"
     agg_br00003_columns = [
         face_name_str(),
         event_int_str(),
@@ -340,16 +235,16 @@ VALUES
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, agg_br00003_tablename) == 3
-        cochlea_dir = create_path(get_test_etl_dir(), "cochlea")
-        cochlea_file_path = create_path(cochlea_dir, "br00003.xlsx")
-        assert not sheet_exists(cochlea_file_path, cochlea_agg_str())
+        yell_dir = create_path(get_test_etl_dir(), "yell")
+        yell_file_path = create_path(yell_dir, "br00003.xlsx")
+        assert not sheet_exists(yell_file_path, yell_agg_str())
 
         # WHEN
-        etl_cochlea_agg_db_to_cochlea_agg_df(db_conn, cochlea_dir)
+        etl_yell_agg_db_to_yell_agg_df(db_conn, yell_dir)
 
         # THEN
-        assert sheet_exists(cochlea_file_path, cochlea_agg_str())
-        agg_df = pandas_read_excel(cochlea_file_path, sheet_name=cochlea_agg_str())
+        assert sheet_exists(yell_file_path, yell_agg_str())
+        agg_df = pandas_read_excel(yell_file_path, sheet_name=yell_agg_str())
         row0 = [sue_str, event_1, a23_str, minute_360, hour6am]
         row1 = [sue_str, event_1, a23_str, minute_420, hour7am]
         row2 = [sue_str, event_2, a23_str, minute_480, hour8am]
@@ -361,3 +256,91 @@ VALUES
         assert len(ex_agg_df) == len(agg_df)
         assert len(agg_df) == 3
         assert ex_agg_df.to_csv() == agg_df.to_csv()
+
+
+def test_etl_yell_agg_db_to_yell_valid_db_PopulatesValidTable_Scenario0_Only_valid_events():
+    # ESTABLISH
+    a23_str = "accord23"
+    sue_str = "Sue"
+    event1 = 1
+    event3 = 3
+    event6 = 6
+    minute_360 = 360
+    minute_420 = 420
+    hour6am = "6am"
+    hour7am = "7am"
+    hour8am = "8am"
+
+    agg_br00003_tablename = f"{yell_agg_str()}_br00003"
+    agg_br00003_columns = [
+        face_name_str(),
+        event_int_str(),
+        fisc_tag_str(),
+        cumlative_minute_str(),
+        hour_tag_str(),
+    ]
+    agg_br00003_types = {
+        face_name_str(): "TEXT",
+        event_int_str(): "TEXT",
+        fisc_tag_str(): "TEXT",
+        cumlative_minute_str(): "TEXT",
+        hour_tag_str(): "TEXT",
+    }
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_table_from_columns(
+            cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
+        )
+        insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
+  {face_name_str()}
+, {event_int_str()}
+, {fisc_tag_str()}
+, {cumlative_minute_str()}
+, {hour_tag_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{sue_str}', '{event1}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{sue_str}', '{event3}', '{a23_str}', '{minute_420}', '{hour8am}')
+, ('{sue_str}', '{event6}', '{a23_str}', '{minute_420}', '{hour8am}')
+;
+"""
+        insert_sqlstr = f"{insert_into_clause} {values_clause}"
+        cursor.execute(insert_sqlstr)
+        assert get_row_count(cursor, agg_br00003_tablename) == 3
+
+        valid_events_columns = [face_name_str(), event_int_str()]
+        valid_events_types = {face_name_str(): "TEXT", event_int_str(): "TEXT"}
+        valid_events_tablename = "yell_valid_events"
+        create_table_from_columns(
+            cursor, valid_events_tablename, valid_events_columns, valid_events_types
+        )
+        insert_into_valid_events = f"""
+INSERT INTO {valid_events_tablename} ({face_name_str()}, {event_int_str()})
+VALUES     
+  ('{sue_str}', '{event1}')
+, ('{sue_str}', '{event6}')
+;
+"""
+        cursor.execute(insert_into_valid_events)
+        assert get_row_count(cursor, valid_events_tablename) == 2
+
+        valid_br00003_tablename = f"{yell_valid_str()}_br00003"
+        assert not db_table_exists(cursor, valid_br00003_tablename)
+
+        # WHEN
+        etl_yell_agg_db_to_yell_valid_db(cursor)
+
+        # THEN
+        assert db_table_exists(cursor, valid_br00003_tablename)
+        assert get_table_columns(cursor, valid_br00003_tablename) == agg_br00003_columns
+        assert get_row_count(cursor, valid_br00003_tablename) == 2
+        select_agg_sqlstr = f"""SELECT * FROM {valid_br00003_tablename};"""
+        cursor.execute(select_agg_sqlstr)
+
+        rows = cursor.fetchall()
+        assert len(rows) == 2
+        row0 = (sue_str, str(event1), a23_str, str(minute_360), hour6am)
+        row1 = (sue_str, str(event6), a23_str, str(minute_420), hour8am)
+        assert rows[0] == row0
+        assert rows[1] == row1

@@ -7,23 +7,23 @@ from src.a00_data_toolboxs.db_toolbox import (
 from src.a02_finance_toolboxs.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic.idea_db_tool import upsert_sheet, cochlea_raw_str
-from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
-    env_dir_setup_cleanup,
+from src.a17_idea_logic.idea_db_tool import (
+    get_sheet_names,
+    upsert_sheet,
+    yell_raw_str,
 )
-from pandas import DataFrame
+from src.a18_etl_toolbox.transformers import (
+    etl_sound_df_to_yell_raw_db,
+    etl_yell_raw_db_to_yell_raw_df,
+)
+from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(
-    env_dir_setup_cleanup,
-):
+def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
     event_1 = 1
     event_2 = 2
@@ -32,8 +32,9 @@ def test_WorldUnit_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
-    cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+    sound_dir = create_path(get_test_etl_dir(), "sound")
+    yell_dir = create_path(get_test_etl_dir(), "yell")
+    sound_file_path = create_path(sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -63,15 +64,13 @@ def test_WorldUnit_sound_df_to_cochlea_raw_df_CreatesCochleaFiles(
     upsert_sheet(sound_file_path, br00003_ex1_str, df1)
     upsert_sheet(sound_file_path, br00003_ex2_str, df2)
     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
-    assert os_path_exists(cochlea_file_path) is False
-
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{cochlea_raw_str()}_br00003"
+        br00003_tablename = f"{yell_raw_str()}_br00003"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        fizz_world.sound_df_to_cochlea_raw_db(db_conn)
+        etl_sound_df_to_yell_raw_db(db_conn, sound_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -94,7 +93,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         file = ex_filename
         e1 = event_1
         e2 = event_2
-        s_dir = create_path(fizz_world._sound_dir, ".")
+        s_dir = create_path(sound_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         row0 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
@@ -109,3 +108,20 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         assert rows[2] == row2
         assert rows[3] == row3
         assert rows[4] == row4
+
+        yell_file_path = create_path(yell_dir, "br00003.xlsx")
+        assert os_path_exists(yell_file_path) is False
+
+        # WHEN
+        etl_yell_raw_db_to_yell_raw_df(db_conn, yell_dir)
+
+        # THEN
+        print(f"{yell_file_path=}")
+        assert os_path_exists(yell_file_path)
+        x_df = pandas_read_excel(yell_file_path, sheet_name=yell_raw_str())
+        assert set(idea_columns).issubset(set(x_df.columns))
+        assert file_dir_str in set(x_df.columns)
+        assert filename_str in set(x_df.columns)
+        assert sheet_name_str in set(x_df.columns)
+        assert len(x_df) == 5
+        assert get_sheet_names(yell_file_path) == [yell_raw_str()]

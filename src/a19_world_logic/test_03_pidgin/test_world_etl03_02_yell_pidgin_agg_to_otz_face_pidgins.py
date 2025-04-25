@@ -15,7 +15,7 @@ from src.a16_pidgin_logic.pidgin_config import (
 )
 from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
-    create_cochlea_pidgin_path,
+    create_yell_pidgin_path,
     create_syntax_otx_pidgin_path,
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
@@ -29,7 +29,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_cochlea_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDimens(
+def test_WorldUnit_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -101,7 +101,7 @@ def test_WorldUnit_cochlea_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDim
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_file_columns)
 
-    agg_pidgin_path = create_cochlea_pidgin_path(fizz_world._cochlea_dir)
+    agg_pidgin_path = create_yell_pidgin_path(fizz_world._yell_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
@@ -112,7 +112,7 @@ def test_WorldUnit_cochlea_pidgin_agg_to_otz_face_pidgin_agg_Scenario1_AllMapDim
     assert os_path_exists(sue_pidgin_file_path) is False
 
     # WHEN
-    fizz_world.cochlea_pidgin_agg_to_otz_face_pidgin_agg()
+    fizz_world.yell_pidgin_agg_df_to_otz_face_pidgin_agg_df()
 
     # THEN
     assert os_path_exists(sue_dir)

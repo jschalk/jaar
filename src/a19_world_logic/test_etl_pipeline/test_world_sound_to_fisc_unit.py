@@ -27,8 +27,8 @@ from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
-    cochlea_agg_str,
-    cochlea_raw_str,
+    yell_agg_str,
+    yell_raw_str,
 )
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
@@ -129,13 +129,13 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     mstr_dir = fizz_world._fisc_mstr_dir
     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+    yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
     assert os_path_exists(sound_file_path)
-    assert not os_path_exists(cochlea_file_path)
+    assert not os_path_exists(yell_file_path)
     assert not os_path_exists(a23_json_path)
     assert not os_path_exists(a23_sue_gut_path)
     assert not os_path_exists(a23_sue_job_path)
@@ -148,14 +148,14 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
     assert os_path_exists(sound_file_path)
-    assert os_path_exists(cochlea_file_path)
-    assert sheet_exists(cochlea_file_path, cochlea_raw_str())
-    assert os_path_exists(cochlea_file_path)
+    assert os_path_exists(yell_file_path)
+    assert sheet_exists(yell_file_path, yell_raw_str())
+    assert os_path_exists(yell_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_gut_path)
     assert os_path_exists(a23_sue_job_path)
     assert os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 82
+    assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
 def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(
@@ -190,7 +190,7 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
     assert os_path_exists(a23_ote1_csv_path)
 
 
-# def test_WorldUnit_sound_to_standings_CreatesCochleaFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_sound_to_standings_CreatesYellFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -245,9 +245,9 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
 #     fizz_world.sound_to_standings()
 
 #     # THEN
-#     cochlea_file_path = create_path(fizz_world._cochlea_dir, "br00003.xlsx")
+#     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
 #     assert os_path_exists(sound_file_path)
-#     assert os_path_exists(cochlea_file_path)
+#     assert os_path_exists(yell_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_job_path)

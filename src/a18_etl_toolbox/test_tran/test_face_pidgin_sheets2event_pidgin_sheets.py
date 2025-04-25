@@ -7,7 +7,7 @@ from src.a18_etl_toolbox.tran_path import (
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
     etl_face_pidgin_to_event_pidgins,
-    etl_otz_face_pidgins_to_otz_event_pidgins,
+    etl_otz_face_pidgins_df_to_otz_event_pidgins_df,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
 from pandas import DataFrame, read_excel as pandas_read_excel
@@ -262,7 +262,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     assert sheet_exists(event9_pidgin_file_path, road_agg_str)
 
 
-def test_etl_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face_names(
+def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -313,7 +313,7 @@ def test_etl_otz_face_pidgins_to_otz_event_pidgins_Scenario0_road_Two_face_names
     assert sheet_exists(event9_pidgin_file_path, road_agg_str) is False
 
     # WHEN
-    etl_otz_face_pidgins_to_otz_event_pidgins(faces_dir)
+    etl_otz_face_pidgins_df_to_otz_event_pidgins_df(faces_dir)
 
     # THEN
     assert os_path_exists(event3_dir)

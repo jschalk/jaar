@@ -13,7 +13,10 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_row_count,
     save_to_split_csvs,
     get_db_tables,
+    create_select_query,
     create_insert_into_clause_str,
+    get_table_columns,
+    create_table_from_columns,
 )
 from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -62,7 +65,7 @@ from src.a17_idea_logic.idea_db_tool import (
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_cochlea_raw_grouping_with_all_values_equal_df,
+    get_yell_raw_grouping_with_all_values_equal_df,
     get_grouping_with_all_values_equal_sql_query,
     translate_all_columns_dataframe,
     insert_idea_csv,
@@ -71,10 +74,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_idea_into_dimen_raw_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
-from src.a18_etl_toolbox.tran_path import (
-    create_cochlea_events_path,
-    create_cochlea_pidgin_path,
-)
+from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_create_table_sqlstrs,
     create_fisc_tables,
@@ -123,7 +123,7 @@ MAPS_DIMENS = {
     "map_road": "RoadUnit",
 }
 
-class_types = {
+CLASS_TYPES = {
     "NameUnit": {
         "raw": "name_raw",
         "agg": "name_agg",
@@ -162,22 +162,22 @@ def get_class_type(pidgin_dimen: str) -> str:
 
 
 def get_sheet_raw_name(class_type: str) -> str:
-    return class_types[class_type]["raw"]
+    return CLASS_TYPES[class_type]["raw"]
 
 
 def get_sheet_agg_name(class_type: str) -> str:
-    return class_types[class_type]["agg"]
+    return CLASS_TYPES[class_type]["agg"]
 
 
 def get_otx_obj(class_type, x_row) -> str:
-    return x_row[class_types[class_type]["otx_obj"]]
+    return x_row[CLASS_TYPES[class_type]["otx_obj"]]
 
 
 def get_inx_obj(class_type, x_row) -> str:
-    return x_row[class_types[class_type]["inx_obj"]]
+    return x_row[CLASS_TYPES[class_type]["inx_obj"]]
 
 
-def etl_sound_df_to_cochlea_raw_db(conn: sqlite3_Connection, sound_dir: str):
+def etl_sound_df_to_yell_raw_db(conn: sqlite3_Connection, sound_dir: str):
     for ref in get_all_idea_dataframes(sound_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
@@ -189,55 +189,20 @@ def etl_sound_df_to_cochlea_raw_db(conn: sqlite3_Connection, sound_dir: str):
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
-        x_tablename = f"cochlea_raw_{ref.idea_number}"
+        x_tablename = f"yell_raw_{ref.idea_number}"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
-def etl_cochlea_raw_db_to_cochlea_raw_df(conn: sqlite3_Connection, cochlea_dir: str):
-    cochlea_raw_dict = {f"cochlea_raw_{idea}": idea for idea in get_idea_numbers()}
-    cochlea_raw_tables = set(cochlea_raw_dict.keys())
+def etl_yell_raw_db_to_yell_raw_df(conn: sqlite3_Connection, yell_dir: str):
+    yell_raw_dict = {f"yell_raw_{idea}": idea for idea in get_idea_numbers()}
+    yell_raw_tables = set(yell_raw_dict.keys())
     for table_name in get_db_tables(conn):
-        if table_name in cochlea_raw_tables:
-            idea_number = cochlea_raw_dict.get(table_name)
-            cochlea_path = create_path(cochlea_dir, f"{idea_number}.xlsx")
+        if table_name in yell_raw_tables:
+            idea_number = yell_raw_dict.get(table_name)
+            yell_path = create_path(yell_dir, f"{idea_number}.xlsx")
             sqlstr = f"SELECT * FROM {table_name}"
-            cochlea_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(cochlea_path, "cochlea_raw", cochlea_raw_idea_df)
-
-
-def etl_sound_df_to_cochlea_raw_df(sound_dir: str, cochlea_dir: str):
-    transformer = SoundToCochleaTransformer(sound_dir, cochlea_dir)
-    transformer.transform()
-
-
-class SoundToCochleaTransformer:
-    def __init__(self, sound_dir: str, cochlea_dir: str):
-        self.sound_dir = sound_dir
-        self.cochlea_dir = cochlea_dir
-
-    def transform(self):
-        for idea_number, dfs in self._group_sound_data().items():
-            self._save_to_cochlea_raw(idea_number, dfs)
-
-    def _group_sound_data(self):
-        grouped_data = {}
-        for ref in get_all_idea_dataframes(self.sound_dir):
-            df = self._read_and_title_dataframe(ref)
-            grouped_data.setdefault(ref.idea_number, []).append(df)
-        return grouped_data
-
-    def _read_and_title_dataframe(self, ref: IdeaFileRef):
-        x_file_path = create_path(ref.file_dir, ref.filename)
-        df = pandas_read_excel(x_file_path, ref.sheet_name)
-        df["file_dir"] = ref.file_dir
-        df["filename"] = ref.filename
-        df["sheet_name"] = ref.sheet_name
-        return df
-
-    def _save_to_cochlea_raw(self, idea_number: str, dfs: list):
-        job_df = pandas_concat(dfs)
-        cochlea_path = create_path(self.cochlea_dir, f"{idea_number}.xlsx")
-        upsert_sheet(cochlea_path, "cochlea_raw", job_df)
+            yell_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(yell_path, "yell_raw", yell_raw_idea_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -253,32 +218,32 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_cochlea_raw_df_to_cochlea_agg_df(cochlea_dir):
-    for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
-        cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        cochlea_raw_df = pandas_read_excel(cochlea_idea_path, "cochlea_raw")
-        otx_df = create_df_with_groupby_idea_columns(cochlea_raw_df, br_ref.idea_number)
-        upsert_sheet(cochlea_idea_path, "cochlea_agg", otx_df)
+def etl_yell_raw_db_to_yell_agg_df(yell_dir):
+    for br_ref in get_existing_excel_idea_file_refs(yell_dir):
+        yell_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        yell_raw_df = pandas_read_excel(yell_idea_path, "yell_raw")
+        otx_df = create_df_with_groupby_idea_columns(yell_raw_df, br_ref.idea_number)
+        upsert_sheet(yell_idea_path, "yell_agg", otx_df)
 
 
-def etl_cochlea_agg_db_to_cochlea_agg_df(conn: sqlite3_Connection, cochlea_dir: str):
-    cochlea_agg_dict = {f"cochlea_agg_{idea}": idea for idea in get_idea_numbers()}
-    cochlea_agg_tables = set(cochlea_agg_dict.keys())
+def etl_yell_agg_db_to_yell_agg_df(conn: sqlite3_Connection, yell_dir: str):
+    yell_agg_dict = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
+    yell_agg_tables = set(yell_agg_dict.keys())
     for table_name in get_db_tables(conn):
-        if table_name in cochlea_agg_tables:
-            idea_number = cochlea_agg_dict.get(table_name)
-            cochlea_path = create_path(cochlea_dir, f"{idea_number}.xlsx")
+        if table_name in yell_agg_tables:
+            idea_number = yell_agg_dict.get(table_name)
+            yell_path = create_path(yell_dir, f"{idea_number}.xlsx")
             sqlstr = f"SELECT * FROM {table_name}"
-            cochlea_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(cochlea_path, "cochlea_agg", cochlea_agg_idea_df)
+            yell_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(yell_path, "yell_agg", yell_agg_idea_df)
 
 
-def etl_cochlea_raw_db_to_cochlea_agg_db(conn_or_cursor: sqlite3_Connection):
-    cochlea_raw_dict = {f"cochlea_raw_{idea}": idea for idea in get_idea_numbers()}
-    cochlea_raw_tables = set(cochlea_raw_dict.keys())
-    for raw_tablename in get_db_tables(conn_or_cursor):
-        if raw_tablename in cochlea_raw_tables:
-            idea_number = cochlea_raw_dict.get(raw_tablename)
+def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
+    yell_raw_dict = {f"yell_raw_{idea}": idea for idea in get_idea_numbers()}
+    yell_raw_tables = set(yell_raw_dict.keys())
+    for x_tablename in get_db_tables(conn_or_cursor):
+        if x_tablename in yell_raw_tables:
+            idea_number = yell_raw_dict.get(x_tablename)
             idea_filename = get_idea_format_filename(idea_number)
             idearef = get_idearef_obj(idea_filename)
             key_columns_set = set(idearef.get_otx_keys_list())
@@ -289,11 +254,11 @@ def etl_cochlea_raw_db_to_cochlea_agg_db(conn_or_cursor: sqlite3_Connection):
             value_columns_list = get_default_sorted_list(
                 value_columns_set, idea_columns
             )
-            agg_tablename = f"cochlea_agg_{idea_number}"
+            agg_tablename = f"yell_agg_{idea_number}"
             if not db_table_exists(conn_or_cursor, agg_tablename):
                 create_idea_sorted_table(conn_or_cursor, agg_tablename, idea_columns)
             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
-                x_table=raw_tablename,
+                x_table=x_tablename,
                 groupby_columns=key_columns_list,
                 value_columns=value_columns_list,
             )
@@ -308,58 +273,90 @@ def etl_cochlea_raw_db_to_cochlea_agg_db(conn_or_cursor: sqlite3_Connection):
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
 
+def etl_yell_agg_db_to_yell_valid_db(conn_or_cursor: sqlite3_Connection):
+    yell_agg_dict = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
+    yell_agg_tables = set(yell_agg_dict.keys())
+    for x_tablename in get_db_tables(conn_or_cursor):
+        if x_tablename in yell_agg_tables:
+            idea_number = yell_agg_dict.get(x_tablename)
+            valid_tablename = f"yell_valid_{idea_number}"
+            agg_columns = get_table_columns(conn_or_cursor, x_tablename)
+            create_table_from_columns(
+                conn_or_cursor,
+                tablename=valid_tablename,
+                columns_list=agg_columns,
+                column_types={},
+            )
+            agg_cols_dict = {agg_col: None for agg_col in agg_columns}
+            insert_clause_str = create_insert_into_clause_str(
+                conn_or_cursor, valid_tablename, agg_cols_dict
+            )
+            select_sqlstr = create_select_query(
+                conn_or_cursor, x_tablename, agg_columns
+            )
+            select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
+            select_sqlstr = select_sqlstr.replace("event_int", "agg.event_int")
+            select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
+            join_clause_str = """JOIN yell_valid_events valid_events ON valid_events.event_int = agg.event_int"""
+            insert_select_into_sqlstr = f"""
+{insert_clause_str}
+{select_sqlstr}{join_clause_str}
+"""
+            conn_or_cursor.execute(insert_select_into_sqlstr)
+
+
 def create_df_with_groupby_idea_columns(
-    cochlea_raw_df: DataFrame, idea_number: str
+    yell_raw_df: DataFrame, idea_number: str
 ) -> DataFrame:
     idea_filename = get_idea_format_filename(idea_number)
     idearef = get_idearef_obj(idea_filename)
     required_columns = idearef.get_otx_keys_list()
     idea_columns_set = set(idearef._attributes.keys())
     idea_columns_list = get_default_sorted_list(idea_columns_set)
-    cochlea_raw_df = cochlea_raw_df[idea_columns_list]
-    return get_cochlea_raw_grouping_with_all_values_equal_df(
-        cochlea_raw_df, required_columns, idea_number
+    yell_raw_df = yell_raw_df[idea_columns_list]
+    return get_yell_raw_grouping_with_all_values_equal_df(
+        yell_raw_df, required_columns, idea_number
     )
 
 
-def etl_cochlea_agg_non_pidgin_ideas_to_cochlea_valid(
-    cochlea_dir: str, legitimate_events: set[EventInt]
+def etl_yell_agg_non_pidgin_ideas_to_yell_valid(
+    yell_dir: str, legitimate_events: set[EventInt]
 ):
-    """create cochlea_legit sheet with each idea's data that is of a legitimate event"""
-    for br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
-        cochlea_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        cochlea_agg = pandas_read_excel(cochlea_idea_path, "cochlea_agg")
-        cochlea_valid_df = cochlea_agg[cochlea_agg["event_int"].isin(legitimate_events)]
-        upsert_sheet(cochlea_idea_path, "cochlea_valid", cochlea_valid_df)
+    """create yell_legit sheet with each idea's data that is of a legitimate event"""
+    for br_ref in get_existing_excel_idea_file_refs(yell_dir):
+        yell_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        yell_agg = pandas_read_excel(yell_idea_path, "yell_agg")
+        yell_valid_df = yell_agg[yell_agg["event_int"].isin(legitimate_events)]
+        upsert_sheet(yell_idea_path, "yell_valid", yell_valid_df)
 
 
-def etl_cochlea_raw_db_to_cochlea_agg_events_db(conn_or_cursor: sqlite3_Cursor):
-    cochlea_events_tablename = "cochlea_events"
-    if not db_table_exists(conn_or_cursor, cochlea_events_tablename):
-        cochlea_events_columns = ["face_name", "event_int", "error_message"]
+def etl_yell_raw_db_to_yell_agg_events_db(conn_or_cursor: sqlite3_Cursor):
+    yell_events_tablename = "yell_agg_events"
+    if not db_table_exists(conn_or_cursor, yell_events_tablename):
+        yell_events_columns = ["idea_number", "face_name", "event_int", "error_message"]
         create_idea_sorted_table(
-            conn_or_cursor, cochlea_events_tablename, cochlea_events_columns
+            conn_or_cursor, yell_events_tablename, yell_events_columns
         )
 
-    cochlea_agg_tables = {f"cochlea_agg_{idea}" for idea in get_idea_numbers()}
+    yell_agg_tables = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
     for agg_tablename in get_db_tables(conn_or_cursor):
-        if agg_tablename in cochlea_agg_tables:
+        if agg_tablename in yell_agg_tables:
+            idea_number = yell_agg_tables.get(agg_tablename)
             insert_from_select_sqlstr = f"""
-INSERT INTO {cochlea_events_tablename} (face_name, event_int)
-SELECT face_name, event_int 
+INSERT INTO {yell_events_tablename} (idea_number, face_name, event_int)
+SELECT '{idea_number}', face_name, event_int 
 FROM {agg_tablename}
 GROUP BY face_name, event_int
-ORDER BY face_name, event_int
 ;
 """
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
     update_error_message_sqlstr = f"""
-UPDATE {cochlea_events_tablename}
+UPDATE {yell_events_tablename}
 SET error_message = 'invalid because of conflicting event_int'
 WHERE event_int IN (
     SELECT event_int 
-    FROM {cochlea_events_tablename} 
+    FROM {yell_events_tablename} 
     GROUP BY event_int 
     HAVING MAX(face_name) <> MIN(face_name)
 )
@@ -368,171 +365,77 @@ WHERE event_int IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
-#             idea_filename = get_idea_format_filename(idea_number)
-#             idearef = get_idearef_obj(idea_filename)
-#             key_columns_set = set(idearef.get_otx_keys_list())
-#             idea_columns_set = set(idearef._attributes.keys())
-#             value_columns_set = idea_columns_set.difference(key_columns_set)
-#             idea_columns = get_default_sorted_list(idea_columns_set)
-#             key_columns_list = get_default_sorted_list(key_columns_set, idea_columns)
-#             value_columns_list = get_default_sorted_list(
-#                 value_columns_set, idea_columns
-#             )
-#             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
-#                 x_table=raw_tablename,
-#                 groupby_columns=key_columns_list,
-#                 value_columns=value_columns_list,
-#             )
-#             insert_clause_sqlstr = create_insert_into_clause_str(
-#                 conn_or_cursor,
-#                 agg_tablename,
-#                 values_dict=idearef._attributes,
-#             )
-#             insert_from_select_sqlstr = f"""
-# {insert_clause_sqlstr}
-# {select_sqlstr};"""
-#             conn_or_cursor.execute(insert_from_select_sqlstr)
+def etl_yell_agg_events_db_to_yell_valid_events_db(conn_or_cursor: sqlite3_Cursor):
+    valid_events_tablename = "yell_valid_events"
+    if not db_table_exists(conn_or_cursor, valid_events_tablename):
+        yell_events_columns = ["face_name", "event_int"]
+        create_idea_sorted_table(
+            conn_or_cursor, valid_events_tablename, yell_events_columns
+        )
+    insert_select_sqlstr = f"""
+INSERT INTO {valid_events_tablename} (face_name, event_int)
+SELECT face_name, event_int 
+FROM yell_agg_events
+WHERE error_message IS NULL
+;
+"""
+    conn_or_cursor.execute(insert_select_sqlstr)
 
 
-def etl_cochlea_agg_df_to_cochlea_agg_events_df(cochlea_dir):
-    for file_ref in get_existing_excel_idea_file_refs(cochlea_dir):
-        cochlea_idea_path = create_path(cochlea_dir, file_ref.filename)
-        cochlea_agg_df = pandas_read_excel(cochlea_idea_path, "cochlea_agg")
-        events_df = get_df_of_cochlea_agg_events(cochlea_agg_df)
-        upsert_sheet(cochlea_idea_path, "cochlea_events", events_df)
+def etl_yell_agg_events_db_to_event_dict(
+    conn_or_cursor: sqlite3_Cursor,
+) -> dict[EventInt, FaceName]:
+    select_sqlstr = """
+SELECT event_int, face_name 
+FROM yell_valid_events
+;
+"""
+    conn_or_cursor.execute(select_sqlstr)
+    return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def get_df_of_cochlea_agg_events(cochlea_agg_df: DataFrame) -> DataFrame:
-    events_df = cochlea_agg_df[["face_name", "event_int"]].drop_duplicates()
-    events_df["error_message"] = (
-        events_df["event_int"]
-        .duplicated(keep=False)
-        .apply(lambda x: "invalid because of conflicting event_int" if x else "")
-    )
-    return events_df.sort_values(["face_name", "event_int"])
+def etl_yell_valid_db_to_yell_pidgin_raw_db(cursor: sqlite3_Cursor):
+    pass
 
 
-def etl_cochlea_events_to_events_log(cochlea_dir: str):
-    transformer = CochleaEventsToEventsLogTransformer(cochlea_dir)
-    transformer.transform()
+def etl_yell_agg_df_to_yell_pidgin_raw_df(
+    legitimate_events: set[EventInt], yell_dir: str
+):
+    etl_yell_agg_to_pidgin_name_raw(legitimate_events, yell_dir)
+    etl_yell_agg_to_pidgin_label_raw(legitimate_events, yell_dir)
+    etl_yell_agg_to_pidgin_tag_raw(legitimate_events, yell_dir)
+    etl_yell_agg_to_pidgin_road_raw(legitimate_events, yell_dir)
 
 
-class CochleaEventsToEventsLogTransformer:
-    def __init__(self, cochlea_dir: str):
-        self.cochlea_dir = cochlea_dir
-
-    def transform(self):
-        sheet_name = "cochlea_events"
-        for br_ref in get_existing_excel_idea_file_refs(self.cochlea_dir):
-            cochlea_idea_path = create_path(self.cochlea_dir, br_ref.filename)
-            otx_events_df = pandas_read_excel(cochlea_idea_path, sheet_name)
-            events_log_df = self.get_event_log_df(
-                otx_events_df, self.cochlea_dir, br_ref.filename
-            )
-            self._save_events_log_file(events_log_df)
-
-    def get_event_log_df(
-        self, otx_events_df: DataFrame, x_dir: str, x_filename: str
-    ) -> DataFrame:
-        otx_events_df[["file_dir"]] = x_dir
-        otx_events_df[["filename"]] = x_filename
-        otx_events_df[["sheet_name"]] = "cochlea_events"
-        cols = [
-            "file_dir",
-            "filename",
-            "sheet_name",
-            "face_name",
-            "event_int",
-            "error_message",
-        ]
-        otx_events_df = otx_events_df[cols]
-        return otx_events_df
-
-    def _save_events_log_file(self, events_df: DataFrame):
-        events_file_path = create_cochlea_events_path(self.cochlea_dir)
-        events_log_str = "events_log"
-        if os_path_exists(events_file_path):
-            events_log_df = pandas_read_excel(events_file_path, events_log_str)
-            events_df = pandas_concat([events_log_df, events_df])
-        upsert_sheet(events_file_path, events_log_str, events_df, replace=True)
+def etl_yell_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], yell_dir: str):
+    yell_agg_single_to_pidgin_raw("map_name", legitimate_events, yell_dir)
 
 
-def _create_events_agg_df(events_log_df: DataFrame) -> DataFrame:
-    events_agg_df = events_log_df[["face_name", "event_int"]].drop_duplicates()
-    events_agg_df["error_message"] = (
-        events_agg_df["event_int"]
-        .duplicated(keep=False)
-        .apply(lambda x: "invalid because of conflicting event_int" if x else "")
-    )
-    return events_agg_df.sort_values(["event_int", "face_name"])
+def etl_yell_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], yell_dir: str):
+    yell_agg_single_to_pidgin_raw("map_label", legitimate_events, yell_dir)
 
 
-def etl_cochlea_events_log_to_cochlea_events_agg(cochlea_dir):
-    events_file_path = create_cochlea_events_path(cochlea_dir)
-    if os_path_exists(events_file_path):
-        events_log_df = pandas_read_excel(events_file_path, "events_log")
-        events_agg_df = _create_events_agg_df(events_log_df)
-        upsert_sheet(events_file_path, "events_agg", events_agg_df)
+def etl_yell_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], yell_dir: str):
+    yell_agg_single_to_pidgin_raw("map_tag", legitimate_events, yell_dir)
 
 
-def etl_events_agg_file_to_events_dict(cochlea_dir) -> dict[EventInt, FaceName]:
-    events_file_path = create_cochlea_events_path(cochlea_dir)
-    x_dict = {}
-    if os_path_exists(events_file_path):
-        events_agg_df = pandas_read_excel(events_file_path, "events_agg")
-        for index, event_agg_row in events_agg_df.iterrows():
-            x_note = event_agg_row["error_message"]
-            if x_note != "invalid because of conflicting event_int":
-                x_dict[event_agg_row["event_int"]] = event_agg_row["face_name"]
-    return x_dict
+def etl_yell_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], yell_dir: str):
+    yell_agg_single_to_pidgin_raw("map_road", legitimate_events, yell_dir)
 
 
-def cochlea_agg_single_to_pidgin_raw(
-    pidgin_dimen: str, legitimate_events: set[EventInt], cochlea_dir: str
+def yell_agg_single_to_pidgin_raw(
+    pidgin_dimen: str, legitimate_events: set[EventInt], yell_dir: str
 ):
     x_events = legitimate_events
-    transformer = CochleaAggToRawTransformer(cochlea_dir, pidgin_dimen, x_events)
+    transformer = YellAggToPidginRawTransformer(yell_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-def etl_cochlea_agg_to_pidgin_name_raw(
-    legitimate_events: set[EventInt], cochlea_dir: str
-):
-    cochlea_agg_single_to_pidgin_raw("map_name", legitimate_events, cochlea_dir)
-
-
-def etl_cochlea_agg_to_pidgin_label_raw(
-    legitimate_events: set[EventInt], cochlea_dir: str
-):
-    cochlea_agg_single_to_pidgin_raw("map_label", legitimate_events, cochlea_dir)
-
-
-def etl_cochlea_agg_to_pidgin_tag_raw(
-    legitimate_events: set[EventInt], cochlea_dir: str
-):
-    cochlea_agg_single_to_pidgin_raw("map_tag", legitimate_events, cochlea_dir)
-
-
-def etl_cochlea_agg_to_pidgin_road_raw(
-    legitimate_events: set[EventInt], cochlea_dir: str
-):
-    cochlea_agg_single_to_pidgin_raw("map_road", legitimate_events, cochlea_dir)
-
-
-def etl_cochlea_agg_to_cochlea_pidgin_raw(
-    legitimate_events: set[EventInt], cochlea_dir: str
-):
-    etl_cochlea_agg_to_pidgin_name_raw(legitimate_events, cochlea_dir)
-    etl_cochlea_agg_to_pidgin_label_raw(legitimate_events, cochlea_dir)
-    etl_cochlea_agg_to_pidgin_tag_raw(legitimate_events, cochlea_dir)
-    etl_cochlea_agg_to_pidgin_road_raw(legitimate_events, cochlea_dir)
-
-
-class CochleaAggToRawTransformer:
+class YellAggToPidginRawTransformer:
     def __init__(
-        self, cochlea_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
+        self, yell_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
-        self.cochlea_dir = cochlea_dir
+        self.yell_dir = yell_dir
         self.legitmate_events = legitmate_events
         self.pidgin_dimen = pidgin_dimen
         self.class_type = get_class_type(pidgin_dimen)
@@ -543,29 +446,30 @@ class CochleaAggToRawTransformer:
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
         pidgin_columns.insert(0, "src_idea")
+        # empty df with src_idea, face_name, event_int, idea_columns...
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
-            cochlea_idea_path = create_path(self.cochlea_dir, idea_filename)
-            if os_path_exists(cochlea_idea_path):
+            yell_idea_path = create_path(self.yell_dir, idea_filename)
+            if os_path_exists(yell_idea_path):
                 self.insert_raw_rows(
-                    pidgin_df, idea_number, cochlea_idea_path, pidgin_columns
+                    pidgin_df, idea_number, yell_idea_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_cochlea_pidgin_path(self.cochlea_dir)
+        pidgin_file_path = create_yell_pidgin_path(self.yell_dir)
         upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
 
     def insert_raw_rows(
         self,
         raw_df: DataFrame,
         idea_number: str,
-        cochlea_idea_path: str,
+        yell_idea_path: str,
         df_columns: list[str],
     ):
-        cochlea_agg_df = pandas_read_excel(cochlea_idea_path, sheet_name="cochlea_agg")
-        df_missing_cols = set(df_columns).difference(cochlea_agg_df.columns)
+        yell_agg_df = pandas_read_excel(yell_idea_path, sheet_name="yell_agg")
+        df_missing_cols = set(df_columns).difference(yell_agg_df.columns)
 
-        for index, x_row in cochlea_agg_df.iterrows():
+        for index, x_row in yell_agg_df.iterrows():
             event_int = x_row["event_int"]
             if event_int in self.legitmate_events:
                 face_name = x_row["face_name"]
@@ -602,39 +506,39 @@ class CochleaAggToRawTransformer:
         return None
 
 
-def etl_pidgin_name_raw_to_name_agg(cochlea_dir: str):
-    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_name")
+def etl_pidgin_name_raw_to_name_agg(yell_dir: str):
+    etl_pidgin_single_raw_to_agg(yell_dir, "map_name")
 
 
-def etl_pidgin_label_raw_to_label_agg(cochlea_dir: str):
-    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_label")
+def etl_pidgin_label_raw_to_label_agg(yell_dir: str):
+    etl_pidgin_single_raw_to_agg(yell_dir, "map_label")
 
 
-def etl_pidgin_road_raw_to_road_agg(cochlea_dir: str):
-    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_road")
+def etl_pidgin_road_raw_to_road_agg(yell_dir: str):
+    etl_pidgin_single_raw_to_agg(yell_dir, "map_road")
 
 
-def etl_pidgin_tag_raw_to_tag_agg(cochlea_dir: str):
-    etl_pidgin_single_raw_to_agg(cochlea_dir, "map_tag")
+def etl_pidgin_tag_raw_to_tag_agg(yell_dir: str):
+    etl_pidgin_single_raw_to_agg(yell_dir, "map_tag")
 
 
-def etl_pidgin_single_raw_to_agg(cochlea_dir: str, map_dimen: str):
-    transformer = PidginRawToAggTransformer(cochlea_dir, map_dimen)
+def etl_pidgin_single_raw_to_agg(yell_dir: str, map_dimen: str):
+    transformer = PidginRawToAggTransformer(yell_dir, map_dimen)
     transformer.transform()
 
 
-def etl_cochlea_pidgin_raw_to_pidgin_agg(cochlea_dir):
-    etl_pidgin_name_raw_to_name_agg(cochlea_dir)
-    etl_pidgin_label_raw_to_label_agg(cochlea_dir)
-    etl_pidgin_road_raw_to_road_agg(cochlea_dir)
-    etl_pidgin_tag_raw_to_tag_agg(cochlea_dir)
+def etl_yell_pidgin_raw_df_to_pidgin_agg_df(yell_dir):
+    etl_pidgin_name_raw_to_name_agg(yell_dir)
+    etl_pidgin_label_raw_to_label_agg(yell_dir)
+    etl_pidgin_road_raw_to_road_agg(yell_dir)
+    etl_pidgin_tag_raw_to_tag_agg(yell_dir)
 
 
 class PidginRawToAggTransformer:
-    def __init__(self, cochlea_dir: str, pidgin_dimen: str):
-        self.cochlea_dir = cochlea_dir
+    def __init__(self, yell_dir: str, pidgin_dimen: str):
+        self.yell_dir = yell_dir
         self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_cochlea_pidgin_path(self.cochlea_dir)
+        self.file_path = create_yell_pidgin_path(self.yell_dir)
         self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
@@ -646,7 +550,7 @@ class PidginRawToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_cochlea_pidgin_path(self.cochlea_dir)
+        pidgin_file_path = create_yell_pidgin_path(self.yell_dir)
         raw_sheet_name = get_sheet_raw_name(self.class_type)
         raw_df = pandas_read_excel(pidgin_file_path, sheet_name=raw_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(raw_df)
@@ -680,10 +584,10 @@ class PidginRawToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(cochlea_dir: str, faces_dir: str):
-    agg_pidgin = create_cochlea_pidgin_path(cochlea_dir)
-    for class_type in class_types.keys():
-        agg_sheet_name = class_types[class_type]["agg"]
+def etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir: str, faces_dir: str):
+    agg_pidgin = create_yell_pidgin_path(yell_dir)
+    for class_type in CLASS_TYPES.keys():
+        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
             split_excel_into_dirs(
                 input_file=agg_pidgin,
@@ -695,14 +599,14 @@ def etl_cochlea_pidgin_agg_to_otz_face_pidgin_agg(cochlea_dir: str, faces_dir: s
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    face_pidgin_path = create_cochlea_pidgin_path(face_dir)
-    for class_type in class_types.keys():
-        agg_sheet_name = class_types[class_type]["agg"]
+    face_pidgin_path = create_yell_pidgin_path(face_dir)
+    for class_type in CLASS_TYPES.keys():
+        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
             split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
 
 
-def etl_otz_face_pidgins_to_otz_event_pidgins(faces_dir: str):
+def etl_otz_face_pidgins_df_to_otz_event_pidgins_df(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
         etl_face_pidgin_to_event_pidgins(face_dir)
@@ -713,10 +617,10 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
-    event_pidgin_path = create_cochlea_pidgin_path(event_pidgin_dir)
-    for class_type in class_types.keys():
-        agg_sheet_name = class_types[class_type]["agg"]
-        csv_filename = class_types[class_type]["csv_filename"]
+    event_pidgin_path = create_yell_pidgin_path(event_pidgin_dir)
+    for class_type in CLASS_TYPES.keys():
+        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
+        csv_filename = CLASS_TYPES[class_type]["csv_filename"]
         if sheet_exists(event_pidgin_path, agg_sheet_name):
             name_csv_path = create_path(event_pidgin_dir, csv_filename)
             name_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
@@ -773,16 +677,16 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_cochlea_ideas_to_otz_face_ideas(cochlea_dir: str, faces_dir: str):
-    for cochlea_br_ref in get_existing_excel_idea_file_refs(cochlea_dir):
-        cochlea_idea_path = create_path(cochlea_dir, cochlea_br_ref.filename)
-        if cochlea_br_ref.filename not in _get_pidgen_idea_format_filenames():
+def etl_yell_ideas_to_otz_face_ideas(yell_dir: str, faces_dir: str):
+    for yell_br_ref in get_existing_excel_idea_file_refs(yell_dir):
+        yell_idea_path = create_path(yell_dir, yell_br_ref.filename)
+        if yell_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=cochlea_idea_path,
+                input_file=yell_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                filename=cochlea_br_ref.idea_number,
-                sheet_name="cochlea_valid",
+                filename=yell_br_ref.idea_number,
+                sheet_name="yell_valid",
             )
 
 
@@ -796,7 +700,7 @@ def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_int",
                 filename=face_br_ref.idea_number,
-                sheet_name="cochlea_valid",
+                sheet_name="yell_valid",
             )
 
 
@@ -837,7 +741,7 @@ def etl_otz_event_ideas_to_inz_events(
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
-                idea_df = pandas_read_excel(event_idea_path, "cochlea_valid")
+                idea_df = pandas_read_excel(event_idea_path, "yell_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
@@ -1096,8 +1000,8 @@ def etl_fisc_agg_tables_to_fisc_csvs(
 def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
     fisc_filename = "fisc.json"
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    insert_raw_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
-    cursor.execute(insert_raw_sqlstr)
+    select_fisc_tag_sqlstr = """SELECT fisc_tag FROM fiscunit_agg;"""
+    cursor.execute(select_fisc_tag_sqlstr)
     for fisc_tag_set in cursor.fetchall():
         fisc_tag = fisc_tag_set[0]
         fisc_dict = get_fisc_dict_from_db(cursor, fisc_tag)
