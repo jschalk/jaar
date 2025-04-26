@@ -1030,7 +1030,7 @@ def get_bud_insert_del_agg_from_raw_sqlstrs() -> dict[str, str]:
     }
 
 
-IDEA_RAWABLE_PUT_DIMENS = {
+IDEA_STAGEBLE_PUT_DIMENS = {
     "br00000": ["fiscunit"],
     "br00001": ["budunit", "fisc_dealunit", "fiscunit"],
     "br00002": ["bud_acctunit", "budunit", "fisc_cashbook", "fiscunit"],
@@ -1079,7 +1079,7 @@ IDEA_RAWABLE_PUT_DIMENS = {
     "br00117": ["bud_acctunit", "budunit", "fiscunit"],
 }
 
-IDEA_RAWABLE_DEL_DIMENS = {
+IDEA_STAGEBLE_DEL_DIMENS = {
     "br00050": ["bud_acct_membership"],
     "br00051": ["bud_acctunit"],
     "br00052": ["bud_item_awardlink"],
