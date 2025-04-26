@@ -20,7 +20,7 @@ from src.a12_hub_tools.hub_path import create_fisc_json_path
 from src.a15_fisc_logic.fisc import get_from_json as fiscunit_get_from_json
 from src.a15_fisc_logic.fisc_config import fiscunit_str
 from src.a18_etl_toolbox.transformers import (
-    create_fisc_tables,
+    create_fisc_prime_tables,
     etl_fisc_agg_tables_to_fisc_jsons,
 )
 from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
@@ -39,7 +39,7 @@ def test_etl_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTag(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         insert_raw_sqlstr = f"""
 INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()})

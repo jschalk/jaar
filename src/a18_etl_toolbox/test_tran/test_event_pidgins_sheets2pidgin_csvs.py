@@ -65,7 +65,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario1_1Event_name(env_dir_setup_cl
     bob_otx = "Bob"
     bob2_inx = "Bobby"
     event3 = 3
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     x_nan = float("nan")
     e3_name_row = [sue_str, event3, bob_otx, bob2_inx, x_nan, x_nan, x_nan]
     e3_name_df = DataFrame([e3_name_row], columns=name_agg_columns)
@@ -98,7 +98,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cl
     clean_otx = "fizz,casa,clean"
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     x_nan = float("nan")
     e7_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e7_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
@@ -140,7 +140,7 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
     event3 = 3
     event7 = 7
     event9 = 9
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     x_nan = float("nan")
     e3_road0 = [bob_str, event3, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e3_road1 = [bob_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]

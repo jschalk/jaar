@@ -63,7 +63,7 @@ def test_etl_yell_agg_to_pidgin_label_raw_CreatesFile_Scenario0_SingleIdea(
     assert os_path_exists(pidgin_path)
     label_raw_str = "label_raw"
     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 2
     bx = "br00115"
@@ -137,7 +137,7 @@ def test_etl_yell_agg_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleIdeasFil
     assert os_path_exists(pidgin_path)
     label_raw_str = "label_raw"
     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 5
     b3 = "br00115"
@@ -215,7 +215,7 @@ def test_etl_yell_agg_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_events
     assert os_path_exists(pidgin_path)
     label_raw_str = "label_raw"
     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 2
     b3 = "br00115"

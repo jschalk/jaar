@@ -42,7 +42,7 @@ def test_WorldUnit_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMap
     event7 = 7
     name_agg_str = "name_agg"
 
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     x_nan = float("nan")
     e1_name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
     e1_name1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
@@ -55,7 +55,7 @@ def test_WorldUnit_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMap
     run_inx = ";Running"
     event7 = 7
     label_agg_str = "label_agg"
-    label_file_columns = PidginPrimeColumns().map_label_agg_columns
+    label_file_columns = PidginPrimeColumns().pidgin_label_agg_columns
     e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
     e1_label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
     e1_label_rows = [e1_label0, e1_label1]

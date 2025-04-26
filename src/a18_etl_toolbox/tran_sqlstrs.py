@@ -63,17 +63,17 @@ CREATE_FISC_TIMEOFFI_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_ra
 CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
 CREATE_FISCUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 
-CREATE_MAP_LABEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_LABEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_label_agg (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_NAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_NAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_name_agg (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_ROAD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_ROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_road_agg (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_TAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS map_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_MAP_TAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS map_tag_agg (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_LABEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_LABEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDGIN_NAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_NAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDGIN_ROAD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_ROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDGIN_TAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDGIN_TAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 
-def get_fisc_create_table_sqlstrs() -> dict[str, str]:
+def get_fisc_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
         "fisc_cashbook_agg": CREATE_FISC_CASHBOOK_AGG_SQLSTR,
         "fisc_cashbook_raw": CREATE_FISC_CASHBOOK_RAW_SQLSTR,
@@ -92,7 +92,7 @@ def get_fisc_create_table_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_bud_create_table_sqlstrs() -> dict[str, str]:
+def get_bud_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
         "bud_acct_membership_put_agg": CREATE_BUDMEMB_PUT_AGG_SQLSTR,
         "bud_acct_membership_put_raw": CREATE_BUDMEMB_PUT_RAW_SQLSTR,
@@ -137,26 +137,31 @@ def get_bud_create_table_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_pidgin_create_table_sqlstrs() -> dict[str, str]:
+def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "map_label_raw": CREATE_MAP_LABEL_RAW_SQLSTR,
-        "map_label_agg": CREATE_MAP_LABEL_AGG_SQLSTR,
-        "map_name_raw": CREATE_MAP_NAME_RAW_SQLSTR,
-        "map_name_agg": CREATE_MAP_NAME_AGG_SQLSTR,
-        "map_road_raw": CREATE_MAP_ROAD_RAW_SQLSTR,
-        "map_road_agg": CREATE_MAP_ROAD_AGG_SQLSTR,
-        "map_tag_raw": CREATE_MAP_TAG_RAW_SQLSTR,
-        "map_tag_agg": CREATE_MAP_TAG_AGG_SQLSTR,
+        "pidgin_label_raw": CREATE_PIDGIN_LABEL_RAW_SQLSTR,
+        "pidgin_label_agg": CREATE_PIDGIN_LABEL_AGG_SQLSTR,
+        "pidgin_name_raw": CREATE_PIDGIN_NAME_RAW_SQLSTR,
+        "pidgin_name_agg": CREATE_PIDGIN_NAME_AGG_SQLSTR,
+        "pidgin_road_raw": CREATE_PIDGIN_ROAD_RAW_SQLSTR,
+        "pidgin_road_agg": CREATE_PIDGIN_ROAD_AGG_SQLSTR,
+        "pidgin_tag_raw": CREATE_PIDGIN_TAG_RAW_SQLSTR,
+        "pidgin_tag_agg": CREATE_PIDGIN_TAG_AGG_SQLSTR,
     }
 
 
-def create_fisc_tables(conn_or_cursor: sqlite3_Connection):
-    for create_table_sqlstr in get_fisc_create_table_sqlstrs().values():
+def create_pidgin_prime_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_pidgin_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
 
 
-def create_bud_tables(conn_or_cursor: sqlite3_Connection):
-    for create_table_sqlstr in get_bud_create_table_sqlstrs().values():
+def create_fisc_prime_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_fisc_prime_create_table_sqlstrs().values():
+        conn_or_cursor.execute(create_table_sqlstr)
+
+
+def create_bud_prime_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_bud_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
 
 
@@ -288,6 +293,38 @@ HAVING MIN(timeline_tag) != MAX(timeline_tag)
     OR MIN(bridge) != MAX(bridge)
     OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
 """
+PIDGIN_LABEL_INCONSISTENCY_SQLSTR = """SELECT otx_label
+FROM pidgin_label_raw
+GROUP BY otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDGIN_NAME_INCONSISTENCY_SQLSTR = """SELECT otx_name
+FROM pidgin_name_raw
+GROUP BY otx_name
+HAVING MIN(inx_name) != MAX(inx_name)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDGIN_ROAD_INCONSISTENCY_SQLSTR = """SELECT otx_road
+FROM pidgin_road_raw
+GROUP BY otx_road
+HAVING MIN(inx_road) != MAX(inx_road)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDGIN_TAG_INCONSISTENCY_SQLSTR = """SELECT otx_tag
+FROM pidgin_tag_raw
+GROUP BY otx_tag
+HAVING MIN(inx_tag) != MAX(inx_tag)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
 
 
 def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
@@ -302,6 +339,15 @@ def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
         "bud_item_teamlink": BUDTEAM_INCONSISTENCY_SQLSTR,
         "bud_itemunit": BUDITEM_INCONSISTENCY_SQLSTR,
         "budunit": BUDUNIT_INCONSISTENCY_SQLSTR,
+    }
+
+
+def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDGIN_LABEL_INCONSISTENCY_SQLSTR,
+        "pidgin_name": PIDGIN_NAME_INCONSISTENCY_SQLSTR,
+        "pidgin_road": PIDGIN_ROAD_INCONSISTENCY_SQLSTR,
+        "pidgin_tag": PIDGIN_TAG_INCONSISTENCY_SQLSTR,
     }
 
 
@@ -325,7 +371,7 @@ HAVING MIN(credit_vote) != MAX(credit_vote)
     OR MIN(debtit_vote) != MAX(debtit_vote)
 )
 UPDATE bud_acct_membership_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_acct_membership_put_raw.face_name
     AND inconsistency_rows.event_int = bud_acct_membership_put_raw.event_int
@@ -343,7 +389,7 @@ HAVING MIN(credit_belief) != MAX(credit_belief)
     OR MIN(debtit_belief) != MAX(debtit_belief)
 )
 UPDATE bud_acctunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_acctunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_acctunit_put_raw.event_int
@@ -360,7 +406,7 @@ HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
 UPDATE bud_item_awardlink_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_awardlink_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_awardlink_put_raw.event_int
@@ -379,7 +425,7 @@ HAVING MIN(pick) != MAX(pick)
     OR MIN(fnigh) != MAX(fnigh)
 )
 UPDATE bud_item_factunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_factunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_factunit_put_raw.event_int
@@ -396,7 +442,7 @@ GROUP BY face_name, event_int, fisc_tag, owner_name, road, healer_name
 HAVING 1=2
 )
 UPDATE bud_item_healerlink_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_healerlink_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_healerlink_put_raw.event_int
@@ -415,7 +461,7 @@ HAVING MIN(nigh) != MAX(nigh)
     OR MIN(divisor) != MAX(divisor)
 )
 UPDATE bud_item_reason_premiseunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_reason_premiseunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_reason_premiseunit_put_raw.event_int
@@ -433,7 +479,7 @@ GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 HAVING MIN(base_item_active_requisite) != MAX(base_item_active_requisite)
 )
 UPDATE bud_item_reasonunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_reasonunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_reasonunit_put_raw.event_int
@@ -450,7 +496,7 @@ GROUP BY face_name, event_int, fisc_tag, owner_name, road, team_title
 HAVING 1=2
 )
 UPDATE bud_item_teamlink_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_teamlink_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_teamlink_put_raw.event_int
@@ -477,7 +523,7 @@ HAVING MIN(begin) != MAX(begin)
     OR MIN(problem_bool) != MAX(problem_bool)
 )
 UPDATE bud_itemunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_itemunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_itemunit_put_raw.event_int
@@ -501,7 +547,7 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(respect_bit) != MAX(respect_bit)
 )
 UPDATE budunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = budunit_put_raw.face_name
     AND inconsistency_rows.event_int = budunit_put_raw.event_int
@@ -587,7 +633,7 @@ GROUP BY fisc_tag, owner_name, acct_name, tran_time
 HAVING MIN(amount) != MAX(amount)
 )
 UPDATE fisc_cashbook_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_cashbook_raw.fisc_tag
     AND inconsistency_rows.owner_name = fisc_cashbook_raw.owner_name
@@ -603,7 +649,7 @@ HAVING MIN(quota) != MAX(quota)
     OR MIN(celldepth) != MAX(celldepth)
 )
 UPDATE fisc_dealunit_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_dealunit_raw.fisc_tag
     AND inconsistency_rows.owner_name = fisc_dealunit_raw.owner_name
@@ -617,7 +663,7 @@ GROUP BY fisc_tag, cumlative_minute
 HAVING MIN(hour_tag) != MAX(hour_tag)
 )
 UPDATE fisc_timeline_hour_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_raw.fisc_tag
     AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_raw.cumlative_minute
@@ -630,7 +676,7 @@ GROUP BY fisc_tag, cumlative_day
 HAVING MIN(month_tag) != MAX(month_tag)
 )
 UPDATE fisc_timeline_month_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeline_month_raw.fisc_tag
     AND inconsistency_rows.cumlative_day = fisc_timeline_month_raw.cumlative_day
@@ -643,7 +689,7 @@ GROUP BY fisc_tag, weekday_order
 HAVING MIN(weekday_tag) != MAX(weekday_tag)
 )
 UPDATE fisc_timeline_weekday_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeline_weekday_raw.fisc_tag
     AND inconsistency_rows.weekday_order = fisc_timeline_weekday_raw.weekday_order
@@ -656,7 +702,7 @@ GROUP BY fisc_tag, offi_time
 HAVING 1=2
 )
 UPDATE fisc_timeoffi_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeoffi_raw.fisc_tag
     AND inconsistency_rows.offi_time = fisc_timeoffi_raw.offi_time
@@ -677,11 +723,80 @@ HAVING MIN(timeline_tag) != MAX(timeline_tag)
     OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
 )
 UPDATE fiscunit_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fiscunit_raw.fisc_tag
 ;
 """
+PIDGIN_LABEL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_label
+FROM pidgin_label_raw
+GROUP BY otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_label_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_label = pidgin_label_raw.otx_label
+;
+"""
+PIDGIN_NAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_name
+FROM pidgin_name_raw
+GROUP BY otx_name
+HAVING MIN(inx_name) != MAX(inx_name)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_name_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_name = pidgin_name_raw.otx_name
+;
+"""
+PIDGIN_ROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_road
+FROM pidgin_road_raw
+GROUP BY otx_road
+HAVING MIN(inx_road) != MAX(inx_road)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_road_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_road = pidgin_road_raw.otx_road
+;
+"""
+PIDGIN_TAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_tag
+FROM pidgin_tag_raw
+GROUP BY otx_tag
+HAVING MIN(inx_tag) != MAX(inx_tag)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_tag_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_tag = pidgin_tag_raw.otx_tag
+;
+"""
+
+
+def get_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDGIN_LABEL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_name": PIDGIN_NAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_road": PIDGIN_ROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_tag": PIDGIN_TAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    }
 
 
 def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:

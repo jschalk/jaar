@@ -114,10 +114,10 @@ from src.a16_pidgin_logic.pidgin_config import (
     otx_label_str,
     inx_label_str,
     map_otx2inx_str,
-    map_name_str,
-    map_label_str,
-    map_tag_str,
-    map_road_str,
+    pidgin_name_str,
+    pidgin_label_str,
+    pidgin_tag_str,
+    pidgin_road_str,
     get_pidgin_dimens,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
@@ -474,10 +474,10 @@ def test_get_idea_config_dict_ReturnsObj():
     assert bud_item_reasonunit_str() in idea_config_dimens
     assert bud_itemunit_str() in idea_config_dimens
     assert budunit_str() in idea_config_dimens
-    assert map_name_str() in idea_config_dimens
-    assert map_label_str() in idea_config_dimens
-    assert map_tag_str() in idea_config_dimens
-    assert map_road_str() in idea_config_dimens
+    assert pidgin_name_str() in idea_config_dimens
+    assert pidgin_label_str() in idea_config_dimens
+    assert pidgin_tag_str() in idea_config_dimens
+    assert pidgin_road_str() in idea_config_dimens
     assert get_bud_dimens().issubset(idea_config_dimens)
     assert get_fisc_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
@@ -515,10 +515,10 @@ def _validate_idea_config(x_idea_config: dict):
             fisc_timeline_weekday_str(),
             fiscunit_str(),
             map_otx2inx_str(),
-            map_label_str(),
-            map_name_str(),
-            map_tag_str(),
-            map_road_str(),
+            pidgin_label_str(),
+            pidgin_name_str(),
+            pidgin_tag_str(),
+            pidgin_road_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
@@ -728,10 +728,10 @@ def set_idea_config_json(dimen: str, build_order: int):
 def test_get_idea_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
-    # set_idea_config_json(map_name_str(), 0)
-    # set_idea_config_json(map_label_str(), 1)
-    # set_idea_config_json(map_tag_str(), 2)
-    # set_idea_config_json(map_road_str(), 3)
+    # set_idea_config_json(pidgin_name_str(), 0)
+    # set_idea_config_json(pidgin_label_str(), 1)
+    # set_idea_config_json(pidgin_tag_str(), 2)
+    # set_idea_config_json(pidgin_road_str(), 3)
     # set_idea_config_json(fiscunit_str(), 5)
     # set_idea_config_json(fisc_timeline_hour_str(), 6)
     # set_idea_config_json(fisc_timeline_month_str(), 7)
@@ -752,10 +752,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     x_idea_config = get_idea_config_dict()
 
     # THEN
-    assert x_idea_config.get(map_name_str()).get(bo) == 0
-    assert x_idea_config.get(map_label_str()).get(bo) == 1
-    assert x_idea_config.get(map_tag_str()).get(bo) == 2
-    assert x_idea_config.get(map_road_str()).get(bo) == 3
+    assert x_idea_config.get(pidgin_name_str()).get(bo) == 0
+    assert x_idea_config.get(pidgin_label_str()).get(bo) == 1
+    assert x_idea_config.get(pidgin_tag_str()).get(bo) == 2
+    assert x_idea_config.get(pidgin_road_str()).get(bo) == 3
     assert x_idea_config.get(fiscunit_str()).get(bo) == 5
     assert x_idea_config.get(fisc_timeline_hour_str()).get(bo) == 6
     assert x_idea_config.get(fisc_timeline_month_str()).get(bo) == 7
@@ -806,9 +806,9 @@ def _create_expected_idea_dimen_ref() -> dict[str, list[str]]:
         dimens_list = x_idearef.get(dimens_str())
         for x_dimen in dimens_list:
             if expected_idea_dimen_ref.get(x_dimen) is None:
-                expected_idea_dimen_ref[x_dimen] = [idea_number]
+                expected_idea_dimen_ref[x_dimen] = {idea_number}
             else:
-                expected_idea_dimen_ref.get(x_dimen).append(idea_number)
+                expected_idea_dimen_ref.get(x_dimen).add(idea_number)
     return expected_idea_dimen_ref
 
 

@@ -24,7 +24,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     event7 = 7
     name_raw_str = "name_raw"
     name_agg_str = "name_agg"
-    name_raw_columns = PidginPrimeColumns().map_name_raw_columns
+    name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     bx = "br00xxx"
     e1_name0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
@@ -38,7 +38,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     event7 = 7
     label_raw_str = "label_raw"
     label_agg_str = "label_agg"
-    label_raw_columns = PidginPrimeColumns().map_label_raw_columns
+    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     bx = "br00xxx"
     e1_label0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
     e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
@@ -52,7 +52,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     event7 = 7
     road_raw_str = "road_raw"
     road_agg_str = "road_agg"
-    road_raw_columns = PidginPrimeColumns().map_road_raw_columns
+    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     bx = "br00xxx"
     e1_road0 = [bx, sue_str, event7, casa_otx, casa_inx, None, None, None]
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
@@ -66,7 +66,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     event7 = 7
     tag_raw_str = "tag_raw"
     tag_agg_str = "tag_agg"
-    tag_raw_columns = PidginPrimeColumns().map_tag_raw_columns
+    tag_raw_columns = PidginPrimeColumns().pidgin_tag_raw_columns
     bx = "br00xxx"
     e1_tag0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
     e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
@@ -102,7 +102,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
     gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
 
-    name_agg_columns = PidginPrimeColumns().map_name_agg_columns
+    name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     assert list(gen_name_agg_df.columns) == name_agg_columns
     assert len(gen_name_agg_df) == 2
     x_nan = float("nan")
@@ -111,7 +111,7 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     e1_name_rows = [e1_name0, e1_name1]
     e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
-    label_agg_columns = PidginPrimeColumns().map_label_agg_columns
+    label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
     assert list(gen_label_agg_df.columns) == label_agg_columns
     assert len(gen_label_agg_df) == 2
     e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
@@ -119,14 +119,14 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     e1_label_rows = [e1_label0, e1_label1]
     e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
-    road_agg_columns = PidginPrimeColumns().map_road_agg_columns
+    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     assert list(gen_road_agg_df.columns) == road_agg_columns
     assert len(gen_road_agg_df) == 2
     e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
-    tag_agg_columns = PidginPrimeColumns().map_tag_agg_columns
+    tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     assert list(gen_tag_agg_df.columns) == tag_agg_columns
     assert len(gen_tag_agg_df) == 2
     e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]

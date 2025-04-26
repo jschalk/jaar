@@ -10,7 +10,7 @@ from src.a07_calendar_logic.chrono import (
 from src.a08_bud_atom_logic.atom_config import fund_coin_str, penny_str, respect_bit_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef, FiscPrimeColumnsRef
 from src.a18_etl_toolbox.transformers import (
-    create_fisc_tables,
+    create_fisc_prime_tables,
     fisc_raw_tables2fisc_agg_tables,
     etl_fisc_agg_tables_to_fisc_csvs,
 )
@@ -29,7 +29,7 @@ def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
     br00011_str = "br00011"
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
@@ -104,7 +104,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         raw_tablename = x_objs.unit_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
@@ -180,16 +180,16 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         raw_tablename = x_objs.unit_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
-, ('br00555','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
-, ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00555','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -234,13 +234,13 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message()
     _8pm_str = "8pm"
     cumlative_minute_1 = 44
     cumlative_minute_2 = 77
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         raw_tablename = x_objs.hour_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.hour_raw_csv_header})
@@ -282,13 +282,13 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message()
     aug_str = "Aug"
     cumlative_day_1 = 44
     cumlative_day_2 = 77
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.mont_raw_tablename} ({x_cols.mont_raw_csv_header})
 VALUES
@@ -329,13 +329,13 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message()
     wed_str = "Wed"
     weekday_order_1 = 4
     weekday_order_2 = 7
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.week_raw_tablename} ({x_cols.week_raw_csv_header})
 VALUES
@@ -378,13 +378,13 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message()
     t1_quota_2 = 300
     t2_deal_time = 55
     t2_quota = 400
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.deal_raw_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
@@ -430,13 +430,13 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message()
     t1_amount_2 = 300
     t2_tran_time = 55
     t2_amount = 400
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.cash_raw_tablename} ({x_cols.cash_raw_csv_header})
 VALUES
@@ -475,7 +475,7 @@ def test_etl_fisc_agg_tables_to_fisc_csvs_CreateFiles():
     accord45_str = "accord45"
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fisc_mstr_dir = get_test_etl_dir()
         x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
         insert_agg_sqlstr = f"""

@@ -81,20 +81,20 @@ def map_otx2inx_str() -> str:
     return "map_otx2inx"
 
 
-def map_name_str() -> str:
-    return "map_name"
+def pidgin_name_str() -> str:
+    return "pidgin_name"
 
 
-def map_label_str() -> str:
-    return "map_label"
+def pidgin_label_str() -> str:
+    return "pidgin_label"
 
 
-def map_tag_str() -> str:
-    return "map_tag"
+def pidgin_tag_str() -> str:
+    return "pidgin_tag"
 
 
-def map_road_str() -> str:
-    return "map_road"
+def pidgin_road_str() -> str:
+    return "pidgin_road"
 
 
 def default_unknown_word() -> str:
@@ -210,28 +210,28 @@ def get_pidgin_args_class_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config dimen contains the associated columns"""
     return {
-        "map_label": {
+        "pidgin_label": {
             "inx_label",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
             "otx_label",
         },
-        "map_name": {
+        "pidgin_name": {
             "inx_name",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
             "otx_name",
         },
-        "map_tag": {
+        "pidgin_tag": {
             "inx_tag",
             "unknown_word",
             "inx_bridge",
             "otx_bridge",
             "otx_tag",
         },
-        "map_road": {
+        "pidgin_road": {
             "inx_road",
             "unknown_word",
             "inx_bridge",

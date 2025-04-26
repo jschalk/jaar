@@ -15,6 +15,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_db_tables,
     create_select_query,
     create_insert_into_clause_str,
+    _get_grouping_groupby_clause,
     get_table_columns,
     create_table_from_columns,
 )
@@ -76,9 +77,10 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    get_bud_create_table_sqlstrs,
-    create_fisc_tables,
-    create_bud_tables,
+    get_bud_prime_create_table_sqlstrs,
+    create_pidgin_prime_tables,
+    create_fisc_prime_tables,
+    create_bud_prime_tables,
     get_fisc_update_inconsist_error_message_sqlstrs,
     get_fisc_insert_agg_from_raw_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
@@ -117,10 +119,10 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 
 MAPS_DIMENS = {
-    "map_name": "NameUnit",
-    "map_label": "LabelUnit",
-    "map_tag": "TagUnit",
-    "map_road": "RoadUnit",
+    "pidgin_name": "NameUnit",
+    "pidgin_label": "LabelUnit",
+    "pidgin_tag": "TagUnit",
+    "pidgin_road": "RoadUnit",
 }
 
 CLASS_TYPES = {
@@ -394,8 +396,69 @@ FROM yell_valid_events
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def etl_yell_valid_db_to_yell_pidgin_raw_db(cursor: sqlite3_Cursor):
-    pass
+def get_yell_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
+    possible_yell_valid_tables = {
+        f"yell_valid_{idea}": idea for idea in get_idea_numbers()
+    }
+    active_tables = get_db_tables(cursor)
+    return {
+        active_table: possible_yell_valid_tables.get(active_table)
+        for active_table in active_tables
+        if active_table in possible_yell_valid_tables
+    }
+
+
+def etl_yell_valid_db_to_pidgin_prime_raw_db(cursor: sqlite3_Cursor):
+    create_pidgin_prime_tables(cursor)
+    yell_valid_tables = get_yell_valid_tables(cursor)
+    idea_dimen_ref = {
+        pidgin_dimen: idea_numbers
+        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
+        if pidgin_dimen[:6] == "pidgin"
+    }
+    pidgin_raw_tables = {}
+    for pidgin_dimen in idea_dimen_ref:
+        idea_numbers = idea_dimen_ref.get(pidgin_dimen)
+        raw_tablename = f"{pidgin_dimen}_raw"
+        pidgin_raw_tables[raw_tablename] = idea_numbers
+
+    for yell_valid_table, idea_number in yell_valid_tables.items():
+        for raw_tablename, idea_numbers in pidgin_raw_tables.items():
+            if idea_number in idea_numbers:
+                etl_yell_valid_table_into_pidgin_prime_raw_table(
+                    cursor, yell_valid_table, raw_tablename, idea_number
+                )
+
+
+def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
+    idea_dimen_ref = {
+        pidgin_dimen: idea_numbers
+        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
+        if pidgin_dimen[:6] == "pidgin"
+    }
+    # pidgin_raw_tables = {}
+    # for pidgin_dimen in idea_dimen_ref:
+    #     idea_numbers = idea_dimen_ref.get(pidgin_dimen)
+    #     raw_tablename = f"{pidgin_dimen}_raw"
+    #     pidgin_raw_tables[raw_tablename] = idea_numbers
+
+
+def etl_yell_valid_table_into_pidgin_prime_raw_table(
+    cursor: sqlite3_Cursor, yell_valid_table: str, raw_tablename: str, idea_number: str
+):
+    lab_columns = set(get_table_columns(cursor, raw_tablename))
+    valid_columns = set(get_table_columns(cursor, yell_valid_table))
+    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = get_default_sorted_list(common_cols)
+    select_str = create_select_query(cursor, yell_valid_table, common_cols)
+    select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
+    group_by_clause_str = _get_grouping_groupby_clause(common_cols)
+    common_cols.append("idea_number")
+    common_cols = get_default_sorted_list(common_cols)
+    x_dict = {common_col: None for common_col in common_cols}
+    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
+    insert_select_sqlstr = f"{insert_clause_str}\n{select_str}{group_by_clause_str}"
+    cursor.execute(insert_select_sqlstr)
 
 
 def etl_yell_agg_df_to_yell_pidgin_raw_df(
@@ -408,19 +471,19 @@ def etl_yell_agg_df_to_yell_pidgin_raw_df(
 
 
 def etl_yell_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_name", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_label", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_tag", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, yell_dir)
 
 
 def etl_yell_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("map_road", legitimate_events, yell_dir)
+    yell_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, yell_dir)
 
 
 def yell_agg_single_to_pidgin_raw(
@@ -445,8 +508,8 @@ class YellAggToPidginRawTransformer:
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"face_name", "event_int"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
-        pidgin_columns.insert(0, "src_idea")
-        # empty df with src_idea, face_name, event_int, idea_columns...
+        pidgin_columns.insert(0, "idea_number")
+        # empty df with idea_number, face_name, event_int, idea_columns...
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
@@ -507,19 +570,19 @@ class YellAggToPidginRawTransformer:
 
 
 def etl_pidgin_name_raw_to_name_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_name")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_name")
 
 
 def etl_pidgin_label_raw_to_label_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_label")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_label")
 
 
 def etl_pidgin_road_raw_to_road_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_road")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_road")
 
 
 def etl_pidgin_tag_raw_to_tag_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "map_tag")
+    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_tag")
 
 
 def etl_pidgin_single_raw_to_agg(yell_dir: str, map_dimen: str):
@@ -789,7 +852,7 @@ def etl_inz_face_csv_files2idea_raw_tables(
 
 
 def etl_idea_raw_to_fisc_tables(conn_or_cursor):
-    create_fisc_tables(conn_or_cursor)
+    create_fisc_prime_tables(conn_or_cursor)
     idea_raw_tables2fisc_raw_tables(conn_or_cursor)
     set_fisc_raw_error_message(conn_or_cursor)
     fisc_raw_tables2fisc_agg_tables(conn_or_cursor)
@@ -797,7 +860,7 @@ def etl_idea_raw_to_fisc_tables(conn_or_cursor):
 
 
 def etl_idea_raw_to_bud_tables(conn_or_cursor):
-    create_bud_tables(conn_or_cursor)
+    create_bud_prime_tables(conn_or_cursor)
     idea_raw_tables2bud_raw_tables(conn_or_cursor)
     set_bud_raw_error_message(conn_or_cursor)
     bud_raw_tables2bud_agg_tables(conn_or_cursor)
@@ -970,7 +1033,7 @@ def etl_bud_tables_to_event_bud_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for bud_table in get_bud_create_table_sqlstrs():
+    for bud_table in get_bud_prime_create_table_sqlstrs():
         if get_row_count(conn_or_cursor, bud_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,

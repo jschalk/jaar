@@ -57,7 +57,7 @@ from src.a18_etl_toolbox.fisc_etl_tool import (
 from src.a18_etl_toolbox.tran_sqlstrs import get_fisc_inconsistency_sqlstrs
 from src.a18_etl_toolbox.transformers import (
     etl_inz_face_csv_files2idea_raw_tables,
-    create_fisc_tables,
+    create_fisc_prime_tables,
     idea_raw_tables2fisc_raw_tables,
     etl_fisc_raw_tables_to_fisc_csvs,
     set_fisc_raw_error_message,
@@ -93,7 +93,7 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario0_From_br00011_IdeaFile(
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         etl_inz_face_csv_files2idea_raw_tables(cursor, inz_faces_dir)
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_fisc = FiscPrimeObjsRef()
         assert get_row_count(cursor, x_fisc.unit_raw_tablename) == 0
 
@@ -178,7 +178,7 @@ VALUES
 """
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.unit_raw_tablename) == 0
 
         # WHEN
@@ -265,7 +265,7 @@ VALUES
 """
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.unit_raw_tablename) == 0
 
         # WHEN
@@ -363,7 +363,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.unit_raw_tablename) == 0
 
         # WHEN
@@ -454,7 +454,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.deal_raw_tablename) == 0
 
         # WHEN
@@ -534,7 +534,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.cash_raw_tablename) == 0
 
         # WHEN
@@ -610,7 +610,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.hour_raw_tablename) == 0
 
         # WHEN
@@ -682,7 +682,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.mont_raw_tablename) == 0
 
         # WHEN
@@ -754,7 +754,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         x_fisc = FiscPrimeObjsRef()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         assert get_row_count(cursor, x_fisc.week_raw_tablename) == 0
 
         # WHEN
@@ -802,7 +802,7 @@ def test_etl_fisc_raw_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fisc_mstr_dir = get_test_etl_dir()
         fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
         x_fisc = FiscPrimeObjsRef(fiscs_dir)
@@ -864,7 +864,7 @@ def test_etl_fisc_raw_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fisc_mstr_dir = get_test_etl_dir()
         fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
         x_fisc = FiscPrimeObjsRef(fiscs_dir)
@@ -928,7 +928,7 @@ def test_GlobalVariablesForFisc_inconsistency_queryReturns_sqlstrs():
 
     exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}
     with sqlite3_connect(":memory:") as conn:
-        create_fisc_tables(conn)
+        create_fisc_prime_tables(conn)
 
         for x_dimen, x_sqlstr in get_fisc_inconsistency_sqlstrs().items():
             x_tablename = f"{x_dimen}_raw"
@@ -966,7 +966,7 @@ def test_set_fisc_raw_error_message_Scenario0_fiscunit_WithNo_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.unit_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
@@ -1021,7 +1021,7 @@ def test_set_fisc_raw_error_message_Scenario1_fiscunit_Some_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.unit_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
@@ -1053,7 +1053,7 @@ VALUES
         # THEN
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, x_error_message),
             (event7, accord23_str, x_error_message),
@@ -1078,7 +1078,7 @@ def test_set_fisc_raw_error_message_Scenario2_fischour_Some_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.hour_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
@@ -1110,7 +1110,7 @@ VALUES
         # THEN
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, x_error_message),
             (event7, accord23_str, x_error_message),
@@ -1135,7 +1135,7 @@ def test_set_fisc_raw_error_message_Scenario3_fischour_Some_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.mont_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
@@ -1167,7 +1167,7 @@ VALUES
         # THEN
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, x_error_message),
             (event7, accord23_str, x_error_message),
@@ -1195,7 +1195,7 @@ def test_set_fisc_raw_error_message_Scenario4_fiscweek_Some_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.week_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.week_raw_csv_header})
@@ -1228,7 +1228,7 @@ VALUES
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, order1, None),
             (event7, accord23_str, order2, x_error_message),
@@ -1259,7 +1259,7 @@ def test_set_fisc_raw_error_message_Scenario5_fiscdeal_Some_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.deal_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
@@ -1296,7 +1296,7 @@ VALUES
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, t1_deal_time, x_error_message),
             (event7, accord23_str, t1_deal_time, x_error_message),
@@ -1327,7 +1327,7 @@ def test_set_fisc_raw_error_message_Scenario6_fisccash_Some_error_message(
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.cash_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
@@ -1364,7 +1364,7 @@ VALUES
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, t1_tran_time, x_error_message),
             (event7, accord23_str, t1_tran_time, x_error_message),

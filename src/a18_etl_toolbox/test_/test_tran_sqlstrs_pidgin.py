@@ -52,10 +52,11 @@ from src.a15_fisc_logic.fisc_config import (
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_config_args,
-    map_label_str,
-    map_road_str,
-    map_tag_str,
-    map_name_str,
+    pidgin_label_str,
+    pidgin_road_str,
+    pidgin_tag_str,
+    pidgin_name_str,
+    get_pidgin_dimens,
 )
 from src.a17_idea_logic.idea_config import (
     idea_number_str,
@@ -71,86 +72,16 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    get_pidgin_create_table_sqlstrs,
-    get_bud_create_table_sqlstrs,
-    create_fisc_tables,
-    create_bud_tables,
-    create_all_idea_tables,
-    get_bud_inconsistency_sqlstrs,
-    get_fisc_inconsistency_sqlstrs,
-    get_bud_put_update_inconsist_error_message_sqlstrs,
-    get_fisc_update_inconsist_error_message_sqlstrs,
-    get_bud_insert_put_agg_from_raw_sqlstrs,
-    get_bud_insert_del_agg_from_raw_sqlstrs,
-    get_fisc_insert_agg_from_raw_sqlstrs,
-    FISCUNIT_AGG_INSERT_SQLSTR,
-    IDEA_RAWABLE_PUT_DIMENS,
-    IDEA_RAWABLE_DEL_DIMENS,
-    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISC_OTE1_AGG_SQLSTR,
-    INSERT_FISC_OTE1_AGG_SQLSTR,
-    get_fisc_fu1_select_sqlstrs,
-    # get_bud_bu1_select_sqlstrs,
+    get_pidgin_prime_create_table_sqlstrs,
+    create_pidgin_prime_tables,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def pidnam_str() -> str:
-    return "PIDNAM"
-
-
-def pidtag_str() -> str:
-    return "PIDTAG"
-
-
-def pidroa_str() -> str:
-    return "PIDROA"
-
-
-def pidlab_str() -> str:
-    return "PIDLAB"
-
-
-# create pidgin tables: raw, agg
-def pidgin_abbv() -> dict:
-    return {
-        map_name_str(): pidnam_str(),
-        map_label_str(): pidtag_str(),
-        map_road_str(): pidroa_str(),
-        map_label_str(): pidlab_str(),
-    }
-
-
-# def abbv(tablename: str) -> str:
-#     abbrevions = {
-#         f"{bud_acct_membership_str()}_put_agg": "BUDMEMB_PUT_AGG",
-
-
-#     pidgin_name_agg_args = set(get_pidgin_config_args((map_name_str())).keys())
-#     pidgin_label_agg_args = set(get_pidgin_config_args((map_label_str())).keys())
-#     pidgin_tag_agg_args = set(get_pidgin_config_args((map_tag_str())).keys())
-#     pidgin_road_agg_args = set(get_pidgin_config_args((map_road_str())).keys())
-#     event_args = {face_name_str(), event_int_str()}
-#     pidgin_name_agg_args = pidgin_name_agg_args.union(event_args)
-#     pidgin_label_agg_args = pidgin_label_agg_args.union(event_args)
-#     pidgin_tag_agg_args = pidgin_tag_agg_args.union(event_args)
-#     pidgin_road_agg_args = pidgin_road_agg_args.union(event_args)
-#     raw_args = {"src_idea"}
-#     pidgin_name_raw_args = pidgin_name_agg_args.union(raw_args)
-#     pidgin_label_raw_args = pidgin_label_agg_args.union(raw_args)
-#     pidgin_tag_raw_args = pidgin_tag_agg_args.union(raw_args)
-#     pidgin_road_raw_args = pidgin_road_agg_args.union(raw_args)
-
-#     }
-#     return abbrevions.get(tablename)
-
-
-def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
+def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_pidgin_create_table_sqlstrs()
+    create_table_sqlstrs = get_pidgin_prime_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
@@ -177,219 +108,99 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
         agg_table = f"{x_dimen}_agg"
         agg_cols = set(x_config.get("jkeys").keys())
         agg_cols.update(set(x_config.get("jvalues").keys()))
-        agg_cols.add("error_message")
-        agg_cols = get_default_sorted_list(raw_cols)
+        agg_cols = get_default_sorted_list(agg_cols)
         ex_agg_sqlstr = get_create_table_sqlstr(agg_table, agg_cols, sqlite_types)
         agg_create_sqlstr = create_table_sqlstrs.get(agg_table)
         assert agg_create_sqlstr == ex_agg_sqlstr
 
-        # print(f'CREATE_{raw_table.upper()}_SQLSTR= """{ex_raw_sqlstr}"""')
-        # print(f'CREATE_{agg_table.upper()}_SQLSTR= """{ex_agg_sqlstr}"""')
+        print(f'CREATE_{raw_table.upper()}_SQLSTR= """{ex_raw_sqlstr}"""')
+        print(f'CREATE_{agg_table.upper()}_SQLSTR= """{ex_agg_sqlstr}"""')
         # print(f'"{raw_table}": CREATE_{raw_table.upper()}_SQLSTR,')
         # print(f'"{agg_table}": CREATE_{agg_table.upper()}_SQLSTR,')
 
 
-# def test_get_pidgin_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
-#     # ESTABLISH / WHEN
-#     fisc_create_table_sqlstrs = get_pidgin_create_table_sqlstrs()
+def test_get_bud_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+    # ESTABLISH / WHEN
+    pidgin_create_table_sqlstrs = get_pidgin_prime_create_table_sqlstrs()
 
-#     # THEN
-#     assert fisc_create_table_sqlstrs
-#     fisc_dimens = get_fisc_dimens()
-#     expected_fisc_tablenames = {f"{x_dimen}_agg" for x_dimen in fisc_dimens}
-#     expected_fisc_tablenames.update({f"{x_dimen}_raw" for x_dimen in fisc_dimens})
-#     print(f"{expected_fisc_tablenames=}")
-#     assert set(fisc_create_table_sqlstrs.keys()) == expected_fisc_tablenames
-
-
-# def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
-#     # ESTABLISH / WHEN
-#     bud_create_table_sqlstrs = get_bud_create_table_sqlstrs()
-
-#     # THEN
-#     assert bud_create_table_sqlstrs
-#     bud_dimens = get_bud_dimens()
-#     expected_bud_tablenames = {f"{x_dimen}_put_agg" for x_dimen in bud_dimens}
-#     expected_bud_tablenames.update({f"{x_dimen}_put_raw" for x_dimen in bud_dimens})
-#     expected_bud_tablenames.update({f"{x_dimen}_del_agg" for x_dimen in bud_dimens})
-#     expected_bud_tablenames.update({f"{x_dimen}_del_raw" for x_dimen in bud_dimens})
-#     print(f"{expected_bud_tablenames=}")
-#     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
+    # THEN
+    assert pidgin_create_table_sqlstrs
+    bud_dimens = get_pidgin_dimens()
+    expected_bud_tablenames = {f"{x_dimen}_agg" for x_dimen in bud_dimens}
+    expected_bud_tablenames.update({f"{x_dimen}_raw" for x_dimen in bud_dimens})
+    print(f"{expected_bud_tablenames=}")
+    assert set(pidgin_create_table_sqlstrs.keys()) == expected_bud_tablenames
 
 
-# def test_create_all_idea_tables_CreatesFiscRawTables():
-#     # ESTABLISH sourcery skip: no-loop-in-tests
-#     idea_numbers = get_idea_numbers()
-#     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         cursor = fisc_db_conn.cursor()
-#         for idea_number in idea_numbers:
-#             assert db_table_exists(cursor, f"{idea_number}_raw") is False
+def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        pidnam_raw_table = "pidgin_label_raw"
+        pidnam_agg_table = "pidgin_label_agg"
+        pidtag_raw_table = "pidgin_name_raw"
+        pidtag_agg_table = "pidgin_name_agg"
+        pidroa_raw_table = "pidgin_road_raw"
+        pidroa_agg_table = "pidgin_road_agg"
+        pidlab_raw_table = "pidgin_tag_raw"
+        pidlab_agg_table = "pidgin_tag_agg"
+        cursor = fisc_db_conn.cursor()
+        assert not db_table_exists(cursor, pidnam_raw_table)
+        assert not db_table_exists(cursor, pidnam_agg_table)
+        assert not db_table_exists(cursor, pidtag_raw_table)
+        assert not db_table_exists(cursor, pidtag_agg_table)
+        assert not db_table_exists(cursor, pidroa_raw_table)
+        assert not db_table_exists(cursor, pidroa_agg_table)
+        assert not db_table_exists(cursor, pidlab_raw_table)
+        assert not db_table_exists(cursor, pidlab_agg_table)
 
-#         # WHEN
-#         create_all_idea_tables(cursor)
+        # WHEN
+        create_pidgin_prime_tables(cursor)
 
-#         # THEN
-#         for idea_number in idea_numbers:
-#             print(f"{idea_number} checking...")
-#             assert db_table_exists(cursor, f"{idea_number}_raw")
+        # THEN
+        assert db_table_exists(cursor, pidnam_raw_table)
+        assert db_table_exists(cursor, pidnam_agg_table)
+        assert db_table_exists(cursor, pidtag_raw_table)
+        assert db_table_exists(cursor, pidtag_agg_table)
+        assert db_table_exists(cursor, pidroa_raw_table)
+        assert db_table_exists(cursor, pidroa_agg_table)
+        assert db_table_exists(cursor, pidlab_raw_table)
+        assert db_table_exists(cursor, pidlab_agg_table)
 
+        pidnam_raw_columns = get_table_columns(cursor, pidnam_raw_table)
+        pidnam_agg_columns = get_table_columns(cursor, pidnam_agg_table)
+        pidtag_raw_columns = get_table_columns(cursor, pidtag_raw_table)
+        pidtag_agg_columns = get_table_columns(cursor, pidtag_agg_table)
+        pidroa_raw_columns = get_table_columns(cursor, pidroa_raw_table)
+        pidroa_agg_columns = get_table_columns(cursor, pidroa_agg_table)
+        pidlab_raw_columns = get_table_columns(cursor, pidlab_raw_table)
+        pidlab_agg_columns = get_table_columns(cursor, pidlab_agg_table)
 
-# def test_create_bud_tables_CreatesFiscRawTables():
-#     # ESTABLISH
-#     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         cursor = fisc_db_conn.cursor()
-#         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
-#         assert cursor.fetchone()[0] == 0
-#         budmemb_pud_agg_table = f"{bud_acct_membership_str()}_put_agg"
-#         budmemb_pud_raw_table = f"{bud_acct_membership_str()}_put_raw"
-#         budacct_pud_agg_table = f"{bud_acctunit_str()}_put_agg"
-#         budacct_pud_raw_table = f"{bud_acctunit_str()}_put_raw"
-#         budawar_pud_agg_table = f"{bud_item_awardlink_str()}_put_agg"
-#         budawar_pud_raw_table = f"{bud_item_awardlink_str()}_put_raw"
-#         budfact_pud_agg_table = f"{bud_item_factunit_str()}_put_agg"
-#         budfact_pud_raw_table = f"{bud_item_factunit_str()}_put_raw"
-#         budheal_pud_agg_table = f"{bud_item_healerlink_str()}_put_agg"
-#         budheal_pud_raw_table = f"{bud_item_healerlink_str()}_put_raw"
-#         budprem_pud_agg_table = f"{bud_item_reason_premiseunit_str()}_put_agg"
-#         budprem_pud_raw_table = f"{bud_item_reason_premiseunit_str()}_put_raw"
-#         budreas_pud_agg_table = f"{bud_item_reasonunit_str()}_put_agg"
-#         budreas_pud_raw_table = f"{bud_item_reasonunit_str()}_put_raw"
-#         budteam_pud_agg_table = f"{bud_item_teamlink_str()}_put_agg"
-#         budteam_pud_raw_table = f"{bud_item_teamlink_str()}_put_raw"
-#         buditem_pud_agg_table = f"{bud_itemunit_str()}_put_agg"
-#         buditem_pud_raw_table = f"{bud_itemunit_str()}_put_raw"
-#         budunit_pud_agg_table = f"{budunit_str()}_put_agg"
-#         budunit_pud_raw_table = f"{budunit_str()}_put_raw"
-
-#         assert db_table_exists(cursor, budmemb_pud_agg_table) is False
-#         assert db_table_exists(cursor, budmemb_pud_raw_table) is False
-#         assert db_table_exists(cursor, budacct_pud_agg_table) is False
-#         assert db_table_exists(cursor, budacct_pud_raw_table) is False
-#         assert db_table_exists(cursor, budawar_pud_agg_table) is False
-#         assert db_table_exists(cursor, budawar_pud_raw_table) is False
-#         assert db_table_exists(cursor, budfact_pud_agg_table) is False
-#         assert db_table_exists(cursor, budfact_pud_raw_table) is False
-#         assert db_table_exists(cursor, budheal_pud_agg_table) is False
-#         assert db_table_exists(cursor, budheal_pud_raw_table) is False
-#         assert db_table_exists(cursor, budprem_pud_agg_table) is False
-#         assert db_table_exists(cursor, budprem_pud_raw_table) is False
-#         assert db_table_exists(cursor, budreas_pud_agg_table) is False
-#         assert db_table_exists(cursor, budreas_pud_raw_table) is False
-#         assert db_table_exists(cursor, budteam_pud_agg_table) is False
-#         assert db_table_exists(cursor, budteam_pud_raw_table) is False
-#         assert db_table_exists(cursor, buditem_pud_agg_table) is False
-#         assert db_table_exists(cursor, buditem_pud_raw_table) is False
-#         assert db_table_exists(cursor, budunit_pud_agg_table) is False
-#         assert db_table_exists(cursor, budunit_pud_raw_table) is False
-
-#         # WHEN
-#         create_bud_tables(cursor)
-
-#         # THEN
-#         cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
-#         # print(f"{cursor.fetchall()=}")
-#         # x_count = 0
-#         # for x_row in cursor.fetchall():
-#         #     print(f"{x_count} {x_row[1]=}")
-#         #     x_count += 1
-#         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
-#         assert cursor.fetchone()[0] == 40
-#         assert db_table_exists(cursor, budmemb_pud_agg_table)
-#         assert db_table_exists(cursor, budmemb_pud_raw_table)
-#         assert db_table_exists(cursor, budacct_pud_agg_table)
-#         assert db_table_exists(cursor, budacct_pud_raw_table)
-#         assert db_table_exists(cursor, budawar_pud_agg_table)
-#         assert db_table_exists(cursor, budawar_pud_raw_table)
-#         assert db_table_exists(cursor, budfact_pud_agg_table)
-#         assert db_table_exists(cursor, budfact_pud_raw_table)
-#         assert db_table_exists(cursor, budheal_pud_agg_table)
-#         assert db_table_exists(cursor, budheal_pud_raw_table)
-#         assert db_table_exists(cursor, budprem_pud_agg_table)
-#         assert db_table_exists(cursor, budprem_pud_raw_table)
-#         assert db_table_exists(cursor, budreas_pud_agg_table)
-#         assert db_table_exists(cursor, budreas_pud_raw_table)
-#         assert db_table_exists(cursor, budteam_pud_agg_table)
-#         assert db_table_exists(cursor, budteam_pud_raw_table)
-#         assert db_table_exists(cursor, buditem_pud_agg_table)
-#         assert db_table_exists(cursor, buditem_pud_raw_table)
-#         assert db_table_exists(cursor, budunit_pud_agg_table)
-#         assert db_table_exists(cursor, budunit_pud_raw_table)
-
-
-# def test_create_fisc_tables_CreatesFiscRawTables():
-#     # ESTABLISH
-#     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         cursor = fisc_db_conn.cursor()
-#         fisc_objs = FiscPrimeObjsRef()
-#         fisc_cols = FiscPrimeColumnsRef()
-#         assert db_table_exists(cursor, fisc_objs.unit_agg_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.deal_agg_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.cash_agg_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.hour_agg_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.mont_agg_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.week_agg_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.unit_raw_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.deal_raw_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.cash_raw_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.hour_raw_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.mont_raw_tablename) is False
-#         assert db_table_exists(cursor, fisc_objs.week_raw_tablename) is False
-
-#         # WHEN
-#         create_fisc_tables(cursor)
-
-#         # THEN
-#         assert db_table_exists(cursor, fisc_objs.unit_agg_tablename)
-#         assert db_table_exists(cursor, fisc_objs.deal_agg_tablename)
-#         assert db_table_exists(cursor, fisc_objs.cash_agg_tablename)
-#         assert db_table_exists(cursor, fisc_objs.hour_agg_tablename)
-#         assert db_table_exists(cursor, fisc_objs.mont_agg_tablename)
-#         assert db_table_exists(cursor, fisc_objs.week_agg_tablename)
-
-#         assert db_table_exists(cursor, fisc_objs.unit_raw_tablename)
-#         assert db_table_exists(cursor, fisc_objs.deal_raw_tablename)
-#         assert db_table_exists(cursor, fisc_objs.cash_raw_tablename)
-#         assert db_table_exists(cursor, fisc_objs.hour_raw_tablename)
-#         assert db_table_exists(cursor, fisc_objs.mont_raw_tablename)
-#         assert db_table_exists(cursor, fisc_objs.week_raw_tablename)
-
-#         fisc_unit_agg_pragma = get_pragma_table_fetchall(fisc_cols.unit_agg_columns)
-#         fisc_deal_agg_pragma = get_pragma_table_fetchall(fisc_cols.deal_agg_columns)
-#         fisc_cash_agg_pragma = get_pragma_table_fetchall(fisc_cols.cash_agg_columns)
-#         fisc_hour_agg_pragma = get_pragma_table_fetchall(fisc_cols.hour_agg_columns)
-#         fisc_mont_agg_pragma = get_pragma_table_fetchall(fisc_cols.mont_agg_columns)
-#         fisc_week_agg_pragma = get_pragma_table_fetchall(fisc_cols.week_agg_columns)
-#         fisc_unit_raw_pragma = get_pragma_table_fetchall(fisc_cols.unit_raw_columns)
-#         fisc_deal_raw_pragma = get_pragma_table_fetchall(fisc_cols.deal_raw_columns)
-#         fisc_cash_raw_pragma = get_pragma_table_fetchall(fisc_cols.cash_raw_columns)
-#         fisc_hour_raw_pragma = get_pragma_table_fetchall(fisc_cols.hour_raw_columns)
-#         fisc_mont_raw_pragma = get_pragma_table_fetchall(fisc_cols.mont_raw_columns)
-#         fisc_week_raw_pragma = get_pragma_table_fetchall(fisc_cols.week_raw_columns)
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.unit_agg_tablename})")
-#         assert fisc_unit_agg_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.deal_agg_tablename})")
-#         assert fisc_deal_agg_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.cash_agg_tablename})")
-#         assert fisc_cash_agg_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.hour_agg_tablename})")
-#         assert fisc_hour_agg_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.mont_agg_tablename})")
-#         assert fisc_mont_agg_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.week_agg_tablename})")
-#         assert fisc_week_agg_pragma == cursor.fetchall()
-
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.unit_raw_tablename})")
-#         assert fisc_unit_raw_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.deal_raw_tablename})")
-#         assert fisc_deal_raw_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.cash_raw_tablename})")
-#         assert fisc_cash_raw_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.hour_raw_tablename})")
-#         assert fisc_hour_raw_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.mont_raw_tablename})")
-#         assert fisc_mont_raw_pragma == cursor.fetchall()
-#         cursor.execute(f"PRAGMA table_info({fisc_objs.week_raw_tablename})")
-#         assert fisc_week_raw_pragma == cursor.fetchall()
+        print(f"{pidnam_raw_columns=}")
+        print(f"{pidnam_agg_columns=}")
+        assert "error_message" in pidnam_raw_columns
+        assert "error_message" not in pidnam_agg_columns
+        assert "error_message" in pidtag_raw_columns
+        assert "error_message" not in pidtag_agg_columns
+        assert "error_message" in pidroa_raw_columns
+        assert "error_message" not in pidroa_agg_columns
+        assert "error_message" in pidlab_raw_columns
+        assert "error_message" not in pidlab_agg_columns
+        assert idea_number_str() in pidnam_raw_columns
+        assert idea_number_str() not in pidnam_agg_columns
+        assert idea_number_str() in pidtag_raw_columns
+        assert idea_number_str() not in pidtag_agg_columns
+        assert idea_number_str() in pidroa_raw_columns
+        assert idea_number_str() not in pidroa_agg_columns
+        assert idea_number_str() in pidlab_raw_columns
+        assert idea_number_str() not in pidlab_agg_columns
+        assert len(pidnam_raw_columns) == 9
+        assert len(pidnam_agg_columns) == 7
+        assert len(pidtag_raw_columns) == 9
+        assert len(pidtag_agg_columns) == 7
+        assert len(pidroa_raw_columns) == 9
+        assert len(pidroa_agg_columns) == 7
+        assert len(pidlab_raw_columns) == 9
+        assert len(pidlab_agg_columns) == 7
 
 
 # def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
@@ -416,7 +227,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 
 #         for x_dimen in sorted(idea_config):
 #             # print(f"{x_dimen} checking...")
@@ -449,7 +260,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     exclude_cols = {idea_number_str(), "error_message"}
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in sorted(idea_config):
 #             # print(f"{x_dimen} checking...")
@@ -488,8 +299,8 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_fisc_tables(cursor)
-#         create_bud_tables(cursor)
+#         create_fisc_prime_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             print(f"{x_dimen} checking...")
@@ -527,7 +338,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     exclude_cols = {idea_number_str(), "error_message"}
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             # print(f"{x_dimen} checking...")
@@ -569,7 +380,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     }
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             print(f"{x_dimen} checking...")
@@ -638,7 +449,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             print(f"{x_dimen} checking...")
@@ -684,7 +495,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             # print(f"{x_dimen} checking...")
@@ -726,8 +537,8 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
 #         create_all_idea_tables(cursor)
-#         create_fisc_tables(cursor)
-#         create_bud_tables(cursor)
+#         create_fisc_prime_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         idea_raw2dimen_count = 0
 #         idea_dimen_combo_checked_count = 0
@@ -790,8 +601,8 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
 #         create_all_idea_tables(cursor)
-#         create_fisc_tables(cursor)
-#         create_bud_tables(cursor)
+#         create_fisc_prime_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         idea_raw2dimen_count = 0
 #         idea_dimen_combo_checked_count = 0
@@ -967,7 +778,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
 #     gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str())
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 #         fisccash_agg = f"{fisc_cashbook_str()}_agg"
 #         fiscdeal_agg = f"{fisc_dealunit_str()}_agg"
 #         fischour_agg = f"{fisc_timeline_hour_str()}_agg"

@@ -31,21 +31,21 @@ from src.a16_pidgin_logic.examples.example_pidgins import (
     get_pidgin_core_attrs_are_none_namemap,
 )
 from src.a17_idea_logic.pidgin_toolbox import (
-    get_map_name_dt_columns,
-    get_map_label_dt_columns,
-    get_map_tag_dt_columns,
-    get_map_road_dt_columns,
-    create_map_name_dt,
-    create_map_label_dt,
-    create_map_tag_dt,
-    create_map_road_dt,
-    create_map_tag_dt,
+    get_pidgin_name_dt_columns,
+    get_pidgin_label_dt_columns,
+    get_pidgin_tag_dt_columns,
+    get_pidgin_road_dt_columns,
+    create_pidgin_name_dt,
+    create_pidgin_label_dt,
+    create_pidgin_tag_dt,
+    create_pidgin_road_dt,
+    create_pidgin_tag_dt,
     save_all_csvs_from_pidginunit,
     _load_namemap_from_csv,
     _load_labelmap_from_csv,
     _load_tagmap_from_csv,
     _load_roadmap_from_csv,
-    _save_map_tag_csv,
+    _save_pidgin_tag_csv,
     create_dir_valid_empty_pidginunit,
     init_pidginunit_from_dir,
 )
@@ -56,10 +56,10 @@ from src.a17_idea_logic.idea_db_tool import (
 from os.path import exists as os_path_exists
 
 
-def test_get_map_name_dt_columns_ReturnsObj():
+def test_get_pidgin_name_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_map_name_dt_columns()
-    assert len(get_map_name_dt_columns()) == 7
+    assert get_pidgin_name_dt_columns()
+    assert len(get_pidgin_name_dt_columns()) == 7
     static_list = [
         face_name_str(),
         event_int_str(),
@@ -69,14 +69,14 @@ def test_get_map_name_dt_columns_ReturnsObj():
         "otx_name",
         "inx_name",
     ]
-    assert get_map_name_dt_columns() == static_list
-    assert set(get_map_name_dt_columns()).issubset(set(sorting_columns()))
+    assert get_pidgin_name_dt_columns() == static_list
+    assert set(get_pidgin_name_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_map_label_dt_columns_ReturnsObj():
+def test_get_pidgin_label_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_map_label_dt_columns()
-    assert len(get_map_label_dt_columns()) == 7
+    assert get_pidgin_label_dt_columns()
+    assert len(get_pidgin_label_dt_columns()) == 7
     static_list = [
         face_name_str(),
         event_int_str(),
@@ -86,14 +86,14 @@ def test_get_map_label_dt_columns_ReturnsObj():
         "otx_label",
         "inx_label",
     ]
-    assert get_map_label_dt_columns() == static_list
-    assert set(get_map_label_dt_columns()).issubset(set(sorting_columns()))
+    assert get_pidgin_label_dt_columns() == static_list
+    assert set(get_pidgin_label_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_map_tag_dt_columns_ReturnsObj():
+def test_get_pidgin_tag_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_map_tag_dt_columns()
-    assert len(get_map_tag_dt_columns()) == 7
+    assert get_pidgin_tag_dt_columns()
+    assert len(get_pidgin_tag_dt_columns()) == 7
     static_list = [
         face_name_str(),
         event_int_str(),
@@ -103,14 +103,14 @@ def test_get_map_tag_dt_columns_ReturnsObj():
         "otx_tag",
         "inx_tag",
     ]
-    assert get_map_tag_dt_columns() == static_list
-    assert set(get_map_tag_dt_columns()).issubset(set(sorting_columns()))
+    assert get_pidgin_tag_dt_columns() == static_list
+    assert set(get_pidgin_tag_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_map_road_dt_columns_ReturnsObj():
+def test_get_pidgin_road_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_map_road_dt_columns()
-    assert len(get_map_road_dt_columns()) == 7
+    assert get_pidgin_road_dt_columns()
+    assert len(get_pidgin_road_dt_columns()) == 7
     static_list = [
         face_name_str(),
         event_int_str(),
@@ -120,44 +120,44 @@ def test_get_map_road_dt_columns_ReturnsObj():
         "otx_road",
         "inx_road",
     ]
-    assert get_map_road_dt_columns() == static_list
-    assert set(get_map_road_dt_columns()).issubset(set(sorting_columns()))
+    assert get_pidgin_road_dt_columns() == static_list
+    assert set(get_pidgin_road_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_create_map_road_dt_ReturnsObj():
+def test_create_pidgin_road_dt_ReturnsObj():
     # ESTABLISH
     casa_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     casa_mapunit = casa_pidginunit.get_roadmap()
 
     # WHEN
-    casa_dataframe = create_map_road_dt(casa_mapunit)
+    casa_dataframe = create_pidgin_road_dt(casa_mapunit)
     print(f"{casa_dataframe=}")
 
     # THEN
-    assert list(casa_dataframe.columns) == get_map_road_dt_columns()
+    assert list(casa_dataframe.columns) == get_pidgin_road_dt_columns()
     assert len(casa_dataframe) == 4
     casa_csv = get_ordered_csv(casa_dataframe)
-    print(f"{get_map_road_dt_columns()=}")
+    print(f"{get_pidgin_road_dt_columns()=}")
     print(f"{casa_dataframe.columns=}")
     print(f"{casa_csv=}")
     print(f"{get_ordered_csv(get_casa_maison_road_otx2inx_dt())=}")
     assert casa_csv == get_ordered_csv(get_casa_maison_road_otx2inx_dt())
 
 
-def test_create_map_tag_dt_ReturnsObj():
+def test_create_pidgin_tag_dt_ReturnsObj():
     # ESTABLISH
     casa_pidginunit = get_casa_maison_pidginunit_set_by_tag()
     casa_mapunit = casa_pidginunit.get_tagmap()
 
     # WHEN
-    casa_dataframe = create_map_tag_dt(casa_mapunit)
+    casa_dataframe = create_pidgin_tag_dt(casa_mapunit)
 
     # THEN
-    # print(f"{get_map_tag_dt_columns()=}")
+    # print(f"{get_pidgin_tag_dt_columns()=}")
     # print(f"    {list(casa_dataframe.columns)=}")
     # print("")
     # print(f"{casa_dataframe=}")
-    assert list(casa_dataframe.columns) == get_map_tag_dt_columns()
+    assert list(casa_dataframe.columns) == get_pidgin_tag_dt_columns()
     assert len(casa_dataframe) == 3
     casa_csv = get_ordered_csv(casa_dataframe)
     ex_tag_csv = get_ordered_csv(get_casa_maison_tag_dt())

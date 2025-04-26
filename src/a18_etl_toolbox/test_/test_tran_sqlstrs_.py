@@ -50,6 +50,7 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
 )
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
 from src.a17_idea_logic.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
@@ -67,13 +68,16 @@ from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeColumnsRef,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    get_fisc_create_table_sqlstrs,
-    get_bud_create_table_sqlstrs,
-    create_fisc_tables,
-    create_bud_tables,
+    get_fisc_prime_create_table_sqlstrs,
+    get_bud_prime_create_table_sqlstrs,
+    create_pidgin_prime_tables,
+    create_fisc_prime_tables,
+    create_bud_prime_tables,
     create_all_idea_tables,
+    get_pidgin_inconsistency_sqlstrs,
     get_bud_inconsistency_sqlstrs,
     get_fisc_inconsistency_sqlstrs,
+    get_pidgin_update_inconsist_error_message_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_fisc_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_raw_sqlstrs,
@@ -139,10 +143,10 @@ def abbv(tablename: str) -> str:
     return abbrevions.get(tablename)
 
 
-def test_get_fisc_create_table_sqlstrs_ReturnsObj():
+def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_fisc_create_table_sqlstrs()
+    create_table_sqlstrs = get_fisc_prime_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
@@ -183,10 +187,10 @@ def test_get_fisc_create_table_sqlstrs_ReturnsObj():
         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
 
 
-def test_get_bud_create_table_sqlstrs_ReturnsObj():
+def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_bud_create_table_sqlstrs()
+    create_table_sqlstrs = get_bud_prime_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
@@ -246,9 +250,9 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj():
         # print(f'"{st_del_table}": CREATE_{abbv(st_del_table)}_SQLSTR,')
 
 
-def test_get_fisc_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
-    fisc_create_table_sqlstrs = get_fisc_create_table_sqlstrs()
+    fisc_create_table_sqlstrs = get_fisc_prime_create_table_sqlstrs()
 
     # THEN
     assert fisc_create_table_sqlstrs
@@ -259,9 +263,9 @@ def test_get_fisc_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert set(fisc_create_table_sqlstrs.keys()) == expected_fisc_tablenames
 
 
-def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_bud_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
-    bud_create_table_sqlstrs = get_bud_create_table_sqlstrs()
+    bud_create_table_sqlstrs = get_bud_prime_create_table_sqlstrs()
 
     # THEN
     assert bud_create_table_sqlstrs
@@ -291,7 +295,7 @@ def test_create_all_idea_tables_CreatesFiscRawTables():
             assert db_table_exists(cursor, f"{idea_number}_raw")
 
 
-def test_create_bud_tables_CreatesFiscRawTables():
+def test_create_bud_prime_tables_CreatesFiscRawTables():
     # ESTABLISH
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
@@ -340,7 +344,7 @@ def test_create_bud_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budunit_pud_raw_table) is False
 
         # WHEN
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         # THEN
         cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
@@ -373,7 +377,7 @@ def test_create_bud_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budunit_pud_raw_table)
 
 
-def test_create_fisc_tables_CreatesFiscRawTables():
+def test_create_fisc_prime_tables_CreatesFiscRawTables():
     # ESTABLISH
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
@@ -393,7 +397,7 @@ def test_create_fisc_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, fisc_objs.week_raw_tablename) is False
 
         # WHEN
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, fisc_objs.unit_agg_tablename)
@@ -449,6 +453,48 @@ def test_create_fisc_tables_CreatesFiscRawTables():
         assert fisc_week_raw_pragma == cursor.fetchall()
 
 
+def test_get_pidgin_inconsistency_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    pidgin_inconsistency_sqlstrs = get_pidgin_inconsistency_sqlstrs()
+
+    # THEN
+    assert pidgin_inconsistency_sqlstrs.keys() == get_pidgin_dimens()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        # if dimen_config.get(idea_category_str()) != "pidgin"
+        # if dimen_config.get(idea_category_str()) == "bud"
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
+
+    exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_pidgin_prime_tables(cursor)
+
+        for x_dimen in sorted(idea_config):
+            # print(f"{x_dimen} checking...")
+            x_sqlstr = pidgin_inconsistency_sqlstrs.get(x_dimen)
+            x_tablename = f"{x_dimen}_raw"
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            generated_dimen_sqlstr = create_select_inconsistency_query(
+                cursor, x_tablename, dimen_focus_columns, exclude_cols
+            )
+            print(
+                f'{x_dimen.upper()}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""'
+            )
+            print(f'{x_sqlstr=}"""')
+            assert x_sqlstr == generated_dimen_sqlstr
+
+
 def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
@@ -473,7 +519,7 @@ def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         for x_dimen in sorted(idea_config):
             # print(f"{x_dimen} checking...")
@@ -506,7 +552,7 @@ def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
     exclude_cols = {idea_number_str(), "error_message"}
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         for x_dimen in sorted(idea_config):
             # print(f"{x_dimen} checking...")
@@ -545,12 +591,55 @@ def test_get_fisc_update_inconsist_error_message_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
-        create_bud_tables(cursor)
+        create_fisc_prime_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
             x_sqlstr = fisc_update_error_sqlstrs.get(x_dimen)
+            x_tablename = f"{x_dimen}_raw"
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            generated_dimen_sqlstr = create_update_inconsistency_error_query(
+                cursor, x_tablename, dimen_focus_columns, exclude_cols
+            )
+            # print(
+            #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
+            # )
+            # print(
+            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            # )
+            # print(f"""            {x_sqlstr=}""")
+            assert x_sqlstr == generated_dimen_sqlstr
+
+
+def test_get_pidgin_update_inconsist_error_message_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    pidgin_update_error_sqlstrs = get_pidgin_update_inconsist_error_message_sqlstrs()
+
+    # THEN
+    assert set(pidgin_update_error_sqlstrs.keys()) == get_pidgin_dimens()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
+
+    exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_pidgin_prime_tables(cursor)
+
+        for x_dimen in idea_config:
+            # print(f"{x_dimen} checking...")
+            x_sqlstr = pidgin_update_error_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_raw"
             dimen_config = idea_config.get(x_dimen)
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
@@ -584,7 +673,7 @@ def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
     exclude_cols = {idea_number_str(), "error_message"}
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         for x_dimen in idea_config:
             # print(f"{x_dimen} checking...")
@@ -626,7 +715,7 @@ def test_get_fisc_insert_agg_from_raw_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
@@ -695,7 +784,7 @@ def test_get_bud_insert_put_agg_from_raw_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         for x_dimen in idea_config:
             print(f"{x_dimen} checking...")
@@ -741,7 +830,7 @@ def test_get_bud_insert_del_agg_from_raw_sqlstrs_ReturnsObj():
     }
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         for x_dimen in idea_config:
             # print(f"{x_dimen} checking...")
@@ -783,8 +872,8 @@ def test_IDEA_RAWABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_all_idea_tables(cursor)
-        create_fisc_tables(cursor)
-        create_bud_tables(cursor)
+        create_fisc_prime_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         idea_raw2dimen_count = 0
         idea_dimen_combo_checked_count = 0
@@ -847,8 +936,8 @@ def test_IDEA_RAWABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_all_idea_tables(cursor)
-        create_fisc_tables(cursor)
-        create_bud_tables(cursor)
+        create_fisc_prime_tables(cursor)
+        create_bud_prime_tables(cursor)
 
         idea_raw2dimen_count = 0
         idea_dimen_combo_checked_count = 0
@@ -1024,7 +1113,7 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fisccash_agg = f"{fisc_cashbook_str()}_agg"
         fiscdeal_agg = f"{fisc_dealunit_str()}_agg"
         fischour_agg = f"{fisc_timeline_hour_str()}_agg"

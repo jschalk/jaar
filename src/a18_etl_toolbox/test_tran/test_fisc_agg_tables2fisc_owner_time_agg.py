@@ -3,7 +3,7 @@ from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_ta
 from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a18_etl_toolbox.transformers import (
-    create_fisc_tables,
+    create_fisc_prime_tables,
     etl_fisc_agg_tables_to_fisc_ote1_agg,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -23,7 +23,7 @@ def test_etl_fisc_agg_tables_to_fisc_ote1_agg_SetsTableAttr():
     timepoint77 = 77
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
@@ -69,7 +69,7 @@ VALUES
 #     timepoint77 = 77
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 
 #         x_fisc = FiscPrimeObjsRef()
 #         insert_raw_sqlstr = f"""
