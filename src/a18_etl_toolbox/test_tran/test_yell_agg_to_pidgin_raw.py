@@ -658,11 +658,11 @@ def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
 
         br00115_str = "br00115"
         br00042_str = "br00042"
-        row0 = (br00042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-        row1 = (br00042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-        row2 = (br00042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-        row3 = (br00115_str, sue_str, event1, bob_str, bob_inx, None, None, None)
-        row4 = (br00115_str, sue_str, event1, yao_str, yao_inx, None, None, None)
+        row0 = (br00042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
+        row1 = (br00042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row2 = (br00042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row3 = (br00115_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
+        row4 = (br00115_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
         assert lab_rows[0] == row0
         assert lab_rows[1] == row1
         assert lab_rows[2] == row2
@@ -671,11 +671,11 @@ def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
 
         br00113_str = "br00113"
         br00043_str = "br00043"
-        row0 = (br00043_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-        row1 = (br00043_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-        row2 = (br00043_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-        row3 = (br00113_str, sue_str, event9, bob_str, bob_inx, None, None, None)
-        row4 = (br00113_str, sue_str, event9, yao_str, yao_inx, None, None, None)
+        row0 = (br00043_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
+        row1 = (br00043_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row2 = (br00043_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row3 = (br00113_str, sue_str, event9, bob_str, bob_inx, None, None, None, None)
+        row4 = (br00113_str, sue_str, event9, yao_str, yao_inx, None, None, None, None)
         assert nam_rows[0] == row0
         assert nam_rows[1] == row1
         assert nam_rows[2] == row2
@@ -684,11 +684,11 @@ def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
 
         br00116_str = "br00116"
         br00044_str = "br00044"
-        row0 = (br00044_str, sue_str, event0, bob_str, bob_inx, rdx, rdx, ukx)
-        row1 = (br00044_str, sue_str, event0, sue_str, sue_str, rdx, rdx, ukx)
-        row2 = (br00044_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-        row3 = (br00116_str, sue_str, event1, bob_str, bob_inx, None, None, None)
-        row4 = (br00116_str, sue_str, event1, yao_str, yao_inx, None, None, None)
+        row0 = (br00044_str, sue_str, event0, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row1 = (br00044_str, sue_str, event0, sue_str, sue_str, rdx, rdx, ukx, None)
+        row2 = (br00044_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row3 = (br00116_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
+        row4 = (br00116_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
         assert tag_rows[0] == row0
         assert tag_rows[1] == row1
         assert tag_rows[2] == row2
@@ -697,13 +697,13 @@ def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
 
         br00117_str = "br00117"
         br00045_str = "br00045"
-        row0 = (br00045_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-        row1 = (br00045_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-        row2 = (br00045_str, yao_str, event1, bob_str, bob_inx, rdx, rdx, ukx)
-        row3 = (br00045_str, yao_str, event1, sue_str, sue_str, rdx, rdx, ukx)
-        row4 = (br00045_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-        row5 = (br00117_str, sue_str, event1, bob_str, bob_inx, None, None, None)
-        row6 = (br00117_str, sue_str, event1, yao_str, yao_inx, None, None, None)
+        row0 = (br00045_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
+        row1 = (br00045_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row2 = (br00045_str, yao_str, event1, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row3 = (br00045_str, yao_str, event1, sue_str, sue_str, rdx, rdx, ukx, None)
+        row4 = (br00045_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row5 = (br00117_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
+        row6 = (br00117_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
         print(f"{roa_rows[5]=}")
         print(f"       {row5=}")
         assert roa_rows[0] == row0

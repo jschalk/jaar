@@ -99,6 +99,7 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
         raw_cols = set(x_config.get("jkeys").keys())
         raw_cols.update(set(x_config.get("jvalues").keys()))
         raw_cols.add("idea_number")
+        raw_cols.add("error_message")
         raw_cols = get_default_sorted_list(raw_cols)
         ex_raw_sqlstr = get_create_table_sqlstr(raw_table, raw_cols, sqlite_types)
         raw_create_sqlstr = create_table_sqlstrs.get(raw_table)
@@ -107,23 +108,15 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
         agg_table = f"{x_dimen}_agg"
         agg_cols = set(x_config.get("jkeys").keys())
         agg_cols.update(set(x_config.get("jvalues").keys()))
-        agg_cols.add("error_message")
         agg_cols = get_default_sorted_list(agg_cols)
         ex_agg_sqlstr = get_create_table_sqlstr(agg_table, agg_cols, sqlite_types)
         agg_create_sqlstr = create_table_sqlstrs.get(agg_table)
         assert agg_create_sqlstr == ex_agg_sqlstr
 
-        valid_table = f"{x_dimen}_valid"
-        ex_valid_sqlstr = ex_agg_sqlstr.replace("agg", "valid")
-        valid_create_sqlstr = create_table_sqlstrs.get(valid_table)
-        assert valid_create_sqlstr == ex_valid_sqlstr
-
-        # print(f'CREATE_{raw_table.upper()}_SQLSTR= """{ex_raw_sqlstr}"""')
-        # print(f'CREATE_{agg_table.upper()}_SQLSTR= """{ex_agg_sqlstr}"""')
-        # print(f'CREATE_{valid_table.upper()}_SQLSTR= """{ex_valid_sqlstr}"""')
+        print(f'CREATE_{raw_table.upper()}_SQLSTR= """{ex_raw_sqlstr}"""')
+        print(f'CREATE_{agg_table.upper()}_SQLSTR= """{ex_agg_sqlstr}"""')
         # print(f'"{raw_table}": CREATE_{raw_table.upper()}_SQLSTR,')
         # print(f'"{agg_table}": CREATE_{agg_table.upper()}_SQLSTR,')
-        # print(f'"{valid_table}": CREATE_{valid_table.upper()}_SQLSTR,')
 
 
 def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
@@ -135,7 +128,6 @@ def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     bud_dimens = get_pidgin_dimens()
     expected_bud_tablenames = {f"{x_dimen}_agg" for x_dimen in bud_dimens}
     expected_bud_tablenames.update({f"{x_dimen}_raw" for x_dimen in bud_dimens})
-    expected_bud_tablenames.update({f"{x_dimen}_valid" for x_dimen in bud_dimens})
     print(f"{expected_bud_tablenames=}")
     assert set(pidgin_create_table_sqlstrs.keys()) == expected_bud_tablenames
 
@@ -145,29 +137,21 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
     with sqlite3_connect(":memory:") as fisc_db_conn:
         pidnam_raw_table = "pidgin_label_raw"
         pidnam_agg_table = "pidgin_label_agg"
-        pidnam_val_table = "pidgin_label_valid"
         pidtag_raw_table = "pidgin_name_raw"
         pidtag_agg_table = "pidgin_name_agg"
-        pidtag_val_table = "pidgin_name_valid"
         pidroa_raw_table = "pidgin_road_raw"
         pidroa_agg_table = "pidgin_road_agg"
-        pidroa_val_table = "pidgin_road_valid"
         pidlab_raw_table = "pidgin_tag_raw"
         pidlab_agg_table = "pidgin_tag_agg"
-        pidlab_val_table = "pidgin_tag_valid"
         cursor = fisc_db_conn.cursor()
         assert not db_table_exists(cursor, pidnam_raw_table)
         assert not db_table_exists(cursor, pidnam_agg_table)
-        assert not db_table_exists(cursor, pidnam_val_table)
         assert not db_table_exists(cursor, pidtag_raw_table)
         assert not db_table_exists(cursor, pidtag_agg_table)
-        assert not db_table_exists(cursor, pidtag_val_table)
         assert not db_table_exists(cursor, pidroa_raw_table)
         assert not db_table_exists(cursor, pidroa_agg_table)
-        assert not db_table_exists(cursor, pidroa_val_table)
         assert not db_table_exists(cursor, pidlab_raw_table)
         assert not db_table_exists(cursor, pidlab_agg_table)
-        assert not db_table_exists(cursor, pidlab_val_table)
 
         # WHEN
         create_pidgin_prime_tables(cursor)
@@ -175,68 +159,48 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         # THEN
         assert db_table_exists(cursor, pidnam_raw_table)
         assert db_table_exists(cursor, pidnam_agg_table)
-        assert db_table_exists(cursor, pidnam_val_table)
         assert db_table_exists(cursor, pidtag_raw_table)
         assert db_table_exists(cursor, pidtag_agg_table)
-        assert db_table_exists(cursor, pidtag_val_table)
         assert db_table_exists(cursor, pidroa_raw_table)
         assert db_table_exists(cursor, pidroa_agg_table)
-        assert db_table_exists(cursor, pidroa_val_table)
         assert db_table_exists(cursor, pidlab_raw_table)
         assert db_table_exists(cursor, pidlab_agg_table)
-        assert db_table_exists(cursor, pidlab_val_table)
 
         pidnam_raw_columns = get_table_columns(cursor, pidnam_raw_table)
         pidnam_agg_columns = get_table_columns(cursor, pidnam_agg_table)
-        pidnam_val_columns = get_table_columns(cursor, pidnam_val_table)
         pidtag_raw_columns = get_table_columns(cursor, pidtag_raw_table)
         pidtag_agg_columns = get_table_columns(cursor, pidtag_agg_table)
-        pidtag_val_columns = get_table_columns(cursor, pidtag_val_table)
         pidroa_raw_columns = get_table_columns(cursor, pidroa_raw_table)
         pidroa_agg_columns = get_table_columns(cursor, pidroa_agg_table)
-        pidroa_val_columns = get_table_columns(cursor, pidroa_val_table)
         pidlab_raw_columns = get_table_columns(cursor, pidlab_raw_table)
         pidlab_agg_columns = get_table_columns(cursor, pidlab_agg_table)
-        pidlab_val_columns = get_table_columns(cursor, pidlab_val_table)
 
         print(f"{pidnam_raw_columns=}")
         print(f"{pidnam_agg_columns=}")
-        assert "error_message" not in pidnam_raw_columns
-        assert "error_message" in pidnam_agg_columns
-        assert "error_message" in pidnam_val_columns
-        assert "error_message" not in pidtag_raw_columns
-        assert "error_message" in pidtag_agg_columns
-        assert "error_message" in pidtag_val_columns
-        assert "error_message" not in pidroa_raw_columns
-        assert "error_message" in pidroa_agg_columns
-        assert "error_message" in pidroa_val_columns
-        assert "error_message" not in pidlab_raw_columns
-        assert "error_message" in pidlab_agg_columns
-        assert "error_message" in pidlab_val_columns
+        assert "error_message" in pidnam_raw_columns
+        assert "error_message" not in pidnam_agg_columns
+        assert "error_message" in pidtag_raw_columns
+        assert "error_message" not in pidtag_agg_columns
+        assert "error_message" in pidroa_raw_columns
+        assert "error_message" not in pidroa_agg_columns
+        assert "error_message" in pidlab_raw_columns
+        assert "error_message" not in pidlab_agg_columns
         assert idea_number_str() in pidnam_raw_columns
         assert idea_number_str() not in pidnam_agg_columns
-        assert idea_number_str() not in pidnam_val_columns
         assert idea_number_str() in pidtag_raw_columns
         assert idea_number_str() not in pidtag_agg_columns
-        assert idea_number_str() not in pidtag_val_columns
         assert idea_number_str() in pidroa_raw_columns
         assert idea_number_str() not in pidroa_agg_columns
-        assert idea_number_str() not in pidroa_val_columns
         assert idea_number_str() in pidlab_raw_columns
         assert idea_number_str() not in pidlab_agg_columns
-        assert idea_number_str() not in pidlab_val_columns
-        assert len(pidnam_raw_columns) == 8
-        assert len(pidnam_agg_columns) == 8
-        assert len(pidnam_val_columns) == 8
-        assert len(pidtag_raw_columns) == 8
-        assert len(pidtag_agg_columns) == 8
-        assert len(pidtag_val_columns) == 8
-        assert len(pidroa_raw_columns) == 8
-        assert len(pidroa_agg_columns) == 8
-        assert len(pidroa_val_columns) == 8
-        assert len(pidlab_raw_columns) == 8
-        assert len(pidlab_agg_columns) == 8
-        assert len(pidlab_val_columns) == 8
+        assert len(pidnam_raw_columns) == 9
+        assert len(pidnam_agg_columns) == 7
+        assert len(pidtag_raw_columns) == 9
+        assert len(pidtag_agg_columns) == 7
+        assert len(pidroa_raw_columns) == 9
+        assert len(pidroa_agg_columns) == 7
+        assert len(pidlab_raw_columns) == 9
+        assert len(pidlab_agg_columns) == 7
 
 
 # def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
