@@ -50,6 +50,7 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
 )
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
 from src.a17_idea_logic.idea_config import (
     idea_number_str,
     get_idea_sqlite_types,
@@ -69,11 +70,14 @@ from src.a18_etl_toolbox.fisc_etl_tool import (
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_fisc_prime_create_table_sqlstrs,
     get_bud_prime_create_table_sqlstrs,
+    create_pidgin_prime_tables,
     create_fisc_prime_tables,
     create_bud_prime_tables,
     create_all_idea_tables,
+    get_pidgin_inconsistency_sqlstrs,
     get_bud_inconsistency_sqlstrs,
     get_fisc_inconsistency_sqlstrs,
+    get_pidgin_update_inconsist_error_message_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_fisc_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_raw_sqlstrs,
@@ -449,6 +453,48 @@ def test_create_fisc_prime_tables_CreatesFiscRawTables():
         assert fisc_week_raw_pragma == cursor.fetchall()
 
 
+def test_get_pidgin_inconsistency_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    pidgin_inconsistency_sqlstrs = get_pidgin_inconsistency_sqlstrs()
+
+    # THEN
+    assert pidgin_inconsistency_sqlstrs.keys() == get_pidgin_dimens()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        # if dimen_config.get(idea_category_str()) != "pidgin"
+        # if dimen_config.get(idea_category_str()) == "bud"
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
+
+    exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_pidgin_prime_tables(cursor)
+
+        for x_dimen in sorted(idea_config):
+            # print(f"{x_dimen} checking...")
+            x_sqlstr = pidgin_inconsistency_sqlstrs.get(x_dimen)
+            x_tablename = f"{x_dimen}_raw"
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            generated_dimen_sqlstr = create_select_inconsistency_query(
+                cursor, x_tablename, dimen_focus_columns, exclude_cols
+            )
+            print(
+                f'{x_dimen.upper()}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""'
+            )
+            print(f'{x_sqlstr=}"""')
+            assert x_sqlstr == generated_dimen_sqlstr
+
+
 def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
@@ -567,48 +613,47 @@ def test_get_fisc_update_inconsist_error_message_sqlstrs_ReturnsObj():
             assert x_sqlstr == generated_dimen_sqlstr
 
 
-# def test_get_pidgin_update_inconsist_error_message_sqlstrs_ReturnsObj():
-#     # sourcery skip: no-loop-in-tests
-#     # ESTABLISH / WHEN
-#     pidgin_update_error_sqlstrs = get_pidgin_update_inconsist_error_message_sqlstrs()
+def test_get_pidgin_update_inconsist_error_message_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    pidgin_update_error_sqlstrs = get_pidgin_update_inconsist_error_message_sqlstrs()
 
-#     # THEN
-#     assert set(pidgin_update_error_sqlstrs.keys()) == get_pidgin_dimens()
-#     idea_config = get_idea_config_dict()
-#     idea_config = {
-#         x_dimen: dimen_config
-#         for x_dimen, dimen_config in idea_config.items()
-#         if dimen_config.get(idea_category_str()) == "pidgin"
-#     }
+    # THEN
+    assert set(pidgin_update_error_sqlstrs.keys()) == get_pidgin_dimens()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
 
-#     exclude_cols = {
-#         idea_number_str(),
-#         face_name_str(),
-#         event_int_str(),
-#         "error_message",
-#     }
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_fisc_prime_tables(cursor)
-#         create_bud_prime_tables(cursor)
+    exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_pidgin_prime_tables(cursor)
 
-#         for x_dimen in idea_config:
-#             print(f"{x_dimen} checking...")
-#             x_sqlstr = fisc_update_error_sqlstrs.get(x_dimen)
-#             x_tablename = f"{x_dimen}_raw"
-#             dimen_config = idea_config.get(x_dimen)
-#             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-#             generated_dimen_sqlstr = create_update_inconsistency_error_query(
-#                 cursor, x_tablename, dimen_focus_columns, exclude_cols
-#             )
-#             # print(
-#             #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
-#             # )
-#             # print(
-#             #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
-#             # )
-#             # print(f"""            {x_sqlstr=}""")
-#             assert x_sqlstr == generated_dimen_sqlstr
+        for x_dimen in idea_config:
+            # print(f"{x_dimen} checking...")
+            x_sqlstr = pidgin_update_error_sqlstrs.get(x_dimen)
+            x_tablename = f"{x_dimen}_raw"
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            generated_dimen_sqlstr = create_update_inconsistency_error_query(
+                cursor, x_tablename, dimen_focus_columns, exclude_cols
+            )
+            # print(
+            #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
+            # )
+            # print(
+            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            # )
+            # print(f"""            {x_sqlstr=}""")
+            assert x_sqlstr == generated_dimen_sqlstr
 
 
 def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():

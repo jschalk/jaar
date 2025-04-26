@@ -293,6 +293,38 @@ HAVING MIN(timeline_tag) != MAX(timeline_tag)
     OR MIN(bridge) != MAX(bridge)
     OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
 """
+PIDGIN_LABEL_INCONSISTENCY_SQLSTR = """SELECT otx_label
+FROM pidgin_label_raw
+GROUP BY otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDGIN_NAME_INCONSISTENCY_SQLSTR = """SELECT otx_name
+FROM pidgin_name_raw
+GROUP BY otx_name
+HAVING MIN(inx_name) != MAX(inx_name)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDGIN_ROAD_INCONSISTENCY_SQLSTR = """SELECT otx_road
+FROM pidgin_road_raw
+GROUP BY otx_road
+HAVING MIN(inx_road) != MAX(inx_road)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDGIN_TAG_INCONSISTENCY_SQLSTR = """SELECT otx_tag
+FROM pidgin_tag_raw
+GROUP BY otx_tag
+HAVING MIN(inx_tag) != MAX(inx_tag)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
 
 
 def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
@@ -307,6 +339,15 @@ def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
         "bud_item_teamlink": BUDTEAM_INCONSISTENCY_SQLSTR,
         "bud_itemunit": BUDITEM_INCONSISTENCY_SQLSTR,
         "budunit": BUDUNIT_INCONSISTENCY_SQLSTR,
+    }
+
+
+def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDGIN_LABEL_INCONSISTENCY_SQLSTR,
+        "pidgin_name": PIDGIN_NAME_INCONSISTENCY_SQLSTR,
+        "pidgin_road": PIDGIN_ROAD_INCONSISTENCY_SQLSTR,
+        "pidgin_tag": PIDGIN_TAG_INCONSISTENCY_SQLSTR,
     }
 
 
@@ -687,6 +728,75 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fiscunit_raw.fisc_tag
 ;
 """
+PIDGIN_LABEL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_label
+FROM pidgin_label_raw
+GROUP BY otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_label_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_label = pidgin_label_raw.otx_label
+;
+"""
+PIDGIN_NAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_name
+FROM pidgin_name_raw
+GROUP BY otx_name
+HAVING MIN(inx_name) != MAX(inx_name)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_name_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_name = pidgin_name_raw.otx_name
+;
+"""
+PIDGIN_ROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_road
+FROM pidgin_road_raw
+GROUP BY otx_road
+HAVING MIN(inx_road) != MAX(inx_road)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_road_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_road = pidgin_road_raw.otx_road
+;
+"""
+PIDGIN_TAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_tag
+FROM pidgin_tag_raw
+GROUP BY otx_tag
+HAVING MIN(inx_tag) != MAX(inx_tag)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_tag_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_tag = pidgin_tag_raw.otx_tag
+;
+"""
+
+
+def get_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDGIN_LABEL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_name": PIDGIN_NAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_road": PIDGIN_ROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_tag": PIDGIN_TAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    }
 
 
 def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
