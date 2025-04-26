@@ -978,6 +978,45 @@ def get_bud_insert_del_agg_from_raw_sqlstrs() -> dict[str, str]:
     }
 
 
+PIDGIN_LABEL_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_label_agg (otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_label_raw
+WHERE error_message IS NULL
+GROUP BY otx_label
+;
+"""
+PIDGIN_NAME_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_name_agg (otx_name, inx_name, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_name, MAX(inx_name), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_name_raw
+WHERE error_message IS NULL
+GROUP BY otx_name
+;
+"""
+PIDGIN_ROAD_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_road_agg (otx_road, inx_road, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_road, MAX(inx_road), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_road_raw
+WHERE error_message IS NULL
+GROUP BY otx_road
+;
+"""
+PIDGIN_TAG_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_tag_agg (otx_tag, inx_tag, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_tag, MAX(inx_tag), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_tag_raw
+WHERE error_message IS NULL
+GROUP BY otx_tag
+;
+"""
+
+
+def get_pidgin_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDGIN_LABEL_AGG_INSERT_SQLSTR,
+        "pidgin_name": PIDGIN_NAME_AGG_INSERT_SQLSTR,
+        "pidgin_road": PIDGIN_ROAD_AGG_INSERT_SQLSTR,
+        "pidgin_tag": PIDGIN_TAG_AGG_INSERT_SQLSTR,
+    }
+
+
 def get_fisc_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
     return {
         "fisc_cashbook": FISCCASH_AGG_INSERT_SQLSTR,

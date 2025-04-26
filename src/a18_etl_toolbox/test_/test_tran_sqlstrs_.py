@@ -39,7 +39,6 @@ from src.a08_bud_atom_logic.atom_config import (
     get_bud_dimens,
     get_delete_key_name,
 )
-from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
 from src.a15_fisc_logic.fisc_config import (
     get_fisc_dimens,
     fiscunit_str,
@@ -83,6 +82,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_insert_put_agg_from_raw_sqlstrs,
     get_bud_insert_del_agg_from_raw_sqlstrs,
     get_fisc_insert_agg_from_raw_sqlstrs,
+    get_pidgin_insert_agg_from_raw_sqlstrs,
     FISCUNIT_AGG_INSERT_SQLSTR,
     IDEA_RAWABLE_PUT_DIMENS,
     IDEA_RAWABLE_DEL_DIMENS,
@@ -763,6 +763,58 @@ GROUP BY {fisc_tag_str()}
         assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
 
     assert len(idea_config) == len(fisc_insert_agg_sqlstrs)
+
+
+def test_get_pidgin_insert_agg_from_raw_sqlstrs_ReturnsObj():
+    # sourcery skip: extract-method, no-loop-in-tests
+    # ESTABLISH / WHEN
+    pidgin_insert_agg_sqlstrs = get_pidgin_insert_agg_from_raw_sqlstrs()
+
+    # THEN
+    assert set(pidgin_insert_agg_sqlstrs.keys()) == get_pidgin_dimens()
+    x_exclude_cols = {
+        idea_number_str(),
+        face_name_str(),
+        event_int_str(),
+        "error_message",
+    }
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_pidgin_prime_tables(cursor)
+
+        for x_dimen in idea_config:
+            # print(f"{x_dimen} checking...")
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            dimen_focus_columns.remove(event_int_str())
+            dimen_focus_columns.remove(face_name_str())
+            dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
+            raw_tablename = f"{x_dimen}_raw"
+            agg_tablename = f"{x_dimen}_agg"
+
+            expected_table2table_agg_insert_sqlstr = (
+                create_table2table_agg_insert_query(
+                    cursor,
+                    src_table=raw_tablename,
+                    dst_table=agg_tablename,
+                    focus_cols=dimen_focus_columns,
+                    exclude_cols=x_exclude_cols,
+                )
+            )
+            x_sqlstr = pidgin_insert_agg_sqlstrs.get(x_dimen)
+            # print(f'"{x_dimen}": {x_dimen.upper()}_AGG_INSERT_SQLSTR,')
+            # print(
+            #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
+            # )
+            assert x_sqlstr == expected_table2table_agg_insert_sqlstr
+
+    assert len(idea_config) == len(pidgin_insert_agg_sqlstrs)
 
 
 def test_get_bud_insert_put_agg_from_raw_sqlstrs_ReturnsObj():
