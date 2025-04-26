@@ -77,10 +77,10 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    get_bud_create_table_sqlstrs,
+    get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
-    create_fisc_tables,
-    create_bud_tables,
+    create_fisc_prime_tables,
+    create_bud_prime_tables,
     get_fisc_update_inconsist_error_message_sqlstrs,
     get_fisc_insert_agg_from_raw_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
@@ -852,7 +852,7 @@ def etl_inz_face_csv_files2idea_raw_tables(
 
 
 def etl_idea_raw_to_fisc_tables(conn_or_cursor):
-    create_fisc_tables(conn_or_cursor)
+    create_fisc_prime_tables(conn_or_cursor)
     idea_raw_tables2fisc_raw_tables(conn_or_cursor)
     set_fisc_raw_error_message(conn_or_cursor)
     fisc_raw_tables2fisc_agg_tables(conn_or_cursor)
@@ -860,7 +860,7 @@ def etl_idea_raw_to_fisc_tables(conn_or_cursor):
 
 
 def etl_idea_raw_to_bud_tables(conn_or_cursor):
-    create_bud_tables(conn_or_cursor)
+    create_bud_prime_tables(conn_or_cursor)
     idea_raw_tables2bud_raw_tables(conn_or_cursor)
     set_bud_raw_error_message(conn_or_cursor)
     bud_raw_tables2bud_agg_tables(conn_or_cursor)
@@ -1033,7 +1033,7 @@ def etl_bud_tables_to_event_bud_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for bud_table in get_bud_create_table_sqlstrs():
+    for bud_table in get_bud_prime_create_table_sqlstrs():
         if get_row_count(conn_or_cursor, bud_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,

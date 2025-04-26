@@ -4,7 +4,7 @@ from src.a15_fisc_logic.fisc import (
     get_from_dict as fiscunit_get_from_dict,
 )
 from src.a15_fisc_logic.fisc_config import cashbook_str, brokerunits_str, timeline_str
-from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_prime_tables
 from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db
 from sqlite3 import connect as sqlite3_connect
 
@@ -23,7 +23,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario0():
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = f"""INSERT INTO fiscunit_agg (
   fisc_tag
 , timeline_tag
@@ -72,7 +72,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fiscunit_Attrs_Scenario1():
     a23_str = "accord23"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -107,7 +107,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fisccash_Attrs_Scenario0():
     bob_sue_tp55_amount = 444
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -145,7 +145,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fisccash_Attrs_Scenario1():
     a45_bob_sue_tp55_amount = 800
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -183,7 +183,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fiscdeal_Attrs_Scenario0():
     bob_tp55_celldepth = 3
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -224,7 +224,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario0():
     hour4_tag = "4xm"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -258,7 +258,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fiscmont_Attrs_Scenario0():
     month222_tag = "feb222"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -293,7 +293,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fiscweek_Attrs_Scenario0():
     bee_tag = "bee_weekday"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -324,7 +324,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fiscoffi_Attrs_Scenario0():
     offi_time7 = 7
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -360,7 +360,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario0_fiscuni
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = f"""INSERT INTO fiscunit_agg (
   fisc_tag
 , timeline_tag
@@ -410,7 +410,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario1_fisccas
     bob_sue_tp55_amount = 444
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -441,7 +441,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario2_fiscdea
     bob_tp55_celldepth = 3
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -475,7 +475,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario3_fischour
     hour4_tag = "4xm"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -508,7 +508,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario4_fiscmont
     month222_tag = "feb222"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -541,7 +541,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario5_fiscweek
     bee_tag = "bee_weekday"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )
@@ -570,7 +570,7 @@ def test_get_fisc_dict_from_db_ReturnsObj_With_fischour_Attrs_Scenario5_fiscweek
     offi_time7 = 7
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fiscunit_insert_sqlstr = (
             f"INSERT INTO fiscunit_agg (fisc_tag) VALUES ('{a23_str}');"
         )

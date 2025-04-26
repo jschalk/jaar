@@ -16,7 +16,7 @@ from src.a15_fisc_logic.fisc import (
     get_from_json as fiscunit_get_from_json,
 )
 from src.a15_fisc_logic.fisc_config import fiscunit_str
-from src.a18_etl_toolbox.transformers import create_fisc_tables
+from src.a18_etl_toolbox.transformers import create_fisc_prime_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
     get_test_worlds_dir as worlds_dir,
@@ -38,7 +38,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFi
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         insert_raw_sqlstr = f"""
 INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()})
@@ -88,7 +88,7 @@ def test_WorldUnit_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUn
     fiscunit_agg_tablename = f"{fiscunit_str()}_agg"
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         insert_raw_sqlstr = f"""
 INSERT INTO {fiscunit_agg_tablename} ({fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})

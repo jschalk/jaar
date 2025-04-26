@@ -72,16 +72,16 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    get_pidgin_create_table_sqlstrs,
+    get_pidgin_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
 )
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
+def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    create_table_sqlstrs = get_pidgin_create_table_sqlstrs()
+    create_table_sqlstrs = get_pidgin_prime_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
@@ -119,9 +119,9 @@ def test_get_pidgin_create_table_sqlstrs_ReturnsObj():
         # print(f'"{agg_table}": CREATE_{agg_table.upper()}_SQLSTR,')
 
 
-def test_get_bud_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_bud_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
-    pidgin_create_table_sqlstrs = get_pidgin_create_table_sqlstrs()
+    pidgin_create_table_sqlstrs = get_pidgin_prime_create_table_sqlstrs()
 
     # THEN
     assert pidgin_create_table_sqlstrs
@@ -227,7 +227,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 
 #         for x_dimen in sorted(idea_config):
 #             # print(f"{x_dimen} checking...")
@@ -260,7 +260,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     exclude_cols = {idea_number_str(), "error_message"}
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in sorted(idea_config):
 #             # print(f"{x_dimen} checking...")
@@ -299,8 +299,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_fisc_tables(cursor)
-#         create_bud_tables(cursor)
+#         create_fisc_prime_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             print(f"{x_dimen} checking...")
@@ -338,7 +338,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     exclude_cols = {idea_number_str(), "error_message"}
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             # print(f"{x_dimen} checking...")
@@ -380,7 +380,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     }
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             print(f"{x_dimen} checking...")
@@ -449,7 +449,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             print(f"{x_dimen} checking...")
@@ -495,7 +495,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     }
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         for x_dimen in idea_config:
 #             # print(f"{x_dimen} checking...")
@@ -537,8 +537,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
 #         create_all_idea_tables(cursor)
-#         create_fisc_tables(cursor)
-#         create_bud_tables(cursor)
+#         create_fisc_prime_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         idea_raw2dimen_count = 0
 #         idea_dimen_combo_checked_count = 0
@@ -601,8 +601,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
 #         create_all_idea_tables(cursor)
-#         create_fisc_tables(cursor)
-#         create_bud_tables(cursor)
+#         create_fisc_prime_tables(cursor)
+#         create_bud_prime_tables(cursor)
 
 #         idea_raw2dimen_count = 0
 #         idea_dimen_combo_checked_count = 0
@@ -778,7 +778,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str())
 #     with sqlite3_connect(":memory:") as fisc_db_conn:
 #         cursor = fisc_db_conn.cursor()
-#         create_fisc_tables(cursor)
+#         create_fisc_prime_tables(cursor)
 #         fisccash_agg = f"{fisc_cashbook_str()}_agg"
 #         fiscdeal_agg = f"{fisc_dealunit_str()}_agg"
 #         fischour_agg = f"{fisc_timeline_hour_str()}_agg"

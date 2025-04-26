@@ -7,7 +7,7 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_owners_dir_path,
 )
-from src.a18_etl_toolbox.transformers import create_fisc_tables
+from src.a18_etl_toolbox.transformers import create_fisc_prime_tables
 from src.a18_etl_toolbox.transformers import (
     etl_fisc_agg_tables_to_fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
@@ -32,7 +32,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
     fisc_mstr_dir = get_test_etl_dir()
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_raw_sqlstr = f"""
@@ -93,7 +93,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro2_ote1_agg_TableIsEmpty(
     set_dir(a45_fisc_dir)
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_raw_sqlstr = f"""

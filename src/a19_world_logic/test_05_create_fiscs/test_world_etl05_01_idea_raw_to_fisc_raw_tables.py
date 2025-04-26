@@ -7,7 +7,7 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
 )
 from src.a17_idea_logic.idea_db_tool import get_pragma_table_fetchall
-from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_prime_tables
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeColumnsRef, FiscPrimeObjsRef
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
@@ -172,7 +172,7 @@ def test_WorldUnit_set_idea_raw_error_message_ChangeAttrs(env_dir_setup_cleanup)
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         x_tablename = x_objs.deal_raw_tablename
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""

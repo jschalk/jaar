@@ -73,7 +73,7 @@ CREATE_PIDGIN_TAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (ide
 CREATE_PIDGIN_TAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 
-def get_fisc_create_table_sqlstrs() -> dict[str, str]:
+def get_fisc_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
         "fisc_cashbook_agg": CREATE_FISC_CASHBOOK_AGG_SQLSTR,
         "fisc_cashbook_raw": CREATE_FISC_CASHBOOK_RAW_SQLSTR,
@@ -92,7 +92,7 @@ def get_fisc_create_table_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_bud_create_table_sqlstrs() -> dict[str, str]:
+def get_bud_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
         "bud_acct_membership_put_agg": CREATE_BUDMEMB_PUT_AGG_SQLSTR,
         "bud_acct_membership_put_raw": CREATE_BUDMEMB_PUT_RAW_SQLSTR,
@@ -137,7 +137,7 @@ def get_bud_create_table_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_pidgin_create_table_sqlstrs() -> dict[str, str]:
+def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
         "pidgin_label_raw": CREATE_PIDGIN_LABEL_RAW_SQLSTR,
         "pidgin_label_agg": CREATE_PIDGIN_LABEL_AGG_SQLSTR,
@@ -151,17 +151,17 @@ def get_pidgin_create_table_sqlstrs() -> dict[str, str]:
 
 
 def create_pidgin_prime_tables(conn_or_cursor: sqlite3_Connection):
-    for create_table_sqlstr in get_pidgin_create_table_sqlstrs().values():
+    for create_table_sqlstr in get_pidgin_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
 
 
-def create_fisc_tables(conn_or_cursor: sqlite3_Connection):
-    for create_table_sqlstr in get_fisc_create_table_sqlstrs().values():
+def create_fisc_prime_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_fisc_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
 
 
-def create_bud_tables(conn_or_cursor: sqlite3_Connection):
-    for create_table_sqlstr in get_bud_create_table_sqlstrs().values():
+def create_bud_prime_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_bud_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
 
 

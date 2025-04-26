@@ -11,7 +11,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 
 from src.a17_idea_logic.idea_config import idea_number_str
-from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
     get_test_worlds_dir as worlds_dir,
@@ -39,7 +39,7 @@ def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudPutAggTables(
 
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
         raw_tablename = f"{bud_acctunit_str()}_put_raw"
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
@@ -88,7 +88,7 @@ def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudDelAggTables(
 
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
         raw_tablename = f"{bud_acctunit_str()}_del_raw"
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)

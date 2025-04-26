@@ -3,7 +3,7 @@ from src.a00_data_toolboxs.file_toolbox import open_file
 from src.a02_finance_toolboxs.deal import deal_time_str, owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
-from src.a18_etl_toolbox.transformers import create_fisc_tables
+from src.a18_etl_toolbox.transformers import create_fisc_prime_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic.examples.world_env import (
     get_test_worlds_dir as worlds_dir,
@@ -28,7 +28,7 @@ def test_WorldUnit_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
     timepoint66 = 66
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fizz_world.fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_raw_sqlstr = f"""

@@ -12,7 +12,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 from src.a15_fisc_logic.fisc_config import fiscunit_str
 from src.a17_idea_logic.idea_config import idea_number_str
-from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a18_etl_toolbox.transformers import (
     etl_idea_raw_to_bud_tables,
     etl_inz_face_csv_files2idea_raw_tables,
@@ -165,7 +165,7 @@ def test_etl_idea_raw_to_bud_tables_Sets_error_message(env_dir_setup_cleanup):
     yao_credit_belief7 = 7
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
         x_tablename = f"{bud_acctunit_str()}_put_raw"
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""

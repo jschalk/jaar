@@ -8,7 +8,7 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
 )
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path
-from src.a18_etl_toolbox.tran_sqlstrs import create_bud_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a18_etl_toolbox.transformers import etl_bud_tables_to_event_bud_csvs
 from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
 from sqlite3 import connect as sqlite3_connect
@@ -41,7 +41,7 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
 
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
-        create_bud_tables(cursor)
+        create_bud_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {put_agg_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
 VALUES
@@ -94,7 +94,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 
 #     with sqlite3_connect(":memory:") as bud_db_conn:
 #         cursor = bud_db_conn.cursor()
-#         create_bud_tables(cursor)
+#         create_bud_prime_tables(cursor)
 #         raw_tablename = f"{bud_acctunit_str()}_del_raw"
 #         insert_raw_sqlstr = f"""
 # INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)

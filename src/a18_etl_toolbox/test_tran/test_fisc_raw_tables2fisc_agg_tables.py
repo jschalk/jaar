@@ -10,7 +10,7 @@ from src.a07_calendar_logic.chrono import (
 from src.a08_bud_atom_logic.atom_config import fund_coin_str, penny_str, respect_bit_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef, FiscPrimeColumnsRef
 from src.a18_etl_toolbox.transformers import (
-    create_fisc_tables,
+    create_fisc_prime_tables,
     fisc_raw_tables2fisc_agg_tables,
     etl_fisc_agg_tables_to_fisc_csvs,
 )
@@ -29,7 +29,7 @@ def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
     br00011_str = "br00011"
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
@@ -104,7 +104,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         raw_tablename = x_objs.unit_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
@@ -180,7 +180,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         raw_tablename = x_objs.unit_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
@@ -240,7 +240,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         raw_tablename = x_objs.hour_raw_tablename
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.hour_raw_csv_header})
@@ -288,7 +288,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.mont_raw_tablename} ({x_cols.mont_raw_csv_header})
 VALUES
@@ -335,7 +335,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.week_raw_tablename} ({x_cols.week_raw_csv_header})
 VALUES
@@ -384,7 +384,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.deal_raw_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
@@ -436,7 +436,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message()
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.cash_raw_tablename} ({x_cols.cash_raw_csv_header})
 VALUES
@@ -475,7 +475,7 @@ def test_etl_fisc_agg_tables_to_fisc_csvs_CreateFiles():
     accord45_str = "accord45"
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        create_fisc_tables(cursor)
+        create_fisc_prime_tables(cursor)
         fisc_mstr_dir = get_test_etl_dir()
         x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
         insert_agg_sqlstr = f"""
