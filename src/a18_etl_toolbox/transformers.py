@@ -408,7 +408,7 @@ def get_yell_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
     }
 
 
-def etl_yell_valid_db_to_pridgin_prime_raw_db(cursor: sqlite3_Cursor):
+def etl_yell_valid_db_to_pidgin_prime_raw_db(cursor: sqlite3_Cursor):
     create_pidgin_prime_tables(cursor)
     yell_valid_tables = get_yell_valid_tables(cursor)
     idea_dimen_ref = {
@@ -428,6 +428,19 @@ def etl_yell_valid_db_to_pridgin_prime_raw_db(cursor: sqlite3_Cursor):
                 etl_yell_valid_table_into_pidgin_prime_raw_table(
                     cursor, yell_valid_table, raw_tablename, idea_number
                 )
+
+
+def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
+    idea_dimen_ref = {
+        pidgin_dimen: idea_numbers
+        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
+        if pidgin_dimen[:6] == "pidgin"
+    }
+    # pidgin_raw_tables = {}
+    # for pidgin_dimen in idea_dimen_ref:
+    #     idea_numbers = idea_dimen_ref.get(pidgin_dimen)
+    #     raw_tablename = f"{pidgin_dimen}_raw"
+    #     pidgin_raw_tables[raw_tablename] = idea_numbers
 
 
 def etl_yell_valid_table_into_pidgin_prime_raw_table(

@@ -26,6 +26,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     unknown_word_str,
     get_pidgin_config_args,
 )
+from src.a17_idea_logic.idea_config import idea_number_str
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
@@ -38,7 +39,8 @@ from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
     etl_yell_agg_df_to_yell_pidgin_raw_df,
-    etl_yell_valid_db_to_pridgin_prime_raw_db,
+    etl_yell_valid_db_to_pidgin_prime_raw_db,
+    etl_pidgin_prime_raw_to_pidgin_prime_agg,
 )
 from src.a18_etl_toolbox.examples.etl_env import (
     get_test_etl_dir as etl_dir,
@@ -46,7 +48,7 @@ from src.a18_etl_toolbox.examples.etl_env import (
 )
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import connect as sqlite3_connect, Cursor as sqlite_Cursor
 
 
 def test_get_pidgen_idea_format_filenames_ReturnsObj():
@@ -556,7 +558,7 @@ VALUES
     cursor.execute(insert_sqlstr)
 
 
-def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
+def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -622,7 +624,7 @@ def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
         assert not db_table_exists(cursor, pidgin_raw_road_tablename)
 
         # WHEN
-        etl_yell_valid_db_to_pridgin_prime_raw_db(cursor)
+        etl_yell_valid_db_to_pidgin_prime_raw_db(cursor)
 
         # THEN
         assert db_table_exists(cursor, pidgin_raw_label_tablename)
@@ -712,65 +714,196 @@ def test_etl_yell_valid_db_to_pridgin_prime_raw_db_CreatesFile():
         assert roa_rows[5] == row5
         assert roa_rows[6] == row6
 
-        # for row in lab_rows:
-        #     print(f"{row=}")
 
-        # name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
-        # assert list(gen_name_df.columns) == name_raw_columns
-        # assert len(gen_name_df) == 2
-        # b3 = "br00113"
-        # b4 = "br00043"
-        # e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-        # e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-        # e1_name_rows = [e1_name3, e1_name4]
-        # e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
-        # assert len(gen_name_df) == len(e1_name_df)
-        # print(f"{gen_name_df.to_csv()=}")
-        # print(f" {e1_name_df.to_csv()=}")
-        # assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
+def populate_pidgin_raw_tables(cursor: sqlite_Cursor, idea_number: str):
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    yao_inx = "Yaoito"
+    bob_inx = "Bobito"
+    rdx = ":"
+    ukx = "Unknown"
+    a23_str = "accord23"
+    a45_str = "accord45"
+    event0 = 0
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event9 = 9
+    raw_nam_table = "pidgin_label_raw"
+    raw_lab_table = "pidgin_name_raw"
+    raw_tag_table = "pidgin_tag_raw"
+    raw_roa_table = "pidgin_road_raw"
+    br00113_str = "br00113"
+    br00043_str = "br00043"
+    br00115_str = "br00115"
+    br00042_str = "br00042"
+    br00116_str = "br00116"
+    br00044_str = "br00044"
+    br00117_str = "br00117"
+    br00045_str = "br00045"
 
-        # tag_file_columns = [
-        #     "idea_number",
-        #     face_name_str(),
-        #     event_int_str(),
-        #     otx_tag_str(),
-        #     inx_tag_str(),
-        #     otx_bridge_str(),
-        #     inx_bridge_str(),
-        #     unknown_word_str(),
-        # ]
-        # assert list(gen_tag_df.columns) == tag_file_columns
-        # assert len(gen_tag_df) == 2
-        # b3 = "br00116"
-        # b4 = "br00044"
-        # e1_tag3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-        # e1_tag4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-        # e1_tag_rows = [e1_tag3, e1_tag4]
-        # e1_tag_df = DataFrame(e1_tag_rows, columns=tag_file_columns)
-        # assert len(gen_tag_df) == len(e1_tag_df)
-        # print(f"{gen_tag_df.to_csv()=}")
-        # print(f" {e1_tag_df.to_csv()=}")
-        # assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
+    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{otx_label_str()},{inx_label_str()})"""
+    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_nam_values_clause = f"""
+VALUES     
+  ('{br00042_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00042_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00042_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00115_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00115_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+;
+"""
+    raw_lab_values_clause = f"""
+VALUES     
+  ('{br00043_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00043_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00043_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00113_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00113_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+;
+"""
+    raw_tag_values_clause = f"""
+VALUES     
+  ('{br00044_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00044_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00044_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00116_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00116_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+;
+"""
+    raw_roa_values_clause = f"""
+VALUES     
+  ('{br00045_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00045_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00045_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00117_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00117_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+;
+"""
+    nam_insert_sqlstr = f"{raw_nam_insert_into_clause} {raw_nam_values_clause}"
+    lab_insert_sqlstr = f"{raw_lab_insert_into_clause} {raw_lab_values_clause}"
+    tag_insert_sqlstr = f"{raw_tag_insert_into_clause} {raw_tag_values_clause}"
+    roa_insert_sqlstr = f"{raw_roa_insert_into_clause} {raw_roa_values_clause}"
+    cursor.execute(nam_insert_sqlstr)
+    cursor.execute(lab_insert_sqlstr)
+    cursor.execute(tag_insert_sqlstr)
+    cursor.execute(roa_insert_sqlstr)
 
-        # road_file_columns = [
-        #     "idea_number",
-        #     face_name_str(),
-        #     event_int_str(),
-        #     otx_road_str(),
-        #     inx_road_str(),
-        #     otx_bridge_str(),
-        #     inx_bridge_str(),
-        #     unknown_word_str(),
-        # ]
-        # assert list(gen_road_df.columns) == road_file_columns
-        # assert len(gen_road_df) == 2
-        # b3 = "br00117"
-        # b4 = "br00045"
-        # e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-        # e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-        # e1_road_rows = [e1_road3, e1_road4]
-        # e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
-        # assert len(gen_road_df) == len(e1_road_df)
-        # print(f"{gen_road_df.to_csv()=}")
-        # print(f" {e1_road_df.to_csv()=}")
-        # assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
+
+# def test_etl_pidgin_prime_raw_db_to_pidgin_prime_agg_db_PopulatesTables():
+#     # ESTABLISH
+#     bob_str = "Bob"
+#     sue_str = "Sue"
+#     yao_str = "Yao"
+#     yao_inx = "Yaoito"
+#     bob_inx = "Bobito"
+#     rdx = ":"
+#     ukx = "Unknown"
+#     event0 = 0
+#     event1 = 1
+#     event2 = 2
+#     event5 = 5
+#     event9 = 9
+#     with sqlite3_connect(":memory:") as db_conn:
+#         cursor = db_conn.cursor()
+#         populate_pidgin_raw_tables(cursor)
+#         br00113_str = "br00113"
+#         br00043_str = "br00043"
+#         br00115_str = "br00115"
+#         br00042_str = "br00042"
+#         br00116_str = "br00116"
+#         br00044_str = "br00044"
+#         br00117_str = "br00117"
+#         br00045_str = "br00045"
+#         raw_lab_table = "pidgin_label_raw"
+#         raw_nam_table = "pidgin_name_raw"
+#         raw_tag_table = "pidgin_tag_raw"
+#         raw_roa_table = "pidgin_road_raw"
+#         agg_lab_table = "pidgin_label_agg"
+#         agg_nam_table = "pidgin_name_agg"
+#         agg_tag_table = "pidgin_tag_agg"
+#         agg_roa_table = "pidgin_road_agg"
+#         assert get_row_count(cursor, raw_lab_table) == 2
+#         assert get_row_count(cursor, raw_nam_table) == 3
+#         assert get_row_count(cursor, raw_tag_table) == 3
+#         assert get_row_count(cursor, raw_roa_table) == 3
+#         assert get_row_count(cursor, agg_lab_table) == 0
+#         assert get_row_count(cursor, agg_nam_table) == 0
+#         assert get_row_count(cursor, agg_tag_table) == 0
+#         assert get_row_count(cursor, agg_roa_table) == 0
+
+#         # WHEN
+#         etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor)
+
+#         # THEN
+#         assert get_row_count(cursor, agg_lab_table) == 2
+#         assert get_row_count(cursor, agg_nam_table) == 3
+#         assert get_row_count(cursor, agg_tag_table) == 2
+#         assert get_row_count(cursor, agg_roa_table) == 5
+#         pidlab_raw_cols = get_table_columns(cursor, agg_lab_table)
+#         pidnam_raw_cols = get_table_columns(cursor, agg_nam_table)
+#         pidtag_raw_cols = get_table_columns(cursor, agg_tag_table)
+#         pidroa_raw_cols = get_table_columns(cursor, agg_roa_table)
+#         select_pidlab = create_select_query(cursor, agg_lab_table, pidlab_raw_cols)
+#         select_pidnam = create_select_query(cursor, agg_nam_table, pidnam_raw_cols)
+#         select_pidtag = create_select_query(cursor, agg_tag_table, pidtag_raw_cols)
+#         select_pidroa = create_select_query(cursor, agg_roa_table, pidroa_raw_cols)
+#         pidgin_agg_lab_rows = cursor.execute(select_pidlab).fetchall()
+#         pidgin_agg_nam_rows = cursor.execute(select_pidnam).fetchall()
+#         pidgin_agg_tag_rows = cursor.execute(select_pidtag).fetchall()
+#         pidgin_agg_roa_rows = cursor.execute(select_pidroa).fetchall()
+#         assert len(pidgin_agg_lab_rows) == 5
+#         assert len(pidgin_agg_nam_rows) == 5
+#         assert len(pidgin_agg_tag_rows) == 5
+#         assert len(pidgin_agg_roa_rows) == 7
+#         row0 = (sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+#         row2 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+#         row3 = (sue_str, event1, bob_str, bob_inx, None, None, None)
+#         row4 = (sue_str, event1, yao_str, yao_inx, None, None, None)
+#         print(f"{pidgin_agg_lab_rows[0]=}")
+#         print(f"                  {row0=}")
+#         assert pidgin_agg_lab_rows[0] == row0
+#         assert pidgin_agg_lab_rows[1] == row1
+#         assert pidgin_agg_lab_rows[2] == row2
+#         assert pidgin_agg_lab_rows[3] == row3
+#         assert pidgin_agg_lab_rows[4] == row4
+#         row0 = (sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+#         row2 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+#         row3 = (sue_str, event9, bob_str, bob_inx, None, None, None)
+#         row4 = (sue_str, event9, yao_str, yao_inx, None, None, None)
+#         assert pidgin_agg_nam_rows[0] == row0
+#         assert pidgin_agg_nam_rows[1] == row1
+#         assert pidgin_agg_nam_rows[2] == row2
+#         assert pidgin_agg_nam_rows[3] == row3
+#         assert pidgin_agg_nam_rows[4] == row4
+
+#         row0 = (sue_str, event0, bob_str, bob_inx, rdx, rdx, ukx)
+#         row1 = (sue_str, event0, sue_str, sue_str, rdx, rdx, ukx)
+#         row2 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+#         row3 = (sue_str, event1, bob_str, bob_inx, None, None, None)
+#         row4 = (sue_str, event1, yao_str, yao_inx, None, None, None)
+#         assert pidgin_agg_tag_rows[0] == row0
+#         assert pidgin_agg_tag_rows[1] == row1
+#         assert pidgin_agg_tag_rows[2] == row2
+#         assert pidgin_agg_tag_rows[3] == row3
+#         assert pidgin_agg_tag_rows[4] == row4
+
+#         row0 = (sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
+#         row2 = (yao_str, event1, bob_str, bob_inx, rdx, rdx, ukx)
+#         row3 = (yao_str, event1, sue_str, sue_str, rdx, rdx, ukx)
+#         row4 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
+#         row5 = (sue_str, event1, bob_str, bob_inx, None, None, None)
+#         row6 = (sue_str, event1, yao_str, yao_inx, None, None, None)
+#         assert pidgin_agg_roa_rows[0] == row0
+#         assert pidgin_agg_roa_rows[1] == row1
+#         assert pidgin_agg_roa_rows[2] == row2
+#         assert pidgin_agg_roa_rows[3] == row3
+#         assert pidgin_agg_roa_rows[4] == row4
+#         assert pidgin_agg_roa_rows[5] == row5
+#         assert pidgin_agg_roa_rows[6] == row6
