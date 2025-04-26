@@ -330,7 +330,7 @@ HAVING MIN(credit_vote) != MAX(credit_vote)
     OR MIN(debtit_vote) != MAX(debtit_vote)
 )
 UPDATE bud_acct_membership_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_acct_membership_put_raw.face_name
     AND inconsistency_rows.event_int = bud_acct_membership_put_raw.event_int
@@ -348,7 +348,7 @@ HAVING MIN(credit_belief) != MAX(credit_belief)
     OR MIN(debtit_belief) != MAX(debtit_belief)
 )
 UPDATE bud_acctunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_acctunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_acctunit_put_raw.event_int
@@ -365,7 +365,7 @@ HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
 UPDATE bud_item_awardlink_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_awardlink_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_awardlink_put_raw.event_int
@@ -384,7 +384,7 @@ HAVING MIN(pick) != MAX(pick)
     OR MIN(fnigh) != MAX(fnigh)
 )
 UPDATE bud_item_factunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_factunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_factunit_put_raw.event_int
@@ -401,7 +401,7 @@ GROUP BY face_name, event_int, fisc_tag, owner_name, road, healer_name
 HAVING 1=2
 )
 UPDATE bud_item_healerlink_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_healerlink_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_healerlink_put_raw.event_int
@@ -420,7 +420,7 @@ HAVING MIN(nigh) != MAX(nigh)
     OR MIN(divisor) != MAX(divisor)
 )
 UPDATE bud_item_reason_premiseunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_reason_premiseunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_reason_premiseunit_put_raw.event_int
@@ -438,7 +438,7 @@ GROUP BY face_name, event_int, fisc_tag, owner_name, road, base
 HAVING MIN(base_item_active_requisite) != MAX(base_item_active_requisite)
 )
 UPDATE bud_item_reasonunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_reasonunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_reasonunit_put_raw.event_int
@@ -455,7 +455,7 @@ GROUP BY face_name, event_int, fisc_tag, owner_name, road, team_title
 HAVING 1=2
 )
 UPDATE bud_item_teamlink_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_item_teamlink_put_raw.face_name
     AND inconsistency_rows.event_int = bud_item_teamlink_put_raw.event_int
@@ -482,7 +482,7 @@ HAVING MIN(begin) != MAX(begin)
     OR MIN(problem_bool) != MAX(problem_bool)
 )
 UPDATE bud_itemunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = bud_itemunit_put_raw.face_name
     AND inconsistency_rows.event_int = bud_itemunit_put_raw.event_int
@@ -506,7 +506,7 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(respect_bit) != MAX(respect_bit)
 )
 UPDATE budunit_put_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.face_name = budunit_put_raw.face_name
     AND inconsistency_rows.event_int = budunit_put_raw.event_int
@@ -592,7 +592,7 @@ GROUP BY fisc_tag, owner_name, acct_name, tran_time
 HAVING MIN(amount) != MAX(amount)
 )
 UPDATE fisc_cashbook_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_cashbook_raw.fisc_tag
     AND inconsistency_rows.owner_name = fisc_cashbook_raw.owner_name
@@ -608,7 +608,7 @@ HAVING MIN(quota) != MAX(quota)
     OR MIN(celldepth) != MAX(celldepth)
 )
 UPDATE fisc_dealunit_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_dealunit_raw.fisc_tag
     AND inconsistency_rows.owner_name = fisc_dealunit_raw.owner_name
@@ -622,7 +622,7 @@ GROUP BY fisc_tag, cumlative_minute
 HAVING MIN(hour_tag) != MAX(hour_tag)
 )
 UPDATE fisc_timeline_hour_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_raw.fisc_tag
     AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_raw.cumlative_minute
@@ -635,7 +635,7 @@ GROUP BY fisc_tag, cumlative_day
 HAVING MIN(month_tag) != MAX(month_tag)
 )
 UPDATE fisc_timeline_month_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeline_month_raw.fisc_tag
     AND inconsistency_rows.cumlative_day = fisc_timeline_month_raw.cumlative_day
@@ -648,7 +648,7 @@ GROUP BY fisc_tag, weekday_order
 HAVING MIN(weekday_tag) != MAX(weekday_tag)
 )
 UPDATE fisc_timeline_weekday_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeline_weekday_raw.fisc_tag
     AND inconsistency_rows.weekday_order = fisc_timeline_weekday_raw.weekday_order
@@ -661,7 +661,7 @@ GROUP BY fisc_tag, offi_time
 HAVING 1=2
 )
 UPDATE fisc_timeoffi_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fisc_timeoffi_raw.fisc_tag
     AND inconsistency_rows.offi_time = fisc_timeoffi_raw.offi_time
@@ -682,7 +682,7 @@ HAVING MIN(timeline_tag) != MAX(timeline_tag)
     OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
 )
 UPDATE fiscunit_raw
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.fisc_tag = fiscunit_raw.fisc_tag
 ;

@@ -187,9 +187,9 @@ INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
   ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 , ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
-, ('br00555','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
-, ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent fisc data')
+, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00555','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -234,7 +234,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message()
     _8pm_str = "8pm"
     cumlative_minute_1 = 44
     cumlative_minute_2 = 77
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -282,7 +282,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message()
     aug_str = "Aug"
     cumlative_day_1 = 44
     cumlative_day_2 = 77
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -329,7 +329,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message()
     wed_str = "Wed"
     weekday_order_1 = 4
     weekday_order_2 = 7
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -378,7 +378,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message()
     t1_quota_2 = 300
     t2_deal_time = 55
     t2_quota = 400
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 
@@ -430,7 +430,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message()
     t1_amount_2 = 300
     t2_tran_time = 55
     t2_amount = 400
-    x_error_message = "Inconsistent fisc data"
+    x_error_message = "Inconsistent data"
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
 

@@ -199,7 +199,7 @@ VALUES
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        x_error_message = "Inconsistent fisc data"
+        x_error_message = "Inconsistent data"
         assert rows == [
             (event3, accord23_str, yao_credit_belief5, None),
             (event3, accord23_str, None, None),

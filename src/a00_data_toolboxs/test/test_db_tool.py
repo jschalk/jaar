@@ -851,7 +851,7 @@ HAVING MIN(name) != MAX(name)
     OR MIN(hair) != MAX(hair)
 )
 UPDATE dark_side
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.id = dark_side.id
 ;
@@ -882,7 +882,7 @@ HAVING MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
 )
 UPDATE dark_side
-SET error_message = 'Inconsistent fisc data'
+SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.id = dark_side.id
     AND inconsistency_rows.name = dark_side.name
