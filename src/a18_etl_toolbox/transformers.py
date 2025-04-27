@@ -191,6 +191,7 @@ def etl_sound_df_to_yell_raw_db(conn: sqlite3_Connection, sound_dir: str):
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
+        df["error_message"] = None
         x_tablename = f"yell_raw_{ref.idea_number}"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
