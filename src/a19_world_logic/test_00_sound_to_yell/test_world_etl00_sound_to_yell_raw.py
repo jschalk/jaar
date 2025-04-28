@@ -99,11 +99,11 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         m_420 = minute_420
         br3_ex1 = br00003_ex1_str
         br3_ex3 = br00003_ex3_str
-        row0 = (s_dir, file, br3_ex1, sue_str, e1, a23_str, m_360, hour6am, None)
-        row1 = (s_dir, file, br3_ex1, sue_str, e1, a23_str, m_420, hour7am, None)
-        row2 = (s_dir, file, br3_ex3, sue_str, e1, a23_str, m_360, hour6am, None)
-        row3 = (s_dir, file, br3_ex3, sue_str, e1, a23_str, m_420, hour7am, None)
-        row4 = (s_dir, file, br3_ex3, sue_str, e2, a23_str, m_420, hour7am, None)
+        row0 = (s_dir, file, br3_ex1, sue_str, e1, a23_str, m_360, hour6am)
+        row1 = (s_dir, file, br3_ex1, sue_str, e1, a23_str, m_420, hour7am)
+        row2 = (s_dir, file, br3_ex3, sue_str, e1, a23_str, m_360, hour6am)
+        row3 = (s_dir, file, br3_ex3, sue_str, e1, a23_str, m_420, hour7am)
+        row4 = (s_dir, file, br3_ex3, sue_str, e2, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0

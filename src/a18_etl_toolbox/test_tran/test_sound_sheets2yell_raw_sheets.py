@@ -82,7 +82,7 @@ def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert "error_message" == br00003_table_cols[-1]
+        assert "error_message" != br00003_table_cols[-1]
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
@@ -99,11 +99,11 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
         br3_ex3_str = br00003_ex3_str
-        row0 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_360, hour6am, None)
-        row1 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_420, hour7am, None)
-        row2 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_360, hour6am, None)
-        row3 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_420, hour7am, None)
-        row4 = (s_dir, file, br3_ex3_str, sue_str, e2, a23_str, m_420, hour7am, None)
+        row0 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
+        row1 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_420, hour7am)
+        row2 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_360, hour6am)
+        row3 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_420, hour7am)
+        row4 = (s_dir, file, br3_ex3_str, sue_str, e2, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0
