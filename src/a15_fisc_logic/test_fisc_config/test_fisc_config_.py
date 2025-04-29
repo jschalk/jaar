@@ -31,12 +31,7 @@ from src.a08_bud_atom_logic._utils.str_a08 import (
     class_type_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_allowed_class_types
-from src.a15_fisc_logic.fisc_config import (
-    config_file_dir,
-    get_fisc_config_filename,
-    get_fisc_config_dict,
-    get_fisc_args_dimen_mapping,
-    cumlative_minute_str,
+from src.a15_fisc_logic._utils.str_a15 import (
     fiscunit_str,
     fisc_dealunit_str,
     fisc_cashbook_str,
@@ -44,9 +39,6 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
-    get_fisc_dimens,
-    get_fisc_args_class_types,
-    get_fisc_args_set,
     offi_time_str,
     amount_str,
     cumlative_day_str,
@@ -55,6 +47,15 @@ from src.a15_fisc_logic.fisc_config import (
     month_tag_str,
     weekday_tag_str,
     weekday_order_str,
+)
+from src.a15_fisc_logic.fisc_config import (
+    config_file_dir,
+    get_fisc_config_filename,
+    get_fisc_config_dict,
+    get_fisc_args_dimen_mapping,
+    get_fisc_dimens,
+    get_fisc_args_class_types,
+    get_fisc_args_set,
 )
 from os import getcwd as os_getcwd
 

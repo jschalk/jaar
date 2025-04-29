@@ -27,7 +27,7 @@ from src.a07_calendar_logic._utils.str_a07 import (
     monthday_distortion_str,
     timeline_tag_str,
 )
-from src.a15_fisc_logic.fisc_config import (
+from src.a15_fisc_logic._utils.str_a15 import (
     amount_str,
     hour_tag_str,
     cumlative_minute_str,

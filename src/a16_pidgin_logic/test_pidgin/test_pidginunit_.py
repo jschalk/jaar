@@ -21,12 +21,12 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
 from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
-from src.a15_fisc_logic.fisc_config import (
-    get_fisc_args_class_types,
+from src.a15_fisc_logic._utils.str_a15 import (
     weekday_tag_str,
     month_tag_str,
     hour_tag_str,
 )
+from src.a15_fisc_logic.fisc_config import get_fisc_args_class_types
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,

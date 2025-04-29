@@ -14,7 +14,7 @@ from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
     get_from_json as fiscunit_get_from_json,
 )
-from src.a15_fisc_logic.fisc_config import fiscunit_str
+from src.a15_fisc_logic._utils.str_a15 import fiscunit_str
 from src.a18_etl_toolbox.transformers import create_fisc_prime_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (

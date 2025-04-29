@@ -15,7 +15,7 @@ from src.a15_fisc_logic.fisc import (
     get_from_json as fiscunit_get_from_json,
     get_from_default_path as fiscunit_get_from_default_path,
 )
-from src.a15_fisc_logic.fisc_config import (
+from src.a15_fisc_logic._utils.str_a15 import (
     timeline_str,
     offi_time_str,
     brokerunits_str,

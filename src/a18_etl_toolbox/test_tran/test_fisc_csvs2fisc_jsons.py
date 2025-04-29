@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a12_hub_tools.hub_path import create_fisc_json_path
 from src.a15_fisc_logic.fisc import get_from_json as fiscunit_get_from_json
-from src.a15_fisc_logic.fisc_config import fiscunit_str
+from src.a15_fisc_logic._utils.str_a15 import fiscunit_str
 from src.a18_etl_toolbox.transformers import (
     create_fisc_prime_tables,
     etl_fisc_agg_tables_to_fisc_jsons,

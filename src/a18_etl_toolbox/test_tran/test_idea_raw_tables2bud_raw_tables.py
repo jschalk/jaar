@@ -11,7 +11,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens
-from src.a15_fisc_logic.fisc_config import fiscunit_str
+from src.a15_fisc_logic._utils.str_a15 import fiscunit_str
 from src.a17_idea_logic.idea_config import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a18_etl_toolbox.transformers import (

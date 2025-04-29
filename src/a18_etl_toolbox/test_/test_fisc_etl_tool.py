@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import (
+from src.a15_fisc_logic._utils.str_a15 import (
     fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
@@ -8,8 +8,8 @@ from src.a15_fisc_logic.fisc_config import (
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
-    get_fisc_config_args,
 )
+from src.a15_fisc_logic.fisc_config import get_fisc_config_args
 from src.a17_idea_logic.idea_db_tool import sheet_exists, get_default_sorted_list
 from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeObjsRef,

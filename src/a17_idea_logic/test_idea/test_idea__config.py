@@ -82,10 +82,7 @@ from src.a10_bud_calc.bud_calc_config import (
     get_all_bud_calc_args,
     get_bud_calc_args_sqlite_datatype_dict,
 )
-from src.a15_fisc_logic.fisc_config import (
-    get_fisc_args_dimen_mapping,
-    get_fisc_config_dict,
-    get_fisc_dimens,
+from src.a15_fisc_logic._utils.str_a15 import (
     fiscunit_str,
     fisc_dealunit_str,
     fisc_cashbook_str,
@@ -101,6 +98,11 @@ from src.a15_fisc_logic.fisc_config import (
     weekday_tag_str,
     weekday_order_str,
     offi_time_str,
+)
+from src.a15_fisc_logic.fisc_config import (
+    get_fisc_args_dimen_mapping,
+    get_fisc_config_dict,
+    get_fisc_dimens,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     pidginunit_str,

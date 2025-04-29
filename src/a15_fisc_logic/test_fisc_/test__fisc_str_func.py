@@ -1,4 +1,4 @@
-from src.a15_fisc_logic.fisc_config import (
+from src.a15_fisc_logic._utils.str_a15 import (
     timeline_str,
     offi_time_str,
     brokerunits_str,
