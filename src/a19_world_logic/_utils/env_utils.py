@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_module_temp_dir():
-    return "src/a19_world_logic/_utils/worlds"
+    return "src\\a19_world_logic\\_utils\\worlds"
 
 
 @pytest_fixture()

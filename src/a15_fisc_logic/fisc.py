@@ -463,7 +463,7 @@ def _get_ote1_max_past_event_int(
 
 
 def get_module_temp_dir():
-    return "src/a15_fisc_logic/_utils/fisc_mstr"
+    return "src\\a15_fisc_logic\\_utils\\fisc_mstr"
 
 
 def fiscunit_shop(

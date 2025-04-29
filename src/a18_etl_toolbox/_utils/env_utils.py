@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_module_temp_dir():
-    return "src/a18_etl_toolbox/_utils/etls"
+    return "src\\a18_etl_toolbox\\_utils\\etls"
 
 
 @pytest_fixture()

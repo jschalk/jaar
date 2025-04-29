@@ -371,7 +371,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
 ):
     # ESTABLISH
     env_dir = get_module_temp_dir()
-    temp_dir = f"{env_dir}/temp_does_not_exist"
+    temp_dir = f"{env_dir}\\temp_does_not_exist"
     assert os_path_exist(temp_dir) is False
 
     # WHEN
