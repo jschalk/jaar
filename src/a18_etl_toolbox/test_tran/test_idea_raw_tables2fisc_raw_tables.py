@@ -13,7 +13,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     fisc_tag_str,
 )
-from src.a07_calendar_logic.chrono import (
+from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
     yr1_jan1_offset_str,
     monthday_distortion_str,
@@ -28,13 +28,6 @@ from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
 )
 from src.a15_fisc_logic.fisc_config import (
-    fisc_cashbook_str,
-    fisc_dealunit_str,
-    fisc_timeline_hour_str,
-    fisc_timeline_month_str,
-    fisc_timeline_weekday_str,
-    fiscunit_str,
-    offi_time_str,
     amount_str,
     hour_tag_str,
     cumlative_minute_str,
@@ -45,7 +38,6 @@ from src.a15_fisc_logic.fisc_config import (
 )
 from src.a17_idea_logic.idea_config import (
     idea_number_str,
-    get_idea_sqlite_types,
     get_idea_config_dict,
     idea_category_str,
 )

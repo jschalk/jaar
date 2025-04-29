@@ -21,7 +21,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.a07_calendar_logic.chrono import (
+from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
     monthday_distortion_str,
     timeline_tag_str,

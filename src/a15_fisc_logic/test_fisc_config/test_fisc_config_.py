@@ -8,11 +8,11 @@ from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     fisc_tag_str,
 )
-from src.a07_calendar_logic.chrono import (
+from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
+    monthday_distortion_str,
     timeline_tag_str,
     yr1_jan1_offset_str,
-    monthday_distortion_str,
 )
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,

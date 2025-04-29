@@ -10,18 +10,18 @@ from src.a07_calendar_logic._utils.calendar_examples import (
     get_fri,
     get_sat,
 )
-from src.a07_calendar_logic.chrono import (
-    time_str,
-    day_str,
-    days_str,
+from src.a07_calendar_logic._utils.str_a07 import (
+    c100_str,
     c400_leap_str,
     c400_clean_str,
-    c100_str,
-    yr4_leap_str,
-    yr4_clean_str,
-    year_str,
+    day_str,
+    days_str,
+    time_str,
     week_str,
     weeks_str,
+    year_str,
+    yr4_leap_str,
+    yr4_clean_str,
 )
 
 

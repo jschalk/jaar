@@ -8,13 +8,13 @@ from src.a07_calendar_logic._utils.calendar_examples import (
     get_thu,
     creg_weekday_itemunits,
 )
-from src.a07_calendar_logic.chrono import (
-    time_str,
+from src.a07_calendar_logic.chrono import get_year_road
+from src.a07_calendar_logic._utils.str_a07 import (
     day_str,
     days_str,
-    get_year_road,
-    weeks_str,
+    time_str,
     week_str,
+    weeks_str,
 )
 from datetime import datetime
 

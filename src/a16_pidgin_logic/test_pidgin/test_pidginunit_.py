@@ -1,6 +1,6 @@
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a01_word_logic.road import default_bridge_if_None
-from src.a07_calendar_logic.chrono import timeline_tag_str
+from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_class_types,
     type_NameUnit_str,
@@ -53,7 +53,6 @@ from src.a16_pidgin_logic._utils.example_pidgins import (
     get_suita_namemap,
 )
 from pytest import raises as pytest_raises
-from copy import deepcopy as copy_deepcopy
 
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
