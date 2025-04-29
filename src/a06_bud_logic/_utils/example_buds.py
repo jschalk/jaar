@@ -1,4 +1,4 @@
-from src.a00_data_toolbox.file_toolbox import open_file
+from src.a00_data_toolbox.file_toolbox import open_file, create_path
 from src.a01_word_logic.road import RoadUnit
 from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop, reasonunit_shop
@@ -12,7 +12,8 @@ from src.a06_bud_logic._utils.env_a06 import get_bud_examples_dir as env_dir
 
 
 def budunit_v001() -> BudUnit:
-    return budunit_get_from_json(open_file(env_dir(), "example_bud1.json"))
+    bud1_path = create_path(env_dir(), "example_bud1.json")
+    return budunit_get_from_json(open_file(bud1_path))
 
 
 def budunit_v001_with_large_agenda() -> BudUnit:
