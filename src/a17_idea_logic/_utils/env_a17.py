@@ -4,23 +4,23 @@ from os import makedirs as os_makedirs
 
 
 def src_module_dir() -> str:
-    return "src\\a17_idea_logic"
+    return "src/a17_idea_logic"
 
 
 def get_module_temp_dir() -> str:
-    return "src\\a17_idea_logic\\_utils"
+    return "src/a17_idea_logic/_utils"
 
 
 def idea_examples_dir() -> str:
-    return "src\\a17_idea_logic\\_utils\\idea_examples"
+    return "src/a17_idea_logic/_utils/idea_examples"
 
 
 def idea_fisc_mstr_dir() -> str:
-    return "src\\a17_idea_logic\\_utils\\idea_examples\\fisc_mstr"
+    return "src/a17_idea_logic/_utils/idea_examples/fisc_mstr"
 
 
 def idea_fiscs_dir() -> str:
-    return "src\\a17_idea_logic\\_utils\\idea_examples\\fisc_mstr\\fiscs"
+    return "src/a17_idea_logic/_utils/idea_examples/fisc_mstr/fiscs"
 
 
 @pytest_fixture()

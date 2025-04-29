@@ -75,7 +75,8 @@ def test_get_idea_formats_dir_ReturnsObj():
     # THEN
     print(f"{idea_dir=}")
     print(f"{src_module_dir()=}")
-    assert idea_dir == create_path(src_module_dir(), "idea_formats")
+    # assert idea_dir == create_path(src_module_dir(), "idea_formats")
+    assert idea_dir == f"{src_module_dir()}/idea_formats"
 
 
 def test_get_idearef_obj_ReturnsObj():
