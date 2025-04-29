@@ -1,10 +1,10 @@
-from src.a00_data_toolboxs.file_toolbox import (
+from src.a00_data_toolbox.file_toolbox import (
     create_path,
     count_dirs_files,
     delete_dir,
     save_file,
 )
-from src.a02_finance_toolboxs.deal import (
+from src.a02_finance_logic._utils.str_helpers import (
     owner_name_str,
     fisc_tag_str,
     deal_time_str,

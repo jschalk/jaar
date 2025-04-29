@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.file_toolbox import open_file, create_path
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
+from src.a00_data_toolbox.file_toolbox import open_file, create_path
+from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic._utils.calendar_examples import (

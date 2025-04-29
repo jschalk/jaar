@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.finance_config import TimeLinePoint
+from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic._utils.calendar_examples import (
     get_creg_config,

@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
+from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a08_bud_atom_logic.atom_graphic import budatom_periodic_table0
 
 # from src.a06_bud_logic._utils.example_buds import (

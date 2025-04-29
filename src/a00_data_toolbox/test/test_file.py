@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import (
+from src.a00_data_toolbox.file_toolbox import (
     create_path,
     is_subdirectory,
     get_immediate_subdir,
@@ -20,8 +20,8 @@ from src.a00_data_toolboxs.file_toolbox import (
     get_dir_filenames,
     get_max_file_number,
 )
-from src.a00_data_toolboxs.dict_toolbox import get_dict_from_json
-from src.a00_data_toolboxs._utils.env_utils import (
+from src.a00_data_toolbox.dict_toolbox import get_dict_from_json
+from src.a00_data_toolbox._utils.env_utils import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )
@@ -371,7 +371,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
 ):
     # ESTABLISH
     env_dir = get_module_temp_dir()
-    temp_dir = f"{env_dir}/temp_does_not_exist"
+    temp_dir = f"{env_dir}\\temp_does_not_exist"
     assert os_path_exist(temp_dir) is False
 
     # WHEN

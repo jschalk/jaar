@@ -1,6 +1,6 @@
-from src.a00_data_toolboxs.dict_toolbox import create_csv
-from src.a02_finance_toolboxs.allot import allot_scale
-from src.a02_finance_toolboxs.finance_config import FundNum, get_net, RespectNum
+from src.a00_data_toolbox.dict_toolbox import create_csv
+from src.a02_finance_logic.allot import allot_scale
+from src.a02_finance_logic.finance_config import FundNum, get_net, RespectNum
 from src.a01_word_logic.road import AcctName, FiscTag, RoadUnit
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, AwardLink
@@ -12,51 +12,6 @@ from src.a04_reason_logic.reason_item import (
     factunits_get_from_dict,
 )
 from src.a06_bud_logic.bud import BudUnit
-
-
-def budunit_str() -> str:
-    return "budunit"
-
-
-def bud_acctunit_str() -> str:
-    return "bud_acctunit"
-
-
-def bud_acct_membership_str() -> str:
-    return "bud_acct_membership"
-
-
-def bud_itemunit_str() -> str:
-    return "bud_itemunit"
-
-
-def bud_item_awardlink_str() -> str:
-    return "bud_item_awardlink"
-
-
-def bud_item_reasonunit_str() -> str:
-    return "bud_item_reasonunit"
-
-
-def bud_item_reason_premiseunit_str() -> str:
-    return "bud_item_reason_premiseunit"
-
-
-def bud_item_teamlink_str() -> str:
-    return "bud_item_teamlink"
-
-
-def bud_item_healerlink_str() -> str:
-    return "bud_item_healerlink"
-
-
-def bud_item_factunit_str() -> str:
-    return "bud_item_factunit"
-
-
-def bud_groupunit_str() -> str:
-    """Is not saved to raw data budunit json"""
-    return "bud_groupunit"
 
 
 def budunit_exists(x_bud: BudUnit) -> bool:
@@ -138,25 +93,25 @@ def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_attr_exists(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    if x_dimen == budunit_str():
+    if x_dimen == "budunit":
         return budunit_exists(x_bud)
-    elif x_dimen == bud_acctunit_str():
+    elif x_dimen == "bud_acctunit":
         return bud_acctunit_exists(x_bud, jkeys)
-    elif x_dimen == bud_acct_membership_str():
+    elif x_dimen == "bud_acct_membership":
         return bud_acct_membership_exists(x_bud, jkeys)
-    elif x_dimen == bud_itemunit_str():
+    elif x_dimen == "bud_itemunit":
         return bud_itemunit_exists(x_bud, jkeys)
-    elif x_dimen == bud_item_awardlink_str():
+    elif x_dimen == "bud_item_awardlink":
         return bud_item_awardlink_exists(x_bud, jkeys)
-    elif x_dimen == bud_item_reasonunit_str():
+    elif x_dimen == "bud_item_reasonunit":
         return bud_item_reasonunit_exists(x_bud, jkeys)
-    elif x_dimen == bud_item_reason_premiseunit_str():
+    elif x_dimen == "bud_item_reason_premiseunit":
         return bud_item_reason_premiseunit_exists(x_bud, jkeys)
-    elif x_dimen == bud_item_teamlink_str():
+    elif x_dimen == "bud_item_teamlink":
         return bud_item_teamlink_exists(x_bud, jkeys)
-    elif x_dimen == bud_item_healerlink_str():
+    elif x_dimen == "bud_item_healerlink":
         return bud_item_healerlink_exists(x_bud, jkeys)
-    elif x_dimen == bud_item_factunit_str():
+    elif x_dimen == "bud_item_factunit":
         return bud_item_factunit_exists(x_bud, jkeys)
     return True
 
@@ -204,17 +159,17 @@ def bud_item_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit
 
 
 def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
-    if x_dimen == budunit_str():
+    if x_dimen == "budunit":
         return x_bud
 
     x_dimens = {
-        bud_acctunit_str(): bud_acctunit_get_obj,
-        bud_acct_membership_str(): bud_acct_membership_get_obj,
-        bud_itemunit_str(): bud_itemunit_get_obj,
-        bud_item_awardlink_str(): bud_item_awardlink_get_obj,
-        bud_item_reasonunit_str(): bud_item_reasonunit_get_obj,
-        bud_item_reason_premiseunit_str(): bud_item_reason_premiseunit_get_obj,
-        bud_item_factunit_str(): bud_item_factunit_get_obj,
+        "bud_acctunit": bud_acctunit_get_obj,
+        "bud_acct_membership": bud_acct_membership_get_obj,
+        "bud_itemunit": bud_itemunit_get_obj,
+        "bud_item_awardlink": bud_item_awardlink_get_obj,
+        "bud_item_reasonunit": bud_item_reasonunit_get_obj,
+        "bud_item_reason_premiseunit": bud_item_reason_premiseunit_get_obj,
+        "bud_item_factunit": bud_item_factunit_get_obj,
     }
     if x_func := x_dimens.get(x_dimen):
         return x_func(x_bud, jkeys)

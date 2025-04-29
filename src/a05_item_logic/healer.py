@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import get_empty_set_if_None
+from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a01_word_logic.road import GroupLabel
 from dataclasses import dataclass
 

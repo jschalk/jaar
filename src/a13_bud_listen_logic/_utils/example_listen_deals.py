@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.deal import dealunit_shop, DealUnit
+from src.a02_finance_logic.deal import dealunit_shop, DealUnit
 
 
 def get_dealunit_55_example() -> DealUnit:

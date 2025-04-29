@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import (
+from src.a00_data_toolbox.file_toolbox import (
     open_file,
     get_dir_file_strs,
     delete_dir,
@@ -109,7 +109,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_atoms_dir_IsWrong(
     sue_packunit = packunit_shop(
         owner_name=sue_str,
         _pack_id=x_pack_id,
-        _atoms_dir="src/incorrect_directory",
+        _atoms_dir="src\\incorrect_directory",
         _packs_dir=sue_hubunit._packs_dir,
     )
 
@@ -135,7 +135,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
         owner_name=sue_str,
         _pack_id=x_pack_id,
         _atoms_dir=sue_hubunit._atoms_dir,
-        _packs_dir="src/incorrect_directory",
+        _packs_dir="src\\incorrect_directory",
     )
 
     # WHEN / THEN

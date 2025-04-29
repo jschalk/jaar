@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.file_toolbox import save_file, delete_dir, create_path
-from src.a02_finance_toolboxs.deal import timeconversion_shop
+from src.a00_data_toolbox.file_toolbox import save_file, delete_dir, create_path
+from src.a02_finance_logic.deal import timeconversion_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a19_world_logic.world import (
     init_fiscunits_from_dirs,

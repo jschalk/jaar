@@ -3,7 +3,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic.bud_tool import (
+from src.a06_bud_logic._utils.str_helpers import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -39,7 +39,7 @@ from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 from src.a13_bud_listen_logic._utils.example_listen_buds import (
     get_budunit_with_4_levels,
 )
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_from_nested_dict,
     get_empty_list_if_None,
 )

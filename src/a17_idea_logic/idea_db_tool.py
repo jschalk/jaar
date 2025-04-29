@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import (
+from src.a00_data_toolbox.file_toolbox import (
     set_dir,
     save_file,
     create_path,
@@ -6,7 +6,7 @@ from src.a00_data_toolboxs.file_toolbox import (
     get_dir_file_strs,
     open_file,
 )
-from src.a00_data_toolboxs.db_toolbox import (
+from src.a00_data_toolbox.db_toolbox import (
     get_grouping_with_all_values_equal_sql_query,
     create_table_from_csv,
     insert_csv,
@@ -14,7 +14,7 @@ from src.a00_data_toolboxs.db_toolbox import (
     get_table_columns,
     create_table_from_columns,
 )
-from src.a00_data_toolboxs.dict_toolbox import set_in_nested_dict
+from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
 from src.a01_word_logic.road import FaceName, EventInt
 from src.a16_pidgin_logic.map import MapCore
 from src.a16_pidgin_logic.pidgin import (
@@ -103,15 +103,15 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def yell_raw_str():
+def yell_raw_str() -> str:
     return "yell_raw"
 
 
-def yell_agg_str():
+def yell_agg_str() -> str:
     return "yell_agg"
 
 
-def yell_valid_str():
+def yell_valid_str() -> str:
     return "yell_valid"
 
 

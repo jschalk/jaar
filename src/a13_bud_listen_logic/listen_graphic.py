@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.plotly_toolbox import (
+from src.a00_data_toolbox.plotly_toolbox import (
     conditional_fig_show,
     add_simp_rect,
     add_direc_rect,
@@ -6,7 +6,7 @@ from src.a00_data_toolboxs.plotly_toolbox import (
     add_rect_arrow,
     add_keep__rect,
 )
-from src.a02_finance_toolboxs.finance_config import default_money_magnitude
+from src.a02_finance_logic.finance_config import default_money_magnitude
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_graphics import display_itemtree
 from src.a12_hub_tools.hub_path import gut_str, job_str

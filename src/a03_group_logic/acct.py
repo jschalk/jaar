@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_1_if_None,
     get_dict_from_json,
     get_0_if_None,
@@ -9,8 +9,8 @@ from src.a01_word_logic.road import (
     validate_tagunit,
     is_tagunit,
 )
-from src.a02_finance_toolboxs.allot import allot_scale
-from src.a02_finance_toolboxs.finance_config import (
+from src.a02_finance_logic.allot import allot_scale
+from src.a02_finance_logic.finance_config import (
     default_respect_bit_if_None,
     RespectNum,
 )

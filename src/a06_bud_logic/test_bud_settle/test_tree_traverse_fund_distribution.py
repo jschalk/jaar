@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import RoadUnit
-from src.a02_finance_toolboxs.finance_config import default_fund_pool
+from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop
 from src.a05_item_logic.item import itemunit_shop, ItemUnit

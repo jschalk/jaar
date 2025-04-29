@@ -1,9 +1,9 @@
-from src.a00_data_toolboxs.file_toolbox import delete_dir
+from src.a00_data_toolbox.file_toolbox import delete_dir
 from pytest import fixture as pytest_fixture
 
 
 def get_module_temp_dir():
-    return "src/a20_lobby_db_toolbox/_utils/lobbys"
+    return "src\\a20_lobby_db_toolbox\\_utils\\lobbys"
 
 
 @pytest_fixture()

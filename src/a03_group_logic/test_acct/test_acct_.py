@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import default_bridge_if_None
-from src.a02_finance_toolboxs.finance_config import default_respect_bit_if_None
+from src.a02_finance_logic.finance_config import default_respect_bit_if_None
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 from pytest import raises as pytest_raises
 

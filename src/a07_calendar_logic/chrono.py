@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.a00_data_toolboxs.file_toolbox import open_json, create_path
+from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
+from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from src.a01_word_logic.road import RoadUnit, TimeLineTag
 from src.a05_item_logic.item import (
     itemunit_shop,
@@ -13,27 +13,27 @@ from dataclasses import dataclass
 from os import getcwd as os_getcwd
 
 
-def c400_leap_str():
+def c400_leap_str() -> str:
     return "c400_leap"
 
 
-def c400_clean_str():
+def c400_clean_str() -> str:
     return "c400_clean"
 
 
-def c100_str():
+def c100_str() -> str:
     return "c100"
 
 
-def yr4_leap_str():
+def yr4_leap_str() -> str:
     return "yr4_leap"
 
 
-def yr4_clean_str():
+def yr4_clean_str() -> str:
     return "yr4_clean"
 
 
-def year_str():
+def year_str() -> str:
     return "year"
 
 
@@ -49,7 +49,7 @@ class C400Constants:
 
 
 def get_c400_constants() -> C400Constants:
-    c400_constants_path = create_path("src/a07_calendar_logic/", "c400_constants.json")
+    c400_constants_path = create_path("src\\a07_calendar_logic", "c400_constants.json")
     c400_dict = open_json(c400_constants_path)
     return C400Constants(
         day_length=c400_dict.get(f"{day_str()}_length"),
@@ -118,23 +118,23 @@ def time_str() -> str:
     return "time"
 
 
-def day_str():
+def day_str() -> str:
     return "day"
 
 
-def days_str():
+def days_str() -> str:
     return f"{day_str()}s"
 
 
-def hour_str():
+def hour_str() -> str:
     return "hour"
 
 
-def week_str():
+def week_str() -> str:
     return "week"
 
 
-def weeks_str():
+def weeks_str() -> str:
     return f"{week_str()}s"
 
 

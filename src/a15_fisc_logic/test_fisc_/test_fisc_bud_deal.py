@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.deal import brokerunit_shop
+from src.a02_finance_logic.deal import brokerunit_shop
 from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a15_fisc_logic._utils.env_utils import get_module_temp_dir
 from pytest import raises as pytest_raises

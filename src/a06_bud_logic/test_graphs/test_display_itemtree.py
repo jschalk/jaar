@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
+from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_graphics import (
     display_itemtree,

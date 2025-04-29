@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     str_in_dict,
     str_in_dict_keys,

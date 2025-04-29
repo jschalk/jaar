@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_0_if_None,
     get_1_if_None,
@@ -21,13 +21,13 @@ from src.a01_word_logic.road import (
     rebuild_road,
     find_replace_road_key_dict,
 )
-from src.a02_finance_toolboxs.allot import allot_scale
-from src.a02_finance_toolboxs.finance_config import (
+from src.a02_finance_logic.allot import allot_scale
+from src.a02_finance_logic.finance_config import (
     FundCoin,
     FundNum,
     default_fund_coin_if_None,
 )
-from src.a02_finance_toolboxs.test.range_toolbox import get_morphed_rangeunit, RangeUnit
+from src.a02_finance_logic.test.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src.a03_group_logic.group import (
     AwardHeir,
     AwardLink,

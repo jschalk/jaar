@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.file_toolbox import open_json
-from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
+from src.a00_data_toolbox.file_toolbox import open_json
+from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_item_logic.item import ItemUnit
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a07_calendar_logic.chrono import (
@@ -90,7 +90,7 @@ def creg_weekday_itemunits() -> dict[str, ItemUnit]:
     return create_weekday_itemunits(creg_weekdays_list())
 
 
-def get_cregtime_str():
+def get_cregtime_str() -> str:
     return get_creg_config().get(timeline_tag_str())
 
 

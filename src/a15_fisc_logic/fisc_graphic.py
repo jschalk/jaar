@@ -1,32 +1,32 @@
-from src.a00_data_toolboxs.plotly_toolbox import conditional_fig_show
+from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
-def green_str():
+def green_str() -> str:
     return "green"
 
 
-def LightSeaGreen_str():
+def LightSeaGreen_str() -> str:
     return "LightSeaGreen"
 
 
-def blue_str():
+def blue_str() -> str:
     return "blue"
 
 
-def purple_str():
+def purple_str() -> str:
     return "purple"
 
 
-def red_str():
+def red_str() -> str:
     return "red"
 
 
-def darkred_str():
+def darkred_str() -> str:
     return "darkred"
 
 
-def black_str():
+def black_str() -> str:
     return "black"
 
 

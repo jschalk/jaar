@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import get_empty_str_if_None as if_none_str
+from src.a00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
 from src.a01_word_logic.road import FiscTag, FaceName
 from src.a06_bud_logic.bud import BudUnit
 from src.a09_pack_logic.pack import PackUnit

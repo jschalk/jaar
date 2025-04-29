@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.db_toolbox import create_insert_query
+from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_dimen_args
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import create_job_tables
 from src.a20_lobby_db_toolbox.lobby_tranformers import (

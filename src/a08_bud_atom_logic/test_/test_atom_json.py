@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road
-from src.a06_bud_logic.bud_tool import bud_item_factunit_str
+from src.a06_bud_logic._utils.str_helpers import bud_item_factunit_str
 from src.a08_bud_atom_logic.atom_config import (
     jkeys_str,
     jvalues_str,
@@ -13,7 +13,7 @@ from src.a08_bud_atom_logic.atom import (
     atom_insert,
     get_from_json as budatom_get_from_json,
 )
-from src.a00_data_toolboxs.dict_toolbox import x_is_json
+from src.a00_data_toolbox.dict_toolbox import x_is_json
 
 
 def test_BudAtom_get_dict_ReturnsObj():

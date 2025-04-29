@@ -12,6 +12,9 @@ from src.a06_bud_logic.bud_tool import (
     bud_item_teamlink_exists,
     bud_item_healerlink_exists,
     bud_item_factunit_exists,
+    bud_attr_exists,
+)
+from src.a06_bud_logic._utils.str_helpers import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -22,7 +25,6 @@ from src.a06_bud_logic.bud_tool import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
-    bud_attr_exists,
 )
 
 

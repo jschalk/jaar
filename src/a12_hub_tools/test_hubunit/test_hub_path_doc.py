@@ -1,4 +1,8 @@
-from src.a02_finance_toolboxs.deal import owner_name_str, deal_time_str, fisc_tag_str
+from src.a02_finance_logic._utils.str_helpers import (
+    owner_name_str,
+    deal_time_str,
+    fisc_tag_str,
+)
 from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a12_hub_tools.hub_path import (
     create_fisc_dir_path,

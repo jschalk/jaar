@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import create_path
+from src.a00_data_toolbox.file_toolbox import create_path
 from src.a20_lobby_db_toolbox.lobby_path import (
     LobbyID,
     lobbys_str,

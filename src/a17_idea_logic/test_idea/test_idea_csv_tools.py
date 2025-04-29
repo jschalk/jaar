@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.dict_toolbox import extract_csv_headers
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
+from src.a00_data_toolbox.dict_toolbox import extract_csv_headers
+from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import acct_name_str
 from src.a17_idea_logic.idea import (
     get_csv_fisc_tag_owner_name_metrics,

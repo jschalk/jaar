@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import get_empty_dict_if_None, get_0_if_None
+from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_0_if_None
 from src.a01_word_logic.road import GroupLabel
 from src.a04_reason_logic.reason_item import ReasonUnit, RoadUnit
 from src.a03_group_logic.group import AwardLink

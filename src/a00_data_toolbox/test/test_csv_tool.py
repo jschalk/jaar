@@ -1,6 +1,6 @@
-from src.a00_data_toolboxs.file_toolbox import create_path, set_dir, save_file
-from src.a00_data_toolboxs.csv_toolbox import open_csv_with_types
-from src.a00_data_toolboxs._utils.env_utils import (
+from src.a00_data_toolbox.file_toolbox import create_path, set_dir, save_file
+from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
+from src.a00_data_toolbox._utils.env_utils import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

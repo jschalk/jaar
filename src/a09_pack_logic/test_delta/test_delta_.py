@@ -1,6 +1,6 @@
 from src.a01_word_logic.road import create_road, get_default_fisc_tag as root_tag
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic.bud_tool import (
+from src.a06_bud_logic._utils.str_helpers import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -31,7 +31,7 @@ from src.a09_pack_logic._utils.example_deltas import (
     get_buddelta_example1,
     get_buddelta_sue_example,
 )
-from src.a00_data_toolboxs.dict_toolbox import x_is_json
+from src.a00_data_toolbox.dict_toolbox import x_is_json
 from pytest import raises as pytest_raises
 
 

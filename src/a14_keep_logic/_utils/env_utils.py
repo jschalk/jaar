@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import delete_dir, copy_dir, create_path
+from src.a00_data_toolbox.file_toolbox import delete_dir, copy_dir, create_path
 from src.a01_word_logic.road import create_road_from_tags, RoadUnit
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from os.path import exists as os_path_exists
@@ -10,11 +10,11 @@ def temp_fisc_tag():
 
 
 def temp_fisc_mstr_dir():
-    return "src/a14_keep_logic/_utils/fisc_mstr"
+    return "src\\a14_keep_logic\\_utils\\fisc_mstr"
 
 
 def get_module_temp_dir():
-    return "src/a14_keep_logic/_utils/fisc_mstr/fiscs"
+    return "src\\a14_keep_logic\\_utils\\fisc_mstr\\fiscs"
 
 
 def temp_owner_name():
@@ -47,7 +47,7 @@ class InvalidkeepCopyException(Exception):
 
 
 def copy_evaluation_keep(src_fisc_tag: str, dest_fisc_tag: str):
-    base_dir = "src/keep/_utils/keeps"
+    base_dir = "src\\keep\\_utils/keeps"
     new_dir = create_path(base_dir, dest_fisc_tag)
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(

@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
     get_1_if_None,
@@ -6,8 +6,8 @@ from src.a00_data_toolboxs.dict_toolbox import (
     get_False_if_None,
     get_empty_dict_if_None,
 )
-from src.a02_finance_toolboxs.allot import allot_scale
-from src.a02_finance_toolboxs.finance_config import (
+from src.a02_finance_logic.allot import allot_scale
+from src.a02_finance_logic.finance_config import (
     valid_finance_ratio,
     default_respect_bit_if_None,
     filter_penny,

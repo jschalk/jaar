@@ -1,6 +1,6 @@
-from src.a00_data_toolboxs.file_toolbox import create_path, get_level1_dirs
+from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a01_word_logic.road import RoadUnit, WorldID
-from src.a02_finance_toolboxs.deal import OwnerName, FiscTag
+from src.a02_finance_logic.deal import OwnerName, FiscTag
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a04_reason_logic.reason_item import ReasonHeir, PremiseUnit, FactHeir

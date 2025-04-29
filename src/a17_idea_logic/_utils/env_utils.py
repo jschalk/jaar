@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import delete_dir
+from src.a00_data_toolbox.file_toolbox import delete_dir
 from pytest import fixture as pytest_fixture
 from os import makedirs as os_makedirs
 
