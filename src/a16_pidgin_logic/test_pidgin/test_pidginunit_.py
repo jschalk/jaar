@@ -1,8 +1,6 @@
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a01_word_logic.road import default_bridge_if_None
-from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
-from src.a08_bud_atom_logic.atom_config import (
-    get_atom_args_class_types,
+from src.a06_bud_logic._utils.str_a06 import (
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
@@ -21,6 +19,8 @@ from src.a08_bud_atom_logic.atom_config import (
     road_str,
     team_title_str,
 )
+from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
+from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
 from src.a15_fisc_logic.fisc_config import (
     get_fisc_args_class_types,
     weekday_tag_str,

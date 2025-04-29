@@ -5,7 +5,7 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a01_word_logic.road import default_bridge_if_None
-from src.a08_bud_atom_logic.atom_config import type_RoadUnit_str
+from src.a06_bud_logic._utils.str_a06 import type_RoadUnit_str
 from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json
 from src.a16_pidgin_logic.pidgin_config import (
     pidgin_filename,

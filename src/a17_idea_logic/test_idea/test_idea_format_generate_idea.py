@@ -4,10 +4,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_acct_membership_str,
     bud_itemunit_str,
-)
-from src.a06_bud_logic._utils.example_buds import budunit_v001
-from src.a08_bud_atom_logic.atom_config import (
-    atom_insert,
     acct_name_str,
     group_label_str,
     parent_road_str,
@@ -19,6 +15,8 @@ from src.a08_bud_atom_logic.atom_config import (
     debtit_vote_str,
     credit_vote_str,
 )
+from src.a06_bud_logic._utils.example_buds import budunit_v001
+from src.a08_bud_atom_logic.atom_config import atom_insert
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a17_idea_logic.idea import create_idea_df, make_buddelta, get_idearef_obj
 from src.a17_idea_logic.idea_config import (

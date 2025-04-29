@@ -7,7 +7,6 @@ from src.a08_bud_atom_logic.atom_config import (
     atom_delete,
     normal_specs_str,
     class_type_str,
-    event_int_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     config_file_dir,

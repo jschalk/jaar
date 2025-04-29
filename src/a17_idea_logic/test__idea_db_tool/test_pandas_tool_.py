@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
     credor_respect_str,

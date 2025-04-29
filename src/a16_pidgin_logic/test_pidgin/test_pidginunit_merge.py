@@ -1,4 +1,4 @@
-from src.a08_bud_atom_logic.atom_config import type_NameUnit_str
+from src.a06_bud_logic._utils.str_a06 import type_NameUnit_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_clean_roadmap,

@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a06_bud_logic._utils.str_a06 import bud_acctunit_str
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
+    bud_acctunit_str,
     face_name_str,
     event_int_str,
     acct_name_str,

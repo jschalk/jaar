@@ -5,11 +5,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     fisc_tag_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    face_name_str,
-    acct_name_str,
-    event_int_str,
-)
+from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a17_idea_logic.idea_db_tool import get_pragma_table_fetchall
 from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_prime_tables
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeColumnsRef, FiscPrimeObjsRef

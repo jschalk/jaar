@@ -14,14 +14,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
-)
-from src.a08_bud_atom_logic.atom import (
-    atom_update,
-    atom_delete,
-    atom_insert,
-    budatom_shop,
-)
-from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     awardee_title_str,
     group_label_str,
@@ -41,6 +33,12 @@ from src.a08_bud_atom_logic.atom_config import (
     fnigh_str,
     give_force_str,
     take_force_str,
+)
+from src.a08_bud_atom_logic.atom import (
+    atom_update,
+    atom_delete,
+    atom_insert,
+    budatom_shop,
 )
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic._utils.example_deltas import get_buddelta_example1

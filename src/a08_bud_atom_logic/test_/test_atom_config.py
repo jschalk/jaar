@@ -11,6 +11,41 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
+from src.a06_bud_logic._utils.str_a06 import (
+    acct_name_str,
+    acct_pool_str,
+    addin_str,
+    awardee_title_str,
+    base_str,
+    begin_str,
+    close_str,
+    credit_belief_str,
+    credor_respect_str,
+    credit_vote_str,
+    debtit_belief_str,
+    debtor_respect_str,
+    debtit_vote_str,
+    denom_str,
+    event_int_str,
+    fnigh_str,
+    fopen_str,
+    fund_coin_str,
+    gogo_want_str,
+    group_label_str,
+    healer_name_str,
+    morph_str,
+    numor_str,
+    parent_road_str,
+    penny_str,
+    respect_bit_str,
+    road_str,
+    stop_want_str,
+    team_title_str,
+    type_NameUnit_str,
+    type_LabelUnit_str,
+    type_TagUnit_str,
+    type_RoadUnit_str,
+)
 from src.a08_bud_atom_logic.atom_config import (
     get_bud_dimens,
     get_all_bud_dimen_keys,
@@ -26,99 +61,36 @@ from src.a08_bud_atom_logic.atom_config import (
     set_mog,
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
-    acct_name_str,
-    addin_str,
     atom_insert,
     atom_delete,
     atom_update,
-    awardee_title_str,
-    base_str,
-    begin_str,
     dimen_str,
-    close_str,
     column_order_str,
-    credit_belief_str,
-    credor_respect_str,
-    credit_vote_str,
     crud_str,
-    debtit_belief_str,
-    debtor_respect_str,
-    debtit_vote_str,
-    denom_str,
-    event_int_str,
-    fnigh_str,
-    fopen_str,
-    fund_coin_str,
-    gogo_want_str,
-    group_label_str,
-    healer_name_str,
     class_type_str,
     jkeys_str,
     jvalues_str,
-    morph_str,
     nesting_order_str,
     normal_specs_str,
     normal_table_name_str,
-    numor_str,
-    parent_road_str,
-    penny_str,
-    respect_bit_str,
-    road_str,
     sqlite_datatype_str,
-    stop_want_str,
-    team_title_str,
-    type_NameUnit_str,
-    type_LabelUnit_str,
-    type_TagUnit_str,
-    type_RoadUnit_str,
 )
 
 
 def test_str_functions_ReturnsObj():
-    assert acct_name_str() == "acct_name"
-    assert addin_str() == "addin"
     assert atom_insert() == "INSERT"
     assert atom_update() == "UPDATE"
     assert atom_delete() == "DELETE"
-    assert awardee_title_str() == "awardee_title"
-    assert base_str() == "base"
-    assert begin_str() == "begin"
     assert dimen_str() == "dimen"
-    assert close_str() == "close"
     assert column_order_str() == "column_order"
-    assert credit_belief_str() == "credit_belief"
-    assert credor_respect_str() == "credor_respect"
-    assert credit_vote_str() == "credit_vote"
     assert crud_str() == "crud"
-    assert debtit_belief_str() == "debtit_belief"
-    assert debtor_respect_str() == "debtor_respect"
-    assert debtit_vote_str() == "debtit_vote"
-    assert denom_str() == "denom"
-    assert event_int_str() == "event_int"
-    assert fnigh_str() == "fnigh"
-    assert fopen_str() == "fopen"
-    assert fund_coin_str() == "fund_coin"
-    assert gogo_want_str() == "gogo_want"
-    assert group_label_str() == "group_label"
     assert class_type_str() == "class_type"
     assert jkeys_str() == "jkeys"
     assert jvalues_str() == "jvalues"
-    assert morph_str() == "morph"
     assert nesting_order_str() == "nesting_order"
     assert normal_specs_str() == "normal_specs"
     assert normal_table_name_str() == "normal_table_name"
-    assert numor_str() == "numor"
-    assert parent_road_str() == "parent_road"
-    assert penny_str() == "penny"
-    assert respect_bit_str() == "respect_bit"
-    assert road_str() == "road"
     assert sqlite_datatype_str() == "sqlite_datatype"
-    assert stop_want_str() == "stop_want"
-    assert team_title_str() == "team_title"
-    assert type_NameUnit_str() == "NameUnit"
-    assert type_LabelUnit_str() == "LabelUnit"
-    assert type_TagUnit_str() == "TagUnit"
-    assert type_RoadUnit_str() == "RoadUnit"
 
 
 def test_get_bud_dimens_ReturnsObj():

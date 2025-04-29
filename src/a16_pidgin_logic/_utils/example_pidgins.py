@@ -1,9 +1,5 @@
 from src.a01_word_logic.road import default_bridge_if_None, create_road
-from src.a08_bud_atom_logic.atom_config import (
-    acct_name_str,
-    base_str,
-    type_RoadUnit_str,
-)
+from src.a06_bud_logic._utils.str_a06 import acct_name_str, base_str, type_RoadUnit_str
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
     labelmap_shop,

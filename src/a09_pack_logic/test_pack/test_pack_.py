@@ -2,19 +2,17 @@ from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a01_word_logic.road import get_default_fisc_tag as root_tag
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic._utils.str_a06 import bud_acctunit_str
-from src.a06_bud_logic.bud import budunit_shop
-from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
+    bud_acctunit_str,
     face_name_str,
     event_int_str,
     credit_belief_str,
     debtit_belief_str,
     acct_name_str,
-    atom_insert,
-    atom_delete,
-    atom_update,
 )
+from src.a06_bud_logic.bud import budunit_shop
+from src.a08_bud_atom_logic.atom import budatom_shop
+from src.a08_bud_atom_logic.atom_config import atom_insert, atom_delete, atom_update
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import (
     init_pack_id,

@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, set_dir, open_json
 from src.a02_finance_logic._utils.strs_a02 import quota_str
 from src.a01_word_logic.road import create_road
 from src.a06_bud_logic.bud import budunit_shop
-from src.a08_bud_atom_logic.atom_config import penny_str, event_int_str
+from src.a06_bud_logic._utils.str_a06 import penny_str, event_int_str
 from src.a11_deal_cell_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
     cellunit_shop,

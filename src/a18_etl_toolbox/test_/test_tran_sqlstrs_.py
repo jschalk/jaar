@@ -25,6 +25,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
+    event_int_str,
+    face_name_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
@@ -32,12 +34,7 @@ from src.a07_calendar_logic._utils.str_a07 import (
     timeline_tag_str,
     yr1_jan1_offset_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    event_int_str,
-    face_name_str,
-    get_bud_dimens,
-    get_delete_key_name,
-)
+from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
 from src.a15_fisc_logic.fisc_config import (
     get_fisc_dimens,
     fiscunit_str,

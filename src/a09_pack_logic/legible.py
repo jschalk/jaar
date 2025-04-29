@@ -13,10 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_factunit_str,
 )
 from src.a08_bud_atom_logic.atom import BudAtom
-from src.a08_bud_atom_logic.atom_config import (
-    atom_delete,
-    atom_insert,
-    atom_update,
+from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     awardee_title_str,
     group_label_str,
@@ -39,6 +36,7 @@ from src.a08_bud_atom_logic.atom_config import (
     fnigh_str,
     fopen_str,
 )
+from src.a08_bud_atom_logic.atom_config import atom_delete, atom_insert, atom_update
 from src.a09_pack_logic.delta import BudDelta
 
 

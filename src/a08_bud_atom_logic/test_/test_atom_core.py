@@ -4,14 +4,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_acct_membership_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    atom_insert,
-    atom_delete,
+from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
     credit_belief_str,
     debtit_belief_str,
 )
+from src.a08_bud_atom_logic.atom_config import atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 
 
