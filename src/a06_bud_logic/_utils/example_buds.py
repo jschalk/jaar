@@ -9,9 +9,14 @@ from src.a06_bud_logic.bud import (
 )
 from src.a04_reason_logic.reason_team import teamunit_shop
 from src.a06_bud_logic._utils.env_a06 import get_bud_examples_dir as env_dir
+from os.path import exists as os_path_exists
 
 
 def budunit_v001() -> BudUnit:
+    print(os_path_exists("src"))
+    print(os_path_exists("src/a06_bud_logic"))
+    print(os_path_exists("src\\a06_bud_logic\\_utils"))
+    print(os_path_exists("src\\a06_bud_logic\\_utils\\example_bud1.json"))
     bud1_path = "src\\a06_bud_logic\\_utils\\example_bud1.json"
     return budunit_get_from_json(open_file(bud1_path))
 
