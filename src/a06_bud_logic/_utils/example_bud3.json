@@ -1,0 +1,4634 @@
+{
+  "accts": {
+    "A a ron Jones": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";MerVista Apt": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";MerVista Apt"
+        },
+        "A a ron Jones": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "A a ron Jones"
+        }
+      },
+      "acct_name": "A a ron Jones",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "America": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Family": {
+          "credit_vote": 6.45,
+          "debtit_vote": 1,
+          "group_label": ";Family"
+        },
+        ";Friends": {
+          "credit_vote": 6.1,
+          "debtit_vote": 1,
+          "group_label": ";Friends"
+        },
+        "America": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "America"
+        }
+      },
+      "acct_name": "America",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Anna": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Family": {
+          "credit_vote": 6.2,
+          "debtit_vote": 1,
+          "group_label": ";Family"
+        },
+        "Anna": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Anna"
+        }
+      },
+      "acct_name": "Anna",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Benjamin Stoddert": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME General"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Benjamin Stoddert": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Benjamin Stoddert"
+        }
+      },
+      "acct_name": "Benjamin Stoddert",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Bob302": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 6.25,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";appreciates US DOLLAR": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";appreciates US DOLLAR"
+        },
+        "Bob302": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Bob302"
+        }
+      },
+      "acct_name": "Bob302",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Chuck Lee": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME General"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Chuck Lee": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Chuck Lee"
+        }
+      },
+      "acct_name": "Chuck Lee",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Ernesto Chavez": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Philosophy": {
+          "credit_vote": 6.5,
+          "debtit_vote": 1,
+          "group_label": ";Philosophy"
+        },
+        "Ernesto Chavez": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Ernesto Chavez"
+        }
+      },
+      "acct_name": "Ernesto Chavez",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Jacque Chirac": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";MerVista Apt": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";MerVista Apt"
+        },
+        "Jacque Chirac": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Jacque Chirac"
+        }
+      },
+      "acct_name": "Jacque Chirac",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Jane Randolph": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Jane Randolph": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Jane Randolph"
+        }
+      },
+      "acct_name": "Jane Randolph",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Maria Reynolds": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 6.75,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Maria Reynolds": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Maria Reynolds"
+        }
+      },
+      "acct_name": "Maria Reynolds",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Martha Doubs": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME General"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Martha Doubs": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Martha Doubs"
+        }
+      },
+      "acct_name": "Martha Doubs",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Mikayla": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 10,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Philosophy": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Philosophy"
+        },
+        "Mikayla": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Mikayla"
+        }
+      },
+      "acct_name": "Mikayla",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Norberto": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";MerVista Apt": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";MerVista Apt"
+        },
+        "Norberto": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Norberto"
+        }
+      },
+      "acct_name": "Norberto",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Perrison": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Friends": {
+          "credit_vote": 6.4,
+          "debtit_vote": 1,
+          "group_label": ";Friends"
+        },
+        ";appreciates US DOLLAR": {
+          "credit_vote": 5,
+          "debtit_vote": 1,
+          "group_label": ";appreciates US DOLLAR"
+        },
+        "Perrison": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Perrison"
+        }
+      },
+      "acct_name": "Perrison",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Philipa": {
+      "_memberships": {
+        ";Climate Death": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Climate Death"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Philosophy": {
+          "credit_vote": 52,
+          "debtit_vote": 1,
+          "group_label": ";Philosophy"
+        },
+        "Philipa": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Philipa"
+        }
+      },
+      "acct_name": "Philipa",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Prashant": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";appreciates US DOLLAR": {
+          "credit_vote": 2,
+          "debtit_vote": 1,
+          "group_label": ";appreciates US DOLLAR"
+        },
+        "Prashant": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Prashant"
+        }
+      },
+      "acct_name": "Prashant",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Renee Elise Goldsberry": {
+      "_memberships": {
+        ";Climate Death": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Climate Death"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Friends": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Friends"
+        },
+        ";People who identify by UTEP": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";People who identify by UTEP"
+        },
+        ";Philosophy": {
+          "credit_vote": 3,
+          "debtit_vote": 1,
+          "group_label": ";Philosophy"
+        },
+        ";SHOW ME2": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";SHOW ME2"
+        },
+        ";appreciates US DOLLAR": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";appreciates US DOLLAR"
+        },
+        ";hurt by us dollar": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";hurt by us dollar"
+        },
+        "Renee Elise Goldsberry": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Renee Elise Goldsberry"
+        }
+      },
+      "acct_name": "Renee Elise Goldsberry",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Sam zamora": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME General"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Sam zamora": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Sam zamora"
+        }
+      },
+      "acct_name": "Sam zamora",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Shadwell Harris": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Shadwell Harris": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Shadwell Harris"
+        }
+      },
+      "acct_name": "Shadwell Harris",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Thomas OSU": {
+      "_memberships": {
+        ";Climate Death": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Climate Death"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "Thomas OSU": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Thomas OSU"
+        }
+      },
+      "acct_name": "Thomas OSU",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "Travis Fox": {
+      "_memberships": {
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        ";Family": {
+          "credit_vote": 6.35,
+          "debtit_vote": 1,
+          "group_label": ";Family"
+        },
+        "Travis Fox": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "Travis Fox"
+        }
+      },
+      "acct_name": "Travis Fox",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    },
+    "WIlliam Wellace": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
+        },
+        "WIlliam Wellace": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": "WIlliam Wellace"
+        }
+      },
+      "acct_name": "WIlliam Wellace",
+      "credit_belief": 1,
+      "debtit_belief": 1
+    }
+  },
+  "bridge": ";",
+  "fisc_tag": "accord45",
+  "fund_coin": 1,
+  "fund_pool": 1000000000.0,
+  "itemroot": {
+    "_kids": {
+      "ACME": {
+        "_is_expanded": false,
+        "_kids": {
+          "ACME Employee Responsiblities": {
+            "_is_expanded": false,
+            "_kids": {
+              "Employee Intruction manuel.": {
+                "_is_expanded": false,
+                "_uid": 123,
+                "item_tag": "Employee Intruction manuel.",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;year_month": {
+                    "base": "accord45;year_month",
+                    "premises": {
+                      "accord45;year_month;September": {
+                        "divisor": 12,
+                        "need": "accord45;year_month;September",
+                        "nigh": 9,
+                        "open": 9
+                      }
+                    }
+                  }
+                }
+              },
+              "Know Abuse Deterrence and Reporting guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 116,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 106,
+                "item_tag": "Know Abuse Deterrence and Reporting guildlines",
+                "mass": 1
+              },
+              "Know Discrimination Harassment Bully guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 117,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 107,
+                "item_tag": "Know Discrimination Harassment Bully guildlines",
+                "mass": 1
+              },
+              "PC1025 Identifying and Supporting houseless Youth": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_is_expanded": false,
+                    "_uid": 119,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 109,
+                "item_tag": "PC1025 Identifying and Supporting houseless Youth",
+                "mass": 1
+              },
+              "PC1026 Rick Management and Hazard Analysis": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_is_expanded": false,
+                    "_uid": 122,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1
+                  }
+                },
+                "_uid": 112,
+                "item_tag": "PC1026 Rick Management and Hazard Analysis",
+                "mass": 1
+              },
+              "PC1027 Adult Sexual Misconduct: Staff to Student/ IX": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_is_expanded": false,
+                    "_uid": 118,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 108,
+                "item_tag": "PC1027 Adult Sexual Misconduct: Staff to Student/ IX",
+                "mass": 1
+              },
+              "PC1029 Information Security Awareness traaining": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_is_expanded": false,
+                    "_uid": 121,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 111,
+                "item_tag": "PC1029 Information Security Awareness traaining",
+                "mass": 1
+              },
+              "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_is_expanded": false,
+                    "_uid": 120,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 110,
+                "item_tag": "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining",
+                "mass": 1
+              },
+              "PRM1005 ACME Staff  and Safety": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 115,
+                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month;September": {
+                            "divisor": 12,
+                            "need": "accord45;year_month;September",
+                            "nigh": 9,
+                            "open": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 105,
+                "item_tag": "PRM1005 ACME Staff  and Safety",
+                "mass": 1
+              }
+            },
+            "_uid": 102,
+            "item_tag": "ACME Employee Responsiblities",
+            "mass": 1
+          },
+          "IT DEPT": {
+            "_kids": {
+              "IT DEPT off-hours responsiblities": {
+                "_kids": {
+                  "check ETLs ran correctly": {
+                    "_kids": {
+                      "check emails": {
+                        "_uid": 138,
+                        "item_tag": "check emails",
+                        "mass": 1,
+                        "pledge": true,
+                        "reasonunits": {
+                          "accord45;day_minute": {
+                            "base": "accord45;day_minute",
+                            "premises": {
+                              "accord45;day_minute": {
+                                "need": "accord45;day_minute",
+                                "nigh": 360,
+                                "open": 360
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "check mechanisms": {
+                        "_kids": {
+                          "MECHANISM2": {
+                            "_uid": 171,
+                            "item_tag": "MECHANISM2",
+                            "mass": 1
+                          },
+                          "MECHANISM3": {
+                            "_uid": 172,
+                            "item_tag": "MECHANISM3",
+                            "mass": 1
+                          },
+                          "MECHANISM5": {
+                            "_uid": 173,
+                            "item_tag": "MECHANISM5",
+                            "mass": 1
+                          },
+                          "MECHANISM7": {
+                            "_uid": 170,
+                            "item_tag": "MECHANISM7",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 139,
+                        "item_tag": "check mechanisms",
+                        "mass": 1,
+                        "pledge": true,
+                        "reasonunits": {
+                          "accord45;day_minute": {
+                            "base": "accord45;day_minute",
+                            "premises": {
+                              "accord45;day_minute": {
+                                "need": "accord45;day_minute",
+                                "nigh": 360,
+                                "open": 360
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 137,
+                    "item_tag": "check ETLs ran correctly",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 360,
+                            "open": 360
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "dress to slightly impress": {
+                    "_uid": 158,
+                    "item_tag": "dress to slightly impress",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 450,
+                            "open": 450
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "go to employment": {
+                    "_is_expanded": false,
+                    "_uid": 231,
+                    "item_tag": "go to employment",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 525,
+                            "open": 525
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 136,
+                "item_tag": "IT DEPT off-hours responsiblities",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 1320,
+                        "open": 360
+                      }
+                    }
+                  }
+                }
+              },
+              "IT DEPT regular hours responsiblities": {
+                "_kids": {
+                  "Add to Azure DevOps": {
+                    "_uid": 156,
+                    "item_tag": "Add to Azure DevOps",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "Datawarehouse": {
+                    "_kids": {
+                      "Datawarehouse Expertise acquisition": {
+                        "_uid": 142,
+                        "item_tag": "Datawarehouse Expertise acquisition",
+                        "mass": 1,
+                        "pledge": true,
+                        "reasonunits": {
+                          "accord45;day_minute": {
+                            "base": "accord45;day_minute",
+                            "premises": {
+                              "accord45;day_minute": {
+                                "need": "accord45;day_minute",
+                                "nigh": 540,
+                                "open": 540
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "dev quantification script \"TIMOTHY\"": {
+                        "_kids": {
+                          "MECHANISM2": {
+                            "_uid": 176,
+                            "item_tag": "MECHANISM2",
+                            "mass": 1
+                          },
+                          "MECHANISM7": {
+                            "_uid": 175,
+                            "item_tag": "MECHANISM7",
+                            "mass": 1
+                          },
+                          "WPRD": {
+                            "_uid": 177,
+                            "item_tag": "WPRD",
+                            "mass": 1
+                          },
+                          "WPRDD": {
+                            "_uid": 174,
+                            "item_tag": "WPRDD",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 157,
+                        "item_tag": "dev quantification script \"TIMOTHY\"",
+                        "mass": 1,
+                        "pledge": true,
+                        "reasonunits": {
+                          "accord45;day_minute": {
+                            "base": "accord45;day_minute",
+                            "premises": {
+                              "accord45;day_minute": {
+                                "need": "accord45;day_minute",
+                                "nigh": 480,
+                                "open": 480
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "go to daily meeting ": {
+                        "_uid": 232,
+                        "item_tag": "go to daily meeting ",
+                        "mass": 1,
+                        "pledge": true,
+                        "reasonunits": {
+                          "accord45;day_minute": {
+                            "base": "accord45;day_minute",
+                            "premises": {
+                              "accord45;day_minute": {
+                                "need": "accord45;day_minute",
+                                "nigh": 582,
+                                "open": 582
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 135,
+                    "item_tag": "Datawarehouse",
+                    "mass": 1
+                  },
+                  "IT DEPT general": {
+                    "_uid": 141,
+                    "item_tag": "IT DEPT general",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 1019,
+                            "open": 540
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "Keep track of Chatroom conversations": {
+                    "_uid": 151,
+                    "item_tag": "Keep track of Chatroom conversations",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "Synergy": {
+                    "_kids": {
+                      "check for access": {
+                        "_uid": 143,
+                        "item_tag": "check for access",
+                        "mass": 1,
+                        "reasonunits": {
+                          "accord45;day_minute": {
+                            "base": "accord45;day_minute",
+                            "premises": {
+                              "accord45;day_minute": {
+                                "need": "accord45;day_minute",
+                                "nigh": 541,
+                                "open": 540
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 140,
+                    "item_tag": "Synergy",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 1020,
+                            "open": 540
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "consider management perspective": {
+                    "_uid": 155,
+                    "item_tag": "consider management perspective",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 541,
+                            "open": 540
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 133,
+                "item_tag": "IT DEPT regular hours responsiblities",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 1019,
+                        "open": 540
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 101,
+            "item_tag": "IT DEPT",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;day_minute": {
+                "base": "accord45;day_minute",
+                "premises": {
+                  "accord45;day_minute": {
+                    "need": "accord45;day_minute",
+                    "nigh": 1379,
+                    "open": 360
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 100,
+        "item_tag": "ACME",
+        "mass": 1
+      },
+      "Aaron Donald objects effected by him": {
+        "_is_expanded": false,
+        "_kids": {
+          "interesting": {
+            "_uid": 262,
+            "item_tag": "interesting",
+            "mass": 1
+          },
+          "not interesting": {
+            "_uid": 263,
+            "item_tag": "not interesting",
+            "mass": 1
+          }
+        },
+        "_uid": 261,
+        "item_tag": "Aaron Donald objects effected by him",
+        "mass": 1
+      },
+      "Asset management": {
+        "_is_expanded": false,
+        "_kids": {
+          "American sovereignty": {
+            "_kids": {
+              "portland sovereignty": {
+                "_kids": {
+                  "downtown": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "PSU Sports": {
+                        "_kids": {
+                          "browsing": {
+                            "_uid": 217,
+                            "item_tag": "browsing",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Nation-States": {
+                                "base": "accord45;Nation-States",
+                                "premises": {
+                                  "accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library": {
+                                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "picnic": {
+                            "_uid": 216,
+                            "item_tag": "picnic",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Seasons": {
+                                "base": "accord45;Seasons",
+                                "premises": {
+                                  "accord45;Seasons;Summer": {
+                                    "need": "accord45;Seasons;Summer"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "street soccer": {
+                            "_uid": 213,
+                            "item_tag": "street soccer",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Nation-States": {
+                                "base": "accord45;Nation-States",
+                                "premises": {
+                                  "accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field": {
+                                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "swimming": {
+                            "_uid": 212,
+                            "item_tag": "swimming",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Nation-States": {
+                                "base": "accord45;Nation-States",
+                                "premises": {
+                                  "accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool": {
+                                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "_uid": 210,
+                        "item_tag": "PSU Sports",
+                        "mass": 1,
+                        "reasonunits": {
+                          "accord45;Nation-States": {
+                            "base": "accord45;Nation-States",
+                            "premises": {
+                              "accord45;Nation-States;USA;Portland; OR;Downtown;PSU": {
+                                "need": "accord45;Nation-States;USA;Portland; OR;Downtown;PSU"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "flats": {
+                        "_kids": {
+                          "be reponsible for rent": {
+                            "_uid": 209,
+                            "item_tag": "be reponsible for rent",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Nation-States": {
+                                "base": "accord45;Nation-States",
+                                "premises": {
+                                  "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace": {
+                                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "flat": {
+                            "_uid": 211,
+                            "item_tag": "flat",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Nation-States": {
+                                "base": "accord45;Nation-States",
+                                "premises": {
+                                  "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "go for parent_road": {
+                            "_kids": {
+                              "maybe watch a video": {
+                                "_uid": 218,
+                                "item_tag": "maybe watch a video",
+                                "mass": 1,
+                                "reasonunits": {
+                                  "accord45;Interweb": {
+                                    "base": "accord45;Interweb",
+                                    "premises": {
+                                      "accord45;Interweb;YahooVideo": {
+                                        "need": "accord45;Interweb;YahooVideo"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "_uid": 214,
+                            "item_tag": "go for parent_road",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Nation-States": {
+                                "base": "accord45;Nation-States",
+                                "premises": {
+                                  "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden": {
+                                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "gym time": {
+                            "_uid": 215,
+                            "item_tag": "gym time",
+                            "mass": 1,
+                            "reasonunits": {
+                              "accord45;Moods": {
+                                "base": "accord45;Moods",
+                                "premises": {
+                                  "accord45;Moods;hungry": {
+                                    "need": "accord45;Moods;hungry"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "_uid": 208,
+                        "item_tag": "flats",
+                        "mass": 1,
+                        "reasonunits": {
+                          "accord45;Nation-States": {
+                            "base": "accord45;Nation-States",
+                            "premises": {
+                              "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt": {
+                                "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 207,
+                    "item_tag": "downtown",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;Nation-States": {
+                        "base": "accord45;Nation-States",
+                        "premises": {
+                          "accord45;Nation-States;USA;Portland; OR;Downtown": {
+                            "need": "accord45;Nation-States;USA;Portland; OR;Downtown"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 206,
+                "item_tag": "portland sovereignty",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland OR": {
+                        "need": "accord45;Nation-States;USA;Portland OR"
+                      }
+                    }
+                  }
+                }
+              },
+              "texas sovereignty": {
+                "_uid": 205,
+                "item_tag": "texas sovereignty",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Texas": {
+                        "need": "accord45;Nation-States;USA;Texas"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 204,
+            "item_tag": "American sovereignty",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Nation-States": {
+                "base": "accord45;Nation-States",
+                "premises": {
+                  "accord45;Nation-States;USA": {
+                    "need": "accord45;Nation-States;USA"
+                  }
+                }
+              }
+            }
+          },
+          "French sovereignty": {
+            "_uid": 203,
+            "item_tag": "French sovereignty",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Nation-States": {
+                "base": "accord45;Nation-States",
+                "premises": {
+                  "accord45;Nation-States;France2": {
+                    "need": "accord45;Nation-States;France2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 199,
+        "item_tag": "Asset management",
+        "mass": 1
+      },
+      "Bob Dylan Root": {
+        "_kids": {
+          "Aint me Babe": {
+            "_uid": 270,
+            "item_tag": "Aint me Babe",
+            "mass": 1
+          },
+          "tangled up in blue": {
+            "_uid": 271,
+            "item_tag": "tangled up in blue",
+            "mass": 1
+          }
+        },
+        "_uid": 269,
+        "item_tag": "Bob Dylan Root",
+        "mass": 1
+      },
+      "D&B": {
+        "_is_expanded": false,
+        "_kids": {
+          "Aarons friends are desperate for of housing support": {
+            "_is_expanded": false,
+            "_kids": {
+              "Ask Chuck monthly what I can do": {
+                "_uid": 160,
+                "awardlinks": {
+                  "Renee Elise Goldsberry": {
+                    "awardee_title": "Renee Elise Goldsberry",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "Ask Chuck monthly what I can do",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Aaron Donald objects effected by him": {
+                    "base": "accord45;Aaron Donald objects effected by him",
+                    "premises": {
+                      "accord45;Aaron Donald objects effected by him;interesting": {
+                        "need": "accord45;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 99,
+            "awardlinks": {
+              "Renee Elise Goldsberry": {
+                "awardee_title": "Renee Elise Goldsberry",
+                "give_force": 1.0,
+                "take_force": 1.0
+              }
+            },
+            "item_tag": "Aarons friends are desperate for of housing support",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Aaron Donald objects effected by him": {
+                "base": "accord45;Aaron Donald objects effected by him",
+                "premises": {
+                  "accord45;Aaron Donald objects effected by him;interesting": {
+                    "need": "accord45;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "develop D&B software": {
+            "_kids": {
+              "test program": {
+                "_uid": 178,
+                "item_tag": "test program",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Aaron Donald objects effected by him": {
+                    "base": "accord45;Aaron Donald objects effected by him",
+                    "premises": {
+                      "accord45;Aaron Donald objects effected by him;interesting": {
+                        "need": "accord45;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 660,
+                        "open": 660
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 169,
+            "awardlinks": {
+              ";hurt by us dollar": {
+                "awardee_title": ";hurt by us dollar",
+                "give_force": 1.0,
+                "take_force": 1.0
+              }
+            },
+            "item_tag": "develop D&B software",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Aaron Donald objects effected by him": {
+                "base": "accord45;Aaron Donald objects effected by him",
+                "premises": {
+                  "accord45;Aaron Donald objects effected by him;interesting": {
+                    "need": "accord45;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "donate to pro-climate committees": {
+            "_is_expanded": false,
+            "_kids": {
+              "donate to influential people that are pro-Climate Death": {
+                "_uid": 168,
+                "awardlinks": {
+                  ";Climate Death": {
+                    "awardee_title": ";Climate Death",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "donate to influential people that are pro-Climate Death",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Aaron Donald objects effected by him": {
+                    "base": "accord45;Aaron Donald objects effected by him",
+                    "premises": {
+                      "accord45;Aaron Donald objects effected by him;interesting": {
+                        "need": "accord45;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  },
+                  "accord45;ced_week": {
+                    "base": "accord45;ced_week",
+                    "premises": {
+                      "accord45;ced_week": {
+                        "divisor": 2,
+                        "need": "accord45;ced_week",
+                        "nigh": 0,
+                        "open": 0
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 600,
+                        "open": 600
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Friday": {
+                        "need": "accord45;weekdays;Friday"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 167,
+            "item_tag": "donate to pro-climate committees",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Aaron Donald objects effected by him": {
+                "base": "accord45;Aaron Donald objects effected by him",
+                "premises": {
+                  "accord45;Aaron Donald objects effected by him;interesting": {
+                    "need": "accord45;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "late_night_go_to_sleep": {
+            "_uid": 149,
+            "item_tag": "late_night_go_to_sleep",
+            "mass": 1,
+            "pledge": true,
+            "reasonunits": {
+              "accord45;Aaron Donald objects effected by him": {
+                "base": "accord45;Aaron Donald objects effected by him",
+                "premises": {
+                  "accord45;Aaron Donald objects effected by him;interesting": {
+                    "need": "accord45;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "sympathetic receptive": {
+            "_is_expanded": false,
+            "_kids": {
+              "sympathetic receptive to David": {
+                "_kids": {
+                  "be available for phone call": {
+                    "_uid": 163,
+                    "awardlinks": {
+                      "Renee Elise Goldsberry": {
+                        "awardee_title": "Renee Elise Goldsberry",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "be available for phone call",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;Aaron Donald objects effected by him": {
+                        "base": "accord45;Aaron Donald objects effected by him",
+                        "premises": {
+                          "accord45;Aaron Donald objects effected by him;interesting": {
+                            "need": "accord45;Aaron Donald objects effected by him;interesting"
+                          }
+                        }
+                      },
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 669,
+                            "open": 666
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "call David and discuss methodology": {
+                    "_uid": 164,
+                    "awardlinks": {
+                      ";Climate Death": {
+                        "awardee_title": ";Climate Death",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      },
+                      "Renee Elise Goldsberry": {
+                        "awardee_title": "Renee Elise Goldsberry",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "call David and discuss methodology",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;Aaron Donald objects effected by him": {
+                        "base": "accord45;Aaron Donald objects effected by him",
+                        "premises": {
+                          "accord45;Aaron Donald objects effected by him;interesting": {
+                            "need": "accord45;Aaron Donald objects effected by him;interesting"
+                          }
+                        }
+                      },
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;year_month": {
+                        "base": "accord45;year_month",
+                        "premises": {
+                          "accord45;year_month": {
+                            "divisor": 1,
+                            "need": "accord45;year_month",
+                            "nigh": 0,
+                            "open": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 162,
+                "awardlinks": {
+                  "Renee Elise Goldsberry": {
+                    "awardee_title": "Renee Elise Goldsberry",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "sympathetic receptive to David",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Aaron Donald objects effected by him": {
+                    "base": "accord45;Aaron Donald objects effected by him",
+                    "premises": {
+                      "accord45;Aaron Donald objects effected by him;interesting": {
+                        "need": "accord45;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 161,
+            "item_tag": "sympathetic receptive",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Aaron Donald objects effected by him": {
+                "base": "accord45;Aaron Donald objects effected by him",
+                "premises": {
+                  "accord45;Aaron Donald objects effected by him;interesting": {
+                    "need": "accord45;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "write letters to reps": {
+            "_is_expanded": false,
+            "_kids": {
+              "write letters about Climate Death to congressman": {
+                "_uid": 166,
+                "awardlinks": {
+                  ";Climate Death": {
+                    "awardee_title": ";Climate Death",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "write letters about Climate Death to congressman",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Aaron Donald objects effected by him": {
+                    "base": "accord45;Aaron Donald objects effected by him",
+                    "premises": {
+                      "accord45;Aaron Donald objects effected by him;interesting": {
+                        "need": "accord45;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Friday": {
+                        "need": "accord45;weekdays;Friday"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 165,
+            "item_tag": "write letters to reps",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Aaron Donald objects effected by him": {
+                "base": "accord45;Aaron Donald objects effected by him",
+                "premises": {
+                  "accord45;Aaron Donald objects effected by him;interesting": {
+                    "need": "accord45;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 96,
+        "awardlinks": {
+          ";Climate Death": {
+            "awardee_title": ";Climate Death",
+            "give_force": 1.0,
+            "take_force": 1.0
+          },
+          ";Family": {
+            "awardee_title": ";Family",
+            "give_force": 1.0,
+            "take_force": 1.0
+          },
+          "America": {
+            "awardee_title": "America",
+            "give_force": 1.0,
+            "take_force": 1.0
+          }
+        },
+        "item_tag": "D&B",
+        "mass": 1,
+        "reasonunits": {
+          "accord45;Aaron Donald objects effected by him": {
+            "base": "accord45;Aaron Donald objects effected by him",
+            "premises": {
+              "accord45;Aaron Donald objects effected by him;interesting": {
+                "need": "accord45;Aaron Donald objects effected by him;interesting"
+              }
+            }
+          }
+        }
+      },
+      "Freelancing": {
+        "_is_expanded": false,
+        "_kids": {
+          "Submit hours on website": {
+            "_is_expanded": false,
+            "_uid": 104,
+            "item_tag": "Submit hours on website",
+            "mass": 1,
+            "pledge": true,
+            "reasonunits": {
+              "accord45;day_minute": {
+                "base": "accord45;day_minute",
+                "premises": {
+                  "accord45;day_minute": {
+                    "need": "accord45;day_minute",
+                    "nigh": 480,
+                    "open": 480
+                  }
+                }
+              },
+              "accord45;weekdays": {
+                "base": "accord45;weekdays",
+                "premises": {
+                  "accord45;weekdays;Friday": {
+                    "need": "accord45;weekdays;Friday"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 103,
+        "item_tag": "Freelancing",
+        "mass": 1,
+        "reasonunits": {
+          "accord45;day_minute": {
+            "base": "accord45;day_minute",
+            "premises": {
+              "accord45;day_minute": {
+                "need": "accord45;day_minute",
+                "nigh": 1019,
+                "open": 540
+              }
+            }
+          }
+        }
+      },
+      "Interweb": {
+        "_is_expanded": false,
+        "_kids": {
+          "AOL AIM": {
+            "_kids": {
+              "PSU Ultimate": {
+                "_uid": 254,
+                "item_tag": "PSU Ultimate",
+                "mass": 1
+              }
+            },
+            "_uid": 253,
+            "item_tag": "AOL AIM",
+            "mass": 1
+          },
+          "Faaceboook": {
+            "_uid": 251,
+            "item_tag": "Faaceboook",
+            "mass": 1
+          },
+          "Github": {
+            "_uid": 252,
+            "item_tag": "Github",
+            "mass": 1
+          },
+          "YahooVideo": {
+            "_uid": 255,
+            "item_tag": "YahooVideo",
+            "mass": 1
+          }
+        },
+        "_uid": 250,
+        "item_tag": "Interweb",
+        "mass": 1
+      },
+      "Moods": {
+        "_kids": {
+          "Bllod Meridan by Cormac": {
+            "_uid": 265,
+            "item_tag": "Bllod Meridan by Cormac",
+            "mass": 1
+          },
+          "Happy": {
+            "_kids": {
+              "Happy - angerish": {
+                "_uid": 267,
+                "item_tag": "Happy - angerish",
+                "mass": 1
+              }
+            },
+            "_uid": 266,
+            "item_tag": "Happy",
+            "mass": 1
+          },
+          "hungry": {
+            "_uid": 268,
+            "item_tag": "hungry",
+            "mass": 1
+          }
+        },
+        "_uid": 264,
+        "item_tag": "Moods",
+        "mass": 1
+      },
+      "Nation-States": {
+        "_kids": {
+          "France2": {
+            "_uid": 235,
+            "item_tag": "France2",
+            "mass": 1
+          },
+          "USA": {
+            "_kids": {
+              "Portland OR": {
+                "_kids": {
+                  "Downtown": {
+                    "_kids": {
+                      "PSU": {
+                        "_kids": {
+                          "Park Squares": {
+                            "_uid": 241,
+                            "item_tag": "Park Squares",
+                            "mass": 1
+                          },
+                          "Pool": {
+                            "_uid": 242,
+                            "item_tag": "Pool",
+                            "mass": 1
+                          },
+                          "Stott Field": {
+                            "_uid": 243,
+                            "item_tag": "Stott Field",
+                            "mass": 1
+                          },
+                          "library": {
+                            "_uid": 244,
+                            "item_tag": "library",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 240,
+                        "item_tag": "PSU",
+                        "mass": 1
+                      },
+                      "Southpark Apt": {
+                        "_kids": {
+                          "10th floor gaarden": {
+                            "_uid": 246,
+                            "item_tag": "10th floor gaarden",
+                            "mass": 1
+                          },
+                          "Apt X4XX": {
+                            "_uid": 247,
+                            "item_tag": "Apt X4XX",
+                            "mass": 1
+                          },
+                          "Gym": {
+                            "_uid": 248,
+                            "item_tag": "Gym",
+                            "mass": 1
+                          },
+                          "workspace": {
+                            "_uid": 249,
+                            "item_tag": "workspace",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 245,
+                        "item_tag": "Southpark Apt",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 239,
+                    "item_tag": "Downtown",
+                    "mass": 1
+                  }
+                },
+                "_uid": 237,
+                "item_tag": "Portland OR",
+                "mass": 1
+              },
+              "Texas": {
+                "_uid": 238,
+                "item_tag": "Texas",
+                "mass": 1
+              }
+            },
+            "_uid": 236,
+            "item_tag": "USA",
+            "mass": 1
+          }
+        },
+        "_uid": 234,
+        "item_tag": "Nation-States",
+        "mass": 1
+      },
+      "No Movie playing": {
+        "_is_expanded": false,
+        "_kids": {
+          "Big Lewbwski": {
+            "_uid": 273,
+            "item_tag": "Big Lewbwski",
+            "mass": 1
+          },
+          "Star Wars eps IV": {
+            "_uid": 274,
+            "item_tag": "Star Wars eps IV",
+            "mass": 1
+          }
+        },
+        "_uid": 272,
+        "item_tag": "No Movie playing",
+        "mass": 1
+      },
+      "Seasons": {
+        "_kids": {
+          "Summer": {
+            "_uid": 276,
+            "item_tag": "Summer",
+            "mass": 1
+          }
+        },
+        "_uid": 275,
+        "item_tag": "Seasons",
+        "mass": 1
+      },
+      "Tired Status": {
+        "_kids": {
+          "Not tired": {
+            "_uid": 278,
+            "item_tag": "Not tired",
+            "mass": 1
+          },
+          "Tired": {
+            "_uid": 279,
+            "item_tag": "Tired",
+            "mass": 1
+          }
+        },
+        "_uid": 277,
+        "item_tag": "Tired Status",
+        "mass": 1
+      },
+      "Ultimate Frisbee": {
+        "_is_expanded": false,
+        "_kids": {
+          "check on m33": {
+            "_uid": 221,
+            "item_tag": "check on m33",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Moods": {
+                "base": "accord45;Moods",
+                "premises": {
+                  "accord45;Moods;Happy": {
+                    "need": "accord45;Moods;Happy"
+                  }
+                }
+              }
+            }
+          },
+          "contemplate the disc": {
+            "_uid": 229,
+            "item_tag": "contemplate the disc",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;No Movie playing": {
+                "base": "accord45;No Movie playing",
+                "premises": {
+                  "accord45;No Movie playing,Big Lewbwski": {
+                    "need": "accord45;No Movie playing,Big Lewbwski"
+                  }
+                }
+              }
+            }
+          },
+          "playing ultimate": {
+            "_kids": {
+              "check PSU mini": {
+                "_uid": 219,
+                "item_tag": "check PSU mini",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Moods": {
+                    "base": "accord45;Moods",
+                    "premises": {
+                      "accord45;Moods;Happy": {
+                        "need": "accord45;Moods;Happy"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 201,
+            "item_tag": "playing ultimate",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Moods": {
+                "base": "accord45;Moods",
+                "premises": {
+                  "accord45;Moods;Happy": {
+                    "need": "accord45;Moods;Happy"
+                  }
+                }
+              }
+            }
+          },
+          "relaxing": {
+            "_uid": 202,
+            "item_tag": "relaxing",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;No Movie playing": {
+                "base": "accord45;No Movie playing",
+                "premises": {
+                  "accord45;No Movie playing,Star Wars eps IV": {
+                    "need": "accord45;No Movie playing,Star Wars eps IV"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 200,
+        "item_tag": "Ultimate Frisbee",
+        "mass": 1,
+        "reasonunits": {
+          "accord45;Moods": {
+            "base": "accord45;Moods",
+            "premises": {
+              "accord45;Moods;Happy": {
+                "need": "accord45;Moods;Happy"
+              }
+            }
+          }
+        }
+      },
+      "Water Living": {
+        "_is_expanded": false,
+        "_kids": {
+          "Swimming in Williamette watershed": {
+            "_kids": {
+              "Go climbing at east Circuit": {
+                "_uid": 226,
+                "item_tag": "Go climbing at east Circuit",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;WaterExistence": {
+                    "base": "accord45;WaterExistence",
+                    "premises": {
+                      "accord45;WaterExistence,Williamette WaterShed,West side of Watershed": {
+                        "need": "accord45;WaterExistence,Williamette WaterShed,West side of Watershed"
+                      }
+                    }
+                  }
+                }
+              },
+              "animate": {
+                "_uid": 228,
+                "item_tag": "animate",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;WaterExistence": {
+                    "base": "accord45;WaterExistence",
+                    "premises": {
+                      "accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
+                        "need": "accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
+                      }
+                    }
+                  }
+                }
+              },
+              "bike around": {
+                "_uid": 227,
+                "item_tag": "bike around",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;WaterExistence": {
+                    "base": "accord45;WaterExistence",
+                    "premises": {
+                      "accord45;WaterExistence,Williamette WaterShed,East Side of Watershed": {
+                        "need": "accord45;WaterExistence,Williamette WaterShed,East Side of Watershed"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 225,
+            "item_tag": "Swimming in Williamette watershed",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;WaterExistence": {
+                "base": "accord45;WaterExistence",
+                "premises": {
+                  "accord45;WaterExistence,Williamette WaterShed": {
+                    "need": "accord45;WaterExistence,Williamette WaterShed"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 223,
+        "item_tag": "Water Living",
+        "mass": 1
+      },
+      "WaterExistence": {
+        "_kids": {
+          "Williamette WaterShed": {
+            "_kids": {
+              "East Side of Watershed": {
+                "_kids": {
+                  "flat": {
+                    "_uid": 260,
+                    "item_tag": "flat",
+                    "mass": 1
+                  }
+                },
+                "_uid": 258,
+                "item_tag": "East Side of Watershed",
+                "mass": 1
+              },
+              "West side of Watershed": {
+                "_uid": 259,
+                "item_tag": "West side of Watershed",
+                "mass": 1
+              }
+            },
+            "_uid": 257,
+            "item_tag": "Williamette WaterShed",
+            "mass": 1
+          }
+        },
+        "_uid": 256,
+        "item_tag": "WaterExistence",
+        "mass": 1
+      },
+      "casa": {
+        "_is_expanded": false,
+        "_kids": {
+          "Financial Ops": {
+            "_is_expanded": false,
+            "_kids": {
+              "be reponsible for rent": {
+                "_uid": 37,
+                "awardlinks": {
+                  "Perrison": {
+                    "awardee_title": "Perrison",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "be reponsible for rent",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;month_week": {
+                    "base": "accord45;month_week",
+                    "premises": {
+                      "accord45;month_week;1st week": {
+                        "need": "accord45;month_week;1st week"
+                      }
+                    }
+                  }
+                }
+              },
+              "be responsible for expenses card": {
+                "_uid": 45,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "be responsible for expenses card",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;month_week": {
+                    "base": "accord45;month_week",
+                    "premises": {
+                      "accord45;month_week;1st week": {
+                        "need": "accord45;month_week;1st week"
+                      }
+                    }
+                  }
+                }
+              },
+              "be responsible for utilities": {
+                "_uid": 31,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "be responsible for utilities",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;month_week": {
+                    "base": "accord45;month_week",
+                    "premises": {
+                      "accord45;month_week;1st week": {
+                        "need": "accord45;month_week;1st week"
+                      }
+                    }
+                  }
+                }
+              },
+              "set resturant bucks for the week": {
+                "_uid": 75,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "set resturant bucks for the week",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Tuesday": {
+                        "need": "accord45;weekdays;Tuesday"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 148,
+            "item_tag": "Financial Ops",
+            "mass": 1
+          },
+          "Housing": {
+            "_is_expanded": false,
+            "_kids": {
+              "Bike Garage": {
+                "_uid": 185,
+                "item_tag": "Bike Garage",
+                "mass": 1
+              },
+              "Bike Gym": {
+                "_uid": 184,
+                "item_tag": "Bike Gym",
+                "mass": 1
+              },
+              "Flat": {
+                "_kids": {
+                  "bathroom #2": {
+                    "_uid": 196,
+                    "item_tag": "bathroom #2",
+                    "mass": 1
+                  },
+                  "bedroom #1": {
+                    "_kids": {
+                      "big bathroom": {
+                        "_uid": 195,
+                        "item_tag": "big bathroom",
+                        "mass": 1
+                      },
+                      "closet": {
+                        "_uid": 194,
+                        "item_tag": "closet",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 191,
+                    "item_tag": "bedroom #1",
+                    "mass": 1
+                  },
+                  "bedroom #2": {
+                    "_kids": {
+                      "bed area": {
+                        "_kids": {
+                          "heater maintenance": {
+                            "_uid": 198,
+                            "awardlinks": {
+                              "Norberto": {
+                                "awardee_title": "Norberto",
+                                "give_force": 1.0,
+                                "take_force": 1.0
+                              }
+                            },
+                            "item_tag": "heater maintenance",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 197,
+                        "item_tag": "bed area",
+                        "mass": 1
+                      },
+                      "closet": {
+                        "_uid": 193,
+                        "item_tag": "closet",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 192,
+                    "item_tag": "bedroom #2",
+                    "mass": 1
+                  },
+                  "cookery": {
+                    "_uid": 189,
+                    "item_tag": "cookery",
+                    "mass": 1
+                  },
+                  "dining area": {
+                    "_uid": 190,
+                    "item_tag": "dining area",
+                    "mass": 1
+                  },
+                  "maintenance": {
+                    "_uid": 187,
+                    "item_tag": "maintenance",
+                    "mass": 1
+                  },
+                  "nursery": {
+                    "_uid": 188,
+                    "item_tag": "nursery",
+                    "mass": 1
+                  }
+                },
+                "_uid": 181,
+                "item_tag": "Flat",
+                "mass": 1
+              },
+              "Lifting Gym": {
+                "_uid": 183,
+                "item_tag": "Lifting Gym",
+                "mass": 1
+              },
+              "Playing in nurserys": {
+                "_uid": 186,
+                "item_tag": "Playing in nurserys",
+                "mass": 1
+              },
+              "Pool": {
+                "_uid": 182,
+                "item_tag": "Pool",
+                "mass": 1
+              }
+            },
+            "_uid": 180,
+            "awardlinks": {
+              ";MerVista Apt": {
+                "awardee_title": ";MerVista Apt",
+                "give_force": 1.0,
+                "take_force": 1.0
+              }
+            },
+            "item_tag": "Housing",
+            "mass": 1
+          },
+          "call high school friend": {
+            "_uid": 35,
+            "awardlinks": {
+              "Perrison": {
+                "awardee_title": "Perrison",
+                "give_force": 1.0,
+                "take_force": 1.0
+              }
+            },
+            "item_tag": "call high school friend",
+            "mass": 1,
+            "pledge": true,
+            "reasonunits": {
+              "accord45;day_minute": {
+                "base": "accord45;day_minute",
+                "premises": {
+                  "accord45;day_minute": {
+                    "need": "accord45;day_minute",
+                    "nigh": 540,
+                    "open": 540
+                  }
+                }
+              },
+              "accord45;year_month": {
+                "base": "accord45;year_month",
+                "premises": {
+                  "accord45;year_month": {
+                    "divisor": 3,
+                    "need": "accord45;year_month",
+                    "nigh": 0,
+                    "open": 0
+                  }
+                }
+              }
+            }
+          },
+          "check up on old family friends": {
+            "_uid": 222,
+            "item_tag": "check up on old family friends",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Moods": {
+                "base": "accord45;Moods",
+                "premises": {
+                  "accord45;Moods;Happy,Happy - angerish": {
+                    "need": "accord45;Moods;Happy,Happy - angerish"
+                  }
+                }
+              }
+            }
+          },
+          "cleaning": {
+            "_is_expanded": false,
+            "_kids": {
+              "check cat water": {
+                "_uid": 33,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "check cat water",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Sunday": {
+                        "need": "accord45;weekdays;Sunday"
+                      }
+                    }
+                  }
+                }
+              },
+              "check humidifer": {
+                "_uid": 159,
+                "item_tag": "check humidifer",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "clean baby seats": {
+                "_uid": 49,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean baby seats",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;year_month": {
+                    "base": "accord45;year_month",
+                    "premises": {
+                      "accord45;year_month": {
+                        "divisor": 3,
+                        "need": "accord45;year_month",
+                        "nigh": 0,
+                        "open": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean bathroom": {
+                "_uid": 65,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean bathroom",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 600,
+                        "open": 600
+                      }
+                    }
+                  }
+                }
+              },
+              "clean cat poo": {
+                "_uid": 9,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean cat poo",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 480,
+                        "open": 480
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "clean humidifiers": {
+                "_uid": 55,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean humidifiers",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "clean sheets couch blankets": {
+                "_uid": 41,
+                "awardlinks": {
+                  "Perrison": {
+                    "awardee_title": "Perrison",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean sheets couch blankets",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;ced_week": {
+                    "base": "accord45;ced_week",
+                    "premises": {
+                      "accord45;ced_week": {
+                        "divisor": 6,
+                        "need": "accord45;ced_week",
+                        "nigh": 1,
+                        "open": 1
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "clean table": {
+                "_uid": 53,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean table",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "deep clean play mat": {
+                "_uid": 71,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "deep clean play mat",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;month_week": {
+                    "base": "accord45;month_week",
+                    "premises": {
+                      "accord45;month_week;1st week": {
+                        "need": "accord45;month_week;1st week"
+                      }
+                    }
+                  },
+                  "accord45;year_month": {
+                    "base": "accord45;year_month",
+                    "premises": {
+                      "accord45;year_month": {
+                        "divisor": 2,
+                        "need": "accord45;year_month",
+                        "nigh": 0,
+                        "open": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "empty roomba": {
+                "_uid": 11,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "empty roomba",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 480,
+                        "open": 480
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Friday": {
+                        "need": "accord45;weekdays;Friday"
+                      }
+                    }
+                  }
+                }
+              },
+              "empty roomba Friday": {
+                "_uid": 13,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "empty roomba Friday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 480,
+                        "open": 480
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Friday": {
+                        "need": "accord45;weekdays;Friday"
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry monday": {
+                "_uid": 25,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "laundry monday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry saturday": {
+                "_uid": 29,
+                "awardlinks": {
+                  "Travis Fox": {
+                    "awardee_title": "Travis Fox",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "laundry saturday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Saturday": {
+                        "need": "accord45;weekdays;Saturday"
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry wednesday": {
+                "_uid": 27,
+                "awardlinks": {
+                  "America": {
+                    "awardee_title": "America",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "laundry wednesday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Wednesday": {
+                        "need": "accord45;weekdays;Wednesday"
+                      }
+                    }
+                  }
+                }
+              },
+              "morning cookery clean-up": {
+                "_uid": 150,
+                "item_tag": "morning cookery clean-up",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 480,
+                        "open": 480
+                      }
+                    }
+                  }
+                }
+              },
+              "prepare_bed clean bedroom": {
+                "_uid": 63,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "prepare_bed clean bedroom",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 360,
+                        "open": 360
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba bedroom": {
+                "_uid": 15,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "roomba bedroom",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Tuesday": {
+                        "need": "accord45;weekdays;Tuesday"
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba bedroom Friday": {
+                "_uid": 17,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "roomba bedroom Friday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Friday": {
+                        "need": "accord45;weekdays;Friday"
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba living area": {
+                "_uid": 19,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "roomba living area",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 480,
+                        "open": 480
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba living area thur": {
+                "_uid": 21,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "roomba living area thur",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Thursday": {
+                        "need": "accord45;weekdays;Thursday"
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba maintenance": {
+                "_uid": 51,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "roomba maintenance",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "wipe down play mat2": {
+                "_uid": 69,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "wipe down play mat2",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                        "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 146,
+            "item_tag": "cleaning",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Nation-States": {
+                "base": "accord45;Nation-States",
+                "premises": {
+                  "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
+                    "need": "accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                  }
+                }
+              }
+            }
+          },
+          "exercise": {
+            "_kids": {
+              "5 push-ups": {
+                "_uid": 5,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "5 push-ups",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "check protein for week is adequate": {
+                "_uid": 61,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "check protein for week is adequate",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "clean ears": {
+                "_uid": 79,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clean ears",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;year_month": {
+                    "base": "accord45;year_month",
+                    "premises": {
+                      "accord45;year_month": {
+                        "divisor": 3,
+                        "need": "accord45;year_month",
+                        "nigh": 0,
+                        "open": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "clip nails": {
+                "_uid": 77,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clip nails",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "cook veggies every morning": {
+                "_uid": 59,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "cook veggies every morning",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "daily exercise 20min": {
+                "_is_expanded": false,
+                "_kids": {
+                  "I do not be desperate for of I have to exercise": {
+                    "_uid": 154,
+                    "item_tag": "I do not be desperate for of I have to exercise",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 67,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "daily exercise 20min",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 960,
+                        "open": 960
+                      }
+                    }
+                  }
+                }
+              },
+              "flossing teeth": {
+                "_uid": 47,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "flossing teeth",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;year_month": {
+                    "base": "accord45;year_month",
+                    "premises": {
+                      "accord45;year_month": {
+                        "divisor": 3,
+                        "need": "accord45;year_month",
+                        "nigh": 0,
+                        "open": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "mass traaining": {
+                "_kids": {
+                  "bike or stuff": {
+                    "_uid": 92,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "bike or stuff",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Saturday": {
+                            "need": "accord45;weekdays;Saturday"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "chest and arms (mon)": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "bi and triceps exercises": {
+                        "_is_expanded": false,
+                        "_uid": 130,
+                        "item_tag": "bi and triceps exercises",
+                        "mass": 1
+                      },
+                      "chest  exercises": {
+                        "_is_expanded": false,
+                        "_uid": 129,
+                        "item_tag": "chest  exercises",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 84,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "chest and arms (mon)",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Monday": {
+                            "need": "accord45;weekdays;Monday"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "core and squats": {
+                    "_uid": 179,
+                    "item_tag": "core and squats",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 482,
+                            "open": 482
+                          }
+                        }
+                      },
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Friday": {
+                            "need": "accord45;weekdays;Friday"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "core lower back": {
+                    "_uid": 86,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "core lower back",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Wednesday": {
+                            "need": "accord45;weekdays;Wednesday"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rest": {
+                    "_is_expanded": false,
+                    "_uid": 94,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "rest",
+                    "mass": 1,
+                    "reasonunits": {
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Sunday": {
+                            "need": "accord45;weekdays;Sunday"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "shoulders and upper back": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "shoulder exercises": {
+                        "_is_expanded": false,
+                        "_uid": 131,
+                        "item_tag": "shoulder exercises",
+                        "mass": 1
+                      },
+                      "upper back exercises": {
+                        "_is_expanded": false,
+                        "_uid": 132,
+                        "item_tag": "upper back exercises",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 82,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "shoulders and upper back",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Tuesday": {
+                            "need": "accord45;weekdays;Tuesday"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "squats hamstrings and calves": {
+                    "_uid": 90,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1.0
+                      }
+                    },
+                    "item_tag": "squats hamstrings and calves",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "accord45;day_minute": {
+                        "base": "accord45;day_minute",
+                        "premises": {
+                          "accord45;day_minute": {
+                            "need": "accord45;day_minute",
+                            "nigh": 480,
+                            "open": 480
+                          }
+                        }
+                      },
+                      "accord45;weekdays": {
+                        "base": "accord45;weekdays",
+                        "premises": {
+                          "accord45;weekdays;Thursday": {
+                            "need": "accord45;weekdays;Thursday"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 81,
+                "item_tag": "mass traaining",
+                "mass": 1
+              },
+              "morning multivitamin": {
+                "_uid": 3,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "morning multivitamin",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "night multivitamin": {
+                "_uid": 230,
+                "item_tag": "night multivitamin",
+                "mass": 1,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 1080,
+                        "open": 1080
+                      }
+                    }
+                  }
+                }
+              },
+              "shampooing": {
+                "_uid": 39,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "shampooing",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              },
+              "straight back for 45 secs": {
+                "_uid": 57,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "straight back for 45 secs",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "trim beard": {
+                "_uid": 73,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "trim beard",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 540,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Monday": {
+                        "need": "accord45;weekdays;Monday"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 147,
+            "item_tag": "exercise",
+            "mass": 1
+          },
+          "keep up with friends": {
+            "_is_expanded": false,
+            "_uid": 220,
+            "item_tag": "keep up with friends",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Interweb": {
+                "base": "accord45;Interweb",
+                "premises": {
+                  "accord45;Interweb;Faaceboook": {
+                    "need": "accord45;Interweb;Faaceboook"
+                  }
+                }
+              }
+            }
+          },
+          "responsible for kids": {
+            "_is_expanded": false,
+            "_kids": {
+              "clip fingernails": {
+                "_uid": 23,
+                "awardlinks": {
+                  "America": {
+                    "awardee_title": "America",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "clip fingernails",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland OR": {
+                        "need": "accord45;Nation-States;USA;Portland OR"
+                      }
+                    }
+                  },
+                  "accord45;ced_week": {
+                    "base": "accord45;ced_week",
+                    "premises": {
+                      "accord45;ced_week": {
+                        "divisor": 2,
+                        "need": "accord45;ced_week",
+                        "nigh": 1,
+                        "open": 1
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 241,
+                        "open": 240
+                      }
+                    }
+                  },
+                  "accord45;weekdays": {
+                    "base": "accord45;weekdays",
+                    "premises": {
+                      "accord45;weekdays;Friday": {
+                        "need": "accord45;weekdays;Friday"
+                      }
+                    }
+                  }
+                }
+              },
+              "get rid of toy get new toy": {
+                "_uid": 43,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1.0
+                  }
+                },
+                "item_tag": "get rid of toy get new toy",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland OR": {
+                        "need": "accord45;Nation-States;USA;Portland OR"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 541,
+                        "open": 540
+                      }
+                    }
+                  },
+                  "accord45;year_month": {
+                    "base": "accord45;year_month",
+                    "premises": {
+                      "accord45;year_month": {
+                        "divisor": 2,
+                        "need": "accord45;year_month",
+                        "nigh": 0,
+                        "open": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "going to get them": {
+                "_uid": 145,
+                "item_tag": "going to get them",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "accord45;Nation-States": {
+                    "base": "accord45;Nation-States",
+                    "premises": {
+                      "accord45;Nation-States;USA;Portland OR": {
+                        "need": "accord45;Nation-States;USA;Portland OR"
+                      }
+                    }
+                  },
+                  "accord45;day_minute": {
+                    "base": "accord45;day_minute",
+                    "premises": {
+                      "accord45;day_minute": {
+                        "need": "accord45;day_minute",
+                        "nigh": 1005,
+                        "open": 1005
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 144,
+            "item_tag": "responsible for kids",
+            "mass": 1,
+            "reasonunits": {
+              "accord45;Nation-States": {
+                "base": "accord45;Nation-States",
+                "premises": {
+                  "accord45;Nation-States;USA;Portland OR": {
+                    "need": "accord45;Nation-States;USA;Portland OR"
+                  }
+                }
+              }
+            }
+          },
+          "say hi to birds": {
+            "_uid": 7,
+            "awardlinks": {
+              ";Family": {
+                "awardee_title": ";Family",
+                "give_force": 1.0,
+                "take_force": 1.0
+              }
+            },
+            "item_tag": "say hi to birds",
+            "mass": 1,
+            "pledge": true,
+            "reasonunits": {
+              "accord45;Moods": {
+                "base": "accord45;Moods",
+                "premises": {
+                  "accord45;Moods;Bllod Meridan by Cormac": {
+                    "need": "accord45;Moods;Bllod Meridan by Cormac"
+                  }
+                }
+              },
+              "accord45;day_minute": {
+                "base": "accord45;day_minute",
+                "premises": {
+                  "accord45;day_minute": {
+                    "need": "accord45;day_minute",
+                    "nigh": 425,
+                    "open": 420
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 2,
+        "item_tag": "casa",
+        "mass": 1
+      },
+      "ced_day": {
+        "begin": 0,
+        "close": 80000,
+        "item_tag": "ced_day",
+        "mass": 40
+      },
+      "ced_week": {
+        "begin": 0,
+        "close": 110000,
+        "item_tag": "ced_week",
+        "mass": 40
+      },
+      "ced_year": {
+        "begin": 0,
+        "close": 2100,
+        "item_tag": "ced_year",
+        "mass": 40
+      },
+      "day_hour": {
+        "begin": 0,
+        "close": 23,
+        "item_tag": "day_hour",
+        "mass": 40
+      },
+      "day_minute": {
+        "begin": 0,
+        "close": 1439,
+        "factunits": {
+          "accord45;day_minute": {
+            "base": "accord45;day_minute",
+            "fnigh": 59,
+            "fopen": 5,
+            "pick": "accord45;day_minute"
+          }
+        },
+        "item_tag": "day_minute",
+        "mass": 40
+      },
+      "month_day": {
+        "begin": 1,
+        "close": 31,
+        "item_tag": "month_day",
+        "mass": 40
+      },
+      "month_week": {
+        "_kids": {
+          "1st week": {
+            "gogo_want": 1,
+            "item_tag": "1st week",
+            "mass": 40,
+            "stop_want": 2
+          },
+          "2nd week": {
+            "gogo_want": 2,
+            "item_tag": "2nd week",
+            "mass": 40,
+            "stop_want": 3
+          },
+          "3rd week": {
+            "gogo_want": 3,
+            "item_tag": "3rd week",
+            "mass": 40,
+            "stop_want": 4
+          },
+          "4th week": {
+            "gogo_want": 4,
+            "item_tag": "4th week",
+            "mass": 40,
+            "stop_want": 5
+          },
+          "5th week": {
+            "gogo_want": 5,
+            "item_tag": "5th week",
+            "mass": 40,
+            "stop_want": 6
+          }
+        },
+        "begin": 1,
+        "close": 5,
+        "item_tag": "month_week",
+        "mass": 40
+      },
+      "weekdays": {
+        "_kids": {
+          "Friday": {
+            "item_tag": "Friday",
+            "mass": 40
+          },
+          "Monday": {
+            "item_tag": "Monday",
+            "mass": 20
+          },
+          "Saturday": {
+            "item_tag": "Saturday",
+            "mass": 50
+          },
+          "Sunday": {
+            "item_tag": "Sunday",
+            "mass": 20
+          },
+          "Thursday": {
+            "item_tag": "Thursday",
+            "mass": 30
+          },
+          "Tuesday": {
+            "item_tag": "Tuesday",
+            "mass": 20
+          },
+          "Wednesday": {
+            "item_tag": "Wednesday",
+            "mass": 20
+          }
+        },
+        "item_tag": "weekdays",
+        "mass": 40
+      },
+      "year_month": {
+        "_kids": {
+          "April": {
+            "gogo_want": 4,
+            "item_tag": "April",
+            "mass": 40,
+            "stop_want": 5
+          },
+          "August": {
+            "gogo_want": 8,
+            "item_tag": "August",
+            "mass": 40,
+            "stop_want": 9
+          },
+          "December": {
+            "gogo_want": 12,
+            "item_tag": "December",
+            "mass": 40,
+            "stop_want": 13
+          },
+          "February": {
+            "gogo_want": 2,
+            "item_tag": "February",
+            "mass": 40,
+            "stop_want": 3
+          },
+          "January": {
+            "gogo_want": 1,
+            "item_tag": "January",
+            "mass": 40,
+            "stop_want": 2
+          },
+          "July": {
+            "gogo_want": 7,
+            "item_tag": "July",
+            "mass": 40,
+            "stop_want": 8
+          },
+          "June": {
+            "gogo_want": 6,
+            "item_tag": "June",
+            "mass": 40,
+            "stop_want": 7
+          },
+          "March": {
+            "gogo_want": 3,
+            "item_tag": "March",
+            "mass": 40,
+            "stop_want": 4
+          },
+          "May": {
+            "gogo_want": 5,
+            "item_tag": "May",
+            "mass": 40,
+            "stop_want": 6
+          },
+          "November": {
+            "gogo_want": 11,
+            "item_tag": "November",
+            "mass": 40,
+            "stop_want": 12
+          },
+          "October": {
+            "gogo_want": 10,
+            "item_tag": "October",
+            "mass": 40,
+            "stop_want": 11
+          },
+          "September": {
+            "gogo_want": 9,
+            "item_tag": "September",
+            "mass": 40,
+            "stop_want": 10
+          }
+        },
+        "begin": 1,
+        "close": 13,
+        "item_tag": "year_month",
+        "mass": 40
+      },
+      "year_week": {
+        "begin": 0,
+        "close": 52,
+        "item_tag": "year_week",
+        "mass": 40
+      }
+    },
+    "_uid": 1,
+    "factunits": {
+      "accord45;day_hour": {
+        "base": "accord45;day_hour",
+        "fnigh": 23,
+        "fopen": 0,
+        "pick": "accord45;day_hour"
+      },
+      "accord45;day_minute": {
+        "base": "accord45;day_minute",
+        "fnigh": 59,
+        "fopen": 0,
+        "pick": "accord45;day_minute"
+      }
+    },
+    "item_tag": "accord45",
+    "mass": 1
+  },
+  "max_tree_traverse": 2,
+  "originunit": {
+    "_originholds": {}
+  },
+  "owner_name": "Yao",
+  "penny": 1,
+  "respect_bit": 1,
+  "tally": null
+}

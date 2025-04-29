@@ -1,8 +1,8 @@
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic.bud_tool import (
+from src.a06_bud_logic._utils.str_helpers import (
+    budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    budunit_str,
 )
 from src.a08_bud_atom_logic.atom_config import (
     atom_insert,
