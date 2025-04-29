@@ -1,6 +1,6 @@
 from src.a00_data_toolboxs.file_toolbox import create_path, set_dir
-from src.a17_idea_logic.examples.idea_env import (
-    idea_env_setup_cleanup,
+from src.a17_idea_logic._utils.env_utils import (
+    env_dir_setup_cleanup,
     idea_fisc_mstr_dir,
 )
 from src.a17_idea_logic.idea_db_tool import (
@@ -25,7 +25,7 @@ from os.path import exists as os_path_exists
 from numpy import nan as numpy_nan, float64
 
 
-def test_append_df_to_excel_CreatesSheet(idea_env_setup_cleanup):
+def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
     # ESTABLISH
     test_file = create_path(idea_fisc_mstr_dir(), "test.xlsx")
     append_data = {
@@ -53,7 +53,7 @@ def test_append_df_to_excel_CreatesSheet(idea_env_setup_cleanup):
     assert rows == expected_rows
 
 
-def test_append_df_to_excel_AppendsToSheet(idea_env_setup_cleanup):
+def test_append_df_to_excel_AppendsToSheet(env_dir_setup_cleanup):
     # ESTABLISH
     set_dir(idea_fisc_mstr_dir())
     test_file = create_path(idea_fisc_mstr_dir(), "test.xlsx")
@@ -147,7 +147,7 @@ def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_datafram
 
 
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     env_dir = idea_fisc_mstr_dir()
@@ -172,7 +172,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
 
 
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     env_dir = idea_fisc_mstr_dir()
@@ -200,7 +200,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     assert len(x_sheet_names) == 2
 
 
-def test_sheet_exists_ReturnsObj_Scenario1(idea_env_setup_cleanup):
+def test_sheet_exists_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = idea_fisc_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
@@ -369,7 +369,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     assert os_path_exists(c_file_path)
 
 
-def test_if_nan_return_None_ReturnsObj(idea_env_setup_cleanup):
+def test_if_nan_return_None_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
@@ -506,7 +506,7 @@ def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
 
 
 def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
@@ -557,7 +557,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
 
 
 def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH: A workbook with no matching headers
     excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")

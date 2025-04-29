@@ -12,8 +12,8 @@ from src.a18_etl_toolbox.tran_path import (
     create_otx_event_pidgin_path as otx_event_pidgin_path,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame

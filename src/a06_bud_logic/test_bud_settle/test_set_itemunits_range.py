@@ -1,9 +1,8 @@
-from src.a06_bud_logic.examples.example_buds import (
-    get_budunit_with_4_levels_and_2reasons,
-)
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from pytest import raises as pytest_raises
+from src.a06_bud_logic._utils.example_buds import (
+    get_budunit_with_4_levels_and_2reasons,
+)
 
 
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():

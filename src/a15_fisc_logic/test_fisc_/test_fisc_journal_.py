@@ -13,8 +13,8 @@ from src.a00_data_toolboxs.db_toolbox import (
     check_table_column_existence,
 )
 from src.a15_fisc_logic.fisc import FiscUnit, fiscunit_shop
-from src.a15_fisc_logic.examples.fisc_env import (
-    get_test_fisc_mstr_dir,
+from src.a15_fisc_logic._utils.env_utils import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -24,15 +24,13 @@ from pytest import raises as pytest_raises
 def test_FiscUnit_get_journal_db_path_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = FiscUnit(
-        fisc_tag=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
-    )
+    accord_fisc = FiscUnit(fisc_tag=accord45_str, fisc_mstr_dir=get_module_temp_dir())
 
     # WHEN
     x_journal_db_path = accord_fisc.get_journal_db_path()
 
     # THEN
-    fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
+    fiscs_dir = create_path(get_module_temp_dir(), "fiscs")
     x_fisc_dir = create_path(fiscs_dir, accord45_str)
     journal_filename = "journal.db"
     assert x_journal_db_path == create_path(x_fisc_dir, journal_filename)
@@ -44,7 +42,7 @@ def test_FiscUnit_create_journal_db_CreatesDBIfDoesNotExist(
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        fisc_tag=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+        fisc_tag=accord45_str, fisc_mstr_dir=get_module_temp_dir()
     )
     assert os_path_exists(accord_fisc.get_journal_db_path())
     delete_dir(accord_fisc.get_journal_db_path())
@@ -63,7 +61,7 @@ def test_FiscUnit_create_journal_db_DoesNotOverWriteDBIfExists(
     # ESTABLISH
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
-        fisc_tag=accord45_str, fisc_mstr_dir=get_test_fisc_mstr_dir()
+        fisc_tag=accord45_str, fisc_mstr_dir=get_module_temp_dir()
     )
     delete_dir(dir=accord_fisc.get_journal_db_path())  # clear out any treasury.db file
     accord_fisc._create_journal_db()
@@ -92,7 +90,7 @@ def test_FiscUnit_create_journal_db_CanCreateInMemory(env_dir_setup_cleanup):
     accord45_str = "accord45"
     accord_fisc = fiscunit_shop(
         fisc_tag=accord45_str,
-        fisc_mstr_dir=get_test_fisc_mstr_dir(),
+        fisc_mstr_dir=get_module_temp_dir(),
         in_memory_journal=True,
     )
 
@@ -112,7 +110,7 @@ def test_FiscUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH create fisc
-    x_fisc = FiscUnit("accord23", get_test_fisc_mstr_dir())
+    x_fisc = FiscUnit("accord23", get_module_temp_dir())
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         check_connection(x_fisc.get_journal_conn())
@@ -127,7 +125,7 @@ def test_FiscUnit_get_journal_conn_CreatesTreasuryDBIfDoesNotExist(
 
 def test_fisc_set_fisc_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # ESTABLISH create fisc
-    x_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+    x_fisc = fiscunit_shop("accord23", get_module_temp_dir())
 
     # WHEN
     x_fisc._set_fisc_dirs(in_memory_journal=True)

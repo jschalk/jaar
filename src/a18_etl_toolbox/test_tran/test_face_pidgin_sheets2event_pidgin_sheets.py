@@ -9,7 +9,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_face_pidgin_to_event_pidgins,
     etl_otz_face_pidgins_df_to_otz_event_pidgins_df,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
@@ -17,7 +20,7 @@ from os.path import exists as os_path_exists
 
 def test_etl_face_pidgin_to_event_pidgins_Scenario0_Nofile(env_dir_setup_cleanup):
     # ESTABLISH
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_str = "Sue"
     sue_face_dir = create_path(faces_dir, sue_str)
     name_agg_str = "name_agg"
@@ -76,7 +79,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario1_3Events(env_dir_setup_cleanu
     name_rows = [name0, name1, name2, name3]
     sue_name_df = DataFrame(name_rows, columns=name_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event3_dir = create_path(sue_dir, event3)
     event7_dir = create_path(sue_dir, event7)
@@ -133,7 +136,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario2_label(env_dir_setup_cleanup)
     label_rows = [label0, label1, label2]
     sue_label_agg_df = DataFrame(label_rows, columns=label_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)
@@ -181,7 +184,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_tag(env_dir_setup_cleanup):
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)
@@ -230,7 +233,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     e1_road_rows = [e1_road0, e1_road1, e1_road2]
     sue_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event7_dir = create_path(sue_dir, event7)
     event9_dir = create_path(sue_dir, event9)
@@ -285,7 +288,7 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     z1_road3 = [zia_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     zia_road_agg_df = DataFrame([z1_road3], columns=road_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     zia_dir = create_path(faces_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)

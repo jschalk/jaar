@@ -462,8 +462,8 @@ def _get_ote1_max_past_event_int(
         return ote1_owner_dict.get(max_past_timepoint)
 
 
-def get_test_fisc_mstr_dir():
-    return "src/a15_fisc_logic/examples/fisc_mstr"
+def get_module_temp_dir():
+    return "src/a15_fisc_logic/_utils/fisc_mstr"
 
 
 def fiscunit_shop(
@@ -481,7 +481,7 @@ def fiscunit_shop(
     if timeline is None:
         timeline = timelineunit_shop()
     if fisc_mstr_dir is None:
-        fisc_mstr_dir = get_test_fisc_mstr_dir()
+        fisc_mstr_dir = get_module_temp_dir()
     if not job_listen_rotations:
         job_listen_rotations = get_default_job_listen_count()
     x_fiscunit = FiscUnit(

@@ -18,7 +18,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_otz_event_ideas_to_inz_events,
     get_most_recent_event_int,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
@@ -55,7 +58,7 @@ def test_etl_otz_event_ideas_to_inz_events_Scenario0_NoPidginUnit():
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     x_event_pidgins = {}
-    x_otz_dir = create_path(get_test_etl_dir(), "syntax_otz")
+    x_otz_dir = create_path(get_module_temp_dir(), "syntax_otz")
     sue_otz_dir = create_path(x_otz_dir, sue_otx)
     otz_e3_dir = create_path(sue_otz_dir, event3)
     yell_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
@@ -119,7 +122,7 @@ def test_etl_otz_event_ideas_to_inz_events_Scenario1_MultpleFaceNames_CreatesEve
     e9_accord23_df = DataFrame([zia1, zia2, zia3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     x_event_pidgins = {sue_otx: {event3}, zia_otx: {event7, event9}}
-    x_otz_dir = create_path(get_test_etl_dir(), "syntax_otz")
+    x_otz_dir = create_path(get_module_temp_dir(), "syntax_otz")
     sue_otz_dir = create_path(x_otz_dir, sue_otx)
     zia_otz_dir = create_path(x_otz_dir, zia_otx)
     otz_e3_dir = create_path(sue_otz_dir, event3)

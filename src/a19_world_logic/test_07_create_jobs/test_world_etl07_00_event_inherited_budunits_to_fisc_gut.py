@@ -2,8 +2,8 @@ from src.a00_data_toolboxs.file_toolbox import create_path, save_file, open_file
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path, create_gut_path
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists

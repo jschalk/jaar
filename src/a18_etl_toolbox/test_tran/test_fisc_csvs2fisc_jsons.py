@@ -23,7 +23,10 @@ from src.a18_etl_toolbox.transformers import (
     create_fisc_prime_tables,
     etl_fisc_agg_tables_to_fisc_jsons,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
@@ -34,7 +37,7 @@ def test_etl_fisc_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscTag(
     # ESTABLISH
     accord23_str = "accord23"
     accord45_str = "accord45"
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     fiscunit_agg_tablename = f"{fiscunit_str()}_agg"
 
     with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -74,7 +77,7 @@ VALUES ('{accord23_str}'), ('{accord45_str}')
 #     # ESTABLISH
 #     accord23_str = "accord23"
 #     accord45_str = "accord45"
-#     fisc_mstr_dir = get_test_etl_dir()
+#     fisc_mstr_dir = get_module_temp_dir()
 #     x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
 #     x_cols = FiscPrimeColumnsRef()
 #     a45_fund_coin = 3

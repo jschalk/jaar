@@ -8,7 +8,10 @@ from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
     etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
@@ -36,11 +39,11 @@ def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_nam
     name_rows = [name0, name1, name2, name3]
     e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
-    yell_dir = create_path(get_test_etl_dir(), "yell")
+    yell_dir = create_path(get_module_temp_dir(), "yell")
     agg_pidgin_path = create_yell_pidgin_path(yell_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "syntax_otz")
+    faces_dir = create_path(get_module_temp_dir(), "syntax_otz")
 
     # WHEN
     etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir, faces_dir)
@@ -121,14 +124,14 @@ def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
-    yell_dir = create_path(get_test_etl_dir(), "yell")
+    yell_dir = create_path(get_module_temp_dir(), "yell")
     agg_pidgin_path = create_yell_pidgin_path(yell_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
     upsert_sheet(agg_pidgin_path, tag_agg_str, e1_tag_agg_df)
 
-    faces_dir = create_path(get_test_etl_dir(), "syntax_otz")
+    faces_dir = create_path(get_module_temp_dir(), "syntax_otz")
 
     # WHEN
     etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir, faces_dir)

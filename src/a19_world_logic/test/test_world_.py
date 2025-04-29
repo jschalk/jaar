@@ -6,8 +6,8 @@ from src.a19_world_logic.world import (
     WorldUnit,
     worldunit_shop,
 )
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists

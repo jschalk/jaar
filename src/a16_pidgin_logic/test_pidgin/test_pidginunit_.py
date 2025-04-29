@@ -43,7 +43,7 @@ from src.a16_pidgin_logic.pidgin import (
     pidginable_class_types,
     pidginable_atom_args,
 )
-from src.a16_pidgin_logic.examples.example_pidgins import (
+from src.a16_pidgin_logic._utils.example_pidgins import (
     get_invalid_namemap,
     get_invalid_labelmap,
     get_invalid_tagmap,

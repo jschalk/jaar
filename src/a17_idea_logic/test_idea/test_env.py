@@ -1,20 +1,20 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a17_idea_logic.examples.idea_env import (
-    src_idea_dir,
+from src.a17_idea_logic._utils.env_utils import (
+    src_module_dir,
     idea_examples_dir,
-    src_idea_examples_dir,
+    get_module_temp_dir,
     idea_fiscs_dir,
 )
 
 
-def test_src_idea_examples_dir_ReturnsObj():
+def test_get_module_temp_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert src_idea_examples_dir() == create_path(src_idea_dir(), "examples")
+    assert get_module_temp_dir() == create_path(src_module_dir(), "_utils")
 
 
 def test_idea_examples_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert idea_examples_dir() == create_path(src_idea_examples_dir(), "idea_examples")
+    assert idea_examples_dir() == create_path(get_module_temp_dir(), "idea_examples")
 
 
 def test_idea_fiscs_dir_ReturnsObj():

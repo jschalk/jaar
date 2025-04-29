@@ -7,7 +7,10 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.transformers import etl_inz_face_ideas_to_csv_files
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame
 from os.path import exists as os_path_exists
 
@@ -33,7 +36,7 @@ def test_etl_inz_face_ideas_to_csv_files_Scenario0(env_dir_setup_cleanup):
     sue3 = [sue_inx, event7, accord23_str, yao_inx, yao_inx]
     sue_accord23_df = DataFrame([sue0, sue1, sue2, sue3], columns=br00011_columns)
     inx_str = "inx"
-    x_syntax_inz_dir = create_path(get_test_etl_dir(), "inz")
+    x_syntax_inz_dir = create_path(get_module_temp_dir(), "inz")
     sue_inz_dir = create_path(x_syntax_inz_dir, sue_inx)
     br00011_excel_filename = "br00011.xlsx"
     br00011_excel_path = create_path(sue_inz_dir, br00011_excel_filename)

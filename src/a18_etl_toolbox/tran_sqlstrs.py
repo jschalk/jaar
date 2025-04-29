@@ -7,6 +7,30 @@ from src.a17_idea_logic.idea_config import (
 from sqlite3 import Connection as sqlite3_Connection
 
 
+CREATE_PIDLAB_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDLAB_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDNAM_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDNAM_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDROA_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDROA_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDTAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDTAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+
+CREATE_FISCCASH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISCCASH_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISCDEAL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISCDEAL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISCHOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISCHOUR_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISCMONT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISCMONT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISCWEEK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISCWEEK_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISCOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISCOFFI_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISCUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+
 CREATE_BUDMEMB_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
 CREATE_BUDMEMB_PUT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"""
 CREATE_BUDMEMB_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"""
@@ -48,45 +72,34 @@ CREATE_BUDUNIT_PUT_RAW_SQLSTR = "CREATE TABLE IF NOT EXISTS budunit_put_raw (ide
 CREATE_BUDUNIT_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name_ERASE TEXT)"""
 CREATE_BUDUNIT_DEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name_ERASE TEXT, error_message TEXT)"""
 
-CREATE_FISC_CASHBOOK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISC_CASHBOOK_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISC_DEALUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISC_DEALUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
-CREATE_FISC_TIMELINE_HOUR_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
-CREATE_FISC_TIMELINE_MONTH_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
-CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
-CREATE_FISC_TIMELINE_WEEKDAY_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
-CREATE_FISC_TIMEOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_tag TEXT, offi_time INTEGER)"""
-CREATE_FISC_TIMEOFFI_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISCUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 
-CREATE_PIDGIN_LABEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDGIN_LABEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDGIN_NAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDGIN_NAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDGIN_ROAD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDGIN_ROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDGIN_TAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDGIN_TAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label_raw": CREATE_PIDLAB_RAW_SQLSTR,
+        "pidgin_label_agg": CREATE_PIDLAB_AGG_SQLSTR,
+        "pidgin_name_raw": CREATE_PIDNAM_RAW_SQLSTR,
+        "pidgin_name_agg": CREATE_PIDNAM_AGG_SQLSTR,
+        "pidgin_road_raw": CREATE_PIDROA_RAW_SQLSTR,
+        "pidgin_road_agg": CREATE_PIDROA_AGG_SQLSTR,
+        "pidgin_tag_raw": CREATE_PIDTAG_RAW_SQLSTR,
+        "pidgin_tag_agg": CREATE_PIDTAG_AGG_SQLSTR,
+    }
 
 
 def get_fisc_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "fisc_cashbook_agg": CREATE_FISC_CASHBOOK_AGG_SQLSTR,
-        "fisc_cashbook_raw": CREATE_FISC_CASHBOOK_RAW_SQLSTR,
-        "fisc_dealunit_agg": CREATE_FISC_DEALUNIT_AGG_SQLSTR,
-        "fisc_dealunit_raw": CREATE_FISC_DEALUNIT_RAW_SQLSTR,
-        "fisc_timeline_hour_agg": CREATE_FISC_TIMELINE_HOUR_AGG_SQLSTR,
-        "fisc_timeline_hour_raw": CREATE_FISC_TIMELINE_HOUR_RAW_SQLSTR,
-        "fisc_timeline_month_agg": CREATE_FISC_TIMELINE_MONTH_AGG_SQLSTR,
-        "fisc_timeline_month_raw": CREATE_FISC_TIMELINE_MONTH_RAW_SQLSTR,
-        "fisc_timeline_weekday_agg": CREATE_FISC_TIMELINE_WEEKDAY_AGG_SQLSTR,
-        "fisc_timeline_weekday_raw": CREATE_FISC_TIMELINE_WEEKDAY_RAW_SQLSTR,
-        "fisc_timeoffi_agg": CREATE_FISC_TIMEOFFI_AGG_SQLSTR,
-        "fisc_timeoffi_raw": CREATE_FISC_TIMEOFFI_RAW_SQLSTR,
+        "fisc_cashbook_agg": CREATE_FISCCASH_AGG_SQLSTR,
+        "fisc_cashbook_raw": CREATE_FISCCASH_RAW_SQLSTR,
+        "fisc_dealunit_agg": CREATE_FISCDEAL_AGG_SQLSTR,
+        "fisc_dealunit_raw": CREATE_FISCDEAL_RAW_SQLSTR,
+        "fisc_timeline_hour_agg": CREATE_FISCHOUR_AGG_SQLSTR,
+        "fisc_timeline_hour_raw": CREATE_FISCHOUR_RAW_SQLSTR,
+        "fisc_timeline_month_agg": CREATE_FISCMONT_AGG_SQLSTR,
+        "fisc_timeline_month_raw": CREATE_FISCMONT_RAW_SQLSTR,
+        "fisc_timeline_weekday_agg": CREATE_FISCWEEK_AGG_SQLSTR,
+        "fisc_timeline_weekday_raw": CREATE_FISCWEEK_RAW_SQLSTR,
+        "fisc_timeoffi_agg": CREATE_FISCOFFI_AGG_SQLSTR,
+        "fisc_timeoffi_raw": CREATE_FISCOFFI_RAW_SQLSTR,
         "fiscunit_agg": CREATE_FISCUNIT_AGG_SQLSTR,
         "fiscunit_raw": CREATE_FISCUNIT_RAW_SQLSTR,
     }
@@ -137,19 +150,6 @@ def get_bud_prime_create_table_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
-    return {
-        "pidgin_label_raw": CREATE_PIDGIN_LABEL_RAW_SQLSTR,
-        "pidgin_label_agg": CREATE_PIDGIN_LABEL_AGG_SQLSTR,
-        "pidgin_name_raw": CREATE_PIDGIN_NAME_RAW_SQLSTR,
-        "pidgin_name_agg": CREATE_PIDGIN_NAME_AGG_SQLSTR,
-        "pidgin_road_raw": CREATE_PIDGIN_ROAD_RAW_SQLSTR,
-        "pidgin_road_agg": CREATE_PIDGIN_ROAD_AGG_SQLSTR,
-        "pidgin_tag_raw": CREATE_PIDGIN_TAG_RAW_SQLSTR,
-        "pidgin_tag_agg": CREATE_PIDGIN_TAG_AGG_SQLSTR,
-    }
-
-
 def create_pidgin_prime_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_pidgin_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
@@ -173,6 +173,84 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         col_types = get_idea_sqlite_types()
         create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
 
+
+PIDLAB_INCONSISTENCY_SQLSTR = """SELECT otx_label
+FROM pidgin_label_raw
+GROUP BY otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDNAM_INCONSISTENCY_SQLSTR = """SELECT otx_name
+FROM pidgin_name_raw
+GROUP BY otx_name
+HAVING MIN(inx_name) != MAX(inx_name)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDROA_INCONSISTENCY_SQLSTR = """SELECT otx_road
+FROM pidgin_road_raw
+GROUP BY otx_road
+HAVING MIN(inx_road) != MAX(inx_road)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+PIDTAG_INCONSISTENCY_SQLSTR = """SELECT otx_tag
+FROM pidgin_tag_raw
+GROUP BY otx_tag
+HAVING MIN(inx_tag) != MAX(inx_tag)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+"""
+
+FISCCASH_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, acct_name, tran_time
+FROM fisc_cashbook_raw
+GROUP BY fisc_tag, owner_name, acct_name, tran_time
+HAVING MIN(amount) != MAX(amount)
+"""
+FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, deal_time
+FROM fisc_dealunit_raw
+GROUP BY fisc_tag, owner_name, deal_time
+HAVING MIN(quota) != MAX(quota)
+    OR MIN(celldepth) != MAX(celldepth)
+"""
+FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_minute
+FROM fisc_timeline_hour_raw
+GROUP BY fisc_tag, cumlative_minute
+HAVING MIN(hour_tag) != MAX(hour_tag)
+"""
+FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_day
+FROM fisc_timeline_month_raw
+GROUP BY fisc_tag, cumlative_day
+HAVING MIN(month_tag) != MAX(month_tag)
+"""
+FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, weekday_order
+FROM fisc_timeline_weekday_raw
+GROUP BY fisc_tag, weekday_order
+HAVING MIN(weekday_tag) != MAX(weekday_tag)
+"""
+FISCOFFI_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, offi_time
+FROM fisc_timeoffi_raw
+GROUP BY fisc_tag, offi_time
+HAVING 1=2
+"""
+FISCUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag
+FROM fiscunit_raw
+GROUP BY fisc_tag
+HAVING MIN(timeline_tag) != MAX(timeline_tag)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+    OR MIN(bridge) != MAX(bridge)
+    OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
+"""
 
 BUDMEMB_INCONSISTENCY_SQLSTR = """SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label
 FROM bud_acct_membership_put_raw
@@ -249,82 +327,26 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
     OR MIN(respect_bit) != MAX(respect_bit)
 """
 
-FISCCASH_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, acct_name, tran_time
-FROM fisc_cashbook_raw
-GROUP BY fisc_tag, owner_name, acct_name, tran_time
-HAVING MIN(amount) != MAX(amount)
-"""
-FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, deal_time
-FROM fisc_dealunit_raw
-GROUP BY fisc_tag, owner_name, deal_time
-HAVING MIN(quota) != MAX(quota)
-    OR MIN(celldepth) != MAX(celldepth)
-"""
-FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_minute
-FROM fisc_timeline_hour_raw
-GROUP BY fisc_tag, cumlative_minute
-HAVING MIN(hour_tag) != MAX(hour_tag)
-"""
-FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_day
-FROM fisc_timeline_month_raw
-GROUP BY fisc_tag, cumlative_day
-HAVING MIN(month_tag) != MAX(month_tag)
-"""
-FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, weekday_order
-FROM fisc_timeline_weekday_raw
-GROUP BY fisc_tag, weekday_order
-HAVING MIN(weekday_tag) != MAX(weekday_tag)
-"""
-FISCOFFI_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, offi_time
-FROM fisc_timeoffi_raw
-GROUP BY fisc_tag, offi_time
-HAVING 1=2
-"""
-FISCUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag
-FROM fiscunit_raw
-GROUP BY fisc_tag
-HAVING MIN(timeline_tag) != MAX(timeline_tag)
-    OR MIN(c400_number) != MAX(c400_number)
-    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
-    OR MIN(monthday_distortion) != MAX(monthday_distortion)
-    OR MIN(fund_coin) != MAX(fund_coin)
-    OR MIN(penny) != MAX(penny)
-    OR MIN(respect_bit) != MAX(respect_bit)
-    OR MIN(bridge) != MAX(bridge)
-    OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
-"""
-PIDGIN_LABEL_INCONSISTENCY_SQLSTR = """SELECT otx_label
-FROM pidgin_label_raw
-GROUP BY otx_label
-HAVING MIN(inx_label) != MAX(inx_label)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-"""
-PIDGIN_NAME_INCONSISTENCY_SQLSTR = """SELECT otx_name
-FROM pidgin_name_raw
-GROUP BY otx_name
-HAVING MIN(inx_name) != MAX(inx_name)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-"""
-PIDGIN_ROAD_INCONSISTENCY_SQLSTR = """SELECT otx_road
-FROM pidgin_road_raw
-GROUP BY otx_road
-HAVING MIN(inx_road) != MAX(inx_road)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-"""
-PIDGIN_TAG_INCONSISTENCY_SQLSTR = """SELECT otx_tag
-FROM pidgin_tag_raw
-GROUP BY otx_tag
-HAVING MIN(inx_tag) != MAX(inx_tag)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-"""
+
+def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDLAB_INCONSISTENCY_SQLSTR,
+        "pidgin_name": PIDNAM_INCONSISTENCY_SQLSTR,
+        "pidgin_road": PIDROA_INCONSISTENCY_SQLSTR,
+        "pidgin_tag": PIDTAG_INCONSISTENCY_SQLSTR,
+    }
+
+
+def get_fisc_inconsistency_sqlstrs() -> dict[str, str]:
+    return {
+        "fiscunit": FISCUNIT_INCONSISTENCY_SQLSTR,
+        "fisc_dealunit": FISCDEAL_INCONSISTENCY_SQLSTR,
+        "fisc_cashbook": FISCCASH_INCONSISTENCY_SQLSTR,
+        "fisc_timeline_hour": FISCHOUR_INCONSISTENCY_SQLSTR,
+        "fisc_timeline_month": FISCMONT_INCONSISTENCY_SQLSTR,
+        "fisc_timeline_weekday": FISCWEEK_INCONSISTENCY_SQLSTR,
+        "fisc_timeoffi": FISCOFFI_INCONSISTENCY_SQLSTR,
+    }
 
 
 def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
@@ -342,26 +364,169 @@ def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
-    return {
-        "pidgin_label": PIDGIN_LABEL_INCONSISTENCY_SQLSTR,
-        "pidgin_name": PIDGIN_NAME_INCONSISTENCY_SQLSTR,
-        "pidgin_road": PIDGIN_ROAD_INCONSISTENCY_SQLSTR,
-        "pidgin_tag": PIDGIN_TAG_INCONSISTENCY_SQLSTR,
-    }
+PIDLAB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_label
+FROM pidgin_label_raw
+GROUP BY otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_label_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_label = pidgin_label_raw.otx_label
+;
+"""
+PIDNAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_name
+FROM pidgin_name_raw
+GROUP BY otx_name
+HAVING MIN(inx_name) != MAX(inx_name)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_name_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_name = pidgin_name_raw.otx_name
+;
+"""
+PIDROA_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_road
+FROM pidgin_road_raw
+GROUP BY otx_road
+HAVING MIN(inx_road) != MAX(inx_road)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_road_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_road = pidgin_road_raw.otx_road
+;
+"""
+PIDTAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT otx_tag
+FROM pidgin_tag_raw
+GROUP BY otx_tag
+HAVING MIN(inx_tag) != MAX(inx_tag)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_tag_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.otx_tag = pidgin_tag_raw.otx_tag
+;
+"""
 
-
-def get_fisc_inconsistency_sqlstrs() -> dict[str, str]:
-    return {
-        "fiscunit": FISCUNIT_INCONSISTENCY_SQLSTR,
-        "fisc_dealunit": FISCDEAL_INCONSISTENCY_SQLSTR,
-        "fisc_cashbook": FISCCASH_INCONSISTENCY_SQLSTR,
-        "fisc_timeline_hour": FISCHOUR_INCONSISTENCY_SQLSTR,
-        "fisc_timeline_month": FISCMONT_INCONSISTENCY_SQLSTR,
-        "fisc_timeline_weekday": FISCWEEK_INCONSISTENCY_SQLSTR,
-        "fisc_timeoffi": FISCOFFI_INCONSISTENCY_SQLSTR,
-    }
-
+FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag, owner_name, acct_name, tran_time
+FROM fisc_cashbook_raw
+GROUP BY fisc_tag, owner_name, acct_name, tran_time
+HAVING MIN(amount) != MAX(amount)
+)
+UPDATE fisc_cashbook_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fisc_cashbook_raw.fisc_tag
+    AND inconsistency_rows.owner_name = fisc_cashbook_raw.owner_name
+    AND inconsistency_rows.acct_name = fisc_cashbook_raw.acct_name
+    AND inconsistency_rows.tran_time = fisc_cashbook_raw.tran_time
+;
+"""
+FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag, owner_name, deal_time
+FROM fisc_dealunit_raw
+GROUP BY fisc_tag, owner_name, deal_time
+HAVING MIN(quota) != MAX(quota)
+    OR MIN(celldepth) != MAX(celldepth)
+)
+UPDATE fisc_dealunit_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fisc_dealunit_raw.fisc_tag
+    AND inconsistency_rows.owner_name = fisc_dealunit_raw.owner_name
+    AND inconsistency_rows.deal_time = fisc_dealunit_raw.deal_time
+;
+"""
+FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag, cumlative_minute
+FROM fisc_timeline_hour_raw
+GROUP BY fisc_tag, cumlative_minute
+HAVING MIN(hour_tag) != MAX(hour_tag)
+)
+UPDATE fisc_timeline_hour_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_raw.fisc_tag
+    AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_raw.cumlative_minute
+;
+"""
+FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag, cumlative_day
+FROM fisc_timeline_month_raw
+GROUP BY fisc_tag, cumlative_day
+HAVING MIN(month_tag) != MAX(month_tag)
+)
+UPDATE fisc_timeline_month_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fisc_timeline_month_raw.fisc_tag
+    AND inconsistency_rows.cumlative_day = fisc_timeline_month_raw.cumlative_day
+;
+"""
+FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag, weekday_order
+FROM fisc_timeline_weekday_raw
+GROUP BY fisc_tag, weekday_order
+HAVING MIN(weekday_tag) != MAX(weekday_tag)
+)
+UPDATE fisc_timeline_weekday_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fisc_timeline_weekday_raw.fisc_tag
+    AND inconsistency_rows.weekday_order = fisc_timeline_weekday_raw.weekday_order
+;
+"""
+FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag, offi_time
+FROM fisc_timeoffi_raw
+GROUP BY fisc_tag, offi_time
+HAVING 1=2
+)
+UPDATE fisc_timeoffi_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fisc_timeoffi_raw.fisc_tag
+    AND inconsistency_rows.offi_time = fisc_timeoffi_raw.offi_time
+;
+"""
+FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+SELECT fisc_tag
+FROM fiscunit_raw
+GROUP BY fisc_tag
+HAVING MIN(timeline_tag) != MAX(timeline_tag)
+    OR MIN(c400_number) != MAX(c400_number)
+    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
+    OR MIN(monthday_distortion) != MAX(monthday_distortion)
+    OR MIN(fund_coin) != MAX(fund_coin)
+    OR MIN(penny) != MAX(penny)
+    OR MIN(respect_bit) != MAX(respect_bit)
+    OR MIN(bridge) != MAX(bridge)
+    OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
+)
+UPDATE fiscunit_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.fisc_tag = fiscunit_raw.fisc_tag
+;
+"""
 
 BUDMEMB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label
@@ -626,176 +791,25 @@ GROUP BY face_name, event_int, fisc_tag, owner_name_ERASE
 ;
 """
 
-FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag, owner_name, acct_name, tran_time
-FROM fisc_cashbook_raw
-GROUP BY fisc_tag, owner_name, acct_name, tran_time
-HAVING MIN(amount) != MAX(amount)
-)
-UPDATE fisc_cashbook_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_cashbook_raw.fisc_tag
-    AND inconsistency_rows.owner_name = fisc_cashbook_raw.owner_name
-    AND inconsistency_rows.acct_name = fisc_cashbook_raw.acct_name
-    AND inconsistency_rows.tran_time = fisc_cashbook_raw.tran_time
-;
-"""
-FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag, owner_name, deal_time
-FROM fisc_dealunit_raw
-GROUP BY fisc_tag, owner_name, deal_time
-HAVING MIN(quota) != MAX(quota)
-    OR MIN(celldepth) != MAX(celldepth)
-)
-UPDATE fisc_dealunit_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_dealunit_raw.fisc_tag
-    AND inconsistency_rows.owner_name = fisc_dealunit_raw.owner_name
-    AND inconsistency_rows.deal_time = fisc_dealunit_raw.deal_time
-;
-"""
-FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag, cumlative_minute
-FROM fisc_timeline_hour_raw
-GROUP BY fisc_tag, cumlative_minute
-HAVING MIN(hour_tag) != MAX(hour_tag)
-)
-UPDATE fisc_timeline_hour_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_raw.fisc_tag
-    AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_raw.cumlative_minute
-;
-"""
-FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag, cumlative_day
-FROM fisc_timeline_month_raw
-GROUP BY fisc_tag, cumlative_day
-HAVING MIN(month_tag) != MAX(month_tag)
-)
-UPDATE fisc_timeline_month_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_timeline_month_raw.fisc_tag
-    AND inconsistency_rows.cumlative_day = fisc_timeline_month_raw.cumlative_day
-;
-"""
-FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag, weekday_order
-FROM fisc_timeline_weekday_raw
-GROUP BY fisc_tag, weekday_order
-HAVING MIN(weekday_tag) != MAX(weekday_tag)
-)
-UPDATE fisc_timeline_weekday_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_timeline_weekday_raw.fisc_tag
-    AND inconsistency_rows.weekday_order = fisc_timeline_weekday_raw.weekday_order
-;
-"""
-FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag, offi_time
-FROM fisc_timeoffi_raw
-GROUP BY fisc_tag, offi_time
-HAVING 1=2
-)
-UPDATE fisc_timeoffi_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_timeoffi_raw.fisc_tag
-    AND inconsistency_rows.offi_time = fisc_timeoffi_raw.offi_time
-;
-"""
-FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT fisc_tag
-FROM fiscunit_raw
-GROUP BY fisc_tag
-HAVING MIN(timeline_tag) != MAX(timeline_tag)
-    OR MIN(c400_number) != MAX(c400_number)
-    OR MIN(yr1_jan1_offset) != MAX(yr1_jan1_offset)
-    OR MIN(monthday_distortion) != MAX(monthday_distortion)
-    OR MIN(fund_coin) != MAX(fund_coin)
-    OR MIN(penny) != MAX(penny)
-    OR MIN(respect_bit) != MAX(respect_bit)
-    OR MIN(bridge) != MAX(bridge)
-    OR MIN(job_listen_rotations) != MAX(job_listen_rotations)
-)
-UPDATE fiscunit_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fiscunit_raw.fisc_tag
-;
-"""
-PIDGIN_LABEL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT otx_label
-FROM pidgin_label_raw
-GROUP BY otx_label
-HAVING MIN(inx_label) != MAX(inx_label)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-)
-UPDATE pidgin_label_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.otx_label = pidgin_label_raw.otx_label
-;
-"""
-PIDGIN_NAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT otx_name
-FROM pidgin_name_raw
-GROUP BY otx_name
-HAVING MIN(inx_name) != MAX(inx_name)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-)
-UPDATE pidgin_name_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.otx_name = pidgin_name_raw.otx_name
-;
-"""
-PIDGIN_ROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT otx_road
-FROM pidgin_road_raw
-GROUP BY otx_road
-HAVING MIN(inx_road) != MAX(inx_road)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-)
-UPDATE pidgin_road_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.otx_road = pidgin_road_raw.otx_road
-;
-"""
-PIDGIN_TAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
-SELECT otx_tag
-FROM pidgin_tag_raw
-GROUP BY otx_tag
-HAVING MIN(inx_tag) != MAX(inx_tag)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
-)
-UPDATE pidgin_tag_raw
-SET error_message = 'Inconsistent data'
-FROM inconsistency_rows
-WHERE inconsistency_rows.otx_tag = pidgin_tag_raw.otx_tag
-;
-"""
-
 
 def get_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     return {
-        "pidgin_label": PIDGIN_LABEL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_name": PIDGIN_NAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_road": PIDGIN_ROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_tag": PIDGIN_TAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_label": PIDLAB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_name": PIDNAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_road": PIDROA_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_tag": PIDTAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+    }
+
+
+def get_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    return {
+        "fiscunit": FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_dealunit": FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_cashbook": FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeline_hour": FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeline_month": FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeline_weekday": FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeoffi": FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
     }
 
 
@@ -814,17 +828,84 @@ def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
-    return {
-        "fiscunit": FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_dealunit": FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_cashbook": FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeline_hour": FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeline_month": FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeline_weekday": FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeoffi": FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-    }
+PIDLAB_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_label_agg (otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_label_raw
+WHERE error_message IS NULL
+GROUP BY otx_label
+;
+"""
+PIDNAM_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_name_agg (otx_name, inx_name, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_name, MAX(inx_name), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_name_raw
+WHERE error_message IS NULL
+GROUP BY otx_name
+;
+"""
+PIDROA_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_road_agg (otx_road, inx_road, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_road, MAX(inx_road), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_road_raw
+WHERE error_message IS NULL
+GROUP BY otx_road
+;
+"""
+PIDTAG_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_tag_agg (otx_tag, inx_tag, otx_bridge, inx_bridge, unknown_word)
+SELECT otx_tag, MAX(inx_tag), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_tag_raw
+WHERE error_message IS NULL
+GROUP BY otx_tag
+;
+"""
 
+FISCCASH_AGG_INSERT_SQLSTR = """INSERT INTO fisc_cashbook_agg (fisc_tag, owner_name, acct_name, tran_time, amount)
+SELECT fisc_tag, owner_name, acct_name, tran_time, MAX(amount)
+FROM fisc_cashbook_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, owner_name, acct_name, tran_time
+;
+"""
+FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_tag, owner_name, deal_time, quota, celldepth)
+SELECT fisc_tag, owner_name, deal_time, MAX(quota), MAX(celldepth)
+FROM fisc_dealunit_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, owner_name, deal_time
+;
+"""
+FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_tag, cumlative_minute, hour_tag)
+SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
+FROM fisc_timeline_hour_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, cumlative_minute
+;
+"""
+FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_tag, cumlative_day, month_tag)
+SELECT fisc_tag, cumlative_day, MAX(month_tag)
+FROM fisc_timeline_month_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, cumlative_day
+;
+"""
+FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_tag, weekday_order, weekday_tag)
+SELECT fisc_tag, weekday_order, MAX(weekday_tag)
+FROM fisc_timeline_weekday_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, weekday_order
+;
+"""
+FISCOFFI_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeoffi_agg (fisc_tag, offi_time)
+SELECT fisc_tag, offi_time
+FROM fisc_timeoffi_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, offi_time
+;
+"""
+FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
+SELECT fisc_tag, MAX(timeline_tag), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
+FROM fiscunit_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag
+;
+"""
 
 BUDMEMB_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_acct_membership_put_agg (face_name, event_int, fisc_tag, owner_name, acct_name, group_label, credit_vote, debtit_vote)
 SELECT face_name, event_int, fisc_tag, owner_name, acct_name, group_label, MAX(credit_vote), MAX(debtit_vote)
@@ -897,55 +978,26 @@ GROUP BY face_name, event_int, fisc_tag, owner_name
 ;
 """
 
-FISCCASH_AGG_INSERT_SQLSTR = """INSERT INTO fisc_cashbook_agg (fisc_tag, owner_name, acct_name, tran_time, amount)
-SELECT fisc_tag, owner_name, acct_name, tran_time, MAX(amount)
-FROM fisc_cashbook_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag, owner_name, acct_name, tran_time
-;
-"""
-FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_tag, owner_name, deal_time, quota, celldepth)
-SELECT fisc_tag, owner_name, deal_time, MAX(quota), MAX(celldepth)
-FROM fisc_dealunit_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag, owner_name, deal_time
-;
-"""
-FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_tag, cumlative_minute, hour_tag)
-SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
-FROM fisc_timeline_hour_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag, cumlative_minute
-;
-"""
-FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_tag, cumlative_day, month_tag)
-SELECT fisc_tag, cumlative_day, MAX(month_tag)
-FROM fisc_timeline_month_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag, cumlative_day
-;
-"""
-FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_tag, weekday_order, weekday_tag)
-SELECT fisc_tag, weekday_order, MAX(weekday_tag)
-FROM fisc_timeline_weekday_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag, weekday_order
-;
-"""
-FISCOFFI_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeoffi_agg (fisc_tag, offi_time)
-SELECT fisc_tag, offi_time
-FROM fisc_timeoffi_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag, offi_time
-;
-"""
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
-SELECT fisc_tag, MAX(timeline_tag), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
-FROM fiscunit_raw
-WHERE error_message IS NULL
-GROUP BY fisc_tag
-;
-"""
+
+def get_pidgin_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
+    return {
+        "pidgin_label": PIDLAB_AGG_INSERT_SQLSTR,
+        "pidgin_name": PIDNAM_AGG_INSERT_SQLSTR,
+        "pidgin_road": PIDROA_AGG_INSERT_SQLSTR,
+        "pidgin_tag": PIDTAG_AGG_INSERT_SQLSTR,
+    }
+
+
+def get_fisc_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
+    return {
+        "fisc_cashbook": FISCCASH_AGG_INSERT_SQLSTR,
+        "fisc_dealunit": FISCDEAL_AGG_INSERT_SQLSTR,
+        "fisc_timeline_hour": FISCHOUR_AGG_INSERT_SQLSTR,
+        "fisc_timeline_month": FISCMONT_AGG_INSERT_SQLSTR,
+        "fisc_timeline_weekday": FISCWEEK_AGG_INSERT_SQLSTR,
+        "fisc_timeoffi": FISCOFFI_AGG_INSERT_SQLSTR,
+        "fiscunit": FISCUNIT_AGG_INSERT_SQLSTR,
+    }
 
 
 def get_bud_insert_put_agg_from_raw_sqlstrs() -> dict[str, str]:
@@ -978,19 +1030,7 @@ def get_bud_insert_del_agg_from_raw_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_fisc_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
-    return {
-        "fisc_cashbook": FISCCASH_AGG_INSERT_SQLSTR,
-        "fisc_dealunit": FISCDEAL_AGG_INSERT_SQLSTR,
-        "fisc_timeline_hour": FISCHOUR_AGG_INSERT_SQLSTR,
-        "fisc_timeline_month": FISCMONT_AGG_INSERT_SQLSTR,
-        "fisc_timeline_weekday": FISCWEEK_AGG_INSERT_SQLSTR,
-        "fisc_timeoffi": FISCOFFI_AGG_INSERT_SQLSTR,
-        "fiscunit": FISCUNIT_AGG_INSERT_SQLSTR,
-    }
-
-
-IDEA_RAWABLE_PUT_DIMENS = {
+IDEA_STAGEBLE_PUT_DIMENS = {
     "br00000": ["fiscunit"],
     "br00001": ["budunit", "fisc_dealunit", "fiscunit"],
     "br00002": ["bud_acctunit", "budunit", "fisc_cashbook", "fiscunit"],
@@ -1039,7 +1079,7 @@ IDEA_RAWABLE_PUT_DIMENS = {
     "br00117": ["bud_acctunit", "budunit", "fiscunit"],
 }
 
-IDEA_RAWABLE_DEL_DIMENS = {
+IDEA_STAGEBLE_DEL_DIMENS = {
     "br00050": ["bud_acct_membership"],
     "br00051": ["bud_acctunit"],
     "br00052": ["bud_item_awardlink"],

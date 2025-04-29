@@ -9,8 +9,8 @@ from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, yell_raw_str
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame
@@ -97,11 +97,13 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         s_dir = create_path(fizz_world._sound_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
-        row0 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
-        row1 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_420, hour7am)
-        row2 = (s_dir, file, br00003_ex3_str, sue_str, e1, a23_str, m_360, hour6am)
-        row3 = (s_dir, file, br00003_ex3_str, sue_str, e1, a23_str, m_420, hour7am)
-        row4 = (s_dir, file, br00003_ex3_str, sue_str, e2, a23_str, m_420, hour7am)
+        br3_ex1 = br00003_ex1_str
+        br3_ex3 = br00003_ex3_str
+        row0 = (s_dir, file, br3_ex1, sue_str, e1, a23_str, m_360, hour6am)
+        row1 = (s_dir, file, br3_ex1, sue_str, e1, a23_str, m_420, hour7am)
+        row2 = (s_dir, file, br3_ex3, sue_str, e1, a23_str, m_360, hour6am)
+        row3 = (s_dir, file, br3_ex3, sue_str, e1, a23_str, m_420, hour7am)
+        row4 = (s_dir, file, br3_ex3, sue_str, e2, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0

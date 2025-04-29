@@ -20,7 +20,10 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import etl_yell_agg_to_pidgin_label_raw
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
@@ -36,7 +39,7 @@ def test_etl_yell_agg_to_pidgin_label_raw_CreatesFile_Scenario0_SingleIdea(
     bob_inx = "Bobito"
     m_str = "accord23"
     event7 = 7
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     br00115_file_path = create_path(x_yell_dir, "br00115.xlsx")
     br00115_columns = [
         face_name_str(),
@@ -94,7 +97,7 @@ def test_etl_yell_agg_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleIdeasFil
     event2 = 2
     event5 = 5
     event7 = 7
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     br00115_file_path = create_path(x_yell_dir, "br00115.xlsx")
     br00115_columns = [
         face_name_str(),
@@ -172,7 +175,7 @@ def test_etl_yell_agg_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_events
     event1 = 1
     event2 = 2
     event5 = 5
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     br00115_file_path = create_path(x_yell_dir, "br00115.xlsx")
     br00115_columns = [
         face_name_str(),

@@ -14,7 +14,7 @@ from src.a18_etl_toolbox.transformers import (
     fisc_raw_tables2fisc_agg_tables,
     etl_fisc_agg_tables_to_fisc_csvs,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir
+from src.a18_etl_toolbox._utils.env_utils import get_module_temp_dir
 from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
@@ -476,7 +476,7 @@ def test_etl_fisc_agg_tables_to_fisc_csvs_CreateFiles():
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_prime_tables(cursor)
-        fisc_mstr_dir = get_test_etl_dir()
+        fisc_mstr_dir = get_module_temp_dir()
         x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
         insert_agg_sqlstr = f"""
 INSERT INTO {x_fisc.unit_agg_tablename} ({fisc_tag_str()})

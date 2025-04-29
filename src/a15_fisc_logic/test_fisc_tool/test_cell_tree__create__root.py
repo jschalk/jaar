@@ -8,9 +8,9 @@ from src.a12_hub_tools.hub_path import (
     create_cell_json_path,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop, _get_ote1_max_past_event_int
-from src.a15_fisc_logic.examples.fisc_env import (
+from src.a15_fisc_logic._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_fisc_mstr_dir,
+    get_module_temp_dir,
 )
 from os.path import exists as os_path_exists
 
@@ -32,7 +32,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro0_DealEmpty(
 ):
     # ESTABLISH
     a23_str = "accord23"
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     accord23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     a23_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_fisc.get_json())
@@ -51,7 +51,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro1_DealExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
 
     # Create FiscUnit with bob deal at time 37
@@ -91,7 +91,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEve
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
 
     # Create FiscUnit with bob deal at time 37
@@ -131,7 +131,7 @@ def test_FiscUnit_create_deals_root_cells_Scenaro3_DealExistsNotPerfectMatch_dea
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     a23_penny = 2
 

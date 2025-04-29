@@ -8,7 +8,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_fisc_agg_tables_to_fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
@@ -37,7 +40,7 @@ VALUES
 ;
 """
         cursor.execute(insert_raw_sqlstr)
-        fisc_mstr_dir = get_test_etl_dir()
+        fisc_mstr_dir = get_module_temp_dir()
         a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
         a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
         assert get_row_count(cursor, fisc_ote1_agg_str) == 3

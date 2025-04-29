@@ -7,7 +7,10 @@ from src.a12_hub_tools.hub_path import (
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a18_etl_toolbox.transformers import etl_fisc_gut_to_fisc_job
-from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
+from src.a18_etl_toolbox._utils.env_utils import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 from os.path import exists as os_path_exists
 
 
@@ -22,7 +25,7 @@ def test_etl_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     bob_gut = budunit_shop(bob_inx, a23_str)
     bob_gut.add_acctunit(bob_inx, credit77)
     bob_gut.add_acctunit(yao_inx, credit44)

@@ -523,7 +523,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #             assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-# def test_IDEA_RAWABLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
+# def test_IDEA_STAGEBLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
 #     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
 #     # ESTABLISH / WHEN
 #     # THEN
@@ -580,14 +580,14 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #                     # check sqlstr is correct?
 #                     assert generated_sqlstr != ""
 
-#     idea_rawable_dimen_list = sorted(list(expected_idea_stagable_dimens))
+#     idea_stageble_dimen_list = sorted(list(expected_idea_stagable_dimens))
 #     print(f"{expected_idea_stagable_dimens=}")
 #     assert idea_dimen_combo_checked_count == 680
 #     assert idea_raw2dimen_count == 100
-#     assert IDEA_RAWABLE_PUT_DIMENS == expected_idea_stagable_dimens
+#     assert IDEA_STAGEBLE_PUT_DIMENS == expected_idea_stagable_dimens
 
 
-# def test_IDEA_RAWABLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
+# def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
 #     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
 #     # ESTABLISH / WHEN
 #     # THEN
@@ -647,11 +647,11 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #         for x_idea_number, stagable_dimens in x_idea_stagable_dimens.items()
 #         if stagable_dimens != []
 #     }
-#     idea_rawable_dimen_list = sorted(list(expected_idea_stagable_dimens))
+#     idea_stageble_dimen_list = sorted(list(expected_idea_stagable_dimens))
 #     print(f"{expected_idea_stagable_dimens=}")
 #     assert idea_dimen_combo_checked_count == 680
 #     assert idea_raw2dimen_count == 10
-#     assert IDEA_RAWABLE_DEL_DIMENS == expected_idea_stagable_dimens
+#     assert IDEA_STAGEBLE_DEL_DIMENS == expected_idea_stagable_dimens
 
 
 # def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():

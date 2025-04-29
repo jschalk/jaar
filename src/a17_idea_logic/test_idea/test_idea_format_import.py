@@ -20,13 +20,13 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00013_itemunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_db_tool import open_csv
-from src.a17_idea_logic.examples.idea_env import (
+from src.a17_idea_logic._utils.env_utils import (
     idea_examples_dir,
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 )
 
 
-def test_open_csv_ReturnsObjWhenFileExists(idea_env_setup_cleanup):
+def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -74,7 +74,7 @@ def test_open_csv_ReturnsObjWhenFileExists(idea_env_setup_cleanup):
     assert len(acct_dataframe) == 3
 
 
-def test_open_csv_ReturnsObjWhenNoFileExists(idea_env_setup_cleanup):
+def test_open_csv_ReturnsObjWhenNoFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     name_filename = f"{sue_str}_acct_example_77.csv"
@@ -87,7 +87,7 @@ def test_open_csv_ReturnsObjWhenNoFileExists(idea_env_setup_cleanup):
 
 
 def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvTo_job(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -139,7 +139,7 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvTo_job(
 
 
 def test_load_idea_csv_csvTo_job(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"

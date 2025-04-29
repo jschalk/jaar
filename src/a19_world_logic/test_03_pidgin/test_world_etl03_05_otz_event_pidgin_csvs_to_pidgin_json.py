@@ -12,9 +12,9 @@ from src.a16_pidgin_logic.pidgin_config import (
     default_unknown_word_if_None,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
+from src.a19_world_logic._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_worlds_dir as worlds_dir,
+    get_module_temp_dir as worlds_dir,
 )
 
 from os.path import exists as os_path_exists

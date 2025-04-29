@@ -276,8 +276,7 @@ class WorldUnit:
             # per event create complete (inherited) pidgin.json
             self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
 
-            # translate all non-pidgin ideas by pidgins
-            # filtered by valid event_int get all non-pidgin yell idea bricks
+            # pidgins translate all fisc&bud ideas
             self.yell_agg_non_pidgin_ideas_to_yell_valid()  # self._events.keys()
             self.yell_ideas_to_otz_face_ideas()
             self.otz_face_ideas_to_otz_event_otx_ideas()

@@ -17,7 +17,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_idea_raw_to_bud_tables,
     etl_inz_face_csv_files2idea_raw_tables,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 
 
@@ -66,7 +69,7 @@ def test_etl_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    x_syntax_inz_dir = create_path(get_test_etl_dir(), "syntax_inz")
+    x_syntax_inz_dir = create_path(get_module_temp_dir(), "syntax_inz")
     sue_inz_dir = create_path(x_syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"

@@ -16,7 +16,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_yell_raw_db,
     etl_yell_raw_db_to_yell_raw_df,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
@@ -32,8 +35,8 @@ def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_dir = create_path(get_test_etl_dir(), "sound")
-    yell_dir = create_path(get_test_etl_dir(), "yell")
+    sound_dir = create_path(get_module_temp_dir(), "sound")
+    yell_dir = create_path(get_module_temp_dir(), "yell")
     sound_file_path = create_path(sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),
@@ -82,6 +85,7 @@ def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
+        assert "error_message" != br00003_table_cols[-1]
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
@@ -96,11 +100,13 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         s_dir = create_path(sound_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
-        row0 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
-        row1 = (s_dir, file, br00003_ex1_str, sue_str, e1, a23_str, m_420, hour7am)
-        row2 = (s_dir, file, br00003_ex3_str, sue_str, e1, a23_str, m_360, hour6am)
-        row3 = (s_dir, file, br00003_ex3_str, sue_str, e1, a23_str, m_420, hour7am)
-        row4 = (s_dir, file, br00003_ex3_str, sue_str, e2, a23_str, m_420, hour7am)
+        br3_ex1_str = br00003_ex1_str
+        br3_ex3_str = br00003_ex3_str
+        row0 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
+        row1 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_420, hour7am)
+        row2 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_360, hour6am)
+        row3 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_420, hour7am)
+        row4 = (s_dir, file, br3_ex3_str, sue_str, e2, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0

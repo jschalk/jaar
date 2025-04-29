@@ -51,7 +51,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_elements_sort_order,
     get_default_sorted_list,
 )
-from src.a17_idea_logic.examples.idea_env import src_idea_dir
+from src.a17_idea_logic._utils.env_utils import src_module_dir
 
 
 def test_config_str_functions_ReturnObjs():
@@ -75,8 +75,8 @@ def test_get_idea_formats_dir_ReturnsObj():
     idea_dir = get_idea_formats_dir()
     # THEN
     print(f"{idea_dir=}")
-    print(f"{src_idea_dir()=}")
-    assert idea_dir == create_path(src_idea_dir(), "idea_formats")
+    print(f"{src_module_dir()=}")
+    assert idea_dir == create_path(src_module_dir(), "idea_formats")
 
 
 def test_get_idearef_obj_ReturnsObj():

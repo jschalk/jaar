@@ -16,7 +16,10 @@ from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
 )
 from src.a18_etl_toolbox.transformers import etl_yell_ideas_to_otz_face_ideas
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
@@ -44,7 +47,7 @@ def test_etl_yell_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario0_Single
     row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
     row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
     br00003_yell_agg_df = DataFrame([row1, row2], columns=idea_columns)
-    x_etl_dir = get_test_etl_dir()
+    x_etl_dir = get_module_temp_dir()
     x_yell_dir = create_path(x_etl_dir, "yell")
     x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
@@ -98,7 +101,7 @@ def test_etl_yell_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multpl
     sue2 = [sue_str, event3, accord23_str, hour7am, minute_420]
     zia3 = [zia_str, event7, accord23_str, hour7am, minute_420]
     br00003_yell_agg_df = DataFrame([sue1, sue2, zia3], columns=idea_columns)
-    x_etl_dir = get_test_etl_dir()
+    x_etl_dir = get_module_temp_dir()
     x_yell_dir = create_path(x_etl_dir, "yell")
     x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
@@ -168,7 +171,7 @@ def test_etl_yell_ideas_to_otz_face_ideas_Scenario2_PidginDimenIdeasAreNotLoaded
     sue43_1 = [sue_str, event3, ":", "Bob", ":", "Bobby", "Unknown"]
     br00043_yell_agg_df = DataFrame([sue43_0, sue43_1], columns=br00043_columns)
 
-    x_etl_dir = get_test_etl_dir()
+    x_etl_dir = get_module_temp_dir()
     x_yell_dir = create_path(x_etl_dir, "yell")
     x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"

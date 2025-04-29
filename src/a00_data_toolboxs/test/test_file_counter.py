@@ -3,8 +3,8 @@ from pathlib import Path
 from tempfile import mkdtemp as tempfile_mkdtemp
 from shutil import rmtree as shutil_rmtree
 from src.a00_data_toolboxs.file_toolbox import count_dirs_files, save_file, create_path
-from src.a00_data_toolboxs.examples.instrument_env import (
-    get_instrument_temp_env_dir,
+from src.a00_data_toolboxs._utils.env_utils import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -46,7 +46,7 @@ def test_count_dirs_files(test_directory):
 
 def test_count_dirs_files_DoesNotCreateDir(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     sub1_dir = create_path(env_dir, "sub1")
     assert os_path_exists(sub1_dir) is False
 

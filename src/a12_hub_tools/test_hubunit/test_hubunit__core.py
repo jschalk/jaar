@@ -13,8 +13,8 @@ from src.a02_finance_toolboxs.finance_config import (
 )
 from src.a12_hub_tools.hub_path import create_owner_dir_path
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop, get_keep_path
-from src.a13_bud_listen_logic.examples.listen_env import (
-    get_listen_temp_env_dir as env_dir,
+from src.a13_bud_listen_logic._utils.env_utils import (
+    get_module_temp_dir as env_dir,
     env_dir_setup_cleanup,
 )
 from pytest import raises as pytest_raises
@@ -56,7 +56,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fisc_mstr_dir = "src/a15_fisc_logic/examples"
+    x_fisc_mstr_dir = "src/a15_fisc_logic/_utils"
     x_fisc_tag = "accord45"
     sue_str = "Sue"
     x_bridge = "/"

@@ -9,8 +9,8 @@ from src.a17_idea_logic.idea_db_tool import (
     yell_valid_str,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas.testing import (
@@ -86,8 +86,8 @@ def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenari
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     sound_dir = create_path(get_test_etl_dir(), "sound")
-#     yell_dir = create_path(get_test_etl_dir(), "yell")
+#     sound_dir = create_path(get_module_temp_dir(), "sound")
+#     yell_dir = create_path(get_module_temp_dir(), "yell")
 #     sound_file_path = create_path(sound_dir, ex_filename)
 #     yell_file_path = create_path(yell_dir, "br00003.xlsx")
 #     idea_columns = [

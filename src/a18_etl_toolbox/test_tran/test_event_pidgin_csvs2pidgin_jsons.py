@@ -17,7 +17,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     get_pidgin_events_by_dirs,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -38,7 +41,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
 "{bob_str}",{event3},"{casa_otx}","{casa_inx}",,,
 "{bob_str}",{event3},"{clean_otx}","{clean_inx}",,,
 """
-    bob_dir = create_path(get_test_etl_dir(), bob_str)
+    bob_dir = create_path(get_module_temp_dir(), bob_str)
     event3_dir = create_path(bob_dir, event3)
     save_file(event3_dir, "road.csv", event3_road_csv)
     pidgin_json_file_path = create_path(event3_dir, pidgin_filename())
@@ -88,7 +91,7 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
 "{zia_str}",{event9},"{casa_otx}","{casa_inx}",,,
 "{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
 """
-    x_syntax_otz_dir = create_path(get_test_etl_dir(), "syntax_otz")
+    x_syntax_otz_dir = create_path(get_module_temp_dir(), "syntax_otz")
     bob_dir = create_path(x_syntax_otz_dir, bob_str)
     zia_dir = create_path(x_syntax_otz_dir, bob_str)
     event3_dir = create_path(bob_dir, event3)
@@ -179,7 +182,7 @@ def test_get_pidgin_events_by_dirs_ReturnsObj(env_dir_setup_cleanup):
     event7 = 7
     event9 = 9
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     zia_dir = create_path(faces_dir, zia_str)
     event3_dir = create_path(zia_dir, event3)

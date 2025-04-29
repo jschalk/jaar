@@ -10,9 +10,9 @@ from src.a15_fisc_logic.fisc import (
     get_from_dict as fiscunit_get_from_dict,
 )
 from src.a15_fisc_logic.fisc_tool import create_deal_mandate_ledgers
-from src.a15_fisc_logic.examples.fisc_env import (
+from src.a15_fisc_logic._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_fisc_mstr_dir,
+    get_module_temp_dir,
 )
 from os.path import exists as os_path_exists
 
@@ -20,7 +20,7 @@ from os.path import exists as os_path_exists
 def test_create_deal_mandate_ledgers_Scenaro0_DealEmpty(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     accord23_fisc = fiscunit_shop(a23_str, mstr_dir)
     a23_json_path = create_fisc_json_path(mstr_dir, a23_str)
     save_json(a23_json_path, None, accord23_fisc.get_dict())
@@ -39,7 +39,7 @@ def test_create_deal_mandate_ledgers_Scenaro0_DealEmpty(env_dir_setup_cleanup):
 def test_create_deal_mandate_ledgers_Scenaro1_DealExists(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     accord23_fisc = fiscunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     tp37 = 37
@@ -77,7 +77,7 @@ def test_create_deal_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers
 ):
     # ESTABLISH
     a23_str = "accord23"
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     accord23_fisc = fiscunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     yao_str = "Yao"

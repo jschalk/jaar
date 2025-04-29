@@ -21,15 +21,15 @@ from src.a15_fisc_logic.fisc_config import (
     brokerunits_str,
     cashbook_str,
 )
-from src.a15_fisc_logic.examples.fisc_env import (
-    get_test_fisc_mstr_dir,
+from src.a15_fisc_logic._utils.env_utils import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 
 
 def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a45_str = "accord45"
     a45_offi_times = {17, 37}
     accord_fisc = fiscunit_shop(a45_str, fisc_mstr_dir, offi_times=a45_offi_times)
@@ -87,7 +87,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
 def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_module_temp_dir())
 
     # WHEN
     x_dict = accord_fisc.get_dict(include_cashbook=False)
@@ -109,7 +109,7 @@ def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
 def test_FiscUnit_get_json_ReturnsObj():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
+    accord_fisc = fiscunit_shop(accord45_str, get_module_temp_dir())
     bob_str = "Bob"
     bob_x0_deal_time = 702
     bob_x0_quota = 33
@@ -269,7 +269,7 @@ def test_get_from_file_ReturnsFiscUnitWith_fisc_mstr_dir(env_dir_setup_cleanup):
     accord45_fisc.timeline.timeline_tag = sue_timeline_tag
     sue_respect_bit = 2
     accord45_fisc.respect_bit = sue_respect_bit
-    x_fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_buzz")
+    x_fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_buzz")
     accord45_json_path = create_fisc_json_path(x_fisc_mstr_dir, accord45_str)
     save_file(accord45_json_path, None, accord45_fisc.get_json())
     assert accord45_fisc.fisc_mstr_dir != x_fisc_mstr_dir

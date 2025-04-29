@@ -1,4 +1,6 @@
-from src.a13_bud_listen_logic.examples.example_listen_buds import get_fund_breakdown_bud
+from src.a13_bud_listen_logic._utils.example_listen_buds import (
+    get_fund_breakdown_bud,
+)
 from src.a13_bud_listen_logic.listen_graphic import (
     get_listen_structures0_fig,
     get_listen_structures1_fig,

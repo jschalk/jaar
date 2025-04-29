@@ -23,8 +23,8 @@ from src.a09_pack_logic.pack import (
     get_init_pack_id_if_None,
     get_packunit_from_json,
 )
-from src.a09_pack_logic.examples.example_atoms import get_atom_example_itemunit_sports
-from src.a09_pack_logic.examples.example_deltas import get_buddelta_sue_example
+from src.a09_pack_logic._utils.example_atoms import get_atom_example_itemunit_sports
+from src.a09_pack_logic._utils.example_deltas import get_buddelta_sue_example
 from pytest import raises as pytest_raises
 
 

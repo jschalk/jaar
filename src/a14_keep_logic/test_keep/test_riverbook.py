@@ -6,7 +6,7 @@ from src.a14_keep_logic.rivercycle import (
     create_riverbook,
     get_credorledger,
 )
-from src.a14_keep_logic.examples.keep_env import temp_fisc_mstr_dir
+from src.a14_keep_logic._utils.env_utils import temp_fisc_mstr_dir
 
 
 def test_RiverBook_Exists():

@@ -5,8 +5,8 @@ from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
 from src.a18_etl_toolbox.transformers import create_fisc_prime_tables
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from sqlite3 import connect as sqlite3_connect

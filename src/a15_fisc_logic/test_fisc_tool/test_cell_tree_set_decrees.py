@@ -10,15 +10,15 @@ from src.a12_hub_tools.hub_tool import (
     save_bud_file,
 )
 from src.a15_fisc_logic.fisc_tool import set_cell_trees_decrees, DecreeUnit
-from src.a15_fisc_logic.examples.example_fiscs import (
+from src.a15_fisc_logic._utils.example_fiscs import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
     get_bob_mop_without_reason_budunit_example,
     get_bob_mop_with_reason_budunit_example,
 )
-from src.a15_fisc_logic.examples.fisc_env import (
+from src.a15_fisc_logic._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_fisc_mstr_dir,
+    get_module_temp_dir,
 )
 
 
@@ -58,7 +58,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord"
     tp5 = 5
     bob_str = "Bob"
@@ -83,7 +83,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_budevent_fac
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord"
     tp5 = 5
     bob_str = "Bob"
@@ -111,7 +111,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord"
     tp5 = 5
     bob_str = "Bob"
@@ -144,7 +144,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_fact
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     tp5 = 5
     bob_str = "Bob"
@@ -181,7 +181,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     tp5 = 5
     bob_str = "Bob"
@@ -226,7 +226,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     tp5 = 5
     bob_str = "Bob"
@@ -289,7 +289,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     tp5 = 5
     bob_str = "Bob"
@@ -352,7 +352,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     tp5 = 5
     bob_str = "Bob"
@@ -419,7 +419,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBudEvent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_test_fisc_mstr_dir()
+    mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     tp5 = 5
     bob_str = "Bob"

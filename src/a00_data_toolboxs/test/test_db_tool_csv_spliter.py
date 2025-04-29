@@ -1,9 +1,9 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a00_data_toolboxs.db_toolbox import save_to_split_csvs
 from src.a00_data_toolboxs.csv_toolbox import open_csv_with_types
-from src.a00_data_toolboxs.examples.instrument_env import (
+from src.a00_data_toolboxs._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_instrument_temp_env_dir,
+    get_module_temp_dir,
 )
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
@@ -32,7 +32,7 @@ VALUES
 ;
 """
         )
-        x_dir = get_instrument_temp_env_dir()
+        x_dir = get_module_temp_dir()
         A_dir = create_path(x_dir, "A")
         B_dir = create_path(x_dir, "B")
         C_dir = create_path(x_dir, "C")
@@ -106,7 +106,7 @@ VALUES
 ;
 """
         )
-        x_dir = get_instrument_temp_env_dir()
+        x_dir = get_module_temp_dir()
         hairs_str = "hairs"
         A_dir = create_path(x_dir, "A")
         B_dir = create_path(x_dir, "B")
@@ -174,7 +174,7 @@ def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix():
         cursor.execute(
             f"""INSERT INTO {x_tablename} (hair, user, y_int, run) VALUES (1, "A", 200, "yes") ;"""
         )
-        x_dir = get_instrument_temp_env_dir()
+        x_dir = get_module_temp_dir()
         hairs_str = "hairs"
         y_ints_str = "y_ints"
         A_dir = create_path(x_dir, "A")
