@@ -36,7 +36,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fnigh_str,
     fopen_str,
 )
-from src.a08_bud_atom_logic.atom_config import atom_delete, atom_insert, atom_update
+from src.a08_bud_atom_logic._utils.str_a08 import atom_delete, atom_insert, atom_update
 from src.a09_pack_logic.delta import BudDelta
 
 

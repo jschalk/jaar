@@ -12,7 +12,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a08_bud_atom_logic.atom_config import atom_insert, atom_delete, atom_update
+from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete, atom_update
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import (
     init_pack_id,

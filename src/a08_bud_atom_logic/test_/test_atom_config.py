@@ -46,6 +46,21 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_TagUnit_str,
     type_RoadUnit_str,
 )
+from src.a08_bud_atom_logic._utils.str_a08 import (
+    atom_insert,
+    atom_delete,
+    atom_update,
+    dimen_str,
+    column_order_str,
+    crud_str,
+    class_type_str,
+    jkeys_str,
+    jvalues_str,
+    nesting_order_str,
+    normal_specs_str,
+    normal_table_name_str,
+    sqlite_datatype_str,
+)
 from src.a08_bud_atom_logic.atom_config import (
     get_bud_dimens,
     get_all_bud_dimen_keys,
@@ -61,19 +76,6 @@ from src.a08_bud_atom_logic.atom_config import (
     set_mog,
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
-    atom_insert,
-    atom_delete,
-    atom_update,
-    dimen_str,
-    column_order_str,
-    crud_str,
-    class_type_str,
-    jkeys_str,
-    jvalues_str,
-    nesting_order_str,
-    normal_specs_str,
-    normal_table_name_str,
-    sqlite_datatype_str,
 )
 
 

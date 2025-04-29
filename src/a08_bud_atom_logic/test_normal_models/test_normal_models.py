@@ -10,13 +10,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    get_normalized_bud_table_build,
+from src.a08_bud_atom_logic._utils.str_a08 import (
     normal_table_name_str,
     normal_specs_str,
     columns_str,
     sqlite_datatype_str,
 )
+from src.a08_bud_atom_logic.atom_config import get_normalized_bud_table_build
 from src.a08_bud_atom_logic.normal_models import (
     BudTable,
     AcctUnitTable,

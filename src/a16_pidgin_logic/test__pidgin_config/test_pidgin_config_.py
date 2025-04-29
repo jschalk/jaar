@@ -1,12 +1,11 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a08_bud_atom_logic.atom_config import (
+from src.a08_bud_atom_logic._utils.str_a08 import (
     jkeys_str,
     jvalues_str,
     atom_update,
     atom_insert,
     atom_delete,
     normal_specs_str,
-    class_type_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     config_file_dir,

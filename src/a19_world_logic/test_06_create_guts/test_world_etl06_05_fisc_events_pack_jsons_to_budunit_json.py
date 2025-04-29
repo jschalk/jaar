@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a08_bud_atom_logic.atom_config import atom_insert
+from src.a08_bud_atom_logic._utils.str_a08 import atom_insert
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json
 from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path,

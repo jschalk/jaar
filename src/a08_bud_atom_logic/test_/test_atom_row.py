@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
 )
 from src.a06_bud_logic._utils.str_a06 import acct_name_str
-from src.a08_bud_atom_logic.atom_config import atom_insert, atom_delete
+from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import AtomRow, atomrow_shop, budatom_shop
 
 

@@ -10,12 +10,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    atom_insert,
-    atom_delete,
-    atom_update,
-    get_normal_table_name,
-)
+from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete, atom_update
+from src.a08_bud_atom_logic.atom_config import get_normal_table_name
 from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from dataclasses import dataclass

@@ -21,7 +21,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     penny_str,
     respect_bit_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
+from src.a08_bud_atom_logic._utils.str_a08 import (
     jkeys_str,
     jvalues_str,
     atom_update,
@@ -29,8 +29,8 @@ from src.a08_bud_atom_logic.atom_config import (
     atom_delete,
     normal_specs_str,
     class_type_str,
-    get_allowed_class_types,
 )
+from src.a08_bud_atom_logic.atom_config import get_allowed_class_types
 from src.a15_fisc_logic.fisc_config import (
     config_file_dir,
     get_fisc_config_filename,
