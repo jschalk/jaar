@@ -10,16 +10,16 @@ from src.a12_hub_tools.hub_tool import (
     cellunit_get_from_dir,
 )
 from src.a15_fisc_logic.fisc_tool import create_cell_tree
-from src.a15_fisc_logic.examples.fisc_env import (
+from src.a15_fisc_logic._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_fisc_mstr_dir,
+    get_module_temp_dir,
 )
 from os.path import exists as os_path_exists
 
 
 def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
     a23_str = "accord23"
     bob_str = "Bob"
     tp37 = 37
@@ -37,7 +37,7 @@ def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -62,7 +62,7 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -147,7 +147,7 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -236,7 +236,7 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_budevent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -311,7 +311,7 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = create_path(get_test_fisc_mstr_dir(), "fizz_mstr")
+    fisc_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
     a23_str = "accord23"
     bob_str = "Bob"
     yao_str = "Yao"

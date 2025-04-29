@@ -1,13 +1,16 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
-from src.a07_calendar_logic.examples.chrono_examples import get_five_config
+from src.a07_calendar_logic._utils.calendar_examples import get_five_config
 from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
     get_default_timeline_config_dict,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a17_idea_logic.idea import fisc_build_from_df
-from src.a17_idea_logic.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
-from src.a17_idea_logic.examples.idea_df_examples import (
+from src.a17_idea_logic._utils.env_utils import (
+    idea_fiscs_dir,
+    env_dir_setup_cleanup,
+)
+from src.a17_idea_logic._utils.idea_df_examples import (
     get_ex1_br00000_df,
     get_ex1_br00001_df,
     get_ex1_br00002_df,
@@ -25,7 +28,7 @@ from src.a17_idea_logic.examples.idea_df_examples import (
 
 # ESTABLISH a dataframe, build a fisc unit
 def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTag(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     br00000_df = get_ex1_br00000_df()
@@ -101,7 +104,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTag(
 
 # ESTABLISH a dataframe, build a fisc unit
 def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTags(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()

@@ -3,11 +3,11 @@ from src.a01_word_logic.road import create_road
 from src.a08_bud_atom_logic.atom_config import acct_name_str, base_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import pidgin_filename
-from src.a16_pidgin_logic.examples.pidgin_env import (
+from src.a16_pidgin_logic._utils.env_utils import (
     env_dir_setup_cleanup,
     get_example_face_dir,
 )
-from src.a16_pidgin_logic.examples.example_pidgins import (
+from src.a16_pidgin_logic._utils.example_pidgins import (
     get_casa_maison_pidginunit_set_by_tag,
     get_casa_maison_road_otx_dt,
     get_casa_maison_road_inx_dt,

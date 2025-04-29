@@ -42,8 +42,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_yell_valid_db_to_pidgin_prime_raw_db,
     etl_pidgin_prime_raw_to_pidgin_prime_agg,
 )
-from src.a18_etl_toolbox.examples.etl_env import (
-    get_test_etl_dir as etl_dir,
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir as etl_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame, read_excel as pandas_read_excel

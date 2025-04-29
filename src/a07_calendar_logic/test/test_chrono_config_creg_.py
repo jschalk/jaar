@@ -24,7 +24,7 @@ from src.a07_calendar_logic.chrono import (
     monthday_distortion_str,
     get_min_from_dt,
 )
-from src.a07_calendar_logic.examples.chrono_examples import (
+from src.a07_calendar_logic._utils.calendar_examples import (
     add_time_creg_itemunit,
     add_time_five_itemunit,
     get_creg_min_from_dt,

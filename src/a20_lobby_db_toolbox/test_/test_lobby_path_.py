@@ -8,7 +8,7 @@ from src.a20_lobby_db_toolbox.lobby_path import (
     create_world_dir_path,
     create_fisc_mstr_dir_path,
 )
-from src.a20_lobby_db_toolbox.examples.lobby_db_env import get_test_lobby_dir
+from src.a20_lobby_db_toolbox._utils.env_utils import get_module_temp_dir
 
 
 def test_str_functions_ReturnObjs():
@@ -23,7 +23,7 @@ def test_LobbyID_Exists():
 
 def test_create_lobby_dir_path_ReturnObj():
     # ESTABLISH
-    x_lobby_mstr_dir = get_test_lobby_dir()
+    x_lobby_mstr_dir = get_module_temp_dir()
     c23_str = "chat23"
 
     # WHEN
@@ -37,7 +37,7 @@ def test_create_lobby_dir_path_ReturnObj():
 
 def test_create_world_dir_path_ReturnObj():
     # ESTABLISH
-    x_lobby_mstr_dir = get_test_lobby_dir()
+    x_lobby_mstr_dir = get_module_temp_dir()
     c23_str = "chat23"
     m23_str = "music23"
 
@@ -54,7 +54,7 @@ def test_create_world_dir_path_ReturnObj():
 
 def test_create_fisc_mstr_dir_path_ReturnObj():
     # ESTABLISH
-    x_lobby_mstr_dir = get_test_lobby_dir()
+    x_lobby_mstr_dir = get_module_temp_dir()
     c23_str = "chat23"
     m23_str = "music23"
 

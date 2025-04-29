@@ -10,7 +10,10 @@ from src.a08_bud_atom_logic.atom_config import (
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a18_etl_toolbox.transformers import etl_bud_tables_to_event_bud_csvs
-from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
+from src.a18_etl_toolbox._utils.env_utils import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
@@ -29,7 +32,7 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPutAggTables(
     sue_credit_belief7 = 7
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv = f"{put_agg_tablename}.csv"
-    x_fisc_mstr_dir = get_test_etl_dir()
+    x_fisc_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_owner_event_dir_path(
         x_fisc_mstr_dir, accord23_str, bob_inx, event3
     )

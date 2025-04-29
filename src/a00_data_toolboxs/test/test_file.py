@@ -20,9 +20,9 @@ from src.a00_data_toolboxs.file_toolbox import (
     get_dir_filenames,
     get_max_file_number,
 )
-from src.a00_data_toolboxs.dict_toolbox import get_json_from_dict, get_dict_from_json
-from src.a00_data_toolboxs.examples.instrument_env import (
-    get_instrument_temp_env_dir,
+from src.a00_data_toolboxs.dict_toolbox import get_dict_from_json
+from src.a00_data_toolboxs._utils.env_utils import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from pytest import raises as pytest_raises
@@ -50,7 +50,7 @@ def test_create_path_ReturnsObj():
 
 
 def test_is_subdirectory_ReturnsObj(env_dir_setup_cleanup):
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     sub = os_path_join(env_dir, "subdir")
     assert is_subdirectory(sub, env_dir)
     assert is_subdirectory(env_dir, sub) is False
@@ -58,7 +58,7 @@ def test_is_subdirectory_ReturnsObj(env_dir_setup_cleanup):
 
 
 def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     level1 = os_path_join(env_dir, "level1")
     level2 = os_path_join(level1, "level2")
     expected_path = str(pathlib_Path(level1).resolve())
@@ -71,7 +71,7 @@ def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
 
 def test_set_dir_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     fizz_name = "fizz_buzz"
     fizz_dir = f"{env_dir}/{fizz_name}"
     assert not os_path_exist(fizz_dir)
@@ -91,7 +91,7 @@ def test_set_dir_SetsFile(env_dir_setup_cleanup):
 
 def test_save_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x_name = "fizz_buzz"
     x_file_ext = "txt"
     x_filename = f"{x_name}.{x_file_ext}"
@@ -110,7 +110,7 @@ def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_filename(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -132,7 +132,7 @@ def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -157,7 +157,7 @@ def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
 
 def test_save_json_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     bob_str = "bob"
     yao_str = "yao"
     x_filename = "fizz_buzz.json"
@@ -180,7 +180,7 @@ def test_open_json_ReturnObj(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     bob_str = "bob"
     yao_str = "yao"
     x_filename = "fizz_buzz.json"
@@ -199,7 +199,7 @@ def test_open_json_ReturnObj(
 
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     swim_str = "swim"
     swim_file_ext = "txt"
     swim_filename = f"{swim_str}.{swim_file_ext}"
@@ -223,7 +223,7 @@ def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
 
 def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     swim_str = "swim"
     swim_file_ext = "txt"
     swim_filename = f"{swim_str}.{swim_file_ext}"
@@ -247,7 +247,7 @@ def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
 
 def test_save_file_DoesNotRequireSeperateFilename(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     swim_str = "swim"
     swim_file_ext = "txt"
     swim_filename = f"{swim_str}.{swim_file_ext}"
@@ -265,7 +265,7 @@ def test_save_file_DoesNotRequireSeperateFilename(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_correctlyGrabsFileData(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.txt"
     x1_file_str = "trying this"
@@ -284,7 +284,7 @@ def test_get_dir_file_strs_correctlyGrabsFileData(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_delete_extensions_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -306,7 +306,7 @@ def test_get_dir_file_strs_delete_extensions_ReturnsObj(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_returnsSubDirs(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -338,7 +338,7 @@ def test_get_dir_file_strs_returnsSubDirs(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_doesNotReturnsFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_name = "x1"
     x1_file_ext = "txt"
     x1_filename = f"{x1_name}.{x1_file_ext}"
@@ -370,7 +370,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     temp_dir = f"{env_dir}/temp_does_not_exist"
     assert os_path_exist(temp_dir) is False
 
@@ -384,7 +384,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
 
 def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "1.json"
     x2_filename = "2.json"
     x_file_str = "file strs"
@@ -403,7 +403,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     z_filename = "z.json"
     x1_filename = "1.json"
     x2_filename = "2.json"
@@ -432,7 +432,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThan_min_integer
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     z_filename = "z.json"
     x1_filename = "1.json"
     x2_filename = "2.json"
@@ -456,7 +456,7 @@ def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     does_not_exist_dir = f"{env_dir}/swim"
 
     # WHEN
@@ -536,7 +536,7 @@ def test_is_path_existent_or_probably_creatable_ReturnsObj():
 
 def test_get_all_dirs_with_file_ReturnsCorrectDirectories(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"
     x1_file_str = "trying this"
     iowa_rel_dir = "iowa/dallas"
@@ -555,7 +555,7 @@ def test_get_all_dirs_with_file_ReturnsCorrectDirectories(env_dir_setup_cleanup)
 
 def test_get_dir_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.txt"
     iowa_rel_dir = "iowa/dallas"
@@ -578,7 +578,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
 
 def test_get_dir_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.txt"
     iowa_rel_dir = "iowa/dallas"
@@ -603,7 +603,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario1_FilterByExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.json"
     iowa_rel_dir = "iowa/dallas"
@@ -629,7 +629,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario2_FilterByExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_instrument_temp_env_dir()
+    env_dir = get_module_temp_dir()
     x1_filename = "br.txt"
     x2_filename = "x2.json"
     x3_filename = "x3.json"
@@ -660,7 +660,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario2_FilterByExtension(
 
 def test_get_max_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_instrument_temp_env_dir()
+    x_dir = get_module_temp_dir()
     six_int = 6
     ten_int = 10
     save_file(x_dir, f"{six_int}.json", "fizzbuzz")
@@ -674,7 +674,7 @@ def test_get_max_file_number_ReturnsObjWhenDirIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_instrument_temp_env_dir()
+    x_dir = get_module_temp_dir()
 
     # WHEN / THEN
     assert get_max_file_number(x_dir) is None

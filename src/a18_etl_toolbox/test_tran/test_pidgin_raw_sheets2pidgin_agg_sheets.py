@@ -9,7 +9,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_pidgin_road_raw_to_road_agg,
     etl_yell_pidgin_raw_df_to_pidgin_agg_df,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
@@ -35,7 +38,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario0_CreatesEmptyFileBecauseOfConf
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, slash_str, None]
     e1_name_rows = [e1_name0, e1_name1]
     raw_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     pidgin_path = create_yell_pidgin_path(x_yell_dir)
     upsert_sheet(pidgin_path, name_raw_str, raw_name_df)
     assert os_path_exists(pidgin_path)
@@ -74,7 +77,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario1_CreatesFileFromSingleIdea(
     e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
     e1_name_rows = [e1_name0, e1_name1]
     raw_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     pidgin_path = create_yell_pidgin_path(x_yell_dir)
     upsert_sheet(pidgin_path, name_raw_str, raw_name_df)
     assert os_path_exists(pidgin_path)
@@ -118,7 +121,7 @@ def test_etl_pidgin_label_raw_to_label_agg_Scenario0_CreatesFileFromSingleIdea(
     e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
     e1_label_rows = [e1_label0, e1_label1]
     raw_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     pidgin_path = create_yell_pidgin_path(x_yell_dir)
     upsert_sheet(pidgin_path, label_raw_str, raw_label_df)
     assert os_path_exists(pidgin_path)
@@ -162,7 +165,7 @@ def test_etl_pidgin_road_raw_to_road_agg_Scenario0_CreatesFileFromSingleIdea(
     e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
     raw_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     pidgin_path = create_yell_pidgin_path(x_yell_dir)
     upsert_sheet(pidgin_path, road_raw_str, raw_road_df)
     assert os_path_exists(pidgin_path)
@@ -206,7 +209,7 @@ def test_etl_pidgin_tag_raw_to_tag_agg_Scenario0_CreatesFileFromSingleIdea(
     e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
     e1_tag_rows = [e1_tag0, e1_tag1]
     raw_tag_df = DataFrame(e1_tag_rows, columns=tag_raw_columns)
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     pidgin_path = create_yell_pidgin_path(x_yell_dir)
     upsert_sheet(pidgin_path, tag_raw_str, raw_tag_df)
     assert os_path_exists(pidgin_path)
@@ -293,7 +296,7 @@ def test_etl_yell_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDim
     e1_tag_rows = [e1_tag0, e1_tag1]
     raw_tag_df = DataFrame(e1_tag_rows, columns=tag_raw_columns)
 
-    x_yell_dir = get_test_etl_dir()
+    x_yell_dir = get_module_temp_dir()
     pidgin_path = create_yell_pidgin_path(x_yell_dir)
     upsert_sheet(pidgin_path, name_raw_str, raw_name_df)
     upsert_sheet(pidgin_path, label_raw_str, raw_label_df)

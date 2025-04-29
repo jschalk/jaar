@@ -1,5 +1,5 @@
 from src.a00_data_toolboxs.file_toolbox import get_level1_dirs, set_dir
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir
+from src.a18_etl_toolbox._utils.env_utils import get_module_temp_dir
 from pathlib import Path
 
 
@@ -31,7 +31,7 @@ def test_get_level1_dirs_NonExistentDirectory():
 
 def test_get_level1_dirs_ReturnsObjSorted():
     # ESTABLISH
-    test_dir = get_test_etl_dir()
+    test_dir = get_module_temp_dir()
     # Create a temporary directory structure
     set_dir((Path(test_dir) / "dir2"))
     set_dir((Path(test_dir) / "dir1"))

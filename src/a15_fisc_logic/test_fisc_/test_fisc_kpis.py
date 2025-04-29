@@ -23,12 +23,12 @@ from src.a15_fisc_logic.fisc_report import (
     get_fisc_jobs_agenda_dataframe,
     get_fisc_jobs_agenda_plotly_fig,
 )
-from src.a15_fisc_logic.examples.example_fiscs import (
+from src.a15_fisc_logic._utils.example_fiscs import (
     create_example_fisc2,
     create_example_fisc3,
     create_example_fisc4,
 )
-from src.a15_fisc_logic.examples.fisc_env import env_dir_setup_cleanup
+from src.a15_fisc_logic._utils.env_utils import env_dir_setup_cleanup
 
 
 def test_get_fisc_guts_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics_bool):

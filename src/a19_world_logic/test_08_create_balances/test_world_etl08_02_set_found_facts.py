@@ -5,8 +5,8 @@ from src.a11_deal_cell_logic.cell import cellunit_shop
 from src.a12_hub_tools.hub_path import create_cell_dir_path as cell_dir
 from src.a12_hub_tools.hub_tool import cellunit_save_to_dir, cellunit_get_from_dir
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 

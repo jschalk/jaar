@@ -8,7 +8,10 @@ from src.a18_etl_toolbox.transformers import (
     event_pidgin_to_pidgin_csv_files,
     etl_otz_event_pidgins_to_otz_pidgin_csv_files,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from os.path import exists as os_path_exists
@@ -16,7 +19,7 @@ from os.path import exists as os_path_exists
 
 def test_etl_event_pidgin_to_pidgin_csv_files_Scenario0_Nofile(env_dir_setup_cleanup):
     # ESTABLISH
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_str = "Sue"
     sue_face_dir = create_path(faces_dir, sue_str)
     event3 = 3
@@ -70,7 +73,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario1_1Event_name(env_dir_setup_cl
     e3_name_row = [sue_str, event3, bob_otx, bob2_inx, x_nan, x_nan, x_nan]
     e3_name_df = DataFrame([e3_name_row], columns=name_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event3_dir = create_path(sue_dir, event3)
     event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event3)
@@ -105,7 +108,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cl
     e7_road_rows = [e7_road0, e7_road1]
     e7_road_df = DataFrame(e7_road_rows, columns=road_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event7_dir = create_path(sue_dir, event7)
     event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
@@ -157,7 +160,7 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
     e9_road_rows = [e9_road0, e9_road1]
     e9_road_df = DataFrame(e9_road_rows, columns=road_agg_columns)
 
-    faces_dir = get_test_etl_dir()
+    faces_dir = get_module_temp_dir()
     bob_dir = create_path(faces_dir, bob_str)
     sue_dir = create_path(faces_dir, sue_str)
     zia_dir = create_path(faces_dir, zia_str)

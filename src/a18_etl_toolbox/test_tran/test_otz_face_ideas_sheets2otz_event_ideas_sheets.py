@@ -8,7 +8,10 @@ from src.a17_idea_logic.idea_db_tool import (
     sheet_exists,
 )
 from src.a18_etl_toolbox.transformers import etl_otz_face_ideas_to_otz_event_otx_ideas
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
@@ -43,7 +46,7 @@ def test_etl_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     zia2 = [zia_str, event9, accord23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=idea_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
-    x_etl_dir = get_test_etl_dir()
+    x_etl_dir = get_module_temp_dir()
     x_syntax_otz_dir = create_path(x_etl_dir, "syntax_otz")
     br00003_filename = "br00003.xlsx"
     sue_dir = create_path(x_syntax_otz_dir, sue_str)

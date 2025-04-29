@@ -11,7 +11,10 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a18_etl_toolbox.transformers import (
     etl_yell_agg_non_pidgin_ideas_to_yell_valid,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas.testing import (
     assert_frame_equal as pandas_assert_frame_equal,
 )
@@ -43,7 +46,7 @@ def test_etl_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenario0(
     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
     row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-    yell_dir = create_path(get_test_etl_dir(), "yell")
+    yell_dir = create_path(get_module_temp_dir(), "yell")
     yell_file_path = create_path(yell_dir, "br00003.xlsx")
     yell_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
     upsert_sheet(yell_file_path, yell_agg_str(), yell_agg_df)

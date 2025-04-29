@@ -9,8 +9,8 @@ from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, yell_raw_str
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from pandas import DataFrame

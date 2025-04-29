@@ -36,7 +36,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 from src.a08_bud_atom_logic.atom import atom_insert, atom_update, atom_delete
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
-from src.a13_bud_listen_logic.examples.example_listen_buds import (
+from src.a13_bud_listen_logic._utils.example_listen_buds import (
     get_budunit_with_4_levels,
 )
 from src.a00_data_toolboxs.dict_toolbox import (

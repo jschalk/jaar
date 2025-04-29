@@ -9,7 +9,10 @@ from src.a18_etl_toolbox.tran_path import (
     create_stances_owner_dir_path,
     create_stance0001_path,
 )
-from src.a13_bud_listen_logic.examples.listen_env import get_listen_temp_env_dir
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 
 
 def test_hub_path_constants_are_values():
@@ -20,7 +23,7 @@ def test_hub_path_constants_are_values():
 
 def test_create_yell_pidgin_path_ReturnObj():
     # ESTABLISH
-    x_yell_dir = get_listen_temp_env_dir()
+    x_yell_dir = get_module_temp_dir()
 
     # WHEN
     gen_yell_event_path = create_yell_pidgin_path(x_yell_dir)
@@ -32,7 +35,7 @@ def test_create_yell_pidgin_path_ReturnObj():
 
 def test_create_syntax_otx_pidgin_path_ReturnObj():
     # ESTABLISH
-    syntax_otz_dir = get_listen_temp_env_dir()
+    syntax_otz_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -46,7 +49,7 @@ def test_create_syntax_otx_pidgin_path_ReturnObj():
 
 def test_create_otx_event_pidgin_path_ReturnObj():
     # ESTABLISH
-    syntax_otz_dir = get_listen_temp_env_dir()
+    syntax_otz_dir = get_module_temp_dir()
     bob_str = "Bob"
     event7 = 7
 
@@ -62,7 +65,7 @@ def test_create_otx_event_pidgin_path_ReturnObj():
 
 def test_create_stances_dir_path_ReturnObj():
     # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_module_temp_dir()
 
     # WHEN
     gen_bob_stance_dir = create_stances_dir_path(x_fisc_mstr_dir)
@@ -74,7 +77,7 @@ def test_create_stances_dir_path_ReturnObj():
 
 def test_create_stances_owner_dir_path_ReturnObj():
     # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -88,7 +91,7 @@ def test_create_stances_owner_dir_path_ReturnObj():
 
 def test_create_stance0001_path_ReturnObj():
     # ESTABLISH
-    x_fisc_mstr_dir = get_listen_temp_env_dir()
+    x_fisc_mstr_dir = get_module_temp_dir()
 
     # WHEN
     gen_stance0001_xlsx_path = create_stance0001_path(x_fisc_mstr_dir)

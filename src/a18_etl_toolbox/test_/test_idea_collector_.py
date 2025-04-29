@@ -8,7 +8,10 @@ from src.a18_etl_toolbox.idea_collector import (
     get_all_idea_dataframes,
     IdeaFileRef,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame
 
 
@@ -16,7 +19,7 @@ def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_test_etl_dir()
+    env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -44,7 +47,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_test_etl_dir()
+    env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -102,7 +105,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_test_etl_dir()
+    env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     event_1 = 1
@@ -141,7 +144,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
 
 def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_test_etl_dir()
+    env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     event_1 = 1

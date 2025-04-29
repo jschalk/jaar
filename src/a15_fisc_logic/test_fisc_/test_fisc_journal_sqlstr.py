@@ -2,7 +2,7 @@
 # from src.a00_data_toolboxs.sqlite import check_table_column_existence
 # from src.a15_fisc_logic.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.a15_fisc_logic.fisc import fiscunit_shop
-# from src.a15_fisc_logic.examples.fisc_env import (
+# from src.a15_fisc_logic._utils.fisc_env import (
 #     env_dir_setup_cleanup,
 # )
 # from src.a00_data_toolboxs.sqlite import get_row_count
@@ -15,7 +15,7 @@
 # ):
 #     # ESTABLISH
 #     accord45_str = "accord45"
-#     accord_fisc = fiscunit_shop(accord45_str, get_test_fisc_mstr_dir())
+#     accord_fisc = fiscunit_shop(accord45_str, get_module_temp_dir())
 #     # with accord_fisc.get_journal_conn() as journal_conn:
 #     #     assert check_table_column_existence({atom_hx_table_name()}, journal_conn)
 #     #     assert get_row_count(journal_conn, atom_hx_table_name()) == 0

@@ -1,10 +1,10 @@
-from src.a06_bud_logic.bud import budunit_shop
+from src.a01_word_logic.road import get_default_fisc_tag as root_tag
 from src.a05_item_logic.item import itemunit_shop
-from src.a06_bud_logic.examples.example_buds import (
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic._utils.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
 from pytest import raises as pytest_raises
-from src.a01_word_logic.road import get_default_fisc_tag as root_tag
 
 
 def test_BudUnit_edit_item_tag_FailsWhenItemDoesNotExist():

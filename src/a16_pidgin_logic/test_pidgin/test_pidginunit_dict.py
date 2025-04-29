@@ -11,7 +11,7 @@ from src.a16_pidgin_logic.pidgin import (
     get_pidginunit_from_dict,
     get_pidginunit_from_json,
 )
-from src.a16_pidgin_logic.examples.example_pidgins import (
+from src.a16_pidgin_logic._utils.example_pidgins import (
     get_clean_roadmap,
     get_clean_tagmap,
     get_swim_labelmap,

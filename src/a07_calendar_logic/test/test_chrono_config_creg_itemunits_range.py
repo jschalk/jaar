@@ -1,5 +1,5 @@
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic.examples.chrono_examples import (
+from src.a07_calendar_logic._utils.calendar_examples import (
     add_time_creg_itemunit,
     get_cregtime_str,
     get_sun,

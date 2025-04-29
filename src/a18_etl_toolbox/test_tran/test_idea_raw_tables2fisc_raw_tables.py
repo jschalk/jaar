@@ -62,7 +62,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_fisc_raw_tables_to_fisc_csvs,
     set_fisc_raw_error_message,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
@@ -78,7 +81,7 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario0_From_br00011_IdeaFile(
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    inz_faces_dir = get_test_etl_dir()
+    inz_faces_dir = get_module_temp_dir()
     sue_inz_dir = create_path(inz_faces_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
@@ -803,7 +806,7 @@ def test_etl_fisc_raw_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_prime_tables(cursor)
-        fisc_mstr_dir = get_test_etl_dir()
+        fisc_mstr_dir = get_module_temp_dir()
         fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
         x_fisc = FiscPrimeObjsRef(fiscs_dir)
         fisc_cols = FiscPrimeColumnsRef()
@@ -865,7 +868,7 @@ def test_etl_fisc_raw_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_prime_tables(cursor)
-        fisc_mstr_dir = get_test_etl_dir()
+        fisc_mstr_dir = get_module_temp_dir()
         fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
         x_fisc = FiscPrimeObjsRef(fiscs_dir)
         fisc_cols = FiscPrimeColumnsRef()

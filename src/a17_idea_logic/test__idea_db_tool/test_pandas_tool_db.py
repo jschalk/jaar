@@ -8,7 +8,10 @@ from src.a08_bud_atom_logic.atom_config import (
     gogo_want_str,
 )
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic.examples.idea_env import idea_env_setup_cleanup, idea_fiscs_dir
+from src.a17_idea_logic._utils.env_utils import (
+    env_dir_setup_cleanup,
+    idea_fiscs_dir,
+)
 from src.a17_idea_logic.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from pytest import fixture as pytest_fixture
 from os import remove as os_remove
@@ -136,7 +139,7 @@ def test_insert_idea_csv_ChangesDBState_add_to_empty_table(
 
 
 def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
-    setup_database_and_csv: tuple[sqlite3_Connection, str, str], idea_env_setup_cleanup
+    setup_database_and_csv: tuple[sqlite3_Connection, str, str], env_dir_setup_cleanup
 ):
     """Test the insert_csv function using pytest."""
     # ESTABLISH

@@ -6,7 +6,7 @@ from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.world_env import env_dir_setup_cleanup
+from src.a19_world_logic._utils.env_utils import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 

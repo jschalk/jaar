@@ -19,7 +19,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_yell_agg_db_to_yell_valid_db,
     etl_yell_agg_db_to_yell_agg_df,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
@@ -235,7 +238,7 @@ VALUES
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, agg_br00003_tablename) == 3
-        yell_dir = create_path(get_test_etl_dir(), "yell")
+        yell_dir = create_path(get_module_temp_dir(), "yell")
         yell_file_path = create_path(yell_dir, "br00003.xlsx")
         assert not sheet_exists(yell_file_path, yell_agg_str())
 

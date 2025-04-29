@@ -31,14 +31,17 @@ from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeColumnsRef,
     create_init_fisc_prime_files,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
 def test_FiscPrimeObjsRef_Exists():
     # ESTABLISH
-    x_dir = get_test_etl_dir()
+    x_dir = get_module_temp_dir()
 
     # WHEN
     xp = FiscPrimeObjsRef(x_dir)
@@ -185,7 +188,7 @@ def test_FiscPrimeColumnsRef_Exists():
 
 def test_create_init_fisc_prime_files_CreatesFiles_raw(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_test_etl_dir()
+    x_dir = get_module_temp_dir()
     raw_str = "raw"
     fiscref = FiscPrimeObjsRef(x_dir)
     assert sheet_exists(fiscref.unit_excel_path, raw_str) is False
@@ -213,7 +216,7 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_raw(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_test_etl_dir()
+    x_dir = get_module_temp_dir()
 
     # WHEN
     create_init_fisc_prime_files(x_dir)
@@ -242,7 +245,7 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_raw(
 
 def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_test_etl_dir()
+    x_dir = get_module_temp_dir()
     agg_str = "agg"
     xp = FiscPrimeObjsRef(x_dir)
     assert sheet_exists(xp.unit_excel_path, agg_str) is False
@@ -268,7 +271,7 @@ def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
 
 def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_test_etl_dir()
+    x_dir = get_module_temp_dir()
 
     # WHEN
     create_init_fisc_prime_files(x_dir)

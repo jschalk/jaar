@@ -17,12 +17,12 @@ from src.a15_fisc_logic.fisc import (
     get_from_dict as fiscunit_get_from_dict,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic.examples.example_worlds import (
+from src.a19_world_logic._utils.example_worlds import (
     get_bob_mop_with_reason_budunit_example,
     example_casa_clean_factunit,
 )
-from src.a19_world_logic.examples.world_env import (
-    get_test_worlds_dir as worlds_dir,
+from src.a19_world_logic._utils.env_utils import (
+    get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -402,7 +402,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     x_dir = get_road_temp_env_dir()
+# #     x_dir = get_module_temp_dir()
 # #     bob_str = "Bob"
 # #     sue_str = "Sue"
 # #     yao_str = "Yao"
@@ -435,7 +435,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     x_dir = get_road_temp_env_dir()
+# #     x_dir = get_module_temp_dir()
 # #     bob_str = "Bob"
 # #     sue_str = "Sue"
 # #     yao_str = "Yao"
@@ -470,7 +470,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     x_dir = get_road_temp_env_dir()
+# #     x_dir = get_module_temp_dir()
 # #     bob_str = "Bob"
 # #     sue_str = "Sue"
 # #     root_ledger = {bob_str: 10, sue_str: 40}
@@ -496,7 +496,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     x_dir = get_road_temp_env_dir()
+# #     x_dir = get_module_temp_dir()
 # #     bob_str = "Bob"
 # #     sue_str = "Sue"
 # #     yao_str = "Yao"
@@ -537,7 +537,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 
 # # def test_allot_nested_scale_SetsFiles_Scenario0(env_dir_setup_cleanup):
 # #     # ESTABLISH
-# #     x_dir = get_road_temp_env_dir()
+# #     x_dir = get_module_temp_dir()
 # #     bob_str = "Bob"
 # #     sue_str = "Sue"
 # #     yao_str = "Yao"
@@ -603,7 +603,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
-# #     x_dir = get_road_temp_env_dir()
+# #     x_dir = get_module_temp_dir()
 # #     bob_str = "Bob"
 # #     sue_str = "Sue"
 # #     yao_str = "Yao"

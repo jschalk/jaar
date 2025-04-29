@@ -13,7 +13,10 @@ from src.a18_etl_toolbox.stance_tool import (
     collect_stance_csv_strs,
     create_stance0001_file,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from os.path import exists as os_path_exists
 
 
@@ -21,7 +24,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoFiscUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -36,7 +39,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleFiscUnit_NoBudUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     fisc_json_path = create_fisc_json_path(fisc_mstr_dir, a23_str)
@@ -55,7 +58,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BudUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
@@ -81,7 +84,7 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoFiscUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     stance0001_path = create_stance0001_path(fisc_mstr_dir)
     assert os_path_exists(stance0001_path) is False
 

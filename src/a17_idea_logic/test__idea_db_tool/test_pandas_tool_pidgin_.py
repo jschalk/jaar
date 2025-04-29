@@ -13,7 +13,7 @@ from src.a17_idea_logic.idea_db_tool import (
     translate_all_columns_dataframe,
     get_dataframe_pidginable_columns,
 )
-from src.a16_pidgin_logic.examples.example_pidgins import (
+from src.a16_pidgin_logic._utils.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
     get_casa_maison_pidginunit_set_by_tag,
     get_casa_maison_road_otx_dt,

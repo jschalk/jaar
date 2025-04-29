@@ -1,7 +1,7 @@
 from src.a00_data_toolboxs.file_toolbox import create_path
 from src.a03_group_logic.group import awardlink_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic.examples.chrono_examples import get_five_config
+from src.a07_calendar_logic._utils.calendar_examples import get_five_config
 from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
     get_default_timeline_config_dict,
@@ -45,8 +45,11 @@ from src.a17_idea_logic.idea_csv_tool import (
     add_packunit_to_stance_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv
-from src.a17_idea_logic.examples.idea_env import idea_fiscs_dir, idea_env_setup_cleanup
-from src.a17_idea_logic.examples.idea_df_examples import (
+from src.a17_idea_logic._utils.env_utils import (
+    idea_fiscs_dir,
+    env_dir_setup_cleanup,
+)
+from src.a17_idea_logic._utils.idea_df_examples import (
     get_ex2_br00000_df,
     get_ex2_br00001_df,
     get_ex2_br00002_df,
@@ -59,7 +62,7 @@ from copy import deepcopy as copy_deepcopy
 
 
 def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     csv_delimiter = ","
@@ -142,7 +145,7 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
 
 
 def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()
@@ -214,7 +217,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
 
 
 def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()

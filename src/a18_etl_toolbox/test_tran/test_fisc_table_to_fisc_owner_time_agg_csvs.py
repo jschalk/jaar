@@ -12,7 +12,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_fisc_agg_tables_to_fisc_ote1_agg,
     etl_fisc_table2fisc_ote1_agg_csvs,
 )
-from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
+from src.a18_etl_toolbox._utils.env_utils import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
@@ -29,7 +32,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
     accord45_str = "accord45"
     timepoint55 = 55
     timepoint66 = 66
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_prime_tables(cursor)
@@ -87,7 +90,7 @@ def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro2_ote1_agg_TableIsEmpty(
     accord23_str = "accord23"
     accord45_str = "accord45"
     timepoint55 = 55
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a45_fisc_dir = create_fisc_dir_path(fisc_mstr_dir, accord45_str)
     print(f"{a45_fisc_dir=}")
     set_dir(a45_fisc_dir)

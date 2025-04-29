@@ -1,9 +1,9 @@
 from src.a04_reason_logic.reason_item import factunit_shop, factunit_shop, factheir_shop
 from src.a05_item_logic.item import itemunit_shop
-from src.a06_bud_logic.examples.example_buds import (
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic._utils.example_buds import (
     get_budunit_1Task_1CE0MinutesReason_1Fact,
 )
-from src.a06_bud_logic.bud import budunit_shop
 from pytest import raises as pytest_raises
 
 

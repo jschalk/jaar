@@ -1,6 +1,6 @@
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic.examples.chrono_examples import (
+from src.a07_calendar_logic._utils.calendar_examples import (
     get_creg_min_from_dt,
     add_time_creg_itemunit,
     get_cregtime_str,

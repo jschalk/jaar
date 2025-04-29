@@ -15,7 +15,10 @@ from src.a12_hub_tools.hub_path import (
     create_event_all_pack_path,
 )
 from src.a18_etl_toolbox.transformers import etl_event_bud_csvs_to_pack_json
-from src.a18_etl_toolbox.examples.etl_env import env_dir_setup_cleanup, get_test_etl_dir
+from src.a18_etl_toolbox._utils.env_utils import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 from os.path import exists as os_path_exists
 
 
@@ -29,7 +32,7 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV
     a23_str = "accord23"
     put_agg_tablename = f"{budunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
@@ -75,7 +78,7 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     a23_str = "accord23"
     put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    fisc_mstr_dir = get_test_etl_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)

@@ -4,12 +4,12 @@ from src.a08_bud_atom_logic.atom_config import (
     group_label_str,
     credor_respect_str,
 )
-from src.a17_idea_logic.examples.idea_env import (
-    idea_env_setup_cleanup,
+from src.a17_idea_logic._utils.env_utils import (
+    env_dir_setup_cleanup,
     idea_fiscs_dir,
     idea_examples_dir,
 )
-from src.a17_idea_logic.examples.examples_pandas import (
+from src.a17_idea_logic._utils.example_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
     get_small_example01_dataframe,
@@ -67,7 +67,7 @@ def test_get_ordered_csv_ReturnsObj():
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     env_dir = idea_examples_dir()
@@ -87,7 +87,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     env_dir = idea_examples_dir()

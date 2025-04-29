@@ -16,7 +16,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_yell_raw_db,
     etl_yell_raw_db_to_yell_raw_df,
 )
-from src.a18_etl_toolbox.examples.etl_env import get_test_etl_dir, env_dir_setup_cleanup
+from src.a18_etl_toolbox._utils.env_utils import (
+    get_module_temp_dir,
+    env_dir_setup_cleanup,
+)
 from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
@@ -32,8 +35,8 @@ def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_dir = create_path(get_test_etl_dir(), "sound")
-    yell_dir = create_path(get_test_etl_dir(), "yell")
+    sound_dir = create_path(get_module_temp_dir(), "sound")
+    yell_dir = create_path(get_module_temp_dir(), "yell")
     sound_file_path = create_path(sound_dir, ex_filename)
     idea_columns = [
         face_name_str(),

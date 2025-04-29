@@ -25,12 +25,11 @@ from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
     get_default_job_listen_count,
 )
-from src.a15_fisc_logic.examples.fisc_env import (
-    get_test_fisc_mstr_dir,
+from src.a15_fisc_logic._utils.env_utils import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists, isdir as os_path_isdir
-from pytest import raises as pytest_raises
 
 
 def test_get_default_job_listen_count_ReturnsObj():
@@ -78,7 +77,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert a23_fisc.fund_coin == default_fund_coin_if_None()
     assert a23_fisc.respect_bit == default_respect_bit_if_None()
     assert a23_fisc.penny == filter_penny()
-    assert a23_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
+    assert a23_fisc.fisc_mstr_dir == get_module_temp_dir()
     assert a23_fisc.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
     assert a23_fisc._owners_dir != None
@@ -91,11 +90,11 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     a23_str = "accord23"
 
     # WHEN
-    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir=get_test_fisc_mstr_dir())
+    a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir=get_module_temp_dir())
 
     # THEN
     assert a23_fisc.fisc_tag == a23_str
-    assert a23_fisc.fisc_mstr_dir == get_test_fisc_mstr_dir()
+    assert a23_fisc.fisc_mstr_dir == get_module_temp_dir()
     assert a23_fisc._owners_dir is not None
     assert a23_fisc._packs_dir is not None
 
@@ -113,7 +112,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     # WHEN
     a23_fisc = fiscunit_shop(
         fisc_tag=a23_str,
-        fisc_mstr_dir=get_test_fisc_mstr_dir(),
+        fisc_mstr_dir=get_module_temp_dir(),
         offi_times=a45_offi_times,
         in_memory_journal=True,
         bridge=slash_str,
@@ -135,8 +134,8 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
 def test_FiscUnit_set_fisc_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
-    accord_fisc = FiscUnit(a23_str, get_test_fisc_mstr_dir())
-    x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
+    accord_fisc = FiscUnit(a23_str, get_module_temp_dir())
+    x_fiscs_dir = create_path(get_module_temp_dir(), "fiscs")
     x_fisc_dir = create_path(x_fiscs_dir, a23_str)
     x_owners_dir = create_path(x_fisc_dir, "owners")
     x_packs_dir = create_path(x_fisc_dir, "packs")
@@ -171,11 +170,11 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
     a23_str = "accord23"
 
     # WHEN
-    a23_fisc = fiscunit_shop(a23_str, get_test_fisc_mstr_dir(), in_memory_journal=True)
+    a23_fisc = fiscunit_shop(a23_str, get_module_temp_dir(), in_memory_journal=True)
 
     # THEN
     assert a23_fisc.fisc_tag == a23_str
-    x_fiscs_dir = create_path(get_test_fisc_mstr_dir(), "fiscs")
+    x_fiscs_dir = create_path(get_module_temp_dir(), "fiscs")
     assert a23_fisc._fisc_dir == create_path(x_fiscs_dir, a23_str)
     assert a23_fisc._owners_dir == create_path(a23_fisc._fisc_dir, "owners")
 
@@ -184,7 +183,7 @@ def test_FiscUnit_create_empty_bud_from_fisc_ReturnsObj_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
     x_fund_coin = 4
@@ -214,7 +213,7 @@ def test_FiscUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_Ex
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     sue_str = "Sue"
@@ -236,7 +235,7 @@ def test_FiscUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_owner_dir_Ex
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
     x_fund_coin = 4
@@ -273,7 +272,7 @@ def test_FiscUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExistsIs
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
     sue_str = "Sue"
@@ -298,7 +297,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario0_CreatesFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
     x_fund_coin = 4
@@ -326,7 +325,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
     x_fund_coin = 4
@@ -357,7 +356,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
     x_fund_coin = 4
@@ -389,7 +388,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
     x_fund_coin = 4
@@ -435,7 +434,7 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
 ):
     # ESTABLISH
     a23_str = "accord23"
-    x_fisc_mstr_dir = get_test_fisc_mstr_dir()
+    x_fisc_mstr_dir = get_module_temp_dir()
     a23_fisc = fiscunit_shop(a23_str, x_fisc_mstr_dir, in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
@@ -504,9 +503,7 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
 
 def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_fisc = fiscunit_shop(
-        "accord23", get_test_fisc_mstr_dir(), in_memory_journal=True
-    )
+    a23_fisc = fiscunit_shop("accord23", get_module_temp_dir(), in_memory_journal=True)
     sue_str = "Sue"
     yao_str = "Yao"
 
@@ -544,7 +541,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
 
 # def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
-#     fisc_mstr_dir = get_test_fisc_mstr_dir()
+#     fisc_mstr_dir = get_module_temp_dir()
 #     time56 = 56
 #     a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir, _offi_time_max=time56)
 #     assert a23_fisc.offi_time == 0
@@ -561,7 +558,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
 
 # def test_FiscUnit_set_offi_time_Scenario1_SetsAttr():
 #     # ESTABLISH
-#     a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+#     a23_fisc = fiscunit_shop("accord23", get_module_temp_dir())
 #     assert a23_fisc.offi_time == 0
 #     assert a23_fisc._offi_time_max == 0
 
@@ -576,7 +573,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
 
 def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     time7 = 7
     a23_fisc = fiscunit_shop("accord23", fisc_mstr_dir)
     a23_fisc._offi_time_max = time7
@@ -594,7 +591,7 @@ def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
 
 # def test_FiscUnit_set_offi_time_max_Scenario1_SetsAttr():
 #     # ESTABLISH
-#     fisc_mstr_dir = get_test_fisc_mstr_dir()
+#     fisc_mstr_dir = get_module_temp_dir()
 #     time21 = 21
 #     time77 = 77
 #     a23_fisc = fiscunit_shop(
@@ -613,7 +610,7 @@ def test_FiscUnit_set_offi_time_max_Scenario0_SetsAttr():
 
 # def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
-#     a23_fisc = fiscunit_shop("accord23", get_test_fisc_mstr_dir())
+#     a23_fisc = fiscunit_shop("accord23", get_module_temp_dir())
 #     assert a23_fisc.offi_time == 0
 #     assert a23_fisc._offi_time_max == 0
 

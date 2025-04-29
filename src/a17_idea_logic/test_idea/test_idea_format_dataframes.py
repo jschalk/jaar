@@ -2,7 +2,7 @@ from src.a00_data_toolboxs.file_toolbox import open_file, create_path
 from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic.examples.chrono_examples import (
+from src.a07_calendar_logic._utils.calendar_examples import (
     add_time_creg_itemunit,
     add_time_five_itemunit,
 )
@@ -25,10 +25,10 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00013_itemunit_v0_0_0,
     idea_format_00019_itemunit_v0_0_0,
 )
-from src.a17_idea_logic.examples.idea_env import (
+from src.a17_idea_logic._utils.env_utils import (
     idea_examples_dir,
     idea_fiscs_dir,
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
 
@@ -204,7 +204,7 @@ def test_save_idea_csv_Arg_idea_format_00019_itemunit_v0_0_0():
 
 
 def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
-    idea_env_setup_cleanup,
+    env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -258,7 +258,7 @@ def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     assert open_file(idea_fiscs_dir(), name_filename) == sue2_acct_example_csv
 
 
-def test_save_idea_csv_Arg_idea_format_00013_itemunit_v0_0_0(idea_env_setup_cleanup):
+def test_save_idea_csv_Arg_idea_format_00013_itemunit_v0_0_0(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"

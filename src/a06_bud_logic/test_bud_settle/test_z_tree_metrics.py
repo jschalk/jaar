@@ -1,9 +1,9 @@
-from src.a06_bud_logic.examples.example_buds import budunit_v001
+from src.a01_word_logic.road import create_road_from_tags
 from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a05_item_logic.item import itemunit_shop
-from src.a01_word_logic.road import create_road_from_tags
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic._utils.example_buds import budunit_v001
 
 
 def test_BudUnit_get_tree_metrics_exists():

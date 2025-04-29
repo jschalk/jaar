@@ -49,9 +49,9 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     insert_job_budunit,
     insert_job_obj,
 )
-from src.a20_lobby_db_toolbox.examples.lobby_db_env import (
+from src.a20_lobby_db_toolbox._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_lobby_dir,
+    get_module_temp_dir,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -973,7 +973,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    lobby_mstr_dir = get_test_lobby_dir()
+    lobby_mstr_dir = get_module_temp_dir()
     c23_str = "Chat23"
     m23_str = "music23"
     m23_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c23_str, m23_str)
@@ -1050,7 +1050,7 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    lobby_mstr_dir = get_test_lobby_dir()
+    lobby_mstr_dir = get_module_temp_dir()
     c77_str = "Chat77"
     a23_str = "accord23"
     sue_str = "Sue"

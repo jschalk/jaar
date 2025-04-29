@@ -3,10 +3,10 @@ from src.a11_deal_cell_logic.cell import budevent_facts_str
 from src.a12_hub_tools.hub_path import create_cell_json_path, create_budevent_path
 from src.a12_hub_tools.hub_tool import save_arbitrary_budevent, cellunit_add_json_file
 from src.a15_fisc_logic.fisc_tool import load_cells_budevent
-from src.a15_fisc_logic.examples.example_fiscs import example_casa_clean_factunit
-from src.a15_fisc_logic.examples.fisc_env import (
+from src.a15_fisc_logic._utils.example_fiscs import example_casa_clean_factunit
+from src.a15_fisc_logic._utils.env_utils import (
     env_dir_setup_cleanup,
-    get_test_fisc_mstr_dir,
+    get_module_temp_dir,
 )
 from os.path import exists as os_path_exists
 
@@ -15,7 +15,7 @@ def test_load_cells_budevent_SetsFiles_Scenario0_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
     a23_str = "accord23"
     event300 = 300
@@ -39,7 +39,7 @@ def test_load_cells_budevent_SetsFiles_Scenario1_WithFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
     a23_str = "accord23"
     event300 = 300
@@ -67,7 +67,7 @@ def test_load_cells_budevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fisc_mstr_dir = get_test_fisc_mstr_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
     a23_str = "accord23"
     event300 = 300
