@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a08_bud_atom_logic.atom_config import jkeys_str, jvalues_str
+from src.a08_bud_atom_logic._utils.str_a08 import jkeys_str, jvalues_str
 from os import getcwd as os_getcwd
 
 
@@ -19,82 +19,6 @@ def get_pidgin_config_dict() -> dict:
 
 def get_pidgin_dimens() -> set[str]:
     return set(get_pidgin_config_dict().keys())
-
-
-def pidginunit_str() -> str:
-    return "pidginunit"
-
-
-def pidgin_filename() -> str:
-    return "pidgin.json"
-
-
-def otx_bridge_str() -> str:
-    return "otx_bridge"
-
-
-def inx_bridge_str() -> str:
-    return "inx_bridge"
-
-
-def inx_label_str() -> str:
-    return "inx_label"
-
-
-def otx_label_str() -> str:
-    return "otx_label"
-
-
-def inx_name_str() -> str:
-    return "inx_name"
-
-
-def otx_name_str() -> str:
-    return "otx_name"
-
-
-def inx_tag_str() -> str:
-    return "inx_tag"
-
-
-def otx_tag_str() -> str:
-    return "otx_tag"
-
-
-def inx_road_str() -> str:
-    return "inx_road"
-
-
-def otx_road_str() -> str:
-    return "otx_road"
-
-
-def unknown_word_str() -> str:
-    return "unknown_word"
-
-
-def otx2inx_str() -> str:
-    return "otx2inx"
-
-
-def map_otx2inx_str() -> str:
-    return "map_otx2inx"
-
-
-def pidgin_name_str() -> str:
-    return "pidgin_name"
-
-
-def pidgin_label_str() -> str:
-    return "pidgin_label"
-
-
-def pidgin_tag_str() -> str:
-    return "pidgin_tag"
-
-
-def pidgin_road_str() -> str:
-    return "pidgin_road"
 
 
 def default_unknown_word() -> str:

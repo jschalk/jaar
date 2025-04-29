@@ -2,18 +2,6 @@ from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from os import getcwd as os_getcwd
 
 
-def jmetrics_str() -> str:
-    return "jmetrics"
-
-
-def fund_take_str() -> str:
-    return "fund_take"
-
-
-def fund_give_str() -> str:
-    return "fund_give"
-
-
 def get_bud_calc_config_filename() -> str:
     return "bud_calc_config.json"
 

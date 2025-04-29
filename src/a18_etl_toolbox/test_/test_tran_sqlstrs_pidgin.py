@@ -1,75 +1,12 @@
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
-    create_select_inconsistency_query,
-    create_update_inconsistency_error_query,
     get_create_table_sqlstr,
-    create_table2table_agg_insert_query,
     get_table_columns,
-    required_columns_exist,
-    create_select_query,
 )
-from src.a02_finance_logic._utils.strs_a02 import (
-    fisc_tag_str,
-    owner_name_str,
-    deal_time_str,
-    tran_time_str,
-)
-from src.a06_bud_logic._utils.a06_str_helpers import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
-)
-from src.a07_calendar_logic.chrono import (
-    timeline_tag_str,
-    c400_number_str,
-    monthday_distortion_str,
-    yr1_jan1_offset_str,
-)
-from src.a08_bud_atom_logic.atom_config import (
-    event_int_str,
-    face_name_str,
-    get_bud_dimens,
-    get_delete_key_name,
-)
-from src.a15_fisc_logic.fisc_config import (
-    get_fisc_dimens,
-    fiscunit_str,
-    fisc_cashbook_str,
-    fisc_dealunit_str,
-    fisc_timeline_hour_str,
-    fisc_timeline_month_str,
-    fisc_timeline_weekday_str,
-    fisc_timeoffi_str,
-)
-from src.a16_pidgin_logic.pidgin_config import (
-    get_pidgin_config_dict,
-    get_pidgin_config_args,
-    pidgin_label_str,
-    pidgin_road_str,
-    pidgin_tag_str,
-    pidgin_name_str,
-    get_pidgin_dimens,
-)
-from src.a17_idea_logic.idea_config import (
-    idea_number_str,
-    get_idea_sqlite_types,
-    get_idea_config_dict,
-    idea_category_str,
-    get_idea_numbers,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    get_pragma_table_fetchall,
-    get_default_sorted_list,
-    get_idea_into_dimen_raw_query,
-)
-from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
+from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
+from src.a17_idea_logic.idea_config import get_idea_sqlite_types, get_idea_config_dict
+from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_pidgin_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,

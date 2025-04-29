@@ -7,13 +7,15 @@ from src.a07_calendar_logic.chrono import (
     add_newtimeline_itemunit,
     new_timeline_itemunit,
     get_min_from_dt_offset,
+    chronounit_shop,
+)
+from src.a07_calendar_logic._utils.str_a07 import (
     hours_config_str,
     weekdays_config_str,
     months_config_str,
     timeline_tag_str,
     yr1_jan1_offset_str,
     c400_number_str,
-    chronounit_shop,
 )
 from src.a07_calendar_logic._utils.env_a07 import get_module_examples_dir
 from datetime import datetime

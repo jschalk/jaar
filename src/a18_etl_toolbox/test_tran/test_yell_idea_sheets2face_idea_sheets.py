@@ -1,20 +1,16 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
-from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a15_fisc_logic.fisc_config import cumlative_minute_str, hour_tag_str
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     inx_name_str,
     otx_bridge_str,
     otx_name_str,
     unknown_word_str,
 )
-from src.a17_idea_logic.idea_db_tool import (
-    get_sheet_names,
-    upsert_sheet,
-    yell_valid_str,
-    sheet_exists,
-)
+from src.a17_idea_logic._utils.str_a17 import yell_valid_str
+from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.transformers import etl_yell_ideas_to_otz_face_ideas
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,

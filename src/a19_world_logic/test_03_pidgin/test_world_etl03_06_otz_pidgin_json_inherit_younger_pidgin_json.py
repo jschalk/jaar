@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
-from src.a08_bud_atom_logic.atom_config import type_NameUnit_str
+from src.a06_bud_logic._utils.str_a06 import type_NameUnit_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, get_pidginunit_from_json
-from src.a16_pidgin_logic.pidgin_config import pidgin_filename
+from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,

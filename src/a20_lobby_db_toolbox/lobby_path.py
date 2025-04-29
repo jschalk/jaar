@@ -6,18 +6,6 @@ class LobbyID(str):
     pass
 
 
-def lobbys_str() -> str:
-    return "lobbys"
-
-
-def lobby_id_str() -> str:
-    return "lobby_id"
-
-
-def lobby_mstr_dir_str() -> str:
-    return "lobby_mstr_dir"
-
-
 def create_lobby_dir_path(lobby_mstr_dir: str, lobby_id: LobbyID) -> str:
     """Returns path: lobby_mstr_dir\\lobbys\\lobby_id"""
     lobbys_dir = create_path(lobby_mstr_dir, "lobbys")

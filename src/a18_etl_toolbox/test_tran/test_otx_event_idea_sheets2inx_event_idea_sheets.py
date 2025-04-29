@@ -1,19 +1,16 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     face_name_str,
     type_NameUnit_str,
     type_TagUnit_str,
     event_int_str,
 )
-from src.a16_pidgin_logic.pidgin_config import pidgin_filename
+from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic.idea_db_tool import (
-    upsert_sheet,
-    yell_valid_str,
-    sheet_exists,
-)
+from src.a17_idea_logic._utils.str_a17 import yell_valid_str
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.transformers import (
     etl_otz_event_ideas_to_inz_events,
     get_most_recent_event_int,

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
     type_NameUnit_str,
     type_TagUnit_str,
     type_RoadUnit_str,
@@ -10,7 +10,7 @@ from src.a08_bud_atom_logic.atom_config import (
     type_NameUnit_str,
     type_LabelUnit_str,
 )
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,

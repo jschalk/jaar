@@ -36,7 +36,6 @@ from src.a12_hub_tools.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     open_bud_file,
-    open_job_file,
 )
 from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,

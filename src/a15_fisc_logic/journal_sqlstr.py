@@ -1,5 +1,5 @@
-from src.a08_bud_atom_logic.atom_config import (
-    get_flattened_atom_table_build,
+from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
+from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_hx_table_name,
     atom_mstr_table_name,
 )

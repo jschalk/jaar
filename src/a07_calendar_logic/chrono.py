@@ -1,4 +1,4 @@
-from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
+from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from src.a01_word_logic.road import RoadUnit, TimeLineTag
 from src.a05_item_logic.item import (
@@ -11,30 +11,6 @@ from src.a06_bud_logic.bud import BudUnit
 from datetime import datetime
 from dataclasses import dataclass
 from os import getcwd as os_getcwd
-
-
-def c400_leap_str() -> str:
-    return "c400_leap"
-
-
-def c400_clean_str() -> str:
-    return "c400_clean"
-
-
-def c100_str() -> str:
-    return "c100"
-
-
-def yr4_leap_str() -> str:
-    return "yr4_leap"
-
-
-def yr4_clean_str() -> str:
-    return "yr4_clean"
-
-
-def year_str() -> str:
-    return "year"
 
 
 @dataclass
@@ -52,13 +28,13 @@ def get_c400_constants() -> C400Constants:
     c400_constants_path = create_path("src\\a07_calendar_logic", "c400_constants.json")
     c400_dict = open_json(c400_constants_path)
     return C400Constants(
-        day_length=c400_dict.get(f"{day_str()}_length"),
-        c400_leap_length=c400_dict.get(f"{c400_leap_str()}_length"),
-        c400_clean_length=c400_dict.get(f"{c400_clean_str()}_length"),
-        c100_length=c400_dict.get(f"{c100_str()}_length"),
-        yr4_leap_length=c400_dict.get(f"{yr4_leap_str()}_length"),
-        yr4_clean_length=c400_dict.get(f"{yr4_clean_str()}_length"),
-        year_length=c400_dict.get(f"{year_str()}_length"),
+        day_length=c400_dict.get("day_length"),
+        c400_leap_length=c400_dict.get("c400_leap_length"),
+        c400_clean_length=c400_dict.get("c400_clean_length"),
+        c100_length=c400_dict.get("c100_length"),
+        yr4_leap_length=c400_dict.get("yr4_leap_length"),
+        yr4_clean_length=c400_dict.get("yr4_clean_length"),
+        year_length=c400_dict.get("year_length"),
     )
 
 
@@ -68,42 +44,42 @@ def day_length() -> int:
 
 def stan_c400_leap_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().c400_leap_length
-    return itemunit_shop(c400_leap_str(), denom=x_denom, morph=True)
+    return itemunit_shop("c400_leap", denom=x_denom, morph=True)
 
 
 def stan_c400_clean_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().c400_clean_length
-    return itemunit_shop(c400_clean_str(), denom=x_denom, morph=True)
+    return itemunit_shop("c400_clean", denom=x_denom, morph=True)
 
 
 def stan_c100_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().c100_length
-    return itemunit_shop(c100_str(), denom=x_denom, morph=True)
+    return itemunit_shop("c100", denom=x_denom, morph=True)
 
 
 def stan_yr4_leap_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().yr4_leap_length
-    return itemunit_shop(yr4_leap_str(), denom=x_denom, morph=True)
+    return itemunit_shop("yr4_leap", denom=x_denom, morph=True)
 
 
 def stan_yr4_clean_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().yr4_clean_length
-    return itemunit_shop(yr4_clean_str(), denom=x_denom, morph=True)
+    return itemunit_shop("yr4_clean", denom=x_denom, morph=True)
 
 
 def stan_year_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().year_length
-    return itemunit_shop(year_str(), denom=x_denom, morph=True)
+    return itemunit_shop("year", denom=x_denom, morph=True)
 
 
 def stan_day_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().day_length
-    return itemunit_shop(day_str(), denom=x_denom, morph=True)
+    return itemunit_shop("day", denom=x_denom, morph=True)
 
 
 def stan_days_itemunit() -> ItemUnit:
     x_denom = get_c400_constants().day_length
-    return itemunit_shop(days_str(), denom=x_denom)
+    return itemunit_shop("days", denom=x_denom)
 
 
 def _get_morph_item(x_str: str, x_denom: int) -> ItemUnit:
@@ -112,30 +88,6 @@ def _get_morph_item(x_str: str, x_denom: int) -> ItemUnit:
 
 def week_length(x_int: int) -> int:
     return day_length() * x_int
-
-
-def time_str() -> str:
-    return "time"
-
-
-def day_str() -> str:
-    return "day"
-
-
-def days_str() -> str:
-    return f"{day_str()}s"
-
-
-def hour_str() -> str:
-    return "hour"
-
-
-def week_str() -> str:
-    return "week"
-
-
-def weeks_str() -> str:
-    return f"{week_str()}s"
 
 
 def create_weekday_itemunits(x_weekdays: list[str]) -> dict[str, ItemUnit]:
@@ -184,7 +136,7 @@ def create_hour_itemunits(x_hours_list: list[str]) -> dict[str, ItemUnit]:
 def create_week_itemunits(x_weekdays_list) -> dict[str, ItemUnit]:
     x_week_lenth = week_length(len(x_weekdays_list))
     week_str = "week"
-    weeks_str = f"{week_str}s"
+    weeks_str = "weeks"
     return {
         week_str: itemunit_shop(week_str, denom=x_week_lenth, morph=True),
         weeks_str: itemunit_shop(weeks_str, denom=x_week_lenth),
@@ -197,18 +149,18 @@ def new_timeline_itemunit(timeline_tag: TimeLineTag, c400_number: int) -> ItemUn
 
 
 def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
-    x_item_tag = timeline_config.get(timeline_tag_str())
-    x_c400_number = timeline_config.get(c400_number_str())
-    x_months = timeline_config.get(months_config_str())
-    x_mday = timeline_config.get(monthday_distortion_str())
-    x_hours_list = timeline_config.get(hours_config_str())
-    x_wkdays_list = timeline_config.get(weekdays_config_str())
-    x_yr1_jan1_offset = timeline_config.get(yr1_jan1_offset_str())
+    x_item_tag = timeline_config.get("timeline_tag")
+    x_c400_number = timeline_config.get("c400_number")
+    x_months = timeline_config.get("months_config")
+    x_mday = timeline_config.get("monthday_distortion")
+    x_hours_list = timeline_config.get("hours_config")
+    x_wkdays_list = timeline_config.get("weekdays_config")
+    x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
-    time_road = x_budunit.make_l1_road(time_str())
+    time_road = x_budunit.make_l1_road("time")
     new_road = x_budunit.make_road(time_road, x_item_tag)
-    day_road = x_budunit.make_road(new_road, day_str())
-    week_road = x_budunit.make_road(new_road, week_str())
+    day_road = x_budunit.make_road(new_road, "day")
+    week_road = x_budunit.make_road(new_road, "week")
     year_road = get_year_road(x_budunit, new_road)
 
     add_stan_itemunits(x_budunit, time_road, x_item_tag, x_c400_number)
@@ -216,7 +168,7 @@ def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     add_itemunits(x_budunit, new_road, create_week_itemunits(x_wkdays_list))
     add_itemunits(x_budunit, week_road, create_weekday_itemunits(x_wkdays_list))
     add_itemunits(x_budunit, year_road, create_month_itemunits(x_months, x_mday))
-    offset_item = itemunit_shop(yr1_jan1_offset_str(), addin=x_yr1_jan1_offset)
+    offset_item = itemunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
     x_budunit.set_item(offset_item, new_road)
     return x_budunit
 
@@ -234,16 +186,16 @@ def add_stan_itemunits(
     timeline_tag: TimeLineTag,
     timeline_c400_number: int,
 ):
-    time_road = x_budunit.make_l1_road(time_str())
+    time_road = x_budunit.make_l1_road("time")
     new_road = x_budunit.make_road(time_road, timeline_tag)
-    c400_leap_road = x_budunit.make_road(new_road, c400_leap_str())
-    c400_clean_road = x_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_road = x_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
-    yr4_clean_road = x_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    c400_leap_road = x_budunit.make_road(new_road, "c400_leap")
+    c400_clean_road = x_budunit.make_road(c400_leap_road, "c400_clean")
+    c100_road = x_budunit.make_road(c400_clean_road, "c100")
+    yr4_leap_road = x_budunit.make_road(c100_road, "yr4_leap")
+    yr4_clean_road = x_budunit.make_road(yr4_leap_road, "yr4_clean")
 
     if not x_budunit.item_exists(time_road):
-        x_budunit.set_l1_item(itemunit_shop(time_str()))
+        x_budunit.set_l1_item(itemunit_shop("time"))
     timeline_itemunit = new_timeline_itemunit(timeline_tag, timeline_c400_number)
     x_budunit.set_item(timeline_itemunit, time_road)
     x_budunit.set_item(stan_c400_leap_itemunit(), new_road)
@@ -257,87 +209,59 @@ def add_stan_itemunits(
 
 
 def get_c400_clean_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    c400_leap_road = x_budunit.make_road(time_range_root_road, c400_leap_str())
-    return x_budunit.make_road(c400_leap_road, c400_clean_str())
+    c400_leap_road = x_budunit.make_road(time_range_root_road, "c400_leap")
+    return x_budunit.make_road(c400_leap_road, "c400_clean")
 
 
 def get_c100_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
     c400_clean_road = get_c400_clean_road(x_budunit, time_range_root_road)
-    return x_budunit.make_road(c400_clean_road, c100_str())
+    return x_budunit.make_road(c400_clean_road, "c100")
 
 
 def get_yr4_clean_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
     c100_road = get_c100_road(x_budunit, time_range_root_road)
-    yr4_leap_road = x_budunit.make_road(c100_road, yr4_leap_str())
-    return x_budunit.make_road(yr4_leap_road, yr4_clean_str())
+    yr4_leap_road = x_budunit.make_road(c100_road, "yr4_leap")
+    return x_budunit.make_road(yr4_leap_road, "yr4_clean")
 
 
 def get_year_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
     yr4_clean_road = get_yr4_clean_road(x_budunit, time_range_root_road)
-    return x_budunit.make_road(yr4_clean_road, year_str())
+    return x_budunit.make_road(yr4_clean_road, "year")
 
 
 def get_week_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    return x_budunit.make_road(time_range_root_road, week_str())
+    return x_budunit.make_road(time_range_root_road, "week")
 
 
 def get_day_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    return x_budunit.make_road(time_range_root_road, day_str())
-
-
-def hours_config_str() -> str:
-    return "hours_config"
-
-
-def weekdays_config_str() -> str:
-    return "weekdays_config"
-
-
-def months_config_str() -> str:
-    return "months_config"
-
-
-def monthday_distortion_str() -> str:
-    return "monthday_distortion"
-
-
-def timeline_tag_str() -> str:
-    return "timeline_tag"
-
-
-def c400_number_str() -> str:
-    return "c400_number"
-
-
-def yr1_jan1_offset_str() -> str:
-    return "yr1_jan1_offset"
+    return x_budunit.make_road(time_range_root_road, "day")
 
 
 def validate_timeline_config(config_dict: dict) -> bool:
     config_elements = [
-        hours_config_str(),
-        weekdays_config_str(),
-        months_config_str(),
-        monthday_distortion_str(),
-        timeline_tag_str(),
-        c400_number_str(),
-        yr1_jan1_offset_str(),
+        "hours_config",
+        "weekdays_config",
+        "months_config",
+        "monthday_distortion",
+        "timeline_tag",
+        "c400_number",
+        "yr1_jan1_offset",
     ]
     for config_key in config_elements:
         config_element = config_dict.get(config_key)
         len_elements = {
-            hours_config_str(),
-            weekdays_config_str(),
-            months_config_str(),
+            "hours_config",
+            "weekdays_config",
+            "months_config",
         }
         if config_element is None:
             return False
         elif config_key in len_elements and len(config_element) == 0:
             return False
-        elif config_key in {weekdays_config_str()}:
+        elif config_key in "weekdays_config":
             if _duplicate_exists(config_element):
                 return False
-        elif config_key in {months_config_str(), hours_config_str()}:
+        elif config_key in {"months_config", "hours_config"}:
             str_list = [x_config[0] for x_config in config_element]
             if _duplicate_exists(str_list):
                 return False
@@ -439,13 +363,13 @@ def timeline_config_shop(
     else:
         month_config = get_default_months_config()
     return {
-        hours_config_str(): hour_config,
-        weekdays_config_str(): weekday_list,
-        months_config_str(): month_config,
-        timeline_tag_str(): timeline_tag,
-        c400_number_str(): c400_number,
-        monthday_distortion_str(): get_1_if_None(monthday_distortion),
-        yr1_jan1_offset_str(): yr1_jan1_offset,
+        "hours_config": hour_config,
+        "weekdays_config": weekday_list,
+        "months_config": month_config,
+        "timeline_tag": timeline_tag,
+        "c400_number": c400_number,
+        "monthday_distortion": get_1_if_None(monthday_distortion),
+        "yr1_jan1_offset": yr1_jan1_offset,
     }
 
 
@@ -470,15 +394,15 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
 def get_min_from_dt(
     x_bud: BudUnit, timeline_road: RoadUnit, x_datetime: datetime
 ) -> int:
-    offset_road = x_bud.make_road(timeline_road, yr1_jan1_offset_str())
+    offset_road = x_bud.make_road(timeline_road, "yr1_jan1_offset")
     offset_item = x_bud.get_item_obj(offset_road)
     offset_amount = offset_item.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
 
 def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) -> int:
-    offset_x0 = timeline_config0.get(yr1_jan1_offset_str())
-    offset_x1 = timeline_config1.get(yr1_jan1_offset_str())
+    offset_x0 = timeline_config0.get("yr1_jan1_offset")
+    offset_x1 = timeline_config1.get("yr1_jan1_offset")
     return offset_x0 - offset_x1
 
 
@@ -645,11 +569,11 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
     if timeline_config.get("yr1_jan1_offset") is None:
         timeline_config["yr1_jan1_offset"] = default_timeline.get("yr1_jan1_offset")
     return TimeLineUnit(
-        c400_number=timeline_config.get(c400_number_str()),
-        hours_config=timeline_config.get(hours_config_str()),
-        months_config=timeline_config.get(months_config_str()),
-        monthday_distortion=timeline_config.get(monthday_distortion_str()),
-        timeline_tag=timeline_config.get(timeline_tag_str()),
-        weekdays_config=timeline_config.get(weekdays_config_str()),
-        yr1_jan1_offset=timeline_config.get(yr1_jan1_offset_str()),
+        c400_number=timeline_config.get("c400_number"),
+        hours_config=timeline_config.get("hours_config"),
+        months_config=timeline_config.get("months_config"),
+        monthday_distortion=timeline_config.get("monthday_distortion"),
+        timeline_tag=timeline_config.get("timeline_tag"),
+        weekdays_config=timeline_config.get("weekdays_config"),
+        yr1_jan1_offset=timeline_config.get("yr1_jan1_offset"),
     )

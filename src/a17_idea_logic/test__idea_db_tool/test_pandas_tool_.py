@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
     credor_respect_str,
@@ -21,13 +21,11 @@ from src.a17_idea_logic._utils.example_pandas import (
     get_ex02_atom_dataframe,
     get_ex02_atom_csv,
 )
+from src.a17_idea_logic._utils.str_a17 import yell_raw_str, yell_agg_str, yell_valid_str
 from src.a17_idea_logic.idea_db_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_relevant_columns_dataframe,
-    yell_raw_str,
-    yell_agg_str,
-    yell_valid_str,
     get_yell_raw_grouping_with_all_values_equal_df,
 )
 from os.path import exists as os_path_exists

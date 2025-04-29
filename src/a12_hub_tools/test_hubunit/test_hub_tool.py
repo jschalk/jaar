@@ -2,19 +2,13 @@ from src.a00_data_toolbox.file_toolbox import create_path, set_dir, open_json
 from src.a02_finance_logic._utils.strs_a02 import quota_str
 from src.a01_word_logic.road import create_road
 from src.a06_bud_logic.bud import budunit_shop
-from src.a08_bud_atom_logic.atom_config import penny_str, event_int_str
-from src.a11_deal_cell_logic.cell import (
-    CELLNODE_QUOTA_DEFAULT,
-    cellunit_shop,
+from src.a06_bud_logic._utils.str_a06 import penny_str, event_int_str
+from src.a11_deal_cell_logic._utils.str_a10 import (
     ancestors_str,
     celldepth_str,
     deal_owner_name_str,
-    mandate_str,
-    budadjust_str,
-    budevent_facts_str,
-    found_facts_str,
-    boss_facts_str,
 )
+from src.a11_deal_cell_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.a12_hub_tools.hub_path import (
     create_gut_path,
     create_job_path,

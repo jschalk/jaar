@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a06_bud_logic._utils.a06_str_helpers import bud_acctunit_str
-from src.a08_bud_atom_logic.atom_config import (
+from src.a06_bud_logic._utils.str_a06 import (
+    bud_acctunit_str,
     face_name_str,
     event_int_str,
     acct_name_str,
@@ -29,6 +29,7 @@ from src.a17_idea_logic.idea import (
     get_idearef_obj,
     _get_headers_list,
 )
+from src.a17_idea_logic._utils.str_a17 import attributes_str
 from src.a17_idea_logic.idea_config import (
     get_idea_formats_dir,
     get_idea_format_filenames,
@@ -46,7 +47,6 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00028_bud_itemunit_v0_0_0,
     idea_format_00029_budunit_v0_0_0,
     get_idea_format_headers,
-    attributes_str,
     get_idea_elements_sort_order,
     get_default_sorted_list,
 )

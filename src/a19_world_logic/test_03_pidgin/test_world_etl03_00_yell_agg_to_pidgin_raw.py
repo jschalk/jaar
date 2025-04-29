@@ -1,11 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a08_bud_atom_logic.atom_config import (
-    face_name_str,
-    acct_name_str,
-    event_int_str,
-)
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
+from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
     inx_name_str,
@@ -18,11 +14,11 @@ from src.a16_pidgin_logic.pidgin_config import (
     otx_label_str,
     unknown_word_str,
 )
+from src.a17_idea_logic._utils.str_a17 import yell_agg_str
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    yell_agg_str,
 )
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns

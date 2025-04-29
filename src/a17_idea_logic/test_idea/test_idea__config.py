@@ -9,7 +9,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     fisc_tag_str,
     world_id_str,
 )
-from src.a06_bud_logic._utils.a06_str_helpers import (
+from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -20,26 +20,6 @@ from src.a06_bud_logic._utils.a06_str_helpers import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
-)
-from src.a07_calendar_logic.chrono import (
-    c400_number_str,
-    monthday_distortion_str,
-    timeline_tag_str,
-    yr1_jan1_offset_str,
-)
-from src.a08_bud_atom_logic.atom_config import (
-    get_atom_args_dimen_mapping,
-    get_atom_config_dict,
-    get_bud_dimens,
-    get_delete_key_name,
-    get_all_bud_dimen_delete_keys,
-    jkeys_str,
-    jvalues_str,
-    normal_specs_str,
-    column_order_str,
-    atom_delete,
-    atom_insert,
-    atom_update,
     face_name_str,
     event_int_str,
     acct_name_str,
@@ -76,14 +56,33 @@ from src.a08_bud_atom_logic.atom_config import (
     give_force_str,
     take_force_str,
 )
+from src.a07_calendar_logic._utils.str_a07 import (
+    c400_number_str,
+    monthday_distortion_str,
+    timeline_tag_str,
+    yr1_jan1_offset_str,
+)
+from src.a08_bud_atom_logic._utils.str_a08 import (
+    jkeys_str,
+    jvalues_str,
+    normal_specs_str,
+    column_order_str,
+    atom_delete,
+    atom_insert,
+    atom_update,
+)
+from src.a08_bud_atom_logic.atom_config import (
+    get_atom_args_dimen_mapping,
+    get_atom_config_dict,
+    get_bud_dimens,
+    get_delete_key_name,
+    get_all_bud_dimen_delete_keys,
+)
 from src.a10_bud_calc.bud_calc_config import (
     get_all_bud_calc_args,
     get_bud_calc_args_sqlite_datatype_dict,
 )
-from src.a15_fisc_logic.fisc_config import (
-    get_fisc_args_dimen_mapping,
-    get_fisc_config_dict,
-    get_fisc_dimens,
+from src.a15_fisc_logic._utils.str_a15 import (
     fiscunit_str,
     fisc_dealunit_str,
     fisc_cashbook_str,
@@ -100,7 +99,12 @@ from src.a15_fisc_logic.fisc_config import (
     weekday_order_str,
     offi_time_str,
 )
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a15_fisc_logic.fisc_config import (
+    get_fisc_args_dimen_mapping,
+    get_fisc_config_dict,
+    get_fisc_dimens,
+)
+from src.a16_pidgin_logic._utils.str_a16 import (
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
@@ -118,16 +122,15 @@ from src.a16_pidgin_logic.pidgin_config import (
     pidgin_label_str,
     pidgin_tag_str,
     pidgin_road_str,
+)
+from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
 )
-from src.a17_idea_logic.idea_config import (
+from src.a17_idea_logic._utils.str_a17 import (
     idea_category_str,
     get_idea_categorys,
-    get_idea_elements_sort_order,
-    get_idea_sqlite_types,
-    get_idea_dimen_ref,
     idea_number_str,
     allowed_crud_str,
     attributes_str,
@@ -140,6 +143,11 @@ from src.a17_idea_logic.idea_config import (
     delete_insert_str,
     delete_update_str,
     build_order_str,
+)
+from src.a17_idea_logic.idea_config import (
+    get_idea_elements_sort_order,
+    get_idea_sqlite_types,
+    get_idea_dimen_ref,
     get_allowed_curds,
     get_idearef_from_file,
     get_quick_ideas_column_ref,

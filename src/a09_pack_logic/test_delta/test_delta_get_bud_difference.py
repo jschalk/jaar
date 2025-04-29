@@ -3,7 +3,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.a06_str_helpers import (
+from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -14,8 +14,6 @@ from src.a06_bud_logic._utils.a06_str_helpers import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
-)
-from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     awardee_title_str,
     group_label_str,

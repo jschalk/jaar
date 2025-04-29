@@ -1,11 +1,11 @@
-from src.a08_bud_atom_logic.atom_config import face_name_str, event_int_str
-from src.a16_pidgin_logic.pidgin_config import (
-    get_pidgin_config_args,
+from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
+from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_name_str,
     pidgin_label_str,
     pidgin_tag_str,
     pidgin_road_str,
 )
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_config_args
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 
 
