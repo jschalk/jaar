@@ -29,6 +29,7 @@ from src.a17_idea_logic.idea import (
     get_idearef_obj,
     _get_headers_list,
 )
+from src.a17_idea_logic._utils.str_a17 import attributes_str
 from src.a17_idea_logic.idea_config import (
     get_idea_formats_dir,
     get_idea_format_filenames,
@@ -46,7 +47,6 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00028_bud_itemunit_v0_0_0,
     idea_format_00029_budunit_v0_0_0,
     get_idea_format_headers,
-    attributes_str,
     get_idea_elements_sort_order,
     get_default_sorted_list,
 )

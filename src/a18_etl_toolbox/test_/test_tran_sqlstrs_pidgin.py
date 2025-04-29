@@ -4,12 +4,8 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
-from src.a17_idea_logic.idea_config import (
-    idea_number_str,
-    get_idea_sqlite_types,
-    get_idea_config_dict,
-    idea_category_str,
-)
+from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
+from src.a17_idea_logic.idea_config import get_idea_sqlite_types, get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_pidgin_prime_create_table_sqlstrs,

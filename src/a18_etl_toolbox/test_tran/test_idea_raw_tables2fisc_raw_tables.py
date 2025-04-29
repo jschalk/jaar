@@ -36,11 +36,8 @@ from src.a15_fisc_logic._utils.str_a15 import (
     weekday_order_str,
     weekday_tag_str,
 )
-from src.a17_idea_logic.idea_config import (
-    idea_number_str,
-    get_idea_config_dict,
-    idea_category_str,
-)
+from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
+from src.a17_idea_logic.idea_config import get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeObjsRef,

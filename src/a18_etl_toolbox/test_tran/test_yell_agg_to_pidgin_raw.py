@@ -21,7 +21,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_label_str,
     unknown_word_str,
 )
-from src.a17_idea_logic.idea_config import idea_number_str
+from src.a17_idea_logic._utils.str_a17 import idea_number_str
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,

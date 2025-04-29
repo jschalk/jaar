@@ -46,11 +46,10 @@ from src.a15_fisc_logic._utils.str_a15 import (
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
+from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
-    idea_number_str,
     get_idea_sqlite_types,
     get_idea_config_dict,
-    idea_category_str,
     get_idea_numbers,
 )
 from src.a17_idea_logic.idea_db_tool import (

@@ -11,7 +11,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtit_belief_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens
-from src.a17_idea_logic.idea_config import idea_number_str
+from src.a17_idea_logic._utils.str_a17 import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (

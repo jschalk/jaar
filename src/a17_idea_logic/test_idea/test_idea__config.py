@@ -128,12 +128,9 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
 )
-from src.a17_idea_logic.idea_config import (
+from src.a17_idea_logic._utils.str_a17 import (
     idea_category_str,
     get_idea_categorys,
-    get_idea_elements_sort_order,
-    get_idea_sqlite_types,
-    get_idea_dimen_ref,
     idea_number_str,
     allowed_crud_str,
     attributes_str,
@@ -146,6 +143,11 @@ from src.a17_idea_logic.idea_config import (
     delete_insert_str,
     delete_update_str,
     build_order_str,
+)
+from src.a17_idea_logic.idea_config import (
+    get_idea_elements_sort_order,
+    get_idea_sqlite_types,
+    get_idea_dimen_ref,
     get_allowed_curds,
     get_idearef_from_file,
     get_quick_ideas_column_ref,
