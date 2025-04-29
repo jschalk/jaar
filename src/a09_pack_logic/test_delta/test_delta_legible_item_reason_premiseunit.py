@@ -1,4 +1,4 @@
-from src.a06_bud_logic._utils.a06_str_helpers import bud_item_reason_premiseunit_str
+from src.a06_bud_logic._utils.str_a06 import bud_item_reason_premiseunit_str
 from src.a08_bud_atom_logic.atom_config import atom_update, atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop

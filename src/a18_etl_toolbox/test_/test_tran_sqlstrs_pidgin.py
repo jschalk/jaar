@@ -14,7 +14,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     deal_time_str,
     tran_time_str,
 )
-from src.a06_bud_logic._utils.a06_str_helpers import (
+from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
