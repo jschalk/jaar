@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import (
     delete_dir,
     save_file,
 )
-from src.a02_finance_logic._utils.str_helpers import (
+from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     fisc_tag_str,
     deal_time_str,
@@ -31,7 +31,7 @@ from src.a17_idea_logic.idea_db_tool import (
     yell_raw_str,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_utils import (
+from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

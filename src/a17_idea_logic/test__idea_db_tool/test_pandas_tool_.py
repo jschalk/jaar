@@ -1,12 +1,11 @@
-from src.a00_data_toolbox.file_toolbox import open_file, create_path, get_dir_file_strs
+from src.a00_data_toolbox.file_toolbox import open_file, create_path
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     group_label_str,
     credor_respect_str,
 )
-from src.a17_idea_logic._utils.env_utils import (
+from src.a17_idea_logic._utils.env_a17 import (
     env_dir_setup_cleanup,
-    idea_fiscs_dir,
     idea_examples_dir,
 )
 from src.a17_idea_logic._utils.example_pandas import (

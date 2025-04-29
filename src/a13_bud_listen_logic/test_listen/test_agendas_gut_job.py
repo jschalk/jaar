@@ -23,7 +23,7 @@ from src.a13_bud_listen_logic._utils.example_listen import (
     get_example_zia_speaker,
     get_example_bob_speaker,
 )
-from src.a13_bud_listen_logic._utils.env_utils import (
+from src.a13_bud_listen_logic._utils.env_a13 import (
     get_module_temp_dir as env_dir,
     env_dir_setup_cleanup,
 )

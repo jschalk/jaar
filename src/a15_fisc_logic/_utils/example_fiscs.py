@@ -5,7 +5,7 @@ from src.a04_reason_logic.reason_item import factunit_shop, FactUnit
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a12_hub_tools.hub_tool import save_gut_file, open_gut_file
 from src.a15_fisc_logic.fisc import FiscUnit, fiscunit_shop
-from src.a15_fisc_logic._utils.env_utils import get_module_temp_dir
+from src.a15_fisc_logic._utils.env_a15 import get_module_temp_dir
 
 
 def create_example_fisc2() -> FiscUnit:

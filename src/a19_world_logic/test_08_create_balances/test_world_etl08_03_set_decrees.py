@@ -8,7 +8,7 @@ from src.a19_world_logic._utils.example_worlds import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
 )
-from src.a19_world_logic._utils.env_utils import (
+from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

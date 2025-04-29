@@ -8,7 +8,7 @@ from src.a20_lobby_db_toolbox.lobby_path import (
     create_world_dir_path,
     create_fisc_mstr_dir_path,
 )
-from src.a20_lobby_db_toolbox._utils.env_utils import get_module_temp_dir
+from src.a20_lobby_db_toolbox._utils.env_a20 import get_module_temp_dir
 
 
 def test_str_functions_ReturnObjs():

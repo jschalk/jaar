@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
@@ -11,7 +11,7 @@ from src.a18_etl_toolbox.tran_path import (
     create_stance0001_path,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_utils import (
+from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

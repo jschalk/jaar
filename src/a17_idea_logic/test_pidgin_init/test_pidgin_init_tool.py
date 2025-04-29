@@ -16,7 +16,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     unknown_word_str,
 )
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic._utils.env_utils import (
+from src.a16_pidgin_logic._utils.env_a16 import (
     env_dir_setup_cleanup,
     get_example_face_dir,
 )

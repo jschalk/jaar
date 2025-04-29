@@ -1,4 +1,4 @@
-from src.a02_finance_logic._utils.str_helpers import owner_name_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str
 from src.a08_bud_atom_logic.atom_config import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_path import (
     create_yell_pidgin_path,

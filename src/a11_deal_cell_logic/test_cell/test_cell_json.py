@@ -1,4 +1,4 @@
-from src.a02_finance_logic._utils.str_helpers import quota_str
+from src.a02_finance_logic._utils.strs_a02 import quota_str
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic.atom_config import event_int_str, penny_str
 from src.a11_deal_cell_logic.cell import (

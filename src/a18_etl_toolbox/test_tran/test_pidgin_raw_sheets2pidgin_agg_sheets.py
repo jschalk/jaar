@@ -9,7 +9,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_pidgin_road_raw_to_road_agg,
     etl_yell_pidgin_raw_df_to_pidgin_agg_df,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

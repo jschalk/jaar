@@ -1,5 +1,5 @@
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_helpers import bud_acctunit_str
+from src.a06_bud_logic._utils.a06_str_helpers import bud_acctunit_str
 from src.a08_bud_atom_logic.atom import atom_insert, atom_update, budatom_shop
 from src.a08_bud_atom_logic.atom_config import acct_name_str, credit_belief_str
 from src.a09_pack_logic.delta import buddelta_shop, get_minimal_buddelta

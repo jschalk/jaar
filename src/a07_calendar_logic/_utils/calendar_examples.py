@@ -15,7 +15,7 @@ from src.a07_calendar_logic.chrono import (
     c400_number_str,
     chronounit_shop,
 )
-from src.a07_calendar_logic._utils.env_utils import get_module_examples_dir
+from src.a07_calendar_logic._utils.env_a07 import get_module_examples_dir
 from datetime import datetime
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 

@@ -9,7 +9,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_face_pidgin_to_event_pidgins,
     etl_otz_face_pidgins_df_to_otz_event_pidgins_df,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

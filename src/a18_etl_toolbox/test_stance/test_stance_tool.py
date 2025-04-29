@@ -13,7 +13,7 @@ from src.a18_etl_toolbox.stance_tool import (
     collect_stance_csv_strs,
     create_stance0001_file,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

@@ -6,7 +6,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     acct_name_str,
@@ -42,7 +42,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_yell_valid_db_to_pidgin_prime_raw_db,
     etl_pidgin_prime_raw_to_pidgin_prime_agg,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir as etl_dir,
     env_dir_setup_cleanup,
 )

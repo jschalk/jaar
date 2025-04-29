@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_logic._utils.str_helpers import (
+from src.a02_finance_logic._utils.strs_a02 import (
     deal_time_str,
     owner_name_str,
     fisc_tag_str,
