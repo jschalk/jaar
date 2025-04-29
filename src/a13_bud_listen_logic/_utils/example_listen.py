@@ -24,11 +24,11 @@ def full_str() -> str:
     return "full"
 
 
-def clean_str():
+def clean_str() -> str:
     return "clean"
 
 
-def run_str():
+def run_str() -> str:
     return "run"
 
 

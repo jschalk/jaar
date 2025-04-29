@@ -44,23 +44,23 @@ def full_str() -> str:
     return "full"
 
 
-def sanitation_str():
+def sanitation_str() -> str:
     return "sanitation"
 
 
-def clean_str():
+def clean_str() -> str:
     return "clean"
 
 
-def dirty_str():
+def dirty_str() -> str:
     return "dirty"
 
 
-def sweep_str():
+def sweep_str() -> str:
     return "sweep"
 
 
-def run_str():
+def run_str() -> str:
     return "run"
 
 

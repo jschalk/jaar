@@ -90,7 +90,7 @@ def creg_weekday_itemunits() -> dict[str, ItemUnit]:
     return create_weekday_itemunits(creg_weekdays_list())
 
 
-def get_cregtime_str():
+def get_cregtime_str() -> str:
     return get_creg_config().get(timeline_tag_str())
 
 

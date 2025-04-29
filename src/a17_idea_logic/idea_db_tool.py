@@ -103,15 +103,15 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def yell_raw_str():
+def yell_raw_str() -> str:
     return "yell_raw"
 
 
-def yell_agg_str():
+def yell_agg_str() -> str:
     return "yell_agg"
 
 
-def yell_valid_str():
+def yell_valid_str() -> str:
     return "yell_valid"
 
 

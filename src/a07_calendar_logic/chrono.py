@@ -13,27 +13,27 @@ from dataclasses import dataclass
 from os import getcwd as os_getcwd
 
 
-def c400_leap_str():
+def c400_leap_str() -> str:
     return "c400_leap"
 
 
-def c400_clean_str():
+def c400_clean_str() -> str:
     return "c400_clean"
 
 
-def c100_str():
+def c100_str() -> str:
     return "c100"
 
 
-def yr4_leap_str():
+def yr4_leap_str() -> str:
     return "yr4_leap"
 
 
-def yr4_clean_str():
+def yr4_clean_str() -> str:
     return "yr4_clean"
 
 
-def year_str():
+def year_str() -> str:
     return "year"
 
 
@@ -118,23 +118,23 @@ def time_str() -> str:
     return "time"
 
 
-def day_str():
+def day_str() -> str:
     return "day"
 
 
-def days_str():
+def days_str() -> str:
     return f"{day_str()}s"
 
 
-def hour_str():
+def hour_str() -> str:
     return "hour"
 
 
-def week_str():
+def week_str() -> str:
     return "week"
 
 
-def weeks_str():
+def weeks_str() -> str:
     return f"{week_str()}s"
 
 
