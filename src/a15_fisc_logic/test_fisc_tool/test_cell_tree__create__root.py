@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import save_file, open_json, count_dirs_f
 from src.a02_finance_logic._utils.strs_a02 import celldepth_str, quota_str
 from src.a02_finance_logic.deal import DEFAULT_CELLDEPTH
 from src.a06_bud_logic._utils.str_a06 import event_int_str, penny_str
-from src.a11_deal_cell_logic._utils.str_a10 import (
+from src.a11_deal_cell_logic._utils.str_a11 import (
     ancestors_str,
     celldepth_str,
     deal_owner_name_str,
