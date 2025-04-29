@@ -9,11 +9,8 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic.idea_db_tool import (
-    upsert_sheet,
-    yell_valid_str,
-    sheet_exists,
-)
+from src.a17_idea_logic._utils.str_a17 import yell_valid_str
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,

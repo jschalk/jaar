@@ -9,12 +9,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_name_str,
     unknown_word_str,
 )
-from src.a17_idea_logic.idea_db_tool import (
-    get_sheet_names,
-    upsert_sheet,
-    yell_valid_str,
-    sheet_exists,
-)
+from src.a17_idea_logic._utils.str_a17 import yell_valid_str
+from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.transformers import etl_yell_ideas_to_otz_face_ideas
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,

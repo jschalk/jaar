@@ -14,11 +14,11 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_label_str,
     unknown_word_str,
 )
+from src.a17_idea_logic._utils.str_a17 import yell_agg_str
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    yell_agg_str,
 )
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns

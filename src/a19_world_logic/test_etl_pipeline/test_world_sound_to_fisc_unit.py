@@ -15,12 +15,8 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
 )
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic.idea_db_tool import (
-    upsert_sheet,
-    sheet_exists,
-    yell_agg_str,
-    yell_raw_str,
-)
+from src.a17_idea_logic._utils.str_a17 import yell_agg_str, yell_raw_str
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,

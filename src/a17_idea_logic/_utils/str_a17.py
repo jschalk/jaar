@@ -52,3 +52,15 @@ def delete_update_str() -> str:
 
 def build_order_str() -> str:
     return "build_order"
+
+
+def yell_raw_str() -> str:
+    return "yell_raw"
+
+
+def yell_agg_str() -> str:
+    return "yell_agg"
+
+
+def yell_valid_str() -> str:
+    return "yell_valid"

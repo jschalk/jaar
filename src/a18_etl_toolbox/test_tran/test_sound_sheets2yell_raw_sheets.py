@@ -7,11 +7,8 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic.idea_db_tool import (
-    get_sheet_names,
-    upsert_sheet,
-    yell_raw_str,
-)
+from src.a17_idea_logic._utils.str_a17 import yell_raw_str
+from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.transformers import (
     etl_sound_df_to_yell_raw_db,
     etl_yell_raw_db_to_yell_raw_df,
