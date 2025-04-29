@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_module_temp_dir():
-    return "src/a02_finance_toolboxs/_utils/temp"
+    return "src/a02_finance_logic/_utils/temp"
 
 
 @pytest_fixture()
