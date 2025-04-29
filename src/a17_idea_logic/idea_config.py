@@ -236,7 +236,6 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "problem_bool": "INTEGER",
         "take_force": "REAL",
         "tally": "INTEGER",
-        "fund_coin": "REAL",
         "penny": "REAL",
         "respect_bit": "REAL",
         "amount": "REAL",
