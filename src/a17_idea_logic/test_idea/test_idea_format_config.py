@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
-from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
-from src.a06_bud_logic._utils.str_helpers import bud_acctunit_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a06_bud_logic._utils.a06_str_helpers import bud_acctunit_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
@@ -50,7 +50,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_elements_sort_order,
     get_default_sorted_list,
 )
-from src.a17_idea_logic._utils.env_utils import src_module_dir
+from src.a17_idea_logic._utils.env_a17 import src_module_dir
 
 
 def test_config_str_functions_ReturnObjs():

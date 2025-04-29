@@ -4,7 +4,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     create_select_inconsistency_query,
 )
-from src.a02_finance_logic._utils.str_helpers import (
+from src.a02_finance_logic._utils.strs_a02 import (
     bridge_str,
     quota_str,
     deal_time_str,
@@ -62,7 +62,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_fisc_raw_tables_to_fisc_csvs,
     set_fisc_raw_error_message,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

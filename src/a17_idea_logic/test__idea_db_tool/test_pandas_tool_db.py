@@ -1,5 +1,4 @@
-from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.str_helpers import fisc_tag_str, owner_name_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str, owner_name_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
     event_int_str,
@@ -8,10 +7,7 @@ from src.a08_bud_atom_logic.atom_config import (
     gogo_want_str,
 )
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic._utils.env_utils import (
-    env_dir_setup_cleanup,
-    idea_fiscs_dir,
-)
+from src.a17_idea_logic._utils.env_a17 import env_dir_setup_cleanup
 from src.a17_idea_logic.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from pytest import fixture as pytest_fixture
 from os import remove as os_remove

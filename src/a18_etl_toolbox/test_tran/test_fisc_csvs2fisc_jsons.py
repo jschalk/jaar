@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file, open_file
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_logic._utils.str_helpers import (
+from src.a02_finance_logic._utils.strs_a02 import (
     bridge_str,
     owner_name_str,
     fisc_tag_str,
@@ -27,7 +27,7 @@ from src.a18_etl_toolbox.transformers import (
     create_fisc_prime_tables,
     etl_fisc_agg_tables_to_fisc_jsons,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

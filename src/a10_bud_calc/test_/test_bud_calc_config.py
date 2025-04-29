@@ -1,11 +1,11 @@
 # from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.str_helpers import (
+from src.a02_finance_logic._utils.strs_a02 import (
     fisc_tag_str,
     owner_name_str,
     world_id_str,
 )
-from src.a06_bud_logic._utils.str_helpers import (
+from src.a06_bud_logic._utils.a06_str_helpers import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,

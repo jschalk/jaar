@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic.deal import timeconversion_shop
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_utils import (
+from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

@@ -8,7 +8,7 @@ from src.a06_bud_logic.bud import (
     get_from_json as budunit_get_from_json,
 )
 from src.a04_reason_logic.reason_team import teamunit_shop
-from src.a06_bud_logic._utils.bud_env import get_bud_examples_dir as env_dir
+from src.a06_bud_logic._utils.env_a06 import get_bud_examples_dir as env_dir
 
 
 def budunit_v001() -> BudUnit:

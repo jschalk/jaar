@@ -1,5 +1,5 @@
 from src.a06_bud_logic.bud import BudUnit, budunit_shop, itemunit_shop, FiscTag
-from src.a14_keep_logic._utils.env_utils import temp_fisc_tag
+from src.a14_keep_logic._utils.env_a14 import temp_fisc_tag
 
 
 def get_1tag_bud() -> BudUnit:

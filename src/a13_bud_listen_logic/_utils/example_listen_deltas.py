@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import FiscTag
-from src.a06_bud_logic._utils.str_helpers import bud_acctunit_str, bud_itemunit_str
+from src.a06_bud_logic._utils.a06_str_helpers import bud_acctunit_str, bud_itemunit_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     parent_road_str,

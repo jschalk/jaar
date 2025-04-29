@@ -12,7 +12,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     default_unknown_word_if_None,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_utils import (
+from src.a19_world_logic._utils.env_a19 import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
 )

@@ -17,7 +17,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     get_pidgin_events_by_dirs,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

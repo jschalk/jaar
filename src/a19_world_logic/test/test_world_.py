@@ -6,7 +6,7 @@ from src.a19_world_logic.world import (
     WorldUnit,
     worldunit_shop,
 )
-from src.a19_world_logic._utils.env_utils import (
+from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

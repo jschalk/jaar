@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     face_name_str,
@@ -7,7 +7,7 @@ from src.a08_bud_atom_logic.atom_config import (
 )
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.transformers import etl_inz_face_ideas_to_csv_files
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

@@ -9,7 +9,7 @@ from src.a18_etl_toolbox.tran_path import (
     create_stances_owner_dir_path,
     create_stance0001_path,
 )
-from src.a18_etl_toolbox._utils.env_utils import (
+from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

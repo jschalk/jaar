@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic._utils.calendar_examples import (
@@ -25,11 +25,7 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00013_itemunit_v0_0_0,
     idea_format_00019_itemunit_v0_0_0,
 )
-from src.a17_idea_logic._utils.env_utils import (
-    idea_examples_dir,
-    idea_fiscs_dir,
-    env_dir_setup_cleanup,
-)
+from src.a17_idea_logic._utils.env_a17 import idea_fiscs_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
 
 

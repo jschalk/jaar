@@ -1,5 +1,5 @@
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel
-from src.a17_idea_logic._utils.env_utils import (
+from src.a17_idea_logic._utils.env_a17 import (
     idea_examples_dir,
     env_dir_setup_cleanup,
 )

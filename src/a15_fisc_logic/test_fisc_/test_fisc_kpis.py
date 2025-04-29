@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a02_finance_logic._utils.str_helpers import owner_name_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     credit_belief_str,
@@ -28,7 +28,7 @@ from src.a15_fisc_logic._utils.example_fiscs import (
     create_example_fisc3,
     create_example_fisc4,
 )
-from src.a15_fisc_logic._utils.env_utils import env_dir_setup_cleanup
+from src.a15_fisc_logic._utils.env_a15 import env_dir_setup_cleanup
 
 
 def test_get_fisc_guts_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics_bool):

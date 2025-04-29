@@ -6,7 +6,7 @@ from src.a02_finance_logic.deal import (
     get_dealunit_from_json,
     DEFAULT_CELLDEPTH,
 )
-from src.a02_finance_logic._utils.str_helpers import (
+from src.a02_finance_logic._utils.strs_a02 import (
     quota_str,
     deal_time_str,
     tran_time_str,
