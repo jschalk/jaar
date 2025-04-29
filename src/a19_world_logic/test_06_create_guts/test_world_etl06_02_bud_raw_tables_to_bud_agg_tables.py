@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.db_toolbox import get_row_count
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
+from src.a00_data_toolbox.db_toolbox import get_row_count
+from src.a02_finance_logic.deal import owner_name_str, fisc_tag_str
 from src.a06_bud_logic.bud_tool import bud_acctunit_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,

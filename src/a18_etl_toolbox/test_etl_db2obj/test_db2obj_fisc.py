@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.deal import fisc_tag_str
+from src.a02_finance_logic.deal import fisc_tag_str
 from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
     get_from_dict as fiscunit_get_from_dict,

@@ -1,11 +1,11 @@
-from src.a00_data_toolboxs.file_toolbox import create_path
+from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_word_logic.road import (
     default_bridge_if_None,
     create_road_from_tags,
     create_road,
     get_default_fisc_tag as root_tag,
 )
-from src.a02_finance_toolboxs.finance_config import (
+from src.a02_finance_logic.finance_config import (
     default_respect_bit_if_None,
     filter_penny,
     default_fund_coin_if_None,

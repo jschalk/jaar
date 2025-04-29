@@ -39,7 +39,7 @@ from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 from src.a13_bud_listen_logic._utils.example_listen_buds import (
     get_budunit_with_4_levels,
 )
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_from_nested_dict,
     get_empty_list_if_None,
 )

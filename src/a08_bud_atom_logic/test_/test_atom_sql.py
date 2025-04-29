@@ -11,7 +11,7 @@ from src.a08_bud_atom_logic.atom import (
     atom_hx_table_name,
     get_budatom_from_rowdata,
 )
-from src.a00_data_toolboxs.db_toolbox import get_rowdata, sqlite_connection
+from src.a00_data_toolbox.db_toolbox import get_rowdata, sqlite_connection
 from pytest import raises as pytest_raises
 
 

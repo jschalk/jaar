@@ -1,5 +1,5 @@
-from src.a00_data_toolboxs.dict_toolbox import x_is_json
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
+from src.a00_data_toolbox.dict_toolbox import x_is_json
+from src.a02_finance_logic.deal import owner_name_str, fisc_tag_str
 from src.a01_word_logic.road import get_default_fisc_tag as root_tag
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic.bud_tool import bud_acctunit_str

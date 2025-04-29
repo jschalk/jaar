@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.db_toolbox import get_row_count
+from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import (
     awardlink_shop,

@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.finance_config import default_fund_pool
+from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
     reasonunit_shop,

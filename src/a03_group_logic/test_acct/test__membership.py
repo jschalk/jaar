@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.dict_toolbox import x_is_json, get_json_from_dict
+from src.a00_data_toolbox.dict_toolbox import x_is_json, get_json_from_dict
 from src.a03_group_logic.group import (
     GroupCore,
     GroupLabel,

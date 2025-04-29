@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.finance_config import (
+from src.a02_finance_logic.finance_config import (
     default_respect_num,
     validate_respect_num,
 )

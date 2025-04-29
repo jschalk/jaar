@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.db_toolbox import create_table_from_columns
+from src.a00_data_toolbox.db_toolbox import create_table_from_columns
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,

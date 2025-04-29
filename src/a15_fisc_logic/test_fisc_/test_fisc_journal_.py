@@ -1,12 +1,12 @@
-from src.a00_data_toolboxs.dict_toolbox import get_from_nested_dict
-from src.a00_data_toolboxs.file_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
+from src.a00_data_toolbox.file_toolbox import (
     delete_dir,
     save_file,
     open_file,
     open_json,
     create_path,
 )
-from src.a00_data_toolboxs.db_toolbox import (
+from src.a00_data_toolbox.db_toolbox import (
     get_db_tables,
     get_db_columns,
     check_connection,

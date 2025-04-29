@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.deal import owner_name_str, deal_time_str, fisc_tag_str
+from src.a02_finance_logic.deal import owner_name_str, deal_time_str, fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_path import (
     create_yell_pidgin_path,

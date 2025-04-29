@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import create_path
+from src.a00_data_toolbox.file_toolbox import create_path
 from src.a17_idea_logic._utils.env_utils import (
     src_module_dir,
     idea_examples_dir,

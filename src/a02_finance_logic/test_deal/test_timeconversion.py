@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import get_default_fisc_tag
-from src.a02_finance_toolboxs.deal import TimeConversion, timeconversion_shop
+from src.a02_finance_logic.deal import TimeConversion, timeconversion_shop
 
 
 def test_TimeConversion_Exists():

@@ -1,6 +1,6 @@
-from src.a00_data_toolboxs.dict_toolbox import set_in_nested_dict
-from src.a00_data_toolboxs.db_toolbox import sqlite_obj_str
-from src.a02_finance_toolboxs.deal import OwnerName, FiscTag
+from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
+from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
+from src.a02_finance_logic.deal import OwnerName, FiscTag
 from src.a01_word_logic.road import RoadUnit, WorldID
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip

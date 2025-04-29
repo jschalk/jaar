@@ -1,15 +1,15 @@
-from src.a00_data_toolboxs.file_toolbox import (
+from src.a00_data_toolbox.file_toolbox import (
     set_dir,
     create_path,
     count_dirs_files,
     delete_dir,
 )
-from src.a00_data_toolboxs.dict_toolbox import (
+from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_0_if_None,
     get_empty_set_if_None,
 )
-from src.a02_finance_toolboxs.deal import TimeLinePoint, TimeConversion
+from src.a02_finance_logic.deal import TimeLinePoint, TimeConversion
 from src.a01_word_logic.road import (
     FaceName,
     EventInt,

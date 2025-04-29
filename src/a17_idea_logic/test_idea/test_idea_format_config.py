@@ -1,6 +1,6 @@
-from src.a00_data_toolboxs.dict_toolbox import create_sorted_concatenated_str
-from src.a00_data_toolboxs.file_toolbox import get_dir_file_strs, create_path
-from src.a02_finance_toolboxs.deal import owner_name_str, fisc_tag_str
+from src.a00_data_toolbox.dict_toolbox import create_sorted_concatenated_str
+from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
+from src.a02_finance_logic.deal import owner_name_str, fisc_tag_str
 from src.a06_bud_logic.bud_tool import bud_acctunit_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,

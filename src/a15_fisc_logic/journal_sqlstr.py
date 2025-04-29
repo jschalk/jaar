@@ -6,7 +6,7 @@ from src.a08_bud_atom_logic.atom_config import (
 from src.a08_bud_atom_logic.atom import BudAtom
 from src.a01_word_logic.road import RoadUnit
 
-# from src.a00_data_toolboxs.sqlite import (
+# from src.a00_data_toolbox.sqlite import (
 #     sqlite_to_python,
 # )
 # from dataclasses import dataclass

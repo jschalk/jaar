@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import open_json
+from src.a00_data_toolbox.file_toolbox import open_json
 from src.a11_deal_cell_logic.cell import budevent_facts_str
 from src.a12_hub_tools.hub_path import create_cell_json_path, create_budevent_path
 from src.a12_hub_tools.hub_tool import save_arbitrary_budevent, cellunit_add_json_file

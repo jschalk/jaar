@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.deal import (
+from src.a02_finance_logic.deal import (
     fisc_tag_str,
     TranUnit,
     tranunit_shop,

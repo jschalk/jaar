@@ -1,4 +1,4 @@
-from src.a02_finance_toolboxs.allot import (
+from src.a02_finance_logic.allot import (
     allot_scale,
     _create_allot_dict,
     _allot_missing_scale,

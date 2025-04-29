@@ -1,5 +1,5 @@
-# from src.a00_data_toolboxs.db_toolbox import create_table_from_columns
-from src.a02_finance_toolboxs.deal import fisc_tag_str, owner_name_str
+# from src.a00_data_toolbox.db_toolbox import create_table_from_columns
+from src.a02_finance_logic.deal import fisc_tag_str, owner_name_str
 from src.a08_bud_atom_logic.atom_config import (
     event_int_str,
     face_name_str,

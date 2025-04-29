@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.file_toolbox import open_json, create_path
+from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from os import getcwd as os_getcwd
 
 

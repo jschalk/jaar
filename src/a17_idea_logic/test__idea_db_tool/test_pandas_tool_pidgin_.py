@@ -1,5 +1,5 @@
 from src.a01_word_logic.road import create_road
-from src.a02_finance_toolboxs.deal import fisc_tag_str
+from src.a02_finance_logic.deal import fisc_tag_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     credit_belief_str,

@@ -1,11 +1,11 @@
 # from src.a08_bud_atom_logic.atom import atom_hx_table_name
-# from src.a00_data_toolboxs.sqlite import check_table_column_existence
+# from src.a00_data_toolbox.sqlite import check_table_column_existence
 # from src.a15_fisc_logic.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.a15_fisc_logic.fisc import fiscunit_shop
 # from src.a15_fisc_logic._utils.fisc_env import (
 #     env_dir_setup_cleanup,
 # )
-# from src.a00_data_toolboxs.sqlite import get_row_count
+# from src.a00_data_toolbox.sqlite import get_row_count
 # from os.path import exists as os_path_exists
 # from pytest import raises as pytest_raises
 

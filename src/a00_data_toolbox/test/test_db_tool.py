@@ -1,4 +1,4 @@
-from src.a00_data_toolboxs.db_toolbox import (
+from src.a00_data_toolbox.db_toolbox import (
     sqlite_obj_str,
     create_class_type_reference_insert_sqlstr,
     RowData,
