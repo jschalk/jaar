@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a02_finance_logic.deal import bridge_str, fisc_tag_str
+from src.a02_finance_logic._utils.str_helpers import bridge_str, fisc_tag_str
 from src.a07_calendar_logic.chrono import (
     c400_number_str,
     yr1_jan1_offset_str,

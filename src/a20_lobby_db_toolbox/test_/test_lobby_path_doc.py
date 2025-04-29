@@ -1,4 +1,4 @@
-from src.a02_finance_logic.deal import (
+from src.a02_finance_logic._utils.str_helpers import (
     owner_name_str,
     deal_time_str,
     fisc_tag_str,

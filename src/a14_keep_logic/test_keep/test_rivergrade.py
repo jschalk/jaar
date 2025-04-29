@@ -1,4 +1,4 @@
-from src.a02_finance_logic.deal import fisc_tag_str
+from src.a02_finance_logic._utils.str_helpers import fisc_tag_str
 from src.a14_keep_logic._utils.example_credorledgers import example_yao_hubunit
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 

@@ -1,5 +1,9 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_logic.deal import deal_time_str, owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.str_helpers import (
+    deal_time_str,
+    owner_name_str,
+    fisc_tag_str,
+)
 from src.a08_bud_atom_logic.atom_config import event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a18_etl_toolbox.transformers import create_fisc_prime_tables

@@ -1,11 +1,11 @@
 from src.a02_finance_logic.deal import (
-    fisc_tag_str,
     TranUnit,
     tranunit_shop,
     TranBook,
     tranbook_shop,
     get_tranbook_from_dict,
 )
+from src.a02_finance_logic._utils.str_helpers import fisc_tag_str
 from pytest import raises as pytest_raises
 
 

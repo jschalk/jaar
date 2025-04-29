@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir, open_json
-from src.a02_finance_logic.deal import quota_str
+from src.a02_finance_logic._utils.str_helpers import quota_str
 from src.a01_word_logic.road import create_road
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic.atom_config import penny_str, event_int_str

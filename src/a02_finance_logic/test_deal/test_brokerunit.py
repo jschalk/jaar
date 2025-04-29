@@ -3,6 +3,8 @@ from src.a02_finance_logic.deal import (
     BrokerUnit,
     brokerunit_shop,
     get_brokerunit_from_dict,
+)
+from src.a02_finance_logic._utils.str_helpers import (
     quota_str,
     deal_time_str,
     celldepth_str,

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a02_finance_logic.deal import owner_name_str
+from src.a02_finance_logic._utils.str_helpers import owner_name_str
 from src.a08_bud_atom_logic.atom_config import (
     acct_name_str,
     credit_belief_str,

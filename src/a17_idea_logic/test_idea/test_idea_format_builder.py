@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_json
-from src.a02_finance_logic.deal import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
 from src.a06_bud_logic.bud_tool import bud_itemunit_str
 from src.a08_bud_atom_logic.atom_config import (
     parent_road_str,

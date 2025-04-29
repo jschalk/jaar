@@ -5,7 +5,7 @@ from src.a00_data_toolbox.db_toolbox import (
     required_columns_exist,
     create_select_query,
 )
-from src.a02_finance_logic.deal import fisc_tag_str, owner_name_str
+from src.a02_finance_logic._utils.str_helpers import fisc_tag_str, owner_name_str
 from src.a06_bud_logic.bud_tool import (
     bud_acct_membership_str,
     bud_acctunit_str,

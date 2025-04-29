@@ -4,7 +4,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     create_select_inconsistency_query,
 )
-from src.a02_finance_logic.deal import (
+from src.a02_finance_logic._utils.str_helpers import (
     bridge_str,
     quota_str,
     deal_time_str,

@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import (
     delete_dir,
     save_file,
 )
-from src.a02_finance_logic.deal import (
+from src.a02_finance_logic._utils.str_helpers import (
     owner_name_str,
     fisc_tag_str,
     deal_time_str,

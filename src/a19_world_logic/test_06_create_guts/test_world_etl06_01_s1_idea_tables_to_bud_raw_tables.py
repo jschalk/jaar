@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_logic.deal import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.str_helpers import owner_name_str, fisc_tag_str
 from src.a06_bud_logic.bud_tool import budunit_str, bud_acctunit_str
 from src.a08_bud_atom_logic.atom_config import (
     face_name_str,
