@@ -1,12 +1,12 @@
 from src.a01_word_logic.road import default_bridge_if_None
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,
     otx2inx_str,
-    default_unknown_word_if_None,
 )
+from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
     TagMap,
     tagmap_shop,

@@ -7,7 +7,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_TagUnit_str,
     event_int_str,
 )
-from src.a16_pidgin_logic.pidgin_config import pidgin_filename
+from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,

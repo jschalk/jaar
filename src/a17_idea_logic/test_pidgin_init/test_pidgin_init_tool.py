@@ -10,7 +10,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_NameUnit_str,
     type_LabelUnit_str,
 )
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_word_str,

@@ -8,7 +8,7 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
     inx_name_str,
@@ -20,7 +20,6 @@ from src.a16_pidgin_logic.pidgin_config import (
     inx_label_str,
     otx_label_str,
     unknown_word_str,
-    get_pidgin_config_args,
 )
 from src.a17_idea_logic.idea_config import idea_number_str
 from src.a17_idea_logic.idea_db_tool import (

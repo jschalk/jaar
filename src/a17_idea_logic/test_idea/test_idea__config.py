@@ -104,7 +104,7 @@ from src.a15_fisc_logic.fisc_config import (
     get_fisc_config_dict,
     get_fisc_dimens,
 )
-from src.a16_pidgin_logic.pidgin_config import (
+from src.a16_pidgin_logic._utils.str_a16 import (
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
@@ -122,6 +122,8 @@ from src.a16_pidgin_logic.pidgin_config import (
     pidgin_label_str,
     pidgin_tag_str,
     pidgin_road_str,
+)
+from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
