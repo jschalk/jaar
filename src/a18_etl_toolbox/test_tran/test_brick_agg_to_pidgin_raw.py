@@ -23,8 +23,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
 )
 from src.a17_idea_logic._utils.str_a17 import (
     idea_number_str,
-    yell_agg_str,
-    yell_valid_str,
+    brick_agg_str,
+    brick_valid_str,
 )
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
@@ -32,12 +32,12 @@ from src.a17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     get_default_sorted_list,
 )
-from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
+from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.tran_sqlstrs import create_pidgin_prime_tables
 from src.a18_etl_toolbox.transformers import (
-    etl_yell_agg_df_to_yell_pidgin_raw_df,
-    yell_valid_tables_to_pidgin_prime_raw_tables,
+    etl_brick_agg_df_to_brick_pidgin_raw_df,
+    brick_valid_tables_to_pidgin_prime_raw_tables,
     etl_pidgin_prime_raw_to_pidgin_prime_agg,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -67,7 +67,7 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     }
 
 
-def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup):
+def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -80,8 +80,8 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     event1 = 1
     event2 = 2
     event5 = 5
-    yell_dir = etl_dir()
-    br00113_file_path = create_path(yell_dir, "br00113.xlsx")
+    brick_dir = etl_dir()
+    br00113_file_path = create_path(brick_dir, "br00113.xlsx")
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -91,7 +91,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
         otx_name_str(),
         inx_name_str(),
     ]
-    br00043_file_path = create_path(yell_dir, "br00043.xlsx")
+    br00043_file_path = create_path(brick_dir, "br00043.xlsx")
     br00043_columns = [
         face_name_str(),
         event_int_str(),
@@ -108,13 +108,13 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
-    upsert_sheet(br00113_file_path, yell_agg_str(), br00113_df)
+    upsert_sheet(br00113_file_path, brick_agg_str(), br00113_df)
     br00043_df = [sue2, sue3, yao1]
     br00043_df = DataFrame(br00043_df, columns=br00043_columns)
-    upsert_sheet(br00043_file_path, yell_agg_str(), br00043_df)
-    pidgin_path = create_yell_pidgin_path(yell_dir)
+    upsert_sheet(br00043_file_path, brick_agg_str(), br00043_df)
+    pidgin_path = create_brick_pidgin_path(brick_dir)
 
-    br00115_file_path = create_path(yell_dir, "br00115.xlsx")
+    br00115_file_path = create_path(brick_dir, "br00115.xlsx")
     br00115_columns = [
         face_name_str(),
         event_int_str(),
@@ -124,7 +124,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
         otx_label_str(),
         inx_label_str(),
     ]
-    br00042_file_path = create_path(yell_dir, "br00042.xlsx")
+    br00042_file_path = create_path(brick_dir, "br00042.xlsx")
     br00042_columns = [
         face_name_str(),
         event_int_str(),
@@ -141,12 +141,12 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
-    upsert_sheet(br00115_file_path, yell_agg_str(), br00115_df)
+    upsert_sheet(br00115_file_path, brick_agg_str(), br00115_df)
     b40_rows = [sue2, sue3, yao1]
     br00042_df = DataFrame(b40_rows, columns=br00042_columns)
-    upsert_sheet(br00042_file_path, yell_agg_str(), br00042_df)
+    upsert_sheet(br00042_file_path, brick_agg_str(), br00042_df)
 
-    br00116_file_path = create_path(yell_dir, "br00116.xlsx")
+    br00116_file_path = create_path(brick_dir, "br00116.xlsx")
     br00116_columns = [
         face_name_str(),
         event_int_str(),
@@ -156,7 +156,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
         otx_tag_str(),
         inx_tag_str(),
     ]
-    br00044_file_path = create_path(yell_dir, "br00044.xlsx")
+    br00044_file_path = create_path(brick_dir, "br00044.xlsx")
     br00044_columns = [
         face_name_str(),
         event_int_str(),
@@ -173,12 +173,12 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
-    upsert_sheet(br00116_file_path, yell_agg_str(), br00116_df)
+    upsert_sheet(br00116_file_path, brick_agg_str(), br00116_df)
     br00044_rows = [sue2, sue3, yao1]
     br00044_df = DataFrame(br00044_rows, columns=br00044_columns)
-    upsert_sheet(br00044_file_path, yell_agg_str(), br00044_df)
+    upsert_sheet(br00044_file_path, brick_agg_str(), br00044_df)
 
-    br00117_file_path = create_path(yell_dir, "br00117.xlsx")
+    br00117_file_path = create_path(brick_dir, "br00117.xlsx")
     br00117_columns = [
         face_name_str(),
         event_int_str(),
@@ -188,7 +188,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
         otx_road_str(),
         inx_road_str(),
     ]
-    br00045_file_path = create_path(yell_dir, "br00045.xlsx")
+    br00045_file_path = create_path(brick_dir, "br00045.xlsx")
     br00045_columns = [
         face_name_str(),
         event_int_str(),
@@ -205,16 +205,16 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
-    upsert_sheet(br00117_file_path, yell_agg_str(), br00117_df)
+    upsert_sheet(br00117_file_path, brick_agg_str(), br00117_df)
     br00045_rows = [sue2, sue3, yao1]
     br00045_df = DataFrame(br00045_rows, columns=br00045_columns)
-    upsert_sheet(br00045_file_path, yell_agg_str(), br00045_df)
+    upsert_sheet(br00045_file_path, brick_agg_str(), br00045_df)
 
     events = {event2: sue_str, event5: sue_str}
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_yell_agg_df_to_yell_pidgin_raw_df(events, yell_dir)
+    etl_brick_agg_df_to_brick_pidgin_raw_df(events, brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -307,7 +307,7 @@ def test_etl_yell_agg_df_to_yell_pidgin_raw_df_CreatesFile(env_dir_setup_cleanup
     assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
 
 
-def create_yell_valid_table(cursor, idea_number: str):
+def create_brick_valid_table(cursor, idea_number: str):
     if idea_number == "br00113":
         x_columns = [
             face_name_str(),
@@ -389,11 +389,11 @@ def create_yell_valid_table(cursor, idea_number: str):
             unknown_word_str(),
         ]
     x_types = {x_column: "TEXT" for x_column in x_columns}
-    agg_tablename = f"{yell_valid_str()}_{idea_number}"
+    agg_tablename = f"{brick_valid_str()}_{idea_number}"
     create_table_from_columns(cursor, agg_tablename, x_columns, x_types)
 
 
-def populate_yell_valid_table(cursor, idea_number: str):
+def populate_brick_valid_table(cursor, idea_number: str):
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -408,7 +408,7 @@ def populate_yell_valid_table(cursor, idea_number: str):
     event2 = 2
     event5 = 5
     event9 = 9
-    agg_tablename = f"{yell_valid_str()}_{idea_number}"
+    agg_tablename = f"{brick_valid_str()}_{idea_number}"
     if idea_number == "br00042":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
@@ -556,7 +556,7 @@ VALUES
     cursor.execute(insert_sqlstr)
 
 
-def test_yell_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
+def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -580,30 +580,30 @@ def test_yell_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         br00044_str = "br00044"
         br00117_str = "br00117"
         br00045_str = "br00045"
-        create_yell_valid_table(cursor, br00113_str)
-        create_yell_valid_table(cursor, br00043_str)
-        create_yell_valid_table(cursor, br00115_str)
-        create_yell_valid_table(cursor, br00042_str)
-        create_yell_valid_table(cursor, br00116_str)
-        create_yell_valid_table(cursor, br00044_str)
-        create_yell_valid_table(cursor, br00117_str)
-        create_yell_valid_table(cursor, br00045_str)
-        populate_yell_valid_table(cursor, br00113_str)
-        populate_yell_valid_table(cursor, br00043_str)
-        populate_yell_valid_table(cursor, br00115_str)
-        populate_yell_valid_table(cursor, br00042_str)
-        populate_yell_valid_table(cursor, br00116_str)
-        populate_yell_valid_table(cursor, br00044_str)
-        populate_yell_valid_table(cursor, br00117_str)
-        populate_yell_valid_table(cursor, br00045_str)
-        br00113_tablename = f"{yell_valid_str()}_{br00113_str}"
-        br00043_tablename = f"{yell_valid_str()}_{br00043_str}"
-        br00115_tablename = f"{yell_valid_str()}_{br00115_str}"
-        br00042_tablename = f"{yell_valid_str()}_{br00042_str}"
-        br00116_tablename = f"{yell_valid_str()}_{br00116_str}"
-        br00044_tablename = f"{yell_valid_str()}_{br00044_str}"
-        br00117_tablename = f"{yell_valid_str()}_{br00117_str}"
-        br00045_tablename = f"{yell_valid_str()}_{br00045_str}"
+        create_brick_valid_table(cursor, br00113_str)
+        create_brick_valid_table(cursor, br00043_str)
+        create_brick_valid_table(cursor, br00115_str)
+        create_brick_valid_table(cursor, br00042_str)
+        create_brick_valid_table(cursor, br00116_str)
+        create_brick_valid_table(cursor, br00044_str)
+        create_brick_valid_table(cursor, br00117_str)
+        create_brick_valid_table(cursor, br00045_str)
+        populate_brick_valid_table(cursor, br00113_str)
+        populate_brick_valid_table(cursor, br00043_str)
+        populate_brick_valid_table(cursor, br00115_str)
+        populate_brick_valid_table(cursor, br00042_str)
+        populate_brick_valid_table(cursor, br00116_str)
+        populate_brick_valid_table(cursor, br00044_str)
+        populate_brick_valid_table(cursor, br00117_str)
+        populate_brick_valid_table(cursor, br00045_str)
+        br00113_tablename = f"{brick_valid_str()}_{br00113_str}"
+        br00043_tablename = f"{brick_valid_str()}_{br00043_str}"
+        br00115_tablename = f"{brick_valid_str()}_{br00115_str}"
+        br00042_tablename = f"{brick_valid_str()}_{br00042_str}"
+        br00116_tablename = f"{brick_valid_str()}_{br00116_str}"
+        br00044_tablename = f"{brick_valid_str()}_{br00044_str}"
+        br00117_tablename = f"{brick_valid_str()}_{br00117_str}"
+        br00045_tablename = f"{brick_valid_str()}_{br00045_str}"
         assert get_row_count(cursor, br00113_tablename) == 2
         assert get_row_count(cursor, br00043_tablename) == 3
         assert get_row_count(cursor, br00115_tablename) == 3
@@ -623,7 +623,7 @@ def test_yell_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         assert get_row_count(cursor, pidgin_raw_road_tablename) == 0
 
         # WHEN
-        yell_valid_tables_to_pidgin_prime_raw_tables(cursor)
+        brick_valid_tables_to_pidgin_prime_raw_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidgin_raw_label_tablename) == 5

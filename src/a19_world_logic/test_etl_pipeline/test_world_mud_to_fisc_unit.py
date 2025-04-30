@@ -15,7 +15,7 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
 )
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic._utils.str_a17 import yell_agg_str, yell_raw_str
+from src.a17_idea_logic._utils.str_a17 import brick_agg_str, brick_raw_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
@@ -116,13 +116,13 @@ def test_WorldUnit_mud_to_stances_Scenario1_CreatesFiles(env_dir_setup_cleanup):
     mstr_dir = fizz_world._fisc_mstr_dir
     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
+    brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
     assert os_path_exists(mud_file_path)
-    assert not os_path_exists(yell_file_path)
+    assert not os_path_exists(brick_file_path)
     assert not os_path_exists(a23_json_path)
     assert not os_path_exists(a23_sue_gut_path)
     assert not os_path_exists(a23_sue_job_path)
@@ -135,9 +135,9 @@ def test_WorldUnit_mud_to_stances_Scenario1_CreatesFiles(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
     assert os_path_exists(mud_file_path)
-    assert os_path_exists(yell_file_path)
-    assert sheet_exists(yell_file_path, yell_raw_str())
-    assert os_path_exists(yell_file_path)
+    assert os_path_exists(brick_file_path)
+    assert sheet_exists(brick_file_path, brick_raw_str())
+    assert os_path_exists(brick_file_path)
     assert os_path_exists(a23_json_path)
     assert os_path_exists(a23_sue_gut_path)
     assert os_path_exists(a23_sue_job_path)
@@ -177,7 +177,7 @@ def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
     assert os_path_exists(a23_ote1_csv_path)
 
 
-# def test_WorldUnit_mud_to_stances_CreatesYellFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mud_to_stances_CreatesBrickFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -232,9 +232,9 @@ def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
 #     fizz_world.mud_to_stances()
 
 #     # THEN
-#     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
+#     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
 #     assert os_path_exists(mud_file_path)
-#     assert os_path_exists(yell_file_path)
+#     assert os_path_exists(brick_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_job_path)

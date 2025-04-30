@@ -30,7 +30,7 @@ def test_WorldUnit_Exists():
     assert not x_world._syntax_inz_dir
     assert not x_world._world_dir
     assert not x_world._mud_dir
-    assert not x_world._yell_dir
+    assert not x_world._brick_dir
     assert not x_world._fisc_mstr_dir
     assert not x_world._fiscunits
     assert not x_world._pidgin_events
@@ -45,7 +45,7 @@ def test_WorldUnit_set_mud_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._world_dir is None
     assert fizz_world._syntax_otz_dir is None
     assert fizz_world._mud_dir is None
-    assert fizz_world._yell_dir is None
+    assert fizz_world._brick_dir is None
     assert fizz_world._fisc_mstr_dir is None
     assert os_path_exists(x_mud_dir) is False
 
@@ -56,7 +56,7 @@ def test_WorldUnit_set_mud_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert fizz_world._world_dir is None
     assert fizz_world._syntax_otz_dir is None
     assert fizz_world._mud_dir == x_mud_dir
-    assert fizz_world._yell_dir is None
+    assert fizz_world._brick_dir is None
     assert fizz_world._fisc_mstr_dir is None
     assert os_path_exists(x_mud_dir)
 
@@ -69,20 +69,20 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
     x_syntax_inz_dir = create_path(x_world_dir, "syntax_inz")
     x_mud_dir = create_path(x_world_dir, "mud")
-    x_yell_dir = create_path(x_world_dir, "yell")
+    x_brick_dir = create_path(x_world_dir, "brick")
     x_fisc_mstr_dir = create_path(x_world_dir, "fisc_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
     assert not fizz_world._syntax_inz_dir
     assert not fizz_world._mud_dir
-    assert not fizz_world._yell_dir
+    assert not fizz_world._brick_dir
     assert not fizz_world._fisc_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_syntax_otz_dir) is False
     assert os_path_exists(x_syntax_inz_dir) is False
     assert os_path_exists(x_mud_dir) is False
-    assert os_path_exists(x_yell_dir) is False
+    assert os_path_exists(x_brick_dir) is False
     assert os_path_exists(x_fisc_mstr_dir) is False
 
     # WHEN
@@ -93,12 +93,12 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert fizz_world._syntax_otz_dir == x_syntax_otz_dir
     assert fizz_world._syntax_inz_dir == x_syntax_inz_dir
     assert not fizz_world._mud_dir
-    assert fizz_world._yell_dir == x_yell_dir
+    assert fizz_world._brick_dir == x_brick_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_syntax_otz_dir)
     assert os_path_exists(x_syntax_inz_dir)
     assert os_path_exists(x_mud_dir) is False
-    assert os_path_exists(x_yell_dir)
+    assert os_path_exists(x_brick_dir)
     assert os_path_exists(x_fisc_mstr_dir)
 
 

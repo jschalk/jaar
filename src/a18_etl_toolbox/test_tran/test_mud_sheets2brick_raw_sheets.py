@@ -7,11 +7,11 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic._utils.str_a17 import yell_raw_str
+from src.a17_idea_logic._utils.str_a17 import brick_raw_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.transformers import (
-    etl_mud_df_to_yell_raw_db,
-    etl_yell_raw_db_to_yell_raw_df,
+    etl_mud_df_to_brick_raw_db,
+    etl_brick_raw_db_to_brick_raw_df,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
@@ -22,7 +22,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_mud_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
+def test_etl_mud_df_to_brick_raw_db_PopulatesBrickTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -33,7 +33,7 @@ def test_etl_mud_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
     mud_dir = create_path(get_module_temp_dir(), "mud")
-    yell_dir = create_path(get_module_temp_dir(), "yell")
+    brick_dir = create_path(get_module_temp_dir(), "brick")
     mud_file_path = create_path(mud_dir, ex_filename)
     idea_columns = [
         face_name_str(),
@@ -66,11 +66,11 @@ def test_etl_mud_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     upsert_sheet(mud_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{yell_raw_str()}_br00003"
+        br00003_tablename = f"{brick_raw_str()}_br00003"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        etl_mud_df_to_yell_raw_db(db_conn, mud_dir)
+        etl_mud_df_to_brick_raw_db(db_conn, mud_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -112,19 +112,19 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         assert rows[3] == row3
         assert rows[4] == row4
 
-        yell_file_path = create_path(yell_dir, "br00003.xlsx")
-        assert os_path_exists(yell_file_path) is False
+        brick_file_path = create_path(brick_dir, "br00003.xlsx")
+        assert os_path_exists(brick_file_path) is False
 
         # WHEN
-        etl_yell_raw_db_to_yell_raw_df(db_conn, yell_dir)
+        etl_brick_raw_db_to_brick_raw_df(db_conn, brick_dir)
 
         # THEN
-        print(f"{yell_file_path=}")
-        assert os_path_exists(yell_file_path)
-        x_df = pandas_read_excel(yell_file_path, sheet_name=yell_raw_str())
+        print(f"{brick_file_path=}")
+        assert os_path_exists(brick_file_path)
+        x_df = pandas_read_excel(brick_file_path, sheet_name=brick_raw_str())
         assert set(idea_columns).issubset(set(x_df.columns))
         assert file_dir_str in set(x_df.columns)
         assert filename_str in set(x_df.columns)
         assert sheet_name_str in set(x_df.columns)
         assert len(x_df) == 5
-        assert get_sheet_names(yell_file_path) == [yell_raw_str()]
+        assert get_sheet_names(brick_file_path) == [brick_raw_str()]

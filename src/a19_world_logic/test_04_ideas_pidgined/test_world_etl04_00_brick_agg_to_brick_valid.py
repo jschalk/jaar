@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic._utils.str_a17 import yell_valid_str, yell_agg_str
+from src.a17_idea_logic._utils.str_a17 import brick_valid_str, brick_agg_str
 from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
@@ -15,7 +15,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenario0(
+def test_WorldUnit_brick_agg_non_pidgin_ideas_to_brick_valid_CreatesSheets_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -45,28 +45,30 @@ def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenari
     fizz_world.set_event(event9, yao_str)
     legitimate_events = {event1, event9}
     assert set(fizz_world._events.keys()) == legitimate_events
-    yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
-    yell_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
-    upsert_sheet(yell_file_path, yell_agg_str(), yell_agg_df)
-    assert sheet_exists(yell_file_path, yell_valid_str()) is False
+    brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
+    brick_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)
+    upsert_sheet(brick_file_path, brick_agg_str(), brick_agg_df)
+    assert sheet_exists(brick_file_path, brick_valid_str()) is False
 
     # WHEN
-    fizz_world.yell_agg_non_pidgin_ideas_to_yell_valid()
+    fizz_world.brick_agg_non_pidgin_ideas_to_brick_valid()
 
     # THEN
-    assert sheet_exists(yell_file_path, yell_valid_str())
-    gen_yell_valid_df = pandas_read_excel(yell_file_path, sheet_name=yell_valid_str())
-    print(f"{gen_yell_valid_df.columns=}")
-    example_yell_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
-    assert len(gen_yell_valid_df.columns) == len(example_yell_valid_df.columns)
-    assert list(gen_yell_valid_df.columns) == list(example_yell_valid_df.columns)
-    assert len(gen_yell_valid_df) > 0
-    assert len(gen_yell_valid_df) == 3
-    assert len(gen_yell_valid_df) == len(example_yell_valid_df)
-    pandas_assert_frame_equal(gen_yell_valid_df, example_yell_valid_df)
+    assert sheet_exists(brick_file_path, brick_valid_str())
+    gen_brick_valid_df = pandas_read_excel(
+        brick_file_path, sheet_name=brick_valid_str()
+    )
+    print(f"{gen_brick_valid_df.columns=}")
+    example_brick_valid_df = DataFrame([row1, row2, row4], columns=br00003_columns)
+    assert len(gen_brick_valid_df.columns) == len(example_brick_valid_df.columns)
+    assert list(gen_brick_valid_df.columns) == list(example_brick_valid_df.columns)
+    assert len(gen_brick_valid_df) > 0
+    assert len(gen_brick_valid_df) == 3
+    assert len(gen_brick_valid_df) == len(example_brick_valid_df)
+    pandas_assert_frame_equal(gen_brick_valid_df, example_brick_valid_df)
 
 
-# def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenario1(
+# def test_WorldUnit_brick_agg_non_pidgin_ideas_to_brick_valid_CreatesSheets_Scenario1(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -83,9 +85,9 @@ def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenari
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
 #     mud_dir = create_path(get_module_temp_dir(), "mud")
-#     yell_dir = create_path(get_module_temp_dir(), "yell")
+#     brick_dir = create_path(get_module_temp_dir(), "brick")
 #     mud_file_path = create_path(mud_dir, ex_filename)
-#     yell_file_path = create_path(yell_dir, "br00003.xlsx")
+#     brick_file_path = create_path(brick_dir, "br00003.xlsx")
 #     idea_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -101,13 +103,13 @@ def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenari
 #     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
 #     upsert_sheet(mud_file_path, "example1_br00003", df1)
-#     etl_yell_raw_db_to_yell_agg_df(yell_dir)
+#     etl_brick_raw_db_to_brick_agg_df(brick_dir)
 
 #     # WHEN
-#     etl_yell_agg_non_pidgin_ideas_to_yell_valid(yell_dir)
+#     etl_brick_agg_non_pidgin_ideas_to_brick_valid(brick_dir)
 
 #     # THEN
-#     gen_otx_events_df = pandas_read_excel(yell_file_path, sheet_name="yell_valid")
+#     gen_otx_events_df = pandas_read_excel(brick_file_path, sheet_name="brick_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
 #     bob_row = [bob_str, event3, ""]

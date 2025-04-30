@@ -2,13 +2,13 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_word_logic.road import OwnerName, TagUnit, FaceName, EventInt
 
 
-YELL_PIDGIN_FILENAME = "pidgin.xlsx"
+BRICK_PIDGIN_FILENAME = "pidgin.xlsx"
 STANCE0001_FILENAME = "stance0001.xlsx"
 
 
-def create_yell_pidgin_path(yell_dir: str) -> str:
-    """Returns path: yell_dir\\pidgin.xlsx"""
-    return create_path(yell_dir, "pidgin.xlsx")
+def create_brick_pidgin_path(brick_dir: str) -> str:
+    """Returns path: brick_dir\\pidgin.xlsx"""
+    return create_path(brick_dir, "pidgin.xlsx")
 
 
 def create_syntax_otx_pidgin_path(syntax_otz_dir: str, face_name: FaceName) -> str:

@@ -21,12 +21,16 @@ from src.a17_idea_logic._utils.example_pandas import (
     get_ex02_atom_dataframe,
     get_ex02_atom_csv,
 )
-from src.a17_idea_logic._utils.str_a17 import yell_raw_str, yell_agg_str, yell_valid_str
+from src.a17_idea_logic._utils.str_a17 import (
+    brick_raw_str,
+    brick_agg_str,
+    brick_valid_str,
+)
 from src.a17_idea_logic.idea_db_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_relevant_columns_dataframe,
-    get_yell_raw_grouping_with_all_values_equal_df,
+    get_brick_raw_grouping_with_all_values_equal_df,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -176,20 +180,20 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_label_str()]
 
 
-def test_yell_raw_str_ReturnsObj():
+def test_brick_raw_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert yell_raw_str() == "yell_raw"
-    assert yell_agg_str() == "yell_agg"
-    assert yell_valid_str() == "yell_valid"
+    assert brick_raw_str() == "brick_raw"
+    assert brick_agg_str() == "brick_agg"
+    assert brick_valid_str() == "brick_valid"
 
 
-def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
+def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
     groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    groupby_dataframe = get_yell_raw_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
         df1, groupby_list, idea_number="br00004"
     )
 
@@ -200,7 +204,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_Emp
     assert groupby_dataframe.columns.to_list() == []
 
 
-def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
+def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -208,7 +212,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_Gro
     groupby_list = [group_label_str()]
 
     # WHEN
-    groupby_dataframe = get_yell_raw_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
         df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
@@ -223,7 +227,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_Gro
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
+def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
@@ -231,7 +235,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_Gro
     groupby_list = [group_label_str(), acct_name_str()]
 
     # WHEN
-    groupby_dataframe = get_yell_raw_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
         df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
@@ -246,7 +250,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_Gro
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
+def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
@@ -254,7 +258,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_Gro
     groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    groupby_dataframe = get_yell_raw_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
         df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")
@@ -269,7 +273,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_Gro
     assert groupby_dataframe.to_csv() == after_df.to_csv()
 
 
-def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
+def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
     # ESTABLISH
     df_columns = [group_label_str(), credor_respect_str(), "column3"]
     before_df_values = [
@@ -281,7 +285,7 @@ def test_get_yell_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_Gro
     groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
-    groupby_dataframe = get_yell_raw_grouping_with_all_values_equal_df(
+    groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
         df1, groupby_list, idea_number="br00004"
     )
     print(f"{groupby_dataframe=}")

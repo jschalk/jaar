@@ -65,7 +65,7 @@ from src.a17_idea_logic.idea_db_tool import (
     split_excel_into_dirs,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_yell_raw_grouping_with_all_values_equal_df,
+    get_brick_raw_grouping_with_all_values_equal_df,
     get_grouping_with_all_values_equal_sql_query,
     translate_all_columns_dataframe,
     insert_idea_csv,
@@ -74,7 +74,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_idea_into_dimen_raw_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
-from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
+from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
@@ -179,7 +179,7 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[CLASS_TYPES[class_type]["inx_obj"]]
 
 
-def etl_mud_df_to_yell_raw_db(conn: sqlite3_Connection, mud_dir: str):
+def etl_mud_df_to_brick_raw_db(conn: sqlite3_Connection, mud_dir: str):
     for ref in get_all_idea_dataframes(mud_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
@@ -191,20 +191,20 @@ def etl_mud_df_to_yell_raw_db(conn: sqlite3_Connection, mud_dir: str):
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
-        x_tablename = f"yell_raw_{ref.idea_number}"
+        x_tablename = f"brick_raw_{ref.idea_number}"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
-def etl_yell_raw_db_to_yell_raw_df(conn: sqlite3_Connection, yell_dir: str):
-    yell_raw_dict = {f"yell_raw_{idea}": idea for idea in get_idea_numbers()}
-    yell_raw_tables = set(yell_raw_dict.keys())
+def etl_brick_raw_db_to_brick_raw_df(conn: sqlite3_Connection, brick_dir: str):
+    brick_raw_dict = {f"brick_raw_{idea}": idea for idea in get_idea_numbers()}
+    brick_raw_tables = set(brick_raw_dict.keys())
     for table_name in get_db_tables(conn):
-        if table_name in yell_raw_tables:
-            idea_number = yell_raw_dict.get(table_name)
-            yell_path = create_path(yell_dir, f"{idea_number}.xlsx")
+        if table_name in brick_raw_tables:
+            idea_number = brick_raw_dict.get(table_name)
+            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
             sqlstr = f"SELECT * FROM {table_name}"
-            yell_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(yell_path, "yell_raw", yell_raw_idea_df)
+            brick_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(brick_path, "brick_raw", brick_raw_idea_df)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -220,32 +220,32 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_yell_raw_db_to_yell_agg_df(yell_dir):
-    for br_ref in get_existing_excel_idea_file_refs(yell_dir):
-        yell_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        yell_raw_df = pandas_read_excel(yell_idea_path, "yell_raw")
-        otx_df = create_df_with_groupby_idea_columns(yell_raw_df, br_ref.idea_number)
-        upsert_sheet(yell_idea_path, "yell_agg", otx_df)
+def etl_brick_raw_db_to_brick_agg_df(brick_dir):
+    for br_ref in get_existing_excel_idea_file_refs(brick_dir):
+        brick_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        brick_raw_df = pandas_read_excel(brick_idea_path, "brick_raw")
+        otx_df = create_df_with_groupby_idea_columns(brick_raw_df, br_ref.idea_number)
+        upsert_sheet(brick_idea_path, "brick_agg", otx_df)
 
 
-def etl_yell_agg_db_to_yell_agg_df(conn: sqlite3_Connection, yell_dir: str):
-    yell_agg_dict = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
-    yell_agg_tables = set(yell_agg_dict.keys())
+def etl_brick_agg_db_to_brick_agg_df(conn: sqlite3_Connection, brick_dir: str):
+    brick_agg_dict = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
+    brick_agg_tables = set(brick_agg_dict.keys())
     for table_name in get_db_tables(conn):
-        if table_name in yell_agg_tables:
-            idea_number = yell_agg_dict.get(table_name)
-            yell_path = create_path(yell_dir, f"{idea_number}.xlsx")
+        if table_name in brick_agg_tables:
+            idea_number = brick_agg_dict.get(table_name)
+            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
             sqlstr = f"SELECT * FROM {table_name}"
-            yell_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(yell_path, "yell_agg", yell_agg_idea_df)
+            brick_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(brick_path, "brick_agg", brick_agg_idea_df)
 
 
-def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
-    yell_raw_dict = {f"yell_raw_{idea}": idea for idea in get_idea_numbers()}
-    yell_raw_tables = set(yell_raw_dict.keys())
+def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
+    brick_raw_dict = {f"brick_raw_{idea}": idea for idea in get_idea_numbers()}
+    brick_raw_tables = set(brick_raw_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
-        if x_tablename in yell_raw_tables:
-            idea_number = yell_raw_dict.get(x_tablename)
+        if x_tablename in brick_raw_tables:
+            idea_number = brick_raw_dict.get(x_tablename)
             idea_filename = get_idea_format_filename(idea_number)
             idearef = get_idearef_obj(idea_filename)
             key_columns_set = set(idearef.get_otx_keys_list())
@@ -256,7 +256,7 @@ def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
             value_columns_list = get_default_sorted_list(
                 value_columns_set, idea_columns
             )
-            agg_tablename = f"yell_agg_{idea_number}"
+            agg_tablename = f"brick_agg_{idea_number}"
             if not db_table_exists(conn_or_cursor, agg_tablename):
                 create_idea_sorted_table(conn_or_cursor, agg_tablename, idea_columns)
             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
@@ -275,13 +275,13 @@ def etl_yell_raw_db_to_yell_agg_db(conn_or_cursor: sqlite3_Connection):
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
 
-def etl_yell_agg_db_to_yell_valid_db(conn_or_cursor: sqlite3_Connection):
-    yell_agg_dict = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
-    yell_agg_tables = set(yell_agg_dict.keys())
+def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
+    brick_agg_dict = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
+    brick_agg_tables = set(brick_agg_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
-        if x_tablename in yell_agg_tables:
-            idea_number = yell_agg_dict.get(x_tablename)
-            valid_tablename = f"yell_valid_{idea_number}"
+        if x_tablename in brick_agg_tables:
+            idea_number = brick_agg_dict.get(x_tablename)
+            valid_tablename = f"brick_valid_{idea_number}"
             agg_columns = get_table_columns(conn_or_cursor, x_tablename)
             create_table_from_columns(
                 conn_or_cursor,
@@ -299,7 +299,7 @@ def etl_yell_agg_db_to_yell_valid_db(conn_or_cursor: sqlite3_Connection):
             select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
             select_sqlstr = select_sqlstr.replace("event_int", "agg.event_int")
             select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
-            join_clause_str = """JOIN yell_valid_events valid_events ON valid_events.event_int = agg.event_int"""
+            join_clause_str = """JOIN brick_valid_events valid_events ON valid_events.event_int = agg.event_int"""
             insert_select_into_sqlstr = f"""
 {insert_clause_str}
 {select_sqlstr}{join_clause_str}
@@ -308,44 +308,49 @@ def etl_yell_agg_db_to_yell_valid_db(conn_or_cursor: sqlite3_Connection):
 
 
 def create_df_with_groupby_idea_columns(
-    yell_raw_df: DataFrame, idea_number: str
+    brick_raw_df: DataFrame, idea_number: str
 ) -> DataFrame:
     idea_filename = get_idea_format_filename(idea_number)
     idearef = get_idearef_obj(idea_filename)
     required_columns = idearef.get_otx_keys_list()
     idea_columns_set = set(idearef._attributes.keys())
     idea_columns_list = get_default_sorted_list(idea_columns_set)
-    yell_raw_df = yell_raw_df[idea_columns_list]
-    return get_yell_raw_grouping_with_all_values_equal_df(
-        yell_raw_df, required_columns, idea_number
+    brick_raw_df = brick_raw_df[idea_columns_list]
+    return get_brick_raw_grouping_with_all_values_equal_df(
+        brick_raw_df, required_columns, idea_number
     )
 
 
-def etl_yell_agg_non_pidgin_ideas_to_yell_valid(
-    yell_dir: str, legitimate_events: set[EventInt]
+def etl_brick_agg_non_pidgin_ideas_to_brick_valid(
+    brick_dir: str, legitimate_events: set[EventInt]
 ):
-    """create yell_legit sheet with each idea's data that is of a legitimate event"""
-    for br_ref in get_existing_excel_idea_file_refs(yell_dir):
-        yell_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        yell_agg = pandas_read_excel(yell_idea_path, "yell_agg")
-        yell_valid_df = yell_agg[yell_agg["event_int"].isin(legitimate_events)]
-        upsert_sheet(yell_idea_path, "yell_valid", yell_valid_df)
+    """create brick_legit sheet with each idea's data that is of a legitimate event"""
+    for br_ref in get_existing_excel_idea_file_refs(brick_dir):
+        brick_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        brick_agg = pandas_read_excel(brick_idea_path, "brick_agg")
+        brick_valid_df = brick_agg[brick_agg["event_int"].isin(legitimate_events)]
+        upsert_sheet(brick_idea_path, "brick_valid", brick_valid_df)
 
 
-def etl_yell_raw_db_to_yell_agg_events_db(conn_or_cursor: sqlite3_Cursor):
-    yell_events_tablename = "yell_agg_events"
-    if not db_table_exists(conn_or_cursor, yell_events_tablename):
-        yell_events_columns = ["idea_number", "face_name", "event_int", "error_message"]
+def etl_brick_raw_db_to_brick_agg_events_db(conn_or_cursor: sqlite3_Cursor):
+    brick_events_tablename = "brick_agg_events"
+    if not db_table_exists(conn_or_cursor, brick_events_tablename):
+        brick_events_columns = [
+            "idea_number",
+            "face_name",
+            "event_int",
+            "error_message",
+        ]
         create_idea_sorted_table(
-            conn_or_cursor, yell_events_tablename, yell_events_columns
+            conn_or_cursor, brick_events_tablename, brick_events_columns
         )
 
-    yell_agg_tables = {f"yell_agg_{idea}": idea for idea in get_idea_numbers()}
+    brick_agg_tables = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
     for agg_tablename in get_db_tables(conn_or_cursor):
-        if agg_tablename in yell_agg_tables:
-            idea_number = yell_agg_tables.get(agg_tablename)
+        if agg_tablename in brick_agg_tables:
+            idea_number = brick_agg_tables.get(agg_tablename)
             insert_from_select_sqlstr = f"""
-INSERT INTO {yell_events_tablename} (idea_number, face_name, event_int)
+INSERT INTO {brick_events_tablename} (idea_number, face_name, event_int)
 SELECT '{idea_number}', face_name, event_int 
 FROM {agg_tablename}
 GROUP BY face_name, event_int
@@ -354,11 +359,11 @@ GROUP BY face_name, event_int
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
     update_error_message_sqlstr = f"""
-UPDATE {yell_events_tablename}
+UPDATE {brick_events_tablename}
 SET error_message = 'invalid because of conflicting event_int'
 WHERE event_int IN (
     SELECT event_int 
-    FROM {yell_events_tablename} 
+    FROM {brick_events_tablename} 
     GROUP BY event_int 
     HAVING MAX(face_name) <> MIN(face_name)
 )
@@ -367,49 +372,49 @@ WHERE event_int IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
-def etl_yell_agg_events_db_to_yell_valid_events_db(conn_or_cursor: sqlite3_Cursor):
-    valid_events_tablename = "yell_valid_events"
+def etl_brick_agg_events_db_to_brick_valid_events_db(conn_or_cursor: sqlite3_Cursor):
+    valid_events_tablename = "brick_valid_events"
     if not db_table_exists(conn_or_cursor, valid_events_tablename):
-        yell_events_columns = ["face_name", "event_int"]
+        brick_events_columns = ["face_name", "event_int"]
         create_idea_sorted_table(
-            conn_or_cursor, valid_events_tablename, yell_events_columns
+            conn_or_cursor, valid_events_tablename, brick_events_columns
         )
     insert_select_sqlstr = f"""
 INSERT INTO {valid_events_tablename} (face_name, event_int)
 SELECT face_name, event_int 
-FROM yell_agg_events
+FROM brick_agg_events
 WHERE error_message IS NULL
 ;
 """
     conn_or_cursor.execute(insert_select_sqlstr)
 
 
-def etl_yell_agg_events_db_to_event_dict(
+def etl_brick_agg_events_db_to_event_dict(
     conn_or_cursor: sqlite3_Cursor,
 ) -> dict[EventInt, FaceName]:
     select_sqlstr = """
 SELECT event_int, face_name 
-FROM yell_valid_events
+FROM brick_valid_events
 ;
 """
     conn_or_cursor.execute(select_sqlstr)
     return {int(row[0]): row[1] for row in conn_or_cursor.fetchall()}
 
 
-def get_yell_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
-    possible_yell_valid_tables = {
-        f"yell_valid_{idea}": idea for idea in get_idea_numbers()
+def get_brick_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
+    possible_brick_valid_tables = {
+        f"brick_valid_{idea}": idea for idea in get_idea_numbers()
     }
     active_tables = get_db_tables(cursor)
     return {
-        active_table: possible_yell_valid_tables.get(active_table)
+        active_table: possible_brick_valid_tables.get(active_table)
         for active_table in active_tables
-        if active_table in possible_yell_valid_tables
+        if active_table in possible_brick_valid_tables
     }
 
 
-def yell_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
-    yell_valid_tables = get_yell_valid_tables(cursor)
+def brick_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
+    brick_valid_tables = get_brick_valid_tables(cursor)
     idea_dimen_ref = {
         pidgin_dimen: idea_numbers
         for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
@@ -421,11 +426,11 @@ def yell_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
         raw_tablename = f"{pidgin_dimen}_raw"
         pidgin_raw_tables[raw_tablename] = idea_numbers
 
-    for yell_valid_table, idea_number in yell_valid_tables.items():
+    for brick_valid_table, idea_number in brick_valid_tables.items():
         for raw_tablename, idea_numbers in pidgin_raw_tables.items():
             if idea_number in idea_numbers:
-                etl_yell_valid_table_into_pidgin_prime_raw_table(
-                    cursor, yell_valid_table, raw_tablename, idea_number
+                etl_brick_valid_table_into_pidgin_prime_raw_table(
+                    cursor, brick_valid_table, raw_tablename, idea_number
                 )
 
 
@@ -442,14 +447,14 @@ def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
     #     pidgin_raw_tables[raw_tablename] = idea_numbers
 
 
-def etl_yell_valid_table_into_pidgin_prime_raw_table(
-    cursor: sqlite3_Cursor, yell_valid_table: str, raw_tablename: str, idea_number: str
+def etl_brick_valid_table_into_pidgin_prime_raw_table(
+    cursor: sqlite3_Cursor, brick_valid_table: str, raw_tablename: str, idea_number: str
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
-    valid_columns = set(get_table_columns(cursor, yell_valid_table))
+    valid_columns = set(get_table_columns(cursor, brick_valid_table))
     common_cols = lab_columns.intersection(valid_columns)
     common_cols = get_default_sorted_list(common_cols)
-    select_str = create_select_query(cursor, yell_valid_table, common_cols)
+    select_str = create_select_query(cursor, brick_valid_table, common_cols)
     select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
     group_by_clause_str = _get_grouping_groupby_clause(common_cols)
     common_cols.append("idea_number")
@@ -460,44 +465,44 @@ def etl_yell_valid_table_into_pidgin_prime_raw_table(
     cursor.execute(insert_select_sqlstr)
 
 
-def etl_yell_agg_df_to_yell_pidgin_raw_df(
-    legitimate_events: set[EventInt], yell_dir: str
+def etl_brick_agg_df_to_brick_pidgin_raw_df(
+    legitimate_events: set[EventInt], brick_dir: str
 ):
-    etl_yell_agg_to_pidgin_name_raw(legitimate_events, yell_dir)
-    etl_yell_agg_to_pidgin_label_raw(legitimate_events, yell_dir)
-    etl_yell_agg_to_pidgin_tag_raw(legitimate_events, yell_dir)
-    etl_yell_agg_to_pidgin_road_raw(legitimate_events, yell_dir)
+    etl_brick_agg_to_pidgin_name_raw(legitimate_events, brick_dir)
+    etl_brick_agg_to_pidgin_label_raw(legitimate_events, brick_dir)
+    etl_brick_agg_to_pidgin_tag_raw(legitimate_events, brick_dir)
+    etl_brick_agg_to_pidgin_road_raw(legitimate_events, brick_dir)
 
 
-def etl_yell_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, yell_dir)
+def etl_brick_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], brick_dir: str):
+    brick_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, brick_dir)
 
 
-def etl_yell_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, yell_dir)
+def etl_brick_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], brick_dir: str):
+    brick_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, brick_dir)
 
 
-def etl_yell_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, yell_dir)
+def etl_brick_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], brick_dir: str):
+    brick_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, brick_dir)
 
 
-def etl_yell_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], yell_dir: str):
-    yell_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, yell_dir)
+def etl_brick_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], brick_dir: str):
+    brick_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, brick_dir)
 
 
-def yell_agg_single_to_pidgin_raw(
-    pidgin_dimen: str, legitimate_events: set[EventInt], yell_dir: str
+def brick_agg_single_to_pidgin_raw(
+    pidgin_dimen: str, legitimate_events: set[EventInt], brick_dir: str
 ):
     x_events = legitimate_events
-    transformer = YellAggToPidginRawTransformer(yell_dir, pidgin_dimen, x_events)
+    transformer = BrickAggToPidginRawTransformer(brick_dir, pidgin_dimen, x_events)
     transformer.transform()
 
 
-class YellAggToPidginRawTransformer:
+class BrickAggToPidginRawTransformer:
     def __init__(
-        self, yell_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
+        self, brick_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
     ):
-        self.yell_dir = yell_dir
+        self.brick_dir = brick_dir
         self.legitmate_events = legitmate_events
         self.pidgin_dimen = pidgin_dimen
         self.class_type = get_class_type(pidgin_dimen)
@@ -512,26 +517,26 @@ class YellAggToPidginRawTransformer:
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
-            yell_idea_path = create_path(self.yell_dir, idea_filename)
-            if os_path_exists(yell_idea_path):
+            brick_idea_path = create_path(self.brick_dir, idea_filename)
+            if os_path_exists(brick_idea_path):
                 self.insert_raw_rows(
-                    pidgin_df, idea_number, yell_idea_path, pidgin_columns
+                    pidgin_df, idea_number, brick_idea_path, pidgin_columns
                 )
 
-        pidgin_file_path = create_yell_pidgin_path(self.yell_dir)
+        pidgin_file_path = create_brick_pidgin_path(self.brick_dir)
         upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
 
     def insert_raw_rows(
         self,
         raw_df: DataFrame,
         idea_number: str,
-        yell_idea_path: str,
+        brick_idea_path: str,
         df_columns: list[str],
     ):
-        yell_agg_df = pandas_read_excel(yell_idea_path, sheet_name="yell_agg")
-        df_missing_cols = set(df_columns).difference(yell_agg_df.columns)
+        brick_agg_df = pandas_read_excel(brick_idea_path, sheet_name="brick_agg")
+        df_missing_cols = set(df_columns).difference(brick_agg_df.columns)
 
-        for index, x_row in yell_agg_df.iterrows():
+        for index, x_row in brick_agg_df.iterrows():
             event_int = x_row["event_int"]
             if event_int in self.legitmate_events:
                 face_name = x_row["face_name"]
@@ -568,39 +573,39 @@ class YellAggToPidginRawTransformer:
         return None
 
 
-def etl_pidgin_name_raw_to_name_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_name")
+def etl_pidgin_name_raw_to_name_agg(brick_dir: str):
+    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_name")
 
 
-def etl_pidgin_label_raw_to_label_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_label")
+def etl_pidgin_label_raw_to_label_agg(brick_dir: str):
+    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_label")
 
 
-def etl_pidgin_road_raw_to_road_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_road")
+def etl_pidgin_road_raw_to_road_agg(brick_dir: str):
+    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_road")
 
 
-def etl_pidgin_tag_raw_to_tag_agg(yell_dir: str):
-    etl_pidgin_single_raw_to_agg(yell_dir, "pidgin_tag")
+def etl_pidgin_tag_raw_to_tag_agg(brick_dir: str):
+    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_tag")
 
 
-def etl_pidgin_single_raw_to_agg(yell_dir: str, map_dimen: str):
-    transformer = PidginRawToAggTransformer(yell_dir, map_dimen)
+def etl_pidgin_single_raw_to_agg(brick_dir: str, map_dimen: str):
+    transformer = PidginRawToAggTransformer(brick_dir, map_dimen)
     transformer.transform()
 
 
-def etl_yell_pidgin_raw_df_to_pidgin_agg_df(yell_dir):
-    etl_pidgin_name_raw_to_name_agg(yell_dir)
-    etl_pidgin_label_raw_to_label_agg(yell_dir)
-    etl_pidgin_road_raw_to_road_agg(yell_dir)
-    etl_pidgin_tag_raw_to_tag_agg(yell_dir)
+def etl_brick_pidgin_raw_df_to_pidgin_agg_df(brick_dir):
+    etl_pidgin_name_raw_to_name_agg(brick_dir)
+    etl_pidgin_label_raw_to_label_agg(brick_dir)
+    etl_pidgin_road_raw_to_road_agg(brick_dir)
+    etl_pidgin_tag_raw_to_tag_agg(brick_dir)
 
 
 class PidginRawToAggTransformer:
-    def __init__(self, yell_dir: str, pidgin_dimen: str):
-        self.yell_dir = yell_dir
+    def __init__(self, brick_dir: str, pidgin_dimen: str):
+        self.brick_dir = brick_dir
         self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_yell_pidgin_path(self.yell_dir)
+        self.file_path = create_brick_pidgin_path(self.brick_dir)
         self.class_type = get_class_type(self.pidgin_dimen)
 
     def transform(self):
@@ -612,7 +617,7 @@ class PidginRawToAggTransformer:
         upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
 
     def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_yell_pidgin_path(self.yell_dir)
+        pidgin_file_path = create_brick_pidgin_path(self.brick_dir)
         raw_sheet_name = get_sheet_raw_name(self.class_type)
         raw_df = pandas_read_excel(pidgin_file_path, sheet_name=raw_sheet_name)
         x_pidginbodybook = self.get_validated_pidginbodybook(raw_df)
@@ -646,8 +651,8 @@ class PidginRawToAggTransformer:
         return x_pidginheartbook
 
 
-def etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir: str, faces_dir: str):
-    agg_pidgin = create_yell_pidgin_path(yell_dir)
+def etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df(brick_dir: str, faces_dir: str):
+    agg_pidgin = create_brick_pidgin_path(brick_dir)
     for class_type in CLASS_TYPES.keys():
         agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         if sheet_exists(agg_pidgin, agg_sheet_name):
@@ -661,7 +666,7 @@ def etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir: str, faces_dir: s
 
 
 def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    face_pidgin_path = create_yell_pidgin_path(face_dir)
+    face_pidgin_path = create_brick_pidgin_path(face_dir)
     for class_type in CLASS_TYPES.keys():
         agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         if sheet_exists(face_pidgin_path, agg_sheet_name):
@@ -679,7 +684,7 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
-    event_pidgin_path = create_yell_pidgin_path(event_pidgin_dir)
+    event_pidgin_path = create_brick_pidgin_path(event_pidgin_dir)
     for class_type in CLASS_TYPES.keys():
         agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         csv_filename = CLASS_TYPES[class_type]["csv_filename"]
@@ -739,16 +744,16 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_yell_ideas_to_otz_face_ideas(yell_dir: str, faces_dir: str):
-    for yell_br_ref in get_existing_excel_idea_file_refs(yell_dir):
-        yell_idea_path = create_path(yell_dir, yell_br_ref.filename)
-        if yell_br_ref.filename not in _get_pidgen_idea_format_filenames():
+def etl_brick_ideas_to_otz_face_ideas(brick_dir: str, faces_dir: str):
+    for brick_br_ref in get_existing_excel_idea_file_refs(brick_dir):
+        brick_idea_path = create_path(brick_dir, brick_br_ref.filename)
+        if brick_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=yell_idea_path,
+                input_file=brick_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                filename=yell_br_ref.idea_number,
-                sheet_name="yell_valid",
+                filename=brick_br_ref.idea_number,
+                sheet_name="brick_valid",
             )
 
 
@@ -762,7 +767,7 @@ def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
                 output_dir=face_dir,
                 column_name="event_int",
                 filename=face_br_ref.idea_number,
-                sheet_name="yell_valid",
+                sheet_name="brick_valid",
             )
 
 
@@ -803,7 +808,7 @@ def etl_otz_event_ideas_to_inz_events(
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
             for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
                 event_idea_path = create_path(event_dir, event_br_ref.filename)
-                idea_df = pandas_read_excel(event_idea_path, "yell_valid")
+                idea_df = pandas_read_excel(event_idea_path, "brick_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
@@ -852,7 +857,7 @@ def etl_inz_face_csv_files2idea_raw_tables(
 
 def etl_idea_raw_to_pidgin_prime_tables(conn_or_cursor):
     create_pidgin_prime_tables(conn_or_cursor)
-    yell_valid_tables_to_pidgin_prime_raw_tables(conn_or_cursor)
+    brick_valid_tables_to_pidgin_prime_raw_tables(conn_or_cursor)
     set_pidgin_raw_error_message(conn_or_cursor)
 
 
