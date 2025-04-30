@@ -19,7 +19,7 @@ from src.a19_world_logic._utils.env_a19 import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudPutAggTables(
+def test_WorldUnit_idea_raw_to_bud_prime_tables_PopulatesBudPutAggTables(
     env_dir_setup_cleanup,
 ):
 
@@ -56,7 +56,7 @@ VALUES
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fizz_world.idea_raw_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
@@ -69,7 +69,7 @@ VALUES
         ]
 
 
-def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudDelAggTables(
+def test_WorldUnit_idea_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
     env_dir_setup_cleanup,
 ):
 
@@ -105,7 +105,7 @@ VALUES
         assert get_row_count(cursor, agg_tablename) == 0
 
         # WHEN
-        fizz_world.idea_raw_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2

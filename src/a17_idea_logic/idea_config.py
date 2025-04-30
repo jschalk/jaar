@@ -32,7 +32,8 @@ def get_allowed_curds() -> set[str]:
 
 def get_idea_formats_dir() -> str:
     idea_dir = create_path("src", "a17_idea_logic")
-    return create_path(idea_dir, "idea_formats")
+    # return create_path(idea_dir, "idea_formats")
+    return "src/a17_idea_logic/idea_formats"
 
 
 def get_idea_elements_sort_order() -> list[str]:
@@ -235,7 +236,6 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "problem_bool": "INTEGER",
         "take_force": "REAL",
         "tally": "INTEGER",
-        "fund_coin": "REAL",
         "penny": "REAL",
         "respect_bit": "REAL",
         "amount": "REAL",

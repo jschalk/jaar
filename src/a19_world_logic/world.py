@@ -37,11 +37,11 @@ from src.a18_etl_toolbox.transformers import (
     etl_otz_inx_event_ideas_to_inz_faces,
     etl_inz_face_ideas_to_csv_files,
     etl_inz_face_csv_files2idea_raw_tables,
-    etl_idea_raw_to_fisc_tables,
+    etl_idea_raw_to_fisc_prime_tables,
     etl_fisc_raw_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_jsons,
-    etl_idea_raw_to_bud_tables,
+    etl_idea_raw_to_bud_prime_tables,
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_pack_json,
     etl_event_pack_json_to_event_inherited_budunits,
@@ -174,11 +174,11 @@ class WorldUnit:
     def inz_face_csv_files2idea_raw_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_inz_face_csv_files2idea_raw_tables(conn_or_cursor, self._syntax_inz_dir)
 
-    def idea_raw_to_fisc_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_raw_to_fisc_tables(conn_or_cursor)
+    def idea_raw_to_fisc_prime_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_raw_to_fisc_prime_tables(conn_or_cursor)
 
-    def idea_raw_to_bud_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_raw_to_bud_tables(conn_or_cursor)
+    def idea_raw_to_bud_prime_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_raw_to_bud_prime_tables(conn_or_cursor)
 
     def inz_faces_ideas_to_fisc_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_fisc_raw_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
@@ -281,14 +281,14 @@ class WorldUnit:
             self.inz_face_csv_files2idea_raw_tables(cursor)
 
             # create fiscunits
-            self.idea_raw_to_fisc_tables(cursor)
+            self.idea_raw_to_fisc_prime_tables(cursor)
             self.fisc_agg_tables_to_fisc_jsons(cursor)
             self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
             self.fisc_table2fisc_ote1_agg_csvs(cursor)
             self.fisc_ote1_agg_csvs2jsons()
 
             # create budunits
-            self.idea_raw_to_bud_tables(cursor)
+            self.idea_raw_to_bud_prime_tables(cursor)
             self.bud_tables_to_event_bud_csvs(cursor)
             self.event_bud_csvs_to_pack_json()
             self.event_pack_json_to_event_inherited_budunits()

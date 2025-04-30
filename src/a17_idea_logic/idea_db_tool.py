@@ -481,3 +481,26 @@ def update_all_face_name_event_int_columns(
 
             # Save the updated sheet
             workbook.save(excel_file_path)
+
+
+class sqlite_data_type_Exception(Exception):
+    pass
+
+
+def is_column_type_valid(df: DataFrame, column: str, sqlite_data_type: str) -> bool:
+    """expected sqlite_data_types: INT, REAL, TEXT"""
+    if sqlite_data_type == "INT":
+        expected_data_type = "int64"
+    elif sqlite_data_type == "REAL":
+        expected_data_type = "float64"
+    elif sqlite_data_type == "TEXT":
+        expected_data_type = "object"
+    else:
+        raise sqlite_data_type_Exception(f"{sqlite_data_type} is not valid sqlite_type")
+    if column not in df.columns:
+        return False
+    # If column is completely empty (all NaN), accept it
+    if df[column].isna().all():
+        return True
+    actual_dtype = df[column].dropna().infer_objects().dtype
+    return str(actual_dtype) == expected_data_type

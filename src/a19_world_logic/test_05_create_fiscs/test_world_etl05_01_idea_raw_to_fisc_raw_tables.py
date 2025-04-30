@@ -18,14 +18,14 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_idea_raw_to_fisc_tables_CreatesFiscRawTables(
+def test_WorldUnit_idea_raw_to_fisc_prime_tables_CreatesFiscRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
-        fizz_world.idea_raw_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_prime_tables(cursor)
         fisc_objs = FiscPrimeObjsRef(fizz_world._fisc_mstr_dir)
         fisc_cols = FiscPrimeColumnsRef()
         assert db_table_exists(cursor, fisc_objs.unit_agg_tablename)
@@ -81,7 +81,7 @@ def test_WorldUnit_idea_raw_to_fisc_tables_CreatesFiscRawTables(
         assert fisc_week_raw_pragma == cursor.fetchall()
 
 
-def test_WorldUnit_idea_raw_to_fisc_tables_Bud_dimen_idea_PopulatesFiscRawTables(
+def test_WorldUnit_idea_raw_to_fisc_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -109,7 +109,7 @@ def test_WorldUnit_idea_raw_to_fisc_tables_Bud_dimen_idea_PopulatesFiscRawTables
         assert not db_table_exists(cursor, fisc_objs.unit_raw_tablename)
 
         # WHEN
-        fizz_world.idea_raw_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_prime_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, fisc_objs.unit_raw_tablename) == 2
@@ -203,7 +203,7 @@ VALUES
         ]
 
         # WHEN
-        fizz_world.idea_raw_to_fisc_tables(cursor)
+        fizz_world.idea_raw_to_fisc_prime_tables(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)

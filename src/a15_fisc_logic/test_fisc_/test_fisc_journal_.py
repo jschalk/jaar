@@ -133,7 +133,7 @@ def test_fisc_set_fisc_dirs_CorrectlyCreatesDBTables(env_dir_setup_cleanup):
     # THEN
     # grab config.json
     config_dict = open_json(
-        dest_dir="src\\a15_fisc_logic", filename="journal_db_check.json"
+        dest_dir="src/a15_fisc_logic", filename="journal_db_check.json"
     )
     tables_dict = get_from_nested_dict(config_dict, ["tables"])
     print(f"{tables_dict=}")

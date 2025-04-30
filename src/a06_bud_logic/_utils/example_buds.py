@@ -1,4 +1,4 @@
-from src.a00_data_toolbox.file_toolbox import open_file
+from src.a00_data_toolbox.file_toolbox import open_file, create_path
 from src.a01_word_logic.road import RoadUnit
 from src.a05_item_logic.item import itemunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop, reasonunit_shop
@@ -9,10 +9,13 @@ from src.a06_bud_logic.bud import (
 )
 from src.a04_reason_logic.reason_team import teamunit_shop
 from src.a06_bud_logic._utils.env_a06 import get_bud_examples_dir as env_dir
+from os.path import exists as os_path_exists
 
 
 def budunit_v001() -> BudUnit:
-    return budunit_get_from_json(open_file(env_dir(), "example_bud1.json"))
+    bud1_path = "src/a06_bud_logic/_utils/example_bud1.json"
+    bud1_json = open_file(bud1_path)
+    return budunit_get_from_json(bud1_json)
 
 
 def budunit_v001_with_large_agenda() -> BudUnit:
@@ -43,9 +46,8 @@ def budunit_v001_with_large_agenda() -> BudUnit:
 
 
 def budunit_v002() -> BudUnit:
-    bob_bud = budunit_get_from_json(open_file(env_dir(), "example_bud2.json"))
-    print(f"{bob_bud.fisc_tag=} {bob_bud.bridge=}")
-    return bob_bud
+    bud2_path = "src/a06_bud_logic/_utils/example_bud2.json"
+    return budunit_get_from_json(open_file(bud2_path))
 
 
 def get_budunit_with_4_levels() -> BudUnit:
@@ -370,8 +372,6 @@ def get_budunit_laundry_example1() -> BudUnit:
     cali_teamunit = teamunit_shop()
     cali_teamunit.set_teamlink(cali_str)
     amos_bud.edit_item_attr(road=laundry_task_road, teamunit=cali_teamunit)
-    # print(f"{basket_road=}")
-    # print(f"{amos_bud.fisc_tag=}")
     amos_bud.add_fact(base=basket_road, pick=b_full_road)
 
     return amos_bud

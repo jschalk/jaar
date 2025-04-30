@@ -34,9 +34,10 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.tran_path import create_yell_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
+from src.a18_etl_toolbox.tran_sqlstrs import create_pidgin_prime_tables
 from src.a18_etl_toolbox.transformers import (
     etl_yell_agg_df_to_yell_pidgin_raw_df,
-    etl_yell_valid_db_to_pidgin_prime_raw_db,
+    yell_valid_tables_to_pidgin_prime_raw_tables,
     etl_pidgin_prime_raw_to_pidgin_prime_agg,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -555,7 +556,7 @@ VALUES
     cursor.execute(insert_sqlstr)
 
 
-def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
+def test_yell_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -615,19 +616,20 @@ def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
         pidgin_raw_name_tablename = "pidgin_name_raw"
         pidgin_raw_tag_tablename = "pidgin_tag_raw"
         pidgin_raw_road_tablename = "pidgin_road_raw"
-        assert not db_table_exists(cursor, pidgin_raw_label_tablename)
-        assert not db_table_exists(cursor, pidgin_raw_name_tablename)
-        assert not db_table_exists(cursor, pidgin_raw_tag_tablename)
-        assert not db_table_exists(cursor, pidgin_raw_road_tablename)
+        create_pidgin_prime_tables(cursor)
+        assert get_row_count(cursor, pidgin_raw_label_tablename) == 0
+        assert get_row_count(cursor, pidgin_raw_name_tablename) == 0
+        assert get_row_count(cursor, pidgin_raw_tag_tablename) == 0
+        assert get_row_count(cursor, pidgin_raw_road_tablename) == 0
 
         # WHEN
-        etl_yell_valid_db_to_pidgin_prime_raw_db(cursor)
+        yell_valid_tables_to_pidgin_prime_raw_tables(cursor)
 
         # THEN
-        assert db_table_exists(cursor, pidgin_raw_label_tablename)
-        assert db_table_exists(cursor, pidgin_raw_name_tablename)
-        assert db_table_exists(cursor, pidgin_raw_tag_tablename)
-        assert db_table_exists(cursor, pidgin_raw_road_tablename)
+        assert get_row_count(cursor, pidgin_raw_label_tablename) == 5
+        assert get_row_count(cursor, pidgin_raw_name_tablename) == 5
+        assert get_row_count(cursor, pidgin_raw_tag_tablename) == 5
+        assert get_row_count(cursor, pidgin_raw_road_tablename) == 7
         pidlab_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
         pidnam_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
         pidtag_raw_cols = get_table_columns(cursor, pidgin_raw_tag_tablename)
@@ -712,7 +714,7 @@ def test_etl_yell_valid_db_to_pidgin_prime_raw_db_PopulatesTables():
         assert roa_rows[6] == row6
 
 
-def populate_pidgin_raw_tables(cursor: sqlite_Cursor, idea_number: str):
+def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -727,8 +729,8 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor, idea_number: str):
     event2 = 2
     event5 = 5
     event9 = 9
-    raw_nam_table = "pidgin_label_raw"
-    raw_lab_table = "pidgin_name_raw"
+    raw_lab_table = "pidgin_label_raw"
+    raw_nam_table = "pidgin_name_raw"
     raw_tag_table = "pidgin_tag_raw"
     raw_roa_table = "pidgin_road_raw"
     br00113_str = "br00113"
@@ -740,7 +742,7 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor, idea_number: str):
     br00117_str = "br00117"
     br00045_str = "br00045"
 
-    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{otx_label_str()},{inx_label_str()})"""
+    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
@@ -769,6 +771,7 @@ VALUES
 , ('{br00044_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ('{br00116_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
 , ('{br00116_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ('{br00116_str}', '{yao_str}', {event9}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 ;
 """
     raw_roa_values_clause = f"""
@@ -777,7 +780,6 @@ VALUES
 , ('{br00045_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ('{br00045_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ('{br00117_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ('{br00117_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 ;
 """
     nam_insert_sqlstr = f"{raw_nam_insert_into_clause} {raw_nam_values_clause}"
@@ -806,15 +808,8 @@ VALUES
 #     event9 = 9
 #     with sqlite3_connect(":memory:") as db_conn:
 #         cursor = db_conn.cursor()
+#         create_pidgin_prime_tables(cursor)
 #         populate_pidgin_raw_tables(cursor)
-#         br00113_str = "br00113"
-#         br00043_str = "br00043"
-#         br00115_str = "br00115"
-#         br00042_str = "br00042"
-#         br00116_str = "br00116"
-#         br00044_str = "br00044"
-#         br00117_str = "br00117"
-#         br00045_str = "br00045"
 #         raw_lab_table = "pidgin_label_raw"
 #         raw_nam_table = "pidgin_name_raw"
 #         raw_tag_table = "pidgin_tag_raw"
@@ -823,10 +818,10 @@ VALUES
 #         agg_nam_table = "pidgin_name_agg"
 #         agg_tag_table = "pidgin_tag_agg"
 #         agg_roa_table = "pidgin_road_agg"
-#         assert get_row_count(cursor, raw_lab_table) == 2
-#         assert get_row_count(cursor, raw_nam_table) == 3
-#         assert get_row_count(cursor, raw_tag_table) == 3
-#         assert get_row_count(cursor, raw_roa_table) == 3
+#         assert get_row_count(cursor, raw_lab_table) == 5
+#         assert get_row_count(cursor, raw_nam_table) == 5
+#         assert get_row_count(cursor, raw_tag_table) == 6
+#         assert get_row_count(cursor, raw_roa_table) == 4
 #         assert get_row_count(cursor, agg_lab_table) == 0
 #         assert get_row_count(cursor, agg_nam_table) == 0
 #         assert get_row_count(cursor, agg_tag_table) == 0
@@ -904,3 +899,4 @@ VALUES
 #         assert pidgin_agg_roa_rows[4] == row4
 #         assert pidgin_agg_roa_rows[5] == row5
 #         assert pidgin_agg_roa_rows[6] == row6
+#         assert 1 == 2
