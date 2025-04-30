@@ -26,7 +26,7 @@ from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_mud_to_standings_Scenario0_DeletesPreviousFiles(
+def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,7 +47,7 @@ def test_WorldUnit_mud_to_standings_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 9
 
     # WHEN
-    fizz_world.mud_to_standings(store_tracing_files=True)
+    fizz_world.mud_to_stances(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(testing2_path)
@@ -55,7 +55,7 @@ def test_WorldUnit_mud_to_standings_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 23
 
 
-def test_WorldUnit_mud_to_standings_Scenario1_CreatesFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mud_to_stances_Scenario1_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -130,7 +130,7 @@ def test_WorldUnit_mud_to_standings_Scenario1_CreatesFiles(env_dir_setup_cleanup
     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
     # WHEN
-    fizz_world.mud_to_standings(store_tracing_files=True)
+    fizz_world.mud_to_stances(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
@@ -145,7 +145,7 @@ def test_WorldUnit_mud_to_standings_Scenario1_CreatesFiles(env_dir_setup_cleanup
     assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
-def test_WorldUnit_mud_to_standings_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -171,13 +171,13 @@ def test_WorldUnit_mud_to_standings_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated
     assert os_path_exists(a23_ote1_csv_path) is False
 
     # WHEN
-    fizz_world.mud_to_standings()
+    fizz_world.mud_to_stances()
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
 
 
-# def test_WorldUnit_mud_to_standings_CreatesYellFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mud_to_stances_CreatesYellFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -229,7 +229,7 @@ def test_WorldUnit_mud_to_standings_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated
 #     assert os_path_exists(a23_sue_job_path) is False
 
 #     # WHEN
-#     fizz_world.mud_to_standings()
+#     fizz_world.mud_to_stances()
 
 #     # THEN
 #     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
