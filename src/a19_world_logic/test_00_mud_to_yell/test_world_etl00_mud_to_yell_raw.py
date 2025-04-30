@@ -19,7 +19,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_sound_df_to_yell_raw_db_CreatesYellFiles(
+def test_WorldUnit_mud_df_to_yell_raw_db_CreatesYellFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -33,7 +33,7 @@ def test_WorldUnit_sound_df_to_yell_raw_db_CreatesYellFiles(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -61,9 +61,9 @@ def test_WorldUnit_sound_df_to_yell_raw_db_CreatesYellFiles(
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(sound_file_path, br00003_ex1_str, df1)
-    upsert_sheet(sound_file_path, br00003_ex2_str, df2)
-    upsert_sheet(sound_file_path, br00003_ex3_str, df3)
+    upsert_sheet(mud_file_path, br00003_ex1_str, df1)
+    upsert_sheet(mud_file_path, br00003_ex2_str, df2)
+    upsert_sheet(mud_file_path, br00003_ex3_str, df3)
     assert os_path_exists(yell_file_path) is False
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -72,7 +72,7 @@ def test_WorldUnit_sound_df_to_yell_raw_db_CreatesYellFiles(
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        fizz_world.sound_df_to_yell_raw_db(db_conn)
+        fizz_world.mud_df_to_yell_raw_db(db_conn)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -95,7 +95,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         file = ex_filename
         e1 = event_1
         e2 = event_2
-        s_dir = create_path(fizz_world._sound_dir, ".")
+        s_dir = create_path(fizz_world._mud_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1 = br00003_ex1_str

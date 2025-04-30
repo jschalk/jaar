@@ -15,7 +15,7 @@ from src.a01_word_logic.road import (
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_df_to_yell_raw_db,
+    etl_mud_df_to_yell_raw_db,
     etl_yell_raw_db_to_yell_agg_db,
     etl_yell_raw_db_to_yell_raw_df,
     etl_yell_agg_db_to_yell_agg_df,
@@ -74,7 +74,7 @@ class WorldUnit:
     _syntax_otz_dir: str = None
     _syntax_inz_dir: str = None
     _world_dir: str = None
-    _sound_dir: str = None
+    _mud_dir: str = None
     _yell_dir: str = None
     _fisc_mstr_dir: str = None
     _fiscunits: set[FiscTag] = None
@@ -97,9 +97,9 @@ class WorldUnit:
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._syntax_otz_dir)
 
-    def set_sound_dir(self, x_dir: str):
-        self._sound_dir = x_dir
-        set_dir(self._sound_dir)
+    def set_mud_dir(self, x_dir: str):
+        self._mud_dir = x_dir
+        set_dir(self._mud_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
@@ -116,8 +116,8 @@ class WorldUnit:
     def get_timeconversions_dict(self) -> dict[TimeLineTag, TimeConversion]:
         return self.timeconversions
 
-    def sound_df_to_yell_raw_db(self, conn: sqlite3_Connection):
-        etl_sound_df_to_yell_raw_db(conn, self._sound_dir)
+    def mud_df_to_yell_raw_db(self, conn: sqlite3_Connection):
+        etl_mud_df_to_yell_raw_db(conn, self._mud_dir)
 
     def yell_raw_db_to_yell_agg_df(
         self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
@@ -238,7 +238,7 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_deal_mandate_ledgers(mstr_dir)
 
-    def sound_to_standings(
+    def mud_to_standings(
         self, store_tracing_files: bool = False
     ):  # sourcery skip: extract-method
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
@@ -250,7 +250,7 @@ class WorldUnit:
 
             # collect excel file data into central location
             # grab all excel sheets that fit idea format
-            self.sound_df_to_yell_raw_db(db_conn)
+            self.mud_df_to_yell_raw_db(db_conn)
             # per idea brick filter to only non-conflicting idea data
             self.yell_raw_db_to_yell_agg_df(db_conn, cursor)
 
@@ -317,7 +317,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID,
     worlds_dir: str,
-    sound_dir: str = None,
+    mud_dir: str = None,
     world_time_nigh: TimeLinePoint = None,
     timeconversions: dict[TimeLineTag, TimeConversion] = None,
     _fiscunits: set[FiscTag] = None,
@@ -329,12 +329,12 @@ def worldunit_shop(
         timeconversions=get_empty_dict_if_None(timeconversions),
         _events={},
         _fiscunits=get_empty_set_if_None(_fiscunits),
-        _sound_dir=sound_dir,
+        _mud_dir=mud_dir,
         _pidgin_events={},
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._sound_dir:
-        x_worldunit.set_sound_dir(create_path(x_worldunit._world_dir, "sound"))
+    if not x_worldunit._mud_dir:
+        x_worldunit.set_mud_dir(create_path(x_worldunit._world_dir, "mud"))
     return x_worldunit
 
 

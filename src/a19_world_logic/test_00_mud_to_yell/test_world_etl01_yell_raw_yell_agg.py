@@ -26,7 +26,7 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario0_GroupBy
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
@@ -40,10 +40,10 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario0_GroupBy
     row2 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
-    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_yell_raw_db(db_conn)
+        fizz_world.mud_df_to_yell_raw_db(db_conn)
 
         # WHEN
         fizz_world.yell_raw_db_to_yell_agg_df(db_conn, cursor)
@@ -75,7 +75,7 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario1_GroupBy
     hour7am = "7am"
     hour8am = "8am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -89,10 +89,10 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario1_GroupBy
     row3 = [sue_str, event3, accord23_str, minute_420, hour8am]
     row4 = [sue_str, event7, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_yell_raw_db(db_conn)
+        fizz_world.mud_df_to_yell_raw_db(db_conn)
         br00003_agg_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
         assert sheet_exists(br00003_agg_file_path, yell_agg_str()) is False
 

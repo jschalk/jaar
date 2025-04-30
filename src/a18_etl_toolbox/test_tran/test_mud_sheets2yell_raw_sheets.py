@@ -10,7 +10,7 @@ from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic._utils.str_a17 import yell_raw_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.transformers import (
-    etl_sound_df_to_yell_raw_db,
+    etl_mud_df_to_yell_raw_db,
     etl_yell_raw_db_to_yell_raw_df,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -22,7 +22,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
+def test_etl_mud_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event_1 = 1
@@ -32,9 +32,9 @@ def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_dir = create_path(get_module_temp_dir(), "sound")
+    mud_dir = create_path(get_module_temp_dir(), "mud")
     yell_dir = create_path(get_module_temp_dir(), "yell")
-    sound_file_path = create_path(sound_dir, ex_filename)
+    mud_file_path = create_path(mud_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -61,16 +61,16 @@ def test_etl_sound_df_to_yell_raw_db_PopulatesYellTables(env_dir_setup_cleanup):
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(sound_file_path, br00003_ex1_str, df1)
-    upsert_sheet(sound_file_path, br00003_ex2_str, df2)
-    upsert_sheet(sound_file_path, br00003_ex3_str, df3)
+    upsert_sheet(mud_file_path, br00003_ex1_str, df1)
+    upsert_sheet(mud_file_path, br00003_ex2_str, df2)
+    upsert_sheet(mud_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         br00003_tablename = f"{yell_raw_str()}_br00003"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        etl_sound_df_to_yell_raw_db(db_conn, sound_dir)
+        etl_mud_df_to_yell_raw_db(db_conn, mud_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -94,7 +94,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         file = ex_filename
         e1 = event_1
         e2 = event_2
-        s_dir = create_path(sound_dir, ".")
+        s_dir = create_path(mud_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str

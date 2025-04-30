@@ -26,7 +26,7 @@ from pandas import DataFrame
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_sound_to_standings_Scenario0_DeletesPreviousFiles(
+def test_WorldUnit_mud_to_standings_Scenario0_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,7 +47,7 @@ def test_WorldUnit_sound_to_standings_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 9
 
     # WHEN
-    fizz_world.sound_to_standings(store_tracing_files=True)
+    fizz_world.mud_to_standings(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(testing2_path)
@@ -55,7 +55,7 @@ def test_WorldUnit_sound_to_standings_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 23
 
 
-def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mud_to_standings_Scenario1_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -68,7 +68,7 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     br00003_columns = [
         face_name_str(),
         event_int_str(),
@@ -92,7 +92,7 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     br1row0 = [sue_str, event_2, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
-    upsert_sheet(sound_file_path, br00001_ex0_str, br00001_1df)
+    upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
 
     br3row0 = [sue_str, event_1, minute_360, accord23_str, hour6am]
     br3row1 = [sue_str, event_1, minute_420, accord23_str, hour7am]
@@ -101,8 +101,8 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
     br00003_ex1_str = "example1_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(sound_file_path, br00003_ex1_str, br00003_1df)
-    upsert_sheet(sound_file_path, br00003_ex3_str, br00003_3df)
+    upsert_sheet(mud_file_path, br00003_ex1_str, br00003_1df)
+    upsert_sheet(mud_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
         face_name_str(),
         event_int_str(),
@@ -112,7 +112,7 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     ]
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(sound_file_path, "br00011_ex3", br00011_df)
+    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     mstr_dir = fizz_world._fisc_mstr_dir
     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
     assert os_path_exists(wrong_a23_fisc_dir) is False
@@ -121,7 +121,7 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
-    assert os_path_exists(sound_file_path)
+    assert os_path_exists(mud_file_path)
     assert not os_path_exists(yell_file_path)
     assert not os_path_exists(a23_json_path)
     assert not os_path_exists(a23_sue_gut_path)
@@ -130,11 +130,11 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
     # WHEN
-    fizz_world.sound_to_standings(store_tracing_files=True)
+    fizz_world.mud_to_standings(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
-    assert os_path_exists(sound_file_path)
+    assert os_path_exists(mud_file_path)
     assert os_path_exists(yell_file_path)
     assert sheet_exists(yell_file_path, yell_raw_str())
     assert os_path_exists(yell_file_path)
@@ -145,7 +145,7 @@ def test_WorldUnit_sound_to_standings_Scenario1_CreatesFiles(env_dir_setup_clean
     assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
-def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -154,7 +154,7 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
     sue_str = "Sue"
     event_2 = 2
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     accord23_str = "accord23"
     br00011_columns = [
         face_name_str(),
@@ -165,19 +165,19 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
     ]
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(sound_file_path, "br00011_ex3", br00011_df)
+    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     fisc_mstr = fizz_world._fisc_mstr_dir
     a23_ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr, accord23_str)
     assert os_path_exists(a23_ote1_csv_path) is False
 
     # WHEN
-    fizz_world.sound_to_standings()
+    fizz_world.mud_to_standings()
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
 
 
-# def test_WorldUnit_sound_to_standings_CreatesYellFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mud_to_standings_CreatesYellFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -190,7 +190,7 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+#     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
 #     br00003_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -206,8 +206,8 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
 #     df3 = DataFrame([row2, row1, row3], columns=br00003_columns)
 #     br00003_ex1_str = "example1_br00003"
 #     br00003_ex3_str = "example3_br00003"
-#     upsert_sheet(sound_file_path, br00003_ex1_str, df1)
-#     upsert_sheet(sound_file_path, br00003_ex3_str, df3)
+#     upsert_sheet(mud_file_path, br00003_ex1_str, df1)
+#     upsert_sheet(mud_file_path, br00003_ex3_str, df3)
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -217,23 +217,23 @@ def test_WorldUnit_sound_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCrea
 #     ]
 #     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-#     upsert_sheet(sound_file_path, "br00011_ex3", br00011_df)
+#     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
 #     mstr_dir = fizz_world._mstr_dir
 #     fiscs_dir = create_path(mstr_dir, "fiscs")
 #     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
 #     a23_sue_gut_path = create_gut_path(fiscs_dir, accord23_str, sue_str)
 #     a23_sue_job_path = create_job_path(fiscs_dir, accord23_str, sue_str)
-#     assert os_path_exists(sound_file_path)
+#     assert os_path_exists(mud_file_path)
 #     assert os_path_exists(a23_json_path) is False
 #     assert os_path_exists(a23_sue_gut_path) is False
 #     assert os_path_exists(a23_sue_job_path) is False
 
 #     # WHEN
-#     fizz_world.sound_to_standings()
+#     fizz_world.mud_to_standings()
 
 #     # THEN
 #     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
-#     assert os_path_exists(sound_file_path)
+#     assert os_path_exists(mud_file_path)
 #     assert os_path_exists(yell_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)

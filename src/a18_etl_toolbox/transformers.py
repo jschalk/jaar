@@ -179,8 +179,8 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[CLASS_TYPES[class_type]["inx_obj"]]
 
 
-def etl_sound_df_to_yell_raw_db(conn: sqlite3_Connection, sound_dir: str):
-    for ref in get_all_idea_dataframes(sound_dir):
+def etl_mud_df_to_yell_raw_db(conn: sqlite3_Connection, mud_dir: str):
+    for ref in get_all_idea_dataframes(mud_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         idea_sorting_columns = get_default_sorted_list(set(df.columns))

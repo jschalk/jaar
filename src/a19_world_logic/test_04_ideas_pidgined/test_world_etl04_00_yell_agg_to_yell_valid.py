@@ -82,9 +82,9 @@ def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenari
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     sound_dir = create_path(get_module_temp_dir(), "sound")
+#     mud_dir = create_path(get_module_temp_dir(), "mud")
 #     yell_dir = create_path(get_module_temp_dir(), "yell")
-#     sound_file_path = create_path(sound_dir, ex_filename)
+#     mud_file_path = create_path(mud_dir, ex_filename)
 #     yell_file_path = create_path(yell_dir, "br00003.xlsx")
 #     idea_columns = [
 #         face_name_str(),
@@ -100,7 +100,7 @@ def test_WorldUnit_yell_agg_non_pidgin_ideas_to_yell_valid_CreatesSheets_Scenari
 #     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
 #     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
-#     upsert_sheet(sound_file_path, "example1_br00003", df1)
+#     upsert_sheet(mud_file_path, "example1_br00003", df1)
 #     etl_yell_raw_db_to_yell_agg_df(yell_dir)
 
 #     # WHEN
