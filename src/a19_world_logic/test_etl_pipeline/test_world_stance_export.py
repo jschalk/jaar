@@ -23,7 +23,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    fizz_world.sound_to_standings()
+    fizz_world.mud_to_stances()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
@@ -41,7 +41,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     sue_str = "Sue"
     event_2 = 2
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     accord23_str = "accord23"
     br00011_columns = [
         face_name_str(),
@@ -52,8 +52,8 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     ]
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(sound_file_path, "br00011_ex3", br00011_df)
-    fizz_world.sound_to_standings()
+    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
+    fizz_world.mud_to_stances()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
@@ -64,7 +64,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     assert os_path_exists(fizz_stance0001_path)
 
 
-def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldUnit(
+def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -73,7 +73,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
     sue_str = "Sue"
     event_2 = 2
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     accord23_str = "accord23"
     br00011_columns = [
         face_name_str(),
@@ -84,19 +84,19 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
     ]
     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(sound_file_path, "br00011_ex3", br00011_df)
-    fizz_world.sound_to_standings()
+    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
+    fizz_world.mud_to_stances()
     fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
     fizz_world.create_stances()
     buzz_world = worldunit_shop("buzz", worlds_dir())
-    buzz_sound_st0001_path = create_path(buzz_world._fisc_mstr_dir, "buzz_sound.xlsx")
+    buzz_mud_st0001_path = create_path(buzz_world._fisc_mstr_dir, "buzz_mud.xlsx")
     set_dir(create_stances_dir_path(buzz_world._fisc_mstr_dir))
-    shutil_copy2(fizz_stance0001_path, dst=buzz_sound_st0001_path)
+    shutil_copy2(fizz_stance0001_path, dst=buzz_mud_st0001_path)
     # print(f" {pandas_read_excel(fizz_stance0001_path)=}")
-    # print(f"{pandas_read_excel(buzz_sound_st0001_path)=}")
-    print(f"{buzz_sound_st0001_path=}")
-    print(f"{get_sheet_names(buzz_sound_st0001_path)=}")
-    buzz_world.sound_to_standings()
+    # print(f"{pandas_read_excel(buzz_mud_st0001_path)=}")
+    print(f"{buzz_mud_st0001_path=}")
+    print(f"{get_sheet_names(buzz_mud_st0001_path)=}")
+    buzz_world.mud_to_stances()
     buzz_stance0001_path = create_stance0001_path(buzz_world._fisc_mstr_dir)
     assert os_path_exists(buzz_stance0001_path) is False
 
@@ -116,7 +116,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
         assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
 
 
-# def test_WorldUnit_sound_to_standings_CreatesFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mud_to_stances_CreatesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -129,7 +129,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+#     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
 #     br00003_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -153,7 +153,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 #     br1row0 = [sue_str, event_2, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
 #     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
 #     br00001_ex0_str = "example0_br00001"
-#     upsert_sheet(sound_file_path, br00001_ex0_str, br00001_1df)
+#     upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
 
 #     br3row0 = [sue_str, event_1, minute_360, accord23_str, hour6am]
 #     br3row1 = [sue_str, event_1, minute_420, accord23_str, hour7am]
@@ -162,8 +162,8 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 #     br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
 #     br00003_ex1_str = "example1_br00003"
 #     br00003_ex3_str = "example3_br00003"
-#     upsert_sheet(sound_file_path, br00003_ex1_str, br00003_1df)
-#     upsert_sheet(sound_file_path, br00003_ex3_str, br00003_3df)
+#     upsert_sheet(mud_file_path, br00003_ex1_str, br00003_1df)
+#     upsert_sheet(mud_file_path, br00003_ex3_str, br00003_3df)
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -173,7 +173,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 #     ]
 #     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-#     upsert_sheet(sound_file_path, "br00011_ex3", br00011_df)
+#     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
 #     mstr_dir = fizz_world._fisc_mstr_dir
 #     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
 #     assert os_path_exists(wrong_a23_fisc_dir) is False
@@ -181,7 +181,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 #     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
 #     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
 #     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
-#     assert os_path_exists(sound_file_path)
+#     assert os_path_exists(mud_file_path)
 #     assert os_path_exists(a23_json_path) is False
 #     assert os_path_exists(a23_sue_gut_path) is False
 #     assert os_path_exists(a23_sue_job_path) is False
@@ -189,13 +189,13 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeSounddByOtherWorldU
 #     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
 #     # WHEN
-#     fizz_world.sound_to_standings()
+#     fizz_world.mud_to_stances()
 
 #     # THEN
 #     assert os_path_exists(wrong_a23_fisc_dir) is False
-#     yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
-#     assert os_path_exists(sound_file_path)
-#     assert os_path_exists(yell_file_path)
+#     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
+#     assert os_path_exists(mud_file_path)
+#     assert os_path_exists(brick_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_job_path)

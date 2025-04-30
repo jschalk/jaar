@@ -1,12 +1,12 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.tran_path import (
-    create_yell_pidgin_path,
+    create_brick_pidgin_path,
     create_syntax_otx_pidgin_path,
 )
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
-    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df,
+    etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
@@ -17,7 +17,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from os.path import exists as os_path_exists
 
 
-def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_names(
+def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -39,14 +39,14 @@ def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_nam
     name_rows = [name0, name1, name2, name3]
     e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
-    yell_dir = create_path(get_module_temp_dir(), "yell")
-    agg_pidgin_path = create_yell_pidgin_path(yell_dir)
+    brick_dir = create_path(get_module_temp_dir(), "brick")
+    agg_pidgin_path = create_brick_pidgin_path(brick_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
 
     faces_dir = create_path(get_module_temp_dir(), "syntax_otz")
 
     # WHEN
-    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir, faces_dir)
+    etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df(brick_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)
@@ -69,7 +69,7 @@ def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_nam
     pandas_testing_assert_frame_equal(gen_zia_name_df, e1_zia_name_agg_df)
 
 
-def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens(
+def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -124,8 +124,8 @@ def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
-    yell_dir = create_path(get_module_temp_dir(), "yell")
-    agg_pidgin_path = create_yell_pidgin_path(yell_dir)
+    brick_dir = create_path(get_module_temp_dir(), "brick")
+    agg_pidgin_path = create_brick_pidgin_path(brick_dir)
     upsert_sheet(agg_pidgin_path, name_agg_str, e1_name_agg_df)
     upsert_sheet(agg_pidgin_path, label_agg_str, e1_label_agg_df)
     upsert_sheet(agg_pidgin_path, road_agg_str, e1_road_agg_df)
@@ -134,7 +134,7 @@ def test_etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimens
     faces_dir = create_path(get_module_temp_dir(), "syntax_otz")
 
     # WHEN
-    etl_yell_pidgin_agg_df_to_otz_face_pidgin_agg_df(yell_dir, faces_dir)
+    etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df(brick_dir, faces_dir)
 
     # THEN
     sue_dir = create_path(faces_dir, sue_str)

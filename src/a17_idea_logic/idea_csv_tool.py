@@ -11,9 +11,9 @@ from src.a17_idea_logic.idea_config import (
 )
 
 
-def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
+def create_init_stance_idea_csv_strs() -> dict[str, str]:
     """Returns strings of csv headers with comma delimiter"""
-    stance_idea_bricks = [
+    stance_idea_numbers = [
         "br00000",
         "br00001",
         "br00002",
@@ -39,11 +39,11 @@ def create_init_stance_idea_brick_csv_strs() -> dict[str, str]:
     idea_format_headers = get_idea_format_headers()
 
     fisc_csv_strs = {}
-    for idea_brick in stance_idea_bricks:
-        idea_format_filename = get_idea_format_filename(idea_brick)
+    for idea_number in stance_idea_numbers:
+        idea_format_filename = get_idea_format_filename(idea_number)
         for idea_columns, idea_file_name in idea_format_headers.items():
             if idea_file_name == idea_format_filename:
-                fisc_csv_strs[idea_brick] = f"face_name,event_int,{idea_columns}\n"
+                fisc_csv_strs[idea_number] = f"face_name,event_int,{idea_columns}\n"
     return fisc_csv_strs
 
 

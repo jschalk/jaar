@@ -9,7 +9,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic._utils.str_a17 import yell_valid_str
+from src.a17_idea_logic._utils.str_a17 import brick_valid_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
@@ -22,7 +22,7 @@ from pandas.testing import (
 from pandas import DataFrame, read_excel as pandas_read_excel
 
 
-def test_etl_otz_event_ideas_to_yell_events_Scenario0_NoPidginUnit(
+def test_etl_otz_event_ideas_to_brick_events_Scenario0_NoPidginUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,19 +47,19 @@ def test_etl_otz_event_ideas_to_yell_events_Scenario0_NoPidginUnit(
     fizz_world._pidgin_events = {}
     sue_otz_dir = create_path(fizz_world._syntax_otz_dir, sue_otx)
     otz_e3_dir = create_path(sue_otz_dir, event3)
-    yell_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
-    print(f"{yell_e3_br00011_path=}")
-    upsert_sheet(yell_e3_br00011_path, yell_valid_str(), e3_accord23_df)
-    print(f"{yell_valid_str()=}")
+    brick_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
+    print(f"{brick_e3_br00011_path=}")
+    upsert_sheet(brick_e3_br00011_path, brick_valid_str(), e3_accord23_df)
+    print(f"{brick_valid_str()=}")
     inx_str = "inx"
-    assert sheet_exists(yell_e3_br00011_path, inx_str) is False
+    assert sheet_exists(brick_e3_br00011_path, inx_str) is False
 
     # WHEN
     fizz_world.otz_event_ideas_to_inz_events()
 
     # THEN
-    assert sheet_exists(yell_e3_br00011_path, inx_str)
-    e3_inx_df = pandas_read_excel(yell_e3_br00011_path, sheet_name=inx_str)
+    assert sheet_exists(brick_e3_br00011_path, inx_str)
+    e3_inx_df = pandas_read_excel(brick_e3_br00011_path, sheet_name=inx_str)
     sue_i0 = [sue_otx, event3, accord23_str, bob_otx, bob_otx]
     sue_i1 = [sue_otx, event3, accord23_str, yao_otx, bob_otx]
     sue_i2 = [sue_otx, event3, accord23_str, yao_otx, yao_otx]
@@ -67,7 +67,7 @@ def test_etl_otz_event_ideas_to_yell_events_Scenario0_NoPidginUnit(
     pandas_assert_frame_equal(e3_inx_df, example_e3_inx_df)
 
 
-def test_etl_otz_event_ideas_to_yell_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
+def test_etl_otz_event_ideas_to_brick_events_Scenario1_MultpleFaceNames_CreatesEventInxSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -114,16 +114,16 @@ def test_etl_otz_event_ideas_to_yell_events_Scenario1_MultpleFaceNames_CreatesEv
     otz_e3_dir = create_path(sue_otz_dir, event3)
     otz_e7_dir = create_path(zia_otz_dir, event7)
     otz_e9_dir = create_path(zia_otz_dir, event9)
-    yell_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
-    yell_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
-    yell_e9_br00011_path = create_path(otz_e9_dir, br00011_filename)
-    print(f"{yell_e3_br00011_path=}")
-    print(f"{yell_e7_br00011_path=}")
-    print(f"{yell_e9_br00011_path=}")
-    upsert_sheet(yell_e3_br00011_path, yell_valid_str(), e3_accord23_df)
-    upsert_sheet(yell_e7_br00011_path, yell_valid_str(), e7_accord23_df)
-    upsert_sheet(yell_e9_br00011_path, yell_valid_str(), e9_accord23_df)
-    print(f"{yell_valid_str()=}")
+    brick_e3_br00011_path = create_path(otz_e3_dir, br00011_filename)
+    brick_e7_br00011_path = create_path(otz_e7_dir, br00011_filename)
+    brick_e9_br00011_path = create_path(otz_e9_dir, br00011_filename)
+    print(f"{brick_e3_br00011_path=}")
+    print(f"{brick_e7_br00011_path=}")
+    print(f"{brick_e9_br00011_path=}")
+    upsert_sheet(brick_e3_br00011_path, brick_valid_str(), e3_accord23_df)
+    upsert_sheet(brick_e7_br00011_path, brick_valid_str(), e7_accord23_df)
+    upsert_sheet(brick_e9_br00011_path, brick_valid_str(), e9_accord23_df)
+    print(f"{brick_valid_str()=}")
     inx_str = "inx"
     e3_pidginunit = pidginunit_shop(sue_otx, event3)
     e7_pidginunit = pidginunit_shop(zia_otx, event7)
@@ -141,20 +141,20 @@ def test_etl_otz_event_ideas_to_yell_events_Scenario1_MultpleFaceNames_CreatesEv
     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
     save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())
-    assert sheet_exists(yell_e3_br00011_path, inx_str) is False
-    assert sheet_exists(yell_e7_br00011_path, inx_str) is False
-    assert sheet_exists(yell_e9_br00011_path, inx_str) is False
+    assert sheet_exists(brick_e3_br00011_path, inx_str) is False
+    assert sheet_exists(brick_e7_br00011_path, inx_str) is False
+    assert sheet_exists(brick_e9_br00011_path, inx_str) is False
 
     # WHEN
     fizz_world.otz_event_ideas_to_inz_events()
 
     # THEN
-    assert sheet_exists(yell_e3_br00011_path, inx_str)
-    assert sheet_exists(yell_e7_br00011_path, inx_str)
-    assert sheet_exists(yell_e9_br00011_path, inx_str)
-    e3_inx_df = pandas_read_excel(yell_e3_br00011_path, sheet_name=inx_str)
-    e7_inx_df = pandas_read_excel(yell_e7_br00011_path, sheet_name=inx_str)
-    e9_inx_df = pandas_read_excel(yell_e9_br00011_path, sheet_name=inx_str)
+    assert sheet_exists(brick_e3_br00011_path, inx_str)
+    assert sheet_exists(brick_e7_br00011_path, inx_str)
+    assert sheet_exists(brick_e9_br00011_path, inx_str)
+    e3_inx_df = pandas_read_excel(brick_e3_br00011_path, sheet_name=inx_str)
+    e7_inx_df = pandas_read_excel(brick_e7_br00011_path, sheet_name=inx_str)
+    e9_inx_df = pandas_read_excel(brick_e9_br00011_path, sheet_name=inx_str)
     sue_i0 = [sue_inx, event3, accord23_str, bob0_inx, bob0_inx]
     sue_i1 = [sue_inx, event3, accord23_str, yao0_inx, bob0_inx]
     sue_i2 = [sue_inx, event3, accord23_str, yao0_inx, yao0_inx]

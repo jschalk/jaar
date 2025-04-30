@@ -103,7 +103,7 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def get_yell_raw_grouping_with_all_values_equal_df(
+def get_brick_raw_grouping_with_all_values_equal_df(
     x_df: DataFrame, groupby_list: list, idea_number: str
 ) -> DataFrame:
     df_columns = set(x_df.columns)
@@ -113,9 +113,9 @@ def get_yell_raw_grouping_with_all_values_equal_df(
     if grouping_columns == []:
         return x_df
     with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql("yell_raw", conn, index=False)
+        x_df.to_sql("brick_raw", conn, index=False)
         query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table="yell_raw",
+            x_table="brick_raw",
             groupby_columns=grouping_columns,
             value_columns=value_columns,
         )

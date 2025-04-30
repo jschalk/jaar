@@ -54,13 +54,13 @@ def build_order_str() -> str:
     return "build_order"
 
 
-def yell_raw_str() -> str:
-    return "yell_raw"
+def brick_raw_str() -> str:
+    return "brick_raw"
 
 
-def yell_agg_str() -> str:
-    return "yell_agg"
+def brick_agg_str() -> str:
+    return "brick_agg"
 
 
-def yell_valid_str() -> str:
-    return "yell_valid"
+def brick_valid_str() -> str:
+    return "brick_valid"

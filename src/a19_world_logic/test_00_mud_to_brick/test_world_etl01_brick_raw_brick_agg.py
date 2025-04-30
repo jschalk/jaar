@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic._utils.str_a17 import yell_agg_str, yell_raw_str
+from src.a17_idea_logic._utils.str_a17 import brick_agg_str, brick_raw_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
@@ -13,7 +13,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario0_GroupByWorks(
+def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_GroupByWorks(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -26,8 +26,8 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario0_GroupBy
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
-    yell_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -40,16 +40,16 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario0_GroupBy
     row2 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
-    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_yell_raw_db(db_conn)
+        fizz_world.mud_df_to_brick_raw_db(db_conn)
 
         # WHEN
-        fizz_world.yell_raw_db_to_yell_agg_df(db_conn, cursor)
+        fizz_world.brick_raw_db_to_brick_agg_df(db_conn, cursor)
 
     # THEN
-    gen_otx_df = pandas_read_excel(yell_file_path, sheet_name=yell_agg_str())
+    gen_otx_df = pandas_read_excel(brick_file_path, sheet_name=brick_agg_str())
     ex_otx_df = DataFrame([row1, row2], columns=idea_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
@@ -58,10 +58,10 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario0_GroupBy
     assert len(ex_otx_df) == len(gen_otx_df)
     assert len(gen_otx_df) == 2
     assert ex_otx_df.to_csv() == gen_otx_df.to_csv()
-    assert get_sheet_names(yell_file_path) == [yell_agg_str()]
+    assert get_sheet_names(brick_file_path) == [brick_agg_str()]
 
 
-def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
+def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario1_GroupByOnlyNonConflictingRecords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -75,7 +75,7 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario1_GroupBy
     hour7am = "7am"
     hour8am = "8am"
     ex_filename = "fizzbuzz.xlsx"
-    sound_file_path = create_path(fizz_world._sound_dir, ex_filename)
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     idea_columns = [
         face_name_str(),
         event_int_str(),
@@ -89,20 +89,20 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario1_GroupBy
     row3 = [sue_str, event3, accord23_str, minute_420, hour8am]
     row4 = [sue_str, event7, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
-    upsert_sheet(sound_file_path, "example1_br00003", df1)
+    upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.sound_df_to_yell_raw_db(db_conn)
-        br00003_agg_file_path = create_path(fizz_world._yell_dir, "br00003.xlsx")
-        assert sheet_exists(br00003_agg_file_path, yell_agg_str()) is False
+        fizz_world.mud_df_to_brick_raw_db(db_conn)
+        br00003_agg_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
+        assert sheet_exists(br00003_agg_file_path, brick_agg_str()) is False
 
         # WHEN
-        fizz_world.yell_raw_db_to_yell_agg_df(db_conn, cursor)
+        fizz_world.brick_raw_db_to_brick_agg_df(db_conn, cursor)
 
     # THEN
-    assert sheet_exists(br00003_agg_file_path, yell_agg_str())
+    assert sheet_exists(br00003_agg_file_path, brick_agg_str())
     gen_br00003_agg_df = pandas_read_excel(
-        br00003_agg_file_path, sheet_name=yell_agg_str()
+        br00003_agg_file_path, sheet_name=brick_agg_str()
     )
     ex_otx_df = DataFrame([row1, row4], columns=idea_columns)
     # print(f"{gen_otx_df.columns=}")
@@ -114,4 +114,4 @@ def test_WorldUnit_yell_raw_db_to_yell_agg_df_CreatesOtxSheets_Scenario1_GroupBy
     assert len(gen_br00003_agg_df) == len(ex_otx_df)
     assert len(gen_br00003_agg_df) == 2
     assert gen_br00003_agg_df.to_csv() == ex_otx_df.to_csv()
-    assert get_sheet_names(br00003_agg_file_path) == [yell_agg_str()]
+    assert get_sheet_names(br00003_agg_file_path) == [brick_agg_str()]

@@ -13,7 +13,7 @@ from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a17_idea_logic.idea_config import get_idea_format_filename
 from src.a17_idea_logic.idea import fisc_build_from_df
 from src.a17_idea_logic.idea_csv_tool import (
-    create_init_stance_idea_brick_csv_strs,
+    create_init_stance_idea_csv_strs,
     add_fiscunit_to_stance_csv_strs,
     add_fiscunits_to_stance_csv_strs,
     add_bud_to_br00020_csv,
@@ -61,14 +61,14 @@ from src.a17_idea_logic._utils.idea_df_examples import (
 from copy import deepcopy as copy_deepcopy
 
 
-def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
+def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     csv_delimiter = ","
 
     # WHEN
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
 
     # THEN
     expected_stance_csv_strs = {
@@ -118,30 +118,30 @@ def test_create_init_stance_idea_brick_csv_strs_ReturnsObj_Scenario0_EmptyFiscUn
     print(f"{expected_br00001_csv=}")
 
     face_event_str = "face_name,event_int,"
-    assert x_ideabricks.get("br00000") == f"{face_event_str}{expected_br00000_csv}"
-    assert x_ideabricks.get("br00001") == f"{face_event_str}{expected_br00001_csv}"
-    assert x_ideabricks.get("br00002") == f"{face_event_str}{expected_br00002_csv}"
-    assert x_ideabricks.get("br00003") == f"{face_event_str}{expected_br00003_csv}"
-    assert x_ideabricks.get("br00004") == f"{face_event_str}{expected_br00004_csv}"
-    assert x_ideabricks.get("br00005") == f"{face_event_str}{expected_br00005_csv}"
-    # assert x_ideabricks.get("br00006") == f"{face_event_str}{expected_br00006_csv}"
+    assert x_ideas.get("br00000") == f"{face_event_str}{expected_br00000_csv}"
+    assert x_ideas.get("br00001") == f"{face_event_str}{expected_br00001_csv}"
+    assert x_ideas.get("br00002") == f"{face_event_str}{expected_br00002_csv}"
+    assert x_ideas.get("br00003") == f"{face_event_str}{expected_br00003_csv}"
+    assert x_ideas.get("br00004") == f"{face_event_str}{expected_br00004_csv}"
+    assert x_ideas.get("br00005") == f"{face_event_str}{expected_br00005_csv}"
+    # assert x_ideas.get("br00006") == f"{face_event_str}{expected_br00006_csv}"
     print(f"{expected_br00020_csv=}")
-    print(x_ideabricks.get("br00020"))
-    assert x_ideabricks.get("br00020") == f"{face_event_str}{expected_br00020_csv}"
-    assert x_ideabricks.get("br00021") == f"{face_event_str}{expected_br00021_csv}"
-    assert x_ideabricks.get("br00022") == f"{face_event_str}{expected_br00022_csv}"
-    assert x_ideabricks.get("br00023") == f"{face_event_str}{expected_br00023_csv}"
-    assert x_ideabricks.get("br00024") == f"{face_event_str}{expected_br00024_csv}"
-    assert x_ideabricks.get("br00025") == f"{face_event_str}{expected_br00025_csv}"
-    assert x_ideabricks.get("br00026") == f"{face_event_str}{expected_br00026_csv}"
-    assert x_ideabricks.get("br00027") == f"{face_event_str}{expected_br00027_csv}"
-    assert x_ideabricks.get("br00028") == f"{face_event_str}{expected_br00028_csv}"
-    assert x_ideabricks.get("br00029") == f"{face_event_str}{expected_br00029_csv}"
-    assert x_ideabricks.get("br00042") == f"{face_event_str}{expected_br00042_csv}"
-    assert x_ideabricks.get("br00043") == f"{face_event_str}{expected_br00043_csv}"
-    assert x_ideabricks.get("br00044") == f"{face_event_str}{expected_br00044_csv}"
-    assert x_ideabricks.get("br00045") == f"{face_event_str}{expected_br00045_csv}"
-    assert len(x_ideabricks) == 20
+    print(x_ideas.get("br00020"))
+    assert x_ideas.get("br00020") == f"{face_event_str}{expected_br00020_csv}"
+    assert x_ideas.get("br00021") == f"{face_event_str}{expected_br00021_csv}"
+    assert x_ideas.get("br00022") == f"{face_event_str}{expected_br00022_csv}"
+    assert x_ideas.get("br00023") == f"{face_event_str}{expected_br00023_csv}"
+    assert x_ideas.get("br00024") == f"{face_event_str}{expected_br00024_csv}"
+    assert x_ideas.get("br00025") == f"{face_event_str}{expected_br00025_csv}"
+    assert x_ideas.get("br00026") == f"{face_event_str}{expected_br00026_csv}"
+    assert x_ideas.get("br00027") == f"{face_event_str}{expected_br00027_csv}"
+    assert x_ideas.get("br00028") == f"{face_event_str}{expected_br00028_csv}"
+    assert x_ideas.get("br00029") == f"{face_event_str}{expected_br00029_csv}"
+    assert x_ideas.get("br00042") == f"{face_event_str}{expected_br00042_csv}"
+    assert x_ideas.get("br00043") == f"{face_event_str}{expected_br00043_csv}"
+    assert x_ideas.get("br00044") == f"{face_event_str}{expected_br00044_csv}"
+    assert x_ideas.get("br00045") == f"{face_event_str}{expected_br00045_csv}"
+    assert len(x_ideas) == 20
 
 
 def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
@@ -173,7 +173,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
         x_fiscs_dir,
     )
     csv_delimiter = ","
-    x_csvs = create_init_stance_idea_brick_csv_strs()
+    x_csvs = create_init_stance_idea_csv_strs()
     br00_csv_header = x_csvs.get("br00000")
     br01_csv_header = x_csvs.get("br00001")
     br02_csv_header = x_csvs.get("br00002")
@@ -243,10 +243,10 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
         x_fiscs_dir,
     )
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
 
     # WHEN
-    add_fiscunits_to_stance_csv_strs(x_fiscunits, x_ideabricks, csv_delimiter)
+    add_fiscunits_to_stance_csv_strs(x_fiscunits, x_ideas, csv_delimiter)
 
     # THEN
     expected_br00000_csv = get_ordered_csv(get_ex2_br00000_df())
@@ -274,13 +274,13 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
     expected_br00004_csv = expected_br00004_csv.replace("jeffy45", ",,jeffy45")
     expected_br00005_csv = expected_br00005_csv.replace("jeffy45", ",,jeffy45")
 
-    assert len(x_ideabricks) == 20
-    generated_br00000_csv = x_ideabricks.get("br00000")
-    generated_br00001_csv = x_ideabricks.get("br00001")
-    generated_br00002_csv = x_ideabricks.get("br00002")
-    generated_br00003_csv = x_ideabricks.get("br00003")
-    generated_br00004_csv = x_ideabricks.get("br00004")
-    generated_br00005_csv = x_ideabricks.get("br00005")
+    assert len(x_ideas) == 20
+    generated_br00000_csv = x_ideas.get("br00000")
+    generated_br00001_csv = x_ideas.get("br00001")
+    generated_br00002_csv = x_ideas.get("br00002")
+    generated_br00003_csv = x_ideas.get("br00003")
+    generated_br00004_csv = x_ideas.get("br00004")
+    generated_br00005_csv = x_ideas.get("br00005")
     # print(f" {expected_br00000_csv=}")
     # print(f"{generated_br00000_csv=}")
     assert generated_br00000_csv == expected_br00000_csv
@@ -294,7 +294,7 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
 def test_add_bud_to_br00020_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "accord23"
@@ -304,7 +304,7 @@ def test_add_bud_to_br00020_csv_ReturnsObj():
     run_credit = 33
     run_debtit = 55
     bob_bud.get_acct(yao_str).add_membership(run_str, run_credit, run_debtit)
-    csv_header = x_ideabricks.get("br00020")
+    csv_header = x_ideas.get("br00020")
 
     # WHEN
     x_csv = add_bud_to_br00020_csv(csv_header, bob_bud, csv_delimiter)
@@ -322,7 +322,7 @@ def test_add_bud_to_br00020_csv_ReturnsObj():
 def test_add_bud_to_br00021_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     yao_credit = 33
@@ -330,7 +330,7 @@ def test_add_bud_to_br00021_csv_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     bob_bud.add_acctunit(yao_str, yao_credit, yao_debtit)
-    csv_header = x_ideabricks.get("br00021")
+    csv_header = x_ideas.get("br00021")
 
     # WHEN
     x_csv = add_bud_to_br00021_csv(csv_header, bob_bud, csv_delimiter)
@@ -343,7 +343,7 @@ def test_add_bud_to_br00021_csv_ReturnsObj():
 def test_add_bud_to_br00022_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -354,7 +354,7 @@ def test_add_bud_to_br00022_csv_ReturnsObj():
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
     bob_bud.add_item(casa_road)
     bob_bud.edit_item_attr(casa_road, awardlink=casa_awardlink)
-    csv_header = x_ideabricks.get("br00022")
+    csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
     # WHEN
@@ -369,7 +369,7 @@ def test_add_bud_to_br00022_csv_ReturnsObj():
 def test_add_bud_to_br00023_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -380,7 +380,7 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     bob_bud.add_item(casa_road)
     bob_bud.add_item(clean_road)
     bob_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh)
-    csv_header = x_ideabricks.get("br00023")
+    csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
     # WHEN
@@ -394,7 +394,7 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
 def test_add_bud_to_br00024_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -403,7 +403,7 @@ def test_add_bud_to_br00024_csv_ReturnsObj():
     casa_item = bob_bud.get_item_obj(casa_road)
     cleaners_str = "cleaners"
     casa_item.teamunit.set_teamlink(cleaners_str)
-    csv_header = x_ideabricks.get("br00024")
+    csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
     # WHEN
@@ -418,7 +418,7 @@ def test_add_bud_to_br00024_csv_ReturnsObj():
 def test_add_bud_to_br00025_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -427,7 +427,7 @@ def test_add_bud_to_br00025_csv_ReturnsObj():
     casa_item = bob_bud.get_item_obj(casa_road)
     cleaners_str = "cleaners"
     casa_item.healerlink.set_healer_name(cleaners_str)
-    csv_header = x_ideabricks.get("br00025")
+    csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
     # WHEN
@@ -442,7 +442,7 @@ def test_add_bud_to_br00025_csv_ReturnsObj():
 def test_add_bud_to_br00026_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -463,7 +463,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
         reason_premise_nigh=clean_premise_nigh,
         reason_premise_divisor=clean_premise_divisor,
     )
-    csv_header = x_ideabricks.get("br00026")
+    csv_header = x_ideas.get("br00026")
     print(f"{csv_header=}")
 
     # WHEN
@@ -478,7 +478,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
 def test_add_bud_to_br00027_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -491,7 +491,7 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
         reason_base=casa_road,
         reason_base_item_active_requisite=True,
     )
-    csv_header = x_ideabricks.get("br00027")
+    csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
 
     # WHEN
@@ -506,7 +506,7 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
 def test_add_bud_to_br00028_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -539,7 +539,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
         pledge=casa_pledge,
         problem_bool=casa_problem_bool,
     )
-    csv_header = x_ideabricks.get("br00028")
+    csv_header = x_ideas.get("br00028")
     print(f"{csv_header=}")
 
     # WHEN
@@ -560,7 +560,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
 def test_add_bud_to_br00029_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -572,7 +572,7 @@ def test_add_bud_to_br00029_csv_ReturnsObj():
     bob_bud.fund_coin = 12
     bob_bud.penny = 13
     bob_bud.respect_bit = 15
-    csv_header = x_ideabricks.get("br00029")
+    csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
 
     # WHEN
@@ -586,7 +586,7 @@ def test_add_bud_to_br00029_csv_ReturnsObj():
 def test_add_budunit_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "accord23"
@@ -603,38 +603,38 @@ def test_add_budunit_to_stance_csv_strs_ReturnsObj():
     bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
     bob_bud.add_fact(casa_road, clean_road)
 
-    br00020_header = x_ideabricks.get("br00020")
-    br00021_header = x_ideabricks.get("br00021")
-    br00022_header = x_ideabricks.get("br00022")
-    br00023_header = x_ideabricks.get("br00023")
-    br00024_header = x_ideabricks.get("br00024")
-    br00025_header = x_ideabricks.get("br00025")
-    br00026_header = x_ideabricks.get("br00026")
-    br00027_header = x_ideabricks.get("br00027")
-    br00028_header = x_ideabricks.get("br00028")
-    br00029_header = x_ideabricks.get("br00029")
+    br00020_header = x_ideas.get("br00020")
+    br00021_header = x_ideas.get("br00021")
+    br00022_header = x_ideas.get("br00022")
+    br00023_header = x_ideas.get("br00023")
+    br00024_header = x_ideas.get("br00024")
+    br00025_header = x_ideas.get("br00025")
+    br00026_header = x_ideas.get("br00026")
+    br00027_header = x_ideas.get("br00027")
+    br00028_header = x_ideas.get("br00028")
+    br00029_header = x_ideas.get("br00029")
 
     # WHEN
     bob_bud.settle_bud()
-    add_budunit_to_stance_csv_strs(bob_bud, x_ideabricks, csv_delimiter)
+    add_budunit_to_stance_csv_strs(bob_bud, x_ideas, csv_delimiter)
 
     # THEN
-    assert x_ideabricks.get("br00020") != br00020_header
-    assert x_ideabricks.get("br00021") != br00021_header
-    assert x_ideabricks.get("br00022") != br00022_header
-    assert x_ideabricks.get("br00023") != br00023_header
-    # assert x_ideabricks.get("br00024") != br00024_header
-    # assert x_ideabricks.get("br00025") != br00025_header
-    assert x_ideabricks.get("br00026") != br00026_header
-    assert x_ideabricks.get("br00027") != br00027_header
-    assert x_ideabricks.get("br00028") != br00028_header
-    assert x_ideabricks.get("br00029") != br00029_header
+    assert x_ideas.get("br00020") != br00020_header
+    assert x_ideas.get("br00021") != br00021_header
+    assert x_ideas.get("br00022") != br00022_header
+    assert x_ideas.get("br00023") != br00023_header
+    # assert x_ideas.get("br00024") != br00024_header
+    # assert x_ideas.get("br00025") != br00025_header
+    assert x_ideas.get("br00026") != br00026_header
+    assert x_ideas.get("br00027") != br00027_header
+    assert x_ideas.get("br00028") != br00028_header
+    assert x_ideas.get("br00029") != br00029_header
 
 
 def test_add_to_br00042_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
     bob_otx_bridge = ";"
@@ -646,7 +646,7 @@ def test_add_to_br00042_csv_ReturnsObj():
     run_otx = "run"
     run_inx = "cours"
     bob7_pidginunit.set_otx2inx("LabelUnit", run_otx, run_inx)
-    csv_header = x_ideabricks.get("br00042")
+    csv_header = x_ideas.get("br00042")
     print(f"{csv_header=}")
 
     # WHEN
@@ -660,7 +660,7 @@ def test_add_to_br00042_csv_ReturnsObj():
 def test_add_to_br00043_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
     bob_otx_bridge = ";"
@@ -672,7 +672,7 @@ def test_add_to_br00043_csv_ReturnsObj():
     yao_otx = "Yao"
     yao_inx = "YaoMing"
     bob7_pidginunit.set_otx2inx("NameUnit", yao_otx, yao_inx)
-    csv_header = x_ideabricks.get("br00043")
+    csv_header = x_ideas.get("br00043")
     print(f"{csv_header=}")
 
     # WHEN
@@ -686,7 +686,7 @@ def test_add_to_br00043_csv_ReturnsObj():
 def test_add_to_br00044_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
     bob_otx_bridge = ";"
@@ -698,7 +698,7 @@ def test_add_to_br00044_csv_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "prope"
     bob7_pidginunit.set_otx2inx("TagUnit", clean_otx, clean_inx)
-    csv_header = x_ideabricks.get("br00044")
+    csv_header = x_ideas.get("br00044")
     print(f"{csv_header=}")
 
     # WHEN
@@ -712,7 +712,7 @@ def test_add_to_br00044_csv_ReturnsObj():
 def test_add_to_br00045_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
     bob_otx_bridge = ";"
@@ -724,7 +724,7 @@ def test_add_to_br00045_csv_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "prope"
     bob7_pidginunit.set_otx2inx("RoadUnit", clean_otx, clean_inx)
-    csv_header = x_ideabricks.get("br00045")
+    csv_header = x_ideas.get("br00045")
     print(f"{csv_header=}")
 
     # WHEN
@@ -738,7 +738,7 @@ def test_add_to_br00045_csv_ReturnsObj():
 def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
     bob_otx_bridge = ";"
@@ -759,25 +759,25 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "prope"
     bob7_pidginunit.set_otx2inx("TagUnit", clean_otx, clean_inx)
-    br00042_header = x_ideabricks.get("br00042")
-    br00043_header = x_ideabricks.get("br00043")
-    br00044_header = x_ideabricks.get("br00044")
-    br00045_header = x_ideabricks.get("br00045")
+    br00042_header = x_ideas.get("br00042")
+    br00043_header = x_ideas.get("br00043")
+    br00044_header = x_ideas.get("br00044")
+    br00045_header = x_ideas.get("br00045")
 
     # WHEN
-    add_pidginunit_to_stance_csv_strs(bob7_pidginunit, x_ideabricks, csv_delimiter)
+    add_pidginunit_to_stance_csv_strs(bob7_pidginunit, x_ideas, csv_delimiter)
 
     # THEN
-    assert x_ideabricks.get("br00042") != br00042_header
-    assert x_ideabricks.get("br00043") != br00043_header
-    assert x_ideabricks.get("br00044") != br00044_header
-    assert x_ideabricks.get("br00045") != br00045_header
+    assert x_ideas.get("br00042") != br00042_header
+    assert x_ideas.get("br00043") != br00043_header
+    assert x_ideas.get("br00044") != br00044_header
+    assert x_ideas.get("br00045") != br00045_header
 
 
 def test_add_pack_to_br00020_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "accord23"
@@ -793,7 +793,7 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00020")
+    csv_header = x_ideas.get("br00020")
 
     # WHEN
     x_csv = add_pack_to_br00020_csv(csv_header, sue7_pack, csv_delimiter)
@@ -810,7 +810,7 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
 def test_add_pack_to_br00021_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     yao_credit = 33
@@ -824,7 +824,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00021")
+    csv_header = x_ideas.get("br00021")
 
     # WHEN
     x_csv = add_pack_to_br00021_csv(csv_header, sue7_pack, csv_delimiter)
@@ -839,7 +839,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
 def test_add_pack_to_br00022_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -856,7 +856,7 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00022")
+    csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
     # WHEN
@@ -870,7 +870,7 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
 def test_add_pack_to_br00023_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -887,7 +887,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00023")
+    csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
     # WHEN
@@ -904,7 +904,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
 def test_add_pack_to_br00024_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -919,7 +919,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00024")
+    csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
     # WHEN
@@ -938,7 +938,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
 def test_add_pack_to_br00025_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -953,7 +953,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00025")
+    csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
     # WHEN
@@ -969,7 +969,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
 def test_add_pack_to_br00026_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -996,7 +996,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00026")
+    csv_header = x_ideas.get("br00026")
     print(f"{csv_header=}")
 
     # WHEN
@@ -1010,7 +1010,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
 def test_add_pack_to_br00027_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -1029,7 +1029,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00027")
+    csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
 
     # WHEN
@@ -1043,7 +1043,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
 def test_add_pack_to_br00028_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -1082,7 +1082,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00028")
+    csv_header = x_ideas.get("br00028")
     print(f"{csv_header=}")
 
     # WHEN
@@ -1103,7 +1103,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
 def test_add_pack_to_br00029_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
@@ -1121,7 +1121,7 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
-    csv_header = x_ideabricks.get("br00029")
+    csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
 
     # WHEN
@@ -1135,7 +1135,7 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
 def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
-    x_ideabricks = create_init_stance_idea_brick_csv_strs()
+    x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "accord23"
@@ -1166,38 +1166,38 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
     sue7_pack.set_buddelta(bob_buddelta)
 
-    br00020_header = x_ideabricks.get("br00020")
-    br00021_header = x_ideabricks.get("br00021")
-    br00022_header = x_ideabricks.get("br00022")
-    br00023_header = x_ideabricks.get("br00023")
-    br00024_header = x_ideabricks.get("br00024")
-    br00025_header = x_ideabricks.get("br00025")
-    br00026_header = x_ideabricks.get("br00026")
-    br00027_header = x_ideabricks.get("br00027")
-    br00028_header = x_ideabricks.get("br00028")
-    br00029_header = x_ideabricks.get("br00029")
+    br00020_header = x_ideas.get("br00020")
+    br00021_header = x_ideas.get("br00021")
+    br00022_header = x_ideas.get("br00022")
+    br00023_header = x_ideas.get("br00023")
+    br00024_header = x_ideas.get("br00024")
+    br00025_header = x_ideas.get("br00025")
+    br00026_header = x_ideas.get("br00026")
+    br00027_header = x_ideas.get("br00027")
+    br00028_header = x_ideas.get("br00028")
+    br00029_header = x_ideas.get("br00029")
 
     # WHEN
-    add_packunit_to_stance_csv_strs(sue7_pack, x_ideabricks, csv_delimiter)
+    add_packunit_to_stance_csv_strs(sue7_pack, x_ideas, csv_delimiter)
 
     # THEN
-    assert x_ideabricks.get("br00020") != br00020_header
-    assert x_ideabricks.get("br00021") != br00021_header
-    assert x_ideabricks.get("br00022") != br00022_header
-    assert x_ideabricks.get("br00023") != br00023_header
-    # assert x_ideabricks.get("br00024") != br00024_header
-    # assert x_ideabricks.get("br00025") != br00025_header
-    assert x_ideabricks.get("br00026") != br00026_header
-    assert x_ideabricks.get("br00027") != br00027_header
-    assert x_ideabricks.get("br00028") != br00028_header
-    assert x_ideabricks.get("br00029") != br00029_header
+    assert x_ideas.get("br00020") != br00020_header
+    assert x_ideas.get("br00021") != br00021_header
+    assert x_ideas.get("br00022") != br00022_header
+    assert x_ideas.get("br00023") != br00023_header
+    # assert x_ideas.get("br00024") != br00024_header
+    # assert x_ideas.get("br00025") != br00025_header
+    assert x_ideas.get("br00026") != br00026_header
+    assert x_ideas.get("br00027") != br00027_header
+    assert x_ideas.get("br00028") != br00028_header
+    assert x_ideas.get("br00029") != br00029_header
 
 
-# TODO create function that saves excel file with all x_ideabricks
+# TODO create function that saves excel file with all x_ideas
 # def test_add_packunit_to_stance_csv_strs_ReturnsObj():
 #     # ESTABLISH
 #     csv_delimiter = ","
-#     x_ideabricks = create_init_stance_idea_brick_csv_strs()
+#     x_ideas = create_init_stance_idea_csv_strs()
 #     bob_str = "Bob"
 #     yao_str = "Yao"
 #     a23_str = "accord23"
@@ -1228,28 +1228,28 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
 #     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
 #     sue7_pack.set_buddelta(bob_buddelta)
 
-#     br00020_header = x_ideabricks.get("br00020")
-#     br00021_header = x_ideabricks.get("br00021")
-#     br00022_header = x_ideabricks.get("br00022")
-#     br00023_header = x_ideabricks.get("br00023")
-#     br00024_header = x_ideabricks.get("br00024")
-#     br00025_header = x_ideabricks.get("br00025")
-#     br00026_header = x_ideabricks.get("br00026")
-#     br00027_header = x_ideabricks.get("br00027")
-#     br00028_header = x_ideabricks.get("br00028")
-#     br00029_header = x_ideabricks.get("br00029")
-#     add_packunit_to_stance_csv_strs(sue7_pack, x_ideabricks, csv_delimiter)
+#     br00020_header = x_ideas.get("br00020")
+#     br00021_header = x_ideas.get("br00021")
+#     br00022_header = x_ideas.get("br00022")
+#     br00023_header = x_ideas.get("br00023")
+#     br00024_header = x_ideas.get("br00024")
+#     br00025_header = x_ideas.get("br00025")
+#     br00026_header = x_ideas.get("br00026")
+#     br00027_header = x_ideas.get("br00027")
+#     br00028_header = x_ideas.get("br00028")
+#     br00029_header = x_ideas.get("br00029")
+#     add_packunit_to_stance_csv_strs(sue7_pack, x_ideas, csv_delimiter)
 
 #     # WHEN
 #     assert 1 == 2
 
-#     # assert x_ideabricks.get("br00020") != br00020_header
-#     # assert x_ideabricks.get("br00021") != br00021_header
-#     # assert x_ideabricks.get("br00022") != br00022_header
-#     # assert x_ideabricks.get("br00023") != br00023_header
-#     # # assert x_ideabricks.get("br00024") != br00024_header
-#     # # assert x_ideabricks.get("br00025") != br00025_header
-#     # assert x_ideabricks.get("br00026") != br00026_header
-#     # assert x_ideabricks.get("br00027") != br00027_header
-#     # assert x_ideabricks.get("br00028") != br00028_header
-#     # assert x_ideabricks.get("br00029") != br00029_header
+#     # assert x_ideas.get("br00020") != br00020_header
+#     # assert x_ideas.get("br00021") != br00021_header
+#     # assert x_ideas.get("br00022") != br00022_header
+#     # assert x_ideas.get("br00023") != br00023_header
+#     # # assert x_ideas.get("br00024") != br00024_header
+#     # # assert x_ideas.get("br00025") != br00025_header
+#     # assert x_ideas.get("br00026") != br00026_header
+#     # assert x_ideas.get("br00027") != br00027_header
+#     # assert x_ideas.get("br00028") != br00028_header
+#     # assert x_ideas.get("br00029") != br00029_header

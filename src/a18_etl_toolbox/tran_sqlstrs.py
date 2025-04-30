@@ -7,14 +7,14 @@ from src.a17_idea_logic.idea_config import (
 from sqlite3 import Connection as sqlite3_Connection
 
 
-CREATE_PIDLAB_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDLAB_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDNAM_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDNAM_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDROA_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDROA_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDTAG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDTAG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDLABE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDLABE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (face_name TEXT, event_int INTEGER, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDNAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDNAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (face_name TEXT, event_int INTEGER, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDROAD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_name TEXT, event_int INTEGER, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDTAGG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDTAGG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 CREATE_FISCCASH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
 CREATE_FISCCASH_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
@@ -75,14 +75,14 @@ CREATE_BUDUNIT_DEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_del_raw (i
 
 def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "pidgin_label_raw": CREATE_PIDLAB_RAW_SQLSTR,
-        "pidgin_label_agg": CREATE_PIDLAB_AGG_SQLSTR,
-        "pidgin_name_raw": CREATE_PIDNAM_RAW_SQLSTR,
-        "pidgin_name_agg": CREATE_PIDNAM_AGG_SQLSTR,
-        "pidgin_road_raw": CREATE_PIDROA_RAW_SQLSTR,
-        "pidgin_road_agg": CREATE_PIDROA_AGG_SQLSTR,
-        "pidgin_tag_raw": CREATE_PIDTAG_RAW_SQLSTR,
-        "pidgin_tag_agg": CREATE_PIDTAG_AGG_SQLSTR,
+        "pidgin_label_raw": CREATE_PIDLABE_RAW_SQLSTR,
+        "pidgin_label_agg": CREATE_PIDLABE_AGG_SQLSTR,
+        "pidgin_name_raw": CREATE_PIDNAME_RAW_SQLSTR,
+        "pidgin_name_agg": CREATE_PIDNAME_AGG_SQLSTR,
+        "pidgin_road_raw": CREATE_PIDROAD_RAW_SQLSTR,
+        "pidgin_road_agg": CREATE_PIDROAD_AGG_SQLSTR,
+        "pidgin_tag_raw": CREATE_PIDTAGG_RAW_SQLSTR,
+        "pidgin_tag_agg": CREATE_PIDTAGG_AGG_SQLSTR,
     }
 
 
@@ -174,7 +174,7 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
 
 
-PIDLAB_INCONSISTENCY_SQLSTR = """SELECT otx_label
+PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
 FROM pidgin_label_raw
 GROUP BY otx_label
 HAVING MIN(inx_label) != MAX(inx_label)
@@ -182,7 +182,7 @@ HAVING MIN(inx_label) != MAX(inx_label)
     OR MIN(inx_bridge) != MAX(inx_bridge)
     OR MIN(unknown_word) != MAX(unknown_word)
 """
-PIDNAM_INCONSISTENCY_SQLSTR = """SELECT otx_name
+PIDNAME_INCONSISTENCY_SQLSTR = """SELECT otx_name
 FROM pidgin_name_raw
 GROUP BY otx_name
 HAVING MIN(inx_name) != MAX(inx_name)
@@ -190,7 +190,7 @@ HAVING MIN(inx_name) != MAX(inx_name)
     OR MIN(inx_bridge) != MAX(inx_bridge)
     OR MIN(unknown_word) != MAX(unknown_word)
 """
-PIDROA_INCONSISTENCY_SQLSTR = """SELECT otx_road
+PIDROAD_INCONSISTENCY_SQLSTR = """SELECT otx_road
 FROM pidgin_road_raw
 GROUP BY otx_road
 HAVING MIN(inx_road) != MAX(inx_road)
@@ -198,7 +198,7 @@ HAVING MIN(inx_road) != MAX(inx_road)
     OR MIN(inx_bridge) != MAX(inx_bridge)
     OR MIN(unknown_word) != MAX(unknown_word)
 """
-PIDTAG_INCONSISTENCY_SQLSTR = """SELECT otx_tag
+PIDTAGG_INCONSISTENCY_SQLSTR = """SELECT otx_tag
 FROM pidgin_tag_raw
 GROUP BY otx_tag
 HAVING MIN(inx_tag) != MAX(inx_tag)
@@ -330,10 +330,10 @@ HAVING MIN(credor_respect) != MAX(credor_respect)
 
 def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
     return {
-        "pidgin_label": PIDLAB_INCONSISTENCY_SQLSTR,
-        "pidgin_name": PIDNAM_INCONSISTENCY_SQLSTR,
-        "pidgin_road": PIDROA_INCONSISTENCY_SQLSTR,
-        "pidgin_tag": PIDTAG_INCONSISTENCY_SQLSTR,
+        "pidgin_label": PIDLABE_INCONSISTENCY_SQLSTR,
+        "pidgin_name": PIDNAME_INCONSISTENCY_SQLSTR,
+        "pidgin_road": PIDROAD_INCONSISTENCY_SQLSTR,
+        "pidgin_tag": PIDTAGG_INCONSISTENCY_SQLSTR,
     }
 
 
@@ -364,7 +364,7 @@ def get_bud_inconsistency_sqlstrs() -> dict[str, str]:
     }
 
 
-PIDLAB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+PIDLABE_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT otx_label
 FROM pidgin_label_raw
 GROUP BY otx_label
@@ -379,7 +379,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.otx_label = pidgin_label_raw.otx_label
 ;
 """
-PIDNAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+PIDNAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT otx_name
 FROM pidgin_name_raw
 GROUP BY otx_name
@@ -394,7 +394,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.otx_name = pidgin_name_raw.otx_name
 ;
 """
-PIDROA_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+PIDROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT otx_road
 FROM pidgin_road_raw
 GROUP BY otx_road
@@ -409,7 +409,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.otx_road = pidgin_road_raw.otx_road
 ;
 """
-PIDTAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+PIDTAGG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT otx_tag
 FROM pidgin_tag_raw
 GROUP BY otx_tag
@@ -794,10 +794,10 @@ GROUP BY face_name, event_int, fisc_tag, owner_name_ERASE
 
 def get_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     return {
-        "pidgin_label": PIDLAB_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_name": PIDNAM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_road": PIDROA_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_tag": PIDTAG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_label": PIDLABE_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_name": PIDNAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_road": PIDROAD_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_tag": PIDTAGG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
     }
 
 
@@ -828,28 +828,28 @@ def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     }
 
 
-PIDLAB_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_label_agg (otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
+PIDLABE_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_label_agg (otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
 SELECT otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM pidgin_label_raw
 WHERE error_message IS NULL
 GROUP BY otx_label
 ;
 """
-PIDNAM_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_name_agg (otx_name, inx_name, otx_bridge, inx_bridge, unknown_word)
+PIDNAME_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_name_agg (otx_name, inx_name, otx_bridge, inx_bridge, unknown_word)
 SELECT otx_name, MAX(inx_name), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM pidgin_name_raw
 WHERE error_message IS NULL
 GROUP BY otx_name
 ;
 """
-PIDROA_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_road_agg (otx_road, inx_road, otx_bridge, inx_bridge, unknown_word)
+PIDROAD_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_road_agg (otx_road, inx_road, otx_bridge, inx_bridge, unknown_word)
 SELECT otx_road, MAX(inx_road), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM pidgin_road_raw
 WHERE error_message IS NULL
 GROUP BY otx_road
 ;
 """
-PIDTAG_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_tag_agg (otx_tag, inx_tag, otx_bridge, inx_bridge, unknown_word)
+PIDTAGG_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_tag_agg (otx_tag, inx_tag, otx_bridge, inx_bridge, unknown_word)
 SELECT otx_tag, MAX(inx_tag), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM pidgin_tag_raw
 WHERE error_message IS NULL
@@ -981,10 +981,10 @@ GROUP BY face_name, event_int, fisc_tag, owner_name
 
 def get_pidgin_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
     return {
-        "pidgin_label": PIDLAB_AGG_INSERT_SQLSTR,
-        "pidgin_name": PIDNAM_AGG_INSERT_SQLSTR,
-        "pidgin_road": PIDROA_AGG_INSERT_SQLSTR,
-        "pidgin_tag": PIDTAG_AGG_INSERT_SQLSTR,
+        "pidgin_label": PIDLABE_AGG_INSERT_SQLSTR,
+        "pidgin_name": PIDNAME_AGG_INSERT_SQLSTR,
+        "pidgin_road": PIDROAD_AGG_INSERT_SQLSTR,
+        "pidgin_tag": PIDTAGG_AGG_INSERT_SQLSTR,
     }
 
 
