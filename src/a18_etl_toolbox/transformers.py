@@ -80,6 +80,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
     create_bud_prime_tables,
+    get_pidgin_update_inconsist_error_message_sqlstrs,
     get_fisc_update_inconsist_error_message_sqlstrs,
     get_fisc_insert_agg_from_raw_sqlstrs,
     get_bud_put_update_inconsist_error_message_sqlstrs,
@@ -407,8 +408,7 @@ def get_yell_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
     }
 
 
-def etl_yell_valid_db_to_pidgin_prime_raw_db(cursor: sqlite3_Cursor):
-    create_pidgin_prime_tables(cursor)
+def yell_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
     yell_valid_tables = get_yell_valid_tables(cursor)
     idea_dimen_ref = {
         pidgin_dimen: idea_numbers
@@ -850,7 +850,13 @@ def etl_inz_face_csv_files2idea_raw_tables(
                 insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_raw")
 
 
-def etl_idea_raw_to_fisc_tables(conn_or_cursor):
+def etl_idea_raw_to_pidgin_prime_tables(conn_or_cursor):
+    create_pidgin_prime_tables(conn_or_cursor)
+    yell_valid_tables_to_pidgin_prime_raw_tables(conn_or_cursor)
+    set_pidgin_raw_error_message(conn_or_cursor)
+
+
+def etl_idea_raw_to_fisc_prime_tables(conn_or_cursor):
     create_fisc_prime_tables(conn_or_cursor)
     idea_raw_tables2fisc_raw_tables(conn_or_cursor)
     set_fisc_raw_error_message(conn_or_cursor)
@@ -858,7 +864,7 @@ def etl_idea_raw_to_fisc_tables(conn_or_cursor):
     fisc_agg_tables2fisc_event_time_agg(conn_or_cursor)
 
 
-def etl_idea_raw_to_bud_tables(conn_or_cursor):
+def etl_idea_raw_to_bud_prime_tables(conn_or_cursor):
     create_bud_prime_tables(conn_or_cursor)
     idea_raw_tables2bud_raw_tables(conn_or_cursor)
     set_bud_raw_error_message(conn_or_cursor)
@@ -917,6 +923,13 @@ def idea_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
             #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
             #         )
             #         conn_or_cursor.execute(insert_sqlstr)
+
+
+def set_pidgin_raw_error_message(conn_or_cursor: sqlite3_Connection):
+    for (
+        set_error_sqlstr
+    ) in get_pidgin_update_inconsist_error_message_sqlstrs().values():
+        conn_or_cursor.execute(set_error_sqlstr)
 
 
 def set_fisc_raw_error_message(conn_or_cursor: sqlite3_Connection):

@@ -15,7 +15,7 @@ from src.a15_fisc_logic._utils.str_a15 import fiscunit_str
 from src.a17_idea_logic._utils.str_a17 import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
 from src.a18_etl_toolbox.transformers import (
-    etl_idea_raw_to_bud_tables,
+    etl_idea_raw_to_bud_prime_tables,
     etl_inz_face_csv_files2idea_raw_tables,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -33,7 +33,7 @@ def get_existing_bud_x_tables(cursor: sqlite3_Connection, ending: str) -> set:
     }
 
 
-def test_etl_idea_raw_to_bud_tables_CreatesBudRawTables(
+def test_etl_idea_raw_to_bud_prime_tables_CreatesBudRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -45,7 +45,7 @@ def test_etl_idea_raw_to_bud_tables_CreatesBudRawTables(
         assert len(get_existing_bud_x_tables(cursor, agg_str)) == 0
 
         # WHEN
-        etl_idea_raw_to_bud_tables(cursor)
+        etl_idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         assert len(get_existing_bud_x_tables(cursor, raw_srt)) != 0
@@ -60,7 +60,7 @@ def test_etl_idea_raw_to_bud_tables_CreatesBudRawTables(
         assert len(get_existing_bud_x_tables(cursor, agg_str)) == bud_count
 
 
-def test_etl_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
+def test_etl_idea_raw_to_bud_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -93,7 +93,7 @@ def test_etl_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         assert not db_table_exists(cursor, fiscunit_raw_tablename)
 
         # WHEN
-        etl_idea_raw_to_bud_tables(cursor)
+        etl_idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, budunit_raw_tablename)
@@ -156,7 +156,7 @@ def test_etl_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         assert budunit_db_rows == [expected_row1, expected_row2, expected_row3]
 
 
-def test_etl_idea_raw_to_bud_tables_Sets_error_message(env_dir_setup_cleanup):
+def test_etl_idea_raw_to_bud_prime_tables_Sets_error_message(env_dir_setup_cleanup):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
@@ -197,7 +197,7 @@ VALUES
         ]
 
         # WHEN
-        etl_idea_raw_to_bud_tables(cursor)
+        etl_idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)

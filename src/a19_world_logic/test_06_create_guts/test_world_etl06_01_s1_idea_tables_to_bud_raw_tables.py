@@ -29,7 +29,7 @@ def get_existing_bud_x_tables(cursor: sqlite3_Connection, ending: str) -> set:
     }
 
 
-def test_WorldUnit_idea_raw_to_bud_tables_CreatesBudRawTables(
+def test_WorldUnit_idea_raw_to_bud_prime_tables_CreatesBudRawTables(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
     # ESTABLISH
@@ -42,7 +42,7 @@ def test_WorldUnit_idea_raw_to_bud_tables_CreatesBudRawTables(
         assert len(get_existing_bud_x_tables(cursor, agg_str)) == 0
 
         # WHEN
-        fizz_world.idea_raw_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         assert len(get_existing_bud_x_tables(cursor, raw_str)) != 0
@@ -57,7 +57,7 @@ def test_WorldUnit_idea_raw_to_bud_tables_CreatesBudRawTables(
         assert len(get_existing_bud_x_tables(cursor, agg_str)) == bud_count
 
 
-def test_WorldUnit_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
+def test_WorldUnit_idea_raw_to_bud_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -87,7 +87,7 @@ def test_WorldUnit_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         assert not db_table_exists(cursor, budunit_raw_tablename)
 
         # WHEN
-        fizz_world.idea_raw_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, budunit_raw_tablename)
@@ -147,7 +147,9 @@ def test_WorldUnit_idea_raw_to_bud_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         assert budunit_db_rows == [expected_row1, expected_row2, expected_row3]
 
 
-def test_WorldUnit_idea_raw_to_bud_tables_Sets_error_message(env_dir_setup_cleanup):
+def test_WorldUnit_idea_raw_to_bud_prime_tables_Sets_error_message(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
@@ -189,7 +191,7 @@ VALUES
         ]
 
         # WHEN
-        fizz_world.idea_raw_to_bud_tables(cursor)
+        fizz_world.idea_raw_to_bud_prime_tables(cursor)
 
         # THEN
         cursor.execute(select_sqlstr)

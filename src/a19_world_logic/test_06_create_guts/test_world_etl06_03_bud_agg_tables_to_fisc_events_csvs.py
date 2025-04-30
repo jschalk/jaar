@@ -83,7 +83,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
         assert e7_put_csv == expected_e7_put_csv
 
 
-# def test_WorldUnit_idea_raw_to_bud_tables_PopulatesBudDelAggTables(
+# def test_WorldUnit_idea_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
 #     env_dir_setup_cleanup,
 # ):
 
@@ -119,7 +119,7 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 #         assert get_row_count(cursor, agg_tablename) == 0
 
 #         # WHEN
-#         fizz_world.idea_raw_to_bud_tables(cursor)
+#         fizz_world.idea_raw_to_bud_prime_tables(cursor)
 
 #         # THEN
 #         assert get_row_count(cursor, agg_tablename) == 2
