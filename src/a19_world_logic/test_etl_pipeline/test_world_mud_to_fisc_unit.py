@@ -145,7 +145,7 @@ def test_WorldUnit_mud_to_standings_Scenario1_CreatesFiles(env_dir_setup_cleanup
     assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
-def test_WorldUnit_mud_to_standings_Senario2_WhenNoFiscBricks_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_standings_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

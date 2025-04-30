@@ -64,7 +64,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     assert os_path_exists(fizz_stance0001_path)
 
 
-def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeBricksForOtherWorldUnit(
+def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

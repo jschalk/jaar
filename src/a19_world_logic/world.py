@@ -251,7 +251,7 @@ class WorldUnit:
             # collect excel file data into central location
             # grab all excel sheets that fit idea format
             self.mud_df_to_yell_raw_db(db_conn)
-            # per idea brick filter to only non-conflicting idea data
+            # per idea filter to only non-conflicting idea data
             self.yell_raw_db_to_yell_agg_df(db_conn, cursor)
 
             # identify all idea data that has conflicting face_name/event_int uniqueness
@@ -260,7 +260,7 @@ class WorldUnit:
             self._events = etl_yell_agg_events_db_to_event_dict(cursor)
 
             # build pidgins
-            # collect all pidgin data from all relevant valid idea bricks
+            # collect all pidgin data from all relevant valid ideas
             self.yell_agg_df_to_yell_pidgin_raw_df()  # self._events.keys()
             # per pidgin dimen filter to only non-conflicting pidgin data
             self.yell_pidgin_raw_df_to_pidgin_agg_df()

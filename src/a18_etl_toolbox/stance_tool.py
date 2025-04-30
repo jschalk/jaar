@@ -5,7 +5,7 @@ from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
 )
 from src.a17_idea_logic.idea_csv_tool import (
-    create_init_stance_idea_brick_csv_strs,
+    create_init_stance_idea_csv_strs,
     add_fiscunit_to_stance_csv_strs,
     add_budunit_to_stance_csv_strs,
     add_pidginunit_to_stance_csv_strs,
@@ -16,7 +16,7 @@ from os.path import exists as os_path_exists
 
 
 def collect_stance_csv_strs(fisc_mstr_dir: str) -> dict[str, str]:
-    x_csv_strs = create_init_stance_idea_brick_csv_strs()
+    x_csv_strs = create_init_stance_idea_csv_strs()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_tag in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_tag)
