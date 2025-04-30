@@ -630,25 +630,25 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         assert get_row_count(cursor, pidgin_raw_name_tablename) == 5
         assert get_row_count(cursor, pidgin_raw_tag_tablename) == 5
         assert get_row_count(cursor, pidgin_raw_road_tablename) == 7
-        pidlab_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
-        pidnam_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
-        pidtag_raw_cols = get_table_columns(cursor, pidgin_raw_tag_tablename)
-        pidroa_raw_cols = get_table_columns(cursor, pidgin_raw_road_tablename)
+        pidlabe_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
+        pidname_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
+        pidtagg_raw_cols = get_table_columns(cursor, pidgin_raw_tag_tablename)
+        pidroad_raw_cols = get_table_columns(cursor, pidgin_raw_road_tablename)
         lab_table = pidgin_raw_label_tablename
         nam_table = pidgin_raw_name_tablename
         tag_table = pidgin_raw_tag_tablename
         roa_table = pidgin_raw_road_tablename
-        select_pidlab = create_select_query(cursor, lab_table, pidlab_raw_cols)
-        select_pidnam = create_select_query(cursor, nam_table, pidnam_raw_cols)
-        select_pidtag = create_select_query(cursor, tag_table, pidtag_raw_cols)
-        select_pidroa = create_select_query(cursor, roa_table, pidroa_raw_cols)
-        cursor.execute(select_pidlab)
+        select_pidlabe = create_select_query(cursor, lab_table, pidlabe_raw_cols)
+        select_pidname = create_select_query(cursor, nam_table, pidname_raw_cols)
+        select_pidtagg = create_select_query(cursor, tag_table, pidtagg_raw_cols)
+        select_pidroad = create_select_query(cursor, roa_table, pidroad_raw_cols)
+        cursor.execute(select_pidlabe)
         lab_rows = cursor.fetchall()
-        cursor.execute(select_pidnam)
+        cursor.execute(select_pidname)
         nam_rows = cursor.fetchall()
-        cursor.execute(select_pidtag)
+        cursor.execute(select_pidtagg)
         tag_rows = cursor.fetchall()
-        cursor.execute(select_pidroa)
+        cursor.execute(select_pidroad)
         roa_rows = cursor.fetchall()
         assert len(lab_rows) == 5
         assert len(nam_rows) == 5
@@ -835,18 +835,18 @@ VALUES
 #         assert get_row_count(cursor, agg_nam_table) == 3
 #         assert get_row_count(cursor, agg_tag_table) == 2
 #         assert get_row_count(cursor, agg_roa_table) == 5
-#         pidlab_raw_cols = get_table_columns(cursor, agg_lab_table)
-#         pidnam_raw_cols = get_table_columns(cursor, agg_nam_table)
-#         pidtag_raw_cols = get_table_columns(cursor, agg_tag_table)
-#         pidroa_raw_cols = get_table_columns(cursor, agg_roa_table)
-#         select_pidlab = create_select_query(cursor, agg_lab_table, pidlab_raw_cols)
-#         select_pidnam = create_select_query(cursor, agg_nam_table, pidnam_raw_cols)
-#         select_pidtag = create_select_query(cursor, agg_tag_table, pidtag_raw_cols)
-#         select_pidroa = create_select_query(cursor, agg_roa_table, pidroa_raw_cols)
-#         pidgin_agg_lab_rows = cursor.execute(select_pidlab).fetchall()
-#         pidgin_agg_nam_rows = cursor.execute(select_pidnam).fetchall()
-#         pidgin_agg_tag_rows = cursor.execute(select_pidtag).fetchall()
-#         pidgin_agg_roa_rows = cursor.execute(select_pidroa).fetchall()
+#         pidlabe_raw_cols = get_table_columns(cursor, agg_lab_table)
+#         pidname_raw_cols = get_table_columns(cursor, agg_nam_table)
+#         pidtagg_raw_cols = get_table_columns(cursor, agg_tag_table)
+#         pidroad_raw_cols = get_table_columns(cursor, agg_roa_table)
+#         select_pidlabe = create_select_query(cursor, agg_lab_table, pidlabe_raw_cols)
+#         select_pidname = create_select_query(cursor, agg_nam_table, pidname_raw_cols)
+#         select_pidtagg = create_select_query(cursor, agg_tag_table, pidtagg_raw_cols)
+#         select_pidroad = create_select_query(cursor, agg_roa_table, pidroad_raw_cols)
+#         pidgin_agg_lab_rows = cursor.execute(select_pidlabe).fetchall()
+#         pidgin_agg_nam_rows = cursor.execute(select_pidname).fetchall()
+#         pidgin_agg_tag_rows = cursor.execute(select_pidtagg).fetchall()
+#         pidgin_agg_roa_rows = cursor.execute(select_pidroad).fetchall()
 #         assert len(pidgin_agg_lab_rows) == 5
 #         assert len(pidgin_agg_nam_rows) == 5
 #         assert len(pidgin_agg_tag_rows) == 5
