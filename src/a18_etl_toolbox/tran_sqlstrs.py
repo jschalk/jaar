@@ -16,20 +16,20 @@ CREATE_PIDROAD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_agg (face_
 CREATE_PIDTAGG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDTAGG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (face_name TEXT, event_int INTEGER, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
-CREATE_FISCCASH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISCCASH_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCDEAL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISCDEAL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISCHOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
-CREATE_FISCHOUR_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
-CREATE_FISCMONT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
-CREATE_FISCMONT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
-CREATE_FISCWEEK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
-CREATE_FISCWEEK_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
-CREATE_FISCOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_tag TEXT, offi_time INTEGER)"""
-CREATE_FISCOFFI_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISCUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISCUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISCASH_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISCASH_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISDEAL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISDEAL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISHOUR_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISHOUR_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISMONT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISMONT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISWEEK_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISWEEK_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISOFFI_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_agg (fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISOFFI_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISUNIT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISUNIT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 
 CREATE_BUDMEMB_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_agg (face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"""
 CREATE_BUDMEMB_PUT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_put_raw (idea_number TEXT, face_name TEXT, event_int INTEGER, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"""
@@ -88,20 +88,20 @@ def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
 
 def get_fisc_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "fisc_cashbook_agg": CREATE_FISCCASH_AGG_SQLSTR,
-        "fisc_cashbook_raw": CREATE_FISCCASH_RAW_SQLSTR,
-        "fisc_dealunit_agg": CREATE_FISCDEAL_AGG_SQLSTR,
-        "fisc_dealunit_raw": CREATE_FISCDEAL_RAW_SQLSTR,
-        "fisc_timeline_hour_agg": CREATE_FISCHOUR_AGG_SQLSTR,
-        "fisc_timeline_hour_raw": CREATE_FISCHOUR_RAW_SQLSTR,
-        "fisc_timeline_month_agg": CREATE_FISCMONT_AGG_SQLSTR,
-        "fisc_timeline_month_raw": CREATE_FISCMONT_RAW_SQLSTR,
-        "fisc_timeline_weekday_agg": CREATE_FISCWEEK_AGG_SQLSTR,
-        "fisc_timeline_weekday_raw": CREATE_FISCWEEK_RAW_SQLSTR,
-        "fisc_timeoffi_agg": CREATE_FISCOFFI_AGG_SQLSTR,
-        "fisc_timeoffi_raw": CREATE_FISCOFFI_RAW_SQLSTR,
-        "fiscunit_agg": CREATE_FISCUNIT_AGG_SQLSTR,
-        "fiscunit_raw": CREATE_FISCUNIT_RAW_SQLSTR,
+        "fisc_cashbook_agg": CREATE_FISCASH_AGG_SQLSTR,
+        "fisc_cashbook_raw": CREATE_FISCASH_RAW_SQLSTR,
+        "fisc_dealunit_agg": CREATE_FISDEAL_AGG_SQLSTR,
+        "fisc_dealunit_raw": CREATE_FISDEAL_RAW_SQLSTR,
+        "fisc_timeline_hour_agg": CREATE_FISHOUR_AGG_SQLSTR,
+        "fisc_timeline_hour_raw": CREATE_FISHOUR_RAW_SQLSTR,
+        "fisc_timeline_month_agg": CREATE_FISMONT_AGG_SQLSTR,
+        "fisc_timeline_month_raw": CREATE_FISMONT_RAW_SQLSTR,
+        "fisc_timeline_weekday_agg": CREATE_FISWEEK_AGG_SQLSTR,
+        "fisc_timeline_weekday_raw": CREATE_FISWEEK_RAW_SQLSTR,
+        "fisc_timeoffi_agg": CREATE_FISOFFI_AGG_SQLSTR,
+        "fisc_timeoffi_raw": CREATE_FISOFFI_RAW_SQLSTR,
+        "fiscunit_agg": CREATE_FISUNIT_AGG_SQLSTR,
+        "fiscunit_raw": CREATE_FISUNIT_RAW_SQLSTR,
     }
 
 
@@ -207,38 +207,38 @@ HAVING MIN(inx_tag) != MAX(inx_tag)
     OR MIN(unknown_word) != MAX(unknown_word)
 """
 
-FISCCASH_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, acct_name, tran_time
+FISCASH_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, acct_name, tran_time
 FROM fisc_cashbook_raw
 GROUP BY fisc_tag, owner_name, acct_name, tran_time
 HAVING MIN(amount) != MAX(amount)
 """
-FISCDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, deal_time
+FISDEAL_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, owner_name, deal_time
 FROM fisc_dealunit_raw
 GROUP BY fisc_tag, owner_name, deal_time
 HAVING MIN(quota) != MAX(quota)
     OR MIN(celldepth) != MAX(celldepth)
 """
-FISCHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_minute
+FISHOUR_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_minute
 FROM fisc_timeline_hour_raw
 GROUP BY fisc_tag, cumlative_minute
 HAVING MIN(hour_tag) != MAX(hour_tag)
 """
-FISCMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_day
+FISMONT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, cumlative_day
 FROM fisc_timeline_month_raw
 GROUP BY fisc_tag, cumlative_day
 HAVING MIN(month_tag) != MAX(month_tag)
 """
-FISCWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, weekday_order
+FISWEEK_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, weekday_order
 FROM fisc_timeline_weekday_raw
 GROUP BY fisc_tag, weekday_order
 HAVING MIN(weekday_tag) != MAX(weekday_tag)
 """
-FISCOFFI_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, offi_time
+FISOFFI_INCONSISTENCY_SQLSTR = """SELECT fisc_tag, offi_time
 FROM fisc_timeoffi_raw
 GROUP BY fisc_tag, offi_time
 HAVING 1=2
 """
-FISCUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag
+FISUNIT_INCONSISTENCY_SQLSTR = """SELECT fisc_tag
 FROM fiscunit_raw
 GROUP BY fisc_tag
 HAVING MIN(timeline_tag) != MAX(timeline_tag)
@@ -339,13 +339,13 @@ def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
 
 def get_fisc_inconsistency_sqlstrs() -> dict[str, str]:
     return {
-        "fiscunit": FISCUNIT_INCONSISTENCY_SQLSTR,
-        "fisc_dealunit": FISCDEAL_INCONSISTENCY_SQLSTR,
-        "fisc_cashbook": FISCCASH_INCONSISTENCY_SQLSTR,
-        "fisc_timeline_hour": FISCHOUR_INCONSISTENCY_SQLSTR,
-        "fisc_timeline_month": FISCMONT_INCONSISTENCY_SQLSTR,
-        "fisc_timeline_weekday": FISCWEEK_INCONSISTENCY_SQLSTR,
-        "fisc_timeoffi": FISCOFFI_INCONSISTENCY_SQLSTR,
+        "fiscunit": FISUNIT_INCONSISTENCY_SQLSTR,
+        "fisc_dealunit": FISDEAL_INCONSISTENCY_SQLSTR,
+        "fisc_cashbook": FISCASH_INCONSISTENCY_SQLSTR,
+        "fisc_timeline_hour": FISHOUR_INCONSISTENCY_SQLSTR,
+        "fisc_timeline_month": FISMONT_INCONSISTENCY_SQLSTR,
+        "fisc_timeline_weekday": FISWEEK_INCONSISTENCY_SQLSTR,
+        "fisc_timeoffi": FISOFFI_INCONSISTENCY_SQLSTR,
     }
 
 
@@ -425,7 +425,7 @@ WHERE inconsistency_rows.otx_tag = pidgin_tag_raw.otx_tag
 ;
 """
 
-FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag, owner_name, acct_name, tran_time
 FROM fisc_cashbook_raw
 GROUP BY fisc_tag, owner_name, acct_name, tran_time
@@ -440,7 +440,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_cashbook_raw.fisc_tag
     AND inconsistency_rows.tran_time = fisc_cashbook_raw.tran_time
 ;
 """
-FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag, owner_name, deal_time
 FROM fisc_dealunit_raw
 GROUP BY fisc_tag, owner_name, deal_time
@@ -455,7 +455,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_dealunit_raw.fisc_tag
     AND inconsistency_rows.deal_time = fisc_dealunit_raw.deal_time
 ;
 """
-FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag, cumlative_minute
 FROM fisc_timeline_hour_raw
 GROUP BY fisc_tag, cumlative_minute
@@ -468,7 +468,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_raw.fisc_tag
     AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_raw.cumlative_minute
 ;
 """
-FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag, cumlative_day
 FROM fisc_timeline_month_raw
 GROUP BY fisc_tag, cumlative_day
@@ -481,7 +481,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_timeline_month_raw.fisc_tag
     AND inconsistency_rows.cumlative_day = fisc_timeline_month_raw.cumlative_day
 ;
 """
-FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag, weekday_order
 FROM fisc_timeline_weekday_raw
 GROUP BY fisc_tag, weekday_order
@@ -494,7 +494,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_timeline_weekday_raw.fisc_tag
     AND inconsistency_rows.weekday_order = fisc_timeline_weekday_raw.weekday_order
 ;
 """
-FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag, offi_time
 FROM fisc_timeoffi_raw
 GROUP BY fisc_tag, offi_time
@@ -507,7 +507,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_timeoffi_raw.fisc_tag
     AND inconsistency_rows.offi_time = fisc_timeoffi_raw.offi_time
 ;
 """
-FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+FISUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT fisc_tag
 FROM fiscunit_raw
 GROUP BY fisc_tag
@@ -803,13 +803,13 @@ def get_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
 
 def get_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     return {
-        "fiscunit": FISCUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_dealunit": FISCDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_cashbook": FISCCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeline_hour": FISCHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeline_month": FISCMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeline_weekday": FISCWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "fisc_timeoffi": FISCOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fiscunit": FISUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_dealunit": FISDEAL_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_cashbook": FISCASH_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeline_hour": FISHOUR_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeline_month": FISMONT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeline_weekday": FISWEEK_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "fisc_timeoffi": FISOFFI_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
     }
 
 
@@ -857,49 +857,49 @@ GROUP BY otx_tag
 ;
 """
 
-FISCCASH_AGG_INSERT_SQLSTR = """INSERT INTO fisc_cashbook_agg (fisc_tag, owner_name, acct_name, tran_time, amount)
+FISCASH_AGG_INSERT_SQLSTR = """INSERT INTO fisc_cashbook_agg (fisc_tag, owner_name, acct_name, tran_time, amount)
 SELECT fisc_tag, owner_name, acct_name, tran_time, MAX(amount)
 FROM fisc_cashbook_raw
 WHERE error_message IS NULL
 GROUP BY fisc_tag, owner_name, acct_name, tran_time
 ;
 """
-FISCDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_tag, owner_name, deal_time, quota, celldepth)
+FISDEAL_AGG_INSERT_SQLSTR = """INSERT INTO fisc_dealunit_agg (fisc_tag, owner_name, deal_time, quota, celldepth)
 SELECT fisc_tag, owner_name, deal_time, MAX(quota), MAX(celldepth)
 FROM fisc_dealunit_raw
 WHERE error_message IS NULL
 GROUP BY fisc_tag, owner_name, deal_time
 ;
 """
-FISCHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_tag, cumlative_minute, hour_tag)
+FISHOUR_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_hour_agg (fisc_tag, cumlative_minute, hour_tag)
 SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
 FROM fisc_timeline_hour_raw
 WHERE error_message IS NULL
 GROUP BY fisc_tag, cumlative_minute
 ;
 """
-FISCMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_tag, cumlative_day, month_tag)
+FISMONT_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_month_agg (fisc_tag, cumlative_day, month_tag)
 SELECT fisc_tag, cumlative_day, MAX(month_tag)
 FROM fisc_timeline_month_raw
 WHERE error_message IS NULL
 GROUP BY fisc_tag, cumlative_day
 ;
 """
-FISCWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_tag, weekday_order, weekday_tag)
+FISWEEK_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeline_weekday_agg (fisc_tag, weekday_order, weekday_tag)
 SELECT fisc_tag, weekday_order, MAX(weekday_tag)
 FROM fisc_timeline_weekday_raw
 WHERE error_message IS NULL
 GROUP BY fisc_tag, weekday_order
 ;
 """
-FISCOFFI_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeoffi_agg (fisc_tag, offi_time)
+FISOFFI_AGG_INSERT_SQLSTR = """INSERT INTO fisc_timeoffi_agg (fisc_tag, offi_time)
 SELECT fisc_tag, offi_time
 FROM fisc_timeoffi_raw
 WHERE error_message IS NULL
 GROUP BY fisc_tag, offi_time
 ;
 """
-FISCUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
+FISUNIT_AGG_INSERT_SQLSTR = """INSERT INTO fiscunit_agg (fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
 SELECT fisc_tag, MAX(timeline_tag), MAX(c400_number), MAX(yr1_jan1_offset), MAX(monthday_distortion), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
 FROM fiscunit_raw
 WHERE error_message IS NULL
@@ -990,13 +990,13 @@ def get_pidgin_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
 
 def get_fisc_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
     return {
-        "fisc_cashbook": FISCCASH_AGG_INSERT_SQLSTR,
-        "fisc_dealunit": FISCDEAL_AGG_INSERT_SQLSTR,
-        "fisc_timeline_hour": FISCHOUR_AGG_INSERT_SQLSTR,
-        "fisc_timeline_month": FISCMONT_AGG_INSERT_SQLSTR,
-        "fisc_timeline_weekday": FISCWEEK_AGG_INSERT_SQLSTR,
-        "fisc_timeoffi": FISCOFFI_AGG_INSERT_SQLSTR,
-        "fiscunit": FISCUNIT_AGG_INSERT_SQLSTR,
+        "fisc_cashbook": FISCASH_AGG_INSERT_SQLSTR,
+        "fisc_dealunit": FISDEAL_AGG_INSERT_SQLSTR,
+        "fisc_timeline_hour": FISHOUR_AGG_INSERT_SQLSTR,
+        "fisc_timeline_month": FISMONT_AGG_INSERT_SQLSTR,
+        "fisc_timeline_weekday": FISWEEK_AGG_INSERT_SQLSTR,
+        "fisc_timeoffi": FISOFFI_AGG_INSERT_SQLSTR,
+        "fiscunit": FISUNIT_AGG_INSERT_SQLSTR,
     }
 
 
@@ -1159,24 +1159,24 @@ ORDER BY fisc_tag, owner_name, event_int, deal_time
 """
 
 
-FISCCASH_FU1_SELECT_SQLSTR = "SELECT fisc_tag, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_tag = "
-FISCDEAL_FU1_SELECT_SQLSTR = "SELECT fisc_tag, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_tag = "
-FISCHOUR_FU1_SELECT_SQLSTR = "SELECT fisc_tag, cumlative_minute, hour_tag FROM fisc_timeline_hour_agg WHERE fisc_tag = "
-FISCMONT_FU1_SELECT_SQLSTR = "SELECT fisc_tag, cumlative_day, month_tag FROM fisc_timeline_month_agg WHERE fisc_tag = "
-FISCWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_tag, weekday_order, weekday_tag FROM fisc_timeline_weekday_agg WHERE fisc_tag = "
-FISCOFFI_FU1_SELECT_SQLSTR = (
+FISCASH_FU1_SELECT_SQLSTR = "SELECT fisc_tag, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_tag = "
+FISDEAL_FU1_SELECT_SQLSTR = "SELECT fisc_tag, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_tag = "
+FISHOUR_FU1_SELECT_SQLSTR = "SELECT fisc_tag, cumlative_minute, hour_tag FROM fisc_timeline_hour_agg WHERE fisc_tag = "
+FISMONT_FU1_SELECT_SQLSTR = "SELECT fisc_tag, cumlative_day, month_tag FROM fisc_timeline_month_agg WHERE fisc_tag = "
+FISWEEK_FU1_SELECT_SQLSTR = "SELECT fisc_tag, weekday_order, weekday_tag FROM fisc_timeline_weekday_agg WHERE fisc_tag = "
+FISOFFI_FU1_SELECT_SQLSTR = (
     "SELECT fisc_tag, offi_time FROM fisc_timeoffi_agg WHERE fisc_tag = "
 )
-FISCUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_agg WHERE fisc_tag = "
+FISUNIT_FU1_SELECT_SQLSTR = "SELECT fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_agg WHERE fisc_tag = "
 
 
 def get_fisc_fu1_select_sqlstrs(fisc_tag: str) -> dict[str, str]:
     return {
-        "fiscunit": f"{FISCUNIT_FU1_SELECT_SQLSTR}'{fisc_tag}'",
-        "fisc_dealunit": f"{FISCDEAL_FU1_SELECT_SQLSTR}'{fisc_tag}'",
-        "fisc_cashbook": f"{FISCCASH_FU1_SELECT_SQLSTR}'{fisc_tag}'",
-        "fisc_timeline_hour": f"{FISCHOUR_FU1_SELECT_SQLSTR}'{fisc_tag}'",
-        "fisc_timeline_month": f"{FISCMONT_FU1_SELECT_SQLSTR}'{fisc_tag}'",
-        "fisc_timeline_weekday": f"{FISCWEEK_FU1_SELECT_SQLSTR}'{fisc_tag}'",
-        "fisc_timeoffi": f"{FISCOFFI_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fiscunit": f"{FISUNIT_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_dealunit": f"{FISDEAL_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_cashbook": f"{FISCASH_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeline_hour": f"{FISHOUR_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeline_month": f"{FISMONT_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeline_weekday": f"{FISWEEK_FU1_SELECT_SQLSTR}'{fisc_tag}'",
+        "fisc_timeoffi": f"{FISOFFI_FU1_SELECT_SQLSTR}'{fisc_tag}'",
     }

@@ -83,7 +83,7 @@ VALUES
         assert fiscunit_agg_rows == [expected_row0, expected_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fisunit_WithNo_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -159,7 +159,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fisunit_With_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -222,7 +222,7 @@ VALUES
         assert rows == [expected_agg_row0]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fishour_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -270,7 +270,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fismont_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -317,7 +317,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fisweek_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -364,7 +364,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fisdeal_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -415,7 +415,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fiscash_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3

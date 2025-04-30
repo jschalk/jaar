@@ -935,7 +935,7 @@ def test_GlobalVariablesForFisc_inconsistency_queryReturns_sqlstrs():
             print(f"{x_dimen} checked...")
 
 
-def test_set_fisc_raw_error_message_Scenario0_fiscunit_WithNo_error_message(
+def test_set_fisc_raw_error_message_Scenario0_fisunit_WithNo_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -988,7 +988,7 @@ VALUES
         assert rows == [(event3, None), (event7, None)]
 
 
-def test_set_fisc_raw_error_message_Scenario1_fiscunit_Some_error_message(
+def test_set_fisc_raw_error_message_Scenario1_fisunit_Some_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -1053,7 +1053,7 @@ VALUES
         ]
 
 
-def test_set_fisc_raw_error_message_Scenario2_fischour_Some_error_message(
+def test_set_fisc_raw_error_message_Scenario2_fishour_Some_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -1110,7 +1110,7 @@ VALUES
         ]
 
 
-def test_set_fisc_raw_error_message_Scenario3_fischour_Some_error_message(
+def test_set_fisc_raw_error_message_Scenario3_fishour_Some_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -1167,7 +1167,7 @@ VALUES
         ]
 
 
-def test_set_fisc_raw_error_message_Scenario4_fiscweek_Some_error_message(
+def test_set_fisc_raw_error_message_Scenario4_fisweek_Some_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -1230,7 +1230,7 @@ VALUES
         ]
 
 
-def test_set_fisc_raw_error_message_Scenario5_fiscdeal_Some_error_message(
+def test_set_fisc_raw_error_message_Scenario5_fisdeal_Some_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -1298,7 +1298,7 @@ VALUES
         ]
 
 
-def test_set_fisc_raw_error_message_Scenario6_fisccash_Some_error_message(
+def test_set_fisc_raw_error_message_Scenario6_fiscash_Some_error_message(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

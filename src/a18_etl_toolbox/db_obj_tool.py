@@ -44,47 +44,47 @@ def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_tag: FiscTag) -> dict:
         fisc_dict["bridge"] = bridge
 
     cursor.execute(fu1_sqlstrs.get("fisc_cashbook"))
-    _set_fisc_dict_fisccash(cursor, fisc_dict, fisc_tag)
+    _set_fisc_dict_fiscash(cursor, fisc_dict, fisc_tag)
 
     cursor.execute(fu1_sqlstrs.get("fisc_dealunit"))
-    _set_fisc_dict_fiscdeal(cursor, fisc_dict)
+    _set_fisc_dict_fisdeal(cursor, fisc_dict)
 
     cursor.execute(fu1_sqlstrs.get("fisc_timeline_hour"))
-    _set_fisc_dict_fischour(cursor, fisc_dict)
+    _set_fisc_dict_fishour(cursor, fisc_dict)
 
     cursor.execute(fu1_sqlstrs.get("fisc_timeline_month"))
-    _set_fisc_dict_fiscmont(cursor, fisc_dict)
+    _set_fisc_dict_fismont(cursor, fisc_dict)
 
     cursor.execute(fu1_sqlstrs.get("fisc_timeline_weekday"))
-    _set_fisc_dict_fiscweek(cursor, fisc_dict)
+    _set_fisc_dict_fisweek(cursor, fisc_dict)
 
     cursor.execute(fu1_sqlstrs.get("fisc_timeoffi"))
     _set_fisc_dict_timeoffi(cursor, fisc_dict)
     return fisc_dict
 
 
-def _set_fisc_dict_fisccash(cursor: sqlite3_Cursor, fisc_dict: dict, x_fisc_tag: str):
+def _set_fisc_dict_fiscash(cursor: sqlite3_Cursor, fisc_dict: dict, x_fisc_tag: str):
     tranunits_dict = {}
-    for fisccash_row in cursor.fetchall():
-        row_fisc_tag = fisccash_row[0]
-        row_owner_name = fisccash_row[1]
-        row_acct_name = fisccash_row[2]
-        row_tran_time = fisccash_row[3]
-        row_amount = fisccash_row[4]
+    for fiscash_row in cursor.fetchall():
+        row_fisc_tag = fiscash_row[0]
+        row_owner_name = fiscash_row[1]
+        row_acct_name = fiscash_row[2]
+        row_tran_time = fiscash_row[3]
+        row_amount = fiscash_row[4]
         keylist = [row_owner_name, row_acct_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
     cashbook_dict = {"fisc_tag": x_fisc_tag, "tranunits": tranunits_dict}
     fisc_dict["cashbook"] = cashbook_dict
 
 
-def _set_fisc_dict_fiscdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
+def _set_fisc_dict_fisdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
     brokerunits_dict = {}
-    for fisccash_row in cursor.fetchall():
-        row_fisc_tag = fisccash_row[0]
-        row_owner_name = fisccash_row[1]
-        row_deal_time = fisccash_row[2]
-        row_quota = fisccash_row[3]
-        row_celldepth = fisccash_row[4]
+    for fiscash_row in cursor.fetchall():
+        row_fisc_tag = fiscash_row[0]
+        row_owner_name = fiscash_row[1]
+        row_deal_time = fiscash_row[2]
+        row_quota = fiscash_row[3]
+        row_celldepth = fiscash_row[4]
         owner_keylist = [row_owner_name, "owner_name"]
         set_in_nested_dict(brokerunits_dict, owner_keylist, row_owner_name)
         keylist = [row_owner_name, "deals", row_deal_time]
@@ -97,34 +97,34 @@ def _set_fisc_dict_fiscdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
     fisc_dict["brokerunits"] = brokerunits_dict
 
 
-def _set_fisc_dict_fischour(cursor: sqlite3_Cursor, fisc_dict: dict):
+def _set_fisc_dict_fishour(cursor: sqlite3_Cursor, fisc_dict: dict):
     hours_config_list = []
-    for fisccash_row in cursor.fetchall():
-        row_fisc_tag = fisccash_row[0]
-        row_cumlative_minute = fisccash_row[1]
-        row_hour_tag = fisccash_row[2]
+    for fiscash_row in cursor.fetchall():
+        row_fisc_tag = fiscash_row[0]
+        row_cumlative_minute = fiscash_row[1]
+        row_hour_tag = fiscash_row[2]
         hours_config_list.append([row_hour_tag, row_cumlative_minute])
     if hours_config_list:
         fisc_dict["timeline"]["hours_config"] = hours_config_list
 
 
-def _set_fisc_dict_fiscmont(cursor: sqlite3_Cursor, fisc_dict: dict):
+def _set_fisc_dict_fismont(cursor: sqlite3_Cursor, fisc_dict: dict):
     months_config_list = []
-    for fisccash_row in cursor.fetchall():
-        row_fisc_tag = fisccash_row[0]
-        row_cumlative_day = fisccash_row[1]
-        row_month_tag = fisccash_row[2]
+    for fiscash_row in cursor.fetchall():
+        row_fisc_tag = fiscash_row[0]
+        row_cumlative_day = fiscash_row[1]
+        row_month_tag = fiscash_row[2]
         months_config_list.append([row_month_tag, row_cumlative_day])
     if months_config_list:
         fisc_dict["timeline"]["months_config"] = months_config_list
 
 
-def _set_fisc_dict_fiscweek(cursor: sqlite3_Cursor, fisc_dict: dict):
+def _set_fisc_dict_fisweek(cursor: sqlite3_Cursor, fisc_dict: dict):
     weekday_dict = {}
-    for fisccash_row in cursor.fetchall():
-        row_fisc_tag = fisccash_row[0]
-        row_weekday_order = fisccash_row[1]
-        row_weekday_tag = fisccash_row[2]
+    for fiscash_row in cursor.fetchall():
+        row_fisc_tag = fiscash_row[0]
+        row_weekday_order = fiscash_row[1]
+        row_weekday_tag = fiscash_row[2]
         weekday_dict[row_weekday_order] = row_weekday_tag
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
     if weekday_dict:
@@ -133,8 +133,8 @@ def _set_fisc_dict_fiscweek(cursor: sqlite3_Cursor, fisc_dict: dict):
 
 def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
     offi_times_set = set()
-    for fisccash_row in cursor.fetchall():
-        row_fisc_tag = fisccash_row[0]
-        row_offi_time = fisccash_row[1]
+    for fiscash_row in cursor.fetchall():
+        row_fisc_tag = fiscash_row[0]
+        row_offi_time = fiscash_row[1]
         offi_times_set.add(row_offi_time)
     fisc_dict["offi_times"] = list(offi_times_set)
