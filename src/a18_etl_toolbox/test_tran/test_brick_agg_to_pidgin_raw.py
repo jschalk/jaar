@@ -2,7 +2,6 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_select_query,
-    db_table_exists,
     get_row_count,
     get_table_columns,
 )
@@ -30,7 +29,6 @@ from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
-    get_default_sorted_list,
 )
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
@@ -38,7 +36,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import create_pidgin_prime_tables
 from src.a18_etl_toolbox.transformers import (
     etl_brick_agg_df_to_brick_pidgin_raw_df,
     brick_valid_tables_to_pidgin_prime_raw_tables,
-    etl_pidgin_prime_raw_to_pidgin_prime_agg,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir as etl_dir,
@@ -261,7 +258,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
     tag_file_columns = [
-        "idea_number",
+        idea_number_str(),
         event_int_str(),
         face_name_str(),
         otx_tag_str(),
@@ -284,7 +281,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
 
     road_file_columns = [
-        "idea_number",
+        idea_number_str(),
         event_int_str(),
         face_name_str(),
         otx_road_str(),
@@ -742,10 +739,10 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     br00117_str = "br00117"
     br00045_str = "br00045"
 
-    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_nam_values_clause = f"""
 VALUES     
   ('{br00042_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
