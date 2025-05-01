@@ -10,8 +10,8 @@ from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic._utils.str_a17 import idea_number_str, brick_agg_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox.transformers import (
-    etl_brick_raw_db_to_events_brick_agg_db,
-    etl_events_brick_agg_db_to_brick_valid_events_db,
+    etl_brick_raw_tables_to_events_brick_agg_table,
+    etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_events_brick_agg_db_to_event_dict,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -71,7 +71,7 @@ VALUES
         assert not db_table_exists(cursor, brick_events_tablename)
 
         # WHEN
-        etl_brick_raw_db_to_events_brick_agg_db(cursor)
+        etl_brick_raw_tables_to_events_brick_agg_table(cursor)
 
         # THEN
         assert db_table_exists(cursor, brick_events_tablename)
@@ -155,7 +155,7 @@ VALUES
         assert not db_table_exists(cursor, brick_events_tablename)
 
         # WHEN
-        etl_brick_raw_db_to_events_brick_agg_db(cursor)
+        etl_brick_raw_tables_to_events_brick_agg_table(cursor)
 
         # THEN
         assert db_table_exists(cursor, brick_events_tablename)
@@ -180,7 +180,7 @@ ORDER BY {event_int_str()}, {face_name_str()};"""
         assert rows[3] == yao9_row
 
 
-def test_etl_events_brick_agg_db_to_brick_valid_events_db_PopulatesTables_Scenario0():
+def test_etl_events_brick_agg_table_to_events_brick_valid_table_PopulatesTables_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -211,11 +211,11 @@ VALUES
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, agg_events_tablename) == 4
-        valid_events_tablename = "brick_valid_events"
+        valid_events_tablename = "events_brick_valid"
         assert not db_table_exists(cursor, valid_events_tablename)
 
         # WHEN
-        etl_events_brick_agg_db_to_brick_valid_events_db(cursor)
+        etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
 
         # THEN
         assert db_table_exists(cursor, valid_events_tablename)
@@ -265,7 +265,7 @@ VALUES
 ;
 """
         cursor.execute(insert_into_clause)
-        etl_events_brick_agg_db_to_brick_valid_events_db(cursor)
+        etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         assert get_row_count(cursor, agg_events_tablename) == 6
 
         # WHEN

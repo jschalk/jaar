@@ -179,7 +179,7 @@ def get_inx_obj(class_type, x_row) -> str:
     return x_row[CLASS_TYPES[class_type]["inx_obj"]]
 
 
-def etl_mud_df_to_brick_raw_db(conn: sqlite3_Connection, mud_dir: str):
+def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
     for ref in get_all_idea_dataframes(mud_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
@@ -240,7 +240,7 @@ def etl_brick_agg_db_to_brick_agg_df(conn: sqlite3_Connection, brick_dir: str):
             upsert_sheet(brick_path, "brick_agg", brick_agg_idea_df)
 
 
-def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
+def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection):
     brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
@@ -275,7 +275,7 @@ def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
 
-def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
+def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connection):
     idea_sqlite_types = get_idea_sqlite_types()
     brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
@@ -300,7 +300,7 @@ def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
             select_sqlstr = select_sqlstr.replace("event_int", "agg.event_int")
             select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
             select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
-            join_clause_str = """JOIN brick_valid_events valid_events ON valid_events.event_int = agg.event_int"""
+            join_clause_str = """JOIN events_brick_valid valid_events ON valid_events.event_int = agg.event_int"""
             insert_select_into_sqlstr = f"""
 {insert_clause_str}
 {select_sqlstr}{join_clause_str}
@@ -333,7 +333,7 @@ def etl_brick_agg_non_pidgin_ideas_to_brick_valid(
         upsert_sheet(brick_idea_path, "brick_valid", brick_valid_df)
 
 
-def etl_brick_raw_db_to_events_brick_agg_db(conn_or_cursor: sqlite3_Cursor):
+def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
     brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
         brick_events_columns = [
@@ -373,8 +373,10 @@ WHERE event_int IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
-def etl_events_brick_agg_db_to_brick_valid_events_db(conn_or_cursor: sqlite3_Cursor):
-    valid_events_tablename = "brick_valid_events"
+def etl_events_brick_agg_table_to_events_brick_valid_table(
+    conn_or_cursor: sqlite3_Cursor,
+):
+    valid_events_tablename = "events_brick_valid"
     if not db_table_exists(conn_or_cursor, valid_events_tablename):
         brick_events_columns = ["event_int", "face_name"]
         create_idea_sorted_table(
@@ -395,7 +397,7 @@ def etl_events_brick_agg_db_to_event_dict(
 ) -> dict[EventInt, FaceName]:
     select_sqlstr = """
 SELECT event_int, face_name 
-FROM brick_valid_events
+FROM events_brick_valid
 ;
 """
     conn_or_cursor.execute(select_sqlstr)
@@ -685,6 +687,7 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
     event_pidgin_path = create_brick_pidgin_path(event_pidgin_dir)
+    print(f"{event_pidgin_path=}")
     for class_type in CLASS_TYPES.keys():
         agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         csv_filename = CLASS_TYPES[class_type]["csv_filename"]

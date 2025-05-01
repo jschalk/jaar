@@ -19,7 +19,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_mud_df_to_brick_raw_db_CreatesBrickFiles(
+def test_WorldUnit_mud_dfs_to_brick_raw_tables_CreatesBrickFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -72,7 +72,7 @@ def test_WorldUnit_mud_df_to_brick_raw_db_CreatesBrickFiles(
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        fizz_world.mud_df_to_brick_raw_db(db_conn)
+        fizz_world.mud_dfs_to_brick_raw_tables(db_conn)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)

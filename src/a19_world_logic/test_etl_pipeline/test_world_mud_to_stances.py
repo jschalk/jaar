@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, count_dirs_files, save_file
-from src.a00_data_toolbox.db_toolbox import get_row_count
+from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
 from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     fisc_tag_str,
@@ -26,6 +26,7 @@ from src.a19_world_logic._utils.env_a19 import (
 )
 from pandas import DataFrame
 from os.path import exists as os_path_exists
+from sqlite3 import connect as sqlite3_connect
 
 
 def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
@@ -57,121 +58,137 @@ def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 23
 
 
-# def test_WorldUnit_mud_to_stances_Scenario2_PopulatesTables(env_dir_setup_cleanup):
-#     # ESTABLISH:
-#     fizz_str = "fizz"
-#     fizz_world = worldunit_shop(fizz_str, worlds_dir())
-#     # delete_dir(fizz_world.worlds_dir)
-#     sue_str = "Sue"
-#     sue_inx = "Suzy"
-#     event3 = 3
-#     ex_filename = "fizzbuzz.xlsx"
-#     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
-#     br00113_columns = [
-#         face_name_str(),
-#         event_int_str(),
-#         fisc_tag_str(),
-#         owner_name_str(),
-#         acct_name_str(),
-#         otx_name_str(),
-#         inx_name_str(),
-#     ]
-#     a23_str = "accord23"
-#     br00113_str = "br00113"
-#     br00113row0 = [
-#         sue_str,
-#         event3,
-#         a23_str,
-#         sue_str,
-#         sue_str,
-#         sue_str,
-#         sue_inx,
-#     ]
-#     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
-#     br00113_ex0_str = f"example0_{br00113_str}"
-#     upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
-#     br00113_xlsx = f"{br00113_str}.xlsx"
-#     brick_events_xlsx = "brick_events.xlsx"
-#     pidname_xlsx = "pidname.xlsx"
-#     fisunit_xlsx = "fisunit.xlsx"
-#     budunit_xlsx = "budunit.xlsx"
-#     budacct_xlsx = "budacct.xlsx"
-#     brick_events_xlsx = "brick_events.xlsx"
-#     assert get_row_count() (br00113_xlsx, sheet_name="brick_raw")
-#     assert get_row_count() (br00113_xlsx, sheet_name="brick_agg")
-#     assert get_row_count() (brick_events_xlsx, sheet_name="agg")
-#     assert get_row_count() (brick_events_xlsx, sheet_name="valid")
-#     assert get_row_count() (br00113_xlsx, sheet_name="brick_valid")
-#     assert get_row_count() (pidname_xlsx, sheet_name="sound_raw")
-#     assert get_row_count() (pidname_xlsx, sheet_name="sound_agg")
-#     assert get_row_count() (pidname_xlsx, sheet_name="sound_valid")
-#     assert get_row_count() (fisunit_xlsx, sheet_name="sound_raw")
-#     assert get_row_count() (fisunit_xlsx, sheet_name="sound_agg")
-#     assert get_row_count() (fisunit_xlsx, sheet_name="sound_valid")
-#     assert get_row_count() (budunit_xlsx, sheet_name="sound_raw")
-#     assert get_row_count() (budunit_xlsx, sheet_name="sound_agg")
-#     assert get_row_count() (budunit_xlsx, sheet_name="sound_valid")
-#     assert get_row_count() (budacct_xlsx, sheet_name="sound_raw")
-#     assert get_row_count() (budacct_xlsx, sheet_name="sound_agg")
-#     assert get_row_count() (budacct_xlsx, sheet_name="sound_valid")
-#     event1_sound_budunit_path = "events/1/sound_budunit.csv"
-#     event1_sound_budacct_path = "events/1/sound_budacct.csv"
-#     event1_pidgin_json_path = "events/1/pidgin.json"
-#     event1_inherited_pidgin_json_path = "events/1/inherited_pidgin.json"
-#     event1_voice_budunit_path = "events/1/voice_budunit.csv"
-#     event1_voice_budacct_path = "events/1/voice_budacct.csv"
-#     assert not os_path_exists(event1_sound_budunit_path)
-#     assert not os_path_exists(event1_sound_budacct_path)
-#     assert not os_path_exists(event1_pidgin_json_path)
-#     assert not os_path_exists(event1_inherited_pidgin_json_path)
-#     assert not os_path_exists(event1_voice_budunit_path)
-#     assert not os_path_exists(event1_voice_budacct_path)
-#     assert not sheet_exists(fisunit_xlsx, sheet_name="voice_raw")
-#     assert not sheet_exists(fisunit_xlsx, sheet_name="voice_agg")
-#     assert not sheet_exists(fisunit_xlsx, sheet_name="voice_valid")
-#     assert not sheet_exists(budunit_xlsx, sheet_name="voice_raw")
-#     assert not sheet_exists(budunit_xlsx, sheet_name="voice_agg")
-#     assert not sheet_exists(budunit_xlsx, sheet_name="voice_valid")
-#     assert not sheet_exists(budacct_xlsx, sheet_name="voice_raw")
-#     assert not sheet_exists(budacct_xlsx, sheet_name="voice_agg")
-#     assert not sheet_exists(budacct_xlsx, sheet_name="voice_valid")
+def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTables(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH:
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    # delete_dir(fizz_world.worlds_dir)
+    sue_str = "Sue"
+    sue_inx = "Suzy"
+    e3 = 3
+    ex_filename = "fizzbuzz.xlsx"
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    br00113_columns = [
+        face_name_str(),
+        event_int_str(),
+        fisc_tag_str(),
+        owner_name_str(),
+        acct_name_str(),
+        otx_name_str(),
+        inx_name_str(),
+    ]
+    a23_str = "accord23"
+    br00113_str = "br00113"
+    br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
+    br00113_df = DataFrame([br00113row0], columns=br00113_columns)
+    br00113_ex0_str = f"example0_{br00113_str}"
+    upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+    br00113_raw = f"{br00113_str}_brick_raw"
+    br00113_agg = f"{br00113_str}_brick_agg"
+    br00113_valid = f"{br00113_str}_brick_valid"
+    events_brick_agg_tablename = "events_brick_agg"
+    events_brick_valid_tablename = "events_brick_valid"
+    pidname_sound_raw = "pidname_sound_raw"
+    pidname_sound_agg = "pidname_sound_agg"
+    pidname_sound_valid = "pidname_sound_valid"
+    fisunit_sound_raw = "fisunit_sound_raw"
+    fisunit_sound_agg = "fisunit_sound_agg"
+    fisunit_sound_valid = "fisunit_sound_valid"
+    budunit_sound_raw = "budunit_sound_raw"
+    budunit_sound_agg = "budunit_sound_agg"
+    budunit_sound_valid = "budunit_sound_valid"
+    budacct_sound_raw = "budacct_sound_raw"
+    budacct_sound_agg = "budacct_sound_agg"
+    budacct_sound_valid = "budacct_sound_valid"
+    fisunit_voice_raw = "fisunit_voice_raw"
+    fisunit_voice_agg = "fisunit_voice_agg"
+    fisunit_voice_valid = "fisunit_voice_valid"
+    budunit_voice_raw = "budunit_voice_raw"
+    budunit_voice_agg = "budunit_voice_agg"
+    budunit_voice_valid = "budunit_voice_valid"
+    budacct_voice_raw = "budacct_voice_raw"
+    budacct_voice_agg = "budacct_voice_agg"
+    budacct_voice_valid = "budacct_voice_valid"
+    event1_sound_budunit_path = "events/1/sound_budunit.csv"
+    event1_sound_budacct_path = "events/1/sound_budacct.csv"
+    event1_pidgin_json_path = "events/1/pidgin.json"
+    event1_inherited_pidgin_json_path = "events/1/inherited_pidgin.json"
+    event1_voice_budunit_path = "events/1/voice_budunit.csv"
+    event1_voice_budacct_path = "events/1/voice_budacct.csv"
 
-#     # WHEN
-#     fizz_world.mud_to_stances(store_tracing_files=True)
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        assert not db_table_exists(cursor, br00113_raw)
+        assert not db_table_exists(cursor, br00113_agg)
+        assert not db_table_exists(cursor, events_brick_agg_tablename)
+        assert not db_table_exists(cursor, events_brick_valid_tablename)
+        assert not db_table_exists(cursor, br00113_valid)
+        assert not db_table_exists(cursor, pidname_sound_raw)
+        assert not db_table_exists(cursor, pidname_sound_agg)
+        assert not db_table_exists(cursor, pidname_sound_valid)
+        assert not db_table_exists(cursor, fisunit_sound_raw)
+        assert not db_table_exists(cursor, fisunit_sound_agg)
+        assert not db_table_exists(cursor, fisunit_sound_valid)
+        assert not db_table_exists(cursor, budunit_sound_raw)
+        assert not db_table_exists(cursor, budunit_sound_agg)
+        assert not db_table_exists(cursor, budunit_sound_valid)
+        assert not db_table_exists(cursor, budacct_sound_raw)
+        assert not db_table_exists(cursor, budacct_sound_agg)
+        assert not db_table_exists(cursor, budacct_sound_valid)
+        assert not os_path_exists(event1_sound_budunit_path)
+        assert not os_path_exists(event1_sound_budacct_path)
+        assert not os_path_exists(event1_pidgin_json_path)
+        assert not os_path_exists(event1_inherited_pidgin_json_path)
+        assert not os_path_exists(event1_voice_budunit_path)
+        assert not os_path_exists(event1_voice_budacct_path)
+        assert not db_table_exists(cursor, fisunit_voice_raw)
+        assert not db_table_exists(cursor, fisunit_voice_agg)
+        assert not db_table_exists(cursor, fisunit_voice_valid)
+        assert not db_table_exists(cursor, budunit_voice_raw)
+        assert not db_table_exists(cursor, budunit_voice_agg)
+        assert not db_table_exists(cursor, budunit_voice_valid)
+        assert not db_table_exists(cursor, budacct_voice_raw)
+        assert not db_table_exists(cursor, budacct_voice_agg)
+        assert not db_table_exists(cursor, budacct_voice_valid)
 
-#     # THEN
-#     assert sheet_exists(br00113_xlsx, sheet="brick_raw")
-#     assert sheet_exists(br00113_xlsx, sheet="brick_agg")
-#     assert sheet_exists(brick_events_xlsx, sheet="agg")
-#     assert sheet_exists(brick_events_xlsx, sheet="valid")
-#     assert sheet_exists(br00113_xlsx, sheet="brick_valid")
-#     assert sheet_exists(pidname_xlsx, sheet="sound_raw")
-#     assert sheet_exists(pidname_xlsx, sheet="sound_agg")
-#     assert sheet_exists(pidname_xlsx, sheet="sound_valid")
-#     assert sheet_exists(fisunit_xlsx, sheet="sound_raw")
-#     assert sheet_exists(fisunit_xlsx, sheet="sound_agg")
-#     assert sheet_exists(fisunit_xlsx, sheet="sound_valid")
-#     assert sheet_exists(budunit_xlsx, sheet="sound_raw")
-#     assert sheet_exists(budunit_xlsx, sheet="sound_agg")
-#     assert sheet_exists(budunit_xlsx, sheet="sound_valid")
-#     assert sheet_exists(budacct_xlsx, sheet="sound_raw")
-#     assert sheet_exists(budacct_xlsx, sheet="sound_agg")
-#     assert sheet_exists(budacct_xlsx, sheet="sound_valid")
-#     assert os_path_exists(event1_sound_budunit_path)
-#     assert os_path_exists(event1_sound_budacct_path)
-#     assert os_path_exists(event1_pidgin_json_path)
-#     assert os_path_exists(event1_inherited_pidgin_json_path)
-#     assert os_path_exists(event1_voice_budunit_path)
-#     assert os_path_exists(event1_voice_budacct_path)
-#     assert sheet_exists(fisunit_xlsx, sheet="voice_raw")
-#     assert sheet_exists(fisunit_xlsx, sheet="voice_agg")
-#     assert sheet_exists(fisunit_xlsx, sheet="voice_valid")
-#     assert sheet_exists(budunit_xlsx, sheet="voice_raw")
-#     assert sheet_exists(budunit_xlsx, sheet="voice_agg")
-#     assert sheet_exists(budunit_xlsx, sheet="voice_valid")
-#     assert sheet_exists(budacct_xlsx, sheet="voice_raw")
-#     assert sheet_exists(budacct_xlsx, sheet="voice_agg")
-#     assert sheet_exists(budacct_xlsx, sheet="voice_valid")
+        # WHEN
+        fizz_world.mud_to_stances_v2_with_cursor(db_conn, cursor)
+
+        # THEN
+        assert get_row_count(cursor, br00113_raw) == 1
+        assert get_row_count(cursor, br00113_agg) == 1
+        assert get_row_count(cursor, events_brick_agg_tablename) == 1
+        assert get_row_count(cursor, events_brick_valid_tablename) == 1
+        assert get_row_count(cursor, br00113_valid) == 1
+        # assert get_row_count(cursor, pidname_sound_raw) == 1
+        # assert get_row_count(cursor, pidname_sound_agg) == 1
+        # assert get_row_count(cursor, pidname_sound_valid) == 1
+        # assert get_row_count(cursor, fisunit_sound_raw) == 1
+        # assert get_row_count(cursor, fisunit_sound_agg) == 1
+        # assert get_row_count(cursor, fisunit_sound_valid) == 1
+        # assert get_row_count(cursor, budunit_sound_raw) == 1
+        # assert get_row_count(cursor, budunit_sound_agg) == 1
+        # assert get_row_count(cursor, budunit_sound_valid) == 1
+        # assert get_row_count(cursor, budacct_sound_raw) == 1
+        # assert get_row_count(cursor, budacct_sound_agg) == 1
+        # assert get_row_count(cursor, budacct_sound_valid) == 1
+        # assert not os_path_exists(event1_sound_budunit_path)
+        # assert not os_path_exists(event1_sound_budacct_path)
+        # assert not os_path_exists(event1_pidgin_json_path)
+        # assert not os_path_exists(event1_inherited_pidgin_json_path)
+        # assert not os_path_exists(event1_voice_budunit_path)
+        # assert not os_path_exists(event1_voice_budacct_path)
+        # assert get_row_count(cursor, fisunit_voice_raw) == 1
+        # assert get_row_count(cursor, fisunit_voice_agg) == 1
+        # assert get_row_count(cursor, fisunit_voice_valid) == 1
+        # assert get_row_count(cursor, budunit_voice_raw) == 1
+        # assert get_row_count(cursor, budunit_voice_agg) == 1
+        # assert get_row_count(cursor, budunit_voice_valid) == 1
+        # assert get_row_count(cursor, budacct_voice_raw) == 1
+        # assert get_row_count(cursor, budacct_voice_agg) == 1
+        # assert get_row_count(cursor, budacct_voice_valid) == 1
 
 
 # def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):
