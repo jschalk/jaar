@@ -324,7 +324,7 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
         )
 
 
-def _add_time_offis_from_df(x_fiscunit: FiscUnit, br00006_df: DataFrame):
+def _add_time_offi_units_from_df(x_fiscunit: FiscUnit, br00006_df: DataFrame):
     query_str = f"fisc_tag == '{x_fiscunit.fisc_tag}'"
     for index, row in br00006_df.query(query_str).iterrows():
         x_fiscunit.offi_times.add(row["offi_time"])

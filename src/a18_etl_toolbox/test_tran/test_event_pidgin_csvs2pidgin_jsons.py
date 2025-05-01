@@ -35,9 +35,9 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_road_csv = f"""face_name,event_int,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
-"{bob_str}",{event3},"{casa_otx}","{casa_inx}",,,
-"{bob_str}",{event3},"{clean_otx}","{clean_inx}",,,
+    event3_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+{event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
+{event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
     bob_dir = create_path(get_module_temp_dir(), bob_str)
     event3_dir = create_path(bob_dir, event3)
@@ -77,17 +77,17 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_road_csv = f"""face_name,event_int,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
-"{bob_str}",{event3},"{casa_otx}","{casa_inx}",,,
-"{bob_str}",{event3},"{clean_otx}","{clean_inx}",,,
+    event3_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+{event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
+{event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event7_road_csv = f"""face_name,event_int,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
-"{bob_str}",{event7},"{casa_otx}","{casa_inx}",,,
-"{bob_str}",{event7},"{clean_otx}","{clean_inx}",,,
+    event7_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+{event7},"{bob_str}","{casa_otx}","{casa_inx}",,,
+{event7},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event9_road_csv = f"""face_name,event_int,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
-"{zia_str}",{event9},"{casa_otx}","{casa_inx}",,,
-"{zia_str}",{event9},"{clean_otx}","{clean_inx}",,,
+    event9_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+{event9},"{zia_str}","{casa_otx}","{casa_inx}",,,
+{event9},"{zia_str}","{clean_otx}","{clean_inx}",,,
 """
     x_syntax_otz_dir = create_path(get_module_temp_dir(), "syntax_otz")
     bob_dir = create_path(x_syntax_otz_dir, bob_str)

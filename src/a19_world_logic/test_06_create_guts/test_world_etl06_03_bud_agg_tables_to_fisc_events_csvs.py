@@ -48,11 +48,11 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
         cursor = bud_db_conn.cursor()
         create_bud_prime_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
+INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
-, ('{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
-, ('{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{sue_inx}',{sue_credit_belief7})
+  ({event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
+, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
+, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{sue_inx}',{sue_credit_belief7})
 ;
 """
         print(insert_raw_sqlstr)
@@ -72,12 +72,12 @@ VALUES
         e7_put_csv = open_file(a23_e7_budacct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = f"""{face_name_str()},event_int,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
-Suzy,3,accord23,Bobby,Bobby,5.0,
+        expected_e3_put_csv = f"""event_int,{face_name_str()},fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
+3,Suzy,accord23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """face_name,event_int,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
-Suzy,7,accord23,Bobby,Bobby,5.0,
-Suzy,7,accord23,Bobby,Suzy,7.0,
+        expected_e7_put_csv = """event_int,face_name,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
+7,Suzy,accord23,Bobby,Bobby,5.0,
+7,Suzy,accord23,Bobby,Suzy,7.0,
 """
         assert e3_put_csv == expected_e3_put_csv
         assert e7_put_csv == expected_e7_put_csv
@@ -104,13 +104,13 @@ Suzy,7,accord23,Bobby,Suzy,7.0,
 #         create_bud_prime_tables(cursor)
 #         raw_tablename = f"{bud_acctunit_str()}_del_raw"
 #         insert_raw_sqlstr = f"""
-# INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+# INSERT INTO {raw_tablename} ({idea_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 # VALUES
-#   ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-# , ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-# , ('br00051','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-# , ('br00051','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
-# , ('br00051','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
+#   ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
+# , ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
+# , ('br00051',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
+# , ('br00051',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
+# , ('br00051',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
 # ;
 # """
 #         print(insert_raw_sqlstr)

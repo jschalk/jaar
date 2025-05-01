@@ -276,6 +276,7 @@ def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
 
 
 def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
+    idea_sqlite_types = get_idea_sqlite_types()
     brick_agg_dict = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
@@ -287,7 +288,7 @@ def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
                 conn_or_cursor,
                 tablename=valid_tablename,
                 columns_list=agg_columns,
-                column_types={},
+                column_types=idea_sqlite_types,
             )
             agg_cols_dict = {agg_col: None for agg_col in agg_columns}
             insert_clause_str = create_insert_into_clause_str(
@@ -296,8 +297,8 @@ def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
             select_sqlstr = create_select_query(
                 conn_or_cursor, x_tablename, agg_columns
             )
-            select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
             select_sqlstr = select_sqlstr.replace("event_int", "agg.event_int")
+            select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
             select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
             join_clause_str = """JOIN brick_valid_events valid_events ON valid_events.event_int = agg.event_int"""
             insert_select_into_sqlstr = f"""
@@ -350,10 +351,10 @@ def etl_brick_raw_db_to_brick_agg_events_db(conn_or_cursor: sqlite3_Cursor):
         if agg_tablename in brick_agg_tables:
             idea_number = brick_agg_tables.get(agg_tablename)
             insert_from_select_sqlstr = f"""
-INSERT INTO {brick_events_tablename} (idea_number, face_name, event_int)
-SELECT '{idea_number}', face_name, event_int 
+INSERT INTO {brick_events_tablename} (idea_number, event_int, face_name)
+SELECT '{idea_number}', event_int, face_name 
 FROM {agg_tablename}
-GROUP BY face_name, event_int
+GROUP BY event_int, face_name
 ;
 """
             conn_or_cursor.execute(insert_from_select_sqlstr)
@@ -375,13 +376,13 @@ WHERE event_int IN (
 def etl_brick_agg_events_db_to_brick_valid_events_db(conn_or_cursor: sqlite3_Cursor):
     valid_events_tablename = "brick_valid_events"
     if not db_table_exists(conn_or_cursor, valid_events_tablename):
-        brick_events_columns = ["face_name", "event_int"]
+        brick_events_columns = ["event_int", "face_name"]
         create_idea_sorted_table(
             conn_or_cursor, valid_events_tablename, brick_events_columns
         )
     insert_select_sqlstr = f"""
-INSERT INTO {valid_events_tablename} (face_name, event_int)
-SELECT face_name, event_int 
+INSERT INTO {valid_events_tablename} (event_int, face_name)
+SELECT event_int, face_name 
 FROM brick_agg_events
 WHERE error_message IS NULL
 ;
@@ -510,10 +511,10 @@ class BrickAggToPidginRawTransformer:
     def transform(self):
         dimen_ideas = get_idea_dimen_ref().get(self.pidgin_dimen)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
-        pidgin_columns.update({"face_name", "event_int"})
+        pidgin_columns.update({"event_int", "face_name"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
         pidgin_columns.insert(0, "idea_number")
-        # empty df with idea_number, face_name, event_int, idea_columns...
+        # empty df with idea_number, event_int, face_name, idea_columns...
         pidgin_df = DataFrame(columns=pidgin_columns)
         for idea_number in sorted(dimen_ideas):
             idea_filename = f"{idea_number}.xlsx"
@@ -522,7 +523,6 @@ class BrickAggToPidginRawTransformer:
                 self.insert_raw_rows(
                     pidgin_df, idea_number, brick_idea_path, pidgin_columns
                 )
-
         pidgin_file_path = create_brick_pidgin_path(self.brick_dir)
         upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
 
@@ -552,8 +552,8 @@ class BrickAggToPidginRawTransformer:
                 df_len = len(raw_df.index)
                 raw_df.loc[df_len] = [
                     idea_number,
-                    face_name,
                     event_int,
+                    face_name,
                     get_otx_obj(self.class_type, x_row),
                     self.get_inx_obj(x_row, df_missing_cols),
                     otx_bridge,
@@ -610,7 +610,7 @@ class PidginRawToAggTransformer:
 
     def transform(self):
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
-        pidgin_columns.update({"face_name", "event_int"})
+        pidgin_columns.update({"event_int", "face_name"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
         pidgin_agg_df = DataFrame(columns=pidgin_columns)
         self.insert_agg_rows(pidgin_agg_df)

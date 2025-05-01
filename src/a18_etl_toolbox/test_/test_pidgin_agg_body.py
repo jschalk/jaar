@@ -580,7 +580,7 @@ def test_PidginBodyBook_get_valid_pidginbodylists_ReturnsObj_Scenario1():
     # WHEN / THEN
     assert len(x_pidginbodybook.get_valid_pidginbodylists()) == 1
     x0_pidginbodylist = x_pidginbodybook.get_valid_pidginbodylists()[0]
-    assert x0_pidginbodylist == [sue_str, e55, bob_otx, bob2_inx, None, None, None]
+    assert x0_pidginbodylist == [e55, sue_str, bob_otx, bob2_inx, None, None, None]
 
     # WHEN
     e44 = 44
@@ -591,7 +591,7 @@ def test_PidginBodyBook_get_valid_pidginbodylists_ReturnsObj_Scenario1():
     # THEN
     assert len(x_pidginbodybook.get_valid_pidginbodylists()) == 2
     x1_pidginbodylist = x_pidginbodybook.get_valid_pidginbodylists()[1]
-    assert x1_pidginbodylist == [sue_str, e44, bob_otx, bob2_inx, None, None, None]
+    assert x1_pidginbodylist == [e44, sue_str, bob_otx, bob2_inx, None, None, None]
 
     # WHEN
     bob3_inx = "Bobby"
@@ -601,4 +601,4 @@ def test_PidginBodyBook_get_valid_pidginbodylists_ReturnsObj_Scenario1():
     # THEN
     assert len(x_pidginbodybook.get_valid_pidginbodylists()) == 1
     x0_pidginbodylist = x_pidginbodybook.get_valid_pidginbodylists()[0]
-    assert x0_pidginbodylist == [sue_str, e55, bob_otx, bob2_inx, None, None, None]
+    assert x0_pidginbodylist == [e55, sue_str, bob_otx, bob2_inx, None, None, None]

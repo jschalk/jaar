@@ -35,16 +35,16 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario0_SingleIdea(
     x_brick_dir = get_module_temp_dir()
     br00115_file_path = create_path(x_brick_dir, "br00115.xlsx")
     br00115_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
         otx_label_str(),
         inx_label_str(),
     ]
-    sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue0 = [event7, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event7, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
     upsert_sheet(br00115_file_path, brick_agg_str(), br00115_df)
@@ -63,8 +63,8 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario0_SingleIdea(
     assert list(gen_label_df.columns) == label_raw_columns
     assert len(gen_label_df) == 2
     bx = "br00115"
-    e1_label0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
-    e1_label1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
+    e1_label0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
+    e1_label1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
     e1_label_rows = [e1_label0, e1_label1]
     e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
     assert len(gen_label_df) == len(e1_label_df)
@@ -93,8 +93,8 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleIdeasFi
     x_brick_dir = get_module_temp_dir()
     br00115_file_path = create_path(x_brick_dir, "br00115.xlsx")
     br00115_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -103,19 +103,19 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleIdeasFi
     ]
     br00042_file_path = create_path(x_brick_dir, "br00042.xlsx")
     br00042_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_label_str(),
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
     upsert_sheet(br00115_file_path, brick_agg_str(), br00115_df)
@@ -138,11 +138,11 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleIdeasFi
     assert len(gen_label_df) == 5
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_label5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_label0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
-    e1_label1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
+    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label5 = [b4, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_label0 = [b3, event1, sue_str, yao_str, yao_inx, None, None, None]
+    e1_label1 = [b3, event1, sue_str, bob_str, bob_inx, None, None, None]
 
     e1_label_rows = [e1_label3, e1_label4, e1_label5, e1_label0, e1_label1]
     e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
@@ -171,8 +171,8 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_event
     x_brick_dir = get_module_temp_dir()
     br00115_file_path = create_path(x_brick_dir, "br00115.xlsx")
     br00115_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -181,19 +181,19 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_event
     ]
     br00042_file_path = create_path(x_brick_dir, "br00042.xlsx")
     br00042_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_label_str(),
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
     upsert_sheet(br00115_file_path, brick_agg_str(), br00115_df)
@@ -216,8 +216,8 @@ def test_etl_brick_agg_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_event
     assert len(gen_label_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
     e1_label_rows = [e1_label3, e1_label4]
     e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
     assert len(gen_label_df) == len(e1_label_df)

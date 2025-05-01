@@ -11,7 +11,7 @@ from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a17_idea_logic.idea import (
     _add_cashpurchases_from_df,
     _add_dealunits_from_df,
-    _add_time_offis_from_df,
+    _add_time_offi_units_from_df,
 )
 from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
@@ -115,7 +115,7 @@ class FiscPrimeColumnsRef:
         self.week_agg_columns = ["fisc_tag", "weekday_order", "weekday_tag"]
         self.offi_agg_columns = ["fisc_tag", "offi_time"]
 
-        _front_cols = ["idea_number", "face_name", "event_int"]
+        _front_cols = ["idea_number", "event_int", "face_name"]
         _back_cols = ["error_message"]
         self.unit_agg_csv_header = "fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations"
         self.deal_agg_csv_header = "fisc_tag,owner_name,deal_time,quota,celldepth"
@@ -131,14 +131,14 @@ class FiscPrimeColumnsRef:
         self.mont_raw_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_raw_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
         self.offi_raw_columns = [*_front_cols, *self.offi_agg_columns, *_back_cols]
-        self.unit_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
-        self.deal_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,owner_name,deal_time,quota,celldepth,error_message"""
-        self.cash_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,owner_name,acct_name,tran_time,amount,error_message"""
-        self.hour_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,cumlative_minute,hour_tag,error_message"""
-        self.mont_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,cumlative_day,month_tag,error_message"""
-        self.week_raw_csv_header = """idea_number,face_name,event_int,fisc_tag,weekday_order,weekday_tag,error_message"""
+        self.unit_raw_csv_header = """idea_number,event_int,face_name,fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
+        self.deal_raw_csv_header = """idea_number,event_int,face_name,fisc_tag,owner_name,deal_time,quota,celldepth,error_message"""
+        self.cash_raw_csv_header = """idea_number,event_int,face_name,fisc_tag,owner_name,acct_name,tran_time,amount,error_message"""
+        self.hour_raw_csv_header = """idea_number,event_int,face_name,fisc_tag,cumlative_minute,hour_tag,error_message"""
+        self.mont_raw_csv_header = """idea_number,event_int,face_name,fisc_tag,cumlative_day,month_tag,error_message"""
+        self.week_raw_csv_header = """idea_number,event_int,face_name,fisc_tag,weekday_order,weekday_tag,error_message"""
         self.offi_raw_csv_header = (
-            """idea_number,face_name,event_int,fisc_tag,offi_time,error_message"""
+            """idea_number,event_int,face_name,fisc_tag,offi_time,error_message"""
         )
         self.unit_agg_empty_csv = f"{self.unit_agg_csv_header}\n"
         self.deal_agg_empty_csv = f"{self.deal_agg_csv_header}\n"

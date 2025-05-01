@@ -95,11 +95,11 @@ def test_WorldUnit_idea_raw_to_fisc_prime_tables_Bud_dimen_idea_PopulatesFiscRaw
     sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+{event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as fisc_db_conn:
@@ -117,8 +117,8 @@ def test_WorldUnit_idea_raw_to_fisc_prime_tables_Bud_dimen_idea_PopulatesFiscRaw
         fiscunit_db_rows = cursor.fetchall()
         expected_row1 = (
             br00011_str,
-            sue_inx,
             event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -134,8 +134,8 @@ def test_WorldUnit_idea_raw_to_fisc_prime_tables_Bud_dimen_idea_PopulatesFiscRaw
         )
         expected_row2 = (
             br00011_str,
-            sue_inx,
             event7,
+            sue_inx,
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -178,11 +178,11 @@ def test_WorldUnit_set_idea_raw_error_message_ChangeAttrs(env_dir_setup_cleanup)
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")

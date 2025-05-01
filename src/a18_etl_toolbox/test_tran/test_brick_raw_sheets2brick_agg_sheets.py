@@ -31,22 +31,22 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario0_GroupByWor
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
-    event_1 = 1
+    event1 = 1
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
     raw_br00003_tablename = f"{brick_raw_str()}_br00003"
     raw_br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     raw_br00003_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         fisc_tag_str(): "TEXT",
         cumlative_minute_str(): "TEXT",
         hour_tag_str(): "TEXT",
@@ -57,17 +57,17 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario0_GroupByWor
             cursor, raw_br00003_tablename, raw_br00003_columns, raw_br00003_types
         )
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {cumlative_minute_str()}
 , {hour_tag_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event_1}', '{a23_str}', '{minute_360}', '{hour6am}')
-, ('{sue_str}', '{event_1}', '{a23_str}', '{minute_420}', '{hour7am}')
-, ('{sue_str}', '{event_1}', '{a23_str}', '{minute_420}', '{hour7am}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -98,11 +98,11 @@ ORDER BY {event_int_str()}, {cumlative_minute_str()};"""
 
         rows = cursor.fetchall()
         assert len(rows) == 2
-        e1 = event_1
+        e1 = event1
         m_360 = minute_360
         m_420 = minute_420
-        row0 = (sue_str, e1, a23_str, m_360, hour6am)
-        row1 = (sue_str, e1, a23_str, m_420, hour7am)
+        row0 = (e1, sue_str, a23_str, m_360, hour6am)
+        row1 = (e1, sue_str, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0
@@ -113,7 +113,7 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario1_GroupByOnl
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
-    event_1 = 1
+    event1 = 1
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -122,15 +122,15 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario1_GroupByOnl
 
     raw_br00003_tablename = f"{brick_raw_str()}_br00003"
     raw_br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     raw_br00003_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         fisc_tag_str(): "TEXT",
         cumlative_minute_str(): "TEXT",
         hour_tag_str(): "TEXT",
@@ -141,17 +141,17 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario1_GroupByOnl
             cursor, raw_br00003_tablename, raw_br00003_columns, raw_br00003_types
         )
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {cumlative_minute_str()}
 , {hour_tag_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event_1}', '{a23_str}', '{minute_360}', '{hour6am}')
-, ('{sue_str}', '{event_1}', '{a23_str}', '{minute_420}', '{hour7am}')
-, ('{sue_str}', '{event_1}', '{a23_str}', '{minute_420}', '{hour8am}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour8am}')
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -179,9 +179,9 @@ VALUES
 
         rows = cursor.fetchall()
         assert len(rows) == 1
-        e1 = event_1
+        e1 = event1
         m_360 = minute_360
-        row0 = (sue_str, e1, a23_str, m_360, hour6am)
+        row0 = (e1, sue_str, a23_str, m_360, hour6am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0
@@ -193,8 +193,8 @@ def test_etl_brick_agg_db_to_brick_agg_df_PopulatesAggTable_Scenario0_GroupByWor
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
-    event_1 = 1
-    event_2 = 2
+    event1 = 1
+    event2 = 2
     minute_360 = 360
     minute_420 = 420
     minute_480 = 480
@@ -203,15 +203,15 @@ def test_etl_brick_agg_db_to_brick_agg_df_PopulatesAggTable_Scenario0_GroupByWor
     hour8am = "8am"
     agg_br00003_tablename = f"{brick_agg_str()}_br00003"
     agg_br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     agg_br00003_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         fisc_tag_str(): "TEXT",
         cumlative_minute_str(): "TEXT",
         hour_tag_str(): "TEXT",
@@ -222,17 +222,17 @@ def test_etl_brick_agg_db_to_brick_agg_df_PopulatesAggTable_Scenario0_GroupByWor
             cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
         )
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {cumlative_minute_str()}
 , {hour_tag_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event_1}', '{a23_str}', '{minute_360}', '{hour6am}')
-, ('{sue_str}', '{event_1}', '{a23_str}', '{minute_420}', '{hour7am}')
-, ('{sue_str}', '{event_2}', '{a23_str}', '{minute_480}', '{hour8am}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event2}', '{sue_str}', '{a23_str}', '{minute_480}', '{hour8am}')
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -248,9 +248,9 @@ VALUES
         # THEN
         assert sheet_exists(brick_file_path, brick_agg_str())
         agg_df = pandas_read_excel(brick_file_path, sheet_name=brick_agg_str())
-        row0 = [sue_str, event_1, a23_str, minute_360, hour6am]
-        row1 = [sue_str, event_1, a23_str, minute_420, hour7am]
-        row2 = [sue_str, event_2, a23_str, minute_480, hour8am]
+        row0 = [event1, sue_str, a23_str, minute_360, hour6am]
+        row1 = [event1, sue_str, a23_str, minute_420, hour7am]
+        row2 = [event2, sue_str, a23_str, minute_480, hour8am]
         ex_agg_df = DataFrame([row0, row1, row2], columns=agg_br00003_columns)
         print(f"{agg_df.columns=}")
         assert len(ex_agg_df.columns) == len(agg_df.columns)
@@ -276,15 +276,15 @@ def test_etl_brick_agg_db_to_brick_valid_db_PopulatesValidTable_Scenario0_Only_v
 
     agg_br00003_tablename = f"{brick_agg_str()}_br00003"
     agg_br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     agg_br00003_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         fisc_tag_str(): "TEXT",
         cumlative_minute_str(): "TEXT",
         hour_tag_str(): "TEXT",
@@ -295,17 +295,17 @@ def test_etl_brick_agg_db_to_brick_valid_db_PopulatesValidTable_Scenario0_Only_v
             cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
         )
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {cumlative_minute_str()}
 , {hour_tag_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{a23_str}', '{minute_360}', '{hour6am}')
-, ('{sue_str}', '{event3}', '{a23_str}', '{minute_420}', '{hour8am}')
-, ('{sue_str}', '{event6}', '{a23_str}', '{minute_420}', '{hour8am}')
+  ({event1}, '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ({event3}, '{sue_str}', '{a23_str}', '{minute_420}', '{hour8am}')
+, ({event6}, '{sue_str}', '{a23_str}', '{minute_420}', '{hour8am}')
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -313,16 +313,16 @@ VALUES
         assert get_row_count(cursor, agg_br00003_tablename) == 3
 
         valid_events_columns = [face_name_str(), event_int_str()]
-        valid_events_types = {face_name_str(): "TEXT", event_int_str(): "TEXT"}
+        valid_events_types = {face_name_str(): "TEXT", event_int_str(): "INTEGER"}
         valid_events_tablename = "brick_valid_events"
         create_table_from_columns(
             cursor, valid_events_tablename, valid_events_columns, valid_events_types
         )
         insert_into_valid_events = f"""
-INSERT INTO {valid_events_tablename} ({face_name_str()}, {event_int_str()})
+INSERT INTO {valid_events_tablename} ({event_int_str()}, {face_name_str()})
 VALUES     
-  ('{sue_str}', '{event1}')
-, ('{sue_str}', '{event6}')
+  ({event1}, '{sue_str}')
+, ({event6}, '{sue_str}')
 ;
 """
         cursor.execute(insert_into_valid_events)
@@ -343,7 +343,7 @@ VALUES
 
         rows = cursor.fetchall()
         assert len(rows) == 2
-        row0 = (sue_str, str(event1), a23_str, str(minute_360), hour6am)
-        row1 = (sue_str, str(event6), a23_str, str(minute_420), hour8am)
+        row0 = (event1, sue_str, a23_str, minute_360, hour6am)
+        row1 = (event6, sue_str, a23_str, minute_420, hour8am)
         assert rows[0] == row0
         assert rows[1] == row1

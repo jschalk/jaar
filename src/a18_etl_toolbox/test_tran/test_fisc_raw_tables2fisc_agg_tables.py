@@ -33,12 +33,12 @@ def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.unit_raw_tablename} (idea_number, face_name, event_int, fisc_tag)
+INSERT INTO {x_fisc.unit_raw_tablename} (idea_number, event_int, face_name, fisc_tag)
 VALUES
-  ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
-, ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
-, ('{br00011_str}', '{sue_inx}', {event3}, '{accord45_str}')
-, ('{br00011_str}', '{sue_inx}', {event7}, '{accord45_str}')
+  ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
+, ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
+, ('{br00011_str}', {event3}, '{sue_inx}', '{accord45_str}')
+, ('{br00011_str}', {event7}, '{sue_inx}', '{accord45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -83,7 +83,7 @@ VALUES
         assert fiscunit_agg_rows == [expected_row0, expected_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fisunit_WithNo_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -109,11 +109,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fiscunit_WithNo_error_message
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00555','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00555',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00666',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -159,7 +159,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fisunit_With_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -185,11 +185,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fiscunit_With_error_message()
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
-, ('br00555','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
-, ('br00666','{sue_inx}',{event7},'{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00555',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00666',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -222,7 +222,7 @@ VALUES
         assert rows == [expected_agg_row0]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fishour_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -245,11 +245,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario2_fischour_Some_error_message()
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.hour_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{cumlative_minute_1},'{_4pm_str}','{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord45_str}',{cumlative_minute_2},'{_4pm_str}','{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord23_str}',{cumlative_minute_2},'{_8pm_str}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{cumlative_minute_1},'{_4pm_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{cumlative_minute_1},'{_4pm_str}','{x_error_message}')
+, ('br00333',{event9},'{sue_inx}','{accord45_str}',{cumlative_minute_2},'{_4pm_str}','{x_error_message}')
+, ('br00333',{event9},'{sue_inx}','{accord23_str}',{cumlative_minute_2},'{_8pm_str}',NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -270,7 +270,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fismont_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -292,11 +292,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario3_fiscmont_Some_error_message()
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.mont_raw_tablename} ({x_cols.mont_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{cumlative_day_1},'{aug_str}','{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord45_str}',{cumlative_day_2},'{aug_str}','{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord23_str}',{cumlative_day_2},'{aug_str}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{cumlative_day_1},'{apr_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{cumlative_day_1},'{aug_str}','{x_error_message}')
+, ('br00333',{event9},'{sue_inx}','{accord45_str}',{cumlative_day_2},'{aug_str}','{x_error_message}')
+, ('br00333',{event9},'{sue_inx}','{accord23_str}',{cumlative_day_2},'{aug_str}',NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -317,7 +317,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fisweek_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -339,11 +339,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario4_fiscweek_Some_error_message()
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.week_raw_tablename} ({x_cols.week_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{weekday_order_1},'{wed_str}','{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord45_str}',{weekday_order_2},'{wed_str}','{x_error_message}')
-, ('br00333','{sue_inx}',{event9},'{accord23_str}',{weekday_order_2},'{wed_str}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{weekday_order_1},'{mon_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{weekday_order_1},'{wed_str}','{x_error_message}')
+, ('br00333',{event9},'{sue_inx}','{accord45_str}',{weekday_order_2},'{wed_str}','{x_error_message}')
+, ('br00333',{event9},'{sue_inx}','{accord23_str}',{weekday_order_2},'{wed_str}',NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -364,7 +364,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fisdeal_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -388,12 +388,12 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario5_fiscdeal_Some_error_message()
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.deal_raw_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_2},NULL,'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,'{x_error_message}')
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{bob_inx}',{t1_deal_time},{t1_quota_2},NULL,'{x_error_message}')
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333',{event9},'{sue_inx}','{accord45_str}','{bob_inx}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333',{event9},'{sue_inx}','{accord23_str}','{bob_inx}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -415,7 +415,7 @@ VALUES
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
 
 
-def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message():
+def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fiscash_Some_error_message():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -440,13 +440,13 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario6_fisccash_Some_error_message()
         insert_raw_sqlstr = f"""
 INSERT INTO {x_objs.cash_raw_tablename} ({x_cols.cash_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_2},'{x_error_message}')
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord45_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event9},'{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},NULL,NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},'{x_error_message}')
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_2},'{x_error_message}')
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333',{event9},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}',{t1_tran_time},{t1_amount_1},NULL)
+, ('br00333',{event9},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333',{event9},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{t2_tran_time},NULL,NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")

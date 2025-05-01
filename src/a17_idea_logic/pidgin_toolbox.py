@@ -14,8 +14,8 @@ from os.path import exists as os_path_exists
 
 def get_pidgin_name_dt_columns() -> list[str]:
     return [
-        "face_name",
         "event_int",
+        "face_name",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -26,8 +26,8 @@ def get_pidgin_name_dt_columns() -> list[str]:
 
 def get_pidgin_label_dt_columns() -> list[str]:
     return [
-        "face_name",
         "event_int",
+        "face_name",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -38,8 +38,8 @@ def get_pidgin_label_dt_columns() -> list[str]:
 
 def get_pidgin_tag_dt_columns() -> list[str]:
     return [
-        "face_name",
         "event_int",
+        "face_name",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
@@ -50,8 +50,8 @@ def get_pidgin_tag_dt_columns() -> list[str]:
 
 def get_pidgin_road_dt_columns() -> list[str]:
     return [
-        "face_name",
         "event_int",
+        "face_name",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",

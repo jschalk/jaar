@@ -208,8 +208,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
 
     assert table_sorting_priority[0] == world_id_str()
     assert table_sorting_priority[1] == idea_number_str()
-    assert table_sorting_priority[2] == face_name_str()
-    assert table_sorting_priority[3] == event_int_str()
+    assert table_sorting_priority[2] == event_int_str()
+    assert table_sorting_priority[3] == face_name_str()
     assert table_sorting_priority[4] == fisc_tag_str()
     assert table_sorting_priority[5] == timeline_tag_str()
     assert table_sorting_priority[6] == offi_time_str()
@@ -789,8 +789,8 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     # THEN
     assert len(x_idea_quick_column_ref) == len(get_idea_numbers())
     assert x_idea_quick_column_ref.get("br00000") == {
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         c400_number_str(),
         fisc_tag_str(),
         fund_coin_str(),

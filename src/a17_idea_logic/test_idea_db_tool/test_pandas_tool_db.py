@@ -49,10 +49,10 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
         )
-        csv_file.write("Sue,3,Accord43,Bob,Bob,;runners,6.5\n")
-        csv_file.write("Sue,3,Accord43,Yao,Bob,;runners,7.5\n")
+        csv_file.write("3,Sue,Accord43,Bob,Bob,;runners,6.5\n")
+        csv_file.write("3,Sue,Accord43,Yao,Bob,;runners,7.5\n")
 
     yield conn, test_csv_filepath
 
@@ -87,8 +87,8 @@ def test_create_idea_table_from_csv_ChangesDBState(
 
     # Expected column definitions
     expected_columns = [
-        (0, face_name_str(), "TEXT", 0, None, 0),
-        (1, event_int_str(), "INTEGER", 0, None, 0),
+        (0, event_int_str(), "INTEGER", 0, None, 0),
+        (1, face_name_str(), "TEXT", 0, None, 0),
         (2, fisc_tag_str(), "TEXT", 0, None, 0),
         (3, owner_name_str(), "TEXT", 0, None, 0),
         (4, acct_name_str(), "TEXT", 0, None, 0),
@@ -98,8 +98,8 @@ def test_create_idea_table_from_csv_ChangesDBState(
     assert columns == expected_columns
     column_types = get_idea_sqlite_types()
     get_idea_sqlite_types_columns = [
-        (0, face_name_str(), column_types.get(face_name_str()), 0, None, 0),
-        (1, event_int_str(), column_types.get(event_int_str()), 0, None, 0),
+        (0, event_int_str(), column_types.get(event_int_str()), 0, None, 0),
+        (1, face_name_str(), column_types.get(face_name_str()), 0, None, 0),
         (2, fisc_tag_str(), column_types.get(fisc_tag_str()), 0, None, 0),
         (3, owner_name_str(), column_types.get(owner_name_str()), 0, None, 0),
         (4, acct_name_str(), column_types.get(acct_name_str()), 0, None, 0),
@@ -128,8 +128,8 @@ def test_insert_idea_csv_ChangesDBState_add_to_empty_table(
     cursor.execute(f"SELECT * FROM {br_tablename}")
     rows = cursor.fetchall()
     expected_data = [
-        ("Sue", 3, "Accord43", "Bob", "Bob", ";runners", 6.5),
-        ("Sue", 3, "Accord43", "Yao", "Bob", ";runners", 7.5),
+        (3, "Sue", "Accord43", "Bob", "Bob", ";runners", 6.5),
+        (3, "Sue", "Accord43", "Yao", "Bob", ";runners", 7.5),
     ]
     assert rows == expected_data
 
@@ -144,17 +144,17 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
         )
-        csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
-        csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")
+        csv_file.write("7,Zia,Accord55,Yao,Zia,;swimmers,10.2\n")
+        csv_file.write("8,Zia,Accord43,Zia,Bob,;runners,11.1\n")
 
     br_tablename = "brXXXXX"
     create_idea_table_from_csv(test_csv_filepath, conn, br_tablename)
     insert_idea_csv(test_csv_filepath, conn, br_tablename)
     before_table_data = [
-        ("Sue", 3, "Accord43", "Bob", "Bob", ";runners", 6.5),
-        ("Sue", 3, "Accord43", "Yao", "Bob", ";runners", 7.5),
+        (3, "Sue", "Accord43", "Bob", "Bob", ";runners", 6.5),
+        (3, "Sue", "Accord43", "Yao", "Bob", ";runners", 7.5),
     ]
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM {br_tablename}")
@@ -165,10 +165,10 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
 
     # THEN
     expected_table_data = [
-        ("Sue", 3, "Accord43", "Bob", "Bob", ";runners", 6.5),
-        ("Sue", 3, "Accord43", "Yao", "Bob", ";runners", 7.5),
-        ("Zia", 7, "Accord55", "Yao", "Zia", ";swimmers", 10.2),
-        ("Zia", 8, "Accord43", "Zia", "Bob", ";runners", 11.1),
+        (3, "Sue", "Accord43", "Bob", "Bob", ";runners", 6.5),
+        (3, "Sue", "Accord43", "Yao", "Bob", ";runners", 7.5),
+        (7, "Zia", "Accord55", "Yao", "Zia", ";swimmers", 10.2),
+        (8, "Zia", "Accord43", "Zia", "Bob", ";runners", 11.1),
     ]
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM {br_tablename}")
@@ -188,10 +188,10 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
         )
-        csv_file.write("Zia,7,Accord55,Yao,Zia,;swimmers,10.2\n")
-        csv_file.write("Zia,8,Accord43,Zia,Bob,;runners,11.1\n")
+        csv_file.write("7,Zia,Accord55,Yao,Zia,;swimmers,10.2\n")
+        csv_file.write("8,Zia,Accord43,Zia,Bob,;runners,11.1\n")
 
     br_tablename = "brXXXXX"
     cursor = conn.cursor()
@@ -204,8 +204,8 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
 
     # THEN
     expected_table_data = [
-        ("Zia", 7, "Accord55", "Yao", "Zia", ";swimmers", 10.2),
-        ("Zia", 8, "Accord43", "Zia", "Bob", ";runners", 11.1),
+        (7, "Zia", "Accord55", "Yao", "Zia", ";swimmers", 10.2),
+        (8, "Zia", "Accord43", "Zia", "Bob", ";runners", 11.1),
     ]
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM {br_tablename}")
@@ -224,8 +224,8 @@ def test_create_idea_table_from_csv_DoesNothinpackableExists(
     create_idea_table_from_csv(test_csv_filepath, conn, br_tablename)
     insert_idea_csv(test_csv_filepath, conn, br_tablename)
     before_table_data = [
-        ("Sue", 3, "Accord43", "Bob", "Bob", ";runners", 6.5),
-        ("Sue", 3, "Accord43", "Yao", "Bob", ";runners", 7.5),
+        (3, "Sue", "Accord43", "Bob", "Bob", ";runners", 6.5),
+        (3, "Sue", "Accord43", "Yao", "Bob", ";runners", 7.5),
     ]
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM {br_tablename}")

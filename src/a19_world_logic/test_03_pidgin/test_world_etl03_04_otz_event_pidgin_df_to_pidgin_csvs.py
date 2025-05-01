@@ -36,8 +36,8 @@ def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_ro
     event7 = 7
     event9 = 9
     road_file_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
@@ -45,18 +45,18 @@ def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_ro
         unknown_word_str(),
     ]
     x_nan = float("nan")
-    e3_road0 = [bob_str, event3, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e3_road1 = [bob_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e3_road0 = [event3, bob_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e3_road1 = [event3, bob_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e3_road_rows = [e3_road0, e3_road1]
     e3_road_df = DataFrame(e3_road_rows, columns=road_file_columns)
 
-    e7_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e7_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e7_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e7_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e7_road_rows = [e7_road0, e7_road1]
     e7_road_df = DataFrame(e7_road_rows, columns=road_file_columns)
 
-    e9_road0 = [zia_str, event9, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e9_road1 = [zia_str, event9, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e9_road0 = [event9, zia_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e9_road1 = [event9, zia_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e9_road_rows = [e9_road0, e9_road1]
     e9_road_df = DataFrame(e9_road_rows, columns=road_file_columns)
 

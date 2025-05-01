@@ -474,10 +474,10 @@ def update_all_face_name_event_int_columns(
     # Loop through all sheets in the workbook
     for sheet in workbook.sheetnames:
         ws = workbook[sheet]
-        if ws["A1"].value == "face_name" and ws["B1"].value == "event_int":
+        if ws["A1"].value == "event_int" and ws["B1"].value == "face_name":
             for row in range(2, ws.max_row + 1):
-                ws.cell(row=row, column=1, value=face_name)
-                ws.cell(row=row, column=2, value=event_int)
+                ws.cell(row=row, column=1, value=event_int)
+                ws.cell(row=row, column=2, value=face_name)
 
             # Save the updated sheet
             workbook.save(excel_file_path)

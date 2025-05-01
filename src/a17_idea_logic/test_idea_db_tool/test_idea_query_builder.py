@@ -54,11 +54,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_bud_item_teamlink():
         )
 
         # THEN
-        columns_str = "face_name, event_int, fisc_tag, owner_name, road, team_title"
+        columns_str = "event_int, face_name, fisc_tag, owner_name, road, team_title"
         expected_sqlstr = f"""INSERT INTO {budteam_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND road IS NOT NULL AND team_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND road IS NOT NULL AND team_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -103,11 +103,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
         )
 
         # THEN
-        columns_str = "face_name, event_int, fisc_tag, owner_name, acct_name, credit_belief, debtit_belief"
+        columns_str = "event_int, face_name, fisc_tag, owner_name, acct_name, credit_belief, debtit_belief"
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -153,12 +153,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
 
         # THEN
         columns_str = (
-            "face_name, event_int, fisc_tag, owner_name, acct_name, credit_belief"
+            "event_int, face_name, fisc_tag, owner_name, acct_name, credit_belief"
         )
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE face_name IS NOT NULL AND event_int IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

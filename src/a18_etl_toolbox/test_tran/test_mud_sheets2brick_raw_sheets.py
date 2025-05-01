@@ -25,8 +25,8 @@ from sqlite3 import connect as sqlite3_connect
 def test_etl_mud_df_to_brick_raw_db_PopulatesBrickTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    event_1 = 1
-    event_2 = 2
+    event1 = 1
+    event2 = 2
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -36,24 +36,24 @@ def test_etl_mud_df_to_brick_raw_db_PopulatesBrickTables(env_dir_setup_cleanup):
     brick_dir = create_path(get_module_temp_dir(), "brick")
     mud_file_path = create_path(mud_dir, ex_filename)
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         cumlative_minute_str(),
         fisc_tag_str(),
         hour_tag_str(),
     ]
     a23_str = "accord23"
-    row1 = [sue_str, event_1, minute_360, a23_str, hour6am]
-    row2 = [sue_str, event_1, minute_420, a23_str, hour7am]
-    row3 = [sue_str, event_2, minute_420, a23_str, hour7am]
+    row1 = [event1, sue_str, minute_360, a23_str, hour6am]
+    row2 = [event1, sue_str, minute_420, a23_str, hour7am]
+    row3 = [event2, sue_str, minute_420, a23_str, hour7am]
     incomplete_idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         cumlative_minute_str(),
         fisc_tag_str(),
     ]
-    incom_row1 = [sue_str, event_1, minute_360, a23_str]
-    incom_row2 = [sue_str, event_1, minute_420, a23_str]
+    incom_row1 = [event1, sue_str, minute_360, a23_str]
+    incom_row2 = [event1, sue_str, minute_420, a23_str]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)
@@ -92,18 +92,18 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         rows = cursor.fetchall()
         assert len(rows) == 5
         file = ex_filename
-        e1 = event_1
-        e2 = event_2
+        e1 = event1
+        e2 = event2
         s_dir = create_path(mud_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
         br3_ex3_str = br00003_ex3_str
-        row0 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_360, hour6am)
-        row1 = (s_dir, file, br3_ex1_str, sue_str, e1, a23_str, m_420, hour7am)
-        row2 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_360, hour6am)
-        row3 = (s_dir, file, br3_ex3_str, sue_str, e1, a23_str, m_420, hour7am)
-        row4 = (s_dir, file, br3_ex3_str, sue_str, e2, a23_str, m_420, hour7am)
+        row0 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_360, hour6am)
+        row1 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_420, hour7am)
+        row2 = (s_dir, file, br3_ex3_str, e1, sue_str, a23_str, m_360, hour6am)
+        row3 = (s_dir, file, br3_ex3_str, e1, sue_str, a23_str, m_420, hour7am)
+        row4 = (s_dir, file, br3_ex3_str, e2, sue_str, a23_str, m_420, hour7am)
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0

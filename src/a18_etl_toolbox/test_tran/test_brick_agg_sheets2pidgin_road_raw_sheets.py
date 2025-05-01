@@ -35,16 +35,16 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     x_brick_dir = get_module_temp_dir()
     br00117_file_path = create_path(x_brick_dir, "br00117.xlsx")
     br00117_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
         otx_road_str(),
         inx_road_str(),
     ]
-    sue0 = [sue_str, event7, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event7, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue0 = [event7, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event7, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
     upsert_sheet(br00117_file_path, brick_agg_str(), br00117_df)
@@ -62,8 +62,8 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     assert list(gen_road_df.columns) == road_raw_columns
     assert len(gen_road_df) == 2
     bx = "br00117"
-    e1_road0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
-    e1_road1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
+    e1_road0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
+    e1_road1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
     assert len(gen_road_df) == len(e1_road_df)
@@ -92,8 +92,8 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFil
     x_brick_dir = get_module_temp_dir()
     br00117_file_path = create_path(x_brick_dir, "br00117.xlsx")
     br00117_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -102,19 +102,19 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFil
     ]
     br00045_file_path = create_path(x_brick_dir, "br00045.xlsx")
     br00045_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
     upsert_sheet(br00117_file_path, brick_agg_str(), br00117_df)
@@ -137,11 +137,11 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFil
     assert len(gen_road_df) == 5
     b3 = "br00117"
     b4 = "br00045"
-    e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_road5 = [b4, yao_str, event7, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_road0 = [b3, sue_str, event1, yao_str, yao_inx, None, None, None]
-    e1_road1 = [b3, sue_str, event1, bob_str, bob_inx, None, None, None]
+    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_road5 = [b4, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_road0 = [b3, event1, sue_str, yao_str, yao_inx, None, None, None]
+    e1_road1 = [b3, event1, sue_str, bob_str, bob_inx, None, None, None]
 
     e1_road_rows = [e1_road3, e1_road4, e1_road5, e1_road0, e1_road1]
     e1_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
@@ -170,8 +170,8 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events
     x_brick_dir = get_module_temp_dir()
     br00117_file_path = create_path(x_brick_dir, "br00117.xlsx")
     br00117_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -180,19 +180,19 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events
     ]
     br00045_file_path = create_path(x_brick_dir, "br00045.xlsx")
     br00045_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
     upsert_sheet(br00117_file_path, brick_agg_str(), br00117_df)
@@ -215,8 +215,8 @@ def test_etl_brick_agg_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events
     assert len(gen_road_df) == 2
     b3 = "br00117"
     b4 = "br00045"
-    e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
     e1_road_rows = [e1_road3, e1_road4]
     e1_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
     assert len(gen_road_df) == len(e1_road_df)

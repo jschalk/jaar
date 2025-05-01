@@ -91,9 +91,6 @@ def create_pidginheartunit(
     face_name: str, event_int: int, otx_bridge: str, inx_bridge: str, unknown_word: str
 ) -> PidginHeartUnit:
     x_pidginheartunit = pidginheartunit_shop(face_name, event_int)
-    print(f"{otx_bridge=} {type(otx_bridge)=}")
-    print(f"{inx_bridge=} {type(inx_bridge)=}")
-    print(f"{unknown_word=} {type(unknown_word)=}")
     x_pidginheartunit.add_otx_bridge(otx_bridge)
     x_pidginheartunit.add_inx_bridge(inx_bridge)
     x_pidginheartunit.add_unknown_word(unknown_word)
@@ -225,8 +222,8 @@ class PidginBodyBook:
                 x_pidginheartrow = x_pidginheartunit.get_valid_pidginheartrow()
 
                 x_pidginbodylist = [
-                    x_pidginbodyunit.face_name,
                     x_pidginbodyunit.event_int,
+                    x_pidginbodyunit.face_name,
                     x_pidginbodyunit.otx_str,
                     min(x_pidginbodyunit.inx_strs),
                     x_pidginheartrow.otx_bridge,
@@ -292,8 +289,8 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
 
 class PidginPrimeColumns:
     def __init__(self):
-        f1_columns = ["face_name", "event_int"]
-        f2_cols = ["idea_number", "face_name", "event_int"]
+        f1_columns = ["event_int", "face_name"]
+        f2_cols = ["idea_number", "event_int", "face_name"]
         back_cols = ["otx_bridge", "inx_bridge", "unknown_word"]
         self.pidgin_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
         self.pidgin_label_agg_columns = [

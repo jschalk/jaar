@@ -516,14 +516,14 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     validsheet_str = "ValidSheet"
     invalidsheet_str = "InvalidSheet"
     ws1.title = validsheet_str
-    ws1.append(["face_name", "event_int", "other"])
+    ws1.append(["event_int", "face_name", "other"])
     for _ in range(5):
-        ws1.append([yao_str, event3, "value4"])
+        ws1.append([event3, yao_str, "value4"])
 
     ws2 = workbook.create_sheet(title=invalidsheet_str)
     ws2.append(["wrong", "headers", "data"])
     for _ in range(5):
-        ws2.append([yao_str, event3, "value3"])
+        ws2.append([event3, yao_str, "value3"])
 
     workbook.save(excel_path)
     bob_str = "Bob"
@@ -531,12 +531,12 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     workbook = openpyxl_load_workbook(excel_path)
     ws1 = workbook[validsheet_str]
     for row in range(2, ws1.max_row + 1):
-        assert ws1.cell(row=row, column=1).value != bob_str
-        assert ws1.cell(row=row, column=2).value != event7
+        assert ws1.cell(row=row, column=1).value != event7
+        assert ws1.cell(row=row, column=2).value != bob_str
     ws2 = workbook[invalidsheet_str]
     for row in range(2, ws2.max_row + 1):
-        assert ws2.cell(row=row, column=1).value == yao_str
-        assert ws2.cell(row=row, column=2).value == event3
+        assert ws2.cell(row=row, column=1).value == event3
+        assert ws2.cell(row=row, column=2).value == yao_str
 
     # WHEN: We update the workbook
     update_all_face_name_event_int_columns(excel_path, bob_str, event7)
@@ -545,12 +545,12 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     workbook = openpyxl_load_workbook(excel_path)
     ws1 = workbook[validsheet_str]
     for row in range(2, ws1.max_row + 1):
-        assert ws1.cell(row=row, column=1).value == bob_str
-        assert ws1.cell(row=row, column=2).value == event7
+        assert ws1.cell(row=row, column=1).value == event7
+        assert ws1.cell(row=row, column=2).value == bob_str
     ws2 = workbook["InvalidSheet"]
     for row in range(2, ws2.max_row + 1):
-        assert ws2.cell(row=row, column=1).value == yao_str
-        assert ws2.cell(row=row, column=2).value == event3
+        assert ws2.cell(row=row, column=1).value == event3
+        assert ws2.cell(row=row, column=2).value == yao_str
 
 
 def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(

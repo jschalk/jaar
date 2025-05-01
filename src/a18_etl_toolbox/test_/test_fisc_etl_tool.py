@@ -130,7 +130,7 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.week_raw_columns == get_default_sorted_list(week_raw_args)
     assert fisc_cols.offi_raw_columns == get_default_sorted_list(offi_raw_args)
 
-    # unit_raw_csv_header = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}"""
+    # unit_raw_csv_header = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}"""
     unit_raw_csv_header = ",".join(fisc_cols.unit_raw_columns)
     deal_raw_csv_header = ",".join(fisc_cols.deal_raw_columns)
     cash_raw_csv_header = ",".join(fisc_cols.cash_raw_columns)
@@ -208,23 +208,23 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_raw(
     # THEN
     raw_str = "raw"
     xp = FiscPrimeObjsRef(x_dir)
-    fiscunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=raw_str)
-    fiscdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=raw_str)
-    fisccash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=raw_str)
-    fischour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=raw_str)
-    fiscmont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=raw_str)
-    fiscweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=raw_str)
-    fiscoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=raw_str)
+    fisunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=raw_str)
+    fisdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=raw_str)
+    fiscash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=raw_str)
+    fishour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=raw_str)
+    fismont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=raw_str)
+    fisweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=raw_str)
+    fisoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=raw_str)
 
     expected_cols = FiscPrimeColumnsRef()
-    print(f"{list(fiscunit_df.columns)=}")
-    assert list(fiscunit_df.columns) == expected_cols.unit_raw_columns
-    assert list(fiscdeal_df.columns) == expected_cols.deal_raw_columns
-    assert list(fisccash_df.columns) == expected_cols.cash_raw_columns
-    assert list(fischour_df.columns) == expected_cols.hour_raw_columns
-    assert list(fiscmont_df.columns) == expected_cols.mont_raw_columns
-    assert list(fiscweek_df.columns) == expected_cols.week_raw_columns
-    assert list(fiscoffi_df.columns) == expected_cols.offi_raw_columns
+    print(f"{list(fisunit_df.columns)=}")
+    assert list(fisunit_df.columns) == expected_cols.unit_raw_columns
+    assert list(fisdeal_df.columns) == expected_cols.deal_raw_columns
+    assert list(fiscash_df.columns) == expected_cols.cash_raw_columns
+    assert list(fishour_df.columns) == expected_cols.hour_raw_columns
+    assert list(fismont_df.columns) == expected_cols.mont_raw_columns
+    assert list(fisweek_df.columns) == expected_cols.week_raw_columns
+    assert list(fisoffi_df.columns) == expected_cols.offi_raw_columns
 
 
 def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
@@ -263,20 +263,20 @@ def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanu
     # THEN
     agg_str = "agg"
     xp = FiscPrimeObjsRef(x_dir)
-    fiscunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=agg_str)
-    fiscdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=agg_str)
-    fisccash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=agg_str)
-    fischour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=agg_str)
-    fiscmont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=agg_str)
-    fiscweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=agg_str)
-    fiscoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=agg_str)
+    fisunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=agg_str)
+    fisdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=agg_str)
+    fiscash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=agg_str)
+    fishour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=agg_str)
+    fismont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=agg_str)
+    fisweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=agg_str)
+    fisoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=agg_str)
 
     expected_cols = FiscPrimeColumnsRef()
-    print(f"{list(fiscunit_df.columns)=}")
-    assert list(fiscunit_df.columns) == expected_cols.unit_agg_columns
-    assert list(fiscdeal_df.columns) == expected_cols.deal_agg_columns
-    assert list(fisccash_df.columns) == expected_cols.cash_agg_columns
-    assert list(fischour_df.columns) == expected_cols.hour_agg_columns
-    assert list(fiscmont_df.columns) == expected_cols.mont_agg_columns
-    assert list(fiscweek_df.columns) == expected_cols.week_agg_columns
-    assert list(fiscoffi_df.columns) == expected_cols.offi_agg_columns
+    print(f"{list(fisunit_df.columns)=}")
+    assert list(fisunit_df.columns) == expected_cols.unit_agg_columns
+    assert list(fisdeal_df.columns) == expected_cols.deal_agg_columns
+    assert list(fiscash_df.columns) == expected_cols.cash_agg_columns
+    assert list(fishour_df.columns) == expected_cols.hour_agg_columns
+    assert list(fismont_df.columns) == expected_cols.mont_agg_columns
+    assert list(fisweek_df.columns) == expected_cols.week_agg_columns
+    assert list(fisoffi_df.columns) == expected_cols.offi_agg_columns

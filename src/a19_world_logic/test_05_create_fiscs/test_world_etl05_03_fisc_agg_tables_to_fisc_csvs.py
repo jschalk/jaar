@@ -30,11 +30,11 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateRawFiles(
     fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+{event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz", worlds_dir())
@@ -55,8 +55,8 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateRawFiles(
         generated_fiscunit_csv = open_file(fisc_objs.unit_raw_csv_path)
         fisc_cols = FiscPrimeColumnsRef()
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_raw_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord23_str},,,,,,,,,,
+{br00011_str},{event7},{sue_inx},{accord45_str},,,,,,,,,,
 """
         print(f"   {expected_fiscunit_csv_str=}")
         assert generated_fiscunit_csv == expected_fiscunit_csv_str
@@ -78,11 +78,11 @@ def test_WorldUnit_inz_faces_ideas_to_fisc_mstr_csvs_CreateAggFiles(
     fizz_world = worldunit_shop("fizz", worlds_dir())
     sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+{event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz", worlds_dir())

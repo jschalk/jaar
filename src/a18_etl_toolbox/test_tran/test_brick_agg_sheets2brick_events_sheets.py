@@ -31,15 +31,15 @@ def test_etl_brick_agg_db_to_brick_agg_events_db_PopulatesTables_Scenario0():
     hour7am = "7am"
     agg_br00003_tablename = f"{brick_agg_str()}_br00003"
     agg_br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     agg_br00003_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         fisc_tag_str(): "TEXT",
         cumlative_minute_str(): "TEXT",
         hour_tag_str(): "TEXT",
@@ -50,18 +50,18 @@ def test_etl_brick_agg_db_to_brick_agg_events_db_PopulatesTables_Scenario0():
             cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
         )
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {cumlative_minute_str()}
 , {hour_tag_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{a23_str}', '{minute_360}', '{hour6am}')
-, ('{sue_str}', '{event1}', '{a23_str}', '{minute_420}', '{hour7am}')
-, ('{yao_str}', '{event3}', '{a23_str}', '{minute_420}', '{hour7am}')
-, ('{yao_str}', '{event9}', '{a23_str}', '{minute_420}', '{hour7am}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event3}', '{yao_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event9}', '{yao_str}', '{a23_str}', '{minute_420}', '{hour7am}')
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -85,14 +85,14 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {brick_events_tablename} 
-ORDER BY {face_name_str()}, {event_int_str()};"""
+ORDER BY {event_int_str()}, {face_name_str()};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 3
-        sue_r = ("br00003", sue_str, event1, None)
-        yao3_r = ("br00003", yao_str, event3, None)
-        yao9_r = ("br00003", yao_str, event9, None)
+        sue_r = ("br00003", event1, sue_str, None)
+        yao3_r = ("br00003", event3, yao_str, None)
+        yao9_r = ("br00003", event9, yao_str, None)
         print(f"{rows[0]=}")
         assert rows[0] == sue_r
         assert rows[1] == yao3_r
@@ -114,15 +114,15 @@ def test_etl_brick_agg_db_to_brick_agg_events_db_PopulatesTables_Scenario1():
     hour7am = "7am"
     agg_br00003_tablename = f"{brick_agg_str()}_br00003"
     agg_br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     agg_br00003_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         fisc_tag_str(): "TEXT",
         cumlative_minute_str(): "TEXT",
         hour_tag_str(): "TEXT",
@@ -133,19 +133,19 @@ def test_etl_brick_agg_db_to_brick_agg_events_db_PopulatesTables_Scenario1():
             cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
         )
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {cumlative_minute_str()}
 , {hour_tag_str()}
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', "{a23_str}", '{hour6am}', '{minute_360}')
-, ('{sue_str}', '{event1}', "{a23_str}", '{hour7am}', '{minute_420}')
-, ('{yao_str}', '{event1}', "{a23_str}", '{hour7am}', '{minute_420}')
-, ('{yao_str}', '{event9}', "{a23_str}", '{hour7am}', '{minute_420}')
-, ('{bob_str}', '{event3}', "{a23_str}", '{hour7am}', '{minute_420}')
+  ('{event1}', '{sue_str}', "{a23_str}", '{hour6am}', '{minute_360}')
+, ('{event1}', '{sue_str}', "{a23_str}", '{hour7am}', '{minute_420}')
+, ('{event1}', '{yao_str}', "{a23_str}", '{hour7am}', '{minute_420}')
+, ('{event9}', '{yao_str}', "{a23_str}", '{hour7am}', '{minute_420}')
+, ('{event3}', '{bob_str}', "{a23_str}", '{hour7am}', '{minute_420}')
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -163,20 +163,20 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {brick_events_tablename} 
-ORDER BY {face_name_str()}, {event_int_str()};"""
+ORDER BY {event_int_str()}, {face_name_str()};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 4
         invalid_str = "invalid because of conflicting event_int"
-        bob_row = ("br00003", bob_str, event3, None)
-        sue_row = ("br00003", sue_str, event1, invalid_str)
-        yao1_row = ("br00003", yao_str, event1, invalid_str)
-        yao9_row = ("br00003", yao_str, event9, None)
+        bob_row = ("br00003", event3, bob_str, None)
+        sue_row = ("br00003", event1, sue_str, invalid_str)
+        yao1_row = ("br00003", event1, yao_str, invalid_str)
+        yao9_row = ("br00003", event9, yao_str, None)
 
-        assert rows[0] == bob_row
-        assert rows[1] == sue_row
-        assert rows[2] == yao1_row
+        assert rows[0] == sue_row
+        assert rows[1] == yao1_row
+        assert rows[2] == bob_row
         assert rows[3] == yao9_row
 
 
@@ -191,21 +191,21 @@ def test_etl_brick_agg_events_db_to_brick_valid_events_db_PopulatesTables_Scenar
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         agg_events_tablename = "brick_agg_events"
-        agg_events_columns = ["idea_number", "face_name", "event_int", "error_message"]
+        agg_events_columns = ["idea_number", "event_int", "face_name", "error_message"]
         create_idea_sorted_table(cursor, agg_events_tablename, agg_events_columns)
         insert_into_clause = f"""INSERT INTO {agg_events_tablename} (
   {idea_number_str()}
-, {face_name_str()}
 , {event_int_str()}
+, {face_name_str()}
 , error_message
 )"""
         invalid_str = "invalid because of conflicting event_int"
         values_clause = f"""
 VALUES
-  ('br00003', '{bob_str}', '{event3}', NULL)
-, ('br00003', '{sue_str}', '{event1}', '{invalid_str}')
-, ('br00003', '{yao_str}', '{event1}', '{invalid_str}')
-, ('br00003', '{yao_str}', '{event9}', NULL)  
+  ('br00003', {event3}, '{bob_str}', NULL)
+, ('br00003', {event1}, '{sue_str}', '{invalid_str}')
+, ('br00003', {event1}, '{yao_str}', '{invalid_str}')
+, ('br00003', {event9}, '{yao_str}', NULL)  
 ;
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -223,13 +223,13 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {valid_events_tablename} 
-ORDER BY {face_name_str()}, {event_int_str()};"""
+ORDER BY {event_int_str()}, {face_name_str()};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 2
-        bob_row = (bob_str, event3)
-        yao9_row = (yao_str, event9)
+        bob_row = (event3, bob_str)
+        yao9_row = (event9, yao_str)
 
         assert rows[0] == bob_row
         assert rows[1] == yao9_row
@@ -245,8 +245,8 @@ def test_etl_brick_agg_events_db_to_event_dict_ReturnsObj_Scenario0():
     event9 = 9
     agg_columns = [face_name_str(), event_int_str(), "error_message"]
     agg_types = {
+        event_int_str(): "INTEGER",
         face_name_str(): "TEXT",
-        event_int_str(): "TEXT",
         "error_message": "TEXT",
     }
     with sqlite3_connect(":memory:") as db_conn:
@@ -254,14 +254,14 @@ def test_etl_brick_agg_events_db_to_event_dict_ReturnsObj_Scenario0():
         agg_events_tablename = "brick_agg_events"
         create_table_from_columns(cursor, agg_events_tablename, agg_columns, agg_types)
         insert_into_clause = f"""
-INSERT INTO {agg_events_tablename} ({face_name_str()}, {event_int_str()}, error_message)
+INSERT INTO {agg_events_tablename} ({event_int_str()}, {face_name_str()}, error_message)
 VALUES     
-  ('{bob_str}', '{event3}', NULL)
-, ('{sue_str}', '{event1}', 'invalid because of conflicting event_int')
-, ('{yao_str}', '{event1}', 'invalid because of conflicting event_int')
-, ('{yao_str}', '{event9}', NULL)
-, ('{yao_str}', '{event9}', NULL)
-, ('{yao_str}', '{event9}', NULL)
+  ('{event3}', '{bob_str}', NULL)
+, ('{event1}', '{sue_str}', 'invalid because of conflicting event_int')
+, ('{event1}', '{yao_str}', 'invalid because of conflicting event_int')
+, ('{event9}', '{yao_str}', NULL)
+, ('{event9}', '{yao_str}', NULL)
+, ('{event9}', '{yao_str}', NULL)
 ;
 """
         cursor.execute(insert_into_clause)

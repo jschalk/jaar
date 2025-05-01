@@ -100,8 +100,8 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -219,8 +219,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_bud_acctunit_v0_0_0()
         "owner_name": {"otx_key": True},
     }
     headers_list = format_00001_idearef.get_headers_list()
-    assert headers_list[0] == face_name_str()
-    assert headers_list[1] == event_int_str()
+    assert headers_list[0] == event_int_str()
+    assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
@@ -238,8 +238,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_bud_acct_membership_v
     # THEN
     assert len(format_00021_idearef._attributes) == 8
     headers_list = format_00021_idearef.get_headers_list()
-    assert headers_list[0] == face_name_str()
-    assert headers_list[1] == event_int_str()
+    assert headers_list[0] == event_int_str()
+    assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
@@ -258,8 +258,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_itemunit_v0_0_0():
     # THEN
     assert len(format_00003_idearef._attributes) == 8
     headers_list = format_00003_idearef.get_headers_list()
-    assert headers_list[0] == face_name_str()
-    assert headers_list[1] == event_int_str()
+    assert headers_list[0] == event_int_str()
+    assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()
@@ -278,8 +278,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_itemunit_v0_0_0():
     # THEN
     assert len(format_00019_idearef._attributes) == 14
     headers_list = format_00019_idearef.get_headers_list()
-    assert headers_list[0] == face_name_str()
-    assert headers_list[1] == event_int_str()
+    assert headers_list[0] == event_int_str()
+    assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == parent_road_str()

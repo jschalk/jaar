@@ -29,17 +29,17 @@ def test_WorldUnit_brick_agg_non_pidgin_ideas_to_brick_valid_CreatesSheets_Scena
     hour6am = "6am"
     hour7am = "7am"
     br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
-    row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row1 = [event1, sue_str, accord23_str, hour6am, minute_360]
+    row2 = [event1, sue_str, accord23_str, hour7am, minute_420]
+    row3 = [event3, yao_str, accord23_str, hour7am, minute_420]
+    row4 = [event9, yao_str, accord23_str, hour7am, minute_420]
     fizz_world = worldunit_shop("fizz", worlds_dir())
     fizz_world.set_event(event1, sue_str)
     fizz_world.set_event(event9, yao_str)
@@ -96,11 +96,11 @@ def test_WorldUnit_brick_agg_non_pidgin_ideas_to_brick_valid_CreatesSheets_Scena
 #         cumlative_minute_str(),
 #     ]
 #     accord23_str = "accord23"
-#     row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
-#     row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
-#     row3 = [yao_str, event1, accord23_str, hour7am, minute_420]
-#     row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
-#     row5 = [bob_str, event3, accord23_str, hour7am, minute_420]
+#     row1 = [event1, sue_str, accord23_str, hour6am, minute_360]
+#     row2 = [event1, sue_str, accord23_str, hour7am, minute_420]
+#     row3 = [event1, yao_str, accord23_str, hour7am, minute_420]
+#     row4 = [event9, yao_str, accord23_str, hour7am, minute_420]
+#     row5 = [event3, bob_str, accord23_str, hour7am, minute_420]
 #     df1 = DataFrame([row1, row2, row3, row4, row5], columns=idea_columns)
 #     upsert_sheet(mud_file_path, "example1_br00003", df1)
 #     etl_brick_raw_db_to_brick_agg_df(brick_dir)
@@ -112,10 +112,10 @@ def test_WorldUnit_brick_agg_non_pidgin_ideas_to_brick_valid_CreatesSheets_Scena
 #     gen_otx_events_df = pandas_read_excel(brick_file_path, sheet_name="brick_valid")
 #     print(f"{gen_otx_events_df.columns=}")
 #     events_otx_columns = [face_name_str(), event_int_str(), "error_message"]
-#     bob_row = [bob_str, event3, ""]
-#     sue_row = [sue_str, event1, "invalid because of conflicting event_int"]
-#     yao1_row = [yao_str, event1, "invalid because of conflicting event_int"]
-#     yao9_row = [yao_str, event9, ""]
+#     bob_row = [event3, bob_str, ""]
+#     sue_row = [event1, sue_str, "invalid because of conflicting event_int"]
+#     yao1_row = [event1, yao_str, "invalid because of conflicting event_int"]
+#     yao9_row = [event9, yao_str, ""]
 #     events_rows = [bob_row, sue_row, yao1_row, yao9_row]
 #     ex_otx_events_df = DataFrame(events_rows, columns=events_otx_columns)
 #     assert len(gen_otx_events_df.columns) == len(ex_otx_events_df.columns)

@@ -74,12 +74,12 @@ def test_etl_idea_raw_to_bud_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
     sue_inz_dir = create_path(x_syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+{event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     with sqlite3_connect(":memory:") as conn:
@@ -105,8 +105,8 @@ def test_etl_idea_raw_to_bud_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         budunit_db_rows = cursor.fetchall()
         expected_row1 = (
             br00011_str,
-            sue_inx,
             event3,
+            sue_inx,
             accord23_str,  # fisc_tag,
             bob_inx,  # owner_name,
             None,  # credor_respect,
@@ -121,8 +121,8 @@ def test_etl_idea_raw_to_bud_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         )
         expected_row2 = (
             br00011_str,
-            sue_inx,
             event3,
+            sue_inx,
             accord23_str,  # fisc_tag,
             yao_inx,  # owner_name,
             None,  # credor_respect,
@@ -137,8 +137,8 @@ def test_etl_idea_raw_to_bud_prime_tables_Bud_dimen_idea_PopulatesFiscRawTables(
         )
         expected_row3 = (
             br00011_str,
-            sue_inx,
             event7,
+            sue_inx,
             accord23_str,  # fisc_tag,
             yao_inx,  # owner_name,
             None,  # credor_respect,
@@ -173,13 +173,13 @@ def test_etl_idea_raw_to_bud_prime_tables_Sets_error_message(env_dir_setup_clean
         x_tablename = f"{bud_acctunit_str()}_put_raw"
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
-INSERT INTO {x_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
+INSERT INTO {x_tablename} ({idea_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
 VALUES
-  ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
-, ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL)
-, ('br00021','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
-, ('br00021','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
-, ('br00021','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief7},NULL)
+  ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
+, ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL)
+, ('br00021',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
+, ('br00021',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
+, ('br00021',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief7},NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")

@@ -29,18 +29,18 @@ def test_etl_otz_face_ideas_to_otz_event_otx_ideas_CreatesFaceIdeaSheets_Scenari
     hour6am = "6am"
     hour7am = "7am"
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    sue0 = [sue_str, event3, accord23_str, hour6am, minute_360]
-    sue1 = [sue_str, event3, accord23_str, hour7am, minute_420]
-    zia0 = [zia_str, event7, accord23_str, hour7am, minute_420]
-    zia1 = [zia_str, event9, accord23_str, hour6am, minute_360]
-    zia2 = [zia_str, event9, accord23_str, hour7am, minute_420]
+    sue0 = [event3, sue_str, accord23_str, hour6am, minute_360]
+    sue1 = [event3, sue_str, accord23_str, hour7am, minute_420]
+    zia0 = [event7, zia_str, accord23_str, hour7am, minute_420]
+    zia1 = [event9, zia_str, accord23_str, hour6am, minute_360]
+    zia2 = [event9, zia_str, accord23_str, hour7am, minute_420]
     example_sue_df = DataFrame([sue0, sue1], columns=idea_columns)
     example_zia_df = DataFrame([zia0, zia1, zia2], columns=idea_columns)
     x_etl_dir = get_module_temp_dir()

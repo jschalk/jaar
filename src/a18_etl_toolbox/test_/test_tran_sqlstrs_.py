@@ -78,7 +78,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_insert_del_agg_from_raw_sqlstrs,
     get_fisc_insert_agg_from_raw_sqlstrs,
     get_pidgin_insert_agg_from_raw_sqlstrs,
-    FISCUNIT_AGG_INSERT_SQLSTR,
+    FISUNIT_AGG_INSERT_SQLSTR,
     IDEA_STAGEBLE_PUT_DIMENS,
     IDEA_STAGEBLE_DEL_DIMENS,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -138,6 +138,28 @@ def abbv(tablename: str) -> str:
     return abbrevions.get(tablename)
 
 
+def short_abbv(dimen: str) -> str:
+    return {
+        "fisc_cashbook": "FISCASH",
+        "fisc_dealunit": "FISDEAL",
+        "fisc_timeline_hour": "FISHOUR",
+        "fisc_timeline_month": "FISMONT",
+        "fisc_timeline_weekday": "FISWEEK",
+        "fisc_timeoffi": "FISOFFI",
+        "fiscunit": "FISUNIT",
+        "bud_acct_membership": "BUDMEMB",
+        "bud_acctunit": "BUDACCT",
+        "bud_item_awardlink": "BUDAWAR",
+        "bud_item_factunit": "BUDFACT",
+        "bud_item_healerlink": "BUDHEAL",
+        "bud_item_reason_premiseunit": "BUDPREM",
+        "bud_item_reasonunit": "BUDREAS",
+        "bud_item_teamlink": "BUDTEAM",
+        "bud_itemunit": "BUDITEM",
+        "budunit": "BUDUNIT",
+    }.get(dimen)
+
+
 def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
@@ -153,6 +175,7 @@ def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
     sqlite_types = get_idea_sqlite_types()
     for x_dimen in idea_config:
         # print(f"{x_dimen} checking...")
+        abbv7 = short_abbv(x_dimen)
         x_config = idea_config.get(x_dimen)
 
         ag_table = f"{x_dimen}_agg"
@@ -162,7 +185,7 @@ def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
         ag_cols.remove(event_int_str())
         ag_cols.remove(face_name_str())
         ag_cols = get_default_sorted_list(ag_cols)
-        print(f"{ag_cols=}")
+        # print(f"{ag_cols=}")
         gen_dimen_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
         assert ag_sqlstr == gen_dimen_agg_sqlstr
 
@@ -176,8 +199,8 @@ def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
         gen_dimen_raw_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
         assert st_sqlstr == gen_dimen_raw_sqlstr
 
-        # print(f'CREATE_{ag_table.upper()}_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
-        # print(f'CREATE_{st_table.upper()}_SQLSTR= """{gen_dimen_raw_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_AGG_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_RAW_SQLSTR= """{gen_dimen_raw_sqlstr}"""')
         # print(f'"{ag_table}": {ag_table.upper()}_SQLSTR,')
         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
 
@@ -204,7 +227,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         ag_put_cols.update(set(x_config.get("jvalues").keys()))
         ag_put_cols = get_default_sorted_list(ag_put_cols)
         ex_ag_put_sqlstr = get_create_table_sqlstr(ag_put_table, ag_put_cols, s_types)
-        print(f"{ex_ag_put_sqlstr=}")
+        # print(f"{ex_ag_put_sqlstr=}")
         assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
 
         st_put_table = f"{x_dimen}_put_raw"
@@ -214,7 +237,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         st_put_cols.add("error_message")
         st_put_cols = get_default_sorted_list(st_put_cols)
         ex_st_put_sqlstr = get_create_table_sqlstr(st_put_table, st_put_cols, s_types)
-        print(f"{ex_st_put_sqlstr=}")
+        # print(f"{ex_st_put_sqlstr=}")
         assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
 
         ag_del_table = f"{x_dimen}_del_agg"
@@ -466,8 +489,8 @@ def test_get_pidgin_inconsistency_sqlstrs_ReturnsObj():
 
     exclude_cols = {
         idea_number_str(),
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         "error_message",
     }
     with sqlite3_connect(":memory:") as conn:
@@ -508,8 +531,8 @@ def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
 
     exclude_cols = {
         idea_number_str(),
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         "error_message",
     }
     with sqlite3_connect(":memory:") as conn:
@@ -580,8 +603,8 @@ def test_get_fisc_update_inconsist_error_message_sqlstrs_ReturnsObj():
 
     exclude_cols = {
         idea_number_str(),
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         "error_message",
     }
     with sqlite3_connect(":memory:") as conn:
@@ -624,8 +647,8 @@ def test_get_pidgin_update_inconsist_error_message_sqlstrs_ReturnsObj():
 
     exclude_cols = {
         idea_number_str(),
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         "error_message",
     }
     with sqlite3_connect(":memory:") as conn:
@@ -679,13 +702,14 @@ def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
             generated_dimen_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
+            abbv7 = short_abbv(x_dimen)
             print(
-                f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
+                f"""{abbv7.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
             )
-            print(
-                f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
-            )
-            print(f"""            {x_sqlstr=}""")
+            # print(
+            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            # )
+            # print(f"""            {x_sqlstr=}""")
             assert x_sqlstr == generated_dimen_sqlstr
 
 
@@ -698,8 +722,8 @@ def test_get_fisc_insert_agg_from_raw_sqlstrs_ReturnsObj():
     assert set(fisc_insert_agg_sqlstrs.keys()) == get_fisc_dimens()
     x_exclude_cols = {
         idea_number_str(),
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         "error_message",
     }
     idea_config = get_idea_config_dict()
@@ -745,7 +769,7 @@ def test_get_fisc_insert_agg_from_raw_sqlstrs_ReturnsObj():
             focus_cols=[fisc_tag_str()],
             exclude_cols=x_exclude_cols,
         )
-        assert FISCUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
+        assert FISUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
         columns_header = f"""{fisc_tag_str()}, {timeline_tag_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, job_listen_rotations"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
@@ -755,7 +779,7 @@ WHERE error_message IS NULL
 GROUP BY {fisc_tag_str()}
 ;
 """
-        assert FISCUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
+        assert FISUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
 
     assert len(idea_config) == len(fisc_insert_agg_sqlstrs)
 
@@ -769,8 +793,8 @@ def test_get_pidgin_insert_agg_from_raw_sqlstrs_ReturnsObj():
     assert set(pidgin_insert_agg_sqlstrs.keys()) == get_pidgin_dimens()
     x_exclude_cols = {
         idea_number_str(),
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         "error_message",
     }
     idea_config = get_idea_config_dict()
@@ -1151,36 +1175,36 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_tag=a23_str)
 
     # THEN
-    gen_fisccash_sqlstr = fu1_select_sqlstrs.get(fisc_cashbook_str())
-    gen_fiscdeal_sqlstr = fu1_select_sqlstrs.get(fisc_dealunit_str())
-    gen_fischour_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_hour_str())
-    gen_fiscmont_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_month_str())
-    gen_fiscweek_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_weekday_str())
-    gen_fiscoffi_sqlstr = fu1_select_sqlstrs.get(fisc_timeoffi_str())
-    gen_fiscunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str())
+    gen_fiscash_sqlstr = fu1_select_sqlstrs.get(fisc_cashbook_str())
+    gen_fisdeal_sqlstr = fu1_select_sqlstrs.get(fisc_dealunit_str())
+    gen_fishour_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_hour_str())
+    gen_fismont_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_month_str())
+    gen_fisweek_sqlstr = fu1_select_sqlstrs.get(fisc_timeline_weekday_str())
+    gen_fisoffi_sqlstr = fu1_select_sqlstrs.get(fisc_timeoffi_str())
+    gen_fisunit_sqlstr = fu1_select_sqlstrs.get(fiscunit_str())
     with sqlite3_connect(":memory:") as fisc_db_conn:
         cursor = fisc_db_conn.cursor()
         create_fisc_prime_tables(cursor)
-        fisccash_agg = f"{fisc_cashbook_str()}_agg"
-        fiscdeal_agg = f"{fisc_dealunit_str()}_agg"
-        fischour_agg = f"{fisc_timeline_hour_str()}_agg"
-        fiscmont_agg = f"{fisc_timeline_month_str()}_agg"
-        fiscweek_agg = f"{fisc_timeline_weekday_str()}_agg"
-        fiscoffi_agg = f"{fisc_timeoffi_str()}_agg"
+        fiscash_agg = f"{fisc_cashbook_str()}_agg"
+        fisdeal_agg = f"{fisc_dealunit_str()}_agg"
+        fishour_agg = f"{fisc_timeline_hour_str()}_agg"
+        fismont_agg = f"{fisc_timeline_month_str()}_agg"
+        fisweek_agg = f"{fisc_timeline_weekday_str()}_agg"
+        fisoffi_agg = f"{fisc_timeoffi_str()}_agg"
         fiscunit_agg = f"{fiscunit_str()}_agg"
         where_dict = {fisc_tag_str(): a23_str}
-        fisccash_sql = create_select_query(cursor, fisccash_agg, [], where_dict, True)
-        fiscdeal_sql = create_select_query(cursor, fiscdeal_agg, [], where_dict, True)
-        fischour_sql = create_select_query(cursor, fischour_agg, [], where_dict, True)
-        fiscmont_sql = create_select_query(cursor, fiscmont_agg, [], where_dict, True)
-        fiscweek_sql = create_select_query(cursor, fiscweek_agg, [], where_dict, True)
-        fiscoffi_sql = create_select_query(cursor, fiscoffi_agg, [], where_dict, True)
-        fiscunit_sql = create_select_query(cursor, fiscunit_agg, [], where_dict, True)
-        print(f"""FISCUNIT_FU1_SELECT_SQLSTR = "{fiscunit_sql}\"""")
-        assert gen_fisccash_sqlstr == fisccash_sql
-        assert gen_fiscdeal_sqlstr == fiscdeal_sql
-        assert gen_fischour_sqlstr == fischour_sql
-        assert gen_fiscmont_sqlstr == fiscmont_sql
-        assert gen_fiscweek_sqlstr == fiscweek_sql
-        assert gen_fiscoffi_sqlstr == fiscoffi_sql
-        assert gen_fiscunit_sqlstr == fiscunit_sql
+        fiscash_sql = create_select_query(cursor, fiscash_agg, [], where_dict, True)
+        fisdeal_sql = create_select_query(cursor, fisdeal_agg, [], where_dict, True)
+        fishour_sql = create_select_query(cursor, fishour_agg, [], where_dict, True)
+        fismont_sql = create_select_query(cursor, fismont_agg, [], where_dict, True)
+        fisweek_sql = create_select_query(cursor, fisweek_agg, [], where_dict, True)
+        fisoffi_sql = create_select_query(cursor, fisoffi_agg, [], where_dict, True)
+        fisunit_sql = create_select_query(cursor, fiscunit_agg, [], where_dict, True)
+        print(f"""FISUNIT_FU1_SELECT_SQLSTR = "{fisunit_sql}\"""")
+        assert gen_fiscash_sqlstr == fiscash_sql
+        assert gen_fisdeal_sqlstr == fisdeal_sql
+        assert gen_fishour_sqlstr == fishour_sql
+        assert gen_fismont_sqlstr == fismont_sql
+        assert gen_fisweek_sqlstr == fisweek_sql
+        assert gen_fisoffi_sqlstr == fisoffi_sql
+        assert gen_fisunit_sqlstr == fisunit_sql

@@ -21,16 +21,16 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     yao_inx = "Yao"
     event3 = 3
     br00011_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
     accord23_str = "accord23"
-    sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
-    sue1 = [sue_inx, event3, accord23_str, yao_inx, bob_inx]
-    sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
+    sue0 = [event3, sue_inx, accord23_str, bob_inx, bob_inx]
+    sue1 = [event3, sue_inx, accord23_str, yao_inx, bob_inx]
+    sue2 = [event3, sue_inx, accord23_str, yao_inx, yao_inx]
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"
     fizz_world = worldunit_shop("fizz", worlds_dir())
@@ -64,17 +64,17 @@ def test_otz_inx_event_ideas_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     event3 = 3
     event7 = 7
     br00011_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
     accord23_str = "accord23"
-    sue0 = [sue_inx, event3, accord23_str, bob_inx, bob_inx]
-    sue1 = [sue_inx, event3, accord23_str, yao_inx, bob_inx]
-    sue2 = [sue_inx, event3, accord23_str, yao_inx, yao_inx]
-    sue3 = [sue_inx, event7, accord23_str, yao_inx, yao_inx]
+    sue0 = [event3, sue_inx, accord23_str, bob_inx, bob_inx]
+    sue1 = [event3, sue_inx, accord23_str, yao_inx, bob_inx]
+    sue2 = [event3, sue_inx, accord23_str, yao_inx, yao_inx]
+    sue3 = [event7, sue_inx, accord23_str, yao_inx, yao_inx]
     e3_accord23_df = DataFrame([sue0, sue1, sue2], columns=br00011_columns)
     e7_accord23_df = DataFrame([sue3], columns=br00011_columns)
     br00011_filename = "br00011.xlsx"

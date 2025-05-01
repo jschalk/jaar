@@ -43,7 +43,7 @@ def create_init_stance_idea_csv_strs() -> dict[str, str]:
         idea_format_filename = get_idea_format_filename(idea_number)
         for idea_columns, idea_file_name in idea_format_headers.items():
             if idea_file_name == idea_format_filename:
-                fisc_csv_strs[idea_number] = f"face_name,event_int,{idea_columns}\n"
+                fisc_csv_strs[idea_number] = f"event_int,face_name,{idea_columns}\n"
     return fisc_csv_strs
 
 
