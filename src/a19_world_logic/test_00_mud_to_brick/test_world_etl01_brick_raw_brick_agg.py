@@ -43,7 +43,7 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_Group
     upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.mud_df_to_brick_raw_db(db_conn)
+        fizz_world.mud_dfs_to_brick_raw_tables(db_conn)
 
         # WHEN
         fizz_world.brick_raw_db_to_brick_agg_df(db_conn, cursor)
@@ -92,7 +92,7 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario1_Group
     upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        fizz_world.mud_df_to_brick_raw_db(db_conn)
+        fizz_world.mud_dfs_to_brick_raw_tables(db_conn)
         br00003_agg_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
         assert sheet_exists(br00003_agg_file_path, brick_agg_str()) is False
 

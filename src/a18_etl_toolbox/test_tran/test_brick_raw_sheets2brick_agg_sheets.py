@@ -15,8 +15,8 @@ from src.a17_idea_logic._utils.str_a17 import (
 )
 from src.a17_idea_logic.idea_db_tool import sheet_exists
 from src.a18_etl_toolbox.transformers import (
-    etl_brick_raw_db_to_brick_agg_db,
-    etl_brick_agg_db_to_brick_valid_db,
+    etl_brick_raw_tables_to_brick_agg_tables,
+    etl_brick_agg_tables_to_brick_valid_tables,
     etl_brick_agg_db_to_brick_agg_df,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -27,7 +27,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario0_GroupByWorks():
+def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_GroupByWorks():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -36,7 +36,7 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario0_GroupByWor
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    raw_br00003_tablename = f"{brick_raw_str()}_br00003"
+    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -72,12 +72,12 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
         # WHEN
-        etl_brick_raw_db_to_brick_agg_db(cursor)
+        etl_brick_raw_tables_to_brick_agg_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, agg_br00003_tablename)
@@ -109,7 +109,7 @@ ORDER BY {event_int_str()}, {cumlative_minute_str()};"""
         assert rows[1] == row1
 
 
-def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario1_GroupByOnlyNonConflictingRecords():
+def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_GroupByOnlyNonConflictingRecords():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -120,7 +120,7 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario1_GroupByOnl
     hour7am = "7am"
     hour8am = "8am"
 
-    raw_br00003_tablename = f"{brick_raw_str()}_br00003"
+    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -156,12 +156,12 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
         # WHEN
-        etl_brick_raw_db_to_brick_agg_db(cursor)
+        etl_brick_raw_tables_to_brick_agg_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, agg_br00003_tablename)
@@ -201,7 +201,7 @@ def test_etl_brick_agg_db_to_brick_agg_df_PopulatesAggTable_Scenario0_GroupByWor
     hour6am = "6am"
     hour7am = "7am"
     hour8am = "8am"
-    agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -261,7 +261,7 @@ VALUES
         assert ex_agg_df.to_csv() == agg_df.to_csv()
 
 
-def test_etl_brick_agg_db_to_brick_valid_db_PopulatesValidTable_Scenario0_Only_valid_events():
+def test_etl_brick_agg_tables_to_brick_valid_tables_PopulatesValidTable_Scenario0_Only_valid_events():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -274,7 +274,7 @@ def test_etl_brick_agg_db_to_brick_valid_db_PopulatesValidTable_Scenario0_Only_v
     hour7am = "7am"
     hour8am = "8am"
 
-    agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -314,7 +314,7 @@ VALUES
 
         valid_events_columns = [face_name_str(), event_int_str()]
         valid_events_types = {face_name_str(): "TEXT", event_int_str(): "INTEGER"}
-        valid_events_tablename = "brick_valid_events"
+        valid_events_tablename = "events_brick_valid"
         create_table_from_columns(
             cursor, valid_events_tablename, valid_events_columns, valid_events_types
         )
@@ -328,11 +328,11 @@ VALUES
         cursor.execute(insert_into_valid_events)
         assert get_row_count(cursor, valid_events_tablename) == 2
 
-        valid_br00003_tablename = f"{brick_valid_str()}_br00003"
+        valid_br00003_tablename = f"br00003_{brick_valid_str()}"
         assert not db_table_exists(cursor, valid_br00003_tablename)
 
         # WHEN
-        etl_brick_agg_db_to_brick_valid_db(cursor)
+        etl_brick_agg_tables_to_brick_valid_tables(cursor)
 
         # THEN
         assert db_table_exists(cursor, valid_br00003_tablename)

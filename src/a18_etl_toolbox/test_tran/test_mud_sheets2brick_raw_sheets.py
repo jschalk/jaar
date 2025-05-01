@@ -10,7 +10,7 @@ from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic._utils.str_a17 import brick_raw_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.transformers import (
-    etl_mud_df_to_brick_raw_db,
+    etl_mud_dfs_to_brick_raw_tables,
     etl_brick_raw_db_to_brick_raw_df,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -22,7 +22,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_mud_df_to_brick_raw_db_PopulatesBrickTables(env_dir_setup_cleanup):
+def test_etl_mud_dfs_to_brick_raw_tables_PopulatesBrickTables(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     event1 = 1
@@ -66,11 +66,11 @@ def test_etl_mud_df_to_brick_raw_db_PopulatesBrickTables(env_dir_setup_cleanup):
     upsert_sheet(mud_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{brick_raw_str()}_br00003"
+        br00003_tablename = f"br00003_{brick_raw_str()}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        etl_mud_df_to_brick_raw_db(db_conn, mud_dir)
+        etl_mud_dfs_to_brick_raw_tables(db_conn, mud_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
