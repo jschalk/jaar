@@ -20,7 +20,7 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_Group
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
-    event_1 = 1
+    event1 = 1
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -29,16 +29,16 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_Group
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event_1, accord23_str, minute_360, hour6am]
-    row2 = [sue_str, event_1, accord23_str, minute_420, hour7am]
-    row3 = [sue_str, event_1, accord23_str, minute_420, hour7am]
+    row1 = [event1, sue_str, accord23_str, minute_360, hour6am]
+    row2 = [event1, sue_str, accord23_str, minute_420, hour7am]
+    row3 = [event1, sue_str, accord23_str, minute_420, hour7am]
     df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
@@ -77,17 +77,17 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario1_Group
     ex_filename = "fizzbuzz.xlsx"
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         cumlative_minute_str(),
         hour_tag_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event3, accord23_str, minute_360, hour6am]
-    row2 = [sue_str, event3, accord23_str, minute_420, hour7am]
-    row3 = [sue_str, event3, accord23_str, minute_420, hour8am]
-    row4 = [sue_str, event7, accord23_str, minute_420, hour8am]
+    row1 = [event3, sue_str, accord23_str, minute_360, hour6am]
+    row2 = [event3, sue_str, accord23_str, minute_420, hour7am]
+    row3 = [event3, sue_str, accord23_str, minute_420, hour8am]
+    row4 = [event7, sue_str, accord23_str, minute_420, hour8am]
     df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:

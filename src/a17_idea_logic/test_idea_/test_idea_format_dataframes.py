@@ -228,7 +228,7 @@ def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """face_name,event_int,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
+    sue1_name_example_csv = """event_int,face_name,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37
@@ -245,7 +245,7 @@ def test_save_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """face_name,event_int,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
+    sue2_acct_example_csv = """event_int,face_name,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37

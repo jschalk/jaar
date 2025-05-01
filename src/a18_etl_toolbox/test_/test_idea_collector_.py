@@ -108,7 +108,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
-    event_1 = 1
+    event1 = 1
     minute_360 = 360
     minute_420 = 420
     accord23_str = "accord23"
@@ -117,14 +117,14 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         cumlative_minute_str(),
         fisc_tag_str(),
         hour_tag_str(),
     ]
-    row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
-    row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
+    row1 = [event1, sue_str, minute_360, accord23_str, hour6am]
+    row2 = [event1, sue_str, minute_420, accord23_str, hour7am]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     br00003_str = "example_br00003"
@@ -147,7 +147,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
-    event_1 = 1
+    event1 = 1
     minute_360 = 360
     minute_420 = 420
     accord23_str = "accord23"
@@ -156,22 +156,22 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         cumlative_minute_str(),
         fisc_tag_str(),
         hour_tag_str(),
     ]
-    row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
-    row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
+    row1 = [event1, sue_str, minute_360, accord23_str, hour6am]
+    row2 = [event1, sue_str, minute_420, accord23_str, hour7am]
     incomplete_idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         cumlative_minute_str(),
         fisc_tag_str(),
     ]
-    incom_row1 = [sue_str, event_1, minute_360, accord23_str]
-    incom_row2 = [sue_str, event_1, minute_420, accord23_str]
+    incom_row1 = [event1, sue_str, minute_360, accord23_str]
+    incom_row2 = [event1, sue_str, minute_420, accord23_str]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)

@@ -49,12 +49,12 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles(
     a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
-    e3_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
-{sue_inx},{event3},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
+    e3_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+{event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
-    e7_put_csv = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
-{sue_inx},{event7},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
-{sue_inx},{event7},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
+    e7_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+{event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
+{event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
     save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)

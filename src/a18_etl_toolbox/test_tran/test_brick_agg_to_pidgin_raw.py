@@ -83,8 +83,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     brick_dir = etl_dir()
     br00113_file_path = create_path(brick_dir, "br00113.xlsx")
     br00113_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -93,19 +93,19 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     ]
     br00043_file_path = create_path(brick_dir, "br00043.xlsx")
     br00043_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_name_str(),
         inx_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     br00113_rows = [sue0, sue1]
     br00113_df = DataFrame(br00113_rows, columns=br00113_columns)
     upsert_sheet(br00113_file_path, brick_agg_str(), br00113_df)
@@ -116,8 +116,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 
     br00115_file_path = create_path(brick_dir, "br00115.xlsx")
     br00115_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -126,19 +126,19 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     ]
     br00042_file_path = create_path(brick_dir, "br00042.xlsx")
     br00042_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_label_str(),
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     br00115_rows = [sue0, sue1]
     br00115_df = DataFrame(br00115_rows, columns=br00115_columns)
     upsert_sheet(br00115_file_path, brick_agg_str(), br00115_df)
@@ -148,8 +148,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 
     br00116_file_path = create_path(brick_dir, "br00116.xlsx")
     br00116_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -158,19 +158,19 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     ]
     br00044_file_path = create_path(brick_dir, "br00044.xlsx")
     br00044_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_tag_str(),
         inx_tag_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     br00116_rows = [sue0, sue1]
     br00116_df = DataFrame(br00116_rows, columns=br00116_columns)
     upsert_sheet(br00116_file_path, brick_agg_str(), br00116_df)
@@ -180,8 +180,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 
     br00117_file_path = create_path(brick_dir, "br00117.xlsx")
     br00117_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -190,19 +190,19 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     ]
     br00045_file_path = create_path(brick_dir, "br00045.xlsx")
     br00045_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    sue0 = [sue_str, event1, m_str, bob_str, yao_str, yao_str, yao_inx]
-    sue1 = [sue_str, event1, m_str, bob_str, bob_str, bob_str, bob_inx]
-    sue2 = [sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    sue3 = [sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
-    yao1 = [yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx]
+    sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
+    sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
+    sue2 = [event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    sue3 = [event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    yao1 = [event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
     b117_rows = [sue0, sue1]
     br00117_df = DataFrame(b117_rows, columns=br00117_columns)
     upsert_sheet(br00117_file_path, brick_agg_str(), br00117_df)
@@ -237,8 +237,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert len(gen_label_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
     e1_label_rows = [e1_label3, e1_label4]
     e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
     assert len(gen_label_df) == len(e1_label_df)
@@ -251,8 +251,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert len(gen_name_df) == 2
     b3 = "br00113"
     b4 = "br00043"
-    e1_name3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_name4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_name3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_name4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
     e1_name_rows = [e1_name3, e1_name4]
     e1_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
     assert len(gen_name_df) == len(e1_name_df)
@@ -262,8 +262,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 
     tag_file_columns = [
         "idea_number",
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_tag_str(),
         inx_tag_str(),
         otx_bridge_str(),
@@ -274,8 +274,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert len(gen_tag_df) == 2
     b3 = "br00116"
     b4 = "br00044"
-    e1_tag3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_tag4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_tag3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_tag4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
     e1_tag_rows = [e1_tag3, e1_tag4]
     e1_tag_df = DataFrame(e1_tag_rows, columns=tag_file_columns)
     assert len(gen_tag_df) == len(e1_tag_df)
@@ -285,8 +285,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 
     road_file_columns = [
         "idea_number",
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_road_str(),
         inx_road_str(),
         otx_bridge_str(),
@@ -297,8 +297,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert len(gen_road_df) == 2
     b3 = "br00117"
     b4 = "br00045"
-    e1_road3 = [b4, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
     e1_road_rows = [e1_road3, e1_road4]
     e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
     assert len(gen_road_df) == len(e1_road_df)
@@ -310,8 +310,8 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 def create_brick_valid_table(cursor, idea_number: str):
     if idea_number == "br00113":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             fisc_tag_str(),
             owner_name_str(),
             acct_name_str(),
@@ -320,8 +320,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00043":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             otx_name_str(),
             inx_name_str(),
             otx_bridge_str(),
@@ -330,8 +330,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00115":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             fisc_tag_str(),
             owner_name_str(),
             acct_name_str(),
@@ -340,8 +340,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00042":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             otx_label_str(),
             inx_label_str(),
             otx_bridge_str(),
@@ -350,8 +350,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00116":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             fisc_tag_str(),
             owner_name_str(),
             acct_name_str(),
@@ -360,8 +360,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00044":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             otx_tag_str(),
             inx_tag_str(),
             otx_bridge_str(),
@@ -370,8 +370,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00117":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             fisc_tag_str(),
             owner_name_str(),
             acct_name_str(),
@@ -380,8 +380,8 @@ def create_brick_valid_table(cursor, idea_number: str):
         ]
     elif idea_number == "br00045":
         x_columns = [
-            face_name_str(),
             event_int_str(),
+            face_name_str(),
             otx_road_str(),
             inx_road_str(),
             otx_bridge_str(),
@@ -412,8 +412,8 @@ def populate_brick_valid_table(cursor, idea_number: str):
     if idea_number == "br00042":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {otx_label_str()}
 , {inx_label_str()}
 , {otx_bridge_str()}
@@ -422,16 +422,16 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ('{event2}', '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event5}', '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
     elif idea_number == "br00043":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {otx_name_str()}
 , {inx_name_str()}
 , {otx_bridge_str()}
@@ -440,16 +440,16 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ('{event2}', '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event5}', '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
     elif idea_number == "br00044":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {otx_tag_str()}
 , {inx_tag_str()}
 , {otx_bridge_str()}
@@ -458,16 +458,16 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event0}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{sue_str}', '{event0}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ('{event0}', '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event0}', '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
     elif idea_number == "br00045":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {otx_road_str()}
 , {inx_road_str()}
 , {otx_bridge_str()}
@@ -476,18 +476,18 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES
-  ('{sue_str}', '{event2}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{sue_str}', '{event5}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{yao_str}', '{event1}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ('{event2}', '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event5}', '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event1}', '{yao_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{event1}', '{yao_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
     elif idea_number == "br00113":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {owner_name_str()}
 , {acct_name_str()}
@@ -496,15 +496,15 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event9}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event9}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{event9}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{event9}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00115":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {owner_name_str()}
 , {acct_name_str()}
@@ -513,16 +513,16 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
-, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00116":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {owner_name_str()}
 , {acct_name_str()}
@@ -531,15 +531,15 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     elif idea_number == "br00117":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
-  {face_name_str()}
-, {event_int_str()}
+  {event_int_str()}
+, {face_name_str()}
 , {fisc_tag_str()}
 , {owner_name_str()}
 , {acct_name_str()}
@@ -548,8 +548,8 @@ INSERT INTO {agg_tablename} (
 )"""
         values_clause = f"""
 VALUES     
-  ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{sue_str}', '{event1}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+  ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -657,11 +657,11 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
 
         br00115_str = "br00115"
         br00042_str = "br00042"
-        row0 = (br00042_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
-        row1 = (br00042_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
-        row2 = (br00042_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
-        row3 = (br00115_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
-        row4 = (br00115_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
+        row0 = (br00042_str, event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row1 = (br00042_str, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
+        row2 = (br00042_str, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row3 = (br00115_str, event1, sue_str, bob_str, bob_inx, None, None, None, None)
+        row4 = (br00115_str, event1, sue_str, yao_str, yao_inx, None, None, None, None)
         assert lab_rows[0] == row0
         assert lab_rows[1] == row1
         assert lab_rows[2] == row2
@@ -670,11 +670,11 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
 
         br00113_str = "br00113"
         br00043_str = "br00043"
-        row0 = (br00043_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
-        row1 = (br00043_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
-        row2 = (br00043_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
-        row3 = (br00113_str, sue_str, event9, bob_str, bob_inx, None, None, None, None)
-        row4 = (br00113_str, sue_str, event9, yao_str, yao_inx, None, None, None, None)
+        row0 = (br00043_str, event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row1 = (br00043_str, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
+        row2 = (br00043_str, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row3 = (br00113_str, event9, sue_str, bob_str, bob_inx, None, None, None, None)
+        row4 = (br00113_str, event9, sue_str, yao_str, yao_inx, None, None, None, None)
         assert nam_rows[0] == row0
         assert nam_rows[1] == row1
         assert nam_rows[2] == row2
@@ -683,11 +683,11 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
 
         br00116_str = "br00116"
         br00044_str = "br00044"
-        row0 = (br00044_str, sue_str, event0, bob_str, bob_inx, rdx, rdx, ukx, None)
-        row1 = (br00044_str, sue_str, event0, sue_str, sue_str, rdx, rdx, ukx, None)
-        row2 = (br00044_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
-        row3 = (br00116_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
-        row4 = (br00116_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
+        row0 = (br00044_str, event0, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row1 = (br00044_str, event0, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
+        row2 = (br00044_str, event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row3 = (br00116_str, event1, sue_str, bob_str, bob_inx, None, None, None, None)
+        row4 = (br00116_str, event1, sue_str, yao_str, yao_inx, None, None, None, None)
         assert tag_rows[0] == row0
         assert tag_rows[1] == row1
         assert tag_rows[2] == row2
@@ -696,15 +696,15 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
 
         br00117_str = "br00117"
         br00045_str = "br00045"
-        row0 = (br00045_str, sue_str, event2, sue_str, sue_str, rdx, rdx, ukx, None)
-        row1 = (br00045_str, sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx, None)
-        row2 = (br00045_str, yao_str, event1, bob_str, bob_inx, rdx, rdx, ukx, None)
-        row3 = (br00045_str, yao_str, event1, sue_str, sue_str, rdx, rdx, ukx, None)
-        row4 = (br00045_str, yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx, None)
-        row5 = (br00117_str, sue_str, event1, bob_str, bob_inx, None, None, None, None)
-        row6 = (br00117_str, sue_str, event1, yao_str, yao_inx, None, None, None, None)
-        print(f"{roa_rows[5]=}")
-        print(f"       {row5=}")
+        row0 = (br00045_str, event1, yao_str, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row1 = (br00045_str, event1, yao_str, sue_str, sue_str, rdx, rdx, ukx, None)
+        row2 = (br00045_str, event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
+        row3 = (br00045_str, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
+        row4 = (br00045_str, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
+        row5 = (br00117_str, event1, sue_str, bob_str, bob_inx, None, None, None, None)
+        row6 = (br00117_str, event1, sue_str, yao_str, yao_inx, None, None, None, None)
+        print(f"{roa_rows[0]=}")
+        print(f"       {row0=}")
         assert roa_rows[0] == row0
         assert roa_rows[1] == row1
         assert roa_rows[2] == row2
@@ -742,44 +742,44 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     br00117_str = "br00117"
     br00045_str = "br00045"
 
-    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()}, {face_name_str()},{event_int_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()}, {event_int_str()},{face_name_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_nam_values_clause = f"""
 VALUES     
-  ('{br00042_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00042_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00042_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00115_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ('{br00115_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+  ('{br00042_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00042_str}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00042_str}', {event1}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00115_str}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00115_str}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 ;
 """
     raw_lab_values_clause = f"""
 VALUES     
-  ('{br00043_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00043_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00043_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00113_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ('{br00113_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+  ('{br00043_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00043_str}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00043_str}', {event1}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00113_str}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00113_str}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 ;
 """
     raw_tag_values_clause = f"""
 VALUES     
-  ('{br00044_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00044_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00044_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00116_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ('{br00116_str}', '{sue_str}', {event1}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ('{br00116_str}', '{yao_str}', {event9}, '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+  ('{br00044_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00044_str}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00044_str}', {event1}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00116_str}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ('{br00116_str}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ('{br00116_str}', {event9}, '{yao_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 ;
 """
     raw_roa_values_clause = f"""
 VALUES     
-  ('{br00045_str}', '{sue_str}', {event2}, '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00045_str}', '{sue_str}', {event5}, '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00045_str}', '{yao_str}', {event1}, '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ('{br00117_str}', '{sue_str}', {event1}, '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+  ('{br00045_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00045_str}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00045_str}', {event1}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ('{br00117_str}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
 ;
 """
     nam_insert_sqlstr = f"{raw_nam_insert_into_clause} {raw_nam_values_clause}"
@@ -851,11 +851,11 @@ VALUES
 #         assert len(pidgin_agg_nam_rows) == 5
 #         assert len(pidgin_agg_tag_rows) == 5
 #         assert len(pidgin_agg_roa_rows) == 7
-#         row0 = (sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-#         row1 = (sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-#         row2 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-#         row3 = (sue_str, event1, bob_str, bob_inx, None, None, None)
-#         row4 = (sue_str, event1, yao_str, yao_inx, None, None, None)
+#         row0 = (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx)
+#         row2 = (event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx)
+#         row3 = (event1, sue_str, bob_str, bob_inx, None, None, None)
+#         row4 = (event1, sue_str, yao_str, yao_inx, None, None, None)
 #         print(f"{pidgin_agg_lab_rows[0]=}")
 #         print(f"                  {row0=}")
 #         assert pidgin_agg_lab_rows[0] == row0
@@ -863,35 +863,35 @@ VALUES
 #         assert pidgin_agg_lab_rows[2] == row2
 #         assert pidgin_agg_lab_rows[3] == row3
 #         assert pidgin_agg_lab_rows[4] == row4
-#         row0 = (sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-#         row1 = (sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-#         row2 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-#         row3 = (sue_str, event9, bob_str, bob_inx, None, None, None)
-#         row4 = (sue_str, event9, yao_str, yao_inx, None, None, None)
+#         row0 = (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx)
+#         row2 = (event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx)
+#         row3 = (event9, sue_str, bob_str, bob_inx, None, None, None)
+#         row4 = (event9, sue_str, yao_str, yao_inx, None, None, None)
 #         assert pidgin_agg_nam_rows[0] == row0
 #         assert pidgin_agg_nam_rows[1] == row1
 #         assert pidgin_agg_nam_rows[2] == row2
 #         assert pidgin_agg_nam_rows[3] == row3
 #         assert pidgin_agg_nam_rows[4] == row4
 
-#         row0 = (sue_str, event0, bob_str, bob_inx, rdx, rdx, ukx)
-#         row1 = (sue_str, event0, sue_str, sue_str, rdx, rdx, ukx)
-#         row2 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-#         row3 = (sue_str, event1, bob_str, bob_inx, None, None, None)
-#         row4 = (sue_str, event1, yao_str, yao_inx, None, None, None)
+#         row0 = (event0, sue_str, bob_str, bob_inx, rdx, rdx, ukx)
+#         row1 = (event0, sue_str, sue_str, sue_str, rdx, rdx, ukx)
+#         row2 = (event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx)
+#         row3 = (event1, sue_str, bob_str, bob_inx, None, None, None)
+#         row4 = (event1, sue_str, yao_str, yao_inx, None, None, None)
 #         assert pidgin_agg_tag_rows[0] == row0
 #         assert pidgin_agg_tag_rows[1] == row1
 #         assert pidgin_agg_tag_rows[2] == row2
 #         assert pidgin_agg_tag_rows[3] == row3
 #         assert pidgin_agg_tag_rows[4] == row4
 
-#         row0 = (sue_str, event2, sue_str, sue_str, rdx, rdx, ukx)
-#         row1 = (sue_str, event5, bob_str, bob_inx, rdx, rdx, ukx)
-#         row2 = (yao_str, event1, bob_str, bob_inx, rdx, rdx, ukx)
-#         row3 = (yao_str, event1, sue_str, sue_str, rdx, rdx, ukx)
-#         row4 = (yao_str, event1, yao_str, yao_inx, rdx, rdx, ukx)
-#         row5 = (sue_str, event1, bob_str, bob_inx, None, None, None)
-#         row6 = (sue_str, event1, yao_str, yao_inx, None, None, None)
+#         row0 = (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx)
+#         row1 = (event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx)
+#         row2 = (event1, yao_str, bob_str, bob_inx, rdx, rdx, ukx)
+#         row3 = (event1, yao_str, sue_str, sue_str, rdx, rdx, ukx)
+#         row4 = (event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx)
+#         row5 = (event1, sue_str, bob_str, bob_inx, None, None, None)
+#         row6 = (event1, sue_str, yao_str, yao_inx, None, None, None)
 #         assert pidgin_agg_roa_rows[0] == row0
 #         assert pidgin_agg_roa_rows[1] == row1
 #         assert pidgin_agg_roa_rows[2] == row2

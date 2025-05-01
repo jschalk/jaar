@@ -61,8 +61,8 @@ def test_get_pidgin_name_dt_columns_ReturnsObj():
     assert get_pidgin_name_dt_columns()
     assert len(get_pidgin_name_dt_columns()) == 7
     static_list = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -78,8 +78,8 @@ def test_get_pidgin_label_dt_columns_ReturnsObj():
     assert get_pidgin_label_dt_columns()
     assert len(get_pidgin_label_dt_columns()) == 7
     static_list = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -95,8 +95,8 @@ def test_get_pidgin_tag_dt_columns_ReturnsObj():
     assert get_pidgin_tag_dt_columns()
     assert len(get_pidgin_tag_dt_columns()) == 7
     static_list = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -112,8 +112,8 @@ def test_get_pidgin_road_dt_columns_ReturnsObj():
     assert get_pidgin_road_dt_columns()
     assert len(get_pidgin_road_dt_columns()) == 7
     static_list = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),

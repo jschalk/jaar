@@ -173,39 +173,39 @@ def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
 #     assert sheet_exists(budacct_xlsx, sheet="voice_valid")
 
 #     # In mud directory 1 excel sheet
-#     # sheet1: idea format: "face_name,event_int,fisc_tag,owner_name,acct_name,otx_name,inx_name": (idea_format_00113_acct_map1_v0_0_0)
+#     # sheet1: idea format: "event_int,face_name,fisc_tag,owner_name,acct_name,otx_name,inx_name": (idea_format_00113_acct_map1_v0_0_0)
 #     # sue_str,event3,a23_str,sue_str,sue_str,sue_str,sue_inx
 
 #     # THEN asserts:
-#     # file br00113.xlsx, sheet="brick_raw" == one row file_dir, file_name, sheet_name,face_name,event_int,fisc_tag,owner_name,acct_name,otx_name,inx_name
-#     # file br00113.xlsx, sheet="brick_agg" == face_name,event_int,fisc_tag,owner_name,acct_name,otx_name,inx_name,error_message
-#     # file brick_events.xlsx, sheet="agg" == face_name,event_int,error_message
-#     # file brick_events.xlsx, sheet="valid" == face_name,event_int
-#     # file br00113.xlsx, sheet="brick_valid" == face_name,event_int,fisc_tag,owner_name,acct_name,otx_name,inx_name
+#     # file br00113.xlsx, sheet="brick_raw" == one row file_dir, file_name, sheet_name,event_int,face_name,fisc_tag,owner_name,acct_name,otx_name,inx_name
+#     # file br00113.xlsx, sheet="brick_agg" == event_int,face_name,fisc_tag,owner_name,acct_name,otx_name,inx_name,error_message
+#     # file brick_events.xlsx, sheet="agg" == event_int,face_name,error_message
+#     # file brick_events.xlsx, sheet="valid" == event_int,face_name
+#     # file br00113.xlsx, sheet="brick_valid" == event_int,face_name,fisc_tag,owner_name,acct_name,otx_name,inx_name
 
-#     # file pidname.xlsx, sheet="sound_raw" ==  idea_number,face_name,event_int,otx_name,inx_name
-#     # file pidname.xlsx, sheet="sound_agg" == face_name,event_int,otx_name,inx_name,error_message
-#     # file pidname.xlsx, sheet="sound_valid" == face_name,event_int,otx_name,inx_name
+#     # file pidname.xlsx, sheet="sound_raw" ==  idea_number,event_int,face_name,otx_name,inx_name
+#     # file pidname.xlsx, sheet="sound_agg" == event_int,face_name,otx_name,inx_name,error_message
+#     # file pidname.xlsx, sheet="sound_valid" == event_int,face_name,otx_name,inx_name
 
-#     # file fisunit.xlsx, sheet="sound_raw" == idea_number,face_name,event_int,fisc_tag,...
-#     # file fisunit.xlsx, sheet="sound_agg" == face_name,event_int,fisc_tag,...,error_message
-#     # file fisunit.xlsx, sheet="sound_valid" == face_name,event_int,fisc_tag,...
-#     # file budunit.xlsx, sheet="sound_raw" == idea_number,face_name,event_int,fisc_tag,owner_name,...
-#     # file budunit.xlsx, sheet="sound_agg" == face_name,event_int,fisc_tag,owner_name,...,error_message
-#     # file budunit.xlsx, sheet="sound_valid" == face_name,event_int,fisc_tag,owner_name,...
-#     # file budacct.xlsx, sheet="sound_raw" == idea_number,face_name,event_int,fisc_tag,...
-#     # file budacct.xlsx, sheet="sound_agg" == face_name,event_int,fisc_tag,...,error_message
-#     # file budacct.xlsx, sheet="sound_valid" == face_name,event_int,fisc_tag,...
+#     # file fisunit.xlsx, sheet="sound_raw" == idea_number,event_int,face_name,fisc_tag,...
+#     # file fisunit.xlsx, sheet="sound_agg" == event_int,face_name,fisc_tag,...,error_message
+#     # file fisunit.xlsx, sheet="sound_valid" == event_int,face_name,fisc_tag,...
+#     # file budunit.xlsx, sheet="sound_raw" == idea_number,event_int,face_name,fisc_tag,owner_name,...
+#     # file budunit.xlsx, sheet="sound_agg" == event_int,face_name,fisc_tag,owner_name,...,error_message
+#     # file budunit.xlsx, sheet="sound_valid" == event_int,face_name,fisc_tag,owner_name,...
+#     # file budacct.xlsx, sheet="sound_raw" == idea_number,event_int,face_name,fisc_tag,...
+#     # file budacct.xlsx, sheet="sound_agg" == event_int,face_name,fisc_tag,...,error_message
+#     # file budacct.xlsx, sheet="sound_valid" == event_int,face_name,fisc_tag,...
 
-#     # file fisunit.xlsx, sheet="voice_raw" == idea_number,face_name,event_int,fisc_tag,...
-#     # file fisunit.xlsx, sheet="voice_agg" == face_name,event_int,fisc_tag,...,error_message
-#     # file fisunit.xlsx, sheet="voice_valid" == face_name,event_int,fisc_tag,...
-#     # file budunit.xlsx, sheet="voice_raw" == idea_number,face_name,event_int,fisc_tag,owner_name,...
-#     # file budunit.xlsx, sheet="voice_agg" == face_name,event_int,fisc_tag,owner_name,...,error_message
-#     # file budunit.xlsx, sheet="voice_valid" == face_name,event_int,fisc_tag,owner_name,...
-#     # file budacct.xlsx, sheet="voice_raw" == idea_number,face_name,event_int,fisc_tag,...
-#     # file budacct.xlsx, sheet="voice_agg" == face_name,event_int,fisc_tag,...,error_message
-#     # file budacct.xlsx, sheet="sound_valid" == face_name,event_int,fisc_tag,...
+#     # file fisunit.xlsx, sheet="voice_raw" == idea_number,event_int,face_name,fisc_tag,...
+#     # file fisunit.xlsx, sheet="voice_agg" == event_int,face_name,fisc_tag,...,error_message
+#     # file fisunit.xlsx, sheet="voice_valid" == event_int,face_name,fisc_tag,...
+#     # file budunit.xlsx, sheet="voice_raw" == idea_number,event_int,face_name,fisc_tag,owner_name,...
+#     # file budunit.xlsx, sheet="voice_agg" == event_int,face_name,fisc_tag,owner_name,...,error_message
+#     # file budunit.xlsx, sheet="voice_valid" == event_int,face_name,fisc_tag,owner_name,...
+#     # file budacct.xlsx, sheet="voice_raw" == idea_number,event_int,face_name,fisc_tag,...
+#     # file budacct.xlsx, sheet="voice_agg" == event_int,face_name,fisc_tag,...,error_message
+#     # file budacct.xlsx, sheet="sound_valid" == event_int,face_name,fisc_tag,...
 
 #     # events_dir/event_int/ sound_dimen.csv =
 #     # events_dir/event3/ sound_budunit.csv =
@@ -222,8 +222,8 @@ def test_WorldUnit_mud_to_stances_Scenario2_CreatesFiles(env_dir_setup_cleanup):
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
     # delete_dir(fizz_world.worlds_dir)
     sue_str = "Sue"
-    event_1 = 1
-    event_2 = 2
+    event1 = 1
+    event2 = 2
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -231,15 +231,15 @@ def test_WorldUnit_mud_to_stances_Scenario2_CreatesFiles(env_dir_setup_cleanup):
     ex_filename = "fizzbuzz.xlsx"
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         cumlative_minute_str(),
         fisc_tag_str(),
         hour_tag_str(),
     ]
     br00001_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         deal_time_str(),
@@ -250,14 +250,14 @@ def test_WorldUnit_mud_to_stances_Scenario2_CreatesFiles(env_dir_setup_cleanup):
     tp37 = 37
     sue_quota = 235
     sue_celldepth = 3
-    br1row0 = [sue_str, event_2, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
+    br1row0 = [event2, sue_str, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
     upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
 
-    br3row0 = [sue_str, event_1, minute_360, accord23_str, hour6am]
-    br3row1 = [sue_str, event_1, minute_420, accord23_str, hour7am]
-    br3row2 = [sue_str, event_2, minute_420, accord23_str, hour7am]
+    br3row0 = [event1, sue_str, minute_360, accord23_str, hour6am]
+    br3row1 = [event1, sue_str, minute_420, accord23_str, hour7am]
+    br3row2 = [event2, sue_str, minute_420, accord23_str, hour7am]
     br00003_1df = DataFrame([br3row0, br3row1], columns=br00003_columns)
     br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
     br00003_ex1_str = "example1_br00003"
@@ -265,13 +265,13 @@ def test_WorldUnit_mud_to_stances_Scenario2_CreatesFiles(env_dir_setup_cleanup):
     upsert_sheet(mud_file_path, br00003_ex1_str, br00003_1df)
     upsert_sheet(mud_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
-    br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
+    br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     mstr_dir = fizz_world._fisc_mstr_dir
@@ -313,18 +313,18 @@ def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
     sue_str = "Sue"
-    event_2 = 2
+    event2 = 2
     ex_filename = "fizzbuzz.xlsx"
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     accord23_str = "accord23"
     br00011_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
     ]
-    br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
+    br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     fisc_mstr = fizz_world._fisc_mstr_dir
@@ -344,8 +344,8 @@ def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
 #     delete_dir(fizz_world.worlds_dir)
 #     sue_str = "Sue"
-#     event_1 = 1
-#     event_2 = 2
+#     event1 = 1
+#     event2 = 2
 #     minute_360 = 360
 #     minute_420 = 420
 #     hour6am = "6am"
@@ -360,9 +360,9 @@ def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
 #         hour_tag_str(),
 #     ]
 #     accord23_str = "accord23"
-#     row1 = [sue_str, event_1, minute_360, accord23_str, hour6am]
-#     row2 = [sue_str, event_1, minute_420, accord23_str, hour7am]
-#     row3 = [sue_str, event_2, minute_420, accord23_str, hour7am]
+#     row1 = [event1, sue_str,  minute_360, accord23_str, hour6am]
+#     row2 = [event1, sue_str,  minute_420, accord23_str, hour7am]
+#     row3 = [event2, sue_str,  minute_420, accord23_str, hour7am]
 #     df1 = DataFrame([row1, row2], columns=br00003_columns)
 #     df3 = DataFrame([row2, row1, row3], columns=br00003_columns)
 #     br00003_ex1_str = "example1_br00003"
@@ -376,7 +376,7 @@ def test_WorldUnit_mud_to_stances_Senario2_WhenNoFiscIdeas_ote1_IsStillCreated(
 #         "owner_name",
 #         "acct_name",
 #     ]
-#     br00011_rows = [[sue_str, event_2, accord23_str, sue_str, sue_str]]
+#     br00011_rows = [[event2, sue_str,  accord23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
 #     mstr_dir = fizz_world._mstr_dir

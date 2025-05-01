@@ -72,10 +72,10 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario1_3Events(env_dir_setup_cleanu
     event9 = 9
     name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     x_nan = float("nan")
-    name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    name1 = [sue_str, event7, bob_otx, bob1_inx, x_nan, x_nan, x_nan]
-    name2 = [sue_str, event9, bob_otx, bob1_inx, x_nan, x_nan, x_nan]
-    name3 = [sue_str, event3, bob_otx, bob2_inx, x_nan, x_nan, x_nan]
+    name0 = [event7, sue_str, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    name1 = [event7, sue_str, bob_otx, bob1_inx, x_nan, x_nan, x_nan]
+    name2 = [event9, sue_str, bob_otx, bob1_inx, x_nan, x_nan, x_nan]
+    name3 = [event3, sue_str, bob_otx, bob2_inx, x_nan, x_nan, x_nan]
     name_rows = [name0, name1, name2, name3]
     sue_name_df = DataFrame(name_rows, columns=name_agg_columns)
 
@@ -130,9 +130,9 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario2_label(env_dir_setup_cleanup)
     run_inx = ";Running"
     label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
     x_nan = float("nan")
-    label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
-    label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
-    label2 = [sue_str, event9, run_str, run_inx, x_nan, x_nan, x_nan]
+    label0 = [event7, sue_str, jog_str, jog_inx, x_nan, x_nan, x_nan]
+    label1 = [event7, sue_str, run_str, run_inx, x_nan, x_nan, x_nan]
+    label2 = [event9, sue_str, run_str, run_inx, x_nan, x_nan, x_nan]
     label_rows = [label0, label1, label2]
     sue_label_agg_df = DataFrame(label_rows, columns=label_agg_columns)
 
@@ -179,8 +179,8 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_tag(env_dir_setup_cleanup):
     event9 = 9
     tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     x_nan = float("nan")
-    e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_tag1 = [sue_str, event9, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_tag0 = [event7, sue_str, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_tag1 = [event9, sue_str, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 
@@ -227,9 +227,9 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     event9 = 9
     road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     x_nan = float("nan")
-    e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road2 = [sue_str, event9, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_road2 = [event9, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1, e1_road2]
     sue_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
 
@@ -280,12 +280,12 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     event9 = 9
     road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     x_nan = float("nan")
-    e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road2 = [sue_str, event9, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_road2 = [event9, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1, e1_road2]
     sue_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
-    z1_road3 = [zia_str, event3, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    z1_road3 = [event3, zia_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     zia_road_agg_df = DataFrame([z1_road3], columns=road_agg_columns)
 
     faces_dir = get_module_temp_dir()

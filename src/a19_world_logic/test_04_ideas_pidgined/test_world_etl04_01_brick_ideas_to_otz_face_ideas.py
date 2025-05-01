@@ -26,15 +26,15 @@ def test_WorldUnit_brick_ideas_to_otz_face_ideas_CreatesOtxSheets_Scenario0_Grou
     hour6am = "6am"
     hour7am = "7am"
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
-    row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    row1 = [event3, sue_str, accord23_str, hour6am, minute_360]
+    row2 = [event3, sue_str, accord23_str, hour7am, minute_420]
     br00003_brick_agg_df = DataFrame([row1, row2], columns=idea_columns)
     br00003_agg_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
     upsert_sheet(br00003_agg_file_path, brick_valid_str(), br00003_brick_agg_df)

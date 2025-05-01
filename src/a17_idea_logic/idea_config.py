@@ -41,8 +41,8 @@ def get_idea_elements_sort_order() -> list[str]:
     return [
         "world_id",
         "idea_number",
-        "face_name",
         "event_int",
+        "face_name",
         "fisc_tag",
         "timeline_tag",
         "offi_time",

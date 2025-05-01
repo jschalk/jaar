@@ -31,17 +31,17 @@ def test_etl_brick_agg_non_pidgin_ideas_to_brick_valid_CreatesSheets_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event1, accord23_str, hour6am, minute_360]
-    row2 = [sue_str, event1, accord23_str, hour7am, minute_420]
-    row3 = [yao_str, event3, accord23_str, hour7am, minute_420]
-    row4 = [yao_str, event9, accord23_str, hour7am, minute_420]
+    row1 = [event1, sue_str, accord23_str, hour6am, minute_360]
+    row2 = [event1, sue_str, accord23_str, hour7am, minute_420]
+    row3 = [event3, yao_str, accord23_str, hour7am, minute_420]
+    row4 = [event9, yao_str, accord23_str, hour7am, minute_420]
     brick_dir = create_path(get_module_temp_dir(), "brick")
     brick_file_path = create_path(brick_dir, "br00003.xlsx")
     brick_agg_df = DataFrame([row1, row2, row3, row4], columns=br00003_columns)

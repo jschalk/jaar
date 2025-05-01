@@ -26,8 +26,8 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     name_agg_str = "name_agg"
     name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     bx = "br00xxx"
-    e1_name0 = [bx, sue_str, event7, yao_str, yao_inx, None, None, None]
-    e1_name1 = [bx, sue_str, event7, bob_str, bob_inx, None, None, None]
+    e1_name0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
+    e1_name1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
     e1_name_rows = [e1_name0, e1_name1]
     raw_name_df = DataFrame(e1_name_rows, columns=name_raw_columns)
 
@@ -40,8 +40,8 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     label_agg_str = "label_agg"
     label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
     bx = "br00xxx"
-    e1_label0 = [bx, sue_str, event7, jog_str, jog_inx, None, None, None]
-    e1_label1 = [bx, sue_str, event7, run_str, run_inx, None, None, None]
+    e1_label0 = [bx, event7, sue_str, jog_str, jog_inx, None, None, None]
+    e1_label1 = [bx, event7, sue_str, run_str, run_inx, None, None, None]
     e1_label_rows = [e1_label0, e1_label1]
     raw_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
 
@@ -54,8 +54,8 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     road_agg_str = "road_agg"
     road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
     bx = "br00xxx"
-    e1_road0 = [bx, sue_str, event7, casa_otx, casa_inx, None, None, None]
-    e1_road1 = [bx, sue_str, event7, clean_otx, clean_inx, None, None, None]
+    e1_road0 = [bx, event7, sue_str, casa_otx, casa_inx, None, None, None]
+    e1_road1 = [bx, event7, sue_str, clean_otx, clean_inx, None, None, None]
     e1_road_rows = [e1_road0, e1_road1]
     raw_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
 
@@ -68,8 +68,8 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     tag_agg_str = "tag_agg"
     tag_raw_columns = PidginPrimeColumns().pidgin_tag_raw_columns
     bx = "br00xxx"
-    e1_tag0 = [bx, sue_str, event7, t3am_otx, t3am_inx, None, None, None]
-    e1_tag1 = [bx, sue_str, event7, t6am_otx, t6am_inx, None, None, None]
+    e1_tag0 = [bx, event7, sue_str, t3am_otx, t3am_inx, None, None, None]
+    e1_tag1 = [bx, event7, sue_str, t6am_otx, t6am_inx, None, None, None]
     e1_tag_rows = [e1_tag0, e1_tag1]
     raw_tag_df = DataFrame(e1_tag_rows, columns=tag_raw_columns)
 
@@ -106,31 +106,31 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     assert list(gen_name_agg_df.columns) == name_agg_columns
     assert len(gen_name_agg_df) == 2
     x_nan = float("nan")
-    e1_name0 = [sue_str, event7, yao_str, yao_inx, x_nan, x_nan, x_nan]
-    e1_name1 = [sue_str, event7, bob_str, bob_inx, x_nan, x_nan, x_nan]
+    e1_name0 = [event7, sue_str, yao_str, yao_inx, x_nan, x_nan, x_nan]
+    e1_name1 = [event7, sue_str, bob_str, bob_inx, x_nan, x_nan, x_nan]
     e1_name_rows = [e1_name0, e1_name1]
     e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
     label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
     assert list(gen_label_agg_df.columns) == label_agg_columns
     assert len(gen_label_agg_df) == 2
-    e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
-    e1_label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
+    e1_label0 = [event7, sue_str, jog_str, jog_inx, x_nan, x_nan, x_nan]
+    e1_label1 = [event7, sue_str, run_str, run_inx, x_nan, x_nan, x_nan]
     e1_label_rows = [e1_label0, e1_label1]
     e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
     road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
     assert list(gen_road_agg_df.columns) == road_agg_columns
     assert len(gen_road_agg_df) == 2
-    e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
     tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     assert list(gen_tag_agg_df.columns) == tag_agg_columns
     assert len(gen_tag_agg_df) == 2
-    e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_tag1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_tag0 = [event7, sue_str, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_tag1 = [event7, sue_str, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 

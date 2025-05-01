@@ -32,10 +32,10 @@ def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario0_Two_face_na
 
     name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     x_nan = float("nan")
-    name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    name1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
-    name2 = [zia_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    name3 = [zia_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
+    name0 = [event7, sue_str, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    name1 = [event7, sue_str, bob_otx, bob_inx, x_nan, x_nan, x_nan]
+    name2 = [event7, zia_str, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    name3 = [event7, zia_str, bob_otx, bob_inx, x_nan, x_nan, x_nan]
     name_rows = [name0, name1, name2, name3]
     e1_name_agg_df = DataFrame(name_rows, columns=name_agg_columns)
 
@@ -83,8 +83,8 @@ def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimen
 
     name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     x_nan = float("nan")
-    e1_name0 = [sue_str, event7, yao_otx, yao_inx, x_nan, x_nan, x_nan]
-    e1_name1 = [sue_str, event7, bob_otx, bob_inx, x_nan, x_nan, x_nan]
+    e1_name0 = [event7, sue_str, yao_otx, yao_inx, x_nan, x_nan, x_nan]
+    e1_name1 = [event7, sue_str, bob_otx, bob_inx, x_nan, x_nan, x_nan]
     e1_name_rows = [e1_name0, e1_name1]
     e1_name_agg_df = DataFrame(e1_name_rows, columns=name_agg_columns)
 
@@ -95,8 +95,8 @@ def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimen
     event7 = 7
     label_agg_str = "label_agg"
     label_agg_columns = PidginPrimeColumns().pidgin_label_agg_columns
-    e1_label0 = [sue_str, event7, jog_str, jog_inx, x_nan, x_nan, x_nan]
-    e1_label1 = [sue_str, event7, run_str, run_inx, x_nan, x_nan, x_nan]
+    e1_label0 = [event7, sue_str, jog_str, jog_inx, x_nan, x_nan, x_nan]
+    e1_label1 = [event7, sue_str, run_str, run_inx, x_nan, x_nan, x_nan]
     e1_label_rows = [e1_label0, e1_label1]
     e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
@@ -107,8 +107,8 @@ def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimen
     event7 = 7
     road_agg_str = "road_agg"
     road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
-    e1_road0 = [sue_str, event7, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [sue_str, event7, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_road_rows = [e1_road0, e1_road1]
     e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
 
@@ -119,8 +119,8 @@ def test_etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMapDimen
     event7 = 7
     tag_agg_str = "tag_agg"
     tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
-    e1_tag0 = [sue_str, event7, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_tag1 = [sue_str, event7, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_tag0 = [event7, sue_str, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_tag1 = [event7, sue_str, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
     e1_tag_rows = [e1_tag0, e1_tag1]
     e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
 

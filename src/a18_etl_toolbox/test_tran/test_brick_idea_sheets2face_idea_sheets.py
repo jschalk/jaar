@@ -33,15 +33,15 @@ def test_etl_brick_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario0_Singl
     hour6am = "6am"
     hour7am = "7am"
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    row1 = [sue_str, event3, accord23_str, hour6am, minute_360]
-    row2 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    row1 = [event3, sue_str, accord23_str, hour6am, minute_360]
+    row2 = [event3, sue_str, accord23_str, hour7am, minute_420]
     br00003_brick_agg_df = DataFrame([row1, row2], columns=idea_columns)
     x_etl_dir = get_module_temp_dir()
     x_brick_dir = create_path(x_etl_dir, "brick")
@@ -86,16 +86,16 @@ def test_etl_brick_ideas_to_otz_face_ideas_CreatesFaceIdeaSheets_Scenario1_Multp
     hour6am = "6am"
     hour7am = "7am"
     idea_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    sue1 = [sue_str, event3, accord23_str, hour6am, minute_360]
-    sue2 = [sue_str, event3, accord23_str, hour7am, minute_420]
-    zia3 = [zia_str, event7, accord23_str, hour7am, minute_420]
+    sue1 = [event3, sue_str, accord23_str, hour6am, minute_360]
+    sue2 = [event3, sue_str, accord23_str, hour7am, minute_420]
+    zia3 = [event7, zia_str, accord23_str, hour7am, minute_420]
     br00003_brick_agg_df = DataFrame([sue1, sue2, zia3], columns=idea_columns)
     x_etl_dir = get_module_temp_dir()
     x_brick_dir = create_path(x_etl_dir, "brick")
@@ -143,28 +143,28 @@ def test_etl_brick_ideas_to_otz_face_ideas_Scenario2_PidginDimenIdeasAreNotLoade
     hour6am = "6am"
     hour7am = "7am"
     br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
-    sue3_0 = [sue_str, event3, accord23_str, hour6am, minute_360]
-    sue3_1 = [sue_str, event3, accord23_str, hour7am, minute_420]
+    sue3_0 = [event3, sue_str, accord23_str, hour6am, minute_360]
+    sue3_1 = [event3, sue_str, accord23_str, hour7am, minute_420]
     br00003_brick_agg_df = DataFrame([sue3_0, sue3_1], columns=br00003_columns)
 
     br00043_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         inx_bridge_str(),
         inx_name_str(),
         otx_bridge_str(),
         otx_name_str(),
         unknown_word_str(),
     ]
-    sue43_0 = [sue_str, event3, ":", "Bob", ":", "Bobby", "Unknown"]
-    sue43_1 = [sue_str, event3, ":", "Bob", ":", "Bobby", "Unknown"]
+    sue43_0 = [event3, sue_str, ":", "Bob", ":", "Bobby", "Unknown"]
+    sue43_1 = [event3, sue_str, ":", "Bob", ":", "Bobby", "Unknown"]
     br00043_brick_agg_df = DataFrame([sue43_0, sue43_1], columns=br00043_columns)
 
     x_etl_dir = get_module_temp_dir()

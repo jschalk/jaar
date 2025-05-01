@@ -14,6 +14,15 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from sqlite3 import connect as sqlite3_connect
 
 
+def short_abbv(dimen: str) -> str:
+    return {
+        "pidgin_label": "PIDLABE",
+        "pidgin_name": "PIDNAME",
+        "pidgin_road": "PIDROAD",
+        "pidgin_tag": "PIDTAGG",
+    }.get(dimen)
+
+
 def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
@@ -49,8 +58,9 @@ def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
         agg_create_sqlstr = create_table_sqlstrs.get(agg_table)
         assert agg_create_sqlstr == ex_agg_sqlstr
 
-        print(f'CREATE_{raw_table.upper()}_SQLSTR= """{ex_raw_sqlstr}"""')
-        print(f'CREATE_{agg_table.upper()}_SQLSTR= """{ex_agg_sqlstr}"""')
+        # abbv7 = short_abbv(x_dimen)
+        # print(f'CREATE_{abbv7.upper()}_RAW_SQLSTR= """{ex_raw_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_AGG_SQLSTR= """{ex_agg_sqlstr}"""')
         # print(f'"{raw_table}": CREATE_{raw_table.upper()}_SQLSTR,')
         # print(f'"{agg_table}": CREATE_{agg_table.upper()}_SQLSTR,')
 

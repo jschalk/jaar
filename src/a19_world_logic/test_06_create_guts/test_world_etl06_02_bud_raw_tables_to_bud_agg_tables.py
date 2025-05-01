@@ -41,13 +41,13 @@ def test_WorldUnit_idea_raw_to_bud_prime_tables_PopulatesBudPutAggTables(
         create_bud_prime_tables(cursor)
         raw_tablename = f"{bud_acctunit_str()}_put_raw"
         insert_raw_sqlstr = f"""
-INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
+INSERT INTO {raw_tablename} ({idea_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
 VALUES
-  ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
-, ('br00021','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL,NULL)
-, ('br00021','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
-, ('br00021','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,'{x_error_message}')
-, ('br00021','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief7},NULL,'{x_error_message}')
+  ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
+, ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL,NULL)
+, ('br00021',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
+, ('br00021',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,'{x_error_message}')
+, ('br00021',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}',{yao_credit_belief7},NULL,'{x_error_message}')
 ;
 """
         print(insert_raw_sqlstr)
@@ -90,13 +90,13 @@ def test_WorldUnit_idea_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
         create_bud_prime_tables(cursor)
         raw_tablename = f"{bud_acctunit_str()}_del_raw"
         insert_raw_sqlstr = f"""
-INSERT INTO {raw_tablename} ({idea_number_str()},{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+INSERT INTO {raw_tablename} ({idea_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 VALUES
-  ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-, ('br00051','{sue_inx}',{event3},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-, ('br00051','{sue_inx}',{event7},'{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-, ('br00051','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
-, ('br00051','{sue_inx}',{event7},'{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
+  ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
+, ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
+, ('br00051',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
+, ('br00051',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
+, ('br00051',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
 ;
 """
         print(insert_raw_sqlstr)

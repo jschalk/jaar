@@ -27,11 +27,11 @@ def test_WorldUnit_idea_raw_to_fisc_prime_tables_PopulatesFiscAggTables(
     sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord45_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord45_str},{yao_inx},{yao_inx}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+{event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
+{event3},{sue_inx},{accord45_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord45_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
     fizz_world = worldunit_shop("fizz", worlds_dir())
@@ -112,17 +112,17 @@ def test_WorldUnit_idea_raw_to_fisc_prime_tables_PopulatesTable_fisc_event_time(
     br00002_str = "br00002"
     br00001_csv_filename = f"{br00001_str}.csv"
     br00002_csv_filename = f"{br00002_str}.csv"
-    br00001_csv_str = f"""{face_name_str()},{event_int_str()},fisc_tag,owner_name,deal_time,quota,celldepth
-{sue_inx},{event3},{accord23_str},{bob_inx},{timepoint800},{quota_t8},{x_celldepth}
-{sue_inx},{event3},{accord23_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
-{sue_inx},{event3},{accord45_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
-{sue_inx},{event7},{accord45_str},{yao_inx},{timepoint900},{quota_t9},{x_celldepth}
+    br00001_csv_str = f"""{event_int_str()},{face_name_str()},fisc_tag,owner_name,deal_time,quota,celldepth
+{event3},{sue_inx},{accord23_str},{bob_inx},{timepoint800},{quota_t8},{x_celldepth}
+{event3},{sue_inx},{accord23_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
+{event3},{sue_inx},{accord45_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
+{event7},{sue_inx},{accord45_str},{yao_inx},{timepoint900},{quota_t9},{x_celldepth}
 """
-    br00002_csv_str = f"""{face_name_str()},{event_int_str()},fisc_tag,owner_name,acct_name,tran_time,amount
-{sue_inx},{event2},{accord23_str},{bob_inx},{sue_inx},{timepoint22},{amount_t22}
-{sue_inx},{event2},{accord23_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
-{sue_inx},{event2},{accord45_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
-{sue_inx},{event8},{accord45_str},{yao_inx},{bob_inx},{timepoint23},{amount_t23}
+    br00002_csv_str = f"""{event_int_str()},{face_name_str()},fisc_tag,owner_name,acct_name,tran_time,amount
+{event2},{sue_inx},{accord23_str},{bob_inx},{sue_inx},{timepoint22},{amount_t22}
+{event2},{sue_inx},{accord23_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
+{event2},{sue_inx},{accord45_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
+{event8},{sue_inx},{accord45_str},{yao_inx},{bob_inx},{timepoint23},{amount_t23}
 """
     save_file(sue_inz_dir, br00001_csv_filename, br00001_csv_str)
     save_file(sue_inz_dir, br00002_csv_filename, br00002_csv_str)

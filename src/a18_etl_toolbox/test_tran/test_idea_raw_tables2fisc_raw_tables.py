@@ -74,11 +74,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario0_From_br00011_IdeaFile(
     sue_inz_dir = create_path(inz_faces_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
-{sue_inx},{event3},{accord23_str},{bob_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{bob_inx}
-{sue_inx},{event3},{accord23_str},{yao_inx},{yao_inx}
-{sue_inx},{event7},{accord23_str},{yao_inx},{yao_inx}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+{event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
+{event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
+{event7},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
 """
     save_file(sue_inz_dir, br00011_csv_filename, br00011_csv_str)
 
@@ -98,8 +98,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario0_From_br00011_IdeaFile(
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00011_str,  # idea_number
-            sue_inx,  # face_name
             event3,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -115,8 +115,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario0_From_br00011_IdeaFile(
         )
         expected_row1 = (
             br00011_str,  # idea_number
-            sue_inx,  # face_name
             event7,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -149,8 +149,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario1_From_br00011_IdeaTable(
     accord23_str = "accord23"
     br00011_str = "br00011"
     br00011_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -160,12 +160,12 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario1_From_br00011_IdeaTable(
         br00011_tablename = f"{br00011_str}_raw"
         create_idea_sorted_table(cursor, br00011_tablename, br00011_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00011_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()})
+INSERT INTO {br00011_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()})
 VALUES 
-  ('{sue_inx}', {event3}, '{accord23_str}', '{bob_inx}', '{bob_inx}')
-, ('{sue_inx}', {event3}, '{accord23_str}', '{yao_inx}', '{bob_inx}')
-, ('{sue_inx}', {event3}, '{accord23_str}', '{yao_inx}', '{yao_inx}')
-, ('{sue_inx}', {event7}, '{accord23_str}', '{yao_inx}', '{yao_inx}')
+  ({event3}, '{sue_inx}', '{accord23_str}', '{bob_inx}', '{bob_inx}')
+, ({event3}, '{sue_inx}', '{accord23_str}', '{yao_inx}', '{bob_inx}')
+, ({event3}, '{sue_inx}', '{accord23_str}', '{yao_inx}', '{yao_inx}')
+, ({event7}, '{sue_inx}', '{accord23_str}', '{yao_inx}', '{yao_inx}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -182,8 +182,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00011_str,  # idea_number
-            sue_inx,  # face_name
             event3,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -199,8 +199,8 @@ VALUES
         )
         expected_row1 = (
             br00011_str,  # idea_number
-            sue_inx,  # face_name
             event7,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -231,8 +231,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario2_Idea_br00000_Table_WithEmptyA
     accord23_str = "accord23"
     br00000_str = "br00000"
     br00000_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         fund_coin_str(),
         penny_str(),
@@ -248,11 +248,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario2_Idea_br00000_Table_WithEmptyA
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
+INSERT INTO {br00000_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
 VALUES
-  ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
-, ('{sue_inx}', {event3}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
-, ('{sue_inx}', {event7}, '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+  ({event3}, '{sue_inx}', '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+, ({event3}, '{sue_inx}', '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+, ({event7}, '{sue_inx}', '{accord23_str}', NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -269,8 +269,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00000_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -286,8 +286,8 @@ VALUES
         )
         expected_row1 = (
             br00000_str,  # idea_number
-            sue_inx,  # face_name
             event7,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             None,  # fund_coin
             None,  # penny
@@ -319,8 +319,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario3_Idea_br00000_Table_WithAttrs(
     accord23_str = "accord23"
     br00000_str = "br00000"
     br00000_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         fund_coin_str(),
         penny_str(),
@@ -345,11 +345,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario3_Idea_br00000_Table_WithAttrs(
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00000_tablename, br00000_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00000_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
+INSERT INTO {br00000_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
+  ({event3},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
+, ({event3},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
+, ({event7},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}')
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -367,8 +367,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00000_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_timeline_tag,  # timeline_tag
             a23_c400_number,  # c400_number
@@ -384,8 +384,8 @@ VALUES
         )
         expected_row1 = (
             br00000_str,  # idea_number
-            sue_inx,  # face_name
             event7,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             a23_timeline_tag,  # timeline_tag
             a23_c400_number,  # c400_number
@@ -419,8 +419,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario4_Idea_br00001_Table_WithAttrs(
     accord23_str = "accord23"
     br00001_str = "br00001"
     br00001_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         deal_time_str(),
@@ -436,11 +436,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario4_Idea_br00001_Table_WithAttrs(
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00001_tablename, br00001_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00001_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{deal_time_str()},{quota_str()}, {celldepth_str()})
+INSERT INTO {br00001_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{deal_time_str()},{quota_str()}, {celldepth_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
+  ({event3},'{sue_inx}','{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
+, ({event3},'{sue_inx}','{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
+, ({event7},'{sue_inx}','{accord23_str}','{a23_owner_name}',{a23_deal_time},{a23_quota}, NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -458,8 +458,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00001_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_owner_name,
             a23_deal_time,
@@ -469,8 +469,8 @@ VALUES
         )
         expected_row1 = (
             br00001_str,  # idea_number
-            sue_inx,  # face_name
             event7,  # event_int
+            sue_inx,  # face_name
             accord23_str,  # fisc_tag
             a23_owner_name,
             a23_deal_time,
@@ -498,8 +498,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario5_Idea_br00002_Table_WithAttrs(
     accord23_str = "accord23"
     br00002_str = "br00002"
     br00002_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
@@ -516,11 +516,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario5_Idea_br00002_Table_WithAttrs(
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00002_tablename, br00002_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00002_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{tran_time_str()},{amount_str()})
+INSERT INTO {br00002_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{tran_time_str()},{amount_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
+  ({event3},'{sue_inx}','{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
+, ({event3},'{sue_inx}','{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
+, ({event7},'{sue_inx}','{accord23_str}','{a23_owner_name}','{a23_acct_name}',{a23_tran_time},{a23_amount})
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -538,8 +538,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00002_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_owner_name,
             a23_acct_name,
@@ -549,8 +549,8 @@ VALUES
         )
         expected_row1 = (
             br00002_str,  # idea_number
-            sue_inx,  # face_name
-            event7,  # event_int
+            event7,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_owner_name,
             a23_acct_name,
@@ -578,8 +578,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario6_Idea_br00003_Table_WithAttrs(
     accord23_str = "accord23"
     br00003_str = "br00003"
     br00003_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         hour_tag_str(),
         cumlative_minute_str(),
@@ -592,11 +592,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario6_Idea_br00003_Table_WithAttrs(
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00003_tablename, br00003_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00003_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{hour_tag_str()},{cumlative_minute_str()})
+INSERT INTO {br00003_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{hour_tag_str()},{cumlative_minute_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_hour_tag}',{a23_cumlative_minute})
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_hour_tag}',{a23_cumlative_minute})
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_hour_tag}',{a23_cumlative_minute})
+  ({event3},'{sue_inx}','{accord23_str}','{a23_hour_tag}',{a23_cumlative_minute})
+, ({event3},'{sue_inx}','{accord23_str}','{a23_hour_tag}',{a23_cumlative_minute})
+, ({event7},'{sue_inx}','{accord23_str}','{a23_hour_tag}',{a23_cumlative_minute})
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -614,8 +614,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00003_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_cumlative_minute,
             a23_hour_tag,
@@ -623,8 +623,8 @@ VALUES
         )
         expected_row1 = (
             br00003_str,  # idea_number
-            sue_inx,  # face_name
-            event7,  # event_int
+            event7,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_cumlative_minute,
             a23_hour_tag,
@@ -650,8 +650,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario7_Idea_br00004_Table_WithAttrs(
     accord23_str = "accord23"
     br00004_str = "br00004"
     br00004_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         month_tag_str(),
         cumlative_day_str(),
@@ -664,11 +664,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario7_Idea_br00004_Table_WithAttrs(
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00004_tablename, br00004_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00004_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{month_tag_str()},{cumlative_day_str()})
+INSERT INTO {br00004_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{month_tag_str()},{cumlative_day_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_month_tag}',{a23_cumlative_day})
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_month_tag}',{a23_cumlative_day})
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_month_tag}',{a23_cumlative_day})
+  ({event3},'{sue_inx}','{accord23_str}','{a23_month_tag}',{a23_cumlative_day})
+, ({event3},'{sue_inx}','{accord23_str}','{a23_month_tag}',{a23_cumlative_day})
+, ({event7},'{sue_inx}','{accord23_str}','{a23_month_tag}',{a23_cumlative_day})
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -686,8 +686,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00004_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_cumlative_day,
             a23_month_tag,
@@ -695,8 +695,8 @@ VALUES
         )
         expected_row1 = (
             br00004_str,  # idea_number
-            sue_inx,  # face_name
-            event7,  # event_int
+            event7,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_cumlative_day,
             a23_month_tag,
@@ -722,8 +722,8 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario8_Idea_br00005_Table_WithAttrs(
     accord23_str = "accord23"
     br00005_str = "br00005"
     br00005_columns = [
-        face_name_str(),
         event_int_str(),
+        face_name_str(),
         fisc_tag_str(),
         weekday_tag_str(),
         weekday_order_str(),
@@ -736,11 +736,11 @@ def test_idea_raw_tables2fisc_raw_tables_Scenario8_Idea_br00005_Table_WithAttrs(
         cursor = fisc_db_conn.cursor()
         create_idea_sorted_table(cursor, br00005_tablename, br00005_columns)
         insert_raw_sqlstr = f"""
-INSERT INTO {br00005_tablename} ({face_name_str()},{event_int_str()},{fisc_tag_str()},{weekday_tag_str()},{weekday_order_str()})
+INSERT INTO {br00005_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{weekday_tag_str()},{weekday_order_str()})
 VALUES
-  ('{sue_inx}',{event3},'{accord23_str}','{a23_weekday_tag}',{a23_weekday_order})
-, ('{sue_inx}',{event3},'{accord23_str}','{a23_weekday_tag}',{a23_weekday_order})
-, ('{sue_inx}',{event7},'{accord23_str}','{a23_weekday_tag}',{a23_weekday_order})
+  ({event3},'{sue_inx}','{accord23_str}','{a23_weekday_tag}',{a23_weekday_order})
+, ({event3},'{sue_inx}','{accord23_str}','{a23_weekday_tag}',{a23_weekday_order})
+, ({event7},'{sue_inx}','{accord23_str}','{a23_weekday_tag}',{a23_weekday_order})
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -758,8 +758,8 @@ VALUES
         fiscunit_db_rows = cursor.fetchall()
         expected_row0 = (
             br00005_str,  # idea_number
-            sue_inx,  # face_name
-            event3,  # event_int
+            event3,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_weekday_order,
             a23_weekday_tag,
@@ -767,8 +767,8 @@ VALUES
         )
         expected_row1 = (
             br00005_str,  # idea_number
-            sue_inx,  # face_name
-            event7,  # event_int
+            event7,
+            sue_inx,
             accord23_str,  # fisc_tag
             a23_weekday_order,
             a23_weekday_tag,
@@ -800,12 +800,12 @@ def test_etl_fisc_raw_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
         x_fisc = FiscPrimeObjsRef(fiscs_dir)
         fisc_cols = FiscPrimeColumnsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.unit_raw_tablename} ({idea_number_str()}, {face_name_str()}, {event_int_str()}, {fisc_tag_str()})
+INSERT INTO {x_fisc.unit_raw_tablename} ({idea_number_str()}, {event_int_str()}, {face_name_str()}, {fisc_tag_str()})
 VALUES 
-  ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
-, ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
-, ('{br00011_str}', '{sue_inx}', {event3}, '{accord45_str}')
-, ('{br00011_str}', '{sue_inx}', {event7}, '{accord45_str}')
+  ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
+, ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
+, ('{br00011_str}', {event3}, '{sue_inx}', '{accord45_str}')
+, ('{br00011_str}', {event7}, '{sue_inx}', '{accord45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -829,10 +829,10 @@ VALUES
         unit_raw_csv_filename = x_fisc.unit_raw_csv_filename
         generated_fiscunit_csv = open_file(fiscs_dir, unit_raw_csv_filename)
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_raw_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord23_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord23_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord45_str},,,,,,,,,,
+{br00011_str},{event7},{sue_inx},{accord45_str},,,,,,,,,,
 """
         print(f"   {generated_fiscunit_csv=}")
         print(f"{expected_fiscunit_csv_str=}")
@@ -862,12 +862,12 @@ def test_etl_fisc_raw_tables_to_fisc_csvs_CreateFiles(env_dir_setup_cleanup):
         x_fisc = FiscPrimeObjsRef(fiscs_dir)
         fisc_cols = FiscPrimeColumnsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.unit_raw_tablename} ({idea_number_str()}, {face_name_str()}, {event_int_str()}, {fisc_tag_str()})
+INSERT INTO {x_fisc.unit_raw_tablename} ({idea_number_str()}, {event_int_str()}, {face_name_str()}, {fisc_tag_str()})
 VALUES 
-  ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
-, ('{br00011_str}', '{sue_inx}', {event3}, '{accord23_str}')
-, ('{br00011_str}', '{sue_inx}', {event3}, '{accord45_str}')
-, ('{br00011_str}', '{sue_inx}', {event7}, '{accord45_str}')
+  ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
+, ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
+, ('{br00011_str}', {event3}, '{sue_inx}', '{accord45_str}')
+, ('{br00011_str}', {event7}, '{sue_inx}', '{accord45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -891,10 +891,10 @@ VALUES
         unit_raw_csv_filename = x_fisc.unit_raw_csv_filename
         generated_fiscunit_csv = open_file(fiscs_dir, unit_raw_csv_filename)
         expected_fiscunit_csv_str = f"""{fisc_cols.unit_raw_csv_header}
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord23_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event3},{accord45_str},,,,,,,,,,
-{br00011_str},{sue_inx},{event7},{accord45_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord23_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord23_str},,,,,,,,,,
+{br00011_str},{event3},{sue_inx},{accord45_str},,,,,,,,,,
+{br00011_str},{event7},{sue_inx},{accord45_str},,,,,,,,,,
 """
         print(f"   {generated_fiscunit_csv=}")
         print(f"{expected_fiscunit_csv_str=}")
@@ -918,7 +918,7 @@ def test_GlobalVariablesForFisc_inconsistency_queryReturns_sqlstrs():
         if dimen_config.get(idea_category_str()) == "fisc"
     }
 
-    exclude_cols = {"idea_number", "face_name", "event_int", "error_message"}
+    exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
     with sqlite3_connect(":memory:") as conn:
         create_fisc_prime_tables(conn)
 
@@ -964,8 +964,8 @@ def test_set_fisc_raw_error_message_Scenario0_fisunit_WithNo_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -1019,9 +1019,9 @@ def test_set_fisc_raw_error_message_Scenario1_fisunit_Some_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{a23_fund_coin},{a23_penny_1},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{a23_fund_coin},{a23_penny_2},{a23_respect_bit},'{a23_bridge}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},'{a23_timeline_tag}',{a23_job_listen_rotations},NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -1076,9 +1076,9 @@ def test_set_fisc_raw_error_message_Scenario2_fishour_Some_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.hour_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{a23_cumlative_minute_1},'{a23_4hour_tag}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{a23_cumlative_minute_1},'{a23_5hour_tag}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{a23_cumlative_minute_1},'{a23_4hour_tag}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{a23_cumlative_minute_1},'{a23_4hour_tag}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{a23_cumlative_minute_1},'{a23_5hour_tag}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{a23_cumlative_minute_1},'{a23_4hour_tag}',NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -1133,9 +1133,9 @@ def test_set_fisc_raw_error_message_Scenario3_fishour_Some_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.mont_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{_44_cumlative_day},'{a23_month_tag_1}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{_44_cumlative_day},'{a23_month_tag_2}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{_44_cumlative_day},'{a23_month_tag_2}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{_44_cumlative_day},'{a23_month_tag_1}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{_44_cumlative_day},'{a23_month_tag_2}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{_44_cumlative_day},'{a23_month_tag_2}',NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -1192,11 +1192,11 @@ def test_set_fisc_raw_error_message_Scenario4_fisweek_Some_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.week_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}',{order1},'{mon_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{order2},'{tue_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}',{order2},'{wed_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{order1},'{mon_str}',NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}',{order3},'{wed_str}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}',{order1},'{mon_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{order2},'{tue_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}',{order2},'{wed_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{order1},'{mon_str}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}',{order3},'{wed_str}',NULL)
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -1257,11 +1257,11 @@ def test_set_fisc_raw_error_message_Scenario5_fisdeal_Some_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.deal_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_2},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_owner_name}',{t1_deal_time},{t1_quota_1},NULL,NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_owner_name}',{t2_deal_time},{t2_quota},NULL,NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -1325,11 +1325,11 @@ def test_set_fisc_raw_error_message_Scenario6_fiscash_Some_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {x_tablename} ({x_cols.cash_raw_csv_header})
 VALUES
-  ('br00333','{sue_inx}',{event3},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_2},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord23_str}','{yao_inx}','{bob_inx}',{t2_tran_time},{t2_amount},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_1},NULL)
-, ('br00333','{sue_inx}',{event7},'{accord45_str}','{yao_inx}','{bob_inx}',{t2_tran_time},{t2_amount},NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_1},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_2},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{yao_inx}','{bob_inx}',{t2_tran_time},{t2_amount},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{yao_inx}','{bob_inx}',{t1_tran_time},{t1_amount_1},NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{yao_inx}','{bob_inx}',{t2_tran_time},{t2_amount},NULL)
 ;
 """
         print(f"{insert_raw_sqlstr=}")

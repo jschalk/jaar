@@ -117,7 +117,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
     expected_br00045_csv = expected_stance_csv_strs.get("br00045")
     print(f"{expected_br00001_csv=}")
 
-    face_event_str = "face_name,event_int,"
+    face_event_str = "event_int,face_name,"
     assert x_ideas.get("br00000") == f"{face_event_str}{expected_br00000_csv}"
     assert x_ideas.get("br00001") == f"{face_event_str}{expected_br00001_csv}"
     assert x_ideas.get("br00002") == f"{face_event_str}{expected_br00002_csv}"
@@ -255,12 +255,12 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
     expected_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
     expected_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
     expected_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
-    expected_br00000_csv = f"face_name,event_int,{expected_br00000_csv}"
-    expected_br00001_csv = f"face_name,event_int,{expected_br00001_csv}"
-    expected_br00002_csv = f"face_name,event_int,{expected_br00002_csv}"
-    expected_br00003_csv = f"face_name,event_int,{expected_br00003_csv}"
-    expected_br00004_csv = f"face_name,event_int,{expected_br00004_csv}"
-    expected_br00005_csv = f"face_name,event_int,{expected_br00005_csv}"
+    expected_br00000_csv = f"event_int,face_name,{expected_br00000_csv}"
+    expected_br00001_csv = f"event_int,face_name,{expected_br00001_csv}"
+    expected_br00002_csv = f"event_int,face_name,{expected_br00002_csv}"
+    expected_br00003_csv = f"event_int,face_name,{expected_br00003_csv}"
+    expected_br00004_csv = f"event_int,face_name,{expected_br00004_csv}"
+    expected_br00005_csv = f"event_int,face_name,{expected_br00005_csv}"
     expected_br00000_csv = expected_br00000_csv.replace("accord", ",,accord")
     expected_br00001_csv = expected_br00001_csv.replace("accord", ",,accord")
     expected_br00002_csv = expected_br00002_csv.replace("accord", ",,accord")
