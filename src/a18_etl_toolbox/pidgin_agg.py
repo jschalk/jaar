@@ -91,9 +91,6 @@ def create_pidginheartunit(
     face_name: str, event_int: int, otx_bridge: str, inx_bridge: str, unknown_word: str
 ) -> PidginHeartUnit:
     x_pidginheartunit = pidginheartunit_shop(face_name, event_int)
-    print(f"{otx_bridge=} {type(otx_bridge)=}")
-    print(f"{inx_bridge=} {type(inx_bridge)=}")
-    print(f"{unknown_word=} {type(unknown_word)=}")
     x_pidginheartunit.add_otx_bridge(otx_bridge)
     x_pidginheartunit.add_inx_bridge(inx_bridge)
     x_pidginheartunit.add_unknown_word(unknown_word)
