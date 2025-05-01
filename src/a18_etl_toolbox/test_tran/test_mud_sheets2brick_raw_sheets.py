@@ -66,7 +66,7 @@ def test_etl_mud_df_to_brick_raw_db_PopulatesBrickTables(env_dir_setup_cleanup):
     upsert_sheet(mud_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{brick_raw_str()}_br00003"
+        br00003_tablename = f"br00003_{brick_raw_str()}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN

@@ -19,9 +19,9 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_db_to_brick_agg_db,
     etl_brick_raw_db_to_brick_raw_df,
     etl_brick_agg_db_to_brick_agg_df,
-    etl_brick_raw_db_to_brick_agg_events_db,
-    etl_brick_agg_events_db_to_brick_valid_events_db,
-    etl_brick_agg_events_db_to_event_dict,
+    etl_brick_raw_db_to_events_brick_agg_db,
+    etl_events_brick_agg_db_to_brick_valid_events_db,
+    etl_events_brick_agg_db_to_event_dict,
     etl_brick_agg_non_pidgin_ideas_to_brick_valid,
     etl_brick_pidgin_raw_df_to_pidgin_agg_df,
     etl_brick_agg_df_to_brick_pidgin_raw_df,
@@ -240,70 +240,75 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_deal_mandate_ledgers(mstr_dir)
 
-    def mud_to_stances(
-        self, store_tracing_files: bool = False
-    ):  # sourcery skip: extract-method
+    def mud_to_stances(self, store_tracing_files: bool = False):
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         delete_dir(fisc_mstr_dir)
         set_dir(fisc_mstr_dir)
 
         with sqlite3_connect(":memory:") as db_conn:
             cursor = db_conn.cursor()
+            self.mud_to_stances_with_cursor(db_conn, cursor, store_tracing_files)
 
-            # collect excel file data into central location
-            # grab all excel sheets that fit idea format
-            self.mud_df_to_brick_raw_db(db_conn)
-            # per idea filter to only non-conflicting idea data
-            self.brick_raw_db_to_brick_agg_df(db_conn, cursor)
+    def mud_to_stances_with_cursor(
+        self,
+        db_conn: sqlite3_Connection,
+        cursor: sqlite3_Cursor,
+        store_tracing_files: bool,
+    ):
+        # collect excel file data into central location
+        # grab all excel sheets that fit idea format
+        self.mud_df_to_brick_raw_db(db_conn)
+        # per idea filter to only non-conflicting idea data
+        self.brick_raw_db_to_brick_agg_df(db_conn, cursor)
 
-            # identify all idea data that has conflicting face_name/event_int uniqueness
-            etl_brick_raw_db_to_brick_agg_events_db(cursor)
-            etl_brick_agg_events_db_to_brick_valid_events_db(cursor)
-            self._events = etl_brick_agg_events_db_to_event_dict(cursor)
+        # identify all idea data that has conflicting face_name/event_int uniqueness
+        etl_brick_raw_db_to_events_brick_agg_db(cursor)
+        etl_events_brick_agg_db_to_brick_valid_events_db(cursor)
+        self._events = etl_events_brick_agg_db_to_event_dict(cursor)
 
-            # build pidgins
-            # collect all pidgin data from all relevant valid ideas
-            self.brick_agg_df_to_brick_pidgin_raw_df()  # self._events.keys()
-            # per pidgin dimen filter to only non-conflicting pidgin data
-            self.brick_pidgin_raw_df_to_pidgin_agg_df()
-            self.brick_pidgin_agg_df_to_otz_face_pidgin_agg_df()
-            self.otz_face_pidgins_df_to_otz_event_pidgins_df()
-            # per event create isolated pidgin.json
-            self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
-            # per event create complete (inherited) pidgin.json
-            self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
+        # build pidgins
+        # collect all pidgin data from all relevant valid ideas
+        self.brick_agg_df_to_brick_pidgin_raw_df()  # self._events.keys()
+        # per pidgin dimen filter to only non-conflicting pidgin data
+        self.brick_pidgin_raw_df_to_pidgin_agg_df()
+        self.brick_pidgin_agg_df_to_otz_face_pidgin_agg_df()
+        self.otz_face_pidgins_df_to_otz_event_pidgins_df()
+        # per event create isolated pidgin.json
+        self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
+        # per event create complete (inherited) pidgin.json
+        self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
 
-            # pidgins translate all fisc&bud ideas
-            self.brick_agg_non_pidgin_ideas_to_brick_valid()  # self._events.keys()
-            self.brick_ideas_to_otz_face_ideas()
-            self.otz_face_ideas_to_otz_event_otx_ideas()
-            self.otz_event_ideas_to_inz_events()  # self._pidgin_events
-            self.otz_inx_event_ideas_to_inz_faces()
-            self.inz_face_ideas_to_csv_files()
-            self.inz_face_csv_files2idea_raw_tables(cursor)
+        # pidgins translate all fisc&bud ideas
+        self.brick_agg_non_pidgin_ideas_to_brick_valid()  # self._events.keys()
+        self.brick_ideas_to_otz_face_ideas()
+        self.otz_face_ideas_to_otz_event_otx_ideas()
+        self.otz_event_ideas_to_inz_events()  # self._pidgin_events
+        self.otz_inx_event_ideas_to_inz_faces()
+        self.inz_face_ideas_to_csv_files()
+        self.inz_face_csv_files2idea_raw_tables(cursor)
 
-            # create fiscunits
-            self.idea_raw_to_fisc_prime_tables(cursor)
-            self.fisc_agg_tables_to_fisc_jsons(cursor)
-            self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
-            self.fisc_table2fisc_ote1_agg_csvs(cursor)
-            self.fisc_ote1_agg_csvs2jsons()
+        # create fiscunits
+        self.idea_raw_to_fisc_prime_tables(cursor)
+        self.fisc_agg_tables_to_fisc_jsons(cursor)
+        self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
+        self.fisc_table2fisc_ote1_agg_csvs(cursor)
+        self.fisc_ote1_agg_csvs2jsons()
 
-            # create budunits
-            self.idea_raw_to_bud_prime_tables(cursor)
-            self.bud_tables_to_event_bud_csvs(cursor)
-            self.event_bud_csvs_to_pack_json()
-            self.event_pack_json_to_event_inherited_budunits()
-            self.event_inherited_budunits_to_fisc_gut()
+        # create budunits
+        self.idea_raw_to_bud_prime_tables(cursor)
+        self.bud_tables_to_event_bud_csvs(cursor)
+        self.event_bud_csvs_to_pack_json()
+        self.event_pack_json_to_event_inherited_budunits()
+        self.event_inherited_budunits_to_fisc_gut()
 
-            # create all fisc_job and mandate reports
-            self.fisc_gut_to_fisc_job()
-            self.calc_fisc_deal_acct_mandate_net_ledgers()
+        # create all fisc_job and mandate reports
+        self.fisc_gut_to_fisc_job()
+        self.calc_fisc_deal_acct_mandate_net_ledgers()
 
-            if store_tracing_files:
-                etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
-                # etl_brick_agg_db_to_brick_agg_df(db_conn, self._brick_dir)
-                self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
+        if store_tracing_files:
+            etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
+            # etl_brick_agg_db_to_brick_agg_df(db_conn, self._brick_dir)
+            self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):
         create_stance0001_file(self._fisc_mstr_dir)

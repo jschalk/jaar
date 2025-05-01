@@ -191,12 +191,12 @@ def etl_mud_df_to_brick_raw_db(conn: sqlite3_Connection, mud_dir: str):
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
-        x_tablename = f"brick_raw_{ref.idea_number}"
+        x_tablename = f"{ref.idea_number}_brick_raw"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
 def etl_brick_raw_db_to_brick_raw_df(conn: sqlite3_Connection, brick_dir: str):
-    brick_raw_dict = {f"brick_raw_{idea}": idea for idea in get_idea_numbers()}
+    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
     for table_name in get_db_tables(conn):
         if table_name in brick_raw_tables:
@@ -229,7 +229,7 @@ def etl_brick_raw_db_to_brick_agg_df(brick_dir):
 
 
 def etl_brick_agg_db_to_brick_agg_df(conn: sqlite3_Connection, brick_dir: str):
-    brick_agg_dict = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
+    brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for table_name in get_db_tables(conn):
         if table_name in brick_agg_tables:
@@ -241,7 +241,7 @@ def etl_brick_agg_db_to_brick_agg_df(conn: sqlite3_Connection, brick_dir: str):
 
 
 def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
-    brick_raw_dict = {f"brick_raw_{idea}": idea for idea in get_idea_numbers()}
+    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
         if x_tablename in brick_raw_tables:
@@ -256,7 +256,7 @@ def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
             value_columns_list = get_default_sorted_list(
                 value_columns_set, idea_columns
             )
-            agg_tablename = f"brick_agg_{idea_number}"
+            agg_tablename = f"{idea_number}_brick_agg"
             if not db_table_exists(conn_or_cursor, agg_tablename):
                 create_idea_sorted_table(conn_or_cursor, agg_tablename, idea_columns)
             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
@@ -277,12 +277,12 @@ def etl_brick_raw_db_to_brick_agg_db(conn_or_cursor: sqlite3_Connection):
 
 def etl_brick_agg_db_to_brick_valid_db(conn_or_cursor: sqlite3_Connection):
     idea_sqlite_types = get_idea_sqlite_types()
-    brick_agg_dict = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
+    brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
         if x_tablename in brick_agg_tables:
             idea_number = brick_agg_dict.get(x_tablename)
-            valid_tablename = f"brick_valid_{idea_number}"
+            valid_tablename = f"{idea_number}_brick_valid"
             agg_columns = get_table_columns(conn_or_cursor, x_tablename)
             create_table_from_columns(
                 conn_or_cursor,
@@ -333,8 +333,8 @@ def etl_brick_agg_non_pidgin_ideas_to_brick_valid(
         upsert_sheet(brick_idea_path, "brick_valid", brick_valid_df)
 
 
-def etl_brick_raw_db_to_brick_agg_events_db(conn_or_cursor: sqlite3_Cursor):
-    brick_events_tablename = "brick_agg_events"
+def etl_brick_raw_db_to_events_brick_agg_db(conn_or_cursor: sqlite3_Cursor):
+    brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
         brick_events_columns = [
             "idea_number",
@@ -346,7 +346,7 @@ def etl_brick_raw_db_to_brick_agg_events_db(conn_or_cursor: sqlite3_Cursor):
             conn_or_cursor, brick_events_tablename, brick_events_columns
         )
 
-    brick_agg_tables = {f"brick_agg_{idea}": idea for idea in get_idea_numbers()}
+    brick_agg_tables = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     for agg_tablename in get_db_tables(conn_or_cursor):
         if agg_tablename in brick_agg_tables:
             idea_number = brick_agg_tables.get(agg_tablename)
@@ -373,7 +373,7 @@ WHERE event_int IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
-def etl_brick_agg_events_db_to_brick_valid_events_db(conn_or_cursor: sqlite3_Cursor):
+def etl_events_brick_agg_db_to_brick_valid_events_db(conn_or_cursor: sqlite3_Cursor):
     valid_events_tablename = "brick_valid_events"
     if not db_table_exists(conn_or_cursor, valid_events_tablename):
         brick_events_columns = ["event_int", "face_name"]
@@ -383,14 +383,14 @@ def etl_brick_agg_events_db_to_brick_valid_events_db(conn_or_cursor: sqlite3_Cur
     insert_select_sqlstr = f"""
 INSERT INTO {valid_events_tablename} (event_int, face_name)
 SELECT event_int, face_name 
-FROM brick_agg_events
+FROM events_brick_agg
 WHERE error_message IS NULL
 ;
 """
     conn_or_cursor.execute(insert_select_sqlstr)
 
 
-def etl_brick_agg_events_db_to_event_dict(
+def etl_events_brick_agg_db_to_event_dict(
     conn_or_cursor: sqlite3_Cursor,
 ) -> dict[EventInt, FaceName]:
     select_sqlstr = """

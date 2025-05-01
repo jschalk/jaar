@@ -36,7 +36,7 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario0_GroupByWor
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    raw_br00003_tablename = f"{brick_raw_str()}_br00003"
+    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -72,7 +72,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -120,7 +120,7 @@ def test_etl_brick_raw_db_to_brick_agg_db_PopulatesAggTable_Scenario1_GroupByOnl
     hour7am = "7am"
     hour8am = "8am"
 
-    raw_br00003_tablename = f"{brick_raw_str()}_br00003"
+    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -156,7 +156,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -201,7 +201,7 @@ def test_etl_brick_agg_db_to_brick_agg_df_PopulatesAggTable_Scenario0_GroupByWor
     hour6am = "6am"
     hour7am = "7am"
     hour8am = "8am"
-    agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -274,7 +274,7 @@ def test_etl_brick_agg_db_to_brick_valid_db_PopulatesValidTable_Scenario0_Only_v
     hour7am = "7am"
     hour8am = "8am"
 
-    agg_br00003_tablename = f"{brick_agg_str()}_br00003"
+    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -328,7 +328,7 @@ VALUES
         cursor.execute(insert_into_valid_events)
         assert get_row_count(cursor, valid_events_tablename) == 2
 
-        valid_br00003_tablename = f"{brick_valid_str()}_br00003"
+        valid_br00003_tablename = f"br00003_{brick_valid_str()}"
         assert not db_table_exists(cursor, valid_br00003_tablename)
 
         # WHEN

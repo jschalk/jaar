@@ -68,7 +68,7 @@ def test_WorldUnit_mud_df_to_brick_raw_db_CreatesBrickFiles(
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"{brick_raw_str()}_br00003"
+        br00003_tablename = f"br00003_{brick_raw_str()}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
