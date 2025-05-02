@@ -8,19 +8,11 @@ from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types, get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    get_dimen_abbv7,
     get_pidgin_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
 )
 from sqlite3 import connect as sqlite3_connect
-
-
-def short_abbv(dimen: str) -> str:
-    return {
-        "pidgin_label": "PIDLABE",
-        "pidgin_name": "PIDNAME",
-        "pidgin_road": "PIDROAD",
-        "pidgin_tag": "PIDTAGG",
-    }.get(dimen)
 
 
 def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
@@ -58,7 +50,7 @@ def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
         agg_create_sqlstr = create_table_sqlstrs.get(agg_table)
         assert agg_create_sqlstr == ex_agg_sqlstr
 
-        # abbv7 = short_abbv(x_dimen)
+        # abbv7 = get_dimen_abbv7(x_dimen)
         # print(f'CREATE_{abbv7.upper()}_RAW_SQLSTR= """{ex_raw_sqlstr}"""')
         # print(f'CREATE_{abbv7.upper()}_AGG_SQLSTR= """{ex_agg_sqlstr}"""')
         # print(f'"{raw_table}": CREATE_{raw_table.upper()}_SQLSTR,')

@@ -46,6 +46,12 @@ from src.a15_fisc_logic._utils.str_a15 import (
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
+from src.a16_pidgin_logic._utils.str_a16 import (
+    pidgin_label_str,
+    pidgin_name_str,
+    pidgin_road_str,
+    pidgin_tag_str,
+)
 from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
@@ -62,6 +68,10 @@ from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeColumnsRef,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    ALL_DIMEN_ABBV7,
+    get_dimen_abbv7,
+    create_prime_tablename,
+    get_prime_create_table_sqlstrs,
     get_fisc_prime_create_table_sqlstrs,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
@@ -138,26 +148,158 @@ def abbv(tablename: str) -> str:
     return abbrevions.get(tablename)
 
 
-def short_abbv(dimen: str) -> str:
-    return {
-        "fisc_cashbook": "FISCASH",
-        "fisc_dealunit": "FISDEAL",
-        "fisc_timeline_hour": "FISHOUR",
-        "fisc_timeline_month": "FISMONT",
-        "fisc_timeline_weekday": "FISWEEK",
-        "fisc_timeoffi": "FISOFFI",
-        "fiscunit": "FISUNIT",
-        "bud_acct_membership": "BUDMEMB",
-        "bud_acctunit": "BUDACCT",
-        "bud_item_awardlink": "BUDAWAR",
-        "bud_item_factunit": "BUDFACT",
-        "bud_item_healerlink": "BUDHEAL",
-        "bud_item_reason_premiseunit": "BUDPREM",
-        "bud_item_reasonunit": "BUDREAS",
-        "bud_item_teamlink": "BUDTEAM",
-        "bud_itemunit": "BUDITEM",
-        "budunit": "BUDUNIT",
-    }.get(dimen)
+def test_ALL_DIMEN_ABBV7_has_all_dimens():
+    # ESTABLISH / WHEN / THEN
+    assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
+
+
+def test_create_prime_tablename_ReturnsObj():
+    # ESTABLISH
+    budunit_dimen = budunit_str()
+    budacct_dimen = bud_acctunit_str()
+    budmemb_dimen = bud_acct_membership_str()
+    buditem_dimen = bud_itemunit_str()
+    budawar_dimen = bud_item_awardlink_str()
+    budreas_dimen = bud_item_reasonunit_str()
+    budprem_dimen = bud_item_reason_premiseunit_str()
+    budteam_dimen = bud_item_teamlink_str()
+    budheal_dimen = bud_item_healerlink_str()
+    budfact_dimen = bud_item_factunit_str()
+    fisunit_dimen = fiscunit_str()
+    fiscash_dimen = fisc_cashbook_str()
+    fisdeal_dimen = fisc_dealunit_str()
+    fishour_dimen = fisc_timeline_hour_str()
+    fismont_dimen = fisc_timeline_month_str()
+    fisweek_dimen = fisc_timeline_weekday_str()
+    fisoffi_dimen = fisc_timeoffi_str()
+    pidname_dimen = pidgin_name_str()
+    pidtagg_dimen = pidgin_tag_str()
+    pidroad_dimen = pidgin_road_str()
+    pidlabe_dimen = pidgin_label_str()
+    raw_str = "raw"
+    agg_str = "agg"
+    vld_str = "vld"
+    put_str = "put"
+    del_str = "del"
+
+    # WHEN
+    budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
+    budacct_s_agg_table = create_prime_tablename("budacct", "s", agg_str, put_str)
+    budmemb_s_agg_table = create_prime_tablename("budmemb", "s", agg_str, put_str)
+    buditem_s_agg_table = create_prime_tablename("buditem", "s", agg_str, put_str)
+    budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
+    budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
+    budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
+    budteam_s_agg_table = create_prime_tablename("budteam", "s", agg_str, put_str)
+    budheal_s_agg_table = create_prime_tablename("budheal", "s", agg_str, put_str)
+    budfact_s_agg_table = create_prime_tablename("budfact", "s", agg_str, put_str)
+    budfact_s_del_table = create_prime_tablename("budfact", "s", agg_str, del_str)
+    fisunit_s_agg_table = create_prime_tablename("fisunit", "s", agg_str)
+    fiscash_s_agg_table = create_prime_tablename("fiscash", "s", agg_str)
+    fisdeal_s_agg_table = create_prime_tablename("fisdeal", "s", agg_str)
+    fishour_s_agg_table = create_prime_tablename("fishour", "s", agg_str)
+    fismont_s_agg_table = create_prime_tablename("fismont", "s", agg_str)
+    fisweek_s_agg_table = create_prime_tablename("fisweek", "s", agg_str)
+    fisoffi_s_agg_table = create_prime_tablename("fisoffi", "s", agg_str)
+    pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
+    pidtagg_s_agg_table = create_prime_tablename("pidtagg", "s", agg_str)
+    pidroad_s_agg_table = create_prime_tablename("pidroad", "s", agg_str)
+    pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
+    pidlabe_v_agg_table = create_prime_tablename("pidlabe", "v", agg_str)
+    pidlabe_s_raw_table = create_prime_tablename("pidlabe", "s", raw_str)
+    pidlabe_s_val_table = create_prime_tablename("pidlabe", "s", vld_str)
+
+    # THEN
+    assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
+    assert budacct_s_agg_table == f"{budacct_dimen}_s_put_agg"
+    assert budmemb_s_agg_table == f"{budmemb_dimen}_s_put_agg"
+    assert buditem_s_agg_table == f"{buditem_dimen}_s_put_agg"
+    assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
+    assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
+    assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
+    assert budteam_s_agg_table == f"{budteam_dimen}_s_put_agg"
+    assert budheal_s_agg_table == f"{budheal_dimen}_s_put_agg"
+    assert budfact_s_agg_table == f"{budfact_dimen}_s_put_agg"
+    assert budfact_s_del_table == f"{budfact_dimen}_s_del_agg"
+    assert fisunit_s_agg_table == f"{fisunit_dimen}_s_agg"
+    assert fiscash_s_agg_table == f"{fiscash_dimen}_s_agg"
+    assert fisdeal_s_agg_table == f"{fisdeal_dimen}_s_agg"
+    assert fishour_s_agg_table == f"{fishour_dimen}_s_agg"
+    assert fismont_s_agg_table == f"{fismont_dimen}_s_agg"
+    assert fisweek_s_agg_table == f"{fisweek_dimen}_s_agg"
+    assert fisoffi_s_agg_table == f"{fisoffi_dimen}_s_agg"
+    assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
+    assert pidtagg_s_agg_table == f"{pidtagg_dimen}_s_agg"
+    assert pidroad_s_agg_table == f"{pidroad_dimen}_s_agg"
+    assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
+    assert pidlabe_v_agg_table == f"{pidlabe_dimen}_v_agg"
+    assert pidlabe_s_raw_table == f"{pidlabe_dimen}_s_raw"
+    assert pidlabe_s_val_table == f"{pidlabe_dimen}_s_vld"
+
+
+def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
+    pass
+    #  create_prime_tablename(abbv7, "s", "agg")
+
+
+def create_fisc_table_sqlstr(abbv7):
+    pass
+
+
+# def test_get_prime_create_table_sqlstrs_ReturnsObj():
+#     # sourcery skip: no-loop-in-tests
+#     # ESTABLISH / WHEN
+#     create_table_sqlstrs = get_prime_create_table_sqlstrs()
+
+#     # THEN
+#     idea_config = get_idea_config_dict()
+#     sqlite_types = get_idea_sqlite_types()
+#     for x_dimen in idea_config:
+#         abbv7 = get_dimen_abbv7(x_dimen)
+#         print(f"{abbv7} {x_dimen} checking...")
+#         x_config = idea_config.get(x_dimen)
+
+#         # create agg table
+#         s_agg = create_prime_tablename(abbv7, "s", "agg")
+#         # ag_table = f"{x_dimen}_agg"
+#         ag_sqlstr = create_table_sqlstrs.get(s_agg)
+#         ag_cols = set(x_config.get("jkeys").keys())
+#         ag_cols.update(set(x_config.get("jvalues").keys()))
+#         ag_cols.remove(event_int_str())
+#         ag_cols.remove(face_name_str())
+#         ag_cols = get_default_sorted_list(ag_cols)
+#         # print(f"{ag_cols=}")
+#         gen_dimen_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
+#         gen_dimen_agg_sqlstr = create_agg_table_sqlstr()
+#         # assert ag_sqlstr == gen_dimen_agg_sqlstr
+
+#         # create raw table
+#         st_table = f"{x_dimen}_raw"
+#         st_sqlstr = create_table_sqlstrs.get(st_table)
+#         st_cols = set(x_config.get("jkeys").keys())
+#         st_cols.update(set(x_config.get("jvalues").keys()))
+#         st_cols.add(idea_number_str())
+#         st_cols.add("error_message")
+#         st_cols = get_default_sorted_list(st_cols)
+#         gen_dimen_raw_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
+#         # assert st_sqlstr == gen_dimen_raw_sqlstr
+
+#         # create raw table
+#         st_table = f"{x_dimen}_raw"
+#         st_sqlstr = create_table_sqlstrs.get(st_table)
+#         st_cols = set(x_config.get("jkeys").keys())
+#         st_cols.update(set(x_config.get("jvalues").keys()))
+#         st_cols.add(idea_number_str())
+#         st_cols.add("error_message")
+#         st_cols = get_default_sorted_list(st_cols)
+#         gen_dimen_raw_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
+#         # assert st_sqlstr == gen_dimen_raw_sqlstr
+
+#         # print(f'CREATE_{abbv7.upper()}_AGG_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
+#         # print(f'CREATE_{abbv7.upper()}_RAW_SQLSTR= """{gen_dimen_raw_sqlstr}"""')
+#         # print(f'"{ag_table}": {ag_table.upper()}_SQLSTR,')
+#         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
+#     assert 1 == 2
 
 
 def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
@@ -175,7 +317,7 @@ def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
     sqlite_types = get_idea_sqlite_types()
     for x_dimen in idea_config:
         # print(f"{x_dimen} checking...")
-        abbv7 = short_abbv(x_dimen)
+        abbv7 = get_dimen_abbv7(x_dimen)
         x_config = idea_config.get(x_dimen)
 
         ag_table = f"{x_dimen}_agg"
@@ -702,7 +844,7 @@ def test_get_bud_put_update_inconsist_error_message_sqlstrs_ReturnsObj():
             generated_dimen_sqlstr = create_update_inconsistency_error_query(
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
-            abbv7 = short_abbv(x_dimen)
+            abbv7 = get_dimen_abbv7(x_dimen)
             print(
                 f"""{abbv7.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
             )

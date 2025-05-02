@@ -41,6 +41,7 @@ def get_idea_elements_sort_order() -> list[str]:
     return [
         "world_id",
         "idea_number",
+        "pidgin_event_int",
         "event_int",
         "face_name",
         "fisc_tag",
@@ -179,6 +180,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "world_id": "TEXT",
         "idea_number": "TEXT",
         "face_name": "TEXT",
+        "pidgin_event_int": "INTEGER",
         "event_int": "INTEGER",
         "fisc_tag": "TEXT",
         "owner_name": "TEXT",

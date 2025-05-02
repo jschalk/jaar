@@ -6,6 +6,179 @@ from src.a17_idea_logic.idea_config import (
 )
 from sqlite3 import Connection as sqlite3_Connection
 
+ALL_DIMEN_ABBV7 = {
+    "FISCASH",
+    "FISDEAL",
+    "FISHOUR",
+    "FISMONT",
+    "FISWEEK",
+    "FISOFFI",
+    "FISUNIT",
+    "BUDMEMB",
+    "BUDACCT",
+    "BUDAWAR",
+    "BUDFACT",
+    "BUDHEAL",
+    "BUDPREM",
+    "BUDREAS",
+    "BUDTEAM",
+    "BUDITEM",
+    "BUDUNIT",
+    "PIDLABE",
+    "PIDNAME",
+    "PIDROAD",
+    "PIDTAGG",
+}
+
+
+def get_dimen_abbv7(dimen: str) -> str:
+    return {
+        "fisc_cashbook": "FISCASH",
+        "fisc_dealunit": "FISDEAL",
+        "fisc_timeline_hour": "FISHOUR",
+        "fisc_timeline_month": "FISMONT",
+        "fisc_timeline_weekday": "FISWEEK",
+        "fisc_timeoffi": "FISOFFI",
+        "fiscunit": "FISUNIT",
+        "bud_acct_membership": "BUDMEMB",
+        "bud_acctunit": "BUDACCT",
+        "bud_item_awardlink": "BUDAWAR",
+        "bud_item_factunit": "BUDFACT",
+        "bud_item_healerlink": "BUDHEAL",
+        "bud_item_reason_premiseunit": "BUDPREM",
+        "bud_item_reasonunit": "BUDREAS",
+        "bud_item_teamlink": "BUDTEAM",
+        "bud_itemunit": "BUDITEM",
+        "budunit": "BUDUNIT",
+        "pidgin_label": "PIDLABE",
+        "pidgin_name": "PIDNAME",
+        "pidgin_road": "PIDROAD",
+        "pidgin_tag": "PIDTAGG",
+    }.get(dimen)
+
+
+def create_prime_tablename(
+    abbv7: str, sound: str, stage: str, put_del: str = None
+) -> str:
+    abbv_references = {
+        "FISCASH": "fisc_cashbook",
+        "FISDEAL": "fisc_dealunit",
+        "FISHOUR": "fisc_timeline_hour",
+        "FISMONT": "fisc_timeline_month",
+        "FISWEEK": "fisc_timeline_weekday",
+        "FISOFFI": "fisc_timeoffi",
+        "FISUNIT": "fiscunit",
+        "BUDMEMB": "bud_acct_membership",
+        "BUDACCT": "bud_acctunit",
+        "BUDAWAR": "bud_item_awardlink",
+        "BUDFACT": "bud_item_factunit",
+        "BUDHEAL": "bud_item_healerlink",
+        "BUDPREM": "bud_item_reason_premiseunit",
+        "BUDREAS": "bud_item_reasonunit",
+        "BUDTEAM": "bud_item_teamlink",
+        "BUDITEM": "bud_itemunit",
+        "BUDUNIT": "budunit",
+        "PIDLABE": "pidgin_label",
+        "PIDNAME": "pidgin_name",
+        "PIDROAD": "pidgin_road",
+        "PIDTAGG": "pidgin_tag",
+    }
+    full_dimen = abbv_references.get(abbv7.upper())
+    if put_del:
+        return f"{full_dimen}_{sound}_{put_del}_{stage}"
+    return f"{full_dimen}_{sound}_{stage}"
+
+
+CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISCASH_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_vld (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISCASH_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISCASH_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISCASH_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_vld (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISDEAL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISDEAL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISDEAL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_vld (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISDEAL_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISDEAL_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISDEAL_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_vld (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISHOUR_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_vld (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISHOUR_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISHOUR_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISHOUR_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_vld (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISMONT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISMONT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISMONT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_vld (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISMONT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISMONT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISMONT_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_vld (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISWEEK_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISWEEK_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISWEEK_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_vld (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISWEEK_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISWEEK_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISWEEK_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_vld (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISOFFI_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_agg (fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_vld (fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_agg (fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISOFFI_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_vld (fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_vld (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISUNIT_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_vld (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+
+
+def get_prime_create_table_sqlstrs() -> dict[str:str]:
+    return {
+        "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
+        "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
+        "fisc_cashbook_s_vld": CREATE_FISCASH_SOUND_VLD_SQLSTR,
+        "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,
+        "fisc_cashbook_v_agg": CREATE_FISCASH_VOICE_AGG_SQLSTR,
+        "fisc_cashbook_v_vld": CREATE_FISCASH_VOICE_VLD_SQLSTR,
+        "fisc_dealunit_s_raw": CREATE_FISDEAL_SOUND_RAW_SQLSTR,
+        "fisc_dealunit_s_agg": CREATE_FISDEAL_SOUND_AGG_SQLSTR,
+        "fisc_dealunit_s_vld": CREATE_FISDEAL_SOUND_VLD_SQLSTR,
+        "fisc_dealunit_v_raw": CREATE_FISDEAL_VOICE_RAW_SQLSTR,
+        "fisc_dealunit_v_agg": CREATE_FISDEAL_VOICE_AGG_SQLSTR,
+        "fisc_dealunit_v_vld": CREATE_FISDEAL_VOICE_VLD_SQLSTR,
+        "fisc_timeline_hour_s_raw": CREATE_FISHOUR_SOUND_RAW_SQLSTR,
+        "fisc_timeline_hour_s_agg": CREATE_FISHOUR_SOUND_AGG_SQLSTR,
+        "fisc_timeline_hour_s_vld": CREATE_FISHOUR_SOUND_VLD_SQLSTR,
+        "fisc_timeline_hour_v_raw": CREATE_FISHOUR_VOICE_RAW_SQLSTR,
+        "fisc_timeline_hour_v_agg": CREATE_FISHOUR_VOICE_AGG_SQLSTR,
+        "fisc_timeline_hour_v_vld": CREATE_FISHOUR_VOICE_VLD_SQLSTR,
+        "fisc_timeline_month_s_raw": CREATE_FISMONT_SOUND_RAW_SQLSTR,
+        "fisc_timeline_month_s_agg": CREATE_FISMONT_SOUND_AGG_SQLSTR,
+        "fisc_timeline_month_s_vld": CREATE_FISMONT_SOUND_VLD_SQLSTR,
+        "fisc_timeline_month_v_raw": CREATE_FISMONT_VOICE_RAW_SQLSTR,
+        "fisc_timeline_month_v_agg": CREATE_FISMONT_VOICE_AGG_SQLSTR,
+        "fisc_timeline_month_v_vld": CREATE_FISMONT_VOICE_VLD_SQLSTR,
+        "fisc_timeline_weekday_s_raw": CREATE_FISWEEK_SOUND_RAW_SQLSTR,
+        "fisc_timeline_weekday_s_agg": CREATE_FISWEEK_SOUND_AGG_SQLSTR,
+        "fisc_timeline_weekday_s_vld": CREATE_FISWEEK_SOUND_VLD_SQLSTR,
+        "fisc_timeline_weekday_v_raw": CREATE_FISWEEK_VOICE_RAW_SQLSTR,
+        "fisc_timeline_weekday_v_agg": CREATE_FISWEEK_VOICE_AGG_SQLSTR,
+        "fisc_timeline_weekday_v_vld": CREATE_FISWEEK_VOICE_VLD_SQLSTR,
+        "fisc_timeoffi_s_raw": CREATE_FISOFFI_SOUND_RAW_SQLSTR,
+        "fisc_timeoffi_s_agg": CREATE_FISOFFI_SOUND_AGG_SQLSTR,
+        "fisc_timeoffi_s_vld": CREATE_FISOFFI_SOUND_VLD_SQLSTR,
+        "fisc_timeoffi_v_raw": CREATE_FISOFFI_VOICE_RAW_SQLSTR,
+        "fisc_timeoffi_v_agg": CREATE_FISOFFI_VOICE_AGG_SQLSTR,
+        "fisc_timeoffi_v_vld": CREATE_FISOFFI_VOICE_VLD_SQLSTR,
+        "fiscunit_s_raw": CREATE_FISUNIT_SOUND_RAW_SQLSTR,
+        "fiscunit_s_agg": CREATE_FISUNIT_SOUND_AGG_SQLSTR,
+        "fiscunit_s_vld": CREATE_FISUNIT_SOUND_VLD_SQLSTR,
+        "fiscunit_v_raw": CREATE_FISUNIT_VOICE_RAW_SQLSTR,
+        "fiscunit_v_agg": CREATE_FISUNIT_VOICE_AGG_SQLSTR,
+        "fiscunit_v_vld": CREATE_FISUNIT_VOICE_VLD_SQLSTR,
+    }
+
 
 CREATE_PIDLABE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDLABE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
