@@ -86,7 +86,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_raw_sqlstrs,
     get_bud_insert_del_agg_from_raw_sqlstrs,
-    IDEA_STAGEBLE_PUT_DIMENS,
+    get_idea_stageble_put_dimens,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -880,12 +880,13 @@ def etl_idea_raw_to_bud_prime_tables(conn_or_cursor):
 
 
 def idea_raw_tables2fisc_raw_tables(conn_or_cursor: sqlite3_Connection):
+    ideas_stageble_dimens = get_idea_stageble_put_dimens()
     idea_config_dict = get_idea_config_dict()
     for idea_number in get_idea_numbers():
         idea_raw = f"{idea_number}_raw"
         if db_table_exists(conn_or_cursor, idea_raw):
             # only inserts from pre-identified idea categorys
-            stageble_dimens = IDEA_STAGEBLE_PUT_DIMENS.get(idea_number)
+            stageble_dimens = ideas_stageble_dimens.get(idea_number)
             for x_dimen in stageble_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "fisc":
@@ -912,7 +913,7 @@ def idea_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
         idea_raw = f"{idea_number}_raw"
         if db_table_exists(conn_or_cursor, idea_raw):
             # only inserts from pre-identified idea categorys
-            stageble_dimens = IDEA_STAGEBLE_PUT_DIMENS.get(idea_number)
+            stageble_dimens = get_idea_stageble_put_dimens().get(idea_number)
             for x_dimen in stageble_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "bud":

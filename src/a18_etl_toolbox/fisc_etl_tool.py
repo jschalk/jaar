@@ -1,24 +1,4 @@
-from src.a00_data_toolbox.file_toolbox import create_path, save_file
-from src.a00_data_toolbox.dict_toolbox import (
-    get_sorted_list_of_dict_keys as get_sorted_list,
-)
-from src.a07_calendar_logic.chrono import (
-    timeline_config_shop,
-    timelineunit_shop,
-    validate_timeline_config,
-)
-from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a17_idea_logic.idea import (
-    _add_cashpurchases_from_df,
-    _add_dealunits_from_df,
-    _add_time_offi_units_from_df,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    upsert_sheet,
-    dataframe_to_dict,
-    if_nan_return_None,
-)
-from pandas import DataFrame, read_excel as pandas_read_excel
+from src.a00_data_toolbox.file_toolbox import create_path
 
 
 class FiscPrimeObjsRef:
@@ -149,64 +129,63 @@ class FiscPrimeColumnsRef:
         self.offi_agg_empty_csv = f"{self.offi_agg_csv_header}\n"
 
 
-def create_init_fisc_prime_files(fiscs_dir: str):
-    fiscref = FiscPrimeObjsRef(fiscs_dir)
-    xc = FiscPrimeColumnsRef()
-    unit_raw_df = DataFrame([], columns=xc.unit_raw_columns)
-    deal_raw_df = DataFrame([], columns=xc.deal_raw_columns)
-    cash_raw_df = DataFrame([], columns=xc.cash_raw_columns)
-    hour_raw_df = DataFrame([], columns=xc.hour_raw_columns)
-    mont_raw_df = DataFrame([], columns=xc.mont_raw_columns)
-    week_raw_df = DataFrame([], columns=xc.week_raw_columns)
-    offi_raw_df = DataFrame([], columns=xc.offi_raw_columns)
-    upsert_sheet(fiscref.unit_excel_path, "raw", unit_raw_df)
-    upsert_sheet(fiscref.deal_excel_path, "raw", deal_raw_df)
-    upsert_sheet(fiscref.cash_excel_path, "raw", cash_raw_df)
-    upsert_sheet(fiscref.hour_excel_path, "raw", hour_raw_df)
-    upsert_sheet(fiscref.mont_excel_path, "raw", mont_raw_df)
-    upsert_sheet(fiscref.week_excel_path, "raw", week_raw_df)
-    upsert_sheet(fiscref.offi_excel_path, "raw", offi_raw_df)
+# def create_init_fisc_prime_files(fiscs_dir: str):
+#     fiscref = FiscPrimeObjsRef(fiscs_dir)
+#     xc = FiscPrimeColumnsRef()
+#     unit_raw_df = DataFrame([], columns=xc.unit_raw_columns)
+#     deal_raw_df = DataFrame([], columns=xc.deal_raw_columns)
+#     cash_raw_df = DataFrame([], columns=xc.cash_raw_columns)
+#     hour_raw_df = DataFrame([], columns=xc.hour_raw_columns)
+#     mont_raw_df = DataFrame([], columns=xc.mont_raw_columns)
+#     week_raw_df = DataFrame([], columns=xc.week_raw_columns)
+#     offi_raw_df = DataFrame([], columns=xc.offi_raw_columns)
+#     upsert_sheet(fiscref.unit_excel_path, "raw", unit_raw_df)
+#     upsert_sheet(fiscref.deal_excel_path, "raw", deal_raw_df)
+#     upsert_sheet(fiscref.cash_excel_path, "raw", cash_raw_df)
+#     upsert_sheet(fiscref.hour_excel_path, "raw", hour_raw_df)
+#     upsert_sheet(fiscref.mont_excel_path, "raw", mont_raw_df)
+#     upsert_sheet(fiscref.week_excel_path, "raw", week_raw_df)
+#     upsert_sheet(fiscref.offi_excel_path, "raw", offi_raw_df)
 
-    unit_agg_df = DataFrame([], columns=xc.unit_agg_columns)
-    deal_agg_df = DataFrame([], columns=xc.deal_agg_columns)
-    cash_agg_df = DataFrame([], columns=xc.cash_agg_columns)
-    hour_agg_df = DataFrame([], columns=xc.hour_agg_columns)
-    mont_agg_df = DataFrame([], columns=xc.mont_agg_columns)
-    week_agg_df = DataFrame([], columns=xc.week_agg_columns)
-    offi_agg_df = DataFrame([], columns=xc.offi_agg_columns)
-    upsert_sheet(fiscref.unit_excel_path, "agg", unit_agg_df)
-    upsert_sheet(fiscref.deal_excel_path, "agg", deal_agg_df)
-    upsert_sheet(fiscref.cash_excel_path, "agg", cash_agg_df)
-    upsert_sheet(fiscref.hour_excel_path, "agg", hour_agg_df)
-    upsert_sheet(fiscref.mont_excel_path, "agg", mont_agg_df)
-    upsert_sheet(fiscref.week_excel_path, "agg", week_agg_df)
-    upsert_sheet(fiscref.offi_excel_path, "agg", offi_agg_df)
+#     unit_agg_df = DataFrame([], columns=xc.unit_agg_columns)
+#     deal_agg_df = DataFrame([], columns=xc.deal_agg_columns)
+#     cash_agg_df = DataFrame([], columns=xc.cash_agg_columns)
+#     hour_agg_df = DataFrame([], columns=xc.hour_agg_columns)
+#     mont_agg_df = DataFrame([], columns=xc.mont_agg_columns)
+#     week_agg_df = DataFrame([], columns=xc.week_agg_columns)
+#     offi_agg_df = DataFrame([], columns=xc.offi_agg_columns)
+#     upsert_sheet(fiscref.unit_excel_path, "agg", unit_agg_df)
+#     upsert_sheet(fiscref.deal_excel_path, "agg", deal_agg_df)
+#     upsert_sheet(fiscref.cash_excel_path, "agg", cash_agg_df)
+#     upsert_sheet(fiscref.hour_excel_path, "agg", hour_agg_df)
+#     upsert_sheet(fiscref.mont_excel_path, "agg", mont_agg_df)
+#     upsert_sheet(fiscref.week_excel_path, "agg", week_agg_df)
+#     upsert_sheet(fiscref.offi_excel_path, "agg", offi_agg_df)
 
 
-def create_timelineunit_from_prime_data(
-    fisc_attrs, fisc_weekday_dict, fisc_month_dict, fisc_hour_dict
-):
-    if fisc_weekday_dict:
-        x_weekday_list = get_sorted_list(fisc_weekday_dict, "weekday_order")
-    else:
-        x_weekday_list = None
-    timeline_config = timeline_config_shop(
-        timeline_tag=if_nan_return_None(fisc_attrs.get("timeline_tag")),
-        c400_number=if_nan_return_None(fisc_attrs.get("c400_number")),
-        hour_length=None,
-        month_length=None,
-        weekday_list=x_weekday_list,
-        months_list=None,
-        monthday_distortion=if_nan_return_None(fisc_attrs.get("monthday_distortion")),
-        yr1_jan1_offset=if_nan_return_None(fisc_attrs.get("yr1_jan1_offset")),
-    )
-    if fisc_month_dict:
-        x_month_list = get_sorted_list(fisc_month_dict, "cumlative_day", True)
-        timeline_config["months_config"] = x_month_list
-    if fisc_hour_dict:
-        x_hour_list = get_sorted_list(fisc_hour_dict, "cumlative_minute", True)
-        timeline_config["hours_config"] = x_hour_list
-    if validate_timeline_config(timeline_config) is False:
-        raise ValueError(f"Invalid timeline_config: {timeline_config=}")
-
-    return timelineunit_shop(timeline_config)
+# def create_timelineunit_from_prime_data(
+#     fisc_attrs, fisc_weekday_dict, fisc_month_dict, fisc_hour_dict
+# ):
+#     if fisc_weekday_dict:
+#         x_weekday_list = get_sorted_list(fisc_weekday_dict, "weekday_order")
+#     else:
+#         x_weekday_list = None
+#     timeline_config = timeline_config_shop(
+#         timeline_tag=if_nan_return_None(fisc_attrs.get("timeline_tag")),
+#         c400_number=if_nan_return_None(fisc_attrs.get("c400_number")),
+#         hour_length=None,
+#         month_length=None,
+#         weekday_list=x_weekday_list,
+#         months_list=None,
+#         monthday_distortion=if_nan_return_None(fisc_attrs.get("monthday_distortion")),
+#         yr1_jan1_offset=if_nan_return_None(fisc_attrs.get("yr1_jan1_offset")),
+#     )
+#     if fisc_month_dict:
+#         x_month_list = get_sorted_list(fisc_month_dict, "cumlative_day", True)
+#         timeline_config["months_config"] = x_month_list
+#     if fisc_hour_dict:
+#         x_hour_list = get_sorted_list(fisc_hour_dict, "cumlative_minute", True)
+#         timeline_config["hours_config"] = x_hour_list
+#     if validate_timeline_config(timeline_config) is False:
+#         raise ValueError(f"Invalid timeline_config: {timeline_config=}")
+#     return timelineunit_shop(timeline_config)

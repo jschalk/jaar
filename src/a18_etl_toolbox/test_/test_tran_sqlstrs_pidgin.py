@@ -469,7 +469,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #             assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-# def test_IDEA_STAGEBLE_PUT_DIMENS_HasAll_idea_numbersForAll_dimens():
+# def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
 #     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
 #     # ESTABLISH / WHEN
 #     # THEN
@@ -530,7 +530,7 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
 #     print(f"{expected_idea_stagable_dimens=}")
 #     assert idea_dimen_combo_checked_count == 680
 #     assert idea_raw2dimen_count == 100
-#     assert IDEA_STAGEBLE_PUT_DIMENS == expected_idea_stagable_dimens
+#     assert get_idea_stageble_put_dimens() == expected_idea_stagable_dimens
 
 
 # def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
