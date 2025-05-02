@@ -131,6 +131,18 @@ CREATE_FISUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_vld (
 CREATE_FISUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
 CREATE_FISUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 CREATE_FISUNIT_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_vld (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_vld (otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_vld (otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDROAD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDROAD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_agg (otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDROAD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_vld (otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDTAGG_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDTAGG_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_agg (otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDTAGG_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_vld (otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 
 def get_prime_create_table_sqlstrs() -> dict[str:str]:
@@ -177,6 +189,18 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "fiscunit_v_raw": CREATE_FISUNIT_VOICE_RAW_SQLSTR,
         "fiscunit_v_agg": CREATE_FISUNIT_VOICE_AGG_SQLSTR,
         "fiscunit_v_vld": CREATE_FISUNIT_VOICE_VLD_SQLSTR,
+        "pidgin_label_s_raw": CREATE_PIDLABE_SOUND_RAW_SQLSTR,
+        "pidgin_label_s_agg": CREATE_PIDLABE_SOUND_AGG_SQLSTR,
+        "pidgin_label_s_vld": CREATE_PIDLABE_SOUND_VLD_SQLSTR,
+        "pidgin_name_s_raw": CREATE_PIDNAME_SOUND_RAW_SQLSTR,
+        "pidgin_name_s_agg": CREATE_PIDNAME_SOUND_AGG_SQLSTR,
+        "pidgin_name_s_vld": CREATE_PIDNAME_SOUND_VLD_SQLSTR,
+        "pidgin_road_s_raw": CREATE_PIDROAD_SOUND_RAW_SQLSTR,
+        "pidgin_road_s_agg": CREATE_PIDROAD_SOUND_AGG_SQLSTR,
+        "pidgin_road_s_vld": CREATE_PIDROAD_SOUND_VLD_SQLSTR,
+        "pidgin_tag_s_raw": CREATE_PIDTAGG_SOUND_RAW_SQLSTR,
+        "pidgin_tag_s_agg": CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
+        "pidgin_tag_s_vld": CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
     }
 
 

@@ -230,7 +230,7 @@ def get_dimen_columns(x_dimen: str) -> set[str]:
     return columns
 
 
-def create_fisc_sound_raw_table_sqlstr(x_dimen):
+def create_pf_sound_raw_table_sqlstr(x_dimen):
     abbv7 = get_dimen_abbv7(x_dimen)
     tablename = create_prime_tablename(abbv7, "s", "raw")
     columns = get_dimen_columns(x_dimen)
@@ -239,7 +239,7 @@ def create_fisc_sound_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_sound_agg_table_sqlstr(x_dimen):
+def create_pf_sound_agg_table_sqlstr(x_dimen):
     abbv7 = get_dimen_abbv7(x_dimen)
     s_agg_table = create_prime_tablename(abbv7, "s", "agg")
 
@@ -251,7 +251,7 @@ def create_fisc_sound_agg_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(s_agg_table, columns, get_idea_sqlite_types())
 
 
-def create_fisc_sound_vld_table_sqlstr(x_dimen):
+def create_pf_sound_vld_table_sqlstr(x_dimen):
     abbv7 = get_dimen_abbv7(x_dimen)
     tablename = create_prime_tablename(abbv7, "s", "vld")
 
@@ -262,7 +262,7 @@ def create_fisc_sound_vld_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_voice_raw_table_sqlstr(x_dimen):
+def create_pf_voice_raw_table_sqlstr(x_dimen):
     abbv7 = get_dimen_abbv7(x_dimen)
     tablename = create_prime_tablename(abbv7, "v", "raw")
 
@@ -272,7 +272,7 @@ def create_fisc_voice_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_voice_agg_table_sqlstr(x_dimen):
+def create_pf_voice_agg_table_sqlstr(x_dimen):
     abbv7 = get_dimen_abbv7(x_dimen)
     s_agg_table = create_prime_tablename(abbv7, "v", "agg")
 
@@ -284,7 +284,7 @@ def create_fisc_voice_agg_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(s_agg_table, columns, get_idea_sqlite_types())
 
 
-def create_fisc_voice_vld_table_sqlstr(x_dimen):
+def create_pf_voice_vld_table_sqlstr(x_dimen):
     abbv7 = get_dimen_abbv7(x_dimen)
     tablename = create_prime_tablename(abbv7, "v", "vld")
 
@@ -320,12 +320,12 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         v_agg_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "v", "agg")
         v_vld_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "v", "vld")
 
-        expected_s_raw_sqlstr = create_fisc_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_fisc_sound_agg_table_sqlstr(x_dimen)
-        expected_s_vld_sqlstr = create_fisc_sound_vld_table_sqlstr(x_dimen)
-        expected_v_raw_sqlstr = create_fisc_voice_raw_table_sqlstr(x_dimen)
-        expected_v_agg_sqlstr = create_fisc_voice_agg_table_sqlstr(x_dimen)
-        expected_v_vld_sqlstr = create_fisc_voice_vld_table_sqlstr(x_dimen)
+        expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
+        expected_s_vld_sqlstr = create_pf_sound_vld_table_sqlstr(x_dimen)
+        expected_v_raw_sqlstr = create_pf_voice_raw_table_sqlstr(x_dimen)
+        expected_v_agg_sqlstr = create_pf_voice_agg_table_sqlstr(x_dimen)
+        expected_v_vld_sqlstr = create_pf_voice_vld_table_sqlstr(x_dimen)
 
         assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
         assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
@@ -348,53 +348,45 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         # print(f'"{v_agg_tablename}": CREATE_{abbv7.upper()}_VOICE_AGG_SQLSTR,')
         # print(f'"{v_vld_tablename}": CREATE_{abbv7.upper()}_VOICE_VLD_SQLSTR,')
 
-    # def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
-    #     # sourcery skip: no-loop-in-tests
-    #     # ESTABLISH / WHEN
-    #     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
-    #     # THEN
-    #     idea_config = get_idea_config_dict()
-    #     fisc_dimens_config = {
-    #         x_dimen: dimen_config
-    #         for x_dimen, dimen_config in idea_config.items()
-    #         if dimen_config.get(idea_category_str()) == "pidgin"
-    #     }
+def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
-    #     for x_dimen in fisc_dimens_config:
-    #         abbv7 = get_dimen_abbv7(x_dimen)
-    #         # print(f"{abbv7} {x_dimen} checking...")
+    # THEN
+    idea_config = get_idea_config_dict()
+    fisc_dimens_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
 
-    #         # create agg table
-    #         s_raw_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "s", "raw")
-    #         s_agg_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "s", "agg")
-    #         s_vld_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "s", "vld")
+    for x_dimen in fisc_dimens_config:
+        # print(f"{abbv7} {x_dimen} checking...")
 
-    #         expected_s_raw_sqlstr = create_pidgin_sound_raw_table_sqlstr(x_dimen)
-    #         expected_s_agg_sqlstr = create_pidgin_sound_agg_table_sqlstr(x_dimen)
-    #         expected_s_vld_sqlstr = create_pidgin_sound_vld_table_sqlstr(x_dimen)
+        # create agg table
+        s_raw_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "s", "raw")
+        s_agg_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "s", "agg")
+        s_vld_tablename = create_prime_tablename(get_dimen_abbv7(x_dimen), "s", "vld")
 
-    # assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
-    # assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
-    # assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
-    # assert expected_v_raw_sqlstr == create_table_sqlstrs.get(v_raw_tablename)
-    # assert expected_v_agg_sqlstr == create_table_sqlstrs.get(v_agg_tablename)
-    # assert expected_v_vld_sqlstr == create_table_sqlstrs.get(v_vld_tablename)
+        expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
+        expected_s_vld_sqlstr = create_pf_sound_vld_table_sqlstr(x_dimen)
 
-    # print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
-    # print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
-    # print(f'CREATE_{abbv7.upper()}_SOUND_VLD_SQLSTR= """{expected_s_vld_sqlstr}"""')
-    # print(f'CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR= """{expected_v_raw_sqlstr}"""')
-    # print(f'CREATE_{abbv7.upper()}_VOICE_AGG_SQLSTR= """{expected_v_agg_sqlstr}"""')
-    # print(f'CREATE_{abbv7.upper()}_VOICE_VLD_SQLSTR= """{expected_v_vld_sqlstr}"""')
+        assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
+        assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
+        assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
 
-    # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
-    # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
-    # print(f'"{s_vld_tablename}": CREATE_{abbv7.upper()}_SOUND_VLD_SQLSTR,')
-    # print(f'"{v_raw_tablename}": CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR,')
-    # print(f'"{v_agg_tablename}": CREATE_{abbv7.upper()}_VOICE_AGG_SQLSTR,')
-    # print(f'"{v_vld_tablename}": CREATE_{abbv7.upper()}_VOICE_VLD_SQLSTR,')
-    # assert 1 == 2
+        abbv7 = get_dimen_abbv7(x_dimen)
+        # print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_SOUND_VLD_SQLSTR= """{expected_s_vld_sqlstr}"""')
+
+        # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
+        # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
+        # print(f'"{s_vld_tablename}": CREATE_{abbv7.upper()}_SOUND_VLD_SQLSTR,')
+    assert 1 == 2
 
 
 # def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
