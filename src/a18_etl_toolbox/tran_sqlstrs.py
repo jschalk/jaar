@@ -83,10 +83,11 @@ def create_prime_tablename(
         "PIDROAD": "pidgin_road",
         "PIDTAGG": "pidgin_tag",
     }
-    full_dimen = abbv_references.get(abbv7.upper())
-    if put_del:
-        return f"{full_dimen}_{sound}_{put_del}_{stage}"
-    return f"{full_dimen}_{sound}_{stage}"
+    tablename = abbv_references.get(abbv7.upper())
+    if sound in {"s", "v"}:
+        tablename = f"{tablename}_{sound}"
+
+    return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
 
 CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
@@ -1154,6 +1155,15 @@ def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
         "bud_itemunit": BUDITEM_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "budunit": BUDUNIT_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
     }
+
+
+def get_sound_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    x_dict = {}
+    for dimen, sqlstr in get_pidgin_update_inconsist_error_message_sqlstrs().items():
+        old_raw_tablename = f"{dimen}_raw"
+        new_raw_tablename = f"{dimen}_s_raw"
+        x_dict[dimen] = sqlstr.replace(old_raw_tablename, new_raw_tablename)
+    return x_dict
 
 
 PIDLABE_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_label_agg (otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)

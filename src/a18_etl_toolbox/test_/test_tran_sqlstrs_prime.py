@@ -7,6 +7,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
     create_select_query,
+    get_db_tables,
 )
 from src.a02_finance_logic._utils.strs_a02 import (
     fisc_tag_str,
@@ -69,6 +70,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     get_prime_create_table_sqlstrs,
     create_sound_and_voice_tables,
+    get_pidgin_update_inconsist_error_message_sqlstrs,
+    get_sound_pidgin_update_inconsist_error_message_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -150,57 +153,32 @@ def test_create_prime_tablename_ReturnsObj():
     put_str = "put"
     del_str = "del"
 
-    # WHEN
-    budunit_s_agg_table = prime_tbl("budunit", "s", agg_str, put_str)
-    budacct_s_agg_table = prime_tbl("budacct", "s", agg_str, put_str)
-    budmemb_s_agg_table = prime_tbl("budmemb", "s", agg_str, put_str)
-    buditem_s_agg_table = prime_tbl("buditem", "s", agg_str, put_str)
-    budawar_s_agg_table = prime_tbl("budawar", "s", agg_str, put_str)
-    budreas_s_agg_table = prime_tbl("budreas", "s", agg_str, put_str)
-    budprem_s_agg_table = prime_tbl("budprem", "s", agg_str, put_str)
-    budteam_s_agg_table = prime_tbl("budteam", "s", agg_str, put_str)
-    budheal_s_agg_table = prime_tbl("budheal", "s", agg_str, put_str)
-    budfact_s_agg_table = prime_tbl("budfact", "s", agg_str, put_str)
-    budfact_s_del_table = prime_tbl("budfact", "s", agg_str, del_str)
-    fisunit_s_agg_table = prime_tbl("fisunit", "s", agg_str)
-    fiscash_s_agg_table = prime_tbl("fiscash", "s", agg_str)
-    fisdeal_s_agg_table = prime_tbl("fisdeal", "s", agg_str)
-    fishour_s_agg_table = prime_tbl("fishour", "s", agg_str)
-    fismont_s_agg_table = prime_tbl("fismont", "s", agg_str)
-    fisweek_s_agg_table = prime_tbl("fisweek", "s", agg_str)
-    fisoffi_s_agg_table = prime_tbl("fisoffi", "s", agg_str)
-    pidname_s_agg_table = prime_tbl("pidname", "s", agg_str)
-    pidtagg_s_agg_table = prime_tbl("pidtagg", "s", agg_str)
-    pidroad_s_agg_table = prime_tbl("pidroad", "s", agg_str)
-    pidlabe_s_agg_table = prime_tbl("pidlabe", "s", agg_str)
-    pidlabe_v_agg_table = prime_tbl("pidlabe", "v", agg_str)
-    pidlabe_s_raw_table = prime_tbl("pidlabe", "s", raw_str)
-
-    # THEN
-    assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
-    assert budacct_s_agg_table == f"{budacct_dimen}_s_put_agg"
-    assert budmemb_s_agg_table == f"{budmemb_dimen}_s_put_agg"
-    assert buditem_s_agg_table == f"{buditem_dimen}_s_put_agg"
-    assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
-    assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
-    assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
-    assert budteam_s_agg_table == f"{budteam_dimen}_s_put_agg"
-    assert budheal_s_agg_table == f"{budheal_dimen}_s_put_agg"
-    assert budfact_s_agg_table == f"{budfact_dimen}_s_put_agg"
-    assert budfact_s_del_table == f"{budfact_dimen}_s_del_agg"
-    assert fisunit_s_agg_table == f"{fisunit_dimen}_s_agg"
-    assert fiscash_s_agg_table == f"{fiscash_dimen}_s_agg"
-    assert fisdeal_s_agg_table == f"{fisdeal_dimen}_s_agg"
-    assert fishour_s_agg_table == f"{fishour_dimen}_s_agg"
-    assert fismont_s_agg_table == f"{fismont_dimen}_s_agg"
-    assert fisweek_s_agg_table == f"{fisweek_dimen}_s_agg"
-    assert fisoffi_s_agg_table == f"{fisoffi_dimen}_s_agg"
-    assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
-    assert pidtagg_s_agg_table == f"{pidtagg_dimen}_s_agg"
-    assert pidroad_s_agg_table == f"{pidroad_dimen}_s_agg"
-    assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
-    assert pidlabe_v_agg_table == f"{pidlabe_dimen}_v_agg"
-    assert pidlabe_s_raw_table == f"{pidlabe_dimen}_s_raw"
+    # WHEN / THEN
+    assert prime_tbl("budunit", "s", agg_str, put_str) == f"{budunit_dimen}_s_put_agg"
+    assert prime_tbl("budacct", "s", agg_str, put_str) == f"{budacct_dimen}_s_put_agg"
+    assert prime_tbl("budmemb", "s", agg_str, put_str) == f"{budmemb_dimen}_s_put_agg"
+    assert prime_tbl("buditem", "s", agg_str, put_str) == f"{buditem_dimen}_s_put_agg"
+    assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
+    assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
+    assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
+    assert prime_tbl("budteam", "s", agg_str, put_str) == f"{budteam_dimen}_s_put_agg"
+    assert prime_tbl("budheal", "s", agg_str, put_str) == f"{budheal_dimen}_s_put_agg"
+    assert prime_tbl("budfact", "s", agg_str, put_str) == f"{budfact_dimen}_s_put_agg"
+    assert prime_tbl("budfact", "s", agg_str, del_str) == f"{budfact_dimen}_s_del_agg"
+    assert prime_tbl("fisunit", "s", agg_str) == f"{fisunit_dimen}_s_agg"
+    assert prime_tbl("fiscash", "s", agg_str) == f"{fiscash_dimen}_s_agg"
+    assert prime_tbl("fisdeal", "s", agg_str) == f"{fisdeal_dimen}_s_agg"
+    assert prime_tbl("fishour", "s", agg_str) == f"{fishour_dimen}_s_agg"
+    assert prime_tbl("fismont", "s", agg_str) == f"{fismont_dimen}_s_agg"
+    assert prime_tbl("fisweek", "s", agg_str) == f"{fisweek_dimen}_s_agg"
+    assert prime_tbl("fisoffi", "s", agg_str) == f"{fisoffi_dimen}_s_agg"
+    assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
+    assert prime_tbl("pidtagg", "s", agg_str) == f"{pidtagg_dimen}_s_agg"
+    assert prime_tbl("pidroad", "s", agg_str) == f"{pidroad_dimen}_s_agg"
+    assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
+    assert prime_tbl("pidlabe", "v", agg_str) == f"{pidlabe_dimen}_v_agg"
+    assert prime_tbl("pidlabe", "s", raw_str) == f"{pidlabe_dimen}_s_raw"
+    assert prime_tbl("pidlabe", "k", raw_str) == f"{pidlabe_dimen}_raw"
 
 
 def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
@@ -512,46 +490,53 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, pidlabe_s_raw_table)
 
 
-# def test_get_pidgin_inconsistency_sqlstrs_ReturnsObj():
-#     # sourcery skip: no-loop-in-tests
-#     # ESTABLISH / WHEN
-#     pidgin_inconsistency_sqlstrs = get_pidgin_inconsistency_sqlstrs()
+def test_get_sound_pidgin_update_inconsist_error_message_sqlstrs_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    sound_pidgin_sqlstrs = get_sound_pidgin_update_inconsist_error_message_sqlstrs()
 
-#     # THEN
-#     assert pidgin_inconsistency_sqlstrs.keys() == get_pidgin_dimens()
-#     idea_config = get_idea_config_dict()
-#     idea_config = {
-#         x_dimen: dimen_config
-#         for x_dimen, dimen_config in idea_config.items()
-#         # if dimen_config.get(idea_category_str()) != "pidgin"
-#         # if dimen_config.get(idea_category_str()) == "bud"
-#         if dimen_config.get(idea_category_str()) == "pidgin"
-#     }
+    # THEN
+    assert set(sound_pidgin_sqlstrs.keys()) == get_pidgin_dimens()
+    idea_config = get_idea_config_dict()
+    idea_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
+    }
 
-#     exclude_cols = {
-#         idea_number_str(),
-#         event_int_str(),
-#         face_name_str(),
-#         "error_message",
-#     }
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_pidgin_prime_tables(cursor)
+    exclude_cols = {
+        idea_number_str(),
+        event_int_str(),
+        face_name_str(),
+        "error_message",
+    }
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
 
-#         for x_dimen in sorted(idea_config):
-#             # print(f"{x_dimen} checking...")
-#             x_sqlstr = pidgin_inconsistency_sqlstrs.get(x_dimen)
-#             x_tablename = f"{x_dimen}_raw"
-#             dimen_config = idea_config.get(x_dimen)
-#             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-#             generated_dimen_sqlstr = create_select_inconsistency_query(
-#                 cursor, x_tablename, dimen_focus_columns, exclude_cols
-#             )
-#             print(
-#                 f'{x_dimen.upper()}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""'
-#             )
-#             print(f'{x_sqlstr=}"""')
-#             assert x_sqlstr == generated_dimen_sqlstr
+        for x_dimen in idea_config:
+            # for db_table in get_db_tables(conn):
+            #     # if db_table.find(x_dimen) > 0:
+            #     print(f"{db_table=}")
+
+            # print(f"{x_dimen} checking...")
+            x_sqlstr = sound_pidgin_sqlstrs.get(x_dimen)
+            abbv7 = get_dimen_abbv7(x_dimen)
+            x_tablename = prime_tbl(abbv7, "s", "raw")
+            dimen_config = idea_config.get(x_dimen)
+            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+            generated_dimen_sqlstr = create_update_inconsistency_error_query(
+                cursor, x_tablename, dimen_focus_columns, exclude_cols
+            )
+            # print(
+            #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
+            # )
+            # print(
+            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
+            # )
+            print(generated_dimen_sqlstr)
+            print(f"""            {x_sqlstr=}""")
+            assert x_sqlstr == generated_dimen_sqlstr
 
 
 # def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():
