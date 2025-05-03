@@ -70,8 +70,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     get_prime_create_table_sqlstrs,
     create_sound_and_voice_tables,
-    get_pidgin_update_inconsist_error_message_sqlstrs,
-    get_sound_pidgin_update_inconsist_error_message_sqlstrs,
+    create_sound_pidgin_update_inconsist_error_message_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -179,6 +178,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("pidlabe", "v", agg_str) == f"{pidlabe_dimen}_v_agg"
     assert prime_tbl("pidlabe", "s", raw_str) == f"{pidlabe_dimen}_s_raw"
     assert prime_tbl("pidlabe", "k", raw_str) == f"{pidlabe_dimen}_raw"
+    assert prime_tbl("bud_acctunit", "k", raw_str) == "bud_acctunit_raw"
 
 
 def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
@@ -490,53 +490,48 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, pidlabe_s_raw_table)
 
 
-def test_get_sound_pidgin_update_inconsist_error_message_sqlstrs_ReturnsObj():
-    # sourcery skip: no-loop-in-tests
-    # ESTABLISH / WHEN
-    sound_pidgin_sqlstrs = get_sound_pidgin_update_inconsist_error_message_sqlstrs()
-
-    # THEN
-    assert set(sound_pidgin_sqlstrs.keys()) == get_pidgin_dimens()
-    idea_config = get_idea_config_dict()
-    idea_config = {
-        x_dimen: dimen_config
-        for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "pidgin"
-    }
-
-    exclude_cols = {
-        idea_number_str(),
-        event_int_str(),
-        face_name_str(),
-        "error_message",
-    }
+def test_create_sound_pidgin_update_inconsist_error_message_sqlstr_ReturnsObj():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    pidlabe_dimen = pidgin_label_str()
+    exclude_cols = {idea_number_str(), "error_message"}
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for x_dimen in idea_config:
-            # for db_table in get_db_tables(conn):
-            #     # if db_table.find(x_dimen) > 0:
-            #     print(f"{db_table=}")
+        # WHEN
+        gen_update_sqlstr = create_sound_pidgin_update_inconsist_error_message_sqlstr(
+            cursor, pidlabe_dimen
+        )
 
-            # print(f"{x_dimen} checking...")
-            x_sqlstr = sound_pidgin_sqlstrs.get(x_dimen)
-            abbv7 = get_dimen_abbv7(x_dimen)
-            x_tablename = prime_tbl(abbv7, "s", "raw")
-            dimen_config = idea_config.get(x_dimen)
-            dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-            generated_dimen_sqlstr = create_update_inconsistency_error_query(
-                cursor, x_tablename, dimen_focus_columns, exclude_cols
-            )
-            # print(
-            #     f"""{x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = \"\"\"{generated_dimen_sqlstr}\"\"\""""
-            # )
-            # print(
-            #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
-            # )
-            print(generated_dimen_sqlstr)
-            print(f"""            {x_sqlstr=}""")
-            assert x_sqlstr == generated_dimen_sqlstr
+        # THEN
+        x_tablename = prime_tbl(pidlabe_dimen, "s", "raw")
+        dimen_config = get_idea_config_dict().get(pidlabe_dimen)
+        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+        expected_update_sqlstr = create_update_inconsistency_error_query(
+            cursor, x_tablename, dimen_focus_columns, exclude_cols
+        )
+        assert gen_update_sqlstr == expected_update_sqlstr
+
+        static_example_sqlstr = """WITH inconsistency_rows AS (
+SELECT event_int, face_name, otx_label
+FROM pidgin_label_s_raw
+GROUP BY event_int, face_name, otx_label
+HAVING MIN(inx_label) != MAX(inx_label)
+    OR MIN(otx_bridge) != MAX(otx_bridge)
+    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(unknown_word) != MAX(unknown_word)
+)
+UPDATE pidgin_label_s_raw
+SET error_message = 'Inconsistent data'
+FROM inconsistency_rows
+WHERE inconsistency_rows.event_int = pidgin_label_s_raw.event_int
+    AND inconsistency_rows.face_name = pidgin_label_s_raw.face_name
+    AND inconsistency_rows.otx_label = pidgin_label_s_raw.otx_label
+;
+"""
+        print(gen_update_sqlstr)
+        assert gen_update_sqlstr == static_example_sqlstr
 
 
 # def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():

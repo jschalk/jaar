@@ -1,8 +1,12 @@
-from src.a00_data_toolbox.db_toolbox import create_table_from_columns
+from src.a00_data_toolbox.db_toolbox import (
+    create_table_from_columns,
+    create_update_inconsistency_error_query,
+)
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,
     get_idea_sqlite_types,
+    get_idea_config_dict,
 )
 from sqlite3 import Connection as sqlite3_Connection
 
@@ -58,7 +62,7 @@ def get_dimen_abbv7(dimen: str) -> str:
 
 
 def create_prime_tablename(
-    abbv7: str, sound: str, stage: str, put_del: str = None
+    tablename_or_abbv7: str, sound: str, stage: str, put_del: str = None
 ) -> str:
     abbv_references = {
         "FISCASH": "fisc_cashbook",
@@ -83,7 +87,9 @@ def create_prime_tablename(
         "PIDROAD": "pidgin_road",
         "PIDTAGG": "pidgin_tag",
     }
-    tablename = abbv_references.get(abbv7.upper())
+    tablename = tablename_or_abbv7
+    if abbv_references.get(tablename_or_abbv7.upper()):
+        tablename = abbv_references.get(tablename_or_abbv7.upper())
     if sound in {"s", "v"}:
         tablename = f"{tablename}_{sound}"
 
@@ -501,6 +507,18 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         x_columns = get_default_sorted_list(idea_columns)
         col_types = get_idea_sqlite_types()
         create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
+
+
+def create_sound_pidgin_update_inconsist_error_message_sqlstr(
+    conn_or_cursor: sqlite3_Connection, pidgin_dimen: str
+) -> str:
+    exclude_cols = {"idea_number", "error_message"}
+    x_tablename = create_prime_tablename(pidgin_dimen, "s", "raw")
+    dimen_config = get_idea_config_dict().get(pidgin_dimen)
+    dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+    return create_update_inconsistency_error_query(
+        conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
+    )
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
@@ -1158,6 +1176,15 @@ def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
 
 
 def get_sound_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    x_dict = {}
+    for dimen, sqlstr in get_pidgin_update_inconsist_error_message_sqlstrs().items():
+        old_raw_tablename = f"{dimen}_raw"
+        new_raw_tablename = f"{dimen}_s_raw"
+        x_dict[dimen] = sqlstr.replace(old_raw_tablename, new_raw_tablename)
+    return x_dict
+
+
+def get_sound_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     x_dict = {}
     for dimen, sqlstr in get_pidgin_update_inconsist_error_message_sqlstrs().items():
         old_raw_tablename = f"{dimen}_raw"
