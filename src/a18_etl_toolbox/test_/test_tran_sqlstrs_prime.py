@@ -68,6 +68,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_dimen_abbv7,
     create_prime_tablename as prime_tbl,
     get_prime_create_table_sqlstrs,
+    create_sound_and_voice_tables,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -230,13 +231,13 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     return columns
 
 
-def get_del_dimen_columns_list(x_dimen: str) -> list[str]:
+def get_del_dimen_columns_set(x_dimen: str) -> list[str]:
     x_config = get_idea_config_dict().get(x_dimen)
     columns_set = set(x_config.get("jkeys").keys())
     columns_set.update(set(x_config.get("jvalues").keys()))
     columns_list = get_default_sorted_list(columns_set)
     columns_list[-1] = get_delete_key_name(columns_list[-1])
-    return columns_list
+    return set(columns_list)
 
 
 def create_pf_sound_raw_table_sqlstr(x_dimen):
@@ -314,20 +315,25 @@ def create_bud_sound_put_vld_table_sqlstr(x_dimen: str) -> str:
 
 def create_bud_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "del")
-    columns_list = get_del_dimen_columns_list(x_dimen)
-    return get_create_table_sqlstr(tablename, columns_list, get_idea_sqlite_types())
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns.add("pidgin_event_int")
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "del")
-    columns_list = get_del_dimen_columns_list(x_dimen)
-    return get_create_table_sqlstr(tablename, columns_list, get_idea_sqlite_types())
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns.add("error_message")
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_sound_del_vld_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld", "del")
-    columns_list = get_del_dimen_columns_list(x_dimen)
-    return get_create_table_sqlstr(tablename, columns_list, get_idea_sqlite_types())
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
@@ -339,7 +345,7 @@ def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
 
 
 def create_bud_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
-    tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
+    tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
@@ -347,7 +353,7 @@ def create_bud_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
 
 
 def create_bud_voice_put_vld_table_sqlstr(x_dimen: str) -> str:
-    tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "vld")
+    tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "vld", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
@@ -355,20 +361,25 @@ def create_bud_voice_put_vld_table_sqlstr(x_dimen: str) -> str:
 
 def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "del")
-    columns_list = get_del_dimen_columns_list(x_dimen)
-    return get_create_table_sqlstr(tablename, columns_list, get_idea_sqlite_types())
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns.add("pidgin_event_int")
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "del")
-    columns_list = get_del_dimen_columns_list(x_dimen)
-    return get_create_table_sqlstr(tablename, columns_list, get_idea_sqlite_types())
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns.add("error_message")
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_del_vld_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "vld", "del")
-    columns_list = get_del_dimen_columns_list(x_dimen)
-    return get_create_table_sqlstr(tablename, columns_list, get_idea_sqlite_types())
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
@@ -385,20 +396,12 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
     }
 
     for x_dimen in pidgin_dimens_config:
-        # print(f"{abbv7} {x_dimen} checking...")
-
-        # create agg table
         s_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
         s_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
         s_vld_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
-
         expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
         expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
         expected_s_vld_sqlstr = create_pf_sound_vld_table_sqlstr(x_dimen)
-
-        assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
-        assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
-        assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
 
         abbv7 = get_dimen_abbv7(x_dimen)
         print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
@@ -408,6 +411,9 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
         # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
         # print(f'"{s_vld_tablename}": CREATE_{abbv7.upper()}_SOUND_VLD_SQLSTR,')
+        assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
+        assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
+        assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
 
 
 def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
@@ -424,31 +430,19 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
     }
 
     for x_dimen in fisc_dimens_config:
-        abbv7 = get_dimen_abbv7(x_dimen)
         # print(f"{abbv7} {x_dimen} checking...")
-
-        # create agg table
         s_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
         s_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
         s_vld_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
         v_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
         v_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
         v_vld_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "vld")
-
         expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
         expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
         expected_s_vld_sqlstr = create_pf_sound_vld_table_sqlstr(x_dimen)
         expected_v_raw_sqlstr = create_fisc_voice_raw_table_sqlstr(x_dimen)
         expected_v_agg_sqlstr = create_fisc_voice_agg_table_sqlstr(x_dimen)
         expected_v_vld_sqlstr = create_fisc_voice_vld_table_sqlstr(x_dimen)
-
-        assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
-        assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
-        assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
-        assert expected_v_raw_sqlstr == create_table_sqlstrs.get(v_raw_tablename)
-        assert expected_v_agg_sqlstr == create_table_sqlstrs.get(v_agg_tablename)
-        assert expected_v_vld_sqlstr == create_table_sqlstrs.get(v_vld_tablename)
-
         # print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
         # print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
         # print(f'CREATE_{abbv7.upper()}_SOUND_VLD_SQLSTR= """{expected_s_vld_sqlstr}"""')
@@ -462,6 +456,12 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         # print(f'"{v_raw_tablename}": CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR,')
         # print(f'"{v_agg_tablename}": CREATE_{abbv7.upper()}_VOICE_AGG_SQLSTR,')
         # print(f'"{v_vld_tablename}": CREATE_{abbv7.upper()}_VOICE_VLD_SQLSTR,')
+        assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
+        assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
+        assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
+        assert expected_v_raw_sqlstr == create_table_sqlstrs.get(v_raw_tablename)
+        assert expected_v_agg_sqlstr == create_table_sqlstrs.get(v_agg_tablename)
+        assert expected_v_vld_sqlstr == create_table_sqlstrs.get(v_vld_tablename)
 
 
 def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
@@ -477,10 +477,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
     }
 
     for x_dimen in bud_dimens_config:
-        abbv7 = get_dimen_abbv7(x_dimen).upper()
-        # print(f"{abbv7} {x_dimen} checking...")
-
-        # create agg table
+        # print(f"{x_dimen} checking...")
         s_put_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "put")
         s_put_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
         s_put_vld_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld", "put")
@@ -506,20 +503,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
         expected_v_del_raw_sqlstr = create_bud_voice_del_raw_table_sqlstr(x_dimen)
         expected_v_del_agg_sqlstr = create_bud_voice_del_agg_table_sqlstr(x_dimen)
         expected_v_del_vld_sqlstr = create_bud_voice_del_vld_table_sqlstr(x_dimen)
-
-        assert expected_s_put_raw_sqlstr == sqlstrs.get(s_put_raw_tablename)
-        assert expected_s_put_agg_sqlstr == sqlstrs.get(s_put_agg_tablename)
-        assert expected_s_put_vld_sqlstr == sqlstrs.get(s_put_vld_tablename)
-        assert expected_s_del_raw_sqlstr == sqlstrs.get(s_del_raw_tablename)
-        assert expected_s_del_agg_sqlstr == sqlstrs.get(s_del_agg_tablename)
-        assert expected_s_del_vld_sqlstr == sqlstrs.get(s_del_vld_tablename)
-        assert expected_v_put_raw_sqlstr == sqlstrs.get(v_put_raw_tablename)
-        assert expected_v_put_agg_sqlstr == sqlstrs.get(v_put_agg_tablename)
-        assert expected_v_put_vld_sqlstr == sqlstrs.get(v_put_vld_tablename)
-        assert expected_v_del_raw_sqlstr == sqlstrs.get(v_del_raw_tablename)
-        assert expected_v_del_agg_sqlstr == sqlstrs.get(v_del_agg_tablename)
-        assert expected_v_del_vld_sqlstr == sqlstrs.get(v_del_vld_tablename)
-
+        # abbv7 = get_dimen_abbv7(x_dimen)
         # print(f'CREATE_{abbv7}_SOUND_PUT_RAW_STR= "{expected_s_put_raw_sqlstr}"')
         # print(f'CREATE_{abbv7}_SOUND_PUT_AGG_STR= "{expected_s_put_agg_sqlstr}"')
         # print(f'CREATE_{abbv7}_SOUND_PUT_VLD_STR= "{expected_s_put_vld_sqlstr}"')
@@ -545,241 +529,88 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
         # print(f'"{v_del_raw_tablename}": CREATE_{abbv7}_VOICE_DEL_RAW_STR,')
         # print(f'"{v_del_agg_tablename}": CREATE_{abbv7}_VOICE_DEL_AGG_STR,')
         # print(f'"{v_del_vld_tablename}": CREATE_{abbv7}_VOICE_DEL_VLD_STR,')
+        assert expected_s_put_raw_sqlstr == sqlstrs.get(s_put_raw_tablename)
+        assert expected_s_put_agg_sqlstr == sqlstrs.get(s_put_agg_tablename)
+        assert expected_s_put_vld_sqlstr == sqlstrs.get(s_put_vld_tablename)
+        assert expected_s_del_raw_sqlstr == sqlstrs.get(s_del_raw_tablename)
+        assert expected_s_del_agg_sqlstr == sqlstrs.get(s_del_agg_tablename)
+        assert expected_s_del_vld_sqlstr == sqlstrs.get(s_del_vld_tablename)
+        assert expected_v_put_raw_sqlstr == sqlstrs.get(v_put_raw_tablename)
+        assert expected_v_put_agg_sqlstr == sqlstrs.get(v_put_agg_tablename)
+        assert expected_v_put_vld_sqlstr == sqlstrs.get(v_put_vld_tablename)
+        assert expected_v_del_raw_sqlstr == sqlstrs.get(v_del_raw_tablename)
+        assert expected_v_del_agg_sqlstr == sqlstrs.get(v_del_agg_tablename)
+        assert expected_v_del_vld_sqlstr == sqlstrs.get(v_del_vld_tablename)
 
 
-# def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
-#     # sourcery skip: no-loop-in-tests
-#     # ESTABLISH / WHEN
-#     create_table_sqlstrs = get_fisc_prime_create_table_sqlstrs()
+def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+    # ESTABLISH / WHEN
+    create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
-#     # THEN
-#     idea_config = get_idea_config_dict()
-#     idea_config = {
-#         x_dimen: dimen_config
-#         for x_dimen, dimen_config in idea_config.items()
-#         if dimen_config.get(idea_category_str()) == "fisc"
-#     }
-#     sqlite_types = get_idea_sqlite_types()
-#     for x_dimen in idea_config:
-#         # print(f"{x_dimen} checking...")
-#         abbv7 = get_dimen_abbv7(x_dimen)
-#         x_config = idea_config.get(x_dimen)
-
-#         ag_table = f"{x_dimen}_agg"
-#         ag_sqlstr = create_table_sqlstrs.get(ag_table)
-#         ag_cols = set(x_config.get("jkeys").keys())
-#         ag_cols.update(set(x_config.get("jvalues").keys()))
-#         ag_cols.remove(event_int_str())
-#         ag_cols.remove(face_name_str())
-#         ag_cols = get_default_sorted_list(ag_cols)
-#         # print(f"{ag_cols=}")
-#         gen_dimen_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
-#         assert ag_sqlstr == gen_dimen_agg_sqlstr
-
-#         st_table = f"{x_dimen}_raw"
-#         st_sqlstr = create_table_sqlstrs.get(st_table)
-#         st_cols = set(x_config.get("jkeys").keys())
-#         st_cols.update(set(x_config.get("jvalues").keys()))
-#         st_cols.add(idea_number_str())
-#         st_cols.add("error_message")
-#         st_cols = get_default_sorted_list(st_cols)
-#         gen_dimen_raw_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
-#         assert st_sqlstr == gen_dimen_raw_sqlstr
-
-#         # print(f'CREATE_{abbv7.upper()}_AGG_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
-#         # print(f'CREATE_{abbv7.upper()}_RAW_SQLSTR= """{gen_dimen_raw_sqlstr}"""')
-#         # print(f'"{ag_table}": {ag_table.upper()}_SQLSTR,')
-#         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
+    # THEN
+    assert create_table_sqlstrs
+    pidgin_dimens_count = len(get_pidgin_dimens()) * 3
+    fisc_dimens_count = len(get_fisc_dimens()) * 6
+    bud_dimens_count = len(get_bud_dimens()) * 12
+    print(f"{pidgin_dimens_count=}")
+    print(f"{fisc_dimens_count=}")
+    print(f"{bud_dimens_count=}")
+    all_dimens_count = pidgin_dimens_count + fisc_dimens_count + bud_dimens_count
+    assert len(create_table_sqlstrs) == all_dimens_count
 
 
-# def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
-#     # sourcery skip: no-loop-in-tests
-#     # ESTABLISH / WHEN
-#     create_table_sqlstrs = get_bud_prime_create_table_sqlstrs()
+def test_create_sound_and_voice_tables_CreatesFiscRawTables():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
+        assert cursor.fetchone()[0] == 0
+        agg_str = "agg"
+        raw_str = "raw"
+        vld_str = "vld"
+        put_str = "put"
+        del_str = "del"
+        budunit_s_agg_table = prime_tbl("budunit", "s", agg_str, put_str)
+        budacct_s_agg_table = prime_tbl("budacct", "s", agg_str, put_str)
+        budmemb_s_agg_table = prime_tbl("budmemb", "s", agg_str, put_str)
+        budfact_s_del_table = prime_tbl("budfact", "s", agg_str, del_str)
+        fisunit_s_agg_table = prime_tbl("fisunit", "s", agg_str)
+        pidlabe_s_agg_table = prime_tbl("pidlabe", "s", agg_str)
+        fishour_v_agg_table = prime_tbl("fishour", "v", agg_str)
+        pidlabe_s_raw_table = prime_tbl("pidlabe", "s", raw_str)
+        pidlabe_s_vld_table = prime_tbl("pidlabe", "s", vld_str)
 
-#     # THEN
-#     idea_config = get_idea_config_dict()
-#     idea_config = {
-#         x_dimen: dimen_config
-#         for x_dimen, dimen_config in idea_config.items()
-#         if dimen_config.get(idea_category_str()) == "bud"
-#     }
-#     s_types = get_idea_sqlite_types()
-#     for x_dimen in idea_config:
-#         print(f"{x_dimen} checking...")
-#         x_config = idea_config.get(x_dimen)
+        assert not db_table_exists(cursor, budunit_s_agg_table)
+        assert not db_table_exists(cursor, budacct_s_agg_table)
+        assert not db_table_exists(cursor, budmemb_s_agg_table)
+        assert not db_table_exists(cursor, budfact_s_del_table)
+        assert not db_table_exists(cursor, fisunit_s_agg_table)
+        assert not db_table_exists(cursor, pidlabe_s_agg_table)
+        assert not db_table_exists(cursor, fishour_v_agg_table)
+        assert not db_table_exists(cursor, pidlabe_s_raw_table)
+        assert not db_table_exists(cursor, pidlabe_s_vld_table)
 
-#         ag_put_table = f"{x_dimen}_put_agg"
-#         ag_put_cols = set(x_config.get("jkeys").keys())
-#         ag_put_cols.update(set(x_config.get("jvalues").keys()))
-#         ag_put_cols = get_default_sorted_list(ag_put_cols)
-#         ex_ag_put_sqlstr = get_create_table_sqlstr(ag_put_table, ag_put_cols, s_types)
-#         # print(f"{ex_ag_put_sqlstr=}")
-#         assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
+        # WHEN
+        create_sound_and_voice_tables(cursor)
 
-#         st_put_table = f"{x_dimen}_put_raw"
-#         st_put_cols = set(x_config.get("jkeys").keys())
-#         st_put_cols.update(set(x_config.get("jvalues").keys()))
-#         st_put_cols.add(idea_number_str())
-#         st_put_cols.add("error_message")
-#         st_put_cols = get_default_sorted_list(st_put_cols)
-#         ex_st_put_sqlstr = get_create_table_sqlstr(st_put_table, st_put_cols, s_types)
-#         # print(f"{ex_st_put_sqlstr=}")
-#         assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
-
-#         ag_del_table = f"{x_dimen}_del_agg"
-#         ag_del_cols = set(x_config.get("jkeys").keys())
-#         ag_del_cols = get_default_sorted_list(ag_del_cols)
-#         ag_del_cols[-1] = get_delete_key_name(ag_del_cols[-1])
-#         ex_ag_del_sqlstr = get_create_table_sqlstr(ag_del_table, ag_del_cols, s_types)
-#         # print(f" {ex_ag_del_sqlstr}")
-#         assert create_table_sqlstrs.get(ag_del_table) == ex_ag_del_sqlstr
-
-#         st_del_table = f"{x_dimen}_del_raw"
-#         st_del_cols = set(x_config.get("jkeys").keys())
-#         st_del_cols.add(idea_number_str())
-#         st_del_cols.add("error_message")
-#         st_del_cols = get_default_sorted_list(st_del_cols)
-#         st_del_cols[-2] = get_delete_key_name(st_del_cols[-2])
-#         ex_st_del_sqlstr = get_create_table_sqlstr(st_del_table, st_del_cols, s_types)
-#         # print(f" {ex_st_del_sqlstr}")
-#         assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
-
-#         # print(f'CREATE_{abbv(ag_put_table)}_SQLSTR= """{ex_ag_put_sqlstr}"""')
-#         # print(f'CREATE_{abbv(st_put_table)}_SQLSTR= """{ex_st_put_sqlstr}"""')
-#         # print(f'CREATE_{abbv(ag_del_table)}_SQLSTR= """{ex_ag_del_sqlstr}"""')
-#         # print(f'CREATE_{abbv(st_del_table)}_SQLSTR= """{ex_st_del_sqlstr}"""')
-#         # print(f'"{ag_put_table}": CREATE_{abbv(ag_put_table)}_SQLSTR,')
-#         # print(f'"{st_put_table}": CREATE_{abbv(st_put_table)}_SQLSTR,')
-#         # print(f'"{ag_del_table}": CREATE_{abbv(ag_del_table)}_SQLSTR,')
-#         # print(f'"{st_del_table}": CREATE_{abbv(st_del_table)}_SQLSTR,')
-
-
-# def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
-#     # ESTABLISH / WHEN
-#     fisc_create_table_sqlstrs = get_fisc_prime_create_table_sqlstrs()
-
-#     # THEN
-#     assert fisc_create_table_sqlstrs
-#     fisc_dimens = get_fisc_dimens()
-#     expected_fisc_tablenames = {f"{x_dimen}_agg" for x_dimen in fisc_dimens}
-#     expected_fisc_tablenames.update({f"{x_dimen}_raw" for x_dimen in fisc_dimens})
-#     print(f"{expected_fisc_tablenames=}")
-#     assert set(fisc_create_table_sqlstrs.keys()) == expected_fisc_tablenames
-
-
-# def test_get_bud_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
-#     # ESTABLISH / WHEN
-#     bud_create_table_sqlstrs = get_bud_prime_create_table_sqlstrs()
-
-#     # THEN
-#     assert bud_create_table_sqlstrs
-#     bud_dimens = get_bud_dimens()
-#     expected_bud_tablenames = {f"{x_dimen}_put_agg" for x_dimen in bud_dimens}
-#     expected_bud_tablenames.update({f"{x_dimen}_put_raw" for x_dimen in bud_dimens})
-#     expected_bud_tablenames.update({f"{x_dimen}_del_agg" for x_dimen in bud_dimens})
-#     expected_bud_tablenames.update({f"{x_dimen}_del_raw" for x_dimen in bud_dimens})
-#     print(f"{expected_bud_tablenames=}")
-#     assert set(bud_create_table_sqlstrs.keys()) == expected_bud_tablenames
-
-
-# def test_create_all_idea_tables_CreatesFiscRawTables():
-#     # ESTABLISH sourcery skip: no-loop-in-tests
-#     idea_numbers = get_idea_numbers()
-#     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         cursor = fisc_db_conn.cursor()
-#         for idea_number in idea_numbers:
-#             assert db_table_exists(cursor, f"{idea_number}_raw") is False
-
-#         # WHEN
-#         create_all_idea_tables(cursor)
-
-#         # THEN
-#         for idea_number in idea_numbers:
-#             print(f"{idea_number} checking...")
-#             assert db_table_exists(cursor, f"{idea_number}_raw")
-
-
-# def test_create_bud_prime_tables_CreatesFiscRawTables():
-#     # ESTABLISH
-#     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         cursor = fisc_db_conn.cursor()
-#         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
-#         assert cursor.fetchone()[0] == 0
-#         budmemb_pud_agg_table = f"{bud_acct_membership_str()}_put_agg"
-#         budmemb_pud_raw_table = f"{bud_acct_membership_str()}_put_raw"
-#         budacct_pud_agg_table = f"{bud_acctunit_str()}_put_agg"
-#         budacct_pud_raw_table = f"{bud_acctunit_str()}_put_raw"
-#         budawar_pud_agg_table = f"{bud_item_awardlink_str()}_put_agg"
-#         budawar_pud_raw_table = f"{bud_item_awardlink_str()}_put_raw"
-#         budfact_pud_agg_table = f"{bud_item_factunit_str()}_put_agg"
-#         budfact_pud_raw_table = f"{bud_item_factunit_str()}_put_raw"
-#         budheal_pud_agg_table = f"{bud_item_healerlink_str()}_put_agg"
-#         budheal_pud_raw_table = f"{bud_item_healerlink_str()}_put_raw"
-#         budprem_pud_agg_table = f"{bud_item_reason_premiseunit_str()}_put_agg"
-#         budprem_pud_raw_table = f"{bud_item_reason_premiseunit_str()}_put_raw"
-#         budreas_pud_agg_table = f"{bud_item_reasonunit_str()}_put_agg"
-#         budreas_pud_raw_table = f"{bud_item_reasonunit_str()}_put_raw"
-#         budteam_pud_agg_table = f"{bud_item_teamlink_str()}_put_agg"
-#         budteam_pud_raw_table = f"{bud_item_teamlink_str()}_put_raw"
-#         buditem_pud_agg_table = f"{bud_itemunit_str()}_put_agg"
-#         buditem_pud_raw_table = f"{bud_itemunit_str()}_put_raw"
-#         budunit_pud_agg_table = f"{budunit_str()}_put_agg"
-#         budunit_pud_raw_table = f"{budunit_str()}_put_raw"
-
-#         assert db_table_exists(cursor, budmemb_pud_agg_table) is False
-#         assert db_table_exists(cursor, budmemb_pud_raw_table) is False
-#         assert db_table_exists(cursor, budacct_pud_agg_table) is False
-#         assert db_table_exists(cursor, budacct_pud_raw_table) is False
-#         assert db_table_exists(cursor, budawar_pud_agg_table) is False
-#         assert db_table_exists(cursor, budawar_pud_raw_table) is False
-#         assert db_table_exists(cursor, budfact_pud_agg_table) is False
-#         assert db_table_exists(cursor, budfact_pud_raw_table) is False
-#         assert db_table_exists(cursor, budheal_pud_agg_table) is False
-#         assert db_table_exists(cursor, budheal_pud_raw_table) is False
-#         assert db_table_exists(cursor, budprem_pud_agg_table) is False
-#         assert db_table_exists(cursor, budprem_pud_raw_table) is False
-#         assert db_table_exists(cursor, budreas_pud_agg_table) is False
-#         assert db_table_exists(cursor, budreas_pud_raw_table) is False
-#         assert db_table_exists(cursor, budteam_pud_agg_table) is False
-#         assert db_table_exists(cursor, budteam_pud_raw_table) is False
-#         assert db_table_exists(cursor, buditem_pud_agg_table) is False
-#         assert db_table_exists(cursor, buditem_pud_raw_table) is False
-#         assert db_table_exists(cursor, budunit_pud_agg_table) is False
-#         assert db_table_exists(cursor, budunit_pud_raw_table) is False
-
-#         # WHEN
-#         create_bud_prime_tables(cursor)
-
-#         # THEN
-#         cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
-#         # print(f"{cursor.fetchall()=}")
-#         # x_count = 0
-#         # for x_row in cursor.fetchall():
-#         #     print(f"{x_count} {x_row[1]=}")
-#         #     x_count += 1
-#         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
-#         assert cursor.fetchone()[0] == 40
-#         assert db_table_exists(cursor, budmemb_pud_agg_table)
-#         assert db_table_exists(cursor, budmemb_pud_raw_table)
-#         assert db_table_exists(cursor, budacct_pud_agg_table)
-#         assert db_table_exists(cursor, budacct_pud_raw_table)
-#         assert db_table_exists(cursor, budawar_pud_agg_table)
-#         assert db_table_exists(cursor, budawar_pud_raw_table)
-#         assert db_table_exists(cursor, budfact_pud_agg_table)
-#         assert db_table_exists(cursor, budfact_pud_raw_table)
-#         assert db_table_exists(cursor, budheal_pud_agg_table)
-#         assert db_table_exists(cursor, budheal_pud_raw_table)
-#         assert db_table_exists(cursor, budprem_pud_agg_table)
-#         assert db_table_exists(cursor, budprem_pud_raw_table)
-#         assert db_table_exists(cursor, budreas_pud_agg_table)
-#         assert db_table_exists(cursor, budreas_pud_raw_table)
-#         assert db_table_exists(cursor, budteam_pud_agg_table)
-#         assert db_table_exists(cursor, budteam_pud_raw_table)
-#         assert db_table_exists(cursor, buditem_pud_agg_table)
-#         assert db_table_exists(cursor, buditem_pud_raw_table)
-#         assert db_table_exists(cursor, budunit_pud_agg_table)
-#         assert db_table_exists(cursor, budunit_pud_raw_table)
+        # THEN
+        cursor.execute("SELECT * FROM sqlite_master WHERE type = 'table'")
+        # print(f"{cursor.fetchall()=}")
+        # x_count = 0
+        # for x_row in cursor.fetchall():
+        #     print(f"{x_count} {x_row[1]=}")
+        #     x_count += 1
+        cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
+        assert cursor.fetchone()[0] == 174
+        assert db_table_exists(cursor, budunit_s_agg_table)
+        assert db_table_exists(cursor, budacct_s_agg_table)
+        assert db_table_exists(cursor, budmemb_s_agg_table)
+        assert db_table_exists(cursor, budfact_s_del_table)
+        assert db_table_exists(cursor, fisunit_s_agg_table)
+        assert db_table_exists(cursor, pidlabe_s_agg_table)
+        assert db_table_exists(cursor, fishour_v_agg_table)
+        assert db_table_exists(cursor, pidlabe_s_raw_table)
+        assert db_table_exists(cursor, pidlabe_s_vld_table)
 
 
 # def test_create_fisc_prime_tables_CreatesFiscRawTables():
