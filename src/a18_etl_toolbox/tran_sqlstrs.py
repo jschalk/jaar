@@ -1,8 +1,8 @@
-from src.a00_data_toolbox.db_toolbox import (
-    create_table_from_columns,
-    create_update_inconsistency_error_query,
+from src.a00_data_toolbox.db_toolbox import create_update_inconsistency_error_query
+from src.a17_idea_logic.idea_db_tool import (
+    get_default_sorted_list,
+    create_idea_sorted_table,
 )
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,
     get_idea_sqlite_types,
@@ -504,9 +504,7 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
     idea_refs = get_quick_ideas_column_ref()
     for idea_number, idea_columns in idea_refs.items():
         x_tablename = f"{idea_number}_raw"
-        x_columns = get_default_sorted_list(idea_columns)
-        col_types = get_idea_sqlite_types()
-        create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
+        create_idea_sorted_table(conn_or_cursor, x_tablename, idea_columns)
 
 
 def create_sound_pidgin_update_inconsist_error_message_sqlstr(

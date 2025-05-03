@@ -1,5 +1,8 @@
-from src.a00_data_toolbox.db_toolbox import sqlite_obj_str, create_table_from_columns
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
+from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
+from src.a17_idea_logic.idea_db_tool import (
+    get_default_sorted_list,
+    create_idea_sorted_table,
+)
 from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,
     get_idea_sqlite_types,

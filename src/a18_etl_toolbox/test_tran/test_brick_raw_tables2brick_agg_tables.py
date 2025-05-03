@@ -3,13 +3,12 @@ from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_row_count,
     get_table_columns,
-    create_table_from_columns,
 )
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a17_idea_logic._utils.str_a17 import brick_raw_str, brick_agg_str
-from src.a17_idea_logic.idea_db_tool import sheet_exists
+from src.a17_idea_logic.idea_db_tool import sheet_exists, create_idea_sorted_table
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
     etl_brick_agg_tables_to_brick_agg_dfs,
@@ -39,18 +38,9 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         cumlative_minute_str(),
         hour_tag_str(),
     ]
-    raw_br00003_types = {
-        event_int_str(): "INTEGER",
-        face_name_str(): "TEXT",
-        fisc_tag_str(): "TEXT",
-        cumlative_minute_str(): "TEXT",
-        hour_tag_str(): "TEXT",
-    }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_table_from_columns(
-            cursor, raw_br00003_tablename, raw_br00003_columns, raw_br00003_types
-        )
+        create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -123,18 +113,9 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         cumlative_minute_str(),
         hour_tag_str(),
     ]
-    raw_br00003_types = {
-        event_int_str(): "INTEGER",
-        face_name_str(): "TEXT",
-        fisc_tag_str(): "TEXT",
-        cumlative_minute_str(): "TEXT",
-        hour_tag_str(): "TEXT",
-    }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_table_from_columns(
-            cursor, raw_br00003_tablename, raw_br00003_columns, raw_br00003_types
-        )
+        create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -204,18 +185,9 @@ def test_etl_brick_agg_tables_to_brick_agg_dfs_PopulatesAggTable_Scenario0_Group
         cumlative_minute_str(),
         hour_tag_str(),
     ]
-    agg_br00003_types = {
-        event_int_str(): "INTEGER",
-        face_name_str(): "TEXT",
-        fisc_tag_str(): "TEXT",
-        cumlative_minute_str(): "TEXT",
-        hour_tag_str(): "TEXT",
-    }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_table_from_columns(
-            cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
-        )
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}

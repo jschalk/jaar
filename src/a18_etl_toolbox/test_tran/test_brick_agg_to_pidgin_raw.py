@@ -1,6 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a00_data_toolbox.db_toolbox import (
-    create_table_from_columns,
     create_select_query,
     get_row_count,
     get_table_columns,
@@ -29,6 +28,7 @@ from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
     _get_pidgen_idea_format_filenames,
+    create_idea_sorted_table,
 )
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
@@ -385,9 +385,8 @@ def create_brick_valid_table(cursor, idea_number: str):
             inx_bridge_str(),
             unknown_word_str(),
         ]
-    x_types = {x_column: "TEXT" for x_column in x_columns}
     agg_tablename = f"{brick_valid_str()}_{idea_number}"
-    create_table_from_columns(cursor, agg_tablename, x_columns, x_types)
+    create_idea_sorted_table(cursor, agg_tablename, x_columns)
 
 
 def populate_brick_valid_table(cursor, idea_number: str):
