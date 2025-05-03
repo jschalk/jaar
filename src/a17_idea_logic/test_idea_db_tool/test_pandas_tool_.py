@@ -25,6 +25,10 @@ from src.a17_idea_logic._utils.str_a17 import (
     brick_raw_str,
     brick_agg_str,
     brick_valid_str,
+    sound_raw_str,
+    sound_agg_str,
+    voice_raw_str,
+    voice_agg_str,
 )
 from src.a17_idea_logic.idea_db_tool import (
     save_dataframe_to_csv,
@@ -178,13 +182,6 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     print(f"{relevant_dataframe.columns=}")
     assert relevant_dataframe.columns.to_list()[0] == acct_name_str()
     assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_label_str()]
-
-
-def test_brick_raw_str_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert brick_raw_str() == "brick_raw"
-    assert brick_agg_str() == "brick_agg"
-    assert brick_valid_str() == "brick_valid"
 
 
 def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():

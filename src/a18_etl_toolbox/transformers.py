@@ -228,7 +228,7 @@ def etl_brick_raw_db_to_brick_agg_df(brick_dir):
         upsert_sheet(brick_idea_path, "brick_agg", otx_df)
 
 
-def etl_brick_agg_db_to_brick_agg_df(conn: sqlite3_Connection, brick_dir: str):
+def etl_brick_agg_tables_to_brick_agg_dfs(conn: sqlite3_Connection, brick_dir: str):
     brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for table_name in get_db_tables(conn):
@@ -435,6 +435,10 @@ def brick_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
                 etl_brick_valid_table_into_pidgin_prime_raw_table(
                     cursor, brick_valid_table, raw_tablename, idea_number
                 )
+
+
+def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
+    pass
 
 
 def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
