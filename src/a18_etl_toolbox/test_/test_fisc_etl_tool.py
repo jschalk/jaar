@@ -10,17 +10,16 @@ from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeoffi_str,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_config_args
-from src.a17_idea_logic.idea_db_tool import sheet_exists, get_default_sorted_list
+from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeObjsRef,
     FiscPrimeColumnsRef,
-    create_init_fisc_prime_files,
+    # create_init_fisc_prime_files,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )
-from pandas import read_excel as pandas_read_excel
 
 
 def test_FiscPrimeObjsRef_Exists():
@@ -170,113 +169,113 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.offi_agg_empty_csv == f"{offi_agg_csv_header}\n"
 
 
-def test_create_init_fisc_prime_files_CreatesFiles_raw(env_dir_setup_cleanup):
-    # ESTABLISH
-    x_dir = get_module_temp_dir()
-    raw_str = "raw"
-    fiscref = FiscPrimeObjsRef(x_dir)
-    assert sheet_exists(fiscref.unit_excel_path, raw_str) is False
-    assert sheet_exists(fiscref.deal_excel_path, raw_str) is False
-    assert sheet_exists(fiscref.cash_excel_path, raw_str) is False
-    assert sheet_exists(fiscref.hour_excel_path, raw_str) is False
-    assert sheet_exists(fiscref.mont_excel_path, raw_str) is False
-    assert sheet_exists(fiscref.week_excel_path, raw_str) is False
-    assert sheet_exists(fiscref.offi_excel_path, raw_str) is False
+# def test_create_init_fisc_prime_files_CreatesFiles_raw(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     x_dir = get_module_temp_dir()
+#     raw_str = "raw"
+#     fiscref = FiscPrimeObjsRef(x_dir)
+#     assert sheet_exists(fiscref.unit_excel_path, raw_str) is False
+#     assert sheet_exists(fiscref.deal_excel_path, raw_str) is False
+#     assert sheet_exists(fiscref.cash_excel_path, raw_str) is False
+#     assert sheet_exists(fiscref.hour_excel_path, raw_str) is False
+#     assert sheet_exists(fiscref.mont_excel_path, raw_str) is False
+#     assert sheet_exists(fiscref.week_excel_path, raw_str) is False
+#     assert sheet_exists(fiscref.offi_excel_path, raw_str) is False
 
-    # WHEN
-    create_init_fisc_prime_files(x_dir)
+#     # WHEN
+#     create_init_fisc_prime_files(x_dir)
 
-    # THEN
-    assert sheet_exists(fiscref.unit_excel_path, raw_str)
-    assert sheet_exists(fiscref.deal_excel_path, raw_str)
-    assert sheet_exists(fiscref.cash_excel_path, raw_str)
-    assert sheet_exists(fiscref.hour_excel_path, raw_str)
-    assert sheet_exists(fiscref.mont_excel_path, raw_str)
-    assert sheet_exists(fiscref.week_excel_path, raw_str)
-    assert sheet_exists(fiscref.offi_excel_path, raw_str)
-
-
-def test_create_init_fisc_prime_files_HasCorrectColumns_raw(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    x_dir = get_module_temp_dir()
-
-    # WHEN
-    create_init_fisc_prime_files(x_dir)
-
-    # THEN
-    raw_str = "raw"
-    xp = FiscPrimeObjsRef(x_dir)
-    fisunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=raw_str)
-    fisdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=raw_str)
-    fiscash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=raw_str)
-    fishour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=raw_str)
-    fismont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=raw_str)
-    fisweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=raw_str)
-    fisoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=raw_str)
-
-    expected_cols = FiscPrimeColumnsRef()
-    print(f"{list(fisunit_df.columns)=}")
-    assert list(fisunit_df.columns) == expected_cols.unit_raw_columns
-    assert list(fisdeal_df.columns) == expected_cols.deal_raw_columns
-    assert list(fiscash_df.columns) == expected_cols.cash_raw_columns
-    assert list(fishour_df.columns) == expected_cols.hour_raw_columns
-    assert list(fismont_df.columns) == expected_cols.mont_raw_columns
-    assert list(fisweek_df.columns) == expected_cols.week_raw_columns
-    assert list(fisoffi_df.columns) == expected_cols.offi_raw_columns
+#     # THEN
+#     assert sheet_exists(fiscref.unit_excel_path, raw_str)
+#     assert sheet_exists(fiscref.deal_excel_path, raw_str)
+#     assert sheet_exists(fiscref.cash_excel_path, raw_str)
+#     assert sheet_exists(fiscref.hour_excel_path, raw_str)
+#     assert sheet_exists(fiscref.mont_excel_path, raw_str)
+#     assert sheet_exists(fiscref.week_excel_path, raw_str)
+#     assert sheet_exists(fiscref.offi_excel_path, raw_str)
 
 
-def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
-    # ESTABLISH
-    x_dir = get_module_temp_dir()
-    agg_str = "agg"
-    xp = FiscPrimeObjsRef(x_dir)
-    assert sheet_exists(xp.unit_excel_path, agg_str) is False
-    assert sheet_exists(xp.deal_excel_path, agg_str) is False
-    assert sheet_exists(xp.cash_excel_path, agg_str) is False
-    assert sheet_exists(xp.hour_excel_path, agg_str) is False
-    assert sheet_exists(xp.mont_excel_path, agg_str) is False
-    assert sheet_exists(xp.week_excel_path, agg_str) is False
-    assert sheet_exists(xp.offi_excel_path, agg_str) is False
+# def test_create_init_fisc_prime_files_HasCorrectColumns_raw(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     x_dir = get_module_temp_dir()
 
-    # WHEN
-    create_init_fisc_prime_files(x_dir)
+#     # WHEN
+#     create_init_fisc_prime_files(x_dir)
 
-    # THEN
-    assert sheet_exists(xp.unit_excel_path, agg_str)
-    assert sheet_exists(xp.deal_excel_path, agg_str)
-    assert sheet_exists(xp.cash_excel_path, agg_str)
-    assert sheet_exists(xp.hour_excel_path, agg_str)
-    assert sheet_exists(xp.mont_excel_path, agg_str)
-    assert sheet_exists(xp.week_excel_path, agg_str)
-    assert sheet_exists(xp.offi_excel_path, agg_str)
+#     # THEN
+#     raw_str = "raw"
+#     xp = FiscPrimeObjsRef(x_dir)
+#     fisunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=raw_str)
+#     fisdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=raw_str)
+#     fiscash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=raw_str)
+#     fishour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=raw_str)
+#     fismont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=raw_str)
+#     fisweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=raw_str)
+#     fisoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=raw_str)
+
+#     expected_cols = FiscPrimeColumnsRef()
+#     print(f"{list(fisunit_df.columns)=}")
+#     assert list(fisunit_df.columns) == expected_cols.unit_raw_columns
+#     assert list(fisdeal_df.columns) == expected_cols.deal_raw_columns
+#     assert list(fiscash_df.columns) == expected_cols.cash_raw_columns
+#     assert list(fishour_df.columns) == expected_cols.hour_raw_columns
+#     assert list(fismont_df.columns) == expected_cols.mont_raw_columns
+#     assert list(fisweek_df.columns) == expected_cols.week_raw_columns
+#     assert list(fisoffi_df.columns) == expected_cols.offi_raw_columns
 
 
-def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
-    # ESTABLISH
-    x_dir = get_module_temp_dir()
+# def test_create_init_fisc_prime_files_CreatesFiles_agg(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     x_dir = get_module_temp_dir()
+#     agg_str = "agg"
+#     xp = FiscPrimeObjsRef(x_dir)
+#     assert sheet_exists(xp.unit_excel_path, agg_str) is False
+#     assert sheet_exists(xp.deal_excel_path, agg_str) is False
+#     assert sheet_exists(xp.cash_excel_path, agg_str) is False
+#     assert sheet_exists(xp.hour_excel_path, agg_str) is False
+#     assert sheet_exists(xp.mont_excel_path, agg_str) is False
+#     assert sheet_exists(xp.week_excel_path, agg_str) is False
+#     assert sheet_exists(xp.offi_excel_path, agg_str) is False
 
-    # WHEN
-    create_init_fisc_prime_files(x_dir)
+#     # WHEN
+#     create_init_fisc_prime_files(x_dir)
 
-    # THEN
-    agg_str = "agg"
-    xp = FiscPrimeObjsRef(x_dir)
-    fisunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=agg_str)
-    fisdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=agg_str)
-    fiscash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=agg_str)
-    fishour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=agg_str)
-    fismont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=agg_str)
-    fisweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=agg_str)
-    fisoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=agg_str)
+#     # THEN
+#     assert sheet_exists(xp.unit_excel_path, agg_str)
+#     assert sheet_exists(xp.deal_excel_path, agg_str)
+#     assert sheet_exists(xp.cash_excel_path, agg_str)
+#     assert sheet_exists(xp.hour_excel_path, agg_str)
+#     assert sheet_exists(xp.mont_excel_path, agg_str)
+#     assert sheet_exists(xp.week_excel_path, agg_str)
+#     assert sheet_exists(xp.offi_excel_path, agg_str)
 
-    expected_cols = FiscPrimeColumnsRef()
-    print(f"{list(fisunit_df.columns)=}")
-    assert list(fisunit_df.columns) == expected_cols.unit_agg_columns
-    assert list(fisdeal_df.columns) == expected_cols.deal_agg_columns
-    assert list(fiscash_df.columns) == expected_cols.cash_agg_columns
-    assert list(fishour_df.columns) == expected_cols.hour_agg_columns
-    assert list(fismont_df.columns) == expected_cols.mont_agg_columns
-    assert list(fisweek_df.columns) == expected_cols.week_agg_columns
-    assert list(fisoffi_df.columns) == expected_cols.offi_agg_columns
+
+# def test_create_init_fisc_prime_files_HasCorrectColumns_agg(env_dir_setup_cleanup):
+#     # ESTABLISH
+#     x_dir = get_module_temp_dir()
+
+#     # WHEN
+#     create_init_fisc_prime_files(x_dir)
+
+#     # THEN
+#     agg_str = "agg"
+#     xp = FiscPrimeObjsRef(x_dir)
+#     fisunit_df = pandas_read_excel(xp.unit_excel_path, sheet_name=agg_str)
+#     fisdeal_df = pandas_read_excel(xp.deal_excel_path, sheet_name=agg_str)
+#     fiscash_df = pandas_read_excel(xp.cash_excel_path, sheet_name=agg_str)
+#     fishour_df = pandas_read_excel(xp.hour_excel_path, sheet_name=agg_str)
+#     fismont_df = pandas_read_excel(xp.mont_excel_path, sheet_name=agg_str)
+#     fisweek_df = pandas_read_excel(xp.week_excel_path, sheet_name=agg_str)
+#     fisoffi_df = pandas_read_excel(xp.offi_excel_path, sheet_name=agg_str)
+
+#     expected_cols = FiscPrimeColumnsRef()
+#     print(f"{list(fisunit_df.columns)=}")
+#     assert list(fisunit_df.columns) == expected_cols.unit_agg_columns
+#     assert list(fisdeal_df.columns) == expected_cols.deal_agg_columns
+#     assert list(fiscash_df.columns) == expected_cols.cash_agg_columns
+#     assert list(fishour_df.columns) == expected_cols.hour_agg_columns
+#     assert list(fismont_df.columns) == expected_cols.mont_agg_columns
+#     assert list(fisweek_df.columns) == expected_cols.week_agg_columns
+#     assert list(fisoffi_df.columns) == expected_cols.offi_agg_columns

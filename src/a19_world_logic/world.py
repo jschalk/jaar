@@ -248,9 +248,9 @@ class WorldUnit:
 
         with sqlite3_connect(":memory:") as db_conn:
             cursor = db_conn.cursor()
-            self.mud_to_stances_with_cursor(db_conn, cursor, store_tracing_files)
+            self.mud_to_stances_v1_with_cursor(db_conn, cursor, store_tracing_files)
 
-    def mud_to_stances_with_cursor(
+    def mud_to_stances_v1_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
