@@ -2,49 +2,51 @@ from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_row_count,
     get_table_columns,
-    create_table_from_columns,
 )
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
-from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a16_pidgin_logic._utils.str_a16 import (
+    inx_bridge_str,
+    otx_bridge_str,
+    inx_road_str,
+    otx_road_str,
+    unknown_word_str,
+)
+from src.a17_idea_logic.idea_config import get_idea_sqlite_types
+from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a17_idea_logic._utils.str_a17 import brick_valid_str, sound_raw_str
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 from sqlite3 import connect as sqlite3_connect
 
+# get examples from tests for etl_brick_agg_dfs_to_pidgin_label_raw
+# get examples from tests for etl_brick_agg_dfs_to_pidgin_road_raw
+# get examples from tests for etl_brick_agg_dfs_to_pidgin__raw
+# get examples from tests for etl_brick_agg_dfs_to_pidgin_road_raw
 
-# def test_etl_brick_agg_tables_to_brick_valid_tables_PopulatesValidTable_Scenario0_Only_valid_events():
+
+# def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario0_Only_valid_events():
 #     # ESTABLISH
 #     a23_str = "accord23"
+#     bob_str = "Bob"
 #     sue_str = "Sue"
-#     event1 = 1
-#     event3 = 3
-#     event6 = 6
-#     minute_360 = 360
-#     minute_420 = 420
-#     hour6am = "6am"
-#     hour7am = "7am"
-#     hour8am = "8am"
-
-#     agg_br00003_tablename = f"br00003_{brick_valid_str()}"
-#     agg_br00003_columns = [
+#     yao_str = "Yao"
+#     yao_inx = "Yaoito"
+#     bob_inx = "Bobito"
+#     event7 = 7
+#     br00117_agg_tablename = f"br00003_{brick_valid_str()}"
+#     br00117_columns = [
 #         event_int_str(),
 #         face_name_str(),
 #         fisc_tag_str(),
-#         cumlative_minute_str(),
-#         hour_tag_str(),
+#         owner_name_str(),
+#         acct_name_str(),
+#         otx_road_str(),
+#         inx_road_str(),
 #     ]
-#     agg_br00003_types = {
-#         event_int_str(): "INTEGER",
-#         face_name_str(): "TEXT",
-#         fisc_tag_str(): "TEXT",
-#         cumlative_minute_str(): "TEXT",
-#         hour_tag_str(): "TEXT",
-#     }
 #     with sqlite3_connect(":memory:") as db_conn:
 #         cursor = db_conn.cursor()
-#         create_table_from_columns(
-#             cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
-#         )
+#         create_idea_sorted_table(cursor, br00117_agg_tablename, br00117_columns)
 #         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
 #   {event_int_str()}
 # , {face_name_str()}
@@ -64,11 +66,8 @@ from sqlite3 import connect as sqlite3_connect
 #         assert get_row_count(cursor, agg_br00003_tablename) == 3
 
 #         valid_events_columns = [face_name_str(), event_int_str()]
-#         valid_events_types = {face_name_str(): "TEXT", event_int_str(): "INTEGER"}
 #         valid_events_tablename = "events_brick_valid"
-#         create_table_from_columns(
-#             cursor, valid_events_tablename, valid_events_columns, valid_events_types
-#         )
+#         create_idea_sorted_table(cursor, valid_events_tablename, valid_events_columns)
 #         insert_into_valid_events = f"""
 # INSERT INTO {valid_events_tablename} ({event_int_str()}, {face_name_str()})
 # VALUES

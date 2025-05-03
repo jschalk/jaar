@@ -475,25 +475,33 @@ def etl_brick_valid_table_into_pidgin_prime_raw_table(
 def etl_brick_agg_df_to_brick_pidgin_raw_df(
     legitimate_events: set[EventInt], brick_dir: str
 ):
-    etl_brick_agg_to_pidgin_name_raw(legitimate_events, brick_dir)
-    etl_brick_agg_to_pidgin_label_raw(legitimate_events, brick_dir)
-    etl_brick_agg_to_pidgin_tag_raw(legitimate_events, brick_dir)
-    etl_brick_agg_to_pidgin_road_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_tag_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_road_raw(legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_name_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_label_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_tag_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_road_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, brick_dir)
 
 
