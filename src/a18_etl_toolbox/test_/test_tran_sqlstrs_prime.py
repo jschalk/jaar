@@ -196,7 +196,6 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
 def get_del_dimen_columns_set(x_dimen: str) -> list[str]:
     x_config = get_idea_config_dict().get(x_dimen)
     columns_set = set(x_config.get("jkeys").keys())
-    columns_set.update(set(x_config.get("jvalues").keys()))
     columns_list = get_default_sorted_list(columns_set)
     columns_list[-1] = get_delete_key_name(columns_list[-1])
     return set(columns_list)
@@ -255,7 +254,7 @@ def create_bud_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
 def create_bud_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "del")
     columns = get_del_dimen_columns_set(x_dimen)
-    columns.add("pidgin_event_int")
+    columns.add(idea_number_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -317,11 +316,11 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
 
         abbv7 = get_dimen_abbv7(x_dimen)
-        # print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
-        # print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
+        print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
+        print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
 
-        print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
-        print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
+        # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
+        # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
         assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
         assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
 

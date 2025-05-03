@@ -14,6 +14,7 @@ from src.a00_data_toolbox.db_toolbox import (
     insert_csv,
     create_table_from_csv,
     db_table_exists,
+    get_db_tables,
     get_table_columns,
     create_table_from_columns,
     create_select_inconsistency_query,
@@ -976,3 +977,51 @@ def test_required_columns_exist_ReturnsObj_Scenario0():
         assert required_columns_exist(cursor, x_table1, {"name", "address"}) is False
         assert required_columns_exist(cursor, x_table2, {"name", "email"}) is False
         assert required_columns_exist(cursor, x_table2, {"name"})
+
+
+def test_get_db_tables_ReturnsObj_Scenario0_AllTablenames():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        hair_str = "hair"
+        x_table1 = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(cursor, x_table1, src_columns, {})
+        x_table2 = "side2"
+        dst_columns = ["name", "age", hair_str]
+        create_table_from_columns(cursor, x_table2, dst_columns, {})
+
+        # WHEN / THEN
+        assert get_db_tables(cursor) == {x_table1: 1, x_table2: 1}
+
+
+def test_get_db_tables_ReturnsObj_Scenario1_TablenamesContainsString():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        hair_str = "hair"
+        x_table1 = "side1"
+        src_columns = ["id", "name", "age", "email", hair_str]
+        create_table_from_columns(cursor, x_table1, src_columns, {})
+        x_table2 = "side2"
+        dst_columns = ["name", "age", hair_str]
+        create_table_from_columns(cursor, x_table2, dst_columns, {})
+
+        # WHEN / THEN
+        assert get_db_tables(cursor, "2") == {x_table2: 1}
+
+
+def test_get_db_tables_ReturnsObj_Scenario1_TablenamesStartWithString():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        x_table1 = "side1"
+        x_table2 = "side2"
+        x_table3 = "run2"
+        create_table_from_columns(cursor, x_table1, ["id", "age"], {})
+        create_table_from_columns(cursor, x_table2, ["id", "age"], {})
+        create_table_from_columns(cursor, x_table3, ["id", "age"], {})
+
+        # WHEN / THEN
+        assert get_db_tables(cursor, "2") == {x_table2: 1, x_table3: 1}
+        assert get_db_tables(cursor, "2", "side") == {x_table2: 1}
