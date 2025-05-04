@@ -18,6 +18,7 @@
     },
     "idea_number": "br00004",
     "dimens": [
+        "fiscunit",
         "fisc_timeline_month"
     ]
 }

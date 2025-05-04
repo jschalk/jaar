@@ -14,6 +14,7 @@
         }
     },
     "dimens": [
+        "fiscunit",
         "fisc_timeoffi"
     ],
     "idea_number": "br00006"

@@ -18,8 +18,9 @@ from src.a18_etl_toolbox.transformers import (
     etl_mud_dfs_to_brick_raw_tables,
     etl_brick_raw_tables_to_brick_agg_tables,
     etl_brick_agg_tables_to_brick_valid_tables,
+    etl_brick_valid_tables_to_sound_raw_tables,
     etl_brick_raw_db_to_brick_raw_df,
-    etl_brick_agg_db_to_brick_agg_df,
+    etl_brick_agg_tables_to_brick_agg_dfs,
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_events_brick_agg_db_to_event_dict,
@@ -124,7 +125,7 @@ class WorldUnit:
         self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
     ):
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
-        etl_brick_agg_db_to_brick_agg_df(conn, self._brick_dir)
+        etl_brick_agg_tables_to_brick_agg_dfs(conn, self._brick_dir)
 
     def brick_agg_non_pidgin_ideas_to_brick_valid(self):
         etl_brick_agg_non_pidgin_ideas_to_brick_valid(
@@ -309,7 +310,7 @@ class WorldUnit:
 
         if store_tracing_files:
             etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
-            # etl_brick_agg_db_to_brick_agg_df(db_conn, self._brick_dir)
+            # etl_brick_agg_tables_to_brick_agg_dfs(db_conn, self._brick_dir)
             self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def mud_to_stances_v2_with_cursor(
@@ -324,6 +325,7 @@ class WorldUnit:
         etl_brick_raw_tables_to_events_brick_agg_table(cursor)
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
+        etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # identify all idea data that has conflicting face_name/event_int uniqueness
         # self._events = etl_events_brick_agg_db_to_event_dict(cursor)
@@ -370,7 +372,7 @@ class WorldUnit:
 
         # if store_tracing_files:
         #     etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
-        #     # etl_brick_agg_db_to_brick_agg_df(db_conn, self._brick_dir)
+        #     # etl_brick_agg_tables_to_brick_agg_dfs(db_conn, self._brick_dir)
         #     self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):

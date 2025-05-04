@@ -1,8 +1,12 @@
-from src.a00_data_toolbox.db_toolbox import create_table_from_columns
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
+from src.a00_data_toolbox.db_toolbox import create_update_inconsistency_error_query
+from src.a17_idea_logic.idea_db_tool import (
+    get_default_sorted_list,
+    create_idea_sorted_table,
+)
 from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,
     get_idea_sqlite_types,
+    get_idea_config_dict,
 )
 from sqlite3 import Connection as sqlite3_Connection
 
@@ -58,7 +62,7 @@ def get_dimen_abbv7(dimen: str) -> str:
 
 
 def create_prime_tablename(
-    abbv7: str, sound: str, stage: str, put_del: str = None
+    idea_dimen_or_abbv7: str, sound: str, stage: str, put_del: str = None
 ) -> str:
     abbv_references = {
         "FISCASH": "fisc_cashbook",
@@ -83,365 +87,253 @@ def create_prime_tablename(
         "PIDROAD": "pidgin_road",
         "PIDTAGG": "pidgin_tag",
     }
-    full_dimen = abbv_references.get(abbv7.upper())
-    if put_del:
-        return f"{full_dimen}_{sound}_{put_del}_{stage}"
-    return f"{full_dimen}_{sound}_{stage}"
+    tablename = idea_dimen_or_abbv7
+    if abbv_references.get(idea_dimen_or_abbv7.upper()):
+        tablename = abbv_references.get(idea_dimen_or_abbv7.upper())
+    if sound in {"s", "v"}:
+        tablename = f"{tablename}_{sound}"
+
+    return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
 
-CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_vld (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDROAD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDROAD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_agg (event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDROAD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_vld (event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDTAGG_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDTAGG_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_agg (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDTAGG_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_vld (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDROAD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDROAD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_agg (event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDTAGG_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDTAGG_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_agg (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
-CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCASH_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISCASH_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISCASH_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCASH_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_vld (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISDEAL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISDEAL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISDEAL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISDEAL_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISDEAL_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISDEAL_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_vld (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
-CREATE_FISHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
-CREATE_FISHOUR_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
-CREATE_FISHOUR_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
-CREATE_FISHOUR_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
-CREATE_FISHOUR_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_vld (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
-CREATE_FISMONT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
-CREATE_FISMONT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
-CREATE_FISMONT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
-CREATE_FISMONT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
-CREATE_FISMONT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
-CREATE_FISMONT_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_vld (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
-CREATE_FISWEEK_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
-CREATE_FISWEEK_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
-CREATE_FISWEEK_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
-CREATE_FISWEEK_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
-CREATE_FISWEEK_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
-CREATE_FISWEEK_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_vld (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
-CREATE_FISOFFI_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER)"""
-CREATE_FISOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER)"""
-CREATE_FISOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER)"""
-CREATE_FISOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_agg (fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISOFFI_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_vld (fisc_tag TEXT, offi_time INTEGER)"""
-CREATE_FISUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_FISUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_FISUNIT_VOICE_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_vld (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_BUDMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
-CREATE_BUDMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote_ERASE TEXT)"
-CREATE_BUDMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote_ERASE TEXT)"
-CREATE_BUDMEMB_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote_ERASE TEXT)"
+CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISCASH_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_FISCASH_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_agg (fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_FISDEAL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISDEAL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISDEAL_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
+CREATE_FISDEAL_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_agg (fisc_tag TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_FISHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISHOUR_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT, error_message TEXT)"""
+CREATE_FISHOUR_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_agg (fisc_tag TEXT, cumlative_minute INTEGER, hour_tag TEXT)"""
+CREATE_FISMONT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISMONT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISMONT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT, error_message TEXT)"""
+CREATE_FISMONT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_agg (fisc_tag TEXT, cumlative_day INTEGER, month_tag TEXT)"""
+CREATE_FISWEEK_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISWEEK_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISWEEK_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT, error_message TEXT)"""
+CREATE_FISWEEK_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_agg (fisc_tag TEXT, weekday_order INTEGER, weekday_tag TEXT)"""
+CREATE_FISOFFI_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_FISOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_agg (fisc_tag TEXT, offi_time INTEGER)"""
+CREATE_FISUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_FISUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_FISUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_agg (fisc_tag TEXT, timeline_tag TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+
+CREATE_BUDMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
+CREATE_BUDMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"
+CREATE_BUDMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"
+CREATE_BUDMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"
 CREATE_BUDMEMB_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
-CREATE_BUDMEMB_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote_ERASE TEXT)"
-CREATE_BUDMEMB_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote_ERASE TEXT)"
-CREATE_BUDMEMB_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote_ERASE TEXT)"
-CREATE_BUDACCT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"
-CREATE_BUDACCT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief_ERASE TEXT)"
-CREATE_BUDACCT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief_ERASE TEXT)"
-CREATE_BUDACCT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief_ERASE TEXT)"
+CREATE_BUDMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL)"
+CREATE_BUDMEMB_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"
+CREATE_BUDMEMB_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, group_label_ERASE TEXT)"
+CREATE_BUDACCT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"
+CREATE_BUDACCT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
+CREATE_BUDACCT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
+CREATE_BUDACCT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
 CREATE_BUDACCT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"
-CREATE_BUDACCT_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief_ERASE TEXT)"
-CREATE_BUDACCT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief_ERASE TEXT)"
-CREATE_BUDACCT_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief_ERASE TEXT)"
-CREATE_BUDAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
-CREATE_BUDAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force_ERASE TEXT)"
-CREATE_BUDAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force_ERASE TEXT)"
-CREATE_BUDAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force_ERASE TEXT)"
+CREATE_BUDACCT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
+CREATE_BUDACCT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
+CREATE_BUDACCT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
+CREATE_BUDAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
+CREATE_BUDAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_BUDAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title_ERASE TEXT)"
+CREATE_BUDAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title_ERASE TEXT)"
 CREATE_BUDAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
-CREATE_BUDAWAR_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force_ERASE TEXT)"
-CREATE_BUDAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force_ERASE TEXT)"
-CREATE_BUDAWAR_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force_ERASE TEXT)"
-CREATE_BUDFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_BUDFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh_ERASE TEXT)"
-CREATE_BUDFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh_ERASE TEXT)"
-CREATE_BUDFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh_ERASE TEXT)"
+CREATE_BUDAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_BUDAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title_ERASE TEXT)"
+CREATE_BUDAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title_ERASE TEXT)"
+CREATE_BUDFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
+CREATE_BUDFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"
+CREATE_BUDFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
+CREATE_BUDFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
 CREATE_BUDFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_BUDFACT_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh_ERASE TEXT)"
-CREATE_BUDFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh_ERASE TEXT)"
-CREATE_BUDFACT_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh_ERASE TEXT)"
-CREATE_BUDHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"
-CREATE_BUDHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT, error_message TEXT)"
-CREATE_BUDHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"
-CREATE_BUDHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
+CREATE_BUDFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"
+CREATE_BUDFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
+CREATE_BUDFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_factunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
+CREATE_BUDHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT, error_message TEXT)"
+CREATE_BUDHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"
+CREATE_BUDHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
 CREATE_BUDHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
 CREATE_BUDHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"
-CREATE_BUDHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT, error_message TEXT)"
-CREATE_BUDHEAL_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"
-CREATE_BUDHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
+CREATE_BUDHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"
+CREATE_BUDHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
 CREATE_BUDHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDHEAL_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_healerlink_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
-CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
-CREATE_BUDPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor_ERASE TEXT)"
+CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, error_message TEXT)"
+CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
+CREATE_BUDPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"
+CREATE_BUDPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"
 CREATE_BUDPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
-CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
-CREATE_BUDPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor_ERASE TEXT)"
-CREATE_BUDPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor_ERASE TEXT)"
-CREATE_BUDPREM_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor_ERASE TEXT)"
-CREATE_BUDREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
-CREATE_BUDREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, error_message TEXT)"
-CREATE_BUDREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
-CREATE_BUDREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite_ERASE TEXT)"
-CREATE_BUDREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite_ERASE TEXT)"
-CREATE_BUDREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite_ERASE TEXT)"
+CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER)"
+CREATE_BUDPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"
+CREATE_BUDPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need_ERASE TEXT)"
+CREATE_BUDREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, error_message TEXT)"
+CREATE_BUDREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
+CREATE_BUDREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
+CREATE_BUDREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
 CREATE_BUDREAS_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
-CREATE_BUDREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, error_message TEXT)"
-CREATE_BUDREAS_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
-CREATE_BUDREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite_ERASE TEXT)"
-CREATE_BUDREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite_ERASE TEXT)"
-CREATE_BUDREAS_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite_ERASE TEXT)"
-CREATE_BUDTEAM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"
-CREATE_BUDTEAM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT, error_message TEXT)"
-CREATE_BUDTEAM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"
-CREATE_BUDTEAM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
+CREATE_BUDREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER)"
+CREATE_BUDREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
+CREATE_BUDREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base_ERASE TEXT)"
+CREATE_BUDTEAM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT, error_message TEXT)"
+CREATE_BUDTEAM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"
+CREATE_BUDTEAM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
 CREATE_BUDTEAM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
-CREATE_BUDTEAM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
 CREATE_BUDTEAM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"
-CREATE_BUDTEAM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT, error_message TEXT)"
-CREATE_BUDTEAM_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"
-CREATE_BUDTEAM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
+CREATE_BUDTEAM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT)"
+CREATE_BUDTEAM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
 CREATE_BUDTEAM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
-CREATE_BUDTEAM_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_item_teamlink_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title_ERASE TEXT)"
-CREATE_BUDITEM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDITEM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_BUDITEM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDITEM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool_ERASE TEXT)"
-CREATE_BUDITEM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool_ERASE TEXT)"
-CREATE_BUDITEM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool_ERASE TEXT)"
+CREATE_BUDITEM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
+CREATE_BUDITEM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
+CREATE_BUDITEM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag_ERASE TEXT)"
+CREATE_BUDITEM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag_ERASE TEXT)"
 CREATE_BUDITEM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDITEM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_BUDITEM_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDITEM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool_ERASE TEXT)"
-CREATE_BUDITEM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool_ERASE TEXT)"
-CREATE_BUDITEM_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool_ERASE TEXT)"
-CREATE_BUDUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_BUDUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit_ERASE TEXT)"
-CREATE_BUDUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit_ERASE TEXT)"
-CREATE_BUDUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit_ERASE TEXT)"
+CREATE_BUDITEM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
+CREATE_BUDITEM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag_ERASE TEXT)"
+CREATE_BUDITEM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_itemunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag_ERASE TEXT)"
+CREATE_BUDUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
+CREATE_BUDUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
+CREATE_BUDUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name_ERASE TEXT)"
+CREATE_BUDUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name_ERASE TEXT)"
 CREATE_BUDUNIT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_v_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_BUDUNIT_VOICE_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS budunit_v_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_raw (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit_ERASE TEXT)"
-CREATE_BUDUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit_ERASE TEXT)"
-CREATE_BUDUNIT_VOICE_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_vld (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit_ERASE TEXT)"
+CREATE_BUDUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
+CREATE_BUDUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name_ERASE TEXT)"
+CREATE_BUDUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name_ERASE TEXT)"
 
 
 def get_prime_create_table_sqlstrs() -> dict[str:str]:
     return {
         "pidgin_label_s_raw": CREATE_PIDLABE_SOUND_RAW_SQLSTR,
         "pidgin_label_s_agg": CREATE_PIDLABE_SOUND_AGG_SQLSTR,
-        "pidgin_label_s_vld": CREATE_PIDLABE_SOUND_VLD_SQLSTR,
         "pidgin_name_s_raw": CREATE_PIDNAME_SOUND_RAW_SQLSTR,
         "pidgin_name_s_agg": CREATE_PIDNAME_SOUND_AGG_SQLSTR,
-        "pidgin_name_s_vld": CREATE_PIDNAME_SOUND_VLD_SQLSTR,
         "pidgin_road_s_raw": CREATE_PIDROAD_SOUND_RAW_SQLSTR,
         "pidgin_road_s_agg": CREATE_PIDROAD_SOUND_AGG_SQLSTR,
-        "pidgin_road_s_vld": CREATE_PIDROAD_SOUND_VLD_SQLSTR,
         "pidgin_tag_s_raw": CREATE_PIDTAGG_SOUND_RAW_SQLSTR,
         "pidgin_tag_s_agg": CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
-        "pidgin_tag_s_vld": CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
         "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
         "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
-        "fisc_cashbook_s_vld": CREATE_FISCASH_SOUND_VLD_SQLSTR,
         "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,
         "fisc_cashbook_v_agg": CREATE_FISCASH_VOICE_AGG_SQLSTR,
-        "fisc_cashbook_v_vld": CREATE_FISCASH_VOICE_VLD_SQLSTR,
         "fisc_dealunit_s_raw": CREATE_FISDEAL_SOUND_RAW_SQLSTR,
         "fisc_dealunit_s_agg": CREATE_FISDEAL_SOUND_AGG_SQLSTR,
-        "fisc_dealunit_s_vld": CREATE_FISDEAL_SOUND_VLD_SQLSTR,
         "fisc_dealunit_v_raw": CREATE_FISDEAL_VOICE_RAW_SQLSTR,
         "fisc_dealunit_v_agg": CREATE_FISDEAL_VOICE_AGG_SQLSTR,
-        "fisc_dealunit_v_vld": CREATE_FISDEAL_VOICE_VLD_SQLSTR,
         "fisc_timeline_hour_s_raw": CREATE_FISHOUR_SOUND_RAW_SQLSTR,
         "fisc_timeline_hour_s_agg": CREATE_FISHOUR_SOUND_AGG_SQLSTR,
-        "fisc_timeline_hour_s_vld": CREATE_FISHOUR_SOUND_VLD_SQLSTR,
         "fisc_timeline_hour_v_raw": CREATE_FISHOUR_VOICE_RAW_SQLSTR,
         "fisc_timeline_hour_v_agg": CREATE_FISHOUR_VOICE_AGG_SQLSTR,
-        "fisc_timeline_hour_v_vld": CREATE_FISHOUR_VOICE_VLD_SQLSTR,
         "fisc_timeline_month_s_raw": CREATE_FISMONT_SOUND_RAW_SQLSTR,
         "fisc_timeline_month_s_agg": CREATE_FISMONT_SOUND_AGG_SQLSTR,
-        "fisc_timeline_month_s_vld": CREATE_FISMONT_SOUND_VLD_SQLSTR,
         "fisc_timeline_month_v_raw": CREATE_FISMONT_VOICE_RAW_SQLSTR,
         "fisc_timeline_month_v_agg": CREATE_FISMONT_VOICE_AGG_SQLSTR,
-        "fisc_timeline_month_v_vld": CREATE_FISMONT_VOICE_VLD_SQLSTR,
         "fisc_timeline_weekday_s_raw": CREATE_FISWEEK_SOUND_RAW_SQLSTR,
         "fisc_timeline_weekday_s_agg": CREATE_FISWEEK_SOUND_AGG_SQLSTR,
-        "fisc_timeline_weekday_s_vld": CREATE_FISWEEK_SOUND_VLD_SQLSTR,
         "fisc_timeline_weekday_v_raw": CREATE_FISWEEK_VOICE_RAW_SQLSTR,
         "fisc_timeline_weekday_v_agg": CREATE_FISWEEK_VOICE_AGG_SQLSTR,
-        "fisc_timeline_weekday_v_vld": CREATE_FISWEEK_VOICE_VLD_SQLSTR,
         "fisc_timeoffi_s_raw": CREATE_FISOFFI_SOUND_RAW_SQLSTR,
         "fisc_timeoffi_s_agg": CREATE_FISOFFI_SOUND_AGG_SQLSTR,
-        "fisc_timeoffi_s_vld": CREATE_FISOFFI_SOUND_VLD_SQLSTR,
         "fisc_timeoffi_v_raw": CREATE_FISOFFI_VOICE_RAW_SQLSTR,
         "fisc_timeoffi_v_agg": CREATE_FISOFFI_VOICE_AGG_SQLSTR,
-        "fisc_timeoffi_v_vld": CREATE_FISOFFI_VOICE_VLD_SQLSTR,
         "fiscunit_s_raw": CREATE_FISUNIT_SOUND_RAW_SQLSTR,
         "fiscunit_s_agg": CREATE_FISUNIT_SOUND_AGG_SQLSTR,
-        "fiscunit_s_vld": CREATE_FISUNIT_SOUND_VLD_SQLSTR,
         "fiscunit_v_raw": CREATE_FISUNIT_VOICE_RAW_SQLSTR,
         "fiscunit_v_agg": CREATE_FISUNIT_VOICE_AGG_SQLSTR,
-        "fiscunit_v_vld": CREATE_FISUNIT_VOICE_VLD_SQLSTR,
         "bud_acct_membership_s_put_raw": CREATE_BUDMEMB_SOUND_PUT_RAW_STR,
         "bud_acct_membership_s_put_agg": CREATE_BUDMEMB_SOUND_PUT_AGG_STR,
-        "bud_acct_membership_s_put_vld": CREATE_BUDMEMB_SOUND_PUT_VLD_STR,
         "bud_acct_membership_s_del_raw": CREATE_BUDMEMB_SOUND_DEL_RAW_STR,
         "bud_acct_membership_s_del_agg": CREATE_BUDMEMB_SOUND_DEL_AGG_STR,
-        "bud_acct_membership_s_del_vld": CREATE_BUDMEMB_SOUND_DEL_VLD_STR,
         "bud_acct_membership_v_put_raw": CREATE_BUDMEMB_VOICE_PUT_RAW_STR,
         "bud_acct_membership_v_put_agg": CREATE_BUDMEMB_VOICE_PUT_AGG_STR,
-        "bud_acct_membership_v_put_vld": CREATE_BUDMEMB_VOICE_PUT_VLD_STR,
         "bud_acct_membership_v_del_raw": CREATE_BUDMEMB_VOICE_DEL_RAW_STR,
         "bud_acct_membership_v_del_agg": CREATE_BUDMEMB_VOICE_DEL_AGG_STR,
-        "bud_acct_membership_v_del_vld": CREATE_BUDMEMB_VOICE_DEL_VLD_STR,
         "bud_acctunit_s_put_raw": CREATE_BUDACCT_SOUND_PUT_RAW_STR,
         "bud_acctunit_s_put_agg": CREATE_BUDACCT_SOUND_PUT_AGG_STR,
-        "bud_acctunit_s_put_vld": CREATE_BUDACCT_SOUND_PUT_VLD_STR,
         "bud_acctunit_s_del_raw": CREATE_BUDACCT_SOUND_DEL_RAW_STR,
         "bud_acctunit_s_del_agg": CREATE_BUDACCT_SOUND_DEL_AGG_STR,
-        "bud_acctunit_s_del_vld": CREATE_BUDACCT_SOUND_DEL_VLD_STR,
         "bud_acctunit_v_put_raw": CREATE_BUDACCT_VOICE_PUT_RAW_STR,
         "bud_acctunit_v_put_agg": CREATE_BUDACCT_VOICE_PUT_AGG_STR,
-        "bud_acctunit_v_put_vld": CREATE_BUDACCT_VOICE_PUT_VLD_STR,
         "bud_acctunit_v_del_raw": CREATE_BUDACCT_VOICE_DEL_RAW_STR,
         "bud_acctunit_v_del_agg": CREATE_BUDACCT_VOICE_DEL_AGG_STR,
-        "bud_acctunit_v_del_vld": CREATE_BUDACCT_VOICE_DEL_VLD_STR,
         "bud_item_awardlink_s_put_raw": CREATE_BUDAWAR_SOUND_PUT_RAW_STR,
         "bud_item_awardlink_s_put_agg": CREATE_BUDAWAR_SOUND_PUT_AGG_STR,
-        "bud_item_awardlink_s_put_vld": CREATE_BUDAWAR_SOUND_PUT_VLD_STR,
         "bud_item_awardlink_s_del_raw": CREATE_BUDAWAR_SOUND_DEL_RAW_STR,
         "bud_item_awardlink_s_del_agg": CREATE_BUDAWAR_SOUND_DEL_AGG_STR,
-        "bud_item_awardlink_s_del_vld": CREATE_BUDAWAR_SOUND_DEL_VLD_STR,
         "bud_item_awardlink_v_put_raw": CREATE_BUDAWAR_VOICE_PUT_RAW_STR,
         "bud_item_awardlink_v_put_agg": CREATE_BUDAWAR_VOICE_PUT_AGG_STR,
-        "bud_item_awardlink_v_put_vld": CREATE_BUDAWAR_VOICE_PUT_VLD_STR,
         "bud_item_awardlink_v_del_raw": CREATE_BUDAWAR_VOICE_DEL_RAW_STR,
         "bud_item_awardlink_v_del_agg": CREATE_BUDAWAR_VOICE_DEL_AGG_STR,
-        "bud_item_awardlink_v_del_vld": CREATE_BUDAWAR_VOICE_DEL_VLD_STR,
         "bud_item_factunit_s_put_raw": CREATE_BUDFACT_SOUND_PUT_RAW_STR,
         "bud_item_factunit_s_put_agg": CREATE_BUDFACT_SOUND_PUT_AGG_STR,
-        "bud_item_factunit_s_put_vld": CREATE_BUDFACT_SOUND_PUT_VLD_STR,
         "bud_item_factunit_s_del_raw": CREATE_BUDFACT_SOUND_DEL_RAW_STR,
         "bud_item_factunit_s_del_agg": CREATE_BUDFACT_SOUND_DEL_AGG_STR,
-        "bud_item_factunit_s_del_vld": CREATE_BUDFACT_SOUND_DEL_VLD_STR,
         "bud_item_factunit_v_put_raw": CREATE_BUDFACT_VOICE_PUT_RAW_STR,
         "bud_item_factunit_v_put_agg": CREATE_BUDFACT_VOICE_PUT_AGG_STR,
-        "bud_item_factunit_v_put_vld": CREATE_BUDFACT_VOICE_PUT_VLD_STR,
         "bud_item_factunit_v_del_raw": CREATE_BUDFACT_VOICE_DEL_RAW_STR,
         "bud_item_factunit_v_del_agg": CREATE_BUDFACT_VOICE_DEL_AGG_STR,
-        "bud_item_factunit_v_del_vld": CREATE_BUDFACT_VOICE_DEL_VLD_STR,
         "bud_item_healerlink_s_put_raw": CREATE_BUDHEAL_SOUND_PUT_RAW_STR,
         "bud_item_healerlink_s_put_agg": CREATE_BUDHEAL_SOUND_PUT_AGG_STR,
-        "bud_item_healerlink_s_put_vld": CREATE_BUDHEAL_SOUND_PUT_VLD_STR,
         "bud_item_healerlink_s_del_raw": CREATE_BUDHEAL_SOUND_DEL_RAW_STR,
         "bud_item_healerlink_s_del_agg": CREATE_BUDHEAL_SOUND_DEL_AGG_STR,
-        "bud_item_healerlink_s_del_vld": CREATE_BUDHEAL_SOUND_DEL_VLD_STR,
         "bud_item_healerlink_v_put_raw": CREATE_BUDHEAL_VOICE_PUT_RAW_STR,
         "bud_item_healerlink_v_put_agg": CREATE_BUDHEAL_VOICE_PUT_AGG_STR,
-        "bud_item_healerlink_v_put_vld": CREATE_BUDHEAL_VOICE_PUT_VLD_STR,
         "bud_item_healerlink_v_del_raw": CREATE_BUDHEAL_VOICE_DEL_RAW_STR,
         "bud_item_healerlink_v_del_agg": CREATE_BUDHEAL_VOICE_DEL_AGG_STR,
-        "bud_item_healerlink_v_del_vld": CREATE_BUDHEAL_VOICE_DEL_VLD_STR,
         "bud_item_reason_premiseunit_s_put_raw": CREATE_BUDPREM_SOUND_PUT_RAW_STR,
         "bud_item_reason_premiseunit_s_put_agg": CREATE_BUDPREM_SOUND_PUT_AGG_STR,
-        "bud_item_reason_premiseunit_s_put_vld": CREATE_BUDPREM_SOUND_PUT_VLD_STR,
         "bud_item_reason_premiseunit_s_del_raw": CREATE_BUDPREM_SOUND_DEL_RAW_STR,
         "bud_item_reason_premiseunit_s_del_agg": CREATE_BUDPREM_SOUND_DEL_AGG_STR,
-        "bud_item_reason_premiseunit_s_del_vld": CREATE_BUDPREM_SOUND_DEL_VLD_STR,
         "bud_item_reason_premiseunit_v_put_raw": CREATE_BUDPREM_VOICE_PUT_RAW_STR,
         "bud_item_reason_premiseunit_v_put_agg": CREATE_BUDPREM_VOICE_PUT_AGG_STR,
-        "bud_item_reason_premiseunit_v_put_vld": CREATE_BUDPREM_VOICE_PUT_VLD_STR,
         "bud_item_reason_premiseunit_v_del_raw": CREATE_BUDPREM_VOICE_DEL_RAW_STR,
         "bud_item_reason_premiseunit_v_del_agg": CREATE_BUDPREM_VOICE_DEL_AGG_STR,
-        "bud_item_reason_premiseunit_v_del_vld": CREATE_BUDPREM_VOICE_DEL_VLD_STR,
         "bud_item_reasonunit_s_put_raw": CREATE_BUDREAS_SOUND_PUT_RAW_STR,
         "bud_item_reasonunit_s_put_agg": CREATE_BUDREAS_SOUND_PUT_AGG_STR,
-        "bud_item_reasonunit_s_put_vld": CREATE_BUDREAS_SOUND_PUT_VLD_STR,
         "bud_item_reasonunit_s_del_raw": CREATE_BUDREAS_SOUND_DEL_RAW_STR,
         "bud_item_reasonunit_s_del_agg": CREATE_BUDREAS_SOUND_DEL_AGG_STR,
-        "bud_item_reasonunit_s_del_vld": CREATE_BUDREAS_SOUND_DEL_VLD_STR,
         "bud_item_reasonunit_v_put_raw": CREATE_BUDREAS_VOICE_PUT_RAW_STR,
         "bud_item_reasonunit_v_put_agg": CREATE_BUDREAS_VOICE_PUT_AGG_STR,
-        "bud_item_reasonunit_v_put_vld": CREATE_BUDREAS_VOICE_PUT_VLD_STR,
         "bud_item_reasonunit_v_del_raw": CREATE_BUDREAS_VOICE_DEL_RAW_STR,
         "bud_item_reasonunit_v_del_agg": CREATE_BUDREAS_VOICE_DEL_AGG_STR,
-        "bud_item_reasonunit_v_del_vld": CREATE_BUDREAS_VOICE_DEL_VLD_STR,
         "bud_item_teamlink_s_put_raw": CREATE_BUDTEAM_SOUND_PUT_RAW_STR,
         "bud_item_teamlink_s_put_agg": CREATE_BUDTEAM_SOUND_PUT_AGG_STR,
-        "bud_item_teamlink_s_put_vld": CREATE_BUDTEAM_SOUND_PUT_VLD_STR,
         "bud_item_teamlink_s_del_raw": CREATE_BUDTEAM_SOUND_DEL_RAW_STR,
         "bud_item_teamlink_s_del_agg": CREATE_BUDTEAM_SOUND_DEL_AGG_STR,
-        "bud_item_teamlink_s_del_vld": CREATE_BUDTEAM_SOUND_DEL_VLD_STR,
         "bud_item_teamlink_v_put_raw": CREATE_BUDTEAM_VOICE_PUT_RAW_STR,
         "bud_item_teamlink_v_put_agg": CREATE_BUDTEAM_VOICE_PUT_AGG_STR,
-        "bud_item_teamlink_v_put_vld": CREATE_BUDTEAM_VOICE_PUT_VLD_STR,
         "bud_item_teamlink_v_del_raw": CREATE_BUDTEAM_VOICE_DEL_RAW_STR,
         "bud_item_teamlink_v_del_agg": CREATE_BUDTEAM_VOICE_DEL_AGG_STR,
-        "bud_item_teamlink_v_del_vld": CREATE_BUDTEAM_VOICE_DEL_VLD_STR,
         "bud_itemunit_s_put_raw": CREATE_BUDITEM_SOUND_PUT_RAW_STR,
         "bud_itemunit_s_put_agg": CREATE_BUDITEM_SOUND_PUT_AGG_STR,
-        "bud_itemunit_s_put_vld": CREATE_BUDITEM_SOUND_PUT_VLD_STR,
         "bud_itemunit_s_del_raw": CREATE_BUDITEM_SOUND_DEL_RAW_STR,
         "bud_itemunit_s_del_agg": CREATE_BUDITEM_SOUND_DEL_AGG_STR,
-        "bud_itemunit_s_del_vld": CREATE_BUDITEM_SOUND_DEL_VLD_STR,
         "bud_itemunit_v_put_raw": CREATE_BUDITEM_VOICE_PUT_RAW_STR,
         "bud_itemunit_v_put_agg": CREATE_BUDITEM_VOICE_PUT_AGG_STR,
-        "bud_itemunit_v_put_vld": CREATE_BUDITEM_VOICE_PUT_VLD_STR,
         "bud_itemunit_v_del_raw": CREATE_BUDITEM_VOICE_DEL_RAW_STR,
         "bud_itemunit_v_del_agg": CREATE_BUDITEM_VOICE_DEL_AGG_STR,
-        "bud_itemunit_v_del_vld": CREATE_BUDITEM_VOICE_DEL_VLD_STR,
         "budunit_s_put_raw": CREATE_BUDUNIT_SOUND_PUT_RAW_STR,
         "budunit_s_put_agg": CREATE_BUDUNIT_SOUND_PUT_AGG_STR,
-        "budunit_s_put_vld": CREATE_BUDUNIT_SOUND_PUT_VLD_STR,
         "budunit_s_del_raw": CREATE_BUDUNIT_SOUND_DEL_RAW_STR,
         "budunit_s_del_agg": CREATE_BUDUNIT_SOUND_DEL_AGG_STR,
-        "budunit_s_del_vld": CREATE_BUDUNIT_SOUND_DEL_VLD_STR,
         "budunit_v_put_raw": CREATE_BUDUNIT_VOICE_PUT_RAW_STR,
         "budunit_v_put_agg": CREATE_BUDUNIT_VOICE_PUT_AGG_STR,
-        "budunit_v_put_vld": CREATE_BUDUNIT_VOICE_PUT_VLD_STR,
         "budunit_v_del_raw": CREATE_BUDUNIT_VOICE_DEL_RAW_STR,
         "budunit_v_del_agg": CREATE_BUDUNIT_VOICE_DEL_AGG_STR,
-        "budunit_v_del_vld": CREATE_BUDUNIT_VOICE_DEL_VLD_STR,
     }
 
 
@@ -588,6 +480,11 @@ def get_bud_prime_create_table_sqlstrs() -> dict[str, str]:
     }
 
 
+def create_sound_and_voice_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_prime_create_table_sqlstrs().values():
+        conn_or_cursor.execute(create_table_sqlstr)
+
+
 def create_pidgin_prime_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_pidgin_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
@@ -607,9 +504,19 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
     idea_refs = get_quick_ideas_column_ref()
     for idea_number, idea_columns in idea_refs.items():
         x_tablename = f"{idea_number}_raw"
-        x_columns = get_default_sorted_list(idea_columns)
-        col_types = get_idea_sqlite_types()
-        create_table_from_columns(conn_or_cursor, x_tablename, x_columns, col_types)
+        create_idea_sorted_table(conn_or_cursor, x_tablename, idea_columns)
+
+
+def create_sound_pidgin_update_inconsist_error_message_sqlstr(
+    conn_or_cursor: sqlite3_Connection, pidgin_dimen: str
+) -> str:
+    exclude_cols = {"idea_number", "error_message"}
+    x_tablename = create_prime_tablename(pidgin_dimen, "s", "raw")
+    dimen_config = get_idea_config_dict().get(pidgin_dimen)
+    dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+    return create_update_inconsistency_error_query(
+        conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
+    )
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
@@ -1266,6 +1173,24 @@ def get_bud_put_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     }
 
 
+def get_sound_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    x_dict = {}
+    for dimen, sqlstr in get_pidgin_update_inconsist_error_message_sqlstrs().items():
+        old_raw_tablename = f"{dimen}_raw"
+        new_raw_tablename = f"{dimen}_s_raw"
+        x_dict[dimen] = sqlstr.replace(old_raw_tablename, new_raw_tablename)
+    return x_dict
+
+
+def get_sound_fisc_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
+    x_dict = {}
+    for dimen, sqlstr in get_pidgin_update_inconsist_error_message_sqlstrs().items():
+        old_raw_tablename = f"{dimen}_raw"
+        new_raw_tablename = f"{dimen}_s_raw"
+        x_dict[dimen] = sqlstr.replace(old_raw_tablename, new_raw_tablename)
+    return x_dict
+
+
 PIDLABE_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_label_agg (otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
 SELECT otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM pidgin_label_raw
@@ -1497,7 +1422,7 @@ def get_idea_stageble_put_dimens() -> dict[str, list[str]]:
         "br00027": ["bud_item_factunit", "bud_item_reasonunit", "budunit", "fiscunit"],
         "br00028": ["bud_itemunit", "budunit", "fiscunit"],
         "br00029": ["budunit", "fiscunit"],
-        "br00036": ["bud_itemunit", "budunit", "fiscunit"],
+        "br00036": ["bud_item_healerlink", "budunit", "fiscunit"],
         "br00042": [],
         "br00043": [],
         "br00044": [],

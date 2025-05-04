@@ -157,6 +157,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_format_filenames,
     get_idea_format_filename,
     get_idea_numbers,
+    get_default_sorted_list,
     idea_format_00021_bud_acctunit_v0_0_0,
     idea_format_00020_bud_acct_membership_v0_0_0,
     idea_format_00013_itemunit_v0_0_0,
@@ -644,7 +645,7 @@ def test_get_idea_format_filenames_ReturnsObj():
     idea_filenames_set = get_idea_format_filenames()
     idea_filenames_sorted = list(idea_filenames_set)
     idea_filenames_sorted.sort(key=lambda x: x)
-    print(idea_filenames_sorted)
+    # print(idea_filenames_sorted)
 
     # THEN
     assert idea_format_00021_bud_acctunit_v0_0_0() in idea_filenames_set
@@ -656,6 +657,11 @@ def test_get_idea_format_filenames_ReturnsObj():
 
 
 def _validate_idea_format_files(idea_filenames: set[str]):
+    all_dimen_keys_dict = {
+        dimen: set(dict.get(jkeys_str()).keys())
+        for dimen, dict in get_idea_config_dict().items()
+    }
+
     valid_idea_dimens = set()
     valid_idea_dimens.update(get_bud_dimens())
     valid_idea_dimens.update(get_fisc_dimens())
@@ -666,7 +672,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
     idea_numbers_set = set()
     for idea_filename in idea_filenames:
         ref_dict = get_idearef_from_file(idea_filename)
-        print(f"{idea_filename=} {ref_dict.get(idea_number_str())=}")
+        # print(f"{idea_filename=} {ref_dict.get(idea_number_str())=}")
         idea_number_value = ref_dict.get(idea_number_str())
         assert idea_number_value
         assert idea_number_value[2:8] == idea_filename[12:17]
@@ -678,17 +684,18 @@ def _validate_idea_format_files(idea_filenames: set[str]):
         for idea_format_dimen in format_dimens:
             assert idea_format_dimen in valid_idea_dimens
 
-        assert ref_dict.get(attributes_str()) is not None
+        assert ref_dict.get(attributes_str())
         idea_format_attributes = ref_dict.get(attributes_str())
         for idea_attribute, attr_dict in idea_format_attributes.items():
+            # print(f"{idea_attribute=}")
             assert otx_key_str() in set(attr_dict.keys())
             otx_key_value = attr_dict.get(otx_key_str())
             for idea_format_dimen in format_dimens:
                 format_config = config_dict.get(idea_format_dimen)
-                dimen_required_keys = set(format_config.get(jkeys_str()).keys())
-                dimen_optional_keys = set(format_config.get(jvalues_str()).keys())
-                attr_in_required = idea_attribute in dimen_required_keys
-                attr_in_optional = idea_attribute in dimen_optional_keys
+                dimen_required_attrs = set(format_config.get(jkeys_str()).keys())
+                dimen_optional_attrs = set(format_config.get(jvalues_str()).keys())
+                attr_in_required = idea_attribute in dimen_required_attrs
+                attr_in_optional = idea_attribute in dimen_optional_attrs
                 attr_in_keys = attr_in_required or attr_in_optional
                 assert_fail_str = (
                     f"{idea_format_dimen=} {idea_attribute=} {otx_key_value=}"
@@ -697,6 +704,37 @@ def _validate_idea_format_files(idea_filenames: set[str]):
                     assert attr_in_required, assert_fail_str
                 elif attr_in_keys:
                     assert attr_in_optional, assert_fail_str
+        # check all implied dimens are there
+        idea_attrs = set(ref_dict.get(attributes_str()).keys())
+        idea_attrs_list = get_default_sorted_list(idea_attrs)
+        if idea_attrs_list[-1].find("_ERASE") > 0:
+            delete_attr_with_erase = idea_attrs_list[-1]
+            delete_attr_without_erase = delete_attr_with_erase.replace("_ERASE", "")
+            idea_attrs.remove(delete_attr_with_erase)
+            idea_attrs.add(delete_attr_without_erase)
+        if idea_attrs_list[-1].find("_EXCISE") > 0:
+            delete_attr_with_term = idea_attrs_list[-1]
+            delete_attr_without_term = delete_attr_with_term.replace("_EXCISE", "")
+            idea_attrs.remove(delete_attr_with_term)
+            idea_attrs.add(delete_attr_without_term)
+
+        for x_dimen, dimen_keys in all_dimen_keys_dict.items():
+            if dimen_keys.issubset(idea_attrs):
+                if x_dimen not in format_dimens:
+                    print(f"MISSING {x_dimen=} {idea_number_value} {idea_attrs=}")
+                assert x_dimen in format_dimens
+            elif x_dimen != "bud_itemunit":
+                # dimen_keys_list = get_default_sorted_list(dimen_keys)
+                #     idea_attrs_list[-1] = idea_attrs_list[-1].removesuffix("_ERASE")
+                #     idea_attrs = set(idea_attrs_list)
+                if x_dimen in format_dimens:
+                    print(
+                        f"SHOULDNT BE {x_dimen=} {idea_number_value} : {get_default_sorted_list(idea_attrs)}"
+                    )
+                    print(
+                        f"SHOULDNT BE {x_dimen=} {idea_number_value} : {get_default_sorted_list(dimen_keys)}"
+                    )
+                assert x_dimen not in format_dimens
 
     # assert face_name_str() in idea_format_attributes
     # assert event_int_str() in idea_format_attributes

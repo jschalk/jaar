@@ -1,5 +1,8 @@
 {
     "attributes": {
+        "bridge": {
+            "otx_key": false
+        },
         "c400_number": {
             "otx_key": false
         },
@@ -15,19 +18,16 @@
         "fund_coin": {
             "otx_key": false
         },
+        "job_listen_rotations": {
+            "otx_key": false
+        },
         "monthday_distortion": {
             "otx_key": false
         },
         "penny": {
             "otx_key": false
         },
-        "job_listen_rotations": {
-            "otx_key": false
-        },
         "respect_bit": {
-            "otx_key": false
-        },
-        "bridge": {
             "otx_key": false
         },
         "timeline_tag": {
@@ -37,8 +37,8 @@
             "otx_key": false
         }
     },
-    "idea_number": "br00000",
     "dimens": [
         "fiscunit"
-    ]
+    ],
+    "idea_number": "br00000"
 }

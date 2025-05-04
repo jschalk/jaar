@@ -171,16 +171,6 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
-def _get_fisc_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_dimen_ref().get("fiscunit"))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_cashbook")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_dealunit")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_hour")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_month")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("fisc_timeline_weekday")))
-    return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
-
-
 def append_df_to_excel(file_path: str, sheet_name: str, dataframe: DataFrame):
     try:
         # Load the existing workbook

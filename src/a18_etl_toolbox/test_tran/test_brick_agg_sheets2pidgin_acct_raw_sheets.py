@@ -12,7 +12,7 @@ from src.a17_idea_logic._utils.str_a17 import brick_agg_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_brick_agg_to_pidgin_name_raw
+from src.a18_etl_toolbox.transformers import etl_brick_agg_dfs_to_pidgin_name_raw
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
@@ -21,7 +21,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
+def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -53,7 +53,7 @@ def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
 
     # WHEN
     legitimate_events = {event7}
-    etl_brick_agg_to_pidgin_name_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -74,7 +74,7 @@ def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
     assert get_sheet_names(pidgin_path) == [name_raw_str]
 
 
-def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -127,7 +127,7 @@ def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleIdeasFil
 
     # WHEN
     legitimate_events = {event1, event2, event7, event5}
-    etl_brick_agg_to_pidgin_name_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
@@ -153,7 +153,7 @@ def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleIdeasFil
     assert get_sheet_names(pidgin_path) == [name_raw_str]
 
 
-def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -205,7 +205,7 @@ def test_etl_brick_agg_to_pidgin_name_raw_CreatesFile_Scenario2_WorldUnit_events
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_brick_agg_to_pidgin_name_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)

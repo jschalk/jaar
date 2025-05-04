@@ -9,15 +9,16 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "weekday_tag": {
-            "otx_key": false
-        },
         "weekday_order": {
             "otx_key": true
+        },
+        "weekday_tag": {
+            "otx_key": false
         }
     },
-    "idea_number": "br00005",
     "dimens": [
+        "fiscunit",
         "fisc_timeline_weekday"
-    ]
+    ],
+    "idea_number": "br00005"
 }

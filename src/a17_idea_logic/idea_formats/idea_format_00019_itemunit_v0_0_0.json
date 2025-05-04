@@ -43,8 +43,10 @@
             "otx_key": false
         }
     },
-    "idea_number": "br00019",
     "dimens": [
+        "fiscunit",
+        "budunit",
         "bud_itemunit"
-    ]
+    ],
+    "idea_number": "br00019"
 }

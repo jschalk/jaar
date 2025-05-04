@@ -33,7 +33,7 @@ from dataclasses import dataclass
 @dataclass
 class IdeaRef:
     idea_name: str = None
-    dimens: str = None
+    dimens: list[str] = None
     _attributes: dict[str, dict[str, bool]] = None
 
     def set_attribute(self, x_attribute: str, otx_key: bool):
@@ -161,13 +161,24 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     return get_idearef_obj(x_ideaname)
 
 
+def _remove_non_bud_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
+    to_delete_dimen_set = {dimen for dimen in x_idearef.dimens if dimen[:3] != "bud"}
+    dimens_set = set(x_idearef.dimens)
+    for to_delete_dimen in to_delete_dimen_set:
+        if to_delete_dimen in dimens_set:
+            dimens_set.remove(to_delete_dimen)
+    x_idearef.dimens = list(dimens_set)
+    return x_idearef
+
+
 def make_buddelta(x_csv: str) -> BudDelta:
     header_row, headerless_csv = extract_csv_headers(x_csv)
     x_idearef = get_csv_idearef(header_row)
-
+    _remove_non_bud_dimens_from_idearef(x_idearef)
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(header_row)
     x_buddelta = buddelta_shop()
+
     for row in x_reader:
         x_atomrow = atomrow_shop(x_idearef.dimens, atom_insert())
         for x_header in header_row:
@@ -237,7 +248,6 @@ def fisc_build_from_df(
 
     fiscunit_dict = {}
     for index, row in br00000_df.iterrows():
-        print(f"{row=}")
         x_fisc_tag = row["fisc_tag"]
         x_timeline_config = {
             "c400_number": row["c400_number"],

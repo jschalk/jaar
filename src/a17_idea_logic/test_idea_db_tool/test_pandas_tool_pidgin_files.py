@@ -23,7 +23,6 @@ from src.a17_idea_logic.idea_db_tool import (
     open_csv,
     move_otx_csvs_to_pidgin_inx,
     _get_pidgen_idea_format_filenames,
-    _get_fisc_idea_format_filenames,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -209,28 +208,3 @@ def test_get_pidgen_idea_format_filenames_ReturnsObj():
     assert br00043_filename in x_pidgen_idea_filenames
     assert br00044_filename in x_pidgen_idea_filenames
     assert len(x_pidgen_idea_filenames) == 8
-
-
-def test_get_fisc_idea_format_filenames_ReturnsObj():
-    # ESTABLISH
-    br00000_filename = "br00000.xlsx"
-    br00001_filename = "br00001.xlsx"
-    br00002_filename = "br00002.xlsx"
-    br00003_filename = "br00003.xlsx"
-    br00004_filename = "br00004.xlsx"
-    br00005_filename = "br00005.xlsx"
-    br00042_filename = "br00042.xlsx"
-
-    # WHEN
-    x_pidgen_idea_filenames = _get_fisc_idea_format_filenames()
-
-    # THEN
-    print(f"{x_pidgen_idea_filenames=}")
-    assert br00000_filename in x_pidgen_idea_filenames
-    assert br00001_filename in x_pidgen_idea_filenames
-    assert br00002_filename in x_pidgen_idea_filenames
-    assert br00003_filename in x_pidgen_idea_filenames
-    assert br00004_filename in x_pidgen_idea_filenames
-    assert br00005_filename in x_pidgen_idea_filenames
-    assert br00042_filename not in x_pidgen_idea_filenames
-    assert len(x_pidgen_idea_filenames) == 6

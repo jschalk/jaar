@@ -124,11 +124,25 @@ def get_rowdata(tablename: str, x_conn: Connection, select_sqlstr: str) -> RowDa
     return rowdata_shop(tablename, row1)
 
 
-def get_db_tables(x_conn: Connection) -> dict[str, int]:
+def get_db_tables(
+    x_conn: Connection, tablename_contains: str = None, prefix: str = None
+) -> dict[str, int]:
     sqlstr = "SELECT name FROM sqlite_schema WHERE type='table' ORDER BY name;"
     results = x_conn.execute(sqlstr)
-
-    return {row[0]: 1 for row in results}
+    tablenames_dict = {row[0]: 1 for row in results}
+    if tablename_contains:
+        new_dict = {}
+        for table, dict_value in tablenames_dict.items():
+            if not prefix and table.find(tablename_contains) != -1:
+                new_dict[table] = dict_value
+            elif (
+                prefix
+                and table.find(prefix) == 0
+                and table.find(tablename_contains) != -1
+            ):
+                new_dict[table] = dict_value
+        tablenames_dict = new_dict
+    return tablenames_dict
 
 
 def get_db_columns(x_conn: Connection) -> dict[str : dict[str, int]]:

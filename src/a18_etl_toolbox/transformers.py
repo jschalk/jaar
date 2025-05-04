@@ -56,6 +56,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_dimen_ref,
     get_idea_config_dict,
     get_idea_sqlite_types,
+    get_idearef_from_file,
 )
 from src.a17_idea_logic.idea import get_idearef_obj
 from src.a17_idea_logic.idea_db_tool import (
@@ -76,6 +77,8 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename,
+    create_sound_and_voice_tables,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -228,7 +231,7 @@ def etl_brick_raw_db_to_brick_agg_df(brick_dir):
         upsert_sheet(brick_idea_path, "brick_agg", otx_df)
 
 
-def etl_brick_agg_db_to_brick_agg_df(conn: sqlite3_Connection, brick_dir: str):
+def etl_brick_agg_tables_to_brick_agg_dfs(conn: sqlite3_Connection, brick_dir: str):
     brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for table_name in get_db_tables(conn):
@@ -432,25 +435,63 @@ def brick_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
     for brick_valid_table, idea_number in brick_valid_tables.items():
         for raw_tablename, idea_numbers in pidgin_raw_tables.items():
             if idea_number in idea_numbers:
-                etl_brick_valid_table_into_pidgin_prime_raw_table(
+                etl_brick_valid_table_into_old_prime_table(
                     cursor, brick_valid_table, raw_tablename, idea_number
                 )
 
 
-def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
-    idea_dimen_ref = {
-        pidgin_dimen: idea_numbers
-        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
-        if pidgin_dimen[:6] == "pidgin"
-    }
-    # pidgin_raw_tables = {}
-    # for pidgin_dimen in idea_dimen_ref:
-    #     idea_numbers = idea_dimen_ref.get(pidgin_dimen)
-    #     raw_tablename = f"{pidgin_dimen}_raw"
-    #     pidgin_raw_tables[raw_tablename] = idea_numbers
+def get_sound_raw_tablenames(
+    cursor: sqlite3_Cursor, dimens: list[str], brick_valid_tablename: str
+) -> set[str]:
+    valid_columns = set(get_table_columns(cursor, brick_valid_tablename))
+    s_raw_tables = set()
+    for dimen in dimens:
+        if dimen[:3].lower() == "bud":
+            bud_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+            bud_del_columns = get_table_columns(cursor, bud_del_tablename)
+            delete_key = bud_del_columns[-1]
+            if delete_key in valid_columns:
+                s_raw_tables.add(bud_del_tablename)
+            else:
+                s_raw_tables.add(create_prime_tablename(dimen, "s", "raw", "put"))
+        else:
+            s_raw_tables.add(create_prime_tablename(dimen, "s", "raw"))
+    return s_raw_tables
 
 
-def etl_brick_valid_table_into_pidgin_prime_raw_table(
+def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
+    create_sound_and_voice_tables(cursor)
+    brick_valid_tablenames = get_db_tables(cursor, "_brick_valid", "br")
+    for brick_valid_tablename in brick_valid_tablenames:
+        idea_number = brick_valid_tablename[:7]
+        idearef_filename = get_idea_format_filename(idea_number)
+        idearef = get_idearef_from_file(idearef_filename)
+        dimens = idearef.get("dimens")
+        s_raw_tables = get_sound_raw_tablenames(cursor, dimens, brick_valid_tablename)
+        for sound_raw_table in s_raw_tables:
+            etl_brick_valid_table_into_prime_table(
+                cursor, brick_valid_tablename, sound_raw_table, idea_number
+            )
+
+
+def etl_brick_valid_table_into_prime_table(
+    cursor: sqlite3_Cursor, brick_valid_table: str, raw_tablename: str, idea_number: str
+):
+    lab_columns = set(get_table_columns(cursor, raw_tablename))
+    valid_columns = set(get_table_columns(cursor, brick_valid_table))
+    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = get_default_sorted_list(common_cols)
+    select_str = create_select_query(cursor, brick_valid_table, common_cols)
+    select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
+    common_cols.append("idea_number")
+    common_cols = get_default_sorted_list(common_cols)
+    x_dict = {common_col: None for common_col in common_cols}
+    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
+    insert_select_sqlstr = f"{insert_clause_str}\n{select_str};"
+    cursor.execute(insert_select_sqlstr)
+
+
+def etl_brick_valid_table_into_old_prime_table(
     cursor: sqlite3_Cursor, brick_valid_table: str, raw_tablename: str, idea_number: str
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
@@ -468,28 +509,49 @@ def etl_brick_valid_table_into_pidgin_prime_raw_table(
     cursor.execute(insert_select_sqlstr)
 
 
+def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
+    idea_dimen_ref = {
+        pidgin_dimen: idea_numbers
+        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
+        if pidgin_dimen[:6] == "pidgin"
+    }
+    # pidgin_raw_tables = {}
+    # for pidgin_dimen in idea_dimen_ref:
+    #     idea_numbers = idea_dimen_ref.get(pidgin_dimen)
+    #     raw_tablename = f"{pidgin_dimen}_raw"
+    #     pidgin_raw_tables[raw_tablename] = idea_numbers
+
+
 def etl_brick_agg_df_to_brick_pidgin_raw_df(
     legitimate_events: set[EventInt], brick_dir: str
 ):
-    etl_brick_agg_to_pidgin_name_raw(legitimate_events, brick_dir)
-    etl_brick_agg_to_pidgin_label_raw(legitimate_events, brick_dir)
-    etl_brick_agg_to_pidgin_tag_raw(legitimate_events, brick_dir)
-    etl_brick_agg_to_pidgin_road_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_tag_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_road_raw(legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_name_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_name_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_label_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_label_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_tag_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_tag_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_to_pidgin_road_raw(legitimate_events: set[EventInt], brick_dir: str):
+def etl_brick_agg_dfs_to_pidgin_road_raw(
+    legitimate_events: set[EventInt], brick_dir: str
+):
     brick_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, brick_dir)
 
 
@@ -687,7 +749,6 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
 
 def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
     event_pidgin_path = create_brick_pidgin_path(event_pidgin_dir)
-    print(f"{event_pidgin_path=}")
     for class_type in CLASS_TYPES.keys():
         agg_sheet_name = CLASS_TYPES[class_type]["agg"]
         csv_filename = CLASS_TYPES[class_type]["csv_filename"]

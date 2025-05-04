@@ -64,3 +64,19 @@ def brick_agg_str() -> str:
 
 def brick_valid_str() -> str:
     return "brick_valid"
+
+
+def sound_raw_str() -> str:
+    return "sound_raw"
+
+
+def sound_agg_str() -> str:
+    return "sound_agg"
+
+
+def voice_raw_str() -> str:
+    return "voice_raw"
+
+
+def voice_agg_str() -> str:
+    return "voice_agg"

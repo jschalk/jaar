@@ -8,17 +8,12 @@ from src.a02_finance_logic._utils.strs_a02 import (
     celldepth_str,
 )
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_name_str
-from src.a12_hub_tools.hub_path import (
-    create_fisc_json_path,
-    create_job_path,
-    create_gut_path,
-    create_deal_acct_mandate_ledger_path as deal_mandate,
-    create_fisc_ote1_csv_path,
-)
+from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a16_pidgin_logic._utils.str_a16 import otx_name_str, inx_name_str
 from src.a17_idea_logic._utils.str_a17 import brick_agg_str, brick_raw_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
+from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,
@@ -90,27 +85,20 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     br00113_valid = f"{br00113_str}_brick_valid"
     events_brick_agg_tablename = "events_brick_agg"
     events_brick_valid_tablename = "events_brick_valid"
-    pidname_sound_raw = "pidname_sound_raw"
-    pidname_sound_agg = "pidname_sound_agg"
-    pidname_sound_valid = "pidname_sound_valid"
-    fisunit_sound_raw = "fisunit_sound_raw"
-    fisunit_sound_agg = "fisunit_sound_agg"
-    fisunit_sound_valid = "fisunit_sound_valid"
-    budunit_sound_raw = "budunit_sound_raw"
-    budunit_sound_agg = "budunit_sound_agg"
-    budunit_sound_valid = "budunit_sound_valid"
-    budacct_sound_raw = "budacct_sound_raw"
-    budacct_sound_agg = "budacct_sound_agg"
-    budacct_sound_valid = "budacct_sound_valid"
-    fisunit_voice_raw = "fisunit_voice_raw"
-    fisunit_voice_agg = "fisunit_voice_agg"
-    fisunit_voice_valid = "fisunit_voice_valid"
-    budunit_voice_raw = "budunit_voice_raw"
-    budunit_voice_agg = "budunit_voice_agg"
-    budunit_voice_valid = "budunit_voice_valid"
-    budacct_voice_raw = "budacct_voice_raw"
-    budacct_voice_agg = "budacct_voice_agg"
-    budacct_voice_valid = "budacct_voice_valid"
+    pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
+    pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
+    fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
+    fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
+    budunit_sound_raw_put = create_prime_tablename("budunit", "s", "raw", "put")
+    budunit_sound_agg_put = create_prime_tablename("budunit", "s", "agg", "put")
+    budacct_sound_raw_put = create_prime_tablename("budacct", "s", "raw", "put")
+    budacct_sound_agg_put = create_prime_tablename("budacct", "s", "agg", "put")
+    fisunit_voice_raw = create_prime_tablename("fisunit", "v", "raw")
+    fisunit_voice_agg = create_prime_tablename("fisunit", "v", "agg")
+    budunit_voice_raw_put = create_prime_tablename("budunit", "v", "raw", "put")
+    budunit_voice_agg_put = create_prime_tablename("budunit", "v", "agg", "put")
+    budacct_voice_raw_put = create_prime_tablename("budacct", "v", "raw", "put")
+    budacct_voice_agg_put = create_prime_tablename("budacct", "v", "agg", "put")
     event1_sound_budunit_path = "events/1/sound_budunit.csv"
     event1_sound_budacct_path = "events/1/sound_budacct.csv"
     event1_pidgin_json_path = "events/1/pidgin.json"
@@ -127,16 +115,12 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, pidname_sound_raw)
         assert not db_table_exists(cursor, pidname_sound_agg)
-        assert not db_table_exists(cursor, pidname_sound_valid)
         assert not db_table_exists(cursor, fisunit_sound_raw)
         assert not db_table_exists(cursor, fisunit_sound_agg)
-        assert not db_table_exists(cursor, fisunit_sound_valid)
-        assert not db_table_exists(cursor, budunit_sound_raw)
-        assert not db_table_exists(cursor, budunit_sound_agg)
-        assert not db_table_exists(cursor, budunit_sound_valid)
-        assert not db_table_exists(cursor, budacct_sound_raw)
-        assert not db_table_exists(cursor, budacct_sound_agg)
-        assert not db_table_exists(cursor, budacct_sound_valid)
+        assert not db_table_exists(cursor, budunit_sound_raw_put)
+        assert not db_table_exists(cursor, budunit_sound_agg_put)
+        assert not db_table_exists(cursor, budacct_sound_raw_put)
+        assert not db_table_exists(cursor, budacct_sound_agg_put)
         assert not os_path_exists(event1_sound_budunit_path)
         assert not os_path_exists(event1_sound_budacct_path)
         assert not os_path_exists(event1_pidgin_json_path)
@@ -145,13 +129,10 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not os_path_exists(event1_voice_budacct_path)
         assert not db_table_exists(cursor, fisunit_voice_raw)
         assert not db_table_exists(cursor, fisunit_voice_agg)
-        assert not db_table_exists(cursor, fisunit_voice_valid)
-        assert not db_table_exists(cursor, budunit_voice_raw)
-        assert not db_table_exists(cursor, budunit_voice_agg)
-        assert not db_table_exists(cursor, budunit_voice_valid)
-        assert not db_table_exists(cursor, budacct_voice_raw)
-        assert not db_table_exists(cursor, budacct_voice_agg)
-        assert not db_table_exists(cursor, budacct_voice_valid)
+        assert not db_table_exists(cursor, budunit_voice_raw_put)
+        assert not db_table_exists(cursor, budunit_voice_agg_put)
+        assert not db_table_exists(cursor, budacct_voice_raw_put)
+        assert not db_table_exists(cursor, budacct_voice_agg_put)
 
         # WHEN
         fizz_world.mud_to_stances_v2_with_cursor(db_conn, cursor)
@@ -162,18 +143,15 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, events_brick_agg_tablename) == 1
         assert get_row_count(cursor, events_brick_valid_tablename) == 1
         assert get_row_count(cursor, br00113_valid) == 1
-        # assert get_row_count(cursor, pidname_sound_raw) == 1
+        assert get_row_count(cursor, pidname_sound_raw) == 1
+        assert get_row_count(cursor, fisunit_sound_raw) == 1
+        assert get_row_count(cursor, budunit_sound_raw_put) == 1
+        assert get_row_count(cursor, budacct_sound_raw_put) == 1
+
         # assert get_row_count(cursor, pidname_sound_agg) == 1
-        # assert get_row_count(cursor, pidname_sound_valid) == 1
-        # assert get_row_count(cursor, fisunit_sound_raw) == 1
         # assert get_row_count(cursor, fisunit_sound_agg) == 1
-        # assert get_row_count(cursor, fisunit_sound_valid) == 1
-        # assert get_row_count(cursor, budunit_sound_raw) == 1
         # assert get_row_count(cursor, budunit_sound_agg) == 1
-        # assert get_row_count(cursor, budunit_sound_valid) == 1
-        # assert get_row_count(cursor, budacct_sound_raw) == 1
         # assert get_row_count(cursor, budacct_sound_agg) == 1
-        # assert get_row_count(cursor, budacct_sound_valid) == 1
         # assert not os_path_exists(event1_sound_budunit_path)
         # assert not os_path_exists(event1_sound_budacct_path)
         # assert not os_path_exists(event1_pidgin_json_path)
@@ -182,13 +160,10 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         # assert not os_path_exists(event1_voice_budacct_path)
         # assert get_row_count(cursor, fisunit_voice_raw) == 1
         # assert get_row_count(cursor, fisunit_voice_agg) == 1
-        # assert get_row_count(cursor, fisunit_voice_valid) == 1
         # assert get_row_count(cursor, budunit_voice_raw) == 1
         # assert get_row_count(cursor, budunit_voice_agg) == 1
-        # assert get_row_count(cursor, budunit_voice_valid) == 1
         # assert get_row_count(cursor, budacct_voice_raw) == 1
         # assert get_row_count(cursor, budacct_voice_agg) == 1
-        # assert get_row_count(cursor, budacct_voice_valid) == 1
 
 
 # def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):

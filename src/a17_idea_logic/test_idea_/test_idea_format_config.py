@@ -1,6 +1,7 @@
-from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
+from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import (
+    budunit_str,
     bud_acctunit_str,
     face_name_str,
     event_int_str,
@@ -24,6 +25,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     gogo_want_str,
     stop_want_str,
 )
+from src.a15_fisc_logic._utils.str_a15 import fiscunit_str
 from src.a17_idea_logic.idea import (
     _generate_idea_dataframe,
     get_idearef_obj,
@@ -88,7 +90,7 @@ def test_get_idearef_obj_ReturnsObj():
 
     # THEN
     assert x_idearef.idea_name == idea_name_00021
-    assert x_idearef.dimens == [bud_acctunit_str()]
+    assert set(x_idearef.dimens) == {bud_acctunit_str(), budunit_str(), fiscunit_str()}
     assert x_idearef._attributes != {}
     assert len(x_idearef._attributes) == 7
 

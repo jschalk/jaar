@@ -289,29 +289,14 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
 
 class PidginPrimeColumns:
     def __init__(self):
-        f1_columns = ["event_int", "face_name"]
+        f1_cols = ["event_int", "face_name"]
         f2_cols = ["idea_number", "event_int", "face_name"]
         back_cols = ["otx_bridge", "inx_bridge", "unknown_word"]
-        self.pidgin_name_agg_columns = [*f1_columns, "otx_name", "inx_name", *back_cols]
-        self.pidgin_label_agg_columns = [
-            *f1_columns,
-            "otx_label",
-            "inx_label",
-            *back_cols,
-        ]
-        self.pidgin_tag_agg_columns = [*f1_columns, "otx_tag", "inx_tag", *back_cols]
-        self.pidgin_road_agg_columns = [*f1_columns, "otx_road", "inx_road", *back_cols]
+        self.pidgin_name_agg_columns = [*f1_cols, "otx_name", "inx_name", *back_cols]
+        self.pidgin_label_agg_columns = [*f1_cols, "otx_label", "inx_label", *back_cols]
+        self.pidgin_tag_agg_columns = [*f1_cols, "otx_tag", "inx_tag", *back_cols]
+        self.pidgin_road_agg_columns = [*f1_cols, "otx_road", "inx_road", *back_cols]
         self.pidgin_name_raw_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
-        self.pidgin_label_raw_columns = [
-            *f2_cols,
-            "otx_label",
-            "inx_label",
-            *back_cols,
-        ]
-        self.pidgin_tag_raw_columns = [
-            *f2_cols,
-            "otx_tag",
-            "inx_tag",
-            *back_cols,
-        ]
+        self.pidgin_label_raw_columns = [*f2_cols, "otx_label", "inx_label", *back_cols]
+        self.pidgin_tag_raw_columns = [*f2_cols, "otx_tag", "inx_tag", *back_cols]
         self.pidgin_road_raw_columns = [*f2_cols, "otx_road", "inx_road", *back_cols]

@@ -22,9 +22,11 @@
             "otx_key": true
         }
     },
-    "idea_number": "br00117",
     "dimens": [
         "pidgin_road",
-        "bud_acctunit"
-    ]
+        "bud_acctunit",
+        "budunit",
+        "fiscunit"
+    ],
+    "idea_number": "br00117"
 }

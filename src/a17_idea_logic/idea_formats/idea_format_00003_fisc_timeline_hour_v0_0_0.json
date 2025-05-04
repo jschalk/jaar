@@ -16,8 +16,9 @@
             "otx_key": false
         }
     },
-    "idea_number": "br00003",
     "dimens": [
+        "fiscunit",
         "fisc_timeline_hour"
-    ]
+    ],
+    "idea_number": "br00003"
 }

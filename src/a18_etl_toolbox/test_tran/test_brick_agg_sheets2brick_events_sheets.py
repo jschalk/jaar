@@ -2,7 +2,6 @@ from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_row_count,
     get_table_columns,
-    create_table_from_columns,
 )
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
@@ -37,18 +36,9 @@ def test_etl_brick_agg_db_to_events_brick_agg_db_PopulatesTables_Scenario0():
         cumlative_minute_str(),
         hour_tag_str(),
     ]
-    agg_br00003_types = {
-        event_int_str(): "INTEGER",
-        face_name_str(): "TEXT",
-        fisc_tag_str(): "TEXT",
-        cumlative_minute_str(): "TEXT",
-        hour_tag_str(): "TEXT",
-    }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_table_from_columns(
-            cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
-        )
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -120,18 +110,9 @@ def test_etl_brick_agg_db_to_events_brick_agg_db_PopulatesTables_Scenario1():
         cumlative_minute_str(),
         hour_tag_str(),
     ]
-    agg_br00003_types = {
-        event_int_str(): "INTEGER",
-        face_name_str(): "TEXT",
-        fisc_tag_str(): "TEXT",
-        cumlative_minute_str(): "TEXT",
-        hour_tag_str(): "TEXT",
-    }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_table_from_columns(
-            cursor, agg_br00003_tablename, agg_br00003_columns, agg_br00003_types
-        )
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -244,15 +225,10 @@ def test_etl_events_brick_agg_db_to_event_dict_ReturnsObj_Scenario0():
     event3 = 3
     event9 = 9
     agg_columns = [face_name_str(), event_int_str(), "error_message"]
-    agg_types = {
-        event_int_str(): "INTEGER",
-        face_name_str(): "TEXT",
-        "error_message": "TEXT",
-    }
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         agg_events_tablename = "events_brick_agg"
-        create_table_from_columns(cursor, agg_events_tablename, agg_columns, agg_types)
+        create_idea_sorted_table(cursor, agg_events_tablename, agg_columns)
         insert_into_clause = f"""
 INSERT INTO {agg_events_tablename} ({event_int_str()}, {face_name_str()}, error_message)
 VALUES     
