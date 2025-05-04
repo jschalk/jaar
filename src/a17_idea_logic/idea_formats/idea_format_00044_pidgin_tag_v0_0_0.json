@@ -6,24 +6,24 @@
         "face_name": {
             "otx_key": true
         },
+        "inx_bridge": {
+            "otx_key": false
+        },
         "inx_tag": {
             "otx_key": false
         },
-        "inx_bridge": {
+        "otx_bridge": {
             "otx_key": false
         },
         "otx_tag": {
             "otx_key": true
         },
-        "otx_bridge": {
-            "otx_key": false
-        },
         "unknown_word": {
             "otx_key": false
         }
     },
-    "idea_number": "br00044",
     "dimens": [
         "pidgin_tag"
-    ]
+    ],
+    "idea_number": "br00044"
 }

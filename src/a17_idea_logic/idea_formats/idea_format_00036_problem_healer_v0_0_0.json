@@ -18,16 +18,18 @@
         "owner_name": {
             "otx_key": true
         },
-        "parent_road": {
-            "otx_key": true
-        },
         "problem_bool": {
             "otx_key": false
+        },
+        "road": {
+            "otx_key": true
         }
     },
-    "idea_number": "br00036",
     "dimens": [
+        "fiscunit",
+        "budunit",
         "bud_itemunit",
         "bud_item_healerlink"
-    ]
+    ],
+    "idea_number": "br00036"
 }

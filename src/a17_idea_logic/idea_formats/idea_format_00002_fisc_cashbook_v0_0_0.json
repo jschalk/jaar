@@ -22,8 +22,11 @@
             "otx_key": true
         }
     },
-    "idea_number": "br00002",
     "dimens": [
-        "fisc_cashbook"
-    ]
+        "fiscunit",
+        "fisc_cashbook",
+        "bud_acctunit",
+        "budunit"
+    ],
+    "idea_number": "br00002"
 }

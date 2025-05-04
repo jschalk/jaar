@@ -1422,7 +1422,7 @@ def get_idea_stageble_put_dimens() -> dict[str, list[str]]:
         "br00027": ["bud_item_factunit", "bud_item_reasonunit", "budunit", "fiscunit"],
         "br00028": ["bud_itemunit", "budunit", "fiscunit"],
         "br00029": ["budunit", "fiscunit"],
-        "br00036": ["bud_itemunit", "budunit", "fiscunit"],
+        "br00036": ["bud_item_healerlink", "budunit", "fiscunit"],
         "br00042": [],
         "br00043": [],
         "br00044": [],

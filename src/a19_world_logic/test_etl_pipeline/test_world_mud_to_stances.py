@@ -144,17 +144,14 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, events_brick_valid_tablename) == 1
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, pidname_sound_raw) == 1
+        assert get_row_count(cursor, fisunit_sound_raw) == 1
+        assert get_row_count(cursor, budunit_sound_raw_put) == 1
+        assert get_row_count(cursor, budacct_sound_raw_put) == 1
+
         # assert get_row_count(cursor, pidname_sound_agg) == 1
-        # assert get_row_count(cursor, pidname_sound_valid) == 1
-        # assert get_row_count(cursor, fisunit_sound_raw) == 1
         # assert get_row_count(cursor, fisunit_sound_agg) == 1
-        # assert get_row_count(cursor, fisunit_sound_valid) == 1
-        # assert get_row_count(cursor, budunit_sound_raw) == 1
         # assert get_row_count(cursor, budunit_sound_agg) == 1
-        # assert get_row_count(cursor, budunit_sound_valid) == 1
-        # assert get_row_count(cursor, budacct_sound_raw) == 1
         # assert get_row_count(cursor, budacct_sound_agg) == 1
-        # assert get_row_count(cursor, budacct_sound_valid) == 1
         # assert not os_path_exists(event1_sound_budunit_path)
         # assert not os_path_exists(event1_sound_budacct_path)
         # assert not os_path_exists(event1_pidgin_json_path)
@@ -163,13 +160,10 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         # assert not os_path_exists(event1_voice_budacct_path)
         # assert get_row_count(cursor, fisunit_voice_raw) == 1
         # assert get_row_count(cursor, fisunit_voice_agg) == 1
-        # assert get_row_count(cursor, fisunit_voice_valid) == 1
         # assert get_row_count(cursor, budunit_voice_raw) == 1
         # assert get_row_count(cursor, budunit_voice_agg) == 1
-        # assert get_row_count(cursor, budunit_voice_valid) == 1
         # assert get_row_count(cursor, budacct_voice_raw) == 1
         # assert get_row_count(cursor, budacct_voice_agg) == 1
-        # assert get_row_count(cursor, budacct_voice_valid) == 1
 
 
 # def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):

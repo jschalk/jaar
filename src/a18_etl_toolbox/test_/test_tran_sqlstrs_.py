@@ -1099,7 +1099,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
             for idea_number in sorted_idea_numbers:
                 src_columns = get_table_columns(cursor, f"{idea_number}_raw")
                 expected_stagable = dimen_key_columns.issubset(src_columns)
-                if idea_number == "br00050":
+                if idea_number == "br00036":
                     print(f"{x_dimen} {idea_number} checking... {src_columns}")
                 src_tablename = f"{idea_number}_raw"
                 gen_stablable = required_columns_exist(

@@ -111,6 +111,7 @@ def test_create_idea_df_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     array_headers = list(membership_dataframe.columns)
     acct_idearef = get_idearef_obj(x_idea_name)
     print(f"{len(membership_dataframe)=}")
+    assert len(membership_dataframe) == 10
     assert array_headers == acct_idearef.get_headers_list()
     assert membership_dataframe.loc[0, fisc_tag_str()] == accord_fisc_tag
     assert membership_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
@@ -119,27 +120,27 @@ def test_create_idea_df_Arg_idea_format_00020_bud_acct_membership_v0_0_0():
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
 
-    assert membership_dataframe.loc[2, fisc_tag_str()] == accord_fisc_tag
-    assert membership_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
-    assert membership_dataframe.loc[2, acct_name_str()] == sue_str
-    assert membership_dataframe.loc[2, group_label_str()] == iowa_str
-    assert membership_dataframe.loc[2, credit_vote_str()] == sue_iowa_credit_w
-    assert membership_dataframe.loc[2, debtit_vote_str()] == sue_iowa_debtit_w
+    assert membership_dataframe.loc[3, fisc_tag_str()] == accord_fisc_tag
+    assert membership_dataframe.loc[3, owner_name_str()] == sue_budunit.owner_name
+    assert membership_dataframe.loc[3, acct_name_str()] == sue_str
+    assert membership_dataframe.loc[3, group_label_str()] == iowa_str
+    assert membership_dataframe.loc[3, credit_vote_str()] == sue_iowa_credit_w
+    assert membership_dataframe.loc[3, debtit_vote_str()] == sue_iowa_debtit_w
 
     assert membership_dataframe.loc[4, fisc_tag_str()] == accord_fisc_tag
     assert membership_dataframe.loc[4, owner_name_str()] == sue_budunit.owner_name
-    assert membership_dataframe.loc[4, acct_name_str()] == yao_str
-    assert membership_dataframe.loc[4, group_label_str()] == iowa_str
-    assert membership_dataframe.loc[4, credit_vote_str()] == yao_iowa_credit_w
-    assert membership_dataframe.loc[4, debtit_vote_str()] == yao_iowa_debtit_w
+    assert membership_dataframe.loc[4, acct_name_str()] == sue_str
+    assert membership_dataframe.loc[4, group_label_str()] == sue_str
+    assert membership_dataframe.loc[4, credit_vote_str()] == 1
+    assert membership_dataframe.loc[4, debtit_vote_str()] == 1
 
-    assert membership_dataframe.loc[5, fisc_tag_str()] == accord_fisc_tag
-    assert membership_dataframe.loc[5, owner_name_str()] == sue_budunit.owner_name
-    assert membership_dataframe.loc[5, acct_name_str()] == yao_str
-    assert membership_dataframe.loc[5, group_label_str()] == ohio_str
-    assert membership_dataframe.loc[5, credit_vote_str()] == yao_ohio_credit_w
-    assert membership_dataframe.loc[5, debtit_vote_str()] == yao_ohio_debtit_w
-    assert len(membership_dataframe) == 7
+    assert membership_dataframe.loc[7, fisc_tag_str()] == accord_fisc_tag
+    assert membership_dataframe.loc[7, owner_name_str()] == sue_budunit.owner_name
+    assert membership_dataframe.loc[7, acct_name_str()] == yao_str
+    assert membership_dataframe.loc[7, group_label_str()] == ohio_str
+    assert membership_dataframe.loc[7, credit_vote_str()] == yao_ohio_credit_w
+    assert membership_dataframe.loc[7, debtit_vote_str()] == yao_ohio_debtit_w
+    assert len(membership_dataframe) == 10
 
 
 def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
