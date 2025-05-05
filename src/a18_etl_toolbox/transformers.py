@@ -509,19 +509,6 @@ def etl_brick_valid_table_into_old_prime_table(
     cursor.execute(insert_select_sqlstr)
 
 
-def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
-    idea_dimen_ref = {
-        pidgin_dimen: idea_numbers
-        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
-        if pidgin_dimen[:6] == "pidgin"
-    }
-    # pidgin_raw_tables = {}
-    # for pidgin_dimen in idea_dimen_ref:
-    #     idea_numbers = idea_dimen_ref.get(pidgin_dimen)
-    #     raw_tablename = f"{pidgin_dimen}_raw"
-    #     pidgin_raw_tables[raw_tablename] = idea_numbers
-
-
 def etl_brick_agg_df_to_brick_pidgin_raw_df(
     legitimate_events: set[EventInt], brick_dir: str
 ):
