@@ -29,7 +29,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDROAD_SOUND_AGG_SQLSTR,
     CREATE_BUDACCT_SOUND_PUT_RAW_STR,
     CREATE_BUDACCT_SOUND_PUT_AGG_STR,
-    sound_raw_update_inconsist_error_message_sqlstr,
+    create_sound_raw_update_inconsist_error_message_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
     insert_sound_raw_select_into_sound_agg_tables,
@@ -38,7 +38,7 @@ from src.a18_etl_toolbox.transformers import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdatesTableCorrectly_Scenario0():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdatesTableCorrectly_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -87,7 +87,9 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = sound_raw_update_inconsist_error_message_sqlstr(cursor, pidroad_str)
+        sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
+            cursor, pidroad_str
+        )
         cursor.execute(sqlstr)
 
         # THEN

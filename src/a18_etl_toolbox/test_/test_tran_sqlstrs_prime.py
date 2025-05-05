@@ -1,7 +1,8 @@
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
-    create_update_inconsistency_error_query,
     get_create_table_sqlstr,
+    create_update_inconsistency_error_query,
+    create_table2table_agg_insert_query,
 )
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
@@ -44,7 +45,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     get_prime_create_table_sqlstrs,
     create_sound_and_voice_tables,
-    sound_raw_update_inconsist_error_message_sqlstr,
+    create_sound_raw_update_inconsist_error_message_sqlstr,
+    create_sound_agg_insert_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -463,7 +465,7 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, pidlabe_s_raw_table)
 
 
-def test_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario0_PidginDimen():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario0_PidginDimen():
     # sourcery skip: extract-method
     # ESTABLISH
     dimen = pidgin_label_str()
@@ -472,7 +474,9 @@ def test_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario0_Pi
         create_sound_and_voice_tables(cursor)
 
         # WHEN
-        update_sqlstr = sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
+        update_sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
+            cursor, dimen
+        )
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw")
@@ -505,7 +509,7 @@ WHERE inconsistency_rows.event_int = pidgin_label_s_raw.event_int
         assert update_sqlstr == static_example_sqlstr
 
 
-def test_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_FiscDimen():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_FiscDimen():
     # sourcery skip: extract-method
     # ESTABLISH
     dimen = fisc_timeline_hour_str()
@@ -514,7 +518,9 @@ def test_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_Fi
         create_sound_and_voice_tables(cursor)
 
         # WHEN
-        update_sqlstr = sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
+        update_sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
+            cursor, dimen
+        )
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw")
@@ -544,7 +550,7 @@ WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_s_raw.fisc_tag
         assert update_sqlstr == static_example_sqlstr
 
 
-def test_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BudDimen():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BudDimen():
     # sourcery skip: extract-method
     # ESTABLISH
     dimen = bud_item_awardlink_str()
@@ -553,7 +559,9 @@ def test_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_Bu
         create_sound_and_voice_tables(cursor)
 
         # WHEN
-        update_sqlstr = sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
+        update_sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
+            cursor, dimen
+        )
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw", "put")
@@ -585,4 +593,127 @@ WHERE inconsistency_rows.event_int = bud_item_awardlink_s_put_raw.event_int
 ;
 """
         # print(update_sqlstr)
+        assert update_sqlstr == static_example_sqlstr
+
+
+def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario0_PidginDimen():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    dimen = pidgin_label_str()
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
+
+        # WHEN
+        update_sqlstr = create_sound_agg_insert_sqlstr(cursor, dimen)
+
+        # THEN
+        raw_tablename = prime_tbl(dimen, "s", "raw")
+        agg_tablename = prime_tbl(dimen, "s", "agg")
+        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+        exclude_cols = {idea_number_str(), "error_message"}
+        expected_insert_sqlstr = create_table2table_agg_insert_query(
+            cursor,
+            src_table=raw_tablename,
+            dst_table=agg_tablename,
+            focus_cols=dimen_focus_columns,
+            exclude_cols=exclude_cols,
+        )
+        # print(expected_insert_sqlstr)
+        assert update_sqlstr == expected_insert_sqlstr
+
+        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
+SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM pidgin_label_s_raw
+WHERE error_message IS NULL
+GROUP BY event_int, face_name, otx_label
+;
+"""
+        print(update_sqlstr)
+        assert update_sqlstr == static_example_sqlstr
+
+
+def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario1_FiscDimen():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    dimen = fisc_timeline_hour_str()
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
+
+        # WHEN
+        update_sqlstr = create_sound_agg_insert_sqlstr(cursor, dimen)
+
+        # THEN
+        raw_tablename = prime_tbl(dimen, "s", "raw")
+        agg_tablename = prime_tbl(dimen, "s", "agg")
+        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+        dimen_focus_columns.remove("event_int")
+        dimen_focus_columns.remove("face_name")
+        dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
+        exclude_cols = {
+            idea_number_str(),
+            event_int_str(),
+            face_name_str(),
+            "error_message",
+        }
+        print("yeah")
+        expected_insert_sqlstr = create_table2table_agg_insert_query(
+            cursor,
+            src_table=raw_tablename,
+            dst_table=agg_tablename,
+            focus_cols=dimen_focus_columns,
+            exclude_cols=exclude_cols,
+        )
+        print(expected_insert_sqlstr)
+        assert update_sqlstr == expected_insert_sqlstr
+
+        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_tag, cumlative_minute, hour_tag)
+SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
+FROM fisc_timeline_hour_s_raw
+WHERE error_message IS NULL
+GROUP BY fisc_tag, cumlative_minute
+;
+"""
+        print(update_sqlstr)
+        assert update_sqlstr == static_example_sqlstr
+
+
+def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario2_BudDimen():
+    # sourcery skip: extract-method
+    # ESTABLISH
+    dimen = bud_item_awardlink_str()
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
+
+        # WHEN
+        update_sqlstr = create_sound_agg_insert_sqlstr(cursor, dimen)
+
+        # THEN
+        raw_tablename = prime_tbl(dimen, "s", "raw", "put")
+        agg_tablename = prime_tbl(dimen, "s", "agg", "put")
+        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+        exclude_cols = {idea_number_str(), "error_message"}
+        expected_insert_sqlstr = create_table2table_agg_insert_query(
+            cursor,
+            src_table=raw_tablename,
+            dst_table=agg_tablename,
+            focus_cols=dimen_focus_columns,
+            exclude_cols=exclude_cols,
+        )
+        print(expected_insert_sqlstr)
+        assert update_sqlstr == expected_insert_sqlstr
+
+        static_example_sqlstr = """INSERT INTO bud_item_awardlink_s_put_agg (event_int, face_name, fisc_tag, owner_name, road, awardee_title, give_force, take_force)
+SELECT event_int, face_name, fisc_tag, owner_name, road, awardee_title, MAX(give_force), MAX(take_force)
+FROM bud_item_awardlink_s_put_raw
+WHERE error_message IS NULL
+GROUP BY event_int, face_name, fisc_tag, owner_name, road, awardee_title
+;
+"""
+        print(update_sqlstr)
         assert update_sqlstr == static_example_sqlstr

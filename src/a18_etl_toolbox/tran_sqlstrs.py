@@ -1,4 +1,7 @@
-from src.a00_data_toolbox.db_toolbox import create_update_inconsistency_error_query
+from src.a00_data_toolbox.db_toolbox import (
+    create_update_inconsistency_error_query,
+    create_table2table_agg_insert_query,
+)
 from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     create_idea_sorted_table,
@@ -507,7 +510,7 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         create_idea_sorted_table(conn_or_cursor, x_tablename, idea_columns)
 
 
-def sound_raw_update_inconsist_error_message_sqlstr(
+def create_sound_raw_update_inconsist_error_message_sqlstr(
     conn_or_cursor: sqlite3_Connection, dimen: str
 ) -> str:
     if dimen[:4].lower() == "fisc":
@@ -522,6 +525,41 @@ def sound_raw_update_inconsist_error_message_sqlstr(
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
     return create_update_inconsistency_error_query(
         conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
+    )
+
+
+def create_sound_agg_insert_sqlstr(
+    conn_or_cursor: sqlite3_Connection, dimen: str
+) -> str:
+    dimen_config = get_idea_config_dict().get(dimen)
+    dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+
+    if dimen[:4].lower() == "fisc":
+        exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
+        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+        dimen_focus_columns.remove("event_int")
+        dimen_focus_columns.remove("face_name")
+        dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
+    else:
+        exclude_cols = {"idea_number", "error_message"}
+
+    print(f"{dimen_focus_columns=}")
+
+    if dimen[:3].lower() == "bud":
+        raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
+    else:
+        raw_tablename = create_prime_tablename(dimen, "s", "raw")
+    if dimen[:3].lower() == "bud":
+        agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
+    else:
+        agg_tablename = create_prime_tablename(dimen, "s", "agg")
+
+    return create_table2table_agg_insert_query(
+        conn_or_cursor,
+        src_table=raw_tablename,
+        dst_table=agg_tablename,
+        focus_cols=dimen_focus_columns,
+        exclude_cols=exclude_cols,
     )
 
 
