@@ -481,7 +481,7 @@ def set_sound_tables_raw_error_message(cursor: sqlite3_Cursor):
         cursor.execute(sqlstr)
 
 
-def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
+def insert_sound_raw_select_into_sound_agg_tables(cursor: sqlite3_Cursor):
     pass
 
 
