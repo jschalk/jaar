@@ -317,3 +317,6 @@ VALUES
 #             (b117, 1, sue_str, a23_str, bob_str, yao_str, None, None, None),
 #             (b117, 1, sue_str, a23_str, bob_str, bob_str, None, None, None),
 #         ]
+
+
+# TODO include bud agg_del

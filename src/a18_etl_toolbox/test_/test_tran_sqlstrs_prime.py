@@ -46,7 +46,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_prime_create_table_sqlstrs,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
-    create_sound_agg_insert_sqlstr,
+    create_sound_agg_insert_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -596,7 +596,7 @@ WHERE inconsistency_rows.event_int = bud_item_awardlink_s_put_raw.event_int
         assert update_sqlstr == static_example_sqlstr
 
 
-def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario0_PidginDimen():
+def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
     # sourcery skip: extract-method
     # ESTABLISH
     dimen = pidgin_label_str()
@@ -605,7 +605,7 @@ def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario0_PidginDimen():
         create_sound_and_voice_tables(cursor)
 
         # WHEN
-        update_sqlstr = create_sound_agg_insert_sqlstr(cursor, dimen)
+        update_sqlstrs = create_sound_agg_insert_sqlstrs(cursor, dimen)
 
         # THEN
         raw_tablename = prime_tbl(dimen, "s", "raw")
@@ -621,7 +621,7 @@ def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario0_PidginDimen():
             exclude_cols=exclude_cols,
         )
         # print(expected_insert_sqlstr)
-        assert update_sqlstr == expected_insert_sqlstr
+        assert update_sqlstrs[0] == expected_insert_sqlstr
 
         static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
 SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
@@ -630,11 +630,11 @@ WHERE error_message IS NULL
 GROUP BY event_int, face_name, otx_label
 ;
 """
-        print(update_sqlstr)
-        assert update_sqlstr == static_example_sqlstr
+        print(update_sqlstrs[0])
+        assert update_sqlstrs[0] == static_example_sqlstr
 
 
-def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario1_FiscDimen():
+def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
     # sourcery skip: extract-method
     # ESTABLISH
     dimen = fisc_timeline_hour_str()
@@ -643,7 +643,7 @@ def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario1_FiscDimen():
         create_sound_and_voice_tables(cursor)
 
         # WHEN
-        update_sqlstr = create_sound_agg_insert_sqlstr(cursor, dimen)
+        update_sqlstrs = create_sound_agg_insert_sqlstrs(cursor, dimen)
 
         # THEN
         raw_tablename = prime_tbl(dimen, "s", "raw")
@@ -668,7 +668,7 @@ def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario1_FiscDimen():
             exclude_cols=exclude_cols,
         )
         print(expected_insert_sqlstr)
-        assert update_sqlstr == expected_insert_sqlstr
+        assert update_sqlstrs[0] == expected_insert_sqlstr
 
         static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_tag, cumlative_minute, hour_tag)
 SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
@@ -677,11 +677,11 @@ WHERE error_message IS NULL
 GROUP BY fisc_tag, cumlative_minute
 ;
 """
-        print(update_sqlstr)
-        assert update_sqlstr == static_example_sqlstr
+        print(update_sqlstrs[0])
+        assert update_sqlstrs[0] == static_example_sqlstr
 
 
-def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario2_BudDimen():
+def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
     # sourcery skip: extract-method
     # ESTABLISH
     dimen = bud_item_awardlink_str()
@@ -690,30 +690,54 @@ def test_create_sound_agg_insert_sqlstr_ReturnsObj_Scenario2_BudDimen():
         create_sound_and_voice_tables(cursor)
 
         # WHEN
-        update_sqlstr = create_sound_agg_insert_sqlstr(cursor, dimen)
+        update_sqlstrs = create_sound_agg_insert_sqlstrs(cursor, dimen)
 
         # THEN
-        raw_tablename = prime_tbl(dimen, "s", "raw", "put")
-        agg_tablename = prime_tbl(dimen, "s", "agg", "put")
-        dimen_config = get_idea_config_dict().get(dimen)
-        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
-        expected_insert_sqlstr = create_table2table_agg_insert_query(
+        put_raw_tablename = prime_tbl(dimen, "s", "raw", "put")
+        put_agg_tablename = prime_tbl(dimen, "s", "agg", "put")
+        put_dimen_config = get_idea_config_dict().get(dimen)
+        put_dimen_focus_columns = set(put_dimen_config.get("jkeys").keys())
+        put_exclude_cols = {idea_number_str(), "error_message"}
+        put_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
-            src_table=raw_tablename,
-            dst_table=agg_tablename,
-            focus_cols=dimen_focus_columns,
-            exclude_cols=exclude_cols,
+            src_table=put_raw_tablename,
+            dst_table=put_agg_tablename,
+            focus_cols=put_dimen_focus_columns,
+            exclude_cols=put_exclude_cols,
         )
-        print(expected_insert_sqlstr)
-        assert update_sqlstr == expected_insert_sqlstr
+        # print(put_expected_insert_sqlstr)
+        assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO bud_item_awardlink_s_put_agg (event_int, face_name, fisc_tag, owner_name, road, awardee_title, give_force, take_force)
+        static_example_put_sqlstr = """INSERT INTO bud_item_awardlink_s_put_agg (event_int, face_name, fisc_tag, owner_name, road, awardee_title, give_force, take_force)
 SELECT event_int, face_name, fisc_tag, owner_name, road, awardee_title, MAX(give_force), MAX(take_force)
 FROM bud_item_awardlink_s_put_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, fisc_tag, owner_name, road, awardee_title
 ;
 """
-        print(update_sqlstr)
-        assert update_sqlstr == static_example_sqlstr
+        # print(update_sqlstrs[0])
+        assert update_sqlstrs[0] == static_example_put_sqlstr
+
+        # del
+        del_raw_tablename = prime_tbl(dimen, "s", "raw", "del")
+        del_agg_tablename = prime_tbl(dimen, "s", "agg", "del")
+        del_exclude_cols = {idea_number_str(), "error_message"}
+        del_expected_insert_sqlstr = create_table2table_agg_insert_query(
+            cursor,
+            src_table=del_raw_tablename,
+            dst_table=del_agg_tablename,
+            focus_cols=None,
+            exclude_cols=del_exclude_cols,
+            where_block="",
+        )
+        print(del_expected_insert_sqlstr)
+        assert update_sqlstrs[1] == del_expected_insert_sqlstr
+
+        static_example_del_sqlstr = """INSERT INTO bud_item_awardlink_s_del_agg (event_int, face_name, fisc_tag, owner_name, road, awardee_title_ERASE)
+SELECT event_int, face_name, fisc_tag, owner_name, road, awardee_title_ERASE
+FROM bud_item_awardlink_s_del_raw
+GROUP BY event_int, face_name, fisc_tag, owner_name, road, awardee_title_ERASE
+;
+"""
+        print(update_sqlstrs[1])
+        assert update_sqlstrs[1] == static_example_del_sqlstr

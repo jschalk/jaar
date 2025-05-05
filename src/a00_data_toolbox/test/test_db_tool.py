@@ -997,6 +997,80 @@ GROUP BY name, style
         assert gen_sqlstr == expected_sqlstr
 
 
+def test_create_table2table_agg_insert_query_ReturnsObj_Scenario4():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        hair_str = "hair"
+        email_str = "email"
+        age_str = "age"
+        style_str = "style"
+        src_tablename = "side1"
+        src_columns = ["id", "name", age_str, style_str, email_str, hair_str]
+        create_table_from_columns(cursor, src_tablename, src_columns, {})
+        dst_tablename = "side2"
+        dst_columns = ["name", age_str, style_str, hair_str]
+        create_table_from_columns(cursor, dst_tablename, dst_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_table2table_agg_insert_query(
+            cursor,
+            dst_table=dst_tablename,
+            src_table=src_tablename,
+            focus_cols=[style_str, "name"],
+            exclude_cols={age_str},
+            where_block="",
+        )
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, style, hair)
+SELECT name, style, MAX(hair)
+FROM {src_tablename}
+GROUP BY name, style
+;
+"""
+        print(f"     {gen_sqlstr=}")
+        print(f"{expected_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
+def test_create_table2table_agg_insert_query_ReturnsObj_Scenario5():
+    # ESTABLISH
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        hair_str = "hair"
+        email_str = "email"
+        age_str = "age"
+        style_str = "style"
+        src_tablename = "side1"
+        src_columns = ["id", "name", age_str, style_str, email_str, hair_str]
+        create_table_from_columns(cursor, src_tablename, src_columns, {})
+        dst_tablename = "side2"
+        dst_columns = ["name", age_str, style_str, hair_str]
+        create_table_from_columns(cursor, dst_tablename, dst_columns, {})
+
+        # WHEN
+        gen_sqlstr = create_table2table_agg_insert_query(
+            cursor,
+            dst_table=dst_tablename,
+            src_table=src_tablename,
+            focus_cols=None,
+            exclude_cols={"id"},
+            where_block="",
+        )
+
+        # THEN
+        expected_sqlstr = f"""INSERT INTO {dst_tablename} (name, age, style, hair)
+SELECT name, age, style, hair
+FROM {src_tablename}
+GROUP BY name, age, style, hair
+;
+"""
+        print(f"     {gen_sqlstr=}")
+        print(f"{expected_sqlstr=}")
+        assert gen_sqlstr == expected_sqlstr
+
+
 def test_required_columns_exist_ReturnsObj_Scenario0():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:

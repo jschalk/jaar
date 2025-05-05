@@ -435,7 +435,10 @@ def create_table2table_agg_insert_query(
     dst_table: str,
     focus_cols: list[str],
     exclude_cols: set[str],
+    where_block: str = None,
 ) -> str:
+    if not focus_cols:
+        focus_cols = set(get_table_columns(conn_or_cursor, dst_table))
     focus_cols_set = set(focus_cols)
     dst_columns = get_table_columns(conn_or_cursor, dst_table)
     focus_col_list = get_sorted_intersection_list(focus_cols, dst_columns)
@@ -450,11 +453,12 @@ def create_table2table_agg_insert_query(
         else:
             select_columns_str += f", MAX({dst_column})"
     groupby_columns_str = ", ".join(focus_col_list)
+    if where_block is None:
+        where_block = "\nWHERE error_message IS NULL"
 
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}
-FROM {src_table}
-WHERE error_message IS NULL
+FROM {src_table}{where_block}
 GROUP BY {groupby_columns_str}
 ;
 """

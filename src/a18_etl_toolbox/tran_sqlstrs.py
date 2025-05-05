@@ -1,4 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import (
+    get_table_columns,
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
 )
@@ -528,7 +529,7 @@ def create_sound_raw_update_inconsist_error_message_sqlstr(
     )
 
 
-def create_sound_agg_insert_sqlstr(
+def create_sound_agg_insert_sqlstrs(
     conn_or_cursor: sqlite3_Connection, dimen: str
 ) -> str:
     dimen_config = get_idea_config_dict().get(dimen)
@@ -543,24 +544,35 @@ def create_sound_agg_insert_sqlstr(
     else:
         exclude_cols = {"idea_number", "error_message"}
 
-    print(f"{dimen_focus_columns=}")
-
     if dimen[:3].lower() == "bud":
+        agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
         raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
     else:
         raw_tablename = create_prime_tablename(dimen, "s", "raw")
-    if dimen[:3].lower() == "bud":
-        agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
-    else:
         agg_tablename = create_prime_tablename(dimen, "s", "agg")
 
-    return create_table2table_agg_insert_query(
+    pidgin_fisc_bud_put_sqlstr = create_table2table_agg_insert_query(
         conn_or_cursor,
         src_table=raw_tablename,
         dst_table=agg_tablename,
         focus_cols=dimen_focus_columns,
         exclude_cols=exclude_cols,
     )
+    sqlstrs = [pidgin_fisc_bud_put_sqlstr]
+    if dimen[:3].lower() == "bud":
+        del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+        del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
+        bud_del_sqlstr = create_table2table_agg_insert_query(
+            conn_or_cursor,
+            src_table=del_raw_tablename,
+            dst_table=del_agg_tablename,
+            focus_cols=None,
+            exclude_cols=exclude_cols,
+            where_block="",
+        )
+        sqlstrs.append(bud_del_sqlstr)
+
+    return sqlstrs
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
