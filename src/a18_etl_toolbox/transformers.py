@@ -474,6 +474,10 @@ def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
             )
 
 
+def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
+    pass
+
+
 def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor, brick_valid_table: str, raw_tablename: str, idea_number: str
 ):

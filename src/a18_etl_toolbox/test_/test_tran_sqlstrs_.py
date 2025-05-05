@@ -237,71 +237,6 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidlabe_s_val_table == f"{pidlabe_dimen}_s_vld"
 
 
-def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
-    pass
-    #  create_prime_tablename(abbv7, "s", "agg")
-
-
-def create_fisc_table_sqlstr(abbv7):
-    pass
-
-
-# def test_get_prime_create_table_sqlstrs_ReturnsObj():
-#     # sourcery skip: no-loop-in-tests
-#     # ESTABLISH / WHEN
-#     create_table_sqlstrs = get_prime_create_table_sqlstrs()
-
-#     # THEN
-#     idea_config = get_idea_config_dict()
-#     sqlite_types = get_idea_sqlite_types()
-#     for x_dimen in idea_config:
-#         abbv7 = get_dimen_abbv7(x_dimen)
-#         print(f"{abbv7} {x_dimen} checking...")
-#         x_config = idea_config.get(x_dimen)
-
-#         # create agg table
-#         s_agg = create_prime_tablename(abbv7, "s", "agg")
-#         # ag_table = f"{x_dimen}_agg"
-#         ag_sqlstr = create_table_sqlstrs.get(s_agg)
-#         ag_cols = set(x_config.get("jkeys").keys())
-#         ag_cols.update(set(x_config.get("jvalues").keys()))
-#         ag_cols.remove(event_int_str())
-#         ag_cols.remove(face_name_str())
-#         ag_cols = get_default_sorted_list(ag_cols)
-#         # print(f"{ag_cols=}")
-#         gen_dimen_agg_sqlstr = get_create_table_sqlstr(ag_table, ag_cols, sqlite_types)
-#         gen_dimen_agg_sqlstr = create_agg_table_sqlstr()
-#         # assert ag_sqlstr == gen_dimen_agg_sqlstr
-
-#         # create raw table
-#         st_table = f"{x_dimen}_raw"
-#         st_sqlstr = create_table_sqlstrs.get(st_table)
-#         st_cols = set(x_config.get("jkeys").keys())
-#         st_cols.update(set(x_config.get("jvalues").keys()))
-#         st_cols.add(idea_number_str())
-#         st_cols.add("error_message")
-#         st_cols = get_default_sorted_list(st_cols)
-#         gen_dimen_raw_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
-#         # assert st_sqlstr == gen_dimen_raw_sqlstr
-
-#         # create raw table
-#         st_table = f"{x_dimen}_raw"
-#         st_sqlstr = create_table_sqlstrs.get(st_table)
-#         st_cols = set(x_config.get("jkeys").keys())
-#         st_cols.update(set(x_config.get("jvalues").keys()))
-#         st_cols.add(idea_number_str())
-#         st_cols.add("error_message")
-#         st_cols = get_default_sorted_list(st_cols)
-#         gen_dimen_raw_sqlstr = get_create_table_sqlstr(st_table, st_cols, sqlite_types)
-#         # assert st_sqlstr == gen_dimen_raw_sqlstr
-
-#         # print(f'CREATE_{abbv7.upper()}_AGG_SQLSTR= """{gen_dimen_agg_sqlstr}"""')
-#         # print(f'CREATE_{abbv7.upper()}_RAW_SQLSTR= """{gen_dimen_raw_sqlstr}"""')
-#         # print(f'"{ag_table}": {ag_table.upper()}_SQLSTR,')
-#         # print(f'"{st_table}": {st_table.upper()}_SQLSTR,')
-#     assert 1 == 2
-
-
 def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
@@ -769,7 +704,8 @@ def test_get_fisc_update_inconsist_error_message_sqlstrs_ReturnsObj():
             # print(
             #     f"""\"{x_dimen}\": {x_dimen.upper()}_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,"""
             # )
-            # print(f"""            {x_sqlstr=}""")
+            print("")
+            print(generated_dimen_sqlstr)
             assert x_sqlstr == generated_dimen_sqlstr
 
 

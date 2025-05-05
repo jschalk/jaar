@@ -1,11 +1,6 @@
-from src.a00_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_row_count,
-    get_table_columns,
-)
+from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
@@ -13,20 +8,16 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_road_str,
     unknown_word_str,
 )
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a17_idea_logic._utils.str_a17 import brick_valid_str, sound_raw_str
-from src.a18_etl_toolbox.tran_sqlstrs import (
-    create_prime_tablename,
-    create_sound_and_voice_tables,
-)
+from src.a17_idea_logic._utils.str_a17 import brick_valid_str
+from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 from sqlite3 import connect as sqlite3_connect
 
-# get examples from tests for etl_brick_agg_dfs_to_pidgin_label_raw
-# get examples from tests for etl_brick_agg_dfs_to_pidgin_road_raw
-# get examples from tests for etl_brick_agg_dfs_to_pidgin__raw
-# get examples from tests for etl_brick_agg_dfs_to_pidgin_road_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_label_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_road_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin__raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_road_raw
 
 
 def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario0_Only_valid_events():

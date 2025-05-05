@@ -507,12 +507,18 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         create_idea_sorted_table(conn_or_cursor, x_tablename, idea_columns)
 
 
-def create_sound_pidgin_update_inconsist_error_message_sqlstr(
-    conn_or_cursor: sqlite3_Connection, pidgin_dimen: str
+def sound_raw_update_inconsist_error_message_sqlstr(
+    conn_or_cursor: sqlite3_Connection, dimen: str
 ) -> str:
-    exclude_cols = {"idea_number", "error_message"}
-    x_tablename = create_prime_tablename(pidgin_dimen, "s", "raw")
-    dimen_config = get_idea_config_dict().get(pidgin_dimen)
+    if dimen[:4].lower() == "fisc":
+        exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
+    else:
+        exclude_cols = {"idea_number", "error_message"}
+    if dimen[:3].lower() == "bud":
+        x_tablename = create_prime_tablename(dimen, "s", "raw", "put")
+    else:
+        x_tablename = create_prime_tablename(dimen, "s", "raw")
+    dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
     return create_update_inconsistency_error_query(
         conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
