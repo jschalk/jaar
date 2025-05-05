@@ -79,6 +79,7 @@ from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
+    sound_raw_update_inconsist_error_message_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -472,6 +473,12 @@ def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
             etl_brick_valid_table_into_prime_table(
                 cursor, brick_valid_tablename, sound_raw_table, idea_number
             )
+
+
+def set_sound_tables_raw_error_message(cursor: sqlite3_Cursor):
+    for dimen in get_idea_dimen_ref().keys():
+        sqlstr = sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
+        cursor.execute(sqlstr)
 
 
 def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
