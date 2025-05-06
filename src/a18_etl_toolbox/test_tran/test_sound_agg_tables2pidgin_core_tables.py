@@ -11,6 +11,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_road_str,
     pidgin_name_str,
+    pidgin_core_str,
     inx_bridge_str,
     otx_bridge_str,
     inx_road_str,
@@ -32,7 +33,8 @@ from src.a18_etl_toolbox.transformers import (
     insert_sound_raw_selects_into_sound_agg_tables,
     set_sound_tables_raw_error_message,
     etl_sound_raw_tables_to_sound_agg_tables,
-    insert_pidgin_sound_agg_into_pidgin_core_raw_tables,
+    insert_pidgin_sound_agg_into_pidgin_core_raw_table,
+    update_inconsistency_pidgin_core_raw_table,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -96,7 +98,7 @@ VALUES
         ]
 
 
-def test_insert_pidgin_sound_agg_into_pidgin_core_raw_tables_PopulatesTableCorrectly_Scenario0():
+def test_insert_pidgin_sound_agg_into_pidgin_core_raw_table_PopulatesTableCorrectly_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -161,7 +163,7 @@ VALUES
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 0
 
         # WHEN
-        insert_pidgin_sound_agg_into_pidgin_core_raw_tables(cursor)
+        insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
 
         # THEN
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 4
@@ -173,6 +175,66 @@ VALUES
             (pidgin_name_s_agg_tablename, "Bob", ":", ":", "Unknown", None),
             (pidgin_name_s_agg_tablename, "Sue", None, None, None, None),
             (pidgin_road_s_agg_tablename, "Sue", None, None, None, None),
+            (pidgin_road_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
+        ]
+
+
+def test_update_inconsistency_pidgin_core_raw_table_UpdatesTableCorrectly_Scenario0():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    yao_inx = "Yaoito"
+    bob_inx = "Bobito"
+    rdx = ":"
+    other_bridge = "/"
+    ukx = "Unknown"
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        cursor.execute(CREATE_PIDCORE_SOUND_RAW_SQLSTR)
+        pidroad_dimen = pidgin_road_str()
+        pidgin_road_s_agg_tablename = create_prime_tablename(pidroad_dimen, "s", "agg")
+        pidname_dimen = pidgin_name_str()
+        pidgin_name_s_agg_tablename = create_prime_tablename(pidname_dimen, "s", "agg")
+        pidcore_dimen = pidgin_core_str()
+        pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidgin_core_s_raw_tablename} (
+  source_dimen
+, {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+, error_message
+)"""
+        values_clause = f"""
+VALUES
+  ('{pidgin_name_s_agg_tablename}', "{bob_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
+, ('{pidgin_name_s_agg_tablename}', "{sue_str}", NULL, NULL, '{rdx}', NULL)
+, ('{pidgin_road_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_bridge}', NULL)
+, ('{pidgin_road_s_agg_tablename}', "{yao_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+
+        create_sound_and_voice_tables(cursor)
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_core_s_raw_tablename} WHERE error_message IS NOT NULL;"
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+
+        # WHEN
+        update_inconsistency_pidgin_core_raw_table(cursor)
+
+        # THEN
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 2
+        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_core_s_raw_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(f"{rows=}")
+        error_message = "Inconsistent data"
+        assert rows == [
+            (pidgin_name_s_agg_tablename, "Bob", ":", ":", "Unknown", None),
+            (pidgin_name_s_agg_tablename, "Sue", None, None, ":", error_message),
+            (pidgin_road_s_agg_tablename, "Sue", None, None, "/", error_message),
             (pidgin_road_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
         ]
 

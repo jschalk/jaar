@@ -18,6 +18,7 @@ from src.a00_data_toolbox.db_toolbox import (
     _get_grouping_groupby_clause,
     get_table_columns,
     create_table_from_columns,
+    create_update_inconsistency_error_query,
 )
 from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -495,9 +496,22 @@ def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
     insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
 
-def insert_pidgin_sound_agg_into_pidgin_core_raw_tables(cursor: sqlite3_Cursor):
+def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     for dimen in get_quick_pidgens_column_ref():
         cursor.execute(create_insert_into_pidgin_core_raw_sqlstr(dimen))
+
+
+def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
+    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+    sqlstr = create_update_inconsistency_error_query(
+        cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
+    )
+    cursor.execute(sqlstr)
+    print(sqlstr)
+
+
+def etl_sound_agg_to_pidgin_core_tables(cursor: sqlite3_Cursor):
+    insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
 
 
 def etl_brick_valid_table_into_prime_table(
