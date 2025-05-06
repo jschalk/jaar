@@ -32,7 +32,7 @@ from src.a18_etl_toolbox.transformers import (
     insert_sound_raw_selects_into_sound_agg_tables,
     set_sound_tables_raw_error_message,
     etl_sound_raw_tables_to_sound_agg_tables,
-    etl_sound_agg_to_pidgin_core_tables,
+    insert_pidgin_sound_agg_into_pidgin_core_raw_tables,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -96,7 +96,7 @@ VALUES
         ]
 
 
-def test_etl_sound_agg_to_pidgin_core_tables_PopulatesTableCorrectly_Scenario0():
+def test_insert_pidgin_sound_agg_into_pidgin_core_raw_tables_PopulatesTableCorrectly_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -161,7 +161,7 @@ VALUES
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 0
 
         # WHEN
-        etl_sound_agg_to_pidgin_core_tables(cursor)
+        insert_pidgin_sound_agg_into_pidgin_core_raw_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 4

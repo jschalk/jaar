@@ -495,7 +495,7 @@ def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
     insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
 
-def etl_sound_agg_to_pidgin_core_tables(cursor: sqlite3_Cursor):
+def insert_pidgin_sound_agg_into_pidgin_core_raw_tables(cursor: sqlite3_Cursor):
     for dimen in get_quick_pidgens_column_ref():
         cursor.execute(create_insert_into_pidgin_core_raw_sqlstr(dimen))
 
