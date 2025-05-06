@@ -1,4 +1,8 @@
-from src.a00_data_toolbox.db_toolbox import create_update_inconsistency_error_query
+from src.a00_data_toolbox.db_toolbox import (
+    get_table_columns,
+    create_update_inconsistency_error_query,
+    create_table2table_agg_insert_query,
+)
 from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     create_idea_sorted_table,
@@ -58,6 +62,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "pidgin_name": "PIDNAME",
         "pidgin_road": "PIDROAD",
         "pidgin_tag": "PIDTAGG",
+        "pidgin_core": "PIDCORE",
     }.get(dimen)
 
 
@@ -86,6 +91,7 @@ def create_prime_tablename(
         "PIDNAME": "pidgin_name",
         "PIDROAD": "pidgin_road",
         "PIDTAGG": "pidgin_tag",
+        "PIDCORE": "pidgin_core",
     }
     tablename = idea_dimen_or_abbv7
     if abbv_references.get(idea_dimen_or_abbv7.upper()):
@@ -98,12 +104,19 @@ def create_prime_tablename(
 
 CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_vld (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 CREATE_PIDROAD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDROAD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_agg (event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDROAD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_vld (event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 CREATE_PIDTAGG_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDTAGG_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_agg (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDTAGG_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_vld (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+
+CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
@@ -220,12 +233,18 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
     return {
         "pidgin_label_s_raw": CREATE_PIDLABE_SOUND_RAW_SQLSTR,
         "pidgin_label_s_agg": CREATE_PIDLABE_SOUND_AGG_SQLSTR,
+        "pidgin_label_s_vld": CREATE_PIDLABE_SOUND_VLD_SQLSTR,
         "pidgin_name_s_raw": CREATE_PIDNAME_SOUND_RAW_SQLSTR,
         "pidgin_name_s_agg": CREATE_PIDNAME_SOUND_AGG_SQLSTR,
+        "pidgin_name_s_vld": CREATE_PIDNAME_SOUND_VLD_SQLSTR,
         "pidgin_road_s_raw": CREATE_PIDROAD_SOUND_RAW_SQLSTR,
         "pidgin_road_s_agg": CREATE_PIDROAD_SOUND_AGG_SQLSTR,
+        "pidgin_road_s_vld": CREATE_PIDROAD_SOUND_VLD_SQLSTR,
         "pidgin_tag_s_raw": CREATE_PIDTAGG_SOUND_RAW_SQLSTR,
         "pidgin_tag_s_agg": CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
+        "pidgin_tag_s_vld": CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
+        "pidgin_core_s_raw": CREATE_PIDCORE_SOUND_RAW_SQLSTR,
+        "pidgin_core_s_agg": CREATE_PIDCORE_SOUND_AGG_SQLSTR,
         "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
         "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
         "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,
@@ -507,16 +526,78 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
         create_idea_sorted_table(conn_or_cursor, x_tablename, idea_columns)
 
 
-def create_sound_pidgin_update_inconsist_error_message_sqlstr(
-    conn_or_cursor: sqlite3_Connection, pidgin_dimen: str
+def create_sound_raw_update_inconsist_error_message_sqlstr(
+    conn_or_cursor: sqlite3_Connection, dimen: str
 ) -> str:
-    exclude_cols = {"idea_number", "error_message"}
-    x_tablename = create_prime_tablename(pidgin_dimen, "s", "raw")
-    dimen_config = get_idea_config_dict().get(pidgin_dimen)
+    if dimen[:4].lower() == "fisc":
+        exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
+    else:
+        exclude_cols = {"idea_number", "error_message"}
+    if dimen[:3].lower() == "bud":
+        x_tablename = create_prime_tablename(dimen, "s", "raw", "put")
+    else:
+        x_tablename = create_prime_tablename(dimen, "s", "raw")
+    dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
     return create_update_inconsistency_error_query(
         conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
     )
+
+
+def create_sound_agg_insert_sqlstrs(
+    conn_or_cursor: sqlite3_Connection, dimen: str
+) -> str:
+    dimen_config = get_idea_config_dict().get(dimen)
+    dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+
+    if dimen[:4].lower() == "fisc":
+        exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
+        dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+        dimen_focus_columns.remove("event_int")
+        dimen_focus_columns.remove("face_name")
+        dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
+    else:
+        exclude_cols = {"idea_number", "error_message"}
+
+    if dimen[:3].lower() == "bud":
+        agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
+        raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
+    else:
+        raw_tablename = create_prime_tablename(dimen, "s", "raw")
+        agg_tablename = create_prime_tablename(dimen, "s", "agg")
+
+    pidgin_fisc_bud_put_sqlstr = create_table2table_agg_insert_query(
+        conn_or_cursor,
+        src_table=raw_tablename,
+        dst_table=agg_tablename,
+        focus_cols=dimen_focus_columns,
+        exclude_cols=exclude_cols,
+    )
+    sqlstrs = [pidgin_fisc_bud_put_sqlstr]
+    if dimen[:3].lower() == "bud":
+        del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+        del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
+        bud_del_sqlstr = create_table2table_agg_insert_query(
+            conn_or_cursor,
+            src_table=del_raw_tablename,
+            dst_table=del_agg_tablename,
+            focus_cols=None,
+            exclude_cols=exclude_cols,
+            where_block="",
+        )
+        sqlstrs.append(bud_del_sqlstr)
+
+    return sqlstrs
+
+
+def create_insert_into_pidgin_core_raw_sqlstr(dimen: str) -> str:
+    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+    pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    return f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_word)
+SELECT '{pidgin_s_agg_tablename}', face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM {pidgin_s_agg_tablename}
+GROUP BY face_name
+"""
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label

@@ -18,6 +18,7 @@ from src.a00_data_toolbox.db_toolbox import (
     _get_grouping_groupby_clause,
     get_table_columns,
     create_table_from_columns,
+    create_update_inconsistency_error_query,
 )
 from src.a01_word_logic.road import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -79,6 +80,9 @@ from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
+    create_sound_raw_update_inconsist_error_message_sqlstr,
+    create_sound_agg_insert_sqlstrs,
+    create_insert_into_pidgin_core_raw_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -474,6 +478,42 @@ def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
             )
 
 
+def set_sound_tables_raw_error_message(cursor: sqlite3_Cursor):
+    for dimen in get_idea_dimen_ref().keys():
+        sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
+        cursor.execute(sqlstr)
+
+
+def insert_sound_raw_selects_into_sound_agg_tables(cursor: sqlite3_Cursor):
+    for dimen in get_idea_dimen_ref().keys():
+        sqlstrs = create_sound_agg_insert_sqlstrs(cursor, dimen)
+        for sqlstr in sqlstrs:
+            cursor.execute(sqlstr)
+
+
+def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
+    set_sound_tables_raw_error_message(cursor)
+    insert_sound_raw_selects_into_sound_agg_tables(cursor)
+
+
+def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
+    for dimen in get_quick_pidgens_column_ref():
+        cursor.execute(create_insert_into_pidgin_core_raw_sqlstr(dimen))
+
+
+def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
+    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+    sqlstr = create_update_inconsistency_error_query(
+        cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
+    )
+    cursor.execute(sqlstr)
+    print(sqlstr)
+
+
+def etl_sound_agg_to_pidgin_core_tables(cursor: sqlite3_Cursor):
+    insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
+
+
 def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor, brick_valid_table: str, raw_tablename: str, idea_number: str
 ):
@@ -507,19 +547,6 @@ def etl_brick_valid_table_into_old_prime_table(
     insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
     insert_select_sqlstr = f"{insert_clause_str}\n{select_str}{group_by_clause_str}"
     cursor.execute(insert_select_sqlstr)
-
-
-def etl_pidgin_prime_raw_to_pidgin_prime_agg(cursor: sqlite3_Cursor):
-    idea_dimen_ref = {
-        pidgin_dimen: idea_numbers
-        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
-        if pidgin_dimen[:6] == "pidgin"
-    }
-    # pidgin_raw_tables = {}
-    # for pidgin_dimen in idea_dimen_ref:
-    #     idea_numbers = idea_dimen_ref.get(pidgin_dimen)
-    #     raw_tablename = f"{pidgin_dimen}_raw"
-    #     pidgin_raw_tables[raw_tablename] = idea_numbers
 
 
 def etl_brick_agg_df_to_brick_pidgin_raw_df(
