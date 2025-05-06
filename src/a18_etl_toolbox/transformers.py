@@ -489,6 +489,11 @@ def insert_sound_raw_selects_into_sound_agg_tables(cursor: sqlite3_Cursor):
             cursor.execute(sqlstr)
 
 
+def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
+    set_sound_tables_raw_error_message(cursor)
+    insert_sound_raw_selects_into_sound_agg_tables(cursor)
+
+
 def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor, brick_valid_table: str, raw_tablename: str, idea_number: str
 ):
