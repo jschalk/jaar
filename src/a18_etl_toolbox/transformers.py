@@ -80,6 +80,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
+    create_sound_agg_insert_sqlstrs,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -481,8 +482,11 @@ def set_sound_tables_raw_error_message(cursor: sqlite3_Cursor):
         cursor.execute(sqlstr)
 
 
-def insert_sound_raw_select_into_sound_agg_tables(cursor: sqlite3_Cursor):
-    pass
+def insert_sound_raw_selects_into_sound_agg_tables(cursor: sqlite3_Cursor):
+    for dimen in get_idea_dimen_ref().keys():
+        sqlstrs = create_sound_agg_insert_sqlstrs(cursor, dimen)
+        for sqlstr in sqlstrs:
+            cursor.execute(sqlstr)
 
 
 def etl_brick_valid_table_into_prime_table(
