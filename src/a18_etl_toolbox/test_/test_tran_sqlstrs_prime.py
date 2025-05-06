@@ -35,6 +35,10 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_name_str,
     pidgin_road_str,
     pidgin_tag_str,
+    pidgin_core_str,
+    otx_bridge_str,
+    inx_bridge_str,
+    unknown_word_str,
 )
 from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types, get_idea_config_dict
@@ -163,6 +167,14 @@ def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
 
 
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
+    if x_dimen == pidgin_core_str():
+        return {
+            event_int_str(),
+            face_name_str(),
+            otx_bridge_str(),
+            inx_bridge_str(),
+            unknown_word_str(),
+        }
     x_config = get_idea_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
     columns.update(set(x_config.get("jvalues").keys()))
@@ -284,6 +296,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) == "pidgin"
     }
+    pidgin_dimens_config[pidgin_core_str()] = {}
 
     for x_dimen in pidgin_dimens_config:
         s_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
@@ -292,11 +305,11 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
 
         abbv7 = get_dimen_abbv7(x_dimen)
-        print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
-        print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
+        # print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
 
-        # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
-        # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
+        print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
+        print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
         assert expected_s_raw_sqlstr == create_table_sqlstrs.get(s_raw_tablename)
         assert expected_s_agg_sqlstr == create_table_sqlstrs.get(s_agg_tablename)
 
@@ -412,6 +425,8 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     print(f"{fisc_dimens_count=}")
     print(f"{bud_dimens_count=}")
     all_dimens_count = pidgin_dimens_count + fisc_dimens_count + bud_dimens_count
+    pidgin_core_count = 2
+    all_dimens_count += pidgin_core_count
     assert len(create_table_sqlstrs) == all_dimens_count
 
 
@@ -433,6 +448,8 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         pidlabe_s_agg_table = prime_tbl("pidlabe", "s", agg_str)
         fishour_v_agg_table = prime_tbl("fishour", "v", agg_str)
         pidlabe_s_raw_table = prime_tbl("pidlabe", "s", raw_str)
+        pidcore_s_raw_table = prime_tbl("pidcore", "s", raw_str)
+        pidcore_s_agg_table = prime_tbl("pidcore", "s", agg_str)
 
         assert not db_table_exists(cursor, budunit_s_agg_table)
         assert not db_table_exists(cursor, budacct_s_agg_table)
@@ -442,6 +459,8 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert not db_table_exists(cursor, pidlabe_s_agg_table)
         assert not db_table_exists(cursor, fishour_v_agg_table)
         assert not db_table_exists(cursor, pidlabe_s_raw_table)
+        assert not db_table_exists(cursor, pidcore_s_raw_table)
+        assert not db_table_exists(cursor, pidcore_s_agg_table)
 
         # WHEN
         create_sound_and_voice_tables(cursor)
@@ -454,7 +473,7 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
-        assert cursor.fetchone()[0] == 116
+        assert cursor.fetchone()[0] == 118
         assert db_table_exists(cursor, budunit_s_agg_table)
         assert db_table_exists(cursor, budacct_s_agg_table)
         assert db_table_exists(cursor, budmemb_s_agg_table)
@@ -463,6 +482,8 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, pidlabe_s_agg_table)
         assert db_table_exists(cursor, fishour_v_agg_table)
         assert db_table_exists(cursor, pidlabe_s_raw_table)
+        assert db_table_exists(cursor, pidcore_s_raw_table)
+        assert db_table_exists(cursor, pidcore_s_agg_table)
 
 
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario0_PidginDimen():

@@ -27,6 +27,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_label_str,
     pidgin_tag_str,
     pidgin_road_str,
+    pidgin_core_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     config_file_dir,
@@ -60,6 +61,7 @@ def test_str_functions_ReturnsObj():
     assert pidgin_label_str() == "pidgin_label"
     assert pidgin_tag_str() == "pidgin_tag"
     assert pidgin_road_str() == "pidgin_road"
+    assert pidgin_core_str() == "pidgin_core"
     assert map_otx2inx_str() == "map_otx2inx"
 
 

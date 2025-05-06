@@ -72,3 +72,7 @@ def pidgin_tag_str() -> str:
 
 def pidgin_road_str() -> str:
     return "pidgin_road"
+
+
+def pidgin_core_str() -> str:
+    return "pidgin_core"

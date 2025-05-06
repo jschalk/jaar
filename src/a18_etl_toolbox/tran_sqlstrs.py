@@ -62,6 +62,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "pidgin_name": "PIDNAME",
         "pidgin_road": "PIDROAD",
         "pidgin_tag": "PIDTAGG",
+        "pidgin_core": "PIDCORE",
     }.get(dimen)
 
 
@@ -90,6 +91,7 @@ def create_prime_tablename(
         "PIDNAME": "pidgin_name",
         "PIDROAD": "pidgin_road",
         "PIDTAGG": "pidgin_tag",
+        "PIDCORE": "pidgin_core",
     }
     tablename = idea_dimen_or_abbv7
     if abbv_references.get(idea_dimen_or_abbv7.upper()):
@@ -108,6 +110,8 @@ CREATE_PIDROAD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_ra
 CREATE_PIDROAD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_road_s_agg (event_int INTEGER, face_name TEXT, otx_road TEXT, inx_road TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 CREATE_PIDTAGG_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDTAGG_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_agg (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (event_int INTEGER, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
@@ -230,6 +234,8 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_road_s_agg": CREATE_PIDROAD_SOUND_AGG_SQLSTR,
         "pidgin_tag_s_raw": CREATE_PIDTAGG_SOUND_RAW_SQLSTR,
         "pidgin_tag_s_agg": CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
+        "pidgin_core_s_raw": CREATE_PIDCORE_SOUND_RAW_SQLSTR,
+        "pidgin_core_s_agg": CREATE_PIDCORE_SOUND_AGG_SQLSTR,
         "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
         "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
         "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,

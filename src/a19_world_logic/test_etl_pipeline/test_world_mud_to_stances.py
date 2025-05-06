@@ -99,8 +99,6 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     budunit_voice_agg_put = create_prime_tablename("budunit", "v", "agg", "put")
     budacct_voice_raw_put = create_prime_tablename("budacct", "v", "raw", "put")
     budacct_voice_agg_put = create_prime_tablename("budacct", "v", "agg", "put")
-    event1_sound_budunit_path = "events/1/sound_budunit.csv"
-    event1_sound_budacct_path = "events/1/sound_budacct.csv"
     event1_pidgin_json_path = "events/1/pidgin.json"
     event1_inherited_pidgin_json_path = "events/1/inherited_pidgin.json"
     event1_voice_budunit_path = "events/1/voice_budunit.csv"
@@ -121,8 +119,6 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not db_table_exists(cursor, budunit_sound_agg_put)
         assert not db_table_exists(cursor, budacct_sound_raw_put)
         assert not db_table_exists(cursor, budacct_sound_agg_put)
-        assert not os_path_exists(event1_sound_budunit_path)
-        assert not os_path_exists(event1_sound_budacct_path)
         assert not os_path_exists(event1_pidgin_json_path)
         assert not os_path_exists(event1_inherited_pidgin_json_path)
         assert not os_path_exists(event1_voice_budunit_path)
@@ -151,10 +147,8 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, fisunit_sound_agg) == 1
         assert get_row_count(cursor, budunit_sound_agg_put) == 1
         assert get_row_count(cursor, budacct_sound_agg_put) == 1
-        # assert not os_path_exists(event1_sound_budunit_path)
-        # assert not os_path_exists(event1_sound_budacct_path)
-        # assert not os_path_exists(event1_pidgin_json_path)
-        # assert not os_path_exists(event1_inherited_pidgin_json_path)
+        assert os_path_exists(event1_pidgin_json_path)
+        # assert os_path_exists(event1_inherited_pidgin_json_path)
         # assert not os_path_exists(event1_voice_budunit_path)
         # assert not os_path_exists(event1_voice_budacct_path)
         # assert get_row_count(cursor, fisunit_voice_raw) == 1

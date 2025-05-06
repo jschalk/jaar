@@ -51,6 +51,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_name_str,
     pidgin_road_str,
     pidgin_tag_str,
+    pidgin_core_str,
 )
 from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
@@ -176,6 +177,7 @@ def test_create_prime_tablename_ReturnsObj():
     pidtagg_dimen = pidgin_tag_str()
     pidroad_dimen = pidgin_road_str()
     pidlabe_dimen = pidgin_label_str()
+    pidcore_dimen = pidgin_core_str()
     raw_str = "raw"
     agg_str = "agg"
     vld_str = "vld"
@@ -208,6 +210,8 @@ def test_create_prime_tablename_ReturnsObj():
     pidlabe_v_agg_table = create_prime_tablename("pidlabe", "v", agg_str)
     pidlabe_s_raw_table = create_prime_tablename("pidlabe", "s", raw_str)
     pidlabe_s_val_table = create_prime_tablename("pidlabe", "s", vld_str)
+    pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
+    pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
 
     # THEN
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
@@ -235,6 +239,8 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidlabe_v_agg_table == f"{pidlabe_dimen}_v_agg"
     assert pidlabe_s_raw_table == f"{pidlabe_dimen}_s_raw"
     assert pidlabe_s_val_table == f"{pidlabe_dimen}_s_vld"
+    assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
+    assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
 
 
 def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj():
