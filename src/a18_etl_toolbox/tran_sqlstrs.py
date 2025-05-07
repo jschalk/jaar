@@ -594,14 +594,14 @@ def create_insert_into_pidgin_core_raw_sqlstr(dimen: str) -> str:
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     return f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_word)
-SELECT '{pidgin_s_agg_tablename}', face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_word
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name
+GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
 ;
 """
 
 
-def create_update_inconsist_pidgin_core_agg_sqlstr(dimen: str) -> str:
+def create_update_inconsist_pidgin_dimen_agg_sqlstr(dimen: str) -> str:
     pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     return f"""UPDATE {pidgin_s_agg_tablename}
@@ -612,6 +612,27 @@ WHERE face_name IN (
     LEFT JOIN {pidgin_core_s_agg_tablename} ON {pidgin_core_s_agg_tablename}.face_name = {pidgin_s_agg_tablename}.face_name
     WHERE {pidgin_core_s_agg_tablename}.face_name IS NULL
 )
+;
+"""
+
+
+def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
+    pidgin_tag_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    pidgin_core_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
+    dimen_otx_inx_obj_names = {
+        "pidgin_name": "name",
+        "pidgin_label": "label",
+        "pidgin_tag": "tag",
+        "pidgin_road": "road",
+    }
+    otx_str = f"otx_{dimen_otx_inx_obj_names[dimen]}"
+    inx_str = f"inx_{dimen_otx_inx_obj_names[dimen]}"
+    return f"""
+INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
+SELECT event_int, face_name, MAX({otx_str}), MAX({inx_str})
+FROM {pidgin_tag_s_agg_tablename}
+WHERE error_message IS NULL
+GROUP BY event_int, face_name
 ;
 """
 

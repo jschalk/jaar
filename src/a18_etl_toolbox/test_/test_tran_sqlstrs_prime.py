@@ -52,6 +52,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_insert_pidgin_sound_vld_table_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -838,9 +839,49 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
     # THEN
     pidgin_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     expected_road_sqlstr = f"""INSERT INTO pidgin_core_s_raw (source_dimen, face_name, otx_bridge, inx_bridge, unknown_word)
-SELECT '{pidgin_s_agg_tablename}', face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_word
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name
+GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
 ;
 """
     assert road_sqlstr == expected_road_sqlstr
+
+
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_road():
+    # ESTABLISH
+    dimen = pidgin_road_str()
+    # WHEN
+    road_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+
+    # THEN
+    pidgin_road_s_agg_tablename = prime_tbl(dimen, "s", "agg")
+    pidgin_core_s_vld_tablename = prime_tbl(dimen, "s", "vld")
+    expected_road_sqlstr = f"""
+INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, otx_road, inx_road)
+SELECT event_int, face_name, MAX(otx_road), MAX(inx_road)
+FROM {pidgin_road_s_agg_tablename}
+WHERE error_message IS NULL
+GROUP BY event_int, face_name
+;
+"""
+    assert road_sqlstr == expected_road_sqlstr
+
+
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_tag():
+    # ESTABLISH
+    dimen = pidgin_tag_str()
+    # WHEN
+    tag_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+
+    # THEN
+    pidgin_tag_s_agg_tablename = prime_tbl(dimen, "s", "agg")
+    pidgin_core_s_vld_tablename = prime_tbl(dimen, "s", "vld")
+    expected_tag_sqlstr = f"""
+INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, otx_tag, inx_tag)
+SELECT event_int, face_name, MAX(otx_tag), MAX(inx_tag)
+FROM {pidgin_tag_s_agg_tablename}
+WHERE error_message IS NULL
+GROUP BY event_int, face_name
+;
+"""
+    assert tag_sqlstr == expected_tag_sqlstr
