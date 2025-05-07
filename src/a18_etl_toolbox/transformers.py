@@ -511,7 +511,7 @@ def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     cursor.execute(sqlstr)
 
 
-def insert_pidgin_core_raw_to_core_agg_table(cursor: sqlite3_Cursor):
+def insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
     sqlstr = f"""
@@ -534,13 +534,13 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def etl_sound_agg_tables_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
+def etl_sound_agg_tables_to_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
 
 
 def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
     update_inconsistency_pidgin_core_raw_table(cursor)
-    insert_pidgin_core_raw_to_core_agg_table(cursor)
+    insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     update_inconsistency_pidgin_sound_agg_tables(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 

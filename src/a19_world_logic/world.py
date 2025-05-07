@@ -20,7 +20,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_agg_tables_to_brick_valid_tables,
     etl_brick_valid_tables_to_sound_raw_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
-    etl_sound_agg_tables_to_pidgin_core_agg_table,
+    etl_sound_agg_tables_to_pidgin_core_raw_table,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
     etl_brick_raw_db_to_brick_raw_df,
     etl_brick_agg_tables_to_brick_agg_dfs,
@@ -330,7 +330,7 @@ class WorldUnit:
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
-        etl_sound_agg_tables_to_pidgin_core_agg_table(cursor)
+        etl_sound_agg_tables_to_pidgin_core_raw_table(cursor)
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
 
         # identify all idea data that has conflicting face_name/event_int uniqueness
