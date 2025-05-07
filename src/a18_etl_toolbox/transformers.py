@@ -507,10 +507,22 @@ def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
         cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
     )
     cursor.execute(sqlstr)
-    print(sqlstr)
 
 
-def etl_sound_agg_to_pidgin_core_tables(cursor: sqlite3_Cursor):
+def insert_pidgin_core_raw_to_core_agg_table(cursor: sqlite3_Cursor):
+    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+    pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+    sqlstr = f"""
+INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_word)
+SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM {pidgin_core_s_raw_tablename}
+WHERE error_message IS NULL
+GROUP BY face_name
+"""
+    cursor.execute(sqlstr)
+
+
+def etl_sound_agg_tables_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
 
 

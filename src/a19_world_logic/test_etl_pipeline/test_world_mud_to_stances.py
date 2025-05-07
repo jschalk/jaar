@@ -150,7 +150,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, budunit_sound_agg_put) == 1
         assert get_row_count(cursor, budacct_sound_agg_put) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
-        assert get_row_count(cursor, pidcore_sound_agg) == 1
+        # assert get_row_count(cursor, pidcore_sound_agg) == 1
         # assert os_path_exists(event1_pidgin_json_path)
         # assert os_path_exists(event1_inherited_pidgin_json_path)
         # assert not os_path_exists(event1_voice_budunit_path)

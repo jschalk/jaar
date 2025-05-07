@@ -296,8 +296,8 @@ VALUES
         print(rows)
         assert len(rows) == 2
         assert rows == [
-            (event1, sue_str, bob_str, bob_inx, None, None, None),
-            (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx),
+            (event1, sue_str, bob_str, bob_inx, None, None, None, None),
+            (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
         ]
 
         select_agg_sqlstr = f"""SELECT * FROM {budacct_s_put_agg_tblname};"""
@@ -464,10 +464,10 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, bob_str, bob_inx, None, None, None),
-            (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx),
-            (event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx),
-            (event7, yao_str, bob_str, yao_inx, rdx, rdx, ukx),
+            (event1, sue_str, bob_str, bob_inx, None, None, None, None),
+            (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
+            (event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None),
+            (event7, yao_str, bob_str, yao_inx, rdx, rdx, ukx, None),
         ]
 
         select_agg_sqlstr = f"""SELECT * FROM {budacct_s_put_agg_tblname};"""

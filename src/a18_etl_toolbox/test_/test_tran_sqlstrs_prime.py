@@ -199,7 +199,15 @@ def create_pf_sound_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_pf_sound_agg_table_sqlstr(x_dimen):
+def create_pidgin_sound_agg_table_sqlstr(x_dimen):
+    tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
+    columns = get_all_dimen_columns_set(x_dimen)
+    columns.add("error_message")
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+
+
+def create_fisc_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
@@ -328,7 +336,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         s_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
         s_vld_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
         expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_pidgin_sound_agg_table_sqlstr(x_dimen)
         expected_s_vld_sqlstr = create_pf_sound_vld_table_sqlstr(x_dimen)
 
         abbv7 = get_dimen_abbv7(x_dimen)
@@ -388,7 +396,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         v_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
         v_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
         expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_fisc_sound_agg_table_sqlstr(x_dimen)
         expected_v_raw_sqlstr = create_fisc_voice_raw_table_sqlstr(x_dimen)
         expected_v_agg_sqlstr = create_fisc_voice_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
