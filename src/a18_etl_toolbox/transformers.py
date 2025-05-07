@@ -83,6 +83,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_update_inconsist_pidgin_core_agg_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -520,6 +521,11 @@ WHERE error_message IS NULL
 GROUP BY face_name
 """
     cursor.execute(sqlstr)
+
+
+def update_inconsistency_pidgin_sound_agg_tables(cursor: sqlite3_Cursor):
+    for dimen in get_quick_pidgens_column_ref():
+        cursor.execute(create_update_inconsist_pidgin_core_agg_sqlstr(dimen))
 
 
 def etl_sound_agg_tables_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):

@@ -27,7 +27,9 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDROAD_SOUND_AGG_SQLSTR,
     CREATE_PIDNAME_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_RAW_SQLSTR,
+    CREATE_PIDCORE_SOUND_AGG_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_update_inconsist_pidgin_core_agg_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
     insert_sound_raw_selects_into_sound_agg_tables,
@@ -36,6 +38,7 @@ from src.a18_etl_toolbox.transformers import (
     insert_pidgin_sound_agg_into_pidgin_core_raw_table,
     update_inconsistency_pidgin_core_raw_table,
     insert_pidgin_core_raw_to_core_agg_table,
+    update_inconsistency_pidgin_sound_agg_tables,
     etl_sound_agg_tables_to_pidgin_core_agg_table,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -294,6 +297,163 @@ VALUES
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [(bob_str, rdx, rdx, ukx), (yao_str, rdx, rdx, ukx)]
+
+
+def test_update_inconsistency_pidgin_sound_agg_tables_ReturnsObj_PopulatesTableCorrectly_Scenario0():
+    # ESTABLISH
+    a23_str = "accord23"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    yao_inx = "Yaoito"
+    bob_inx = "Bobito"
+    rdx = ":"
+    other_bridge = "/"
+    ukx = "Unknown"
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event7 = 7
+    error_message = "Inconsistent pidgin core data"
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        cursor.execute(CREATE_PIDROAD_SOUND_AGG_SQLSTR)
+        pidroad_dimen = pidgin_road_str()
+        pidgin_road_s_agg_tablename = create_prime_tablename(pidroad_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_road_s_agg_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {otx_road_str()}
+, {inx_road_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL)
+, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        cursor.execute(CREATE_PIDCORE_SOUND_AGG_SQLSTR)
+        pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_core_s_agg_tablename} (
+  {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ('{yao_str}', '{rdx}', '{rdx}', '{ukx}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_road_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+
+        # WHEN
+        sqlstr = create_update_inconsist_pidgin_core_agg_sqlstr(pidroad_dimen)
+        print(f"{sqlstr=}")
+        cursor.execute(sqlstr)
+
+        # THEN
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 5
+        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_road_s_agg_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(rows)
+        assert rows == [
+            (1, sue_str, yao_str, yao_inx, None, None, None, error_message),
+            (1, sue_str, bob_str, bob_inx, None, None, None, error_message),
+            (1, sue_str, bob_str, bob_str, None, "/", None, error_message),
+            (2, sue_str, sue_str, sue_str, ":", ":", "Unknown", error_message),
+            (5, sue_str, bob_str, bob_inx, ":", ":", "Unknown", error_message),
+            (7, yao_str, yao_str, yao_inx, ":", ":", "Unknown", None),
+        ]
+
+
+def test_update_inconsistency_pidgin_sound_agg_tables_ReturnsObj_PopulatesTableCorrectly_Scenario0():
+    # ESTABLISH
+    a23_str = "accord23"
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    yao_inx = "Yaoito"
+    bob_inx = "Bobito"
+    rdx = ":"
+    other_bridge = "/"
+    ukx = "Unknown"
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event7 = 7
+    error_message = "Inconsistent pidgin core data"
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        pidroad_dimen = pidgin_road_str()
+        pidgin_road_s_agg_tablename = create_prime_tablename(pidroad_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_road_s_agg_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {otx_road_str()}
+, {inx_road_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL)
+, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_core_s_agg_tablename} (
+  {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ('{yao_str}', '{rdx}', '{rdx}', '{ukx}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_road_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+
+        # WHEN
+        update_inconsistency_pidgin_sound_agg_tables(cursor)
+
+        # THEN
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 5
+        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_road_s_agg_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(rows)
+        assert rows == [
+            (1, sue_str, yao_str, yao_inx, None, None, None, error_message),
+            (1, sue_str, bob_str, bob_inx, None, None, None, error_message),
+            (1, sue_str, bob_str, bob_str, None, "/", None, error_message),
+            (2, sue_str, sue_str, sue_str, ":", ":", "Unknown", error_message),
+            (5, sue_str, bob_str, bob_inx, ":", ":", "Unknown", error_message),
+            (7, yao_str, yao_str, yao_inx, ":", ":", "Unknown", None),
+        ]
 
 
 # TODO create test of pidgin_core_agg updating error_message in pidgin_sound_agg_tables

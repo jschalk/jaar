@@ -217,6 +217,9 @@ def create_fisc_sound_agg_table_sqlstr(x_dimen):
 def create_pf_sound_vld_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
     columns = get_all_dimen_columns_set(x_dimen)
+    columns.remove(otx_bridge_str())
+    columns.remove(inx_bridge_str())
+    columns.remove(unknown_word_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -838,5 +841,6 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
 SELECT '{pidgin_s_agg_tablename}', face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM {pidgin_s_agg_tablename}
 GROUP BY face_name
+;
 """
     assert road_sqlstr == expected_road_sqlstr
