@@ -83,6 +83,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_update_inconsist_pidgin_dimen_agg_sqlstr,
+    create_insert_pidgin_sound_vld_table_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -507,11 +509,40 @@ def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
         cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
     )
     cursor.execute(sqlstr)
-    print(sqlstr)
 
 
-def etl_sound_agg_to_pidgin_core_tables(cursor: sqlite3_Cursor):
+def insert_pidgin_core_raw_to_core_agg_table(cursor: sqlite3_Cursor):
+    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+    pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+    sqlstr = f"""
+INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_word)
+SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+FROM {pidgin_core_s_raw_tablename}
+WHERE error_message IS NULL
+GROUP BY face_name
+"""
+    cursor.execute(sqlstr)
+
+
+def update_inconsistency_pidgin_sound_agg_tables(cursor: sqlite3_Cursor):
+    for dimen in get_quick_pidgens_column_ref():
+        cursor.execute(create_update_inconsist_pidgin_dimen_agg_sqlstr(dimen))
+
+
+def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):
+    for dimen in get_quick_pidgens_column_ref():
+        cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
+
+
+def etl_sound_agg_tables_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
+
+
+def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
+    update_inconsistency_pidgin_core_raw_table(cursor)
+    insert_pidgin_core_raw_to_core_agg_table(cursor)
+    update_inconsistency_pidgin_sound_agg_tables(cursor)
+    insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
 def etl_brick_valid_table_into_prime_table(

@@ -52,6 +52,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_insert_pidgin_sound_vld_table_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -199,7 +200,15 @@ def create_pf_sound_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_pf_sound_agg_table_sqlstr(x_dimen):
+def create_pidgin_sound_agg_table_sqlstr(x_dimen):
+    tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
+    columns = get_all_dimen_columns_set(x_dimen)
+    columns.add("error_message")
+    columns = get_default_sorted_list(columns)
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+
+
+def create_fisc_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
@@ -209,6 +218,9 @@ def create_pf_sound_agg_table_sqlstr(x_dimen):
 def create_pf_sound_vld_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
     columns = get_all_dimen_columns_set(x_dimen)
+    columns.remove(otx_bridge_str())
+    columns.remove(inx_bridge_str())
+    columns.remove(unknown_word_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -328,7 +340,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         s_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
         s_vld_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
         expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_pidgin_sound_agg_table_sqlstr(x_dimen)
         expected_s_vld_sqlstr = create_pf_sound_vld_table_sqlstr(x_dimen)
 
         abbv7 = get_dimen_abbv7(x_dimen)
@@ -388,7 +400,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         v_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
         v_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
         expected_s_raw_sqlstr = create_pf_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_pf_sound_agg_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_fisc_sound_agg_table_sqlstr(x_dimen)
         expected_v_raw_sqlstr = create_fisc_voice_raw_table_sqlstr(x_dimen)
         expected_v_agg_sqlstr = create_fisc_voice_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
@@ -827,8 +839,49 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
     # THEN
     pidgin_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     expected_road_sqlstr = f"""INSERT INTO pidgin_core_s_raw (source_dimen, face_name, otx_bridge, inx_bridge, unknown_word)
-SELECT '{pidgin_s_agg_tablename}', face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_word
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name
+GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
+;
 """
     assert road_sqlstr == expected_road_sqlstr
+
+
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_road():
+    # ESTABLISH
+    dimen = pidgin_road_str()
+    # WHEN
+    road_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+
+    # THEN
+    pidgin_road_s_agg_tablename = prime_tbl(dimen, "s", "agg")
+    pidgin_core_s_vld_tablename = prime_tbl(dimen, "s", "vld")
+    expected_road_sqlstr = f"""
+INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, otx_road, inx_road)
+SELECT event_int, face_name, MAX(otx_road), MAX(inx_road)
+FROM {pidgin_road_s_agg_tablename}
+WHERE error_message IS NULL
+GROUP BY event_int, face_name
+;
+"""
+    assert road_sqlstr == expected_road_sqlstr
+
+
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_tag():
+    # ESTABLISH
+    dimen = pidgin_tag_str()
+    # WHEN
+    tag_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+
+    # THEN
+    pidgin_tag_s_agg_tablename = prime_tbl(dimen, "s", "agg")
+    pidgin_core_s_vld_tablename = prime_tbl(dimen, "s", "vld")
+    expected_tag_sqlstr = f"""
+INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, otx_tag, inx_tag)
+SELECT event_int, face_name, MAX(otx_tag), MAX(inx_tag)
+FROM {pidgin_tag_s_agg_tablename}
+WHERE error_message IS NULL
+GROUP BY event_int, face_name
+;
+"""
+    assert tag_sqlstr == expected_tag_sqlstr
