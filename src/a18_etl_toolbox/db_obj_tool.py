@@ -138,3 +138,7 @@ def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
         row_offi_time = fiscash_row[1]
         offi_times_set.add(row_offi_time)
     fisc_dict["offi_times"] = list(offi_times_set)
+
+
+def get_pidgin_dict_from_db(cursor: sqlite3_Cursor) -> dict[str,]:
+    return {}
