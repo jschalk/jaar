@@ -317,7 +317,6 @@ def pidginunit_shop(
 
 def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_event_int = x_dict.get("event_int")
-    print(f"{x_event_int=}")
     x_face_name = x_dict.get("face_name")
     x_otx_bridge = x_dict.get("otx_bridge")
     x_inx_bridge = x_dict.get("inx_bridge")
@@ -397,7 +396,6 @@ def _add_pidgin_core_keys(
     inx_bridge: str,
     unknown_word: str,
 ) -> dict:
-    print(f"{event_int=}")
     map_dict["event_int"] = event_int
     map_dict["face_name"] = face_name
     map_dict["otx_bridge"] = otx_bridge
