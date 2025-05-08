@@ -24,6 +24,8 @@ from src.a16_pidgin_logic._utils.example_pidgins import (
 
 
 def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:
+    map_dict.pop(event_int_str())
+    map_dict.pop(face_name_str())
     map_dict.pop(otx_bridge_str())
     map_dict.pop(inx_bridge_str())
     map_dict.pop(unknown_word_str())
@@ -102,14 +104,14 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     # print(f"{sue_json=}")
-    assert sue_json.find("tagmap") == 535
-    assert sue_json.find(otx_bridge_str()) == 357
+    assert sue_json.find("tagmap") == 403
+    assert sue_json.find(otx_bridge_str()) == 269
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_event_int = 77
+    sue_event_int = 7
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -143,7 +145,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
 def test_get_pidginunit_from_json_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_event_int = 77
+    sue_event_int = 7
     x_unknown_word = "UnknownWord"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"

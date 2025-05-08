@@ -240,22 +240,10 @@ class PidginUnit:
         self.roadmap.del_tag(x_otx)
 
     def get_dict(self) -> dict:
-        x_namemap = self.namemap.get_dict()
-        x_labelmap = self.labelmap.get_dict()
-        x_tagmap = self.tagmap.get_dict()
-        x_roadmap = self.roadmap.get_dict()
-        x_namemap.pop("otx_bridge")
-        x_labelmap.pop("otx_bridge")
-        x_tagmap.pop("otx_bridge")
-        x_roadmap.pop("otx_bridge")
-        x_namemap.pop("inx_bridge")
-        x_labelmap.pop("inx_bridge")
-        x_tagmap.pop("inx_bridge")
-        x_roadmap.pop("inx_bridge")
-        x_namemap.pop("unknown_word")
-        x_labelmap.pop("unknown_word")
-        x_tagmap.pop("unknown_word")
-        x_roadmap.pop("unknown_word")
+        x_namemap = _get_rid_of_pidgin_core_keys(self.namemap.get_dict())
+        x_labelmap = _get_rid_of_pidgin_core_keys(self.labelmap.get_dict())
+        x_tagmap = _get_rid_of_pidgin_core_keys(self.tagmap.get_dict())
+        x_roadmap = _get_rid_of_pidgin_core_keys(self.roadmap.get_dict())
 
         return {
             "face_name": self.face_name,
@@ -328,6 +316,9 @@ def pidginunit_shop(
 
 
 def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
+    x_event_int = x_dict.get("event_int")
+    print(f"{x_event_int=}")
+    x_face_name = x_dict.get("face_name")
     x_otx_bridge = x_dict.get("otx_bridge")
     x_inx_bridge = x_dict.get("inx_bridge")
     x_unknown_word = x_dict.get("unknown_word")
@@ -335,26 +326,46 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     labelmap_dict = x_dict.get("labelmap")
     tagmap_dict = x_dict.get("tagmap")
     roadmap_dict = x_dict.get("roadmap")
-    namemap_dict["otx_bridge"] = x_otx_bridge
-    labelmap_dict["otx_bridge"] = x_otx_bridge
-    tagmap_dict["otx_bridge"] = x_otx_bridge
-    roadmap_dict["otx_bridge"] = x_otx_bridge
-    namemap_dict["inx_bridge"] = x_inx_bridge
-    labelmap_dict["inx_bridge"] = x_inx_bridge
-    tagmap_dict["inx_bridge"] = x_inx_bridge
-    roadmap_dict["inx_bridge"] = x_inx_bridge
-    namemap_dict["unknown_word"] = x_unknown_word
-    labelmap_dict["unknown_word"] = x_unknown_word
-    tagmap_dict["unknown_word"] = x_unknown_word
-    roadmap_dict["unknown_word"] = x_unknown_word
+    namemap_dict = _add_pidgin_core_keys(
+        namemap_dict,
+        x_event_int,
+        x_face_name,
+        x_otx_bridge,
+        x_inx_bridge,
+        x_unknown_word,
+    )
+    labelmap_dict = _add_pidgin_core_keys(
+        labelmap_dict,
+        x_event_int,
+        x_face_name,
+        x_otx_bridge,
+        x_inx_bridge,
+        x_unknown_word,
+    )
+    tagmap_dict = _add_pidgin_core_keys(
+        tagmap_dict,
+        x_event_int,
+        x_face_name,
+        x_otx_bridge,
+        x_inx_bridge,
+        x_unknown_word,
+    )
+    roadmap_dict = _add_pidgin_core_keys(
+        roadmap_dict,
+        x_event_int,
+        x_face_name,
+        x_otx_bridge,
+        x_inx_bridge,
+        x_unknown_word,
+    )
     x_namemap = get_namemap_from_dict(namemap_dict)
     x_labelmap = get_labelmap_from_dict(labelmap_dict)
     x_tagmap = get_tagmap_from_dict(tagmap_dict)
     x_roadmap = get_roadmap_from_dict(roadmap_dict)
     x_roadmap.tagmap = x_tagmap
     return PidginUnit(
-        face_name=x_dict.get("face_name"),
-        event_int=x_dict.get("event_int"),
+        face_name=x_face_name,
+        event_int=x_event_int,
         otx_bridge=x_otx_bridge,
         inx_bridge=x_inx_bridge,
         unknown_word=x_unknown_word,
@@ -367,6 +378,32 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
 
 def get_pidginunit_from_json(x_json: str) -> PidginUnit:
     return get_pidginunit_from_dict(get_dict_from_json(x_json))
+
+
+def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:
+    map_dict.pop("event_int")
+    map_dict.pop("face_name")
+    map_dict.pop("otx_bridge")
+    map_dict.pop("inx_bridge")
+    map_dict.pop("unknown_word")
+    return map_dict
+
+
+def _add_pidgin_core_keys(
+    map_dict: dict,
+    event_int: int,
+    face_name: str,
+    otx_bridge: str,
+    inx_bridge: str,
+    unknown_word: str,
+) -> dict:
+    print(f"{event_int=}")
+    map_dict["event_int"] = event_int
+    map_dict["face_name"] = face_name
+    map_dict["otx_bridge"] = otx_bridge
+    map_dict["inx_bridge"] = inx_bridge
+    map_dict["unknown_word"] = unknown_word
+    return map_dict
 
 
 class PidginCoreAttrConflictException(Exception):
