@@ -6,7 +6,7 @@ from src.a04_reason_logic.reason_item import (
     factunits_get_from_dict,
     get_factunit_from_tuple,
 )
-from src.a01_word_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
 
 
 def test_FactUnit_exists():

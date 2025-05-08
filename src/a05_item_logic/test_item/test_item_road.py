@@ -4,7 +4,7 @@ from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
     factunit_shop,
 )
-from src.a01_word_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
 
 
 def test_ItemUnit_find_replace_road_CorrectlyModifies_parent_road():

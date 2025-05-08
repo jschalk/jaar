@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     get_default_fisc_tag as root_tag,
     default_bridge_if_None,
     get_road_from_doar,

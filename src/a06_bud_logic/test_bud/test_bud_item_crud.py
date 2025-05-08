@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import default_bridge_if_None
+from src.a01_road_logic.road import default_bridge_if_None
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import factunit_shop
 from src.a05_item_logic.healer import healerlink_shop

@@ -5,7 +5,7 @@ from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
     premises_get_from_dict,
 )
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     get_default_fisc_tag as root_tag,
     create_road,
     find_replace_road_key_dict,

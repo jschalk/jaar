@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.a01_word_logic.road import default_bridge_if_None, OwnerName, EventInt
+from src.a01_road_logic.road import default_bridge_if_None, OwnerName, EventInt
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
     MapCore,

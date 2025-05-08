@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road
+from src.a01_road_logic.road import create_road
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_tool import (
     get_bud_root_facts_dict,

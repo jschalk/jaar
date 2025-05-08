@@ -31,7 +31,7 @@ from src.a02_finance_logic.deal import (
     tranbook_shop,
     get_tranbook_from_dict,
 )
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     default_bridge_if_None,
     OwnerName,
     RoadUnit,

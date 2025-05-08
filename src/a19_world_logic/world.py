@@ -5,7 +5,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_set_if_None,
 )
 from src.a02_finance_logic.deal import TimeLinePoint, TimeConversion
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     FaceName,
     EventInt,
     FiscTag,

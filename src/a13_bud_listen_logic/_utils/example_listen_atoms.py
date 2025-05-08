@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road, FiscTag
+from src.a01_road_logic.road import create_road, FiscTag
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,

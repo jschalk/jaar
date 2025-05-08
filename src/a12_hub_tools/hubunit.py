@@ -21,7 +21,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     default_money_magnitude_if_None,
 )
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     OwnerName,
     FiscTag,
     TagUnit,

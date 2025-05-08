@@ -4,7 +4,7 @@ from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_mstr_table_name,
 )
 from src.a08_bud_atom_logic.atom import BudAtom
-from src.a01_word_logic.road import RoadUnit
+from src.a01_road_logic.road import RoadUnit
 
 # from src.a00_data_toolbox.sqlite import (
 #     sqlite_to_python,

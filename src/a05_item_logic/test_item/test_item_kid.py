@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
 from src.a05_item_logic.item import itemunit_shop
 from pytest import raises as pytest_raises
 

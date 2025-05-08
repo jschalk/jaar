@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import get_terminus_tag, get_parent_road
+from src.a01_road_logic.road import get_terminus_tag, get_parent_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import factunit_shop
 from src.a05_item_logic.item import itemunit_shop

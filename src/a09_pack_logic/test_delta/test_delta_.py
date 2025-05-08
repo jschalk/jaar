@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road, get_default_fisc_tag as root_tag
+from src.a01_road_logic.road import create_road, get_default_fisc_tag as root_tag
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,

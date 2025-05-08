@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json, get_dict_from_json
-from src.a01_word_logic.road import default_bridge_if_None
+from src.a01_road_logic.road import default_bridge_if_None
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_team import teamunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop

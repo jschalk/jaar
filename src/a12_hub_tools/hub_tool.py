@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
 )
 from src.a00_data_toolbox.dict_toolbox import get_empty_list_if_None
-from src.a01_word_logic.road import OwnerName, TagUnit, EventInt, RoadUnit
+from src.a01_road_logic.road import OwnerName, TagUnit, EventInt, RoadUnit
 from src.a02_finance_logic.deal import (
     DealUnit,
     TimeLinePoint,

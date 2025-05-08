@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import get_default_fisc_tag as root_tag
+from src.a01_road_logic.road import get_default_fisc_tag as root_tag
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.example_buds import (

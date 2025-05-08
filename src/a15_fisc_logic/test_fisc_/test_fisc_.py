@@ -4,7 +4,7 @@ from src.a02_finance_logic.finance_config import (
     default_respect_bit_if_None,
     filter_penny,
 )
-from src.a01_word_logic.road import default_bridge_if_None
+from src.a01_road_logic.road import default_bridge_if_None
 from src.a02_finance_logic.deal import tranbook_shop
 from src.a05_item_logic.healer import healerlink_shop
 from src.a05_item_logic.item import itemunit_shop
