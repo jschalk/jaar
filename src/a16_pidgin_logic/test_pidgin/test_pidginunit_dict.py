@@ -23,6 +23,13 @@ from src.a16_pidgin_logic._utils.example_pidgins import (
 )
 
 
+def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:
+    map_dict.pop(otx_bridge_str())
+    map_dict.pop(inx_bridge_str())
+    map_dict.pop(unknown_word_str())
+    return map_dict
+
+
 def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
@@ -32,16 +39,21 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     sue_dict = sue_pidginunit.get_dict()
 
     # THEN
+    print(sue_dict)
     assert sue_dict
     assert sue_dict.get(face_name_str()) == sue_str
     assert sue_dict.get(event_int_str()) == sue_pidginunit.event_int
     assert sue_dict.get(otx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(inx_bridge_str()) == default_bridge_if_None()
     assert sue_dict.get(unknown_word_str()) == default_unknown_word_if_None()
-    assert sue_dict.get("namemap") == sue_pidginunit.namemap.get_dict()
-    assert sue_dict.get("labelmap") == sue_pidginunit.labelmap.get_dict()
-    assert sue_dict.get("tagmap") == sue_pidginunit.tagmap.get_dict()
-    assert sue_dict.get("roadmap") == sue_pidginunit.roadmap.get_dict()
+    sue_namemap = sue_pidginunit.namemap.get_dict()
+    sue_labelmap = sue_pidginunit.labelmap.get_dict()
+    sue_tagmap = sue_pidginunit.tagmap.get_dict()
+    sue_roadmap = sue_pidginunit.roadmap.get_dict()
+    assert sue_dict.get("namemap") == _get_rid_of_pidgin_core_keys(sue_namemap)
+    assert sue_dict.get("labelmap") == _get_rid_of_pidgin_core_keys(sue_labelmap)
+    assert sue_dict.get("tagmap") == _get_rid_of_pidgin_core_keys(sue_tagmap)
+    assert sue_dict.get("roadmap") == _get_rid_of_pidgin_core_keys(sue_roadmap)
 
 
 def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
@@ -66,10 +78,14 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     assert sue_dict.get(otx_bridge_str()) == slash_otx_bridge
     assert sue_dict.get(inx_bridge_str()) == colon_inx_bridge
     assert sue_dict.get(unknown_word_str()) == x_unknown_word
-    assert sue_dict.get("namemap") == sue_pidginunit.namemap.get_dict()
-    assert sue_dict.get("labelmap") == sue_pidginunit.labelmap.get_dict()
-    assert sue_dict.get("tagmap") == sue_pidginunit.tagmap.get_dict()
-    assert sue_dict.get("roadmap") == sue_pidginunit.roadmap.get_dict()
+    sue_namemap = sue_pidginunit.namemap.get_dict()
+    sue_labelmap = sue_pidginunit.labelmap.get_dict()
+    sue_tagmap = sue_pidginunit.tagmap.get_dict()
+    sue_roadmap = sue_pidginunit.roadmap.get_dict()
+    assert sue_dict.get("namemap") == _get_rid_of_pidgin_core_keys(sue_namemap)
+    assert sue_dict.get("labelmap") == _get_rid_of_pidgin_core_keys(sue_labelmap)
+    assert sue_dict.get("tagmap") == _get_rid_of_pidgin_core_keys(sue_tagmap)
+    assert sue_dict.get("roadmap") == _get_rid_of_pidgin_core_keys(sue_roadmap)
 
 
 def test_PidginUnit_get_json_ReturnsObj():
@@ -86,8 +102,8 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     # print(f"{sue_json=}")
-    assert sue_json.find("tagmap") == 766
-    assert sue_json.find(otx_bridge_str()) == 224
+    assert sue_json.find("tagmap") == 535
+    assert sue_json.find(otx_bridge_str()) == 357
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
