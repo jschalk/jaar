@@ -241,13 +241,13 @@ def get_ex2_br00004_df() -> DataFrame:
     x_df.loc[9] = [ACCORD23_STR, "December", 306]
     x_df.loc[10] = [ACCORD23_STR, "January", 337]
     x_df.loc[11] = [ACCORD23_STR, "February", 365]
-    x_df.loc[12] = (JEFFY45_STR, "Fresh", 25)
+    x_df.loc[12] = (JEFFY45_STR, "Fredrick", 25)
     x_df.loc[13] = (JEFFY45_STR, "Geo", 50)
     x_df.loc[14] = (JEFFY45_STR, "Holocene", 75)
     x_df.loc[15] = (JEFFY45_STR, "Iguana", 100)
-    x_df.loc[16] = (JEFFY45_STR, "Jinping", 125)
+    x_df.loc[16] = (JEFFY45_STR, "Jesus", 125)
     x_df.loc[17] = (JEFFY45_STR, "Keel", 150)
-    x_df.loc[18] = (JEFFY45_STR, "Lebron", 175)
+    x_df.loc[18] = (JEFFY45_STR, "LeBron", 175)
     x_df.loc[19] = (JEFFY45_STR, "Mikayla", 200)
     x_df.loc[20] = (JEFFY45_STR, "Ninon", 225)
     x_df.loc[21] = (JEFFY45_STR, "Obama", 250)
@@ -274,7 +274,7 @@ def get_ex2_br00005_df() -> DataFrame:
     x_df.loc[8] = [JEFFY45_STR, "Baileyday", 1]
     x_df.loc[9] = [JEFFY45_STR, "Chiday", 2]
     x_df.loc[10] = [JEFFY45_STR, "Danceday", 3]
-    x_df.loc[11] = [JEFFY45_STR, "Elonday", 4]
+    x_df.loc[11] = [JEFFY45_STR, "Eastday", 4]
     return x_df
 
 

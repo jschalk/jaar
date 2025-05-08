@@ -199,17 +199,17 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
     five_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
     five_hour_length = 72
     five_month_length = 25
-    five_weekday_list = ["Anaday", "Baileyday", "Chiday", "Danceday", "Elonday"]
+    five_weekday_list = ["Anaday", "Baileyday", "Chiday", "Danceday", "Eastday"]
     # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
     # c_mons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
     five_months_list = [
-        "Fresh",
+        "Fredrick",
         "Geo",
         "Holocene",
         "Iguana",
-        "Jinping",
+        "Jesus",
         "Keel",
-        "Lebron",
+        "LeBron",
         "Mikayla",
         "Ninon",
         "Obama",
@@ -244,9 +244,9 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
     x_months_config = five_dict.get(months_config_str())
     gen_months = [mon_config[0] for mon_config in x_months_config]
     assert gen_months == five_months_list
-    assert x_months_config[0][0] == "Fresh"
+    assert x_months_config[0][0] == "Fredrick"
     assert x_months_config[0][1] == 25
-    assert x_months_config[6][0] == "Lebron"
+    assert x_months_config[6][0] == "LeBron"
     assert x_months_config[6][1] == 175
     assert x_months_config[13][0] == "Simon"
     assert x_months_config[13][1] == 350

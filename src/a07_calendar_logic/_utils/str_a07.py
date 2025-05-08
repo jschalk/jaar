@@ -72,3 +72,11 @@ def c400_number_str() -> str:
 
 def yr1_jan1_offset_str() -> str:
     return "yr1_jan1_offset"
+
+
+def creg_str() -> str:
+    return "creg"
+
+
+def five_str() -> str:
+    return "five"
