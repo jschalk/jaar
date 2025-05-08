@@ -437,7 +437,7 @@ class HubUnit:
             raise get_keep_roadsException(x_str)
         owner_healer_dict = x_gut_bud._healers_dict.get(self.owner_name)
         if owner_healer_dict is None:
-            return get_empty_set_if_None(None)
+            return get_empty_set_if_None()
         keep_roads = x_gut_bud._healers_dict.get(self.owner_name).keys()
         return get_empty_set_if_None(keep_roads)
 

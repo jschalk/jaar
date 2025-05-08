@@ -95,7 +95,7 @@ def rivercycle_shop(
         hubunit=hubunit,
         number=number,
         keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
-        riverbooks=get_empty_dict_if_None(None),
+        riverbooks=get_empty_dict_if_None(),
     )
 
 

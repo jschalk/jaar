@@ -5,11 +5,11 @@ from io import StringIO as io_StringIO
 from collections import deque
 
 
-def get_empty_dict_if_None(x_dict: dict) -> dict:
+def get_empty_dict_if_None(x_dict: dict = None) -> dict:
     return {} if x_dict is None else x_dict
 
 
-def get_empty_set_if_None(x_set: set) -> set:
+def get_empty_set_if_None(x_set: set = None) -> set:
     return set() if x_set is None else x_set
 
 
