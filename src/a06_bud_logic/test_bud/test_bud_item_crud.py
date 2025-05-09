@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import default_bridge_if_None
+from src.a01_road_logic.road import default_bridge_if_None, create_road, to_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import factunit_shop
 from src.a05_item_logic.healer import healerlink_shop
@@ -11,7 +11,7 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_item_RaisesErrorWhen_parent_road_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
-    invalid_roottag_swim_road = "swimming"
+    invalid_roottag_swim_road = create_road("swimming")
     assert invalid_roottag_swim_road != zia_bud.fisc_tag
     casa_str = "casa"
 
@@ -62,7 +62,7 @@ def test_BudUnit_set_item_CorrectlySetsAttr():
     assert not zia_bud.itemroot._kids.get(casa_str)
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.fisc_tag)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=to_road(zia_bud.fisc_tag))
 
     # THEN
     print(f"{zia_bud.itemroot._kids.keys()=}")
@@ -77,7 +77,7 @@ def test_BudUnit_item_exists_ReturnsObj():
     assert zia_bud.item_exists(casa_road) is False
 
     # WHEN
-    zia_bud.set_item(itemunit_shop(casa_str), parent_road=zia_bud.fisc_tag)
+    zia_bud.set_item(itemunit_shop(casa_str), parent_road=to_road(zia_bud.fisc_tag))
 
     # THEN
     assert zia_bud.item_exists(casa_road)
@@ -196,7 +196,7 @@ def test_BudUnit_set_item_CanCreateMissingItemUnits():
 def test_BudUnit_del_item_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_road = sue_bud.fisc_tag
+    root_road = to_road(sue_bud.fisc_tag)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -246,7 +246,7 @@ def test_BudUnit_del_item_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_road = sue_bud.make_l1_road(sun_str)
     assert sue_bud.get_item_obj(new_sunday_road)
     new_sunday_item = sue_bud.get_item_obj(new_sunday_road)
-    assert new_sunday_item.parent_road == sue_bud.fisc_tag
+    assert new_sunday_item.parent_road == to_road(sue_bud.fisc_tag)
 
 
 def test_BudUnit_del_item_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -662,7 +662,7 @@ def test_BudUnit_edit_item_attr_DeletesItemUnit_awardlinks():
     yao_bud.add_acctunit(Xio_str)
 
     swim_str = "swim"
-    swim_road = yao_bud.make_road(yao_str, swim_str)
+    swim_road = yao_bud.make_l1_road(swim_str)
 
     yao_bud.set_l1_item(itemunit_shop(swim_str))
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
@@ -802,7 +802,7 @@ def test_BudUnit_get_item_obj_ReturnsItem():
     assert week_item.item_tag == week_str
 
     # WHEN
-    root_item = sue_bud.get_item_obj(road=sue_bud.fisc_tag)
+    root_item = sue_bud.get_item_obj(to_road(sue_bud.fisc_tag))
 
     # THEN
     assert root_item is not None
@@ -844,7 +844,7 @@ def test_BudUnit_item_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_bud.item_exists("") is False
     assert sue_bud.item_exists(None) is False
-    assert sue_bud.item_exists(sue_bud.fisc_tag)
+    assert sue_bud.item_exists(to_road(sue_bud.fisc_tag))
     assert sue_bud.item_exists(cat_road)
     assert sue_bud.item_exists(week_road)
     assert sue_bud.item_exists(casa_road)
@@ -861,7 +861,7 @@ def test_BudUnit_item_exists_ReturnsCorrectBool():
     assert sue_bud.item_exists(brazil_road)
     assert sue_bud.item_exists(texas_road)
     assert sue_bud.item_exists(oregon_road)
-    assert sue_bud.item_exists("B") is False
+    assert sue_bud.item_exists(to_road("B")) is False
     assert sue_bud.item_exists(sports_road) is False
     assert sue_bud.item_exists(swim_road) is False
     assert sue_bud.item_exists(idaho_road) is False

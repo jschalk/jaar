@@ -320,6 +320,8 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_face_name = x_dict.get("face_name")
     x_otx_bridge = x_dict.get("otx_bridge")
     x_inx_bridge = x_dict.get("inx_bridge")
+    print(f"{x_otx_bridge}")
+    print(f"{x_inx_bridge}")
     x_unknown_word = x_dict.get("unknown_word")
     namemap_dict = x_dict.get("namemap")
     labelmap_dict = x_dict.get("labelmap")

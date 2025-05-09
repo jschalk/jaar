@@ -1,4 +1,8 @@
-from src.a01_road_logic.road import create_road, get_default_fisc_tag as root_tag
+from src.a01_road_logic.road import (
+    create_road,
+    get_default_fisc_tag as root_tag,
+    to_road,
+)
 from src.a04_reason_logic.reason_item import reasonunit_shop, factunit_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
@@ -56,7 +60,7 @@ def test_bud_set_fisc_tag_CorrectlySetsAttr():
     assert yao_bud.owner_name == yao_str
     assert yao_bud.itemroot.item_tag == yao_bud.fisc_tag
     casa_item = yao_bud.get_item_obj(old_casa_road)
-    assert casa_item.parent_road == yao_bud.fisc_tag
+    assert casa_item.parent_road == to_road(yao_bud.fisc_tag)
     swim_item = yao_bud.get_item_obj(old_swim_road)
     assert swim_item.parent_road == old_casa_road
     assert yao_bud.fisc_tag == yao_bud.fisc_tag
@@ -72,7 +76,7 @@ def test_bud_set_fisc_tag_CorrectlySetsAttr():
     assert yao_bud.fisc_tag == x_fisc_tag
     assert yao_bud.itemroot.item_tag == x_fisc_tag
     casa_item = yao_bud.get_item_obj(new_casa_road)
-    assert casa_item.parent_road == x_fisc_tag
+    assert casa_item.parent_road == to_road(x_fisc_tag)
     swim_item = yao_bud.get_item_obj(new_swim_road)
     assert swim_item.parent_road == new_casa_road
 
@@ -205,3 +209,19 @@ def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     assert gen_time_factunit.pick == slash_8am_road
 
     assert casa_item.factunits.get(semicolon_time_road) is None
+
+
+def test_BudUnit_set_bridge_CorrectlySetsAttr():
+    # ESTABLISH
+    x_fisc_tag = "accord45"
+    slash_bridge = "/"
+    sue_str = "Sue"
+    sue_bud = budunit_shop(sue_str, x_fisc_tag, bridge=slash_bridge)
+    assert sue_bud.bridge == slash_bridge
+
+    # WHEN
+    at_tag_bridge = "@"
+    sue_bud.set_bridge(new_bridge=at_tag_bridge)
+
+    # THEN
+    assert sue_bud.bridge == at_tag_bridge

@@ -444,7 +444,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
     casa_str = "casa"
-    casa_road = yao_bud.make_road(yao_str, casa_str)
+    casa_road = yao_bud.make_l1_road(casa_str)
     yao_bud.set_l1_item(itemunit_shop(casa_str, pledge=True))
     assert len(yao_bud.get_agenda_dict()) == 1
 
@@ -481,7 +481,7 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     yao_bud = budunit_shop(yao_str)
     yao_bud.add_acctunit(yao_str)
     casa_str = "casa"
-    casa_road = yao_bud.make_road(yao_str, casa_str)
+    casa_road = yao_bud.make_l1_road(casa_str)
     yao_bud.set_l1_item(itemunit_shop(casa_str, pledge=True))
 
     sue_str = "Sue"

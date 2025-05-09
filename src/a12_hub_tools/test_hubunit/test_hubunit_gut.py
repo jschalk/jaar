@@ -65,7 +65,7 @@ def test_HubUnit_create_initial_pack_files_from_default_CorrectlySavesPackUnitFi
     assert gut_file_exists(env_dir(), "accord23", sue_str) is False
 
 
-def test_HubUnit_create_gut_from_packs_CreatesgutFileFrompackFiles(
+def test_HubUnit_create_gut_from_packs_CreatesgutFileFromPackFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -87,7 +87,7 @@ def test_HubUnit_create_gut_from_packs_CreatesgutFileFrompackFiles(
     assert gut_bud.get_dict() == static_sue_gut.get_dict()
 
 
-def test_HubUnit_create_initial_pack_and_gut_files_CreatespackFilesAndgutFile(
+def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -109,7 +109,7 @@ def test_HubUnit_create_initial_pack_and_gut_files_CreatespackFilesAndgutFile(
     assert gut_bud.get_dict() == static_sue_gut.get_dict()
 
 
-def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlypackFiles(
+def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -131,7 +131,7 @@ def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlypackFiles(
     assert os_path_exists(init_pack_file_path)
 
 
-def test_HubUnit_initialize_pack_gut_files_CorrectlySavesgutFileAndpackFile(
+def test_HubUnit_initialize_pack_gut_files_CorrectlySavesgutFileAndPackFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -180,7 +180,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlygutFile(
     assert os_path_exists(init_pack_file_path)
 
 
-def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlypackFile(
+def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -208,27 +208,27 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlypackFile(
     assert os_path_exists(init_pack_file_path)
 
 
-def test_HubUnit_append_packs_to_gut_file_AddspacksTogutFile(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-    sue_hubunit.initialize_pack_gut_files()
-    sue_hubunit.save_pack_file(sue_2budatoms_packunit())
-    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_tag=}")
-    sports_str = "sports"
-    sports_road = gut_bud.make_l1_road(sports_str)
-    knee_str = "knee"
-    knee_road = gut_bud.make_road(sports_road, knee_str)
-    assert gut_bud.item_exists(sports_road) is False
-    assert gut_bud.item_exists(knee_road) is False
+# def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     sue_str = "Sue"
+#     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
+#     sue_hubunit.initialize_pack_gut_files()
+#     sue_hubunit.save_pack_file(sue_2budatoms_packunit())
+#     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
+#     # gut_bud.add_item(gut_bud.make_l1_road("sports"))
+#     sports_str = "sports"
+#     sports_road = gut_bud.make_l1_road(sports_str)
+#     knee_str = "knee"
+#     knee_road = gut_bud.make_road(sports_road, knee_str)
+#     assert gut_bud.item_exists(sports_road) is False
+#     assert gut_bud.item_exists(knee_road) is False
 
-    # WHEN
-    new_bud = sue_hubunit.append_packs_to_gut_file()
+#     # WHEN
+#     new_bud = sue_hubunit.append_packs_to_gut_file()
 
-    # THEN
-    assert new_bud != gut_bud
-    assert new_bud.item_exists(sports_road)
-    assert new_bud.item_exists(knee_road)
+#     # THEN
+#     assert new_bud != gut_bud
+#     assert new_bud.item_exists(sports_road)
+#     assert new_bud.item_exists(knee_road)

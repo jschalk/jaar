@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json, get_dict_from_json
-from src.a01_road_logic.road import default_bridge_if_None
+from src.a01_road_logic.road import default_bridge_if_None, to_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_team import teamunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop
@@ -18,7 +18,7 @@ from src.a06_bud_logic._utils.example_buds import (
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_get_dict_ReturnsDictObject():
+def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_bud = budunit_v001()
     day_hour_str = "day_hour"
@@ -84,14 +84,15 @@ def test_BudUnit_get_dict_ReturnsDictObject():
     assert yao_bud_originhold["importance"] == 1
 
 
-def test_BudUnit_get_dict_ReturnsDictWith_itemroot_teamunit():
+def test_BudUnit_get_dict_ReturnsObj_Scenario2_itemroot_teamunit():
     # ESTABLISH
     run_str = "runners"
     sue_bud = budunit_shop("Sue")
     x_teamunit = teamunit_shop()
     x_teamunit.set_teamlink(team_title=run_str)
-    sue_bud.edit_item_attr(sue_bud.fisc_tag, teamunit=x_teamunit)
-    root_item = sue_bud.get_item_obj(sue_bud.fisc_tag)
+    root_road = to_road(sue_bud.fisc_tag)
+    sue_bud.edit_item_attr(root_road, teamunit=x_teamunit)
+    root_item = sue_bud.get_item_obj(root_road)
     x_gogo_want = 5
     x_stop_want = 11
     root_item.gogo_want = x_gogo_want
@@ -108,7 +109,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_teamunit():
     assert itemroot_dict.get("stop_want") == x_stop_want
 
 
-def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
+def test_BudUnit_get_dict_ReturnsObj_Scenario3_With_itemroot_healerlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -118,7 +119,8 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    sue_bud.edit_item_attr(road=sue_bud.fisc_tag, healerlink=run_healerlink)
+    root_road = to_road(sue_bud.fisc_tag)
+    sue_bud.edit_item_attr(road=root_road, healerlink=run_healerlink)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -128,7 +130,7 @@ def test_BudUnit_get_dict_ReturnsDictWith_itemroot_healerlink():
     assert itemroot_dict["healerlink"] == run_healerlink.get_dict()
 
 
-def test_BudUnit_get_dict_ReturnsDictWith_itemkid_TeamUnit():
+def test_BudUnit_get_dict_ReturnsObj_Scenario4_itemkid_TeamUnit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     yao_str = "Yao"
@@ -175,8 +177,9 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    zia_bud.edit_item_attr(road=zia_bud.fisc_tag, healerlink=run_healerlink)
-    zia_bud.edit_item_attr(road=zia_bud.fisc_tag, problem_bool=True)
+    root_road = to_road(zia_bud.fisc_tag)
+    zia_bud.edit_item_attr(road=root_road, healerlink=run_healerlink)
+    zia_bud.edit_item_attr(road=root_road, problem_bool=True)
 
     # WHEN
     x_json = zia_bud.get_json()
@@ -325,13 +328,14 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_teamunit = teamunit_shop()
     run_teamunit.set_teamlink(team_title=run_str)
-    zia_bud.edit_item_attr(zia_bud.fisc_tag, teamunit=run_teamunit)
+    root_road = to_road(zia_bud.fisc_tag)
+    zia_bud.edit_item_attr(root_road, teamunit=run_teamunit)
     xio_teamunit = teamunit_shop()
     xio_teamunit.set_teamlink(team_title=xio_str)
     zia_bud.edit_item_attr(shave_road, teamunit=xio_teamunit)
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(xio_str))
     zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(sue_str))
-    zia_bud.edit_item_attr(zia_bud.fisc_tag, awardlink=awardlink_shop(sue_str))
+    zia_bud.edit_item_attr(root_road, awardlink=awardlink_shop(sue_str))
     # add healerlink to shave itemunit
     run_healerlink = healerlink_shop({run_str})
     zia_bud.edit_item_attr(shave_road, healerlink=run_healerlink)
@@ -433,7 +437,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
-    json_itemroot = json_bud.get_item_obj(zia_bud.fisc_tag)
+    json_itemroot = json_bud.get_item_obj(to_road(zia_bud.fisc_tag))
     assert json_itemroot.gogo_want == zia_gogo_want
     assert json_itemroot.stop_want == zia_stop_want
 
@@ -488,6 +492,28 @@ def test_budunit_get_from_json_ReturnsObj_bridge_GroupExample():
     # THEN
     after_yao_acctunit = after_bob_bud.get_acct(yao_str)
     assert after_yao_acctunit.bridge == slash_bridge
+
+
+def test_budunit_get_from_json_ReturnsObj_Scenario7_itemroot_bridge_IsCorrectlySet():
+    # ESTABLISH
+    slash_str = "/"
+    run_str = "runners"
+    sue_bud = budunit_shop("Sue", bridge=slash_str)
+    root_road = to_road(sue_bud.fisc_tag, slash_str)
+    day_hour_str = "day_hour"
+    day_hour_road = sue_bud.make_l1_road(day_hour_str)
+    sue_bud.add_item(day_hour_road)
+    assert sue_bud.bridge == slash_str
+    assert sue_bud.get_item_obj(root_road).bridge == slash_str
+    assert sue_bud.get_item_obj(day_hour_road).bridge == slash_str
+
+    # WHEN
+    after_bob_bud = budunit_get_from_json(sue_bud.get_json())
+
+    # THEN
+    assert after_bob_bud.bridge == slash_str
+    assert after_bob_bud.get_item_obj(root_road).bridge == slash_str
+    assert after_bob_bud.get_item_obj(day_hour_road).bridge == slash_str
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():

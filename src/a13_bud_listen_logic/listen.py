@@ -93,8 +93,8 @@ def _create_mass_data(listener: BudUnit, x_road: RoadUnit) -> list:
     mass_data = MassReplaceOrAddData()
     mass_data.add_to_mass_list = []
     mass_data.replace_mass_list = []
-    ancestor_roads = get_ancestor_roads(x_road)
-    root_road = get_root_tag_from_road(x_road)
+    ancestor_roads = get_ancestor_roads(x_road, listener.bridge)
+    root_road = get_root_tag_from_road(x_road, listener.bridge)
     for ancestor_road in ancestor_roads:
         if ancestor_road != root_road:
             if listener.item_exists(ancestor_road):

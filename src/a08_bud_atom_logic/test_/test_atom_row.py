@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import create_road
+from src.a01_road_logic.road import create_road, to_road
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -238,7 +238,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
 
     # THEN
     static_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    static_budatom.set_arg("parent_road", "accord78")
+    static_budatom.set_arg("parent_road", to_road("accord78"))
     static_budatom.set_arg("item_tag", "casa")
     static_budatom.set_arg("pledge", False)
     assert x_budatom == static_budatom
@@ -248,7 +248,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_dimens = {bud_itemunit_str(), bud_item_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, atom_insert())
-    x_atomrow.parent_road = "accord78"
+    x_atomrow.parent_road = to_road("accord78")
     x_atomrow.item_tag = "casa"
     x_atomrow.pledge = False
     x_atomrow.healer_name = "Bob"
@@ -259,11 +259,11 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # THEN
     assert len(x_budatoms) == 2
     y_item_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    y_item_budatom.set_arg("parent_road", "accord78")
+    y_item_budatom.set_arg("parent_road", to_road("accord78"))
     y_item_budatom.set_arg("item_tag", "casa")
     y_item_budatom.set_arg("pledge", False)
     assert y_item_budatom in x_budatoms
     healerlink_budatom = budatom_shop(bud_item_healerlink_str(), atom_insert())
-    healerlink_budatom.set_arg("road", "accord78;casa")
+    healerlink_budatom.set_arg("road", to_road("accord78;casa"))
     healerlink_budatom.set_arg("healer_name", "Bob")
     assert healerlink_budatom in x_budatoms

@@ -139,8 +139,8 @@ def test_create_pidgin_road_dt_ReturnsObj():
     casa_csv = get_ordered_csv(casa_dataframe)
     print(f"{get_pidgin_road_dt_columns()=}")
     print(f"{casa_dataframe.columns=}")
-    print(f"{casa_csv=}")
-    print(f"{get_ordered_csv(get_casa_maison_road_otx2inx_dt())=}")
+    print(casa_csv)
+    print(get_ordered_csv(get_casa_maison_road_otx2inx_dt()))
     assert casa_csv == get_ordered_csv(get_casa_maison_road_otx2inx_dt())
 
 

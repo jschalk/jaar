@@ -1,16 +1,10 @@
 from src.a00_data_toolbox.file_toolbox import create_path
+from src.a01_road_logic.road import to_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic._utils.calendar_examples import get_five_config
-from src.a07_calendar_logic.chrono import (
-    timelineunit_shop,
-    get_default_timeline_config_dict,
-)
-from src.a09_pack_logic.delta import get_minimal_buddelta, buddelta_shop
+from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import packunit_shop
-from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
-from src.a17_idea_logic.idea_config import get_idea_format_filename
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a17_idea_logic.idea import fisc_build_from_df
 from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
@@ -372,6 +366,7 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
+    a23_road = to_road(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
     casa_road = bob_bud.make_l1_road("casa")
     clean_road = bob_bud.make_road(casa_road, "clean")
@@ -387,7 +382,7 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     x_csv = add_bud_to_br00023_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    clean_row = f",,{a23_str},{bob_str},{a23_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f",,{a23_str},{bob_str},{a23_road},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
@@ -509,6 +504,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
+    a23_road = to_road(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
     mop_road = bob_bud.make_l1_road("mop")
     casa_road = bob_bud.make_l1_road("casa")
@@ -547,9 +543,9 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     x_csv = add_bud_to_br00028_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    root_row = f",,{a23_str},{bob_str},,{bob_bud.fisc_tag},,,,,,,,,1,False,False\n"
-    mop_row = f",,{a23_str},{bob_str},{bob_bud.fisc_tag},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-    casa_row = f",,{a23_str},{bob_str},{bob_bud.fisc_tag},casa,,,,,,,,,0,False,False\n"
+    root_row = f",,{a23_str},{bob_str},,{a23_road},,,,,,,,,1,False,False\n"
+    mop_row = f",,{a23_str},{bob_str},{a23_road},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
+    casa_row = f",,{a23_str},{bob_str},{a23_road},casa,,,,,,,,,0,False,False\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"
     print(f"       {x_csv=}")
@@ -873,6 +869,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
+    a23_road = to_road(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
     casa_road = bob_bud.make_l1_road("casa")
     clean_road = bob_bud.make_road(casa_road, "clean")
@@ -894,7 +891,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_csv = add_pack_to_br00023_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_str},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_road},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
     expected_csv = f"{csv_header}{clean_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
@@ -1046,6 +1043,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
+    a23_road = to_road(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
     mop_road = bob_bud.make_l1_road("mop")
     casa_road = bob_bud.make_l1_road("casa")
@@ -1091,8 +1089,10 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     # THEN
     # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_bud.fisc_tag},,,,,,,,,1,False,False\n"
     # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_tag},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_tag},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_pledge},\n"
-    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_tag},casa,,,,,,,,,0,False,\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_road},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_pledge},\n"
+    casa_row = (
+        f"{sue_str},{event7},{a23_str},{bob_str},{a23_road},casa,,,,,,,,,0,False,\n"
+    )
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{casa_row}{mop_row}"
     print(f"       {x_csv=}")

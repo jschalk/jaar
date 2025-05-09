@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a05_item_logic.item import itemunit_shop
@@ -449,15 +450,16 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_insert():
     assert street_budatom.get_value(parent_road_str()) == sports_road
     assert street_budatom.get_value(item_tag_str()) == disc_str
 
+    root_road = to_road(after_sue_bud.fisc_tag)
     x_keylist = [
         atom_insert(),
         bud_itemunit_str(),
-        after_sue_bud.fisc_tag,
+        root_road,
         accord45_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(item_tag_str()) == accord45_str
-    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_tag
+    assert ball_budatom.get_value(parent_road_str()) == root_road
     assert ball_budatom.get_value(begin_str()) == accord_begin
     assert ball_budatom.get_value(close_str()) == accord_close
     assert ball_budatom.get_value(mass_str()) == accord_mass
@@ -508,14 +510,15 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_update():
     # THEN
     print_budatom_keys(sue_buddelta)
 
+    root_road = to_road(after_sue_bud.fisc_tag)
     x_keylist = [
         atom_update(),
         bud_itemunit_str(),
-        after_sue_bud.fisc_tag,
+        root_road,
         accord45_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(parent_road_str()) == after_sue_bud.fisc_tag
+    assert ball_budatom.get_value(parent_road_str()) == root_road
     assert ball_budatom.get_value(item_tag_str()) == accord45_str
     assert ball_budatom.get_value(begin_str()) == after_accord_begin
     assert ball_budatom.get_value(close_str()) == after_accord_close

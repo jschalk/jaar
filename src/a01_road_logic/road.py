@@ -90,10 +90,71 @@ class EventInt(int):
     pass
 
 
+class bridge_not_in_parent_road_Exception(Exception):
+    pass
+
+
+def get_default_fisc_tag() -> FiscTag:
+    return "ZZ"
+
+
+def to_road(tag: TagUnit, bridge: str = None):
+    x_bridge = default_bridge_if_None(bridge)
+    if tag is None:
+        return x_bridge
+    return tag if tag.find(x_bridge) == 0 else f"{x_bridge}{tag}"
+
+
+def get_default_fisc_road(bridge: str = None) -> str:
+    return to_road(get_default_fisc_tag(), bridge)
+
+
 def default_bridge_if_None(bridge: any = None) -> str:
     if bridge != bridge:  # float("nan")
         bridge = None
     return bridge if bridge is not None else ";"
+
+
+class init_bridge_not_presentException(Exception):
+    pass
+
+
+class bridge_in_tag_Exception(Exception):
+    pass
+
+
+def create_road(
+    parent_road: RoadUnit,
+    terminus_tag: TagUnit = None,
+    bridge: str = None,
+    auto_add_first_bridge: bool = True,
+) -> RoadUnit:
+    bridge = default_bridge_if_None(bridge)
+    if terminus_tag in {"", None}:
+        return to_road(parent_road, bridge)
+
+    if parent_road and parent_road.find(bridge) != 0:
+        if auto_add_first_bridge:
+            parent_road = to_road(parent_road, bridge)
+        else:
+            exception_str = (
+                f"Parent road must have bridge '{bridge}' at position 0 in string"
+            )
+            raise init_bridge_not_presentException(exception_str)
+
+    terminus_tag = TagUnit(terminus_tag)
+    if terminus_tag.is_tag(bridge) is False:
+        raise bridge_in_tag_Exception(f"bridge '{bridge}' is in {terminus_tag}")
+    if terminus_tag is None:
+        return RoadUnit(parent_road)
+    if terminus_tag.is_tag(bridge) is False:
+        raise bridge_in_tag_Exception(f"bridge '{bridge}' is in {terminus_tag}")
+
+    if parent_road in {"", None}:
+        x_road = terminus_tag
+    else:
+        x_road = f"{parent_road}{bridge}{terminus_tag}"
+    return to_road(x_road, bridge)
 
 
 def rebuild_road(
@@ -137,7 +198,7 @@ def find_replace_road_key_dict(
 
 
 def get_all_road_tags(road: RoadUnit, bridge: str = None) -> list[TagUnit]:
-    return road.split(default_bridge_if_None(bridge))
+    return road.split(default_bridge_if_None(bridge))[1:]
 
 
 def get_terminus_tag(road: RoadUnit, bridge: str = None) -> TagUnit:
@@ -151,46 +212,21 @@ def get_parent_road(
     return create_road_from_tags(parent_tags, bridge=bridge)
 
 
-def create_road_without_root_tag(
-    road: RoadUnit, bridge: str = None
-) -> RoadUnit:  # road without terminus tagf
-    if road[:1] == default_bridge_if_None(bridge):
-        raise InvalidRoadUnitException(
-            f"Cannot create_road_without_root_tag of '{road}' because it has no root tag."
-        )
-    road_without_root_tag = create_road_from_tags(get_all_road_tags(road=road)[1:])
-    return f"{default_bridge_if_None(bridge)}{road_without_root_tag}"
-
-
 def get_root_tag_from_road(road: RoadUnit, bridge: str = None) -> TagUnit:
     return get_all_road_tags(road=road, bridge=bridge)[0]
 
 
-def road_validate(road: RoadUnit, bridge: str, root_tag: TagUnit) -> RoadUnit:
-    if road == "" or road is None:
-        return RoadUnit("")
-    x_root = get_root_tag_from_road(road, bridge)
-    return (
-        rebuild_road(
-            subj_road=road,
-            old_road=x_root,
-            new_road=root_tag,
-        )
-        if x_root != root_tag
-        else road
-    )
-
-
-def get_ancestor_roads(road: RoadUnit) -> list[RoadUnit]:
-    if road is None:
+def get_ancestor_roads(road: RoadUnit, bridge: str = None) -> list[RoadUnit]:
+    bridge = default_bridge_if_None(bridge)
+    if not road:
         return []
-    tags = get_all_road_tags(road)
-    temp_road = tags.pop(0)
+    tags = get_all_road_tags(road, bridge)
+    temp_road = to_road(tags.pop(0), bridge)
 
     temp_roads = [temp_road]
     if tags != []:
         while tags != []:
-            temp_road = create_road(temp_road, tags.pop(0))
+            temp_road = create_road(temp_road, tags.pop(0), bridge)
             temp_roads.append(temp_road)
 
     x_roads = []
@@ -228,45 +264,9 @@ def get_default_fisc_tag() -> FiscTag:
 
 
 def create_road_from_tags(tags: list[TagUnit], bridge: str = None) -> RoadUnit:
-    return default_bridge_if_None(bridge).join(tags)
-
-
-class bridge_in_tag_Exception(Exception):
-    pass
-
-
-def create_road(
-    parent_road: RoadUnit, terminus_tag: TagUnit = None, bridge: str = None
-) -> RoadUnit:
-
-    if terminus_tag is None:
-        return RoadUnit(parent_road)
-    x_bridge = default_bridge_if_None(bridge)
-    terminus_tag = TagUnit(terminus_tag)
-    if terminus_tag.is_tag(x_bridge) is False:
-        raise bridge_in_tag_Exception(f"bridge '{x_bridge}' is in {terminus_tag}")
-
-    return RoadUnit(
-        terminus_tag
-        if parent_road in {"", None}
-        else f"{parent_road}{x_bridge}{terminus_tag}"
-    )
-
-
-def combine_roads(
-    parent_road: RoadUnit, ancestor_road: RoadUnit, bridge: str = None
-) -> RoadUnit:
-    if parent_road in {""}:
-        return ancestor_road
-    parent_road_tags = get_all_road_tags(parent_road, bridge)
-    ancestor_road_tags = get_all_road_tags(ancestor_road, bridge)
-    parent_road_tags.extend(ancestor_road_tags)
-    return create_road_from_tags(parent_road_tags, bridge)
-
-
-def get_diff_road(x_road: RoadUnit, sub_road: RoadUnit, bridge: str = None):
-    sub_road = f"{sub_road}{default_bridge_if_None(bridge)}"
-    return x_road.replace(sub_road, "")
+    if not tags:
+        return ""
+    return to_road(default_bridge_if_None(bridge).join(tags), bridge)
 
 
 class InvalidbridgeReplaceException(Exception):
@@ -314,6 +314,7 @@ def roadunit_valid_dir_path(x_roadunit: RoadUnit, bridge: str) -> bool:
     slash_str = "/"
     x_road_os_path = create_road_from_tags(x_road_tags, bridge=slash_str)
     parts = pathlib_Path(x_road_os_path).parts
+    parts = parts[1:]
     if len(parts) != len(x_road_tags):
         return False
 

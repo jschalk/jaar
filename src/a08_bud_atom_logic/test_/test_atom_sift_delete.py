@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import reasonunit_shop, factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
@@ -78,6 +79,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_acct_membership():
 def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
+    root_road = to_road(sue_bud.fisc_tag)
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
@@ -89,7 +91,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     root_atom.set_arg(parent_road_str(), "")
     root_atom.set_arg(item_tag_str(), sue_bud.fisc_tag)
     casa_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_tag)
+    casa_atom.set_arg(parent_road_str(), root_road)
     casa_atom.set_arg(item_tag_str(), casa_str)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_delete())
     clean_atom.set_arg(parent_road_str(), casa_road)
@@ -97,7 +99,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_delete())
     sweep_atom.set_arg(parent_road_str(), clean_road)
     sweep_atom.set_arg(item_tag_str(), sweep_str)
-    assert not sift_budatom(sue_bud, root_atom)
+    assert sift_budatom(sue_bud, root_atom)
     assert not sift_budatom(sue_bud, casa_atom)
     assert not sift_budatom(sue_bud, clean_atom)
     assert not sift_budatom(sue_bud, sweep_atom)
@@ -105,7 +107,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     # WHEN
     sue_bud.add_item(casa_road)
     # THEN
-    assert not sift_budatom(sue_bud, root_atom)
+    assert sift_budatom(sue_bud, root_atom)
     assert sift_budatom(sue_bud, casa_atom)
     assert not sift_budatom(sue_bud, clean_atom)
     assert not sift_budatom(sue_bud, sweep_atom)
@@ -113,7 +115,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     # WHEN
     sue_bud.add_item(clean_road)
     # THEN
-    assert not sift_budatom(sue_bud, root_atom)
+    assert sift_budatom(sue_bud, root_atom)
     assert sift_budatom(sue_bud, casa_atom)
     assert sift_budatom(sue_bud, clean_atom)
     assert not sift_budatom(sue_bud, sweep_atom)
@@ -122,6 +124,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
 def test_sift_atom_SetsBudDeltaBudAtom_bud_itemunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
+    root_road = to_road(sue_bud.fisc_tag)
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
@@ -130,7 +133,7 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_itemunit():
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
     casa_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_tag)
+    casa_atom.set_arg(parent_road_str(), root_road)
     casa_atom.set_arg(item_tag_str(), casa_str)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_delete())
     clean_atom.set_arg(parent_road_str(), casa_road)

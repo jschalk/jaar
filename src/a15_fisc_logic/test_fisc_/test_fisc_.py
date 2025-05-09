@@ -406,11 +406,11 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 
     # create Sue gut
     bob_str = "Bob"
-    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut = budunit_shop(sue_str, a23_str, bridge=slash_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(fisc_mstr_dir, sue_gut)
     # create Bob gut with agenda item for Sue
-    bob_gut = budunit_shop(bob_str, a23_str)
+    bob_gut = budunit_shop(bob_str, a23_str, bridge=slash_str)
     bob_gut.add_acctunit(sue_str)
     casa_road = bob_gut.make_l1_road("casa")
     clean_road = bob_gut.make_road(casa_road, "clean")

@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import default_bridge_if_None, create_road
+from src.a01_road_logic.road import default_bridge_if_None, create_road, to_road
 from src.a06_bud_logic._utils.str_a06 import event_int_str, face_name_str
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic._utils.str_a16 import (
@@ -432,8 +432,8 @@ def test_RoadMap_del_tag_SetsAttr():
 
 def test_RoadMap_set_tag_Edits_otx2inx():
     # ESTABLISH
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
+    otx_accord45_str = to_road("accord45")
+    inx_accord87_str = to_road("accord87")
     casa_otx_str = "casa"
     casa_inx_str = "maison"
     casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
@@ -554,10 +554,10 @@ def test_get_roadmap_from_json_ReturnsObj():
 
 def test_RoadMap_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     # ESTABLISH
-    clean_otx_parent_road = "accord45"
     otx_r_bridge = "/"
+    clean_otx_parent_road = to_road("accord45", otx_r_bridge)
     clean_otx_str = "clean"
-    clean_otx_road = f"{clean_otx_parent_road}{otx_r_bridge}{clean_otx_str}"
+    clean_otx_road = create_road(clean_otx_parent_road, clean_otx_str, otx_r_bridge)
 
     x_roadmap = roadmap_shop(otx_bridge=otx_r_bridge)
     assert x_roadmap.otx_exists(clean_otx_parent_road) is False
@@ -565,14 +565,14 @@ def test_RoadMap_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
     assert x_roadmap.all_otx_parent_roads_exist()
 
     # WHEN
-    x_roadmap.set_otx2inx(clean_otx_road, "any")
+    x_roadmap.set_otx2inx(clean_otx_road, to_road("any", otx_r_bridge))
     # THEN
     assert x_roadmap.otx_exists(clean_otx_parent_road) is False
     assert x_roadmap.otx_exists(clean_otx_road)
     assert x_roadmap.all_otx_parent_roads_exist() is False
 
     # WHEN
-    x_roadmap.set_otx2inx(clean_otx_parent_road, "any")
+    x_roadmap.set_otx2inx(clean_otx_parent_road, to_road("any"))
     # THEN
     assert x_roadmap.otx_exists(clean_otx_parent_road)
     assert x_roadmap.otx_exists(clean_otx_road)
@@ -581,12 +581,16 @@ def test_RoadMap_all_otx_parent_roads_exist_ReturnsObj_RoadUnit():
 
 def test_RoadMap_is_valid_ReturnsObj_Scenario0_item_tag_str():
     # ESTABLISH
+    x_otx_bridge = "/"
+    x_inx_bridge = ":"
+    tagunit_roadmap = roadmap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
+
     clean_str = "clean"
-    clean_inx = "propre"
-    otx_bridge = "/"
-    casa_otx = f"casa{otx_bridge}"
+    clean_inx = to_road("propre", x_inx_bridge)
+    casa_otx = to_road("casa", x_otx_bridge)
+    mop_otx = to_road(f"{casa_otx}{x_otx_bridge}mop", x_otx_bridge)
+    mop_inx = "mop"
     casa_inx = "casa"
-    tagunit_roadmap = roadmap_shop(otx_bridge=otx_bridge)
     assert tagunit_roadmap.is_valid()
 
     # WHEN
@@ -595,7 +599,7 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario0_item_tag_str():
     assert tagunit_roadmap.is_valid()
 
     # WHEN
-    tagunit_roadmap.set_otx2inx(casa_otx, casa_inx)
+    tagunit_roadmap.set_otx2inx(mop_otx, mop_inx)
     # THEN
     assert tagunit_roadmap.is_valid() is False
 
@@ -625,10 +629,10 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario1_road_str():
 
 def test_RoadMap_is_valid_ReturnsObj_Scenario3_RoadUnit():
     # ESTABLISH
-    clean_otx_parent_road = "accord45"
     otx_r_bridge = "/"
+    clean_otx_parent_road = to_road("accord45", otx_r_bridge)
     clean_otx_str = "clean"
-    clean_otx_road = f"{clean_otx_parent_road}{otx_r_bridge}{clean_otx_str}"
+    clean_otx_road = create_road(clean_otx_parent_road, clean_otx_str, otx_r_bridge)
 
     x_roadmap = roadmap_shop(otx_bridge=otx_r_bridge)
     assert x_roadmap.otx_exists(clean_otx_parent_road) is False

@@ -1,4 +1,8 @@
-from src.a01_road_logic.road import get_default_fisc_tag as root_tag
+from src.a01_road_logic.road import (
+    get_default_fisc_tag as root_tag,
+    to_road,
+    get_default_fisc_road,
+)
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.example_buds import (
@@ -38,22 +42,19 @@ def test_BudUnit_edit_item_tag_RaisesErrorForLevel0ItemWhen_fisc_tag_isNone():
     assert yao_bud.owner_name == yao_str
     assert yao_bud.itemroot.item_tag == yao_bud.fisc_tag
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item.parent_road == yao_bud.fisc_tag
+    assert casa_item.parent_road == to_road(yao_bud.fisc_tag)
     swim_item = yao_bud.get_item_obj(swim_road)
+    root_road = to_road(yao_bud.fisc_tag)
     assert swim_item.parent_road == casa_road
 
-    # WHEN
-    moon_str = "moon"
-    yao_bud.edit_item_tag(old_road=yao_bud.fisc_tag, new_item_tag=moon_str)
-
-    # THEN
-    # with pytest_raises(Exception) as excinfo:
-    #     moon_str = "moon"
-    #     yao_bud.edit_item_tag(old_road=yao_bud.fisc_tag, new_item_tag=moon_str)
-    # assert (
-    #     str(excinfo.value)
-    #     == f"Cannot set itemroot to string other than '{yao_bud.fisc_tag}'"
-    # )
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        moon_str = "moon"
+        yao_bud.edit_item_tag(old_road=root_road, new_item_tag=moon_str)
+    assert (
+        str(excinfo.value)
+        == f"Cannot set itemroot to string different than '{yao_bud.fisc_tag}'"
+    )
 
     assert yao_bud.itemroot.item_tag != moon_str
     assert yao_bud.itemroot.item_tag == yao_bud.fisc_tag
@@ -77,7 +78,7 @@ def test_BudUnit_edit_item_tag_RaisesErrorForLevel0When_fisc_tag_IsDifferent():
     assert yao_bud.itemroot.fisc_tag == sun_str
     assert yao_bud.itemroot.item_tag == root_tag()
     casa_item = yao_bud.get_item_obj(casa_road)
-    assert casa_item.parent_road == root_tag()
+    assert casa_item.parent_road == get_default_fisc_road()
     swim_item = yao_bud.get_item_obj(swim_road)
     assert swim_item.parent_road == casa_road
 
@@ -85,7 +86,7 @@ def test_BudUnit_edit_item_tag_RaisesErrorForLevel0When_fisc_tag_IsDifferent():
 
     with pytest_raises(Exception) as excinfo:
         moon_str = "moon"
-        yao_bud.edit_item_tag(old_road=root_tag(), new_item_tag=moon_str)
+        yao_bud.edit_item_tag(old_road=get_default_fisc_road(), new_item_tag=moon_str)
     assert (
         str(excinfo.value)
         == f"Cannot set itemroot to string different than '{sun_str}'"

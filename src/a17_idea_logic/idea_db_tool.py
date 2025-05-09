@@ -134,6 +134,7 @@ def translate_single_column_dataframe(
         for cur_row in range(row_count):
             otx_value = x_df.iloc[cur_row][column_name]
             inx_value = x_mapunit.reveal_inx(otx_value)
+            print(f"{otx_value=} {inx_value=}")
             x_df.at[cur_row, column_name] = inx_value
     return x_df
 

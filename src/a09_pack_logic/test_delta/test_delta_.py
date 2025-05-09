@@ -1,4 +1,8 @@
-from src.a01_road_logic.road import create_road, get_default_fisc_tag as root_tag
+from src.a01_road_logic.road import (
+    create_road,
+    get_default_fisc_tag as root_tag,
+    to_road,
+)
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
@@ -332,13 +336,14 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj():
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
     # ESTABLISH
     x_fisc_tag = root_tag()
+    root_road = to_road(x_fisc_tag)
     sports_str = "sports"
     sports_road = create_road(x_fisc_tag, sports_str)
     knee_str = "knee"
     x_dimen = bud_itemunit_str()
     sports_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
     sports_insert_itemunit_budatom.set_jkey(item_tag_str(), sports_str)
-    sports_insert_itemunit_budatom.set_jkey(parent_road_str(), x_fisc_tag)
+    sports_insert_itemunit_budatom.set_jkey(parent_road_str(), root_road)
     knee_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
     knee_insert_itemunit_budatom.set_jkey(item_tag_str(), knee_str)
     knee_insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)

@@ -9,6 +9,7 @@ from src.a04_reason_logic.reason_item import (
 )
 from src.a01_road_logic.road import (
     get_default_fisc_tag as root_tag,
+    get_default_fisc_road,
     create_road,
     default_bridge_if_None,
 )
@@ -458,8 +459,8 @@ def test_ReasonCore_find_replace_road_casas():
     assert x_reason.premises.get(old_sunday_road).need == old_sunday_road
 
     # WHEN
-    old_road = root_tag()
-    new_road = "fun"
+    old_road = get_default_fisc_road()
+    new_road = create_road("fun")
     x_reason.find_replace_road(old_road=old_road, new_road=new_road)
     new_weekday_road = create_road(new_road, weekday_str)
     new_sunday_road = create_road(new_weekday_road, sunday_str)

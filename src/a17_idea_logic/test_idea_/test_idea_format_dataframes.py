@@ -1,4 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
+from src.a01_road_logic.road import to_road
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
@@ -169,7 +170,7 @@ def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
     assert itemunit_format.loc[0, fisc_tag_str()] == accord_fisc_tag
     assert itemunit_format.loc[0, item_tag_str()] == casa_str
     assert itemunit_format.loc[0, mass_str()] == casa_mass
-    assert itemunit_format.loc[0, parent_road_str()] == accord_fisc_tag
+    assert itemunit_format.loc[0, parent_road_str()] == to_road(accord_fisc_tag)
 
     assert itemunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[1, pledge_str()] == "Yes"

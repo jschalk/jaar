@@ -6,25 +6,11 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_empty_dict_if_None,
 )
-from src.a02_finance_logic.allot import allot_scale
-from src.a02_finance_logic.finance_config import (
-    valid_finance_ratio,
-    default_respect_bit_if_None,
-    filter_penny,
-    default_fund_coin_if_None,
-    validate_fund_pool,
-    BitNum,
-    RespectNum,
-    PennyNum,
-    FundCoin,
-    FundNum,
-    validate_respect_num,
-)
 from src.a01_road_logic.road import (
     get_parent_road,
+    to_road,
     is_sub_road,
     all_roadunits_between,
-    road_validate,
     rebuild_road,
     get_terminus_tag,
     get_root_tag_from_road,
@@ -43,7 +29,20 @@ from src.a01_road_logic.road import (
     FiscTag,
     roadunit_valid_dir_path,
 )
-from src.a06_bud_logic.bud_config import max_tree_traverse_default
+from src.a02_finance_logic.allot import allot_scale
+from src.a02_finance_logic.finance_config import (
+    valid_finance_ratio,
+    default_respect_bit_if_None,
+    filter_penny,
+    default_fund_coin_if_None,
+    validate_fund_pool,
+    BitNum,
+    RespectNum,
+    PennyNum,
+    FundCoin,
+    FundNum,
+    validate_respect_num,
+)
 from src.a03_group_logic.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.a03_group_logic.group import (
     AwardLink,
@@ -52,7 +51,6 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a05_item_logic.healer import HealerLink
 from src.a04_reason_logic.reason_item import (
     FactUnit,
     FactUnit,
@@ -61,12 +59,7 @@ from src.a04_reason_logic.reason_item import (
     factunit_shop,
 )
 from src.a04_reason_logic.reason_team import TeamUnit
-from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
-from src.a05_item_logic.origin import (
-    originunit_get_from_dict,
-    originunit_shop,
-    OriginUnit,
-)
+from src.a05_item_logic.healer import HealerLink
 from src.a05_item_logic.item import (
     ItemUnit,
     itemunit_shop,
@@ -74,6 +67,13 @@ from src.a05_item_logic.item import (
     ItemAttrHolder,
     get_obj_from_item_dict,
 )
+from src.a05_item_logic.origin import (
+    originunit_get_from_dict,
+    originunit_shop,
+    OriginUnit,
+)
+from src.a06_bud_logic.bud_config import max_tree_traverse_default
+from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 
@@ -189,12 +189,11 @@ class BudUnit:
         parent_road: RoadUnit = None,
         terminus_tag: TagUnit = None,
     ) -> RoadUnit:
-        x_road = create_road(
+        return create_road(
             parent_road=parent_road,
             terminus_tag=terminus_tag,
             bridge=self.bridge,
         )
-        return road_validate(x_road, self.bridge, self.fisc_tag)
 
     def make_l1_road(self, l1_tag: TagUnit):
         return self.make_road(self.fisc_tag, l1_tag)
@@ -218,7 +217,7 @@ class BudUnit:
         for item_obj in self._item_dict.values():
             item_obj.fisc_tag = fisc_tag
         self.fisc_tag = fisc_tag
-        self.edit_item_tag(old_road=old_fisc_tag, new_item_tag=self.fisc_tag)
+        self.edit_item_tag(old_road=to_road(old_fisc_tag), new_item_tag=self.fisc_tag)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -443,7 +442,7 @@ class BudUnit:
             self._create_itemkid_if_empty(road=pick)
 
         fact_base_item = self.get_item_obj(base)
-        x_itemroot = self.get_item_obj(self.fisc_tag)
+        x_itemroot = self.get_item_obj(to_road(self.fisc_tag))
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_itemroot.factunits.get(base).fopen
@@ -604,6 +603,7 @@ class BudUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
+        parent_road = to_road(parent_road, self.bridge)
         if TagUnit(item_kid.item_tag).is_tag(self.bridge) is False:
             x_str = f"set_item failed because '{item_kid.item_tag}' is not a TagUnit."
             raise InvalidBudException(x_str)
@@ -981,9 +981,9 @@ class BudUnit:
             acctunit.clear_fund_give_take()
 
     def item_exists(self, road: RoadUnit) -> bool:
-        if road is None:
+        if road in {"", None}:
             return False
-        root_road_item_tag = get_root_tag_from_road(road, bridge=self.bridge)
+        root_road_item_tag = get_root_tag_from_road(road, self.bridge)
         if root_road_item_tag != self.itemroot.item_tag:
             return False
 
@@ -1033,7 +1033,7 @@ class BudUnit:
         return [self.get_item_obj(x_item_road) for x_item_road in item_roads]
 
     def _set_item_dict(self):
-        item_list = [self.get_item_obj(self.fisc_tag)]
+        item_list = [self.get_item_obj(to_road(self.fisc_tag, self.bridge))]
         while item_list != []:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
@@ -1095,7 +1095,7 @@ class BudUnit:
         x_descendant_pledge_count = 0
         child_awardlines = None
         group_everyone = None
-        ancestor_roads = get_ancestor_roads(road)
+        ancestor_roads = get_ancestor_roads(road, self.bridge)
         keep_justified_by_problem = True
         healerlink_count = 0
 
@@ -1508,7 +1508,7 @@ def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
         awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
-        bridge=get_obj_from_item_dict(itemroot_dict, "bridge"),
+        bridge=x_bud.bridge,
         fisc_tag=x_bud.fisc_tag,
         fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )

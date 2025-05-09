@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a04_reason_logic.reason_item import reasonunit_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop, get_sorted_item_list
@@ -7,7 +8,8 @@ from src.a06_bud_logic._utils.example_buds import get_budunit_with_4_levels
 def test_BudUnit_set_item_dict_Scenario0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_item = yao_bud.get_item_obj(yao_bud.fisc_tag)
+    root_road = to_road(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_road)
     assert not root_item.begin
     assert not root_item.close
     assert not root_item._gogo_calc
@@ -32,8 +34,10 @@ def test_BudUnit_set_item_dict_Scenario1():
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    yao_bud.edit_item_attr(yao_bud.fisc_tag, begin=time0_begin, close=time0_close)
-    root_item = yao_bud.get_item_obj(yao_bud.fisc_tag)
+    root_road = to_road(yao_bud.fisc_tag)
+    yao_bud.edit_item_attr(root_road, begin=time0_begin, close=time0_close)
+    root_road = to_road(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_road)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert not root_item._gogo_calc
@@ -52,7 +56,8 @@ def test_BudUnit_set_item_dict_Scenario1():
 def test_BudUnit_set_item_dict_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_item = sue_bud.get_item_obj(sue_bud.fisc_tag)
+    root_road = to_road(sue_bud.fisc_tag)
+    root_item = sue_bud.get_item_obj(root_road)
     states_str = "nation-state"
     states_road = sue_bud.make_l1_road(states_str)
     usa_str = "USA"

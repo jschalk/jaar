@@ -6,7 +6,11 @@ from src.a04_reason_logic.reason_item import (
     factunits_get_from_dict,
     get_factunit_from_tuple,
 )
-from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_road_logic.road import (
+    get_default_fisc_tag as root_tag,
+    create_road,
+    get_default_fisc_road,
+)
 
 
 def test_FactUnit_exists():
@@ -164,13 +168,13 @@ def test_FactUnit_find_replace_road_SetsAttrCorrectly():
     assert sunday_fact.pick == old_sunday_road
 
     # WHEN
-    old_road = root_tag()
-    new_road = "fun"
+    old_road = get_default_fisc_road()
+    new_road = create_road("fun")
     sunday_fact.find_replace_road(old_road=old_road, new_road=new_road)
-    new_weekday_road = create_road(new_road, weekday_str)
-    new_sunday_road = create_road(new_weekday_road, sunday_str)
 
     # THEN
+    new_weekday_road = create_road(new_road, weekday_str)
+    new_sunday_road = create_road(new_weekday_road, sunday_str)
     assert sunday_fact.base == new_weekday_road
     assert sunday_fact.pick == new_sunday_road
 
