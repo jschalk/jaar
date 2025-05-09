@@ -7,9 +7,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
     acct_name_str,
     group_label_str,
-    parent_road_str,
+    road_str,
     pledge_str,
-    item_tag_str,
     mass_str,
     debtit_belief_str,
     credit_belief_str,
@@ -165,15 +164,13 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(parent_road_str(), to_road(sue_budunit.fisc_tag))
-    casa_budatom.set_arg(item_tag_str(), casa_str)
+    casa_budatom.set_arg(road_str(), casa_road)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_budatom.set_arg(parent_road_str(), casa_road)
-    clean_budatom.set_arg(item_tag_str(), clean_str)
+    clean_budatom.set_arg(road_str(), clean_road)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)
@@ -220,15 +217,13 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(parent_road_str(), to_road(sue_budunit.fisc_tag))
-    casa_budatom.set_arg(item_tag_str(), casa_str)
+    casa_budatom.set_arg(road_str(), casa_road)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_budatom.set_arg(parent_road_str(), casa_road)
-    clean_budatom.set_arg(item_tag_str(), clean_str)
+    clean_budatom.set_arg(road_str(), clean_road)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)

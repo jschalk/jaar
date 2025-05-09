@@ -1,4 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count
+from src.a01_road_logic.road import create_road
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import (
     awardlink_shop,
@@ -160,12 +161,12 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
     # print("")
-
     x_world_id = 0
-    x_fisc_tag = 1
+    x_fisc_tag = "accord23"
     x_owner_name = 2
-    x_parent_road = 3
-    x_item_tag = 4
+    casa_road = create_road(x_fisc_tag, "casa")
+    x_parent_road = casa_road
+    x_item_tag = "clean"
     x_begin = 5.0
     x_close = 6.0
     x_addin = 7.0
@@ -257,16 +258,16 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
         insert_job_buditem(cursor, x_objkeysholder, x_item)
 
         # THEN
+        clean_road = create_road(casa_road, "clean")
         assert get_row_count(cursor, x_table_name) == 1
         select_sqlstr = f"SELECT * FROM {x_table_name};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_world_id),
-            str(x_fisc_tag),
+            x_fisc_tag,
             str(x_owner_name),
-            str(x_parent_road),
-            str(x_item_tag),
+            clean_road,
             x_begin,
             x_close,
             x_addin,

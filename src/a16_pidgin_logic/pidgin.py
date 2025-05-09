@@ -47,7 +47,6 @@ def pidginable_atom_args() -> set:
         "hour_tag",
         "item_tag",
         "month_tag",
-        "parent_road",
         "pick",
         "need",
         "owner_name",

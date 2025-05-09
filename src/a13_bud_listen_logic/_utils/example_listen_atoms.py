@@ -5,8 +5,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
     bud_item_factunit_str,
     acct_name_str,
-    parent_road_str,
-    item_tag_str,
+    road_str,
     fopen_str,
     fnigh_str,
 )
@@ -20,9 +19,9 @@ def get_atom_example_itemunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
         fisc_tag = "accord23"
     sports_str = "sports"
     x_dimen = bud_itemunit_str()
+    sports_road = create_road(fisc_tag, sports_str)
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_tag_str(), sports_str)
-    insert_itemunit_budatom.set_jkey(parent_road_str(), fisc_tag)
+    insert_itemunit_budatom.set_jkey(road_str(), sports_road)
     return insert_itemunit_budatom
 
 
@@ -33,9 +32,9 @@ def get_atom_example_itemunit_ball(fisc_tag: FiscTag = None) -> BudAtom:
     sports_road = create_road(fisc_tag, sports_str)
     ball_str = "basketball"
     x_dimen = bud_itemunit_str()
+    bball_road = create_road(sports_road, ball_str)
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_tag_str(), ball_str)
-    insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)
+    insert_itemunit_budatom.set_jkey(road_str(), bball_road)
     return insert_itemunit_budatom
 
 
@@ -50,9 +49,9 @@ def get_atom_example_itemunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     x_dimen = bud_itemunit_str()
     begin_str = "begin"
     close_str = "close"
+    knee_road = create_road(sports_road, knee_str)
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_tag_str(), knee_str)
-    insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)
+    insert_itemunit_budatom.set_jkey(road_str(), knee_road)
     insert_itemunit_budatom.set_jvalue(begin_str, knee_begin)
     insert_itemunit_budatom.set_jvalue(close_str, knee_close)
     return insert_itemunit_budatom

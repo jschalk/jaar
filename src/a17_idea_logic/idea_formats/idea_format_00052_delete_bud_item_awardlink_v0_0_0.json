@@ -22,6 +22,7 @@
     "dimens": [
         "budunit",
         "fiscunit",
+        "bud_itemunit",
         "bud_item_awardlink"
     ],
     "idea_number": "br00052"

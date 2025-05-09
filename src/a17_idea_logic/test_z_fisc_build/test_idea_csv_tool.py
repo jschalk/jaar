@@ -81,7 +81,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00025": "fisc_tag,owner_name,road,healer_name\n",
         "br00026": "fisc_tag,owner_name,road,base,need,nigh,open,divisor\n",
         "br00027": "fisc_tag,owner_name,road,base,base_item_active_requisite\n",
-        "br00028": "fisc_tag,owner_name,parent_road,item_tag,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
+        "br00028": "fisc_tag,owner_name,road,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
         "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word\n",
@@ -544,8 +544,8 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
 
     # THEN
     root_row = f",,{a23_str},{bob_str},,{a23_road},,,,,,,,,1,False,False\n"
-    mop_row = f",,{a23_str},{bob_str},{a23_road},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-    casa_row = f",,{a23_str},{bob_str},{a23_road},casa,,,,,,,,,0,False,False\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_road},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
+    casa_row = f",,{a23_str},{bob_str},{casa_road},,,,,,,,,0,False,False\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"
     print(f"       {x_csv=}")

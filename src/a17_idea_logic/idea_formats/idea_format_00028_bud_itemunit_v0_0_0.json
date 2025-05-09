@@ -24,9 +24,6 @@
         "gogo_want": {
             "otx_key": false
         },
-        "item_tag": {
-            "otx_key": true
-        },
         "mass": {
             "otx_key": false
         },
@@ -39,14 +36,14 @@
         "owner_name": {
             "otx_key": true
         },
-        "parent_road": {
-            "otx_key": true
-        },
         "pledge": {
             "otx_key": false
         },
         "problem_bool": {
             "otx_key": false
+        },
+        "road": {
+            "otx_key": true
         },
         "stop_want": {
             "otx_key": false

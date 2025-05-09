@@ -174,8 +174,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_itemunit():
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    old_casa_atom.set_arg(parent_road_str(), sue_bud.fisc_tag)
-    old_casa_atom.set_arg(item_tag_str(), casa_str)
+    old_casa_atom.set_arg(road_str(), casa_road)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)

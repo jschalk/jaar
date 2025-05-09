@@ -40,8 +40,7 @@ class MemberShipTable(Base):
 class ItemTable(Base):
     __tablename__ = "item"
     uid = Column(Integer, primary_key=True)
-    item_tag = Column(String)
-    parent_road = Column(String)
+    road = Column(String)
     addin = Column(Float)
     begin = Column(Float)
     close = Column(Float)

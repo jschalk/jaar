@@ -138,9 +138,8 @@
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
-      "item_tag": {},
       "owner_name": {},
-      "parent_road": {}
+      "road": {}
     },
     "jvalues": {
       "addin": {},

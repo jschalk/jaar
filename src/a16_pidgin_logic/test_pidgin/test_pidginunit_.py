@@ -13,7 +13,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     group_label_str,
     item_tag_str,
-    parent_road_str,
     penny_str,
     respect_bit_str,
     road_str,
@@ -104,7 +103,6 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("open") == "float"
-    assert pidgin_args_class_types.get("parent_road") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("penny") == "float"
     assert pidgin_args_class_types.get("pick") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
@@ -138,7 +136,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
         respect_bit_str(),
     }
     assert atom_args.union(fisc_args) != pidgin_args
-    assert atom_args.union(fisc_args).union({"face_name"}) == pidgin_args
+    assert atom_args.union(fisc_args).union({"face_name", "item_tag"}) == pidgin_args
     assert check_class_types_are_correct()
     # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -177,13 +175,14 @@ def test_pidginable_class_types_ReturnsObj():
     }
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
+    all_atom_class_types.add(type_TagUnit_str())
     inter_x = set(all_atom_class_types).intersection(x_pidginable_class_types)
     assert inter_x == x_pidginable_class_types
 
 
 def test_pidginable_atom_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert len(pidginable_atom_args()) == 18
+    assert len(pidginable_atom_args()) == 17
     assert pidginable_atom_args() == {
         acct_name_str(),
         awardee_title_str(),
@@ -195,7 +194,6 @@ def test_pidginable_atom_args_ReturnsObj():
         hour_tag_str(),
         item_tag_str(),
         month_tag_str(),
-        parent_road_str(),
         "pick",
         "need",
         owner_name_str(),

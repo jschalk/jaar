@@ -9,13 +9,10 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "item_tag_ERASE": {
-            "otx_key": true
-        },
         "owner_name": {
             "otx_key": true
         },
-        "parent_road": {
+        "road_ERASE": {
             "otx_key": true
         }
     },

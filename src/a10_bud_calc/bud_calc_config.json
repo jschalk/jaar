@@ -447,15 +447,11 @@
                 "class_type": "TagUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_tag": {
-                "class_type": "TagUnit",
-                "sqlite_datatype": "TEXT"
-            },
             "owner_name": {
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "parent_road": {
+            "road": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },

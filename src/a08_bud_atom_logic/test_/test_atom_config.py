@@ -245,7 +245,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(budunit_str()) == 0
     assert _get_atom_config_jkeys_len(bud_acctunit_str()) == 1
     assert _get_atom_config_jkeys_len(bud_acct_membership_str()) == 2
-    assert _get_atom_config_jkeys_len(bud_itemunit_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_itemunit_str()) == 1
     assert _get_atom_config_jkeys_len(bud_item_awardlink_str()) == 2
     assert _get_atom_config_jkeys_len(bud_item_reasonunit_str()) == 2
     assert _get_atom_config_jkeys_len(bud_item_reason_premiseunit_str()) == 3
@@ -410,7 +410,7 @@ def test_get_flattened_atom_table_build_ReturnsObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 106
+    assert len(atom_columns) == 103
     assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
     # print(f"{atom_columns.keys()=}")
 
@@ -525,9 +525,9 @@ def test_get_normalized_bud_table_build_ReturnsObj():
 
     assert len(cat_item) == 2
     item_columns = cat_item.get(columns_str)
-    assert len(item_columns) == 14
+    assert len(item_columns) == 13
     assert item_columns.get("uid") is not None
-    assert item_columns.get(parent_road_str()) is not None
+    assert item_columns.get(road_str()) is not None
     assert item_columns.get(begin_str()) is not None
     assert item_columns.get(close_str()) is not None
 
@@ -549,12 +549,12 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert x_atom_args_dimen_mapping
     assert x_atom_args_dimen_mapping.get(stop_want_str())
     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
-    assert x_atom_args_dimen_mapping.get(parent_road_str())
+    assert x_atom_args_dimen_mapping.get(road_str())
     road_dimens = x_atom_args_dimen_mapping.get(road_str())
     assert bud_item_factunit_str() in road_dimens
     assert bud_item_teamlink_str() in road_dimens
-    assert len(road_dimens) == 6
-    assert len(x_atom_args_dimen_mapping) == 42
+    assert len(road_dimens) == 7
+    assert len(x_atom_args_dimen_mapping) == 40
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -664,7 +664,6 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(gogo_want_str()) == "float"
     assert x_class_types.get(group_label_str()) == type_LabelUnit_str()
     assert x_class_types.get(healer_name_str()) == type_NameUnit_str()
-    assert x_class_types.get("item_tag") == type_TagUnit_str()
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
@@ -672,7 +671,6 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("nigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
-    assert x_class_types.get(parent_road_str()) == type_RoadUnit_str()
     assert x_class_types.get(penny_str()) == "float"
     assert x_class_types.get("pick") == type_RoadUnit_str()
     assert x_class_types.get("pledge") == "bool"

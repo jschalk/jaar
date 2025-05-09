@@ -49,8 +49,10 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         job_cols = get_default_sorted_list(job_cols)
         expected_create_sqlstr = get_create_table_sqlstr(job_table, job_cols, s_types)
         job_dimen_abbr = x_config.get("abbreviation").upper()
-        print(f'CREATE_job_{job_dimen_abbr}_SQLSTR= """{expected_create_sqlstr}"""')
-        # print(f'"{job_table}": CREATE_job_{job_dimen_abbr}_SQLSTR,')
+        print(
+            f'CREATE_JOB_{job_dimen_abbr.upper()}_SQLSTR= """{expected_create_sqlstr}"""'
+        )
+        # print(f'"{job_table}": CREATE_JOB_{job_dimen_abbr}_SQLSTR,')
         assert create_table_sqlstrs.get(job_table) == expected_create_sqlstr
 
 

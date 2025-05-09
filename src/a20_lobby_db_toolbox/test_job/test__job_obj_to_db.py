@@ -113,11 +113,10 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
     x_close = 17
     x_denom = 18
     x_gogo_want = 19
-    x_item_tag = 20
     x_mass = 21
     x_morph = 22
     x_numor = 23
-    x_parent_road = 24
+    x_road = 24
     x_pledge = 25
     x_problem_bool = 26
     x_stop_want = 27
@@ -144,11 +143,10 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         "close": x_close,
         "denom": x_denom,
         "gogo_want": x_gogo_want,
-        "item_tag": x_item_tag,
         "mass": x_mass,
         "morph": x_morph,
         "numor": x_numor,
-        "parent_road": x_parent_road,
+        "road": x_road,
         "pledge": x_pledge,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
@@ -166,9 +164,9 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         create_job_tables(cursor)
         table_name = "bud_itemunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
-        # print(expected_sqlstr)
+        print(expected_sqlstr)
         print("")
-        # print(insert_sqlstr)
+        print(insert_sqlstr)
         assert insert_sqlstr == expected_sqlstr
 
 
