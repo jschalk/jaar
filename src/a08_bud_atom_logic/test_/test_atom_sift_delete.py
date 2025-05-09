@@ -17,7 +17,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     team_title_str,
     healer_name_str,
-    parent_road_str,
     item_tag_str,
     road_str,
     base_str,
@@ -88,17 +87,13 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
     root_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(item_tag_str(), sue_bud.fisc_tag)
+    root_atom.set_arg(road_str(), root_road)
     casa_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), root_road)
-    casa_atom.set_arg(item_tag_str(), casa_str)
+    casa_atom.set_arg(road_str(), casa_road)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(item_tag_str(), clean_str)
+    clean_atom.set_arg(road_str(), clean_road)
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(item_tag_str(), sweep_str)
+    sweep_atom.set_arg(road_str(), sweep_road)
     assert sift_budatom(sue_bud, root_atom)
     assert not sift_budatom(sue_bud, casa_atom)
     assert not sift_budatom(sue_bud, clean_atom)
@@ -133,14 +128,11 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_itemunit():
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
     casa_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(parent_road_str(), root_road)
-    casa_atom.set_arg(item_tag_str(), casa_str)
+    casa_atom.set_arg(road_str(), casa_road)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(item_tag_str(), clean_str)
+    clean_atom.set_arg(road_str(), clean_road)
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(item_tag_str(), sweep_str)
+    sweep_atom.set_arg(road_str(), sweep_road)
     assert not sift_budatom(sue_bud, casa_atom)
     assert not sift_budatom(sue_bud, clean_atom)
     assert not sift_budatom(sue_bud, sweep_atom)

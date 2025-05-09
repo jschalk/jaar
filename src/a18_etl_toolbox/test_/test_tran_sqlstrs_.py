@@ -665,7 +665,7 @@ def test_get_bud_inconsistency_sqlstrs_ReturnsObj():
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
             print(
-                f'{x_dimen.upper()}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""'
+                f'{get_dimen_abbv7(x_dimen).upper()}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""'
             )
             assert x_sqlstr == generated_dimen_sqlstr
 
@@ -960,9 +960,9 @@ def test_get_bud_insert_put_agg_from_raw_sqlstrs_ReturnsObj():
             )
             x_sqlstr = bud_insert_agg_sqlstrs.get(x_dimen)
             # print(f'"{x_dimen}": BUD_AGG_INSERT_SQLSTR,')
-            # print(
-            #     f'{x_dimen.upper()}_AGG_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
-            # )
+            print(
+                f'{abbv(agg_tablename)}_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
+            )
             assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
@@ -1007,9 +1007,9 @@ def test_get_bud_insert_del_agg_from_raw_sqlstrs_ReturnsObj():
             )
             x_sqlstr = bud_insert_agg_sqlstrs.get(x_dimen)
             # print(f'"{x_dimen}": BUD_AGG_INSERT_SQLSTR,')
-            # print(
-            #     f'{abbv(agg_tablename)}_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
-            # )
+            print(
+                f'{abbv(agg_tablename)}_INSERT_SQLSTR = """{expected_table2table_agg_insert_sqlstr}"""'
+            )
             assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
@@ -1073,7 +1073,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
     idea_stageble_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
     assert idea_dimen_combo_checked_count == 680
-    assert idea_raw2dimen_count == 100
+    assert idea_raw2dimen_count == 113
     assert get_idea_stageble_put_dimens() == expected_idea_stagable_dimens
 
 

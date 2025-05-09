@@ -19,8 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     team_title_str,
     healer_name_str,
-    parent_road_str,
-    item_tag_str,
+    road_str,
     base_item_active_requisite_str,
     pledge_str,
     addin_str,
@@ -46,6 +45,7 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
 
 def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_delta.budatoms
+    print(atoms_dict)
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_str()])
 
     acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_str()])
@@ -327,40 +327,39 @@ def add_bud_itemunit_insert_to_legible_list(
     _problem_bool_str = "problem_bool"
     _morph_str = "morph"
     _mass_str = "mass"
-    for parent_road_dict in itemunit_insert_dict.values():
-        for itemunit_atom in parent_road_dict.values():
-            item_tag_value = itemunit_atom.get_value(item_tag_str())
-            parent_road_value = itemunit_atom.get_value(parent_road_str())
-            _addin_value = itemunit_atom.get_value(addin_str())
-            _begin_value = itemunit_atom.get_value(begin_str())
-            _close_value = itemunit_atom.get_value(close_str())
-            _denom_value = itemunit_atom.get_value(denom_str())
-            _numor_value = itemunit_atom.get_value(numor_str())
-            _problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
-            _morph_value = itemunit_atom.get_value(_morph_str)
-            _mass_value = itemunit_atom.get_value(_mass_str)
-            pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = f"Created Item '{item_tag_value}' with parent_road {parent_road_value}. "
-            if _addin_value is not None:
-                x_str += f"addin={_addin_value}."
-            if _begin_value is not None:
-                x_str += f"begin={_begin_value}."
-            if _close_value is not None:
-                x_str += f"close={_close_value}."
-            if _denom_value is not None:
-                x_str += f"denom={_denom_value}."
-            if _numor_value is not None:
-                x_str += f"numor={_numor_value}."
-            if _problem_bool_value is not None:
-                x_str += f"problem_bool={_problem_bool_value}."
-            if _morph_value is not None:
-                x_str += f"morph={_morph_value}."
-            if _mass_value is not None:
-                x_str += f"mass={_mass_value}."
-            if pledge_value is not None:
-                x_str += f"pledge={pledge_value}."
+    print(itemunit_insert_dict)
+    for itemunit_atom in itemunit_insert_dict.values():
+        road_value = itemunit_atom.get_value(road_str())
+        _addin_value = itemunit_atom.get_value(addin_str())
+        _begin_value = itemunit_atom.get_value(begin_str())
+        _close_value = itemunit_atom.get_value(close_str())
+        _denom_value = itemunit_atom.get_value(denom_str())
+        _numor_value = itemunit_atom.get_value(numor_str())
+        _problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
+        _morph_value = itemunit_atom.get_value(_morph_str)
+        _mass_value = itemunit_atom.get_value(_mass_str)
+        pledge_value = itemunit_atom.get_value(pledge_str())
+        x_str = f"Created Item '{road_value}'. "
+        if _addin_value is not None:
+            x_str += f"addin={_addin_value}."
+        if _begin_value is not None:
+            x_str += f"begin={_begin_value}."
+        if _close_value is not None:
+            x_str += f"close={_close_value}."
+        if _denom_value is not None:
+            x_str += f"denom={_denom_value}."
+        if _numor_value is not None:
+            x_str += f"numor={_numor_value}."
+        if _problem_bool_value is not None:
+            x_str += f"problem_bool={_problem_bool_value}."
+        if _morph_value is not None:
+            x_str += f"morph={_morph_value}."
+        if _mass_value is not None:
+            x_str += f"mass={_mass_value}."
+        if pledge_value is not None:
+            x_str += f"pledge={pledge_value}."
 
-            legible_list.append(x_str)
+        legible_list.append(x_str)
 
 
 def add_bud_itemunit_update_to_legible_list(
@@ -368,51 +367,47 @@ def add_bud_itemunit_update_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     _mass_str = "mass"
-    for parent_road_dict in itemunit_update_dict.values():
-        for itemunit_atom in parent_road_dict.values():
-            item_tag_value = itemunit_atom.get_value(item_tag_str())
-            parent_road_value = itemunit_atom.get_value(parent_road_str())
-            addin_value = itemunit_atom.get_value(addin_str())
-            begin_value = itemunit_atom.get_value(begin_str())
-            close_value = itemunit_atom.get_value(close_str())
-            denom_value = itemunit_atom.get_value(denom_str())
-            numor_value = itemunit_atom.get_value(numor_str())
-            problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
-            morph_value = itemunit_atom.get_value(morph_str())
-            mass_value = itemunit_atom.get_value(_mass_str)
-            pledge_value = itemunit_atom.get_value(pledge_str())
-            x_str = f"Item '{item_tag_value}' with parent_road {parent_road_value} set these attributes: "
-            if addin_value is not None:
-                x_str += f"addin={addin_value}."
-            if begin_value is not None:
-                x_str += f"begin={begin_value}."
-            if close_value is not None:
-                x_str += f"close={close_value}."
-            if denom_value is not None:
-                x_str += f"denom={denom_value}."
-            if numor_value is not None:
-                x_str += f"numor={numor_value}."
-            if problem_bool_value is not None:
-                x_str += f"problem_bool={problem_bool_value}."
-            if morph_value is not None:
-                x_str += f"morph={morph_value}."
-            if mass_value is not None:
-                x_str += f"mass={mass_value}."
-            if pledge_value is not None:
-                x_str += f"pledge={pledge_value}."
+    for itemunit_atom in itemunit_update_dict.values():
+        road_value = itemunit_atom.get_value(road_str())
+        addin_value = itemunit_atom.get_value(addin_str())
+        begin_value = itemunit_atom.get_value(begin_str())
+        close_value = itemunit_atom.get_value(close_str())
+        denom_value = itemunit_atom.get_value(denom_str())
+        numor_value = itemunit_atom.get_value(numor_str())
+        problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
+        morph_value = itemunit_atom.get_value(morph_str())
+        mass_value = itemunit_atom.get_value(_mass_str)
+        pledge_value = itemunit_atom.get_value(pledge_str())
+        x_str = f"Item '{road_value}' set these attributes: "
+        if addin_value is not None:
+            x_str += f"addin={addin_value}."
+        if begin_value is not None:
+            x_str += f"begin={begin_value}."
+        if close_value is not None:
+            x_str += f"close={close_value}."
+        if denom_value is not None:
+            x_str += f"denom={denom_value}."
+        if numor_value is not None:
+            x_str += f"numor={numor_value}."
+        if problem_bool_value is not None:
+            x_str += f"problem_bool={problem_bool_value}."
+        if morph_value is not None:
+            x_str += f"morph={morph_value}."
+        if mass_value is not None:
+            x_str += f"mass={mass_value}."
+        if pledge_value is not None:
+            x_str += f"pledge={pledge_value}."
 
-            legible_list.append(x_str)
+        legible_list.append(x_str)
 
 
 def add_bud_itemunit_delete_to_legible_list(
     legible_list: list[str], itemunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for parent_road_dict in itemunit_delete_dict.values():
-        for itemunit_atom in parent_road_dict.values():
-            item_tag_value = itemunit_atom.get_value(item_tag_str())
-            parent_road_value = itemunit_atom.get_value(parent_road_str())
-            x_str = f"Item '{item_tag_value}' with parent_road {parent_road_value} was deleted."
-            legible_list.append(x_str)
+    for itemunit_atom in itemunit_delete_dict.values():
+        road_value = itemunit_atom.get_value(road_str())
+        x_str = f"Item '{road_value}' was deleted."
+        legible_list.append(x_str)
 
 
 def add_bud_item_awardlink_insert_to_legible_list(

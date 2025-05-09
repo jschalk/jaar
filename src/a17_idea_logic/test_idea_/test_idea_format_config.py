@@ -7,9 +7,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     acct_name_str,
     group_label_str,
-    parent_road_str,
-    item_tag_str,
     mass_str,
+    road_str,
     pledge_str,
     acct_pool_str,
     debtit_belief_str,
@@ -128,15 +127,19 @@ def get_sorted_headers_str(idea_filename):
 
 def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
-    headers = get_sorted_headers_str(idea_format_00021_bud_acctunit_v0_0_0())
+    br00021_headers = get_sorted_headers_str(idea_format_00021_bud_acctunit_v0_0_0())
     # THEN
-    assert headers == "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief"
+    assert (
+        br00021_headers == "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief"
+    )
 
     # ESTABLISH / WHEN
-    headers = get_sorted_headers_str(idea_format_00019_itemunit_v0_0_0())
+    br00019_headers = get_sorted_headers_str(idea_format_00019_itemunit_v0_0_0())
+
     # THEN
-    item_headers_str = "fisc_tag,owner_name,parent_road,item_tag,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
-    assert headers == item_headers_str
+    print(f"{br00019_headers=}")
+    item_headers_str = "fisc_tag,owner_name,road,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    assert br00019_headers == item_headers_str
 
 
 def check_sorted_headers_exist(idea_format_filename: str, x_headers: dict):
@@ -258,16 +261,15 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_itemunit_v0_0_0():
     format_00003_idearef = get_idearef_obj(idea_name)
 
     # THEN
-    assert len(format_00003_idearef._attributes) == 8
+    assert len(format_00003_idearef._attributes) == 7
     headers_list = format_00003_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == parent_road_str()
-    assert headers_list[5] == item_tag_str()
-    assert headers_list[6] == mass_str()
-    assert headers_list[7] == pledge_str()
+    assert headers_list[4] == road_str()
+    assert headers_list[5] == mass_str()
+    assert headers_list[6] == pledge_str()
 
 
 def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_itemunit_v0_0_0():
@@ -278,19 +280,18 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_itemunit_v0_0_0():
     format_00019_idearef = get_idearef_obj(idea_name)
 
     # THEN
-    assert len(format_00019_idearef._attributes) == 14
+    assert len(format_00019_idearef._attributes) == 13
     headers_list = format_00019_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == parent_road_str()
-    assert headers_list[5] == item_tag_str()
-    assert headers_list[6] == begin_str()
-    assert headers_list[7] == close_str()
-    assert headers_list[8] == addin_str()
-    assert headers_list[9] == numor_str()
-    assert headers_list[10] == denom_str()
-    assert headers_list[11] == morph_str()
-    assert headers_list[12] == gogo_want_str()
-    assert headers_list[13] == stop_want_str()
+    assert headers_list[4] == road_str()
+    assert headers_list[5] == begin_str()
+    assert headers_list[6] == close_str()
+    assert headers_list[7] == addin_str()
+    assert headers_list[8] == numor_str()
+    assert headers_list[9] == denom_str()
+    assert headers_list[10] == morph_str()
+    assert headers_list[11] == gogo_want_str()
+    assert headers_list[12] == stop_want_str()

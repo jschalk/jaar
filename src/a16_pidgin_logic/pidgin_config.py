@@ -108,7 +108,6 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "open": "float",
         "offi_time": "TimeLinePoint",
         "owner_name": "NameUnit",
-        "parent_road": "RoadUnit",
         "penny": "float",
         "pick": "RoadUnit",
         "job_listen_rotations": "int",

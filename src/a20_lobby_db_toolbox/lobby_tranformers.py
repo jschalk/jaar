@@ -174,6 +174,7 @@ def insert_job_buditem(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_item: ItemUnit
 ):
     x_dict = copy_deepcopy(x_item.__dict__)
+    x_dict["road"] = x_item.get_road()
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_buditem_metrics_insert_sqlstr(x_dict)

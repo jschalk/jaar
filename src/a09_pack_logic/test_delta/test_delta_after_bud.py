@@ -19,8 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     team_title_str,
     healer_name_str,
-    parent_road_str,
-    item_tag_str,
+    road_str,
     base_item_active_requisite_str,
     pledge_str,
     begin_str,
@@ -326,22 +325,17 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_itemunit():
     disc_road = before_sue_budunit.make_road(sports_road, disc_str)
     before_sue_budunit.set_item(itemunit_shop(ball_str), sports_road)
     before_sue_budunit.set_item(itemunit_shop(disc_str), sports_road)
+    delete_disc_budatom = budatom_shop(bud_itemunit_str(), atom_delete())
+    delete_disc_budatom.set_jkey(road_str(), disc_road)
+    print(f"{disc_road=}")
+    delete_disc_budatom.set_jkey(road_str(), disc_road)
+    print(f"{delete_disc_budatom=}")
+    sue_buddelta = buddelta_shop()
+    sue_buddelta.set_budatom(delete_disc_budatom)
     assert before_sue_budunit.item_exists(ball_road)
     assert before_sue_budunit.item_exists(disc_road)
 
     # WHEN
-    delete_disc_budatom = budatom_shop(bud_itemunit_str(), atom_delete())
-    delete_disc_budatom.set_jkey(
-        item_tag_str(), get_terminus_tag(disc_road, before_sue_budunit.bridge)
-    )
-    print(f"{disc_road=}")
-    delete_disc_budatom.set_jkey(
-        parent_road_str(),
-        get_parent_road(disc_road, before_sue_budunit.bridge),
-    )
-    print(f"{delete_disc_budatom=}")
-    sue_buddelta = buddelta_shop()
-    sue_buddelta.set_budatom(delete_disc_budatom)
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
@@ -371,8 +365,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_itemunit():
     # x_numor = 10
     x_pledge = True
     insert_disc_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    insert_disc_budatom.set_jkey(item_tag_str(), disc_str)
-    insert_disc_budatom.set_jkey(parent_road_str(), sports_road)
+    insert_disc_budatom.set_jkey(road_str(), disc_road)
     # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
     # insert_disc_budatom.set_jvalue(begin_str(), x_begin)
     # insert_disc_budatom.set_jvalue(close_str(), x_close)
@@ -414,8 +407,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_itemunit_SimpleAttrib
     x_stop_want = 1333
     x_pledge = True
     insert_disc_budatom = budatom_shop(bud_itemunit_str(), atom_update())
-    insert_disc_budatom.set_jkey(item_tag_str(), ball_str)
-    insert_disc_budatom.set_jkey(parent_road_str(), sports_road)
+    insert_disc_budatom.set_jkey(road_str(), ball_road)
     # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
     insert_disc_budatom.set_jvalue(begin_str(), x_begin)
     insert_disc_budatom.set_jvalue(close_str(), x_close)

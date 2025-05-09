@@ -19,7 +19,7 @@ CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_jo
 CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, _task INTEGER, _status INTEGER)"""
 CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, _task INTEGER, _status INTEGER, _base_item_active_value INTEGER)"""
 CREATE_JOB_BUDTEAM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_teamlink_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, team_title TEXT, _owner_name_team INTEGER)"""
-CREATE_JOB_BUDITEM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, parent_road TEXT, item_tag TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
+CREATE_JOB_BUDITEM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_itemunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
 CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
@@ -305,8 +305,7 @@ def create_buditem_metrics_insert_sqlstr(values_dict: dict[str,]):
     world_id = values_dict.get("world_id")
     fisc_tag = values_dict.get("fisc_tag")
     owner_name = values_dict.get("owner_name")
-    parent_road = values_dict.get("parent_road")
-    item_tag = values_dict.get("item_tag")
+    road = values_dict.get("road")
     begin = values_dict.get("begin")
     close = values_dict.get("close")
     addin = values_dict.get("addin")
@@ -335,13 +334,12 @@ def create_buditem_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO bud_itemunit_job (world_id, fisc_tag, owner_name, parent_road, item_tag, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_coin, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+    return f"""INSERT INTO bud_itemunit_job (world_id, fisc_tag, owner_name, road, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_coin, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_tag, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
-, {sqlite_obj_str(parent_road, "TEXT")}
-, {sqlite_obj_str(item_tag, "TEXT")}
+, {sqlite_obj_str(road, "TEXT")}
 , {sqlite_obj_str(begin, real_str)}
 , {sqlite_obj_str(close, real_str)}
 , {sqlite_obj_str(addin, real_str)}

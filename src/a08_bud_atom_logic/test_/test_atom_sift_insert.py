@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import reasonunit_shop, factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
@@ -16,7 +17,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     team_title_str,
     healer_name_str,
-    parent_road_str,
     item_tag_str,
     road_str,
     base_str,
@@ -79,6 +79,7 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_acct_membership():
 def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_itemunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
+    root_road = to_road(sue_bud.fisc_tag)
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     clean_str = "clean"
@@ -87,17 +88,13 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_itemunit():
     sweep_road = sue_bud.make_road(clean_road, sweep_str)
 
     root_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    root_atom.set_arg(parent_road_str(), "")
-    root_atom.set_arg(item_tag_str(), sue_bud.fisc_tag)
+    root_atom.set_arg(road_str(), root_road)
     casa_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_tag)
-    casa_atom.set_arg(item_tag_str(), casa_str)
+    casa_atom.set_arg(road_str(), casa_road)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_atom.set_arg(parent_road_str(), casa_road)
-    clean_atom.set_arg(item_tag_str(), clean_str)
+    clean_atom.set_arg(road_str(), clean_road)
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    sweep_atom.set_arg(parent_road_str(), clean_road)
-    sweep_atom.set_arg(item_tag_str(), sweep_str)
+    sweep_atom.set_arg(road_str(), sweep_road)
     assert not sift_budatom(sue_bud, root_atom)
     assert sift_budatom(sue_bud, casa_atom)
     assert sift_budatom(sue_bud, clean_atom)

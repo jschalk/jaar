@@ -6,12 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.a01_road_logic.road import (
-    RoadUnit,
-    get_terminus_tag,
-    get_parent_road,
-    LabelUnit,
-)
+from src.a01_road_logic.road import RoadUnit, LabelUnit
 from src.a04_reason_logic.reason_item import FactUnit, ReasonUnit
 from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
 from src.a03_group_logic.group import MemberShip
@@ -57,8 +52,6 @@ class BudDelta:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].jkeys.get("parent_road") is not None:
-                x_list = sorted(x_list, key=lambda x: x.jkeys.get("parent_road"))
             if x_list[0].jkeys.get("road") is not None:
                 x_list = sorted(x_list, key=lambda x: x.jkeys.get("road"))
             ordered_list.extend(x_list)
@@ -330,8 +323,7 @@ class BudDelta:
         for insert_item_road in insert_item_roads:
             insert_itemunit = after_bud.get_item_obj(insert_item_road)
             x_budatom = budatom_shop("bud_itemunit", atom_insert())
-            x_budatom.set_jkey("parent_road", insert_itemunit.parent_road)
-            x_budatom.set_jkey("item_tag", insert_itemunit.item_tag)
+            x_budatom.set_jkey("road", insert_itemunit.get_road())
             x_budatom.set_jvalue("addin", insert_itemunit.addin)
             x_budatom.set_jvalue("begin", insert_itemunit.begin)
             x_budatom.set_jvalue("close", insert_itemunit.close)
@@ -371,8 +363,7 @@ class BudDelta:
             before_itemunit = before_bud.get_item_obj(item_road)
             if jvalues_different("bud_itemunit", before_itemunit, after_itemunit):
                 x_budatom = budatom_shop("bud_itemunit", atom_update())
-                x_budatom.set_jkey("parent_road", after_itemunit.parent_road)
-                x_budatom.set_jkey("item_tag", after_itemunit.item_tag)
+                x_budatom.set_jkey("road", after_itemunit.get_road())
                 if before_itemunit.addin != after_itemunit.addin:
                     x_budatom.set_jvalue("addin", after_itemunit.addin)
                 if before_itemunit.begin != after_itemunit.begin:
@@ -502,11 +493,8 @@ class BudDelta:
 
     def add_budatom_item_deletes(self, before_bud: BudUnit, delete_item_roads: set):
         for delete_item_road in delete_item_roads:
-            x_parent_road = get_parent_road(delete_item_road, before_bud.bridge)
-            x_item_tag = get_terminus_tag(delete_item_road, before_bud.bridge)
             x_budatom = budatom_shop("bud_itemunit", atom_delete())
-            x_budatom.set_jkey("parent_road", x_parent_road)
-            x_budatom.set_jkey("item_tag", x_item_tag)
+            x_budatom.set_jkey("road", delete_item_road)
             self.set_budatom(x_budatom)
 
             delete_itemunit = before_bud.get_item_obj(delete_item_road)

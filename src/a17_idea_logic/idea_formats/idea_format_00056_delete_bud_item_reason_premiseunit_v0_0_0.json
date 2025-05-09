@@ -25,6 +25,7 @@
     "dimens": [
         "fiscunit",
         "budunit",
+        "bud_itemunit",
         "bud_item_factunit",
         "bud_item_reasonunit",
         "bud_item_reason_premiseunit"

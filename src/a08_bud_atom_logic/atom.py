@@ -7,7 +7,6 @@ from src.a00_data_toolbox.db_toolbox import (
     create_class_type_reference_insert_sqlstr,
     RowData,
 )
-from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a01_road_logic.road import (
     create_road,
     TagUnit,
@@ -15,10 +14,12 @@ from src.a01_road_logic.road import (
     LabelUnit,
     AcctName,
     is_tagunit,
+    get_terminus_tag,
+    get_parent_road,
 )
-from src.a04_reason_logic.reason_item import factunit_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
+from src.a04_reason_logic.reason_item import factunit_shop
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_tool import bud_attr_exists, bud_get_obj
@@ -242,20 +243,12 @@ def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 
 def _modify_bud_itemunit_delete(x_bud: BudUnit, x_atom: BudAtom):
-    item_road = create_road(
-        x_atom.get_value("parent_road"),
-        x_atom.get_value("item_tag"),
-        bridge=x_bud.bridge,
-    )
+    item_road = create_road(x_atom.get_value("road"), bridge=x_bud.bridge)
     x_bud.del_item_obj(item_road, del_children=x_atom.get_value("del_children"))
 
 
 def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: BudAtom):
-    item_road = create_road(
-        x_atom.get_value("parent_road"),
-        x_atom.get_value("item_tag"),
-        bridge=x_bud.bridge,
-    )
+    item_road = create_road(x_atom.get_value("road"), bridge=x_bud.bridge)
     x_bud.edit_item_attr(
         road=item_road,
         addin=x_atom.get_value("addin"),
@@ -272,9 +265,12 @@ def _modify_bud_itemunit_update(x_bud: BudUnit, x_atom: BudAtom):
 
 
 def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: BudAtom):
+    item_road = x_atom.get_value("road")
+    item_tag = get_terminus_tag(item_road)
+    item_parent_road = get_parent_road(item_road)
     x_bud.set_item(
         item_kid=itemunit_shop(
-            item_tag=x_atom.get_value("item_tag"),
+            item_tag=item_tag,
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),
@@ -284,7 +280,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: BudAtom):
             numor=x_atom.get_value("numor"),
             pledge=x_atom.get_value("pledge"),
         ),
-        parent_road=x_atom.get_value("parent_road"),
+        parent_road=item_parent_road,
         create_missing_items=False,
         get_rid_of_missing_awardlinks_awardee_titles=False,
         create_missing_ancestors=True,
@@ -713,10 +709,9 @@ def atomrow_shop(atom_dimens: set[str], crud_command: CRUD_command) -> AtomRow:
 def sift_budatom(x_bud: BudUnit, x_atom: BudAtom) -> BudAtom:
     config_keys = get_atom_config_jkeys(x_atom.dimen)
     x_atom_reqs = {x_key: x_atom.get_value(x_key) for x_key in config_keys}
-    x_parent_road = x_atom_reqs.get("parent_road")
-    x_item_tag = x_atom_reqs.get("item_tag")
-    if x_parent_road != None and x_item_tag != None:
-        x_atom_reqs["road"] = x_bud.make_road(x_parent_road, x_item_tag)
+    x_road = x_atom_reqs.get("road")
+    if x_road != None:
+        x_atom_reqs["road"] = x_road
         x_bridge = x_bud.bridge
         is_itemroot_road = is_tagunit(x_atom_reqs.get("road"), x_bridge)
         if is_itemroot_road is True:

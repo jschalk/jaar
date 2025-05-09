@@ -38,7 +38,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     morph_str,
     numor_str,
-    parent_road_str,
     penny_str,
     respect_bit_str,
     road_str,
@@ -304,7 +303,7 @@ def test_get_all_bud_calc_args_ReturnsObj():
     # THEN
     assert all_bud_calc_args
     assert stop_want_str() in all_bud_calc_args
-    assert parent_road_str() in all_bud_calc_args
+    assert road_str() in all_bud_calc_args
     assert "_fund_give" in all_bud_calc_args
     assert all_bud_calc_args.get("_fund_give") == {
         "bud_item_awardlink",
@@ -320,7 +319,7 @@ def test_get_all_bud_calc_args_ReturnsObj():
     # assert bud_item_factunit_str() in road_bud_calc_aspects
     # assert bud_item_teamlink_str() in road_bud_calc_aspects
     # assert len(road_bud_calc_aspects) == 6
-    assert len(all_bud_calc_args) == 78
+    assert len(all_bud_calc_args) == 76
 
 
 def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
@@ -397,7 +396,6 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         owner_name_str(),
         morph_str(),
         denom_str(),
-        "item_tag",
         "pledge",
         close_str(),
         addin_str(),
@@ -420,7 +418,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_range_evaluated",
         "problem_bool",
         gogo_want_str(),
-        parent_road_str(),
+        road_str(),
         begin_str(),
     }
     assert bud_groupunit_args == {
@@ -620,10 +618,6 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budteam, jk, "team_title") == "TEXT"
     assert g_class_type(config, budteam, jm, "_owner_name_team") == "int"
     assert g_sqlitetype(config, budteam, jm, "_owner_name_team") == "INTEGER"
-    assert g_class_type(config, buditem, jk, "item_tag") == type_TagUnit_str()
-    assert g_sqlitetype(config, buditem, jk, "item_tag") == "TEXT"
-    assert g_class_type(config, buditem, jk, parent_road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, buditem, jk, parent_road_str()) == "TEXT"
     assert g_class_type(config, buditem, jm, "_active") == "int"
     assert g_sqlitetype(config, buditem, jm, "_active") == "INTEGER"
     assert g_class_type(config, buditem, jm, "_all_acct_cred") == "int"
@@ -787,8 +781,6 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get("_irrational_debtit_belief") == "float"
     assert bud_calc_args_type_dict.get(credit_belief_str()) == "float"
     assert bud_calc_args_type_dict.get(debtit_belief_str()) == "float"
-    assert bud_calc_args_type_dict.get("item_tag") == type_TagUnit_str()
-    assert bud_calc_args_type_dict.get(parent_road_str()) == type_RoadUnit_str()
     assert bud_calc_args_type_dict.get(addin_str()) == "float"
     assert bud_calc_args_type_dict.get(begin_str()) == "float"
     assert bud_calc_args_type_dict.get(close_str()) == "float"
@@ -845,4 +837,4 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get(penny_str()) == "float"
     assert bud_calc_args_type_dict.get(respect_bit_str()) == "float"
     assert bud_calc_args_type_dict.get("tally") == "int"
-    assert len(bud_calc_args_type_dict) == 74
+    assert len(bud_calc_args_type_dict) == 72

@@ -13,8 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     awardee_title_str,
     group_label_str,
-    parent_road_str,
-    item_tag_str,
+    road_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -340,13 +339,12 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
     sports_str = "sports"
     sports_road = create_road(x_fisc_tag, sports_str)
     knee_str = "knee"
+    knee_road = create_road(x_fisc_tag, knee_str)
     x_dimen = bud_itemunit_str()
     sports_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    sports_insert_itemunit_budatom.set_jkey(item_tag_str(), sports_str)
-    sports_insert_itemunit_budatom.set_jkey(parent_road_str(), root_road)
+    sports_insert_itemunit_budatom.set_jkey(road_str(), sports_road)
     knee_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    knee_insert_itemunit_budatom.set_jkey(item_tag_str(), knee_str)
-    knee_insert_itemunit_budatom.set_jkey(parent_road_str(), sports_road)
+    knee_insert_itemunit_budatom.set_jkey(road_str(), knee_road)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_insert_itemunit_budatom)
     x_buddelta.set_budatom(sports_insert_itemunit_budatom)
@@ -356,10 +354,10 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
 
     # THEN
     assert len(x_atom_order_list) == 2
-    # for budatom in x_atom_order_list:
-    #     print(f"{budatom.jkeys=}")
-    assert x_atom_order_list[0] == sports_insert_itemunit_budatom
-    assert x_atom_order_list[1] == knee_insert_itemunit_budatom
+    for budatom in x_atom_order_list:
+        print(f"{budatom.jkeys=}")
+    assert x_atom_order_list[0] == knee_insert_itemunit_budatom
+    assert x_atom_order_list[1] == sports_insert_itemunit_budatom
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")

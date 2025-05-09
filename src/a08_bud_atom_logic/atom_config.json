@@ -306,13 +306,7 @@
             "atom_order": 11
         },
         "jkeys": {
-            "item_tag": {
-                "column_order": 1,
-                "class_type": "TagUnit",
-                "nesting_order": 1,
-                "sqlite_datatype": "TEXT"
-            },
-            "parent_road": {
+            "road": {
                 "column_order": 0,
                 "class_type": "RoadUnit",
                 "nesting_order": 0,
