@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir, open_json
 from src.a02_finance_logic._utils.strs_a02 import quota_str
-from src.a01_word_logic.road import create_road
+from src.a01_road_logic.road import create_road
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import penny_str, event_int_str
 from src.a11_deal_cell_logic._utils.str_a11 import (

@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import default_bridge_if_None, create_road
+from src.a01_road_logic.road import default_bridge_if_None, create_road, to_road
 from src.a06_bud_logic._utils.str_a06 import acct_name_str, base_str, type_RoadUnit_str
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
@@ -202,10 +202,12 @@ def get_suita_acct_name_inx_dt() -> DataFrame:
 def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
+    otx_accord45_road = to_road(otx_accord45_str)
+    inx_accord87_road = to_road(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_road, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_road, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -216,7 +218,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
     rx = type_RoadUnit_str()
-    sue_pidginunit.set_otx2inx(rx, otx_accord45_str, inx_accord87_str)
+    sue_pidginunit.set_otx2inx(rx, otx_accord45_road, inx_accord87_road)
     sue_pidginunit.set_otx2inx(rx, casa_otx_road, casa_inx_road)
     sue_pidginunit.set_otx2inx(rx, clean_otx_road, clean_inx_road)
     sue_pidginunit.set_otx2inx(rx, sweep_otx_road, sweep_inx_road)
@@ -247,6 +249,7 @@ def get_casa_maison_pidginunit_set_by_tag() -> PidginUnit:
 
 def get_casa_maison_road_otx_dt() -> DataFrame:
     otx_accord45_str = "accord45"
+    otx_accord45_road = to_road(otx_accord45_str)
     casa_otx_str = "casa"
     casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
     clean_otx_str = "clean"
@@ -254,7 +257,7 @@ def get_casa_maison_road_otx_dt() -> DataFrame:
     sweep_str = "sweep"
     sweep_otx_road = create_road(clean_otx_road, sweep_str)
     otx_dt = DataFrame(columns=[base_str()])
-    otx_dt.loc[0, base_str()] = otx_accord45_str
+    otx_dt.loc[0, base_str()] = otx_accord45_road
     otx_dt.loc[1, base_str()] = casa_otx_road
     otx_dt.loc[2, base_str()] = clean_otx_road
     otx_dt.loc[3, base_str()] = sweep_otx_road
@@ -263,11 +266,12 @@ def get_casa_maison_road_otx_dt() -> DataFrame:
 
 def get_casa_maison_road_inx_dt() -> DataFrame:
     inx_accord87_str = "accord87"
-    casa_inx_road = create_road(inx_accord87_str, "maison")
+    inx_accord87_road = to_road(inx_accord87_str)
+    casa_inx_road = create_road(inx_accord87_road, "maison")
     clean_inx_road = create_road(casa_inx_road, "propre")
     sweep_inx_road = create_road(clean_inx_road, "sweep")
     inx_dt = DataFrame(columns=[base_str()])
-    inx_dt.loc[0, base_str()] = inx_accord87_str
+    inx_dt.loc[0, base_str()] = inx_accord87_road
     inx_dt.loc[1, base_str()] = casa_inx_road
     inx_dt.loc[2, base_str()] = clean_inx_road
     inx_dt.loc[3, base_str()] = sweep_inx_road
@@ -276,11 +280,13 @@ def get_casa_maison_road_inx_dt() -> DataFrame:
 
 def get_casa_maison_road_otx2inx_dt() -> DataFrame:
     inx_accord87_str = "accord87"
+    inx_accord87_road = to_road(inx_accord87_str)
     casa_inx_road = create_road(inx_accord87_str, "maison")
     clean_inx_road = create_road(casa_inx_road, "propre")
     sweep_inx_road = create_road(clean_inx_road, "sweep")
     otx_accord45_str = "accord45"
-    casa_otx_road = create_road(otx_accord45_str, "casa")
+    otx_accord45_road = to_road(otx_accord45_str)
+    casa_otx_road = create_road(otx_accord45_road, "casa")
     clean_otx_road = create_road(casa_otx_road, "clean")
     sweep_otx_road = create_road(clean_otx_road, "sweep")
     x_rd = default_bridge_if_None()
@@ -298,7 +304,7 @@ def get_casa_maison_road_otx2inx_dt() -> DataFrame:
             "inx_road",
         ]
     )
-    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_road, inx_accord87_road]
     inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_road, casa_inx_road]
     inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_road, clean_inx_road]
     inx_dt.loc[3] = ["Sue", e7, x_rd, x_rd, uw, sweep_otx_road, sweep_inx_road]
@@ -357,14 +363,15 @@ def get_invalid_labelmap() -> LabelMap:
     return x_labelmap
 
 
-def get_invalid_tagmap() -> RoadMap:
-    clean_str = "clean"
-    clean_inx = "propre"
-    casa_otx = f"casa{default_bridge_if_None()}"
-    casa_inx = "casa"
+def get_invalid_roadmap() -> RoadMap:
+    casa_str = "casa"
+    casa_otx = create_road(casa_str)
+    casa_inx = create_road(casa_str)
+    clean_str = create_road(casa_otx, "clean")
+    clean_inx = create_road(casa_inx, "propre")
     roadmap = roadmap_shop(face_name="Sue")
     roadmap.set_otx2inx(clean_str, clean_inx)
-    roadmap.set_otx2inx(casa_otx, casa_inx)
+    # roadmap.set_otx2inx(casa_otx, casa_inx)
     return roadmap
 
 
@@ -390,15 +397,17 @@ def get_slash_tagmap() -> TagMap:
 
 
 def get_slash_roadmap() -> RoadMap:
+    slash_otx_bridge = "/"
+    colon_inx_bridge = ":"
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
+    otx_accord45_road = to_road(otx_accord45_str, slash_otx_bridge)
+    inx_accord87_road = to_road(inx_accord87_str, colon_inx_bridge)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_word = "UnknownWord"
-    slash_otx_bridge = "/"
-    colon_inx_bridge = ":"
-    clean_otx_road = f"{otx_accord45_str}{slash_otx_bridge}{clean_otx_str}"
-    clean_otx_road = f"{otx_accord45_str}{colon_inx_bridge}{clean_otx_str}"
+    clean_otx_road = create_road(otx_accord45_road, clean_otx_str, slash_otx_bridge)
+    clean_inx_road = create_road(inx_accord87_road, clean_otx_str, colon_inx_bridge)
     x_roadmap = roadmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
@@ -408,7 +417,7 @@ def get_slash_roadmap() -> RoadMap:
         x_tagmap=get_slash_tagmap(),
     )
     x_roadmap.set_tag(clean_otx_str, clean_inx_str)
-    x_roadmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_roadmap.set_otx2inx(otx_accord45_road, inx_accord87_road)
     x_roadmap.reveal_inx(clean_otx_road)
     return x_roadmap
 

@@ -6,7 +6,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     get_default_fisc_tag as root_tag,
     default_bridge_if_None,
 )
@@ -51,7 +51,7 @@ def test_BudUnit_Exists():
     assert str(type(x_bud.itemroot)).find("None") == 8
 
 
-def test_BudUnit_shop_ReturnsObjectWithFilledFields():
+def test_budunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
     iowa_fisc_tag = "Iowa"
@@ -106,7 +106,7 @@ def test_BudUnit_shop_ReturnsObjectWithFilledFields():
     assert str(type(x_bud.itemroot)).find(".item.ItemUnit'>") > 0
 
 
-def test_BudUnit_shop_ReturnsObjectWithCorrectEmptyField():
+def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
     # ESTABLISH / WHEN
     x_bud = budunit_shop()
 
@@ -171,22 +171,6 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
         str(excinfo.value)
         == f"set_max_tree_traverse: '{zia_tree_traverse}' must be number that is 2 or greater"
     )
-
-
-def test_BudUnit_set_bridge_CorrectlySetsAttr():
-    # ESTABLISH
-    x_fisc_tag = "accord45"
-    slash_bridge = "/"
-    sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_fisc_tag, bridge=slash_bridge)
-    assert sue_bud.bridge == slash_bridge
-
-    # WHEN
-    at_tag_bridge = "@"
-    sue_bud.set_bridge(new_bridge=at_tag_bridge)
-
-    # THEN
-    assert sue_bud.bridge == at_tag_bridge
 
 
 def test_BudUnit_make_road_ReturnsObj():

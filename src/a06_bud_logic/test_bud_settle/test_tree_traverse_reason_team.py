@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a04_reason_logic.reason_team import teamheir_shop, teamunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a05_item_logic.item import itemunit_shop
@@ -25,7 +26,8 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
     x_teamunit = teamunit_shop()
 
     yao_bud = budunit_shop("Yao")
-    yao_bud.edit_item_attr(teamunit=x_teamunit, road=yao_bud.fisc_tag)
+    root_road = to_road(yao_bud.fisc_tag)
+    yao_bud.edit_item_attr(teamunit=x_teamunit, road=root_road)
     assert yao_bud.itemroot.teamunit == x_teamunit
     assert yao_bud.itemroot._teamheir is None
 

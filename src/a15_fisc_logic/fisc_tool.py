@@ -7,7 +7,7 @@ from src.a00_data_toolbox.file_toolbox import (
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a02_finance_logic.deal import FiscTag
-from src.a01_word_logic.road import TagUnit, OwnerName
+from src.a01_road_logic.road import TagUnit, OwnerName
 from src.a02_finance_logic.finance_config import FundNum
 from src.a04_reason_logic.reason_item import get_dict_from_factunits
 from src.a11_deal_cell_logic.cell import CellUnit, cellunit_shop

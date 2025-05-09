@@ -10,13 +10,13 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     default_bridge_if_None,
+    create_road,
     get_all_road_tags,
     create_road_from_tags,
     get_terminus_tag,
     get_parent_road,
-    combine_roads,
     is_tagunit,
     RoadUnit,
     TagUnit,
@@ -348,7 +348,7 @@ class RoadMap:
             inx_parent_road = ""
         else:
             inx_parent_road = self._get_inx_value(otx_parent_road)
-        return combine_roads(inx_parent_road, otx_terminus, self.inx_bridge)
+        return create_road(inx_parent_road, otx_terminus, self.inx_bridge)
 
     def _get_tagmap_tagunit(self, x_tagUnit: TagUnit) -> TagUnit:
         if self.otx_tag_exists(x_tagUnit):
@@ -401,10 +401,10 @@ class RoadMap:
 
     def all_otx_parent_roads_exist(self) -> bool:
         for x_road in self.otx2inx.keys():
-            if is_tagunit(x_road, self.otx_bridge) is False:
-                parent_road = get_parent_road(x_road, self.otx_bridge)
-                if self.otx_exists(parent_road) is False:
-                    return False
+            print(f"{x_road=}")
+            parent_road = get_parent_road(x_road, self.otx_bridge)
+            if parent_road and self.otx_exists(parent_road) is False:
+                return False
         return True
 
     def is_valid(self) -> bool:

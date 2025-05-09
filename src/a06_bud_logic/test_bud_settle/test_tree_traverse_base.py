@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import factheir_shop
 from src.a05_item_logic.item import itemunit_shop
@@ -163,7 +164,8 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     sue_bud.set_item(email_item, parent_road=casa_road)
 
     # test root status:
-    x_itemroot = sue_bud.get_item_obj(sue_bud.fisc_tag)
+    root_road = to_road(sue_bud.fisc_tag)
+    x_itemroot = sue_bud.get_item_obj(root_road)
     assert x_itemroot._descendant_pledge_count is None
     assert x_itemroot._all_acct_cred is None
     assert x_itemroot._all_acct_debt is None
@@ -371,7 +373,8 @@ def test_BudUnit_get_item_tree_ordered_road_list_ReturnsObj():
     # THEN
     assert len(ordered_tag_list) == 17
     x_1st_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[0]
-    assert x_1st_road_in_ordered_list == sue_bud.fisc_tag
+    root_road = to_road(sue_bud.fisc_tag)
+    assert x_1st_road_in_ordered_list == root_road
     x_8th_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[9]
     assert x_8th_road_in_ordered_list == sue_bud.make_l1_road(week_str)
 
@@ -380,7 +383,7 @@ def test_BudUnit_get_item_tree_ordered_road_list_ReturnsObj():
 
     # THEN
     y_1st_road_in_ordered_list = y_bud.get_item_tree_ordered_road_list()[0]
-    assert y_1st_road_in_ordered_list == sue_bud.fisc_tag
+    assert y_1st_road_in_ordered_list == root_road
 
 
 def test_BudUnit_get_item_tree_ordered_road_list_CorrectlyCleansRangedItemRoadUnits():
@@ -457,7 +460,8 @@ def test_BudUnit_settle_bud_WhenItemRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_mass_set == {sue_budunit.fisc_tag}
+    root_road = to_road(sue_budunit.fisc_tag)
+    assert sue_budunit._offtrack_kids_mass_set == {root_road}
 
     # WHEN
     sue_budunit.edit_item_attr(casa_road, mass=2)
@@ -516,7 +520,8 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_debtit_belief = 5
     yao_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     yao_bud.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    x_itemroot = yao_bud.get_item_obj(yao_bud.fisc_tag)
+    root_road = to_road(yao_bud.fisc_tag)
+    x_itemroot = yao_bud.get_item_obj(root_road)
     x_itemroot.set_awardlink(awardlink_shop(yao_str))
     x_itemroot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -649,8 +654,8 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
     tue_road = yao_bud.make_road(week_road, tue_str)
     tue_addin = 100
     yao_bud.set_item(itemunit_shop(tue_str, addin=tue_addin), week_road)
-    x_fisc_tag = yao_bud.fisc_tag
-    yao_bud.edit_item_attr(x_fisc_tag, reason_base=tue_road, reason_premise=tue_road)
+    root_road = to_road(yao_bud.fisc_tag)
+    yao_bud.edit_item_attr(root_road, reason_base=tue_road, reason_premise=tue_road)
 
     week_open = 3
     week_nigh = 7
@@ -679,7 +684,7 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
     # tue_open = 113
     # tue_nigh = 117
     # tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
-    # root_item = yao_bud.get_item_obj(yao_bud.fisc_tag)
+    # root_item = yao_bud.get_item_obj(root_road)
     # print(f"{week_road=} {root_item._factheirs.keys()=}")
     # assert root_item._factheirs.get(week_road) == week_factheir
     # assert len(root_item._factheirs) == 2

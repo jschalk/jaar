@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
@@ -164,7 +165,7 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_tag)
+    casa_budatom.set_arg(parent_road_str(), to_road(sue_budunit.fisc_tag))
     casa_budatom.set_arg(item_tag_str(), casa_str)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
@@ -219,7 +220,7 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(parent_road_str(), sue_budunit.fisc_tag)
+    casa_budatom.set_arg(parent_road_str(), to_road(sue_budunit.fisc_tag))
     casa_budatom.set_arg(item_tag_str(), casa_str)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)

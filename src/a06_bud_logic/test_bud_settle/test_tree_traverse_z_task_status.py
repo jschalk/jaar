@@ -1,3 +1,4 @@
+from src.a01_road_logic.road import to_road
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
@@ -158,7 +159,7 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     # THEN
     casa_item = sue_budunit._item_dict.get(casa_road)
     print(f"\nlook at {casa_item.get_road()=}")
-    assert casa_item.parent_road == sue_budunit.fisc_tag
+    assert casa_item.parent_road == to_road(sue_budunit.fisc_tag)
     assert casa_item._kids == {}
     assert casa_item.mass == 30
     assert casa_item.item_tag == casa_str
@@ -400,7 +401,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     }
     mt_reasonunit = reasonunit_shop(week_road, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(week_road, premises=mt_premises, _status=False)
-    x_itemroot = yao_budunit.get_item_obj(yao_budunit.fisc_tag)
+    x_itemroot = yao_budunit.get_item_obj(to_road(yao_budunit.fisc_tag))
     x_itemroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_budunit.reasonunits[week_road].base=}")
     # print(f"{yao_budunit.reasonunits[week_road].premises[mon_road].need=}")

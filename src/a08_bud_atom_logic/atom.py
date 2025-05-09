@@ -8,7 +8,7 @@ from src.a00_data_toolbox.db_toolbox import (
     RowData,
 )
 from src.a02_finance_logic.finance_config import TimeLinePoint
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     create_road,
     TagUnit,
     RoadUnit,
@@ -287,7 +287,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         parent_road=x_atom.get_value("parent_road"),
         create_missing_items=False,
         get_rid_of_missing_awardlinks_awardee_titles=False,
-        create_missing_ancestors=False,
+        create_missing_ancestors=True,
     )
 
 
@@ -711,9 +711,8 @@ def atomrow_shop(atom_dimens: set[str], crud_command: CRUD_command) -> AtomRow:
 
 
 def sift_budatom(x_bud: BudUnit, x_atom: BudAtom) -> BudAtom:
-    x_dimen = x_atom.dimen
-    config_req_args = get_atom_config_jkeys(x_dimen)
-    x_atom_reqs = {req_arg: x_atom.get_value(req_arg) for req_arg in config_req_args}
+    config_keys = get_atom_config_jkeys(x_atom.dimen)
+    x_atom_reqs = {x_key: x_atom.get_value(x_key) for x_key in config_keys}
     x_parent_road = x_atom_reqs.get("parent_road")
     x_item_tag = x_atom_reqs.get("item_tag")
     if x_parent_road != None and x_item_tag != None:
@@ -723,16 +722,16 @@ def sift_budatom(x_bud: BudUnit, x_atom: BudAtom) -> BudAtom:
         if is_itemroot_road is True:
             return None
 
-    x_exists = bud_attr_exists(x_dimen, x_bud, x_atom_reqs)
+    x_exists = bud_attr_exists(x_atom.dimen, x_bud, x_atom_reqs)
 
     if x_atom.crud_str == atom_delete() and x_exists:
         return x_atom
     elif x_atom.crud_str == atom_insert() and not x_exists:
         return x_atom
     elif x_atom.crud_str == atom_insert() and x_exists:
-        x_bud_obj = bud_get_obj(x_dimen, x_bud, x_atom_reqs)
+        x_bud_obj = bud_get_obj(x_atom.dimen, x_bud, x_atom_reqs)
         x_jvalues = x_atom.get_jvalues_dict()
-        update_atom = budatom_shop(x_dimen, atom_update(), x_atom.jkeys)
+        update_atom = budatom_shop(x_atom.dimen, atom_update(), x_atom.jkeys)
         for jvalue in x_jvalues:
             optional_jvalue = x_atom.get_value(jvalue)
             obj_jvalue = x_bud_obj.__dict__[jvalue]

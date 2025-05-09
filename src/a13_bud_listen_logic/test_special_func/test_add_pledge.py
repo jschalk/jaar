@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import get_default_fisc_tag as root_tag
+from src.a01_road_logic.road import get_default_fisc_tag as root_tag
 from src.a12_hub_tools.hub_tool import open_gut_file
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a12_hub_tools.special_func import add_gut_pledge, add_gut_fact

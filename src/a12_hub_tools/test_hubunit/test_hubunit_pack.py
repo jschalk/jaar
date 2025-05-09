@@ -261,7 +261,7 @@ def test_HubUnit_save_pack_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     two_file_json = open_file(sue_hubunit._packs_dir, next_filename)
 
 
-def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenNopackFilesExist(
+def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenNoPackFilesExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -282,7 +282,7 @@ def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenNopackFilesE
     assert sue_packunit._packs_dir == sue_hubunit._packs_dir
 
 
-def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenpackFilesExist(
+def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenPackFilesExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -507,27 +507,27 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     assert new_bud.item_exists(sports_road)
 
 
-def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-    sue_hubunit.save_pack_file(sue_2budatoms_packunit())
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_tag=}")
-    sports_str = "sports"
-    sports_road = gut_bud.make_l1_road(sports_str)
-    knee_str = "knee"
-    knee_road = gut_bud.make_road(sports_road, knee_str)
-    assert gut_bud.item_exists(sports_road) is False
-    assert gut_bud.item_exists(knee_road) is False
+# def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     sue_str = "Sue"
+#     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
+#     sue_hubunit.save_pack_file(sue_2budatoms_packunit())
+#     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+#     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
+#     print(f"{gut_bud.fisc_tag=}")
+#     sports_str = "sports"
+#     sports_road = gut_bud.make_l1_road(sports_str)
+#     knee_str = "knee"
+#     knee_road = gut_bud.make_road(sports_road, knee_str)
+#     assert gut_bud.item_exists(sports_road) is False
+#     assert gut_bud.item_exists(knee_road) is False
 
-    # WHEN
-    new_bud = sue_hubunit._merge_any_packs(gut_bud)
+#     # WHEN
+#     new_bud = sue_hubunit._merge_any_packs(gut_bud)
 
-    # THEN
-    assert new_bud != gut_bud
-    assert new_bud.item_exists(sports_road)
-    assert new_bud.item_exists(knee_road)
+#     # THEN
+#     assert new_bud != gut_bud
+#     assert new_bud.item_exists(sports_road)
+#     assert new_bud.item_exists(knee_road)

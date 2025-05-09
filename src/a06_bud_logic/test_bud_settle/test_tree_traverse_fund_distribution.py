@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import RoadUnit
+from src.a01_road_logic.road import RoadUnit, to_road
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop
@@ -354,7 +354,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert sue_bud.itemroot._awardheirs.get(sue_str) is not None
     assert sue_bud.itemroot._awardheirs.get(sue_str).awardee_title == sue_str
     assert sue_bud.itemroot._awardlines != {}
-    root_item = sue_bud.get_item_obj(road=sue_bud.itemroot.item_tag)
+    root_road = to_road(sue_bud.itemroot.item_tag)
+    root_item = sue_bud.get_item_obj(road=root_road)
     sue_awardline = sue_bud.itemroot._awardlines.get(sue_str)
     print(f"{sue_awardline._fund_give=} {root_item._fund_ratio=} ")
     print(f"  {sue_awardline._fund_take=} {root_item._fund_ratio=} ")
@@ -428,7 +429,8 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    x_itemroot = sue_bud.get_item_obj(sue_bud.fisc_tag)
+    root_road = to_road(sue_bud.itemroot.item_tag)
+    x_itemroot = sue_bud.get_item_obj(root_road)
     x_itemroot.set_awardlink(awardlink=yao_awardlink)
     x_itemroot.set_awardlink(awardlink=zia_awardlink)
     x_itemroot.set_awardlink(awardlink=xio_awardlink)
@@ -607,7 +609,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fu
     x_bud.settle_bud()
 
     # THEN
-    x_itemroot = x_bud.get_item_obj(x_bud.fisc_tag)
+    x_itemroot = x_bud.get_item_obj(to_road(x_bud.fisc_tag))
     with pytest_raises(Exception) as excinfo:
         x_itemroot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -670,7 +672,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{item_dict.keys()=}")
-    item_bob = item_dict.get(sue_bud.fisc_tag)
+    item_bob = item_dict.get(to_road(sue_bud.fisc_tag))
     assert len(item_bob._awardheirs) == 3
 
     bheir_yao = item_bob._awardheirs.get(yao_str)
@@ -718,9 +720,10 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    yao_bud.edit_item_attr(yao_bud.fisc_tag, awardlink=sue_awardlink)
-    yao_bud.edit_item_attr(yao_bud.fisc_tag, awardlink=bob_awardlink)
-    yao_bud.edit_item_attr(yao_bud.fisc_tag, awardlink=zia_awardlink)
+    root_road = to_road(yao_bud.fisc_tag)
+    yao_bud.edit_item_attr(root_road, awardlink=sue_awardlink)
+    yao_bud.edit_item_attr(root_road, awardlink=bob_awardlink)
+    yao_bud.edit_item_attr(root_road, awardlink=zia_awardlink)
 
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)

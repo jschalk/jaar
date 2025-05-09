@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import PennyNum, FundNum
-from src.a01_word_logic.road import OwnerName, EventInt, RoadUnit
+from src.a01_road_logic.road import OwnerName, EventInt, RoadUnit
 from src.a04_reason_logic.reason_item import (
     FactUnit,
     factunits_get_from_dict,

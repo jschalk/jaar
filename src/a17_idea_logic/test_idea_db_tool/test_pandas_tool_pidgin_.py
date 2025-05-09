@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road
+from src.a01_road_logic.road import create_road, to_road
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
@@ -210,6 +210,8 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
+    otx_accord45_road = to_road(otx_accord45_str)
+    inx_accord87_road = to_road(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
     casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
@@ -224,7 +226,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_accord45_str
+    assert otx_dt.iloc[0][base_str()] == otx_accord45_road
     assert otx_dt.iloc[1][base_str()] == casa_otx_road
     assert otx_dt.iloc[2][base_str()] == clean_otx_road
     assert otx_dt.iloc[3][base_str()] == sweep_otx_road
@@ -234,7 +236,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][base_str()] == inx_accord87_str
+    assert otx_dt.iloc[0][base_str()] == inx_accord87_road
     assert otx_dt.iloc[1][base_str()] == casa_inx_road
     assert otx_dt.iloc[2][base_str()] == clean_inx_road
     assert otx_dt.iloc[3][base_str()] == sweep_inx_road
@@ -250,6 +252,8 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
+    otx_accord45_road = to_road(otx_accord45_str)
+    inx_accord87_road = to_road(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
     casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
@@ -265,7 +269,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_road_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_accord45_str
+    assert otx_dt.iloc[0][base_str()] == otx_accord45_road
     assert otx_dt.iloc[1][base_str()] == casa_otx_road
     assert otx_dt.iloc[2][base_str()] == clean_otx_road
     assert otx_dt.iloc[3][base_str()] == sweep_otx_road
@@ -278,7 +282,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][base_str()] == inx_accord87_str
+    assert otx_dt.iloc[0][base_str()] == inx_accord87_road
     assert otx_dt.iloc[1][base_str()] == casa_inx_road
     assert otx_dt.iloc[2][base_str()] == clean_inx_road
     assert otx_dt.iloc[3][base_str()] == sweep_inx_road

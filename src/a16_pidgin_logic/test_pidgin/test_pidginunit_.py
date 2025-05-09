@@ -1,5 +1,5 @@
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a01_word_logic.road import default_bridge_if_None
+from src.a01_road_logic.road import default_bridge_if_None
 from src.a06_bud_logic._utils.str_a06 import (
     type_NameUnit_str,
     type_LabelUnit_str,
@@ -46,7 +46,7 @@ from src.a16_pidgin_logic.pidgin import (
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_invalid_namemap,
     get_invalid_labelmap,
-    get_invalid_tagmap,
+    get_invalid_roadmap,
     get_clean_roadmap,
     get_clean_tagmap,
     get_swim_labelmap,
@@ -465,7 +465,7 @@ def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
     invalid_namemap = get_invalid_namemap()
     invalid_labelmap = get_invalid_labelmap()
-    invalid_tagmap = get_invalid_tagmap()
+    invalid_tagmap = get_invalid_roadmap()
     valid_namemap = get_suita_namemap()
     valid_labelmap = get_swim_labelmap()
     valid_tagmap = get_clean_roadmap()

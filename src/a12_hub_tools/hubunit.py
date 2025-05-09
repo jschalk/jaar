@@ -21,7 +21,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     default_money_magnitude_if_None,
 )
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     OwnerName,
     FiscTag,
     TagUnit,
@@ -68,11 +68,11 @@ from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
 
 
-class SavepackFileException(Exception):
+class SavePackFileException(Exception):
     pass
 
 
-class packFileMissingException(Exception):
+class PackFileMissingException(Exception):
     pass
 
 
@@ -219,20 +219,20 @@ class HubUnit:
             x_pack = self.validate_packunit(x_pack)
 
         if x_pack._atoms_dir != self._atoms_dir:
-            raise SavepackFileException(
+            raise SavePackFileException(
                 f"PackUnit file cannot be saved because packunit._atoms_dir is incorrect: {x_pack._atoms_dir}. It must be {self._atoms_dir}."
             )
         if x_pack._packs_dir != self._packs_dir:
-            raise SavepackFileException(
+            raise SavePackFileException(
                 f"PackUnit file cannot be saved because packunit._packs_dir is incorrect: {x_pack._packs_dir}. It must be {self._packs_dir}."
             )
         if x_pack.owner_name != self.owner_name:
-            raise SavepackFileException(
+            raise SavePackFileException(
                 f"PackUnit file cannot be saved because packunit.owner_name is incorrect: {x_pack.owner_name}. It must be {self.owner_name}."
             )
         pack_filename = self.pack_filename(x_pack._pack_id)
         if not replace and self.pack_file_exists(x_pack._pack_id):
-            raise SavepackFileException(
+            raise SavePackFileException(
                 f"PackUnit file {pack_filename} exists and cannot be saved over."
             )
         x_pack.save_files()
@@ -257,7 +257,7 @@ class HubUnit:
 
     def get_packunit(self, pack_id: int) -> PackUnit:
         if self.pack_file_exists(pack_id) is False:
-            raise packFileMissingException(
+            raise PackFileMissingException(
                 f"PackUnit file_number {pack_id} does not exist."
             )
         x_packs_dir = self._packs_dir
@@ -437,7 +437,7 @@ class HubUnit:
             raise get_keep_roadsException(x_str)
         owner_healer_dict = x_gut_bud._healers_dict.get(self.owner_name)
         if owner_healer_dict is None:
-            return get_empty_set_if_None(None)
+            return get_empty_set_if_None()
         keep_roads = x_gut_bud._healers_dict.get(self.owner_name).keys()
         return get_empty_set_if_None(keep_roads)
 

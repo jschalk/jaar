@@ -23,13 +23,13 @@
         ["19hr", 1440]
     ],
     "months_config": [
-        ["Fresh", 25],
+        ["Fredrick", 25],
         ["Geo", 50],
         ["Holocene", 75],
         ["Iguana", 100],
-        ["Jinping", 125],
+        ["Jesus", 125],
         ["Keel", 150],
-        ["Lebron", 175],
+        ["LeBron", 175],
         ["Mikayla", 200],
         ["Ninon", 225],
         ["Obama", 250],
@@ -41,6 +41,6 @@
     ],
     "monthday_distortion": 0,
     "timeline_tag": "five",
-    "weekdays_config": ["Anaday", "Baileyday", "Chiday", "Danceday", "Elonday"],
+    "weekdays_config": ["Anaday", "Baileyday", "Chiday", "Danceday", "Eastday"],
     "yr1_jan1_offset": 1683478080
 }

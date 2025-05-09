@@ -5,8 +5,9 @@ from src.a04_reason_logic.reason_item import (
     premiseunit_shop,
     premises_get_from_dict,
 )
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     get_default_fisc_tag as root_tag,
+    get_default_fisc_road,
     create_road,
     find_replace_road_key_dict,
 )
@@ -697,7 +698,7 @@ def test_PremiseUnit_get_obj_key():
 
 def test_PremiseUnit_find_replace_road_casas():
     # ESTABLISH
-    old_root_road = root_tag()
+    old_root_road = get_default_fisc_road()
     weekday_str = "weekday"
     weekday_road = create_road(root_tag(), weekday_str)
     sunday_str = "Sunday"
@@ -707,12 +708,12 @@ def test_PremiseUnit_find_replace_road_casas():
     assert sunday_premise.need == old_sunday_road
 
     # WHEN
-    new_road = "fun"
+    new_road = create_road("fun")
     sunday_premise.find_replace_road(old_road=old_root_road, new_road=new_road)
-    new_weekday_road = create_road(new_road, weekday_str)
-    new_sunday_road = create_road(new_weekday_road, sunday_str)
 
     # THEN
+    new_weekday_road = create_road(new_road, weekday_str)
+    new_sunday_road = create_road(new_weekday_road, sunday_str)
     assert sunday_premise.need == new_sunday_road
 
 

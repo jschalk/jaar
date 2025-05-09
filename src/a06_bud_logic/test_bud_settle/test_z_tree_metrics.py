@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import create_road_from_tags
+from src.a01_road_logic.road import create_road_from_tags
 from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_item_logic.item import itemunit_shop

@@ -1,5 +1,5 @@
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     get_default_fisc_tag as root_tag,
     create_road,
     default_bridge_if_None,

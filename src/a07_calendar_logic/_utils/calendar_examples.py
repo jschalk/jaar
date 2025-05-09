@@ -16,18 +16,12 @@ from src.a07_calendar_logic._utils.str_a07 import (
     timeline_tag_str,
     yr1_jan1_offset_str,
     c400_number_str,
+    creg_str,
+    five_str,
 )
 from src.a07_calendar_logic._utils.env_a07 import get_module_examples_dir
 from datetime import datetime
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
-
-
-def creg_str() -> str:
-    return "creg"
-
-
-def five_str() -> str:
-    return "five"
 
 
 def get_five_config() -> dict:

@@ -1,4 +1,4 @@
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     create_road_from_tags,
     get_default_fisc_tag,
     RoadUnit,

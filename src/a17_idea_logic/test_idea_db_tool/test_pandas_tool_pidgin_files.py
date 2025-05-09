@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_file, create_path
-from src.a01_word_logic.road import create_road
+from src.a01_road_logic.road import create_road, to_road
 from src.a06_bud_logic._utils.str_a06 import acct_name_str, base_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
@@ -92,10 +92,12 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
+    otx_accord45_road = to_road(otx_accord45_str)
+    inx_accord87_road = to_road(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
+    casa_otx_road = create_road(otx_accord45_road, casa_otx_str)
+    casa_inx_road = create_road(inx_accord87_road, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_road = create_road(casa_otx_road, clean_otx_str)
@@ -128,7 +130,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][base_str()] == inx_accord87_str
+    assert gen_inx_dt.iloc[0][base_str()] == inx_accord87_road
     assert gen_inx_dt.iloc[1][base_str()] == casa_inx_road
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
     assert gen_inx_dt.iloc[0][base_str()] == sue_inx_dt.iloc[0][base_str()]

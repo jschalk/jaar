@@ -6,7 +6,7 @@ from src.a00_data_toolbox.file_toolbox import (
     get_json_filename,
 )
 from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, get_dict_from_json
-from src.a01_word_logic.road import (
+from src.a01_road_logic.road import (
     FaceName,
     OwnerName,
     FiscTag,
