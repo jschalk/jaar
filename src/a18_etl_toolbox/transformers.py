@@ -513,7 +513,6 @@ def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
     bridge = default_bridge_if_None()
     unknown = default_unknown_word_if_None()
     insert_sqlstr = create_insert_into_pidgin_core_vld_sqlstr(bridge, unknown)
-    print(insert_sqlstr)
     cursor.execute(insert_sqlstr)
 
 
