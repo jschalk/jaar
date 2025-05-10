@@ -102,11 +102,12 @@ def test_make_buddelta_Arg_idea_format_00021_bud_acctunit_v0_0_0():
 #     x_idea_name = idea_format_00020_bud_acct_membership_v0_0_0()
 #     membership_dataframe = create_idea_df(sue_budunit, x_idea_name)
 #     assert len(membership_dataframe) == 10
+#     print(membership_dataframe)
 #     membership_csv = membership_dataframe.to_csv(index=False)
 #     print(f"{membership_csv=}")
 
 #     # WHEN
-#     membership_changunit = make_buddelta(membership_csv)
+#       membership_changunit = make_buddelta(membership_csv)
 
 #     # THEN
 #     assert membership_changunit

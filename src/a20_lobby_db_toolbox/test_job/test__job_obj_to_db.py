@@ -392,8 +392,8 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_road = 1
-    x_base = 2
-    x_pick = 3
+    x_fbase = 2
+    x_fneed = 3
     x_fopen = 4
     x_fnigh = 5
     values_dict = {
@@ -401,8 +401,8 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "road": x_road,
-        "base": x_base,
-        "pick": x_pick,
+        "fbase": x_fbase,
+        "fneed": x_fneed,
         "fopen": x_fopen,
         "fnigh": x_fnigh,
     }

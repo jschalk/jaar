@@ -4434,7 +4434,7 @@
             "base": ";accord45;day_minute",
             "fnigh": 59,
             "fopen": 5,
-            "pick": ";accord45;day_minute"
+            "fneed": ";accord45;day_minute"
           }
         },
         "item_tag": "day_minute",
@@ -4611,13 +4611,13 @@
         "base": ";accord45;day_hour",
         "fnigh": 23,
         "fopen": 0,
-        "pick": ";accord45;day_hour"
+        "fneed": ";accord45;day_hour"
       },
       ";accord45;day_minute": {
         "base": ";accord45;day_minute",
         "fnigh": 59,
         "fopen": 0,
-        "pick": ";accord45;day_minute"
+        "fneed": ";accord45;day_minute"
       }
     },
     "item_tag": "accord45",

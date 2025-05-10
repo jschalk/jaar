@@ -1,6 +1,6 @@
 from src.a01_road_logic.road import create_road
 from src.a06_bud_logic._utils.str_a06 import bud_item_factunit_str
-from src.a06_bud_logic._utils.str_a06 import road_str, base_str
+from src.a06_bud_logic._utils.str_a06 import road_str, base_str, open_str, nigh_str
 from src.a08_bud_atom_logic._utils.str_a08 import (
     jkeys_str,
     jvalues_str,
@@ -53,16 +53,13 @@ def test_BudAtom_get_json_ReturnsObj():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     x_dimen = bud_item_factunit_str()
-    road_str = "road"
-    open_str = "open"
-    nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_factunit_budatom.set_jkey(road_str, ball_road)
+    insert_factunit_budatom.set_jkey(road_str(), ball_road)
     insert_factunit_budatom.set_jkey(base_str(), knee_road)
-    insert_factunit_budatom.set_jvalue(open_str, knee_open)
-    insert_factunit_budatom.set_jvalue(nigh_str, knee_nigh)
+    insert_factunit_budatom.set_jvalue(open_str(), knee_open)
+    insert_factunit_budatom.set_jvalue(nigh_str(), knee_nigh)
 
     # WHEN
     atom_json = insert_factunit_budatom.get_json()
@@ -80,16 +77,13 @@ def test_budatom_get_from_json_ReturnsObj():
     knee_str = "knee"
     knee_road = create_road("a", knee_str)
     x_dimen = bud_item_factunit_str()
-    road_str = "road"
-    open_str = "open"
-    nigh_str = "nigh"
     knee_open = 7
     knee_nigh = 13
     gen_budatom = budatom_shop(x_dimen, atom_insert())
-    gen_budatom.set_jkey(road_str, ball_road)
+    gen_budatom.set_jkey(road_str(), ball_road)
     gen_budatom.set_jkey(base_str(), knee_road)
-    gen_budatom.set_jvalue(open_str, knee_open)
-    gen_budatom.set_jvalue(nigh_str, knee_nigh)
+    gen_budatom.set_jvalue(open_str(), knee_open)
+    gen_budatom.set_jvalue(nigh_str(), knee_nigh)
     atom_json = gen_budatom.get_json()
 
     # WHEN

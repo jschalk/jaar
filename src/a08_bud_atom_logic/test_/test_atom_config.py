@@ -17,6 +17,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     addin_str,
     awardee_title_str,
     base_str,
+    fbase_str,
     begin_str,
     close_str,
     credit_belief_str,
@@ -411,7 +412,7 @@ def test_get_flattened_atom_table_build_ReturnsObj():
 
     # THEN
     assert len(atom_columns) == 103
-    assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
+    assert atom_columns.get("budunit_UPDATE_credor_respect") == "REAL"
     # print(f"{atom_columns.keys()=}")
 
 
@@ -520,7 +521,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert acct_name_dict.get("nullable") is False
     debtit_belief_dict = acctunit_columns.get("debtit_belief")
     assert len(acct_name_dict) == 2
-    assert debtit_belief_dict.get(sqlite_datatype_str()) == "INTEGER"
+    assert debtit_belief_dict.get(sqlite_datatype_str()) == "REAL"
     assert debtit_belief_dict.get("nullable") is True
 
     assert len(cat_item) == 2
@@ -554,7 +555,7 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_dimens
     assert bud_item_teamlink_str() in road_dimens
     assert len(road_dimens) == 7
-    assert len(x_atom_args_dimen_mapping) == 40
+    assert len(x_atom_args_dimen_mapping) == 41
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -648,14 +649,15 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
-    assert x_class_types.get(credit_belief_str()) == "int"
-    assert x_class_types.get(credit_vote_str()) == "int"
-    assert x_class_types.get(credor_respect_str()) == "int"
-    assert x_class_types.get(debtit_belief_str()) == "int"
-    assert x_class_types.get(debtit_vote_str()) == "int"
-    assert x_class_types.get(debtor_respect_str()) == "int"
+    assert x_class_types.get(credit_belief_str()) == "float"
+    assert x_class_types.get(credit_vote_str()) == "float"
+    assert x_class_types.get(credor_respect_str()) == "float"
+    assert x_class_types.get(debtit_belief_str()) == "float"
+    assert x_class_types.get(debtit_vote_str()) == "float"
+    assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("divisor") == "int"
+    assert x_class_types.get(fbase_str()) == type_RoadUnit_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"
@@ -672,7 +674,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("pick") == type_RoadUnit_str()
+    assert x_class_types.get("fneed") == type_RoadUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(road_str()) == type_RoadUnit_str()

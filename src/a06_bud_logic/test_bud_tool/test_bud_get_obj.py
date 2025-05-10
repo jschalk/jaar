@@ -22,6 +22,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
+    road_str,
+    base_str,
+    fbase_str,
+    need_str,
+    fneed_str,
 )
 
 
@@ -61,7 +66,7 @@ def test_bud_itemunit_get_obj_ReturnsObj():
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road}
+    jkeys = {road_str(): casa_road}
 
     # WHEN
     x_obj = bud_itemunit_get_obj(sue_bud, jkeys)
@@ -77,7 +82,7 @@ def test_bud_item_awardlink_get_obj_ReturnsObj():
     swim_str = "swim"
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "awardee_title": swim_str}
+    jkeys = {road_str(): casa_road, "awardee_title": swim_str}
     sue_bud.add_item(casa_road)
     sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
 
@@ -95,7 +100,7 @@ def test_bud_item_reasonunit_get_obj_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     week_road = sue_bud.make_l1_road("week")
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "base": week_road}
+    jkeys = {road_str(): casa_road, base_str(): week_road}
     sue_bud.add_item(casa_road)
     sue_bud.add_item(week_road)
     sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
@@ -115,7 +120,7 @@ def test_bud_item_reason_premiseunit_get_obj_ReturnsObj():
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
-    casa_jkeys = {"road": casa_road, "base": week_road, "need": thur_road}
+    casa_jkeys = {road_str(): casa_road, base_str(): week_road, need_str(): thur_road}
     sue_bud.add_item(casa_road)
     sue_bud.add_item(week_road)
     sue_bud.add_item(thur_road)
@@ -137,7 +142,7 @@ def test_bud_item_factunit_get_obj_ReturnsObj():
     casa_road = sue_bud.make_l1_road(casa_str)
     week_road = sue_bud.make_l1_road("week")
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "base": week_road}
+    jkeys = {road_str(): casa_road, fbase_str(): week_road}
     sue_bud.add_item(casa_road)
     sue_bud.add_item(week_road)
     sue_bud.get_item_obj(casa_road).set_factunit(factunit_shop(week_road))
@@ -199,7 +204,7 @@ def test_bud_get_obj_ReturnsObj_bud_itemunit_get_obj():
     casa_str = "casa"
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road}
+    jkeys = {road_str(): casa_road}
 
     # WHEN
     x_obj = bud_get_obj(bud_itemunit_str(), sue_bud, jkeys)
@@ -215,7 +220,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_awardlink_get_obj():
     swim_str = "swim"
     casa_road = sue_bud.make_l1_road(casa_str)
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "awardee_title": swim_str}
+    jkeys = {road_str(): casa_road, "awardee_title": swim_str}
     sue_bud.add_item(casa_road)
     sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
 
@@ -233,7 +238,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_reasonunit_get_obj():
     casa_road = sue_bud.make_l1_road(casa_str)
     week_road = sue_bud.make_l1_road("week")
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "base": week_road}
+    jkeys = {road_str(): casa_road, base_str(): week_road}
     sue_bud.add_item(casa_road)
     sue_bud.add_item(week_road)
     sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
@@ -253,7 +258,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_reason_premiseunit_get_obj():
     week_str = "week"
     week_road = sue_bud.make_l1_road(week_str)
     thur_road = sue_bud.make_road(week_road, "thur")
-    casa_jkeys = {"road": casa_road, "base": week_road, "need": thur_road}
+    casa_jkeys = {road_str(): casa_road, base_str(): week_road, need_str(): thur_road}
     sue_bud.add_item(casa_road)
     sue_bud.add_item(week_road)
     sue_bud.add_item(thur_road)
@@ -275,7 +280,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_factunit_get_obj():
     casa_road = sue_bud.make_l1_road(casa_str)
     week_road = sue_bud.make_l1_road("week")
     sue_bud.add_item(casa_road)
-    jkeys = {"road": casa_road, "base": week_road}
+    jkeys = {road_str(): casa_road, fbase_str(): week_road}
     sue_bud.add_item(casa_road)
     sue_bud.add_item(week_road)
     sue_bud.get_item_obj(casa_road).set_factunit(factunit_shop(week_road))

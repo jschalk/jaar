@@ -203,10 +203,10 @@ def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     slash_8am_road = zia_bud.make_road(slash_time_road, _8am_str)
     assert casa_item.factunits.get(slash_time_road) is not None
     gen_time_factunit = casa_item.factunits.get(slash_time_road)
-    assert gen_time_factunit.base is not None
-    assert gen_time_factunit.base == slash_time_road
-    assert gen_time_factunit.pick is not None
-    assert gen_time_factunit.pick == slash_8am_road
+    assert gen_time_factunit.fbase is not None
+    assert gen_time_factunit.fbase == slash_time_road
+    assert gen_time_factunit.fneed is not None
+    assert gen_time_factunit.fneed == slash_8am_road
 
     assert casa_item.factunits.get(semicolon_time_road) is None
 

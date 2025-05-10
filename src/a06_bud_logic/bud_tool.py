@@ -85,34 +85,34 @@ def bud_item_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_road = jkeys.get("road")
-    x_base = jkeys.get("base")
+    x_fbase = jkeys.get("fbase")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).factunit_exists(x_base)
+        and x_bud.get_item_obj(x_road).factunit_exists(x_fbase)
     )
 
 
 def bud_attr_exists(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    if x_dimen == "budunit":
-        return budunit_exists(x_bud)
+    if x_dimen == "bud_acct_membership":
+        return bud_acct_membership_exists(x_bud, jkeys)
     elif x_dimen == "bud_acctunit":
         return bud_acctunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_acct_membership":
-        return bud_acct_membership_exists(x_bud, jkeys)
-    elif x_dimen == "bud_itemunit":
-        return bud_itemunit_exists(x_bud, jkeys)
     elif x_dimen == "bud_item_awardlink":
         return bud_item_awardlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_reasonunit":
-        return bud_item_reasonunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_reason_premiseunit":
-        return bud_item_reason_premiseunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_teamlink":
-        return bud_item_teamlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_healerlink":
-        return bud_item_healerlink_exists(x_bud, jkeys)
     elif x_dimen == "bud_item_factunit":
         return bud_item_factunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_healerlink":
+        return bud_item_healerlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_reason_premiseunit":
+        return bud_item_reason_premiseunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_reasonunit":
+        return bud_item_reasonunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_teamlink":
+        return bud_item_teamlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_itemunit":
+        return bud_itemunit_exists(x_bud, jkeys)
+    elif x_dimen == "budunit":
+        return budunit_exists(x_bud)
     return True
 
 
@@ -154,8 +154,10 @@ def bud_item_reason_premiseunit_get_obj(
 
 def bud_item_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
     x_road = jkeys.get("road")
-    x_base = jkeys.get("base")
-    return x_bud.get_item_obj(x_road).factunits.get(x_base)
+    x_fbase = jkeys.get("fbase")
+    print(f"{x_fbase=}")
+    print(f"{x_bud.get_item_obj(x_road).factunits=}")
+    return x_bud.get_item_obj(x_road).factunits.get(x_fbase)
 
 
 def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
@@ -253,10 +255,10 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
     not_missing_fact_bases = set(x_bud.get_factunits_dict().keys())
     bud_fact_bases = not_missing_fact_bases.union(missing_fact_bases)
     for factunit in factunits_dict.values():
-        if factunit.base in bud_fact_bases:
+        if factunit.fbase in bud_fact_bases:
             x_bud.add_fact(
-                factunit.base,
-                factunit.pick,
+                factunit.fbase,
+                factunit.fneed,
                 factunit.fopen,
                 factunit.fnigh,
                 create_missing_items=True,

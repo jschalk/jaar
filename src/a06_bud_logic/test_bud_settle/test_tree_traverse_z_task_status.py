@@ -32,7 +32,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
     assert sue_budunit.get_item_obj(casa_road)._active is None
 
     # WHEN
-    sue_budunit.add_fact(base=week_road, pick=sun_road)
+    sue_budunit.add_fact(fbase=week_road, fneed=sun_road)
     sue_budunit.settle_bud()
 
     # THEN
@@ -55,7 +55,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     casa_road = sue_budunit.make_l1_road(casa_str)
 
     # WHEN
-    sue_budunit.add_fact(base=week_road, pick=sun_road)
+    sue_budunit.add_fact(fbase=week_road, fneed=sun_road)
 
     # THEN
     sue_budunit.settle_bud()
@@ -68,7 +68,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     states_road = sue_budunit.make_l1_road(states_str)
     usa_str = "USA"
     usa_road = sue_budunit.make_road(states_road, usa_str)
-    sue_budunit.add_fact(base=states_road, pick=usa_road)
+    sue_budunit.add_fact(fbase=states_road, fneed=usa_road)
 
     # THEN
     sue_budunit.settle_bud()
@@ -79,7 +79,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     # WHEN
     france_str = "France"
     france_road = sue_budunit.make_road(states_road, france_str)
-    sue_budunit.add_fact(base=states_road, pick=france_road)
+    sue_budunit.add_fact(fbase=states_road, fneed=france_road)
 
     # THEN
     sue_budunit.settle_bud()
@@ -99,8 +99,8 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     state_road = sue_budunit.make_l1_road(state_str)
     france_str = "France"
     france_road = sue_budunit.make_road(state_road, france_str)
-    sue_budunit.add_fact(base=week_road, pick=wed_road)
-    sue_budunit.add_fact(base=state_road, pick=france_road)
+    sue_budunit.add_fact(fbase=week_road, fneed=wed_road)
+    sue_budunit.add_fact(fbase=state_road, fneed=france_road)
 
     casa_str = "casa"
     casa_road = sue_budunit.make_l1_road(casa_str)
@@ -153,7 +153,7 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
     }
 
     # WHEN
-    sue_budunit.add_fact(base=state_road, pick=oregon_road)
+    sue_budunit.add_fact(fbase=state_road, fneed=oregon_road)
     sue_budunit.settle_bud()
 
     # THEN
@@ -237,13 +237,13 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     day24hr_str = "24hr day"
     day24hr_road = sue_budunit.make_road(time_road, day24hr_str)
     day24hr_base = day24hr_road
-    day24hr_pick = day24hr_road
+    day24hr_fneed = day24hr_road
     day24hr_open = 0.0
     day24hr_nigh = 8.0
 
     # WHEN
     sue_budunit.add_fact(
-        base=day24hr_base, pick=day24hr_pick, fopen=day24hr_open, fnigh=day24hr_nigh
+        fbase=day24hr_base, fneed=day24hr_fneed, fopen=day24hr_open, fnigh=day24hr_nigh
     )
 
     # THEN
@@ -256,7 +256,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     day24hr_nigh = 10.0
     print(sue_budunit.itemroot.factunits[day24hr_road])
     sue_budunit.add_fact(
-        base=day24hr_base, pick=day24hr_pick, fopen=day24hr_open, fnigh=day24hr_nigh
+        fbase=day24hr_base, fneed=day24hr_fneed, fopen=day24hr_open, fnigh=day24hr_nigh
     )
     print(sue_budunit.itemroot.factunits[day24hr_road])
     print(sue_budunit.itemroot._kids[house_str]._kids[clean_str].reasonunits)
@@ -285,22 +285,22 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_bases()=}")
     # day_hour = f"{yao_budunit.fisc_tag},day_hour"
-    # yao_budunit.add_fact(base=day_hour, pick=day_hour, open=0, nigh=23)
+    # yao_budunit.add_fact(fbase=day_hour, fneed=day_hour, open=0, nigh=23)
     day_min_str = "day_minute"
     day_min_road = yao_budunit.make_l1_road(day_min_str)
-    yao_budunit.add_fact(base=day_min_road, pick=day_min_road, fopen=0, fnigh=1439)
+    yao_budunit.add_fact(fbase=day_min_road, fneed=day_min_road, fopen=0, fnigh=1439)
 
     mood_str = "Moods"
     mood_road = yao_budunit.make_l1_road(mood_str)
-    yao_budunit.add_fact(base=mood_road, pick=mood_road)
+    yao_budunit.add_fact(fbase=mood_road, fneed=mood_road)
     print(f"{yao_budunit.get_reason_bases()=}")
 
     yr_mon_str = "year_month"
     yr_mon_road = yao_budunit.make_l1_road(yr_mon_str)
-    yao_budunit.add_fact(base=yr_mon_road, pick=yr_mon_road)
+    yao_budunit.add_fact(fbase=yr_mon_road, fneed=yr_mon_road)
     inter_str = "Interweb"
     inter_road = yao_budunit.make_l1_road(inter_str)
-    yao_budunit.add_fact(base=inter_road, pick=inter_road)
+    yao_budunit.add_fact(fbase=inter_road, fneed=inter_road)
     assert yao_budunit is not None
     # print(f"{yao_budunit.owner_name=}")
     # print(f"{len(yao_budunit.itemroot._kids)=}")
@@ -342,7 +342,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     week_road = yao_budunit.make_l1_road(week_str)
     mon_str = "Monday"
     mon_road = yao_budunit.make_road(week_road, mon_str)
-    yao_budunit.add_fact(base=week_road, pick=mon_road)
+    yao_budunit.add_fact(fbase=week_road, fneed=mon_road)
     yao_budunit.settle_bud()
 
     # THEN
@@ -355,28 +355,28 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
 
     day_hr_str = "day_hour"
     day_hr_road = yao_budunit.make_l1_road(day_hr_str)
-    yao_budunit.add_fact(base=day_hr_road, pick=day_hr_road, fopen=0, fnigh=23)
+    yao_budunit.add_fact(fbase=day_hr_road, fneed=day_hr_road, fopen=0, fnigh=23)
     day_min_str = "day_minute"
     day_min_road = yao_budunit.make_l1_road(day_min_str)
-    yao_budunit.add_fact(base=day_min_road, pick=day_min_road, fopen=0, fnigh=59)
+    yao_budunit.add_fact(fbase=day_min_road, fneed=day_min_road, fopen=0, fnigh=59)
     mon_wk_str = "month_week"
     mon_wk_road = yao_budunit.make_l1_road(mon_wk_str)
-    yao_budunit.add_fact(base=mon_wk_road, pick=mon_wk_road)
+    yao_budunit.add_fact(fbase=mon_wk_road, fneed=mon_wk_road)
     nation_str = "Nation-States"
     nation_road = yao_budunit.make_l1_road(nation_str)
-    yao_budunit.add_fact(base=nation_road, pick=nation_road)
+    yao_budunit.add_fact(fbase=nation_road, fneed=nation_road)
     mood_str = "Moods"
     mood_road = yao_budunit.make_l1_road(mood_str)
-    yao_budunit.add_fact(base=mood_road, pick=mood_road)
+    yao_budunit.add_fact(fbase=mood_road, fneed=mood_road)
     aaron_str = "Aaron Donald objects effected by him"
     aaron_road = yao_budunit.make_l1_road(aaron_str)
-    yao_budunit.add_fact(base=aaron_road, pick=aaron_road)
+    yao_budunit.add_fact(fbase=aaron_road, fneed=aaron_road)
     inter_str = "Interweb"
     inter_road = yao_budunit.make_l1_road(inter_str)
-    yao_budunit.add_fact(base=inter_road, pick=inter_road)
+    yao_budunit.add_fact(fbase=inter_road, fneed=inter_road)
     yr_mon_str = "year_month"
     yr_mon_road = yao_budunit.make_l1_road(yr_mon_str)
-    yao_budunit.add_fact(base=yr_mon_road, pick=yr_mon_road, fopen=0, fnigh=1000)
+    yao_budunit.add_fact(fbase=yr_mon_road, fneed=yr_mon_road, fopen=0, fnigh=1000)
 
     yao_budunit.settle_bud()
     missing_facts = yao_budunit.get_missing_fact_bases()
@@ -433,7 +433,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     bird_road = yao_budunit.make_road(casa_road, bird_str)
     assert from_list_get_active(bird_road, item_dict) is False
 
-    # yao_budunit.add_fact(base=week_road, pick=mon_road)
+    # yao_budunit.add_fact(fbase=week_road, fneed=mon_road)
     # item_dict = yao_budunit.get_item_dict()
     # casa_item = x_itemroot._kids[casa_str]
     # twee_item = casa_item._kids[bird_str]
@@ -443,11 +443,11 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
 
     # assert YR.get_active(road=bird_item, item_dict=item_dict) is True
 
-    # yao_budunit.add_fact(base=f"{yao_budunit.fisc_tag},weekdays", pick=f"{yao_budunit.fisc_tag},weekdays,Tuesday")
+    # yao_budunit.add_fact(fbase=f"{yao_budunit.fisc_tag},weekdays", fneed=f"{yao_budunit.fisc_tag},weekdays,Tuesday")
     # item_dict = yao_budunit.get_item_dict()
     # assert YR.get_active(road=bird_item, item_dict=item_dict) is True
 
-    # yao_budunit.add_fact(base=f"{yao_budunit.fisc_tag},weekdays", pick=f"{yao_budunit.fisc_tag},weekdays,Wednesday")
+    # yao_budunit.add_fact(fbase=f"{yao_budunit.fisc_tag},weekdays", fneed=f"{yao_budunit.fisc_tag},weekdays,Wednesday")
     # item_dict = yao_budunit.get_item_dict()
     # assert YR.get_active(road=bird_item, item_dict=item_dict) is False
 
@@ -461,8 +461,8 @@ def test_BudUnit_settle_bud_CorrectlySetsItemUnitsActiveWithEvery6WeeksReason_bu
     min_road = yao_budunit.make_l1_road(day_str)
 
     # WHEN
-    yao_budunit.add_fact(base=day_road, pick=day_road, fopen=0, fnigh=23)
-    yao_budunit.add_fact(base=min_road, pick=min_road, fopen=0, fnigh=59)
+    yao_budunit.add_fact(fbase=day_road, fneed=day_road, fopen=0, fnigh=23)
+    yao_budunit.add_fact(fbase=min_road, fneed=min_road, fopen=0, fnigh=59)
     yao_budunit.settle_bud()
 
     # THEN
@@ -507,11 +507,14 @@ def test_BudUnit_settle_bud_CorrectlySetsItemUnitsActiveWithEvery6WeeksReason_bu
 
     # WHEN
     yao_budunit.add_fact(
-        base=ced_week_base, pick=ced_week_base, fopen=ced_week_open, fnigh=ced_week_open
+        fbase=ced_week_base,
+        fneed=ced_week_base,
+        fopen=ced_week_open,
+        fnigh=ced_week_open,
     )
     nation_str = "Nation-States"
     nation_road = yao_budunit.make_l1_road(nation_str)
-    yao_budunit.add_fact(base=nation_road, pick=nation_road)
+    yao_budunit.add_fact(fbase=nation_road, fneed=nation_road)
     print(
         f"Nation-states set and also fact set: {ced_week_base=} with {ced_week_open=} and {ced_week_open=}"
     )
@@ -578,25 +581,25 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsObj_budunit_v001():
     yao_budunit = budunit_v001()
     minute_str = "day_minute"
     minute_road = yao_budunit.make_l1_road(minute_str)
-    yao_budunit.add_fact(base=minute_road, pick=minute_road, fopen=0, fnigh=1399)
+    yao_budunit.add_fact(fbase=minute_road, fneed=minute_road, fopen=0, fnigh=1399)
     month_str = "month_week"
     month_road = yao_budunit.make_l1_road(month_str)
-    yao_budunit.add_fact(base=month_road, pick=month_road)
+    yao_budunit.add_fact(fbase=month_road, fneed=month_road)
     nations_str = "Nation-States"
     nations_road = yao_budunit.make_l1_road(nations_str)
-    yao_budunit.add_fact(base=nations_road, pick=nations_road)
+    yao_budunit.add_fact(fbase=nations_road, fneed=nations_road)
     mood_str = "Moods"
     mood_road = yao_budunit.make_l1_road(mood_str)
-    yao_budunit.add_fact(base=mood_road, pick=mood_road)
+    yao_budunit.add_fact(fbase=mood_road, fneed=mood_road)
     aaron_str = "Aaron Donald objects effected by him"
     aaron_road = yao_budunit.make_l1_road(aaron_str)
-    yao_budunit.add_fact(base=aaron_road, pick=aaron_road)
+    yao_budunit.add_fact(fbase=aaron_road, fneed=aaron_road)
     interweb_str = "Interweb"
     interweb_road = yao_budunit.make_l1_road(interweb_str)
-    yao_budunit.add_fact(base=interweb_road, pick=interweb_road)
+    yao_budunit.add_fact(fbase=interweb_road, fneed=interweb_road)
     weekdays_str = "weekdays"
     weekdays_road = yao_budunit.make_l1_road(weekdays_str)
-    yao_budunit.add_fact(base=weekdays_road, pick=weekdays_road)
+    yao_budunit.add_fact(fbase=weekdays_road, fneed=weekdays_road)
     item_dict = yao_budunit.get_item_dict()
     print(f"{len(item_dict)=}")
 
@@ -612,9 +615,9 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsObj_budunit_v001():
     print(f"{year_month_base=}, {year_month_base=}")
 
     # WHEN
-    yao_budunit.add_fact(base=year_month_base, pick=year_month_base, fopen=0, fnigh=8)
+    yao_budunit.add_fact(fbase=year_month_base, fneed=year_month_base, fopen=0, fnigh=8)
     ced_week = yao_budunit.make_l1_road("ced_week")
-    yao_budunit.add_fact(base=ced_week, pick=ced_week, fopen=0, fnigh=4)
+    yao_budunit.add_fact(fbase=ced_week, fneed=ced_week, fopen=0, fnigh=4)
     yao_budunit.settle_bud()
 
     # THEN

@@ -50,21 +50,21 @@ def add_gut_pledge(
     x_hubunit.append_packs_to_gut_file()
 
 
-def create_fact(x_bud: BudUnit, fact_pick: RoadUnit):
-    if x_bud.item_exists(fact_pick) is False:
-        x_bud.get_item_obj(fact_pick, if_missing_create=True)
-    fact_base = get_parent_road(fact_pick)
-    x_bud.add_fact(fact_base, fact_pick)
+def create_fact(x_bud: BudUnit, fact_fneed: RoadUnit):
+    if x_bud.item_exists(fact_fneed) is False:
+        x_bud.get_item_obj(fact_fneed, if_missing_create=True)
+    fact_base = get_parent_road(fact_fneed)
+    x_bud.add_fact(fact_base, fact_fneed)
 
 
-def add_gut_fact(x_hubunit: HubUnit, fact_pick: RoadUnit):
+def add_gut_fact(x_hubunit: HubUnit, fact_fneed: RoadUnit):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
         x_hubunit.fisc_tag,
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)
-    create_fact(gut_bud, fact_pick)
+    create_fact(gut_bud, fact_fneed)
     next_packunit = x_hubunit._default_packunit()
     next_packunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
     next_packunit.save_files()

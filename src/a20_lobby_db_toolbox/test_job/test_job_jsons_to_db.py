@@ -742,12 +742,12 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     x_owner_name = 2
     x_road = 3
     x_base = 4
-    x_pick = 5
+    x_fneed = 5
     x_fopen = 6
     x_fnigh = 7
     x_factheir = factheir_shop()
-    x_factheir.base = x_base
-    x_factheir.pick = x_pick
+    x_factheir.fbase = x_base
+    x_factheir.fneed = x_fneed
     x_factheir.fopen = x_fopen
     x_factheir.fnigh = x_fnigh
 
@@ -772,7 +772,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
             str(x_owner_name),
             str(x_road),
             str(x_base),
-            str(x_pick),
+            str(x_fneed),
             x_fopen,
             x_fnigh,
         )

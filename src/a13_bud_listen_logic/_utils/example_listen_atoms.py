@@ -6,6 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_factunit_str,
     acct_name_str,
     road_str,
+    fbase_str,
     fopen_str,
     fnigh_str,
 )
@@ -69,11 +70,9 @@ def get_atom_example_factunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     knee_fopen = 7
     knee_fnigh = 23
     x_dimen = bud_item_factunit_str()
-    road_str = "road"
-    base_str = "base"
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_factunit_budatom.set_jkey(road_str, ball_road)
-    insert_factunit_budatom.set_jkey(base_str, knee_road)
+    insert_factunit_budatom.set_jkey(road_str(), ball_road)
+    insert_factunit_budatom.set_jkey(fbase_str(), knee_road)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_fopen)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_fnigh)
     return insert_factunit_budatom

@@ -24,7 +24,7 @@ class Missing_debtor_respectException(Exception):
 
 def generate_perspective_agenda(perspective_bud: BudUnit) -> list[ItemUnit]:
     for x_factunit in perspective_bud.itemroot.factunits.values():
-        x_factunit.set_pick_to_base()
+        x_factunit.set_fneed_to_base()
     return list(perspective_bud.get_agenda_dict().values())
 
 
@@ -133,15 +133,15 @@ def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
     for x_factunit in src_listener.itemroot.factunits.values():
-        base_road = x_factunit.base
-        pick_road = x_factunit.pick
-        if dst_listener.item_exists(base_road) is False:
-            base_item = src_listener.get_item_obj(base_road)
+        fbase_road = x_factunit.fbase
+        fneed_road = x_factunit.fneed
+        if dst_listener.item_exists(fbase_road) is False:
+            base_item = src_listener.get_item_obj(fbase_road)
             dst_listener.set_item(base_item, base_item.parent_road)
-        if dst_listener.item_exists(pick_road) is False:
-            pick_item = src_listener.get_item_obj(pick_road)
-            dst_listener.set_item(pick_item, pick_item.parent_road)
-        dst_listener.add_fact(base_road, pick_road)
+        if dst_listener.item_exists(fneed_road) is False:
+            fneed_item = src_listener.get_item_obj(fneed_road)
+            dst_listener.set_item(fneed_item, fneed_item.parent_road)
+        dst_listener.add_fact(fbase_road, fneed_road)
 
 
 def listen_to_speaker_fact(
@@ -155,8 +155,8 @@ def listen_to_speaker_fact(
         x_factunit = speaker.get_fact(missing_fact_base)
         if x_factunit is not None:
             listener.add_fact(
-                base=x_factunit.base,
-                pick=x_factunit.pick,
+                fbase=x_factunit.fbase,
+                fneed=x_factunit.fneed,
                 fopen=x_factunit.fopen,
                 fnigh=x_factunit.fnigh,
                 create_missing_items=True,
@@ -279,7 +279,7 @@ def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
         listener_id = listener_hubunit.owner_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_name = x_healer_name
-        _pick_keep_plans_and_listen(listener_id, keep_dict, healer_hubunit, new_job)
+        _fneed_keep_plans_and_listen(listener_id, keep_dict, healer_hubunit, new_job)
 
     if new_job.get_dict() == pre_job_dict:
         agenda = list(gut.get_agenda_dict().values())
@@ -289,7 +289,7 @@ def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
     save_job_file(listener_hubunit.fisc_mstr_dir, new_job)
 
 
-def _pick_keep_plans_and_listen(
+def _fneed_keep_plans_and_listen(
     listener_id: OwnerName,
     keep_dict: dict[RoadUnit],
     healer_hubunit: HubUnit,
@@ -297,10 +297,10 @@ def _pick_keep_plans_and_listen(
 ):
     for keep_path in keep_dict:
         healer_hubunit.keep_road = keep_path
-        pick_keep_plan_and_listen(listener_id, healer_hubunit, new_job)
+        fneed_keep_plan_and_listen(listener_id, healer_hubunit, new_job)
 
 
-def pick_keep_plan_and_listen(
+def fneed_keep_plan_and_listen(
     listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_job: BudUnit
 ):
     listener_id = listener_owner_name

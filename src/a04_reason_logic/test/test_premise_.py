@@ -114,31 +114,31 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     usa_road = create_road(nation_road, "USA")
     texas_road = create_road(usa_road, "Texas")
     idaho_road = create_road(usa_road, "Idaho")
-    texas_fact = factheir_shop(base=usa_road, pick=texas_road)
+    texas_fact = factheir_shop(fbase=usa_road, fneed=texas_road)
 
     # WHEN / THEN
     texas_premise = premiseunit_shop(need=texas_road)
-    assert texas_premise.is_in_lineage(fact_pick=texas_fact.pick)
+    assert texas_premise.is_in_lineage(fact_fneed=texas_fact.fneed)
 
     # WHEN / THEN
     idaho_premise = premiseunit_shop(need=idaho_road)
-    assert idaho_premise.is_in_lineage(fact_pick=texas_fact.pick) is False
+    assert idaho_premise.is_in_lineage(fact_fneed=texas_fact.fneed) is False
 
     # WHEN / THEN
     usa_premise = premiseunit_shop(need=usa_road)
-    assert usa_premise.is_in_lineage(fact_pick=texas_fact.pick)
+    assert usa_premise.is_in_lineage(fact_fneed=texas_fact.fneed)
 
     # ESTABLISH
     sea_road = create_road("earth", "sea")  # "earth,sea"
     sea_premise = premiseunit_shop(need=sea_road)
 
     # THEN
-    sea_fact = factheir_shop(base=sea_road, pick=sea_road)
-    assert sea_premise.is_in_lineage(fact_pick=sea_fact.pick)
+    sea_fact = factheir_shop(fbase=sea_road, fneed=sea_road)
+    assert sea_premise.is_in_lineage(fact_fneed=sea_fact.fneed)
     seaside_road = create_road("earth", "seaside")  # "earth,seaside,beach"
     seaside_beach_road = create_road(seaside_road, "beach")  # "earth,seaside,beach"
     seaside_fact = factheir_shop(seaside_beach_road, seaside_beach_road)
-    assert sea_premise.is_in_lineage(fact_pick=seaside_fact.pick) is False
+    assert sea_premise.is_in_lineage(fact_fneed=seaside_fact.fneed) is False
 
 
 def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridge():
@@ -150,19 +150,19 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridg
     idaho_road = create_road(usa_road, "Idaho", bridge=slash_str)
 
     # WHEN
-    texas_fact = factheir_shop(base=usa_road, pick=texas_road)
+    texas_fact = factheir_shop(fbase=usa_road, fneed=texas_road)
 
     # THEN
     texas_premise = premiseunit_shop(need=texas_road, bridge=slash_str)
-    assert texas_premise.is_in_lineage(fact_pick=texas_fact.pick)
+    assert texas_premise.is_in_lineage(fact_fneed=texas_fact.fneed)
 
     idaho_premise = premiseunit_shop(need=idaho_road, bridge=slash_str)
-    assert idaho_premise.is_in_lineage(fact_pick=texas_fact.pick) is False
+    assert idaho_premise.is_in_lineage(fact_fneed=texas_fact.fneed) is False
 
     usa_premise = premiseunit_shop(need=usa_road, bridge=slash_str)
     print(f"  {usa_premise.need=}")
-    print(f"{texas_fact.pick=}")
-    assert usa_premise.is_in_lineage(fact_pick=texas_fact.pick)
+    print(f"{texas_fact.fneed=}")
+    assert usa_premise.is_in_lineage(fact_fneed=texas_fact.fneed)
 
     # ESTABLISH
     # "earth,sea"
@@ -176,10 +176,10 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridg
     sea_premise = premiseunit_shop(need=sea_road, bridge=slash_str)
 
     # THEN
-    sea_fact = factheir_shop(base=sea_road, pick=sea_road)
-    assert sea_premise.is_in_lineage(fact_pick=sea_fact.pick)
+    sea_fact = factheir_shop(fbase=sea_road, fneed=sea_road)
+    assert sea_premise.is_in_lineage(fact_fneed=sea_fact.fneed)
     seaside_fact = factheir_shop(seaside_beach_road, seaside_beach_road)
-    assert sea_premise.is_in_lineage(fact_pick=seaside_fact.pick) is False
+    assert sea_premise.is_in_lineage(fact_fneed=seaside_fact.fneed) is False
 
 
 def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rangePremise():
@@ -189,41 +189,41 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_r
     yr_premise = premiseunit_shop(need=yr_road, open=3, nigh=13)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(base=yr_road, fopen=5, fnigh=11, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=5, fnigh=11, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(base=yr_road, fopen=1, fnigh=11, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=1, fnigh=11, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(base=yr_road, fopen=8, fnigh=17, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=8, fnigh=17, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=2, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=0, fnigh=2, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, fopen=15, fnigh=19, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=15, fnigh=19, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, fopen=1, fnigh=19, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=1, fnigh=19, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     # boundary tests
-    yr_fact = factheir_shop(base=yr_road, fopen=13, fnigh=19, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=13, fnigh=19, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=3, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=0, fnigh=3, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(base=yr_road, fopen=0, fnigh=0, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=0, fnigh=0, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
-    yr_fact = factheir_shop(base=yr_road, fopen=3, fnigh=3, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=3, fnigh=3, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
-    yr_fact = factheir_shop(base=yr_road, fopen=13, fnigh=13, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=13, fnigh=13, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
-    yr_fact = factheir_shop(base=yr_road, fopen=17, fnigh=17, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=17, fnigh=17, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, fopen=20, fnigh=17, pick=yr_road)
+    yr_fact = factheir_shop(fbase=yr_road, fopen=20, fnigh=17, fneed=yr_road)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
 
@@ -234,29 +234,29 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
     yr_premise = premiseunit_shop(need=yr_road, divisor=5, open=0, nigh=0)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=5, fnigh=5)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=5, fnigh=5)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=6, fnigh=6)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=6, fnigh=6)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=4, fnigh=6)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=4, fnigh=6)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=3, fnigh=4)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=3, fnigh=4)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     # ESTABLISH
     yr_premise = premiseunit_shop(need=yr_road, divisor=5, open=0, nigh=2)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=2, fnigh=2)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=2, fnigh=2)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=102, fnigh=102)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=102, fnigh=102)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(base=yr_road, pick=yr_road, fopen=1, fnigh=4)
+    yr_fact = factheir_shop(fbase=yr_road, fneed=yr_road, fopen=1, fnigh=4)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
 
@@ -283,10 +283,10 @@ def test_PremiseUnitUnit_get_premise_status_Returns_active_Boolean():
     wkday_premise = premiseunit_shop(need=wkday_road)
 
     # WHEN / THEN
-    wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road)
+    wkday_fact = factheir_shop(fbase=wkday_road, fneed=wkday_road)
     assert wkday_premise._get_active(factheir=wkday_fact)
     # if fact has range but premise does not reqquire range, fact's range does not matter
-    wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road, fopen=0, fnigh=2)
+    wkday_fact = factheir_shop(fbase=wkday_road, fneed=wkday_road, fopen=0, fnigh=2)
     assert wkday_premise._get_active(factheir=wkday_fact)
 
 
@@ -297,9 +297,9 @@ def test_PremiseUnitUnit_get_active_Returns_is_range_active_Boolean():
     wkday_premise = premiseunit_shop(need=wkday_road, open=3, nigh=7)
 
     # WHEN / THEN
-    wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road)
+    wkday_fact = factheir_shop(fbase=wkday_road, fneed=wkday_road)
     assert wkday_premise._get_active(factheir=wkday_fact) is False
-    wkday_fact = factheir_shop(base=wkday_road, pick=wkday_road, fopen=0, fnigh=2)
+    wkday_fact = factheir_shop(fbase=wkday_road, fneed=wkday_road, fopen=0, fnigh=2)
     assert wkday_premise._get_active(factheir=wkday_fact) is False
 
 
@@ -327,7 +327,7 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wednesday"
     wed_road = create_road(wkday_road, wed_str)
     wed_premise = premiseunit_shop(need=wed_road)
-    bud_fact = factheir_shop(base=wkday_road, pick=wed_road)
+    bud_fact = factheir_shop(fbase=wkday_road, fneed=wed_road)
     assert wed_premise._status is None
 
     # WHEN
@@ -349,7 +349,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario2():
     assert wed_after_premise._status is None
 
     # WHEN
-    wed_fact = factheir_shop(base=wkday_road, pick=wed_road)
+    wed_fact = factheir_shop(fbase=wkday_road, fneed=wed_road)
     wed_after_premise.set_status(x_factheir=wed_fact)
 
     # THEN
@@ -368,7 +368,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario3():
     assert wed_premise._status is None
 
     # WHEN
-    noon_fact = factheir_shop(base=wkday_road, pick=wed_noon_road)
+    noon_fact = factheir_shop(fbase=wkday_road, fneed=wed_noon_road)
     wed_premise.set_status(x_factheir=noon_fact)
 
     # THEN
@@ -384,9 +384,9 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario4():
     thu_str = "thursday"
     thu_road = create_road(wkday_road, thu_str)
     wed_premise = premiseunit_shop(need=wed_road)
-    thu_fact = factheir_shop(base=wkday_road, pick=thu_road)
+    thu_fact = factheir_shop(fbase=wkday_road, fneed=thu_road)
     assert wed_premise._status is None
-    assert wed_premise.is_in_lineage(fact_pick=thu_fact.pick) is False
+    assert wed_premise.is_in_lineage(fact_fneed=thu_fact.fneed) is False
     assert thu_fact.fopen is None
     assert thu_fact.fnigh is None
 
@@ -411,7 +411,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario5():
     assert wed_sun_premise._status is None
 
     # WHEN
-    wed_rain_fact = factheir_shop(base=wkday_road, pick=wed_rain_road)
+    wed_rain_fact = factheir_shop(fbase=wkday_road, fneed=wed_rain_road)
     wed_sun_premise.set_status(x_factheir=wed_rain_fact)
 
     # THEN
@@ -443,7 +443,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
     no_range_premise._status = False
 
     # WHEN / THEN
-    no_range_fact = factheir_shop(base=hr24_road, pick=hr24_road)
+    no_range_fact = factheir_shop(fbase=hr24_road, fneed=hr24_road)
     assert no_range_premise._get_task_status(factheir=no_range_fact) is False
 
 
@@ -529,7 +529,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
     wed_premise._status = True
 
     # ESTABLISH
-    factheir = factheir_shop(base=week_road, pick=wed_road)
+    factheir = factheir_shop(fbase=week_road, fneed=wed_road)
 
     # THEN
     assert wed_premise._get_task_status(factheir=factheir) is False
@@ -592,7 +592,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_premise._status is None
 
     # WHEN
-    bud_fact = factheir_shop(base=hr24_road, pick=hr24_road, fopen=8, fnigh=10)
+    bud_fact = factheir_shop(fbase=hr24_road, fneed=hr24_road, fopen=8, fnigh=10)
     hr24_premise.set_status(x_factheir=bud_fact)
 
     # THEN
@@ -623,7 +623,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     week_str = "ced_week"
     week_road = create_road(timetech_road, week_str)
     week_premise = premiseunit_shop(need=week_road, divisor=6, open=1, nigh=1)
-    bud_fact = factheir_shop(base=week_road, pick=week_road, fopen=7, fnigh=7)
+    bud_fact = factheir_shop(fbase=week_road, fneed=week_road, fopen=7, fnigh=7)
     assert week_premise._status is None
 
     # WHEN

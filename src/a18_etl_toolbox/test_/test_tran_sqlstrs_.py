@@ -311,7 +311,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         ag_put_cols = get_default_sorted_list(ag_put_cols)
         ex_ag_put_sqlstr = get_create_table_sqlstr(ag_put_table, ag_put_cols, s_types)
         # print(f"{ex_ag_put_sqlstr=}")
-        assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
+        # assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
 
         st_put_table = f"{x_dimen}_put_raw"
         st_put_cols = set(x_config.get("jkeys").keys())
@@ -321,7 +321,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         st_put_cols = get_default_sorted_list(st_put_cols)
         ex_st_put_sqlstr = get_create_table_sqlstr(st_put_table, st_put_cols, s_types)
         # print(f"{ex_st_put_sqlstr=}")
-        assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
+        # assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
 
         ag_del_table = f"{x_dimen}_del_agg"
         ag_del_cols = set(x_config.get("jkeys").keys())
@@ -329,7 +329,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         ag_del_cols[-1] = get_delete_key_name(ag_del_cols[-1])
         ex_ag_del_sqlstr = get_create_table_sqlstr(ag_del_table, ag_del_cols, s_types)
         # print(f" {ex_ag_del_sqlstr}")
-        assert create_table_sqlstrs.get(ag_del_table) == ex_ag_del_sqlstr
+        # assert create_table_sqlstrs.get(ag_del_table) == ex_ag_del_sqlstr
 
         st_del_table = f"{x_dimen}_del_raw"
         st_del_cols = set(x_config.get("jkeys").keys())
@@ -339,16 +339,20 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         st_del_cols[-2] = get_delete_key_name(st_del_cols[-2])
         ex_st_del_sqlstr = get_create_table_sqlstr(st_del_table, st_del_cols, s_types)
         # print(f" {ex_st_del_sqlstr}")
-        assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
+        # assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
 
-        # print(f'CREATE_{abbv(ag_put_table)}_SQLSTR= """{ex_ag_put_sqlstr}"""')
-        # print(f'CREATE_{abbv(st_put_table)}_SQLSTR= """{ex_st_put_sqlstr}"""')
-        # print(f'CREATE_{abbv(ag_del_table)}_SQLSTR= """{ex_ag_del_sqlstr}"""')
-        # print(f'CREATE_{abbv(st_del_table)}_SQLSTR= """{ex_st_del_sqlstr}"""')
+        print(f'CREATE_{abbv(ag_put_table)}_SQLSTR= """{ex_ag_put_sqlstr}"""')
+        print(f'CREATE_{abbv(st_put_table)}_SQLSTR= """{ex_st_put_sqlstr}"""')
+        print(f'CREATE_{abbv(ag_del_table)}_SQLSTR= """{ex_ag_del_sqlstr}"""')
+        print(f'CREATE_{abbv(st_del_table)}_SQLSTR= """{ex_st_del_sqlstr}"""')
         # print(f'"{ag_put_table}": CREATE_{abbv(ag_put_table)}_SQLSTR,')
         # print(f'"{st_put_table}": CREATE_{abbv(st_put_table)}_SQLSTR,')
         # print(f'"{ag_del_table}": CREATE_{abbv(ag_del_table)}_SQLSTR,')
         # print(f'"{st_del_table}": CREATE_{abbv(st_del_table)}_SQLSTR,')
+        assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
+        assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
+        assert create_table_sqlstrs.get(ag_del_table) == ex_ag_del_sqlstr
+        assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
 
 
 def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
@@ -1073,7 +1077,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
     idea_stageble_dimen_list = sorted(list(expected_idea_stagable_dimens))
     print(f"{expected_idea_stagable_dimens=}")
     assert idea_dimen_combo_checked_count == 680
-    assert idea_raw2dimen_count == 113
+    assert idea_raw2dimen_count == 109
     assert get_idea_stageble_put_dimens() == expected_idea_stagable_dimens
 
 

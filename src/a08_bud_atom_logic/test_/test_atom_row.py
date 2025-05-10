@@ -8,6 +8,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a06_bud_logic._utils.str_a06 import acct_name_str
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import AtomRow, atomrow_shop, budatom_shop
+from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
 
 
 def test_AtomRow_exists():
@@ -32,6 +33,7 @@ def test_AtomRow_exists():
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.divisor is None
+    assert x_atomrow.fbase is None
     assert x_atomrow.fnigh is None
     assert x_atomrow.fopen is None
     assert x_atomrow.fund_coin is None
@@ -40,7 +42,6 @@ def test_AtomRow_exists():
     assert x_atomrow.gogo_want is None
     assert x_atomrow.group_label is None
     assert x_atomrow.healer_name is None
-    assert x_atomrow.item_tag is None
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
@@ -48,15 +49,22 @@ def test_AtomRow_exists():
     assert x_atomrow.nigh is None
     assert x_atomrow.numor is None
     assert x_atomrow.open is None
-    assert x_atomrow.parent_road is None
     assert x_atomrow.penny is None
-    assert x_atomrow.pick is None
+    assert x_atomrow.fneed is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.road is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
     assert x_atomrow.tally is None
+
+    print(f"{set(x_atomrow.__dict__.keys())=}")
+    print(f"{set(get_atom_args_class_types().keys())=}")
+    atomrow_args_set = set(x_atomrow.__dict__.keys())
+    atomrow_args_set.remove("_atom_dimens")
+    atomrow_args_set.remove("_crud_command")
+    config_args_set = set(get_atom_args_class_types().keys())
+    assert atomrow_args_set == config_args_set
 
 
 def test_atomrow_shop_ReturnObj():
@@ -121,25 +129,21 @@ def test_AtomRow_set_class_types_SetsAttr():
     x_item_tag = "buzzziy"
     x_morph_str = "True"
     x_morph_bool = True
-    x_atomrow.parent_road = x_parent_road
-    x_atomrow.item_tag = x_item_tag
+    x_road = create_road(x_parent_road, x_item_tag)
+    x_atomrow.road = x_road
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
-    assert x_atomrow.parent_road == x_parent_road
-    assert x_atomrow.item_tag == x_item_tag
+    assert x_atomrow.road == x_road
     assert x_atomrow.morph == x_morph_str
-    assert not x_atomrow.road
 
     # WHEN
     x_atomrow._set_class_types()
 
     # THEN
     assert x_atomrow.close == four_int
-    assert x_atomrow.parent_road == x_parent_road
-    assert x_atomrow.item_tag == x_item_tag
+    assert x_atomrow.road == x_road
     assert x_atomrow.morph == x_morph_bool
-    assert x_atomrow.road == create_road(x_parent_road, x_item_tag)
 
 
 def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
@@ -228,8 +232,7 @@ def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
 def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_itemunit_str()}, atom_insert())
-    x_atomrow.parent_road = "accord78"
-    x_atomrow.item_tag = "casa"
+    x_atomrow.road = create_road("accord78", "casa")
     x_atomrow.pledge = False
     assert len(x_atomrow.get_budatoms()) == 1
 
@@ -249,8 +252,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     # ESTABLISH
     x_dimens = {bud_itemunit_str(), bud_item_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, atom_insert())
-    x_atomrow.parent_road = to_road("accord78")
-    x_atomrow.item_tag = "casa"
+    x_atomrow.road = create_road("accord78", "casa")
     x_atomrow.pledge = False
     x_atomrow.healer_name = "Bob"
 
