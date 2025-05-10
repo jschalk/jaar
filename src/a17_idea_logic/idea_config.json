@@ -54,17 +54,17 @@
     "build_order": 12,
     "idea_category": "bud",
     "jkeys": {
-      "base": {},
       "event_int": {},
       "face_name": {},
+      "fbase": {},
       "fisc_tag": {},
       "owner_name": {},
       "road": {}
     },
     "jvalues": {
+      "fneed": {},
       "fnigh": {},
-      "fopen": {},
-      "fpick": {}
+      "fopen": {}
     }
   },
   "bud_item_healerlink": {
@@ -275,9 +275,9 @@
       "bridge": {},
       "c400_number": {},
       "fund_coin": {},
+      "job_listen_rotations": {},
       "monthday_distortion": {},
       "penny": {},
-      "job_listen_rotations": {},
       "respect_bit": {},
       "timeline_tag": {},
       "yr1_jan1_offset": {}

@@ -355,7 +355,7 @@ def test_ItemUnit_set_factunit_SetsAttr():
     assert not clean_item.factunits.get(dirty_str)
 
     # WHEN
-    clean_item.set_factunit(factunit_shop(base=dirty_str))
+    clean_item.set_factunit(factunit_shop(fbase=dirty_str))
 
     # THEN
     assert clean_item.factunits.get(dirty_str)
@@ -369,7 +369,7 @@ def test_ItemUnit_factunit_exists_ReturnsObj():
     assert not clean_item.factunit_exists(dirty_str)
 
     # WHEN
-    clean_item.set_factunit(factunit_shop(base=dirty_str))
+    clean_item.set_factunit(factunit_shop(fbase=dirty_str))
 
     # THEN
     assert clean_item.factunit_exists(dirty_str)

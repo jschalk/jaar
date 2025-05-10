@@ -25,15 +25,22 @@ from src.a06_bud_logic._utils.str_a06 import (
     addin_str,
     begin_str,
     close_str,
-    denom_str,
-    numor_str,
-    morph_str,
     credit_vote_str,
-    debtit_vote_str,
     credor_respect_str,
+    debtit_vote_str,
     debtor_respect_str,
+    denom_str,
+    fbase_str,
+    fneed_str,
     fnigh_str,
     fopen_str,
+    mass_str,
+    morph_str,
+    numor_str,
+    base_str,
+    need_str,
+    nigh_str,
+    open_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_delete, atom_insert, atom_update
 from src.a09_pack_logic.delta import BudDelta
@@ -324,8 +331,6 @@ def add_bud_itemunit_insert_to_legible_list(
     legible_list: list[str], itemunit_insert_dict: dict, x_bud: BudUnit
 ):
     _problem_bool_str = "problem_bool"
-    _morph_str = "morph"
-    _mass_str = "mass"
     for itemunit_atom in itemunit_insert_dict.values():
         road_value = itemunit_atom.get_value(road_str())
         _addin_value = itemunit_atom.get_value(addin_str())
@@ -334,8 +339,8 @@ def add_bud_itemunit_insert_to_legible_list(
         _denom_value = itemunit_atom.get_value(denom_str())
         _numor_value = itemunit_atom.get_value(numor_str())
         _problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
-        _morph_value = itemunit_atom.get_value(_morph_str)
-        _mass_value = itemunit_atom.get_value(_mass_str)
+        _morph_value = itemunit_atom.get_value(morph_str())
+        _mass_value = itemunit_atom.get_value(mass_str())
         pledge_value = itemunit_atom.get_value(pledge_str())
         x_str = f"Created Item '{road_value}'. "
         if _addin_value is not None:
@@ -364,7 +369,6 @@ def add_bud_itemunit_update_to_legible_list(
     legible_list: list[str], itemunit_update_dict: dict, x_bud: BudUnit
 ):
     _problem_bool_str = "problem_bool"
-    _mass_str = "mass"
     for itemunit_atom in itemunit_update_dict.values():
         road_value = itemunit_atom.get_value(road_str())
         addin_value = itemunit_atom.get_value(addin_str())
@@ -374,7 +378,7 @@ def add_bud_itemunit_update_to_legible_list(
         numor_value = itemunit_atom.get_value(numor_str())
         problem_bool_value = itemunit_atom.get_value(_problem_bool_str)
         morph_value = itemunit_atom.get_value(morph_str())
-        mass_value = itemunit_atom.get_value(_mass_str)
+        mass_value = itemunit_atom.get_value(mass_str())
         pledge_value = itemunit_atom.get_value(pledge_str())
         x_str = f"Item '{road_value}' set these attributes: "
         if addin_value is not None:
@@ -503,21 +507,15 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
     item_reason_premiseunit_insert_dict: dict,
     x_bud: BudUnit,
 ):
-    road_str = "road"
-    base_str = "base"
-    need_str = "need"
-    divisor_str = "divisor"
-    nigh_str = "nigh"
-    open_str = "open"
     for road_dict in item_reason_premiseunit_insert_dict.values():
         for base_dict in road_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                road_value = item_reason_premiseunit_atom.get_value(road_str)
-                base_value = item_reason_premiseunit_atom.get_value(base_str)
-                need_value = item_reason_premiseunit_atom.get_value(need_str)
-                divisor_value = item_reason_premiseunit_atom.get_value(divisor_str)
-                nigh_value = item_reason_premiseunit_atom.get_value(nigh_str)
-                open_value = item_reason_premiseunit_atom.get_value(open_str)
+                road_value = item_reason_premiseunit_atom.get_value(road_str())
+                base_value = item_reason_premiseunit_atom.get_value(base_str())
+                need_value = item_reason_premiseunit_atom.get_value(need_str())
+                divisor_value = item_reason_premiseunit_atom.get_value("divisor")
+                nigh_value = item_reason_premiseunit_atom.get_value(nigh_str())
+                open_value = item_reason_premiseunit_atom.get_value(open_str())
                 x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
@@ -533,21 +531,15 @@ def add_bud_reason_premiseunit_update_to_legible_list(
     item_reason_premiseunit_update_dict: dict,
     x_bud: BudUnit,
 ):
-    road_str = "road"
-    base_str = "base"
-    need_str = "need"
-    divisor_str = "divisor"
-    nigh_str = "nigh"
-    open_str = "open"
     for road_dict in item_reason_premiseunit_update_dict.values():
         for base_dict in road_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                road_value = item_reason_premiseunit_atom.get_value(road_str)
-                base_value = item_reason_premiseunit_atom.get_value(base_str)
-                need_value = item_reason_premiseunit_atom.get_value(need_str)
-                divisor_value = item_reason_premiseunit_atom.get_value(divisor_str)
-                nigh_value = item_reason_premiseunit_atom.get_value(nigh_str)
-                open_value = item_reason_premiseunit_atom.get_value(open_str)
+                road_value = item_reason_premiseunit_atom.get_value(road_str())
+                base_value = item_reason_premiseunit_atom.get_value(base_str())
+                need_value = item_reason_premiseunit_atom.get_value(need_str())
+                divisor_value = item_reason_premiseunit_atom.get_value("divisor")
+                nigh_value = item_reason_premiseunit_atom.get_value(nigh_str())
+                open_value = item_reason_premiseunit_atom.get_value(open_str())
                 x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
@@ -563,15 +555,12 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
     item_reason_premiseunit_delete_dict: dict,
     x_bud: BudUnit,
 ):
-    road_str = "road"
-    base_str = "base"
-    need_str = "need"
     for road_dict in item_reason_premiseunit_delete_dict.values():
         for base_dict in road_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                road_value = item_reason_premiseunit_atom.get_value(road_str)
-                base_value = item_reason_premiseunit_atom.get_value(base_str)
-                need_value = item_reason_premiseunit_atom.get_value(need_str)
+                road_value = item_reason_premiseunit_atom.get_value(road_str())
+                base_value = item_reason_premiseunit_atom.get_value(base_str())
+                need_value = item_reason_premiseunit_atom.get_value(need_str())
                 x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{road_value}'."
                 legible_list.append(x_str)
 
@@ -623,55 +612,46 @@ def add_bud_item_healerlink_delete_to_legible_list(
 def add_bud_item_factunit_insert_to_legible_list(
     legible_list: list[str], item_factunit_insert_dict: dict, x_bud: BudUnit
 ):
-    road_str = "road"
-    base_str = "base"
-    fpick_str = "fpick"
     for road_dict in item_factunit_insert_dict.values():
         for item_factunit_atom in road_dict.values():
-            road_value = item_factunit_atom.get_value(road_str)
-            base_value = item_factunit_atom.get_value(base_str)
-            fpick_value = item_factunit_atom.get_value(fpick_str)
+            road_value = item_factunit_atom.get_value(road_str())
+            fbase_value = item_factunit_atom.get_value(fbase_str())
+            fneed_value = item_factunit_atom.get_value(fneed_str())
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
             fopen_value = item_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fpick_value}' created for base '{base_value}' for item '{road_value}'."
+            x_str = f"FactUnit '{fneed_value}' created for base '{fbase_value}' for item '{road_value}'."
             if fopen_value is not None:
-                x_str += f" fOpen={fopen_value}."
+                x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
-                x_str += f" fNigh={fnigh_value}."
+                x_str += f" fnigh={fnigh_value}."
             legible_list.append(x_str)
 
 
 def add_bud_item_factunit_update_to_legible_list(
     legible_list: list[str], item_factunit_update_dict: dict, x_bud: BudUnit
 ):
-    road_str = "road"
-    base_str = "base"
-    fpick_str = "fpick"
     for road_dict in item_factunit_update_dict.values():
         for item_factunit_atom in road_dict.values():
-            road_value = item_factunit_atom.get_value(road_str)
-            base_value = item_factunit_atom.get_value(base_str)
-            fpick_value = item_factunit_atom.get_value(fpick_str)
+            road_value = item_factunit_atom.get_value(road_str())
+            fbase_value = item_factunit_atom.get_value(fbase_str())
+            fneed_value = item_factunit_atom.get_value(fneed_str())
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
             fopen_value = item_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fpick_value}' updated for base '{base_value}' for item '{road_value}'."
+            x_str = f"FactUnit '{fneed_value}' updated for base '{fbase_value}' for item '{road_value}'."
             if fopen_value is not None:
-                x_str += f" fOpen={fopen_value}."
+                x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
-                x_str += f" fNigh={fnigh_value}."
+                x_str += f" fnigh={fnigh_value}."
             legible_list.append(x_str)
 
 
 def add_bud_item_factunit_delete_to_legible_list(
     legible_list: list[str], item_factunit_delete_dict: dict, x_bud: BudUnit
 ):
-    road_str = "road"
-    base_str = "base"
-    fpick_str = "fpick"
     for road_dict in item_factunit_delete_dict.values():
         for item_factunit_atom in road_dict.values():
-            road_value = item_factunit_atom.get_value(road_str)
-            base_value = item_factunit_atom.get_value(base_str)
-            fpick_value = item_factunit_atom.get_value(fpick_str)
-            x_str = f"FactUnit base '{base_value}' deleted for item '{road_value}'."
+            road_value = item_factunit_atom.get_value(road_str())
+            fbase_value = item_factunit_atom.get_value(fbase_str())
+            fneed_value = item_factunit_atom.get_value(fneed_str())
+            x_str = f"FactUnit base '{fbase_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)

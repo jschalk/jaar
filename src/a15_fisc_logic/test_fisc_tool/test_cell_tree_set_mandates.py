@@ -68,7 +68,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_budadjust = get_bob_mop_with_reason_budunit_example()
 #     # create cell file
 #     clean_fact = example_casa_clean_factunit()
-#     clean_facts = {clean_fact.base: clean_fact}
+#     clean_facts = {clean_fact.fbase: clean_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str, [], event7, 0, budadjust=bob_budadjust, budevent_facts=clean_facts
 #     )
@@ -96,7 +96,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_budadjust = get_bob_mop_with_reason_budunit_example()
 #     # create cell file
 #     clean_fact = example_casa_clean_factunit()
-#     clean_facts = {clean_fact.base: clean_fact}
+#     clean_facts = {clean_fact.fbase: clean_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         [],
@@ -171,7 +171,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_sue_budadjust.set_owner_name(sue_str)
 #     # create cell file
 #     dirty_fact = example_casa_dirty_factunit()
-#     dirty_facts = {dirty_fact.base: dirty_fact}
+#     dirty_facts = {dirty_fact.fbase: dirty_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
@@ -226,7 +226,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ba.set_owner_name(zia_str)
 #     # create cell file
 #     dirty_fact = example_casa_dirty_factunit()
-#     dirty_facts = {dirty_fact.base: dirty_fact}
+#     dirty_facts = {dirty_fact.fbase: dirty_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
@@ -289,7 +289,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ba.set_owner_name(zia_str)
 #     # create cell file
 #     dirty_fact = example_casa_dirty_factunit()
-#     dirty_facts = {dirty_fact.base: dirty_fact}
+#     dirty_facts = {dirty_fact.fbase: dirty_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
@@ -349,12 +349,12 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bs_yao_ba.set_owner_name(yao_str)
 #     bs_yao_ba.add_acctunit(zia_str, 1)
 #     clean_fact = example_casa_clean_factunit()
-#     bs_yao_ba.add_fact(clean_fact.base, clean_fact.fpick)
+#     bs_yao_ba.add_fact(clean_fact.fbase, clean_fact.fneed)
 #     bsy_zia_ba = get_bob_mop_with_reason_budunit_example()
 #     bsy_zia_ba.set_owner_name(zia_str)
 #     # create cell file
 #     dirty_fact = example_casa_dirty_factunit()
-#     dirty_facts = {dirty_fact.base: dirty_fact}
+#     dirty_facts = {dirty_fact.fbase: dirty_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
@@ -386,7 +386,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     # THEN
 #     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts
 #     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
-#     clean_facts = {clean_fact.base: clean_fact}
+#     clean_facts = {clean_fact.fbase: clean_fact}
 #     assert cellunit_get_from_dir(bob_sue_yao_dir).boss_facts == clean_facts
 #     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == clean_facts
 
@@ -419,7 +419,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ba.set_owner_name(zia_str)
 #     # create cell file
 #     dirty_fact = example_casa_dirty_factunit()
-#     dirty_facts = {dirty_fact.base: dirty_fact}
+#     dirty_facts = {dirty_fact.fbase: dirty_fact}
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,

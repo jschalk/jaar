@@ -99,8 +99,8 @@ class HealerLinkTable(Base):
 class FactTable(Base):
     __tablename__ = "fact"
     uid = Column(Integer, primary_key=True)
-    base = Column(String)
+    fbase = Column(String)
     road = Column(String)
     fnigh = Column(Float)
     fopen = Column(Float)
-    fpick = Column(String)
+    fneed = Column(String)

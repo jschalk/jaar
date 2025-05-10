@@ -280,7 +280,7 @@ class ItemUnit:
 
     def _set_factheir(self, x_fact: FactCore):
         if (
-            x_fact.base == self.get_road()
+            x_fact.fbase == self.get_road()
             and self._gogo_calc is not None
             and self._stop_calc is not None
             and self.begin is None
@@ -290,15 +290,15 @@ class ItemUnit:
                 f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact item must have _begin, _close attributes"
             )
         x_factheir = factheir_shop(
-            x_fact.base, x_fact.fpick, x_fact.fopen, x_fact.fnigh
+            x_fact.fbase, x_fact.fneed, x_fact.fopen, x_fact.fnigh
         )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
-        self._factheirs[x_factheir.base] = x_factheir
+        self._factheirs[x_factheir.fbase] = x_factheir
 
     def apply_factunit_moldations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self.factunits.values():
-            if factunit.base == factheir.base:
+            if factunit.fbase == factheir.fbase:
                 factheir.mold(factunit)
         return factheir
 
@@ -306,20 +306,20 @@ class ItemUnit:
         delete_factunit = False
         for factunit in self.factunits.values():
             if (
-                factunit.base == factheir.base
+                factunit.fbase == factheir.fbase
                 and factunit.fnigh is not None
                 and factheir.fopen is not None
             ) and factunit.fnigh < factheir.fopen:
                 delete_factunit = True
 
         if delete_factunit:
-            del self.factunits[factunit.base]
+            del self.factunits[factunit.fbase]
 
     def set_factunit(self, factunit: FactUnit):
-        self.factunits[factunit.base] = factunit
+        self.factunits[factunit.fbase] = factunit
 
-    def factunit_exists(self, x_base: RoadUnit) -> bool:
-        return self.factunits.get(x_base) != None
+    def factunit_exists(self, x_fbase: RoadUnit) -> bool:
+        return self.factunits.get(x_fbase) != None
 
     def get_factunits_dict(self) -> dict[RoadUnit, str]:
         return get_dict_from_factunits(self.factunits)
@@ -330,15 +330,15 @@ class ItemUnit:
         # the minimal factheir.fopen to modify item._task is False. item_core._factheir cannot be straight up manipulated
         # so it is mandatory that item._factunit is different.
         # self.set_factunits(base=fact, fact=base, open=premise_nigh, nigh=fact_nigh)
-        self.factunits[base_factunit.base] = factunit_shop(
-            base=base_factunit.base,
-            fpick=base_factunit.base,
+        self.factunits[base_factunit.fbase] = factunit_shop(
+            fbase=base_factunit.fbase,
+            fneed=base_factunit.fbase,
             fopen=base_factunit.fnigh,
             fnigh=base_factunit.fnigh,
         )
 
-    def del_factunit(self, base: RoadUnit):
-        self.factunits.pop(base)
+    def del_factunit(self, fbase: RoadUnit):
+        self.factunits.pop(fbase)
 
     def set_fund_attr(
         self,
@@ -528,20 +528,20 @@ class ItemUnit:
         self.reasonunits = new_reasonunits
 
         new_factunits = {}
-        for factunit_road, factunit_obj in self.factunits.items():
+        for factunit_road, x_factunit in self.factunits.items():
             new_base_road = replace_bridge(
                 road=factunit_road,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            factunit_obj.base = new_base_road
-            new_fpick_road = replace_bridge(
-                road=factunit_obj.fpick,
+            x_factunit.fbase = new_base_road
+            new_fneed_road = replace_bridge(
+                road=x_factunit.fneed,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            factunit_obj.set_attr(fpick=new_fpick_road)
-            new_factunits[new_base_road] = factunit_obj
+            x_factunit.set_attr(fneed=new_fneed_road)
+            new_factunits[new_base_road] = x_factunit
         self.factunits = new_factunits
 
     def set_originunit_empty_if_None(self):

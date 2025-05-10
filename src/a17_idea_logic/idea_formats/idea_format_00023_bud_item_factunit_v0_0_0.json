@@ -1,16 +1,19 @@
 {
     "attributes": {
-        "base": {
-            "otx_key": true
-        },
         "event_int": {
             "otx_key": true
         },
         "face_name": {
             "otx_key": true
         },
+        "fbase": {
+            "otx_key": true
+        },
         "fisc_tag": {
             "otx_key": true
+        },
+        "fneed": {
+            "otx_key": false
         },
         "fnigh": {
             "otx_key": false
@@ -21,9 +24,6 @@
         "owner_name": {
             "otx_key": true
         },
-        "fpick": {
-            "otx_key": false
-        },
         "road": {
             "otx_key": true
         }
@@ -32,7 +32,6 @@
         "fiscunit",
         "budunit",
         "bud_itemunit",
-        "bud_item_reasonunit",
         "bud_item_factunit"
     ],
     "idea_number": "br00023"

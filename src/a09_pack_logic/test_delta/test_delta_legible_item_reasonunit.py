@@ -1,6 +1,8 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_item_reasonunit_str,
     base_item_active_requisite_str,
+    base_str,
+    road_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_update, atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import budatom_shop
@@ -13,15 +15,13 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_With_base_item_ac
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reasonunit_str()
-    road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
     base_item_active_requisite_value = True
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(
         base_item_active_requisite_str(), base_item_active_requisite_value
     )
@@ -42,14 +42,12 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_INSERT_Without_base_item
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reasonunit_str()
-    road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(base_str(), base_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -67,15 +65,13 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reasonunit_str()
-    base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
-    road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     base_item_active_requisite_value = True
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(
         base_item_active_requisite_str(), base_item_active_requisite_value
     )
@@ -96,14 +92,12 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_UPDATE_base_item_active_
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reasonunit_str()
-    base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
-    road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(base_str(), base_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -121,14 +115,12 @@ def test_create_legible_list_ReturnsObj_item_reasonunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reasonunit_str()
-    road_str = "road"
     casa_road = sue_bud.make_l1_road("casa")
     road_value = sue_bud.make_road(casa_road, "clean fridge")
-    base_str = "base"
     base_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_delete())
-    swim_budatom.set_arg(road_str, road_value)
-    swim_budatom.set_arg(base_str, base_value)
+    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(base_str(), base_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)

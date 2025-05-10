@@ -33,6 +33,7 @@ def test_AtomRow_exists():
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.divisor is None
+    assert x_atomrow.fbase is None
     assert x_atomrow.fnigh is None
     assert x_atomrow.fopen is None
     assert x_atomrow.fund_coin is None
@@ -49,7 +50,7 @@ def test_AtomRow_exists():
     assert x_atomrow.numor is None
     assert x_atomrow.open is None
     assert x_atomrow.penny is None
-    assert x_atomrow.fpick is None
+    assert x_atomrow.fneed is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.road is None

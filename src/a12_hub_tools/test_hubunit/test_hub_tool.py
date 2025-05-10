@@ -658,17 +658,17 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     sue_bud.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_bud.add_item(clean_fact.fpick)
-    sue_bud.add_item(dirty_fact.fpick)
+    sue_bud.add_item(clean_fact.fneed)
+    sue_bud.add_item(dirty_fact.fneed)
     casa_road = sue_bud.make_l1_road("casa")
     mop_road = sue_bud.make_road(casa_road, "mop")
     sue_bud.add_item(mop_road, 1, pledge=True)
-    sue_bud.edit_reason(mop_road, dirty_fact.base, dirty_fact.fpick)
-    sue_bud.add_fact(dirty_fact.base, dirty_fact.fpick, create_missing_items=True)
+    sue_bud.edit_reason(mop_road, dirty_fact.fbase, dirty_fact.fneed)
+    sue_bud.add_fact(dirty_fact.fbase, dirty_fact.fneed, create_missing_items=True)
     sky_blue_fact = sky_blue_factunit()
-    sue_budevent_factunits = {clean_fact.base: clean_fact}
-    sue_found_factunits = {dirty_fact.base: dirty_fact}
-    sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    sue_budevent_factunits = {clean_fact.fbase: clean_fact}
+    sue_found_factunits = {dirty_fact.fbase: dirty_fact}
+    sue_boss_factunits = {sky_blue_fact.fbase: sky_blue_fact}
     sue_cell = cellunit_shop(
         deal_owner_name=yao_str,
         ancestors=sue_ancestors,

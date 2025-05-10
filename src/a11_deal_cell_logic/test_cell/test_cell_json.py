@@ -140,9 +140,9 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
-    bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
-    bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
-    bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    bob_sue_budevent_factunits = {clean_fact.fbase: clean_fact}
+    bob_sue_found_factunits = {dirty_fact.fbase: dirty_fact}
+    bob_sue_boss_factunits = {sky_blue_fact.fbase: sky_blue_fact}
     x_cellunit = cellunit_shop(
         bob_sue_deal_owner,
         bob_sue_ancestors,
@@ -184,9 +184,9 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert (
         x_cell_dict.get(budadjust_str()) == budunit_shop(bob_sue_deal_owner).get_dict()
     )
-    bob_sue_budevent_fact_dicts = {clean_fact.base: clean_fact.get_dict()}
-    bob_sue_found_fact_dicts = {dirty_fact.base: dirty_fact.get_dict()}
-    bob_sue_boss_fact_dicts = {sky_blue_fact.base: sky_blue_fact.get_dict()}
+    bob_sue_budevent_fact_dicts = {clean_fact.fbase: clean_fact.get_dict()}
+    bob_sue_found_fact_dicts = {dirty_fact.fbase: dirty_fact.get_dict()}
+    bob_sue_boss_fact_dicts = {sky_blue_fact.fbase: sky_blue_fact.get_dict()}
     assert x_cell_dict.get(budevent_facts_str()) == bob_sue_budevent_fact_dicts
     assert x_cell_dict.get(found_facts_str()) == bob_sue_found_fact_dicts
     assert x_cell_dict.get(boss_facts_str()) == bob_sue_boss_fact_dicts
@@ -207,9 +207,9 @@ def test_CellUnit_get_json_ReturnsObj():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
-    bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
-    bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
-    bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    bob_sue_budevent_factunits = {clean_fact.fbase: clean_fact}
+    bob_sue_found_factunits = {dirty_fact.fbase: dirty_fact}
+    bob_sue_boss_factunits = {sky_blue_fact.fbase: sky_blue_fact}
     bob_sue_bud = budunit_shop(bob_sue_deal_owner)
     bob_sue_bud.add_acctunit(sue_str)
     x_cellunit = cellunit_shop(
@@ -258,9 +258,9 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
-    bob_sue_budevent_factunits = {clean_fact.base: clean_fact}
-    bob_sue_found_factunits = {dirty_fact.base: dirty_fact}
-    bob_sue_boss_factunits = {sky_blue_fact.base: sky_blue_fact}
+    bob_sue_budevent_factunits = {clean_fact.fbase: clean_fact}
+    bob_sue_found_factunits = {dirty_fact.fbase: dirty_fact}
+    bob_sue_boss_factunits = {sky_blue_fact.fbase: sky_blue_fact}
     bob_sue_bud = budunit_shop(bob_sue_deal_owner)
     bob_sue_bud.add_acctunit(sue_str)
     bob_sue_cellunit = cellunit_shop(

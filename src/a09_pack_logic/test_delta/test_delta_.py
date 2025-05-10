@@ -373,14 +373,13 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_Road_Sorted():
     knee_str = "knee"
     knee_road = create_road(sports_road, knee_str)
     x_dimen = bud_item_awardlink_str()
-    road_str = "road"
     swimmers_str = ",Swimmers"
     sports_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
     sports_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
-    sports_awardlink_budatom.set_jkey(road_str, sports_road)
+    sports_awardlink_budatom.set_jkey(road_str(), sports_road)
     knee_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
     knee_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
-    knee_awardlink_budatom.set_jkey(road_str, knee_road)
+    knee_awardlink_budatom.set_jkey(road_str(), knee_road)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_awardlink_budatom)
     x_buddelta.set_budatom(sports_awardlink_budatom)

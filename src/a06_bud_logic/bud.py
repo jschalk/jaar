@@ -425,44 +425,46 @@ class BudUnit:
             for fact in self.itemroot.factunits.values()
             if fact.fopen is not None
             and fact.fnigh is not None
-            and self._is_item_rangeroot(item_road=fact.base)
+            and self._is_item_rangeroot(item_road=fact.fbase)
         ]
 
     def add_fact(
         self,
-        base: RoadUnit,
-        fpick: RoadUnit = None,
+        fbase: RoadUnit,
+        fneed: RoadUnit = None,
         fopen: float = None,
         fnigh: float = None,
         create_missing_items: bool = None,
     ):
-        fpick = base if fpick is None else fpick
+        fneed = fbase if fneed is None else fneed
         if create_missing_items:
-            self._create_itemkid_if_empty(road=base)
-            self._create_itemkid_if_empty(road=fpick)
+            self._create_itemkid_if_empty(road=fbase)
+            self._create_itemkid_if_empty(road=fneed)
 
-        fact_base_item = self.get_item_obj(base)
+        fact_base_item = self.get_item_obj(fbase)
         x_itemroot = self.get_item_obj(to_road(self.fisc_tag))
         x_fopen = None
         if fnigh is not None and fopen is None:
-            x_fopen = x_itemroot.factunits.get(base).fopen
+            x_fopen = x_itemroot.factunits.get(fbase).fopen
         else:
             x_fopen = fopen
         x_fnigh = None
         if fopen is not None and fnigh is None:
-            x_fnigh = x_itemroot.factunits.get(base).fnigh
+            x_fnigh = x_itemroot.factunits.get(fbase).fnigh
         else:
             x_fnigh = fnigh
-        x_factunit = factunit_shop(base=base, fpick=fpick, fopen=x_fopen, fnigh=x_fnigh)
+        x_factunit = factunit_shop(
+            fbase=fbase, fneed=fneed, fopen=x_fopen, fnigh=x_fnigh
+        )
 
         if fact_base_item.is_math() is False:
             x_itemroot.set_factunit(x_factunit)
         # if fact's item no range or is a "range-root" then allow fact to be set
-        elif fact_base_item.is_math() and self._is_item_rangeroot(base) is False:
+        elif fact_base_item.is_math() and self._is_item_rangeroot(fbase) is False:
             raise InvalidBudException(
-                f"Non range-root fact:{base} can only be set by range-root fact"
+                f"Non range-root fact:{fbase} can only be set by range-root fact"
             )
-        elif fact_base_item.is_math() and self._is_item_rangeroot(base):
+        elif fact_base_item.is_math() and self._is_item_rangeroot(fbase):
             # WHEN item is "range-root" identify any reason.bases that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
@@ -475,11 +477,11 @@ class BudUnit:
             # that has that base.
             x_itemroot.set_factunit(x_factunit)
 
-    def get_fact(self, base: RoadUnit) -> FactUnit:
-        return self.itemroot.factunits.get(base)
+    def get_fact(self, fbase: RoadUnit) -> FactUnit:
+        return self.itemroot.factunits.get(fbase)
 
-    def del_fact(self, base: RoadUnit):
-        self.itemroot.del_factunit(base)
+    def del_fact(self, fbase: RoadUnit):
+        self.itemroot.del_factunit(fbase)
 
     def get_item_dict(self, problem: bool = None) -> dict[RoadUnit, ItemUnit]:
         self.settle_bud()

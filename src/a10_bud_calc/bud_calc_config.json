@@ -178,15 +178,15 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "fund_coin": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
             "_fund_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
             "_fund_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "fund_coin": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -246,7 +246,7 @@
     "bud_item_factunit": {
         "abbreviation": "budfact",
         "jkeys": {
-            "base": {
+            "fbase": {
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -269,6 +269,10 @@
         },
         "jmetrics": {},
         "jvalues": {
+            "fneed": {
+                "class_type": "RoadUnit",
+                "sqlite_datatype": "TEXT"
+            },
             "fnigh": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
@@ -276,10 +280,6 @@
             "fopen": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
-            },
-            "fpick": {
-                "class_type": "RoadUnit",
-                "sqlite_datatype": "TEXT"
             }
         }
     },
@@ -481,10 +481,6 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "fund_coin": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
             "_fund_onset": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
@@ -516,6 +512,10 @@
             "_task": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
+            },
+            "fund_coin": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {

@@ -17,15 +17,15 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    base: RoadUnit
-    fpick: RoadUnit
+    fbase: RoadUnit
+    fneed: RoadUnit
     fopen: float = None
     fnigh: float = None
 
     def get_dict(self) -> dict[str,]:
         x_dict = {
-            "base": self.base,
-            "fpick": self.fpick,
+            "base": self.fbase,
+            "fneed": self.fneed,
         }
         if self.fopen is not None:
             x_dict["fopen"] = self.fopen
@@ -38,29 +38,29 @@ class FactCore:
         self.fnigh = None
 
     def set_attr(
-        self, fpick: RoadUnit = None, fopen: float = None, fnigh: float = None
+        self, fneed: RoadUnit = None, fopen: float = None, fnigh: float = None
     ):
-        if fpick is not None:
-            self.fpick = fpick
+        if fneed is not None:
+            self.fneed = fneed
         if fopen is not None:
             self.fopen = fopen
         if fnigh is not None:
             self.fnigh = fnigh
 
-    def set_fpick_to_base(self):
-        self.set_attr(fpick=self.base)
+    def set_fneed_to_base(self):
+        self.set_attr(fneed=self.fbase)
         self.fopen = None
         self.fnigh = None
 
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        self.base = rebuild_road(self.base, old_road, new_road)
-        self.fpick = rebuild_road(self.fpick, old_road, new_road)
+        self.fbase = rebuild_road(self.fbase, old_road, new_road)
+        self.fneed = rebuild_road(self.fneed, old_road, new_road)
 
     def get_obj_key(self) -> RoadUnit:
-        return self.base
+        return self.fbase
 
     def get_tuple(self) -> tuple[RoadUnit, RoadUnit, float, float]:
-        return (self.base, self.fpick, self.fopen, self.fnigh)
+        return (self.fbase, self.fneed, self.fopen, self.fnigh)
 
 
 @dataclass
@@ -69,19 +69,19 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    base: RoadUnit = None,
-    fpick: RoadUnit = None,
+    fbase: RoadUnit = None,
+    fneed: RoadUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
-    return FactUnit(base=base, fpick=fpick, fopen=fopen, fnigh=fnigh)
+    return FactUnit(fbase=fbase, fneed=fneed, fopen=fopen, fnigh=fnigh)
 
 
 def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_base = fact_dict["base"]
-        x_fpick = fact_dict["fpick"]
+        x_fneed = fact_dict["fneed"]
 
         try:
             x_fopen = fact_dict["fopen"]
@@ -93,13 +93,13 @@ def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
             x_fnigh = None
 
         x_fact = factunit_shop(
-            base=x_base,
-            fpick=x_fpick,
+            fbase=x_base,
+            fneed=x_fneed,
             fopen=x_fopen,
             fnigh=x_fnigh,
         )
 
-        facts[x_fact.base] = x_fact
+        facts[x_fact.fbase] = x_fact
     return facts
 
 
@@ -112,7 +112,7 @@ def get_factunit_from_tuple(
 def get_dict_from_factunits(
     factunits: dict[RoadUnit, FactUnit],
 ) -> dict[RoadUnit, dict[str,]]:
-    return {hc.base: hc.get_dict() for hc in factunits.values()}
+    return {fact.fbase: fact.get_dict() for fact in factunits.values()}
 
 
 @dataclass
@@ -127,12 +127,12 @@ class FactHeir(FactCore):
 
 
 def factheir_shop(
-    base: RoadUnit = None,
-    fpick: RoadUnit = None,
+    fbase: RoadUnit = None,
+    fneed: RoadUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
-    return FactHeir(base=base, fpick=fpick, fopen=fopen, fnigh=fnigh)
+    return FactHeir(fbase=fbase, fneed=fneed, fopen=fopen, fnigh=fnigh)
 
 
 class PremiseStatusFinderException(Exception):
@@ -327,10 +327,10 @@ class PremiseUnit:
             road=self.need, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
-    def is_in_lineage(self, fact_fpick: RoadUnit):
+    def is_in_lineage(self, fact_fneed: RoadUnit):
         return is_heir_road(
-            src=self.need, heir=fact_fpick, bridge=self.bridge
-        ) or is_heir_road(src=fact_fpick, heir=self.need, bridge=self.bridge)
+            src=self.need, heir=fact_fneed, bridge=self.bridge
+        ) or is_heir_road(src=fact_fneed, heir=self.need, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -341,14 +341,14 @@ class PremiseUnit:
         # status might be true if premise is in lineage of fact
         if factheir is None:
             x_status = False
-        elif self.is_in_lineage(fact_fpick=factheir.fpick):
+        elif self.is_in_lineage(fact_fneed=factheir.fneed):
             if self._is_range_or_segregate() is False:
                 x_status = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
                 x_status = False
             elif self._is_range_or_segregate() and factheir.is_range():
                 x_status = self._get_range_segregate_status(factheir=factheir)
-        elif self.is_in_lineage(fact_fpick=factheir.fpick) is False:
+        elif self.is_in_lineage(fact_fneed=factheir.fneed) is False:
             x_status = False
 
         return x_status
@@ -592,7 +592,7 @@ class ReasonHeir(ReasonCore):
         base_fact = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
-            if self.base == y_factheir.base:
+            if self.base == y_factheir.fbase:
                 base_fact = y_factheir
         return base_fact
 

@@ -104,8 +104,8 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     wkday_reason = reasonheir_shop(base=wkday_road, premises=wed_premises)
     assert wkday_reason._status is None
     # WHEN
-    wkday_fact = factheir_shop(base=wkday_road, fpick=wed_noon_road)
-    wkday_facts = {wkday_fact.base: wkday_fact}
+    wkday_fact = factheir_shop(fbase=wkday_road, fneed=wed_noon_road)
+    wkday_facts = {wkday_fact.fbase: wkday_fact}
     wkday_reason.set_status(factheirs=wkday_facts)
     # THEN
     assert wkday_reason._status is True
@@ -116,8 +116,8 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     two_reason = reasonheir_shop(base=wkday_road, premises=two_premises)
     assert two_reason._status is None
     # WHEN
-    noon_fact = factheir_shop(base=wkday_road, fpick=wed_noon_road)
-    noon_facts = {noon_fact.base: noon_fact}
+    noon_fact = factheir_shop(fbase=wkday_road, fneed=wed_noon_road)
+    noon_facts = {noon_fact.fbase: noon_fact}
     two_reason.set_status(factheirs=noon_facts)
     # THEN
     assert two_reason._status is True
@@ -126,8 +126,8 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     two_reason.clear_status()
     assert two_reason._status is None
     # WHEN
-    fri_fact = factheir_shop(base=wkday_road, fpick=fri_road)
-    fri_facts = {fri_fact.base: fri_fact}
+    fri_fact = factheir_shop(fbase=wkday_road, fneed=fri_road)
+    fri_facts = {fri_fact.fbase: fri_fact}
     two_reason.set_status(factheirs=fri_facts)
     # THEN
     assert two_reason._status is False
@@ -342,7 +342,7 @@ def test_ReasonHeir_correctSetsPledgeState():
 
     # WHEN
     range_5_to_8_fact = factheir_shop(day_road, day_road, fopen=5, fnigh=8)
-    range_5_to_8_facts = {range_5_to_8_fact.base: range_5_to_8_fact}
+    range_5_to_8_facts = {range_5_to_8_fact.fbase: range_5_to_8_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
     assert range_3_to_6_reason._status is True
@@ -350,7 +350,7 @@ def test_ReasonHeir_correctSetsPledgeState():
 
     # WHEN
     range_5_to_6_fact = factheir_shop(day_road, day_road, fopen=5, fnigh=6)
-    range_5_to_6_facts = {range_5_to_6_fact.base: range_5_to_6_fact}
+    range_5_to_6_facts = {range_5_to_6_fact.fbase: range_5_to_6_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
     assert range_3_to_6_reason._status is True
@@ -358,7 +358,7 @@ def test_ReasonHeir_correctSetsPledgeState():
 
     # WHEN
     range_0_to_1_fact = factheir_shop(day_road, day_road, fopen=0, fnigh=1)
-    range_0_to_1_facts = {range_0_to_1_fact.base: range_0_to_1_fact}
+    range_0_to_1_facts = {range_0_to_1_fact.fbase: range_0_to_1_fact}
     range_3_to_6_reason.set_status(factheirs=range_0_to_1_facts)
     # THEN
     assert range_3_to_6_reason._status is False

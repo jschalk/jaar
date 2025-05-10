@@ -758,9 +758,9 @@ class BudDelta:
             insert_factunit = itemunit.factunits.get(insert_factunit_base)
             x_budatom = budatom_shop("bud_item_factunit", atom_insert())
             x_budatom.set_jkey("road", itemunit.get_road())
-            x_budatom.set_jkey("base", insert_factunit.base)
-            if insert_factunit.fpick is not None:
-                x_budatom.set_jvalue("fpick", insert_factunit.fpick)
+            x_budatom.set_jkey("fbase", insert_factunit.fbase)
+            if insert_factunit.fneed is not None:
+                x_budatom.set_jvalue("fneed", insert_factunit.fneed)
             if insert_factunit.fopen is not None:
                 x_budatom.set_jvalue("fopen", insert_factunit.fopen)
             if insert_factunit.fnigh is not None:
@@ -779,9 +779,9 @@ class BudDelta:
             if jvalues_different("bud_item_factunit", before_factunit, after_factunit):
                 x_budatom = budatom_shop("bud_item_factunit", atom_update())
                 x_budatom.set_jkey("road", before_itemunit.get_road())
-                x_budatom.set_jkey("base", after_factunit.base)
-                if before_factunit.fpick != after_factunit.fpick:
-                    x_budatom.set_jvalue("fpick", after_factunit.fpick)
+                x_budatom.set_jkey("fbase", after_factunit.fbase)
+                if before_factunit.fneed != after_factunit.fneed:
+                    x_budatom.set_jvalue("fneed", after_factunit.fneed)
                 if before_factunit.fopen != after_factunit.fopen:
                     x_budatom.set_jvalue("fopen", after_factunit.fopen)
                 if before_factunit.fnigh != after_factunit.fnigh:
@@ -794,7 +794,7 @@ class BudDelta:
         for delete_factunit_base in delete_factunit_bases:
             x_budatom = budatom_shop("bud_item_factunit", atom_delete())
             x_budatom.set_jkey("road", item_road)
-            x_budatom.set_jkey("base", delete_factunit_base)
+            x_budatom.set_jkey("fbase", delete_factunit_base)
             self.set_budatom(x_budatom)
 
     def is_empty(self) -> bool:

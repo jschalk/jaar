@@ -4432,7 +4432,7 @@
                         "base": ";accord45;day_minute",
                         "fnigh": 59,
                         "fopen": 5,
-                        "fpick": ";accord45;day_minute"
+                        "fneed": ";accord45;day_minute"
                     }
                 },
                 "mass": 40
@@ -4609,13 +4609,13 @@
                 "base": ";accord45;day_hour",
                 "fnigh": 23,
                 "fopen": 0,
-                "fpick": ";accord45;day_hour"
+                "fneed": ";accord45;day_hour"
             },
             ";accord45;day_minute": {
                 "base": ";accord45;day_minute",
                 "fnigh": 59,
                 "fopen": 0,
-                "fpick": ";accord45;day_minute"
+                "fneed": ";accord45;day_minute"
             }
         },
         "mass": 1

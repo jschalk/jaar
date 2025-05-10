@@ -317,26 +317,25 @@ def _modify_bud_item_awardlink_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_item_factunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_itemunit.del_factunit(x_atom.get_value("base"))
+    x_itemunit.del_factunit(x_atom.get_value("fbase"))
 
 
 def _modify_bud_item_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
-    x_factunit = x_itemunit.factunits.get(x_atom.get_value("base"))
+    x_factunit = x_itemunit.factunits.get(x_atom.get_value("fbase"))
     x_factunit.set_attr(
-        fpick=x_atom.get_value("fpick"),
+        fneed=x_atom.get_value("fneed"),
         fopen=x_atom.get_value("fopen"),
         fnigh=x_atom.get_value("fnigh"),
     )
-    # x_itemunit.set_factunit(x_factunit)
 
 
 def _modify_bud_item_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_item_attr(
         road=x_atom.get_value("road"),
         factunit=factunit_shop(
-            base=x_atom.get_value("base"),
-            fpick=x_atom.get_value("fpick"),
+            fbase=x_atom.get_value("fbase"),
+            fneed=x_atom.get_value("fneed"),
             fopen=x_atom.get_value("fopen"),
             fnigh=x_atom.get_value("fnigh"),
         ),
@@ -577,7 +576,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "bud_item_factunit":
         return (
-            (x_obj.fpick != y_obj.fpick)
+            (x_obj.fneed != y_obj.fneed)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
@@ -629,6 +628,7 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     divisor: int = None
+    fbase: RoadUnit = None
     fnigh: float = None
     fopen: float = None
     fund_coin: float = None
@@ -645,7 +645,7 @@ class AtomRow:
     numor: int = None
     open: float = None
     penny: float = None
-    fpick: RoadUnit = None
+    fneed: RoadUnit = None
     pledge: bool = None
     problem_bool: bool = None
     road: RoadUnit = None
@@ -705,15 +705,9 @@ def atomrow_shop(atom_dimens: set[str], crud_command: CRUD_command) -> AtomRow:
 def sift_budatom(x_bud: BudUnit, x_atom: BudAtom) -> BudAtom:
     config_keys = get_atom_config_jkeys(x_atom.dimen)
     x_atom_reqs = {x_key: x_atom.get_value(x_key) for x_key in config_keys}
-    x_road = x_atom_reqs.get("road")
-    if x_road != None:
-        x_atom_reqs["road"] = x_road
-        x_bridge = x_bud.bridge
-        is_itemroot_road = is_tagunit(x_atom_reqs.get("road"), x_bridge)
-        if is_itemroot_road is True:
-            return None
 
     x_exists = bud_attr_exists(x_atom.dimen, x_bud, x_atom_reqs)
+    print(f"{x_exists=}")
 
     if x_atom.crud_str == atom_delete() and x_exists:
         return x_atom

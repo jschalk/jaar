@@ -141,8 +141,8 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
         pledge=True,
         problem_bool=x_problem_bool,
     )
-    factunit_x = factunit_shop(base=week_road, fpick=week_road, fopen=5, fnigh=59)
-    casa_item.set_factunit(factunit=factunit_x)
+    x_factunit = factunit_shop(fbase=week_road, fneed=week_road, fopen=5, fnigh=59)
+    casa_item.set_factunit(factunit=x_factunit)
     casa_item._originunit.set_originhold(acct_name="Ray", importance=None)
     casa_item._originunit.set_originhold(acct_name="Lei", importance=4)
     x_begin = 11

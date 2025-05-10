@@ -23,7 +23,6 @@
         "fiscunit",
         "budunit",
         "bud_itemunit",
-        "bud_item_factunit",
         "bud_item_reasonunit"
     ],
     "idea_number": "br00057"

@@ -83,15 +83,15 @@ class CellUnit:
     def set_boss_facts_from_other_facts(self):
         self.boss_facts = copy_deepcopy(self.budevent_facts)
         for x_fact in self.found_facts.values():
-            self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+            self.boss_facts[x_fact.fbase] = copy_deepcopy(x_fact)
 
     def add_other_facts_to_boss_facts(self):
         for x_fact in self.found_facts.values():
-            if not self.boss_facts.get(x_fact.base):
-                self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.fbase):
+                self.boss_facts[x_fact.fbase] = copy_deepcopy(x_fact)
         for x_fact in self.budevent_facts.values():
-            if not self.boss_facts.get(x_fact.base):
-                self.boss_facts[x_fact.base] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.fbase):
+                self.boss_facts[x_fact.fbase] = copy_deepcopy(x_fact)
 
     def filter_facts_by_reason_bases(self):
         to_delete_budevent_fact_keys = set(self.budevent_facts.keys())
@@ -109,11 +109,17 @@ class CellUnit:
 
     def set_budadjust_facts(self):
         for fact in self.budevent_facts.values():
-            self.budadjust.add_fact(fact.base, fact.fpick, fact.fopen, fact.fnigh, True)
+            self.budadjust.add_fact(
+                fact.fbase, fact.fneed, fact.fopen, fact.fnigh, True
+            )
         for fact in self.found_facts.values():
-            self.budadjust.add_fact(fact.base, fact.fpick, fact.fopen, fact.fnigh, True)
+            self.budadjust.add_fact(
+                fact.fbase, fact.fneed, fact.fopen, fact.fnigh, True
+            )
         for fact in self.boss_facts.values():
-            self.budadjust.add_fact(fact.base, fact.fpick, fact.fopen, fact.fnigh, True)
+            self.budadjust.add_fact(
+                fact.fbase, fact.fneed, fact.fopen, fact.fnigh, True
+            )
 
     def _set_acct_mandate_ledger(self):
         self.budadjust.set_fund_pool(self.mandate)

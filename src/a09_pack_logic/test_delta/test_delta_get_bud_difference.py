@@ -25,8 +25,10 @@ from src.a06_bud_logic._utils.str_a06 import (
     begin_str,
     close_str,
     mass_str,
-    fopen_str,
+    fbase_str,
+    fneed_str,
     fnigh_str,
+    fopen_str,
     base_item_active_requisite_str,
     give_force_str,
     take_force_str,
@@ -703,8 +705,8 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_updat
     x_keylist = [atom_update(), bud_item_factunit_str(), ball_road, knee_road]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value("base") == knee_road
-    assert ball_budatom.get_value("fpick") == damaged_road
+    assert ball_budatom.get_value(fbase_str()) == knee_road
+    assert ball_budatom.get_value(fneed_str()) == damaged_road
     assert ball_budatom.get_value(fopen_str()) == after_fopen
     assert ball_budatom.get_value(fnigh_str()) == after_fnigh
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -740,9 +742,10 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_inser
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [atom_insert(), bud_item_factunit_str(), ball_road, knee_road]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
+    print(f"{ball_budatom=}")
     assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value("base") == knee_road
-    assert ball_budatom.get_value("fpick") == damaged_road
+    assert ball_budatom.get_value(fbase_str()) == knee_road
+    assert ball_budatom.get_value(fneed_str()) == damaged_road
     assert ball_budatom.get_value(fopen_str()) == after_fopen
     assert ball_budatom.get_value(fnigh_str()) == after_fnigh
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -768,8 +771,8 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_delet
     before_damaged_open = 55
     before_damaged_nigh = 66
     before_fact = factunit_shop(
-        base=knee_road,
-        fpick=damaged_road,
+        fbase=knee_road,
+        fneed=damaged_road,
         fopen=before_damaged_open,
         fnigh=before_damaged_nigh,
     )
@@ -784,9 +787,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_factunit_delet
     x_keylist = [atom_delete(), bud_item_factunit_str(), ball_road, knee_road]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value("base") == knee_road
-    assert ball_budatom.get_value(road_str()) == ball_road
-    assert ball_budatom.get_value("base") == knee_road
+    assert ball_budatom.get_value(fbase_str()) == knee_road
     assert get_budatom_total_count(sue_buddelta) == 1
 
 

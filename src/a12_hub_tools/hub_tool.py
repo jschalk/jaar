@@ -151,10 +151,10 @@ def save_arbitrary_budevent(
         x_budunit.add_acctunit(acct_list[0], credit_belief)
     for fact_tup in facts:
         x_base = fact_tup[0]
-        x_fpick = fact_tup[1]
+        x_fneed = fact_tup[1]
         x_fopen = fact_tup[2]
         x_fnigh = fact_tup[3]
-        x_budunit.add_fact(x_base, x_fpick, x_fopen, x_fnigh, True)
+        x_budunit.add_fact(x_base, x_fneed, x_fopen, x_fnigh, True)
     x_budevent_path = create_budevent_path(
         fisc_mstr_dir, fisc_tag, owner_name, event_int
     )

@@ -187,7 +187,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     assert len(yao_listener.get_missing_fact_bases()) == 2
     yao_listener.add_fact(status_road, dirty_road)
     assert len(yao_listener.get_missing_fact_bases()) == 1
-    assert yao_listener.get_fact(status_road).fpick == dirty_road
+    assert yao_listener.get_fact(status_road).fneed == dirty_road
 
     # WHEN
     yao_speaker = budunit_shop(yao_str)
@@ -199,9 +199,9 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # THEN
     assert len(yao_listener.get_missing_fact_bases()) == 0
     # did not grab speaker's factunit
-    assert yao_listener.get_fact(status_road).fpick == dirty_road
+    assert yao_listener.get_fact(status_road).fneed == dirty_road
     # grabed speaker's factunit
-    assert yao_listener.get_fact(fridge_road).fpick == running_road
+    assert yao_listener.get_fact(fridge_road).fneed == running_road
 
 
 def test_migrate_all_facts_CorrectlyAddsItemUnitsAndSetsFactUnits():
@@ -256,5 +256,5 @@ def test_migrate_all_facts_CorrectlyAddsItemUnitsAndSetsFactUnits():
     assert yao_dst.item_exists(snow_road)
     assert yao_dst.get_fact(weather_road) is not None
     assert yao_dst.get_fact(status_road) is not None
-    assert yao_dst.get_fact(weather_road).fpick == rain_road
-    assert yao_dst.get_fact(status_road).fpick == clean_road
+    assert yao_dst.get_fact(weather_road).fneed == rain_road
+    assert yao_dst.get_fact(status_road).fneed == clean_road

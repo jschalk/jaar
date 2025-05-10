@@ -25,6 +25,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     item_tag_str,
     road_str,
     base_str,
+    fbase_str,
     debtit_belief_str,
     debtit_vote_str,
     addin_str,
@@ -321,7 +322,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_factunit():
     casa_fopen = 32
     casa_atom = budatom_shop(bud_item_factunit_str(), atom_insert())
     casa_atom.set_arg(road_str(), casa_road)
-    casa_atom.set_arg(base_str(), week_road)
+    casa_atom.set_arg(fbase_str(), week_road)
     casa_atom.set_arg(fopen_str(), casa_fopen)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_factunit = bud_item_factunit_get_obj(sue_bud, casa_jkeys)

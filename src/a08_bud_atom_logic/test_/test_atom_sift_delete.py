@@ -20,6 +20,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     item_tag_str,
     road_str,
     base_str,
+    fbase_str,
 )
 from src.a08_bud_atom_logic.atom import atom_delete, budatom_shop, sift_budatom
 
@@ -345,10 +346,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_factunit():
 
     casa_week_atom = budatom_shop(bud_item_factunit_str(), atom_delete())
     casa_week_atom.set_arg(road_str(), casa_road)
-    casa_week_atom.set_arg(base_str(), week_road)
+    casa_week_atom.set_arg(fbase_str(), week_road)
     clean_week_atom = budatom_shop(bud_item_factunit_str(), atom_delete())
     clean_week_atom.set_arg(road_str(), clean_road)
-    clean_week_atom.set_arg(base_str(), week_road)
+    clean_week_atom.set_arg(fbase_str(), week_road)
     sue_bud.add_item(casa_road)
     sue_bud.add_item(clean_road)
     assert not sift_budatom(sue_bud, casa_week_atom)

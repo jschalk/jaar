@@ -33,8 +33,8 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     assert sue_fact_dict.get(casa_road) != None
     casa_fact_dict = sue_fact_dict.get(casa_road)
     assert casa_fact_dict.get("base") == casa_road
-    assert casa_fact_dict.get("fpick") == dirty_road
-    expected_sue_fact_dict = {casa_road: {"base": casa_road, "fpick": dirty_road}}
+    assert casa_fact_dict.get("fneed") == dirty_road
+    expected_sue_fact_dict = {casa_road: {"base": casa_road, "fneed": dirty_road}}
     print(f"{sue_fact_dict=}")
     print(f"{expected_sue_fact_dict=}")
     assert sue_fact_dict == expected_sue_fact_dict
@@ -58,13 +58,13 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     assert sue_fact_dict.get(casa_road) != None
     casa_fact_dict = sue_fact_dict.get(casa_road)
     assert casa_fact_dict.get("base") == casa_road
-    assert casa_fact_dict.get("fpick") == dirty_road
+    assert casa_fact_dict.get("fneed") == dirty_road
     assert casa_fact_dict.get("fopen") == dirty_open
     assert casa_fact_dict.get("fnigh") == dirty_nigh
     expected_sue_fact_dict = {
         casa_road: {
             "base": casa_road,
-            "fpick": dirty_road,
+            "fneed": dirty_road,
             "fopen": dirty_open,
             "fnigh": dirty_nigh,
         }
@@ -106,7 +106,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario1_Bud1FactsChanged():
     bob_bud.add_item(dirty_road)
     bob_bud.add_item(mop_road, pledge=True)
     bob_bud.edit_item_attr(mop_road, reason_base=floor_road, reason_premise=dirty_road)
-    dirty_facts_dict = {floor_road: {"base": floor_road, "fpick": dirty_road}}
+    dirty_facts_dict = {floor_road: {"base": floor_road, "fneed": dirty_road}}
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != dirty_facts_dict
     assert bob_bud.get_factunits_dict() == {}
@@ -138,7 +138,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_base_DoesNotExistInB
     bob_bud.add_item(dirty_road)
     bob_bud.add_item(mop_road, pledge=True)
     bob_bud.edit_item_attr(mop_road, reason_base=floor_road, reason_premise=dirty_road)
-    clean_facts_dict = {floor_road: {"base": floor_road, "fpick": clean_road}}
+    clean_facts_dict = {floor_road: {"base": floor_road, "fneed": clean_road}}
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != clean_facts_dict
     assert bob_bud.get_factunits_dict() == {}
@@ -178,8 +178,8 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_base_WithoutBaseNotA
     rain_road = bob_bud.make_road(weather_road, raining_str)
 
     two_facts_dict = {
-        floor_road: {"base": floor_road, "fpick": clean_road},
-        weather_road: {"base": weather_road, "fpick": rain_road},
+        floor_road: {"base": floor_road, "fneed": clean_road},
+        weather_road: {"base": weather_road, "fneed": rain_road},
     }
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != two_facts_dict
@@ -214,7 +214,7 @@ def test_clear_factunits_from_bud_ReturnsObj_Scenario1_FactUnit_Exist():
     bob_bud.add_item(mop_road, pledge=True)
     bob_bud.edit_item_attr(mop_road, reason_base=floor_road, reason_premise=dirty_road)
     bob_bud.add_fact(floor_road, dirty_road)
-    floor_facts_dict = {floor_road: {"base": floor_road, "fpick": dirty_road}}
+    floor_facts_dict = {floor_road: {"base": floor_road, "fneed": dirty_road}}
     assert bob_bud.get_factunits_dict() == floor_facts_dict
     assert bob_bud.get_factunits_dict() != {}
 

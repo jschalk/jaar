@@ -179,6 +179,14 @@ def morph_str() -> str:
     return "morph"
 
 
+def need_str() -> str:
+    return "need"
+
+
+def nigh_str() -> str:
+    return "nigh"
+
+
 def gogo_want_str() -> str:
     return "gogo_want"
 
@@ -191,12 +199,24 @@ def base_str() -> str:
     return "base"
 
 
+def fbase_str() -> str:
+    return "fbase"
+
+
 def fopen_str() -> str:
     return "fopen"
 
 
+def fneed_str() -> str:
+    return "fneed"
+
+
 def fnigh_str() -> str:
     return "fnigh"
+
+
+def open_str() -> str:
+    return "open"
 
 
 def base_item_active_requisite_str() -> str:

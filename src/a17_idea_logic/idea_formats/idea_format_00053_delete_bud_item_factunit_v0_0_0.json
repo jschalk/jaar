@@ -1,12 +1,12 @@
 {
     "attributes": {
-        "base_EXCISE": {
-            "otx_key": true
-        },
         "event_int": {
             "otx_key": true
         },
         "face_name": {
+            "otx_key": true
+        },
+        "fbase_ERASE": {
             "otx_key": true
         },
         "fisc_tag": {
@@ -23,7 +23,6 @@
         "fiscunit",
         "budunit",
         "bud_itemunit",
-        "bud_item_reasonunit",
         "bud_item_factunit"
     ],
     "idea_number": "br00053"

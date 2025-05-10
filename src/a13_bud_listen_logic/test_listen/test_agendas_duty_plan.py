@@ -337,7 +337,7 @@ def test_listen_to_agenda_duty_plan_agenda_GetsAgendaFromSrcBudNotSpeakerSelf(
     # ESTABLISH
     # yao_duty has task run_road
     # yao_plan has task clean_road
-    # yao_new_plan fpicks yao_duty task run_road and not clean_road
+    # yao_new_plan fneeds yao_duty task run_road and not clean_road
     yao_duty = get_example_yao_speaker()
     assert yao_duty.item_exists(run_road()) is False
     assert yao_duty.item_exists(clean_road()) is False

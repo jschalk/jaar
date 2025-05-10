@@ -85,10 +85,10 @@ def bud_item_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_road = jkeys.get("road")
-    x_base = jkeys.get("base")
+    x_fbase = jkeys.get("fbase")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).factunit_exists(x_base)
+        and x_bud.get_item_obj(x_road).factunit_exists(x_fbase)
     )
 
 
@@ -154,8 +154,10 @@ def bud_item_reason_premiseunit_get_obj(
 
 def bud_item_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
     x_road = jkeys.get("road")
-    x_base = jkeys.get("base")
-    return x_bud.get_item_obj(x_road).factunits.get(x_base)
+    x_fbase = jkeys.get("fbase")
+    print(f"{x_fbase=}")
+    print(f"{x_bud.get_item_obj(x_road).factunits=}")
+    return x_bud.get_item_obj(x_road).factunits.get(x_fbase)
 
 
 def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
@@ -253,10 +255,10 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
     not_missing_fact_bases = set(x_bud.get_factunits_dict().keys())
     bud_fact_bases = not_missing_fact_bases.union(missing_fact_bases)
     for factunit in factunits_dict.values():
-        if factunit.base in bud_fact_bases:
+        if factunit.fbase in bud_fact_bases:
             x_bud.add_fact(
-                factunit.base,
-                factunit.fpick,
+                factunit.fbase,
+                factunit.fneed,
                 factunit.fopen,
                 factunit.fnigh,
                 create_missing_items=True,

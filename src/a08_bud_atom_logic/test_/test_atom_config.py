@@ -17,6 +17,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     addin_str,
     awardee_title_str,
     base_str,
+    fbase_str,
     begin_str,
     close_str,
     credit_belief_str,
@@ -554,7 +555,7 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert bud_item_factunit_str() in road_dimens
     assert bud_item_teamlink_str() in road_dimens
     assert len(road_dimens) == 7
-    assert len(x_atom_args_dimen_mapping) == 40
+    assert len(x_atom_args_dimen_mapping) == 41
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -656,6 +657,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("divisor") == "int"
+    assert x_class_types.get(fbase_str()) == type_RoadUnit_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"
@@ -672,7 +674,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fpick") == type_RoadUnit_str()
+    assert x_class_types.get("fneed") == type_RoadUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(road_str()) == type_RoadUnit_str()

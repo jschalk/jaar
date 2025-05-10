@@ -86,11 +86,11 @@ def test_set_cell_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAn
     bob5_budevent.add_acctunit(yao_str)
     bob5_yao_budevent.add_acctunit(sue_str)
     bob5_yao_sue_budevent.add_acctunit(bob_str)
-    bob5_yao_sue_budevent.add_item(clean_fact.fpick, 1)
-    bob5_yao_sue_budevent.add_fact(clean_fact.base, clean_fact.fpick)
+    bob5_yao_sue_budevent.add_item(clean_fact.fneed, 1)
+    bob5_yao_sue_budevent.add_fact(clean_fact.fbase, clean_fact.fneed)
     bob5_cell = cellunit_shop(bob_str, das, budadjust=bob5_budevent)
     bob5_yao_cell = cellunit_shop(bob_str, das_y, budadjust=bob5_yao_budevent)
-    clean_facts = {clean_fact.base: clean_fact}
+    clean_facts = {clean_fact.fbase: clean_fact}
     bob5_yao_sue_cell = cellunit_shop(
         bob_str, das_ys, budadjust=bob5_yao_sue_budevent, budevent_facts=clean_facts
     )

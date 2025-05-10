@@ -9,10 +9,14 @@ from src.a06_bud_logic._utils.str_a06 import (
     awardee_title_str,
     base_str,
     face_name_str,
+    fbase_str,
+    fneed_str,
+    fopen_str,
     fund_coin_str,
     healer_name_str,
     group_label_str,
     item_tag_str,
+    need_str,
     penny_str,
     respect_bit_str,
     road_str,
@@ -81,6 +85,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("denom") == "int"
     assert pidgin_args_class_types.get("divisor") == "int"
     assert pidgin_args_class_types.get("face_name") == type_NameUnit_str()
+    assert pidgin_args_class_types.get("fbase") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("fisc_tag") == type_TagUnit_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
@@ -104,7 +109,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("owner_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("open") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("fpick") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("fneed") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
@@ -182,27 +187,6 @@ def test_pidginable_class_types_ReturnsObj():
 
 def test_pidginable_atom_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert len(pidginable_atom_args()) == 17
-    assert pidginable_atom_args() == {
-        acct_name_str(),
-        awardee_title_str(),
-        base_str(),
-        face_name_str(),
-        fisc_tag_str(),
-        group_label_str(),
-        healer_name_str(),
-        hour_tag_str(),
-        item_tag_str(),
-        month_tag_str(),
-        "fpick",
-        "need",
-        owner_name_str(),
-        road_str(),
-        team_title_str(),
-        timeline_tag_str(),
-        weekday_tag_str(),
-    }
-
     print(f"{pidginable_class_types()=}")
     all_pidgin_args = set(get_pidgin_args_class_types().keys())
     print(f"{pidginable_atom_args().difference(all_pidgin_args)}")
@@ -213,6 +197,28 @@ def test_pidginable_atom_args_ReturnsObj():
         if class_type in pidginable_class_types()
     }
     assert pidginable_atom_args() == static_pidginable_atom_args
+
+    assert len(pidginable_atom_args()) == 18
+    assert pidginable_atom_args() == {
+        acct_name_str(),
+        awardee_title_str(),
+        base_str(),
+        face_name_str(),
+        fbase_str(),
+        fisc_tag_str(),
+        fneed_str(),
+        group_label_str(),
+        healer_name_str(),
+        hour_tag_str(),
+        item_tag_str(),
+        month_tag_str(),
+        need_str(),
+        owner_name_str(),
+        road_str(),
+        team_title_str(),
+        timeline_tag_str(),
+        weekday_tag_str(),
+    }
 
 
 def test_PidginUnit_Exists():
