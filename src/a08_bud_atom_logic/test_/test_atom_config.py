@@ -411,7 +411,7 @@ def test_get_flattened_atom_table_build_ReturnsObj():
 
     # THEN
     assert len(atom_columns) == 103
-    assert atom_columns.get("budunit_UPDATE_credor_respect") == "INTEGER"
+    assert atom_columns.get("budunit_UPDATE_credor_respect") == "REAL"
     # print(f"{atom_columns.keys()=}")
 
 
@@ -520,7 +520,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert acct_name_dict.get("nullable") is False
     debtit_belief_dict = acctunit_columns.get("debtit_belief")
     assert len(acct_name_dict) == 2
-    assert debtit_belief_dict.get(sqlite_datatype_str()) == "INTEGER"
+    assert debtit_belief_dict.get(sqlite_datatype_str()) == "REAL"
     assert debtit_belief_dict.get("nullable") is True
 
     assert len(cat_item) == 2
@@ -648,12 +648,12 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
-    assert x_class_types.get(credit_belief_str()) == "int"
-    assert x_class_types.get(credit_vote_str()) == "int"
-    assert x_class_types.get(credor_respect_str()) == "int"
-    assert x_class_types.get(debtit_belief_str()) == "int"
-    assert x_class_types.get(debtit_vote_str()) == "int"
-    assert x_class_types.get(debtor_respect_str()) == "int"
+    assert x_class_types.get(credit_belief_str()) == "float"
+    assert x_class_types.get(credit_vote_str()) == "float"
+    assert x_class_types.get(credor_respect_str()) == "float"
+    assert x_class_types.get(debtit_belief_str()) == "float"
+    assert x_class_types.get(debtit_vote_str()) == "float"
+    assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("divisor") == "int"
     assert x_class_types.get(fnigh_str()) == "float"

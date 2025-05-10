@@ -26,13 +26,13 @@
         "jvalues": {
             "credit_vote": {
                 "column_order": 3,
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "debtit_vote": {
                 "column_order": 2,
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
@@ -59,13 +59,13 @@
         "jvalues": {
             "credit_belief": {
                 "column_order": 2,
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "debtit_belief": {
                 "column_order": 1,
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
@@ -382,13 +382,13 @@
         "jvalues": {
             "credor_respect": {
                 "column_order": 3,
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "debtor_respect": {
                 "column_order": 2,
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
             },
             "fund_coin": {
                 "column_order": 1,

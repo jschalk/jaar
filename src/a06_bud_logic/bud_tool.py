@@ -93,26 +93,26 @@ def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_attr_exists(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    if x_dimen == "budunit":
-        return budunit_exists(x_bud)
+    if x_dimen == "bud_acct_membership":
+        return bud_acct_membership_exists(x_bud, jkeys)
     elif x_dimen == "bud_acctunit":
         return bud_acctunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_acct_membership":
-        return bud_acct_membership_exists(x_bud, jkeys)
-    elif x_dimen == "bud_itemunit":
-        return bud_itemunit_exists(x_bud, jkeys)
     elif x_dimen == "bud_item_awardlink":
         return bud_item_awardlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_reasonunit":
-        return bud_item_reasonunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_reason_premiseunit":
-        return bud_item_reason_premiseunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_teamlink":
-        return bud_item_teamlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_item_healerlink":
-        return bud_item_healerlink_exists(x_bud, jkeys)
     elif x_dimen == "bud_item_factunit":
         return bud_item_factunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_healerlink":
+        return bud_item_healerlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_reason_premiseunit":
+        return bud_item_reason_premiseunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_reasonunit":
+        return bud_item_reasonunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_item_teamlink":
+        return bud_item_teamlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_itemunit":
+        return bud_itemunit_exists(x_bud, jkeys)
+    elif x_dimen == "budunit":
+        return budunit_exists(x_bud)
     return True
 
 

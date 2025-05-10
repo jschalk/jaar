@@ -11,8 +11,8 @@ class BudTable(Base):
     __tablename__ = "bud"
     uid = Column(Integer, primary_key=True)
     max_tree_traverse = Column(Integer)
-    credor_respect = Column(Integer)
-    debtor_respect = Column(Integer)
+    credor_respect = Column(Float)
+    debtor_respect = Column(Float)
     fund_pool = Column(Float)
     fund_coin = Column(Float)
     respect_bit = Column(Float)
@@ -24,8 +24,8 @@ class AcctUnitTable(Base):
     __tablename__ = "acctunit"
     uid = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    credit_belief = Column(Integer)
-    debtit_belief = Column(Integer)
+    credit_belief = Column(Float)
+    debtit_belief = Column(Float)
 
 
 class MemberShipTable(Base):
@@ -33,8 +33,8 @@ class MemberShipTable(Base):
     uid = Column(Integer, primary_key=True)
     group_label = Column(String)
     acct_name = Column(String)
-    credit_vote = Column(Integer)
-    debtit_vote = Column(Integer)
+    credit_vote = Column(Float)
+    debtit_vote = Column(Float)
 
 
 class ItemTable(Base):

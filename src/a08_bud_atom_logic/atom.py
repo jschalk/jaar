@@ -637,7 +637,6 @@ class AtomRow:
     gogo_want: float = None
     group_label: LabelUnit = None
     healer_name: LabelUnit = None
-    item_tag: TagUnit = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
@@ -645,7 +644,6 @@ class AtomRow:
     nigh: float = None
     numor: int = None
     open: float = None
-    parent_road: RoadUnit = None
     penny: float = None
     pick: RoadUnit = None
     pledge: bool = None
@@ -685,8 +683,6 @@ class AtomRow:
                     self.__dict__[x_arg] = int(x_value)
                 elif class_type == "float":
                     self.__dict__[x_arg] = float(x_value)
-        if self.item_tag != None and self.parent_road != None and self.road is None:
-            self.road = create_road(self.parent_road, self.item_tag)
 
     def get_budatoms(self) -> list[BudAtom]:
         self._set_class_types()
