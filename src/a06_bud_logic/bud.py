@@ -431,15 +431,15 @@ class BudUnit:
     def add_fact(
         self,
         base: RoadUnit,
-        pick: RoadUnit = None,
+        fpick: RoadUnit = None,
         fopen: float = None,
         fnigh: float = None,
         create_missing_items: bool = None,
     ):
-        pick = base if pick is None else pick
+        fpick = base if fpick is None else fpick
         if create_missing_items:
             self._create_itemkid_if_empty(road=base)
-            self._create_itemkid_if_empty(road=pick)
+            self._create_itemkid_if_empty(road=fpick)
 
         fact_base_item = self.get_item_obj(base)
         x_itemroot = self.get_item_obj(to_road(self.fisc_tag))
@@ -453,7 +453,7 @@ class BudUnit:
             x_fnigh = x_itemroot.factunits.get(base).fnigh
         else:
             x_fnigh = fnigh
-        x_factunit = factunit_shop(base=base, pick=pick, fopen=x_fopen, fnigh=x_fnigh)
+        x_factunit = factunit_shop(base=base, fpick=fpick, fopen=x_fopen, fnigh=x_fnigh)
 
         if fact_base_item.is_math() is False:
             x_itemroot.set_factunit(x_factunit)

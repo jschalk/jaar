@@ -303,7 +303,7 @@ def add_bud_to_br00023_csv(
             x_bud.owner_name,
             x_bud.itemroot.get_road(),
             factunit.base,
-            factunit.pick,
+            factunit.fpick,
             if_none_str(factunit.fopen),
             if_none_str(factunit.fnigh),
         ]
@@ -651,7 +651,7 @@ def add_pack_to_br00023_csv(
                 x_packunit.owner_name,
                 budatom.jkeys.get("road"),
                 budatom.jkeys.get("base"),
-                if_none_str(budatom.jvalues.get("pick")),
+                if_none_str(budatom.jvalues.get("fpick")),
                 if_none_str(budatom.jvalues.get("fopen")),
                 if_none_str(budatom.jvalues.get("fnigh")),
             ]

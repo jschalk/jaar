@@ -14,7 +14,7 @@ CREATE_JOB_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_jo
 CREATE_JOB_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
 CREATE_JOB_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, group_label TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
 CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_awardlink_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
-CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, pick TEXT, fopen REAL, fnigh REAL)"""
+CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_factunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, fpick TEXT, fopen REAL, fnigh REAL)"""
 CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_healerlink_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, healer_name TEXT)"""
 CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reason_premiseunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, need TEXT, nigh REAL, open REAL, divisor INTEGER, _task INTEGER, _status INTEGER)"""
 CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_item_reasonunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, road TEXT, base TEXT, base_item_active_requisite INTEGER, _task INTEGER, _status INTEGER, _base_item_active_value INTEGER)"""
@@ -189,17 +189,17 @@ def create_budfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     owner_name = values_dict.get("owner_name")
     road = values_dict.get("road")
     base = values_dict.get("base")
-    pick = values_dict.get("pick")
+    fpick = values_dict.get("fpick")
     fopen = values_dict.get("fopen")
     fnigh = values_dict.get("fnigh")
-    return f"""INSERT INTO bud_item_factunit_job (world_id, fisc_tag, owner_name, road, base, pick, fopen, fnigh)
+    return f"""INSERT INTO bud_item_factunit_job (world_id, fisc_tag, owner_name, road, base, fpick, fopen, fnigh)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_tag, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(road, "TEXT")}
 , {sqlite_obj_str(base, "TEXT")}
-, {sqlite_obj_str(pick, "TEXT")}
+, {sqlite_obj_str(fpick, "TEXT")}
 , {sqlite_obj_str(fopen, "REAL")}
 , {sqlite_obj_str(fnigh, "REAL")}
 )

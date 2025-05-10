@@ -354,7 +354,7 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     assert yao_job.item_exists(get_in_mer_road())
     assert yao_job.item_exists(get_on_land_road()) is False
     assert yao_job.get_fact(get_location_road()) is not None
-    assert yao_job.get_fact(get_location_road()).pick == get_in_mer_road()
+    assert yao_job.get_fact(get_location_road()).fpick == get_in_mer_road()
     assert len(yao_job.get_agenda_dict()) == 1
     assert len(yao_job.itemroot.factunits) == 1
     assert yao_job != yao_gut0

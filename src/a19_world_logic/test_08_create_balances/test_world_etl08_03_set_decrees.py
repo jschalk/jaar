@@ -40,7 +40,7 @@ def test_WorldUnit_set_cell_tree_decrees_SetsChildCells_Scenario6_boss_facts_Res
     bs_yao_ba.set_owner_name(yao_str)
     bs_yao_ba.add_acctunit(zia_str, 1)
     clean_fact = example_casa_clean_factunit()
-    bs_yao_ba.add_fact(clean_fact.base, clean_fact.pick)
+    bs_yao_ba.add_fact(clean_fact.base, clean_fact.fpick)
     bsy_zia_ba = get_bob_mop_with_reason_budunit_example()
     bsy_zia_ba.set_owner_name(zia_str)
     # create cell file

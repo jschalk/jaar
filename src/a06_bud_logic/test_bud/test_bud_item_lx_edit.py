@@ -160,13 +160,13 @@ def test_bud_edit_item_tag_Modifies_factunits():
     yao_bud.set_l1_item(itemunit_shop(casa_str))
     yao_bud.set_item(itemunit_shop(roses_str), parent_road=bloomers_road)
     yao_bud.set_item(itemunit_shop(rain_str), parent_road=old_water_road)
-    yao_bud.add_fact(base=old_water_road, pick=old_rain_road)
+    yao_bud.add_fact(base=old_water_road, fpick=old_rain_road)
 
     item_x = yao_bud.get_item_obj(roses_road)
     assert yao_bud.itemroot.factunits[old_water_road] is not None
     old_water_rain_factunit = yao_bud.itemroot.factunits[old_water_road]
     assert old_water_rain_factunit.base == old_water_road
-    assert old_water_rain_factunit.pick == old_rain_road
+    assert old_water_rain_factunit.fpick == old_rain_road
 
     # WHEN
     new_water_str = "h2o"
@@ -181,14 +181,14 @@ def test_bud_edit_item_tag_Modifies_factunits():
     new_water_rain_factunit = yao_bud.itemroot.factunits[new_water_road]
     assert new_water_rain_factunit.base == new_water_road
     new_rain_road = yao_bud.make_road(new_water_road, rain_str)
-    assert new_water_rain_factunit.pick == new_rain_road
+    assert new_water_rain_factunit.fpick == new_rain_road
 
     assert yao_bud.itemroot.factunits.get(new_water_road)
     factunit_obj = yao_bud.itemroot.factunits.get(new_water_road)
     # for factunit_key, factunit_obj in yao_bud.itemroot.factunits.items():
     #     assert factunit_key == new_water_road
     assert factunit_obj.base == new_water_road
-    assert factunit_obj.pick == new_rain_road
+    assert factunit_obj.fpick == new_rain_road
 
 
 def test_bud_edit_item_tag_ModifiesItemReasonUnitsScenario1():

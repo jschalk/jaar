@@ -49,7 +49,7 @@ def test_AtomRow_exists():
     assert x_atomrow.numor is None
     assert x_atomrow.open is None
     assert x_atomrow.penny is None
-    assert x_atomrow.pick is None
+    assert x_atomrow.fpick is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.road is None

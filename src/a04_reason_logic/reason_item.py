@@ -18,14 +18,14 @@ class InvalidReasonException(Exception):
 @dataclass
 class FactCore:
     base: RoadUnit
-    pick: RoadUnit
+    fpick: RoadUnit
     fopen: float = None
     fnigh: float = None
 
     def get_dict(self) -> dict[str,]:
         x_dict = {
             "base": self.base,
-            "pick": self.pick,
+            "fpick": self.fpick,
         }
         if self.fopen is not None:
             x_dict["fopen"] = self.fopen
@@ -37,28 +37,30 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def set_attr(self, pick: RoadUnit = None, fopen: float = None, fnigh: float = None):
-        if pick is not None:
-            self.pick = pick
+    def set_attr(
+        self, fpick: RoadUnit = None, fopen: float = None, fnigh: float = None
+    ):
+        if fpick is not None:
+            self.fpick = fpick
         if fopen is not None:
             self.fopen = fopen
         if fnigh is not None:
             self.fnigh = fnigh
 
-    def set_pick_to_base(self):
-        self.set_attr(pick=self.base)
+    def set_fpick_to_base(self):
+        self.set_attr(fpick=self.base)
         self.fopen = None
         self.fnigh = None
 
     def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
         self.base = rebuild_road(self.base, old_road, new_road)
-        self.pick = rebuild_road(self.pick, old_road, new_road)
+        self.fpick = rebuild_road(self.fpick, old_road, new_road)
 
     def get_obj_key(self) -> RoadUnit:
         return self.base
 
     def get_tuple(self) -> tuple[RoadUnit, RoadUnit, float, float]:
-        return (self.base, self.pick, self.fopen, self.fnigh)
+        return (self.base, self.fpick, self.fopen, self.fnigh)
 
 
 @dataclass
@@ -68,18 +70,18 @@ class FactUnit(FactCore):
 
 def factunit_shop(
     base: RoadUnit = None,
-    pick: RoadUnit = None,
+    fpick: RoadUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
-    return FactUnit(base=base, pick=pick, fopen=fopen, fnigh=fnigh)
+    return FactUnit(base=base, fpick=fpick, fopen=fopen, fnigh=fnigh)
 
 
 def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_base = fact_dict["base"]
-        x_pick = fact_dict["pick"]
+        x_fpick = fact_dict["fpick"]
 
         try:
             x_fopen = fact_dict["fopen"]
@@ -92,7 +94,7 @@ def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
 
         x_fact = factunit_shop(
             base=x_base,
-            pick=x_pick,
+            fpick=x_fpick,
             fopen=x_fopen,
             fnigh=x_fnigh,
         )
@@ -126,11 +128,11 @@ class FactHeir(FactCore):
 
 def factheir_shop(
     base: RoadUnit = None,
-    pick: RoadUnit = None,
+    fpick: RoadUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
-    return FactHeir(base=base, pick=pick, fopen=fopen, fnigh=fnigh)
+    return FactHeir(base=base, fpick=fpick, fopen=fopen, fnigh=fnigh)
 
 
 class PremiseStatusFinderException(Exception):
@@ -325,10 +327,10 @@ class PremiseUnit:
             road=self.need, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
-    def is_in_lineage(self, fact_pick: RoadUnit):
+    def is_in_lineage(self, fact_fpick: RoadUnit):
         return is_heir_road(
-            src=self.need, heir=fact_pick, bridge=self.bridge
-        ) or is_heir_road(src=fact_pick, heir=self.need, bridge=self.bridge)
+            src=self.need, heir=fact_fpick, bridge=self.bridge
+        ) or is_heir_road(src=fact_fpick, heir=self.need, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -339,14 +341,14 @@ class PremiseUnit:
         # status might be true if premise is in lineage of fact
         if factheir is None:
             x_status = False
-        elif self.is_in_lineage(fact_pick=factheir.pick):
+        elif self.is_in_lineage(fact_fpick=factheir.fpick):
             if self._is_range_or_segregate() is False:
                 x_status = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
                 x_status = False
             elif self._is_range_or_segregate() and factheir.is_range():
                 x_status = self._get_range_segregate_status(factheir=factheir)
-        elif self.is_in_lineage(fact_pick=factheir.pick) is False:
+        elif self.is_in_lineage(fact_fpick=factheir.fpick) is False:
             x_status = False
 
         return x_status

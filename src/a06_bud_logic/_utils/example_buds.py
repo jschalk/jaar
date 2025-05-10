@@ -132,8 +132,8 @@ def get_budunit_with_4_levels_and_2reasons_2facts() -> BudUnit:
     states_road = sue_bud.make_l1_road(states_str)
     usa_str = "USA"
     usa_road = sue_bud.make_road(states_road, usa_str)
-    sue_bud.add_fact(base=week_road, pick=wed_road)
-    sue_bud.add_fact(base=states_road, pick=usa_road)
+    sue_bud.add_fact(base=week_road, fpick=wed_road)
+    sue_bud.add_fact(base=states_road, fpick=usa_road)
     return sue_bud
 
 
@@ -250,8 +250,8 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     shave_reason.set_premise(mon_road)
 
     zia_bud.edit_item_attr(road=shave_road, reason=shave_reason)
-    zia_bud.add_fact(base=week_road, pick=sun_road)
-    factunit_x = factunit_shop(base=week_road, pick=church_road)
+    zia_bud.add_fact(base=week_road, fpick=sun_road)
+    factunit_x = factunit_shop(base=week_road, fpick=church_road)
     zia_bud.edit_item_attr(road=shave_road, factunit=factunit_x)
     return zia_bud
 
@@ -372,7 +372,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     cali_teamunit = teamunit_shop()
     cali_teamunit.set_teamlink(cali_str)
     amos_bud.edit_item_attr(road=laundry_task_road, teamunit=cali_teamunit)
-    amos_bud.add_fact(base=basket_road, pick=b_full_road)
+    amos_bud.add_fact(base=basket_road, fpick=b_full_road)
 
     return amos_bud
 

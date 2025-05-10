@@ -92,7 +92,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "numor": "int",
         "open": "float",
         "penny": "float",
-        "pick": "RoadUnit",
+        "fpick": "RoadUnit",
         "pledge": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",

@@ -363,7 +363,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     assert sue_bud.itemroot._kids[casa_str].factunits == {}
     wkdays_road = sue_bud.make_l1_road("weekdays")
     fact_road = sue_bud.make_road(wkdays_road, "Sunday")
-    factunit_x = factunit_shop(base=fact_road, pick=fact_road)
+    factunit_x = factunit_shop(base=fact_road, fpick=fact_road)
 
     casa_factunits = sue_bud.itemroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")

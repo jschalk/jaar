@@ -21,7 +21,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "pick": {
+        "fpick": {
             "otx_key": false
         },
         "road": {

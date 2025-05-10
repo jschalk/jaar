@@ -103,4 +103,4 @@ class FactTable(Base):
     road = Column(String)
     fnigh = Column(Float)
     fopen = Column(Float)
-    pick = Column(String)
+    fpick = Column(String)

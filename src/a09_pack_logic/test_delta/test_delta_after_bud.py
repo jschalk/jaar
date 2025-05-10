@@ -590,7 +590,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     update_disc_budatom = budatom_shop(bud_item_factunit_str(), atom_insert())
     update_disc_budatom.set_jkey("road", ball_road)
     update_disc_budatom.set_jkey("base", knee_road)
-    update_disc_budatom.set_jvalue("pick", damaged_road)
+    update_disc_budatom.set_jvalue("fpick", damaged_road)
     update_disc_budatom.set_jvalue(fopen_str(), damaged_fopen)
     update_disc_budatom.set_jvalue(fnigh_str(), damaged_fnigh)
     # print(f"{update_disc_budatom=}")
@@ -603,7 +603,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_factunit():
     assert after_ball_item.factunits != {}
     assert after_ball_item.factunits.get(knee_road) is not None
     assert after_ball_item.factunits.get(knee_road).base == knee_road
-    assert after_ball_item.factunits.get(knee_road).pick == damaged_road
+    assert after_ball_item.factunits.get(knee_road).fpick == damaged_road
     assert after_ball_item.factunits.get(knee_road).fopen == damaged_fopen
     assert after_ball_item.factunits.get(knee_road).fnigh == damaged_fnigh
 
@@ -624,7 +624,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_factunit():
     before_sue_au.set_l1_item(itemunit_shop(knee_str))
     before_sue_au.set_item(itemunit_shop(damaged_str), knee_road)
     before_sue_au.edit_item_attr(
-        road=ball_road, factunit=factunit_shop(base=knee_road, pick=damaged_road)
+        road=ball_road, factunit=factunit_shop(base=knee_road, fpick=damaged_road)
     )
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     assert before_ball_item.factunits != {}
@@ -667,7 +667,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     before_ball_item = before_sue_au.get_item_obj(ball_road)
     assert before_ball_item.factunits != {}
     assert before_ball_item.factunits.get(knee_road) is not None
-    assert before_ball_item.factunits.get(knee_road).pick == damaged_road
+    assert before_ball_item.factunits.get(knee_road).fpick == damaged_road
     assert before_ball_item.factunits.get(knee_road).fopen is None
     assert before_ball_item.factunits.get(knee_road).fnigh is None
 
@@ -677,7 +677,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     update_disc_budatom = budatom_shop(bud_item_factunit_str(), atom_update())
     update_disc_budatom.set_jkey("road", ball_road)
     update_disc_budatom.set_jkey("base", knee_road)
-    update_disc_budatom.set_jvalue("pick", medical_road)
+    update_disc_budatom.set_jvalue("fpick", medical_road)
     update_disc_budatom.set_jvalue(fopen_str(), medical_fopen)
     update_disc_budatom.set_jvalue(fnigh_str(), medical_fnigh)
     # print(f"{update_disc_budatom=}")
@@ -689,7 +689,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_factunit():
     after_ball_item = after_sue_au.get_item_obj(ball_road)
     assert after_ball_item.factunits != {}
     assert after_ball_item.factunits.get(knee_road) is not None
-    assert after_ball_item.factunits.get(knee_road).pick == medical_road
+    assert after_ball_item.factunits.get(knee_road).fpick == medical_road
     assert after_ball_item.factunits.get(knee_road).fopen == medical_fopen
     assert after_ball_item.factunits.get(knee_road).fnigh == medical_fnigh
 

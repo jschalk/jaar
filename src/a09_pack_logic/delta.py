@@ -759,8 +759,8 @@ class BudDelta:
             x_budatom = budatom_shop("bud_item_factunit", atom_insert())
             x_budatom.set_jkey("road", itemunit.get_road())
             x_budatom.set_jkey("base", insert_factunit.base)
-            if insert_factunit.pick is not None:
-                x_budatom.set_jvalue("pick", insert_factunit.pick)
+            if insert_factunit.fpick is not None:
+                x_budatom.set_jvalue("fpick", insert_factunit.fpick)
             if insert_factunit.fopen is not None:
                 x_budatom.set_jvalue("fopen", insert_factunit.fopen)
             if insert_factunit.fnigh is not None:
@@ -780,8 +780,8 @@ class BudDelta:
                 x_budatom = budatom_shop("bud_item_factunit", atom_update())
                 x_budatom.set_jkey("road", before_itemunit.get_road())
                 x_budatom.set_jkey("base", after_factunit.base)
-                if before_factunit.pick != after_factunit.pick:
-                    x_budatom.set_jvalue("pick", after_factunit.pick)
+                if before_factunit.fpick != after_factunit.fpick:
+                    x_budatom.set_jvalue("fpick", after_factunit.fpick)
                 if before_factunit.fopen != after_factunit.fopen:
                     x_budatom.set_jvalue("fopen", after_factunit.fopen)
                 if before_factunit.fnigh != after_factunit.fnigh:

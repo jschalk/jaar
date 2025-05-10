@@ -289,7 +289,9 @@ class ItemUnit:
             raise ranged_fact_item_Exception(
                 f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact item must have _begin, _close attributes"
             )
-        x_factheir = factheir_shop(x_fact.base, x_fact.pick, x_fact.fopen, x_fact.fnigh)
+        x_factheir = factheir_shop(
+            x_fact.base, x_fact.fpick, x_fact.fopen, x_fact.fnigh
+        )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
         self._factheirs[x_factheir.base] = x_factheir
@@ -330,7 +332,7 @@ class ItemUnit:
         # self.set_factunits(base=fact, fact=base, open=premise_nigh, nigh=fact_nigh)
         self.factunits[base_factunit.base] = factunit_shop(
             base=base_factunit.base,
-            pick=base_factunit.base,
+            fpick=base_factunit.base,
             fopen=base_factunit.fnigh,
             fnigh=base_factunit.fnigh,
         )
@@ -533,12 +535,12 @@ class ItemUnit:
                 new_bridge=self.bridge,
             )
             factunit_obj.base = new_base_road
-            new_pick_road = replace_bridge(
-                road=factunit_obj.pick,
+            new_fpick_road = replace_bridge(
+                road=factunit_obj.fpick,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            factunit_obj.set_attr(pick=new_pick_road)
+            factunit_obj.set_attr(fpick=new_fpick_road)
             new_factunits[new_base_road] = factunit_obj
         self.factunits = new_factunits
 

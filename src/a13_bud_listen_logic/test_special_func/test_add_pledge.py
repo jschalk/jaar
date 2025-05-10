@@ -99,4 +99,4 @@ def test_add_gut_fact_CanAdd_factunit(env_dir_setup_cleanup):
     new_sue_gut = open_gut_file(env_dir(), root_tag(), sue_str)
     assert new_sue_gut.item_exists(dirty_road)
     assert new_sue_gut.get_fact(house_estimation_road) is not None
-    assert new_sue_gut.get_fact(house_estimation_road).pick == dirty_road
+    assert new_sue_gut.get_fact(house_estimation_road).fpick == dirty_road

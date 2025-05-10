@@ -672,7 +672,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("pick") == type_RoadUnit_str()
+    assert x_class_types.get("fpick") == type_RoadUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(road_str()) == type_RoadUnit_str()

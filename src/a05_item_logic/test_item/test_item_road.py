@@ -93,13 +93,13 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_factunits():
     rain_str = "rain"
     old_rain_road = create_road(old_water_road, rain_str)
 
-    factunit_x = factunit_shop(base=old_water_road, pick=old_rain_road)
+    factunit_x = factunit_shop(base=old_water_road, fpick=old_rain_road)
     factunits_x = {factunit_x.base: factunit_x}
     x_item = itemunit_shop(roses_str, factunits=factunits_x)
     assert x_item.factunits[old_water_road] is not None
     old_water_rain_factunit = x_item.factunits[old_water_road]
     assert old_water_rain_factunit.base == old_water_road
-    assert old_water_rain_factunit.pick == old_rain_road
+    assert old_water_rain_factunit.fpick == old_rain_road
 
     # WHEN
     new_water_str = "h2o"
@@ -113,13 +113,13 @@ def test_ItemUnit_find_replace_road_CorrectlyModifies_factunits():
     new_water_rain_factunit = x_item.factunits[new_water_road]
     assert new_water_rain_factunit.base == new_water_road
     new_rain_road = create_road(new_water_road, rain_str)
-    assert new_water_rain_factunit.pick == new_rain_road
+    assert new_water_rain_factunit.fpick == new_rain_road
 
     print(f"{len(x_item.factunits)=}")
     factunit_obj = x_item.factunits.get(new_water_road)
     assert factunit_obj is not None
     assert factunit_obj.base == new_water_road
-    assert factunit_obj.pick == new_rain_road
+    assert factunit_obj.fpick == new_rain_road
 
 
 def test_ItemUnit_get_obj_key_ReturnsCorrectInfo():

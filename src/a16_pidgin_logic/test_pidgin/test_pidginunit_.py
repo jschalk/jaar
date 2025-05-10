@@ -104,7 +104,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("owner_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("open") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("pick") == type_RoadUnit_str()
+    assert pidgin_args_class_types.get("fpick") == type_RoadUnit_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
@@ -194,7 +194,7 @@ def test_pidginable_atom_args_ReturnsObj():
         hour_tag_str(),
         item_tag_str(),
         month_tag_str(),
-        "pick",
+        "fpick",
         "need",
         owner_name_str(),
         road_str(),

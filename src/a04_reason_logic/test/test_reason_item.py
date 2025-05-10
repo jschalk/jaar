@@ -104,7 +104,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     wkday_reason = reasonheir_shop(base=wkday_road, premises=wed_premises)
     assert wkday_reason._status is None
     # WHEN
-    wkday_fact = factheir_shop(base=wkday_road, pick=wed_noon_road)
+    wkday_fact = factheir_shop(base=wkday_road, fpick=wed_noon_road)
     wkday_facts = {wkday_fact.base: wkday_fact}
     wkday_reason.set_status(factheirs=wkday_facts)
     # THEN
@@ -116,7 +116,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     two_reason = reasonheir_shop(base=wkday_road, premises=two_premises)
     assert two_reason._status is None
     # WHEN
-    noon_fact = factheir_shop(base=wkday_road, pick=wed_noon_road)
+    noon_fact = factheir_shop(base=wkday_road, fpick=wed_noon_road)
     noon_facts = {noon_fact.base: noon_fact}
     two_reason.set_status(factheirs=noon_facts)
     # THEN
@@ -126,7 +126,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     two_reason.clear_status()
     assert two_reason._status is None
     # WHEN
-    fri_fact = factheir_shop(base=wkday_road, pick=fri_road)
+    fri_fact = factheir_shop(base=wkday_road, fpick=fri_road)
     fri_facts = {fri_fact.base: fri_fact}
     two_reason.set_status(factheirs=fri_facts)
     # THEN

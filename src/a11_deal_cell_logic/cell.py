@@ -109,11 +109,11 @@ class CellUnit:
 
     def set_budadjust_facts(self):
         for fact in self.budevent_facts.values():
-            self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+            self.budadjust.add_fact(fact.base, fact.fpick, fact.fopen, fact.fnigh, True)
         for fact in self.found_facts.values():
-            self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+            self.budadjust.add_fact(fact.base, fact.fpick, fact.fopen, fact.fnigh, True)
         for fact in self.boss_facts.values():
-            self.budadjust.add_fact(fact.base, fact.pick, fact.fopen, fact.fnigh, True)
+            self.budadjust.add_fact(fact.base, fact.fpick, fact.fopen, fact.fnigh, True)
 
     def _set_acct_mandate_ledger(self):
         self.budadjust.set_fund_pool(self.mandate)

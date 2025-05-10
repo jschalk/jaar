@@ -236,7 +236,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[28] == f"{base_str()}_EXCISE"
     assert table_sorting_priority[29] == "need"
     assert table_sorting_priority[30] == get_delete_key_name("need")
-    assert table_sorting_priority[31] == "pick"
+    assert table_sorting_priority[31] == "fpick"
     assert table_sorting_priority[32] == team_title_str()
     assert table_sorting_priority[33] == get_delete_key_name(team_title_str())
     assert table_sorting_priority[34] == awardee_title_str()
@@ -368,7 +368,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(road_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
-    assert sqlite_types.get("pick") == "TEXT"
+    assert sqlite_types.get("fpick") == "TEXT"
     assert sqlite_types.get(team_title_str()) == "TEXT"
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
@@ -713,11 +713,13 @@ def _validate_idea_format_files(idea_filenames: set[str]):
             idea_attrs.add(delete_attr_without_term)
 
         for x_dimen, dimen_keys in all_dimen_keys_dict.items():
+            if x_dimen == bud_item_factunit_str() and x_dimen in format_dimens:
+                print(f"{idea_number_value}  {x_dimen=} {idea_attrs_list=}")
             if dimen_keys.issubset(idea_attrs):
                 if x_dimen not in format_dimens:
                     print(f"MISSING {x_dimen=} {idea_number_value} {idea_attrs=}")
                 assert x_dimen in format_dimens
-            elif x_dimen != "bud_itemunit":
+            else:
                 # dimen_keys_list = get_default_sorted_list(dimen_keys)
                 #     idea_attrs_list[-1] = idea_attrs_list[-1].removesuffix("_ERASE")
                 #     idea_attrs = set(idea_attrs_list)

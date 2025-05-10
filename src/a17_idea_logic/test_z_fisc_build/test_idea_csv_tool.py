@@ -76,7 +76,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00020": "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
         "br00021": "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief\n",
         "br00022": "fisc_tag,owner_name,road,awardee_title,give_force,take_force\n",
-        "br00023": "fisc_tag,owner_name,road,base,pick,fopen,fnigh\n",
+        "br00023": "fisc_tag,owner_name,road,base,fpick,fopen,fnigh\n",
         "br00024": "fisc_tag,owner_name,road,team_title\n",
         "br00025": "fisc_tag,owner_name,road,healer_name\n",
         "br00026": "fisc_tag,owner_name,road,base,need,nigh,open,divisor\n",

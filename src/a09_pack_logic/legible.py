@@ -625,15 +625,15 @@ def add_bud_item_factunit_insert_to_legible_list(
 ):
     road_str = "road"
     base_str = "base"
-    pick_str = "pick"
+    fpick_str = "fpick"
     for road_dict in item_factunit_insert_dict.values():
         for item_factunit_atom in road_dict.values():
             road_value = item_factunit_atom.get_value(road_str)
             base_value = item_factunit_atom.get_value(base_str)
-            pick_value = item_factunit_atom.get_value(pick_str)
+            fpick_value = item_factunit_atom.get_value(fpick_str)
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
             fopen_value = item_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{pick_value}' created for base '{base_value}' for item '{road_value}'."
+            x_str = f"FactUnit '{fpick_value}' created for base '{base_value}' for item '{road_value}'."
             if fopen_value is not None:
                 x_str += f" fOpen={fopen_value}."
             if fnigh_value is not None:
@@ -646,15 +646,15 @@ def add_bud_item_factunit_update_to_legible_list(
 ):
     road_str = "road"
     base_str = "base"
-    pick_str = "pick"
+    fpick_str = "fpick"
     for road_dict in item_factunit_update_dict.values():
         for item_factunit_atom in road_dict.values():
             road_value = item_factunit_atom.get_value(road_str)
             base_value = item_factunit_atom.get_value(base_str)
-            pick_value = item_factunit_atom.get_value(pick_str)
+            fpick_value = item_factunit_atom.get_value(fpick_str)
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
             fopen_value = item_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{pick_value}' updated for base '{base_value}' for item '{road_value}'."
+            x_str = f"FactUnit '{fpick_value}' updated for base '{base_value}' for item '{road_value}'."
             if fopen_value is not None:
                 x_str += f" fOpen={fopen_value}."
             if fnigh_value is not None:
@@ -667,11 +667,11 @@ def add_bud_item_factunit_delete_to_legible_list(
 ):
     road_str = "road"
     base_str = "base"
-    pick_str = "pick"
+    fpick_str = "fpick"
     for road_dict in item_factunit_delete_dict.values():
         for item_factunit_atom in road_dict.values():
             road_value = item_factunit_atom.get_value(road_str)
             base_value = item_factunit_atom.get_value(base_str)
-            pick_value = item_factunit_atom.get_value(pick_str)
+            fpick_value = item_factunit_atom.get_value(fpick_str)
             x_str = f"FactUnit base '{base_value}' deleted for item '{road_value}'."
             legible_list.append(x_str)

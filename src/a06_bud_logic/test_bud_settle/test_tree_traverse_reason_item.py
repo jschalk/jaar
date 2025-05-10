@@ -605,8 +605,8 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     sue_bud.settle_bud()
     assert run_item._active is False
 
-    # Fact: base: (...,weekdays) pick: (...,weekdays,wednesday)
-    sue_bud.add_fact(base=weekdays_road, pick=wed_road)
+    # Fact: base: (...,weekdays) fpick: (...,weekdays,wednesday)
+    sue_bud.add_fact(base=weekdays_road, fpick=wed_road)
     sue_bud.settle_bud()
 
     assert casa_item._active is False
@@ -614,7 +614,7 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
 
     # WHEN
     print("before changing fact")
-    sue_bud.add_fact(base=weekdays_road, pick=thu_road)
+    sue_bud.add_fact(base=weekdays_road, fpick=thu_road)
     print("after changing fact")
     sue_bud.settle_bud()
     assert casa_item._active is True

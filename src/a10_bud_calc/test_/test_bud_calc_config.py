@@ -578,8 +578,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(config, budfact, jv, fopen_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(config, budfact, jv, "pick") == type_RoadUnit_str()
-    assert g_sqlitetype(config, budfact, jv, "pick") == "TEXT"
+    assert g_class_type(config, budfact, jv, "fpick") == type_RoadUnit_str()
+    assert g_sqlitetype(config, budfact, jv, "fpick") == "TEXT"
     assert g_class_type(config, budheal, jk, healer_name_str()) == type_NameUnit_str()
     assert g_sqlitetype(config, budheal, jk, healer_name_str()) == "TEXT"
     assert g_class_type(config, budheal, jk, road_str()) == type_RoadUnit_str()
@@ -799,7 +799,7 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get(base_str()) == type_RoadUnit_str()
     assert bud_calc_args_type_dict.get(fnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(fopen_str()) == "float"
-    assert bud_calc_args_type_dict.get("pick") == type_RoadUnit_str()
+    assert bud_calc_args_type_dict.get("fpick") == type_RoadUnit_str()
     assert bud_calc_args_type_dict.get(healer_name_str()) == type_NameUnit_str()
     assert bud_calc_args_type_dict.get("need") == type_RoadUnit_str()
     assert bud_calc_args_type_dict.get("_status") == "int"

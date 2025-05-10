@@ -21,13 +21,13 @@ def test_FactUnit_exists():
     sunday_road = create_road(weekday_road, sunday_str)
 
     # WHEN
-    sunday_fact = FactUnit(base=weekday_road, pick=sunday_road, fopen=1.9, fnigh=2.3)
+    sunday_fact = FactUnit(base=weekday_road, fpick=sunday_road, fopen=1.9, fnigh=2.3)
 
     # THEN
     print(sunday_fact)
     assert sunday_fact is not None
     assert sunday_fact.base == weekday_road
-    assert sunday_fact.pick == sunday_road
+    assert sunday_fact.fpick == sunday_road
     assert sunday_fact.fopen == 1.9
     assert sunday_fact.fnigh == 2.3
 
@@ -48,7 +48,7 @@ def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
     assert weekday_fact.fnigh is None
 
 
-def test_FactUnit_set_pick_to_base_SetsAttr_1():
+def test_FactUnit_set_fpick_to_base_SetsAttr_1():
     # ESTABLISH
     floor_str = "floor"
     floor_road = create_road(root_tag(), floor_str)
@@ -56,17 +56,17 @@ def test_FactUnit_set_pick_to_base_SetsAttr_1():
     dirty_road = create_road(root_tag(), dirty_str)
     floor_fact = factunit_shop(floor_road, dirty_road)
     assert floor_fact.base == floor_road
-    assert floor_fact.pick == dirty_road
+    assert floor_fact.fpick == dirty_road
 
     # WHEN
-    floor_fact.set_pick_to_base()
+    floor_fact.set_fpick_to_base()
 
     # THEN
     assert floor_fact.base == floor_road
-    assert floor_fact.pick == floor_road
+    assert floor_fact.fpick == floor_road
 
 
-def test_FactUnit_set_pick_to_base_SetsAttr_2():
+def test_FactUnit_set_fpick_to_base_SetsAttr_2():
     # ESTABLISH
     floor_str = "floor"
     floor_road = create_road(root_tag(), floor_str)
@@ -77,7 +77,7 @@ def test_FactUnit_set_pick_to_base_SetsAttr_2():
     assert floor_fact.fnigh is not None
 
     # WHEN
-    floor_fact.set_pick_to_base()
+    floor_fact.set_fpick_to_base()
 
     # THEN
     assert floor_fact.fopen is None
@@ -93,9 +93,9 @@ def test_FactUnit_set_attr_SetsAttrCorrectly_2():
     # WHEN
     sunday_str = "Sunday"
     sunday_road = create_road(weekday_road, sunday_str)
-    weekday_fact.set_attr(pick=sunday_road)
+    weekday_fact.set_attr(fpick=sunday_road)
     # THEN
-    assert weekday_fact.pick == sunday_road
+    assert weekday_fact.fpick == sunday_road
 
     # WHEN
     weekday_fact.set_attr(fopen=45)
@@ -117,7 +117,7 @@ def test_FactUnit_get_dict_ReturnsDict():
     x_fopen = 35
     x_fnigh = 50
     sunday_fact = factunit_shop(
-        base=weekday_road, pick=sunday_road, fopen=x_fopen, fnigh=x_fnigh
+        base=weekday_road, fpick=sunday_road, fopen=x_fopen, fnigh=x_fnigh
     )
     print(sunday_fact)
 
@@ -128,7 +128,7 @@ def test_FactUnit_get_dict_ReturnsDict():
     assert fact_dict is not None
     static_dict = {
         "base": weekday_road,
-        "pick": sunday_road,
+        "fpick": sunday_road,
         "fopen": x_fopen,
         "fnigh": x_fnigh,
     }
@@ -141,7 +141,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
     weekday_road = create_road(root_tag(), weekday_str)
     sunday_str = "Sunday"
     sunday_road = create_road(weekday_road, sunday_str)
-    sunday_fact = factunit_shop(base=weekday_road, pick=sunday_road)
+    sunday_fact = factunit_shop(base=weekday_road, fpick=sunday_road)
     print(sunday_fact)
 
     # WHEN
@@ -151,7 +151,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
     assert fact_dict is not None
     static_dict = {
         "base": weekday_road,
-        "pick": sunday_road,
+        "fpick": sunday_road,
     }
     assert fact_dict == static_dict
 
@@ -162,10 +162,10 @@ def test_FactUnit_find_replace_road_SetsAttrCorrectly():
     old_weekday_road = create_road(root_tag(), weekday_str)
     sunday_str = "Sunday"
     old_sunday_road = create_road(old_weekday_road, sunday_str)
-    sunday_fact = factunit_shop(base=old_weekday_road, pick=old_sunday_road)
+    sunday_fact = factunit_shop(base=old_weekday_road, fpick=old_sunday_road)
     print(sunday_fact)
     assert sunday_fact.base == old_weekday_road
-    assert sunday_fact.pick == old_sunday_road
+    assert sunday_fact.fpick == old_sunday_road
 
     # WHEN
     old_road = get_default_fisc_road()
@@ -176,16 +176,16 @@ def test_FactUnit_find_replace_road_SetsAttrCorrectly():
     new_weekday_road = create_road(new_road, weekday_str)
     new_sunday_road = create_road(new_weekday_road, sunday_str)
     assert sunday_fact.base == new_weekday_road
-    assert sunday_fact.pick == new_sunday_road
+    assert sunday_fact.fpick == new_sunday_road
 
 
-def test_FactUnit_get_tuple_ReturnsObj_Scenario0_base_pick_only():
+def test_FactUnit_get_tuple_ReturnsObj_Scenario0_base_fpick_only():
     # ESTABLISH
     weekday_str = "weekday"
     weekday_road = create_road(root_tag(), weekday_str)
     sunday_str = "Sunday"
     sunday_road = create_road(weekday_road, sunday_str)
-    sunday_fact = factunit_shop(base=weekday_road, pick=sunday_road)
+    sunday_fact = factunit_shop(base=weekday_road, fpick=sunday_road)
 
     # WHEN
     sunday_tuple = sunday_fact.get_tuple()
@@ -213,13 +213,13 @@ def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
     assert sunday_tuple == (weekday_road, sunday_road, sun_fopen, sun_fnigh)
 
 
-def test_get_factunit_from_tuple_ReturnsObj_Scenario0_base_pick_only():
+def test_get_factunit_from_tuple_ReturnsObj_Scenario0_base_fpick_only():
     # ESTABLISH
     weekday_str = "weekday"
     weekday_road = create_road(root_tag(), weekday_str)
     sunday_str = "Sunday"
     sunday_road = create_road(weekday_road, sunday_str)
-    sunday_fact = factunit_shop(base=weekday_road, pick=sunday_road)
+    sunday_fact = factunit_shop(base=weekday_road, fpick=sunday_road)
     sunday_tuple = sunday_fact.get_tuple()
 
     # WHEN
@@ -301,11 +301,11 @@ def test_FactHeir_is_range_Returns_is_range_Status():
     min_road = create_road(root_tag(), ced_min_str)
 
     # WHEN
-    x_factheir = factheir_shop(base=min_road, pick=min_road)
+    x_factheir = factheir_shop(base=min_road, fpick=min_road)
     assert x_factheir.is_range() is False
 
     # THEN
-    x_factheir = factheir_shop(min_road, pick=min_road, fopen=10.0, fnigh=30.0)
+    x_factheir = factheir_shop(min_road, fpick=min_road, fopen=10.0, fnigh=30.0)
     assert x_factheir.is_range() is True
 
 
@@ -315,13 +315,13 @@ def test_factheir_is_range_Returns_is_range_Status():
     min_road = create_road(root_tag(), ced_min_str)
 
     # WHEN
-    x_factheir = factheir_shop(base=min_road, pick=min_road)
+    x_factheir = factheir_shop(base=min_road, fpick=min_road)
 
     # THEN
     assert x_factheir.is_range() is False
 
     # WHEN
-    x_factheir = factheir_shop(min_road, pick=min_road, fopen=10.0, fnigh=30.0)
+    x_factheir = factheir_shop(min_road, fpick=min_road, fopen=10.0, fnigh=30.0)
 
     # THEN
     assert x_factheir.is_range() is True
@@ -335,7 +335,7 @@ def test_FactCore_get_obj_key_SetsAttrCorrectly():
     secs_road = create_road(min_road, secs_str)
 
     # WHEN
-    x_factcore = FactCore(base=min_road, pick=secs_road)
+    x_factcore = FactCore(base=min_road, fpick=secs_road)
 
     # THEN
     assert x_factcore.get_obj_key() == min_road
@@ -350,7 +350,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
     static_dict = {
         weekday_road: {
             "base": weekday_road,
-            "pick": sunday_road,
+            "fpick": sunday_road,
             "fopen": None,
             "fnigh": None,
         }
@@ -362,7 +362,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
     # THEN
     assert len(facts_dict) == 1
     weekday_fact = facts_dict.get(weekday_road)
-    assert weekday_fact == factunit_shop(base=weekday_road, pick=sunday_road)
+    assert weekday_fact == factunit_shop(base=weekday_road, fpick=sunday_road)
 
 
 def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
@@ -374,7 +374,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     static_dict = {
         weekday_road: {
             "base": weekday_road,
-            "pick": sunday_road,
+            "fpick": sunday_road,
         }
     }
 
@@ -383,4 +383,4 @@ def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
 
     # THEN
     weekday_fact = facts_dict.get(weekday_road)
-    assert weekday_fact == factunit_shop(base=weekday_road, pick=sunday_road)
+    assert weekday_fact == factunit_shop(base=weekday_road, fpick=sunday_road)

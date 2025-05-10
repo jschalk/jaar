@@ -147,7 +147,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "pick": {
+            "fpick": {
                 "column_order": 2,
                 "class_type": "RoadUnit",
                 "sqlite_datatype": "TEXT"

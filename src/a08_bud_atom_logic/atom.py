@@ -324,7 +324,7 @@ def _modify_bud_item_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("road"))
     x_factunit = x_itemunit.factunits.get(x_atom.get_value("base"))
     x_factunit.set_attr(
-        pick=x_atom.get_value("pick"),
+        fpick=x_atom.get_value("fpick"),
         fopen=x_atom.get_value("fopen"),
         fnigh=x_atom.get_value("fnigh"),
     )
@@ -336,7 +336,7 @@ def _modify_bud_item_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         road=x_atom.get_value("road"),
         factunit=factunit_shop(
             base=x_atom.get_value("base"),
-            pick=x_atom.get_value("pick"),
+            fpick=x_atom.get_value("fpick"),
             fopen=x_atom.get_value("fopen"),
             fnigh=x_atom.get_value("fnigh"),
         ),
@@ -577,7 +577,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "bud_item_factunit":
         return (
-            (x_obj.pick != y_obj.pick)
+            (x_obj.fpick != y_obj.fpick)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
@@ -645,7 +645,7 @@ class AtomRow:
     numor: int = None
     open: float = None
     penny: float = None
-    pick: RoadUnit = None
+    fpick: RoadUnit = None
     pledge: bool = None
     problem_bool: bool = None
     road: RoadUnit = None

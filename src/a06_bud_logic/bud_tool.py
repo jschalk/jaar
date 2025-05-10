@@ -256,7 +256,7 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
         if factunit.base in bud_fact_bases:
             x_bud.add_fact(
                 factunit.base,
-                factunit.pick,
+                factunit.fpick,
                 factunit.fopen,
                 factunit.fnigh,
                 create_missing_items=True,

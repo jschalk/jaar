@@ -205,8 +205,8 @@ def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     gen_time_factunit = casa_item.factunits.get(slash_time_road)
     assert gen_time_factunit.base is not None
     assert gen_time_factunit.base == slash_time_road
-    assert gen_time_factunit.pick is not None
-    assert gen_time_factunit.pick == slash_8am_road
+    assert gen_time_factunit.fpick is not None
+    assert gen_time_factunit.fpick == slash_8am_road
 
     assert casa_item.factunits.get(semicolon_time_road) is None
 
