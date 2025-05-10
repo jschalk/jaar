@@ -34,7 +34,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
-    create_update_inconsist_pidgin_dimen_agg_sqlstr,
+    create_update_inconsist_pidgin_sound_agg_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
@@ -406,9 +406,10 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        cursor.execute(CREATE_PIDCORE_SOUND_AGG_SQLSTR)
-        pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_core_s_agg_tablename} (
+        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        print(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_into_clause = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
@@ -424,7 +425,7 @@ VALUES
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_update_inconsist_pidgin_dimen_agg_sqlstr(pidroad_dimen)
+        sqlstr = create_update_inconsist_pidgin_sound_agg_sqlstr(pidroad_dimen)
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
@@ -444,7 +445,7 @@ VALUES
         ]
 
 
-def test_update_inconsistency_pidgin_sound_agg_tables_ReturnsObj_PopulatesTableCorrectly_Scenario0():
+def test_update_inconsistency_pidgin_sound_agg_tables_ReturnsObj_PopulatesTableCorrectly_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -486,8 +487,8 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_core_s_agg_tablename} (
+        pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_into_clause = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}

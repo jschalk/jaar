@@ -89,7 +89,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_into_pidgin_core_vld_sqlstr,
-    create_update_inconsist_pidgin_dimen_agg_sqlstr,
+    create_update_inconsist_pidgin_sound_agg_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
@@ -539,7 +539,8 @@ GROUP BY face_name
 
 def update_inconsistency_pidgin_sound_agg_tables(cursor: sqlite3_Cursor):
     for dimen in get_quick_pidgens_column_ref():
-        cursor.execute(create_update_inconsist_pidgin_dimen_agg_sqlstr(dimen))
+        print(create_update_inconsist_pidgin_sound_agg_sqlstr(dimen))
+        cursor.execute(create_update_inconsist_pidgin_sound_agg_sqlstr(dimen))
 
 
 def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):
@@ -554,6 +555,7 @@ def etl_sound_agg_tables_to_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
     update_inconsistency_pidgin_core_raw_table(cursor)
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
+    insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     update_inconsistency_pidgin_sound_agg_tables(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 

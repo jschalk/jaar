@@ -617,16 +617,16 @@ FROM pidgin_core_s_agg
 """
 
 
-def create_update_inconsist_pidgin_dimen_agg_sqlstr(dimen: str) -> str:
-    pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+def create_update_inconsist_pidgin_sound_agg_sqlstr(dimen: str) -> str:
+    pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     return f"""UPDATE {pidgin_s_agg_tablename}
 SET error_message = 'Inconsistent pidgin core data'
 WHERE face_name IN (
     SELECT {pidgin_s_agg_tablename}.face_name
     FROM {pidgin_s_agg_tablename} 
-    LEFT JOIN {pidgin_core_s_agg_tablename} ON {pidgin_core_s_agg_tablename}.face_name = {pidgin_s_agg_tablename}.face_name
-    WHERE {pidgin_core_s_agg_tablename}.face_name IS NULL
+    LEFT JOIN {pidgin_core_s_vld_tablename} ON {pidgin_core_s_vld_tablename}.face_name = {pidgin_s_agg_tablename}.face_name
+    WHERE {pidgin_core_s_vld_tablename}.face_name IS NULL
 )
 ;
 """
