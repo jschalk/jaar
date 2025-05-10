@@ -45,7 +45,6 @@ def get_leg_obj(x_dict: dict, x_keylist) -> any:
 
 def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     atoms_dict = x_delta.budatoms
-    print(atoms_dict)
     budunit_atom = get_leg_obj(atoms_dict, [atom_update(), budunit_str()])
 
     acctunit_insert_dict = get_leg_obj(atoms_dict, [atom_insert(), bud_acctunit_str()])
@@ -327,7 +326,6 @@ def add_bud_itemunit_insert_to_legible_list(
     _problem_bool_str = "problem_bool"
     _morph_str = "morph"
     _mass_str = "mass"
-    print(itemunit_insert_dict)
     for itemunit_atom in itemunit_insert_dict.values():
         road_value = itemunit_atom.get_value(road_str())
         _addin_value = itemunit_atom.get_value(addin_str())

@@ -588,7 +588,7 @@ def test_RoadMap_is_valid_ReturnsObj_Scenario0_item_tag_str():
     clean_str = "clean"
     clean_inx = to_road("propre", x_inx_bridge)
     casa_otx = to_road("casa", x_otx_bridge)
-    mop_otx = to_road(f"{casa_otx}{x_otx_bridge}mop", x_otx_bridge)
+    mop_otx = create_road(casa_otx, "mop", x_otx_bridge)
     mop_inx = "mop"
     casa_inx = "casa"
     assert tagunit_roadmap.is_valid()

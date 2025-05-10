@@ -354,8 +354,8 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
 
     # THEN
     assert len(x_atom_order_list) == 2
-    for budatom in x_atom_order_list:
-        print(f"{budatom.jkeys=}")
+    # for budatom in x_atom_order_list:
+    #     print(f"{budatom.jkeys=}")
     assert x_atom_order_list[0] == knee_insert_itemunit_budatom
     assert x_atom_order_list[1] == sports_insert_itemunit_budatom
     # for crud_str, atom_list in sue_atom_order_dict.items():
