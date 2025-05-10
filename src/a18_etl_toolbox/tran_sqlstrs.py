@@ -117,6 +117,7 @@ CREATE_PIDTAGG_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_vld
 
 CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
@@ -245,6 +246,7 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_tag_s_vld": CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
         "pidgin_core_s_raw": CREATE_PIDCORE_SOUND_RAW_SQLSTR,
         "pidgin_core_s_agg": CREATE_PIDCORE_SOUND_AGG_SQLSTR,
+        "pidgin_core_s_vld": CREATE_PIDCORE_SOUND_VLD_SQLSTR,
         "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
         "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
         "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,
@@ -597,6 +599,20 @@ def create_insert_into_pidgin_core_raw_sqlstr(dimen: str) -> str:
 SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_word
 FROM {pidgin_s_agg_tablename}
 GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
+;
+"""
+
+
+def create_insert_into_pidgin_core_vld_sqlstr(
+    default_bridge: str, default_unknown: str
+):
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_word)
+SELECT
+  face_name
+, IFNULL(otx_bridge, '{default_bridge}')
+, IFNULL(inx_bridge, '{default_bridge}')
+, IFNULL(unknown_word, '{default_unknown}')
+FROM pidgin_core_s_agg
 ;
 """
 

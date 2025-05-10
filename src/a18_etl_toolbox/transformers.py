@@ -49,7 +49,12 @@ from src.a15_fisc_logic.fisc_tool import (
     create_deal_mandate_ledgers,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json, inherit_pidginunit
+from src.a16_pidgin_logic.pidgin import (
+    get_pidginunit_from_json,
+    inherit_pidginunit,
+    default_bridge_if_None,
+    default_unknown_word_if_None,
+)
 from src.a16_pidgin_logic.pidgin_config import get_quick_pidgens_column_ref
 from src.a17_idea_logic.idea_config import (
     get_idea_numbers,
@@ -83,6 +88,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_insert_into_pidgin_core_vld_sqlstr,
     create_update_inconsist_pidgin_dimen_agg_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_bud_prime_create_table_sqlstrs,
@@ -480,7 +486,7 @@ def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
             )
 
 
-def set_sound_tables_raw_error_message(cursor: sqlite3_Cursor):
+def set_sound_raw_tables_error_message(cursor: sqlite3_Cursor):
     for dimen in get_idea_dimen_ref().keys():
         sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
         cursor.execute(sqlstr)
@@ -494,13 +500,21 @@ def insert_sound_raw_selects_into_sound_agg_tables(cursor: sqlite3_Cursor):
 
 
 def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
-    set_sound_tables_raw_error_message(cursor)
+    set_sound_raw_tables_error_message(cursor)
     insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
 
 def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     for dimen in get_quick_pidgens_column_ref():
         cursor.execute(create_insert_into_pidgin_core_raw_sqlstr(dimen))
+
+
+def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
+    bridge = default_bridge_if_None()
+    unknown = default_unknown_word_if_None()
+    insert_sqlstr = create_insert_into_pidgin_core_vld_sqlstr(bridge, unknown)
+    print(insert_sqlstr)
+    cursor.execute(insert_sqlstr)
 
 
 def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):

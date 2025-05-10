@@ -8,6 +8,10 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_belief_str,
     debtit_belief_str,
 )
+from src.a16_pidgin_logic.pidgin import (
+    default_bridge_if_None,
+    default_unknown_word_if_None,
+)
 from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_road_str,
     pidgin_name_str,
@@ -28,15 +32,17 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDNAME_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_RAW_SQLSTR,
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,
+    CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_update_inconsist_pidgin_dimen_agg_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
     insert_sound_raw_selects_into_sound_agg_tables,
-    set_sound_tables_raw_error_message,
+    set_sound_raw_tables_error_message,
     etl_sound_raw_tables_to_sound_agg_tables,
     insert_pidgin_sound_agg_into_pidgin_core_raw_table,
+    insert_pidgin_core_agg_to_pidgin_core_vld_table,
     update_inconsistency_pidgin_core_raw_table,
     insert_pidgin_core_raw_to_pidgin_core_agg_table,
     update_inconsistency_pidgin_sound_agg_tables,
@@ -301,6 +307,61 @@ VALUES
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [(bob_str, rdx, rdx, ukx), (yao_str, rdx, rdx, ukx)]
+
+
+def test_insert_pidgin_core_agg_to_pidgin_core_vld_table_PopulatesTableCorrectly_Scenario0():
+    # ESTABLISH
+    bob_str = "Bob"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    zia_str = "zia"
+    colon_bridge = ":"
+    slash_bridge = "/"
+    other_bridge = "="
+    unknown_str = "Unknown"
+    huh_str = "Huh"
+    default_bridge = default_bridge_if_None()
+    default_unknown = default_unknown_word_if_None()
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        cursor.execute(CREATE_PIDCORE_SOUND_AGG_SQLSTR)
+        pidcore_dimen = pidgin_core_str()
+        pidgin_core_s_agg_tablename = create_prime_tablename(pidcore_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_core_s_agg_tablename} (
+  {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ("{bob_str}", "{colon_bridge}", "{slash_bridge}", "{unknown_str}")
+, ("{sue_str}", NULL, NULL, NULL)
+, ("{yao_str}", NULL, '{colon_bridge}', '{huh_str}')
+, ("{zia_str}", "{colon_bridge}", "{colon_bridge}", "{huh_str}")
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        pidgin_core_s_vld_tablename = create_prime_tablename(pidcore_dimen, "s", "vld")
+        assert get_row_count(cursor, pidgin_core_s_vld_tablename) == 0
+
+        # WHEN
+        insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
+
+        # THEN
+        assert get_row_count(cursor, pidgin_core_s_vld_tablename) == 4
+        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_core_s_vld_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(f"{rows=}")
+        assert rows == [
+            (bob_str, colon_bridge, slash_bridge, unknown_str),
+            (sue_str, default_bridge, default_bridge, default_unknown),
+            (yao_str, default_bridge, colon_bridge, huh_str),
+            (zia_str, colon_bridge, colon_bridge, huh_str),
+        ]
 
 
 def test_update_inconsistency_pidgin_sound_agg_tables_ReturnsObj_PopulatesTableCorrectly_Scenario0():

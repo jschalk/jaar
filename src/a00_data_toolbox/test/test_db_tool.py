@@ -861,7 +861,7 @@ WHERE inconsistency_rows.id = dark_side.id
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_create_update_inconsistency_error_queryReturnsObj_Scenario1():
+def test_create_update_inconsistency_error_query_ReturnsObj_Scenario1():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
