@@ -648,6 +648,38 @@ WHERE rowid IN (
 """
 
 
+def create_update_pidroad_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidroad_s_agg_tablename = create_prime_tablename("pidroad", "s", "agg")
+    return f"""UPDATE {pidroad_s_agg_tablename}
+SET error_message = 'Bridge must exist in RoadUnit'
+WHERE rowid IN (
+    SELECT road_agg.rowid
+    FROM {pidroad_s_agg_tablename} road_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = road_agg.face_name
+    WHERE NOT road_agg.otx_road LIKE core_vld.otx_bridge || '%'
+        OR NOT road_agg.inx_road LIKE core_vld.inx_bridge || '%'
+)
+;
+"""
+
+
+def create_update_pidname_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidname_s_agg_tablename = create_prime_tablename("pidname", "s", "agg")
+    return f"""UPDATE {pidname_s_agg_tablename}
+SET error_message = 'Bridge cannot exist in NameUnit'
+WHERE rowid IN (
+    SELECT name_agg.rowid
+    FROM {pidname_s_agg_tablename} name_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = name_agg.face_name
+    WHERE name_agg.otx_name LIKE '%' || core_vld.otx_bridge || '%'
+      OR name_agg.inx_name LIKE '%' || core_vld.inx_bridge || '%'
+)
+;
+"""
+
+
 def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     pidgin_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")

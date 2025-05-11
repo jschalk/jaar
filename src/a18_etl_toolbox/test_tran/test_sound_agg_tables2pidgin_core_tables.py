@@ -25,13 +25,14 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
     CREATE_PIDROAD_SOUND_AGG_SQLSTR,
     CREATE_PIDNAME_SOUND_AGG_SQLSTR,
-    CREATE_PIDLABE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_RAW_SQLSTR,
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidtagg_sound_agg_bridge_error_sqlstr,
+    create_update_pidroad_sound_agg_bridge_error_sqlstr,
+    create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
@@ -442,7 +443,6 @@ VALUES
 
 def test_update_pidgin_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
     # ESTABLISH
-    a23_str = "accord23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -519,6 +519,8 @@ VALUES
 
 def test_create_update_pidtagg_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
     ski_str = "Ski"
     run_str = "Run"
     fly_str = "Fly"
@@ -547,11 +549,11 @@ def test_create_update_pidtagg_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{run_str}', '{fly_str}', '{fly_inx}')
-, ({event1}, '{run_str}', '{ski_str}{rdx}', '{ski_str}')
-, ({event2}, '{run_str}', '{run_rdx_run}', '{run_str}')
-, ({event5}, '{fly_str}', '{ski_str}', '{ski_inx}{rdx}')
-, ({event7}, '{fly_str}', '{fly_str}', '{fly_inx}')
+  ({event1}, '{bob_str}', '{fly_str}', '{fly_inx}')
+, ({event1}, '{bob_str}', '{ski_str}{rdx}', '{ski_str}')
+, ({event2}, '{bob_str}', '{run_rdx_run}', '{run_str}')
+, ({event5}, '{yao_str}', '{ski_str}', '{ski_inx}{rdx}')
+, ({event7}, '{yao_str}', '{fly_str}', '{fly_inx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -564,8 +566,8 @@ VALUES
 , {unknown_word_str()}
 )
 VALUES
-  ('{fly_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{run_str}', '{rdx}', '{rdx}', '{ukx}')
+  ('{bob_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{yao_str}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
         cursor.execute(insert_sqlstr)
@@ -594,11 +596,11 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         error_x = error_message
-        exp_row0 = (1, run_str, fly_str, fly_inx, None, None, None, None)
-        exp_row1 = (1, run_str, f"{ski_str}{rdx}", ski_str, None, None, None, error_x)
-        exp_row2 = (2, run_str, run_rdx_run, run_str, None, None, None, error_x)
-        exp_row3 = (5, fly_str, ski_str, f"{ski_inx}{rdx}", None, None, None, error_x)
-        exp_row4 = (7, fly_str, fly_str, fly_inx, None, None, None, None)
+        exp_row0 = (1, bob_str, fly_str, fly_inx, None, None, None, None)
+        exp_row1 = (1, bob_str, f"{ski_str}{rdx}", ski_str, None, None, None, error_x)
+        exp_row2 = (2, bob_str, run_rdx_run, run_str, None, None, None, error_x)
+        exp_row3 = (5, yao_str, ski_str, f"{ski_inx}{rdx}", None, None, None, error_x)
+        exp_row4 = (7, yao_str, fly_str, fly_inx, None, None, None, None)
         assert rows[0] == exp_row0
         assert rows[1] == exp_row1
         assert rows[2] == exp_row2
@@ -607,8 +609,196 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
-def test_update_pidgin_sound_agg_brick_errors_PopulatesTable_Scenario0_PidTagg():
+def test_create_update_pidroad_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    rdx = ":"
+    ski_str = f"{rdx}Ski"
+    spt_run_str = f"{rdx}sports{rdx}Run"
+    spt_fly_str = f"{rdx}sports{rdx}Fly"
+    bad_fly_str = f"sports{rdx}fli"
+    bad_ski_str = "Skiito"
+    bad_run_str = f"run{rdx}run"
+    ukx = "Unknown"
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event7 = 7
+    event9 = 9
+    error_message = "Bridge must exist in RoadUnit"
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        cursor.execute(CREATE_PIDROAD_SOUND_AGG_SQLSTR)
+        pidroad_dimen = pidgin_road_str()
+        pidroad_s_agg_tablename = create_prime_tablename(pidroad_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidroad_s_agg_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {otx_road_str()}
+, {inx_road_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ({event1}, '{bob_str}', '{spt_run_str}', '{spt_run_str}')
+, ({event1}, '{bob_str}', '{spt_fly_str}', '{bad_fly_str}')
+, ({event2}, '{bob_str}', '{bad_fly_str}', '{spt_fly_str}')
+, ({event5}, '{yao_str}', '{bad_ski_str}', '{bad_ski_str}')
+, ({event7}, '{yao_str}', '{spt_run_str}', '{bad_run_str}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
+  {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)
+VALUES
+  ('{bob_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{yao_str}', '{rdx}', '{rdx}', '{ukx}')
+;
+"""
+        cursor.execute(insert_sqlstr)
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidroad_s_agg_tablename} WHERE error_message IS NOT NULL;"
+
+        testing_select_sqlstr = """
+  SELECT road_agg.rowid, road_agg.otx_road, road_agg.inx_road
+  FROM pidgin_road_s_agg road_agg
+  JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = road_agg.face_name
+  WHERE NOT road_agg.otx_road LIKE core_vld.otx_bridge || '%'
+     OR NOT road_agg.inx_road LIKE core_vld.inx_bridge || '%'
+  """
+
+        print(cursor.execute(testing_select_sqlstr).fetchall())
+
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+
+        # WHEN
+        sqlstr = create_update_pidroad_sound_agg_bridge_error_sqlstr()
+        print(sqlstr)
+        cursor.execute(sqlstr)
+
+        # THEN
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 4
+        select_core_raw_sqlstr = f"SELECT * FROM {pidroad_s_agg_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(rows)
+        error_x = error_message
+        exp_row0 = (1, bob_str, spt_run_str, spt_run_str, None, None, None, None)
+        exp_row1 = (1, bob_str, spt_fly_str, bad_fly_str, None, None, None, error_x)
+        exp_row2 = (2, bob_str, bad_fly_str, spt_fly_str, None, None, None, error_x)
+        exp_row3 = (5, yao_str, bad_ski_str, bad_ski_str, None, None, None, error_x)
+        exp_row4 = (7, yao_str, spt_run_str, bad_run_str, None, None, None, error_x)
+        assert rows[0] == exp_row0
+        assert rows[1] == exp_row1
+        assert rows[2] == exp_row2
+        assert rows[3] == exp_row3
+        assert rows[4] == exp_row4
+        assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
+
+
+def test_create_update_pidname_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
+    # ESTABLISH
+    rdx = ":"
+    bob_str = "Bob"
+    yao_str = "Yao"
+    sue_otx = "Sue"
+    sue_inx = "Susy"
+    bad_sue_inx = f"Susy{rdx}"
+    zia_otx = "Zia"
+    bad_zia_otx = f"{rdx}Zia"
+    zia_inx = "Ziaita"
+    bad_zia_inx = f"Zia{rdx}"
+    ukx = "Unknown"
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event7 = 7
+    event9 = 9
+    error_message = "Bridge cannot exist in NameUnit"
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        cursor.execute(CREATE_PIDNAME_SOUND_AGG_SQLSTR)
+        pidname_dimen = pidgin_name_str()
+        pidname_s_agg_tablename = create_prime_tablename(pidname_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidname_s_agg_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {otx_name_str()}
+, {inx_name_str()}
+)"""
+        values_clause = f"""
+VALUES
+  ({event1}, '{bob_str}', '{sue_otx}', '{sue_inx}')
+, ({event1}, '{bob_str}', '{sue_otx}', '{bad_sue_inx}')
+, ({event2}, '{bob_str}', '{zia_otx}', '{bad_zia_inx}')
+, ({event5}, '{yao_str}', '{bad_zia_otx}', '{bad_zia_inx}')
+, ({event7}, '{yao_str}', '{bad_zia_otx}', '{zia_inx}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
+  {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)
+VALUES
+  ('{bob_str}', '{rdx}', '{rdx}', '{ukx}')
+, ('{yao_str}', '{rdx}', '{rdx}', '{ukx}')
+;
+"""
+        cursor.execute(insert_sqlstr)
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
+
+        testing_select_sqlstr = """
+  SELECT name_agg.rowid, name_agg.otx_name, name_agg.inx_name
+  FROM pidgin_name_s_agg name_agg
+  JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = name_agg.face_name
+  WHERE NOT name_agg.otx_name LIKE core_vld.otx_bridge || '%'
+     OR NOT name_agg.inx_name LIKE core_vld.inx_bridge || '%'
+  """
+
+        print(cursor.execute(testing_select_sqlstr).fetchall())
+
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+
+        # WHEN
+        sqlstr = create_update_pidname_sound_agg_bridge_error_sqlstr()
+        print(sqlstr)
+        cursor.execute(sqlstr)
+
+        # THEN
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 4
+        select_core_raw_sqlstr = f"SELECT * FROM {pidname_s_agg_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(rows)
+        error_x = error_message
+        exp_row0 = (1, bob_str, sue_otx, sue_inx, None, None, None, None)
+        exp_row1 = (1, bob_str, sue_otx, bad_sue_inx, None, None, None, error_x)
+        exp_row2 = (2, bob_str, zia_otx, bad_zia_inx, None, None, None, error_x)
+        exp_row3 = (5, yao_str, bad_zia_otx, bad_zia_inx, None, None, None, error_x)
+        exp_row4 = (7, yao_str, bad_zia_otx, zia_inx, None, None, None, error_x)
+        assert rows[0] == exp_row0
+        assert rows[1] == exp_row1
+        assert rows[2] == exp_row2
+        assert rows[3] == exp_row3
+        assert rows[4] == exp_row4
+        assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
+
+
+def test_update_pidgin_sound_agg_brick_errors_UpdatesTables_Scenario0():
+    # ESTABLISH
+    bob_str = "bob"
     casa_str = "Casa"
     mop_str = "Mop"
     yao_str = "Yao"
@@ -618,81 +808,55 @@ def test_update_pidgin_sound_agg_brick_errors_PopulatesTable_Scenario0_PidTagg()
     mop_rdx_mop = f"{mop_str}{rdx}{mop_str}"
     ukx = "Unknown"
     event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
-    event9 = 9
     error_message = "Bridge cannot exist in TagUnit"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PIDTAGG_SOUND_AGG_SQLSTR)
-        pidtagg_dimen = pidgin_tag_str()
-        pidtagg_s_agg_tablename = create_prime_tablename(pidtagg_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidtagg_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
-, {otx_tag_str()}
-, {inx_tag_str()}
-)"""
-        values_clause = f"""
-VALUES
-  ({event1}, '{mop_str}', '{yao_str}', '{yao_inx}')
-, ({event1}, '{mop_str}', '{casa_str}{rdx}', '{casa_str}')
-, ({event2}, '{mop_str}', '{mop_rdx_mop}', '{mop_str}')
-, ({event5}, '{yao_str}', '{casa_str}', '{casa_inx}{rdx}')
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}')
-;
-"""
-        cursor.execute(f"{insert_into_clause} {values_clause}")
-        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        cursor.execute(CREATE_PIDROAD_SOUND_AGG_SQLSTR)
+        cursor.execute(CREATE_PIDNAME_SOUND_AGG_SQLSTR)
+        pidtagg_s_agg_tablename = create_prime_tablename(pidgin_tag_str(), "s", "agg")
+        pidroad_s_agg_tablename = create_prime_tablename(pidgin_road_str(), "s", "agg")
+        pidname_s_agg_tablename = create_prime_tablename(pidgin_name_str(), "s", "agg")
+        insert_pidtagg_sqlstr = f"""
+INSERT INTO {pidtagg_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_tag_str()}, {inx_tag_str()})
+VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+        insert_pidroad_sqlstr = f"""
+INSERT INTO {pidroad_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_road_str()}, {inx_road_str()})
+VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+        insert_pidname_sqlstr = f"""
+INSERT INTO {pidname_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+        cursor.execute(insert_pidtagg_sqlstr)
+        cursor.execute(insert_pidroad_sqlstr)
+        cursor.execute(insert_pidname_sqlstr)
+
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
-, {unknown_word_str()}
-)
-VALUES
-  ('{yao_str}', '{rdx}', '{rdx}', '{ukx}')
-, ('{mop_str}', '{rdx}', '{rdx}', '{ukx}')
-;
-"""
+  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_word_str()})
+VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtagg_s_agg_tablename} WHERE error_message IS NOT NULL;"
-
-        testing_select_sqlstr = """
-  SELECT tagg_agg.rowid, tagg_agg.otx_tag, tagg_agg.inx_tag, *
-  FROM pidgin_tag_s_agg tagg_agg
-  JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = tagg_agg.face_name
-  WHERE tagg_agg.otx_tag LIKE '%' || core_vld.otx_bridge || '%'
-      OR tagg_agg.inx_tag LIKE '%' || core_vld.inx_bridge || '%'
-"""
-        print(cursor.execute(testing_select_sqlstr).fetchall())
-
-        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+        pidtagg_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtagg_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidroad_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidroad_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        assert cursor.execute(pidtagg_error_count_sqlstr).fetchone()[0] == 0
+        assert cursor.execute(pidroad_error_count_sqlstr).fetchone()[0] == 0
+        assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         update_pidgin_sound_agg_brick_errors(cursor)
 
         # THEN
-        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 3
-        select_core_raw_sqlstr = f"SELECT * FROM {pidtagg_s_agg_tablename}"
+        assert cursor.execute(pidtagg_error_count_sqlstr).fetchone()[0] == 1
+        assert cursor.execute(pidroad_error_count_sqlstr).fetchone()[0] == 1
+        assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 1
+        select_core_raw_sqlstr = f"SELECT {event_int_str()}, {face_name_str()}, {otx_tag_str()}, {inx_tag_str()} FROM {pidtagg_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
-        print(rows)
-        error_x = error_message
-        exp_row0 = (1, mop_str, yao_str, yao_inx, None, None, None, None)
-        exp_row1 = (1, mop_str, f"{casa_str}{rdx}", casa_str, None, None, None, error_x)
-        exp_row2 = (2, mop_str, mop_rdx_mop, mop_str, None, None, None, error_x)
-        exp_row3 = (5, yao_str, casa_str, f"{casa_inx}{rdx}", None, None, None, error_x)
-        exp_row4 = (7, yao_str, yao_str, yao_inx, None, None, None, None)
+        exp_row0 = (1, bob_str, f"{casa_str}{rdx}", casa_str)
         assert rows[0] == exp_row0
-        assert rows[1] == exp_row1
-        assert rows[2] == exp_row2
-        assert rows[3] == exp_row3
-        assert rows[4] == exp_row4
-        assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
+        assert rows == [exp_row0]
 
 
 # def test_update_bridge_errorency_pidgin_sound_agg_tables_PopulatesTable_Scenario1():
