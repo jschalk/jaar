@@ -75,18 +75,18 @@ def test_WorldUnit_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
 #     bob_gut.add_acctunit(bob_inx)
 #     bob_gut.add_acctunit(sue_inx)
 #     bob_gut.add_acctunit(yao_inx)
-#     clean_road = bob_gut.make_l1_road("clean")
-#     bob_gut.add_item(clean_road, pledge=True)
+#     clean_way = bob_gut.make_l1_way("clean")
+#     bob_gut.add_item(clean_way, pledge=True)
 
 #     yao_gut = budunit_shop(yao_inx, a23_str)
 #     yao_gut.add_acctunit(bob_inx)
 #     yao_gut.add_acctunit(yao_inx)
-#     run_road = bob_gut.make_l1_road("run")
-#     fly_road = bob_gut.make_l1_road("fly")
-#     yao_gut.add_item(run_road, pledge=True)
-#     yao_gut.add_item(fly_road, pledge=True)
-#     assert bob_gut.item_exists(clean_road)
-#     assert yao_gut.item_exists(clean_road) is False
+#     run_way = bob_gut.make_l1_way("run")
+#     fly_way = bob_gut.make_l1_way("fly")
+#     yao_gut.add_item(run_way, pledge=True)
+#     yao_gut.add_item(fly_way, pledge=True)
+#     assert bob_gut.item_exists(clean_way)
+#     assert yao_gut.item_exists(clean_way) is False
 
 #     a23_bob_gut_path = create_gut_path(fisc_mstr_dir, a23_str, bob_inx)
 #     a23_yao_gut_path = create_gut_path(fisc_mstr_dir, a23_str, yao_inx)
@@ -119,16 +119,16 @@ def test_WorldUnit_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
 #     expected_bob_job.add_acctunit(yao_inx)
 #     expected_yao_job.add_acctunit(bob_inx)
 #     expected_yao_job.add_acctunit(yao_inx)
-#     expected_bob_job.add_item(clean_road, pledge=True)
-#     expected_bob_job.add_item(run_road, pledge=True)
-#     expected_bob_job.add_item(fly_road, pledge=True)
-#     expected_yao_job.add_item(clean_road, pledge=True)
-#     expected_yao_job.add_item(run_road, pledge=True)
-#     expected_yao_job.add_item(fly_road, pledge=True)
+#     expected_bob_job.add_item(clean_way, pledge=True)
+#     expected_bob_job.add_item(run_way, pledge=True)
+#     expected_bob_job.add_item(fly_way, pledge=True)
+#     expected_yao_job.add_item(clean_way, pledge=True)
+#     expected_yao_job.add_item(run_way, pledge=True)
+#     expected_yao_job.add_item(fly_way, pledge=True)
 
 #     assert gen_yao_job.accts.keys() == expected_yao_job.accts.keys()
 #     print(f"{gen_yao_job.get_item_dict().keys()=}")
-#     assert gen_yao_job.item_exists(clean_road)
+#     assert gen_yao_job.item_exists(clean_way)
 #     assert gen_yao_job.get_dict() == expected_yao_job.get_dict()
 
 #     assert gen_bob_job.accts.keys() == expected_bob_job.accts.keys()
@@ -137,8 +137,8 @@ def test_WorldUnit_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
 #     print(f"{expected_bob_items=}")
 #     print(f"{generate_bob_items=}")
 #     assert generate_bob_items == expected_bob_items
-#     expected_clean_item = expected_bob_job.get_item_obj(clean_road)
-#     gen_clean_item = gen_bob_job.get_item_obj(clean_road)
+#     expected_clean_item = expected_bob_job.get_item_obj(clean_way)
+#     gen_clean_item = gen_bob_job.get_item_obj(clean_way)
 #     assert gen_clean_item.fisc_tag == expected_clean_item.fisc_tag
 #     assert gen_clean_item == expected_clean_item
-#     assert gen_bob_job.get_item_obj(clean_road) == expected_clean_item
+#     assert gen_bob_job.get_item_obj(clean_way) == expected_clean_item

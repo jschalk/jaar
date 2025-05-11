@@ -8,8 +8,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_name_str,
     inx_tag_str,
     otx_tag_str,
-    inx_road_str,
-    otx_road_str,
+    inx_way_str,
+    otx_way_str,
     inx_label_str,
     otx_label_str,
     unknown_word_str,
@@ -169,15 +169,15 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
     ]
     br00045_file_path = create_path(fizz_world._brick_dir, "br00045.xlsx")
     br00045_columns = [
         event_int_str(),
         face_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -205,16 +205,16 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     label_raw_str = "label_raw"
     name_raw_str = "name_raw"
     tag_raw_str = "tag_raw"
-    road_raw_str = "road_raw"
+    way_raw_str = "way_raw"
     assert sheet_exists(pidgin_path, name_raw_str)
     assert sheet_exists(pidgin_path, label_raw_str)
     assert sheet_exists(pidgin_path, tag_raw_str)
-    assert sheet_exists(pidgin_path, road_raw_str)
+    assert sheet_exists(pidgin_path, way_raw_str)
 
     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
     gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_raw_str)
-    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
+    gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
 
     label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_file_columns
@@ -267,25 +267,25 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     print(f" {e1_tag_df.to_csv()=}")
     assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
 
-    road_file_columns = [
+    way_file_columns = [
         "idea_number",
         event_int_str(),
         face_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    assert list(gen_road_df.columns) == road_file_columns
-    assert len(gen_road_df) == 2
+    assert list(gen_way_df.columns) == way_file_columns
+    assert len(gen_way_df) == 2
     b3 = "br00117"
     b4 = "br00045"
-    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_road_rows = [e1_road3, e1_road4]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
-    assert len(gen_road_df) == len(e1_road_df)
-    print(f"{gen_road_df.to_csv()=}")
-    print(f" {e1_road_df.to_csv()=}")
-    assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
+    e1_way3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_way4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_way_rows = [e1_way3, e1_way4]
+    e1_way_df = DataFrame(e1_way_rows, columns=way_file_columns)
+    assert len(gen_way_df) == len(e1_way_df)
+    print(f"{gen_way_df.to_csv()=}")
+    print(f" {e1_way_df.to_csv()=}")
+    assert gen_way_df.to_csv(index=False) == e1_way_df.to_csv(index=False)

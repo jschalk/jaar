@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_road_logic.road import OwnerName, TagUnit
+from src.a01_way_logic.way import OwnerName, TagUnit
 
 FISC_FILENAME = "fisc.json"
 FISC_OTE1_AGG_CSV_FILENAME = "fisc_ote1_agg.csv"

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_file, create_path
-from src.a01_road_logic.road import create_road, to_road
+from src.a01_way_logic.way import create_way, to_way
 from src.a06_bud_logic._utils.str_a06 import acct_name_str, base_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
@@ -9,9 +9,9 @@ from src.a16_pidgin_logic._utils.env_a16 import (
 )
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_casa_maison_pidginunit_set_by_tag,
-    get_casa_maison_road_otx_dt,
-    get_casa_maison_road_inx_dt,
-    get_clean_roadmap,
+    get_casa_maison_way_otx_dt,
+    get_casa_maison_way_inx_dt,
+    get_clean_waymap,
     get_swim_labelmap,
     get_suita_namemap,
     get_suita_acct_name_otx_dt,
@@ -86,35 +86,35 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
 
 
 # save two dataframes to be pidgined: two files in otx, two files in inx
-def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_RoadUnit(
+def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_WayUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
-    otx_accord45_road = to_road(otx_accord45_str)
-    inx_accord87_road = to_road(inx_accord87_str)
+    otx_accord45_way = to_way(otx_accord45_str)
+    inx_accord87_way = to_way(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_accord45_road, casa_otx_str)
-    casa_inx_road = create_road(inx_accord87_road, casa_inx_str)
+    casa_otx_way = create_way(otx_accord45_way, casa_otx_str)
+    casa_inx_way = create_way(inx_accord87_way, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
-    clean_otx_road = create_road(casa_otx_road, clean_otx_str)
-    clean_inx_road = create_road(casa_inx_road, clean_inx_str)
+    clean_otx_way = create_way(casa_otx_way, clean_otx_str)
+    clean_inx_way = create_way(casa_inx_way, clean_inx_str)
     sweep_str = "sweep"
-    sweep_otx_road = create_road(clean_otx_road, sweep_str)
-    sweep_inx_road = create_road(clean_inx_road, sweep_str)
+    sweep_otx_way = create_way(clean_otx_way, sweep_str)
+    sweep_inx_way = create_way(clean_inx_way, sweep_str)
 
     sue_pidginunit = get_casa_maison_pidginunit_set_by_tag()
     sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
     save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
-    sue_otx_dt = get_casa_maison_road_otx_dt()
-    sue_inx_dt = get_casa_maison_road_inx_dt()
+    sue_otx_dt = get_casa_maison_way_otx_dt()
+    sue_inx_dt = get_casa_maison_way_inx_dt()
     otz_dir = create_path(sue_dir, "otz")
     inz_dir = create_path(sue_dir, "inz")
 
-    example_filename = "road1_example.csv"
+    example_filename = "way1_example.csv"
     otx_file_path = create_path(otz_dir, example_filename)
     inx_file_path = create_path(inz_dir, example_filename)
     save_dataframe_to_csv(sue_otx_dt, otz_dir, example_filename)
@@ -130,8 +130,8 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][base_str()] == inx_accord87_road
-    assert gen_inx_dt.iloc[1][base_str()] == casa_inx_road
+    assert gen_inx_dt.iloc[0][base_str()] == inx_accord87_way
+    assert gen_inx_dt.iloc[1][base_str()] == casa_inx_way
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
     assert gen_inx_dt.iloc[0][base_str()] == sue_inx_dt.iloc[0][base_str()]
     assert gen_inx_dt.iloc[1][base_str()] == sue_inx_dt.iloc[1][base_str()]
@@ -162,14 +162,14 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     acct_name_filename = "acct_name_example.csv"
     acct_name_otx_file_path = create_path(otz_dir, acct_name_filename)
     acct_name_inx_file_path = create_path(inz_dir, acct_name_filename)
-    road1_otx_dt = get_casa_maison_road_otx_dt()
-    road1_filename = "road1_example.csv"
-    road1_otx_file_path = create_path(otz_dir, road1_filename)
-    road1_inx_file_path = create_path(inz_dir, road1_filename)
-    save_dataframe_to_csv(road1_otx_dt, otz_dir, road1_filename)
+    way1_otx_dt = get_casa_maison_way_otx_dt()
+    way1_filename = "way1_example.csv"
+    way1_otx_file_path = create_path(otz_dir, way1_filename)
+    way1_inx_file_path = create_path(inz_dir, way1_filename)
+    save_dataframe_to_csv(way1_otx_dt, otz_dir, way1_filename)
     save_dataframe_to_csv(sue_otx_dt, otz_dir, acct_name_filename)
-    assert os_path_exists(road1_otx_file_path)
-    assert os_path_exists(road1_inx_file_path) is False
+    assert os_path_exists(way1_otx_file_path)
+    assert os_path_exists(way1_inx_file_path) is False
     assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(acct_name_otx_file_path)
     assert os_path_exists(acct_name_inx_file_path) is False
@@ -178,8 +178,8 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     move_otx_csvs_to_pidgin_inx(sue_dir)
 
     # THEN
-    assert os_path_exists(road1_otx_file_path)
-    assert os_path_exists(road1_inx_file_path)
+    assert os_path_exists(way1_otx_file_path)
+    assert os_path_exists(way1_inx_file_path)
     assert os_path_exists(pidginunit_file_path)
     assert os_path_exists(acct_name_otx_file_path)
     assert os_path_exists(acct_name_inx_file_path)
@@ -188,9 +188,9 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     sue_inx_dt = get_suita_acct_name_inx_dt()
     assert gen_csv == sue_inx_dt.sort_values(acct_name_str()).to_csv(index=False)
 
-    gen_road1_inx_dt = open_csv(inz_dir, road1_filename)
-    road1_inx_dt = get_casa_maison_road_inx_dt()
-    assert gen_road1_inx_dt.to_csv() == road1_inx_dt.to_csv()
+    gen_way1_inx_dt = open_csv(inz_dir, way1_filename)
+    way1_inx_dt = get_casa_maison_way_inx_dt()
+    assert gen_way1_inx_dt.to_csv() == way1_inx_dt.to_csv()
 
 
 def test_get_pidgen_idea_format_filenames_ReturnsObj():

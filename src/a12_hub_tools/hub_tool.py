@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
 )
 from src.a00_data_toolbox.dict_toolbox import get_empty_list_if_None
-from src.a01_road_logic.road import OwnerName, TagUnit, EventInt, RoadUnit
+from src.a01_way_logic.way import OwnerName, TagUnit, EventInt, WayUnit
 from src.a02_finance_logic.deal import (
     DealUnit,
     TimeLinePoint,
@@ -138,7 +138,7 @@ def save_arbitrary_budevent(
     owner_name: str,
     event_int: int,
     accts: list[list] = None,
-    facts: list[tuple[RoadUnit, RoadUnit, float, float]] = None,
+    facts: list[tuple[WayUnit, WayUnit, float, float]] = None,
 ) -> str:
     accts = get_empty_list_if_None(accts)
     facts = get_empty_list_if_None(facts)

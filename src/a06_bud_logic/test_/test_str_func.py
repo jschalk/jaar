@@ -26,16 +26,16 @@ from src.a06_bud_logic._utils.str_a06 import (
     nigh_str,
     numor_str,
     open_str,
-    parent_road_str,
+    parent_way_str,
     penny_str,
     respect_bit_str,
-    road_str,
+    way_str,
     stop_want_str,
     team_title_str,
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
-    type_RoadUnit_str,
+    type_WayUnit_str,
 )
 
 
@@ -66,13 +66,13 @@ def test_str_functions_ReturnsObj():
     assert nigh_str() == "nigh"
     assert numor_str() == "numor"
     assert open_str() == "open"
-    assert parent_road_str() == "parent_road"
+    assert parent_way_str() == "parent_way"
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"
-    assert road_str() == "road"
+    assert way_str() == "way"
     assert stop_want_str() == "stop_want"
     assert team_title_str() == "team_title"
     assert type_NameUnit_str() == "NameUnit"
     assert type_LabelUnit_str() == "LabelUnit"
     assert type_TagUnit_str() == "TagUnit"
-    assert type_RoadUnit_str() == "RoadUnit"
+    assert type_WayUnit_str() == "WayUnit"

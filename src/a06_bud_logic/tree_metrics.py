@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_0_if_None
-from src.a01_road_logic.road import GroupLabel
-from src.a04_reason_logic.reason_item import ReasonUnit, RoadUnit
+from src.a01_way_logic.way import GroupLabel
+from src.a04_reason_logic.reason_item import ReasonUnit, WayUnit
 from src.a03_group_logic.group import AwardLink
 from dataclasses import dataclass
 
@@ -9,32 +9,32 @@ from dataclasses import dataclass
 class TreeMetrics:
     tag_count: int = None
     level_count: dict[int, int] = None
-    reason_bases: dict[RoadUnit, int] = None
+    reason_bases: dict[WayUnit, int] = None
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_item_uids_are_unique: bool = None
-    last_evaluated_pledge_item_road: RoadUnit = None
+    last_evaluated_pledge_item_way: WayUnit = None
 
     def evaluate_tag(
         self,
         level: int,
-        reasons: dict[RoadUnit, ReasonUnit],
+        reasons: dict[WayUnit, ReasonUnit],
         awardlinks: dict[GroupLabel, AwardLink],
         uid: int,
         pledge: bool,
-        item_road: RoadUnit,
+        item_way: WayUnit,
     ):
         self.tag_count += 1
-        self.evaluate_pledge(pledge=pledge, item_road=item_road)
+        self.evaluate_pledge(pledge=pledge, item_way=item_way)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_pledge(self, pledge: bool, item_road: RoadUnit):
+    def evaluate_pledge(self, pledge: bool, item_way: WayUnit):
         if pledge:
-            self.last_evaluated_pledge_item_road = item_road
+            self.last_evaluated_pledge_item_way = item_way
 
     def evaluate_level(self, level):
         if self.level_count.get(level) is None:
@@ -42,7 +42,7 @@ class TreeMetrics:
         else:
             self.level_count[level] = self.level_count[level] + 1
 
-    def evaluate_reasonunits(self, reasons: dict[RoadUnit, ReasonUnit]):
+    def evaluate_reasonunits(self, reasons: dict[WayUnit, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
             if self.reason_bases.get(reason.base) is None:
@@ -69,7 +69,7 @@ class TreeMetrics:
 def treemetrics_shop(
     tag_count: int = None,
     level_count: dict[int, int] = None,
-    reason_bases: dict[RoadUnit, int] = None,
+    reason_bases: dict[WayUnit, int] = None,
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,

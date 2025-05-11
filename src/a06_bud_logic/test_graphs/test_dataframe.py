@@ -71,7 +71,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
     week_str = "weekdays"
-    week_road = yao_bud.make_l1_road(week_str)
+    week_way = yao_bud.make_l1_way(week_str)
     assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN
@@ -83,7 +83,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
         "owner_name",
         "fund_ratio",
         "item_tag",
-        "parent_road",
+        "parent_way",
         "begin",
         "close",
         "addin",
@@ -111,7 +111,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
         "owner_name",
         "fund_ratio",
         "item_tag",
-        "parent_road",
+        "parent_way",
         "begin",
         "close",
         "addin",

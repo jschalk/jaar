@@ -89,9 +89,9 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -125,13 +125,13 @@
         "jkeys": {
             "fbase": {
                 "column_order": 1,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -149,7 +149,7 @@
             },
             "fneed": {
                 "column_order": 2,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -171,9 +171,9 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -196,19 +196,19 @@
         "jkeys": {
             "base": {
                 "column_order": 1,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "need": {
                 "column_order": 2,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -247,13 +247,13 @@
         "jkeys": {
             "base": {
                 "column_order": 1,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -277,9 +277,9 @@
             "atom_order": 4
         },
         "jkeys": {
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
@@ -306,9 +306,9 @@
             "atom_order": 11
         },
         "jkeys": {
-            "road": {
+            "way": {
                 "column_order": 0,
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }

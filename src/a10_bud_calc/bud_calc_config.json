@@ -213,8 +213,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -247,7 +247,7 @@
         "abbreviation": "budfact",
         "jkeys": {
             "fbase": {
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
@@ -258,8 +258,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -270,7 +270,7 @@
         "jmetrics": {},
         "jvalues": {
             "fneed": {
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fnigh": {
@@ -298,8 +298,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -314,7 +314,7 @@
         "abbreviation": "budprem",
         "jkeys": {
             "base": {
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
@@ -322,15 +322,15 @@
                 "sqlite_datatype": "TEXT"
             },
             "need": {
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -367,7 +367,7 @@
         "abbreviation": "budreas",
         "jkeys": {
             "base": {
-                "class_type": "RoadUnit",
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
@@ -378,8 +378,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -419,8 +419,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "team_title": {
@@ -451,8 +451,8 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "road": {
-                "class_type": "RoadUnit",
+            "way": {
+                "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {

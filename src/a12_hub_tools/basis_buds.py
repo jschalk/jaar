@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import OwnerName
+from src.a01_way_logic.way import OwnerName
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 

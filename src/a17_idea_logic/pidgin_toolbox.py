@@ -5,7 +5,7 @@ from src.a16_pidgin_logic.pidgin import (
     NameMap,
     LabelMap,
     TagMap,
-    RoadMap,
+    WayMap,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv, open_csv
 from pandas import DataFrame
@@ -48,15 +48,15 @@ def get_pidgin_tag_dt_columns() -> list[str]:
     ]
 
 
-def get_pidgin_road_dt_columns() -> list[str]:
+def get_pidgin_way_dt_columns() -> list[str]:
     return [
         "event_int",
         "face_name",
         "otx_bridge",
         "inx_bridge",
         "unknown_word",
-        "otx_road",
-        "inx_road",
+        "otx_way",
+        "inx_way",
     ]
 
 
@@ -108,7 +108,7 @@ def create_pidgin_tag_dt(x_map: TagMap) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_pidgin_tag_dt_columns())
 
 
-def create_pidgin_road_dt(x_map: RoadMap) -> DataFrame:
+def create_pidgin_way_dt(x_map: WayMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -116,19 +116,19 @@ def create_pidgin_road_dt(x_map: RoadMap) -> DataFrame:
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
             "unknown_word": x_map.unknown_word,
-            "otx_road": otx_value,
-            "inx_road": inx_value,
+            "otx_way": otx_value,
+            "inx_way": inx_value,
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_pidgin_road_dt_columns())
+    return DataFrame(x_rows_list, columns=get_pidgin_way_dt_columns())
 
 
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_pidgin_name_csv(x_dir, x_pidginunit.namemap)
     _save_pidgin_label_csv(x_dir, x_pidginunit.labelmap)
     _save_pidgin_tag_csv(x_dir, x_pidginunit.tagmap)
-    _save_pidgin_road_csv(x_dir, x_pidginunit.roadmap)
+    _save_pidgin_way_csv(x_dir, x_pidginunit.waymap)
 
 
 def _save_pidgin_name_csv(x_dir: str, namemap: NameMap):
@@ -146,9 +146,9 @@ def _save_pidgin_tag_csv(x_dir: str, tagmap: TagMap):
     save_file(x_dir, "tag.csv", get_ordered_csv(x_dt))
 
 
-def _save_pidgin_road_csv(x_dir: str, roadmap: RoadMap):
-    x_dt = create_pidgin_road_dt(roadmap)
-    save_file(x_dir, "road.csv", get_ordered_csv(x_dt))
+def _save_pidgin_way_csv(x_dir: str, waymap: WayMap):
+    x_dt = create_pidgin_way_dt(waymap)
+    save_file(x_dir, "way.csv", get_ordered_csv(x_dt))
 
 
 def _load_namemap_from_csv(x_dir, x_namemap: NameMap) -> NameMap:
@@ -187,16 +187,16 @@ def _load_tagmap_from_csv(x_dir, x_tagmap: TagMap) -> TagMap:
     return x_tagmap
 
 
-def _load_roadmap_from_csv(x_dir, x_roadmap: RoadMap) -> RoadMap:
-    road_filename = "road.csv"
-    if os_path_exists(create_path(x_dir, road_filename)):
-        otx2inx_dt = open_csv(x_dir, "road.csv")
+def _load_waymap_from_csv(x_dir, x_waymap: WayMap) -> WayMap:
+    way_filename = "way.csv"
+    if os_path_exists(create_path(x_dir, way_filename)):
+        otx2inx_dt = open_csv(x_dir, "way.csv")
         for table_row in otx2inx_dt.to_dict("records"):
-            otx_value = table_row.get("otx_road")
-            inx_value = table_row.get("inx_road")
-            if x_roadmap.otx2inx_exists(otx_value, inx_value) is False:
-                x_roadmap.set_otx2inx(otx_value, inx_value)
-    return x_roadmap
+            otx_value = table_row.get("otx_way")
+            inx_value = table_row.get("inx_way")
+            if x_waymap.otx2inx_exists(otx_value, inx_value) is False:
+                x_waymap.set_otx2inx(otx_value, inx_value)
+    return x_waymap
 
 
 def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
@@ -238,6 +238,6 @@ def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     _load_namemap_from_csv(x_dir, x_pidginunit.namemap)
     _load_labelmap_from_csv(x_dir, x_pidginunit.labelmap)
     _load_tagmap_from_csv(x_dir, x_pidginunit.tagmap)
-    _load_roadmap_from_csv(x_dir, x_pidginunit.roadmap)
-    x_pidginunit.roadmap.tagmap = x_pidginunit.tagmap
+    _load_waymap_from_csv(x_dir, x_pidginunit.waymap)
+    x_pidginunit.waymap.tagmap = x_pidginunit.tagmap
     return x_pidginunit

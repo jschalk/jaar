@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir, open_json
 from src.a02_finance_logic._utils.strs_a02 import quota_str
-from src.a01_road_logic.road import create_road
+from src.a01_way_logic.way import create_way
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import penny_str, event_int_str
 from src.a11_deal_cell_logic._utils.str_a11 import (
@@ -255,11 +255,11 @@ def test_save_arbitrary_budevent_SetsFile_Scenario1_includes_facts(
     event5 = 5
     sue_str = "Sue"
     budevent_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, event5)
-    casa_road = create_road(a23_str, "casa")
-    clean_road = create_road(casa_road, "clean")
+    casa_way = create_way(a23_str, "casa")
+    clean_way = create_way(casa_way, "clean")
     clean_fopen = 11
     clean_fnigh = 16
-    x_facts = [(casa_road, clean_road, clean_fopen, clean_fnigh)]
+    x_facts = [(casa_way, clean_way, clean_fopen, clean_fnigh)]
     assert os_path_exists(budevent_path) is False
 
     # WHEN
@@ -268,7 +268,7 @@ def test_save_arbitrary_budevent_SetsFile_Scenario1_includes_facts(
     # THEN
     assert os_path_exists(budevent_path)
     expected_sue_bud = budunit_shop(sue_str, a23_str)
-    expected_sue_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh, True)
+    expected_sue_bud.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh, True)
     gen_sue_bud = open_bud_file(budevent_path)
     assert gen_sue_bud.get_factunits_dict() == expected_sue_bud.get_factunits_dict()
     assert gen_sue_bud.get_dict() == expected_sue_bud.get_dict()
@@ -293,10 +293,10 @@ def test_get_budevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup)
     t3 = 3
     t3_json_path = create_budevent_path(fisc_mstr_dir, a23_str, sue_str, t3)
     sue_bud = budunit_shop(sue_str, a23_str)
-    casa_road = sue_bud.make_l1_road("case")
-    clean_road = sue_bud.make_l1_road("clean")
-    dirty_road = sue_bud.make_l1_road("dirty")
-    sue_bud.add_fact(casa_road, dirty_road, create_missing_items=True)
+    casa_way = sue_bud.make_l1_way("case")
+    clean_way = sue_bud.make_l1_way("clean")
+    dirty_way = sue_bud.make_l1_way("dirty")
+    sue_bud.add_fact(casa_way, dirty_way, create_missing_items=True)
     save_bud_file(t3_json_path, None, sue_bud)
 
     # WHEN
@@ -660,10 +660,10 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     dirty_fact = dirty_factunit()
     sue_bud.add_item(clean_fact.fneed)
     sue_bud.add_item(dirty_fact.fneed)
-    casa_road = sue_bud.make_l1_road("casa")
-    mop_road = sue_bud.make_road(casa_road, "mop")
-    sue_bud.add_item(mop_road, 1, pledge=True)
-    sue_bud.edit_reason(mop_road, dirty_fact.fbase, dirty_fact.fneed)
+    casa_way = sue_bud.make_l1_way("casa")
+    mop_way = sue_bud.make_way(casa_way, "mop")
+    sue_bud.add_item(mop_way, 1, pledge=True)
+    sue_bud.edit_reason(mop_way, dirty_fact.fbase, dirty_fact.fneed)
     sue_bud.add_fact(dirty_fact.fbase, dirty_fact.fneed, create_missing_items=True)
     sky_blue_fact = sky_blue_factunit()
     sue_budevent_factunits = {clean_fact.fbase: clean_fact}

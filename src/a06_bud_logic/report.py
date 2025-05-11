@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import RoadUnit
+from src.a01_way_logic.way import WayUnit
 from src.a06_bud_logic.bud import BudUnit
 from pandas import DataFrame
 
@@ -22,7 +22,7 @@ def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:
     return DataFrame(x_acctunits_list)
 
 
-def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame:
+def get_bud_agenda_dataframe(x_bud: BudUnit, base: WayUnit = None) -> DataFrame:
     agenda_dict = x_bud.get_agenda_dict(necessary_base=base)
     if agenda_dict == {}:
         return DataFrame(
@@ -30,7 +30,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
                 "owner_name",
                 "fund_ratio",
                 "item_tag",
-                "parent_road",
+                "parent_way",
                 "begin",
                 "close",
                 "addin",
@@ -45,7 +45,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, base: RoadUnit = None) -> DataFrame
             "owner_name": x_bud.owner_name,
             "fund_ratio": x_item._fund_ratio,
             "item_tag": x_item.item_tag,
-            "parent_road": x_item.parent_road,
+            "parent_way": x_item.parent_way,
             "begin": x_item.begin,
             "close": x_item.close,
             "addin": x_item.addin,

@@ -15,7 +15,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
 )
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.a01_road_logic.road import FaceName, EventInt
+from src.a01_way_logic.way import FaceName, EventInt
 from src.a16_pidgin_logic.map import MapCore
 from src.a16_pidgin_logic.pidgin import (
     PidginUnit,
@@ -168,7 +168,7 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
     idea_numbers = set(get_idea_dimen_ref().get("pidgin_name"))
     idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_label")))
     idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_tag")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_road")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_way")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 

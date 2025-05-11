@@ -5,21 +5,21 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from src.a01_road_logic.road import (
-    RoadUnit,
+from src.a01_way_logic.way import (
+    WayUnit,
     TagUnit,
-    is_sub_road,
+    is_sub_way,
     get_default_fisc_tag as root_tag,
-    all_roadunits_between,
-    create_road as road_create_road,
+    all_wayunits_between,
+    create_way as way_create_way,
     default_bridge_if_None,
     replace_bridge,
     FiscTag,
     AcctName,
     GroupLabel,
-    RoadUnit,
-    rebuild_road,
-    find_replace_road_key_dict,
+    WayUnit,
+    rebuild_way,
+    find_replace_way_key_dict,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
@@ -52,7 +52,7 @@ from src.a04_reason_logic.reason_item import (
     ReasonCore,
     ReasonUnit,
     reasonunit_shop,
-    RoadUnit,
+    WayUnit,
     FactUnit,
     factunit_shop,
     ReasonHeir,
@@ -97,13 +97,13 @@ class ItemAttrHolder:
     mass: int = None
     uid: int = None
     reason: ReasonUnit = None
-    reason_base: RoadUnit = None
-    reason_premise: RoadUnit = None
+    reason_base: WayUnit = None
+    reason_premise: WayUnit = None
     reason_premise_open: float = None
     reason_premise_nigh: float = None
     reason_premise_divisor: int = None
-    reason_del_premise_base: RoadUnit = None
-    reason_del_premise_need: RoadUnit = None
+    reason_del_premise_base: WayUnit = None
+    reason_del_premise_need: WayUnit = None
     reason_base_item_active_requisite: str = None
     teamunit: TeamUnit = None
     healerlink: HealerLink = None
@@ -144,13 +144,13 @@ def itemattrholder_shop(
     mass: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
-    reason_base: RoadUnit = None,
-    reason_premise: RoadUnit = None,
+    reason_base: WayUnit = None,
+    reason_premise: WayUnit = None,
     reason_premise_open: float = None,
     reason_premise_nigh: float = None,
     reason_premise_divisor: int = None,
-    reason_del_premise_base: RoadUnit = None,
-    reason_del_premise_need: RoadUnit = None,
+    reason_del_premise_base: WayUnit = None,
+    reason_del_premise_need: WayUnit = None,
     reason_base_item_active_requisite: str = None,
     teamunit: TeamUnit = None,
     healerlink: HealerLink = None,
@@ -210,15 +210,15 @@ def itemattrholder_shop(
 class ItemUnit:
     item_tag: TagUnit = None
     mass: int = None
-    parent_road: RoadUnit = None
+    parent_way: WayUnit = None
     root: bool = None
-    _kids: dict[RoadUnit,] = None
+    _kids: dict[WayUnit,] = None
     fisc_tag: FiscTag = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupLabel, AwardLink] = None
-    reasonunits: dict[RoadUnit, ReasonUnit] = None
+    reasonunits: dict[WayUnit, ReasonUnit] = None
     teamunit: TeamUnit = None
-    factunits: dict[RoadUnit, FactUnit] = None
+    factunits: dict[WayUnit, FactUnit] = None
     healerlink: HealerLink = None
     begin: float = None
     close: float = None
@@ -241,7 +241,7 @@ class ItemUnit:
     _awardheirs: dict[GroupLabel, AwardHeir] = None
     _awardlines: dict[GroupLabel, AwardLine] = None
     _descendant_pledge_count: int = None
-    _factheirs: dict[RoadUnit, FactHeir] = None
+    _factheirs: dict[WayUnit, FactHeir] = None
     _fund_ratio: float = None
     fund_coin: FundCoin = None
     _fund_onset: FundNum = None
@@ -249,17 +249,17 @@ class ItemUnit:
     _healerlink_ratio: float = None
     _level: int = None
     _range_evaluated: bool = None
-    _reasonheirs: dict[RoadUnit, ReasonHeir] = None
+    _reasonheirs: dict[WayUnit, ReasonHeir] = None
     _task: bool = None
     _teamheir: TeamHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
 
-    def is_agenda_item(self, necessary_base: RoadUnit = None) -> bool:
+    def is_agenda_item(self, necessary_base: WayUnit = None) -> bool:
         base_reasonunit_exists = self.base_reasonunit_exists(necessary_base)
         return self.pledge and self._active and base_reasonunit_exists
 
-    def base_reasonunit_exists(self, necessary_base: RoadUnit = None) -> bool:
+    def base_reasonunit_exists(self, necessary_base: WayUnit = None) -> bool:
         x_reasons = self.reasonunits.values()
         x_base = necessary_base
         return x_base is None or any(reason.base == x_base for reason in x_reasons)
@@ -272,7 +272,7 @@ class ItemUnit:
         elif prev_active != now_active:
             self._active_hx[tree_traverse_count] = now_active
 
-    def set_factheirs(self, facts: dict[RoadUnit, FactCore]):
+    def set_factheirs(self, facts: dict[WayUnit, FactCore]):
         facts_dict = get_empty_dict_if_None(facts)
         self._factheirs = {}
         for x_factcore in facts_dict.values():
@@ -280,14 +280,14 @@ class ItemUnit:
 
     def _set_factheir(self, x_fact: FactCore):
         if (
-            x_fact.fbase == self.get_road()
+            x_fact.fbase == self.get_way()
             and self._gogo_calc is not None
             and self._stop_calc is not None
             and self.begin is None
             and self.close is None
         ):
             raise ranged_fact_item_Exception(
-                f"Cannot have fact for range inheritor '{self.get_road()}'. A ranged fact item must have _begin, _close attributes"
+                f"Cannot have fact for range inheritor '{self.get_way()}'. A ranged fact item must have _begin, _close attributes"
             )
         x_factheir = factheir_shop(
             x_fact.fbase, x_fact.fneed, x_fact.fopen, x_fact.fnigh
@@ -318,10 +318,10 @@ class ItemUnit:
     def set_factunit(self, factunit: FactUnit):
         self.factunits[factunit.fbase] = factunit
 
-    def factunit_exists(self, x_fbase: RoadUnit) -> bool:
+    def factunit_exists(self, x_fbase: WayUnit) -> bool:
         return self.factunits.get(x_fbase) != None
 
-    def get_factunits_dict(self) -> dict[RoadUnit, str]:
+    def get_factunits_dict(self) -> dict[WayUnit, str]:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, base_factunit: FactUnit):
@@ -337,7 +337,7 @@ class ItemUnit:
             fnigh=base_factunit.fnigh,
         )
 
-    def del_factunit(self, fbase: RoadUnit):
+    def del_factunit(self, fbase: WayUnit):
         self.factunits.pop(fbase)
 
     def set_fund_attr(
@@ -382,11 +382,11 @@ class ItemUnit:
     def get_obj_key(self) -> TagUnit:
         return self.item_tag
 
-    def get_road(self) -> RoadUnit:
-        if self.parent_road in (None, ""):
-            return road_create_road(self.item_tag, bridge=self.bridge)
+    def get_way(self) -> WayUnit:
+        if self.parent_way in (None, ""):
+            return way_create_way(self.item_tag, bridge=self.bridge)
         else:
-            return road_create_road(self.parent_road, self.item_tag, bridge=self.bridge)
+            return way_create_way(self.parent_way, self.item_tag, bridge=self.bridge)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -399,23 +399,23 @@ class ItemUnit:
         self.set_descendant_pledge_count_zero_if_None()
         self._descendant_pledge_count += x_int
 
-    def get_descendant_roads_from_kids(self) -> dict[RoadUnit, int]:
-        descendant_roads = {}
+    def get_descendant_ways_from_kids(self) -> dict[WayUnit, int]:
+        descendant_ways = {}
         to_evaluate_items = list(self._kids.values())
         count_x = 0
         max_count = 1000
         while to_evaluate_items != [] and count_x < max_count:
             x_item = to_evaluate_items.pop()
-            descendant_roads[x_item.get_road()] = -1
+            descendant_ways[x_item.get_way()] = -1
             to_evaluate_items.extend(x_item._kids.values())
             count_x += 1
 
         if count_x == max_count:
             raise ItemGetDescendantsException(
-                f"Item '{self.get_road()}' either has an infinite loop or more than {max_count} descendants."
+                f"Item '{self.get_way()}' either has an infinite loop or more than {max_count} descendants."
             )
 
-        return descendant_roads
+        return descendant_ways
 
     def clear_all_acct_cred_debt(self):
         self._all_acct_cred = None
@@ -424,8 +424,8 @@ class ItemUnit:
     def set_level(self, parent_level):
         self._level = parent_level + 1
 
-    def set_parent_road(self, parent_road):
-        self.parent_road = parent_road
+    def set_parent_way(self, parent_way):
+        self.parent_way = parent_way
 
     def inherit_awardheirs(self, parent_awardheirs: dict[GroupLabel, AwardHeir] = None):
         parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
@@ -514,34 +514,34 @@ class ItemUnit:
             self._find_replace_bridge(old_bridge)
 
     def _find_replace_bridge(self, old_bridge):
-        self.parent_road = replace_bridge(self.parent_road, old_bridge, self.bridge)
+        self.parent_way = replace_bridge(self.parent_way, old_bridge, self.bridge)
 
         new_reasonunits = {}
-        for reasonunit_road, reasonunit_obj in self.reasonunits.items():
-            new_reasonunit_road = replace_bridge(
-                road=reasonunit_road,
+        for reasonunit_way, reasonunit_obj in self.reasonunits.items():
+            new_reasonunit_way = replace_bridge(
+                way=reasonunit_way,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
             reasonunit_obj.set_bridge(self.bridge)
-            new_reasonunits[new_reasonunit_road] = reasonunit_obj
+            new_reasonunits[new_reasonunit_way] = reasonunit_obj
         self.reasonunits = new_reasonunits
 
         new_factunits = {}
-        for factunit_road, x_factunit in self.factunits.items():
-            new_base_road = replace_bridge(
-                road=factunit_road,
+        for factunit_way, x_factunit in self.factunits.items():
+            new_base_way = replace_bridge(
+                way=factunit_way,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            x_factunit.fbase = new_base_road
-            new_fneed_road = replace_bridge(
-                road=x_factunit.fneed,
+            x_factunit.fbase = new_base_way
+            new_fneed_way = replace_bridge(
+                way=x_factunit.fneed,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            x_factunit.set_attr(fneed=new_fneed_road)
-            new_factunits[new_base_road] = x_factunit
+            x_factunit.set_attr(fneed=new_fneed_way)
+            new_factunits[new_base_way] = x_factunit
         self.factunits = new_factunits
 
     def set_originunit_empty_if_None(self):
@@ -662,14 +662,14 @@ class ItemUnit:
             self._stop_calc = (self._stop_calc * r_item_numor) / r_item_denom
         self._range_evaluated = True
 
-    def _del_reasonunit_all_cases(self, base: RoadUnit, premise: RoadUnit):
+    def _del_reasonunit_all_cases(self, base: WayUnit, premise: WayUnit):
         if base is not None and premise is not None:
             self.del_reasonunit_premise(base=base, premise=premise)
             if len(self.reasonunits[base].premises) == 0:
                 self.del_reasonunit_base(base=base)
 
     def set_reason_base_item_active_requisite(
-        self, base: RoadUnit, base_item_active_requisite: str
+        self, base: WayUnit, base_item_active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(base=base)
         if base_item_active_requisite is False:
@@ -679,7 +679,7 @@ class ItemUnit:
         elif base_item_active_requisite:
             x_reasonunit.base_item_active_requisite = True
 
-    def _get_or_create_reasonunit(self, base: RoadUnit) -> ReasonUnit:
+    def _get_or_create_reasonunit(self, base: WayUnit) -> ReasonUnit:
         x_reasonunit = None
         try:
             x_reasonunit = self.reasonunits[base]
@@ -690,8 +690,8 @@ class ItemUnit:
 
     def set_reason_premise(
         self,
-        base: RoadUnit,
-        premise: RoadUnit,
+        base: WayUnit,
+        premise: WayUnit,
         open: float,
         nigh: float,
         divisor: int,
@@ -699,13 +699,13 @@ class ItemUnit:
         x_reasonunit = self._get_or_create_reasonunit(base=base)
         x_reasonunit.set_premise(premise=premise, open=open, nigh=nigh, divisor=divisor)
 
-    def del_reasonunit_base(self, base: RoadUnit):
+    def del_reasonunit_base(self, base: WayUnit):
         try:
             self.reasonunits.pop(base)
         except KeyError as e:
             raise InvalidItemException(f"No ReasonUnit at '{base}'") from e
 
-    def del_reasonunit_premise(self, base: RoadUnit, premise: RoadUnit):
+    def del_reasonunit_premise(self, base: WayUnit, premise: WayUnit):
         reason_unit = self.reasonunits[base]
         reason_unit.del_premise(premise=premise)
 
@@ -752,10 +752,10 @@ class ItemUnit:
         reason.bridge = self.bridge
         self.reasonunits[reason.base] = reason
 
-    def reasonunit_exists(self, x_base: RoadUnit) -> bool:
+    def reasonunit_exists(self, x_base: WayUnit) -> bool:
         return self.reasonunits.get(x_base) != None
 
-    def get_reasonunit(self, base: RoadUnit) -> ReasonUnit:
+    def get_reasonunit(self, base: WayUnit) -> ReasonUnit:
         return self.reasonunits.get(base)
 
     def set_reasonheirs_status(self):
@@ -802,19 +802,19 @@ class ItemUnit:
         return active_bool
 
     def set_range_factheirs(
-        self, bud_item_dict: dict[RoadUnit,], range_inheritors: dict[RoadUnit, RoadUnit]
+        self, bud_item_dict: dict[WayUnit,], range_inheritors: dict[WayUnit, WayUnit]
     ):
         for reason_base in self._reasonheirs.keys():
-            if range_root_road := range_inheritors.get(reason_base):
+            if range_root_way := range_inheritors.get(reason_base):
                 all_items = all_items_between(
-                    bud_item_dict, range_root_road, reason_base
+                    bud_item_dict, range_root_way, reason_base
                 )
-                self._create_factheir(all_items, range_root_road, reason_base)
+                self._create_factheir(all_items, range_root_way, reason_base)
 
     def _create_factheir(
-        self, all_items: list, range_root_road: RoadUnit, reason_base: RoadUnit
+        self, all_items: list, range_root_way: WayUnit, reason_base: WayUnit
     ):
-        range_root_factheir = self._factheirs.get(range_root_road)
+        range_root_factheir = self._factheirs.get(range_root_way)
         old_open = range_root_factheir.fopen
         old_nigh = range_root_factheir.fnigh
         x_rangeunit = items_calculated_range(all_items, old_open, old_nigh)
@@ -833,14 +833,14 @@ class ItemUnit:
             reason.clear_status()
 
     def _coalesce_with_reasonunits(
-        self, reasonheirs: dict[RoadUnit, ReasonHeir]
-    ) -> dict[RoadUnit, ReasonHeir]:
+        self, reasonheirs: dict[WayUnit, ReasonHeir]
+    ) -> dict[WayUnit, ReasonHeir]:
         new_reasonheirs = deepcopy(reasonheirs)
         new_reasonheirs |= self.reasonunits
         return new_reasonheirs
 
     def set_reasonheirs(
-        self, bud_item_dict: dict[RoadUnit,], reasonheirs: dict[RoadUnit, ReasonCore]
+        self, bud_item_dict: dict[WayUnit,], reasonheirs: dict[WayUnit, ReasonCore]
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self._reasonheirs = {}
@@ -861,14 +861,14 @@ class ItemUnit:
             new_reasonheir.inherit_from_reasonheir(x_reasonunit)
             self._reasonheirs[new_reasonheir.base] = new_reasonheir
 
-    def get_reasonheir(self, base: RoadUnit) -> ReasonHeir:
+    def get_reasonheir(self, base: WayUnit) -> ReasonHeir:
         return self._reasonheirs.get(base)
 
     def get_reasonunits_dict(self):
         return {base: reason.get_dict() for base, reason in self.reasonunits.items()}
 
     def get_kids_dict(self) -> dict[GroupLabel,]:
-        return {c_road: kid.get_dict() for c_road, kid in self._kids.items()}
+        return {c_way: kid.get_dict() for c_way, kid in self._kids.items()}
 
     def get_awardlinks_dict(self) -> dict[GroupLabel, dict]:
         x_awardlinks = self.awardlinks.items()
@@ -932,16 +932,16 @@ class ItemUnit:
 
         return x_dict
 
-    def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        if is_sub_road(ref_road=self.parent_road, sub_road=old_road):
-            self.parent_road = rebuild_road(self.parent_road, old_road, new_road)
+    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+        if is_sub_way(ref_way=self.parent_way, sub_way=old_way):
+            self.parent_way = rebuild_way(self.parent_way, old_way, new_way)
 
-        self.reasonunits == find_replace_road_key_dict(
-            dict_x=self.reasonunits, old_road=old_road, new_road=new_road
+        self.reasonunits == find_replace_way_key_dict(
+            dict_x=self.reasonunits, old_way=old_way, new_way=new_way
         )
 
-        self.factunits == find_replace_road_key_dict(
-            dict_x=self.factunits, old_road=old_road, new_road=new_road
+        self.factunits == find_replace_way_key_dict(
+            dict_x=self.factunits, old_way=old_way, new_way=new_way
         )
 
     def set_teamunit_empty_if_None(self):
@@ -967,14 +967,14 @@ class ItemUnit:
 def itemunit_shop(
     item_tag: TagUnit = None,
     _uid: int = None,  # Calculated field?
-    parent_road: RoadUnit = None,
+    parent_way: WayUnit = None,
     _kids: dict = None,
     mass: int = 1,
     awardlinks: dict[GroupLabel, AwardLink] = None,
     _awardheirs: dict[GroupLabel, AwardHeir] = None,  # Calculated field
     _awardlines: dict[GroupLabel, AwardLink] = None,  # Calculated field
-    reasonunits: dict[RoadUnit, ReasonUnit] = None,
-    _reasonheirs: dict[RoadUnit, ReasonHeir] = None,  # Calculated field
+    reasonunits: dict[WayUnit, ReasonUnit] = None,
+    _reasonheirs: dict[WayUnit, ReasonHeir] = None,  # Calculated field
     teamunit: TeamUnit = None,
     _teamheir: TeamHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
@@ -1015,7 +1015,7 @@ def itemunit_shop(
     x_itemkid = ItemUnit(
         item_tag=None,
         _uid=_uid,
-        parent_road=parent_road,
+        parent_way=parent_way,
         _kids=get_empty_dict_if_None(_kids),
         mass=get_positive_int(mass),
         awardlinks=get_empty_dict_if_None(awardlinks),
@@ -1111,10 +1111,10 @@ def get_obj_from_item_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_items_between(
-    bud_item_dict: dict[RoadUnit, ItemUnit], src_road: RoadUnit, dst_base: RoadUnit
+    bud_item_dict: dict[WayUnit, ItemUnit], src_way: WayUnit, dst_base: WayUnit
 ) -> list[ItemUnit]:
-    all_roads = all_roadunits_between(src_road, dst_base)
-    return [bud_item_dict.get(x_road) for x_road in all_roads]
+    all_ways = all_wayunits_between(src_way, dst_base)
+    return [bud_item_dict.get(x_way) for x_way in all_ways]
 
 
 def items_calculated_range(

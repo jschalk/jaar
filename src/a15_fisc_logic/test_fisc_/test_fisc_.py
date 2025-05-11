@@ -4,7 +4,7 @@ from src.a02_finance_logic.finance_config import (
     default_respect_bit_if_None,
     filter_penny,
 )
-from src.a01_road_logic.road import default_bridge_if_None
+from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.deal import tranbook_shop
 from src.a05_item_logic.healer import healerlink_shop
 from src.a05_item_logic.item import itemunit_shop
@@ -412,10 +412,10 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     # create Bob gut with agenda item for Sue
     bob_gut = budunit_shop(bob_str, a23_str, bridge=slash_str)
     bob_gut.add_acctunit(sue_str)
-    casa_road = bob_gut.make_l1_road("casa")
-    clean_road = bob_gut.make_road(casa_road, "clean")
-    bob_gut.add_item(clean_road, pledge=True)
-    bob_gut.get_item_obj(clean_road).teamunit.set_teamlink(sue_str)
+    casa_way = bob_gut.make_l1_way("casa")
+    clean_way = bob_gut.make_way(casa_way, "clean")
+    bob_gut.add_item(clean_way, pledge=True)
+    bob_gut.get_item_obj(clean_way).teamunit.set_teamlink(sue_str)
     save_gut_file(fisc_mstr_dir, bob_gut)
     assert not open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
 
@@ -426,7 +426,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     assert open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
     sue_agenda = open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
     assert len(sue_agenda) == 1
-    assert sue_agenda.get(clean_road).get_road() == clean_road
+    assert sue_agenda.get(clean_way).get_way() == clean_way
 
 
 def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
@@ -448,29 +448,29 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_gut_bud.add_acctunit(sue_str)
     yao_gut_bud.add_acctunit(yao_str)
     texas_str = "Texas"
-    texas_road = sue_gut_bud.make_l1_road(texas_str)
+    texas_way = sue_gut_bud.make_l1_way(texas_str)
     sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     yao_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_road = sue_gut_bud.make_road(texas_road, dallas_str)
+    dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
     dallas_item = itemunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
-    elpaso_road = sue_gut_bud.make_road(texas_road, elpaso_str)
+    elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
     elpaso_item = itemunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_gut_bud.set_item(dallas_item, texas_road)
-    sue_gut_bud.set_item(elpaso_item, texas_road)
-    yao_gut_bud.set_item(dallas_item, texas_road)
-    yao_gut_bud.set_item(elpaso_item, texas_road)
+    sue_gut_bud.set_item(dallas_item, texas_way)
+    sue_gut_bud.set_item(elpaso_item, texas_way)
+    yao_gut_bud.set_item(dallas_item, texas_way)
+    yao_gut_bud.set_item(elpaso_item, texas_way)
 
     save_gut_file(x_fisc_mstr_dir, sue_gut_bud)
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
-    sue_dallas_hubunit = hubunit_shop(x_fisc_mstr_dir, a23_str, sue_str, dallas_road)
-    yao_dallas_hubunit = hubunit_shop(x_fisc_mstr_dir, a23_str, yao_str, dallas_road)
+    sue_dallas_hubunit = hubunit_shop(x_fisc_mstr_dir, a23_str, sue_str, dallas_way)
+    yao_dallas_hubunit = hubunit_shop(x_fisc_mstr_dir, a23_str, yao_str, dallas_way)
     sue_dutys_dir = sue_dallas_hubunit.dutys_dir()
     yao_dutys_dir = yao_dallas_hubunit.dutys_dir()
     sue_dallas_sue_duty_file_path = create_path(sue_dutys_dir, sue_filename)
@@ -520,7 +520,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
         fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
         fisc_tag=a23_fisc.fisc_tag,
         owner_name=sue_str,
-        keep_road=None,
+        keep_way=None,
         bridge=a23_fisc.bridge,
         fund_coin=a23_fisc.fund_coin,
         respect_bit=a23_fisc.respect_bit,
@@ -529,7 +529,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
         fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
         fisc_tag=a23_fisc.fisc_tag,
         owner_name=yao_str,
-        keep_road=None,
+        keep_way=None,
         bridge=a23_fisc.bridge,
         fund_coin=a23_fisc.fund_coin,
         respect_bit=a23_fisc.respect_bit,

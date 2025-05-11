@@ -21,13 +21,13 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     default_money_magnitude_if_None,
 )
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     OwnerName,
     FiscTag,
     TagUnit,
-    RoadUnit,
-    rebuild_road,
-    get_all_road_tags,
+    WayUnit,
+    rebuild_way,
+    get_all_way_tags,
     validate_tagunit,
     default_bridge_if_None,
 )
@@ -76,11 +76,11 @@ class PackFileMissingException(Exception):
     pass
 
 
-class get_keep_roadsException(Exception):
+class get_keep_waysException(Exception):
     pass
 
 
-class _keep_roadMissingException(Exception):
+class _keep_wayMissingException(Exception):
     pass
 
 
@@ -101,7 +101,7 @@ class HubUnit:
     owner_name: OwnerName = None
     fisc_mstr_dir: str = None
     fisc_tag: str = None
-    keep_road: RoadUnit = None
+    keep_way: WayUnit = None
     bridge: str = None
     fund_pool: float = None
     fund_coin: float = None
@@ -324,11 +324,11 @@ class HubUnit:
 
     # keep management
     def keep_dir(self) -> str:
-        if self.keep_road is None:
-            raise _keep_roadMissingException(
-                f"HubUnit '{self.owner_name}' cannot save to keep_dir because it does not have keep_road."
+        if self.keep_way is None:
+            raise _keep_wayMissingException(
+                f"HubUnit '{self.owner_name}' cannot save to keep_dir because it does not have keep_way."
             )
-        return get_keep_path(self, self.keep_road)
+        return get_keep_path(self, self.keep_way)
 
     def create_keep_dir_if_missing(self):
         set_dir(self.keep_dir())
@@ -414,7 +414,7 @@ class HubUnit:
             fisc_mstr_dir=self.fisc_mstr_dir,
             fisc_tag=self.fisc_tag,
             owner_name=healer_name,
-            keep_road=self.keep_road,
+            keep_way=self.keep_way,
             bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
@@ -426,27 +426,27 @@ class HubUnit:
         speaker_plan = self.rj_speaker_bud(healer_name, speaker_id)
         return self.get_perspective_bud(speaker_plan)
 
-    def get_keep_roads(self) -> set[RoadUnit]:
+    def get_keep_ways(self) -> set[WayUnit]:
         x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name)
         x_gut_bud.settle_bud()
         if x_gut_bud._keeps_justified is False:
-            x_str = f"Cannot get_keep_roads from '{self.owner_name}' gut bud because 'BudUnit._keeps_justified' is False."
-            raise get_keep_roadsException(x_str)
+            x_str = f"Cannot get_keep_ways from '{self.owner_name}' gut bud because 'BudUnit._keeps_justified' is False."
+            raise get_keep_waysException(x_str)
         if x_gut_bud._keeps_buildable is False:
-            x_str = f"Cannot get_keep_roads from '{self.owner_name}' gut bud because 'BudUnit._keeps_buildable' is False."
-            raise get_keep_roadsException(x_str)
+            x_str = f"Cannot get_keep_ways from '{self.owner_name}' gut bud because 'BudUnit._keeps_buildable' is False."
+            raise get_keep_waysException(x_str)
         owner_healer_dict = x_gut_bud._healers_dict.get(self.owner_name)
         if owner_healer_dict is None:
             return get_empty_set_if_None()
-        keep_roads = x_gut_bud._healers_dict.get(self.owner_name).keys()
-        return get_empty_set_if_None(keep_roads)
+        keep_ways = x_gut_bud._healers_dict.get(self.owner_name).keys()
+        return get_empty_set_if_None(keep_ways)
 
     def save_all_gut_dutys(self):
         gut = open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name)
-        for x_keep_road in self.get_keep_roads():
-            self.keep_road = x_keep_road
+        for x_keep_way in self.get_keep_ways():
+            self.keep_way = x_keep_way
             self.save_duty_bud(gut)
-        self.keep_road = None
+        self.keep_way = None
 
     def create_treasury_db_file(self):
         self.create_keep_dir_if_missing()
@@ -457,26 +457,26 @@ class HubUnit:
         return os_path_exists(self.treasury_db_path())
 
     def treasury_db_file_conn(self) -> Connection:
-        if self.keep_road is None:
-            raise _keep_roadMissingException(
-                f"hubunit cannot connect to treasury_db_file because keep_road is {self.keep_road}"
+        if self.keep_way is None:
+            raise _keep_wayMissingException(
+                f"hubunit cannot connect to treasury_db_file because keep_way is {self.keep_way}"
             )
         if self.treasury_db_file_exists() is False:
             self.create_treasury_db_file()
         return sqlite_connection(self.treasury_db_path())
 
     def create_gut_treasury_db_files(self):
-        for x_keep_road in self.get_keep_roads():
-            self.keep_road = x_keep_road
+        for x_keep_way in self.get_keep_ways():
+            self.keep_way = x_keep_way
             self.create_treasury_db_file()
-        self.keep_road = None
+        self.keep_way = None
 
 
 def hubunit_shop(
     fisc_mstr_dir: str,
     fisc_tag: FiscTag,
     owner_name: OwnerName = None,
-    keep_road: RoadUnit = None,
+    keep_way: WayUnit = None,
     bridge: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
@@ -488,7 +488,7 @@ def hubunit_shop(
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_tag=fisc_tag,
         owner_name=validate_tagunit(owner_name, bridge),
-        keep_road=keep_road,
+        keep_way=keep_way,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
@@ -500,9 +500,9 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_path(x_hubunit: HubUnit, x_road: TagUnit) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_way: TagUnit) -> str:
     keep_root = "itemroot"
-    x_road = rebuild_road(x_road, x_hubunit.fisc_tag, keep_root)
-    x_list = get_all_road_tags(x_road, x_hubunit.bridge)
+    x_way = rebuild_way(x_way, x_hubunit.fisc_tag, keep_root)
+    x_list = get_all_way_tags(x_way, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return create_path(x_hubunit._keeps_dir, keep_sub_path)

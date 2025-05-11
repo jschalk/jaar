@@ -6,7 +6,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     get_default_fisc_tag as root_tag,
     default_bridge_if_None,
 )
@@ -125,7 +125,7 @@ def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.itemroot._level == 0
     assert x_bud.itemroot.fisc_tag == x_bud.fisc_tag
     assert x_bud.itemroot.bridge == x_bud.bridge
-    assert x_bud.itemroot.parent_road == ""
+    assert x_bud.itemroot.parent_way == ""
 
 
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
@@ -173,20 +173,20 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
     )
 
 
-def test_BudUnit_make_road_ReturnsObj():
+def test_BudUnit_make_way_ReturnsObj():
     # ESTABLISH
     x_fisc_tag = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str, x_fisc_tag, bridge=slash_bridge)
     casa_str = "casa"
-    v1_casa_road = sue_bud.make_l1_road(casa_str)
+    v1_casa_way = sue_bud.make_l1_way(casa_str)
 
     # WHEN
-    v2_casa_road = sue_bud.make_l1_road(casa_str)
+    v2_casa_way = sue_bud.make_l1_way(casa_str)
 
     # THEN
-    assert v1_casa_road == v2_casa_road
+    assert v1_casa_way == v2_casa_way
 
 
 def test_BudUnit_set_last_pack_id_SetsAttrCorrectly():

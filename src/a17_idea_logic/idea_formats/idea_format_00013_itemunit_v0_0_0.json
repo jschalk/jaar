@@ -18,7 +18,7 @@
         "pledge": {
             "otx_key": false
         },
-        "road": {
+        "way": {
             "otx_key": true
         }
     },

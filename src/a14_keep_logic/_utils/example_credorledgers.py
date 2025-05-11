@@ -1,10 +1,10 @@
-from src.a01_road_logic.road import OwnerName, AcctName
+from src.a01_way_logic.way import OwnerName, AcctName
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic._utils.env_a14 import (
     get_module_temp_dir,
     temp_fisc_tag,
-    get_texas_road,
+    get_texas_way,
 )
 from src.a14_keep_logic.rivercycle import get_credorledger
 
@@ -14,7 +14,7 @@ def example_yao_hubunit() -> HubUnit:
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(get_module_temp_dir(), temp_fisc_tag(), "Yao", get_texas_road())
+    return hubunit_shop(get_module_temp_dir(), temp_fisc_tag(), "Yao", get_texas_way())
 
 
 def example_yao_credorledger() -> dict[str, float]:

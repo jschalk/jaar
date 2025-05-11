@@ -273,16 +273,16 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    floor_road = sue_bud.make_road(casa_road, floor_str)
-    clean_road = sue_bud.make_road(floor_road, clean_str)
-    dirty_road = sue_bud.make_road(floor_road, dirty_str)
-    mop_road = sue_bud.make_road(casa_road, mop_str)
-    sue_bud.add_item(floor_road)
-    sue_bud.add_item(clean_road)
-    sue_bud.add_item(dirty_road)
-    sue_bud.add_item(mop_road, pledge=True)
-    sue_bud.edit_item_attr(mop_road, reason_base=floor_road, reason_premise=clean_road)
+    casa_way = sue_bud.make_l1_way(casa_str)
+    floor_way = sue_bud.make_way(casa_way, floor_str)
+    clean_way = sue_bud.make_way(floor_way, clean_str)
+    dirty_way = sue_bud.make_way(floor_way, dirty_str)
+    mop_way = sue_bud.make_way(casa_way, mop_str)
+    sue_bud.add_item(floor_way)
+    sue_bud.add_item(clean_way)
+    sue_bud.add_item(dirty_way)
+    sue_bud.add_item(mop_way, pledge=True)
+    sue_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=clean_way)
     yao_str = "Yao"
     sue_bud.add_acctunit(yao_str, 13, 5)
 

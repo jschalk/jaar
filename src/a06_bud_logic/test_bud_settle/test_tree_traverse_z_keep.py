@@ -68,10 +68,10 @@ def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenKeepIsLevelAbovePr
     yao_healerlink = healerlink_shop({yao_str})
 
     texas_str = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_str)
+    texas_way = sue_bud.make_l1_way(texas_str)
     sue_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
     ep_str = "El Paso"
-    sue_bud.set_item(itemunit_shop(ep_str, healerlink=yao_healerlink), texas_road)
+    sue_bud.set_item(itemunit_shop(ep_str, healerlink=yao_healerlink), texas_way)
     assert sue_bud._keeps_justified is False
 
     # WHEN
@@ -85,10 +85,10 @@ def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenKeepIsLevelBelowPr
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_str = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_str)
+    texas_way = sue_bud.make_l1_way(texas_str)
     yao_healerlink = healerlink_shop({"Yao"})
     sue_bud.set_l1_item(itemunit_shop(texas_str, healerlink=yao_healerlink))
-    sue_bud.set_item(itemunit_shop("El Paso", problem_bool=True), texas_road)
+    sue_bud.set_item(itemunit_shop("El Paso", problem_bool=True), texas_way)
     assert sue_bud._keeps_justified is False
 
     # WHEN
@@ -102,12 +102,12 @@ def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     texas_str = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_str)
+    texas_way = sue_bud.make_l1_way(texas_str)
     yao_healerlink = healerlink_shop({"Yao"})
     texas_item = itemunit_shop(texas_str, healerlink=yao_healerlink)
     sue_bud.set_l1_item(texas_item)
     elpaso_item = itemunit_shop("El Paso", problem_bool=True)
-    sue_bud.set_item(elpaso_item, texas_road)
+    sue_bud.set_item(elpaso_item, texas_way)
     assert sue_bud._keeps_justified is False
 
     # WHEN
@@ -115,7 +115,7 @@ def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
         sue_bud.settle_bud(keep_exceptions=True)
     assert (
         str(excinfo.value)
-        == f"ItemUnit '{elpaso_item.get_road()}' cannot sponsor ancestor keeps."
+        == f"ItemUnit '{elpaso_item.get_way()}' cannot sponsor ancestor keeps."
     )
 
 
@@ -124,11 +124,11 @@ def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenTwoKeepsAre_OnTheE
     sue_bud = budunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
     texas_str = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_str)
+    texas_way = sue_bud.make_l1_way(texas_str)
     texas_item = itemunit_shop(texas_str, healerlink=yao_healerlink, problem_bool=True)
     sue_bud.set_l1_item(texas_item)
     elpaso_item = itemunit_shop("El Paso", healerlink=yao_healerlink, problem_bool=True)
-    sue_bud.set_item(elpaso_item, texas_road)
+    sue_bud.set_item(elpaso_item, texas_way)
     assert sue_bud._keeps_justified is False
 
     # WHEN
@@ -143,11 +143,11 @@ def test_BudUnit_get_item_dict_RaisesErrorWhen_keeps_justified_IsFalse():
     sue_bud = budunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
     texas_str = "Texas"
-    texas_road = sue_bud.make_l1_road(texas_str)
+    texas_way = sue_bud.make_l1_way(texas_str)
     texas_item = itemunit_shop(texas_str, healerlink=yao_healerlink, problem_bool=True)
     sue_bud.set_l1_item(texas_item)
     elpaso_item = itemunit_shop("El Paso", healerlink=yao_healerlink, problem_bool=True)
-    sue_bud.set_item(elpaso_item, texas_road)
+    sue_bud.set_item(elpaso_item, texas_way)
     sue_bud.settle_bud()
     assert sue_bud._keeps_justified is False
 

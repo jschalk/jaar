@@ -128,7 +128,7 @@ def _validate_fisc_config(fisc_config: dict):
     accepted_class_typees = get_allowed_class_types()
     accepted_class_typees.add("str")
 
-    # for every fisc_format file there exists a unique fisc_number always with leading zeros to make 5 digits
+    # for every fisc_format file there exists a unique fisc_number with leading zeros to make 5 digits
     for fisc_dimen, dimen_dict in fisc_config.items():
         print(f"_validate_fisc_config {fisc_dimen=}")
         assert dimen_dict.get(jkeys_str()) is not None

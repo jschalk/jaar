@@ -1,8 +1,8 @@
 from src.a02_finance_logic.allot import allot_scale
-from src.a01_road_logic.road import (
-    get_ancestor_roads,
-    RoadUnit,
-    get_root_tag_from_road,
+from src.a01_way_logic.way import (
+    get_ancestor_ways,
+    WayUnit,
+    get_root_tag_from_way,
     OwnerName,
 )
 from src.a05_item_logic.item import ItemUnit
@@ -61,19 +61,19 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_name: OwnerName):
 def generate_ingest_list(
     item_list: list[ItemUnit], debtor_amount: float, respect_bit: float
 ) -> list[ItemUnit]:
-    item_ledger = {x_item.get_road(): x_item.mass for x_item in item_list}
+    item_ledger = {x_item.get_way(): x_item.mass for x_item in item_list}
     mass_allot = allot_scale(item_ledger, debtor_amount, respect_bit)
     for x_itemunit in item_list:
-        x_itemunit.mass = mass_allot.get(x_itemunit.get_road())
+        x_itemunit.mass = mass_allot.get(x_itemunit.get_way())
     return item_list
 
 
 def _ingest_single_itemunit(listener: BudUnit, ingest_itemunit: ItemUnit):
-    mass_data = _create_mass_data(listener, ingest_itemunit.get_road())
+    mass_data = _create_mass_data(listener, ingest_itemunit.get_way())
 
-    if listener.item_exists(ingest_itemunit.get_road()) is False:
-        x_parent_road = ingest_itemunit.parent_road
-        listener.set_item(ingest_itemunit, x_parent_road, create_missing_items=True)
+    if listener.item_exists(ingest_itemunit.get_way()) is False:
+        x_parent_way = ingest_itemunit.parent_way
+        listener.set_item(ingest_itemunit, x_parent_way, create_missing_items=True)
 
     _add_and_replace_itemunit_masss(
         listener=listener,
@@ -89,31 +89,31 @@ class MassReplaceOrAddData:
     replace_mass_list: list = None
 
 
-def _create_mass_data(listener: BudUnit, x_road: RoadUnit) -> list:
+def _create_mass_data(listener: BudUnit, x_way: WayUnit) -> list:
     mass_data = MassReplaceOrAddData()
     mass_data.add_to_mass_list = []
     mass_data.replace_mass_list = []
-    ancestor_roads = get_ancestor_roads(x_road, listener.bridge)
-    root_road = get_root_tag_from_road(x_road, listener.bridge)
-    for ancestor_road in ancestor_roads:
-        if ancestor_road != root_road:
-            if listener.item_exists(ancestor_road):
-                mass_data.add_to_mass_list.append(ancestor_road)
+    ancestor_ways = get_ancestor_ways(x_way, listener.bridge)
+    root_way = get_root_tag_from_way(x_way, listener.bridge)
+    for ancestor_way in ancestor_ways:
+        if ancestor_way != root_way:
+            if listener.item_exists(ancestor_way):
+                mass_data.add_to_mass_list.append(ancestor_way)
             else:
-                mass_data.replace_mass_list.append(ancestor_road)
+                mass_data.replace_mass_list.append(ancestor_way)
     return mass_data
 
 
 def _add_and_replace_itemunit_masss(
     listener: BudUnit,
-    replace_mass_list: list[RoadUnit],
-    add_to_mass_list: list[RoadUnit],
+    replace_mass_list: list[WayUnit],
+    add_to_mass_list: list[WayUnit],
     x_mass: float,
 ):
-    for item_road in replace_mass_list:
-        listener.edit_item_attr(item_road, mass=x_mass)
-    for item_road in add_to_mass_list:
-        x_itemunit = listener.get_item_obj(item_road)
+    for item_way in replace_mass_list:
+        listener.edit_item_attr(item_way, mass=x_mass)
+    for item_way in add_to_mass_list:
+        x_itemunit = listener.get_item_obj(item_way)
         x_itemunit.mass += x_mass
 
 
@@ -133,21 +133,21 @@ def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
     for x_factunit in src_listener.itemroot.factunits.values():
-        fbase_road = x_factunit.fbase
-        fneed_road = x_factunit.fneed
-        if dst_listener.item_exists(fbase_road) is False:
-            base_item = src_listener.get_item_obj(fbase_road)
-            dst_listener.set_item(base_item, base_item.parent_road)
-        if dst_listener.item_exists(fneed_road) is False:
-            fneed_item = src_listener.get_item_obj(fneed_road)
-            dst_listener.set_item(fneed_item, fneed_item.parent_road)
-        dst_listener.add_fact(fbase_road, fneed_road)
+        fbase_way = x_factunit.fbase
+        fneed_way = x_factunit.fneed
+        if dst_listener.item_exists(fbase_way) is False:
+            base_item = src_listener.get_item_obj(fbase_way)
+            dst_listener.set_item(base_item, base_item.parent_way)
+        if dst_listener.item_exists(fneed_way) is False:
+            fneed_item = src_listener.get_item_obj(fneed_way)
+            dst_listener.set_item(fneed_item, fneed_item.parent_way)
+        dst_listener.add_fact(fbase_way, fneed_way)
 
 
 def listen_to_speaker_fact(
     listener: BudUnit,
     speaker: BudUnit,
-    missing_fact_bases: list[RoadUnit] = None,
+    missing_fact_bases: list[WayUnit] = None,
 ) -> BudUnit:
     if missing_fact_bases is None:
         missing_fact_bases = list(listener.get_missing_fact_bases())
@@ -291,12 +291,12 @@ def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
 
 def _fneed_keep_plans_and_listen(
     listener_id: OwnerName,
-    keep_dict: dict[RoadUnit],
+    keep_dict: dict[WayUnit],
     healer_hubunit: HubUnit,
     new_job: BudUnit,
 ):
     for keep_path in keep_dict:
-        healer_hubunit.keep_road = keep_path
+        healer_hubunit.keep_way = keep_path
         fneed_keep_plan_and_listen(listener_id, healer_hubunit, new_job)
 
 
@@ -313,11 +313,11 @@ def fneed_keep_plan_and_listen(
 
 def listen_to_plan_agenda(listener: BudUnit, plan: BudUnit):
     for x_item in plan._item_dict.values():
-        if listener.item_exists(x_item.get_road()) is False:
-            listener.set_item(x_item, x_item.parent_road)
-        if listener.get_fact(x_item.get_road()) is False:
-            listener.set_item(x_item, x_item.parent_road)
-    for x_fact_road, x_fact_unit in plan.itemroot.factunits.items():
+        if listener.item_exists(x_item.get_way()) is False:
+            listener.set_item(x_item, x_item.parent_way)
+        if listener.get_fact(x_item.get_way()) is False:
+            listener.set_item(x_item, x_item.parent_way)
+    for x_fact_way, x_fact_unit in plan.itemroot.factunits.items():
         listener.itemroot.set_factunit(x_fact_unit)
     listener.settle_bud()
 

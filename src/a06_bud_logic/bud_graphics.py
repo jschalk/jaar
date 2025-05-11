@@ -4,7 +4,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_rect_arrow,
     add_keep__rect,
 )
-from src.a01_road_logic.road import get_parent_road, RoadUnit, is_sub_road
+from src.a01_way_logic.way import get_parent_way, WayUnit, is_sub_way
 from src.a05_item_logic.item import ItemUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.report import (
@@ -22,9 +22,9 @@ def _get_dot_diameter(x_ratio: float):
     return ((x_ratio**0.4)) * 100
 
 
-def _get_parent_y(x_item: ItemUnit, itemunit_y_coordinate_dict: dict) -> RoadUnit:
-    parent_road = get_parent_road(x_item.get_road())
-    return itemunit_y_coordinate_dict.get(parent_road)
+def _get_parent_y(x_item: ItemUnit, itemunit_y_coordinate_dict: dict) -> WayUnit:
+    parent_way = get_parent_way(x_item.get_way())
+    return itemunit_y_coordinate_dict.get(parent_way)
 
 
 def _get_color_for_itemunit_trace(x_itemunit: ItemUnit, mode: str) -> str:
@@ -88,11 +88,11 @@ def _create_itemunit_traces(
 ):
     items = [x_bud.itemroot]
     y_itemunit_y_coordinate_dict = {None: 0}
-    prev_road = x_bud.itemroot.get_road()
+    prev_way = x_bud.itemroot.get_way()
     source_y = 0
     while items != []:
         x_item = items.pop(-1)
-        if is_sub_road(x_item.get_road(), prev_road) is False:
+        if is_sub_way(x_item.get_way(), prev_way) is False:
             source_y -= 1
         _add_individual_trace(
             trace_list=trace_list,
@@ -103,8 +103,8 @@ def _create_itemunit_traces(
             mode=mode,
         )
         items.extend(iter(x_item._kids.values()))
-        y_itemunit_y_coordinate_dict[x_item.get_road()] = source_y
-        prev_road = x_item.get_road()
+        y_itemunit_y_coordinate_dict[x_item.get_way()] = source_y
+        prev_way = x_item.get_way()
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
@@ -197,7 +197,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
         "owner_name",
         "fund_ratio",
         "item_tag",
-        "parent_road",
+        "parent_way",
     ]
     df = get_bud_agenda_dataframe(x_bud)
     header_dict = dict(
@@ -210,7 +210,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
                 df.owner_name,
                 df.fund_ratio,
                 df.item_tag,
-                df.parent_road,
+                df.parent_way,
             ],
             fill_color="lavender",
             align="left",

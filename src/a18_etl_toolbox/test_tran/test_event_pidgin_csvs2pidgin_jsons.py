@@ -5,8 +5,8 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
     delete_dir,
 )
-from src.a01_road_logic.road import default_bridge_if_None
-from src.a06_bud_logic._utils.str_a06 import type_RoadUnit_str
+from src.a01_way_logic.way import default_bridge_if_None
+from src.a06_bud_logic._utils.str_a06 import type_WayUnit_str
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json
@@ -22,7 +22,7 @@ from src.a18_etl_toolbox._utils.env_a18 import (
 from os.path import exists as os_path_exists
 
 
-def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
+def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_way(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -35,13 +35,13 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
     bob_dir = create_path(get_module_temp_dir(), bob_str)
     event3_dir = create_path(bob_dir, event3)
-    save_file(event3_dir, "road.csv", event3_road_csv)
+    save_file(event3_dir, "way.csv", event3_way_csv)
     pidgin_json_file_path = create_path(event3_dir, pidgin_filename())
     assert os_path_exists(pidgin_json_file_path) is False
 
@@ -56,11 +56,11 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_road(
     assert json_pidginunit.otx_bridge == default_bridge_if_None()
     assert json_pidginunit.inx_bridge == default_bridge_if_None()
     assert json_pidginunit.unknown_word == default_unknown_word_if_None()
-    assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
-    assert json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
+    assert json_pidginunit.otx2inx_exists(type_WayUnit_str(), casa_otx, casa_inx)
+    assert json_pidginunit.otx2inx_exists(type_WayUnit_str(), clean_otx, clean_inx)
 
 
-def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
+def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_way(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -77,15 +77,15 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event7_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event7_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event7},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event7},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event9_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event9_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event9},"{zia_str}","{casa_otx}","{casa_inx}",,,
 {event9},"{zia_str}","{clean_otx}","{clean_inx}",,,
 """
@@ -95,9 +95,9 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)
-    save_file(event3_dir, "road.csv", event3_road_csv)
-    save_file(event7_dir, "road.csv", event7_road_csv)
-    save_file(event9_dir, "road.csv", event9_road_csv)
+    save_file(event3_dir, "way.csv", event3_way_csv)
+    save_file(event7_dir, "way.csv", event7_way_csv)
+    save_file(event9_dir, "way.csv", event9_way_csv)
     e3_json_file_path = create_path(event3_dir, pidgin_filename())
     e7_json_file_path = create_path(event7_dir, pidgin_filename())
     e9_json_file_path = create_path(event9_dir, pidgin_filename())
@@ -120,8 +120,8 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     assert e3_json_pidginunit.otx_bridge == default_bridge_if_None()
     assert e3_json_pidginunit.inx_bridge == default_bridge_if_None()
     assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
-    assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
-    assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
+    assert e3_json_pidginunit.otx2inx_exists(type_WayUnit_str(), casa_otx, casa_inx)
+    assert e3_json_pidginunit.otx2inx_exists(type_WayUnit_str(), clean_otx, clean_inx)
     e7_json_pidginunit = get_pidginunit_from_json(
         open_file(event7_dir, pidgin_filename())
     )
@@ -130,8 +130,8 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     assert e7_json_pidginunit.otx_bridge == default_bridge_if_None()
     assert e7_json_pidginunit.inx_bridge == default_bridge_if_None()
     assert e7_json_pidginunit.unknown_word == default_unknown_word_if_None()
-    assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
-    assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
+    assert e7_json_pidginunit.otx2inx_exists(type_WayUnit_str(), casa_otx, casa_inx)
+    assert e7_json_pidginunit.otx2inx_exists(type_WayUnit_str(), clean_otx, clean_inx)
 
     # bob_dir = create_path(fizz_world._syntax_otz_dir, bob_str)
     # zia_dir = create_path(fizz_world._syntax_otz_dir, zia_str)
@@ -141,34 +141,34 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_road(
     # event3_pidgin_file_path = create_otx_event_pidgin_path(event3_dir)
     # event7_pidgin_file_path = create_otx_event_pidgin_path(event7_dir)
     # event9_pidgin_file_path = create_otx_event_pidgin_path(event9_dir)
-    # event3_road_csv_file_path = create_path(event3_dir, "road.csv")
-    # event7_road_csv_file_path = create_path(event7_dir, "road.csv")
-    # event9_road_csv_file_path = create_path(event9_dir, "road.csv")
-    # road_agg_str = "road_agg"
-    # upsert_sheet(event3_pidgin_file_path, road_agg_str, e3_road_df)
-    # upsert_sheet(event7_pidgin_file_path, road_agg_str, e7_road_df)
-    # upsert_sheet(event9_pidgin_file_path, road_agg_str, e9_road_df)
-    # assert sheet_exists(event3_pidgin_file_path, road_agg_str)
-    # assert sheet_exists(event7_pidgin_file_path, road_agg_str)
-    # assert sheet_exists(event9_pidgin_file_path, road_agg_str)
-    # assert os_path_exists(event3_road_csv_file_path) is False
-    # assert os_path_exists(event7_road_csv_file_path) is False
-    # assert os_path_exists(event9_road_csv_file_path) is False
+    # event3_way_csv_file_path = create_path(event3_dir, "way.csv")
+    # event7_way_csv_file_path = create_path(event7_dir, "way.csv")
+    # event9_way_csv_file_path = create_path(event9_dir, "way.csv")
+    # way_agg_str = "way_agg"
+    # upsert_sheet(event3_pidgin_file_path, way_agg_str, e3_way_df)
+    # upsert_sheet(event7_pidgin_file_path, way_agg_str, e7_way_df)
+    # upsert_sheet(event9_pidgin_file_path, way_agg_str, e9_way_df)
+    # assert sheet_exists(event3_pidgin_file_path, way_agg_str)
+    # assert sheet_exists(event7_pidgin_file_path, way_agg_str)
+    # assert sheet_exists(event9_pidgin_file_path, way_agg_str)
+    # assert os_path_exists(event3_way_csv_file_path) is False
+    # assert os_path_exists(event7_way_csv_file_path) is False
+    # assert os_path_exists(event9_way_csv_file_path) is False
 
     # # WHEN
     # fizz_world.otz_event_pidgins_to_otz_pidgin_csv_files()
 
     # # THEN
-    # assert os_path_exists(event3_road_csv_file_path)
-    # assert os_path_exists(event7_road_csv_file_path)
-    # assert os_path_exists(event9_road_csv_file_path)
-    # road_filename = "road.csv"
-    # print(f"{open_file(event3_dir, road_filename)=}")
-    # print(f"{open_file(event7_dir, road_filename)=}")
-    # print(f"{open_file(event9_dir, road_filename)=}")
-    # gen_csv_event3_df = open_csv(event7_dir, "road.csv")
+    # assert os_path_exists(event3_way_csv_file_path)
+    # assert os_path_exists(event7_way_csv_file_path)
+    # assert os_path_exists(event9_way_csv_file_path)
+    # way_filename = "way.csv"
+    # print(f"{open_file(event3_dir, way_filename)=}")
+    # print(f"{open_file(event7_dir, way_filename)=}")
+    # print(f"{open_file(event9_dir, way_filename)=}")
+    # gen_csv_event3_df = open_csv(event7_dir, "way.csv")
     # print(f"{gen_csv_event3_df=}")
-    # pandas_testing_assert_frame_equal(gen_csv_event3_df, e7_road_df)
+    # pandas_testing_assert_frame_equal(gen_csv_event3_df, e7_way_df)
 
 
 def test_get_pidgin_events_by_dirs_ReturnsObj(env_dir_setup_cleanup):

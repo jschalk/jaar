@@ -9,13 +9,13 @@
         "inx_bridge": {
             "otx_key": false
         },
-        "inx_road": {
+        "inx_way": {
             "otx_key": false
         },
         "otx_bridge": {
             "otx_key": false
         },
-        "otx_road": {
+        "otx_way": {
             "otx_key": true
         },
         "unknown_word": {
@@ -23,7 +23,7 @@
         }
     },
     "dimens": [
-        "pidgin_road"
+        "pidgin_way"
     ],
     "idea_number": "br00045"
 }

@@ -63,8 +63,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "acct_name_ERASE",
         "group_label",
         "group_label_ERASE",
-        "road",
-        "road_ERASE",
+        "way",
+        "way_ERASE",
         "base",
         "base_ERASE",
         "fbase",
@@ -114,8 +114,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "amount",
         "otx_tag",
         "inx_tag",
-        "otx_road",
-        "inx_road",
+        "otx_way",
+        "inx_way",
         "otx_name",
         "inx_name",
         "otx_label",
@@ -188,8 +188,8 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "acct_name_ERASE": "TEXT",
         "group_label": "TEXT",
         "group_label_ERASE": "TEXT",
-        "road": "TEXT",
-        "road_ERASE": "TEXT",
+        "way": "TEXT",
+        "way_ERASE": "TEXT",
         "base": "TEXT",
         "base_ERASE": "TEXT",
         "fbase": "TEXT",
@@ -248,8 +248,8 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "unknown_word": "TEXT",
         "otx_tag": "TEXT",
         "inx_tag": "TEXT",
-        "otx_road": "TEXT",
-        "inx_road": "TEXT",
+        "otx_way": "TEXT",
+        "inx_way": "TEXT",
         "otx_name": "TEXT",
         "inx_name": "TEXT",
         "otx_label": "TEXT",
@@ -423,8 +423,8 @@ def idea_format_00044_pidgin_tag_v0_0_0() -> str:
     return "idea_format_00044_pidgin_tag_v0_0_0"
 
 
-def idea_format_00045_pidgin_road_v0_0_0() -> str:
-    return "idea_format_00045_pidgin_road_v0_0_0"
+def idea_format_00045_pidgin_way_v0_0_0() -> str:
+    return "idea_format_00045_pidgin_way_v0_0_0"
 
 
 def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
@@ -483,8 +483,8 @@ def idea_format_00116_tag_map1_v0_0_0() -> str:
     return "idea_format_00116_tag_map1_v0_0_0"
 
 
-def idea_format_00117_road_map1_v0_0_0() -> str:
-    return "idea_format_00117_road_map1_v0_0_0"
+def idea_format_00117_way_map1_v0_0_0() -> str:
+    return "idea_format_00117_way_map1_v0_0_0"
 
 
 def get_idea_format_filenames() -> set[str]:
@@ -514,7 +514,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00042_pidgin_label_v0_0_0(),
         idea_format_00043_pidgin_name_v0_0_0(),
         idea_format_00044_pidgin_tag_v0_0_0(),
-        idea_format_00045_pidgin_road_v0_0_0(),
+        idea_format_00045_pidgin_way_v0_0_0(),
         idea_format_00050_delete_bud_acct_membership_v0_0_0(),
         idea_format_00051_delete_bud_acctunit_v0_0_0(),
         idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
@@ -528,7 +528,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00113_acct_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
         idea_format_00116_tag_map1_v0_0_0(),
-        idea_format_00117_road_map1_v0_0_0(),
+        idea_format_00117_way_map1_v0_0_0(),
     }
 
 
@@ -595,37 +595,37 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "fisc_tag,offi_time": idea_format_00006_fisc_timeoffi_v0_0_0(),
         "fisc_tag,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label": idea_format_00012_membership_v0_0_0(),
-        "fisc_tag,owner_name,road,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
-        "fisc_tag,owner_name,road,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,way,mass,pledge": idea_format_00013_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,way,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_itemunit_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
         "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
-        "fisc_tag,owner_name,road,awardee_title,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
-        "fisc_tag,owner_name,road,fbase,fneed,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
-        "fisc_tag,owner_name,road,team_title": idea_format_00024_bud_item_teamlink_v0_0_0(),
-        "fisc_tag,owner_name,road,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
-        "fisc_tag,owner_name,road,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "fisc_tag,owner_name,road,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
-        "fisc_tag,owner_name,road,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,way,awardee_title,give_force,take_force": idea_format_00022_bud_item_awardlink_v0_0_0(),
+        "fisc_tag,owner_name,way,fbase,fneed,fopen,fnigh": idea_format_00023_bud_item_factunit_v0_0_0(),
+        "fisc_tag,owner_name,way,team_title": idea_format_00024_bud_item_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,way,healer_name": idea_format_00025_bud_item_healerlink_v0_0_0(),
+        "fisc_tag,owner_name,way,base,need,nigh,open,divisor": idea_format_00026_bud_item_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,way,base,base_item_active_requisite": idea_format_00027_bud_item_reasonunit_v0_0_0(),
+        "fisc_tag,owner_name,way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_itemunit_v0_0_0(),
         "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
-        "fisc_tag,owner_name,road,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "fisc_tag,owner_name,way,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word": idea_format_00042_pidgin_label_v0_0_0(),
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": idea_format_00043_pidgin_name_v0_0_0(),
         "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word": idea_format_00044_pidgin_tag_v0_0_0(),
-        "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word": idea_format_00045_pidgin_road_v0_0_0(),
+        "otx_way,inx_way,otx_bridge,inx_bridge,unknown_word": idea_format_00045_pidgin_way_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
         "fisc_tag,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        "fisc_tag,owner_name,road,awardee_title_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
-        "fisc_tag,owner_name,road,fbase_ERASE": idea_format_00053_delete_bud_item_factunit_v0_0_0(),
-        "fisc_tag,owner_name,road,team_title_ERASE": idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
-        "fisc_tag,owner_name,road,healer_name_ERASE": idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
-        "fisc_tag,owner_name,road,base,need_ERASE": idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
-        "fisc_tag,owner_name,road,base_ERASE": idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
-        "fisc_tag,owner_name,road_ERASE": idea_format_00058_delete_bud_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,way,awardee_title_ERASE": idea_format_00052_delete_bud_item_awardlink_v0_0_0(),
+        "fisc_tag,owner_name,way,fbase_ERASE": idea_format_00053_delete_bud_item_factunit_v0_0_0(),
+        "fisc_tag,owner_name,way,team_title_ERASE": idea_format_00054_delete_bud_item_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,way,healer_name_ERASE": idea_format_00055_delete_bud_item_healerlink_v0_0_0(),
+        "fisc_tag,owner_name,way,base,need_ERASE": idea_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,way,base_ERASE": idea_format_00057_delete_bud_item_reasonunit_v0_0_0(),
+        "fisc_tag,owner_name,way_ERASE": idea_format_00058_delete_bud_itemunit_v0_0_0(),
         "fisc_tag,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
         "fisc_tag,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
         "fisc_tag,owner_name,acct_name,otx_label,inx_label": idea_format_00115_group_map1_v0_0_0(),
         "fisc_tag,owner_name,acct_name,otx_tag,inx_tag": idea_format_00116_tag_map1_v0_0_0(),
-        "fisc_tag,owner_name,acct_name,otx_road,inx_road": idea_format_00117_road_map1_v0_0_0(),
+        "fisc_tag,owner_name,acct_name,otx_way,inx_way": idea_format_00117_way_map1_v0_0_0(),
     }
 
 
@@ -764,6 +764,6 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         },
         "pidgin_label": {"br00042", "br00115"},
         "pidgin_name": {"br00043", "br00113"},
-        "pidgin_road": {"br00045", "br00117"},
+        "pidgin_way": {"br00045", "br00117"},
         "pidgin_tag": {"br00044", "br00116"},
     }

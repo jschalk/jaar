@@ -175,7 +175,7 @@ def test_RiverGrade_get_dict_ReturnsObj():
     # THEN
     assert rivergrade_dict.get(fisc_tag_str()) == yao_hubunit.fisc_tag
     assert rivergrade_dict.get("healer_name") == yao_hubunit.owner_name
-    assert rivergrade_dict.get("keep_road") == yao_hubunit.keep_road
+    assert rivergrade_dict.get("keep_way") == yao_hubunit.keep_way
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
     assert rivergrade_dict.get("grant_amount") == x_grant_amount
     assert rivergrade_dict.get("debtor_rank_num") == x_debtor_rank_num
@@ -217,7 +217,7 @@ def test_RiverGrade_get_json_ReturnsObj():
   "fisc_tag": "ex_keep04",
   "grant_amount": null,
   "healer_name": "Yao",
-  "keep_road": null,
+  "keep_way": null,
   "rewards_count": null,
   "rewards_magnitude": null,
   "tax_bill_amount": null,

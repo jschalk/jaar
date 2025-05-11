@@ -1378,7 +1378,7 @@
                               }
                             }
                           },
-                          "go for parent_road": {
+                          "go for parent_way": {
                             "_kids": {
                               "maybe watch a video": {
                                 "_uid": 218,
@@ -1397,7 +1397,7 @@
                               }
                             },
                             "_uid": 214,
-                            "item_tag": "go for parent_road",
+                            "item_tag": "go for parent_way",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {

@@ -6,7 +6,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_pidgin_name_raw_to_name_agg,
     etl_pidgin_label_raw_to_label_agg,
     etl_pidgin_tag_raw_to_tag_agg,
-    etl_pidgin_road_raw_to_road_agg,
+    etl_pidgin_way_raw_to_way_agg,
     etl_brick_pidgin_raw_df_to_pidgin_agg_df,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -148,7 +148,7 @@ def test_etl_pidgin_label_raw_to_label_agg_Scenario0_CreatesFileFromSingleIdea(
     pandas_testing_assert_frame_equal(gen_label_agg_df, e1_label_agg_df)
 
 
-def test_etl_pidgin_road_raw_to_road_agg_Scenario0_CreatesFileFromSingleIdea(
+def test_etl_pidgin_way_raw_to_way_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -158,38 +158,38 @@ def test_etl_pidgin_road_raw_to_road_agg_Scenario0_CreatesFileFromSingleIdea(
     clean_otx = "fizz,casa,clean"
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
-    road_raw_str = "road_raw"
-    road_agg_str = "road_agg"
-    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
+    way_raw_str = "way_raw"
+    way_agg_str = "way_agg"
+    way_raw_columns = PidginPrimeColumns().pidgin_way_raw_columns
     bx = "br00xxx"
-    e1_road0 = [bx, event7, sue_str, casa_otx, casa_inx, None, None, None]
-    e1_road1 = [bx, event7, sue_str, clean_otx, clean_inx, None, None, None]
-    e1_road_rows = [e1_road0, e1_road1]
-    raw_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
+    e1_way0 = [bx, event7, sue_str, casa_otx, casa_inx, None, None, None]
+    e1_way1 = [bx, event7, sue_str, clean_otx, clean_inx, None, None, None]
+    e1_way_rows = [e1_way0, e1_way1]
+    raw_way_df = DataFrame(e1_way_rows, columns=way_raw_columns)
     x_brick_dir = get_module_temp_dir()
     pidgin_path = create_brick_pidgin_path(x_brick_dir)
-    upsert_sheet(pidgin_path, road_raw_str, raw_road_df)
+    upsert_sheet(pidgin_path, way_raw_str, raw_way_df)
     assert os_path_exists(pidgin_path)
-    assert sheet_exists(pidgin_path, road_raw_str)
-    assert sheet_exists(pidgin_path, road_agg_str) is False
+    assert sheet_exists(pidgin_path, way_raw_str)
+    assert sheet_exists(pidgin_path, way_agg_str) is False
 
     # WHEN
-    etl_pidgin_road_raw_to_road_agg(x_brick_dir)
+    etl_pidgin_way_raw_to_way_agg(x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    assert sheet_exists(pidgin_path, road_agg_str)
-    gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
-    print(f"{gen_road_agg_df=}")
-    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
-    assert list(gen_road_agg_df.columns) == road_agg_columns
-    assert len(gen_road_agg_df) == 2
+    assert sheet_exists(pidgin_path, way_agg_str)
+    gen_way_agg_df = pandas_read_excel(pidgin_path, sheet_name=way_agg_str)
+    print(f"{gen_way_agg_df=}")
+    way_agg_columns = PidginPrimeColumns().pidgin_way_agg_columns
+    assert list(gen_way_agg_df.columns) == way_agg_columns
+    assert len(gen_way_agg_df) == 2
     x_nan = float("nan")
-    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road_rows = [e1_road0, e1_road1]
-    e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
-    pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
+    e1_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_way_rows = [e1_way0, e1_way1]
+    e1_way_agg_df = DataFrame(e1_way_rows, columns=way_agg_columns)
+    pandas_testing_assert_frame_equal(gen_way_agg_df, e1_way_agg_df)
 
 
 def test_etl_pidgin_tag_raw_to_tag_agg_Scenario0_CreatesFileFromSingleIdea(
@@ -274,14 +274,14 @@ def test_etl_brick_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDi
     clean_otx = "fizz,casa,clean"
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
-    road_raw_str = "road_raw"
-    road_agg_str = "road_agg"
-    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
+    way_raw_str = "way_raw"
+    way_agg_str = "way_agg"
+    way_raw_columns = PidginPrimeColumns().pidgin_way_raw_columns
     bx = "br00xxx"
-    e1_road0 = [bx, event7, sue_str, casa_otx, casa_inx, None, None, None]
-    e1_road1 = [bx, event7, sue_str, clean_otx, clean_inx, None, None, None]
-    e1_road_rows = [e1_road0, e1_road1]
-    raw_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
+    e1_way0 = [bx, event7, sue_str, casa_otx, casa_inx, None, None, None]
+    e1_way1 = [bx, event7, sue_str, clean_otx, clean_inx, None, None, None]
+    e1_way_rows = [e1_way0, e1_way1]
+    raw_way_df = DataFrame(e1_way_rows, columns=way_raw_columns)
 
     t3am_otx = "t3am"
     t3am_inx = "t300"
@@ -301,16 +301,16 @@ def test_etl_brick_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDi
     pidgin_path = create_brick_pidgin_path(x_brick_dir)
     upsert_sheet(pidgin_path, name_raw_str, raw_name_df)
     upsert_sheet(pidgin_path, label_raw_str, raw_label_df)
-    upsert_sheet(pidgin_path, road_raw_str, raw_road_df)
+    upsert_sheet(pidgin_path, way_raw_str, raw_way_df)
     upsert_sheet(pidgin_path, tag_raw_str, raw_tag_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_raw_str)
     assert sheet_exists(pidgin_path, label_raw_str)
-    assert sheet_exists(pidgin_path, road_raw_str)
+    assert sheet_exists(pidgin_path, way_raw_str)
     assert sheet_exists(pidgin_path, tag_raw_str)
     assert sheet_exists(pidgin_path, name_agg_str) is False
     assert sheet_exists(pidgin_path, label_agg_str) is False
-    assert sheet_exists(pidgin_path, road_agg_str) is False
+    assert sheet_exists(pidgin_path, way_agg_str) is False
     assert sheet_exists(pidgin_path, tag_agg_str) is False
 
     # WHEN
@@ -320,11 +320,11 @@ def test_etl_brick_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDi
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_agg_str)
     assert sheet_exists(pidgin_path, label_agg_str)
-    assert sheet_exists(pidgin_path, road_agg_str)
+    assert sheet_exists(pidgin_path, way_agg_str)
     assert sheet_exists(pidgin_path, tag_agg_str)
     gen_name_agg_df = pandas_read_excel(pidgin_path, sheet_name=name_agg_str)
     gen_label_agg_df = pandas_read_excel(pidgin_path, sheet_name=label_agg_str)
-    gen_road_agg_df = pandas_read_excel(pidgin_path, sheet_name=road_agg_str)
+    gen_way_agg_df = pandas_read_excel(pidgin_path, sheet_name=way_agg_str)
     gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
 
     name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
@@ -344,13 +344,13 @@ def test_etl_brick_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDi
     e1_label_rows = [e1_label0, e1_label1]
     e1_label_agg_df = DataFrame(e1_label_rows, columns=label_agg_columns)
 
-    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
-    assert list(gen_road_agg_df.columns) == road_agg_columns
-    assert len(gen_road_agg_df) == 2
-    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road_rows = [e1_road0, e1_road1]
-    e1_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
+    way_agg_columns = PidginPrimeColumns().pidgin_way_agg_columns
+    assert list(gen_way_agg_df.columns) == way_agg_columns
+    assert len(gen_way_agg_df) == 2
+    e1_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_way_rows = [e1_way0, e1_way1]
+    e1_way_agg_df = DataFrame(e1_way_rows, columns=way_agg_columns)
 
     tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
     assert list(gen_tag_agg_df.columns) == tag_agg_columns
@@ -362,5 +362,5 @@ def test_etl_brick_pidgin_raw_df_to_pidgin_agg_df_Scenario0_CreatesFileWithAllDi
 
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
     pandas_testing_assert_frame_equal(gen_label_agg_df, e1_label_agg_df)
-    pandas_testing_assert_frame_equal(gen_road_agg_df, e1_road_agg_df)
+    pandas_testing_assert_frame_equal(gen_way_agg_df, e1_way_agg_df)
     pandas_testing_assert_frame_equal(gen_tag_agg_df, e1_tag_agg_df)

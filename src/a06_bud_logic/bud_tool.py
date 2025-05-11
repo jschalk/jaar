@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, get_net, RespectNum
-from src.a01_road_logic.road import AcctName, FiscTag, RoadUnit
+from src.a01_way_logic.way import AcctName, FiscTag, WayUnit
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, AwardLink
 from src.a05_item_logic.item import ItemUnit
@@ -33,62 +33,62 @@ def bud_acct_membership_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_itemunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_road = jkeys.get("road")
-    return False if x_bud is None else bool(x_bud.item_exists(x_road))
+    x_way = jkeys.get("way")
+    return False if x_bud is None else bool(x_bud.item_exists(x_way))
 
 
 def bud_item_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_awardee_title = jkeys.get("awardee_title")
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).awardlink_exists(x_awardee_title)
+        and x_bud.get_item_obj(x_way).awardlink_exists(x_awardee_title)
     )
 
 
 def bud_item_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_base = jkeys.get("base")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).reasonunit_exists(x_base)
+        and x_bud.get_item_obj(x_way).reasonunit_exists(x_base)
     )
 
 
 def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_base = jkeys.get("base")
     x_need = jkeys.get("need")
     return bool(
         bud_item_reasonunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).get_reasonunit(x_base).premise_exists(x_need)
+        and x_bud.get_item_obj(x_way).get_reasonunit(x_base).premise_exists(x_need)
     )
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_team_title = jkeys.get("team_title")
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).teamunit.teamlink_exists(x_team_title)
+        and x_bud.get_item_obj(x_way).teamunit.teamlink_exists(x_team_title)
     )
 
 
 def bud_item_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_healer_name = jkeys.get("healer_name")
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).healerlink.healer_name_exists(x_healer_name)
+        and x_bud.get_item_obj(x_way).healerlink.healer_name_exists(x_healer_name)
     )
 
 
 def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_fbase = jkeys.get("fbase")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_road).factunit_exists(x_fbase)
+        and x_bud.get_item_obj(x_way).factunit_exists(x_fbase)
     )
 
 
@@ -127,37 +127,37 @@ def bud_acct_membership_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> Member
 
 
 def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
-    x_road = jkeys.get("road")
-    return x_bud.get_item_obj(x_road)
+    x_way = jkeys.get("way")
+    return x_bud.get_item_obj(x_way)
 
 
 def bud_item_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_awardee_title = jkeys.get("awardee_title")
-    return x_bud.get_item_obj(x_road).get_awardlink(x_awardee_title)
+    return x_bud.get_item_obj(x_way).get_awardlink(x_awardee_title)
 
 
 def bud_item_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_base = jkeys.get("base")
-    return x_bud.get_item_obj(x_road).get_reasonunit(x_base)
+    return x_bud.get_item_obj(x_way).get_reasonunit(x_base)
 
 
 def bud_item_reason_premiseunit_get_obj(
     x_bud: BudUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_base = jkeys.get("base")
     x_need = jkeys.get("need")
-    return x_bud.get_item_obj(x_road).get_reasonunit(x_base).get_premise(x_need)
+    return x_bud.get_item_obj(x_way).get_reasonunit(x_base).get_premise(x_need)
 
 
 def bud_item_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
-    x_road = jkeys.get("road")
+    x_way = jkeys.get("way")
     x_fbase = jkeys.get("fbase")
     print(f"{x_fbase=}")
-    print(f"{x_bud.get_item_obj(x_road).factunits=}")
-    return x_bud.get_item_obj(x_road).factunits.get(x_fbase)
+    print(f"{x_bud.get_item_obj(x_way).factunits=}")
+    return x_bud.get_item_obj(x_way).factunits.get(x_fbase)
 
 
 def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
@@ -245,11 +245,11 @@ def get_credit_ledger(x_bud: BudUnit) -> dict[AcctUnit, RespectNum]:
     return credit_ledger
 
 
-def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[RoadUnit, dict[str,]]:
+def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[WayUnit, dict[str,]]:
     return x_bud.get_factunits_dict()
 
 
-def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[RoadUnit, dict]):
+def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayUnit, dict]):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
     missing_fact_bases = set(x_bud.get_missing_fact_bases().keys())
     not_missing_fact_bases = set(x_bud.get_factunits_dict().keys())

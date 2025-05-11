@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import create_road
+from src.a01_way_logic.way import create_way
 from src.a12_hub_tools.hub_tool import save_job_file
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic._utils.example_listen_buds import (
@@ -59,8 +59,8 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
 ):
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road("accord23", nation_str)
-    iowa_road = create_road(nation_road, "Iowa")
+    nation_way = create_way("accord23", nation_str)
+    iowa_way = create_way(nation_way, "Iowa")
     a23_str = "accord23"
 
     bob_str = "Bob"
@@ -68,11 +68,11 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
     yao_budunit = get_budunit_with_4_levels()
     yao_budunit.set_owner_name(yao_str)
 
-    bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_road)
+    bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_way)
     bob_iowa_hubunit.save_plan_bud(yao_budunit)
 
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_way)
 
     # WHEN
     perspective_budunit = sue_hubunit.rj_perspective_bud(bob_str, yao_str)

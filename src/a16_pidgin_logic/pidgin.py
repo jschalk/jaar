@@ -3,26 +3,26 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     get_dict_from_json,
 )
-from src.a01_road_logic.road import default_bridge_if_None, OwnerName, EventInt
+from src.a01_way_logic.way import default_bridge_if_None, OwnerName, EventInt
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
     MapCore,
     LabelMap,
     NameMap,
     TagMap,
-    RoadMap,
+    WayMap,
     labelmap_shop,
     namemap_shop,
     tagmap_shop,
-    roadmap_shop,
+    waymap_shop,
     get_namemap_from_dict,
     get_labelmap_from_dict,
     get_tagmap_from_dict,
-    get_roadmap_from_dict,
+    get_waymap_from_dict,
     inherit_namemap,
     inherit_labelmap,
     inherit_tagmap,
-    inherit_roadmap,
+    inherit_waymap,
 )
 from dataclasses import dataclass
 
@@ -32,7 +32,7 @@ class check_attrException(Exception):
 
 
 def pidginable_class_types() -> set:
-    return {"NameUnit", "LabelUnit", "TagUnit", "RoadUnit"}
+    return {"NameUnit", "LabelUnit", "TagUnit", "WayUnit"}
 
 
 def pidginable_atom_args() -> set:
@@ -51,7 +51,7 @@ def pidginable_atom_args() -> set:
         "month_tag",
         "need",
         "owner_name",
-        "road",
+        "way",
         "team_title",
         "timeline_tag",
         "weekday_tag",
@@ -63,7 +63,7 @@ class PidginUnit:
     """Per face object that translates any translatable str.
     otx is the reference for the outside, what the face says
     inx is the reference for the inside, what the same inteprets from the face
-    Contains a mapunit for each translatable type: RoadUnit, NameUnit, LabelUnit...
+    Contains a mapunit for each translatable type: WayUnit, NameUnit, LabelUnit...
     """
 
     event_int: EventInt = None
@@ -71,7 +71,7 @@ class PidginUnit:
     labelmap: LabelMap = None
     namemap: NameMap = None
     tagmap: TagMap = None
-    roadmap: RoadMap = None
+    waymap: WayMap = None
     unknown_word: str = None  # pidginunit heart
     otx_bridge: str = None  # pidginunit heart
     inx_bridge: str = None  # pidginunit heart
@@ -102,8 +102,8 @@ class PidginUnit:
             return self.labelmap
         elif x_class_type == "TagUnit":
             return self.tagmap
-        elif x_class_type == "RoadUnit":
-            return self.roadmap
+        elif x_class_type == "WayUnit":
+            return self.waymap
 
     def set_namemap(self, x_namemap: NameMap):
         self._check_all_core_attrs_match(x_namemap)
@@ -143,24 +143,24 @@ class PidginUnit:
     def del_tag(self, otx_tag: str):
         return self.tagmap.del_otx2inx(otx_tag)
 
-    def set_roadmap(self, x_roadmap: RoadMap):
-        self._check_all_core_attrs_match(x_roadmap)
-        self.roadmap = x_roadmap
+    def set_waymap(self, x_waymap: WayMap):
+        self._check_all_core_attrs_match(x_waymap)
+        self.waymap = x_waymap
 
-    def get_roadmap(self) -> RoadMap:
-        return self.roadmap
+    def get_waymap(self) -> WayMap:
+        return self.waymap
 
-    def set_road(self, otx_road: str, inx_road: str):
-        self.roadmap.set_otx2inx(otx_road, inx_road)
+    def set_way(self, otx_way: str, inx_way: str):
+        self.waymap.set_otx2inx(otx_way, inx_way)
 
-    def road_exists(self, otx_road: str, inx_road: str):
-        return self.roadmap.otx2inx_exists(otx_road, inx_road)
+    def way_exists(self, otx_way: str, inx_way: str):
+        return self.waymap.otx2inx_exists(otx_way, inx_way)
 
-    def _get_inx_road(self, otx_road: str):
-        return self.roadmap._get_inx_value(otx_road)
+    def _get_inx_way(self, otx_way: str):
+        return self.waymap._get_inx_value(otx_way)
 
-    def del_road(self, otx_road: str):
-        return self.roadmap.del_otx2inx(otx_road)
+    def del_way(self, otx_way: str):
+        return self.waymap.del_otx2inx(otx_way)
 
     def _check_all_core_attrs_match(self, x_mapcore: MapCore):
         self._check_attr_match("face_name", x_mapcore)
@@ -180,70 +180,70 @@ class PidginUnit:
             self.namemap.is_valid()
             and self.labelmap.is_valid()
             and self.tagmap.is_valid()
-            and self.roadmap.is_valid()
+            and self.waymap.is_valid()
         )
 
     def set_otx2inx(self, x_class_type: str, x_otx: str, x_inx: str):
-        """class_type: NameUnit, LabelUnit, TagUnit, RoadUnit"""
+        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
         if x_class_type == "NameUnit":
             self.namemap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "LabelUnit":
             self.labelmap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "TagUnit":
             self.tagmap.set_otx2inx(x_otx, x_inx)
-        elif x_class_type == "RoadUnit":
-            self.roadmap.set_otx2inx(x_otx, x_inx)
+        elif x_class_type == "WayUnit":
+            self.waymap.set_otx2inx(x_otx, x_inx)
 
     def _get_inx_value(self, x_class_type: str, x_otx: str) -> str:
-        """class_type: NameUnit, LabelUnit, TagUnit, RoadUnit"""
+        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
         if x_class_type == "NameUnit":
             return self.namemap._get_inx_value(x_otx)
         elif x_class_type == "LabelUnit":
             return self.labelmap._get_inx_value(x_otx)
         elif x_class_type == "TagUnit":
             return self.tagmap._get_inx_value(x_otx)
-        elif x_class_type == "RoadUnit":
-            return self.roadmap._get_inx_value(x_otx)
+        elif x_class_type == "WayUnit":
+            return self.waymap._get_inx_value(x_otx)
 
     def otx2inx_exists(self, x_class_type: str, x_otx: str, x_inx: str) -> bool:
-        """class_type: NameUnit, LabelUnit, TagUnit, RoadUnit"""
+        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
         if x_class_type == "NameUnit":
             return self.namemap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "LabelUnit":
             return self.labelmap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "TagUnit":
             return self.tagmap.otx2inx_exists(x_otx, x_inx)
-        elif x_class_type == "RoadUnit":
-            return self.roadmap.otx2inx_exists(x_otx, x_inx)
+        elif x_class_type == "WayUnit":
+            return self.waymap.otx2inx_exists(x_otx, x_inx)
 
     def del_otx2inx(self, x_class_type: str, x_otx: str):
-        """class_type: NameUnit, LabelUnit, TagUnit, RoadUnit"""
+        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
         if x_class_type == "NameUnit":
             self.namemap.del_otx2inx(x_otx)
         elif x_class_type == "LabelUnit":
             self.labelmap.del_otx2inx(x_otx)
         elif x_class_type == "TagUnit":
             self.tagmap.del_otx2inx(x_otx)
-        elif x_class_type == "RoadUnit":
-            self.roadmap.del_otx2inx(x_otx)
+        elif x_class_type == "WayUnit":
+            self.waymap.del_otx2inx(x_otx)
 
     def set_tag(self, x_otx: str, x_inx: str):
-        self.roadmap.set_tag(x_otx, x_inx)
+        self.waymap.set_tag(x_otx, x_inx)
 
     def _get_inx_tag(self, x_otx: str) -> str:
-        return self.roadmap._get_inx_tag(x_otx)
+        return self.waymap._get_inx_tag(x_otx)
 
     def tag_exists(self, x_otx: str, x_inx: str) -> bool:
-        return self.roadmap.tag_exists(x_otx, x_inx)
+        return self.waymap.tag_exists(x_otx, x_inx)
 
     def del_tag(self, x_otx: str):
-        self.roadmap.del_tag(x_otx)
+        self.waymap.del_tag(x_otx)
 
     def get_dict(self) -> dict:
         x_namemap = _get_rid_of_pidgin_core_keys(self.namemap.get_dict())
         x_labelmap = _get_rid_of_pidgin_core_keys(self.labelmap.get_dict())
         x_tagmap = _get_rid_of_pidgin_core_keys(self.tagmap.get_dict())
-        x_roadmap = _get_rid_of_pidgin_core_keys(self.roadmap.get_dict())
+        x_waymap = _get_rid_of_pidgin_core_keys(self.waymap.get_dict())
 
         return {
             "face_name": self.face_name,
@@ -254,7 +254,7 @@ class PidginUnit:
             "namemap": x_namemap,
             "tagmap": x_tagmap,
             "labelmap": x_labelmap,
-            "roadmap": x_roadmap,
+            "waymap": x_waymap,
         }
 
     def get_json(self) -> str:
@@ -293,7 +293,7 @@ def pidginunit_shop(
         inx_bridge=inx_bridge,
         unknown_word=unknown_word,
     )
-    x_roadmap = roadmap_shop(
+    x_waymap = waymap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
@@ -311,7 +311,7 @@ def pidginunit_shop(
         namemap=x_namemap,
         labelmap=x_labelmap,
         tagmap=x_tagmap,
-        roadmap=x_roadmap,
+        waymap=x_waymap,
     )
 
 
@@ -324,7 +324,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     namemap_dict = x_dict.get("namemap")
     labelmap_dict = x_dict.get("labelmap")
     tagmap_dict = x_dict.get("tagmap")
-    roadmap_dict = x_dict.get("roadmap")
+    waymap_dict = x_dict.get("waymap")
     namemap_dict = _add_pidgin_core_keys(
         namemap_dict,
         x_event_int,
@@ -349,8 +349,8 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_inx_bridge,
         x_unknown_word,
     )
-    roadmap_dict = _add_pidgin_core_keys(
-        roadmap_dict,
+    waymap_dict = _add_pidgin_core_keys(
+        waymap_dict,
         x_event_int,
         x_face_name,
         x_otx_bridge,
@@ -360,8 +360,8 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_namemap = get_namemap_from_dict(namemap_dict)
     x_labelmap = get_labelmap_from_dict(labelmap_dict)
     x_tagmap = get_tagmap_from_dict(tagmap_dict)
-    x_roadmap = get_roadmap_from_dict(roadmap_dict)
-    x_roadmap.tagmap = x_tagmap
+    x_waymap = get_waymap_from_dict(waymap_dict)
+    x_waymap.tagmap = x_tagmap
     return PidginUnit(
         face_name=x_face_name,
         event_int=x_event_int,
@@ -371,7 +371,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         namemap=x_namemap,
         labelmap=x_labelmap,
         tagmap=x_tagmap,
-        roadmap=x_roadmap,
+        waymap=x_waymap,
     )
 
 
@@ -421,6 +421,6 @@ def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
     newer.set_namemap(inherit_namemap(newer.namemap, older.namemap))
     newer.set_labelmap(inherit_labelmap(newer.labelmap, older.labelmap))
     newer.set_tagmap(inherit_tagmap(newer.tagmap, older.tagmap))
-    newer.set_roadmap(inherit_roadmap(newer.roadmap, older.roadmap))
+    newer.set_waymap(inherit_waymap(newer.waymap, older.waymap))
 
     return newer

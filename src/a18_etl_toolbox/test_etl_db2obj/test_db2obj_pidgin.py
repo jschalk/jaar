@@ -2,7 +2,7 @@
 # from src.a16_pidgin_logic._utils.str_a16 import (
 #     pidgin_label_str,
 #     pidgin_name_str,
-#     pidgin_road_str,
+#     pidgin_way_str,
 #     pidgin_tag_str,
 #     pidgin_core_str,
 # )
@@ -29,7 +29,7 @@
 # #     "labelmap": {
 # #         "otx2inx": {},
 # #     },
-# #     "roadmap": {
+# #     "waymap": {
 # #         "otx2inx": {},
 # #     },
 # # }

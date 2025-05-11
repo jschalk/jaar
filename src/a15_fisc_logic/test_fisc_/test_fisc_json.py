@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_file, create_path
-from src.a01_road_logic.road import default_bridge_if_None
+from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
     default_respect_bit_if_None,

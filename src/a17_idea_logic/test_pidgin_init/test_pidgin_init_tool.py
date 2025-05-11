@@ -2,9 +2,9 @@ from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
 from src.a06_bud_logic._utils.str_a06 import (
     type_NameUnit_str,
     type_TagUnit_str,
-    type_RoadUnit_str,
+    type_WayUnit_str,
     type_LabelUnit_str,
-    road_str,
+    way_str,
     face_name_str,
     event_int_str,
     type_NameUnit_str,
@@ -23,7 +23,7 @@ from src.a16_pidgin_logic._utils.env_a16 import (
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
     get_casa_maison_pidginunit_set_by_tag,
-    get_casa_maison_road_otx2inx_dt,
+    get_casa_maison_way_otx2inx_dt,
     get_casa_maison_tag_dt,
     get_slash_namemap,
     get_sue_pidginunit,
@@ -34,17 +34,17 @@ from src.a17_idea_logic.pidgin_toolbox import (
     get_pidgin_name_dt_columns,
     get_pidgin_label_dt_columns,
     get_pidgin_tag_dt_columns,
-    get_pidgin_road_dt_columns,
+    get_pidgin_way_dt_columns,
     create_pidgin_name_dt,
     create_pidgin_label_dt,
     create_pidgin_tag_dt,
-    create_pidgin_road_dt,
+    create_pidgin_way_dt,
     create_pidgin_tag_dt,
     save_all_csvs_from_pidginunit,
     _load_namemap_from_csv,
     _load_labelmap_from_csv,
     _load_tagmap_from_csv,
-    _load_roadmap_from_csv,
+    _load_waymap_from_csv,
     _save_pidgin_tag_csv,
     create_dir_valid_empty_pidginunit,
     init_pidginunit_from_dir,
@@ -107,41 +107,41 @@ def test_get_pidgin_tag_dt_columns_ReturnsObj():
     assert set(get_pidgin_tag_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_pidgin_road_dt_columns_ReturnsObj():
+def test_get_pidgin_way_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_pidgin_road_dt_columns()
-    assert len(get_pidgin_road_dt_columns()) == 7
+    assert get_pidgin_way_dt_columns()
+    assert len(get_pidgin_way_dt_columns()) == 7
     static_list = [
         event_int_str(),
         face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
-        "otx_road",
-        "inx_road",
+        "otx_way",
+        "inx_way",
     ]
-    assert get_pidgin_road_dt_columns() == static_list
-    assert set(get_pidgin_road_dt_columns()).issubset(set(sorting_columns()))
+    assert get_pidgin_way_dt_columns() == static_list
+    assert set(get_pidgin_way_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_create_pidgin_road_dt_ReturnsObj():
+def test_create_pidgin_way_dt_ReturnsObj():
     # ESTABLISH
     casa_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
-    casa_mapunit = casa_pidginunit.get_roadmap()
+    casa_mapunit = casa_pidginunit.get_waymap()
 
     # WHEN
-    casa_dataframe = create_pidgin_road_dt(casa_mapunit)
+    casa_dataframe = create_pidgin_way_dt(casa_mapunit)
     print(f"{casa_dataframe=}")
 
     # THEN
-    assert list(casa_dataframe.columns) == get_pidgin_road_dt_columns()
+    assert list(casa_dataframe.columns) == get_pidgin_way_dt_columns()
     assert len(casa_dataframe) == 4
     casa_csv = get_ordered_csv(casa_dataframe)
-    print(f"{get_pidgin_road_dt_columns()=}")
+    print(f"{get_pidgin_way_dt_columns()=}")
     print(f"{casa_dataframe.columns=}")
     print(casa_csv)
-    print(get_ordered_csv(get_casa_maison_road_otx2inx_dt()))
-    assert casa_csv == get_ordered_csv(get_casa_maison_road_otx2inx_dt())
+    print(get_ordered_csv(get_casa_maison_way_otx2inx_dt()))
+    assert casa_csv == get_ordered_csv(get_casa_maison_way_otx2inx_dt())
 
 
 def test_create_pidgin_tag_dt_ReturnsObj():
@@ -173,15 +173,15 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     name_filename = "name.csv"
     label_filename = "label.csv"
     tag_filename = "tag.csv"
-    road_filename = "road.csv"
+    way_filename = "way.csv"
     name_csv_path = create_path(map_dir, name_filename)
     group_csv_path = create_path(map_dir, label_filename)
     tag_csv_path = create_path(map_dir, tag_filename)
-    road_csv_path = create_path(map_dir, road_filename)
+    way_csv_path = create_path(map_dir, way_filename)
     assert os_path_exists(name_csv_path) is False
     assert os_path_exists(group_csv_path) is False
     assert os_path_exists(tag_csv_path) is False
-    assert os_path_exists(road_csv_path) is False
+    assert os_path_exists(way_csv_path) is False
     assert len(get_dir_file_strs(map_dir)) == 0
 
     # WHEN
@@ -191,7 +191,7 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     assert os_path_exists(name_csv_path)
     assert os_path_exists(group_csv_path)
     assert os_path_exists(tag_csv_path)
-    assert os_path_exists(road_csv_path)
+    assert os_path_exists(way_csv_path)
     assert len(get_dir_file_strs(map_dir)) == 4
 
 
@@ -325,51 +325,51 @@ def test_load_tagmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     assert len(sue_tagmap.otx2inx) == 0
 
 
-def test_load_roadmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_waymap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
-    road_filename = "road.csv"
-    road_csv_path = create_path(map_dir, road_filename)
+    way_filename = "way.csv"
+    way_csv_path = create_path(map_dir, way_filename)
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
-    assert os_path_exists(road_csv_path)
+    assert os_path_exists(way_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_roadmap = empty_pidginunit.get_mapunit(type_RoadUnit_str())
-    sue_roadmap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_roadmap=}")
-    assert len(sue_roadmap.otx2inx) == 0
+    sue_waymap = empty_pidginunit.get_mapunit(type_WayUnit_str())
+    sue_waymap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_waymap=}")
+    assert len(sue_waymap.otx2inx) == 0
 
     # WHEN
-    sue_roadmap = _load_roadmap_from_csv(map_dir, sue_roadmap)
+    sue_waymap = _load_waymap_from_csv(map_dir, sue_waymap)
 
     # THEN
-    assert len(sue_roadmap.otx2inx) == 2
-    ex_roadmap = sue_pidginunit.get_mapunit(type_RoadUnit_str())
-    assert ex_roadmap.event_int == sue_roadmap.event_int
-    assert ex_roadmap.face_name == sue_roadmap.face_name
-    assert ex_roadmap.otx2inx == sue_roadmap.otx2inx
-    assert ex_roadmap.tagmap != sue_roadmap.tagmap
+    assert len(sue_waymap.otx2inx) == 2
+    ex_waymap = sue_pidginunit.get_mapunit(type_WayUnit_str())
+    assert ex_waymap.event_int == sue_waymap.event_int
+    assert ex_waymap.face_name == sue_waymap.face_name
+    assert ex_waymap.otx2inx == sue_waymap.otx2inx
+    assert ex_waymap.tagmap != sue_waymap.tagmap
 
 
-def test_load_roadmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
+def test_load_waymap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
-    road_filename = "road.csv"
-    road_csv_path = create_path(map_dir, road_filename)
-    assert os_path_exists(road_csv_path) is False
+    way_filename = "way.csv"
+    way_csv_path = create_path(map_dir, way_filename)
+    assert os_path_exists(way_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_roadmap = empty_pidginunit.get_mapunit(type_RoadUnit_str())
-    sue_roadmap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_roadmap=}")
-    assert len(sue_roadmap.otx2inx) == 0
+    sue_waymap = empty_pidginunit.get_mapunit(type_WayUnit_str())
+    sue_waymap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_waymap=}")
+    assert len(sue_waymap.otx2inx) == 0
 
     # WHEN
-    sue_roadmap = _load_roadmap_from_csv(map_dir, sue_roadmap)
+    sue_waymap = _load_waymap_from_csv(map_dir, sue_waymap)
 
     # THEN
-    assert len(sue_roadmap.otx2inx) == 0
+    assert len(sue_waymap.otx2inx) == 0
 
 
 def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
@@ -455,6 +455,6 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
     assert gen_pidginunit.namemap == sue_pidginunit.namemap
     assert gen_pidginunit.labelmap == sue_pidginunit.labelmap
     assert gen_pidginunit.tagmap == sue_pidginunit.tagmap
-    assert gen_pidginunit.roadmap.tagmap == sue_pidginunit.roadmap.tagmap
-    assert gen_pidginunit.roadmap == sue_pidginunit.roadmap
+    assert gen_pidginunit.waymap.tagmap == sue_pidginunit.waymap.tagmap
+    assert gen_pidginunit.waymap == sue_pidginunit.waymap
     assert gen_pidginunit == sue_pidginunit

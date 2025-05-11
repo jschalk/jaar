@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import to_road
+from src.a01_way_logic.way import to_way
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.example_buds import (
@@ -9,8 +9,8 @@ from src.a06_bud_logic._utils.example_buds import (
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     assert not root_item.begin
     assert not root_item.close
     assert not root_item._gogo_calc
@@ -29,8 +29,8 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Un
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_DoesNotErrorWhenNoMathTags():
     # ESTABLISH
     yao_bud = get_budunit_with_4_levels_and_2reasons()
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     assert not root_item._gogo_calc
 
     # WHEM
@@ -43,12 +43,12 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Do
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_SimpleTag():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_tag)
     time0_begin = 7
     time0_close = 31
-    yao_bud.edit_item_attr(root_road, begin=time0_begin, close=time0_close)
+    yao_bud.edit_item_attr(root_way, begin=time0_begin, close=time0_close)
     yao_bud._set_item_dict()
-    root_item = yao_bud.get_item_obj(root_road)
+    root_item = yao_bud.get_item_obj(root_way)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert not root_item._gogo_calc
@@ -67,17 +67,17 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Si
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TagWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_tag)
     time0_begin = 6
     time0_close = 21
     time0_denom = 3
     yao_bud.edit_item_attr(
-        root_road,
+        root_way,
         begin=time0_begin,
         close=time0_close,
         denom=time0_denom,
     )
-    root_item = yao_bud.get_item_obj(root_road)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
@@ -100,19 +100,19 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Ta
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TagWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_tag)
     time0_begin = 6
     time0_close = 18
     time0_numor = 7
     time0_denom = 3
     yao_bud.edit_item_attr(
-        root_road,
+        root_way,
         begin=time0_begin,
         close=time0_close,
         numor=time0_numor,
         denom=time0_denom,
     )
-    root_item = yao_bud.get_item_obj(root_road)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
@@ -136,18 +136,18 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Ta
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TagWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_tag)
     time0_begin = 6
     time0_close = 18
     time0_addin = 7
     yao_bud.edit_item_attr(
-        root_road,
+        root_way,
         begin=time0_begin,
         close=time0_close,
         addin=time0_addin,
     )
     yao_bud._set_item_dict()
-    root_item = yao_bud.get_item_obj(root_road)
+    root_item = yao_bud.get_item_obj(root_way)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert root_item.addin == time0_addin
@@ -169,20 +169,20 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Ta
 def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_TagWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_tag)
     time0_begin = 6
     time0_close = 18
     time0_denom = 3
     time0_addin = 60
     yao_bud.edit_item_attr(
-        root_road,
+        root_way,
         begin=time0_begin,
         close=time0_close,
         denom=time0_denom,
         addin=time0_addin,
     )
     yao_bud._set_item_dict()
-    root_item = yao_bud.get_item_obj(root_road)
+    root_item = yao_bud.get_item_obj(root_way)
     assert root_item.begin == time0_begin
     assert root_item.close == time0_close
     assert root_item.denom == time0_denom
@@ -205,19 +205,19 @@ def test_BudUnit_set_itemtree_range_attrs_SetsInitialItem_gogo_calc_stop_calc_Ta
 def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_Simple0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_road = to_road(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_tag)
     time0_str = "time0"
-    time0_road = yao_bud.make_l1_road(time0_str)
+    time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 7
     time0_close = 31
     time0_item = itemunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_item(time0_item)
 
     time1_str = "time1"
-    time1_road = yao_bud.make_road(time0_road, time1_str)
-    yao_bud.set_item(itemunit_shop(time1_str), time0_road)
-    time1_item = yao_bud.get_item_obj(time1_road)
-    root_item = yao_bud.get_item_obj(root_road)
+    time1_way = yao_bud.make_way(time0_way, time1_str)
+    yao_bud.set_item(itemunit_shop(time1_str), time0_way)
+    time1_item = yao_bud.get_item_obj(time1_way)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -239,14 +239,14 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     assert not time1_item.close
     assert time1_item._gogo_calc == time0_begin
     assert time1_item._stop_calc == time0_close
-    assert yao_bud._range_inheritors == {time1_road: time0_road}
+    assert yao_bud._range_inheritors == {time1_way: time0_way}
 
 
 def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_TagWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
-    time0_road = yao_bud.make_l1_road(time0_str)
+    time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 14
     time0_close = 35
     time0_item = itemunit_shop(time0_str, begin=time0_begin, close=time0_close)
@@ -254,11 +254,11 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
 
     time1_str = "time1"
     time1_denom = 7
-    time1_road = yao_bud.make_road(time0_road, time1_str)
-    yao_bud.set_item(itemunit_shop(time1_str, denom=time1_denom), time0_road)
-    time1_item = yao_bud.get_item_obj(time1_road)
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    time1_way = yao_bud.make_way(time0_way, time1_str)
+    yao_bud.set_item(itemunit_shop(time1_str, denom=time1_denom), time0_way)
+    time1_item = yao_bud.get_item_obj(time1_way)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -285,7 +285,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
-    time0_road = yao_bud.make_l1_road(time0_str)
+    time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 14
     time0_close = 35
     time0_item = itemunit_shop(time0_str, begin=time0_begin, close=time0_close)
@@ -294,12 +294,12 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     time1_str = "time1"
     time1_denom = 7
     time1_numor = 3
-    time1_road = yao_bud.make_road(time0_road, time1_str)
+    time1_way = yao_bud.make_way(time0_way, time1_str)
     temp_item = itemunit_shop(time1_str, numor=time1_numor, denom=time1_denom)
-    yao_bud.set_item(temp_item, time0_road)
-    time1_item = yao_bud.get_item_obj(time1_road)
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    yao_bud.set_item(temp_item, time0_way)
+    time1_item = yao_bud.get_item_obj(time1_way)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -326,7 +326,7 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
-    time0_road = yao_bud.make_l1_road(time0_str)
+    time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 3
     time0_close = 7
     time0_item = itemunit_shop(time0_str, begin=time0_begin, close=time0_close)
@@ -334,12 +334,12 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
 
     time1_str = "time1"
     time1_addin = 5
-    time1_road = yao_bud.make_road(time0_road, time1_str)
+    time1_way = yao_bud.make_way(time0_way, time1_str)
     temp_item = itemunit_shop(time1_str, addin=time1_addin)
-    yao_bud.set_item(temp_item, time0_road)
-    time1_item = yao_bud.get_item_obj(time1_road)
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    yao_bud.set_item(temp_item, time0_way)
+    time1_item = yao_bud.get_item_obj(time1_way)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -367,23 +367,23 @@ def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_st
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
-    time0_road = yao_bud.make_l1_road(time0_str)
+    time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 3
     time0_close = 7
     time0_item = itemunit_shop(time0_str, begin=time0_begin, close=time0_close)
     yao_bud.set_l1_item(time0_item)
 
     time1_str = "time1"
-    time1_road = yao_bud.make_road(time0_road, time1_str)
-    yao_bud.add_item(time1_road)
+    time1_way = yao_bud.make_way(time0_way, time1_str)
+    yao_bud.add_item(time1_way)
     time2_str = "time2"
-    time2_road = yao_bud.make_road(time1_road, time2_str)
+    time2_way = yao_bud.make_way(time1_way, time2_str)
     time2_addin = 5
     x_time2_item = itemunit_shop(time2_str, addin=time2_addin)
-    yao_bud.set_item(x_time2_item, time1_road)
-    time2_item = yao_bud.get_item_obj(time2_road)
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    yao_bud.set_item(x_time2_item, time1_way)
+    time2_item = yao_bud.get_item_obj(time2_way)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
@@ -406,14 +406,14 @@ def test_BudUnit_set_itemtree_range_attrs_Sets2LevelsDescendentItem_gogo_calc_st
     assert time2_item._stop_calc == time0_item._stop_calc + time2_addin
     assert time2_item._gogo_calc == 8
     assert time2_item._stop_calc == 12
-    assert yao_bud._range_inheritors == {time1_road: time0_road, time2_road: time0_road}
+    assert yao_bud._range_inheritors == {time1_way: time0_way, time2_way: time0_way}
 
 
 def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc_TagWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
-    time0_road = yao_bud.make_l1_road(time0_str)
+    time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 21
     time0_close = 35
     time0_item = itemunit_shop(time0_str, begin=time0_begin, close=time0_close)
@@ -422,12 +422,12 @@ def test_BudUnit_set_itemtree_range_attrs_SetsDescendentItem_gogo_calc_stop_calc
     time1_str = "time1"
     time1_addin = 70
     time1_denom = 7
-    time1_road = yao_bud.make_road(time0_road, time1_str)
+    time1_way = yao_bud.make_way(time0_way, time1_str)
     temp_item = itemunit_shop(time1_str, denom=time1_denom, addin=time1_addin)
-    yao_bud.set_item(temp_item, time0_road)
-    time1_item = yao_bud.get_item_obj(time1_road)
-    root_road = to_road(yao_bud.fisc_tag)
-    root_item = yao_bud.get_item_obj(root_road)
+    yao_bud.set_item(temp_item, time0_way)
+    time1_item = yao_bud.get_item_obj(time1_way)
+    root_way = to_way(yao_bud.fisc_tag)
+    root_item = yao_bud.get_item_obj(root_way)
     yao_bud._set_item_dict()
     assert not root_item._gogo_calc
     assert not root_item._stop_calc

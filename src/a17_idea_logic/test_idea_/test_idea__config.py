@@ -33,7 +33,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fneed_str,
     group_label_str,
     healer_name_str,
-    road_str,
+    way_str,
     numor_str,
     team_title_str,
     close_str,
@@ -114,8 +114,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     unknown_word_str,
     otx_tag_str,
     inx_tag_str,
-    otx_road_str,
-    inx_road_str,
+    otx_way_str,
+    inx_way_str,
     otx_name_str,
     inx_name_str,
     otx_label_str,
@@ -124,7 +124,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_name_str,
     pidgin_label_str,
     pidgin_tag_str,
-    pidgin_road_str,
+    pidgin_way_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
@@ -234,8 +234,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[21] == get_delete_key_name(acct_name_str())
     assert table_sorting_priority[22] == group_label_str()
     assert table_sorting_priority[23] == get_delete_key_name(group_label_str())
-    assert table_sorting_priority[24] == road_str()
-    assert table_sorting_priority[25] == get_delete_key_name(road_str())
+    assert table_sorting_priority[24] == way_str()
+    assert table_sorting_priority[25] == get_delete_key_name(way_str())
     assert table_sorting_priority[26] == base_str()
     assert table_sorting_priority[27] == get_delete_key_name(base_str())
     assert table_sorting_priority[28] == fbase_str()
@@ -285,8 +285,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[72] == amount_str()
     assert table_sorting_priority[73] == otx_tag_str()
     assert table_sorting_priority[74] == inx_tag_str()
-    assert table_sorting_priority[75] == otx_road_str()
-    assert table_sorting_priority[76] == inx_road_str()
+    assert table_sorting_priority[75] == otx_way_str()
+    assert table_sorting_priority[76] == inx_way_str()
     assert table_sorting_priority[77] == otx_name_str()
     assert table_sorting_priority[78] == inx_name_str()
     assert table_sorting_priority[79] == otx_label_str()
@@ -370,7 +370,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
-    assert sqlite_types.get(road_str()) == "TEXT"
+    assert sqlite_types.get(way_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("fneed") == "TEXT"
@@ -488,7 +488,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert pidgin_name_str() in idea_config_dimens
     assert pidgin_label_str() in idea_config_dimens
     assert pidgin_tag_str() in idea_config_dimens
-    assert pidgin_road_str() in idea_config_dimens
+    assert pidgin_way_str() in idea_config_dimens
     assert get_bud_dimens().issubset(idea_config_dimens)
     assert get_fisc_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
@@ -500,7 +500,7 @@ def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
     fisc_config_dict = get_fisc_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
-    # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
+    # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
         print(f"{idea_dimen=}")
         assert idea_dict.get(idea_category_str()) in get_idea_categorys()
@@ -529,7 +529,7 @@ def _validate_idea_config(x_idea_config: dict):
             pidgin_label_str(),
             pidgin_name_str(),
             pidgin_tag_str(),
-            pidgin_road_str(),
+            pidgin_way_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
@@ -667,7 +667,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
     valid_idea_dimens.update(get_pidgin_dimens())
     config_dict = get_idea_config_dict()
 
-    # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
+    # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     idea_numbers_set = set()
     for idea_filename in idea_filenames:
         ref_dict = get_idearef_from_file(idea_filename)
@@ -776,7 +776,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(pidgin_name_str(), 0)
     # set_idea_config_json(pidgin_label_str(), 1)
     # set_idea_config_json(pidgin_tag_str(), 2)
-    # set_idea_config_json(pidgin_road_str(), 3)
+    # set_idea_config_json(pidgin_way_str(), 3)
     # set_idea_config_json(fiscunit_str(), 5)
     # set_idea_config_json(fisc_timeline_hour_str(), 6)
     # set_idea_config_json(fisc_timeline_month_str(), 7)
@@ -800,7 +800,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(pidgin_name_str()).get(bo) == 0
     assert x_idea_config.get(pidgin_label_str()).get(bo) == 1
     assert x_idea_config.get(pidgin_tag_str()).get(bo) == 2
-    assert x_idea_config.get(pidgin_road_str()).get(bo) == 3
+    assert x_idea_config.get(pidgin_way_str()).get(bo) == 3
     assert x_idea_config.get(fiscunit_str()).get(bo) == 5
     assert x_idea_config.get(fisc_timeline_hour_str()).get(bo) == 6
     assert x_idea_config.get(fisc_timeline_month_str()).get(bo) == 7

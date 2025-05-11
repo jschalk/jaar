@@ -1,22 +1,22 @@
 {
-    "pidgin_name": {
-        "jkeys": {
-            "otx_name": {}
-        },
-        "jvalues": {
-            "inx_name": {},
-            "inx_bridge": {},
-            "otx_bridge": {},
-            "unknown_word": {}
-        }
-    },
     "pidgin_label": {
         "jkeys": {
             "otx_label": {}
         },
         "jvalues": {
-            "inx_label": {},
             "inx_bridge": {},
+            "inx_label": {},
+            "otx_bridge": {},
+            "unknown_word": {}
+        }
+    },
+    "pidgin_name": {
+        "jkeys": {
+            "otx_name": {}
+        },
+        "jvalues": {
+            "inx_bridge": {},
+            "inx_name": {},
             "otx_bridge": {},
             "unknown_word": {}
         }
@@ -26,19 +26,19 @@
             "otx_tag": {}
         },
         "jvalues": {
-            "inx_tag": {},
             "inx_bridge": {},
+            "inx_tag": {},
             "otx_bridge": {},
             "unknown_word": {}
         }
     },
-    "pidgin_road": {
+    "pidgin_way": {
         "jkeys": {
-            "otx_road": {}
+            "otx_way": {}
         },
         "jvalues": {
-            "inx_road": {},
             "inx_bridge": {},
+            "inx_way": {},
             "otx_bridge": {},
             "unknown_word": {}
         }

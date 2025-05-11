@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import WorldID
+from src.a01_way_logic.way import WorldID
 from src.a09_pack_logic.pack import PackUnit
 from src.a19_world_logic.world import WorldUnit
 from dataclasses import dataclass

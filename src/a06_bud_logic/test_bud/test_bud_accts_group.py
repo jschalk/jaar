@@ -47,7 +47,7 @@ def test_BudUnit_set_groupunit_SetsAttr_Scenario0():
     assert bob_bud._groupunits.get(run_str)
 
 
-def test_BudUnit_set_groupunit_Sets_road_fund_coin():
+def test_BudUnit_set_groupunit_Sets_way_fund_coin():
     # ESTABLISH
     x_fund_coin = 5
     bob_bud = budunit_shop("Bob", fund_coin=x_fund_coin)

@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
-from src.a01_road_logic.road import RoadUnit, TimeLineTag
+from src.a01_way_logic.way import WayUnit, TimeLineTag
 from src.a05_item_logic.item import (
     itemunit_shop,
     ItemUnit,
@@ -157,84 +157,84 @@ def add_newtimeline_itemunit(x_budunit: BudUnit, timeline_config: dict):
     x_wkdays_list = timeline_config.get("weekdays_config")
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
-    time_road = x_budunit.make_l1_road("time")
-    new_road = x_budunit.make_road(time_road, x_item_tag)
-    day_road = x_budunit.make_road(new_road, "day")
-    week_road = x_budunit.make_road(new_road, "week")
-    year_road = get_year_road(x_budunit, new_road)
+    time_way = x_budunit.make_l1_way("time")
+    new_way = x_budunit.make_way(time_way, x_item_tag)
+    day_way = x_budunit.make_way(new_way, "day")
+    week_way = x_budunit.make_way(new_way, "week")
+    year_way = get_year_way(x_budunit, new_way)
 
-    add_stan_itemunits(x_budunit, time_road, x_item_tag, x_c400_number)
-    add_itemunits(x_budunit, day_road, create_hour_itemunits(x_hours_list))
-    add_itemunits(x_budunit, new_road, create_week_itemunits(x_wkdays_list))
-    add_itemunits(x_budunit, week_road, create_weekday_itemunits(x_wkdays_list))
-    add_itemunits(x_budunit, year_road, create_month_itemunits(x_months, x_mday))
+    add_stan_itemunits(x_budunit, time_way, x_item_tag, x_c400_number)
+    add_itemunits(x_budunit, day_way, create_hour_itemunits(x_hours_list))
+    add_itemunits(x_budunit, new_way, create_week_itemunits(x_wkdays_list))
+    add_itemunits(x_budunit, week_way, create_weekday_itemunits(x_wkdays_list))
+    add_itemunits(x_budunit, year_way, create_month_itemunits(x_months, x_mday))
     offset_item = itemunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
-    x_budunit.set_item(offset_item, new_road)
+    x_budunit.set_item(offset_item, new_way)
     return x_budunit
 
 
 def add_itemunits(
-    x_budunit: BudUnit, parent_road: RoadUnit, config_dict: dict[str, ItemUnit]
+    x_budunit: BudUnit, parent_way: WayUnit, config_dict: dict[str, ItemUnit]
 ):
     for x_time_itemunit in config_dict.values():
-        x_budunit.set_item(x_time_itemunit, parent_road)
+        x_budunit.set_item(x_time_itemunit, parent_way)
 
 
 def add_stan_itemunits(
     x_budunit: BudUnit,
-    time_road: RoadUnit,
+    time_way: WayUnit,
     timeline_tag: TimeLineTag,
     timeline_c400_number: int,
 ):
-    time_road = x_budunit.make_l1_road("time")
-    new_road = x_budunit.make_road(time_road, timeline_tag)
-    c400_leap_road = x_budunit.make_road(new_road, "c400_leap")
-    c400_clean_road = x_budunit.make_road(c400_leap_road, "c400_clean")
-    c100_road = x_budunit.make_road(c400_clean_road, "c100")
-    yr4_leap_road = x_budunit.make_road(c100_road, "yr4_leap")
-    yr4_clean_road = x_budunit.make_road(yr4_leap_road, "yr4_clean")
+    time_way = x_budunit.make_l1_way("time")
+    new_way = x_budunit.make_way(time_way, timeline_tag)
+    c400_leap_way = x_budunit.make_way(new_way, "c400_leap")
+    c400_clean_way = x_budunit.make_way(c400_leap_way, "c400_clean")
+    c100_way = x_budunit.make_way(c400_clean_way, "c100")
+    yr4_leap_way = x_budunit.make_way(c100_way, "yr4_leap")
+    yr4_clean_way = x_budunit.make_way(yr4_leap_way, "yr4_clean")
 
-    if not x_budunit.item_exists(time_road):
+    if not x_budunit.item_exists(time_way):
         x_budunit.set_l1_item(itemunit_shop("time"))
     timeline_itemunit = new_timeline_itemunit(timeline_tag, timeline_c400_number)
-    x_budunit.set_item(timeline_itemunit, time_road)
-    x_budunit.set_item(stan_c400_leap_itemunit(), new_road)
-    x_budunit.set_item(stan_c400_clean_itemunit(), c400_leap_road)
-    x_budunit.set_item(stan_c100_itemunit(), c400_clean_road)
-    x_budunit.set_item(stan_yr4_leap_itemunit(), c100_road)
-    x_budunit.set_item(stan_yr4_clean_itemunit(), yr4_leap_road)
-    x_budunit.set_item(stan_year_itemunit(), yr4_clean_road)
-    x_budunit.set_item(stan_day_itemunit(), new_road)
-    x_budunit.set_item(stan_days_itemunit(), new_road)
+    x_budunit.set_item(timeline_itemunit, time_way)
+    x_budunit.set_item(stan_c400_leap_itemunit(), new_way)
+    x_budunit.set_item(stan_c400_clean_itemunit(), c400_leap_way)
+    x_budunit.set_item(stan_c100_itemunit(), c400_clean_way)
+    x_budunit.set_item(stan_yr4_leap_itemunit(), c100_way)
+    x_budunit.set_item(stan_yr4_clean_itemunit(), yr4_leap_way)
+    x_budunit.set_item(stan_year_itemunit(), yr4_clean_way)
+    x_budunit.set_item(stan_day_itemunit(), new_way)
+    x_budunit.set_item(stan_days_itemunit(), new_way)
 
 
-def get_c400_clean_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    c400_leap_road = x_budunit.make_road(time_range_root_road, "c400_leap")
-    return x_budunit.make_road(c400_leap_road, "c400_clean")
+def get_c400_clean_way(x_budunit: BudUnit, time_range_root_way: WayUnit) -> WayUnit:
+    c400_leap_way = x_budunit.make_way(time_range_root_way, "c400_leap")
+    return x_budunit.make_way(c400_leap_way, "c400_clean")
 
 
-def get_c100_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    c400_clean_road = get_c400_clean_road(x_budunit, time_range_root_road)
-    return x_budunit.make_road(c400_clean_road, "c100")
+def get_c100_way(x_budunit: BudUnit, time_range_root_way: WayUnit) -> WayUnit:
+    c400_clean_way = get_c400_clean_way(x_budunit, time_range_root_way)
+    return x_budunit.make_way(c400_clean_way, "c100")
 
 
-def get_yr4_clean_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    c100_road = get_c100_road(x_budunit, time_range_root_road)
-    yr4_leap_road = x_budunit.make_road(c100_road, "yr4_leap")
-    return x_budunit.make_road(yr4_leap_road, "yr4_clean")
+def get_yr4_clean_way(x_budunit: BudUnit, time_range_root_way: WayUnit) -> WayUnit:
+    c100_way = get_c100_way(x_budunit, time_range_root_way)
+    yr4_leap_way = x_budunit.make_way(c100_way, "yr4_leap")
+    return x_budunit.make_way(yr4_leap_way, "yr4_clean")
 
 
-def get_year_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    yr4_clean_road = get_yr4_clean_road(x_budunit, time_range_root_road)
-    return x_budunit.make_road(yr4_clean_road, "year")
+def get_year_way(x_budunit: BudUnit, time_range_root_way: WayUnit) -> WayUnit:
+    yr4_clean_way = get_yr4_clean_way(x_budunit, time_range_root_way)
+    return x_budunit.make_way(yr4_clean_way, "year")
 
 
-def get_week_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    return x_budunit.make_road(time_range_root_road, "week")
+def get_week_way(x_budunit: BudUnit, time_range_root_way: WayUnit) -> WayUnit:
+    return x_budunit.make_way(time_range_root_way, "week")
 
 
-def get_day_road(x_budunit: BudUnit, time_range_root_road: RoadUnit) -> RoadUnit:
-    return x_budunit.make_road(time_range_root_road, "day")
+def get_day_way(x_budunit: BudUnit, time_range_root_way: WayUnit) -> WayUnit:
+    return x_budunit.make_way(time_range_root_way, "day")
 
 
 def validate_timeline_config(config_dict: dict) -> bool:
@@ -391,11 +391,9 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
 
 
-def get_min_from_dt(
-    x_bud: BudUnit, timeline_road: RoadUnit, x_datetime: datetime
-) -> int:
-    offset_road = x_bud.make_road(timeline_road, "yr1_jan1_offset")
-    offset_item = x_bud.get_item_obj(offset_road)
+def get_min_from_dt(x_bud: BudUnit, timeline_way: WayUnit, x_datetime: datetime) -> int:
+    offset_way = x_bud.make_way(timeline_way, "yr1_jan1_offset")
+    offset_item = x_bud.get_item_obj(offset_way)
     offset_amount = offset_item.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
@@ -409,7 +407,7 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 @dataclass
 class ChronoUnit:
     x_budunit: BudUnit = None
-    time_range_root_road: RoadUnit = None
+    time_range_root_way: WayUnit = None
     x_min: int = None
     # calculated fields
     _timeline_item: ItemUnit = None
@@ -425,11 +423,11 @@ class ChronoUnit:
     _year_num: str = None
 
     def _set_timeline_item(self):
-        self._timeline_item = self.x_budunit.get_item_obj(self.time_range_root_road)
+        self._timeline_item = self.x_budunit.get_item_obj(self.time_range_root_way)
 
     def _set_weekday(self):
-        week_road = get_week_road(self.x_budunit, self.time_range_root_road)
-        week_item = self.x_budunit.get_item_obj(week_road)
+        week_way = get_week_way(self.x_budunit, self.time_range_root_way)
+        week_item = self.x_budunit.get_item_obj(week_way)
         x_item_list = [self._timeline_item, week_item]
         open_rangeunit = calc_range(x_item_list, self.x_min, self.x_min)
         open_weekday_dict = week_item.get_kids_in_range(open_rangeunit.gogo)
@@ -437,10 +435,10 @@ class ChronoUnit:
             self._weekday = x_weekday
 
     def _set_month(self):
-        year_road = get_year_road(self.x_budunit, self.time_range_root_road)
-        year_item = self.x_budunit.get_item_obj(year_road)
+        year_way = get_year_way(self.x_budunit, self.time_range_root_way)
+        year_item = self.x_budunit.get_item_obj(year_way)
         x_item_dict = self.x_budunit._item_dict
-        item_list = all_between(x_item_dict, self.time_range_root_road, year_road)
+        item_list = all_between(x_item_dict, self.time_range_root_way, year_way)
         open_rangeunit = calc_range(item_list, self.x_min, self.x_min)
         gogo_month_dict = year_item.get_kids_in_range(open_rangeunit.gogo)
         month_item = None
@@ -452,8 +450,8 @@ class ChronoUnit:
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):
-        day_road = get_day_road(self.x_budunit, self.time_range_root_road)
-        day_item = self.x_budunit.get_item_obj(day_road)
+        day_way = get_day_way(self.x_budunit, self.time_range_root_way)
+        day_item = self.x_budunit.get_item_obj(day_way)
         x_item_list = [self._timeline_item, day_item]
         rangeunit = calc_range(x_item_list, self.x_min, self.x_min)
         hour_dict = day_item.get_kids_in_range(rangeunit.gogo)
@@ -465,26 +463,26 @@ class ChronoUnit:
 
     def _set_year(self):
         c400_constants = get_c400_constants()
-        x_time_road = self.time_range_root_road
+        x_time_way = self.time_range_root_way
         x_item_dict = self.x_budunit._item_dict
         # count 400 year blocks
         self._c400_number = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
-        c400_clean_road = get_c400_clean_road(self.x_budunit, x_time_road)
-        c400_clean_item_list = all_between(x_item_dict, x_time_road, c400_clean_road)
+        c400_clean_way = get_c400_clean_way(self.x_budunit, x_time_way)
+        c400_clean_item_list = all_between(x_item_dict, x_time_way, c400_clean_way)
         c400_clean_range = calc_range(c400_clean_item_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
 
         # count 4 year blocks
-        c100_road = get_c100_road(self.x_budunit, x_time_road)
-        c100_item_list = all_between(x_item_dict, x_time_road, c100_road)
+        c100_way = get_c100_way(self.x_budunit, x_time_way)
+        c100_item_list = all_between(x_item_dict, x_time_way, c100_way)
         c100_range = calc_range(c100_item_list, self.x_min, self.x_min)
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
-        yr4_clean_road = get_yr4_clean_road(self.x_budunit, x_time_road)
-        yr4_clean_items = all_between(x_item_dict, x_time_road, yr4_clean_road)
+        yr4_clean_way = get_yr4_clean_way(self.x_budunit, x_time_way)
+        yr4_clean_items = all_between(x_item_dict, x_time_way, yr4_clean_way)
         yr4_clean_range = calc_range(yr4_clean_items, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 
@@ -511,8 +509,8 @@ class ChronoUnit:
         return x_str
 
 
-def chronounit_shop(x_budunit: BudUnit, time_range_root_road: str, x_min: int):
-    return ChronoUnit(x_budunit, time_range_root_road, x_min=x_min)
+def chronounit_shop(x_budunit: BudUnit, time_range_root_way: str, x_min: int):
+    return ChronoUnit(x_budunit, time_range_root_way, x_min=x_min)
 
 
 def config_file_dir() -> str:

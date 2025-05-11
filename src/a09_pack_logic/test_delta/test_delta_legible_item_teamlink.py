@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
     team_title_str,
-    road_str,
+    way_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import budatom_shop
@@ -14,11 +14,11 @@ def test_create_legible_list_ReturnsObj_item_teamlink_INSERT():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_teamlink_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
     team_title_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(team_title_str(), team_title_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -28,7 +28,7 @@ def test_create_legible_list_ReturnsObj_item_teamlink_INSERT():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"teamlink '{team_title_value}' created for item '{road_value}'."
+    x_str = f"teamlink '{team_title_value}' created for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -37,11 +37,11 @@ def test_create_legible_list_ReturnsObj_item_teamlink_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_teamlink_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
     team_title_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_delete())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(team_title_str(), team_title_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -51,6 +51,6 @@ def test_create_legible_list_ReturnsObj_item_teamlink_DELETE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"teamlink '{team_title_value}' deleted for item '{road_value}'."
+    x_str = f"teamlink '{team_title_value}' deleted for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

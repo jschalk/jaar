@@ -31,22 +31,22 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     yao_speaker.add_acctunit(yao_str)
     yao_speaker.set_acct_respect(20)
     casa_str = "casa"
-    casa_road = yao_speaker.make_l1_road(casa_str)
+    casa_way = yao_speaker.make_l1_way(casa_str)
     status_str = "status"
-    status_road = yao_speaker.make_road(casa_road, status_str)
+    status_way = yao_speaker.make_way(casa_way, status_str)
     clean_str = "clean"
-    clean_road = yao_speaker.make_road(status_road, clean_str)
+    clean_way = yao_speaker.make_way(status_way, clean_str)
     dirty_str = "dirty"
-    dirty_road = yao_speaker.make_road(status_road, dirty_str)
+    dirty_way = yao_speaker.make_way(status_way, dirty_str)
     sweep_str = "sweep"
-    sweep_road = yao_speaker.make_road(casa_road, sweep_str)
-    yao_speaker.set_item(itemunit_shop(clean_str), status_road)
-    yao_speaker.set_item(itemunit_shop(dirty_str), status_road)
-    yao_speaker.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+    sweep_way = yao_speaker.make_way(casa_way, sweep_str)
+    yao_speaker.set_item(itemunit_shop(clean_str), status_way)
+    yao_speaker.set_item(itemunit_shop(dirty_str), status_way)
+    yao_speaker.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
     yao_speaker.edit_item_attr(
-        sweep_road, reason_base=status_road, reason_premise=dirty_road
+        sweep_way, reason_base=status_way, reason_premise=dirty_way
     )
-    yao_speaker.add_fact(status_road, clean_road)
+    yao_speaker.add_fact(status_way, clean_way)
     assert len(yao_speaker.get_agenda_dict()) == 0
 
     # WHEN
@@ -74,9 +74,9 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     )
 
     # THEN
-    # clean_road = zia_budunit.make_l1_road(clean_str)
-    clean_road = zia_budunit.make_l1_road(clean_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_road)
+    # clean_way = zia_budunit.make_l1_way(clean_str)
+    clean_way = zia_budunit.make_l1_way(clean_str)
+    clean_itemunit = zia_budunit.get_item_obj(clean_way)
     assert ingested_list[0] == clean_itemunit
     assert ingested_list[0].mass == zia_debtor_pool
 
@@ -101,12 +101,12 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     )
 
     # THEN
-    # clean_road = zia_budunit.make_l1_road(clean_str)
+    # clean_way = zia_budunit.make_l1_way(clean_str)
     assert len(ingested_list) == 2
-    clean_road = zia_budunit.make_l1_road(clean_str)
-    cook_road = zia_budunit.make_l1_road(cook_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_road)
-    cook_itemunit = zia_budunit.get_item_obj(cook_road)
+    clean_way = zia_budunit.make_l1_way(clean_str)
+    cook_way = zia_budunit.make_l1_way(cook_str)
+    clean_itemunit = zia_budunit.get_item_obj(clean_way)
+    cook_itemunit = zia_budunit.get_item_obj(cook_way)
     assert ingested_list[0] == cook_itemunit
     assert ingested_list[0].mass == 16.0
     assert ingested_list == [cook_itemunit, clean_itemunit]
@@ -132,10 +132,10 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     )
 
     # THEN
-    clean_road = zia_budunit.make_l1_road(clean_str)
-    cook_road = zia_budunit.make_l1_road(cook_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_road)
-    cook_itemunit = zia_budunit.get_item_obj(cook_road)
+    clean_way = zia_budunit.make_l1_way(clean_str)
+    cook_way = zia_budunit.make_l1_way(cook_str)
+    clean_itemunit = zia_budunit.get_item_obj(clean_way)
+    cook_itemunit = zia_budunit.get_item_obj(cook_way)
     assert ingested_list == [cook_itemunit, clean_itemunit]
     assert ingested_list[0].mass == 24.0
     assert ingested_list[1].mass == 8.0
@@ -161,10 +161,10 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     )
 
     # THEN
-    clean_road = zia_budunit.make_l1_road(clean_str)
-    cook_road = zia_budunit.make_l1_road(cook_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_road)
-    cook_itemunit = zia_budunit.get_item_obj(cook_road)
+    clean_way = zia_budunit.make_l1_way(clean_str)
+    cook_way = zia_budunit.make_l1_way(cook_str)
+    clean_itemunit = zia_budunit.get_item_obj(clean_way)
+    cook_itemunit = zia_budunit.get_item_obj(cook_way)
     assert ingested_list[0].mass == 22
     assert ingested_list[1].mass == 10
     assert ingested_list == [cook_itemunit, clean_itemunit]

@@ -21,9 +21,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     awardee_title_str,
     group_label_str,
     healer_name_str,
-    parent_road_str,
+    parent_way_str,
     item_tag_str,
-    road_str,
+    way_str,
     base_str,
     fbase_str,
     debtit_belief_str,
@@ -55,10 +55,10 @@ def test_sift_atom_ReturnsNoneIfGivenBudAtomIsUPDATE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
     casa_atom = budatom_shop(bud_itemunit_str(), atom_update())
-    casa_atom.set_arg(parent_road_str(), sue_bud.fisc_tag)
+    casa_atom.set_arg(parent_way_str(), sue_bud.fisc_tag)
     casa_atom.set_arg(item_tag_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
@@ -160,8 +160,8 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_itemunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
 
     sue_addin = 23
     sue_begin = 37
@@ -175,7 +175,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_itemunit():
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    old_casa_atom.set_arg(road_str(), casa_road)
+    old_casa_atom.set_arg(way_str(), casa_way)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)
@@ -212,15 +212,15 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_awardlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
     run_str = ";run"
     zia_run_give_force = 72
     zia_run_take_force = 76
-    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(run_str, 2, 3))
+    sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(run_str, 2, 3))
 
     zia_atom = budatom_shop(bud_item_awardlink_str(), atom_insert())
-    zia_atom.set_arg(road_str(), casa_road)
+    zia_atom.set_arg(way_str(), casa_way)
     zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
     zia_atom.set_arg(take_force_str(), zia_run_take_force)
@@ -241,16 +241,16 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_reasonunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     week_str = "week"
-    week_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
-    sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
+    week_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
+    sue_bud.get_item_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
 
     new_base_item_active_requisite = True
     casa_atom = budatom_shop(bud_item_reasonunit_str(), atom_insert())
-    casa_atom.set_arg(road_str(), casa_road)
-    casa_atom.set_arg(base_str(), week_road)
+    casa_atom.set_arg(way_str(), casa_way)
+    casa_atom.set_arg(base_str(), week_way)
     casa_atom.set_arg(base_item_active_requisite_str(), new_base_item_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = bud_item_reasonunit_get_obj(sue_bud, casa_jkeys)
@@ -273,24 +273,24 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_reason_premiseunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
-    clean_road = sue_bud.make_road(casa_road, clean_str)
+    clean_way = sue_bud.make_way(casa_way, clean_str)
     week_str = "week"
-    week_road = sue_bud.make_l1_road(week_str)
+    week_way = sue_bud.make_l1_way(week_str)
     thur_str = "thur"
-    thur_road = sue_bud.make_road(week_road, thur_str)
-    sue_bud.add_item(clean_road)
-    sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
-    clean_item = sue_bud.get_item_obj(clean_road)
-    clean_item.set_reasonunit(reasonunit_shop(week_road))
-    clean_item.get_reasonunit(week_road).set_premise(thur_road)
+    thur_way = sue_bud.make_way(week_way, thur_str)
+    sue_bud.add_item(clean_way)
+    sue_bud.get_item_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
+    clean_item = sue_bud.get_item_obj(clean_way)
+    clean_item.set_reasonunit(reasonunit_shop(week_way))
+    clean_item.get_reasonunit(week_way).set_premise(thur_way)
 
     thur_divisor = 39
     thur_atom = budatom_shop(bud_item_reason_premiseunit_str(), atom_insert())
-    thur_atom.set_arg(road_str(), clean_road)
-    thur_atom.set_arg(base_str(), week_road)
-    thur_atom.set_arg("need", thur_road)
+    thur_atom.set_arg(way_str(), clean_way)
+    thur_atom.set_arg(base_str(), week_way)
+    thur_atom.set_arg("need", thur_way)
     assert thur_atom.is_valid()
     thur_atom.set_arg("divisor", thur_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
@@ -313,16 +313,16 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_factunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     week_str = "week"
-    week_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
-    sue_bud.get_item_obj(casa_road).set_factunit(factunit_shop(week_road))
+    week_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
+    sue_bud.get_item_obj(casa_way).set_factunit(factunit_shop(week_way))
 
     casa_fopen = 32
     casa_atom = budatom_shop(bud_item_factunit_str(), atom_insert())
-    casa_atom.set_arg(road_str(), casa_road)
-    casa_atom.set_arg(fbase_str(), week_road)
+    casa_atom.set_arg(way_str(), casa_way)
+    casa_atom.set_arg(fbase_str(), week_way)
     casa_atom.set_arg(fopen_str(), casa_fopen)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_factunit = bud_item_factunit_get_obj(sue_bud, casa_jkeys)

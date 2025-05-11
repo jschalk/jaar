@@ -32,8 +32,8 @@ def test_treemetrics_shop_ReturnsObj():
 
     # # could create tests for these methods?
     # def evaluate_tag(
-    # def evaluate_pledge(self, pledge: bool, item_road: RoadUnit):
+    # def evaluate_pledge(self, pledge: bool, item_way: WayUnit):
     # def evaluate_level(self, level):
-    # def evaluate_reasonunits(self, reasons: dict[RoadUnit, ReasonUnit]):
+    # def evaluate_reasonunits(self, reasons: dict[WayUnit, ReasonUnit]):
     # def evaluate_awardlinks(self, awardlinks: dict[GroupLabel, AwardLink]):
     # def evaluate_uid_max(self, uid):

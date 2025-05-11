@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import create_road, to_road
+from src.a01_way_logic.way import create_way, to_way
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
@@ -16,8 +16,8 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_casa_maison_pidginunit_set_by_otx2inx,
     get_casa_maison_pidginunit_set_by_tag,
-    get_casa_maison_road_otx_dt,
-    get_casa_maison_road_inx_dt,
+    get_casa_maison_way_otx_dt,
+    get_casa_maison_way_inx_dt,
 )
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
 from pandas import DataFrame
@@ -210,38 +210,38 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
-    otx_accord45_road = to_road(otx_accord45_str)
-    inx_accord87_road = to_road(inx_accord87_str)
+    otx_accord45_way = to_way(otx_accord45_str)
+    inx_accord87_way = to_way(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
+    casa_otx_way = create_way(otx_accord45_str, casa_otx_str)
+    casa_inx_way = create_way(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
-    clean_otx_road = create_road(casa_otx_road, clean_otx_str)
-    clean_inx_road = create_road(casa_inx_road, clean_inx_str)
+    clean_otx_way = create_way(casa_otx_way, clean_otx_str)
+    clean_inx_way = create_way(casa_inx_way, clean_inx_str)
     sweep_str = "sweep"
-    sweep_otx_road = create_road(clean_otx_road, sweep_str)
-    sweep_inx_road = create_road(clean_inx_road, sweep_str)
+    sweep_otx_way = create_way(clean_otx_way, sweep_str)
+    sweep_inx_way = create_way(clean_inx_way, sweep_str)
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
-    otx_dt = get_casa_maison_road_otx_dt()
+    otx_dt = get_casa_maison_way_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_accord45_road
-    assert otx_dt.iloc[1][base_str()] == casa_otx_road
-    assert otx_dt.iloc[2][base_str()] == clean_otx_road
-    assert otx_dt.iloc[3][base_str()] == sweep_otx_road
+    assert otx_dt.iloc[0][base_str()] == otx_accord45_way
+    assert otx_dt.iloc[1][base_str()] == casa_otx_way
+    assert otx_dt.iloc[2][base_str()] == clean_otx_way
+    assert otx_dt.iloc[3][base_str()] == sweep_otx_way
     print(f"{otx_dt=}")
 
     # WHEN
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][base_str()] == inx_accord87_road
-    assert otx_dt.iloc[1][base_str()] == casa_inx_road
-    assert otx_dt.iloc[2][base_str()] == clean_inx_road
-    assert otx_dt.iloc[3][base_str()] == sweep_inx_road
+    assert otx_dt.iloc[0][base_str()] == inx_accord87_way
+    assert otx_dt.iloc[1][base_str()] == casa_inx_way
+    assert otx_dt.iloc[2][base_str()] == clean_inx_way
+    assert otx_dt.iloc[3][base_str()] == sweep_inx_way
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = get_casa_maison_road_inx_dt()
+    inx_dt = get_casa_maison_way_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()
@@ -252,27 +252,27 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
-    otx_accord45_road = to_road(otx_accord45_str)
-    inx_accord87_road = to_road(inx_accord87_str)
+    otx_accord45_way = to_way(otx_accord45_str)
+    inx_accord87_way = to_way(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_road = create_road(otx_accord45_str, casa_otx_str)
-    casa_inx_road = create_road(inx_accord87_str, casa_inx_str)
+    casa_otx_way = create_way(otx_accord45_str, casa_otx_str)
+    casa_inx_way = create_way(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
-    clean_otx_road = create_road(casa_otx_road, clean_otx_str)
-    clean_inx_road = create_road(casa_inx_road, clean_inx_str)
+    clean_otx_way = create_way(casa_otx_way, clean_otx_str)
+    clean_inx_way = create_way(casa_inx_way, clean_inx_str)
     sweep_str = "sweep"
-    sweep_otx_road = create_road(clean_otx_road, sweep_str)
-    sweep_inx_road = create_road(clean_inx_road, sweep_str)
+    sweep_otx_way = create_way(clean_otx_way, sweep_str)
+    sweep_inx_way = create_way(clean_inx_way, sweep_str)
     yao_pidginunit = get_casa_maison_pidginunit_set_by_tag()
     # print(f"{yao_pidginunit=}")
-    otx_dt = get_casa_maison_road_otx_dt()
+    otx_dt = get_casa_maison_way_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_accord45_road
-    assert otx_dt.iloc[1][base_str()] == casa_otx_road
-    assert otx_dt.iloc[2][base_str()] == clean_otx_road
-    assert otx_dt.iloc[3][base_str()] == sweep_otx_road
+    assert otx_dt.iloc[0][base_str()] == otx_accord45_way
+    assert otx_dt.iloc[1][base_str()] == casa_otx_way
+    assert otx_dt.iloc[2][base_str()] == clean_otx_way
+    assert otx_dt.iloc[3][base_str()] == sweep_otx_way
     print(f"Before {otx_dt=}")
     print("")
 
@@ -282,12 +282,12 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][base_str()] == inx_accord87_road
-    assert otx_dt.iloc[1][base_str()] == casa_inx_road
-    assert otx_dt.iloc[2][base_str()] == clean_inx_road
-    assert otx_dt.iloc[3][base_str()] == sweep_inx_road
+    assert otx_dt.iloc[0][base_str()] == inx_accord87_way
+    assert otx_dt.iloc[1][base_str()] == casa_inx_way
+    assert otx_dt.iloc[2][base_str()] == clean_inx_way
+    assert otx_dt.iloc[3][base_str()] == sweep_inx_way
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = get_casa_maison_road_inx_dt()
+    inx_dt = get_casa_maison_way_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()

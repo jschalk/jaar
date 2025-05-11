@@ -4,7 +4,7 @@ from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_mstr_table_name,
 )
 from src.a08_bud_atom_logic.atom import BudAtom
-from src.a01_road_logic.road import RoadUnit
+from src.a01_way_logic.way import WayUnit
 
 # from src.a00_data_toolbox.sqlite import (
 #     sqlite_to_python,
@@ -121,30 +121,30 @@ CREATE TABLE owner_mstr
 ;"""
 
 
-def get_road_ref_table_create_sqlstr() -> str:
+def get_way_ref_table_create_sqlstr() -> str:
     return """
-CREATE TABLE IF NOT EXISTS road_ref (
-  road VARCHAR(255) NOT NULL
+CREATE TABLE IF NOT EXISTS way_ref (
+  way VARCHAR(255) NOT NULL
 , bridge VARCHAR(255) NOT NULL
-, UNIQUE(road, bridge)
+, UNIQUE(way, bridge)
 )
 ;"""
 
 
-def get_road_ref_table_single_insert_sqlstr(road: RoadUnit, bridge: str) -> str:
+def get_way_ref_table_single_insert_sqlstr(way: WayUnit, bridge: str) -> str:
     return f"""
-INSERT OR IGNORE INTO road_ref (road, bridge) 
+INSERT OR IGNORE INTO way_ref (way, bridge) 
 VALUES (
-  '{road}'
+  '{way}'
 , '{bridge}'
 )
 ;"""
 
 
-def get_road_ref_table_row_id_select_sqlstr(road: RoadUnit, bridge: str) -> str:
+def get_way_ref_table_row_id_select_sqlstr(way: WayUnit, bridge: str) -> str:
     return f"""
-SELECT rowid FROM road_ref  
-WHERE road = '{road}' 
+SELECT rowid FROM way_ref  
+WHERE way = '{way}' 
   AND bridge = '{bridge}'
 )
 ;"""
@@ -159,7 +159,7 @@ def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x.append(get_pack_table_create_sqlstr())
     list_x.append(get_pack2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())
-    list_x.append(get_road_ref_table_create_sqlstr())
+    list_x.append(get_way_ref_table_create_sqlstr())
     return list_x
 
 

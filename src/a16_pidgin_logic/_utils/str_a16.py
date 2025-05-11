@@ -38,12 +38,12 @@ def otx_tag_str() -> str:
     return "otx_tag"
 
 
-def inx_road_str() -> str:
-    return "inx_road"
+def inx_way_str() -> str:
+    return "inx_way"
 
 
-def otx_road_str() -> str:
-    return "otx_road"
+def otx_way_str() -> str:
+    return "otx_way"
 
 
 def unknown_word_str() -> str:
@@ -70,8 +70,8 @@ def pidgin_tag_str() -> str:
     return "pidgin_tag"
 
 
-def pidgin_road_str() -> str:
-    return "pidgin_road"
+def pidgin_way_str() -> str:
+    return "pidgin_way"
 
 
 def pidgin_core_str() -> str:

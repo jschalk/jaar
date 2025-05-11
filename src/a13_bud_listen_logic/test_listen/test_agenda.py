@@ -64,8 +64,8 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     after_yao_budunit = listen_to_speaker_agenda(before_yao_budunit, zia_budunit)
 
     # THEN
-    clean_road = zia_budunit.make_l1_road(clean_str)
-    yao_clean_itemunit = after_yao_budunit.get_item_obj(clean_road)
+    clean_way = zia_budunit.make_l1_way(clean_str)
+    yao_clean_itemunit = after_yao_budunit.get_item_obj(clean_way)
     print(f"{yao_clean_itemunit.mass=}")
     assert yao_clean_itemunit.mass != zia_clean_itemunit.mass
     assert yao_clean_itemunit.mass == yao_acct_debtit_belief
@@ -86,8 +86,8 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     clean_str = "clean"
     zia_clean_itemunit = itemunit_shop(clean_str, pledge=True)
     zia_clean_itemunit.teamunit.set_teamlink(yao_str)
-    casa_road = zia_budunit.make_l1_road("casa")
-    zia_budunit.set_item(zia_clean_itemunit, casa_road)
+    casa_way = zia_budunit.make_l1_way("casa")
+    zia_budunit.set_item(zia_clean_itemunit, casa_way)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
     zia_yao_budunit.set_owner_name(yao_str)
@@ -98,12 +98,12 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     after_yao_budunit = listen_to_speaker_agenda(before_yao_budunit, zia_budunit)
 
     # THEN
-    clean_road = zia_budunit.make_road(casa_road, clean_str)
-    yao_clean_itemunit = after_yao_budunit.get_item_obj(clean_road)
+    clean_way = zia_budunit.make_way(casa_way, clean_str)
+    yao_clean_itemunit = after_yao_budunit.get_item_obj(clean_way)
     print(f"{yao_clean_itemunit.mass=}")
     assert yao_clean_itemunit.mass != zia_clean_itemunit.mass
     assert yao_clean_itemunit.mass == yao_debtit_belief
-    after_casa_itemunit = after_yao_budunit.get_item_obj(casa_road)
+    after_casa_itemunit = after_yao_budunit.get_item_obj(casa_way)
     print(f"{after_casa_itemunit.mass=}")
     assert after_casa_itemunit.mass != 1
     assert after_casa_itemunit.mass == yao_debtit_belief
@@ -132,10 +132,10 @@ def test_listen_to_speaker_agenda_Returns2AgendaItemsLevel2TaskBud():
     yao_cook_itemunit.teamunit.set_teamlink(yao_str)
     yao_fly_itemunit = itemunit_shop(fly_str, pledge=True)
     yao_fly_itemunit.teamunit.set_teamlink(yao_str)
-    casa_road = zia_budunit.make_l1_road("casa")
-    fly_road = zia_budunit.make_l1_road(fly_str)
-    zia_budunit.set_item(yao_clean_itemunit, casa_road)
-    zia_budunit.set_item(yao_cook_itemunit, casa_road)
+    casa_way = zia_budunit.make_l1_way("casa")
+    fly_way = zia_budunit.make_l1_way(fly_str)
+    zia_budunit.set_item(yao_clean_itemunit, casa_way)
+    zia_budunit.set_item(yao_cook_itemunit, casa_way)
     zia_budunit.set_l1_item(yao_fly_itemunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
@@ -146,12 +146,12 @@ def test_listen_to_speaker_agenda_Returns2AgendaItemsLevel2TaskBud():
     after_yao_budunit = listen_to_speaker_agenda(before_yao_budunit, zia_budunit)
 
     # THEN
-    clean_road = zia_budunit.make_road(casa_road, clean_str)
-    cook_road = zia_budunit.make_road(casa_road, cook_str)
-    after_cook_itemunit = after_yao_budunit.get_item_obj(cook_road)
-    after_clean_itemunit = after_yao_budunit.get_item_obj(clean_road)
-    after_casa_itemunit = after_yao_budunit.get_item_obj(casa_road)
-    after_fly_itemunit = after_yao_budunit.get_item_obj(fly_road)
+    clean_way = zia_budunit.make_way(casa_way, clean_str)
+    cook_way = zia_budunit.make_way(casa_way, cook_str)
+    after_cook_itemunit = after_yao_budunit.get_item_obj(cook_way)
+    after_clean_itemunit = after_yao_budunit.get_item_obj(clean_way)
+    after_casa_itemunit = after_yao_budunit.get_item_obj(casa_way)
+    after_fly_itemunit = after_yao_budunit.get_item_obj(fly_way)
     print(f"{after_clean_itemunit.mass=}")
     assert after_clean_itemunit.mass != yao_clean_itemunit.mass
     assert after_clean_itemunit.mass == 19
@@ -187,15 +187,15 @@ def test_listen_to_speaker_agenda_Returns2AgendaItemsLevel2TaskBudWhereAnItemUni
     yao_cook_itemunit.teamunit.set_teamlink(yao_str)
     yao_fly_itemunit = itemunit_shop(fly_str, pledge=True)
     yao_fly_itemunit.teamunit.set_teamlink(yao_str)
-    casa_road = zia_budunit.make_l1_road("casa")
-    dish_road = zia_budunit.make_road(casa_road, dish_str)
-    fly_road = zia_budunit.make_l1_road(fly_str)
+    casa_way = zia_budunit.make_l1_way("casa")
+    dish_way = zia_budunit.make_way(casa_way, dish_str)
+    fly_way = zia_budunit.make_l1_way(fly_str)
     before_yao_dish_itemunit = itemunit_shop(dish_str, pledge=True)
     before_yao_dish_itemunit.teamunit.set_teamlink(yao_str)
-    before_yao_budunit.set_item(before_yao_dish_itemunit, casa_road)
-    before_yao_budunit.edit_item_attr(dish_road, mass=1000)
-    zia_budunit.set_item(yao_dish_itemunit, casa_road)
-    zia_budunit.set_item(yao_cook_itemunit, casa_road)
+    before_yao_budunit.set_item(before_yao_dish_itemunit, casa_way)
+    before_yao_budunit.edit_item_attr(dish_way, mass=1000)
+    zia_budunit.set_item(yao_dish_itemunit, casa_way)
+    zia_budunit.set_item(yao_cook_itemunit, casa_way)
     zia_budunit.set_l1_item(yao_fly_itemunit)
     assert len(zia_budunit.get_agenda_dict()) == 0
     zia_yao_budunit = copy_deepcopy(zia_budunit)
@@ -206,11 +206,11 @@ def test_listen_to_speaker_agenda_Returns2AgendaItemsLevel2TaskBudWhereAnItemUni
     after_yao_budunit = listen_to_speaker_agenda(before_yao_budunit, zia_budunit)
 
     # THEN
-    cook_road = zia_budunit.make_road(casa_road, cook_str)
-    after_cook_itemunit = after_yao_budunit.get_item_obj(cook_road)
-    after_dish_itemunit = after_yao_budunit.get_item_obj(dish_road)
-    after_casa_itemunit = after_yao_budunit.get_item_obj(casa_road)
-    after_fly_itemunit = after_yao_budunit.get_item_obj(fly_road)
+    cook_way = zia_budunit.make_way(casa_way, cook_str)
+    after_cook_itemunit = after_yao_budunit.get_item_obj(cook_way)
+    after_dish_itemunit = after_yao_budunit.get_item_obj(dish_way)
+    after_casa_itemunit = after_yao_budunit.get_item_obj(casa_way)
+    after_fly_itemunit = after_yao_budunit.get_item_obj(fly_way)
     print(f"{after_dish_itemunit.mass=}")
     assert after_dish_itemunit.mass != yao_dish_itemunit.mass
     assert after_dish_itemunit.mass == 1018
@@ -244,29 +244,29 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     sue_budunit = budunit_shop(sue_str)
     sue_budunit.set_max_tree_traverse(6)
     vacuum_str = "vacuum"
-    vacuum_road = sue_budunit.make_l1_road(vacuum_str)
+    vacuum_way = sue_budunit.make_l1_way(vacuum_str)
     sue_budunit.set_l1_item(itemunit_shop(vacuum_str, pledge=True))
-    vacuum_itemunit = sue_budunit.get_item_obj(vacuum_road)
+    vacuum_itemunit = sue_budunit.get_item_obj(vacuum_way)
     vacuum_itemunit.teamunit.set_teamlink(yao_str)
 
     egg_str = "egg first"
-    egg_road = sue_budunit.make_l1_road(egg_str)
+    egg_way = sue_budunit.make_l1_way(egg_str)
     sue_budunit.set_l1_item(itemunit_shop(egg_str))
     chicken_str = "chicken first"
-    chicken_road = sue_budunit.make_l1_road(chicken_str)
+    chicken_way = sue_budunit.make_l1_way(chicken_str)
     sue_budunit.set_l1_item(itemunit_shop(chicken_str))
     # set egg pledge is True when chicken first is False
     sue_budunit.edit_item_attr(
-        road=egg_road,
+        way=egg_way,
         pledge=True,
-        reason_base=chicken_road,
+        reason_base=chicken_way,
         reason_base_item_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_budunit.edit_item_attr(
-        road=chicken_road,
+        way=chicken_way,
         pledge=True,
-        reason_base=egg_road,
+        reason_base=egg_way,
         reason_base_item_active_requisite=False,
     )
     sue_budunit.settle_bud()

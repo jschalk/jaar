@@ -13,8 +13,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_name_str,
     inx_tag_str,
     otx_tag_str,
-    inx_road_str,
-    otx_road_str,
+    inx_way_str,
+    otx_way_str,
     inx_label_str,
     otx_label_str,
     unknown_word_str,
@@ -182,15 +182,15 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
     ]
     br00045_file_path = create_path(brick_dir, "br00045.xlsx")
     br00045_columns = [
         event_int_str(),
         face_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -218,16 +218,16 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     label_raw_str = "label_raw"
     name_raw_str = "name_raw"
     tag_raw_str = "tag_raw"
-    road_raw_str = "road_raw"
+    way_raw_str = "way_raw"
     assert sheet_exists(pidgin_path, name_raw_str)
     assert sheet_exists(pidgin_path, label_raw_str)
     assert sheet_exists(pidgin_path, tag_raw_str)
-    assert sheet_exists(pidgin_path, road_raw_str)
+    assert sheet_exists(pidgin_path, way_raw_str)
 
     gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
     gen_tag_df = pandas_read_excel(pidgin_path, sheet_name=tag_raw_str)
-    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
+    gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
 
     label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
     assert list(gen_label_df.columns) == label_file_columns
@@ -280,28 +280,28 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     print(f" {e1_tag_df.to_csv()=}")
     assert gen_tag_df.to_csv(index=False) == e1_tag_df.to_csv(index=False)
 
-    road_file_columns = [
+    way_file_columns = [
         idea_number_str(),
         event_int_str(),
         face_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
     ]
-    assert list(gen_road_df.columns) == road_file_columns
-    assert len(gen_road_df) == 2
+    assert list(gen_way_df.columns) == way_file_columns
+    assert len(gen_way_df) == 2
     b3 = "br00117"
     b4 = "br00045"
-    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_road_rows = [e1_road3, e1_road4]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_file_columns)
-    assert len(gen_road_df) == len(e1_road_df)
-    print(f"{gen_road_df.to_csv()=}")
-    print(f" {e1_road_df.to_csv()=}")
-    assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
+    e1_way3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_way4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_way_rows = [e1_way3, e1_way4]
+    e1_way_df = DataFrame(e1_way_rows, columns=way_file_columns)
+    assert len(gen_way_df) == len(e1_way_df)
+    print(f"{gen_way_df.to_csv()=}")
+    print(f" {e1_way_df.to_csv()=}")
+    assert gen_way_df.to_csv(index=False) == e1_way_df.to_csv(index=False)
 
 
 def create_brick_valid_table(cursor, idea_number: str):
@@ -372,15 +372,15 @@ def create_brick_valid_table(cursor, idea_number: str):
             fisc_tag_str(),
             owner_name_str(),
             acct_name_str(),
-            otx_road_str(),
-            inx_road_str(),
+            otx_way_str(),
+            inx_way_str(),
         ]
     elif idea_number == "br00045":
         x_columns = [
             event_int_str(),
             face_name_str(),
-            otx_road_str(),
-            inx_road_str(),
+            otx_way_str(),
+            inx_way_str(),
             otx_bridge_str(),
             inx_bridge_str(),
             unknown_word_str(),
@@ -464,8 +464,8 @@ VALUES
 INSERT INTO {agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_road_str()}
-, {inx_road_str()}
+, {otx_way_str()}
+, {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
 , {unknown_word_str()}
@@ -539,8 +539,8 @@ INSERT INTO {agg_tablename} (
 , {fisc_tag_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {otx_road_str()}
-, {inx_road_str()}
+, {otx_way_str()}
+, {inx_way_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -611,12 +611,12 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         pidgin_raw_label_tablename = "pidgin_label_raw"
         pidgin_raw_name_tablename = "pidgin_name_raw"
         pidgin_raw_tag_tablename = "pidgin_tag_raw"
-        pidgin_raw_road_tablename = "pidgin_road_raw"
+        pidgin_raw_way_tablename = "pidgin_way_raw"
         create_pidgin_prime_tables(cursor)
         assert get_row_count(cursor, pidgin_raw_label_tablename) == 0
         assert get_row_count(cursor, pidgin_raw_name_tablename) == 0
         assert get_row_count(cursor, pidgin_raw_tag_tablename) == 0
-        assert get_row_count(cursor, pidgin_raw_road_tablename) == 0
+        assert get_row_count(cursor, pidgin_raw_way_tablename) == 0
 
         # WHEN
         brick_valid_tables_to_pidgin_prime_raw_tables(cursor)
@@ -625,26 +625,26 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         assert get_row_count(cursor, pidgin_raw_label_tablename) == 5
         assert get_row_count(cursor, pidgin_raw_name_tablename) == 5
         assert get_row_count(cursor, pidgin_raw_tag_tablename) == 5
-        assert get_row_count(cursor, pidgin_raw_road_tablename) == 7
+        assert get_row_count(cursor, pidgin_raw_way_tablename) == 7
         pidlabe_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
         pidname_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
         pidtagg_raw_cols = get_table_columns(cursor, pidgin_raw_tag_tablename)
-        pidroad_raw_cols = get_table_columns(cursor, pidgin_raw_road_tablename)
+        pidway_raw_cols = get_table_columns(cursor, pidgin_raw_way_tablename)
         lab_table = pidgin_raw_label_tablename
         nam_table = pidgin_raw_name_tablename
         tag_table = pidgin_raw_tag_tablename
-        roa_table = pidgin_raw_road_tablename
+        roa_table = pidgin_raw_way_tablename
         select_pidlabe = create_select_query(cursor, lab_table, pidlabe_raw_cols)
         select_pidname = create_select_query(cursor, nam_table, pidname_raw_cols)
         select_pidtagg = create_select_query(cursor, tag_table, pidtagg_raw_cols)
-        select_pidroad = create_select_query(cursor, roa_table, pidroad_raw_cols)
+        select_pidway = create_select_query(cursor, roa_table, pidway_raw_cols)
         cursor.execute(select_pidlabe)
         lab_rows = cursor.fetchall()
         cursor.execute(select_pidname)
         nam_rows = cursor.fetchall()
         cursor.execute(select_pidtagg)
         tag_rows = cursor.fetchall()
-        cursor.execute(select_pidroad)
+        cursor.execute(select_pidway)
         roa_rows = cursor.fetchall()
         assert len(lab_rows) == 5
         assert len(nam_rows) == 5
@@ -728,7 +728,7 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     raw_lab_table = "pidgin_label_raw"
     raw_nam_table = "pidgin_name_raw"
     raw_tag_table = "pidgin_tag_raw"
-    raw_roa_table = "pidgin_road_raw"
+    raw_roa_table = "pidgin_way_raw"
     br00113_str = "br00113"
     br00043_str = "br00043"
     br00115_str = "br00115"
@@ -741,7 +741,7 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_road_str()},{inx_road_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_way_str()},{inx_way_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
     raw_nam_values_clause = f"""
 VALUES     
   ('{br00042_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')

@@ -28,10 +28,10 @@
                 "owner_name": {}
             }
         },
-        "road_ref": {
+        "way_ref": {
             "columns": {
                 "bridge": {},
-                "road": {}
+                "way": {}
             }
         }
     }

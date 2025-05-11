@@ -1,12 +1,12 @@
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     TagUnit,
     NameUnit,
     LabelUnit,
     HealerName,
     OwnerName,
     AcctName,
-    RoadUnit,
-    DoarUnit,
+    WayUnit,
+    YawUnit,
     GroupLabel,
     default_bridge_if_None,
     WorldID,
@@ -95,20 +95,20 @@ def test_LabelUnit_exists():
 def test_GroupLabel_exists():
     bikers_group_label = GroupLabel(";bikers")
     assert bikers_group_label is not None
-    assert str(type(bikers_group_label)).find("src.a01_road_logic.road.GroupLabel") > 0
+    assert str(type(bikers_group_label)).find("src.a01_way_logic.way.GroupLabel") > 0
 
 
 def test_TagUnit_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_road = TagUnit(empty_str)
+    x_way = TagUnit(empty_str)
     # THEN
-    assert x_road == empty_str
+    assert x_way == empty_str
     doc_str = (
-        "A string representation of a tree node. Nodes cannot contain RoadUnit bridge"
+        "A string representation of a tree node. Nodes cannot contain WayUnit bridge"
     )
-    assert inspect_getdoc(x_road) == doc_str
+    assert inspect_getdoc(x_way) == doc_str
 
 
 def test_default_bridge_if_None_ReturnsObj():
@@ -147,28 +147,28 @@ def test_TagUnit_is_tag_ReturnsObj_Scenario1():
     assert x_tagunit.is_tag(slash_str) is False
 
 
-def test_RoadUnit_exists():
+def test_WayUnit_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_road = RoadUnit(empty_str)
+    x_way = WayUnit(empty_str)
     # THEN
-    assert x_road == empty_str
+    assert x_way == empty_str
     doc_str = (
-        "A string representation of a tree path. TagUnits are seperated by road bridge"
+        "A string representation of a tree path. TagUnits are seperated by way bridge"
     )
-    assert inspect_getdoc(x_road) == doc_str
+    assert inspect_getdoc(x_way) == doc_str
 
 
-def test_DoarUnit_exists():
+def test_YawUnit_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_road = DoarUnit(empty_str)
+    x_way = YawUnit(empty_str)
     # THEN
-    assert x_road == empty_str
-    doc_str = "DoarUnit is a RoadUnit in reverse direction. A string representation of a tree path. TagUnits are seperated by road bridge."
-    assert inspect_getdoc(x_road) == doc_str
+    assert x_way == empty_str
+    doc_str = "YawUnit is a WayUnit in reverse direction. A string representation of a tree path. TagUnits are seperated by way bridge."
+    assert inspect_getdoc(x_way) == doc_str
 
 
 def test_TimeLineTag_exists():

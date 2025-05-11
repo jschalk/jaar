@@ -20,7 +20,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_update_inconsistency_error_query,
 )
-from src.a01_road_logic.road import FaceName, EventInt, OwnerName, FiscTag
+from src.a01_way_logic.way import FaceName, EventInt, OwnerName, FiscTag
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens
@@ -91,7 +91,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_insert_into_pidgin_core_vld_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidtagg_sound_agg_bridge_error_sqlstr,
-    create_update_pidroad_sound_agg_bridge_error_sqlstr,
+    create_update_pidway_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
@@ -140,7 +140,7 @@ MAPS_DIMENS = {
     "pidgin_name": "NameUnit",
     "pidgin_label": "LabelUnit",
     "pidgin_tag": "TagUnit",
-    "pidgin_road": "RoadUnit",
+    "pidgin_way": "WayUnit",
 }
 
 CLASS_TYPES = {
@@ -165,12 +165,12 @@ CLASS_TYPES = {
         "otx_obj": "otx_tag",
         "inx_obj": "inx_tag",
     },
-    "RoadUnit": {
-        "raw": "road_raw",
-        "agg": "road_agg",
-        "csv_filename": "road.csv",
-        "otx_obj": "otx_road",
-        "inx_obj": "inx_road",
+    "WayUnit": {
+        "raw": "way_raw",
+        "agg": "way_agg",
+        "csv_filename": "way.csv",
+        "otx_obj": "otx_way",
+        "inx_obj": "inx_way",
     },
 }
 
@@ -547,7 +547,7 @@ def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
 
 def update_pidgin_sound_agg_brick_errors(cursor: sqlite3_Cursor):
     cursor.execute(create_update_pidtagg_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidroad_sound_agg_bridge_error_sqlstr())
+    cursor.execute(create_update_pidway_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
 
@@ -611,7 +611,7 @@ def etl_brick_agg_df_to_brick_pidgin_raw_df(
     etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, brick_dir)
     etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, brick_dir)
     etl_brick_agg_dfs_to_pidgin_tag_raw(legitimate_events, brick_dir)
-    etl_brick_agg_dfs_to_pidgin_road_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_way_raw(legitimate_events, brick_dir)
 
 
 def etl_brick_agg_dfs_to_pidgin_name_raw(
@@ -632,10 +632,10 @@ def etl_brick_agg_dfs_to_pidgin_tag_raw(
     brick_agg_single_to_pidgin_raw("pidgin_tag", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_dfs_to_pidgin_road_raw(
+def etl_brick_agg_dfs_to_pidgin_way_raw(
     legitimate_events: set[EventInt], brick_dir: str
 ):
-    brick_agg_single_to_pidgin_raw("pidgin_road", legitimate_events, brick_dir)
+    brick_agg_single_to_pidgin_raw("pidgin_way", legitimate_events, brick_dir)
 
 
 def brick_agg_single_to_pidgin_raw(
@@ -715,8 +715,8 @@ class BrickAggToPidginRawTransformer:
             return x_row["inx_label"]
         elif self.class_type == "TagUnit" and "inx_tag" not in missing_col:
             return x_row["inx_tag"]
-        elif self.class_type == "RoadUnit" and "inx_road" not in missing_col:
-            return x_row["inx_road"]
+        elif self.class_type == "WayUnit" and "inx_way" not in missing_col:
+            return x_row["inx_way"]
         return None
 
 
@@ -728,8 +728,8 @@ def etl_pidgin_label_raw_to_label_agg(brick_dir: str):
     etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_label")
 
 
-def etl_pidgin_road_raw_to_road_agg(brick_dir: str):
-    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_road")
+def etl_pidgin_way_raw_to_way_agg(brick_dir: str):
+    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_way")
 
 
 def etl_pidgin_tag_raw_to_tag_agg(brick_dir: str):
@@ -744,7 +744,7 @@ def etl_pidgin_single_raw_to_agg(brick_dir: str, map_dimen: str):
 def etl_brick_pidgin_raw_df_to_pidgin_agg_df(brick_dir):
     etl_pidgin_name_raw_to_name_agg(brick_dir)
     etl_pidgin_label_raw_to_label_agg(brick_dir)
-    etl_pidgin_road_raw_to_road_agg(brick_dir)
+    etl_pidgin_way_raw_to_way_agg(brick_dir)
     etl_pidgin_tag_raw_to_tag_agg(brick_dir)
 
 
