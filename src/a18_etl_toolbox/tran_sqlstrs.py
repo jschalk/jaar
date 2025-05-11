@@ -617,7 +617,7 @@ FROM pidgin_core_s_agg
 """
 
 
-def create_update_inconsist_pidgin_sound_agg_sqlstr(dimen: str) -> str:
+def create_update_pidgin_sound_agg_inconsist_sqlstr(dimen: str) -> str:
     pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     return f"""UPDATE {pidgin_s_agg_tablename}
@@ -632,9 +632,25 @@ WHERE face_name IN (
 """
 
 
+def create_update_pidtagg_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidtagg_s_agg_tablename = create_prime_tablename("pidtagg", "s", "agg")
+    return f"""UPDATE {pidtagg_s_agg_tablename}
+SET error_message = 'Bridge cannot exist in TagUnit'
+WHERE rowid IN (
+    SELECT tagg_agg.rowid
+    FROM {pidtagg_s_agg_tablename} tagg_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = tagg_agg.face_name
+    WHERE tagg_agg.otx_tag LIKE '%' || core_vld.otx_bridge || '%'
+      OR tagg_agg.inx_tag LIKE '%' || core_vld.inx_bridge || '%'
+)
+;
+"""
+
+
 def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
-    pidgin_tag_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    pidgin_core_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
+    pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    pidgin_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
     dimen_otx_inx_obj_names = {
         "pidgin_name": "name",
         "pidgin_label": "label",
@@ -644,9 +660,9 @@ def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
     otx_str = f"otx_{dimen_otx_inx_obj_names[dimen]}"
     inx_str = f"inx_{dimen_otx_inx_obj_names[dimen]}"
     return f"""
-INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
+INSERT INTO {pidgin_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
 SELECT event_int, face_name, MAX({otx_str}), MAX({inx_str})
-FROM {pidgin_tag_s_agg_tablename}
+FROM {pidgin_s_agg_tablename}
 WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;
