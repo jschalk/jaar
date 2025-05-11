@@ -599,7 +599,7 @@ def test_get_missing_scale_list_RaisesErrorIfWhileLoopFails_Scenario1():
     )
 
 
-def test__create_allot_dict_SummationFailsInConsistentWay():
+def test__create_allot_dict_SummationFailsInConsistentOrder():
     # ESTABLISH
     ledger = {
         "ACME": 1,

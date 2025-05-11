@@ -500,7 +500,7 @@ def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
     fisc_config_dict = get_fisc_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
-    # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
+    # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
         print(f"{idea_dimen=}")
         assert idea_dict.get(idea_category_str()) in get_idea_categorys()
@@ -667,7 +667,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
     valid_idea_dimens.update(get_pidgin_dimens())
     config_dict = get_idea_config_dict()
 
-    # for every idea_format file there exists a unique idea_number always with leading zeros to make 5 digits
+    # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     idea_numbers_set = set()
     for idea_filename in idea_filenames:
         ref_dict = get_idearef_from_file(idea_filename)

@@ -317,7 +317,7 @@ def check_necessary_nesting_order_exists() -> bool:
 
 def test_atom_config_NestingOrderExistsWhenNeeded():
     # When ChangUnit places an BudAtom in a nested dictionary ChangUnit.budatoms
-    # the order of required argments decides the location. The order must always be
+    # the order of required argments decides the location. The order must be
     # the same. All atom_config elements with two or more required args
     # must assign to each of those args a nesting order
 

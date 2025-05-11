@@ -111,7 +111,7 @@ class BudAtom:
 
     def get_nesting_order_args(self) -> list[str]:
         # When ChangUnit places an BudAtom in a nested dictionary ChangUnit.budatoms
-        # the order of required argments decides the location. The order must always be
+        # the order of required argments decides the location. The order must be
         # the same
         sorted_jkey_keys = get_sorted_jkey_keys(self.dimen)
         return [self.jkeys.get(jkey) for jkey in sorted_jkey_keys]

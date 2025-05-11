@@ -120,7 +120,7 @@ def _validate_pidgin_config(pidgin_config: dict):
         unknown_word_str(),
     }
 
-    # for every pidgin_format file there exists a unique pidgin_number always with leading zeros to make 5 digits
+    # for every pidgin_format file there exists a unique pidgin_number with leading zeros to make 5 digits
     for pidgin_dimens, dimen_dict in pidgin_config.items():
         print(f"_validate_pidgin_config {pidgin_dimens=}")
         assert dimen_dict.get(jkeys_str()) is not None
