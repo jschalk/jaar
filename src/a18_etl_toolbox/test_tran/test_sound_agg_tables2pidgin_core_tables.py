@@ -8,6 +8,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_tag_str,
     pidgin_road_str,
     pidgin_name_str,
+    pidgin_label_str,
     pidgin_core_str,
     inx_bridge_str,
     otx_bridge_str,
@@ -17,6 +18,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_road_str,
     inx_name_str,
     otx_name_str,
+    inx_label_str,
+    otx_label_str,
     unknown_word_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -25,6 +28,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
     CREATE_PIDROAD_SOUND_AGG_SQLSTR,
     CREATE_PIDNAME_SOUND_AGG_SQLSTR,
+    CREATE_PIDLABE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_RAW_SQLSTR,
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
@@ -33,6 +37,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidtagg_sound_agg_bridge_error_sqlstr,
     create_update_pidroad_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
+    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
@@ -796,28 +801,129 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
+def test_create_update_pidlabe_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    rdx_inx = ":"
+    rdx_otx = "<"
+    sue_inx = "Sue"
+    sue_otx = "Suzy"
+    bad_sue_otx = f"{rdx_otx}Suzy"
+    swim_inx = f"{rdx_inx}swimmers"
+    swim_otx = f"{rdx_otx}swimmers"
+    bad_swim_otx = "swimmers"
+    bad_swim_inx = "swimmers"
+    ukx = "Unknown"
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event7 = 7
+    event9 = 9
+    error_message = "Otx and inx labels must match bridge property."
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        cursor.execute(CREATE_PIDLABE_SOUND_AGG_SQLSTR)
+        pidlabe_dimen = pidgin_label_str()
+        pidlabe_s_agg_tablename = create_prime_tablename(pidlabe_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidlabe_s_agg_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {otx_label_str()}
+, {inx_label_str()}
+)"""
+        # TODO create values where errors will appear: groups should map to groups,
+        values_clause = f"""
+VALUES
+  ({event1}, '{bob_str}', '{sue_otx}', '{sue_inx}')
+, ({event1}, '{yao_str}', '{bad_sue_otx}', '{sue_inx}')
+, ({event2}, '{bob_str}', '{swim_otx}', '{swim_inx}')
+, ({event5}, '{yao_str}', '{swim_otx}', '{bad_swim_inx}')
+, ({event7}, '{yao_str}', '{bad_swim_otx}', '{swim_inx}')
+;
+"""
+        cursor.execute(f"{insert_into_clause} {values_clause}")
+        cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
+        pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
+  {face_name_str()}
+, {otx_bridge_str()}
+, {inx_bridge_str()}
+, {unknown_word_str()}
+)
+VALUES
+  ('{bob_str}', '{rdx_otx}', '{rdx_inx}', '{ukx}')
+, ('{yao_str}', '{rdx_otx}', '{rdx_inx}', '{ukx}')
+;
+"""
+        cursor.execute(insert_sqlstr)
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
+
+        testing_select_sqlstr = """
+  SELECT label_agg.rowid, label_agg.otx_label, label_agg.inx_label
+  FROM pidgin_label_s_agg label_agg
+  JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = label_agg.face_name
+  WHERE NOT ((
+            label_agg.otx_label LIKE core_vld.otx_bridge || '%' 
+        AND label_agg.inx_label LIKE core_vld.inx_bridge || '%') 
+      OR (
+            NOT label_agg.otx_label LIKE core_vld.otx_bridge || '%'
+        AND NOT label_agg.inx_label LIKE core_vld.inx_bridge || '%'
+        ))
+        """
+
+        print(cursor.execute(testing_select_sqlstr).fetchall())
+
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
+
+        # WHEN
+        sqlstr = create_update_pidlabe_sound_agg_bridge_error_sqlstr()
+        print(sqlstr)
+        cursor.execute(sqlstr)
+
+        # THEN
+        assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 3
+        select_core_raw_sqlstr = f"SELECT * FROM {pidlabe_s_agg_tablename}"
+        cursor.execute(select_core_raw_sqlstr)
+        rows = cursor.fetchall()
+        print(rows)
+        error_x = error_message
+        exp_row0 = (1, bob_str, sue_otx, sue_inx, None, None, None, None)
+        exp_row1 = (1, yao_str, bad_sue_otx, sue_inx, None, None, None, error_x)
+        exp_row2 = (2, bob_str, swim_otx, swim_inx, None, None, None, None)
+        exp_row3 = (5, yao_str, swim_otx, bad_swim_inx, None, None, None, error_x)
+        exp_row4 = (7, yao_str, bad_swim_otx, swim_inx, None, None, None, error_x)
+        assert rows[0] == exp_row0
+        assert rows[1] == exp_row1
+        print(f" {rows[2]=}")
+        print(f"{exp_row2=}")
+        assert rows[2] == exp_row2
+        assert rows[3] == exp_row3
+        assert rows[4] == exp_row4
+        assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
+
+
 def test_update_pidgin_sound_agg_brick_errors_UpdatesTables_Scenario0():
     # ESTABLISH
     bob_str = "bob"
     casa_str = "Casa"
-    mop_str = "Mop"
-    yao_str = "Yao"
-    yao_inx = "Yaoito"
-    casa_inx = "Casaito"
     rdx = ":"
-    mop_rdx_mop = f"{mop_str}{rdx}{mop_str}"
     ukx = "Unknown"
+    sue_inx = "Sue"
+    bad_sue_otx = f"{rdx}Suzy"
     event1 = 1
-    error_message = "Bridge cannot exist in TagUnit"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PIDTAGG_SOUND_AGG_SQLSTR)
         cursor.execute(CREATE_PIDROAD_SOUND_AGG_SQLSTR)
         cursor.execute(CREATE_PIDNAME_SOUND_AGG_SQLSTR)
+        cursor.execute(CREATE_PIDLABE_SOUND_AGG_SQLSTR)
         pidtagg_s_agg_tablename = create_prime_tablename(pidgin_tag_str(), "s", "agg")
         pidroad_s_agg_tablename = create_prime_tablename(pidgin_road_str(), "s", "agg")
         pidname_s_agg_tablename = create_prime_tablename(pidgin_name_str(), "s", "agg")
+        pidlabe_s_agg_tablename = create_prime_tablename(pidgin_label_str(), "s", "agg")
         insert_pidtagg_sqlstr = f"""
 INSERT INTO {pidtagg_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_tag_str()}, {inx_tag_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
@@ -827,9 +933,13 @@ VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_pidname_sqlstr = f"""
 INSERT INTO {pidname_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+        insert_pidlabe_sqlstr = f"""
+INSERT INTO {pidlabe_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
+VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
         cursor.execute(insert_pidtagg_sqlstr)
         cursor.execute(insert_pidroad_sqlstr)
         cursor.execute(insert_pidname_sqlstr)
+        cursor.execute(insert_pidlabe_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
@@ -840,9 +950,11 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         pidtagg_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtagg_s_agg_tablename} WHERE error_message IS NOT NULL;"
         pidroad_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidroad_s_agg_tablename} WHERE error_message IS NOT NULL;"
         pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
         assert cursor.execute(pidtagg_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidroad_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 0
+        assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         update_pidgin_sound_agg_brick_errors(cursor)
@@ -851,6 +963,8 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         assert cursor.execute(pidtagg_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(pidroad_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 1
+        assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 1
+        assert get_row_count(cursor, pidlabe_s_agg_tablename) == 1
         select_core_raw_sqlstr = f"SELECT {event_int_str()}, {face_name_str()}, {otx_tag_str()}, {inx_tag_str()} FROM {pidtagg_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()

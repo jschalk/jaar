@@ -93,6 +93,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidtagg_sound_agg_bridge_error_sqlstr,
     create_update_pidroad_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
+    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
@@ -548,6 +549,7 @@ def update_pidgin_sound_agg_brick_errors(cursor: sqlite3_Cursor):
     cursor.execute(create_update_pidtagg_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidroad_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
+    cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
 
 
 def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):

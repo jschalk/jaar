@@ -680,6 +680,27 @@ WHERE rowid IN (
 """
 
 
+def create_update_pidlabe_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidlabe_s_agg_tablename = create_prime_tablename("pidlabe", "s", "agg")
+    return f"""UPDATE {pidlabe_s_agg_tablename}
+SET error_message = 'Otx and inx labels must match bridge property.'
+WHERE rowid IN (
+  SELECT label_agg.rowid
+  FROM {pidlabe_s_agg_tablename} label_agg
+  JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = label_agg.face_name
+  WHERE NOT ((
+            label_agg.otx_label LIKE core_vld.otx_bridge || '%' 
+        AND label_agg.inx_label LIKE core_vld.inx_bridge || '%') 
+      OR (
+            NOT label_agg.otx_label LIKE core_vld.otx_bridge || '%'
+        AND NOT label_agg.inx_label LIKE core_vld.inx_bridge || '%'
+        ))
+)
+;
+"""
+
+
 def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     pidgin_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
