@@ -1,5 +1,5 @@
-from src.a01_road_logic.road import (
-    create_road,
+from src.a01_way_logic.way import (
+    create_way,
     get_default_fisc_tag as root_tag,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop
@@ -18,13 +18,13 @@ def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     assert os_path_exists(sue_hubunit.keep_dir()) is False
 
     # WHEN
@@ -38,13 +38,13 @@ def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
@@ -61,13 +61,13 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
@@ -84,13 +84,13 @@ def test_HubUnit_get_duty_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
@@ -121,13 +121,13 @@ def test_HubUnit_save_plan_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
@@ -144,13 +144,13 @@ def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
@@ -167,13 +167,13 @@ def test_HubUnit_get_plan_bud_OpensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
@@ -187,13 +187,13 @@ def test_HubUnit_get_plan_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanu
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_way)
     bob_str = "Bob"
 
     # WHEN / THEN

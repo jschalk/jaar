@@ -4,8 +4,8 @@ from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
-    inx_road_str,
-    otx_road_str,
+    inx_way_str,
+    otx_way_str,
     unknown_word_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
@@ -15,9 +15,9 @@ from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw
 from sqlite3 import connect as sqlite3_connect
 
 # get examples from tests from etl_brick_agg_dfs_to_pidgin_label_raw
-# get examples from tests from etl_brick_agg_dfs_to_pidgin_road_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_way_raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin__raw
-# get examples from tests from etl_brick_agg_dfs_to_pidgin_road_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_way_raw
 
 
 def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario0_Only_valid_events():
@@ -45,8 +45,8 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             fisc_tag_str(),
             owner_name_str(),
             acct_name_str(),
-            otx_road_str(),
-            inx_road_str(),
+            otx_way_str(),
+            inx_way_str(),
         ]
         create_idea_sorted_table(cursor, br00117_valid_tablename, br00117_columns)
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
@@ -55,8 +55,8 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
 , {fisc_tag_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {otx_road_str()}
-, {inx_road_str()}
+, {otx_way_str()}
+, {inx_way_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -70,8 +70,8 @@ VALUES
         br00045_columns = [
             event_int_str(),
             face_name_str(),
-            otx_road_str(),
-            inx_road_str(),
+            otx_way_str(),
+            inx_way_str(),
             otx_bridge_str(),
             inx_bridge_str(),
             unknown_word_str(),
@@ -80,8 +80,8 @@ VALUES
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_road_str()}
-, {inx_road_str()}
+, {otx_way_str()}
+, {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
 , {unknown_word_str()}
@@ -96,34 +96,34 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, br00117_valid_tablename) == 2
         assert get_row_count(cursor, br00045_valid_tablename) == 3
-        pidroad_s_raw_tablename = create_prime_tablename("PIDROAD", "s", "raw")
+        pidway_s_raw_tablename = create_prime_tablename("PIDWAY", "s", "raw")
         budacct_s_put_raw_tblname = create_prime_tablename("BUDACCT", "s", "raw", "put")
-        assert not db_table_exists(cursor, pidroad_s_raw_tablename)
+        assert not db_table_exists(cursor, pidway_s_raw_tablename)
         assert not db_table_exists(cursor, budacct_s_put_raw_tblname)
 
         # WHEN
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidroad_s_raw_tablename) == 5
+        assert get_row_count(cursor, pidway_s_raw_tablename) == 5
         assert get_row_count(cursor, budacct_s_put_raw_tblname) == 2
         b117 = "br00117"
         b045 = "br00045"
-        ex_road0 = (b117, event1, sue_str, yao_str, yao_inx, None, None, None, None)
-        ex_road1 = (b117, event1, sue_str, bob_str, bob_inx, None, None, None, None)
-        ex_road2 = (b045, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
-        ex_road3 = (b045, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
-        ex_road4 = (b045, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
-        select_agg_sqlstr = f"""SELECT * FROM {pidroad_s_raw_tablename};"""
+        ex_way0 = (b117, event1, sue_str, yao_str, yao_inx, None, None, None, None)
+        ex_way1 = (b117, event1, sue_str, bob_str, bob_inx, None, None, None, None)
+        ex_way2 = (b045, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
+        ex_way3 = (b045, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
+        ex_way4 = (b045, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
+        select_agg_sqlstr = f"""SELECT * FROM {pidway_s_raw_tablename};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 5
-        assert rows[0] == ex_road2
-        assert rows[1] == ex_road3
-        assert rows[2] == ex_road4
-        assert rows[3] == ex_road0
-        assert rows[4] == ex_road1
+        assert rows[0] == ex_way2
+        assert rows[1] == ex_way3
+        assert rows[2] == ex_way4
+        assert rows[3] == ex_way0
+        assert rows[4] == ex_way1
 
         select_agg_sqlstr = f"""SELECT * FROM {budacct_s_put_raw_tblname};"""
         cursor.execute(select_agg_sqlstr)

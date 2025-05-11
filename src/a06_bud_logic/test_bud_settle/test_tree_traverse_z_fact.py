@@ -11,16 +11,16 @@ def test_BudUnit_settle_bud_ChangesItemUnit_pledge_task():
     # ESTABLISH
     yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
     hour_str = "hour"
-    hour_road = yao_bud.make_l1_road(hour_str)
+    hour_way = yao_bud.make_l1_way(hour_str)
 
     # WHEN
-    yao_bud.add_fact(fbase=hour_road, fneed=hour_road, fopen=82, fnigh=85)
+    yao_bud.add_fact(fbase=hour_way, fneed=hour_way, fopen=82, fnigh=85)
 
     # THEN
-    mail_road = yao_bud.make_l1_road("obtain mail")
+    mail_way = yao_bud.make_l1_way("obtain mail")
     item_dict = yao_bud.get_item_dict()
-    mail_item = item_dict.get(mail_road)
-    yao_bud.add_fact(fbase=hour_road, fneed=hour_road, fopen=82, fnigh=95)
+    mail_item = item_dict.get(mail_way)
+    yao_bud.add_fact(fbase=hour_way, fneed=hour_way, fopen=82, fnigh=95)
     assert mail_item.pledge is True
     assert mail_item._task is False
 
@@ -28,7 +28,7 @@ def test_BudUnit_settle_bud_ChangesItemUnit_pledge_task():
     yao_bud.settle_bud()
 
     # THEN
-    mail_item = yao_bud.get_item_obj(mail_road)
+    mail_item = yao_bud.get_item_obj(mail_way)
     assert mail_item.pledge
     assert mail_item._task
 
@@ -37,10 +37,10 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     casa_str = "casa"
-    casa_road = zia_bud.make_l1_road(casa_str)
+    casa_way = zia_bud.make_l1_way(casa_str)
     zia_bud.set_l1_item(itemunit_shop(casa_str))
     clean_str = "clean"
-    clean_road = zia_bud.make_road(casa_road, clean_str)
+    clean_way = zia_bud.make_way(casa_way, clean_str)
     clean_begin = -3
     clean_close = 7
     clean_item = itemunit_shop(clean_str, begin=clean_begin, close=clean_close)
@@ -49,8 +49,8 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     sweep_stop_want = 1
     sweep_item = itemunit_shop(sweep_str, gogo_want=sweep_gogo_want)
     sweep_item.stop_want = sweep_stop_want
-    zia_bud.set_item(clean_item, parent_road=casa_road)
-    zia_bud.add_fact(fbase=clean_road, fneed=clean_road, fopen=1, fnigh=5)
+    zia_bud.set_item(clean_item, parent_way=casa_way)
+    zia_bud.add_fact(fbase=clean_way, fneed=clean_way, fopen=1, fnigh=5)
     assert zia_bud.itemroot._factheirs == {}
 
     # WHEN
@@ -58,7 +58,7 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
 
     # THEN
     assert zia_bud.itemroot._factheirs != {}
-    clean_factheir = factheir_shop(clean_road, clean_road, 1.0, 5.0)
+    clean_factheir = factheir_shop(clean_way, clean_way, 1.0, 5.0)
     assert zia_bud.itemroot._factheirs == {clean_factheir.fbase: clean_factheir}
 
 
@@ -66,26 +66,26 @@ def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     casa_str = "casa"
-    casa_road = zia_bud.make_l1_road(casa_str)
+    casa_way = zia_bud.make_l1_way(casa_str)
     zia_bud.set_l1_item(itemunit_shop(casa_str))
     clean_str = "clean"
-    clean_road = zia_bud.make_road(casa_road, clean_str)
+    clean_way = zia_bud.make_way(casa_way, clean_str)
     clean_begin = -3
     clean_close = 7
     clean_item = itemunit_shop(clean_str, begin=clean_begin, close=clean_close)
     sweep_str = "sweep"
-    sweep_road = zia_bud.make_road(clean_road, sweep_str)
+    sweep_way = zia_bud.make_way(clean_way, sweep_str)
     sweep_item = itemunit_shop(sweep_str, addin=2)
-    zia_bud.set_item(clean_item, parent_road=casa_road)
-    zia_bud.set_item(sweep_item, parent_road=clean_road)
-    zia_bud.add_fact(sweep_road, sweep_road, fopen=1, fnigh=5)
+    zia_bud.set_item(clean_item, parent_way=casa_way)
+    zia_bud.set_item(sweep_item, parent_way=clean_way)
+    zia_bud.add_fact(sweep_way, sweep_way, fopen=1, fnigh=5)
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.settle_bud()
     assert (
         str(excinfo.value)
-        == f"Cannot have fact for range inheritor '{sweep_road}'. A ranged fact item must have _begin, _close attributes"
+        == f"Cannot have fact for range inheritor '{sweep_way}'. A ranged fact item must have _begin, _close attributes"
     )
 
 
@@ -93,23 +93,23 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_str = "swim"
-    swim_road = zia_bud.make_l1_road(swim_str)
+    swim_way = zia_bud.make_l1_way(swim_str)
     zia_bud.set_l1_item(itemunit_shop(swim_str))
     fast_str = "fast"
     slow_str = "slow"
-    fast_road = zia_bud.make_road(swim_road, fast_str)
-    slow_road = zia_bud.make_road(swim_road, slow_str)
-    zia_bud.set_item(itemunit_shop(fast_str), parent_road=swim_road)
-    zia_bud.set_item(itemunit_shop(slow_str), parent_road=swim_road)
+    fast_way = zia_bud.make_way(swim_way, fast_str)
+    slow_way = zia_bud.make_way(swim_way, slow_str)
+    zia_bud.set_item(itemunit_shop(fast_str), parent_way=swim_way)
+    zia_bud.set_item(itemunit_shop(slow_str), parent_way=swim_way)
 
     earth_str = "earth"
-    earth_road = zia_bud.make_l1_road(earth_str)
+    earth_way = zia_bud.make_l1_way(earth_str)
     zia_bud.set_l1_item(itemunit_shop(earth_str))
 
-    swim_item = zia_bud.get_item_obj(swim_road)
-    fast_item = zia_bud.get_item_obj(fast_road)
-    slow_item = zia_bud.get_item_obj(slow_road)
-    zia_bud.add_fact(fbase=earth_road, fneed=earth_road, fopen=1.0, fnigh=5.0)
+    swim_item = zia_bud.get_item_obj(swim_way)
+    fast_item = zia_bud.get_item_obj(fast_way)
+    slow_item = zia_bud.get_item_obj(slow_way)
+    zia_bud.add_fact(fbase=earth_way, fneed=earth_way, fopen=1.0, fnigh=5.0)
     assert swim_item._factheirs == {}
     assert fast_item._factheirs == {}
     assert slow_item._factheirs == {}
@@ -121,7 +121,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     assert swim_item._factheirs != {}
     assert fast_item._factheirs != {}
     assert slow_item._factheirs != {}
-    factheir_set_range = factheir_shop(earth_road, earth_road, 1.0, 5.0)
+    factheir_set_range = factheir_shop(earth_way, earth_way, 1.0, 5.0)
     factheirs_set_range = {factheir_set_range.fbase: factheir_set_range}
     assert swim_item._factheirs == factheirs_set_range
     assert fast_item._factheirs == factheirs_set_range
@@ -130,17 +130,17 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     assert len(swim_item._factheirs) == 1
 
     # WHEN
-    swim_earth_factheir = swim_item._factheirs.get(earth_road)
+    swim_earth_factheir = swim_item._factheirs.get(earth_way)
     swim_earth_factheir.set_range_null()
 
     # THEN
-    fact_none_range = factheir_shop(earth_road, earth_road, None, None)
+    fact_none_range = factheir_shop(earth_way, earth_way, None, None)
     facts_none_range = {fact_none_range.fbase: fact_none_range}
     assert swim_item._factheirs == facts_none_range
     assert fast_item._factheirs == factheirs_set_range
     assert slow_item._factheirs == factheirs_set_range
 
-    fact_x1 = swim_item._factheirs.get(earth_road)
+    fact_x1 = swim_item._factheirs.get(earth_way)
     fact_x1.set_range_null()
     print(type(fact_x1))
     assert str(type(fact_x1)).find(".reason.FactHeir'>")
@@ -150,38 +150,38 @@ def test_BudUnit_settle_bud_FactUnitMoldsFactHeir():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_str = "swim"
-    swim_road = zia_bud.make_l1_road(swim_str)
+    swim_way = zia_bud.make_l1_way(swim_str)
     zia_bud.set_l1_item(itemunit_shop(swim_str))
-    swim_item = zia_bud.get_item_obj(swim_road)
+    swim_item = zia_bud.get_item_obj(swim_way)
 
     fast_str = "fast"
     slow_str = "slow"
-    zia_bud.set_item(itemunit_shop(fast_str), parent_road=swim_road)
-    zia_bud.set_item(itemunit_shop(slow_str), parent_road=swim_road)
+    zia_bud.set_item(itemunit_shop(fast_str), parent_way=swim_way)
+    zia_bud.set_item(itemunit_shop(slow_str), parent_way=swim_way)
 
     earth_str = "earth"
-    earth_road = zia_bud.make_l1_road(earth_str)
+    earth_way = zia_bud.make_l1_way(earth_str)
     zia_bud.set_l1_item(itemunit_shop(earth_str))
 
     assert swim_item._factheirs == {}
 
     # WHEN
-    zia_bud.add_fact(fbase=earth_road, fneed=earth_road, fopen=1.0, fnigh=5.0)
+    zia_bud.add_fact(fbase=earth_way, fneed=earth_way, fopen=1.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
-    first_earthheir = factheir_shop(earth_road, earth_road, fopen=1.0, fnigh=5.0)
+    first_earthheir = factheir_shop(earth_way, earth_way, fopen=1.0, fnigh=5.0)
     first_earthdict = {first_earthheir.fbase: first_earthheir}
     assert swim_item._factheirs == first_earthdict
 
     # WHEN
-    # earth_curb = factunit_shop(fbase=earth_road, fneed=earth_road, open=3.0, nigh=4.0)
+    # earth_curb = factunit_shop(fbase=earth_way, fneed=earth_way, open=3.0, nigh=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
-    zia_bud.add_fact(fbase=earth_road, fneed=earth_road, fopen=3.0, fnigh=5.0)
+    zia_bud.add_fact(fbase=earth_way, fneed=earth_way, fopen=3.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
-    after_earthheir = factheir_shop(earth_road, earth_road, fopen=3.0, fnigh=5.0)
+    after_earthheir = factheir_shop(earth_way, earth_way, fopen=3.0, fnigh=5.0)
     after_earthdict = {after_earthheir.fbase: after_earthheir}
     assert swim_item._factheirs == after_earthdict
 
@@ -190,19 +190,19 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     swim_str = "swim"
-    swim_road = sue_bud.make_l1_road(swim_str)
+    swim_way = sue_bud.make_l1_way(swim_str)
     sue_bud.set_l1_item(itemunit_shop(swim_str))
     fast_str = "fast"
     slow_str = "slow"
-    sue_bud.set_item(itemunit_shop(fast_str), parent_road=swim_road)
-    sue_bud.set_item(itemunit_shop(slow_str), parent_road=swim_road)
+    sue_bud.set_item(itemunit_shop(fast_str), parent_way=swim_way)
+    sue_bud.set_item(itemunit_shop(slow_str), parent_way=swim_way)
     earth_str = "earth"
-    earth_road = sue_bud.make_l1_road(earth_str)
+    earth_way = sue_bud.make_l1_way(earth_str)
     sue_bud.set_l1_item(itemunit_shop(earth_str))
-    swim_item = sue_bud.get_item_obj(swim_road)
-    first_earthheir = factheir_shop(earth_road, earth_road, fopen=200.0, fnigh=500.0)
+    swim_item = sue_bud.get_item_obj(swim_way)
+    first_earthheir = factheir_shop(earth_way, earth_way, fopen=200.0, fnigh=500.0)
     first_earthdict = {first_earthheir.fbase: first_earthheir}
-    sue_bud.add_fact(earth_road, earth_road, fopen=200.0, fnigh=500.0)
+    sue_bud.add_fact(earth_way, earth_way, fopen=200.0, fnigh=500.0)
     assert swim_item._factheirs == {}
 
     # WHEN
@@ -212,7 +212,7 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
     assert swim_item._factheirs == first_earthdict
 
     # WHEN
-    earth_curb = factunit_shop(earth_road, earth_road, fopen=3.0, fnigh=4.0)
+    earth_curb = factunit_shop(earth_way, earth_way, fopen=3.0, fnigh=4.0)
     swim_item.set_factunit(factunit=earth_curb)
     sue_bud.settle_bud()
 
@@ -228,10 +228,10 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     assert yao_bud is not None
     assert len(yao_bud.itemroot._kids[mail_str].reasonunits) == 1
     item_dict = yao_bud.get_item_dict()
-    mail_item = item_dict.get(yao_bud.make_l1_road(mail_str))
+    mail_item = item_dict.get(yao_bud.make_l1_way(mail_str))
     hour_str = "hour"
-    hour_road = yao_bud.make_l1_road(hour_str)
-    yao_bud.add_fact(hour_road, hour_road, fopen=82, fnigh=85)
+    hour_way = yao_bud.make_l1_way(hour_str)
+    yao_bud.add_fact(hour_way, hour_way, fopen=82, fnigh=85)
     assert mail_item.pledge
     assert mail_item._task
 

@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import create_road_from_tags
+from src.a01_way_logic.way import create_way_from_tags
 from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_item_logic.item import itemunit_shop
@@ -70,17 +70,17 @@ def test_BudUnit_set_all_item_uids_unique_SetsUIDsCorrectly():
     sports_str = "sports"
     zia_bud.set_l1_item(itemunit_shop(swim_str, _uid=None))
     zia_bud.set_l1_item(itemunit_shop(sports_str, _uid=2))
-    swim_road = zia_bud.make_l1_road(swim_str)
-    assert zia_bud.get_item_obj(swim_road)._uid is None
+    swim_way = zia_bud.make_l1_way(swim_str)
+    assert zia_bud.get_item_obj(swim_way)._uid is None
 
     # WHEN
     zia_bud.set_all_item_uids_unique()
 
     # THEN
-    assert zia_bud.get_item_obj(swim_road)._uid is not None
+    assert zia_bud.get_item_obj(swim_way)._uid is not None
 
 
-def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ItemRoadUnit():
+def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ItemWayUnit():
     # ESTABLISH
     nia_str = "Nia"
     nia_bud = budunit_shop(nia_str, tally=10)
@@ -89,16 +89,16 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ItemRoadUnit():
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN / THEN
-    assert tree_metrics_before.last_evaluated_pledge_item_road is None
+    assert tree_metrics_before.last_evaluated_pledge_item_way is None
 
 
-def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
+def test_BudUnit_get_tree_metrics_Returns_pledge_ItemWayUnit():
     # ESTABLISH
     yao_bud = budunit_v001()
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
     # WHEN / THEN
-    traain_road = create_road_from_tags(
+    traain_way = create_way_from_tags(
         [
             yao_bud.fisc_tag,
             "ACME",
@@ -107,7 +107,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemRoadUnit():
             "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_pledge_item_road == traain_road
+    assert yao_tree_metrics.last_evaluated_pledge_item_way == traain_way
 
 
 def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
@@ -136,8 +136,8 @@ def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
     assert len(missing_bases) == 11
 
     yao_budunit.add_fact(
-        fbase=yao_budunit.make_l1_road("day_minute"),
-        fneed=yao_budunit.make_l1_road("day_minute"),
+        fbase=yao_budunit.make_l1_way("day_minute"),
+        fneed=yao_budunit.make_l1_way("day_minute"),
         fopen=0,
         fnigh=1439,
     )

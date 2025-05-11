@@ -4,15 +4,15 @@ from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
-    inx_road_str,
-    otx_road_str,
+    inx_way_str,
+    otx_way_str,
     unknown_word_str,
 )
 from src.a17_idea_logic._utils.str_a17 import brick_agg_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_brick_agg_dfs_to_pidgin_road_raw
+from src.a18_etl_toolbox.transformers import etl_brick_agg_dfs_to_pidgin_way_raw
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
@@ -21,7 +21,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
+def test_etl_brick_agg_dfs_to_pidgin_way_raw_CreatesFile_Scenario0_SingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -40,8 +40,8 @@ def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
     ]
     sue0 = [event7, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event7, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -52,28 +52,28 @@ def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario0_SingleIdea(
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_brick_agg_dfs_to_pidgin_road_raw({event7}, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_way_raw({event7}, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    road_raw_str = "road_raw"
-    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
-    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
-    assert list(gen_road_df.columns) == road_raw_columns
-    assert len(gen_road_df) == 2
+    way_raw_str = "way_raw"
+    gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
+    way_raw_columns = PidginPrimeColumns().pidgin_way_raw_columns
+    assert list(gen_way_df.columns) == way_raw_columns
+    assert len(gen_way_df) == 2
     bx = "br00117"
-    e1_road0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
-    e1_road1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
-    e1_road_rows = [e1_road0, e1_road1]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
-    assert len(gen_road_df) == len(e1_road_df)
-    print(f"{gen_road_df.to_csv()=}")
-    print(f" {e1_road_df.to_csv()=}")
-    assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [road_raw_str]
+    e1_way0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
+    e1_way1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
+    e1_way_rows = [e1_way0, e1_way1]
+    e1_way_df = DataFrame(e1_way_rows, columns=way_raw_columns)
+    assert len(gen_way_df) == len(e1_way_df)
+    print(f"{gen_way_df.to_csv()=}")
+    print(f" {e1_way_df.to_csv()=}")
+    assert gen_way_df.to_csv(index=False) == e1_way_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [way_raw_str]
 
 
-def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_brick_agg_dfs_to_pidgin_way_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -97,15 +97,15 @@ def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdea
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
     ]
     br00045_file_path = create_path(x_brick_dir, "br00045.xlsx")
     br00045_columns = [
         event_int_str(),
         face_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -126,33 +126,33 @@ def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario1_MultipleIdea
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_brick_agg_dfs_to_pidgin_road_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_way_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    road_raw_str = "road_raw"
-    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
-    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
-    assert list(gen_road_df.columns) == road_raw_columns
-    assert len(gen_road_df) == 5
+    way_raw_str = "way_raw"
+    gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
+    way_raw_columns = PidginPrimeColumns().pidgin_way_raw_columns
+    assert list(gen_way_df.columns) == way_raw_columns
+    assert len(gen_way_df) == 5
     b3 = "br00117"
     b4 = "br00045"
-    e1_road0 = [b3, event1, sue_str, yao_str, yao_inx, None, None, None]
-    e1_road1 = [b3, event1, sue_str, bob_str, bob_inx, None, None, None]
-    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_road5 = [b4, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_way0 = [b3, event1, sue_str, yao_str, yao_inx, None, None, None]
+    e1_way1 = [b3, event1, sue_str, bob_str, bob_inx, None, None, None]
+    e1_way3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_way4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_way5 = [b4, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
 
-    e1_road_rows = [e1_road3, e1_road4, e1_road5, e1_road0, e1_road1]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
-    assert len(gen_road_df) == len(e1_road_df)
-    print(f"{gen_road_df.to_csv()=}")
-    print(f" {e1_road_df.to_csv()=}")
-    assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [road_raw_str]
+    e1_way_rows = [e1_way3, e1_way4, e1_way5, e1_way0, e1_way1]
+    e1_way_df = DataFrame(e1_way_rows, columns=way_raw_columns)
+    assert len(gen_way_df) == len(e1_way_df)
+    print(f"{gen_way_df.to_csv()=}")
+    print(f" {e1_way_df.to_csv()=}")
+    assert gen_way_df.to_csv(index=False) == e1_way_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [way_raw_str]
 
 
-def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_brick_agg_dfs_to_pidgin_way_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -175,15 +175,15 @@ def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_ev
         fisc_tag_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
     ]
     br00045_file_path = create_path(x_brick_dir, "br00045.xlsx")
     br00045_columns = [
         event_int_str(),
         face_name_str(),
-        otx_road_str(),
-        inx_road_str(),
+        otx_way_str(),
+        inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_word_str(),
@@ -204,23 +204,23 @@ def test_etl_brick_agg_dfs_to_pidgin_road_raw_CreatesFile_Scenario2_WorldUnit_ev
     assert os_path_exists(pidgin_path) is False
 
     # WHEN
-    etl_brick_agg_dfs_to_pidgin_road_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_way_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    road_raw_str = "road_raw"
-    gen_road_df = pandas_read_excel(pidgin_path, sheet_name=road_raw_str)
-    road_raw_columns = PidginPrimeColumns().pidgin_road_raw_columns
-    assert list(gen_road_df.columns) == road_raw_columns
-    assert len(gen_road_df) == 2
+    way_raw_str = "way_raw"
+    gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
+    way_raw_columns = PidginPrimeColumns().pidgin_way_raw_columns
+    assert list(gen_way_df.columns) == way_raw_columns
+    assert len(gen_way_df) == 2
     b3 = "br00117"
     b4 = "br00045"
-    e1_road3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_road4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_road_rows = [e1_road3, e1_road4]
-    e1_road_df = DataFrame(e1_road_rows, columns=road_raw_columns)
-    assert len(gen_road_df) == len(e1_road_df)
-    print(f"{gen_road_df.to_csv()=}")
-    print(f" {e1_road_df.to_csv()=}")
-    assert gen_road_df.to_csv(index=False) == e1_road_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [road_raw_str]
+    e1_way3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_way4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_way_rows = [e1_way3, e1_way4]
+    e1_way_df = DataFrame(e1_way_rows, columns=way_raw_columns)
+    assert len(gen_way_df) == len(e1_way_df)
+    print(f"{gen_way_df.to_csv()=}")
+    print(f" {e1_way_df.to_csv()=}")
+    assert gen_way_df.to_csv(index=False) == e1_way_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [way_raw_str]

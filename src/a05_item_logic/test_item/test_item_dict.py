@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_way_logic.way import get_default_fisc_tag as root_tag, create_way
 from src.a05_item_logic.healer import healerlink_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import (
@@ -64,28 +64,28 @@ def test_get_obj_from_item_dict_ReturnsCorrect_HealerLink():
 def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
     week_str = "weekdays"
-    week_road = create_road(root_tag(), week_str)
+    week_way = create_way(root_tag(), week_str)
     wed_str = "Wednesday"
-    wed_road = create_road(week_road, wed_str)
+    wed_way = create_way(week_way, wed_str)
     states_str = "nation-state"
-    states_road = create_road(root_tag(), states_str)
+    states_way = create_way(root_tag(), states_str)
     usa_str = "USA"
-    usa_road = create_road(states_road, usa_str)
+    usa_way = create_way(states_way, usa_str)
 
-    wed_premise = premiseunit_shop(need=wed_road)
+    wed_premise = premiseunit_shop(need=wed_way)
     wed_premise._status = True
-    usa_premise = premiseunit_shop(need=usa_road)
+    usa_premise = premiseunit_shop(need=usa_way)
     usa_premise._status = False
 
     x1_reasonunits = {
-        week_road: reasonunit_shop(week_road, premises={wed_premise.need: wed_premise}),
-        states_road: reasonunit_shop(states_road, {usa_premise.need: usa_premise}),
+        week_way: reasonunit_shop(week_way, premises={wed_premise.need: wed_premise}),
+        states_way: reasonunit_shop(states_way, {usa_premise.need: usa_premise}),
     }
     wed_premises = {wed_premise.need: wed_premise}
     usa_premises = {usa_premise.need: usa_premise}
     x1_reasonheirs = {
-        week_road: reasonheir_shop(week_road, wed_premises, _status=True),
-        states_road: reasonheir_shop(states_road, usa_premises, _status=False),
+        week_way: reasonheir_shop(week_way, wed_premises, _status=True),
+        states_way: reasonheir_shop(states_way, usa_premises, _status=False),
     }
     biker_awardee_title = "bikers"
     biker_give_force = 3.0
@@ -124,10 +124,10 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
     sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
-    casa_road = create_road(root_tag(), casa_str)
+    casa_way = create_way(root_tag(), casa_str)
     x_problem_bool = True
     casa_item = itemunit_shop(
-        parent_road=casa_road,
+        parent_way=casa_way,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
@@ -141,7 +141,7 @@ def test_ItemUnit_get_dict_ReturnsCorrectCompleteDict():
         pledge=True,
         problem_bool=x_problem_bool,
     )
-    x_factunit = factunit_shop(fbase=week_road, fneed=week_road, fopen=5, fnigh=59)
+    x_factunit = factunit_shop(fbase=week_way, fneed=week_way, fopen=5, fnigh=59)
     casa_item.set_factunit(factunit=x_factunit)
     casa_item._originunit.set_originhold(acct_name="Ray", importance=None)
     casa_item._originunit.set_originhold(acct_name="Lei", importance=4)
@@ -215,8 +215,8 @@ def test_ItemUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     ignore_str = "ignore"
 
     a_str = "a"
-    a_road = create_road(root_tag(), a_str)
-    casa_item.set_factunit(factunit_shop(a_road, a_road))
+    a_way = create_way(root_tag(), a_str)
+    casa_item.set_factunit(factunit_shop(a_way, a_way))
 
     yao_str = "Yao"
     casa_item.set_awardlink(awardlink_shop(yao_str))

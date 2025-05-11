@@ -1,9 +1,9 @@
-from src.a01_road_logic.road import FiscTag
+from src.a01_way_logic.way import FiscTag
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_itemunit_str,
     acct_name_str,
-    parent_road_str,
+    parent_way_str,
     item_tag_str,
 )
 from src.a08_bud_atom_logic.atom import (
@@ -23,7 +23,7 @@ def get_atom_example_itemunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
     x_dimen = bud_itemunit_str()
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_itemunit_budatom.set_jkey(item_tag_str(), sports_str)
-    insert_itemunit_budatom.set_jkey(parent_road_str(), fisc_tag)
+    insert_itemunit_budatom.set_jkey(parent_way_str(), fisc_tag)
     return insert_itemunit_budatom
 
 

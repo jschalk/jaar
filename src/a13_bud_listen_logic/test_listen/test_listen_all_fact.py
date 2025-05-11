@@ -122,29 +122,29 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_str = "Yao"
     yao_listener = budunit_shop(yao_str)
     casa_str = "casa"
-    casa_road = yao_listener.make_l1_road(casa_str)
+    casa_way = yao_listener.make_l1_way(casa_str)
     status_str = "status"
-    status_road = yao_listener.make_road(casa_road, status_str)
+    status_way = yao_listener.make_way(casa_way, status_str)
     clean_str = "clean"
-    clean_road = yao_listener.make_road(status_road, clean_str)
+    clean_way = yao_listener.make_way(status_way, clean_str)
     dirty_str = "dirty"
-    dirty_road = yao_listener.make_road(status_road, dirty_str)
+    dirty_way = yao_listener.make_way(status_way, dirty_str)
     sweep_str = "sweep"
-    sweep_road = yao_listener.make_road(casa_road, sweep_str)
+    sweep_way = yao_listener.make_way(casa_way, sweep_str)
 
     yao_listener.add_acctunit(yao_str)
     yao_listener.set_acct_respect(20)
-    yao_listener.set_item(itemunit_shop(clean_str), status_road)
-    yao_listener.set_item(itemunit_shop(dirty_str), status_road)
-    yao_listener.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+    yao_listener.set_item(itemunit_shop(clean_str), status_way)
+    yao_listener.set_item(itemunit_shop(dirty_str), status_way)
+    yao_listener.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
     yao_listener.edit_item_attr(
-        sweep_road, reason_base=status_road, reason_premise=dirty_road
+        sweep_way, reason_base=status_way, reason_premise=dirty_way
     )
     missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
 
     yao_speaker = budunit_shop(yao_str)
-    yao_speaker.add_fact(status_road, clean_road, create_missing_items=True)
-    assert yao_listener.get_missing_fact_bases().keys() == {status_road}
+    yao_speaker.add_fact(status_way, clean_way, create_missing_items=True)
+    assert yao_listener.get_missing_fact_bases().keys() == {status_way}
 
     # WHEN
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_bases)
@@ -160,48 +160,48 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.add_acctunit(yao_str)
     yao_listener.set_acct_respect(20)
     casa_str = "casa"
-    casa_road = yao_listener.make_l1_road(casa_str)
+    casa_way = yao_listener.make_l1_way(casa_str)
     status_str = "status"
-    status_road = yao_listener.make_road(casa_road, status_str)
+    status_way = yao_listener.make_way(casa_way, status_str)
     clean_str = "clean"
-    clean_road = yao_listener.make_road(status_road, clean_str)
+    clean_way = yao_listener.make_way(status_way, clean_str)
     dirty_str = "dirty"
-    dirty_road = yao_listener.make_road(status_road, dirty_str)
+    dirty_way = yao_listener.make_way(status_way, dirty_str)
     sweep_str = "sweep"
-    sweep_road = yao_listener.make_road(casa_road, sweep_str)
+    sweep_way = yao_listener.make_way(casa_way, sweep_str)
     fridge_str = "fridge"
-    fridge_road = yao_listener.make_road(casa_road, fridge_str)
+    fridge_way = yao_listener.make_way(casa_way, fridge_str)
     running_str = "running"
-    running_road = yao_listener.make_road(fridge_road, running_str)
+    running_way = yao_listener.make_way(fridge_way, running_str)
 
-    yao_listener.set_item(itemunit_shop(running_str), fridge_road)
-    yao_listener.set_item(itemunit_shop(clean_str), status_road)
-    yao_listener.set_item(itemunit_shop(dirty_str), status_road)
-    yao_listener.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
+    yao_listener.set_item(itemunit_shop(running_str), fridge_way)
+    yao_listener.set_item(itemunit_shop(clean_str), status_way)
+    yao_listener.set_item(itemunit_shop(dirty_str), status_way)
+    yao_listener.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
     yao_listener.edit_item_attr(
-        sweep_road, reason_base=status_road, reason_premise=dirty_road
+        sweep_way, reason_base=status_way, reason_premise=dirty_way
     )
     yao_listener.edit_item_attr(
-        sweep_road, reason_base=fridge_road, reason_premise=running_road
+        sweep_way, reason_base=fridge_way, reason_premise=running_way
     )
     assert len(yao_listener.get_missing_fact_bases()) == 2
-    yao_listener.add_fact(status_road, dirty_road)
+    yao_listener.add_fact(status_way, dirty_way)
     assert len(yao_listener.get_missing_fact_bases()) == 1
-    assert yao_listener.get_fact(status_road).fneed == dirty_road
+    assert yao_listener.get_fact(status_way).fneed == dirty_way
 
     # WHEN
     yao_speaker = budunit_shop(yao_str)
-    yao_speaker.add_fact(status_road, clean_road, create_missing_items=True)
-    yao_speaker.add_fact(fridge_road, running_road, create_missing_items=True)
+    yao_speaker.add_fact(status_way, clean_way, create_missing_items=True)
+    yao_speaker.add_fact(fridge_way, running_way, create_missing_items=True)
     missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_bases)
 
     # THEN
     assert len(yao_listener.get_missing_fact_bases()) == 0
     # did not grab speaker's factunit
-    assert yao_listener.get_fact(status_road).fneed == dirty_road
+    assert yao_listener.get_fact(status_way).fneed == dirty_way
     # grabed speaker's factunit
-    assert yao_listener.get_fact(fridge_road).fneed == running_road
+    assert yao_listener.get_fact(fridge_way).fneed == running_way
 
 
 def test_migrate_all_facts_CorrectlyAddsItemUnitsAndSetsFactUnits():
@@ -209,52 +209,52 @@ def test_migrate_all_facts_CorrectlyAddsItemUnitsAndSetsFactUnits():
     yao_str = "Yao"
     yao_src = budunit_shop(yao_str)
     casa_str = "casa"
-    casa_road = yao_src.make_l1_road(casa_str)
+    casa_way = yao_src.make_l1_way(casa_str)
     status_str = "status"
-    status_road = yao_src.make_road(casa_road, status_str)
+    status_way = yao_src.make_way(casa_way, status_str)
     clean_str = "clean"
-    clean_road = yao_src.make_road(status_road, clean_str)
+    clean_way = yao_src.make_way(status_way, clean_str)
     dirty_str = "dirty"
-    dirty_road = yao_src.make_road(status_road, dirty_str)
+    dirty_way = yao_src.make_way(status_way, dirty_str)
     sweep_str = "sweep"
-    sweep_road = yao_src.make_road(casa_road, sweep_str)
+    sweep_way = yao_src.make_way(casa_way, sweep_str)
     weather_str = "weather"
-    weather_road = yao_src.make_l1_road(weather_str)
+    weather_way = yao_src.make_l1_way(weather_str)
     rain_str = "raining"
-    rain_road = yao_src.make_road(weather_road, rain_str)
+    rain_way = yao_src.make_way(weather_way, rain_str)
     snow_str = "snow"
-    snow_road = yao_src.make_road(weather_road, snow_str)
+    snow_way = yao_src.make_way(weather_way, snow_str)
 
     yao_src.add_acctunit(yao_str)
     yao_src.set_acct_respect(20)
-    yao_src.set_item(itemunit_shop(clean_str), status_road)
-    yao_src.set_item(itemunit_shop(dirty_str), status_road)
-    yao_src.set_item(itemunit_shop(sweep_str, pledge=True), casa_road)
-    yao_src.edit_reason(sweep_road, status_road, dirty_road)
+    yao_src.set_item(itemunit_shop(clean_str), status_way)
+    yao_src.set_item(itemunit_shop(dirty_str), status_way)
+    yao_src.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
+    yao_src.edit_reason(sweep_way, status_way, dirty_way)
     # missing_fact_bases = list(yao_src.get_missing_fact_bases().keys())
-    yao_src.set_item(itemunit_shop(rain_str), weather_road)
-    yao_src.set_item(itemunit_shop(snow_str), weather_road)
-    yao_src.add_fact(weather_road, rain_road)
-    yao_src.add_fact(status_road, clean_road)
+    yao_src.set_item(itemunit_shop(rain_str), weather_way)
+    yao_src.set_item(itemunit_shop(snow_str), weather_way)
+    yao_src.add_fact(weather_way, rain_way)
+    yao_src.add_fact(status_way, clean_way)
     yao_src.settle_bud()
 
     yao_dst = budunit_shop(yao_str)
-    assert yao_dst.item_exists(clean_road) is False
-    assert yao_dst.item_exists(dirty_road) is False
-    assert yao_dst.item_exists(rain_road) is False
-    assert yao_dst.item_exists(snow_road) is False
-    assert yao_dst.get_fact(weather_road) is None
-    assert yao_dst.get_fact(status_road) is None
+    assert yao_dst.item_exists(clean_way) is False
+    assert yao_dst.item_exists(dirty_way) is False
+    assert yao_dst.item_exists(rain_way) is False
+    assert yao_dst.item_exists(snow_way) is False
+    assert yao_dst.get_fact(weather_way) is None
+    assert yao_dst.get_fact(status_way) is None
 
     # WHEN
     migrate_all_facts(yao_src, yao_dst)
 
     # THEN
-    assert yao_dst.item_exists(clean_road)
-    assert yao_dst.item_exists(dirty_road)
-    assert yao_dst.item_exists(rain_road)
-    assert yao_dst.item_exists(snow_road)
-    assert yao_dst.get_fact(weather_road) is not None
-    assert yao_dst.get_fact(status_road) is not None
-    assert yao_dst.get_fact(weather_road).fneed == rain_road
-    assert yao_dst.get_fact(status_road).fneed == clean_road
+    assert yao_dst.item_exists(clean_way)
+    assert yao_dst.item_exists(dirty_way)
+    assert yao_dst.item_exists(rain_way)
+    assert yao_dst.item_exists(snow_way)
+    assert yao_dst.get_fact(weather_way) is not None
+    assert yao_dst.get_fact(status_way) is not None
+    assert yao_dst.get_fact(weather_way).fneed == rain_way
+    assert yao_dst.get_fact(status_way).fneed == clean_way

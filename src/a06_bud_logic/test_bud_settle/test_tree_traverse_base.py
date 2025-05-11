@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import to_road
+from src.a01_way_logic.way import to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_item import factheir_shop
 from src.a05_item_logic.item import itemunit_shop
@@ -38,7 +38,7 @@ def test_BudUnit_clear_item_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._tree_traverse_count != x_tree_traverse_count
     assert sue_bud._tree_traverse_count == 0
     assert sue_bud._item_dict != x_item_dict
-    assert sue_bud._item_dict == {sue_bud.itemroot.get_road(): sue_bud.itemroot}
+    assert sue_bud._item_dict == {sue_bud.itemroot.get_way(): sue_bud.itemroot}
     assert sue_bud._offtrack_kids_mass_set == set()
     assert not sue_bud._reason_bases
     assert not sue_bud._range_inheritors
@@ -77,13 +77,13 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     sue_bud = get_budunit_with_4_levels()
     # test root status:
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    casa_item = sue_bud.get_item_obj(casa_road)
+    casa_way = sue_bud.make_l1_way(casa_str)
+    casa_item = sue_bud.get_item_obj(casa_way)
     week_str = "weekdays"
-    week_road = sue_bud.make_l1_road(week_str)
+    week_way = sue_bud.make_l1_way(week_str)
     mon_str = "Monday"
-    mon_road = sue_bud.make_road(week_road, mon_str)
-    mon_item = sue_bud.get_item_obj(mon_road)
+    mon_way = sue_bud.make_way(week_way, mon_str)
+    mon_item = sue_bud.get_item_obj(mon_way)
     assert sue_bud.itemroot._descendant_pledge_count is None
     assert sue_bud.itemroot._all_acct_cred is None
     assert sue_bud.itemroot._all_acct_debt is None
@@ -150,22 +150,22 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    casa_item = sue_bud.get_item_obj(casa_road)
+    casa_way = sue_bud.make_l1_way(casa_str)
+    casa_item = sue_bud.get_item_obj(casa_way)
     week_str = "weekdays"
-    week_road = sue_bud.make_l1_road(week_str)
-    week_item = sue_bud.get_item_obj(week_road)
+    week_way = sue_bud.make_l1_way(week_str)
+    week_item = sue_bud.get_item_obj(week_way)
     mon_str = "Monday"
-    mon_road = sue_bud.make_road(week_road, mon_str)
-    mon_item = sue_bud.get_item_obj(mon_road)
+    mon_way = sue_bud.make_way(week_way, mon_str)
+    mon_item = sue_bud.get_item_obj(mon_way)
 
     email_str = "email"
     email_item = itemunit_shop(email_str, pledge=True)
-    sue_bud.set_item(email_item, parent_road=casa_road)
+    sue_bud.set_item(email_item, parent_way=casa_way)
 
     # test root status:
-    root_road = to_road(sue_bud.fisc_tag)
-    x_itemroot = sue_bud.get_item_obj(root_road)
+    root_way = to_way(sue_bud.fisc_tag)
+    x_itemroot = sue_bud.get_item_obj(root_way)
     assert x_itemroot._descendant_pledge_count is None
     assert x_itemroot._all_acct_cred is None
     assert x_itemroot._all_acct_debt is None
@@ -203,11 +203,11 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     vacuum_str = "vacuum"
     sue_str = "Sue"
 
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     email_item = itemunit_shop(email_str, pledge=True)
-    sue_bud.set_item(email_item, parent_road=casa_road)
+    sue_bud.set_item(email_item, parent_way=casa_way)
     vacuum_item = itemunit_shop(vacuum_str, pledge=True)
-    sue_bud.set_item(vacuum_item, parent_road=casa_road)
+    sue_bud.set_item(vacuum_item, parent_way=casa_way)
 
     sue_bud.add_acctunit(acct_name=sue_str)
     x_awardlink = awardlink_shop(awardee_title=sue_str)
@@ -260,13 +260,13 @@ def test_BudUnit_settle_bud_SetsItemUnitAttr_awardlinks():
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
     awardlink_zia = awardlink_shop(zia_str, give_force=10)
     awardlink_Xio = awardlink_shop(Xio_str, give_force=10)
-    swim_road = sue_bud.make_l1_road(swim_str)
-    sue_bud.edit_item_attr(swim_road, awardlink=awardlink_yao)
-    sue_bud.edit_item_attr(swim_road, awardlink=awardlink_zia)
-    sue_bud.edit_item_attr(swim_road, awardlink=awardlink_Xio)
+    swim_way = sue_bud.make_l1_way(swim_str)
+    sue_bud.edit_item_attr(swim_way, awardlink=awardlink_yao)
+    sue_bud.edit_item_attr(swim_way, awardlink=awardlink_zia)
+    sue_bud.edit_item_attr(swim_way, awardlink=awardlink_Xio)
 
     street_str = "streets"
-    sue_bud.set_item(itemunit_shop(street_str), parent_road=swim_road)
+    sue_bud.set_item(itemunit_shop(street_str), parent_way=swim_way)
     assert sue_bud.itemroot.awardlinks in (None, {})
     assert len(sue_bud.itemroot._kids[swim_str].awardlinks) == 3
 
@@ -275,8 +275,8 @@ def test_BudUnit_settle_bud_SetsItemUnitAttr_awardlinks():
 
     # THEN
     print(f"{sue_bud._item_dict.keys()=} ")
-    swim_item = sue_bud._item_dict.get(swim_road)
-    street_item = sue_bud._item_dict.get(sue_bud.make_road(swim_road, street_str))
+    swim_item = sue_bud._item_dict.get(swim_way)
+    street_item = sue_bud._item_dict.get(sue_bud.make_way(swim_way, street_str))
 
     assert len(swim_item.awardlinks) == 3
     assert len(swim_item._awardheirs) == 3
@@ -328,17 +328,17 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     yao_bud.add_acctunit(Xio_str)
 
     swim_str = "swim"
-    swim_road = yao_bud.make_l1_road(swim_str)
+    swim_way = yao_bud.make_l1_way(swim_str)
 
     yao_bud.set_l1_item(itemunit_shop(swim_str))
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
     awardlink_zia = awardlink_shop(zia_str, give_force=10)
     awardlink_Xio = awardlink_shop(Xio_str, give_force=10)
 
-    swim_item = yao_bud.get_item_obj(swim_road)
-    yao_bud.edit_item_attr(swim_road, awardlink=awardlink_yao)
-    yao_bud.edit_item_attr(swim_road, awardlink=awardlink_zia)
-    yao_bud.edit_item_attr(swim_road, awardlink=awardlink_Xio)
+    swim_item = yao_bud.get_item_obj(swim_way)
+    yao_bud.edit_item_attr(swim_way, awardlink=awardlink_yao)
+    yao_bud.edit_item_attr(swim_way, awardlink=awardlink_zia)
+    yao_bud.edit_item_attr(swim_way, awardlink=awardlink_Xio)
 
     assert len(swim_item.awardlinks) == 3
     assert len(swim_item._awardheirs) == 0
@@ -349,7 +349,7 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     # THEN
     assert len(swim_item.awardlinks) == 3
     assert len(swim_item._awardheirs) == 3
-    yao_bud.edit_item_attr(swim_road, awardlink_del=yao_str)
+    yao_bud.edit_item_attr(swim_way, awardlink_del=yao_str)
     assert len(swim_item.awardlinks) == 2
     assert len(swim_item._awardheirs) == 3
 
@@ -361,45 +361,45 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
     assert len(swim_item._awardheirs) == 2
 
 
-def test_BudUnit_get_item_tree_ordered_road_list_ReturnsObj():
+def test_BudUnit_get_item_tree_ordered_way_list_ReturnsObj():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     week_str = "weekdays"
-    assert sue_bud.get_item_tree_ordered_road_list()
+    assert sue_bud.get_item_tree_ordered_way_list()
 
     # WHEN
-    ordered_tag_list = sue_bud.get_item_tree_ordered_road_list()
+    ordered_tag_list = sue_bud.get_item_tree_ordered_way_list()
 
     # THEN
     assert len(ordered_tag_list) == 17
-    x_1st_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[0]
-    root_road = to_road(sue_bud.fisc_tag)
-    assert x_1st_road_in_ordered_list == root_road
-    x_8th_road_in_ordered_list = sue_bud.get_item_tree_ordered_road_list()[9]
-    assert x_8th_road_in_ordered_list == sue_bud.make_l1_road(week_str)
+    x_1st_way_in_ordered_list = sue_bud.get_item_tree_ordered_way_list()[0]
+    root_way = to_way(sue_bud.fisc_tag)
+    assert x_1st_way_in_ordered_list == root_way
+    x_8th_way_in_ordered_list = sue_bud.get_item_tree_ordered_way_list()[9]
+    assert x_8th_way_in_ordered_list == sue_bud.make_l1_way(week_str)
 
     # WHEN
     y_bud = budunit_shop()
 
     # THEN
-    y_1st_road_in_ordered_list = y_bud.get_item_tree_ordered_road_list()[0]
-    assert y_1st_road_in_ordered_list == root_road
+    y_1st_way_in_ordered_list = y_bud.get_item_tree_ordered_way_list()[0]
+    assert y_1st_way_in_ordered_list == root_way
 
 
-def test_BudUnit_get_item_tree_ordered_road_list_CorrectlyCleansRangedItemRoadUnits():
+def test_BudUnit_get_item_tree_ordered_way_list_CorrectlyCleansRangedItemWayUnits():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
 
     # WHEN
     time_str = "timeline"
-    time_road = yao_bud.make_l1_road(time_str)
+    time_way = yao_bud.make_l1_way(time_str)
     yao_bud.set_l1_item(itemunit_shop(time_str, begin=0, close=700))
     weeks_str = "weeks"
-    yao_bud.set_item(itemunit_shop(weeks_str, denom=7), time_road)
+    yao_bud.set_item(itemunit_shop(weeks_str, denom=7), time_way)
 
     # THEN
-    assert len(yao_bud.get_item_tree_ordered_road_list()) == 3
-    assert len(yao_bud.get_item_tree_ordered_road_list(no_range_descendants=True)) == 2
+    assert len(yao_bud.get_item_tree_ordered_way_list()) == 3
+    assert len(yao_bud.get_item_tree_ordered_way_list(no_range_descendants=True)) == 2
 
 
 def test_BudUnit_get_item_dict_ReturnsObjWhenSingle():
@@ -415,10 +415,10 @@ def test_BudUnit_get_item_dict_ReturnsObjWhenSingle():
 
     # THEN
     assert sue_bud._keeps_justified
-    texas_road = sue_bud.make_l1_road(texas_str)
-    texas_item = sue_bud.get_item_obj(texas_road)
+    texas_way = sue_bud.make_l1_way(texas_str)
+    texas_item = sue_bud.get_item_obj(texas_way)
     assert len(problems_dict) == 1
-    assert problems_dict == {texas_road: texas_item}
+    assert problems_dict == {texas_way: texas_item}
 
 
 def test_BudUnit_settle_bud_CreatesFullyPopulated_item_dict():
@@ -451,7 +451,7 @@ def test_BudUnit_settle_bud_WhenItemRootHas_massButAll_kidsHaveZero_massAddTo_of
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_str)
+    casa_way = sue_budunit.make_l1_way(casa_str)
     casa_item = itemunit_shop(casa_str, mass=0)
     sue_budunit.set_l1_item(casa_item)
     assert sue_budunit._offtrack_kids_mass_set == set()
@@ -460,11 +460,11 @@ def test_BudUnit_settle_bud_WhenItemRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit.settle_bud()
 
     # THEN
-    root_road = to_road(sue_budunit.fisc_tag)
-    assert sue_budunit._offtrack_kids_mass_set == {root_road}
+    root_way = to_way(sue_budunit.fisc_tag)
+    assert sue_budunit._offtrack_kids_mass_set == {root_way}
 
     # WHEN
-    sue_budunit.edit_item_attr(casa_road, mass=2)
+    sue_budunit.edit_item_attr(casa_way, mass=2)
     sue_budunit.settle_bud()
 
     # THEN
@@ -475,30 +475,30 @@ def test_BudUnit_settle_bud_WhenItemUnitHas_massButAll_kidsHaveZero_massAddTo_of
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_str)
+    casa_way = sue_budunit.make_l1_way(casa_str)
     casa_item = itemunit_shop(casa_str, mass=1)
 
     swim_str = "swimming"
-    swim_road = sue_budunit.make_road(casa_road, swim_str)
+    swim_way = sue_budunit.make_way(casa_way, swim_str)
     swim_item = itemunit_shop(swim_str, mass=8)
 
     clean_str = "cleaning"
-    clean_road = sue_budunit.make_road(casa_road, clean_str)
+    clean_way = sue_budunit.make_way(casa_way, clean_str)
     clean_item = itemunit_shop(clean_str, mass=2)
-    sue_budunit.set_item(itemunit_shop(clean_str), casa_road)
+    sue_budunit.set_item(itemunit_shop(clean_str), casa_way)
 
     sweep_str = "sweep"
-    sweep_road = sue_budunit.make_road(clean_road, sweep_str)
+    sweep_way = sue_budunit.make_way(clean_way, sweep_str)
     sweep_item = itemunit_shop(sweep_str, mass=0)
     vaccum_str = "vaccum"
-    vaccum_road = sue_budunit.make_road(clean_road, vaccum_str)
+    vaccum_way = sue_budunit.make_way(clean_way, vaccum_str)
     vaccum_item = itemunit_shop(vaccum_str, mass=0)
 
     sue_budunit.set_l1_item(casa_item)
-    sue_budunit.set_item(swim_item, casa_road)
-    sue_budunit.set_item(clean_item, casa_road)
-    sue_budunit.set_item(sweep_item, clean_road)  # _mass=0
-    sue_budunit.set_item(vaccum_item, clean_road)  # _mass=0
+    sue_budunit.set_item(swim_item, casa_way)
+    sue_budunit.set_item(clean_item, casa_way)
+    sue_budunit.set_item(sweep_item, clean_way)  # _mass=0
+    sue_budunit.set_item(vaccum_item, clean_way)  # _mass=0
 
     assert sue_budunit._offtrack_kids_mass_set == set()
 
@@ -506,7 +506,7 @@ def test_BudUnit_settle_bud_WhenItemUnitHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit.settle_bud()
 
     # THEN
-    assert sue_budunit._offtrack_kids_mass_set == {clean_road}
+    assert sue_budunit._offtrack_kids_mass_set == {clean_way}
 
 
 def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
@@ -520,8 +520,8 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_debtit_belief = 5
     yao_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     yao_bud.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    root_road = to_road(yao_bud.fisc_tag)
-    x_itemroot = yao_bud.get_item_obj(root_road)
+    root_way = to_way(yao_bud.fisc_tag)
+    x_itemroot = yao_bud.get_item_obj(root_way)
     x_itemroot.set_awardlink(awardlink_shop(yao_str))
     x_itemroot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -562,12 +562,12 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
     swim_str = "swim"
-    swim_road = yao_bud.make_l1_road(swim_str)
+    swim_way = yao_bud.make_l1_way(swim_str)
     yao_bud.set_l1_item(itemunit_shop(swim_str))
     zia_str = "Zia"
     yao_bud.add_acctunit(yao_str)
     yao_bud.add_acctunit(zia_str)
-    swim_item = yao_bud.get_item_obj(swim_road)
+    swim_item = yao_bud.get_item_obj(swim_way)
     swim_item.set_awardlink(awardlink_shop(yao_str))
     swim_item.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -602,12 +602,12 @@ def test_BudUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
     swim_str = "swim"
-    swim_road = yao_bud.make_l1_road(swim_str)
+    swim_way = yao_bud.make_l1_way(swim_str)
     yao_bud.set_l1_item(itemunit_shop(swim_str))
     zia_str = "Zia"
     yao_bud.add_acctunit(yao_str)
     yao_bud.add_acctunit(zia_str)
-    swim_item = yao_bud.get_item_obj(swim_road)
+    swim_item = yao_bud.get_item_obj(swim_way)
     swim_item.set_awardlink(awardlink_shop(yao_str))
     swim_item.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -646,49 +646,49 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
     week_str = "week"
-    week_road = yao_bud.make_l1_road(week_str)
+    week_way = yao_bud.make_l1_way(week_str)
     week_addin = 10
     week_item = itemunit_shop(week_str, begin=10, close=15, addin=week_addin)
     yao_bud.set_l1_item(week_item)
     tue_str = "Tue"
-    tue_road = yao_bud.make_road(week_road, tue_str)
+    tue_way = yao_bud.make_way(week_way, tue_str)
     tue_addin = 100
-    yao_bud.set_item(itemunit_shop(tue_str, addin=tue_addin), week_road)
-    root_road = to_road(yao_bud.fisc_tag)
-    yao_bud.edit_item_attr(root_road, reason_base=tue_road, reason_premise=tue_road)
+    yao_bud.set_item(itemunit_shop(tue_str, addin=tue_addin), week_way)
+    root_way = to_way(yao_bud.fisc_tag)
+    yao_bud.edit_item_attr(root_way, reason_base=tue_way, reason_premise=tue_way)
 
     week_open = 3
     week_nigh = 7
-    yao_bud.add_fact(week_road, week_road, week_open, week_nigh)
+    yao_bud.add_fact(week_way, week_way, week_open, week_nigh)
 
     # assert len(ball_item._reasonheirs) == 1
-    # assert ball_item._factheirs == {week_road: week_factheir}
-    # assert ball_item._factheirs.get(week_road)
+    # assert ball_item._factheirs == {week_way: week_factheir}
+    # assert ball_item._factheirs.get(week_way)
     # assert len(ball_item._factheirs) == 1
-    # assert ball_item._factheirs.get(tue_road) is None
+    # assert ball_item._factheirs.get(tue_way) is None
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
         yao_bud.settle_bud()
-    exception_str = f"Cannot have fact for range inheritor '{tue_road}'. A ranged fact item must have _begin, _close attributes"
+    exception_str = f"Cannot have fact for range inheritor '{tue_way}'. A ranged fact item must have _begin, _close attributes"
     assert str(excinfo.value) == exception_str
 
     # THEN
-    # week_factunit = factunit_shop(week_road, week_road, week_open, week_nigh)
-    # tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
-    # x_bud_item_dict = {week_item.get_road(): week_item, tue_item.get_road(): tue_item}
+    # week_factunit = factunit_shop(week_way, week_way, week_open, week_nigh)
+    # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
+    # x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
     # ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
-    # x_range_inheritors = {tue_road: week_road}
-    # week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
+    # x_range_inheritors = {tue_way: week_way}
+    # week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
 
     # tue_open = 113
     # tue_nigh = 117
-    # tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
-    # root_item = yao_bud.get_item_obj(root_road)
-    # print(f"{week_road=} {root_item._factheirs.keys()=}")
-    # assert root_item._factheirs.get(week_road) == week_factheir
+    # tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_nigh)
+    # root_item = yao_bud.get_item_obj(root_way)
+    # print(f"{week_way=} {root_item._factheirs.keys()=}")
+    # assert root_item._factheirs.get(week_way) == week_factheir
     # assert len(root_item._factheirs) == 2
-    # assert root_item._factheirs == {tue_road: tue_factheir, week_road: week_factheir}
+    # assert root_item._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
 
 
 def test_BudUnit_settle_bud_SetsItemUnit_factheir_With_range_factheirs():
@@ -696,45 +696,45 @@ def test_BudUnit_settle_bud_SetsItemUnit_factheir_With_range_factheirs():
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
     week_str = "week"
-    week_road = yao_bud.make_l1_road(week_str)
+    week_way = yao_bud.make_l1_way(week_str)
     week_addin = 10
     week_item = itemunit_shop(week_str, begin=10, close=15, addin=week_addin)
     yao_bud.set_l1_item(week_item)
     tue_str = "Tue"
-    tue_road = yao_bud.make_road(week_road, tue_str)
+    tue_way = yao_bud.make_way(week_way, tue_str)
     tue_addin = 100
-    yao_bud.set_item(itemunit_shop(tue_str, addin=tue_addin), week_road)
+    yao_bud.set_item(itemunit_shop(tue_str, addin=tue_addin), week_way)
     ball_str = "ball"
-    ball_road = yao_bud.make_l1_road(ball_str)
+    ball_way = yao_bud.make_l1_way(ball_str)
     yao_bud.set_l1_item(itemunit_shop(ball_str))
-    yao_bud.edit_item_attr(ball_road, reason_base=tue_road, reason_premise=tue_road)
+    yao_bud.edit_item_attr(ball_way, reason_base=tue_way, reason_premise=tue_way)
 
     week_open = 3
     week_nigh = 7
-    yao_bud.add_fact(week_road, week_road, week_open, week_nigh)
+    yao_bud.add_fact(week_way, week_way, week_open, week_nigh)
 
     # assert len(ball_item._reasonheirs) == 1
-    # assert ball_item._factheirs == {week_road: week_factheir}
-    # assert ball_item._factheirs.get(week_road)
+    # assert ball_item._factheirs == {week_way: week_factheir}
+    # assert ball_item._factheirs.get(week_way)
     # assert len(ball_item._factheirs) == 1
-    # assert ball_item._factheirs.get(tue_road) is None
+    # assert ball_item._factheirs.get(tue_way) is None
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    # week_factunit = factunit_shop(week_road, week_road, week_open, week_nigh)
-    # tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
-    # x_bud_item_dict = {week_item.get_road(): week_item, tue_item.get_road(): tue_item}
+    # week_factunit = factunit_shop(week_way, week_way, week_open, week_nigh)
+    # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
+    # x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
     # ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
-    x_range_inheritors = {tue_road: week_road}
-    week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
+    x_range_inheritors = {tue_way: week_way}
+    week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
 
     tue_open = 113
     tue_nigh = 117
-    tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
-    ball_item = yao_bud.get_item_obj(ball_road)
-    print(f"{week_road=} {ball_item._factheirs.keys()=}")
-    assert ball_item._factheirs.get(week_road) == week_factheir
+    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_nigh)
+    ball_item = yao_bud.get_item_obj(ball_way)
+    print(f"{week_way=} {ball_item._factheirs.keys()=}")
+    assert ball_item._factheirs.get(week_way) == week_factheir
     assert len(ball_item._factheirs) == 2
-    assert ball_item._factheirs == {tue_road: tue_factheir, week_road: week_factheir}
+    assert ball_item._factheirs == {tue_way: tue_factheir, week_way: week_factheir}

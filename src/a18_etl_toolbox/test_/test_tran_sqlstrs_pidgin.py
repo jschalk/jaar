@@ -77,8 +77,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         pidname_agg_table = "pidgin_label_agg"
         pidtagg_raw_table = "pidgin_name_raw"
         pidtagg_agg_table = "pidgin_name_agg"
-        pidroad_raw_table = "pidgin_road_raw"
-        pidroad_agg_table = "pidgin_road_agg"
+        pidway_raw_table = "pidgin_way_raw"
+        pidway_agg_table = "pidgin_way_agg"
         pidlabe_raw_table = "pidgin_tag_raw"
         pidlabe_agg_table = "pidgin_tag_agg"
         cursor = fisc_db_conn.cursor()
@@ -86,8 +86,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         assert not db_table_exists(cursor, pidname_agg_table)
         assert not db_table_exists(cursor, pidtagg_raw_table)
         assert not db_table_exists(cursor, pidtagg_agg_table)
-        assert not db_table_exists(cursor, pidroad_raw_table)
-        assert not db_table_exists(cursor, pidroad_agg_table)
+        assert not db_table_exists(cursor, pidway_raw_table)
+        assert not db_table_exists(cursor, pidway_agg_table)
         assert not db_table_exists(cursor, pidlabe_raw_table)
         assert not db_table_exists(cursor, pidlabe_agg_table)
 
@@ -99,8 +99,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         assert db_table_exists(cursor, pidname_agg_table)
         assert db_table_exists(cursor, pidtagg_raw_table)
         assert db_table_exists(cursor, pidtagg_agg_table)
-        assert db_table_exists(cursor, pidroad_raw_table)
-        assert db_table_exists(cursor, pidroad_agg_table)
+        assert db_table_exists(cursor, pidway_raw_table)
+        assert db_table_exists(cursor, pidway_agg_table)
         assert db_table_exists(cursor, pidlabe_raw_table)
         assert db_table_exists(cursor, pidlabe_agg_table)
 
@@ -108,8 +108,8 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         pidname_agg_columns = get_table_columns(cursor, pidname_agg_table)
         pidtagg_raw_columns = get_table_columns(cursor, pidtagg_raw_table)
         pidtagg_agg_columns = get_table_columns(cursor, pidtagg_agg_table)
-        pidroad_raw_columns = get_table_columns(cursor, pidroad_raw_table)
-        pidroad_agg_columns = get_table_columns(cursor, pidroad_agg_table)
+        pidway_raw_columns = get_table_columns(cursor, pidway_raw_table)
+        pidway_agg_columns = get_table_columns(cursor, pidway_agg_table)
         pidlabe_raw_columns = get_table_columns(cursor, pidlabe_raw_table)
         pidlabe_agg_columns = get_table_columns(cursor, pidlabe_agg_table)
 
@@ -119,23 +119,23 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         assert "error_message" not in pidname_agg_columns
         assert "error_message" in pidtagg_raw_columns
         assert "error_message" not in pidtagg_agg_columns
-        assert "error_message" in pidroad_raw_columns
-        assert "error_message" not in pidroad_agg_columns
+        assert "error_message" in pidway_raw_columns
+        assert "error_message" not in pidway_agg_columns
         assert "error_message" in pidlabe_raw_columns
         assert "error_message" not in pidlabe_agg_columns
         assert idea_number_str() in pidname_raw_columns
         assert idea_number_str() not in pidname_agg_columns
         assert idea_number_str() in pidtagg_raw_columns
         assert idea_number_str() not in pidtagg_agg_columns
-        assert idea_number_str() in pidroad_raw_columns
-        assert idea_number_str() not in pidroad_agg_columns
+        assert idea_number_str() in pidway_raw_columns
+        assert idea_number_str() not in pidway_agg_columns
         assert idea_number_str() in pidlabe_raw_columns
         assert idea_number_str() not in pidlabe_agg_columns
         assert len(pidname_raw_columns) == 9
         assert len(pidname_agg_columns) == 7
         assert len(pidtagg_raw_columns) == 9
         assert len(pidtagg_agg_columns) == 7
-        assert len(pidroad_raw_columns) == 9
-        assert len(pidroad_agg_columns) == 7
+        assert len(pidway_raw_columns) == 9
+        assert len(pidway_agg_columns) == 7
         assert len(pidlabe_raw_columns) == 9
         assert len(pidlabe_agg_columns) == 7

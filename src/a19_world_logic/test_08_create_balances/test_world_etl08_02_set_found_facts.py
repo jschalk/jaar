@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import create_road
+from src.a01_way_logic.way import create_way
 from src.a04_reason_logic.reason_item import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a11_deal_cell_logic.cell import cellunit_shop
@@ -22,9 +22,9 @@ def test_set_cell_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
     sue_str = "Sue"
     a23_str = "accord23"
     time5 = 5
-    casa_road = create_road(a23_str, "casa")
-    clean_road = create_road(casa_road, "clean")
-    clean_fact = factunit_shop(casa_road, clean_road)
+    casa_way = create_way(a23_str, "casa")
+    clean_way = create_way(casa_way, "clean")
+    clean_fact = factunit_shop(casa_way, clean_way)
     das = []
     das_y = [yao_str]
     das_ys = [yao_str, sue_str]

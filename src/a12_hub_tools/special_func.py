@@ -1,7 +1,7 @@
-from src.a01_road_logic.road import (
-    RoadUnit,
+from src.a01_way_logic.way import (
+    WayUnit,
     get_terminus_tag,
-    get_parent_road,
+    get_parent_way,
     LabelUnit,
 )
 from src.a06_bud_logic.bud import BudUnit
@@ -12,12 +12,12 @@ from copy import deepcopy as copy_deepcopy
 
 def create_pledge(
     x_bud: BudUnit,
-    pledge_road: RoadUnit,
+    pledge_way: WayUnit,
     x_teamlink: LabelUnit = None,
-    reason_premise: RoadUnit = None,
+    reason_premise: WayUnit = None,
 ):
-    if pledge_road is not None and get_terminus_tag(pledge_road) != "":
-        x_item = x_bud.get_item_obj(pledge_road, if_missing_create=True)
+    if pledge_way is not None and get_terminus_tag(pledge_way) != "":
+        x_item = x_bud.get_item_obj(pledge_way, if_missing_create=True)
         x_item.pledge = True
         x_item.teamunit.set_teamlink(x_teamlink)
 
@@ -27,15 +27,15 @@ def create_pledge(
         if reason_premise is not None:
             if x_bud.item_exists(reason_premise) is False:
                 x_bud.get_item_obj(reason_premise, if_missing_create=True)
-            reason_base = get_parent_road(reason_premise)
-            x_bud.edit_reason(pledge_road, reason_base, reason_premise)
+            reason_base = get_parent_way(reason_premise)
+            x_bud.edit_reason(pledge_way, reason_base, reason_premise)
 
 
 def add_gut_pledge(
     x_hubunit: HubUnit,
-    pledge_road: RoadUnit,
+    pledge_way: WayUnit,
     x_teamlink: LabelUnit = None,
-    reason_premise: RoadUnit = None,
+    reason_premise: WayUnit = None,
 ):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
@@ -43,21 +43,21 @@ def add_gut_pledge(
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)
-    create_pledge(gut_bud, pledge_road, x_teamlink, reason_premise)
+    create_pledge(gut_bud, pledge_way, x_teamlink, reason_premise)
     next_packunit = x_hubunit._default_packunit()
     next_packunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
     next_packunit.save_files()
     x_hubunit.append_packs_to_gut_file()
 
 
-def create_fact(x_bud: BudUnit, fact_fneed: RoadUnit):
+def create_fact(x_bud: BudUnit, fact_fneed: WayUnit):
     if x_bud.item_exists(fact_fneed) is False:
         x_bud.get_item_obj(fact_fneed, if_missing_create=True)
-    fact_base = get_parent_road(fact_fneed)
+    fact_base = get_parent_way(fact_fneed)
     x_bud.add_fact(fact_base, fact_fneed)
 
 
-def add_gut_fact(x_hubunit: HubUnit, fact_fneed: RoadUnit):
+def add_gut_fact(x_hubunit: HubUnit, fact_fneed: WayUnit):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
         x_hubunit.fisc_tag,

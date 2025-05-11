@@ -1,6 +1,6 @@
-from src.a01_road_logic.road import create_road
+from src.a01_way_logic.way import create_way
 from src.a06_bud_logic._utils.str_a06 import bud_item_factunit_str
-from src.a06_bud_logic._utils.str_a06 import road_str, fbase_str, fopen_str, fnigh_str
+from src.a06_bud_logic._utils.str_a06 import way_str, fbase_str, fopen_str, fnigh_str
 from src.a08_bud_atom_logic._utils.str_a08 import (
     jkeys_str,
     jvalues_str,
@@ -18,17 +18,17 @@ from src.a00_data_toolbox.dict_toolbox import x_is_json
 def test_BudAtom_get_dict_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
-    sports_road = create_road("a", sports_str)
+    sports_way = create_way("a", sports_str)
     ball_str = "basketball"
-    ball_road = create_road(sports_road, ball_str)
+    ball_way = create_way(sports_way, ball_str)
     knee_str = "knee"
-    knee_road = create_road("a", knee_str)
+    knee_way = create_way("a", knee_str)
     x_dimen = bud_item_factunit_str()
     knee_open = 7
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_factunit_budatom.set_jkey(road_str(), ball_road)
-    insert_factunit_budatom.set_jkey(fbase_str(), knee_road)
+    insert_factunit_budatom.set_jkey(way_str(), ball_way)
+    insert_factunit_budatom.set_jkey(fbase_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
 
@@ -39,7 +39,7 @@ def test_BudAtom_get_dict_ReturnsObj():
     assert atom_dict == {
         dimen_str(): x_dimen,
         crud_str(): atom_insert(),
-        jkeys_str(): {road_str(): ball_road, fbase_str(): knee_road},
+        jkeys_str(): {way_str(): ball_way, fbase_str(): knee_way},
         jvalues_str(): {fopen_str(): knee_open, fnigh_str(): knee_nigh},
     }
 
@@ -47,17 +47,17 @@ def test_BudAtom_get_dict_ReturnsObj():
 def test_BudAtom_get_json_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
-    sports_road = create_road("a", sports_str)
+    sports_way = create_way("a", sports_str)
     ball_str = "basketball"
-    ball_road = create_road(sports_road, ball_str)
+    ball_way = create_way(sports_way, ball_str)
     knee_str = "knee"
-    knee_road = create_road("a", knee_str)
+    knee_way = create_way("a", knee_str)
     x_dimen = bud_item_factunit_str()
     knee_open = 7
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_factunit_budatom.set_jkey(road_str(), ball_road)
-    insert_factunit_budatom.set_jkey(fbase_str(), knee_road)
+    insert_factunit_budatom.set_jkey(way_str(), ball_way)
+    insert_factunit_budatom.set_jkey(fbase_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
 
@@ -71,17 +71,17 @@ def test_BudAtom_get_json_ReturnsObj():
 def test_budatom_get_from_json_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
-    sports_road = create_road("a", sports_str)
+    sports_way = create_way("a", sports_str)
     ball_str = "basketball"
-    ball_road = create_road(sports_road, ball_str)
+    ball_way = create_way(sports_way, ball_str)
     knee_str = "knee"
-    knee_road = create_road("a", knee_str)
+    knee_way = create_way("a", knee_str)
     x_dimen = bud_item_factunit_str()
     knee_open = 7
     knee_nigh = 13
     gen_budatom = budatom_shop(x_dimen, atom_insert())
-    gen_budatom.set_jkey(road_str(), ball_road)
-    gen_budatom.set_jkey(fbase_str(), knee_road)
+    gen_budatom.set_jkey(way_str(), ball_way)
+    gen_budatom.set_jkey(fbase_str(), knee_way)
     gen_budatom.set_jvalue(fopen_str(), knee_open)
     gen_budatom.set_jvalue(fnigh_str(), knee_nigh)
     atom_json = gen_budatom.get_json()

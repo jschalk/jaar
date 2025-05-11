@@ -4,7 +4,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
 )
 from src.a02_finance_logic.allot import allot_scale
-from src.a01_road_logic.road import AcctName, OwnerName
+from src.a01_way_logic.way import AcctName, OwnerName
 from src.a06_bud_logic.bud import BudUnit
 from src.a12_hub_tools.hubunit import HubUnit
 from dataclasses import dataclass
@@ -160,7 +160,7 @@ class RiverGrade:
         return {
             "fisc_tag": self.hubunit.fisc_tag,
             "healer_name": self.hubunit.owner_name,
-            "keep_road": self.hubunit.keep_road,
+            "keep_way": self.hubunit.keep_way,
             "tax_bill_amount": self.tax_bill_amount,
             "grant_amount": self.grant_amount,
             "debtor_rank_num": self.debtor_rank_num,

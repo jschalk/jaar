@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import to_road
+from src.a01_way_logic.way import to_way
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
@@ -7,7 +7,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
     acct_name_str,
     group_label_str,
-    road_str,
+    way_str,
     pledge_str,
     mass_str,
     debtit_belief_str,
@@ -150,12 +150,12 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     accord_fisc_tag = "accord56"
     sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_str)
+    casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
     sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    clean_way = sue_budunit.make_way(casa_way, clean_str)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
     x_idea_name = idea_format_00013_itemunit_v0_0_0()
     itemunit_dataframe = create_idea_df(sue_budunit, x_idea_name)
     itemunit_csv = itemunit_dataframe.to_csv(index=False)
@@ -165,13 +165,13 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(road_str(), casa_road)
+    casa_budatom.set_arg(way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_budatom.set_arg(road_str(), clean_road)
+    clean_budatom.set_arg(way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)
@@ -203,12 +203,12 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
     accord_fisc_tag = "accord56"
     sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_str)
+    casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
     sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    clean_way = sue_budunit.make_way(casa_way, clean_str)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
     x_idea_name = idea_format_00013_itemunit_v0_0_0()
     itemunit_dataframe = create_idea_df(sue_budunit, x_idea_name)
     itemunit_csv = itemunit_dataframe.to_csv(index=False)
@@ -218,13 +218,13 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(road_str(), casa_road)
+    casa_budatom.set_arg(way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_budatom.set_arg(road_str(), clean_road)
+    clean_budatom.set_arg(way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)

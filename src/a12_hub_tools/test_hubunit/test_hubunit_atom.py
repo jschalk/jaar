@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
-from src.a01_road_logic.road import get_default_fisc_tag as fisc_tag
+from src.a01_way_logic.way import get_default_fisc_tag as fisc_tag
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic._utils.example_listen_atoms import (
     get_atom_example_factunit_knee,
@@ -187,9 +187,9 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleItem(
     assert yao_bud.fisc_tag == yao_hubunit.fisc_tag
     assert yao_bud.bridge == yao_hubunit.bridge
     sports_str = "sports"
-    sports_road = yao_bud.make_l1_road(sports_str)
+    sports_way = yao_bud.make_l1_way(sports_str)
 
-    assert yao_bud.item_exists(sports_road)
+    assert yao_bud.item_exists(sports_way)
 
 
 def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
@@ -215,6 +215,6 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     assert yao_bud.fisc_tag == yao_hubunit.fisc_tag
     assert yao_bud.bridge == yao_hubunit.bridge
     sports_str = "sports"
-    sports_road = yao_bud.make_l1_road(sports_str)
+    sports_way = yao_bud.make_l1_way(sports_str)
 
-    assert yao_bud.item_exists(sports_road)
+    assert yao_bud.item_exists(sports_way)

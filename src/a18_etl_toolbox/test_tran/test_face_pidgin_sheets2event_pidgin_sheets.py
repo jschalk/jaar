@@ -216,7 +216,7 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario3_tag(env_dir_setup_cleanup):
     assert sheet_exists(event9_pidgin_file_path, tag_agg_str)
 
 
-def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
+def test_etl_face_pidgin_to_event_pidgins_Scenario4_way(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     casa_otx = "fizz,casa"
@@ -225,13 +225,13 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
     event9 = 9
-    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
+    way_agg_columns = PidginPrimeColumns().pidgin_way_agg_columns
     x_nan = float("nan")
-    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road2 = [event9, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road_rows = [e1_road0, e1_road1, e1_road2]
-    sue_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
+    e1_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_way2 = [event9, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_way_rows = [e1_way0, e1_way1, e1_way2]
+    sue_way_agg_df = DataFrame(e1_way_rows, columns=way_agg_columns)
 
     faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
@@ -240,18 +240,18 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     sue_pidgin_file_path = create_syntax_otx_pidgin_path(faces_dir, sue_str)
     event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
     event9_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event9)
-    road_agg_str = "road_agg"
-    upsert_sheet(sue_pidgin_file_path, road_agg_str, sue_road_agg_df)
+    way_agg_str = "way_agg"
+    upsert_sheet(sue_pidgin_file_path, way_agg_str, sue_way_agg_df)
     assert os_path_exists(sue_dir)
     assert os_path_exists(sue_pidgin_file_path)
-    assert sheet_exists(sue_pidgin_file_path, road_agg_str)
+    assert sheet_exists(sue_pidgin_file_path, way_agg_str)
 
     assert os_path_exists(event7_dir) is False
     assert os_path_exists(event9_dir) is False
     assert os_path_exists(event7_pidgin_file_path) is False
     assert os_path_exists(event9_pidgin_file_path) is False
-    assert sheet_exists(event7_pidgin_file_path, road_agg_str) is False
-    assert sheet_exists(event9_pidgin_file_path, road_agg_str) is False
+    assert sheet_exists(event7_pidgin_file_path, way_agg_str) is False
+    assert sheet_exists(event9_pidgin_file_path, way_agg_str) is False
 
     # WHEN
     etl_face_pidgin_to_event_pidgins(sue_dir)
@@ -261,11 +261,11 @@ def test_etl_face_pidgin_to_event_pidgins_Scenario4_road(env_dir_setup_cleanup):
     assert os_path_exists(event9_dir)
     assert os_path_exists(event7_pidgin_file_path)
     assert os_path_exists(event9_pidgin_file_path)
-    assert sheet_exists(event7_pidgin_file_path, road_agg_str)
-    assert sheet_exists(event9_pidgin_file_path, road_agg_str)
+    assert sheet_exists(event7_pidgin_file_path, way_agg_str)
+    assert sheet_exists(event9_pidgin_file_path, way_agg_str)
 
 
-def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face_names(
+def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_way_Two_face_names(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -278,15 +278,15 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     event3 = 3
     event7 = 7
     event9 = 9
-    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
+    way_agg_columns = PidginPrimeColumns().pidgin_way_agg_columns
     x_nan = float("nan")
-    e1_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e1_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road2 = [event9, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e1_road_rows = [e1_road0, e1_road1, e1_road2]
-    sue_road_agg_df = DataFrame(e1_road_rows, columns=road_agg_columns)
-    z1_road3 = [event3, zia_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    zia_road_agg_df = DataFrame([z1_road3], columns=road_agg_columns)
+    e1_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e1_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_way2 = [event9, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e1_way_rows = [e1_way0, e1_way1, e1_way2]
+    sue_way_agg_df = DataFrame(e1_way_rows, columns=way_agg_columns)
+    z1_way3 = [event3, zia_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    zia_way_agg_df = DataFrame([z1_way3], columns=way_agg_columns)
 
     faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
@@ -299,11 +299,11 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, zia_str, event3)
     event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
     event9_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event9)
-    road_agg_str = "road_agg"
-    upsert_sheet(sue_pidgin_file_path, road_agg_str, sue_road_agg_df)
-    upsert_sheet(zia_pidgin_file_path, road_agg_str, zia_road_agg_df)
-    assert sheet_exists(sue_pidgin_file_path, road_agg_str)
-    assert sheet_exists(zia_pidgin_file_path, road_agg_str)
+    way_agg_str = "way_agg"
+    upsert_sheet(sue_pidgin_file_path, way_agg_str, sue_way_agg_df)
+    upsert_sheet(zia_pidgin_file_path, way_agg_str, zia_way_agg_df)
+    assert sheet_exists(sue_pidgin_file_path, way_agg_str)
+    assert sheet_exists(zia_pidgin_file_path, way_agg_str)
 
     assert os_path_exists(event3_dir) is False
     assert os_path_exists(event7_dir) is False
@@ -311,9 +311,9 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     assert os_path_exists(event3_pidgin_file_path) is False
     assert os_path_exists(event7_pidgin_file_path) is False
     assert os_path_exists(event9_pidgin_file_path) is False
-    assert sheet_exists(event3_pidgin_file_path, road_agg_str) is False
-    assert sheet_exists(event7_pidgin_file_path, road_agg_str) is False
-    assert sheet_exists(event9_pidgin_file_path, road_agg_str) is False
+    assert sheet_exists(event3_pidgin_file_path, way_agg_str) is False
+    assert sheet_exists(event7_pidgin_file_path, way_agg_str) is False
+    assert sheet_exists(event9_pidgin_file_path, way_agg_str) is False
 
     # WHEN
     etl_otz_face_pidgins_df_to_otz_event_pidgins_df(faces_dir)
@@ -325,10 +325,10 @@ def test_etl_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_road_Two_face
     assert os_path_exists(event3_pidgin_file_path)
     assert os_path_exists(event7_pidgin_file_path)
     assert os_path_exists(event9_pidgin_file_path)
-    assert sheet_exists(event3_pidgin_file_path, road_agg_str)
-    assert sheet_exists(event7_pidgin_file_path, road_agg_str)
-    assert sheet_exists(event9_pidgin_file_path, road_agg_str)
-    gen_e3 = pandas_read_excel(event3_pidgin_file_path, road_agg_str)
-    gen_e7 = pandas_read_excel(event7_pidgin_file_path, road_agg_str)
-    gen_e9 = pandas_read_excel(event9_pidgin_file_path, road_agg_str)
-    pandas_testing_assert_frame_equal(gen_e3, zia_road_agg_df)
+    assert sheet_exists(event3_pidgin_file_path, way_agg_str)
+    assert sheet_exists(event7_pidgin_file_path, way_agg_str)
+    assert sheet_exists(event9_pidgin_file_path, way_agg_str)
+    gen_e3 = pandas_read_excel(event3_pidgin_file_path, way_agg_str)
+    gen_e7 = pandas_read_excel(event7_pidgin_file_path, way_agg_str)
+    gen_e9 = pandas_read_excel(event9_pidgin_file_path, way_agg_str)
+    pandas_testing_assert_frame_equal(gen_e3, zia_way_agg_df)

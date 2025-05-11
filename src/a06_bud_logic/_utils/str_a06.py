@@ -51,8 +51,8 @@ def type_LabelUnit_str() -> str:
     return "LabelUnit"
 
 
-def type_RoadUnit_str() -> str:
-    return "RoadUnit"
+def type_WayUnit_str() -> str:
+    return "WayUnit"
 
 
 def type_TagUnit_str() -> str:
@@ -135,12 +135,12 @@ def credit_vote_str() -> str:
     return "credit_vote"
 
 
-def road_str() -> str:
-    return "road"
+def way_str() -> str:
+    return "way"
 
 
-def parent_road_str() -> str:
-    return "parent_road"
+def parent_way_str() -> str:
+    return "parent_way"
 
 
 def item_tag_str() -> str:

@@ -42,7 +42,7 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "road": {}
+      "way": {}
     },
     "jvalues": {
       "give_force": {},
@@ -59,7 +59,7 @@
       "fbase": {},
       "fisc_tag": {},
       "owner_name": {},
-      "road": {}
+      "way": {}
     },
     "jvalues": {
       "fneed": {},
@@ -77,7 +77,7 @@
       "fisc_tag": {},
       "healer_name": {},
       "owner_name": {},
-      "road": {}
+      "way": {}
     },
     "jvalues": {}
   },
@@ -92,7 +92,7 @@
       "fisc_tag": {},
       "need": {},
       "owner_name": {},
-      "road": {}
+      "way": {}
     },
     "jvalues": {
       "divisor": {},
@@ -110,7 +110,7 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "road": {}
+      "way": {}
     },
     "jvalues": {
       "base_item_active_requisite": {}
@@ -125,7 +125,7 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "road": {},
+      "way": {},
       "team_title": {}
     },
     "jvalues": {}
@@ -139,7 +139,7 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "road": {}
+      "way": {}
     },
     "jvalues": {
       "addin": {},
@@ -315,18 +315,18 @@
       "unknown_word": {}
     }
   },
-  "pidgin_road": {
+  "pidgin_way": {
     "allowed_crud": "INSERT_ONE_TIME",
     "build_order": 3,
     "idea_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_road": {}
+      "otx_way": {}
     },
     "jvalues": {
       "inx_bridge": {},
-      "inx_road": {},
+      "inx_way": {},
       "otx_bridge": {},
       "unknown_word": {}
     }

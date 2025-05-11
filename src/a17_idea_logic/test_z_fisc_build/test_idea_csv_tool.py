@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_road_logic.road import to_road
+from src.a01_way_logic.way import to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a09_pack_logic.delta import buddelta_shop
@@ -75,18 +75,18 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         # "br00006": "fisc_tag,offi_time,_offi_time_max\n",
         "br00020": "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
         "br00021": "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief\n",
-        "br00022": "fisc_tag,owner_name,road,awardee_title,give_force,take_force\n",
-        "br00023": "fisc_tag,owner_name,road,fbase,fneed,fopen,fnigh\n",
-        "br00024": "fisc_tag,owner_name,road,team_title\n",
-        "br00025": "fisc_tag,owner_name,road,healer_name\n",
-        "br00026": "fisc_tag,owner_name,road,base,need,nigh,open,divisor\n",
-        "br00027": "fisc_tag,owner_name,road,base,base_item_active_requisite\n",
-        "br00028": "fisc_tag,owner_name,road,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
+        "br00022": "fisc_tag,owner_name,way,awardee_title,give_force,take_force\n",
+        "br00023": "fisc_tag,owner_name,way,fbase,fneed,fopen,fnigh\n",
+        "br00024": "fisc_tag,owner_name,way,team_title\n",
+        "br00025": "fisc_tag,owner_name,way,healer_name\n",
+        "br00026": "fisc_tag,owner_name,way,base,need,nigh,open,divisor\n",
+        "br00027": "fisc_tag,owner_name,way,base,base_item_active_requisite\n",
+        "br00028": "fisc_tag,owner_name,way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
         "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word\n",
         "br00044": "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word\n",
-        "br00045": "otx_road,inx_road,otx_bridge,inx_bridge,unknown_word\n",
+        "br00045": "otx_way,inx_way,otx_bridge,inx_bridge,unknown_word\n",
     }
     expected_br00000_csv = expected_stance_csv_strs.get("br00000")
     expected_br00001_csv = expected_stance_csv_strs.get("br00001")
@@ -341,13 +341,13 @@ def test_add_bud_to_br00022_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
+    casa_way = bob_bud.make_l1_way("casa")
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_bud.add_item(casa_road)
-    bob_bud.edit_item_attr(casa_road, awardlink=casa_awardlink)
+    bob_bud.add_item(casa_way)
+    bob_bud.edit_item_attr(casa_way, awardlink=casa_awardlink)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
@@ -356,7 +356,7 @@ def test_add_bud_to_br00022_csv_ReturnsObj():
     x_csv = add_bud_to_br00022_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    yao_award_row = f",,{a23_str},{bob_str},{casa_road},{yao_str},{yao_give_force},{yao_take_force}\n"
+    yao_award_row = f",,{a23_str},{bob_str},{casa_way},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
@@ -366,15 +366,15 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_road = to_road(a23_str)
+    a23_way = to_way(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
-    clean_road = bob_bud.make_road(casa_road, "clean")
+    casa_way = bob_bud.make_l1_way("casa")
+    clean_way = bob_bud.make_way(casa_way, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(clean_road)
-    bob_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(clean_way)
+    bob_bud.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
@@ -382,7 +382,7 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     x_csv = add_bud_to_br00023_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    clean_row = f",,{a23_str},{bob_str},{a23_road},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f",,{a23_str},{bob_str},{a23_way},{casa_way},{clean_way},{clean_fopen},{clean_fnigh}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
@@ -393,9 +393,9 @@ def test_add_bud_to_br00024_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
-    bob_bud.add_item(casa_road)
-    casa_item = bob_bud.get_item_obj(casa_road)
+    casa_way = bob_bud.make_l1_way("casa")
+    bob_bud.add_item(casa_way)
+    casa_item = bob_bud.get_item_obj(casa_way)
     cleaners_str = "cleaners"
     casa_item.teamunit.set_teamlink(cleaners_str)
     csv_header = x_ideas.get("br00024")
@@ -406,7 +406,7 @@ def test_add_bud_to_br00024_csv_ReturnsObj():
     x_csv = add_bud_to_br00024_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    cleaners_row = f",,{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
+    cleaners_row = f",,{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
@@ -417,9 +417,9 @@ def test_add_bud_to_br00025_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
-    bob_bud.add_item(casa_road)
-    casa_item = bob_bud.get_item_obj(casa_road)
+    casa_way = bob_bud.make_l1_way("casa")
+    bob_bud.add_item(casa_way)
+    casa_item = bob_bud.get_item_obj(casa_way)
     cleaners_str = "cleaners"
     casa_item.healerlink.set_healer_name(cleaners_str)
     csv_header = x_ideas.get("br00025")
@@ -430,7 +430,7 @@ def test_add_bud_to_br00025_csv_ReturnsObj():
     x_csv = add_bud_to_br00025_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    cleaners_row = f",,{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
+    cleaners_row = f",,{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
@@ -441,19 +441,19 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
-    clean_road = bob_bud.make_road(casa_road, "clean")
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
+    clean_way = bob_bud.make_way(casa_way, "clean")
     clean_premise_open = 22
     clean_premise_nigh = 55
     clean_premise_divisor = 77
-    bob_bud.add_item(mop_road)
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(clean_road)
+    bob_bud.add_item(mop_way)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(clean_way)
     bob_bud.edit_item_attr(
-        mop_road,
-        reason_base=casa_road,
-        reason_premise=clean_road,
+        mop_way,
+        reason_base=casa_way,
+        reason_premise=clean_way,
         reason_premise_open=clean_premise_open,
         reason_premise_nigh=clean_premise_nigh,
         reason_premise_divisor=clean_premise_divisor,
@@ -466,7 +466,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
     x_csv = add_bud_to_br00026_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    mop_row = f",,{a23_str},{bob_str},{mop_road},{casa_road},{clean_road},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -477,13 +477,13 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
-    bob_bud.add_item(mop_road)
-    bob_bud.add_item(casa_road)
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
+    bob_bud.add_item(mop_way)
+    bob_bud.add_item(casa_way)
     bob_bud.edit_item_attr(
-        mop_road,
-        reason_base=casa_road,
+        mop_way,
+        reason_base=casa_way,
         reason_base_item_active_requisite=True,
     )
     csv_header = x_ideas.get("br00027")
@@ -494,7 +494,7 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
     x_csv = add_bud_to_br00027_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    casa_row = f",,{a23_str},{bob_str},{mop_road},{casa_road},True\n"
+    casa_row = f",,{a23_str},{bob_str},{mop_way},{casa_way},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
@@ -504,10 +504,10 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_road = to_road(a23_str)
+    a23_way = to_way(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
     casa_begin = 3
     casa_close = 5
     casa_addin = 7
@@ -519,10 +519,10 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_pledge = False
     casa_problem_bool = False
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(mop_road)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(mop_way)
     bob_bud.edit_item_attr(
-        mop_road,
+        mop_way,
         begin=casa_begin,
         close=casa_close,
         addin=casa_addin,
@@ -543,9 +543,9 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     x_csv = add_bud_to_br00028_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    root_row = f",,{a23_str},{bob_str},,{a23_road},,,,,,,,,1,False,False\n"
-    mop_row = f",,{a23_str},{bob_str},{mop_road},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-    casa_row = f",,{a23_str},{bob_str},{casa_road},,,,,,,,,0,False,False\n"
+    root_row = f",,{a23_str},{bob_str},,{a23_way},,,,,,,,,1,False,False\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
+    casa_row = f",,{a23_str},{bob_str},{casa_way},,,,,,,,,0,False,False\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"
     print(f"       {x_csv=}")
@@ -588,16 +588,16 @@ def test_add_budunit_to_stance_csv_strs_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     bob_bud.add_acctunit(yao_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
-    clean_road = bob_bud.make_road(casa_road, "clean")
-    bob_bud.add_item(mop_road)
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(clean_road)
-    bob_bud.edit_item_attr(mop_road, reason_base=casa_road, reason_premise=clean_road)
-    bob_bud.add_item(casa_road)
-    bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
-    bob_bud.add_fact(casa_road, clean_road)
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
+    clean_way = bob_bud.make_way(casa_way, "clean")
+    bob_bud.add_item(mop_way)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(clean_way)
+    bob_bud.edit_item_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
+    bob_bud.add_item(casa_way)
+    bob_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(yao_str))
+    bob_bud.add_fact(casa_way, clean_way)
 
     br00020_header = x_ideas.get("br00020")
     br00021_header = x_ideas.get("br00021")
@@ -719,7 +719,7 @@ def test_add_to_br00045_csv_ReturnsObj():
     )
     clean_otx = "clean"
     clean_inx = "prope"
-    bob7_pidginunit.set_otx2inx("RoadUnit", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("WayUnit", clean_otx, clean_inx)
     csv_header = x_ideas.get("br00045")
     print(f"{csv_header=}")
 
@@ -745,7 +745,7 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     )
     clean_otx = "clean"
     clean_inx = "prope"
-    bob7_pidginunit.set_otx2inx("RoadUnit", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("WayUnit", clean_otx, clean_inx)
     yao_otx = "Yao"
     yao_inx = "YaoMing"
     bob7_pidginunit.set_otx2inx("NameUnit", yao_otx, yao_inx)
@@ -839,13 +839,13 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
+    casa_way = bob_bud.make_l1_way("casa")
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_bud.add_item(casa_road)
-    bob_bud.edit_item_attr(casa_road, awardlink=casa_awardlink)
+    bob_bud.add_item(casa_way)
+    bob_bud.edit_item_attr(casa_way, awardlink=casa_awardlink)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
@@ -859,7 +859,7 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     x_csv = add_pack_to_br00022_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    yao_award_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{yao_str},{yao_give_force},{yao_take_force}\n"
+    yao_award_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_way},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
@@ -869,15 +869,15 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_road = to_road(a23_str)
+    a23_way = to_way(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
-    clean_road = bob_bud.make_road(casa_road, "clean")
+    casa_way = bob_bud.make_l1_way("casa")
+    clean_way = bob_bud.make_way(casa_way, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(clean_road)
-    bob_bud.add_fact(casa_road, clean_road, clean_fopen, clean_fnigh)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(clean_way)
+    bob_bud.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
@@ -891,7 +891,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_csv = add_pack_to_br00023_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_road},{casa_road},{clean_road},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},{casa_way},{clean_way},{clean_fopen},{clean_fnigh}\n"
     expected_csv = f"{csv_header}{clean_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
@@ -905,9 +905,9 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
-    bob_bud.add_item(casa_road)
-    casa_item = bob_bud.get_item_obj(casa_road)
+    casa_way = bob_bud.make_l1_way("casa")
+    bob_bud.add_item(casa_way)
+    casa_item = bob_bud.get_item_obj(casa_way)
     cleaners_str = "cleaners"
     casa_item.teamunit.set_teamlink(cleaners_str)
     bob_buddelta = buddelta_shop()
@@ -923,9 +923,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     x_csv = add_pack_to_br00024_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    cleaners_row = (
-        f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
-    )
+    cleaners_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
     expected_csv = f"{csv_header}{cleaners_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
@@ -939,9 +937,9 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    casa_road = bob_bud.make_l1_road("casa")
-    bob_bud.add_item(casa_road)
-    casa_item = bob_bud.get_item_obj(casa_road)
+    casa_way = bob_bud.make_l1_way("casa")
+    bob_bud.add_item(casa_way)
+    casa_item = bob_bud.get_item_obj(casa_way)
     cleaners_str = "cleaners"
     casa_item.healerlink.set_healer_name(cleaners_str)
     bob_buddelta = buddelta_shop()
@@ -957,9 +955,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     x_csv = add_pack_to_br00025_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    cleaners_row = (
-        f"{sue_str},{event7},{a23_str},{bob_str},{casa_road},{cleaners_str}\n"
-    )
+    cleaners_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
@@ -970,19 +966,19 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
-    clean_road = bob_bud.make_road(casa_road, "clean")
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
+    clean_way = bob_bud.make_way(casa_way, "clean")
     clean_premise_open = 22
     clean_premise_nigh = 55
     clean_premise_divisor = 77
-    bob_bud.add_item(mop_road)
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(clean_road)
+    bob_bud.add_item(mop_way)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(clean_way)
     bob_bud.edit_item_attr(
-        mop_road,
-        reason_base=casa_road,
-        reason_premise=clean_road,
+        mop_way,
+        reason_base=casa_way,
+        reason_premise=clean_way,
         reason_premise_open=clean_premise_open,
         reason_premise_nigh=clean_premise_nigh,
         reason_premise_divisor=clean_premise_divisor,
@@ -1000,7 +996,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     x_csv = add_pack_to_br00026_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_road},{casa_road},{clean_road},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -1011,13 +1007,13 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
-    bob_bud.add_item(mop_road)
-    bob_bud.add_item(casa_road)
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
+    bob_bud.add_item(mop_way)
+    bob_bud.add_item(casa_way)
     bob_bud.edit_item_attr(
-        mop_road,
-        reason_base=casa_road,
+        mop_way,
+        reason_base=casa_way,
         reason_base_item_active_requisite=True,
     )
     bob_buddelta = buddelta_shop()
@@ -1033,7 +1029,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     x_csv = add_pack_to_br00027_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_road},{casa_road},True\n"
+    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_way},{casa_way},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
@@ -1043,10 +1039,10 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_road = to_road(a23_str)
+    a23_way = to_way(a23_str)
     bob_bud = budunit_shop(bob_str, a23_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
     casa_begin = 3
     casa_close = 5
     casa_addin = 7
@@ -1058,10 +1054,10 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_pledge = False
     casa_problem_bool = False
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(mop_road)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(mop_way)
     bob_bud.edit_item_attr(
-        mop_road,
+        mop_way,
         begin=casa_begin,
         close=casa_close,
         addin=casa_addin,
@@ -1089,9 +1085,9 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     # THEN
     # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_bud.fisc_tag},,,,,,,,,1,False,False\n"
     # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.fisc_tag},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_road},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_pledge},\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_pledge},\n"
     casa_row = (
-        f"{sue_str},{event7},{a23_str},{bob_str},{a23_road},casa,,,,,,,,,0,False,\n"
+        f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},casa,,,,,,,,,0,False,\n"
     )
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{casa_row}{mop_row}"
@@ -1141,16 +1137,16 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     bob_bud.add_acctunit(yao_str)
-    mop_road = bob_bud.make_l1_road("mop")
-    casa_road = bob_bud.make_l1_road("casa")
-    clean_road = bob_bud.make_road(casa_road, "clean")
-    bob_bud.add_item(mop_road)
-    bob_bud.add_item(casa_road)
-    bob_bud.add_item(clean_road)
-    bob_bud.edit_item_attr(mop_road, reason_base=casa_road, reason_premise=clean_road)
-    bob_bud.add_item(casa_road)
-    bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
-    bob_bud.add_fact(casa_road, clean_road)
+    mop_way = bob_bud.make_l1_way("mop")
+    casa_way = bob_bud.make_l1_way("casa")
+    clean_way = bob_bud.make_way(casa_way, "clean")
+    bob_bud.add_item(mop_way)
+    bob_bud.add_item(casa_way)
+    bob_bud.add_item(clean_way)
+    bob_bud.edit_item_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
+    bob_bud.add_item(casa_way)
+    bob_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(yao_str))
+    bob_bud.add_fact(casa_way, clean_way)
     bob_bud.credor_respect = 444
     bob_bud.debtor_respect = 556
     bob_bud.fund_pool = 999
@@ -1203,16 +1199,16 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
 #     a23_str = "accord23"
 #     bob_bud = budunit_shop(bob_str, a23_str)
 #     bob_bud.add_acctunit(yao_str)
-#     mop_road = bob_bud.make_l1_road("mop")
-#     casa_road = bob_bud.make_l1_road("casa")
-#     clean_road = bob_bud.make_road(casa_road, "clean")
-#     bob_bud.add_item(mop_road)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.add_item(clean_road)
-#     bob_bud.edit_item_attr(mop_road, reason_base=casa_road, reason_premise=clean_road)
-#     bob_bud.add_item(casa_road)
-#     bob_bud.edit_item_attr(casa_road, awardlink=awardlink_shop(yao_str))
-#     bob_bud.add_fact(casa_road, clean_road)
+#     mop_way = bob_bud.make_l1_way("mop")
+#     casa_way = bob_bud.make_l1_way("casa")
+#     clean_way = bob_bud.make_way(casa_way, "clean")
+#     bob_bud.add_item(mop_way)
+#     bob_bud.add_item(casa_way)
+#     bob_bud.add_item(clean_way)
+#     bob_bud.edit_item_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
+#     bob_bud.add_item(casa_way)
+#     bob_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(yao_str))
+#     bob_bud.add_fact(casa_way, clean_way)
 #     bob_bud.credor_respect = 444
 #     bob_bud.debtor_respect = 556
 #     bob_bud.fund_pool = 999

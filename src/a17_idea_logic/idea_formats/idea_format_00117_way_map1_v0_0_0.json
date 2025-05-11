@@ -12,10 +12,10 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "inx_road": {
+        "inx_way": {
             "otx_key": false
         },
-        "otx_road": {
+        "otx_way": {
             "otx_key": true
         },
         "owner_name": {
@@ -23,7 +23,7 @@
         }
     },
     "dimens": [
-        "pidgin_road",
+        "pidgin_way",
         "bud_acctunit",
         "budunit",
         "fiscunit"

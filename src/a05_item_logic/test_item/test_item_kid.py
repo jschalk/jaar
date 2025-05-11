@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_way_logic.way import get_default_fisc_tag as root_tag, create_way
 from src.a05_item_logic.item import itemunit_shop
 from pytest import raises as pytest_raises
 
@@ -48,73 +48,73 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
     assert len(mon_item.get_kids_in_range()) == 3
 
 
-def test_ItemUnit_get_descendants_ReturnsNoRoadUnits():
+def test_ItemUnit_get_descendants_ReturnsNoWayUnits():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
 
     # WHEN
-    nation_descendants = nation_item.get_descendant_roads_from_kids()
+    nation_descendants = nation_item.get_descendant_ways_from_kids()
 
     # THEN
     assert nation_descendants == {}
 
 
-def test_ItemUnit_get_descendants_Returns3DescendantsRoadUnits():
+def test_ItemUnit_get_descendants_Returns3DescendantsWayUnits():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
 
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
-    usa_item = itemunit_shop(usa_str, parent_road=nation_road)
+    usa_way = create_way(nation_way, usa_str)
+    usa_item = itemunit_shop(usa_str, parent_way=nation_way)
     nation_item.add_kid(usa_item)
 
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
-    texas_item = itemunit_shop(texas_str, parent_road=usa_road)
+    texas_way = create_way(usa_way, texas_str)
+    texas_item = itemunit_shop(texas_str, parent_way=usa_way)
     usa_item.add_kid(texas_item)
 
     iowa_str = "Iowa"
-    iowa_road = create_road(usa_road, iowa_str)
-    iowa_item = itemunit_shop(iowa_str, parent_road=usa_road)
+    iowa_way = create_way(usa_way, iowa_str)
+    iowa_item = itemunit_shop(iowa_str, parent_way=usa_way)
     usa_item.add_kid(iowa_item)
 
     # WHEN
-    nation_descendants = nation_item.get_descendant_roads_from_kids()
+    nation_descendants = nation_item.get_descendant_ways_from_kids()
 
     # THEN
     assert len(nation_descendants) == 3
-    assert nation_descendants.get(usa_road) is not None
-    assert nation_descendants.get(texas_road) is not None
-    assert nation_descendants.get(iowa_road) is not None
+    assert nation_descendants.get(usa_way) is not None
+    assert nation_descendants.get(texas_way) is not None
+    assert nation_descendants.get(iowa_way) is not None
 
 
 def test_ItemUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
     nation_item.add_kid(nation_item)
     max_count = 1000
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        nation_item.get_descendant_roads_from_kids()
+        nation_item.get_descendant_ways_from_kids()
     assert (
         str(excinfo.value)
-        == f"Item '{nation_item.get_road()}' either has an infinite loop or more than {max_count} descendants."
+        == f"Item '{nation_item.get_way()}' either has an infinite loop or more than {max_count} descendants."
     )
 
 
 def test_ItemUnit_clear_kids_CorrectlySetsAttr():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
-    nation_item.add_kid(itemunit_shop("USA", parent_road=nation_road))
-    nation_item.add_kid(itemunit_shop("France", parent_road=nation_road))
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
+    nation_item.add_kid(itemunit_shop("USA", parent_way=nation_way))
+    nation_item.add_kid(itemunit_shop("France", parent_way=nation_way))
     assert len(nation_item._kids) == 2
 
     # WHEN
@@ -127,16 +127,16 @@ def test_ItemUnit_clear_kids_CorrectlySetsAttr():
 def test_ItemUnit_get_kid_ReturnsObj():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
 
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
-    nation_item.add_kid(itemunit_shop(usa_str, parent_road=nation_road))
+    usa_way = create_way(nation_way, usa_str)
+    nation_item.add_kid(itemunit_shop(usa_str, parent_way=nation_way))
 
     france_str = "France"
-    france_road = create_road(nation_road, france_str)
-    nation_item.add_kid(itemunit_shop(france_str, parent_road=nation_road))
+    france_way = create_way(nation_way, france_str)
+    nation_item.add_kid(itemunit_shop(france_str, parent_way=nation_way))
     assert len(nation_item._kids) == 2
 
     # WHEN
@@ -149,16 +149,16 @@ def test_ItemUnit_get_kid_ReturnsObj():
 def test_ItemUnit_del_kid_CorrectModifiesAttr():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
 
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
-    nation_item.add_kid(itemunit_shop(usa_str, parent_road=nation_road))
+    usa_way = create_way(nation_way, usa_str)
+    nation_item.add_kid(itemunit_shop(usa_str, parent_way=nation_way))
 
     france_str = "France"
-    france_road = create_road(nation_road, france_str)
-    nation_item.add_kid(itemunit_shop(france_str, parent_road=nation_road))
+    france_way = create_way(nation_way, france_str)
+    nation_item.add_kid(itemunit_shop(france_str, parent_way=nation_way))
     assert len(nation_item._kids) == 2
 
     # WHEN
@@ -171,13 +171,13 @@ def test_ItemUnit_del_kid_CorrectModifiesAttr():
 def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
     usa_str = "USA"
-    usa_item = itemunit_shop(usa_str, parent_road=nation_road)
+    usa_item = itemunit_shop(usa_str, parent_way=nation_way)
     nation_item.add_kid(usa_item)
     france_str = "France"
-    france_item = itemunit_shop(france_str, parent_road=nation_road)
+    france_item = itemunit_shop(france_str, parent_way=nation_way)
     nation_item.add_kid(france_item)
 
     # WHEN / THEN
@@ -187,13 +187,13 @@ def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
 def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
-    nation_item = itemunit_shop(nation_str, parent_road=root_tag())
+    nation_way = create_way(root_tag(), nation_str)
+    nation_item = itemunit_shop(nation_str, parent_way=root_tag())
     usa_str = "USA"
-    usa_item = itemunit_shop(usa_str, mass=0, parent_road=nation_road)
+    usa_item = itemunit_shop(usa_str, mass=0, parent_way=nation_way)
     nation_item.add_kid(usa_item)
     france_str = "France"
-    france_item = itemunit_shop(france_str, mass=0, parent_road=nation_road)
+    france_item = itemunit_shop(france_str, mass=0, parent_way=nation_way)
     nation_item.add_kid(france_item)
 
     # WHEN / THEN
@@ -201,7 +201,7 @@ def test_ItemUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
 
     # WHEN
     france_str = "France"
-    france_item = itemunit_shop(france_str, mass=3, parent_road=nation_road)
+    france_item = itemunit_shop(france_str, mass=3, parent_way=nation_way)
     nation_item.add_kid(france_item)
 
     # WHEN / THEN

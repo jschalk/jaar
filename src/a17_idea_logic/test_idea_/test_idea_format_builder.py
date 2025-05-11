@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import save_json
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a06_bud_logic._utils.str_a06 import bud_itemunit_str, road_str, gogo_want_str
+from src.a06_bud_logic._utils.str_a06 import bud_itemunit_str, way_str, gogo_want_str
 from src.a08_bud_atom_logic.atom_config import get_atom_config_args
 from src.a17_idea_logic._utils.str_a17 import attributes_str, dimens_str
 from src.a17_idea_logic.idea_config import get_idea_formats_dir, get_idea_config_dict
@@ -38,7 +38,7 @@ def test_create_dimens_idea_format_dict_ReturnObj(rebuild_bool):
     bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
     assert fisc_tag_str() in bud_itemunit_attributes
     assert owner_name_str() in bud_itemunit_attributes
-    assert road_str() in bud_itemunit_attributes
+    assert way_str() in bud_itemunit_attributes
     assert gogo_want_str() in bud_itemunit_attributes
 
     rebuild_format_jsons(rebuild_bool)

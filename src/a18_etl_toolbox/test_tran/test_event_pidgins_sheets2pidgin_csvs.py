@@ -93,7 +93,7 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario1_1Event_name(env_dir_setup_cl
     pandas_testing_assert_frame_equal(gen_event3_csv_df, e3_name_df)
 
 
-def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cleanup):
+def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_way(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     casa_otx = "fizz,casa"
@@ -101,35 +101,35 @@ def test_event_pidgin_to_pidgin_csv_files_Scenario2_1Event_road(env_dir_setup_cl
     clean_otx = "fizz,casa,clean"
     clean_inx = "fizz,casaita,limpio"
     event7 = 7
-    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
+    way_agg_columns = PidginPrimeColumns().pidgin_way_agg_columns
     x_nan = float("nan")
-    e7_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e7_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e7_road_rows = [e7_road0, e7_road1]
-    e7_road_df = DataFrame(e7_road_rows, columns=road_agg_columns)
+    e7_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e7_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e7_way_rows = [e7_way0, e7_way1]
+    e7_way_df = DataFrame(e7_way_rows, columns=way_agg_columns)
 
     faces_dir = get_module_temp_dir()
     sue_dir = create_path(faces_dir, sue_str)
     event7_dir = create_path(sue_dir, event7)
     event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
     print(f"{event7_pidgin_file_path=}")
-    event7_road_csv_file_path = create_path(event7_dir, "road.csv")
-    road_agg_str = "road_agg"
-    upsert_sheet(event7_pidgin_file_path, road_agg_str, e7_road_df)
-    assert sheet_exists(event7_pidgin_file_path, road_agg_str)
-    assert os_path_exists(event7_road_csv_file_path) is False
+    event7_way_csv_file_path = create_path(event7_dir, "way.csv")
+    way_agg_str = "way_agg"
+    upsert_sheet(event7_pidgin_file_path, way_agg_str, e7_way_df)
+    assert sheet_exists(event7_pidgin_file_path, way_agg_str)
+    assert os_path_exists(event7_way_csv_file_path) is False
 
     # WHEN
     event_pidgin_to_pidgin_csv_files(event7_dir)
 
     # THEN
-    assert os_path_exists(event7_road_csv_file_path)
-    gen_event3_csv_df = open_csv(event7_dir, "road.csv")
+    assert os_path_exists(event7_way_csv_file_path)
+    gen_event3_csv_df = open_csv(event7_dir, "way.csv")
     print(f"{gen_event3_csv_df=}")
-    pandas_testing_assert_frame_equal(gen_event3_csv_df, e7_road_df)
+    pandas_testing_assert_frame_equal(gen_event3_csv_df, e7_way_df)
 
 
-def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
+def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_way(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -143,22 +143,22 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
     event3 = 3
     event7 = 7
     event9 = 9
-    road_agg_columns = PidginPrimeColumns().pidgin_road_agg_columns
+    way_agg_columns = PidginPrimeColumns().pidgin_way_agg_columns
     x_nan = float("nan")
-    e3_road0 = [event3, bob_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e3_road1 = [event3, bob_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e3_road_rows = [e3_road0, e3_road1]
-    e3_road_df = DataFrame(e3_road_rows, columns=road_agg_columns)
+    e3_way0 = [event3, bob_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e3_way1 = [event3, bob_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e3_way_rows = [e3_way0, e3_way1]
+    e3_way_df = DataFrame(e3_way_rows, columns=way_agg_columns)
 
-    e7_road0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e7_road1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e7_road_rows = [e7_road0, e7_road1]
-    e7_road_df = DataFrame(e7_road_rows, columns=road_agg_columns)
+    e7_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e7_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e7_way_rows = [e7_way0, e7_way1]
+    e7_way_df = DataFrame(e7_way_rows, columns=way_agg_columns)
 
-    e9_road0 = [event9, zia_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
-    e9_road1 = [event9, zia_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
-    e9_road_rows = [e9_road0, e9_road1]
-    e9_road_df = DataFrame(e9_road_rows, columns=road_agg_columns)
+    e9_way0 = [event9, zia_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
+    e9_way1 = [event9, zia_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
+    e9_way_rows = [e9_way0, e9_way1]
+    e9_way_df = DataFrame(e9_way_rows, columns=way_agg_columns)
 
     faces_dir = get_module_temp_dir()
     bob_dir = create_path(faces_dir, bob_str)
@@ -170,27 +170,27 @@ def test_etl_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_road(
     event3_pidgin_file_path = otx_event_pidgin_path(faces_dir, bob_str, event3)
     event7_pidgin_file_path = otx_event_pidgin_path(faces_dir, sue_str, event7)
     event9_pidgin_file_path = otx_event_pidgin_path(faces_dir, zia_str, event9)
-    event3_road_csv_file_path = create_path(event3_dir, "road.csv")
-    event7_road_csv_file_path = create_path(event7_dir, "road.csv")
-    event9_road_csv_file_path = create_path(event9_dir, "road.csv")
-    road_agg_str = "road_agg"
-    upsert_sheet(event3_pidgin_file_path, road_agg_str, e3_road_df)
-    upsert_sheet(event7_pidgin_file_path, road_agg_str, e7_road_df)
-    upsert_sheet(event9_pidgin_file_path, road_agg_str, e9_road_df)
-    assert sheet_exists(event3_pidgin_file_path, road_agg_str)
-    assert sheet_exists(event7_pidgin_file_path, road_agg_str)
-    assert sheet_exists(event9_pidgin_file_path, road_agg_str)
-    assert os_path_exists(event3_road_csv_file_path) is False
-    assert os_path_exists(event7_road_csv_file_path) is False
-    assert os_path_exists(event9_road_csv_file_path) is False
+    event3_way_csv_file_path = create_path(event3_dir, "way.csv")
+    event7_way_csv_file_path = create_path(event7_dir, "way.csv")
+    event9_way_csv_file_path = create_path(event9_dir, "way.csv")
+    way_agg_str = "way_agg"
+    upsert_sheet(event3_pidgin_file_path, way_agg_str, e3_way_df)
+    upsert_sheet(event7_pidgin_file_path, way_agg_str, e7_way_df)
+    upsert_sheet(event9_pidgin_file_path, way_agg_str, e9_way_df)
+    assert sheet_exists(event3_pidgin_file_path, way_agg_str)
+    assert sheet_exists(event7_pidgin_file_path, way_agg_str)
+    assert sheet_exists(event9_pidgin_file_path, way_agg_str)
+    assert os_path_exists(event3_way_csv_file_path) is False
+    assert os_path_exists(event7_way_csv_file_path) is False
+    assert os_path_exists(event9_way_csv_file_path) is False
 
     # WHEN
     etl_otz_event_pidgins_to_otz_pidgin_csv_files(faces_dir)
 
     # THEN
-    assert os_path_exists(event3_road_csv_file_path)
-    assert os_path_exists(event7_road_csv_file_path)
-    assert os_path_exists(event9_road_csv_file_path)
-    gen_event3_csv_df = open_csv(event7_dir, "road.csv")
+    assert os_path_exists(event3_way_csv_file_path)
+    assert os_path_exists(event7_way_csv_file_path)
+    assert os_path_exists(event9_way_csv_file_path)
+    gen_event3_csv_df = open_csv(event7_dir, "way.csv")
     print(f"{gen_event3_csv_df=}")
-    pandas_testing_assert_frame_equal(gen_event3_csv_df, e7_road_df)
+    pandas_testing_assert_frame_equal(gen_event3_csv_df, e7_way_df)

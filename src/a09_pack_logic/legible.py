@@ -19,7 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     team_title_str,
     healer_name_str,
-    road_str,
+    way_str,
     base_item_active_requisite_str,
     pledge_str,
     addin_str,
@@ -332,7 +332,7 @@ def add_bud_itemunit_insert_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     for itemunit_atom in itemunit_insert_dict.values():
-        road_value = itemunit_atom.get_value(road_str())
+        way_value = itemunit_atom.get_value(way_str())
         _addin_value = itemunit_atom.get_value(addin_str())
         _begin_value = itemunit_atom.get_value(begin_str())
         _close_value = itemunit_atom.get_value(close_str())
@@ -342,7 +342,7 @@ def add_bud_itemunit_insert_to_legible_list(
         _morph_value = itemunit_atom.get_value(morph_str())
         _mass_value = itemunit_atom.get_value(mass_str())
         pledge_value = itemunit_atom.get_value(pledge_str())
-        x_str = f"Created Item '{road_value}'. "
+        x_str = f"Created Item '{way_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
         if _begin_value is not None:
@@ -370,7 +370,7 @@ def add_bud_itemunit_update_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     for itemunit_atom in itemunit_update_dict.values():
-        road_value = itemunit_atom.get_value(road_str())
+        way_value = itemunit_atom.get_value(way_str())
         addin_value = itemunit_atom.get_value(addin_str())
         begin_value = itemunit_atom.get_value(begin_str())
         close_value = itemunit_atom.get_value(close_str())
@@ -380,7 +380,7 @@ def add_bud_itemunit_update_to_legible_list(
         morph_value = itemunit_atom.get_value(morph_str())
         mass_value = itemunit_atom.get_value(mass_str())
         pledge_value = itemunit_atom.get_value(pledge_str())
-        x_str = f"Item '{road_value}' set these attributes: "
+        x_str = f"Item '{way_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
         if begin_value is not None:
@@ -407,65 +407,65 @@ def add_bud_itemunit_delete_to_legible_list(
     legible_list: list[str], itemunit_delete_dict: dict, x_bud: BudUnit
 ):
     for itemunit_atom in itemunit_delete_dict.values():
-        road_value = itemunit_atom.get_value(road_str())
-        x_str = f"Item '{road_value}' was deleted."
+        way_value = itemunit_atom.get_value(way_str())
+        x_str = f"Item '{way_value}' was deleted."
         legible_list.append(x_str)
 
 
 def add_bud_item_awardlink_insert_to_legible_list(
     legible_list: list[str], item_awardlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_awardlink_insert_dict.values():
-        for item_awardlink_atom in road_dict.values():
+    for way_dict in item_awardlink_insert_dict.values():
+        for item_awardlink_atom in way_dict.values():
             awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
-            road_value = item_awardlink_atom.get_value("road")
+            way_value = item_awardlink_atom.get_value("way")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_title_value} for item '{road_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {awardee_title_value} for item '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
 def add_bud_item_awardlink_update_to_legible_list(
     legible_list: list[str], item_awardlink_update_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_awardlink_update_dict.values():
-        for item_awardlink_atom in road_dict.values():
+    for way_dict in item_awardlink_update_dict.values():
+        for item_awardlink_atom in way_dict.values():
             awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
-            road_value = item_awardlink_atom.get_value("road")
+            way_value = item_awardlink_atom.get_value("way")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{road_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{road_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{way_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{road_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{way_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
 def add_bud_item_awardlink_delete_to_legible_list(
     legible_list: list[str], item_awardlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_awardlink_delete_dict.values():
-        for item_awardlink_atom in road_dict.values():
+    for way_dict in item_awardlink_delete_dict.values():
+        for item_awardlink_atom in way_dict.values():
             awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
-            road_value = item_awardlink_atom.get_value("road")
-            x_str = f"Awardlink for group {awardee_title_value}, item '{road_value}' has been deleted."
+            way_value = item_awardlink_atom.get_value("way")
+            x_str = f"Awardlink for group {awardee_title_value}, item '{way_value}' has been deleted."
             legible_list.append(x_str)
 
 
 def add_bud_item_reasonunit_insert_to_legible_list(
     legible_list: list[str], item_reasonunit_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_reasonunit_insert_dict.values():
-        for item_reasonunit_atom in road_dict.values():
-            road_value = item_reasonunit_atom.get_value("road")
+    for way_dict in item_reasonunit_insert_dict.values():
+        for item_reasonunit_atom in way_dict.values():
+            way_value = item_reasonunit_atom.get_value("way")
             base_value = item_reasonunit_atom.get_value("base")
             base_item_active_requisite_value = item_reasonunit_atom.get_value(
                 base_item_active_requisite_str()
             )
             x_str = (
-                f"ReasonUnit created for item '{road_value}' with base '{base_value}'."
+                f"ReasonUnit created for item '{way_value}' with base '{base_value}'."
             )
             if base_item_active_requisite_value is not None:
                 x_str += (
@@ -477,28 +477,28 @@ def add_bud_item_reasonunit_insert_to_legible_list(
 def add_bud_item_reasonunit_update_to_legible_list(
     legible_list: list[str], item_reasonunit_update_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_reasonunit_update_dict.values():
-        for item_reasonunit_atom in road_dict.values():
-            road_value = item_reasonunit_atom.get_value("road")
+    for way_dict in item_reasonunit_update_dict.values():
+        for item_reasonunit_atom in way_dict.values():
+            way_value = item_reasonunit_atom.get_value("way")
             base_value = item_reasonunit_atom.get_value("base")
             base_item_active_requisite_value = item_reasonunit_atom.get_value(
                 base_item_active_requisite_str()
             )
             if base_item_active_requisite_value is not None:
-                x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' set with base_item_active_requisite={base_item_active_requisite_value}."
+                x_str = f"ReasonUnit base='{base_value}' for item '{way_value}' set with base_item_active_requisite={base_item_active_requisite_value}."
             else:
-                x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' and no longer checks base active mode."
+                x_str = f"ReasonUnit base='{base_value}' for item '{way_value}' and no longer checks base active mode."
             legible_list.append(x_str)
 
 
 def add_bud_item_reasonunit_delete_to_legible_list(
     legible_list: list[str], item_reasonunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_reasonunit_delete_dict.values():
-        for item_reasonunit_atom in road_dict.values():
-            road_value = item_reasonunit_atom.get_value("road")
+    for way_dict in item_reasonunit_delete_dict.values():
+        for item_reasonunit_atom in way_dict.values():
+            way_value = item_reasonunit_atom.get_value("way")
             base_value = item_reasonunit_atom.get_value("base")
-            x_str = f"ReasonUnit base='{base_value}' for item '{road_value}' has been deleted."
+            x_str = f"ReasonUnit base='{base_value}' for item '{way_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -507,16 +507,16 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
     item_reason_premiseunit_insert_dict: dict,
     x_bud: BudUnit,
 ):
-    for road_dict in item_reason_premiseunit_insert_dict.values():
-        for base_dict in road_dict.values():
+    for way_dict in item_reason_premiseunit_insert_dict.values():
+        for base_dict in way_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                road_value = item_reason_premiseunit_atom.get_value(road_str())
+                way_value = item_reason_premiseunit_atom.get_value(way_str())
                 base_value = item_reason_premiseunit_atom.get_value(base_str())
                 need_value = item_reason_premiseunit_atom.get_value(need_str())
                 divisor_value = item_reason_premiseunit_atom.get_value("divisor")
                 nigh_value = item_reason_premiseunit_atom.get_value(nigh_str())
                 open_value = item_reason_premiseunit_atom.get_value(open_str())
-                x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'."
+                x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{way_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
                 if nigh_value is not None:
@@ -531,16 +531,16 @@ def add_bud_reason_premiseunit_update_to_legible_list(
     item_reason_premiseunit_update_dict: dict,
     x_bud: BudUnit,
 ):
-    for road_dict in item_reason_premiseunit_update_dict.values():
-        for base_dict in road_dict.values():
+    for way_dict in item_reason_premiseunit_update_dict.values():
+        for base_dict in way_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                road_value = item_reason_premiseunit_atom.get_value(road_str())
+                way_value = item_reason_premiseunit_atom.get_value(way_str())
                 base_value = item_reason_premiseunit_atom.get_value(base_str())
                 need_value = item_reason_premiseunit_atom.get_value(need_str())
                 divisor_value = item_reason_premiseunit_atom.get_value("divisor")
                 nigh_value = item_reason_premiseunit_atom.get_value(nigh_str())
                 open_value = item_reason_premiseunit_atom.get_value(open_str())
-                x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'."
+                x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{way_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
                 if nigh_value is not None:
@@ -555,71 +555,71 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
     item_reason_premiseunit_delete_dict: dict,
     x_bud: BudUnit,
 ):
-    for road_dict in item_reason_premiseunit_delete_dict.values():
-        for base_dict in road_dict.values():
+    for way_dict in item_reason_premiseunit_delete_dict.values():
+        for base_dict in way_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                road_value = item_reason_premiseunit_atom.get_value(road_str())
+                way_value = item_reason_premiseunit_atom.get_value(way_str())
                 base_value = item_reason_premiseunit_atom.get_value(base_str())
                 need_value = item_reason_premiseunit_atom.get_value(need_str())
-                x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{road_value}'."
+                x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{way_value}'."
                 legible_list.append(x_str)
 
 
 def add_bud_item_teamlink_insert_to_legible_list(
     legible_list: list[str], item_teamlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_teamlink_insert_dict.values():
-        for item_teamlink_atom in road_dict.values():
+    for way_dict in item_teamlink_insert_dict.values():
+        for item_teamlink_atom in way_dict.values():
             team_title_value = item_teamlink_atom.get_value(team_title_str())
-            road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{team_title_value}' created for item '{road_value}'."
+            way_value = item_teamlink_atom.get_value("way")
+            x_str = f"teamlink '{team_title_value}' created for item '{way_value}'."
             legible_list.append(x_str)
 
 
 def add_bud_item_teamlink_delete_to_legible_list(
     legible_list: list[str], item_teamlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_teamlink_delete_dict.values():
-        for item_teamlink_atom in road_dict.values():
+    for way_dict in item_teamlink_delete_dict.values():
+        for item_teamlink_atom in way_dict.values():
             team_title_value = item_teamlink_atom.get_value(team_title_str())
-            road_value = item_teamlink_atom.get_value("road")
-            x_str = f"teamlink '{team_title_value}' deleted for item '{road_value}'."
+            way_value = item_teamlink_atom.get_value("way")
+            x_str = f"teamlink '{team_title_value}' deleted for item '{way_value}'."
             legible_list.append(x_str)
 
 
 def add_bud_item_healerlink_insert_to_legible_list(
     legible_list: list[str], item_healerlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_healerlink_insert_dict.values():
-        for item_healerlink_atom in road_dict.values():
+    for way_dict in item_healerlink_insert_dict.values():
+        for item_healerlink_atom in way_dict.values():
             healer_name_value = item_healerlink_atom.get_value(healer_name_str())
-            road_value = item_healerlink_atom.get_value("road")
-            x_str = f"HealerLink '{healer_name_value}' created for item '{road_value}'."
+            way_value = item_healerlink_atom.get_value("way")
+            x_str = f"HealerLink '{healer_name_value}' created for item '{way_value}'."
             legible_list.append(x_str)
 
 
 def add_bud_item_healerlink_delete_to_legible_list(
     legible_list: list[str], item_healerlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_healerlink_delete_dict.values():
-        for item_healerlink_atom in road_dict.values():
+    for way_dict in item_healerlink_delete_dict.values():
+        for item_healerlink_atom in way_dict.values():
             healer_name_value = item_healerlink_atom.get_value(healer_name_str())
-            road_value = item_healerlink_atom.get_value("road")
-            x_str = f"HealerLink '{healer_name_value}' deleted for item '{road_value}'."
+            way_value = item_healerlink_atom.get_value("way")
+            x_str = f"HealerLink '{healer_name_value}' deleted for item '{way_value}'."
             legible_list.append(x_str)
 
 
 def add_bud_item_factunit_insert_to_legible_list(
     legible_list: list[str], item_factunit_insert_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_factunit_insert_dict.values():
-        for item_factunit_atom in road_dict.values():
-            road_value = item_factunit_atom.get_value(road_str())
+    for way_dict in item_factunit_insert_dict.values():
+        for item_factunit_atom in way_dict.values():
+            way_value = item_factunit_atom.get_value(way_str())
             fbase_value = item_factunit_atom.get_value(fbase_str())
             fneed_value = item_factunit_atom.get_value(fneed_str())
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
             fopen_value = item_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fneed_value}' created for base '{fbase_value}' for item '{road_value}'."
+            x_str = f"FactUnit '{fneed_value}' created for base '{fbase_value}' for item '{way_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -630,14 +630,14 @@ def add_bud_item_factunit_insert_to_legible_list(
 def add_bud_item_factunit_update_to_legible_list(
     legible_list: list[str], item_factunit_update_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_factunit_update_dict.values():
-        for item_factunit_atom in road_dict.values():
-            road_value = item_factunit_atom.get_value(road_str())
+    for way_dict in item_factunit_update_dict.values():
+        for item_factunit_atom in way_dict.values():
+            way_value = item_factunit_atom.get_value(way_str())
             fbase_value = item_factunit_atom.get_value(fbase_str())
             fneed_value = item_factunit_atom.get_value(fneed_str())
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
             fopen_value = item_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fneed_value}' updated for base '{fbase_value}' for item '{road_value}'."
+            x_str = f"FactUnit '{fneed_value}' updated for base '{fbase_value}' for item '{way_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -648,10 +648,10 @@ def add_bud_item_factunit_update_to_legible_list(
 def add_bud_item_factunit_delete_to_legible_list(
     legible_list: list[str], item_factunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for road_dict in item_factunit_delete_dict.values():
-        for item_factunit_atom in road_dict.values():
-            road_value = item_factunit_atom.get_value(road_str())
+    for way_dict in item_factunit_delete_dict.values():
+        for item_factunit_atom in way_dict.values():
+            way_value = item_factunit_atom.get_value(way_str())
             fbase_value = item_factunit_atom.get_value(fbase_str())
             fneed_value = item_factunit_atom.get_value(fneed_str())
-            x_str = f"FactUnit base '{fbase_value}' deleted for item '{road_value}'."
+            x_str = f"FactUnit base '{fbase_value}' deleted for item '{way_value}'."
             legible_list.append(x_str)

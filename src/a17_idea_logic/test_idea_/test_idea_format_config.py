@@ -8,7 +8,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
     mass_str,
-    road_str,
+    way_str,
     pledge_str,
     acct_pool_str,
     debtit_belief_str,
@@ -138,7 +138,7 @@ def test_get_sorted_headers_str_ReturnsObj():
 
     # THEN
     print(f"{br00019_headers=}")
-    item_headers_str = "fisc_tag,owner_name,road,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    item_headers_str = "fisc_tag,owner_name,way,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert br00019_headers == item_headers_str
 
 
@@ -175,7 +175,7 @@ def test__generate_idea_dataframe_ReturnsObj():
 
 
 def for_all_ideas__generate_idea_dataframe():
-    # Catching broad exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
+    # Catching bway exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
     for x_filename in get_idea_format_filenames():
         try:
@@ -267,7 +267,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_itemunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == road_str()
+    assert headers_list[4] == way_str()
     assert headers_list[5] == mass_str()
     assert headers_list[6] == pledge_str()
 
@@ -286,7 +286,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_itemunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_tag_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == road_str()
+    assert headers_list[4] == way_str()
     assert headers_list[5] == begin_str()
     assert headers_list[6] == close_str()
     assert headers_list[7] == addin_str()

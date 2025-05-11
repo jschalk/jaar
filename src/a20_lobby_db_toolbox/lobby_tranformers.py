@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a01_road_logic.road import RoadUnit, WorldID
+from src.a01_way_logic.way import WayUnit, WorldID
 from src.a02_finance_logic.deal import OwnerName, FiscTag
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
@@ -33,12 +33,12 @@ class ObjKeysHolder:
     world_id: WorldID = None
     fisc_tag: FiscTag = None
     owner_name: OwnerName = None
-    road: RoadUnit = None
-    base: RoadUnit = None
+    way: WayUnit = None
+    base: WayUnit = None
     acct_name: AcctUnit = None
     membership: GroupUnit = None
     group_name: GroupUnit = None
-    fact_road: RoadUnit = None
+    fact_way: WayUnit = None
 
 
 def insert_job_budmemb(
@@ -89,7 +89,7 @@ def insert_job_budawar(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["road"] = x_objkeysholder.road
+    x_dict["way"] = x_objkeysholder.way
     insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -103,7 +103,7 @@ def insert_job_budfact(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["road"] = x_objkeysholder.road
+    x_dict["way"] = x_objkeysholder.way
     insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -117,7 +117,7 @@ def insert_job_budheal(
         "world_id": x_objkeysholder.world_id,
         "fisc_tag": x_objkeysholder.fisc_tag,
         "owner_name": x_objkeysholder.owner_name,
-        "road": x_objkeysholder.road,
+        "way": x_objkeysholder.way,
     }
     for healer_name in sorted(x_healer._healer_names):
         x_dict["healer_name"] = healer_name
@@ -134,7 +134,7 @@ def insert_job_budprem(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["road"] = x_objkeysholder.road
+    x_dict["way"] = x_objkeysholder.way
     x_dict["base"] = x_objkeysholder.base
     insert_sqlstr = create_budprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -149,7 +149,7 @@ def insert_job_budreas(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["road"] = x_objkeysholder.road
+    x_dict["way"] = x_objkeysholder.way
     insert_sqlstr = create_budreas_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -163,7 +163,7 @@ def insert_job_budteam(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["road"] = x_objkeysholder.road
+    x_dict["way"] = x_objkeysholder.way
     for team_title in sorted(x_teamheir._teamlinks):
         x_dict["team_title"] = team_title
         insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
@@ -174,7 +174,7 @@ def insert_job_buditem(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_item: ItemUnit
 ):
     x_dict = copy_deepcopy(x_item.__dict__)
-    x_dict["road"] = x_item.get_road()
+    x_dict["way"] = x_item.get_way()
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_buditem_metrics_insert_sqlstr(x_dict)
@@ -195,7 +195,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
     x_objkeysholder = ObjKeysHolder(world_id, job_bud.fisc_tag, job_bud.owner_name)
     insert_job_budunit(cursor, x_objkeysholder, job_bud)
     for x_item in job_bud.get_item_dict().values():
-        x_objkeysholder.road = x_item.get_road()
+        x_objkeysholder.way = x_item.get_way()
         healerlink = x_item.healerlink
         teamheir = x_item._teamheir
         insert_job_buditem(cursor, x_objkeysholder, x_item)
@@ -218,7 +218,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
         insert_job_budgrou(cursor, x_objkeysholder, x_groupunit)
 
     for x_factheir in job_bud.itemroot._factheirs.values():
-        x_objkeysholder.fact_road = job_bud.itemroot.get_road()
+        x_objkeysholder.fact_way = job_bud.itemroot.get_way()
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
 
 

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a01_road_logic.road import create_road
+from src.a01_way_logic.way import create_way
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import (
     awardlink_shop,
@@ -64,12 +64,12 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.world_id
     assert not x_objkeyholder.fisc_tag
     assert not x_objkeyholder.owner_name
-    assert not x_objkeyholder.road
+    assert not x_objkeyholder.way
     assert not x_objkeyholder.base
     assert not x_objkeyholder.acct_name
     assert not x_objkeyholder.membership
     assert not x_objkeyholder.group_name
-    assert not x_objkeyholder.fact_road
+    assert not x_objkeyholder.fact_way
 
 
 def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
@@ -164,8 +164,8 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     x_world_id = 0
     x_fisc_tag = "accord23"
     x_owner_name = 2
-    casa_road = create_road(x_fisc_tag, "casa")
-    x_parent_road = casa_road
+    casa_way = create_way(x_fisc_tag, "casa")
+    x_parent_way = casa_way
     x_item_tag = "clean"
     x_begin = 5.0
     x_close = 6.0
@@ -194,7 +194,7 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
     x__all_acct_debt = 29
     x_item = itemunit_shop()
     x_item.fisc_tag = x_fisc_tag
-    x_item.parent_road = x_parent_road
+    x_item.parent_way = x_parent_way
     x_item.item_tag = x_item_tag
     x_item.begin = x_begin
     x_item.close = x_close
@@ -258,7 +258,7 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
         insert_job_buditem(cursor, x_objkeysholder, x_item)
 
         # THEN
-        clean_road = create_road(casa_road, "clean")
+        clean_way = create_way(casa_way, "clean")
         assert get_row_count(cursor, x_table_name) == 1
         select_sqlstr = f"SELECT * FROM {x_table_name};"
         cursor.execute(select_sqlstr)
@@ -267,7 +267,7 @@ def test_insert_job_buditem_CreatesTableRowsFor_buditem_job():
             str(x_world_id),
             x_fisc_tag,
             str(x_owner_name),
-            clean_road,
+            clean_way,
             x_begin,
             x_close,
             x_addin,
@@ -317,7 +317,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_world_id = 0
     x_fisc_tag = 1
     x_owner_name = 2
-    x_road = 3
+    x_way = 3
     x_base = 4
     x_base_item_active_requisite = 5
     x__task = 6
@@ -335,7 +335,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_way)
 
         # WHEN
         insert_job_budreas(cursor, x_objkeysholder, x_reasonheir)
@@ -349,7 +349,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             str(x_base),
             x_base_item_active_requisite,
             x__task,
@@ -378,7 +378,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_world_id = 0
     x_fisc_tag = 1
     x_owner_name = 2
-    x_road = 3
+    x_way = 3
     x_base = 4
     x_need = 5
     x_nigh = 6.0
@@ -400,7 +400,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         x_table_name = "bud_item_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_world_id, x_fisc_tag, x_owner_name, x_road, x_base
+            x_world_id, x_fisc_tag, x_owner_name, x_way, x_base
         )
 
         # WHEN
@@ -415,7 +415,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             str(x_base),
             str(x_need),
             x_nigh,
@@ -679,7 +679,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     x_world_id = 0
     x_fisc_tag = 1
     x_owner_name = 2
-    x_road = 3
+    x_way = 3
     x_awardee_title = 4
     x_give_force = 5
     x_take_force = 6
@@ -697,7 +697,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_way)
 
         # WHEN
         insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
@@ -711,7 +711,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             str(x_awardee_title),
             x_give_force,
             x_take_force,
@@ -740,7 +740,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     x_world_id = 0
     x_fisc_tag = 1
     x_owner_name = 2
-    x_road = 3
+    x_way = 3
     x_base = 4
     x_fneed = 5
     x_fopen = 6
@@ -756,7 +756,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_way)
 
         # WHEN
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
@@ -770,7 +770,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             str(x_base),
             str(x_fneed),
             x_fopen,
@@ -798,7 +798,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     x_world_id = 0
     x_fisc_tag = 1
     x_owner_name = 2
-    x_road = 3
+    x_way = 3
     bob_str = "Bob"
     sue_str = "Sue"
     x_healerlink = healerlink_shop()
@@ -810,7 +810,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_way)
 
         # WHEN
         insert_job_budheal(cursor, x_objkeysholder, x_healerlink)
@@ -824,14 +824,14 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             bob_str,
         )
         expected_row2 = (
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             sue_str,
         )
         expected_data = [expected_row1, expected_row2]
@@ -856,7 +856,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
     x_world_id = 0
     x_fisc_tag = 1
     x_owner_name = 2
-    x_road = 3
+    x_way = 3
     x__owner_name_team = 5
     x_teamheir = teamheir_shop()
     x_teamheir._owner_name_team = x__owner_name_team
@@ -869,7 +869,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
         create_job_tables(cursor)
         x_table_name = "bud_item_teamlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_road)
+        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_way)
 
         # WHEN
         insert_job_budteam(cursor, x_objkeysholder, x_teamheir)
@@ -883,7 +883,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             bob_str,
             x__owner_name_team,
         )
@@ -891,7 +891,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
             str(x_world_id),
             str(x_fisc_tag),
             str(x_owner_name),
-            str(x_road),
+            str(x_way),
             sue_str,
             x__owner_name_team,
         )
@@ -911,20 +911,20 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_bud.add_acctunit(sue_str)
     sue_bud.add_acctunit(bob_str)
     sue_bud.get_acct(bob_str).add_membership(run_str)
-    casa_road = sue_bud.make_l1_road("casa")
-    status_road = sue_bud.make_l1_road("status")
-    clean_road = sue_bud.make_road(status_road, "clean")
-    dirty_road = sue_bud.make_road(status_road, "dirty")
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(clean_road)
-    sue_bud.add_item(dirty_road)
+    casa_way = sue_bud.make_l1_way("casa")
+    status_way = sue_bud.make_l1_way("status")
+    clean_way = sue_bud.make_way(status_way, "clean")
+    dirty_way = sue_bud.make_way(status_way, "dirty")
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(clean_way)
+    sue_bud.add_item(dirty_way)
     sue_bud.edit_item_attr(
-        road=casa_road, reason_base=status_road, reason_premise=dirty_road
+        way=casa_way, reason_base=status_way, reason_premise=dirty_way
     )
-    sue_bud.edit_item_attr(road=casa_road, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_item_attr(road=casa_road, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(road=casa_road, teamunit=teamunit_shop({sue_str}))
-    sue_bud.add_fact(status_road, clean_road)
+    sue_bud.edit_item_attr(way=casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_item_attr(way=casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(way=casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.add_fact(status_way, clean_way)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -985,22 +985,22 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     sue_bud.add_acctunit(sue_str)
     sue_bud.add_acctunit(bob_str)
     sue_bud.get_acct(bob_str).add_membership(run_str)
-    casa_road = sue_bud.make_l1_road("casa")
-    status_road = sue_bud.make_l1_road("status")
-    clean_road = sue_bud.make_road(status_road, "clean")
-    dirty_road = sue_bud.make_road(status_road, "dirty")
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(clean_road)
-    sue_bud.add_item(dirty_road)
+    casa_way = sue_bud.make_l1_way("casa")
+    status_way = sue_bud.make_l1_way("status")
+    clean_way = sue_bud.make_way(status_way, "clean")
+    dirty_way = sue_bud.make_way(status_way, "dirty")
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(clean_way)
+    sue_bud.add_item(dirty_way)
     sue_bud.edit_item_attr(
-        road=casa_road, reason_base=status_road, reason_premise=dirty_road
+        way=casa_way, reason_base=status_way, reason_premise=dirty_way
     )
-    sue_bud.edit_item_attr(road=casa_road, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_item_attr(road=casa_road, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(road=casa_road, teamunit=teamunit_shop({sue_str}))
-    sue_bud.add_fact(status_road, clean_road)
-    print(f"{sue_bud.get_item_obj(casa_road).teamunit=}")
-    print(f"{sue_bud.get_item_obj(casa_road).get_dict()=}")
+    sue_bud.edit_item_attr(way=casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_item_attr(way=casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(way=casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.add_fact(status_way, clean_way)
+    print(f"{sue_bud.get_item_obj(casa_way).teamunit=}")
+    print(f"{sue_bud.get_item_obj(casa_way).get_dict()=}")
     save_job_file(m23_fisc_mstr_dir, sue_bud)
 
     with sqlite3_connect(":memory:") as conn:
@@ -1056,15 +1056,15 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
     sue_str = "Sue"
     a23_sue_bud = budunit_shop(sue_str, a23_str)
     a23_sue_bud.add_acctunit(sue_str)
-    a23_sue_bud.add_item(a23_sue_bud.make_l1_road("casa"))
+    a23_sue_bud.add_item(a23_sue_bud.make_l1_way("casa"))
 
     a99_str = "accord99"
     bob_str = "Bob"
     a99_sue_bud = budunit_shop(sue_str, a99_str)
     a99_sue_bud.add_acctunit(sue_str)
     a99_sue_bud.add_acctunit(bob_str)
-    a99_sue_bud.add_item(a99_sue_bud.make_l1_road("casa"))
-    a99_sue_bud.add_item(a99_sue_bud.make_l1_road("sports"))
+    a99_sue_bud.add_item(a99_sue_bud.make_l1_way("casa"))
+    a99_sue_bud.add_item(a99_sue_bud.make_l1_way("sports"))
 
     w34_str = "world34"
     w99_str = "world99"

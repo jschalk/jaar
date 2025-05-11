@@ -28,19 +28,19 @@ from src.a07_calendar_logic._utils.str_a07 import (
 def test_BudUnit_set_item_dict_SetsAll_range_inheritors():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
-    weeks_road = sue_budunit.make_road(creg_road, weeks_str())
-    week_road = sue_budunit.make_road(creg_road, week_str())
-    sun_road = sue_budunit.make_road(week_road, get_sun())
-    day_road = sue_budunit.make_road(creg_road, day_str())
-    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
-    jan_road = sue_budunit.make_road(year_road, "January")
+    time_way = sue_budunit.make_l1_way(time_str())
+    creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
+    weeks_way = sue_budunit.make_way(creg_way, weeks_str())
+    week_way = sue_budunit.make_way(creg_way, week_str())
+    sun_way = sue_budunit.make_way(week_way, get_sun())
+    day_way = sue_budunit.make_way(creg_way, day_str())
+    c400_leap_way = sue_budunit.make_way(creg_way, c400_leap_str())
+    c400_clean_way = sue_budunit.make_way(c400_leap_way, c400_clean_str())
+    c100_clean_way = sue_budunit.make_way(c400_clean_way, c100_str())
+    yr4_leap_way = sue_budunit.make_way(c100_clean_way, yr4_leap_str())
+    yr4_clean_way = sue_budunit.make_way(yr4_leap_way, yr4_clean_str())
+    year_way = sue_budunit.make_way(yr4_clean_way, year_str())
+    jan_way = sue_budunit.make_way(year_way, "January")
 
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     assert sue_budunit._range_inheritors == {}
@@ -52,34 +52,34 @@ def test_BudUnit_set_item_dict_SetsAll_range_inheritors():
     # THEN
     print(f"{sue_budunit._range_inheritors=}")
     assert sue_budunit._range_inheritors != {}
-    assert day_road in sue_budunit._range_inheritors
-    assert weeks_road in sue_budunit._range_inheritors
-    assert week_road in sue_budunit._range_inheritors
-    assert sun_road in sue_budunit._range_inheritors
-    assert c400_leap_road in sue_budunit._range_inheritors
-    assert c400_clean_road in sue_budunit._range_inheritors
-    assert c100_clean_road in sue_budunit._range_inheritors
-    assert yr4_leap_road in sue_budunit._range_inheritors
-    assert yr4_clean_road in sue_budunit._range_inheritors
-    assert year_road in sue_budunit._range_inheritors
-    assert jan_road in sue_budunit._range_inheritors
+    assert day_way in sue_budunit._range_inheritors
+    assert weeks_way in sue_budunit._range_inheritors
+    assert week_way in sue_budunit._range_inheritors
+    assert sun_way in sue_budunit._range_inheritors
+    assert c400_leap_way in sue_budunit._range_inheritors
+    assert c400_clean_way in sue_budunit._range_inheritors
+    assert c100_clean_way in sue_budunit._range_inheritors
+    assert yr4_leap_way in sue_budunit._range_inheritors
+    assert yr4_clean_way in sue_budunit._range_inheritors
+    assert year_way in sue_budunit._range_inheritors
+    assert jan_way in sue_budunit._range_inheritors
 
 
 def test_BudUnit_set_itemtree_range_attrs_Sets_day_item_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
-    day_road = sue_budunit.make_road(creg_road, day_str())
+    time_way = sue_budunit.make_l1_way(time_str())
+    creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
+    day_way = sue_budunit.make_way(creg_way, day_str())
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     sue_budunit._set_item_dict()
-    assert sue_budunit.item_exists(time_road)
-    assert sue_budunit.item_exists(creg_road)
-    creg_item = sue_budunit.get_item_obj(creg_road)
+    assert sue_budunit.item_exists(time_way)
+    assert sue_budunit.item_exists(creg_way)
+    creg_item = sue_budunit.get_item_obj(creg_way)
     assert creg_item.begin == 0
     assert creg_item.close == 1472657760
-    assert sue_budunit.item_exists(day_road)
-    day_item = sue_budunit.get_item_obj(day_road)
+    assert sue_budunit.item_exists(day_way)
+    day_item = sue_budunit.get_item_obj(day_way)
     assert day_item.denom == 1440
     assert not day_item._gogo_calc
     assert not day_item._stop_calc
@@ -95,13 +95,13 @@ def test_BudUnit_set_itemtree_range_attrs_Sets_day_item_gogo_calc_stop_calc():
 def test_BudUnit_set_itemtree_range_attrs_Sets_days_item_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
-    days_road = sue_budunit.make_road(creg_road, days_str())
+    time_way = sue_budunit.make_l1_way(time_str())
+    creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
+    days_way = sue_budunit.make_way(creg_way, days_str())
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     sue_budunit._set_item_dict()
-    assert sue_budunit.item_exists(days_road)
-    days_item = sue_budunit.get_item_obj(days_road)
+    assert sue_budunit.item_exists(days_way)
+    days_item = sue_budunit.get_item_obj(days_way)
     assert days_item.denom == 1440
     assert not days_item._gogo_calc
     assert not days_item._stop_calc
@@ -118,33 +118,33 @@ def test_BudUnit_set_itemtree_range_attrs_Sets_days_item_gogo_calc_stop_calc():
 def test_BudUnit_set_itemtree_range_attrs_Sets_weeks_item_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
-    weeks_road = sue_budunit.make_road(creg_road, weeks_str())
-    week_road = sue_budunit.make_road(creg_road, week_str())
-    sun_road = sue_budunit.make_road(week_road, get_sun())
-    mon_road = sue_budunit.make_road(week_road, get_mon())
-    tue_road = sue_budunit.make_road(week_road, get_tue())
-    wed_road = sue_budunit.make_road(week_road, get_wed())
-    thu_road = sue_budunit.make_road(week_road, get_thu())
-    fri_road = sue_budunit.make_road(week_road, get_fri())
-    sat_road = sue_budunit.make_road(week_road, get_sat())
+    time_way = sue_budunit.make_l1_way(time_str())
+    creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
+    weeks_way = sue_budunit.make_way(creg_way, weeks_str())
+    week_way = sue_budunit.make_way(creg_way, week_str())
+    sun_way = sue_budunit.make_way(week_way, get_sun())
+    mon_way = sue_budunit.make_way(week_way, get_mon())
+    tue_way = sue_budunit.make_way(week_way, get_tue())
+    wed_way = sue_budunit.make_way(week_way, get_wed())
+    thu_way = sue_budunit.make_way(week_way, get_thu())
+    fri_way = sue_budunit.make_way(week_way, get_fri())
+    sat_way = sue_budunit.make_way(week_way, get_sat())
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     sue_budunit._set_item_dict()
-    assert sue_budunit.item_exists(weeks_road)
-    assert sue_budunit.item_exists(sun_road)
-    assert sue_budunit.item_exists(mon_road)
-    assert sue_budunit.item_exists(tue_road)
-    assert sue_budunit.item_exists(wed_road)
-    assert sue_budunit.item_exists(thu_road)
-    assert sue_budunit.item_exists(fri_road)
-    assert sue_budunit.item_exists(sat_road)
-    weeks_item = sue_budunit.get_item_obj(weeks_road)
+    assert sue_budunit.item_exists(weeks_way)
+    assert sue_budunit.item_exists(sun_way)
+    assert sue_budunit.item_exists(mon_way)
+    assert sue_budunit.item_exists(tue_way)
+    assert sue_budunit.item_exists(wed_way)
+    assert sue_budunit.item_exists(thu_way)
+    assert sue_budunit.item_exists(fri_way)
+    assert sue_budunit.item_exists(sat_way)
+    weeks_item = sue_budunit.get_item_obj(weeks_way)
     assert weeks_item.denom == 10080
     assert not weeks_item._gogo_calc
     assert not weeks_item._stop_calc
-    assert sue_budunit.item_exists(week_road)
-    week_item = sue_budunit.get_item_obj(week_road)
+    assert sue_budunit.item_exists(week_way)
+    week_item = sue_budunit.get_item_obj(week_way)
     assert week_item.denom == 10080
     assert not week_item._gogo_calc
     assert not week_item._stop_calc
@@ -158,38 +158,38 @@ def test_BudUnit_set_itemtree_range_attrs_Sets_weeks_item_gogo_calc_stop_calc():
     assert weeks_item._stop_calc == 146097
     assert week_item._gogo_calc == 0
     assert week_item._stop_calc == 10080
-    assert sue_budunit.get_item_obj(sun_road)._gogo_calc == 5760
-    assert sue_budunit.get_item_obj(mon_road)._gogo_calc == 7200
-    assert sue_budunit.get_item_obj(tue_road)._gogo_calc == 8640
-    assert sue_budunit.get_item_obj(wed_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(thu_road)._gogo_calc == 1440
-    assert sue_budunit.get_item_obj(fri_road)._gogo_calc == 2880
-    assert sue_budunit.get_item_obj(sat_road)._gogo_calc == 4320
-    assert sue_budunit.get_item_obj(sun_road)._stop_calc == 7200
-    assert sue_budunit.get_item_obj(mon_road)._stop_calc == 8640
-    assert sue_budunit.get_item_obj(tue_road)._stop_calc == 10080
-    assert sue_budunit.get_item_obj(wed_road)._stop_calc == 1440
-    assert sue_budunit.get_item_obj(thu_road)._stop_calc == 2880
-    assert sue_budunit.get_item_obj(fri_road)._stop_calc == 4320
-    assert sue_budunit.get_item_obj(sat_road)._stop_calc == 5760
+    assert sue_budunit.get_item_obj(sun_way)._gogo_calc == 5760
+    assert sue_budunit.get_item_obj(mon_way)._gogo_calc == 7200
+    assert sue_budunit.get_item_obj(tue_way)._gogo_calc == 8640
+    assert sue_budunit.get_item_obj(wed_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(thu_way)._gogo_calc == 1440
+    assert sue_budunit.get_item_obj(fri_way)._gogo_calc == 2880
+    assert sue_budunit.get_item_obj(sat_way)._gogo_calc == 4320
+    assert sue_budunit.get_item_obj(sun_way)._stop_calc == 7200
+    assert sue_budunit.get_item_obj(mon_way)._stop_calc == 8640
+    assert sue_budunit.get_item_obj(tue_way)._stop_calc == 10080
+    assert sue_budunit.get_item_obj(wed_way)._stop_calc == 1440
+    assert sue_budunit.get_item_obj(thu_way)._stop_calc == 2880
+    assert sue_budunit.get_item_obj(fri_way)._stop_calc == 4320
+    assert sue_budunit.get_item_obj(sat_way)._stop_calc == 5760
 
 
 def test_BudUnit_set_itemtree_range_attrs_Sets_c400_item_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
-    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
-    # c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    # c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    # yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-    # yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    # year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    time_way = sue_budunit.make_l1_way(time_str())
+    creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
+    c400_leap_way = sue_budunit.make_way(creg_way, c400_leap_str())
+    # c400_clean_way = sue_budunit.make_way(c400_leap_way, c400_clean_str())
+    # c100_clean_way = sue_budunit.make_way(c400_clean_way, c100_str())
+    # yr4_leap_way = sue_budunit.make_way(c100_clean_way, yr4_leap_str())
+    # yr4_clean_way = sue_budunit.make_way(yr4_leap_way, yr4_clean_str())
+    # year_way = sue_budunit.make_way(yr4_clean_way, year_str())
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     sue_budunit._set_item_dict()
-    print(f"    {c400_leap_road=}")
-    assert sue_budunit.item_exists(c400_leap_road)
-    c400_leap_item = sue_budunit.get_item_obj(c400_leap_road)
+    print(f"    {c400_leap_way=}")
+    assert sue_budunit.item_exists(c400_leap_way)
+    c400_leap_item = sue_budunit.get_item_obj(c400_leap_way)
     # assert year_item.morph
     assert not c400_leap_item._gogo_calc
     assert not c400_leap_item._stop_calc
@@ -202,27 +202,27 @@ def test_BudUnit_set_itemtree_range_attrs_Sets_c400_item_gogo_calc_stop_calc():
     # assert year_item._gogo_calc == 0
     # assert year_item._stop_calc == 525600
     difference_between_mar1_jan1 = 86400
-    assert sue_budunit.get_item_obj(c400_leap_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(c400_leap_road)._stop_calc == 210379680
-    assert 1472657760 % sue_budunit.get_item_obj(c400_leap_road)._stop_calc == 0
+    assert sue_budunit.get_item_obj(c400_leap_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(c400_leap_way)._stop_calc == 210379680
+    assert 1472657760 % sue_budunit.get_item_obj(c400_leap_way)._stop_calc == 0
 
 
 def test_BudUnit_set_itemtree_range_attrs_Sets_years_item_gogo_calc_stop_calc():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue")
-    time_road = sue_budunit.make_l1_road(time_str())
-    creg_road = sue_budunit.make_road(time_road, get_cregtime_str())
-    c400_leap_road = sue_budunit.make_road(creg_road, c400_leap_str())
-    c400_clean_road = sue_budunit.make_road(c400_leap_road, c400_clean_str())
-    c100_clean_road = sue_budunit.make_road(c400_clean_road, c100_str())
-    yr4_leap_road = sue_budunit.make_road(c100_clean_road, yr4_leap_str())
-    yr4_clean_road = sue_budunit.make_road(yr4_leap_road, yr4_clean_str())
-    year_road = sue_budunit.make_road(yr4_clean_road, year_str())
+    time_way = sue_budunit.make_l1_way(time_str())
+    creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
+    c400_leap_way = sue_budunit.make_way(creg_way, c400_leap_str())
+    c400_clean_way = sue_budunit.make_way(c400_leap_way, c400_clean_str())
+    c100_clean_way = sue_budunit.make_way(c400_clean_way, c100_str())
+    yr4_leap_way = sue_budunit.make_way(c100_clean_way, yr4_leap_str())
+    yr4_clean_way = sue_budunit.make_way(yr4_leap_way, yr4_clean_str())
+    year_way = sue_budunit.make_way(yr4_clean_way, year_str())
     sue_budunit = add_time_creg_itemunit(sue_budunit)
     sue_budunit._set_item_dict()
-    print(f"    {year_road=}")
-    assert sue_budunit.item_exists(year_road)
-    year_item = sue_budunit.get_item_obj(year_road)
+    print(f"    {year_way=}")
+    assert sue_budunit.item_exists(year_way)
+    year_item = sue_budunit.get_item_obj(year_way)
     # assert year_item.morph
     assert not year_item._gogo_calc
     assert not year_item._stop_calc
@@ -231,59 +231,59 @@ def test_BudUnit_set_itemtree_range_attrs_Sets_years_item_gogo_calc_stop_calc():
     sue_budunit._set_itemtree_range_attrs()
 
     # THEN
-    assert sue_budunit.get_item_obj(creg_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(c400_leap_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(c400_clean_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(c100_clean_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(yr4_leap_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(yr4_clean_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(year_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(creg_road)._stop_calc == 1472657760
-    assert sue_budunit.get_item_obj(c400_leap_road)._stop_calc == 210379680
-    assert sue_budunit.get_item_obj(c400_clean_road)._stop_calc == 210378240
-    assert sue_budunit.get_item_obj(c100_clean_road)._stop_calc == 52594560
-    assert sue_budunit.get_item_obj(yr4_leap_road)._stop_calc == 2103840
-    assert sue_budunit.get_item_obj(yr4_clean_road)._stop_calc == 2102400
-    assert sue_budunit.get_item_obj(year_road)._stop_calc == 525600
+    assert sue_budunit.get_item_obj(creg_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(c400_leap_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(c400_clean_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(c100_clean_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(yr4_leap_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(yr4_clean_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(year_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(creg_way)._stop_calc == 1472657760
+    assert sue_budunit.get_item_obj(c400_leap_way)._stop_calc == 210379680
+    assert sue_budunit.get_item_obj(c400_clean_way)._stop_calc == 210378240
+    assert sue_budunit.get_item_obj(c100_clean_way)._stop_calc == 52594560
+    assert sue_budunit.get_item_obj(yr4_leap_way)._stop_calc == 2103840
+    assert sue_budunit.get_item_obj(yr4_clean_way)._stop_calc == 2102400
+    assert sue_budunit.get_item_obj(year_way)._stop_calc == 525600
 
     assert year_item.denom == 525600
     assert year_item._gogo_calc == 0
     assert year_item._stop_calc == 525600
 
-    jan_road = sue_budunit.make_road(year_road, "January")
-    feb_road = sue_budunit.make_road(year_road, "February")
-    mar_road = sue_budunit.make_road(year_road, "March")
-    apr_road = sue_budunit.make_road(year_road, "April")
-    may_road = sue_budunit.make_road(year_road, "May")
-    jun_road = sue_budunit.make_road(year_road, "June")
-    jul_road = sue_budunit.make_road(year_road, "July")
-    aug_road = sue_budunit.make_road(year_road, "August")
-    sep_road = sue_budunit.make_road(year_road, "September")
-    oct_road = sue_budunit.make_road(year_road, "October")
-    nov_road = sue_budunit.make_road(year_road, "November")
-    dec_road = sue_budunit.make_road(year_road, "December")
-    assert sue_budunit.get_item_obj(jan_road)._gogo_calc == 440640
-    assert sue_budunit.get_item_obj(feb_road)._gogo_calc == 485280
-    assert sue_budunit.get_item_obj(mar_road)._gogo_calc == 0
-    assert sue_budunit.get_item_obj(apr_road)._gogo_calc == 44640
-    assert sue_budunit.get_item_obj(may_road)._gogo_calc == 87840
-    assert sue_budunit.get_item_obj(jun_road)._gogo_calc == 132480
-    assert sue_budunit.get_item_obj(jul_road)._gogo_calc == 175680
-    assert sue_budunit.get_item_obj(aug_road)._gogo_calc == 220320
-    assert sue_budunit.get_item_obj(sep_road)._gogo_calc == 264960
-    assert sue_budunit.get_item_obj(oct_road)._gogo_calc == 308160
-    assert sue_budunit.get_item_obj(nov_road)._gogo_calc == 352800
-    assert sue_budunit.get_item_obj(dec_road)._gogo_calc == 396000
+    jan_way = sue_budunit.make_way(year_way, "January")
+    feb_way = sue_budunit.make_way(year_way, "February")
+    mar_way = sue_budunit.make_way(year_way, "March")
+    apr_way = sue_budunit.make_way(year_way, "April")
+    may_way = sue_budunit.make_way(year_way, "May")
+    jun_way = sue_budunit.make_way(year_way, "June")
+    jul_way = sue_budunit.make_way(year_way, "July")
+    aug_way = sue_budunit.make_way(year_way, "August")
+    sep_way = sue_budunit.make_way(year_way, "September")
+    oct_way = sue_budunit.make_way(year_way, "October")
+    nov_way = sue_budunit.make_way(year_way, "November")
+    dec_way = sue_budunit.make_way(year_way, "December")
+    assert sue_budunit.get_item_obj(jan_way)._gogo_calc == 440640
+    assert sue_budunit.get_item_obj(feb_way)._gogo_calc == 485280
+    assert sue_budunit.get_item_obj(mar_way)._gogo_calc == 0
+    assert sue_budunit.get_item_obj(apr_way)._gogo_calc == 44640
+    assert sue_budunit.get_item_obj(may_way)._gogo_calc == 87840
+    assert sue_budunit.get_item_obj(jun_way)._gogo_calc == 132480
+    assert sue_budunit.get_item_obj(jul_way)._gogo_calc == 175680
+    assert sue_budunit.get_item_obj(aug_way)._gogo_calc == 220320
+    assert sue_budunit.get_item_obj(sep_way)._gogo_calc == 264960
+    assert sue_budunit.get_item_obj(oct_way)._gogo_calc == 308160
+    assert sue_budunit.get_item_obj(nov_way)._gogo_calc == 352800
+    assert sue_budunit.get_item_obj(dec_way)._gogo_calc == 396000
 
-    assert sue_budunit.get_item_obj(jan_road)._stop_calc == 485280
-    assert sue_budunit.get_item_obj(feb_road)._stop_calc == 525600
-    assert sue_budunit.get_item_obj(mar_road)._stop_calc == 44640
-    assert sue_budunit.get_item_obj(apr_road)._stop_calc == 87840
-    assert sue_budunit.get_item_obj(may_road)._stop_calc == 132480
-    assert sue_budunit.get_item_obj(jun_road)._stop_calc == 175680
-    assert sue_budunit.get_item_obj(jul_road)._stop_calc == 220320
-    assert sue_budunit.get_item_obj(aug_road)._stop_calc == 264960
-    assert sue_budunit.get_item_obj(sep_road)._stop_calc == 308160
-    assert sue_budunit.get_item_obj(oct_road)._stop_calc == 352800
-    assert sue_budunit.get_item_obj(nov_road)._stop_calc == 396000
-    assert sue_budunit.get_item_obj(dec_road)._stop_calc == 440640
+    assert sue_budunit.get_item_obj(jan_way)._stop_calc == 485280
+    assert sue_budunit.get_item_obj(feb_way)._stop_calc == 525600
+    assert sue_budunit.get_item_obj(mar_way)._stop_calc == 44640
+    assert sue_budunit.get_item_obj(apr_way)._stop_calc == 87840
+    assert sue_budunit.get_item_obj(may_way)._stop_calc == 132480
+    assert sue_budunit.get_item_obj(jun_way)._stop_calc == 175680
+    assert sue_budunit.get_item_obj(jul_way)._stop_calc == 220320
+    assert sue_budunit.get_item_obj(aug_way)._stop_calc == 264960
+    assert sue_budunit.get_item_obj(sep_way)._stop_calc == 308160
+    assert sue_budunit.get_item_obj(oct_way)._stop_calc == 352800
+    assert sue_budunit.get_item_obj(nov_way)._stop_calc == 396000
+    assert sue_budunit.get_item_obj(dec_way)._stop_calc == 440640

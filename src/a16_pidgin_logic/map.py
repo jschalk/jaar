@@ -10,15 +10,15 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     default_bridge_if_None,
-    create_road,
-    get_all_road_tags,
-    create_road_from_tags,
+    create_way,
+    get_all_way_tags,
+    create_way_from_tags,
     get_terminus_tag,
-    get_parent_road,
+    get_parent_way,
     is_tagunit,
-    RoadUnit,
+    WayUnit,
     TagUnit,
     FaceName,
     EventInt,
@@ -306,7 +306,7 @@ def get_tagmap_from_json(x_json: str) -> TagMap:
 
 
 @dataclass
-class RoadMap:
+class WayMap:
     face_name: FaceName = None
     event_int: EventInt = None
     otx2inx: dict = None
@@ -324,45 +324,45 @@ class RoadMap:
             raise set_all_otx2inxException(exception_str)
         self.otx2inx = x_otx2inx
 
-    def set_otx2inx(self, otx_road: str, inx_road: str):
-        self.otx2inx[otx_road] = inx_road
+    def set_otx2inx(self, otx_way: str, inx_way: str):
+        self.otx2inx[otx_way] = inx_way
 
-    def _get_inx_value(self, otx_road: str) -> str:
-        return self.otx2inx.get(otx_road)
+    def _get_inx_value(self, otx_way: str) -> str:
+        return self.otx2inx.get(otx_way)
 
-    def reveal_inx(self, otx_road: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_road) is False:
-            inx_road = copy_copy(otx_road)
-            inx_road = self._reveal_roadunit_inx(otx_road)
-            self.set_otx2inx(otx_road, inx_road)
+    def reveal_inx(self, otx_way: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_way) is False:
+            inx_way = copy_copy(otx_way)
+            inx_way = self._reveal_wayunit_inx(otx_way)
+            self.set_otx2inx(otx_way, inx_way)
 
-        return self._get_inx_value(otx_road)
+        return self._get_inx_value(otx_way)
 
-    def _reveal_roadunit_inx(self, otx_road) -> RoadUnit:
-        otx_parent_road = get_parent_road(otx_road, self.otx_bridge)
-        if self.otx_exists(otx_parent_road) is False and otx_parent_road != "":
+    def _reveal_wayunit_inx(self, otx_way) -> WayUnit:
+        otx_parent_way = get_parent_way(otx_way, self.otx_bridge)
+        if self.otx_exists(otx_parent_way) is False and otx_parent_way != "":
             return None
-        otx_terminus = get_terminus_tag(otx_road, self.otx_bridge)
+        otx_terminus = get_terminus_tag(otx_way, self.otx_bridge)
         otx_terminus = self._get_tagmap_tagunit(otx_terminus)
-        if otx_parent_road == "":
-            inx_parent_road = ""
+        if otx_parent_way == "":
+            inx_parent_way = ""
         else:
-            inx_parent_road = self._get_inx_value(otx_parent_road)
-        return create_road(inx_parent_road, otx_terminus, self.inx_bridge)
+            inx_parent_way = self._get_inx_value(otx_parent_way)
+        return create_way(inx_parent_way, otx_terminus, self.inx_bridge)
 
     def _get_tagmap_tagunit(self, x_tagUnit: TagUnit) -> TagUnit:
         if self.otx_tag_exists(x_tagUnit):
             return self.tagmap.reveal_inx(x_tagUnit)
         return x_tagUnit
 
-    def otx2inx_exists(self, otx_road: str, inx_road: str) -> bool:
-        return self._get_inx_value(otx_road) == inx_road
+    def otx2inx_exists(self, otx_way: str, inx_way: str) -> bool:
+        return self._get_inx_value(otx_way) == inx_way
 
-    def otx_exists(self, otx_road: str) -> bool:
-        return self._get_inx_value(otx_road) != None
+    def otx_exists(self, otx_way: str) -> bool:
+        return self._get_inx_value(otx_way) != None
 
-    def del_otx2inx(self, otx_road: str):
-        self.otx2inx.pop(otx_road)
+    def del_otx2inx(self, otx_way: str):
+        self.otx2inx.pop(otx_way)
 
     def set_tag(self, otx_tag: TagUnit, inx_tag: TagUnit):
         if self.otx_bridge in otx_tag:
@@ -376,13 +376,13 @@ class RoadMap:
         self._set_new_tag_to_otx_inx(otx_tag, inx_tag)
 
     def _set_new_tag_to_otx_inx(self, otx_tag, inx_tag):
-        for otx_road, inx_road in self.otx2inx.items():
-            otx_tagunits = get_all_road_tags(otx_road, self.otx_bridge)
-            inx_tagunits = get_all_road_tags(inx_road, self.inx_bridge)
+        for otx_way, inx_way in self.otx2inx.items():
+            otx_tagunits = get_all_way_tags(otx_way, self.otx_bridge)
+            inx_tagunits = get_all_way_tags(inx_way, self.inx_bridge)
             for x_count, otx_tagunit in enumerate(otx_tagunits):
                 if otx_tagunit == otx_tag:
                     inx_tagunits[x_count] = inx_tag
-            self.set_otx2inx(otx_road, create_road_from_tags(inx_tagunits))
+            self.set_otx2inx(otx_way, create_way_from_tags(inx_tagunits))
 
     def _get_inx_tag(self, otx_tag: TagUnit) -> TagUnit:
         return self.tagmap.otx2inx.get(otx_tag)
@@ -399,16 +399,16 @@ class RoadMap:
     def _unknown_word_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_word, self.otx2inx)
 
-    def all_otx_parent_roads_exist(self) -> bool:
-        for x_road in self.otx2inx.keys():
-            print(f"{x_road=}")
-            parent_road = get_parent_road(x_road, self.otx_bridge)
-            if parent_road and self.otx_exists(parent_road) is False:
+    def all_otx_parent_ways_exist(self) -> bool:
+        for x_way in self.otx2inx.keys():
+            print(f"{x_way=}")
+            parent_way = get_parent_way(x_way, self.otx_bridge)
+            if parent_way and self.otx_exists(parent_way) is False:
                 return False
         return True
 
     def is_valid(self) -> bool:
-        return self.all_otx_parent_roads_exist()
+        return self.all_otx_parent_ways_exist()
 
     def get_dict(self) -> dict:
         return {
@@ -424,7 +424,7 @@ class RoadMap:
         return get_json_from_dict(self.get_dict())
 
 
-def roadmap_shop(
+def waymap_shop(
     face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
@@ -432,7 +432,7 @@ def roadmap_shop(
     x_tagmap: TagMap = None,
     otx2inx: dict = None,
     unknown_word: str = None,
-) -> RoadMap:
+) -> WayMap:
     unknown_word = default_unknown_word_if_None(unknown_word)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
@@ -446,7 +446,7 @@ def roadmap_shop(
             event_int=event_int,
         )
 
-    return RoadMap(
+    return WayMap(
         otx2inx=get_empty_dict_if_None(otx2inx),
         unknown_word=unknown_word,
         otx_bridge=otx_bridge,
@@ -457,8 +457,8 @@ def roadmap_shop(
     )
 
 
-def get_roadmap_from_dict(x_dict: dict) -> RoadMap:
-    return roadmap_shop(
+def get_waymap_from_dict(x_dict: dict) -> WayMap:
+    return waymap_shop(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
@@ -468,8 +468,8 @@ def get_roadmap_from_dict(x_dict: dict) -> RoadMap:
     )
 
 
-def get_roadmap_from_json(x_json: str) -> RoadMap:
-    return get_roadmap_from_dict(get_dict_from_json(x_json))
+def get_waymap_from_json(x_json: str) -> WayMap:
+    return get_waymap_from_dict(get_dict_from_json(x_json))
 
 
 class MapCoreAttrConflictException(Exception):
@@ -508,5 +508,5 @@ def inherit_tagmap(new: TagMap, old: TagMap) -> TagMap:
     return _inherit_mapunit(new, old)
 
 
-def inherit_roadmap(new: RoadMap, old: RoadMap) -> RoadMap:
+def inherit_waymap(new: WayMap, old: WayMap) -> WayMap:
     return _inherit_mapunit(new, old)

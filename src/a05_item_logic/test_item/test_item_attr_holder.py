@@ -35,7 +35,7 @@ def test_ItemAttrHolder_Exists():
 
 def test_ItemAttrHolder_CorrectlyCalculatesPremiseRanges():
     # ESTABLISH
-    item_attr = ItemAttrHolder(reason_premise="some_road")
+    item_attr = ItemAttrHolder(reason_premise="some_way")
     assert item_attr.reason_premise_open is None
     assert item_attr.reason_premise_nigh is None
     # assert item_attr.reason_premise_numor is None

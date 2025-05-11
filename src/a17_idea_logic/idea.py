@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
     add_headers_to_csv,
 )
-from src.a01_road_logic.road import FiscTag, OwnerName
+from src.a01_way_logic.way import FiscTag, OwnerName
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import timelineunit_shop
 from src.a08_bud_atom_logic.atom import atom_insert, BudAtom, atomrow_shop

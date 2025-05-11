@@ -1,6 +1,6 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_item_reason_premiseunit_str,
-    road_str,
+    way_str,
     base_str,
     need_str,
     nigh_str,
@@ -17,13 +17,13 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithOutNu
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reason_premiseunit_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
-    casa_road = sue_bud.make_l1_road("casa")
-    base_value = sue_bud.make_road(casa_road, "fridge status")
-    need_value = sue_bud.make_road(base_value, "dirty")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    base_value = sue_bud.make_way(casa_way, "fridge status")
+    need_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     # print(f"{swim_budatom=}")
@@ -34,7 +34,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithOutNu
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'."
+    x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -43,16 +43,16 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithNumbe
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reason_premiseunit_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
-    casa_road = sue_bud.make_l1_road("casa")
-    base_value = sue_bud.make_road(casa_road, "fridge status")
-    need_value = sue_bud.make_road(base_value, "dirty")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    base_value = sue_bud.make_way(casa_way, "fridge status")
+    need_value = sue_bud.make_way(base_value, "dirty")
     divisor_value = 7
     nigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     swim_budatom.set_arg("divisor", divisor_value)
@@ -66,7 +66,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithNumbe
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{road_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
+    x_str = f"PremiseUnit '{need_value}' created for reason '{base_value}' for item '{way_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -75,13 +75,13 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithOutNu
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reason_premiseunit_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
-    casa_road = sue_bud.make_l1_road("casa")
-    base_value = sue_bud.make_road(casa_road, "fridge status")
-    need_value = sue_bud.make_road(base_value, "dirty")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    base_value = sue_bud.make_way(casa_way, "fridge status")
+    need_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     # print(f"{swim_budatom=}")
@@ -92,7 +92,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithOutNu
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'."
+    x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -101,16 +101,16 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithNumbe
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reason_premiseunit_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
-    casa_road = sue_bud.make_l1_road("casa")
-    base_value = sue_bud.make_road(casa_road, "fridge status")
-    need_value = sue_bud.make_road(base_value, "dirty")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    base_value = sue_bud.make_way(casa_way, "fridge status")
+    need_value = sue_bud.make_way(base_value, "dirty")
     divisor_value = 7
     nigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     swim_budatom.set_arg("divisor", divisor_value)
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithNumbe
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{road_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
+    x_str = f"PremiseUnit '{need_value}' updated for reason '{base_value}' for item '{way_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -133,13 +133,13 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_item_reason_premiseunit_str()
-    casa_road = sue_bud.make_l1_road("casa")
-    road_value = sue_bud.make_road(casa_road, "clean fridge")
-    casa_road = sue_bud.make_l1_road("casa")
-    base_value = sue_bud.make_road(casa_road, "fridge status")
-    need_value = sue_bud.make_road(base_value, "dirty")
+    casa_way = sue_bud.make_l1_way("casa")
+    way_value = sue_bud.make_way(casa_way, "clean fridge")
+    casa_way = sue_bud.make_l1_way("casa")
+    base_value = sue_bud.make_way(casa_way, "fridge status")
+    need_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_delete())
-    swim_budatom.set_arg(road_str(), road_value)
+    swim_budatom.set_arg(way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     # print(f"{swim_budatom=}")
@@ -150,6 +150,6 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_DELETE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{road_value}'."
+    x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

@@ -15,7 +15,7 @@ from src.a02_finance_logic.finance_config import (
     TimeLinePoint,
     default_fund_pool,
 )
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     AcctName,
     OwnerName,
     FiscTag,

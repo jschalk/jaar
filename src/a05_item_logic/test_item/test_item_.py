@@ -1,7 +1,7 @@
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     get_default_fisc_tag as root_tag,
-    create_road,
+    create_way,
     default_bridge_if_None,
 )
 from src.a05_item_logic.healer import healerlink_shop
@@ -183,46 +183,46 @@ def test_itemunit_shop_ReturnsObjWithParameters():
 def test_ItemUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_road = create_road(root_tag(), round_str)
+    round_way = create_way(root_tag(), round_str)
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(item_tag=ball_str, parent_road=round_road)
+    ball_item = itemunit_shop(item_tag=ball_str, parent_way=round_way)
 
     # THEN
     assert ball_item.get_obj_key() == ball_str
 
 
-def test_ItemUnit_get_road_ReturnsObj():
+def test_ItemUnit_get_way_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_road = create_road(root_tag(), round_str, bridge=slash_str)
+    round_way = create_way(root_tag(), round_str, bridge=slash_str)
     ball_str = "ball"
 
     # WHEN
-    ball_item = itemunit_shop(ball_str, parent_road=round_road, bridge=slash_str)
+    ball_item = itemunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
 
     # THEN
-    ball_road = create_road(round_road, ball_str, bridge=slash_str)
-    assert ball_item.get_road() == ball_road
+    ball_way = create_way(round_way, ball_str, bridge=slash_str)
+    assert ball_item.get_way() == ball_way
 
 
-def test_ItemUnit_set_parent_road_SetsAttr():
+def test_ItemUnit_set_parent_way_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_road = create_road(root_tag(), round_str, bridge=slash_str)
+    round_way = create_way(root_tag(), round_str, bridge=slash_str)
     ball_str = "ball"
-    ball_item = itemunit_shop(ball_str, parent_road=round_road, bridge=slash_str)
-    assert ball_item.parent_road == round_road
+    ball_item = itemunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
+    assert ball_item.parent_way == round_way
 
     # WHEN
-    sports_road = create_road(root_tag(), "sports", bridge=slash_str)
-    ball_item.set_parent_road(parent_road=sports_road)
+    sports_way = create_way(root_tag(), "sports", bridge=slash_str)
+    ball_item.set_parent_way(parent_way=sports_way)
 
     # THEN
-    assert ball_item.parent_road == sports_road
+    assert ball_item.parent_way == sports_way
 
 
 def test_ItemUnit_clear_descendant_pledge_count_ClearsCorrectly():

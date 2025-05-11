@@ -88,9 +88,9 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
     init_yao_job = budunit_shop(yao_str, a23_str)
     init_yao_job.add_acctunit(bob_str)
     init_bob_job = budunit_shop(bob_str, a23_str)
-    casa_road = init_bob_job.make_l1_road("casa")
-    clean_road = init_bob_job.make_road(casa_road, "clean")
-    init_bob_job.add_item(clean_road, pledge=True)
+    casa_way = init_bob_job.make_l1_way("casa")
+    clean_way = init_bob_job.make_way(casa_way, "clean")
+    init_bob_job.add_item(clean_way, pledge=True)
     save_job_file(fisc_mstr_dir, init_sue_job)
     save_job_file(fisc_mstr_dir, init_yao_job)
     save_job_file(fisc_mstr_dir, init_bob_job)
@@ -120,9 +120,9 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
     init_sue_job.add_acctunit(yao_str)
     init_yao_job = budunit_shop(yao_str, a23_str)
     init_yao_job.add_acctunit(bob_str)
-    casa_road = init_bob_job.make_l1_road("casa")
-    clean_road = init_bob_job.make_road(casa_road, "clean")
-    init_bob_job.add_item(clean_road, pledge=True)
+    casa_way = init_bob_job.make_l1_way("casa")
+    clean_way = init_bob_job.make_way(casa_way, "clean")
+    init_bob_job.add_item(clean_way, pledge=True)
     save_job_file(fisc_mstr_dir, init_sue_job)
     save_job_file(fisc_mstr_dir, init_yao_job)
     save_job_file(fisc_mstr_dir, init_bob_job)
@@ -179,12 +179,12 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     bob_gut_bud.add_acctunit(bob_str)
 #     bob_gut_bud.set_acct_respect(100)
 #     texas_str = "Texas"
-#     texas_road = bob_gut_bud.make_l1_road(texas_str)
+#     texas_way = bob_gut_bud.make_l1_way(texas_str)
 #     elpaso_str = "el paso"
-#     elpaso_road = bob_gut_bud.make_road(texas_road, elpaso_str)
+#     elpaso_way = bob_gut_bud.make_way(texas_way, elpaso_str)
 #     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
 #     bob_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-#     bob_gut_bud.set_item(elpaso_item, texas_road)
+#     bob_gut_bud.set_item(elpaso_item, texas_way)
 #     save_gut_file(a23_fisc.fisc_mstr_dir, bob_gut_bud)
 
 #     after_bob_job = a23_fisc.rotate_job(bob_str)
@@ -256,13 +256,13 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
 #     sue_str = "Sue"
 #     sue_bud = budunit_shop(sue_str, a23_str)
-#     casa_road = sue_bud.make_l1_road("casa")
-#     dirty_road = sue_bud.make_road(casa_road, "dirty")
-#     mop_road = sue_bud.make_road(casa_road, "mop")
-#     sue_bud.add_item(mop_road, pledge=True)
-#     sue_bud.add_item(dirty_road)
-#     sue_bud.edit_reason(mop_road, casa_road, dirty_road)
-#     sue_bud.add_fact(casa_road, dirty_road)
+#     casa_way = sue_bud.make_l1_way("casa")
+#     dirty_way = sue_bud.make_way(casa_way, "dirty")
+#     mop_way = sue_bud.make_way(casa_way, "mop")
+#     sue_bud.add_item(mop_way, pledge=True)
+#     sue_bud.add_item(dirty_way)
+#     sue_bud.edit_reason(mop_way, casa_way, dirty_way)
+#     sue_bud.add_fact(casa_way, dirty_way)
 #     save_gut_file(fisc_mstr_dir, sue_bud)
 #     sue_gut = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
 #     assert len(sue_gut.get_acctunits_dict()) == 0
@@ -272,10 +272,10 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 
 #     # THEN
 #     expected_job = budunit_shop(sue_str, a23_str)
-#     expected_job.add_item(mop_road, pledge=True)
-#     expected_job.add_item(dirty_road)
-#     expected_job.edit_reason(mop_road, casa_road, dirty_road)
-#     expected_job.add_fact(casa_road, dirty_road)
+#     expected_job.add_item(mop_way, pledge=True)
+#     expected_job.add_item(dirty_way)
+#     expected_job.edit_reason(mop_way, casa_way, dirty_way)
+#     expected_job.add_fact(casa_way, dirty_way)
 #     assert sue_job.fisc_tag == expected_job.fisc_tag
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_agenda_dict() == expected_job.get_agenda_dict()
@@ -292,14 +292,14 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir)
 #     sue_str = "Sue"
 #     sue_bud = budunit_shop(sue_str, a23_str)
-#     casa_road = sue_bud.make_l1_road("casa")
-#     clean_road = sue_bud.make_road(casa_road, "clean")
-#     dirty_road = sue_bud.make_road(casa_road, "dirty")
-#     mop_road = sue_bud.make_road(casa_road, "mop")
-#     sue_bud.add_item(mop_road, pledge=True)
-#     sue_bud.add_item(dirty_road)
-#     sue_bud.edit_reason(mop_road, casa_road, dirty_road)
-#     sue_bud.add_fact(casa_road, clean_road, create_missing_items=True)
+#     casa_way = sue_bud.make_l1_way("casa")
+#     clean_way = sue_bud.make_way(casa_way, "clean")
+#     dirty_way = sue_bud.make_way(casa_way, "dirty")
+#     mop_way = sue_bud.make_way(casa_way, "mop")
+#     sue_bud.add_item(mop_way, pledge=True)
+#     sue_bud.add_item(dirty_way)
+#     sue_bud.edit_reason(mop_way, casa_way, dirty_way)
+#     sue_bud.add_fact(casa_way, clean_way, create_missing_items=True)
 #     save_gut_file(fisc_mstr_dir, sue_bud)
 #     sue_gut = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
 #     assert len(sue_gut.get_acctunits_dict()) == 0
@@ -309,7 +309,7 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 
 #     # THEN
 #     expected_job = budunit_shop(sue_str, a23_str)
-#     expected_job.add_fact(casa_road, clean_road, create_missing_items=True)
+#     expected_job.add_fact(casa_way, clean_way, create_missing_items=True)
 #     assert sue_job.fisc_tag == expected_job.fisc_tag
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_factunits_dict() == expected_job.get_factunits_dict()
@@ -358,9 +358,9 @@ def test_FiscUnit_generate_all_jobs_Scenario1_jobs_rotated(
     bob_gut = budunit_shop(bob_str, a23_str)
     bob_gut.add_acctunit(bob_str)
     bob_gut.add_acctunit(sue_str)
-    casa_road = bob_gut.make_l1_road("casa")
-    clean_road = bob_gut.make_road(casa_road, "clean")
-    bob_gut.add_item(clean_road, pledge=True)
+    casa_way = bob_gut.make_l1_way("casa")
+    clean_way = bob_gut.make_way(casa_way, "clean")
+    bob_gut.add_item(clean_way, pledge=True)
 
     sue_gut = budunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(sue_str)
@@ -410,9 +410,9 @@ def test_FiscUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
 
     zia_gut = budunit_shop(zia_str, a23_str)
     zia_gut.add_acctunit(zia_str)
-    casa_road = zia_gut.make_l1_road("casa")
-    clean_road = zia_gut.make_road(casa_road, "clean")
-    zia_gut.add_item(clean_road, pledge=True)
+    casa_way = zia_gut.make_l1_way("casa")
+    clean_way = zia_gut.make_way(casa_way, "clean")
+    zia_gut.add_item(clean_way, pledge=True)
     save_gut_file(fisc_mstr_dir, bob_gut)
     save_gut_file(fisc_mstr_dir, sue_gut)
     save_gut_file(fisc_mstr_dir, yao_gut)
@@ -459,9 +459,9 @@ def test_FiscUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
 
     zia_gut = budunit_shop(zia_str, a23_str)
     zia_gut.add_acctunit(zia_str)
-    casa_road = zia_gut.make_l1_road("casa")
-    clean_road = zia_gut.make_road(casa_road, "clean")
-    zia_gut.add_item(clean_road, pledge=True)
+    casa_way = zia_gut.make_l1_way("casa")
+    clean_way = zia_gut.make_way(casa_way, "clean")
+    zia_gut.add_item(clean_way, pledge=True)
     save_gut_file(fisc_mstr_dir, bob_gut)
     save_gut_file(fisc_mstr_dir, sue_gut)
     save_gut_file(fisc_mstr_dir, yao_gut)
@@ -513,22 +513,22 @@ def test_FiscUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
 #     sue_gut_bud = a23_fisc.rotate_job(sue_str)
 
 #     texas_str = "Texas"
-#     texas_road = bob_gut_bud.make_l1_road(texas_str)
+#     texas_way = bob_gut_bud.make_l1_way(texas_str)
 #     elpaso_str = "el paso"
-#     elpaso_road = bob_gut_bud.make_road(texas_road, elpaso_str)
+#     elpaso_way = bob_gut_bud.make_way(texas_way, elpaso_str)
 #     elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
 
 #     bob_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, bob_str)
 #     bob_gut_bud.add_acctunit(bob_str)
 #     bob_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-#     bob_gut_bud.set_item(elpaso_item, texas_road)
+#     bob_gut_bud.set_item(elpaso_item, texas_way)
 #     save_gut_file(a23_fisc.fisc_mstr_dir, bob_gut_bud)
 
 #     sue_gut_bud = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
 #     sue_gut_bud.add_acctunit(sue_str)
 #     sue_gut_bud.add_acctunit(bob_str)
 #     sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-#     sue_gut_bud.set_item(elpaso_item, texas_road)
+#     sue_gut_bud.set_item(elpaso_item, texas_way)
 #     save_gut_file(a23_fisc.fisc_mstr_dir, sue_gut_bud)
 
 #     before_bob_job = a23_fisc.get_job_file_bud(bob_str)

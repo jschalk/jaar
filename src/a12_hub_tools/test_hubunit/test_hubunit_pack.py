@@ -494,17 +494,17 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     print(f"{gut_bud.fisc_tag=}")
     print(f"{sue_hubunit.fisc_tag=}")
     sports_str = "sports"
-    sports_road = gut_bud.make_l1_road(sports_str)
+    sports_way = gut_bud.make_l1_way(sports_str)
     knee_str = "knee"
-    knee_road = gut_bud.make_road(sports_road, knee_str)
-    assert gut_bud.item_exists(sports_road) is False
+    knee_way = gut_bud.make_way(sports_way, knee_str)
+    assert gut_bud.item_exists(sports_way) is False
 
     # WHEN
     new_bud = sue_hubunit._merge_any_packs(gut_bud)
 
     # THEN
     assert new_bud != gut_bud
-    assert new_bud.item_exists(sports_road)
+    assert new_bud.item_exists(sports_way)
 
 
 # def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
@@ -518,16 +518,16 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
 #     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
 #     print(f"{gut_bud.fisc_tag=}")
 #     sports_str = "sports"
-#     sports_road = gut_bud.make_l1_road(sports_str)
+#     sports_way = gut_bud.make_l1_way(sports_str)
 #     knee_str = "knee"
-#     knee_road = gut_bud.make_road(sports_road, knee_str)
-#     assert gut_bud.item_exists(sports_road) is False
-#     assert gut_bud.item_exists(knee_road) is False
+#     knee_way = gut_bud.make_way(sports_way, knee_str)
+#     assert gut_bud.item_exists(sports_way) is False
+#     assert gut_bud.item_exists(knee_way) is False
 
 #     # WHEN
 #     new_bud = sue_hubunit._merge_any_packs(gut_bud)
 
 #     # THEN
 #     assert new_bud != gut_bud
-#     assert new_bud.item_exists(sports_road)
-#     assert new_bud.item_exists(knee_road)
+#     assert new_bud.item_exists(sports_way)
+#     assert new_bud.item_exists(knee_way)

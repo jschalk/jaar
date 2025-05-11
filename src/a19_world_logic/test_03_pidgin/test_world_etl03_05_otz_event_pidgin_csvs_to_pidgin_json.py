@@ -4,8 +4,8 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.a01_road_logic.road import default_bridge_if_None
-from src.a06_bud_logic._utils.str_a06 import type_RoadUnit_str
+from src.a01_way_logic.way import default_bridge_if_None
+from src.a06_bud_logic._utils.str_a06 import type_WayUnit_str
 from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
@@ -18,7 +18,7 @@ from src.a19_world_logic._utils.env_a19 import (
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_3Event_road(
+def test_WorldUnit_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_3Event_way(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -35,15 +35,15 @@ def test_WorldUnit_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_3Event_r
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event7_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event7_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event7},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event7},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event9_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event9_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event9},"{zia_str}","{casa_otx}","{casa_inx}",,,
 {event9},"{zia_str}","{clean_otx}","{clean_inx}",,,
 """
@@ -53,9 +53,9 @@ def test_WorldUnit_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_3Event_r
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)
-    save_file(event3_dir, "road.csv", event3_road_csv)
-    save_file(event7_dir, "road.csv", event7_road_csv)
-    save_file(event9_dir, "road.csv", event9_road_csv)
+    save_file(event3_dir, "way.csv", event3_way_csv)
+    save_file(event7_dir, "way.csv", event7_way_csv)
+    save_file(event9_dir, "way.csv", event9_way_csv)
     e3_json_file_path = create_path(event3_dir, pidgin_filename())
     e7_json_file_path = create_path(event7_dir, pidgin_filename())
     e9_json_file_path = create_path(event9_dir, pidgin_filename())
@@ -78,8 +78,8 @@ def test_WorldUnit_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_3Event_r
     assert e3_json_pidginunit.otx_bridge == default_bridge_if_None()
     assert e3_json_pidginunit.inx_bridge == default_bridge_if_None()
     assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
-    assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
-    assert e3_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
+    assert e3_json_pidginunit.otx2inx_exists(type_WayUnit_str(), casa_otx, casa_inx)
+    assert e3_json_pidginunit.otx2inx_exists(type_WayUnit_str(), clean_otx, clean_inx)
     e7_json_pidginunit = get_pidginunit_from_json(
         open_file(event7_dir, pidgin_filename())
     )
@@ -88,8 +88,8 @@ def test_WorldUnit_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_3Event_r
     assert e7_json_pidginunit.otx_bridge == default_bridge_if_None()
     assert e7_json_pidginunit.inx_bridge == default_bridge_if_None()
     assert e7_json_pidginunit.unknown_word == default_unknown_word_if_None()
-    assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), casa_otx, casa_inx)
-    assert e7_json_pidginunit.otx2inx_exists(type_RoadUnit_str(), clean_otx, clean_inx)
+    assert e7_json_pidginunit.otx2inx_exists(type_WayUnit_str(), casa_otx, casa_inx)
+    assert e7_json_pidginunit.otx2inx_exists(type_WayUnit_str(), clean_otx, clean_inx)
 
 
 def test_WorldUnit_set_pidgin_events_SetsAttr(env_dir_setup_cleanup):
@@ -148,15 +148,15 @@ def test_WorldUnit_otz_face_pidgins_df_to_otz_event_pidgins_df_SetsAttr_pidgin_e
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event7_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event7_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event7},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event7},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event9_road_csv = f"""event_int,face_name,otx_road,inx_road,otx_bridge,inx_bridge,unknown_word
+    event9_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
 {event9},"{zia_str}","{casa_otx}","{casa_inx}",,,
 {event9},"{zia_str}","{clean_otx}","{clean_inx}",,,
 """
@@ -166,9 +166,9 @@ def test_WorldUnit_otz_face_pidgins_df_to_otz_event_pidgins_df_SetsAttr_pidgin_e
     event3_dir = create_path(bob_dir, event3)
     event7_dir = create_path(bob_dir, event7)
     event9_dir = create_path(zia_dir, event9)
-    save_file(event3_dir, "road.csv", event3_road_csv)
-    save_file(event7_dir, "road.csv", event7_road_csv)
-    save_file(event9_dir, "road.csv", event9_road_csv)
+    save_file(event3_dir, "way.csv", event3_way_csv)
+    save_file(event7_dir, "way.csv", event7_way_csv)
+    save_file(event9_dir, "way.csv", event9_way_csv)
     e3_json_file_path = create_path(event3_dir, pidgin_filename())
     e7_json_file_path = create_path(event7_dir, pidgin_filename())
     e9_json_file_path = create_path(event9_dir, pidgin_filename())

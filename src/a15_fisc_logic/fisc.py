@@ -31,10 +31,10 @@ from src.a02_finance_logic.deal import (
     tranbook_shop,
     get_tranbook_from_dict,
 )
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     default_bridge_if_None,
     OwnerName,
-    RoadUnit,
+    WayUnit,
     FiscTag,
     AcctName,
     EventInt,
@@ -142,7 +142,7 @@ class FiscUnit:
                 fisc_mstr_dir=self.fisc_mstr_dir,
                 fisc_tag=self.fisc_tag,
                 owner_name=x_owner_name,
-                keep_road=None,
+                keep_way=None,
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
@@ -194,21 +194,21 @@ class FiscUnit:
                 self.fisc_mstr_dir,
                 self.fisc_tag,
                 healer_name,
-                keep_road=None,
+                keep_way=None,
                 # "duty_plan",
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
-            for keep_road in healer_dict.keys():
-                self._set_owner_duty(healer_hubunit, keep_road, x_gut)
+            for keep_way in healer_dict.keys():
+                self._set_owner_duty(healer_hubunit, keep_way, x_gut)
 
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
-        keep_road: RoadUnit,
+        keep_way: WayUnit,
         gut_bud: BudUnit,
     ):
-        healer_hubunit.keep_road = keep_road
+        healer_hubunit.keep_way = keep_way
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(gut_bud)
 
@@ -219,17 +219,17 @@ class FiscUnit:
                 fisc_mstr_dir=self.fisc_mstr_dir,
                 fisc_tag=self.fisc_tag,
                 owner_name=healer_name,
-                keep_road=None,
+                keep_way=None,
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
             healer_hubunit.create_gut_treasury_db_files()
-            for keep_road in healer_dict.keys():
+            for keep_way in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
                     fisc_mstr_dir=self.fisc_mstr_dir,
                     fisc_tag=self.fisc_tag,
                     owner_name=healer_name,
-                    keep_road=keep_road,
+                    keep_way=keep_way,
                     # "duty_plan",
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,

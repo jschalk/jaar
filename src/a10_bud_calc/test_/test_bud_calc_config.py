@@ -45,12 +45,12 @@ from src.a06_bud_logic._utils.str_a06 import (
     open_str,
     penny_str,
     respect_bit_str,
-    road_str,
+    way_str,
     stop_want_str,
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
-    type_RoadUnit_str,
+    type_WayUnit_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import (
     class_type_str,
@@ -308,7 +308,7 @@ def test_get_all_bud_calc_args_ReturnsObj():
     # THEN
     assert all_bud_calc_args
     assert stop_want_str() in all_bud_calc_args
-    assert road_str() in all_bud_calc_args
+    assert way_str() in all_bud_calc_args
     assert "_fund_give" in all_bud_calc_args
     assert all_bud_calc_args.get("_fund_give") == {
         "bud_item_awardlink",
@@ -320,10 +320,10 @@ def test_get_all_bud_calc_args_ReturnsObj():
     # bud_calc_config = get_bud_calc_config_dict()
     # bud_acctunit_aspects = bud_calc_config.get("bud_acctunit")
     # budacct_jmetrics_dict = bud_acctunit_aspects.get("jmetrics")
-    # road_bud_calc_aspects = budacct_jmetrics_dict.get("_fund_give")
-    # assert bud_item_factunit_str() in road_bud_calc_aspects
-    # assert bud_item_teamlink_str() in road_bud_calc_aspects
-    # assert len(road_bud_calc_aspects) == 6
+    # way_bud_calc_aspects = budacct_jmetrics_dict.get("_fund_give")
+    # assert bud_item_factunit_str() in way_bud_calc_aspects
+    # assert bud_item_teamlink_str() in way_bud_calc_aspects
+    # assert len(way_bud_calc_aspects) == 6
     assert len(all_bud_calc_args) == 77
 
 
@@ -423,7 +423,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_range_evaluated",
         "problem_bool",
         gogo_want_str(),
-        road_str(),
+        way_str(),
         begin_str(),
     }
     assert bud_groupunit_args == {
@@ -565,8 +565,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
         g_class_type(config, budawar, jk, awardee_title_str()) == type_LabelUnit_str()
     )
     assert g_sqlitetype(config, budawar, jk, awardee_title_str()) == "TEXT"
-    assert g_class_type(config, budawar, jk, road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, budawar, jk, road_str()) == "TEXT"
+    assert g_class_type(config, budawar, jk, way_str()) == type_WayUnit_str()
+    assert g_sqlitetype(config, budawar, jk, way_str()) == "TEXT"
     assert g_class_type(config, budawar, jm, "_fund_give") == "float"
     assert g_sqlitetype(config, budawar, jm, "_fund_give") == "REAL"
     assert g_class_type(config, budawar, jm, "_fund_take") == "float"
@@ -575,26 +575,26 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budawar, jv, "give_force") == "REAL"
     assert g_class_type(config, budawar, jv, "take_force") == "float"
     assert g_sqlitetype(config, budawar, jv, "take_force") == "REAL"
-    assert g_class_type(config, budfact, jk, fbase_str()) == type_RoadUnit_str()
+    assert g_class_type(config, budfact, jk, fbase_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budfact, jk, fbase_str()) == "TEXT"
-    assert g_class_type(config, budfact, jk, road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, budfact, jk, road_str()) == "TEXT"
+    assert g_class_type(config, budfact, jk, way_str()) == type_WayUnit_str()
+    assert g_sqlitetype(config, budfact, jk, way_str()) == "TEXT"
     assert g_class_type(config, budfact, jv, fnigh_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(config, budfact, jv, fopen_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(config, budfact, jv, fneed_str()) == type_RoadUnit_str()
+    assert g_class_type(config, budfact, jv, fneed_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budfact, jv, fneed_str()) == "TEXT"
     assert g_class_type(config, budheal, jk, healer_name_str()) == type_NameUnit_str()
     assert g_sqlitetype(config, budheal, jk, healer_name_str()) == "TEXT"
-    assert g_class_type(config, budheal, jk, road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, budheal, jk, road_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, base_str()) == type_RoadUnit_str()
+    assert g_class_type(config, budheal, jk, way_str()) == type_WayUnit_str()
+    assert g_sqlitetype(config, budheal, jk, way_str()) == "TEXT"
+    assert g_class_type(config, budprem, jk, base_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budprem, jk, base_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, need_str()) == type_RoadUnit_str()
+    assert g_class_type(config, budprem, jk, need_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budprem, jk, need_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, budprem, jk, road_str()) == "TEXT"
+    assert g_class_type(config, budprem, jk, way_str()) == type_WayUnit_str()
+    assert g_sqlitetype(config, budprem, jk, way_str()) == "TEXT"
     assert g_class_type(config, budprem, jm, "_status") == "int"
     assert g_sqlitetype(config, budprem, jm, "_status") == "INTEGER"
     assert g_class_type(config, budprem, jm, "_task") == "int"
@@ -605,10 +605,10 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budprem, jv, nigh_str()) == "REAL"
     assert g_class_type(config, budprem, jv, open_str()) == "float"
     assert g_sqlitetype(config, budprem, jv, open_str()) == "REAL"
-    assert g_class_type(config, budreas, jk, base_str()) == type_RoadUnit_str()
+    assert g_class_type(config, budreas, jk, base_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budreas, jk, base_str()) == "TEXT"
-    assert g_class_type(config, budreas, jk, road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, budreas, jk, road_str()) == "TEXT"
+    assert g_class_type(config, budreas, jk, way_str()) == type_WayUnit_str()
+    assert g_sqlitetype(config, budreas, jk, way_str()) == "TEXT"
     assert g_class_type(config, budreas, jm, "_base_item_active_value") == "int"
     assert g_sqlitetype(config, budreas, jm, "_base_item_active_value") == "INTEGER"
     assert g_class_type(config, budreas, jm, "_status") == "int"
@@ -617,8 +617,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budreas, jm, "_task") == "INTEGER"
     assert g_class_type(config, budreas, jv, "base_item_active_requisite") == "bool"
     assert g_sqlitetype(config, budreas, jv, "base_item_active_requisite") == "INTEGER"
-    assert g_class_type(config, budteam, jk, road_str()) == type_RoadUnit_str()
-    assert g_sqlitetype(config, budteam, jk, road_str()) == "TEXT"
+    assert g_class_type(config, budteam, jk, way_str()) == type_WayUnit_str()
+    assert g_sqlitetype(config, budteam, jk, way_str()) == "TEXT"
     assert g_class_type(config, budteam, jk, "team_title") == type_LabelUnit_str()
     assert g_sqlitetype(config, budteam, jk, "team_title") == "TEXT"
     assert g_class_type(config, budteam, jm, "_owner_name_team") == "int"
@@ -798,15 +798,15 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get("problem_bool") == "bool"
     assert bud_calc_args_type_dict.get(stop_want_str()) == "float"
     assert bud_calc_args_type_dict.get(awardee_title_str()) == type_LabelUnit_str()
-    assert bud_calc_args_type_dict.get(road_str()) == type_RoadUnit_str()
+    assert bud_calc_args_type_dict.get(way_str()) == type_WayUnit_str()
     assert bud_calc_args_type_dict.get("give_force") == "float"
     assert bud_calc_args_type_dict.get("take_force") == "float"
-    assert bud_calc_args_type_dict.get(base_str()) == type_RoadUnit_str()
+    assert bud_calc_args_type_dict.get(base_str()) == type_WayUnit_str()
     assert bud_calc_args_type_dict.get(fnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(fopen_str()) == "float"
-    assert bud_calc_args_type_dict.get(fneed_str()) == type_RoadUnit_str()
+    assert bud_calc_args_type_dict.get(fneed_str()) == type_WayUnit_str()
     assert bud_calc_args_type_dict.get(healer_name_str()) == type_NameUnit_str()
-    assert bud_calc_args_type_dict.get(need_str()) == type_RoadUnit_str()
+    assert bud_calc_args_type_dict.get(need_str()) == type_WayUnit_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
     assert bud_calc_args_type_dict.get("divisor") == "int"

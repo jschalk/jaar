@@ -12,13 +12,13 @@ from src.a13_bud_listen_logic._utils.example_listen import (
     cook_str,
     clean_str,
     run_str,
-    casa_road,
-    cook_road,
-    eat_road,
-    hungry_road,
-    full_road,
-    clean_road,
-    run_road,
+    casa_way,
+    cook_way,
+    eat_way,
+    hungry_way,
+    full_way,
+    clean_way,
+    run_way,
     get_example_yao_speaker,
     get_example_zia_speaker,
     get_example_bob_speaker,
@@ -47,8 +47,8 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWhenNo_teamlinkIsSet(
     save_gut_file(fisc_mstr_dir, yao_gut)
 
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
-    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_way())
+    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     save_job_file(fisc_mstr_dir, zia_job)
 
@@ -79,11 +79,11 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBud(env_dir_setup_cleanup):
     save_job_file(fisc_mstr_dir, yao_gut)
 
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
-    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_way())
+    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
-    clean_itemunit = zia_job.get_item_obj(clean_road())
-    cook_itemunit = zia_job.get_item_obj(cook_road())
+    clean_itemunit = zia_job.get_item_obj(clean_way())
+    cook_itemunit = zia_job.get_item_obj(cook_way())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
@@ -106,12 +106,12 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debt
     zia_job = get_example_zia_speaker()
     bob_job = get_example_bob_speaker()
     bob_job.edit_item_attr(
-        road=cook_road(),
-        reason_del_premise_base=eat_road(),
-        reason_del_premise_need=hungry_road(),
+        way=cook_way(),
+        reason_del_premise_base=eat_way(),
+        reason_del_premise_need=hungry_way(),
     )
-    bob_cook_itemunit = bob_job.get_item_obj(cook_road())
-    zia_cook_itemunit = zia_job.get_item_obj(cook_road())
+    bob_cook_itemunit = bob_job.get_item_obj(cook_way())
+    zia_cook_itemunit = zia_job.get_item_obj(cook_way())
     assert bob_cook_itemunit != zia_cook_itemunit
     assert len(zia_cook_itemunit.reasonunits) == 1
     assert len(bob_cook_itemunit.reasonunits) == 0
@@ -126,19 +126,19 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debt
     save_gut_file(fisc_mstr_dir, yao_gut)
 
     new_yao_job1 = create_listen_basis(yao_gut)
-    assert new_yao_job1.item_exists(cook_road()) is False
+    assert new_yao_job1.item_exists(cook_way()) is False
 
     # WHEN
     yao_hubunit = hubunit_shop(fisc_mstr_dir, a23_str, yao_str)
     listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job1)
 
     # THEN
-    assert new_yao_job1.item_exists(cook_road())
-    new_cook_item = new_yao_job1.get_item_obj(cook_road())
+    assert new_yao_job1.item_exists(cook_way())
+    new_cook_item = new_yao_job1.get_item_obj(cook_way())
     zia_acctunit = new_yao_job1.get_acct(zia_str)
     bob_acctunit = new_yao_job1.get_acct(bob_str)
     assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
-    assert new_cook_item.get_reasonunit(eat_road()) is None
+    assert new_cook_item.get_reasonunit(eat_way()) is None
 
     yao_zia_debtit_belief = 15
     yao_bob_debtit_belief = 5
@@ -146,19 +146,19 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debt
     yao_gut.add_acctunit(bob_str, None, yao_bob_debtit_belief)
     yao_gut.set_acct_respect(100)
     new_yao_job2 = create_listen_basis(yao_gut)
-    assert new_yao_job2.item_exists(cook_road()) is False
+    assert new_yao_job2.item_exists(cook_way()) is False
 
     # WHEN
     listen_to_agendas_jobs_into_job(fisc_mstr_dir, new_yao_job2)
 
     # THEN
-    assert new_yao_job2.item_exists(cook_road())
-    new_cook_item = new_yao_job2.get_item_obj(cook_road())
+    assert new_yao_job2.item_exists(cook_way())
+    new_cook_item = new_yao_job2.get_item_obj(cook_way())
     zia_acctunit = new_yao_job2.get_acct(zia_str)
     bob_acctunit = new_yao_job2.get_acct(bob_str)
     assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
-    zia_eat_reasonunit = zia_cook_itemunit.get_reasonunit(eat_road())
-    assert new_cook_item.get_reasonunit(eat_road()) == zia_eat_reasonunit
+    zia_eat_reasonunit = zia_cook_itemunit.get_reasonunit(eat_way())
+    assert new_cook_item.get_reasonunit(eat_way()) == zia_eat_reasonunit
 
 
 def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cleanup):
@@ -182,11 +182,11 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
 
     zia_str = "Zia"
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
-    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_way())
+    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
-    clean_itemunit = zia_job.get_item_obj(clean_road())
-    cook_itemunit = zia_job.get_item_obj(cook_road())
+    clean_itemunit = zia_job.get_item_obj(clean_way())
+    cook_itemunit = zia_job.get_item_obj(cook_way())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
@@ -195,29 +195,29 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
     sue_job.set_max_tree_traverse(5)
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     vacuum_str = "vacuum"
-    vacuum_road = sue_job.make_l1_road(vacuum_str)
+    vacuum_way = sue_job.make_l1_way(vacuum_str)
     sue_job.set_l1_item(itemunit_shop(vacuum_str, pledge=True))
-    vacuum_itemunit = sue_job.get_item_obj(vacuum_road)
+    vacuum_itemunit = sue_job.get_item_obj(vacuum_way)
     vacuum_itemunit.teamunit.set_teamlink(yao_str)
 
     egg_str = "egg first"
-    egg_road = sue_job.make_l1_road(egg_str)
+    egg_way = sue_job.make_l1_way(egg_str)
     sue_job.set_l1_item(itemunit_shop(egg_str))
     chicken_str = "chicken first"
-    chicken_road = sue_job.make_l1_road(chicken_str)
+    chicken_way = sue_job.make_l1_way(chicken_str)
     sue_job.set_l1_item(itemunit_shop(chicken_str))
     # set egg pledge is True when chicken first is False
     sue_job.edit_item_attr(
-        road=egg_road,
+        way=egg_way,
         pledge=True,
-        reason_base=chicken_road,
+        reason_base=chicken_way,
         reason_base_item_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_job.edit_item_attr(
-        road=chicken_road,
+        way=chicken_way,
         pledge=True,
-        reason_base=egg_road,
+        reason_base=egg_way,
         reason_base_item_active_requisite=False,
     )
     save_job_file(fisc_mstr_dir, sue_job)
@@ -261,11 +261,11 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBud(
     save_gut_file(fisc_mstr_dir, yao_gut)
 
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
-    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_way())
+    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
-    clean_itemunit = zia_job.get_item_obj(clean_road())
-    cook_itemunit = zia_job.get_item_obj(cook_road())
+    clean_itemunit = zia_job.get_item_obj(clean_way())
+    cook_itemunit = zia_job.get_item_obj(cook_way())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
@@ -309,11 +309,11 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     # Save Zia to job
     zia_str = "Zia"
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_road())
-    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_road())
+    zia_job.set_item(itemunit_shop(clean_str(), pledge=True), casa_way())
+    zia_job.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
-    clean_itemunit = zia_job.get_item_obj(clean_road())
-    cook_itemunit = zia_job.get_item_obj(cook_road())
+    clean_itemunit = zia_job.get_item_obj(clean_way())
+    cook_itemunit = zia_job.get_item_obj(cook_way())
     clean_itemunit.teamunit.set_teamlink(yao_str)
     cook_itemunit.teamunit.set_teamlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
@@ -321,9 +321,9 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     # save yao with task to dutys
     yao_old_job = budunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
-    vacuum_road = yao_old_job.make_l1_road(vacuum_str)
+    vacuum_way = yao_old_job.make_l1_way(vacuum_str)
     yao_old_job.set_l1_item(itemunit_shop(vacuum_str, pledge=True))
-    vacuum_itemunit = yao_old_job.get_item_obj(vacuum_road)
+    vacuum_itemunit = yao_old_job.get_item_obj(vacuum_way)
     vacuum_itemunit.teamunit.set_teamlink(yao_str)
     save_job_file(fisc_mstr_dir, yao_old_job)
 

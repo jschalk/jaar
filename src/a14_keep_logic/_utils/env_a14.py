@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import delete_dir, copy_dir, create_path
-from src.a01_road_logic.road import create_road_from_tags, RoadUnit
+from src.a01_way_logic.way import create_way_from_tags, WayUnit
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
@@ -29,16 +29,16 @@ def env_dir_setup_cleanup():
     delete_dir(env_dir)
 
 
-def get_texas_road() -> RoadUnit:
+def get_texas_way() -> WayUnit:
     naton_str = "nation-state"
     usa_str = "usa"
     texas_str = "texas"
-    return create_road_from_tags([naton_str, usa_str, texas_str])
+    return create_way_from_tags([naton_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        get_module_temp_dir(), temp_fisc_tag(), temp_owner_name(), get_texas_road()
+        get_module_temp_dir(), temp_fisc_tag(), temp_owner_name(), get_texas_way()
     )
 
 

@@ -13,7 +13,7 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud.set_l1_item(itemunit_shop(cat, mass=30, pledge=True))
 
     week_str = "weekdays"
-    week_road = sue_bud.make_l1_road(week_str)
+    week_way = sue_bud.make_l1_way(week_str)
     item_kid_weekdays = itemunit_shop(week_str, mass=40)
     sue_bud.set_l1_item(item_kid_weekdays)
 
@@ -33,36 +33,36 @@ def get_budunit_with_4_levels() -> BudUnit:
     item_grandkidF = itemunit_shop(fri_str, mass=40)
     item_grandkidA = itemunit_shop(sat_str, mass=50)
 
-    sue_bud.set_item(item_grandkidU, week_road)
-    sue_bud.set_item(item_grandkidM, week_road)
-    sue_bud.set_item(item_grandkidT, week_road)
-    sue_bud.set_item(item_grandkidW, week_road)
-    sue_bud.set_item(item_grandkidR, week_road)
-    sue_bud.set_item(item_grandkidF, week_road)
-    sue_bud.set_item(item_grandkidA, week_road)
+    sue_bud.set_item(item_grandkidU, week_way)
+    sue_bud.set_item(item_grandkidM, week_way)
+    sue_bud.set_item(item_grandkidT, week_way)
+    sue_bud.set_item(item_grandkidW, week_way)
+    sue_bud.set_item(item_grandkidR, week_way)
+    sue_bud.set_item(item_grandkidF, week_way)
+    sue_bud.set_item(item_grandkidA, week_way)
 
     states_str = "nation-state"
-    states_road = sue_bud.make_l1_road(states_str)
+    states_way = sue_bud.make_l1_way(states_str)
     item_kid_states = itemunit_shop(states_str, mass=30)
     sue_bud.set_l1_item(item_kid_states)
 
     usa_str = "USA"
-    usa_road = sue_bud.make_road(states_road, usa_str)
+    usa_way = sue_bud.make_way(states_way, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
     item_grandkid_usa = itemunit_shop(usa_str, mass=50)
     item_grandkid_france = itemunit_shop(france_str, mass=50)
     item_grandkid_brazil = itemunit_shop(brazil_str, mass=50)
-    sue_bud.set_item(item_grandkid_france, states_road)
-    sue_bud.set_item(item_grandkid_brazil, states_road)
-    sue_bud.set_item(item_grandkid_usa, states_road)
+    sue_bud.set_item(item_grandkid_france, states_way)
+    sue_bud.set_item(item_grandkid_brazil, states_way)
+    sue_bud.set_item(item_grandkid_usa, states_way)
 
     texas_str = "Texas"
     oregon_str = "Oregon"
     item_grandgrandkid_usa_texas = itemunit_shop(texas_str, mass=50)
     item_grandgrandkid_usa_oregon = itemunit_shop(oregon_str, mass=50)
-    sue_bud.set_item(item_grandgrandkid_usa_texas, usa_road)
-    sue_bud.set_item(item_grandgrandkid_usa_oregon, usa_road)
+    sue_bud.set_item(item_grandgrandkid_usa_texas, usa_way)
+    sue_bud.set_item(item_grandgrandkid_usa_oregon, usa_way)
     return sue_bud
 
 
@@ -70,28 +70,28 @@ def get_fund_breakdown_bud() -> BudUnit:
     sue_bud = budunit_shop(owner_name="Sue")
 
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     cat_str = "cat status"
-    cat_road = sue_bud.make_road(casa_road, cat_str)
+    cat_way = sue_bud.make_way(casa_way, cat_str)
     hun_n_str = "not hungry"
     hun_y_str = "hungry"
     clean_str = "cleaning"
-    clean_road = sue_bud.make_road(casa_road, clean_str)
+    clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_str = "sweep floor"
     dish_str = "clean dishes"
     sue_bud.set_l1_item(itemunit_shop(casa_str, mass=30))
-    sue_bud.set_item(itemunit_shop(cat_str, mass=30), casa_road)
-    sue_bud.set_item(itemunit_shop(hun_n_str, mass=30), cat_road)
-    sue_bud.set_item(itemunit_shop(hun_y_str, mass=30), cat_road)
-    sue_bud.set_item(itemunit_shop(clean_str, mass=30), casa_road)
-    sue_bud.set_item(itemunit_shop(sweep_str, mass=30, pledge=True), clean_road)
-    sue_bud.set_item(itemunit_shop(dish_str, mass=30, pledge=True), clean_road)
+    sue_bud.set_item(itemunit_shop(cat_str, mass=30), casa_way)
+    sue_bud.set_item(itemunit_shop(hun_n_str, mass=30), cat_way)
+    sue_bud.set_item(itemunit_shop(hun_y_str, mass=30), cat_way)
+    sue_bud.set_item(itemunit_shop(clean_str, mass=30), casa_way)
+    sue_bud.set_item(itemunit_shop(sweep_str, mass=30, pledge=True), clean_way)
+    sue_bud.set_item(itemunit_shop(dish_str, mass=30, pledge=True), clean_way)
 
     cat_str = "cat have dinner"
     sue_bud.set_l1_item(itemunit_shop(cat_str, mass=30, pledge=True))
 
     # week_str = "weekdays"
-    # week_road = sue_bud.make_l1_road(week_str)
+    # week_way = sue_bud.make_l1_way(week_str)
     # item_kid_weekdays = itemunit_shop(week_str, mass=25)
     # sue_bud.set_l1_item(item_kid_weekdays)
 
@@ -109,36 +109,36 @@ def get_fund_breakdown_bud() -> BudUnit:
     # item_grandkidR = itemunit_shop(thu_str, mass=30)
     # item_grandkidF = itemunit_shop(fri_str, mass=40)
     # item_grandkidA = itemunit_shop(sat_str, mass=50)
-    # sue_bud.set_item(item_grandkidU, week_road)
-    # sue_bud.set_item(item_grandkidM, week_road)
-    # sue_bud.set_item(item_grandkidT, week_road)
-    # sue_bud.set_item(item_grandkidW, week_road)
-    # sue_bud.set_item(item_grandkidR, week_road)
-    # sue_bud.set_item(item_grandkidF, week_road)
-    # sue_bud.set_item(item_grandkidA, week_road)
+    # sue_bud.set_item(item_grandkidU, week_way)
+    # sue_bud.set_item(item_grandkidM, week_way)
+    # sue_bud.set_item(item_grandkidT, week_way)
+    # sue_bud.set_item(item_grandkidW, week_way)
+    # sue_bud.set_item(item_grandkidR, week_way)
+    # sue_bud.set_item(item_grandkidF, week_way)
+    # sue_bud.set_item(item_grandkidA, week_way)
 
     # states_str = "nation-state"
-    # states_road = sue_bud.make_l1_road(states_str)
+    # states_way = sue_bud.make_l1_way(states_str)
     # item_kid_states = itemunit_shop(states_str, mass=30)
     # sue_bud.set_l1_item(item_kid_states)
 
     # usa_str = "USA"
-    # usa_road = sue_bud.make_road(states_road, usa_str)
+    # usa_way = sue_bud.make_way(states_way, usa_str)
     # france_str = "France"
     # brazil_str = "Brazil"
     # item_grandkid_usa = itemunit_shop(usa_str, mass=50)
     # item_grandkid_france = itemunit_shop(france_str, mass=50)
     # item_grandkid_brazil = itemunit_shop(brazil_str, mass=50)
-    # sue_bud.set_item(item_grandkid_france, states_road)
-    # sue_bud.set_item(item_grandkid_brazil, states_road)
-    # sue_bud.set_item(item_grandkid_usa, states_road)
+    # sue_bud.set_item(item_grandkid_france, states_way)
+    # sue_bud.set_item(item_grandkid_brazil, states_way)
+    # sue_bud.set_item(item_grandkid_usa, states_way)
 
     # texas_str = "Texas"
     # oregon_str = "Oregon"
     # item_grandgrandkid_usa_texas = itemunit_shop(texas_str, mass=50)
     # item_grandgrandkid_usa_oregon = itemunit_shop(oregon_str, mass=50)
-    # sue_bud.set_item(item_grandgrandkid_usa_texas, usa_road)
-    # sue_bud.set_item(item_grandgrandkid_usa_oregon, usa_road)
+    # sue_bud.set_item(item_grandgrandkid_usa_texas, usa_way)
+    # sue_bud.set_item(item_grandgrandkid_usa_oregon, usa_way)
     return sue_bud
 
 
@@ -159,26 +159,26 @@ def get_budunit_irrational_example() -> BudUnit:
     hatter_bud.set_max_tree_traverse(3)
 
     egg_str = "egg first"
-    egg_road = hatter_bud.make_l1_road(egg_str)
-    hatter_bud.add_item(egg_road)
+    egg_way = hatter_bud.make_l1_way(egg_str)
+    hatter_bud.add_item(egg_way)
 
     chicken_str = "chicken first"
-    chicken_road = hatter_bud.make_l1_road(chicken_str)
-    hatter_bud.add_item(chicken_road)
+    chicken_way = hatter_bud.make_l1_way(chicken_str)
+    hatter_bud.add_item(chicken_way)
 
     # set egg pledge is True when chicken first is False
     hatter_bud.edit_item_attr(
-        road=egg_road,
+        way=egg_way,
         pledge=True,
-        reason_base=chicken_road,
+        reason_base=chicken_way,
         reason_base_item_active_requisite=True,
     )
 
     # set chick pledge is True when egg first is False
     hatter_bud.edit_item_attr(
-        road=chicken_road,
+        way=chicken_way,
         pledge=True,
-        reason_base=egg_road,
+        reason_base=egg_way,
         reason_base_item_active_requisite=False,
     )
 

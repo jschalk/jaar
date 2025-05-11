@@ -1,12 +1,12 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a01_road_logic.road import to_road
+from src.a01_way_logic.way import to_way
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a05_item_logic.item import itemunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
-    road_str,
+    way_str,
     mass_str,
     pledge_str,
     debtit_belief_str,
@@ -149,12 +149,12 @@ def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
     accord_fisc_tag = "accord56"
     sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_str)
+    casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
     sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    clean_way = sue_budunit.make_way(casa_way, clean_str)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
 
     # WHEN
     x_idea_name = idea_format_00013_itemunit_v0_0_0()
@@ -167,13 +167,13 @@ def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
     assert itemunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[0, pledge_str()] == ""
     assert itemunit_format.loc[0, fisc_tag_str()] == accord_fisc_tag
-    assert itemunit_format.loc[0, road_str()] == casa_road
+    assert itemunit_format.loc[0, way_str()] == casa_way
     assert itemunit_format.loc[0, mass_str()] == casa_mass
 
     assert itemunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
     assert itemunit_format.loc[1, fisc_tag_str()] == accord_fisc_tag
-    assert itemunit_format.loc[1, road_str()] == clean_road
+    assert itemunit_format.loc[1, way_str()] == clean_way
     assert itemunit_format.loc[1, mass_str()] == 1
     assert len(itemunit_format) == 2
 
@@ -260,12 +260,12 @@ def test_save_idea_csv_Arg_idea_format_00013_itemunit_v0_0_0(env_dir_setup_clean
     accord_fisc_tag = "accord56"
     sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
     casa_str = "casa"
-    casa_road = sue_budunit.make_l1_road(casa_str)
+    casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
     sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_road = sue_budunit.make_road(casa_road, clean_str)
-    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_road)
+    clean_way = sue_budunit.make_way(casa_way, clean_str)
+    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
     x_idea_name = idea_format_00013_itemunit_v0_0_0()
     itemunit_format = create_idea_df(sue_budunit, x_idea_name)
     name_filename = f"{sue_str}_itemunit_example_000.csv"

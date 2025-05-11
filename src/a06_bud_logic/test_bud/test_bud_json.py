@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json, get_dict_from_json
-from src.a01_road_logic.road import default_bridge_if_None, to_road
+from src.a01_way_logic.way import default_bridge_if_None, to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_team import teamunit_shop
 from src.a04_reason_logic.reason_item import factunit_shop
@@ -22,11 +22,11 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_bud = budunit_v001()
     day_hour_str = "day_hour"
-    day_hour_road = yao_bud.make_l1_road(day_hour_str)
-    day_hour_item = yao_bud.get_item_obj(day_hour_road)
+    day_hour_way = yao_bud.make_l1_way(day_hour_str)
+    day_hour_item = yao_bud.get_item_obj(day_hour_way)
     day_hour_item._originunit.set_originhold(acct_name="Bob", importance=2)
-    yao_bud.add_fact(fbase=day_hour_road, fneed=day_hour_road, fopen=0, fnigh=23)
-    time_minute = yao_bud.make_l1_road("day_minute")
+    yao_bud.add_fact(fbase=day_hour_way, fneed=day_hour_way, fopen=0, fnigh=23)
+    time_minute = yao_bud.make_l1_way("day_minute")
     yao_bud.add_fact(fbase=time_minute, fneed=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
     yao_bud.originunit.set_originhold(yao_str, 1)
@@ -90,9 +90,9 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario2_itemroot_teamunit():
     sue_bud = budunit_shop("Sue")
     x_teamunit = teamunit_shop()
     x_teamunit.set_teamlink(team_title=run_str)
-    root_road = to_road(sue_bud.fisc_tag)
-    sue_bud.edit_item_attr(root_road, teamunit=x_teamunit)
-    root_item = sue_bud.get_item_obj(root_road)
+    root_way = to_way(sue_bud.fisc_tag)
+    sue_bud.edit_item_attr(root_way, teamunit=x_teamunit)
+    root_item = sue_bud.get_item_obj(root_way)
     x_gogo_want = 5
     x_stop_want = 11
     root_item.gogo_want = x_gogo_want
@@ -119,8 +119,8 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario3_With_itemroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    root_road = to_road(sue_bud.fisc_tag)
-    sue_bud.edit_item_attr(road=root_road, healerlink=run_healerlink)
+    root_way = to_way(sue_bud.fisc_tag)
+    sue_bud.edit_item_attr(way=root_way, healerlink=run_healerlink)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -140,11 +140,11 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario4_itemkid_TeamUnit():
     yao_acctunit.add_membership(run_str)
 
     morn_str = "morning"
-    morn_road = sue_bud.make_l1_road(morn_str)
+    morn_way = sue_bud.make_l1_way(morn_str)
     sue_bud.set_l1_item(itemunit_shop(morn_str))
     x_teamunit = teamunit_shop()
     x_teamunit.set_teamlink(team_title=run_str)
-    sue_bud.edit_item_attr(teamunit=x_teamunit, road=morn_road)
+    sue_bud.edit_item_attr(teamunit=x_teamunit, way=morn_way)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -177,9 +177,9 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    root_road = to_road(zia_bud.fisc_tag)
-    zia_bud.edit_item_attr(road=root_road, healerlink=run_healerlink)
-    zia_bud.edit_item_attr(road=root_road, problem_bool=True)
+    root_way = to_way(zia_bud.fisc_tag)
+    zia_bud.edit_item_attr(way=root_way, healerlink=run_healerlink)
+    zia_bud.edit_item_attr(way=root_way, problem_bool=True)
 
     # WHEN
     x_json = zia_bud.get_json()
@@ -231,13 +231,13 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # ESTABLISH
     yao_bud = budunit_v001()
     day_hour_str = "day_hour"
-    day_hour_road = yao_bud.make_l1_road(day_hour_str)
-    yao_bud.add_fact(fbase=day_hour_road, fneed=day_hour_road, fopen=0, fnigh=23)
+    day_hour_way = yao_bud.make_l1_way(day_hour_str)
+    yao_bud.add_fact(fbase=day_hour_way, fneed=day_hour_way, fopen=0, fnigh=23)
     day_min_str = "day_minute"
-    day_min_road = yao_bud.make_l1_road(day_min_str)
-    yao_bud.add_fact(fbase=day_min_road, fneed=day_min_road, fopen=0, fnigh=59)
-    x_factunit = factunit_shop(day_min_road, day_min_road, 5, 59)
-    yao_bud.edit_item_attr(road=x_factunit.fbase, factunit=x_factunit)
+    day_min_way = yao_bud.make_l1_way(day_min_str)
+    yao_bud.add_fact(fbase=day_min_way, fneed=day_min_way, fopen=0, fnigh=59)
+    x_factunit = factunit_shop(day_min_way, day_min_way, 5, 59)
+    yao_bud.edit_item_attr(way=x_factunit.fbase, factunit=x_factunit)
     yao_bud.set_max_tree_traverse(2)
     yao_str = "Yao"
     yao_bud.originunit.set_originhold(yao_str, 1)
@@ -261,7 +261,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     kids = itemroot_dict[_kids]
     day_min_dict = kids[day_min_str]
     day_min_factunits_dict = day_min_dict["factunits"]
-    day_min_item_x = yao_bud.get_item_obj(day_min_road)
+    day_min_item_x = yao_bud.get_item_obj(day_min_way)
     print(f"{day_min_factunits_dict=}")
     assert len(day_min_factunits_dict) == 1
     assert len(day_min_factunits_dict) == len(day_min_item_x.factunits)
@@ -269,10 +269,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     _reasonunits = "reasonunits"
     cont_str = "Freelancing"
     ulti_str = "Ultimate Frisbee"
-    cont_road = yao_bud.make_l1_road(cont_str)
-    ulti_road = yao_bud.make_l1_road(ulti_str)
-    cont_item = yao_bud.get_item_obj(cont_road)
-    ulti_item = yao_bud.get_item_obj(ulti_road)
+    cont_way = yao_bud.make_l1_way(cont_str)
+    ulti_way = yao_bud.make_l1_way(ulti_str)
+    cont_item = yao_bud.get_item_obj(cont_way)
+    ulti_item = yao_bud.get_item_obj(ulti_way)
     cont_reasonunits_dict = itemroot_dict[_kids][cont_str][_reasonunits]
     ulti_reasonunits_dict = itemroot_dict[_kids][ulti_str][_reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_item.reasonunits)
@@ -310,12 +310,12 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     zia_bud.set_last_pack_id(zia_last_pack_id)
 
     shave_str = "shave"
-    shave_road = zia_bud.make_l1_road(shave_str)
-    shave_item_y1 = zia_bud.get_item_obj(shave_road)
+    shave_way = zia_bud.make_l1_way(shave_str)
+    shave_item_y1 = zia_bud.get_item_obj(shave_way)
     shave_item_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_item_y1.problem_bool = True
-    # print(f"{shave_road=}")
-    # print(f"{json_shave_item.item_tag=} {json_shave_item.parent_road=}")
+    # print(f"{shave_way=}")
+    # print(f"{json_shave_item.item_tag=} {json_shave_item.parent_way=}")
 
     sue_str = "Sue"
     zia_bud.add_acctunit(acct_name=sue_str, credit_belief=199, debtit_belief=199)
@@ -328,18 +328,18 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_teamunit = teamunit_shop()
     run_teamunit.set_teamlink(team_title=run_str)
-    root_road = to_road(zia_bud.fisc_tag)
-    zia_bud.edit_item_attr(root_road, teamunit=run_teamunit)
+    root_way = to_way(zia_bud.fisc_tag)
+    zia_bud.edit_item_attr(root_way, teamunit=run_teamunit)
     xio_teamunit = teamunit_shop()
     xio_teamunit.set_teamlink(team_title=xio_str)
-    zia_bud.edit_item_attr(shave_road, teamunit=xio_teamunit)
-    zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(xio_str))
-    zia_bud.edit_item_attr(shave_road, awardlink=awardlink_shop(sue_str))
-    zia_bud.edit_item_attr(root_road, awardlink=awardlink_shop(sue_str))
+    zia_bud.edit_item_attr(shave_way, teamunit=xio_teamunit)
+    zia_bud.edit_item_attr(shave_way, awardlink=awardlink_shop(xio_str))
+    zia_bud.edit_item_attr(shave_way, awardlink=awardlink_shop(sue_str))
+    zia_bud.edit_item_attr(root_way, awardlink=awardlink_shop(sue_str))
     # add healerlink to shave itemunit
     run_healerlink = healerlink_shop({run_str})
-    zia_bud.edit_item_attr(shave_road, healerlink=run_healerlink)
-    shave_item = zia_bud.get_item_obj(shave_road)
+    zia_bud.edit_item_attr(shave_way, healerlink=run_healerlink)
+    shave_item = zia_bud.get_item_obj(shave_way)
     zia_gogo_want = 75
     zia_stop_want = 77
     shave_item.gogo_want = zia_gogo_want
@@ -379,8 +379,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     # assert json_bud._groups == zia_bud._groups
 
     json_itemroot = json_bud.itemroot
-    assert json_itemroot.parent_road == ""
-    assert json_itemroot.parent_road == zia_bud.itemroot.parent_road
+    assert json_itemroot.parent_way == ""
+    assert json_itemroot.parent_way == zia_bud.itemroot.parent_way
     assert json_itemroot.reasonunits == {}
     assert json_itemroot.teamunit == zia_bud.itemroot.teamunit
     assert json_itemroot.teamunit == run_teamunit
@@ -392,17 +392,17 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert len(json_bud.itemroot._kids) == 2
 
     weekday_str = "weekdays"
-    weekday_road = json_bud.make_l1_road(weekday_str)
-    weekday_item_x = json_bud.get_item_obj(weekday_road)
+    weekday_way = json_bud.make_l1_way(weekday_str)
+    weekday_item_x = json_bud.get_item_obj(weekday_way)
     assert len(weekday_item_x._kids) == 2
 
     sunday_str = "Sunday"
-    sunday_road = json_bud.make_road(weekday_road, sunday_str)
-    sunday_item = json_bud.get_item_obj(sunday_road)
+    sunday_way = json_bud.make_way(weekday_way, sunday_str)
+    sunday_item = json_bud.get_item_obj(sunday_way)
     assert sunday_item.mass == 20
 
-    json_shave_item = json_bud.get_item_obj(shave_road)
-    zia_shave_item = zia_bud.get_item_obj(shave_road)
+    json_shave_item = json_bud.get_item_obj(shave_way)
+    zia_shave_item = zia_bud.get_item_obj(shave_way)
     assert len(json_shave_item.reasonunits) == 1
     assert json_shave_item.teamunit == zia_shave_item.teamunit
     assert json_shave_item.teamunit == xio_teamunit
@@ -437,7 +437,7 @@ def test_budunit_get_from_json_ReturnsCorrectItemRoot():
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
-    json_itemroot = json_bud.get_item_obj(to_road(zia_bud.fisc_tag))
+    json_itemroot = json_bud.get_item_obj(to_way(zia_bud.fisc_tag))
     assert json_itemroot.gogo_want == zia_gogo_want
     assert json_itemroot.stop_want == zia_stop_want
 
@@ -499,21 +499,21 @@ def test_budunit_get_from_json_ReturnsObj_Scenario7_itemroot_bridge_IsCorrectlyS
     slash_str = "/"
     run_str = "runners"
     sue_bud = budunit_shop("Sue", bridge=slash_str)
-    root_road = to_road(sue_bud.fisc_tag, slash_str)
+    root_way = to_way(sue_bud.fisc_tag, slash_str)
     day_hour_str = "day_hour"
-    day_hour_road = sue_bud.make_l1_road(day_hour_str)
-    sue_bud.add_item(day_hour_road)
+    day_hour_way = sue_bud.make_l1_way(day_hour_str)
+    sue_bud.add_item(day_hour_way)
     assert sue_bud.bridge == slash_str
-    assert sue_bud.get_item_obj(root_road).bridge == slash_str
-    assert sue_bud.get_item_obj(day_hour_road).bridge == slash_str
+    assert sue_bud.get_item_obj(root_way).bridge == slash_str
+    assert sue_bud.get_item_obj(day_hour_way).bridge == slash_str
 
     # WHEN
     after_bob_bud = budunit_get_from_json(sue_bud.get_json())
 
     # THEN
     assert after_bob_bud.bridge == slash_str
-    assert after_bob_bud.get_item_obj(root_road).bridge == slash_str
-    assert after_bob_bud.get_item_obj(day_hour_road).bridge == slash_str
+    assert after_bob_bud.get_item_obj(root_way).bridge == slash_str
+    assert after_bob_bud.get_item_obj(day_hour_way).bridge == slash_str
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():
@@ -560,12 +560,12 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
     assert ccn2_bud.itemroot.item_tag == x2_bud.itemroot.item_tag
-    assert ccn2_bud.itemroot.parent_road == x2_bud.itemroot.parent_road
+    assert ccn2_bud.itemroot.parent_way == x2_bud.itemroot.parent_way
     assert ccn2_bud.itemroot.fund_coin == x2_bud.itemroot.fund_coin
-    shave_road = ccn2_bud.make_l1_road("shave")
-    week_road = ccn2_bud.make_l1_road("weekdays")
-    # assert ccn2_bud.get_item_obj(shave_road) == x2_bud.get_item_obj(shave_road)
-    # assert ccn2_bud.get_item_obj(week_road) == x2_bud.get_item_obj(week_road)
+    shave_way = ccn2_bud.make_l1_way("shave")
+    week_way = ccn2_bud.make_l1_way("weekdays")
+    # assert ccn2_bud.get_item_obj(shave_way) == x2_bud.get_item_obj(shave_way)
+    # assert ccn2_bud.get_item_obj(week_way) == x2_bud.get_item_obj(week_way)
     # assert ccn2_bud.itemroot == x2_bud.itemroot
     assert ccn2_bud.get_dict() == x2_bud.get_dict()
 

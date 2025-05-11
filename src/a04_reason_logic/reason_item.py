@@ -1,10 +1,10 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
-from src.a01_road_logic.road import (
-    RoadUnit,
-    rebuild_road,
-    find_replace_road_key_dict,
+from src.a01_way_logic.way import (
+    WayUnit,
+    rebuild_way,
+    find_replace_way_key_dict,
     replace_bridge,
-    is_heir_road,
+    is_heir_way,
     default_bridge_if_None,
 )
 from copy import deepcopy as copy_deepcopy
@@ -17,8 +17,8 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    fbase: RoadUnit
-    fneed: RoadUnit
+    fbase: WayUnit
+    fneed: WayUnit
     fopen: float = None
     fnigh: float = None
 
@@ -37,9 +37,7 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def set_attr(
-        self, fneed: RoadUnit = None, fopen: float = None, fnigh: float = None
-    ):
+    def set_attr(self, fneed: WayUnit = None, fopen: float = None, fnigh: float = None):
         if fneed is not None:
             self.fneed = fneed
         if fopen is not None:
@@ -52,14 +50,14 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        self.fbase = rebuild_road(self.fbase, old_road, new_road)
-        self.fneed = rebuild_road(self.fneed, old_road, new_road)
+    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+        self.fbase = rebuild_way(self.fbase, old_way, new_way)
+        self.fneed = rebuild_way(self.fneed, old_way, new_way)
 
-    def get_obj_key(self) -> RoadUnit:
+    def get_obj_key(self) -> WayUnit:
         return self.fbase
 
-    def get_tuple(self) -> tuple[RoadUnit, RoadUnit, float, float]:
+    def get_tuple(self) -> tuple[WayUnit, WayUnit, float, float]:
         return (self.fbase, self.fneed, self.fopen, self.fnigh)
 
 
@@ -69,15 +67,15 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    fbase: RoadUnit = None,
-    fneed: RoadUnit = None,
+    fbase: WayUnit = None,
+    fneed: WayUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
     return FactUnit(fbase=fbase, fneed=fneed, fopen=fopen, fnigh=fnigh)
 
 
-def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
+def factunits_get_from_dict(x_dict: dict) -> dict[WayUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_base = fact_dict["base"]
@@ -104,14 +102,14 @@ def factunits_get_from_dict(x_dict: dict) -> dict[RoadUnit, FactUnit]:
 
 
 def get_factunit_from_tuple(
-    fact_tuple: tuple[RoadUnit, RoadUnit, float, float],
+    fact_tuple: tuple[WayUnit, WayUnit, float, float],
 ) -> FactUnit:
     return factunit_shop(fact_tuple[0], fact_tuple[1], fact_tuple[2], fact_tuple[3])
 
 
 def get_dict_from_factunits(
-    factunits: dict[RoadUnit, FactUnit],
-) -> dict[RoadUnit, dict[str,]]:
+    factunits: dict[WayUnit, FactUnit],
+) -> dict[WayUnit, dict[str,]]:
     return {fact.fbase: fact.get_dict() for fact in factunits.values()}
 
 
@@ -127,8 +125,8 @@ class FactHeir(FactCore):
 
 
 def factheir_shop(
-    fbase: RoadUnit = None,
-    fneed: RoadUnit = None,
+    fbase: WayUnit = None,
+    fneed: WayUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
@@ -294,7 +292,7 @@ def premisestatusfinder_shop(
 
 @dataclass
 class PremiseUnit:
-    need: RoadUnit
+    need: WayUnit
     open: float = None
     nigh: float = None
     divisor: int = None
@@ -324,13 +322,13 @@ class PremiseUnit:
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
         self.need = replace_bridge(
-            road=self.need, old_bridge=old_bridge, new_bridge=self.bridge
+            way=self.need, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
-    def is_in_lineage(self, fact_fneed: RoadUnit):
-        return is_heir_road(
+    def is_in_lineage(self, fact_fneed: WayUnit):
+        return is_heir_way(
             src=self.need, heir=fact_fneed, bridge=self.bridge
-        ) or is_heir_road(src=fact_fneed, heir=self.need, bridge=self.bridge)
+        ) or is_heir_way(src=fact_fneed, heir=self.need, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -408,13 +406,13 @@ class PremiseUnit:
             or (self.open >= factheir.fopen and self.nigh < factheir.fnigh)
         )
 
-    def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        self.need = rebuild_road(self.need, old_road, new_road)
+    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+        self.need = rebuild_way(self.need, old_way, new_way)
 
 
 # class premisesshop:
 def premiseunit_shop(
-    need: RoadUnit,
+    need: WayUnit,
     open: float = None,
     nigh: float = None,
     divisor: float = None,
@@ -457,8 +455,8 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 
 @dataclass
 class ReasonCore:
-    base: RoadUnit
-    premises: dict[RoadUnit, PremiseUnit]
+    base: WayUnit
+    premises: dict[WayUnit, PremiseUnit]
     base_item_active_requisite: bool = None
     bridge: str = None
 
@@ -468,14 +466,14 @@ class ReasonCore:
         self.base = replace_bridge(self.base, old_bridge, new_bridge)
 
         new_premises = {}
-        for premise_road, premise_obj in self.premises.items():
-            new_premise_road = replace_bridge(
-                road=premise_road,
+        for premise_way, premise_obj in self.premises.items():
+            new_premise_way = replace_bridge(
+                way=premise_way,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
             premise_obj.set_bridge(self.bridge)
-            new_premises[new_premise_road] = premise_obj
+            new_premises[new_premise_way] = premise_obj
         self.premises = new_premises
 
     def get_obj_key(self):
@@ -486,7 +484,7 @@ class ReasonCore:
 
     def set_premise(
         self,
-        premise: RoadUnit,
+        premise: WayUnit,
         open: float = None,
         nigh: float = None,
         divisor: int = None,
@@ -499,28 +497,28 @@ class ReasonCore:
             bridge=self.bridge,
         )
 
-    def premise_exists(self, x_need: RoadUnit) -> bool:
+    def premise_exists(self, x_need: WayUnit) -> bool:
         return self.premises.get(x_need) != None
 
-    def get_premise(self, premise: RoadUnit) -> PremiseUnit:
+    def get_premise(self, premise: WayUnit) -> PremiseUnit:
         return self.premises.get(premise)
 
-    def del_premise(self, premise: RoadUnit):
+    def del_premise(self, premise: WayUnit):
         try:
             self.premises.pop(premise)
         except KeyError as e:
             raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
 
-    def find_replace_road(self, old_road: RoadUnit, new_road: RoadUnit):
-        self.base = rebuild_road(self.base, old_road, new_road)
-        self.premises = find_replace_road_key_dict(
-            dict_x=self.premises, old_road=old_road, new_road=new_road
+    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+        self.base = rebuild_way(self.base, old_way, new_way)
+        self.premises = find_replace_way_key_dict(
+            dict_x=self.premises, old_way=old_way, new_way=new_way
         )
 
 
 def reasoncore_shop(
-    base: RoadUnit,
-    premises: dict[RoadUnit, PremiseUnit] = None,
+    base: WayUnit,
+    premises: dict[WayUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
     bridge: str = None,
 ):
@@ -536,8 +534,8 @@ def reasoncore_shop(
 class ReasonUnit(ReasonCore):
     def get_dict(self) -> dict[str, str]:
         premises_dict = {
-            premise_road: premise.get_dict()
-            for premise_road, premise in self.premises.items()
+            premise_way: premise.get_dict()
+            for premise_way, premise in self.premises.items()
         }
         x_dict = {"base": self.base}
         if premises_dict != {}:
@@ -548,8 +546,8 @@ class ReasonUnit(ReasonCore):
 
 
 def reasonunit_shop(
-    base: RoadUnit,
-    premises: dict[RoadUnit, PremiseUnit] = None,
+    base: WayUnit,
+    premises: dict[WayUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
     bridge: str = None,
 ):
@@ -588,7 +586,7 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_base_fact(self, factheirs: dict[RoadUnit, FactHeir]) -> FactHeir:
+    def _get_base_fact(self, factheirs: dict[WayUnit, FactHeir]) -> FactHeir:
         base_fact = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
@@ -625,7 +623,7 @@ class ReasonHeir(ReasonCore):
         if self._status and self._task is None:
             self._task = False
 
-    def set_status(self, factheirs: dict[RoadUnit, FactHeir]):
+    def set_status(self, factheirs: dict[WayUnit, FactHeir]):
         self.clear_status()
         self._set_premise_status(self._get_base_fact(factheirs))
         any_premise_true, any_task_true = self.is_any_premise_true()
@@ -634,8 +632,8 @@ class ReasonHeir(ReasonCore):
 
 
 def reasonheir_shop(
-    base: RoadUnit,
-    premises: dict[RoadUnit, PremiseUnit] = None,
+    base: WayUnit,
+    premises: dict[WayUnit, PremiseUnit] = None,
     base_item_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
@@ -654,7 +652,7 @@ def reasonheir_shop(
 
 
 # class Reasonsshop:
-def reasons_get_from_dict(reasons_dict: dict) -> dict[RoadUnit, ReasonUnit]:
+def reasons_get_from_dict(reasons_dict: dict) -> dict[WayUnit, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(base=reason_dict["base"])

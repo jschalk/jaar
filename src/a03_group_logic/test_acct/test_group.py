@@ -1,7 +1,7 @@
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     get_default_fisc_tag as root_tag,
-    create_road,
+    create_way,
     default_bridge_if_None,
 )
 from src.a03_group_logic.group import membership_shop
@@ -31,8 +31,8 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_road = create_road(root_tag(), "nation-states")
-    usa_road = create_road(nation_road, "USA")
+    nation_way = create_way(root_tag(), "nation-states")
+    usa_way = create_way(nation_way, "USA")
 
     # WHEN
     swim_groupunit = groupunit_shop(group_label=swim_str)

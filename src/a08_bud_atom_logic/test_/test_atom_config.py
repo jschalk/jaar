@@ -36,16 +36,16 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     morph_str,
     numor_str,
-    parent_road_str,
+    parent_way_str,
     penny_str,
     respect_bit_str,
-    road_str,
+    way_str,
     stop_want_str,
     team_title_str,
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
-    type_RoadUnit_str,
+    type_WayUnit_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_insert,
@@ -361,8 +361,8 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if road_str() in new_jkey_keys:
-            new_jkey_keys.remove(road_str())
+        if way_str() in new_jkey_keys:
+            new_jkey_keys.remove(way_str())
         if base_str() in new_jkey_keys:
             new_jkey_keys.remove(base_str())
         if acct_name_str() in new_jkey_keys:
@@ -403,7 +403,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [road_str(), base_str(), "need"]
+    assert x_sorted_jkey_keys == [way_str(), base_str(), "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -528,7 +528,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     item_columns = cat_item.get(columns_str)
     assert len(item_columns) == 13
     assert item_columns.get("uid") is not None
-    assert item_columns.get(road_str()) is not None
+    assert item_columns.get(way_str()) is not None
     assert item_columns.get(begin_str()) is not None
     assert item_columns.get(close_str()) is not None
 
@@ -550,11 +550,11 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert x_atom_args_dimen_mapping
     assert x_atom_args_dimen_mapping.get(stop_want_str())
     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
-    assert x_atom_args_dimen_mapping.get(road_str())
-    road_dimens = x_atom_args_dimen_mapping.get(road_str())
-    assert bud_item_factunit_str() in road_dimens
-    assert bud_item_teamlink_str() in road_dimens
-    assert len(road_dimens) == 7
+    assert x_atom_args_dimen_mapping.get(way_str())
+    way_dimens = x_atom_args_dimen_mapping.get(way_str())
+    assert bud_item_factunit_str() in way_dimens
+    assert bud_item_teamlink_str() in way_dimens
+    assert len(way_dimens) == 7
     assert len(x_atom_args_dimen_mapping) == 41
 
 
@@ -584,7 +584,7 @@ def test_get_allowed_class_types_ReturnsObj():
         type_NameUnit_str(),
         type_LabelUnit_str(),
         type_TagUnit_str(),
-        type_RoadUnit_str(),
+        type_WayUnit_str(),
         "float",
         "bool",
         "TimeLinePoint",
@@ -644,7 +644,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(acct_name_str()) == type_NameUnit_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_title_str()) == type_LabelUnit_str()
-    assert x_class_types.get(base_str()) == type_RoadUnit_str()
+    assert x_class_types.get(base_str()) == type_WayUnit_str()
     assert x_class_types.get("base_item_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
@@ -657,7 +657,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("divisor") == "int"
-    assert x_class_types.get(fbase_str()) == type_RoadUnit_str()
+    assert x_class_types.get(fbase_str()) == type_WayUnit_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"
@@ -669,15 +669,15 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("need") == type_RoadUnit_str()
+    assert x_class_types.get("need") == type_WayUnit_str()
     assert x_class_types.get("nigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fneed") == type_RoadUnit_str()
+    assert x_class_types.get("fneed") == type_WayUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(road_str()) == type_RoadUnit_str()
+    assert x_class_types.get(way_str()) == type_WayUnit_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"

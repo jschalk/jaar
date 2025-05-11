@@ -1,4 +1,4 @@
-from src.a01_road_logic.road import get_default_fisc_tag as root_tag, create_road
+from src.a01_way_logic.way import get_default_fisc_tag as root_tag, create_way
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_item import (
     reasonunit_shop,
@@ -152,13 +152,13 @@ def test_ItemUnit_set_awardheirs_fund_give_fund_take_ReturnsObj_NoValues():
 def test_ItemUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     # ESTABLISH
     ball_str = "ball"
-    ball_road = create_road(ball_str)
+    ball_way = create_way(ball_str)
     run_str = "run"
-    run_road = create_road(ball_road, run_str)
+    run_way = create_way(ball_way, run_str)
     ball_item = itemunit_shop(ball_str)
-    run_premise = premiseunit_shop(need=run_road, open=0, nigh=7)
+    run_premise = premiseunit_shop(need=run_way, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
-    reasonheir = reasonheir_shop(run_road, premises=run_premises)
+    reasonheir = reasonheir_shop(run_way, premises=run_premises)
     reasonheirs = {reasonheir.base: reasonheir}
     assert ball_item._reasonheirs == {}
 
@@ -173,12 +173,12 @@ def test_ItemUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
 def test_ItemUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     # ESTABLISH
     ball_str = "ball"
-    ball_road = create_road(ball_str)
+    ball_way = create_way(ball_str)
     run_str = "run"
-    run_road = create_road(ball_road, run_str)
-    run_premise = premiseunit_shop(need=run_road, open=0, nigh=7)
+    run_way = create_way(ball_way, run_str)
+    run_premise = premiseunit_shop(need=run_way, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
-    run_reasonunit = reasonunit_shop(base=run_road, premises=run_premises)
+    run_reasonunit = reasonunit_shop(base=run_way, premises=run_premises)
     run_reasonunits = {run_reasonunit.base: run_reasonunit}
     ball_item = itemunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_item.reasonunits != {}
@@ -187,7 +187,7 @@ def test_ItemUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_item.set_reasonheirs(reasonheirs={}, bud_item_dict={})
 
     # THEN
-    reasonheir = reasonheir_shop(run_road, premises=run_premises)
+    reasonheir = reasonheir_shop(run_way, premises=run_premises)
     reasonheirs = {reasonheir.base: reasonheir}
     assert ball_item._reasonheirs == reasonheirs
 
@@ -207,30 +207,30 @@ def test_ItemUnit_set_range_factheirs_SetsAttrNoParameters():
 def test_ItemUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     week_str = "week"
-    week_road = create_road(root_tag(), week_str)
+    week_way = create_way(root_tag(), week_str)
     week_open = 3
     week_nigh = 7
     week_addin = 10
-    week_item = itemunit_shop(week_str, parent_road=root_tag(), addin=week_addin)
-    week_factheir = factheir_shop(week_road, week_road, week_open, week_nigh)
+    week_item = itemunit_shop(week_str, parent_way=root_tag(), addin=week_addin)
+    week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
     tue_str = "Tue"
-    tue_road = create_road(week_road, tue_str)
+    tue_way = create_way(week_way, tue_str)
     tue_addin = 100
-    tue_item = itemunit_shop(tue_str, parent_road=week_road, addin=tue_addin)
+    tue_item = itemunit_shop(tue_str, parent_way=week_way, addin=tue_addin)
     ball_str = "ball"
-    ball_road = create_road(root_tag(), ball_str)
+    ball_way = create_way(root_tag(), ball_str)
     ball_item = itemunit_shop(ball_str)
     ball_item._set_factheir(week_factheir)
-    tue_reasonheirs = {tue_road: reasonheir_shop(tue_road, None, False)}
-    x_bud_item_dict = {week_item.get_road(): week_item, tue_item.get_road(): tue_item}
+    tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
+    x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
     ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
 
-    x_range_inheritors = {tue_road: week_road}
+    x_range_inheritors = {tue_way: week_way}
     assert len(ball_item._reasonheirs) == 1
-    assert ball_item._factheirs == {week_road: week_factheir}
-    assert ball_item._factheirs.get(week_road)
+    assert ball_item._factheirs == {week_way: week_factheir}
+    assert ball_item._factheirs.get(week_way)
     assert len(ball_item._factheirs) == 1
-    assert ball_item._factheirs.get(tue_road) is None
+    assert ball_item._factheirs.get(tue_way) is None
 
     # WHEN
     ball_item.set_range_factheirs(x_bud_item_dict, x_range_inheritors)
@@ -238,9 +238,9 @@ def test_ItemUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # THEN
     tue_open = 113
     tue_nigh = 117
-    tue_factheir = factheir_shop(tue_road, tue_road, tue_open, tue_nigh)
+    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_nigh)
     assert len(ball_item._factheirs) == 2
-    assert ball_item._factheirs == {tue_road: tue_factheir, week_road: week_factheir}
+    assert ball_item._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
 
 
 def test_ItemUnit_set_reasonunit_SetsAttr():

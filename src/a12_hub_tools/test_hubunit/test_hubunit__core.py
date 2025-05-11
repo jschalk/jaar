@@ -1,8 +1,8 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_road_logic.road import (
+from src.a01_way_logic.way import (
     default_bridge_if_None,
-    create_road_from_tags,
-    create_road,
+    create_way_from_tags,
+    create_way,
     get_default_fisc_tag as root_tag,
 )
 from src.a02_finance_logic.finance_config import (
@@ -28,7 +28,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit.fisc_mstr_dir
     assert not x_hubunit.fisc_tag
     assert not x_hubunit.owner_name
-    assert not x_hubunit.keep_road
+    assert not x_hubunit.keep_way
     assert not x_hubunit.bridge
     assert not x_hubunit.fund_pool
     assert not x_hubunit.fund_coin
@@ -40,7 +40,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit._packs_dir
 
 
-def test_HubUnit_RaisesError_keep_road_DoesNotExist():
+def test_HubUnit_RaisesError_keep_way_DoesNotExist():
     # ESTABLISH
     bob_str = "Bob"
     bob_hubunit = HubUnit(bob_str)
@@ -50,7 +50,7 @@ def test_HubUnit_RaisesError_keep_road_DoesNotExist():
         bob_hubunit.keep_dir()
     assert (
         str(excinfo.value)
-        == f"HubUnit '{bob_str}' cannot save to keep_dir because it does not have keep_road."
+        == f"HubUnit '{bob_str}' cannot save to keep_dir because it does not have keep_way."
     )
 
 
@@ -71,7 +71,7 @@ def test_hubunit_shop_ReturnsObj():
         fisc_mstr_dir=x_fisc_mstr_dir,
         fisc_tag=x_fisc_tag,
         owner_name=sue_str,
-        keep_road=None,
+        keep_way=None,
         bridge=x_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
@@ -100,16 +100,16 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_road = create_road(root_tag(), nation_str)
+    nation_way = create_way(root_tag(), nation_str)
     usa_str = "USA"
-    usa_road = create_road(nation_road, usa_str)
+    usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
-    texas_road = create_road(usa_road, texas_str)
+    texas_way = create_way(usa_way, texas_str)
     fisc_mstr_dir = env_dir()
     accord23_str = "accord23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str, texas_road)
+    sue_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str, texas_way)
 
     # THEN
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
@@ -125,8 +125,8 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.respect_bit == default_respect_bit_if_None()
     assert sue_hubunit.penny == filter_penny()
     x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
-    assert sue_hubunit.keep_road == texas_road
-    assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_road)
+    assert sue_hubunit.keep_way == texas_way
+    assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_way)
     bob_str = "Bob"
     assert sue_hubunit.dutys_dir() == x_dutys_path
     assert sue_hubunit.plans_dir() == x_plans_path
@@ -169,20 +169,20 @@ def test_get_keep_path_ReturnsObj():
     elpaso_str = "el paso"
     kern_str = "kern"
     itemroot = "itemroot"
-    texas_road = create_road_from_tags([peru_str, texas_str])
-    dallas_road = create_road_from_tags([peru_str, texas_str, dallas_str])
-    elpaso_road = create_road_from_tags([peru_str, texas_str, elpaso_str])
-    kern_road = create_road_from_tags([peru_str, texas_str, elpaso_str, kern_str])
+    texas_way = create_way_from_tags([peru_str, texas_str])
+    dallas_way = create_way_from_tags([peru_str, texas_str, dallas_str])
+    elpaso_way = create_way_from_tags([peru_str, texas_str, elpaso_str])
+    kern_way = create_way_from_tags([peru_str, texas_str, elpaso_str, kern_str])
 
     # WHEN
-    texas_path = get_keep_path(sue_hubunit, texas_road)
-    dallas_path = get_keep_path(sue_hubunit, dallas_road)
-    elpaso_path = get_keep_path(sue_hubunit, elpaso_road)
-    kern_path = get_keep_path(sue_hubunit, kern_road)
+    texas_path = get_keep_path(sue_hubunit, texas_way)
+    dallas_path = get_keep_path(sue_hubunit, dallas_way)
+    elpaso_path = get_keep_path(sue_hubunit, elpaso_way)
+    kern_path = get_keep_path(sue_hubunit, kern_way)
 
     # THEN
     itemroot_dir = create_path(sue_hubunit._keeps_dir, peru_str)
-    print(f"{kern_road=}")
+    print(f"{kern_way=}")
     print(f"{itemroot_dir=}")
     assert texas_path == create_path(itemroot_dir, texas_str)
     assert dallas_path == create_path(texas_path, dallas_str)
@@ -190,9 +190,9 @@ def test_get_keep_path_ReturnsObj():
     assert kern_path == create_path(elpaso_path, kern_str)
 
     # WHEN / THEN
-    diff_root_texas_road = create_road_from_tags([peru_str, texas_str])
-    diff_root_dallas_road = create_road_from_tags([peru_str, texas_str, dallas_str])
-    diff_root_elpaso_road = create_road_from_tags([peru_str, texas_str, elpaso_str])
-    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_road)
-    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_road)
-    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_road)
+    diff_root_texas_way = create_way_from_tags([peru_str, texas_str])
+    diff_root_dallas_way = create_way_from_tags([peru_str, texas_str, dallas_str])
+    diff_root_elpaso_way = create_way_from_tags([peru_str, texas_str, elpaso_str])
+    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_way)
+    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_way)
+    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_way)

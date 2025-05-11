@@ -18,7 +18,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "road": {
+        "way": {
             "otx_key": true
         },
         "take_force": {

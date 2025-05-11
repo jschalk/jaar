@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
-    road_str,
+    way_str,
     base_str,
     fbase_str,
     need_str,
@@ -64,15 +64,15 @@ def test_bud_itemunit_get_obj_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road}
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way}
 
     # WHEN
     x_obj = bud_itemunit_get_obj(sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road)
+    assert x_obj == sue_bud.get_item_obj(casa_way)
 
 
 def test_bud_item_awardlink_get_obj_ReturnsObj():
@@ -80,78 +80,78 @@ def test_bud_item_awardlink_get_obj_ReturnsObj():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     swim_str = "swim"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road, "awardee_title": swim_str}
-    sue_bud.add_item(casa_road)
-    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way, "awardee_title": swim_str}
+    sue_bud.add_item(casa_way)
+    sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
 
     # WHEN
     x_obj = bud_item_awardlink_get_obj(sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road).get_awardlink(swim_str)
+    assert x_obj == sue_bud.get_item_obj(casa_way).get_awardlink(swim_str)
 
 
 def test_bud_item_reasonunit_get_obj_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    week_road = sue_bud.make_l1_road("week")
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road, base_str(): week_road}
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(week_road)
-    sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
+    casa_way = sue_bud.make_l1_way(casa_str)
+    week_way = sue_bud.make_l1_way("week")
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way, base_str(): week_way}
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(week_way)
+    sue_bud.get_item_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
 
     # WHEN
     x_obj = bud_item_reasonunit_get_obj(sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road).get_reasonunit(week_road)
+    assert x_obj == sue_bud.get_item_obj(casa_way).get_reasonunit(week_way)
 
 
 def test_bud_item_reason_premiseunit_get_obj_ReturnsObj():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     week_str = "week"
-    week_road = sue_bud.make_l1_road(week_str)
-    thur_road = sue_bud.make_road(week_road, "thur")
-    casa_jkeys = {road_str(): casa_road, base_str(): week_road, need_str(): thur_road}
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(week_road)
-    sue_bud.add_item(thur_road)
-    casa_item = sue_bud.get_item_obj(casa_road)
-    casa_item.set_reasonunit(reasonunit_shop(week_road))
-    casa_item.get_reasonunit(week_road).set_premise(thur_road)
+    week_way = sue_bud.make_l1_way(week_str)
+    thur_way = sue_bud.make_way(week_way, "thur")
+    casa_jkeys = {way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(week_way)
+    sue_bud.add_item(thur_way)
+    casa_item = sue_bud.get_item_obj(casa_way)
+    casa_item.set_reasonunit(reasonunit_shop(week_way))
+    casa_item.get_reasonunit(week_way).set_premise(thur_way)
 
     # WHEN
     x_obj = premiseunit_get_obj(sue_bud, casa_jkeys)
     # THEN
     assert x_obj
-    assert x_obj == casa_item.get_reasonunit(week_road).get_premise(thur_road)
+    assert x_obj == casa_item.get_reasonunit(week_way).get_premise(thur_way)
 
 
 def test_bud_item_factunit_get_obj_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    week_road = sue_bud.make_l1_road("week")
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road, fbase_str(): week_road}
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(week_road)
-    sue_bud.get_item_obj(casa_road).set_factunit(factunit_shop(week_road))
+    casa_way = sue_bud.make_l1_way(casa_str)
+    week_way = sue_bud.make_l1_way("week")
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way, fbase_str(): week_way}
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(week_way)
+    sue_bud.get_item_obj(casa_way).set_factunit(factunit_shop(week_way))
 
     # WHEN
     x_obj = bud_item_factunit_get_obj(sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road).factunits.get(week_road)
+    assert x_obj == sue_bud.get_item_obj(casa_way).factunits.get(week_way)
 
 
 def test_bud_get_obj_ReturnsObj_BudUnit():
@@ -202,15 +202,15 @@ def test_bud_get_obj_ReturnsObj_bud_itemunit_get_obj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road}
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way}
 
     # WHEN
     x_obj = bud_get_obj(bud_itemunit_str(), sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road)
+    assert x_obj == sue_bud.get_item_obj(casa_way)
 
 
 def test_bud_get_obj_ReturnsObj_bud_item_awardlink_get_obj():
@@ -218,75 +218,75 @@ def test_bud_get_obj_ReturnsObj_bud_item_awardlink_get_obj():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     swim_str = "swim"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road, "awardee_title": swim_str}
-    sue_bud.add_item(casa_road)
-    sue_bud.get_item_obj(casa_road).set_awardlink(awardlink_shop(swim_str))
+    casa_way = sue_bud.make_l1_way(casa_str)
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way, "awardee_title": swim_str}
+    sue_bud.add_item(casa_way)
+    sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
 
     # WHEN
     x_obj = bud_get_obj(bud_item_awardlink_str(), sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road).get_awardlink(swim_str)
+    assert x_obj == sue_bud.get_item_obj(casa_way).get_awardlink(swim_str)
 
 
 def test_bud_get_obj_ReturnsObj_bud_item_reasonunit_get_obj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    week_road = sue_bud.make_l1_road("week")
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road, base_str(): week_road}
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(week_road)
-    sue_bud.get_item_obj(casa_road).set_reasonunit(reasonunit_shop(week_road))
+    casa_way = sue_bud.make_l1_way(casa_str)
+    week_way = sue_bud.make_l1_way("week")
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way, base_str(): week_way}
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(week_way)
+    sue_bud.get_item_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
 
     # WHEN
     x_obj = bud_get_obj(bud_item_reasonunit_str(), sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road).get_reasonunit(week_road)
+    assert x_obj == sue_bud.get_item_obj(casa_way).get_reasonunit(week_way)
 
 
 def test_bud_get_obj_ReturnsObj_bud_item_reason_premiseunit_get_obj():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
+    casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     week_str = "week"
-    week_road = sue_bud.make_l1_road(week_str)
-    thur_road = sue_bud.make_road(week_road, "thur")
-    casa_jkeys = {road_str(): casa_road, base_str(): week_road, need_str(): thur_road}
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(week_road)
-    sue_bud.add_item(thur_road)
-    casa_item = sue_bud.get_item_obj(casa_road)
-    casa_item.set_reasonunit(reasonunit_shop(week_road))
-    casa_item.get_reasonunit(week_road).set_premise(thur_road)
+    week_way = sue_bud.make_l1_way(week_str)
+    thur_way = sue_bud.make_way(week_way, "thur")
+    casa_jkeys = {way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(week_way)
+    sue_bud.add_item(thur_way)
+    casa_item = sue_bud.get_item_obj(casa_way)
+    casa_item.set_reasonunit(reasonunit_shop(week_way))
+    casa_item.get_reasonunit(week_way).set_premise(thur_way)
 
     # WHEN
     x_obj = bud_get_obj(premiseunit_str(), sue_bud, casa_jkeys)
     # THEN
     assert x_obj
-    assert x_obj == casa_item.get_reasonunit(week_road).get_premise(thur_road)
+    assert x_obj == casa_item.get_reasonunit(week_way).get_premise(thur_way)
 
 
 def test_bud_get_obj_ReturnsObj_bud_item_factunit_get_obj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
-    casa_road = sue_bud.make_l1_road(casa_str)
-    week_road = sue_bud.make_l1_road("week")
-    sue_bud.add_item(casa_road)
-    jkeys = {road_str(): casa_road, fbase_str(): week_road}
-    sue_bud.add_item(casa_road)
-    sue_bud.add_item(week_road)
-    sue_bud.get_item_obj(casa_road).set_factunit(factunit_shop(week_road))
+    casa_way = sue_bud.make_l1_way(casa_str)
+    week_way = sue_bud.make_l1_way("week")
+    sue_bud.add_item(casa_way)
+    jkeys = {way_str(): casa_way, fbase_str(): week_way}
+    sue_bud.add_item(casa_way)
+    sue_bud.add_item(week_way)
+    sue_bud.get_item_obj(casa_way).set_factunit(factunit_shop(week_way))
 
     # WHEN
     x_obj = bud_get_obj(bud_item_factunit_str(), sue_bud, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_bud.get_item_obj(casa_road).factunits.get(week_road)
+    assert x_obj == sue_bud.get_item_obj(casa_way).factunits.get(week_way)

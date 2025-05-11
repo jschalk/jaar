@@ -1,18 +1,18 @@
-from src.a01_road_logic.road import (
-    create_road_from_tags,
+from src.a01_way_logic.way import (
+    create_way_from_tags,
     get_default_fisc_tag,
-    RoadUnit,
+    WayUnit,
 )
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a13_bud_listen_logic._utils.env_a13 import get_module_temp_dir
 
 
-def get_texas_road() -> RoadUnit:
+def get_texas_way() -> WayUnit:
     fisc_tag = get_default_fisc_tag()
     nation_str = "nation-state"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_road_from_tags([fisc_tag, nation_str, usa_str, texas_str])
+    return create_way_from_tags([fisc_tag, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
@@ -21,17 +21,17 @@ def get_texas_hubunit() -> HubUnit:
         get_module_temp_dir(),
         fisc_tag,
         owner_name="Sue",
-        keep_road=get_texas_road(),
+        keep_way=get_texas_way(),
         # pipeline_duty_plan_str(),
     )
 
 
-def get_dakota_road() -> RoadUnit:
+def get_dakota_way() -> WayUnit:
     fisc_tag = get_default_fisc_tag()
     nation_str = "nation-state"
     usa_str = "USA"
     dakota_str = "Dakota"
-    return create_road_from_tags([fisc_tag, nation_str, usa_str, dakota_str])
+    return create_way_from_tags([fisc_tag, nation_str, usa_str, dakota_str])
 
 
 def get_dakota_hubunit() -> HubUnit:
@@ -40,6 +40,6 @@ def get_dakota_hubunit() -> HubUnit:
         get_module_temp_dir(),
         fisc_tag,
         owner_name="Sue",
-        keep_road=get_dakota_road(),
+        keep_way=get_dakota_way(),
         # pipeline_duty_plan_str(),
     )
