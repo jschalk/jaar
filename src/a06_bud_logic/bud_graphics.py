@@ -23,7 +23,7 @@ def _get_dot_diameter(x_ratio: float):
 
 
 def _get_parent_y(x_item: ItemUnit, itemunit_y_coordinate_dict: dict) -> WayUnit:
-    parent_way = get_parent_way(x_item.get_way())
+    parent_way = get_parent_way(x_item.get_item_way())
     return itemunit_y_coordinate_dict.get(parent_way)
 
 
@@ -88,11 +88,11 @@ def _create_itemunit_traces(
 ):
     items = [x_bud.itemroot]
     y_itemunit_y_coordinate_dict = {None: 0}
-    prev_way = x_bud.itemroot.get_way()
+    prev_way = x_bud.itemroot.get_item_way()
     source_y = 0
     while items != []:
         x_item = items.pop(-1)
-        if is_sub_way(x_item.get_way(), prev_way) is False:
+        if is_sub_way(x_item.get_item_way(), prev_way) is False:
             source_y -= 1
         _add_individual_trace(
             trace_list=trace_list,
@@ -103,8 +103,8 @@ def _create_itemunit_traces(
             mode=mode,
         )
         items.extend(iter(x_item._kids.values()))
-        y_itemunit_y_coordinate_dict[x_item.get_way()] = source_y
-        prev_way = x_item.get_way()
+        y_itemunit_y_coordinate_dict[x_item.get_item_way()] = source_y
+        prev_way = x_item.get_item_way()
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):

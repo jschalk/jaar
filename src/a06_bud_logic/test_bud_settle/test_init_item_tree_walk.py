@@ -25,7 +25,7 @@ def test_BudUnit_set_item_dict_Scenario0():
     assert not root_item.close
     assert not root_item._gogo_calc
     assert not root_item._stop_calc
-    assert yao_bud._item_dict == {root_item.get_way(): root_item}
+    assert yao_bud._item_dict == {root_item.get_item_way(): root_item}
     assert yao_bud._reason_bases == set()
 
 

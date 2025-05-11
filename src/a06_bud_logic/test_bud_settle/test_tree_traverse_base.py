@@ -38,7 +38,7 @@ def test_BudUnit_clear_item_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._tree_traverse_count != x_tree_traverse_count
     assert sue_bud._tree_traverse_count == 0
     assert sue_bud._item_dict != x_item_dict
-    assert sue_bud._item_dict == {sue_bud.itemroot.get_way(): sue_bud.itemroot}
+    assert sue_bud._item_dict == {sue_bud.itemroot.get_item_way(): sue_bud.itemroot}
     assert sue_bud._offtrack_kids_mass_set == set()
     assert not sue_bud._reason_bases
     assert not sue_bud._range_inheritors
@@ -676,7 +676,7 @@ def test_BudUnit_settle_bud_Sets_itemroot_factheir_With_range_factheirs():
     # THEN
     # week_factunit = factunit_shop(week_way, week_way, week_open, week_nigh)
     # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    # x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
+    # x_bud_item_dict = {week_item.get_item_way(): week_item, tue_item.get_item_way(): tue_item}
     # ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
     # x_range_inheritors = {tue_way: week_way}
     # week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
@@ -725,7 +725,7 @@ def test_BudUnit_settle_bud_SetsItemUnit_factheir_With_range_factheirs():
     # THEN
     # week_factunit = factunit_shop(week_way, week_way, week_open, week_nigh)
     # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    # x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
+    # x_bud_item_dict = {week_item.get_item_way(): week_item, tue_item.get_item_way(): tue_item}
     # ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
     x_range_inheritors = {tue_way: week_way}
     week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)

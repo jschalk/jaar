@@ -399,10 +399,10 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     night_item = yao_bud._item_dict.get(night_way)
     # for item_x in yao_bud.get_agenda_dict():
     #     # if item_x._task != True:
-    #     #     print(f"{len(pledge_item_list)=} {item_x._task=} {item_x.get_way()}")
+    #     #     print(f"{len(pledge_item_list)=} {item_x._task=} {item_x.get_item_way()}")
     #     if item_x.item_tag == night_item_tag:
     #         night_item = item_x
-    #         print(f"{item_x.get_way()=}")
+    #         print(f"{item_x.get_item_way()=}")
 
     print(f"\nItem = '{night_str}' and reason '{gregtime_way}'")
     factheir_gregtime = night_item._factheirs.get(gregtime_way)

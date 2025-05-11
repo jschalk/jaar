@@ -205,7 +205,7 @@ def test_ItemUnit_get_way_ReturnsObj():
 
     # THEN
     ball_way = create_way(round_way, ball_str, bridge=slash_str)
-    assert ball_item.get_way() == ball_way
+    assert ball_item.get_item_way() == ball_way
 
 
 def test_ItemUnit_set_parent_way_SetsAttr():

@@ -61,17 +61,17 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_name: OwnerName):
 def generate_ingest_list(
     item_list: list[ItemUnit], debtor_amount: float, respect_bit: float
 ) -> list[ItemUnit]:
-    item_ledger = {x_item.get_way(): x_item.mass for x_item in item_list}
+    item_ledger = {x_item.get_item_way(): x_item.mass for x_item in item_list}
     mass_allot = allot_scale(item_ledger, debtor_amount, respect_bit)
     for x_itemunit in item_list:
-        x_itemunit.mass = mass_allot.get(x_itemunit.get_way())
+        x_itemunit.mass = mass_allot.get(x_itemunit.get_item_way())
     return item_list
 
 
 def _ingest_single_itemunit(listener: BudUnit, ingest_itemunit: ItemUnit):
-    mass_data = _create_mass_data(listener, ingest_itemunit.get_way())
+    mass_data = _create_mass_data(listener, ingest_itemunit.get_item_way())
 
-    if listener.item_exists(ingest_itemunit.get_way()) is False:
+    if listener.item_exists(ingest_itemunit.get_item_way()) is False:
         x_parent_way = ingest_itemunit.parent_way
         listener.set_item(ingest_itemunit, x_parent_way, create_missing_items=True)
 
@@ -313,9 +313,9 @@ def fneed_keep_plan_and_listen(
 
 def listen_to_plan_agenda(listener: BudUnit, plan: BudUnit):
     for x_item in plan._item_dict.values():
-        if listener.item_exists(x_item.get_way()) is False:
+        if listener.item_exists(x_item.get_item_way()) is False:
             listener.set_item(x_item, x_item.parent_way)
-        if listener.get_fact(x_item.get_way()) is False:
+        if listener.get_fact(x_item.get_item_way()) is False:
             listener.set_item(x_item, x_item.parent_way)
     for x_fact_way, x_fact_unit in plan.itemroot.factunits.items():
         listener.itemroot.set_factunit(x_fact_unit)

@@ -492,7 +492,9 @@ class BudUnit:
             raise Exception_keeps_justified(exception_str)
 
         x_items = self._item_dict.values()
-        return {x_item.get_way(): x_item for x_item in x_items if x_item.problem_bool}
+        return {
+            x_item.get_item_way(): x_item for x_item in x_items if x_item.problem_bool
+        }
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
@@ -503,7 +505,7 @@ class BudUnit:
             awardlinks=self.itemroot.awardlinks,
             uid=self.itemroot._uid,
             pledge=self.itemroot.pledge,
-            item_way=self.itemroot.get_way(),
+            item_way=self.itemroot.get_item_way(),
         )
 
         x_item_list = [self.itemroot]
@@ -523,7 +525,7 @@ class BudUnit:
             awardlinks=item_kid.awardlinks,
             uid=item_kid._uid,
             pledge=item_kid.pledge,
-            item_way=item_kid.get_way(),
+            item_way=item_kid.get_item_way(),
         )
         x_item_list.append(item_kid)
 
@@ -539,7 +541,7 @@ class BudUnit:
         for x_item in self.get_item_dict().values():
             if x_item._uid is None or item_uid_dict.get(x_item._uid) > 1:
                 new_item_uid_max = item_uid_max + 1
-                self.edit_item_attr(way=x_item.get_way(), uid=new_item_uid_max)
+                self.edit_item_attr(way=x_item.get_item_way(), uid=new_item_uid_max)
                 item_uid_max = new_item_uid_max
 
     def get_level_count(self, level) -> int:
@@ -685,7 +687,7 @@ class BudUnit:
             self.add_item(way)
 
     def del_item_obj(self, way: WayUnit, del_children: bool = True):
-        if way == self.itemroot.get_way():
+        if way == self.itemroot.get_item_way():
             raise InvalidBudException("Itemroot cannot be deleted")
         parent_way = get_parent_way(way)
         if self.item_exists(way):
@@ -860,7 +862,7 @@ class BudUnit:
     ) -> dict[WayUnit, ItemUnit]:
         self.settle_bud()
         return {
-            x_item.get_way(): x_item
+            x_item.get_item_way(): x_item
             for x_item in self._item_dict.values()
             if x_item.is_agenda_item(necessary_base)
         }
@@ -868,7 +870,7 @@ class BudUnit:
     def get_all_pledges(self) -> dict[WayUnit, ItemUnit]:
         self.settle_bud()
         all_items = self._item_dict.values()
-        return {x_item.get_way(): x_item for x_item in all_items if x_item.pledge}
+        return {x_item.get_item_way(): x_item for x_item in all_items if x_item.pledge}
 
     def set_agenda_task_complete(self, task_way: WayUnit, base: WayUnit):
         pledge_item = self.get_item_obj(task_way)
@@ -1040,10 +1042,10 @@ class BudUnit:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
             for item_kid in x_item._kids.values():
-                item_kid.set_parent_way(x_item.get_way())
+                item_kid.set_parent_way(x_item.get_item_way())
                 item_kid.set_level(x_item._level)
                 item_list.append(item_kid)
-            self._item_dict[x_item.get_way()] = x_item
+            self._item_dict[x_item.get_item_way()] = x_item
             for x_reason_base in x_item.reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
 
@@ -1056,16 +1058,16 @@ class BudUnit:
         while single_range_item_list != []:
             r_item = single_range_item_list.pop()
             if r_item._range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_item.get_way())
+                self._raise_gogo_calc_stop_calc_exception(r_item.get_item_way())
             if r_item.is_math():
                 r_item._gogo_calc = r_item.begin
                 r_item._stop_calc = r_item.close
             else:
-                parent_way = get_parent_way(r_item.get_way())
+                parent_way = get_parent_way(r_item.get_item_way())
                 parent_item = self.get_item_obj(parent_way)
                 r_item._gogo_calc = parent_item._gogo_calc
                 r_item._stop_calc = parent_item._stop_calc
-                self._range_inheritors[r_item.get_way()] = math_item.get_way()
+                self._range_inheritors[r_item.get_item_way()] = math_item.get_item_way()
             r_item._mold_gogo_calc_stop_calc()
 
             single_range_item_list.extend(iter(r_item._kids.values()))
@@ -1080,14 +1082,14 @@ class BudUnit:
                 and x_item.get_kids_mass_sum() == 0
                 and x_item.mass != 0
             ):
-                self._offtrack_kids_mass_set.add(x_item.get_way())
+                self._offtrack_kids_mass_set.add(x_item.get_item_way())
 
     def _set_groupunit_acctunit_funds(self, keep_exceptions):
         for x_item in self._item_dict.values():
             x_item.set_awardheirs_fund_give_fund_take()
             if x_item.is_kidless():
                 self._set_ancestors_pledge_fund_keep_attrs(
-                    x_item.get_way(), keep_exceptions
+                    x_item.get_item_way(), keep_exceptions
                 )
                 self._allot_fund_share(x_item)
 
@@ -1184,7 +1186,7 @@ class BudUnit:
         self._reset_acctunit_fund_give_take()
 
     def _clear_item_dict_and_bud_obj_settle_attrs(self):
-        self._item_dict = {self.itemroot.get_way(): self.itemroot}
+        self._item_dict = {self.itemroot.get_item_way(): self.itemroot}
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
@@ -1294,7 +1296,7 @@ class BudUnit:
                 x_sum = self._sum_healerlink_share
                 x_item._healerlink_ratio = x_item.get_fund_share() / x_sum
             if self._keeps_justified and x_item.healerlink.any_healer_name_exists():
-                self._keep_dict[x_item.get_way()] = x_item
+                self._keep_dict[x_item.get_item_way()] = x_item
 
     def _get_healers_dict(self) -> dict[HealerName, dict[WayUnit, ItemUnit]]:
         _healers_dict = {}
@@ -1323,7 +1325,9 @@ class BudUnit:
         self, no_range_descendants: bool = False
     ) -> list[WayUnit]:
         item_list = list(self.get_item_dict().values())
-        tag_dict = {item.get_way().lower(): item.get_way() for item in item_list}
+        tag_dict = {
+            item.get_item_way().lower(): item.get_item_way() for item in item_list
+        }
         tag_lowercase_ordered_list = sorted(list(tag_dict))
         tag_orginalcase_ordered_list = [
             tag_dict[tag_l] for tag_l in tag_lowercase_ordered_list
@@ -1587,5 +1591,5 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
 
 
 def get_sorted_item_list(x_list: list[ItemUnit]) -> list[ItemUnit]:
-    x_list.sort(key=lambda x: x.get_way(), reverse=False)
+    x_list.sort(key=lambda x: x.get_item_way(), reverse=False)
     return x_list

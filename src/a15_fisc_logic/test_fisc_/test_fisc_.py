@@ -426,7 +426,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     assert open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
     sue_agenda = open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
     assert len(sue_agenda) == 1
-    assert sue_agenda.get(clean_way).get_way() == clean_way
+    assert sue_agenda.get(clean_way).get_item_way() == clean_way
 
 
 def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(

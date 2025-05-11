@@ -174,7 +174,7 @@ def insert_job_buditem(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_item: ItemUnit
 ):
     x_dict = copy_deepcopy(x_item.__dict__)
-    x_dict["way"] = x_item.get_way()
+    x_dict["way"] = x_item.get_item_way()
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_buditem_metrics_insert_sqlstr(x_dict)
@@ -195,7 +195,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
     x_objkeysholder = ObjKeysHolder(world_id, job_bud.fisc_tag, job_bud.owner_name)
     insert_job_budunit(cursor, x_objkeysholder, job_bud)
     for x_item in job_bud.get_item_dict().values():
-        x_objkeysholder.way = x_item.get_way()
+        x_objkeysholder.way = x_item.get_item_way()
         healerlink = x_item.healerlink
         teamheir = x_item._teamheir
         insert_job_buditem(cursor, x_objkeysholder, x_item)
@@ -218,7 +218,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
         insert_job_budgrou(cursor, x_objkeysholder, x_groupunit)
 
     for x_factheir in job_bud.itemroot._factheirs.values():
-        x_objkeysholder.fact_way = job_bud.itemroot.get_way()
+        x_objkeysholder.fact_way = job_bud.itemroot.get_item_way()
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
 
 

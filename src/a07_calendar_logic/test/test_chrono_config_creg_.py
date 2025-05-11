@@ -622,7 +622,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     sweep_str = "sweep"
     sweep_way = sue_bud.make_way(clean_way, sweep_str)
     sweep_item = itemunit_shop(sweep_str, parent_way=clean_way)
-    print(f"{sweep_item.get_way()=}")
+    print(f"{sweep_item.get_item_way()=}")
     house_str = "house"
     house_way = sue_bud.make_l1_way(house_str)
     cookery_room_str = "cookery room"
@@ -657,7 +657,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     assert len(sue_bud.itemroot._kids) == 1
     assert sue_bud.get_item_obj(daytime_way).denom == 1440
     assert sue_bud.get_item_obj(daytime_way).morph
-    print(f"{sweep_item.get_way()=}")
+    print(f"{sweep_item.get_item_way()=}")
 
     # ESTABLISH
     sue_bud.set_dominate_pledge_item(item_kid=sweep_item)
@@ -666,7 +666,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     # for item_kid in sue_bud.itemroot._kids.keys():
     #     print(f"  {item_kid=}")
 
-    print(f"{sweep_item.get_way()=}")
+    print(f"{sweep_item.get_item_way()=}")
     assert sue_bud.get_item_obj(sweep_way) is not None
     assert sue_bud.get_item_obj(sweep_way).item_tag == sweep_str
     assert sue_bud.get_item_obj(sweep_way).pledge

@@ -278,7 +278,7 @@ def add_bud_to_br00022_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
@@ -301,7 +301,7 @@ def add_bud_to_br00023_csv(
             if_none_str(event_int),
             x_bud.fisc_tag,
             x_bud.owner_name,
-            x_bud.itemroot.get_way(),
+            x_bud.itemroot.get_item_way(),
             factunit.fbase,
             factunit.fneed,
             if_none_str(factunit.fopen),
@@ -326,7 +326,7 @@ def add_bud_to_br00024_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -348,7 +348,7 @@ def add_bud_to_br00025_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -371,7 +371,7 @@ def add_bud_to_br00026_csv(
                     if_none_str(event_int),
                     x_bud.fisc_tag,
                     x_bud.owner_name,
-                    itemunit.get_way(),
+                    itemunit.get_item_way(),
                     reasonunit.base,
                     premiseunit.need,
                     if_none_str(premiseunit.open),
@@ -397,7 +397,7 @@ def add_bud_to_br00027_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 reasonunit.base,
                 if_none_str(reasonunit.base_item_active_requisite),
             ]
@@ -420,7 +420,7 @@ def add_bud_to_br00028_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 if_none_str(itemunit.begin),
                 if_none_str(itemunit.close),
                 if_none_str(itemunit.addin),

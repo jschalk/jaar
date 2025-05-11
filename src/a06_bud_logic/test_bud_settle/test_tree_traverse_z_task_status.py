@@ -26,7 +26,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
     sun_way = sue_budunit.make_way(week_way, sun_str)
 
     # for item in sue_budunit._item_dict.values():
-    #     print(f"{casa_way=} {item.get_way()=}")
+    #     print(f"{casa_way=} {item.get_item_way()=}")
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     assert sue_budunit.get_item_obj(casa_way)._active is None
@@ -40,7 +40,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
     assert len(sue_budunit._item_dict) == 17
 
     # for item in sue_budunit._item_dict.values():
-    #     print(f"{casa_way=} {item.get_way()=}")
+    #     print(f"{casa_way=} {item.get_item_way()=}")
     assert sue_budunit.get_item_obj(casa_way)._active is False
 
 
@@ -158,7 +158,7 @@ def test_BudUnit_settle_bud_CorrectlySets_item_dict():
 
     # THEN
     casa_item = sue_budunit._item_dict.get(casa_way)
-    print(f"\nlook at {casa_item.get_way()=}")
+    print(f"\nlook at {casa_item.get_item_way()=}")
     assert casa_item.parent_way == to_way(sue_budunit.fisc_tag)
     assert casa_item._kids == {}
     assert casa_item.mass == 30
@@ -493,7 +493,7 @@ def test_BudUnit_settle_bud_CorrectlySetsItemUnitsActiveWithEvery6WeeksReason_bu
     # for item in item_dict:
     #     # print(f"{item.parent_way=}")
     #     if item.item_tag == "clean sheets couch blankets":
-    #         print(f"{item.get_way()=}")
+    #         print(f"{item.get_item_way()=}")
 
     assert premise_divisor == 6
     assert premise_open == 1

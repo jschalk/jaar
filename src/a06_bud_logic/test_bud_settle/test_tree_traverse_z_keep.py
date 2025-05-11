@@ -115,7 +115,7 @@ def test_BudUnit_settle_bud_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
         sue_bud.settle_bud(keep_exceptions=True)
     assert (
         str(excinfo.value)
-        == f"ItemUnit '{elpaso_item.get_way()}' cannot sponsor ancestor keeps."
+        == f"ItemUnit '{elpaso_item.get_item_way()}' cannot sponsor ancestor keeps."
     )
 
 

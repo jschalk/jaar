@@ -382,7 +382,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
 
     # for kid_item in root_item._kids.values():
     #     sum_x += kid_item._fund_ratio
-    #     print(f"  {kid_item._fund_ratio=} {sum_x=} {kid_item.get_way()=}")
+    #     print(f"  {kid_item._fund_ratio=} {sum_x=} {kid_item.get_item_way()=}")
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())

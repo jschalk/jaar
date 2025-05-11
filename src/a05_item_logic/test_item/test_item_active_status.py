@@ -222,7 +222,10 @@ def test_ItemUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_item = itemunit_shop(ball_str)
     ball_item._set_factheir(week_factheir)
     tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
+    x_bud_item_dict = {
+        week_item.get_item_way(): week_item,
+        tue_item.get_item_way(): tue_item,
+    }
     ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
 
     x_range_inheritors = {tue_way: week_way}

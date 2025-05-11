@@ -11,7 +11,7 @@ from src.a01_way_logic.way import (
     is_sub_way,
     get_default_fisc_tag as root_tag,
     all_wayunits_between,
-    create_way as way_create_way,
+    create_way,
     default_bridge_if_None,
     replace_bridge,
     FiscTag,
@@ -280,14 +280,14 @@ class ItemUnit:
 
     def _set_factheir(self, x_fact: FactCore):
         if (
-            x_fact.fbase == self.get_way()
+            x_fact.fbase == self.get_item_way()
             and self._gogo_calc is not None
             and self._stop_calc is not None
             and self.begin is None
             and self.close is None
         ):
             raise ranged_fact_item_Exception(
-                f"Cannot have fact for range inheritor '{self.get_way()}'. A ranged fact item must have _begin, _close attributes"
+                f"Cannot have fact for range inheritor '{self.get_item_way()}'. A ranged fact item must have _begin, _close attributes"
             )
         x_factheir = factheir_shop(
             x_fact.fbase, x_fact.fneed, x_fact.fopen, x_fact.fnigh
@@ -382,11 +382,11 @@ class ItemUnit:
     def get_obj_key(self) -> TagUnit:
         return self.item_tag
 
-    def get_way(self) -> WayUnit:
+    def get_item_way(self) -> WayUnit:
         if self.parent_way in (None, ""):
-            return way_create_way(self.item_tag, bridge=self.bridge)
+            return create_way(self.item_tag, bridge=self.bridge)
         else:
-            return way_create_way(self.parent_way, self.item_tag, bridge=self.bridge)
+            return create_way(self.parent_way, self.item_tag, bridge=self.bridge)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -406,13 +406,13 @@ class ItemUnit:
         max_count = 1000
         while to_evaluate_items != [] and count_x < max_count:
             x_item = to_evaluate_items.pop()
-            descendant_ways[x_item.get_way()] = -1
+            descendant_ways[x_item.get_item_way()] = -1
             to_evaluate_items.extend(x_item._kids.values())
             count_x += 1
 
         if count_x == max_count:
             raise ItemGetDescendantsException(
-                f"Item '{self.get_way()}' either has an infinite loop or more than {max_count} descendants."
+                f"Item '{self.get_item_way()}' either has an infinite loop or more than {max_count} descendants."
             )
 
         return descendant_ways

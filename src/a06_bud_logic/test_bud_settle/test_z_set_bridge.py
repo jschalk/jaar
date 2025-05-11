@@ -120,18 +120,18 @@ def test_bud_set_bridge_CorrectlyModifies_parent_way():
     # print(f"{cook_item.parent_way=} {cook_item.item_tag=}")
     # semicolon_casa_item = zia_bud.get_item_obj(semicolon_casa_way)
     # print(f"{semicolon_casa_item.parent_way=} {semicolon_casa_item.item_tag=}")
-    assert cook_item.get_way() == semicolon_cook_way
+    assert cook_item.get_item_way() == semicolon_cook_way
 
     # WHEN
     slash_str = "/"
     zia_bud.set_bridge(slash_str)
 
     # THEN
-    assert cook_item.get_way() != semicolon_cook_way
+    assert cook_item.get_item_way() != semicolon_cook_way
     zia_fisc_tag = zia_bud.fisc_tag
     slash_casa_way = create_way(zia_fisc_tag, casa_str, bridge=slash_str)
     slash_cook_way = create_way(slash_casa_way, cook_str, bridge=slash_str)
-    assert cook_item.get_way() == slash_cook_way
+    assert cook_item.get_item_way() == slash_cook_way
 
 
 def test_bud_set_bridge_CorrectlyModifiesReasonUnit():

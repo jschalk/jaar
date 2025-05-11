@@ -385,9 +385,9 @@ def from_list_get_active(way: WayUnit, item_dict: dict, asse_bool: bool = None) 
     active_true_count = 0
     active_false_count = 0
     for item in item_dict.values():
-        if item.get_way() == way:
+        if item.get_item_way() == way:
             temp_item = item
-            print(f"s for ItemUnit {temp_item.get_way()}  {temp_item._active=}")
+            print(f"s for ItemUnit {temp_item.get_item_way()}  {temp_item._active=}")
 
         if item._active:
             active_true_count += 1
