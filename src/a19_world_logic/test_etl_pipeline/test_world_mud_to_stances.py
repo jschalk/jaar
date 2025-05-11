@@ -90,6 +90,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
     pidcore_sound_raw = create_prime_tablename("pidcore", "s", "raw")
     pidcore_sound_agg = create_prime_tablename("pidcore", "s", "agg")
+    pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
     fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
     fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
     budunit_sound_raw_put = create_prime_tablename("budunit", "s", "raw", "put")
@@ -122,6 +123,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not db_table_exists(cursor, budunit_sound_agg_put)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
+        assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
         assert not os_path_exists(event1_pidgin_json_path)
         assert not os_path_exists(event1_inherited_pidgin_json_path)
@@ -153,6 +155,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, budacct_sound_agg_put) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
+        assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         # assert os_path_exists(event1_pidgin_json_path)
         # assert os_path_exists(event1_inherited_pidgin_json_path)

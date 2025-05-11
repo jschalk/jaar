@@ -1,6 +1,6 @@
 from src.a01_road_logic.road import create_road
 from src.a06_bud_logic._utils.str_a06 import bud_item_factunit_str
-from src.a06_bud_logic._utils.str_a06 import road_str, base_str, open_str, nigh_str
+from src.a06_bud_logic._utils.str_a06 import road_str, fbase_str, fopen_str, fnigh_str
 from src.a08_bud_atom_logic._utils.str_a08 import (
     jkeys_str,
     jvalues_str,
@@ -28,9 +28,9 @@ def test_BudAtom_get_dict_ReturnsObj():
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_factunit_budatom.set_jkey(road_str(), ball_road)
-    insert_factunit_budatom.set_jkey(base_str(), knee_road)
-    insert_factunit_budatom.set_jvalue("open", knee_open)
-    insert_factunit_budatom.set_jvalue("nigh", knee_nigh)
+    insert_factunit_budatom.set_jkey(fbase_str(), knee_road)
+    insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
+    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
 
     # WHEN
     atom_dict = insert_factunit_budatom.get_dict()
@@ -39,8 +39,8 @@ def test_BudAtom_get_dict_ReturnsObj():
     assert atom_dict == {
         dimen_str(): x_dimen,
         crud_str(): atom_insert(),
-        jkeys_str(): {road_str(): ball_road, base_str(): knee_road},
-        jvalues_str(): {"open": knee_open, "nigh": knee_nigh},
+        jkeys_str(): {road_str(): ball_road, fbase_str(): knee_road},
+        jvalues_str(): {fopen_str(): knee_open, fnigh_str(): knee_nigh},
     }
 
 
@@ -57,9 +57,9 @@ def test_BudAtom_get_json_ReturnsObj():
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_factunit_budatom.set_jkey(road_str(), ball_road)
-    insert_factunit_budatom.set_jkey(base_str(), knee_road)
-    insert_factunit_budatom.set_jvalue(open_str(), knee_open)
-    insert_factunit_budatom.set_jvalue(nigh_str(), knee_nigh)
+    insert_factunit_budatom.set_jkey(fbase_str(), knee_road)
+    insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
+    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
 
     # WHEN
     atom_json = insert_factunit_budatom.get_json()
@@ -81,9 +81,9 @@ def test_budatom_get_from_json_ReturnsObj():
     knee_nigh = 13
     gen_budatom = budatom_shop(x_dimen, atom_insert())
     gen_budatom.set_jkey(road_str(), ball_road)
-    gen_budatom.set_jkey(base_str(), knee_road)
-    gen_budatom.set_jvalue(open_str(), knee_open)
-    gen_budatom.set_jvalue(nigh_str(), knee_nigh)
+    gen_budatom.set_jkey(fbase_str(), knee_road)
+    gen_budatom.set_jvalue(fopen_str(), knee_open)
+    gen_budatom.set_jvalue(fnigh_str(), knee_nigh)
     atom_json = gen_budatom.get_json()
 
     # WHEN

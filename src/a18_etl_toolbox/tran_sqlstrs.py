@@ -117,6 +117,7 @@ CREATE_PIDTAGG_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_vld
 
 CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
 CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
@@ -245,6 +246,7 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_tag_s_vld": CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
         "pidgin_core_s_raw": CREATE_PIDCORE_SOUND_RAW_SQLSTR,
         "pidgin_core_s_agg": CREATE_PIDCORE_SOUND_AGG_SQLSTR,
+        "pidgin_core_s_vld": CREATE_PIDCORE_SOUND_VLD_SQLSTR,
         "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
         "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
         "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,
@@ -601,24 +603,107 @@ GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
 """
 
 
-def create_update_inconsist_pidgin_dimen_agg_sqlstr(dimen: str) -> str:
-    pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+def create_insert_into_pidgin_core_vld_sqlstr(
+    default_bridge: str, default_unknown: str
+):
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_word)
+SELECT
+  face_name
+, IFNULL(otx_bridge, '{default_bridge}')
+, IFNULL(inx_bridge, '{default_bridge}')
+, IFNULL(unknown_word, '{default_unknown}')
+FROM pidgin_core_s_agg
+;
+"""
+
+
+def create_update_pidgin_sound_agg_inconsist_sqlstr(dimen: str) -> str:
+    pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
     return f"""UPDATE {pidgin_s_agg_tablename}
 SET error_message = 'Inconsistent pidgin core data'
 WHERE face_name IN (
     SELECT {pidgin_s_agg_tablename}.face_name
     FROM {pidgin_s_agg_tablename} 
-    LEFT JOIN {pidgin_core_s_agg_tablename} ON {pidgin_core_s_agg_tablename}.face_name = {pidgin_s_agg_tablename}.face_name
-    WHERE {pidgin_core_s_agg_tablename}.face_name IS NULL
+    LEFT JOIN {pidgin_core_s_vld_tablename} ON {pidgin_core_s_vld_tablename}.face_name = {pidgin_s_agg_tablename}.face_name
+    WHERE {pidgin_core_s_vld_tablename}.face_name IS NULL
+)
+;
+"""
+
+
+def create_update_pidtagg_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidtagg_s_agg_tablename = create_prime_tablename("pidtagg", "s", "agg")
+    return f"""UPDATE {pidtagg_s_agg_tablename}
+SET error_message = 'Bridge cannot exist in TagUnit'
+WHERE rowid IN (
+    SELECT tagg_agg.rowid
+    FROM {pidtagg_s_agg_tablename} tagg_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = tagg_agg.face_name
+    WHERE tagg_agg.otx_tag LIKE '%' || core_vld.otx_bridge || '%'
+      OR tagg_agg.inx_tag LIKE '%' || core_vld.inx_bridge || '%'
+)
+;
+"""
+
+
+def create_update_pidroad_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidroad_s_agg_tablename = create_prime_tablename("pidroad", "s", "agg")
+    return f"""UPDATE {pidroad_s_agg_tablename}
+SET error_message = 'Bridge must exist in RoadUnit'
+WHERE rowid IN (
+    SELECT road_agg.rowid
+    FROM {pidroad_s_agg_tablename} road_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = road_agg.face_name
+    WHERE NOT road_agg.otx_road LIKE core_vld.otx_bridge || '%'
+        OR NOT road_agg.inx_road LIKE core_vld.inx_bridge || '%'
+)
+;
+"""
+
+
+def create_update_pidname_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidname_s_agg_tablename = create_prime_tablename("pidname", "s", "agg")
+    return f"""UPDATE {pidname_s_agg_tablename}
+SET error_message = 'Bridge cannot exist in NameUnit'
+WHERE rowid IN (
+    SELECT name_agg.rowid
+    FROM {pidname_s_agg_tablename} name_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = name_agg.face_name
+    WHERE name_agg.otx_name LIKE '%' || core_vld.otx_bridge || '%'
+      OR name_agg.inx_name LIKE '%' || core_vld.inx_bridge || '%'
+)
+;
+"""
+
+
+def create_update_pidlabe_sound_agg_bridge_error_sqlstr() -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    pidlabe_s_agg_tablename = create_prime_tablename("pidlabe", "s", "agg")
+    return f"""UPDATE {pidlabe_s_agg_tablename}
+SET error_message = 'Otx and inx labels must match bridge property.'
+WHERE rowid IN (
+  SELECT label_agg.rowid
+  FROM {pidlabe_s_agg_tablename} label_agg
+  JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = label_agg.face_name
+  WHERE NOT ((
+            label_agg.otx_label LIKE core_vld.otx_bridge || '%' 
+        AND label_agg.inx_label LIKE core_vld.inx_bridge || '%') 
+      OR (
+            NOT label_agg.otx_label LIKE core_vld.otx_bridge || '%'
+        AND NOT label_agg.inx_label LIKE core_vld.inx_bridge || '%'
+        ))
 )
 ;
 """
 
 
 def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
-    pidgin_tag_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    pidgin_core_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
+    pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    pidgin_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
     dimen_otx_inx_obj_names = {
         "pidgin_name": "name",
         "pidgin_label": "label",
@@ -628,9 +713,9 @@ def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
     otx_str = f"otx_{dimen_otx_inx_obj_names[dimen]}"
     inx_str = f"inx_{dimen_otx_inx_obj_names[dimen]}"
     return f"""
-INSERT INTO {pidgin_core_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
+INSERT INTO {pidgin_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
 SELECT event_int, face_name, MAX({otx_str}), MAX({inx_str})
-FROM {pidgin_tag_s_agg_tablename}
+FROM {pidgin_s_agg_tablename}
 WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;

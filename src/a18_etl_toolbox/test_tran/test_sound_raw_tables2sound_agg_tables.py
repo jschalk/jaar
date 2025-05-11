@@ -25,7 +25,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 from src.a18_etl_toolbox.transformers import (
     insert_sound_raw_selects_into_sound_agg_tables,
-    set_sound_tables_raw_error_message,
+    set_sound_raw_tables_error_message,
     etl_sound_raw_tables_to_sound_agg_tables,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -89,7 +89,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
 
 
-def test_set_sound_tables_raw_error_message_UpdatesTableCorrectly_Scenario0():
+def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -137,7 +137,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        set_sound_tables_raw_error_message(cursor)
+        set_sound_raw_tables_error_message(cursor)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
@@ -146,7 +146,7 @@ VALUES
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
 
-def test_set_sound_tables_raw_error_message_UpdatesTableCorrectly_Scenario1_bud_raw_del():
+def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_bud_raw_del():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -190,7 +190,7 @@ VALUES
         assert "error_message" not in get_table_columns(cursor, buda_s_raw_del)
 
         # WHEN
-        set_sound_tables_raw_error_message(cursor)
+        set_sound_raw_tables_error_message(cursor)
 
         # THEN No Error message is added and updated
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
