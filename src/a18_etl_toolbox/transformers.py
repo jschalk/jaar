@@ -123,7 +123,6 @@ from src.a18_etl_toolbox.pidgin_agg import (
 )
 from pandas import (
     read_excel as pandas_read_excel,
-    concat as pandas_concat,
     DataFrame,
     read_sql_query as pandas_read_sql_query,
 )
@@ -565,6 +564,7 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
+    update_pidgin_sound_agg_brick_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
