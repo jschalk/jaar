@@ -4,7 +4,7 @@ from csv import reader as csv_reader
 def open_csv_with_types(csv_path, column_types):
     """
     Reads a CSV file and returns a list of tuples where each value is converted
-    based on the provided column type dictionary.
+    to a type from the provided column type dictionary.
 
     :param csv_path: Path to the CSV file.
     :param column_types: Dictionary mapping column names to data types.

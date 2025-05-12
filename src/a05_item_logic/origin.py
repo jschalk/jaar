@@ -1,4 +1,3 @@
-from contextlib import suppress as contextlib_suppress
 from src.a03_group_logic.acct import AcctName
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
 from dataclasses import dataclass
@@ -50,11 +49,10 @@ def originunit_shop(_originholds: dict[AcctName, OriginHold] = None) -> OriginUn
 
 def originunit_get_from_dict(x_dict: dict) -> OriginUnit:
     originunit_x = originunit_shop()
-    with contextlib_suppress(KeyError):
-        originholds_dict = x_dict["_originholds"]
-        for originhold_dict in originholds_dict.values():
-            originunit_x.set_originhold(
-                acct_name=originhold_dict["acct_name"],
-                importance=originhold_dict["importance"],
-            )
+    originholds_dict = x_dict["_originholds"]
+    for originhold_dict in originholds_dict.values():
+        originunit_x.set_originhold(
+            acct_name=originhold_dict["acct_name"],
+            importance=originhold_dict["importance"],
+        )
     return originunit_x
