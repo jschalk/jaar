@@ -193,7 +193,7 @@ def append_df_to_excel(file_path: str, sheet_name: str, dataframe: DataFrame):
 
         # Append the rows to the sheet
         for i, row in enumerate(rows, start_row):
-            for j, value in enumerate(row, 1):  # 1-rcontextd index for Excel
+            for j, value in enumerate(row, 1):  # 1-based index for Excel
                 sheet.cell(row=i, column=j, value=value)
 
         # Save changes to the workbook
