@@ -280,7 +280,6 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_agenda_dict() == expected_job.get_agenda_dict()
 #     assert sue_job.get_dict() == expected_job.get_dict()
-#     assert 1 == 2
 
 
 # def test_FiscUnit_rotate_job_ReturnsObj_Scenario2_gut_with_FactUnit(
@@ -314,7 +313,6 @@ def test_FiscUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_factunits_dict() == expected_job.get_factunits_dict()
 #     assert sue_job.get_dict() == expected_job.get_dict()
-#     assert 1 == 2
 
 
 def test_FiscUnit_generate_all_jobs_Scenario0_init_job_IsCreated(
@@ -545,5 +543,3 @@ def test_FiscUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
 #     after_sue_job = a23_fisc.get_job_file_bud(sue_str)
 #     assert after_bob_job.acct_exists(bob_str)
 #     assert after_sue_job.acct_exists(sue_str)
-
-#     assert 1 == 2

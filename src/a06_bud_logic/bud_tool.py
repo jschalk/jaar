@@ -33,21 +33,21 @@ def bud_acct_membership_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_itemunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     return False if x_bud is None else bool(x_bud.item_exists(x_way))
 
 
 def bud_item_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_awardee_title = jkeys.get("awardee_title")
-    x_way = jkeys.get("way")
+    x_awardee_label = jkeys.get("awardee_label")
+    x_way = jkeys.get("item_way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_way).awardlink_exists(x_awardee_title)
+        and x_bud.get_item_obj(x_way).awardlink_exists(x_awardee_label)
     )
 
 
 def bud_item_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     x_base = jkeys.get("base")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
@@ -56,7 +56,7 @@ def bud_item_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     x_base = jkeys.get("base")
     x_need = jkeys.get("need")
     return bool(
@@ -66,17 +66,17 @@ def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_team_title = jkeys.get("team_title")
-    x_way = jkeys.get("way")
+    x_team_label = jkeys.get("team_label")
+    x_way = jkeys.get("item_way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_way).teamunit.teamlink_exists(x_team_title)
+        and x_bud.get_item_obj(x_way).teamunit.teamlink_exists(x_team_label)
     )
 
 
 def bud_item_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_healer_name = jkeys.get("healer_name")
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
         and x_bud.get_item_obj(x_way).healerlink.healer_name_exists(x_healer_name)
@@ -84,7 +84,7 @@ def bud_item_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_item_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     x_fbase = jkeys.get("fbase")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
@@ -127,18 +127,18 @@ def bud_acct_membership_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> Member
 
 
 def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     return x_bud.get_item_obj(x_way)
 
 
 def bud_item_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
-    x_way = jkeys.get("way")
-    x_awardee_title = jkeys.get("awardee_title")
-    return x_bud.get_item_obj(x_way).get_awardlink(x_awardee_title)
+    x_way = jkeys.get("item_way")
+    x_awardee_label = jkeys.get("awardee_label")
+    return x_bud.get_item_obj(x_way).get_awardlink(x_awardee_label)
 
 
 def bud_item_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     x_base = jkeys.get("base")
     return x_bud.get_item_obj(x_way).get_reasonunit(x_base)
 
@@ -146,14 +146,14 @@ def bud_item_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> Reason
 def bud_item_reason_premiseunit_get_obj(
     x_bud: BudUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     x_base = jkeys.get("base")
     x_need = jkeys.get("need")
     return x_bud.get_item_obj(x_way).get_reasonunit(x_base).get_premise(x_need)
 
 
 def bud_item_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
-    x_way = jkeys.get("way")
+    x_way = jkeys.get("item_way")
     x_fbase = jkeys.get("fbase")
     print(f"{x_fbase=}")
     print(f"{x_bud.get_item_obj(x_way).factunits=}")

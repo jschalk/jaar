@@ -492,7 +492,9 @@ class BudUnit:
             raise Exception_keeps_justified(exception_str)
 
         x_items = self._item_dict.values()
-        return {x_item.get_way(): x_item for x_item in x_items if x_item.problem_bool}
+        return {
+            x_item.get_item_way(): x_item for x_item in x_items if x_item.problem_bool
+        }
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
@@ -503,7 +505,7 @@ class BudUnit:
             awardlinks=self.itemroot.awardlinks,
             uid=self.itemroot._uid,
             pledge=self.itemroot.pledge,
-            item_way=self.itemroot.get_way(),
+            item_way=self.itemroot.get_item_way(),
         )
 
         x_item_list = [self.itemroot]
@@ -523,7 +525,7 @@ class BudUnit:
             awardlinks=item_kid.awardlinks,
             uid=item_kid._uid,
             pledge=item_kid.pledge,
-            item_way=item_kid.get_way(),
+            item_way=item_kid.get_item_way(),
         )
         x_item_list.append(item_kid)
 
@@ -539,7 +541,9 @@ class BudUnit:
         for x_item in self.get_item_dict().values():
             if x_item._uid is None or item_uid_dict.get(x_item._uid) > 1:
                 new_item_uid_max = item_uid_max + 1
-                self.edit_item_attr(way=x_item.get_way(), uid=new_item_uid_max)
+                self.edit_item_attr(
+                    item_way=x_item.get_item_way(), uid=new_item_uid_max
+                )
                 item_uid_max = new_item_uid_max
 
     def get_level_count(self, level) -> int:
@@ -580,7 +584,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         create_missing_items: bool = None,
-        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
+        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -589,7 +593,7 @@ class BudUnit:
             item_kid=item_kid,
             parent_way=self.fisc_tag,
             create_missing_items=create_missing_items,
-            get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
+            get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -599,7 +603,7 @@ class BudUnit:
         self,
         item_kid: ItemUnit,
         parent_way: WayUnit,
-        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
+        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
         create_missing_items: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -620,7 +624,7 @@ class BudUnit:
             item_kid.fisc_tag = self.fisc_tag
         if item_kid.fund_coin != self.fund_coin:
             item_kid.fund_coin = self.fund_coin
-        if not get_rid_of_missing_awardlinks_awardee_titles:
+        if not get_rid_of_missing_awardlinks_awardee_labels:
             item_kid = self._get_filtered_awardlinks_item(item_kid)
         item_kid.set_parent_way(parent_way=parent_way)
 
@@ -646,29 +650,29 @@ class BudUnit:
                 self.del_item_obj(adoptee_way)
 
             if bundling:
-                self.edit_item_attr(way=kid_way, mass=mass_sum)
+                self.edit_item_attr(kid_way, mass=mass_sum)
 
         if create_missing_items:
             self._create_missing_items(way=kid_way)
 
     def _get_filtered_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
         _awardlinks_to_delete = [
-            _awardlink_awardee_title
-            for _awardlink_awardee_title in x_item.awardlinks.keys()
-            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_title)
+            _awardlink_awardee_label
+            for _awardlink_awardee_label in x_item.awardlinks.keys()
+            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_label)
             is None
         ]
-        for _awardlink_awardee_title in _awardlinks_to_delete:
-            x_item.awardlinks.pop(_awardlink_awardee_title)
+        for _awardlink_awardee_label in _awardlinks_to_delete:
+            x_item.awardlinks.pop(_awardlink_awardee_label)
         if x_item.teamunit is not None:
             _teamlinks_to_delete = [
-                _teamlink_team_title
-                for _teamlink_team_title in x_item.teamunit._teamlinks
-                if self.get_acctunit_group_labels_dict().get(_teamlink_team_title)
+                _teamlink_team_label
+                for _teamlink_team_label in x_item.teamunit._teamlinks
+                if self.get_acctunit_group_labels_dict().get(_teamlink_team_label)
                 is None
             ]
-            for _teamlink_team_title in _teamlinks_to_delete:
-                x_item.teamunit.del_teamlink(_teamlink_team_title)
+            for _teamlink_team_label in _teamlinks_to_delete:
+                x_item.teamunit.del_teamlink(_teamlink_team_label)
         return x_item
 
     def _create_missing_items(self, way):
@@ -685,7 +689,7 @@ class BudUnit:
             self.add_item(way)
 
     def del_item_obj(self, way: WayUnit, del_children: bool = True):
-        if way == self.itemroot.get_way():
+        if way == self.itemroot.get_item_way():
             raise InvalidBudException("Itemroot cannot be deleted")
         parent_way = get_parent_way(way)
         if self.item_exists(way):
@@ -762,7 +766,7 @@ class BudUnit:
 
     def edit_reason(
         self,
-        way: WayUnit,
+        item_way: WayUnit,
         reason_base: WayUnit = None,
         reason_premise: WayUnit = None,
         reason_premise_open: float = None,
@@ -770,7 +774,7 @@ class BudUnit:
         reason_premise_divisor: int = None,
     ):
         self.edit_item_attr(
-            way=way,
+            item_way=item_way,
             reason_base=reason_base,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
@@ -780,7 +784,7 @@ class BudUnit:
 
     def edit_item_attr(
         self,
-        way: WayUnit,
+        item_way: WayUnit,
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
@@ -852,7 +856,7 @@ class BudUnit:
         )
         if reason_premise is not None:
             self._set_itemattrholder_premise_ranges(x_itemattrholder)
-        x_item = self.get_item_obj(way)
+        x_item = self.get_item_obj(item_way)
         x_item._set_attrs_to_itemunit(item_attr=x_itemattrholder)
 
     def get_agenda_dict(
@@ -860,7 +864,7 @@ class BudUnit:
     ) -> dict[WayUnit, ItemUnit]:
         self.settle_bud()
         return {
-            x_item.get_way(): x_item
+            x_item.get_item_way(): x_item
             for x_item in self._item_dict.values()
             if x_item.is_agenda_item(necessary_base)
         }
@@ -868,7 +872,7 @@ class BudUnit:
     def get_all_pledges(self) -> dict[WayUnit, ItemUnit]:
         self.settle_bud()
         all_items = self._item_dict.values()
-        return {x_item.get_way(): x_item for x_item in all_items if x_item.pledge}
+        return {x_item.get_item_way(): x_item for x_item in all_items if x_item.pledge}
 
     def set_agenda_task_complete(self, task_way: WayUnit, base: WayUnit):
         pledge_item = self.get_item_obj(task_way)
@@ -923,11 +927,11 @@ class BudUnit:
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupLabel, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_awardee_title = awardlink_obj.awardee_title
-            if not self.groupunit_exists(x_awardee_title):
-                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_title))
+            x_awardee_label = awardlink_obj.awardee_label
+            if not self.groupunit_exists(x_awardee_label):
+                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_label))
             self.add_to_groupunit_fund_give_fund_take(
-                group_label=awardlink_obj.awardee_title,
+                group_label=awardlink_obj.awardee_label,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -942,7 +946,7 @@ class BudUnit:
                 if item.awardheir_exists():
                     for x_awardline in item._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
-                            group_label=x_awardline.awardee_title,
+                            group_label=x_awardline.awardee_label,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
@@ -1040,10 +1044,10 @@ class BudUnit:
             x_item = item_list.pop()
             x_item.clear_gogo_calc_stop_calc()
             for item_kid in x_item._kids.values():
-                item_kid.set_parent_way(x_item.get_way())
+                item_kid.set_parent_way(x_item.get_item_way())
                 item_kid.set_level(x_item._level)
                 item_list.append(item_kid)
-            self._item_dict[x_item.get_way()] = x_item
+            self._item_dict[x_item.get_item_way()] = x_item
             for x_reason_base in x_item.reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
 
@@ -1056,16 +1060,16 @@ class BudUnit:
         while single_range_item_list != []:
             r_item = single_range_item_list.pop()
             if r_item._range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_item.get_way())
+                self._raise_gogo_calc_stop_calc_exception(r_item.get_item_way())
             if r_item.is_math():
                 r_item._gogo_calc = r_item.begin
                 r_item._stop_calc = r_item.close
             else:
-                parent_way = get_parent_way(r_item.get_way())
+                parent_way = get_parent_way(r_item.get_item_way())
                 parent_item = self.get_item_obj(parent_way)
                 r_item._gogo_calc = parent_item._gogo_calc
                 r_item._stop_calc = parent_item._stop_calc
-                self._range_inheritors[r_item.get_way()] = math_item.get_way()
+                self._range_inheritors[r_item.get_item_way()] = math_item.get_item_way()
             r_item._mold_gogo_calc_stop_calc()
 
             single_range_item_list.extend(iter(r_item._kids.values()))
@@ -1080,14 +1084,14 @@ class BudUnit:
                 and x_item.get_kids_mass_sum() == 0
                 and x_item.mass != 0
             ):
-                self._offtrack_kids_mass_set.add(x_item.get_way())
+                self._offtrack_kids_mass_set.add(x_item.get_item_way())
 
     def _set_groupunit_acctunit_funds(self, keep_exceptions):
         for x_item in self._item_dict.values():
             x_item.set_awardheirs_fund_give_fund_take()
             if x_item.is_kidless():
                 self._set_ancestors_pledge_fund_keep_attrs(
-                    x_item.get_way(), keep_exceptions
+                    x_item.get_item_way(), keep_exceptions
                 )
                 self._allot_fund_share(x_item)
 
@@ -1184,7 +1188,7 @@ class BudUnit:
         self._reset_acctunit_fund_give_take()
 
     def _clear_item_dict_and_bud_obj_settle_attrs(self):
-        self._item_dict = {self.itemroot.get_way(): self.itemroot}
+        self._item_dict = {self.itemroot.get_item_way(): self.itemroot}
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
@@ -1294,7 +1298,7 @@ class BudUnit:
                 x_sum = self._sum_healerlink_share
                 x_item._healerlink_ratio = x_item.get_fund_share() / x_sum
             if self._keeps_justified and x_item.healerlink.any_healer_name_exists():
-                self._keep_dict[x_item.get_way()] = x_item
+                self._keep_dict[x_item.get_item_way()] = x_item
 
     def _get_healers_dict(self) -> dict[HealerName, dict[WayUnit, ItemUnit]]:
         _healers_dict = {}
@@ -1323,7 +1327,9 @@ class BudUnit:
         self, no_range_descendants: bool = False
     ) -> list[WayUnit]:
         item_list = list(self.get_item_dict().values())
-        tag_dict = {item.get_way().lower(): item.get_way() for item in item_list}
+        tag_dict = {
+            item.get_item_way().lower(): item.get_item_way() for item in item_list
+        }
         tag_lowercase_ordered_list = sorted(list(tag_dict))
         tag_orginalcase_ordered_list = [
             tag_dict[tag_l] for tag_l in tag_lowercase_ordered_list
@@ -1393,7 +1399,7 @@ class BudUnit:
         self.set_item(
             item_kid=item_kid,
             parent_way=self.make_way(item_kid.parent_way),
-            get_rid_of_missing_awardlinks_awardee_titles=True,
+            get_rid_of_missing_awardlinks_awardee_labels=True,
             create_missing_items=True,
         )
 
@@ -1587,5 +1593,5 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
 
 
 def get_sorted_item_list(x_list: list[ItemUnit]) -> list[ItemUnit]:
-    x_list.sort(key=lambda x: x.get_way(), reverse=False)
+    x_list.sort(key=lambda x: x.get_item_way(), reverse=False)
     return x_list

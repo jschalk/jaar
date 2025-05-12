@@ -18,12 +18,12 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     group_label_str,
     healer_name_str,
     parent_way_str,
     item_tag_str,
-    way_str,
+    item_way_str,
     base_str,
     fbase_str,
     debtit_belief_str,
@@ -175,7 +175,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_itemunit():
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = budatom_shop(bud_itemunit_str(), atom_insert())
-    old_casa_atom.set_arg(way_str(), casa_way)
+    old_casa_atom.set_arg(item_way_str(), casa_way)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)
@@ -220,8 +220,8 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_awardlink():
     sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(run_str, 2, 3))
 
     zia_atom = budatom_shop(bud_item_awardlink_str(), atom_insert())
-    zia_atom.set_arg(way_str(), casa_way)
-    zia_atom.set_arg(awardee_title_str(), run_str)
+    zia_atom.set_arg(item_way_str(), casa_way)
+    zia_atom.set_arg(awardee_label_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
     zia_atom.set_arg(take_force_str(), zia_run_take_force)
 
@@ -249,7 +249,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_reasonunit():
 
     new_base_item_active_requisite = True
     casa_atom = budatom_shop(bud_item_reasonunit_str(), atom_insert())
-    casa_atom.set_arg(way_str(), casa_way)
+    casa_atom.set_arg(item_way_str(), casa_way)
     casa_atom.set_arg(base_str(), week_way)
     casa_atom.set_arg(base_item_active_requisite_str(), new_base_item_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
@@ -288,7 +288,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_reason_premiseunit():
 
     thur_divisor = 39
     thur_atom = budatom_shop(bud_item_reason_premiseunit_str(), atom_insert())
-    thur_atom.set_arg(way_str(), clean_way)
+    thur_atom.set_arg(item_way_str(), clean_way)
     thur_atom.set_arg(base_str(), week_way)
     thur_atom.set_arg("need", thur_way)
     assert thur_atom.is_valid()
@@ -321,7 +321,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_item_factunit():
 
     casa_fopen = 32
     casa_atom = budatom_shop(bud_item_factunit_str(), atom_insert())
-    casa_atom.set_arg(way_str(), casa_way)
+    casa_atom.set_arg(item_way_str(), casa_way)
     casa_atom.set_arg(fbase_str(), week_way)
     casa_atom.set_arg(fopen_str(), casa_fopen)
     casa_jkeys = casa_atom.get_jkeys_dict()

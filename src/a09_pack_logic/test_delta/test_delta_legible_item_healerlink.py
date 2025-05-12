@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     healer_name_str,
-    way_str,
+    item_way_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete
 from src.a08_bud_atom_logic.atom import budatom_shop
@@ -18,7 +18,7 @@ def test_create_legible_list_ReturnsObj_item_healerlink_INSERT():
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     healer_name_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(healer_name_str(), healer_name_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -41,7 +41,7 @@ def test_create_legible_list_ReturnsObj_item_healerlink_DELETE():
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     healer_name_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_delete())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(healer_name_str(), healer_name_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()

@@ -76,7 +76,7 @@ def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitBase():
     sue_bud.set_item(status_item, parent_way=casa_way)
     floor_reason = reasonunit_shop(base=status_way)
     floor_reason.set_premise(premise=status_way)
-    sue_bud.edit_item_attr(way=floor_way, reason=floor_reason)
+    sue_bud.edit_item_attr(floor_way, reason=floor_reason)
 
     # WHEN
     floor_dict = {floor_way}

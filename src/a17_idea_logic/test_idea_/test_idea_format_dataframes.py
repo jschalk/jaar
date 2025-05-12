@@ -6,7 +6,7 @@ from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
-    way_str,
+    item_way_str,
     mass_str,
     pledge_str,
     debtit_belief_str,
@@ -167,13 +167,13 @@ def test_create_idea_df_Arg_idea_format_00013_itemunit_v0_0_0():
     assert itemunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[0, pledge_str()] == ""
     assert itemunit_format.loc[0, fisc_tag_str()] == accord_fisc_tag
-    assert itemunit_format.loc[0, way_str()] == casa_way
+    assert itemunit_format.loc[0, item_way_str()] == casa_way
     assert itemunit_format.loc[0, mass_str()] == casa_mass
 
     assert itemunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert itemunit_format.loc[1, pledge_str()] == "Yes"
     assert itemunit_format.loc[1, fisc_tag_str()] == accord_fisc_tag
-    assert itemunit_format.loc[1, way_str()] == clean_way
+    assert itemunit_format.loc[1, item_way_str()] == clean_way
     assert itemunit_format.loc[1, mass_str()] == 1
     assert len(itemunit_format) == 2
 

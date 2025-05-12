@@ -117,8 +117,8 @@ def get_budunit_with_4_levels_and_2reasons() -> BudUnit:
 
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.edit_item_attr(way=casa_way, reason=week_reason)
-    sue_bud.edit_item_attr(way=casa_way, reason=nation_reason)
+    sue_bud.edit_item_attr(casa_way, reason=week_reason)
+    sue_bud.edit_item_attr(casa_way, reason=nation_reason)
     return sue_bud
 
 
@@ -249,10 +249,10 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     shave_reason = reasonunit_shop(week_way)
     shave_reason.set_premise(mon_way)
 
-    zia_bud.edit_item_attr(way=shave_way, reason=shave_reason)
+    zia_bud.edit_item_attr(shave_way, reason=shave_reason)
     zia_bud.add_fact(fbase=week_way, fneed=sun_way)
     x_factunit = factunit_shop(fbase=week_way, fneed=church_way)
-    zia_bud.edit_item_attr(way=shave_way, factunit=x_factunit)
+    zia_bud.edit_item_attr(shave_way, factunit=x_factunit)
     return zia_bud
 
 
@@ -288,7 +288,7 @@ def get_budunit_irrational_example() -> BudUnit:
 
     # set egg pledge is True when chicken first is False
     hatter_bud.edit_item_attr(
-        way=egg_way,
+        egg_way,
         pledge=True,
         reason_base=chicken_way,
         reason_base_item_active_requisite=True,
@@ -296,7 +296,7 @@ def get_budunit_irrational_example() -> BudUnit:
 
     # set chick pledge is True when egg first is False
     hatter_bud.edit_item_attr(
-        way=chicken_way,
+        chicken_way,
         pledge=True,
         reason_base=egg_way,
         reason_base_item_active_requisite=False,
@@ -328,7 +328,7 @@ def get_mop_with_reason_budunit_example1():
 
     floor_reason = reasonunit_shop(status_way)
     floor_reason.set_premise(premise=status_way)
-    sue_bud.edit_item_attr(way=floor_way, reason=floor_reason)
+    sue_bud.edit_item_attr(floor_way, reason=floor_reason)
     return sue_bud
 
 
@@ -363,15 +363,15 @@ def get_budunit_laundry_example1() -> BudUnit:
 
     # laundry requirement
     amos_bud.edit_item_attr(
-        way=laundry_task_way, reason_base=basket_way, reason_premise=b_full_way
+        laundry_task_way, reason_base=basket_way, reason_premise=b_full_way
     )
     # laundry requirement
     amos_bud.edit_item_attr(
-        way=laundry_task_way, reason_base=basket_way, reason_premise=b_smel_way
+        laundry_task_way, reason_base=basket_way, reason_premise=b_smel_way
     )
     cali_teamunit = teamunit_shop()
     cali_teamunit.set_teamlink(cali_str)
-    amos_bud.edit_item_attr(way=laundry_task_way, teamunit=cali_teamunit)
+    amos_bud.edit_item_attr(laundry_task_way, teamunit=cali_teamunit)
     amos_bud.add_fact(fbase=basket_way, fneed=b_full_way)
 
     return amos_bud
@@ -385,9 +385,9 @@ def from_list_get_active(way: WayUnit, item_dict: dict, asse_bool: bool = None) 
     active_true_count = 0
     active_false_count = 0
     for item in item_dict.values():
-        if item.get_way() == way:
+        if item.get_item_way() == way:
             temp_item = item
-            print(f"s for ItemUnit {temp_item.get_way()}  {temp_item._active=}")
+            print(f"s for ItemUnit {temp_item.get_item_way()}  {temp_item._active=}")
 
         if item._active:
             active_true_count += 1

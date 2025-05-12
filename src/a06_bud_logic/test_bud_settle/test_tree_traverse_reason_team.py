@@ -15,7 +15,7 @@ def test_bud_edit_item_attr_CorrectlySetsTeamUnit():
 
     # WHEN
     x_teamunit = teamunit_shop()
-    xio_bud.edit_item_attr(teamunit=x_teamunit, way=run_way)
+    xio_bud.edit_item_attr(run_way, teamunit=x_teamunit)
 
     # THEN
     assert run_item.teamunit == x_teamunit
@@ -27,7 +27,7 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
 
     yao_bud = budunit_shop("Yao")
     root_way = to_way(yao_bud.fisc_tag)
-    yao_bud.edit_item_attr(teamunit=x_teamunit, way=root_way)
+    yao_bud.edit_item_attr(root_way, teamunit=x_teamunit)
     assert yao_bud.itemroot.teamunit == x_teamunit
     assert yao_bud.itemroot._teamheir is None
 
@@ -120,7 +120,7 @@ def test_bud_itemkid_teamunit_CorrectlySets_grandchild_item_teamheir():
     four_way = sue_bud.make_way(morn_way, four_str)
     x_teamunit = teamunit_shop()
     swimmers_str = ";swimmers"
-    x_teamunit.set_teamlink(team_title=swimmers_str)
+    x_teamunit.set_teamlink(team_label=swimmers_str)
 
     yao_str = "Yao"
     sue_bud.add_acctunit(yao_str)
@@ -166,8 +166,8 @@ def test_BudUnit__get_filtered_awardlinks_item_CorrectlyCleansItem_Teamunit():
     sue1_bud.set_item(itemunit_shop(casa_str), parent_way=sue1_bud.fisc_tag)
     sue1_bud.set_item(itemunit_shop(swim_str), parent_way=sue1_bud.fisc_tag)
     swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(team_title=xia_str)
-    swim_teamunit.set_teamlink(team_title=zoa_str)
+    swim_teamunit.set_teamlink(team_label=xia_str)
+    swim_teamunit.set_teamlink(team_label=zoa_str)
     sue1_bud.edit_item_attr(swim_way, teamunit=swim_teamunit)
     sue1_bud_swim_item = sue1_bud.get_item_obj(swim_way)
     sue1_bud_swim_teamlinks = sue1_bud_swim_item.teamunit._teamlinks
@@ -199,8 +199,8 @@ def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     sue1_bud.set_item(itemunit_shop(casa_str), parent_way=sue1_bud.fisc_tag)
     sue1_bud.set_item(itemunit_shop(swim_str), parent_way=sue1_bud.fisc_tag)
     swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(team_title=xia_str)
-    swim_teamunit.set_teamlink(team_title=zoa_str)
+    swim_teamunit.set_teamlink(team_label=xia_str)
+    swim_teamunit.set_teamlink(team_label=zoa_str)
     sue1_bud.edit_item_attr(swim_way, teamunit=swim_teamunit)
     sue1_bud_swim_item = sue1_bud.get_item_obj(swim_way)
     sue1_bud_swim_teamlinks = sue1_bud_swim_item.teamunit._teamlinks
@@ -210,7 +210,7 @@ def test_BudUnit_set_item_CorrectlyCleansItem_awardlinks():
     sue2_bud = budunit_shop("Sue")
     sue2_bud.add_acctunit(xia_str)
     sue2_bud.set_l1_item(
-        sue1_bud_swim_item, get_rid_of_missing_awardlinks_awardee_titles=False
+        sue1_bud_swim_item, get_rid_of_missing_awardlinks_awardee_labels=False
     )
 
     # THEN

@@ -263,7 +263,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     zia_bud.set_l1_item(itemunit_shop(run_str, pledge=True))
     zia_bud.set_item(itemunit_shop(day_str, begin=0, close=500), time_way)
     zia_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=day_way,
         reason_premise=day_way,
         reason_premise_open=25,
@@ -304,7 +304,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     zia_bud.set_l1_item(itemunit_shop(run_str, pledge=True))
     zia_bud.set_item(itemunit_shop(day_str, begin=0, close=500), time_way)
     zia_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=day_way,
         reason_premise=day_way,
         reason_premise_open=1,
@@ -399,10 +399,10 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     night_item = yao_bud._item_dict.get(night_way)
     # for item_x in yao_bud.get_agenda_dict():
     #     # if item_x._task != True:
-    #     #     print(f"{len(pledge_item_list)=} {item_x._task=} {item_x.get_way()}")
+    #     #     print(f"{len(pledge_item_list)=} {item_x._task=} {item_x.get_item_way()}")
     #     if item_x.item_tag == night_item_tag:
     #         night_item = item_x
-    #         print(f"{item_x.get_way()=}")
+    #         print(f"{item_x.get_item_way()=}")
 
     print(f"\nItem = '{night_str}' and reason '{gregtime_way}'")
     factheir_gregtime = night_item._factheirs.get(gregtime_way)
@@ -451,11 +451,11 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
     teamunit_sue = teamunit_shop()
-    teamunit_sue.set_teamlink(team_title=sue_str)
+    teamunit_sue.set_teamlink(team_label=sue_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_item_attr(way=casa_way, teamunit=teamunit_sue)
+    yao_bud.edit_item_attr(casa_way, teamunit=teamunit_sue)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0
@@ -463,10 +463,10 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     # WHEN
     yao_bud.add_acctunit(yao_str)
     teamunit_yao = teamunit_shop()
-    teamunit_yao.set_teamlink(team_title=yao_str)
+    teamunit_yao.set_teamlink(team_label=yao_str)
 
     # WHEN
-    yao_bud.edit_item_attr(way=casa_way, teamunit=teamunit_yao)
+    yao_bud.edit_item_attr(casa_way, teamunit=teamunit_yao)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
@@ -491,11 +491,11 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     sue_acctunit.add_membership(run_str)
 
     run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(team_title=run_str)
+    run_teamunit.set_teamlink(team_label=run_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_item_attr(way=casa_way, teamunit=run_teamunit)
+    yao_bud.edit_item_attr(casa_way, teamunit=run_teamunit)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0

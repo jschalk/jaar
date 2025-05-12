@@ -46,10 +46,10 @@ def test_teamunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
 def test_create_teamunit_ReturnsObj():
     # ESTABLISH
-    swim_team_title = GroupLabel("swimmers")
+    swim_team_label = GroupLabel("swimmers")
 
     # WHEN
-    swim_teamunit = create_teamunit(swim_team_title)
+    swim_teamunit = create_teamunit(swim_team_label)
 
     # THEN
     assert swim_teamunit
@@ -58,8 +58,8 @@ def test_create_teamunit_ReturnsObj():
 
 def test_TeamUnit_get_dict_ReturnsCorrectDictWithSingle_teamlink():
     # ESTABLISH
-    bob_team_title = GroupLabel("Bob")
-    x_teamlinks = {bob_team_title: bob_team_title}
+    bob_team_label = GroupLabel("Bob")
+    x_teamlinks = {bob_team_label: bob_team_label}
     x_teamunit = teamunit_shop(_teamlinks=x_teamlinks)
 
     # WHEN
@@ -67,7 +67,7 @@ def test_TeamUnit_get_dict_ReturnsCorrectDictWithSingle_teamlink():
 
     # THEN
     assert obj_dict is not None
-    example_dict = {"_teamlinks": [bob_team_title]}
+    example_dict = {"_teamlinks": [bob_team_label]}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
 
@@ -79,7 +79,7 @@ def test_TeamUnit_set_teamlink_CorrectlySets_teamlinks_v1():
 
     # WHEN
     yao_str = "Yao"
-    x_teamunit.set_teamlink(team_title=yao_str)
+    x_teamunit.set_teamlink(team_label=yao_str)
 
     # THEN
     assert len(x_teamunit._teamlinks) == 1
@@ -92,7 +92,7 @@ def test_TeamUnit_teamlink_exists_ReturnsObj():
     assert x_teamunit.teamlink_exists(yao_str) is False
 
     # WHEN
-    x_teamunit.set_teamlink(team_title=yao_str)
+    x_teamunit.set_teamlink(team_label=yao_str)
 
     # THEN
     assert x_teamunit.teamlink_exists(yao_str)
@@ -103,12 +103,12 @@ def test_TeamUnit_del_teamlink_CorrectlyDeletes_teamlinks_v1():
     x_teamunit = teamunit_shop()
     yao_str = "Yao"
     sue_str = "Sue"
-    x_teamunit.set_teamlink(team_title=yao_str)
-    x_teamunit.set_teamlink(team_title=sue_str)
+    x_teamunit.set_teamlink(team_label=yao_str)
+    x_teamunit.set_teamlink(team_label=sue_str)
     assert len(x_teamunit._teamlinks) == 2
 
     # WHEN
-    x_teamunit.del_teamlink(team_title=sue_str)
+    x_teamunit.del_teamlink(team_label=sue_str)
 
     # THEN
     assert len(x_teamunit._teamlinks) == 1
@@ -261,8 +261,8 @@ def test_TeamHeir_set_teamlink_TeamUnitNotEmpty_ParentTeamHeirIsNone():
     kent_str = "kent"
     swim_str = ",swim"
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_title=kent_str)
-    x_teamunit.set_teamlink(team_title=swim_str)
+    x_teamunit.set_teamlink(team_label=kent_str)
+    x_teamunit.set_teamlink(team_label=swim_str)
 
     # WHEN
     x_teamheir = teamheir_shop()
@@ -277,8 +277,8 @@ def test_TeamHeir_set_teamlink_TeamUnitNotEmpty_ParentTeamHeirEmpty():
     kent_str = "kent"
     swim_str = ",swim"
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_title=kent_str)
-    x_teamunit.set_teamlink(team_title=swim_str)
+    x_teamunit.set_teamlink(team_label=kent_str)
+    x_teamunit.set_teamlink(team_label=swim_str)
 
     # WHEN
     x_teamheir = teamheir_shop()
@@ -294,8 +294,8 @@ def test_TeamHeir_set_teamlink_TeamUnit_Empty_ParentTeamHeirNotEmpty():
     kent_str = "kent"
     swim_str = ",swim"
     teamunit_swim = teamunit_shop()
-    teamunit_swim.set_teamlink(team_title=kent_str)
-    teamunit_swim.set_teamlink(team_title=swim_str)
+    teamunit_swim.set_teamlink(team_label=kent_str)
+    teamunit_swim.set_teamlink(team_label=swim_str)
     empty_teamheir = teamheir_shop()
 
     parent_teamheir = teamheir_shop()
@@ -318,8 +318,8 @@ def test_TeamHeir_set_teamlink_TeamUnitEqualParentTeamHeir_NonEmpty():
     kent_str = "kent"
     swim_str = ",swim"
     teamunit_swim = teamunit_shop()
-    teamunit_swim.set_teamlink(team_title=kent_str)
-    teamunit_swim.set_teamlink(team_title=swim_str)
+    teamunit_swim.set_teamlink(team_label=kent_str)
+    teamunit_swim.set_teamlink(team_label=swim_str)
     empty_teamheir = teamheir_shop()
 
     parent_teamheir = teamheir_shop()
@@ -367,14 +367,14 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
     }
 
     parent_teamunit = teamunit_shop()
-    parent_teamunit.set_teamlink(team_title=swim3_str)
+    parent_teamunit.set_teamlink(team_label=swim3_str)
     parent_teamheir = teamheir_shop()
     parent_teamheir.set_teamlinks(
         parent_teamheir=None, teamunit=parent_teamunit, bud_groupunits=None
     )
 
     teamunit_swim2 = teamunit_shop()
-    teamunit_swim2.set_teamlink(team_title=swim2_str)
+    teamunit_swim2.set_teamlink(team_label=swim2_str)
 
     # WHEN
     x_teamheir = teamheir_shop()
@@ -405,7 +405,7 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 #     swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=sue_str))
 
 #     swim3_str = ",swim3"
-#     swim3_groupunit = groupunit_shop(team_title=swim3_str)
+#     swim3_groupunit = groupunit_shop(team_label=swim3_str)
 #     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=yao_str))
 #     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=sue_str))
 #     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=zia_str))
@@ -424,7 +424,7 @@ def test_TeamHeir_set_teamlink_TeamUnit_NotEqual_ParentTeamHeir_NonEmpty():
 #     parent_teamheir.set_teamlinks(None, parent_teamunit, x_groupunits)
 
 #     teamunit_swim3 = teamunit_shop()
-#     teamunit_swim3.set_teamlink(team_title=swim3_str)
+#     teamunit_swim3.set_teamlink(team_label=swim3_str)
 
 #     # WHEN / THEN
 #     x_teamheir = teamheir_shop()
@@ -456,15 +456,15 @@ def test_TeamUnit_get_teamlink_ReturnsObj():
     assert x_teamunit.get_teamlink(run_str) is None
 
 
-def test_TeamHeir_team_title_in_ReturnsCorrectBoolWhen_teamlinksNotEmpty():
+def test_TeamHeir_team_label_in_ReturnsCorrectBoolWhen_teamlinksNotEmpty():
     # ESTABLISH
     swim_str = ",swim"
     hike_str = ",hike"
     swim_dict = {swim_str}
     hike_dict = {hike_str}
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_title=swim_str)
-    x_teamunit.set_teamlink(team_title=hike_str)
+    x_teamunit.set_teamlink(team_label=swim_str)
+    x_teamunit.set_teamlink(team_label=hike_str)
     x_teamheir = teamheir_shop()
     x_teamheir.set_teamlinks(
         parent_teamheir=None, teamunit=x_teamunit, bud_groupunits=None

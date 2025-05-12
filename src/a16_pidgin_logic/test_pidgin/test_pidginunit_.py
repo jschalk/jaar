@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_TagUnit_str,
     type_WayUnit_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     face_name_str,
     fbase_str,
@@ -19,8 +19,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     need_str,
     penny_str,
     respect_bit_str,
-    way_str,
-    team_title_str,
+    item_way_str,
+    team_label_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
 from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
@@ -68,7 +68,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("acct_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
-    assert pidgin_args_class_types.get("awardee_title") == type_LabelUnit_str()
+    assert pidgin_args_class_types.get("awardee_label") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("base") == type_WayUnit_str()
     assert pidgin_args_class_types.get("base_item_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
@@ -114,12 +114,12 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("way") == type_WayUnit_str()
+    assert pidgin_args_class_types.get("item_way") == type_WayUnit_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
-    assert pidgin_args_class_types.get("team_title") == type_LabelUnit_str()
+    assert pidgin_args_class_types.get("team_label") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("deal_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("tran_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("timeline_tag") == type_TagUnit_str()
@@ -201,7 +201,7 @@ def test_pidginable_atom_args_ReturnsObj():
     assert len(pidginable_atom_args()) == 18
     assert pidginable_atom_args() == {
         acct_name_str(),
-        awardee_title_str(),
+        awardee_label_str(),
         base_str(),
         face_name_str(),
         fbase_str(),
@@ -214,8 +214,8 @@ def test_pidginable_atom_args_ReturnsObj():
         month_tag_str(),
         need_str(),
         owner_name_str(),
-        way_str(),
-        team_title_str(),
+        item_way_str(),
+        team_label_str(),
         timeline_tag_str(),
         weekday_tag_str(),
     }

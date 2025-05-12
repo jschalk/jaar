@@ -278,8 +278,8 @@ def add_bud_to_br00022_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
-                awardlink.awardee_title,
+                itemunit.get_item_way(),
+                awardlink.awardee_label,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
             ]
@@ -301,7 +301,7 @@ def add_bud_to_br00023_csv(
             if_none_str(event_int),
             x_bud.fisc_tag,
             x_bud.owner_name,
-            x_bud.itemroot.get_way(),
+            x_bud.itemroot.get_item_way(),
             factunit.fbase,
             factunit.fneed,
             if_none_str(factunit.fopen),
@@ -320,14 +320,14 @@ def add_bud_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for itemunit in x_bud._item_dict.values():
-        for group_title in itemunit.teamunit._teamlinks:
+        for group_label in itemunit.teamunit._teamlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
-                group_title,
+                itemunit.get_item_way(),
+                group_label,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -342,14 +342,14 @@ def add_bud_to_br00025_csv(
     event_int: int = None,
 ) -> str:
     for itemunit in x_bud._item_dict.values():
-        for group_title in itemunit.healerlink._healer_names:
+        for group_label in itemunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
-                group_title,
+                itemunit.get_item_way(),
+                group_label,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -371,7 +371,7 @@ def add_bud_to_br00026_csv(
                     if_none_str(event_int),
                     x_bud.fisc_tag,
                     x_bud.owner_name,
-                    itemunit.get_way(),
+                    itemunit.get_item_way(),
                     reasonunit.base,
                     premiseunit.need,
                     if_none_str(premiseunit.open),
@@ -397,7 +397,7 @@ def add_bud_to_br00027_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 reasonunit.base,
                 if_none_str(reasonunit.base_item_active_requisite),
             ]
@@ -420,7 +420,7 @@ def add_bud_to_br00028_csv(
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
-                itemunit.get_way(),
+                itemunit.get_item_way(),
                 if_none_str(itemunit.begin),
                 if_none_str(itemunit.close),
                 if_none_str(itemunit.addin),
@@ -629,8 +629,8 @@ def add_pack_to_br00022_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
-                budatom.jkeys.get("awardee_title"),
+                budatom.jkeys.get("item_way"),
+                budatom.jkeys.get("awardee_label"),
                 if_none_str(budatom.jvalues.get("give_force")),
                 if_none_str(budatom.jvalues.get("take_force")),
             ]
@@ -649,7 +649,7 @@ def add_pack_to_br00023_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("fbase"),
                 if_none_str(budatom.jvalues.get("fneed")),
                 if_none_str(budatom.jvalues.get("fopen")),
@@ -670,8 +670,8 @@ def add_pack_to_br00024_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
-                budatom.jkeys.get("team_title"),
+                budatom.jkeys.get("item_way"),
+                budatom.jkeys.get("team_label"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -688,7 +688,7 @@ def add_pack_to_br00025_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -706,7 +706,7 @@ def add_pack_to_br00026_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("base"),
                 budatom.jkeys.get("need"),
                 if_none_str(budatom.jvalues.get("open")),
@@ -728,7 +728,7 @@ def add_pack_to_br00027_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("base"),
                 if_none_str(budatom.jvalues.get("base_item_active_requisite")),
             ]
@@ -747,7 +747,7 @@ def add_pack_to_br00028_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 if_none_str(budatom.jvalues.get("begin")),
                 if_none_str(budatom.jvalues.get("close")),
                 if_none_str(budatom.jvalues.get("addin")),

@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "awardee_title": {
+        "awardee_label": {
             "otx_key": true
         },
         "event_int": {
@@ -18,7 +18,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "way": {
+        "item_way": {
             "otx_key": true
         },
         "take_force": {

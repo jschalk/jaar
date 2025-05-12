@@ -152,8 +152,8 @@ def test_itemunit_shop_ReturnsObjWith_awardlinks():
     swim_take_force = 32
     swim_awardlink = awardlink_shop(swim_group_label, swim_give_force, swim_take_force)
     x_awardlinks = {
-        swim_awardlink.awardee_title: swim_awardlink,
-        biker_awardlink.awardee_title: biker_awardlink,
+        swim_awardlink.awardee_label: swim_awardlink,
+        biker_awardlink.awardee_label: biker_awardlink,
     }
 
     # WHEN
@@ -205,7 +205,7 @@ def test_ItemUnit_get_way_ReturnsObj():
 
     # THEN
     ball_way = create_way(round_way, ball_str, bridge=slash_str)
-    assert ball_item.get_way() == ball_way
+    assert ball_item.get_item_way() == ball_way
 
 
 def test_ItemUnit_set_parent_way_SetsAttr():

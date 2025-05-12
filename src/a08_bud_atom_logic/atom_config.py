@@ -63,7 +63,7 @@ def get_atom_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "NameUnit",
         "addin": "float",
-        "awardee_title": "LabelUnit",
+        "awardee_label": "LabelUnit",
         "base": "WayUnit",
         "base_item_active_requisite": "bool",
         "begin": "float",
@@ -97,11 +97,11 @@ def get_atom_args_class_types() -> dict[str, str]:
         "pledge": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
-        "way": "WayUnit",
+        "item_way": "WayUnit",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_title": "LabelUnit",
+        "team_label": "LabelUnit",
     }
 
 
@@ -242,15 +242,15 @@ def get_bud_dimens() -> set:
 def get_all_bud_dimen_keys() -> set:
     return {
         "acct_name",
-        "awardee_title",
+        "awardee_label",
         "base",
         "fbase",
         "group_label",
         "healer_name",
         "need",
         "owner_name",
-        "way",
-        "team_title",
+        "item_way",
+        "team_label",
     }
 
 
@@ -261,15 +261,15 @@ def get_delete_key_name(key: str) -> str:
 def get_all_bud_dimen_delete_keys() -> set:
     return {
         "acct_name_ERASE",
-        "awardee_title_ERASE",
+        "awardee_label_ERASE",
         "base_ERASE",
         "fbase_ERASE",
         "group_label_ERASE",
         "healer_name_ERASE",
         "need_ERASE",
         "owner_name_ERASE",
-        "way_ERASE",
-        "team_title_ERASE",
+        "item_way_ERASE",
+        "team_label_ERASE",
     }
 
 

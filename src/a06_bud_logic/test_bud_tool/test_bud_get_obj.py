@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
     bud_item_healerlink_str,
     bud_item_factunit_str,
-    way_str,
+    item_way_str,
     base_str,
     fbase_str,
     need_str,
@@ -66,7 +66,7 @@ def test_bud_itemunit_get_obj_ReturnsObj():
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way}
+    jkeys = {item_way_str(): casa_way}
 
     # WHEN
     x_obj = bud_itemunit_get_obj(sue_bud, jkeys)
@@ -82,7 +82,7 @@ def test_bud_item_awardlink_get_obj_ReturnsObj():
     swim_str = "swim"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way, "awardee_title": swim_str}
+    jkeys = {item_way_str(): casa_way, "awardee_label": swim_str}
     sue_bud.add_item(casa_way)
     sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
 
@@ -100,7 +100,7 @@ def test_bud_item_reasonunit_get_obj_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way, base_str(): week_way}
+    jkeys = {item_way_str(): casa_way, base_str(): week_way}
     sue_bud.add_item(casa_way)
     sue_bud.add_item(week_way)
     sue_bud.get_item_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
@@ -120,7 +120,7 @@ def test_bud_item_reason_premiseunit_get_obj_ReturnsObj():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
-    casa_jkeys = {way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    casa_jkeys = {item_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
     sue_bud.add_item(casa_way)
     sue_bud.add_item(week_way)
     sue_bud.add_item(thur_way)
@@ -142,7 +142,7 @@ def test_bud_item_factunit_get_obj_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way, fbase_str(): week_way}
+    jkeys = {item_way_str(): casa_way, fbase_str(): week_way}
     sue_bud.add_item(casa_way)
     sue_bud.add_item(week_way)
     sue_bud.get_item_obj(casa_way).set_factunit(factunit_shop(week_way))
@@ -204,7 +204,7 @@ def test_bud_get_obj_ReturnsObj_bud_itemunit_get_obj():
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way}
+    jkeys = {item_way_str(): casa_way}
 
     # WHEN
     x_obj = bud_get_obj(bud_itemunit_str(), sue_bud, jkeys)
@@ -220,7 +220,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_awardlink_get_obj():
     swim_str = "swim"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way, "awardee_title": swim_str}
+    jkeys = {item_way_str(): casa_way, "awardee_label": swim_str}
     sue_bud.add_item(casa_way)
     sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
 
@@ -238,7 +238,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_reasonunit_get_obj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way, base_str(): week_way}
+    jkeys = {item_way_str(): casa_way, base_str(): week_way}
     sue_bud.add_item(casa_way)
     sue_bud.add_item(week_way)
     sue_bud.get_item_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
@@ -258,7 +258,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_reason_premiseunit_get_obj():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
-    casa_jkeys = {way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    casa_jkeys = {item_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
     sue_bud.add_item(casa_way)
     sue_bud.add_item(week_way)
     sue_bud.add_item(thur_way)
@@ -280,7 +280,7 @@ def test_bud_get_obj_ReturnsObj_bud_item_factunit_get_obj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_item(casa_way)
-    jkeys = {way_str(): casa_way, fbase_str(): week_way}
+    jkeys = {item_way_str(): casa_way, fbase_str(): week_way}
     sue_bud.add_item(casa_way)
     sue_bud.add_item(week_way)
     sue_bud.get_item_obj(casa_way).set_factunit(factunit_shop(week_way))

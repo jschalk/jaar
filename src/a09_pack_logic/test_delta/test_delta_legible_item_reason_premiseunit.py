@@ -1,6 +1,6 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_item_reason_premiseunit_str,
-    way_str,
+    item_way_str,
     base_str,
     need_str,
     nigh_str,
@@ -23,7 +23,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithOutNu
     base_value = sue_bud.make_way(casa_way, "fridge status")
     need_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     # print(f"{swim_budatom=}")
@@ -52,7 +52,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_INSERT_WithNumbe
     nigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     swim_budatom.set_arg("divisor", divisor_value)
@@ -81,7 +81,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithOutNu
     base_value = sue_bud.make_way(casa_way, "fridge status")
     need_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     # print(f"{swim_budatom=}")
@@ -110,7 +110,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_UPDATE_WithNumbe
     nigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     swim_budatom.set_arg("divisor", divisor_value)
@@ -139,7 +139,7 @@ def test_create_legible_list_ReturnsObj_item_reason_premiseunit_DELETE():
     base_value = sue_bud.make_way(casa_way, "fridge status")
     need_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_delete())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(base_str(), base_value)
     swim_budatom.set_arg(need_str(), need_value)
     # print(f"{swim_budatom=}")

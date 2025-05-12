@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     addin_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     begin_str,
     close_str,
@@ -29,9 +29,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     parent_way_str,
     penny_str,
     respect_bit_str,
-    way_str,
+    item_way_str,
     stop_want_str,
-    team_title_str,
+    team_label_str,
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
@@ -42,7 +42,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 def test_str_functions_ReturnsObj():
     assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
-    assert awardee_title_str() == "awardee_title"
+    assert awardee_label_str() == "awardee_label"
     assert base_str() == "base"
     assert fbase_str() == "fbase"
     assert begin_str() == "begin"
@@ -69,9 +69,9 @@ def test_str_functions_ReturnsObj():
     assert parent_way_str() == "parent_way"
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"
-    assert way_str() == "way"
+    assert item_way_str() == "item_way"
     assert stop_want_str() == "stop_want"
-    assert team_title_str() == "team_title"
+    assert team_label_str() == "team_label"
     assert type_NameUnit_str() == "NameUnit"
     assert type_LabelUnit_str() == "LabelUnit"
     assert type_TagUnit_str() == "TagUnit"

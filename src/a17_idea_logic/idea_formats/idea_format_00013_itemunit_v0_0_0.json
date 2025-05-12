@@ -18,7 +18,7 @@
         "pledge": {
             "otx_key": false
         },
-        "way": {
+        "item_way": {
             "otx_key": true
         }
     },

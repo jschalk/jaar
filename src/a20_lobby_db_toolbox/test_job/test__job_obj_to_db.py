@@ -146,7 +146,7 @@ def test_create_buditem_metrics_insert_sqlstr_ReturnsObj():
         "mass": x_mass,
         "morph": x_morph,
         "numor": x_numor,
-        "way": x_way,
+        "item_way": x_way,
         "pledge": x_pledge,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
@@ -205,7 +205,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
-        "way": x_way,
+        "item_way": x_way,
         "base": x_base,
         "base_item_active_requisite": x_base_item_active_requisite,
         "_task": x__task,
@@ -271,7 +271,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
-        "way": x_way,
+        "item_way": x_way,
         "base": x_base,
         "need": x_need,
         "nigh": x_nigh,
@@ -328,7 +328,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_awardee_title = 2
+    x_awardee_label = 2
     x_give_force = 3
     x_take_force = 4
     x__fund_give = 5
@@ -337,8 +337,8 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
-        "way": x_way,
-        "awardee_title": x_awardee_title,
+        "item_way": x_way,
+        "awardee_label": x_awardee_label,
         "give_force": x_give_force,
         "take_force": x_take_force,
         "_fund_give": x__fund_give,
@@ -400,7 +400,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
-        "way": x_way,
+        "item_way": x_way,
         "fbase": x_fbase,
         "fneed": x_fneed,
         "fopen": x_fopen,
@@ -459,7 +459,7 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
-        "way": x_way,
+        "item_way": x_way,
         "healer_name": x_healer_name,
     }
     # all args included in values dict
@@ -510,14 +510,14 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_team_title = 2
+    x_team_label = 2
     x__owner_name_team = 3
     values_dict = {
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
-        "way": x_way,
-        "team_title": x_team_title,
+        "item_way": x_way,
+        "team_label": x_team_label,
         "_owner_name_team": x__owner_name_team,
     }
     # all args included in values dict

@@ -15,7 +15,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     acct_pool_str,
     addin_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     fbase_str,
     begin_str,
@@ -39,9 +39,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     parent_way_str,
     penny_str,
     respect_bit_str,
-    way_str,
+    item_way_str,
     stop_want_str,
-    team_title_str,
+    team_label_str,
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
@@ -361,8 +361,8 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if way_str() in new_jkey_keys:
-            new_jkey_keys.remove(way_str())
+        if item_way_str() in new_jkey_keys:
+            new_jkey_keys.remove(item_way_str())
         if base_str() in new_jkey_keys:
             new_jkey_keys.remove(base_str())
         if acct_name_str() in new_jkey_keys:
@@ -403,7 +403,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [way_str(), base_str(), "need"]
+    assert x_sorted_jkey_keys == [item_way_str(), base_str(), "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -528,7 +528,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     item_columns = cat_item.get(columns_str)
     assert len(item_columns) == 13
     assert item_columns.get("uid") is not None
-    assert item_columns.get(way_str()) is not None
+    assert item_columns.get(item_way_str()) is not None
     assert item_columns.get(begin_str()) is not None
     assert item_columns.get(close_str()) is not None
 
@@ -550,8 +550,8 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert x_atom_args_dimen_mapping
     assert x_atom_args_dimen_mapping.get(stop_want_str())
     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
-    assert x_atom_args_dimen_mapping.get(way_str())
-    way_dimens = x_atom_args_dimen_mapping.get(way_str())
+    assert x_atom_args_dimen_mapping.get(item_way_str())
+    way_dimens = x_atom_args_dimen_mapping.get(item_way_str())
     assert bud_item_factunit_str() in way_dimens
     assert bud_item_teamlink_str() in way_dimens
     assert len(way_dimens) == 7
@@ -643,7 +643,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     # THEN
     assert x_class_types.get(acct_name_str()) == type_NameUnit_str()
     assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_title_str()) == type_LabelUnit_str()
+    assert x_class_types.get(awardee_label_str()) == type_LabelUnit_str()
     assert x_class_types.get(base_str()) == type_WayUnit_str()
     assert x_class_types.get("base_item_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
@@ -677,10 +677,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("fneed") == type_WayUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(way_str()) == type_WayUnit_str()
+    assert x_class_types.get(item_way_str()) == type_WayUnit_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(team_title_str()) == type_LabelUnit_str()
+    assert x_class_types.get(team_label_str()) == type_LabelUnit_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

@@ -122,4 +122,3 @@ VALUES ('{accord23_str}'), ('{accord45_str}')
 #         bridge=a45_bridge,
 #         timeline=expected_45_tl,
 #     )
-#     assert 1 == 2

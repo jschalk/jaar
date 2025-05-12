@@ -89,7 +89,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario2_itemroot_teamunit():
     run_str = "runners"
     sue_bud = budunit_shop("Sue")
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_title=run_str)
+    x_teamunit.set_teamlink(team_label=run_str)
     root_way = to_way(sue_bud.fisc_tag)
     sue_bud.edit_item_attr(root_way, teamunit=x_teamunit)
     root_item = sue_bud.get_item_obj(root_way)
@@ -120,7 +120,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario3_With_itemroot_healerlink():
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
     root_way = to_way(sue_bud.fisc_tag)
-    sue_bud.edit_item_attr(way=root_way, healerlink=run_healerlink)
+    sue_bud.edit_item_attr(root_way, healerlink=run_healerlink)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -143,8 +143,8 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario4_itemkid_TeamUnit():
     morn_way = sue_bud.make_l1_way(morn_str)
     sue_bud.set_l1_item(itemunit_shop(morn_str))
     x_teamunit = teamunit_shop()
-    x_teamunit.set_teamlink(team_title=run_str)
-    sue_bud.edit_item_attr(teamunit=x_teamunit, way=morn_way)
+    x_teamunit.set_teamlink(team_label=run_str)
+    sue_bud.edit_item_attr(morn_way, teamunit=x_teamunit)
 
     # WHEN
     bud_dict = sue_bud.get_dict()
@@ -178,8 +178,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
     root_way = to_way(zia_bud.fisc_tag)
-    zia_bud.edit_item_attr(way=root_way, healerlink=run_healerlink)
-    zia_bud.edit_item_attr(way=root_way, problem_bool=True)
+    zia_bud.edit_item_attr(root_way, healerlink=run_healerlink)
+    zia_bud.edit_item_attr(root_way, problem_bool=True)
 
     # WHEN
     x_json = zia_bud.get_json()
@@ -237,7 +237,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     day_min_way = yao_bud.make_l1_way(day_min_str)
     yao_bud.add_fact(fbase=day_min_way, fneed=day_min_way, fopen=0, fnigh=59)
     x_factunit = factunit_shop(day_min_way, day_min_way, 5, 59)
-    yao_bud.edit_item_attr(way=x_factunit.fbase, factunit=x_factunit)
+    yao_bud.edit_item_attr(x_factunit.fbase, factunit=x_factunit)
     yao_bud.set_max_tree_traverse(2)
     yao_str = "Yao"
     yao_bud.originunit.set_originhold(yao_str, 1)
@@ -327,11 +327,11 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     sue_acctunit.add_membership(run_str)
     xio_acctunit.add_membership(run_str)
     run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(team_title=run_str)
+    run_teamunit.set_teamlink(team_label=run_str)
     root_way = to_way(zia_bud.fisc_tag)
     zia_bud.edit_item_attr(root_way, teamunit=run_teamunit)
     xio_teamunit = teamunit_shop()
-    xio_teamunit.set_teamlink(team_title=xio_str)
+    xio_teamunit.set_teamlink(team_label=xio_str)
     zia_bud.edit_item_attr(shave_way, teamunit=xio_teamunit)
     zia_bud.edit_item_attr(shave_way, awardlink=awardlink_shop(xio_str))
     zia_bud.edit_item_attr(shave_way, awardlink=awardlink_shop(sue_str))

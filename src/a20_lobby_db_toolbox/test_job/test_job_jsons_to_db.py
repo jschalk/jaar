@@ -680,13 +680,13 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     x_fisc_tag = 1
     x_owner_name = 2
     x_way = 3
-    x_awardee_title = 4
+    x_awardee_label = 4
     x_give_force = 5
     x_take_force = 6
     x__fund_give = 7
     x__fund_take = 8
-    x_awardheir = awardheir_shop(x_awardee_title)
-    x_awardheir.awardee_title = x_awardee_title
+    x_awardheir = awardheir_shop(x_awardee_label)
+    x_awardheir.awardee_label = x_awardee_label
     x_awardheir.give_force = x_give_force
     x_awardheir.take_force = x_take_force
     x_awardheir._fund_give = x__fund_give
@@ -712,7 +712,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
             str(x_fisc_tag),
             str(x_owner_name),
             str(x_way),
-            str(x_awardee_title),
+            str(x_awardee_label),
             x_give_force,
             x_take_force,
             x__fund_give,
@@ -918,12 +918,10 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
     sue_bud.add_item(dirty_way)
-    sue_bud.edit_item_attr(
-        way=casa_way, reason_base=status_way, reason_premise=dirty_way
-    )
-    sue_bud.edit_item_attr(way=casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_item_attr(way=casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(way=casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.edit_item_attr(casa_way, reason_base=status_way, reason_premise=dirty_way)
+    sue_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_item_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(casa_way, teamunit=teamunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
 
     with sqlite3_connect(":memory:") as conn:
@@ -992,12 +990,10 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
     sue_bud.add_item(dirty_way)
-    sue_bud.edit_item_attr(
-        way=casa_way, reason_base=status_way, reason_premise=dirty_way
-    )
-    sue_bud.edit_item_attr(way=casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_item_attr(way=casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(way=casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.edit_item_attr(casa_way, reason_base=status_way, reason_premise=dirty_way)
+    sue_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_item_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(casa_way, teamunit=teamunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
     print(f"{sue_bud.get_item_obj(casa_way).teamunit=}")
     print(f"{sue_bud.get_item_obj(casa_way).get_dict()=}")

@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "awardee_title_ERASE": {
+        "awardee_label_ERASE": {
             "otx_key": true
         },
         "event_int": {
@@ -15,7 +15,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "way": {
+        "item_way": {
             "otx_key": true
         }
     },

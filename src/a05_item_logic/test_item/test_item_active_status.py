@@ -80,7 +80,7 @@ def test_ItemUnit_get_awardlink_ReturnsObj():
 
     # THEN
     assert biker_awardlink
-    assert biker_awardlink.awardee_title == biker_str
+    assert biker_awardlink.awardee_label == biker_str
 
 
 def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -95,8 +95,8 @@ def test_ItemUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     swim_take_force = 32
     swim_awardheir = awardheir_shop(swim_group_label, swim_give_force, swim_take_force)
     x_awardheirs = {
-        swim_awardheir.awardee_title: swim_awardheir,
-        biker_awardheir.awardee_title: biker_awardheir,
+        swim_awardheir.awardee_label: swim_awardheir,
+        biker_awardheir.awardee_label: biker_awardheir,
     }
     sport_str = "sport"
     sport_item = itemunit_shop(sport_str, _awardheirs=x_awardheirs)
@@ -222,7 +222,10 @@ def test_ItemUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_item = itemunit_shop(ball_str)
     ball_item._set_factheir(week_factheir)
     tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    x_bud_item_dict = {week_item.get_way(): week_item, tue_item.get_way(): tue_item}
+    x_bud_item_dict = {
+        week_item.get_item_way(): week_item,
+        tue_item.get_item_way(): tue_item,
+    }
     ball_item.set_reasonheirs(x_bud_item_dict, tue_reasonheirs)
 
     x_range_inheritors = {tue_way: week_way}
@@ -451,7 +454,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     swim_str = "swimmers"
     sport_str = "sports"
     sport_item = itemunit_shop(sport_str)
-    sport_item.teamunit.set_teamlink(team_title=swim_str)
+    sport_item.teamunit.set_teamlink(team_label=swim_str)
     # assert sport_item._teamheir is None
 
     # WHEN
@@ -460,7 +463,7 @@ def test_ItemUnit_set_teamheir_CorrectlySetsAttr():
     # THEN
     assert sport_item._teamheir is not None
     swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(team_title=swim_str)
+    swim_teamunit.set_teamlink(team_label=swim_str)
     swim_teamheir = teamheir_shop()
     swim_teamheir.set_teamlinks(
         teamunit=swim_teamunit, parent_teamheir=None, bud_groupunits=None

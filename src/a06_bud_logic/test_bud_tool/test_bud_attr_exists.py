@@ -27,13 +27,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     fbase_str,
     group_label_str,
     need_str,
-    way_str,
-    team_title_str,
+    item_way_str,
+    team_label_str,
     healer_name_str,
 )
 
@@ -99,10 +99,10 @@ def test_bud_itemunit_exists_ReturnsObj():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_way = sue_bud.make_way(clean_way, "sweep")
     root_way = to_way(sue_bud.fisc_tag)
-    root_jkeys = {way_str(): root_way}
-    casa_jkeys = {way_str(): casa_way}
-    clean_jkeys = {way_str(): clean_way}
-    sweep_jkeys = {way_str(): sweep_way}
+    root_jkeys = {item_way_str(): root_way}
+    casa_jkeys = {item_way_str(): casa_way}
+    clean_jkeys = {item_way_str(): clean_way}
+    sweep_jkeys = {item_way_str(): sweep_way}
 
     # WHEN / THEN
     assert not bud_itemunit_exists(None, {})
@@ -141,9 +141,9 @@ def test_bud_item_awardlink_exists_ReturnsObj():
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
     root_way = to_way(sue_bud.fisc_tag)
-    root_jkeys = {way_str(): root_way, awardee_title_str(): swim_str}
-    casa_jkeys = {way_str(): casa_way, awardee_title_str(): swim_str}
-    clean_jkeys = {way_str(): clean_way, awardee_title_str(): swim_str}
+    root_jkeys = {item_way_str(): root_way, awardee_label_str(): swim_str}
+    casa_jkeys = {item_way_str(): casa_way, awardee_label_str(): swim_str}
+    clean_jkeys = {item_way_str(): clean_way, awardee_label_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_item_awardlink_exists(None, {})
@@ -171,9 +171,9 @@ def test_bud_item_reasonunit_exists_ReturnsObj():
     root_way = to_way(sue_bud.fisc_tag)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
-    root_jkeys = {way_str(): root_way, base_str(): week_way}
-    casa_jkeys = {way_str(): casa_way, base_str(): week_way}
-    clean_jkeys = {way_str(): clean_way, base_str(): week_way}
+    root_jkeys = {item_way_str(): root_way, base_str(): week_way}
+    casa_jkeys = {item_way_str(): casa_way, base_str(): week_way}
+    clean_jkeys = {item_way_str(): clean_way, base_str(): week_way}
 
     # WHEN / THEN
     assert not bud_item_reasonunit_exists(None, {})
@@ -203,9 +203,13 @@ def test_bud_item_reason_premiseunit_exists_ReturnsObj():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
-    root_jkeys = {way_str(): root_way, base_str(): week_way, need_str(): thur_way}
-    casa_jkeys = {way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
-    clean_jkeys = {way_str(): clean_way, base_str(): week_way, need_str(): thur_way}
+    root_jkeys = {item_way_str(): root_way, base_str(): week_way, need_str(): thur_way}
+    casa_jkeys = {item_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    clean_jkeys = {
+        item_way_str(): clean_way,
+        base_str(): week_way,
+        need_str(): thur_way,
+    }
 
     # WHEN / THEN
     assert not premiseunit_exists(None, {})
@@ -244,9 +248,9 @@ def test_bud_item_teamlink_exists_ReturnsObj():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
-    root_jkeys = {way_str(): root_way, team_title_str(): swim_str}
-    casa_jkeys = {way_str(): casa_way, team_title_str(): swim_str}
-    clean_jkeys = {way_str(): clean_way, team_title_str(): swim_str}
+    root_jkeys = {item_way_str(): root_way, team_label_str(): swim_str}
+    casa_jkeys = {item_way_str(): casa_way, team_label_str(): swim_str}
+    clean_jkeys = {item_way_str(): clean_way, team_label_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_item_teamlink_exists(None, {})
@@ -274,9 +278,9 @@ def test_bud_item_healerlink_exists_ReturnsObj():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
-    root_jkeys = {way_str(): root_way, healer_name_str(): swim_str}
-    casa_jkeys = {way_str(): casa_way, healer_name_str(): swim_str}
-    clean_jkeys = {way_str(): clean_way, healer_name_str(): swim_str}
+    root_jkeys = {item_way_str(): root_way, healer_name_str(): swim_str}
+    casa_jkeys = {item_way_str(): casa_way, healer_name_str(): swim_str}
+    clean_jkeys = {item_way_str(): clean_way, healer_name_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_item_healerlink_exists(None, {})
@@ -304,9 +308,9 @@ def test_bud_item_factunit_exists_ReturnsObj():
     root_way = to_way(sue_bud.fisc_tag)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
-    root_jkeys = {way_str(): root_way, fbase_str(): week_way}
-    casa_jkeys = {way_str(): casa_way, fbase_str(): week_way}
-    clean_jkeys = {way_str(): clean_way, fbase_str(): week_way}
+    root_jkeys = {item_way_str(): root_way, fbase_str(): week_way}
+    casa_jkeys = {item_way_str(): casa_way, fbase_str(): week_way}
+    clean_jkeys = {item_way_str(): clean_way, fbase_str(): week_way}
 
     # WHEN / THEN
     assert not bud_item_factunit_exists(None, {})
@@ -388,10 +392,10 @@ def test_bud_attr_exists_ReturnsObj_bud_itemunit():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_way = sue_bud.make_way(clean_way, "sweep")
     x_parent_way = to_way(sue_bud.fisc_tag)
-    root_jkeys = {way_str(): x_parent_way}
-    casa_jkeys = {way_str(): casa_way}
-    clean_jkeys = {way_str(): clean_way}
-    sweep_jkeys = {way_str(): sweep_way}
+    root_jkeys = {item_way_str(): x_parent_way}
+    casa_jkeys = {item_way_str(): casa_way}
+    clean_jkeys = {item_way_str(): clean_way}
+    sweep_jkeys = {item_way_str(): sweep_way}
     x_dimen = bud_itemunit_str()
 
     # WHEN / THEN
@@ -431,9 +435,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_awardlink():
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
     x_dimen = bud_item_awardlink_str()
-    root_jkeys = {way_str(): root_way, awardee_title_str(): swim_str}
-    casa_jkeys = {way_str(): casa_way, awardee_title_str(): swim_str}
-    clean_jkeys = {way_str(): clean_way, awardee_title_str(): swim_str}
+    root_jkeys = {item_way_str(): root_way, awardee_label_str(): swim_str}
+    casa_jkeys = {item_way_str(): casa_way, awardee_label_str(): swim_str}
+    clean_jkeys = {item_way_str(): clean_way, awardee_label_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -462,9 +466,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reasonunit():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     x_dimen = bud_item_reasonunit_str()
-    root_jkeys = {way_str(): root_way, base_str(): week_way}
-    casa_jkeys = {way_str(): casa_way, base_str(): week_way}
-    clean_jkeys = {way_str(): clean_way, base_str(): week_way}
+    root_jkeys = {item_way_str(): root_way, base_str(): week_way}
+    casa_jkeys = {item_way_str(): casa_way, base_str(): week_way}
+    clean_jkeys = {item_way_str(): clean_way, base_str(): week_way}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -494,9 +498,13 @@ def test_bud_attr_exists_ReturnsObj_bud_item_reason_premiseunit():
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
     x_dimen = bud_item_reason_premiseunit_str()
-    root_jkeys = {way_str(): root_way, base_str(): week_way, need_str(): thur_way}
-    casa_jkeys = {way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
-    clean_jkeys = {way_str(): clean_way, base_str(): week_way, need_str(): thur_way}
+    root_jkeys = {item_way_str(): root_way, base_str(): week_way, need_str(): thur_way}
+    casa_jkeys = {item_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    clean_jkeys = {
+        item_way_str(): clean_way,
+        base_str(): week_way,
+        need_str(): thur_way,
+    }
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -534,9 +542,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_teamlink():
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
     x_dimen = bud_item_teamlink_str()
-    root_jkeys = {way_str(): root_way, team_title_str(): swim_str}
-    casa_jkeys = {way_str(): casa_way, team_title_str(): swim_str}
-    clean_jkeys = {way_str(): clean_way, team_title_str(): swim_str}
+    root_jkeys = {item_way_str(): root_way, team_label_str(): swim_str}
+    casa_jkeys = {item_way_str(): casa_way, team_label_str(): swim_str}
+    clean_jkeys = {item_way_str(): clean_way, team_label_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -565,9 +573,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_healerlink():
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
     x_dimen = bud_item_healerlink_str()
-    root_jkeys = {way_str(): root_way, healer_name_str(): swim_str}
-    casa_jkeys = {way_str(): casa_way, healer_name_str(): swim_str}
-    clean_jkeys = {way_str(): clean_way, healer_name_str(): swim_str}
+    root_jkeys = {item_way_str(): root_way, healer_name_str(): swim_str}
+    casa_jkeys = {item_way_str(): casa_way, healer_name_str(): swim_str}
+    clean_jkeys = {item_way_str(): clean_way, healer_name_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -596,9 +604,9 @@ def test_bud_attr_exists_ReturnsObj_bud_item_factunit():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     x_dimen = bud_item_factunit_str()
-    root_jkeys = {way_str(): root_way, fbase_str(): week_way}
-    casa_jkeys = {way_str(): casa_way, fbase_str(): week_way}
-    clean_jkeys = {way_str(): clean_way, fbase_str(): week_way}
+    root_jkeys = {item_way_str(): root_way, fbase_str(): week_way}
+    casa_jkeys = {item_way_str(): casa_way, fbase_str(): week_way}
+    clean_jkeys = {item_way_str(): clean_way, fbase_str(): week_way}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})

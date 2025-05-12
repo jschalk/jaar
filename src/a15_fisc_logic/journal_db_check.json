@@ -31,7 +31,7 @@
         "way_ref": {
             "columns": {
                 "bridge": {},
-                "way": {}
+                "item_way": {}
             }
         }
     }

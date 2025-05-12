@@ -28,5 +28,3 @@
 #     # THEN
 #     with accord_fisc.get_journal_conn() as journal_conn:
 #         assert get_row_count(journal_conn, atom_hx_table_name()) == 1
-
-#     assert 1 == 2

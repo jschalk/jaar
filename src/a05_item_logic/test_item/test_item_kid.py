@@ -104,7 +104,7 @@ def test_ItemUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
         nation_item.get_descendant_ways_from_kids()
     assert (
         str(excinfo.value)
-        == f"Item '{nation_item.get_way()}' either has an infinite loop or more than {max_count} descendants."
+        == f"Item '{nation_item.get_item_way()}' either has an infinite loop or more than {max_count} descendants."
     )
 
 

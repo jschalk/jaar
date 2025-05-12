@@ -33,7 +33,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "way": {
+        "item_way": {
             "otx_key": true
         },
         "stop_want": {

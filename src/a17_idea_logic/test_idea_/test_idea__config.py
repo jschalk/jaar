@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_factunit_str,
     acct_name_str,
     addin_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     base_item_active_requisite_str,
     begin_str,
@@ -33,9 +33,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     fneed_str,
     group_label_str,
     healer_name_str,
-    way_str,
+    item_way_str,
     numor_str,
-    team_title_str,
+    team_label_str,
     close_str,
     credit_belief_str,
     debtit_belief_str,
@@ -234,8 +234,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[21] == get_delete_key_name(acct_name_str())
     assert table_sorting_priority[22] == group_label_str()
     assert table_sorting_priority[23] == get_delete_key_name(group_label_str())
-    assert table_sorting_priority[24] == way_str()
-    assert table_sorting_priority[25] == get_delete_key_name(way_str())
+    assert table_sorting_priority[24] == item_way_str()
+    assert table_sorting_priority[25] == get_delete_key_name(item_way_str())
     assert table_sorting_priority[26] == base_str()
     assert table_sorting_priority[27] == get_delete_key_name(base_str())
     assert table_sorting_priority[28] == fbase_str()
@@ -243,10 +243,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[30] == need_str()
     assert table_sorting_priority[31] == get_delete_key_name(need_str())
     assert table_sorting_priority[32] == fneed_str()
-    assert table_sorting_priority[33] == team_title_str()
-    assert table_sorting_priority[34] == get_delete_key_name(team_title_str())
-    assert table_sorting_priority[35] == awardee_title_str()
-    assert table_sorting_priority[36] == get_delete_key_name(awardee_title_str())
+    assert table_sorting_priority[33] == team_label_str()
+    assert table_sorting_priority[34] == get_delete_key_name(team_label_str())
+    assert table_sorting_priority[35] == awardee_label_str()
+    assert table_sorting_priority[36] == get_delete_key_name(awardee_label_str())
     assert table_sorting_priority[37] == healer_name_str()
     assert table_sorting_priority[38] == get_delete_key_name(healer_name_str())
     assert table_sorting_priority[39] == deal_time_str()
@@ -370,12 +370,12 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
-    assert sqlite_types.get(way_str()) == "TEXT"
+    assert sqlite_types.get(item_way_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("fneed") == "TEXT"
-    assert sqlite_types.get(team_title_str()) == "TEXT"
-    assert sqlite_types.get(awardee_title_str()) == "TEXT"
+    assert sqlite_types.get(team_label_str()) == "TEXT"
+    assert sqlite_types.get(awardee_label_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
     assert sqlite_types.get(deal_time_str()) == "INTEGER"

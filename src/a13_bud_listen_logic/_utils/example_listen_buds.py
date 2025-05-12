@@ -168,7 +168,7 @@ def get_budunit_irrational_example() -> BudUnit:
 
     # set egg pledge is True when chicken first is False
     hatter_bud.edit_item_attr(
-        way=egg_way,
+        egg_way,
         pledge=True,
         reason_base=chicken_way,
         reason_base_item_active_requisite=True,
@@ -176,7 +176,7 @@ def get_budunit_irrational_example() -> BudUnit:
 
     # set chick pledge is True when egg first is False
     hatter_bud.edit_item_attr(
-        way=chicken_way,
+        chicken_way,
         pledge=True,
         reason_base=egg_way,
         reason_base_item_active_requisite=False,

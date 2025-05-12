@@ -88,7 +88,7 @@ def test_LabelUnit_exists():
     bob_nameunit = LabelUnit(bob_str)
     # THEN
     assert bob_nameunit == bob_str
-    doc_str = "Any Label and _title string classes should inherit from this class"
+    doc_str = """If a LabelUnit contains bridges it represents a group otherwise it's a single member group of an AcctName."""
     assert inspect_getdoc(bob_nameunit) == doc_str
 
 
