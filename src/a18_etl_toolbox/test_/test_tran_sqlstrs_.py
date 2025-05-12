@@ -355,7 +355,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
 
 
-def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllBranchedKeys():
     # ESTABLISH / WHEN
     fisc_create_table_sqlstrs = get_fisc_prime_create_table_sqlstrs()
 
@@ -368,7 +368,7 @@ def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert set(fisc_create_table_sqlstrs.keys()) == expected_fisc_tablenames
 
 
-def test_get_bud_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_bud_prime_create_table_sqlstrs_ReturnsObj_HasAllBranchedKeys():
     # ESTABLISH / WHEN
     bud_create_table_sqlstrs = get_bud_prime_create_table_sqlstrs()
 
@@ -1243,7 +1243,7 @@ ORDER BY {fisc_tag_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str
     assert INSERT_FISC_OTE1_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_get_fisc_fu1_select_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_fisc_fu1_select_sqlstrs_ReturnsObj_HasAllBranchedKeys():
     # ESTABLISH
     a23_str = "accord23"
 

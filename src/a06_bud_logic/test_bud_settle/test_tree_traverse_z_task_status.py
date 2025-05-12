@@ -32,7 +32,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():
     assert sue_budunit.get_idea_obj(casa_way)._active is None
 
     # WHEN
-    sue_budunit.add_fact(fcontext=week_way, fneed=sun_way)
+    sue_budunit.add_fact(fcontext=week_way, fbranch=sun_way)
     sue_budunit.settle_bud()
 
     # THEN
@@ -55,7 +55,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     casa_way = sue_budunit.make_l1_way(casa_str)
 
     # WHEN
-    sue_budunit.add_fact(fcontext=week_way, fneed=sun_way)
+    sue_budunit.add_fact(fcontext=week_way, fbranch=sun_way)
 
     # THEN
     sue_budunit.settle_bud()
@@ -68,7 +68,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     states_way = sue_budunit.make_l1_way(states_str)
     usa_str = "USA"
     usa_way = sue_budunit.make_way(states_way, usa_str)
-    sue_budunit.add_fact(fcontext=states_way, fneed=usa_way)
+    sue_budunit.add_fact(fcontext=states_way, fbranch=usa_way)
 
     # THEN
     sue_budunit.settle_bud()
@@ -79,7 +79,7 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     # WHEN
     france_str = "France"
     france_way = sue_budunit.make_way(states_way, france_str)
-    sue_budunit.add_fact(fcontext=states_way, fneed=france_way)
+    sue_budunit.add_fact(fcontext=states_way, fbranch=france_way)
 
     # THEN
     sue_budunit.settle_bud()
@@ -99,8 +99,8 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     state_way = sue_budunit.make_l1_way(state_str)
     france_str = "France"
     france_way = sue_budunit.make_way(state_way, france_str)
-    sue_budunit.add_fact(fcontext=week_way, fneed=wed_way)
-    sue_budunit.add_fact(fcontext=state_way, fneed=france_way)
+    sue_budunit.add_fact(fcontext=week_way, fbranch=wed_way)
+    sue_budunit.add_fact(fcontext=state_way, fbranch=france_way)
 
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
@@ -119,25 +119,25 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     oregon_str = "Oregon"
     oregon_way = sue_budunit.make_way(usa_way, oregon_str)
 
-    wed = premiseunit_shop(need=wed_way)
+    wed = premiseunit_shop(branch=wed_way)
     wed._status = True
     wed._task = False
-    usa = premiseunit_shop(need=usa_way)
+    usa = premiseunit_shop(branch=usa_way)
     usa._status = True
     usa._task = False
 
-    wed_lu = reasonunit_shop(week_way, premises={wed.need: wed})
-    sta_lu = reasonunit_shop(state_way, premises={usa.need: usa})
+    wed_lu = reasonunit_shop(week_way, premises={wed.branch: wed})
+    sta_lu = reasonunit_shop(state_way, premises={usa.branch: usa})
     wed_lh = reasonheir_shop(
         context=week_way,
-        premises={wed.need: wed},
+        premises={wed.branch: wed},
         _status=True,
         _task=False,
         _context_idea_active_value=True,
     )
     sta_lh = reasonheir_shop(
         context=state_way,
-        premises={usa.need: usa},
+        premises={usa.branch: usa},
         _status=True,
         _task=False,
         _context_idea_active_value=True,
@@ -153,7 +153,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     }
 
     # WHEN
-    sue_budunit.add_fact(fcontext=state_way, fneed=oregon_way)
+    sue_budunit.add_fact(fcontext=state_way, fbranch=oregon_way)
     sue_budunit.settle_bud()
 
     # THEN
@@ -181,10 +181,10 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     # print(f"    {usa_premise._task=}")
     assert week_reasonheir._task is False
     # print(f"      premises: {w=}")
-    # w_need = usa_premise.premises[wed_way].need
-    # print(f"      {w_need=}")
-    # assert usa_premise._task == w_need._task
-    # assert usa_premise._status == w_need._status
+    # w_branch = usa_premise.premises[wed_way].branch
+    # print(f"      {w_branch=}")
+    # assert usa_premise._task == w_branch._task
+    # assert usa_premise._status == w_branch._status
     # assert week_reasonheir.premises == week_reasonheir.premises
 
     # assert casa_idea.reasonunits == x1_reasonunits
@@ -237,14 +237,14 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     day24hr_str = "24hr day"
     day24hr_way = sue_budunit.make_way(time_way, day24hr_str)
     day24hr_context = day24hr_way
-    day24hr_fneed = day24hr_way
+    day24hr_fbranch = day24hr_way
     day24hr_open = 0.0
     day24hr_nigh = 8.0
 
     # WHEN
     sue_budunit.add_fact(
         fcontext=day24hr_context,
-        fneed=day24hr_fneed,
+        fbranch=day24hr_fbranch,
         fopen=day24hr_open,
         fnigh=day24hr_nigh,
     )
@@ -260,7 +260,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     print(sue_budunit.idearoot.factunits[day24hr_way])
     sue_budunit.add_fact(
         fcontext=day24hr_context,
-        fneed=day24hr_fneed,
+        fbranch=day24hr_fbranch,
         fopen=day24hr_open,
         fnigh=day24hr_nigh,
     )
@@ -291,22 +291,22 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_contexts()=}")
     # day_hour = f"{yao_budunit.fisc_tag},day_hour"
-    # yao_budunit.add_fact(fcontext=day_hour, fneed=day_hour, open=0, nigh=23)
+    # yao_budunit.add_fact(fcontext=day_hour, fbranch=day_hour, open=0, nigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_budunit.make_l1_way(day_min_str)
-    yao_budunit.add_fact(fcontext=day_min_way, fneed=day_min_way, fopen=0, fnigh=1439)
+    yao_budunit.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=1439)
 
     mood_str = "Moods"
     mood_way = yao_budunit.make_l1_way(mood_str)
-    yao_budunit.add_fact(fcontext=mood_way, fneed=mood_way)
+    yao_budunit.add_fact(fcontext=mood_way, fbranch=mood_way)
     print(f"{yao_budunit.get_reason_contexts()=}")
 
     yr_mon_str = "year_month"
     yr_mon_way = yao_budunit.make_l1_way(yr_mon_str)
-    yao_budunit.add_fact(fcontext=yr_mon_way, fneed=yr_mon_way)
+    yao_budunit.add_fact(fcontext=yr_mon_way, fbranch=yr_mon_way)
     inter_str = "Interweb"
     inter_way = yao_budunit.make_l1_way(inter_str)
-    yao_budunit.add_fact(fcontext=inter_way, fneed=inter_way)
+    yao_budunit.add_fact(fcontext=inter_way, fbranch=inter_way)
     assert yao_budunit is not None
     # print(f"{yao_budunit.owner_name=}")
     # print(f"{len(yao_budunit.idearoot._kids)=}")
@@ -348,7 +348,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     week_way = yao_budunit.make_l1_way(week_str)
     mon_str = "Monday"
     mon_way = yao_budunit.make_way(week_way, mon_str)
-    yao_budunit.add_fact(fcontext=week_way, fneed=mon_way)
+    yao_budunit.add_fact(fcontext=week_way, fbranch=mon_way)
     yao_budunit.settle_bud()
 
     # THEN
@@ -361,28 +361,28 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
 
     day_hr_str = "day_hour"
     day_hr_way = yao_budunit.make_l1_way(day_hr_str)
-    yao_budunit.add_fact(fcontext=day_hr_way, fneed=day_hr_way, fopen=0, fnigh=23)
+    yao_budunit.add_fact(fcontext=day_hr_way, fbranch=day_hr_way, fopen=0, fnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_budunit.make_l1_way(day_min_str)
-    yao_budunit.add_fact(fcontext=day_min_way, fneed=day_min_way, fopen=0, fnigh=59)
+    yao_budunit.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=59)
     mon_wk_str = "month_week"
     mon_wk_way = yao_budunit.make_l1_way(mon_wk_str)
-    yao_budunit.add_fact(fcontext=mon_wk_way, fneed=mon_wk_way)
+    yao_budunit.add_fact(fcontext=mon_wk_way, fbranch=mon_wk_way)
     nation_str = "Nation-States"
     nation_way = yao_budunit.make_l1_way(nation_str)
-    yao_budunit.add_fact(fcontext=nation_way, fneed=nation_way)
+    yao_budunit.add_fact(fcontext=nation_way, fbranch=nation_way)
     mood_str = "Moods"
     mood_way = yao_budunit.make_l1_way(mood_str)
-    yao_budunit.add_fact(fcontext=mood_way, fneed=mood_way)
+    yao_budunit.add_fact(fcontext=mood_way, fbranch=mood_way)
     aaron_str = "Aaron Donald objects effected by him"
     aaron_way = yao_budunit.make_l1_way(aaron_str)
-    yao_budunit.add_fact(fcontext=aaron_way, fneed=aaron_way)
+    yao_budunit.add_fact(fcontext=aaron_way, fbranch=aaron_way)
     inter_str = "Interweb"
     inter_way = yao_budunit.make_l1_way(inter_str)
-    yao_budunit.add_fact(fcontext=inter_way, fneed=inter_way)
+    yao_budunit.add_fact(fcontext=inter_way, fbranch=inter_way)
     yr_mon_str = "year_month"
     yr_mon_way = yao_budunit.make_l1_way(yr_mon_str)
-    yao_budunit.add_fact(fcontext=yr_mon_way, fneed=yr_mon_way, fopen=0, fnigh=1000)
+    yao_budunit.add_fact(fcontext=yr_mon_way, fbranch=yr_mon_way, fopen=0, fnigh=1000)
 
     yao_budunit.settle_bud()
     missing_facts = yao_budunit.get_missing_fact_contexts()
@@ -395,31 +395,31 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     mon_way = yao_budunit.make_way(week_way, mon_str)
     tue_str = "Tuesday"
     tue_way = yao_budunit.make_way(week_way, tue_str)
-    mon_premise_x = premiseunit_shop(need=mon_way)
+    mon_premise_x = premiseunit_shop(branch=mon_way)
     mon_premise_x._status = False
     mon_premise_x._task = False
-    tue_premise_x = premiseunit_shop(need=tue_way)
+    tue_premise_x = premiseunit_shop(branch=tue_way)
     tue_premise_x._status = False
     tue_premise_x._task = False
     mt_premises = {
-        mon_premise_x.need: mon_premise_x,
-        tue_premise_x.need: tue_premise_x,
+        mon_premise_x.branch: mon_premise_x,
+        tue_premise_x.branch: tue_premise_x,
     }
     mt_reasonunit = reasonunit_shop(week_way, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(week_way, premises=mt_premises, _status=False)
     x_idearoot = yao_budunit.get_idea_obj(to_way(yao_budunit.fisc_tag))
     x_idearoot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_budunit.reasonunits[week_way].context=}")
-    # print(f"{yao_budunit.reasonunits[week_way].premises[mon_way].need=}")
-    # print(f"{yao_budunit.reasonunits[week_way].premises[tue_way].need=}")
+    # print(f"{yao_budunit.reasonunits[week_way].premises[mon_way].branch=}")
+    # print(f"{yao_budunit.reasonunits[week_way].premises[tue_way].branch=}")
     week_reasonunit = x_idearoot.reasonunits[week_way]
     print(f"{week_reasonunit.premises=}")
     premise_mon = week_reasonunit.premises.get(mon_way)
     premise_tue = week_reasonunit.premises.get(tue_way)
     assert premise_mon
-    assert premise_mon == mt_reasonunit.premises[premise_mon.need]
+    assert premise_mon == mt_reasonunit.premises[premise_mon.branch]
     assert premise_tue
-    assert premise_tue == mt_reasonunit.premises[premise_tue.need]
+    assert premise_tue == mt_reasonunit.premises[premise_tue.branch]
     assert week_reasonunit == mt_reasonunit
 
     # WHEN
@@ -439,7 +439,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     bird_way = yao_budunit.make_way(casa_way, bird_str)
     assert from_list_get_active(bird_way, idea_dict) is False
 
-    # yao_budunit.add_fact(fcontext=week_way, fneed=mon_way)
+    # yao_budunit.add_fact(fcontext=week_way, fbranch=mon_way)
     # idea_dict = yao_budunit.get_idea_dict()
     # casa_idea = x_idearoot._kids[casa_str]
     # twee_idea = casa_idea._kids[bird_str]
@@ -449,11 +449,11 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
 
     # assert YR.get_active(way=bird_idea, idea_dict=idea_dict) is True
 
-    # yao_budunit.add_fact(fcontext=f"{yao_budunit.fisc_tag},weekdays", fneed=f"{yao_budunit.fisc_tag},weekdays,Tuesday")
+    # yao_budunit.add_fact(fcontext=f"{yao_budunit.fisc_tag},weekdays", fbranch=f"{yao_budunit.fisc_tag},weekdays,Tuesday")
     # idea_dict = yao_budunit.get_idea_dict()
     # assert YR.get_active(way=bird_idea, idea_dict=idea_dict) is True
 
-    # yao_budunit.add_fact(fcontext=f"{yao_budunit.fisc_tag},weekdays", fneed=f"{yao_budunit.fisc_tag},weekdays,Wednesday")
+    # yao_budunit.add_fact(fcontext=f"{yao_budunit.fisc_tag},weekdays", fbranch=f"{yao_budunit.fisc_tag},weekdays,Wednesday")
     # idea_dict = yao_budunit.get_idea_dict()
     # assert YR.get_active(way=bird_idea, idea_dict=idea_dict) is False
 
@@ -467,8 +467,8 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     min_way = yao_budunit.make_l1_way(day_str)
 
     # WHEN
-    yao_budunit.add_fact(fcontext=day_way, fneed=day_way, fopen=0, fnigh=23)
-    yao_budunit.add_fact(fcontext=min_way, fneed=min_way, fopen=0, fnigh=59)
+    yao_budunit.add_fact(fcontext=day_way, fbranch=day_way, fopen=0, fnigh=23)
+    yao_budunit.add_fact(fcontext=min_way, fbranch=min_way, fopen=0, fnigh=59)
     yao_budunit.settle_bud()
 
     # THEN
@@ -487,7 +487,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     ced_week_reason = clean_sheet_idea.reasonunits.get(ced_week_context)
     ced_week_premise = ced_week_reason.premises.get(ced_week_context)
     print(
-        f"{clean_sheet_idea.idea_tag=} {ced_week_reason.context=} {ced_week_premise.need=}"
+        f"{clean_sheet_idea.idea_tag=} {ced_week_reason.context=} {ced_week_premise.branch=}"
     )
     # print(f"{clean_sheet_idea.idea_tag=} {ced_week_reason.context=} {premise_x=}")
     premise_divisor = ced_week_premise.divisor
@@ -512,13 +512,13 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     # WHEN
     yao_budunit.add_fact(
         fcontext=ced_week_context,
-        fneed=ced_week_context,
+        fbranch=ced_week_context,
         fopen=ced_week_open,
         fnigh=ced_week_open,
     )
     nation_str = "Nation-States"
     nation_way = yao_budunit.make_l1_way(nation_str)
-    yao_budunit.add_fact(fcontext=nation_way, fneed=nation_way)
+    yao_budunit.add_fact(fcontext=nation_way, fbranch=nation_way)
     print(
         f"Nation-states set and also fact set: {ced_week_context=} with {ced_week_open=} and {ced_week_open=}"
     )
@@ -585,25 +585,25 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsObj_budunit_v001():
     yao_budunit = budunit_v001()
     minute_str = "day_minute"
     minute_way = yao_budunit.make_l1_way(minute_str)
-    yao_budunit.add_fact(fcontext=minute_way, fneed=minute_way, fopen=0, fnigh=1399)
+    yao_budunit.add_fact(fcontext=minute_way, fbranch=minute_way, fopen=0, fnigh=1399)
     month_str = "month_week"
     month_way = yao_budunit.make_l1_way(month_str)
-    yao_budunit.add_fact(fcontext=month_way, fneed=month_way)
+    yao_budunit.add_fact(fcontext=month_way, fbranch=month_way)
     nations_str = "Nation-States"
     nations_way = yao_budunit.make_l1_way(nations_str)
-    yao_budunit.add_fact(fcontext=nations_way, fneed=nations_way)
+    yao_budunit.add_fact(fcontext=nations_way, fbranch=nations_way)
     mood_str = "Moods"
     mood_way = yao_budunit.make_l1_way(mood_str)
-    yao_budunit.add_fact(fcontext=mood_way, fneed=mood_way)
+    yao_budunit.add_fact(fcontext=mood_way, fbranch=mood_way)
     aaron_str = "Aaron Donald objects effected by him"
     aaron_way = yao_budunit.make_l1_way(aaron_str)
-    yao_budunit.add_fact(fcontext=aaron_way, fneed=aaron_way)
+    yao_budunit.add_fact(fcontext=aaron_way, fbranch=aaron_way)
     interweb_str = "Interweb"
     interweb_way = yao_budunit.make_l1_way(interweb_str)
-    yao_budunit.add_fact(fcontext=interweb_way, fneed=interweb_way)
+    yao_budunit.add_fact(fcontext=interweb_way, fbranch=interweb_way)
     weekdays_str = "weekdays"
     weekdays_way = yao_budunit.make_l1_way(weekdays_str)
-    yao_budunit.add_fact(fcontext=weekdays_way, fneed=weekdays_way)
+    yao_budunit.add_fact(fcontext=weekdays_way, fbranch=weekdays_way)
     idea_dict = yao_budunit.get_idea_dict()
     print(f"{len(idea_dict)=}")
 
@@ -620,10 +620,10 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsObj_budunit_v001():
 
     # WHEN
     yao_budunit.add_fact(
-        fcontext=year_month_context, fneed=year_month_context, fopen=0, fnigh=8
+        fcontext=year_month_context, fbranch=year_month_context, fopen=0, fnigh=8
     )
     ced_week = yao_budunit.make_l1_way("ced_week")
-    yao_budunit.add_fact(fcontext=ced_week, fneed=ced_week, fopen=0, fnigh=4)
+    yao_budunit.add_fact(fcontext=ced_week, fbranch=ced_week, fopen=0, fnigh=4)
     yao_budunit.settle_bud()
 
     # THEN

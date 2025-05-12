@@ -349,7 +349,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bs_yao_ba.set_owner_name(yao_str)
 #     bs_yao_ba.add_acctunit(zia_str, 1)
 #     clean_fact = example_casa_clean_factunit()
-#     bs_yao_ba.add_fact(clean_fact.fcontext, clean_fact.fneed)
+#     bs_yao_ba.add_fact(clean_fact.fcontext, clean_fact.fbranch)
 #     bsy_zia_ba = get_bob_mop_with_reason_budunit_example()
 #     bsy_zia_ba.set_owner_name(zia_str)
 #     # create cell file

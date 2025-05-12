@@ -31,14 +31,14 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtor_respect_str,
     denom_str,
     fcontext_str,
-    fneed_str,
+    fbranch_str,
     fnigh_str,
     fopen_str,
     mass_str,
     morph_str,
     numor_str,
     context_str,
-    need_str,
+    branch_str,
     nigh_str,
     open_str,
 )
@@ -508,11 +508,11 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
             for idea_reason_premiseunit_atom in context_dict.values():
                 way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
                 context_value = idea_reason_premiseunit_atom.get_value(context_str())
-                need_value = idea_reason_premiseunit_atom.get_value(need_str())
+                branch_value = idea_reason_premiseunit_atom.get_value(branch_str())
                 divisor_value = idea_reason_premiseunit_atom.get_value("divisor")
                 nigh_value = idea_reason_premiseunit_atom.get_value(nigh_str())
                 open_value = idea_reason_premiseunit_atom.get_value(open_str())
-                x_str = f"PremiseUnit '{need_value}' created for reason '{context_value}' for idea '{way_value}'."
+                x_str = f"PremiseUnit '{branch_value}' created for reason '{context_value}' for idea '{way_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
                 if nigh_value is not None:
@@ -532,11 +532,11 @@ def add_bud_reason_premiseunit_update_to_legible_list(
             for idea_reason_premiseunit_atom in context_dict.values():
                 way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
                 context_value = idea_reason_premiseunit_atom.get_value(context_str())
-                need_value = idea_reason_premiseunit_atom.get_value(need_str())
+                branch_value = idea_reason_premiseunit_atom.get_value(branch_str())
                 divisor_value = idea_reason_premiseunit_atom.get_value("divisor")
                 nigh_value = idea_reason_premiseunit_atom.get_value(nigh_str())
                 open_value = idea_reason_premiseunit_atom.get_value(open_str())
-                x_str = f"PremiseUnit '{need_value}' updated for reason '{context_value}' for idea '{way_value}'."
+                x_str = f"PremiseUnit '{branch_value}' updated for reason '{context_value}' for idea '{way_value}'."
                 if open_value is not None:
                     x_str += f" Open={open_value}."
                 if nigh_value is not None:
@@ -556,8 +556,8 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
             for idea_reason_premiseunit_atom in context_dict.values():
                 way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
                 context_value = idea_reason_premiseunit_atom.get_value(context_str())
-                need_value = idea_reason_premiseunit_atom.get_value(need_str())
-                x_str = f"PremiseUnit '{need_value}' deleted from reason '{context_value}' for idea '{way_value}'."
+                branch_value = idea_reason_premiseunit_atom.get_value(branch_str())
+                x_str = f"PremiseUnit '{branch_value}' deleted from reason '{context_value}' for idea '{way_value}'."
                 legible_list.append(x_str)
 
 
@@ -612,10 +612,10 @@ def add_bud_idea_factunit_insert_to_legible_list(
         for idea_factunit_atom in way_dict.values():
             way_value = idea_factunit_atom.get_value(idea_way_str())
             fcontext_value = idea_factunit_atom.get_value(fcontext_str())
-            fneed_value = idea_factunit_atom.get_value(fneed_str())
+            fbranch_value = idea_factunit_atom.get_value(fbranch_str())
             fnigh_value = idea_factunit_atom.get_value(fnigh_str())
             fopen_value = idea_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fneed_value}' created for context '{fcontext_value}' for idea '{way_value}'."
+            x_str = f"FactUnit '{fbranch_value}' created for context '{fcontext_value}' for idea '{way_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -630,10 +630,10 @@ def add_bud_idea_factunit_update_to_legible_list(
         for idea_factunit_atom in way_dict.values():
             way_value = idea_factunit_atom.get_value(idea_way_str())
             fcontext_value = idea_factunit_atom.get_value(fcontext_str())
-            fneed_value = idea_factunit_atom.get_value(fneed_str())
+            fbranch_value = idea_factunit_atom.get_value(fbranch_str())
             fnigh_value = idea_factunit_atom.get_value(fnigh_str())
             fopen_value = idea_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fneed_value}' updated for context '{fcontext_value}' for idea '{way_value}'."
+            x_str = f"FactUnit '{fbranch_value}' updated for context '{fcontext_value}' for idea '{way_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -648,7 +648,7 @@ def add_bud_idea_factunit_delete_to_legible_list(
         for idea_factunit_atom in way_dict.values():
             way_value = idea_factunit_atom.get_value(idea_way_str())
             fcontext_value = idea_factunit_atom.get_value(fcontext_str())
-            fneed_value = idea_factunit_atom.get_value(fneed_str())
+            fbranch_value = idea_factunit_atom.get_value(fbranch_str())
             x_str = (
                 f"FactUnit context '{fcontext_value}' deleted for idea '{way_value}'."
             )

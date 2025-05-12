@@ -658,13 +658,13 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     sue_bud.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_bud.add_idea(clean_fact.fneed)
-    sue_bud.add_idea(dirty_fact.fneed)
+    sue_bud.add_idea(clean_fact.fbranch)
+    sue_bud.add_idea(dirty_fact.fbranch)
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
     sue_bud.add_idea(mop_way, 1, pledge=True)
-    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fneed)
-    sue_bud.add_fact(dirty_fact.fcontext, dirty_fact.fneed, create_missing_ideas=True)
+    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fbranch)
+    sue_bud.add_fact(dirty_fact.fcontext, dirty_fact.fbranch, create_missing_ideas=True)
     sky_blue_fact = sky_blue_factunit()
     sue_budevent_factunits = {clean_fact.fcontext: clean_fact}
     sue_found_factunits = {dirty_fact.fcontext: dirty_fact}

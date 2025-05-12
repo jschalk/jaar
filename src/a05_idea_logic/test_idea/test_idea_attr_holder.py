@@ -13,7 +13,7 @@ def test_IdeaAttrHolder_Exists():
     assert new_obj.reason_premise_nigh is None
     assert new_obj.reason_premise_divisor is None
     assert new_obj.reason_del_premise_context is None
-    assert new_obj.reason_del_premise_need is None
+    assert new_obj.reason_del_premise_branch is None
     assert new_obj.reason_context_idea_active_requisite is None
     assert new_obj.teamunit is None
     assert new_obj.healerlink is None

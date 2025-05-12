@@ -261,7 +261,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x_owner_name = "Sue"
     x_way = 1
     x_context = 2
-    x_need = 3
+    x_branch = 3
     x_nigh = 4
     x_open = 5
     x_divisor = 6
@@ -273,7 +273,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "context": x_context,
-        "need": x_need,
+        "branch": x_branch,
         "nigh": x_nigh,
         "open": x_open,
         "divisor": x_divisor,
@@ -393,7 +393,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_owner_name = "Sue"
     x_way = 1
     x_fcontext = 2
-    x_fneed = 3
+    x_fbranch = 3
     x_fopen = 4
     x_fnigh = 5
     values_dict = {
@@ -402,7 +402,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "fcontext": x_fcontext,
-        "fneed": x_fneed,
+        "fbranch": x_fbranch,
         "fopen": x_fopen,
         "fnigh": x_fnigh,
     }

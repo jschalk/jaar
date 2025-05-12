@@ -315,7 +315,7 @@ def check_necessary_nesting_order_exists() -> bool:
     return True
 
 
-def test_atom_config_NestingOrderExistsWhenNeeded():
+def test_atom_config_NestingOrderExistsWhenBranched():
     # When ChangUnit places an BudAtom in a nested dictionary ChangUnit.budatoms
     # the order of required argments decides the location. The order must be
     # the same. All atom_config elements with two or more required args
@@ -403,7 +403,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_idea_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [idea_way_str(), context_str(), "need"]
+    assert x_sorted_jkey_keys == [idea_way_str(), context_str(), "branch"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -669,12 +669,12 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("need") == type_WayStr_str()
+    assert x_class_types.get("branch") == type_WayStr_str()
     assert x_class_types.get("nigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fneed") == type_WayStr_str()
+    assert x_class_types.get("fbranch") == type_WayStr_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(idea_way_str()) == type_WayStr_str()

@@ -12,7 +12,7 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "fneed": {
+        "fbranch": {
             "otx_key": false
         },
         "fnigh": {

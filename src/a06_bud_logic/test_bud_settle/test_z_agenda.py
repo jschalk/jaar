@@ -39,7 +39,7 @@ def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectIdeas():
     week_way = x_bud.make_l1_way(week_str)
     sun_str = "Sunday"
     sun_way = x_bud.make_way(week_way, sun_str)
-    x_bud.add_fact(fcontext=week_way, fneed=sun_way)
+    x_bud.add_fact(fcontext=week_way, fbranch=sun_way)
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
@@ -123,7 +123,7 @@ def test_budunit_v001_AgendaExists():
     yao_bud = budunit_v001()
     min_str = "day_minute"
     min_way = yao_bud.make_l1_way(min_str)
-    yao_bud.add_fact(fcontext=min_way, fneed=min_way, fopen=0, fnigh=1399)
+    yao_bud.add_fact(fcontext=min_way, fbranch=min_way, fopen=0, fnigh=1399)
     assert yao_bud
     # for idea_kid in yao_bud.idearoot._kids.values():
     #     # print(idea_kid.idea_tag)
@@ -148,7 +148,7 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
 
     day_min_str = "day_minute"
     day_min_way = yao_bud.make_l1_way(day_min_str)
-    yao_bud.add_fact(fcontext=day_min_way, fneed=day_min_way, fopen=0, fnigh=1399)
+    yao_bud.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=1399)
     month_week_str = "month_week"
     month_week_way = yao_bud.make_l1_way(month_week_str)
     nations_str = "Nation-States"
@@ -161,24 +161,24 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # interweb_way = yao_bud.make_l1_way(interweb_str)
     year_month_str = "year_month"
     year_month_way = yao_bud.make_l1_way(year_month_str)
-    yao_bud.add_fact(fcontext=month_week_way, fneed=month_week_way)
-    yao_bud.add_fact(fcontext=nations_way, fneed=nations_way)
-    yao_bud.add_fact(fcontext=mood_way, fneed=mood_way)
-    yao_bud.add_fact(fcontext=aaron_way, fneed=aaron_way)
-    # yao_bud.add_fact(fcontext=interweb_way, fneed=interweb_way)
-    yao_bud.add_fact(fcontext=year_month_way, fneed=year_month_way)
+    yao_bud.add_fact(fcontext=month_week_way, fbranch=month_week_way)
+    yao_bud.add_fact(fcontext=nations_way, fbranch=nations_way)
+    yao_bud.add_fact(fcontext=mood_way, fbranch=mood_way)
+    yao_bud.add_fact(fcontext=aaron_way, fbranch=aaron_way)
+    # yao_bud.add_fact(fcontext=interweb_way, fbranch=interweb_way)
+    yao_bud.add_fact(fcontext=year_month_way, fbranch=year_month_way)
     # season_str = "Seasons"
     # season_way = yao_bud.make_l1_way(season_str)
-    # yao_bud.add_fact(fcontext=season_way, fneed=season_way)
+    # yao_bud.add_fact(fcontext=season_way, fbranch=season_way)
     ced_week_str = "ced_week"
     ced_week_way = yao_bud.make_l1_way(ced_week_str)
-    yao_bud.add_fact(fcontext=ced_week_way, fneed=ced_week_way)
+    yao_bud.add_fact(fcontext=ced_week_way, fbranch=ced_week_way)
     # water_str = "WaterExistence"
     # water_way = yao_bud.make_l1_way(water_str)
-    # yao_bud.add_fact(fcontext=water_way, fneed=water_way)
+    # yao_bud.add_fact(fcontext=water_way, fbranch=water_way)
     # movie_str = "No Movie playing"
     # movie_way = yao_bud.make_l1_way(movie_str)
-    # yao_bud.add_fact(fcontext=movie_way, fneed=movie_str)
+    # yao_bud.add_fact(fcontext=movie_way, fbranch=movie_str)
 
     # WHEN
     idea_pledge_list = yao_bud.get_agenda_dict()
@@ -196,15 +196,15 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     monday_str = "Monday"
     monday_way = yao_bud.make_way(weekday_way, monday_str)
 
-    yao_bud.add_fact(fcontext=weekday_way, fneed=monday_way)
+    yao_bud.add_fact(fcontext=weekday_way, fbranch=monday_way)
     idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 39
 
-    yao_bud.add_fact(fcontext=weekday_way, fneed=weekday_way)
+    yao_bud.add_fact(fcontext=weekday_way, fbranch=weekday_way)
     idea_pledge_list = yao_bud.get_agenda_dict()
     assert len(idea_pledge_list) == 53
 
-    # yao_bud.add_fact(fcontext=nations_way, fneed=nations_way)
+    # yao_bud.add_fact(fcontext=nations_way, fbranch=nations_way)
     # idea_pledge_list = yao_bud.get_agenda_dict()
     # assert len(idea_pledge_list) == 53
 
@@ -269,7 +269,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
         reason_premise_open=25,
         reason_premise_nigh=81,
     )
-    zia_bud.add_fact(fcontext=day_way, fneed=day_way, fopen=30, fnigh=87)
+    zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=30, fnigh=87)
     zia_bud.get_agenda_dict()
     run_reasonunits = zia_bud.idearoot._kids[run_str].reasonunits[day_way]
     print(f"{run_reasonunits=}")
@@ -314,13 +314,13 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
 
     run_idea = zia_bud.get_idea_obj(run_way)
     # print(f"{run_idea._factheirs=}")
-    zia_bud.add_fact(fcontext=day_way, fneed=day_way, fopen=1, fnigh=2)
+    zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=1, fnigh=2)
     assert len(zia_bud.get_agenda_dict()) == 1
-    zia_bud.add_fact(fcontext=day_way, fneed=day_way, fopen=2, fnigh=2)
+    zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=2, fnigh=2)
     assert len(zia_bud.get_agenda_dict()) == 0
-    zia_bud.add_fact(fcontext=day_way, fneed=day_way, fopen=400, fnigh=400)
+    zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=400, fnigh=400)
     assert len(zia_bud.get_agenda_dict()) == 0
-    zia_bud.add_fact(fcontext=day_way, fneed=day_way, fopen=401, fnigh=402)
+    zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=401, fnigh=402)
     assert len(zia_bud.get_agenda_dict()) == 1
     # print(f"{run_idea._factheirs=}")
     print(f"{run_idea.factunits=}")
@@ -373,7 +373,7 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     # WHEN
     day_min_str = "day_minute"
     day_min_way = yao_bud.make_l1_way(day_min_str)
-    yao_bud.add_fact(fcontext=day_min_way, fneed=day_min_way, fopen=0, fnigh=1399)
+    yao_bud.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=1399)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) > 0

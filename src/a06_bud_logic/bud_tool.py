@@ -58,10 +58,10 @@ def bud_idea_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 def bud_idea_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_way = jkeys.get("idea_way")
     x_context = jkeys.get("context")
-    x_need = jkeys.get("need")
+    x_branch = jkeys.get("branch")
     return bool(
         bud_idea_reasonunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).get_reasonunit(x_context).premise_exists(x_need)
+        and x_bud.get_idea_obj(x_way).get_reasonunit(x_context).premise_exists(x_branch)
     )
 
 
@@ -148,8 +148,8 @@ def bud_idea_reason_premiseunit_get_obj(
 ) -> PremiseUnit:
     x_way = jkeys.get("idea_way")
     x_context = jkeys.get("context")
-    x_need = jkeys.get("need")
-    return x_bud.get_idea_obj(x_way).get_reasonunit(x_context).get_premise(x_need)
+    x_branch = jkeys.get("branch")
+    return x_bud.get_idea_obj(x_way).get_reasonunit(x_context).get_premise(x_branch)
 
 
 def bud_idea_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
@@ -258,7 +258,7 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayStr, dict]):
         if factunit.fcontext in bud_fact_contexts:
             x_bud.add_fact(
                 factunit.fcontext,
-                factunit.fneed,
+                factunit.fbranch,
                 factunit.fopen,
                 factunit.fnigh,
                 create_missing_ideas=True,

@@ -31,7 +31,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtit_vote_str,
     denom_str,
     fcontext_str,
-    fneed_str,
+    fbranch_str,
     fnigh_str,
     fopen_str,
     fund_coin_str,
@@ -39,7 +39,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     healer_name_str,
     morph_str,
-    need_str,
+    branch_str,
     nigh_str,
     numor_str,
     open_str,
@@ -581,16 +581,16 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(config, budfact, jv, fopen_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(config, budfact, jv, fneed_str()) == type_WayStr_str()
-    assert g_sqlitetype(config, budfact, jv, fneed_str()) == "TEXT"
+    assert g_class_type(config, budfact, jv, fbranch_str()) == type_WayStr_str()
+    assert g_sqlitetype(config, budfact, jv, fbranch_str()) == "TEXT"
     assert g_class_type(config, budheal, jk, healer_name_str()) == type_NameStr_str()
     assert g_sqlitetype(config, budheal, jk, healer_name_str()) == "TEXT"
     assert g_class_type(config, budheal, jk, idea_way_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budheal, jk, idea_way_str()) == "TEXT"
     assert g_class_type(config, budprem, jk, context_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budprem, jk, context_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, need_str()) == type_WayStr_str()
-    assert g_sqlitetype(config, budprem, jk, need_str()) == "TEXT"
+    assert g_class_type(config, budprem, jk, branch_str()) == type_WayStr_str()
+    assert g_sqlitetype(config, budprem, jk, branch_str()) == "TEXT"
     assert g_class_type(config, budprem, jk, idea_way_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budprem, jk, idea_way_str()) == "TEXT"
     assert g_class_type(config, budprem, jm, "_status") == "int"
@@ -804,9 +804,9 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get(context_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get(fnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(fopen_str()) == "float"
-    assert bud_calc_args_type_dict.get(fneed_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(fbranch_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get(healer_name_str()) == type_NameStr_str()
-    assert bud_calc_args_type_dict.get(need_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(branch_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
     assert bud_calc_args_type_dict.get("divisor") == "int"

@@ -103,7 +103,7 @@ class IdeaAttrHolder:
     reason_premise_nigh: float = None
     reason_premise_divisor: int = None
     reason_del_premise_context: WayStr = None
-    reason_del_premise_need: WayStr = None
+    reason_del_premise_branch: WayStr = None
     reason_context_idea_active_requisite: str = None
     teamunit: TeamUnit = None
     healerlink: HealerLink = None
@@ -150,7 +150,7 @@ def ideaattrholder_shop(
     reason_premise_nigh: float = None,
     reason_premise_divisor: int = None,
     reason_del_premise_context: WayStr = None,
-    reason_del_premise_need: WayStr = None,
+    reason_del_premise_branch: WayStr = None,
     reason_context_idea_active_requisite: str = None,
     teamunit: TeamUnit = None,
     healerlink: HealerLink = None,
@@ -182,7 +182,7 @@ def ideaattrholder_shop(
         reason_premise_nigh=reason_premise_nigh,
         reason_premise_divisor=reason_premise_divisor,
         reason_del_premise_context=reason_del_premise_context,
-        reason_del_premise_need=reason_del_premise_need,
+        reason_del_premise_branch=reason_del_premise_branch,
         reason_context_idea_active_requisite=reason_context_idea_active_requisite,
         teamunit=teamunit,
         healerlink=healerlink,
@@ -292,7 +292,7 @@ class IdeaUnit:
                 f"Cannot have fact for range inheritor '{self.get_idea_way()}'. A ranged fact idea must have _begin, _close attributes"
             )
         x_factheir = factheir_shop(
-            x_fact.fcontext, x_fact.fneed, x_fact.fopen, x_fact.fnigh
+            x_fact.fcontext, x_fact.fbranch, x_fact.fopen, x_fact.fnigh
         )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
@@ -334,7 +334,7 @@ class IdeaUnit:
         # self.set_factunits(context=fact, fact=context, open=premise_nigh, nigh=fact_nigh)
         self.factunits[context_factunit.fcontext] = factunit_shop(
             fcontext=context_factunit.fcontext,
-            fneed=context_factunit.fcontext,
+            fbranch=context_factunit.fcontext,
             fopen=context_factunit.fnigh,
             fnigh=context_factunit.fnigh,
         )
@@ -537,12 +537,12 @@ class IdeaUnit:
                 new_bridge=self.bridge,
             )
             x_factunit.fcontext = new_context_way
-            new_fneed_way = replace_bridge(
-                way=x_factunit.fneed,
+            new_fbranch_way = replace_bridge(
+                way=x_factunit.fbranch,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            x_factunit.set_attr(fneed=new_fneed_way)
+            x_factunit.set_attr(fbranch=new_fbranch_way)
             new_factunits[new_context_way] = x_factunit
         self.factunits = new_factunits
 
@@ -620,7 +620,7 @@ class IdeaUnit:
 
         self._del_reasonunit_all_cases(
             context=idea_attr.reason_del_premise_context,
-            premise=idea_attr.reason_del_premise_need,
+            premise=idea_attr.reason_del_premise_branch,
         )
         self._set_addin_to_zero_if_any_moldations_exist()
 

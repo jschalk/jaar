@@ -60,7 +60,7 @@ def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
         # print(f'"{agg_table}": CREATE_{agg_table.upper()}_SQLSTR,')
 
 
-def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj_HasAllBranchedKeys():
     # ESTABLISH / WHEN
     pidgin_create_table_sqlstrs = get_pidgin_prime_create_table_sqlstrs()
 

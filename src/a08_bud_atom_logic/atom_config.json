@@ -134,7 +134,7 @@
             }
         },
         "jvalues": {
-            "fneed": {
+            "fbranch": {
                 "class_type": "WayStr",
                 "column_order": 2,
                 "sqlite_datatype": "TEXT"
@@ -203,7 +203,7 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "need": {
+            "branch": {
                 "class_type": "WayStr",
                 "column_order": 2,
                 "nesting_order": 2,

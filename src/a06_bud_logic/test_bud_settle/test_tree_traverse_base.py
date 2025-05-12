@@ -317,7 +317,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsClearsAwardLineestorsCorrectly():
     assert not sue_bud.idearoot._kids[casa_str]._awardlines
 
 
-def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
+def test_BudUnit_settle_bud_DoesNotKeepUnbranched_awardheirs():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -509,7 +509,7 @@ def test_BudUnit_settle_bud_WhenIdeaUnitHas_massButAll_kidsHaveZero_massAddTo_of
     assert sue_budunit._offtrack_kids_mass_set == {clean_way}
 
 
-def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
+def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenBranched_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -557,7 +557,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert zia_membership.debtit_vote == zia_debtit_belief
 
 
-def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario1():
+def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenBranched_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)

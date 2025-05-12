@@ -431,15 +431,15 @@ class BudUnit:
     def add_fact(
         self,
         fcontext: WayStr,
-        fneed: WayStr = None,
+        fbranch: WayStr = None,
         fopen: float = None,
         fnigh: float = None,
         create_missing_ideas: bool = None,
     ):
-        fneed = fcontext if fneed is None else fneed
+        fbranch = fcontext if fbranch is None else fbranch
         if create_missing_ideas:
             self._create_ideakid_if_empty(way=fcontext)
-            self._create_ideakid_if_empty(way=fneed)
+            self._create_ideakid_if_empty(way=fbranch)
 
         fact_fcontext_idea = self.get_idea_obj(fcontext)
         x_idearoot = self.get_idea_obj(to_way(self.fisc_tag))
@@ -454,7 +454,7 @@ class BudUnit:
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(
-            fcontext=fcontext, fneed=fneed, fopen=x_fopen, fnigh=x_fnigh
+            fcontext=fcontext, fbranch=fbranch, fopen=x_fopen, fnigh=x_fnigh
         )
 
         if fact_fcontext_idea.is_math() is False:
@@ -471,7 +471,7 @@ class BudUnit:
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason context "timeline,weeks" with premise.need = "timeline,weeks"
+            # there exists a reason context "timeline,weeks" with premise.branch = "timeline,weeks"
             # and (1,2) divisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
@@ -684,7 +684,7 @@ class BudUnit:
         for x_reason in posted_idea.reasonunits.values():
             self._create_ideakid_if_empty(way=x_reason.context)
             for premise_x in x_reason.premises.values():
-                self._create_ideakid_if_empty(way=premise_x.need)
+                self._create_ideakid_if_empty(way=premise_x.branch)
 
     def _create_ideakid_if_empty(self, way: WayStr):
         if self.idea_exists(way) is False:
@@ -796,7 +796,7 @@ class BudUnit:
         reason_premise_nigh: float = None,
         reason_premise_divisor: int = None,
         reason_del_premise_context: WayStr = None,
-        reason_del_premise_need: WayStr = None,
+        reason_del_premise_branch: WayStr = None,
         reason_context_idea_active_requisite: str = None,
         teamunit: TeamUnit = None,
         healerlink: HealerLink = None,
@@ -834,7 +834,7 @@ class BudUnit:
             reason_premise_nigh=reason_premise_nigh,
             reason_premise_divisor=reason_premise_divisor,
             reason_del_premise_context=reason_del_premise_context,
-            reason_del_premise_need=reason_del_premise_need,
+            reason_del_premise_branch=reason_del_premise_branch,
             reason_context_idea_active_requisite=reason_context_idea_active_requisite,
             teamunit=teamunit,
             healerlink=healerlink,

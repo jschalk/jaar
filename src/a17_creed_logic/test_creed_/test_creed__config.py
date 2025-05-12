@@ -30,7 +30,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
     fcontext_str,
-    fneed_str,
+    fbranch_str,
     group_label_str,
     healer_name_str,
     idea_way_str,
@@ -48,7 +48,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     gogo_want_str,
     mass_str,
     morph_str,
-    need_str,
+    branch_str,
     pledge_str,
     stop_want_str,
     fund_coin_str,
@@ -240,9 +240,9 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[27] == get_delete_key_name(context_str())
     assert table_sorting_priority[28] == fcontext_str()
     assert table_sorting_priority[29] == get_delete_key_name(fcontext_str())
-    assert table_sorting_priority[30] == need_str()
-    assert table_sorting_priority[31] == get_delete_key_name(need_str())
-    assert table_sorting_priority[32] == fneed_str()
+    assert table_sorting_priority[30] == branch_str()
+    assert table_sorting_priority[31] == get_delete_key_name(branch_str())
+    assert table_sorting_priority[32] == fbranch_str()
     assert table_sorting_priority[33] == team_label_str()
     assert table_sorting_priority[34] == get_delete_key_name(team_label_str())
     assert table_sorting_priority[35] == awardee_label_str()
@@ -372,8 +372,8 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(group_label_str()) == "TEXT"
     assert sqlite_types.get(idea_way_str()) == "TEXT"
     assert sqlite_types.get(context_str()) == "TEXT"
-    assert sqlite_types.get("need") == "TEXT"
-    assert sqlite_types.get("fneed") == "TEXT"
+    assert sqlite_types.get("branch") == "TEXT"
+    assert sqlite_types.get("fbranch") == "TEXT"
     assert sqlite_types.get(team_label_str()) == "TEXT"
     assert sqlite_types.get(awardee_label_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"

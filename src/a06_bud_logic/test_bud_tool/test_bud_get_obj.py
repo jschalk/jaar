@@ -25,8 +25,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     idea_way_str,
     context_str,
     fcontext_str,
-    need_str,
-    fneed_str,
+    branch_str,
+    fbranch_str,
 )
 
 
@@ -123,7 +123,7 @@ def test_bud_idea_reason_premiseunit_get_obj_ReturnsObj():
     casa_jkeys = {
         idea_way_str(): casa_way,
         context_str(): week_way,
-        need_str(): thur_way,
+        branch_str(): thur_way,
     }
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
@@ -265,7 +265,7 @@ def test_bud_get_obj_ReturnsObj_bud_idea_reason_premiseunit_get_obj():
     casa_jkeys = {
         idea_way_str(): casa_way,
         context_str(): week_way,
-        need_str(): thur_way,
+        branch_str(): thur_way,
     }
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
