@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a01_way_logic.way import WayUnit, WorldID
+from src.a01_way_logic.way import WayStr, WorldID
 from src.a02_finance_logic.deal import OwnerName, FiscTag
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
@@ -33,12 +33,12 @@ class ObjKeysHolder:
     world_id: WorldID = None
     fisc_tag: FiscTag = None
     owner_name: OwnerName = None
-    way: WayUnit = None
-    context: WayUnit = None
+    way: WayStr = None
+    context: WayStr = None
     acct_name: AcctUnit = None
     membership: GroupUnit = None
     group_name: GroupUnit = None
-    fact_way: WayUnit = None
+    fact_way: WayStr = None
 
 
 def insert_job_budmemb(

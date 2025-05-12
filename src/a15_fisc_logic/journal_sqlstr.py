@@ -4,7 +4,7 @@ from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_mstr_table_name,
 )
 from src.a08_bud_atom_logic.atom import BudAtom
-from src.a01_way_logic.way import WayUnit
+from src.a01_way_logic.way import WayStr
 
 # from src.a00_data_toolbox.sqlite import (
 #     sqlite_to_python,
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS way_ref (
 ;"""
 
 
-def get_way_ref_table_single_insert_sqlstr(way: WayUnit, bridge: str) -> str:
+def get_way_ref_table_single_insert_sqlstr(way: WayStr, bridge: str) -> str:
     return f"""
 INSERT OR IGNORE INTO way_ref (way, bridge) 
 VALUES (
@@ -141,7 +141,7 @@ VALUES (
 ;"""
 
 
-def get_way_ref_table_row_id_select_sqlstr(way: WayUnit, bridge: str) -> str:
+def get_way_ref_table_row_id_select_sqlstr(way: WayStr, bridge: str) -> str:
     return f"""
 SELECT rowid FROM way_ref  
 WHERE way = '{way}' 

@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import PennyNum, FundNum
-from src.a01_way_logic.way import OwnerName, EventInt, WayUnit
+from src.a01_way_logic.way import OwnerName, EventInt, WayStr
 from src.a04_reason_logic.reason_idea import (
     FactUnit,
     factunits_get_from_dict,
@@ -40,10 +40,10 @@ class CellUnit:
     quota: float = None
     mandate: float = None
     budadjust: BudUnit = None
-    budevent_facts: dict[WayUnit, FactUnit] = None
-    found_facts: dict[WayUnit, FactUnit] = None
-    boss_facts: dict[WayUnit, FactUnit] = None
-    _reason_contexts: set[WayUnit] = None
+    budevent_facts: dict[WayStr, FactUnit] = None
+    found_facts: dict[WayStr, FactUnit] = None
+    boss_facts: dict[WayStr, FactUnit] = None
+    _reason_contexts: set[WayStr] = None
     _acct_mandate_ledger: dict[OwnerName, FundNum] = None
 
     def get_cell_owner_name(self) -> OwnerName:
@@ -74,10 +74,10 @@ class CellUnit:
         credit_ledger = self.get_budevents_credit_ledger()
         return allot_scale(credit_ledger, self.quota, self.penny)
 
-    def set_budevent_facts_from_dict(self, fact_dict: dict[WayUnit, dict]):
+    def set_budevent_facts_from_dict(self, fact_dict: dict[WayStr, dict]):
         self.budevent_facts = factunits_get_from_dict(fact_dict)
 
-    def set_found_facts_from_dict(self, fact_dict: dict[WayUnit, dict]):
+    def set_found_facts_from_dict(self, fact_dict: dict[WayStr, dict]):
         self.found_facts = factunits_get_from_dict(fact_dict)
 
     def set_boss_facts_from_other_facts(self):
@@ -160,9 +160,9 @@ def cellunit_shop(
     penny: PennyNum = None,
     quota: float = None,
     budadjust: BudUnit = None,
-    budevent_facts: dict[WayUnit, FactUnit] = None,
-    found_facts: dict[WayUnit, FactUnit] = None,
-    boss_facts: dict[WayUnit, FactUnit] = None,
+    budevent_facts: dict[WayStr, FactUnit] = None,
+    found_facts: dict[WayStr, FactUnit] = None,
+    boss_facts: dict[WayStr, FactUnit] = None,
     mandate: float = None,
 ) -> CellUnit:
     if quota is None:

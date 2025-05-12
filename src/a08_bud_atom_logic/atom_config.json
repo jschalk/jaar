@@ -8,13 +8,13 @@
         },
         "jkeys": {
             "acct_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -48,7 +48,7 @@
         },
         "jkeys": {
             "acct_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "column_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -81,13 +81,13 @@
         },
         "jkeys": {
             "awardee_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -121,13 +121,13 @@
         },
         "jkeys": {
             "fcontext": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -135,7 +135,7 @@
         },
         "jvalues": {
             "fneed": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 2,
                 "sqlite_datatype": "TEXT"
             },
@@ -166,13 +166,13 @@
         },
         "jkeys": {
             "healer_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -192,19 +192,19 @@
         },
         "jkeys": {
             "context": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "need": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 2,
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
@@ -243,13 +243,13 @@
         },
         "jkeys": {
             "context": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -278,13 +278,13 @@
         },
         "jkeys": {
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "team_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -304,7 +304,7 @@
         },
         "jkeys": {
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"

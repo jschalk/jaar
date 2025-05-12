@@ -2,7 +2,7 @@ from src.a01_way_logic.way import default_bridge_if_None, create_way, to_way
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     context_str,
-    type_WayUnit_str,
+    type_WayStr_str,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
@@ -75,7 +75,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_labelmap = mapunit_shop(type_NameUnit_str(), face_name="Sue")
+#     x_labelmap = mapunit_shop(type_NameStr_str(), face_name="Sue")
 #     x_labelmap.set_otx2inx(sue_otx, sue_inx)
 #     x_labelmap.set_otx2inx(zia_otx, zia_inx)
 #     return x_labelmap
@@ -86,7 +86,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = f"Sue{default_bridge_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_bridge_if_None()}"
-#     x_labelmap = mapunit_shop(type_LabelUnit_str(), face_name="Sue")
+#     x_labelmap = mapunit_shop(type_LabelStr_str(), face_name="Sue")
 #     x_labelmap.set_otx2inx(sue_otx, sue_inx)
 #     x_labelmap.set_otx2inx(zia_otx, zia_inx)
 #     return x_labelmap
@@ -97,7 +97,7 @@ def get_suita_namemap() -> NameMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_bridge_if_None()}"
 #     casa_inx = "casa"
-#     tagmap = mapunit_shop(type_TagUnit_str(), face_name="Sue")
+#     tagmap = mapunit_shop(type_TagStr_str(), face_name="Sue")
 #     tagmap.set_otx2inx(clean_str, clean_inx)
 #     tagmap.set_otx2inx(casa_otx, casa_inx)
 #     return tagmap
@@ -221,7 +221,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     sweep_inx_way = create_way(clean_inx_way, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    rx = type_WayUnit_str()
+    rx = type_WayStr_str()
     sue_pidginunit.set_otx2inx(rx, otx_accord45_way, inx_accord87_way)
     sue_pidginunit.set_otx2inx(rx, casa_otx_way, casa_inx_way)
     sue_pidginunit.set_otx2inx(rx, clean_otx_way, clean_inx_way)

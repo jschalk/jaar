@@ -80,7 +80,7 @@ def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
     assert zia_bud.get_idea_obj(swim_way)._uid is not None
 
 
-def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaWayUnit():
+def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaWayStr():
     # ESTABLISH
     nia_str = "Nia"
     nia_bud = budunit_shop(nia_str, tally=10)
@@ -92,7 +92,7 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaWayUnit():
     assert tree_metrics_before.last_evaluated_pledge_idea_way is None
 
 
-def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaWayUnit():
+def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaWayStr():
     # ESTABLISH
     yao_bud = budunit_v001()
     yao_tree_metrics = yao_bud.get_tree_metrics()

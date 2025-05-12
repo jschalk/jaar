@@ -86,7 +86,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
 
 
 # save two dataframes to be pidgined: two files in otx, two files in inx
-def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_WayUnit(
+def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_WayStr(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

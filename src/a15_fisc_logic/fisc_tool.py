@@ -7,7 +7,7 @@ from src.a00_data_toolbox.file_toolbox import (
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a02_finance_logic.deal import FiscTag
-from src.a01_way_logic.way import TagUnit, OwnerName
+from src.a01_way_logic.way import TagStr, OwnerName
 from src.a02_finance_logic.finance_config import FundNum
 from src.a04_reason_logic.reason_idea import get_dict_from_factunits
 from src.a11_deal_cell_logic.cell import CellUnit, cellunit_shop
@@ -100,7 +100,7 @@ def _exists_create_cell_tree(fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time
                         cells_to_evaluate.append(child_cellunit)
 
 
-def load_cells_budevent(fisc_mstr_dir: str, fisc_tag: TagUnit):
+def load_cells_budevent(fisc_mstr_dir: str, fisc_tag: TagStr):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_tag)
     owners_dir = create_path(fisc_dir, "owners")
@@ -123,7 +123,7 @@ def _load_cell_budevent(fisc_mstr_dir, fisc_tag, dirpath):
     cellunit_save_to_dir(dirpath, x_cellunit)
 
 
-def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_tag: TagUnit):
+def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_tag: TagStr):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_tag)
     owners_dir = create_path(fisc_dir, "owners")

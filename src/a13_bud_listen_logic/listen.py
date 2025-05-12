@@ -1,7 +1,7 @@
 from src.a02_finance_logic.allot import allot_scale
 from src.a01_way_logic.way import (
     get_ancestor_ways,
-    WayUnit,
+    WayStr,
     get_root_tag_from_way,
     OwnerName,
 )
@@ -89,7 +89,7 @@ class MassReplaceOrAddData:
     replace_mass_list: list = None
 
 
-def _create_mass_data(listener: BudUnit, x_way: WayUnit) -> list:
+def _create_mass_data(listener: BudUnit, x_way: WayStr) -> list:
     mass_data = MassReplaceOrAddData()
     mass_data.add_to_mass_list = []
     mass_data.replace_mass_list = []
@@ -106,8 +106,8 @@ def _create_mass_data(listener: BudUnit, x_way: WayUnit) -> list:
 
 def _add_and_replace_ideaunit_masss(
     listener: BudUnit,
-    replace_mass_list: list[WayUnit],
-    add_to_mass_list: list[WayUnit],
+    replace_mass_list: list[WayStr],
+    add_to_mass_list: list[WayStr],
     x_mass: float,
 ):
     for idea_way in replace_mass_list:
@@ -147,7 +147,7 @@ def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
 def listen_to_speaker_fact(
     listener: BudUnit,
     speaker: BudUnit,
-    missing_fact_contexts: list[WayUnit] = None,
+    missing_fact_contexts: list[WayStr] = None,
 ) -> BudUnit:
     if missing_fact_contexts is None:
         missing_fact_contexts = list(listener.get_missing_fact_contexts())
@@ -291,7 +291,7 @@ def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
 
 def _fneed_keep_plans_and_listen(
     listener_id: OwnerName,
-    keep_dict: dict[WayUnit],
+    keep_dict: dict[WayStr],
     healer_hubunit: HubUnit,
     new_job: BudUnit,
 ):

@@ -2,12 +2,12 @@ from src.a00_data_toolbox.file_toolbox import is_path_valid
 from pathlib import Path as pathlib_Path
 
 
-class InvalidWayUnitException(Exception):
+class InvalidWayStrException(Exception):
     pass
 
 
-class TagUnit(str):
-    """A string representation of a tree node. Nodes cannot contain WayUnit bridge"""
+class TagStr(str):
+    """A string representation of a tree node. Nodes cannot contain WayStr bridge"""
 
     def is_tag(self, bridge: str = None) -> bool:
         return len(self) > 0 and self.contains_bridge(bridge)
@@ -16,11 +16,11 @@ class TagUnit(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class FiscTag(TagUnit):  # Created to help track the concept
+class FiscTag(TagStr):  # Created to help track the concept
     pass
 
 
-class NameUnit(str):
+class NameStr(str):
     """All Name string classes should inherit from this class"""
 
     def is_name(self, bridge: str = None) -> bool:
@@ -30,8 +30,8 @@ class NameUnit(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class OwnerName(NameUnit):
-    """A TagUnit used to identify a BudUnit's owner_name"""
+class OwnerName(NameStr):
+    """A TagStr used to identify a BudUnit's owner_name"""
 
     pass
 
@@ -43,34 +43,34 @@ class AcctName(OwnerName):  # Created to help track the concept
 
 
 class HealerName(OwnerName):
-    """A TagUnit used to identify a Problem's Healer"""
+    """A TagStr used to identify a Problem's Healer"""
 
     pass
 
 
-class TimeLineTag(TagUnit):
-    "TimeLineTag is required for every TimeLineUnit. It is a TagUnit that must not container the bridge."
+class TimeLineTag(TagStr):
+    "TimeLineTag is required for every TimeLineUnit. It is a TagStr that must not container the bridge."
 
     pass
 
 
-class WayUnit(str):
-    """A string representation of a tree path. TagUnits are seperated by way bridge"""
+class WayStr(str):
+    """A string representation of a tree path. TagStrs are seperated by way bridge"""
 
     pass
 
 
-class YawUnit(str):
-    """YawUnit is a WayUnit in reverse direction. A string representation of a tree path. TagUnits are seperated by way bridge."""
+class YawStr(str):
+    """YawStr is a WayStr in reverse direction. A string representation of a tree path. TagStrs are seperated by way bridge."""
 
     pass
 
 
-class LabelUnit(str):
-    """If a LabelUnit contains bridges it represents a group otherwise it's a single member group of an AcctName."""
+class LabelStr(str):
+    """If a LabelStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
 
 
-class GroupLabel(LabelUnit):  # Created to help track the concept
+class GroupLabel(LabelStr):  # Created to help track the concept
     pass
 
 
@@ -78,7 +78,7 @@ class WorldID(str):
     pass
 
 
-class FaceName(NameUnit):
+class FaceName(NameStr):
     pass
 
 
@@ -98,7 +98,7 @@ def get_default_fisc_tag() -> FiscTag:
     return "ZZ"
 
 
-def to_way(tag: TagUnit, bridge: str = None):
+def to_way(tag: TagStr, bridge: str = None):
     x_bridge = default_bridge_if_None(bridge)
     if tag is None:
         return x_bridge
@@ -124,11 +124,11 @@ class bridge_in_tag_Exception(Exception):
 
 
 def create_way(
-    parent_way: WayUnit,
-    terminus_tag: TagUnit = None,
+    parent_way: WayStr,
+    terminus_tag: TagStr = None,
     bridge: str = None,
     auto_add_first_bridge: bool = True,
-) -> WayUnit:
+) -> WayStr:
     bridge = default_bridge_if_None(bridge)
     if terminus_tag in {"", None}:
         return to_way(parent_way, bridge)
@@ -142,11 +142,11 @@ def create_way(
             )
             raise init_bridge_not_presentException(exception_str)
 
-    terminus_tag = TagUnit(terminus_tag)
+    terminus_tag = TagStr(terminus_tag)
     if terminus_tag.is_tag(bridge) is False:
         raise bridge_in_tag_Exception(f"bridge '{bridge}' is in {terminus_tag}")
     if terminus_tag is None:
-        return WayUnit(parent_way)
+        return WayStr(parent_way)
     if terminus_tag.is_tag(bridge) is False:
         raise bridge_in_tag_Exception(f"bridge '{bridge}' is in {terminus_tag}")
 
@@ -157,7 +157,7 @@ def create_way(
     return to_way(x_way, bridge)
 
 
-def rebuild_way(subj_way: WayUnit, old_way: WayUnit, new_way: WayUnit) -> WayUnit:
+def rebuild_way(subj_way: WayStr, old_way: WayStr, new_way: WayStr) -> WayStr:
     if subj_way is None:
         return subj_way
     elif is_sub_way(subj_way, old_way):
@@ -166,16 +166,16 @@ def rebuild_way(subj_way: WayUnit, old_way: WayUnit, new_way: WayUnit) -> WayUni
         return subj_way
 
 
-def is_sub_way(ref_way: WayUnit, sub_way: WayUnit) -> bool:
+def is_sub_way(ref_way: WayStr, sub_way: WayStr) -> bool:
     ref_way = "" if ref_way is None else ref_way
     return ref_way.find(sub_way) == 0
 
 
-def is_heir_way(src: WayUnit, heir: WayUnit, bridge: str = None) -> bool:
+def is_heir_way(src: WayStr, heir: WayStr, bridge: str = None) -> bool:
     return src == heir or heir.find(f"{src}{default_bridge_if_None(bridge)}") == 0
 
 
-def find_replace_way_key_dict(dict_x: dict, old_way: WayUnit, new_way: WayUnit) -> dict:
+def find_replace_way_key_dict(dict_x: dict, old_way: WayStr, new_way: WayStr) -> dict:
     keys_to_delete = []
     objs_to_add = []
     for x_key, x_obj in dict_x.items():
@@ -193,26 +193,26 @@ def find_replace_way_key_dict(dict_x: dict, old_way: WayUnit, new_way: WayUnit) 
     return dict_x
 
 
-def get_all_way_tags(way: WayUnit, bridge: str = None) -> list[TagUnit]:
+def get_all_way_tags(way: WayStr, bridge: str = None) -> list[TagStr]:
     return way.split(default_bridge_if_None(bridge))[1:]
 
 
-def get_terminus_tag(way: WayUnit, bridge: str = None) -> TagUnit:
+def get_terminus_tag(way: WayStr, bridge: str = None) -> TagStr:
     return get_all_way_tags(way=way, bridge=bridge)[-1]
 
 
 def get_parent_way(
-    way: WayUnit, bridge: str = None
-) -> WayUnit:  # way without terminus tag
+    way: WayStr, bridge: str = None
+) -> WayStr:  # way without terminus tag
     parent_tags = get_all_way_tags(way=way, bridge=bridge)[:-1]
     return create_way_from_tags(parent_tags, bridge=bridge)
 
 
-def get_root_tag_from_way(way: WayUnit, bridge: str = None) -> TagUnit:
+def get_root_tag_from_way(way: WayStr, bridge: str = None) -> TagStr:
     return get_all_way_tags(way=way, bridge=bridge)[0]
 
 
-def get_ancestor_ways(way: WayUnit, bridge: str = None) -> list[WayUnit]:
+def get_ancestor_ways(way: WayStr, bridge: str = None) -> list[WayStr]:
     bridge = default_bridge_if_None(bridge)
     if not way:
         return []
@@ -231,7 +231,7 @@ def get_ancestor_ways(way: WayUnit, bridge: str = None) -> list[WayUnit]:
     return x_ways
 
 
-def all_wayunits_between(src_way, dst_way) -> list[WayUnit]:
+def all_waystrs_between(src_way, dst_way) -> list[WayStr]:
     x_list = []
     anc_ways = get_ancestor_ways(dst_way)
     while anc_ways != []:
@@ -245,7 +245,7 @@ class ForeFatherException(Exception):
     pass
 
 
-def get_forefather_ways(way: WayUnit) -> dict[WayUnit]:
+def get_forefather_ways(way: WayStr) -> dict[WayStr]:
     ancestor_ways = get_ancestor_ways(way=way)
     popped_way = ancestor_ways.pop(0)
     if popped_way != way:
@@ -259,7 +259,7 @@ def get_default_fisc_tag() -> FiscTag:
     return "ZZ"
 
 
-def create_way_from_tags(tags: list[TagUnit], bridge: str = None) -> WayUnit:
+def create_way_from_tags(tags: list[TagStr], bridge: str = None) -> WayStr:
     if not tags:
         return ""
     return to_way(default_bridge_if_None(bridge).join(tags), bridge)
@@ -269,11 +269,11 @@ class InvalidbridgeReplaceException(Exception):
     pass
 
 
-def is_string_in_way(string: str, way: WayUnit) -> bool:
+def is_string_in_way(string: str, way: WayStr) -> bool:
     return way.find(string) >= 0
 
 
-def replace_bridge(way: WayUnit, old_bridge: str, new_bridge: str):
+def replace_bridge(way: WayStr, old_bridge: str, new_bridge: str):
     if is_string_in_way(string=new_bridge, way=way):
         raise InvalidbridgeReplaceException(
             f"Cannot replace_bridge '{old_bridge}' with '{new_bridge}' because the new one exists in way '{way}'."
@@ -281,32 +281,30 @@ def replace_bridge(way: WayUnit, old_bridge: str, new_bridge: str):
     return way.replace(old_bridge, new_bridge)
 
 
-class ValidateTagUnitException(Exception):
+class ValidateTagStrException(Exception):
     pass
 
 
-def is_tagunit(x_tagunit: TagUnit, x_bridge: str):
-    x_tagunit = TagUnit(x_tagunit)
-    return x_tagunit.is_tag(bridge=x_bridge)
+def is_tagstr(x_tagstr: TagStr, x_bridge: str):
+    x_tagstr = TagStr(x_tagstr)
+    return x_tagstr.is_tag(bridge=x_bridge)
 
 
-def validate_tagunit(
-    x_tagunit: TagUnit, x_bridge: str, not_tagunit_required: bool = False
-):
-    if is_tagunit(x_tagunit, x_bridge) and not_tagunit_required:
-        raise ValidateTagUnitException(
-            f"'{x_tagunit}' needs to not be a TagUnit. Must contain bridge: '{x_bridge}'"
+def validate_tagstr(x_tagstr: TagStr, x_bridge: str, not_tagstr_required: bool = False):
+    if is_tagstr(x_tagstr, x_bridge) and not_tagstr_required:
+        raise ValidateTagStrException(
+            f"'{x_tagstr}' needs to not be a TagStr. Must contain bridge: '{x_bridge}'"
         )
-    elif is_tagunit(x_tagunit, x_bridge) is False and not not_tagunit_required:
-        raise ValidateTagUnitException(
-            f"'{x_tagunit}' needs to be a TagUnit. Cannot contain bridge: '{x_bridge}'"
+    elif is_tagstr(x_tagstr, x_bridge) is False and not not_tagstr_required:
+        raise ValidateTagStrException(
+            f"'{x_tagstr}' needs to be a TagStr. Cannot contain bridge: '{x_bridge}'"
         )
 
-    return x_tagunit
+    return x_tagstr
 
 
-def wayunit_valid_dir_path(x_wayunit: WayUnit, bridge: str) -> bool:
-    x_way_tags = get_all_way_tags(x_wayunit, bridge)
+def waystr_valid_dir_path(x_waystr: WayStr, bridge: str) -> bool:
+    x_way_tags = get_all_way_tags(x_waystr, bridge)
     slash_str = "/"
     x_way_os_path = create_way_from_tags(x_way_tags, bridge=slash_str)
     parts = pathlib_Path(x_way_os_path).parts
@@ -314,11 +312,11 @@ def wayunit_valid_dir_path(x_wayunit: WayUnit, bridge: str) -> bool:
     return False if len(parts) != len(x_way_tags) else is_path_valid(x_way_os_path)
 
 
-def get_way_from_yaw(x_yawunit: YawUnit, bridge: str = None) -> WayUnit:
+def get_way_from_yaw(x_yawstr: YawStr, bridge: str = None) -> WayStr:
     x_bridge = default_bridge_if_None(bridge)
-    yaw_tags = get_all_way_tags(x_yawunit, x_bridge)
-    return WayUnit(create_way_from_tags(yaw_tags[::-1], x_bridge))
+    yaw_tags = get_all_way_tags(x_yawstr, x_bridge)
+    return WayStr(create_way_from_tags(yaw_tags[::-1], x_bridge))
 
 
-def get_yaw_from_way(x_wayunit: WayUnit, bridge: str = None) -> YawUnit:
-    return YawUnit(get_way_from_yaw(x_wayunit, bridge))
+def get_yaw_from_way(x_waystr: WayStr, bridge: str = None) -> YawStr:
+    return YawStr(get_way_from_yaw(x_waystr, bridge))

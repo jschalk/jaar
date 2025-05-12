@@ -10,7 +10,7 @@ from src.a01_way_logic.way import (
     get_parent_way,
     to_way,
     is_sub_way,
-    all_wayunits_between,
+    all_waystrs_between,
     rebuild_way,
     get_terminus_tag,
     get_root_tag_from_way,
@@ -20,14 +20,14 @@ from src.a01_way_logic.way import (
     get_forefather_ways,
     create_way,
     default_bridge_if_None,
-    TagUnit,
-    WayUnit,
+    TagStr,
+    WayStr,
     is_string_in_way,
     OwnerName,
     AcctName,
     HealerName,
     FiscTag,
-    wayunit_valid_dir_path,
+    waystr_valid_dir_path,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
@@ -55,7 +55,7 @@ from src.a04_reason_logic.reason_idea import (
     FactUnit,
     FactUnit,
     ReasonUnit,
-    WayUnit,
+    WayStr,
     factunit_shop,
 )
 from src.a04_reason_logic.reason_team import TeamUnit
@@ -136,19 +136,19 @@ class BudUnit:
     last_pack_id: int = None
     originunit: OriginUnit = None  # In plan buds this shows source
     # settle_bud Calculated field begin
-    _idea_dict: dict[WayUnit, IdeaUnit] = None
-    _keep_dict: dict[WayUnit, IdeaUnit] = None
-    _healers_dict: dict[HealerName, dict[WayUnit, IdeaUnit]] = None
+    _idea_dict: dict[WayStr, IdeaUnit] = None
+    _keep_dict: dict[WayStr, IdeaUnit] = None
+    _healers_dict: dict[HealerName, dict[WayStr, IdeaUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
     _groupunits: dict[GroupLabel, GroupUnit] = None
-    _offtrack_kids_mass_set: set[WayUnit] = None
+    _offtrack_kids_mass_set: set[WayStr] = None
     _offtrack_fund: float = None
-    _reason_contexts: set[WayUnit] = None
-    _range_inheritors: dict[WayUnit, WayUnit] = None
+    _reason_contexts: set[WayStr] = None
+    _range_inheritors: dict[WayStr, WayStr] = None
     # settle_bud Calculated field end
 
     def del_last_pack_id(self):
@@ -186,16 +186,16 @@ class BudUnit:
 
     def make_way(
         self,
-        parent_way: WayUnit = None,
-        terminus_tag: TagUnit = None,
-    ) -> WayUnit:
+        parent_way: WayStr = None,
+        terminus_tag: TagStr = None,
+    ) -> WayStr:
         return create_way(
             parent_way=parent_way,
             terminus_tag=terminus_tag,
             bridge=self.bridge,
         )
 
-    def make_l1_way(self, l1_tag: TagUnit):
+    def make_l1_way(self, l1_tag: TagStr):
         return self.make_way(self.fisc_tag, l1_tag)
 
     def set_bridge(self, new_bridge: str):
@@ -228,7 +228,7 @@ class BudUnit:
         else:
             self.max_tree_traverse = x_int
 
-    def _get_relevant_ways(self, ways: dict[WayUnit,]) -> set[WayUnit]:
+    def _get_relevant_ways(self, ways: dict[WayStr,]) -> set[WayStr]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
         for x_way in ways:
@@ -264,9 +264,9 @@ class BudUnit:
 
     def _evaluate_relevancy(
         self,
-        to_evaluate_list: list[WayUnit],
-        to_evaluate_hx_dict: dict[WayUnit, int],
-        to_evaluate_way: WayUnit,
+        to_evaluate_list: list[WayStr],
+        to_evaluate_hx_dict: dict[WayStr, int],
+        to_evaluate_way: WayStr,
         way_type: str,
     ):
         if to_evaluate_hx_dict.get(to_evaluate_way) is None:
@@ -283,7 +283,7 @@ class BudUnit:
                         way_type="reasonunit_descendant",
                     )
 
-    def all_ideas_relevant_to_pledge_idea(self, way: WayUnit) -> bool:
+    def all_ideas_relevant_to_pledge_idea(self, way: WayStr) -> bool:
         pledge_idea_assoc_set = set(self._get_relevant_ways({way}))
         all_ideas_set = set(self.get_idea_tree_ordered_way_list())
         return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
@@ -410,7 +410,7 @@ class BudUnit:
         all_group_labels = set(self._groupunits.keys())
         return all_group_labels.difference(x_acctunit_group_labels)
 
-    def _is_idea_rangeroot(self, idea_way: WayUnit) -> bool:
+    def _is_idea_rangeroot(self, idea_way: WayStr) -> bool:
         if self.fisc_tag == idea_way:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where idearoot is rangeroot"
@@ -430,8 +430,8 @@ class BudUnit:
 
     def add_fact(
         self,
-        fcontext: WayUnit,
-        fneed: WayUnit = None,
+        fcontext: WayStr,
+        fneed: WayStr = None,
         fopen: float = None,
         fnigh: float = None,
         create_missing_ideas: bool = None,
@@ -479,13 +479,13 @@ class BudUnit:
             # that has that context.
             x_idearoot.set_factunit(x_factunit)
 
-    def get_fact(self, fcontext: WayUnit) -> FactUnit:
+    def get_fact(self, fcontext: WayStr) -> FactUnit:
         return self.idearoot.factunits.get(fcontext)
 
-    def del_fact(self, fcontext: WayUnit):
+    def del_fact(self, fcontext: WayStr):
         self.idearoot.del_factunit(fcontext)
 
-    def get_idea_dict(self, problem: bool = None) -> dict[WayUnit, IdeaUnit]:
+    def get_idea_dict(self, problem: bool = None) -> dict[WayStr, IdeaUnit]:
         self.settle_bud()
         if not problem:
             return self._idea_dict
@@ -557,10 +557,10 @@ class BudUnit:
             level_count = 0
         return level_count
 
-    def get_reason_contexts(self) -> set[WayUnit]:
+    def get_reason_contexts(self) -> set[WayStr]:
         return set(self.get_tree_metrics().reason_contexts.keys())
 
-    def get_missing_fact_contexts(self) -> dict[WayUnit, int]:
+    def get_missing_fact_contexts(self) -> dict[WayStr, int]:
         tree_metrics = self.get_tree_metrics()
         reason_contexts = tree_metrics.reason_contexts
         missing_contexts = {}
@@ -572,7 +572,7 @@ class BudUnit:
         return missing_contexts
 
     def add_idea(
-        self, idea_way: WayUnit, mass: float = None, pledge: bool = None
+        self, idea_way: WayStr, mass: float = None, pledge: bool = None
     ) -> IdeaUnit:
         x_idea_tag = get_terminus_tag(idea_way, self.bridge)
         x_parent_way = get_parent_way(idea_way, self.bridge)
@@ -604,7 +604,7 @@ class BudUnit:
     def set_idea(
         self,
         idea_kid: IdeaUnit,
-        parent_way: WayUnit,
+        parent_way: WayStr,
         get_rid_of_missing_awardlinks_awardee_labels: bool = None,
         create_missing_ideas: bool = None,
         adoptees: list[str] = None,
@@ -612,8 +612,8 @@ class BudUnit:
         create_missing_ancestors: bool = True,
     ):
         parent_way = to_way(parent_way, self.bridge)
-        if TagUnit(idea_kid.idea_tag).is_tag(self.bridge) is False:
-            x_str = f"set_idea failed because '{idea_kid.idea_tag}' is not a TagUnit."
+        if TagStr(idea_kid.idea_tag).is_tag(self.bridge) is False:
+            x_str = f"set_idea failed because '{idea_kid.idea_tag}' is not a TagStr."
             raise InvalidBudException(x_str)
 
         x_root_tag = get_root_tag_from_way(parent_way, self.bridge)
@@ -686,11 +686,11 @@ class BudUnit:
             for premise_x in x_reason.premises.values():
                 self._create_ideakid_if_empty(way=premise_x.need)
 
-    def _create_ideakid_if_empty(self, way: WayUnit):
+    def _create_ideakid_if_empty(self, way: WayStr):
         if self.idea_exists(way) is False:
             self.add_idea(way)
 
-    def del_idea_obj(self, way: WayUnit, del_children: bool = True):
+    def del_idea_obj(self, way: WayStr, del_children: bool = True):
         if way == self.idearoot.get_idea_way():
             raise InvalidBudException("Idearoot cannot be deleted")
         parent_way = get_parent_way(way)
@@ -701,7 +701,7 @@ class BudUnit:
             parent_idea.del_kid(get_terminus_tag(way, self.bridge))
         self.settle_bud()
 
-    def _shift_idea_kids(self, x_way: WayUnit):
+    def _shift_idea_kids(self, x_way: WayStr):
         parent_way = get_parent_way(x_way)
         d_temp_idea = self.get_idea_obj(x_way)
         for kid in d_temp_idea._kids.values():
@@ -710,7 +710,7 @@ class BudUnit:
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_idea_tag(self, old_way: WayUnit, new_idea_tag: TagUnit):
+    def edit_idea_tag(self, old_way: WayStr, new_idea_tag: TagStr):
         if self.bridge in new_idea_tag:
             exception_str = f"Cannot modify '{old_way}' because new_idea_tag {new_idea_tag} contains bridge {self.bridge}"
             raise InvalidTagException(exception_str)
@@ -731,7 +731,7 @@ class BudUnit:
             self._idearoot_find_replace_way(old_way=old_way, new_way=new_way)
 
     def _non_root_idea_tag_edit(
-        self, old_way: WayUnit, new_idea_tag: TagUnit, parent_way: WayUnit
+        self, old_way: WayStr, new_idea_tag: TagStr, parent_way: WayStr
     ):
         x_idea = self.get_idea_obj(old_way)
         x_idea.set_idea_tag(new_idea_tag)
@@ -740,7 +740,7 @@ class BudUnit:
         idea_parent._kids.pop(get_terminus_tag(old_way, self.bridge))
         idea_parent._kids[x_idea.idea_tag] = x_idea
 
-    def _idearoot_find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+    def _idearoot_find_replace_way(self, old_way: WayStr, new_way: WayStr):
         self.idearoot.find_replace_way(old_way=old_way, new_way=new_way)
 
         idea_iter_list = [self.idearoot]
@@ -768,9 +768,9 @@ class BudUnit:
 
     def edit_reason(
         self,
-        idea_way: WayUnit,
-        reason_context: WayUnit = None,
-        reason_premise: WayUnit = None,
+        idea_way: WayStr,
+        reason_context: WayStr = None,
+        reason_premise: WayStr = None,
         reason_premise_open: float = None,
         reason_premise_nigh: float = None,
         reason_premise_divisor: int = None,
@@ -786,17 +786,17 @@ class BudUnit:
 
     def edit_idea_attr(
         self,
-        idea_way: WayUnit,
+        idea_way: WayStr,
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
-        reason_context: WayUnit = None,
-        reason_premise: WayUnit = None,
+        reason_context: WayStr = None,
+        reason_premise: WayStr = None,
         reason_premise_open: float = None,
         reason_premise_nigh: float = None,
         reason_premise_divisor: int = None,
-        reason_del_premise_context: WayUnit = None,
-        reason_del_premise_need: WayUnit = None,
+        reason_del_premise_context: WayStr = None,
+        reason_del_premise_need: WayStr = None,
         reason_context_idea_active_requisite: str = None,
         teamunit: TeamUnit = None,
         healerlink: HealerLink = None,
@@ -862,8 +862,8 @@ class BudUnit:
         x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrholder)
 
     def get_agenda_dict(
-        self, necessary_context: WayUnit = None
-    ) -> dict[WayUnit, IdeaUnit]:
+        self, necessary_context: WayStr = None
+    ) -> dict[WayStr, IdeaUnit]:
         self.settle_bud()
         return {
             x_idea.get_idea_way(): x_idea
@@ -871,12 +871,12 @@ class BudUnit:
             if x_idea.is_agenda_idea(necessary_context)
         }
 
-    def get_all_pledges(self) -> dict[WayUnit, IdeaUnit]:
+    def get_all_pledges(self) -> dict[WayStr, IdeaUnit]:
         self.settle_bud()
         all_ideas = self._idea_dict.values()
         return {x_idea.get_idea_way(): x_idea for x_idea in all_ideas if x_idea.pledge}
 
-    def set_agenda_task_complete(self, task_way: WayUnit, context: WayUnit):
+    def set_agenda_task_complete(self, task_way: WayStr, context: WayStr):
         pledge_idea = self.get_idea_obj(task_way)
         pledge_idea.set_factunit_to_complete(self.idearoot.factunits[context])
 
@@ -988,7 +988,7 @@ class BudUnit:
         for acctunit in self.accts.values():
             acctunit.clear_fund_give_take()
 
-    def idea_exists(self, way: WayUnit) -> bool:
+    def idea_exists(self, way: WayStr) -> bool:
         if way in {"", None}:
             return False
         root_way_idea_tag = get_root_tag_from_way(way, self.bridge)
@@ -1011,20 +1011,20 @@ class BudUnit:
                 return False
         return True
 
-    def get_idea_obj(self, way: WayUnit, if_missing_create: bool = False) -> IdeaUnit:
+    def get_idea_obj(self, way: WayStr, if_missing_create: bool = False) -> IdeaUnit:
         if way is None:
             raise InvalidBudException("get_idea_obj received way=None")
         if self.idea_exists(way) is False and not if_missing_create:
             raise InvalidBudException(f"get_idea_obj failed. no idea at '{way}'")
-        tagunits = get_all_way_tags(way, bridge=self.bridge)
-        if len(tagunits) == 1:
+        tagstrs = get_all_way_tags(way, bridge=self.bridge)
+        if len(tagstrs) == 1:
             return self.idearoot
 
-        tagunits.pop(0)
-        idea_tag = tagunits.pop(0)
+        tagstrs.pop(0)
+        idea_tag = tagstrs.pop(0)
         x_idea = self.idearoot.get_kid(idea_tag, if_missing_create)
-        while tagunits != []:
-            x_idea = x_idea.get_kid(tagunits.pop(0), if_missing_create)
+        while tagstrs != []:
+            x_idea = x_idea.get_kid(tagstrs.pop(0), if_missing_create)
 
         return x_idea
 
@@ -1035,9 +1035,9 @@ class BudUnit:
         return x_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
     def get_inheritor_idea_list(
-        self, math_way: WayUnit, inheritor_way: WayUnit
+        self, math_way: WayStr, inheritor_way: WayStr
     ) -> list[IdeaUnit]:
-        idea_ways = all_wayunits_between(math_way, inheritor_way)
+        idea_ways = all_waystrs_between(math_way, inheritor_way)
         return [self.get_idea_obj(x_idea_way) for x_idea_way in idea_ways]
 
     def _set_idea_dict(self):
@@ -1053,7 +1053,7 @@ class BudUnit:
             for x_reason_context in x_idea.reasonunits.keys():
                 self._reason_contexts.add(x_reason_context)
 
-    def _raise_gogo_calc_stop_calc_exception(self, idea_way: WayUnit):
+    def _raise_gogo_calc_stop_calc_exception(self, idea_way: WayStr):
         exception_str = f"Error has occurred, Idea '{idea_way}' is having _gogo_calc and _stop_calc attributes set twice"
         raise _gogo_calc_stop_calc_Exception(exception_str)
 
@@ -1098,7 +1098,7 @@ class BudUnit:
                 self._allot_fund_share(x_idea)
 
     def _set_ancestors_pledge_fund_keep_attrs(
-        self, way: WayUnit, keep_exceptions: bool = False
+        self, way: WayStr, keep_exceptions: bool = False
     ):
         x_descendant_pledge_count = 0
         child_awardlines = None
@@ -1305,7 +1305,7 @@ class BudUnit:
             if self._keeps_justified and x_idea.healerlink.any_healer_name_exists():
                 self._keep_dict[x_idea.get_idea_way()] = x_idea
 
-    def _get_healers_dict(self) -> dict[HealerName, dict[WayUnit, IdeaUnit]]:
+    def _get_healers_dict(self) -> dict[HealerName, dict[WayStr, IdeaUnit]]:
         _healers_dict = {}
         for x_keep_way, x_keep_idea in self._keep_dict.items():
             for x_healer_name in x_keep_idea.healerlink._healer_names:
@@ -1320,7 +1320,7 @@ class BudUnit:
 
     def _get_buildable_keeps(self) -> bool:
         return all(
-            wayunit_valid_dir_path(keep_way, self.bridge) != False
+            waystr_valid_dir_path(keep_way, self.bridge) != False
             for keep_way in self._keep_dict.keys()
         )
 
@@ -1330,7 +1330,7 @@ class BudUnit:
 
     def get_idea_tree_ordered_way_list(
         self, no_range_descendants: bool = False
-    ) -> list[WayUnit]:
+    ) -> list[WayStr]:
         idea_list = list(self.get_idea_dict().values())
         tag_dict = {
             idea.get_idea_way().lower(): idea.get_idea_way() for idea in idea_list
@@ -1411,7 +1411,7 @@ class BudUnit:
     def set_offtrack_fund(self) -> float:
         mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_idea_obj(x_wayunit).get_fund_share() for x_wayunit in mass_set
+            self.get_idea_obj(x_waystr).get_fund_share() for x_waystr in mass_set
         )
 
 

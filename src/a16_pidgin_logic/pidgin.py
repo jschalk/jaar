@@ -36,7 +36,7 @@ class PidginUnit:
     """Per face object that translates any translatable str.
     otx is the reference for the outside, what the face says
     inx is the reference for the inside, what the same inteprets from the face
-    Contains a mapunit for each translatable type: WayUnit, NameUnit, LabelUnit...
+    Contains a mapunit for each translatable type: WayStr, NameStr, LabelStr...
     """
 
     event_int: EventInt = None
@@ -56,26 +56,26 @@ class PidginUnit:
     def get_labelmap(self) -> LabelMap:
         return self.labelmap
 
-    def set_labelunit(self, otx_label: str, inx_label: str):
+    def set_labelstr(self, otx_label: str, inx_label: str):
         self.labelmap.set_otx2inx(otx_label, inx_label)
 
-    def labelunit_exists(self, otx_label: str, inx_label: str):
+    def labelstr_exists(self, otx_label: str, inx_label: str):
         return self.labelmap.otx2inx_exists(otx_label, inx_label)
 
     def _get_inx_label(self, otx_label: str):
         return self.labelmap._get_inx_value(otx_label)
 
-    def del_labelunit(self, otx_label: str):
+    def del_labelstr(self, otx_label: str):
         return self.labelmap.del_otx2inx(otx_label)
 
     def get_mapunit(self, x_class_type: str):
-        if x_class_type == "NameUnit":
+        if x_class_type == "NameStr":
             return self.namemap
-        elif x_class_type == "LabelUnit":
+        elif x_class_type == "LabelStr":
             return self.labelmap
-        elif x_class_type == "TagUnit":
+        elif x_class_type == "TagStr":
             return self.tagmap
-        elif x_class_type == "WayUnit":
+        elif x_class_type == "WayStr":
             return self.waymap
 
     def set_namemap(self, x_namemap: NameMap):
@@ -85,16 +85,16 @@ class PidginUnit:
     def get_namemap(self) -> NameMap:
         return self.namemap
 
-    def set_nameunit(self, otx_name: str, inx_name: str):
+    def set_namestr(self, otx_name: str, inx_name: str):
         self.namemap.set_otx2inx(otx_name, inx_name)
 
-    def nameunit_exists(self, otx_name: str, inx_name: str):
+    def namestr_exists(self, otx_name: str, inx_name: str):
         return self.namemap.otx2inx_exists(otx_name, inx_name)
 
     def _get_inx_name(self, otx_name: str):
         return self.namemap._get_inx_value(otx_name)
 
-    def del_nameunit(self, otx_name: str):
+    def del_namestr(self, otx_name: str):
         return self.namemap.del_otx2inx(otx_name)
 
     def set_tagmap(self, x_tagmap: TagMap):
@@ -157,47 +157,47 @@ class PidginUnit:
         )
 
     def set_otx2inx(self, x_class_type: str, x_otx: str, x_inx: str):
-        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
-        if x_class_type == "NameUnit":
+        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        if x_class_type == "NameStr":
             self.namemap.set_otx2inx(x_otx, x_inx)
-        elif x_class_type == "LabelUnit":
+        elif x_class_type == "LabelStr":
             self.labelmap.set_otx2inx(x_otx, x_inx)
-        elif x_class_type == "TagUnit":
+        elif x_class_type == "TagStr":
             self.tagmap.set_otx2inx(x_otx, x_inx)
-        elif x_class_type == "WayUnit":
+        elif x_class_type == "WayStr":
             self.waymap.set_otx2inx(x_otx, x_inx)
 
     def _get_inx_value(self, x_class_type: str, x_otx: str) -> str:
-        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
-        if x_class_type == "NameUnit":
+        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        if x_class_type == "NameStr":
             return self.namemap._get_inx_value(x_otx)
-        elif x_class_type == "LabelUnit":
+        elif x_class_type == "LabelStr":
             return self.labelmap._get_inx_value(x_otx)
-        elif x_class_type == "TagUnit":
+        elif x_class_type == "TagStr":
             return self.tagmap._get_inx_value(x_otx)
-        elif x_class_type == "WayUnit":
+        elif x_class_type == "WayStr":
             return self.waymap._get_inx_value(x_otx)
 
     def otx2inx_exists(self, x_class_type: str, x_otx: str, x_inx: str) -> bool:
-        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
-        if x_class_type == "NameUnit":
+        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        if x_class_type == "NameStr":
             return self.namemap.otx2inx_exists(x_otx, x_inx)
-        elif x_class_type == "LabelUnit":
+        elif x_class_type == "LabelStr":
             return self.labelmap.otx2inx_exists(x_otx, x_inx)
-        elif x_class_type == "TagUnit":
+        elif x_class_type == "TagStr":
             return self.tagmap.otx2inx_exists(x_otx, x_inx)
-        elif x_class_type == "WayUnit":
+        elif x_class_type == "WayStr":
             return self.waymap.otx2inx_exists(x_otx, x_inx)
 
     def del_otx2inx(self, x_class_type: str, x_otx: str):
-        """class_type: NameUnit, LabelUnit, TagUnit, WayUnit"""
-        if x_class_type == "NameUnit":
+        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        if x_class_type == "NameStr":
             self.namemap.del_otx2inx(x_otx)
-        elif x_class_type == "LabelUnit":
+        elif x_class_type == "LabelStr":
             self.labelmap.del_otx2inx(x_otx)
-        elif x_class_type == "TagUnit":
+        elif x_class_type == "TagStr":
             self.tagmap.del_otx2inx(x_otx)
-        elif x_class_type == "WayUnit":
+        elif x_class_type == "WayStr":
             self.waymap.del_otx2inx(x_otx)
 
     def set_tag(self, x_otx: str, x_inx: str):

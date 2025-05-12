@@ -48,7 +48,7 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
     assert len(mon_idea.get_kids_in_range()) == 3
 
 
-def test_IdeaUnit_get_descendants_ReturnsNoWayUnits():
+def test_IdeaUnit_get_descendants_ReturnsNoWayStrs():
     # ESTABLISH
     nation_str = "nation-state"
     nation_idea = ideaunit_shop(nation_str, parent_way=root_tag())
@@ -60,7 +60,7 @@ def test_IdeaUnit_get_descendants_ReturnsNoWayUnits():
     assert nation_descendants == {}
 
 
-def test_IdeaUnit_get_descendants_Returns3DescendantsWayUnits():
+def test_IdeaUnit_get_descendants_Returns3DescendantsWayStrs():
     # ESTABLISH
     nation_str = "nation-state"
     nation_way = create_way(root_tag(), nation_str)

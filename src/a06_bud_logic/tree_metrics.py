@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_0_if_None
 from src.a01_way_logic.way import GroupLabel
-from src.a04_reason_logic.reason_idea import ReasonUnit, WayUnit
+from src.a04_reason_logic.reason_idea import ReasonUnit, WayStr
 from src.a03_group_logic.group import AwardLink
 from dataclasses import dataclass
 
@@ -9,21 +9,21 @@ from dataclasses import dataclass
 class TreeMetrics:
     tag_count: int = None
     level_count: dict[int, int] = None
-    reason_contexts: dict[WayUnit, int] = None
+    reason_contexts: dict[WayStr, int] = None
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_idea_uids_are_unique: bool = None
-    last_evaluated_pledge_idea_way: WayUnit = None
+    last_evaluated_pledge_idea_way: WayStr = None
 
     def evaluate_tag(
         self,
         level: int,
-        reasons: dict[WayUnit, ReasonUnit],
+        reasons: dict[WayStr, ReasonUnit],
         awardlinks: dict[GroupLabel, AwardLink],
         uid: int,
         pledge: bool,
-        idea_way: WayUnit,
+        idea_way: WayStr,
     ):
         self.tag_count += 1
         self.evaluate_pledge(pledge=pledge, idea_way=idea_way)
@@ -32,7 +32,7 @@ class TreeMetrics:
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_pledge(self, pledge: bool, idea_way: WayUnit):
+    def evaluate_pledge(self, pledge: bool, idea_way: WayStr):
         if pledge:
             self.last_evaluated_pledge_idea_way = idea_way
 
@@ -42,7 +42,7 @@ class TreeMetrics:
         else:
             self.level_count[level] = self.level_count[level] + 1
 
-    def evaluate_reasonunits(self, reasons: dict[WayUnit, ReasonUnit]):
+    def evaluate_reasonunits(self, reasons: dict[WayStr, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
             if self.reason_contexts.get(reason.context) is None:
@@ -71,7 +71,7 @@ class TreeMetrics:
 def treemetrics_shop(
     tag_count: int = None,
     level_count: dict[int, int] = None,
-    reason_contexts: dict[WayUnit, int] = None,
+    reason_contexts: dict[WayStr, int] = None,
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,

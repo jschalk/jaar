@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
 from src.a01_way_logic.way import (
-    WayUnit,
+    WayStr,
     rebuild_way,
     find_replace_way_key_dict,
     replace_bridge,
@@ -17,8 +17,8 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    fcontext: WayUnit
-    fneed: WayUnit
+    fcontext: WayStr
+    fneed: WayStr
     fopen: float = None
     fnigh: float = None
 
@@ -37,7 +37,7 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def set_attr(self, fneed: WayUnit = None, fopen: float = None, fnigh: float = None):
+    def set_attr(self, fneed: WayStr = None, fopen: float = None, fnigh: float = None):
         if fneed is not None:
             self.fneed = fneed
         if fopen is not None:
@@ -50,14 +50,14 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+    def find_replace_way(self, old_way: WayStr, new_way: WayStr):
         self.fcontext = rebuild_way(self.fcontext, old_way, new_way)
         self.fneed = rebuild_way(self.fneed, old_way, new_way)
 
-    def get_obj_key(self) -> WayUnit:
+    def get_obj_key(self) -> WayStr:
         return self.fcontext
 
-    def get_tuple(self) -> tuple[WayUnit, WayUnit, float, float]:
+    def get_tuple(self) -> tuple[WayStr, WayStr, float, float]:
         return (self.fcontext, self.fneed, self.fopen, self.fnigh)
 
 
@@ -67,15 +67,15 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    fcontext: WayUnit = None,
-    fneed: WayUnit = None,
+    fcontext: WayStr = None,
+    fneed: WayStr = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
     return FactUnit(fcontext=fcontext, fneed=fneed, fopen=fopen, fnigh=fnigh)
 
 
-def factunits_get_from_dict(x_dict: dict) -> dict[WayUnit, FactUnit]:
+def factunits_get_from_dict(x_dict: dict) -> dict[WayStr, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_fcontext = fact_dict["fcontext"]
@@ -102,14 +102,14 @@ def factunits_get_from_dict(x_dict: dict) -> dict[WayUnit, FactUnit]:
 
 
 def get_factunit_from_tuple(
-    fact_tuple: tuple[WayUnit, WayUnit, float, float],
+    fact_tuple: tuple[WayStr, WayStr, float, float],
 ) -> FactUnit:
     return factunit_shop(fact_tuple[0], fact_tuple[1], fact_tuple[2], fact_tuple[3])
 
 
 def get_dict_from_factunits(
-    factunits: dict[WayUnit, FactUnit],
-) -> dict[WayUnit, dict[str,]]:
+    factunits: dict[WayStr, FactUnit],
+) -> dict[WayStr, dict[str,]]:
     return {fact.fcontext: fact.get_dict() for fact in factunits.values()}
 
 
@@ -125,8 +125,8 @@ class FactHeir(FactCore):
 
 
 def factheir_shop(
-    fcontext: WayUnit = None,
-    fneed: WayUnit = None,
+    fcontext: WayStr = None,
+    fneed: WayStr = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
@@ -292,7 +292,7 @@ def premisestatusfinder_shop(
 
 @dataclass
 class PremiseUnit:
-    need: WayUnit
+    need: WayStr
     open: float = None
     nigh: float = None
     divisor: int = None
@@ -325,7 +325,7 @@ class PremiseUnit:
             way=self.need, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
-    def is_in_lineage(self, fact_fneed: WayUnit):
+    def is_in_lineage(self, fact_fneed: WayStr):
         return is_heir_way(
             src=self.need, heir=fact_fneed, bridge=self.bridge
         ) or is_heir_way(src=fact_fneed, heir=self.need, bridge=self.bridge)
@@ -406,13 +406,13 @@ class PremiseUnit:
             or (self.open >= factheir.fopen and self.nigh < factheir.fnigh)
         )
 
-    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+    def find_replace_way(self, old_way: WayStr, new_way: WayStr):
         self.need = rebuild_way(self.need, old_way, new_way)
 
 
 # class premisesshop:
 def premiseunit_shop(
-    need: WayUnit,
+    need: WayStr,
     open: float = None,
     nigh: float = None,
     divisor: float = None,
@@ -455,8 +455,8 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 
 @dataclass
 class ReasonCore:
-    context: WayUnit
-    premises: dict[WayUnit, PremiseUnit]
+    context: WayStr
+    premises: dict[WayStr, PremiseUnit]
     context_idea_active_requisite: bool = None
     bridge: str = None
 
@@ -484,7 +484,7 @@ class ReasonCore:
 
     def set_premise(
         self,
-        premise: WayUnit,
+        premise: WayStr,
         open: float = None,
         nigh: float = None,
         divisor: int = None,
@@ -497,19 +497,19 @@ class ReasonCore:
             bridge=self.bridge,
         )
 
-    def premise_exists(self, x_need: WayUnit) -> bool:
+    def premise_exists(self, x_need: WayStr) -> bool:
         return self.premises.get(x_need) != None
 
-    def get_premise(self, premise: WayUnit) -> PremiseUnit:
+    def get_premise(self, premise: WayStr) -> PremiseUnit:
         return self.premises.get(premise)
 
-    def del_premise(self, premise: WayUnit):
+    def del_premise(self, premise: WayStr):
         try:
             self.premises.pop(premise)
         except KeyError as e:
             raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
 
-    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+    def find_replace_way(self, old_way: WayStr, new_way: WayStr):
         self.context = rebuild_way(self.context, old_way, new_way)
         self.premises = find_replace_way_key_dict(
             dict_x=self.premises, old_way=old_way, new_way=new_way
@@ -517,8 +517,8 @@ class ReasonCore:
 
 
 def reasoncore_shop(
-    context: WayUnit,
-    premises: dict[WayUnit, PremiseUnit] = None,
+    context: WayStr,
+    premises: dict[WayStr, PremiseUnit] = None,
     context_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
@@ -546,8 +546,8 @@ class ReasonUnit(ReasonCore):
 
 
 def reasonunit_shop(
-    context: WayUnit,
-    premises: dict[WayUnit, PremiseUnit] = None,
+    context: WayStr,
+    premises: dict[WayStr, PremiseUnit] = None,
     context_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
@@ -586,7 +586,7 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_context_fact(self, factheirs: dict[WayUnit, FactHeir]) -> FactHeir:
+    def _get_context_fact(self, factheirs: dict[WayStr, FactHeir]) -> FactHeir:
         context_fact = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
@@ -623,7 +623,7 @@ class ReasonHeir(ReasonCore):
         if self._status and self._task is None:
             self._task = False
 
-    def set_status(self, factheirs: dict[WayUnit, FactHeir]):
+    def set_status(self, factheirs: dict[WayStr, FactHeir]):
         self.clear_status()
         self._set_premise_status(self._get_context_fact(factheirs))
         any_premise_true, any_task_true = self.is_any_premise_true()
@@ -632,8 +632,8 @@ class ReasonHeir(ReasonCore):
 
 
 def reasonheir_shop(
-    context: WayUnit,
-    premises: dict[WayUnit, PremiseUnit] = None,
+    context: WayStr,
+    premises: dict[WayStr, PremiseUnit] = None,
     context_idea_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
@@ -652,7 +652,7 @@ def reasonheir_shop(
 
 
 # class Reasonsshop:
-def reasons_get_from_dict(reasons_dict: dict) -> dict[WayUnit, ReasonUnit]:
+def reasons_get_from_dict(reasons_dict: dict) -> dict[WayStr, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(context=reason_dict["context"])

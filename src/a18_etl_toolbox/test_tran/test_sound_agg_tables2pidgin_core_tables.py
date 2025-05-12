@@ -539,7 +539,7 @@ def test_create_update_pidtagg_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge cannot exist in TagUnit"
+    error_message = "Bridge cannot exist in TagStr"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -631,7 +631,7 @@ def test_create_update_pidwayy_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge must exist in WayUnit"
+    error_message = "Bridge must exist in WayStr"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -725,7 +725,7 @@ def test_create_update_pidname_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge cannot exist in NameUnit"
+    error_message = "Bridge cannot exist in NameStr"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1194,7 +1194,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario1_Update
     mop_rdx_mop = f"{mop_str}{rdx}{mop_str}"
     ukx = "Unknown"
     event1 = 1
-    error_message = "Bridge cannot exist in TagUnit"
+    error_message = "Bridge cannot exist in TagStr"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()

@@ -552,7 +552,7 @@ def test_get_waymap_from_json_ReturnsObj():
     assert x_waymap == x_waymap
 
 
-def test_WayMap_all_otx_parent_ways_exist_ReturnsObj_WayUnit():
+def test_WayMap_all_otx_parent_ways_exist_ReturnsObj_WayStr():
     # ESTABLISH
     otx_r_bridge = "/"
     clean_otx_parent_way = to_way("accord45", otx_r_bridge)
@@ -583,7 +583,7 @@ def test_WayMap_is_valid_ReturnsObj_Scenario0_idea_tag_str():
     # ESTABLISH
     x_otx_bridge = "/"
     x_inx_bridge = ":"
-    tagunit_waymap = waymap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
+    tagstr_waymap = waymap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
 
     clean_str = "clean"
     clean_inx = to_way("propre", x_inx_bridge)
@@ -591,17 +591,17 @@ def test_WayMap_is_valid_ReturnsObj_Scenario0_idea_tag_str():
     mop_otx = create_way(casa_otx, "mop", x_otx_bridge)
     mop_inx = "mop"
     casa_inx = "casa"
-    assert tagunit_waymap.is_valid()
+    assert tagstr_waymap.is_valid()
 
     # WHEN
-    tagunit_waymap.set_otx2inx(clean_str, clean_inx)
+    tagstr_waymap.set_otx2inx(clean_str, clean_inx)
     # THEN
-    assert tagunit_waymap.is_valid()
+    assert tagstr_waymap.is_valid()
 
     # WHEN
-    tagunit_waymap.set_otx2inx(mop_otx, mop_inx)
+    tagstr_waymap.set_otx2inx(mop_otx, mop_inx)
     # THEN
-    assert tagunit_waymap.is_valid() is False
+    assert tagstr_waymap.is_valid() is False
 
 
 def test_WayMap_is_valid_ReturnsObj_Scenario1_way_str():
@@ -627,7 +627,7 @@ def test_WayMap_is_valid_ReturnsObj_Scenario1_way_str():
     assert x_waymap.otx2inx_exists(clean_otx_way, clean_inx_way)
 
 
-def test_WayMap_is_valid_ReturnsObj_Scenario3_WayUnit():
+def test_WayMap_is_valid_ReturnsObj_Scenario3_WayStr():
     # ESTABLISH
     otx_r_bridge = "/"
     clean_otx_parent_way = to_way("accord45", otx_r_bridge)

@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
 #         groupunit_shop(bob_str, _acct_mirror=True, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a TagUnit. Cannot contain bridge: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a TagStr. Cannot contain bridge: '{slash_str}'"
 #     )
 
 

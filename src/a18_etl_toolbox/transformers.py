@@ -137,35 +137,35 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 
 MAPS_DIMENS = {
-    "pidgin_name": "NameUnit",
-    "pidgin_label": "LabelUnit",
-    "pidgin_tag": "TagUnit",
-    "pidgin_way": "WayUnit",
+    "pidgin_name": "NameStr",
+    "pidgin_label": "LabelStr",
+    "pidgin_tag": "TagStr",
+    "pidgin_way": "WayStr",
 }
 
 CLASS_TYPES = {
-    "NameUnit": {
+    "NameStr": {
         "raw": "name_raw",
         "agg": "name_agg",
         "csv_filename": "name.csv",
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
-    "LabelUnit": {
+    "LabelStr": {
         "raw": "label_raw",
         "agg": "label_agg",
         "csv_filename": "label.csv",
         "otx_obj": "otx_label",
         "inx_obj": "inx_label",
     },
-    "TagUnit": {
+    "TagStr": {
         "raw": "tag_raw",
         "agg": "tag_agg",
         "csv_filename": "tag.csv",
         "otx_obj": "otx_tag",
         "inx_obj": "inx_tag",
     },
-    "WayUnit": {
+    "WayStr": {
         "raw": "way_raw",
         "agg": "way_agg",
         "csv_filename": "way.csv",
@@ -715,13 +715,13 @@ class BrickAggToPidginRawTransformer:
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.class_type == "NameUnit" and "inx_name" not in missing_col:
+        if self.class_type == "NameStr" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.class_type == "LabelUnit" and "inx_label" not in missing_col:
+        elif self.class_type == "LabelStr" and "inx_label" not in missing_col:
             return x_row["inx_label"]
-        elif self.class_type == "TagUnit" and "inx_tag" not in missing_col:
+        elif self.class_type == "TagStr" and "inx_tag" not in missing_col:
             return x_row["inx_tag"]
-        elif self.class_type == "WayUnit" and "inx_way" not in missing_col:
+        elif self.class_type == "WayStr" and "inx_way" not in missing_col:
             return x_row["inx_way"]
         return None
 

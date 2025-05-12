@@ -115,7 +115,7 @@ def test_PidginUnit_get_namemap_ReturnsObj():
     assert gen_x_namemap == static_x_namemap
 
 
-def test_PidginUnit_set_nameunit_SetsAttr_Scenario0():
+def test_PidginUnit_set_namestr_SetsAttr_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -125,26 +125,26 @@ def test_PidginUnit_set_nameunit_SetsAttr_Scenario0():
     assert acct_name_namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_nameunit(sue_otx, sue_inx)
+    zia_pidginunit.set_namestr(sue_otx, sue_inx)
 
     # THEN
     assert acct_name_namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_nameunit_exists_ReturnsObj():
+def test_PidginUnit_namestr_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    assert zia_pidginunit.nameunit_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_nameunit(sue_otx, sue_inx)
+    zia_pidginunit.set_namestr(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.nameunit_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_get_inx_name_ReturnsObj():
@@ -156,27 +156,27 @@ def test_PidginUnit_get_inx_name_ReturnsObj():
     assert zia_pidginunit._get_inx_name(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_nameunit(sue_otx, sue_inx)
+    zia_pidginunit.set_namestr(sue_otx, sue_inx)
 
     # THEN
     assert zia_pidginunit._get_inx_name(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_nameunit_ReturnsObj():
+def test_PidginUnit_del_namestr_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    zia_pidginunit.set_nameunit(sue_otx, sue_inx)
-    zia_pidginunit.set_nameunit(zia_str, zia_str)
-    assert zia_pidginunit.nameunit_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.nameunit_exists(zia_str, zia_str)
+    zia_pidginunit.set_namestr(sue_otx, sue_inx)
+    zia_pidginunit.set_namestr(zia_str, zia_str)
+    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.namestr_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_nameunit(sue_otx)
+    zia_pidginunit.del_namestr(sue_otx)
 
     # THEN
-    assert zia_pidginunit.nameunit_exists(sue_otx, sue_inx) is False
-    assert zia_pidginunit.nameunit_exists(zia_str, zia_str)
+    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.namestr_exists(zia_str, zia_str)

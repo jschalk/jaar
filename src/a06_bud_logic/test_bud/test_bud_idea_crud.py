@@ -51,7 +51,7 @@ def test_BudUnit_set_idea_RaisesErrorWhen_idea_tag_IsNotTag():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_idea(ideaunit_shop(run_way), parent_way=swim_way)
-    exception_str = f"set_idea failed because '{run_way}' is not a TagUnit."
+    exception_str = f"set_idea failed because '{run_way}' is not a TagStr."
     assert str(excinfo.value) == exception_str
 
 

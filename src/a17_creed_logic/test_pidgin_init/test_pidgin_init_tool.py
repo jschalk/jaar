@@ -1,14 +1,14 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
 from src.a06_bud_logic._utils.str_a06 import (
-    type_NameUnit_str,
-    type_TagUnit_str,
-    type_WayUnit_str,
-    type_LabelUnit_str,
+    type_NameStr_str,
+    type_TagStr_str,
+    type_WayStr_str,
+    type_LabelStr_str,
     idea_way_str,
     face_name_str,
     event_int_str,
-    type_NameUnit_str,
-    type_LabelUnit_str,
+    type_NameStr_str,
+    type_LabelStr_str,
 )
 from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
@@ -204,7 +204,7 @@ def test_load_namemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(name_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_namemap = empty_pidginunit.get_mapunit(type_NameUnit_str())
+    sue_namemap = empty_pidginunit.get_mapunit(type_NameStr_str())
     sue_namemap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_namemap=}")
     assert len(sue_namemap.otx2inx) == 0
@@ -214,7 +214,7 @@ def test_load_namemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_namemap.otx2inx) == 3
-    ex_namemap = sue_pidginunit.get_mapunit(type_NameUnit_str())
+    ex_namemap = sue_pidginunit.get_mapunit(type_NameStr_str())
     assert ex_namemap == sue_namemap
 
 
@@ -225,7 +225,7 @@ def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_c
     name_csv_path = create_path(map_dir, name_filename)
     assert os_path_exists(name_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_namemap = empty_pidginunit.get_mapunit(type_NameUnit_str())
+    sue_namemap = empty_pidginunit.get_mapunit(type_NameStr_str())
     sue_namemap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_namemap=}")
     assert len(sue_namemap.otx2inx) == 0
@@ -246,7 +246,7 @@ def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelUnit_str())
+    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelStr_str())
     sue_labelmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_labelmap=}")
     assert len(sue_labelmap.otx2inx) == 0
@@ -256,7 +256,7 @@ def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_labelmap.otx2inx) == 2
-    ex_labelmap = sue_pidginunit.get_mapunit(type_LabelUnit_str())
+    ex_labelmap = sue_pidginunit.get_mapunit(type_LabelStr_str())
     assert ex_labelmap == sue_labelmap
 
 
@@ -269,7 +269,7 @@ def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     group_csv_path = create_path(map_dir, label_filename)
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelUnit_str())
+    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelStr_str())
     sue_labelmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_labelmap=}")
     assert len(sue_labelmap.otx2inx) == 0
@@ -290,7 +290,7 @@ def test_load_tagmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(tag_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_tagmap = empty_pidginunit.get_mapunit(type_TagUnit_str())
+    sue_tagmap = empty_pidginunit.get_mapunit(type_TagStr_str())
     sue_tagmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_tagmap=}")
     assert len(sue_tagmap.otx2inx) == 0
@@ -300,7 +300,7 @@ def test_load_tagmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_tagmap.otx2inx) == 2
-    ex_tagmap = sue_pidginunit.get_mapunit(type_TagUnit_str())
+    ex_tagmap = sue_pidginunit.get_mapunit(type_TagStr_str())
     assert ex_tagmap == sue_tagmap
 
 
@@ -313,7 +313,7 @@ def test_load_tagmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     tag_csv_path = create_path(map_dir, tag_filename)
     assert os_path_exists(tag_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_tagmap = empty_pidginunit.get_mapunit(type_TagUnit_str())
+    sue_tagmap = empty_pidginunit.get_mapunit(type_TagStr_str())
     sue_tagmap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_tagmap=}")
     assert len(sue_tagmap.otx2inx) == 0
@@ -334,7 +334,7 @@ def test_load_waymap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(way_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_waymap = empty_pidginunit.get_mapunit(type_WayUnit_str())
+    sue_waymap = empty_pidginunit.get_mapunit(type_WayStr_str())
     sue_waymap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_waymap=}")
     assert len(sue_waymap.otx2inx) == 0
@@ -344,7 +344,7 @@ def test_load_waymap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_waymap.otx2inx) == 2
-    ex_waymap = sue_pidginunit.get_mapunit(type_WayUnit_str())
+    ex_waymap = sue_pidginunit.get_mapunit(type_WayStr_str())
     assert ex_waymap.event_int == sue_waymap.event_int
     assert ex_waymap.face_name == sue_waymap.face_name
     assert ex_waymap.otx2inx == sue_waymap.otx2inx
@@ -360,7 +360,7 @@ def test_load_waymap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     way_csv_path = create_path(map_dir, way_filename)
     assert os_path_exists(way_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_waymap = empty_pidginunit.get_mapunit(type_WayUnit_str())
+    sue_waymap = empty_pidginunit.get_mapunit(type_WayStr_str())
     sue_waymap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_waymap=}")
     assert len(sue_waymap.otx2inx) == 0
@@ -397,7 +397,7 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
-    gen_mapunit = gen_pidginunit.get_mapunit(type_NameUnit_str())
+    gen_mapunit = gen_pidginunit.get_mapunit(type_NameStr_str())
     assert gen_mapunit.unknown_word == x_unknown_word
     assert gen_mapunit.otx_bridge == slash_otx_bridge
     assert gen_mapunit.inx_bridge == colon_inx_bridge
@@ -432,7 +432,7 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_int(
     assert gen_pidginunit.unknown_word == x_unknown_word
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
-    gen_mapunit = gen_pidginunit.get_mapunit(type_NameUnit_str())
+    gen_mapunit = gen_pidginunit.get_mapunit(type_NameStr_str())
     assert gen_mapunit.unknown_word == x_unknown_word
     assert gen_mapunit.otx_bridge == slash_otx_bridge
     assert gen_mapunit.inx_bridge == colon_inx_bridge
