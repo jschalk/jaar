@@ -51,7 +51,7 @@ def pidginable_atom_args() -> set:
         "month_tag",
         "need",
         "owner_name",
-        "way",
+        "item_way",
         "team_title",
         "timeline_tag",
         "weekday_tag",

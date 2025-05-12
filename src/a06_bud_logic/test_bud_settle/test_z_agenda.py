@@ -263,7 +263,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     zia_bud.set_l1_item(itemunit_shop(run_str, pledge=True))
     zia_bud.set_item(itemunit_shop(day_str, begin=0, close=500), time_way)
     zia_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=day_way,
         reason_premise=day_way,
         reason_premise_open=25,
@@ -304,7 +304,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     zia_bud.set_l1_item(itemunit_shop(run_str, pledge=True))
     zia_bud.set_item(itemunit_shop(day_str, begin=0, close=500), time_way)
     zia_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=day_way,
         reason_premise=day_way,
         reason_premise_open=1,
@@ -455,7 +455,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_item_attr(way=casa_way, teamunit=teamunit_sue)
+    yao_bud.edit_item_attr(casa_way, teamunit=teamunit_sue)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0
@@ -466,7 +466,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     teamunit_yao.set_teamlink(team_title=yao_str)
 
     # WHEN
-    yao_bud.edit_item_attr(way=casa_way, teamunit=teamunit_yao)
+    yao_bud.edit_item_attr(casa_way, teamunit=teamunit_yao)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
@@ -495,7 +495,7 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_item_attr(way=casa_way, teamunit=run_teamunit)
+    yao_bud.edit_item_attr(casa_way, teamunit=run_teamunit)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0

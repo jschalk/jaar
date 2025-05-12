@@ -12,7 +12,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "way": {
+        "item_way": {
             "otx_key": true
         },
         "team_title_ERASE": {

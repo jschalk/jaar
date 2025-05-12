@@ -7,7 +7,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
     acct_name_str,
     group_label_str,
-    way_str,
+    item_way_str,
     pledge_str,
     mass_str,
     debtit_belief_str,
@@ -165,13 +165,13 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(way_str(), casa_way)
+    casa_budatom.set_arg(item_way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_budatom.set_arg(way_str(), clean_way)
+    clean_budatom.set_arg(item_way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)
@@ -218,13 +218,13 @@ def test_make_buddelta_Arg_idea_format_00013_itemunit_v0_0_0():
 
     # THEN
     casa_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    casa_budatom.set_arg(way_str(), casa_way)
+    casa_budatom.set_arg(item_way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    clean_budatom.set_arg(way_str(), clean_way)
+    clean_budatom.set_arg(item_way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert itemunit_changunit.budatom_exists(casa_budatom)

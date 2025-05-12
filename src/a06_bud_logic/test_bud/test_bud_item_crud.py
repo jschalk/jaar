@@ -322,7 +322,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     print(f"{casa_way=}")
     old_mass = sue_bud.itemroot._kids[casa_str].mass
     assert old_mass == 30
-    sue_bud.edit_item_attr(way=casa_way, mass=23)
+    sue_bud.edit_item_attr(casa_way, mass=23)
     new_mass = sue_bud.itemroot._kids[casa_str].mass
     assert new_mass == 23
 
@@ -330,7 +330,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     sue_bud.itemroot._kids[casa_str]._uid = 34
     x_uid = sue_bud.itemroot._kids[casa_str]._uid
     assert x_uid == 34
-    sue_bud.edit_item_attr(way=casa_way, uid=23)
+    sue_bud.edit_item_attr(casa_way, uid=23)
     uid_new = sue_bud.itemroot._kids[casa_str]._uid
     assert uid_new == 23
 
@@ -342,7 +342,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     sue_bud.itemroot._kids[casa_str].close = 43
     x_close = sue_bud.itemroot._kids[casa_str].close
     assert x_close == 43
-    sue_bud.edit_item_attr(way=casa_way, begin=25, close=29)
+    sue_bud.edit_item_attr(casa_way, begin=25, close=29)
     assert sue_bud.itemroot._kids[casa_str].begin == 25
     assert sue_bud.itemroot._kids[casa_str].close == 29
 
@@ -354,7 +354,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     sue_bud.itemroot._kids[casa_str].stop_want = 443
     x_stop_want = sue_bud.itemroot._kids[casa_str].stop_want
     assert x_stop_want == 443
-    sue_bud.edit_item_attr(way=casa_way, gogo_want=425, stop_want=429)
+    sue_bud.edit_item_attr(casa_way, gogo_want=425, stop_want=429)
     assert sue_bud.itemroot._kids[casa_str].gogo_want == 425
     assert sue_bud.itemroot._kids[casa_str].stop_want == 429
 
@@ -367,7 +367,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
 
     casa_factunits = sue_bud.itemroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
-    sue_bud.edit_item_attr(way=casa_way, factunit=x_factunit)
+    sue_bud.edit_item_attr(casa_way, factunit=x_factunit)
     casa_factunits = sue_bud.itemroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
     assert sue_bud.itemroot._kids[casa_str].factunits == {x_factunit.fbase: x_factunit}
@@ -378,7 +378,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
         casa_str
     ]._descendant_pledge_count
     assert x_descendant_pledge_count == 81
-    sue_bud.edit_item_attr(way=casa_way, descendant_pledge_count=67)
+    sue_bud.edit_item_attr(casa_way, descendant_pledge_count=67)
     _descendant_pledge_count_new = sue_bud.itemroot._kids[
         casa_str
     ]._descendant_pledge_count
@@ -388,7 +388,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     sue_bud.itemroot._kids[casa_str]._all_acct_cred = 74
     x_all_acct_cred = sue_bud.itemroot._kids[casa_str]._all_acct_cred
     assert x_all_acct_cred == 74
-    sue_bud.edit_item_attr(way=casa_way, all_acct_cred=59)
+    sue_bud.edit_item_attr(casa_way, all_acct_cred=59)
     _all_acct_cred_new = sue_bud.itemroot._kids[casa_str]._all_acct_cred
     assert _all_acct_cred_new == 59
 
@@ -396,7 +396,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     sue_bud.itemroot._kids[casa_str]._all_acct_debt = 74
     x_all_acct_debt = sue_bud.itemroot._kids[casa_str]._all_acct_debt
     assert x_all_acct_debt == 74
-    sue_bud.edit_item_attr(way=casa_way, all_acct_debt=59)
+    sue_bud.edit_item_attr(casa_way, all_acct_debt=59)
     _all_acct_debt_new = sue_bud.itemroot._kids[casa_str]._all_acct_debt
     assert _all_acct_debt_new == 59
 
@@ -409,21 +409,21 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
         "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
     }
     x_awardlink = awardlink_shop(awardee_title="fun", give_force=4, take_force=8)
-    sue_bud.edit_item_attr(way=casa_way, awardlink=x_awardlink)
+    sue_bud.edit_item_attr(casa_way, awardlink=x_awardlink)
     assert sue_bud.itemroot._kids[casa_str].awardlinks == {"fun": x_awardlink}
 
     # _is_expanded: dict = None,
     sue_bud.itemroot._kids[casa_str]._is_expanded = "what"
     _is_expanded = sue_bud.itemroot._kids[casa_str]._is_expanded
     assert _is_expanded == "what"
-    sue_bud.edit_item_attr(way=casa_way, is_expanded=True)
+    sue_bud.edit_item_attr(casa_way, is_expanded=True)
     assert sue_bud.itemroot._kids[casa_str]._is_expanded is True
 
     # pledge: dict = None,
     sue_bud.itemroot._kids[casa_str].pledge = "funfun3"
     pledge = sue_bud.itemroot._kids[casa_str].pledge
     assert pledge == "funfun3"
-    sue_bud.edit_item_attr(way=casa_way, pledge=True)
+    sue_bud.edit_item_attr(casa_way, pledge=True)
     assert sue_bud.itemroot._kids[casa_str].pledge is True
 
     # _healerlink:
@@ -435,7 +435,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     x_healerlink = healerlink_shop({sue_str, yao_str})
     sue_bud.add_acctunit(sue_str)
     sue_bud.add_acctunit(yao_str)
-    sue_bud.edit_item_attr(way=casa_way, healerlink=x_healerlink)
+    sue_bud.edit_item_attr(casa_way, healerlink=x_healerlink)
     assert sue_bud.itemroot._kids[casa_str].healerlink == x_healerlink
 
     # _problem_bool: bool
@@ -443,7 +443,7 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
     src_problem_bool = sue_bud.itemroot._kids[casa_str].problem_bool
     assert src_problem_bool == "fun3rol"
     x_problem_bool = True
-    sue_bud.edit_item_attr(way=casa_way, problem_bool=x_problem_bool)
+    sue_bud.edit_item_attr(casa_way, problem_bool=x_problem_bool)
     assert sue_bud.itemroot._kids[casa_str].problem_bool == x_problem_bool
 
 
@@ -466,7 +466,7 @@ def test_BudUnit_edit_item_attr_RaisesErrorWhen_healerlink_healer_names_DoNotExi
     sue_str = "Sue"
     x_healerlink = healerlink_shop({sue_str})
     with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_item_attr(way=casa_way, healerlink=x_healerlink)
+        yao_bud.edit_item_attr(casa_way, healerlink=x_healerlink)
     assert (
         str(excinfo.value)
         == f"Item cannot edit healerlink because group_label '{sue_str}' does not exist as group in Bud"

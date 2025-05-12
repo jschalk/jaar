@@ -42,7 +42,7 @@
         "problem_bool": {
             "otx_key": false
         },
-        "way": {
+        "item_way": {
             "otx_key": true
         },
         "stop_want": {

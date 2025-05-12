@@ -918,12 +918,10 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
     sue_bud.add_item(dirty_way)
-    sue_bud.edit_item_attr(
-        way=casa_way, reason_base=status_way, reason_premise=dirty_way
-    )
-    sue_bud.edit_item_attr(way=casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_item_attr(way=casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(way=casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.edit_item_attr(casa_way, reason_base=status_way, reason_premise=dirty_way)
+    sue_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_item_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(casa_way, teamunit=teamunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
 
     with sqlite3_connect(":memory:") as conn:
@@ -992,12 +990,10 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
     sue_bud.add_item(dirty_way)
-    sue_bud.edit_item_attr(
-        way=casa_way, reason_base=status_way, reason_premise=dirty_way
-    )
-    sue_bud.edit_item_attr(way=casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_item_attr(way=casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_item_attr(way=casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.edit_item_attr(casa_way, reason_base=status_way, reason_premise=dirty_way)
+    sue_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_item_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_item_attr(casa_way, teamunit=teamunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
     print(f"{sue_bud.get_item_obj(casa_way).teamunit=}")
     print(f"{sue_bud.get_item_obj(casa_way).get_dict()=}")

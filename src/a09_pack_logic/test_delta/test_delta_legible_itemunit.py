@@ -1,6 +1,6 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
-    way_str,
+    item_way_str,
     pledge_str,
     addin_str,
     begin_str,
@@ -35,7 +35,7 @@ def test_create_legible_list_ReturnsObj_itemunit_INSERT():
     mass_value = 43
     pledge_value = False
     clean_budatom = budatom_shop(dimen, atom_insert())
-    clean_budatom.set_arg(way_str(), clean_way)
+    clean_budatom.set_arg(item_way_str(), clean_way)
     clean_budatom.set_arg(addin_str(), addin_value)
     clean_budatom.set_arg(begin_str(), begin_value)
     clean_budatom.set_arg(close_str(), close_value)
@@ -76,7 +76,7 @@ def test_create_legible_list_ReturnsObj_itemunit_UPDATE():
     mass_value = 43
     pledge_value = False
     clean_budatom = budatom_shop(dimen, atom_update())
-    clean_budatom.set_arg(way_str(), clean_way)
+    clean_budatom.set_arg(item_way_str(), clean_way)
     clean_budatom.set_arg(addin_str(), addin_value)
     clean_budatom.set_arg(begin_str(), begin_value)
     clean_budatom.set_arg(close_str(), close_value)
@@ -107,7 +107,7 @@ def test_create_legible_list_ReturnsObj_itemunit_DELETE():
     casa_way = sue_bud.make_l1_way("casa")
     clean_way = sue_bud.make_way(casa_way, clean_tag)
     clean_budatom = budatom_shop(dimen, atom_delete())
-    clean_budatom.set_arg(way_str(), clean_way)
+    clean_budatom.set_arg(item_way_str(), clean_way)
 
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(clean_budatom)

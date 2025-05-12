@@ -18,7 +18,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     team_title_str,
     healer_name_str,
     item_tag_str,
-    way_str,
+    item_way_str,
     base_str,
     fbase_str,
 )
@@ -88,13 +88,13 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_itemunit():
     sweep_way = sue_bud.make_way(clean_way, sweep_str)
 
     root_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    root_atom.set_arg(way_str(), root_way)
+    root_atom.set_arg(item_way_str(), root_way)
     casa_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(way_str(), casa_way)
+    casa_atom.set_arg(item_way_str(), casa_way)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    clean_atom.set_arg(way_str(), clean_way)
+    clean_atom.set_arg(item_way_str(), clean_way)
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    sweep_atom.set_arg(way_str(), sweep_way)
+    sweep_atom.set_arg(item_way_str(), sweep_way)
     assert sift_budatom(sue_bud, root_atom)
     assert not sift_budatom(sue_bud, casa_atom)
     assert not sift_budatom(sue_bud, clean_atom)
@@ -129,11 +129,11 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_itemunit():
     sweep_way = sue_bud.make_way(clean_way, sweep_str)
 
     casa_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    casa_atom.set_arg(way_str(), casa_way)
+    casa_atom.set_arg(item_way_str(), casa_way)
     clean_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    clean_atom.set_arg(way_str(), clean_way)
+    clean_atom.set_arg(item_way_str(), clean_way)
     sweep_atom = budatom_shop(bud_itemunit_str(), atom_delete())
-    sweep_atom.set_arg(way_str(), sweep_way)
+    sweep_atom.set_arg(item_way_str(), sweep_way)
     assert not sift_budatom(sue_bud, casa_atom)
     assert not sift_budatom(sue_bud, clean_atom)
     assert not sift_budatom(sue_bud, sweep_atom)
@@ -163,10 +163,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_awardlink():
     swim_str = "Swim"
 
     casa_swim_atom = budatom_shop(bud_item_awardlink_str(), atom_delete())
-    casa_swim_atom.set_arg(way_str(), casa_way)
+    casa_swim_atom.set_arg(item_way_str(), casa_way)
     casa_swim_atom.set_arg(awardee_title_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_awardlink_str(), atom_delete())
-    clean_swim_atom.set_arg(way_str(), clean_way)
+    clean_swim_atom.set_arg(item_way_str(), clean_way)
     clean_swim_atom.set_arg(awardee_title_str(), swim_str)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
@@ -198,10 +198,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_reasonunit():
     week_way = sue_bud.make_l1_way(week_str)
 
     casa_week_atom = budatom_shop(bud_item_reasonunit_str(), atom_delete())
-    casa_week_atom.set_arg(way_str(), casa_way)
+    casa_week_atom.set_arg(item_way_str(), casa_way)
     casa_week_atom.set_arg(base_str(), week_way)
     clean_week_atom = budatom_shop(bud_item_reasonunit_str(), atom_delete())
-    clean_week_atom.set_arg(way_str(), clean_way)
+    clean_week_atom.set_arg(item_way_str(), clean_way)
     clean_week_atom.set_arg(base_str(), week_way)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
@@ -235,11 +235,11 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_reason_premiseunit_exists():
     thur_way = sue_bud.make_way(week_way, thur_str)
 
     casa_week_atom = budatom_shop(bud_item_reason_premiseunit_str(), atom_delete())
-    casa_week_atom.set_arg(way_str(), casa_way)
+    casa_week_atom.set_arg(item_way_str(), casa_way)
     casa_week_atom.set_arg(base_str(), week_way)
     casa_week_atom.set_arg("need", thur_way)
     clean_week_atom = budatom_shop(bud_item_reason_premiseunit_str(), atom_delete())
-    clean_week_atom.set_arg(way_str(), clean_way)
+    clean_week_atom.set_arg(item_way_str(), clean_way)
     clean_week_atom.set_arg(base_str(), week_way)
     clean_week_atom.set_arg("need", thur_way)
     sue_bud.add_item(casa_way)
@@ -276,10 +276,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_teamlink():
     swim_str = "Swim"
 
     casa_swim_atom = budatom_shop(bud_item_teamlink_str(), atom_delete())
-    casa_swim_atom.set_arg(way_str(), casa_way)
+    casa_swim_atom.set_arg(item_way_str(), casa_way)
     casa_swim_atom.set_arg(team_title_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_teamlink_str(), atom_delete())
-    clean_swim_atom.set_arg(way_str(), clean_way)
+    clean_swim_atom.set_arg(item_way_str(), clean_way)
     clean_swim_atom.set_arg(team_title_str(), swim_str)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
@@ -310,10 +310,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_healerlink():
     swim_str = "Swim"
 
     casa_swim_atom = budatom_shop(bud_item_healerlink_str(), atom_delete())
-    casa_swim_atom.set_arg(way_str(), casa_way)
+    casa_swim_atom.set_arg(item_way_str(), casa_way)
     casa_swim_atom.set_arg(healer_name_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_healerlink_str(), atom_delete())
-    clean_swim_atom.set_arg(way_str(), clean_way)
+    clean_swim_atom.set_arg(item_way_str(), clean_way)
     clean_swim_atom.set_arg(healer_name_str(), swim_str)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
@@ -345,10 +345,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_factunit():
     week_way = sue_bud.make_l1_way(week_str)
 
     casa_week_atom = budatom_shop(bud_item_factunit_str(), atom_delete())
-    casa_week_atom.set_arg(way_str(), casa_way)
+    casa_week_atom.set_arg(item_way_str(), casa_way)
     casa_week_atom.set_arg(fbase_str(), week_way)
     clean_week_atom = budatom_shop(bud_item_factunit_str(), atom_delete())
-    clean_week_atom.set_arg(way_str(), clean_way)
+    clean_week_atom.set_arg(item_way_str(), clean_way)
     clean_week_atom.set_arg(fbase_str(), week_way)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)

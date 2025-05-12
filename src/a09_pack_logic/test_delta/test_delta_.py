@@ -13,7 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     awardee_title_str,
     group_label_str,
-    way_str,
+    item_way_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -342,9 +342,9 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
     knee_way = create_way(x_fisc_tag, knee_str)
     x_dimen = bud_itemunit_str()
     sports_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    sports_insert_itemunit_budatom.set_jkey(way_str(), sports_way)
+    sports_insert_itemunit_budatom.set_jkey(item_way_str(), sports_way)
     knee_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    knee_insert_itemunit_budatom.set_jkey(way_str(), knee_way)
+    knee_insert_itemunit_budatom.set_jkey(item_way_str(), knee_way)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_insert_itemunit_budatom)
     x_buddelta.set_budatom(sports_insert_itemunit_budatom)
@@ -376,10 +376,10 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_Way_Sorted():
     swimmers_str = ",Swimmers"
     sports_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
     sports_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
-    sports_awardlink_budatom.set_jkey(way_str(), sports_way)
+    sports_awardlink_budatom.set_jkey(item_way_str(), sports_way)
     knee_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
     knee_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
-    knee_awardlink_budatom.set_jkey(way_str(), knee_way)
+    knee_awardlink_budatom.set_jkey(item_way_str(), knee_way)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_awardlink_budatom)
     x_buddelta.set_budatom(sports_awardlink_budatom)

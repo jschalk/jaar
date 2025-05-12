@@ -19,7 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     need_str,
     penny_str,
     respect_bit_str,
-    way_str,
+    item_way_str,
     team_title_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
@@ -114,7 +114,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("way") == type_WayUnit_str()
+    assert pidgin_args_class_types.get("item_way") == type_WayUnit_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -214,7 +214,7 @@ def test_pidginable_atom_args_ReturnsObj():
         month_tag_str(),
         need_str(),
         owner_name_str(),
-        way_str(),
+        item_way_str(),
         team_title_str(),
         timeline_tag_str(),
         weekday_tag_str(),

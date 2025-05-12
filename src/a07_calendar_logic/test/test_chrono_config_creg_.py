@@ -575,7 +575,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeItemsOutsideRange():
     day_way = sue_bud.make_way(cregtime_way, "day")
 
     sue_bud.edit_item_attr(
-        way=clean_way,
+        clean_way,
         reason_base=day_way,
         reason_premise=day_way,
         reason_premise_open=320,
@@ -694,7 +694,7 @@ def test_ItemCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     time_way = sue_bud.make_l1_way("time")
     cregtime_way = sue_bud.make_way(time_way, creg_str())
     sue_bud.edit_item_attr(
-        way=laundry_way,
+        laundry_way,
         reason_base=cregtime_way,
         reason_premise=cregtime_way,
         reason_premise_open=3420.0,

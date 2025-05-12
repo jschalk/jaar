@@ -19,7 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     team_title_str,
     healer_name_str,
-    way_str,
+    item_way_str,
     base_item_active_requisite_str,
     pledge_str,
     addin_str,
@@ -332,7 +332,7 @@ def add_bud_itemunit_insert_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     for itemunit_atom in itemunit_insert_dict.values():
-        way_value = itemunit_atom.get_value(way_str())
+        way_value = itemunit_atom.get_value(item_way_str())
         _addin_value = itemunit_atom.get_value(addin_str())
         _begin_value = itemunit_atom.get_value(begin_str())
         _close_value = itemunit_atom.get_value(close_str())
@@ -370,7 +370,7 @@ def add_bud_itemunit_update_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     for itemunit_atom in itemunit_update_dict.values():
-        way_value = itemunit_atom.get_value(way_str())
+        way_value = itemunit_atom.get_value(item_way_str())
         addin_value = itemunit_atom.get_value(addin_str())
         begin_value = itemunit_atom.get_value(begin_str())
         close_value = itemunit_atom.get_value(close_str())
@@ -407,7 +407,7 @@ def add_bud_itemunit_delete_to_legible_list(
     legible_list: list[str], itemunit_delete_dict: dict, x_bud: BudUnit
 ):
     for itemunit_atom in itemunit_delete_dict.values():
-        way_value = itemunit_atom.get_value(way_str())
+        way_value = itemunit_atom.get_value(item_way_str())
         x_str = f"Item '{way_value}' was deleted."
         legible_list.append(x_str)
 
@@ -418,7 +418,7 @@ def add_bud_item_awardlink_insert_to_legible_list(
     for way_dict in item_awardlink_insert_dict.values():
         for item_awardlink_atom in way_dict.values():
             awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
-            way_value = item_awardlink_atom.get_value("way")
+            way_value = item_awardlink_atom.get_value("item_way")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
             x_str = f"Awardlink created for group {awardee_title_value} for item '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
@@ -431,7 +431,7 @@ def add_bud_item_awardlink_update_to_legible_list(
     for way_dict in item_awardlink_update_dict.values():
         for item_awardlink_atom in way_dict.values():
             awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
-            way_value = item_awardlink_atom.get_value("way")
+            way_value = item_awardlink_atom.get_value("item_way")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
@@ -449,7 +449,7 @@ def add_bud_item_awardlink_delete_to_legible_list(
     for way_dict in item_awardlink_delete_dict.values():
         for item_awardlink_atom in way_dict.values():
             awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
-            way_value = item_awardlink_atom.get_value("way")
+            way_value = item_awardlink_atom.get_value("item_way")
             x_str = f"Awardlink for group {awardee_title_value}, item '{way_value}' has been deleted."
             legible_list.append(x_str)
 
@@ -459,7 +459,7 @@ def add_bud_item_reasonunit_insert_to_legible_list(
 ):
     for way_dict in item_reasonunit_insert_dict.values():
         for item_reasonunit_atom in way_dict.values():
-            way_value = item_reasonunit_atom.get_value("way")
+            way_value = item_reasonunit_atom.get_value("item_way")
             base_value = item_reasonunit_atom.get_value("base")
             base_item_active_requisite_value = item_reasonunit_atom.get_value(
                 base_item_active_requisite_str()
@@ -479,7 +479,7 @@ def add_bud_item_reasonunit_update_to_legible_list(
 ):
     for way_dict in item_reasonunit_update_dict.values():
         for item_reasonunit_atom in way_dict.values():
-            way_value = item_reasonunit_atom.get_value("way")
+            way_value = item_reasonunit_atom.get_value("item_way")
             base_value = item_reasonunit_atom.get_value("base")
             base_item_active_requisite_value = item_reasonunit_atom.get_value(
                 base_item_active_requisite_str()
@@ -496,7 +496,7 @@ def add_bud_item_reasonunit_delete_to_legible_list(
 ):
     for way_dict in item_reasonunit_delete_dict.values():
         for item_reasonunit_atom in way_dict.values():
-            way_value = item_reasonunit_atom.get_value("way")
+            way_value = item_reasonunit_atom.get_value("item_way")
             base_value = item_reasonunit_atom.get_value("base")
             x_str = f"ReasonUnit base='{base_value}' for item '{way_value}' has been deleted."
             legible_list.append(x_str)
@@ -510,7 +510,7 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
     for way_dict in item_reason_premiseunit_insert_dict.values():
         for base_dict in way_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                way_value = item_reason_premiseunit_atom.get_value(way_str())
+                way_value = item_reason_premiseunit_atom.get_value(item_way_str())
                 base_value = item_reason_premiseunit_atom.get_value(base_str())
                 need_value = item_reason_premiseunit_atom.get_value(need_str())
                 divisor_value = item_reason_premiseunit_atom.get_value("divisor")
@@ -534,7 +534,7 @@ def add_bud_reason_premiseunit_update_to_legible_list(
     for way_dict in item_reason_premiseunit_update_dict.values():
         for base_dict in way_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                way_value = item_reason_premiseunit_atom.get_value(way_str())
+                way_value = item_reason_premiseunit_atom.get_value(item_way_str())
                 base_value = item_reason_premiseunit_atom.get_value(base_str())
                 need_value = item_reason_premiseunit_atom.get_value(need_str())
                 divisor_value = item_reason_premiseunit_atom.get_value("divisor")
@@ -558,7 +558,7 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
     for way_dict in item_reason_premiseunit_delete_dict.values():
         for base_dict in way_dict.values():
             for item_reason_premiseunit_atom in base_dict.values():
-                way_value = item_reason_premiseunit_atom.get_value(way_str())
+                way_value = item_reason_premiseunit_atom.get_value(item_way_str())
                 base_value = item_reason_premiseunit_atom.get_value(base_str())
                 need_value = item_reason_premiseunit_atom.get_value(need_str())
                 x_str = f"PremiseUnit '{need_value}' deleted from reason '{base_value}' for item '{way_value}'."
@@ -571,7 +571,7 @@ def add_bud_item_teamlink_insert_to_legible_list(
     for way_dict in item_teamlink_insert_dict.values():
         for item_teamlink_atom in way_dict.values():
             team_title_value = item_teamlink_atom.get_value(team_title_str())
-            way_value = item_teamlink_atom.get_value("way")
+            way_value = item_teamlink_atom.get_value("item_way")
             x_str = f"teamlink '{team_title_value}' created for item '{way_value}'."
             legible_list.append(x_str)
 
@@ -582,7 +582,7 @@ def add_bud_item_teamlink_delete_to_legible_list(
     for way_dict in item_teamlink_delete_dict.values():
         for item_teamlink_atom in way_dict.values():
             team_title_value = item_teamlink_atom.get_value(team_title_str())
-            way_value = item_teamlink_atom.get_value("way")
+            way_value = item_teamlink_atom.get_value("item_way")
             x_str = f"teamlink '{team_title_value}' deleted for item '{way_value}'."
             legible_list.append(x_str)
 
@@ -593,7 +593,7 @@ def add_bud_item_healerlink_insert_to_legible_list(
     for way_dict in item_healerlink_insert_dict.values():
         for item_healerlink_atom in way_dict.values():
             healer_name_value = item_healerlink_atom.get_value(healer_name_str())
-            way_value = item_healerlink_atom.get_value("way")
+            way_value = item_healerlink_atom.get_value("item_way")
             x_str = f"HealerLink '{healer_name_value}' created for item '{way_value}'."
             legible_list.append(x_str)
 
@@ -604,7 +604,7 @@ def add_bud_item_healerlink_delete_to_legible_list(
     for way_dict in item_healerlink_delete_dict.values():
         for item_healerlink_atom in way_dict.values():
             healer_name_value = item_healerlink_atom.get_value(healer_name_str())
-            way_value = item_healerlink_atom.get_value("way")
+            way_value = item_healerlink_atom.get_value("item_way")
             x_str = f"HealerLink '{healer_name_value}' deleted for item '{way_value}'."
             legible_list.append(x_str)
 
@@ -614,7 +614,7 @@ def add_bud_item_factunit_insert_to_legible_list(
 ):
     for way_dict in item_factunit_insert_dict.values():
         for item_factunit_atom in way_dict.values():
-            way_value = item_factunit_atom.get_value(way_str())
+            way_value = item_factunit_atom.get_value(item_way_str())
             fbase_value = item_factunit_atom.get_value(fbase_str())
             fneed_value = item_factunit_atom.get_value(fneed_str())
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
@@ -632,7 +632,7 @@ def add_bud_item_factunit_update_to_legible_list(
 ):
     for way_dict in item_factunit_update_dict.values():
         for item_factunit_atom in way_dict.values():
-            way_value = item_factunit_atom.get_value(way_str())
+            way_value = item_factunit_atom.get_value(item_way_str())
             fbase_value = item_factunit_atom.get_value(fbase_str())
             fneed_value = item_factunit_atom.get_value(fneed_str())
             fnigh_value = item_factunit_atom.get_value(fnigh_str())
@@ -650,7 +650,7 @@ def add_bud_item_factunit_delete_to_legible_list(
 ):
     for way_dict in item_factunit_delete_dict.values():
         for item_factunit_atom in way_dict.values():
-            way_value = item_factunit_atom.get_value(way_str())
+            way_value = item_factunit_atom.get_value(item_way_str())
             fbase_value = item_factunit_atom.get_value(fbase_str())
             fneed_value = item_factunit_atom.get_value(fneed_str())
             x_str = f"FactUnit base '{fbase_value}' deleted for item '{way_value}'."

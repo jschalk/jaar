@@ -52,8 +52,8 @@ class BudDelta:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].jkeys.get("way") is not None:
-                x_list = sorted(x_list, key=lambda x: x.jkeys.get("way"))
+            if x_list[0].jkeys.get("item_way") is not None:
+                x_list = sorted(x_list, key=lambda x: x.jkeys.get("item_way"))
             ordered_list.extend(x_list)
         return ordered_list
 
@@ -323,7 +323,7 @@ class BudDelta:
         for insert_item_way in insert_item_ways:
             insert_itemunit = after_bud.get_item_obj(insert_item_way)
             x_budatom = budatom_shop("bud_itemunit", atom_insert())
-            x_budatom.set_jkey("way", insert_itemunit.get_item_way())
+            x_budatom.set_jkey("item_way", insert_itemunit.get_item_way())
             x_budatom.set_jvalue("addin", insert_itemunit.addin)
             x_budatom.set_jvalue("begin", insert_itemunit.begin)
             x_budatom.set_jvalue("close", insert_itemunit.close)
@@ -363,7 +363,7 @@ class BudDelta:
             before_itemunit = before_bud.get_item_obj(item_way)
             if jvalues_different("bud_itemunit", before_itemunit, after_itemunit):
                 x_budatom = budatom_shop("bud_itemunit", atom_update())
-                x_budatom.set_jkey("way", after_itemunit.get_item_way())
+                x_budatom.set_jkey("item_way", after_itemunit.get_item_way())
                 if before_itemunit.addin != after_itemunit.addin:
                     x_budatom.set_jvalue("addin", after_itemunit.addin)
                 if before_itemunit.begin != after_itemunit.begin:
@@ -494,7 +494,7 @@ class BudDelta:
     def add_budatom_item_deletes(self, before_bud: BudUnit, delete_item_ways: set):
         for delete_item_way in delete_item_ways:
             x_budatom = budatom_shop("bud_itemunit", atom_delete())
-            x_budatom.set_jkey("way", delete_item_way)
+            x_budatom.set_jkey("item_way", delete_item_way)
             self.set_budatom(x_budatom)
 
             delete_itemunit = before_bud.get_item_obj(delete_item_way)
@@ -526,7 +526,7 @@ class BudDelta:
         for insert_reasonunit_base in insert_reasonunit_bases:
             after_reasonunit = after_itemunit.get_reasonunit(insert_reasonunit_base)
             x_budatom = budatom_shop("bud_item_reasonunit", atom_insert())
-            x_budatom.set_jkey("way", after_itemunit.get_item_way())
+            x_budatom.set_jkey("item_way", after_itemunit.get_item_way())
             x_budatom.set_jkey("base", after_reasonunit.base)
             if after_reasonunit.base_item_active_requisite is not None:
                 x_budatom.set_jvalue(
@@ -554,7 +554,7 @@ class BudDelta:
                 "bud_item_reasonunit", before_reasonunit, after_reasonunit
             ):
                 x_budatom = budatom_shop("bud_item_reasonunit", atom_update())
-                x_budatom.set_jkey("way", before_itemunit.get_item_way())
+                x_budatom.set_jkey("item_way", before_itemunit.get_item_way())
                 x_budatom.set_jkey("base", after_reasonunit.base)
                 if (
                     before_reasonunit.base_item_active_requisite
@@ -596,7 +596,7 @@ class BudDelta:
     ):
         for delete_reasonunit_base in delete_reasonunit_bases:
             x_budatom = budatom_shop("bud_item_reasonunit", atom_delete())
-            x_budatom.set_jkey("way", before_itemunit.get_item_way())
+            x_budatom.set_jkey("item_way", before_itemunit.get_item_way())
             x_budatom.set_jkey("base", delete_reasonunit_base)
             self.set_budatom(x_budatom)
 
@@ -616,7 +616,7 @@ class BudDelta:
         for insert_premise_need in insert_premise_needs:
             after_premiseunit = after_reasonunit.get_premise(insert_premise_need)
             x_budatom = budatom_shop("bud_item_reason_premiseunit", atom_insert())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("base", after_reasonunit.base)
             x_budatom.set_jkey("need", after_premiseunit.need)
             if after_premiseunit.open is not None:
@@ -643,7 +643,7 @@ class BudDelta:
                 after_premiseunit,
             ):
                 x_budatom = budatom_shop("bud_item_reason_premiseunit", atom_update())
-                x_budatom.set_jkey("way", item_way)
+                x_budatom.set_jkey("item_way", item_way)
                 x_budatom.set_jkey("base", before_reasonunit.base)
                 x_budatom.set_jkey("need", after_premiseunit.need)
                 if after_premiseunit.open != before_premiseunit.open:
@@ -662,7 +662,7 @@ class BudDelta:
     ):
         for delete_premise_need in delete_premise_needs:
             x_budatom = budatom_shop("bud_item_reason_premiseunit", atom_delete())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("base", reasonunit_base)
             x_budatom.set_jkey("need", delete_premise_need)
             self.set_budatom(x_budatom)
@@ -672,7 +672,7 @@ class BudDelta:
     ):
         for insert_teamlink_team_title in insert_teamlink_team_titles:
             x_budatom = budatom_shop("bud_item_teamlink", atom_insert())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("team_title", insert_teamlink_team_title)
             self.set_budatom(x_budatom)
 
@@ -681,7 +681,7 @@ class BudDelta:
     ):
         for delete_teamlink_team_title in delete_teamlink_team_titles:
             x_budatom = budatom_shop("bud_item_teamlink", atom_delete())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("team_title", delete_teamlink_team_title)
             self.set_budatom(x_budatom)
 
@@ -690,7 +690,7 @@ class BudDelta:
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
             x_budatom = budatom_shop("bud_item_healerlink", atom_insert())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("healer_name", insert_healerlink_healer_name)
             self.set_budatom(x_budatom)
 
@@ -699,7 +699,7 @@ class BudDelta:
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
             x_budatom = budatom_shop("bud_item_healerlink", atom_delete())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("healer_name", delete_healerlink_healer_name)
             self.set_budatom(x_budatom)
 
@@ -711,7 +711,7 @@ class BudDelta:
                 after_awardlink_awardee_title
             )
             x_budatom = budatom_shop("bud_item_awardlink", atom_insert())
-            x_budatom.set_jkey("way", after_itemunit.get_item_way())
+            x_budatom.set_jkey("item_way", after_itemunit.get_item_way())
             x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
             x_budatom.set_jvalue("give_force", after_awardlink.give_force)
             x_budatom.set_jvalue("take_force", after_awardlink.take_force)
@@ -734,7 +734,7 @@ class BudDelta:
                 "bud_item_awardlink", before_awardlink, after_awardlink
             ):
                 x_budatom = budatom_shop("bud_item_awardlink", atom_update())
-                x_budatom.set_jkey("way", before_itemunit.get_item_way())
+                x_budatom.set_jkey("item_way", before_itemunit.get_item_way())
                 x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_budatom.set_jvalue("give_force", after_awardlink.give_force)
@@ -747,7 +747,7 @@ class BudDelta:
     ):
         for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
             x_budatom = budatom_shop("bud_item_awardlink", atom_delete())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("awardee_title", delete_awardlink_awardee_title)
             self.set_budatom(x_budatom)
 
@@ -757,7 +757,7 @@ class BudDelta:
         for insert_factunit_base in insert_factunit_bases:
             insert_factunit = itemunit.factunits.get(insert_factunit_base)
             x_budatom = budatom_shop("bud_item_factunit", atom_insert())
-            x_budatom.set_jkey("way", itemunit.get_item_way())
+            x_budatom.set_jkey("item_way", itemunit.get_item_way())
             x_budatom.set_jkey("fbase", insert_factunit.fbase)
             if insert_factunit.fneed is not None:
                 x_budatom.set_jvalue("fneed", insert_factunit.fneed)
@@ -778,7 +778,7 @@ class BudDelta:
             after_factunit = after_itemunit.factunits.get(update_factunit_base)
             if jvalues_different("bud_item_factunit", before_factunit, after_factunit):
                 x_budatom = budatom_shop("bud_item_factunit", atom_update())
-                x_budatom.set_jkey("way", before_itemunit.get_item_way())
+                x_budatom.set_jkey("item_way", before_itemunit.get_item_way())
                 x_budatom.set_jkey("fbase", after_factunit.fbase)
                 if before_factunit.fneed != after_factunit.fneed:
                     x_budatom.set_jvalue("fneed", after_factunit.fneed)
@@ -793,7 +793,7 @@ class BudDelta:
     ):
         for delete_factunit_base in delete_factunit_bases:
             x_budatom = budatom_shop("bud_item_factunit", atom_delete())
-            x_budatom.set_jkey("way", item_way)
+            x_budatom.set_jkey("item_way", item_way)
             x_budatom.set_jkey("fbase", delete_factunit_base)
             self.set_budatom(x_budatom)
 

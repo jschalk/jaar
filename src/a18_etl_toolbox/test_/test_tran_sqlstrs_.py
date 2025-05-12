@@ -586,18 +586,20 @@ def test_get_pidgin_inconsistency_sqlstrs_ReturnsObj():
 
         for x_dimen in sorted(idea_config):
             # print(f"{x_dimen} checking...")
-            x_sqlstr = pidgin_inconsistency_sqlstrs.get(x_dimen)
             x_tablename = f"{x_dimen}_raw"
             dimen_config = idea_config.get(x_dimen)
             dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-            generated_dimen_sqlstr = create_select_inconsistency_query(
+            expected_dimen_sqlstr = create_select_inconsistency_query(
                 cursor, x_tablename, dimen_focus_columns, exclude_cols
             )
+            print(f"{dimen_focus_columns=}")
+            print(f"{get_table_columns(cursor, x_tablename)=}")
             print(
-                f'{x_dimen.upper()}_INCONSISTENCY_SQLSTR ="""{generated_dimen_sqlstr}"""'
+                f'{x_dimen.upper()}_INCONSISTENCY_SQLSTR ="""{expected_dimen_sqlstr}"""'
             )
-            print(f'{x_sqlstr=}"""')
-            assert x_sqlstr == generated_dimen_sqlstr
+            current_sqlstr = pidgin_inconsistency_sqlstrs.get(x_dimen)
+            print(current_sqlstr)
+            assert current_sqlstr == expected_dimen_sqlstr
 
 
 def test_get_fisc_inconsistency_sqlstrs_ReturnsObj():

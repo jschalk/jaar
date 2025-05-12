@@ -127,11 +127,11 @@ x_dict = {
     "bud_acct_membership":          {"jkeys": {"acct_name","group_label"},       "jvalues": {"credit_vote","debtit_vote"},
     "bud_acctunit":                 {"jkeys": {"acct_name",},                 "jvalues": {"credit_belief","debtit_belief"},
 each idea will either have bud_acctunit as a dimen or not. that will decide if the atom is created. 
-    "bud_item_awardlink":           {"jkeys": {"way","group_label",},         "jvalues": {"give_force","take_force"},
-    "bud_item_teamlink":            {"jkeys": {"way","group_label",},         "jvalues",
+    "bud_item_awardlink":           {"jkeys": {"item_way","group_label",},         "jvalues": {"give_force","take_force"},
+    "bud_item_teamlink":            {"jkeys": {"item_way","group_label",},         "jvalues",
 each idea will either have bud_item_teamlink as a dimen or not. that will decide if the atom is created. 
-    "bud_item_factunit":            {"jkeys": {"way","base",},             "jvalues": {"fnigh","fopen","pick",},},
+    "bud_item_factunit":            {"jkeys": {"item_way","base",},             "jvalues": {"fnigh","fopen","pick",},},
 each idea will either have bud_item_factunit as a dimen or not. Would be nice if pick was required...not required for delete
-    "bud_item_reason_premiseunit":  {"jkeys": {"way","base","need",},      "jvalues": {"divisor","nigh","open",},},
-    "bud_item_reasonunit":          {"jkeys": {"way","base",},             "jvalues": {"base_item_active_requisite",},},
+    "bud_item_reason_premiseunit":  {"jkeys": {"item_way","base","need",},      "jvalues": {"divisor","nigh","open",},},
+    "bud_item_reasonunit":          {"jkeys": {"item_way","base",},             "jvalues": {"base_item_active_requisite",},},
 }

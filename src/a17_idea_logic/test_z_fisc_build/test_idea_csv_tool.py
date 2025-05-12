@@ -75,13 +75,13 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         # "br00006": "fisc_tag,offi_time,_offi_time_max\n",
         "br00020": "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
         "br00021": "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief\n",
-        "br00022": "fisc_tag,owner_name,way,awardee_title,give_force,take_force\n",
-        "br00023": "fisc_tag,owner_name,way,fbase,fneed,fopen,fnigh\n",
-        "br00024": "fisc_tag,owner_name,way,team_title\n",
-        "br00025": "fisc_tag,owner_name,way,healer_name\n",
-        "br00026": "fisc_tag,owner_name,way,base,need,nigh,open,divisor\n",
-        "br00027": "fisc_tag,owner_name,way,base,base_item_active_requisite\n",
-        "br00028": "fisc_tag,owner_name,way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
+        "br00022": "fisc_tag,owner_name,item_way,awardee_title,give_force,take_force\n",
+        "br00023": "fisc_tag,owner_name,item_way,fbase,fneed,fopen,fnigh\n",
+        "br00024": "fisc_tag,owner_name,item_way,team_title\n",
+        "br00025": "fisc_tag,owner_name,item_way,healer_name\n",
+        "br00026": "fisc_tag,owner_name,item_way,base,need,nigh,open,divisor\n",
+        "br00027": "fisc_tag,owner_name,item_way,base,base_item_active_requisite\n",
+        "br00028": "fisc_tag,owner_name,item_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
         "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word\n",
@@ -1237,7 +1237,6 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
 #     add_packunit_to_stance_csv_strs(sue7_pack, x_ideas, csv_delimiter)
 
 #     # WHEN
-#     assert 1 == 2
 
 #     # assert x_ideas.get("br00020") != br00020_header
 #     # assert x_ideas.get("br00021") != br00021_header

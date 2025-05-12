@@ -107,7 +107,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWithDetailsDe
     zia_gut = get_example_zia_speaker()
     bob_gut = get_example_bob_speaker()
     bob_gut.edit_item_attr(
-        way=cook_way(),
+        cook_way(),
         reason_del_premise_base=eat_way(),
         reason_del_premise_need=hungry_way(),
     )
@@ -211,14 +211,14 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
     sue_gut.set_l1_item(itemunit_shop(chicken_str))
     # set egg pledge is True when chicken first is False
     sue_gut.edit_item_attr(
-        way=egg_way,
+        egg_way,
         pledge=True,
         reason_base=chicken_way,
         reason_base_item_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_gut.edit_item_attr(
-        way=chicken_way,
+        chicken_way,
         pledge=True,
         reason_base=egg_way,
         reason_base_item_active_requisite=False,

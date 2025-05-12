@@ -33,7 +33,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fneed_str,
     group_label_str,
     healer_name_str,
-    way_str,
+    item_way_str,
     numor_str,
     team_title_str,
     close_str,
@@ -234,8 +234,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[21] == get_delete_key_name(acct_name_str())
     assert table_sorting_priority[22] == group_label_str()
     assert table_sorting_priority[23] == get_delete_key_name(group_label_str())
-    assert table_sorting_priority[24] == way_str()
-    assert table_sorting_priority[25] == get_delete_key_name(way_str())
+    assert table_sorting_priority[24] == item_way_str()
+    assert table_sorting_priority[25] == get_delete_key_name(item_way_str())
     assert table_sorting_priority[26] == base_str()
     assert table_sorting_priority[27] == get_delete_key_name(base_str())
     assert table_sorting_priority[28] == fbase_str()
@@ -370,7 +370,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
-    assert sqlite_types.get(way_str()) == "TEXT"
+    assert sqlite_types.get(item_way_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("fneed") == "TEXT"

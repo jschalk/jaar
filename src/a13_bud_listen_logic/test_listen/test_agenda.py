@@ -257,14 +257,14 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     sue_budunit.set_l1_item(itemunit_shop(chicken_str))
     # set egg pledge is True when chicken first is False
     sue_budunit.edit_item_attr(
-        way=egg_way,
+        egg_way,
         pledge=True,
         reason_base=chicken_way,
         reason_base_item_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_budunit.edit_item_attr(
-        way=chicken_way,
+        chicken_way,
         pledge=True,
         reason_base=egg_way,
         reason_base_item_active_requisite=False,

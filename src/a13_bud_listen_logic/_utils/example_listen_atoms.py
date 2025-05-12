@@ -5,7 +5,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
     bud_item_factunit_str,
     acct_name_str,
-    way_str,
+    item_way_str,
     fbase_str,
     fopen_str,
     fnigh_str,
@@ -22,7 +22,7 @@ def get_atom_example_itemunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
     x_dimen = bud_itemunit_str()
     sports_way = create_way(fisc_tag, sports_str)
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(way_str(), sports_way)
+    insert_itemunit_budatom.set_jkey(item_way_str(), sports_way)
     return insert_itemunit_budatom
 
 
@@ -35,7 +35,7 @@ def get_atom_example_itemunit_ball(fisc_tag: FiscTag = None) -> BudAtom:
     x_dimen = bud_itemunit_str()
     bball_way = create_way(sports_way, ball_str)
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(way_str(), bball_way)
+    insert_itemunit_budatom.set_jkey(item_way_str(), bball_way)
     return insert_itemunit_budatom
 
 
@@ -52,7 +52,7 @@ def get_atom_example_itemunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     close_str = "close"
     knee_way = create_way(sports_way, knee_str)
     insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(way_str(), knee_way)
+    insert_itemunit_budatom.set_jkey(item_way_str(), knee_way)
     insert_itemunit_budatom.set_jvalue(begin_str, knee_begin)
     insert_itemunit_budatom.set_jvalue(close_str, knee_close)
     return insert_itemunit_budatom
@@ -71,7 +71,7 @@ def get_atom_example_factunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     knee_fnigh = 23
     x_dimen = bud_item_factunit_str()
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_factunit_budatom.set_jkey(way_str(), ball_way)
+    insert_factunit_budatom.set_jkey(item_way_str(), ball_way)
     insert_factunit_budatom.set_jkey(fbase_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_fopen)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_fnigh)

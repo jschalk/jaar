@@ -2,7 +2,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_factunit_str,
     fnigh_str,
     fopen_str,
-    way_str,
+    item_way_str,
     fbase_str,
     fneed_str,
 )
@@ -23,7 +23,7 @@ def test_create_legible_list_ReturnsObj_item_factunit_INSERT_WithOutNumberArgs()
     fbase_value = sue_bud.make_way(casa_way, "fridge status")
     fneed_value = sue_bud.make_way(fbase_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(fbase_str(), fbase_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     # print(f"{swim_budatom=}")
@@ -51,7 +51,7 @@ def test_create_legible_list_ReturnsObj_item_factunit_INSERT_WithNumberArgs():
     fnigh_value = 13
     fopen_value = 17
     swim_budatom = budatom_shop(dimen, atom_insert())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(fbase_str(), base_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     swim_budatom.set_arg(fnigh_str(), fnigh_value)
@@ -79,7 +79,7 @@ def test_create_legible_list_ReturnsObj_item_factunit_UPDATE_WithOutNumberArgs()
     base_value = sue_bud.make_way(casa_way, "fridge status")
     fneed_value = sue_bud.make_way(base_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(fbase_str(), base_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     # print(f"{swim_budatom=}")
@@ -107,7 +107,7 @@ def test_create_legible_list_ReturnsObj_item_factunit_UPDATE_WithNumberArgs():
     fnigh_value = 13
     fopen_value = 17
     swim_budatom = budatom_shop(dimen, atom_update())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(fbase_str(), base_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     swim_budatom.set_arg(fnigh_str(), fnigh_value)
@@ -134,7 +134,7 @@ def test_create_legible_list_ReturnsObj_item_factunit_DELETE():
     casa_way = sue_bud.make_l1_way("casa")
     base_value = sue_bud.make_way(casa_way, "fridge status")
     swim_budatom = budatom_shop(dimen, atom_delete())
-    swim_budatom.set_arg(way_str(), way_value)
+    swim_budatom.set_arg(item_way_str(), way_value)
     swim_budatom.set_arg(fbase_str(), base_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()

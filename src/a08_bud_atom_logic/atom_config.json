@@ -6,37 +6,37 @@
         "INSERT": {
             "atom_order": 1
         },
-        "UPDATE": {
-            "atom_order": 10
-        },
         "jkeys": {
             "acct_name": {
-                "column_order": 0,
                 "class_type": "NameUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
-                "column_order": 1,
                 "class_type": "LabelUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "credit_vote": {
-                "column_order": 3,
                 "class_type": "float",
+                "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
             "debtit_vote": {
-                "column_order": 2,
                 "class_type": "float",
+                "column_order": 2,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
             "normal_table_name": "membership"
+        },
+        "UPDATE": {
+            "atom_order": 10
         }
     },
     "bud_acctunit": {
@@ -46,30 +46,30 @@
         "INSERT": {
             "atom_order": 0
         },
-        "UPDATE": {
-            "atom_order": 9
-        },
         "jkeys": {
             "acct_name": {
-                "column_order": 0,
                 "class_type": "NameUnit",
+                "column_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "credit_belief": {
-                "column_order": 2,
                 "class_type": "float",
+                "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
             "debtit_belief": {
-                "column_order": 1,
                 "class_type": "float",
+                "column_order": 1,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
             "normal_table_name": "acctunit"
+        },
+        "UPDATE": {
+            "atom_order": 9
         }
     },
     "bud_item_awardlink": {
@@ -79,37 +79,37 @@
         "INSERT": {
             "atom_order": 3
         },
-        "UPDATE": {
-            "atom_order": 12
-        },
         "jkeys": {
             "awardee_title": {
-                "column_order": 1,
                 "class_type": "LabelUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
-                "column_order": 0,
+            "item_way": {
                 "class_type": "WayUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "give_force": {
-                "column_order": 3,
                 "class_type": "float",
+                "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
             "take_force": {
-                "column_order": 2,
                 "class_type": "float",
+                "column_order": 2,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
             "normal_table_name": "awardlink"
+        },
+        "UPDATE": {
+            "atom_order": 12
         }
     },
     "bud_item_factunit": {
@@ -119,42 +119,42 @@
         "INSERT": {
             "atom_order": 6
         },
-        "UPDATE": {
-            "atom_order": 13
-        },
         "jkeys": {
             "fbase": {
-                "column_order": 1,
                 "class_type": "WayUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
-                "column_order": 0,
+            "item_way": {
                 "class_type": "WayUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
+            "fneed": {
+                "class_type": "WayUnit",
+                "column_order": 2,
+                "sqlite_datatype": "TEXT"
+            },
             "fnigh": {
-                "column_order": 4,
                 "class_type": "float",
+                "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
             "fopen": {
-                "column_order": 3,
                 "class_type": "float",
+                "column_order": 3,
                 "sqlite_datatype": "REAL"
-            },
-            "fneed": {
-                "column_order": 2,
-                "class_type": "WayUnit",
-                "sqlite_datatype": "TEXT"
             }
         },
         "normal_specs": {
             "normal_table_name": "fact"
+        },
+        "UPDATE": {
+            "atom_order": 13
         }
     },
     "bud_item_healerlink": {
@@ -166,14 +166,14 @@
         },
         "jkeys": {
             "healer_name": {
-                "column_order": 1,
                 "class_type": "NameUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
-                "column_order": 0,
+            "item_way": {
                 "class_type": "WayUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -190,48 +190,48 @@
         "INSERT": {
             "atom_order": 8
         },
-        "UPDATE": {
-            "atom_order": 14
-        },
         "jkeys": {
             "base": {
-                "column_order": 1,
                 "class_type": "WayUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "need": {
-                "column_order": 2,
+            "item_way": {
                 "class_type": "WayUnit",
-                "nesting_order": 2,
+                "column_order": 0,
+                "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
-                "column_order": 0,
+            "need": {
                 "class_type": "WayUnit",
-                "nesting_order": 0,
+                "column_order": 2,
+                "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "divisor": {
-                "column_order": 5,
                 "class_type": "int",
+                "column_order": 5,
                 "sqlite_datatype": "INTEGER"
             },
             "nigh": {
-                "column_order": 4,
                 "class_type": "float",
+                "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
             "open": {
-                "column_order": 3,
                 "class_type": "float",
+                "column_order": 3,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
             "normal_table_name": "premise"
+        },
+        "UPDATE": {
+            "atom_order": 14
         }
     },
     "bud_item_reasonunit": {
@@ -241,32 +241,32 @@
         "INSERT": {
             "atom_order": 7
         },
-        "UPDATE": {
-            "atom_order": 15
-        },
         "jkeys": {
             "base": {
-                "column_order": 1,
                 "class_type": "WayUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
-                "column_order": 0,
+            "item_way": {
                 "class_type": "WayUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "base_item_active_requisite": {
-                "column_order": 2,
                 "class_type": "bool",
+                "column_order": 2,
                 "sqlite_datatype": "INTEGER"
             }
         },
         "normal_specs": {
             "normal_table_name": "reason"
+        },
+        "UPDATE": {
+            "atom_order": 15
         }
     },
     "bud_item_teamlink": {
@@ -277,15 +277,15 @@
             "atom_order": 4
         },
         "jkeys": {
-            "way": {
-                "column_order": 0,
+            "item_way": {
                 "class_type": "WayUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "team_title": {
-                "column_order": 1,
                 "class_type": "LabelUnit",
+                "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
@@ -302,127 +302,127 @@
         "INSERT": {
             "atom_order": 2
         },
-        "UPDATE": {
-            "atom_order": 11
-        },
         "jkeys": {
-            "way": {
-                "column_order": 0,
+            "item_way": {
                 "class_type": "WayUnit",
+                "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
             "addin": {
-                "column_order": 10,
                 "class_type": "float",
+                "column_order": 10,
                 "sqlite_datatype": "REAL"
             },
             "begin": {
-                "column_order": 5,
                 "class_type": "float",
+                "column_order": 5,
                 "sqlite_datatype": "REAL"
             },
             "close": {
-                "column_order": 6,
                 "class_type": "float",
+                "column_order": 6,
                 "sqlite_datatype": "REAL"
             },
             "denom": {
-                "column_order": 8,
                 "class_type": "int",
+                "column_order": 8,
                 "sqlite_datatype": "INTEGER"
             },
             "gogo_want": {
-                "column_order": 11,
                 "class_type": "float",
+                "column_order": 11,
                 "sqlite_datatype": "REAL"
             },
             "mass": {
-                "column_order": 3,
                 "class_type": "int",
+                "column_order": 3,
                 "sqlite_datatype": "INTEGER"
             },
             "morph": {
-                "column_order": 9,
                 "class_type": "bool",
+                "column_order": 9,
                 "sqlite_datatype": "INTEGER"
             },
             "numor": {
-                "column_order": 7,
                 "class_type": "int",
+                "column_order": 7,
                 "sqlite_datatype": "INTEGER"
             },
             "pledge": {
-                "column_order": 2,
                 "class_type": "bool",
+                "column_order": 2,
                 "sqlite_datatype": "INTEGER"
             },
             "problem_bool": {
-                "column_order": 4,
                 "class_type": "bool",
+                "column_order": 4,
                 "sqlite_datatype": "INTEGER"
             },
             "stop_want": {
-                "column_order": 12,
                 "class_type": "float",
+                "column_order": 12,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
             "normal_table_name": "item"
+        },
+        "UPDATE": {
+            "atom_order": 11
         }
     },
     "budunit": {
-        "UPDATE": {
-            "atom_order": 25
-        },
         "jkeys": {},
         "jvalues": {
             "credor_respect": {
-                "column_order": 3,
                 "class_type": "float",
+                "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
             "debtor_respect": {
-                "column_order": 2,
                 "class_type": "float",
+                "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
             "fund_coin": {
-                "column_order": 1,
                 "class_type": "float",
+                "column_order": 1,
                 "sqlite_datatype": "REAL"
             },
             "fund_pool": {
-                "column_order": 0,
                 "class_type": "float",
+                "column_order": 0,
                 "sqlite_datatype": "REAL"
             },
             "max_tree_traverse": {
-                "column_order": 5,
                 "class_type": "int",
+                "column_order": 5,
                 "sqlite_datatype": "INTEGER"
             },
             "penny": {
-                "column_order": 6,
                 "class_type": "float",
+                "column_order": 6,
                 "sqlite_datatype": "REAL"
             },
             "respect_bit": {
-                "column_order": 4,
                 "class_type": "float",
+                "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
             "tally": {
-                "column_order": 7,
                 "class_type": "int",
+                "column_order": 7,
                 "sqlite_datatype": "INTEGER"
             }
         },
         "normal_specs": {
             "normal_table_name": "bud"
+        },
+        "UPDATE": {
+            "atom_order": 25
         }
     }
 }

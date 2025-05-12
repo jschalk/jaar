@@ -97,7 +97,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "pledge": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
-        "way": "WayUnit",
+        "item_way": "WayUnit",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
@@ -249,7 +249,7 @@ def get_all_bud_dimen_keys() -> set:
         "healer_name",
         "need",
         "owner_name",
-        "way",
+        "item_way",
         "team_title",
     }
 
@@ -268,7 +268,7 @@ def get_all_bud_dimen_delete_keys() -> set:
         "healer_name_ERASE",
         "need_ERASE",
         "owner_name_ERASE",
-        "way_ERASE",
+        "item_way_ERASE",
         "team_title_ERASE",
     }
 

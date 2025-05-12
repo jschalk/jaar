@@ -53,7 +53,7 @@ def test_AtomRow_exists():
     assert x_atomrow.fneed is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
-    assert x_atomrow.way is None
+    assert x_atomrow.item_way is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
     assert x_atomrow.tally is None
@@ -130,11 +130,11 @@ def test_AtomRow_set_class_types_SetsAttr():
     x_morph_str = "True"
     x_morph_bool = True
     x_way = create_way(x_parent_way, x_item_tag)
-    x_atomrow.way = x_way
+    x_atomrow.item_way = x_way
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
-    assert x_atomrow.way == x_way
+    assert x_atomrow.item_way == x_way
     assert x_atomrow.morph == x_morph_str
 
     # WHEN
@@ -142,7 +142,7 @@ def test_AtomRow_set_class_types_SetsAttr():
 
     # THEN
     assert x_atomrow.close == four_int
-    assert x_atomrow.way == x_way
+    assert x_atomrow.item_way == x_way
     assert x_atomrow.morph == x_morph_bool
 
 
@@ -229,10 +229,10 @@ def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
     assert len(x_atomrow.get_budatoms()) == 1
 
 
-def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False_Scenario0():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_itemunit_str()}, atom_insert())
-    x_atomrow.way = create_way("accord78", "casa")
+    x_atomrow.item_way = create_way("accord78", "casa")
     x_atomrow.pledge = False
     assert len(x_atomrow.get_budatoms()) == 1
 
@@ -241,18 +241,18 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
 
     # THEN
     static_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
-    static_budatom.set_arg("way", create_way("accord78", "casa"))
+    static_budatom.set_arg("item_way", create_way("accord78", "casa"))
     static_budatom.set_arg("pledge", False)
     print(static_budatom)
     print(x_budatom)
     assert x_budatom == static_budatom
 
 
-def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False_Scenario1():
     # ESTABLISH
     x_dimens = {bud_itemunit_str(), bud_item_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, atom_insert())
-    x_atomrow.way = create_way("accord78", "casa")
+    x_atomrow.item_way = create_way("accord78", "casa")
     x_atomrow.pledge = False
     x_atomrow.healer_name = "Bob"
 
@@ -263,10 +263,10 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_itemunit_INSERT_pledge_False():
     assert len(x_budatoms) == 2
     y_item_budatom = budatom_shop(bud_itemunit_str(), atom_insert())
     casa_way = create_way("accord78", "casa")
-    y_item_budatom.set_arg("way", casa_way)
+    y_item_budatom.set_arg("item_way", casa_way)
     y_item_budatom.set_arg("pledge", False)
     assert y_item_budatom in x_budatoms
     healerlink_budatom = budatom_shop(bud_item_healerlink_str(), atom_insert())
-    healerlink_budatom.set_arg("way", casa_way)
+    healerlink_budatom.set_arg("item_way", casa_way)
     healerlink_budatom.set_arg("healer_name", "Bob")
     assert healerlink_budatom in x_budatoms

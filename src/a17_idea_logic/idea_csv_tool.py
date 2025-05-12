@@ -629,7 +629,7 @@ def add_pack_to_br00022_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("awardee_title"),
                 if_none_str(budatom.jvalues.get("give_force")),
                 if_none_str(budatom.jvalues.get("take_force")),
@@ -649,7 +649,7 @@ def add_pack_to_br00023_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("fbase"),
                 if_none_str(budatom.jvalues.get("fneed")),
                 if_none_str(budatom.jvalues.get("fopen")),
@@ -670,7 +670,7 @@ def add_pack_to_br00024_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("team_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -688,7 +688,7 @@ def add_pack_to_br00025_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -706,7 +706,7 @@ def add_pack_to_br00026_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("base"),
                 budatom.jkeys.get("need"),
                 if_none_str(budatom.jvalues.get("open")),
@@ -728,7 +728,7 @@ def add_pack_to_br00027_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 budatom.jkeys.get("base"),
                 if_none_str(budatom.jvalues.get("base_item_active_requisite")),
             ]
@@ -747,7 +747,7 @@ def add_pack_to_br00028_csv(
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
-                budatom.jkeys.get("way"),
+                budatom.jkeys.get("item_way"),
                 if_none_str(budatom.jvalues.get("begin")),
                 if_none_str(budatom.jvalues.get("close")),
                 if_none_str(budatom.jvalues.get("addin")),

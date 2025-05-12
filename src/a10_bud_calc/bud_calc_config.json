@@ -213,7 +213,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -258,7 +258,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -298,7 +298,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -329,7 +329,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -378,7 +378,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -419,7 +419,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -451,7 +451,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "way": {
+            "item_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },

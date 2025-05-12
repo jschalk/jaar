@@ -148,7 +148,7 @@ def test_bud_set_bridge_CorrectlyModifiesReasonUnit():
     semicolon_time_reasonunit.set_premise(semicolon_8am_way)
 
     semicolon_casa_way = zia_bud.make_l1_way(casa_str)
-    zia_bud.edit_item_attr(way=semicolon_casa_way, reason=semicolon_time_reasonunit)
+    zia_bud.edit_item_attr(semicolon_casa_way, reason=semicolon_time_reasonunit)
     casa_item = zia_bud.get_item_obj(semicolon_casa_way)
     assert casa_item.reasonunits.get(semicolon_time_way) is not None
     gen_time_reasonunit = casa_item.reasonunits.get(semicolon_time_way)

@@ -15,7 +15,7 @@ def test_bud_edit_item_attr_CorrectlySetsTeamUnit():
 
     # WHEN
     x_teamunit = teamunit_shop()
-    xio_bud.edit_item_attr(teamunit=x_teamunit, way=run_way)
+    xio_bud.edit_item_attr(run_way, teamunit=x_teamunit)
 
     # THEN
     assert run_item.teamunit == x_teamunit
@@ -27,7 +27,7 @@ def test_bud_itemroot_teamunit_CorrectlySets_item_teamheir():
 
     yao_bud = budunit_shop("Yao")
     root_way = to_way(yao_bud.fisc_tag)
-    yao_bud.edit_item_attr(teamunit=x_teamunit, way=root_way)
+    yao_bud.edit_item_attr(root_way, teamunit=x_teamunit)
     assert yao_bud.itemroot.teamunit == x_teamunit
     assert yao_bud.itemroot._teamheir is None
 

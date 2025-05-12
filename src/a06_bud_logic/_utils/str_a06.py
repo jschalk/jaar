@@ -135,8 +135,8 @@ def credit_vote_str() -> str:
     return "credit_vote"
 
 
-def way_str() -> str:
-    return "way"
+def item_way_str() -> str:
+    return "item_way"
 
 
 def parent_way_str() -> str:

@@ -116,7 +116,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "problem_bool": "bool",
         "quota": "int",
         "respect_bit": "float",
-        "way": "WayUnit",
+        "item_way": "WayUnit",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",

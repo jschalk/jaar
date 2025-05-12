@@ -541,7 +541,9 @@ class BudUnit:
         for x_item in self.get_item_dict().values():
             if x_item._uid is None or item_uid_dict.get(x_item._uid) > 1:
                 new_item_uid_max = item_uid_max + 1
-                self.edit_item_attr(way=x_item.get_item_way(), uid=new_item_uid_max)
+                self.edit_item_attr(
+                    item_way=x_item.get_item_way(), uid=new_item_uid_max
+                )
                 item_uid_max = new_item_uid_max
 
     def get_level_count(self, level) -> int:
@@ -648,7 +650,7 @@ class BudUnit:
                 self.del_item_obj(adoptee_way)
 
             if bundling:
-                self.edit_item_attr(way=kid_way, mass=mass_sum)
+                self.edit_item_attr(kid_way, mass=mass_sum)
 
         if create_missing_items:
             self._create_missing_items(way=kid_way)
@@ -764,7 +766,7 @@ class BudUnit:
 
     def edit_reason(
         self,
-        way: WayUnit,
+        item_way: WayUnit,
         reason_base: WayUnit = None,
         reason_premise: WayUnit = None,
         reason_premise_open: float = None,
@@ -772,7 +774,7 @@ class BudUnit:
         reason_premise_divisor: int = None,
     ):
         self.edit_item_attr(
-            way=way,
+            item_way=item_way,
             reason_base=reason_base,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
@@ -782,7 +784,7 @@ class BudUnit:
 
     def edit_item_attr(
         self,
-        way: WayUnit,
+        item_way: WayUnit,
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
@@ -854,7 +856,7 @@ class BudUnit:
         )
         if reason_premise is not None:
             self._set_itemattrholder_premise_ranges(x_itemattrholder)
-        x_item = self.get_item_obj(way)
+        x_item = self.get_item_obj(item_way)
         x_item._set_attrs_to_itemunit(item_attr=x_itemattrholder)
 
     def get_agenda_dict(

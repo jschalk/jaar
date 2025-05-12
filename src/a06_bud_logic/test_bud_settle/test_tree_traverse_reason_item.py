@@ -325,7 +325,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     wed_way = sue_bud.make_way(week_way, wed_str)
 
     # WHEN
-    sue_bud.edit_item_attr(way=casa_way, reason_base=week_way, reason_premise=wed_way)
+    sue_bud.edit_item_attr(casa_way, reason_base=week_way, reason_premise=wed_way)
 
     # THEN
     casa_item1 = sue_bud.get_item_obj(casa_way)
@@ -348,7 +348,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_base=week_way,
         reason_premise=wed_way,
         reason_premise_divisor=divisor_x,
@@ -374,7 +374,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     thu_str = "Thursday"
     thu_way = sue_bud.make_way(week_way, thu_str)
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_base=week_way,
         reason_premise=thu_way,
         reason_premise_divisor=divisor_x,
@@ -400,7 +400,7 @@ def test_BudUnit_ReasonUnits_set_premiseItemWithDenomSetsPremiseDivision():
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_base=time_way,
         reason_premise=week_way,
         reason_premise_open=2,
@@ -430,7 +430,7 @@ def test_BudUnit_ReasonUnits_set_premiseItemWithBeginCloseSetsPremiseOpen_Nigh()
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_base=time_way,
         reason_premise=rus_war_way,
         reason_premise_open=None,
@@ -453,12 +453,10 @@ def test_BudUnit_ReasonUnits_edit_item_attr_CorrectlyDeletes_ReasonUnits_And_Pre
     weekday_way = sue_bud.make_l1_way("weekdays")
     wed_way = sue_bud.make_way(weekday_way, "Wednesday")
 
-    sue_bud.edit_item_attr(
-        way=casa_way, reason_base=weekday_way, reason_premise=wed_way
-    )
+    sue_bud.edit_item_attr(casa_way, reason_base=weekday_way, reason_premise=wed_way)
     thu_way = sue_bud.make_way(weekday_way, "Thursday")
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_base=weekday_way,
         reason_premise=thu_way,
     )
@@ -467,7 +465,7 @@ def test_BudUnit_ReasonUnits_edit_item_attr_CorrectlyDeletes_ReasonUnits_And_Pre
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_del_premise_base=weekday_way,
         reason_del_premise_need=thu_way,
     )
@@ -477,7 +475,7 @@ def test_BudUnit_ReasonUnits_edit_item_attr_CorrectlyDeletes_ReasonUnits_And_Pre
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_del_premise_base=weekday_way,
         reason_del_premise_need=wed_way,
     )
@@ -520,7 +518,7 @@ def test_BudUnit_edit_item_attr_budIsAbleToEdit_base_item_active_requisite_AnyIt
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=casa_way,
         reason_base_item_active_requisite=True,
     )
@@ -534,7 +532,7 @@ def test_BudUnit_edit_item_attr_budIsAbleToEdit_base_item_active_requisite_AnyIt
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=casa_way,
         reason_base_item_active_requisite=False,
     )
@@ -548,7 +546,7 @@ def test_BudUnit_edit_item_attr_budIsAbleToEdit_base_item_active_requisite_AnyIt
 
     # WHEN
     sue_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=casa_way,
         reason_base_item_active_requisite="Set to Ignore",
     )
@@ -580,7 +578,7 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     # 4.1 ReasonUnit: base=weekdays_way, need=thu_way
     # 4.2 .active = False
     sue_bud.edit_item_attr(
-        way=casa_way,
+        casa_way,
         reason_base=weekdays_way,
         reason_premise=thu_way,
     )
@@ -595,7 +593,7 @@ def test_BudUnit_ReasonUnits_ItemUnit_active_InfluencesReasonUnitStatus():
     run_way = sue_bud.make_l1_way(run_str)
     sue_bud.set_item(itemunit_shop(run_str), sue_bud.fisc_tag)
     sue_bud.edit_item_attr(
-        way=run_way,
+        run_way,
         reason_base=casa_way,
         reason_base_item_active_requisite=True,
     )
