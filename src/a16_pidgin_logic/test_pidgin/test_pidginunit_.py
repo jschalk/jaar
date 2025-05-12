@@ -96,7 +96,6 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("group_label") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("healer_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("hour_tag") == type_TagUnit_str()
-    assert pidgin_args_class_types.get("idea_tag") == type_TagUnit_str()
     assert pidgin_args_class_types.get("mass") == "int"
     assert pidgin_args_class_types.get("max_tree_traverse") == "int"
     assert pidgin_args_class_types.get("month_tag") == type_TagUnit_str()
@@ -141,7 +140,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
         respect_bit_str(),
     }
     assert atom_args.union(fisc_args) != pidgin_args
-    assert atom_args.union(fisc_args).union({"face_name", "idea_tag"}) == pidgin_args
+    assert atom_args.union(fisc_args).union({"face_name"}) == pidgin_args
     assert check_class_types_are_correct()
     # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -198,7 +197,7 @@ def test_pidginable_atom_args_ReturnsObj():
     }
     assert pidginable_atom_args() == static_pidginable_atom_args
 
-    assert len(pidginable_atom_args()) == 18
+    assert len(pidginable_atom_args()) == 17
     assert pidginable_atom_args() == {
         acct_name_str(),
         awardee_label_str(),
@@ -210,7 +209,6 @@ def test_pidginable_atom_args_ReturnsObj():
         group_label_str(),
         healer_name_str(),
         hour_tag_str(),
-        idea_tag_str(),
         month_tag_str(),
         need_str(),
         owner_name_str(),

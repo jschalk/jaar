@@ -98,7 +98,6 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "group_label": "LabelUnit",
         "healer_name": "NameUnit",
         "hour_tag": "TagUnit",
-        "idea_tag": "TagUnit",
         "mass": "int",
         "max_tree_traverse": "int",
         "month_tag": "TagUnit",
