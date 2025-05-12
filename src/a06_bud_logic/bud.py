@@ -51,7 +51,7 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a04_reason_logic.reason_item import (
+from src.a04_reason_logic.reason_idea import (
     FactUnit,
     FactUnit,
     ReasonUnit,
@@ -59,15 +59,15 @@ from src.a04_reason_logic.reason_item import (
     factunit_shop,
 )
 from src.a04_reason_logic.reason_team import TeamUnit
-from src.a05_item_logic.healer import HealerLink
-from src.a05_item_logic.item import (
-    ItemUnit,
-    itemunit_shop,
-    itemattrholder_shop,
-    ItemAttrHolder,
-    get_obj_from_item_dict,
+from src.a05_idea_logic.healer import HealerLink
+from src.a05_idea_logic.idea import (
+    IdeaUnit,
+    ideaunit_shop,
+    ideaattrholder_shop,
+    IdeaAttrHolder,
+    get_obj_from_idea_dict,
 )
-from src.a05_item_logic.origin import (
+from src.a05_idea_logic.origin import (
     originunit_get_from_dict,
     originunit_shop,
     OriginUnit,
@@ -123,7 +123,7 @@ class BudUnit:
     fisc_tag: FiscTag = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
-    itemroot: ItemUnit = None
+    idearoot: IdeaUnit = None
     tally: float = None
     fund_pool: FundNum = None
     fund_coin: FundCoin = None
@@ -136,9 +136,9 @@ class BudUnit:
     last_pack_id: int = None
     originunit: OriginUnit = None  # In plan buds this shows source
     # settle_bud Calculated field begin
-    _item_dict: dict[WayUnit, ItemUnit] = None
-    _keep_dict: dict[WayUnit, ItemUnit] = None
-    _healers_dict: dict[HealerName, dict[WayUnit, ItemUnit]] = None
+    _idea_dict: dict[WayUnit, IdeaUnit] = None
+    _keep_dict: dict[WayUnit, IdeaUnit] = None
+    _healers_dict: dict[HealerName, dict[WayUnit, IdeaUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _keeps_justified: bool = None
@@ -201,23 +201,23 @@ class BudUnit:
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
         if self.bridge != new_bridge:
-            for x_item_way in self._item_dict.keys():
-                if is_string_in_way(new_bridge, x_item_way):
-                    exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an item item_tag '{x_item_way}'"
+            for x_idea_way in self._idea_dict.keys():
+                if is_string_in_way(new_bridge, x_idea_way):
+                    exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an idea idea_tag '{x_idea_way}'"
                     raise NewBridgeException(exception_str)
 
-            # modify all way attributes in itemunits
+            # modify all way attributes in ideaunits
             self.bridge = default_bridge_if_None(new_bridge)
-            for x_item in self._item_dict.values():
-                x_item.set_bridge(self.bridge)
+            for x_idea in self._idea_dict.values():
+                x_idea.set_bridge(self.bridge)
 
     def set_fisc_tag(self, fisc_tag: str):
         old_fisc_tag = copy_deepcopy(self.fisc_tag)
         self.settle_bud()
-        for item_obj in self._item_dict.values():
-            item_obj.fisc_tag = fisc_tag
+        for idea_obj in self._idea_dict.values():
+            idea_obj.fisc_tag = fisc_tag
         self.fisc_tag = fisc_tag
-        self.edit_item_tag(old_way=to_way(old_fisc_tag), new_item_tag=self.fisc_tag)
+        self.edit_idea_tag(old_way=to_way(old_fisc_tag), new_idea_tag=self.fisc_tag)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -241,8 +241,8 @@ class BudUnit:
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
             x_way = to_evaluate_list.pop()
-            x_item = self.get_item_obj(x_way)
-            for reasonunit_obj in x_item.reasonunits.values():
+            x_idea = self.get_idea_obj(x_way)
+            for reasonunit_obj in x_idea.reasonunits.values():
                 reason_base = reasonunit_obj.base
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -274,8 +274,8 @@ class BudUnit:
             to_evaluate_hx_dict[to_evaluate_way] = way_type
 
             if way_type == "reasonunit_base":
-                ru_base_item = self.get_item_obj(to_evaluate_way)
-                for descendant_way in ru_base_item.get_descendant_ways_from_kids():
+                ru_base_idea = self.get_idea_obj(to_evaluate_way)
+                for descendant_way in ru_base_idea.get_descendant_ways_from_kids():
                     self._evaluate_relevancy(
                         to_evaluate_list=to_evaluate_list,
                         to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -283,10 +283,10 @@ class BudUnit:
                         way_type="reasonunit_descendant",
                     )
 
-    def all_items_relevant_to_pledge_item(self, way: WayUnit) -> bool:
-        pledge_item_assoc_set = set(self._get_relevant_ways({way}))
-        all_items_set = set(self.get_item_tree_ordered_way_list())
-        return all_items_set == all_items_set.intersection(pledge_item_assoc_set)
+    def all_ideas_relevant_to_pledge_idea(self, way: WayUnit) -> bool:
+        pledge_idea_assoc_set = set(self._get_relevant_ways({way}))
+        all_ideas_set = set(self.get_idea_tree_ordered_way_list())
+        return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
 
     def get_awardlinks_metrics(self) -> dict[GroupLabel, AwardLink]:
         tree_metrics = self.get_tree_metrics()
@@ -410,22 +410,22 @@ class BudUnit:
         all_group_labels = set(self._groupunits.keys())
         return all_group_labels.difference(x_acctunit_group_labels)
 
-    def _is_item_rangeroot(self, item_way: WayUnit) -> bool:
-        if self.fisc_tag == item_way:
+    def _is_idea_rangeroot(self, idea_way: WayUnit) -> bool:
+        if self.fisc_tag == idea_way:
             raise InvalidBudException(
-                "its difficult to foresee a scenario where itemroot is rangeroot"
+                "its difficult to foresee a scenario where idearoot is rangeroot"
             )
-        parent_way = get_parent_way(item_way)
-        parent_item = self.get_item_obj(parent_way)
-        return not parent_item.is_math()
+        parent_way = get_parent_way(idea_way)
+        parent_idea = self.get_idea_obj(parent_way)
+        return not parent_idea.is_math()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
             fact
-            for fact in self.itemroot.factunits.values()
+            for fact in self.idearoot.factunits.values()
             if fact.fopen is not None
             and fact.fnigh is not None
-            and self._is_item_rangeroot(item_way=fact.fbase)
+            and self._is_idea_rangeroot(idea_way=fact.fbase)
         ]
 
     def add_fact(
@@ -434,38 +434,38 @@ class BudUnit:
         fneed: WayUnit = None,
         fopen: float = None,
         fnigh: float = None,
-        create_missing_items: bool = None,
+        create_missing_ideas: bool = None,
     ):
         fneed = fbase if fneed is None else fneed
-        if create_missing_items:
-            self._create_itemkid_if_empty(way=fbase)
-            self._create_itemkid_if_empty(way=fneed)
+        if create_missing_ideas:
+            self._create_ideakid_if_empty(way=fbase)
+            self._create_ideakid_if_empty(way=fneed)
 
-        fact_base_item = self.get_item_obj(fbase)
-        x_itemroot = self.get_item_obj(to_way(self.fisc_tag))
+        fact_base_idea = self.get_idea_obj(fbase)
+        x_idearoot = self.get_idea_obj(to_way(self.fisc_tag))
         x_fopen = None
         if fnigh is not None and fopen is None:
-            x_fopen = x_itemroot.factunits.get(fbase).fopen
+            x_fopen = x_idearoot.factunits.get(fbase).fopen
         else:
             x_fopen = fopen
         x_fnigh = None
         if fopen is not None and fnigh is None:
-            x_fnigh = x_itemroot.factunits.get(fbase).fnigh
+            x_fnigh = x_idearoot.factunits.get(fbase).fnigh
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(
             fbase=fbase, fneed=fneed, fopen=x_fopen, fnigh=x_fnigh
         )
 
-        if fact_base_item.is_math() is False:
-            x_itemroot.set_factunit(x_factunit)
-        # if fact's item no range or is a "range-root" then allow fact to be set
-        elif fact_base_item.is_math() and self._is_item_rangeroot(fbase) is False:
+        if fact_base_idea.is_math() is False:
+            x_idearoot.set_factunit(x_factunit)
+        # if fact's idea no range or is a "range-root" then allow fact to be set
+        elif fact_base_idea.is_math() and self._is_idea_rangeroot(fbase) is False:
             raise InvalidBudException(
                 f"Non range-root fact:{fbase} can only be set by range-root fact"
             )
-        elif fact_base_item.is_math() and self._is_item_rangeroot(fbase):
-            # WHEN item is "range-root" identify any reason.bases that are descendants
+        elif fact_base_idea.is_math() and self._is_idea_rangeroot(fbase):
+            # WHEN idea is "range-root" identify any reason.bases that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
@@ -475,76 +475,76 @@ class BudUnit:
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
             # that has that base.
-            x_itemroot.set_factunit(x_factunit)
+            x_idearoot.set_factunit(x_factunit)
 
     def get_fact(self, fbase: WayUnit) -> FactUnit:
-        return self.itemroot.factunits.get(fbase)
+        return self.idearoot.factunits.get(fbase)
 
     def del_fact(self, fbase: WayUnit):
-        self.itemroot.del_factunit(fbase)
+        self.idearoot.del_factunit(fbase)
 
-    def get_item_dict(self, problem: bool = None) -> dict[WayUnit, ItemUnit]:
+    def get_idea_dict(self, problem: bool = None) -> dict[WayUnit, IdeaUnit]:
         self.settle_bud()
         if not problem:
-            return self._item_dict
+            return self._idea_dict
         if self._keeps_justified is False:
             exception_str = f"Cannot return problem set because _keeps_justified={self._keeps_justified}."
             raise Exception_keeps_justified(exception_str)
 
-        x_items = self._item_dict.values()
+        x_ideas = self._idea_dict.values()
         return {
-            x_item.get_item_way(): x_item for x_item in x_items if x_item.problem_bool
+            x_idea.get_idea_way(): x_idea for x_idea in x_ideas if x_idea.problem_bool
         }
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_tag(
-            level=self.itemroot._level,
-            reasons=self.itemroot.reasonunits,
-            awardlinks=self.itemroot.awardlinks,
-            uid=self.itemroot._uid,
-            pledge=self.itemroot.pledge,
-            item_way=self.itemroot.get_item_way(),
+            level=self.idearoot._level,
+            reasons=self.idearoot.reasonunits,
+            awardlinks=self.idearoot.awardlinks,
+            uid=self.idearoot._uid,
+            pledge=self.idearoot.pledge,
+            idea_way=self.idearoot.get_idea_way(),
         )
 
-        x_item_list = [self.itemroot]
-        while x_item_list != []:
-            parent_item = x_item_list.pop()
-            for item_kid in parent_item._kids.values():
+        x_idea_list = [self.idearoot]
+        while x_idea_list != []:
+            parent_idea = x_idea_list.pop()
+            for idea_kid in parent_idea._kids.values():
                 self._eval_tree_metrics(
-                    parent_item, item_kid, tree_metrics, x_item_list
+                    parent_idea, idea_kid, tree_metrics, x_idea_list
                 )
         return tree_metrics
 
-    def _eval_tree_metrics(self, parent_item, item_kid, tree_metrics, x_item_list):
-        item_kid._level = parent_item._level + 1
+    def _eval_tree_metrics(self, parent_idea, idea_kid, tree_metrics, x_idea_list):
+        idea_kid._level = parent_idea._level + 1
         tree_metrics.evaluate_tag(
-            level=item_kid._level,
-            reasons=item_kid.reasonunits,
-            awardlinks=item_kid.awardlinks,
-            uid=item_kid._uid,
-            pledge=item_kid.pledge,
-            item_way=item_kid.get_item_way(),
+            level=idea_kid._level,
+            reasons=idea_kid.reasonunits,
+            awardlinks=idea_kid.awardlinks,
+            uid=idea_kid._uid,
+            pledge=idea_kid.pledge,
+            idea_way=idea_kid.get_idea_way(),
         )
-        x_item_list.append(item_kid)
+        x_idea_list.append(idea_kid)
 
-    def get_item_uid_max(self) -> int:
+    def get_idea_uid_max(self) -> int:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.uid_max
 
-    def set_all_item_uids_unique(self):
+    def set_all_idea_uids_unique(self):
         tree_metrics = self.get_tree_metrics()
-        item_uid_max = tree_metrics.uid_max
-        item_uid_dict = tree_metrics.uid_dict
+        idea_uid_max = tree_metrics.uid_max
+        idea_uid_dict = tree_metrics.uid_dict
 
-        for x_item in self.get_item_dict().values():
-            if x_item._uid is None or item_uid_dict.get(x_item._uid) > 1:
-                new_item_uid_max = item_uid_max + 1
-                self.edit_item_attr(
-                    item_way=x_item.get_item_way(), uid=new_item_uid_max
+        for x_idea in self.get_idea_dict().values():
+            if x_idea._uid is None or idea_uid_dict.get(x_idea._uid) > 1:
+                new_idea_uid_max = idea_uid_max + 1
+                self.edit_idea_attr(
+                    idea_way=x_idea.get_idea_way(), uid=new_idea_uid_max
                 )
-                item_uid_max = new_item_uid_max
+                idea_uid_max = new_idea_uid_max
 
     def get_level_count(self, level) -> int:
         tree_metrics = self.get_tree_metrics()
@@ -564,217 +564,217 @@ class BudUnit:
         missing_bases = {}
         for base, base_count in reason_bases.items():
             try:
-                self.itemroot.factunits[base]
+                self.idearoot.factunits[base]
             except KeyError:
                 missing_bases[base] = base_count
         return missing_bases
 
-    def add_item(
-        self, item_way: WayUnit, mass: float = None, pledge: bool = None
-    ) -> ItemUnit:
-        x_item_tag = get_terminus_tag(item_way, self.bridge)
-        x_parent_way = get_parent_way(item_way, self.bridge)
-        x_itemunit = itemunit_shop(x_item_tag, mass=mass)
+    def add_idea(
+        self, idea_way: WayUnit, mass: float = None, pledge: bool = None
+    ) -> IdeaUnit:
+        x_idea_tag = get_terminus_tag(idea_way, self.bridge)
+        x_parent_way = get_parent_way(idea_way, self.bridge)
+        x_ideaunit = ideaunit_shop(x_idea_tag, mass=mass)
         if pledge:
-            x_itemunit.pledge = True
-        self.set_item(x_itemunit, x_parent_way)
-        return x_itemunit
+            x_ideaunit.pledge = True
+        self.set_idea(x_ideaunit, x_parent_way)
+        return x_ideaunit
 
-    def set_l1_item(
+    def set_l1_idea(
         self,
-        item_kid: ItemUnit,
-        create_missing_items: bool = None,
+        idea_kid: IdeaUnit,
+        create_missing_ideas: bool = None,
         get_rid_of_missing_awardlinks_awardee_labels: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        self.set_item(
-            item_kid=item_kid,
+        self.set_idea(
+            idea_kid=idea_kid,
             parent_way=self.fisc_tag,
-            create_missing_items=create_missing_items,
+            create_missing_ideas=create_missing_ideas,
             get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
         )
 
-    def set_item(
+    def set_idea(
         self,
-        item_kid: ItemUnit,
+        idea_kid: IdeaUnit,
         parent_way: WayUnit,
         get_rid_of_missing_awardlinks_awardee_labels: bool = None,
-        create_missing_items: bool = None,
+        create_missing_ideas: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
         parent_way = to_way(parent_way, self.bridge)
-        if TagUnit(item_kid.item_tag).is_tag(self.bridge) is False:
-            x_str = f"set_item failed because '{item_kid.item_tag}' is not a TagUnit."
+        if TagUnit(idea_kid.idea_tag).is_tag(self.bridge) is False:
+            x_str = f"set_idea failed because '{idea_kid.idea_tag}' is not a TagUnit."
             raise InvalidBudException(x_str)
 
         x_root_tag = get_root_tag_from_way(parent_way, self.bridge)
-        if self.itemroot.item_tag != x_root_tag:
-            exception_str = f"set_item failed because parent_way '{parent_way}' has an invalid root tag. Should be {self.itemroot.item_tag}."
+        if self.idearoot.idea_tag != x_root_tag:
+            exception_str = f"set_idea failed because parent_way '{parent_way}' has an invalid root tag. Should be {self.idearoot.idea_tag}."
             raise InvalidBudException(exception_str)
 
-        item_kid.bridge = self.bridge
-        if item_kid.fisc_tag != self.fisc_tag:
-            item_kid.fisc_tag = self.fisc_tag
-        if item_kid.fund_coin != self.fund_coin:
-            item_kid.fund_coin = self.fund_coin
+        idea_kid.bridge = self.bridge
+        if idea_kid.fisc_tag != self.fisc_tag:
+            idea_kid.fisc_tag = self.fisc_tag
+        if idea_kid.fund_coin != self.fund_coin:
+            idea_kid.fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_labels:
-            item_kid = self._get_filtered_awardlinks_item(item_kid)
-        item_kid.set_parent_way(parent_way=parent_way)
+            idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
+        idea_kid.set_parent_way(parent_way=parent_way)
 
-        # create any missing items
-        if not create_missing_ancestors and self.item_exists(parent_way) is False:
-            x_str = f"set_item failed because '{parent_way}' item does not exist."
+        # create any missing ideas
+        if not create_missing_ancestors and self.idea_exists(parent_way) is False:
+            x_str = f"set_idea failed because '{parent_way}' idea does not exist."
             raise InvalidBudException(x_str)
-        parent_way_item = self.get_item_obj(parent_way, create_missing_ancestors)
-        if parent_way_item.root is False:
-            parent_way_item
-        parent_way_item.add_kid(item_kid)
+        parent_way_idea = self.get_idea_obj(parent_way, create_missing_ancestors)
+        if parent_way_idea.root is False:
+            parent_way_idea
+        parent_way_idea.add_kid(idea_kid)
 
-        kid_way = self.make_way(parent_way, item_kid.item_tag)
+        kid_way = self.make_way(parent_way, idea_kid.idea_tag)
         if adoptees is not None:
             mass_sum = 0
-            for adoptee_item_tag in adoptees:
-                adoptee_way = self.make_way(parent_way, adoptee_item_tag)
-                adoptee_item = self.get_item_obj(adoptee_way)
-                mass_sum += adoptee_item.mass
-                new_adoptee_parent_way = self.make_way(kid_way, adoptee_item_tag)
-                self.set_item(adoptee_item, new_adoptee_parent_way)
-                self.edit_item_attr(new_adoptee_parent_way, mass=adoptee_item.mass)
-                self.del_item_obj(adoptee_way)
+            for adoptee_idea_tag in adoptees:
+                adoptee_way = self.make_way(parent_way, adoptee_idea_tag)
+                adoptee_idea = self.get_idea_obj(adoptee_way)
+                mass_sum += adoptee_idea.mass
+                new_adoptee_parent_way = self.make_way(kid_way, adoptee_idea_tag)
+                self.set_idea(adoptee_idea, new_adoptee_parent_way)
+                self.edit_idea_attr(new_adoptee_parent_way, mass=adoptee_idea.mass)
+                self.del_idea_obj(adoptee_way)
 
             if bundling:
-                self.edit_item_attr(kid_way, mass=mass_sum)
+                self.edit_idea_attr(kid_way, mass=mass_sum)
 
-        if create_missing_items:
-            self._create_missing_items(way=kid_way)
+        if create_missing_ideas:
+            self._create_missing_ideas(way=kid_way)
 
-    def _get_filtered_awardlinks_item(self, x_item: ItemUnit) -> ItemUnit:
+    def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
         _awardlinks_to_delete = [
             _awardlink_awardee_label
-            for _awardlink_awardee_label in x_item.awardlinks.keys()
+            for _awardlink_awardee_label in x_idea.awardlinks.keys()
             if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_label)
             is None
         ]
         for _awardlink_awardee_label in _awardlinks_to_delete:
-            x_item.awardlinks.pop(_awardlink_awardee_label)
-        if x_item.teamunit is not None:
+            x_idea.awardlinks.pop(_awardlink_awardee_label)
+        if x_idea.teamunit is not None:
             _teamlinks_to_delete = [
                 _teamlink_team_label
-                for _teamlink_team_label in x_item.teamunit._teamlinks
+                for _teamlink_team_label in x_idea.teamunit._teamlinks
                 if self.get_acctunit_group_labels_dict().get(_teamlink_team_label)
                 is None
             ]
             for _teamlink_team_label in _teamlinks_to_delete:
-                x_item.teamunit.del_teamlink(_teamlink_team_label)
-        return x_item
+                x_idea.teamunit.del_teamlink(_teamlink_team_label)
+        return x_idea
 
-    def _create_missing_items(self, way):
-        self._set_item_dict()
-        posted_item = self.get_item_obj(way)
+    def _create_missing_ideas(self, way):
+        self._set_idea_dict()
+        posted_idea = self.get_idea_obj(way)
 
-        for reason_x in posted_item.reasonunits.values():
-            self._create_itemkid_if_empty(way=reason_x.base)
+        for reason_x in posted_idea.reasonunits.values():
+            self._create_ideakid_if_empty(way=reason_x.base)
             for premise_x in reason_x.premises.values():
-                self._create_itemkid_if_empty(way=premise_x.need)
+                self._create_ideakid_if_empty(way=premise_x.need)
 
-    def _create_itemkid_if_empty(self, way: WayUnit):
-        if self.item_exists(way) is False:
-            self.add_item(way)
+    def _create_ideakid_if_empty(self, way: WayUnit):
+        if self.idea_exists(way) is False:
+            self.add_idea(way)
 
-    def del_item_obj(self, way: WayUnit, del_children: bool = True):
-        if way == self.itemroot.get_item_way():
-            raise InvalidBudException("Itemroot cannot be deleted")
+    def del_idea_obj(self, way: WayUnit, del_children: bool = True):
+        if way == self.idearoot.get_idea_way():
+            raise InvalidBudException("Idearoot cannot be deleted")
         parent_way = get_parent_way(way)
-        if self.item_exists(way):
+        if self.idea_exists(way):
             if not del_children:
-                self._shift_item_kids(x_way=way)
-            parent_item = self.get_item_obj(parent_way)
-            parent_item.del_kid(get_terminus_tag(way, self.bridge))
+                self._shift_idea_kids(x_way=way)
+            parent_idea = self.get_idea_obj(parent_way)
+            parent_idea.del_kid(get_terminus_tag(way, self.bridge))
         self.settle_bud()
 
-    def _shift_item_kids(self, x_way: WayUnit):
+    def _shift_idea_kids(self, x_way: WayUnit):
         parent_way = get_parent_way(x_way)
-        d_temp_item = self.get_item_obj(x_way)
-        for kid in d_temp_item._kids.values():
-            self.set_item(kid, parent_way=parent_way)
+        d_temp_idea = self.get_idea_obj(x_way)
+        for kid in d_temp_idea._kids.values():
+            self.set_idea(kid, parent_way=parent_way)
 
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_item_tag(self, old_way: WayUnit, new_item_tag: TagUnit):
-        if self.bridge in new_item_tag:
-            exception_str = f"Cannot modify '{old_way}' because new_item_tag {new_item_tag} contains bridge {self.bridge}"
+    def edit_idea_tag(self, old_way: WayUnit, new_idea_tag: TagUnit):
+        if self.bridge in new_idea_tag:
+            exception_str = f"Cannot modify '{old_way}' because new_idea_tag {new_idea_tag} contains bridge {self.bridge}"
             raise InvalidTagException(exception_str)
-        if self.item_exists(old_way) is False:
-            raise InvalidBudException(f"Item {old_way=} does not exist")
+        if self.idea_exists(old_way) is False:
+            raise InvalidBudException(f"Idea {old_way=} does not exist")
 
         parent_way = get_parent_way(way=old_way)
         new_way = (
-            self.make_way(new_item_tag)
+            self.make_way(new_idea_tag)
             if parent_way == ""
-            else self.make_way(parent_way, new_item_tag)
+            else self.make_way(parent_way, new_idea_tag)
         )
         if old_way != new_way:
             if parent_way == "":
-                self.itemroot.set_item_tag(new_item_tag)
+                self.idearoot.set_idea_tag(new_idea_tag)
             else:
-                self._non_root_item_tag_edit(old_way, new_item_tag, parent_way)
-            self._itemroot_find_replace_way(old_way=old_way, new_way=new_way)
+                self._non_root_idea_tag_edit(old_way, new_idea_tag, parent_way)
+            self._idearoot_find_replace_way(old_way=old_way, new_way=new_way)
 
-    def _non_root_item_tag_edit(
-        self, old_way: WayUnit, new_item_tag: TagUnit, parent_way: WayUnit
+    def _non_root_idea_tag_edit(
+        self, old_way: WayUnit, new_idea_tag: TagUnit, parent_way: WayUnit
     ):
-        x_item = self.get_item_obj(old_way)
-        x_item.set_item_tag(new_item_tag)
-        x_item.parent_way = parent_way
-        item_parent = self.get_item_obj(get_parent_way(old_way))
-        item_parent._kids.pop(get_terminus_tag(old_way, self.bridge))
-        item_parent._kids[x_item.item_tag] = x_item
+        x_idea = self.get_idea_obj(old_way)
+        x_idea.set_idea_tag(new_idea_tag)
+        x_idea.parent_way = parent_way
+        idea_parent = self.get_idea_obj(get_parent_way(old_way))
+        idea_parent._kids.pop(get_terminus_tag(old_way, self.bridge))
+        idea_parent._kids[x_idea.idea_tag] = x_idea
 
-    def _itemroot_find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
-        self.itemroot.find_replace_way(old_way=old_way, new_way=new_way)
+    def _idearoot_find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+        self.idearoot.find_replace_way(old_way=old_way, new_way=new_way)
 
-        item_iter_list = [self.itemroot]
-        while item_iter_list != []:
-            listed_item = item_iter_list.pop()
-            # add all item_children in item list
-            if listed_item._kids is not None:
-                for item_kid in listed_item._kids.values():
-                    item_iter_list.append(item_kid)
-                    if is_sub_way(item_kid.parent_way, sub_way=old_way):
-                        item_kid.parent_way = rebuild_way(
-                            subj_way=item_kid.parent_way,
+        idea_iter_list = [self.idearoot]
+        while idea_iter_list != []:
+            listed_idea = idea_iter_list.pop()
+            # add all idea_children in idea list
+            if listed_idea._kids is not None:
+                for idea_kid in listed_idea._kids.values():
+                    idea_iter_list.append(idea_kid)
+                    if is_sub_way(idea_kid.parent_way, sub_way=old_way):
+                        idea_kid.parent_way = rebuild_way(
+                            subj_way=idea_kid.parent_way,
                             old_way=old_way,
                             new_way=new_way,
                         )
-                    item_kid.find_replace_way(old_way=old_way, new_way=new_way)
+                    idea_kid.find_replace_way(old_way=old_way, new_way=new_way)
 
-    def _set_itemattrholder_premise_ranges(self, x_itemattrholder: ItemAttrHolder):
-        premise_item = self.get_item_obj(x_itemattrholder.reason_premise)
-        x_itemattrholder.set_premise_range_attributes_influenced_by_premise_item(
-            premise_open=premise_item.begin,
-            premise_nigh=premise_item.close,
-            premise_denom=premise_item.denom,
+    def _set_ideaattrholder_premise_ranges(self, x_ideaattrholder: IdeaAttrHolder):
+        premise_idea = self.get_idea_obj(x_ideaattrholder.reason_premise)
+        x_ideaattrholder.set_premise_range_attributes_influenced_by_premise_idea(
+            premise_open=premise_idea.begin,
+            premise_nigh=premise_idea.close,
+            premise_denom=premise_idea.denom,
         )
 
     def edit_reason(
         self,
-        item_way: WayUnit,
+        idea_way: WayUnit,
         reason_base: WayUnit = None,
         reason_premise: WayUnit = None,
         reason_premise_open: float = None,
         reason_premise_nigh: float = None,
         reason_premise_divisor: int = None,
     ):
-        self.edit_item_attr(
-            item_way=item_way,
+        self.edit_idea_attr(
+            idea_way=idea_way,
             reason_base=reason_base,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
@@ -782,9 +782,9 @@ class BudUnit:
             reason_premise_divisor=reason_premise_divisor,
         )
 
-    def edit_item_attr(
+    def edit_idea_attr(
         self,
-        item_way: WayUnit,
+        idea_way: WayUnit,
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
@@ -795,7 +795,7 @@ class BudUnit:
         reason_premise_divisor: int = None,
         reason_del_premise_base: WayUnit = None,
         reason_del_premise_need: WayUnit = None,
-        reason_base_item_active_requisite: str = None,
+        reason_base_idea_active_requisite: str = None,
         teamunit: TeamUnit = None,
         healerlink: HealerLink = None,
         begin: float = None,
@@ -819,10 +819,10 @@ class BudUnit:
         if healerlink is not None:
             for x_healer_name in healerlink._healer_names:
                 if self.get_acctunit_group_labels_dict().get(x_healer_name) is None:
-                    exception_str = f"Item cannot edit healerlink because group_label '{x_healer_name}' does not exist as group in Bud"
+                    exception_str = f"Idea cannot edit healerlink because group_label '{x_healer_name}' does not exist as group in Bud"
                     raise healerlink_group_label_Exception(exception_str)
 
-        x_itemattrholder = itemattrholder_shop(
+        x_ideaattrholder = ideaattrholder_shop(
             mass=mass,
             uid=uid,
             reason=reason,
@@ -833,7 +833,7 @@ class BudUnit:
             reason_premise_divisor=reason_premise_divisor,
             reason_del_premise_base=reason_del_premise_base,
             reason_del_premise_need=reason_del_premise_need,
-            reason_base_item_active_requisite=reason_base_item_active_requisite,
+            reason_base_idea_active_requisite=reason_base_idea_active_requisite,
             teamunit=teamunit,
             healerlink=healerlink,
             begin=begin,
@@ -855,28 +855,28 @@ class BudUnit:
             problem_bool=problem_bool,
         )
         if reason_premise is not None:
-            self._set_itemattrholder_premise_ranges(x_itemattrholder)
-        x_item = self.get_item_obj(item_way)
-        x_item._set_attrs_to_itemunit(item_attr=x_itemattrholder)
+            self._set_ideaattrholder_premise_ranges(x_ideaattrholder)
+        x_idea = self.get_idea_obj(idea_way)
+        x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrholder)
 
     def get_agenda_dict(
         self, necessary_base: WayUnit = None
-    ) -> dict[WayUnit, ItemUnit]:
+    ) -> dict[WayUnit, IdeaUnit]:
         self.settle_bud()
         return {
-            x_item.get_item_way(): x_item
-            for x_item in self._item_dict.values()
-            if x_item.is_agenda_item(necessary_base)
+            x_idea.get_idea_way(): x_idea
+            for x_idea in self._idea_dict.values()
+            if x_idea.is_agenda_idea(necessary_base)
         }
 
-    def get_all_pledges(self) -> dict[WayUnit, ItemUnit]:
+    def get_all_pledges(self) -> dict[WayUnit, IdeaUnit]:
         self.settle_bud()
-        all_items = self._item_dict.values()
-        return {x_item.get_item_way(): x_item for x_item in all_items if x_item.pledge}
+        all_ideas = self._idea_dict.values()
+        return {x_idea.get_idea_way(): x_idea for x_idea in all_ideas if x_idea.pledge}
 
     def set_agenda_task_complete(self, task_way: WayUnit, base: WayUnit):
-        pledge_item = self.get_item_obj(task_way)
-        pledge_item.set_factunit_to_complete(self.itemroot.factunits[base])
+        pledge_idea = self.get_idea_obj(task_way)
+        pledge_idea.set_factunit_to_complete(self.idearoot.factunits[base])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -897,10 +897,10 @@ class BudUnit:
     def get_acctunits_debtit_belief_sum(self) -> float:
         return sum(acctunit.get_debtit_belief() for acctunit in self.accts.values())
 
-    def _add_to_acctunits_fund_give_take(self, item_fund_share: float):
+    def _add_to_acctunits_fund_give_take(self, idea_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, item_fund_share, self.fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self.fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self.fund_coin)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
@@ -912,10 +912,10 @@ class BudUnit:
             if not self._reason_bases:
                 self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
 
-    def _add_to_acctunits_fund_agenda_give_take(self, item_fund_share: float):
+    def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, item_fund_share, self.fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, item_fund_share, self.fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, idea_fund_share, self.fund_coin)
+        fund_take_allot = allot_scale(debtor_ledger, idea_fund_share, self.fund_coin)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
         for x_acct_name, acct_fund_take in fund_take_allot.items():
@@ -937,21 +937,21 @@ class BudUnit:
             )
 
     def _allot_fund_bud_agenda(self):
-        for item in self._item_dict.values():
-            # If there are no awardlines associated with item
+        for idea in self._idea_dict.values():
+            # If there are no awardlines associated with idea
             # allot fund_share via general acctunit
             # cred ratio and debt ratio
-            # if item.is_agenda_item() and item._awardlines == {}:
-            if item.is_agenda_item():
-                if item.awardheir_exists():
-                    for x_awardline in item._awardlines.values():
+            # if idea.is_agenda_idea() and idea._awardlines == {}:
+            if idea.is_agenda_idea():
+                if idea.awardheir_exists():
+                    for x_awardline in idea._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
                             group_label=x_awardline.awardee_label,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
                 else:
-                    self._add_to_acctunits_fund_agenda_give_take(item.get_fund_share())
+                    self._add_to_acctunits_fund_agenda_give_take(idea.get_fund_share())
 
     def _allot_groupunits_fund(self):
         for x_groupunit in self._groupunits.values():
@@ -986,114 +986,114 @@ class BudUnit:
         for acctunit in self.accts.values():
             acctunit.clear_fund_give_take()
 
-    def item_exists(self, way: WayUnit) -> bool:
+    def idea_exists(self, way: WayUnit) -> bool:
         if way in {"", None}:
             return False
-        root_way_item_tag = get_root_tag_from_way(way, self.bridge)
-        if root_way_item_tag != self.itemroot.item_tag:
+        root_way_idea_tag = get_root_tag_from_way(way, self.bridge)
+        if root_way_idea_tag != self.idearoot.idea_tag:
             return False
 
         tags = get_all_way_tags(way, bridge=self.bridge)
-        root_way_item_tag = tags.pop(0)
+        root_way_idea_tag = tags.pop(0)
         if tags == []:
             return True
 
-        item_tag = tags.pop(0)
-        x_item = self.itemroot.get_kid(item_tag)
-        if x_item is None:
+        idea_tag = tags.pop(0)
+        x_idea = self.idearoot.get_kid(idea_tag)
+        if x_idea is None:
             return False
         while tags != []:
-            item_tag = tags.pop(0)
-            x_item = x_item.get_kid(item_tag)
-            if x_item is None:
+            idea_tag = tags.pop(0)
+            x_idea = x_idea.get_kid(idea_tag)
+            if x_idea is None:
                 return False
         return True
 
-    def get_item_obj(self, way: WayUnit, if_missing_create: bool = False) -> ItemUnit:
+    def get_idea_obj(self, way: WayUnit, if_missing_create: bool = False) -> IdeaUnit:
         if way is None:
-            raise InvalidBudException("get_item_obj received way=None")
-        if self.item_exists(way) is False and not if_missing_create:
-            raise InvalidBudException(f"get_item_obj failed. no item at '{way}'")
+            raise InvalidBudException("get_idea_obj received way=None")
+        if self.idea_exists(way) is False and not if_missing_create:
+            raise InvalidBudException(f"get_idea_obj failed. no idea at '{way}'")
         tagunits = get_all_way_tags(way, bridge=self.bridge)
         if len(tagunits) == 1:
-            return self.itemroot
+            return self.idearoot
 
         tagunits.pop(0)
-        item_tag = tagunits.pop(0)
-        x_item = self.itemroot.get_kid(item_tag, if_missing_create)
+        idea_tag = tagunits.pop(0)
+        x_idea = self.idearoot.get_kid(idea_tag, if_missing_create)
         while tagunits != []:
-            x_item = x_item.get_kid(tagunits.pop(0), if_missing_create)
+            x_idea = x_idea.get_kid(tagunits.pop(0), if_missing_create)
 
-        return x_item
+        return x_idea
 
-    def get_item_ranged_kids(
-        self, item_way: str, x_gogo_calc: float = None, x_stop_calc: float = None
-    ) -> dict[ItemUnit]:
-        x_item = self.get_item_obj(item_way)
-        return x_item.get_kids_in_range(x_gogo_calc, x_stop_calc)
+    def get_idea_ranged_kids(
+        self, idea_way: str, x_gogo_calc: float = None, x_stop_calc: float = None
+    ) -> dict[IdeaUnit]:
+        x_idea = self.get_idea_obj(idea_way)
+        return x_idea.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
-    def get_inheritor_item_list(
+    def get_inheritor_idea_list(
         self, math_way: WayUnit, inheritor_way: WayUnit
-    ) -> list[ItemUnit]:
-        item_ways = all_wayunits_between(math_way, inheritor_way)
-        return [self.get_item_obj(x_item_way) for x_item_way in item_ways]
+    ) -> list[IdeaUnit]:
+        idea_ways = all_wayunits_between(math_way, inheritor_way)
+        return [self.get_idea_obj(x_idea_way) for x_idea_way in idea_ways]
 
-    def _set_item_dict(self):
-        item_list = [self.get_item_obj(to_way(self.fisc_tag, self.bridge))]
-        while item_list != []:
-            x_item = item_list.pop()
-            x_item.clear_gogo_calc_stop_calc()
-            for item_kid in x_item._kids.values():
-                item_kid.set_parent_way(x_item.get_item_way())
-                item_kid.set_level(x_item._level)
-                item_list.append(item_kid)
-            self._item_dict[x_item.get_item_way()] = x_item
-            for x_reason_base in x_item.reasonunits.keys():
+    def _set_idea_dict(self):
+        idea_list = [self.get_idea_obj(to_way(self.fisc_tag, self.bridge))]
+        while idea_list != []:
+            x_idea = idea_list.pop()
+            x_idea.clear_gogo_calc_stop_calc()
+            for idea_kid in x_idea._kids.values():
+                idea_kid.set_parent_way(x_idea.get_idea_way())
+                idea_kid.set_level(x_idea._level)
+                idea_list.append(idea_kid)
+            self._idea_dict[x_idea.get_idea_way()] = x_idea
+            for x_reason_base in x_idea.reasonunits.keys():
                 self._reason_bases.add(x_reason_base)
 
-    def _raise_gogo_calc_stop_calc_exception(self, item_way: WayUnit):
-        exception_str = f"Error has occurred, Item '{item_way}' is having _gogo_calc and _stop_calc attributes set twice"
+    def _raise_gogo_calc_stop_calc_exception(self, idea_way: WayUnit):
+        exception_str = f"Error has occurred, Idea '{idea_way}' is having _gogo_calc and _stop_calc attributes set twice"
         raise _gogo_calc_stop_calc_Exception(exception_str)
 
-    def _distribute_math_attrs(self, math_item: ItemUnit):
-        single_range_item_list = [math_item]
-        while single_range_item_list != []:
-            r_item = single_range_item_list.pop()
-            if r_item._range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_item.get_item_way())
-            if r_item.is_math():
-                r_item._gogo_calc = r_item.begin
-                r_item._stop_calc = r_item.close
+    def _distribute_math_attrs(self, math_idea: IdeaUnit):
+        single_range_idea_list = [math_idea]
+        while single_range_idea_list != []:
+            r_idea = single_range_idea_list.pop()
+            if r_idea._range_evaluated:
+                self._raise_gogo_calc_stop_calc_exception(r_idea.get_idea_way())
+            if r_idea.is_math():
+                r_idea._gogo_calc = r_idea.begin
+                r_idea._stop_calc = r_idea.close
             else:
-                parent_way = get_parent_way(r_item.get_item_way())
-                parent_item = self.get_item_obj(parent_way)
-                r_item._gogo_calc = parent_item._gogo_calc
-                r_item._stop_calc = parent_item._stop_calc
-                self._range_inheritors[r_item.get_item_way()] = math_item.get_item_way()
-            r_item._mold_gogo_calc_stop_calc()
+                parent_way = get_parent_way(r_idea.get_idea_way())
+                parent_idea = self.get_idea_obj(parent_way)
+                r_idea._gogo_calc = parent_idea._gogo_calc
+                r_idea._stop_calc = parent_idea._stop_calc
+                self._range_inheritors[r_idea.get_idea_way()] = math_idea.get_idea_way()
+            r_idea._mold_gogo_calc_stop_calc()
 
-            single_range_item_list.extend(iter(r_item._kids.values()))
+            single_range_idea_list.extend(iter(r_idea._kids.values()))
 
-    def _set_itemtree_range_attrs(self):
-        for x_item in self._item_dict.values():
-            if x_item.is_math():
-                self._distribute_math_attrs(x_item)
+    def _set_ideatree_range_attrs(self):
+        for x_idea in self._idea_dict.values():
+            if x_idea.is_math():
+                self._distribute_math_attrs(x_idea)
 
             if (
-                not x_item.is_kidless()
-                and x_item.get_kids_mass_sum() == 0
-                and x_item.mass != 0
+                not x_idea.is_kidless()
+                and x_idea.get_kids_mass_sum() == 0
+                and x_idea.mass != 0
             ):
-                self._offtrack_kids_mass_set.add(x_item.get_item_way())
+                self._offtrack_kids_mass_set.add(x_idea.get_idea_way())
 
     def _set_groupunit_acctunit_funds(self, keep_exceptions):
-        for x_item in self._item_dict.values():
-            x_item.set_awardheirs_fund_give_fund_take()
-            if x_item.is_kidless():
+        for x_idea in self._idea_dict.values():
+            x_idea.set_awardheirs_fund_give_fund_take()
+            if x_idea.is_kidless():
                 self._set_ancestors_pledge_fund_keep_attrs(
-                    x_item.get_item_way(), keep_exceptions
+                    x_idea.get_idea_way(), keep_exceptions
                 )
-                self._allot_fund_share(x_item)
+                self._allot_fund_share(x_idea)
 
     def _set_ancestors_pledge_fund_keep_attrs(
         self, way: WayUnit, keep_exceptions: bool = False
@@ -1107,67 +1107,70 @@ class BudUnit:
 
         while ancestor_ways != []:
             youngest_way = ancestor_ways.pop(0)
-            x_item_obj = self.get_item_obj(youngest_way)
-            x_item_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
-            if x_item_obj.is_kidless():
-                x_item_obj.set_kidless_awardlines()
-                child_awardlines = x_item_obj._awardlines
+            x_idea_obj = self.get_idea_obj(youngest_way)
+            x_idea_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
+            if x_idea_obj.is_kidless():
+                x_idea_obj.set_kidless_awardlines()
+                child_awardlines = x_idea_obj._awardlines
             else:
-                x_item_obj.set_awardlines(child_awardlines)
+                x_idea_obj.set_awardlines(child_awardlines)
 
-            if x_item_obj._task:
+            if x_idea_obj._task:
                 x_descendant_pledge_count += 1
 
             if (
                 group_everyone != False
-                and x_item_obj._all_acct_cred != False
-                and x_item_obj._all_acct_debt != False
-                and x_item_obj._awardheirs != {}
+                and x_idea_obj._all_acct_cred != False
+                and x_idea_obj._all_acct_debt != False
+                and x_idea_obj._awardheirs != {}
             ) or (
                 group_everyone != False
-                and x_item_obj._all_acct_cred is False
-                and x_item_obj._all_acct_debt is False
+                and x_idea_obj._all_acct_cred is False
+                and x_idea_obj._all_acct_debt is False
             ):
                 group_everyone = False
             elif group_everyone != False:
                 group_everyone = True
-            x_item_obj._all_acct_cred = group_everyone
-            x_item_obj._all_acct_debt = group_everyone
+            x_idea_obj._all_acct_cred = group_everyone
+            x_idea_obj._all_acct_debt = group_everyone
 
-            if x_item_obj.healerlink.any_healer_name_exists():
+            if x_idea_obj.healerlink.any_healer_name_exists():
                 keep_justified_by_problem = False
                 healerlink_count += 1
-                self._sum_healerlink_share += x_item_obj.get_fund_share()
-            if x_item_obj.problem_bool:
+                self._sum_healerlink_share += x_idea_obj.get_fund_share()
+            if x_idea_obj.problem_bool:
                 keep_justified_by_problem = True
 
         if keep_justified_by_problem is False or healerlink_count > 1:
             if keep_exceptions:
-                exception_str = f"ItemUnit '{way}' cannot sponsor ancestor keeps."
+                exception_str = f"IdeaUnit '{way}' cannot sponsor ancestor keeps."
                 raise Exception_keeps_justified(exception_str)
             self._keeps_justified = False
 
-    def _clear_itemtree_fund_and_active_status_attrs(self):
-        for x_item in self._item_dict.values():
-            x_item.clear_awardlines()
-            x_item.clear_descendant_pledge_count()
-            x_item.clear_all_acct_cred_debt()
+    def _clear_ideatree_fund_and_active_status_attrs(self):
+        for x_idea in self._idea_dict.values():
+            x_idea.clear_awardlines()
+            x_idea.clear_descendant_pledge_count()
+            x_idea.clear_all_acct_cred_debt()
 
-    def _set_kids_active_status_attrs(self, x_item: ItemUnit, parent_item: ItemUnit):
-        x_item.set_reasonheirs(self._item_dict, parent_item._reasonheirs)
-        x_item.set_range_factheirs(self._item_dict, self._range_inheritors)
+    def _set_kids_active_status_attrs(self, x_idea: IdeaUnit, parent_idea: IdeaUnit):
+        x_idea.set_reasonheirs(self._idea_dict, parent_idea._reasonheirs)
+        x_idea.set_range_factheirs(self._idea_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_item.set_active_attrs(tt_count, self._groupunits, self.owner_name)
+        x_idea.set_active_attrs(tt_count, self._groupunits, self.owner_name)
 
-    def _allot_fund_share(self, item: ItemUnit):
-        if item.awardheir_exists():
-            self._set_groupunits_fund_share(item._awardheirs)
-        elif item.awardheir_exists() is False:
-            self._add_to_acctunits_fund_give_take(item.get_fund_share())
+    def _allot_fund_share(self, idea: IdeaUnit):
+        if idea.awardheir_exists():
+            self._set_groupunits_fund_share(idea._awardheirs)
+        elif idea.awardheir_exists() is False:
+            self._add_to_acctunits_fund_give_take(idea.get_fund_share())
 
     def _create_groupunits_metrics(self):
         self._groupunits = {}
-        for group_label, acct_name_set in self.get_acctunit_group_labels_dict().items():
+        for (
+            group_label,
+            acct_name_set,
+        ) in self.get_acctunit_group_labels_dict().items():
             x_groupunit = groupunit_shop(group_label, bridge=self.bridge)
             for x_acct_name in acct_name_set:
                 x_membership = self.get_acct(x_acct_name).get_membership(group_label)
@@ -1187,8 +1190,8 @@ class BudUnit:
         self._create_groupunits_metrics()
         self._reset_acctunit_fund_give_take()
 
-    def _clear_item_dict_and_bud_obj_settle_attrs(self):
-        self._item_dict = {self.itemroot.get_item_way(): self.itemroot}
+    def _clear_idea_dict_and_bud_obj_settle_attrs(self):
+        self._idea_dict = {self.idearoot.get_idea_way(): self.idearoot}
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
@@ -1200,80 +1203,80 @@ class BudUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_itemtree_factheirs_teamheirs_awardheirs(self):
-        for x_item in get_sorted_item_list(list(self._item_dict.values())):
-            if x_item.root:
-                x_item.set_factheirs(x_item.factunits)
-                x_item.set_itemroot_inherit_reasonheirs()
-                x_item.set_teamheir(None, self._groupunits)
-                x_item.inherit_awardheirs()
+    def _set_ideatree_factheirs_teamheirs_awardheirs(self):
+        for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
+            if x_idea.root:
+                x_idea.set_factheirs(x_idea.factunits)
+                x_idea.set_idearoot_inherit_reasonheirs()
+                x_idea.set_teamheir(None, self._groupunits)
+                x_idea.inherit_awardheirs()
             else:
-                parent_item = self.get_item_obj(x_item.parent_way)
-                x_item.set_factheirs(parent_item._factheirs)
-                x_item.set_teamheir(parent_item._teamheir, self._groupunits)
-                x_item.inherit_awardheirs(parent_item._awardheirs)
-            x_item.set_awardheirs_fund_give_fund_take()
+                parent_idea = self.get_idea_obj(x_idea.parent_way)
+                x_idea.set_factheirs(parent_idea._factheirs)
+                x_idea.set_teamheir(parent_idea._teamheir, self._groupunits)
+                x_idea.inherit_awardheirs(parent_idea._awardheirs)
+            x_idea.set_awardheirs_fund_give_fund_take()
 
     def settle_bud(self, keep_exceptions: bool = False):
-        self._clear_item_dict_and_bud_obj_settle_attrs()
-        self._set_item_dict()
-        self._set_itemtree_range_attrs()
+        self._clear_idea_dict_and_bud_obj_settle_attrs()
+        self._set_idea_dict()
+        self._set_ideatree_range_attrs()
         self._set_acctunit_groupunit_respect_ledgers()
         self._clear_acctunit_fund_attrs()
-        self._clear_itemtree_fund_and_active_status_attrs()
-        self._set_itemtree_factheirs_teamheirs_awardheirs()
+        self._clear_ideatree_fund_and_active_status_attrs()
+        self._set_ideatree_factheirs_teamheirs_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_itemtree_active_status_attrs()
+            self._set_ideatree_active_status_attrs()
             self._set_rational_attr()
             self._tree_traverse_count += 1
 
-        self._set_itemtree_fund_attrs(self.itemroot)
+        self._set_ideatree_fund_attrs(self.idearoot)
         self._set_groupunit_acctunit_funds(keep_exceptions)
         self._set_acctunit_fund_related_attrs()
         self._set_bud_keep_attrs()
 
-    def _set_itemtree_active_status_attrs(self):
-        for x_item in get_sorted_item_list(list(self._item_dict.values())):
-            if x_item.root:
+    def _set_ideatree_active_status_attrs(self):
+        for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
+            if x_idea.root:
                 tt_count = self._tree_traverse_count
-                root_item = self.itemroot
-                root_item.set_active_attrs(tt_count, self._groupunits, self.owner_name)
+                root_idea = self.idearoot
+                root_idea.set_active_attrs(tt_count, self._groupunits, self.owner_name)
             else:
-                parent_item = self.get_item_obj(x_item.parent_way)
-                self._set_kids_active_status_attrs(x_item, parent_item)
+                parent_idea = self.get_idea_obj(x_idea.parent_way)
+                self._set_kids_active_status_attrs(x_idea, parent_idea)
 
-    def _set_itemtree_fund_attrs(self, root_item: ItemUnit):
-        root_item.set_fund_attr(0, self.fund_pool, self.fund_pool)
+    def _set_ideatree_fund_attrs(self, root_idea: IdeaUnit):
+        root_idea.set_fund_attr(0, self.fund_pool, self.fund_pool)
         # no function recursion, recursion by iterateing over list that can be added to by iterations
-        cache_item_list = [root_item]
-        while cache_item_list != []:
-            parent_item = cache_item_list.pop()
-            kids_items = parent_item._kids.items()
-            x_ledger = {x_way: item_kid.mass for x_way, item_kid in kids_items}
-            parent_fund_num = parent_item._fund_cease - parent_item._fund_onset
+        cache_idea_list = [root_idea]
+        while cache_idea_list != []:
+            parent_idea = cache_idea_list.pop()
+            kids_ideas = parent_idea._kids.items()
+            x_ledger = {x_way: idea_kid.mass for x_way, idea_kid in kids_ideas}
+            parent_fund_num = parent_idea._fund_cease - parent_idea._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_coin)
 
             fund_onset = None
             fund_cease = None
-            for x_item in parent_item._kids.values():
+            for x_idea in parent_idea._kids.values():
                 if fund_onset is None:
-                    fund_onset = parent_item._fund_onset
-                    fund_cease = fund_onset + alloted_fund_num.get(x_item.item_tag)
+                    fund_onset = parent_idea._fund_onset
+                    fund_cease = fund_onset + alloted_fund_num.get(x_idea.idea_tag)
                 else:
                     fund_onset = fund_cease
-                    fund_cease += alloted_fund_num.get(x_item.item_tag)
-                x_item.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
-                cache_item_list.append(x_item)
+                    fund_cease += alloted_fund_num.get(x_idea.idea_tag)
+                x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
+                cache_idea_list.append(x_idea)
 
     def _set_rational_attr(self):
-        any_item_active_status_has_altered = False
-        for item in self._item_dict.values():
-            if item._active_hx.get(self._tree_traverse_count) is not None:
-                any_item_active_status_has_altered = True
+        any_idea_active_status_has_altered = False
+        for idea in self._idea_dict.values():
+            if idea._active_hx.get(self._tree_traverse_count) is not None:
+                any_idea_active_status_has_altered = True
 
-        if any_item_active_status_has_altered is False:
+        if any_idea_active_status_has_altered is False:
             self._rational = True
 
     def _set_acctunit_fund_related_attrs(self):
@@ -1291,26 +1294,26 @@ class BudUnit:
     def _set_keep_dict(self):
         if self._keeps_justified is False:
             self._sum_healerlink_share = 0
-        for x_item in self._item_dict.values():
+        for x_idea in self._idea_dict.values():
             if self._sum_healerlink_share == 0:
-                x_item._healerlink_ratio = 0
+                x_idea._healerlink_ratio = 0
             else:
                 x_sum = self._sum_healerlink_share
-                x_item._healerlink_ratio = x_item.get_fund_share() / x_sum
-            if self._keeps_justified and x_item.healerlink.any_healer_name_exists():
-                self._keep_dict[x_item.get_item_way()] = x_item
+                x_idea._healerlink_ratio = x_idea.get_fund_share() / x_sum
+            if self._keeps_justified and x_idea.healerlink.any_healer_name_exists():
+                self._keep_dict[x_idea.get_idea_way()] = x_idea
 
-    def _get_healers_dict(self) -> dict[HealerName, dict[WayUnit, ItemUnit]]:
+    def _get_healers_dict(self) -> dict[HealerName, dict[WayUnit, IdeaUnit]]:
         _healers_dict = {}
-        for x_keep_way, x_keep_item in self._keep_dict.items():
-            for x_healer_name in x_keep_item.healerlink._healer_names:
+        for x_keep_way, x_keep_idea in self._keep_dict.items():
+            for x_healer_name in x_keep_idea.healerlink._healer_names:
                 x_groupunit = self.get_groupunit(x_healer_name)
                 for x_acct_name in x_groupunit._memberships.keys():
                     if _healers_dict.get(x_acct_name) is None:
-                        _healers_dict[x_acct_name] = {x_keep_way: x_keep_item}
+                        _healers_dict[x_acct_name] = {x_keep_way: x_keep_idea}
                     else:
                         healer_dict = _healers_dict.get(x_acct_name)
-                        healer_dict[x_keep_way] = x_keep_item
+                        healer_dict[x_keep_way] = x_keep_idea
         return _healers_dict
 
     def _get_buildable_keeps(self) -> bool:
@@ -1323,12 +1326,12 @@ class BudUnit:
         self._reset_groupunits_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
-    def get_item_tree_ordered_way_list(
+    def get_idea_tree_ordered_way_list(
         self, no_range_descendants: bool = False
     ) -> list[WayUnit]:
-        item_list = list(self.get_item_dict().values())
+        idea_list = list(self.get_idea_dict().values())
         tag_dict = {
-            item.get_item_way().lower(): item.get_item_way() for item in item_list
+            idea.get_idea_way().lower(): idea.get_idea_way() for idea in idea_list
         }
         tag_lowercase_ordered_list = sorted(list(tag_dict))
         tag_orginalcase_ordered_list = [
@@ -1344,19 +1347,19 @@ class BudUnit:
                 if len(anc_list) == 1:
                     list_x.append(way)
                 elif len(anc_list) == 2:
-                    if self.itemroot.begin is None and self.itemroot.close is None:
+                    if self.idearoot.begin is None and self.idearoot.close is None:
                         list_x.append(way)
                 else:
-                    parent_item = self.get_item_obj(way=anc_list[1])
-                    if parent_item.begin is None and parent_item.close is None:
+                    parent_idea = self.get_idea_obj(way=anc_list[1])
+                    if parent_idea.begin is None and parent_idea.close is None:
                         list_x.append(way)
 
         return list_x
 
     def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
-        if self.itemroot.factunits is not None:
-            for fact_way, fact_obj in self.itemroot.factunits.items():
+        if self.idearoot.factunits is not None:
+            for fact_way, fact_obj in self.idearoot.factunits.items():
                 x_dict[fact_way] = fact_obj.get_dict()
         return x_dict
 
@@ -1380,7 +1383,7 @@ class BudUnit:
             "fisc_tag": self.fisc_tag,
             "max_tree_traverse": self.max_tree_traverse,
             "bridge": self.bridge,
-            "itemroot": self.itemroot.get_dict(),
+            "idearoot": self.idearoot.get_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1394,19 +1397,19 @@ class BudUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def set_dominate_pledge_item(self, item_kid: ItemUnit):
-        item_kid.pledge = True
-        self.set_item(
-            item_kid=item_kid,
-            parent_way=self.make_way(item_kid.parent_way),
+    def set_dominate_pledge_idea(self, idea_kid: IdeaUnit):
+        idea_kid.pledge = True
+        self.set_idea(
+            idea_kid=idea_kid,
+            parent_way=self.make_way(idea_kid.parent_way),
             get_rid_of_missing_awardlinks_awardee_labels=True,
-            create_missing_items=True,
+            create_missing_ideas=True,
         )
 
     def set_offtrack_fund(self) -> float:
         mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_item_obj(x_wayunit).get_fund_share() for x_wayunit in mass_set
+            self.get_idea_obj(x_wayunit).get_fund_share() for x_wayunit in mass_set
         )
 
 
@@ -1435,7 +1438,7 @@ def budunit_shop(
         fund_coin=default_fund_coin_if_None(fund_coin),
         respect_bit=default_respect_bit_if_None(respect_bit),
         penny=filter_penny(penny),
-        _item_dict=get_empty_dict_if_None(),
+        _idea_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
         _healers_dict=get_empty_dict_if_None(),
         _keeps_justified=get_False_if_None(),
@@ -1445,7 +1448,7 @@ def budunit_shop(
         _reason_bases=set(),
         _range_inheritors={},
     )
-    x_bud.itemroot = itemunit_shop(
+    x_bud.idearoot = ideaunit_shop(
         root=True,
         _uid=1,
         _level=0,
@@ -1470,7 +1473,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
     x_bud.fisc_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
-    x_bud.itemroot.item_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
+    x_bud.idearoot.idea_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1489,78 +1492,78 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
     x_bud.originunit = obj_from_bud_dict(bud_dict, "originunit")
-    create_itemroot_from_bud_dict(x_bud, bud_dict)
+    create_idearoot_from_bud_dict(x_bud, bud_dict)
     return x_bud
 
 
-def create_itemroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
-    itemroot_dict = bud_dict.get("itemroot")
-    x_bud.itemroot = itemunit_shop(
+def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
+    idearoot_dict = bud_dict.get("idearoot")
+    x_bud.idearoot = ideaunit_shop(
         root=True,
-        item_tag=x_bud.fisc_tag,
+        idea_tag=x_bud.fisc_tag,
         parent_way="",
         _level=0,
-        _uid=get_obj_from_item_dict(itemroot_dict, "_uid"),
-        mass=get_obj_from_item_dict(itemroot_dict, "mass"),
-        begin=get_obj_from_item_dict(itemroot_dict, "begin"),
-        close=get_obj_from_item_dict(itemroot_dict, "close"),
-        numor=get_obj_from_item_dict(itemroot_dict, "numor"),
-        denom=get_obj_from_item_dict(itemroot_dict, "denom"),
-        morph=get_obj_from_item_dict(itemroot_dict, "morph"),
-        gogo_want=get_obj_from_item_dict(itemroot_dict, "gogo_want"),
-        stop_want=get_obj_from_item_dict(itemroot_dict, "stop_want"),
-        problem_bool=get_obj_from_item_dict(itemroot_dict, "problem_bool"),
-        reasonunits=get_obj_from_item_dict(itemroot_dict, "reasonunits"),
-        teamunit=get_obj_from_item_dict(itemroot_dict, "teamunit"),
-        healerlink=get_obj_from_item_dict(itemroot_dict, "healerlink"),
-        factunits=get_obj_from_item_dict(itemroot_dict, "factunits"),
-        awardlinks=get_obj_from_item_dict(itemroot_dict, "awardlinks"),
-        _is_expanded=get_obj_from_item_dict(itemroot_dict, "_is_expanded"),
+        _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
+        mass=get_obj_from_idea_dict(idearoot_dict, "mass"),
+        begin=get_obj_from_idea_dict(idearoot_dict, "begin"),
+        close=get_obj_from_idea_dict(idearoot_dict, "close"),
+        numor=get_obj_from_idea_dict(idearoot_dict, "numor"),
+        denom=get_obj_from_idea_dict(idearoot_dict, "denom"),
+        morph=get_obj_from_idea_dict(idearoot_dict, "morph"),
+        gogo_want=get_obj_from_idea_dict(idearoot_dict, "gogo_want"),
+        stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
+        problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
+        reasonunits=get_obj_from_idea_dict(idearoot_dict, "reasonunits"),
+        teamunit=get_obj_from_idea_dict(idearoot_dict, "teamunit"),
+        healerlink=get_obj_from_idea_dict(idearoot_dict, "healerlink"),
+        factunits=get_obj_from_idea_dict(idearoot_dict, "factunits"),
+        awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
+        _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         bridge=x_bud.bridge,
         fisc_tag=x_bud.fisc_tag,
         fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
-    create_itemroot_kids_from_dict(x_bud, itemroot_dict)
+    create_idearoot_kids_from_dict(x_bud, idearoot_dict)
 
 
-def create_itemroot_kids_from_dict(x_bud: BudUnit, itemroot_dict: dict):
-    to_evaluate_item_dicts = []
+def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
+    to_evaluate_idea_dicts = []
     parent_way_str = "parent_way"
     # for every kid dict, set parent_way in dict, add to to_evaluate_list
-    for x_dict in get_obj_from_item_dict(itemroot_dict, "_kids").values():
+    for x_dict in get_obj_from_idea_dict(idearoot_dict, "_kids").values():
         x_dict[parent_way_str] = x_bud.fisc_tag
-        to_evaluate_item_dicts.append(x_dict)
+        to_evaluate_idea_dicts.append(x_dict)
 
-    while to_evaluate_item_dicts != []:
-        item_dict = to_evaluate_item_dicts.pop(0)
+    while to_evaluate_idea_dicts != []:
+        idea_dict = to_evaluate_idea_dicts.pop(0)
         # for every kid dict, set parent_way in dict, add to to_evaluate_list
-        for kid_dict in get_obj_from_item_dict(item_dict, "_kids").values():
-            parent_way = get_obj_from_item_dict(item_dict, parent_way_str)
-            kid_item_tag = get_obj_from_item_dict(item_dict, "item_tag")
-            kid_dict[parent_way_str] = x_bud.make_way(parent_way, kid_item_tag)
-            to_evaluate_item_dicts.append(kid_dict)
-        x_itemkid = itemunit_shop(
-            item_tag=get_obj_from_item_dict(item_dict, "item_tag"),
-            mass=get_obj_from_item_dict(item_dict, "mass"),
-            _uid=get_obj_from_item_dict(item_dict, "_uid"),
-            begin=get_obj_from_item_dict(item_dict, "begin"),
-            close=get_obj_from_item_dict(item_dict, "close"),
-            numor=get_obj_from_item_dict(item_dict, "numor"),
-            denom=get_obj_from_item_dict(item_dict, "denom"),
-            morph=get_obj_from_item_dict(item_dict, "morph"),
-            gogo_want=get_obj_from_item_dict(item_dict, "gogo_want"),
-            stop_want=get_obj_from_item_dict(item_dict, "stop_want"),
-            pledge=get_obj_from_item_dict(item_dict, "pledge"),
-            problem_bool=get_obj_from_item_dict(item_dict, "problem_bool"),
-            reasonunits=get_obj_from_item_dict(item_dict, "reasonunits"),
-            teamunit=get_obj_from_item_dict(item_dict, "teamunit"),
-            healerlink=get_obj_from_item_dict(item_dict, "healerlink"),
-            _originunit=get_obj_from_item_dict(item_dict, "originunit"),
-            awardlinks=get_obj_from_item_dict(item_dict, "awardlinks"),
-            factunits=get_obj_from_item_dict(item_dict, "factunits"),
-            _is_expanded=get_obj_from_item_dict(item_dict, "_is_expanded"),
+        for kid_dict in get_obj_from_idea_dict(idea_dict, "_kids").values():
+            parent_way = get_obj_from_idea_dict(idea_dict, parent_way_str)
+            kid_idea_tag = get_obj_from_idea_dict(idea_dict, "idea_tag")
+            kid_dict[parent_way_str] = x_bud.make_way(parent_way, kid_idea_tag)
+            to_evaluate_idea_dicts.append(kid_dict)
+        x_ideakid = ideaunit_shop(
+            idea_tag=get_obj_from_idea_dict(idea_dict, "idea_tag"),
+            mass=get_obj_from_idea_dict(idea_dict, "mass"),
+            _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
+            begin=get_obj_from_idea_dict(idea_dict, "begin"),
+            close=get_obj_from_idea_dict(idea_dict, "close"),
+            numor=get_obj_from_idea_dict(idea_dict, "numor"),
+            denom=get_obj_from_idea_dict(idea_dict, "denom"),
+            morph=get_obj_from_idea_dict(idea_dict, "morph"),
+            gogo_want=get_obj_from_idea_dict(idea_dict, "gogo_want"),
+            stop_want=get_obj_from_idea_dict(idea_dict, "stop_want"),
+            pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
+            problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
+            reasonunits=get_obj_from_idea_dict(idea_dict, "reasonunits"),
+            teamunit=get_obj_from_idea_dict(idea_dict, "teamunit"),
+            healerlink=get_obj_from_idea_dict(idea_dict, "healerlink"),
+            _originunit=get_obj_from_idea_dict(idea_dict, "originunit"),
+            awardlinks=get_obj_from_idea_dict(idea_dict, "awardlinks"),
+            factunits=get_obj_from_idea_dict(idea_dict, "factunits"),
+            _is_expanded=get_obj_from_idea_dict(idea_dict, "_is_expanded"),
         )
-        x_bud.set_item(x_itemkid, parent_way=item_dict[parent_way_str])
+        x_bud.set_idea(x_ideakid, parent_way=idea_dict[parent_way_str])
 
 
 def obj_from_bud_dict(
@@ -1592,6 +1595,6 @@ def get_dict_of_bud_from_dict(x_dict: dict[str, dict]) -> dict[str, BudUnit]:
     return budunits
 
 
-def get_sorted_item_list(x_list: list[ItemUnit]) -> list[ItemUnit]:
-    x_list.sort(key=lambda x: x.get_item_way(), reverse=False)
+def get_sorted_idea_list(x_list: list[IdeaUnit]) -> list[IdeaUnit]:
+    x_list.sort(key=lambda x: x.get_idea_way(), reverse=False)
     return x_list

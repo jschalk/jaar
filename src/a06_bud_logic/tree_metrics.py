@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_0_if_None
 from src.a01_way_logic.way import GroupLabel
-from src.a04_reason_logic.reason_item import ReasonUnit, WayUnit
+from src.a04_reason_logic.reason_idea import ReasonUnit, WayUnit
 from src.a03_group_logic.group import AwardLink
 from dataclasses import dataclass
 
@@ -13,8 +13,8 @@ class TreeMetrics:
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
-    all_item_uids_are_unique: bool = None
-    last_evaluated_pledge_item_way: WayUnit = None
+    all_idea_uids_are_unique: bool = None
+    last_evaluated_pledge_idea_way: WayUnit = None
 
     def evaluate_tag(
         self,
@@ -23,18 +23,18 @@ class TreeMetrics:
         awardlinks: dict[GroupLabel, AwardLink],
         uid: int,
         pledge: bool,
-        item_way: WayUnit,
+        idea_way: WayUnit,
     ):
         self.tag_count += 1
-        self.evaluate_pledge(pledge=pledge, item_way=item_way)
+        self.evaluate_pledge(pledge=pledge, idea_way=idea_way)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_pledge(self, pledge: bool, item_way: WayUnit):
+    def evaluate_pledge(self, pledge: bool, idea_way: WayUnit):
         if pledge:
-            self.last_evaluated_pledge_item_way = item_way
+            self.last_evaluated_pledge_idea_way = idea_way
 
     def evaluate_level(self, level):
         if self.level_count.get(level) is None:
@@ -63,7 +63,7 @@ class TreeMetrics:
             self.uid_dict[uid] = 1
         else:
             self.uid_dict[uid] += 1
-            self.all_item_uids_are_unique = False
+            self.all_idea_uids_are_unique = False
 
 
 def treemetrics_shop(
@@ -82,6 +82,6 @@ def treemetrics_shop(
         uid_dict=get_empty_dict_if_None(uid_dict),
         uid_max=get_0_if_None(uid_max),
     )
-    if x_treemetrics.all_item_uids_are_unique is None:
-        x_treemetrics.all_item_uids_are_unique = True
+    if x_treemetrics.all_idea_uids_are_unique is None:
+        x_treemetrics.all_idea_uids_are_unique = True
     return x_treemetrics

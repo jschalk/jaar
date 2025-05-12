@@ -13,18 +13,18 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
     acct_name_str,
     addin_str,
     awardee_label_str,
     base_str,
-    base_item_active_requisite_str,
+    base_idea_active_requisite_str,
     begin_str,
     denom_str,
     event_int_str,
@@ -33,7 +33,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fneed_str,
     group_label_str,
     healer_name_str,
-    item_way_str,
+    idea_way_str,
     numor_str,
     team_label_str,
     close_str,
@@ -163,7 +163,7 @@ from src.a17_creed_logic.creed_config import (
     get_default_sorted_list,
     creed_format_00021_bud_acctunit_v0_0_0,
     creed_format_00020_bud_acct_membership_v0_0_0,
-    creed_format_00013_itemunit_v0_0_0,
+    creed_format_00013_ideaunit_v0_0_0,
 )
 from os import getcwd as os_getcwd
 from copy import copy as copy_copy
@@ -234,8 +234,8 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[21] == get_delete_key_name(acct_name_str())
     assert table_sorting_priority[22] == group_label_str()
     assert table_sorting_priority[23] == get_delete_key_name(group_label_str())
-    assert table_sorting_priority[24] == item_way_str()
-    assert table_sorting_priority[25] == get_delete_key_name(item_way_str())
+    assert table_sorting_priority[24] == idea_way_str()
+    assert table_sorting_priority[25] == get_delete_key_name(idea_way_str())
     assert table_sorting_priority[26] == base_str()
     assert table_sorting_priority[27] == get_delete_key_name(base_str())
     assert table_sorting_priority[28] == fbase_str()
@@ -259,7 +259,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[46] == morph_str()
     assert table_sorting_priority[47] == gogo_want_str()
     assert table_sorting_priority[48] == stop_want_str()
-    assert table_sorting_priority[49] == base_item_active_requisite_str()
+    assert table_sorting_priority[49] == base_idea_active_requisite_str()
     assert table_sorting_priority[50] == credit_belief_str()
     assert table_sorting_priority[51] == debtit_belief_str()
     assert table_sorting_priority[52] == credit_vote_str()
@@ -325,7 +325,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[112] == "_all_acct_cred"
     assert table_sorting_priority[113] == "_keeps_justified"
     assert table_sorting_priority[114] == "_offtrack_fund"
-    assert table_sorting_priority[115] == "_base_item_active_value"
+    assert table_sorting_priority[115] == "_base_idea_active_value"
     assert table_sorting_priority[116] == "_irrational_debtit_belief"
     assert table_sorting_priority[117] == "_sum_healerlink_share"
     assert table_sorting_priority[118] == "_keeps_buildable"
@@ -370,7 +370,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
-    assert sqlite_types.get(item_way_str()) == "TEXT"
+    assert sqlite_types.get(idea_way_str()) == "TEXT"
     assert sqlite_types.get(base_str()) == "TEXT"
     assert sqlite_types.get("need") == "TEXT"
     assert sqlite_types.get("fneed") == "TEXT"
@@ -388,7 +388,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(morph_str()) == "INTEGER"
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
-    assert sqlite_types.get(base_item_active_requisite_str()) == "INTEGER"
+    assert sqlite_types.get(base_idea_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(credit_belief_str()) == "REAL"
     assert sqlite_types.get(debtit_belief_str()) == "REAL"
     assert sqlite_types.get(credit_vote_str()) == "REAL"
@@ -477,13 +477,13 @@ def test_get_creed_config_dict_ReturnsObj():
     assert fisc_timeoffi_str() in creed_config_dimens
     assert bud_acct_membership_str() in creed_config_dimens
     assert bud_acctunit_str() in creed_config_dimens
-    assert bud_item_awardlink_str() in creed_config_dimens
-    assert bud_item_factunit_str() in creed_config_dimens
-    assert bud_item_teamlink_str() in creed_config_dimens
-    assert bud_item_healerlink_str() in creed_config_dimens
-    assert bud_item_reason_premiseunit_str() in creed_config_dimens
-    assert bud_item_reasonunit_str() in creed_config_dimens
-    assert bud_itemunit_str() in creed_config_dimens
+    assert bud_idea_awardlink_str() in creed_config_dimens
+    assert bud_idea_factunit_str() in creed_config_dimens
+    assert bud_idea_teamlink_str() in creed_config_dimens
+    assert bud_idea_healerlink_str() in creed_config_dimens
+    assert bud_idea_reason_premiseunit_str() in creed_config_dimens
+    assert bud_idea_reasonunit_str() in creed_config_dimens
+    assert bud_ideaunit_str() in creed_config_dimens
     assert budunit_str() in creed_config_dimens
     assert pidgin_name_str() in creed_config_dimens
     assert pidgin_label_str() in creed_config_dimens
@@ -649,7 +649,7 @@ def test_get_creed_format_filenames_ReturnsObj():
     # THEN
     assert creed_format_00021_bud_acctunit_v0_0_0() in creed_filenames_set
     assert creed_format_00020_bud_acct_membership_v0_0_0() in creed_filenames_set
-    assert creed_format_00013_itemunit_v0_0_0() in creed_filenames_set
+    assert creed_format_00013_ideaunit_v0_0_0() in creed_filenames_set
 
     # WHEN / THEN
     assert _validate_creed_format_files(creed_filenames_sorted)
@@ -713,7 +713,7 @@ def _validate_creed_format_files(creed_filenames: set[str]):
             creed_attrs.add(delete_attr_without_erase)
 
         for x_dimen, dimen_keys in all_dimen_keys_dict.items():
-            # if x_dimen == bud_item_factunit_str() and x_dimen in format_dimens:
+            # if x_dimen == bud_idea_factunit_str() and x_dimen in format_dimens:
             #     print(f"{creed_number_value}  {x_dimen=} {creed_attrs_list=}")
             if dimen_keys.issubset(creed_attrs):
                 if x_dimen not in format_dimens:
@@ -756,7 +756,7 @@ def test_get_creed_format_filename_ReturnsObj():
     # THEN
     assert br00021_filename == creed_format_00021_bud_acctunit_v0_0_0()
     assert br00020_filename == creed_format_00020_bud_acct_membership_v0_0_0()
-    assert br00013_filename == creed_format_00013_itemunit_v0_0_0()
+    assert br00013_filename == creed_format_00013_ideaunit_v0_0_0()
 
     all_set = {get_creed_format_filename(br) for br in get_creed_numbers()}
     assert all_set == get_creed_format_filenames()
@@ -783,13 +783,13 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     # set_creed_config_json(fisc_timeline_weekday_str(), 8)
     # set_creed_config_json(bud_acct_membership_str(), 9)
     # set_creed_config_json(bud_acctunit_str(), 10)
-    # set_creed_config_json(bud_item_awardlink_str(), 11)
-    # set_creed_config_json(bud_item_factunit_str(), 12)
-    # set_creed_config_json(bud_item_teamlink_str(), 14)
-    # set_creed_config_json(bud_item_healerlink_str(), 15)
-    # set_creed_config_json(bud_item_reason_premiseunit_str(), 16)
-    # set_creed_config_json(bud_item_reasonunit_str(), 17)
-    # set_creed_config_json(bud_itemunit_str(), 18)
+    # set_creed_config_json(bud_idea_awardlink_str(), 11)
+    # set_creed_config_json(bud_idea_factunit_str(), 12)
+    # set_creed_config_json(bud_idea_teamlink_str(), 14)
+    # set_creed_config_json(bud_idea_healerlink_str(), 15)
+    # set_creed_config_json(bud_idea_reason_premiseunit_str(), 16)
+    # set_creed_config_json(bud_idea_reasonunit_str(), 17)
+    # set_creed_config_json(bud_ideaunit_str(), 18)
     # set_creed_config_json(budunit_str(), 19)
     # set_creed_config_json(fisc_dealunit_str(), 20)
     # set_creed_config_json(fisc_cashbook_str(), 21)
@@ -807,13 +807,13 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     assert x_creed_config.get(fisc_timeline_weekday_str()).get(bo) == 8
     assert x_creed_config.get(bud_acct_membership_str()).get(bo) == 9
     assert x_creed_config.get(bud_acctunit_str()).get(bo) == 10
-    assert x_creed_config.get(bud_item_awardlink_str()).get(bo) == 11
-    assert x_creed_config.get(bud_item_factunit_str()).get(bo) == 12
-    assert x_creed_config.get(bud_item_teamlink_str()).get(bo) == 14
-    assert x_creed_config.get(bud_item_healerlink_str()).get(bo) == 15
-    assert x_creed_config.get(bud_item_reason_premiseunit_str()).get(bo) == 16
-    assert x_creed_config.get(bud_item_reasonunit_str()).get(bo) == 17
-    assert x_creed_config.get(bud_itemunit_str()).get(bo) == 18
+    assert x_creed_config.get(bud_idea_awardlink_str()).get(bo) == 11
+    assert x_creed_config.get(bud_idea_factunit_str()).get(bo) == 12
+    assert x_creed_config.get(bud_idea_teamlink_str()).get(bo) == 14
+    assert x_creed_config.get(bud_idea_healerlink_str()).get(bo) == 15
+    assert x_creed_config.get(bud_idea_reason_premiseunit_str()).get(bo) == 16
+    assert x_creed_config.get(bud_idea_reasonunit_str()).get(bo) == 17
+    assert x_creed_config.get(bud_ideaunit_str()).get(bo) == 18
     assert x_creed_config.get(budunit_str()).get(bo) == 19
     assert x_creed_config.get(fisc_dealunit_str()).get(bo) == 20
     assert x_creed_config.get(fisc_cashbook_str()).get(bo) == 21

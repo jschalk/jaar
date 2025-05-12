@@ -82,7 +82,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
     acctunit_colums = {
         "owner_name",
         "fund_ratio",
-        "item_tag",
+        "idea_tag",
         "parent_way",
         "begin",
         "close",
@@ -110,7 +110,7 @@ def test_get_bud_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
     acctunit_colums = {
         "owner_name",
         "fund_ratio",
-        "item_tag",
+        "idea_tag",
         "parent_way",
         "begin",
         "close",

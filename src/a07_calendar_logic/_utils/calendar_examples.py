@@ -1,11 +1,11 @@
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a05_item_logic.item import ItemUnit
+from src.a05_idea_logic.idea import IdeaUnit
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a07_calendar_logic.chrono import (
-    create_weekday_itemunits,
-    add_newtimeline_itemunit,
-    new_timeline_itemunit,
+    create_weekday_ideaunits,
+    add_newtimeline_ideaunit,
+    new_timeline_ideaunit,
     get_min_from_dt_offset,
     chronounit_shop,
 )
@@ -41,9 +41,9 @@ def get_example_timeline_config(timeline_tag: str) -> dict:
     return open_json(get_module_examples_dir(), x_filename)
 
 
-def cregtime_itemunit() -> ItemUnit:
+def cregtime_ideaunit() -> IdeaUnit:
     c400_number = get_creg_config().get(c400_number_str())
-    return new_timeline_itemunit(get_cregtime_str(), c400_number)
+    return new_timeline_ideaunit(get_cregtime_str(), c400_number)
 
 
 def get_wed():
@@ -82,8 +82,8 @@ def creg_weekdays_list() -> list[str]:
     return get_creg_config().get(weekdays_config_str())
 
 
-def creg_weekday_itemunits() -> dict[str, ItemUnit]:
-    return create_weekday_itemunits(creg_weekdays_list())
+def creg_weekday_ideaunits() -> dict[str, IdeaUnit]:
+    return create_weekday_ideaunits(creg_weekdays_list())
 
 
 def get_cregtime_str() -> str:
@@ -94,16 +94,16 @@ def creg_hour_tag(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 
-def add_time_creg_itemunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_itemunit(x_budunit, get_creg_config())
+def add_time_creg_ideaunit(x_budunit: BudUnit) -> BudUnit:
+    return add_newtimeline_ideaunit(x_budunit, get_creg_config())
 
 
-def add_time_five_itemunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_itemunit(x_budunit, get_five_config())
+def add_time_five_ideaunit(x_budunit: BudUnit) -> BudUnit:
+    return add_newtimeline_ideaunit(x_budunit, get_five_config())
 
 
-def add_time_squirt_itemunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_itemunit(x_budunit, get_squirt_config())
+def add_time_squirt_ideaunit(x_budunit: BudUnit) -> BudUnit:
+    return add_newtimeline_ideaunit(x_budunit, get_squirt_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
@@ -150,8 +150,8 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime.now()
         sue_bud = budunit_shop("Sue")
-        sue_bud = add_time_creg_itemunit(sue_bud)
-        sue_bud = add_time_five_itemunit(sue_bud)
+        sue_bud = add_time_creg_ideaunit(sue_bud)
+        sue_bud = add_time_five_ideaunit(sue_bud)
         time_way = sue_bud.make_l1_way("time")
         creg_way = sue_bud.make_way(time_way, creg_str())
         five_way = sue_bud.make_way(time_way, five_str())
@@ -187,9 +187,9 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime(2031, 2, 17, 7, 47)
         sue_bud = budunit_shop("Sue")
-        sue_bud = add_time_creg_itemunit(sue_bud)
-        sue_bud = add_time_five_itemunit(sue_bud)
-        sue_bud = add_time_squirt_itemunit(sue_bud)
+        sue_bud = add_time_creg_ideaunit(sue_bud)
+        sue_bud = add_time_five_ideaunit(sue_bud)
+        sue_bud = add_time_squirt_ideaunit(sue_bud)
         time_way = sue_bud.make_l1_way("time")
         creg_way = sue_bud.make_way(time_way, creg_str())
         five_way = sue_bud.make_way(time_way, five_str())

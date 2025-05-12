@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_max_key
 from src.a01_way_logic.way import OwnerName, WayUnit
-from src.a04_reason_logic.reason_item import FactUnit, get_factunit_from_tuple
+from src.a04_reason_logic.reason_idea import FactUnit, get_factunit_from_tuple
 
 
 def get_nodes_with_weighted_facts(

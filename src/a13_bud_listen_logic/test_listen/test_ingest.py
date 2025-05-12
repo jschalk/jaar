@@ -1,4 +1,4 @@
-from src.a05_item_logic.item import itemunit_shop
+from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a13_bud_listen_logic.listen import (
     generate_ingest_list,
@@ -40,10 +40,10 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     dirty_way = yao_speaker.make_way(status_way, dirty_str)
     sweep_str = "sweep"
     sweep_way = yao_speaker.make_way(casa_way, sweep_str)
-    yao_speaker.set_item(itemunit_shop(clean_str), status_way)
-    yao_speaker.set_item(itemunit_shop(dirty_str), status_way)
-    yao_speaker.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
-    yao_speaker.edit_item_attr(
+    yao_speaker.set_idea(ideaunit_shop(clean_str), status_way)
+    yao_speaker.set_idea(ideaunit_shop(dirty_str), status_way)
+    yao_speaker.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
+    yao_speaker.edit_idea_attr(
         sweep_way, reason_base=status_way, reason_premise=dirty_way
     )
     yao_speaker.add_fact(status_way, clean_way)
@@ -61,14 +61,14 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     zia_str = "Zia"
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
-    zia_budunit.set_l1_item(itemunit_shop(clean_str, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
     zia_debtor_pool = 78
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 1
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -76,8 +76,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     # THEN
     # clean_way = zia_budunit.make_l1_way(clean_str)
     clean_way = zia_budunit.make_l1_way(clean_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_way)
-    assert ingested_list[0] == clean_itemunit
+    clean_ideaunit = zia_budunit.get_idea_obj(clean_way)
+    assert ingested_list[0] == clean_ideaunit
     assert ingested_list[0].mass == zia_debtor_pool
 
 
@@ -87,15 +87,15 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_budunit.set_l1_item(itemunit_shop(clean_str, pledge=True))
-    zia_budunit.set_l1_item(itemunit_shop(cook_str, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_str, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -105,11 +105,11 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     assert len(ingested_list) == 2
     clean_way = zia_budunit.make_l1_way(clean_str)
     cook_way = zia_budunit.make_l1_way(cook_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_way)
-    cook_itemunit = zia_budunit.get_item_obj(cook_way)
-    assert ingested_list[0] == cook_itemunit
+    clean_ideaunit = zia_budunit.get_idea_obj(clean_way)
+    cook_ideaunit = zia_budunit.get_idea_obj(cook_way)
+    assert ingested_list[0] == cook_ideaunit
     assert ingested_list[0].mass == 16.0
-    assert ingested_list == [cook_itemunit, clean_itemunit]
+    assert ingested_list == [cook_ideaunit, clean_ideaunit]
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v3():
@@ -118,15 +118,15 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_budunit.set_l1_item(itemunit_shop(clean_str, pledge=True))
-    zia_budunit.set_l1_item(itemunit_shop(cook_str, mass=3, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_str, mass=3, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -134,9 +134,9 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     # THEN
     clean_way = zia_budunit.make_l1_way(clean_str)
     cook_way = zia_budunit.make_l1_way(cook_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_way)
-    cook_itemunit = zia_budunit.get_item_obj(cook_way)
-    assert ingested_list == [cook_itemunit, clean_itemunit]
+    clean_ideaunit = zia_budunit.get_idea_obj(clean_way)
+    cook_ideaunit = zia_budunit.get_idea_obj(cook_way)
+    assert ingested_list == [cook_ideaunit, clean_ideaunit]
     assert ingested_list[0].mass == 24.0
     assert ingested_list[1].mass == 8.0
 
@@ -147,15 +147,15 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_budunit.set_l1_item(itemunit_shop(clean_str, pledge=True))
-    zia_budunit.set_l1_item(itemunit_shop(cook_str, mass=2, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(clean_str, pledge=True))
+    zia_budunit.set_l1_idea(ideaunit_shop(cook_str, mass=2, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
-        item_list=list(zia_budunit.get_agenda_dict().values()),
+        idea_list=list(zia_budunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -163,8 +163,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     # THEN
     clean_way = zia_budunit.make_l1_way(clean_str)
     cook_way = zia_budunit.make_l1_way(cook_str)
-    clean_itemunit = zia_budunit.get_item_obj(clean_way)
-    cook_itemunit = zia_budunit.get_item_obj(cook_way)
+    clean_ideaunit = zia_budunit.get_idea_obj(clean_way)
+    cook_ideaunit = zia_budunit.get_idea_obj(cook_way)
     assert ingested_list[0].mass == 22
     assert ingested_list[1].mass == 10
-    assert ingested_list == [cook_itemunit, clean_itemunit]
+    assert ingested_list == [cook_ideaunit, clean_ideaunit]

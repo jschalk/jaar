@@ -561,7 +561,7 @@
         }
     },
     "fisc_tag": "A",
-    "itemroot": {
+    "idearoot": {
         "_kids": {
             "ACME": {
                 "_is_expanded": false,
@@ -572,7 +572,7 @@
                             "Abuse Deterrence and Reporting guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 116,
                                         "mass": 1,
                                         "pledge": true,
@@ -590,14 +590,14 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Abuse Deterrence and Reporting guildlines",
+                                "idea_tag": "Abuse Deterrence and Reporting guildlines",
                                 "_uid": 106,
                                 "mass": 1
                             },
                             "Know ACME Staff  and Safety #2 guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 115,
                                         "mass": 1,
                                         "reasonunits": {
@@ -614,14 +614,14 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Know ACME Staff  and Safety #2 guildlines",
+                                "idea_tag": "Know ACME Staff  and Safety #2 guildlines",
                                 "_uid": 105,
                                 "mass": 1
                             },
                             "Know Adult Sexual Misconduct guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 118,
                                         "mass": 1,
                                         "pledge": true,
@@ -639,12 +639,12 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Know Adult Sexual Misconduct guildlines",
+                                "idea_tag": "Know Adult Sexual Misconduct guildlines",
                                 "_uid": 108,
                                 "mass": 1
                             },
                             "Know Employee Intruction manuel.": {
-                                "item_tag": "Know Employee Intruction manuel.",
+                                "idea_tag": "Know Employee Intruction manuel.",
                                 "_uid": 123,
                                 "mass": 1,
                                 "pledge": true,
@@ -664,7 +664,7 @@
                             "Know Identifying and Supporting Houseless Youth guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 119,
                                         "mass": 1,
                                         "pledge": true,
@@ -682,14 +682,14 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Know Identifying and Supporting Houseless Youth guildlines",
+                                "idea_tag": "Know Identifying and Supporting Houseless Youth guildlines",
                                 "_uid": 109,
                                 "mass": 1
                             },
                             "Know Information Security Awareness guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 121,
                                         "mass": 1,
                                         "pledge": true,
@@ -707,14 +707,14 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Know Information Security Awareness guildlines",
+                                "idea_tag": "Know Information Security Awareness guildlines",
                                 "_uid": 111,
                                 "mass": 1
                             },
                             "Know Interbody retaliation guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 117,
                                         "mass": 1,
                                         "reasonunits": {
@@ -731,14 +731,14 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Know Interbody retaliation guildlines",
+                                "idea_tag": "Know Interbody retaliation guildlines",
                                 "_uid": 107,
                                 "mass": 1
                             },
                             "Rick Management and Hazard Analysis": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 122,
                                         "mass": 1,
                                         "reasonunits": {
@@ -755,14 +755,14 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Rick Management and Hazard Analysis",
+                                "idea_tag": "Rick Management and Hazard Analysis",
                                 "_uid": 112,
                                 "mass": 1
                             },
                             "know OSHA COVID-19 Rick Reduction guildlines": {
                                 "_kids": {
                                     "Accomplish Fall 2021 traaining": {
-                                        "item_tag": "Accomplish Fall 2021 traaining",
+                                        "idea_tag": "Accomplish Fall 2021 traaining",
                                         "_uid": 120,
                                         "mass": 1,
                                         "pledge": true,
@@ -780,12 +780,12 @@
                                         }
                                     }
                                 },
-                                "item_tag": "know OSHA COVID-19 Rick Reduction guildlines",
+                                "idea_tag": "know OSHA COVID-19 Rick Reduction guildlines",
                                 "_uid": 110,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "ACME Employee Responsiblities",
+                        "idea_tag": "ACME Employee Responsiblities",
                         "_uid": 102,
                         "mass": 1
                     },
@@ -797,7 +797,7 @@
                                     "check ETLs ran correctly": {
                                         "_kids": {
                                             "check emails": {
-                                                "item_tag": "check emails",
+                                                "idea_tag": "check emails",
                                                 "_uid": 138,
                                                 "mass": 1,
                                                 "pledge": true,
@@ -818,27 +818,27 @@
                                             "check mechanisms": {
                                                 "_kids": {
                                                     "MECHANISM1": {
-                                                        "item_tag": "MECHANISM1",
+                                                        "idea_tag": "MECHANISM1",
                                                         "_uid": 170,
                                                         "mass": 1
                                                     },
                                                     "MECHANISM2": {
-                                                        "item_tag": "MECHANISM2",
+                                                        "idea_tag": "MECHANISM2",
                                                         "_uid": 171,
                                                         "mass": 1
                                                     },
                                                     "MECHANISM3": {
-                                                        "item_tag": "MECHANISM3",
+                                                        "idea_tag": "MECHANISM3",
                                                         "_uid": 172,
                                                         "mass": 1
                                                     },
                                                     "MECHANISM4": {
-                                                        "item_tag": "MECHANISM4",
+                                                        "idea_tag": "MECHANISM4",
                                                         "_uid": 173,
                                                         "mass": 1
                                                     }
                                                 },
-                                                "item_tag": "check mechanisms",
+                                                "idea_tag": "check mechanisms",
                                                 "_uid": 139,
                                                 "mass": 1,
                                                 "pledge": true,
@@ -857,7 +857,7 @@
                                                 }
                                             }
                                         },
-                                        "item_tag": "check ETLs ran correctly",
+                                        "idea_tag": "check ETLs ran correctly",
                                         "_uid": 137,
                                         "mass": 1,
                                         "reasonunits": {
@@ -875,7 +875,7 @@
                                         }
                                     },
                                     "dress to slightly impress": {
-                                        "item_tag": "dress to slightly impress",
+                                        "idea_tag": "dress to slightly impress",
                                         "_uid": 158,
                                         "mass": 1,
                                         "pledge": true,
@@ -894,7 +894,7 @@
                                         }
                                     },
                                     "go to employment": {
-                                        "item_tag": "go to employment",
+                                        "idea_tag": "go to employment",
                                         "_uid": 231,
                                         "mass": 1,
                                         "pledge": true,
@@ -913,7 +913,7 @@
                                         }
                                     }
                                 },
-                                "item_tag": "IT DEPT off-hours responsiblities",
+                                "idea_tag": "IT DEPT off-hours responsiblities",
                                 "_uid": 136,
                                 "mass": 1,
                                 "reasonunits": {
@@ -933,7 +933,7 @@
                             "IT DEPT regular hours responsiblities": {
                                 "_kids": {
                                     "Add to Azure DevOps": {
-                                        "item_tag": "Add to Azure DevOps",
+                                        "idea_tag": "Add to Azure DevOps",
                                         "_uid": 156,
                                         "mass": 1,
                                         "pledge": true,
@@ -954,7 +954,7 @@
                                     "Datawarehouse": {
                                         "_kids": {
                                             "Datawarehouse Expertise acquisition": {
-                                                "item_tag": "Datawarehouse Expertise acquisition",
+                                                "idea_tag": "Datawarehouse Expertise acquisition",
                                                 "_uid": 142,
                                                 "mass": 1,
                                                 "pledge": true,
@@ -975,27 +975,27 @@
                                             "dev quantification script \"T2R8\"": {
                                                 "_kids": {
                                                     "MECHANISM1": {
-                                                        "item_tag": "MECHANISM1",
+                                                        "idea_tag": "MECHANISM1",
                                                         "_uid": 175,
                                                         "mass": 1
                                                     },
                                                     "MECHANISM2": {
-                                                        "item_tag": "MECHANISM2",
+                                                        "idea_tag": "MECHANISM2",
                                                         "_uid": 176,
                                                         "mass": 1
                                                     },
                                                     "MECHANISM4D": {
-                                                        "item_tag": "MECHANISM4D",
+                                                        "idea_tag": "MECHANISM4D",
                                                         "_uid": 177,
                                                         "mass": 1
                                                     },
                                                     "MECHANISM4DD": {
-                                                        "item_tag": "MECHANISM4DD",
+                                                        "idea_tag": "MECHANISM4DD",
                                                         "_uid": 174,
                                                         "mass": 1
                                                     }
                                                 },
-                                                "item_tag": "dev quantification script \"T2R8\"",
+                                                "idea_tag": "dev quantification script \"T2R8\"",
                                                 "_uid": 157,
                                                 "mass": 1,
                                                 "pledge": true,
@@ -1014,7 +1014,7 @@
                                                 }
                                             },
                                             "go to daily meeting ": {
-                                                "item_tag": "go to daily meeting ",
+                                                "idea_tag": "go to daily meeting ",
                                                 "_uid": 232,
                                                 "mass": 1,
                                                 "pledge": true,
@@ -1033,12 +1033,12 @@
                                                 }
                                             }
                                         },
-                                        "item_tag": "Datawarehouse",
+                                        "idea_tag": "Datawarehouse",
                                         "_uid": 135,
                                         "mass": 1
                                     },
                                     "IT DEPT general": {
-                                        "item_tag": "IT DEPT general",
+                                        "idea_tag": "IT DEPT general",
                                         "_uid": 141,
                                         "mass": 1,
                                         "reasonunits": {
@@ -1056,7 +1056,7 @@
                                         }
                                     },
                                     "Keep track of Chatroom conversations": {
-                                        "item_tag": "Keep track of Chatroom conversations",
+                                        "idea_tag": "Keep track of Chatroom conversations",
                                         "_uid": 151,
                                         "mass": 1,
                                         "pledge": true,
@@ -1077,7 +1077,7 @@
                                     "SQLIte": {
                                         "_kids": {
                                             "check for access": {
-                                                "item_tag": "check for access",
+                                                "idea_tag": "check for access",
                                                 "_uid": 143,
                                                 "mass": 1,
                                                 "reasonunits": {
@@ -1095,7 +1095,7 @@
                                                 }
                                             }
                                         },
-                                        "item_tag": "SQLIte",
+                                        "idea_tag": "SQLIte",
                                         "_uid": 140,
                                         "mass": 1,
                                         "reasonunits": {
@@ -1113,7 +1113,7 @@
                                         }
                                     },
                                     "consider management perspective": {
-                                        "item_tag": "consider management perspective",
+                                        "idea_tag": "consider management perspective",
                                         "_uid": 155,
                                         "mass": 1,
                                         "pledge": true,
@@ -1132,7 +1132,7 @@
                                         }
                                     }
                                 },
-                                "item_tag": "IT DEPT regular hours responsiblities",
+                                "idea_tag": "IT DEPT regular hours responsiblities",
                                 "_uid": 133,
                                 "mass": 1.0,
                                 "morph": false,
@@ -1152,7 +1152,7 @@
                                 }
                             }
                         },
-                        "item_tag": "IT DEPT",
+                        "idea_tag": "IT DEPT",
                         "_uid": 101,
                         "mass": 1,
                         "reasonunits": {
@@ -1170,7 +1170,7 @@
                         }
                     }
                 },
-                "item_tag": "ACME",
+                "idea_tag": "ACME",
                 "_uid": 100,
                 "mass": 1
             },
@@ -1178,17 +1178,17 @@
                 "_is_expanded": false,
                 "_kids": {
                     "interesting": {
-                        "item_tag": "interesting",
+                        "idea_tag": "interesting",
                         "_uid": 262,
                         "mass": 1
                     },
                     "not interesting": {
-                        "item_tag": "not interesting",
+                        "idea_tag": "not interesting",
                         "_uid": 263,
                         "mass": 1
                     }
                 },
-                "item_tag": "Aaron Donald objects effected by him",
+                "idea_tag": "Aaron Donald objects effected by him",
                 "_uid": 261,
                 "mass": 1
             },
@@ -1204,7 +1204,7 @@
                                             "Local college": {
                                                 "_kids": {
                                                     "browsing": {
-                                                        "item_tag": "browsing",
+                                                        "idea_tag": "browsing",
                                                         "_uid": 217,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1219,7 +1219,7 @@
                                                         }
                                                     },
                                                     "picnic": {
-                                                        "item_tag": "picnic",
+                                                        "idea_tag": "picnic",
                                                         "_uid": 216,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1234,7 +1234,7 @@
                                                         }
                                                     },
                                                     "street soccer": {
-                                                        "item_tag": "street soccer",
+                                                        "idea_tag": "street soccer",
                                                         "_uid": 213,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1249,7 +1249,7 @@
                                                         }
                                                     },
                                                     "swimming": {
-                                                        "item_tag": "swimming",
+                                                        "idea_tag": "swimming",
                                                         "_uid": 212,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1264,7 +1264,7 @@
                                                         }
                                                     }
                                                 },
-                                                "item_tag": "Local college",
+                                                "idea_tag": "Local college",
                                                 "_uid": 210,
                                                 "mass": 1,
                                                 "reasonunits": {
@@ -1281,7 +1281,7 @@
                                             "flats": {
                                                 "_kids": {
                                                     "be reponsible for rent": {
-                                                        "item_tag": "be reponsible for rent",
+                                                        "idea_tag": "be reponsible for rent",
                                                         "_uid": 209,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1298,7 +1298,7 @@
                                                     "enjoy silent time": {
                                                         "_kids": {
                                                             "maybe watch a video": {
-                                                                "item_tag": "maybe watch a video",
+                                                                "idea_tag": "maybe watch a video",
                                                                 "_uid": 218,
                                                                 "mass": 1,
                                                                 "reasonunits": {
@@ -1313,7 +1313,7 @@
                                                                 }
                                                             }
                                                         },
-                                                        "item_tag": "enjoy silent time",
+                                                        "idea_tag": "enjoy silent time",
                                                         "_uid": 214,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1328,7 +1328,7 @@
                                                         }
                                                     },
                                                     "flat": {
-                                                        "item_tag": "flat",
+                                                        "idea_tag": "flat",
                                                         "_uid": 211,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1343,7 +1343,7 @@
                                                         }
                                                     },
                                                     "gym time": {
-                                                        "item_tag": "gym time",
+                                                        "idea_tag": "gym time",
                                                         "_uid": 215,
                                                         "mass": 1,
                                                         "reasonunits": {
@@ -1358,7 +1358,7 @@
                                                         }
                                                     }
                                                 },
-                                                "item_tag": "flats",
+                                                "idea_tag": "flats",
                                                 "_uid": 208,
                                                 "mass": 1,
                                                 "reasonunits": {
@@ -1373,7 +1373,7 @@
                                                 }
                                             }
                                         },
-                                        "item_tag": "downtown",
+                                        "idea_tag": "downtown",
                                         "_uid": 207,
                                         "mass": 1,
                                         "reasonunits": {
@@ -1388,7 +1388,7 @@
                                         }
                                     }
                                 },
-                                "item_tag": "portland sovereignty",
+                                "idea_tag": "portland sovereignty",
                                 "_uid": 206,
                                 "mass": 1,
                                 "reasonunits": {
@@ -1403,7 +1403,7 @@
                                 }
                             },
                             "texas sovereignty": {
-                                "item_tag": "texas sovereignty",
+                                "idea_tag": "texas sovereignty",
                                 "_uid": 205,
                                 "mass": 1,
                                 "reasonunits": {
@@ -1418,7 +1418,7 @@
                                 }
                             }
                         },
-                        "item_tag": "American sovereignty",
+                        "idea_tag": "American sovereignty",
                         "_uid": 204,
                         "mass": 1,
                         "reasonunits": {
@@ -1433,7 +1433,7 @@
                         }
                     },
                     "French sovereignty": {
-                        "item_tag": "French sovereignty",
+                        "idea_tag": "French sovereignty",
                         "_uid": 203,
                         "mass": 1,
                         "reasonunits": {
@@ -1448,24 +1448,24 @@
                         }
                     }
                 },
-                "item_tag": "Asset management",
+                "idea_tag": "Asset management",
                 "_uid": 199,
                 "mass": 1
             },
             "Bob Dylan Root": {
                 "_kids": {
                     "Aint me Babe": {
-                        "item_tag": "Aint me Babe",
+                        "idea_tag": "Aint me Babe",
                         "_uid": 270,
                         "mass": 1
                     },
                     "tangled up in blue": {
-                        "item_tag": "tangled up in blue",
+                        "idea_tag": "tangled up in blue",
                         "_uid": 271,
                         "mass": 1
                     }
                 },
-                "item_tag": "Bob Dylan Root",
+                "idea_tag": "Bob Dylan Root",
                 "_uid": 269,
                 "mass": 1
             },
@@ -1475,7 +1475,7 @@
                     "bens friends be desperate for of housing support": {
                         "_kids": {
                             "Ask Aaron monthly what I can do": {
-                                "item_tag": "Ask Aaron monthly what I can do",
+                                "idea_tag": "Ask Aaron monthly what I can do",
                                 "_uid": 160,
                                 "awardlinks": {
                                     "Renee Elise Goldsberry": {
@@ -1497,7 +1497,7 @@
                                 }
                             }
                         },
-                        "item_tag": "bens friends be desperate for of housing support",
+                        "idea_tag": "bens friends be desperate for of housing support",
                         "_uid": 99,
                         "awardlinks": {
                             "Renee Elise Goldsberry": {
@@ -1521,7 +1521,7 @@
                     "develop D&B software": {
                         "_kids": {
                             "test program": {
-                                "item_tag": "test program",
+                                "idea_tag": "test program",
                                 "_uid": 178,
                                 "mass": 1,
                                 "pledge": true,
@@ -1548,7 +1548,7 @@
                                 }
                             }
                         },
-                        "item_tag": "develop D&B software",
+                        "idea_tag": "develop D&B software",
                         "_uid": 169,
                         "awardlinks": {
                             ";hurt by us dollar": {
@@ -1572,7 +1572,7 @@
                     "donate to pro-climate committees": {
                         "_kids": {
                             "donate to influential people that are pro-Climate Death": {
-                                "item_tag": "donate to influential people that are pro-Climate Death",
+                                "idea_tag": "donate to influential people that are pro-Climate Death",
                                 "_uid": 168,
                                 "awardlinks": {
                                     ";Climate Death": {
@@ -1606,7 +1606,7 @@
                                 }
                             }
                         },
-                        "item_tag": "donate to pro-climate committees",
+                        "idea_tag": "donate to pro-climate committees",
                         "_uid": 167,
                         "mass": 1,
                         "reasonunits": {
@@ -1621,7 +1621,7 @@
                         }
                     },
                     "late_night_go_to_sleep": {
-                        "item_tag": "late_night_go_to_sleep",
+                        "idea_tag": "late_night_go_to_sleep",
                         "_uid": 149,
                         "mass": 1,
                         "pledge": true,
@@ -1652,7 +1652,7 @@
                             "Ernesto Chavez": {
                                 "_kids": {
                                     "available for phone call": {
-                                        "item_tag": "available for phone call",
+                                        "idea_tag": "available for phone call",
                                         "mass": 4.0,
                                         "morph": false,
                                         "pledge": true,
@@ -1671,7 +1671,7 @@
                                         }
                                     }
                                 },
-                                "item_tag": "Ernesto Chavez",
+                                "idea_tag": "Ernesto Chavez",
                                 "mass": 4.0,
                                 "morph": false,
                                 "reasonunits": {
@@ -1683,7 +1683,7 @@
                             "sympathetic receptive to Aaron": {
                                 "_kids": {
                                     "be available for phone call": {
-                                        "item_tag": "be available for phone call",
+                                        "idea_tag": "be available for phone call",
                                         "_uid": 163,
                                         "awardlinks": {
                                             "Renee Elise Goldsberry": {
@@ -1717,7 +1717,7 @@
                                         }
                                     },
                                     "call Aaron and discuss methodology": {
-                                        "item_tag": "call Aaron and discuss methodology",
+                                        "idea_tag": "call Aaron and discuss methodology",
                                         "_uid": 164,
                                         "awardlinks": {
                                             ";Climate Death": {
@@ -1756,7 +1756,7 @@
                                         }
                                     }
                                 },
-                                "item_tag": "sympathetic receptive to Aaron",
+                                "idea_tag": "sympathetic receptive to Aaron",
                                 "_uid": 162,
                                 "awardlinks": {
                                     "Renee Elise Goldsberry": {
@@ -1778,7 +1778,7 @@
                                 }
                             }
                         },
-                        "item_tag": "sympathetic receptive",
+                        "idea_tag": "sympathetic receptive",
                         "_uid": 161,
                         "mass": 1,
                         "reasonunits": {
@@ -1795,7 +1795,7 @@
                     "write letters to reps": {
                         "_kids": {
                             "write letters about Climate Death to congressman": {
-                                "item_tag": "write letters about Climate Death to congressman",
+                                "idea_tag": "write letters about Climate Death to congressman",
                                 "_uid": 166,
                                 "awardlinks": {
                                     ";Climate Death": {
@@ -1828,7 +1828,7 @@
                                 }
                             }
                         },
-                        "item_tag": "write letters to reps",
+                        "idea_tag": "write letters to reps",
                         "_uid": 165,
                         "mass": 1,
                         "reasonunits": {
@@ -1843,7 +1843,7 @@
                         }
                     }
                 },
-                "item_tag": "D&B",
+                "idea_tag": "D&B",
                 "_uid": 96,
                 "awardlinks": {
                     ";Climate Death": {
@@ -1880,66 +1880,66 @@
                     "AOL AIM": {
                         "_kids": {
                             "PSU Ultimate": {
-                                "item_tag": "PSU Ultimate",
+                                "idea_tag": "PSU Ultimate",
                                 "_uid": 254,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "AOL AIM",
+                        "idea_tag": "AOL AIM",
                         "_uid": 253,
                         "mass": 1
                     },
                     "Faaceboook": {
-                        "item_tag": "Faaceboook",
+                        "idea_tag": "Faaceboook",
                         "_uid": 251,
                         "mass": 1
                     },
                     "Github": {
-                        "item_tag": "Github",
+                        "idea_tag": "Github",
                         "_uid": 252,
                         "mass": 1
                     },
                     "YahooVideo": {
-                        "item_tag": "YahooVideo",
+                        "idea_tag": "YahooVideo",
                         "_uid": 255,
                         "mass": 1
                     }
                 },
-                "item_tag": "Interweb",
+                "idea_tag": "Interweb",
                 "_uid": 250,
                 "mass": 1
             },
             "Moods": {
                 "_kids": {
                     "Bllod Meridan by Cormac": {
-                        "item_tag": "Bllod Meridan by Cormac",
+                        "idea_tag": "Bllod Meridan by Cormac",
                         "_uid": 265,
                         "mass": 1
                     },
                     "Happy": {
                         "_kids": {
                             "Happy - angerish": {
-                                "item_tag": "Happy - angerish",
+                                "idea_tag": "Happy - angerish",
                                 "_uid": 267,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "Happy",
+                        "idea_tag": "Happy",
                         "_uid": 266,
                         "mass": 1
                     },
                     "I need to waste time": {
-                        "item_tag": "I need to waste time",
+                        "idea_tag": "I need to waste time",
                         "mass": 1.0,
                         "morph": false
                     },
                     "hungry": {
-                        "item_tag": "hungry",
+                        "idea_tag": "hungry",
                         "_uid": 268,
                         "mass": 1
                     }
                 },
-                "item_tag": "Moods",
+                "idea_tag": "Moods",
                 "_uid": 264,
                 "mass": 1
             },
@@ -1947,7 +1947,7 @@
                 "_is_expanded": false,
                 "_kids": {
                     "France2": {
-                        "item_tag": "France2",
+                        "idea_tag": "France2",
                         "_uid": 235,
                         "mass": 1
                     },
@@ -1960,79 +1960,79 @@
                                             "Flats": {
                                                 "_kids": {
                                                     "10th floor gaarden": {
-                                                        "item_tag": "10th floor gaarden",
+                                                        "idea_tag": "10th floor gaarden",
                                                         "_uid": 246,
                                                         "mass": 1
                                                     },
                                                     "Apt 450": {
-                                                        "item_tag": "Apt 450",
+                                                        "idea_tag": "Apt 450",
                                                         "_uid": 247,
                                                         "mass": 1
                                                     },
                                                     "Gym": {
-                                                        "item_tag": "Gym",
+                                                        "idea_tag": "Gym",
                                                         "_uid": 248,
                                                         "mass": 1
                                                     },
                                                     "workspace": {
-                                                        "item_tag": "workspace",
+                                                        "idea_tag": "workspace",
                                                         "_uid": 249,
                                                         "mass": 1
                                                     }
                                                 },
-                                                "item_tag": "Flats",
+                                                "idea_tag": "Flats",
                                                 "_uid": 245,
                                                 "mass": 1
                                             },
                                             "PSU": {
                                                 "_kids": {
                                                     "Park Squares": {
-                                                        "item_tag": "Park Squares",
+                                                        "idea_tag": "Park Squares",
                                                         "_uid": 241,
                                                         "mass": 1
                                                     },
                                                     "Pool": {
-                                                        "item_tag": "Pool",
+                                                        "idea_tag": "Pool",
                                                         "_uid": 242,
                                                         "mass": 1
                                                     },
                                                     "Stott Field": {
-                                                        "item_tag": "Stott Field",
+                                                        "idea_tag": "Stott Field",
                                                         "_uid": 243,
                                                         "mass": 1
                                                     },
                                                     "library": {
-                                                        "item_tag": "library",
+                                                        "idea_tag": "library",
                                                         "_uid": 244,
                                                         "mass": 1
                                                     }
                                                 },
-                                                "item_tag": "PSU",
+                                                "idea_tag": "PSU",
                                                 "_uid": 240,
                                                 "mass": 1
                                             }
                                         },
-                                        "item_tag": "Downtown",
+                                        "idea_tag": "Downtown",
                                         "_uid": 239,
                                         "mass": 1
                                     }
                                 },
-                                "item_tag": "Portland OR",
+                                "idea_tag": "Portland OR",
                                 "_uid": 237,
                                 "mass": 1
                             },
                             "Texas": {
-                                "item_tag": "Texas",
+                                "idea_tag": "Texas",
                                 "_uid": 238,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "USA",
+                        "idea_tag": "USA",
                         "_uid": 236,
                         "mass": 1
                     }
                 },
-                "item_tag": "Nation-States",
+                "idea_tag": "Nation-States",
                 "_uid": 234,
                 "mass": 1
             },
@@ -2040,17 +2040,17 @@
                 "_is_expanded": false,
                 "_kids": {
                     "Big Lewbwski": {
-                        "item_tag": "Big Lewbwski",
+                        "idea_tag": "Big Lewbwski",
                         "_uid": 273,
                         "mass": 1
                     },
                     "Star Wars eps IV": {
-                        "item_tag": "Star Wars eps IV",
+                        "idea_tag": "Star Wars eps IV",
                         "_uid": 274,
                         "mass": 1
                     }
                 },
-                "item_tag": "No Movie playing",
+                "idea_tag": "No Movie playing",
                 "_uid": 272,
                 "mass": 1
             },
@@ -2058,12 +2058,12 @@
                 "_is_expanded": false,
                 "_kids": {
                     "Summer": {
-                        "item_tag": "Summer",
+                        "idea_tag": "Summer",
                         "_uid": 276,
                         "mass": 1
                     }
                 },
-                "item_tag": "Seasons",
+                "idea_tag": "Seasons",
                 "_uid": 275,
                 "mass": 1
             },
@@ -2073,7 +2073,7 @@
                     "decrease carbon footprint": {
                         "_kids": {
                             "never fly a private G5": {
-                                "item_tag": "never fly a private G5",
+                                "idea_tag": "never fly a private G5",
                                 "mass": 1.0,
                                 "morph": false,
                                 "pledge": true,
@@ -2091,12 +2091,12 @@
                                 }
                             }
                         },
-                        "item_tag": "decrease carbon footprint",
+                        "idea_tag": "decrease carbon footprint",
                         "mass": 1.0,
                         "morph": false
                     }
                 },
-                "item_tag": "Better Stuff Proposal",
+                "idea_tag": "Better Stuff Proposal",
                 "mass": 1.0,
                 "morph": false
             },
@@ -2104,17 +2104,17 @@
                 "_is_expanded": false,
                 "_kids": {
                     "Not tired": {
-                        "item_tag": "Not tired",
+                        "idea_tag": "Not tired",
                         "_uid": 278,
                         "mass": 1
                     },
                     "Tired": {
-                        "item_tag": "Tired",
+                        "idea_tag": "Tired",
                         "_uid": 279,
                         "mass": 1
                     }
                 },
-                "item_tag": "Tired Status",
+                "idea_tag": "Tired Status",
                 "_uid": 277,
                 "mass": 1
             },
@@ -2122,7 +2122,7 @@
                 "_is_expanded": false,
                 "_kids": {
                     "check on m33": {
-                        "item_tag": "check on m33",
+                        "idea_tag": "check on m33",
                         "_uid": 221,
                         "mass": 1,
                         "reasonunits": {
@@ -2137,7 +2137,7 @@
                         }
                     },
                     "contemplate the disc": {
-                        "item_tag": "contemplate the disc",
+                        "idea_tag": "contemplate the disc",
                         "_uid": 229,
                         "mass": 1,
                         "reasonunits": {
@@ -2154,7 +2154,7 @@
                     "playing ultimate": {
                         "_kids": {
                             "check for mini ultimate at park": {
-                                "item_tag": "check for mini ultimate at park",
+                                "idea_tag": "check for mini ultimate at park",
                                 "_uid": 219,
                                 "mass": 1,
                                 "reasonunits": {
@@ -2169,7 +2169,7 @@
                                 }
                             }
                         },
-                        "item_tag": "playing ultimate",
+                        "idea_tag": "playing ultimate",
                         "_uid": 201,
                         "mass": 1,
                         "reasonunits": {
@@ -2184,7 +2184,7 @@
                         }
                     },
                     "relaxing": {
-                        "item_tag": "relaxing",
+                        "idea_tag": "relaxing",
                         "_uid": 202,
                         "mass": 1,
                         "reasonunits": {
@@ -2199,7 +2199,7 @@
                         }
                     }
                 },
-                "item_tag": "Ultimate Frisbee",
+                "idea_tag": "Ultimate Frisbee",
                 "_uid": 200,
                 "mass": 1,
                 "reasonunits": {
@@ -2219,7 +2219,7 @@
                     "Swimming in Williamette watershed": {
                         "_kids": {
                             "Go climbing at east Circuit": {
-                                "item_tag": "Go climbing at east Circuit",
+                                "idea_tag": "Go climbing at east Circuit",
                                 "_uid": 226,
                                 "mass": 1,
                                 "reasonunits": {
@@ -2234,7 +2234,7 @@
                                 }
                             },
                             "bike around": {
-                                "item_tag": "bike around",
+                                "idea_tag": "bike around",
                                 "_uid": 227,
                                 "mass": 1,
                                 "reasonunits": {
@@ -2249,7 +2249,7 @@
                                 }
                             },
                             "trout": {
-                                "item_tag": "trout",
+                                "idea_tag": "trout",
                                 "_uid": 228,
                                 "mass": 1,
                                 "reasonunits": {
@@ -2264,7 +2264,7 @@
                                 }
                             }
                         },
-                        "item_tag": "Swimming in Williamette watershed",
+                        "idea_tag": "Swimming in Williamette watershed",
                         "_uid": 225,
                         "mass": 1,
                         "reasonunits": {
@@ -2279,7 +2279,7 @@
                         }
                     }
                 },
-                "item_tag": "Water Living",
+                "idea_tag": "Water Living",
                 "_uid": 223,
                 "mass": 1
             },
@@ -2291,27 +2291,27 @@
                             "East Side of Watershed": {
                                 "_kids": {
                                     "flat": {
-                                        "item_tag": "flat",
+                                        "idea_tag": "flat",
                                         "_uid": 260,
                                         "mass": 1
                                     }
                                 },
-                                "item_tag": "East Side of Watershed",
+                                "idea_tag": "East Side of Watershed",
                                 "_uid": 258,
                                 "mass": 1
                             },
                             "West side of Watershed": {
-                                "item_tag": "West side of Watershed",
+                                "idea_tag": "West side of Watershed",
                                 "_uid": 259,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "Williamette WaterShed",
+                        "idea_tag": "Williamette WaterShed",
                         "_uid": 257,
                         "mass": 1
                     }
                 },
-                "item_tag": "WaterExistence",
+                "idea_tag": "WaterExistence",
                 "_uid": 256,
                 "mass": 1
             },
@@ -2322,7 +2322,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "be reponsible for rent": {
-                                "item_tag": "be reponsible for rent",
+                                "idea_tag": "be reponsible for rent",
                                 "_uid": 45,
                                 "awardlinks": {
                                     ";Family": {
@@ -2347,7 +2347,7 @@
                                 }
                             },
                             "be responsible for expenses card": {
-                                "item_tag": "be responsible for expenses card",
+                                "idea_tag": "be responsible for expenses card",
                                 "_uid": 31,
                                 "awardlinks": {
                                     ";Family": {
@@ -2372,7 +2372,7 @@
                                 }
                             },
                             "be responsible for utilities": {
-                                "item_tag": "be responsible for utilities",
+                                "idea_tag": "be responsible for utilities",
                                 "_uid": 37,
                                 "awardlinks": {
                                     "Perrison": {
@@ -2397,7 +2397,7 @@
                                 }
                             },
                             "set aside a little bucks for fun the week": {
-                                "item_tag": "set aside a little bucks for fun the week",
+                                "idea_tag": "set aside a little bucks for fun the week",
                                 "_uid": 75,
                                 "awardlinks": {
                                     ";Family": {
@@ -2422,7 +2422,7 @@
                                 }
                             }
                         },
-                        "item_tag": "Financial Ops",
+                        "idea_tag": "Financial Ops",
                         "_uid": 148,
                         "mass": 1
                     },
@@ -2430,36 +2430,36 @@
                         "_is_expanded": false,
                         "_kids": {
                             "Bike Garage": {
-                                "item_tag": "Bike Garage",
+                                "idea_tag": "Bike Garage",
                                 "_uid": 185,
                                 "mass": 1
                             },
                             "Bike Gym": {
-                                "item_tag": "Bike Gym",
+                                "idea_tag": "Bike Gym",
                                 "_uid": 184,
                                 "mass": 1
                             },
                             "Flat": {
                                 "_kids": {
                                     "bathroom #2": {
-                                        "item_tag": "bathroom #2",
+                                        "idea_tag": "bathroom #2",
                                         "_uid": 196,
                                         "mass": 1
                                     },
                                     "bedroom #1": {
                                         "_kids": {
                                             "big bathroom": {
-                                                "item_tag": "big bathroom",
+                                                "idea_tag": "big bathroom",
                                                 "_uid": 195,
                                                 "mass": 1
                                             },
                                             "closet": {
-                                                "item_tag": "closet",
+                                                "idea_tag": "closet",
                                                 "_uid": 194,
                                                 "mass": 1
                                             }
                                         },
-                                        "item_tag": "bedroom #1",
+                                        "idea_tag": "bedroom #1",
                                         "_uid": 191,
                                         "mass": 1
                                     },
@@ -2468,7 +2468,7 @@
                                             "bed area": {
                                                 "_kids": {
                                                     "heater maintenance": {
-                                                        "item_tag": "heater maintenance",
+                                                        "idea_tag": "heater maintenance",
                                                         "_uid": 198,
                                                         "awardlinks": {
                                                             "Norberto": {
@@ -2480,62 +2480,62 @@
                                                         "mass": 1
                                                     }
                                                 },
-                                                "item_tag": "bed area",
+                                                "idea_tag": "bed area",
                                                 "_uid": 197,
                                                 "mass": 1
                                             },
                                             "closet": {
-                                                "item_tag": "closet",
+                                                "idea_tag": "closet",
                                                 "_uid": 193,
                                                 "mass": 1
                                             }
                                         },
-                                        "item_tag": "bedroom #2",
+                                        "idea_tag": "bedroom #2",
                                         "_uid": 192,
                                         "mass": 1
                                     },
                                     "cookery": {
-                                        "item_tag": "cookery",
+                                        "idea_tag": "cookery",
                                         "_uid": 189,
                                         "mass": 1
                                     },
                                     "dining area": {
-                                        "item_tag": "dining area",
+                                        "idea_tag": "dining area",
                                         "_uid": 190,
                                         "mass": 1
                                     },
                                     "maintenance": {
-                                        "item_tag": "maintenance",
+                                        "idea_tag": "maintenance",
                                         "_uid": 187,
                                         "mass": 1
                                     },
                                     "nursery": {
-                                        "item_tag": "nursery",
+                                        "idea_tag": "nursery",
                                         "_uid": 188,
                                         "mass": 1
                                     }
                                 },
-                                "item_tag": "Flat",
+                                "idea_tag": "Flat",
                                 "_uid": 181,
                                 "mass": 1
                             },
                             "Lifting Gym": {
-                                "item_tag": "Lifting Gym",
+                                "idea_tag": "Lifting Gym",
                                 "_uid": 183,
                                 "mass": 1
                             },
                             "Playing in nurserys": {
-                                "item_tag": "Playing in nurserys",
+                                "idea_tag": "Playing in nurserys",
                                 "_uid": 186,
                                 "mass": 1
                             },
                             "Pool": {
-                                "item_tag": "Pool",
+                                "idea_tag": "Pool",
                                 "_uid": 182,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "Housing",
+                        "idea_tag": "Housing",
                         "_uid": 180,
                         "awardlinks": {
                             ";MerVista Apt": {
@@ -2547,7 +2547,7 @@
                         "mass": 1
                     },
                     "call Crazy pete to say hi": {
-                        "item_tag": "call Crazy pete to say hi",
+                        "idea_tag": "call Crazy pete to say hi",
                         "_uid": 35,
                         "awardlinks": {
                             "Perrison": {
@@ -2574,7 +2574,7 @@
                         }
                     },
                     "check up on old family friends": {
-                        "item_tag": "check up on old family friends",
+                        "idea_tag": "check up on old family friends",
                         "_uid": 222,
                         "mass": 1,
                         "reasonunits": {
@@ -2591,7 +2591,7 @@
                     "cleaning": {
                         "_kids": {
                             "check cat water": {
-                                "item_tag": "check cat water",
+                                "idea_tag": "check cat water",
                                 "_uid": 33,
                                 "awardlinks": {
                                     ";Family": {
@@ -2617,7 +2617,7 @@
                                 }
                             },
                             "check humidifer": {
-                                "item_tag": "check humidifer",
+                                "idea_tag": "check humidifer",
                                 "_uid": 159,
                                 "mass": 1,
                                 "pledge": true,
@@ -2636,7 +2636,7 @@
                                 }
                             },
                             "clean baby seats": {
-                                "item_tag": "clean baby seats",
+                                "idea_tag": "clean baby seats",
                                 "_uid": 49,
                                 "awardlinks": {
                                     ";Family": {
@@ -2662,7 +2662,7 @@
                                 }
                             },
                             "clean bathroom": {
-                                "item_tag": "clean bathroom",
+                                "idea_tag": "clean bathroom",
                                 "_uid": 65,
                                 "awardlinks": {
                                     ";Family": {
@@ -2688,7 +2688,7 @@
                                 }
                             },
                             "clean cat poo": {
-                                "item_tag": "clean cat poo",
+                                "idea_tag": "clean cat poo",
                                 "_uid": 9,
                                 "awardlinks": {
                                     ";Family": {
@@ -2715,7 +2715,7 @@
                                 }
                             },
                             "clean humidifiers": {
-                                "item_tag": "clean humidifiers",
+                                "idea_tag": "clean humidifiers",
                                 "_uid": 55,
                                 "awardlinks": {
                                     ";Family": {
@@ -2741,7 +2741,7 @@
                                 }
                             },
                             "clean sheets couch blankets": {
-                                "item_tag": "clean sheets couch blankets",
+                                "idea_tag": "clean sheets couch blankets",
                                 "_uid": 41,
                                 "awardlinks": {
                                     "Perrison": {
@@ -2767,7 +2767,7 @@
                                 }
                             },
                             "clean table": {
-                                "item_tag": "clean table",
+                                "idea_tag": "clean table",
                                 "_uid": 53,
                                 "awardlinks": {
                                     ";Family": {
@@ -2793,7 +2793,7 @@
                                 }
                             },
                             "deep clean play mat": {
-                                "item_tag": "deep clean play mat",
+                                "idea_tag": "deep clean play mat",
                                 "_uid": 71,
                                 "awardlinks": {
                                     ";Family": {
@@ -2819,7 +2819,7 @@
                                 }
                             },
                             "empty roomba": {
-                                "item_tag": "empty roomba",
+                                "idea_tag": "empty roomba",
                                 "_uid": 11,
                                 "awardlinks": {
                                     ";Family": {
@@ -2845,7 +2845,7 @@
                                 }
                             },
                             "empty roomba Friday": {
-                                "item_tag": "empty roomba Friday",
+                                "idea_tag": "empty roomba Friday",
                                 "_uid": 13,
                                 "awardlinks": {
                                     ";Family": {
@@ -2873,22 +2873,22 @@
                             "laundry basket status": {
                                 "_kids": {
                                     "full": {
-                                        "item_tag": "full",
+                                        "idea_tag": "full",
                                         "mass": 1.0,
                                         "morph": false
                                     },
                                     "not full": {
-                                        "item_tag": "not full",
+                                        "idea_tag": "not full",
                                         "mass": 1.0,
                                         "morph": false
                                     }
                                 },
-                                "item_tag": "laundry basket status",
+                                "idea_tag": "laundry basket status",
                                 "mass": 1.0,
                                 "morph": false
                             },
                             "laundry monday": {
-                                "item_tag": "laundry monday",
+                                "idea_tag": "laundry monday",
                                 "_uid": 25,
                                 "awardlinks": {
                                     ";Family": {
@@ -2922,7 +2922,7 @@
                                 }
                             },
                             "laundry saturday": {
-                                "item_tag": "laundry saturday",
+                                "idea_tag": "laundry saturday",
                                 "_uid": 29,
                                 "awardlinks": {
                                     "Travis Fox": {
@@ -2956,7 +2956,7 @@
                                 }
                             },
                             "laundry thursday": {
-                                "item_tag": "laundry thursday",
+                                "idea_tag": "laundry thursday",
                                 "mass": 1.0,
                                 "morph": false,
                                 "pledge": true,
@@ -2983,7 +2983,7 @@
                                 }
                             },
                             "laundry wednesday": {
-                                "item_tag": "laundry wednesday",
+                                "idea_tag": "laundry wednesday",
                                 "_uid": 27,
                                 "awardlinks": {
                                     "America": {
@@ -3017,7 +3017,7 @@
                                 }
                             },
                             "morning cookery clean-up": {
-                                "item_tag": "morning cookery clean-up",
+                                "idea_tag": "morning cookery clean-up",
                                 "_uid": 150,
                                 "mass": 1,
                                 "reasonunits": {
@@ -3035,7 +3035,7 @@
                                 }
                             },
                             "prepare_bed clean bedroom": {
-                                "item_tag": "prepare_bed clean bedroom",
+                                "idea_tag": "prepare_bed clean bedroom",
                                 "_uid": 63,
                                 "awardlinks": {
                                     ";Family": {
@@ -3061,7 +3061,7 @@
                                 }
                             },
                             "roomba bedroom": {
-                                "item_tag": "roomba bedroom",
+                                "idea_tag": "roomba bedroom",
                                 "_uid": 15,
                                 "awardlinks": {
                                     ";Family": {
@@ -3087,7 +3087,7 @@
                                 }
                             },
                             "roomba bedroom Friday": {
-                                "item_tag": "roomba bedroom Friday",
+                                "idea_tag": "roomba bedroom Friday",
                                 "_uid": 17,
                                 "awardlinks": {
                                     ";Family": {
@@ -3113,7 +3113,7 @@
                                 }
                             },
                             "roomba living area": {
-                                "item_tag": "roomba living area",
+                                "idea_tag": "roomba living area",
                                 "_uid": 19,
                                 "awardlinks": {
                                     ";Family": {
@@ -3139,7 +3139,7 @@
                                 }
                             },
                             "roomba living area thur": {
-                                "item_tag": "roomba living area thur",
+                                "idea_tag": "roomba living area thur",
                                 "_uid": 21,
                                 "awardlinks": {
                                     ";Family": {
@@ -3165,7 +3165,7 @@
                                 }
                             },
                             "roomba maintenance": {
-                                "item_tag": "roomba maintenance",
+                                "idea_tag": "roomba maintenance",
                                 "_uid": 51,
                                 "awardlinks": {
                                     ";Family": {
@@ -3191,7 +3191,7 @@
                                 }
                             },
                             "wipe down play mat2": {
-                                "item_tag": "wipe down play mat2",
+                                "idea_tag": "wipe down play mat2",
                                 "_uid": 69,
                                 "awardlinks": {
                                     ";Family": {
@@ -3217,7 +3217,7 @@
                                 }
                             }
                         },
-                        "item_tag": "cleaning",
+                        "idea_tag": "cleaning",
                         "_uid": 146,
                         "mass": 1,
                         "reasonunits": {
@@ -3235,7 +3235,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "5 push-ups": {
-                                "item_tag": "5 push-ups",
+                                "idea_tag": "5 push-ups",
                                 "_uid": 5,
                                 "awardlinks": {
                                     ";Family": {
@@ -3261,7 +3261,7 @@
                                 }
                             },
                             "check protein for week is adequate": {
-                                "item_tag": "check protein for week is adequate",
+                                "idea_tag": "check protein for week is adequate",
                                 "_uid": 61,
                                 "awardlinks": {
                                     ";Family": {
@@ -3287,7 +3287,7 @@
                                 }
                             },
                             "clean ears": {
-                                "item_tag": "clean ears",
+                                "idea_tag": "clean ears",
                                 "_uid": 79,
                                 "awardlinks": {
                                     ";Family": {
@@ -3313,7 +3313,7 @@
                                 }
                             },
                             "clip body nails": {
-                                "item_tag": "clip body nails",
+                                "idea_tag": "clip body nails",
                                 "_uid": 77,
                                 "awardlinks": {
                                     ";Family": {
@@ -3339,7 +3339,7 @@
                                 }
                             },
                             "cook veggies every morning": {
-                                "item_tag": "cook veggies every morning",
+                                "idea_tag": "cook veggies every morning",
                                 "_uid": 59,
                                 "awardlinks": {
                                     ";Family": {
@@ -3365,7 +3365,7 @@
                                 }
                             },
                             "flossing teeth": {
-                                "item_tag": "flossing teeth",
+                                "idea_tag": "flossing teeth",
                                 "_uid": 47,
                                 "awardlinks": {
                                     ";Family": {
@@ -3393,7 +3393,7 @@
                             "mass traaining": {
                                 "_kids": {
                                     "bike or stuff": {
-                                        "item_tag": "bike or stuff",
+                                        "idea_tag": "bike or stuff",
                                         "_uid": 92,
                                         "awardlinks": {
                                             ";Family": {
@@ -3421,17 +3421,17 @@
                                     "chest and arms (mon)": {
                                         "_kids": {
                                             "bi and triceps exercises": {
-                                                "item_tag": "bi and triceps exercises",
+                                                "idea_tag": "bi and triceps exercises",
                                                 "_uid": 130,
                                                 "mass": 1
                                             },
                                             "chest  exercises": {
-                                                "item_tag": "chest  exercises",
+                                                "idea_tag": "chest  exercises",
                                                 "_uid": 129,
                                                 "mass": 1
                                             }
                                         },
-                                        "item_tag": "chest and arms (mon)",
+                                        "idea_tag": "chest and arms (mon)",
                                         "_uid": 84,
                                         "awardlinks": {
                                             ";Family": {
@@ -3457,7 +3457,7 @@
                                         }
                                     },
                                     "core and squats": {
-                                        "item_tag": "core and squats",
+                                        "idea_tag": "core and squats",
                                         "_uid": 179,
                                         "mass": 1,
                                         "reasonunits": {
@@ -3475,7 +3475,7 @@
                                         }
                                     },
                                     "core lower back": {
-                                        "item_tag": "core lower back",
+                                        "idea_tag": "core lower back",
                                         "_uid": 86,
                                         "awardlinks": {
                                             ";Family": {
@@ -3501,7 +3501,7 @@
                                         }
                                     },
                                     "rest": {
-                                        "item_tag": "rest",
+                                        "idea_tag": "rest",
                                         "_uid": 94,
                                         "awardlinks": {
                                             ";Family": {
@@ -3528,21 +3528,21 @@
                                     "shoulders and upper back": {
                                         "_kids": {
                                             "shoulder exercises": {
-                                                "item_tag": "shoulder exercises",
+                                                "idea_tag": "shoulder exercises",
                                                 "_uid": 131,
                                                 "mass": 1.0,
                                                 "morph": false,
                                                 "pledge": true
                                             },
                                             "upper back exercises": {
-                                                "item_tag": "upper back exercises",
+                                                "idea_tag": "upper back exercises",
                                                 "_uid": 132,
                                                 "mass": 1.0,
                                                 "morph": false,
                                                 "pledge": true
                                             }
                                         },
-                                        "item_tag": "shoulders and upper back",
+                                        "idea_tag": "shoulders and upper back",
                                         "_uid": 82,
                                         "awardlinks": {
                                             ";Family": {
@@ -3568,7 +3568,7 @@
                                         }
                                     },
                                     "squats hamstrings and calves": {
-                                        "item_tag": "squats hamstrings and calves",
+                                        "idea_tag": "squats hamstrings and calves",
                                         "_uid": 90,
                                         "awardlinks": {
                                             ";Family": {
@@ -3594,12 +3594,12 @@
                                         }
                                     }
                                 },
-                                "item_tag": "mass traaining",
+                                "idea_tag": "mass traaining",
                                 "_uid": 81,
                                 "mass": 1
                             },
                             "morning multivitamin": {
-                                "item_tag": "morning multivitamin",
+                                "idea_tag": "morning multivitamin",
                                 "_uid": 3,
                                 "awardlinks": {
                                     ";Family": {
@@ -3625,7 +3625,7 @@
                                 }
                             },
                             "night multivitamin": {
-                                "item_tag": "night multivitamin",
+                                "idea_tag": "night multivitamin",
                                 "_uid": 230,
                                 "mass": 1,
                                 "reasonunits": {
@@ -3643,7 +3643,7 @@
                                 }
                             },
                             "shampooing": {
-                                "item_tag": "shampooing",
+                                "idea_tag": "shampooing",
                                 "_uid": 39,
                                 "awardlinks": {
                                     ";Family": {
@@ -3669,7 +3669,7 @@
                                 }
                             },
                             "straight back for 45 secs": {
-                                "item_tag": "straight back for 45 secs",
+                                "idea_tag": "straight back for 45 secs",
                                 "_uid": 57,
                                 "awardlinks": {
                                     ";Family": {
@@ -3698,7 +3698,7 @@
                                 "_is_expanded": false,
                                 "_kids": {
                                     "back": {
-                                        "item_tag": "back",
+                                        "idea_tag": "back",
                                         "mass": 30.0,
                                         "morph": false,
                                         "pledge": true,
@@ -3717,7 +3717,7 @@
                                         }
                                     },
                                     "legs": {
-                                        "item_tag": "legs",
+                                        "idea_tag": "legs",
                                         "mass": 30.0,
                                         "morph": false,
                                         "pledge": true,
@@ -3736,13 +3736,13 @@
                                         }
                                     },
                                     "waist": {
-                                        "item_tag": "waist",
+                                        "idea_tag": "waist",
                                         "mass": 30.0,
                                         "morph": false,
                                         "pledge": true
                                     }
                                 },
-                                "item_tag": "stretch",
+                                "idea_tag": "stretch",
                                 "mass": 30.0,
                                 "morph": false,
                                 "pledge": true,
@@ -3761,7 +3761,7 @@
                                 }
                             },
                             "trim beard": {
-                                "item_tag": "trim beard",
+                                "idea_tag": "trim beard",
                                 "_uid": 73,
                                 "awardlinks": {
                                     ";Family": {
@@ -3787,12 +3787,12 @@
                                 }
                             }
                         },
-                        "item_tag": "exercise",
+                        "idea_tag": "exercise",
                         "_uid": 147,
                         "mass": 1
                     },
                     "keep up with friends": {
-                        "item_tag": "keep up with friends",
+                        "idea_tag": "keep up with friends",
                         "_uid": 220,
                         "mass": 1,
                         "reasonunits": {
@@ -3810,7 +3810,7 @@
                         "_is_expanded": false,
                         "_kids": {
                             "clip oldest nails": {
-                                "item_tag": "clip oldest nails",
+                                "idea_tag": "clip oldest nails",
                                 "_uid": 23,
                                 "awardlinks": {
                                     "America": {
@@ -3844,7 +3844,7 @@
                                 }
                             },
                             "get rid of toy get new toy": {
-                                "item_tag": "get rid of toy get new toy",
+                                "idea_tag": "get rid of toy get new toy",
                                 "_uid": 43,
                                 "awardlinks": {
                                     ";Family": {
@@ -3878,7 +3878,7 @@
                                 }
                             }
                         },
-                        "item_tag": "responsible for kids",
+                        "idea_tag": "responsible for kids",
                         "_uid": 144,
                         "mass": 1,
                         "reasonunits": {
@@ -3893,7 +3893,7 @@
                         }
                     },
                     "say double hi to birds": {
-                        "item_tag": "say double hi to birds",
+                        "idea_tag": "say double hi to birds",
                         "mass": 25.0,
                         "morph": false,
                         "pledge": true,
@@ -3912,7 +3912,7 @@
                         }
                     },
                     "say hi to birds": {
-                        "item_tag": "say hi to birds",
+                        "idea_tag": "say hi to birds",
                         "_uid": 7,
                         "awardlinks": {
                             ";Family": {
@@ -3938,7 +3938,7 @@
                         }
                     }
                 },
-                "item_tag": "casa",
+                "idea_tag": "casa",
                 "_uid": 2,
                 "mass": 20.0,
                 "morph": false
@@ -3950,7 +3950,7 @@
                         "_kids": {
                             "400 year segment": {
                                 "_is_expanded": false,
-                                "item_tag": "400 year segment",
+                                "idea_tag": "400 year segment",
                                 "denom": 7,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3960,7 +3960,7 @@
                             },
                             "400 year segments": {
                                 "_is_expanded": false,
-                                "item_tag": "400 year segments",
+                                "idea_tag": "400 year segments",
                                 "denom": 210379680,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3970,7 +3970,7 @@
                             },
                             "day": {
                                 "_is_expanded": false,
-                                "item_tag": "day",
+                                "idea_tag": "day",
                                 "denom": 1022679.0,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3980,7 +3980,7 @@
                             },
                             "days": {
                                 "_is_expanded": false,
-                                "item_tag": "days",
+                                "idea_tag": "days",
                                 "denom": 1440,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3990,7 +3990,7 @@
                             },
                             "week": {
                                 "_is_expanded": false,
-                                "item_tag": "week",
+                                "idea_tag": "week",
                                 "denom": 146097.0,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -4000,7 +4000,7 @@
                             },
                             "weeks": {
                                 "_is_expanded": false,
-                                "item_tag": "weeks",
+                                "idea_tag": "weeks",
                                 "denom": 10080,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -4011,7 +4011,7 @@
                             "x2": {
                                 "_kids": {
                                     "Sept 4th 2023 9am": {
-                                        "item_tag": "Sept 4th 2023 9am",
+                                        "idea_tag": "Sept 4th 2023 9am",
                                         "gogo_want": 1064350680.0,
                                         "mass": 1.0,
                                         "morph": false,
@@ -4020,28 +4020,28 @@
                                     "monthly 1st business day": {
                                         "_kids": {
                                             "2023 Feb 9am": {
-                                                "item_tag": "2023 Feb 9am",
+                                                "idea_tag": "2023 Feb 9am",
                                                 "gogo_want": 1064041020.0,
                                                 "mass": 1.0,
                                                 "morph": false,
                                                 "stop_want": 1064041020.0
                                             }
                                         },
-                                        "item_tag": "monthly 1st business day",
+                                        "idea_tag": "monthly 1st business day",
                                         "gogo_want": 0.0,
                                         "mass": 1.0,
                                         "morph": false,
                                         "stop_want": 1472657760.0
                                     }
                                 },
-                                "item_tag": "x2",
+                                "idea_tag": "x2",
                                 "gogo_want": 0.0,
                                 "mass": 1.0,
                                 "morph": false,
                                 "stop_want": 1472657760.0
                             }
                         },
-                        "item_tag": "gregtime",
+                        "idea_tag": "gregtime",
                         "begin": 0,
                         "close": 1472657760,
                         "mass": 1
@@ -4053,90 +4053,90 @@
                                 "_kids": {
                                     "1-Jan": {
                                         "_is_expanded": false,
-                                        "item_tag": "1-Jan",
+                                        "idea_tag": "1-Jan",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 44640
                                     },
                                     "10-Oct": {
                                         "_is_expanded": false,
-                                        "item_tag": "10-Oct",
+                                        "idea_tag": "10-Oct",
                                         "gogo_want": 393120,
                                         "mass": 1,
                                         "stop_want": 437760
                                     },
                                     "11-Nov": {
                                         "_is_expanded": false,
-                                        "item_tag": "11-Nov",
+                                        "idea_tag": "11-Nov",
                                         "gogo_want": 437760,
                                         "mass": 1,
                                         "stop_want": 480960
                                     },
                                     "12-Dec": {
                                         "_is_expanded": false,
-                                        "item_tag": "12-Dec",
+                                        "idea_tag": "12-Dec",
                                         "gogo_want": 480960,
                                         "mass": 1,
                                         "stop_want": 525600
                                     },
                                     "2-Feb28": {
                                         "_is_expanded": false,
-                                        "item_tag": "2-Feb28",
+                                        "idea_tag": "2-Feb28",
                                         "gogo_want": 44640,
                                         "mass": 1,
                                         "stop_want": 84960
                                     },
                                     "3-Mar": {
                                         "_is_expanded": false,
-                                        "item_tag": "3-Mar",
+                                        "idea_tag": "3-Mar",
                                         "gogo_want": 84960,
                                         "mass": 1,
                                         "stop_want": 129600
                                     },
                                     "4-Apr": {
                                         "_is_expanded": false,
-                                        "item_tag": "4-Apr",
+                                        "idea_tag": "4-Apr",
                                         "gogo_want": 129600,
                                         "mass": 1,
                                         "stop_want": 172800
                                     },
                                     "5-May": {
                                         "_is_expanded": false,
-                                        "item_tag": "5-May",
+                                        "idea_tag": "5-May",
                                         "gogo_want": 172800,
                                         "mass": 1,
                                         "stop_want": 217440
                                     },
                                     "6-Jun": {
                                         "_is_expanded": false,
-                                        "item_tag": "6-Jun",
+                                        "idea_tag": "6-Jun",
                                         "gogo_want": 217440,
                                         "mass": 1,
                                         "stop_want": 260640
                                     },
                                     "7-Jul": {
                                         "_is_expanded": false,
-                                        "item_tag": "7-Jul",
+                                        "idea_tag": "7-Jul",
                                         "gogo_want": 260640,
                                         "mass": 1,
                                         "stop_want": 305280
                                     },
                                     "8-Aug": {
                                         "_is_expanded": false,
-                                        "item_tag": "8-Aug",
+                                        "idea_tag": "8-Aug",
                                         "gogo_want": 305280,
                                         "mass": 1,
                                         "stop_want": 349920
                                     },
                                     "9-Sep": {
                                         "_is_expanded": false,
-                                        "item_tag": "9-Sep",
+                                        "idea_tag": "9-Sep",
                                         "gogo_want": 349920,
                                         "mass": 1,
                                         "stop_want": 393120
                                     }
                                 },
-                                "item_tag": "365 year",
+                                "idea_tag": "365 year",
                                 "begin": 0,
                                 "close": 525600,
                                 "mass": 1
@@ -4146,90 +4146,90 @@
                                 "_kids": {
                                     "1-Jan": {
                                         "_is_expanded": false,
-                                        "item_tag": "1-Jan",
+                                        "idea_tag": "1-Jan",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 44640
                                     },
                                     "10-Oct": {
                                         "_is_expanded": false,
-                                        "item_tag": "10-Oct",
+                                        "idea_tag": "10-Oct",
                                         "gogo_want": 394560,
                                         "mass": 1,
                                         "stop_want": 439200
                                     },
                                     "11-Nov": {
                                         "_is_expanded": false,
-                                        "item_tag": "11-Nov",
+                                        "idea_tag": "11-Nov",
                                         "gogo_want": 439200,
                                         "mass": 1,
                                         "stop_want": 482400
                                     },
                                     "12-Dec": {
                                         "_is_expanded": false,
-                                        "item_tag": "12-Dec",
+                                        "idea_tag": "12-Dec",
                                         "gogo_want": 482400,
                                         "mass": 1,
                                         "stop_want": 527040
                                     },
                                     "2-Feb29": {
                                         "_is_expanded": false,
-                                        "item_tag": "2-Feb29",
+                                        "idea_tag": "2-Feb29",
                                         "gogo_want": 44640,
                                         "mass": 1,
                                         "stop_want": 86400
                                     },
                                     "3-Mar": {
                                         "_is_expanded": false,
-                                        "item_tag": "3-Mar",
+                                        "idea_tag": "3-Mar",
                                         "gogo_want": 86400,
                                         "mass": 1,
                                         "stop_want": 131040
                                     },
                                     "4-Apr": {
                                         "_is_expanded": false,
-                                        "item_tag": "4-Apr",
+                                        "idea_tag": "4-Apr",
                                         "gogo_want": 131040,
                                         "mass": 1,
                                         "stop_want": 174240
                                     },
                                     "5-May": {
                                         "_is_expanded": false,
-                                        "item_tag": "5-May",
+                                        "idea_tag": "5-May",
                                         "gogo_want": 174240,
                                         "mass": 1,
                                         "stop_want": 218880
                                     },
                                     "6-Jun": {
                                         "_is_expanded": false,
-                                        "item_tag": "6-Jun",
+                                        "idea_tag": "6-Jun",
                                         "gogo_want": 218880,
                                         "mass": 1,
                                         "stop_want": 262080
                                     },
                                     "7-Jul": {
                                         "_is_expanded": false,
-                                        "item_tag": "7-Jul",
+                                        "idea_tag": "7-Jul",
                                         "gogo_want": 262080,
                                         "mass": 1,
                                         "stop_want": 306720
                                     },
                                     "8-Aug": {
                                         "_is_expanded": false,
-                                        "item_tag": "8-Aug",
+                                        "idea_tag": "8-Aug",
                                         "gogo_want": 306720,
                                         "mass": 1,
                                         "stop_want": 351360
                                     },
                                     "9-Sep": {
                                         "_is_expanded": false,
-                                        "item_tag": "9-Sep",
+                                        "idea_tag": "9-Sep",
                                         "gogo_want": 351360,
                                         "mass": 1,
                                         "stop_want": 394560
                                     }
                                 },
-                                "item_tag": "366 year",
+                                "idea_tag": "366 year",
                                 "begin": 0,
                                 "close": 527040,
                                 "mass": 1
@@ -4242,7 +4242,7 @@
                                         "_kids": {
                                             "4year with leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year with leap",
+                                                "idea_tag": "4year with leap",
                                                 "denom": 25,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -4251,7 +4251,7 @@
                                                 "stop_want": 2103840.0
                                             }
                                         },
-                                        "item_tag": "0-100-25 leap years",
+                                        "idea_tag": "0-100-25 leap years",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 52596000
@@ -4261,7 +4261,7 @@
                                         "_kids": {
                                             "4year wo leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year wo leap",
+                                                "idea_tag": "4year wo leap",
                                                 "denom": 1,
                                                 "gogo_want": 52596000.0,
                                                 "mass": 1,
@@ -4270,7 +4270,7 @@
                                                 "stop_want": 54698400.0
                                             }
                                         },
-                                        "item_tag": "100-104-0 leap years",
+                                        "idea_tag": "100-104-0 leap years",
                                         "gogo_want": 52596000,
                                         "mass": 1,
                                         "stop_want": 54698400
@@ -4280,7 +4280,7 @@
                                         "_kids": {
                                             "4year with leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year with leap",
+                                                "idea_tag": "4year with leap",
                                                 "denom": 24,
                                                 "gogo_want": 2279100.0,
                                                 "mass": 1,
@@ -4289,7 +4289,7 @@
                                                 "stop_want": 4382940.0
                                             }
                                         },
-                                        "item_tag": "104-200-24 leap years",
+                                        "idea_tag": "104-200-24 leap years",
                                         "gogo_want": 54698400,
                                         "mass": 1,
                                         "stop_want": 105190560
@@ -4299,7 +4299,7 @@
                                         "_kids": {
                                             "4year wo leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year wo leap",
+                                                "idea_tag": "4year wo leap",
                                                 "denom": 1,
                                                 "gogo_want": 105190560.0,
                                                 "mass": 1,
@@ -4308,7 +4308,7 @@
                                                 "stop_want": 107292960.0
                                             }
                                         },
-                                        "item_tag": "200-204-0 leap years",
+                                        "idea_tag": "200-204-0 leap years",
                                         "gogo_want": 105190560,
                                         "mass": 1,
                                         "stop_want": 107292960
@@ -4318,7 +4318,7 @@
                                         "_kids": {
                                             "4year with leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year with leap",
+                                                "idea_tag": "4year with leap",
                                                 "denom": 24,
                                                 "gogo_want": 4470540.0,
                                                 "mass": 1,
@@ -4327,7 +4327,7 @@
                                                 "stop_want": 6574380.0
                                             }
                                         },
-                                        "item_tag": "204-300-24 leap years",
+                                        "idea_tag": "204-300-24 leap years",
                                         "gogo_want": 107292960,
                                         "mass": 1,
                                         "stop_want": 157785120
@@ -4337,7 +4337,7 @@
                                         "_kids": {
                                             "4year wo leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year wo leap",
+                                                "idea_tag": "4year wo leap",
                                                 "denom": 1,
                                                 "gogo_want": 157785120.0,
                                                 "mass": 1,
@@ -4346,7 +4346,7 @@
                                                 "stop_want": 159887520.0
                                             }
                                         },
-                                        "item_tag": "300-304-0 leap years",
+                                        "idea_tag": "300-304-0 leap years",
                                         "gogo_want": 157785120,
                                         "mass": 1,
                                         "stop_want": 159887520
@@ -4356,7 +4356,7 @@
                                         "_kids": {
                                             "4year with leap": {
                                                 "_is_expanded": false,
-                                                "item_tag": "4year with leap",
+                                                "idea_tag": "4year with leap",
                                                 "denom": 24,
                                                 "gogo_want": 6661980.0,
                                                 "mass": 1,
@@ -4365,13 +4365,13 @@
                                                 "stop_want": 8765820.0
                                             }
                                         },
-                                        "item_tag": "304-400-24 leap years",
+                                        "idea_tag": "304-400-24 leap years",
                                         "gogo_want": 159887520,
                                         "mass": 1,
                                         "stop_want": 210379680
                                     }
                                 },
-                                "item_tag": "400 year segment",
+                                "idea_tag": "400 year segment",
                                 "begin": 0.0,
                                 "close": 210379680.0,
                                 "mass": 1
@@ -4381,34 +4381,34 @@
                                 "_kids": {
                                     "1-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "1-year",
+                                        "idea_tag": "1-year",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 527040
                                     },
                                     "2-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "2-year",
+                                        "idea_tag": "2-year",
                                         "gogo_want": 527040,
                                         "mass": 1,
                                         "stop_want": 1052640
                                     },
                                     "3-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "3-year",
+                                        "idea_tag": "3-year",
                                         "gogo_want": 1052640,
                                         "mass": 1,
                                         "stop_want": 1578240
                                     },
                                     "4-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "4-year",
+                                        "idea_tag": "4-year",
                                         "gogo_want": 1578240,
                                         "mass": 1,
                                         "stop_want": 2103840
                                     }
                                 },
-                                "item_tag": "4year with leap",
+                                "idea_tag": "4year with leap",
                                 "begin": 0.0,
                                 "close": 2103840.0,
                                 "mass": 1
@@ -4418,34 +4418,34 @@
                                 "_kids": {
                                     "1-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "1-year",
+                                        "idea_tag": "1-year",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 525600
                                     },
                                     "2-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "2-year",
+                                        "idea_tag": "2-year",
                                         "gogo_want": 525600,
                                         "mass": 1,
                                         "stop_want": 1051200
                                     },
                                     "3-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "3-year",
+                                        "idea_tag": "3-year",
                                         "gogo_want": 1051200,
                                         "mass": 1,
                                         "stop_want": 1576800
                                     },
                                     "4-year": {
                                         "_is_expanded": false,
-                                        "item_tag": "4-year",
+                                        "idea_tag": "4-year",
                                         "gogo_want": 1576800,
                                         "mass": 1,
                                         "stop_want": 2102400
                                     }
                                 },
-                                "item_tag": "4year wo leap",
+                                "idea_tag": "4year wo leap",
                                 "begin": 0,
                                 "close": 2102400,
                                 "mass": 1
@@ -4455,174 +4455,174 @@
                                 "_kids": {
                                     "0-12am": {
                                         "_is_expanded": false,
-                                        "item_tag": "0-12am",
+                                        "idea_tag": "0-12am",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 60
                                     },
                                     "1-1am": {
                                         "_is_expanded": false,
-                                        "item_tag": "1-1am",
+                                        "idea_tag": "1-1am",
                                         "gogo_want": 60,
                                         "mass": 1,
                                         "stop_want": 120
                                     },
                                     "10-10am": {
                                         "_is_expanded": false,
-                                        "item_tag": "10-10am",
+                                        "idea_tag": "10-10am",
                                         "gogo_want": 600,
                                         "mass": 1,
                                         "stop_want": 660
                                     },
                                     "11-11am": {
                                         "_is_expanded": false,
-                                        "item_tag": "11-11am",
+                                        "idea_tag": "11-11am",
                                         "gogo_want": 660,
                                         "mass": 1,
                                         "stop_want": 720
                                     },
                                     "12-12pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "12-12pm",
+                                        "idea_tag": "12-12pm",
                                         "gogo_want": 720,
                                         "mass": 1,
                                         "stop_want": 780
                                     },
                                     "13-1pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "13-1pm",
+                                        "idea_tag": "13-1pm",
                                         "gogo_want": 780,
                                         "mass": 1,
                                         "stop_want": 840
                                     },
                                     "14-2pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "14-2pm",
+                                        "idea_tag": "14-2pm",
                                         "gogo_want": 840,
                                         "mass": 1,
                                         "stop_want": 900
                                     },
                                     "15-3pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "15-3pm",
+                                        "idea_tag": "15-3pm",
                                         "gogo_want": 900,
                                         "mass": 1,
                                         "stop_want": 960
                                     },
                                     "16-4pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "16-4pm",
+                                        "idea_tag": "16-4pm",
                                         "gogo_want": 960,
                                         "mass": 1,
                                         "stop_want": 1020
                                     },
                                     "17-5pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "17-5pm",
+                                        "idea_tag": "17-5pm",
                                         "gogo_want": 1020,
                                         "mass": 1,
                                         "stop_want": 1080
                                     },
                                     "18-6pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "18-6pm",
+                                        "idea_tag": "18-6pm",
                                         "gogo_want": 1080,
                                         "mass": 1,
                                         "stop_want": 1140
                                     },
                                     "19-7pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "19-7pm",
+                                        "idea_tag": "19-7pm",
                                         "gogo_want": 1140,
                                         "mass": 1,
                                         "stop_want": 1200
                                     },
                                     "2-2am": {
                                         "_is_expanded": false,
-                                        "item_tag": "2-2am",
+                                        "idea_tag": "2-2am",
                                         "gogo_want": 120,
                                         "mass": 1,
                                         "stop_want": 180
                                     },
                                     "20-8pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "20-8pm",
+                                        "idea_tag": "20-8pm",
                                         "gogo_want": 1200,
                                         "mass": 1,
                                         "stop_want": 1260
                                     },
                                     "21-9pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "21-9pm",
+                                        "idea_tag": "21-9pm",
                                         "gogo_want": 1260,
                                         "mass": 1,
                                         "stop_want": 1320
                                     },
                                     "22-10pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "22-10pm",
+                                        "idea_tag": "22-10pm",
                                         "gogo_want": 1320,
                                         "mass": 1,
                                         "stop_want": 1380
                                     },
                                     "23-11pm": {
                                         "_is_expanded": false,
-                                        "item_tag": "23-11pm",
+                                        "idea_tag": "23-11pm",
                                         "gogo_want": 1380,
                                         "mass": 1,
                                         "stop_want": 1440
                                     },
                                     "3-3am": {
                                         "_is_expanded": false,
-                                        "item_tag": "3-3am",
+                                        "idea_tag": "3-3am",
                                         "gogo_want": 180,
                                         "mass": 1,
                                         "stop_want": 240
                                     },
                                     "4-4am": {
                                         "_is_expanded": false,
-                                        "item_tag": "4-4am",
+                                        "idea_tag": "4-4am",
                                         "gogo_want": 240,
                                         "mass": 1,
                                         "stop_want": 300
                                     },
                                     "5-5am": {
                                         "_is_expanded": false,
-                                        "item_tag": "5-5am",
+                                        "idea_tag": "5-5am",
                                         "gogo_want": 300,
                                         "mass": 1,
                                         "stop_want": 360
                                     },
                                     "6-6am": {
                                         "_is_expanded": false,
-                                        "item_tag": "6-6am",
+                                        "idea_tag": "6-6am",
                                         "gogo_want": 360,
                                         "mass": 1,
                                         "stop_want": 420
                                     },
                                     "7-7am": {
                                         "_is_expanded": false,
-                                        "item_tag": "7-7am",
+                                        "idea_tag": "7-7am",
                                         "gogo_want": 420,
                                         "mass": 1,
                                         "stop_want": 480
                                     },
                                     "8-8am": {
                                         "_is_expanded": false,
-                                        "item_tag": "8-8am",
+                                        "idea_tag": "8-8am",
                                         "gogo_want": 480,
                                         "mass": 1,
                                         "stop_want": 540
                                     },
                                     "9-9am": {
                                         "_is_expanded": false,
-                                        "item_tag": "9-9am",
+                                        "idea_tag": "9-9am",
                                         "gogo_want": 540,
                                         "mass": 1,
                                         "stop_want": 600
                                     }
                                 },
-                                "item_tag": "day",
+                                "idea_tag": "day",
                                 "begin": 0,
                                 "close": 1440,
                                 "mass": 1
@@ -4632,426 +4632,426 @@
                                 "_kids": {
                                     "0-:00": {
                                         "_is_expanded": false,
-                                        "item_tag": "0-:00",
+                                        "idea_tag": "0-:00",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 1
                                     },
                                     "1-:01": {
                                         "_is_expanded": false,
-                                        "item_tag": "1-:01",
+                                        "idea_tag": "1-:01",
                                         "gogo_want": 1,
                                         "mass": 1,
                                         "stop_want": 2
                                     },
                                     "10-:10": {
                                         "_is_expanded": false,
-                                        "item_tag": "10-:10",
+                                        "idea_tag": "10-:10",
                                         "gogo_want": 10,
                                         "mass": 1,
                                         "stop_want": 11
                                     },
                                     "11-:11": {
                                         "_is_expanded": false,
-                                        "item_tag": "11-:11",
+                                        "idea_tag": "11-:11",
                                         "gogo_want": 11,
                                         "mass": 1,
                                         "stop_want": 12
                                     },
                                     "12-:12": {
                                         "_is_expanded": false,
-                                        "item_tag": "12-:12",
+                                        "idea_tag": "12-:12",
                                         "gogo_want": 12,
                                         "mass": 1,
                                         "stop_want": 13
                                     },
                                     "13-:13": {
                                         "_is_expanded": false,
-                                        "item_tag": "13-:13",
+                                        "idea_tag": "13-:13",
                                         "gogo_want": 13,
                                         "mass": 1,
                                         "stop_want": 14
                                     },
                                     "14-:14": {
                                         "_is_expanded": false,
-                                        "item_tag": "14-:14",
+                                        "idea_tag": "14-:14",
                                         "gogo_want": 14,
                                         "mass": 1,
                                         "stop_want": 15
                                     },
                                     "15-:15": {
                                         "_is_expanded": false,
-                                        "item_tag": "15-:15",
+                                        "idea_tag": "15-:15",
                                         "gogo_want": 15,
                                         "mass": 1,
                                         "stop_want": 16
                                     },
                                     "16-:16": {
                                         "_is_expanded": false,
-                                        "item_tag": "16-:16",
+                                        "idea_tag": "16-:16",
                                         "gogo_want": 16,
                                         "mass": 1,
                                         "stop_want": 17
                                     },
                                     "17-:17": {
                                         "_is_expanded": false,
-                                        "item_tag": "17-:17",
+                                        "idea_tag": "17-:17",
                                         "gogo_want": 17,
                                         "mass": 1,
                                         "stop_want": 18
                                     },
                                     "18-:18": {
                                         "_is_expanded": false,
-                                        "item_tag": "18-:18",
+                                        "idea_tag": "18-:18",
                                         "gogo_want": 18,
                                         "mass": 1,
                                         "stop_want": 19
                                     },
                                     "19-:19": {
                                         "_is_expanded": false,
-                                        "item_tag": "19-:19",
+                                        "idea_tag": "19-:19",
                                         "gogo_want": 19,
                                         "mass": 1,
                                         "stop_want": 20
                                     },
                                     "2-:02": {
                                         "_is_expanded": false,
-                                        "item_tag": "2-:02",
+                                        "idea_tag": "2-:02",
                                         "gogo_want": 2,
                                         "mass": 1,
                                         "stop_want": 3
                                     },
                                     "20-:20": {
                                         "_is_expanded": false,
-                                        "item_tag": "20-:20",
+                                        "idea_tag": "20-:20",
                                         "gogo_want": 20,
                                         "mass": 1,
                                         "stop_want": 21
                                     },
                                     "21-:21": {
                                         "_is_expanded": false,
-                                        "item_tag": "21-:21",
+                                        "idea_tag": "21-:21",
                                         "gogo_want": 21,
                                         "mass": 1,
                                         "stop_want": 22
                                     },
                                     "22-:22": {
                                         "_is_expanded": false,
-                                        "item_tag": "22-:22",
+                                        "idea_tag": "22-:22",
                                         "gogo_want": 22,
                                         "mass": 1,
                                         "stop_want": 23
                                     },
                                     "23-:23": {
                                         "_is_expanded": false,
-                                        "item_tag": "23-:23",
+                                        "idea_tag": "23-:23",
                                         "gogo_want": 23,
                                         "mass": 1,
                                         "stop_want": 24
                                     },
                                     "24-:24": {
                                         "_is_expanded": false,
-                                        "item_tag": "24-:24",
+                                        "idea_tag": "24-:24",
                                         "gogo_want": 24,
                                         "mass": 1,
                                         "stop_want": 25
                                     },
                                     "25-:25": {
                                         "_is_expanded": false,
-                                        "item_tag": "25-:25",
+                                        "idea_tag": "25-:25",
                                         "gogo_want": 25,
                                         "mass": 1,
                                         "stop_want": 26
                                     },
                                     "26-:26": {
                                         "_is_expanded": false,
-                                        "item_tag": "26-:26",
+                                        "idea_tag": "26-:26",
                                         "gogo_want": 26,
                                         "mass": 1,
                                         "stop_want": 27
                                     },
                                     "27-:27": {
                                         "_is_expanded": false,
-                                        "item_tag": "27-:27",
+                                        "idea_tag": "27-:27",
                                         "gogo_want": 27,
                                         "mass": 1,
                                         "stop_want": 28
                                     },
                                     "28-:28": {
                                         "_is_expanded": false,
-                                        "item_tag": "28-:28",
+                                        "idea_tag": "28-:28",
                                         "gogo_want": 28,
                                         "mass": 1,
                                         "stop_want": 29
                                     },
                                     "29-:29": {
                                         "_is_expanded": false,
-                                        "item_tag": "29-:29",
+                                        "idea_tag": "29-:29",
                                         "gogo_want": 29,
                                         "mass": 1,
                                         "stop_want": 30
                                     },
                                     "3-:03": {
                                         "_is_expanded": false,
-                                        "item_tag": "3-:03",
+                                        "idea_tag": "3-:03",
                                         "gogo_want": 3,
                                         "mass": 1,
                                         "stop_want": 4
                                     },
                                     "30-:30": {
                                         "_is_expanded": false,
-                                        "item_tag": "30-:30",
+                                        "idea_tag": "30-:30",
                                         "gogo_want": 30,
                                         "mass": 1,
                                         "stop_want": 31
                                     },
                                     "31-:31": {
                                         "_is_expanded": false,
-                                        "item_tag": "31-:31",
+                                        "idea_tag": "31-:31",
                                         "gogo_want": 31,
                                         "mass": 1,
                                         "stop_want": 32
                                     },
                                     "32-:32": {
                                         "_is_expanded": false,
-                                        "item_tag": "32-:32",
+                                        "idea_tag": "32-:32",
                                         "gogo_want": 32,
                                         "mass": 1,
                                         "stop_want": 33
                                     },
                                     "33-:33": {
                                         "_is_expanded": false,
-                                        "item_tag": "33-:33",
+                                        "idea_tag": "33-:33",
                                         "gogo_want": 33,
                                         "mass": 1,
                                         "stop_want": 34
                                     },
                                     "34-:34": {
                                         "_is_expanded": false,
-                                        "item_tag": "34-:34",
+                                        "idea_tag": "34-:34",
                                         "gogo_want": 34,
                                         "mass": 1,
                                         "stop_want": 35
                                     },
                                     "35-:35": {
                                         "_is_expanded": false,
-                                        "item_tag": "35-:35",
+                                        "idea_tag": "35-:35",
                                         "gogo_want": 35,
                                         "mass": 1,
                                         "stop_want": 36
                                     },
                                     "36-:36": {
                                         "_is_expanded": false,
-                                        "item_tag": "36-:36",
+                                        "idea_tag": "36-:36",
                                         "gogo_want": 36,
                                         "mass": 1,
                                         "stop_want": 37
                                     },
                                     "37-:37": {
                                         "_is_expanded": false,
-                                        "item_tag": "37-:37",
+                                        "idea_tag": "37-:37",
                                         "gogo_want": 37,
                                         "mass": 1,
                                         "stop_want": 38
                                     },
                                     "38-:38": {
                                         "_is_expanded": false,
-                                        "item_tag": "38-:38",
+                                        "idea_tag": "38-:38",
                                         "gogo_want": 38,
                                         "mass": 1,
                                         "stop_want": 39
                                     },
                                     "39-:39": {
                                         "_is_expanded": false,
-                                        "item_tag": "39-:39",
+                                        "idea_tag": "39-:39",
                                         "gogo_want": 39,
                                         "mass": 1,
                                         "stop_want": 40
                                     },
                                     "4-:04": {
                                         "_is_expanded": false,
-                                        "item_tag": "4-:04",
+                                        "idea_tag": "4-:04",
                                         "gogo_want": 4,
                                         "mass": 1,
                                         "stop_want": 5
                                     },
                                     "40-:40": {
                                         "_is_expanded": false,
-                                        "item_tag": "40-:40",
+                                        "idea_tag": "40-:40",
                                         "gogo_want": 40,
                                         "mass": 1,
                                         "stop_want": 41
                                     },
                                     "41-:41": {
                                         "_is_expanded": false,
-                                        "item_tag": "41-:41",
+                                        "idea_tag": "41-:41",
                                         "gogo_want": 41,
                                         "mass": 1,
                                         "stop_want": 42
                                     },
                                     "42-:42": {
                                         "_is_expanded": false,
-                                        "item_tag": "42-:42",
+                                        "idea_tag": "42-:42",
                                         "gogo_want": 42,
                                         "mass": 1,
                                         "stop_want": 43
                                     },
                                     "43-:43": {
                                         "_is_expanded": false,
-                                        "item_tag": "43-:43",
+                                        "idea_tag": "43-:43",
                                         "gogo_want": 43,
                                         "mass": 1,
                                         "stop_want": 44
                                     },
                                     "44-:44": {
                                         "_is_expanded": false,
-                                        "item_tag": "44-:44",
+                                        "idea_tag": "44-:44",
                                         "gogo_want": 44,
                                         "mass": 1,
                                         "stop_want": 45
                                     },
                                     "45-:45": {
                                         "_is_expanded": false,
-                                        "item_tag": "45-:45",
+                                        "idea_tag": "45-:45",
                                         "gogo_want": 45,
                                         "mass": 1,
                                         "stop_want": 46
                                     },
                                     "46-:46": {
                                         "_is_expanded": false,
-                                        "item_tag": "46-:46",
+                                        "idea_tag": "46-:46",
                                         "gogo_want": 46,
                                         "mass": 1,
                                         "stop_want": 47
                                     },
                                     "47-:47": {
                                         "_is_expanded": false,
-                                        "item_tag": "47-:47",
+                                        "idea_tag": "47-:47",
                                         "gogo_want": 47,
                                         "mass": 1,
                                         "stop_want": 48
                                     },
                                     "48-:48": {
                                         "_is_expanded": false,
-                                        "item_tag": "48-:48",
+                                        "idea_tag": "48-:48",
                                         "gogo_want": 48,
                                         "mass": 1,
                                         "stop_want": 49
                                     },
                                     "49-:49": {
                                         "_is_expanded": false,
-                                        "item_tag": "49-:49",
+                                        "idea_tag": "49-:49",
                                         "gogo_want": 49,
                                         "mass": 1,
                                         "stop_want": 50
                                     },
                                     "5-:05": {
                                         "_is_expanded": false,
-                                        "item_tag": "5-:05",
+                                        "idea_tag": "5-:05",
                                         "gogo_want": 5,
                                         "mass": 1,
                                         "stop_want": 6
                                     },
                                     "50-:50": {
                                         "_is_expanded": false,
-                                        "item_tag": "50-:50",
+                                        "idea_tag": "50-:50",
                                         "gogo_want": 50,
                                         "mass": 1,
                                         "stop_want": 51
                                     },
                                     "51-:51": {
                                         "_is_expanded": false,
-                                        "item_tag": "51-:51",
+                                        "idea_tag": "51-:51",
                                         "gogo_want": 51,
                                         "mass": 1,
                                         "stop_want": 52
                                     },
                                     "52-:52": {
                                         "_is_expanded": false,
-                                        "item_tag": "52-:52",
+                                        "idea_tag": "52-:52",
                                         "gogo_want": 52,
                                         "mass": 1,
                                         "stop_want": 53
                                     },
                                     "53-:53": {
                                         "_is_expanded": false,
-                                        "item_tag": "53-:53",
+                                        "idea_tag": "53-:53",
                                         "gogo_want": 53,
                                         "mass": 1,
                                         "stop_want": 54
                                     },
                                     "54-:54": {
                                         "_is_expanded": false,
-                                        "item_tag": "54-:54",
+                                        "idea_tag": "54-:54",
                                         "gogo_want": 54,
                                         "mass": 1,
                                         "stop_want": 55
                                     },
                                     "55-:55": {
                                         "_is_expanded": false,
-                                        "item_tag": "55-:55",
+                                        "idea_tag": "55-:55",
                                         "gogo_want": 55,
                                         "mass": 1,
                                         "stop_want": 56
                                     },
                                     "56-:56": {
                                         "_is_expanded": false,
-                                        "item_tag": "56-:56",
+                                        "idea_tag": "56-:56",
                                         "gogo_want": 56,
                                         "mass": 1,
                                         "stop_want": 57
                                     },
                                     "57-:57": {
                                         "_is_expanded": false,
-                                        "item_tag": "57-:57",
+                                        "idea_tag": "57-:57",
                                         "gogo_want": 57,
                                         "mass": 1,
                                         "stop_want": 58
                                     },
                                     "58-:58": {
                                         "_is_expanded": false,
-                                        "item_tag": "58-:58",
+                                        "idea_tag": "58-:58",
                                         "gogo_want": 58,
                                         "mass": 1,
                                         "stop_want": 59
                                     },
                                     "59-59": {
                                         "_is_expanded": false,
-                                        "item_tag": "59-59",
+                                        "idea_tag": "59-59",
                                         "gogo_want": 59,
                                         "mass": 1,
                                         "stop_want": 60
                                     },
                                     "6-:06": {
                                         "_is_expanded": false,
-                                        "item_tag": "6-:06",
+                                        "idea_tag": "6-:06",
                                         "gogo_want": 6,
                                         "mass": 1,
                                         "stop_want": 7
                                     },
                                     "7-:07": {
                                         "_is_expanded": false,
-                                        "item_tag": "7-:07",
+                                        "idea_tag": "7-:07",
                                         "gogo_want": 7,
                                         "mass": 1,
                                         "stop_want": 8
                                     },
                                     "8-:08": {
                                         "_is_expanded": false,
-                                        "item_tag": "8-:08",
+                                        "idea_tag": "8-:08",
                                         "gogo_want": 8,
                                         "mass": 1,
                                         "stop_want": 9
                                     },
                                     "9-:09": {
                                         "_is_expanded": false,
-                                        "item_tag": "9-:09",
+                                        "idea_tag": "9-:09",
                                         "gogo_want": 9,
                                         "mass": 1,
                                         "stop_want": 10
                                     }
                                 },
-                                "item_tag": "hour",
+                                "idea_tag": "hour",
                                 "begin": 0,
                                 "close": 60,
                                 "mass": 1
@@ -5064,7 +5064,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5073,7 +5073,7 @@
                                                 "stop_want": 30.0
                                             }
                                         },
-                                        "item_tag": "Apr",
+                                        "idea_tag": "Apr",
                                         "begin": 0,
                                         "close": 43200,
                                         "mass": 1
@@ -5083,7 +5083,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5092,7 +5092,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "Aug",
+                                        "idea_tag": "Aug",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5102,7 +5102,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5111,7 +5111,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "Dec",
+                                        "idea_tag": "Dec",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5121,7 +5121,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5130,7 +5130,7 @@
                                                 "stop_want": 28.0
                                             }
                                         },
-                                        "item_tag": "Feb28",
+                                        "idea_tag": "Feb28",
                                         "begin": 0,
                                         "close": 40320,
                                         "mass": 1
@@ -5140,7 +5140,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5149,7 +5149,7 @@
                                                 "stop_want": 29.0
                                             }
                                         },
-                                        "item_tag": "Feb29",
+                                        "idea_tag": "Feb29",
                                         "begin": 0,
                                         "close": 41760,
                                         "mass": 1
@@ -5159,7 +5159,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5168,7 +5168,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "Jan",
+                                        "idea_tag": "Jan",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5178,7 +5178,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5187,7 +5187,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "Jul",
+                                        "idea_tag": "Jul",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5197,7 +5197,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5206,7 +5206,7 @@
                                                 "stop_want": 30.0
                                             }
                                         },
-                                        "item_tag": "Jun",
+                                        "idea_tag": "Jun",
                                         "begin": 0,
                                         "close": 43200,
                                         "mass": 1
@@ -5216,7 +5216,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5225,7 +5225,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "Mar",
+                                        "idea_tag": "Mar",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5235,7 +5235,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5244,7 +5244,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "May",
+                                        "idea_tag": "May",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5254,7 +5254,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5263,7 +5263,7 @@
                                                 "stop_want": 30.0
                                             }
                                         },
-                                        "item_tag": "Nov",
+                                        "idea_tag": "Nov",
                                         "begin": 0,
                                         "close": 43200,
                                         "mass": 1
@@ -5273,7 +5273,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5282,7 +5282,7 @@
                                                 "stop_want": 31.0
                                             }
                                         },
-                                        "item_tag": "Oct",
+                                        "idea_tag": "Oct",
                                         "begin": 0,
                                         "close": 44640,
                                         "mass": 1
@@ -5292,7 +5292,7 @@
                                         "_kids": {
                                             "days": {
                                                 "_is_expanded": false,
-                                                "item_tag": "days",
+                                                "idea_tag": "days",
                                                 "denom": 1440,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -5301,13 +5301,13 @@
                                                 "stop_want": 30.0
                                             }
                                         },
-                                        "item_tag": "Sep",
+                                        "idea_tag": "Sep",
                                         "begin": 0,
                                         "close": 43200,
                                         "mass": 1
                                     }
                                 },
-                                "item_tag": "month",
+                                "idea_tag": "month",
                                 "mass": 1
                             },
                             "week": {
@@ -5315,69 +5315,69 @@
                                 "_kids": {
                                     "Friday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Friday",
+                                        "idea_tag": "Friday",
                                         "gogo_want": 8640,
                                         "mass": 1,
                                         "stop_want": 10080
                                     },
                                     "Monday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Monday",
+                                        "idea_tag": "Monday",
                                         "gogo_want": 2880,
                                         "mass": 1,
                                         "stop_want": 4320
                                     },
                                     "Saturday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Saturday",
+                                        "idea_tag": "Saturday",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 1440
                                     },
                                     "Sunday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Sunday",
+                                        "idea_tag": "Sunday",
                                         "gogo_want": 1440,
                                         "mass": 1,
                                         "stop_want": 2880
                                     },
                                     "Thursday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Thursday",
+                                        "idea_tag": "Thursday",
                                         "gogo_want": 7200,
                                         "mass": 1,
                                         "stop_want": 8640
                                     },
                                     "Tuesday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Tuesday",
+                                        "idea_tag": "Tuesday",
                                         "gogo_want": 4320,
                                         "mass": 1,
                                         "stop_want": 5760
                                     },
                                     "Wednesday": {
                                         "_is_expanded": false,
-                                        "item_tag": "Wednesday",
+                                        "idea_tag": "Wednesday",
                                         "gogo_want": 5760,
                                         "mass": 1,
                                         "stop_want": 7200
                                     }
                                 },
-                                "item_tag": "week",
+                                "idea_tag": "week",
                                 "begin": 0.0,
                                 "close": 10080.0,
                                 "mass": 1
                             }
                         },
-                        "item_tag": "tech",
+                        "idea_tag": "tech",
                         "mass": 1
                     }
                 },
-                "item_tag": "time",
+                "idea_tag": "time",
                 "mass": 1
             }
         },
-        "item_tag": "A",
+        "idea_tag": "A",
         "_uid": 1,
         "factunits": {
             "A;Aaron Donald objects effected by him": {

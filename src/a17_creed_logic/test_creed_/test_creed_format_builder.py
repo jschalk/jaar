@@ -1,8 +1,8 @@
 from src.a00_data_toolbox.file_toolbox import save_json
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import (
-    bud_itemunit_str,
-    item_way_str,
+    bud_ideaunit_str,
+    idea_way_str,
     gogo_want_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_atom_config_args
@@ -11,7 +11,7 @@ from src.a17_creed_logic.creed_config import (
     get_creed_formats_dir,
     get_creed_config_dict,
 )
-from src.a06_bud_logic._utils.str_a06 import bud_itemunit_str
+from src.a06_bud_logic._utils.str_a06 import bud_ideaunit_str
 
 
 def create_dimens_creed_format_dict() -> dict:
@@ -37,16 +37,16 @@ def test_create_dimens_creed_format_dict_ReturnObj(rebuild_bool):
 
     # THEN
     assert len(dimens_creed_format_dict) == 10
-    bud_itemunit_filename = f"creed_format_00028_{bud_itemunit_str()}_v0_0_0.json"
-    assert dimens_creed_format_dict.get(bud_itemunit_filename)
-    bud_itemunit_dict = dimens_creed_format_dict.get(bud_itemunit_filename)
-    assert bud_itemunit_dict.get(dimens_str()) == [bud_itemunit_str()]
-    assert bud_itemunit_dict.get(attributes_str())
-    bud_itemunit_attributes = bud_itemunit_dict.get(attributes_str())
-    assert fisc_tag_str() in bud_itemunit_attributes
-    assert owner_name_str() in bud_itemunit_attributes
-    assert item_way_str() in bud_itemunit_attributes
-    assert gogo_want_str() in bud_itemunit_attributes
+    bud_ideaunit_filename = f"creed_format_00028_{bud_ideaunit_str()}_v0_0_0.json"
+    assert dimens_creed_format_dict.get(bud_ideaunit_filename)
+    bud_ideaunit_dict = dimens_creed_format_dict.get(bud_ideaunit_filename)
+    assert bud_ideaunit_dict.get(dimens_str()) == [bud_ideaunit_str()]
+    assert bud_ideaunit_dict.get(attributes_str())
+    bud_ideaunit_attributes = bud_ideaunit_dict.get(attributes_str())
+    assert fisc_tag_str() in bud_ideaunit_attributes
+    assert owner_name_str() in bud_ideaunit_attributes
+    assert idea_way_str() in bud_ideaunit_attributes
+    assert gogo_want_str() in bud_ideaunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 

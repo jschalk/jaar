@@ -2,7 +2,7 @@ from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str, owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
-    item_way_str,
+    idea_way_str,
     team_label_str,
     acct_name_str,
     credit_belief_str,
@@ -18,7 +18,7 @@ from src.a17_creed_logic.creed_db_tool import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_item_teamlink():
+def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_teamlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         creed_number = "br000XX"
@@ -26,13 +26,13 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_item_teamlink()
             event_int_str(),
             face_name_str(),
             fisc_tag_str(),
-            item_way_str(),
+            idea_way_str(),
             team_label_str(),
             owner_name_str(),
             acct_name_str(),
             amount_str(),
         ]
-        budteam_cat = "bud_item_teamlink"
+        budteam_cat = "bud_idea_teamlink"
         src_table = f"{creed_number}_raw"
         dst_table = f"{budteam_cat}_raw"
         creed_config = get_creed_config_dict()
@@ -54,11 +54,11 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_item_teamlink()
         )
 
         # THEN
-        columns_str = "event_int, face_name, fisc_tag, owner_name, item_way, team_label"
+        columns_str = "event_int, face_name, fisc_tag, owner_name, idea_way, team_label"
         expected_sqlstr = f"""INSERT INTO {budteam_cat}_raw (creed_number, {columns_str})
 SELECT '{creed_number}' as creed_number, {columns_str}
 FROM {creed_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND item_way IS NOT NULL AND team_label IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND idea_way IS NOT NULL AND team_label IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -76,7 +76,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
             event_int_str(),
             face_name_str(),
             fisc_tag_str(),
-            item_way_str(),
+            idea_way_str(),
             team_label_str(),
             owner_name_str(),
             acct_name_str(),
@@ -126,7 +126,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
             event_int_str(),
             face_name_str(),
             fisc_tag_str(),
-            item_way_str(),
+            idea_way_str(),
             team_label_str(),
             owner_name_str(),
             acct_name_str(),

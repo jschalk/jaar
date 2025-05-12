@@ -1,12 +1,12 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
 from src.a01_way_logic.way import to_way
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
-from src.a05_item_logic.item import itemunit_shop
+from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
-    item_way_str,
+    idea_way_str,
     mass_str,
     pledge_str,
     debtit_belief_str,
@@ -15,15 +15,15 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_vote_str,
 )
 from src.a07_calendar_logic._utils.calendar_examples import (
-    add_time_creg_itemunit,
-    add_time_five_itemunit,
+    add_time_creg_ideaunit,
+    add_time_five_ideaunit,
 )
 from src.a17_creed_logic.creed import create_creed_df, get_creedref_obj, save_creed_csv
 from src.a17_creed_logic.creed_config import (
     creed_format_00021_bud_acctunit_v0_0_0,
     creed_format_00020_bud_acct_membership_v0_0_0,
-    creed_format_00013_itemunit_v0_0_0,
-    creed_format_00019_itemunit_v0_0_0,
+    creed_format_00013_ideaunit_v0_0_0,
+    creed_format_00019_ideaunit_v0_0_0,
 )
 from src.a17_creed_logic._utils.env_a17 import creed_fiscs_dir, env_dir_setup_cleanup
 from os.path import exists as os_path_exists
@@ -143,7 +143,7 @@ def test_create_creed_df_Arg_creed_format_00020_bud_acct_membership_v0_0_0():
     assert len(membership_dataframe) == 10
 
 
-def test_create_creed_df_Arg_creed_format_00013_itemunit_v0_0_0():
+def test_create_creed_df_Arg_creed_format_00013_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     accord_fisc_tag = "accord56"
@@ -151,42 +151,42 @@ def test_create_creed_df_Arg_creed_format_00013_itemunit_v0_0_0():
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
 
     # WHEN
-    x_creed_name = creed_format_00013_itemunit_v0_0_0()
-    itemunit_format = create_creed_df(sue_budunit, x_creed_name)
+    x_creed_name = creed_format_00013_ideaunit_v0_0_0()
+    ideaunit_format = create_creed_df(sue_budunit, x_creed_name)
 
     # THEN
-    array_headers = list(itemunit_format.columns)
+    array_headers = list(ideaunit_format.columns)
     assert array_headers == get_creedref_obj(x_creed_name).get_headers_list()
 
-    assert itemunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
-    assert itemunit_format.loc[0, pledge_str()] == ""
-    assert itemunit_format.loc[0, fisc_tag_str()] == accord_fisc_tag
-    assert itemunit_format.loc[0, item_way_str()] == casa_way
-    assert itemunit_format.loc[0, mass_str()] == casa_mass
+    assert ideaunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
+    assert ideaunit_format.loc[0, pledge_str()] == ""
+    assert ideaunit_format.loc[0, fisc_tag_str()] == accord_fisc_tag
+    assert ideaunit_format.loc[0, idea_way_str()] == casa_way
+    assert ideaunit_format.loc[0, mass_str()] == casa_mass
 
-    assert itemunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
-    assert itemunit_format.loc[1, pledge_str()] == "Yes"
-    assert itemunit_format.loc[1, fisc_tag_str()] == accord_fisc_tag
-    assert itemunit_format.loc[1, item_way_str()] == clean_way
-    assert itemunit_format.loc[1, mass_str()] == 1
-    assert len(itemunit_format) == 2
+    assert ideaunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
+    assert ideaunit_format.loc[1, pledge_str()] == "Yes"
+    assert ideaunit_format.loc[1, fisc_tag_str()] == accord_fisc_tag
+    assert ideaunit_format.loc[1, idea_way_str()] == clean_way
+    assert ideaunit_format.loc[1, mass_str()] == 1
+    assert len(ideaunit_format) == 2
 
 
-def test_save_creed_csv_Arg_creed_format_00019_itemunit_v0_0_0():
+def test_save_creed_csv_Arg_creed_format_00019_ideaunit_v0_0_0():
     # ESTABLISH
     sue_budunit = budunit_shop("Sue", "accord56")
-    sue_budunit = add_time_creg_itemunit(sue_budunit)
-    sue_budunit = add_time_five_itemunit(sue_budunit)
-    x_creed_name = creed_format_00019_itemunit_v0_0_0()
+    sue_budunit = add_time_creg_ideaunit(sue_budunit)
+    sue_budunit = add_time_five_ideaunit(sue_budunit)
+    x_creed_name = creed_format_00019_ideaunit_v0_0_0()
 
     # WHEN
-    # name_filename = f"{sue_str}_itemunit_example_00019.csv"
+    # name_filename = f"{sue_str}_ideaunit_example_00019.csv"
     # csv_example_path = create_path(creed_fiscs_dir(), name_filename)
     # save_creed_csv(x_creed_name, sue_budunit, creed_examples_dir(), name_filename)
     creed_df = create_creed_df(sue_budunit, x_creed_name)
@@ -253,7 +253,7 @@ def test_save_creed_csv_Arg_creed_format_00021_bud_acctunit_v0_0_0_SaveToCSV(
     assert open_file(creed_fiscs_dir(), name_filename) == sue2_acct_example_csv
 
 
-def test_save_creed_csv_Arg_creed_format_00013_itemunit_v0_0_0(env_dir_setup_cleanup):
+def test_save_creed_csv_Arg_creed_format_00013_ideaunit_v0_0_0(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -262,13 +262,13 @@ def test_save_creed_csv_Arg_creed_format_00013_itemunit_v0_0_0(env_dir_setup_cle
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_item(itemunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    x_creed_name = creed_format_00013_itemunit_v0_0_0()
-    itemunit_format = create_creed_df(sue_budunit, x_creed_name)
-    name_filename = f"{sue_str}_itemunit_example_000.csv"
+    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    x_creed_name = creed_format_00013_ideaunit_v0_0_0()
+    ideaunit_format = create_creed_df(sue_budunit, x_creed_name)
+    name_filename = f"{sue_str}_ideaunit_example_000.csv"
     csv_example_path = create_path(creed_fiscs_dir(), name_filename)
     assert not os_path_exists(csv_example_path)
 

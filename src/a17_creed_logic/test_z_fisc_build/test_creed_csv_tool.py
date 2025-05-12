@@ -75,13 +75,13 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         # "br00006": "fisc_tag,offi_time,_offi_time_max\n",
         "br00020": "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
         "br00021": "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief\n",
-        "br00022": "fisc_tag,owner_name,item_way,awardee_label,give_force,take_force\n",
-        "br00023": "fisc_tag,owner_name,item_way,fbase,fneed,fopen,fnigh\n",
-        "br00024": "fisc_tag,owner_name,item_way,team_label\n",
-        "br00025": "fisc_tag,owner_name,item_way,healer_name\n",
-        "br00026": "fisc_tag,owner_name,item_way,base,need,nigh,open,divisor\n",
-        "br00027": "fisc_tag,owner_name,item_way,base,base_item_active_requisite\n",
-        "br00028": "fisc_tag,owner_name,item_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
+        "br00022": "fisc_tag,owner_name,idea_way,awardee_label,give_force,take_force\n",
+        "br00023": "fisc_tag,owner_name,idea_way,fbase,fneed,fopen,fnigh\n",
+        "br00024": "fisc_tag,owner_name,idea_way,team_label\n",
+        "br00025": "fisc_tag,owner_name,idea_way,healer_name\n",
+        "br00026": "fisc_tag,owner_name,idea_way,base,need,nigh,open,divisor\n",
+        "br00027": "fisc_tag,owner_name,idea_way,base,base_idea_active_requisite\n",
+        "br00028": "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
         "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word\n",
@@ -346,8 +346,8 @@ def test_add_bud_to_br00022_csv_ReturnsObj():
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_bud.add_item(casa_way)
-    bob_bud.edit_item_attr(casa_way, awardlink=casa_awardlink)
+    bob_bud.add_idea(casa_way)
+    bob_bud.edit_idea_attr(casa_way, awardlink=casa_awardlink)
     csv_header = x_creeds.get("br00022")
     print(f"{csv_header=}")
 
@@ -372,8 +372,8 @@ def test_add_bud_to_br00023_csv_ReturnsObj():
     clean_way = bob_bud.make_way(casa_way, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(clean_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(clean_way)
     bob_bud.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh)
     csv_header = x_creeds.get("br00023")
     print(f"{csv_header=}")
@@ -394,10 +394,10 @@ def test_add_bud_to_br00024_csv_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     casa_way = bob_bud.make_l1_way("casa")
-    bob_bud.add_item(casa_way)
-    casa_item = bob_bud.get_item_obj(casa_way)
+    bob_bud.add_idea(casa_way)
+    casa_idea = bob_bud.get_idea_obj(casa_way)
     cleaners_str = "cleaners"
-    casa_item.teamunit.set_teamlink(cleaners_str)
+    casa_idea.teamunit.set_teamlink(cleaners_str)
     csv_header = x_creeds.get("br00024")
     print(f"{csv_header=}")
 
@@ -418,10 +418,10 @@ def test_add_bud_to_br00025_csv_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     casa_way = bob_bud.make_l1_way("casa")
-    bob_bud.add_item(casa_way)
-    casa_item = bob_bud.get_item_obj(casa_way)
+    bob_bud.add_idea(casa_way)
+    casa_idea = bob_bud.get_idea_obj(casa_way)
     cleaners_str = "cleaners"
-    casa_item.healerlink.set_healer_name(cleaners_str)
+    casa_idea.healerlink.set_healer_name(cleaners_str)
     csv_header = x_creeds.get("br00025")
     print(f"{csv_header=}")
 
@@ -447,10 +447,10 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
     clean_premise_open = 22
     clean_premise_nigh = 55
     clean_premise_divisor = 77
-    bob_bud.add_item(mop_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(clean_way)
-    bob_bud.edit_item_attr(
+    bob_bud.add_idea(mop_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(clean_way)
+    bob_bud.edit_idea_attr(
         mop_way,
         reason_base=casa_way,
         reason_premise=clean_way,
@@ -479,12 +479,12 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
     bob_bud = budunit_shop(bob_str, a23_str)
     mop_way = bob_bud.make_l1_way("mop")
     casa_way = bob_bud.make_l1_way("casa")
-    bob_bud.add_item(mop_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.edit_item_attr(
+    bob_bud.add_idea(mop_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.edit_idea_attr(
         mop_way,
         reason_base=casa_way,
-        reason_base_item_active_requisite=True,
+        reason_base_idea_active_requisite=True,
     )
     csv_header = x_creeds.get("br00027")
     print(f"{csv_header=}")
@@ -519,9 +519,9 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_pledge = False
     casa_problem_bool = False
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(mop_way)
-    bob_bud.edit_item_attr(
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(mop_way)
+    bob_bud.edit_idea_attr(
         mop_way,
         begin=casa_begin,
         close=casa_close,
@@ -591,12 +591,12 @@ def test_add_budunit_to_stance_csv_strs_ReturnsObj():
     mop_way = bob_bud.make_l1_way("mop")
     casa_way = bob_bud.make_l1_way("casa")
     clean_way = bob_bud.make_way(casa_way, "clean")
-    bob_bud.add_item(mop_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(clean_way)
-    bob_bud.edit_item_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(yao_str))
+    bob_bud.add_idea(mop_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(clean_way)
+    bob_bud.edit_idea_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(yao_str))
     bob_bud.add_fact(casa_way, clean_way)
 
     br00020_header = x_creeds.get("br00020")
@@ -844,8 +844,8 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_bud.add_item(casa_way)
-    bob_bud.edit_item_attr(casa_way, awardlink=casa_awardlink)
+    bob_bud.add_idea(casa_way)
+    bob_bud.edit_idea_attr(casa_way, awardlink=casa_awardlink)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
@@ -875,8 +875,8 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     clean_way = bob_bud.make_way(casa_way, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(clean_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(clean_way)
     bob_bud.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
@@ -906,10 +906,10 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     casa_way = bob_bud.make_l1_way("casa")
-    bob_bud.add_item(casa_way)
-    casa_item = bob_bud.get_item_obj(casa_way)
+    bob_bud.add_idea(casa_way)
+    casa_idea = bob_bud.get_idea_obj(casa_way)
     cleaners_str = "cleaners"
-    casa_item.teamunit.set_teamlink(cleaners_str)
+    casa_idea.teamunit.set_teamlink(cleaners_str)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
@@ -938,10 +938,10 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     a23_str = "accord23"
     bob_bud = budunit_shop(bob_str, a23_str)
     casa_way = bob_bud.make_l1_way("casa")
-    bob_bud.add_item(casa_way)
-    casa_item = bob_bud.get_item_obj(casa_way)
+    bob_bud.add_idea(casa_way)
+    casa_idea = bob_bud.get_idea_obj(casa_way)
     cleaners_str = "cleaners"
-    casa_item.healerlink.set_healer_name(cleaners_str)
+    casa_idea.healerlink.set_healer_name(cleaners_str)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"
@@ -972,10 +972,10 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     clean_premise_open = 22
     clean_premise_nigh = 55
     clean_premise_divisor = 77
-    bob_bud.add_item(mop_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(clean_way)
-    bob_bud.edit_item_attr(
+    bob_bud.add_idea(mop_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(clean_way)
+    bob_bud.edit_idea_attr(
         mop_way,
         reason_base=casa_way,
         reason_premise=clean_way,
@@ -1009,12 +1009,12 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_bud = budunit_shop(bob_str, a23_str)
     mop_way = bob_bud.make_l1_way("mop")
     casa_way = bob_bud.make_l1_way("casa")
-    bob_bud.add_item(mop_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.edit_item_attr(
+    bob_bud.add_idea(mop_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.edit_idea_attr(
         mop_way,
         reason_base=casa_way,
-        reason_base_item_active_requisite=True,
+        reason_base_idea_active_requisite=True,
     )
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
@@ -1054,9 +1054,9 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_pledge = False
     casa_problem_bool = False
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(mop_way)
-    bob_bud.edit_item_attr(
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(mop_way)
+    bob_bud.edit_idea_attr(
         mop_way,
         begin=casa_begin,
         close=casa_close,
@@ -1140,12 +1140,12 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     mop_way = bob_bud.make_l1_way("mop")
     casa_way = bob_bud.make_l1_way("casa")
     clean_way = bob_bud.make_way(casa_way, "clean")
-    bob_bud.add_item(mop_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.add_item(clean_way)
-    bob_bud.edit_item_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
-    bob_bud.add_item(casa_way)
-    bob_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(yao_str))
+    bob_bud.add_idea(mop_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.add_idea(clean_way)
+    bob_bud.edit_idea_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
+    bob_bud.add_idea(casa_way)
+    bob_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(yao_str))
     bob_bud.add_fact(casa_way, clean_way)
     bob_bud.credor_respect = 444
     bob_bud.debtor_respect = 556
@@ -1202,12 +1202,12 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
 #     mop_way = bob_bud.make_l1_way("mop")
 #     casa_way = bob_bud.make_l1_way("casa")
 #     clean_way = bob_bud.make_way(casa_way, "clean")
-#     bob_bud.add_item(mop_way)
-#     bob_bud.add_item(casa_way)
-#     bob_bud.add_item(clean_way)
-#     bob_bud.edit_item_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
-#     bob_bud.add_item(casa_way)
-#     bob_bud.edit_item_attr(casa_way, awardlink=awardlink_shop(yao_str))
+#     bob_bud.add_idea(mop_way)
+#     bob_bud.add_idea(casa_way)
+#     bob_bud.add_idea(clean_way)
+#     bob_bud.edit_idea_attr(mop_way, reason_base=casa_way, reason_premise=clean_way)
+#     bob_bud.add_idea(casa_way)
+#     bob_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(yao_str))
 #     bob_bud.add_fact(casa_way, clean_way)
 #     bob_bud.credor_respect = 444
 #     bob_bud.debtor_respect = 556

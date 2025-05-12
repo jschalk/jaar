@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import create_way
-from src.a05_item_logic.item import itemunit_shop
-from src.a04_reason_logic.reason_item import factunit_shop, reasonunit_shop, FactUnit
+from src.a05_idea_logic.idea import ideaunit_shop
+from src.a04_reason_logic.reason_idea import factunit_shop, reasonunit_shop, FactUnit
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
@@ -15,7 +15,7 @@ def get_mop_with_no_reason_budunit_example() -> BudUnit:
     mop_str = "mop"
     casa_way = bob_bud.make_l1_way(casa_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(mop_way, pledge=True)
+    bob_bud.add_idea(mop_way, pledge=True)
     return bob_bud
 
 
@@ -31,11 +31,11 @@ def get_bob_mop_with_reason_budunit_example() -> BudUnit:
     clean_way = bob_bud.make_way(floor_way, clean_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(floor_way)
-    bob_bud.add_item(clean_way)
-    bob_bud.add_item(dirty_way)
-    bob_bud.add_item(mop_way, pledge=True)
-    bob_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=clean_way)
+    bob_bud.add_idea(floor_way)
+    bob_bud.add_idea(clean_way)
+    bob_bud.add_idea(dirty_way)
+    bob_bud.add_idea(mop_way, pledge=True)
+    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=clean_way)
     return bob_bud
 
 

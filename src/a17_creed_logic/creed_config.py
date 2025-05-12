@@ -63,8 +63,8 @@ def get_creed_elements_sort_order() -> list[str]:
         "acct_name_ERASE",
         "group_label",
         "group_label_ERASE",
-        "item_way",
-        "item_way_ERASE",
+        "idea_way",
+        "idea_way_ERASE",
         "base",
         "base_ERASE",
         "fbase",
@@ -88,7 +88,7 @@ def get_creed_elements_sort_order() -> list[str]:
         "morph",
         "gogo_want",
         "stop_want",
-        "base_item_active_requisite",
+        "base_idea_active_requisite",
         "credit_belief",
         "debtit_belief",
         "credit_vote",
@@ -154,7 +154,7 @@ def get_creed_elements_sort_order() -> list[str]:
         "_all_acct_cred",
         "_keeps_justified",
         "_offtrack_fund",
-        "_base_item_active_value",
+        "_base_idea_active_value",
         "_irrational_debtit_belief",
         "_sum_healerlink_share",
         "_keeps_buildable",
@@ -188,8 +188,8 @@ def get_creed_sqlite_types() -> dict[str, str]:
         "acct_name_ERASE": "TEXT",
         "group_label": "TEXT",
         "group_label_ERASE": "TEXT",
-        "item_way": "TEXT",
-        "item_way_ERASE": "TEXT",
+        "idea_way": "TEXT",
+        "idea_way_ERASE": "TEXT",
         "base": "TEXT",
         "base_ERASE": "TEXT",
         "fbase": "TEXT",
@@ -214,7 +214,7 @@ def get_creed_sqlite_types() -> dict[str, str]:
         "morph": "INTEGER",
         "gogo_want": "REAL",
         "stop_want": "REAL",
-        "base_item_active_requisite": "INTEGER",
+        "base_idea_active_requisite": "INTEGER",
         "credit_belief": "REAL",
         "debtit_belief": "REAL",
         "credit_vote": "REAL",
@@ -279,7 +279,7 @@ def get_creed_sqlite_types() -> dict[str, str]:
         "_stop_calc": "REAL",
         "_all_acct_cred": "INTEGER",
         "_all_acct_debt": "INTEGER",
-        "_base_item_active_value": "INTEGER",
+        "_base_idea_active_value": "INTEGER",
         "_inallocable_debtit_belief": "REAL",
         "_irrational_debtit_belief": "REAL",
         "_status": "INTEGER",
@@ -343,23 +343,23 @@ def creed_format_00012_membership_v0_0_0() -> str:
     return "creed_format_00012_membership_v0_0_0"
 
 
-def creed_format_00013_itemunit_v0_0_0() -> str:
-    return "creed_format_00013_itemunit_v0_0_0"
+def creed_format_00013_ideaunit_v0_0_0() -> str:
+    return "creed_format_00013_ideaunit_v0_0_0"
 
 
-def creed_format_00019_itemunit_v0_0_0() -> str:
-    return "creed_format_00019_itemunit_v0_0_0"
+def creed_format_00019_ideaunit_v0_0_0() -> str:
+    return "creed_format_00019_ideaunit_v0_0_0"
 
 
 # def creed_format_00020_bud_acct_membership_v0_0_0()-> str: return "creed_format_00020_bud_acct_membership_v0_0_0"
 # def creed_format_00021_bud_acctunit_v0_0_0()-> str: return "creed_format_00021_bud_acctunit_v0_0_0"
-# def creed_format_00022_bud_item_awardlink_v0_0_0()-> str: return "creed_format_00022_bud_item_awardlink_v0_0_0"
-# def creed_format_00023_bud_item_factunit_v0_0_0()-> str: return "creed_format_00023_bud_item_factunit_v0_0_0"
-# def creed_format_00024_bud_item_teamlink_v0_0_0()-> str: return "creed_format_00024_bud_item_teamlink_v0_0_0"
-# def creed_format_00025_bud_item_healerlink_v0_0_0()-> str: return "creed_format_00025_bud_item_healerlink_v0_0_0"
-# def creed_format_00026_bud_item_reason_premiseunit_v0_0_0()-> str: return "creed_format_00026_bud_item_reason_premiseunit_v0_0_0"
-# def creed_format_00027_bud_item_reasonunit_v0_0_0()-> str: return "creed_format_00027_bud_item_reasonunit_v0_0_0"
-# def creed_format_00028_bud_itemunit_v0_0_0()-> str: return "creed_format_00028_bud_itemunit_v0_0_0"
+# def creed_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "creed_format_00022_bud_idea_awardlink_v0_0_0"
+# def creed_format_00023_bud_idea_factunit_v0_0_0()-> str: return "creed_format_00023_bud_idea_factunit_v0_0_0"
+# def creed_format_00024_bud_idea_teamlink_v0_0_0()-> str: return "creed_format_00024_bud_idea_teamlink_v0_0_0"
+# def creed_format_00025_bud_idea_healerlink_v0_0_0()-> str: return "creed_format_00025_bud_idea_healerlink_v0_0_0"
+# def creed_format_00026_bud_idea_reason_premiseunit_v0_0_0()-> str: return "creed_format_00026_bud_idea_reason_premiseunit_v0_0_0"
+# def creed_format_00027_bud_idea_reasonunit_v0_0_0()-> str: return "creed_format_00027_bud_idea_reasonunit_v0_0_0"
+# def creed_format_00028_bud_ideaunit_v0_0_0()-> str: return "creed_format_00028_bud_ideaunit_v0_0_0"
 # def creed_format_00029_budunit_v0_0_0()-> str: return "creed_format_00029_budunit_v0_0_0"
 
 
@@ -371,32 +371,32 @@ def creed_format_00021_bud_acctunit_v0_0_0() -> str:
     return "creed_format_00021_bud_acctunit_v0_0_0"
 
 
-def creed_format_00022_bud_item_awardlink_v0_0_0() -> str:
-    return "creed_format_00022_bud_item_awardlink_v0_0_0"
+def creed_format_00022_bud_idea_awardlink_v0_0_0() -> str:
+    return "creed_format_00022_bud_idea_awardlink_v0_0_0"
 
 
-def creed_format_00023_bud_item_factunit_v0_0_0() -> str:
-    return "creed_format_00023_bud_item_factunit_v0_0_0"
+def creed_format_00023_bud_idea_factunit_v0_0_0() -> str:
+    return "creed_format_00023_bud_idea_factunit_v0_0_0"
 
 
-def creed_format_00024_bud_item_teamlink_v0_0_0() -> str:
-    return "creed_format_00024_bud_item_teamlink_v0_0_0"
+def creed_format_00024_bud_idea_teamlink_v0_0_0() -> str:
+    return "creed_format_00024_bud_idea_teamlink_v0_0_0"
 
 
-def creed_format_00025_bud_item_healerlink_v0_0_0() -> str:
-    return "creed_format_00025_bud_item_healerlink_v0_0_0"
+def creed_format_00025_bud_idea_healerlink_v0_0_0() -> str:
+    return "creed_format_00025_bud_idea_healerlink_v0_0_0"
 
 
-def creed_format_00026_bud_item_reason_premiseunit_v0_0_0() -> str:
-    return "creed_format_00026_bud_item_reason_premiseunit_v0_0_0"
+def creed_format_00026_bud_idea_reason_premiseunit_v0_0_0() -> str:
+    return "creed_format_00026_bud_idea_reason_premiseunit_v0_0_0"
 
 
-def creed_format_00027_bud_item_reasonunit_v0_0_0() -> str:
-    return "creed_format_00027_bud_item_reasonunit_v0_0_0"
+def creed_format_00027_bud_idea_reasonunit_v0_0_0() -> str:
+    return "creed_format_00027_bud_idea_reasonunit_v0_0_0"
 
 
-def creed_format_00028_bud_itemunit_v0_0_0() -> str:
-    return "creed_format_00028_bud_itemunit_v0_0_0"
+def creed_format_00028_bud_ideaunit_v0_0_0() -> str:
+    return "creed_format_00028_bud_ideaunit_v0_0_0"
 
 
 def creed_format_00029_budunit_v0_0_0() -> str:
@@ -435,32 +435,32 @@ def creed_format_00051_delete_bud_acctunit_v0_0_0() -> str:
     return "creed_format_00051_delete_bud_acctunit_v0_0_0"
 
 
-def creed_format_00052_delete_bud_item_awardlink_v0_0_0() -> str:
-    return "creed_format_00052_delete_bud_item_awardlink_v0_0_0"
+def creed_format_00052_delete_bud_idea_awardlink_v0_0_0() -> str:
+    return "creed_format_00052_delete_bud_idea_awardlink_v0_0_0"
 
 
-def creed_format_00053_delete_bud_item_factunit_v0_0_0() -> str:
-    return "creed_format_00053_delete_bud_item_factunit_v0_0_0"
+def creed_format_00053_delete_bud_idea_factunit_v0_0_0() -> str:
+    return "creed_format_00053_delete_bud_idea_factunit_v0_0_0"
 
 
-def creed_format_00054_delete_bud_item_teamlink_v0_0_0() -> str:
-    return "creed_format_00054_delete_bud_item_teamlink_v0_0_0"
+def creed_format_00054_delete_bud_idea_teamlink_v0_0_0() -> str:
+    return "creed_format_00054_delete_bud_idea_teamlink_v0_0_0"
 
 
-def creed_format_00055_delete_bud_item_healerlink_v0_0_0() -> str:
-    return "creed_format_00055_delete_bud_item_healerlink_v0_0_0"
+def creed_format_00055_delete_bud_idea_healerlink_v0_0_0() -> str:
+    return "creed_format_00055_delete_bud_idea_healerlink_v0_0_0"
 
 
-def creed_format_00056_delete_bud_item_reason_premiseunit_v0_0_0() -> str:
-    return "creed_format_00056_delete_bud_item_reason_premiseunit_v0_0_0"
+def creed_format_00056_delete_bud_idea_reason_premiseunit_v0_0_0() -> str:
+    return "creed_format_00056_delete_bud_idea_reason_premiseunit_v0_0_0"
 
 
-def creed_format_00057_delete_bud_item_reasonunit_v0_0_0() -> str:
-    return "creed_format_00057_delete_bud_item_reasonunit_v0_0_0"
+def creed_format_00057_delete_bud_idea_reasonunit_v0_0_0() -> str:
+    return "creed_format_00057_delete_bud_idea_reasonunit_v0_0_0"
 
 
-def creed_format_00058_delete_bud_itemunit_v0_0_0() -> str:
-    return "creed_format_00058_delete_bud_itemunit_v0_0_0"
+def creed_format_00058_delete_bud_ideaunit_v0_0_0() -> str:
+    return "creed_format_00058_delete_bud_ideaunit_v0_0_0"
 
 
 def creed_format_00059_delete_budunit_v0_0_0() -> str:
@@ -498,17 +498,17 @@ def get_creed_format_filenames() -> set[str]:
         creed_format_00006_fisc_timeoffi_v0_0_0(),
         creed_format_00011_acct_v0_0_0(),
         creed_format_00012_membership_v0_0_0(),
-        creed_format_00013_itemunit_v0_0_0(),
-        creed_format_00019_itemunit_v0_0_0(),
+        creed_format_00013_ideaunit_v0_0_0(),
+        creed_format_00019_ideaunit_v0_0_0(),
         creed_format_00020_bud_acct_membership_v0_0_0(),
         creed_format_00021_bud_acctunit_v0_0_0(),
-        creed_format_00022_bud_item_awardlink_v0_0_0(),
-        creed_format_00023_bud_item_factunit_v0_0_0(),
-        creed_format_00024_bud_item_teamlink_v0_0_0(),
-        creed_format_00025_bud_item_healerlink_v0_0_0(),
-        creed_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        creed_format_00027_bud_item_reasonunit_v0_0_0(),
-        creed_format_00028_bud_itemunit_v0_0_0(),
+        creed_format_00022_bud_idea_awardlink_v0_0_0(),
+        creed_format_00023_bud_idea_factunit_v0_0_0(),
+        creed_format_00024_bud_idea_teamlink_v0_0_0(),
+        creed_format_00025_bud_idea_healerlink_v0_0_0(),
+        creed_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
+        creed_format_00027_bud_idea_reasonunit_v0_0_0(),
+        creed_format_00028_bud_ideaunit_v0_0_0(),
         creed_format_00029_budunit_v0_0_0(),
         creed_format_00036_problem_healer_v0_0_0(),
         creed_format_00042_pidgin_label_v0_0_0(),
@@ -517,13 +517,13 @@ def get_creed_format_filenames() -> set[str]:
         creed_format_00045_pidgin_way_v0_0_0(),
         creed_format_00050_delete_bud_acct_membership_v0_0_0(),
         creed_format_00051_delete_bud_acctunit_v0_0_0(),
-        creed_format_00052_delete_bud_item_awardlink_v0_0_0(),
-        creed_format_00053_delete_bud_item_factunit_v0_0_0(),
-        creed_format_00054_delete_bud_item_teamlink_v0_0_0(),
-        creed_format_00055_delete_bud_item_healerlink_v0_0_0(),
-        creed_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
-        creed_format_00057_delete_bud_item_reasonunit_v0_0_0(),
-        creed_format_00058_delete_bud_itemunit_v0_0_0(),
+        creed_format_00052_delete_bud_idea_awardlink_v0_0_0(),
+        creed_format_00053_delete_bud_idea_factunit_v0_0_0(),
+        creed_format_00054_delete_bud_idea_teamlink_v0_0_0(),
+        creed_format_00055_delete_bud_idea_healerlink_v0_0_0(),
+        creed_format_00056_delete_bud_idea_reason_premiseunit_v0_0_0(),
+        creed_format_00057_delete_bud_idea_reasonunit_v0_0_0(),
+        creed_format_00058_delete_bud_ideaunit_v0_0_0(),
         creed_format_00059_delete_budunit_v0_0_0(),
         creed_format_00113_acct_map1_v0_0_0(),
         creed_format_00115_group_map1_v0_0_0(),
@@ -595,32 +595,32 @@ def get_creed_format_headers() -> dict[str, list[str]]:
         "fisc_tag,offi_time": creed_format_00006_fisc_timeoffi_v0_0_0(),
         "fisc_tag,owner_name,acct_name": creed_format_00011_acct_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label": creed_format_00012_membership_v0_0_0(),
-        "fisc_tag,owner_name,item_way,mass,pledge": creed_format_00013_itemunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want": creed_format_00019_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,mass,pledge": creed_format_00013_ideaunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want": creed_format_00019_ideaunit_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label,credit_vote,debtit_vote": creed_format_00020_bud_acct_membership_v0_0_0(),
         "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief": creed_format_00021_bud_acctunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,awardee_label,give_force,take_force": creed_format_00022_bud_item_awardlink_v0_0_0(),
-        "fisc_tag,owner_name,item_way,fbase,fneed,fopen,fnigh": creed_format_00023_bud_item_factunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,team_label": creed_format_00024_bud_item_teamlink_v0_0_0(),
-        "fisc_tag,owner_name,item_way,healer_name": creed_format_00025_bud_item_healerlink_v0_0_0(),
-        "fisc_tag,owner_name,item_way,base,need,nigh,open,divisor": creed_format_00026_bud_item_reason_premiseunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,base,base_item_active_requisite": creed_format_00027_bud_item_reasonunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": creed_format_00028_bud_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,awardee_label,give_force,take_force": creed_format_00022_bud_idea_awardlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,fbase,fneed,fopen,fnigh": creed_format_00023_bud_idea_factunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,team_label": creed_format_00024_bud_idea_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,healer_name": creed_format_00025_bud_idea_healerlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,base,need,nigh,open,divisor": creed_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,base,base_idea_active_requisite": creed_format_00027_bud_idea_reasonunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": creed_format_00028_bud_ideaunit_v0_0_0(),
         "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": creed_format_00029_budunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,healer_name,problem_bool": creed_format_00036_problem_healer_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,healer_name,problem_bool": creed_format_00036_problem_healer_v0_0_0(),
         "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word": creed_format_00042_pidgin_label_v0_0_0(),
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word": creed_format_00043_pidgin_name_v0_0_0(),
         "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word": creed_format_00044_pidgin_tag_v0_0_0(),
         "otx_way,inx_way,otx_bridge,inx_bridge,unknown_word": creed_format_00045_pidgin_way_v0_0_0(),
         "fisc_tag,owner_name,acct_name,group_label_ERASE": creed_format_00050_delete_bud_acct_membership_v0_0_0(),
         "fisc_tag,owner_name,acct_name_ERASE": creed_format_00051_delete_bud_acctunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,awardee_label_ERASE": creed_format_00052_delete_bud_item_awardlink_v0_0_0(),
-        "fisc_tag,owner_name,item_way,fbase_ERASE": creed_format_00053_delete_bud_item_factunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,team_label_ERASE": creed_format_00054_delete_bud_item_teamlink_v0_0_0(),
-        "fisc_tag,owner_name,item_way,healer_name_ERASE": creed_format_00055_delete_bud_item_healerlink_v0_0_0(),
-        "fisc_tag,owner_name,item_way,base,need_ERASE": creed_format_00056_delete_bud_item_reason_premiseunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way,base_ERASE": creed_format_00057_delete_bud_item_reasonunit_v0_0_0(),
-        "fisc_tag,owner_name,item_way_ERASE": creed_format_00058_delete_bud_itemunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,awardee_label_ERASE": creed_format_00052_delete_bud_idea_awardlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,fbase_ERASE": creed_format_00053_delete_bud_idea_factunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,team_label_ERASE": creed_format_00054_delete_bud_idea_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,healer_name_ERASE": creed_format_00055_delete_bud_idea_healerlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,base,need_ERASE": creed_format_00056_delete_bud_idea_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,base_ERASE": creed_format_00057_delete_bud_idea_reasonunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way_ERASE": creed_format_00058_delete_bud_ideaunit_v0_0_0(),
         "fisc_tag,owner_name_ERASE": creed_format_00059_delete_budunit_v0_0_0(),
         "fisc_tag,owner_name,acct_name,otx_name,inx_name": creed_format_00113_acct_map1_v0_0_0(),
         "fisc_tag,owner_name,acct_name,otx_label,inx_label": creed_format_00115_group_map1_v0_0_0(),
@@ -660,13 +660,13 @@ def get_creed_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "bud_item_awardlink": {"br00022", "br00052"},
-        "bud_item_factunit": {"br00023", "br00053"},
-        "bud_item_healerlink": {"br00025", "br00036", "br00055"},
-        "bud_item_reason_premiseunit": {"br00026", "br00056"},
-        "bud_item_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
-        "bud_item_teamlink": {"br00024", "br00054"},
-        "bud_itemunit": {
+        "bud_idea_awardlink": {"br00022", "br00052"},
+        "bud_idea_factunit": {"br00023", "br00053"},
+        "bud_idea_healerlink": {"br00025", "br00036", "br00055"},
+        "bud_idea_reason_premiseunit": {"br00026", "br00056"},
+        "bud_idea_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
+        "bud_idea_teamlink": {"br00024", "br00054"},
+        "bud_ideaunit": {
             "br00013",
             "br00019",
             "br00022",

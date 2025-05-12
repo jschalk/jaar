@@ -4,7 +4,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
-    item_tag_str,
+    idea_tag_str,
     parent_way_str,
     begin_str,
     close_str,
@@ -129,7 +129,7 @@ def test_get_fisc_guts_agenda_dataframe_ReturnsObj(
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        item_tag_str(),
+        idea_tag_str(),
         parent_way_str(),
         begin_str(),
         close_str(),
@@ -170,7 +170,7 @@ def test_get_fisc_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "item_tag",
+        "idea_tag",
         parent_way_str(),
         begin_str(),
         close_str(),

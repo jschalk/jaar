@@ -8,12 +8,12 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
     acct_name_str,
     awardee_label_str,
     group_label_str,
-    item_way_str,
+    idea_way_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -332,7 +332,7 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
+def test_BudDelta_get_sorted_budatoms_ReturnsObj_IdeaUnitsSorted():
     # ESTABLISH
     x_fisc_tag = root_tag()
     root_way = to_way(x_fisc_tag)
@@ -340,14 +340,14 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
     sports_way = create_way(x_fisc_tag, sports_str)
     knee_str = "knee"
     knee_way = create_way(x_fisc_tag, knee_str)
-    x_dimen = bud_itemunit_str()
-    sports_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    sports_insert_itemunit_budatom.set_jkey(item_way_str(), sports_way)
-    knee_insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    knee_insert_itemunit_budatom.set_jkey(item_way_str(), knee_way)
+    x_dimen = bud_ideaunit_str()
+    sports_insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
+    sports_insert_ideaunit_budatom.set_jkey(idea_way_str(), sports_way)
+    knee_insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
+    knee_insert_ideaunit_budatom.set_jkey(idea_way_str(), knee_way)
     x_buddelta = buddelta_shop()
-    x_buddelta.set_budatom(knee_insert_itemunit_budatom)
-    x_buddelta.set_budatom(sports_insert_itemunit_budatom)
+    x_buddelta.set_budatom(knee_insert_ideaunit_budatom)
+    x_buddelta.set_budatom(sports_insert_ideaunit_budatom)
 
     # WHEN
     x_atom_order_list = x_buddelta.get_sorted_budatoms()
@@ -356,8 +356,8 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ItemUnitsSorted():
     assert len(x_atom_order_list) == 2
     # for budatom in x_atom_order_list:
     #     print(f"{budatom.jkeys=}")
-    assert x_atom_order_list[0] == knee_insert_itemunit_budatom
-    assert x_atom_order_list[1] == sports_insert_itemunit_budatom
+    assert x_atom_order_list[0] == knee_insert_ideaunit_budatom
+    assert x_atom_order_list[1] == sports_insert_ideaunit_budatom
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
@@ -372,14 +372,14 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_Way_Sorted():
     sports_way = create_way(x_fisc_tag, sports_str)
     knee_str = "knee"
     knee_way = create_way(sports_way, knee_str)
-    x_dimen = bud_item_awardlink_str()
+    x_dimen = bud_idea_awardlink_str()
     swimmers_str = ",Swimmers"
     sports_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
     sports_awardlink_budatom.set_jkey(awardee_label_str(), swimmers_str)
-    sports_awardlink_budatom.set_jkey(item_way_str(), sports_way)
+    sports_awardlink_budatom.set_jkey(idea_way_str(), sports_way)
     knee_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
     knee_awardlink_budatom.set_jkey(awardee_label_str(), swimmers_str)
-    knee_awardlink_budatom.set_jkey(item_way_str(), knee_way)
+    knee_awardlink_budatom.set_jkey(idea_way_str(), knee_way)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_awardlink_budatom)
     x_buddelta.set_budatom(sports_awardlink_budatom)

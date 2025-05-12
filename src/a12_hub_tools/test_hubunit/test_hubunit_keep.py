@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import delete_dir, save_file, open_file
-from src.a05_item_logic.healer import healerlink_shop
-from src.a05_item_logic.item import itemunit_shop
-from src.a06_bud_logic.bud_graphics import display_itemtree
+from src.a05_idea_logic.healer import healerlink_shop
+from src.a05_idea_logic.idea import ideaunit_shop
+from src.a06_bud_logic.bud_graphics import display_ideatree
 from src.a12_hub_tools.hub_path import treasury_filename
 from src.a12_hub_tools.hub_tool import save_gut_file, open_gut_file
 from src.a12_hub_tools.hubunit import hubunit_shop
@@ -29,10 +29,10 @@ def test_HubUnit_get_keep_ways_RaisesErrorWhen__keeps_justified_IsFalse(
     texas_way = sue_gut_bud.make_l1_way(texas_str)
     dallas_str = "dallas"
     dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
-    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    sue_gut_bud.set_item(itemunit_shop(dallas_str), texas_way)
-    sue_gut_bud.edit_item_attr(texas_way, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.edit_item_attr(dallas_way, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_idea(ideaunit_shop(dallas_str), texas_way)
+    sue_gut_bud.edit_idea_attr(texas_way, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.edit_idea_attr(dallas_way, healerlink=healerlink_shop({sue_str}))
     sue_gut_bud.settle_bud()
     assert sue_gut_bud._keeps_justified is False
     save_gut_file(env_dir(), sue_gut_bud)
@@ -58,8 +58,8 @@ def test_HubUnit_get_keep_ways_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Tex/as"
     texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    sue_gut_bud.edit_item_attr(texas_way, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.edit_idea_attr(texas_way, healerlink=healerlink_shop({sue_str}))
     sue_gut_bud.settle_bud()
     assert sue_gut_bud._keeps_justified
     assert sue_gut_bud._keeps_buildable is False
@@ -84,17 +84,17 @@ def test_HubUnit_get_keep_ways_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Texas"
     texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
     dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
     elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
-    dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_item(dallas_item, texas_way)
-    sue_gut_bud.set_item(elpaso_item, texas_way)
+    dallas_idea = ideaunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.set_idea(dallas_idea, texas_way)
+    sue_gut_bud.set_idea(elpaso_idea, texas_way)
     sue_gut_bud.settle_bud()
-    display_itemtree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
+    display_ideatree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_bud)
 
     # WHEN
@@ -120,16 +120,16 @@ def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
     sue_gut_bud.add_acctunit(bob_str)
     texas_str = "Texas"
     texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
-    dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_item(dallas_item, texas_way)
+    dallas_idea = ideaunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.set_idea(dallas_idea, texas_way)
     elpaso_str = "el paso"
     elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
-    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_item(elpaso_item, texas_way)
-    display_itemtree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
+    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.set_idea(elpaso_idea, texas_way)
+    display_ideatree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_bud)
     sue_dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_way)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_way)
@@ -263,17 +263,17 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     sue_gut_bud.add_acctunit(sue_str)
     texas_str = "Texas"
     texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
     dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
     elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
-    dallas_item = itemunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    elpaso_item = itemunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_item(dallas_item, texas_way)
-    sue_gut_bud.set_item(elpaso_item, texas_way)
+    dallas_idea = ideaunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    sue_gut_bud.set_idea(dallas_idea, texas_way)
+    sue_gut_bud.set_idea(elpaso_idea, texas_way)
     sue_gut_bud.settle_bud()
-    display_itemtree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
+    display_ideatree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_bud)
 
     dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_way)

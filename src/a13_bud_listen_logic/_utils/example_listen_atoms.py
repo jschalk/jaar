@@ -2,10 +2,10 @@ from src.a01_way_logic.way import create_way, FiscTag
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
-    bud_itemunit_str,
-    bud_item_factunit_str,
+    bud_ideaunit_str,
+    bud_idea_factunit_str,
     acct_name_str,
-    item_way_str,
+    idea_way_str,
     fbase_str,
     fopen_str,
     fnigh_str,
@@ -15,31 +15,31 @@ from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
 from src.a09_pack_logic.delta import buddelta_shop, BudDelta
 
 
-def get_atom_example_itemunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
+def get_atom_example_ideaunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
     if not fisc_tag:
         fisc_tag = "accord23"
     sports_str = "sports"
-    x_dimen = bud_itemunit_str()
+    x_dimen = bud_ideaunit_str()
     sports_way = create_way(fisc_tag, sports_str)
-    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_way_str(), sports_way)
-    return insert_itemunit_budatom
+    insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_ideaunit_budatom.set_jkey(idea_way_str(), sports_way)
+    return insert_ideaunit_budatom
 
 
-def get_atom_example_itemunit_ball(fisc_tag: FiscTag = None) -> BudAtom:
+def get_atom_example_ideaunit_ball(fisc_tag: FiscTag = None) -> BudAtom:
     if not fisc_tag:
         fisc_tag = "accord23"
     sports_str = "sports"
     sports_way = create_way(fisc_tag, sports_str)
     ball_str = "basketball"
-    x_dimen = bud_itemunit_str()
+    x_dimen = bud_ideaunit_str()
     bball_way = create_way(sports_way, ball_str)
-    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_way_str(), bball_way)
-    return insert_itemunit_budatom
+    insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_ideaunit_budatom.set_jkey(idea_way_str(), bball_way)
+    return insert_ideaunit_budatom
 
 
-def get_atom_example_itemunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
+def get_atom_example_ideaunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     if not fisc_tag:
         fisc_tag = "accord23"
     sports_str = "sports"
@@ -47,15 +47,15 @@ def get_atom_example_itemunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
-    x_dimen = bud_itemunit_str()
+    x_dimen = bud_ideaunit_str()
     begin_str = "begin"
     close_str = "close"
     knee_way = create_way(sports_way, knee_str)
-    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_way_str(), knee_way)
-    insert_itemunit_budatom.set_jvalue(begin_str, knee_begin)
-    insert_itemunit_budatom.set_jvalue(close_str, knee_close)
-    return insert_itemunit_budatom
+    insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_ideaunit_budatom.set_jkey(idea_way_str(), knee_way)
+    insert_ideaunit_budatom.set_jvalue(begin_str, knee_begin)
+    insert_ideaunit_budatom.set_jvalue(close_str, knee_close)
+    return insert_ideaunit_budatom
 
 
 def get_atom_example_factunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
@@ -69,9 +69,9 @@ def get_atom_example_factunit_knee(fisc_tag: FiscTag = None) -> BudAtom:
     knee_way = create_way(fisc_tag, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
-    x_dimen = bud_item_factunit_str()
+    x_dimen = bud_idea_factunit_str()
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_factunit_budatom.set_jkey(item_way_str(), ball_way)
+    insert_factunit_budatom.set_jkey(idea_way_str(), ball_way)
     insert_factunit_budatom.set_jkey(fbase_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_fopen)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_fnigh)

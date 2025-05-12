@@ -12,7 +12,7 @@ from src.a17_creed_logic.creed import get_creedref_obj, save_creed_csv, load_cre
 from src.a17_creed_logic.creed_config import (
     creed_format_00021_bud_acctunit_v0_0_0,
     creed_format_00012_membership_v0_0_0,
-    creed_format_00013_itemunit_v0_0_0,
+    creed_format_00013_ideaunit_v0_0_0,
 )
 from src.a17_creed_logic.creed_db_tool import open_csv
 from src.a17_creed_logic._utils.env_a17 import (

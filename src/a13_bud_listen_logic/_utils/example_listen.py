@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import WayUnit, create_way, get_default_fisc_tag
-from src.a05_item_logic.item import itemunit_shop
-from src.a04_reason_logic.reason_item import factunit_shop, FactUnit
+from src.a05_idea_logic.idea import ideaunit_shop
+from src.a04_reason_logic.reason_idea import factunit_shop, FactUnit
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 
 
@@ -64,14 +64,14 @@ def get_example_zia_speaker() -> BudUnit:
     zia_str = "Zia"
     a23_str = "accord23"
     zia_speaker = budunit_shop(zia_str, a23_str)
-    zia_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
-    zia_speaker.set_item(itemunit_shop(hungry_str()), eat_way())
-    zia_speaker.set_item(itemunit_shop(full_str()), eat_way())
+    zia_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    zia_speaker.set_idea(ideaunit_shop(hungry_str()), eat_way())
+    zia_speaker.set_idea(ideaunit_shop(full_str()), eat_way())
     yao_str = "Yao"
     zia_speaker.add_acctunit(yao_str, debtit_belief=12)
-    cook_itemunit = zia_speaker.get_item_obj(cook_way())
-    cook_itemunit.teamunit.set_teamlink(yao_str)
-    zia_speaker.edit_item_attr(
+    cook_ideaunit = zia_speaker.get_idea_obj(cook_way())
+    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    zia_speaker.edit_idea_attr(
         cook_way(), reason_base=eat_way(), reason_premise=hungry_way()
     )
     zia_speaker.add_fact(eat_way(), full_way())
@@ -83,14 +83,14 @@ def get_example_bob_speaker() -> BudUnit:
     bob_str = "Bob"
     a23_str = "accord23"
     bob_speaker = budunit_shop(bob_str, a23_str)
-    bob_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
-    bob_speaker.set_item(itemunit_shop(hungry_str()), eat_way())
-    bob_speaker.set_item(itemunit_shop(full_str()), eat_way())
+    bob_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    bob_speaker.set_idea(ideaunit_shop(hungry_str()), eat_way())
+    bob_speaker.set_idea(ideaunit_shop(full_str()), eat_way())
     yao_str = "Yao"
     bob_speaker.add_acctunit(yao_str, debtit_belief=12)
-    cook_itemunit = bob_speaker.get_item_obj(cook_way())
-    cook_itemunit.teamunit.set_teamlink(yao_str)
-    bob_speaker.edit_item_attr(
+    cook_ideaunit = bob_speaker.get_idea_obj(cook_way())
+    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    bob_speaker.edit_idea_attr(
         cook_way(), reason_base=eat_way(), reason_premise=hungry_way()
     )
     bob_speaker.add_fact(eat_way(), hungry_way())
@@ -108,12 +108,12 @@ def get_example_yao_speaker() -> BudUnit:
     yao_speaker.add_acctunit(zia_str, debtit_belief=36)
     yao_speaker.add_acctunit(bob_str, debtit_belief=48)
     yao_speaker.set_acct_respect(100)
-    yao_speaker.set_item(itemunit_shop(cook_str(), pledge=True), casa_way())
-    yao_speaker.set_item(itemunit_shop(hungry_str()), eat_way())
-    yao_speaker.set_item(itemunit_shop(full_str()), eat_way())
-    cook_itemunit = yao_speaker.get_item_obj(cook_way())
-    cook_itemunit.teamunit.set_teamlink(yao_str)
-    yao_speaker.edit_item_attr(
+    yao_speaker.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_way())
+    yao_speaker.set_idea(ideaunit_shop(full_str()), eat_way())
+    cook_ideaunit = yao_speaker.get_idea_obj(cook_way())
+    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_speaker.edit_idea_attr(
         cook_way(), reason_base=eat_way(), reason_premise=hungry_way()
     )
     yao_speaker.add_fact(eat_way(), hungry_way())

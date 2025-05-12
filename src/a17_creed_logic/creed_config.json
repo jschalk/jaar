@@ -32,7 +32,7 @@
       "debtit_belief": {}
     }
   },
-  "bud_item_awardlink": {
+  "bud_idea_awardlink": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 11,
     "creed_category": "bud",
@@ -42,14 +42,14 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "item_way": {}
+      "idea_way": {}
     },
     "jvalues": {
       "give_force": {},
       "take_force": {}
     }
   },
-  "bud_item_factunit": {
+  "bud_idea_factunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 12,
     "creed_category": "bud",
@@ -59,7 +59,7 @@
       "fbase": {},
       "fisc_tag": {},
       "owner_name": {},
-      "item_way": {}
+      "idea_way": {}
     },
     "jvalues": {
       "fneed": {},
@@ -67,7 +67,7 @@
       "fopen": {}
     }
   },
-  "bud_item_healerlink": {
+  "bud_idea_healerlink": {
     "allowed_crud": "DELETE_INSERT",
     "build_order": 15,
     "creed_category": "bud",
@@ -77,11 +77,11 @@
       "fisc_tag": {},
       "healer_name": {},
       "owner_name": {},
-      "item_way": {}
+      "idea_way": {}
     },
     "jvalues": {}
   },
-  "bud_item_reason_premiseunit": {
+  "bud_idea_reason_premiseunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 16,
     "creed_category": "bud",
@@ -92,7 +92,7 @@
       "fisc_tag": {},
       "need": {},
       "owner_name": {},
-      "item_way": {}
+      "idea_way": {}
     },
     "jvalues": {
       "divisor": {},
@@ -100,7 +100,7 @@
       "open": {}
     }
   },
-  "bud_item_reasonunit": {
+  "bud_idea_reasonunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 17,
     "creed_category": "bud",
@@ -110,13 +110,13 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "item_way": {}
+      "idea_way": {}
     },
     "jvalues": {
-      "base_item_active_requisite": {}
+      "base_idea_active_requisite": {}
     }
   },
-  "bud_item_teamlink": {
+  "bud_idea_teamlink": {
     "allowed_crud": "DELETE_INSERT",
     "build_order": 14,
     "creed_category": "bud",
@@ -125,12 +125,12 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "item_way": {},
+      "idea_way": {},
       "team_label": {}
     },
     "jvalues": {}
   },
-  "bud_itemunit": {
+  "bud_ideaunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 18,
     "creed_category": "bud",
@@ -139,7 +139,7 @@
       "face_name": {},
       "fisc_tag": {},
       "owner_name": {},
-      "item_way": {}
+      "idea_way": {}
     },
     "jvalues": {
       "addin": {},

@@ -564,7 +564,7 @@
   "fisc_tag": "accord45",
   "fund_coin": 1,
   "fund_pool": 1000000000.0,
-  "itemroot": {
+  "idearoot": {
     "_kids": {
       "ACME": {
         "_is_expanded": false,
@@ -575,7 +575,7 @@
               "Employee Intruction manuel.": {
                 "_is_expanded": false,
                 "_uid": 123,
-                "item_tag": "Employee Intruction manuel.",
+                "idea_tag": "Employee Intruction manuel.",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -606,7 +606,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 116,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -635,14 +635,14 @@
                   }
                 },
                 "_uid": 106,
-                "item_tag": "Know Abuse Deterrence and Reporting guildlines",
+                "idea_tag": "Know Abuse Deterrence and Reporting guildlines",
                 "mass": 1
               },
               "Know Discrimination Harassment Bully guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 117,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -670,7 +670,7 @@
                   }
                 },
                 "_uid": 107,
-                "item_tag": "Know Discrimination Harassment Bully guildlines",
+                "idea_tag": "Know Discrimination Harassment Bully guildlines",
                 "mass": 1
               },
               "PC1025 Identifying and Supporting houseless Youth": {
@@ -678,7 +678,7 @@
                   "Accomplish Fall 2021 traaining": {
                     "_is_expanded": false,
                     "_uid": 119,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -707,7 +707,7 @@
                   }
                 },
                 "_uid": 109,
-                "item_tag": "PC1025 Identifying and Supporting houseless Youth",
+                "idea_tag": "PC1025 Identifying and Supporting houseless Youth",
                 "mass": 1
               },
               "PC1026 Rick Management and Hazard Analysis": {
@@ -715,12 +715,12 @@
                   "Accomplish Fall 2021 traaining": {
                     "_is_expanded": false,
                     "_uid": 122,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1
                   }
                 },
                 "_uid": 112,
-                "item_tag": "PC1026 Rick Management and Hazard Analysis",
+                "idea_tag": "PC1026 Rick Management and Hazard Analysis",
                 "mass": 1
               },
               "PC1027 Adult Sexual Misconduct: Staff to Student/ IX": {
@@ -728,7 +728,7 @@
                   "Accomplish Fall 2021 traaining": {
                     "_is_expanded": false,
                     "_uid": 118,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -757,7 +757,7 @@
                   }
                 },
                 "_uid": 108,
-                "item_tag": "PC1027 Adult Sexual Misconduct: Staff to Student/ IX",
+                "idea_tag": "PC1027 Adult Sexual Misconduct: Staff to Student/ IX",
                 "mass": 1
               },
               "PC1029 Information Security Awareness traaining": {
@@ -765,7 +765,7 @@
                   "Accomplish Fall 2021 traaining": {
                     "_is_expanded": false,
                     "_uid": 121,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -794,7 +794,7 @@
                   }
                 },
                 "_uid": 111,
-                "item_tag": "PC1029 Information Security Awareness traaining",
+                "idea_tag": "PC1029 Information Security Awareness traaining",
                 "mass": 1
               },
               "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining": {
@@ -802,7 +802,7 @@
                   "Accomplish Fall 2021 traaining": {
                     "_is_expanded": false,
                     "_uid": 120,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -831,14 +831,14 @@
                   }
                 },
                 "_uid": 110,
-                "item_tag": "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining",
+                "idea_tag": "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining",
                 "mass": 1
               },
               "PRM1005 ACME Staff  and Safety": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 115,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -866,12 +866,12 @@
                   }
                 },
                 "_uid": 105,
-                "item_tag": "PRM1005 ACME Staff  and Safety",
+                "idea_tag": "PRM1005 ACME Staff  and Safety",
                 "mass": 1
               }
             },
             "_uid": 102,
-            "item_tag": "ACME Employee Responsiblities",
+            "idea_tag": "ACME Employee Responsiblities",
             "mass": 1
           },
           "IT DEPT": {
@@ -882,7 +882,7 @@
                     "_kids": {
                       "check emails": {
                         "_uid": 138,
-                        "item_tag": "check emails",
+                        "idea_tag": "check emails",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -902,27 +902,27 @@
                         "_kids": {
                           "MECHANISM2": {
                             "_uid": 171,
-                            "item_tag": "MECHANISM2",
+                            "idea_tag": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM3": {
                             "_uid": 172,
-                            "item_tag": "MECHANISM3",
+                            "idea_tag": "MECHANISM3",
                             "mass": 1
                           },
                           "MECHANISM5": {
                             "_uid": 173,
-                            "item_tag": "MECHANISM5",
+                            "idea_tag": "MECHANISM5",
                             "mass": 1
                           },
                           "MECHANISM7": {
                             "_uid": 170,
-                            "item_tag": "MECHANISM7",
+                            "idea_tag": "MECHANISM7",
                             "mass": 1
                           }
                         },
                         "_uid": 139,
-                        "item_tag": "check mechanisms",
+                        "idea_tag": "check mechanisms",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -940,7 +940,7 @@
                       }
                     },
                     "_uid": 137,
-                    "item_tag": "check ETLs ran correctly",
+                    "idea_tag": "check ETLs ran correctly",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -957,7 +957,7 @@
                   },
                   "dress to slightly impress": {
                     "_uid": 158,
-                    "item_tag": "dress to slightly impress",
+                    "idea_tag": "dress to slightly impress",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -976,7 +976,7 @@
                   "go to employment": {
                     "_is_expanded": false,
                     "_uid": 231,
-                    "item_tag": "go to employment",
+                    "idea_tag": "go to employment",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -994,7 +994,7 @@
                   }
                 },
                 "_uid": 136,
-                "item_tag": "IT DEPT off-hours responsiblities",
+                "idea_tag": "IT DEPT off-hours responsiblities",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;day_minute": {
@@ -1013,7 +1013,7 @@
                 "_kids": {
                   "Add to Azure DevOps": {
                     "_uid": 156,
-                    "item_tag": "Add to Azure DevOps",
+                    "idea_tag": "Add to Azure DevOps",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1033,7 +1033,7 @@
                     "_kids": {
                       "Datawarehouse Expertise acquisition": {
                         "_uid": 142,
-                        "item_tag": "Datawarehouse Expertise acquisition",
+                        "idea_tag": "Datawarehouse Expertise acquisition",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1053,27 +1053,27 @@
                         "_kids": {
                           "MECHANISM2": {
                             "_uid": 176,
-                            "item_tag": "MECHANISM2",
+                            "idea_tag": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM7": {
                             "_uid": 175,
-                            "item_tag": "MECHANISM7",
+                            "idea_tag": "MECHANISM7",
                             "mass": 1
                           },
                           "WPRD": {
                             "_uid": 177,
-                            "item_tag": "WPRD",
+                            "idea_tag": "WPRD",
                             "mass": 1
                           },
                           "WPRDD": {
                             "_uid": 174,
-                            "item_tag": "WPRDD",
+                            "idea_tag": "WPRDD",
                             "mass": 1
                           }
                         },
                         "_uid": 157,
-                        "item_tag": "dev quantification script \"TIMOTHY\"",
+                        "idea_tag": "dev quantification script \"TIMOTHY\"",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1091,7 +1091,7 @@
                       },
                       "go to daily meeting ": {
                         "_uid": 232,
-                        "item_tag": "go to daily meeting ",
+                        "idea_tag": "go to daily meeting ",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1109,12 +1109,12 @@
                       }
                     },
                     "_uid": 135,
-                    "item_tag": "Datawarehouse",
+                    "idea_tag": "Datawarehouse",
                     "mass": 1
                   },
                   "IT DEPT general": {
                     "_uid": 141,
-                    "item_tag": "IT DEPT general",
+                    "idea_tag": "IT DEPT general",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -1131,7 +1131,7 @@
                   },
                   "Keep track of Chatroom conversations": {
                     "_uid": 151,
-                    "item_tag": "Keep track of Chatroom conversations",
+                    "idea_tag": "Keep track of Chatroom conversations",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1151,7 +1151,7 @@
                     "_kids": {
                       "check for access": {
                         "_uid": 143,
-                        "item_tag": "check for access",
+                        "idea_tag": "check for access",
                         "mass": 1,
                         "reasonunits": {
                           ";accord45;day_minute": {
@@ -1168,7 +1168,7 @@
                       }
                     },
                     "_uid": 140,
-                    "item_tag": "Synergy",
+                    "idea_tag": "Synergy",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -1185,7 +1185,7 @@
                   },
                   "consider management perspective": {
                     "_uid": 155,
-                    "item_tag": "consider management perspective",
+                    "idea_tag": "consider management perspective",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1203,7 +1203,7 @@
                   }
                 },
                 "_uid": 133,
-                "item_tag": "IT DEPT regular hours responsiblities",
+                "idea_tag": "IT DEPT regular hours responsiblities",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1221,7 +1221,7 @@
               }
             },
             "_uid": 101,
-            "item_tag": "IT DEPT",
+            "idea_tag": "IT DEPT",
             "mass": 1,
             "reasonunits": {
               ";accord45;day_minute": {
@@ -1238,7 +1238,7 @@
           }
         },
         "_uid": 100,
-        "item_tag": "ACME",
+        "idea_tag": "ACME",
         "mass": 1
       },
       "Aaron Donald objects effected by him": {
@@ -1246,17 +1246,17 @@
         "_kids": {
           "interesting": {
             "_uid": 262,
-            "item_tag": "interesting",
+            "idea_tag": "interesting",
             "mass": 1
           },
           "not interesting": {
             "_uid": 263,
-            "item_tag": "not interesting",
+            "idea_tag": "not interesting",
             "mass": 1
           }
         },
         "_uid": 261,
-        "item_tag": "Aaron Donald objects effected by him",
+        "idea_tag": "Aaron Donald objects effected by him",
         "mass": 1
       },
       "Asset management": {
@@ -1273,7 +1273,7 @@
                         "_kids": {
                           "browsing": {
                             "_uid": 217,
-                            "item_tag": "browsing",
+                            "idea_tag": "browsing",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
@@ -1288,7 +1288,7 @@
                           },
                           "picnic": {
                             "_uid": 216,
-                            "item_tag": "picnic",
+                            "idea_tag": "picnic",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Seasons": {
@@ -1303,7 +1303,7 @@
                           },
                           "street soccer": {
                             "_uid": 213,
-                            "item_tag": "street soccer",
+                            "idea_tag": "street soccer",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
@@ -1318,7 +1318,7 @@
                           },
                           "swimming": {
                             "_uid": 212,
-                            "item_tag": "swimming",
+                            "idea_tag": "swimming",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
@@ -1333,7 +1333,7 @@
                           }
                         },
                         "_uid": 210,
-                        "item_tag": "PSU Sports",
+                        "idea_tag": "PSU Sports",
                         "mass": 1,
                         "reasonunits": {
                           ";accord45;Nation-States": {
@@ -1350,7 +1350,7 @@
                         "_kids": {
                           "be reponsible for rent": {
                             "_uid": 209,
-                            "item_tag": "be reponsible for rent",
+                            "idea_tag": "be reponsible for rent",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
@@ -1365,7 +1365,7 @@
                           },
                           "flat": {
                             "_uid": 211,
-                            "item_tag": "flat",
+                            "idea_tag": "flat",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
@@ -1382,7 +1382,7 @@
                             "_kids": {
                               "maybe watch a video": {
                                 "_uid": 218,
-                                "item_tag": "maybe watch a video",
+                                "idea_tag": "maybe watch a video",
                                 "mass": 1,
                                 "reasonunits": {
                                   ";accord45;Interweb": {
@@ -1397,7 +1397,7 @@
                               }
                             },
                             "_uid": 214,
-                            "item_tag": "go for parent_way",
+                            "idea_tag": "go for parent_way",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
@@ -1412,7 +1412,7 @@
                           },
                           "gym time": {
                             "_uid": 215,
-                            "item_tag": "gym time",
+                            "idea_tag": "gym time",
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Moods": {
@@ -1427,7 +1427,7 @@
                           }
                         },
                         "_uid": 208,
-                        "item_tag": "flats",
+                        "idea_tag": "flats",
                         "mass": 1,
                         "reasonunits": {
                           ";accord45;Nation-States": {
@@ -1442,7 +1442,7 @@
                       }
                     },
                     "_uid": 207,
-                    "item_tag": "downtown",
+                    "idea_tag": "downtown",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;Nation-States": {
@@ -1457,7 +1457,7 @@
                   }
                 },
                 "_uid": 206,
-                "item_tag": "portland sovereignty",
+                "idea_tag": "portland sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Nation-States": {
@@ -1472,7 +1472,7 @@
               },
               "texas sovereignty": {
                 "_uid": 205,
-                "item_tag": "texas sovereignty",
+                "idea_tag": "texas sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Nation-States": {
@@ -1487,7 +1487,7 @@
               }
             },
             "_uid": 204,
-            "item_tag": "American sovereignty",
+            "idea_tag": "American sovereignty",
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
@@ -1502,7 +1502,7 @@
           },
           "French sovereignty": {
             "_uid": 203,
-            "item_tag": "French sovereignty",
+            "idea_tag": "French sovereignty",
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
@@ -1517,24 +1517,24 @@
           }
         },
         "_uid": 199,
-        "item_tag": "Asset management",
+        "idea_tag": "Asset management",
         "mass": 1
       },
       "Bob Dylan Root": {
         "_kids": {
           "Aint me Babe": {
             "_uid": 270,
-            "item_tag": "Aint me Babe",
+            "idea_tag": "Aint me Babe",
             "mass": 1
           },
           "tangled up in blue": {
             "_uid": 271,
-            "item_tag": "tangled up in blue",
+            "idea_tag": "tangled up in blue",
             "mass": 1
           }
         },
         "_uid": 269,
-        "item_tag": "Bob Dylan Root",
+        "idea_tag": "Bob Dylan Root",
         "mass": 1
       },
       "D&B": {
@@ -1552,7 +1552,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "Ask Chuck monthly what I can do",
+                "idea_tag": "Ask Chuck monthly what I can do",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
@@ -1574,7 +1574,7 @@
                 "take_force": 1.0
               }
             },
-            "item_tag": "Aarons friends are desperate for of housing support",
+            "idea_tag": "Aarons friends are desperate for of housing support",
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
@@ -1591,7 +1591,7 @@
             "_kids": {
               "test program": {
                 "_uid": 178,
-                "item_tag": "test program",
+                "idea_tag": "test program",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1632,7 +1632,7 @@
                 "take_force": 1.0
               }
             },
-            "item_tag": "develop D&B software",
+            "idea_tag": "develop D&B software",
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
@@ -1657,7 +1657,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "donate to influential people that are pro-Climate Death",
+                "idea_tag": "donate to influential people that are pro-Climate Death",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1702,7 +1702,7 @@
               }
             },
             "_uid": 167,
-            "item_tag": "donate to pro-climate committees",
+            "idea_tag": "donate to pro-climate committees",
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
@@ -1717,7 +1717,7 @@
           },
           "late_night_go_to_sleep": {
             "_uid": 149,
-            "item_tag": "late_night_go_to_sleep",
+            "idea_tag": "late_night_go_to_sleep",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -1745,7 +1745,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "be available for phone call",
+                    "idea_tag": "be available for phone call",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1783,7 +1783,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "call David and discuss methodology",
+                    "idea_tag": "call David and discuss methodology",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1827,7 +1827,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "sympathetic receptive to David",
+                "idea_tag": "sympathetic receptive to David",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
@@ -1842,7 +1842,7 @@
               }
             },
             "_uid": 161,
-            "item_tag": "sympathetic receptive",
+            "idea_tag": "sympathetic receptive",
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
@@ -1867,7 +1867,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "write letters about Climate Death to congressman",
+                "idea_tag": "write letters about Climate Death to congressman",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
@@ -1890,7 +1890,7 @@
               }
             },
             "_uid": 165,
-            "item_tag": "write letters to reps",
+            "idea_tag": "write letters to reps",
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
@@ -1922,7 +1922,7 @@
             "take_force": 1.0
           }
         },
-        "item_tag": "D&B",
+        "idea_tag": "D&B",
         "mass": 1,
         "reasonunits": {
           ";accord45;Aaron Donald objects effected by him": {
@@ -1941,7 +1941,7 @@
           "Submit hours on website": {
             "_is_expanded": false,
             "_uid": 104,
-            "item_tag": "Submit hours on website",
+            "idea_tag": "Submit hours on website",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -1967,7 +1967,7 @@
           }
         },
         "_uid": 103,
-        "item_tag": "Freelancing",
+        "idea_tag": "Freelancing",
         "mass": 1,
         "reasonunits": {
           ";accord45;day_minute": {
@@ -1989,68 +1989,68 @@
             "_kids": {
               "PSU Ultimate": {
                 "_uid": 254,
-                "item_tag": "PSU Ultimate",
+                "idea_tag": "PSU Ultimate",
                 "mass": 1
               }
             },
             "_uid": 253,
-            "item_tag": "AOL AIM",
+            "idea_tag": "AOL AIM",
             "mass": 1
           },
           "Faaceboook": {
             "_uid": 251,
-            "item_tag": "Faaceboook",
+            "idea_tag": "Faaceboook",
             "mass": 1
           },
           "Github": {
             "_uid": 252,
-            "item_tag": "Github",
+            "idea_tag": "Github",
             "mass": 1
           },
           "YahooVideo": {
             "_uid": 255,
-            "item_tag": "YahooVideo",
+            "idea_tag": "YahooVideo",
             "mass": 1
           }
         },
         "_uid": 250,
-        "item_tag": "Interweb",
+        "idea_tag": "Interweb",
         "mass": 1
       },
       "Moods": {
         "_kids": {
           "Bllod Meridan by Cormac": {
             "_uid": 265,
-            "item_tag": "Bllod Meridan by Cormac",
+            "idea_tag": "Bllod Meridan by Cormac",
             "mass": 1
           },
           "Happy": {
             "_kids": {
               "Happy - angerish": {
                 "_uid": 267,
-                "item_tag": "Happy - angerish",
+                "idea_tag": "Happy - angerish",
                 "mass": 1
               }
             },
             "_uid": 266,
-            "item_tag": "Happy",
+            "idea_tag": "Happy",
             "mass": 1
           },
           "hungry": {
             "_uid": 268,
-            "item_tag": "hungry",
+            "idea_tag": "hungry",
             "mass": 1
           }
         },
         "_uid": 264,
-        "item_tag": "Moods",
+        "idea_tag": "Moods",
         "mass": 1
       },
       "Nation-States": {
         "_kids": {
           "France2": {
             "_uid": 235,
-            "item_tag": "France2",
+            "idea_tag": "France2",
             "mass": 1
           },
           "USA": {
@@ -2063,79 +2063,79 @@
                         "_kids": {
                           "Park Squares": {
                             "_uid": 241,
-                            "item_tag": "Park Squares",
+                            "idea_tag": "Park Squares",
                             "mass": 1
                           },
                           "Pool": {
                             "_uid": 242,
-                            "item_tag": "Pool",
+                            "idea_tag": "Pool",
                             "mass": 1
                           },
                           "Stott Field": {
                             "_uid": 243,
-                            "item_tag": "Stott Field",
+                            "idea_tag": "Stott Field",
                             "mass": 1
                           },
                           "library": {
                             "_uid": 244,
-                            "item_tag": "library",
+                            "idea_tag": "library",
                             "mass": 1
                           }
                         },
                         "_uid": 240,
-                        "item_tag": "PSU",
+                        "idea_tag": "PSU",
                         "mass": 1
                       },
                       "Southpark Apt": {
                         "_kids": {
                           "10th floor gaarden": {
                             "_uid": 246,
-                            "item_tag": "10th floor gaarden",
+                            "idea_tag": "10th floor gaarden",
                             "mass": 1
                           },
                           "Apt X4XX": {
                             "_uid": 247,
-                            "item_tag": "Apt X4XX",
+                            "idea_tag": "Apt X4XX",
                             "mass": 1
                           },
                           "Gym": {
                             "_uid": 248,
-                            "item_tag": "Gym",
+                            "idea_tag": "Gym",
                             "mass": 1
                           },
                           "workspace": {
                             "_uid": 249,
-                            "item_tag": "workspace",
+                            "idea_tag": "workspace",
                             "mass": 1
                           }
                         },
                         "_uid": 245,
-                        "item_tag": "Southpark Apt",
+                        "idea_tag": "Southpark Apt",
                         "mass": 1
                       }
                     },
                     "_uid": 239,
-                    "item_tag": "Downtown",
+                    "idea_tag": "Downtown",
                     "mass": 1
                   }
                 },
                 "_uid": 237,
-                "item_tag": "Portland OR",
+                "idea_tag": "Portland OR",
                 "mass": 1
               },
               "Texas": {
                 "_uid": 238,
-                "item_tag": "Texas",
+                "idea_tag": "Texas",
                 "mass": 1
               }
             },
             "_uid": 236,
-            "item_tag": "USA",
+            "idea_tag": "USA",
             "mass": 1
           }
         },
         "_uid": 234,
-        "item_tag": "Nation-States",
+        "idea_tag": "Nation-States",
         "mass": 1
       },
       "No Movie playing": {
@@ -2143,46 +2143,46 @@
         "_kids": {
           "Big Lewbwski": {
             "_uid": 273,
-            "item_tag": "Big Lewbwski",
+            "idea_tag": "Big Lewbwski",
             "mass": 1
           },
           "Star Wars eps IV": {
             "_uid": 274,
-            "item_tag": "Star Wars eps IV",
+            "idea_tag": "Star Wars eps IV",
             "mass": 1
           }
         },
         "_uid": 272,
-        "item_tag": "No Movie playing",
+        "idea_tag": "No Movie playing",
         "mass": 1
       },
       "Seasons": {
         "_kids": {
           "Summer": {
             "_uid": 276,
-            "item_tag": "Summer",
+            "idea_tag": "Summer",
             "mass": 1
           }
         },
         "_uid": 275,
-        "item_tag": "Seasons",
+        "idea_tag": "Seasons",
         "mass": 1
       },
       "Tired Status": {
         "_kids": {
           "Not tired": {
             "_uid": 278,
-            "item_tag": "Not tired",
+            "idea_tag": "Not tired",
             "mass": 1
           },
           "Tired": {
             "_uid": 279,
-            "item_tag": "Tired",
+            "idea_tag": "Tired",
             "mass": 1
           }
         },
         "_uid": 277,
-        "item_tag": "Tired Status",
+        "idea_tag": "Tired Status",
         "mass": 1
       },
       "Ultimate Frisbee": {
@@ -2190,7 +2190,7 @@
         "_kids": {
           "check on m33": {
             "_uid": 221,
-            "item_tag": "check on m33",
+            "idea_tag": "check on m33",
             "mass": 1,
             "reasonunits": {
               ";accord45;Moods": {
@@ -2205,7 +2205,7 @@
           },
           "contemplate the disc": {
             "_uid": 229,
-            "item_tag": "contemplate the disc",
+            "idea_tag": "contemplate the disc",
             "mass": 1,
             "reasonunits": {
               ";accord45;No Movie playing": {
@@ -2222,7 +2222,7 @@
             "_kids": {
               "check PSU mini": {
                 "_uid": 219,
-                "item_tag": "check PSU mini",
+                "idea_tag": "check PSU mini",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Moods": {
@@ -2237,7 +2237,7 @@
               }
             },
             "_uid": 201,
-            "item_tag": "playing ultimate",
+            "idea_tag": "playing ultimate",
             "mass": 1,
             "reasonunits": {
               ";accord45;Moods": {
@@ -2252,7 +2252,7 @@
           },
           "relaxing": {
             "_uid": 202,
-            "item_tag": "relaxing",
+            "idea_tag": "relaxing",
             "mass": 1,
             "reasonunits": {
               ";accord45;No Movie playing": {
@@ -2267,7 +2267,7 @@
           }
         },
         "_uid": 200,
-        "item_tag": "Ultimate Frisbee",
+        "idea_tag": "Ultimate Frisbee",
         "mass": 1,
         "reasonunits": {
           ";accord45;Moods": {
@@ -2287,7 +2287,7 @@
             "_kids": {
               "Go climbing at east Circuit": {
                 "_uid": 226,
-                "item_tag": "Go climbing at east Circuit",
+                "idea_tag": "Go climbing at east Circuit",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;WaterExistence": {
@@ -2302,7 +2302,7 @@
               },
               "animate": {
                 "_uid": 228,
-                "item_tag": "animate",
+                "idea_tag": "animate",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;WaterExistence": {
@@ -2317,7 +2317,7 @@
               },
               "bike around": {
                 "_uid": 227,
-                "item_tag": "bike around",
+                "idea_tag": "bike around",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;WaterExistence": {
@@ -2332,7 +2332,7 @@
               }
             },
             "_uid": 225,
-            "item_tag": "Swimming in Williamette watershed",
+            "idea_tag": "Swimming in Williamette watershed",
             "mass": 1,
             "reasonunits": {
               ";accord45;WaterExistence": {
@@ -2347,7 +2347,7 @@
           }
         },
         "_uid": 223,
-        "item_tag": "Water Living",
+        "idea_tag": "Water Living",
         "mass": 1
       },
       "WaterExistence": {
@@ -2358,27 +2358,27 @@
                 "_kids": {
                   "flat": {
                     "_uid": 260,
-                    "item_tag": "flat",
+                    "idea_tag": "flat",
                     "mass": 1
                   }
                 },
                 "_uid": 258,
-                "item_tag": "East Side of Watershed",
+                "idea_tag": "East Side of Watershed",
                 "mass": 1
               },
               "West side of Watershed": {
                 "_uid": 259,
-                "item_tag": "West side of Watershed",
+                "idea_tag": "West side of Watershed",
                 "mass": 1
               }
             },
             "_uid": 257,
-            "item_tag": "Williamette WaterShed",
+            "idea_tag": "Williamette WaterShed",
             "mass": 1
           }
         },
         "_uid": 256,
-        "item_tag": "WaterExistence",
+        "idea_tag": "WaterExistence",
         "mass": 1
       },
       "casa": {
@@ -2396,7 +2396,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "be reponsible for rent",
+                "idea_tag": "be reponsible for rent",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2429,7 +2429,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "be responsible for expenses card",
+                "idea_tag": "be responsible for expenses card",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2462,7 +2462,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "be responsible for utilities",
+                "idea_tag": "be responsible for utilities",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2495,7 +2495,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "set resturant bucks for the week",
+                "idea_tag": "set resturant bucks for the week",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2521,7 +2521,7 @@
               }
             },
             "_uid": 148,
-            "item_tag": "Financial Ops",
+            "idea_tag": "Financial Ops",
             "mass": 1
           },
           "Housing": {
@@ -2529,36 +2529,36 @@
             "_kids": {
               "Bike Garage": {
                 "_uid": 185,
-                "item_tag": "Bike Garage",
+                "idea_tag": "Bike Garage",
                 "mass": 1
               },
               "Bike Gym": {
                 "_uid": 184,
-                "item_tag": "Bike Gym",
+                "idea_tag": "Bike Gym",
                 "mass": 1
               },
               "Flat": {
                 "_kids": {
                   "bathroom #2": {
                     "_uid": 196,
-                    "item_tag": "bathroom #2",
+                    "idea_tag": "bathroom #2",
                     "mass": 1
                   },
                   "bedroom #1": {
                     "_kids": {
                       "big bathroom": {
                         "_uid": 195,
-                        "item_tag": "big bathroom",
+                        "idea_tag": "big bathroom",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 194,
-                        "item_tag": "closet",
+                        "idea_tag": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 191,
-                    "item_tag": "bedroom #1",
+                    "idea_tag": "bedroom #1",
                     "mass": 1
                   },
                   "bedroom #2": {
@@ -2574,62 +2574,62 @@
                                 "take_force": 1.0
                               }
                             },
-                            "item_tag": "heater maintenance",
+                            "idea_tag": "heater maintenance",
                             "mass": 1
                           }
                         },
                         "_uid": 197,
-                        "item_tag": "bed area",
+                        "idea_tag": "bed area",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 193,
-                        "item_tag": "closet",
+                        "idea_tag": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 192,
-                    "item_tag": "bedroom #2",
+                    "idea_tag": "bedroom #2",
                     "mass": 1
                   },
                   "cookery": {
                     "_uid": 189,
-                    "item_tag": "cookery",
+                    "idea_tag": "cookery",
                     "mass": 1
                   },
                   "dining area": {
                     "_uid": 190,
-                    "item_tag": "dining area",
+                    "idea_tag": "dining area",
                     "mass": 1
                   },
                   "maintenance": {
                     "_uid": 187,
-                    "item_tag": "maintenance",
+                    "idea_tag": "maintenance",
                     "mass": 1
                   },
                   "nursery": {
                     "_uid": 188,
-                    "item_tag": "nursery",
+                    "idea_tag": "nursery",
                     "mass": 1
                   }
                 },
                 "_uid": 181,
-                "item_tag": "Flat",
+                "idea_tag": "Flat",
                 "mass": 1
               },
               "Lifting Gym": {
                 "_uid": 183,
-                "item_tag": "Lifting Gym",
+                "idea_tag": "Lifting Gym",
                 "mass": 1
               },
               "Playing in nurserys": {
                 "_uid": 186,
-                "item_tag": "Playing in nurserys",
+                "idea_tag": "Playing in nurserys",
                 "mass": 1
               },
               "Pool": {
                 "_uid": 182,
-                "item_tag": "Pool",
+                "idea_tag": "Pool",
                 "mass": 1
               }
             },
@@ -2641,7 +2641,7 @@
                 "take_force": 1.0
               }
             },
-            "item_tag": "Housing",
+            "idea_tag": "Housing",
             "mass": 1
           },
           "call high school friend": {
@@ -2653,7 +2653,7 @@
                 "take_force": 1.0
               }
             },
-            "item_tag": "call high school friend",
+            "idea_tag": "call high school friend",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -2682,7 +2682,7 @@
           },
           "check up on old family friends": {
             "_uid": 222,
-            "item_tag": "check up on old family friends",
+            "idea_tag": "check up on old family friends",
             "mass": 1,
             "reasonunits": {
               ";accord45;Moods": {
@@ -2707,7 +2707,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "check cat water",
+                "idea_tag": "check cat water",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2741,7 +2741,7 @@
               },
               "check humidifer": {
                 "_uid": 159,
-                "item_tag": "check humidifer",
+                "idea_tag": "check humidifer",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2774,7 +2774,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean baby seats",
+                "idea_tag": "clean baby seats",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2818,7 +2818,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean bathroom",
+                "idea_tag": "clean bathroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2851,7 +2851,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean cat poo",
+                "idea_tag": "clean cat poo",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2892,7 +2892,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean humidifiers",
+                "idea_tag": "clean humidifiers",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2933,7 +2933,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean sheets couch blankets",
+                "idea_tag": "clean sheets couch blankets",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2985,7 +2985,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean table",
+                "idea_tag": "clean table",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3026,7 +3026,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "deep clean play mat",
+                "idea_tag": "deep clean play mat",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3078,7 +3078,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "empty roomba",
+                "idea_tag": "empty roomba",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3119,7 +3119,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "empty roomba Friday",
+                "idea_tag": "empty roomba Friday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3160,7 +3160,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "laundry monday",
+                "idea_tag": "laundry monday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3201,7 +3201,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "laundry saturday",
+                "idea_tag": "laundry saturday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3242,7 +3242,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "laundry wednesday",
+                "idea_tag": "laundry wednesday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3276,7 +3276,7 @@
               },
               "morning cookery clean-up": {
                 "_uid": 150,
-                "item_tag": "morning cookery clean-up",
+                "idea_tag": "morning cookery clean-up",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Nation-States": {
@@ -3308,7 +3308,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "prepare_bed clean bedroom",
+                "idea_tag": "prepare_bed clean bedroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3341,7 +3341,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "roomba bedroom",
+                "idea_tag": "roomba bedroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3382,7 +3382,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "roomba bedroom Friday",
+                "idea_tag": "roomba bedroom Friday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3423,7 +3423,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "roomba living area",
+                "idea_tag": "roomba living area",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3464,7 +3464,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "roomba living area thur",
+                "idea_tag": "roomba living area thur",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3505,7 +3505,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "roomba maintenance",
+                "idea_tag": "roomba maintenance",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3546,7 +3546,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "wipe down play mat2",
+                "idea_tag": "wipe down play mat2",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3580,7 +3580,7 @@
               }
             },
             "_uid": 146,
-            "item_tag": "cleaning",
+            "idea_tag": "cleaning",
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
@@ -3604,7 +3604,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "5 push-ups",
+                "idea_tag": "5 push-ups",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3629,7 +3629,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "check protein for week is adequate",
+                "idea_tag": "check protein for week is adequate",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3654,7 +3654,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clean ears",
+                "idea_tag": "clean ears",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3690,7 +3690,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clip nails",
+                "idea_tag": "clip nails",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3723,7 +3723,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "cook veggies every morning",
+                "idea_tag": "cook veggies every morning",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3744,7 +3744,7 @@
                 "_kids": {
                   "I do not be desperate for of I have to exercise": {
                     "_uid": 154,
-                    "item_tag": "I do not be desperate for of I have to exercise",
+                    "idea_tag": "I do not be desperate for of I have to exercise",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -3768,7 +3768,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "daily exercise 20min",
+                "idea_tag": "daily exercise 20min",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3793,7 +3793,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "flossing teeth",
+                "idea_tag": "flossing teeth",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3831,7 +3831,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "bike or stuff",
+                    "idea_tag": "bike or stuff",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3861,13 +3861,13 @@
                       "bi and triceps exercises": {
                         "_is_expanded": false,
                         "_uid": 130,
-                        "item_tag": "bi and triceps exercises",
+                        "idea_tag": "bi and triceps exercises",
                         "mass": 1
                       },
                       "chest  exercises": {
                         "_is_expanded": false,
                         "_uid": 129,
-                        "item_tag": "chest  exercises",
+                        "idea_tag": "chest  exercises",
                         "mass": 1
                       }
                     },
@@ -3879,7 +3879,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "chest and arms (mon)",
+                    "idea_tag": "chest and arms (mon)",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3905,7 +3905,7 @@
                   },
                   "core and squats": {
                     "_uid": 179,
-                    "item_tag": "core and squats",
+                    "idea_tag": "core and squats",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
@@ -3937,7 +3937,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "core lower back",
+                    "idea_tag": "core lower back",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3971,7 +3971,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "rest",
+                    "idea_tag": "rest",
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;weekdays": {
@@ -3990,13 +3990,13 @@
                       "shoulder exercises": {
                         "_is_expanded": false,
                         "_uid": 131,
-                        "item_tag": "shoulder exercises",
+                        "idea_tag": "shoulder exercises",
                         "mass": 1
                       },
                       "upper back exercises": {
                         "_is_expanded": false,
                         "_uid": 132,
-                        "item_tag": "upper back exercises",
+                        "idea_tag": "upper back exercises",
                         "mass": 1
                       }
                     },
@@ -4008,7 +4008,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "shoulders and upper back",
+                    "idea_tag": "shoulders and upper back",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -4041,7 +4041,7 @@
                         "take_force": 1.0
                       }
                     },
-                    "item_tag": "squats hamstrings and calves",
+                    "idea_tag": "squats hamstrings and calves",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -4067,7 +4067,7 @@
                   }
                 },
                 "_uid": 81,
-                "item_tag": "mass traaining",
+                "idea_tag": "mass traaining",
                 "mass": 1
               },
               "morning multivitamin": {
@@ -4079,7 +4079,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "morning multivitamin",
+                "idea_tag": "morning multivitamin",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4097,7 +4097,7 @@
               },
               "night multivitamin": {
                 "_uid": 230,
-                "item_tag": "night multivitamin",
+                "idea_tag": "night multivitamin",
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;day_minute": {
@@ -4121,7 +4121,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "shampooing",
+                "idea_tag": "shampooing",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4154,7 +4154,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "straight back for 45 secs",
+                "idea_tag": "straight back for 45 secs",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4179,7 +4179,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "trim beard",
+                "idea_tag": "trim beard",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4205,13 +4205,13 @@
               }
             },
             "_uid": 147,
-            "item_tag": "exercise",
+            "idea_tag": "exercise",
             "mass": 1
           },
           "keep up with friends": {
             "_is_expanded": false,
             "_uid": 220,
-            "item_tag": "keep up with friends",
+            "idea_tag": "keep up with friends",
             "mass": 1,
             "reasonunits": {
               ";accord45;Interweb": {
@@ -4236,7 +4236,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "clip fingernails",
+                "idea_tag": "clip fingernails",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4288,7 +4288,7 @@
                     "take_force": 1.0
                   }
                 },
-                "item_tag": "get rid of toy get new toy",
+                "idea_tag": "get rid of toy get new toy",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4325,7 +4325,7 @@
               },
               "going to get them": {
                 "_uid": 145,
-                "item_tag": "going to get them",
+                "idea_tag": "going to get them",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -4351,7 +4351,7 @@
               }
             },
             "_uid": 144,
-            "item_tag": "responsible for kids",
+            "idea_tag": "responsible for kids",
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
@@ -4373,7 +4373,7 @@
                 "take_force": 1.0
               }
             },
-            "item_tag": "say hi to birds",
+            "idea_tag": "say hi to birds",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -4399,31 +4399,31 @@
           }
         },
         "_uid": 2,
-        "item_tag": "casa",
+        "idea_tag": "casa",
         "mass": 1
       },
       "ced_day": {
         "begin": 0,
         "close": 80000,
-        "item_tag": "ced_day",
+        "idea_tag": "ced_day",
         "mass": 40
       },
       "ced_week": {
         "begin": 0,
         "close": 110000,
-        "item_tag": "ced_week",
+        "idea_tag": "ced_week",
         "mass": 40
       },
       "ced_year": {
         "begin": 0,
         "close": 2100,
-        "item_tag": "ced_year",
+        "idea_tag": "ced_year",
         "mass": 40
       },
       "day_hour": {
         "begin": 0,
         "close": 23,
-        "item_tag": "day_hour",
+        "idea_tag": "day_hour",
         "mass": 40
       },
       "day_minute": {
@@ -4437,171 +4437,171 @@
             "fneed": ";accord45;day_minute"
           }
         },
-        "item_tag": "day_minute",
+        "idea_tag": "day_minute",
         "mass": 40
       },
       "month_day": {
         "begin": 1,
         "close": 31,
-        "item_tag": "month_day",
+        "idea_tag": "month_day",
         "mass": 40
       },
       "month_week": {
         "_kids": {
           "1st week": {
             "gogo_want": 1,
-            "item_tag": "1st week",
+            "idea_tag": "1st week",
             "mass": 40,
             "stop_want": 2
           },
           "2nd week": {
             "gogo_want": 2,
-            "item_tag": "2nd week",
+            "idea_tag": "2nd week",
             "mass": 40,
             "stop_want": 3
           },
           "3rd week": {
             "gogo_want": 3,
-            "item_tag": "3rd week",
+            "idea_tag": "3rd week",
             "mass": 40,
             "stop_want": 4
           },
           "4th week": {
             "gogo_want": 4,
-            "item_tag": "4th week",
+            "idea_tag": "4th week",
             "mass": 40,
             "stop_want": 5
           },
           "5th week": {
             "gogo_want": 5,
-            "item_tag": "5th week",
+            "idea_tag": "5th week",
             "mass": 40,
             "stop_want": 6
           }
         },
         "begin": 1,
         "close": 5,
-        "item_tag": "month_week",
+        "idea_tag": "month_week",
         "mass": 40
       },
       "weekdays": {
         "_kids": {
           "Friday": {
-            "item_tag": "Friday",
+            "idea_tag": "Friday",
             "mass": 40
           },
           "Monday": {
-            "item_tag": "Monday",
+            "idea_tag": "Monday",
             "mass": 20
           },
           "Saturday": {
-            "item_tag": "Saturday",
+            "idea_tag": "Saturday",
             "mass": 50
           },
           "Sunday": {
-            "item_tag": "Sunday",
+            "idea_tag": "Sunday",
             "mass": 20
           },
           "Thursday": {
-            "item_tag": "Thursday",
+            "idea_tag": "Thursday",
             "mass": 30
           },
           "Tuesday": {
-            "item_tag": "Tuesday",
+            "idea_tag": "Tuesday",
             "mass": 20
           },
           "Wednesday": {
-            "item_tag": "Wednesday",
+            "idea_tag": "Wednesday",
             "mass": 20
           }
         },
-        "item_tag": "weekdays",
+        "idea_tag": "weekdays",
         "mass": 40
       },
       "year_month": {
         "_kids": {
           "April": {
             "gogo_want": 4,
-            "item_tag": "April",
+            "idea_tag": "April",
             "mass": 40,
             "stop_want": 5
           },
           "August": {
             "gogo_want": 8,
-            "item_tag": "August",
+            "idea_tag": "August",
             "mass": 40,
             "stop_want": 9
           },
           "December": {
             "gogo_want": 12,
-            "item_tag": "December",
+            "idea_tag": "December",
             "mass": 40,
             "stop_want": 13
           },
           "February": {
             "gogo_want": 2,
-            "item_tag": "February",
+            "idea_tag": "February",
             "mass": 40,
             "stop_want": 3
           },
           "January": {
             "gogo_want": 1,
-            "item_tag": "January",
+            "idea_tag": "January",
             "mass": 40,
             "stop_want": 2
           },
           "July": {
             "gogo_want": 7,
-            "item_tag": "July",
+            "idea_tag": "July",
             "mass": 40,
             "stop_want": 8
           },
           "June": {
             "gogo_want": 6,
-            "item_tag": "June",
+            "idea_tag": "June",
             "mass": 40,
             "stop_want": 7
           },
           "March": {
             "gogo_want": 3,
-            "item_tag": "March",
+            "idea_tag": "March",
             "mass": 40,
             "stop_want": 4
           },
           "May": {
             "gogo_want": 5,
-            "item_tag": "May",
+            "idea_tag": "May",
             "mass": 40,
             "stop_want": 6
           },
           "November": {
             "gogo_want": 11,
-            "item_tag": "November",
+            "idea_tag": "November",
             "mass": 40,
             "stop_want": 12
           },
           "October": {
             "gogo_want": 10,
-            "item_tag": "October",
+            "idea_tag": "October",
             "mass": 40,
             "stop_want": 11
           },
           "September": {
             "gogo_want": 9,
-            "item_tag": "September",
+            "idea_tag": "September",
             "mass": 40,
             "stop_want": 10
           }
         },
         "begin": 1,
         "close": 13,
-        "item_tag": "year_month",
+        "idea_tag": "year_month",
         "mass": 40
       },
       "year_week": {
         "begin": 0,
         "close": 52,
-        "item_tag": "year_week",
+        "idea_tag": "year_week",
         "mass": 40
       }
     },
@@ -4620,7 +4620,7 @@
         "fneed": ";accord45;day_minute"
       }
     },
-    "item_tag": "accord45",
+    "idea_tag": "accord45",
     "mass": 1
   },
   "max_tree_traverse": 2,

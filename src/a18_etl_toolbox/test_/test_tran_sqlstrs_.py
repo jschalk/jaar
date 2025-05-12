@@ -18,13 +18,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
     event_int_str,
     face_name_str,
 )
@@ -109,40 +109,40 @@ def abbv(tablename: str) -> str:
         f"{bud_acct_membership_str()}_put_raw": "BUDMEMB_PUT_RAW",
         f"{bud_acctunit_str()}_put_agg": "BUDACCT_PUT_AGG",
         f"{bud_acctunit_str()}_put_raw": "BUDACCT_PUT_RAW",
-        f"{bud_item_awardlink_str()}_put_agg": "BUDAWAR_PUT_AGG",
-        f"{bud_item_awardlink_str()}_put_raw": "BUDAWAR_PUT_RAW",
-        f"{bud_item_factunit_str()}_put_agg": "BUDFACT_PUT_AGG",
-        f"{bud_item_factunit_str()}_put_raw": "BUDFACT_PUT_RAW",
-        f"{bud_item_healerlink_str()}_put_agg": "BUDHEAL_PUT_AGG",
-        f"{bud_item_healerlink_str()}_put_raw": "BUDHEAL_PUT_RAW",
-        f"{bud_item_reason_premiseunit_str()}_put_agg": "BUDPREM_PUT_AGG",
-        f"{bud_item_reason_premiseunit_str()}_put_raw": "BUDPREM_PUT_RAW",
-        f"{bud_item_reasonunit_str()}_put_agg": "BUDREAS_PUT_AGG",
-        f"{bud_item_reasonunit_str()}_put_raw": "BUDREAS_PUT_RAW",
-        f"{bud_item_teamlink_str()}_put_agg": "BUDTEAM_PUT_AGG",
-        f"{bud_item_teamlink_str()}_put_raw": "BUDTEAM_PUT_RAW",
-        f"{bud_itemunit_str()}_put_agg": "BUDITEM_PUT_AGG",
-        f"{bud_itemunit_str()}_put_raw": "BUDITEM_PUT_RAW",
+        f"{bud_idea_awardlink_str()}_put_agg": "BUDAWAR_PUT_AGG",
+        f"{bud_idea_awardlink_str()}_put_raw": "BUDAWAR_PUT_RAW",
+        f"{bud_idea_factunit_str()}_put_agg": "BUDFACT_PUT_AGG",
+        f"{bud_idea_factunit_str()}_put_raw": "BUDFACT_PUT_RAW",
+        f"{bud_idea_healerlink_str()}_put_agg": "BUDHEAL_PUT_AGG",
+        f"{bud_idea_healerlink_str()}_put_raw": "BUDHEAL_PUT_RAW",
+        f"{bud_idea_reason_premiseunit_str()}_put_agg": "BUDPREM_PUT_AGG",
+        f"{bud_idea_reason_premiseunit_str()}_put_raw": "BUDPREM_PUT_RAW",
+        f"{bud_idea_reasonunit_str()}_put_agg": "BUDREAS_PUT_AGG",
+        f"{bud_idea_reasonunit_str()}_put_raw": "BUDREAS_PUT_RAW",
+        f"{bud_idea_teamlink_str()}_put_agg": "BUDTEAM_PUT_AGG",
+        f"{bud_idea_teamlink_str()}_put_raw": "BUDTEAM_PUT_RAW",
+        f"{bud_ideaunit_str()}_put_agg": "BUDIDEA_PUT_AGG",
+        f"{bud_ideaunit_str()}_put_raw": "BUDIDEA_PUT_RAW",
         f"{budunit_str()}_put_agg": "BUDUNIT_PUT_AGG",
         f"{budunit_str()}_put_raw": "BUDUNIT_PUT_RAW",
         f"{bud_acct_membership_str()}_del_agg": "BUDMEMB_DEL_AGG",
         f"{bud_acct_membership_str()}_del_raw": "BUDMEMB_DEL_RAW",
         f"{bud_acctunit_str()}_del_agg": "BUDACCT_DEL_AGG",
         f"{bud_acctunit_str()}_del_raw": "BUDACCT_DEL_RAW",
-        f"{bud_item_awardlink_str()}_del_agg": "BUDAWAR_DEL_AGG",
-        f"{bud_item_awardlink_str()}_del_raw": "BUDAWAR_DEL_RAW",
-        f"{bud_item_factunit_str()}_del_agg": "BUDFACT_DEL_AGG",
-        f"{bud_item_factunit_str()}_del_raw": "BUDFACT_DEL_RAW",
-        f"{bud_item_healerlink_str()}_del_agg": "BUDHEAL_DEL_AGG",
-        f"{bud_item_healerlink_str()}_del_raw": "BUDHEAL_DEL_RAW",
-        f"{bud_item_reason_premiseunit_str()}_del_agg": "BUDPREM_DEL_AGG",
-        f"{bud_item_reason_premiseunit_str()}_del_raw": "BUDPREM_DEL_RAW",
-        f"{bud_item_reasonunit_str()}_del_agg": "BUDREAS_DEL_AGG",
-        f"{bud_item_reasonunit_str()}_del_raw": "BUDREAS_DEL_RAW",
-        f"{bud_item_teamlink_str()}_del_agg": "BUDTEAM_DEL_AGG",
-        f"{bud_item_teamlink_str()}_del_raw": "BUDTEAM_DEL_RAW",
-        f"{bud_itemunit_str()}_del_agg": "BUDITEM_DEL_AGG",
-        f"{bud_itemunit_str()}_del_raw": "BUDITEM_DEL_RAW",
+        f"{bud_idea_awardlink_str()}_del_agg": "BUDAWAR_DEL_AGG",
+        f"{bud_idea_awardlink_str()}_del_raw": "BUDAWAR_DEL_RAW",
+        f"{bud_idea_factunit_str()}_del_agg": "BUDFACT_DEL_AGG",
+        f"{bud_idea_factunit_str()}_del_raw": "BUDFACT_DEL_RAW",
+        f"{bud_idea_healerlink_str()}_del_agg": "BUDHEAL_DEL_AGG",
+        f"{bud_idea_healerlink_str()}_del_raw": "BUDHEAL_DEL_RAW",
+        f"{bud_idea_reason_premiseunit_str()}_del_agg": "BUDPREM_DEL_AGG",
+        f"{bud_idea_reason_premiseunit_str()}_del_raw": "BUDPREM_DEL_RAW",
+        f"{bud_idea_reasonunit_str()}_del_agg": "BUDREAS_DEL_AGG",
+        f"{bud_idea_reasonunit_str()}_del_raw": "BUDREAS_DEL_RAW",
+        f"{bud_idea_teamlink_str()}_del_agg": "BUDTEAM_DEL_AGG",
+        f"{bud_idea_teamlink_str()}_del_raw": "BUDTEAM_DEL_RAW",
+        f"{bud_ideaunit_str()}_del_agg": "BUDIDEA_DEL_AGG",
+        f"{bud_ideaunit_str()}_del_raw": "BUDIDEA_DEL_RAW",
         f"{budunit_str()}_del_agg": "BUDUNIT_DEL_AGG",
         f"{budunit_str()}_del_raw": "BUDUNIT_DEL_RAW",
     }
@@ -159,13 +159,13 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
-    buditem_dimen = bud_itemunit_str()
-    budawar_dimen = bud_item_awardlink_str()
-    budreas_dimen = bud_item_reasonunit_str()
-    budprem_dimen = bud_item_reason_premiseunit_str()
-    budteam_dimen = bud_item_teamlink_str()
-    budheal_dimen = bud_item_healerlink_str()
-    budfact_dimen = bud_item_factunit_str()
+    budidea_dimen = bud_ideaunit_str()
+    budawar_dimen = bud_idea_awardlink_str()
+    budreas_dimen = bud_idea_reasonunit_str()
+    budprem_dimen = bud_idea_reason_premiseunit_str()
+    budteam_dimen = bud_idea_teamlink_str()
+    budheal_dimen = bud_idea_healerlink_str()
+    budfact_dimen = bud_idea_factunit_str()
     fisunit_dimen = fiscunit_str()
     fiscash_dimen = fisc_cashbook_str()
     fisdeal_dimen = fisc_dealunit_str()
@@ -188,7 +188,7 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
     budacct_s_agg_table = create_prime_tablename("budacct", "s", agg_str, put_str)
     budmemb_s_agg_table = create_prime_tablename("budmemb", "s", agg_str, put_str)
-    buditem_s_agg_table = create_prime_tablename("buditem", "s", agg_str, put_str)
+    budidea_s_agg_table = create_prime_tablename("budidea", "s", agg_str, put_str)
     budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
     budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
     budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
@@ -217,7 +217,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
     assert budacct_s_agg_table == f"{budacct_dimen}_s_put_agg"
     assert budmemb_s_agg_table == f"{budmemb_dimen}_s_put_agg"
-    assert buditem_s_agg_table == f"{buditem_dimen}_s_put_agg"
+    assert budidea_s_agg_table == f"{budidea_dimen}_s_put_agg"
     assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
     assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
     assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
@@ -410,20 +410,20 @@ def test_create_bud_prime_tables_CreatesFiscRawTables():
         budmemb_pud_raw_table = f"{bud_acct_membership_str()}_put_raw"
         budacct_pud_agg_table = f"{bud_acctunit_str()}_put_agg"
         budacct_pud_raw_table = f"{bud_acctunit_str()}_put_raw"
-        budawar_pud_agg_table = f"{bud_item_awardlink_str()}_put_agg"
-        budawar_pud_raw_table = f"{bud_item_awardlink_str()}_put_raw"
-        budfact_pud_agg_table = f"{bud_item_factunit_str()}_put_agg"
-        budfact_pud_raw_table = f"{bud_item_factunit_str()}_put_raw"
-        budheal_pud_agg_table = f"{bud_item_healerlink_str()}_put_agg"
-        budheal_pud_raw_table = f"{bud_item_healerlink_str()}_put_raw"
-        budprem_pud_agg_table = f"{bud_item_reason_premiseunit_str()}_put_agg"
-        budprem_pud_raw_table = f"{bud_item_reason_premiseunit_str()}_put_raw"
-        budreas_pud_agg_table = f"{bud_item_reasonunit_str()}_put_agg"
-        budreas_pud_raw_table = f"{bud_item_reasonunit_str()}_put_raw"
-        budteam_pud_agg_table = f"{bud_item_teamlink_str()}_put_agg"
-        budteam_pud_raw_table = f"{bud_item_teamlink_str()}_put_raw"
-        buditem_pud_agg_table = f"{bud_itemunit_str()}_put_agg"
-        buditem_pud_raw_table = f"{bud_itemunit_str()}_put_raw"
+        budawar_pud_agg_table = f"{bud_idea_awardlink_str()}_put_agg"
+        budawar_pud_raw_table = f"{bud_idea_awardlink_str()}_put_raw"
+        budfact_pud_agg_table = f"{bud_idea_factunit_str()}_put_agg"
+        budfact_pud_raw_table = f"{bud_idea_factunit_str()}_put_raw"
+        budheal_pud_agg_table = f"{bud_idea_healerlink_str()}_put_agg"
+        budheal_pud_raw_table = f"{bud_idea_healerlink_str()}_put_raw"
+        budprem_pud_agg_table = f"{bud_idea_reason_premiseunit_str()}_put_agg"
+        budprem_pud_raw_table = f"{bud_idea_reason_premiseunit_str()}_put_raw"
+        budreas_pud_agg_table = f"{bud_idea_reasonunit_str()}_put_agg"
+        budreas_pud_raw_table = f"{bud_idea_reasonunit_str()}_put_raw"
+        budteam_pud_agg_table = f"{bud_idea_teamlink_str()}_put_agg"
+        budteam_pud_raw_table = f"{bud_idea_teamlink_str()}_put_raw"
+        budidea_pud_agg_table = f"{bud_ideaunit_str()}_put_agg"
+        budidea_pud_raw_table = f"{bud_ideaunit_str()}_put_raw"
         budunit_pud_agg_table = f"{budunit_str()}_put_agg"
         budunit_pud_raw_table = f"{budunit_str()}_put_raw"
 
@@ -443,8 +443,8 @@ def test_create_bud_prime_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budreas_pud_raw_table) is False
         assert db_table_exists(cursor, budteam_pud_agg_table) is False
         assert db_table_exists(cursor, budteam_pud_raw_table) is False
-        assert db_table_exists(cursor, buditem_pud_agg_table) is False
-        assert db_table_exists(cursor, buditem_pud_raw_table) is False
+        assert db_table_exists(cursor, budidea_pud_agg_table) is False
+        assert db_table_exists(cursor, budidea_pud_raw_table) is False
         assert db_table_exists(cursor, budunit_pud_agg_table) is False
         assert db_table_exists(cursor, budunit_pud_raw_table) is False
 
@@ -476,8 +476,8 @@ def test_create_bud_prime_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budreas_pud_raw_table)
         assert db_table_exists(cursor, budteam_pud_agg_table)
         assert db_table_exists(cursor, budteam_pud_raw_table)
-        assert db_table_exists(cursor, buditem_pud_agg_table)
-        assert db_table_exists(cursor, buditem_pud_raw_table)
+        assert db_table_exists(cursor, budidea_pud_agg_table)
+        assert db_table_exists(cursor, budidea_pud_raw_table)
         assert db_table_exists(cursor, budunit_pud_agg_table)
         assert db_table_exists(cursor, budunit_pud_raw_table)
 

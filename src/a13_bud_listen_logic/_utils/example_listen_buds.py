@@ -1,4 +1,4 @@
-from src.a05_item_logic.item import itemunit_shop
+from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
@@ -7,15 +7,15 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop(owner_name="Sue", fisc_tag=a23_str, tally=10)
 
     casa = "casa"
-    sue_bud.set_l1_item(itemunit_shop(casa, mass=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(casa, mass=30, pledge=True))
 
     cat = "cat have dinner"
-    sue_bud.set_l1_item(itemunit_shop(cat, mass=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(cat, mass=30, pledge=True))
 
     week_str = "weekdays"
     week_way = sue_bud.make_l1_way(week_str)
-    item_kid_weekdays = itemunit_shop(week_str, mass=40)
-    sue_bud.set_l1_item(item_kid_weekdays)
+    idea_kid_weekdays = ideaunit_shop(week_str, mass=40)
+    sue_bud.set_l1_idea(idea_kid_weekdays)
 
     sun_str = "Sunday"
     mon_str = "Monday"
@@ -25,44 +25,44 @@ def get_budunit_with_4_levels() -> BudUnit:
     fri_str = "Friday"
     sat_str = "Saturday"
 
-    item_grandkidU = itemunit_shop(sun_str, mass=20)
-    item_grandkidM = itemunit_shop(mon_str, mass=20)
-    item_grandkidT = itemunit_shop(tue_str, mass=20)
-    item_grandkidW = itemunit_shop(wed_str, mass=20)
-    item_grandkidR = itemunit_shop(thu_str, mass=30)
-    item_grandkidF = itemunit_shop(fri_str, mass=40)
-    item_grandkidA = itemunit_shop(sat_str, mass=50)
+    idea_grandkidU = ideaunit_shop(sun_str, mass=20)
+    idea_grandkidM = ideaunit_shop(mon_str, mass=20)
+    idea_grandkidT = ideaunit_shop(tue_str, mass=20)
+    idea_grandkidW = ideaunit_shop(wed_str, mass=20)
+    idea_grandkidR = ideaunit_shop(thu_str, mass=30)
+    idea_grandkidF = ideaunit_shop(fri_str, mass=40)
+    idea_grandkidA = ideaunit_shop(sat_str, mass=50)
 
-    sue_bud.set_item(item_grandkidU, week_way)
-    sue_bud.set_item(item_grandkidM, week_way)
-    sue_bud.set_item(item_grandkidT, week_way)
-    sue_bud.set_item(item_grandkidW, week_way)
-    sue_bud.set_item(item_grandkidR, week_way)
-    sue_bud.set_item(item_grandkidF, week_way)
-    sue_bud.set_item(item_grandkidA, week_way)
+    sue_bud.set_idea(idea_grandkidU, week_way)
+    sue_bud.set_idea(idea_grandkidM, week_way)
+    sue_bud.set_idea(idea_grandkidT, week_way)
+    sue_bud.set_idea(idea_grandkidW, week_way)
+    sue_bud.set_idea(idea_grandkidR, week_way)
+    sue_bud.set_idea(idea_grandkidF, week_way)
+    sue_bud.set_idea(idea_grandkidA, week_way)
 
     states_str = "nation-state"
     states_way = sue_bud.make_l1_way(states_str)
-    item_kid_states = itemunit_shop(states_str, mass=30)
-    sue_bud.set_l1_item(item_kid_states)
+    idea_kid_states = ideaunit_shop(states_str, mass=30)
+    sue_bud.set_l1_idea(idea_kid_states)
 
     usa_str = "USA"
     usa_way = sue_bud.make_way(states_way, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
-    item_grandkid_usa = itemunit_shop(usa_str, mass=50)
-    item_grandkid_france = itemunit_shop(france_str, mass=50)
-    item_grandkid_brazil = itemunit_shop(brazil_str, mass=50)
-    sue_bud.set_item(item_grandkid_france, states_way)
-    sue_bud.set_item(item_grandkid_brazil, states_way)
-    sue_bud.set_item(item_grandkid_usa, states_way)
+    idea_grandkid_usa = ideaunit_shop(usa_str, mass=50)
+    idea_grandkid_france = ideaunit_shop(france_str, mass=50)
+    idea_grandkid_brazil = ideaunit_shop(brazil_str, mass=50)
+    sue_bud.set_idea(idea_grandkid_france, states_way)
+    sue_bud.set_idea(idea_grandkid_brazil, states_way)
+    sue_bud.set_idea(idea_grandkid_usa, states_way)
 
     texas_str = "Texas"
     oregon_str = "Oregon"
-    item_grandgrandkid_usa_texas = itemunit_shop(texas_str, mass=50)
-    item_grandgrandkid_usa_oregon = itemunit_shop(oregon_str, mass=50)
-    sue_bud.set_item(item_grandgrandkid_usa_texas, usa_way)
-    sue_bud.set_item(item_grandgrandkid_usa_oregon, usa_way)
+    idea_grandgrandkid_usa_texas = ideaunit_shop(texas_str, mass=50)
+    idea_grandgrandkid_usa_oregon = ideaunit_shop(oregon_str, mass=50)
+    sue_bud.set_idea(idea_grandgrandkid_usa_texas, usa_way)
+    sue_bud.set_idea(idea_grandgrandkid_usa_oregon, usa_way)
     return sue_bud
 
 
@@ -79,21 +79,21 @@ def get_fund_breakdown_bud() -> BudUnit:
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_str = "sweep floor"
     dish_str = "clean dishes"
-    sue_bud.set_l1_item(itemunit_shop(casa_str, mass=30))
-    sue_bud.set_item(itemunit_shop(cat_str, mass=30), casa_way)
-    sue_bud.set_item(itemunit_shop(hun_n_str, mass=30), cat_way)
-    sue_bud.set_item(itemunit_shop(hun_y_str, mass=30), cat_way)
-    sue_bud.set_item(itemunit_shop(clean_str, mass=30), casa_way)
-    sue_bud.set_item(itemunit_shop(sweep_str, mass=30, pledge=True), clean_way)
-    sue_bud.set_item(itemunit_shop(dish_str, mass=30, pledge=True), clean_way)
+    sue_bud.set_l1_idea(ideaunit_shop(casa_str, mass=30))
+    sue_bud.set_idea(ideaunit_shop(cat_str, mass=30), casa_way)
+    sue_bud.set_idea(ideaunit_shop(hun_n_str, mass=30), cat_way)
+    sue_bud.set_idea(ideaunit_shop(hun_y_str, mass=30), cat_way)
+    sue_bud.set_idea(ideaunit_shop(clean_str, mass=30), casa_way)
+    sue_bud.set_idea(ideaunit_shop(sweep_str, mass=30, pledge=True), clean_way)
+    sue_bud.set_idea(ideaunit_shop(dish_str, mass=30, pledge=True), clean_way)
 
     cat_str = "cat have dinner"
-    sue_bud.set_l1_item(itemunit_shop(cat_str, mass=30, pledge=True))
+    sue_bud.set_l1_idea(ideaunit_shop(cat_str, mass=30, pledge=True))
 
     # week_str = "weekdays"
     # week_way = sue_bud.make_l1_way(week_str)
-    # item_kid_weekdays = itemunit_shop(week_str, mass=25)
-    # sue_bud.set_l1_item(item_kid_weekdays)
+    # idea_kid_weekdays = ideaunit_shop(week_str, mass=25)
+    # sue_bud.set_l1_idea(idea_kid_weekdays)
 
     # sun_str = "Sunday"
     # mon_str = "Monday"
@@ -102,48 +102,48 @@ def get_fund_breakdown_bud() -> BudUnit:
     # thu_str = "Thursday"
     # fri_str = "Friday"
     # sat_str = "Saturday"
-    # item_grandkidU = itemunit_shop(sun_str, mass=20)
-    # item_grandkidM = itemunit_shop(mon_str, mass=20)
-    # item_grandkidT = itemunit_shop(tue_str, mass=20)
-    # item_grandkidW = itemunit_shop(wed_str, mass=20)
-    # item_grandkidR = itemunit_shop(thu_str, mass=30)
-    # item_grandkidF = itemunit_shop(fri_str, mass=40)
-    # item_grandkidA = itemunit_shop(sat_str, mass=50)
-    # sue_bud.set_item(item_grandkidU, week_way)
-    # sue_bud.set_item(item_grandkidM, week_way)
-    # sue_bud.set_item(item_grandkidT, week_way)
-    # sue_bud.set_item(item_grandkidW, week_way)
-    # sue_bud.set_item(item_grandkidR, week_way)
-    # sue_bud.set_item(item_grandkidF, week_way)
-    # sue_bud.set_item(item_grandkidA, week_way)
+    # idea_grandkidU = ideaunit_shop(sun_str, mass=20)
+    # idea_grandkidM = ideaunit_shop(mon_str, mass=20)
+    # idea_grandkidT = ideaunit_shop(tue_str, mass=20)
+    # idea_grandkidW = ideaunit_shop(wed_str, mass=20)
+    # idea_grandkidR = ideaunit_shop(thu_str, mass=30)
+    # idea_grandkidF = ideaunit_shop(fri_str, mass=40)
+    # idea_grandkidA = ideaunit_shop(sat_str, mass=50)
+    # sue_bud.set_idea(idea_grandkidU, week_way)
+    # sue_bud.set_idea(idea_grandkidM, week_way)
+    # sue_bud.set_idea(idea_grandkidT, week_way)
+    # sue_bud.set_idea(idea_grandkidW, week_way)
+    # sue_bud.set_idea(idea_grandkidR, week_way)
+    # sue_bud.set_idea(idea_grandkidF, week_way)
+    # sue_bud.set_idea(idea_grandkidA, week_way)
 
     # states_str = "nation-state"
     # states_way = sue_bud.make_l1_way(states_str)
-    # item_kid_states = itemunit_shop(states_str, mass=30)
-    # sue_bud.set_l1_item(item_kid_states)
+    # idea_kid_states = ideaunit_shop(states_str, mass=30)
+    # sue_bud.set_l1_idea(idea_kid_states)
 
     # usa_str = "USA"
     # usa_way = sue_bud.make_way(states_way, usa_str)
     # france_str = "France"
     # brazil_str = "Brazil"
-    # item_grandkid_usa = itemunit_shop(usa_str, mass=50)
-    # item_grandkid_france = itemunit_shop(france_str, mass=50)
-    # item_grandkid_brazil = itemunit_shop(brazil_str, mass=50)
-    # sue_bud.set_item(item_grandkid_france, states_way)
-    # sue_bud.set_item(item_grandkid_brazil, states_way)
-    # sue_bud.set_item(item_grandkid_usa, states_way)
+    # idea_grandkid_usa = ideaunit_shop(usa_str, mass=50)
+    # idea_grandkid_france = ideaunit_shop(france_str, mass=50)
+    # idea_grandkid_brazil = ideaunit_shop(brazil_str, mass=50)
+    # sue_bud.set_idea(idea_grandkid_france, states_way)
+    # sue_bud.set_idea(idea_grandkid_brazil, states_way)
+    # sue_bud.set_idea(idea_grandkid_usa, states_way)
 
     # texas_str = "Texas"
     # oregon_str = "Oregon"
-    # item_grandgrandkid_usa_texas = itemunit_shop(texas_str, mass=50)
-    # item_grandgrandkid_usa_oregon = itemunit_shop(oregon_str, mass=50)
-    # sue_bud.set_item(item_grandgrandkid_usa_texas, usa_way)
-    # sue_bud.set_item(item_grandgrandkid_usa_oregon, usa_way)
+    # idea_grandgrandkid_usa_texas = ideaunit_shop(texas_str, mass=50)
+    # idea_grandgrandkid_usa_oregon = ideaunit_shop(oregon_str, mass=50)
+    # sue_bud.set_idea(idea_grandgrandkid_usa_texas, usa_way)
+    # sue_bud.set_idea(idea_grandgrandkid_usa_oregon, usa_way)
     return sue_bud
 
 
 def get_budunit_irrational_example() -> BudUnit:
-    # this bud has no conclusive agenda because 2 pledge items are in contradiction
+    # this bud has no conclusive agenda because 2 pledge ideas are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
     # Step 0: if chicken._active is True, egg._active is set to False
@@ -160,26 +160,26 @@ def get_budunit_irrational_example() -> BudUnit:
 
     egg_str = "egg first"
     egg_way = hatter_bud.make_l1_way(egg_str)
-    hatter_bud.add_item(egg_way)
+    hatter_bud.add_idea(egg_way)
 
     chicken_str = "chicken first"
     chicken_way = hatter_bud.make_l1_way(chicken_str)
-    hatter_bud.add_item(chicken_way)
+    hatter_bud.add_idea(chicken_way)
 
     # set egg pledge is True when chicken first is False
-    hatter_bud.edit_item_attr(
+    hatter_bud.edit_idea_attr(
         egg_way,
         pledge=True,
         reason_base=chicken_way,
-        reason_base_item_active_requisite=True,
+        reason_base_idea_active_requisite=True,
     )
 
     # set chick pledge is True when egg first is False
-    hatter_bud.edit_item_attr(
+    hatter_bud.edit_idea_attr(
         chicken_way,
         pledge=True,
         reason_base=egg_way,
-        reason_base_item_active_requisite=False,
+        reason_base_idea_active_requisite=False,
     )
 
     return hatter_bud

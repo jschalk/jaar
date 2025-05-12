@@ -198,7 +198,7 @@
             }
         }
     },
-    "bud_item_awardlink": {
+    "bud_idea_awardlink": {
         "abbreviation": "budawar",
         "jkeys": {
             "awardee_label": {
@@ -213,7 +213,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -243,7 +243,7 @@
             }
         }
     },
-    "bud_item_factunit": {
+    "bud_idea_factunit": {
         "abbreviation": "budfact",
         "jkeys": {
             "fbase": {
@@ -258,7 +258,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -283,7 +283,7 @@
             }
         }
     },
-    "bud_item_healerlink": {
+    "bud_idea_healerlink": {
         "abbreviation": "budheal",
         "jkeys": {
             "fisc_tag": {
@@ -298,7 +298,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -310,7 +310,7 @@
         "jmetrics": {},
         "jvalues": {}
     },
-    "bud_item_reason_premiseunit": {
+    "bud_idea_reason_premiseunit": {
         "abbreviation": "budprem",
         "jkeys": {
             "base": {
@@ -329,7 +329,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -363,7 +363,7 @@
             }
         }
     },
-    "bud_item_reasonunit": {
+    "bud_idea_reasonunit": {
         "abbreviation": "budreas",
         "jkeys": {
             "base": {
@@ -378,7 +378,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -388,7 +388,7 @@
             }
         },
         "jmetrics": {
-            "_base_item_active_value": {
+            "_base_idea_active_value": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -402,13 +402,13 @@
             }
         },
         "jvalues": {
-            "base_item_active_requisite": {
+            "base_idea_active_requisite": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         }
     },
-    "bud_item_teamlink": {
+    "bud_idea_teamlink": {
         "abbreviation": "budteam",
         "jkeys": {
             "fisc_tag": {
@@ -419,7 +419,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -440,8 +440,8 @@
         },
         "jvalues": {}
     },
-    "bud_itemunit": {
-        "abbreviation": "buditem",
+    "bud_ideaunit": {
+        "abbreviation": "budidea",
         "jkeys": {
             "fisc_tag": {
                 "class_type": "TagUnit",
@@ -451,7 +451,7 @@
                 "class_type": "NameUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },

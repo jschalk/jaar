@@ -10,7 +10,7 @@ from src.a01_way_logic.way import (
     get_default_fisc_tag as root_tag,
     default_bridge_if_None,
 )
-from src.a05_item_logic.origin import originunit_shop
+from src.a05_idea_logic.origin import originunit_shop
 from pytest import raises as pytest_raises
 
 
@@ -24,7 +24,7 @@ def test_BudUnit_Exists():
     assert x_bud.owner_name is None
     assert x_bud.tally is None
     assert x_bud.accts is None
-    assert x_bud.itemroot is None
+    assert x_bud.idearoot is None
     assert x_bud.credor_respect is None
     assert x_bud.debtor_respect is None
     assert x_bud.max_tree_traverse is None
@@ -36,7 +36,7 @@ def test_BudUnit_Exists():
     assert x_bud.last_pack_id is None
     assert x_bud.originunit is None
     # calculated attr
-    assert x_bud._item_dict is None
+    assert x_bud._idea_dict is None
     assert x_bud._keep_dict is None
     assert x_bud._healers_dict is None
     assert x_bud._tree_traverse_count is None
@@ -48,7 +48,7 @@ def test_BudUnit_Exists():
     assert x_bud._offtrack_fund is None
     assert x_bud._reason_bases is None
     assert x_bud._range_inheritors is None
-    assert str(type(x_bud.itemroot)).find("None") == 8
+    assert str(type(x_bud.idearoot)).find("None") == 8
 
 
 def test_budunit_shop_ReturnsObjectWithFilledFields():
@@ -78,7 +78,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     assert x_bud.fisc_tag == iowa_fisc_tag
     assert x_bud.tally == 1
     assert x_bud.accts == {}
-    assert x_bud.itemroot is not None
+    assert x_bud.idearoot is not None
     assert x_bud.max_tree_traverse == 3
     assert x_bud.bridge == slash_bridge
     assert x_bud.fund_pool == x_fund_pool
@@ -90,7 +90,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     assert not x_bud.last_pack_id
     assert x_bud.originunit == originunit_shop()
     # calculated attr
-    assert x_bud._item_dict == {}
+    assert x_bud._idea_dict == {}
     assert x_bud._keep_dict == {}
     assert x_bud._healers_dict == {}
     assert not x_bud._tree_traverse_count
@@ -102,8 +102,8 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     assert not x_bud._offtrack_fund
     assert x_bud._reason_bases == set()
     assert x_bud._range_inheritors == {}
-    print(f"{type(x_bud.itemroot)=}") == 0
-    assert str(type(x_bud.itemroot)).find(".item.ItemUnit'>") > 0
+    print(f"{type(x_bud.idearoot)=}") == 0
+    assert str(type(x_bud.idearoot)).find(".idea.IdeaUnit'>") > 0
 
 
 def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
@@ -118,14 +118,14 @@ def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.fund_coin == default_fund_coin_if_None()
     assert x_bud.respect_bit == default_respect_bit_if_None()
     assert x_bud.penny == filter_penny()
-    assert x_bud.itemroot.fund_coin == x_bud.fund_coin
-    assert x_bud.itemroot.bridge == x_bud.bridge
-    assert x_bud.itemroot.root
-    assert x_bud.itemroot._uid == 1
-    assert x_bud.itemroot._level == 0
-    assert x_bud.itemroot.fisc_tag == x_bud.fisc_tag
-    assert x_bud.itemroot.bridge == x_bud.bridge
-    assert x_bud.itemroot.parent_way == ""
+    assert x_bud.idearoot.fund_coin == x_bud.fund_coin
+    assert x_bud.idearoot.bridge == x_bud.bridge
+    assert x_bud.idearoot.root
+    assert x_bud.idearoot._uid == 1
+    assert x_bud.idearoot._level == 0
+    assert x_bud.idearoot.fisc_tag == x_bud.fisc_tag
+    assert x_bud.idearoot.bridge == x_bud.bridge
+    assert x_bud.idearoot.parent_way == ""
 
 
 def test_BudUnit_set_max_tree_traverse_CorrectlySetsInt():
