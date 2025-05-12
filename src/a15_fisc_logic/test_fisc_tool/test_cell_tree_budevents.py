@@ -73,7 +73,7 @@ def test_load_cells_budevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     event300 = 300
     time5 = 5
     clean_fact = example_casa_clean_factunit()
-    x_facts = [(clean_fact.fcontext, clean_fact.fneed, None, None)]
+    x_facts = [(clean_fact.fcontext, clean_fact.fbranch, None, None)]
     save_arbitrary_budevent(fisc_mstr_dir, a23_str, bob_str, event300, facts=x_facts)
     yao_str = "Yao"
     das = [yao_str, bob_str]

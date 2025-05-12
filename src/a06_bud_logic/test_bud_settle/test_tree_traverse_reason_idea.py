@@ -22,8 +22,8 @@ def test_BudUnit_ReasonUnits_create():
     wed_str = "Wednesday"
     wed_way = sue_bud.make_way(weekday_way, wed_str)
 
-    wed_premise = premiseunit_shop(need=wed_way)
-    casa_wk_reason = reasonunit_shop(weekday_way, {wed_premise.need: wed_premise})
+    wed_premise = premiseunit_shop(rbranch=wed_way)
+    casa_wk_reason = reasonunit_shop(weekday_way, {wed_premise.rbranch: wed_premise})
     print(f"{type(casa_wk_reason.context)=}")
     print(f"{casa_wk_reason.context=}")
 
@@ -99,9 +99,9 @@ def test_BudUnit_set_reasonunits_status():
     wed_str = "Wednesday"
     wed_way = sue_bud.make_way(weekday_way, wed_str)
 
-    wed_premise = premiseunit_shop(need=wed_way)
+    wed_premise = premiseunit_shop(rbranch=wed_way)
     casa_wk_reason = reasonunit_shop(
-        context=weekday_way, premises={wed_premise.need: wed_premise}
+        context=weekday_way, premises={wed_premise.rbranch: wed_premise}
     )
     print(f"{type(casa_wk_reason.context)=}")
     print(f"{casa_wk_reason.context=}")
@@ -154,19 +154,19 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     assert len(casa_idea.get_reasonheir(week_way).premises) == 1
     assert casa_idea.get_reasonheir(week_way).get_premise(tue_way)
     premise_tue = casa_idea.get_reasonheir(week_way).get_premise(tue_way)
-    tue_premise = premiseunit_shop(need=tue_way)
+    tue_premise = premiseunit_shop(rbranch=tue_way)
     tue_premise._status = False
     tue_premise._task = False
-    premises = {tue_premise.need: tue_premise}
+    premises = {tue_premise.rbranch: tue_premise}
     built_week_reasonheir = reasonheir_shop(
         context=week_way,
         premises=premises,
         _status=False,
         _context_idea_active_value=True,
     )
-    tue_task = built_week_reasonheir.premises.get(premise_tue.need)._task
+    tue_task = built_week_reasonheir.premises.get(premise_tue.rbranch)._task
     assert premise_tue._task == tue_task
-    assert premise_tue == built_week_reasonheir.premises[premise_tue.need]
+    assert premise_tue == built_week_reasonheir.premises[premise_tue.rbranch]
     week_reasonheir = casa_idea.get_reasonheir(week_way)
     assert week_reasonheir.premises == built_week_reasonheir.premises
     assert casa_idea.get_reasonheir(week_way) == built_week_reasonheir
@@ -182,11 +182,11 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     wed_str = "Wednesday"
     wed_way = a4_bud.make_way(week_way, wed_str)
 
-    wed_premise = premiseunit_shop(need=wed_way)
+    wed_premise = premiseunit_shop(rbranch=wed_way)
     wed_premise._status = False
     wed_premise._task = False
 
-    premises_x = {wed_premise.need: wed_premise}
+    premises_x = {wed_premise.rbranch: wed_premise}
     casa_wk_build_reasonunit = reasonunit_shop(context=week_way, premises=premises_x)
     casa_wk_built_reasonheir = reasonheir_shop(
         context=week_way,
@@ -250,10 +250,10 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     wed_str = "Wednesday"
     wed_way = a4_bud.make_way(week_way, wed_str)
 
-    wed_premise = premiseunit_shop(need=wed_way)
+    wed_premise = premiseunit_shop(rbranch=wed_way)
     wed_premise._status = False
     wed_premise._task = False
-    premises = {wed_premise.need: wed_premise}
+    premises = {wed_premise.rbranch: wed_premise}
     casa_wk_build_reasonunit = reasonunit_shop(week_way, premises=premises)
     casa_wk_built_reasonheir = reasonheir_shop(
         context=week_way,
@@ -361,10 +361,10 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     assert casa_idea1.reasonunits[week_way].premises[wed_way].nigh == 12
 
     wed_premise2 = premiseunit_shop(
-        need=wed_way, divisor=divisor_x, open=open_x, nigh=nigh_x
+        rbranch=wed_way, divisor=divisor_x, open=open_x, nigh=nigh_x
     )
     casa_wk_reason2 = reasonunit_shop(
-        context=week_way, premises={wed_premise2.need: wed_premise2}
+        context=week_way, premises={wed_premise2.rbranch: wed_premise2}
     )
     print(f"{type(casa_wk_reason2.context)=}")
     print(f"{casa_wk_reason2.context=}")
@@ -467,7 +467,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
     sue_bud.edit_idea_attr(
         casa_way,
         reason_del_premise_context=weekday_way,
-        reason_del_premise_need=thu_way,
+        reason_del_premise_rbranch=thu_way,
     )
 
     # THEN
@@ -477,7 +477,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
     sue_bud.edit_idea_attr(
         casa_way,
         reason_del_premise_context=weekday_way,
-        reason_del_premise_need=wed_way,
+        reason_del_premise_rbranch=wed_way,
     )
 
     # THEN
@@ -575,7 +575,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     thu_way = sue_bud.make_way(weekdays_way, thu_str)
 
     # 4. idea(...,casa) with
-    # 4.1 ReasonUnit: context=weekdays_way, need=thu_way
+    # 4.1 ReasonUnit: context=weekdays_way, rbranch=thu_way
     # 4.2 .active = False
     sue_bud.edit_idea_attr(
         casa_way,
@@ -601,8 +601,8 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     sue_bud.settle_bud()
     assert run_idea._active is False
 
-    # Fact: context: (...,weekdays) fneed: (...,weekdays,wednesday)
-    sue_bud.add_fact(fcontext=weekdays_way, fneed=wed_way)
+    # Fact: context: (...,weekdays) fbranch: (...,weekdays,wednesday)
+    sue_bud.add_fact(fcontext=weekdays_way, fbranch=wed_way)
     sue_bud.settle_bud()
 
     assert casa_idea._active is False
@@ -610,7 +610,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
 
     # WHEN
     print("before changing fact")
-    sue_bud.add_fact(fcontext=weekdays_way, fneed=thu_way)
+    sue_bud.add_fact(fcontext=weekdays_way, fbranch=thu_way)
     print("after changing fact")
     sue_bud.settle_bud()
     assert casa_idea._active is True

@@ -24,7 +24,7 @@ class Missing_debtor_respectException(Exception):
 
 def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
     for x_factunit in perspective_bud.idearoot.factunits.values():
-        x_factunit.set_fneed_to_fcontext()
+        x_factunit.set_fbranch_to_fcontext()
     return list(perspective_bud.get_agenda_dict().values())
 
 
@@ -134,14 +134,14 @@ def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
     for x_factunit in src_listener.idearoot.factunits.values():
         fcontext_way = x_factunit.fcontext
-        fneed_way = x_factunit.fneed
+        fbranch_way = x_factunit.fbranch
         if dst_listener.idea_exists(fcontext_way) is False:
             context_idea = src_listener.get_idea_obj(fcontext_way)
             dst_listener.set_idea(context_idea, context_idea.parent_way)
-        if dst_listener.idea_exists(fneed_way) is False:
-            fneed_idea = src_listener.get_idea_obj(fneed_way)
-            dst_listener.set_idea(fneed_idea, fneed_idea.parent_way)
-        dst_listener.add_fact(fcontext_way, fneed_way)
+        if dst_listener.idea_exists(fbranch_way) is False:
+            fbranch_idea = src_listener.get_idea_obj(fbranch_way)
+            dst_listener.set_idea(fbranch_idea, fbranch_idea.parent_way)
+        dst_listener.add_fact(fcontext_way, fbranch_way)
 
 
 def listen_to_speaker_fact(
@@ -156,7 +156,7 @@ def listen_to_speaker_fact(
         if x_factunit is not None:
             listener.add_fact(
                 fcontext=x_factunit.fcontext,
-                fneed=x_factunit.fneed,
+                fbranch=x_factunit.fbranch,
                 fopen=x_factunit.fopen,
                 fnigh=x_factunit.fnigh,
                 create_missing_ideas=True,
@@ -279,7 +279,7 @@ def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
         listener_id = listener_hubunit.owner_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.owner_name = x_healer_name
-        _fneed_keep_plans_and_listen(listener_id, keep_dict, healer_hubunit, new_job)
+        _fbranch_keep_plans_and_listen(listener_id, keep_dict, healer_hubunit, new_job)
 
     if new_job.get_dict() == pre_job_dict:
         agenda = list(gut.get_agenda_dict().values())
@@ -289,7 +289,7 @@ def listen_to_owner_plans(listener_hubunit: HubUnit) -> None:
     save_job_file(listener_hubunit.fisc_mstr_dir, new_job)
 
 
-def _fneed_keep_plans_and_listen(
+def _fbranch_keep_plans_and_listen(
     listener_id: OwnerName,
     keep_dict: dict[WayStr],
     healer_hubunit: HubUnit,
@@ -297,10 +297,10 @@ def _fneed_keep_plans_and_listen(
 ):
     for keep_path in keep_dict:
         healer_hubunit.keep_way = keep_path
-        fneed_keep_plan_and_listen(listener_id, healer_hubunit, new_job)
+        fbranch_keep_plan_and_listen(listener_id, healer_hubunit, new_job)
 
 
-def fneed_keep_plan_and_listen(
+def fbranch_keep_plan_and_listen(
     listener_owner_name: OwnerName, healer_hubunit: HubUnit, new_job: BudUnit
 ):
     listener_id = listener_owner_name

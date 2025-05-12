@@ -187,7 +187,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     assert len(yao_listener.get_missing_fact_contexts()) == 2
     yao_listener.add_fact(status_way, dirty_way)
     assert len(yao_listener.get_missing_fact_contexts()) == 1
-    assert yao_listener.get_fact(status_way).fneed == dirty_way
+    assert yao_listener.get_fact(status_way).fbranch == dirty_way
 
     # WHEN
     yao_speaker = budunit_shop(yao_str)
@@ -199,9 +199,9 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # THEN
     assert len(yao_listener.get_missing_fact_contexts()) == 0
     # did not grab speaker's factunit
-    assert yao_listener.get_fact(status_way).fneed == dirty_way
+    assert yao_listener.get_fact(status_way).fbranch == dirty_way
     # grabed speaker's factunit
-    assert yao_listener.get_fact(fridge_way).fneed == running_way
+    assert yao_listener.get_fact(fridge_way).fbranch == running_way
 
 
 def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
@@ -256,5 +256,5 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     assert yao_dst.idea_exists(snow_way)
     assert yao_dst.get_fact(weather_way) is not None
     assert yao_dst.get_fact(status_way) is not None
-    assert yao_dst.get_fact(weather_way).fneed == rain_way
-    assert yao_dst.get_fact(status_way).fneed == clean_way
+    assert yao_dst.get_fact(weather_way).fbranch == rain_way
+    assert yao_dst.get_fact(status_way).fbranch == clean_way

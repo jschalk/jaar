@@ -324,7 +324,7 @@ def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
     x_factunit = x_ideaunit.factunits.get(x_atom.get_value("fcontext"))
     x_factunit.set_attr(
-        fneed=x_atom.get_value("fneed"),
+        fbranch=x_atom.get_value("fbranch"),
         fopen=x_atom.get_value("fopen"),
         fnigh=x_atom.get_value("fnigh"),
     )
@@ -335,7 +335,7 @@ def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         x_atom.get_value("idea_way"),
         factunit=factunit_shop(
             fcontext=x_atom.get_value("fcontext"),
-            fneed=x_atom.get_value("fneed"),
+            fbranch=x_atom.get_value("fbranch"),
             fopen=x_atom.get_value("fopen"),
             fnigh=x_atom.get_value("fnigh"),
         ),
@@ -371,7 +371,7 @@ def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
         reason_del_premise_context=x_atom.get_value("context"),
-        reason_del_premise_need=x_atom.get_value("need"),
+        reason_del_premise_rbranch=x_atom.get_value("rbranch"),
     )
 
 
@@ -379,7 +379,7 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
         reason_context=x_atom.get_value("context"),
-        reason_premise=x_atom.get_value("need"),
+        reason_premise=x_atom.get_value("rbranch"),
         reason_premise_open=x_atom.get_value("open"),
         reason_premise_nigh=x_atom.get_value("nigh"),
         reason_premise_divisor=x_atom.get_value("divisor"),
@@ -390,7 +390,7 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
     x_ideaunit.set_reason_premise(
         context=x_atom.get_value("context"),
-        premise=x_atom.get_value("need"),
+        premise=x_atom.get_value("rbranch"),
         open=x_atom.get_value("open"),
         nigh=x_atom.get_value("nigh"),
         divisor=x_atom.get_value("divisor"),
@@ -576,7 +576,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "bud_idea_factunit":
         return (
-            (x_obj.fneed != y_obj.fneed)
+            (x_obj.fbranch != y_obj.fbranch)
             or (x_obj.open != y_obj.open)
             or (x_obj.nigh != y_obj.nigh)
         )
@@ -642,12 +642,12 @@ class AtomRow:
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    need: WayStr = None
+    rbranch: WayStr = None
     nigh: float = None
     numor: int = None
     open: float = None
     penny: float = None
-    fneed: WayStr = None
+    fbranch: WayStr = None
     pledge: bool = None
     problem_bool: bool = None
     idea_way: WayStr = None

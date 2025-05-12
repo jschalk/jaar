@@ -12,7 +12,7 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "need_ERASE": {
+        "rbranch_ERASE": {
             "otx_key": true
         },
         "owner_name": {

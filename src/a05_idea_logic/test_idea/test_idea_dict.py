@@ -72,17 +72,19 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_str = "USA"
     usa_way = create_way(states_way, usa_str)
 
-    wed_premise = premiseunit_shop(need=wed_way)
+    wed_premise = premiseunit_shop(rbranch=wed_way)
     wed_premise._status = True
-    usa_premise = premiseunit_shop(need=usa_way)
+    usa_premise = premiseunit_shop(rbranch=usa_way)
     usa_premise._status = False
 
     x1_reasonunits = {
-        week_way: reasonunit_shop(week_way, premises={wed_premise.need: wed_premise}),
-        states_way: reasonunit_shop(states_way, {usa_premise.need: usa_premise}),
+        week_way: reasonunit_shop(
+            week_way, premises={wed_premise.rbranch: wed_premise}
+        ),
+        states_way: reasonunit_shop(states_way, {usa_premise.rbranch: usa_premise}),
     }
-    wed_premises = {wed_premise.need: wed_premise}
-    usa_premises = {usa_premise.need: usa_premise}
+    wed_premises = {wed_premise.rbranch: wed_premise}
+    usa_premises = {usa_premise.rbranch: usa_premise}
     x1_reasonheirs = {
         week_way: reasonheir_shop(week_way, wed_premises, _status=True),
         states_way: reasonheir_shop(states_way, usa_premises, _status=False),
@@ -141,7 +143,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         pledge=True,
         problem_bool=x_problem_bool,
     )
-    x_factunit = factunit_shop(fcontext=week_way, fneed=week_way, fopen=5, fnigh=59)
+    x_factunit = factunit_shop(fcontext=week_way, fbranch=week_way, fopen=5, fnigh=59)
     casa_idea.set_factunit(factunit=x_factunit)
     casa_idea._originunit.set_originhold(acct_name="Ray", importance=None)
     casa_idea._originunit.set_originhold(acct_name="Lei", importance=4)

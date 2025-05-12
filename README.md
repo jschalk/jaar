@@ -34,7 +34,7 @@ Future enhancement: `jaar` can be installed using `pip`
 
     pip install jaar
 
-If you have installed `jaar` before, and you should ensure `pip` downloads the latest version (rather than using its internal cache) you can use the following commands:
+If you have installed `jaar` before, and you should ensure `pip` downloads the latest version (rather than using its internal cache) you can use the follow ing commands:
 
     pip uninstall jaar
     pip install --no-cache jaar

@@ -107,7 +107,7 @@ def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplanBudWithDetailsDecidedB
     bob_plan.edit_idea_attr(
         cook_way(),
         reason_del_premise_context=eat_way(),
-        reason_del_premise_need=hungry_way(),
+        reason_del_premise_rbranch=hungry_way(),
     )
     bob_cook_ideaunit = bob_plan.get_idea_obj(cook_way())
     zia_cook_ideaunit = zia_plan.get_idea_obj(cook_way())
@@ -337,7 +337,7 @@ def test_listen_to_agenda_duty_plan_agenda_GetsAgendaFromSrcBudNotSpeakerSelf(
     # ESTABLISH
     # yao_duty has task run_way
     # yao_plan has task clean_way
-    # yao_new_plan fneeds yao_duty task run_way and not clean_way
+    # yao_new_plan fbranchs yao_duty task run_way and not clean_way
     yao_duty = get_example_yao_speaker()
     assert yao_duty.idea_exists(run_way()) is False
     assert yao_duty.idea_exists(clean_way()) is False

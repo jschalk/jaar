@@ -248,14 +248,14 @@ def get_yao_run_with_reason_budunit_example() -> BudUnit:
     run_str = "running"
     weather_str = "weather"
     raining_str = "raining"
-    snowing_str = "snowing"
+    snowng_str = "snowng"
     sport_way = yao_bud.make_l1_way(sport_str)
     participate_way = yao_bud.make_way(sport_way, participate_str)
     ski_way = yao_bud.make_way(participate_way, ski_str)
     run_way = yao_bud.make_way(participate_way, run_str)
     weather_way = yao_bud.make_l1_way(weather_str)
     rain_way = yao_bud.make_way(weather_way, raining_str)
-    snow_way = yao_bud.make_way(weather_way, snowing_str)
+    snow_way = yao_bud.make_way(weather_way, snowng_str)
     yao_bud.add_idea(participate_way)
     yao_bud.add_idea(ski_way, 5, pledge=True)
     yao_bud.add_idea(run_way, 1, pledge=True)

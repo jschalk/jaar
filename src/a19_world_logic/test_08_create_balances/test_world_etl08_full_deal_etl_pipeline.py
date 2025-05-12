@@ -120,7 +120,7 @@ def test_WorldUnit_calc_fisc_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
     yao44_budevent.set_owner_name(yao_str)
     yao44_budevent.add_acctunit(zia_str, 1)
     clean_fact = example_casa_clean_factunit()
-    yao44_budevent.add_fact(clean_fact.fcontext, clean_fact.fneed)
+    yao44_budevent.add_fact(clean_fact.fcontext, clean_fact.fbranch)
     zia33_budevent = get_bob_mop_with_reason_budunit_example()
     zia33_budevent.set_owner_name(zia_str)
     bob55_path = create_budevent_path(mstr_dir, a23_str, bob_str, event55)

@@ -10,13 +10,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     context_str,
     face_name_str,
     fcontext_str,
-    fneed_str,
+    fbranch_str,
     fopen_str,
     fund_coin_str,
     healer_name_str,
     group_label_str,
     idea_tag_str,
-    need_str,
+    rbranch_str,
     penny_str,
     respect_bit_str,
     idea_way_str,
@@ -98,14 +98,14 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("month_tag") == type_TagStr_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("need") == type_WayStr_str()
+    assert pidgin_args_class_types.get("rbranch") == type_WayStr_str()
     assert pidgin_args_class_types.get("nigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()
     assert pidgin_args_class_types.get("open") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("fneed") == type_WayStr_str()
+    assert pidgin_args_class_types.get("fbranch") == type_WayStr_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
@@ -202,12 +202,12 @@ def test_pidginable_atom_args_ReturnsObj():
         face_name_str(),
         fcontext_str(),
         fisc_tag_str(),
-        fneed_str(),
+        fbranch_str(),
         group_label_str(),
         healer_name_str(),
         hour_tag_str(),
         month_tag_str(),
-        need_str(),
+        rbranch_str(),
         owner_name_str(),
         idea_way_str(),
         team_label_str(),

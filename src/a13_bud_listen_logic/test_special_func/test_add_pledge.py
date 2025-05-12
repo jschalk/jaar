@@ -99,4 +99,4 @@ def test_add_gut_fact_CanAdd_factunit(env_dir_setup_cleanup):
     new_sue_gut = open_gut_file(env_dir(), root_tag(), sue_str)
     assert new_sue_gut.idea_exists(dirty_way)
     assert new_sue_gut.get_fact(house_estimation_way) is not None
-    assert new_sue_gut.get_fact(house_estimation_way).fneed == dirty_way
+    assert new_sue_gut.get_fact(house_estimation_way).fbranch == dirty_way

@@ -295,7 +295,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reason_premiseunit():
     thur_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     thur_atom.set_arg(idea_way_str(), clean_way)
     thur_atom.set_arg(context_str(), week_way)
-    thur_atom.set_arg("need", thur_way)
+    thur_atom.set_arg("rbranch", thur_way)
     assert thur_atom.is_valid()
     thur_atom.set_arg("divisor", thur_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()

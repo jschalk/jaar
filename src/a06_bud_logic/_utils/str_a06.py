@@ -179,8 +179,8 @@ def morph_str() -> str:
     return "morph"
 
 
-def need_str() -> str:
-    return "need"
+def rbranch_str() -> str:
+    return "rbranch"
 
 
 def nigh_str() -> str:
@@ -207,8 +207,8 @@ def fopen_str() -> str:
     return "fopen"
 
 
-def fneed_str() -> str:
-    return "fneed"
+def fbranch_str() -> str:
+    return "fbranch"
 
 
 def fnigh_str() -> str:
