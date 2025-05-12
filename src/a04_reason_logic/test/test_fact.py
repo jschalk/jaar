@@ -138,7 +138,7 @@ def test_FactUnit_get_dict_ReturnsDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "base": weekday_way,
+        "fbase": weekday_way,
         "fneed": sunday_way,
         "fopen": x_fopen,
         "fnigh": x_fnigh,
@@ -161,7 +161,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "base": weekday_way,
+        "fbase": weekday_way,
         "fneed": sunday_way,
     }
     assert fact_dict == static_dict
@@ -360,7 +360,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
     sunday_way = create_way(weekday_way, sunday_str)
     static_dict = {
         weekday_way: {
-            "base": weekday_way,
+            "fbase": weekday_way,
             "fneed": sunday_way,
             "fopen": None,
             "fnigh": None,
@@ -384,7 +384,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     sunday_way = create_way(weekday_way, sunday_str)
     static_dict = {
         weekday_way: {
-            "base": weekday_way,
+            "fbase": weekday_way,
             "fneed": sunday_way,
         }
     }

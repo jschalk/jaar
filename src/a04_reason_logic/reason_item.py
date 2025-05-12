@@ -24,7 +24,7 @@ class FactCore:
 
     def get_dict(self) -> dict[str,]:
         x_dict = {
-            "base": self.fbase,
+            "fbase": self.fbase,
             "fneed": self.fneed,
         }
         if self.fopen is not None:
@@ -78,7 +78,7 @@ def factunit_shop(
 def factunits_get_from_dict(x_dict: dict) -> dict[WayUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
-        x_base = fact_dict["base"]
+        x_base = fact_dict["fbase"]
         x_fneed = fact_dict["fneed"]
 
         try:
