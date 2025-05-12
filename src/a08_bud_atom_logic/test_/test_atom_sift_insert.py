@@ -18,7 +18,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     team_label_str,
     healer_name_str,
     idea_way_str,
-    context_str,
+    rcontext_str,
     fcontext_str,
 )
 
@@ -161,10 +161,10 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_idea_reasonunit():
 
     casa_week_atom = budatom_shop(bud_idea_reasonunit_str(), atom_insert())
     casa_week_atom.set_arg(idea_way_str(), casa_way)
-    casa_week_atom.set_arg(context_str(), week_way)
+    casa_week_atom.set_arg(rcontext_str(), week_way)
     clean_week_atom = budatom_shop(bud_idea_reasonunit_str(), atom_insert())
     clean_week_atom.set_arg(idea_way_str(), clean_way)
-    clean_week_atom.set_arg(context_str(), week_way)
+    clean_week_atom.set_arg(rcontext_str(), week_way)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
     assert sift_budatom(sue_bud, casa_week_atom)
@@ -198,11 +198,11 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_idea_reason_premiseunit_exists(
 
     casa_week_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     casa_week_atom.set_arg(idea_way_str(), casa_way)
-    casa_week_atom.set_arg(context_str(), week_way)
+    casa_week_atom.set_arg(rcontext_str(), week_way)
     casa_week_atom.set_arg("rbranch", thur_way)
     clean_week_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     clean_week_atom.set_arg(idea_way_str(), clean_way)
-    clean_week_atom.set_arg(context_str(), week_way)
+    clean_week_atom.set_arg(rcontext_str(), week_way)
     clean_week_atom.set_arg("rbranch", thur_way)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)

@@ -34,7 +34,7 @@ class ObjKeysHolder:
     fisc_tag: FiscTag = None
     owner_name: OwnerName = None
     way: WayStr = None
-    context: WayStr = None
+    rcontext: WayStr = None
     acct_name: AcctUnit = None
     membership: GroupUnit = None
     group_name: GroupUnit = None
@@ -135,7 +135,7 @@ def insert_job_budprem(
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["idea_way"] = x_objkeysholder.way
-    x_dict["context"] = x_objkeysholder.context
+    x_dict["rcontext"] = x_objkeysholder.rcontext
     insert_sqlstr = create_budprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -203,9 +203,9 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
         insert_job_budteam(cursor, x_objkeysholder, teamheir)
         for x_awardheir in x_idea._awardheirs.values():
             insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
-        for context, reasonheir in x_idea._reasonheirs.items():
+        for rcontext, reasonheir in x_idea._reasonheirs.items():
             insert_job_budreas(cursor, x_objkeysholder, reasonheir)
-            x_objkeysholder.context = context
+            x_objkeysholder.rcontext = rcontext
             for prem in reasonheir.premises.values():
                 insert_job_budprem(cursor, x_objkeysholder, prem)
 

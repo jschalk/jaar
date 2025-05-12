@@ -576,7 +576,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeIdeasOutsideRange():
 
     sue_bud.edit_idea_attr(
         clean_way,
-        reason_context=day_way,
+        reason_rcontext=day_way,
         reason_premise=day_way,
         reason_premise_open=320,
         reason_premise_nigh=480,
@@ -691,7 +691,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     cregtime_way = sue_bud.make_way(time_way, creg_str())
     sue_bud.edit_idea_attr(
         laundry_way,
-        reason_context=cregtime_way,
+        reason_rcontext=cregtime_way,
         reason_premise=cregtime_way,
         reason_premise_open=3420.0,
         reason_premise_nigh=3420.0,
@@ -715,7 +715,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     # print(
     #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
     # )
-    # print(f"{laundry_reasonheir.context=} {laundry_premise=}")
+    # print(f"{laundry_reasonheir.rcontext=} {laundry_premise=}")
     # for x_ideaunit in sue_bud._idea_dict.values():
     #     if x_ideaunit.idea_tag in [laundry_str]:
     #         print(f"{x_ideaunit.idea_tag=} {x_ideaunit.begin=} {x_ideaunit.close=}")

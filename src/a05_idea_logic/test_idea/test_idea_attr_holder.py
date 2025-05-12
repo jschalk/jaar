@@ -7,14 +7,14 @@ def test_IdeaAttrHolder_Exists():
     assert new_obj.mass is None
     assert new_obj.uid is None
     assert new_obj.reason is None
-    assert new_obj.reason_context is None
+    assert new_obj.reason_rcontext is None
     assert new_obj.reason_premise is None
     assert new_obj.reason_premise_open is None
     assert new_obj.reason_premise_nigh is None
     assert new_obj.reason_premise_divisor is None
-    assert new_obj.reason_del_premise_context is None
+    assert new_obj.reason_del_premise_rcontext is None
     assert new_obj.reason_del_premise_rbranch is None
-    assert new_obj.reason_context_idea_active_requisite is None
+    assert new_obj.reason_rcontext_idea_active_requisite is None
     assert new_obj.teamunit is None
     assert new_obj.healerlink is None
     assert new_obj.begin is None

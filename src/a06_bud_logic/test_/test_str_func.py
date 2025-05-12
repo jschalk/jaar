@@ -2,7 +2,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     addin_str,
     awardee_label_str,
-    context_str,
+    rcontext_str,
     begin_str,
     close_str,
     credit_belief_str,
@@ -43,7 +43,7 @@ def test_str_functions_ReturnsObj():
     assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
     assert awardee_label_str() == "awardee_label"
-    assert context_str() == "context"
+    assert rcontext_str() == "rcontext"
     assert fcontext_str() == "fcontext"
     assert begin_str() == "begin"
     assert close_str() == "close"

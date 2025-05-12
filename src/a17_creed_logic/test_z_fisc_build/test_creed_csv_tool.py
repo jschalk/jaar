@@ -79,8 +79,8 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00023": "fisc_tag,owner_name,idea_way,fcontext,fbranch,fopen,fnigh\n",
         "br00024": "fisc_tag,owner_name,idea_way,team_label\n",
         "br00025": "fisc_tag,owner_name,idea_way,healer_name\n",
-        "br00026": "fisc_tag,owner_name,idea_way,context,rbranch,nigh,open,divisor\n",
-        "br00027": "fisc_tag,owner_name,idea_way,context,context_idea_active_requisite\n",
+        "br00026": "fisc_tag,owner_name,idea_way,rcontext,rbranch,nigh,open,divisor\n",
+        "br00027": "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite\n",
         "br00028": "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
         "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word\n",
@@ -452,7 +452,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
     bob_bud.add_idea(clean_way)
     bob_bud.edit_idea_attr(
         mop_way,
-        reason_context=casa_way,
+        reason_rcontext=casa_way,
         reason_premise=clean_way,
         reason_premise_open=clean_premise_open,
         reason_premise_nigh=clean_premise_nigh,
@@ -483,8 +483,8 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
     bob_bud.add_idea(casa_way)
     bob_bud.edit_idea_attr(
         mop_way,
-        reason_context=casa_way,
-        reason_context_idea_active_requisite=True,
+        reason_rcontext=casa_way,
+        reason_rcontext_idea_active_requisite=True,
     )
     csv_header = x_creeds.get("br00027")
     print(f"{csv_header=}")
@@ -594,7 +594,7 @@ def test_add_budunit_to_stance_csv_strs_ReturnsObj():
     bob_bud.add_idea(mop_way)
     bob_bud.add_idea(casa_way)
     bob_bud.add_idea(clean_way)
-    bob_bud.edit_idea_attr(mop_way, reason_context=casa_way, reason_premise=clean_way)
+    bob_bud.edit_idea_attr(mop_way, reason_rcontext=casa_way, reason_premise=clean_way)
     bob_bud.add_idea(casa_way)
     bob_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(yao_str))
     bob_bud.add_fact(casa_way, clean_way)
@@ -977,7 +977,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     bob_bud.add_idea(clean_way)
     bob_bud.edit_idea_attr(
         mop_way,
-        reason_context=casa_way,
+        reason_rcontext=casa_way,
         reason_premise=clean_way,
         reason_premise_open=clean_premise_open,
         reason_premise_nigh=clean_premise_nigh,
@@ -1013,8 +1013,8 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_bud.add_idea(casa_way)
     bob_bud.edit_idea_attr(
         mop_way,
-        reason_context=casa_way,
-        reason_context_idea_active_requisite=True,
+        reason_rcontext=casa_way,
+        reason_rcontext_idea_active_requisite=True,
     )
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
@@ -1143,7 +1143,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     bob_bud.add_idea(mop_way)
     bob_bud.add_idea(casa_way)
     bob_bud.add_idea(clean_way)
-    bob_bud.edit_idea_attr(mop_way, reason_context=casa_way, reason_premise=clean_way)
+    bob_bud.edit_idea_attr(mop_way, reason_rcontext=casa_way, reason_premise=clean_way)
     bob_bud.add_idea(casa_way)
     bob_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(yao_str))
     bob_bud.add_fact(casa_way, clean_way)
@@ -1205,7 +1205,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
 #     bob_bud.add_idea(mop_way)
 #     bob_bud.add_idea(casa_way)
 #     bob_bud.add_idea(clean_way)
-#     bob_bud.edit_idea_attr(mop_way, reason_context=casa_way, reason_premise=clean_way)
+#     bob_bud.edit_idea_attr(mop_way, reason_rcontext=casa_way, reason_premise=clean_way)
 #     bob_bud.add_idea(casa_way)
 #     bob_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(yao_str))
 #     bob_bud.add_fact(casa_way, clean_way)

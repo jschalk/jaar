@@ -336,7 +336,7 @@ class BudDelta:
 
             self.add_budatom_idea_factunit_inserts(
                 ideaunit=insert_ideaunit,
-                insert_factunit_contexts=set(insert_ideaunit.factunits.keys()),
+                insert_factunit_rcontexts=set(insert_ideaunit.factunits.keys()),
             )
             self.add_budatom_idea_awardlink_inserts(
                 after_ideaunit=insert_ideaunit,
@@ -344,7 +344,7 @@ class BudDelta:
             )
             self.add_budatom_idea_reasonunit_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_reasonunit_contexts=set(insert_ideaunit.reasonunits.keys()),
+                insert_reasonunit_rcontexts=set(insert_ideaunit.reasonunits.keys()),
             )
             self.add_budatom_idea_teamlink_insert(
                 idea_way=insert_idea_way,
@@ -383,25 +383,25 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
             # insert / update / delete factunits
-            before_factunit_contexts = set(before_ideaunit.factunits.keys())
-            after_factunit_contexts = set(after_ideaunit.factunits.keys())
+            before_factunit_rcontexts = set(before_ideaunit.factunits.keys())
+            after_factunit_rcontexts = set(after_ideaunit.factunits.keys())
             self.add_budatom_idea_factunit_inserts(
                 ideaunit=after_ideaunit,
-                insert_factunit_contexts=after_factunit_contexts.difference(
-                    before_factunit_contexts
+                insert_factunit_rcontexts=after_factunit_rcontexts.difference(
+                    before_factunit_rcontexts
                 ),
             )
             self.add_budatom_idea_factunit_updates(
                 before_ideaunit=before_ideaunit,
                 after_ideaunit=after_ideaunit,
-                update_factunit_contexts=before_factunit_contexts.intersection(
-                    after_factunit_contexts
+                update_factunit_rcontexts=before_factunit_rcontexts.intersection(
+                    after_factunit_rcontexts
                 ),
             )
             self.add_budatom_idea_factunit_deletes(
                 idea_way=idea_way,
-                delete_factunit_contexts=before_factunit_contexts.difference(
-                    after_factunit_contexts
+                delete_factunit_rcontexts=before_factunit_rcontexts.difference(
+                    after_factunit_rcontexts
                 ),
             )
 
@@ -429,25 +429,25 @@ class BudDelta:
             )
 
             # insert / update / delete reasonunits
-            before_reasonunit_contexts = set(before_ideaunit.reasonunits.keys())
-            after_reasonunit_contexts = set(after_ideaunit.reasonunits.keys())
+            before_reasonunit_rcontexts = set(before_ideaunit.reasonunits.keys())
+            after_reasonunit_rcontexts = set(after_ideaunit.reasonunits.keys())
             self.add_budatom_idea_reasonunit_inserts(
                 after_ideaunit=after_ideaunit,
-                insert_reasonunit_contexts=after_reasonunit_contexts.difference(
-                    before_reasonunit_contexts
+                insert_reasonunit_rcontexts=after_reasonunit_rcontexts.difference(
+                    before_reasonunit_rcontexts
                 ),
             )
             self.add_budatom_idea_reasonunit_updates(
                 before_ideaunit=before_ideaunit,
                 after_ideaunit=after_ideaunit,
-                update_reasonunit_contexts=before_reasonunit_contexts.intersection(
-                    after_reasonunit_contexts
+                update_reasonunit_rcontexts=before_reasonunit_rcontexts.intersection(
+                    after_reasonunit_rcontexts
                 ),
             )
             self.add_budatom_idea_reasonunit_deletes(
                 before_ideaunit=before_ideaunit,
-                delete_reasonunit_contexts=before_reasonunit_contexts.difference(
-                    after_reasonunit_contexts
+                delete_reasonunit_rcontexts=before_reasonunit_rcontexts.difference(
+                    after_reasonunit_rcontexts
                 ),
             )
             # insert / update / delete reasonunits_permises
@@ -500,7 +500,7 @@ class BudDelta:
             delete_ideaunit = before_bud.get_idea_obj(delete_idea_way)
             self.add_budatom_idea_factunit_deletes(
                 idea_way=delete_idea_way,
-                delete_factunit_contexts=set(delete_ideaunit.factunits.keys()),
+                delete_factunit_rcontexts=set(delete_ideaunit.factunits.keys()),
             )
 
             self.add_budatom_idea_awardlink_deletes(
@@ -509,7 +509,7 @@ class BudDelta:
             )
             self.add_budatom_idea_reasonunit_deletes(
                 before_ideaunit=delete_ideaunit,
-                delete_reasonunit_contexts=set(delete_ideaunit.reasonunits.keys()),
+                delete_reasonunit_rcontexts=set(delete_ideaunit.reasonunits.keys()),
             )
             self.add_budatom_idea_teamlink_deletes(
                 idea_way=delete_idea_way,
@@ -521,17 +521,17 @@ class BudDelta:
             )
 
     def add_budatom_idea_reasonunit_inserts(
-        self, after_ideaunit: IdeaUnit, insert_reasonunit_contexts: set
+        self, after_ideaunit: IdeaUnit, insert_reasonunit_rcontexts: set
     ):
-        for insert_reasonunit_context in insert_reasonunit_contexts:
-            after_reasonunit = after_ideaunit.get_reasonunit(insert_reasonunit_context)
+        for insert_reasonunit_rcontext in insert_reasonunit_rcontexts:
+            after_reasonunit = after_ideaunit.get_reasonunit(insert_reasonunit_rcontext)
             x_budatom = budatom_shop("bud_idea_reasonunit", atom_insert())
             x_budatom.set_jkey("idea_way", after_ideaunit.get_idea_way())
-            x_budatom.set_jkey("context", after_reasonunit.context)
-            if after_reasonunit.context_idea_active_requisite is not None:
+            x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
+            if after_reasonunit.rcontext_idea_active_requisite is not None:
                 x_budatom.set_jvalue(
-                    "context_idea_active_requisite",
-                    after_reasonunit.context_idea_active_requisite,
+                    "rcontext_idea_active_requisite",
+                    after_reasonunit.rcontext_idea_active_requisite,
                 )
             self.set_budatom(x_budatom)
 
@@ -545,26 +545,26 @@ class BudDelta:
         self,
         before_ideaunit: IdeaUnit,
         after_ideaunit: IdeaUnit,
-        update_reasonunit_contexts: set,
+        update_reasonunit_rcontexts: set,
     ):
-        for update_reasonunit_context in update_reasonunit_contexts:
+        for update_reasonunit_rcontext in update_reasonunit_rcontexts:
             before_reasonunit = before_ideaunit.get_reasonunit(
-                update_reasonunit_context
+                update_reasonunit_rcontext
             )
-            after_reasonunit = after_ideaunit.get_reasonunit(update_reasonunit_context)
+            after_reasonunit = after_ideaunit.get_reasonunit(update_reasonunit_rcontext)
             if jvalues_different(
                 "bud_idea_reasonunit", before_reasonunit, after_reasonunit
             ):
                 x_budatom = budatom_shop("bud_idea_reasonunit", atom_update())
                 x_budatom.set_jkey("idea_way", before_ideaunit.get_idea_way())
-                x_budatom.set_jkey("context", after_reasonunit.context)
+                x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
                 if (
-                    before_reasonunit.context_idea_active_requisite
-                    != after_reasonunit.context_idea_active_requisite
+                    before_reasonunit.rcontext_idea_active_requisite
+                    != after_reasonunit.rcontext_idea_active_requisite
                 ):
                     x_budatom.set_jvalue(
-                        "context_idea_active_requisite",
-                        after_reasonunit.context_idea_active_requisite,
+                        "rcontext_idea_active_requisite",
+                        after_reasonunit.rcontext_idea_active_requisite,
                     )
                 self.set_budatom(x_budatom)
 
@@ -587,27 +587,27 @@ class BudDelta:
             )
             self.add_budatom_idea_reason_premiseunit_deletes(
                 idea_way=before_ideaunit.get_idea_way(),
-                reasonunit_context=update_reasonunit_context,
+                reasonunit_rcontext=update_reasonunit_rcontext,
                 delete_premise_rbranchs=before_premise_rbranchs.difference(
                     after_premise_rbranchs
                 ),
             )
 
     def add_budatom_idea_reasonunit_deletes(
-        self, before_ideaunit: IdeaUnit, delete_reasonunit_contexts: set
+        self, before_ideaunit: IdeaUnit, delete_reasonunit_rcontexts: set
     ):
-        for delete_reasonunit_context in delete_reasonunit_contexts:
+        for delete_reasonunit_rcontext in delete_reasonunit_rcontexts:
             x_budatom = budatom_shop("bud_idea_reasonunit", atom_delete())
             x_budatom.set_jkey("idea_way", before_ideaunit.get_idea_way())
-            x_budatom.set_jkey("context", delete_reasonunit_context)
+            x_budatom.set_jkey("rcontext", delete_reasonunit_rcontext)
             self.set_budatom(x_budatom)
 
             before_reasonunit = before_ideaunit.get_reasonunit(
-                delete_reasonunit_context
+                delete_reasonunit_rcontext
             )
             self.add_budatom_idea_reason_premiseunit_deletes(
                 idea_way=before_ideaunit.get_idea_way(),
-                reasonunit_context=delete_reasonunit_context,
+                reasonunit_rcontext=delete_reasonunit_rcontext,
                 delete_premise_rbranchs=set(before_reasonunit.premises.keys()),
             )
 
@@ -621,7 +621,7 @@ class BudDelta:
             after_premiseunit = after_reasonunit.get_premise(insert_premise_rbranch)
             x_budatom = budatom_shop("bud_idea_reason_premiseunit", atom_insert())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("context", after_reasonunit.context)
+            x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
             x_budatom.set_jkey("rbranch", after_premiseunit.rbranch)
             if after_premiseunit.open is not None:
                 x_budatom.set_jvalue("open", after_premiseunit.open)
@@ -648,7 +648,7 @@ class BudDelta:
             ):
                 x_budatom = budatom_shop("bud_idea_reason_premiseunit", atom_update())
                 x_budatom.set_jkey("idea_way", idea_way)
-                x_budatom.set_jkey("context", before_reasonunit.context)
+                x_budatom.set_jkey("rcontext", before_reasonunit.rcontext)
                 x_budatom.set_jkey("rbranch", after_premiseunit.rbranch)
                 if after_premiseunit.open != before_premiseunit.open:
                     x_budatom.set_jvalue("open", after_premiseunit.open)
@@ -661,13 +661,13 @@ class BudDelta:
     def add_budatom_idea_reason_premiseunit_deletes(
         self,
         idea_way: WayStr,
-        reasonunit_context: WayStr,
+        reasonunit_rcontext: WayStr,
         delete_premise_rbranchs: set,
     ):
         for delete_premise_rbranch in delete_premise_rbranchs:
             x_budatom = budatom_shop("bud_idea_reason_premiseunit", atom_delete())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("context", reasonunit_context)
+            x_budatom.set_jkey("rcontext", reasonunit_rcontext)
             x_budatom.set_jkey("rbranch", delete_premise_rbranch)
             self.set_budatom(x_budatom)
 
@@ -756,10 +756,10 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_factunit_inserts(
-        self, ideaunit: IdeaUnit, insert_factunit_contexts: set
+        self, ideaunit: IdeaUnit, insert_factunit_rcontexts: set
     ):
-        for insert_factunit_context in insert_factunit_contexts:
-            insert_factunit = ideaunit.factunits.get(insert_factunit_context)
+        for insert_factunit_rcontext in insert_factunit_rcontexts:
+            insert_factunit = ideaunit.factunits.get(insert_factunit_rcontext)
             x_budatom = budatom_shop("bud_idea_factunit", atom_insert())
             x_budatom.set_jkey("idea_way", ideaunit.get_idea_way())
             x_budatom.set_jkey("fcontext", insert_factunit.fcontext)
@@ -775,11 +775,11 @@ class BudDelta:
         self,
         before_ideaunit: IdeaUnit,
         after_ideaunit: IdeaUnit,
-        update_factunit_contexts: set,
+        update_factunit_rcontexts: set,
     ):
-        for update_factunit_context in update_factunit_contexts:
-            before_factunit = before_ideaunit.factunits.get(update_factunit_context)
-            after_factunit = after_ideaunit.factunits.get(update_factunit_context)
+        for update_factunit_rcontext in update_factunit_rcontexts:
+            before_factunit = before_ideaunit.factunits.get(update_factunit_rcontext)
+            after_factunit = after_ideaunit.factunits.get(update_factunit_rcontext)
             if jvalues_different("bud_idea_factunit", before_factunit, after_factunit):
                 x_budatom = budatom_shop("bud_idea_factunit", atom_update())
                 x_budatom.set_jkey("idea_way", before_ideaunit.get_idea_way())
@@ -793,12 +793,12 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
     def add_budatom_idea_factunit_deletes(
-        self, idea_way: WayStr, delete_factunit_contexts: FactUnit
+        self, idea_way: WayStr, delete_factunit_rcontexts: FactUnit
     ):
-        for delete_factunit_context in delete_factunit_contexts:
+        for delete_factunit_rcontext in delete_factunit_rcontexts:
             x_budatom = budatom_shop("bud_idea_factunit", atom_delete())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("fcontext", delete_factunit_context)
+            x_budatom.set_jkey("fcontext", delete_factunit_rcontext)
             self.set_budatom(x_budatom)
 
     def is_empty(self) -> bool:

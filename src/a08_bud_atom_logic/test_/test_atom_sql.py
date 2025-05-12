@@ -23,7 +23,7 @@ def test_BudAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     # WHEN
     x_dimen = bud_idea_factunit_str()
     update_disc_budatom = budatom_shop(x_dimen, atom_update())
-    update_disc_budatom.set_jkey("context", knee_way)
+    update_disc_budatom.set_jkey("rcontext", knee_way)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:

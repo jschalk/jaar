@@ -48,21 +48,21 @@ def bud_idea_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 def bud_idea_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_way = jkeys.get("idea_way")
-    x_context = jkeys.get("context")
+    x_rcontext = jkeys.get("rcontext")
     return bool(
         bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).reasonunit_exists(x_context)
+        and x_bud.get_idea_obj(x_way).reasonunit_exists(x_rcontext)
     )
 
 
 def bud_idea_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_way = jkeys.get("idea_way")
-    x_context = jkeys.get("context")
+    x_rcontext = jkeys.get("rcontext")
     x_rbranch = jkeys.get("rbranch")
     return bool(
         bud_idea_reasonunit_exists(x_bud, jkeys)
         and x_bud.get_idea_obj(x_way)
-        .get_reasonunit(x_context)
+        .get_reasonunit(x_rcontext)
         .premise_exists(x_rbranch)
     )
 
@@ -141,17 +141,17 @@ def bud_idea_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLi
 
 def bud_idea_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:
     x_way = jkeys.get("idea_way")
-    x_context = jkeys.get("context")
-    return x_bud.get_idea_obj(x_way).get_reasonunit(x_context)
+    x_rcontext = jkeys.get("rcontext")
+    return x_bud.get_idea_obj(x_way).get_reasonunit(x_rcontext)
 
 
 def bud_idea_reason_premiseunit_get_obj(
     x_bud: BudUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
     x_way = jkeys.get("idea_way")
-    x_context = jkeys.get("context")
+    x_rcontext = jkeys.get("rcontext")
     x_rbranch = jkeys.get("rbranch")
-    return x_bud.get_idea_obj(x_way).get_reasonunit(x_context).get_premise(x_rbranch)
+    return x_bud.get_idea_obj(x_way).get_reasonunit(x_rcontext).get_premise(x_rbranch)
 
 
 def bud_idea_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
@@ -253,11 +253,11 @@ def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[WayStr, dict[str,]]:
 
 def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayStr, dict]):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
-    missing_fact_contexts = set(x_bud.get_missing_fact_contexts().keys())
-    not_missing_fact_contexts = set(x_bud.get_factunits_dict().keys())
-    bud_fact_contexts = not_missing_fact_contexts.union(missing_fact_contexts)
+    missing_fact_rcontexts = set(x_bud.get_missing_fact_rcontexts().keys())
+    not_missing_fact_rcontexts = set(x_bud.get_factunits_dict().keys())
+    bud_fact_rcontexts = not_missing_fact_rcontexts.union(missing_fact_rcontexts)
     for factunit in factunits_dict.values():
-        if factunit.fcontext in bud_fact_contexts:
+        if factunit.fcontext in bud_fact_rcontexts:
             x_bud.add_fact(
                 factunit.fcontext,
                 factunit.fbranch,
@@ -268,5 +268,5 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayStr, dict]):
 
 
 def clear_factunits_from_bud(x_bud: BudUnit):
-    for fact_context in get_bud_root_facts_dict(x_bud).keys():
-        x_bud.del_fact(fact_context)
+    for fact_rcontext in get_bud_root_facts_dict(x_bud).keys():
+        x_bud.del_fact(fact_rcontext)

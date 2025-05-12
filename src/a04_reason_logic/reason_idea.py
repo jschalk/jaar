@@ -457,15 +457,15 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 
 @dataclass
 class ReasonCore:
-    context: WayStr
+    rcontext: WayStr
     premises: dict[WayStr, PremiseUnit]
-    context_idea_active_requisite: bool = None
+    rcontext_idea_active_requisite: bool = None
     bridge: str = None
 
     def set_bridge(self, new_bridge: str):
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
-        self.context = replace_bridge(self.context, old_bridge, new_bridge)
+        self.rcontext = replace_bridge(self.rcontext, old_bridge, new_bridge)
 
         new_premises = {}
         for premise_way, premise_obj in self.premises.items():
@@ -479,7 +479,7 @@ class ReasonCore:
         self.premises = new_premises
 
     def get_obj_key(self):
-        return self.context
+        return self.rcontext
 
     def get_premises_count(self):
         return sum(1 for _ in self.premises.values())
@@ -512,22 +512,22 @@ class ReasonCore:
             raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
-        self.context = rebuild_way(self.context, old_way, new_way)
+        self.rcontext = rebuild_way(self.rcontext, old_way, new_way)
         self.premises = find_replace_way_key_dict(
             dict_x=self.premises, old_way=old_way, new_way=new_way
         )
 
 
 def reasoncore_shop(
-    context: WayStr,
+    rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    context_idea_active_requisite: bool = None,
+    rcontext_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonCore(
-        context=context,
+        rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        context_idea_active_requisite=context_idea_active_requisite,
+        rcontext_idea_active_requisite=rcontext_idea_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -539,24 +539,26 @@ class ReasonUnit(ReasonCore):
             premise_way: premise.get_dict()
             for premise_way, premise in self.premises.items()
         }
-        x_dict = {"context": self.context}
+        x_dict = {"rcontext": self.rcontext}
         if premises_dict != {}:
             x_dict["premises"] = premises_dict
-        if self.context_idea_active_requisite is not None:
-            x_dict["context_idea_active_requisite"] = self.context_idea_active_requisite
+        if self.rcontext_idea_active_requisite is not None:
+            x_dict["rcontext_idea_active_requisite"] = (
+                self.rcontext_idea_active_requisite
+            )
         return x_dict
 
 
 def reasonunit_shop(
-    context: WayStr,
+    rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    context_idea_active_requisite: bool = None,
+    rcontext_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonUnit(
-        context=context,
+        rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        context_idea_active_requisite=context_idea_active_requisite,
+        rcontext_idea_active_requisite=rcontext_idea_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -565,7 +567,7 @@ def reasonunit_shop(
 class ReasonHeir(ReasonCore):
     _status: bool = None
     _task: bool = None
-    _context_idea_active_value: bool = None
+    _rcontext_idea_active_value: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
         x_premises = {}
@@ -588,21 +590,21 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_context_fact(self, factheirs: dict[WayStr, FactHeir]) -> FactHeir:
-        context_fact = None
+    def _get_fcontext(self, factheirs: dict[WayStr, FactHeir]) -> FactHeir:
+        fcontext = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
-            if self.context == y_factheir.fcontext:
-                context_fact = y_factheir
-        return context_fact
+            if self.rcontext == y_factheir.fcontext:
+                fcontext = y_factheir
+        return fcontext
 
-    def set_context_idea_active_value(self, bool_x: bool):
-        self._context_idea_active_value = bool_x
+    def set_rcontext_idea_active_value(self, bool_x: bool):
+        self._rcontext_idea_active_value = bool_x
 
-    def is_context_idea_active_requisite_operational(self) -> bool:
+    def is_rcontext_idea_active_requisite_operational(self) -> bool:
         return (
-            self._context_idea_active_value is not None
-            and self._context_idea_active_value == self.context_idea_active_requisite
+            self._rcontext_idea_active_value is not None
+            and self._rcontext_idea_active_value == self.rcontext_idea_active_requisite
         )
 
     def is_any_premise_true(self) -> tuple[bool, bool]:
@@ -617,7 +619,7 @@ class ReasonHeir(ReasonCore):
 
     def _set_attr_status(self, any_premise_true: bool):
         self._status = (
-            any_premise_true or self.is_context_idea_active_requisite_operational()
+            any_premise_true or self.is_rcontext_idea_active_requisite_operational()
         )
 
     def _set_attr_task(self, any_task_true: bool):
@@ -627,28 +629,28 @@ class ReasonHeir(ReasonCore):
 
     def set_status(self, factheirs: dict[WayStr, FactHeir]):
         self.clear_status()
-        self._set_premise_status(self._get_context_fact(factheirs))
+        self._set_premise_status(self._get_fcontext(factheirs))
         any_premise_true, any_task_true = self.is_any_premise_true()
         self._set_attr_status(any_premise_true)
         self._set_attr_task(any_task_true)
 
 
 def reasonheir_shop(
-    context: WayStr,
+    rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    context_idea_active_requisite: bool = None,
+    rcontext_idea_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
-    _context_idea_active_value: bool = None,
+    _rcontext_idea_active_value: bool = None,
     bridge: str = None,
 ):
     return ReasonHeir(
-        context=context,
+        rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        context_idea_active_requisite=context_idea_active_requisite,
+        rcontext_idea_active_requisite=rcontext_idea_active_requisite,
         _status=_status,
         _task=_task,
-        _context_idea_active_value=_context_idea_active_value,
+        _rcontext_idea_active_value=_rcontext_idea_active_value,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -657,14 +659,14 @@ def reasonheir_shop(
 def reasons_get_from_dict(reasons_dict: dict) -> dict[WayStr, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
-        x_reasonunit = reasonunit_shop(context=reason_dict["context"])
+        x_reasonunit = reasonunit_shop(rcontext=reason_dict["rcontext"])
         if reason_dict.get("premises") is not None:
             x_reasonunit.premises = premises_get_from_dict(
                 x_dict=reason_dict["premises"]
             )
-        if reason_dict.get("context_idea_active_requisite") is not None:
-            x_reasonunit.context_idea_active_requisite = reason_dict.get(
-                "context_idea_active_requisite"
+        if reason_dict.get("rcontext_idea_active_requisite") is not None:
+            x_reasonunit.rcontext_idea_active_requisite = reason_dict.get(
+                "rcontext_idea_active_requisite"
             )
-        x_dict[x_reasonunit.context] = x_reasonunit
+        x_dict[x_reasonunit.rcontext] = x_reasonunit
     return x_dict

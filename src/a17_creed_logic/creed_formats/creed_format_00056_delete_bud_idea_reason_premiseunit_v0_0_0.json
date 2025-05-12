@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "context": {
+        "rcontext": {
             "otx_key": true
         },
         "event_int": {

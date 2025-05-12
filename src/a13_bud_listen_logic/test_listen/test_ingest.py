@@ -44,7 +44,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
     yao_speaker.set_idea(ideaunit_shop(dirty_str), status_way)
     yao_speaker.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
     yao_speaker.edit_idea_attr(
-        sweep_way, reason_context=status_way, reason_premise=dirty_way
+        sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
     yao_speaker.add_fact(status_way, clean_way)
     assert len(yao_speaker.get_agenda_dict()) == 0

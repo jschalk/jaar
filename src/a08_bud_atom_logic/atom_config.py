@@ -64,8 +64,8 @@ def get_atom_args_class_types() -> dict[str, str]:
         "acct_name": "NameStr",
         "addin": "float",
         "awardee_label": "LabelStr",
-        "context": "WayStr",
-        "context_idea_active_requisite": "bool",
+        "rcontext": "WayStr",
+        "rcontext_idea_active_requisite": "bool",
         "begin": "float",
         "close": "float",
         "credit_belief": "float",
@@ -243,7 +243,7 @@ def get_all_bud_dimen_keys() -> set:
     return {
         "acct_name",
         "awardee_label",
-        "context",
+        "rcontext",
         "fcontext",
         "group_label",
         "healer_name",
@@ -262,7 +262,7 @@ def get_all_bud_dimen_delete_keys() -> set:
     return {
         "acct_name_ERASE",
         "awardee_label_ERASE",
-        "context_ERASE",
+        "rcontext_ERASE",
         "fcontext_ERASE",
         "group_label_ERASE",
         "healer_name_ERASE",

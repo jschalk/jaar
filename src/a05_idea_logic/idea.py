@@ -97,14 +97,14 @@ class IdeaAttrHolder:
     mass: int = None
     uid: int = None
     reason: ReasonUnit = None
-    reason_context: WayStr = None
+    reason_rcontext: WayStr = None
     reason_premise: WayStr = None
     reason_premise_open: float = None
     reason_premise_nigh: float = None
     reason_premise_divisor: int = None
-    reason_del_premise_context: WayStr = None
+    reason_del_premise_rcontext: WayStr = None
     reason_del_premise_rbranch: WayStr = None
-    reason_context_idea_active_requisite: str = None
+    reason_rcontext_idea_active_requisite: str = None
     teamunit: TeamUnit = None
     healerlink: HealerLink = None
     begin: float = None
@@ -144,14 +144,14 @@ def ideaattrholder_shop(
     mass: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
-    reason_context: WayStr = None,
+    reason_rcontext: WayStr = None,
     reason_premise: WayStr = None,
     reason_premise_open: float = None,
     reason_premise_nigh: float = None,
     reason_premise_divisor: int = None,
-    reason_del_premise_context: WayStr = None,
+    reason_del_premise_rcontext: WayStr = None,
     reason_del_premise_rbranch: WayStr = None,
-    reason_context_idea_active_requisite: str = None,
+    reason_rcontext_idea_active_requisite: str = None,
     teamunit: TeamUnit = None,
     healerlink: HealerLink = None,
     begin: float = None,
@@ -176,14 +176,14 @@ def ideaattrholder_shop(
         mass=mass,
         uid=uid,
         reason=reason,
-        reason_context=reason_context,
+        reason_rcontext=reason_rcontext,
         reason_premise=reason_premise,
         reason_premise_open=reason_premise_open,
         reason_premise_nigh=reason_premise_nigh,
         reason_premise_divisor=reason_premise_divisor,
-        reason_del_premise_context=reason_del_premise_context,
+        reason_del_premise_rcontext=reason_del_premise_rcontext,
         reason_del_premise_rbranch=reason_del_premise_rbranch,
-        reason_context_idea_active_requisite=reason_context_idea_active_requisite,
+        reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
         teamunit=teamunit,
         healerlink=healerlink,
         begin=begin,
@@ -255,15 +255,15 @@ class IdeaUnit:
     _gogo_calc: float = None
     _stop_calc: float = None
 
-    def is_agenda_idea(self, necessary_context: WayStr = None) -> bool:
-        context_reasonunit_exists = self.context_reasonunit_exists(necessary_context)
-        return self.pledge and self._active and context_reasonunit_exists
+    def is_agenda_idea(self, necessary_rcontext: WayStr = None) -> bool:
+        rcontext_reasonunit_exists = self.rcontext_reasonunit_exists(necessary_rcontext)
+        return self.pledge and self._active and rcontext_reasonunit_exists
 
-    def context_reasonunit_exists(self, necessary_context: WayStr = None) -> bool:
+    def rcontext_reasonunit_exists(self, necessary_rcontext: WayStr = None) -> bool:
         x_reasons = self.reasonunits.values()
-        x_context = necessary_context
-        return x_context is None or any(
-            reason.context == x_context for reason in x_reasons
+        x_rcontext = necessary_rcontext
+        return x_rcontext is None or any(
+            reason.rcontext == x_rcontext for reason in x_reasons
         )
 
     def record_active_hx(
@@ -326,17 +326,17 @@ class IdeaUnit:
     def get_factunits_dict(self) -> dict[WayStr, str]:
         return get_dict_from_factunits(self.factunits)
 
-    def set_factunit_to_complete(self, context_factunit: FactUnit):
+    def set_factunit_to_complete(self, fcontextunit: FactUnit):
         # if a idea is considered a task then a factheir.fopen attribute can be increased to
         # a number <= factheir.fnigh so the idea no longer is a task. This method finds
         # the minimal factheir.fopen to modify idea._task is False. idea_core._factheir cannot be straight up manipulated
         # so it is mandatory that idea._factunit is different.
-        # self.set_factunits(context=fact, fact=context, open=premise_nigh, nigh=fact_nigh)
-        self.factunits[context_factunit.fcontext] = factunit_shop(
-            fcontext=context_factunit.fcontext,
-            fbranch=context_factunit.fcontext,
-            fopen=context_factunit.fnigh,
-            fnigh=context_factunit.fnigh,
+        # self.set_factunits(rcontext=fact, fact=rcontext, open=premise_nigh, nigh=fact_nigh)
+        self.factunits[fcontextunit.fcontext] = factunit_shop(
+            fcontext=fcontextunit.fcontext,
+            fbranch=fcontextunit.fcontext,
+            fopen=fcontextunit.fnigh,
+            fnigh=fcontextunit.fnigh,
         )
 
     def del_factunit(self, fcontext: WayStr):
@@ -531,19 +531,19 @@ class IdeaUnit:
 
         new_factunits = {}
         for factunit_way, x_factunit in self.factunits.items():
-            new_context_way = replace_bridge(
+            new_rcontext_way = replace_bridge(
                 way=factunit_way,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            x_factunit.fcontext = new_context_way
+            x_factunit.fcontext = new_rcontext_way
             new_fbranch_way = replace_bridge(
                 way=x_factunit.fbranch,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
             x_factunit.set_attr(fbranch=new_fbranch_way)
-            new_factunits[new_context_way] = x_factunit
+            new_factunits[new_rcontext_way] = x_factunit
         self.factunits = new_factunits
 
     def set_originunit_empty_if_None(self):
@@ -561,23 +561,23 @@ class IdeaUnit:
         if idea_attr.reason is not None:
             self.set_reasonunit(reason=idea_attr.reason)
         if (
-            idea_attr.reason_context is not None
+            idea_attr.reason_rcontext is not None
             and idea_attr.reason_premise is not None
         ):
             self.set_reason_premise(
-                context=idea_attr.reason_context,
+                rcontext=idea_attr.reason_rcontext,
                 premise=idea_attr.reason_premise,
                 open=idea_attr.reason_premise_open,
                 nigh=idea_attr.reason_premise_nigh,
                 divisor=idea_attr.reason_premise_divisor,
             )
         if (
-            idea_attr.reason_context is not None
-            and idea_attr.reason_context_idea_active_requisite is not None
+            idea_attr.reason_rcontext is not None
+            and idea_attr.reason_rcontext_idea_active_requisite is not None
         ):
-            self.set_reason_context_idea_active_requisite(
-                context=idea_attr.reason_context,
-                context_idea_active_requisite=idea_attr.reason_context_idea_active_requisite,
+            self.set_reason_rcontext_idea_active_requisite(
+                rcontext=idea_attr.reason_rcontext,
+                rcontext_idea_active_requisite=idea_attr.reason_rcontext_idea_active_requisite,
             )
         if idea_attr.teamunit is not None:
             self.teamunit = idea_attr.teamunit
@@ -619,7 +619,7 @@ class IdeaUnit:
             self.problem_bool = idea_attr.problem_bool
 
         self._del_reasonunit_all_cases(
-            context=idea_attr.reason_del_premise_context,
+            rcontext=idea_attr.reason_del_premise_rcontext,
             premise=idea_attr.reason_del_premise_rbranch,
         )
         self._set_addin_to_zero_if_any_moldations_exist()
@@ -667,51 +667,51 @@ class IdeaUnit:
             self._stop_calc = (self._stop_calc * r_idea_numor) / r_idea_denom
         self._range_evaluated = True
 
-    def _del_reasonunit_all_cases(self, context: WayStr, premise: WayStr):
-        if context is not None and premise is not None:
-            self.del_reasonunit_premise(context=context, premise=premise)
-            if len(self.reasonunits[context].premises) == 0:
-                self.del_reasonunit_context(context=context)
+    def _del_reasonunit_all_cases(self, rcontext: WayStr, premise: WayStr):
+        if rcontext is not None and premise is not None:
+            self.del_reasonunit_premise(rcontext=rcontext, premise=premise)
+            if len(self.reasonunits[rcontext].premises) == 0:
+                self.del_reasonunit_rcontext(rcontext=rcontext)
 
-    def set_reason_context_idea_active_requisite(
-        self, context: WayStr, context_idea_active_requisite: str
+    def set_reason_rcontext_idea_active_requisite(
+        self, rcontext: WayStr, rcontext_idea_active_requisite: str
     ):
-        x_reasonunit = self._get_or_create_reasonunit(context=context)
-        if context_idea_active_requisite is False:
-            x_reasonunit.context_idea_active_requisite = False
-        elif context_idea_active_requisite == "Set to Ignore":
-            x_reasonunit.context_idea_active_requisite = None
-        elif context_idea_active_requisite:
-            x_reasonunit.context_idea_active_requisite = True
+        x_reasonunit = self._get_or_create_reasonunit(rcontext=rcontext)
+        if rcontext_idea_active_requisite is False:
+            x_reasonunit.rcontext_idea_active_requisite = False
+        elif rcontext_idea_active_requisite == "Set to Ignore":
+            x_reasonunit.rcontext_idea_active_requisite = None
+        elif rcontext_idea_active_requisite:
+            x_reasonunit.rcontext_idea_active_requisite = True
 
-    def _get_or_create_reasonunit(self, context: WayStr) -> ReasonUnit:
+    def _get_or_create_reasonunit(self, rcontext: WayStr) -> ReasonUnit:
         x_reasonunit = None
         try:
-            x_reasonunit = self.reasonunits[context]
+            x_reasonunit = self.reasonunits[rcontext]
         except Exception:
-            x_reasonunit = reasonunit_shop(context, bridge=self.bridge)
-            self.reasonunits[context] = x_reasonunit
+            x_reasonunit = reasonunit_shop(rcontext, bridge=self.bridge)
+            self.reasonunits[rcontext] = x_reasonunit
         return x_reasonunit
 
     def set_reason_premise(
         self,
-        context: WayStr,
+        rcontext: WayStr,
         premise: WayStr,
         open: float,
         nigh: float,
         divisor: int,
     ):
-        x_reasonunit = self._get_or_create_reasonunit(context=context)
+        x_reasonunit = self._get_or_create_reasonunit(rcontext=rcontext)
         x_reasonunit.set_premise(premise=premise, open=open, nigh=nigh, divisor=divisor)
 
-    def del_reasonunit_context(self, context: WayStr):
+    def del_reasonunit_rcontext(self, rcontext: WayStr):
         try:
-            self.reasonunits.pop(context)
+            self.reasonunits.pop(rcontext)
         except KeyError as e:
-            raise InvalidIdeaException(f"No ReasonUnit at '{context}'") from e
+            raise InvalidIdeaException(f"No ReasonUnit at '{rcontext}'") from e
 
-    def del_reasonunit_premise(self, context: WayStr, premise: WayStr):
-        reason_unit = self.reasonunits[context]
+    def del_reasonunit_premise(self, rcontext: WayStr, premise: WayStr):
+        reason_unit = self.reasonunits[rcontext]
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, idea_kid):
@@ -755,13 +755,13 @@ class IdeaUnit:
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.bridge = self.bridge
-        self.reasonunits[reason.context] = reason
+        self.reasonunits[reason.rcontext] = reason
 
-    def reasonunit_exists(self, x_context: WayStr) -> bool:
-        return self.reasonunits.get(x_context) != None
+    def reasonunit_exists(self, x_rcontext: WayStr) -> bool:
+        return self.reasonunits.get(x_rcontext) != None
 
-    def get_reasonunit(self, context: WayStr) -> ReasonUnit:
-        return self.reasonunits.get(context)
+    def get_reasonunit(self, rcontext: WayStr) -> ReasonUnit:
+        return self.reasonunits.get(rcontext)
 
     def set_reasonheirs_status(self):
         self.clear_reasonheirs_status()
@@ -809,15 +809,15 @@ class IdeaUnit:
     def set_range_factheirs(
         self, bud_idea_dict: dict[WayStr,], range_inheritors: dict[WayStr, WayStr]
     ):
-        for reason_context in self._reasonheirs.keys():
-            if range_root_way := range_inheritors.get(reason_context):
+        for reason_rcontext in self._reasonheirs.keys():
+            if range_root_way := range_inheritors.get(reason_rcontext):
                 all_ideas = all_ideas_between(
-                    bud_idea_dict, range_root_way, reason_context
+                    bud_idea_dict, range_root_way, reason_rcontext
                 )
-                self._create_factheir(all_ideas, range_root_way, reason_context)
+                self._create_factheir(all_ideas, range_root_way, reason_rcontext)
 
     def _create_factheir(
-        self, all_ideas: list, range_root_way: WayStr, reason_context: WayStr
+        self, all_ideas: list, range_root_way: WayStr, reason_rcontext: WayStr
     ):
         range_root_factheir = self._factheirs.get(range_root_way)
         old_open = range_root_factheir.fopen
@@ -825,8 +825,8 @@ class IdeaUnit:
         x_rangeunit = ideas_calculated_range(all_ideas, old_open, old_nigh)
         new_factheir_open = x_rangeunit.gogo
         new_factheir_nigh = x_rangeunit.stop
-        new_factheir_obj = factheir_shop(reason_context)
-        new_factheir_obj.set_attr(reason_context, new_factheir_open, new_factheir_nigh)
+        new_factheir_obj = factheir_shop(reason_rcontext)
+        new_factheir_obj.set_attr(reason_rcontext, new_factheir_open, new_factheir_nigh)
         self._set_factheir(new_factheir_obj)
 
     def _are_all_reasonheir_active_true(self) -> bool:
@@ -850,28 +850,28 @@ class IdeaUnit:
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self._reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
-            old_context = old_reasonheir.context
-            old_active_requisite = old_reasonheir.context_idea_active_requisite
-            new_reasonheir = reasonheir_shop(old_context, None, old_active_requisite)
+            old_rcontext = old_reasonheir.rcontext
+            old_active_requisite = old_reasonheir.rcontext_idea_active_requisite
+            new_reasonheir = reasonheir_shop(old_rcontext, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if context_idea := bud_idea_dict.get(old_reasonheir.context):
-                new_reasonheir.set_context_idea_active_value(context_idea._active)
-            self._reasonheirs[new_reasonheir.context] = new_reasonheir
+            if rcontext_idea := bud_idea_dict.get(old_reasonheir.rcontext):
+                new_reasonheir.set_rcontext_idea_active_value(rcontext_idea._active)
+            self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
     def set_idearoot_inherit_reasonheirs(self):
         self._reasonheirs = {}
         for x_reasonunit in self.reasonunits.values():
-            new_reasonheir = reasonheir_shop(x_reasonunit.context)
+            new_reasonheir = reasonheir_shop(x_reasonunit.rcontext)
             new_reasonheir.inherit_from_reasonheir(x_reasonunit)
-            self._reasonheirs[new_reasonheir.context] = new_reasonheir
+            self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
-    def get_reasonheir(self, context: WayStr) -> ReasonHeir:
-        return self._reasonheirs.get(context)
+    def get_reasonheir(self, rcontext: WayStr) -> ReasonHeir:
+        return self._reasonheirs.get(rcontext)
 
     def get_reasonunits_dict(self):
         return {
-            context: reason.get_dict() for context, reason in self.reasonunits.items()
+            rcontext: reason.get_dict() for rcontext, reason in self.reasonunits.items()
         }
 
     def get_kids_dict(self) -> dict[GroupLabel,]:
@@ -1118,9 +1118,9 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_ideas_between(
-    bud_idea_dict: dict[WayStr, IdeaUnit], src_way: WayStr, dst_context: WayStr
+    bud_idea_dict: dict[WayStr, IdeaUnit], src_way: WayStr, dst_rcontext: WayStr
 ) -> list[IdeaUnit]:
-    all_ways = all_waystrs_between(src_way, dst_context)
+    all_ways = all_waystrs_between(src_way, dst_rcontext)
     return [bud_idea_dict.get(x_way) for x_way in all_ways]
 
 

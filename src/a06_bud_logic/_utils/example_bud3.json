@@ -598,7 +598,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -608,7 +608,7 @@
                     }
                   },
                   ";accord45;year_month": {
-                    "context": ";accord45;year_month",
+                    "rcontext": ";accord45;year_month",
                     "premises": {
                       ";accord45;year_month;September": {
                         "divisor": 12,
@@ -629,7 +629,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -639,7 +639,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -664,7 +664,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -674,7 +674,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -701,7 +701,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -711,7 +711,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -751,7 +751,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -761,7 +761,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -788,7 +788,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -798,7 +798,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -825,7 +825,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -835,7 +835,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -860,7 +860,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -870,7 +870,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
@@ -905,7 +905,7 @@
                         "pledge": true,
                         "reasonunits": {
                           ";accord45;day_minute": {
-                            "context": ";accord45;day_minute",
+                            "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
                                 "rbranch": ";accord45;day_minute",
@@ -945,7 +945,7 @@
                         "pledge": true,
                         "reasonunits": {
                           ";accord45;day_minute": {
-                            "context": ";accord45;day_minute",
+                            "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
                                 "rbranch": ";accord45;day_minute",
@@ -962,7 +962,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -980,7 +980,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -999,7 +999,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -1016,7 +1016,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1036,7 +1036,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -1054,7 +1054,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -1074,7 +1074,7 @@
                         "pledge": true,
                         "reasonunits": {
                           ";accord45;day_minute": {
-                            "context": ";accord45;day_minute",
+                            "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
                                 "rbranch": ";accord45;day_minute",
@@ -1114,7 +1114,7 @@
                         "pledge": true,
                         "reasonunits": {
                           ";accord45;day_minute": {
-                            "context": ";accord45;day_minute",
+                            "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
                                 "rbranch": ";accord45;day_minute",
@@ -1132,7 +1132,7 @@
                         "pledge": true,
                         "reasonunits": {
                           ";accord45;day_minute": {
-                            "context": ";accord45;day_minute",
+                            "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
                                 "rbranch": ";accord45;day_minute",
@@ -1154,7 +1154,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -1172,7 +1172,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -1191,7 +1191,7 @@
                         "mass": 1,
                         "reasonunits": {
                           ";accord45;day_minute": {
-                            "context": ";accord45;day_minute",
+                            "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
                                 "rbranch": ";accord45;day_minute",
@@ -1208,7 +1208,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -1226,7 +1226,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1243,7 +1243,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;day_minute": {
-                "context": ";accord45;day_minute",
+                "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
                     "rbranch": ";accord45;day_minute",
@@ -1277,7 +1277,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
-                                "context": ";accord45;Nation-States",
+                                "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace": {
                                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace"
@@ -1292,7 +1292,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
-                                "context": ";accord45;Nation-States",
+                                "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1309,7 +1309,7 @@
                                 "mass": 1,
                                 "reasonunits": {
                                   ";accord45;Interweb": {
-                                    "context": ";accord45;Interweb",
+                                    "rcontext": ";accord45;Interweb",
                                     "premises": {
                                       ";accord45;Interweb;YahooVideo": {
                                         "rbranch": ";accord45;Interweb;YahooVideo"
@@ -1324,7 +1324,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
-                                "context": ";accord45;Nation-States",
+                                "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden": {
                                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden"
@@ -1339,7 +1339,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Moods": {
-                                "context": ";accord45;Moods",
+                                "rcontext": ";accord45;Moods",
                                 "premises": {
                                   ";accord45;Moods;hungry": {
                                     "rbranch": ";accord45;Moods;hungry"
@@ -1354,7 +1354,7 @@
                         "mass": 1,
                         "reasonunits": {
                           ";accord45;Nation-States": {
-                            "context": ";accord45;Nation-States",
+                            "rcontext": ";accord45;Nation-States",
                             "premises": {
                               ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt": {
                                 "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt"
@@ -1371,7 +1371,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
-                                "context": ";accord45;Nation-States",
+                                "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library": {
                                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library"
@@ -1386,7 +1386,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Seasons": {
-                                "context": ";accord45;Seasons",
+                                "rcontext": ";accord45;Seasons",
                                 "premises": {
                                   ";accord45;Seasons;Summer": {
                                     "rbranch": ";accord45;Seasons;Summer"
@@ -1401,7 +1401,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
-                                "context": ";accord45;Nation-States",
+                                "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field": {
                                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
@@ -1416,7 +1416,7 @@
                             "mass": 1,
                             "reasonunits": {
                               ";accord45;Nation-States": {
-                                "context": ";accord45;Nation-States",
+                                "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool": {
                                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"
@@ -1431,7 +1431,7 @@
                         "mass": 1,
                         "reasonunits": {
                           ";accord45;Nation-States": {
-                            "context": ";accord45;Nation-States",
+                            "rcontext": ";accord45;Nation-States",
                             "premises": {
                               ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU": {
                                 "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU"
@@ -1446,7 +1446,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;Nation-States": {
-                        "context": ";accord45;Nation-States",
+                        "rcontext": ";accord45;Nation-States",
                         "premises": {
                           ";accord45;Nation-States;USA;Portland; OR;Downtown": {
                             "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown"
@@ -1461,7 +1461,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
                         "rbranch": ";accord45;Nation-States;USA;Portland OR"
@@ -1476,7 +1476,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Texas": {
                         "rbranch": ";accord45;Nation-States;USA;Texas"
@@ -1491,7 +1491,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
-                "context": ";accord45;Nation-States",
+                "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;USA": {
                     "rbranch": ";accord45;Nation-States;USA"
@@ -1506,7 +1506,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
-                "context": ";accord45;Nation-States",
+                "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;France2": {
                     "rbranch": ";accord45;Nation-States;France2"
@@ -1554,7 +1554,7 @@
             "pledge": true,
             "reasonunits": {
               ";accord45;day_minute": {
-                "context": ";accord45;day_minute",
+                "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
                     "rbranch": ";accord45;day_minute",
@@ -1564,7 +1564,7 @@
                 }
               },
               ";accord45;year_month": {
-                "context": ";accord45;year_month",
+                "rcontext": ";accord45;year_month",
                 "premises": {
                   ";accord45;year_month": {
                     "divisor": 3,
@@ -1582,7 +1582,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Moods": {
-                "context": ";accord45;Moods",
+                "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Happy,Happy - angerish": {
                     "rbranch": ";accord45;Moods;Happy,Happy - angerish"
@@ -1608,7 +1608,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1618,7 +1618,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1626,7 +1626,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Sunday": {
                         "rbranch": ";accord45;weekdays;Sunday"
@@ -1642,7 +1642,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1652,7 +1652,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1675,7 +1675,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1685,7 +1685,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1693,7 +1693,7 @@
                     }
                   },
                   ";accord45;year_month": {
-                    "context": ";accord45;year_month",
+                    "rcontext": ";accord45;year_month",
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 3,
@@ -1719,7 +1719,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1729,7 +1729,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1752,7 +1752,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1762,7 +1762,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1770,7 +1770,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -1793,7 +1793,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1803,7 +1803,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1811,7 +1811,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -1834,7 +1834,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;ced_week": {
-                    "context": ";accord45;ced_week",
+                    "rcontext": ";accord45;ced_week",
                     "premises": {
                       ";accord45;ced_week": {
                         "divisor": 6,
@@ -1845,7 +1845,7 @@
                     }
                   },
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1855,7 +1855,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1863,7 +1863,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -1886,7 +1886,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1896,7 +1896,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1904,7 +1904,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -1927,7 +1927,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1937,7 +1937,7 @@
                     }
                   },
                   ";accord45;month_week": {
-                    "context": ";accord45;month_week",
+                    "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
                         "rbranch": ";accord45;month_week;1st week"
@@ -1945,7 +1945,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1953,7 +1953,7 @@
                     }
                   },
                   ";accord45;year_month": {
-                    "context": ";accord45;year_month",
+                    "rcontext": ";accord45;year_month",
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 2,
@@ -1979,7 +1979,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -1989,7 +1989,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -1997,7 +1997,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
                         "rbranch": ";accord45;weekdays;Friday"
@@ -2020,7 +2020,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2030,7 +2030,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2038,7 +2038,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
                         "rbranch": ";accord45;weekdays;Friday"
@@ -2061,7 +2061,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2071,7 +2071,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2079,7 +2079,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -2102,7 +2102,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2112,7 +2112,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2120,7 +2120,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Saturday": {
                         "rbranch": ";accord45;weekdays;Saturday"
@@ -2143,7 +2143,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2153,7 +2153,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2161,7 +2161,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Wednesday": {
                         "rbranch": ";accord45;weekdays;Wednesday"
@@ -2176,7 +2176,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2186,7 +2186,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2209,7 +2209,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2219,7 +2219,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2242,7 +2242,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2252,7 +2252,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2260,7 +2260,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Tuesday": {
                         "rbranch": ";accord45;weekdays;Tuesday"
@@ -2283,7 +2283,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2293,7 +2293,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2301,7 +2301,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
                         "rbranch": ";accord45;weekdays;Friday"
@@ -2324,7 +2324,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2334,7 +2334,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2342,7 +2342,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -2365,7 +2365,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2375,7 +2375,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2383,7 +2383,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Thursday": {
                         "rbranch": ";accord45;weekdays;Thursday"
@@ -2406,7 +2406,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2416,7 +2416,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2424,7 +2424,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -2447,7 +2447,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2457,7 +2457,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                         "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2465,7 +2465,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -2480,7 +2480,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
-                "context": ";accord45;Nation-States",
+                "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
                     "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
@@ -2505,7 +2505,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2530,7 +2530,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2555,7 +2555,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2565,7 +2565,7 @@
                     }
                   },
                   ";accord45;year_month": {
-                    "context": ";accord45;year_month",
+                    "rcontext": ";accord45;year_month",
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 3,
@@ -2591,7 +2591,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2601,7 +2601,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -2624,7 +2624,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2644,7 +2644,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2669,7 +2669,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2694,7 +2694,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2704,7 +2704,7 @@
                     }
                   },
                   ";accord45;year_month": {
-                    "context": ";accord45;year_month",
+                    "rcontext": ";accord45;year_month",
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 3,
@@ -2732,7 +2732,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2742,7 +2742,7 @@
                         }
                       },
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Saturday": {
                             "rbranch": ";accord45;weekdays;Saturday"
@@ -2780,7 +2780,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2790,7 +2790,7 @@
                         }
                       },
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Monday": {
                             "rbranch": ";accord45;weekdays;Monday"
@@ -2805,7 +2805,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2815,7 +2815,7 @@
                         }
                       },
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Friday": {
                             "rbranch": ";accord45;weekdays;Friday"
@@ -2838,7 +2838,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2848,7 +2848,7 @@
                         }
                       },
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Wednesday": {
                             "rbranch": ";accord45;weekdays;Wednesday"
@@ -2871,7 +2871,7 @@
                     "mass": 1,
                     "reasonunits": {
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Sunday": {
                             "rbranch": ";accord45;weekdays;Sunday"
@@ -2909,7 +2909,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2919,7 +2919,7 @@
                         }
                       },
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Tuesday": {
                             "rbranch": ";accord45;weekdays;Tuesday"
@@ -2942,7 +2942,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -2952,7 +2952,7 @@
                         }
                       },
                       ";accord45;weekdays": {
-                        "context": ";accord45;weekdays",
+                        "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Thursday": {
                             "rbranch": ";accord45;weekdays;Thursday"
@@ -2980,7 +2980,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -2997,7 +2997,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3022,7 +3022,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3032,7 +3032,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -3055,7 +3055,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3080,7 +3080,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3090,7 +3090,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -3121,7 +3121,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3131,7 +3131,7 @@
                     }
                   },
                   ";accord45;month_week": {
-                    "context": ";accord45;month_week",
+                    "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
                         "rbranch": ";accord45;month_week;1st week"
@@ -3154,7 +3154,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3164,7 +3164,7 @@
                     }
                   },
                   ";accord45;month_week": {
-                    "context": ";accord45;month_week",
+                    "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
                         "rbranch": ";accord45;month_week;1st week"
@@ -3187,7 +3187,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3197,7 +3197,7 @@
                     }
                   },
                   ";accord45;month_week": {
-                    "context": ";accord45;month_week",
+                    "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
                         "rbranch": ";accord45;month_week;1st week"
@@ -3220,7 +3220,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3230,7 +3230,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Tuesday": {
                         "rbranch": ";accord45;weekdays;Tuesday"
@@ -3371,7 +3371,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Interweb": {
-                "context": ";accord45;Interweb",
+                "rcontext": ";accord45;Interweb",
                 "premises": {
                   ";accord45;Interweb;Faaceboook": {
                     "rbranch": ";accord45;Interweb;Faaceboook"
@@ -3397,7 +3397,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;ced_week": {
-                    "context": ";accord45;ced_week",
+                    "rcontext": ";accord45;ced_week",
                     "premises": {
                       ";accord45;ced_week": {
                         "divisor": 2,
@@ -3408,7 +3408,7 @@
                     }
                   },
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3418,7 +3418,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
                         "rbranch": ";accord45;Nation-States;USA;Portland OR"
@@ -3426,7 +3426,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
                         "rbranch": ";accord45;weekdays;Friday"
@@ -3449,7 +3449,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3459,7 +3459,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
                         "rbranch": ";accord45;Nation-States;USA;Portland OR"
@@ -3467,7 +3467,7 @@
                     }
                   },
                   ";accord45;year_month": {
-                    "context": ";accord45;year_month",
+                    "rcontext": ";accord45;year_month",
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 2,
@@ -3486,7 +3486,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3496,7 +3496,7 @@
                     }
                   },
                   ";accord45;Nation-States": {
-                    "context": ";accord45;Nation-States",
+                    "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
                         "rbranch": ";accord45;Nation-States;USA;Portland OR"
@@ -3511,7 +3511,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Nation-States": {
-                "context": ";accord45;Nation-States",
+                "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;USA;Portland OR": {
                     "rbranch": ";accord45;Nation-States;USA;Portland OR"
@@ -3534,7 +3534,7 @@
             "pledge": true,
             "reasonunits": {
               ";accord45;day_minute": {
-                "context": ";accord45;day_minute",
+                "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
                     "rbranch": ";accord45;day_minute",
@@ -3544,7 +3544,7 @@
                 }
               },
               ";accord45;Moods": {
-                "context": ";accord45;Moods",
+                "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Bllod Meridan by Cormac": {
                     "rbranch": ";accord45;Moods;Bllod Meridan by Cormac"
@@ -3595,7 +3595,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
-                    "context": ";accord45;Aaron Donald objects effected by him",
+                    "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3617,7 +3617,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
-                "context": ";accord45;Aaron Donald objects effected by him",
+                "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3635,7 +3635,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
-                    "context": ";accord45;Aaron Donald objects effected by him",
+                    "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3643,7 +3643,7 @@
                     }
                   },
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3653,7 +3653,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
                         "rbranch": ";accord45;weekdays;Monday"
@@ -3675,7 +3675,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
-                "context": ";accord45;Aaron Donald objects effected by him",
+                "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3701,7 +3701,7 @@
                 "pledge": true,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
-                    "context": ";accord45;Aaron Donald objects effected by him",
+                    "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3709,7 +3709,7 @@
                     }
                   },
                   ";accord45;ced_week": {
-                    "context": ";accord45;ced_week",
+                    "rcontext": ";accord45;ced_week",
                     "premises": {
                       ";accord45;ced_week": {
                         "divisor": 2,
@@ -3720,7 +3720,7 @@
                     }
                   },
                   ";accord45;day_minute": {
-                    "context": ";accord45;day_minute",
+                    "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
                         "rbranch": ";accord45;day_minute",
@@ -3730,7 +3730,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
                         "rbranch": ";accord45;weekdays;Friday"
@@ -3745,7 +3745,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
-                "context": ";accord45;Aaron Donald objects effected by him",
+                "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3761,7 +3761,7 @@
             "pledge": true,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
-                "context": ";accord45;Aaron Donald objects effected by him",
+                "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3789,7 +3789,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;Aaron Donald objects effected by him": {
-                        "context": ";accord45;Aaron Donald objects effected by him",
+                        "rcontext": ";accord45;Aaron Donald objects effected by him",
                         "premises": {
                           ";accord45;Aaron Donald objects effected by him;interesting": {
                             "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3797,7 +3797,7 @@
                         }
                       },
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -3827,7 +3827,7 @@
                     "pledge": true,
                     "reasonunits": {
                       ";accord45;Aaron Donald objects effected by him": {
-                        "context": ";accord45;Aaron Donald objects effected by him",
+                        "rcontext": ";accord45;Aaron Donald objects effected by him",
                         "premises": {
                           ";accord45;Aaron Donald objects effected by him;interesting": {
                             "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3835,7 +3835,7 @@
                         }
                       },
                       ";accord45;day_minute": {
-                        "context": ";accord45;day_minute",
+                        "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
                             "rbranch": ";accord45;day_minute",
@@ -3845,7 +3845,7 @@
                         }
                       },
                       ";accord45;year_month": {
-                        "context": ";accord45;year_month",
+                        "rcontext": ";accord45;year_month",
                         "premises": {
                           ";accord45;year_month": {
                             "divisor": 1,
@@ -3870,7 +3870,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
-                    "context": ";accord45;Aaron Donald objects effected by him",
+                    "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3885,7 +3885,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
-                "context": ";accord45;Aaron Donald objects effected by him",
+                "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3910,7 +3910,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Aaron Donald objects effected by him": {
-                    "context": ";accord45;Aaron Donald objects effected by him",
+                    "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3918,7 +3918,7 @@
                     }
                   },
                   ";accord45;weekdays": {
-                    "context": ";accord45;weekdays",
+                    "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
                         "rbranch": ";accord45;weekdays;Friday"
@@ -3933,7 +3933,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Aaron Donald objects effected by him": {
-                "context": ";accord45;Aaron Donald objects effected by him",
+                "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -3965,7 +3965,7 @@
         "mass": 1,
         "reasonunits": {
           ";accord45;Aaron Donald objects effected by him": {
-            "context": ";accord45;Aaron Donald objects effected by him",
+            "rcontext": ";accord45;Aaron Donald objects effected by him",
             "premises": {
               ";accord45;Aaron Donald objects effected by him;interesting": {
                 "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
@@ -4005,7 +4005,7 @@
             "pledge": true,
             "reasonunits": {
               ";accord45;day_minute": {
-                "context": ";accord45;day_minute",
+                "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
                     "rbranch": ";accord45;day_minute",
@@ -4015,7 +4015,7 @@
                 }
               },
               ";accord45;weekdays": {
-                "context": ";accord45;weekdays",
+                "rcontext": ";accord45;weekdays",
                 "premises": {
                   ";accord45;weekdays;Friday": {
                     "rbranch": ";accord45;weekdays;Friday"
@@ -4030,7 +4030,7 @@
         "mass": 1,
         "reasonunits": {
           ";accord45;day_minute": {
-            "context": ";accord45;day_minute",
+            "rcontext": ";accord45;day_minute",
             "premises": {
               ";accord45;day_minute": {
                 "rbranch": ";accord45;day_minute",
@@ -4297,7 +4297,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Moods": {
-                "context": ";accord45;Moods",
+                "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Happy": {
                     "rbranch": ";accord45;Moods;Happy"
@@ -4312,7 +4312,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;No Movie playing": {
-                "context": ";accord45;No Movie playing",
+                "rcontext": ";accord45;No Movie playing",
                 "premises": {
                   ";accord45;No Movie playing,Big Lewbwski": {
                     "rbranch": ";accord45;No Movie playing,Big Lewbwski"
@@ -4329,7 +4329,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;Moods": {
-                    "context": ";accord45;Moods",
+                    "rcontext": ";accord45;Moods",
                     "premises": {
                       ";accord45;Moods;Happy": {
                         "rbranch": ";accord45;Moods;Happy"
@@ -4344,7 +4344,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;Moods": {
-                "context": ";accord45;Moods",
+                "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Happy": {
                     "rbranch": ";accord45;Moods;Happy"
@@ -4359,7 +4359,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;No Movie playing": {
-                "context": ";accord45;No Movie playing",
+                "rcontext": ";accord45;No Movie playing",
                 "premises": {
                   ";accord45;No Movie playing,Star Wars eps IV": {
                     "rbranch": ";accord45;No Movie playing,Star Wars eps IV"
@@ -4374,7 +4374,7 @@
         "mass": 1,
         "reasonunits": {
           ";accord45;Moods": {
-            "context": ";accord45;Moods",
+            "rcontext": ";accord45;Moods",
             "premises": {
               ";accord45;Moods;Happy": {
                 "rbranch": ";accord45;Moods;Happy"
@@ -4394,7 +4394,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;WaterExistence": {
-                    "context": ";accord45;WaterExistence",
+                    "rcontext": ";accord45;WaterExistence",
                     "premises": {
                       ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
                         "rbranch": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
@@ -4409,7 +4409,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;WaterExistence": {
-                    "context": ";accord45;WaterExistence",
+                    "rcontext": ";accord45;WaterExistence",
                     "premises": {
                       ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed": {
                         "rbranch": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed"
@@ -4424,7 +4424,7 @@
                 "mass": 1,
                 "reasonunits": {
                   ";accord45;WaterExistence": {
-                    "context": ";accord45;WaterExistence",
+                    "rcontext": ";accord45;WaterExistence",
                     "premises": {
                       ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed": {
                         "rbranch": ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed"
@@ -4439,7 +4439,7 @@
             "mass": 1,
             "reasonunits": {
               ";accord45;WaterExistence": {
-                "context": ";accord45;WaterExistence",
+                "rcontext": ";accord45;WaterExistence",
                 "premises": {
                   ";accord45;WaterExistence,Williamette WaterShed": {
                     "rbranch": ";accord45;WaterExistence,Williamette WaterShed"

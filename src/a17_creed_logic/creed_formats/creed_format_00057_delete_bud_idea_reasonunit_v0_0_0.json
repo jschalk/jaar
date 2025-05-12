@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "context_ERASE": {
+        "rcontext_ERASE": {
             "otx_key": true
         },
         "event_int": {

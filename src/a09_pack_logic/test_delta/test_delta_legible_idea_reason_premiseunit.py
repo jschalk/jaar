@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_reason_premiseunit_str,
     idea_way_str,
-    context_str,
+    rcontext_str,
     rbranch_str,
     nigh_str,
     open_str,
@@ -20,11 +20,11 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNu
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    context_value = sue_bud.make_way(casa_way, "fridge status")
-    rbranch_value = sue_bud.make_way(context_value, "dirty")
+    rcontext_value = sue_bud.make_way(casa_way, "fridge status")
+    rbranch_value = sue_bud.make_way(rcontext_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(context_str(), context_value)
+    swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(rbranch_str(), rbranch_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -34,7 +34,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithOutNu
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{rbranch_value}' created for reason '{context_value}' for idea '{way_value}'."
+    x_str = f"PremiseUnit '{rbranch_value}' created for reason '{rcontext_value}' for idea '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -46,14 +46,14 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumbe
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    context_value = sue_bud.make_way(casa_way, "fridge status")
-    rbranch_value = sue_bud.make_way(context_value, "dirty")
+    rcontext_value = sue_bud.make_way(casa_way, "fridge status")
+    rbranch_value = sue_bud.make_way(rcontext_value, "dirty")
     divisor_value = 7
     nigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(context_str(), context_value)
+    swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(rbranch_str(), rbranch_value)
     swim_budatom.set_arg("divisor", divisor_value)
     swim_budatom.set_arg(nigh_str(), nigh_value)
@@ -66,7 +66,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumbe
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{rbranch_value}' created for reason '{context_value}' for idea '{way_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
+    x_str = f"PremiseUnit '{rbranch_value}' created for reason '{rcontext_value}' for idea '{way_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -78,11 +78,11 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNu
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    context_value = sue_bud.make_way(casa_way, "fridge status")
-    rbranch_value = sue_bud.make_way(context_value, "dirty")
+    rcontext_value = sue_bud.make_way(casa_way, "fridge status")
+    rbranch_value = sue_bud.make_way(rcontext_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(context_str(), context_value)
+    swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(rbranch_str(), rbranch_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -92,7 +92,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithOutNu
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{rbranch_value}' updated for reason '{context_value}' for idea '{way_value}'."
+    x_str = f"PremiseUnit '{rbranch_value}' updated for reason '{rcontext_value}' for idea '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -104,14 +104,14 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumbe
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    context_value = sue_bud.make_way(casa_way, "fridge status")
-    rbranch_value = sue_bud.make_way(context_value, "dirty")
+    rcontext_value = sue_bud.make_way(casa_way, "fridge status")
+    rbranch_value = sue_bud.make_way(rcontext_value, "dirty")
     divisor_value = 7
     nigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(context_str(), context_value)
+    swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(rbranch_str(), rbranch_value)
     swim_budatom.set_arg("divisor", divisor_value)
     swim_budatom.set_arg(nigh_str(), nigh_value)
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumbe
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{rbranch_value}' updated for reason '{context_value}' for idea '{way_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
+    x_str = f"PremiseUnit '{rbranch_value}' updated for reason '{rcontext_value}' for idea '{way_value}'. Open={open_value}. Nigh={nigh_value}. Divisor={divisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -136,11 +136,11 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_DELETE():
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    context_value = sue_bud.make_way(casa_way, "fridge status")
-    rbranch_value = sue_bud.make_way(context_value, "dirty")
+    rcontext_value = sue_bud.make_way(casa_way, "fridge status")
+    rbranch_value = sue_bud.make_way(rcontext_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_delete())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(context_str(), context_value)
+    swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(rbranch_str(), rbranch_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -150,6 +150,6 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_DELETE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{rbranch_value}' deleted from reason '{context_value}' for idea '{way_value}'."
+    x_str = f"PremiseUnit '{rbranch_value}' deleted from reason '{rcontext_value}' for idea '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

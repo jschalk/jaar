@@ -226,7 +226,7 @@ def get_bob_mop_with_reason_budunit_example() -> BudUnit:
     floor_way = bob_bud.make_way(casa_way, floor_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.edit_idea_attr(mop_way, reason_context=floor_way, reason_premise=dirty_way)
+    bob_bud.edit_idea_attr(mop_way, reason_rcontext=floor_way, reason_premise=dirty_way)
     return bob_bud
 
 
@@ -262,8 +262,12 @@ def get_yao_run_with_reason_budunit_example() -> BudUnit:
     yao_bud.add_idea(weather_way)
     yao_bud.add_idea(rain_way)
     yao_bud.add_idea(snow_way)
-    yao_bud.edit_idea_attr(ski_way, reason_context=weather_way, reason_premise=snow_way)
-    yao_bud.edit_idea_attr(run_way, reason_context=weather_way, reason_premise=rain_way)
+    yao_bud.edit_idea_attr(
+        ski_way, reason_rcontext=weather_way, reason_premise=snow_way
+    )
+    yao_bud.edit_idea_attr(
+        run_way, reason_rcontext=weather_way, reason_premise=rain_way
+    )
     return yao_bud
 
 

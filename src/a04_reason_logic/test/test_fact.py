@@ -192,7 +192,7 @@ def test_FactUnit_find_replace_way_SetsAttrCorrectly():
     assert sunday_fact.fbranch == new_sunday_way
 
 
-def test_FactUnit_get_tuple_ReturnsObj_Scenario0_context_fbranch_only():
+def test_FactUnit_get_tuple_ReturnsObj_Scenario0_rcontext_fbranch_only():
     # ESTABLISH
     weekday_str = "weekday"
     weekday_way = create_way(root_tag(), weekday_str)
@@ -226,7 +226,7 @@ def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
     assert sunday_tuple == (weekday_way, sunday_way, sun_fopen, sun_fnigh)
 
 
-def test_get_factunit_from_tuple_ReturnsObj_Scenario0_context_fbranch_only():
+def test_get_factunit_from_tuple_ReturnsObj_Scenario0_rcontext_fbranch_only():
     # ESTABLISH
     weekday_str = "weekday"
     weekday_way = create_way(root_tag(), weekday_str)

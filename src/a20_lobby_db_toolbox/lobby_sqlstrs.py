@@ -16,8 +16,8 @@ CREATE_JOB_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (wor
 CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_awardlink_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, awardee_label TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
 CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_factunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, fcontext TEXT, fbranch TEXT, fopen REAL, fnigh REAL)"""
 CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_healerlink_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name TEXT)"""
-CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, context TEXT, rbranch TEXT, nigh REAL, open REAL, divisor INTEGER, _task INTEGER, _status INTEGER)"""
-CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reasonunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, context TEXT, context_idea_active_requisite INTEGER, _task INTEGER, _status INTEGER, _context_idea_active_value INTEGER)"""
+CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, rbranch TEXT, nigh REAL, open REAL, divisor INTEGER, _task INTEGER, _status INTEGER)"""
+CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reasonunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, rcontext_idea_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rcontext_idea_active_value INTEGER)"""
 CREATE_JOB_BUDTEAM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_teamlink_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, team_label TEXT, _owner_name_team INTEGER)"""
 CREATE_JOB_BUDIDEA_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_ideaunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
 CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (world_id TEXT, fisc_tag TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
@@ -230,20 +230,20 @@ def create_budprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     fisc_tag = values_dict.get("fisc_tag")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("idea_way")
-    context = values_dict.get("context")
+    rcontext = values_dict.get("rcontext")
     rbranch = values_dict.get("rbranch")
     nigh = values_dict.get("nigh")
     open = values_dict.get("open")
     divisor = values_dict.get("divisor")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
-    return f"""INSERT INTO bud_idea_reason_premiseunit_job (world_id, fisc_tag, owner_name, idea_way, context, rbranch, nigh, open, divisor, _task, _status)
+    return f"""INSERT INTO bud_idea_reason_premiseunit_job (world_id, fisc_tag, owner_name, idea_way, rcontext, rbranch, nigh, open, divisor, _task, _status)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_tag, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
-, {sqlite_obj_str(context, "TEXT")}
+, {sqlite_obj_str(rcontext, "TEXT")}
 , {sqlite_obj_str(rbranch, "TEXT")}
 , {sqlite_obj_str(nigh, "REAL")}
 , {sqlite_obj_str(open, "REAL")}
@@ -260,22 +260,22 @@ def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     fisc_tag = values_dict.get("fisc_tag")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("idea_way")
-    context = values_dict.get("context")
-    context_idea_active_requisite = values_dict.get("context_idea_active_requisite")
+    rcontext = values_dict.get("rcontext")
+    rcontext_idea_active_requisite = values_dict.get("rcontext_idea_active_requisite")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
-    _context_idea_active_value = values_dict.get("_context_idea_active_value")
-    return f"""INSERT INTO bud_idea_reasonunit_job (world_id, fisc_tag, owner_name, idea_way, context, context_idea_active_requisite, _task, _status, _context_idea_active_value)
+    _rcontext_idea_active_value = values_dict.get("_rcontext_idea_active_value")
+    return f"""INSERT INTO bud_idea_reasonunit_job (world_id, fisc_tag, owner_name, idea_way, rcontext, rcontext_idea_active_requisite, _task, _status, _rcontext_idea_active_value)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_tag, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
-, {sqlite_obj_str(context, "TEXT")}
-, {sqlite_obj_str(context_idea_active_requisite, "INTEGER")}
+, {sqlite_obj_str(rcontext, "TEXT")}
+, {sqlite_obj_str(rcontext_idea_active_requisite, "INTEGER")}
 , {sqlite_obj_str(_task, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
-, {sqlite_obj_str(_context_idea_active_value, "INTEGER")}
+, {sqlite_obj_str(_rcontext_idea_active_value, "INTEGER")}
 )
 ;
 """

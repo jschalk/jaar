@@ -599,7 +599,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -623,7 +623,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -648,7 +648,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -671,7 +671,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;Sept 4th 2023 9am": {
                         "rbranch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
@@ -691,7 +691,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -716,7 +716,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -740,7 +740,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -765,7 +765,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -789,7 +789,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -824,7 +824,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "context": ";A;time;gregtime",
+                            "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -865,7 +865,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "context": ";A;time;gregtime",
+                            "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -883,7 +883,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -902,7 +902,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -921,7 +921,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -939,7 +939,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
                         "divisor": 1440,
@@ -960,7 +960,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -979,7 +979,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1000,7 +1000,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "context": ";A;time;gregtime",
+                            "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1041,7 +1041,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "context": ";A;time;gregtime",
+                            "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1060,7 +1060,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "context": ";A;time;gregtime",
+                            "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1083,7 +1083,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1102,7 +1102,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1122,7 +1122,7 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "context": ";A;time;gregtime",
+                            "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1140,7 +1140,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1160,7 +1160,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
                         "divisor": 1440.0,
@@ -1178,7 +1178,7 @@
             "mass": 1,
             "reasonunits": {
               "A;time;gregtime": {
-                "context": ";A;time;gregtime",
+                "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime;day": {
                     "divisor": 1440,
@@ -1212,7 +1212,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace": {
                                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
@@ -1229,7 +1229,7 @@
                                 "mass": 1,
                                 "reasonunits": {
                                   "A;Interweb": {
-                                    "context": ";A;Interweb",
+                                    "rcontext": ";A;Interweb",
                                     "premises": {
                                       "A;Interweb,YahooVideo": {
                                         "rbranch": ";A;Interweb,YahooVideo"
@@ -1244,7 +1244,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden": {
                                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden"
@@ -1259,7 +1259,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
                                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
@@ -1274,7 +1274,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Moods": {
-                                "context": ";A;Moods",
+                                "rcontext": ";A;Moods",
                                 "premises": {
                                   "A;Moods;hungry": {
                                     "rbranch": ";A;Moods;hungry"
@@ -1289,7 +1289,7 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
-                            "context": ";A;Nation-States",
+                            "rcontext": ";A;Nation-States",
                             "premises": {
                               "A;Nation-States;USA;Portland OR;Downtown;Flats": {
                                 "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
@@ -1306,7 +1306,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
                                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
@@ -1321,7 +1321,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Seasons": {
-                                "context": ";A;Seasons",
+                                "rcontext": ";A;Seasons",
                                 "premises": {
                                   "A;Seasons;Summer": {
                                     "rbranch": ";A;Seasons;Summer"
@@ -1336,7 +1336,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
                                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
@@ -1351,7 +1351,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
                                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
@@ -1366,7 +1366,7 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
-                            "context": ";A;Nation-States",
+                            "rcontext": ";A;Nation-States",
                             "premises": {
                               "A;Nation-States;USA;Portland OR;Downtown;PSU": {
                                 "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
@@ -1381,7 +1381,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;Nation-States": {
-                        "context": ";A;Nation-States",
+                        "rcontext": ";A;Nation-States",
                         "premises": {
                           "A;Nation-States;USA;Portland OR;Downtown": {
                             "rbranch": ";A;Nation-States;USA;Portland OR;Downtown"
@@ -1396,7 +1396,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "context": ";A;Nation-States",
+                    "rcontext": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Portland OR": {
                         "rbranch": ";A;Nation-States;USA;Portland OR"
@@ -1411,7 +1411,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "context": ";A;Nation-States",
+                    "rcontext": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Texas": {
                         "rbranch": ";A;Nation-States;USA;Texas"
@@ -1426,7 +1426,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "context": ";A;Nation-States",
+                "rcontext": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;USA": {
                     "rbranch": ";A;Nation-States;USA"
@@ -1441,7 +1441,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "context": ";A;Nation-States",
+                "rcontext": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;France2": {
                     "rbranch": ";A;Nation-States;France2"
@@ -1467,7 +1467,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "rbranch": ";A;time;gregtime",
@@ -1523,7 +1523,7 @@
             "pledge": true,
             "reasonunits": {
               "A;time;gregtime": {
-                "context": ";A;time;gregtime",
+                "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
                     "divisor": 10080.0,
@@ -1541,7 +1541,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
-                "context": ";A;Moods",
+                "rcontext": ";A;Moods",
                 "premises": {
                   "A;Moods;Happy;Happy - angerish": {
                     "rbranch": ";A;Moods;Happy;Happy - angerish"
@@ -1566,7 +1566,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1585,7 +1585,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -1611,7 +1611,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 60480.0,
@@ -1637,7 +1637,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -1664,7 +1664,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1690,7 +1690,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1716,7 +1716,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 30240.0,
@@ -1742,7 +1742,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1768,7 +1768,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 40320.0,
@@ -1794,7 +1794,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1820,7 +1820,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1863,7 +1863,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status": {
-                    "context": ";A;casa;cleaning;laundry basket status",
+                    "rcontext": ";A;casa;cleaning;laundry basket status",
                     "premises": {
                       "A;casa;cleaning;laundry basket status;full": {
                         "rbranch": ";A;casa;cleaning;laundry basket status;full"
@@ -1871,7 +1871,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1897,7 +1897,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status": {
-                    "context": ";A;casa;cleaning;laundry basket status",
+                    "rcontext": ";A;casa;cleaning;laundry basket status",
                     "premises": {
                       "A;casa;cleaning;laundry basket status;full": {
                         "rbranch": ";A;casa;cleaning;laundry basket status;full"
@@ -1905,7 +1905,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1924,7 +1924,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status": {
-                    "context": ";A;casa;cleaning;laundry basket status",
+                    "rcontext": ";A;casa;cleaning;laundry basket status",
                     "premises": {
                       "A;casa;cleaning;laundry basket status;full": {
                         "rbranch": ";A;casa;cleaning;laundry basket status;full"
@@ -1932,7 +1932,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1958,7 +1958,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status": {
-                    "context": ";A;casa;cleaning;laundry basket status",
+                    "rcontext": ";A;casa;cleaning;laundry basket status",
                     "premises": {
                       "A;casa;cleaning;laundry basket status;full": {
                         "rbranch": ";A;casa;cleaning;laundry basket status;full"
@@ -1966,7 +1966,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -1984,7 +1984,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2010,7 +2010,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2036,7 +2036,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2062,7 +2062,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2088,7 +2088,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2114,7 +2114,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2140,7 +2140,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2166,7 +2166,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2184,7 +2184,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "context": ";A;Nation-States",
+                "rcontext": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
                     "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
@@ -2210,7 +2210,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
                         "divisor": 1440,
@@ -2236,7 +2236,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2262,7 +2262,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 80640.0,
@@ -2288,7 +2288,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2314,7 +2314,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2340,7 +2340,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 80640.0,
@@ -2368,7 +2368,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2406,7 +2406,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2424,7 +2424,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2450,7 +2450,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2475,7 +2475,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2517,7 +2517,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2543,7 +2543,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2574,7 +2574,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2592,7 +2592,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2618,7 +2618,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2644,7 +2644,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 1440.0,
@@ -2666,7 +2666,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2685,7 +2685,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -2710,7 +2710,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2736,7 +2736,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -2770,7 +2770,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2795,7 +2795,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2820,7 +2820,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2845,7 +2845,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2987,7 +2987,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Interweb": {
-                "context": ";A;Interweb",
+                "rcontext": ";A;Interweb",
                 "premises": {
                   "A;Interweb,Faaceboook": {
                     "rbranch": ";A;Interweb,Faaceboook"
@@ -3013,7 +3013,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "context": ";A;Nation-States",
+                    "rcontext": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Portland OR": {
                         "rbranch": ";A;Nation-States;USA;Portland OR"
@@ -3021,7 +3021,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -3047,7 +3047,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "context": ";A;Nation-States",
+                    "rcontext": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Portland OR": {
                         "rbranch": ";A;Nation-States;USA;Portland OR"
@@ -3055,7 +3055,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 60480.0,
@@ -3073,7 +3073,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "context": ";A;Nation-States",
+                "rcontext": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;USA;Portland OR": {
                     "rbranch": ";A;Nation-States;USA;Portland OR"
@@ -3089,7 +3089,7 @@
             "pledge": true,
             "reasonunits": {
               "A;time;gregtime": {
-                "context": ";A;time;gregtime",
+                "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime;day": {
                     "divisor": 1440.0,
@@ -3115,7 +3115,7 @@
             "pledge": true,
             "reasonunits": {
               "A;time;gregtime": {
-                "context": ";A;time;gregtime",
+                "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
                     "divisor": 1440.0,
@@ -3151,7 +3151,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
-                    "context": ";A;Aaron Donald objects effected by him",
+                    "rcontext": ";A;Aaron Donald objects effected by him",
                     "premises": {
                       "A;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3173,7 +3173,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
-                "context": ";A;Aaron Donald objects effected by him",
+                "rcontext": ";A;Aaron Donald objects effected by him",
                 "premises": {
                   "A;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3191,7 +3191,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
-                    "context": ";A;Aaron Donald objects effected by him",
+                    "rcontext": ";A;Aaron Donald objects effected by him",
                     "premises": {
                       "A;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3199,7 +3199,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
                         "divisor": 1440,
@@ -3224,7 +3224,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
-                "context": ";A;Aaron Donald objects effected by him",
+                "rcontext": ";A;Aaron Donald objects effected by him",
                 "premises": {
                   "A;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3249,7 +3249,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
-                    "context": ";A;Aaron Donald objects effected by him",
+                    "rcontext": ";A;Aaron Donald objects effected by him",
                     "premises": {
                       "A;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3257,7 +3257,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 20160.0,
@@ -3275,7 +3275,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
-                "context": ";A;Aaron Donald objects effected by him",
+                "rcontext": ";A;Aaron Donald objects effected by him",
                 "premises": {
                   "A;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3291,7 +3291,7 @@
             "pledge": true,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
-                "context": ";A;Aaron Donald objects effected by him",
+                "rcontext": ";A;Aaron Donald objects effected by him",
                 "premises": {
                   "A;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3299,7 +3299,7 @@
                 }
               },
               "A;time;gregtime": {
-                "context": ";A;time;gregtime",
+                "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
                     "divisor": 1440.0,
@@ -3322,7 +3322,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -3340,7 +3340,7 @@
                 "morph": false,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime"
+                    "rcontext": ";A;time;gregtime"
                   }
                 }
               },
@@ -3360,7 +3360,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;Aaron Donald objects effected by him": {
-                        "context": ";A;Aaron Donald objects effected by him",
+                        "rcontext": ";A;Aaron Donald objects effected by him",
                         "premises": {
                           "A;Aaron Donald objects effected by him;interesting": {
                             "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3368,7 +3368,7 @@
                         }
                       },
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 10080.0,
@@ -3399,7 +3399,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;Aaron Donald objects effected by him": {
-                        "context": ";A;Aaron Donald objects effected by him",
+                        "rcontext": ";A;Aaron Donald objects effected by him",
                         "premises": {
                           "A;Aaron Donald objects effected by him;interesting": {
                             "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3407,7 +3407,7 @@
                         }
                       },
                       "A;time;gregtime": {
-                        "context": ";A;time;gregtime",
+                        "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
                             "divisor": 20160.0,
@@ -3432,7 +3432,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
-                    "context": ";A;Aaron Donald objects effected by him",
+                    "rcontext": ";A;Aaron Donald objects effected by him",
                     "premises": {
                       "A;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3447,7 +3447,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
-                "context": ";A;Aaron Donald objects effected by him",
+                "rcontext": ";A;Aaron Donald objects effected by him",
                 "premises": {
                   "A;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3471,7 +3471,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
-                    "context": ";A;Aaron Donald objects effected by him",
+                    "rcontext": ";A;Aaron Donald objects effected by him",
                     "premises": {
                       "A;Aaron Donald objects effected by him;interesting": {
                         "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3479,7 +3479,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "context": ";A;time;gregtime",
+                    "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 20160.0,
@@ -3497,7 +3497,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
-                "context": ";A;Aaron Donald objects effected by him",
+                "rcontext": ";A;Aaron Donald objects effected by him",
                 "premises": {
                   "A;Aaron Donald objects effected by him;interesting": {
                     "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -3529,7 +3529,7 @@
         "mass": 1,
         "reasonunits": {
           "A;Aaron Donald objects effected by him": {
-            "context": ";A;Aaron Donald objects effected by him",
+            "rcontext": ";A;Aaron Donald objects effected by him",
             "premises": {
               "A;Aaron Donald objects effected by him;interesting": {
                 "rbranch": ";A;Aaron Donald objects effected by him;interesting"
@@ -5191,7 +5191,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
-                "context": ";A;Moods",
+                "rcontext": ";A;Moods",
                 "premises": {
                   "A;Moods;Happy": {
                     "rbranch": ";A;Moods;Happy"
@@ -5206,7 +5206,7 @@
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing": {
-                "context": ";A;No Movie playing",
+                "rcontext": ";A;No Movie playing",
                 "premises": {
                   "A;No Movie playing;Big Lewbwski": {
                     "rbranch": ";A;No Movie playing;Big Lewbwski"
@@ -5223,7 +5223,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Moods": {
-                    "context": ";A;Moods",
+                    "rcontext": ";A;Moods",
                     "premises": {
                       "A;Moods;Happy": {
                         "rbranch": ";A;Moods;Happy"
@@ -5238,7 +5238,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
-                "context": ";A;Moods",
+                "rcontext": ";A;Moods",
                 "premises": {
                   "A;Moods;Happy": {
                     "rbranch": ";A;Moods;Happy"
@@ -5253,7 +5253,7 @@
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing": {
-                "context": ";A;No Movie playing",
+                "rcontext": ";A;No Movie playing",
                 "premises": {
                   "A;No Movie playing;Star Wars eps IV": {
                     "rbranch": ";A;No Movie playing;Star Wars eps IV"
@@ -5268,7 +5268,7 @@
         "mass": 1,
         "reasonunits": {
           "A;Moods": {
-            "context": ";A;Moods",
+            "rcontext": ";A;Moods",
             "premises": {
               "A;Moods;Happy": {
                 "rbranch": ";A;Moods;Happy"
@@ -5288,7 +5288,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
-                    "context": ";A;WaterExistence",
+                    "rcontext": ";A;WaterExistence",
                     "premises": {
                       "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
                         "rbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
@@ -5303,7 +5303,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
-                    "context": ";A;WaterExistence",
+                    "rcontext": ";A;WaterExistence",
                     "premises": {
                       "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
                         "rbranch": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
@@ -5318,7 +5318,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
-                    "context": ";A;WaterExistence",
+                    "rcontext": ";A;WaterExistence",
                     "premises": {
                       "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
                         "rbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
@@ -5333,7 +5333,7 @@
             "mass": 1,
             "reasonunits": {
               "A;WaterExistence": {
-                "context": ";A;WaterExistence",
+                "rcontext": ";A;WaterExistence",
                 "premises": {
                   "A;WaterExistence;Williamette WaterShed": {
                     "rbranch": ";A;WaterExistence;Williamette WaterShed"

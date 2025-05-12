@@ -88,7 +88,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     assert x_idearoot.factunits.get(weekday_way) == x10_factunit
 
 
-def test_BudUnit_set_fact_FailsToCreateWhenContextAndFactAreDifferenctAndFactIdeaIsNot_RangeRoot():
+def test_BudUnit_set_fact_FailsToCreateWhenRcontextAndFactAreDifferenctAndFactIdeaIsNot_RangeRoot():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     time_str = "time"
@@ -139,11 +139,11 @@ def test_BudUnit_get_fact_ReturnsFactUnit():
     sue_bud.add_fact(situations_way, climate_way, create_missing_ideas=True)
 
     # WHEN
-    generated_situations_context = sue_bud.get_fact(situations_way)
+    generated_situations_rcontext = sue_bud.get_fact(situations_way)
 
     # THEN
-    static_situations_context = sue_bud.idearoot.factunits.get(situations_way)
-    assert generated_situations_context == static_situations_context
+    static_situations_rcontext = sue_bud.idearoot.factunits.get(situations_way)
+    assert generated_situations_rcontext == static_situations_rcontext
 
 
 def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
@@ -158,7 +158,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud.set_l1_idea(clean_idea)
     c_way = sue_bud.make_l1_way(clean_str)
     time_way = sue_bud.make_l1_way(time_str)
-    # sue_bud.edit_idea_attr(c_way, reason_context=time_way, reason_premise=time_way, reason_premise_open=5, reason_premise_nigh=10)
+    # sue_bud.edit_idea_attr(c_way, reason_rcontext=time_way, reason_premise=time_way, reason_premise_open=5, reason_premise_nigh=10)
 
     sue_bud.add_fact(fcontext=time_way, fbranch=time_way, fopen=5, fnigh=10)
     print(f"Establish a single ranged fact {sue_bud.idearoot.factunits=}")
@@ -216,7 +216,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     assert sue_bud._get_rangeroot_factunits()[0].fcontext == time_way
 
 
-def test_BudUnit_set_fact_create_missing_ideas_CreatesContextAndFact():
+def test_BudUnit_set_fact_create_missing_ideas_CreatesRcontextAndFact():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     situations_str = "situations"

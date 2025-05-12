@@ -35,7 +35,7 @@ def get_bob_mop_with_reason_budunit_example() -> BudUnit:
     bob_bud.add_idea(clean_way)
     bob_bud.add_idea(dirty_way)
     bob_bud.add_idea(mop_way, pledge=True)
-    bob_bud.edit_idea_attr(mop_way, reason_context=floor_way, reason_premise=clean_way)
+    bob_bud.edit_idea_attr(mop_way, reason_rcontext=floor_way, reason_premise=clean_way)
     return bob_bud
 
 

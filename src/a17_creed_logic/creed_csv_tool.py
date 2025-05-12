@@ -372,7 +372,7 @@ def add_bud_to_br00026_csv(
                     x_bud.fisc_tag,
                     x_bud.owner_name,
                     ideaunit.get_idea_way(),
-                    reasonunit.context,
+                    reasonunit.rcontext,
                     premiseunit.rbranch,
                     if_none_str(premiseunit.open),
                     if_none_str(premiseunit.nigh),
@@ -398,8 +398,8 @@ def add_bud_to_br00027_csv(
                 x_bud.fisc_tag,
                 x_bud.owner_name,
                 ideaunit.get_idea_way(),
-                reasonunit.context,
-                if_none_str(reasonunit.context_idea_active_requisite),
+                reasonunit.rcontext,
+                if_none_str(reasonunit.rcontext_idea_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -707,7 +707,7 @@ def add_pack_to_br00026_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("context"),
+                budatom.jkeys.get("rcontext"),
                 budatom.jkeys.get("rbranch"),
                 if_none_str(budatom.jvalues.get("open")),
                 if_none_str(budatom.jvalues.get("nigh")),
@@ -729,8 +729,8 @@ def add_pack_to_br00027_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("context"),
-                if_none_str(budatom.jvalues.get("context_idea_active_requisite")),
+                budatom.jkeys.get("rcontext"),
+                if_none_str(budatom.jvalues.get("rcontext_idea_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

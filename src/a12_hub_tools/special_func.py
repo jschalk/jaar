@@ -27,8 +27,8 @@ def create_pledge(
         if reason_premise is not None:
             if x_bud.idea_exists(reason_premise) is False:
                 x_bud.get_idea_obj(reason_premise, if_missing_create=True)
-            reason_context = get_parent_way(reason_premise)
-            x_bud.edit_reason(pledge_way, reason_context, reason_premise)
+            reason_rcontext = get_parent_way(reason_premise)
+            x_bud.edit_reason(pledge_way, reason_rcontext, reason_premise)
 
 
 def add_gut_pledge(
@@ -53,8 +53,8 @@ def add_gut_pledge(
 def create_fact(x_bud: BudUnit, fact_fbranch: WayStr):
     if x_bud.idea_exists(fact_fbranch) is False:
         x_bud.get_idea_obj(fact_fbranch, if_missing_create=True)
-    fact_context = get_parent_way(fact_fbranch)
-    x_bud.add_fact(fact_context, fact_fbranch)
+    fact_rcontext = get_parent_way(fact_fbranch)
+    x_bud.add_fact(fact_rcontext, fact_fbranch)
 
 
 def add_gut_fact(x_hubunit: HubUnit, fact_fbranch: WayStr):

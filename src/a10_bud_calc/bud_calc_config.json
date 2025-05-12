@@ -313,7 +313,7 @@
     "bud_idea_reason_premiseunit": {
         "abbreviation": "budprem",
         "jkeys": {
-            "context": {
+            "rcontext": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -366,7 +366,7 @@
     "bud_idea_reasonunit": {
         "abbreviation": "budreas",
         "jkeys": {
-            "context": {
+            "rcontext": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -388,7 +388,7 @@
             }
         },
         "jmetrics": {
-            "_context_idea_active_value": {
+            "_rcontext_idea_active_value": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -402,7 +402,7 @@
             }
         },
         "jvalues": {
-            "context_idea_active_requisite": {
+            "rcontext_idea_active_requisite": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }

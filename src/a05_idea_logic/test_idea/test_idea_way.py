@@ -48,12 +48,12 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_reasonunits():
     premise_x = premiseunit_shop(rbranch=old_rain_way)
     premises_x = {premise_x.rbranch: premise_x}
     x_reason = reasonunit_shop(old_water_way, premises=premises_x)
-    reasons_x = {x_reason.context: x_reason}
+    reasons_x = {x_reason.rcontext: x_reason}
     x_idea = ideaunit_shop(roses_str, reasonunits=reasons_x)
     # check asserts
     assert x_idea.reasonunits.get(old_water_way) is not None
     old_water_rain_reason = x_idea.reasonunits[old_water_way]
-    assert old_water_rain_reason.context == old_water_way
+    assert old_water_rain_reason.rcontext == old_water_way
     assert old_water_rain_reason.premises.get(old_rain_way) is not None
     water_rain_l_premise = old_water_rain_reason.premises[old_rain_way]
     assert water_rain_l_premise.rbranch == old_rain_way
@@ -68,7 +68,7 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_reasonunits():
     assert x_idea.reasonunits.get(old_water_way) is None
     assert x_idea.reasonunits.get(new_water_way) is not None
     new_water_rain_reason = x_idea.reasonunits[new_water_way]
-    assert new_water_rain_reason.context == new_water_way
+    assert new_water_rain_reason.rcontext == new_water_way
     new_rain_way = create_way(new_water_way, rain_str)
     assert new_water_rain_reason.premises.get(old_rain_way) is None
     assert new_water_rain_reason.premises.get(new_rain_way) is not None

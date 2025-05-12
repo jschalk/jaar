@@ -7,7 +7,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_WayStr_str,
     acct_name_str,
     awardee_label_str,
-    context_str,
+    rcontext_str,
     face_name_str,
     fcontext_str,
     fbranch_str,
@@ -66,8 +66,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_label") == type_LabelStr_str()
-    assert pidgin_args_class_types.get("context") == type_WayStr_str()
-    assert pidgin_args_class_types.get("context_idea_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("rcontext") == type_WayStr_str()
+    assert pidgin_args_class_types.get("rcontext_idea_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -198,7 +198,7 @@ def test_pidginable_atom_args_ReturnsObj():
     assert pidginable_atom_args() == {
         acct_name_str(),
         awardee_label_str(),
-        context_str(),
+        rcontext_str(),
         face_name_str(),
         fcontext_str(),
         fisc_tag_str(),

@@ -168,7 +168,7 @@ def test_BudUnit_set_idea_CorrectlyAddsIdeaObjWithNonDefault_bridge():
     assert wed_idea.bridge == bob_bud.bridge
 
     # WHEN
-    bob_bud.edit_idea_attr(casa_way, reason_context=week_way, reason_premise=wed_way)
+    bob_bud.edit_idea_attr(casa_way, reason_rcontext=week_way, reason_premise=wed_way)
 
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_way)

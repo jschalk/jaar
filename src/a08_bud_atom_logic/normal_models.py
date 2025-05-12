@@ -66,15 +66,15 @@ class AwardLinkTable(Base):
 class ReasonTable(Base):
     __tablename__ = "reason"
     uid = Column(Integer, primary_key=True)
-    context = Column(String)
+    rcontext = Column(String)
     idea_way = Column(String)
-    context_idea_active_requisite = Column(Integer)
+    rcontext_idea_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):
     __tablename__ = "premise"
     uid = Column(Integer, primary_key=True)
-    context = Column(String)
+    rcontext = Column(String)
     rbranch = Column(String)
     idea_way = Column(String)
     divisor = Column(Integer)

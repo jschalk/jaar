@@ -216,12 +216,12 @@ def test_bud_edit_idea_tag_ModifiesIdeaReasonUnitsScenario1():
 
     # WHEN
     # for key_x, x_reason in casa_idea.reasonunits.items():
-    #     print(f"Before {key_x=} {x_reason.context=}")
+    #     print(f"Before {key_x=} {x_reason.rcontext=}")
     print(f"before {wednesday_idea.idea_tag=}")
     print(f"before {wednesday_idea.parent_way=}")
     sue_bud.edit_idea_tag(old_way=old_weekday_way, new_idea_tag=new_weekday_str)
     # for key_x, x_reason in casa_idea.reasonunits.items():
-    #     print(f"after {key_x=} {x_reason.context=}")
+    #     print(f"after {key_x=} {x_reason.rcontext=}")
     print(f"after  {wednesday_idea.idea_tag=}")
     print(f"after  {wednesday_idea.parent_way=}")
 

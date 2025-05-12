@@ -106,7 +106,7 @@ def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplanBudWithDetailsDecidedB
     bob_plan = get_example_bob_speaker()
     bob_plan.edit_idea_attr(
         cook_way(),
-        reason_del_premise_context=eat_way(),
+        reason_del_premise_rcontext=eat_way(),
         reason_del_premise_rbranch=hungry_way(),
     )
     bob_cook_ideaunit = bob_plan.get_idea_obj(cook_way())
@@ -207,15 +207,15 @@ def test_listen_to_agenda_duty_plan_agenda_ProcessesIrrationalBud(
     sue_plan.edit_idea_attr(
         egg_way,
         pledge=True,
-        reason_context=chicken_way,
-        reason_context_idea_active_requisite=True,
+        reason_rcontext=chicken_way,
+        reason_rcontext_idea_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_plan.edit_idea_attr(
         chicken_way,
         pledge=True,
-        reason_context=egg_way,
-        reason_context_idea_active_requisite=False,
+        reason_rcontext=egg_way,
+        reason_rcontext_idea_active_requisite=False,
     )
     yao_dakota_hubunit.save_plan_bud(sue_plan)
 

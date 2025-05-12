@@ -20,8 +20,8 @@ def test_AtomRow_exists():
     assert x_atomrow._crud_command is None
     assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
-    assert x_atomrow.context is None
-    assert x_atomrow.context_idea_active_requisite is None
+    assert x_atomrow.rcontext is None
+    assert x_atomrow.rcontext_idea_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
