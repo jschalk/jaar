@@ -51,7 +51,7 @@ def test_get_pidgen_creed_format_filenames_ReturnsObj():
     pidgen_creed_filenames = _get_pidgen_creed_format_filenames()
 
     # THEN
-    print(f"branch examples for {pidgen_creed_filenames=}")
+    print(f"rbranch examples for {pidgen_creed_filenames=}")
     assert pidgen_creed_filenames == {
         "br00042.xlsx",
         "br00043.xlsx",

@@ -371,7 +371,7 @@ def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
         reason_del_premise_context=x_atom.get_value("context"),
-        reason_del_premise_branch=x_atom.get_value("rbranch"),
+        reason_del_premise_rbranch=x_atom.get_value("rbranch"),
     )
 
 

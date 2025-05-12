@@ -492,7 +492,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
         assert expected_v_del_agg_sqlstr == sqlstrs.get(v_del_agg_tablename)
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllBranchedKeys():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH / WHEN
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 

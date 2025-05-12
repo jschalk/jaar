@@ -499,8 +499,8 @@ class ReasonCore:
             bridge=self.bridge,
         )
 
-    def premise_exists(self, x_branch: WayStr) -> bool:
-        return self.premises.get(x_branch) != None
+    def premise_exists(self, rbranch: WayStr) -> bool:
+        return self.premises.get(rbranch) != None
 
     def get_premise(self, premise: WayStr) -> PremiseUnit:
         return self.premises.get(premise)

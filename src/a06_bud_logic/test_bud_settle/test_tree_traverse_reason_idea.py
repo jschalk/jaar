@@ -467,7 +467,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
     sue_bud.edit_idea_attr(
         casa_way,
         reason_del_premise_context=weekday_way,
-        reason_del_premise_branch=thu_way,
+        reason_del_premise_rbranch=thu_way,
     )
 
     # THEN
@@ -477,7 +477,7 @@ def test_BudUnit_ReasonUnits_edit_idea_attr_CorrectlyDeletes_ReasonUnits_And_Pre
     sue_bud.edit_idea_attr(
         casa_way,
         reason_del_premise_context=weekday_way,
-        reason_del_premise_branch=wed_way,
+        reason_del_premise_rbranch=wed_way,
     )
 
     # THEN
@@ -575,7 +575,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     thu_way = sue_bud.make_way(weekdays_way, thu_str)
 
     # 4. idea(...,casa) with
-    # 4.1 ReasonUnit: context=weekdays_way, branch=thu_way
+    # 4.1 ReasonUnit: context=weekdays_way, rbranch=thu_way
     # 4.2 .active = False
     sue_bud.edit_idea_attr(
         casa_way,

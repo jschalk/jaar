@@ -885,7 +885,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     after_sue_bud.edit_idea_attr(
         ball_way,
         reason_del_premise_context=knee_way,
-        reason_del_premise_branch=damaged_way,
+        reason_del_premise_rbranch=damaged_way,
     )
 
     # WHEN

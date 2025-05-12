@@ -3595,8 +3595,8 @@
                         "idea_tag": "hungry",
                         "mass": 1
                     },
-                    "I branch to waste time": {
-                        "idea_tag": "I branch to waste time",
+                    "I will waste time": {
+                        "idea_tag": "I will waste time",
                         "mass": 1.0,
                         "morph": false
                     }
