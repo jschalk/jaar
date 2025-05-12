@@ -136,8 +136,8 @@ def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
         fcontext_way = x_factunit.fcontext
         fbranch_way = x_factunit.fbranch
         if dst_listener.idea_exists(fcontext_way) is False:
-            context_idea = src_listener.get_idea_obj(fcontext_way)
-            dst_listener.set_idea(context_idea, context_idea.parent_way)
+            rcontext_idea = src_listener.get_idea_obj(fcontext_way)
+            dst_listener.set_idea(rcontext_idea, rcontext_idea.parent_way)
         if dst_listener.idea_exists(fbranch_way) is False:
             fbranch_idea = src_listener.get_idea_obj(fbranch_way)
             dst_listener.set_idea(fbranch_idea, fbranch_idea.parent_way)
@@ -147,12 +147,12 @@ def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
 def listen_to_speaker_fact(
     listener: BudUnit,
     speaker: BudUnit,
-    missing_fact_contexts: list[WayStr] = None,
+    missing_fact_rcontexts: list[WayStr] = None,
 ) -> BudUnit:
-    if missing_fact_contexts is None:
-        missing_fact_contexts = list(listener.get_missing_fact_contexts())
-    for missing_fact_context in missing_fact_contexts:
-        x_factunit = speaker.get_fact(missing_fact_context)
+    if missing_fact_rcontexts is None:
+        missing_fact_rcontexts = list(listener.get_missing_fact_rcontexts())
+    for missing_fact_rcontext in missing_fact_rcontexts:
+        x_factunit = speaker.get_fact(missing_fact_rcontext)
         if x_factunit is not None:
             listener.add_fact(
                 fcontext=x_factunit.fcontext,

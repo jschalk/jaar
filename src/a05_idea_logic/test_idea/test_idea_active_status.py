@@ -156,10 +156,10 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     run_str = "run"
     run_way = create_way(ball_way, run_str)
     ball_idea = ideaunit_shop(ball_str)
-    run_premise = premiseunit_shop(rbranch=run_way, open=0, nigh=7)
-    run_premises = {run_premise.rbranch: run_premise}
+    run_premise = premiseunit_shop(pbranch=run_way, open=0, pnigh=7)
+    run_premises = {run_premise.pbranch: run_premise}
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
-    reasonheirs = {reasonheir.context: reasonheir}
+    reasonheirs = {reasonheir.rcontext: reasonheir}
     assert ball_idea._reasonheirs == {}
 
     # WHEN
@@ -176,10 +176,10 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_way = create_way(ball_str)
     run_str = "run"
     run_way = create_way(ball_way, run_str)
-    run_premise = premiseunit_shop(rbranch=run_way, open=0, nigh=7)
-    run_premises = {run_premise.rbranch: run_premise}
-    run_reasonunit = reasonunit_shop(context=run_way, premises=run_premises)
-    run_reasonunits = {run_reasonunit.context: run_reasonunit}
+    run_premise = premiseunit_shop(pbranch=run_way, open=0, pnigh=7)
+    run_premises = {run_premise.pbranch: run_premise}
+    run_reasonunit = reasonunit_shop(rcontext=run_way, premises=run_premises)
+    run_reasonunits = {run_reasonunit.rcontext: run_reasonunit}
     ball_idea = ideaunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_idea.reasonunits != {}
 
@@ -188,7 +188,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesNewValues():
 
     # THEN
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
-    reasonheirs = {reasonheir.context: reasonheir}
+    reasonheirs = {reasonheir.rcontext: reasonheir}
     assert ball_idea._reasonheirs == reasonheirs
 
 
@@ -209,10 +209,10 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     week_str = "week"
     week_way = create_way(root_tag(), week_str)
     week_open = 3
-    week_nigh = 7
+    week_pnigh = 7
     week_addin = 10
     week_idea = ideaunit_shop(week_str, parent_way=root_tag(), addin=week_addin)
-    week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
+    week_factheir = factheir_shop(week_way, week_way, week_open, week_pnigh)
     tue_str = "Tue"
     tue_way = create_way(week_way, tue_str)
     tue_addin = 100
@@ -240,8 +240,8 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
 
     # THEN
     tue_open = 113
-    tue_nigh = 117
-    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_nigh)
+    tue_pnigh = 117
+    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_pnigh)
     assert len(ball_idea._factheirs) == 2
     assert ball_idea._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
 
@@ -254,13 +254,13 @@ def test_IdeaUnit_set_reasonunit_SetsAttr():
     assert not clean_idea.reasonunits.get(dirty_str)
 
     # WHEN
-    clean_idea.set_reasonunit(reasonunit_shop(context=dirty_str))
+    clean_idea.set_reasonunit(reasonunit_shop(rcontext=dirty_str))
 
     # THEN
     assert clean_idea.reasonunits.get(dirty_str)
-    x_reasonunit = clean_idea.get_reasonunit(context=dirty_str)
+    x_reasonunit = clean_idea.get_reasonunit(rcontext=dirty_str)
     assert x_reasonunit is not None
-    assert x_reasonunit.context == dirty_str
+    assert x_reasonunit.rcontext == dirty_str
 
 
 def test_IdeaUnit_reasonunit_exists_ReturnsObj():
@@ -271,7 +271,7 @@ def test_IdeaUnit_reasonunit_exists_ReturnsObj():
     assert not clean_idea.reasonunit_exists(dirty_str)
 
     # WHEN
-    clean_idea.set_reasonunit(reasonunit_shop(context=dirty_str))
+    clean_idea.set_reasonunit(reasonunit_shop(rcontext=dirty_str))
 
     # THEN
     assert clean_idea.reasonunit_exists(dirty_str)
@@ -282,14 +282,14 @@ def test_IdeaUnit_get_reasonunit_ReturnsObj():
     clean_str = "clean"
     clean_idea = ideaunit_shop(clean_str)
     dirty_str = "dirty"
-    clean_idea.set_reasonunit(reasonunit_shop(context=dirty_str))
+    clean_idea.set_reasonunit(reasonunit_shop(rcontext=dirty_str))
 
     # WHEN
-    x_reasonunit = clean_idea.get_reasonunit(context=dirty_str)
+    x_reasonunit = clean_idea.get_reasonunit(rcontext=dirty_str)
 
     # THEN
     assert x_reasonunit is not None
-    assert x_reasonunit.context == dirty_str
+    assert x_reasonunit.rcontext == dirty_str
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsObj():
@@ -297,16 +297,16 @@ def test_IdeaUnit_get_reasonheir_ReturnsObj():
     clean_str = "clean"
     clean_idea = ideaunit_shop(clean_str)
     dirty_str = "dirty"
-    x_reasonheir = reasonheir_shop(context=dirty_str)
-    x_reasonheirs = {x_reasonheir.context: x_reasonheir}
+    x_reasonheir = reasonheir_shop(rcontext=dirty_str)
+    x_reasonheirs = {x_reasonheir.rcontext: x_reasonheir}
     clean_idea.set_reasonheirs(reasonheirs=x_reasonheirs, bud_idea_dict={})
 
     # WHEN
-    z_reasonheir = clean_idea.get_reasonheir(context=dirty_str)
+    z_reasonheir = clean_idea.get_reasonheir(rcontext=dirty_str)
 
     # THEN
     assert z_reasonheir is not None
-    assert z_reasonheir.context == dirty_str
+    assert z_reasonheir.rcontext == dirty_str
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsNone():
@@ -315,12 +315,12 @@ def test_IdeaUnit_get_reasonheir_ReturnsNone():
     clean_idea = ideaunit_shop(clean_str)
     dirty_str = "dirty"
     x_reasonheir = reasonheir_shop(dirty_str)
-    x_reasonheirs = {x_reasonheir.context: x_reasonheir}
+    x_reasonheirs = {x_reasonheir.rcontext: x_reasonheir}
     clean_idea.set_reasonheirs(reasonheirs=x_reasonheirs, bud_idea_dict={})
 
     # WHEN
     test6_str = "test6"
-    reason_heir_test6 = clean_idea.get_reasonheir(context=test6_str)
+    reason_heir_test6 = clean_idea.get_reasonheir(rcontext=test6_str)
 
     # THEN
     assert reason_heir_test6 is None
@@ -383,10 +383,10 @@ def test_IdeaUnit_factunit_exists_ReturnsObj():
 # clean_str = "clean"
 # clean_idea = ideaunit_shop(clean_str)
 #     clean_idea.set_reason_premise(
-#         context="testing1,sec",
+#         rcontext="testing1,sec",
 #         premise="testing1,sec,next",
 #         open=None,
-#         nigh=None,
+#         pnigh=None,
 #         divisor=None,
 #     )
 #     clean_idea._active_hx = {0: True, 4: False}

@@ -65,7 +65,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fisc_tag
     assert not x_objkeyholder.owner_name
     assert not x_objkeyholder.way
-    assert not x_objkeyholder.context
+    assert not x_objkeyholder.rcontext
     assert not x_objkeyholder.acct_name
     assert not x_objkeyholder.membership
     assert not x_objkeyholder.group_name
@@ -318,17 +318,17 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_fisc_tag = 1
     x_owner_name = 2
     x_way = 3
-    x_context = 4
-    x_context_idea_active_requisite = 5
+    x_rcontext = 4
+    x_rcontext_idea_active_requisite = 5
     x__task = 6
     x__status = 7
-    x__context_idea_active_value = 8
-    x_reasonheir = reasonheir_shop(context=x_context)
-    x_reasonheir.context = x_context
-    x_reasonheir.context_idea_active_requisite = x_context_idea_active_requisite
+    x__rcontext_idea_active_value = 8
+    x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
+    x_reasonheir.rcontext = x_rcontext
+    x_reasonheir.rcontext_idea_active_requisite = x_rcontext_idea_active_requisite
     x_reasonheir._task = x__task
     x_reasonheir._status = x__status
-    x_reasonheir._context_idea_active_value = x__context_idea_active_value
+    x_reasonheir._rcontext_idea_active_value = x__rcontext_idea_active_value
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -350,11 +350,11 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             str(x_fisc_tag),
             str(x_owner_name),
             str(x_way),
-            str(x_context),
-            x_context_idea_active_requisite,
+            str(x_rcontext),
+            x_rcontext_idea_active_requisite,
             x__task,
             x__status,
-            x__context_idea_active_value,
+            x__rcontext_idea_active_value,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -379,16 +379,16 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_fisc_tag = 1
     x_owner_name = 2
     x_way = 3
-    x_context = 4
-    x_rbranch = 5
-    x_nigh = 6.0
+    x_rcontext = 4
+    x_pbranch = 5
+    x_pnigh = 6.0
     x_open = 7.0
     x_divisor = 8
     x__task = 9
     x__status = 10
-    x_premiseunit = premiseunit_shop(rbranch=x_rbranch)
-    x_premiseunit.rbranch = x_rbranch
-    x_premiseunit.nigh = x_nigh
+    x_premiseunit = premiseunit_shop(pbranch=x_pbranch)
+    x_premiseunit.pbranch = x_pbranch
+    x_premiseunit.pnigh = x_pnigh
     x_premiseunit.open = x_open
     x_premiseunit.divisor = x_divisor
     x_premiseunit._task = x__task
@@ -400,7 +400,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         x_table_name = "bud_idea_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_world_id, x_fisc_tag, x_owner_name, x_way, x_context
+            x_world_id, x_fisc_tag, x_owner_name, x_way, x_rcontext
         )
 
         # WHEN
@@ -416,9 +416,9 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
             str(x_fisc_tag),
             str(x_owner_name),
             str(x_way),
-            str(x_context),
-            str(x_rbranch),
-            x_nigh,
+            str(x_rcontext),
+            str(x_pbranch),
+            x_pnigh,
             x_open,
             x_divisor,
             x__task,
@@ -741,12 +741,12 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     x_fisc_tag = 1
     x_owner_name = 2
     x_way = 3
-    x_context = 4
+    x_rcontext = 4
     x_fbranch = 5
     x_fopen = 6
     x_fnigh = 7
     x_factheir = factheir_shop()
-    x_factheir.fcontext = x_context
+    x_factheir.fcontext = x_rcontext
     x_factheir.fbranch = x_fbranch
     x_factheir.fopen = x_fopen
     x_factheir.fnigh = x_fnigh
@@ -771,7 +771,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
             str(x_fisc_tag),
             str(x_owner_name),
             str(x_way),
-            str(x_context),
+            str(x_rcontext),
             str(x_fbranch),
             x_fopen,
             x_fnigh,
@@ -919,7 +919,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_bud.add_idea(clean_way)
     sue_bud.add_idea(dirty_way)
     sue_bud.edit_idea_attr(
-        casa_way, reason_context=status_way, reason_premise=dirty_way
+        casa_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
     sue_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(run_str))
     sue_bud.edit_idea_attr(casa_way, healerlink=healerlink_shop({bob_str}))
@@ -993,7 +993,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     sue_bud.add_idea(clean_way)
     sue_bud.add_idea(dirty_way)
     sue_bud.edit_idea_attr(
-        casa_way, reason_context=status_way, reason_premise=dirty_way
+        casa_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
     sue_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(run_str))
     sue_bud.edit_idea_attr(casa_way, healerlink=healerlink_shop({bob_str}))

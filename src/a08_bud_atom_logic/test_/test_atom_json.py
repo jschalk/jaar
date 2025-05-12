@@ -30,12 +30,12 @@ def test_BudAtom_get_dict_ReturnsObj():
     knee_way = create_way("a", knee_str)
     x_dimen = bud_idea_factunit_str()
     knee_open = 7
-    knee_nigh = 13
+    knee_pnigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_factunit_budatom.set_jkey(idea_way_str(), ball_way)
     insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
-    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
+    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_pnigh)
 
     # WHEN
     atom_dict = insert_factunit_budatom.get_dict()
@@ -45,7 +45,7 @@ def test_BudAtom_get_dict_ReturnsObj():
         dimen_str(): x_dimen,
         crud_str(): atom_insert(),
         jkeys_str(): {idea_way_str(): ball_way, fcontext_str(): knee_way},
-        jvalues_str(): {fopen_str(): knee_open, fnigh_str(): knee_nigh},
+        jvalues_str(): {fopen_str(): knee_open, fnigh_str(): knee_pnigh},
     }
 
 
@@ -59,12 +59,12 @@ def test_BudAtom_get_json_ReturnsObj():
     knee_way = create_way("a", knee_str)
     x_dimen = bud_idea_factunit_str()
     knee_open = 7
-    knee_nigh = 13
+    knee_pnigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_factunit_budatom.set_jkey(idea_way_str(), ball_way)
     insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
-    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
+    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_pnigh)
 
     # WHEN
     atom_json = insert_factunit_budatom.get_json()
@@ -83,12 +83,12 @@ def test_budatom_get_from_json_ReturnsObj():
     knee_way = create_way("a", knee_str)
     x_dimen = bud_idea_factunit_str()
     knee_open = 7
-    knee_nigh = 13
+    knee_pnigh = 13
     gen_budatom = budatom_shop(x_dimen, atom_insert())
     gen_budatom.set_jkey(idea_way_str(), ball_way)
     gen_budatom.set_jkey(fcontext_str(), knee_way)
     gen_budatom.set_jvalue(fopen_str(), knee_open)
-    gen_budatom.set_jvalue(fnigh_str(), knee_nigh)
+    gen_budatom.set_jvalue(fnigh_str(), knee_pnigh)
     atom_json = gen_budatom.get_json()
 
     # WHEN

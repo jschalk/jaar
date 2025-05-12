@@ -2,7 +2,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     addin_str,
     awardee_label_str,
-    context_str,
+    rcontext_str,
     begin_str,
     close_str,
     credit_belief_str,
@@ -22,8 +22,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     healer_name_str,
     morph_str,
-    rbranch_str,
-    nigh_str,
+    pbranch_str,
+    pnigh_str,
     numor_str,
     open_str,
     parent_way_str,
@@ -43,7 +43,7 @@ def test_str_functions_ReturnsObj():
     assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
     assert awardee_label_str() == "awardee_label"
-    assert context_str() == "context"
+    assert rcontext_str() == "rcontext"
     assert fcontext_str() == "fcontext"
     assert begin_str() == "begin"
     assert close_str() == "close"
@@ -62,8 +62,8 @@ def test_str_functions_ReturnsObj():
     assert gogo_want_str() == "gogo_want"
     assert group_label_str() == "group_label"
     assert morph_str() == "morph"
-    assert rbranch_str() == "rbranch"
-    assert nigh_str() == "nigh"
+    assert pbranch_str() == "pbranch"
+    assert pnigh_str() == "pnigh"
     assert numor_str() == "numor"
     assert open_str() == "open"
     assert parent_way_str() == "parent_way"

@@ -55,7 +55,7 @@ def test_CellUnit_Exists():
     assert not x_cellunit.quota
     assert not x_cellunit.mandate
     assert not x_cellunit.budadjust
-    assert not x_cellunit._reason_contexts
+    assert not x_cellunit._reason_rcontexts
     assert not x_cellunit._acct_mandate_ledger
     assert not x_cellunit.budevent_facts
     assert not x_cellunit.found_facts
@@ -77,7 +77,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.mandate == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.budadjust.get_dict() == budunit_shop(bob_str).get_dict()
     assert x_cellunit.budevent_facts == {}
-    assert x_cellunit._reason_contexts == set()
+    assert x_cellunit._reason_rcontexts == set()
     assert x_cellunit._acct_mandate_ledger == {}
     assert x_cellunit.found_facts == {}
     assert x_cellunit.boss_facts == {}
@@ -128,13 +128,13 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_cellunit.quota == bob_sue_quota300
     assert x_cellunit.mandate == bob_sue_mandate
     assert x_cellunit.budadjust == bob_sue_bud
-    assert x_cellunit._reason_contexts == set()
+    assert x_cellunit._reason_rcontexts == set()
     assert x_cellunit.budevent_facts == bob_sue_budevent_factunits
     assert x_cellunit.found_facts == bob_sue_found_factunits
     assert x_cellunit.boss_facts == bob_sue_boss_factunits
 
 
-def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonContexts():
+def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -152,8 +152,8 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonContexts():
     # THEN
     assert x_cellunit.deal_owner_name == sue_str
     assert x_cellunit.budadjust == sue_bud
-    assert x_cellunit._reason_contexts == sue_bud.get_reason_contexts()
-    assert len(x_cellunit._reason_contexts) == 1
+    assert x_cellunit._reason_rcontexts == sue_bud.get_reason_rcontexts()
+    assert len(x_cellunit._reason_rcontexts) == 1
 
 
 def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
@@ -208,10 +208,10 @@ def test_CellUnit_eval_budevent_SetsAttr_Scenario0_ParameterIsNone():
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.budadjust = "testing_place_holder"
     yao_cellunit.budevent_facts = "testing_place_holder"
-    yao_cellunit._reason_contexts = "testing_place_holder"
+    yao_cellunit._reason_rcontexts = "testing_place_holder"
     assert yao_cellunit.budadjust
     assert yao_cellunit.budevent_facts != {}
-    assert yao_cellunit._reason_contexts != set()
+    assert yao_cellunit._reason_rcontexts != set()
 
     # WHEN
     yao_cellunit.eval_budevent(None)
@@ -219,7 +219,7 @@ def test_CellUnit_eval_budevent_SetsAttr_Scenario0_ParameterIsNone():
     # THEN
     assert yao_cellunit.budadjust is None
     assert yao_cellunit.budevent_facts == {}
-    assert yao_cellunit._reason_contexts == set()
+    assert yao_cellunit._reason_rcontexts == set()
 
 
 def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
@@ -236,7 +236,7 @@ def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
     yao_bud.add_fact(clean_fact.fcontext, clean_fact.fbranch, create_missing_ideas=True)
     yao_cellunit = cellunit_shop(yao_str)
     assert yao_cellunit.budevent_facts == {}
-    assert yao_cellunit._reason_contexts == set()
+    assert yao_cellunit._reason_rcontexts == set()
 
     # WHEN
     yao_cellunit.eval_budevent(yao_bud)
@@ -244,8 +244,8 @@ def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
     # THEN
     expected_factunits = {clean_fact.fcontext: clean_fact}
     assert yao_cellunit.budevent_facts == expected_factunits
-    assert yao_cellunit._reason_contexts == yao_bud.get_reason_contexts()
-    assert len(yao_cellunit._reason_contexts) == 1
+    assert yao_cellunit._reason_rcontexts == yao_bud.get_reason_rcontexts()
+    assert len(yao_cellunit._reason_rcontexts) == 1
     expected_adjust_bud = copy_deepcopy(yao_bud)
     expected_adjust_bud.del_fact(clean_fact.fcontext)
     expected_adjust_bud.settle_bud()
@@ -530,7 +530,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_Ar
     assert yao_cellunit.boss_facts != yao_cellunit.found_facts
 
 
-def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
+def test_CellUnit_filter_facts_by_reason_rcontexts_ReturnsObj_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -558,13 +558,13 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
         sue_found_factunits,
         sue_boss_factunits,
     )
-    sue_cell._reason_contexts = {clean_fact.fcontext, sky_blue_fact.fcontext}
+    sue_cell._reason_rcontexts = {clean_fact.fcontext, sky_blue_fact.fcontext}
     assert sue_cell.budevent_facts == sue_budevent_factunits
     assert sue_cell.found_facts == sue_found_factunits
     assert sue_cell.boss_facts == sue_boss_factunits
 
     # WHEN
-    sue_cell.filter_facts_by_reason_contexts()
+    sue_cell.filter_facts_by_reason_rcontexts()
 
     # THEN
     assert sue_cell.budevent_facts == sue_budevent_factunits
@@ -572,8 +572,8 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
     assert sue_cell.boss_facts == sue_boss_factunits
 
     # WHEN
-    sue_cell._reason_contexts = {clean_fact.fcontext}
-    sue_cell.filter_facts_by_reason_contexts()
+    sue_cell._reason_rcontexts = {clean_fact.fcontext}
+    sue_cell.filter_facts_by_reason_rcontexts()
 
     # THEN
     assert sue_cell.budevent_facts == sue_budevent_factunits
@@ -581,8 +581,8 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
     assert sue_cell.boss_facts == {}
 
     # WHEN
-    sue_cell._reason_contexts = {}
-    sue_cell.filter_facts_by_reason_contexts()
+    sue_cell._reason_rcontexts = {}
+    sue_cell.filter_facts_by_reason_rcontexts()
 
     # THEN
     assert sue_cell.budevent_facts == {}
@@ -855,8 +855,8 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
     )
-    sue_cell._reason_contexts = set()
-    assert not sue_cell._reason_contexts
+    sue_cell._reason_rcontexts = set()
+    assert not sue_cell._reason_rcontexts
     assert sue_cell.boss_facts == {sky_blue_fact.fcontext: sky_blue_fact}
     assert sue_cell.budadjust.get_factunits_dict() == {}
     assert sue_cell._acct_mandate_ledger == {}
@@ -865,7 +865,7 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     sue_cell.calc_acct_mandate_ledger()
 
     # THEN
-    assert sue_cell._reason_contexts == {clean_fact.fcontext}
+    assert sue_cell._reason_rcontexts == {clean_fact.fcontext}
     assert sue_cell.boss_facts == {}
     assert sue_cell.budadjust.get_factunits_dict() != {}
     assert set(sue_cell.budadjust.get_factunits_dict().keys()) == {clean_fact.fcontext}
@@ -1045,8 +1045,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
     )
-    sue_cell._reason_contexts = set()
-    assert not sue_cell._reason_contexts
+    sue_cell._reason_rcontexts = set()
+    assert not sue_cell._reason_rcontexts
     assert sue_cell.boss_facts == {sky_blue_fact.fcontext: sky_blue_fact}
     assert sue_cell.budadjust.get_factunits_dict() == {}
     assert sue_cell._acct_mandate_ledger == {}
@@ -1058,7 +1058,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     # sue_cell.calc_acct_mandate_ledger()
 
     # # THEN
-    assert sue_cell._reason_contexts == {dirty_fact.fcontext}
+    assert sue_cell._reason_rcontexts == {dirty_fact.fcontext}
     assert sue_cell.boss_facts == {}
     assert sue_cell.budadjust.get_factunits_dict() != {}
     assert set(sue_cell.budadjust.get_factunits_dict().keys()) == {dirty_fact.fcontext}

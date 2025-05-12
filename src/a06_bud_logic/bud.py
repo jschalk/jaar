@@ -147,7 +147,7 @@ class BudUnit:
     _groupunits: dict[GroupLabel, GroupUnit] = None
     _offtrack_kids_mass_set: set[WayStr] = None
     _offtrack_fund: float = None
-    _reason_contexts: set[WayStr] = None
+    _reason_rcontexts: set[WayStr] = None
     _range_inheritors: dict[WayStr, WayStr] = None
     # settle_bud Calculated field end
 
@@ -243,12 +243,12 @@ class BudUnit:
             x_way = to_evaluate_list.pop()
             x_idea = self.get_idea_obj(x_way)
             for reasonunit_obj in x_idea.reasonunits.values():
-                reason_context = reasonunit_obj.context
+                reason_rcontext = reasonunit_obj.rcontext
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
                     to_evaluate_hx_dict=to_evaluate_hx_dict,
-                    to_evaluate_way=reason_context,
-                    way_type="reasonunit_context",
+                    to_evaluate_way=reason_rcontext,
+                    way_type="reasonunit_rcontext",
                 )
             forefather_ways = get_forefather_ways(x_way)
             for forefather_way in forefather_ways:
@@ -273,9 +273,9 @@ class BudUnit:
             to_evaluate_list.append(to_evaluate_way)
             to_evaluate_hx_dict[to_evaluate_way] = way_type
 
-            if way_type == "reasonunit_context":
-                ru_context_idea = self.get_idea_obj(to_evaluate_way)
-                for descendant_way in ru_context_idea.get_descendant_ways_from_kids():
+            if way_type == "reasonunit_rcontext":
+                ru_rcontext_idea = self.get_idea_obj(to_evaluate_way)
+                for descendant_way in ru_rcontext_idea.get_descendant_ways_from_kids():
                     self._evaluate_relevancy(
                         to_evaluate_list=to_evaluate_list,
                         to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -467,16 +467,16 @@ class BudUnit:
                 f"Non range-root fact:{fcontext} can only be set by range-root fact"
             )
         elif fact_fcontext_idea.is_math() and self._is_idea_rangeroot(fcontext):
-            # WHEN idea is "range-root" identify any reason.contexts that are descendants
+            # WHEN idea is "range-root" identify any reason.rcontexts that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason context "timeline,weeks" with premise.rbranch = "timeline,weeks"
+            # there exists a reason rcontext "timeline,weeks" with premise.pbranch = "timeline,weeks"
             # and (1,2) divisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
-            # that has that context.
+            # that has that rcontext.
             x_idearoot.set_factunit(x_factunit)
 
     def get_fact(self, fcontext: WayStr) -> FactUnit:
@@ -557,19 +557,19 @@ class BudUnit:
             level_count = 0
         return level_count
 
-    def get_reason_contexts(self) -> set[WayStr]:
-        return set(self.get_tree_metrics().reason_contexts.keys())
+    def get_reason_rcontexts(self) -> set[WayStr]:
+        return set(self.get_tree_metrics().reason_rcontexts.keys())
 
-    def get_missing_fact_contexts(self) -> dict[WayStr, int]:
+    def get_missing_fact_rcontexts(self) -> dict[WayStr, int]:
         tree_metrics = self.get_tree_metrics()
-        reason_contexts = tree_metrics.reason_contexts
-        missing_contexts = {}
-        for context, context_count in reason_contexts.items():
+        reason_rcontexts = tree_metrics.reason_rcontexts
+        missing_rcontexts = {}
+        for rcontext, rcontext_count in reason_rcontexts.items():
             try:
-                self.idearoot.factunits[context]
+                self.idearoot.factunits[rcontext]
             except KeyError:
-                missing_contexts[context] = context_count
-        return missing_contexts
+                missing_rcontexts[rcontext] = rcontext_count
+        return missing_rcontexts
 
     def add_idea(
         self, idea_way: WayStr, mass: float = None, pledge: bool = None
@@ -682,9 +682,9 @@ class BudUnit:
         posted_idea = self.get_idea_obj(way)
 
         for x_reason in posted_idea.reasonunits.values():
-            self._create_ideakid_if_empty(way=x_reason.context)
+            self._create_ideakid_if_empty(way=x_reason.rcontext)
             for premise_x in x_reason.premises.values():
-                self._create_ideakid_if_empty(way=premise_x.rbranch)
+                self._create_ideakid_if_empty(way=premise_x.pbranch)
 
     def _create_ideakid_if_empty(self, way: WayStr):
         if self.idea_exists(way) is False:
@@ -762,25 +762,25 @@ class BudUnit:
         premise_idea = self.get_idea_obj(x_ideaattrholder.reason_premise)
         x_ideaattrholder.set_premise_range_attributes_influenced_by_premise_idea(
             premise_open=premise_idea.begin,
-            premise_nigh=premise_idea.close,
+            pnigh=premise_idea.close,
             premise_denom=premise_idea.denom,
         )
 
     def edit_reason(
         self,
         idea_way: WayStr,
-        reason_context: WayStr = None,
+        reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
         reason_premise_open: float = None,
-        reason_premise_nigh: float = None,
+        reason_pnigh: float = None,
         reason_premise_divisor: int = None,
     ):
         self.edit_idea_attr(
             idea_way=idea_way,
-            reason_context=reason_context,
+            reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
-            reason_premise_nigh=reason_premise_nigh,
+            reason_pnigh=reason_pnigh,
             reason_premise_divisor=reason_premise_divisor,
         )
 
@@ -790,14 +790,14 @@ class BudUnit:
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
-        reason_context: WayStr = None,
+        reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
         reason_premise_open: float = None,
-        reason_premise_nigh: float = None,
+        reason_pnigh: float = None,
         reason_premise_divisor: int = None,
-        reason_del_premise_context: WayStr = None,
-        reason_del_premise_rbranch: WayStr = None,
-        reason_context_idea_active_requisite: str = None,
+        reason_del_premise_rcontext: WayStr = None,
+        reason_del_premise_pbranch: WayStr = None,
+        reason_rcontext_idea_active_requisite: str = None,
         teamunit: TeamUnit = None,
         healerlink: HealerLink = None,
         begin: float = None,
@@ -828,14 +828,14 @@ class BudUnit:
             mass=mass,
             uid=uid,
             reason=reason,
-            reason_context=reason_context,
+            reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
-            reason_premise_nigh=reason_premise_nigh,
+            reason_pnigh=reason_pnigh,
             reason_premise_divisor=reason_premise_divisor,
-            reason_del_premise_context=reason_del_premise_context,
-            reason_del_premise_rbranch=reason_del_premise_rbranch,
-            reason_context_idea_active_requisite=reason_context_idea_active_requisite,
+            reason_del_premise_rcontext=reason_del_premise_rcontext,
+            reason_del_premise_pbranch=reason_del_premise_pbranch,
+            reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
             teamunit=teamunit,
             healerlink=healerlink,
             begin=begin,
@@ -862,13 +862,13 @@ class BudUnit:
         x_idea._set_attrs_to_ideaunit(idea_attr=x_ideaattrholder)
 
     def get_agenda_dict(
-        self, necessary_context: WayStr = None
+        self, necessary_rcontext: WayStr = None
     ) -> dict[WayStr, IdeaUnit]:
         self.settle_bud()
         return {
             x_idea.get_idea_way(): x_idea
             for x_idea in self._idea_dict.values()
-            if x_idea.is_agenda_idea(necessary_context)
+            if x_idea.is_agenda_idea(necessary_rcontext)
         }
 
     def get_all_pledges(self) -> dict[WayStr, IdeaUnit]:
@@ -876,9 +876,9 @@ class BudUnit:
         all_ideas = self._idea_dict.values()
         return {x_idea.get_idea_way(): x_idea for x_idea in all_ideas if x_idea.pledge}
 
-    def set_agenda_task_complete(self, task_way: WayStr, context: WayStr):
+    def set_agenda_task_complete(self, task_way: WayStr, rcontext: WayStr):
         pledge_idea = self.get_idea_obj(task_way)
-        pledge_idea.set_factunit_to_complete(self.idearoot.factunits[context])
+        pledge_idea.set_factunit_to_complete(self.idearoot.factunits[rcontext])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -906,12 +906,12 @@ class BudUnit:
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_contexts:
+            if not self._reason_rcontexts:
                 self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
         for x_acct_name, acct_fund_take in fund_take_allot.items():
             self.get_acct(x_acct_name).add_fund_take(acct_fund_take)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_contexts:
+            if not self._reason_rcontexts:
                 self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
 
     def _add_to_acctunits_fund_agenda_give_take(self, idea_fund_share: float):
@@ -1050,8 +1050,8 @@ class BudUnit:
                 idea_kid.set_level(x_idea._level)
                 idea_list.append(idea_kid)
             self._idea_dict[x_idea.get_idea_way()] = x_idea
-            for x_reason_context in x_idea.reasonunits.keys():
-                self._reason_contexts.add(x_reason_context)
+            for x_reason_rcontext in x_idea.reasonunits.keys():
+                self._reason_rcontexts.add(x_reason_rcontext)
 
     def _raise_gogo_calc_stop_calc_exception(self, idea_way: WayStr):
         exception_str = f"Error has occurred, Idea '{idea_way}' is having _gogo_calc and _stop_calc attributes set twice"
@@ -1197,7 +1197,7 @@ class BudUnit:
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
-        self._reason_contexts = set()
+        self._reason_rcontexts = set()
         self._range_inheritors = {}
         self._keeps_justified = True
         self._keeps_buildable = False
@@ -1447,7 +1447,7 @@ def budunit_shop(
         _keeps_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
-        _reason_contexts=set(),
+        _reason_rcontexts=set(),
         _range_inheritors={},
     )
     x_bud.idearoot = ideaunit_shop(

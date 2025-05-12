@@ -597,11 +597,11 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -621,11 +621,11 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -646,11 +646,11 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -669,11 +669,11 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;Sept 4th 2023 9am": {
-                                                "rbranch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
-                                                "nigh": 1064350680.0,
+                                                "pbranch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
+                                                "pnigh": 1064350680.0,
                                                 "open": 1064350680.0
                                             }
                                         }
@@ -689,11 +689,11 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -714,11 +714,11 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -738,11 +738,11 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -763,11 +763,11 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -787,11 +787,11 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -822,12 +822,12 @@
                                                 "pledge": true,
                                                 "reasonunits": {
                                                     "A;time;gregtime": {
-                                                        "context": ";A;time;gregtime",
+                                                        "rcontext": ";A;time;gregtime",
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 360,
+                                                                "pbranch": ";A;time;gregtime;day",
+                                                                "pnigh": 360,
                                                                 "open": 360
                                                             }
                                                         }
@@ -863,12 +863,12 @@
                                                 "pledge": true,
                                                 "reasonunits": {
                                                     "A;time;gregtime": {
-                                                        "context": ";A;time;gregtime",
+                                                        "rcontext": ";A;time;gregtime",
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 360,
+                                                                "pbranch": ";A;time;gregtime;day",
+                                                                "pnigh": 360,
                                                                 "open": 360
                                                             }
                                                         }
@@ -881,12 +881,12 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 360,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 360,
                                                         "open": 360
                                                     }
                                                 }
@@ -900,12 +900,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 450,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 450,
                                                         "open": 450
                                                     }
                                                 }
@@ -919,12 +919,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 525,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 525,
                                                         "open": 525
                                                     }
                                                 }
@@ -937,12 +937,12 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 360,
+                                                "pbranch": ";A;time;gregtime;day",
+                                                "pnigh": 360,
                                                 "open": 360
                                             }
                                         }
@@ -958,12 +958,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -977,12 +977,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -998,12 +998,12 @@
                                                 "pledge": true,
                                                 "reasonunits": {
                                                     "A;time;gregtime": {
-                                                        "context": ";A;time;gregtime",
+                                                        "rcontext": ";A;time;gregtime",
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 540,
+                                                                "pbranch": ";A;time;gregtime;day",
+                                                                "pnigh": 540,
                                                                 "open": 540
                                                             }
                                                         }
@@ -1039,12 +1039,12 @@
                                                 "pledge": true,
                                                 "reasonunits": {
                                                     "A;time;gregtime": {
-                                                        "context": ";A;time;gregtime",
+                                                        "rcontext": ";A;time;gregtime",
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 480,
+                                                                "pbranch": ";A;time;gregtime;day",
+                                                                "pnigh": 480,
                                                                 "open": 480
                                                             }
                                                         }
@@ -1058,12 +1058,12 @@
                                                 "pledge": true,
                                                 "reasonunits": {
                                                     "A;time;gregtime": {
-                                                        "context": ";A;time;gregtime",
+                                                        "rcontext": ";A;time;gregtime",
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 540,
+                                                                "pbranch": ";A;time;gregtime;day",
+                                                                "pnigh": 540,
                                                                 "open": 540
                                                             }
                                                         }
@@ -1081,12 +1081,12 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 1020,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 1020,
                                                         "open": 1020
                                                     }
                                                 }
@@ -1100,12 +1100,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -1120,12 +1120,12 @@
                                                 "mass": 1,
                                                 "reasonunits": {
                                                     "A;time;gregtime": {
-                                                        "context": ";A;time;gregtime",
+                                                        "rcontext": ";A;time;gregtime",
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 540,
+                                                                "pbranch": ";A;time;gregtime;day",
+                                                                "pnigh": 540,
                                                                 "open": 540
                                                             }
                                                         }
@@ -1138,12 +1138,12 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pbranch": ";A;time;gregtime;day",
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -1158,12 +1158,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 1080.0,
+                                                "pbranch": ";A;time;gregtime;day",
+                                                "pnigh": 1080.0,
                                                 "open": 540.0
                                             }
                                         }
@@ -1176,12 +1176,12 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;time;gregtime": {
-                                "context": ";A;time;gregtime",
+                                "rcontext": ";A;time;gregtime",
                                 "premises": {
                                     "A;time;gregtime;day": {
                                         "divisor": 1440,
-                                        "rbranch": ";A;time;gregtime;day",
-                                        "nigh": 360,
+                                        "pbranch": ";A;time;gregtime;day",
+                                        "pnigh": 360,
                                         "open": 360
                                     }
                                 }
@@ -1210,10 +1210,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States": {
-                                                                "context": ";A;Nation-States",
+                                                                "rcontext": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace": {
-                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
+                                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
                                                                     }
                                                                 }
                                                             }
@@ -1227,10 +1227,10 @@
                                                                 "mass": 1,
                                                                 "reasonunits": {
                                                                     "A;Interweb": {
-                                                                        "context": ";A;Interweb",
+                                                                        "rcontext": ";A;Interweb",
                                                                         "premises": {
                                                                             "A;Interweb,YahooVideo": {
-                                                                                "rbranch": ";A;Interweb,YahooVideo"
+                                                                                "pbranch": ";A;Interweb,YahooVideo"
                                                                             }
                                                                         }
                                                                     }
@@ -1242,10 +1242,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States": {
-                                                                "context": ";A;Nation-States",
+                                                                "rcontext": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden": {
-                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden"
+                                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden"
                                                                     }
                                                                 }
                                                             }
@@ -1257,10 +1257,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States": {
-                                                                "context": ";A;Nation-States",
+                                                                "rcontext": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                                                     }
                                                                 }
                                                             }
@@ -1272,10 +1272,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Moods": {
-                                                                "context": ";A;Moods",
+                                                                "rcontext": ";A;Moods",
                                                                 "premises": {
                                                                     "A;Moods;hungry": {
-                                                                        "rbranch": ";A;Moods;hungry"
+                                                                        "pbranch": ";A;Moods;hungry"
                                                                     }
                                                                 }
                                                             }
@@ -1287,10 +1287,10 @@
                                                 "mass": 1,
                                                 "reasonunits": {
                                                     "A;Nation-States": {
-                                                        "context": ";A;Nation-States",
+                                                        "rcontext": ";A;Nation-States",
                                                         "premises": {
                                                             "A;Nation-States;USA;Portland OR;Downtown;Flats": {
-                                                                "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
+                                                                "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
                                                             }
                                                         }
                                                     }
@@ -1304,10 +1304,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States": {
-                                                                "context": ";A;Nation-States",
+                                                                "rcontext": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
-                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
+                                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
                                                                     }
                                                                 }
                                                             }
@@ -1319,10 +1319,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Seasons": {
-                                                                "context": ";A;Seasons",
+                                                                "rcontext": ";A;Seasons",
                                                                 "premises": {
                                                                     "A;Seasons;Summer": {
-                                                                        "rbranch": ";A;Seasons;Summer"
+                                                                        "pbranch": ";A;Seasons;Summer"
                                                                     }
                                                                 }
                                                             }
@@ -1334,10 +1334,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States": {
-                                                                "context": ";A;Nation-States",
+                                                                "rcontext": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
-                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
+                                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
                                                                     }
                                                                 }
                                                             }
@@ -1349,10 +1349,10 @@
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States": {
-                                                                "context": ";A;Nation-States",
+                                                                "rcontext": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
-                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
+                                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
                                                                     }
                                                                 }
                                                             }
@@ -1364,10 +1364,10 @@
                                                 "mass": 1,
                                                 "reasonunits": {
                                                     "A;Nation-States": {
-                                                        "context": ";A;Nation-States",
+                                                        "rcontext": ";A;Nation-States",
                                                         "premises": {
                                                             "A;Nation-States;USA;Portland OR;Downtown;PSU": {
-                                                                "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
+                                                                "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
                                                             }
                                                         }
                                                     }
@@ -1379,10 +1379,10 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;Nation-States": {
-                                                "context": ";A;Nation-States",
+                                                "rcontext": ";A;Nation-States",
                                                 "premises": {
                                                     "A;Nation-States;USA;Portland OR;Downtown": {
-                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown"
+                                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown"
                                                     }
                                                 }
                                             }
@@ -1394,10 +1394,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;Nation-States": {
-                                        "context": ";A;Nation-States",
+                                        "rcontext": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "rbranch": ";A;Nation-States;USA;Portland OR"
+                                                "pbranch": ";A;Nation-States;USA;Portland OR"
                                             }
                                         }
                                     }
@@ -1409,10 +1409,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;Nation-States": {
-                                        "context": ";A;Nation-States",
+                                        "rcontext": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Texas": {
-                                                "rbranch": ";A;Nation-States;USA;Texas"
+                                                "pbranch": ";A;Nation-States;USA;Texas"
                                             }
                                         }
                                     }
@@ -1424,10 +1424,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;USA": {
-                                        "rbranch": ";A;Nation-States;USA"
+                                        "pbranch": ";A;Nation-States;USA"
                                     }
                                 }
                             }
@@ -1439,10 +1439,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;France2": {
-                                        "rbranch": ";A;Nation-States;France2"
+                                        "pbranch": ";A;Nation-States;France2"
                                     }
                                 }
                             }
@@ -1465,11 +1465,11 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 1472657760,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 1472657760,
                                                 "open": 0
                                             }
                                         }
@@ -1521,12 +1521,12 @@
                         "pledge": true,
                         "reasonunits": {
                             "A;time;gregtime": {
-                                "context": ";A;time;gregtime",
+                                "rcontext": ";A;time;gregtime",
                                 "premises": {
                                     "A;time;gregtime": {
                                         "divisor": 10080.0,
-                                        "rbranch": ";A;time;gregtime",
-                                        "nigh": 480.0,
+                                        "pbranch": ";A;time;gregtime",
+                                        "pnigh": 480.0,
                                         "open": 480.0
                                     }
                                 }
@@ -1539,10 +1539,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Moods": {
-                                "context": ";A;Moods",
+                                "rcontext": ";A;Moods",
                                 "premises": {
                                     "A;Moods;Happy;Happy - angerish": {
-                                        "rbranch": ";A;Moods;Happy;Happy - angerish"
+                                        "pbranch": ";A;Moods;Happy;Happy - angerish"
                                     }
                                 }
                             }
@@ -1564,12 +1564,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3360.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3360.0,
                                                 "open": 3360.0
                                             }
                                         }
@@ -1583,12 +1583,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -1609,12 +1609,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 60480.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 660.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 660.0,
                                                 "open": 660.0
                                             }
                                         }
@@ -1635,12 +1635,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 600.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 600.0,
                                                 "open": 600.0
                                             }
                                         }
@@ -1662,12 +1662,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1688,12 +1688,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1714,12 +1714,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 30240.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1740,12 +1740,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 1200.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 1200.0,
                                                 "open": 1200.0
                                             }
                                         }
@@ -1766,12 +1766,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 40320.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1792,12 +1792,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 4800.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 4800.0,
                                                 "open": 4800.0
                                             }
                                         }
@@ -1818,12 +1818,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 9120.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 9120.0,
                                                 "open": 9120.0
                                             }
                                         }
@@ -1861,20 +1861,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;casa;cleaning;laundry basket status": {
-                                        "context": ";A;casa;cleaning;laundry basket status",
+                                        "rcontext": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
+                                                "pbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1895,20 +1895,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;casa;cleaning;laundry basket status": {
-                                        "context": ";A;casa;cleaning;laundry basket status",
+                                        "rcontext": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
+                                                "pbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -1922,20 +1922,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;casa;cleaning;laundry basket status": {
-                                        "context": ";A;casa;cleaning;laundry basket status",
+                                        "rcontext": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
+                                                "pbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 7740.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 7740.0,
                                                 "open": 7740.0
                                             }
                                         }
@@ -1956,20 +1956,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;casa;cleaning;laundry basket status": {
-                                        "context": ";A;casa;cleaning;laundry basket status",
+                                        "rcontext": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
+                                                "pbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 6300.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 6300.0,
                                                 "open": 6300.0
                                             }
                                         }
@@ -1982,12 +1982,12 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 480.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 480.0,
                                                 "open": 480.0
                                             }
                                         }
@@ -2008,12 +2008,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 480.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 480.0,
                                                 "open": 480.0
                                             }
                                         }
@@ -2034,12 +2034,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 4740.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 4740.0,
                                                 "open": 4740.0
                                             }
                                         }
@@ -2060,12 +2060,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 9060.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 9060.0,
                                                 "open": 9060.0
                                             }
                                         }
@@ -2086,12 +2086,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2112,12 +2112,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 7620.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 7620.0,
                                                 "open": 7620.0
                                             }
                                         }
@@ -2138,12 +2138,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2164,12 +2164,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2182,10 +2182,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                        "pbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                     }
                                 }
                             }
@@ -2208,12 +2208,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 420,
+                                                "pbranch": ";A;time;gregtime;day",
+                                                "pnigh": 420,
                                                 "open": 420
                                             }
                                         }
@@ -2234,12 +2234,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -2260,12 +2260,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 80640.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 4860.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 4860.0,
                                                 "open": 4860.0
                                             }
                                         }
@@ -2286,12 +2286,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2312,12 +2312,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -2338,12 +2338,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 80640.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2366,12 +2366,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 9600.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 9600.0,
                                                         "open": 9600.0
                                                     }
                                                 }
@@ -2404,12 +2404,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 3360.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 3360.0,
                                                         "open": 3360.0
                                                     }
                                                 }
@@ -2422,12 +2422,12 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6242.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 6242.0,
                                                         "open": 6242.0
                                                     }
                                                 }
@@ -2448,12 +2448,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 3420.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 3420.0,
                                                         "open": 3420.0
                                                     }
                                                 }
@@ -2473,12 +2473,12 @@
                                         "mass": 1,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 7200.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 7200.0,
                                                         "open": 7200.0
                                                     }
                                                 }
@@ -2515,12 +2515,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 4800.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 4800.0,
                                                         "open": 4800.0
                                                     }
                                                 }
@@ -2541,12 +2541,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6240.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 6240.0,
                                                         "open": 6240.0
                                                     }
                                                 }
@@ -2572,30 +2572,30 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
                                     }
                                 }
                             },
-                            "night multivitamin": {
+                            "evening multivitamin": {
                                 "_uid": 230,
-                                "idea_tag": "night multivitamin",
+                                "idea_tag": "evening multivitamin",
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 1080.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 1080.0,
                                                 "open": 1080.0
                                             }
                                         }
@@ -2616,12 +2616,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2642,12 +2642,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -2664,12 +2664,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 9180.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 9180.0,
                                                         "open": 9180.0
                                                     }
                                                 }
@@ -2683,12 +2683,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 9180.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 9180.0,
                                                         "open": 9180.0
                                                     }
                                                 }
@@ -2708,12 +2708,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 9180.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 9180.0,
                                                 "open": 9180.0
                                             }
                                         }
@@ -2734,12 +2734,12 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2768,11 +2768,11 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2793,11 +2793,11 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2818,11 +2818,11 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2843,11 +2843,11 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2985,10 +2985,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Interweb": {
-                                "context": ";A;Interweb",
+                                "rcontext": ";A;Interweb",
                                 "premises": {
                                     "A;Interweb,Faaceboook": {
-                                        "rbranch": ";A;Interweb,Faaceboook"
+                                        "pbranch": ";A;Interweb,Faaceboook"
                                     }
                                 }
                             }
@@ -3011,20 +3011,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;Nation-States": {
-                                        "context": ";A;Nation-States",
+                                        "rcontext": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "rbranch": ";A;Nation-States;USA;Portland OR"
+                                                "pbranch": ";A;Nation-States;USA;Portland OR"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 5340.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 5340.0,
                                                 "open": 5340.0
                                             }
                                         }
@@ -3045,20 +3045,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;Nation-States": {
-                                        "context": ";A;Nation-States",
+                                        "rcontext": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "rbranch": ";A;Nation-States;USA;Portland OR"
+                                                "pbranch": ";A;Nation-States;USA;Portland OR"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 60480.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 840.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 840.0,
                                                 "open": 840.0
                                             }
                                         }
@@ -3071,10 +3071,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Nation-States": {
-                                "context": ";A;Nation-States",
+                                "rcontext": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;USA;Portland OR": {
-                                        "rbranch": ";A;Nation-States;USA;Portland OR"
+                                        "pbranch": ";A;Nation-States;USA;Portland OR"
                                     }
                                 }
                             }
@@ -3087,12 +3087,12 @@
                         "pledge": true,
                         "reasonunits": {
                             "A;time;gregtime": {
-                                "context": ";A;time;gregtime",
+                                "rcontext": ";A;time;gregtime",
                                 "premises": {
                                     "A;time;gregtime;day": {
                                         "divisor": 1440.0,
-                                        "rbranch": ";A;time;gregtime;day",
-                                        "nigh": 480.0,
+                                        "pbranch": ";A;time;gregtime;day",
+                                        "pnigh": 480.0,
                                         "open": 480.0
                                     }
                                 }
@@ -3113,12 +3113,12 @@
                         "pledge": true,
                         "reasonunits": {
                             "A;time;gregtime": {
-                                "context": ";A;time;gregtime",
+                                "rcontext": ";A;time;gregtime",
                                 "premises": {
                                     "A;time;gregtime": {
                                         "divisor": 1440.0,
-                                        "rbranch": ";A;time;gregtime",
-                                        "nigh": 480.0,
+                                        "pbranch": ";A;time;gregtime",
+                                        "pnigh": 480.0,
                                         "open": 480.0
                                     }
                                 }
@@ -3149,10 +3149,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;Aaron Donald objects effected by him": {
-                                        "context": ";A;Aaron Donald objects effected by him",
+                                        "rcontext": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     }
@@ -3171,10 +3171,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Aaron Donald objects effected by him": {
-                                "context": ";A;Aaron Donald objects effected by him",
+                                "rcontext": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3189,20 +3189,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;Aaron Donald objects effected by him": {
-                                        "context": ";A;Aaron Donald objects effected by him",
+                                        "rcontext": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 660,
+                                                "pbranch": ";A;time;gregtime;day",
+                                                "pnigh": 660,
                                                 "open": 660
                                             }
                                         }
@@ -3222,10 +3222,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Aaron Donald objects effected by him": {
-                                "context": ";A;Aaron Donald objects effected by him",
+                                "rcontext": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3247,20 +3247,20 @@
                                 "pledge": true,
                                 "reasonunits": {
                                     "A;Aaron Donald objects effected by him": {
-                                        "context": ";A;Aaron Donald objects effected by him",
+                                        "rcontext": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 20160.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 4920.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 4920.0,
                                                 "open": 4920.0
                                             }
                                         }
@@ -3273,36 +3273,36 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Aaron Donald objects effected by him": {
-                                "context": ";A;Aaron Donald objects effected by him",
+                                "rcontext": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
                         }
                     },
-                    "late_night_go_to_sleep": {
+                    "late_evening_go_to_sleep": {
                         "_uid": 149,
-                        "idea_tag": "late_night_go_to_sleep",
+                        "idea_tag": "late_evening_go_to_sleep",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
                             "A;Aaron Donald objects effected by him": {
-                                "context": ";A;Aaron Donald objects effected by him",
+                                "rcontext": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             },
                             "A;time;gregtime": {
-                                "context": ";A;time;gregtime",
+                                "rcontext": ";A;time;gregtime",
                                 "premises": {
                                     "A;time;gregtime": {
                                         "divisor": 1440.0,
-                                        "rbranch": ";A;time;gregtime",
-                                        "nigh": 1305.0,
+                                        "pbranch": ";A;time;gregtime",
+                                        "pnigh": 1305.0,
                                         "open": 1305.0
                                     }
                                 }
@@ -3320,12 +3320,12 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6495.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 6495.0,
                                                         "open": 6480.0
                                                     }
                                                 }
@@ -3338,7 +3338,7 @@
                                 "morph": false,
                                 "reasonunits": {
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime"
+                                        "rcontext": ";A;time;gregtime"
                                     }
                                 }
                             },
@@ -3358,20 +3358,20 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;Aaron Donald objects effected by him": {
-                                                "context": ";A;Aaron Donald objects effected by him",
+                                                "rcontext": ";A;Aaron Donald objects effected by him",
                                                 "premises": {
                                                     "A;Aaron Donald objects effected by him;interesting": {
-                                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 }
                                             },
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6540.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 6540.0,
                                                         "open": 6480.0
                                                     }
                                                 }
@@ -3397,20 +3397,20 @@
                                         "pledge": true,
                                         "reasonunits": {
                                             "A;Aaron Donald objects effected by him": {
-                                                "context": ";A;Aaron Donald objects effected by him",
+                                                "rcontext": ";A;Aaron Donald objects effected by him",
                                                 "premises": {
                                                     "A;Aaron Donald objects effected by him;interesting": {
-                                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 }
                                             },
                                             "A;time;gregtime": {
-                                                "context": ";A;time;gregtime",
+                                                "rcontext": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 20160.0,
-                                                        "rbranch": ";A;time;gregtime",
-                                                        "nigh": 600.0,
+                                                        "pbranch": ";A;time;gregtime",
+                                                        "pnigh": 600.0,
                                                         "open": 600.0
                                                     }
                                                 }
@@ -3430,10 +3430,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;Aaron Donald objects effected by him": {
-                                        "context": ";A;Aaron Donald objects effected by him",
+                                        "rcontext": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     }
@@ -3445,10 +3445,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Aaron Donald objects effected by him": {
-                                "context": ";A;Aaron Donald objects effected by him",
+                                "rcontext": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3469,20 +3469,20 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;Aaron Donald objects effected by him": {
-                                        "context": ";A;Aaron Donald objects effected by him",
+                                        "rcontext": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
                                     "A;time;gregtime": {
-                                        "context": ";A;time;gregtime",
+                                        "rcontext": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 20160.0,
-                                                "rbranch": ";A;time;gregtime",
-                                                "nigh": 600.0,
+                                                "pbranch": ";A;time;gregtime",
+                                                "pnigh": 600.0,
                                                 "open": 600.0
                                             }
                                         }
@@ -3495,10 +3495,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Aaron Donald objects effected by him": {
-                                "context": ";A;Aaron Donald objects effected by him",
+                                "rcontext": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3527,10 +3527,10 @@
                 "mass": 1,
                 "reasonunits": {
                     "A;Aaron Donald objects effected by him": {
-                        "context": ";A;Aaron Donald objects effected by him",
+                        "rcontext": ";A;Aaron Donald objects effected by him",
                         "premises": {
                             "A;Aaron Donald objects effected by him;interesting": {
-                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
+                                "pbranch": ";A;Aaron Donald objects effected by him;interesting"
                             }
                         }
                     }
@@ -5189,10 +5189,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Moods": {
-                                "context": ";A;Moods",
+                                "rcontext": ";A;Moods",
                                 "premises": {
                                     "A;Moods;Happy": {
-                                        "rbranch": ";A;Moods;Happy"
+                                        "pbranch": ";A;Moods;Happy"
                                     }
                                 }
                             }
@@ -5204,10 +5204,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;No Movie playing": {
-                                "context": ";A;No Movie playing",
+                                "rcontext": ";A;No Movie playing",
                                 "premises": {
                                     "A;No Movie playing;Big Lewbwski": {
-                                        "rbranch": ";A;No Movie playing;Big Lewbwski"
+                                        "pbranch": ";A;No Movie playing;Big Lewbwski"
                                     }
                                 }
                             }
@@ -5221,10 +5221,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;Moods": {
-                                        "context": ";A;Moods",
+                                        "rcontext": ";A;Moods",
                                         "premises": {
                                             "A;Moods;Happy": {
-                                                "rbranch": ";A;Moods;Happy"
+                                                "pbranch": ";A;Moods;Happy"
                                             }
                                         }
                                     }
@@ -5236,10 +5236,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;Moods": {
-                                "context": ";A;Moods",
+                                "rcontext": ";A;Moods",
                                 "premises": {
                                     "A;Moods;Happy": {
-                                        "rbranch": ";A;Moods;Happy"
+                                        "pbranch": ";A;Moods;Happy"
                                     }
                                 }
                             }
@@ -5251,10 +5251,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;No Movie playing": {
-                                "context": ";A;No Movie playing",
+                                "rcontext": ";A;No Movie playing",
                                 "premises": {
                                     "A;No Movie playing;Star Wars eps IV": {
-                                        "rbranch": ";A;No Movie playing;Star Wars eps IV"
+                                        "pbranch": ";A;No Movie playing;Star Wars eps IV"
                                     }
                                 }
                             }
@@ -5266,10 +5266,10 @@
                 "mass": 1,
                 "reasonunits": {
                     "A;Moods": {
-                        "context": ";A;Moods",
+                        "rcontext": ";A;Moods",
                         "premises": {
                             "A;Moods;Happy": {
-                                "rbranch": ";A;Moods;Happy"
+                                "pbranch": ";A;Moods;Happy"
                             }
                         }
                     }
@@ -5286,10 +5286,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;WaterExistence": {
-                                        "context": ";A;WaterExistence",
+                                        "rcontext": ";A;WaterExistence",
                                         "premises": {
                                             "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
-                                                "rbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                                                "pbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
                                             }
                                         }
                                     }
@@ -5301,10 +5301,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;WaterExistence": {
-                                        "context": ";A;WaterExistence",
+                                        "rcontext": ";A;WaterExistence",
                                         "premises": {
                                             "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
-                                                "rbranch": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                                                "pbranch": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
                                             }
                                         }
                                     }
@@ -5316,10 +5316,10 @@
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;WaterExistence": {
-                                        "context": ";A;WaterExistence",
+                                        "rcontext": ";A;WaterExistence",
                                         "premises": {
                                             "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
-                                                "rbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                                                "pbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
                                             }
                                         }
                                     }
@@ -5331,10 +5331,10 @@
                         "mass": 1,
                         "reasonunits": {
                             "A;WaterExistence": {
-                                "context": ";A;WaterExistence",
+                                "rcontext": ";A;WaterExistence",
                                 "premises": {
                                     "A;WaterExistence;Williamette WaterShed": {
-                                        "rbranch": ";A;WaterExistence;Williamette WaterShed"
+                                        "pbranch": ";A;WaterExistence;Williamette WaterShed"
                                     }
                                 }
                             }

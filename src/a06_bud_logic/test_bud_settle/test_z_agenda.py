@@ -91,21 +91,21 @@ def test_BudUnit_get_agenda_dict_WithNo7amIdeaExample():
 
 def test_BudUnit_get_agenda_dict_With7amIdeaExample():
     # ESTABLISH
-    # set facts as midnight to 8am
+    # set facts as midevening to 8am
     x_bud = get_budunit_with7amCleanTableReason()
     print(f"{len(x_bud.get_agenda_dict())=}")
     assert len(x_bud.get_agenda_dict()) == 1
     timetech_way = x_bud.make_l1_way("timetech")
     day24hr_way = x_bud.make_way(timetech_way, "24hr day")
     day24hr_open = 0.0
-    day24hr_nigh = 8.0
+    day24hr_pnigh = 8.0
     housemanagement_str = "housemanagement"
     housemanagement_way = x_bud.make_l1_way(housemanagement_str)
     clean_str = "clean table"
     clean_way = x_bud.make_way(housemanagement_way, clean_str)
 
     # WHEN
-    x_bud.add_fact(day24hr_way, day24hr_way, day24hr_open, day24hr_nigh, True)
+    x_bud.add_fact(day24hr_way, day24hr_way, day24hr_open, day24hr_pnigh, True)
 
     # THEN
     print(x_bud.idearoot.factunits[day24hr_way])
@@ -208,8 +208,8 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # idea_pledge_list = yao_bud.get_agenda_dict()
     # assert len(idea_pledge_list) == 53
 
-    # for context in yao_bud.get_missing_fact_contexts():
-    #     print(f"{context=}")
+    # for rcontext in yao_bud.get_missing_fact_rcontexts():
+    #     print(f"{rcontext=}")
 
     # for agenda_idea in idea_pledge_list:
     #     print(f"{agenda_idea._uid=} {agenda_idea.parent_way=}")
@@ -221,28 +221,28 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     print(len(idea_pledge_list))
 
 
-def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnContext_budunit_v001_with_large_agenda():
+def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnRcontext_budunit_v001_with_large_agenda():
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
     week_str = "weekdays"
     week_way = yao_bud.make_l1_way(week_str)
     print(f"{type(yao_bud)=}")
-    # for context in yao_bud.get_missing_fact_contexts():
-    #     print(f"{context=}")
+    # for rcontext in yao_bud.get_missing_fact_rcontexts():
+    #     print(f"{rcontext=}")
 
     # for agenda_idea in yao_bud.get_agenda_dict():
     #     print(
     #         f"{agenda_idea.parent_way=} {agenda_idea.idea_tag} {len(agenda_idea.reasonunits)=}"
     #     )
     #     for reason in agenda_idea.reasonunits.values():
-    #         if reason.context == weekdays:
+    #         if reason.rcontext == weekdays:
     #             print(f"         {weekdays}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
     assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN
-    pledge_list = yao_bud.get_agenda_dict(necessary_context=week_way)
+    pledge_list = yao_bud.get_agenda_dict(necessary_rcontext=week_way)
 
     # THEN
     assert len(pledge_list) != 63
@@ -264,10 +264,10 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     zia_bud.set_idea(ideaunit_shop(day_str, begin=0, close=500), time_way)
     zia_bud.edit_idea_attr(
         run_way,
-        reason_context=day_way,
+        reason_rcontext=day_way,
         reason_premise=day_way,
         reason_premise_open=25,
-        reason_premise_nigh=81,
+        reason_pnigh=81,
     )
     zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=30, fnigh=87)
     zia_bud.get_agenda_dict()
@@ -275,14 +275,14 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.premises[day_way]._status=}")
     print(f"{run_reasonunits.premises[day_way]._task=}")
-    print(f"{zia_bud.get_reason_contexts()=}")
+    print(f"{zia_bud.get_reason_rcontexts()=}")
     assert len(zia_bud.get_idea_dict()) == 4
     assert len(zia_bud.get_agenda_dict()) == 1
     print(f"{zia_bud.get_agenda_dict().keys()=}")
     assert zia_bud.get_agenda_dict().get(run_way)._task is True
 
     # WHEN
-    zia_bud.set_agenda_task_complete(task_way=run_way, context=day_way)
+    zia_bud.set_agenda_task_complete(task_way=run_way, rcontext=day_way)
 
     # THEN
     agenda_dict = zia_bud.get_agenda_dict()
@@ -305,10 +305,10 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     zia_bud.set_idea(ideaunit_shop(day_str, begin=0, close=500), time_way)
     zia_bud.edit_idea_attr(
         run_way,
-        reason_context=day_way,
+        reason_rcontext=day_way,
         reason_premise=day_way,
         reason_premise_open=1,
-        reason_premise_nigh=1,
+        reason_pnigh=1,
         reason_premise_divisor=2,
     )
 
@@ -326,7 +326,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     print(f"{run_idea.factunits=}")
 
     # WHEN
-    zia_bud.set_agenda_task_complete(task_way=run_way, context=day_way)
+    zia_bud.set_agenda_task_complete(task_way=run_way, rcontext=day_way)
 
     # THEN
     print(f"{run_idea.factunits=}")
@@ -394,24 +394,24 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     # THEN
     assert len(pledge_idea_list) == 66
     db_way = yao_bud.make_l1_way("D&B")
-    night_str = "late_night_go_to_sleep"
-    night_way = yao_bud.make_way(db_way, night_str)
-    night_idea = yao_bud._idea_dict.get(night_way)
+    evening_str = "late_evening_go_to_sleep"
+    evening_way = yao_bud.make_way(db_way, evening_str)
+    evening_idea = yao_bud._idea_dict.get(evening_way)
     # for idea_x in yao_bud.get_agenda_dict():
     #     # if idea_x._task != True:
     #     #     print(f"{len(pledge_idea_list)=} {idea_x._task=} {idea_x.get_idea_way()}")
-    #     if idea_x.idea_tag == night_idea_tag:
-    #         night_idea = idea_x
+    #     if idea_x.idea_tag == evening_idea_tag:
+    #         evening_idea = idea_x
     #         print(f"{idea_x.get_idea_way()=}")
 
-    print(f"\nIdea = '{night_str}' and reason '{gregtime_way}'")
-    factheir_gregtime = night_idea._factheirs.get(gregtime_way)
+    print(f"\nIdea = '{evening_str}' and reason '{gregtime_way}'")
+    factheir_gregtime = evening_idea._factheirs.get(gregtime_way)
     print(f"\n{factheir_gregtime=}")
 
     # for reasonheir in agenda_idea._reasonheirs.values():
-    #     print(f"{reasonheir.context=} {reasonheir._status=} {reasonheir._task=}")
-    reasonheir_gregtime = night_idea._reasonheirs.get(gregtime_way)
-    reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.context}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"
+    #     print(f"{reasonheir.rcontext=} {reasonheir._status=} {reasonheir._task=}")
+    reasonheir_gregtime = evening_idea._reasonheirs.get(gregtime_way)
+    reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.rcontext}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"
     print(reasonheir_str)
 
     premiseunit = reasonheir_gregtime.premises.get(gregtime_way)
@@ -423,16 +423,16 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     )
     # segr_obj = premisestatusfinder_shop(
     #     premise_open=premiseunit.open,
-    #     premise_nigh=premiseunit.nigh,
+    #     pnigh=premiseunit.pnigh,
     #     premise_divisor=premiseunit.divisor,
     #     fact_open_full=factheir_gregtime.open,
-    #     fact_nigh_full=factheir_gregtime.nigh,
+    #     fnigh_full=factheir_gregtime.pnigh,
     # )
     # print(
-    #     f"----\n  {segr_obj.premise_open=}  {segr_obj.premise_nigh=}  {segr_obj.premise_divisor=}"
+    #     f"----\n  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.premise_divisor=}"
     # )
     # print(
-    #     f"       {segr_obj.fact_open_full=}         {segr_obj.fact_nigh_full=} \tdifference:{segr_obj.fact_nigh_full-segr_obj.fact_open_full}"
+    #     f"       {segr_obj.fact_open_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"
     # )
 
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")

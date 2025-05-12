@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "context": {
+        "rcontext": {
             "otx_key": true
         },
         "divisor": {
@@ -15,10 +15,10 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "rbranch": {
+        "pbranch": {
             "otx_key": true
         },
-        "nigh": {
+        "pnigh": {
             "otx_key": false
         },
         "open": {

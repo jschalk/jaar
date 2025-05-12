@@ -22,8 +22,8 @@ def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:
     return DataFrame(x_acctunits_list)
 
 
-def get_bud_agenda_dataframe(x_bud: BudUnit, context: WayStr = None) -> DataFrame:
-    agenda_dict = x_bud.get_agenda_dict(necessary_context=context)
+def get_bud_agenda_dataframe(x_bud: BudUnit, rcontext: WayStr = None) -> DataFrame:
+    agenda_dict = x_bud.get_agenda_dict(necessary_rcontext=rcontext)
     if agenda_dict == {}:
         return DataFrame(
             columns=[

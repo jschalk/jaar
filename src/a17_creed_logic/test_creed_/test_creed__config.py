@@ -23,8 +23,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     addin_str,
     awardee_label_str,
-    context_str,
-    context_idea_active_requisite_str,
+    rcontext_str,
+    rcontext_idea_active_requisite_str,
     begin_str,
     denom_str,
     event_int_str,
@@ -48,7 +48,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     gogo_want_str,
     mass_str,
     morph_str,
-    rbranch_str,
+    pbranch_str,
     pledge_str,
     stop_want_str,
     fund_coin_str,
@@ -56,7 +56,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     respect_bit_str,
     give_force_str,
     take_force_str,
-    nigh_str,
+    pnigh_str,
     open_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import (
@@ -236,12 +236,12 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[23] == get_delete_key_name(group_label_str())
     assert table_sorting_priority[24] == idea_way_str()
     assert table_sorting_priority[25] == get_delete_key_name(idea_way_str())
-    assert table_sorting_priority[26] == context_str()
-    assert table_sorting_priority[27] == get_delete_key_name(context_str())
+    assert table_sorting_priority[26] == rcontext_str()
+    assert table_sorting_priority[27] == get_delete_key_name(rcontext_str())
     assert table_sorting_priority[28] == fcontext_str()
     assert table_sorting_priority[29] == get_delete_key_name(fcontext_str())
-    assert table_sorting_priority[30] == rbranch_str()
-    assert table_sorting_priority[31] == get_delete_key_name(rbranch_str())
+    assert table_sorting_priority[30] == pbranch_str()
+    assert table_sorting_priority[31] == get_delete_key_name(pbranch_str())
     assert table_sorting_priority[32] == fbranch_str()
     assert table_sorting_priority[33] == team_label_str()
     assert table_sorting_priority[34] == get_delete_key_name(team_label_str())
@@ -259,7 +259,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[46] == morph_str()
     assert table_sorting_priority[47] == gogo_want_str()
     assert table_sorting_priority[48] == stop_want_str()
-    assert table_sorting_priority[49] == context_idea_active_requisite_str()
+    assert table_sorting_priority[49] == rcontext_idea_active_requisite_str()
     assert table_sorting_priority[50] == credit_belief_str()
     assert table_sorting_priority[51] == debtit_belief_str()
     assert table_sorting_priority[52] == credit_vote_str()
@@ -272,7 +272,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[59] == give_force_str()
     assert table_sorting_priority[60] == mass_str()
     assert table_sorting_priority[61] == "max_tree_traverse"
-    assert table_sorting_priority[62] == nigh_str()
+    assert table_sorting_priority[62] == pnigh_str()
     assert table_sorting_priority[63] == open_str()
     assert table_sorting_priority[64] == "divisor"
     assert table_sorting_priority[65] == pledge_str()
@@ -325,7 +325,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[112] == "_all_acct_cred"
     assert table_sorting_priority[113] == "_keeps_justified"
     assert table_sorting_priority[114] == "_offtrack_fund"
-    assert table_sorting_priority[115] == "_context_idea_active_value"
+    assert table_sorting_priority[115] == "_rcontext_idea_active_value"
     assert table_sorting_priority[116] == "_irrational_debtit_belief"
     assert table_sorting_priority[117] == "_sum_healerlink_share"
     assert table_sorting_priority[118] == "_keeps_buildable"
@@ -371,8 +371,8 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
     assert sqlite_types.get(idea_way_str()) == "TEXT"
-    assert sqlite_types.get(context_str()) == "TEXT"
-    assert sqlite_types.get("rbranch") == "TEXT"
+    assert sqlite_types.get(rcontext_str()) == "TEXT"
+    assert sqlite_types.get("pbranch") == "TEXT"
     assert sqlite_types.get("fbranch") == "TEXT"
     assert sqlite_types.get(team_label_str()) == "TEXT"
     assert sqlite_types.get(awardee_label_str()) == "TEXT"
@@ -388,7 +388,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(morph_str()) == "INTEGER"
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
-    assert sqlite_types.get(context_idea_active_requisite_str()) == "INTEGER"
+    assert sqlite_types.get(rcontext_idea_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(credit_belief_str()) == "REAL"
     assert sqlite_types.get(debtit_belief_str()) == "REAL"
     assert sqlite_types.get(credit_vote_str()) == "REAL"
@@ -401,7 +401,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(give_force_str()) == "REAL"
     assert sqlite_types.get(mass_str()) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
-    assert sqlite_types.get("nigh") == "REAL"
+    assert sqlite_types.get("pnigh") == "REAL"
     assert sqlite_types.get("open") == "REAL"
     assert sqlite_types.get("divisor") == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"

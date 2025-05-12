@@ -74,7 +74,7 @@ from sqlite3 import (
 class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
-    world_time_nigh: TimeLinePoint = None
+    world_time_pnigh: TimeLinePoint = None
     timeconversions: dict[TimeLineTag, TimeConversion] = None
     _syntax_otz_dir: str = None
     _syntax_inz_dir: str = None
@@ -389,7 +389,7 @@ class WorldUnit:
     def get_dict(self) -> dict:
         return {
             "world_id": self.world_id,
-            "world_time_nigh": self.world_time_nigh,
+            "world_time_pnigh": self.world_time_pnigh,
             "timeconversions": self.get_timeconversions_dict(),
         }
 
@@ -398,14 +398,14 @@ def worldunit_shop(
     world_id: WorldID,
     worlds_dir: str,
     mud_dir: str = None,
-    world_time_nigh: TimeLinePoint = None,
+    world_time_pnigh: TimeLinePoint = None,
     timeconversions: dict[TimeLineTag, TimeConversion] = None,
     _fiscunits: set[FiscTag] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
-        world_time_nigh=get_0_if_None(world_time_nigh),
+        world_time_pnigh=get_0_if_None(world_time_pnigh),
         timeconversions=get_empty_dict_if_None(timeconversions),
         _events={},
         _fiscunits=get_empty_set_if_None(_fiscunits),

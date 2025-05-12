@@ -13,7 +13,7 @@ from src.a06_bud_logic.bud import (
 from src.a06_bud_logic._utils.example_buds import (
     budunit_v001,
     get_budunit_x1_3levels_1reason_1facts,
-    get_budunit_context_time_example,
+    get_budunit_rcontext_time_example,
 )
 from pytest import raises as pytest_raises
 
@@ -539,7 +539,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     # ESTABLISH
     x1_bud = budunit_v001()
     x2_bud = get_budunit_x1_3levels_1reason_1facts()
-    x3_bud = get_budunit_context_time_example()
+    x3_bud = get_budunit_rcontext_time_example()
     print(f"{x1_bud.owner_name}")
     print(f"{x2_bud.owner_name}")
     print(f"{x3_bud.owner_name}")

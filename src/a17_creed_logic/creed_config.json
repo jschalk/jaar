@@ -86,17 +86,17 @@
     "build_order": 16,
     "creed_category": "bud",
     "jkeys": {
-      "context": {},
+      "rcontext": {},
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
-      "rbranch": {},
+      "pbranch": {},
       "owner_name": {},
       "idea_way": {}
     },
     "jvalues": {
       "divisor": {},
-      "nigh": {},
+      "pnigh": {},
       "open": {}
     }
   },
@@ -105,7 +105,7 @@
     "build_order": 17,
     "creed_category": "bud",
     "jkeys": {
-      "context": {},
+      "rcontext": {},
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
@@ -113,7 +113,7 @@
       "idea_way": {}
     },
     "jvalues": {
-      "context_idea_active_requisite": {}
+      "rcontext_idea_active_requisite": {}
     }
   },
   "bud_idea_teamlink": {

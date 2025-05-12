@@ -189,15 +189,15 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     sue_bud.set_idea(soap_idea, clean_way)
     sue_bud.set_idea(grab_idea, soap_way)
 
-    clean_table_7am_context = day24hr_way
+    clean_table_7am_rcontext = day24hr_way
     clean_table_7am_premise_way = day24hr_way
     clean_table_7am_premise_open = 7.0
-    clean_table_7am_premise_nigh = 7.0
-    clean_table_7am_reason = reasonunit_shop(clean_table_7am_context)
+    clean_table_7am_pnigh = 7.0
+    clean_table_7am_reason = reasonunit_shop(clean_table_7am_rcontext)
     clean_table_7am_reason.set_premise(
         premise=clean_table_7am_premise_way,
         open=clean_table_7am_premise_open,
-        nigh=clean_table_7am_premise_nigh,
+        pnigh=clean_table_7am_pnigh,
     )
     sue_bud.edit_idea_attr(clean_way, reason=clean_table_7am_reason)
     casa_str = "casa"
@@ -212,7 +212,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     hour_min_idea = ideaunit_shop(hour_min_str)
     hour_way = yao_bud.make_l1_way(hour_min_str)
     hour_reasonunit = reasonunit_shop(hour_way)
-    hour_reasonunit.set_premise(hour_way, open=80, nigh=90)
+    hour_reasonunit.set_premise(hour_way, open=80, pnigh=90)
     yao_bud.set_l1_idea(hour_min_idea)
     yao_bud.add_fact(hour_way, hour_way, 85, 95)
     mail_str = "obtain mail"
@@ -256,7 +256,7 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     return zia_bud
 
 
-def get_budunit_context_time_example() -> BudUnit:
+def get_budunit_rcontext_time_example() -> BudUnit:
     sue_bud = budunit_shop("Sue")
     sue_bud.set_l1_idea(ideaunit_shop("casa"))
     return sue_bud
@@ -290,16 +290,16 @@ def get_budunit_irrational_example() -> BudUnit:
     hatter_bud.edit_idea_attr(
         egg_way,
         pledge=True,
-        reason_context=chicken_way,
-        reason_context_idea_active_requisite=True,
+        reason_rcontext=chicken_way,
+        reason_rcontext_idea_active_requisite=True,
     )
 
     # set chick pledge is True when egg first is False
     hatter_bud.edit_idea_attr(
         chicken_way,
         pledge=True,
-        reason_context=egg_way,
-        reason_context_idea_active_requisite=False,
+        reason_rcontext=egg_way,
+        reason_rcontext_idea_active_requisite=False,
     )
 
     return hatter_bud
@@ -363,11 +363,11 @@ def get_budunit_laundry_example1() -> BudUnit:
 
     # laundry requirement
     amos_bud.edit_idea_attr(
-        laundry_task_way, reason_context=basket_way, reason_premise=b_full_way
+        laundry_task_way, reason_rcontext=basket_way, reason_premise=b_full_way
     )
     # laundry requirement
     amos_bud.edit_idea_attr(
-        laundry_task_way, reason_context=basket_way, reason_premise=b_smel_way
+        laundry_task_way, reason_rcontext=basket_way, reason_premise=b_smel_way
     )
     cali_teamunit = teamunit_shop()
     cali_teamunit.set_teamlink(cali_str)

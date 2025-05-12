@@ -61,10 +61,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=day_way,
+        reason_rcontext=day_way,
         reason_premise=day_way,
         reason_premise_open=0,
-        reason_premise_nigh=1,
+        reason_pnigh=1,
         reason_premise_divisor=1,
     )
     sue_budunit.add_fact(creg_way, creg_way, 0, 1440)
@@ -95,10 +95,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=day_way,
+        reason_rcontext=day_way,
         reason_premise=day_way,
         reason_premise_open=360,
-        reason_premise_nigh=420,
+        reason_pnigh=420,
         reason_premise_divisor=1440,
     )
     sue_budunit.add_fact(creg_way, creg_way, 14400300, 14400480)
@@ -128,10 +128,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=days_way,
+        reason_rcontext=days_way,
         reason_premise=days_way,
         reason_premise_open=4,
-        reason_premise_nigh=5,
+        reason_pnigh=5,
         reason_premise_divisor=7,
     )
     sue_budunit.add_fact(creg_way, creg_way, 11 * 1400, 12 * 1400)
@@ -164,10 +164,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=week_way,
+        reason_rcontext=week_way,
         reason_premise=week_way,
         reason_premise_open=0,
-        reason_premise_nigh=1440,
+        reason_pnigh=1440,
         reason_premise_divisor=10080,
     )
     sue_budunit.add_fact(creg_way, creg_way, 0, 1440)
@@ -198,10 +198,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=week_way,
+        reason_rcontext=week_way,
         reason_premise=week_way,
         reason_premise_open=2880,
-        reason_premise_nigh=4220,
+        reason_pnigh=4220,
         reason_premise_divisor=10080,
     )
     sue_budunit.add_fact(creg_way, creg_way, 100802880, 100804220)
@@ -232,10 +232,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=weeks_way,
+        reason_rcontext=weeks_way,
         reason_premise=weeks_way,
         reason_premise_open=4,
-        reason_premise_nigh=5,
+        reason_pnigh=5,
         reason_premise_divisor=7,
     )
     sue_budunit.add_fact(creg_way, creg_way, 11 * 10080, 12 * 10080)
@@ -265,10 +265,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=year_way,
+        reason_rcontext=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
-        reason_premise_nigh=1440,
+        reason_pnigh=1440,
         reason_premise_divisor=525600,
     )
     sue_budunit.add_fact(creg_way, creg_way, 0, 1440)
@@ -308,10 +308,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=year_way,
+        reason_rcontext=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
-        reason_premise_nigh=1440,
+        reason_pnigh=1440,
         reason_premise_divisor=525600,
     )
     sue_budunit.add_fact(creg_way, creg_way, 525600, 525600 + 1440)
@@ -343,10 +343,10 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=year_way,
+        reason_rcontext=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
-        reason_premise_nigh=1440,
+        reason_pnigh=1440,
         reason_premise_divisor=525600,
     )
     sue_budunit.add_fact(creg_way, creg_way, 525600, 525600 + 1440)
@@ -410,17 +410,17 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=wed_way,
+        reason_rcontext=wed_way,
         reason_premise=wed_way,
         reason_premise_open=wed_gogo_want(),
-        reason_premise_nigh=wed_gogo_want() + 1440,
+        reason_pnigh=wed_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=year_way,
+        reason_rcontext=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
-        reason_premise_nigh=1400,
+        reason_pnigh=1400,
     )
 
     yr2000_mar1day = get_creg_min_from_dt(datetime(2000, 3, 1, 0, 0))
@@ -537,17 +537,17 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=wed_way,
+        reason_rcontext=wed_way,
         reason_premise=wed_way,
         reason_premise_open=thu_gogo_want(),
-        reason_premise_nigh=thu_gogo_want() + 1440,
+        reason_pnigh=thu_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_context=year_way,
+        reason_rcontext=year_way,
         reason_premise=year_way,
         reason_premise_open=1400,
-        reason_premise_nigh=2800,
+        reason_pnigh=2800,
     )
 
     yr2000_mar1day = get_creg_min_from_dt(datetime(2000, 3, 1, 0, 0))

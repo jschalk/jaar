@@ -15,7 +15,7 @@ def test_BudUnit_set_idea_dict_Scenario0():
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert yao_bud._idea_dict == {}
-    assert yao_bud._reason_contexts == set()
+    assert yao_bud._reason_rcontexts == set()
 
     # WHEN
     yao_bud._set_idea_dict()
@@ -26,7 +26,7 @@ def test_BudUnit_set_idea_dict_Scenario0():
     assert not root_idea._gogo_calc
     assert not root_idea._stop_calc
     assert yao_bud._idea_dict == {root_idea.get_idea_way(): root_idea}
-    assert yao_bud._reason_contexts == set()
+    assert yao_bud._reason_rcontexts == set()
 
 
 def test_BudUnit_set_idea_dict_Scenario1():
@@ -85,7 +85,7 @@ def test_BudUnit_set_idea_dict_Clears_gogo_calc_stop_calc():
     assert not texas_idea._stop_calc
 
 
-def test_BudUnit_set_idea_dict_Sets_reason_contexts():
+def test_BudUnit_set_idea_dict_Sets_reason_rcontexts():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     states_str = "nation-state"
@@ -95,17 +95,17 @@ def test_BudUnit_set_idea_dict_Sets_reason_contexts():
     sue_bud.add_idea(polis_way)
     sue_bud.add_idea(states_way)
     sue_bud.edit_idea_attr(
-        states_way, reason_context=polis_way, reason_premise=polis_way
+        states_way, reason_rcontext=polis_way, reason_premise=polis_way
     )
     states_idea = sue_bud.get_idea_obj(states_way)
-    assert states_idea.context_reasonunit_exists(polis_way)
-    assert sue_bud._reason_contexts == set()
+    assert states_idea.rcontext_reasonunit_exists(polis_way)
+    assert sue_bud._reason_rcontexts == set()
 
     # WHEN
     sue_bud._set_idea_dict()
 
     # THEN
-    assert sue_bud._reason_contexts == {polis_way}
+    assert sue_bud._reason_rcontexts == {polis_way}
 
 
 def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
@@ -122,7 +122,7 @@ def test_BudUnit_set_idea_CreatesIdeaUnitsUsedBy_reasonunits():
     cookery_room_way = sue_bud.make_way(buildings_way, cookery_room_str)
     cookery_dirty_str = "dirty"
     cookery_dirty_way = sue_bud.make_way(cookery_room_way, cookery_dirty_str)
-    cookery_reasonunit = reasonunit_shop(context=cookery_room_way)
+    cookery_reasonunit = reasonunit_shop(rcontext=cookery_room_way)
     cookery_reasonunit.set_premise(premise=cookery_dirty_way)
     clean_cookery_idea.set_reasonunit(cookery_reasonunit)
 

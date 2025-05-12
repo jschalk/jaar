@@ -15,7 +15,7 @@ def test_BudUnit_get_tree_metrics_exists():
 
     # THEN
     assert zia_bud_tree_metrics.tag_count is not None
-    assert zia_bud_tree_metrics.reason_contexts is not None
+    assert zia_bud_tree_metrics.reason_rcontexts is not None
     assert zia_bud_tree_metrics.level_count is not None
     assert zia_bud_tree_metrics.awardlinks_metrics is not None
 
@@ -110,7 +110,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaWayStr():
     assert yao_tree_metrics.last_evaluated_pledge_idea_way == traain_way
 
 
-def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactContexts():
+def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactRcontexts():
     # ESTABLISH
     yao_budunit = budunit_v001()
 
@@ -119,34 +119,34 @@ def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactContexts():
 
     # THEN
     print(f"{yao_tree_metrics.level_count=}")
-    print(f"{yao_tree_metrics.reason_contexts=}")
+    print(f"{yao_tree_metrics.reason_rcontexts=}")
     assert yao_tree_metrics is not None
-    reason_contexts_x = yao_tree_metrics.reason_contexts
-    assert reason_contexts_x is not None
-    assert len(reason_contexts_x) > 0
+    reason_rcontexts_x = yao_tree_metrics.reason_rcontexts
+    assert reason_rcontexts_x is not None
+    assert len(reason_rcontexts_x) > 0
 
 
-def test_BudUnit_get_missing_fact_contexts_ReturnsAllContextsNotCoveredByFacts():
+def test_BudUnit_get_missing_fact_rcontexts_ReturnsAllRcontextsNotCoveredByFacts():
     # ESTABLISH
     yao_budunit = budunit_v001()
-    missing_contexts = yao_budunit.get_missing_fact_contexts()
-    assert missing_contexts is not None
-    print(f"{missing_contexts=}")
-    print(f"{len(missing_contexts)=}")
-    assert len(missing_contexts) == 11
+    missing_rcontexts = yao_budunit.get_missing_fact_rcontexts()
+    assert missing_rcontexts is not None
+    print(f"{missing_rcontexts=}")
+    print(f"{len(missing_rcontexts)=}")
+    assert len(missing_rcontexts) == 11
 
     yao_budunit.add_fact(
-        fcontext=yao_budunit.make_l1_way("day_minute"),
+        yao_budunit.make_l1_way("day_minute"),
         fbranch=yao_budunit.make_l1_way("day_minute"),
         fopen=0,
         fnigh=1439,
     )
 
     # WHEN
-    missing_contexts = yao_budunit.get_missing_fact_contexts()
+    missing_rcontexts = yao_budunit.get_missing_fact_rcontexts()
 
     # THEN
-    assert len(missing_contexts) == 11
+    assert len(missing_rcontexts) == 11
 
 
 def test_BudUnit_3AdvocatesNoideaunit_shop():

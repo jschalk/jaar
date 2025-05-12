@@ -196,21 +196,21 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_context = 2
-    x_context_idea_active_requisite = 3
+    x_rcontext = 2
+    x_rcontext_idea_active_requisite = 3
     x__task = 4
     x__status = 5
-    x__context_idea_active_value = 6
+    x__rcontext_idea_active_value = 6
     values_dict = {
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "context": x_context,
-        "context_idea_active_requisite": x_context_idea_active_requisite,
+        "rcontext": x_rcontext,
+        "rcontext_idea_active_requisite": x_rcontext_idea_active_requisite,
         "_task": x__task,
         "_status": x__status,
-        "_context_idea_active_value": x__context_idea_active_value,
+        "_rcontext_idea_active_value": x__rcontext_idea_active_value,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -260,9 +260,9 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_context = 2
-    x_rbranch = 3
-    x_nigh = 4
+    x_rcontext = 2
+    x_pbranch = 3
+    x_pnigh = 4
     x_open = 5
     x_divisor = 6
     x__task = 7
@@ -272,9 +272,9 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "context": x_context,
-        "rbranch": x_rbranch,
-        "nigh": x_nigh,
+        "rcontext": x_rcontext,
+        "pbranch": x_pbranch,
+        "pnigh": x_pnigh,
         "open": x_open,
         "divisor": x_divisor,
         "_task": x__task,

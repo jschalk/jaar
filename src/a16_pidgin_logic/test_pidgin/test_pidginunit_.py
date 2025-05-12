@@ -7,7 +7,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_WayStr_str,
     acct_name_str,
     awardee_label_str,
-    context_str,
+    rcontext_str,
     face_name_str,
     fcontext_str,
     fbranch_str,
@@ -16,7 +16,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     group_label_str,
     idea_tag_str,
-    rbranch_str,
+    pbranch_str,
     penny_str,
     respect_bit_str,
     idea_way_str,
@@ -66,8 +66,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_label") == type_LabelStr_str()
-    assert pidgin_args_class_types.get("context") == type_WayStr_str()
-    assert pidgin_args_class_types.get("context_idea_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("rcontext") == type_WayStr_str()
+    assert pidgin_args_class_types.get("rcontext_idea_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -98,8 +98,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("month_tag") == type_TagStr_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("rbranch") == type_WayStr_str()
-    assert pidgin_args_class_types.get("nigh") == "float"
+    assert pidgin_args_class_types.get("pbranch") == type_WayStr_str()
+    assert pidgin_args_class_types.get("pnigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()
@@ -198,7 +198,7 @@ def test_pidginable_atom_args_ReturnsObj():
     assert pidginable_atom_args() == {
         acct_name_str(),
         awardee_label_str(),
-        context_str(),
+        rcontext_str(),
         face_name_str(),
         fcontext_str(),
         fisc_tag_str(),
@@ -207,7 +207,7 @@ def test_pidginable_atom_args_ReturnsObj():
         healer_name_str(),
         hour_tag_str(),
         month_tag_str(),
-        rbranch_str(),
+        pbranch_str(),
         owner_name_str(),
         idea_way_str(),
         team_label_str(),

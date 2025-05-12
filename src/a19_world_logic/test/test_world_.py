@@ -23,7 +23,7 @@ def test_WorldUnit_Exists():
     # THEN
     assert not x_world.world_id
     assert not x_world.worlds_dir
-    assert not x_world.world_time_nigh
+    assert not x_world.world_time_pnigh
     assert not x_world.timeconversions
     assert not x_world._events
     assert not x_world._syntax_otz_dir
@@ -107,7 +107,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     worlds2_dir = create_path(worlds_dir(), "worlds2")
     example_mud_dir = create_path(worlds_dir(), "example_mud")
     five_world_id = "five"
-    world2_time_nigh = 55
+    world2_time_pnigh = 55
     accord45_str = "accord45"
     world2timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
     world2_fiscunits = {"accord45"}
@@ -117,7 +117,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
         mud_dir=example_mud_dir,
-        world_time_nigh=world2_time_nigh,
+        world_time_pnigh=world2_time_pnigh,
         timeconversions=world2timeconversions,
         _fiscunits=world2_fiscunits,
     )
@@ -127,7 +127,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
     assert x_world._mud_dir == example_mud_dir
-    assert x_world.world_time_nigh == world2_time_nigh
+    assert x_world.world_time_pnigh == world2_time_pnigh
     assert x_world.timeconversions == world2timeconversions
     assert x_world._events == {}
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
@@ -146,7 +146,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     world_dir = create_path(worlds_dir(), x_world.world_id)
     assert x_world.world_id == a23_str
     assert x_world.worlds_dir == worlds_dir()
-    assert x_world.world_time_nigh == 0
+    assert x_world.world_time_pnigh == 0
     assert x_world.timeconversions == {}
     assert x_world._events == {}
     assert x_world._mud_dir == create_path(x_world._world_dir, "mud")

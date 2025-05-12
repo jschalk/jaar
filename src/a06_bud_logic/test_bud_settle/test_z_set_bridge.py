@@ -144,7 +144,7 @@ def test_bud_set_bridge_CorrectlyModifiesReasonUnit():
     _8am_str = "8am"
     semicolon_8am_way = zia_bud.make_way(semicolon_time_way, _8am_str)
 
-    semicolon_time_reasonunit = reasonunit_shop(context=semicolon_time_way)
+    semicolon_time_reasonunit = reasonunit_shop(rcontext=semicolon_time_way)
     semicolon_time_reasonunit.set_premise(semicolon_8am_way)
 
     semicolon_casa_way = zia_bud.make_l1_way(casa_str)

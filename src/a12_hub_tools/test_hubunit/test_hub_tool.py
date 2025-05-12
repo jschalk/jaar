@@ -682,7 +682,7 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
     )
-    sue_cell._reason_contexts = set()
+    sue_cell._reason_rcontexts = set()
     bob_str = "Bob"
     tp6 = 6
     sue_acct_mandate_ledger_path = create_cell_acct_mandate_ledger_path(

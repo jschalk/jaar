@@ -72,19 +72,19 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_str = "USA"
     usa_way = create_way(states_way, usa_str)
 
-    wed_premise = premiseunit_shop(rbranch=wed_way)
+    wed_premise = premiseunit_shop(pbranch=wed_way)
     wed_premise._status = True
-    usa_premise = premiseunit_shop(rbranch=usa_way)
+    usa_premise = premiseunit_shop(pbranch=usa_way)
     usa_premise._status = False
 
     x1_reasonunits = {
         week_way: reasonunit_shop(
-            week_way, premises={wed_premise.rbranch: wed_premise}
+            week_way, premises={wed_premise.pbranch: wed_premise}
         ),
-        states_way: reasonunit_shop(states_way, {usa_premise.rbranch: usa_premise}),
+        states_way: reasonunit_shop(states_way, {usa_premise.pbranch: usa_premise}),
     }
-    wed_premises = {wed_premise.rbranch: wed_premise}
-    usa_premises = {usa_premise.rbranch: usa_premise}
+    wed_premises = {wed_premise.pbranch: wed_premise}
+    usa_premises = {usa_premise.pbranch: usa_premise}
     x1_reasonheirs = {
         week_way: reasonheir_shop(week_way, wed_premises, _status=True),
         states_way: reasonheir_shop(states_way, usa_premises, _status=False),

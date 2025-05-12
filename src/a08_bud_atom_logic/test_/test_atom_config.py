@@ -16,7 +16,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_pool_str,
     addin_str,
     awardee_label_str,
-    context_str,
+    rcontext_str,
     fcontext_str,
     begin_str,
     close_str,
@@ -363,8 +363,8 @@ def unique_jkeys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
         if idea_way_str() in new_jkey_keys:
             new_jkey_keys.remove(idea_way_str())
-        if context_str() in new_jkey_keys:
-            new_jkey_keys.remove(context_str())
+        if rcontext_str() in new_jkey_keys:
+            new_jkey_keys.remove(rcontext_str())
         if acct_name_str() in new_jkey_keys:
             new_jkey_keys.remove(acct_name_str())
         if group_label_str() in new_jkey_keys:
@@ -403,7 +403,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_idea_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [idea_way_str(), context_str(), "rbranch"]
+    assert x_sorted_jkey_keys == [idea_way_str(), rcontext_str(), "pbranch"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -644,8 +644,8 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(acct_name_str()) == type_NameStr_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_label_str()) == type_LabelStr_str()
-    assert x_class_types.get(context_str()) == type_WayStr_str()
-    assert x_class_types.get("context_idea_active_requisite") == "bool"
+    assert x_class_types.get(rcontext_str()) == type_WayStr_str()
+    assert x_class_types.get("rcontext_idea_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
@@ -669,8 +669,8 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("rbranch") == type_WayStr_str()
-    assert x_class_types.get("nigh") == "float"
+    assert x_class_types.get("pbranch") == type_WayStr_str()
+    assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"

@@ -20,8 +20,8 @@ def test_AtomRow_exists():
     assert x_atomrow._crud_command is None
     assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
-    assert x_atomrow.context is None
-    assert x_atomrow.context_idea_active_requisite is None
+    assert x_atomrow.rcontext is None
+    assert x_atomrow.rcontext_idea_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
@@ -45,8 +45,8 @@ def test_AtomRow_exists():
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
-    assert x_atomrow.rbranch is None
-    assert x_atomrow.nigh is None
+    assert x_atomrow.pbranch is None
+    assert x_atomrow.pnigh is None
     assert x_atomrow.numor is None
     assert x_atomrow.open is None
     assert x_atomrow.penny is None

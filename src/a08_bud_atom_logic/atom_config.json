@@ -191,7 +191,7 @@
             "atom_order": 8
         },
         "jkeys": {
-            "context": {
+            "rcontext": {
                 "class_type": "WayStr",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -203,7 +203,7 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "rbranch": {
+            "pbranch": {
                 "class_type": "WayStr",
                 "column_order": 2,
                 "nesting_order": 2,
@@ -216,7 +216,7 @@
                 "column_order": 5,
                 "sqlite_datatype": "INTEGER"
             },
-            "nigh": {
+            "pnigh": {
                 "class_type": "float",
                 "column_order": 4,
                 "sqlite_datatype": "REAL"
@@ -242,7 +242,7 @@
             "atom_order": 7
         },
         "jkeys": {
-            "context": {
+            "rcontext": {
                 "class_type": "WayStr",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -256,7 +256,7 @@
             }
         },
         "jvalues": {
-            "context_idea_active_requisite": {
+            "rcontext_idea_active_requisite": {
                 "class_type": "bool",
                 "column_order": 2,
                 "sqlite_datatype": "INTEGER"

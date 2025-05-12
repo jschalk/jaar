@@ -141,25 +141,25 @@ class PremiseStatusFinderException(Exception):
 
 @dataclass
 class PremiseStatusFinder:
-    premise_open: float  # within 0 and divisor, can be more than premise_nigh
-    premise_nigh: float  # within 0 and divisor, can be less than premise_open
+    premise_open: float  # within 0 and divisor, can be more than pnigh
+    pnigh: float  # within 0 and divisor, can be less than premise_open
     premise_divisor: float  # greater than zero
-    fact_open_full: float  # less than fact nigh
-    fact_nigh_full: float  # less than fact nigh
+    fact_open_full: float  # less than fnigh
+    fnigh_full: float  # less than fnigh
 
     def check_attr(self):
         if None in (
             self.premise_open,
-            self.premise_nigh,
+            self.pnigh,
             self.premise_divisor,
             self.fact_open_full,
-            self.fact_nigh_full,
+            self.fnigh_full,
         ):
             raise PremiseStatusFinderException("No parameter can be None")
 
-        if self.fact_open_full > self.fact_nigh_full:
+        if self.fact_open_full > self.fnigh_full:
             raise PremiseStatusFinderException(
-                f"{self.fact_open_full=} cannot be greater that {self.fact_nigh_full=}"
+                f"{self.fact_open_full=} cannot be greater that {self.fnigh_full=}"
             )
 
         if self.premise_divisor <= 0:
@@ -172,28 +172,28 @@ class PremiseStatusFinder:
                 f"{self.premise_open=} cannot be less than zero or greater than {self.premise_divisor=}"
             )
 
-        if self.premise_nigh < 0 or self.premise_nigh > self.premise_divisor:
+        if self.pnigh < 0 or self.pnigh > self.premise_divisor:
             raise PremiseStatusFinderException(
-                f"{self.premise_nigh=} cannot be less than zero or greater than {self.premise_divisor=}"
+                f"{self.pnigh=} cannot be less than zero or greater than {self.premise_divisor=}"
             )
 
     def bo(self) -> float:
         return self.fact_open_full % self.premise_divisor
 
     def bn(self) -> float:
-        return self.fact_nigh_full % self.premise_divisor
+        return self.fnigh_full % self.premise_divisor
 
     def po(self) -> float:
         return self.premise_open
 
     def pn(self) -> float:
-        return self.premise_nigh
+        return self.pnigh
 
     def pd(self) -> float:
         return self.premise_divisor
 
     def get_active(self) -> bool:
-        if self.fact_nigh_full - self.fact_open_full > self.premise_divisor:
+        if self.fnigh_full - self.fact_open_full > self.premise_divisor:
             return True
         # Case B1
         elif get_range_less_than_divisor_active(
@@ -209,9 +209,9 @@ class PremiseStatusFinder:
                 self.get_active()
                 and get_collasped_fact_range_active(
                     self.premise_open,
-                    self.premise_nigh,
+                    self.pnigh,
                     self.premise_divisor,
-                    self.fact_nigh_full,
+                    self.fnigh_full,
                 )
                 is False
             )
@@ -260,33 +260,33 @@ def get_range_less_than_divisor_active(bo, bn, po, pn):
 
 def get_collasped_fact_range_active(
     premise_open: float,
-    premise_nigh: float,
+    pnigh: float,
     premise_divisor: float,
-    fact_nigh_full: float,
+    fnigh_full: float,
 ) -> bool:
     x_pbsd = premisestatusfinder_shop(
         premise_open=premise_open,
-        premise_nigh=premise_nigh,
+        pnigh=pnigh,
         premise_divisor=premise_divisor,
-        fact_open_full=fact_nigh_full,
-        fact_nigh_full=fact_nigh_full,
+        fact_open_full=fnigh_full,
+        fnigh_full=fnigh_full,
     )
     return x_pbsd.get_active()
 
 
 def premisestatusfinder_shop(
     premise_open: float,
-    premise_nigh: float,
+    pnigh: float,
     premise_divisor: float,
     fact_open_full: float,
-    fact_nigh_full: float,
+    fnigh_full: float,
 ):
     x_premisestatusfinder = PremiseStatusFinder(
         premise_open,
-        premise_nigh,
+        pnigh,
         premise_divisor,
         fact_open_full,
-        fact_nigh_full,
+        fnigh_full,
     )
     x_premisestatusfinder.check_attr()
     return x_premisestatusfinder
@@ -294,23 +294,23 @@ def premisestatusfinder_shop(
 
 @dataclass
 class PremiseUnit:
-    rbranch: WayStr
+    pbranch: WayStr
     open: float = None
-    nigh: float = None
+    pnigh: float = None
     divisor: int = None
     _status: bool = None
     _task: bool = None
     bridge: str = None
 
     def get_obj_key(self):
-        return self.rbranch
+        return self.pbranch
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"rbranch": self.rbranch}
+        x_dict = {"pbranch": self.pbranch}
         if self.open is not None:
             x_dict["open"] = self.open
-        if self.nigh is not None:
-            x_dict["nigh"] = self.nigh
+        if self.pnigh is not None:
+            x_dict["pnigh"] = self.pnigh
 
         if self.divisor is not None:
             x_dict["divisor"] = self.divisor
@@ -323,14 +323,14 @@ class PremiseUnit:
     def set_bridge(self, new_bridge: str):
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
-        self.rbranch = replace_bridge(
-            way=self.rbranch, old_bridge=old_bridge, new_bridge=self.bridge
+        self.pbranch = replace_bridge(
+            way=self.pbranch, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
     def is_in_lineage(self, fact_fbranch: WayStr):
         return is_heir_way(
-            src=self.rbranch, heir=fact_fbranch, bridge=self.bridge
-        ) or is_heir_way(src=fact_fbranch, heir=self.rbranch, bridge=self.bridge)
+            src=self.pbranch, heir=fact_fbranch, bridge=self.bridge
+        ) or is_heir_way(src=fact_fbranch, heir=self.pbranch, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -358,23 +358,25 @@ class PremiseUnit:
 
     def _is_segregate(self):
         return (
-            self.divisor is not None and self.open is not None and self.nigh is not None
+            self.divisor is not None
+            and self.open is not None
+            and self.pnigh is not None
         )
 
     def _is_range(self):
-        return self.divisor is None and self.open is not None and self.nigh is not None
+        return self.divisor is None and self.open is not None and self.pnigh is not None
 
     def _get_task_status(self, factheir: FactHeir) -> bool:
         x_task = None
         if self._status and self._is_range():
-            x_task = factheir.fnigh > self.nigh
+            x_task = factheir.fnigh > self.pnigh
         elif self._status and self._is_segregate():
             segr_obj = premisestatusfinder_shop(
                 premise_open=self.open,
-                premise_nigh=self.nigh,
+                pnigh=self.pnigh,
                 premise_divisor=self.divisor,
                 fact_open_full=factheir.fopen,
-                fact_nigh_full=factheir.fnigh,
+                fnigh_full=factheir.fnigh,
             )
             x_task = segr_obj.get_task_status()
         elif self._status in [True, False]:
@@ -394,36 +396,36 @@ class PremiseUnit:
     def _get_segregate_status(self, factheir: FactHeir) -> bool:
         segr_obj = premisestatusfinder_shop(
             premise_open=self.open,
-            premise_nigh=self.nigh,
+            pnigh=self.pnigh,
             premise_divisor=self.divisor,
             fact_open_full=factheir.fopen,
-            fact_nigh_full=factheir.fnigh,
+            fnigh_full=factheir.fnigh,
         )
         return segr_obj.get_active()
 
     def _get_range_status(self, factheir: FactHeir) -> bool:
         return (
-            (self.open <= factheir.fopen and self.nigh > factheir.fopen)
-            or (self.open <= factheir.fnigh and self.nigh > factheir.fnigh)
-            or (self.open >= factheir.fopen and self.nigh < factheir.fnigh)
+            (self.open <= factheir.fopen and self.pnigh > factheir.fopen)
+            or (self.open <= factheir.fnigh and self.pnigh > factheir.fnigh)
+            or (self.open >= factheir.fopen and self.pnigh < factheir.fnigh)
         )
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
-        self.rbranch = rebuild_way(self.rbranch, old_way, new_way)
+        self.pbranch = rebuild_way(self.pbranch, old_way, new_way)
 
 
 # class premisesshop:
 def premiseunit_shop(
-    rbranch: WayStr,
+    pbranch: WayStr,
     open: float = None,
-    nigh: float = None,
+    pnigh: float = None,
     divisor: float = None,
     bridge: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
-        rbranch=rbranch,
+        pbranch=pbranch,
         open=open,
-        nigh=nigh,
+        pnigh=pnigh,
         divisor=divisor,
         bridge=default_bridge_if_None(bridge),
     )
@@ -437,35 +439,35 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
         except KeyError:
             x_open = None
         try:
-            x_nigh = premise_dict["nigh"]
+            x_pnigh = premise_dict["pnigh"]
         except KeyError:
-            x_nigh = None
+            x_pnigh = None
         try:
             x_divisor = premise_dict["divisor"]
         except KeyError:
             x_divisor = None
 
         premise_x = premiseunit_shop(
-            rbranch=premise_dict["rbranch"],
+            pbranch=premise_dict["pbranch"],
             open=x_open,
-            nigh=x_nigh,
+            pnigh=x_pnigh,
             divisor=x_divisor,
         )
-        premises[premise_x.rbranch] = premise_x
+        premises[premise_x.pbranch] = premise_x
     return premises
 
 
 @dataclass
 class ReasonCore:
-    context: WayStr
+    rcontext: WayStr
     premises: dict[WayStr, PremiseUnit]
-    context_idea_active_requisite: bool = None
+    rcontext_idea_active_requisite: bool = None
     bridge: str = None
 
     def set_bridge(self, new_bridge: str):
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
-        self.context = replace_bridge(self.context, old_bridge, new_bridge)
+        self.rcontext = replace_bridge(self.rcontext, old_bridge, new_bridge)
 
         new_premises = {}
         for premise_way, premise_obj in self.premises.items():
@@ -479,7 +481,7 @@ class ReasonCore:
         self.premises = new_premises
 
     def get_obj_key(self):
-        return self.context
+        return self.rcontext
 
     def get_premises_count(self):
         return sum(1 for _ in self.premises.values())
@@ -488,19 +490,19 @@ class ReasonCore:
         self,
         premise: WayStr,
         open: float = None,
-        nigh: float = None,
+        pnigh: float = None,
         divisor: int = None,
     ):
         self.premises[premise] = premiseunit_shop(
-            rbranch=premise,
+            pbranch=premise,
             open=open,
-            nigh=nigh,
+            pnigh=pnigh,
             divisor=divisor,
             bridge=self.bridge,
         )
 
-    def premise_exists(self, rbranch: WayStr) -> bool:
-        return self.premises.get(rbranch) != None
+    def premise_exists(self, pbranch: WayStr) -> bool:
+        return self.premises.get(pbranch) != None
 
     def get_premise(self, premise: WayStr) -> PremiseUnit:
         return self.premises.get(premise)
@@ -512,22 +514,22 @@ class ReasonCore:
             raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
-        self.context = rebuild_way(self.context, old_way, new_way)
+        self.rcontext = rebuild_way(self.rcontext, old_way, new_way)
         self.premises = find_replace_way_key_dict(
             dict_x=self.premises, old_way=old_way, new_way=new_way
         )
 
 
 def reasoncore_shop(
-    context: WayStr,
+    rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    context_idea_active_requisite: bool = None,
+    rcontext_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonCore(
-        context=context,
+        rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        context_idea_active_requisite=context_idea_active_requisite,
+        rcontext_idea_active_requisite=rcontext_idea_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -539,24 +541,26 @@ class ReasonUnit(ReasonCore):
             premise_way: premise.get_dict()
             for premise_way, premise in self.premises.items()
         }
-        x_dict = {"context": self.context}
+        x_dict = {"rcontext": self.rcontext}
         if premises_dict != {}:
             x_dict["premises"] = premises_dict
-        if self.context_idea_active_requisite is not None:
-            x_dict["context_idea_active_requisite"] = self.context_idea_active_requisite
+        if self.rcontext_idea_active_requisite is not None:
+            x_dict["rcontext_idea_active_requisite"] = (
+                self.rcontext_idea_active_requisite
+            )
         return x_dict
 
 
 def reasonunit_shop(
-    context: WayStr,
+    rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    context_idea_active_requisite: bool = None,
+    rcontext_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonUnit(
-        context=context,
+        rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        context_idea_active_requisite=context_idea_active_requisite,
+        rcontext_idea_active_requisite=rcontext_idea_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -565,18 +569,18 @@ def reasonunit_shop(
 class ReasonHeir(ReasonCore):
     _status: bool = None
     _task: bool = None
-    _context_idea_active_value: bool = None
+    _rcontext_idea_active_value: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
         x_premises = {}
         for x_premiseunit in x_reasonunit.premises.values():
             premise_x = premiseunit_shop(
-                rbranch=x_premiseunit.rbranch,
+                pbranch=x_premiseunit.pbranch,
                 open=x_premiseunit.open,
-                nigh=x_premiseunit.nigh,
+                pnigh=x_premiseunit.pnigh,
                 divisor=x_premiseunit.divisor,
             )
-            x_premises[premise_x.rbranch] = premise_x
+            x_premises[premise_x.pbranch] = premise_x
         self.premises = x_premises
 
     def clear_status(self):
@@ -588,21 +592,21 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_context_fact(self, factheirs: dict[WayStr, FactHeir]) -> FactHeir:
-        context_fact = None
+    def _get_fcontext(self, factheirs: dict[WayStr, FactHeir]) -> FactHeir:
+        fcontext = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
-            if self.context == y_factheir.fcontext:
-                context_fact = y_factheir
-        return context_fact
+            if self.rcontext == y_factheir.fcontext:
+                fcontext = y_factheir
+        return fcontext
 
-    def set_context_idea_active_value(self, bool_x: bool):
-        self._context_idea_active_value = bool_x
+    def set_rcontext_idea_active_value(self, bool_x: bool):
+        self._rcontext_idea_active_value = bool_x
 
-    def is_context_idea_active_requisite_operational(self) -> bool:
+    def is_rcontext_idea_active_requisite_operational(self) -> bool:
         return (
-            self._context_idea_active_value is not None
-            and self._context_idea_active_value == self.context_idea_active_requisite
+            self._rcontext_idea_active_value is not None
+            and self._rcontext_idea_active_value == self.rcontext_idea_active_requisite
         )
 
     def is_any_premise_true(self) -> tuple[bool, bool]:
@@ -617,7 +621,7 @@ class ReasonHeir(ReasonCore):
 
     def _set_attr_status(self, any_premise_true: bool):
         self._status = (
-            any_premise_true or self.is_context_idea_active_requisite_operational()
+            any_premise_true or self.is_rcontext_idea_active_requisite_operational()
         )
 
     def _set_attr_task(self, any_task_true: bool):
@@ -627,28 +631,28 @@ class ReasonHeir(ReasonCore):
 
     def set_status(self, factheirs: dict[WayStr, FactHeir]):
         self.clear_status()
-        self._set_premise_status(self._get_context_fact(factheirs))
+        self._set_premise_status(self._get_fcontext(factheirs))
         any_premise_true, any_task_true = self.is_any_premise_true()
         self._set_attr_status(any_premise_true)
         self._set_attr_task(any_task_true)
 
 
 def reasonheir_shop(
-    context: WayStr,
+    rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    context_idea_active_requisite: bool = None,
+    rcontext_idea_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
-    _context_idea_active_value: bool = None,
+    _rcontext_idea_active_value: bool = None,
     bridge: str = None,
 ):
     return ReasonHeir(
-        context=context,
+        rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        context_idea_active_requisite=context_idea_active_requisite,
+        rcontext_idea_active_requisite=rcontext_idea_active_requisite,
         _status=_status,
         _task=_task,
-        _context_idea_active_value=_context_idea_active_value,
+        _rcontext_idea_active_value=_rcontext_idea_active_value,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -657,14 +661,14 @@ def reasonheir_shop(
 def reasons_get_from_dict(reasons_dict: dict) -> dict[WayStr, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
-        x_reasonunit = reasonunit_shop(context=reason_dict["context"])
+        x_reasonunit = reasonunit_shop(rcontext=reason_dict["rcontext"])
         if reason_dict.get("premises") is not None:
             x_reasonunit.premises = premises_get_from_dict(
                 x_dict=reason_dict["premises"]
             )
-        if reason_dict.get("context_idea_active_requisite") is not None:
-            x_reasonunit.context_idea_active_requisite = reason_dict.get(
-                "context_idea_active_requisite"
+        if reason_dict.get("rcontext_idea_active_requisite") is not None:
+            x_reasonunit.rcontext_idea_active_requisite = reason_dict.get(
+                "rcontext_idea_active_requisite"
             )
-        x_dict[x_reasonunit.context] = x_reasonunit
+        x_dict[x_reasonunit.rcontext] = x_reasonunit
     return x_dict

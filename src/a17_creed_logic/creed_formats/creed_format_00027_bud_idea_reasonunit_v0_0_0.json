@@ -1,9 +1,9 @@
 {
     "attributes": {
-        "context": {
+        "rcontext": {
             "otx_key": true
         },
-        "context_idea_active_requisite": {
+        "rcontext_idea_active_requisite": {
             "otx_key": false
         },
         "event_int": {

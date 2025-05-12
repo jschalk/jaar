@@ -344,15 +344,15 @@ def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_idea_reasonunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.del_reasonunit_context(x_atom.get_value("context"))
+    x_ideaunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
 
 
 def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_context=x_atom.get_value("context"),
-        reason_context_idea_active_requisite=x_atom.get_value(
-            "context_idea_active_requisite"
+        reason_rcontext=x_atom.get_value("rcontext"),
+        reason_rcontext_idea_active_requisite=x_atom.get_value(
+            "rcontext_idea_active_requisite"
         ),
     )
 
@@ -360,9 +360,9 @@ def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_context=x_atom.get_value("context"),
-        reason_context_idea_active_requisite=x_atom.get_value(
-            "context_idea_active_requisite"
+        reason_rcontext=x_atom.get_value("rcontext"),
+        reason_rcontext_idea_active_requisite=x_atom.get_value(
+            "rcontext_idea_active_requisite"
         ),
     )
 
@@ -370,18 +370,18 @@ def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_del_premise_context=x_atom.get_value("context"),
-        reason_del_premise_rbranch=x_atom.get_value("rbranch"),
+        reason_del_premise_rcontext=x_atom.get_value("rcontext"),
+        reason_del_premise_pbranch=x_atom.get_value("pbranch"),
     )
 
 
 def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_context=x_atom.get_value("context"),
-        reason_premise=x_atom.get_value("rbranch"),
+        reason_rcontext=x_atom.get_value("rcontext"),
+        reason_premise=x_atom.get_value("pbranch"),
         reason_premise_open=x_atom.get_value("open"),
-        reason_premise_nigh=x_atom.get_value("nigh"),
+        reason_pnigh=x_atom.get_value("pnigh"),
         reason_premise_divisor=x_atom.get_value("divisor"),
     )
 
@@ -389,10 +389,10 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
     x_ideaunit.set_reason_premise(
-        context=x_atom.get_value("context"),
-        premise=x_atom.get_value("rbranch"),
+        rcontext=x_atom.get_value("rcontext"),
+        premise=x_atom.get_value("pbranch"),
         open=x_atom.get_value("open"),
-        nigh=x_atom.get_value("nigh"),
+        pnigh=x_atom.get_value("pnigh"),
         divisor=x_atom.get_value("divisor"),
     )
 
@@ -578,16 +578,16 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         return (
             (x_obj.fbranch != y_obj.fbranch)
             or (x_obj.open != y_obj.open)
-            or (x_obj.nigh != y_obj.nigh)
+            or (x_obj.pnigh != y_obj.pnigh)
         )
     elif dimen == "bud_idea_reasonunit":
         return (
-            x_obj.context_idea_active_requisite != y_obj.context_idea_active_requisite
+            x_obj.rcontext_idea_active_requisite != y_obj.rcontext_idea_active_requisite
         )
     elif dimen == "bud_idea_reason_premiseunit":
         return (
             x_obj.open != y_obj.open
-            or x_obj.nigh != y_obj.nigh
+            or x_obj.pnigh != y_obj.pnigh
             or x_obj.divisor != y_obj.divisor
         )
     elif dimen == "bud_acctunit":
@@ -617,8 +617,8 @@ class AtomRow:
     acct_name: AcctName = None
     addin: float = None
     awardee_label: LabelStr = None
-    context: WayStr = None
-    context_idea_active_requisite: bool = None
+    rcontext: WayStr = None
+    rcontext_idea_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
     close: float = None
@@ -642,8 +642,8 @@ class AtomRow:
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    rbranch: WayStr = None
-    nigh: float = None
+    pbranch: WayStr = None
+    pnigh: float = None
     numor: int = None
     open: float = None
     penny: float = None
