@@ -39,13 +39,10 @@ from src.a16_pidgin_logic.map import (
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     default_unknown_word_if_None,
-)
-from src.a16_pidgin_logic.pidgin import (
-    PidginUnit,
-    pidginunit_shop,
     pidginable_class_types,
     pidginable_atom_args,
 )
+from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_invalid_namemap,
     get_invalid_labelmap,

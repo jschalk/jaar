@@ -31,32 +31,6 @@ class check_attrException(Exception):
     pass
 
 
-def pidginable_class_types() -> set:
-    return {"NameUnit", "LabelUnit", "TagUnit", "WayUnit"}
-
-
-def pidginable_atom_args() -> set:
-    return {
-        "acct_name",
-        "awardee_label",
-        "context",
-        "face_name",
-        "fcontext",
-        "fisc_tag",
-        "fneed",
-        "group_label",
-        "healer_name",
-        "hour_tag",
-        "idea_way",
-        "month_tag",
-        "need",
-        "owner_name",
-        "team_label",
-        "timeline_tag",
-        "weekday_tag",
-    }
-
-
 @dataclass
 class PidginUnit:
     """Per face object that translates any translatable str.
