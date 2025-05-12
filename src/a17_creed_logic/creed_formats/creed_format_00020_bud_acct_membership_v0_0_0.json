@@ -1,0 +1,35 @@
+{
+    "attributes": {
+        "acct_name": {
+            "otx_key": true
+        },
+        "credit_vote": {
+            "otx_key": false
+        },
+        "debtit_vote": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "group_label": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "bud_acctunit",
+        "bud_acct_membership",
+        "budunit",
+        "fiscunit"
+    ],
+    "creed_number": "br00020"
+}

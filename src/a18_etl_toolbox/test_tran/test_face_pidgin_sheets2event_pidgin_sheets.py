@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir, get_dir_filenames
-from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
+from src.a17_creed_logic.creed_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.tran_path import (
     create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path as otx_event_pidgin_path,

@@ -20,8 +20,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_groupunit_str,
 )
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
+from src.a17_creed_logic.creed_config import get_creed_sqlite_types
+from src.a17_creed_logic.creed_db_tool import get_default_sorted_list
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
     get_job_create_table_sqlstrs,
     create_job_tables,
@@ -35,7 +35,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
     create_table_sqlstrs = get_job_create_table_sqlstrs()
 
     # THEN
-    s_types = get_idea_sqlite_types()
+    s_types = get_creed_sqlite_types()
     bud_calc_config = get_bud_calc_config_dict()
     for x_dimen in bud_calc_config.keys():
         # print(f"{x_dimen} checking...")

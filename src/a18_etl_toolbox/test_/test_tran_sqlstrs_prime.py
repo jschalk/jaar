@@ -40,9 +40,12 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     unknown_word_str,
 )
-from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types, get_idea_config_dict
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
+from src.a17_creed_logic._utils.str_a17 import creed_category_str, creed_number_str
+from src.a17_creed_logic.creed_config import (
+    get_creed_sqlite_types,
+    get_creed_config_dict,
+)
+from src.a17_creed_logic.creed_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     get_dimen_abbv7,
@@ -104,7 +107,7 @@ BUD_PRIME_TABLENAMES = {
 
 def test_ALL_DIMEN_ABBV7_has_all_dimens():
     # ESTABLISH / WHEN / THEN
-    assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
+    assert len(ALL_DIMEN_ABBV7) == len(get_creed_config_dict())
 
 
 def test_create_prime_tablename_ReturnsObj():
@@ -178,14 +181,14 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
             inx_bridge_str(),
             unknown_word_str(),
         }
-    x_config = get_idea_config_dict().get(x_dimen)
+    x_config = get_creed_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
     columns.update(set(x_config.get("jvalues").keys()))
     return columns
 
 
 def get_del_dimen_columns_set(x_dimen: str) -> list[str]:
-    x_config = get_idea_config_dict().get(x_dimen)
+    x_config = get_creed_config_dict().get(x_dimen)
     columns_set = set(x_config.get("jkeys").keys())
     columns_list = get_default_sorted_list(columns_set)
     columns_list[-1] = get_delete_key_name(columns_list[-1])
@@ -195,10 +198,10 @@ def get_del_dimen_columns_set(x_dimen: str) -> list[str]:
 def create_pf_sound_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add(idea_number_str())
+    columns.add(creed_number_str())
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_pidgin_sound_agg_table_sqlstr(x_dimen):
@@ -206,14 +209,14 @@ def create_pidgin_sound_agg_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_fisc_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_pf_sound_vld_table_sqlstr(x_dimen):
@@ -223,7 +226,7 @@ def create_pf_sound_vld_table_sqlstr(x_dimen):
     columns.remove(inx_bridge_str())
     columns.remove(unknown_word_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_pidgin_core_raw_table_sqlstr(x_dimen):
@@ -233,7 +236,7 @@ def create_pidgin_core_raw_table_sqlstr(x_dimen):
     columns.add("source_dimen")
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_pidgin_core_agg_table_sqlstr(x_dimen):
@@ -241,7 +244,7 @@ def create_pidgin_core_agg_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(event_int_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_pidgin_core_vld_table_sqlstr(x_dimen):
@@ -258,7 +261,7 @@ def create_fisc_voice_raw_table_sqlstr(x_dimen):
     columns.add("pidgin_event_int")
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_fisc_voice_agg_table_sqlstr(x_dimen):
@@ -267,38 +270,38 @@ def create_fisc_voice_agg_table_sqlstr(x_dimen):
     columns.remove(event_int_str())
     columns.remove(face_name_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "put")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add(idea_number_str())
+    columns.add(creed_number_str())
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "del")
     columns = get_del_dimen_columns_set(x_dimen)
-    columns.add(idea_number_str())
+    columns.add(creed_number_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
@@ -306,14 +309,14 @@ def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
@@ -321,14 +324,14 @@ def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     columns = get_del_dimen_columns_set(x_dimen)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def create_bud_voice_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
 
 def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
@@ -337,11 +340,11 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
-    idea_config = get_idea_config_dict()
+    creed_config = get_creed_config_dict()
     pidgin_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "pidgin"
+        for x_dimen, dimen_config in creed_config.items()
+        if dimen_config.get(creed_category_str()) == "pidgin"
     }
 
     for x_dimen in pidgin_dimens_config:
@@ -397,11 +400,11 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
-    idea_config = get_idea_config_dict()
+    creed_config = get_creed_config_dict()
     fisc_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fisc"
+        for x_dimen, dimen_config in creed_config.items()
+        if dimen_config.get(creed_category_str()) == "fisc"
     }
 
     for x_dimen in fisc_dimens_config:
@@ -438,8 +441,8 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
     # THEN
     bud_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in get_idea_config_dict().items()
-        if dimen_config.get(idea_category_str()) == "bud"
+        for x_dimen, dimen_config in get_creed_config_dict().items()
+        if dimen_config.get(creed_category_str()) == "bud"
     }
 
     for x_dimen in bud_dimens_config:
@@ -582,9 +585,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw")
-        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_config = get_creed_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
+        exclude_cols = {creed_number_str(), "error_message"}
         expected_update_sqlstr = create_update_inconsistency_error_query(
             cursor, x_tablename, dimen_focus_columns, exclude_cols
         )
@@ -626,9 +629,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw")
-        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_config = get_creed_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "event_int", "face_name", "error_message"}
+        exclude_cols = {creed_number_str(), "event_int", "face_name", "error_message"}
         expected_update_sqlstr = create_update_inconsistency_error_query(
             cursor, x_tablename, dimen_focus_columns, exclude_cols
         )
@@ -667,9 +670,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw", "put")
-        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_config = get_creed_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
+        exclude_cols = {creed_number_str(), "error_message"}
         expected_update_sqlstr = create_update_inconsistency_error_query(
             cursor, x_tablename, dimen_focus_columns, exclude_cols
         )
@@ -712,9 +715,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # THEN
         raw_tablename = prime_tbl(dimen, "s", "raw")
         agg_tablename = prime_tbl(dimen, "s", "agg")
-        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_config = get_creed_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
+        exclude_cols = {creed_number_str(), "error_message"}
         expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=raw_tablename,
@@ -750,13 +753,13 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         # THEN
         raw_tablename = prime_tbl(dimen, "s", "raw")
         agg_tablename = prime_tbl(dimen, "s", "agg")
-        dimen_config = get_idea_config_dict().get(dimen)
+        dimen_config = get_creed_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
         dimen_focus_columns.remove("event_int")
         dimen_focus_columns.remove("face_name")
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
         exclude_cols = {
-            idea_number_str(),
+            creed_number_str(),
             event_int_str(),
             face_name_str(),
             "error_message",
@@ -797,9 +800,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # THEN
         put_raw_tablename = prime_tbl(dimen, "s", "raw", "put")
         put_agg_tablename = prime_tbl(dimen, "s", "agg", "put")
-        put_dimen_config = get_idea_config_dict().get(dimen)
+        put_dimen_config = get_creed_config_dict().get(dimen)
         put_dimen_focus_columns = set(put_dimen_config.get("jkeys").keys())
-        put_exclude_cols = {idea_number_str(), "error_message"}
+        put_exclude_cols = {creed_number_str(), "error_message"}
         put_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=put_raw_tablename,
@@ -823,7 +826,7 @@ GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_label
         # del
         del_raw_tablename = prime_tbl(dimen, "s", "raw", "del")
         del_agg_tablename = prime_tbl(dimen, "s", "agg", "del")
-        del_exclude_cols = {idea_number_str(), "error_message"}
+        del_exclude_cols = {creed_number_str(), "error_message"}
         del_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=del_raw_tablename,

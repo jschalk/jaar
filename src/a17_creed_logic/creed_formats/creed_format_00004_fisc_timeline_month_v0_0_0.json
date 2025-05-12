@@ -1,0 +1,24 @@
+{
+    "attributes": {
+        "cumlative_day": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "month_tag": {
+            "otx_key": false
+        }
+    },
+    "creed_number": "br00004",
+    "dimens": [
+        "fiscunit",
+        "fisc_timeline_month"
+    ]
+}

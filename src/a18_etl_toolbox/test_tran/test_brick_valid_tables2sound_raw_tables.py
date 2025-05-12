@@ -8,8 +8,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     unknown_word_str,
 )
-from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a17_idea_logic._utils.str_a17 import brick_valid_str
+from src.a17_creed_logic.creed_db_tool import create_creed_sorted_table
+from src.a17_creed_logic._utils.str_a17 import brick_valid_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 from sqlite3 import connect as sqlite3_connect
@@ -48,7 +48,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             otx_way_str(),
             inx_way_str(),
         ]
-        create_idea_sorted_table(cursor, br00117_valid_tablename, br00117_columns)
+        create_creed_sorted_table(cursor, br00117_valid_tablename, br00117_columns)
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -76,7 +76,7 @@ VALUES
             inx_bridge_str(),
             unknown_word_str(),
         ]
-        create_idea_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
+        create_creed_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
   {event_int_str()}
 , {face_name_str()}

@@ -11,8 +11,8 @@ from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_
 from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
 from src.a16_pidgin_logic._utils.str_a16 import otx_name_str, inx_name_str
-from src.a17_idea_logic._utils.str_a17 import brick_agg_str, brick_raw_str
-from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
+from src.a17_creed_logic._utils.str_a17 import brick_agg_str, brick_raw_str
+from src.a17_creed_logic.creed_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
@@ -259,7 +259,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
 #     assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
-def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscIdeas_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscCreeds_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

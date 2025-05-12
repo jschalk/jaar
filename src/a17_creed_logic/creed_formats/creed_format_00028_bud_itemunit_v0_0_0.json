@@ -1,0 +1,58 @@
+{
+    "attributes": {
+        "addin": {
+            "otx_key": false
+        },
+        "begin": {
+            "otx_key": false
+        },
+        "close": {
+            "otx_key": false
+        },
+        "denom": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "gogo_want": {
+            "otx_key": false
+        },
+        "mass": {
+            "otx_key": false
+        },
+        "morph": {
+            "otx_key": false
+        },
+        "numor": {
+            "otx_key": false
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "pledge": {
+            "otx_key": false
+        },
+        "problem_bool": {
+            "otx_key": false
+        },
+        "item_way": {
+            "otx_key": true
+        },
+        "stop_want": {
+            "otx_key": false
+        }
+    },
+    "dimens": [
+        "fiscunit",
+        "budunit",
+        "bud_itemunit"
+    ],
+    "creed_number": "br00028"
+}

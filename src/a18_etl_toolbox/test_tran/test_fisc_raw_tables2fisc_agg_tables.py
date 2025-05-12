@@ -33,7 +33,7 @@ def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.unit_raw_tablename} (idea_number, event_int, face_name, fisc_tag)
+INSERT INTO {x_fisc.unit_raw_tablename} (creed_number, event_int, face_name, fisc_tag)
 VALUES
   ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
 , ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')

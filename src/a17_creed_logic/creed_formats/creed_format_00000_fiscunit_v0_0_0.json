@@ -1,0 +1,44 @@
+{
+    "attributes": {
+        "bridge": {
+            "otx_key": false
+        },
+        "c400_number": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "fund_coin": {
+            "otx_key": false
+        },
+        "job_listen_rotations": {
+            "otx_key": false
+        },
+        "monthday_distortion": {
+            "otx_key": false
+        },
+        "penny": {
+            "otx_key": false
+        },
+        "respect_bit": {
+            "otx_key": false
+        },
+        "timeline_tag": {
+            "otx_key": false
+        },
+        "yr1_jan1_offset": {
+            "otx_key": false
+        }
+    },
+    "dimens": [
+        "fiscunit"
+    ],
+    "creed_number": "br00000"
+}
