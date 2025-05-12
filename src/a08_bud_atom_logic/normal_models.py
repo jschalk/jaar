@@ -79,7 +79,7 @@ class PremiseTable(Base):
     idea_way = Column(String)
     pdivisor = Column(Integer)
     pnigh = Column(Float)
-    open = Column(Float)
+    popen = Column(Float)
 
 
 class TeamLinkTable(Base):

@@ -454,7 +454,10 @@ class BudUnit:
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(
-            fcontext=fcontext, fbranch=fbranch, fopen=x_fopen, fnigh=x_fnigh
+            fcontext=fcontext,
+            fbranch=fbranch,
+            fopen=x_fopen,
+            fnigh=x_fnigh,
         )
 
         if fact_fcontext_idea.is_math() is False:
@@ -761,7 +764,7 @@ class BudUnit:
     def _set_ideaattrholder_premise_ranges(self, x_ideaattrholder: IdeaAttrHolder):
         premise_idea = self.get_idea_obj(x_ideaattrholder.reason_premise)
         x_ideaattrholder.set_premise_range_attributes_influenced_by_premise_idea(
-            premise_open=premise_idea.begin,
+            popen=premise_idea.begin,
             pnigh=premise_idea.close,
             premise_denom=premise_idea.denom,
         )
@@ -771,7 +774,7 @@ class BudUnit:
         idea_way: WayStr,
         reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
-        reason_premise_open: float = None,
+        popen: float = None,
         reason_pnigh: float = None,
         pdivisor: int = None,
     ):
@@ -779,7 +782,7 @@ class BudUnit:
             idea_way=idea_way,
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
-            reason_premise_open=reason_premise_open,
+            popen=popen,
             reason_pnigh=reason_pnigh,
             pdivisor=pdivisor,
         )
@@ -792,7 +795,7 @@ class BudUnit:
         reason: ReasonUnit = None,
         reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
-        reason_premise_open: float = None,
+        popen: float = None,
         reason_pnigh: float = None,
         pdivisor: int = None,
         reason_del_premise_rcontext: WayStr = None,
@@ -830,7 +833,7 @@ class BudUnit:
             reason=reason,
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
-            reason_premise_open=reason_premise_open,
+            popen=popen,
             reason_pnigh=reason_pnigh,
             pdivisor=pdivisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,

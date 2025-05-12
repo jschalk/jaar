@@ -215,8 +215,8 @@ def fnigh_str() -> str:
     return "fnigh"
 
 
-def open_str() -> str:
-    return "open"
+def popen_str() -> str:
+    return "popen"
 
 
 def rcontext_idea_active_requisite_str() -> str:

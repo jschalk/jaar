@@ -91,7 +91,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "pbranch": "WayStr",
         "pnigh": "float",
         "numor": "int",
-        "open": "float",
+        "popen": "float",
         "penny": "float",
         "fbranch": "WayStr",
         "pledge": "bool",

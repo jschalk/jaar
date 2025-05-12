@@ -141,15 +141,15 @@ class PremiseStatusFinderException(Exception):
 
 @dataclass
 class PremiseStatusFinder:
-    premise_open: float  # within 0 and pdivisor, can be more than pnigh
-    pnigh: float  # within 0 and pdivisor, can be less than premise_open
+    popen: float  # within 0 and pdivisor, can be more than pnigh
+    pnigh: float  # within 0 and pdivisor, can be less than popen
     pdivisor: float  # greater than zero
     fopen_full: float  # less than fnigh
     fnigh_full: float  # less than fnigh
 
     def check_attr(self):
         if None in (
-            self.premise_open,
+            self.popen,
             self.pnigh,
             self.pdivisor,
             self.fopen_full,
@@ -167,9 +167,9 @@ class PremiseStatusFinder:
                 f"{self.pdivisor=} cannot be less/equal to zero"
             )
 
-        if self.premise_open < 0 or self.premise_open > self.pdivisor:
+        if self.popen < 0 or self.popen > self.pdivisor:
             raise PremiseStatusFinderException(
-                f"{self.premise_open=} cannot be less than zero or greater than {self.pdivisor=}"
+                f"{self.popen=} cannot be less than zero or greater than {self.pdivisor=}"
             )
 
         if self.pnigh < 0 or self.pnigh > self.pdivisor:
@@ -184,7 +184,7 @@ class PremiseStatusFinder:
         return self.fnigh_full % self.pdivisor
 
     def po(self) -> float:
-        return self.premise_open
+        return self.popen
 
     def pn(self) -> float:
         return self.pnigh
@@ -208,7 +208,7 @@ class PremiseStatusFinder:
             (
                 self.get_active()
                 and get_collasped_fact_range_active(
-                    self.premise_open,
+                    self.popen,
                     self.pnigh,
                     self.pdivisor,
                     self.fnigh_full,
@@ -259,13 +259,13 @@ def get_range_less_than_pdivisor_active(bo, bn, po, pn):
 
 
 def get_collasped_fact_range_active(
-    premise_open: float,
+    popen: float,
     pnigh: float,
     pdivisor: float,
     fnigh_full: float,
 ) -> bool:
     x_pbsd = premisestatusfinder_shop(
-        premise_open=premise_open,
+        popen=popen,
         pnigh=pnigh,
         pdivisor=pdivisor,
         fopen_full=fnigh_full,
@@ -275,14 +275,14 @@ def get_collasped_fact_range_active(
 
 
 def premisestatusfinder_shop(
-    premise_open: float,
+    popen: float,
     pnigh: float,
     pdivisor: float,
     fopen_full: float,
     fnigh_full: float,
 ):
     x_premisestatusfinder = PremiseStatusFinder(
-        premise_open,
+        popen,
         pnigh,
         pdivisor,
         fopen_full,
@@ -295,7 +295,7 @@ def premisestatusfinder_shop(
 @dataclass
 class PremiseUnit:
     pbranch: WayStr
-    open: float = None
+    popen: float = None
     pnigh: float = None
     pdivisor: int = None
     _status: bool = None
@@ -307,8 +307,8 @@ class PremiseUnit:
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {"pbranch": self.pbranch}
-        if self.open is not None:
-            x_dict["open"] = self.open
+        if self.popen is not None:
+            x_dict["popen"] = self.popen
         if self.pnigh is not None:
             x_dict["pnigh"] = self.pnigh
 
@@ -359,13 +359,13 @@ class PremiseUnit:
     def _is_segregate(self):
         return (
             self.pdivisor is not None
-            and self.open is not None
+            and self.popen is not None
             and self.pnigh is not None
         )
 
     def _is_range(self):
         return (
-            self.pdivisor is None and self.open is not None and self.pnigh is not None
+            self.pdivisor is None and self.popen is not None and self.pnigh is not None
         )
 
     def _get_task_status(self, factheir: FactHeir) -> bool:
@@ -374,7 +374,7 @@ class PremiseUnit:
             x_task = factheir.fnigh > self.pnigh
         elif self._status and self._is_segregate():
             segr_obj = premisestatusfinder_shop(
-                premise_open=self.open,
+                popen=self.popen,
                 pnigh=self.pnigh,
                 pdivisor=self.pdivisor,
                 fopen_full=factheir.fopen,
@@ -397,7 +397,7 @@ class PremiseUnit:
 
     def _get_segregate_status(self, factheir: FactHeir) -> bool:
         segr_obj = premisestatusfinder_shop(
-            premise_open=self.open,
+            popen=self.popen,
             pnigh=self.pnigh,
             pdivisor=self.pdivisor,
             fopen_full=factheir.fopen,
@@ -407,9 +407,9 @@ class PremiseUnit:
 
     def _get_range_status(self, factheir: FactHeir) -> bool:
         return (
-            (self.open <= factheir.fopen and self.pnigh > factheir.fopen)
-            or (self.open <= factheir.fnigh and self.pnigh > factheir.fnigh)
-            or (self.open >= factheir.fopen and self.pnigh < factheir.fnigh)
+            (self.popen <= factheir.fopen and self.pnigh > factheir.fopen)
+            or (self.popen <= factheir.fnigh and self.pnigh > factheir.fnigh)
+            or (self.popen >= factheir.fopen and self.pnigh < factheir.fnigh)
         )
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
@@ -419,14 +419,14 @@ class PremiseUnit:
 # class premisesshop:
 def premiseunit_shop(
     pbranch: WayStr,
-    open: float = None,
+    popen: float = None,
     pnigh: float = None,
     pdivisor: float = None,
     bridge: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
         pbranch=pbranch,
-        open=open,
+        popen=popen,
         pnigh=pnigh,
         pdivisor=pdivisor,
         bridge=default_bridge_if_None(bridge),
@@ -437,9 +437,9 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
     premises = {}
     for premise_dict in x_dict.values():
         try:
-            x_open = premise_dict["open"]
+            x_popen = premise_dict["popen"]
         except KeyError:
-            x_open = None
+            x_popen = None
         try:
             x_pnigh = premise_dict["pnigh"]
         except KeyError:
@@ -451,7 +451,7 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 
         premise_x = premiseunit_shop(
             pbranch=premise_dict["pbranch"],
-            open=x_open,
+            popen=x_popen,
             pnigh=x_pnigh,
             pdivisor=x_pdivisor,
         )
@@ -491,13 +491,13 @@ class ReasonCore:
     def set_premise(
         self,
         premise: WayStr,
-        open: float = None,
+        popen: float = None,
         pnigh: float = None,
         pdivisor: int = None,
     ):
         self.premises[premise] = premiseunit_shop(
             pbranch=premise,
-            open=open,
+            popen=popen,
             pnigh=pnigh,
             pdivisor=pdivisor,
             bridge=self.bridge,
@@ -578,7 +578,7 @@ class ReasonHeir(ReasonCore):
         for x_premiseunit in x_reasonunit.premises.values():
             premise_x = premiseunit_shop(
                 pbranch=x_premiseunit.pbranch,
-                open=x_premiseunit.open,
+                popen=x_premiseunit.popen,
                 pnigh=x_premiseunit.pnigh,
                 pdivisor=x_premiseunit.pdivisor,
             )

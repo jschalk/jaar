@@ -16,8 +16,6 @@ from src.a19_world_logic._utils.env_a19 import (
 )
 from os.path import exists as os_path_exists
 
-# open_fisc_ote1_agg(path)-> dict[tuple(OwnerName, TimePiont), EventInt]
-
 
 def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     env_dir_setup_cleanup,

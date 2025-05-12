@@ -380,7 +380,7 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
         x_atom.get_value("idea_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
         reason_premise=x_atom.get_value("pbranch"),
-        reason_premise_open=x_atom.get_value("open"),
+        popen=x_atom.get_value("popen"),
         reason_pnigh=x_atom.get_value("pnigh"),
         pdivisor=x_atom.get_value("pdivisor"),
     )
@@ -391,7 +391,7 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit.set_reason_premise(
         rcontext=x_atom.get_value("rcontext"),
         premise=x_atom.get_value("pbranch"),
-        open=x_atom.get_value("open"),
+        popen=x_atom.get_value("popen"),
         pnigh=x_atom.get_value("pnigh"),
         pdivisor=x_atom.get_value("pdivisor"),
     )
@@ -577,7 +577,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
     elif dimen == "bud_idea_factunit":
         return (
             (x_obj.fbranch != y_obj.fbranch)
-            or (x_obj.open != y_obj.open)
+            or (x_obj.popen != y_obj.popen)
             or (x_obj.pnigh != y_obj.pnigh)
         )
     elif dimen == "bud_idea_reasonunit":
@@ -586,7 +586,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "bud_idea_reason_premiseunit":
         return (
-            x_obj.open != y_obj.open
+            x_obj.popen != y_obj.popen
             or x_obj.pnigh != y_obj.pnigh
             or x_obj.pdivisor != y_obj.pdivisor
         )
@@ -645,7 +645,7 @@ class AtomRow:
     pbranch: WayStr = None
     pnigh: float = None
     numor: int = None
-    open: float = None
+    popen: float = None
     penny: float = None
     fbranch: WayStr = None
     pledge: bool = None

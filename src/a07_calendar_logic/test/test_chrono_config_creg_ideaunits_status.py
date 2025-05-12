@@ -63,7 +63,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
         clean_way,
         reason_rcontext=day_way,
         reason_premise=day_way,
-        reason_premise_open=0,
+        popen=0,
         reason_pnigh=1,
         pdivisor=1,
     )
@@ -97,7 +97,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
         clean_way,
         reason_rcontext=day_way,
         reason_premise=day_way,
-        reason_premise_open=360,
+        popen=360,
         reason_pnigh=420,
         pdivisor=1440,
     )
@@ -130,7 +130,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_idea_Scenario0():
         clean_way,
         reason_rcontext=days_way,
         reason_premise=days_way,
-        reason_premise_open=4,
+        popen=4,
         reason_pnigh=5,
         pdivisor=7,
     )
@@ -166,7 +166,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
         clean_way,
         reason_rcontext=week_way,
         reason_premise=week_way,
-        reason_premise_open=0,
+        popen=0,
         reason_pnigh=1440,
         pdivisor=10080,
     )
@@ -200,7 +200,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
         clean_way,
         reason_rcontext=week_way,
         reason_premise=week_way,
-        reason_premise_open=2880,
+        popen=2880,
         reason_pnigh=4220,
         pdivisor=10080,
     )
@@ -234,7 +234,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
         clean_way,
         reason_rcontext=weeks_way,
         reason_premise=weeks_way,
-        reason_premise_open=4,
+        popen=4,
         reason_pnigh=5,
         pdivisor=7,
     )
@@ -267,7 +267,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
         clean_way,
         reason_rcontext=year_way,
         reason_premise=year_way,
-        reason_premise_open=0,
+        popen=0,
         reason_pnigh=1440,
         pdivisor=525600,
     )
@@ -310,7 +310,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
         clean_way,
         reason_rcontext=year_way,
         reason_premise=year_way,
-        reason_premise_open=0,
+        popen=0,
         reason_pnigh=1440,
         pdivisor=525600,
     )
@@ -345,7 +345,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
         clean_way,
         reason_rcontext=year_way,
         reason_premise=year_way,
-        reason_premise_open=0,
+        popen=0,
         reason_pnigh=1440,
         pdivisor=525600,
     )
@@ -412,14 +412,14 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
         clean_way,
         reason_rcontext=wed_way,
         reason_premise=wed_way,
-        reason_premise_open=wed_gogo_want(),
+        popen=wed_gogo_want(),
         reason_pnigh=wed_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_way,
         reason_rcontext=year_way,
         reason_premise=year_way,
-        reason_premise_open=0,
+        popen=0,
         reason_pnigh=1400,
     )
 
@@ -539,14 +539,14 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
         clean_way,
         reason_rcontext=wed_way,
         reason_premise=wed_way,
-        reason_premise_open=thu_gogo_want(),
+        popen=thu_gogo_want(),
         reason_pnigh=thu_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_way,
         reason_rcontext=year_way,
         reason_premise=year_way,
-        reason_premise_open=1400,
+        popen=1400,
         reason_pnigh=2800,
     )
 

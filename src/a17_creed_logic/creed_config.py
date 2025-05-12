@@ -1,4 +1,8 @@
-from src.a00_data_toolbox.file_toolbox import open_json, create_path, get_json_filename
+from src.a00_data_toolbox.file_toolbox import (
+    open_json,
+    create_path,
+    get_json_filename,
+)
 from src.a00_data_toolbox.db_toolbox import get_sorted_intersection_list
 from os import getcwd as os_getcwd
 
@@ -102,7 +106,7 @@ def get_creed_elements_sort_order() -> list[str]:
         "mass",
         "max_tree_traverse",
         "pnigh",
-        "open",
+        "popen",
         "pdivisor",
         "pledge",
         "problem_bool",
@@ -228,7 +232,7 @@ def get_creed_sqlite_types() -> dict[str, str]:
         "mass": "INTEGER",
         "max_tree_traverse": "INTEGER",
         "pnigh": "REAL",
-        "open": "REAL",
+        "popen": "REAL",
         "pdivisor": "INTEGER",
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
@@ -603,7 +607,7 @@ def get_creed_format_headers() -> dict[str, list[str]]:
         "fisc_tag,owner_name,idea_way,fcontext,fbranch,fopen,fnigh": creed_format_00023_bud_idea_factunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,team_label": creed_format_00024_bud_idea_teamlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,healer_name": creed_format_00025_bud_idea_healerlink_v0_0_0(),
-        "fisc_tag,owner_name,idea_way,rcontext,pbranch,pnigh,open,pdivisor": creed_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,rcontext,pbranch,pnigh,popen,pdivisor": creed_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite": creed_format_00027_bud_idea_reasonunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": creed_format_00028_bud_ideaunit_v0_0_0(),
         "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": creed_format_00029_budunit_v0_0_0(),

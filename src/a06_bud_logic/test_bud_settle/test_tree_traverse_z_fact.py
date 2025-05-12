@@ -175,7 +175,7 @@ def test_BudUnit_settle_bud_FactUnitMoldsFactHeir():
     assert swim_idea._factheirs == first_earthdict
 
     # WHEN
-    # earth_curb = factunit_shop(fcontext=earth_way, fbranch=earth_way, open=3.0, pnigh=4.0)
+    # earth_curb = factunit_shop(fcontext=earth_way, fbranch=earth_way, popen=3.0, pnigh=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
     zia_bud.add_fact(fcontext=earth_way, fbranch=earth_way, fopen=3.0, fnigh=5.0)
     zia_bud.settle_bud()

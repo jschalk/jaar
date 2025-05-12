@@ -623,8 +623,8 @@ class BudDelta:
             x_budatom.set_jkey("idea_way", idea_way)
             x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
             x_budatom.set_jkey("pbranch", after_premiseunit.pbranch)
-            if after_premiseunit.open is not None:
-                x_budatom.set_jvalue("open", after_premiseunit.open)
+            if after_premiseunit.popen is not None:
+                x_budatom.set_jvalue("popen", after_premiseunit.popen)
             if after_premiseunit.pnigh is not None:
                 x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
             if after_premiseunit.pdivisor is not None:
@@ -650,8 +650,8 @@ class BudDelta:
                 x_budatom.set_jkey("idea_way", idea_way)
                 x_budatom.set_jkey("rcontext", before_reasonunit.rcontext)
                 x_budatom.set_jkey("pbranch", after_premiseunit.pbranch)
-                if after_premiseunit.open != before_premiseunit.open:
-                    x_budatom.set_jvalue("open", after_premiseunit.open)
+                if after_premiseunit.popen != before_premiseunit.popen:
+                    x_budatom.set_jvalue("popen", after_premiseunit.popen)
                 if after_premiseunit.pnigh != before_premiseunit.pnigh:
                     x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
                 if after_premiseunit.pdivisor != before_premiseunit.pdivisor:

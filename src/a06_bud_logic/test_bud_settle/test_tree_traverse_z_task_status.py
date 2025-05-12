@@ -238,14 +238,14 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     day24hr_way = sue_budunit.make_way(time_way, day24hr_str)
     day24hr_rcontext = day24hr_way
     day24hr_fbranch = day24hr_way
-    day24hr_open = 0.0
+    day24hr_popen = 0.0
     day24hr_pnigh = 8.0
 
     # WHEN
     sue_budunit.add_fact(
         day24hr_rcontext,
         fbranch=day24hr_fbranch,
-        fopen=day24hr_open,
+        fopen=day24hr_popen,
         fnigh=day24hr_pnigh,
     )
 
@@ -255,13 +255,13 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
 
     # WHEN
     # set facts as 8am to 10am
-    day24hr_open = 8.0
+    day24hr_popen = 8.0
     day24hr_pnigh = 10.0
     print(sue_budunit.idearoot.factunits[day24hr_way])
     sue_budunit.add_fact(
         day24hr_rcontext,
         fbranch=day24hr_fbranch,
-        fopen=day24hr_open,
+        fopen=day24hr_popen,
         fnigh=day24hr_pnigh,
     )
     print(sue_budunit.idearoot.factunits[day24hr_way])
@@ -291,7 +291,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_rcontexts()=}")
     # day_hour = f"{yao_budunit.fisc_tag},day_hour"
-    # yao_budunit.add_fact(fcontext=day_hour, fbranch=day_hour, open=0, pnigh=23)
+    # yao_budunit.add_fact(fcontext=day_hour, fbranch=day_hour, popen=0, pnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_budunit.make_l1_way(day_min_str)
     yao_budunit.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=1439)
@@ -475,7 +475,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     ced_week_rcontext = yao_budunit.make_l1_way("ced_week")
 
     pdivisor = None
-    premise_open = None
+    popen = None
     pnigh = None
     print(f"{len(yao_budunit._idea_dict)=}")
 
@@ -491,7 +491,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     )
     # print(f"{clean_sheet_idea.idea_tag=} {ced_week_reason.rcontext=} {premise_x=}")
     pdivisor = ced_week_premise.pdivisor
-    premise_open = ced_week_premise.open
+    popen = ced_week_premise.popen
     pnigh = ced_week_premise.pnigh
     # print(f"{idea.reasonunits=}")
     assert clean_sheet_idea._active is False
@@ -502,25 +502,25 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     #         print(f"{idea.get_idea_way()=}")
 
     assert pdivisor == 6
-    assert premise_open == 1
+    assert popen == 1
     print(
-        f"There exists a idea with a reason_rcontext {ced_week_rcontext} that also has lemmet div =6 and open/pnigh =1"
+        f"There exists a idea with a reason_rcontext {ced_week_rcontext} that also has lemmet div =6 and popen/pnigh =1"
     )
     # print(f"{len(idea_dict)=}")
-    ced_week_open = 6001
+    ced_week_popen = 6001
 
     # WHEN
     yao_budunit.add_fact(
         ced_week_rcontext,
         fbranch=ced_week_rcontext,
-        fopen=ced_week_open,
-        fnigh=ced_week_open,
+        fopen=ced_week_popen,
+        fnigh=ced_week_popen,
     )
     nation_str = "Nation-States"
     nation_way = yao_budunit.make_l1_way(nation_str)
     yao_budunit.add_fact(fcontext=nation_way, fbranch=nation_way)
     print(
-        f"Nation-states set and also fact set: {ced_week_rcontext=} with {ced_week_open=} and {ced_week_open=}"
+        f"Nation-states set and also fact set: {ced_week_rcontext=} with {ced_week_popen=} and {ced_week_popen=}"
     )
     print(f"{yao_budunit.idearoot.factunits=}")
     yao_budunit.settle_bud()
@@ -536,7 +536,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     week_reason = clean_couch_idea.reasonunits.get(week_way)
     week_premise = week_reason.premises.get(week_way)
     print(f"{clean_couch_idea.idea_tag=} {week_reason.rcontext=} {week_premise=}")
-    assert week_premise.pdivisor == 6 and week_premise.open == 1
+    assert week_premise.pdivisor == 6 and week_premise.popen == 1
 
 
 def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_budunit_v001():

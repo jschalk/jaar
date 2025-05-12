@@ -225,7 +225,7 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
 #         check_connection(sue_hubunit.treasury_db_file_conn())
-#     assert str(excinfo.value) == "unable to open database file"
+#     assert str(excinfo.value) == "unable to popen database file"
 
 #     # WHEN
 #     sue_hubunit.create_treasury_db_file()

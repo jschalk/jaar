@@ -1,6 +1,10 @@
 from src.a01_way_logic.way import create_way
 from src.a06_bud_logic._utils.str_a06 import budunit_str, bud_idea_factunit_str
-from src.a06_bud_logic._utils.str_a06 import idea_way_str, fcontext_str, fopen_str
+from src.a06_bud_logic._utils.str_a06 import (
+    idea_way_str,
+    fcontext_str,
+    fopen_str,
+)
 from src.a08_bud_atom_logic._utils.str_a08 import atom_update, atom_insert
 from src.a08_bud_atom_logic.atom import (
     budatom_shop,
@@ -62,12 +66,12 @@ def test_BudAtom_get_insert_sqlstr_ReturnsObj_idea_factunit():
     ball_way = create_way(sports_way, ball_str)
     knee_str = "knee"
     knee_way = create_way("a", knee_str)
-    knee_open = 7
+    knee_popen = 7
     x_dimen = bud_idea_factunit_str()
     update_disc_budatom = budatom_shop(x_dimen, atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
-    update_disc_budatom.set_jvalue(fopen_str(), knee_open)
+    update_disc_budatom.set_jvalue(fopen_str(), knee_popen)
 
     # WHEN
     generated_sqlstr = update_disc_budatom.get_insert_sqlstr()
@@ -82,7 +86,7 @@ INSERT INTO {atom_hx_table_name()} (
 VALUES (
   '{ball_way}'
 , '{knee_way}'
-, {knee_open}
+, {knee_popen}
 )
 ;"""
     print(f"{generated_sqlstr=}")

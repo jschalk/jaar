@@ -357,7 +357,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "open": {
+            "popen": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

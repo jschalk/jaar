@@ -720,19 +720,19 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     assert before_knee_reasonunit is not None
     damaged_premiseunit = before_knee_reasonunit.get_premise(damaged_way)
     assert damaged_premiseunit.pbranch == damaged_way
-    assert damaged_premiseunit.open is None
+    assert damaged_premiseunit.popen is None
     assert damaged_premiseunit.pnigh is None
     assert damaged_premiseunit.pdivisor is None
 
     # WHEN
-    damaged_open = 45
+    damaged_popen = 45
     damaged_pnigh = 77
     damaged_pdivisor = 3
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_update())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     update_disc_budatom.set_jkey("pbranch", damaged_way)
-    update_disc_budatom.set_jvalue("open", damaged_open)
+    update_disc_budatom.set_jvalue("popen", damaged_popen)
     update_disc_budatom.set_jvalue("pnigh", damaged_pnigh)
     update_disc_budatom.set_jvalue("pdivisor", damaged_pdivisor)
     # print(f"{update_disc_budatom=}")
@@ -746,7 +746,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     assert after_knee_reasonunit is not None
     after_damaged_premiseunit = after_knee_reasonunit.get_premise(damaged_way)
     assert after_damaged_premiseunit.pbranch == damaged_way
-    assert after_damaged_premiseunit.open == damaged_open
+    assert after_damaged_premiseunit.popen == damaged_popen
     assert after_damaged_premiseunit.pnigh == damaged_pnigh
     assert after_damaged_premiseunit.pdivisor == damaged_pdivisor
 
@@ -778,14 +778,14 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_reason_premiseun
     assert before_knee_reasonunit.get_premise(medical_way) is None
 
     # WHEN
-    medical_open = 45
+    medical_popen = 45
     medical_pnigh = 77
     medical_pdivisor = 3
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     update_disc_budatom.set_jkey("pbranch", medical_way)
-    update_disc_budatom.set_jvalue("open", medical_open)
+    update_disc_budatom.set_jvalue("popen", medical_popen)
     update_disc_budatom.set_jvalue("pnigh", medical_pnigh)
     update_disc_budatom.set_jvalue("pdivisor", medical_pdivisor)
     # print(f"{update_disc_budatom=}")
@@ -799,7 +799,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_reason_premiseun
     after_medical_premiseunit = after_knee_reasonunit.get_premise(medical_way)
     assert after_medical_premiseunit is not None
     assert after_medical_premiseunit.pbranch == medical_way
-    assert after_medical_premiseunit.open == medical_open
+    assert after_medical_premiseunit.popen == medical_popen
     assert after_medical_premiseunit.pnigh == medical_pnigh
     assert after_medical_premiseunit.pdivisor == medical_pdivisor
 

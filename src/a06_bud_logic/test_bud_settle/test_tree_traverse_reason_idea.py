@@ -332,7 +332,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     assert casa_idea1.reasonunits is not None
     print(casa_idea1.reasonunits)
     assert casa_idea1.reasonunits[week_way] is not None
-    assert casa_idea1.reasonunits[week_way].premises[wed_way].open is None
+    assert casa_idea1.reasonunits[week_way].premises[wed_way].popen is None
     assert casa_idea1.reasonunits[week_way].premises[wed_way].pnigh is None
 
     casa_wk_reason1 = reasonunit_shop(week_way)
@@ -343,7 +343,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 
     # ESTABLISH
     pdivisor_x = 34
-    x_open = 12
+    x_popen = 12
     x_pnigh = 12
 
     # WHEN
@@ -352,16 +352,16 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
         reason_rcontext=week_way,
         reason_premise=wed_way,
         pdivisor=pdivisor_x,
-        reason_premise_open=x_open,
+        popen=x_popen,
         reason_pnigh=x_pnigh,
     )
 
     # THEN
-    assert casa_idea1.reasonunits[week_way].premises[wed_way].open == 12
+    assert casa_idea1.reasonunits[week_way].premises[wed_way].popen == 12
     assert casa_idea1.reasonunits[week_way].premises[wed_way].pnigh == 12
 
     wed_premise2 = premiseunit_shop(
-        wed_way, pdivisor=pdivisor_x, open=x_open, pnigh=x_pnigh
+        wed_way, pdivisor=pdivisor_x, popen=x_popen, pnigh=x_pnigh
     )
     casa_wk_reason2 = reasonunit_shop(
         rcontext=week_way, premises={wed_premise2.pbranch: wed_premise2}
@@ -378,7 +378,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
         reason_rcontext=week_way,
         reason_premise=thu_way,
         pdivisor=pdivisor_x,
-        reason_premise_open=x_open,
+        popen=x_popen,
         reason_pnigh=x_pnigh,
     )
 
@@ -403,7 +403,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
         casa_way,
         reason_rcontext=time_way,
         reason_premise=week_way,
-        reason_premise_open=2,
+        popen=2,
         reason_pnigh=5,
         pdivisor=None,
     )
@@ -412,11 +412,11 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
     casa_idea1 = sue_bud.get_idea_obj(casa_way)
     assert casa_idea1.reasonunits[time_way] is not None
     assert casa_idea1.reasonunits[time_way].premises[week_way].pdivisor == 7
-    assert casa_idea1.reasonunits[time_way].premises[week_way].open == 2
+    assert casa_idea1.reasonunits[time_way].premises[week_way].popen == 2
     assert casa_idea1.reasonunits[time_way].premises[week_way].pnigh == 5
 
 
-def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Pnigh():
+def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremisePopen_Pnigh():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     casa = "casa"
@@ -433,7 +433,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Pnigh(
         casa_way,
         reason_rcontext=time_way,
         reason_premise=rus_war_way,
-        reason_premise_open=None,
+        popen=None,
         reason_pnigh=None,
         pdivisor=None,
     )
@@ -442,7 +442,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Pnigh(
     casa_idea1 = sue_bud.get_idea_obj(casa_way)
     assert casa_idea1.reasonunits[time_way] is not None
     assert casa_idea1.reasonunits[time_way].premises[rus_war_way].pdivisor is None
-    assert casa_idea1.reasonunits[time_way].premises[rus_war_way].open == 22
+    assert casa_idea1.reasonunits[time_way].premises[rus_war_way].popen == 22
     assert casa_idea1.reasonunits[time_way].premises[rus_war_way].pnigh == 34
 
 

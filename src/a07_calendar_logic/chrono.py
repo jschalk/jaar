@@ -429,9 +429,9 @@ class ChronoUnit:
         week_way = get_week_way(self.x_budunit, self.time_range_root_way)
         week_idea = self.x_budunit.get_idea_obj(week_way)
         x_idea_list = [self._timeline_idea, week_idea]
-        open_rangeunit = calc_range(x_idea_list, self.x_min, self.x_min)
-        open_weekday_dict = week_idea.get_kids_in_range(open_rangeunit.gogo)
-        for x_weekday in open_weekday_dict.keys():
+        popen_rangeunit = calc_range(x_idea_list, self.x_min, self.x_min)
+        popen_weekday_dict = week_idea.get_kids_in_range(popen_rangeunit.gogo)
+        for x_weekday in popen_weekday_dict.keys():
             self._weekday = x_weekday
 
     def _set_month(self):
@@ -439,14 +439,14 @@ class ChronoUnit:
         year_idea = self.x_budunit.get_idea_obj(year_way)
         x_idea_dict = self.x_budunit._idea_dict
         idea_list = all_between(x_idea_dict, self.time_range_root_way, year_way)
-        open_rangeunit = calc_range(idea_list, self.x_min, self.x_min)
-        gogo_month_dict = year_idea.get_kids_in_range(open_rangeunit.gogo)
+        popen_rangeunit = calc_range(idea_list, self.x_min, self.x_min)
+        gogo_month_dict = year_idea.get_kids_in_range(popen_rangeunit.gogo)
         month_idea = None
         for x_monthname, month_idea in gogo_month_dict.items():
             self._month = x_monthname
             month_idea = month_idea
 
-        self._monthday = open_rangeunit.gogo - month_idea._gogo_calc + month_idea.addin
+        self._monthday = popen_rangeunit.gogo - month_idea._gogo_calc + month_idea.addin
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):

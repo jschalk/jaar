@@ -672,7 +672,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("pbranch") == type_WayStr_str()
     assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
-    assert x_class_types.get("open") == "float"
+    assert x_class_types.get("popen") == "float"
     assert x_class_types.get(penny_str()) == "float"
     assert x_class_types.get("fbranch") == type_WayStr_str()
     assert x_class_types.get("pledge") == "bool"

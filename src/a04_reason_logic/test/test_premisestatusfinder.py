@@ -9,7 +9,7 @@ from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scat
 
 def test_PremiseStatusFinder_Exists():
     # ESTABLISH
-    x_premise_open = 1
+    x_popen = 1
     x_pnigh = 1
     x_pdivisor = 1
     x_fopen_full = 1
@@ -17,7 +17,7 @@ def test_PremiseStatusFinder_Exists():
 
     # WHEN
     x_pbsd = PremiseStatusFinder(
-        x_premise_open,
+        x_popen,
         x_pnigh,
         x_pdivisor,
         x_fopen_full,
@@ -25,7 +25,7 @@ def test_PremiseStatusFinder_Exists():
     )
 
     # THEN
-    assert x_pbsd.premise_open == x_premise_open
+    assert x_pbsd.popen == x_popen
     assert x_pbsd.pnigh == x_pnigh
     assert x_pbsd.pdivisor == x_pdivisor
     assert x_pbsd.fopen_full == x_fopen_full
@@ -34,7 +34,7 @@ def test_PremiseStatusFinder_Exists():
 
 def test_premisestatusfinder_shop_ReturnsObj():
     # ESTABLISH
-    x_premise_open = 1
+    x_popen = 1
     x_pnigh = 1
     x_pdivisor = 1
     x_fopen_full = 1
@@ -42,7 +42,7 @@ def test_premisestatusfinder_shop_ReturnsObj():
 
     # WHEN
     x_pbsd = premisestatusfinder_shop(
-        x_premise_open,
+        x_popen,
         x_pnigh,
         x_pdivisor,
         x_fopen_full,
@@ -50,7 +50,7 @@ def test_premisestatusfinder_shop_ReturnsObj():
     )
 
     # THEN
-    assert x_pbsd.premise_open == x_premise_open
+    assert x_pbsd.popen == x_popen
     assert x_pbsd.pnigh == x_pnigh
     assert x_pbsd.pdivisor == x_pdivisor
     assert x_pbsd.fopen_full == x_fopen_full
@@ -60,7 +60,7 @@ def test_premisestatusfinder_shop_ReturnsObj():
 def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
     with pytest_raises(Exception) as excinfo_1:
         premisestatusfinder_shop(
-            premise_open=1,
+            popen=1,
             pnigh=None,
             pdivisor=1,
             fopen_full=1,
@@ -72,7 +72,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
     x_fnigh_full = 1
     with pytest_raises(Exception) as excinfo_2:
         premisestatusfinder_shop(
-            premise_open=1,
+            popen=1,
             pnigh=1,
             pdivisor=1,
             fopen_full=x_fopen_full,
@@ -86,7 +86,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
     x_pdivisor = -1
     with pytest_raises(Exception) as excinfo_3:
         premisestatusfinder_shop(
-            premise_open=1,
+            popen=1,
             pnigh=1,
             pdivisor=x_pdivisor,
             fopen_full=1,
@@ -98,10 +98,10 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
     )
 
     x_pdivisor = 1
-    x_premise_open = -1
+    x_popen = -1
     with pytest_raises(Exception) as excinfo_4:
         premisestatusfinder_shop(
-            premise_open=x_premise_open,
+            popen=x_popen,
             pnigh=1,
             pdivisor=x_pdivisor,
             fopen_full=1,
@@ -109,13 +109,13 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
         )
     assert (
         str(excinfo_4.value)
-        == f"self.premise_open={x_premise_open} cannot be less than zero or greater than self.pdivisor={x_pdivisor}"
+        == f"self.popen={x_popen} cannot be less than zero or greater than self.pdivisor={x_pdivisor}"
     )
 
     x_pnigh = 2
     with pytest_raises(Exception) as excinfo_5:
         premisestatusfinder_shop(
-            premise_open=1,
+            popen=1,
             pnigh=x_pnigh,
             pdivisor=x_pdivisor,
             fopen_full=1,
@@ -129,7 +129,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
 
 def test_PremiseStatusFinder_AbbrevationMethodsReturnsObjs():
     # ESTABLISH
-    x_premise_open = 1
+    x_popen = 1
     x_pnigh = 2
     x_pdivisor = 3
     x_fopen_full = 4
@@ -137,7 +137,7 @@ def test_PremiseStatusFinder_AbbrevationMethodsReturnsObjs():
 
     # WHEN
     x_pbsd = premisestatusfinder_shop(
-        x_premise_open,
+        x_popen,
         x_pnigh,
         x_pdivisor,
         x_fopen_full,
@@ -147,7 +147,7 @@ def test_PremiseStatusFinder_AbbrevationMethodsReturnsObjs():
     # THEN
     assert x_pbsd.bo() == x_fopen_full % x_pdivisor
     assert x_pbsd.bn() == x_fnigh_full % x_pdivisor
-    assert x_pbsd.po() == x_premise_open
+    assert x_pbsd.po() == x_popen
     assert x_pbsd.pn() == x_pnigh
     assert x_pbsd.pd() == x_pdivisor
 
@@ -561,14 +561,14 @@ def _add_last_trace_and_show(fig: plotly_figure, pd, linel, graphics_bool: bool)
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_01():
     # ESTABLISH / WHEN
     segr_obj = premisestatusfinder_shop(
-        premise_open=1305.0,
+        popen=1305.0,
         pnigh=1305.0,
         pdivisor=1440,
         fopen_full=20000,
         fnigh_full=29000,
     )
     print(f"----\n  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=}")
-    print(f"  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
+    print(f"  {segr_obj.popen=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
     print(
         f"  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     )
@@ -584,14 +584,14 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_02():
     # ESTABLISH / WHEN
     segr_obj = premisestatusfinder_shop(
-        premise_open=1305.0,
+        popen=1305.0,
         pnigh=1305.0,
         pdivisor=1440,
         fopen_full=1300,
         fnigh_full=1400,
     )
     print(f"----\n  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=}")
-    print(f"  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
+    print(f"  {segr_obj.popen=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
     print(
         f"  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     )
@@ -605,14 +605,14 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
 def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_03():
     # ESTABLISH / WHEN
     segr_obj = premisestatusfinder_shop(
-        premise_open=1305.0,
+        popen=1305.0,
         pnigh=1305.0,
         pdivisor=1440,
         fopen_full=1300,
         fnigh_full=1300,
     )
     print(f"----\n  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=}")
-    print(f"  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
+    print(f"  {segr_obj.popen=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
     print(
         f"  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     )

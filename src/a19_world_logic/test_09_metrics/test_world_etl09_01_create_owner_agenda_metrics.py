@@ -1,6 +1,3 @@
-# open_fisc_ote1_agg(path)-> dict[tuple(OwnerName, TimePiont), EventInt]
-
-
 # def test_WorldUnit_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
 #     env_dir_setup_cleanup,
 # ):

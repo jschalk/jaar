@@ -106,7 +106,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "morph": "bool",
         "pnigh": "float",
         "numor": "int",
-        "open": "float",
+        "popen": "float",
         "offi_time": "TimeLinePoint",
         "owner_name": "NameStr",
         "penny": "float",

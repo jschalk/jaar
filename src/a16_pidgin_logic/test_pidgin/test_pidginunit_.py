@@ -103,7 +103,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()
-    assert pidgin_args_class_types.get("open") == "float"
+    assert pidgin_args_class_types.get("popen") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
     assert pidgin_args_class_types.get("fbranch") == type_WayStr_str()
     assert pidgin_args_class_types.get("pledge") == "bool"

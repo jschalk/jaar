@@ -188,12 +188,12 @@ CREATE_BUDHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_healerli
 CREATE_BUDHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name TEXT)"
 CREATE_BUDHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name_ERASE TEXT)"
 CREATE_BUDHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_s_put_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, open REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, open REAL, pdivisor INTEGER)"
+CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_s_put_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
+CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
 CREATE_BUDPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_s_del_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
 CREATE_BUDPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
-CREATE_BUDPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, open REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, open REAL, pdivisor INTEGER)"
+CREATE_BUDPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
 CREATE_BUDPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
 CREATE_BUDPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
 CREATE_BUDREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_idea_reasonunit_s_put_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, rcontext_idea_active_requisite INTEGER, error_message TEXT)"
@@ -402,8 +402,8 @@ CREATE_BUDHEAL_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_healerlin
 CREATE_BUDHEAL_PUT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_healerlink_put_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name TEXT, error_message TEXT)"""
 CREATE_BUDHEAL_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_healerlink_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name_ERASE TEXT)"""
 CREATE_BUDHEAL_DEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_healerlink_del_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, healer_name_ERASE TEXT, error_message TEXT)"""
-CREATE_BUDPREM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, open REAL, pdivisor INTEGER)"""
-CREATE_BUDPREM_PUT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_put_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, open REAL, pdivisor INTEGER, error_message TEXT)"""
+CREATE_BUDPREM_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"""
+CREATE_BUDPREM_PUT_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_put_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"""
 CREATE_BUDPREM_DEL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_del_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"""
 CREATE_BUDPREM_DEL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_del_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch_ERASE TEXT, error_message TEXT)"""
 CREATE_BUDREAS_PUT_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reasonunit_put_agg (event_int INTEGER, face_name TEXT, fisc_tag TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, rcontext_idea_active_requisite INTEGER)"""
@@ -834,7 +834,7 @@ BUDPREM_INCONSISTENCY_SQLSTR = """SELECT event_int, face_name, fisc_tag, owner_n
 FROM bud_idea_reason_premiseunit_put_raw
 GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch
 HAVING MIN(pnigh) != MAX(pnigh)
-    OR MIN(open) != MAX(open)
+    OR MIN(popen) != MAX(popen)
     OR MIN(pdivisor) != MAX(pdivisor)
 """
 BUDREAS_INCONSISTENCY_SQLSTR = """SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext
@@ -1170,7 +1170,7 @@ SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch
 FROM bud_idea_reason_premiseunit_put_raw
 GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch
 HAVING MIN(pnigh) != MAX(pnigh)
-    OR MIN(open) != MAX(open)
+    OR MIN(popen) != MAX(popen)
     OR MIN(pdivisor) != MAX(pdivisor)
 )
 UPDATE bud_idea_reason_premiseunit_put_raw
@@ -1513,8 +1513,8 @@ WHERE error_message IS NULL
 GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, healer_name
 ;
 """
-BUDPREM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_idea_reason_premiseunit_put_agg (event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch, pnigh, open, pdivisor)
-SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch, MAX(pnigh), MAX(open), MAX(pdivisor)
+BUDPREM_PUT_AGG_INSERT_SQLSTR = """INSERT INTO bud_idea_reason_premiseunit_put_agg (event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch, pnigh, popen, pdivisor)
+SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch, MAX(pnigh), MAX(popen), MAX(pdivisor)
 FROM bud_idea_reason_premiseunit_put_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch
