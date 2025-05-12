@@ -40,7 +40,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     rcontext_str,
     pbranch_str,
     pnigh_str,
-    open_str,
+    popen_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_delete, atom_insert, atom_update
 from src.a09_pack_logic.delta import BudDelta
@@ -509,16 +509,16 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
                 way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
                 rcontext_value = idea_reason_premiseunit_atom.get_value(rcontext_str())
                 pbranch_value = idea_reason_premiseunit_atom.get_value(pbranch_str())
-                divisor_value = idea_reason_premiseunit_atom.get_value("divisor")
+                pdivisor_value = idea_reason_premiseunit_atom.get_value("pdivisor")
                 pnigh_value = idea_reason_premiseunit_atom.get_value(pnigh_str())
-                open_value = idea_reason_premiseunit_atom.get_value(open_str())
+                popen_value = idea_reason_premiseunit_atom.get_value(popen_str())
                 x_str = f"PremiseUnit '{pbranch_value}' created for reason '{rcontext_value}' for idea '{way_value}'."
-                if open_value is not None:
-                    x_str += f" Open={open_value}."
+                if popen_value is not None:
+                    x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
                     x_str += f" Pnigh={pnigh_value}."
-                if divisor_value is not None:
-                    x_str += f" Divisor={divisor_value}."
+                if pdivisor_value is not None:
+                    x_str += f" Pdivisor={pdivisor_value}."
                 legible_list.append(x_str)
 
 
@@ -533,16 +533,16 @@ def add_bud_reason_premiseunit_update_to_legible_list(
                 way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
                 rcontext_value = idea_reason_premiseunit_atom.get_value(rcontext_str())
                 pbranch_value = idea_reason_premiseunit_atom.get_value(pbranch_str())
-                divisor_value = idea_reason_premiseunit_atom.get_value("divisor")
+                pdivisor_value = idea_reason_premiseunit_atom.get_value("pdivisor")
                 pnigh_value = idea_reason_premiseunit_atom.get_value(pnigh_str())
-                open_value = idea_reason_premiseunit_atom.get_value(open_str())
+                popen_value = idea_reason_premiseunit_atom.get_value(popen_str())
                 x_str = f"PremiseUnit '{pbranch_value}' updated for reason '{rcontext_value}' for idea '{way_value}'."
-                if open_value is not None:
-                    x_str += f" Open={open_value}."
+                if popen_value is not None:
+                    x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
                     x_str += f" Pnigh={pnigh_value}."
-                if divisor_value is not None:
-                    x_str += f" Divisor={divisor_value}."
+                if pdivisor_value is not None:
+                    x_str += f" Pdivisor={pdivisor_value}."
                 legible_list.append(x_str)
 
 

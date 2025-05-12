@@ -80,7 +80,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("debtit_vote") == "float"
     assert pidgin_args_class_types.get("debtor_respect") == "float"
     assert pidgin_args_class_types.get("denom") == "int"
-    assert pidgin_args_class_types.get("divisor") == "int"
+    assert pidgin_args_class_types.get("pdivisor") == "int"
     assert pidgin_args_class_types.get("face_name") == type_NameStr_str()
     assert pidgin_args_class_types.get("fcontext") == type_WayStr_str()
     assert pidgin_args_class_types.get("fisc_tag") == type_TagStr_str()
@@ -103,7 +103,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()
-    assert pidgin_args_class_types.get("open") == "float"
+    assert pidgin_args_class_types.get("popen") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
     assert pidgin_args_class_types.get("fbranch") == type_WayStr_str()
     assert pidgin_args_class_types.get("pledge") == "bool"

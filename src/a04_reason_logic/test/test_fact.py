@@ -130,7 +130,10 @@ def test_FactUnit_get_dict_ReturnsDict():
     x_fopen = 35
     x_fnigh = 50
     sunday_fact = factunit_shop(
-        fcontext=weekday_way, fbranch=sunday_way, fopen=x_fopen, fnigh=x_fnigh
+        fcontext=weekday_way,
+        fbranch=sunday_way,
+        fopen=x_fopen,
+        fnigh=x_fnigh,
     )
     print(sunday_fact)
 

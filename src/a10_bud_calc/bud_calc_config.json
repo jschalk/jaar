@@ -349,7 +349,7 @@
             }
         },
         "jvalues": {
-            "divisor": {
+            "pdivisor": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -357,7 +357,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "open": {
+            "popen": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

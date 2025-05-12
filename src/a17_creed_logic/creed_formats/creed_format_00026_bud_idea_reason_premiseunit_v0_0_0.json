@@ -3,7 +3,7 @@
         "rcontext": {
             "otx_key": true
         },
-        "divisor": {
+        "pdivisor": {
             "otx_key": false
         },
         "event_int": {
@@ -21,7 +21,7 @@
         "pnigh": {
             "otx_key": false
         },
-        "open": {
+        "popen": {
             "otx_key": false
         },
         "owner_name": {

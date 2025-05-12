@@ -95,9 +95,9 @@
       "idea_way": {}
     },
     "jvalues": {
-      "divisor": {},
+      "pdivisor": {},
       "pnigh": {},
-      "open": {}
+      "popen": {}
     }
   },
   "bud_idea_reasonunit": {

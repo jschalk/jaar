@@ -32,7 +32,7 @@ def test_AtomRow_exists():
     assert x_atomrow.debtit_vote is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
-    assert x_atomrow.divisor is None
+    assert x_atomrow.pdivisor is None
     assert x_atomrow.fcontext is None
     assert x_atomrow.fnigh is None
     assert x_atomrow.fopen is None
@@ -48,7 +48,7 @@ def test_AtomRow_exists():
     assert x_atomrow.pbranch is None
     assert x_atomrow.pnigh is None
     assert x_atomrow.numor is None
-    assert x_atomrow.open is None
+    assert x_atomrow.popen is None
     assert x_atomrow.penny is None
     assert x_atomrow.fbranch is None
     assert x_atomrow.pledge is None

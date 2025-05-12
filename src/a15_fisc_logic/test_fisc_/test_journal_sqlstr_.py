@@ -1,6 +1,10 @@
 from src.a01_way_logic.way import create_way
 from src.a06_bud_logic._utils.str_a06 import bud_idea_factunit_str
-from src.a06_bud_logic._utils.str_a06 import fopen_str, fcontext_str, idea_way_str
+from src.a06_bud_logic._utils.str_a06 import (
+    fopen_str,
+    fcontext_str,
+    idea_way_str,
+)
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_hx_table_name
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a15_fisc_logic.journal_sqlstr import (
@@ -169,7 +173,7 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "idea_reasonunit_UPDATE_rcontext_idea_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3534
+    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3538
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -218,12 +222,12 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5328
+    assert generated_sqlstr.find(end_sqlstr) == 5332
     example_idea_reasonunit_str = (
         "idea_reasonunit_UPDATE_rcontext_idea_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_idea_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3566
+    assert generated_sqlstr.find(example_idea_reasonunit_str) == 3570
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

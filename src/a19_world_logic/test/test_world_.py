@@ -155,7 +155,7 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world._fiscunits == set()
 
 
-# def test_WorldUnit_open_event_from_files_ReturnsObj(env_dir_setup_cleanup):
+# def test_WorldUnit_popen_event_from_files_ReturnsObj(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     x_world = worldunit_shop()
 #     sue_str = "Sue"

@@ -107,7 +107,7 @@ def test_load_creed_csv_Arg_creed_format_00021_bud_acctunit_v0_0_0_csvTo_job(
     sue_hubunit = hubunit_shop(
         creed_examples_dir(), accord_fisc_tag, owner_name=sue_str
     )
-    # Open FiscUnit and confirm gut BudUnit does not exist
+    # Popen FiscUnit and confirm gut BudUnit does not exist
     assert not gut_file_exists(creed_examples_dir(), accord_fisc_tag, sue_str)
 
     # WHEN
@@ -161,7 +161,7 @@ def test_load_creed_csv_csvTo_job(
     sue_hubunit = hubunit_shop(
         creed_examples_dir(), accord_fisc_tag, owner_name=sue_str
     )
-    # Open FiscUnit and confirm gut BudUnit does not exist
+    # Popen FiscUnit and confirm gut BudUnit does not exist
     assert not gut_file_exists(creed_examples_dir(), accord_fisc_tag, sue_str)
 
     # WHEN

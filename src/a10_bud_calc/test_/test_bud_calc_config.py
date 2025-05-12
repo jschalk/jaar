@@ -42,7 +42,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     pbranch_str,
     pnigh_str,
     numor_str,
-    open_str,
+    popen_str,
     penny_str,
     respect_bit_str,
     idea_way_str,
@@ -597,12 +597,12 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budprem, jm, "_status") == "INTEGER"
     assert g_class_type(config, budprem, jm, "_task") == "int"
     assert g_sqlitetype(config, budprem, jm, "_task") == "INTEGER"
-    assert g_class_type(config, budprem, jv, "divisor") == "int"
-    assert g_sqlitetype(config, budprem, jv, "divisor") == "INTEGER"
+    assert g_class_type(config, budprem, jv, "pdivisor") == "int"
+    assert g_sqlitetype(config, budprem, jv, "pdivisor") == "INTEGER"
     assert g_class_type(config, budprem, jv, pnigh_str()) == "float"
     assert g_sqlitetype(config, budprem, jv, pnigh_str()) == "REAL"
-    assert g_class_type(config, budprem, jv, open_str()) == "float"
-    assert g_sqlitetype(config, budprem, jv, open_str()) == "REAL"
+    assert g_class_type(config, budprem, jv, popen_str()) == "float"
+    assert g_sqlitetype(config, budprem, jv, popen_str()) == "REAL"
     assert g_class_type(config, budreas, jk, rcontext_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budreas, jk, rcontext_str()) == "TEXT"
     assert g_class_type(config, budreas, jk, idea_way_str()) == type_WayStr_str()
@@ -809,9 +809,9 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get(pbranch_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
-    assert bud_calc_args_type_dict.get("divisor") == "int"
+    assert bud_calc_args_type_dict.get("pdivisor") == "int"
     assert bud_calc_args_type_dict.get(pnigh_str()) == "float"
-    assert bud_calc_args_type_dict.get(open_str()) == "float"
+    assert bud_calc_args_type_dict.get(popen_str()) == "float"
     assert bud_calc_args_type_dict.get("_rcontext_idea_active_value") == "int"
     assert bud_calc_args_type_dict.get("rcontext_idea_active_requisite") == "bool"
     assert bud_calc_args_type_dict.get("team_label") == type_LabelStr_str()

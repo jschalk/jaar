@@ -99,9 +99,9 @@ class IdeaAttrHolder:
     reason: ReasonUnit = None
     reason_rcontext: WayStr = None
     reason_premise: WayStr = None
-    reason_premise_open: float = None
+    popen: float = None
     reason_pnigh: float = None
-    reason_premise_divisor: int = None
+    pdivisor: int = None
     reason_del_premise_rcontext: WayStr = None
     reason_del_premise_pbranch: WayStr = None
     reason_rcontext_idea_active_requisite: str = None
@@ -127,17 +127,17 @@ class IdeaAttrHolder:
 
     def set_premise_range_attributes_influenced_by_premise_idea(
         self,
-        premise_open,
+        popen,
         pnigh,
         premise_denom,
     ):
         if self.reason_premise is not None:
-            if self.reason_premise_open is None:
-                self.reason_premise_open = premise_open
+            if self.popen is None:
+                self.popen = popen
             if self.reason_pnigh is None:
                 self.reason_pnigh = pnigh
-            if self.reason_premise_divisor is None:
-                self.reason_premise_divisor = premise_denom
+            if self.pdivisor is None:
+                self.pdivisor = premise_denom
 
 
 def ideaattrholder_shop(
@@ -146,9 +146,9 @@ def ideaattrholder_shop(
     reason: ReasonUnit = None,
     reason_rcontext: WayStr = None,
     reason_premise: WayStr = None,
-    reason_premise_open: float = None,
+    popen: float = None,
     reason_pnigh: float = None,
-    reason_premise_divisor: int = None,
+    pdivisor: int = None,
     reason_del_premise_rcontext: WayStr = None,
     reason_del_premise_pbranch: WayStr = None,
     reason_rcontext_idea_active_requisite: str = None,
@@ -178,9 +178,9 @@ def ideaattrholder_shop(
         reason=reason,
         reason_rcontext=reason_rcontext,
         reason_premise=reason_premise,
-        reason_premise_open=reason_premise_open,
+        popen=popen,
         reason_pnigh=reason_pnigh,
-        reason_premise_divisor=reason_premise_divisor,
+        pdivisor=pdivisor,
         reason_del_premise_rcontext=reason_del_premise_rcontext,
         reason_del_premise_pbranch=reason_del_premise_pbranch,
         reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
@@ -331,7 +331,7 @@ class IdeaUnit:
         # a number <= factheir.fnigh so the idea no longer is a task. This method finds
         # the minimal factheir.fopen to modify idea._task is False. idea_core._factheir cannot be straight up manipulated
         # so it is mandatory that idea._factunit is different.
-        # self.set_factunits(rcontext=fact, fact=rcontext, open=pnigh, pnigh=fnigh)
+        # self.set_factunits(rcontext=fact, fact=rcontext, popen=pnigh, pnigh=fnigh)
         self.factunits[fcontextunit.fcontext] = factunit_shop(
             fcontext=fcontextunit.fcontext,
             fbranch=fcontextunit.fcontext,
@@ -567,9 +567,9 @@ class IdeaUnit:
             self.set_reason_premise(
                 rcontext=idea_attr.reason_rcontext,
                 premise=idea_attr.reason_premise,
-                open=idea_attr.reason_premise_open,
+                popen=idea_attr.popen,
                 pnigh=idea_attr.reason_pnigh,
-                divisor=idea_attr.reason_premise_divisor,
+                pdivisor=idea_attr.pdivisor,
             )
         if (
             idea_attr.reason_rcontext is not None
@@ -697,13 +697,13 @@ class IdeaUnit:
         self,
         rcontext: WayStr,
         premise: WayStr,
-        open: float,
+        popen: float,
         pnigh: float,
-        divisor: int,
+        pdivisor: int,
     ):
         x_reasonunit = self._get_or_create_reasonunit(rcontext=rcontext)
         x_reasonunit.set_premise(
-            premise=premise, open=open, pnigh=pnigh, divisor=divisor
+            premise=premise, popen=popen, pnigh=pnigh, pdivisor=pdivisor
         )
 
     def del_reasonunit_rcontext(self, rcontext: WayStr):
@@ -822,14 +822,14 @@ class IdeaUnit:
         self, all_ideas: list, range_root_way: WayStr, reason_rcontext: WayStr
     ):
         range_root_factheir = self._factheirs.get(range_root_way)
-        old_open = range_root_factheir.fopen
+        old_popen = range_root_factheir.fopen
         old_pnigh = range_root_factheir.fnigh
-        x_rangeunit = ideas_calculated_range(all_ideas, old_open, old_pnigh)
-        new_factheir_open = x_rangeunit.gogo
+        x_rangeunit = ideas_calculated_range(all_ideas, old_popen, old_pnigh)
+        new_factheir_popen = x_rangeunit.gogo
         new_factheir_pnigh = x_rangeunit.stop
         new_factheir_obj = factheir_shop(reason_rcontext)
         new_factheir_obj.set_attr(
-            reason_rcontext, new_factheir_open, new_factheir_pnigh
+            reason_rcontext, new_factheir_popen, new_factheir_pnigh
         )
         self._set_factheir(new_factheir_obj)
 

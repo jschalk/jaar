@@ -604,7 +604,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -628,7 +628,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -653,7 +653,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -676,7 +676,7 @@
                       "A;time;gregtime;x2;Sept 4th 2023 9am": {
                         "pbranch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
                         "pnigh": 1064350680.0,
-                        "open": 1064350680.0
+                        "popen": 1064350680.0
                       }
                     }
                   }
@@ -696,7 +696,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -721,7 +721,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -745,7 +745,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -770,7 +770,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -794,7 +794,7 @@
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "pbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                             "pnigh": 1064350680.0,
-                            "open": 1064350680.0
+                            "popen": 1064350680.0
                           }
                         }
                       }
@@ -827,10 +827,10 @@
                             "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
-                                "divisor": 1440,
+                                "pdivisor": 1440,
                                 "pbranch": ";A;time;gregtime;day",
                                 "pnigh": 360,
-                                "open": 360
+                                "popen": 360
                               }
                             }
                           }
@@ -868,10 +868,10 @@
                             "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
-                                "divisor": 1440,
+                                "pdivisor": 1440,
                                 "pbranch": ";A;time;gregtime;day",
                                 "pnigh": 360,
-                                "open": 360
+                                "popen": 360
                               }
                             }
                           }
@@ -886,10 +886,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 360,
-                            "open": 360
+                            "popen": 360
                           }
                         }
                       }
@@ -905,10 +905,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 450,
-                            "open": 450
+                            "popen": 450
                           }
                         }
                       }
@@ -924,10 +924,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 525,
-                            "open": 525
+                            "popen": 525
                           }
                         }
                       }
@@ -942,10 +942,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
-                        "divisor": 1440,
+                        "pdivisor": 1440,
                         "pbranch": ";A;time;gregtime;day",
                         "pnigh": 360,
-                        "open": 360
+                        "popen": 360
                       }
                     }
                   }
@@ -963,10 +963,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 540,
-                            "open": 540
+                            "popen": 540
                           }
                         }
                       }
@@ -982,10 +982,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 540,
-                            "open": 540
+                            "popen": 540
                           }
                         }
                       }
@@ -1003,10 +1003,10 @@
                             "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
-                                "divisor": 1440,
+                                "pdivisor": 1440,
                                 "pbranch": ";A;time;gregtime;day",
                                 "pnigh": 540,
-                                "open": 540
+                                "popen": 540
                               }
                             }
                           }
@@ -1044,10 +1044,10 @@
                             "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
-                                "divisor": 1440,
+                                "pdivisor": 1440,
                                 "pbranch": ";A;time;gregtime;day",
                                 "pnigh": 480,
-                                "open": 480
+                                "popen": 480
                               }
                             }
                           }
@@ -1063,10 +1063,10 @@
                             "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
-                                "divisor": 1440,
+                                "pdivisor": 1440,
                                 "pbranch": ";A;time;gregtime;day",
                                 "pnigh": 540,
-                                "open": 540
+                                "popen": 540
                               }
                             }
                           }
@@ -1086,10 +1086,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 1020,
-                            "open": 1020
+                            "popen": 1020
                           }
                         }
                       }
@@ -1105,10 +1105,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 540,
-                            "open": 540
+                            "popen": 540
                           }
                         }
                       }
@@ -1125,10 +1125,10 @@
                             "rcontext": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
-                                "divisor": 1440,
+                                "pdivisor": 1440,
                                 "pbranch": ";A;time;gregtime;day",
                                 "pnigh": 540,
-                                "open": 540
+                                "popen": 540
                               }
                             }
                           }
@@ -1143,10 +1143,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
-                            "divisor": 1440,
+                            "pdivisor": 1440,
                             "pbranch": ";A;time;gregtime;day",
                             "pnigh": 540,
-                            "open": 540
+                            "popen": 540
                           }
                         }
                       }
@@ -1163,10 +1163,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime;day",
                         "pnigh": 1080.0,
-                        "open": 540.0
+                        "popen": 540.0
                       }
                     }
                   }
@@ -1181,10 +1181,10 @@
                 "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime;day": {
-                    "divisor": 1440,
+                    "pdivisor": 1440,
                     "pbranch": ";A;time;gregtime;day",
                     "pnigh": 360,
-                    "open": 360
+                    "popen": 360
                   }
                 }
               }
@@ -1472,7 +1472,7 @@
                       "A;time;gregtime": {
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 1472657760,
-                        "open": 0
+                        "popen": 0
                       }
                     }
                   }
@@ -1526,10 +1526,10 @@
                 "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
-                    "divisor": 10080.0,
+                    "pdivisor": 10080.0,
                     "pbranch": ";A;time;gregtime",
                     "pnigh": 480.0,
-                    "open": 480.0
+                    "popen": 480.0
                   }
                 }
               }
@@ -1569,10 +1569,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3360.0,
-                        "open": 3360.0
+                        "popen": 3360.0
                       }
                     }
                   }
@@ -1588,10 +1588,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 420.0,
-                        "open": 420.0
+                        "popen": 420.0
                       }
                     }
                   }
@@ -1614,10 +1614,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 60480.0,
+                        "pdivisor": 60480.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 660.0,
-                        "open": 660.0
+                        "popen": 660.0
                       }
                     }
                   }
@@ -1640,10 +1640,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 600.0,
-                        "open": 600.0
+                        "popen": 600.0
                       }
                     }
                   }
@@ -1667,10 +1667,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -1693,10 +1693,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -1719,10 +1719,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 30240.0,
+                        "pdivisor": 30240.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -1745,10 +1745,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 1200.0,
-                        "open": 1200.0
+                        "popen": 1200.0
                       }
                     }
                   }
@@ -1771,10 +1771,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 40320.0,
+                        "pdivisor": 40320.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -1797,10 +1797,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 4800.0,
-                        "open": 4800.0
+                        "popen": 4800.0
                       }
                     }
                   }
@@ -1823,10 +1823,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 9120.0,
-                        "open": 9120.0
+                        "popen": 9120.0
                       }
                     }
                   }
@@ -1874,10 +1874,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -1908,10 +1908,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 420.0,
-                        "open": 420.0
+                        "popen": 420.0
                       }
                     }
                   }
@@ -1935,10 +1935,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 7740.0,
-                        "open": 7740.0
+                        "popen": 7740.0
                       }
                     }
                   }
@@ -1969,10 +1969,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 6300.0,
-                        "open": 6300.0
+                        "popen": 6300.0
                       }
                     }
                   }
@@ -1987,10 +1987,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 480.0,
-                        "open": 480.0
+                        "popen": 480.0
                       }
                     }
                   }
@@ -2013,10 +2013,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 480.0,
-                        "open": 480.0
+                        "popen": 480.0
                       }
                     }
                   }
@@ -2039,10 +2039,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 4740.0,
-                        "open": 4740.0
+                        "popen": 4740.0
                       }
                     }
                   }
@@ -2065,10 +2065,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 9060.0,
-                        "open": 9060.0
+                        "popen": 9060.0
                       }
                     }
                   }
@@ -2091,10 +2091,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2117,10 +2117,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 7620.0,
-                        "open": 7620.0
+                        "popen": 7620.0
                       }
                     }
                   }
@@ -2143,10 +2143,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2169,10 +2169,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2213,10 +2213,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
-                        "divisor": 1440,
+                        "pdivisor": 1440,
                         "pbranch": ";A;time;gregtime;day",
                         "pnigh": 420,
-                        "open": 420
+                        "popen": 420
                       }
                     }
                   }
@@ -2239,10 +2239,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 420.0,
-                        "open": 420.0
+                        "popen": 420.0
                       }
                     }
                   }
@@ -2265,10 +2265,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 80640.0,
+                        "pdivisor": 80640.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 4860.0,
-                        "open": 4860.0
+                        "popen": 4860.0
                       }
                     }
                   }
@@ -2291,10 +2291,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2317,10 +2317,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 420.0,
-                        "open": 420.0
+                        "popen": 420.0
                       }
                     }
                   }
@@ -2343,10 +2343,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 80640.0,
+                        "pdivisor": 80640.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2371,10 +2371,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 9600.0,
-                            "open": 9600.0
+                            "popen": 9600.0
                           }
                         }
                       }
@@ -2409,10 +2409,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 3360.0,
-                            "open": 3360.0
+                            "popen": 3360.0
                           }
                         }
                       }
@@ -2427,10 +2427,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 6242.0,
-                            "open": 6242.0
+                            "popen": 6242.0
                           }
                         }
                       }
@@ -2453,10 +2453,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 3420.0,
-                            "open": 3420.0
+                            "popen": 3420.0
                           }
                         }
                       }
@@ -2478,10 +2478,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 7200.0,
-                            "open": 7200.0
+                            "popen": 7200.0
                           }
                         }
                       }
@@ -2520,10 +2520,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 4800.0,
-                            "open": 4800.0
+                            "popen": 4800.0
                           }
                         }
                       }
@@ -2546,10 +2546,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 6240.0,
-                            "open": 6240.0
+                            "popen": 6240.0
                           }
                         }
                       }
@@ -2577,10 +2577,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 420.0,
-                        "open": 420.0
+                        "popen": 420.0
                       }
                     }
                   }
@@ -2595,10 +2595,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 1080.0,
-                        "open": 1080.0
+                        "popen": 1080.0
                       }
                     }
                   }
@@ -2621,10 +2621,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2647,10 +2647,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 1440.0,
+                        "pdivisor": 1440.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 420.0,
-                        "open": 420.0
+                        "popen": 420.0
                       }
                     }
                   }
@@ -2669,10 +2669,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 9180.0,
-                            "open": 9180.0
+                            "popen": 9180.0
                           }
                         }
                       }
@@ -2688,10 +2688,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 9180.0,
-                            "open": 9180.0
+                            "popen": 9180.0
                           }
                         }
                       }
@@ -2713,10 +2713,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 9180.0,
-                        "open": 9180.0
+                        "popen": 9180.0
                       }
                     }
                   }
@@ -2739,10 +2739,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 3420.0,
-                        "open": 3420.0
+                        "popen": 3420.0
                       }
                     }
                   }
@@ -2775,7 +2775,7 @@
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                         "pnigh": 1064041020.0,
-                        "open": 1064041020.0
+                        "popen": 1064041020.0
                       }
                     }
                   }
@@ -2800,7 +2800,7 @@
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                         "pnigh": 1064041020.0,
-                        "open": 1064041020.0
+                        "popen": 1064041020.0
                       }
                     }
                   }
@@ -2825,7 +2825,7 @@
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                         "pnigh": 1064041020.0,
-                        "open": 1064041020.0
+                        "popen": 1064041020.0
                       }
                     }
                   }
@@ -2850,7 +2850,7 @@
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "pbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                         "pnigh": 1064041020.0,
-                        "open": 1064041020.0
+                        "popen": 1064041020.0
                       }
                     }
                   }
@@ -3024,10 +3024,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 10080.0,
+                        "pdivisor": 10080.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 5340.0,
-                        "open": 5340.0
+                        "popen": 5340.0
                       }
                     }
                   }
@@ -3058,10 +3058,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 60480.0,
+                        "pdivisor": 60480.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 840.0,
-                        "open": 840.0
+                        "popen": 840.0
                       }
                     }
                   }
@@ -3092,10 +3092,10 @@
                 "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime;day": {
-                    "divisor": 1440.0,
+                    "pdivisor": 1440.0,
                     "pbranch": ";A;time;gregtime;day",
                     "pnigh": 480.0,
-                    "open": 480.0
+                    "popen": 480.0
                   }
                 }
               }
@@ -3118,10 +3118,10 @@
                 "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
-                    "divisor": 1440.0,
+                    "pdivisor": 1440.0,
                     "pbranch": ";A;time;gregtime",
                     "pnigh": 480.0,
-                    "open": 480.0
+                    "popen": 480.0
                   }
                 }
               }
@@ -3202,10 +3202,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
-                        "divisor": 1440,
+                        "pdivisor": 1440,
                         "pbranch": ";A;time;gregtime;day",
                         "pnigh": 660,
-                        "open": 660
+                        "popen": 660
                       }
                     }
                   }
@@ -3260,10 +3260,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 20160.0,
+                        "pdivisor": 20160.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 4920.0,
-                        "open": 4920.0
+                        "popen": 4920.0
                       }
                     }
                   }
@@ -3302,10 +3302,10 @@
                 "rcontext": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
-                    "divisor": 1440.0,
+                    "pdivisor": 1440.0,
                     "pbranch": ";A;time;gregtime",
                     "pnigh": 1305.0,
-                    "open": 1305.0
+                    "popen": 1305.0
                   }
                 }
               }
@@ -3325,10 +3325,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 6495.0,
-                            "open": 6480.0
+                            "popen": 6480.0
                           }
                         }
                       }
@@ -3371,10 +3371,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 10080.0,
+                            "pdivisor": 10080.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 6540.0,
-                            "open": 6480.0
+                            "popen": 6480.0
                           }
                         }
                       }
@@ -3410,10 +3410,10 @@
                         "rcontext": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime": {
-                            "divisor": 20160.0,
+                            "pdivisor": 20160.0,
                             "pbranch": ";A;time;gregtime",
                             "pnigh": 600.0,
-                            "open": 600.0
+                            "popen": 600.0
                           }
                         }
                       }
@@ -3482,10 +3482,10 @@
                     "rcontext": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 20160.0,
+                        "pdivisor": 20160.0,
                         "pbranch": ";A;time;gregtime",
                         "pnigh": 600.0,
-                        "open": 600.0
+                        "popen": 600.0
                       }
                     }
                   }

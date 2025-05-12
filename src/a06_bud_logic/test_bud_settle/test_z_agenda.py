@@ -97,7 +97,7 @@ def test_BudUnit_get_agenda_dict_With7amIdeaExample():
     assert len(x_bud.get_agenda_dict()) == 1
     timetech_way = x_bud.make_l1_way("timetech")
     day24hr_way = x_bud.make_way(timetech_way, "24hr day")
-    day24hr_open = 0.0
+    day24hr_popen = 0.0
     day24hr_pnigh = 8.0
     housemanagement_str = "housemanagement"
     housemanagement_way = x_bud.make_l1_way(housemanagement_str)
@@ -105,7 +105,7 @@ def test_BudUnit_get_agenda_dict_With7amIdeaExample():
     clean_way = x_bud.make_way(housemanagement_way, clean_str)
 
     # WHEN
-    x_bud.add_fact(day24hr_way, day24hr_way, day24hr_open, day24hr_pnigh, True)
+    x_bud.add_fact(day24hr_way, day24hr_way, day24hr_popen, day24hr_pnigh, True)
 
     # THEN
     print(x_bud.idearoot.factunits[day24hr_way])
@@ -266,7 +266,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
         run_way,
         reason_rcontext=day_way,
         reason_premise=day_way,
-        reason_premise_open=25,
+        popen=25,
         reason_pnigh=81,
     )
     zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=30, fnigh=87)
@@ -307,9 +307,9 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
         run_way,
         reason_rcontext=day_way,
         reason_premise=day_way,
-        reason_premise_open=1,
+        popen=1,
         reason_pnigh=1,
-        reason_premise_divisor=2,
+        pdivisor=2,
     )
 
     run_idea = zia_bud.get_idea_obj(run_way)
@@ -422,17 +422,17 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
         f" {premiseunit._status=} , {premiseunit._is_segregate()=} premiseunit passes"
     )
     # segr_obj = premisestatusfinder_shop(
-    #     premise_open=premiseunit.open,
+    #     popen=premiseunit.popen,
     #     pnigh=premiseunit.pnigh,
-    #     premise_divisor=premiseunit.divisor,
-    #     fact_open_full=factheir_gregtime.open,
+    #     pdivisor=premiseunit.pdivisor,
+    #     fopen_full=factheir_gregtime.popen,
     #     fnigh_full=factheir_gregtime.pnigh,
     # )
     # print(
-    #     f"----\n  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.premise_divisor=}"
+    #     f"----\n  {segr_obj.popen=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}"
     # )
     # print(
-    #     f"       {segr_obj.fact_open_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"
+    #     f"       {segr_obj.fopen_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     # )
 
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")

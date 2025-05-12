@@ -156,7 +156,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     run_str = "run"
     run_way = create_way(ball_way, run_str)
     ball_idea = ideaunit_shop(ball_str)
-    run_premise = premiseunit_shop(pbranch=run_way, open=0, pnigh=7)
+    run_premise = premiseunit_shop(pbranch=run_way, popen=0, pnigh=7)
     run_premises = {run_premise.pbranch: run_premise}
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
     reasonheirs = {reasonheir.rcontext: reasonheir}
@@ -176,7 +176,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_way = create_way(ball_str)
     run_str = "run"
     run_way = create_way(ball_way, run_str)
-    run_premise = premiseunit_shop(pbranch=run_way, open=0, pnigh=7)
+    run_premise = premiseunit_shop(pbranch=run_way, popen=0, pnigh=7)
     run_premises = {run_premise.pbranch: run_premise}
     run_reasonunit = reasonunit_shop(rcontext=run_way, premises=run_premises)
     run_reasonunits = {run_reasonunit.rcontext: run_reasonunit}
@@ -208,11 +208,11 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     week_str = "week"
     week_way = create_way(root_tag(), week_str)
-    week_open = 3
+    week_popen = 3
     week_pnigh = 7
     week_addin = 10
     week_idea = ideaunit_shop(week_str, parent_way=root_tag(), addin=week_addin)
-    week_factheir = factheir_shop(week_way, week_way, week_open, week_pnigh)
+    week_factheir = factheir_shop(week_way, week_way, week_popen, week_pnigh)
     tue_str = "Tue"
     tue_way = create_way(week_way, tue_str)
     tue_addin = 100
@@ -239,9 +239,9 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_idea.set_range_factheirs(x_bud_idea_dict, x_range_inheritors)
 
     # THEN
-    tue_open = 113
+    tue_popen = 113
     tue_pnigh = 117
-    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_pnigh)
+    tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
     assert len(ball_idea._factheirs) == 2
     assert ball_idea._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
 
@@ -385,9 +385,9 @@ def test_IdeaUnit_factunit_exists_ReturnsObj():
 #     clean_idea.set_reason_premise(
 #         rcontext="testing1,sec",
 #         premise="testing1,sec,next",
-#         open=None,
+#         popen=None,
 #         pnigh=None,
-#         divisor=None,
+#         pdivisor=None,
 #     )
 #     clean_idea._active_hx = {0: True, 4: False}
 #     assert clean_idea._active_hx != {0: False}

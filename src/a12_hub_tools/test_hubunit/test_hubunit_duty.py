@@ -80,7 +80,7 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     assert sue_hubunit.duty_file_exists(bob_str)
 
 
-def test_HubUnit_get_duty_bud_OpensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_duty_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
@@ -163,7 +163,7 @@ def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     assert sue_hubunit.plan_file_exists(bob_str)
 
 
-def test_HubUnit_get_plan_bud_OpensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_plan_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"

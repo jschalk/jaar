@@ -25,7 +25,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     pbranch_str,
     pnigh_str,
     numor_str,
-    open_str,
+    popen_str,
     parent_way_str,
     penny_str,
     respect_bit_str,
@@ -65,7 +65,7 @@ def test_str_functions_ReturnsObj():
     assert pbranch_str() == "pbranch"
     assert pnigh_str() == "pnigh"
     assert numor_str() == "numor"
-    assert open_str() == "open"
+    assert popen_str() == "popen"
     assert parent_way_str() == "parent_way"
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"

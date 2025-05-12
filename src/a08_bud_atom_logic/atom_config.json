@@ -211,7 +211,7 @@
             }
         },
         "jvalues": {
-            "divisor": {
+            "pdivisor": {
                 "class_type": "int",
                 "column_order": 5,
                 "sqlite_datatype": "INTEGER"
@@ -221,7 +221,7 @@
                 "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
-            "open": {
+            "popen": {
                 "class_type": "float",
                 "column_order": 3,
                 "sqlite_datatype": "REAL"

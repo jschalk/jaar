@@ -454,7 +454,10 @@ class BudUnit:
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(
-            fcontext=fcontext, fbranch=fbranch, fopen=x_fopen, fnigh=x_fnigh
+            fcontext=fcontext,
+            fbranch=fbranch,
+            fopen=x_fopen,
+            fnigh=x_fnigh,
         )
 
         if fact_fcontext_idea.is_math() is False:
@@ -472,7 +475,7 @@ class BudUnit:
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
             # there exists a reason rcontext "timeline,weeks" with premise.pbranch = "timeline,weeks"
-            # and (1,2) divisor=2 (every other week)
+            # and (1,2) pdivisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
@@ -761,7 +764,7 @@ class BudUnit:
     def _set_ideaattrholder_premise_ranges(self, x_ideaattrholder: IdeaAttrHolder):
         premise_idea = self.get_idea_obj(x_ideaattrholder.reason_premise)
         x_ideaattrholder.set_premise_range_attributes_influenced_by_premise_idea(
-            premise_open=premise_idea.begin,
+            popen=premise_idea.begin,
             pnigh=premise_idea.close,
             premise_denom=premise_idea.denom,
         )
@@ -771,17 +774,17 @@ class BudUnit:
         idea_way: WayStr,
         reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
-        reason_premise_open: float = None,
+        popen: float = None,
         reason_pnigh: float = None,
-        reason_premise_divisor: int = None,
+        pdivisor: int = None,
     ):
         self.edit_idea_attr(
             idea_way=idea_way,
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
-            reason_premise_open=reason_premise_open,
+            popen=popen,
             reason_pnigh=reason_pnigh,
-            reason_premise_divisor=reason_premise_divisor,
+            pdivisor=pdivisor,
         )
 
     def edit_idea_attr(
@@ -792,9 +795,9 @@ class BudUnit:
         reason: ReasonUnit = None,
         reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
-        reason_premise_open: float = None,
+        popen: float = None,
         reason_pnigh: float = None,
-        reason_premise_divisor: int = None,
+        pdivisor: int = None,
         reason_del_premise_rcontext: WayStr = None,
         reason_del_premise_pbranch: WayStr = None,
         reason_rcontext_idea_active_requisite: str = None,
@@ -830,9 +833,9 @@ class BudUnit:
             reason=reason,
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
-            reason_premise_open=reason_premise_open,
+            popen=popen,
             reason_pnigh=reason_pnigh,
-            reason_premise_divisor=reason_premise_divisor,
+            pdivisor=pdivisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,
             reason_del_premise_pbranch=reason_del_premise_pbranch,
             reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
