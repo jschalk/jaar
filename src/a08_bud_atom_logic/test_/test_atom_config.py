@@ -670,7 +670,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
     assert x_class_types.get("rbranch") == type_WayStr_str()
-    assert x_class_types.get("nigh") == "float"
+    assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"

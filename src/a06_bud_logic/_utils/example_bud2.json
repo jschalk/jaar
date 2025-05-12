@@ -601,7 +601,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -625,7 +625,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -650,7 +650,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -673,7 +673,7 @@
                                         "premises": {
                                             "A;time;gregtime;x2;Sept 4th 2023 9am": {
                                                 "rbranch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
-                                                "nigh": 1064350680.0,
+                                                "pnigh": 1064350680.0,
                                                 "open": 1064350680.0
                                             }
                                         }
@@ -693,7 +693,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -718,7 +718,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -742,7 +742,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -767,7 +767,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -791,7 +791,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
                                                         "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                                                        "nigh": 1064350680.0,
+                                                        "pnigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
                                                 }
@@ -827,7 +827,7 @@
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
                                                                 "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 360,
+                                                                "pnigh": 360,
                                                                 "open": 360
                                                             }
                                                         }
@@ -868,7 +868,7 @@
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
                                                                 "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 360,
+                                                                "pnigh": 360,
                                                                 "open": 360
                                                             }
                                                         }
@@ -886,7 +886,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 360,
+                                                        "pnigh": 360,
                                                         "open": 360
                                                     }
                                                 }
@@ -905,7 +905,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 450,
+                                                        "pnigh": 450,
                                                         "open": 450
                                                     }
                                                 }
@@ -924,7 +924,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 525,
+                                                        "pnigh": 525,
                                                         "open": 525
                                                     }
                                                 }
@@ -942,7 +942,7 @@
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
                                                 "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 360,
+                                                "pnigh": 360,
                                                 "open": 360
                                             }
                                         }
@@ -963,7 +963,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -982,7 +982,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -1003,7 +1003,7 @@
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
                                                                 "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 540,
+                                                                "pnigh": 540,
                                                                 "open": 540
                                                             }
                                                         }
@@ -1044,7 +1044,7 @@
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
                                                                 "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 480,
+                                                                "pnigh": 480,
                                                                 "open": 480
                                                             }
                                                         }
@@ -1063,7 +1063,7 @@
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
                                                                 "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 540,
+                                                                "pnigh": 540,
                                                                 "open": 540
                                                             }
                                                         }
@@ -1086,7 +1086,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 1020,
+                                                        "pnigh": 1020,
                                                         "open": 1020
                                                     }
                                                 }
@@ -1105,7 +1105,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -1125,7 +1125,7 @@
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
                                                                 "rbranch": ";A;time;gregtime;day",
-                                                                "nigh": 540,
+                                                                "pnigh": 540,
                                                                 "open": 540
                                                             }
                                                         }
@@ -1143,7 +1143,7 @@
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
                                                         "rbranch": ";A;time;gregtime;day",
-                                                        "nigh": 540,
+                                                        "pnigh": 540,
                                                         "open": 540
                                                     }
                                                 }
@@ -1163,7 +1163,7 @@
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 1080.0,
+                                                "pnigh": 1080.0,
                                                 "open": 540.0
                                             }
                                         }
@@ -1181,7 +1181,7 @@
                                     "A;time;gregtime;day": {
                                         "divisor": 1440,
                                         "rbranch": ";A;time;gregtime;day",
-                                        "nigh": 360,
+                                        "pnigh": 360,
                                         "open": 360
                                     }
                                 }
@@ -1469,7 +1469,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 1472657760,
+                                                "pnigh": 1472657760,
                                                 "open": 0
                                             }
                                         }
@@ -1526,7 +1526,7 @@
                                     "A;time;gregtime": {
                                         "divisor": 10080.0,
                                         "rbranch": ";A;time;gregtime",
-                                        "nigh": 480.0,
+                                        "pnigh": 480.0,
                                         "open": 480.0
                                     }
                                 }
@@ -1569,7 +1569,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3360.0,
+                                                "pnigh": 3360.0,
                                                 "open": 3360.0
                                             }
                                         }
@@ -1588,7 +1588,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -1614,7 +1614,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 60480.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 660.0,
+                                                "pnigh": 660.0,
                                                 "open": 660.0
                                             }
                                         }
@@ -1640,7 +1640,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 600.0,
+                                                "pnigh": 600.0,
                                                 "open": 600.0
                                             }
                                         }
@@ -1667,7 +1667,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1693,7 +1693,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1719,7 +1719,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 30240.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1745,7 +1745,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 1200.0,
+                                                "pnigh": 1200.0,
                                                 "open": 1200.0
                                             }
                                         }
@@ -1771,7 +1771,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 40320.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1797,7 +1797,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 4800.0,
+                                                "pnigh": 4800.0,
                                                 "open": 4800.0
                                             }
                                         }
@@ -1823,7 +1823,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 9120.0,
+                                                "pnigh": 9120.0,
                                                 "open": 9120.0
                                             }
                                         }
@@ -1874,7 +1874,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -1908,7 +1908,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -1935,7 +1935,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 7740.0,
+                                                "pnigh": 7740.0,
                                                 "open": 7740.0
                                             }
                                         }
@@ -1969,7 +1969,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 6300.0,
+                                                "pnigh": 6300.0,
                                                 "open": 6300.0
                                             }
                                         }
@@ -1987,7 +1987,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 480.0,
+                                                "pnigh": 480.0,
                                                 "open": 480.0
                                             }
                                         }
@@ -2013,7 +2013,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 480.0,
+                                                "pnigh": 480.0,
                                                 "open": 480.0
                                             }
                                         }
@@ -2039,7 +2039,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 4740.0,
+                                                "pnigh": 4740.0,
                                                 "open": 4740.0
                                             }
                                         }
@@ -2065,7 +2065,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 9060.0,
+                                                "pnigh": 9060.0,
                                                 "open": 9060.0
                                             }
                                         }
@@ -2091,7 +2091,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2117,7 +2117,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 7620.0,
+                                                "pnigh": 7620.0,
                                                 "open": 7620.0
                                             }
                                         }
@@ -2143,7 +2143,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2169,7 +2169,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2213,7 +2213,7 @@
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
                                                 "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 420,
+                                                "pnigh": 420,
                                                 "open": 420
                                             }
                                         }
@@ -2239,7 +2239,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -2265,7 +2265,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 80640.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 4860.0,
+                                                "pnigh": 4860.0,
                                                 "open": 4860.0
                                             }
                                         }
@@ -2291,7 +2291,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2317,7 +2317,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -2343,7 +2343,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 80640.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2371,7 +2371,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 9600.0,
+                                                        "pnigh": 9600.0,
                                                         "open": 9600.0
                                                     }
                                                 }
@@ -2409,7 +2409,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 3360.0,
+                                                        "pnigh": 3360.0,
                                                         "open": 3360.0
                                                     }
                                                 }
@@ -2427,7 +2427,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6242.0,
+                                                        "pnigh": 6242.0,
                                                         "open": 6242.0
                                                     }
                                                 }
@@ -2453,7 +2453,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 3420.0,
+                                                        "pnigh": 3420.0,
                                                         "open": 3420.0
                                                     }
                                                 }
@@ -2478,7 +2478,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 7200.0,
+                                                        "pnigh": 7200.0,
                                                         "open": 7200.0
                                                     }
                                                 }
@@ -2520,7 +2520,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 4800.0,
+                                                        "pnigh": 4800.0,
                                                         "open": 4800.0
                                                     }
                                                 }
@@ -2546,7 +2546,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6240.0,
+                                                        "pnigh": 6240.0,
                                                         "open": 6240.0
                                                     }
                                                 }
@@ -2577,16 +2577,16 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
                                     }
                                 }
                             },
-                            "night multivitamin": {
+                            "evening multivitamin": {
                                 "_uid": 230,
-                                "idea_tag": "night multivitamin",
+                                "idea_tag": "evening multivitamin",
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;time;gregtime": {
@@ -2595,7 +2595,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 1080.0,
+                                                "pnigh": 1080.0,
                                                 "open": 1080.0
                                             }
                                         }
@@ -2621,7 +2621,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2647,7 +2647,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 420.0,
+                                                "pnigh": 420.0,
                                                 "open": 420.0
                                             }
                                         }
@@ -2669,7 +2669,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 9180.0,
+                                                        "pnigh": 9180.0,
                                                         "open": 9180.0
                                                     }
                                                 }
@@ -2688,7 +2688,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 9180.0,
+                                                        "pnigh": 9180.0,
                                                         "open": 9180.0
                                                     }
                                                 }
@@ -2713,7 +2713,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 9180.0,
+                                                "pnigh": 9180.0,
                                                 "open": 9180.0
                                             }
                                         }
@@ -2739,7 +2739,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 3420.0,
+                                                "pnigh": 3420.0,
                                                 "open": 3420.0
                                             }
                                         }
@@ -2772,7 +2772,7 @@
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                                                 "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2797,7 +2797,7 @@
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                                                 "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2822,7 +2822,7 @@
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                                                 "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -2847,7 +2847,7 @@
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                                                 "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
-                                                "nigh": 1064041020.0,
+                                                "pnigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
                                         }
@@ -3024,7 +3024,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 5340.0,
+                                                "pnigh": 5340.0,
                                                 "open": 5340.0
                                             }
                                         }
@@ -3058,7 +3058,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 60480.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 840.0,
+                                                "pnigh": 840.0,
                                                 "open": 840.0
                                             }
                                         }
@@ -3092,7 +3092,7 @@
                                     "A;time;gregtime;day": {
                                         "divisor": 1440.0,
                                         "rbranch": ";A;time;gregtime;day",
-                                        "nigh": 480.0,
+                                        "pnigh": 480.0,
                                         "open": 480.0
                                     }
                                 }
@@ -3118,7 +3118,7 @@
                                     "A;time;gregtime": {
                                         "divisor": 1440.0,
                                         "rbranch": ";A;time;gregtime",
-                                        "nigh": 480.0,
+                                        "pnigh": 480.0,
                                         "open": 480.0
                                     }
                                 }
@@ -3202,7 +3202,7 @@
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
                                                 "rbranch": ";A;time;gregtime;day",
-                                                "nigh": 660,
+                                                "pnigh": 660,
                                                 "open": 660
                                             }
                                         }
@@ -3260,7 +3260,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 20160.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 4920.0,
+                                                "pnigh": 4920.0,
                                                 "open": 4920.0
                                             }
                                         }
@@ -3282,9 +3282,9 @@
                             }
                         }
                     },
-                    "late_night_go_to_sleep": {
+                    "late_evening_go_to_sleep": {
                         "_uid": 149,
-                        "idea_tag": "late_night_go_to_sleep",
+                        "idea_tag": "late_evening_go_to_sleep",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -3302,7 +3302,7 @@
                                     "A;time;gregtime": {
                                         "divisor": 1440.0,
                                         "rbranch": ";A;time;gregtime",
-                                        "nigh": 1305.0,
+                                        "pnigh": 1305.0,
                                         "open": 1305.0
                                     }
                                 }
@@ -3325,7 +3325,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6495.0,
+                                                        "pnigh": 6495.0,
                                                         "open": 6480.0
                                                     }
                                                 }
@@ -3371,7 +3371,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 6540.0,
+                                                        "pnigh": 6540.0,
                                                         "open": 6480.0
                                                     }
                                                 }
@@ -3410,7 +3410,7 @@
                                                     "A;time;gregtime": {
                                                         "divisor": 20160.0,
                                                         "rbranch": ";A;time;gregtime",
-                                                        "nigh": 600.0,
+                                                        "pnigh": 600.0,
                                                         "open": 600.0
                                                     }
                                                 }
@@ -3482,7 +3482,7 @@
                                             "A;time;gregtime": {
                                                 "divisor": 20160.0,
                                                 "rbranch": ";A;time;gregtime",
-                                                "nigh": 600.0,
+                                                "pnigh": 600.0,
                                                 "open": 600.0
                                             }
                                         }

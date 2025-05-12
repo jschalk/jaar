@@ -721,19 +721,19 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     damaged_premiseunit = before_knee_reasonunit.get_premise(damaged_way)
     assert damaged_premiseunit.rbranch == damaged_way
     assert damaged_premiseunit.open is None
-    assert damaged_premiseunit.nigh is None
+    assert damaged_premiseunit.pnigh is None
     assert damaged_premiseunit.divisor is None
 
     # WHEN
     damaged_open = 45
-    damaged_nigh = 77
+    damaged_pnigh = 77
     damaged_divisor = 3
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_update())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     update_disc_budatom.set_jkey("rbranch", damaged_way)
     update_disc_budatom.set_jvalue("open", damaged_open)
-    update_disc_budatom.set_jvalue("nigh", damaged_nigh)
+    update_disc_budatom.set_jvalue("pnigh", damaged_pnigh)
     update_disc_budatom.set_jvalue("divisor", damaged_divisor)
     # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
@@ -747,7 +747,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     after_damaged_premiseunit = after_knee_reasonunit.get_premise(damaged_way)
     assert after_damaged_premiseunit.rbranch == damaged_way
     assert after_damaged_premiseunit.open == damaged_open
-    assert after_damaged_premiseunit.nigh == damaged_nigh
+    assert after_damaged_premiseunit.pnigh == damaged_pnigh
     assert after_damaged_premiseunit.divisor == damaged_divisor
 
 
@@ -779,14 +779,14 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_reason_premiseun
 
     # WHEN
     medical_open = 45
-    medical_nigh = 77
+    medical_pnigh = 77
     medical_divisor = 3
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     update_disc_budatom.set_jkey("rbranch", medical_way)
     update_disc_budatom.set_jvalue("open", medical_open)
-    update_disc_budatom.set_jvalue("nigh", medical_nigh)
+    update_disc_budatom.set_jvalue("pnigh", medical_pnigh)
     update_disc_budatom.set_jvalue("divisor", medical_divisor)
     # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
@@ -800,7 +800,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_reason_premiseun
     assert after_medical_premiseunit is not None
     assert after_medical_premiseunit.rbranch == medical_way
     assert after_medical_premiseunit.open == medical_open
-    assert after_medical_premiseunit.nigh == medical_nigh
+    assert after_medical_premiseunit.pnigh == medical_pnigh
     assert after_medical_premiseunit.divisor == medical_divisor
 
 

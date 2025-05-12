@@ -99,7 +99,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
     assert pidgin_args_class_types.get("rbranch") == type_WayStr_str()
-    assert pidgin_args_class_types.get("nigh") == "float"
+    assert pidgin_args_class_types.get("pnigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()

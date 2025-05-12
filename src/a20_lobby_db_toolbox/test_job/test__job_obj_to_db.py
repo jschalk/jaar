@@ -262,7 +262,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x_way = 1
     x_rcontext = 2
     x_rbranch = 3
-    x_nigh = 4
+    x_pnigh = 4
     x_open = 5
     x_divisor = 6
     x__task = 7
@@ -274,7 +274,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "idea_way": x_way,
         "rcontext": x_rcontext,
         "rbranch": x_rbranch,
-        "nigh": x_nigh,
+        "pnigh": x_pnigh,
         "open": x_open,
         "divisor": x_divisor,
         "_task": x__task,

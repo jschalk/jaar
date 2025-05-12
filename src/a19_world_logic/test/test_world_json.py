@@ -20,11 +20,11 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
     assert x_world_dict
     assert set(x_world_dict.keys()) == {
         "world_id",
-        "world_time_nigh",
+        "world_time_pnigh",
         "timeconversions",
     }
     assert x_world_dict.get("world_id") == five_world_id
-    assert x_world_dict.get("world_time_nigh") == 0
+    assert x_world_dict.get("world_time_pnigh") == 0
     assert x_world_dict.get("timeconversions") == {}
 
 
@@ -32,14 +32,14 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
     five_world_id = "five"
-    world2_time_nigh = 55
+    world2_time_pnigh = 55
     accord45_str = "accord45"
     world2_timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
     world2_fiscunits = {"accord45"}
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
-        world_time_nigh=world2_time_nigh,
+        world_time_pnigh=world2_time_pnigh,
         timeconversions=world2_timeconversions,
         _fiscunits=world2_fiscunits,
     )
@@ -50,5 +50,5 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     # THEN
     assert x_world_dict
     assert x_world_dict.get("world_id") == five_world_id
-    assert x_world_dict.get("world_time_nigh") == world2_time_nigh
+    assert x_world_dict.get("world_time_pnigh") == world2_time_pnigh
     assert x_world_dict.get("timeconversions") == world2_timeconversions

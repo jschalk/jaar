@@ -579,13 +579,13 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeIdeasOutsideRange():
         reason_rcontext=day_way,
         reason_premise=day_way,
         reason_premise_open=320,
-        reason_premise_nigh=480,
+        reason_pnigh=480,
     )
 
     # WHEN
     open_x = 2063971110
-    nigh_x1 = 2063971523
-    sue_bud.add_fact(cregtime_way, fbranch=cregtime_way, fopen=open_x, fnigh=nigh_x1)
+    x_pnigh1 = 2063971523
+    sue_bud.add_fact(cregtime_way, fbranch=cregtime_way, fopen=open_x, fnigh=x_pnigh1)
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -594,10 +594,10 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeIdeasOutsideRange():
     assert clean_way in agenda_dict.keys()
 
     # WHEN
-    # nigh_x2 = 1063971923
+    # x_pnigh2 = 1063971923
     open_x2 = 0
-    nigh_x2 = 0
-    sue_bud.add_fact(cregtime_way, fbranch=cregtime_way, fopen=open_x2, fnigh=nigh_x2)
+    x_pnigh2 = 0
+    sue_bud.add_fact(cregtime_way, fbranch=cregtime_way, fopen=open_x2, fnigh=x_pnigh2)
     print(f"{sue_bud.idearoot.factunits=}")
 
     # THEN
@@ -634,14 +634,14 @@ def test_BudUnit_create_agenda_idea_CorrectlyCreatesAllBudAttributes():
     print(f"{creg_idea._kids.keys()=}")
     daytime_way = sue_bud.make_way(cregtime_way, "day")
     open_8am = 480
-    nigh_8am = 480
+    pnigh_8am = 480
 
     dirty_cookery_reason = reasonunit_shop(cookery_room_way)
     dirty_cookery_reason.set_premise(premise=cookery_dirty_way)
     sweep_idea.set_reasonunit(reason=dirty_cookery_reason)
 
     daytime_reason = reasonunit_shop(daytime_way)
-    daytime_reason.set_premise(premise=daytime_way, open=open_8am, nigh=nigh_8am)
+    daytime_reason.set_premise(premise=daytime_way, open=open_8am, pnigh=pnigh_8am)
     sweep_idea.set_reasonunit(reason=daytime_reason)
 
     family_str = ",family"
@@ -694,7 +694,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
         reason_rcontext=cregtime_way,
         reason_premise=cregtime_way,
         reason_premise_open=3420.0,
-        reason_premise_nigh=3420.0,
+        reason_pnigh=3420.0,
         reason_premise_divisor=10080.0,
     )
     print("set first fact")
@@ -713,7 +713,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.fopen % 10080=}"
     # )
     # print(
-    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
+    #     f"{laundry_idea._active=} {laundry_premise.pnigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # print(f"{laundry_reasonheir.rcontext=} {laundry_premise=}")
     # for x_ideaunit in sue_bud._idea_dict.values():
@@ -736,7 +736,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     #     f"{laundry_idea._active=} {laundry_premise.open=} {laundry_factheir.fopen % 10080=}"
     # )
     # print(
-    #     f"{laundry_idea._active=} {laundry_premise.nigh=} {laundry_factheir.fnigh % 10080=}"
+    #     f"{laundry_idea._active=} {laundry_premise.pnigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # for x_ideaunit in sue_bud._idea_dict.values():
     #     if x_ideaunit.idea_tag in [laundry_str]:

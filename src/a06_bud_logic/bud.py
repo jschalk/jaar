@@ -762,7 +762,7 @@ class BudUnit:
         premise_idea = self.get_idea_obj(x_ideaattrholder.reason_premise)
         x_ideaattrholder.set_premise_range_attributes_influenced_by_premise_idea(
             premise_open=premise_idea.begin,
-            premise_nigh=premise_idea.close,
+            pnigh=premise_idea.close,
             premise_denom=premise_idea.denom,
         )
 
@@ -772,7 +772,7 @@ class BudUnit:
         reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
         reason_premise_open: float = None,
-        reason_premise_nigh: float = None,
+        reason_pnigh: float = None,
         reason_premise_divisor: int = None,
     ):
         self.edit_idea_attr(
@@ -780,7 +780,7 @@ class BudUnit:
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
-            reason_premise_nigh=reason_premise_nigh,
+            reason_pnigh=reason_pnigh,
             reason_premise_divisor=reason_premise_divisor,
         )
 
@@ -793,7 +793,7 @@ class BudUnit:
         reason_rcontext: WayStr = None,
         reason_premise: WayStr = None,
         reason_premise_open: float = None,
-        reason_premise_nigh: float = None,
+        reason_pnigh: float = None,
         reason_premise_divisor: int = None,
         reason_del_premise_rcontext: WayStr = None,
         reason_del_premise_rbranch: WayStr = None,
@@ -831,7 +831,7 @@ class BudUnit:
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
-            reason_premise_nigh=reason_premise_nigh,
+            reason_pnigh=reason_pnigh,
             reason_premise_divisor=reason_premise_divisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,
             reason_del_premise_rbranch=reason_del_premise_rbranch,

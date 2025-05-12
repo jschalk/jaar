@@ -183,8 +183,8 @@ def rbranch_str() -> str:
     return "rbranch"
 
 
-def nigh_str() -> str:
-    return "nigh"
+def pnigh_str() -> str:
+    return "pnigh"
 
 
 def gogo_want_str() -> str:

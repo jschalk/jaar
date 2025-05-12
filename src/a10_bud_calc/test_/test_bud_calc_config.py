@@ -40,7 +40,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     morph_str,
     rbranch_str,
-    nigh_str,
+    pnigh_str,
     numor_str,
     open_str,
     penny_str,
@@ -599,8 +599,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budprem, jm, "_task") == "INTEGER"
     assert g_class_type(config, budprem, jv, "divisor") == "int"
     assert g_sqlitetype(config, budprem, jv, "divisor") == "INTEGER"
-    assert g_class_type(config, budprem, jv, nigh_str()) == "float"
-    assert g_sqlitetype(config, budprem, jv, nigh_str()) == "REAL"
+    assert g_class_type(config, budprem, jv, pnigh_str()) == "float"
+    assert g_sqlitetype(config, budprem, jv, pnigh_str()) == "REAL"
     assert g_class_type(config, budprem, jv, open_str()) == "float"
     assert g_sqlitetype(config, budprem, jv, open_str()) == "REAL"
     assert g_class_type(config, budreas, jk, rcontext_str()) == type_WayStr_str()
@@ -810,7 +810,7 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
     assert bud_calc_args_type_dict.get("divisor") == "int"
-    assert bud_calc_args_type_dict.get(nigh_str()) == "float"
+    assert bud_calc_args_type_dict.get(pnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(open_str()) == "float"
     assert bud_calc_args_type_dict.get("_rcontext_idea_active_value") == "int"
     assert bud_calc_args_type_dict.get("rcontext_idea_active_requisite") == "bool"

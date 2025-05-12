@@ -23,7 +23,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     morph_str,
     rbranch_str,
-    nigh_str,
+    pnigh_str,
     numor_str,
     open_str,
     parent_way_str,
@@ -63,7 +63,7 @@ def test_str_functions_ReturnsObj():
     assert group_label_str() == "group_label"
     assert morph_str() == "morph"
     assert rbranch_str() == "rbranch"
-    assert nigh_str() == "nigh"
+    assert pnigh_str() == "pnigh"
     assert numor_str() == "numor"
     assert open_str() == "open"
     assert parent_way_str() == "parent_way"

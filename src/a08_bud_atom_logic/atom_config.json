@@ -216,7 +216,7 @@
                 "column_order": 5,
                 "sqlite_datatype": "INTEGER"
             },
-            "nigh": {
+            "pnigh": {
                 "class_type": "float",
                 "column_order": 4,
                 "sqlite_datatype": "REAL"

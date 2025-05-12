@@ -104,7 +104,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "month_tag": "TagStr",
         "monthday_distortion": "int",
         "morph": "bool",
-        "nigh": "float",
+        "pnigh": "float",
         "numor": "int",
         "open": "float",
         "offi_time": "TimeLinePoint",

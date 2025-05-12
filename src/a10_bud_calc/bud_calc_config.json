@@ -353,7 +353,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "nigh": {
+            "pnigh": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

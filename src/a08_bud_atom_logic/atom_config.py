@@ -89,7 +89,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "max_tree_traverse": "int",
         "morph": "bool",
         "rbranch": "WayStr",
-        "nigh": "float",
+        "pnigh": "float",
         "numor": "int",
         "open": "float",
         "penny": "float",

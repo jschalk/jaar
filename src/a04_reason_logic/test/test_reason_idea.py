@@ -337,7 +337,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     # ESTABLISH
     day_str = "ced_day"
     day_way = create_way(root_tag(), day_str)
-    range_3_to_6_premise = premiseunit_shop(rbranch=day_way, open=3, nigh=6)
+    range_3_to_6_premise = premiseunit_shop(rbranch=day_way, open=3, pnigh=6)
     range_3_to_6_premises = {range_3_to_6_premise.rbranch: range_3_to_6_premise}
     range_3_to_6_reason = reasonheir_shop(day_way, range_3_to_6_premises)
     assert range_3_to_6_reason._status is None
@@ -378,7 +378,7 @@ def test_ReasonCore_get_premises_count():
     assert day_reason.get_premises_count() == 0
 
     # WHEN
-    range_3_to_6_premise = premiseunit_shop(rbranch=day_way, open=3, nigh=6)
+    range_3_to_6_premise = premiseunit_shop(rbranch=day_way, open=3, pnigh=6)
     range_3_to_6_premises = {range_3_to_6_premise.rbranch: range_3_to_6_premise}
     day_reason = reasoncore_shop(rcontext=day_way, premises=range_3_to_6_premises)
     # THEN
@@ -393,11 +393,11 @@ def test_ReasonCore_set_premise_CorrectlySetsPremise():
     assert day_reason.get_premises_count() == 0
 
     # WHEN
-    day_reason.set_premise(premise=day_way, open=3, nigh=6)
+    day_reason.set_premise(premise=day_way, open=3, pnigh=6)
 
     # THEN
     assert day_reason.get_premises_count() == 1
-    range_3_to_6_premise = premiseunit_shop(rbranch=day_way, open=3, nigh=6)
+    range_3_to_6_premise = premiseunit_shop(rbranch=day_way, open=3, pnigh=6)
     premises = {range_3_to_6_premise.rbranch: range_3_to_6_premise}
     assert day_reason.premises == premises
 
@@ -410,7 +410,7 @@ def test_ReasonCore_premise_exists_ReturnsObj():
     assert not day_reason.premise_exists(day_way)
 
     # WHEN
-    day_reason.set_premise(day_way, open=3, nigh=6)
+    day_reason.set_premise(day_way, open=3, pnigh=6)
 
     # THEN
     assert day_reason.premise_exists(day_way)
@@ -420,8 +420,8 @@ def test_ReasonCore_get_single_premis_ReturnsObj():
     # ESTABLISH
     day_way = create_way(root_tag(), "day")
     day_reason = reasoncore_shop(rcontext=day_way)
-    day_reason.set_premise(premise=day_way, open=3, nigh=6)
-    day_reason.set_premise(premise=day_way, open=7, nigh=10)
+    day_reason.set_premise(premise=day_way, open=3, pnigh=6)
+    day_reason.set_premise(premise=day_way, open=7, pnigh=10)
     noon_way = create_way(day_way, "noon")
     day_reason.set_premise(premise=noon_way)
     assert day_reason.get_premises_count() == 2
@@ -436,7 +436,7 @@ def test_ReasonCore_del_premise_CorrectlyDeletesPremise():
     day_str = "day"
     day_way = create_way(root_tag(), day_str)
     day_reason = reasoncore_shop(rcontext=day_way)
-    day_reason.set_premise(premise=day_way, open=3, nigh=6)
+    day_reason.set_premise(premise=day_way, open=3, pnigh=6)
     assert day_reason.get_premises_count() == 1
 
     # WHEN

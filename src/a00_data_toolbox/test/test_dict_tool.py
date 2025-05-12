@@ -203,11 +203,11 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
 
     frank_str = "franklin mountain"
     day_str = "day"
-    night_str = "night"
+    evening_str = "evening"
     day_list = [sports_str, run_str, frank_str, day_str]
     day_obj = "is hot"
-    night_list = [sports_str, run_str, frank_str, night_str]
-    night_obj = "is cool"
+    evening_list = [sports_str, run_str, frank_str, evening_str]
+    evening_obj = "is cool"
     rain_str = "raining"
     coat_str = "coat"
     fluf_str = "fluffy"
@@ -226,7 +226,7 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
     set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=evening_list, x_obj=evening_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=rain_list, x_obj=silver_obj)
     print(y_dict)
 
@@ -237,7 +237,7 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
                 mount_str: mount_obj,
                 frank_str: {
                     day_str: day_obj,
-                    night_str: night_obj,
+                    evening_str: evening_obj,
                     rain_str: {coat_str: {fluf_str: {button_str: silver_obj}}},
                 },
             }
@@ -249,7 +249,7 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
 
     # THEN
     assert childless_objs == {
-        sports_str: [fun_obj, mount_obj, day_obj, night_obj, silver_obj]
+        sports_str: [fun_obj, mount_obj, day_obj, evening_obj, silver_obj]
     }
     assert get_from_nested_dict(y_dict, day_list) == day_obj
     assert get_from_nested_dict(y_dict, mount_list) == mount_obj
@@ -271,16 +271,16 @@ def test_get_from_nested_dict_RaisesNestedException():
 
     frank_str = "franklin mountain"
     day_str = "day"
-    night_str = "night"
+    evening_str = "evening"
     day_list = [sports_str, run_str, frank_str, day_str]
     day_obj = "is hot"
-    night_list = [sports_str, run_str, frank_str, night_str]
-    night_obj = "is cool"
+    evening_list = [sports_str, run_str, frank_str, evening_str]
+    evening_obj = "is cool"
 
     set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=evening_list, x_obj=evening_obj)
     assert get_from_nested_dict(y_dict, day_list) == day_obj
 
     # WHEN / THEN
@@ -317,16 +317,16 @@ def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
 
     frank_str = "franklin mountain"
     day_str = "day"
-    night_str = "night"
+    evening_str = "evening"
     day_list = [sports_str, run_str, frank_str, day_str]
     day_obj = "is hot"
-    night_list = [sports_str, run_str, frank_str, night_str]
-    night_obj = "is cool"
+    evening_list = [sports_str, run_str, frank_str, evening_str]
+    evening_obj = "is cool"
 
     set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=night_list, x_obj=night_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=evening_list, x_obj=evening_obj)
     assert (
         get_from_nested_dict(y_dict, day_list, if_missing_return_None=True) == day_obj
     )

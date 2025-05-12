@@ -192,12 +192,12 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     clean_table_7am_rcontext = day24hr_way
     clean_table_7am_premise_way = day24hr_way
     clean_table_7am_premise_open = 7.0
-    clean_table_7am_premise_nigh = 7.0
+    clean_table_7am_pnigh = 7.0
     clean_table_7am_reason = reasonunit_shop(clean_table_7am_rcontext)
     clean_table_7am_reason.set_premise(
         premise=clean_table_7am_premise_way,
         open=clean_table_7am_premise_open,
-        nigh=clean_table_7am_premise_nigh,
+        pnigh=clean_table_7am_pnigh,
     )
     sue_bud.edit_idea_attr(clean_way, reason=clean_table_7am_reason)
     casa_str = "casa"
@@ -212,7 +212,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     hour_min_idea = ideaunit_shop(hour_min_str)
     hour_way = yao_bud.make_l1_way(hour_min_str)
     hour_reasonunit = reasonunit_shop(hour_way)
-    hour_reasonunit.set_premise(hour_way, open=80, nigh=90)
+    hour_reasonunit.set_premise(hour_way, open=80, pnigh=90)
     yao_bud.set_l1_idea(hour_min_idea)
     yao_bud.add_fact(hour_way, hour_way, 85, 95)
     mail_str = "obtain mail"

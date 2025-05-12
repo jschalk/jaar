@@ -10,7 +10,7 @@ def test_IdeaAttrHolder_Exists():
     assert new_obj.reason_rcontext is None
     assert new_obj.reason_premise is None
     assert new_obj.reason_premise_open is None
-    assert new_obj.reason_premise_nigh is None
+    assert new_obj.reason_pnigh is None
     assert new_obj.reason_premise_divisor is None
     assert new_obj.reason_del_premise_rcontext is None
     assert new_obj.reason_del_premise_rbranch is None
@@ -37,7 +37,7 @@ def test_IdeaAttrHolder_CorrectlyCalculatesPremiseRanges():
     # ESTABLISH
     idea_attr = IdeaAttrHolder(reason_premise="some_way")
     assert idea_attr.reason_premise_open is None
-    assert idea_attr.reason_premise_nigh is None
+    assert idea_attr.reason_pnigh is None
     # assert idea_attr.reason_premise_numor is None
     assert idea_attr.reason_premise_divisor is None
     # assert idea_attr.reason_premise_morph is None
@@ -45,13 +45,13 @@ def test_IdeaAttrHolder_CorrectlyCalculatesPremiseRanges():
     # WHEN
     idea_attr.set_premise_range_attributes_influenced_by_premise_idea(
         premise_open=5.0,
-        premise_nigh=20.0,
+        pnigh=20.0,
         # premise_numor,
         premise_denom=4.0,
         # premise_morph,
     )
     assert idea_attr.reason_premise_open == 5.0
-    assert idea_attr.reason_premise_nigh == 20.0
+    assert idea_attr.reason_pnigh == 20.0
     # assert idea_attr.reason_premise_numor is None
     assert idea_attr.reason_premise_divisor == 4.0
     # assert idea_attr.reason_premise_morph is None

@@ -56,7 +56,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     respect_bit_str,
     give_force_str,
     take_force_str,
-    nigh_str,
+    pnigh_str,
     open_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import (
@@ -272,7 +272,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[59] == give_force_str()
     assert table_sorting_priority[60] == mass_str()
     assert table_sorting_priority[61] == "max_tree_traverse"
-    assert table_sorting_priority[62] == nigh_str()
+    assert table_sorting_priority[62] == pnigh_str()
     assert table_sorting_priority[63] == open_str()
     assert table_sorting_priority[64] == "divisor"
     assert table_sorting_priority[65] == pledge_str()
@@ -401,7 +401,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(give_force_str()) == "REAL"
     assert sqlite_types.get(mass_str()) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
-    assert sqlite_types.get("nigh") == "REAL"
+    assert sqlite_types.get("pnigh") == "REAL"
     assert sqlite_types.get("open") == "REAL"
     assert sqlite_types.get("divisor") == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"

@@ -158,7 +158,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud.set_l1_idea(clean_idea)
     c_way = sue_bud.make_l1_way(clean_str)
     time_way = sue_bud.make_l1_way(time_str)
-    # sue_bud.edit_idea_attr(c_way, reason_rcontext=time_way, reason_premise=time_way, reason_premise_open=5, reason_premise_nigh=10)
+    # sue_bud.edit_idea_attr(c_way, reason_rcontext=time_way, reason_premise=time_way, reason_premise_open=5, reason_pnigh=10)
 
     sue_bud.add_fact(fcontext=time_way, fbranch=time_way, fopen=5, fnigh=10)
     print(f"Establish a single ranged fact {sue_bud.idearoot.factunits=}")

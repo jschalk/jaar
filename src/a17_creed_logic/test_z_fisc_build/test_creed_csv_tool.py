@@ -79,7 +79,7 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00023": "fisc_tag,owner_name,idea_way,fcontext,fbranch,fopen,fnigh\n",
         "br00024": "fisc_tag,owner_name,idea_way,team_label\n",
         "br00025": "fisc_tag,owner_name,idea_way,healer_name\n",
-        "br00026": "fisc_tag,owner_name,idea_way,rcontext,rbranch,nigh,open,divisor\n",
+        "br00026": "fisc_tag,owner_name,idea_way,rcontext,rbranch,pnigh,open,divisor\n",
         "br00027": "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite\n",
         "br00028": "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
@@ -445,7 +445,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
     casa_way = bob_bud.make_l1_way("casa")
     clean_way = bob_bud.make_way(casa_way, "clean")
     clean_premise_open = 22
-    clean_premise_nigh = 55
+    clean_pnigh = 55
     clean_premise_divisor = 77
     bob_bud.add_idea(mop_way)
     bob_bud.add_idea(casa_way)
@@ -455,7 +455,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
         reason_rcontext=casa_way,
         reason_premise=clean_way,
         reason_premise_open=clean_premise_open,
-        reason_premise_nigh=clean_premise_nigh,
+        reason_pnigh=clean_pnigh,
         reason_premise_divisor=clean_premise_divisor,
     )
     csv_header = x_creeds.get("br00026")
@@ -466,7 +466,7 @@ def test_add_bud_to_br00026_csv_ReturnsObj():
     x_csv = add_bud_to_br00026_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_premise_open},{clean_pnigh},{clean_premise_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -970,7 +970,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     casa_way = bob_bud.make_l1_way("casa")
     clean_way = bob_bud.make_way(casa_way, "clean")
     clean_premise_open = 22
-    clean_premise_nigh = 55
+    clean_pnigh = 55
     clean_premise_divisor = 77
     bob_bud.add_idea(mop_way)
     bob_bud.add_idea(casa_way)
@@ -980,7 +980,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
         reason_rcontext=casa_way,
         reason_premise=clean_way,
         reason_premise_open=clean_premise_open,
-        reason_premise_nigh=clean_premise_nigh,
+        reason_pnigh=clean_pnigh,
         reason_premise_divisor=clean_premise_divisor,
     )
     bob_buddelta = buddelta_shop()
@@ -996,7 +996,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     x_csv = add_pack_to_br00026_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_premise_open},{clean_premise_nigh},{clean_premise_divisor}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_premise_open},{clean_pnigh},{clean_premise_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 

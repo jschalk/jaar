@@ -48,8 +48,8 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     clean_way = sue_bud.make_l1_way("clean")
     dirty_way = sue_bud.make_l1_way("dirty")
     dirty_open = 10
-    dirty_nigh = 13
-    sue_bud.add_fact(casa_way, dirty_way, dirty_open, dirty_nigh, True)
+    dirty_pnigh = 13
+    sue_bud.add_fact(casa_way, dirty_way, dirty_open, dirty_pnigh, True)
 
     # WHEN
     sue_fact_dict = get_bud_root_facts_dict(sue_bud)
@@ -60,13 +60,13 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     assert casa_fact_dict.get("fcontext") == casa_way
     assert casa_fact_dict.get("fbranch") == dirty_way
     assert casa_fact_dict.get("fopen") == dirty_open
-    assert casa_fact_dict.get("fnigh") == dirty_nigh
+    assert casa_fact_dict.get("fnigh") == dirty_pnigh
     expected_sue_fact_dict = {
         casa_way: {
             "fcontext": casa_way,
             "fbranch": dirty_way,
             "fopen": dirty_open,
-            "fnigh": dirty_nigh,
+            "fnigh": dirty_pnigh,
         }
     }
     print(f"{sue_fact_dict=}")

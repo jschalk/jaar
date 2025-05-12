@@ -141,25 +141,25 @@ class PremiseStatusFinderException(Exception):
 
 @dataclass
 class PremiseStatusFinder:
-    premise_open: float  # within 0 and divisor, can be more than premise_nigh
-    premise_nigh: float  # within 0 and divisor, can be less than premise_open
+    premise_open: float  # within 0 and divisor, can be more than pnigh
+    pnigh: float  # within 0 and divisor, can be less than premise_open
     premise_divisor: float  # greater than zero
-    fact_open_full: float  # less than fact nigh
-    fact_nigh_full: float  # less than fact nigh
+    fact_open_full: float  # less than fnigh
+    fnigh_full: float  # less than fnigh
 
     def check_attr(self):
         if None in (
             self.premise_open,
-            self.premise_nigh,
+            self.pnigh,
             self.premise_divisor,
             self.fact_open_full,
-            self.fact_nigh_full,
+            self.fnigh_full,
         ):
             raise PremiseStatusFinderException("No parameter can be None")
 
-        if self.fact_open_full > self.fact_nigh_full:
+        if self.fact_open_full > self.fnigh_full:
             raise PremiseStatusFinderException(
-                f"{self.fact_open_full=} cannot be greater that {self.fact_nigh_full=}"
+                f"{self.fact_open_full=} cannot be greater that {self.fnigh_full=}"
             )
 
         if self.premise_divisor <= 0:
@@ -172,28 +172,28 @@ class PremiseStatusFinder:
                 f"{self.premise_open=} cannot be less than zero or greater than {self.premise_divisor=}"
             )
 
-        if self.premise_nigh < 0 or self.premise_nigh > self.premise_divisor:
+        if self.pnigh < 0 or self.pnigh > self.premise_divisor:
             raise PremiseStatusFinderException(
-                f"{self.premise_nigh=} cannot be less than zero or greater than {self.premise_divisor=}"
+                f"{self.pnigh=} cannot be less than zero or greater than {self.premise_divisor=}"
             )
 
     def bo(self) -> float:
         return self.fact_open_full % self.premise_divisor
 
     def bn(self) -> float:
-        return self.fact_nigh_full % self.premise_divisor
+        return self.fnigh_full % self.premise_divisor
 
     def po(self) -> float:
         return self.premise_open
 
     def pn(self) -> float:
-        return self.premise_nigh
+        return self.pnigh
 
     def pd(self) -> float:
         return self.premise_divisor
 
     def get_active(self) -> bool:
-        if self.fact_nigh_full - self.fact_open_full > self.premise_divisor:
+        if self.fnigh_full - self.fact_open_full > self.premise_divisor:
             return True
         # Case B1
         elif get_range_less_than_divisor_active(
@@ -209,9 +209,9 @@ class PremiseStatusFinder:
                 self.get_active()
                 and get_collasped_fact_range_active(
                     self.premise_open,
-                    self.premise_nigh,
+                    self.pnigh,
                     self.premise_divisor,
-                    self.fact_nigh_full,
+                    self.fnigh_full,
                 )
                 is False
             )
@@ -260,33 +260,33 @@ def get_range_less_than_divisor_active(bo, bn, po, pn):
 
 def get_collasped_fact_range_active(
     premise_open: float,
-    premise_nigh: float,
+    pnigh: float,
     premise_divisor: float,
-    fact_nigh_full: float,
+    fnigh_full: float,
 ) -> bool:
     x_pbsd = premisestatusfinder_shop(
         premise_open=premise_open,
-        premise_nigh=premise_nigh,
+        pnigh=pnigh,
         premise_divisor=premise_divisor,
-        fact_open_full=fact_nigh_full,
-        fact_nigh_full=fact_nigh_full,
+        fact_open_full=fnigh_full,
+        fnigh_full=fnigh_full,
     )
     return x_pbsd.get_active()
 
 
 def premisestatusfinder_shop(
     premise_open: float,
-    premise_nigh: float,
+    pnigh: float,
     premise_divisor: float,
     fact_open_full: float,
-    fact_nigh_full: float,
+    fnigh_full: float,
 ):
     x_premisestatusfinder = PremiseStatusFinder(
         premise_open,
-        premise_nigh,
+        pnigh,
         premise_divisor,
         fact_open_full,
-        fact_nigh_full,
+        fnigh_full,
     )
     x_premisestatusfinder.check_attr()
     return x_premisestatusfinder
@@ -296,7 +296,7 @@ def premisestatusfinder_shop(
 class PremiseUnit:
     rbranch: WayStr
     open: float = None
-    nigh: float = None
+    pnigh: float = None
     divisor: int = None
     _status: bool = None
     _task: bool = None
@@ -309,8 +309,8 @@ class PremiseUnit:
         x_dict = {"rbranch": self.rbranch}
         if self.open is not None:
             x_dict["open"] = self.open
-        if self.nigh is not None:
-            x_dict["nigh"] = self.nigh
+        if self.pnigh is not None:
+            x_dict["pnigh"] = self.pnigh
 
         if self.divisor is not None:
             x_dict["divisor"] = self.divisor
@@ -358,23 +358,25 @@ class PremiseUnit:
 
     def _is_segregate(self):
         return (
-            self.divisor is not None and self.open is not None and self.nigh is not None
+            self.divisor is not None
+            and self.open is not None
+            and self.pnigh is not None
         )
 
     def _is_range(self):
-        return self.divisor is None and self.open is not None and self.nigh is not None
+        return self.divisor is None and self.open is not None and self.pnigh is not None
 
     def _get_task_status(self, factheir: FactHeir) -> bool:
         x_task = None
         if self._status and self._is_range():
-            x_task = factheir.fnigh > self.nigh
+            x_task = factheir.fnigh > self.pnigh
         elif self._status and self._is_segregate():
             segr_obj = premisestatusfinder_shop(
                 premise_open=self.open,
-                premise_nigh=self.nigh,
+                pnigh=self.pnigh,
                 premise_divisor=self.divisor,
                 fact_open_full=factheir.fopen,
-                fact_nigh_full=factheir.fnigh,
+                fnigh_full=factheir.fnigh,
             )
             x_task = segr_obj.get_task_status()
         elif self._status in [True, False]:
@@ -394,18 +396,18 @@ class PremiseUnit:
     def _get_segregate_status(self, factheir: FactHeir) -> bool:
         segr_obj = premisestatusfinder_shop(
             premise_open=self.open,
-            premise_nigh=self.nigh,
+            pnigh=self.pnigh,
             premise_divisor=self.divisor,
             fact_open_full=factheir.fopen,
-            fact_nigh_full=factheir.fnigh,
+            fnigh_full=factheir.fnigh,
         )
         return segr_obj.get_active()
 
     def _get_range_status(self, factheir: FactHeir) -> bool:
         return (
-            (self.open <= factheir.fopen and self.nigh > factheir.fopen)
-            or (self.open <= factheir.fnigh and self.nigh > factheir.fnigh)
-            or (self.open >= factheir.fopen and self.nigh < factheir.fnigh)
+            (self.open <= factheir.fopen and self.pnigh > factheir.fopen)
+            or (self.open <= factheir.fnigh and self.pnigh > factheir.fnigh)
+            or (self.open >= factheir.fopen and self.pnigh < factheir.fnigh)
         )
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
@@ -416,14 +418,14 @@ class PremiseUnit:
 def premiseunit_shop(
     rbranch: WayStr,
     open: float = None,
-    nigh: float = None,
+    pnigh: float = None,
     divisor: float = None,
     bridge: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
         rbranch=rbranch,
         open=open,
-        nigh=nigh,
+        pnigh=pnigh,
         divisor=divisor,
         bridge=default_bridge_if_None(bridge),
     )
@@ -437,9 +439,9 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
         except KeyError:
             x_open = None
         try:
-            x_nigh = premise_dict["nigh"]
+            x_pnigh = premise_dict["pnigh"]
         except KeyError:
-            x_nigh = None
+            x_pnigh = None
         try:
             x_divisor = premise_dict["divisor"]
         except KeyError:
@@ -448,7 +450,7 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
         premise_x = premiseunit_shop(
             rbranch=premise_dict["rbranch"],
             open=x_open,
-            nigh=x_nigh,
+            pnigh=x_pnigh,
             divisor=x_divisor,
         )
         premises[premise_x.rbranch] = premise_x
@@ -488,13 +490,13 @@ class ReasonCore:
         self,
         premise: WayStr,
         open: float = None,
-        nigh: float = None,
+        pnigh: float = None,
         divisor: int = None,
     ):
         self.premises[premise] = premiseunit_shop(
             rbranch=premise,
             open=open,
-            nigh=nigh,
+            pnigh=pnigh,
             divisor=divisor,
             bridge=self.bridge,
         )
@@ -575,7 +577,7 @@ class ReasonHeir(ReasonCore):
             premise_x = premiseunit_shop(
                 rbranch=x_premiseunit.rbranch,
                 open=x_premiseunit.open,
-                nigh=x_premiseunit.nigh,
+                pnigh=x_premiseunit.pnigh,
                 divisor=x_premiseunit.divisor,
             )
             x_premises[premise_x.rbranch] = premise_x

@@ -18,7 +18,7 @@
         "rbranch": {
             "otx_key": true
         },
-        "nigh": {
+        "pnigh": {
             "otx_key": false
         },
         "open": {

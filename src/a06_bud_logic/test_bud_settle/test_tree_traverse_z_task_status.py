@@ -231,7 +231,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     clean_way = sue_budunit.make_way(house_way, clean_str)
     assert sue_budunit._idea_dict.get(clean_way)._active is False
 
-    # set facts as midnight to 8am
+    # set facts as midevening to 8am
     time_str = "timetech"
     time_way = sue_budunit.make_l1_way(time_str)
     day24hr_str = "24hr day"
@@ -239,14 +239,14 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     day24hr_rcontext = day24hr_way
     day24hr_fbranch = day24hr_way
     day24hr_open = 0.0
-    day24hr_nigh = 8.0
+    day24hr_pnigh = 8.0
 
     # WHEN
     sue_budunit.add_fact(
         day24hr_rcontext,
         fbranch=day24hr_fbranch,
         fopen=day24hr_open,
-        fnigh=day24hr_nigh,
+        fnigh=day24hr_pnigh,
     )
 
     # THEN
@@ -256,13 +256,13 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     # WHEN
     # set facts as 8am to 10am
     day24hr_open = 8.0
-    day24hr_nigh = 10.0
+    day24hr_pnigh = 10.0
     print(sue_budunit.idearoot.factunits[day24hr_way])
     sue_budunit.add_fact(
         day24hr_rcontext,
         fbranch=day24hr_fbranch,
         fopen=day24hr_open,
-        fnigh=day24hr_nigh,
+        fnigh=day24hr_pnigh,
     )
     print(sue_budunit.idearoot.factunits[day24hr_way])
     print(sue_budunit.idearoot._kids[house_str]._kids[clean_str].reasonunits)
@@ -291,7 +291,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_rcontexts()=}")
     # day_hour = f"{yao_budunit.fisc_tag},day_hour"
-    # yao_budunit.add_fact(fcontext=day_hour, fbranch=day_hour, open=0, nigh=23)
+    # yao_budunit.add_fact(fcontext=day_hour, fbranch=day_hour, open=0, pnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_budunit.make_l1_way(day_min_str)
     yao_budunit.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=1439)
@@ -476,7 +476,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
 
     premise_divisor = None
     premise_open = None
-    premise_nigh = None
+    pnigh = None
     print(f"{len(yao_budunit._idea_dict)=}")
 
     casa_way = yao_budunit.make_l1_way("casa")
@@ -492,7 +492,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     # print(f"{clean_sheet_idea.idea_tag=} {ced_week_reason.rcontext=} {premise_x=}")
     premise_divisor = ced_week_premise.divisor
     premise_open = ced_week_premise.open
-    premise_nigh = ced_week_premise.nigh
+    pnigh = ced_week_premise.pnigh
     # print(f"{idea.reasonunits=}")
     assert clean_sheet_idea._active is False
 
@@ -504,7 +504,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     assert premise_divisor == 6
     assert premise_open == 1
     print(
-        f"There exists a idea with a reason_rcontext {ced_week_rcontext} that also has lemmet div =6 and open/nigh =1"
+        f"There exists a idea with a reason_rcontext {ced_week_rcontext} that also has lemmet div =6 and open/pnigh =1"
     )
     # print(f"{len(idea_dict)=}")
     ced_week_open = 6001

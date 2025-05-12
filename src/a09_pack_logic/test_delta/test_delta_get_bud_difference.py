@@ -769,12 +769,12 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delet
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     before_damaged_open = 55
-    before_damaged_nigh = 66
+    before_damaged_pnigh = 66
     before_fact = factunit_shop(
         fcontext=knee_way,
         fbranch=damaged_way,
         fopen=before_damaged_open,
-        fnigh=before_damaged_nigh,
+        fnigh=before_damaged_pnigh,
     )
     before_sue_bud.edit_idea_attr(ball_way, factunit=before_fact)
 
@@ -815,14 +815,14 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     damaged_open = 45
-    damaged_nigh = 77
+    damaged_pnigh = 77
     damaged_divisor = 3
     after_sue_bud.edit_idea_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=damaged_open,
-        reason_premise_nigh=damaged_nigh,
+        reason_pnigh=damaged_pnigh,
         reason_premise_divisor=damaged_divisor,
     )
 
@@ -844,7 +844,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     assert ball_budatom.get_value("rcontext") == knee_way
     assert ball_budatom.get_value("rbranch") == damaged_way
     assert ball_budatom.get_value("open") == damaged_open
-    assert ball_budatom.get_value("nigh") == damaged_nigh
+    assert ball_budatom.get_value("pnigh") == damaged_pnigh
     assert ball_budatom.get_value("divisor") == damaged_divisor
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -871,14 +871,14 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
         ball_way, reason_rcontext=knee_way, reason_premise=bend_way
     )
     damaged_open = 45
-    damaged_nigh = 77
+    damaged_pnigh = 77
     damaged_divisor = 3
     before_sue_bud.edit_idea_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=damaged_open,
-        reason_premise_nigh=damaged_nigh,
+        reason_pnigh=damaged_pnigh,
         reason_premise_divisor=damaged_divisor,
     )
     after_sue_bud = copy_deepcopy(before_sue_bud)
@@ -930,27 +930,27 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
         ball_way, reason_rcontext=knee_way, reason_premise=bend_way
     )
     before_damaged_open = 111
-    before_damaged_nigh = 777
+    before_damaged_pnigh = 777
     before_damaged_divisor = 13
     before_sue_bud.edit_idea_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=before_damaged_open,
-        reason_premise_nigh=before_damaged_nigh,
+        reason_pnigh=before_damaged_pnigh,
         reason_premise_divisor=before_damaged_divisor,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_damaged_open = 333
-    after_damaged_nigh = 555
+    after_damaged_pnigh = 555
     after_damaged_divisor = 78
     after_sue_bud.edit_idea_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=after_damaged_open,
-        reason_premise_nigh=after_damaged_nigh,
+        reason_pnigh=after_damaged_pnigh,
         reason_premise_divisor=after_damaged_divisor,
     )
 
@@ -972,7 +972,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     assert ball_budatom.get_value("rcontext") == knee_way
     assert ball_budatom.get_value("rbranch") == damaged_way
     assert ball_budatom.get_value("open") == after_damaged_open
-    assert ball_budatom.get_value("nigh") == after_damaged_nigh
+    assert ball_budatom.get_value("pnigh") == after_damaged_pnigh
     assert ball_budatom.get_value("divisor") == after_damaged_divisor
     assert get_budatom_total_count(sue_buddelta) == 1
 

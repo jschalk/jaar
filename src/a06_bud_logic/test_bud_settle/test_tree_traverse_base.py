@@ -658,8 +658,8 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     yao_bud.edit_idea_attr(root_way, reason_rcontext=tue_way, reason_premise=tue_way)
 
     week_open = 3
-    week_nigh = 7
-    yao_bud.add_fact(week_way, week_way, week_open, week_nigh)
+    week_pnigh = 7
+    yao_bud.add_fact(week_way, week_way, week_open, week_pnigh)
 
     # assert len(ball_idea._reasonheirs) == 1
     # assert ball_idea._factheirs == {week_way: week_factheir}
@@ -674,16 +674,16 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     assert str(excinfo.value) == exception_str
 
     # THEN
-    # week_factunit = factunit_shop(week_way, week_way, week_open, week_nigh)
+    # week_factunit = factunit_shop(week_way, week_way, week_open, week_pnigh)
     # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
     # x_bud_idea_dict = {week_idea.get_idea_way(): week_idea, tue_idea.get_idea_way(): tue_idea}
     # ball_idea.set_reasonheirs(x_bud_idea_dict, tue_reasonheirs)
     # x_range_inheritors = {tue_way: week_way}
-    # week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
+    # week_factheir = factheir_shop(week_way, week_way, week_open, week_pnigh)
 
     # tue_open = 113
-    # tue_nigh = 117
-    # tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_nigh)
+    # tue_pnigh = 117
+    # tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_pnigh)
     # root_idea = yao_bud.get_idea_obj(root_way)
     # print(f"{week_way=} {root_idea._factheirs.keys()=}")
     # assert root_idea._factheirs.get(week_way) == week_factheir
@@ -710,8 +710,8 @@ def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
     yao_bud.edit_idea_attr(ball_way, reason_rcontext=tue_way, reason_premise=tue_way)
 
     week_open = 3
-    week_nigh = 7
-    yao_bud.add_fact(week_way, week_way, week_open, week_nigh)
+    week_pnigh = 7
+    yao_bud.add_fact(week_way, week_way, week_open, week_pnigh)
 
     # assert len(ball_idea._reasonheirs) == 1
     # assert ball_idea._factheirs == {week_way: week_factheir}
@@ -723,16 +723,16 @@ def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
     yao_bud.settle_bud()
 
     # THEN
-    # week_factunit = factunit_shop(week_way, week_way, week_open, week_nigh)
+    # week_factunit = factunit_shop(week_way, week_way, week_open, week_pnigh)
     # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
     # x_bud_idea_dict = {week_idea.get_idea_way(): week_idea, tue_idea.get_idea_way(): tue_idea}
     # ball_idea.set_reasonheirs(x_bud_idea_dict, tue_reasonheirs)
     x_range_inheritors = {tue_way: week_way}
-    week_factheir = factheir_shop(week_way, week_way, week_open, week_nigh)
+    week_factheir = factheir_shop(week_way, week_way, week_open, week_pnigh)
 
     tue_open = 113
-    tue_nigh = 117
-    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_nigh)
+    tue_pnigh = 117
+    tue_factheir = factheir_shop(tue_way, tue_way, tue_open, tue_pnigh)
     ball_idea = yao_bud.get_idea_obj(ball_way)
     print(f"{week_way=} {ball_idea._factheirs.keys()=}")
     assert ball_idea._factheirs.get(week_way) == week_factheir

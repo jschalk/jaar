@@ -625,8 +625,8 @@ class BudDelta:
             x_budatom.set_jkey("rbranch", after_premiseunit.rbranch)
             if after_premiseunit.open is not None:
                 x_budatom.set_jvalue("open", after_premiseunit.open)
-            if after_premiseunit.nigh is not None:
-                x_budatom.set_jvalue("nigh", after_premiseunit.nigh)
+            if after_premiseunit.pnigh is not None:
+                x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
             if after_premiseunit.divisor is not None:
                 x_budatom.set_jvalue("divisor", after_premiseunit.divisor)
             self.set_budatom(x_budatom)
@@ -652,8 +652,8 @@ class BudDelta:
                 x_budatom.set_jkey("rbranch", after_premiseunit.rbranch)
                 if after_premiseunit.open != before_premiseunit.open:
                     x_budatom.set_jvalue("open", after_premiseunit.open)
-                if after_premiseunit.nigh != before_premiseunit.nigh:
-                    x_budatom.set_jvalue("nigh", after_premiseunit.nigh)
+                if after_premiseunit.pnigh != before_premiseunit.pnigh:
+                    x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
                 if after_premiseunit.divisor != before_premiseunit.divisor:
                     x_budatom.set_jvalue("divisor", after_premiseunit.divisor)
                 self.set_budatom(x_budatom)
