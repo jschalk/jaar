@@ -10,32 +10,32 @@ def bud_acct_membership_str() -> str:
     return "bud_acct_membership"
 
 
-def bud_itemunit_str() -> str:
-    return "bud_itemunit"
+def bud_ideaunit_str() -> str:
+    return "bud_ideaunit"
 
 
-def bud_item_awardlink_str() -> str:
-    return "bud_item_awardlink"
+def bud_idea_awardlink_str() -> str:
+    return "bud_idea_awardlink"
 
 
-def bud_item_reasonunit_str() -> str:
-    return "bud_item_reasonunit"
+def bud_idea_reasonunit_str() -> str:
+    return "bud_idea_reasonunit"
 
 
-def bud_item_reason_premiseunit_str() -> str:
-    return "bud_item_reason_premiseunit"
+def bud_idea_reason_premiseunit_str() -> str:
+    return "bud_idea_reason_premiseunit"
 
 
-def bud_item_teamlink_str() -> str:
-    return "bud_item_teamlink"
+def bud_idea_teamlink_str() -> str:
+    return "bud_idea_teamlink"
 
 
-def bud_item_healerlink_str() -> str:
-    return "bud_item_healerlink"
+def bud_idea_healerlink_str() -> str:
+    return "bud_idea_healerlink"
 
 
-def bud_item_factunit_str() -> str:
-    return "bud_item_factunit"
+def bud_idea_factunit_str() -> str:
+    return "bud_idea_factunit"
 
 
 def bud_groupunit_str() -> str:
@@ -135,16 +135,16 @@ def credit_vote_str() -> str:
     return "credit_vote"
 
 
-def item_way_str() -> str:
-    return "item_way"
+def idea_way_str() -> str:
+    return "idea_way"
 
 
 def parent_way_str() -> str:
     return "parent_way"
 
 
-def item_tag_str() -> str:
-    return "item_tag"
+def idea_tag_str() -> str:
+    return "idea_tag"
 
 
 def mass_str() -> str:
@@ -219,5 +219,5 @@ def open_str() -> str:
     return "open"
 
 
-def base_item_active_requisite_str() -> str:
-    return "base_item_active_requisite"
+def base_idea_active_requisite_str() -> str:
+    return "base_idea_active_requisite"

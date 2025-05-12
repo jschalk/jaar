@@ -143,8 +143,8 @@ class TranBook:
         return ["acct_name", "net_amount"]
 
     def _get_accts_net_array(self) -> list[list]:
-        x_items = self.get_accts_net_dict().items()
-        return [[acct_name, net_amount] for acct_name, net_amount in x_items]
+        x_ideas = self.get_accts_net_dict().items()
+        return [[acct_name, net_amount] for acct_name, net_amount in x_ideas]
 
     def get_accts_net_csv(self) -> str:
         return create_csv(self._get_accts_headers(), self._get_accts_net_array())

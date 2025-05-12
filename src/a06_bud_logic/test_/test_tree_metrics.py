@@ -13,7 +13,7 @@ def test_TreeMetrics_Exists():
     assert x_tree_metrics.awardlinks_metrics is None
     assert x_tree_metrics.uid_max is None
     assert x_tree_metrics.uid_dict is None
-    assert x_tree_metrics.all_item_uids_are_unique is None
+    assert x_tree_metrics.all_idea_uids_are_unique is None
 
 
 def test_treemetrics_shop_ReturnsObj():
@@ -28,11 +28,11 @@ def test_treemetrics_shop_ReturnsObj():
     assert x_tree_metrics.awardlinks_metrics == {}
     assert x_tree_metrics.uid_max == 0
     assert x_tree_metrics.uid_dict == {}
-    assert x_tree_metrics.all_item_uids_are_unique
+    assert x_tree_metrics.all_idea_uids_are_unique
 
     # # could create tests for these methods?
     # def evaluate_tag(
-    # def evaluate_pledge(self, pledge: bool, item_way: WayUnit):
+    # def evaluate_pledge(self, pledge: bool, idea_way: WayUnit):
     # def evaluate_level(self, level):
     # def evaluate_reasonunits(self, reasons: dict[WayUnit, ReasonUnit]):
     # def evaluate_awardlinks(self, awardlinks: dict[GroupLabel, AwardLink]):

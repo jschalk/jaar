@@ -1,4 +1,4 @@
-from src.a05_item_logic.item import itemunit_shop
+from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a13_bud_listen_logic.listen import (
     create_listen_basis,
@@ -76,9 +76,9 @@ def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentTask(
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
     zia_plan = get_example_zia_speaker()
-    zia_plan.set_item(itemunit_shop(clean_str(), pledge=True), casa_way())
-    clean_itemunit = zia_plan.get_item_obj(clean_way())
-    clean_itemunit.teamunit.set_teamlink(yao_str)
+    zia_plan.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_way())
+    clean_ideaunit = zia_plan.get_idea_obj(clean_way())
+    clean_ideaunit.teamunit.set_teamlink(yao_str)
     sue_texas_hubunit.save_plan_bud(zia_plan)
 
     new_yao_plan = create_listen_basis(yao_duty)
@@ -150,7 +150,7 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
     assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan, sue_texas_hubunit)
     print(f"{new_yao_plan.get_missing_fact_bases().keys()=}")
-    print(f"{new_yao_plan.itemroot.factunits.keys()=}")
+    print(f"{new_yao_plan.idearoot.factunits.keys()=}")
     assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is not None
 
     # WHEN
@@ -218,7 +218,7 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
     assert new_yao_plan1.get_missing_fact_bases().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan1, sue_texas_hubunit)
     print(f"{new_yao_plan1.get_missing_fact_bases().keys()=}")
-    print(f"{new_yao_plan1.itemroot.factunits.keys()=}")
+    print(f"{new_yao_plan1.idearoot.factunits.keys()=}")
     assert new_yao_plan1.get_missing_fact_bases().get(eat_way()) is not None
 
     # WHEN
@@ -270,14 +270,14 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 
 #     sue_speaker.add_acctunit(yao_str)
 #     sue_speaker.set_acct_respect(20)
-#     sue_speaker.set_item(itemunit_shop(clean_str), status_way)
-#     sue_speaker.set_item(itemunit_shop(dirty_str), status_way)
-#     sue_speaker.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
-#     sue_speaker.edit_item_attr(
+#     sue_speaker.set_idea(ideaunit_shop(clean_str), status_way)
+#     sue_speaker.set_idea(ideaunit_shop(dirty_str), status_way)
+#     sue_speaker.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
+#     sue_speaker.edit_idea_attr(
 #         sweep_way, reason_base=status_way, reason_premise=dirty_way
 #     )
-#     sweep_item = sue_speaker.get_item_obj(sweep_way)
-#     sweep_item.teamunit.set_teamlink(yao_str)
+#     sweep_idea = sue_speaker.get_idea_obj(sweep_way)
+#     sweep_idea.teamunit.set_teamlink(yao_str)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_plan_bud(sue_str, sue_speaker.get_json(), True)
@@ -285,14 +285,14 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 #     yao_duty.add_acctunit(yao_str)
 #     yao_duty.add_acctunit(sue_str)
 #     new_yao_plan = create_listen_basis(yao_duty)
-#     print(f"{new_yao_plan.get_item_dict().keys()=}")
+#     print(f"{new_yao_plan.get_idea_dict().keys()=}")
 #     # assert new_yao_plan.get_missing_fact_bases().get(status_way) is None
 #     listen_to_agendas_duty_plan(new_yao_plan, texas_hubunit)
-#     print(f"{new_yao_plan.get_item_dict().keys()=}")
+#     print(f"{new_yao_plan.get_idea_dict().keys()=}")
 #     assert new_yao_plan.get_missing_fact_bases().get(status_way) is not None
 
 #     # assert new_yao_plan.get_missing_fact_bases().keys() == {status_way}
-#     # sue_speaker.add_fact(status_way, clean_way, create_missing_items=True)
+#     # sue_speaker.add_fact(status_way, clean_way, create_missing_ideas=True)
 
 #     # # WHEN
 #     # listen_to_facts_duty_plan(yao_duty, yao_plan, missing_fact_bases)
@@ -323,14 +323,14 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 #     running_str = "running"
 #     running_way = yao_duty.make_way(fridge_way, running_str)
 
-#     yao_duty.set_item(itemunit_shop(running_str), fridge_way)
-#     yao_duty.set_item(itemunit_shop(clean_str), status_way)
-#     yao_duty.set_item(itemunit_shop(dirty_str), status_way)
-#     yao_duty.set_item(itemunit_shop(sweep_str, pledge=True), casa_way)
-#     yao_duty.edit_item_attr(
+#     yao_duty.set_idea(ideaunit_shop(running_str), fridge_way)
+#     yao_duty.set_idea(ideaunit_shop(clean_str), status_way)
+#     yao_duty.set_idea(ideaunit_shop(dirty_str), status_way)
+#     yao_duty.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
+#     yao_duty.edit_idea_attr(
 #         sweep_way, reason_base=status_way, reason_premise=dirty_way
 #     )
-#     yao_duty.edit_item_attr(
+#     yao_duty.edit_idea_attr(
 #         sweep_way, reason_base=fridge_way, reason_premise=running_way
 #     )
 #     assert len(yao_duty.get_missing_fact_bases()) == 2
@@ -340,8 +340,8 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 
 #     # WHEN
 #     yao_plan = budunit_shop(yao_str)
-#     yao_plan.add_fact(status_way, clean_way, create_missing_items=True)
-#     yao_plan.add_fact(fridge_way, running_way, create_missing_items=True)
+#     yao_plan.add_fact(status_way, clean_way, create_missing_ideas=True)
+#     yao_plan.add_fact(fridge_way, running_way, create_missing_ideas=True)
 #     missing_fact_bases = list(yao_duty.get_missing_fact_bases().keys())
 #     listen_to_facts_duty_plan(yao_duty, yao_plan, missing_fact_bases)
 

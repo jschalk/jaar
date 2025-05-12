@@ -1,4 +1,4 @@
-from src.a05_item_logic.item import itemunit_shop
+from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import bud_acctunit_str, acct_name_str
 from src.a08_bud_atom_logic.atom import atom_insert
@@ -16,7 +16,7 @@ def test_BudDelta_get_dimens_cruds_buddelta_ReturnsObjWithCorrectDimensAndCRUDsB
     bob_credit_belief = 33
     bob_debtit_belief = 44
     after_sue_bud.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
-    after_sue_bud.set_l1_item(itemunit_shop("casa"))
+    after_sue_bud.set_l1_idea(ideaunit_shop("casa"))
     old_buddelta = buddelta_shop()
     old_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 

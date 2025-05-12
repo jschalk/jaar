@@ -579,7 +579,7 @@ def test_WayMap_all_otx_parent_ways_exist_ReturnsObj_WayUnit():
     assert x_waymap.all_otx_parent_ways_exist()
 
 
-def test_WayMap_is_valid_ReturnsObj_Scenario0_item_tag_str():
+def test_WayMap_is_valid_ReturnsObj_Scenario0_idea_tag_str():
     # ESTABLISH
     x_otx_bridge = "/"
     x_inx_bridge = ":"

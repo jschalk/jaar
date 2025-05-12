@@ -1,0 +1,21 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "owner_name_ERASE": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "budunit",
+        "fiscunit"
+    ],
+    "creed_number": "br00059"
+}

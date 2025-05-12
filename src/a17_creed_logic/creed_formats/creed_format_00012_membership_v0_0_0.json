@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "acct_name": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "group_label": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "budunit",
+        "bud_acctunit",
+        "bud_acct_membership",
+        "fiscunit"
+    ],
+    "creed_number": "br00012"
+}

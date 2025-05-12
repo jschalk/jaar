@@ -501,7 +501,7 @@ def hubunit_shop(
 
 
 def get_keep_path(x_hubunit: HubUnit, x_way: TagUnit) -> str:
-    keep_root = "itemroot"
+    keep_root = "idearoot"
     x_way = rebuild_way(x_way, x_hubunit.fisc_tag, keep_root)
     x_list = get_all_way_tags(x_way, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])

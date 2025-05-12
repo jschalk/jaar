@@ -168,7 +168,7 @@ def test_get_keep_path_ReturnsObj():
     dallas_str = "dallas"
     elpaso_str = "el paso"
     kern_str = "kern"
-    itemroot = "itemroot"
+    idearoot = "idearoot"
     texas_way = create_way_from_tags([peru_str, texas_str])
     dallas_way = create_way_from_tags([peru_str, texas_str, dallas_str])
     elpaso_way = create_way_from_tags([peru_str, texas_str, elpaso_str])
@@ -181,10 +181,10 @@ def test_get_keep_path_ReturnsObj():
     kern_path = get_keep_path(sue_hubunit, kern_way)
 
     # THEN
-    itemroot_dir = create_path(sue_hubunit._keeps_dir, peru_str)
+    idearoot_dir = create_path(sue_hubunit._keeps_dir, peru_str)
     print(f"{kern_way=}")
-    print(f"{itemroot_dir=}")
-    assert texas_path == create_path(itemroot_dir, texas_str)
+    print(f"{idearoot_dir=}")
+    assert texas_path == create_path(idearoot_dir, texas_str)
     assert dallas_path == create_path(texas_path, dallas_str)
     assert elpaso_path == create_path(texas_path, elpaso_str)
     assert kern_path == create_path(elpaso_path, kern_str)

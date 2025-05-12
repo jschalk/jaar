@@ -106,7 +106,7 @@ class TeamHeir:
             if not set(all_teamunit_accts).issubset(set(all_parent_teamheir_accts)):
                 # else raise error
                 raise InvalidTeamHeirPopulateException(
-                    f"parent_teamheir does not contain all accts of the item's teamunit\n{set(all_parent_teamheir_accts)=}\n\n{set(all_teamunit_accts)=}"
+                    f"parent_teamheir does not contain all accts of the idea's teamunit\n{set(all_parent_teamheir_accts)=}\n\n{set(all_teamunit_accts)=}"
                 )
 
             # set dict_x = to teamunit groupunits

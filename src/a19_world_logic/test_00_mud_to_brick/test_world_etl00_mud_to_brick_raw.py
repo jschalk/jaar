@@ -7,8 +7,8 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
-from src.a17_idea_logic._utils.str_a17 import brick_raw_str
-from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.a17_creed_logic._utils.str_a17 import brick_raw_str
+from src.a17_creed_logic.creed_db_tool import upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
     get_module_temp_dir as worlds_dir,
@@ -35,7 +35,7 @@ def test_WorldUnit_mud_dfs_to_brick_raw_tables_CreatesBrickFiles(
     ex_filename = "fizzbuzz.xlsx"
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
-    idea_columns = [
+    creed_columns = [
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
@@ -46,7 +46,7 @@ def test_WorldUnit_mud_dfs_to_brick_raw_tables_CreatesBrickFiles(
     row1 = [event1, sue_str, minute_360, a23_str, hour6am]
     row2 = [event1, sue_str, minute_420, a23_str, hour7am]
     row3 = [event2, sue_str, minute_420, a23_str, hour7am]
-    incomplete_idea_columns = [
+    incomplete_creed_columns = [
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
@@ -55,9 +55,9 @@ def test_WorldUnit_mud_dfs_to_brick_raw_tables_CreatesBrickFiles(
     incom_row1 = [event1, sue_str, minute_360, a23_str]
     incom_row2 = [event1, sue_str, minute_420, a23_str]
 
-    df1 = DataFrame([row1, row2], columns=idea_columns)
-    df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)
-    df3 = DataFrame([row2, row1, row3], columns=idea_columns)
+    df1 = DataFrame([row1, row2], columns=creed_columns)
+    df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_creed_columns)
+    df3 = DataFrame([row2, row1, row3], columns=creed_columns)
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"

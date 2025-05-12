@@ -83,7 +83,7 @@ VALUES
         assert e7_put_csv == expected_e7_put_csv
 
 
-# def test_WorldUnit_idea_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
+# def test_WorldUnit_creed_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
 #     env_dir_setup_cleanup,
 # ):
 
@@ -104,7 +104,7 @@ VALUES
 #         create_bud_prime_tables(cursor)
 #         raw_tablename = f"{bud_acctunit_str()}_del_raw"
 #         insert_raw_sqlstr = f"""
-# INSERT INTO {raw_tablename} ({idea_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+# INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 # VALUES
 #   ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
 # , ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
@@ -119,7 +119,7 @@ VALUES
 #         assert get_row_count(cursor, agg_tablename) == 0
 
 #         # WHEN
-#         fizz_world.idea_raw_to_bud_prime_tables(cursor)
+#         fizz_world.creed_raw_to_bud_prime_tables(cursor)
 
 #         # THEN
 #         assert get_row_count(cursor, agg_tablename) == 2

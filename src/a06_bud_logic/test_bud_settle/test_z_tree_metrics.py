@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import create_way_from_tags
 from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_item_logic.item import itemunit_shop
+from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.example_buds import budunit_v001
 
@@ -20,7 +20,7 @@ def test_BudUnit_get_tree_metrics_exists():
     assert zia_bud_tree_metrics.awardlinks_metrics is not None
 
 
-def test_BudUnit_get_tree_metrics_get_item_uid_max_correctlyGetsMaxItemUID():
+def test_BudUnit_get_tree_metrics_get_idea_uid_max_correctlyGetsMaxIdeaUID():
     # ESTABLISH
     yao_bud = budunit_v001()
 
@@ -29,10 +29,10 @@ def test_BudUnit_get_tree_metrics_get_item_uid_max_correctlyGetsMaxItemUID():
 
     # THEN
     assert tree_metrics_x.uid_max == 279
-    assert yao_bud.get_item_uid_max() == 279
+    assert yao_bud.get_idea_uid_max() == 279
 
 
-def test_BudUnit_get_tree_metrics_CorrectlySetsBoolean_all_item_uids_are_unique():
+def test_BudUnit_get_tree_metrics_CorrectlySetsBoolean_all_idea_uids_are_unique():
     # ESTABLISH
     yao_bud = budunit_v001()
 
@@ -40,59 +40,59 @@ def test_BudUnit_get_tree_metrics_CorrectlySetsBoolean_all_item_uids_are_unique(
     tree_metrics_x = yao_bud.get_tree_metrics()
 
     # THEN
-    assert tree_metrics_x.all_item_uids_are_unique is False
+    assert tree_metrics_x.all_idea_uids_are_unique is False
     assert len(tree_metrics_x.uid_dict) == 219
 
 
-def test_BudUnit_get_tree_set_all_item_uids_unique():
+def test_BudUnit_get_tree_set_all_idea_uids_unique():
     # ESTABLISH
     yao_bud = budunit_v001()
     tree_metrics_before = yao_bud.get_tree_metrics()
     assert len(tree_metrics_before.uid_dict) == 219
 
     # WHEN
-    yao_bud.set_all_item_uids_unique()
+    yao_bud.set_all_idea_uids_unique()
 
     # THEN
     tree_metrics_after = yao_bud.get_tree_metrics()
     # for uid, uid_count in tree_metrics_after.uid_dict.items():
-    #     # print(f"{uid=} {uid_count=} {len(yao_bud.get_item_dict())=}")
+    #     # print(f"{uid=} {uid_count=} {len(yao_bud.get_idea_dict())=}")
     #     print(f"{uid=} {uid_count=} ")
     assert len(tree_metrics_after.uid_dict) == 252
-    assert tree_metrics_after.all_item_uids_are_unique is True
+    assert tree_metrics_after.all_idea_uids_are_unique is True
 
 
-def test_BudUnit_set_all_item_uids_unique_SetsUIDsCorrectly():
+def test_BudUnit_set_all_idea_uids_unique_SetsUIDsCorrectly():
     # ESTABLISH
     zia_str = "Zia"
     zia_bud = budunit_shop(owner_name=zia_str)
     swim_str = "swim"
     sports_str = "sports"
-    zia_bud.set_l1_item(itemunit_shop(swim_str, _uid=None))
-    zia_bud.set_l1_item(itemunit_shop(sports_str, _uid=2))
+    zia_bud.set_l1_idea(ideaunit_shop(swim_str, _uid=None))
+    zia_bud.set_l1_idea(ideaunit_shop(sports_str, _uid=2))
     swim_way = zia_bud.make_l1_way(swim_str)
-    assert zia_bud.get_item_obj(swim_way)._uid is None
+    assert zia_bud.get_idea_obj(swim_way)._uid is None
 
     # WHEN
-    zia_bud.set_all_item_uids_unique()
+    zia_bud.set_all_idea_uids_unique()
 
     # THEN
-    assert zia_bud.get_item_obj(swim_way)._uid is not None
+    assert zia_bud.get_idea_obj(swim_way)._uid is not None
 
 
-def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ItemWayUnit():
+def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_IdeaWayUnit():
     # ESTABLISH
     nia_str = "Nia"
     nia_bud = budunit_shop(nia_str, tally=10)
     weekdays = "weekdays"
-    nia_bud.set_l1_item(itemunit_shop(weekdays, mass=40))
+    nia_bud.set_l1_idea(ideaunit_shop(weekdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN / THEN
-    assert tree_metrics_before.last_evaluated_pledge_item_way is None
+    assert tree_metrics_before.last_evaluated_pledge_idea_way is None
 
 
-def test_BudUnit_get_tree_metrics_Returns_pledge_ItemWayUnit():
+def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaWayUnit():
     # ESTABLISH
     yao_bud = budunit_v001()
     yao_tree_metrics = yao_bud.get_tree_metrics()
@@ -107,7 +107,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ItemWayUnit():
             "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_pledge_item_way == traain_way
+    assert yao_tree_metrics.last_evaluated_pledge_idea_way == traain_way
 
 
 def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactBases():
@@ -149,7 +149,7 @@ def test_BudUnit_get_missing_fact_bases_ReturnsAllBasesNotCoveredByFacts():
     assert len(missing_bases) == 11
 
 
-def test_BudUnit_3AdvocatesNoitemunit_shop():
+def test_BudUnit_3AdvocatesNoideaunit_shop():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -163,9 +163,9 @@ def test_BudUnit_3AdvocatesNoitemunit_shop():
     zia_budunit.set_acctunit(yao_acctunit)
     zia_budunit.set_acctunit(sue_acctunit)
     zia_budunit.set_acctunit(zia_acctunit)
-    zia_budunit.itemroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
-    zia_budunit.itemroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
-    zia_budunit.itemroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
+    zia_budunit.idearoot.set_awardlink(awardlink_shop(yao_str, give_force=10))
+    zia_budunit.idearoot.set_awardlink(awardlink_shop(sue_str, give_force=10))
+    zia_budunit.idearoot.set_awardlink(awardlink_shop(zia_str, give_force=10))
 
     # WHEN
     assert zia_budunit.get_awardlinks_metrics() is not None

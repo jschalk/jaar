@@ -3,13 +3,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
 )
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
@@ -39,7 +39,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     parent_way_str,
     penny_str,
     respect_bit_str,
-    item_way_str,
+    idea_way_str,
     stop_want_str,
     team_label_str,
     type_NameUnit_str,
@@ -100,7 +100,7 @@ def test_get_bud_dimens_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_bud_dimens() == set(get_atom_config_dict().keys())
     assert bud_acctunit_str() in get_bud_dimens()
-    assert is_bud_dimen("itemroot") is False
+    assert is_bud_dimen("idearoot") is False
 
 
 def test_get_all_bud_dimen_keys_ReturnsObj():
@@ -178,54 +178,54 @@ def test_get_atom_config_dict_EveryCrudOperationHasBudDeltaOrderGroup():
     # # Simple script for editing atom_config.json
     # set_mog(atom_insert(), bud_acctunit_str(), 0)
     # set_mog(atom_insert(), bud_acct_membership_str(), 1)
-    # set_mog(atom_insert(), bud_itemunit_str(), 2)
-    # set_mog(atom_insert(), bud_item_awardlink_str(), 3)
-    # set_mog(atom_insert(), bud_item_teamlink_str(), 4)
-    # set_mog(atom_insert(), bud_item_healerlink_str(), 5)
-    # set_mog(atom_insert(), bud_item_factunit_str(), 6)
-    # set_mog(atom_insert(), bud_item_reasonunit_str(), 7)
-    # set_mog(atom_insert(), bud_item_reason_premiseunit_str(), 8)
+    # set_mog(atom_insert(), bud_ideaunit_str(), 2)
+    # set_mog(atom_insert(), bud_idea_awardlink_str(), 3)
+    # set_mog(atom_insert(), bud_idea_teamlink_str(), 4)
+    # set_mog(atom_insert(), bud_idea_healerlink_str(), 5)
+    # set_mog(atom_insert(), bud_idea_factunit_str(), 6)
+    # set_mog(atom_insert(), bud_idea_reasonunit_str(), 7)
+    # set_mog(atom_insert(), bud_idea_reason_premiseunit_str(), 8)
     # set_mog(atom_update(), bud_acctunit_str(), 9)
     # set_mog(atom_update(), bud_acct_membership_str(), 10)
-    # set_mog(atom_update(), bud_itemunit_str(), 11)
-    # set_mog(atom_update(), bud_item_awardlink_str(), 12)
-    # set_mog(atom_update(), bud_item_factunit_str(), 13)
-    # set_mog(atom_update(), bud_item_reason_premiseunit_str(), 14)
-    # set_mog(atom_update(), bud_item_reasonunit_str(), 15)
-    # set_mog(atom_delete(), bud_item_reason_premiseunit_str(), 16)
-    # set_mog(atom_delete(), bud_item_reasonunit_str(), 17)
-    # set_mog(atom_delete(), bud_item_factunit_str(), 18)
-    # set_mog(atom_delete(), bud_item_teamlink_str(), 19)
-    # set_mog(atom_delete(), bud_item_healerlink_str(), 20)
-    # set_mog(atom_delete(), bud_item_awardlink_str(), 21)
-    # set_mog(atom_delete(), bud_itemunit_str(), 22)
+    # set_mog(atom_update(), bud_ideaunit_str(), 11)
+    # set_mog(atom_update(), bud_idea_awardlink_str(), 12)
+    # set_mog(atom_update(), bud_idea_factunit_str(), 13)
+    # set_mog(atom_update(), bud_idea_reason_premiseunit_str(), 14)
+    # set_mog(atom_update(), bud_idea_reasonunit_str(), 15)
+    # set_mog(atom_delete(), bud_idea_reason_premiseunit_str(), 16)
+    # set_mog(atom_delete(), bud_idea_reasonunit_str(), 17)
+    # set_mog(atom_delete(), bud_idea_factunit_str(), 18)
+    # set_mog(atom_delete(), bud_idea_teamlink_str(), 19)
+    # set_mog(atom_delete(), bud_idea_healerlink_str(), 20)
+    # set_mog(atom_delete(), bud_idea_awardlink_str(), 21)
+    # set_mog(atom_delete(), bud_ideaunit_str(), 22)
     # set_mog(atom_delete(), bud_acct_membership_str(), 23)
     # set_mog(atom_delete(), bud_acctunit_str(), 24)
     # set_mog(atom_update(), budunit_str(), 25)
 
     assert 0 == q_order(atom_insert(), bud_acctunit_str())
     assert 1 == q_order(atom_insert(), bud_acct_membership_str())
-    assert 2 == q_order(atom_insert(), bud_itemunit_str())
-    assert 3 == q_order(atom_insert(), bud_item_awardlink_str())
-    assert 4 == q_order(atom_insert(), bud_item_teamlink_str())
-    assert 5 == q_order(atom_insert(), bud_item_healerlink_str())
-    assert 6 == q_order(atom_insert(), bud_item_factunit_str())
-    assert 7 == q_order(atom_insert(), bud_item_reasonunit_str())
-    assert 8 == q_order(atom_insert(), bud_item_reason_premiseunit_str())
+    assert 2 == q_order(atom_insert(), bud_ideaunit_str())
+    assert 3 == q_order(atom_insert(), bud_idea_awardlink_str())
+    assert 4 == q_order(atom_insert(), bud_idea_teamlink_str())
+    assert 5 == q_order(atom_insert(), bud_idea_healerlink_str())
+    assert 6 == q_order(atom_insert(), bud_idea_factunit_str())
+    assert 7 == q_order(atom_insert(), bud_idea_reasonunit_str())
+    assert 8 == q_order(atom_insert(), bud_idea_reason_premiseunit_str())
     assert 9 == q_order(atom_update(), bud_acctunit_str())
     assert 10 == q_order(atom_update(), bud_acct_membership_str())
-    assert 11 == q_order(atom_update(), bud_itemunit_str())
-    assert 12 == q_order(atom_update(), bud_item_awardlink_str())
-    assert 13 == q_order(atom_update(), bud_item_factunit_str())
-    assert 14 == q_order(atom_update(), bud_item_reason_premiseunit_str())
-    assert 15 == q_order(atom_update(), bud_item_reasonunit_str())
-    assert 16 == q_order(atom_delete(), bud_item_reason_premiseunit_str())
-    assert 17 == q_order(atom_delete(), bud_item_reasonunit_str())
-    assert 18 == q_order(atom_delete(), bud_item_factunit_str())
-    assert 19 == q_order(atom_delete(), bud_item_teamlink_str())
-    assert 20 == q_order(atom_delete(), bud_item_healerlink_str())
-    assert 21 == q_order(atom_delete(), bud_item_awardlink_str())
-    assert 22 == q_order(atom_delete(), bud_itemunit_str())
+    assert 11 == q_order(atom_update(), bud_ideaunit_str())
+    assert 12 == q_order(atom_update(), bud_idea_awardlink_str())
+    assert 13 == q_order(atom_update(), bud_idea_factunit_str())
+    assert 14 == q_order(atom_update(), bud_idea_reason_premiseunit_str())
+    assert 15 == q_order(atom_update(), bud_idea_reasonunit_str())
+    assert 16 == q_order(atom_delete(), bud_idea_reason_premiseunit_str())
+    assert 17 == q_order(atom_delete(), bud_idea_reasonunit_str())
+    assert 18 == q_order(atom_delete(), bud_idea_factunit_str())
+    assert 19 == q_order(atom_delete(), bud_idea_teamlink_str())
+    assert 20 == q_order(atom_delete(), bud_idea_healerlink_str())
+    assert 21 == q_order(atom_delete(), bud_idea_awardlink_str())
+    assert 22 == q_order(atom_delete(), bud_ideaunit_str())
     assert 23 == q_order(atom_delete(), bud_acct_membership_str())
     assert 24 == q_order(atom_delete(), bud_acctunit_str())
     assert 25 == q_order(atom_update(), budunit_str())
@@ -246,24 +246,24 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(budunit_str()) == 0
     assert _get_atom_config_jkeys_len(bud_acctunit_str()) == 1
     assert _get_atom_config_jkeys_len(bud_acct_membership_str()) == 2
-    assert _get_atom_config_jkeys_len(bud_itemunit_str()) == 1
-    assert _get_atom_config_jkeys_len(bud_item_awardlink_str()) == 2
-    assert _get_atom_config_jkeys_len(bud_item_reasonunit_str()) == 2
-    assert _get_atom_config_jkeys_len(bud_item_reason_premiseunit_str()) == 3
-    assert _get_atom_config_jkeys_len(bud_item_teamlink_str()) == 2
-    assert _get_atom_config_jkeys_len(bud_item_healerlink_str()) == 2
-    assert _get_atom_config_jkeys_len(bud_item_factunit_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_ideaunit_str()) == 1
+    assert _get_atom_config_jkeys_len(bud_idea_awardlink_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_idea_reasonunit_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_idea_reason_premiseunit_str()) == 3
+    assert _get_atom_config_jkeys_len(bud_idea_teamlink_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_idea_healerlink_str()) == 2
+    assert _get_atom_config_jkeys_len(bud_idea_factunit_str()) == 2
 
     assert _get_atom_config_jvalues_len(budunit_str()) == 8
     assert _get_atom_config_jvalues_len(bud_acctunit_str()) == 2
     assert _get_atom_config_jvalues_len(bud_acct_membership_str()) == 2
-    assert _get_atom_config_jvalues_len(bud_itemunit_str()) == 11
-    assert _get_atom_config_jvalues_len(bud_item_awardlink_str()) == 2
-    assert _get_atom_config_jvalues_len(bud_item_reasonunit_str()) == 1
-    assert _get_atom_config_jvalues_len(bud_item_reason_premiseunit_str()) == 3
-    assert _get_atom_config_jvalues_len(bud_item_teamlink_str()) == 0
-    assert _get_atom_config_jvalues_len(bud_item_healerlink_str()) == 0
-    assert _get_atom_config_jvalues_len(bud_item_factunit_str()) == 3
+    assert _get_atom_config_jvalues_len(bud_ideaunit_str()) == 11
+    assert _get_atom_config_jvalues_len(bud_idea_awardlink_str()) == 2
+    assert _get_atom_config_jvalues_len(bud_idea_reasonunit_str()) == 1
+    assert _get_atom_config_jvalues_len(bud_idea_reason_premiseunit_str()) == 3
+    assert _get_atom_config_jvalues_len(bud_idea_teamlink_str()) == 0
+    assert _get_atom_config_jvalues_len(bud_idea_healerlink_str()) == 0
+    assert _get_atom_config_jvalues_len(bud_idea_factunit_str()) == 3
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
@@ -361,8 +361,8 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if item_way_str() in new_jkey_keys:
-            new_jkey_keys.remove(item_way_str())
+        if idea_way_str() in new_jkey_keys:
+            new_jkey_keys.remove(idea_way_str())
         if base_str() in new_jkey_keys:
             new_jkey_keys.remove(base_str())
         if acct_name_str() in new_jkey_keys:
@@ -395,15 +395,15 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_acctunit():
     assert x_sorted_jkey_keys == [acct_name_str()]
 
 
-def test_get_sorted_jkey_keys_ReturnsObj_bud_item_reason_premiseunit():
+def test_get_sorted_jkey_keys_ReturnsObj_bud_idea_reason_premiseunit():
     # ESTABLISH
-    x_dimen = bud_item_reason_premiseunit_str()
+    x_dimen = bud_idea_reason_premiseunit_str()
 
     # WHEN
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [item_way_str(), base_str(), "need"]
+    assert x_sorted_jkey_keys == [idea_way_str(), base_str(), "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -426,18 +426,18 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     cat_budunit = nx.get(budunit_str())
     cat_acctunit = nx.get(bud_acctunit_str())
     cat_membership = nx.get(bud_acct_membership_str())
-    cat_item = nx.get(bud_itemunit_str())
-    cat_awardlink = nx.get(bud_item_awardlink_str())
-    cat_reason = nx.get(bud_item_reasonunit_str())
-    cat_premise = nx.get(bud_item_reason_premiseunit_str())
-    cat_teamlink = nx.get(bud_item_teamlink_str())
-    cat_healerlink = nx.get(bud_item_healerlink_str())
-    cat_fact = nx.get(bud_item_factunit_str())
+    cat_idea = nx.get(bud_ideaunit_str())
+    cat_awardlink = nx.get(bud_idea_awardlink_str())
+    cat_reason = nx.get(bud_idea_reasonunit_str())
+    cat_premise = nx.get(bud_idea_reason_premiseunit_str())
+    cat_teamlink = nx.get(bud_idea_teamlink_str())
+    cat_healerlink = nx.get(bud_idea_healerlink_str())
+    cat_fact = nx.get(bud_idea_factunit_str())
 
     assert cat_budunit is not None
     assert cat_acctunit is not None
     assert cat_membership is not None
-    assert cat_item is not None
+    assert cat_idea is not None
     assert cat_awardlink is not None
     assert cat_reason is not None
     assert cat_premise is not None
@@ -448,7 +448,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     normal_specs_budunit = cat_budunit.get(normal_specs_str())
     normal_specs_acctunit = cat_acctunit.get(normal_specs_str())
     normal_specs_membership = cat_membership.get(normal_specs_str())
-    normal_specs_item = cat_item.get(normal_specs_str())
+    normal_specs_idea = cat_idea.get(normal_specs_str())
     normal_specs_awardlink = cat_awardlink.get(normal_specs_str())
     normal_specs_reason = cat_reason.get(normal_specs_str())
     normal_specs_premise = cat_premise.get(normal_specs_str())
@@ -462,7 +462,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert normal_specs_budunit is not None
     assert normal_specs_acctunit is not None
     assert normal_specs_membership is not None
-    assert normal_specs_item is not None
+    assert normal_specs_idea is not None
     assert normal_specs_awardlink is not None
     assert normal_specs_reason is not None
     assert normal_specs_premise is not None
@@ -473,7 +473,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     table_name_budunit = normal_specs_budunit.get(normal_table_name_str())
     table_name_acctunit = normal_specs_acctunit.get(normal_table_name_str())
     table_name_membership = normal_specs_membership.get(normal_table_name_str())
-    table_name_item = normal_specs_item.get(normal_table_name_str())
+    table_name_idea = normal_specs_idea.get(normal_table_name_str())
     table_name_awardlink = normal_specs_awardlink.get(normal_table_name_str())
     table_name_reason = normal_specs_reason.get(normal_table_name_str())
     table_name_premise = normal_specs_premise.get(normal_table_name_str())
@@ -484,7 +484,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert table_name_budunit == "bud"
     assert table_name_acctunit == "acctunit"
     assert table_name_membership == "membership"
-    assert table_name_item == "item"
+    assert table_name_idea == "idea"
     assert table_name_awardlink == "awardlink"
     assert table_name_reason == "reason"
     assert table_name_premise == "premise"
@@ -524,16 +524,16 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert debtit_belief_dict.get(sqlite_datatype_str()) == "REAL"
     assert debtit_belief_dict.get("nullable") is True
 
-    assert len(cat_item) == 2
-    item_columns = cat_item.get(columns_str)
-    assert len(item_columns) == 13
-    assert item_columns.get("uid") is not None
-    assert item_columns.get(item_way_str()) is not None
-    assert item_columns.get(begin_str()) is not None
-    assert item_columns.get(close_str()) is not None
+    assert len(cat_idea) == 2
+    idea_columns = cat_idea.get(columns_str)
+    assert len(idea_columns) == 13
+    assert idea_columns.get("uid") is not None
+    assert idea_columns.get(idea_way_str()) is not None
+    assert idea_columns.get(begin_str()) is not None
+    assert idea_columns.get(close_str()) is not None
 
-    gogo_want_dict = item_columns.get(gogo_want_str())
-    stop_want_dict = item_columns.get(stop_want_str())
+    gogo_want_dict = idea_columns.get(gogo_want_str())
+    stop_want_dict = idea_columns.get(stop_want_str())
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
     assert gogo_want_dict.get(sqlite_datatype_str()) == "REAL"
@@ -549,11 +549,11 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     # THEN
     assert x_atom_args_dimen_mapping
     assert x_atom_args_dimen_mapping.get(stop_want_str())
-    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_itemunit_str()}
-    assert x_atom_args_dimen_mapping.get(item_way_str())
-    way_dimens = x_atom_args_dimen_mapping.get(item_way_str())
-    assert bud_item_factunit_str() in way_dimens
-    assert bud_item_teamlink_str() in way_dimens
+    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {bud_ideaunit_str()}
+    assert x_atom_args_dimen_mapping.get(idea_way_str())
+    way_dimens = x_atom_args_dimen_mapping.get(idea_way_str())
+    assert bud_idea_factunit_str() in way_dimens
+    assert bud_idea_teamlink_str() in way_dimens
     assert len(way_dimens) == 7
     assert len(x_atom_args_dimen_mapping) == 41
 
@@ -574,7 +574,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_NameUnit_str()
-    assert get_class_type(bud_itemunit_str(), gogo_want_str()) == "float"
+    assert get_class_type(bud_ideaunit_str(), gogo_want_str()) == "float"
 
 
 def test_get_allowed_class_types_ReturnsObj():
@@ -645,7 +645,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_label_str()) == type_LabelUnit_str()
     assert x_class_types.get(base_str()) == type_WayUnit_str()
-    assert x_class_types.get("base_item_active_requisite") == "bool"
+    assert x_class_types.get("base_idea_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
@@ -677,7 +677,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("fneed") == type_WayUnit_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(item_way_str()) == type_WayUnit_str()
+    assert x_class_types.get(idea_way_str()) == type_WayUnit_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"

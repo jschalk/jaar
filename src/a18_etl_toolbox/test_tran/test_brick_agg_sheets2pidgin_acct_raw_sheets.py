@@ -8,8 +8,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_name_str,
     unknown_word_str,
 )
-from src.a17_idea_logic._utils.str_a17 import brick_agg_str
-from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
+from src.a17_creed_logic._utils.str_a17 import brick_agg_str
+from src.a17_creed_logic.creed_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import etl_brick_agg_dfs_to_pidgin_name_raw
@@ -21,7 +21,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
+def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario0_SingleCreed(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -74,7 +74,7 @@ def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario0_SingleIdea(
     assert get_sheet_names(pidgin_path) == [name_raw_str]
 
 
-def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleIdeasFiles(
+def test_etl_brick_agg_dfs_to_pidgin_name_raw_CreatesFile_Scenario1_MultipleCreedsFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -1,0 +1,35 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "healer_name": {
+            "otx_key": true
+        },
+        "idea_tag": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "problem_bool": {
+            "otx_key": false
+        },
+        "idea_way": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "fiscunit",
+        "budunit",
+        "bud_ideaunit",
+        "bud_idea_healerlink"
+    ],
+    "creed_number": "br00036"
+}

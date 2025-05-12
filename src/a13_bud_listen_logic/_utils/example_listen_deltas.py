@@ -1,10 +1,10 @@
 from src.a01_way_logic.way import FiscTag
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
-    bud_itemunit_str,
+    bud_ideaunit_str,
     acct_name_str,
     parent_way_str,
-    item_tag_str,
+    idea_tag_str,
 )
 from src.a08_bud_atom_logic.atom import (
     BudAtom,
@@ -16,15 +16,15 @@ from src.a08_bud_atom_logic.atom import (
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 
 
-def get_atom_example_itemunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
+def get_atom_example_ideaunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
     if not fisc_tag:
         fisc_tag = "accord23"
     sports_str = "sports"
-    x_dimen = bud_itemunit_str()
-    insert_itemunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_itemunit_budatom.set_jkey(item_tag_str(), sports_str)
-    insert_itemunit_budatom.set_jkey(parent_way_str(), fisc_tag)
-    return insert_itemunit_budatom
+    x_dimen = bud_ideaunit_str()
+    insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_ideaunit_budatom.set_jkey(idea_tag_str(), sports_str)
+    insert_ideaunit_budatom.set_jkey(parent_way_str(), fisc_tag)
+    return insert_ideaunit_budatom
 
 
 def get_buddelta_sue_example() -> BudDelta:

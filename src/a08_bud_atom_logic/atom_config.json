@@ -72,7 +72,7 @@
             "atom_order": 9
         }
     },
-    "bud_item_awardlink": {
+    "bud_idea_awardlink": {
         "DELETE": {
             "atom_order": 21
         },
@@ -86,7 +86,7 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -112,7 +112,7 @@
             "atom_order": 12
         }
     },
-    "bud_item_factunit": {
+    "bud_idea_factunit": {
         "DELETE": {
             "atom_order": 18
         },
@@ -126,7 +126,7 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -157,7 +157,7 @@
             "atom_order": 13
         }
     },
-    "bud_item_healerlink": {
+    "bud_idea_healerlink": {
         "DELETE": {
             "atom_order": 20
         },
@@ -171,7 +171,7 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -183,7 +183,7 @@
             "normal_table_name": "healerlink"
         }
     },
-    "bud_item_reason_premiseunit": {
+    "bud_idea_reason_premiseunit": {
         "DELETE": {
             "atom_order": 16
         },
@@ -197,7 +197,7 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -234,7 +234,7 @@
             "atom_order": 14
         }
     },
-    "bud_item_reasonunit": {
+    "bud_idea_reasonunit": {
         "DELETE": {
             "atom_order": 17
         },
@@ -248,7 +248,7 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -256,7 +256,7 @@
             }
         },
         "jvalues": {
-            "base_item_active_requisite": {
+            "base_idea_active_requisite": {
                 "class_type": "bool",
                 "column_order": 2,
                 "sqlite_datatype": "INTEGER"
@@ -269,7 +269,7 @@
             "atom_order": 15
         }
     },
-    "bud_item_teamlink": {
+    "bud_idea_teamlink": {
         "DELETE": {
             "atom_order": 19
         },
@@ -277,7 +277,7 @@
             "atom_order": 4
         },
         "jkeys": {
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -295,7 +295,7 @@
             "normal_table_name": "teamlink"
         }
     },
-    "bud_itemunit": {
+    "bud_ideaunit": {
         "DELETE": {
             "atom_order": 22
         },
@@ -303,7 +303,7 @@
             "atom_order": 2
         },
         "jkeys": {
-            "item_way": {
+            "idea_way": {
                 "class_type": "WayUnit",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -368,7 +368,7 @@
             }
         },
         "normal_specs": {
-            "normal_table_name": "item"
+            "normal_table_name": "idea"
         },
         "UPDATE": {
             "atom_order": 11

@@ -3,10 +3,10 @@ from src.a01_way_logic.way import WayUnit, WorldID
 from src.a02_finance_logic.deal import OwnerName, FiscTag
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
-from src.a04_reason_logic.reason_item import ReasonHeir, PremiseUnit, FactHeir
+from src.a04_reason_logic.reason_idea import ReasonHeir, PremiseUnit, FactHeir
 from src.a04_reason_logic.reason_team import TeamHeir
-from src.a05_item_logic.healer import HealerLink
-from src.a05_item_logic.item import ItemUnit
+from src.a05_idea_logic.healer import HealerLink
+from src.a05_idea_logic.idea import IdeaUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a12_hub_tools.hub_tool import open_job_file
 from src.a20_lobby_db_toolbox.lobby_path import create_fisc_mstr_dir_path, LobbyID
@@ -20,7 +20,7 @@ from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
     create_budteam_metrics_insert_sqlstr,
-    create_buditem_metrics_insert_sqlstr,
+    create_budidea_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
@@ -89,7 +89,7 @@ def insert_job_budawar(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["item_way"] = x_objkeysholder.way
+    x_dict["idea_way"] = x_objkeysholder.way
     insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -103,7 +103,7 @@ def insert_job_budfact(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["item_way"] = x_objkeysholder.way
+    x_dict["idea_way"] = x_objkeysholder.way
     insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -117,7 +117,7 @@ def insert_job_budheal(
         "world_id": x_objkeysholder.world_id,
         "fisc_tag": x_objkeysholder.fisc_tag,
         "owner_name": x_objkeysholder.owner_name,
-        "item_way": x_objkeysholder.way,
+        "idea_way": x_objkeysholder.way,
     }
     for healer_name in sorted(x_healer._healer_names):
         x_dict["healer_name"] = healer_name
@@ -134,7 +134,7 @@ def insert_job_budprem(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["item_way"] = x_objkeysholder.way
+    x_dict["idea_way"] = x_objkeysholder.way
     x_dict["base"] = x_objkeysholder.base
     insert_sqlstr = create_budprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -149,7 +149,7 @@ def insert_job_budreas(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["item_way"] = x_objkeysholder.way
+    x_dict["idea_way"] = x_objkeysholder.way
     insert_sqlstr = create_budreas_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -163,21 +163,21 @@ def insert_job_budteam(
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    x_dict["item_way"] = x_objkeysholder.way
+    x_dict["idea_way"] = x_objkeysholder.way
     for team_label in sorted(x_teamheir._teamlinks):
         x_dict["team_label"] = team_label
         insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_buditem(
-    cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_item: ItemUnit
+def insert_job_budidea(
+    cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_idea: IdeaUnit
 ):
-    x_dict = copy_deepcopy(x_item.__dict__)
-    x_dict["item_way"] = x_item.get_item_way()
+    x_dict = copy_deepcopy(x_idea.__dict__)
+    x_dict["idea_way"] = x_idea.get_idea_way()
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_buditem_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_budidea_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
@@ -194,16 +194,16 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
     job_bud.settle_bud()
     x_objkeysholder = ObjKeysHolder(world_id, job_bud.fisc_tag, job_bud.owner_name)
     insert_job_budunit(cursor, x_objkeysholder, job_bud)
-    for x_item in job_bud.get_item_dict().values():
-        x_objkeysholder.way = x_item.get_item_way()
-        healerlink = x_item.healerlink
-        teamheir = x_item._teamheir
-        insert_job_buditem(cursor, x_objkeysholder, x_item)
+    for x_idea in job_bud.get_idea_dict().values():
+        x_objkeysholder.way = x_idea.get_idea_way()
+        healerlink = x_idea.healerlink
+        teamheir = x_idea._teamheir
+        insert_job_budidea(cursor, x_objkeysholder, x_idea)
         insert_job_budheal(cursor, x_objkeysholder, healerlink)
         insert_job_budteam(cursor, x_objkeysholder, teamheir)
-        for x_awardheir in x_item._awardheirs.values():
+        for x_awardheir in x_idea._awardheirs.values():
             insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
-        for base, reasonheir in x_item._reasonheirs.items():
+        for base, reasonheir in x_idea._reasonheirs.items():
             insert_job_budreas(cursor, x_objkeysholder, reasonheir)
             x_objkeysholder.base = base
             for prem in reasonheir.premises.values():
@@ -217,8 +217,8 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
     for x_groupunit in job_bud._groupunits.values():
         insert_job_budgrou(cursor, x_objkeysholder, x_groupunit)
 
-    for x_factheir in job_bud.itemroot._factheirs.values():
-        x_objkeysholder.fact_way = job_bud.itemroot.get_item_way()
+    for x_factheir in job_bud.idearoot._factheirs.values():
+        x_objkeysholder.fact_way = job_bud.idearoot.get_idea_way()
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
 
 

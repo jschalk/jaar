@@ -15,11 +15,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     fund_coin_str,
     healer_name_str,
     group_label_str,
-    item_tag_str,
+    idea_tag_str,
     need_str,
     penny_str,
     respect_bit_str,
-    item_way_str,
+    idea_way_str,
     team_label_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
@@ -70,7 +70,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_label") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("base") == type_WayUnit_str()
-    assert pidgin_args_class_types.get("base_item_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("base_idea_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -96,7 +96,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("group_label") == type_LabelUnit_str()
     assert pidgin_args_class_types.get("healer_name") == type_NameUnit_str()
     assert pidgin_args_class_types.get("hour_tag") == type_TagUnit_str()
-    assert pidgin_args_class_types.get("item_tag") == type_TagUnit_str()
+    assert pidgin_args_class_types.get("idea_tag") == type_TagUnit_str()
     assert pidgin_args_class_types.get("mass") == "int"
     assert pidgin_args_class_types.get("max_tree_traverse") == "int"
     assert pidgin_args_class_types.get("month_tag") == type_TagUnit_str()
@@ -114,7 +114,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("item_way") == type_WayUnit_str()
+    assert pidgin_args_class_types.get("idea_way") == type_WayUnit_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -141,7 +141,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
         respect_bit_str(),
     }
     assert atom_args.union(fisc_args) != pidgin_args
-    assert atom_args.union(fisc_args).union({"face_name", "item_tag"}) == pidgin_args
+    assert atom_args.union(fisc_args).union({"face_name", "idea_tag"}) == pidgin_args
     assert check_class_types_are_correct()
     # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -210,11 +210,11 @@ def test_pidginable_atom_args_ReturnsObj():
         group_label_str(),
         healer_name_str(),
         hour_tag_str(),
-        item_tag_str(),
+        idea_tag_str(),
         month_tag_str(),
         need_str(),
         owner_name_str(),
-        item_way_str(),
+        idea_way_str(),
         team_label_str(),
         timeline_tag_str(),
         weekday_tag_str(),

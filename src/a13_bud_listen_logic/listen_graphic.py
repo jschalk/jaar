@@ -8,7 +8,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
 )
 from src.a02_finance_logic.finance_config import default_money_magnitude
 from src.a06_bud_logic.bud import BudUnit
-from src.a06_bud_logic.bud_graphics import display_itemtree
+from src.a06_bud_logic.bud_graphics import display_ideatree
 from src.a12_hub_tools.hub_path import gut_str, job_str
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
@@ -272,7 +272,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
 def fund_graph0(
     x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    fig = display_itemtree(x_bud, mode, False)
+    fig = display_ideatree(x_bud, mode, False)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5, 3])
 

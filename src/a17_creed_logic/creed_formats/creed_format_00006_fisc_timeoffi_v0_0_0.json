@@ -1,0 +1,21 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_tag": {
+            "otx_key": true
+        },
+        "offi_time": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "fiscunit",
+        "fisc_timeoffi"
+    ],
+    "creed_number": "br00006"
+}

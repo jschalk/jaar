@@ -2,7 +2,7 @@ from src.a01_way_logic.way import WayUnit, to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop
-from src.a05_item_logic.item import itemunit_shop, ItemUnit
+from src.a05_idea_logic.idea import ideaunit_shop, IdeaUnit
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a06_bud_logic._utils.example_buds import (
     budunit_v001,
@@ -14,83 +14,83 @@ from pytest import raises as pytest_raises
 from dataclasses import dataclass
 
 
-def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario0():
+def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario0():
     # ESTABLISH
     x_budunit = get_budunit_with7amCleanTableReason()
     casa_way = x_budunit.make_l1_way("casa")
     catt_way = x_budunit.make_l1_way("cat have dinner")
     week_way = x_budunit.make_l1_way("weekdays")
-    x_budunit.itemroot._fund_onset = 13
-    x_budunit.itemroot._fund_cease = 13
-    x_budunit.get_item_obj(casa_way)._fund_onset = 13
-    x_budunit.get_item_obj(casa_way)._fund_cease = 13
-    x_budunit.get_item_obj(catt_way)._fund_onset = 13
-    x_budunit.get_item_obj(catt_way)._fund_cease = 13
-    x_budunit.get_item_obj(week_way)._fund_onset = 13
-    x_budunit.get_item_obj(week_way)._fund_cease = 13
+    x_budunit.idearoot._fund_onset = 13
+    x_budunit.idearoot._fund_cease = 13
+    x_budunit.get_idea_obj(casa_way)._fund_onset = 13
+    x_budunit.get_idea_obj(casa_way)._fund_cease = 13
+    x_budunit.get_idea_obj(catt_way)._fund_onset = 13
+    x_budunit.get_idea_obj(catt_way)._fund_cease = 13
+    x_budunit.get_idea_obj(week_way)._fund_onset = 13
+    x_budunit.get_idea_obj(week_way)._fund_cease = 13
 
-    assert x_budunit.itemroot._fund_onset == 13
-    assert x_budunit.itemroot._fund_cease == 13
-    assert x_budunit.get_item_obj(casa_way)._fund_onset == 13
-    assert x_budunit.get_item_obj(casa_way)._fund_cease == 13
-    assert x_budunit.get_item_obj(catt_way)._fund_onset == 13
-    assert x_budunit.get_item_obj(catt_way)._fund_cease == 13
-    assert x_budunit.get_item_obj(week_way)._fund_onset == 13
-    assert x_budunit.get_item_obj(week_way)._fund_cease == 13
+    assert x_budunit.idearoot._fund_onset == 13
+    assert x_budunit.idearoot._fund_cease == 13
+    assert x_budunit.get_idea_obj(casa_way)._fund_onset == 13
+    assert x_budunit.get_idea_obj(casa_way)._fund_cease == 13
+    assert x_budunit.get_idea_obj(catt_way)._fund_onset == 13
+    assert x_budunit.get_idea_obj(catt_way)._fund_cease == 13
+    assert x_budunit.get_idea_obj(week_way)._fund_onset == 13
+    assert x_budunit.get_idea_obj(week_way)._fund_cease == 13
 
     # WHEN
     x_budunit.settle_bud()
 
     # THEN
-    assert x_budunit.itemroot._fund_onset != 13
-    assert x_budunit.itemroot._fund_cease != 13
-    assert x_budunit.get_item_obj(casa_way)._fund_onset != 13
-    assert x_budunit.get_item_obj(casa_way)._fund_cease != 13
-    assert x_budunit.get_item_obj(catt_way)._fund_onset != 13
-    assert x_budunit.get_item_obj(catt_way)._fund_cease != 13
-    assert x_budunit.get_item_obj(week_way)._fund_onset != 13
-    assert x_budunit.get_item_obj(week_way)._fund_cease != 13
+    assert x_budunit.idearoot._fund_onset != 13
+    assert x_budunit.idearoot._fund_cease != 13
+    assert x_budunit.get_idea_obj(casa_way)._fund_onset != 13
+    assert x_budunit.get_idea_obj(casa_way)._fund_cease != 13
+    assert x_budunit.get_idea_obj(catt_way)._fund_onset != 13
+    assert x_budunit.get_idea_obj(catt_way)._fund_cease != 13
+    assert x_budunit.get_idea_obj(week_way)._fund_onset != 13
+    assert x_budunit.get_idea_obj(week_way)._fund_cease != 13
 
 
-def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario1():
+def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario1():
     # ESTABLISH
     yao_budunit = budunit_shop("Yao", tally=10)
 
     auto_str = "auto"
     auto_way = yao_budunit.make_l1_way(auto_str)
-    auto_item = itemunit_shop(auto_str, mass=10)
-    yao_budunit.set_l1_item(auto_item)
+    auto_idea = ideaunit_shop(auto_str, mass=10)
+    yao_budunit.set_l1_idea(auto_idea)
 
     carn_str = "carn"
     carn_way = yao_budunit.make_l1_way(carn_str)
-    carn_item = itemunit_shop(carn_str, mass=60)
-    yao_budunit.set_l1_item(carn_item)
+    carn_idea = ideaunit_shop(carn_str, mass=60)
+    yao_budunit.set_l1_idea(carn_idea)
     lamb_str = "lambs"
     lamb_way = yao_budunit.make_way(carn_way, lamb_str)
-    lamb_item = itemunit_shop(lamb_str, mass=1)
-    yao_budunit.set_item(lamb_item, parent_way=carn_way)
+    lamb_idea = ideaunit_shop(lamb_str, mass=1)
+    yao_budunit.set_idea(lamb_idea, parent_way=carn_way)
     duck_str = "ducks"
     duck_way = yao_budunit.make_way(carn_way, duck_str)
-    duck_item = itemunit_shop(duck_str, mass=2)
-    yao_budunit.set_item(duck_item, parent_way=carn_way)
+    duck_idea = ideaunit_shop(duck_str, mass=2)
+    yao_budunit.set_idea(duck_idea, parent_way=carn_way)
 
     coal_str = "coal"
     coal_way = yao_budunit.make_l1_way(coal_str)
-    coal_item = itemunit_shop(coal_str, mass=30)
-    yao_budunit.set_l1_item(coal_item)
+    coal_idea = ideaunit_shop(coal_str, mass=30)
+    yao_budunit.set_l1_idea(coal_idea)
 
-    assert yao_budunit.itemroot._fund_onset is None
-    assert yao_budunit.itemroot._fund_cease is None
-    assert yao_budunit.get_item_obj(auto_way)._fund_onset is None
-    assert yao_budunit.get_item_obj(auto_way)._fund_cease is None
-    assert yao_budunit.get_item_obj(carn_way)._fund_onset is None
-    assert yao_budunit.get_item_obj(carn_way)._fund_cease is None
-    assert yao_budunit.get_item_obj(coal_way)._fund_onset is None
-    assert yao_budunit.get_item_obj(coal_way)._fund_cease is None
-    lamb_before = yao_budunit.get_item_obj(way=lamb_way)
+    assert yao_budunit.idearoot._fund_onset is None
+    assert yao_budunit.idearoot._fund_cease is None
+    assert yao_budunit.get_idea_obj(auto_way)._fund_onset is None
+    assert yao_budunit.get_idea_obj(auto_way)._fund_cease is None
+    assert yao_budunit.get_idea_obj(carn_way)._fund_onset is None
+    assert yao_budunit.get_idea_obj(carn_way)._fund_cease is None
+    assert yao_budunit.get_idea_obj(coal_way)._fund_onset is None
+    assert yao_budunit.get_idea_obj(coal_way)._fund_cease is None
+    lamb_before = yao_budunit.get_idea_obj(way=lamb_way)
     assert lamb_before._fund_onset is None
     assert lamb_before._fund_cease is None
-    duck_before = yao_budunit.get_item_obj(way=duck_way)
+    duck_before = yao_budunit.get_idea_obj(way=duck_way)
     assert duck_before._fund_onset is None
     assert duck_before._fund_cease is None
 
@@ -98,62 +98,62 @@ def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario1():
     yao_budunit.settle_bud()
 
     # THEN
-    assert yao_budunit.itemroot._fund_onset == 0.0
-    assert yao_budunit.itemroot._fund_cease == default_fund_pool()
-    assert yao_budunit.get_item_obj(auto_way)._fund_onset == 0.0
-    assert yao_budunit.get_item_obj(auto_way)._fund_cease == default_fund_pool() * 0.1
-    assert yao_budunit.get_item_obj(carn_way)._fund_onset == default_fund_pool() * 0.1
-    assert yao_budunit.get_item_obj(carn_way)._fund_cease == default_fund_pool() * 0.7
-    assert yao_budunit.get_item_obj(coal_way)._fund_onset == default_fund_pool() * 0.7
-    assert yao_budunit.get_item_obj(coal_way)._fund_cease == default_fund_pool() * 1.0
+    assert yao_budunit.idearoot._fund_onset == 0.0
+    assert yao_budunit.idearoot._fund_cease == default_fund_pool()
+    assert yao_budunit.get_idea_obj(auto_way)._fund_onset == 0.0
+    assert yao_budunit.get_idea_obj(auto_way)._fund_cease == default_fund_pool() * 0.1
+    assert yao_budunit.get_idea_obj(carn_way)._fund_onset == default_fund_pool() * 0.1
+    assert yao_budunit.get_idea_obj(carn_way)._fund_cease == default_fund_pool() * 0.7
+    assert yao_budunit.get_idea_obj(coal_way)._fund_onset == default_fund_pool() * 0.7
+    assert yao_budunit.get_idea_obj(coal_way)._fund_cease == default_fund_pool() * 1.0
 
-    duck_after = yao_budunit.get_item_obj(way=duck_way)
+    duck_after = yao_budunit.get_idea_obj(way=duck_way)
     assert duck_after._fund_onset == default_fund_pool() * 0.1
     assert duck_after._fund_cease == default_fund_pool() * 0.5
-    lamb_after = yao_budunit.get_item_obj(way=lamb_way)
+    lamb_after = yao_budunit.get_idea_obj(way=lamb_way)
     assert lamb_after._fund_onset == default_fund_pool() * 0.5
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
-def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfItems():
+def test_BudUnit_settle_bud_Sets_ideaunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfIdeas():
     # ESTABLISH
     yao_budunit = budunit_shop("Yao", tally=10)
 
     auto_str = "auto"
     auto_way = yao_budunit.make_l1_way(auto_str)
-    auto_item = itemunit_shop(auto_str, mass=10)
-    yao_budunit.set_l1_item(auto_item)
+    auto_idea = ideaunit_shop(auto_str, mass=10)
+    yao_budunit.set_l1_idea(auto_idea)
 
     yarn_str = "yarn"
     yarn_way = yao_budunit.make_l1_way(yarn_str)
-    yarn_item = itemunit_shop(yarn_str, mass=60)
-    yao_budunit.set_l1_item(yarn_item)
+    yarn_idea = ideaunit_shop(yarn_str, mass=60)
+    yao_budunit.set_l1_idea(yarn_idea)
     lamb_str = "lambs"
     lamb_way = yao_budunit.make_way(yarn_way, lamb_str)
-    lamb_item = itemunit_shop(lamb_str, mass=1)
-    yao_budunit.set_item(lamb_item, parent_way=yarn_way)
+    lamb_idea = ideaunit_shop(lamb_str, mass=1)
+    yao_budunit.set_idea(lamb_idea, parent_way=yarn_way)
     duck_str = "ducks"
     duck_way = yao_budunit.make_way(yarn_way, duck_str)
-    duck_item = itemunit_shop(duck_str, mass=2)
-    yao_budunit.set_item(duck_item, parent_way=yarn_way)
+    duck_idea = ideaunit_shop(duck_str, mass=2)
+    yao_budunit.set_idea(duck_idea, parent_way=yarn_way)
 
     coal_str = "coal"
     coal_way = yao_budunit.make_l1_way(coal_str)
-    coal_item = itemunit_shop(coal_str, mass=30)
-    yao_budunit.set_l1_item(coal_item)
+    coal_idea = ideaunit_shop(coal_str, mass=30)
+    yao_budunit.set_l1_idea(coal_idea)
 
-    assert yao_budunit.itemroot._fund_onset is None
-    assert yao_budunit.itemroot._fund_cease is None
-    assert yao_budunit.get_item_obj(auto_way)._fund_onset is None
-    assert yao_budunit.get_item_obj(auto_way)._fund_cease is None
-    assert yao_budunit.get_item_obj(yarn_way)._fund_onset is None
-    assert yao_budunit.get_item_obj(yarn_way)._fund_cease is None
-    assert yao_budunit.get_item_obj(coal_way)._fund_onset is None
-    assert yao_budunit.get_item_obj(coal_way)._fund_cease is None
-    lamb_before = yao_budunit.get_item_obj(way=lamb_way)
+    assert yao_budunit.idearoot._fund_onset is None
+    assert yao_budunit.idearoot._fund_cease is None
+    assert yao_budunit.get_idea_obj(auto_way)._fund_onset is None
+    assert yao_budunit.get_idea_obj(auto_way)._fund_cease is None
+    assert yao_budunit.get_idea_obj(yarn_way)._fund_onset is None
+    assert yao_budunit.get_idea_obj(yarn_way)._fund_cease is None
+    assert yao_budunit.get_idea_obj(coal_way)._fund_onset is None
+    assert yao_budunit.get_idea_obj(coal_way)._fund_cease is None
+    lamb_before = yao_budunit.get_idea_obj(way=lamb_way)
     assert lamb_before._fund_onset is None
     assert lamb_before._fund_cease is None
-    duck_before = yao_budunit.get_item_obj(way=duck_way)
+    duck_before = yao_budunit.get_idea_obj(way=duck_way)
     assert duck_before._fund_onset is None
     assert duck_before._fund_cease is None
 
@@ -161,80 +161,80 @@ def test_BudUnit_settle_bud_Sets_itemunit_fund_onset_fund_cease_Scenario2_Differ
     yao_budunit.settle_bud()
 
     # THEN
-    assert yao_budunit.itemroot._fund_onset == 0.0
-    assert yao_budunit.itemroot._fund_cease == default_fund_pool()
-    assert yao_budunit.get_item_obj(auto_way)._fund_onset == 0.0
-    assert yao_budunit.get_item_obj(auto_way)._fund_cease == default_fund_pool() * 0.1
-    assert yao_budunit.get_item_obj(coal_way)._fund_onset == default_fund_pool() * 0.1
-    assert yao_budunit.get_item_obj(coal_way)._fund_cease == default_fund_pool() * 0.4
-    assert yao_budunit.get_item_obj(yarn_way)._fund_onset == default_fund_pool() * 0.4
-    assert yao_budunit.get_item_obj(yarn_way)._fund_cease == default_fund_pool() * 1.0
+    assert yao_budunit.idearoot._fund_onset == 0.0
+    assert yao_budunit.idearoot._fund_cease == default_fund_pool()
+    assert yao_budunit.get_idea_obj(auto_way)._fund_onset == 0.0
+    assert yao_budunit.get_idea_obj(auto_way)._fund_cease == default_fund_pool() * 0.1
+    assert yao_budunit.get_idea_obj(coal_way)._fund_onset == default_fund_pool() * 0.1
+    assert yao_budunit.get_idea_obj(coal_way)._fund_cease == default_fund_pool() * 0.4
+    assert yao_budunit.get_idea_obj(yarn_way)._fund_onset == default_fund_pool() * 0.4
+    assert yao_budunit.get_idea_obj(yarn_way)._fund_cease == default_fund_pool() * 1.0
 
-    duck_after = yao_budunit.get_item_obj(way=duck_way)
+    duck_after = yao_budunit.get_idea_obj(way=duck_way)
     assert duck_after._fund_onset == default_fund_pool() * 0.4
     assert duck_after._fund_cease == default_fund_pool() * 0.8
-    lamb_after = yao_budunit.get_item_obj(way=lamb_way)
+    lamb_after = yao_budunit.get_idea_obj(way=lamb_way)
     assert lamb_after._fund_onset == default_fund_pool() * 0.8
     assert lamb_after._fund_cease == default_fund_pool() * 1.0
 
 
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeItemsOfZero_massScenario0():
+def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario0():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     floor_str = "mop floor"
     floor_way = sue_bud.make_way(casa_way, floor_str)
-    floor_item = itemunit_shop(floor_str, pledge=True)
-    sue_bud.set_item(floor_item, casa_way)
-    sue_bud.set_l1_item(itemunit_shop("unimportant"))
+    floor_idea = ideaunit_shop(floor_str, pledge=True)
+    sue_bud.set_idea(floor_idea, casa_way)
+    sue_bud.set_l1_idea(ideaunit_shop("unimportant"))
 
     status_str = "cleaniness status"
     status_way = sue_bud.make_way(casa_way, status_str)
-    sue_bud.set_item(itemunit_shop(status_str, mass=0), casa_way)
+    sue_bud.set_idea(ideaunit_shop(status_str, mass=0), casa_way)
 
     non_str = "not clean"
     yes_str = "yes clean"
     non_way = sue_bud.make_way(status_way, non_str)
     yes_way = sue_bud.make_way(status_way, yes_str)
-    sue_bud.set_item(itemunit_shop(non_str), status_way)
-    sue_bud.set_item(itemunit_shop(yes_str, mass=2), status_way)
+    sue_bud.set_idea(ideaunit_shop(non_str), status_way)
+    sue_bud.set_idea(ideaunit_shop(yes_str, mass=2), status_way)
 
-    assert sue_bud.get_item_obj(casa_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(floor_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(status_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(non_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(yes_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(casa_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(floor_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(status_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(non_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(yes_way)._fund_ratio is None
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
     print(f"{sue_bud.fund_pool=}")
-    assert sue_bud.get_item_obj(casa_way)._fund_ratio == 0.5
-    assert sue_bud.get_item_obj(floor_way)._fund_ratio == 0.5
-    assert sue_bud.get_item_obj(status_way)._fund_ratio == 0.0
-    assert sue_bud.get_item_obj(non_way)._fund_ratio == 0.0
-    assert sue_bud.get_item_obj(yes_way)._fund_ratio == 0.0
+    assert sue_bud.get_idea_obj(casa_way)._fund_ratio == 0.5
+    assert sue_bud.get_idea_obj(floor_way)._fund_ratio == 0.5
+    assert sue_bud.get_idea_obj(status_way)._fund_ratio == 0.0
+    assert sue_bud.get_idea_obj(non_way)._fund_ratio == 0.0
+    assert sue_bud.get_idea_obj(yes_way)._fund_ratio == 0.0
 
 
-def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeItemsOfZero_massScenario1():
+def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeIdeasOfZero_massScenario1():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     floor_str = "mop floor"
     floor_way = sue_bud.make_way(casa_way, floor_str)
-    floor_item = itemunit_shop(floor_str, pledge=True)
-    sue_bud.set_item(floor_item, casa_way)
-    sue_bud.set_l1_item(itemunit_shop("unimportant"))
+    floor_idea = ideaunit_shop(floor_str, pledge=True)
+    sue_bud.set_idea(floor_idea, casa_way)
+    sue_bud.set_l1_idea(ideaunit_shop("unimportant"))
 
     status_str = "cleaniness status"
     status_way = sue_bud.make_way(casa_way, status_str)
-    sue_bud.set_item(itemunit_shop(status_str), casa_way)
+    sue_bud.set_idea(ideaunit_shop(status_str), casa_way)
 
-    status_item = sue_bud.get_item_obj(status_way)
-    print(f"{status_item.mass=}")
-    print("This should raise error: 'Itemunit._'")
+    status_idea = sue_bud.get_idea_obj(status_way)
+    print(f"{status_idea.mass=}")
+    print("This should raise error: 'Ideaunit._'")
 
     clean_str = "clean"
     clean_way = sue_bud.make_way(status_way, clean_str)
@@ -242,71 +242,71 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeItemsOfZero_massScenario1():
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_bud.set_item(itemunit_shop(clean_str, mass=0), status_way)
-    sue_bud.set_item(itemunit_shop(very_str), clean_way)
-    sue_bud.set_item(itemunit_shop(mod_str, mass=2), clean_way)
-    sue_bud.set_item(itemunit_shop(dirty_str), clean_way)
+    sue_bud.set_idea(ideaunit_shop(clean_str, mass=0), status_way)
+    sue_bud.set_idea(ideaunit_shop(very_str), clean_way)
+    sue_bud.set_idea(ideaunit_shop(mod_str, mass=2), clean_way)
+    sue_bud.set_idea(ideaunit_shop(dirty_str), clean_way)
 
     very_way = sue_bud.make_way(clean_way, very_str)
     mod_way = sue_bud.make_way(clean_way, mod_str)
     dirty_way = sue_bud.make_way(clean_way, dirty_str)
-    assert sue_bud.get_item_obj(casa_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(floor_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(status_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(clean_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(very_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(mod_way)._fund_ratio is None
-    assert sue_bud.get_item_obj(dirty_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(casa_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(floor_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(status_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(clean_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(very_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(mod_way)._fund_ratio is None
+    assert sue_bud.get_idea_obj(dirty_way)._fund_ratio is None
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
     print(f"{sue_bud.fund_pool=}")
-    assert sue_bud.get_item_obj(casa_way)._fund_ratio == 0.5
-    assert sue_bud.get_item_obj(floor_way)._fund_ratio == 0.25
-    assert sue_bud.get_item_obj(status_way)._fund_ratio == 0.25
-    assert sue_bud.get_item_obj(clean_way)._fund_ratio == 0
-    assert sue_bud.get_item_obj(very_way)._fund_ratio == 0
-    assert sue_bud.get_item_obj(mod_way)._fund_ratio == 0
-    assert sue_bud.get_item_obj(dirty_way)._fund_ratio == 0
+    assert sue_bud.get_idea_obj(casa_way)._fund_ratio == 0.5
+    assert sue_bud.get_idea_obj(floor_way)._fund_ratio == 0.25
+    assert sue_bud.get_idea_obj(status_way)._fund_ratio == 0.25
+    assert sue_bud.get_idea_obj(clean_way)._fund_ratio == 0
+    assert sue_bud.get_idea_obj(very_way)._fund_ratio == 0
+    assert sue_bud.get_idea_obj(mod_way)._fund_ratio == 0
+    assert sue_bud.get_idea_obj(dirty_way)._fund_ratio == 0
 
 
-def test_BudUnit_settle_bud_WhenItemUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
+def test_BudUnit_settle_bud_WhenIdeaUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
     sue_budunit = budunit_shop("Sue")
     yao_str = "Yao"
     sue_budunit.add_acctunit(yao_str)
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
-    casa_item = itemunit_shop(casa_str, mass=1)
+    casa_idea = ideaunit_shop(casa_str, mass=1)
 
     swim_str = "swimming"
     swim_way = sue_budunit.make_way(casa_way, swim_str)
-    swim_item = itemunit_shop(swim_str, mass=8)
+    swim_idea = ideaunit_shop(swim_str, mass=8)
 
     clean_str = "cleaning"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    clean_item = itemunit_shop(clean_str, mass=2)
-    sue_budunit.set_item(itemunit_shop(clean_str), casa_way)
+    clean_idea = ideaunit_shop(clean_str, mass=2)
+    sue_budunit.set_idea(ideaunit_shop(clean_str), casa_way)
 
     sweep_str = "sweep"
     sweep_way = sue_budunit.make_way(clean_way, sweep_str)
-    sweep_item = itemunit_shop(sweep_str, mass=0)
+    sweep_idea = ideaunit_shop(sweep_str, mass=0)
     vaccum_str = "vaccum"
     vaccum_way = sue_budunit.make_way(clean_way, vaccum_str)
-    vaccum_item = itemunit_shop(vaccum_str, mass=0)
+    vaccum_idea = ideaunit_shop(vaccum_str, mass=0)
 
-    sue_budunit.set_l1_item(casa_item)
-    sue_budunit.set_item(swim_item, casa_way)
-    sue_budunit.set_item(clean_item, casa_way)
-    sue_budunit.set_item(sweep_item, clean_way)  # _mass=0
-    sue_budunit.set_item(vaccum_item, clean_way)  # _mass=0
+    sue_budunit.set_l1_idea(casa_idea)
+    sue_budunit.set_idea(swim_idea, casa_way)
+    sue_budunit.set_idea(clean_idea, casa_way)
+    sue_budunit.set_idea(sweep_idea, clean_way)  # _mass=0
+    sue_budunit.set_idea(vaccum_idea, clean_way)  # _mass=0
 
-    assert sue_budunit.get_item_obj(casa_way)._fund_ratio is None
-    assert sue_budunit.get_item_obj(swim_way)._fund_ratio is None
-    assert sue_budunit.get_item_obj(clean_way)._fund_ratio is None
-    assert sue_budunit.get_item_obj(sweep_way)._fund_ratio is None
-    assert sue_budunit.get_item_obj(vaccum_way)._fund_ratio is None
+    assert sue_budunit.get_idea_obj(casa_way)._fund_ratio is None
+    assert sue_budunit.get_idea_obj(swim_way)._fund_ratio is None
+    assert sue_budunit.get_idea_obj(clean_way)._fund_ratio is None
+    assert sue_budunit.get_idea_obj(sweep_way)._fund_ratio is None
+    assert sue_budunit.get_idea_obj(vaccum_way)._fund_ratio is None
     assert sue_budunit.get_groupunit(yao_str) is None
 
     assert not sue_budunit._offtrack_fund
@@ -319,11 +319,11 @@ def test_BudUnit_settle_bud_WhenItemUnitHasFundsBut_kidsHaveNoMassDistributeFund
     # THEN
     print(f"{sue_budunit.fund_pool=}")
     clean_fund_ratio = 0.2
-    assert sue_budunit.get_item_obj(casa_way)._fund_ratio == 1
-    assert sue_budunit.get_item_obj(swim_way)._fund_ratio == 0.8
-    assert sue_budunit.get_item_obj(clean_way)._fund_ratio == clean_fund_ratio
-    assert sue_budunit.get_item_obj(sweep_way)._fund_ratio == 0
-    assert sue_budunit.get_item_obj(vaccum_way)._fund_ratio == 0
+    assert sue_budunit.get_idea_obj(casa_way)._fund_ratio == 1
+    assert sue_budunit.get_idea_obj(swim_way)._fund_ratio == 0.8
+    assert sue_budunit.get_idea_obj(clean_way)._fund_ratio == clean_fund_ratio
+    assert sue_budunit.get_idea_obj(sweep_way)._fund_ratio == 0
+    assert sue_budunit.get_idea_obj(vaccum_way)._fund_ratio == 0
     assert sue_budunit.get_groupunit(yao_str)._fund_give == 0
     assert sue_budunit.get_groupunit(yao_str)._fund_take == 0
 
@@ -336,84 +336,84 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
-    # item tree has no awardlinks
-    assert sue_bud.itemroot._awardlines == {}
+    # idea tree has no awardlinks
+    assert sue_bud.idearoot._awardlines == {}
     sue_str = "Sue"
     week_str = "weekdays"
     nation_str = "nation-state"
     sue_awardlink = awardlink_shop(awardee_label=sue_str)
     sue_bud.add_acctunit(acct_name=sue_str)
-    sue_bud.itemroot.set_awardlink(awardlink=sue_awardlink)
-    # item tree has awardlines
-    assert sue_bud.itemroot._awardheirs.get(sue_str) is None
+    sue_bud.idearoot.set_awardlink(awardlink=sue_awardlink)
+    # idea tree has awardlines
+    assert sue_bud.idearoot._awardheirs.get(sue_str) is None
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud.itemroot._awardheirs.get(sue_str) is not None
-    assert sue_bud.itemroot._awardheirs.get(sue_str).awardee_label == sue_str
-    assert sue_bud.itemroot._awardlines != {}
-    root_way = to_way(sue_bud.itemroot.item_tag)
-    root_item = sue_bud.get_item_obj(way=root_way)
-    sue_awardline = sue_bud.itemroot._awardlines.get(sue_str)
-    print(f"{sue_awardline._fund_give=} {root_item._fund_ratio=} ")
-    print(f"  {sue_awardline._fund_take=} {root_item._fund_ratio=} ")
+    assert sue_bud.idearoot._awardheirs.get(sue_str) is not None
+    assert sue_bud.idearoot._awardheirs.get(sue_str).awardee_label == sue_str
+    assert sue_bud.idearoot._awardlines != {}
+    root_way = to_way(sue_bud.idearoot.idea_tag)
+    root_idea = sue_bud.get_idea_obj(way=root_way)
+    sue_awardline = sue_bud.idearoot._awardlines.get(sue_str)
+    print(f"{sue_awardline._fund_give=} {root_idea._fund_ratio=} ")
+    print(f"  {sue_awardline._fund_take=} {root_idea._fund_ratio=} ")
     sum_x = 0
     cat_way = sue_bud.make_l1_way("cat have dinner")
-    cat_item = sue_bud.get_item_obj(cat_way)
+    cat_idea = sue_bud.get_idea_obj(cat_way)
     week_way = sue_bud.make_l1_way(week_str)
-    week_item = sue_bud.get_item_obj(week_way)
+    week_idea = sue_bud.get_idea_obj(week_way)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
-    casa_item = sue_bud.get_item_obj(casa_way)
+    casa_idea = sue_bud.get_idea_obj(casa_way)
     nation_way = sue_bud.make_l1_way(nation_str)
-    nation_item = sue_bud.get_item_obj(nation_way)
-    sum_x = cat_item._fund_ratio
-    print(f"{cat_item._fund_ratio=} {sum_x} ")
-    sum_x += week_item._fund_ratio
-    print(f"{week_item._fund_ratio=} {sum_x} ")
-    sum_x += casa_item._fund_ratio
-    print(f"{casa_item._fund_ratio=} {sum_x} ")
-    sum_x += nation_item._fund_ratio
-    print(f"{nation_item._fund_ratio=} {sum_x} ")
+    nation_idea = sue_bud.get_idea_obj(nation_way)
+    sum_x = cat_idea._fund_ratio
+    print(f"{cat_idea._fund_ratio=} {sum_x} ")
+    sum_x += week_idea._fund_ratio
+    print(f"{week_idea._fund_ratio=} {sum_x} ")
+    sum_x += casa_idea._fund_ratio
+    print(f"{casa_idea._fund_ratio=} {sum_x} ")
+    sum_x += nation_idea._fund_ratio
+    print(f"{nation_idea._fund_ratio=} {sum_x} ")
     tolerance = 1e-10
     assert sum_x < 1.0 + tolerance
 
-    # for kid_item in root_item._kids.values():
-    #     sum_x += kid_item._fund_ratio
-    #     print(f"  {kid_item._fund_ratio=} {sum_x=} {kid_item.get_item_way()=}")
+    # for kid_idea in root_idea._kids.values():
+    #     sum_x += kid_idea._fund_ratio
+    #     print(f"  {kid_idea._fund_ratio=} {sum_x=} {kid_idea.get_idea_way()=}")
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
-    assert sue_bud.itemroot._awardlines == {x_awardline.awardee_label: x_awardline}
+    assert sue_bud.idearoot._awardlines == {x_awardline.awardee_label: x_awardline}
 
 
-def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootItemUnitFromNonRootItemUnit():
+def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRootIdeaUnit():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     sue_bud.settle_bud()
     sue_str = "Sue"
     sue_bud.add_acctunit(sue_str)
     casa_way = sue_bud.make_l1_way("casa")
-    sue_bud.get_item_obj(casa_way).set_awardlink(awardlink_shop(awardee_label=sue_str))
-    assert sue_bud.itemroot._awardlines == {}
+    sue_bud.get_idea_obj(casa_way).set_awardlink(awardlink_shop(awardee_label=sue_str))
+    assert sue_bud.idearoot._awardlines == {}
 
     # WHEN
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud.itemroot._awardlines != {}
-    print(f"{sue_bud.itemroot._awardlines=}")
+    assert sue_bud.idearoot._awardlines != {}
+    print(f"{sue_bud.idearoot._awardlines=}")
     x_awardline = awardline_shop(
         awardee_label=sue_str,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert sue_bud.itemroot._awardlines == {x_awardline.awardee_label: x_awardline}
-    casa_itemunit = sue_bud.get_item_obj(casa_way)
-    assert casa_itemunit._awardlines != {}
-    assert casa_itemunit._awardlines == {x_awardline.awardee_label: x_awardline}
+    assert sue_bud.idearoot._awardlines == {x_awardline.awardee_label: x_awardline}
+    casa_ideaunit = sue_bud.get_idea_obj(casa_way)
+    assert casa_ideaunit._awardlines != {}
+    assert casa_ideaunit._awardlines == {x_awardline.awardee_label: x_awardline}
 
 
 def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_take():
@@ -429,11 +429,11 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    root_way = to_way(sue_bud.itemroot.item_tag)
-    x_itemroot = sue_bud.get_item_obj(root_way)
-    x_itemroot.set_awardlink(awardlink=yao_awardlink)
-    x_itemroot.set_awardlink(awardlink=zia_awardlink)
-    x_itemroot.set_awardlink(awardlink=xio_awardlink)
+    root_way = to_way(sue_bud.idearoot.idea_tag)
+    x_idearoot = sue_bud.get_idea_obj(root_way)
+    x_idearoot.set_awardlink(awardlink=yao_awardlink)
+    x_idearoot.set_awardlink(awardlink=zia_awardlink)
+    x_idearoot.set_awardlink(awardlink=xio_awardlink)
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 3
 
     # WHEN
@@ -459,8 +459,8 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     # ESTABLISH
     sue_bud.set_acctunit(acctunit_shop(sue_str))
     sue_awardlink = awardlink_shop(sue_str, give_force=37)
-    x_itemroot.set_awardlink(sue_awardlink)
-    assert len(x_itemroot.awardlinks) == 4
+    x_idearoot.set_awardlink(sue_awardlink)
+    assert len(x_idearoot.awardlinks) == 4
     assert len(sue_bud.get_acctunit_group_labels_dict()) == 4
 
     # WHEN
@@ -493,7 +493,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_take
     x_bud = budunit_shop(bob_str)
     swim_str = "swim"
     swim_way = x_bud.make_l1_way(swim_str)
-    x_bud.set_l1_item(itemunit_shop(swim_str))
+    x_bud.set_l1_idea(ideaunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -504,10 +504,10 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_take
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_item = x_bud.get_item_obj(swim_way)
-    swim_item.set_awardlink(yao_awardlink)
-    swim_item.set_awardlink(zia_awardlink)
-    swim_item.set_awardlink(xio_awardlink)
+    swim_idea = x_bud.get_idea_obj(swim_way)
+    swim_idea.set_awardlink(yao_awardlink)
+    swim_idea.set_awardlink(zia_awardlink)
+    swim_idea.set_awardlink(xio_awardlink)
     assert len(x_bud.get_acctunit_group_labels_dict()) == 3
 
     # WHEN
@@ -539,7 +539,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     x_bud = budunit_shop(yao_str)
     swim_str = "swim"
     swim_way = x_bud.make_l1_way(swim_str)
-    x_bud.set_l1_item(itemunit_shop(swim_str))
+    x_bud.set_l1_idea(ideaunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -550,10 +550,10 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_item = x_bud.get_item_obj(swim_way)
-    swim_item.set_awardlink(yao_awardlink)
-    swim_item.set_awardlink(zia_awardlink)
-    swim_item.set_awardlink(xio_awardlink)
+    swim_idea = x_bud.get_idea_obj(swim_way)
+    swim_idea.set_awardlink(yao_awardlink)
+    swim_idea.set_awardlink(zia_awardlink)
+    swim_idea.set_awardlink(xio_awardlink)
     assert len(x_bud.get_acctunit_group_labels_dict()) == 2
 
     # WHEN
@@ -586,7 +586,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fu
     x_bud = budunit_shop(yao_str)
     swim_str = "swim"
     swim_way = x_bud.make_l1_way(swim_str)
-    x_bud.set_l1_item(itemunit_shop(swim_str))
+    x_bud.set_l1_idea(ideaunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -597,36 +597,36 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fu
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_item = x_bud.get_item_obj(swim_way)
-    swim_item.set_awardlink(yao_awardlink)
-    swim_item.set_awardlink(zia_awardlink)
-    swim_item.set_awardlink(xio_awardlink)
+    swim_idea = x_bud.get_idea_obj(swim_way)
+    swim_idea.set_awardlink(yao_awardlink)
+    swim_idea.set_awardlink(zia_awardlink)
+    swim_idea.set_awardlink(xio_awardlink)
 
     # no awardlinks attached to this one
-    x_bud.set_l1_item(itemunit_shop("hunt", mass=3))
+    x_bud.set_l1_idea(ideaunit_shop("hunt", mass=3))
 
     # WHEN
     x_bud.settle_bud()
 
     # THEN
-    x_itemroot = x_bud.get_item_obj(to_way(x_bud.fisc_tag))
+    x_idearoot = x_bud.get_idea_obj(to_way(x_bud.fisc_tag))
     with pytest_raises(Exception) as excinfo:
-        x_itemroot.awardlinks[yao_str]
+        x_idearoot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_itemroot.awardlinks[zia_str]
+        x_idearoot.awardlinks[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_itemroot.awardlinks[xio_str]
+        x_idearoot.awardlinks[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_itemroot._kids["hunt"]._awardheirs[yao_str]
+        x_idearoot._kids["hunt"]._awardheirs[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_itemroot._kids["hunt"]._awardheirs[zia_str]
+        x_idearoot._kids["hunt"]._awardheirs[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_itemroot._kids["hunt"]._awardheirs[xio_str]
+        x_idearoot._kids["hunt"]._awardheirs[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
 
     # THEN
@@ -662,22 +662,22 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     Xio_awardlink = awardlink_shop(Xio_str, give_force=10)
-    sue_bud.itemroot.set_awardlink(yao_awardlink)
-    sue_bud.itemroot.set_awardlink(zia_awardlink)
-    sue_bud.itemroot.set_awardlink(Xio_awardlink)
-    assert len(sue_bud.itemroot.awardlinks) == 3
+    sue_bud.idearoot.set_awardlink(yao_awardlink)
+    sue_bud.idearoot.set_awardlink(zia_awardlink)
+    sue_bud.idearoot.set_awardlink(Xio_awardlink)
+    assert len(sue_bud.idearoot.awardlinks) == 3
 
     # WHEN
-    item_dict = sue_bud.get_item_dict()
+    idea_dict = sue_bud.get_idea_dict()
 
     # THEN
-    print(f"{item_dict.keys()=}")
-    item_bob = item_dict.get(to_way(sue_bud.fisc_tag))
-    assert len(item_bob._awardheirs) == 3
+    print(f"{idea_dict.keys()=}")
+    idea_bob = idea_dict.get(to_way(sue_bud.fisc_tag))
+    assert len(idea_bob._awardheirs) == 3
 
-    bheir_yao = item_bob._awardheirs.get(yao_str)
-    bheir_zia = item_bob._awardheirs.get(zia_str)
-    bheir_Xio = item_bob._awardheirs.get(Xio_str)
+    bheir_yao = idea_bob._awardheirs.get(yao_str)
+    bheir_zia = idea_bob._awardheirs.get(zia_str)
+    bheir_Xio = idea_bob._awardheirs.get(Xio_str)
     assert bheir_yao._fund_give == 0.5 * default_fund_pool()
     assert bheir_yao._fund_take == 0.75 * default_fund_pool()
     assert bheir_zia._fund_give == 0.25 * default_fund_pool()
@@ -695,7 +695,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # fund_give_sum = 0
     # fund_take_sum = 0
-    # for group in x_bud.itemroot._awardheirs.values():
+    # for group in x_bud.idearoot._awardheirs.values():
     #     print(f"{group=}")
     #     assert group._fund_give is not None
     #     assert group._fund_give in [0.25, 0.5]
@@ -721,9 +721,9 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
     root_way = to_way(yao_bud.fisc_tag)
-    yao_bud.edit_item_attr(root_way, awardlink=sue_awardlink)
-    yao_bud.edit_item_attr(root_way, awardlink=bob_awardlink)
-    yao_bud.edit_item_attr(root_way, awardlink=zia_awardlink)
+    yao_bud.edit_idea_attr(root_way, awardlink=sue_awardlink)
+    yao_bud.edit_idea_attr(root_way, awardlink=bob_awardlink)
+    yao_bud.edit_idea_attr(root_way, awardlink=zia_awardlink)
 
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)
@@ -765,7 +765,7 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     # ESTABLISH another pledge, check metrics are as expected
     xio_str = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_str))
-    yao_bud.itemroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
+    yao_bud.idearoot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
 
     # WHEN
     yao_bud.settle_bud()
@@ -810,7 +810,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
     yao_bud = budunit_shop("Yao")
     swim_str = "swim"
     swim_way = yao_bud.make_l1_way(swim_str)
-    yao_bud.set_l1_item(itemunit_shop(swim_str))
+    yao_bud.set_l1_idea(ideaunit_shop(swim_str))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -820,9 +820,9 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
     bl_sue = awardlink_shop(sue_str, 20, take_force=40)
     bl_bob = awardlink_shop(bob_str, 10, take_force=5)
     bl_zia = awardlink_shop(zia_str, 10, take_force=5)
-    yao_bud.get_item_obj(swim_way).set_awardlink(bl_sue)
-    yao_bud.get_item_obj(swim_way).set_awardlink(bl_bob)
-    yao_bud.get_item_obj(swim_way).set_awardlink(bl_zia)
+    yao_bud.get_idea_obj(swim_way).set_awardlink(bl_sue)
+    yao_bud.get_idea_obj(swim_way).set_awardlink(bl_bob)
+    yao_bud.get_idea_obj(swim_way).set_awardlink(bl_zia)
 
     sue_acctunit = yao_bud.get_acct(sue_str)
     bob_acctunit = yao_bud.get_acct(bob_str)
@@ -858,7 +858,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
     # WHEN another pledge, check metrics are as expected
     xio_str = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_str))
-    yao_bud.itemroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))
+    yao_bud.idearoot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))
     yao_bud.settle_bud()
 
     # THEN
@@ -902,7 +902,7 @@ def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
     yao_bud = budunit_shop("Yao")
     swim_str = "swim"
     swim_way = yao_bud.make_l1_way(swim_str)
-    yao_bud.set_l1_item(itemunit_shop(swim_str))
+    yao_bud.set_l1_idea(ideaunit_shop(swim_str))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -912,14 +912,14 @@ def test_BudUnit_settle_bud_CorrectlySetsPartGroupedLWAcctUnitBud_fund():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    swim_item = yao_bud.get_item_obj(swim_way)
-    swim_item.set_awardlink(sue_awardlink)
-    swim_item.set_awardlink(bob_awardlink)
-    swim_item.set_awardlink(zia_awardlink)
+    swim_idea = yao_bud.get_idea_obj(swim_way)
+    swim_idea.set_awardlink(sue_awardlink)
+    swim_idea.set_awardlink(bob_awardlink)
+    swim_idea.set_awardlink(zia_awardlink)
 
     # no awardlinks attached to this one
     hunt_str = "hunt"
-    yao_bud.set_l1_item(itemunit_shop(hunt_str, mass=3))
+    yao_bud.set_l1_idea(ideaunit_shop(hunt_str, mass=3))
 
     # WHEN
     yao_bud.settle_bud()
@@ -970,7 +970,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     bob_bud = budunit_shop(bob_str)
     swim_str = "swim"
     swim_way = bob_bud.make_l1_way(swim_str)
-    bob_bud.set_l1_item(itemunit_shop(swim_str))
+    bob_bud.set_l1_idea(ideaunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -981,10 +981,10 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_item = bob_bud.get_item_obj(swim_way)
-    swim_item.set_awardlink(yao_awardlink)
-    swim_item.set_awardlink(zia_awardlink)
-    swim_item.set_awardlink(xio_awardlink)
+    swim_idea = bob_bud.get_idea_obj(swim_way)
+    swim_idea.set_awardlink(yao_awardlink)
+    swim_idea.set_awardlink(zia_awardlink)
+    swim_idea.set_awardlink(xio_awardlink)
     assert len(bob_bud.get_acctunit_group_labels_dict()) == 2
 
     # WHEN
@@ -1005,7 +1005,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
 def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    yao_bud.set_l1_item(itemunit_shop("swim"))
+    yao_bud.set_l1_idea(ideaunit_shop("swim"))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -1089,15 +1089,15 @@ class AwardAgendaMetrics:
     agenda_no_bud_i_sum = 0
     agenda_yes_bud_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[WayUnit, ItemUnit]):
-        for agenda_item in agenda_dict.values():
-            self.sum_bud_agenda_share += agenda_item.get_fund_share()
-            if agenda_item._awardlines == {}:
+    def set_sums(self, agenda_dict: dict[WayUnit, IdeaUnit]):
+        for agenda_idea in agenda_dict.values():
+            self.sum_bud_agenda_share += agenda_idea.get_fund_share()
+            if agenda_idea._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_bud_i_sum += agenda_item.get_fund_share()
+                self.agenda_no_bud_i_sum += agenda_idea.get_fund_share()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_bud_i_sum += agenda_item.get_fund_share()
+                self.agenda_yes_bud_i_sum += agenda_idea.get_fund_share()
 
 
 def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
@@ -1123,8 +1123,8 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
 
     # WHEN
     agenda_dict = yao_bud.get_agenda_dict()
-    # for item_way in yao_bud._item_dict.keys():
-    #     print(f"{item_way=}")
+    # for idea_way in yao_bud._idea_dict.keys():
+    #     print(f"{idea_way=}")
     # for x_acct in yao_bud.accts.values():
     #     for x_membership in x_acct._memberships.values():
     #         print(f"{x_membership.group_label=}")
@@ -1283,15 +1283,15 @@ def test_BudUnit_settle_bud_CreatesGroupUnitWith_budunit_v001():
 
     # WHEN
     yao_bud.settle_bud()
-    item_dict = yao_bud._item_dict
+    idea_dict = yao_bud._idea_dict
 
     # THEN
-    # print(f"{len(item_dict)=}")
-    db_item = item_dict.get(yao_bud.make_l1_way("D&B"))
-    assert len(db_item.awardlinks) == 3
-    # for item_key in item_dict:
-    #     print(f"{item_key=}")
-    #     if item.item_tag == "D&B":
-    #         print(f"{item.item_tag=} {item.awardlinks=}")
-    #         db_awardlink_len = len(item.awardlinks)
+    # print(f"{len(idea_dict)=}")
+    db_idea = idea_dict.get(yao_bud.make_l1_way("D&B"))
+    assert len(db_idea.awardlinks) == 3
+    # for idea_key in idea_dict:
+    #     print(f"{idea_key=}")
+    #     if idea.idea_tag == "D&B":
+    #         print(f"{idea.idea_tag=} {idea.awardlinks=}")
+    #         db_awardlink_len = len(idea.awardlinks)
     # assert db_awardlink_len == 3

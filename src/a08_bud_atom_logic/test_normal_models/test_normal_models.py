@@ -2,13 +2,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import (
     normal_table_name_str,
@@ -21,7 +21,7 @@ from src.a08_bud_atom_logic.normal_models import (
     BudTable,
     AcctUnitTable,
     MemberShipTable,
-    ItemTable,
+    IdeaTable,
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
@@ -123,22 +123,22 @@ def test_normalized_table_MemberShipTable_membership_Exists():
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
-def test_normalized_table_ItemTable_item_Exists():
+def test_normalized_table_IdeaTable_idea_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_itemunit_str())
-    mapper = inspect(ItemTable)
+    config_dimen = get_normalized_bud_table_build().get(bud_ideaunit_str())
+    mapper = inspect(IdeaTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_dimen)
-    assert config_table_name == "item"
-    assert config_table_name == ItemTable.__tablename__
+    assert config_table_name == "idea"
+    assert config_table_name == IdeaTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_item_awardlink_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_idea_awardlink_str())
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -151,7 +151,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_item_reasonunit_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_idea_reasonunit_str())
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -165,7 +165,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 def test_normalized_table_PremiseTable_premise_Exists():
     # ESTABLISH
     config_dimen = get_normalized_bud_table_build().get(
-        bud_item_reason_premiseunit_str()
+        bud_idea_reason_premiseunit_str()
     )
     mapper = inspect(PremiseTable)
     print_out_expected_class_attribute_declarations(config_dimen)
@@ -179,7 +179,7 @@ def test_normalized_table_PremiseTable_premise_Exists():
 
 def test_normalized_table_TeamLinkTable_teamlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_item_teamlink_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_idea_teamlink_str())
     mapper = inspect(TeamLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -192,7 +192,7 @@ def test_normalized_table_TeamLinkTable_teamlink_Exists():
 
 def test_normalized_table_HealerLinkTable_healerlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_item_healerlink_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_idea_healerlink_str())
     mapper = inspect(HealerLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -205,7 +205,7 @@ def test_normalized_table_HealerLinkTable_healerlink_Exists():
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_item_factunit_str())
+    config_dimen = get_normalized_bud_table_build().get(bud_idea_factunit_str())
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 

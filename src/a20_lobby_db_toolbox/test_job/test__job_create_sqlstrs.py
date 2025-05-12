@@ -10,18 +10,18 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_itemunit_str,
-    bud_item_awardlink_str,
-    bud_item_reasonunit_str,
-    bud_item_reason_premiseunit_str,
-    bud_item_teamlink_str,
-    bud_item_healerlink_str,
-    bud_item_factunit_str,
+    bud_ideaunit_str,
+    bud_idea_awardlink_str,
+    bud_idea_reasonunit_str,
+    bud_idea_reason_premiseunit_str,
+    bud_idea_teamlink_str,
+    bud_idea_healerlink_str,
+    bud_idea_factunit_str,
     bud_groupunit_str,
 )
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
+from src.a17_creed_logic.creed_config import get_creed_sqlite_types
+from src.a17_creed_logic.creed_db_tool import get_default_sorted_list
 from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
     get_job_create_table_sqlstrs,
     create_job_tables,
@@ -35,7 +35,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
     create_table_sqlstrs = get_job_create_table_sqlstrs()
 
     # THEN
-    s_types = get_idea_sqlite_types()
+    s_types = get_creed_sqlite_types()
     bud_calc_config = get_bud_calc_config_dict()
     for x_dimen in bud_calc_config.keys():
         # print(f"{x_dimen} checking...")
@@ -66,13 +66,13 @@ def test_create_job_tables_CreatesTables():
         budmemb_job_table = f"{bud_acct_membership_str()}_job"
         budacct_job_table = f"{bud_acctunit_str()}_job"
         budgrou_job_table = f"{bud_groupunit_str()}_job"
-        budawar_job_table = f"{bud_item_awardlink_str()}_job"
-        budfact_job_table = f"{bud_item_factunit_str()}_job"
-        budheal_job_table = f"{bud_item_healerlink_str()}_job"
-        budprem_job_table = f"{bud_item_reason_premiseunit_str()}_job"
-        budares_job_table = f"{bud_item_reasonunit_str()}_job"
-        budteam_job_table = f"{bud_item_teamlink_str()}_job"
-        buditem_job_table = f"{bud_itemunit_str()}_job"
+        budawar_job_table = f"{bud_idea_awardlink_str()}_job"
+        budfact_job_table = f"{bud_idea_factunit_str()}_job"
+        budheal_job_table = f"{bud_idea_healerlink_str()}_job"
+        budprem_job_table = f"{bud_idea_reason_premiseunit_str()}_job"
+        budares_job_table = f"{bud_idea_reasonunit_str()}_job"
+        budteam_job_table = f"{bud_idea_teamlink_str()}_job"
+        budidea_job_table = f"{bud_ideaunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
 
         assert db_table_exists(cursor, budmemb_job_table) is False
@@ -84,7 +84,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, budprem_job_table) is False
         assert db_table_exists(cursor, budares_job_table) is False
         assert db_table_exists(cursor, budteam_job_table) is False
-        assert db_table_exists(cursor, buditem_job_table) is False
+        assert db_table_exists(cursor, budidea_job_table) is False
         assert db_table_exists(cursor, budunit_job_table) is False
 
         # WHEN
@@ -106,7 +106,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, budprem_job_table)
         assert db_table_exists(cursor, budares_job_table)
         assert db_table_exists(cursor, budteam_job_table)
-        assert db_table_exists(cursor, buditem_job_table)
+        assert db_table_exists(cursor, budidea_job_table)
         assert db_table_exists(cursor, budunit_job_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11

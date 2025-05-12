@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import create_way
-from src.a05_item_logic.healer import healerlink_shop
-from src.a05_item_logic.item import itemunit_shop
-from src.a04_reason_logic.reason_item import factunit_shop, FactUnit
+from src.a05_idea_logic.healer import healerlink_shop
+from src.a05_idea_logic.idea import ideaunit_shop
+from src.a04_reason_logic.reason_idea import factunit_shop, FactUnit
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a12_hub_tools.hub_tool import save_gut_file, open_gut_file
 from src.a15_fisc_logic.fisc import FiscUnit, fiscunit_shop
@@ -40,24 +40,24 @@ def create_example_fisc2() -> FiscUnit:
     zia_gut_bud.add_acctunit(zia_str, 38, 400)
     texas_str = "Texas"
     texas_way = yao_gut_bud.make_l1_way(texas_str)
-    yao_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    wei_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    zia_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    yao_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    wei_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    zia_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_way = yao_gut_bud.make_way(texas_way, dallas_str)
     dallas_healerlink = healerlink_shop({yao_str, zia_str})
-    dallas_item = itemunit_shop(dallas_str, healerlink=dallas_healerlink)
+    dallas_idea = ideaunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
     elpaso_way = yao_gut_bud.make_way(texas_way, elpaso_str)
     elpaso_healerlink = healerlink_shop({yao_str})
-    elpaso_item = itemunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    yao_gut_bud.set_item(dallas_item, texas_way)
-    yao_gut_bud.set_item(elpaso_item, texas_way)
-    wei_gut_bud.set_item(dallas_item, texas_way)
-    wei_gut_bud.set_item(elpaso_item, texas_way)
-    zia_gut_bud.set_item(dallas_item, texas_way)
-    zia_gut_bud.set_item(elpaso_item, texas_way)
+    yao_gut_bud.set_idea(dallas_idea, texas_way)
+    yao_gut_bud.set_idea(elpaso_idea, texas_way)
+    wei_gut_bud.set_idea(dallas_idea, texas_way)
+    wei_gut_bud.set_idea(elpaso_idea, texas_way)
+    zia_gut_bud.set_idea(dallas_idea, texas_way)
+    zia_gut_bud.set_idea(elpaso_idea, texas_way)
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     save_gut_file(x_fisc_mstr_dir, wei_gut_bud)
     save_gut_file(x_fisc_mstr_dir, zia_gut_bud)
@@ -85,24 +85,24 @@ def create_example_fisc3() -> FiscUnit:
 
     casa_str = "casa"
     casa_way = yao_gut_bud.make_l1_way(casa_str)
-    yao_gut_bud.set_l1_item(itemunit_shop(casa_str))
-    wei_gut_bud.set_l1_item(itemunit_shop(casa_str))
-    zia_gut_bud.set_l1_item(itemunit_shop(casa_str))
+    yao_gut_bud.set_l1_idea(ideaunit_shop(casa_str))
+    wei_gut_bud.set_l1_idea(ideaunit_shop(casa_str))
+    zia_gut_bud.set_l1_idea(ideaunit_shop(casa_str))
     clean_str = "clean"
     clean_way = yao_gut_bud.make_way(casa_way, clean_str)
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_bud.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    yao_gut_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_way)
-    yao_gut_bud.set_item(itemunit_shop(hall_str, pledge=True), clean_way)
+    yao_gut_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    yao_gut_bud.set_idea(ideaunit_shop(bath_str, pledge=True), clean_way)
+    yao_gut_bud.set_idea(ideaunit_shop(hall_str, pledge=True), clean_way)
 
-    wei_gut_bud.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    wei_gut_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_way)
+    wei_gut_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    wei_gut_bud.set_idea(ideaunit_shop(bath_str, pledge=True), clean_way)
 
-    zia_gut_bud.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    zia_gut_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_way)
-    zia_gut_bud.set_item(itemunit_shop(hall_str, pledge=True), clean_way)
+    zia_gut_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    zia_gut_bud.set_idea(ideaunit_shop(bath_str, pledge=True), clean_way)
+    zia_gut_bud.set_idea(ideaunit_shop(hall_str, pledge=True), clean_way)
 
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     save_gut_file(x_fisc_mstr_dir, wei_gut_bud)
@@ -128,24 +128,24 @@ def create_example_fisc4() -> FiscUnit:
 
     casa_str = "casa"
     casa_way = yao_gut_bud.make_l1_way(casa_str)
-    yao_gut_bud.set_l1_item(itemunit_shop(casa_str))
-    wei_gut_bud.set_l1_item(itemunit_shop(casa_str))
-    zia_gut_bud.set_l1_item(itemunit_shop(casa_str))
+    yao_gut_bud.set_l1_idea(ideaunit_shop(casa_str))
+    wei_gut_bud.set_l1_idea(ideaunit_shop(casa_str))
+    zia_gut_bud.set_l1_idea(ideaunit_shop(casa_str))
     clean_str = "clean"
     clean_way = yao_gut_bud.make_way(casa_way, clean_str)
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_bud.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    yao_gut_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_way)
-    yao_gut_bud.set_item(itemunit_shop(hall_str, pledge=True), clean_way)
+    yao_gut_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    yao_gut_bud.set_idea(ideaunit_shop(bath_str, pledge=True), clean_way)
+    yao_gut_bud.set_idea(ideaunit_shop(hall_str, pledge=True), clean_way)
 
-    wei_gut_bud.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    wei_gut_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_way)
+    wei_gut_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    wei_gut_bud.set_idea(ideaunit_shop(bath_str, pledge=True), clean_way)
 
-    zia_gut_bud.set_item(itemunit_shop(clean_str, pledge=True), casa_way)
-    zia_gut_bud.set_item(itemunit_shop(bath_str, pledge=True), clean_way)
-    zia_gut_bud.set_item(itemunit_shop(hall_str, pledge=True), clean_way)
+    zia_gut_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
+    zia_gut_bud.set_idea(ideaunit_shop(bath_str, pledge=True), clean_way)
+    zia_gut_bud.set_idea(ideaunit_shop(hall_str, pledge=True), clean_way)
 
     yao_gut_bud.set_credor_respect(101)
     wei_gut_bud.set_credor_respect(75)
@@ -164,9 +164,9 @@ def create_example_fisc4() -> FiscUnit:
     zia_gut_bud.add_acctunit(zia_str, 38, 400)
 
     texas_str = "Texas"
-    yao_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    wei_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
-    zia_gut_bud.set_l1_item(itemunit_shop(texas_str, problem_bool=True))
+    yao_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    wei_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    zia_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
     save_gut_file(x_fisc_mstr_dir, wei_gut_bud)
     save_gut_file(x_fisc_mstr_dir, zia_gut_bud)
@@ -207,11 +207,11 @@ def get_bob_mop_without_reason_budunit_example() -> BudUnit:
     clean_way = bob_bud.make_way(floor_way, clean_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(casa_way, 1)
-    bob_bud.add_item(floor_way, 1)
-    bob_bud.add_item(clean_way, 1)
-    bob_bud.add_item(dirty_way, 1)
-    bob_bud.add_item(mop_way, 1, pledge=True)
+    bob_bud.add_idea(casa_way, 1)
+    bob_bud.add_idea(floor_way, 1)
+    bob_bud.add_idea(clean_way, 1)
+    bob_bud.add_idea(dirty_way, 1)
+    bob_bud.add_idea(mop_way, 1, pledge=True)
     return bob_bud
 
 
@@ -226,7 +226,7 @@ def get_bob_mop_with_reason_budunit_example() -> BudUnit:
     floor_way = bob_bud.make_way(casa_way, floor_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
     return bob_bud
 
 
@@ -256,14 +256,14 @@ def get_yao_run_with_reason_budunit_example() -> BudUnit:
     weather_way = yao_bud.make_l1_way(weather_str)
     rain_way = yao_bud.make_way(weather_way, raining_str)
     snow_way = yao_bud.make_way(weather_way, snowing_str)
-    yao_bud.add_item(participate_way)
-    yao_bud.add_item(ski_way, 5, pledge=True)
-    yao_bud.add_item(run_way, 1, pledge=True)
-    yao_bud.add_item(weather_way)
-    yao_bud.add_item(rain_way)
-    yao_bud.add_item(snow_way)
-    yao_bud.edit_item_attr(ski_way, reason_base=weather_way, reason_premise=snow_way)
-    yao_bud.edit_item_attr(run_way, reason_base=weather_way, reason_premise=rain_way)
+    yao_bud.add_idea(participate_way)
+    yao_bud.add_idea(ski_way, 5, pledge=True)
+    yao_bud.add_idea(run_way, 1, pledge=True)
+    yao_bud.add_idea(weather_way)
+    yao_bud.add_idea(rain_way)
+    yao_bud.add_idea(snow_way)
+    yao_bud.edit_idea_attr(ski_way, reason_base=weather_way, reason_premise=snow_way)
+    yao_bud.edit_idea_attr(run_way, reason_base=weather_way, reason_premise=rain_way)
     return yao_bud
 
 

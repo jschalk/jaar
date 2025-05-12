@@ -24,7 +24,7 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     casa_way = sue_bud.make_l1_way("case")
     clean_way = sue_bud.make_l1_way("clean")
     dirty_way = sue_bud.make_l1_way("dirty")
-    sue_bud.add_fact(casa_way, dirty_way, create_missing_items=True)
+    sue_bud.add_fact(casa_way, dirty_way, create_missing_ideas=True)
 
     # WHEN
     sue_fact_dict = get_bud_root_facts_dict(sue_bud)
@@ -101,11 +101,11 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario1_Bud1FactsChanged():
     clean_way = bob_bud.make_way(floor_way, clean_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(floor_way)
-    bob_bud.add_item(clean_way)
-    bob_bud.add_item(dirty_way)
-    bob_bud.add_item(mop_way, pledge=True)
-    bob_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.add_idea(floor_way)
+    bob_bud.add_idea(clean_way)
+    bob_bud.add_idea(dirty_way)
+    bob_bud.add_idea(mop_way, pledge=True)
+    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
     dirty_facts_dict = {floor_way: {"fbase": floor_way, "fneed": dirty_way}}
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != dirty_facts_dict
@@ -133,11 +133,11 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_base_DoesNotExistInB
     clean_way = bob_bud.make_way(floor_way, clean_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(floor_way)
-    # bob_bud.add_item(clean_way)
-    bob_bud.add_item(dirty_way)
-    bob_bud.add_item(mop_way, pledge=True)
-    bob_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.add_idea(floor_way)
+    # bob_bud.add_idea(clean_way)
+    bob_bud.add_idea(dirty_way)
+    bob_bud.add_idea(mop_way, pledge=True)
+    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
     clean_facts_dict = {floor_way: {"fbase": floor_way, "fneed": clean_way}}
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != clean_facts_dict
@@ -150,7 +150,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_base_DoesNotExistInB
     # THEN
     assert bob_bud.get_dict() != before_bob_bud.get_dict()
     assert bob_bud.get_factunits_dict() == clean_facts_dict
-    assert bob_bud.get_item_obj(clean_way)
+    assert bob_bud.get_idea_obj(clean_way)
 
 
 def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_base_WithoutBaseNotAddedToBud():
@@ -166,11 +166,11 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_base_WithoutBaseNotA
     clean_way = bob_bud.make_way(floor_way, clean_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(floor_way)
-    # bob_bud.add_item(clean_way)
-    bob_bud.add_item(dirty_way)
-    bob_bud.add_item(mop_way, pledge=True)
-    bob_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.add_idea(floor_way)
+    # bob_bud.add_idea(clean_way)
+    bob_bud.add_idea(dirty_way)
+    bob_bud.add_idea(mop_way, pledge=True)
+    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
 
     weather_str = "weather"
     raining_str = "raining"
@@ -208,11 +208,11 @@ def test_clear_factunits_from_bud_ReturnsObj_Scenario1_FactUnit_Exist():
     clean_way = bob_bud.make_way(floor_way, clean_str)
     dirty_way = bob_bud.make_way(floor_way, dirty_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_item(floor_way)
-    # bob_bud.add_item(clean_way)
-    bob_bud.add_item(dirty_way)
-    bob_bud.add_item(mop_way, pledge=True)
-    bob_bud.edit_item_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.add_idea(floor_way)
+    # bob_bud.add_idea(clean_way)
+    bob_bud.add_idea(dirty_way)
+    bob_bud.add_idea(mop_way, pledge=True)
+    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
     bob_bud.add_fact(floor_way, dirty_way)
     floor_facts_dict = {floor_way: {"fbase": floor_way, "fneed": dirty_way}}
     assert bob_bud.get_factunits_dict() == floor_facts_dict

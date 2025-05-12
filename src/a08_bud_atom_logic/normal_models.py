@@ -37,10 +37,10 @@ class MemberShipTable(Base):
     debtit_vote = Column(Float)
 
 
-class ItemTable(Base):
-    __tablename__ = "item"
+class IdeaTable(Base):
+    __tablename__ = "idea"
     uid = Column(Integer, primary_key=True)
-    item_way = Column(String)
+    idea_way = Column(String)
     addin = Column(Float)
     begin = Column(Float)
     close = Column(Float)
@@ -58,7 +58,7 @@ class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
     awardee_label = Column(String)
-    item_way = Column(String)
+    idea_way = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
 
@@ -67,8 +67,8 @@ class ReasonTable(Base):
     __tablename__ = "reason"
     uid = Column(Integer, primary_key=True)
     base = Column(String)
-    item_way = Column(String)
-    base_item_active_requisite = Column(Integer)
+    idea_way = Column(String)
+    base_idea_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):
@@ -76,7 +76,7 @@ class PremiseTable(Base):
     uid = Column(Integer, primary_key=True)
     base = Column(String)
     need = Column(String)
-    item_way = Column(String)
+    idea_way = Column(String)
     divisor = Column(Integer)
     nigh = Column(Float)
     open = Column(Float)
@@ -86,21 +86,21 @@ class TeamLinkTable(Base):
     __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
     team_label = Column(String)
-    item_way = Column(String)
+    idea_way = Column(String)
 
 
 class HealerLinkTable(Base):
     __tablename__ = "healerlink"
     uid = Column(Integer, primary_key=True)
     healer_name = Column(String)
-    item_way = Column(String)
+    idea_way = Column(String)
 
 
 class FactTable(Base):
     __tablename__ = "fact"
     uid = Column(Integer, primary_key=True)
     fbase = Column(String)
-    item_way = Column(String)
+    idea_way = Column(String)
     fnigh = Column(Float)
     fopen = Column(Float)
     fneed = Column(String)

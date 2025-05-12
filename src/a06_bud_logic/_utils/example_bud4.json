@@ -564,7 +564,7 @@
   "fisc_tag": "A",
   "fund_coin": 1,
   "fund_pool": 1000000000.0,
-  "itemroot": {
+  "idearoot": {
     "_kids": {
       "ACME": {
         "_is_expanded": false,
@@ -576,7 +576,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 116,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -594,14 +594,14 @@
                   }
                 },
                 "_uid": 106,
-                "item_tag": "Abuse Deterrence and Reporting guildlines",
+                "idea_tag": "Abuse Deterrence and Reporting guildlines",
                 "mass": 1
               },
               "Know ACME Staff  and Safety #2 guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 115,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -618,14 +618,14 @@
                   }
                 },
                 "_uid": 105,
-                "item_tag": "Know ACME Staff  and Safety #2 guildlines",
+                "idea_tag": "Know ACME Staff  and Safety #2 guildlines",
                 "mass": 1
               },
               "Know Adult Sexual Misconduct guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 118,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -643,12 +643,12 @@
                   }
                 },
                 "_uid": 108,
-                "item_tag": "Know Adult Sexual Misconduct guildlines",
+                "idea_tag": "Know Adult Sexual Misconduct guildlines",
                 "mass": 1
               },
               "Know Employee Intruction manuel.": {
                 "_uid": 123,
-                "item_tag": "Know Employee Intruction manuel.",
+                "idea_tag": "Know Employee Intruction manuel.",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -668,7 +668,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 119,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -686,14 +686,14 @@
                   }
                 },
                 "_uid": 109,
-                "item_tag": "Know Identifying and Supporting Houseless Youth guildlines",
+                "idea_tag": "Know Identifying and Supporting Houseless Youth guildlines",
                 "mass": 1
               },
               "Know Information Security Awareness guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 121,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -711,14 +711,14 @@
                   }
                 },
                 "_uid": 111,
-                "item_tag": "Know Information Security Awareness guildlines",
+                "idea_tag": "Know Information Security Awareness guildlines",
                 "mass": 1
               },
               "Know Interbody retaliation guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 117,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -735,14 +735,14 @@
                   }
                 },
                 "_uid": 107,
-                "item_tag": "Know Interbody retaliation guildlines",
+                "idea_tag": "Know Interbody retaliation guildlines",
                 "mass": 1
               },
               "Rick Management and Hazard Analysis": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 122,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -759,14 +759,14 @@
                   }
                 },
                 "_uid": 112,
-                "item_tag": "Rick Management and Hazard Analysis",
+                "idea_tag": "Rick Management and Hazard Analysis",
                 "mass": 1
               },
               "know OSHA COVID-19 Rick Reduction guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 120,
-                    "item_tag": "Accomplish Fall 2021 traaining",
+                    "idea_tag": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -784,12 +784,12 @@
                   }
                 },
                 "_uid": 110,
-                "item_tag": "know OSHA COVID-19 Rick Reduction guildlines",
+                "idea_tag": "know OSHA COVID-19 Rick Reduction guildlines",
                 "mass": 1
               }
             },
             "_uid": 102,
-            "item_tag": "ACME Employee Responsiblities",
+            "idea_tag": "ACME Employee Responsiblities",
             "mass": 1
           },
           "IT DEPT": {
@@ -801,7 +801,7 @@
                     "_kids": {
                       "check emails": {
                         "_uid": 138,
-                        "item_tag": "check emails",
+                        "idea_tag": "check emails",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -822,27 +822,27 @@
                         "_kids": {
                           "MECHANISM1": {
                             "_uid": 170,
-                            "item_tag": "MECHANISM1",
+                            "idea_tag": "MECHANISM1",
                             "mass": 1
                           },
                           "MECHANISM2": {
                             "_uid": 171,
-                            "item_tag": "MECHANISM2",
+                            "idea_tag": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM3": {
                             "_uid": 172,
-                            "item_tag": "MECHANISM3",
+                            "idea_tag": "MECHANISM3",
                             "mass": 1
                           },
                           "MECHANISM4": {
                             "_uid": 173,
-                            "item_tag": "MECHANISM4",
+                            "idea_tag": "MECHANISM4",
                             "mass": 1
                           }
                         },
                         "_uid": 139,
-                        "item_tag": "check mechanisms",
+                        "idea_tag": "check mechanisms",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -861,7 +861,7 @@
                       }
                     },
                     "_uid": 137,
-                    "item_tag": "check ETLs ran correctly",
+                    "idea_tag": "check ETLs ran correctly",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -879,7 +879,7 @@
                   },
                   "dress to slightly impress": {
                     "_uid": 158,
-                    "item_tag": "dress to slightly impress",
+                    "idea_tag": "dress to slightly impress",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -898,7 +898,7 @@
                   },
                   "go to employment": {
                     "_uid": 231,
-                    "item_tag": "go to employment",
+                    "idea_tag": "go to employment",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -917,7 +917,7 @@
                   }
                 },
                 "_uid": 136,
-                "item_tag": "IT DEPT off-hours responsiblities",
+                "idea_tag": "IT DEPT off-hours responsiblities",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
@@ -937,7 +937,7 @@
                 "_kids": {
                   "Add to Azure DevOps": {
                     "_uid": 156,
-                    "item_tag": "Add to Azure DevOps",
+                    "idea_tag": "Add to Azure DevOps",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -958,7 +958,7 @@
                     "_kids": {
                       "Datawarehouse Expertise acquisition": {
                         "_uid": 142,
-                        "item_tag": "Datawarehouse Expertise acquisition",
+                        "idea_tag": "Datawarehouse Expertise acquisition",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -979,27 +979,27 @@
                         "_kids": {
                           "MECHANISM1": {
                             "_uid": 175,
-                            "item_tag": "MECHANISM1",
+                            "idea_tag": "MECHANISM1",
                             "mass": 1
                           },
                           "MECHANISM2": {
                             "_uid": 176,
-                            "item_tag": "MECHANISM2",
+                            "idea_tag": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM4D": {
                             "_uid": 177,
-                            "item_tag": "MECHANISM4D",
+                            "idea_tag": "MECHANISM4D",
                             "mass": 1
                           },
                           "MECHANISM4DD": {
                             "_uid": 174,
-                            "item_tag": "MECHANISM4DD",
+                            "idea_tag": "MECHANISM4DD",
                             "mass": 1
                           }
                         },
                         "_uid": 157,
-                        "item_tag": "dev quantification script \"T2R8\"",
+                        "idea_tag": "dev quantification script \"T2R8\"",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1018,7 +1018,7 @@
                       },
                       "go to daily meeting ": {
                         "_uid": 232,
-                        "item_tag": "go to daily meeting ",
+                        "idea_tag": "go to daily meeting ",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1037,12 +1037,12 @@
                       }
                     },
                     "_uid": 135,
-                    "item_tag": "Datawarehouse",
+                    "idea_tag": "Datawarehouse",
                     "mass": 1
                   },
                   "IT DEPT general": {
                     "_uid": 141,
-                    "item_tag": "IT DEPT general",
+                    "idea_tag": "IT DEPT general",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -1060,7 +1060,7 @@
                   },
                   "Keep track of Chatroom conversations": {
                     "_uid": 151,
-                    "item_tag": "Keep track of Chatroom conversations",
+                    "idea_tag": "Keep track of Chatroom conversations",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1081,7 +1081,7 @@
                     "_kids": {
                       "check for access": {
                         "_uid": 143,
-                        "item_tag": "check for access",
+                        "idea_tag": "check for access",
                         "mass": 1,
                         "reasonunits": {
                           "A;time;gregtime": {
@@ -1099,7 +1099,7 @@
                       }
                     },
                     "_uid": 140,
-                    "item_tag": "SQLIte",
+                    "idea_tag": "SQLIte",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -1117,7 +1117,7 @@
                   },
                   "consider management perspective": {
                     "_uid": 155,
-                    "item_tag": "consider management perspective",
+                    "idea_tag": "consider management perspective",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1136,7 +1136,7 @@
                   }
                 },
                 "_uid": 133,
-                "item_tag": "IT DEPT regular hours responsiblities",
+                "idea_tag": "IT DEPT regular hours responsiblities",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -1156,7 +1156,7 @@
               }
             },
             "_uid": 101,
-            "item_tag": "IT DEPT",
+            "idea_tag": "IT DEPT",
             "mass": 1,
             "reasonunits": {
               "A;time;gregtime": {
@@ -1174,7 +1174,7 @@
           }
         },
         "_uid": 100,
-        "item_tag": "ACME",
+        "idea_tag": "ACME",
         "mass": 1
       },
       "Aaron Donald objects effected by him": {
@@ -1182,17 +1182,17 @@
         "_kids": {
           "interesting": {
             "_uid": 262,
-            "item_tag": "interesting",
+            "idea_tag": "interesting",
             "mass": 1
           },
           "not interesting": {
             "_uid": 263,
-            "item_tag": "not interesting",
+            "idea_tag": "not interesting",
             "mass": 1
           }
         },
         "_uid": 261,
-        "item_tag": "Aaron Donald objects effected by him",
+        "idea_tag": "Aaron Donald objects effected by him",
         "mass": 1
       },
       "Asset management": {
@@ -1208,7 +1208,7 @@
                         "_kids": {
                           "browsing": {
                             "_uid": 217,
-                            "item_tag": "browsing",
+                            "idea_tag": "browsing",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1223,7 +1223,7 @@
                           },
                           "picnic": {
                             "_uid": 216,
-                            "item_tag": "picnic",
+                            "idea_tag": "picnic",
                             "mass": 1,
                             "reasonunits": {
                               "A;Seasons": {
@@ -1238,7 +1238,7 @@
                           },
                           "street soccer": {
                             "_uid": 213,
-                            "item_tag": "street soccer",
+                            "idea_tag": "street soccer",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1253,7 +1253,7 @@
                           },
                           "swimming": {
                             "_uid": 212,
-                            "item_tag": "swimming",
+                            "idea_tag": "swimming",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1268,7 +1268,7 @@
                           }
                         },
                         "_uid": 210,
-                        "item_tag": "Local college",
+                        "idea_tag": "Local college",
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
@@ -1285,7 +1285,7 @@
                         "_kids": {
                           "be reponsible for rent": {
                             "_uid": 209,
-                            "item_tag": "be reponsible for rent",
+                            "idea_tag": "be reponsible for rent",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1302,7 +1302,7 @@
                             "_kids": {
                               "maybe watch a video": {
                                 "_uid": 218,
-                                "item_tag": "maybe watch a video",
+                                "idea_tag": "maybe watch a video",
                                 "mass": 1,
                                 "reasonunits": {
                                   "A;Interweb": {
@@ -1317,7 +1317,7 @@
                               }
                             },
                             "_uid": 214,
-                            "item_tag": "enjoy silent time",
+                            "idea_tag": "enjoy silent time",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1332,7 +1332,7 @@
                           },
                           "flat": {
                             "_uid": 211,
-                            "item_tag": "flat",
+                            "idea_tag": "flat",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1347,7 +1347,7 @@
                           },
                           "gym time": {
                             "_uid": 215,
-                            "item_tag": "gym time",
+                            "idea_tag": "gym time",
                             "mass": 1,
                             "reasonunits": {
                               "A;Moods": {
@@ -1362,7 +1362,7 @@
                           }
                         },
                         "_uid": 208,
-                        "item_tag": "flats",
+                        "idea_tag": "flats",
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
@@ -1377,7 +1377,7 @@
                       }
                     },
                     "_uid": 207,
-                    "item_tag": "downtown",
+                    "idea_tag": "downtown",
                     "mass": 1,
                     "reasonunits": {
                       "A;Nation-States": {
@@ -1392,7 +1392,7 @@
                   }
                 },
                 "_uid": 206,
-                "item_tag": "portland sovereignty",
+                "idea_tag": "portland sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
@@ -1407,7 +1407,7 @@
               },
               "texas sovereignty": {
                 "_uid": 205,
-                "item_tag": "texas sovereignty",
+                "idea_tag": "texas sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
@@ -1422,7 +1422,7 @@
               }
             },
             "_uid": 204,
-            "item_tag": "American sovereignty",
+            "idea_tag": "American sovereignty",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -1437,7 +1437,7 @@
           },
           "French sovereignty": {
             "_uid": 203,
-            "item_tag": "French sovereignty",
+            "idea_tag": "French sovereignty",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -1452,7 +1452,7 @@
           }
         },
         "_uid": 199,
-        "item_tag": "Asset management",
+        "idea_tag": "Asset management",
         "mass": 1
       },
       "Better Stuff Proposal": {
@@ -1461,7 +1461,7 @@
           "decrease carbon footprint": {
             "_kids": {
               "never fly a private G5": {
-                "item_tag": "never fly a private G5",
+                "idea_tag": "never fly a private G5",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -1479,12 +1479,12 @@
                 }
               }
             },
-            "item_tag": "decrease carbon footprint",
+            "idea_tag": "decrease carbon footprint",
             "mass": 1,
             "morph": false
           }
         },
-        "item_tag": "Better Stuff Proposal",
+        "idea_tag": "Better Stuff Proposal",
         "mass": 1,
         "morph": false
       },
@@ -1492,17 +1492,17 @@
         "_kids": {
           "Aint me Babe": {
             "_uid": 270,
-            "item_tag": "Aint me Babe",
+            "idea_tag": "Aint me Babe",
             "mass": 1
           },
           "tangled up in blue": {
             "_uid": 271,
-            "item_tag": "tangled up in blue",
+            "idea_tag": "tangled up in blue",
             "mass": 1
           }
         },
         "_uid": 269,
-        "item_tag": "Bob Dylan Root",
+        "idea_tag": "Bob Dylan Root",
         "mass": 1
       },
       "D&B": {
@@ -1519,7 +1519,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "Ask Aaron monthly what I can do",
+                "idea_tag": "Ask Aaron monthly what I can do",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
@@ -1541,7 +1541,7 @@
                 "take_force": 1
               }
             },
-            "item_tag": "bens friends be desperate for of housing support",
+            "idea_tag": "bens friends be desperate for of housing support",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -1558,7 +1558,7 @@
             "_kids": {
               "test program": {
                 "_uid": 178,
-                "item_tag": "test program",
+                "idea_tag": "test program",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1592,7 +1592,7 @@
                 "take_force": 1
               }
             },
-            "item_tag": "develop D&B software",
+            "idea_tag": "develop D&B software",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -1616,7 +1616,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "donate to influential people that are pro-Climate Death",
+                "idea_tag": "donate to influential people that are pro-Climate Death",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1643,7 +1643,7 @@
               }
             },
             "_uid": 167,
-            "item_tag": "donate to pro-climate committees",
+            "idea_tag": "donate to pro-climate committees",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -1658,7 +1658,7 @@
           },
           "late_night_go_to_sleep": {
             "_uid": 149,
-            "item_tag": "late_night_go_to_sleep",
+            "idea_tag": "late_night_go_to_sleep",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -1688,7 +1688,7 @@
               "Ernesto Chavez": {
                 "_kids": {
                   "available for phone call": {
-                    "item_tag": "available for phone call",
+                    "idea_tag": "available for phone call",
                     "mass": 4,
                     "morph": false,
                     "pledge": true,
@@ -1707,7 +1707,7 @@
                     }
                   }
                 },
-                "item_tag": "Ernesto Chavez",
+                "idea_tag": "Ernesto Chavez",
                 "mass": 4,
                 "morph": false,
                 "reasonunits": {
@@ -1727,7 +1727,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "be available for phone call",
+                    "idea_tag": "be available for phone call",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1766,7 +1766,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "call Aaron and discuss methodology",
+                    "idea_tag": "call Aaron and discuss methodology",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1800,7 +1800,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "sympathetic receptive to Aaron",
+                "idea_tag": "sympathetic receptive to Aaron",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
@@ -1815,7 +1815,7 @@
               }
             },
             "_uid": 161,
-            "item_tag": "sympathetic receptive",
+            "idea_tag": "sympathetic receptive",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -1839,7 +1839,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "write letters about Climate Death to congressman",
+                "idea_tag": "write letters about Climate Death to congressman",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
@@ -1865,7 +1865,7 @@
               }
             },
             "_uid": 165,
-            "item_tag": "write letters to reps",
+            "idea_tag": "write letters to reps",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -1897,7 +1897,7 @@
             "take_force": 1
           }
         },
-        "item_tag": "D&B",
+        "idea_tag": "D&B",
         "mass": 1,
         "reasonunits": {
           "A;Aaron Donald objects effected by him": {
@@ -1917,66 +1917,66 @@
             "_kids": {
               "PSU Ultimate": {
                 "_uid": 254,
-                "item_tag": "PSU Ultimate",
+                "idea_tag": "PSU Ultimate",
                 "mass": 1
               }
             },
             "_uid": 253,
-            "item_tag": "AOL AIM",
+            "idea_tag": "AOL AIM",
             "mass": 1
           },
           "Faaceboook": {
             "_uid": 251,
-            "item_tag": "Faaceboook",
+            "idea_tag": "Faaceboook",
             "mass": 1
           },
           "Github": {
             "_uid": 252,
-            "item_tag": "Github",
+            "idea_tag": "Github",
             "mass": 1
           },
           "YahooVideo": {
             "_uid": 255,
-            "item_tag": "YahooVideo",
+            "idea_tag": "YahooVideo",
             "mass": 1
           }
         },
         "_uid": 250,
-        "item_tag": "Interweb",
+        "idea_tag": "Interweb",
         "mass": 1
       },
       "Moods": {
         "_kids": {
           "Bllod Meridan by Cormac": {
             "_uid": 265,
-            "item_tag": "Bllod Meridan by Cormac",
+            "idea_tag": "Bllod Meridan by Cormac",
             "mass": 1
           },
           "Happy": {
             "_kids": {
               "Happy - angerish": {
                 "_uid": 267,
-                "item_tag": "Happy - angerish",
+                "idea_tag": "Happy - angerish",
                 "mass": 1
               }
             },
             "_uid": 266,
-            "item_tag": "Happy",
+            "idea_tag": "Happy",
             "mass": 1
           },
           "I need to waste time": {
-            "item_tag": "I need to waste time",
+            "idea_tag": "I need to waste time",
             "mass": 1,
             "morph": false
           },
           "hungry": {
             "_uid": 268,
-            "item_tag": "hungry",
+            "idea_tag": "hungry",
             "mass": 1
           }
         },
         "_uid": 264,
-        "item_tag": "Moods",
+        "idea_tag": "Moods",
         "mass": 1
       },
       "Nation-States": {
@@ -1984,7 +1984,7 @@
         "_kids": {
           "France2": {
             "_uid": 235,
-            "item_tag": "France2",
+            "idea_tag": "France2",
             "mass": 1
           },
           "USA": {
@@ -1997,79 +1997,79 @@
                         "_kids": {
                           "10th floor gaarden": {
                             "_uid": 246,
-                            "item_tag": "10th floor gaarden",
+                            "idea_tag": "10th floor gaarden",
                             "mass": 1
                           },
                           "Apt 450": {
                             "_uid": 247,
-                            "item_tag": "Apt 450",
+                            "idea_tag": "Apt 450",
                             "mass": 1
                           },
                           "Gym": {
                             "_uid": 248,
-                            "item_tag": "Gym",
+                            "idea_tag": "Gym",
                             "mass": 1
                           },
                           "workspace": {
                             "_uid": 249,
-                            "item_tag": "workspace",
+                            "idea_tag": "workspace",
                             "mass": 1
                           }
                         },
                         "_uid": 245,
-                        "item_tag": "Flats",
+                        "idea_tag": "Flats",
                         "mass": 1
                       },
                       "PSU": {
                         "_kids": {
                           "Park Squares": {
                             "_uid": 241,
-                            "item_tag": "Park Squares",
+                            "idea_tag": "Park Squares",
                             "mass": 1
                           },
                           "Pool": {
                             "_uid": 242,
-                            "item_tag": "Pool",
+                            "idea_tag": "Pool",
                             "mass": 1
                           },
                           "Stott Field": {
                             "_uid": 243,
-                            "item_tag": "Stott Field",
+                            "idea_tag": "Stott Field",
                             "mass": 1
                           },
                           "library": {
                             "_uid": 244,
-                            "item_tag": "library",
+                            "idea_tag": "library",
                             "mass": 1
                           }
                         },
                         "_uid": 240,
-                        "item_tag": "PSU",
+                        "idea_tag": "PSU",
                         "mass": 1
                       }
                     },
                     "_uid": 239,
-                    "item_tag": "Downtown",
+                    "idea_tag": "Downtown",
                     "mass": 1
                   }
                 },
                 "_uid": 237,
-                "item_tag": "Portland OR",
+                "idea_tag": "Portland OR",
                 "mass": 1
               },
               "Texas": {
                 "_uid": 238,
-                "item_tag": "Texas",
+                "idea_tag": "Texas",
                 "mass": 1
               }
             },
             "_uid": 236,
-            "item_tag": "USA",
+            "idea_tag": "USA",
             "mass": 1
           }
         },
         "_uid": 234,
-        "item_tag": "Nation-States",
+        "idea_tag": "Nation-States",
         "mass": 1
       },
       "No Movie playing": {
@@ -2077,17 +2077,17 @@
         "_kids": {
           "Big Lewbwski": {
             "_uid": 273,
-            "item_tag": "Big Lewbwski",
+            "idea_tag": "Big Lewbwski",
             "mass": 1
           },
           "Star Wars eps IV": {
             "_uid": 274,
-            "item_tag": "Star Wars eps IV",
+            "idea_tag": "Star Wars eps IV",
             "mass": 1
           }
         },
         "_uid": 272,
-        "item_tag": "No Movie playing",
+        "idea_tag": "No Movie playing",
         "mass": 1
       },
       "Seasons": {
@@ -2095,12 +2095,12 @@
         "_kids": {
           "Summer": {
             "_uid": 276,
-            "item_tag": "Summer",
+            "idea_tag": "Summer",
             "mass": 1
           }
         },
         "_uid": 275,
-        "item_tag": "Seasons",
+        "idea_tag": "Seasons",
         "mass": 1
       },
       "Tired Status": {
@@ -2108,17 +2108,17 @@
         "_kids": {
           "Not tired": {
             "_uid": 278,
-            "item_tag": "Not tired",
+            "idea_tag": "Not tired",
             "mass": 1
           },
           "Tired": {
             "_uid": 279,
-            "item_tag": "Tired",
+            "idea_tag": "Tired",
             "mass": 1
           }
         },
         "_uid": 277,
-        "item_tag": "Tired Status",
+        "idea_tag": "Tired Status",
         "mass": 1
       },
       "Ultimate Frisbee": {
@@ -2126,7 +2126,7 @@
         "_kids": {
           "check on m33": {
             "_uid": 221,
-            "item_tag": "check on m33",
+            "idea_tag": "check on m33",
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
@@ -2141,7 +2141,7 @@
           },
           "contemplate the disc": {
             "_uid": 229,
-            "item_tag": "contemplate the disc",
+            "idea_tag": "contemplate the disc",
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing": {
@@ -2158,7 +2158,7 @@
             "_kids": {
               "check for mini ultimate at park": {
                 "_uid": 219,
-                "item_tag": "check for mini ultimate at park",
+                "idea_tag": "check for mini ultimate at park",
                 "mass": 1,
                 "reasonunits": {
                   "A;Moods": {
@@ -2173,7 +2173,7 @@
               }
             },
             "_uid": 201,
-            "item_tag": "playing ultimate",
+            "idea_tag": "playing ultimate",
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
@@ -2188,7 +2188,7 @@
           },
           "relaxing": {
             "_uid": 202,
-            "item_tag": "relaxing",
+            "idea_tag": "relaxing",
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing": {
@@ -2203,7 +2203,7 @@
           }
         },
         "_uid": 200,
-        "item_tag": "Ultimate Frisbee",
+        "idea_tag": "Ultimate Frisbee",
         "mass": 1,
         "reasonunits": {
           "A;Moods": {
@@ -2223,7 +2223,7 @@
             "_kids": {
               "Go climbing at east Circuit": {
                 "_uid": 226,
-                "item_tag": "Go climbing at east Circuit",
+                "idea_tag": "Go climbing at east Circuit",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
@@ -2238,7 +2238,7 @@
               },
               "bike around": {
                 "_uid": 227,
-                "item_tag": "bike around",
+                "idea_tag": "bike around",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
@@ -2253,7 +2253,7 @@
               },
               "trout": {
                 "_uid": 228,
-                "item_tag": "trout",
+                "idea_tag": "trout",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
@@ -2268,7 +2268,7 @@
               }
             },
             "_uid": 225,
-            "item_tag": "Swimming in Williamette watershed",
+            "idea_tag": "Swimming in Williamette watershed",
             "mass": 1,
             "reasonunits": {
               "A;WaterExistence": {
@@ -2283,7 +2283,7 @@
           }
         },
         "_uid": 223,
-        "item_tag": "Water Living",
+        "idea_tag": "Water Living",
         "mass": 1
       },
       "WaterExistence": {
@@ -2295,27 +2295,27 @@
                 "_kids": {
                   "flat": {
                     "_uid": 260,
-                    "item_tag": "flat",
+                    "idea_tag": "flat",
                     "mass": 1
                   }
                 },
                 "_uid": 258,
-                "item_tag": "East Side of Watershed",
+                "idea_tag": "East Side of Watershed",
                 "mass": 1
               },
               "West side of Watershed": {
                 "_uid": 259,
-                "item_tag": "West side of Watershed",
+                "idea_tag": "West side of Watershed",
                 "mass": 1
               }
             },
             "_uid": 257,
-            "item_tag": "Williamette WaterShed",
+            "idea_tag": "Williamette WaterShed",
             "mass": 1
           }
         },
         "_uid": 256,
-        "item_tag": "WaterExistence",
+        "idea_tag": "WaterExistence",
         "mass": 1
       },
       "casa": {
@@ -2333,7 +2333,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "be reponsible for rent",
+                "idea_tag": "be reponsible for rent",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2358,7 +2358,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "be responsible for expenses card",
+                "idea_tag": "be responsible for expenses card",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2383,7 +2383,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "be responsible for utilities",
+                "idea_tag": "be responsible for utilities",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2408,7 +2408,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "set aside a little bucks for fun the week",
+                "idea_tag": "set aside a little bucks for fun the week",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2426,7 +2426,7 @@
               }
             },
             "_uid": 148,
-            "item_tag": "Financial Ops",
+            "idea_tag": "Financial Ops",
             "mass": 1
           },
           "Housing": {
@@ -2434,36 +2434,36 @@
             "_kids": {
               "Bike Garage": {
                 "_uid": 185,
-                "item_tag": "Bike Garage",
+                "idea_tag": "Bike Garage",
                 "mass": 1
               },
               "Bike Gym": {
                 "_uid": 184,
-                "item_tag": "Bike Gym",
+                "idea_tag": "Bike Gym",
                 "mass": 1
               },
               "Flat": {
                 "_kids": {
                   "bathroom #2": {
                     "_uid": 196,
-                    "item_tag": "bathroom #2",
+                    "idea_tag": "bathroom #2",
                     "mass": 1
                   },
                   "bedroom #1": {
                     "_kids": {
                       "big bathroom": {
                         "_uid": 195,
-                        "item_tag": "big bathroom",
+                        "idea_tag": "big bathroom",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 194,
-                        "item_tag": "closet",
+                        "idea_tag": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 191,
-                    "item_tag": "bedroom #1",
+                    "idea_tag": "bedroom #1",
                     "mass": 1
                   },
                   "bedroom #2": {
@@ -2479,62 +2479,62 @@
                                 "take_force": 1
                               }
                             },
-                            "item_tag": "heater maintenance",
+                            "idea_tag": "heater maintenance",
                             "mass": 1
                           }
                         },
                         "_uid": 197,
-                        "item_tag": "bed area",
+                        "idea_tag": "bed area",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 193,
-                        "item_tag": "closet",
+                        "idea_tag": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 192,
-                    "item_tag": "bedroom #2",
+                    "idea_tag": "bedroom #2",
                     "mass": 1
                   },
                   "cookery": {
                     "_uid": 189,
-                    "item_tag": "cookery",
+                    "idea_tag": "cookery",
                     "mass": 1
                   },
                   "dining area": {
                     "_uid": 190,
-                    "item_tag": "dining area",
+                    "idea_tag": "dining area",
                     "mass": 1
                   },
                   "maintenance": {
                     "_uid": 187,
-                    "item_tag": "maintenance",
+                    "idea_tag": "maintenance",
                     "mass": 1
                   },
                   "nursery": {
                     "_uid": 188,
-                    "item_tag": "nursery",
+                    "idea_tag": "nursery",
                     "mass": 1
                   }
                 },
                 "_uid": 181,
-                "item_tag": "Flat",
+                "idea_tag": "Flat",
                 "mass": 1
               },
               "Lifting Gym": {
                 "_uid": 183,
-                "item_tag": "Lifting Gym",
+                "idea_tag": "Lifting Gym",
                 "mass": 1
               },
               "Playing in nurserys": {
                 "_uid": 186,
-                "item_tag": "Playing in nurserys",
+                "idea_tag": "Playing in nurserys",
                 "mass": 1
               },
               "Pool": {
                 "_uid": 182,
-                "item_tag": "Pool",
+                "idea_tag": "Pool",
                 "mass": 1
               }
             },
@@ -2546,7 +2546,7 @@
                 "take_force": 1
               }
             },
-            "item_tag": "Housing",
+            "idea_tag": "Housing",
             "mass": 1
           },
           "call Crazy pete to say hi": {
@@ -2558,7 +2558,7 @@
                 "take_force": 1
               }
             },
-            "item_tag": "call Crazy pete to say hi",
+            "idea_tag": "call Crazy pete to say hi",
             "mass": 30,
             "morph": false,
             "pledge": true,
@@ -2578,7 +2578,7 @@
           },
           "check up on old family friends": {
             "_uid": 222,
-            "item_tag": "check up on old family friends",
+            "idea_tag": "check up on old family friends",
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
@@ -2602,7 +2602,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "check cat water",
+                "idea_tag": "check cat water",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2621,7 +2621,7 @@
               },
               "check humidifer": {
                 "_uid": 159,
-                "item_tag": "check humidifer",
+                "idea_tag": "check humidifer",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2647,7 +2647,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean baby seats",
+                "idea_tag": "clean baby seats",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2673,7 +2673,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean bathroom",
+                "idea_tag": "clean bathroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2699,7 +2699,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean cat poo",
+                "idea_tag": "clean cat poo",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -2726,7 +2726,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean humidifiers",
+                "idea_tag": "clean humidifiers",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2752,7 +2752,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean sheets couch blankets",
+                "idea_tag": "clean sheets couch blankets",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2778,7 +2778,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean table",
+                "idea_tag": "clean table",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2804,7 +2804,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "deep clean play mat",
+                "idea_tag": "deep clean play mat",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2830,7 +2830,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "empty roomba",
+                "idea_tag": "empty roomba",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2856,7 +2856,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "empty roomba Friday",
+                "idea_tag": "empty roomba Friday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2876,17 +2876,17 @@
               "laundry basket status": {
                 "_kids": {
                   "full": {
-                    "item_tag": "full",
+                    "idea_tag": "full",
                     "mass": 1,
                     "morph": false
                   },
                   "not full": {
-                    "item_tag": "not full",
+                    "idea_tag": "not full",
                     "mass": 1,
                     "morph": false
                   }
                 },
-                "item_tag": "laundry basket status",
+                "idea_tag": "laundry basket status",
                 "mass": 1,
                 "morph": false
               },
@@ -2899,7 +2899,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "laundry monday",
+                "idea_tag": "laundry monday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2933,7 +2933,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "laundry saturday",
+                "idea_tag": "laundry saturday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2959,7 +2959,7 @@
                 }
               },
               "laundry thursday": {
-                "item_tag": "laundry thursday",
+                "idea_tag": "laundry thursday",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -2994,7 +2994,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "laundry wednesday",
+                "idea_tag": "laundry wednesday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3021,7 +3021,7 @@
               },
               "morning cookery clean-up": {
                 "_uid": 150,
-                "item_tag": "morning cookery clean-up",
+                "idea_tag": "morning cookery clean-up",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
@@ -3046,7 +3046,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "prepare_bed clean bedroom",
+                "idea_tag": "prepare_bed clean bedroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3072,7 +3072,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "roomba bedroom",
+                "idea_tag": "roomba bedroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3098,7 +3098,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "roomba bedroom Friday",
+                "idea_tag": "roomba bedroom Friday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3124,7 +3124,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "roomba living area",
+                "idea_tag": "roomba living area",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3150,7 +3150,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "roomba living area thur",
+                "idea_tag": "roomba living area thur",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3176,7 +3176,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "roomba maintenance",
+                "idea_tag": "roomba maintenance",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3202,7 +3202,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "wipe down play mat2",
+                "idea_tag": "wipe down play mat2",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3221,7 +3221,7 @@
               }
             },
             "_uid": 146,
-            "item_tag": "cleaning",
+            "idea_tag": "cleaning",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -3246,7 +3246,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "5 push-ups",
+                "idea_tag": "5 push-ups",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3272,7 +3272,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "check protein for week is adequate",
+                "idea_tag": "check protein for week is adequate",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3298,7 +3298,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clean ears",
+                "idea_tag": "clean ears",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3324,7 +3324,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clip body nails",
+                "idea_tag": "clip body nails",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3350,7 +3350,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "cook veggies every morning",
+                "idea_tag": "cook veggies every morning",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3376,7 +3376,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "flossing teeth",
+                "idea_tag": "flossing teeth",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3404,7 +3404,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "bike or stuff",
+                    "idea_tag": "bike or stuff",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3425,12 +3425,12 @@
                     "_kids": {
                       "bi and triceps exercises": {
                         "_uid": 130,
-                        "item_tag": "bi and triceps exercises",
+                        "idea_tag": "bi and triceps exercises",
                         "mass": 1
                       },
                       "chest  exercises": {
                         "_uid": 129,
-                        "item_tag": "chest  exercises",
+                        "idea_tag": "chest  exercises",
                         "mass": 1
                       }
                     },
@@ -3442,7 +3442,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "chest and arms (mon)",
+                    "idea_tag": "chest and arms (mon)",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3461,7 +3461,7 @@
                   },
                   "core and squats": {
                     "_uid": 179,
-                    "item_tag": "core and squats",
+                    "idea_tag": "core and squats",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -3486,7 +3486,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "core lower back",
+                    "idea_tag": "core lower back",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3512,7 +3512,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "rest",
+                    "idea_tag": "rest",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -3532,14 +3532,14 @@
                     "_kids": {
                       "shoulder exercises": {
                         "_uid": 131,
-                        "item_tag": "shoulder exercises",
+                        "idea_tag": "shoulder exercises",
                         "mass": 1,
                         "morph": false,
                         "pledge": true
                       },
                       "upper back exercises": {
                         "_uid": 132,
-                        "item_tag": "upper back exercises",
+                        "idea_tag": "upper back exercises",
                         "mass": 1,
                         "morph": false,
                         "pledge": true
@@ -3553,7 +3553,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "shoulders and upper back",
+                    "idea_tag": "shoulders and upper back",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3579,7 +3579,7 @@
                         "take_force": 1
                       }
                     },
-                    "item_tag": "squats hamstrings and calves",
+                    "idea_tag": "squats hamstrings and calves",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3598,7 +3598,7 @@
                   }
                 },
                 "_uid": 81,
-                "item_tag": "mass traaining",
+                "idea_tag": "mass traaining",
                 "mass": 1
               },
               "morning multivitamin": {
@@ -3610,7 +3610,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "morning multivitamin",
+                "idea_tag": "morning multivitamin",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3629,7 +3629,7 @@
               },
               "night multivitamin": {
                 "_uid": 230,
-                "item_tag": "night multivitamin",
+                "idea_tag": "night multivitamin",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
@@ -3654,7 +3654,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "shampooing",
+                "idea_tag": "shampooing",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3680,7 +3680,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "straight back for 45 secs",
+                "idea_tag": "straight back for 45 secs",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3701,7 +3701,7 @@
                 "_is_expanded": false,
                 "_kids": {
                   "back": {
-                    "item_tag": "back",
+                    "idea_tag": "back",
                     "mass": 30,
                     "morph": false,
                     "pledge": true,
@@ -3720,7 +3720,7 @@
                     }
                   },
                   "legs": {
-                    "item_tag": "legs",
+                    "idea_tag": "legs",
                     "mass": 30,
                     "morph": false,
                     "pledge": true,
@@ -3739,13 +3739,13 @@
                     }
                   },
                   "waist": {
-                    "item_tag": "waist",
+                    "idea_tag": "waist",
                     "mass": 30,
                     "morph": false,
                     "pledge": true
                   }
                 },
-                "item_tag": "stretch",
+                "idea_tag": "stretch",
                 "mass": 30,
                 "morph": false,
                 "pledge": true,
@@ -3772,7 +3772,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "trim beard",
+                "idea_tag": "trim beard",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3791,12 +3791,12 @@
               }
             },
             "_uid": 147,
-            "item_tag": "exercise",
+            "idea_tag": "exercise",
             "mass": 1
           },
           "keep up with friends": {
             "_uid": 220,
-            "item_tag": "keep up with friends",
+            "idea_tag": "keep up with friends",
             "mass": 1,
             "reasonunits": {
               "A;Interweb": {
@@ -3821,7 +3821,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "clip oldest nails",
+                "idea_tag": "clip oldest nails",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3855,7 +3855,7 @@
                     "take_force": 1
                   }
                 },
-                "item_tag": "get rid of toy get new toy",
+                "idea_tag": "get rid of toy get new toy",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3882,7 +3882,7 @@
               }
             },
             "_uid": 144,
-            "item_tag": "responsible for kids",
+            "idea_tag": "responsible for kids",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -3896,7 +3896,7 @@
             }
           },
           "say double hi to birds": {
-            "item_tag": "say double hi to birds",
+            "idea_tag": "say double hi to birds",
             "mass": 25,
             "morph": false,
             "pledge": true,
@@ -3923,7 +3923,7 @@
                 "take_force": 1
               }
             },
-            "item_tag": "say hi to birds",
+            "idea_tag": "say hi to birds",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -3942,7 +3942,7 @@
           }
         },
         "_uid": 2,
-        "item_tag": "casa",
+        "idea_tag": "casa",
         "mass": 20,
         "morph": false
       },
@@ -3955,7 +3955,7 @@
                 "_is_expanded": false,
                 "denom": 7,
                 "gogo_want": 0.0,
-                "item_tag": "400 year segment",
+                "idea_tag": "400 year segment",
                 "mass": 1,
                 "morph": true,
                 "numor": 1,
@@ -3965,7 +3965,7 @@
                 "_is_expanded": false,
                 "denom": 210379680,
                 "gogo_want": 0.0,
-                "item_tag": "400 year segments",
+                "idea_tag": "400 year segments",
                 "mass": 1,
                 "morph": false,
                 "numor": 1,
@@ -3975,7 +3975,7 @@
                 "_is_expanded": false,
                 "denom": 1022679.0,
                 "gogo_want": 0.0,
-                "item_tag": "day",
+                "idea_tag": "day",
                 "mass": 1,
                 "morph": true,
                 "numor": 1,
@@ -3985,7 +3985,7 @@
                 "_is_expanded": false,
                 "denom": 1440,
                 "gogo_want": 0.0,
-                "item_tag": "days",
+                "idea_tag": "days",
                 "mass": 1,
                 "morph": false,
                 "numor": 1,
@@ -3995,7 +3995,7 @@
                 "_is_expanded": false,
                 "denom": 146097.0,
                 "gogo_want": 0.0,
-                "item_tag": "week",
+                "idea_tag": "week",
                 "mass": 1,
                 "morph": true,
                 "numor": 1,
@@ -4005,7 +4005,7 @@
                 "_is_expanded": false,
                 "denom": 10080,
                 "gogo_want": 0.0,
-                "item_tag": "weeks",
+                "idea_tag": "weeks",
                 "mass": 1,
                 "morph": false,
                 "numor": 1,
@@ -4015,7 +4015,7 @@
                 "_kids": {
                   "Sept 4th 2023 9am": {
                     "gogo_want": 1064350680.0,
-                    "item_tag": "Sept 4th 2023 9am",
+                    "idea_tag": "Sept 4th 2023 9am",
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1064350680.0
@@ -4024,21 +4024,21 @@
                     "_kids": {
                       "2023 Feb 9am": {
                         "gogo_want": 1064041020.0,
-                        "item_tag": "2023 Feb 9am",
+                        "idea_tag": "2023 Feb 9am",
                         "mass": 1,
                         "morph": false,
                         "stop_want": 1064041020.0
                       }
                     },
                     "gogo_want": 0.0,
-                    "item_tag": "monthly 1st business day",
+                    "idea_tag": "monthly 1st business day",
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1472657760.0
                   }
                 },
                 "gogo_want": 0.0,
-                "item_tag": "x2",
+                "idea_tag": "x2",
                 "mass": 1,
                 "morph": false,
                 "stop_want": 1472657760.0
@@ -4046,7 +4046,7 @@
             },
             "begin": 0,
             "close": 1472657760,
-            "item_tag": "gregtime",
+            "idea_tag": "gregtime",
             "mass": 1
           },
           "tech": {
@@ -4057,91 +4057,91 @@
                   "1-Jan": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "1-Jan",
+                    "idea_tag": "1-Jan",
                     "mass": 1,
                     "stop_want": 44640
                   },
                   "10-Oct": {
                     "_is_expanded": false,
                     "gogo_want": 393120,
-                    "item_tag": "10-Oct",
+                    "idea_tag": "10-Oct",
                     "mass": 1,
                     "stop_want": 437760
                   },
                   "11-Nov": {
                     "_is_expanded": false,
                     "gogo_want": 437760,
-                    "item_tag": "11-Nov",
+                    "idea_tag": "11-Nov",
                     "mass": 1,
                     "stop_want": 480960
                   },
                   "12-Dec": {
                     "_is_expanded": false,
                     "gogo_want": 480960,
-                    "item_tag": "12-Dec",
+                    "idea_tag": "12-Dec",
                     "mass": 1,
                     "stop_want": 525600
                   },
                   "2-Feb28": {
                     "_is_expanded": false,
                     "gogo_want": 44640,
-                    "item_tag": "2-Feb28",
+                    "idea_tag": "2-Feb28",
                     "mass": 1,
                     "stop_want": 84960
                   },
                   "3-Mar": {
                     "_is_expanded": false,
                     "gogo_want": 84960,
-                    "item_tag": "3-Mar",
+                    "idea_tag": "3-Mar",
                     "mass": 1,
                     "stop_want": 129600
                   },
                   "4-Apr": {
                     "_is_expanded": false,
                     "gogo_want": 129600,
-                    "item_tag": "4-Apr",
+                    "idea_tag": "4-Apr",
                     "mass": 1,
                     "stop_want": 172800
                   },
                   "5-May": {
                     "_is_expanded": false,
                     "gogo_want": 172800,
-                    "item_tag": "5-May",
+                    "idea_tag": "5-May",
                     "mass": 1,
                     "stop_want": 217440
                   },
                   "6-Jun": {
                     "_is_expanded": false,
                     "gogo_want": 217440,
-                    "item_tag": "6-Jun",
+                    "idea_tag": "6-Jun",
                     "mass": 1,
                     "stop_want": 260640
                   },
                   "7-Jul": {
                     "_is_expanded": false,
                     "gogo_want": 260640,
-                    "item_tag": "7-Jul",
+                    "idea_tag": "7-Jul",
                     "mass": 1,
                     "stop_want": 305280
                   },
                   "8-Aug": {
                     "_is_expanded": false,
                     "gogo_want": 305280,
-                    "item_tag": "8-Aug",
+                    "idea_tag": "8-Aug",
                     "mass": 1,
                     "stop_want": 349920
                   },
                   "9-Sep": {
                     "_is_expanded": false,
                     "gogo_want": 349920,
-                    "item_tag": "9-Sep",
+                    "idea_tag": "9-Sep",
                     "mass": 1,
                     "stop_want": 393120
                   }
                 },
                 "begin": 0,
                 "close": 525600,
-                "item_tag": "365 year",
+                "idea_tag": "365 year",
                 "mass": 1
               },
               "366 year": {
@@ -4150,91 +4150,91 @@
                   "1-Jan": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "1-Jan",
+                    "idea_tag": "1-Jan",
                     "mass": 1,
                     "stop_want": 44640
                   },
                   "10-Oct": {
                     "_is_expanded": false,
                     "gogo_want": 394560,
-                    "item_tag": "10-Oct",
+                    "idea_tag": "10-Oct",
                     "mass": 1,
                     "stop_want": 439200
                   },
                   "11-Nov": {
                     "_is_expanded": false,
                     "gogo_want": 439200,
-                    "item_tag": "11-Nov",
+                    "idea_tag": "11-Nov",
                     "mass": 1,
                     "stop_want": 482400
                   },
                   "12-Dec": {
                     "_is_expanded": false,
                     "gogo_want": 482400,
-                    "item_tag": "12-Dec",
+                    "idea_tag": "12-Dec",
                     "mass": 1,
                     "stop_want": 527040
                   },
                   "2-Feb29": {
                     "_is_expanded": false,
                     "gogo_want": 44640,
-                    "item_tag": "2-Feb29",
+                    "idea_tag": "2-Feb29",
                     "mass": 1,
                     "stop_want": 86400
                   },
                   "3-Mar": {
                     "_is_expanded": false,
                     "gogo_want": 86400,
-                    "item_tag": "3-Mar",
+                    "idea_tag": "3-Mar",
                     "mass": 1,
                     "stop_want": 131040
                   },
                   "4-Apr": {
                     "_is_expanded": false,
                     "gogo_want": 131040,
-                    "item_tag": "4-Apr",
+                    "idea_tag": "4-Apr",
                     "mass": 1,
                     "stop_want": 174240
                   },
                   "5-May": {
                     "_is_expanded": false,
                     "gogo_want": 174240,
-                    "item_tag": "5-May",
+                    "idea_tag": "5-May",
                     "mass": 1,
                     "stop_want": 218880
                   },
                   "6-Jun": {
                     "_is_expanded": false,
                     "gogo_want": 218880,
-                    "item_tag": "6-Jun",
+                    "idea_tag": "6-Jun",
                     "mass": 1,
                     "stop_want": 262080
                   },
                   "7-Jul": {
                     "_is_expanded": false,
                     "gogo_want": 262080,
-                    "item_tag": "7-Jul",
+                    "idea_tag": "7-Jul",
                     "mass": 1,
                     "stop_want": 306720
                   },
                   "8-Aug": {
                     "_is_expanded": false,
                     "gogo_want": 306720,
-                    "item_tag": "8-Aug",
+                    "idea_tag": "8-Aug",
                     "mass": 1,
                     "stop_want": 351360
                   },
                   "9-Sep": {
                     "_is_expanded": false,
                     "gogo_want": 351360,
-                    "item_tag": "9-Sep",
+                    "idea_tag": "9-Sep",
                     "mass": 1,
                     "stop_want": 394560
                   }
                 },
                 "begin": 0,
                 "close": 527040,
-                "item_tag": "366 year",
+                "idea_tag": "366 year",
                 "mass": 1
               },
               "400 year segment": {
@@ -4247,7 +4247,7 @@
                         "_is_expanded": false,
                         "denom": 25,
                         "gogo_want": 0.0,
-                        "item_tag": "4year with leap",
+                        "idea_tag": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4255,7 +4255,7 @@
                       }
                     },
                     "gogo_want": 0,
-                    "item_tag": "0-100-25 leap years",
+                    "idea_tag": "0-100-25 leap years",
                     "mass": 1,
                     "stop_want": 52596000
                   },
@@ -4266,7 +4266,7 @@
                         "_is_expanded": false,
                         "denom": 1,
                         "gogo_want": 52596000.0,
-                        "item_tag": "4year wo leap",
+                        "idea_tag": "4year wo leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4274,7 +4274,7 @@
                       }
                     },
                     "gogo_want": 52596000,
-                    "item_tag": "100-104-0 leap years",
+                    "idea_tag": "100-104-0 leap years",
                     "mass": 1,
                     "stop_want": 54698400
                   },
@@ -4285,7 +4285,7 @@
                         "_is_expanded": false,
                         "denom": 24,
                         "gogo_want": 2279100.0,
-                        "item_tag": "4year with leap",
+                        "idea_tag": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4293,7 +4293,7 @@
                       }
                     },
                     "gogo_want": 54698400,
-                    "item_tag": "104-200-24 leap years",
+                    "idea_tag": "104-200-24 leap years",
                     "mass": 1,
                     "stop_want": 105190560
                   },
@@ -4304,7 +4304,7 @@
                         "_is_expanded": false,
                         "denom": 1,
                         "gogo_want": 105190560.0,
-                        "item_tag": "4year wo leap",
+                        "idea_tag": "4year wo leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4312,7 +4312,7 @@
                       }
                     },
                     "gogo_want": 105190560,
-                    "item_tag": "200-204-0 leap years",
+                    "idea_tag": "200-204-0 leap years",
                     "mass": 1,
                     "stop_want": 107292960
                   },
@@ -4323,7 +4323,7 @@
                         "_is_expanded": false,
                         "denom": 24,
                         "gogo_want": 4470540.0,
-                        "item_tag": "4year with leap",
+                        "idea_tag": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4331,7 +4331,7 @@
                       }
                     },
                     "gogo_want": 107292960,
-                    "item_tag": "204-300-24 leap years",
+                    "idea_tag": "204-300-24 leap years",
                     "mass": 1,
                     "stop_want": 157785120
                   },
@@ -4342,7 +4342,7 @@
                         "_is_expanded": false,
                         "denom": 1,
                         "gogo_want": 157785120.0,
-                        "item_tag": "4year wo leap",
+                        "idea_tag": "4year wo leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4350,7 +4350,7 @@
                       }
                     },
                     "gogo_want": 157785120,
-                    "item_tag": "300-304-0 leap years",
+                    "idea_tag": "300-304-0 leap years",
                     "mass": 1,
                     "stop_want": 159887520
                   },
@@ -4361,7 +4361,7 @@
                         "_is_expanded": false,
                         "denom": 24,
                         "gogo_want": 6661980.0,
-                        "item_tag": "4year with leap",
+                        "idea_tag": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4369,14 +4369,14 @@
                       }
                     },
                     "gogo_want": 159887520,
-                    "item_tag": "304-400-24 leap years",
+                    "idea_tag": "304-400-24 leap years",
                     "mass": 1,
                     "stop_want": 210379680
                   }
                 },
                 "begin": 0.0,
                 "close": 210379680.0,
-                "item_tag": "400 year segment",
+                "idea_tag": "400 year segment",
                 "mass": 1
               },
               "4year with leap": {
@@ -4385,35 +4385,35 @@
                   "1-year": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "1-year",
+                    "idea_tag": "1-year",
                     "mass": 1,
                     "stop_want": 527040
                   },
                   "2-year": {
                     "_is_expanded": false,
                     "gogo_want": 527040,
-                    "item_tag": "2-year",
+                    "idea_tag": "2-year",
                     "mass": 1,
                     "stop_want": 1052640
                   },
                   "3-year": {
                     "_is_expanded": false,
                     "gogo_want": 1052640,
-                    "item_tag": "3-year",
+                    "idea_tag": "3-year",
                     "mass": 1,
                     "stop_want": 1578240
                   },
                   "4-year": {
                     "_is_expanded": false,
                     "gogo_want": 1578240,
-                    "item_tag": "4-year",
+                    "idea_tag": "4-year",
                     "mass": 1,
                     "stop_want": 2103840
                   }
                 },
                 "begin": 0.0,
                 "close": 2103840.0,
-                "item_tag": "4year with leap",
+                "idea_tag": "4year with leap",
                 "mass": 1
               },
               "4year wo leap": {
@@ -4422,35 +4422,35 @@
                   "1-year": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "1-year",
+                    "idea_tag": "1-year",
                     "mass": 1,
                     "stop_want": 525600
                   },
                   "2-year": {
                     "_is_expanded": false,
                     "gogo_want": 525600,
-                    "item_tag": "2-year",
+                    "idea_tag": "2-year",
                     "mass": 1,
                     "stop_want": 1051200
                   },
                   "3-year": {
                     "_is_expanded": false,
                     "gogo_want": 1051200,
-                    "item_tag": "3-year",
+                    "idea_tag": "3-year",
                     "mass": 1,
                     "stop_want": 1576800
                   },
                   "4-year": {
                     "_is_expanded": false,
                     "gogo_want": 1576800,
-                    "item_tag": "4-year",
+                    "idea_tag": "4-year",
                     "mass": 1,
                     "stop_want": 2102400
                   }
                 },
                 "begin": 0,
                 "close": 2102400,
-                "item_tag": "4year wo leap",
+                "idea_tag": "4year wo leap",
                 "mass": 1
               },
               "day": {
@@ -4459,175 +4459,175 @@
                   "0-12am": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "0-12am",
+                    "idea_tag": "0-12am",
                     "mass": 1,
                     "stop_want": 60
                   },
                   "1-1am": {
                     "_is_expanded": false,
                     "gogo_want": 60,
-                    "item_tag": "1-1am",
+                    "idea_tag": "1-1am",
                     "mass": 1,
                     "stop_want": 120
                   },
                   "10-10am": {
                     "_is_expanded": false,
                     "gogo_want": 600,
-                    "item_tag": "10-10am",
+                    "idea_tag": "10-10am",
                     "mass": 1,
                     "stop_want": 660
                   },
                   "11-11am": {
                     "_is_expanded": false,
                     "gogo_want": 660,
-                    "item_tag": "11-11am",
+                    "idea_tag": "11-11am",
                     "mass": 1,
                     "stop_want": 720
                   },
                   "12-12pm": {
                     "_is_expanded": false,
                     "gogo_want": 720,
-                    "item_tag": "12-12pm",
+                    "idea_tag": "12-12pm",
                     "mass": 1,
                     "stop_want": 780
                   },
                   "13-1pm": {
                     "_is_expanded": false,
                     "gogo_want": 780,
-                    "item_tag": "13-1pm",
+                    "idea_tag": "13-1pm",
                     "mass": 1,
                     "stop_want": 840
                   },
                   "14-2pm": {
                     "_is_expanded": false,
                     "gogo_want": 840,
-                    "item_tag": "14-2pm",
+                    "idea_tag": "14-2pm",
                     "mass": 1,
                     "stop_want": 900
                   },
                   "15-3pm": {
                     "_is_expanded": false,
                     "gogo_want": 900,
-                    "item_tag": "15-3pm",
+                    "idea_tag": "15-3pm",
                     "mass": 1,
                     "stop_want": 960
                   },
                   "16-4pm": {
                     "_is_expanded": false,
                     "gogo_want": 960,
-                    "item_tag": "16-4pm",
+                    "idea_tag": "16-4pm",
                     "mass": 1,
                     "stop_want": 1020
                   },
                   "17-5pm": {
                     "_is_expanded": false,
                     "gogo_want": 1020,
-                    "item_tag": "17-5pm",
+                    "idea_tag": "17-5pm",
                     "mass": 1,
                     "stop_want": 1080
                   },
                   "18-6pm": {
                     "_is_expanded": false,
                     "gogo_want": 1080,
-                    "item_tag": "18-6pm",
+                    "idea_tag": "18-6pm",
                     "mass": 1,
                     "stop_want": 1140
                   },
                   "19-7pm": {
                     "_is_expanded": false,
                     "gogo_want": 1140,
-                    "item_tag": "19-7pm",
+                    "idea_tag": "19-7pm",
                     "mass": 1,
                     "stop_want": 1200
                   },
                   "2-2am": {
                     "_is_expanded": false,
                     "gogo_want": 120,
-                    "item_tag": "2-2am",
+                    "idea_tag": "2-2am",
                     "mass": 1,
                     "stop_want": 180
                   },
                   "20-8pm": {
                     "_is_expanded": false,
                     "gogo_want": 1200,
-                    "item_tag": "20-8pm",
+                    "idea_tag": "20-8pm",
                     "mass": 1,
                     "stop_want": 1260
                   },
                   "21-9pm": {
                     "_is_expanded": false,
                     "gogo_want": 1260,
-                    "item_tag": "21-9pm",
+                    "idea_tag": "21-9pm",
                     "mass": 1,
                     "stop_want": 1320
                   },
                   "22-10pm": {
                     "_is_expanded": false,
                     "gogo_want": 1320,
-                    "item_tag": "22-10pm",
+                    "idea_tag": "22-10pm",
                     "mass": 1,
                     "stop_want": 1380
                   },
                   "23-11pm": {
                     "_is_expanded": false,
                     "gogo_want": 1380,
-                    "item_tag": "23-11pm",
+                    "idea_tag": "23-11pm",
                     "mass": 1,
                     "stop_want": 1440
                   },
                   "3-3am": {
                     "_is_expanded": false,
                     "gogo_want": 180,
-                    "item_tag": "3-3am",
+                    "idea_tag": "3-3am",
                     "mass": 1,
                     "stop_want": 240
                   },
                   "4-4am": {
                     "_is_expanded": false,
                     "gogo_want": 240,
-                    "item_tag": "4-4am",
+                    "idea_tag": "4-4am",
                     "mass": 1,
                     "stop_want": 300
                   },
                   "5-5am": {
                     "_is_expanded": false,
                     "gogo_want": 300,
-                    "item_tag": "5-5am",
+                    "idea_tag": "5-5am",
                     "mass": 1,
                     "stop_want": 360
                   },
                   "6-6am": {
                     "_is_expanded": false,
                     "gogo_want": 360,
-                    "item_tag": "6-6am",
+                    "idea_tag": "6-6am",
                     "mass": 1,
                     "stop_want": 420
                   },
                   "7-7am": {
                     "_is_expanded": false,
                     "gogo_want": 420,
-                    "item_tag": "7-7am",
+                    "idea_tag": "7-7am",
                     "mass": 1,
                     "stop_want": 480
                   },
                   "8-8am": {
                     "_is_expanded": false,
                     "gogo_want": 480,
-                    "item_tag": "8-8am",
+                    "idea_tag": "8-8am",
                     "mass": 1,
                     "stop_want": 540
                   },
                   "9-9am": {
                     "_is_expanded": false,
                     "gogo_want": 540,
-                    "item_tag": "9-9am",
+                    "idea_tag": "9-9am",
                     "mass": 1,
                     "stop_want": 600
                   }
                 },
                 "begin": 0,
                 "close": 1440,
-                "item_tag": "day",
+                "idea_tag": "day",
                 "mass": 1
               },
               "hour": {
@@ -4636,427 +4636,427 @@
                   "0-:00": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "0-:00",
+                    "idea_tag": "0-:00",
                     "mass": 1,
                     "stop_want": 1
                   },
                   "1-:01": {
                     "_is_expanded": false,
                     "gogo_want": 1,
-                    "item_tag": "1-:01",
+                    "idea_tag": "1-:01",
                     "mass": 1,
                     "stop_want": 2
                   },
                   "10-:10": {
                     "_is_expanded": false,
                     "gogo_want": 10,
-                    "item_tag": "10-:10",
+                    "idea_tag": "10-:10",
                     "mass": 1,
                     "stop_want": 11
                   },
                   "11-:11": {
                     "_is_expanded": false,
                     "gogo_want": 11,
-                    "item_tag": "11-:11",
+                    "idea_tag": "11-:11",
                     "mass": 1,
                     "stop_want": 12
                   },
                   "12-:12": {
                     "_is_expanded": false,
                     "gogo_want": 12,
-                    "item_tag": "12-:12",
+                    "idea_tag": "12-:12",
                     "mass": 1,
                     "stop_want": 13
                   },
                   "13-:13": {
                     "_is_expanded": false,
                     "gogo_want": 13,
-                    "item_tag": "13-:13",
+                    "idea_tag": "13-:13",
                     "mass": 1,
                     "stop_want": 14
                   },
                   "14-:14": {
                     "_is_expanded": false,
                     "gogo_want": 14,
-                    "item_tag": "14-:14",
+                    "idea_tag": "14-:14",
                     "mass": 1,
                     "stop_want": 15
                   },
                   "15-:15": {
                     "_is_expanded": false,
                     "gogo_want": 15,
-                    "item_tag": "15-:15",
+                    "idea_tag": "15-:15",
                     "mass": 1,
                     "stop_want": 16
                   },
                   "16-:16": {
                     "_is_expanded": false,
                     "gogo_want": 16,
-                    "item_tag": "16-:16",
+                    "idea_tag": "16-:16",
                     "mass": 1,
                     "stop_want": 17
                   },
                   "17-:17": {
                     "_is_expanded": false,
                     "gogo_want": 17,
-                    "item_tag": "17-:17",
+                    "idea_tag": "17-:17",
                     "mass": 1,
                     "stop_want": 18
                   },
                   "18-:18": {
                     "_is_expanded": false,
                     "gogo_want": 18,
-                    "item_tag": "18-:18",
+                    "idea_tag": "18-:18",
                     "mass": 1,
                     "stop_want": 19
                   },
                   "19-:19": {
                     "_is_expanded": false,
                     "gogo_want": 19,
-                    "item_tag": "19-:19",
+                    "idea_tag": "19-:19",
                     "mass": 1,
                     "stop_want": 20
                   },
                   "2-:02": {
                     "_is_expanded": false,
                     "gogo_want": 2,
-                    "item_tag": "2-:02",
+                    "idea_tag": "2-:02",
                     "mass": 1,
                     "stop_want": 3
                   },
                   "20-:20": {
                     "_is_expanded": false,
                     "gogo_want": 20,
-                    "item_tag": "20-:20",
+                    "idea_tag": "20-:20",
                     "mass": 1,
                     "stop_want": 21
                   },
                   "21-:21": {
                     "_is_expanded": false,
                     "gogo_want": 21,
-                    "item_tag": "21-:21",
+                    "idea_tag": "21-:21",
                     "mass": 1,
                     "stop_want": 22
                   },
                   "22-:22": {
                     "_is_expanded": false,
                     "gogo_want": 22,
-                    "item_tag": "22-:22",
+                    "idea_tag": "22-:22",
                     "mass": 1,
                     "stop_want": 23
                   },
                   "23-:23": {
                     "_is_expanded": false,
                     "gogo_want": 23,
-                    "item_tag": "23-:23",
+                    "idea_tag": "23-:23",
                     "mass": 1,
                     "stop_want": 24
                   },
                   "24-:24": {
                     "_is_expanded": false,
                     "gogo_want": 24,
-                    "item_tag": "24-:24",
+                    "idea_tag": "24-:24",
                     "mass": 1,
                     "stop_want": 25
                   },
                   "25-:25": {
                     "_is_expanded": false,
                     "gogo_want": 25,
-                    "item_tag": "25-:25",
+                    "idea_tag": "25-:25",
                     "mass": 1,
                     "stop_want": 26
                   },
                   "26-:26": {
                     "_is_expanded": false,
                     "gogo_want": 26,
-                    "item_tag": "26-:26",
+                    "idea_tag": "26-:26",
                     "mass": 1,
                     "stop_want": 27
                   },
                   "27-:27": {
                     "_is_expanded": false,
                     "gogo_want": 27,
-                    "item_tag": "27-:27",
+                    "idea_tag": "27-:27",
                     "mass": 1,
                     "stop_want": 28
                   },
                   "28-:28": {
                     "_is_expanded": false,
                     "gogo_want": 28,
-                    "item_tag": "28-:28",
+                    "idea_tag": "28-:28",
                     "mass": 1,
                     "stop_want": 29
                   },
                   "29-:29": {
                     "_is_expanded": false,
                     "gogo_want": 29,
-                    "item_tag": "29-:29",
+                    "idea_tag": "29-:29",
                     "mass": 1,
                     "stop_want": 30
                   },
                   "3-:03": {
                     "_is_expanded": false,
                     "gogo_want": 3,
-                    "item_tag": "3-:03",
+                    "idea_tag": "3-:03",
                     "mass": 1,
                     "stop_want": 4
                   },
                   "30-:30": {
                     "_is_expanded": false,
                     "gogo_want": 30,
-                    "item_tag": "30-:30",
+                    "idea_tag": "30-:30",
                     "mass": 1,
                     "stop_want": 31
                   },
                   "31-:31": {
                     "_is_expanded": false,
                     "gogo_want": 31,
-                    "item_tag": "31-:31",
+                    "idea_tag": "31-:31",
                     "mass": 1,
                     "stop_want": 32
                   },
                   "32-:32": {
                     "_is_expanded": false,
                     "gogo_want": 32,
-                    "item_tag": "32-:32",
+                    "idea_tag": "32-:32",
                     "mass": 1,
                     "stop_want": 33
                   },
                   "33-:33": {
                     "_is_expanded": false,
                     "gogo_want": 33,
-                    "item_tag": "33-:33",
+                    "idea_tag": "33-:33",
                     "mass": 1,
                     "stop_want": 34
                   },
                   "34-:34": {
                     "_is_expanded": false,
                     "gogo_want": 34,
-                    "item_tag": "34-:34",
+                    "idea_tag": "34-:34",
                     "mass": 1,
                     "stop_want": 35
                   },
                   "35-:35": {
                     "_is_expanded": false,
                     "gogo_want": 35,
-                    "item_tag": "35-:35",
+                    "idea_tag": "35-:35",
                     "mass": 1,
                     "stop_want": 36
                   },
                   "36-:36": {
                     "_is_expanded": false,
                     "gogo_want": 36,
-                    "item_tag": "36-:36",
+                    "idea_tag": "36-:36",
                     "mass": 1,
                     "stop_want": 37
                   },
                   "37-:37": {
                     "_is_expanded": false,
                     "gogo_want": 37,
-                    "item_tag": "37-:37",
+                    "idea_tag": "37-:37",
                     "mass": 1,
                     "stop_want": 38
                   },
                   "38-:38": {
                     "_is_expanded": false,
                     "gogo_want": 38,
-                    "item_tag": "38-:38",
+                    "idea_tag": "38-:38",
                     "mass": 1,
                     "stop_want": 39
                   },
                   "39-:39": {
                     "_is_expanded": false,
                     "gogo_want": 39,
-                    "item_tag": "39-:39",
+                    "idea_tag": "39-:39",
                     "mass": 1,
                     "stop_want": 40
                   },
                   "4-:04": {
                     "_is_expanded": false,
                     "gogo_want": 4,
-                    "item_tag": "4-:04",
+                    "idea_tag": "4-:04",
                     "mass": 1,
                     "stop_want": 5
                   },
                   "40-:40": {
                     "_is_expanded": false,
                     "gogo_want": 40,
-                    "item_tag": "40-:40",
+                    "idea_tag": "40-:40",
                     "mass": 1,
                     "stop_want": 41
                   },
                   "41-:41": {
                     "_is_expanded": false,
                     "gogo_want": 41,
-                    "item_tag": "41-:41",
+                    "idea_tag": "41-:41",
                     "mass": 1,
                     "stop_want": 42
                   },
                   "42-:42": {
                     "_is_expanded": false,
                     "gogo_want": 42,
-                    "item_tag": "42-:42",
+                    "idea_tag": "42-:42",
                     "mass": 1,
                     "stop_want": 43
                   },
                   "43-:43": {
                     "_is_expanded": false,
                     "gogo_want": 43,
-                    "item_tag": "43-:43",
+                    "idea_tag": "43-:43",
                     "mass": 1,
                     "stop_want": 44
                   },
                   "44-:44": {
                     "_is_expanded": false,
                     "gogo_want": 44,
-                    "item_tag": "44-:44",
+                    "idea_tag": "44-:44",
                     "mass": 1,
                     "stop_want": 45
                   },
                   "45-:45": {
                     "_is_expanded": false,
                     "gogo_want": 45,
-                    "item_tag": "45-:45",
+                    "idea_tag": "45-:45",
                     "mass": 1,
                     "stop_want": 46
                   },
                   "46-:46": {
                     "_is_expanded": false,
                     "gogo_want": 46,
-                    "item_tag": "46-:46",
+                    "idea_tag": "46-:46",
                     "mass": 1,
                     "stop_want": 47
                   },
                   "47-:47": {
                     "_is_expanded": false,
                     "gogo_want": 47,
-                    "item_tag": "47-:47",
+                    "idea_tag": "47-:47",
                     "mass": 1,
                     "stop_want": 48
                   },
                   "48-:48": {
                     "_is_expanded": false,
                     "gogo_want": 48,
-                    "item_tag": "48-:48",
+                    "idea_tag": "48-:48",
                     "mass": 1,
                     "stop_want": 49
                   },
                   "49-:49": {
                     "_is_expanded": false,
                     "gogo_want": 49,
-                    "item_tag": "49-:49",
+                    "idea_tag": "49-:49",
                     "mass": 1,
                     "stop_want": 50
                   },
                   "5-:05": {
                     "_is_expanded": false,
                     "gogo_want": 5,
-                    "item_tag": "5-:05",
+                    "idea_tag": "5-:05",
                     "mass": 1,
                     "stop_want": 6
                   },
                   "50-:50": {
                     "_is_expanded": false,
                     "gogo_want": 50,
-                    "item_tag": "50-:50",
+                    "idea_tag": "50-:50",
                     "mass": 1,
                     "stop_want": 51
                   },
                   "51-:51": {
                     "_is_expanded": false,
                     "gogo_want": 51,
-                    "item_tag": "51-:51",
+                    "idea_tag": "51-:51",
                     "mass": 1,
                     "stop_want": 52
                   },
                   "52-:52": {
                     "_is_expanded": false,
                     "gogo_want": 52,
-                    "item_tag": "52-:52",
+                    "idea_tag": "52-:52",
                     "mass": 1,
                     "stop_want": 53
                   },
                   "53-:53": {
                     "_is_expanded": false,
                     "gogo_want": 53,
-                    "item_tag": "53-:53",
+                    "idea_tag": "53-:53",
                     "mass": 1,
                     "stop_want": 54
                   },
                   "54-:54": {
                     "_is_expanded": false,
                     "gogo_want": 54,
-                    "item_tag": "54-:54",
+                    "idea_tag": "54-:54",
                     "mass": 1,
                     "stop_want": 55
                   },
                   "55-:55": {
                     "_is_expanded": false,
                     "gogo_want": 55,
-                    "item_tag": "55-:55",
+                    "idea_tag": "55-:55",
                     "mass": 1,
                     "stop_want": 56
                   },
                   "56-:56": {
                     "_is_expanded": false,
                     "gogo_want": 56,
-                    "item_tag": "56-:56",
+                    "idea_tag": "56-:56",
                     "mass": 1,
                     "stop_want": 57
                   },
                   "57-:57": {
                     "_is_expanded": false,
                     "gogo_want": 57,
-                    "item_tag": "57-:57",
+                    "idea_tag": "57-:57",
                     "mass": 1,
                     "stop_want": 58
                   },
                   "58-:58": {
                     "_is_expanded": false,
                     "gogo_want": 58,
-                    "item_tag": "58-:58",
+                    "idea_tag": "58-:58",
                     "mass": 1,
                     "stop_want": 59
                   },
                   "59-59": {
                     "_is_expanded": false,
                     "gogo_want": 59,
-                    "item_tag": "59-59",
+                    "idea_tag": "59-59",
                     "mass": 1,
                     "stop_want": 60
                   },
                   "6-:06": {
                     "_is_expanded": false,
                     "gogo_want": 6,
-                    "item_tag": "6-:06",
+                    "idea_tag": "6-:06",
                     "mass": 1,
                     "stop_want": 7
                   },
                   "7-:07": {
                     "_is_expanded": false,
                     "gogo_want": 7,
-                    "item_tag": "7-:07",
+                    "idea_tag": "7-:07",
                     "mass": 1,
                     "stop_want": 8
                   },
                   "8-:08": {
                     "_is_expanded": false,
                     "gogo_want": 8,
-                    "item_tag": "8-:08",
+                    "idea_tag": "8-:08",
                     "mass": 1,
                     "stop_want": 9
                   },
                   "9-:09": {
                     "_is_expanded": false,
                     "gogo_want": 9,
-                    "item_tag": "9-:09",
+                    "idea_tag": "9-:09",
                     "mass": 1,
                     "stop_want": 10
                   }
                 },
                 "begin": 0,
                 "close": 60,
-                "item_tag": "hour",
+                "idea_tag": "hour",
                 "mass": 1
               },
               "month": {
@@ -5069,7 +5069,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5078,7 +5078,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "item_tag": "Apr",
+                    "idea_tag": "Apr",
                     "mass": 1
                   },
                   "Aug": {
@@ -5088,7 +5088,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5097,7 +5097,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "Aug",
+                    "idea_tag": "Aug",
                     "mass": 1
                   },
                   "Dec": {
@@ -5107,7 +5107,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5116,7 +5116,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "Dec",
+                    "idea_tag": "Dec",
                     "mass": 1
                   },
                   "Feb28": {
@@ -5126,7 +5126,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5135,7 +5135,7 @@
                     },
                     "begin": 0,
                     "close": 40320,
-                    "item_tag": "Feb28",
+                    "idea_tag": "Feb28",
                     "mass": 1
                   },
                   "Feb29": {
@@ -5145,7 +5145,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5154,7 +5154,7 @@
                     },
                     "begin": 0,
                     "close": 41760,
-                    "item_tag": "Feb29",
+                    "idea_tag": "Feb29",
                     "mass": 1
                   },
                   "Jan": {
@@ -5164,7 +5164,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5173,7 +5173,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "Jan",
+                    "idea_tag": "Jan",
                     "mass": 1
                   },
                   "Jul": {
@@ -5183,7 +5183,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5192,7 +5192,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "Jul",
+                    "idea_tag": "Jul",
                     "mass": 1
                   },
                   "Jun": {
@@ -5202,7 +5202,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5211,7 +5211,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "item_tag": "Jun",
+                    "idea_tag": "Jun",
                     "mass": 1
                   },
                   "Mar": {
@@ -5221,7 +5221,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5230,7 +5230,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "Mar",
+                    "idea_tag": "Mar",
                     "mass": 1
                   },
                   "May": {
@@ -5240,7 +5240,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5249,7 +5249,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "May",
+                    "idea_tag": "May",
                     "mass": 1
                   },
                   "Nov": {
@@ -5259,7 +5259,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5268,7 +5268,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "item_tag": "Nov",
+                    "idea_tag": "Nov",
                     "mass": 1
                   },
                   "Oct": {
@@ -5278,7 +5278,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5287,7 +5287,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "item_tag": "Oct",
+                    "idea_tag": "Oct",
                     "mass": 1
                   },
                   "Sep": {
@@ -5297,7 +5297,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "item_tag": "days",
+                        "idea_tag": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5306,11 +5306,11 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "item_tag": "Sep",
+                    "idea_tag": "Sep",
                     "mass": 1
                   }
                 },
-                "item_tag": "month",
+                "idea_tag": "month",
                 "mass": 1
               },
               "week": {
@@ -5319,64 +5319,64 @@
                   "Friday": {
                     "_is_expanded": false,
                     "gogo_want": 8640,
-                    "item_tag": "Friday",
+                    "idea_tag": "Friday",
                     "mass": 1,
                     "stop_want": 10080
                   },
                   "Monday": {
                     "_is_expanded": false,
                     "gogo_want": 2880,
-                    "item_tag": "Monday",
+                    "idea_tag": "Monday",
                     "mass": 1,
                     "stop_want": 4320
                   },
                   "Saturday": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "item_tag": "Saturday",
+                    "idea_tag": "Saturday",
                     "mass": 1,
                     "stop_want": 1440
                   },
                   "Sunday": {
                     "_is_expanded": false,
                     "gogo_want": 1440,
-                    "item_tag": "Sunday",
+                    "idea_tag": "Sunday",
                     "mass": 1,
                     "stop_want": 2880
                   },
                   "Thursday": {
                     "_is_expanded": false,
                     "gogo_want": 7200,
-                    "item_tag": "Thursday",
+                    "idea_tag": "Thursday",
                     "mass": 1,
                     "stop_want": 8640
                   },
                   "Tuesday": {
                     "_is_expanded": false,
                     "gogo_want": 4320,
-                    "item_tag": "Tuesday",
+                    "idea_tag": "Tuesday",
                     "mass": 1,
                     "stop_want": 5760
                   },
                   "Wednesday": {
                     "_is_expanded": false,
                     "gogo_want": 5760,
-                    "item_tag": "Wednesday",
+                    "idea_tag": "Wednesday",
                     "mass": 1,
                     "stop_want": 7200
                   }
                 },
                 "begin": 0.0,
                 "close": 10080.0,
-                "item_tag": "week",
+                "idea_tag": "week",
                 "mass": 1
               }
             },
-            "item_tag": "tech",
+            "idea_tag": "tech",
             "mass": 1
           }
         },
-        "item_tag": "time",
+        "idea_tag": "time",
         "mass": 1
       }
     },
@@ -5421,7 +5421,7 @@
         "fneed": ";A;time;gregtime"
       }
     },
-    "item_tag": "A",
+    "idea_tag": "A",
     "mass": 1
   },
   "max_tree_traverse": 20,
