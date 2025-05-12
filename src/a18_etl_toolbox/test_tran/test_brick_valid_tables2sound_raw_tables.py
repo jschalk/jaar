@@ -96,16 +96,16 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, br00117_valid_tablename) == 2
         assert get_row_count(cursor, br00045_valid_tablename) == 3
-        pidway_s_raw_tablename = create_prime_tablename("PIDWAY", "s", "raw")
+        pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
         budacct_s_put_raw_tblname = create_prime_tablename("BUDACCT", "s", "raw", "put")
-        assert not db_table_exists(cursor, pidway_s_raw_tablename)
+        assert not db_table_exists(cursor, pidwayy_s_raw_tablename)
         assert not db_table_exists(cursor, budacct_s_put_raw_tblname)
 
         # WHEN
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidway_s_raw_tablename) == 5
+        assert get_row_count(cursor, pidwayy_s_raw_tablename) == 5
         assert get_row_count(cursor, budacct_s_put_raw_tblname) == 2
         b117 = "br00117"
         b045 = "br00045"
@@ -114,7 +114,7 @@ VALUES
         ex_way2 = (b045, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
         ex_way3 = (b045, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
         ex_way4 = (b045, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
-        select_agg_sqlstr = f"""SELECT * FROM {pidway_s_raw_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {pidwayy_s_raw_tablename};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()

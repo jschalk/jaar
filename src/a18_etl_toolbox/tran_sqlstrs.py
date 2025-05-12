@@ -34,7 +34,7 @@ ALL_DIMEN_ABBV7 = {
     "BUDUNIT",
     "PIDLABE",
     "PIDNAME",
-    "PIDWAY",
+    "PIDWAYY",
     "PIDTAGG",
 }
 
@@ -60,7 +60,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "budunit": "BUDUNIT",
         "pidgin_label": "PIDLABE",
         "pidgin_name": "PIDNAME",
-        "pidgin_way": "PIDWAY",
+        "pidgin_way": "PIDWAYY",
         "pidgin_tag": "PIDTAGG",
         "pidgin_core": "PIDCORE",
     }.get(dimen)
@@ -89,7 +89,7 @@ def create_prime_tablename(
         "BUDUNIT": "budunit",
         "PIDLABE": "pidgin_label",
         "PIDNAME": "pidgin_name",
-        "PIDWAY": "pidgin_way",
+        "PIDWAYY": "pidgin_way",
         "PIDTAGG": "pidgin_tag",
         "PIDCORE": "pidgin_core",
     }
@@ -108,9 +108,9 @@ CREATE_PIDLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_v
 CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT)"""
-CREATE_PIDWAY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDWAY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_agg (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDWAY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_vld (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT)"""
+CREATE_PIDWAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDWAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_agg (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDWAYY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_vld (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT)"""
 CREATE_PIDTAGG_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDTAGG_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_agg (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDTAGG_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_s_vld (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT)"""
@@ -238,9 +238,9 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_name_s_raw": CREATE_PIDNAME_SOUND_RAW_SQLSTR,
         "pidgin_name_s_agg": CREATE_PIDNAME_SOUND_AGG_SQLSTR,
         "pidgin_name_s_vld": CREATE_PIDNAME_SOUND_VLD_SQLSTR,
-        "pidgin_way_s_raw": CREATE_PIDWAY_SOUND_RAW_SQLSTR,
-        "pidgin_way_s_agg": CREATE_PIDWAY_SOUND_AGG_SQLSTR,
-        "pidgin_way_s_vld": CREATE_PIDWAY_SOUND_VLD_SQLSTR,
+        "pidgin_way_s_raw": CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
+        "pidgin_way_s_agg": CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
+        "pidgin_way_s_vld": CREATE_PIDWAYY_SOUND_VLD_SQLSTR,
         "pidgin_tag_s_raw": CREATE_PIDTAGG_SOUND_RAW_SQLSTR,
         "pidgin_tag_s_agg": CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
         "pidgin_tag_s_vld": CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
@@ -362,8 +362,8 @@ CREATE_PIDLABE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_raw (cree
 CREATE_PIDLABE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 CREATE_PIDNAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDNAME_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
-CREATE_PIDWAY_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
-CREATE_PIDWAY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_agg (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
+CREATE_PIDWAYY_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
+CREATE_PIDWAYY_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_agg (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 CREATE_PIDTAGG_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_raw (creed_number TEXT, event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT, error_message TEXT)"""
 CREATE_PIDTAGG_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_tag_agg (event_int INTEGER, face_name TEXT, otx_tag TEXT, inx_tag TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_word TEXT)"""
 
@@ -430,8 +430,8 @@ def get_pidgin_prime_create_table_sqlstrs() -> dict[str, str]:
         "pidgin_label_agg": CREATE_PIDLABE_AGG_SQLSTR,
         "pidgin_name_raw": CREATE_PIDNAME_RAW_SQLSTR,
         "pidgin_name_agg": CREATE_PIDNAME_AGG_SQLSTR,
-        "pidgin_way_raw": CREATE_PIDWAY_RAW_SQLSTR,
-        "pidgin_way_agg": CREATE_PIDWAY_AGG_SQLSTR,
+        "pidgin_way_raw": CREATE_PIDWAYY_RAW_SQLSTR,
+        "pidgin_way_agg": CREATE_PIDWAYY_AGG_SQLSTR,
         "pidgin_tag_raw": CREATE_PIDTAGG_RAW_SQLSTR,
         "pidgin_tag_agg": CREATE_PIDTAGG_AGG_SQLSTR,
     }
@@ -648,14 +648,14 @@ WHERE rowid IN (
 """
 
 
-def create_update_pidway_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidwayy_sound_agg_bridge_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
-    pidway_s_agg_tablename = create_prime_tablename("pidway", "s", "agg")
-    return f"""UPDATE {pidway_s_agg_tablename}
+    pidwayy_s_agg_tablename = create_prime_tablename("pidwayy", "s", "agg")
+    return f"""UPDATE {pidwayy_s_agg_tablename}
 SET error_message = 'Bridge must exist in WayUnit'
 WHERE rowid IN (
     SELECT way_agg.rowid
-    FROM {pidway_s_agg_tablename} way_agg
+    FROM {pidwayy_s_agg_tablename} way_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = way_agg.face_name
     WHERE NOT way_agg.otx_way LIKE core_vld.otx_bridge || '%'
         OR NOT way_agg.inx_way LIKE core_vld.inx_bridge || '%'
@@ -738,7 +738,7 @@ HAVING MIN(inx_name) != MAX(inx_name)
     OR MIN(inx_bridge) != MAX(inx_bridge)
     OR MIN(unknown_word) != MAX(unknown_word)
 """
-PIDWAY_INCONSISTENCY_SQLSTR = """SELECT otx_way
+PIDWAYY_INCONSISTENCY_SQLSTR = """SELECT otx_way
 FROM pidgin_way_raw
 GROUP BY otx_way
 HAVING MIN(inx_way) != MAX(inx_way)
@@ -880,7 +880,7 @@ def get_pidgin_inconsistency_sqlstrs() -> dict[str, str]:
     return {
         "pidgin_label": PIDLABE_INCONSISTENCY_SQLSTR,
         "pidgin_name": PIDNAME_INCONSISTENCY_SQLSTR,
-        "pidgin_way": PIDWAY_INCONSISTENCY_SQLSTR,
+        "pidgin_way": PIDWAYY_INCONSISTENCY_SQLSTR,
         "pidgin_tag": PIDTAGG_INCONSISTENCY_SQLSTR,
     }
 
@@ -942,7 +942,7 @@ FROM inconsistency_rows
 WHERE inconsistency_rows.otx_name = pidgin_name_raw.otx_name
 ;
 """
-PIDWAY_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
+PIDWAYY_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR = """WITH inconsistency_rows AS (
 SELECT otx_way
 FROM pidgin_way_raw
 GROUP BY otx_way
@@ -1343,7 +1343,7 @@ def get_pidgin_update_inconsist_error_message_sqlstrs() -> dict[str, str]:
     return {
         "pidgin_label": PIDLABE_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "pidgin_name": PIDNAME_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
-        "pidgin_way": PIDWAY_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
+        "pidgin_way": PIDWAYY_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
         "pidgin_tag": PIDTAGG_SET_INCONSISTENCY_ERROR_MESSAGE_SQLSTR,
     }
 
@@ -1413,7 +1413,7 @@ WHERE error_message IS NULL
 GROUP BY otx_name
 ;
 """
-PIDWAY_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_way_agg (otx_way, inx_way, otx_bridge, inx_bridge, unknown_word)
+PIDWAYY_AGG_INSERT_SQLSTR = """INSERT INTO pidgin_way_agg (otx_way, inx_way, otx_bridge, inx_bridge, unknown_word)
 SELECT otx_way, MAX(inx_way), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
 FROM pidgin_way_raw
 WHERE error_message IS NULL
@@ -1554,7 +1554,7 @@ def get_pidgin_insert_agg_from_raw_sqlstrs() -> dict[str, str]:
     return {
         "pidgin_label": PIDLABE_AGG_INSERT_SQLSTR,
         "pidgin_name": PIDNAME_AGG_INSERT_SQLSTR,
-        "pidgin_way": PIDWAY_AGG_INSERT_SQLSTR,
+        "pidgin_way": PIDWAYY_AGG_INSERT_SQLSTR,
         "pidgin_tag": PIDTAGG_AGG_INSERT_SQLSTR,
     }
 

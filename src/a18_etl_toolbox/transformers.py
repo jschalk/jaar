@@ -91,7 +91,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_insert_into_pidgin_core_vld_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidtagg_sound_agg_bridge_error_sqlstr,
-    create_update_pidway_sound_agg_bridge_error_sqlstr,
+    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
@@ -547,7 +547,7 @@ def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
 
 def update_pidgin_sound_agg_brick_errors(cursor: sqlite3_Cursor):
     cursor.execute(create_update_pidtagg_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidway_sound_agg_bridge_error_sqlstr())
+    cursor.execute(create_update_pidwayy_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
 

@@ -175,7 +175,7 @@ def test_create_prime_tablename_ReturnsObj():
     fisoffi_dimen = fisc_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidtagg_dimen = pidgin_tag_str()
-    pidway_dimen = pidgin_way_str()
+    pidwayy_dimen = pidgin_way_str()
     pidlabe_dimen = pidgin_label_str()
     pidcore_dimen = pidgin_core_str()
     raw_str = "raw"
@@ -205,7 +205,7 @@ def test_create_prime_tablename_ReturnsObj():
     fisoffi_s_agg_table = create_prime_tablename("fisoffi", "s", agg_str)
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
     pidtagg_s_agg_table = create_prime_tablename("pidtagg", "s", agg_str)
-    pidway_s_agg_table = create_prime_tablename("pidway", "s", agg_str)
+    pidwayy_s_agg_table = create_prime_tablename("pidwayy", "s", agg_str)
     pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
     pidlabe_v_agg_table = create_prime_tablename("pidlabe", "v", agg_str)
     pidlabe_s_raw_table = create_prime_tablename("pidlabe", "s", raw_str)
@@ -234,7 +234,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert fisoffi_s_agg_table == f"{fisoffi_dimen}_s_agg"
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
     assert pidtagg_s_agg_table == f"{pidtagg_dimen}_s_agg"
-    assert pidway_s_agg_table == f"{pidway_dimen}_s_agg"
+    assert pidwayy_s_agg_table == f"{pidwayy_dimen}_s_agg"
     assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
     assert pidlabe_v_agg_table == f"{pidlabe_dimen}_v_agg"
     assert pidlabe_s_raw_table == f"{pidlabe_dimen}_s_raw"
