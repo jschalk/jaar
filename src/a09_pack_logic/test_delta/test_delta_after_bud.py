@@ -15,9 +15,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     group_label_str,
-    team_title_str,
+    team_label_str,
     healer_name_str,
     item_way_str,
     base_item_active_requisite_str,
@@ -478,7 +478,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_awardlink():
     # WHEN
     delete_disc_budatom = budatom_shop(bud_item_awardlink_str(), atom_delete())
     delete_disc_budatom.set_jkey(item_way_str(), disc_way)
-    delete_disc_budatom.set_jkey(awardee_title_str(), fly_str)
+    delete_disc_budatom.set_jkey(awardee_label_str(), fly_str)
     print(f"{delete_disc_budatom=}")
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(delete_disc_budatom)
@@ -516,7 +516,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_item_awardlink():
     x_take_force = 66
     update_disc_budatom = budatom_shop(bud_item_awardlink_str(), atom_update())
     update_disc_budatom.set_jkey(item_way_str(), ball_way)
-    update_disc_budatom.set_jkey(awardee_title_str(), run_str)
+    update_disc_budatom.set_jkey(awardee_label_str(), run_str)
     update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
     update_disc_budatom.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_budatom=}")
@@ -555,7 +555,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_awardlink():
     x_take_force = 66
     update_disc_budatom = budatom_shop(bud_item_awardlink_str(), atom_insert())
     update_disc_budatom.set_jkey(item_way_str(), ball_way)
-    update_disc_budatom.set_jkey(awardee_title_str(), run_str)
+    update_disc_budatom.set_jkey(awardee_label_str(), run_str)
     update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
     update_disc_budatom.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_budatom=}")
@@ -995,7 +995,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_item_teamlink():
     # WHEN
     update_disc_budatom = budatom_shop(bud_item_teamlink_str(), atom_insert())
     update_disc_budatom.set_jkey(item_way_str(), ball_way)
-    update_disc_budatom.set_jkey(team_title_str(), yao_str)
+    update_disc_budatom.set_jkey(team_label_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
@@ -1025,7 +1025,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_item_teamlink():
     # WHEN
     update_disc_budatom = budatom_shop(bud_item_teamlink_str(), atom_delete())
     update_disc_budatom.set_jkey(item_way_str(), ball_way)
-    update_disc_budatom.set_jkey(team_title_str(), yao_str)
+    update_disc_budatom.set_jkey(team_label_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
     print(f"{before_sue_au.get_item_obj(ball_way).teamunit=}")

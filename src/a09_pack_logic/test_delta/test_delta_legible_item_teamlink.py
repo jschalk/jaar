@@ -1,6 +1,6 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_item_teamlink_str,
-    team_title_str,
+    team_label_str,
     item_way_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete
@@ -16,10 +16,10 @@ def test_create_legible_list_ReturnsObj_item_teamlink_INSERT():
     dimen = bud_item_teamlink_str()
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
-    team_title_value = f"{sue_bud.bridge}Swimmers"
+    team_label_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(item_way_str(), way_value)
-    swim_budatom.set_arg(team_title_str(), team_title_value)
+    swim_budatom.set_arg(team_label_str(), team_label_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -28,7 +28,7 @@ def test_create_legible_list_ReturnsObj_item_teamlink_INSERT():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"teamlink '{team_title_value}' created for item '{way_value}'."
+    x_str = f"teamlink '{team_label_value}' created for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -39,10 +39,10 @@ def test_create_legible_list_ReturnsObj_item_teamlink_DELETE():
     dimen = bud_item_teamlink_str()
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
-    team_title_value = f"{sue_bud.bridge}Swimmers"
+    team_label_value = f"{sue_bud.bridge}Swimmers"
     swim_budatom = budatom_shop(dimen, atom_delete())
     swim_budatom.set_arg(item_way_str(), way_value)
-    swim_budatom.set_arg(team_title_str(), team_title_value)
+    swim_budatom.set_arg(team_label_str(), team_label_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -51,6 +51,6 @@ def test_create_legible_list_ReturnsObj_item_teamlink_DELETE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"teamlink '{team_title_value}' deleted for item '{way_value}'."
+    x_str = f"teamlink '{team_label_value}' deleted for item '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

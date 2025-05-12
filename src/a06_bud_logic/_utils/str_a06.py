@@ -91,8 +91,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_title_str() -> str:
-    return "awardee_title"
+def awardee_label_str() -> str:
+    return "awardee_label"
 
 
 def give_force_str() -> str:
@@ -107,8 +107,8 @@ def group_label_str() -> str:
     return "group_label"
 
 
-def team_title_str() -> str:
-    return "team_title"
+def team_label_str() -> str:
+    return "team_label"
 
 
 def healer_name_str() -> str:

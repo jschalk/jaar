@@ -38,11 +38,11 @@ def bud_itemunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_item_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_awardee_title = jkeys.get("awardee_title")
+    x_awardee_label = jkeys.get("awardee_label")
     x_way = jkeys.get("item_way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_way).awardlink_exists(x_awardee_title)
+        and x_bud.get_item_obj(x_way).awardlink_exists(x_awardee_label)
     )
 
 
@@ -66,11 +66,11 @@ def bud_item_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
 
 
 def bud_item_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_team_title = jkeys.get("team_title")
+    x_team_label = jkeys.get("team_label")
     x_way = jkeys.get("item_way")
     return bool(
         bud_itemunit_exists(x_bud, jkeys)
-        and x_bud.get_item_obj(x_way).teamunit.teamlink_exists(x_team_title)
+        and x_bud.get_item_obj(x_way).teamunit.teamlink_exists(x_team_label)
     )
 
 
@@ -133,8 +133,8 @@ def bud_itemunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ItemUnit:
 
 def bud_item_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
     x_way = jkeys.get("item_way")
-    x_awardee_title = jkeys.get("awardee_title")
-    return x_bud.get_item_obj(x_way).get_awardlink(x_awardee_title)
+    x_awardee_label = jkeys.get("awardee_label")
+    return x_bud.get_item_obj(x_way).get_awardlink(x_awardee_label)
 
 
 def bud_item_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:

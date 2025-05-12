@@ -282,7 +282,7 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         ),
         parent_way=item_parent_way,
         create_missing_items=False,
-        get_rid_of_missing_awardlinks_awardee_titles=False,
+        get_rid_of_missing_awardlinks_awardee_labels=False,
         create_missing_ancestors=True,
     )
 
@@ -290,13 +290,13 @@ def _modify_bud_itemunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_item_awardlink_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_item_attr(
         x_atom.get_value("item_way"),
-        awardlink_del=x_atom.get_value("awardee_title"),
+        awardlink_del=x_atom.get_value("awardee_label"),
     )
 
 
 def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: BudAtom):
     x_item = x_bud.get_item_obj(x_atom.get_value("item_way"))
-    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_title"))
+    x_awardlink = x_item.awardlinks.get(x_atom.get_value("awardee_label"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -308,7 +308,7 @@ def _modify_bud_item_awardlink_update(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_item_awardlink_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_awardlink = awardlink_shop(
-        awardee_title=x_atom.get_value("awardee_title"),
+        awardee_label=x_atom.get_value("awardee_label"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -399,12 +399,12 @@ def _modify_bud_item_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_item_teamlink_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("item_way"))
-    x_itemunit.teamunit.del_teamlink(team_title=x_atom.get_value("team_title"))
+    x_itemunit.teamunit.del_teamlink(team_label=x_atom.get_value("team_label"))
 
 
 def _modify_bud_item_teamlink_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_itemunit = x_bud.get_item_obj(x_atom.get_value("item_way"))
-    x_itemunit.teamunit.set_teamlink(team_title=x_atom.get_value("team_title"))
+    x_itemunit.teamunit.set_teamlink(team_label=x_atom.get_value("team_label"))
 
 
 def _modify_bud_item_healerlink_delete(x_bud: BudUnit, x_atom: BudAtom):
@@ -614,7 +614,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_title: LabelUnit = None
+    awardee_label: LabelUnit = None
     base: WayUnit = None
     base_item_active_requisite: bool = None
     begin: float = None
@@ -652,7 +652,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    team_title: int = None
+    team_label: int = None
 
     def set_atom_dimen(self, atom_dimen: str):
         self._atom_dimens.add(atom_dimen)

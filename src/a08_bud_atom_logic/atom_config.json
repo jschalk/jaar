@@ -80,7 +80,7 @@
             "atom_order": 3
         },
         "jkeys": {
-            "awardee_title": {
+            "awardee_label": {
                 "class_type": "LabelUnit",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -283,7 +283,7 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "team_title": {
+            "team_label": {
                 "class_type": "LabelUnit",
                 "column_order": 1,
                 "nesting_order": 1,

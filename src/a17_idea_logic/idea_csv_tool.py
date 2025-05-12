@@ -279,7 +279,7 @@ def add_bud_to_br00022_csv(
                 x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_item_way(),
-                awardlink.awardee_title,
+                awardlink.awardee_label,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
             ]
@@ -320,14 +320,14 @@ def add_bud_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for itemunit in x_bud._item_dict.values():
-        for group_title in itemunit.teamunit._teamlinks:
+        for group_label in itemunit.teamunit._teamlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_item_way(),
-                group_title,
+                group_label,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -342,14 +342,14 @@ def add_bud_to_br00025_csv(
     event_int: int = None,
 ) -> str:
     for itemunit in x_bud._item_dict.values():
-        for group_title in itemunit.healerlink._healer_names:
+        for group_label in itemunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_tag,
                 x_bud.owner_name,
                 itemunit.get_item_way(),
-                group_title,
+                group_label,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -630,7 +630,7 @@ def add_pack_to_br00022_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("item_way"),
-                budatom.jkeys.get("awardee_title"),
+                budatom.jkeys.get("awardee_label"),
                 if_none_str(budatom.jvalues.get("give_force")),
                 if_none_str(budatom.jvalues.get("take_force")),
             ]
@@ -671,7 +671,7 @@ def add_pack_to_br00024_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("item_way"),
-                budatom.jkeys.get("team_title"),
+                budatom.jkeys.get("team_label"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

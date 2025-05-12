@@ -67,7 +67,7 @@ class YawUnit(str):
 
 
 class LabelUnit(str):
-    """Any Label and _title string classes should inherit from this class"""
+    """If a LabelUnit contains bridges it represents a group otherwise it's a single member group of an AcctName."""
 
 
 class GroupLabel(LabelUnit):  # Created to help track the concept
@@ -311,10 +311,7 @@ def wayunit_valid_dir_path(x_wayunit: WayUnit, bridge: str) -> bool:
     x_way_os_path = create_way_from_tags(x_way_tags, bridge=slash_str)
     parts = pathlib_Path(x_way_os_path).parts
     parts = parts[1:]
-    if len(parts) != len(x_way_tags):
-        return False
-
-    return is_path_valid(x_way_os_path)
+    return False if len(parts) != len(x_way_tags) else is_path_valid(x_way_os_path)
 
 
 def get_way_from_yaw(x_yawunit: YawUnit, bridge: str = None) -> WayUnit:

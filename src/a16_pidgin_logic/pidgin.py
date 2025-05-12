@@ -38,7 +38,7 @@ def pidginable_class_types() -> set:
 def pidginable_atom_args() -> set:
     return {
         "acct_name",
-        "awardee_title",
+        "awardee_label",
         "base",
         "face_name",
         "fbase",
@@ -52,7 +52,7 @@ def pidginable_atom_args() -> set:
         "need",
         "owner_name",
         "item_way",
-        "team_title",
+        "team_label",
         "timeline_tag",
         "weekday_tag",
     }

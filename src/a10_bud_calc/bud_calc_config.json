@@ -201,7 +201,7 @@
     "bud_item_awardlink": {
         "abbreviation": "budawar",
         "jkeys": {
-            "awardee_title": {
+            "awardee_label": {
                 "class_type": "LabelUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -423,7 +423,7 @@
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
-            "team_title": {
+            "team_label": {
                 "class_type": "LabelUnit",
                 "sqlite_datatype": "TEXT"
             },

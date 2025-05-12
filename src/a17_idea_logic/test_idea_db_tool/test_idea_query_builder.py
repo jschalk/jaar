@@ -3,7 +3,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
     item_way_str,
-    team_title_str,
+    team_label_str,
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
@@ -27,7 +27,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_bud_item_teamlink():
             face_name_str(),
             fisc_tag_str(),
             item_way_str(),
-            team_title_str(),
+            team_label_str(),
             owner_name_str(),
             acct_name_str(),
             amount_str(),
@@ -54,11 +54,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_bud_item_teamlink():
         )
 
         # THEN
-        columns_str = "event_int, face_name, fisc_tag, owner_name, item_way, team_title"
+        columns_str = "event_int, face_name, fisc_tag, owner_name, item_way, team_label"
         expected_sqlstr = f"""INSERT INTO {budteam_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND item_way IS NOT NULL AND team_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND item_way IS NOT NULL AND team_label IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -77,7 +77,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
             face_name_str(),
             fisc_tag_str(),
             item_way_str(),
-            team_title_str(),
+            team_label_str(),
             owner_name_str(),
             acct_name_str(),
             credit_belief_str(),
@@ -127,7 +127,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
             face_name_str(),
             fisc_tag_str(),
             item_way_str(),
-            team_title_str(),
+            team_label_str(),
             owner_name_str(),
             acct_name_str(),
             credit_belief_str(),

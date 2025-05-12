@@ -57,7 +57,7 @@ class ItemTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    awardee_title = Column(String)
+    awardee_label = Column(String)
     item_way = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
@@ -85,7 +85,7 @@ class PremiseTable(Base):
 class TeamLinkTable(Base):
     __tablename__ = "teamlink"
     uid = Column(Integer, primary_key=True)
-    team_title = Column(String)
+    team_label = Column(String)
     item_way = Column(String)
 
 

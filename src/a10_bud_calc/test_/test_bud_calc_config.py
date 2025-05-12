@@ -19,7 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_groupunit_str,
     acct_name_str,
     addin_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     begin_str,
     close_str,
@@ -562,9 +562,9 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budgrou, jm, "fund_coin") == "REAL"
 
     assert (
-        g_class_type(config, budawar, jk, awardee_title_str()) == type_LabelUnit_str()
+        g_class_type(config, budawar, jk, awardee_label_str()) == type_LabelUnit_str()
     )
-    assert g_sqlitetype(config, budawar, jk, awardee_title_str()) == "TEXT"
+    assert g_sqlitetype(config, budawar, jk, awardee_label_str()) == "TEXT"
     assert g_class_type(config, budawar, jk, item_way_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budawar, jk, item_way_str()) == "TEXT"
     assert g_class_type(config, budawar, jm, "_fund_give") == "float"
@@ -619,8 +619,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budreas, jv, "base_item_active_requisite") == "INTEGER"
     assert g_class_type(config, budteam, jk, item_way_str()) == type_WayUnit_str()
     assert g_sqlitetype(config, budteam, jk, item_way_str()) == "TEXT"
-    assert g_class_type(config, budteam, jk, "team_title") == type_LabelUnit_str()
-    assert g_sqlitetype(config, budteam, jk, "team_title") == "TEXT"
+    assert g_class_type(config, budteam, jk, "team_label") == type_LabelUnit_str()
+    assert g_sqlitetype(config, budteam, jk, "team_label") == "TEXT"
     assert g_class_type(config, budteam, jm, "_owner_name_team") == "int"
     assert g_sqlitetype(config, budteam, jm, "_owner_name_team") == "INTEGER"
     assert g_class_type(config, buditem, jm, "_active") == "int"
@@ -797,7 +797,7 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get("pledge") == "bool"
     assert bud_calc_args_type_dict.get("problem_bool") == "bool"
     assert bud_calc_args_type_dict.get(stop_want_str()) == "float"
-    assert bud_calc_args_type_dict.get(awardee_title_str()) == type_LabelUnit_str()
+    assert bud_calc_args_type_dict.get(awardee_label_str()) == type_LabelUnit_str()
     assert bud_calc_args_type_dict.get(item_way_str()) == type_WayUnit_str()
     assert bud_calc_args_type_dict.get("give_force") == "float"
     assert bud_calc_args_type_dict.get("take_force") == "float"
@@ -814,7 +814,7 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get(open_str()) == "float"
     assert bud_calc_args_type_dict.get("_base_item_active_value") == "int"
     assert bud_calc_args_type_dict.get("base_item_active_requisite") == "bool"
-    assert bud_calc_args_type_dict.get("team_title") == type_LabelUnit_str()
+    assert bud_calc_args_type_dict.get("team_label") == type_LabelUnit_str()
     assert bud_calc_args_type_dict.get("_owner_name_team") == "int"
     assert bud_calc_args_type_dict.get("_active") == "int"
     assert bud_calc_args_type_dict.get("_all_acct_cred") == "int"

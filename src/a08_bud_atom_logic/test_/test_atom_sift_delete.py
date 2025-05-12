@@ -13,9 +13,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     group_label_str,
-    team_title_str,
+    team_label_str,
     healer_name_str,
     item_tag_str,
     item_way_str,
@@ -164,10 +164,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_awardlink():
 
     casa_swim_atom = budatom_shop(bud_item_awardlink_str(), atom_delete())
     casa_swim_atom.set_arg(item_way_str(), casa_way)
-    casa_swim_atom.set_arg(awardee_title_str(), swim_str)
+    casa_swim_atom.set_arg(awardee_label_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_awardlink_str(), atom_delete())
     clean_swim_atom.set_arg(item_way_str(), clean_way)
-    clean_swim_atom.set_arg(awardee_title_str(), swim_str)
+    clean_swim_atom.set_arg(awardee_label_str(), swim_str)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
     assert not sift_budatom(sue_bud, casa_swim_atom)
@@ -277,10 +277,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_item_teamlink():
 
     casa_swim_atom = budatom_shop(bud_item_teamlink_str(), atom_delete())
     casa_swim_atom.set_arg(item_way_str(), casa_way)
-    casa_swim_atom.set_arg(team_title_str(), swim_str)
+    casa_swim_atom.set_arg(team_label_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_item_teamlink_str(), atom_delete())
     clean_swim_atom.set_arg(item_way_str(), clean_way)
-    clean_swim_atom.set_arg(team_title_str(), swim_str)
+    clean_swim_atom.set_arg(team_label_str(), swim_str)
     sue_bud.add_item(casa_way)
     sue_bud.add_item(clean_way)
     assert not sift_budatom(sue_bud, casa_swim_atom)

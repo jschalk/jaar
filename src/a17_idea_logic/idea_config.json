@@ -37,7 +37,7 @@
     "build_order": 11,
     "idea_category": "bud",
     "jkeys": {
-      "awardee_title": {},
+      "awardee_label": {},
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
@@ -126,7 +126,7 @@
       "fisc_tag": {},
       "owner_name": {},
       "item_way": {},
-      "team_title": {}
+      "team_label": {}
     },
     "jvalues": {}
   },

@@ -649,7 +649,7 @@ def test_BudUnit_create_agenda_item_CorrectlyCreatesAllBudAttributes():
     sweep_item.set_reasonunit(reason=daytime_reason)
 
     family_str = ",family"
-    awardlink_z = awardlink_shop(awardee_title=family_str)
+    awardlink_z = awardlink_shop(awardee_label=family_str)
     sweep_item.set_awardlink(awardlink_z)
 
     assert len(sue_bud.accts) == 0

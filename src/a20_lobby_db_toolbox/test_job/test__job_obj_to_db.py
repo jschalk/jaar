@@ -328,7 +328,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_awardee_title = 2
+    x_awardee_label = 2
     x_give_force = 3
     x_take_force = 4
     x__fund_give = 5
@@ -338,7 +338,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "item_way": x_way,
-        "awardee_title": x_awardee_title,
+        "awardee_label": x_awardee_label,
         "give_force": x_give_force,
         "take_force": x_take_force,
         "_fund_give": x__fund_give,
@@ -510,14 +510,14 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_team_title = 2
+    x_team_label = 2
     x__owner_name_team = 3
     values_dict = {
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "item_way": x_way,
-        "team_title": x_team_title,
+        "team_label": x_team_label,
         "_owner_name_team": x__owner_name_team,
     }
     # all args included in values dict

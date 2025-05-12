@@ -164,8 +164,8 @@ def insert_job_budteam(
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["item_way"] = x_objkeysholder.way
-    for team_title in sorted(x_teamheir._teamlinks):
-        x_dict["team_title"] = team_title
+    for team_label in sorted(x_teamheir._teamlinks):
+        x_dict["team_label"] = team_label
         insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 

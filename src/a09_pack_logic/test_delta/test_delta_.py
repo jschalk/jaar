@@ -11,7 +11,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_itemunit_str,
     bud_item_awardlink_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     group_label_str,
     item_way_str,
     credit_belief_str,
@@ -375,10 +375,10 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_Way_Sorted():
     x_dimen = bud_item_awardlink_str()
     swimmers_str = ",Swimmers"
     sports_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
-    sports_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
+    sports_awardlink_budatom.set_jkey(awardee_label_str(), swimmers_str)
     sports_awardlink_budatom.set_jkey(item_way_str(), sports_way)
     knee_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
-    knee_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
+    knee_awardlink_budatom.set_jkey(awardee_label_str(), swimmers_str)
     knee_awardlink_budatom.set_jkey(item_way_str(), knee_way)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_awardlink_budatom)

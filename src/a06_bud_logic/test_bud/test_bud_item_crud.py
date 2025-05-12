@@ -402,13 +402,13 @@ def test_BudUnit_edit_item_attr_IsAbleToEditAnyAncestor_Item():
 
     # _awardlink: dict = None,
     sue_bud.itemroot._kids[casa_str].awardlinks = {
-        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(awardee_label="fun", give_force=1, take_force=7)
     }
     _awardlinks = sue_bud.itemroot._kids[casa_str].awardlinks
     assert _awardlinks == {
-        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(awardee_label="fun", give_force=1, take_force=7)
     }
-    x_awardlink = awardlink_shop(awardee_title="fun", give_force=4, take_force=8)
+    x_awardlink = awardlink_shop(awardee_label="fun", give_force=4, take_force=8)
     sue_bud.edit_item_attr(casa_way, awardlink=x_awardlink)
     assert sue_bud.itemroot._kids[casa_str].awardlinks == {"fun": x_awardlink}
 

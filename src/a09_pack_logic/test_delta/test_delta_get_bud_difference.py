@@ -16,10 +16,10 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_item_healerlink_str,
     bud_item_factunit_str,
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     group_label_str,
     item_way_str,
-    team_title_str,
+    team_label_str,
     healer_name_str,
     pledge_str,
     begin_str,
@@ -559,7 +559,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_dele
     x_keylist = [atom_delete(), bud_item_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(item_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_title_str()) == run_str
+    assert run_budatom.get_value(awardee_label_str()) == run_str
 
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -611,9 +611,9 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_inse
     x_keylist = [atom_insert(), bud_item_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(item_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_title_str()) == run_str
+    assert run_budatom.get_value(awardee_label_str()) == run_str
     assert run_budatom.get_value(item_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_title_str()) == run_str
+    assert run_budatom.get_value(awardee_label_str()) == run_str
     assert run_budatom.get_value(give_force_str()) == after_run_give_force
     assert run_budatom.get_value(take_force_str()) == after_run_take_force
 
@@ -645,7 +645,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_upda
     after_sue_bud.edit_item_attr(
         ball_way,
         awardlink=awardlink_shop(
-            awardee_title=run_str,
+            awardee_label=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -660,7 +660,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_awardlink_upda
     x_keylist = [atom_update(), bud_item_awardlink_str(), ball_way, run_str]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(item_way_str()) == ball_way
-    assert ball_budatom.get_value(awardee_title_str()) == run_str
+    assert ball_budatom.get_value(awardee_label_str()) == run_str
     assert ball_budatom.get_value(give_force_str()) == after_give_force
     assert ball_budatom.get_value(take_force_str()) == after_take_force
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -1148,7 +1148,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_teamlink_inser
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(item_way_str()) == ball_way
-    assert ball_budatom.get_value(team_title_str()) == xio_str
+    assert ball_budatom.get_value(team_label_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
@@ -1184,7 +1184,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_item_teamlink_delet
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(item_way_str()) == ball_way
-    assert ball_budatom.get_value(team_title_str()) == xio_str
+    assert ball_budatom.get_value(team_label_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 

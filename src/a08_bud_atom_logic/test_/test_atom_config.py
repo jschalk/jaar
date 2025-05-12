@@ -15,7 +15,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     acct_pool_str,
     addin_str,
-    awardee_title_str,
+    awardee_label_str,
     base_str,
     fbase_str,
     begin_str,
@@ -41,7 +41,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     respect_bit_str,
     item_way_str,
     stop_want_str,
-    team_title_str,
+    team_label_str,
     type_NameUnit_str,
     type_LabelUnit_str,
     type_TagUnit_str,
@@ -643,7 +643,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     # THEN
     assert x_class_types.get(acct_name_str()) == type_NameUnit_str()
     assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_title_str()) == type_LabelUnit_str()
+    assert x_class_types.get(awardee_label_str()) == type_LabelUnit_str()
     assert x_class_types.get(base_str()) == type_WayUnit_str()
     assert x_class_types.get("base_item_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
@@ -681,6 +681,6 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(team_title_str()) == type_LabelUnit_str()
+    assert x_class_types.get(team_label_str()) == type_LabelUnit_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

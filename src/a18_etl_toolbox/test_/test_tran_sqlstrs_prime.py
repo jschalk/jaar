@@ -677,9 +677,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, fisc_tag, owner_name, item_way, awardee_title
+SELECT event_int, face_name, fisc_tag, owner_name, item_way, awardee_label
 FROM bud_item_awardlink_s_put_raw
-GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_title
+GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_label
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -691,7 +691,7 @@ WHERE inconsistency_rows.event_int = bud_item_awardlink_s_put_raw.event_int
     AND inconsistency_rows.fisc_tag = bud_item_awardlink_s_put_raw.fisc_tag
     AND inconsistency_rows.owner_name = bud_item_awardlink_s_put_raw.owner_name
     AND inconsistency_rows.item_way = bud_item_awardlink_s_put_raw.item_way
-    AND inconsistency_rows.awardee_title = bud_item_awardlink_s_put_raw.awardee_title
+    AND inconsistency_rows.awardee_label = bud_item_awardlink_s_put_raw.awardee_label
 ;
 """
         print(update_sqlstr)
@@ -810,11 +810,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO bud_item_awardlink_s_put_agg (event_int, face_name, fisc_tag, owner_name, item_way, awardee_title, give_force, take_force)
-SELECT event_int, face_name, fisc_tag, owner_name, item_way, awardee_title, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO bud_item_awardlink_s_put_agg (event_int, face_name, fisc_tag, owner_name, item_way, awardee_label, give_force, take_force)
+SELECT event_int, face_name, fisc_tag, owner_name, item_way, awardee_label, MAX(give_force), MAX(take_force)
 FROM bud_item_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_title
+GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_label
 ;
 """
         # print(update_sqlstrs[0])
@@ -835,10 +835,10 @@ GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_title
         print(del_expected_insert_sqlstr)
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO bud_item_awardlink_s_del_agg (event_int, face_name, fisc_tag, owner_name, item_way, awardee_title_ERASE)
-SELECT event_int, face_name, fisc_tag, owner_name, item_way, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO bud_item_awardlink_s_del_agg (event_int, face_name, fisc_tag, owner_name, item_way, awardee_label_ERASE)
+SELECT event_int, face_name, fisc_tag, owner_name, item_way, awardee_label_ERASE
 FROM bud_item_awardlink_s_del_raw
-GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_title_ERASE
+GROUP BY event_int, face_name, fisc_tag, owner_name, item_way, awardee_label_ERASE
 ;
 """
         print(update_sqlstrs[1])

@@ -15,9 +15,9 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a08_bud_atom_logic.atom import BudAtom
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
-    awardee_title_str,
+    awardee_label_str,
     group_label_str,
-    team_title_str,
+    team_label_str,
     healer_name_str,
     item_way_str,
     base_item_active_requisite_str,
@@ -417,11 +417,11 @@ def add_bud_item_awardlink_insert_to_legible_list(
 ):
     for way_dict in item_awardlink_insert_dict.values():
         for item_awardlink_atom in way_dict.values():
-            awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
+            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
             way_value = item_awardlink_atom.get_value("item_way")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_title_value} for item '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {awardee_label_value} for item '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -430,16 +430,16 @@ def add_bud_item_awardlink_update_to_legible_list(
 ):
     for way_dict in item_awardlink_update_dict.values():
         for item_awardlink_atom in way_dict.values():
-            awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
+            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
             way_value = item_awardlink_atom.get_value("item_way")
             give_force_value = item_awardlink_atom.get_value("give_force")
             take_force_value = item_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{way_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{way_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for item '{way_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_label_value} for item '{way_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -448,9 +448,9 @@ def add_bud_item_awardlink_delete_to_legible_list(
 ):
     for way_dict in item_awardlink_delete_dict.values():
         for item_awardlink_atom in way_dict.values():
-            awardee_title_value = item_awardlink_atom.get_value(awardee_title_str())
+            awardee_label_value = item_awardlink_atom.get_value(awardee_label_str())
             way_value = item_awardlink_atom.get_value("item_way")
-            x_str = f"Awardlink for group {awardee_title_value}, item '{way_value}' has been deleted."
+            x_str = f"Awardlink for group {awardee_label_value}, item '{way_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -570,9 +570,9 @@ def add_bud_item_teamlink_insert_to_legible_list(
 ):
     for way_dict in item_teamlink_insert_dict.values():
         for item_teamlink_atom in way_dict.values():
-            team_title_value = item_teamlink_atom.get_value(team_title_str())
+            team_label_value = item_teamlink_atom.get_value(team_label_str())
             way_value = item_teamlink_atom.get_value("item_way")
-            x_str = f"teamlink '{team_title_value}' created for item '{way_value}'."
+            x_str = f"teamlink '{team_label_value}' created for item '{way_value}'."
             legible_list.append(x_str)
 
 
@@ -581,9 +581,9 @@ def add_bud_item_teamlink_delete_to_legible_list(
 ):
     for way_dict in item_teamlink_delete_dict.values():
         for item_teamlink_atom in way_dict.values():
-            team_title_value = item_teamlink_atom.get_value(team_title_str())
+            team_label_value = item_teamlink_atom.get_value(team_label_str())
             way_value = item_teamlink_atom.get_value("item_way")
-            x_str = f"teamlink '{team_title_value}' deleted for item '{way_value}'."
+            x_str = f"teamlink '{team_label_value}' deleted for item '{way_value}'."
             legible_list.append(x_str)
 
 

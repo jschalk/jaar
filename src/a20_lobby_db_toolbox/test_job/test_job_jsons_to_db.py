@@ -680,13 +680,13 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     x_fisc_tag = 1
     x_owner_name = 2
     x_way = 3
-    x_awardee_title = 4
+    x_awardee_label = 4
     x_give_force = 5
     x_take_force = 6
     x__fund_give = 7
     x__fund_take = 8
-    x_awardheir = awardheir_shop(x_awardee_title)
-    x_awardheir.awardee_title = x_awardee_title
+    x_awardheir = awardheir_shop(x_awardee_label)
+    x_awardheir.awardee_label = x_awardee_label
     x_awardheir.give_force = x_give_force
     x_awardheir.take_force = x_take_force
     x_awardheir._fund_give = x__fund_give
@@ -712,7 +712,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
             str(x_fisc_tag),
             str(x_owner_name),
             str(x_way),
-            str(x_awardee_title),
+            str(x_awardee_label),
             x_give_force,
             x_take_force,
             x__fund_give,
