@@ -1,8 +1,8 @@
 from src.a01_way_logic.way import (
-    WayUnit,
+    WayStr,
     create_way,
     get_default_fisc_tag,
-    TagUnit,
+    TagStr,
 )
 from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
@@ -64,43 +64,43 @@ def run_str() -> str:
     return "run"
 
 
-def casa_way() -> WayUnit:
+def casa_way() -> WayStr:
     return create_way(get_default_fisc_tag(), casa_str())
 
 
-def cook_way() -> WayUnit:
+def cook_way() -> WayStr:
     return create_way(casa_way(), cook_str())
 
 
-def eat_way() -> WayUnit:
+def eat_way() -> WayStr:
     return create_way(casa_way(), eat_str())
 
 
-def hungry_way() -> WayUnit:
+def hungry_way() -> WayStr:
     return create_way(eat_way(), hungry_str())
 
 
-def full_way() -> WayUnit:
+def full_way() -> WayStr:
     return create_way(eat_way(), full_str())
 
 
-def sanitation_way() -> WayUnit:
+def sanitation_way() -> WayStr:
     return create_way(casa_way(), sanitation_str())
 
 
-def clean_way() -> WayUnit:
+def clean_way() -> WayStr:
     return create_way(sanitation_way(), clean_str())
 
 
-def dirty_way() -> WayUnit:
+def dirty_way() -> WayStr:
     return create_way(sanitation_way(), dirty_str())
 
 
-def sweep_way() -> WayUnit:
+def sweep_way() -> WayStr:
     return create_way(casa_way(), sweep_str())
 
 
-def run_way() -> WayUnit:
+def run_way() -> WayStr:
     return create_way(casa_way(), run_str())
 
 
@@ -165,63 +165,63 @@ def get_example_yao_plan3_speaker() -> BudUnit:
     return yao_speaker
 
 
-def get_usa_way() -> WayUnit:
+def get_usa_way() -> WayStr:
     return create_way(get_default_fisc_tag(), "USA")
 
 
-def get_iowa_str() -> TagUnit:
+def get_iowa_str() -> TagStr:
     return "Iowa"
 
 
-def get_ohio_str() -> TagUnit:
+def get_ohio_str() -> TagStr:
     return "Ohio"
 
 
-def get_utah_str() -> TagUnit:
+def get_utah_str() -> TagStr:
     return "Utah"
 
 
-def get_swim_str() -> TagUnit:
+def get_swim_str() -> TagStr:
     return "swim"
 
 
-def get_location_str() -> TagUnit:
+def get_location_str() -> TagStr:
     return "location"
 
 
-def get_in_mer_str() -> TagUnit:
+def get_in_mer_str() -> TagStr:
     return "in_mer"
 
 
-def get_on_land_str() -> TagUnit:
+def get_on_land_str() -> TagStr:
     return "on_land"
 
 
-def get_iowa_way() -> WayUnit:
+def get_iowa_way() -> WayStr:
     return create_way(get_usa_way(), get_iowa_str())
 
 
-def get_ohio_way() -> WayUnit:
+def get_ohio_way() -> WayStr:
     return create_way(get_usa_way(), get_ohio_str())
 
 
-def get_utah_way() -> WayUnit:
+def get_utah_way() -> WayStr:
     return create_way(get_usa_way(), get_utah_str())
 
 
-def get_swim_way() -> WayUnit:
+def get_swim_way() -> WayStr:
     return create_way(get_default_fisc_tag(), get_swim_str())
 
 
-def get_location_way() -> WayUnit:
+def get_location_way() -> WayStr:
     return create_way(get_default_fisc_tag(), get_location_str())
 
 
-def get_in_mer_way() -> WayUnit:
+def get_in_mer_way() -> WayStr:
     return create_way(get_location_way(), get_in_mer_str())
 
 
-def get_on_land_way() -> WayUnit:
+def get_on_land_way() -> WayStr:
     return create_way(get_location_way(), get_on_land_str())
 
 

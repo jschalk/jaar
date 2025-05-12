@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import (
-    WayUnit,
+    WayStr,
     to_way,
     get_default_fisc_way,
     create_way,
@@ -18,10 +18,10 @@ from src.a01_way_logic.way import (
     is_heir_way,
     default_bridge_if_None,
     replace_bridge,
-    validate_tagunit,
-    wayunit_valid_dir_path,
-    all_wayunits_between,
-    is_tagunit,
+    validate_tagstr,
+    waystr_valid_dir_path,
+    all_waystrs_between,
+    is_tagstr,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -160,7 +160,7 @@ def test_way_is_sub_way_correctlyReturnsBool():
     assert is_sub_way(cleaning_way, laundrys_way) is False
 
 
-def test_way_rebuild_way_ReturnsCorrectWayUnit():
+def test_way_rebuild_way_ReturnsCorrectWayStr():
     # ESTABLISH
     casa_str = "casa"
     casa_way = create_way(root_way(), casa_str)
@@ -180,7 +180,7 @@ def test_way_rebuild_way_ReturnsCorrectWayUnit():
     assert rebuild_way(old_roses_way, "random_str", greenery_way) == old_roses_way
 
 
-def test_way_get_all_way_tags_ReturnsTagUnits():
+def test_way_get_all_way_tags_ReturnsTagStrs():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -201,7 +201,7 @@ def test_way_get_all_way_tags_ReturnsTagUnits():
     assert get_all_way_tags(way=roses_way) == roses_list
 
 
-def test_way_get_terminus_tag_ReturnsTagUnit():
+def test_way_get_terminus_tag_ReturnsTagStr():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -218,7 +218,7 @@ def test_way_get_terminus_tag_ReturnsTagUnit():
     assert get_terminus_tag(way=roses_way) == roses_str
 
 
-def test_way_get_terminus_tag_ReturnsTagUnitWhenNonDefaultbridge():
+def test_way_get_terminus_tag_ReturnsTagStrWhenNonDefaultbridge():
     # ESTABLISH
     casa_str = "casa"
     bloomers_str = "bloomers"
@@ -234,7 +234,7 @@ def test_way_get_terminus_tag_ReturnsTagUnitWhenNonDefaultbridge():
     assert get_terminus_tag(slash_roses_way, slash_str) == roses_str
 
 
-def test_way_get_root_tag_from_way_ReturnsTagUnit():
+def test_way_get_root_tag_from_way_ReturnsTagStr():
     # ESTABLISH
     casa_str = "casa"
     casa_way = create_way(root_way(), casa_str)
@@ -288,12 +288,12 @@ def test_way_get_parent_way_ReturnsObj_Scenario1():
 
 @dataclass
 class TempTestingObj:
-    x_way: WayUnit = ""
+    x_way: WayStr = ""
 
     def find_replace_way(self, old_way, new_way):
         self.x_way = rebuild_way(self.x_way, old_way=old_way, new_way=new_way)
 
-    def get_obj_key(self) -> WayUnit:
+    def get_obj_key(self) -> WayStr:
         return self.x_way
 
 
@@ -376,7 +376,7 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
     assert texas_anc_ways == texas_ancestor_ways
 
 
-def test_way_get_forefather_ways_ReturnsAncestorWayUnitsWithoutClean():
+def test_way_get_forefather_ways_ReturnsAncestorWayStrsWithoutClean():
     # ESTABLISH
     x_s = default_bridge_if_None()
     nation_str = "nation-state"
@@ -425,16 +425,16 @@ def test_way_create_way_from_tags_ReturnsObj():
     assert roses_way == create_way_from_tags(roses_list)
 
 
-def test_is_tagunit_ReturnsObj():
+def test_is_tagstr_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
 
     # WHEN / THEN
-    assert is_tagunit("", x_bridge=x_s) is False
-    assert is_tagunit("casa", x_bridge=x_s)
-    assert not is_tagunit(f"ZZ{x_s}casa", x_s)
-    assert not is_tagunit(WayUnit(f"ZZ{x_s}casa"), x_s)
-    assert is_tagunit(WayUnit("ZZ"), x_s)
+    assert is_tagstr("", x_bridge=x_s) is False
+    assert is_tagstr("casa", x_bridge=x_s)
+    assert not is_tagstr(f"ZZ{x_s}casa", x_s)
+    assert not is_tagstr(WayStr(f"ZZ{x_s}casa"), x_s)
+    assert is_tagstr(WayStr("ZZ"), x_s)
 
 
 def test_is_heir_way_CorrectlyIdentifiesHeirs():
@@ -504,7 +504,7 @@ def test_replace_bridge_CorrectlyRaisesError():
     )
 
 
-def test_replace_bridge_WhenNewbridgeIsFirstInWayUnitRaisesError():
+def test_replace_bridge_WhenNewbridgeIsFirstInWayStrRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"
@@ -526,56 +526,56 @@ def test_replace_bridge_WhenNewbridgeIsFirstInWayUnitRaisesError():
     )
 
 
-def test_validate_tagunit_RaisesErrorWhenNotTagUnit():
+def test_validate_tagstr_RaisesErrorWhenNotTagStr():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
-    assert bob_str == validate_tagunit(bob_str, x_bridge=slash_str)
+    assert bob_str == validate_tagstr(bob_str, x_bridge=slash_str)
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_tagunit(bob_str, x_bridge=comma_str)
+        bob_str == validate_tagstr(bob_str, x_bridge=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a TagUnit. Cannot contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to be a TagStr. Cannot contain bridge: '{comma_str}'"
     )
 
 
-def test_validate_tagunit_RaisesErrorWhenTagUnit():
+def test_validate_tagstr_RaisesErrorWhenTagStr():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
-    assert bob_str == validate_tagunit(
-        bob_str, x_bridge=slash_str, not_tagunit_required=True
+    assert bob_str == validate_tagstr(
+        bob_str, x_bridge=slash_str, not_tagstr_required=True
     )
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_tagunit(
-            bob_str, x_bridge=comma_str, not_tagunit_required=True
+        bob_str == validate_tagstr(
+            bob_str, x_bridge=comma_str, not_tagstr_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a TagUnit. Must contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to not be a TagStr. Must contain bridge: '{comma_str}'"
     )
 
 
-def test_wayunit_valid_dir_path_ReturnsObj_simple_bridge():
+def test_waystr_valid_dir_path_ReturnsObj_simple_bridge():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
-    assert wayunit_valid_dir_path(",run", bridge=comma_str)
-    assert wayunit_valid_dir_path(",run,sport", bridge=comma_str)
+    assert waystr_valid_dir_path(",run", bridge=comma_str)
+    assert waystr_valid_dir_path(",run,sport", bridge=comma_str)
     print(f"{platform_system()=}")
-    sport_question_valid_bool = wayunit_valid_dir_path("run,sport?", comma_str)
+    sport_question_valid_bool = waystr_valid_dir_path("run,sport?", comma_str)
     assert (
         platform_system() == "Windows" and sport_question_valid_bool is False
     ) or platform_system() == "Linux"
 
 
-def test_wayunit_valid_dir_path_ReturnsObj_complicated_bridge():
+def test_waystr_valid_dir_path_ReturnsObj_complicated_bridge():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -587,16 +587,16 @@ def test_wayunit_valid_dir_path_ReturnsObj_complicated_bridge():
     lap_way = create_way(run_way, lap_str, bridge=question_str)
     assert lap_way == f"{sport_way}?{run_str}?{lap_str}"
 
-    assert wayunit_valid_dir_path(sport_way, bridge=question_str)
-    assert wayunit_valid_dir_path(run_way, bridge=question_str)
-    assert wayunit_valid_dir_path(lap_way, bridge=question_str)
+    assert waystr_valid_dir_path(sport_way, bridge=question_str)
+    assert waystr_valid_dir_path(run_way, bridge=question_str)
+    assert waystr_valid_dir_path(lap_way, bridge=question_str)
     assert (
         platform_system() == "Windows"
-        and wayunit_valid_dir_path(lap_way, bridge=",") is False
+        and waystr_valid_dir_path(lap_way, bridge=",") is False
     ) or platform_system() == "Linux"
 
 
-def test_wayunit_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
+def test_waystr_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -607,13 +607,13 @@ def test_wayunit_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
     lap_way = create_way(run_way, lap_str, bridge=question_str)
     assert lap_way == f"{sport_way}?{run_str}?{lap_str}"
 
-    assert wayunit_valid_dir_path(sport_way, bridge=question_str)
-    assert wayunit_valid_dir_path(run_way, bridge=question_str) is False
-    assert wayunit_valid_dir_path(lap_way, bridge=question_str) is False
-    assert wayunit_valid_dir_path(lap_way, bridge=",") is False
+    assert waystr_valid_dir_path(sport_way, bridge=question_str)
+    assert waystr_valid_dir_path(run_way, bridge=question_str) is False
+    assert waystr_valid_dir_path(lap_way, bridge=question_str) is False
+    assert waystr_valid_dir_path(lap_way, bridge=",") is False
 
 
-def test_all_wayunits_between_ReturnsObj():
+def test_all_waystrs_between_ReturnsObj():
     casa_str = "casa"
     sport_str = "sport"
     run_str = "run/swim"
@@ -622,9 +622,9 @@ def test_all_wayunits_between_ReturnsObj():
     run_way = create_way(sport_way, run_str)
     lap_way = create_way(run_way, lap_str)
 
-    assert all_wayunits_between(sport_way, sport_way) == [sport_way]
-    assert all_wayunits_between(sport_way, run_way) == [sport_way, run_way]
-    assert all_wayunits_between(sport_way, lap_way) == [
+    assert all_waystrs_between(sport_way, sport_way) == [sport_way]
+    assert all_waystrs_between(sport_way, run_way) == [sport_way, run_way]
+    assert all_waystrs_between(sport_way, lap_way) == [
         sport_way,
         run_way,
         lap_way,

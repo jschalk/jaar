@@ -641,7 +641,7 @@ def test_add_to_br00042_csv_ReturnsObj():
     )
     run_otx = "run"
     run_inx = "cours"
-    bob7_pidginunit.set_otx2inx("LabelUnit", run_otx, run_inx)
+    bob7_pidginunit.set_otx2inx("LabelStr", run_otx, run_inx)
     csv_header = x_creeds.get("br00042")
     print(f"{csv_header=}")
 
@@ -667,7 +667,7 @@ def test_add_to_br00043_csv_ReturnsObj():
     )
     yao_otx = "Yao"
     yao_inx = "YaoMing"
-    bob7_pidginunit.set_otx2inx("NameUnit", yao_otx, yao_inx)
+    bob7_pidginunit.set_otx2inx("NameStr", yao_otx, yao_inx)
     csv_header = x_creeds.get("br00043")
     print(f"{csv_header=}")
 
@@ -693,7 +693,7 @@ def test_add_to_br00044_csv_ReturnsObj():
     )
     clean_otx = "clean"
     clean_inx = "prope"
-    bob7_pidginunit.set_otx2inx("TagUnit", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("TagStr", clean_otx, clean_inx)
     csv_header = x_creeds.get("br00044")
     print(f"{csv_header=}")
 
@@ -719,7 +719,7 @@ def test_add_to_br00045_csv_ReturnsObj():
     )
     clean_otx = "clean"
     clean_inx = "prope"
-    bob7_pidginunit.set_otx2inx("WayUnit", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("WayStr", clean_otx, clean_inx)
     csv_header = x_creeds.get("br00045")
     print(f"{csv_header=}")
 
@@ -745,16 +745,16 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     )
     clean_otx = "clean"
     clean_inx = "prope"
-    bob7_pidginunit.set_otx2inx("WayUnit", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("WayStr", clean_otx, clean_inx)
     yao_otx = "Yao"
     yao_inx = "YaoMing"
-    bob7_pidginunit.set_otx2inx("NameUnit", yao_otx, yao_inx)
+    bob7_pidginunit.set_otx2inx("NameStr", yao_otx, yao_inx)
     run_otx = "run"
     run_inx = "cours"
-    bob7_pidginunit.set_otx2inx("LabelUnit", run_otx, run_inx)
+    bob7_pidginunit.set_otx2inx("LabelStr", run_otx, run_inx)
     clean_otx = "clean"
     clean_inx = "prope"
-    bob7_pidginunit.set_otx2inx("TagUnit", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("TagStr", clean_otx, clean_inx)
     br00042_header = x_creeds.get("br00042")
     br00043_header = x_creeds.get("br00043")
     br00044_header = x_creeds.get("br00044")

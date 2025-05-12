@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a01_way_logic.way import WayUnit
+from src.a01_way_logic.way import WayStr
 from src.a05_idea_logic.idea import ideaunit_shop
 from src.a04_reason_logic.reason_idea import factunit_shop, reasonunit_shop
 from src.a06_bud_logic.bud import (
@@ -378,7 +378,7 @@ def get_budunit_laundry_example1() -> BudUnit:
 
 
 # class YR:
-def from_list_get_active(way: WayUnit, idea_dict: dict, asse_bool: bool = None) -> bool:
+def from_list_get_active(way: WayStr, idea_dict: dict, asse_bool: bool = None) -> bool:
     active = None
     temp_idea = None
 

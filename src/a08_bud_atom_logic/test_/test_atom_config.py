@@ -42,10 +42,10 @@ from src.a06_bud_logic._utils.str_a06 import (
     idea_way_str,
     stop_want_str,
     team_label_str,
-    type_NameUnit_str,
-    type_LabelUnit_str,
-    type_TagUnit_str,
-    type_WayUnit_str,
+    type_NameStr_str,
+    type_LabelStr_str,
+    type_TagStr_str,
+    type_WayStr_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_insert,
@@ -573,7 +573,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_NameUnit_str()
+    assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_NameStr_str()
     assert get_class_type(bud_ideaunit_str(), gogo_want_str()) == "float"
 
 
@@ -581,10 +581,10 @@ def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
     x_allowed_class_types = {
         "int",
-        type_NameUnit_str(),
-        type_LabelUnit_str(),
-        type_TagUnit_str(),
-        type_WayUnit_str(),
+        type_NameStr_str(),
+        type_LabelStr_str(),
+        type_TagStr_str(),
+        type_WayStr_str(),
         "float",
         "bool",
         "TimeLinePoint",
@@ -641,10 +641,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(acct_name_str()) == type_NameUnit_str()
+    assert x_class_types.get(acct_name_str()) == type_NameStr_str()
     assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_label_str()) == type_LabelUnit_str()
-    assert x_class_types.get(context_str()) == type_WayUnit_str()
+    assert x_class_types.get(awardee_label_str()) == type_LabelStr_str()
+    assert x_class_types.get(context_str()) == type_WayStr_str()
     assert x_class_types.get("context_idea_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
@@ -657,30 +657,30 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("divisor") == "int"
-    assert x_class_types.get(fcontext_str()) == type_WayUnit_str()
+    assert x_class_types.get(fcontext_str()) == type_WayStr_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_label_str()) == type_LabelUnit_str()
-    assert x_class_types.get(healer_name_str()) == type_NameUnit_str()
+    assert x_class_types.get(group_label_str()) == type_LabelStr_str()
+    assert x_class_types.get(healer_name_str()) == type_NameStr_str()
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("need") == type_WayUnit_str()
+    assert x_class_types.get("need") == type_WayStr_str()
     assert x_class_types.get("nigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("open") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fneed") == type_WayUnit_str()
+    assert x_class_types.get("fneed") == type_WayStr_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(idea_way_str()) == type_WayUnit_str()
+    assert x_class_types.get(idea_way_str()) == type_WayStr_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(team_label_str()) == type_LabelUnit_str()
+    assert x_class_types.get(team_label_str()) == type_LabelStr_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

@@ -1,4 +1,4 @@
-from src.a06_bud_logic._utils.str_a06 import type_NameUnit_str
+from src.a06_bud_logic._utils.str_a06 import type_NameStr_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_clean_waymap,
@@ -124,16 +124,16 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
-    new_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob_inx)
+    new_pidginunit.set_otx2inx(type_NameStr_str(), bob_otx, bob_inx)
     assert new_pidginunit.namemap != get_suita_namemap()
-    assert new_pidginunit.nameunit_exists(bob_otx, bob_inx)
+    assert new_pidginunit.namestr_exists(bob_otx, bob_inx)
 
     # WHEN
     merged_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
 
     # THEN
     assert merged_pidginunit
-    assert new_pidginunit.nameunit_exists(bob_otx, bob_inx)
+    assert new_pidginunit.namestr_exists(bob_otx, bob_inx)
     merged_acctbrigde = get_suita_namemap()
     merged_acctbrigde.event_int = event1
     merged_acctbrigde.set_otx2inx(bob_otx, bob_inx)

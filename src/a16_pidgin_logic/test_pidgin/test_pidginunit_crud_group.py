@@ -97,7 +97,7 @@ def test_PidginUnit_get_labelmap_ReturnsObj():
     assert gen_x_labelmap == static_x_labelmap
 
 
-def test_PidginUnit_set_labelunit_SetsAttr_Scenario0():
+def test_PidginUnit_set_labelstr_SetsAttr_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -107,26 +107,26 @@ def test_PidginUnit_set_labelunit_SetsAttr_Scenario0():
     assert acct_name_labelmap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_labelunit(sue_otx, sue_inx)
+    zia_pidginunit.set_labelstr(sue_otx, sue_inx)
 
     # THEN
     assert acct_name_labelmap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_labelunit_exists_ReturnsObj():
+def test_PidginUnit_labelstr_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    assert zia_pidginunit.labelunit_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.labelstr_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_labelunit(sue_otx, sue_inx)
+    zia_pidginunit.set_labelstr(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.labelunit_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.labelstr_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_get_inx_label_ReturnsObj():
@@ -138,27 +138,27 @@ def test_PidginUnit_get_inx_label_ReturnsObj():
     assert zia_pidginunit._get_inx_label(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_labelunit(sue_otx, sue_inx)
+    zia_pidginunit.set_labelstr(sue_otx, sue_inx)
 
     # THEN
     assert zia_pidginunit._get_inx_label(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_labelunit_ReturnsObj():
+def test_PidginUnit_del_labelstr_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    zia_pidginunit.set_labelunit(sue_otx, sue_inx)
-    zia_pidginunit.set_labelunit(zia_str, zia_str)
-    assert zia_pidginunit.labelunit_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.labelunit_exists(zia_str, zia_str)
+    zia_pidginunit.set_labelstr(sue_otx, sue_inx)
+    zia_pidginunit.set_labelstr(zia_str, zia_str)
+    assert zia_pidginunit.labelstr_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.labelstr_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_labelunit(sue_otx)
+    zia_pidginunit.del_labelstr(sue_otx)
 
     # THEN
-    assert zia_pidginunit.labelunit_exists(sue_otx, sue_inx) is False
-    assert zia_pidginunit.labelunit_exists(zia_str, zia_str)
+    assert zia_pidginunit.labelstr_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.labelstr_exists(zia_str, zia_str)

@@ -636,7 +636,7 @@ def create_update_pidtagg_sound_agg_bridge_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidtagg_s_agg_tablename = create_prime_tablename("pidtagg", "s", "agg")
     return f"""UPDATE {pidtagg_s_agg_tablename}
-SET error_message = 'Bridge cannot exist in TagUnit'
+SET error_message = 'Bridge cannot exist in TagStr'
 WHERE rowid IN (
     SELECT tagg_agg.rowid
     FROM {pidtagg_s_agg_tablename} tagg_agg
@@ -652,7 +652,7 @@ def create_update_pidwayy_sound_agg_bridge_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidwayy_s_agg_tablename = create_prime_tablename("pidwayy", "s", "agg")
     return f"""UPDATE {pidwayy_s_agg_tablename}
-SET error_message = 'Bridge must exist in WayUnit'
+SET error_message = 'Bridge must exist in WayStr'
 WHERE rowid IN (
     SELECT way_agg.rowid
     FROM {pidwayy_s_agg_tablename} way_agg
@@ -668,7 +668,7 @@ def create_update_pidname_sound_agg_bridge_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidname_s_agg_tablename = create_prime_tablename("pidname", "s", "agg")
     return f"""UPDATE {pidname_s_agg_tablename}
-SET error_message = 'Bridge cannot exist in NameUnit'
+SET error_message = 'Bridge cannot exist in NameStr'
 WHERE rowid IN (
     SELECT name_agg.rowid
     FROM {pidname_s_agg_tablename} name_agg

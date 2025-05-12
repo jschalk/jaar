@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayUnit, to_way
+from src.a01_way_logic.way import WayStr, to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop
@@ -1089,7 +1089,7 @@ class AwardAgendaMetrics:
     agenda_no_bud_i_sum = 0
     agenda_yes_bud_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[WayUnit, IdeaUnit]):
+    def set_sums(self, agenda_dict: dict[WayStr, IdeaUnit]):
         for agenda_idea in agenda_dict.values():
             self.sum_bud_agenda_share += agenda_idea.get_fund_share()
             if agenda_idea._awardlines == {}:

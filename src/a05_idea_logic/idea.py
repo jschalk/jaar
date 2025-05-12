@@ -6,18 +6,18 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positive_int,
 )
 from src.a01_way_logic.way import (
-    WayUnit,
-    TagUnit,
+    WayStr,
+    TagStr,
     is_sub_way,
     get_default_fisc_tag as root_tag,
-    all_wayunits_between,
+    all_waystrs_between,
     create_way,
     default_bridge_if_None,
     replace_bridge,
     FiscTag,
     AcctName,
     GroupLabel,
-    WayUnit,
+    WayStr,
     rebuild_way,
     find_replace_way_key_dict,
 )
@@ -52,7 +52,7 @@ from src.a04_reason_logic.reason_idea import (
     ReasonCore,
     ReasonUnit,
     reasonunit_shop,
-    WayUnit,
+    WayStr,
     FactUnit,
     factunit_shop,
     ReasonHeir,
@@ -97,13 +97,13 @@ class IdeaAttrHolder:
     mass: int = None
     uid: int = None
     reason: ReasonUnit = None
-    reason_context: WayUnit = None
-    reason_premise: WayUnit = None
+    reason_context: WayStr = None
+    reason_premise: WayStr = None
     reason_premise_open: float = None
     reason_premise_nigh: float = None
     reason_premise_divisor: int = None
-    reason_del_premise_context: WayUnit = None
-    reason_del_premise_need: WayUnit = None
+    reason_del_premise_context: WayStr = None
+    reason_del_premise_need: WayStr = None
     reason_context_idea_active_requisite: str = None
     teamunit: TeamUnit = None
     healerlink: HealerLink = None
@@ -144,13 +144,13 @@ def ideaattrholder_shop(
     mass: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
-    reason_context: WayUnit = None,
-    reason_premise: WayUnit = None,
+    reason_context: WayStr = None,
+    reason_premise: WayStr = None,
     reason_premise_open: float = None,
     reason_premise_nigh: float = None,
     reason_premise_divisor: int = None,
-    reason_del_premise_context: WayUnit = None,
-    reason_del_premise_need: WayUnit = None,
+    reason_del_premise_context: WayStr = None,
+    reason_del_premise_need: WayStr = None,
     reason_context_idea_active_requisite: str = None,
     teamunit: TeamUnit = None,
     healerlink: HealerLink = None,
@@ -208,17 +208,17 @@ def ideaattrholder_shop(
 
 @dataclass
 class IdeaUnit:
-    idea_tag: TagUnit = None
+    idea_tag: TagStr = None
     mass: int = None
-    parent_way: WayUnit = None
+    parent_way: WayStr = None
     root: bool = None
-    _kids: dict[WayUnit,] = None
+    _kids: dict[WayStr,] = None
     fisc_tag: FiscTag = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupLabel, AwardLink] = None
-    reasonunits: dict[WayUnit, ReasonUnit] = None
+    reasonunits: dict[WayStr, ReasonUnit] = None
     teamunit: TeamUnit = None
-    factunits: dict[WayUnit, FactUnit] = None
+    factunits: dict[WayStr, FactUnit] = None
     healerlink: HealerLink = None
     begin: float = None
     close: float = None
@@ -241,7 +241,7 @@ class IdeaUnit:
     _awardheirs: dict[GroupLabel, AwardHeir] = None
     _awardlines: dict[GroupLabel, AwardLine] = None
     _descendant_pledge_count: int = None
-    _factheirs: dict[WayUnit, FactHeir] = None
+    _factheirs: dict[WayStr, FactHeir] = None
     _fund_ratio: float = None
     fund_coin: FundCoin = None
     _fund_onset: FundNum = None
@@ -249,17 +249,17 @@ class IdeaUnit:
     _healerlink_ratio: float = None
     _level: int = None
     _range_evaluated: bool = None
-    _reasonheirs: dict[WayUnit, ReasonHeir] = None
+    _reasonheirs: dict[WayStr, ReasonHeir] = None
     _task: bool = None
     _teamheir: TeamHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
 
-    def is_agenda_idea(self, necessary_context: WayUnit = None) -> bool:
+    def is_agenda_idea(self, necessary_context: WayStr = None) -> bool:
         context_reasonunit_exists = self.context_reasonunit_exists(necessary_context)
         return self.pledge and self._active and context_reasonunit_exists
 
-    def context_reasonunit_exists(self, necessary_context: WayUnit = None) -> bool:
+    def context_reasonunit_exists(self, necessary_context: WayStr = None) -> bool:
         x_reasons = self.reasonunits.values()
         x_context = necessary_context
         return x_context is None or any(
@@ -274,7 +274,7 @@ class IdeaUnit:
         elif prev_active != now_active:
             self._active_hx[tree_traverse_count] = now_active
 
-    def set_factheirs(self, facts: dict[WayUnit, FactCore]):
+    def set_factheirs(self, facts: dict[WayStr, FactCore]):
         facts_dict = get_empty_dict_if_None(facts)
         self._factheirs = {}
         for x_factcore in facts_dict.values():
@@ -320,10 +320,10 @@ class IdeaUnit:
     def set_factunit(self, factunit: FactUnit):
         self.factunits[factunit.fcontext] = factunit
 
-    def factunit_exists(self, x_fcontext: WayUnit) -> bool:
+    def factunit_exists(self, x_fcontext: WayStr) -> bool:
         return self.factunits.get(x_fcontext) != None
 
-    def get_factunits_dict(self) -> dict[WayUnit, str]:
+    def get_factunits_dict(self) -> dict[WayStr, str]:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, context_factunit: FactUnit):
@@ -339,7 +339,7 @@ class IdeaUnit:
             fnigh=context_factunit.fnigh,
         )
 
-    def del_factunit(self, fcontext: WayUnit):
+    def del_factunit(self, fcontext: WayStr):
         self.factunits.pop(fcontext)
 
     def set_fund_attr(
@@ -361,7 +361,7 @@ class IdeaUnit:
 
     def get_kids_in_range(
         self, x_gogo: float = None, x_stop: float = None
-    ) -> dict[TagUnit,]:
+    ) -> dict[TagStr,]:
         if x_gogo is None and x_stop is None:
             x_gogo = self.gogo_want
             x_gogo = self.stop_want
@@ -381,10 +381,10 @@ class IdeaUnit:
                 x_dict[x_idea.idea_tag] = x_idea
         return x_dict
 
-    def get_obj_key(self) -> TagUnit:
+    def get_obj_key(self) -> TagStr:
         return self.idea_tag
 
-    def get_idea_way(self) -> WayUnit:
+    def get_idea_way(self) -> WayStr:
         if self.parent_way in (None, ""):
             return create_way(self.idea_tag, bridge=self.bridge)
         else:
@@ -401,7 +401,7 @@ class IdeaUnit:
         self.set_descendant_pledge_count_zero_if_None()
         self._descendant_pledge_count += x_int
 
-    def get_descendant_ways_from_kids(self) -> dict[WayUnit, int]:
+    def get_descendant_ways_from_kids(self) -> dict[WayStr, int]:
         descendant_ways = {}
         to_evaluate_ideas = list(self._kids.values())
         count_x = 0
@@ -667,14 +667,14 @@ class IdeaUnit:
             self._stop_calc = (self._stop_calc * r_idea_numor) / r_idea_denom
         self._range_evaluated = True
 
-    def _del_reasonunit_all_cases(self, context: WayUnit, premise: WayUnit):
+    def _del_reasonunit_all_cases(self, context: WayStr, premise: WayStr):
         if context is not None and premise is not None:
             self.del_reasonunit_premise(context=context, premise=premise)
             if len(self.reasonunits[context].premises) == 0:
                 self.del_reasonunit_context(context=context)
 
     def set_reason_context_idea_active_requisite(
-        self, context: WayUnit, context_idea_active_requisite: str
+        self, context: WayStr, context_idea_active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(context=context)
         if context_idea_active_requisite is False:
@@ -684,7 +684,7 @@ class IdeaUnit:
         elif context_idea_active_requisite:
             x_reasonunit.context_idea_active_requisite = True
 
-    def _get_or_create_reasonunit(self, context: WayUnit) -> ReasonUnit:
+    def _get_or_create_reasonunit(self, context: WayStr) -> ReasonUnit:
         x_reasonunit = None
         try:
             x_reasonunit = self.reasonunits[context]
@@ -695,8 +695,8 @@ class IdeaUnit:
 
     def set_reason_premise(
         self,
-        context: WayUnit,
-        premise: WayUnit,
+        context: WayStr,
+        premise: WayStr,
         open: float,
         nigh: float,
         divisor: int,
@@ -704,13 +704,13 @@ class IdeaUnit:
         x_reasonunit = self._get_or_create_reasonunit(context=context)
         x_reasonunit.set_premise(premise=premise, open=open, nigh=nigh, divisor=divisor)
 
-    def del_reasonunit_context(self, context: WayUnit):
+    def del_reasonunit_context(self, context: WayStr):
         try:
             self.reasonunits.pop(context)
         except KeyError as e:
             raise InvalidIdeaException(f"No ReasonUnit at '{context}'") from e
 
-    def del_reasonunit_premise(self, context: WayUnit, premise: WayUnit):
+    def del_reasonunit_premise(self, context: WayStr, premise: WayStr):
         reason_unit = self.reasonunits[context]
         reason_unit.del_premise(premise=premise)
 
@@ -718,7 +718,7 @@ class IdeaUnit:
         self._kids[idea_kid.idea_tag] = idea_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, idea_kid_idea_tag: TagUnit, if_missing_create=False):
+    def get_kid(self, idea_kid_idea_tag: TagStr, if_missing_create=False):
         if if_missing_create is False:
             return self._kids.get(idea_kid_idea_tag)
         try:
@@ -729,7 +729,7 @@ class IdeaUnit:
             return_idea = self._kids.get(idea_kid_idea_tag)
         return return_idea
 
-    def del_kid(self, idea_kid_idea_tag: TagUnit):
+    def del_kid(self, idea_kid_idea_tag: TagStr):
         self._kids.pop(idea_kid_idea_tag)
 
     def clear_kids(self):
@@ -757,10 +757,10 @@ class IdeaUnit:
         reason.bridge = self.bridge
         self.reasonunits[reason.context] = reason
 
-    def reasonunit_exists(self, x_context: WayUnit) -> bool:
+    def reasonunit_exists(self, x_context: WayStr) -> bool:
         return self.reasonunits.get(x_context) != None
 
-    def get_reasonunit(self, context: WayUnit) -> ReasonUnit:
+    def get_reasonunit(self, context: WayStr) -> ReasonUnit:
         return self.reasonunits.get(context)
 
     def set_reasonheirs_status(self):
@@ -807,7 +807,7 @@ class IdeaUnit:
         return active_bool
 
     def set_range_factheirs(
-        self, bud_idea_dict: dict[WayUnit,], range_inheritors: dict[WayUnit, WayUnit]
+        self, bud_idea_dict: dict[WayStr,], range_inheritors: dict[WayStr, WayStr]
     ):
         for reason_context in self._reasonheirs.keys():
             if range_root_way := range_inheritors.get(reason_context):
@@ -817,7 +817,7 @@ class IdeaUnit:
                 self._create_factheir(all_ideas, range_root_way, reason_context)
 
     def _create_factheir(
-        self, all_ideas: list, range_root_way: WayUnit, reason_context: WayUnit
+        self, all_ideas: list, range_root_way: WayStr, reason_context: WayStr
     ):
         range_root_factheir = self._factheirs.get(range_root_way)
         old_open = range_root_factheir.fopen
@@ -838,14 +838,14 @@ class IdeaUnit:
             reason.clear_status()
 
     def _coalesce_with_reasonunits(
-        self, reasonheirs: dict[WayUnit, ReasonHeir]
-    ) -> dict[WayUnit, ReasonHeir]:
+        self, reasonheirs: dict[WayStr, ReasonHeir]
+    ) -> dict[WayStr, ReasonHeir]:
         new_reasonheirs = deepcopy(reasonheirs)
         new_reasonheirs |= self.reasonunits
         return new_reasonheirs
 
     def set_reasonheirs(
-        self, bud_idea_dict: dict[WayUnit,], reasonheirs: dict[WayUnit, ReasonCore]
+        self, bud_idea_dict: dict[WayStr,], reasonheirs: dict[WayStr, ReasonCore]
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self._reasonheirs = {}
@@ -866,7 +866,7 @@ class IdeaUnit:
             new_reasonheir.inherit_from_reasonheir(x_reasonunit)
             self._reasonheirs[new_reasonheir.context] = new_reasonheir
 
-    def get_reasonheir(self, context: WayUnit) -> ReasonHeir:
+    def get_reasonheir(self, context: WayStr) -> ReasonHeir:
         return self._reasonheirs.get(context)
 
     def get_reasonunits_dict(self):
@@ -939,7 +939,7 @@ class IdeaUnit:
 
         return x_dict
 
-    def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
+    def find_replace_way(self, old_way: WayStr, new_way: WayStr):
         if is_sub_way(ref_way=self.parent_way, sub_way=old_way):
             self.parent_way = rebuild_way(self.parent_way, old_way, new_way)
 
@@ -972,16 +972,16 @@ class IdeaUnit:
 
 
 def ideaunit_shop(
-    idea_tag: TagUnit = None,
+    idea_tag: TagStr = None,
     _uid: int = None,  # Calculated field?
-    parent_way: WayUnit = None,
+    parent_way: WayStr = None,
     _kids: dict = None,
     mass: int = 1,
     awardlinks: dict[GroupLabel, AwardLink] = None,
     _awardheirs: dict[GroupLabel, AwardHeir] = None,  # Calculated field
     _awardlines: dict[GroupLabel, AwardLink] = None,  # Calculated field
-    reasonunits: dict[WayUnit, ReasonUnit] = None,
-    _reasonheirs: dict[WayUnit, ReasonHeir] = None,  # Calculated field
+    reasonunits: dict[WayStr, ReasonUnit] = None,
+    _reasonheirs: dict[WayStr, ReasonHeir] = None,  # Calculated field
     teamunit: TeamUnit = None,
     _teamheir: TeamHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
@@ -1118,9 +1118,9 @@ def get_obj_from_idea_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_ideas_between(
-    bud_idea_dict: dict[WayUnit, IdeaUnit], src_way: WayUnit, dst_context: WayUnit
+    bud_idea_dict: dict[WayStr, IdeaUnit], src_way: WayStr, dst_context: WayStr
 ) -> list[IdeaUnit]:
-    all_ways = all_wayunits_between(src_way, dst_context)
+    all_ways = all_waystrs_between(src_way, dst_context)
     return [bud_idea_dict.get(x_way) for x_way in all_ways]
 
 

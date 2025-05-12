@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.a01_way_logic.way import WayUnit, LabelUnit
+from src.a01_way_logic.way import WayStr, LabelStr
 from src.a04_reason_logic.reason_idea import FactUnit, ReasonUnit
 from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
 from src.a03_group_logic.group import MemberShip
@@ -263,7 +263,7 @@ class BudDelta:
     def add_budatom_memberships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_membership_group_labels: list[LabelUnit],
+        insert_membership_group_labels: list[LabelStr],
     ):
         after_acct_name = after_acctunit.acct_name
         for insert_group_label in insert_membership_group_labels:
@@ -293,7 +293,7 @@ class BudDelta:
         self.set_budatom(x_budatom)
 
     def add_budatom_memberships_delete(
-        self, before_acct_name: AcctName, before_group_labels: LabelUnit
+        self, before_acct_name: AcctName, before_group_labels: LabelStr
     ):
         for delete_group_label in before_group_labels:
             x_budatom = budatom_shop("bud_acct_membership", atom_delete())
@@ -613,7 +613,7 @@ class BudDelta:
 
     def add_budatom_idea_reason_premiseunit_inserts(
         self,
-        idea_way: WayUnit,
+        idea_way: WayStr,
         after_reasonunit: ReasonUnit,
         insert_premise_needs: set,
     ):
@@ -633,7 +633,7 @@ class BudDelta:
 
     def add_budatom_idea_reason_premiseunit_updates(
         self,
-        idea_way: WayUnit,
+        idea_way: WayStr,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
         update_premise_needs: set,
@@ -660,8 +660,8 @@ class BudDelta:
 
     def add_budatom_idea_reason_premiseunit_deletes(
         self,
-        idea_way: WayUnit,
-        reasonunit_context: WayUnit,
+        idea_way: WayStr,
+        reasonunit_context: WayStr,
         delete_premise_needs: set,
     ):
         for delete_premise_need in delete_premise_needs:
@@ -672,7 +672,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_teamlink_insert(
-        self, idea_way: WayUnit, insert_teamlink_team_labels: set
+        self, idea_way: WayStr, insert_teamlink_team_labels: set
     ):
         for insert_teamlink_team_label in insert_teamlink_team_labels:
             x_budatom = budatom_shop("bud_idea_teamlink", atom_insert())
@@ -681,7 +681,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_teamlink_deletes(
-        self, idea_way: WayUnit, delete_teamlink_team_labels: set
+        self, idea_way: WayStr, delete_teamlink_team_labels: set
     ):
         for delete_teamlink_team_label in delete_teamlink_team_labels:
             x_budatom = budatom_shop("bud_idea_teamlink", atom_delete())
@@ -690,7 +690,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_healerlink_insert(
-        self, idea_way: WayUnit, insert_healerlink_healer_names: set
+        self, idea_way: WayStr, insert_healerlink_healer_names: set
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
             x_budatom = budatom_shop("bud_idea_healerlink", atom_insert())
@@ -699,7 +699,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_healerlink_deletes(
-        self, idea_way: WayUnit, delete_healerlink_healer_names: set
+        self, idea_way: WayStr, delete_healerlink_healer_names: set
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
             x_budatom = budatom_shop("bud_idea_healerlink", atom_delete())
@@ -747,7 +747,7 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
     def add_budatom_idea_awardlink_deletes(
-        self, idea_way: WayUnit, delete_awardlink_awardee_labels: set
+        self, idea_way: WayStr, delete_awardlink_awardee_labels: set
     ):
         for delete_awardlink_awardee_label in delete_awardlink_awardee_labels:
             x_budatom = budatom_shop("bud_idea_awardlink", atom_delete())
@@ -793,7 +793,7 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
     def add_budatom_idea_factunit_deletes(
-        self, idea_way: WayUnit, delete_factunit_contexts: FactUnit
+        self, idea_way: WayStr, delete_factunit_contexts: FactUnit
     ):
         for delete_factunit_context in delete_factunit_contexts:
             x_budatom = budatom_shop("bud_idea_factunit", atom_delete())

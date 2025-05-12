@@ -34,7 +34,7 @@ from src.a02_finance_logic.deal import (
 from src.a01_way_logic.way import (
     default_bridge_if_None,
     OwnerName,
-    WayUnit,
+    WayStr,
     FiscTag,
     AcctName,
     EventInt,
@@ -205,7 +205,7 @@ class FiscUnit:
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
-        keep_way: WayUnit,
+        keep_way: WayStr,
         gut_bud: BudUnit,
     ):
         healer_hubunit.keep_way = keep_way

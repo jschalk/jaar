@@ -1,8 +1,8 @@
 from src.a01_way_logic.way import (
-    WayUnit,
+    WayStr,
     get_terminus_tag,
     get_parent_way,
-    LabelUnit,
+    LabelStr,
 )
 from src.a06_bud_logic.bud import BudUnit
 from src.a12_hub_tools.hub_tool import open_gut_file
@@ -12,9 +12,9 @@ from copy import deepcopy as copy_deepcopy
 
 def create_pledge(
     x_bud: BudUnit,
-    pledge_way: WayUnit,
-    x_teamlink: LabelUnit = None,
-    reason_premise: WayUnit = None,
+    pledge_way: WayStr,
+    x_teamlink: LabelStr = None,
+    reason_premise: WayStr = None,
 ):
     if pledge_way is not None and get_terminus_tag(pledge_way) != "":
         x_idea = x_bud.get_idea_obj(pledge_way, if_missing_create=True)
@@ -33,9 +33,9 @@ def create_pledge(
 
 def add_gut_pledge(
     x_hubunit: HubUnit,
-    pledge_way: WayUnit,
-    x_teamlink: LabelUnit = None,
-    reason_premise: WayUnit = None,
+    pledge_way: WayStr,
+    x_teamlink: LabelStr = None,
+    reason_premise: WayStr = None,
 ):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
@@ -50,14 +50,14 @@ def add_gut_pledge(
     x_hubunit.append_packs_to_gut_file()
 
 
-def create_fact(x_bud: BudUnit, fact_fneed: WayUnit):
+def create_fact(x_bud: BudUnit, fact_fneed: WayStr):
     if x_bud.idea_exists(fact_fneed) is False:
         x_bud.get_idea_obj(fact_fneed, if_missing_create=True)
     fact_context = get_parent_way(fact_fneed)
     x_bud.add_fact(fact_context, fact_fneed)
 
 
-def add_gut_fact(x_hubunit: HubUnit, fact_fneed: WayUnit):
+def add_gut_fact(x_hubunit: HubUnit, fact_fneed: WayStr):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
         x_hubunit.fisc_tag,

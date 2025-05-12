@@ -17,9 +17,9 @@ from src.a01_way_logic.way import (
     create_way_from_tags,
     get_terminus_tag,
     get_parent_way,
-    is_tagunit,
-    WayUnit,
-    TagUnit,
+    is_tagstr,
+    WayStr,
+    TagStr,
     FaceName,
     EventInt,
 )
@@ -333,27 +333,27 @@ class WayMap:
     def reveal_inx(self, otx_way: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_way) is False:
             inx_way = copy_copy(otx_way)
-            inx_way = self._reveal_wayunit_inx(otx_way)
+            inx_way = self._reveal_waystr_inx(otx_way)
             self.set_otx2inx(otx_way, inx_way)
 
         return self._get_inx_value(otx_way)
 
-    def _reveal_wayunit_inx(self, otx_way) -> WayUnit:
+    def _reveal_waystr_inx(self, otx_way) -> WayStr:
         otx_parent_way = get_parent_way(otx_way, self.otx_bridge)
         if self.otx_exists(otx_parent_way) is False and otx_parent_way != "":
             return None
         otx_terminus = get_terminus_tag(otx_way, self.otx_bridge)
-        otx_terminus = self._get_tagmap_tagunit(otx_terminus)
+        otx_terminus = self._get_tagmap_tagstr(otx_terminus)
         if otx_parent_way == "":
             inx_parent_way = ""
         else:
             inx_parent_way = self._get_inx_value(otx_parent_way)
         return create_way(inx_parent_way, otx_terminus, self.inx_bridge)
 
-    def _get_tagmap_tagunit(self, x_tagUnit: TagUnit) -> TagUnit:
-        if self.otx_tag_exists(x_tagUnit):
-            return self.tagmap.reveal_inx(x_tagUnit)
-        return x_tagUnit
+    def _get_tagmap_tagstr(self, x_tagStr: TagStr) -> TagStr:
+        if self.otx_tag_exists(x_tagStr):
+            return self.tagmap.reveal_inx(x_tagStr)
+        return x_tagStr
 
     def otx2inx_exists(self, otx_way: str, inx_way: str) -> bool:
         return self._get_inx_value(otx_way) == inx_way
@@ -364,7 +364,7 @@ class WayMap:
     def del_otx2inx(self, otx_way: str):
         self.otx2inx.pop(otx_way)
 
-    def set_tag(self, otx_tag: TagUnit, inx_tag: TagUnit):
+    def set_tag(self, otx_tag: TagStr, inx_tag: TagStr):
         if self.otx_bridge in otx_tag:
             exception_str = f"tag cannot have otx_tag '{otx_tag}'. It must be not have bridge {self.otx_bridge}."
             raise set_tag_Exception(exception_str)
@@ -377,23 +377,23 @@ class WayMap:
 
     def _set_new_tag_to_otx_inx(self, otx_tag, inx_tag):
         for otx_way, inx_way in self.otx2inx.items():
-            otx_tagunits = get_all_way_tags(otx_way, self.otx_bridge)
-            inx_tagunits = get_all_way_tags(inx_way, self.inx_bridge)
-            for x_count, otx_tagunit in enumerate(otx_tagunits):
-                if otx_tagunit == otx_tag:
-                    inx_tagunits[x_count] = inx_tag
-            self.set_otx2inx(otx_way, create_way_from_tags(inx_tagunits))
+            otx_tagstrs = get_all_way_tags(otx_way, self.otx_bridge)
+            inx_tagstrs = get_all_way_tags(inx_way, self.inx_bridge)
+            for x_count, otx_tagstr in enumerate(otx_tagstrs):
+                if otx_tagstr == otx_tag:
+                    inx_tagstrs[x_count] = inx_tag
+            self.set_otx2inx(otx_way, create_way_from_tags(inx_tagstrs))
 
-    def _get_inx_tag(self, otx_tag: TagUnit) -> TagUnit:
+    def _get_inx_tag(self, otx_tag: TagStr) -> TagStr:
         return self.tagmap.otx2inx.get(otx_tag)
 
-    def tag_exists(self, otx_tag: TagUnit, inx_tag: TagUnit) -> bool:
+    def tag_exists(self, otx_tag: TagStr, inx_tag: TagStr) -> bool:
         return self.tagmap.otx2inx_exists(otx_tag, inx_tag)
 
-    def otx_tag_exists(self, otx_tag: TagUnit) -> bool:
+    def otx_tag_exists(self, otx_tag: TagStr) -> bool:
         return self.tagmap.otx_exists(otx_tag)
 
-    def del_tag(self, otx_tag: TagUnit) -> bool:
+    def del_tag(self, otx_tag: TagStr) -> bool:
         self.tagmap.del_otx2inx(otx_tag)
 
     def _unknown_word_in_otx2inx(self) -> bool:

@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, get_net, RespectNum
-from src.a01_way_logic.way import AcctName, FiscTag, WayUnit
+from src.a01_way_logic.way import AcctName, FiscTag, WayStr
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, AwardLink
 from src.a05_idea_logic.idea import IdeaUnit
@@ -245,11 +245,11 @@ def get_credit_ledger(x_bud: BudUnit) -> dict[AcctUnit, RespectNum]:
     return credit_ledger
 
 
-def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[WayUnit, dict[str,]]:
+def get_bud_root_facts_dict(x_bud: BudUnit) -> dict[WayStr, dict[str,]]:
     return x_bud.get_factunits_dict()
 
 
-def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayUnit, dict]):
+def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayStr, dict]):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
     missing_fact_contexts = set(x_bud.get_missing_fact_contexts().keys())
     not_missing_fact_contexts = set(x_bud.get_factunits_dict().keys())

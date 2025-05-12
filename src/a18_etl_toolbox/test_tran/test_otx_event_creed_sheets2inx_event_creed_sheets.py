@@ -3,8 +3,8 @@ from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     face_name_str,
-    type_NameUnit_str,
-    type_TagUnit_str,
+    type_NameStr_str,
+    type_TagStr_str,
     event_int_str,
 )
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
@@ -140,16 +140,16 @@ def test_etl_otz_event_creeds_to_inz_events_Scenario1_MultpleFaceNames_CreatesEv
     e3_pidginunit = pidginunit_shop(sue_otx, event3)
     e7_pidginunit = pidginunit_shop(zia_otx, event7)
     e9_pidginunit = pidginunit_shop(zia_otx, event9)
-    e3_pidginunit.set_otx2inx(type_NameUnit_str(), sue_otx, sue_inx)
-    e3_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob0_inx)
-    e3_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao0_inx)
-    e7_pidginunit.set_otx2inx(type_NameUnit_str(), zia_otx, zia_inx)
-    e7_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob1_inx)
-    e7_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao1_inx)
-    e9_pidginunit.set_otx2inx(type_NameUnit_str(), zia_otx, zia_inx)
-    e9_pidginunit.set_otx2inx(type_NameUnit_str(), bob_otx, bob2_inx)
-    e9_pidginunit.set_otx2inx(type_NameUnit_str(), yao_otx, yao2_inx)
-    e9_pidginunit.set_otx2inx(type_TagUnit_str(), accord55_inx, accord55_otx)
+    e3_pidginunit.set_otx2inx(type_NameStr_str(), sue_otx, sue_inx)
+    e3_pidginunit.set_otx2inx(type_NameStr_str(), bob_otx, bob0_inx)
+    e3_pidginunit.set_otx2inx(type_NameStr_str(), yao_otx, yao0_inx)
+    e7_pidginunit.set_otx2inx(type_NameStr_str(), zia_otx, zia_inx)
+    e7_pidginunit.set_otx2inx(type_NameStr_str(), bob_otx, bob1_inx)
+    e7_pidginunit.set_otx2inx(type_NameStr_str(), yao_otx, yao1_inx)
+    e9_pidginunit.set_otx2inx(type_NameStr_str(), zia_otx, zia_inx)
+    e9_pidginunit.set_otx2inx(type_NameStr_str(), bob_otx, bob2_inx)
+    e9_pidginunit.set_otx2inx(type_NameStr_str(), yao_otx, yao2_inx)
+    e9_pidginunit.set_otx2inx(type_TagStr_str(), accord55_inx, accord55_otx)
     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
     save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())

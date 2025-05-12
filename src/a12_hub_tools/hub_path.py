@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_way_logic.way import OwnerName, TagUnit
+from src.a01_way_logic.way import OwnerName, TagStr
 
 FISC_FILENAME = "fisc.json"
 FISC_OTE1_AGG_CSV_FILENAME = "fisc_ote1_agg.csv"
@@ -27,41 +27,41 @@ def job_str() -> str:
     return "job"
 
 
-def create_fisc_dir_path(fisc_mstr_dir: str, fisc_tag: TagUnit) -> str:
+def create_fisc_dir_path(fisc_mstr_dir: str, fisc_tag: TagStr) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     return create_path(fiscs_dir, fisc_tag)
 
 
-def create_fisc_json_path(fisc_mstr_dir: str, fisc_tag: TagUnit) -> str:
+def create_fisc_json_path(fisc_mstr_dir: str, fisc_tag: TagStr) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\fisc.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_tag)
     return create_path(fisc_path, "fisc.json")
 
 
-def create_fisc_ote1_csv_path(fisc_mstr_dir: str, fisc_tag: TagUnit):
+def create_fisc_ote1_csv_path(fisc_mstr_dir: str, fisc_tag: TagStr):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\fisc_ote1_agg.csv"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_tag)
     return create_path(fisc_path, "fisc_ote1_agg.csv")
 
 
-def create_fisc_ote1_json_path(fisc_mstr_dir: str, fisc_tag: TagUnit):
+def create_fisc_ote1_json_path(fisc_mstr_dir: str, fisc_tag: TagStr):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\fisc_ote1_agg.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_tag)
     return create_path(fisc_path, "fisc_ote1_agg.json")
 
 
-def fisc_agenda_list_report_path(fisc_mstr_dir: str, fisc_tag: TagUnit) -> str:
+def fisc_agenda_list_report_path(fisc_mstr_dir: str, fisc_tag: TagStr) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\agenda_full_listing.csv"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_path = create_path(fiscs_dir, fisc_tag)
     return create_path(fisc_path, "agenda_full_listing.csv")
 
 
-def create_fisc_owners_dir_path(fisc_mstr_dir: str, fisc_tag: TagUnit) -> str:
+def create_fisc_owners_dir_path(fisc_mstr_dir: str, fisc_tag: TagStr) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_tag)
@@ -69,7 +69,7 @@ def create_fisc_owners_dir_path(fisc_mstr_dir: str, fisc_tag: TagUnit) -> str:
 
 
 def create_owner_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name"""
 
@@ -80,7 +80,7 @@ def create_owner_dir_path(
 
 
 def create_keeps_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\keeps"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -91,7 +91,7 @@ def create_keeps_dir_path(
 
 
 def create_atoms_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\atoms"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -102,7 +102,7 @@ def create_atoms_dir_path(
 
 
 def create_packs_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\packs"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -113,7 +113,7 @@ def create_packs_dir_path(
 
 
 def create_deals_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\deals"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -124,7 +124,7 @@ def create_deals_dir_path(
 
 
 def create_deal_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, deal_time: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, deal_time: int
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\deals\n\\deal_time"""
     timeline_dir = create_deals_dir_path(fisc_mstr_dir, fisc_tag, owner_name)
@@ -132,7 +132,7 @@ def create_deal_dir_path(
 
 
 def create_dealunit_json_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, deal_time: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, deal_time: int
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\deals\n\\deal_time\\dealunit.json"""
     timepoint_dir = create_deal_dir_path(fisc_mstr_dir, fisc_tag, owner_name, deal_time)
@@ -140,7 +140,7 @@ def create_dealunit_json_path(
 
 
 def create_deal_acct_mandate_ledger_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, deal_time: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, deal_time: int
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\deals\n\\deal_time\\deal_acct_mandate_ledger.json"""
     timepoint_dir = create_deal_dir_path(fisc_mstr_dir, fisc_tag, owner_name, deal_time)
@@ -148,7 +148,7 @@ def create_deal_acct_mandate_ledger_path(
 
 
 def create_budpoint_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, deal_time: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, deal_time: int
 ) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\deals\n\\deal_time\\budpoint.json"""
     timepoint_dir = create_deal_dir_path(fisc_mstr_dir, fisc_tag, owner_name, deal_time)
@@ -157,7 +157,7 @@ def create_budpoint_path(
 
 def create_cell_dir_path(
     fisc_mstr_dir: str,
-    fisc_tag: TagUnit,
+    fisc_tag: TagStr,
     owner_name: OwnerName,
     deal_time: int,
     deal_ancestors: list[OwnerName],
@@ -175,7 +175,7 @@ def create_cell_dir_path(
 
 def create_cell_json_path(
     fisc_mstr_dir: str,
-    fisc_tag: TagUnit,
+    fisc_tag: TagStr,
     owner_name: OwnerName,
     deal_time: int,
     deal_ancestors: list[OwnerName] = None,
@@ -189,7 +189,7 @@ def create_cell_json_path(
 
 def create_cell_acct_mandate_ledger_path(
     fisc_mstr_dir: str,
-    fisc_tag: TagUnit,
+    fisc_tag: TagStr,
     owner_name: OwnerName,
     deal_time: int,
     deal_ancestors: list[OwnerName] = None,
@@ -202,7 +202,7 @@ def create_cell_acct_mandate_ledger_path(
 
 
 def create_owner_event_dir_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, event_int: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, event_int: int
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\events\\event_int"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
@@ -214,7 +214,7 @@ def create_owner_event_dir_path(
 
 
 def create_budevent_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, event_int: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, event_int: int
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\events\\event_int\\bud.json"""
     owner_event_dir_path = create_owner_event_dir_path(
@@ -225,7 +225,7 @@ def create_budevent_path(
 
 
 def create_event_all_pack_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, event_int: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, event_int: int
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\events\\event_int\\all_pack.json"""
     owner_event_dir_path = create_owner_event_dir_path(
@@ -236,7 +236,7 @@ def create_event_all_pack_path(
 
 
 def create_event_expressed_pack_path(
-    fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName, event_int: int
+    fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName, event_int: int
 ):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\events\\event_int\\expressed_pack.json"""
     owner_event_dir_path = create_owner_event_dir_path(
@@ -246,7 +246,7 @@ def create_event_expressed_pack_path(
     return create_path(owner_event_dir_path, expressed_pack_filename)
 
 
-def create_gut_path(fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName):
+def create_gut_path(fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\gut\\owner_name.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_tag)
@@ -256,7 +256,7 @@ def create_gut_path(fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName
     return create_path(gut_dir, f"{owner_name}.json")
 
 
-def create_job_path(fisc_mstr_dir: str, fisc_tag: TagUnit, owner_name: OwnerName):
+def create_job_path(fisc_mstr_dir: str, fisc_tag: TagStr, owner_name: OwnerName):
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_tag\\owners\\owner_name\\job\\owner_name.json"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_tag)

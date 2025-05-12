@@ -24,11 +24,11 @@ from src.a02_finance_logic.finance_config import (
 from src.a01_way_logic.way import (
     OwnerName,
     FiscTag,
-    TagUnit,
-    WayUnit,
+    TagStr,
+    WayStr,
     rebuild_way,
     get_all_way_tags,
-    validate_tagunit,
+    validate_tagstr,
     default_bridge_if_None,
 )
 from src.a06_bud_logic.bud import (
@@ -101,7 +101,7 @@ class HubUnit:
     owner_name: OwnerName = None
     fisc_mstr_dir: str = None
     fisc_tag: str = None
-    keep_way: WayUnit = None
+    keep_way: WayStr = None
     bridge: str = None
     fund_pool: float = None
     fund_coin: float = None
@@ -426,7 +426,7 @@ class HubUnit:
         speaker_plan = self.rj_speaker_bud(healer_name, speaker_id)
         return self.get_perspective_bud(speaker_plan)
 
-    def get_keep_ways(self) -> set[WayUnit]:
+    def get_keep_ways(self) -> set[WayStr]:
         x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_tag, self.owner_name)
         x_gut_bud.settle_bud()
         if x_gut_bud._keeps_justified is False:
@@ -476,7 +476,7 @@ def hubunit_shop(
     fisc_mstr_dir: str,
     fisc_tag: FiscTag,
     owner_name: OwnerName = None,
-    keep_way: WayUnit = None,
+    keep_way: WayStr = None,
     bridge: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
@@ -487,7 +487,7 @@ def hubunit_shop(
     x_hubunit = HubUnit(
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_tag=fisc_tag,
-        owner_name=validate_tagunit(owner_name, bridge),
+        owner_name=validate_tagstr(owner_name, bridge),
         keep_way=keep_way,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
@@ -500,7 +500,7 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_path(x_hubunit: HubUnit, x_way: TagUnit) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_way: TagStr) -> str:
     keep_root = "idearoot"
     x_way = rebuild_way(x_way, x_hubunit.fisc_tag, keep_root)
     x_list = get_all_way_tags(x_way, x_hubunit.bridge)

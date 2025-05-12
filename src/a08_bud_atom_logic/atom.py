@@ -9,11 +9,11 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a01_way_logic.way import (
     create_way,
-    TagUnit,
-    WayUnit,
-    LabelUnit,
+    TagStr,
+    WayStr,
+    LabelStr,
     AcctName,
-    is_tagunit,
+    is_tagstr,
     get_terminus_tag,
     get_parent_way,
 )
@@ -616,8 +616,8 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_label: LabelUnit = None
-    context: WayUnit = None
+    awardee_label: LabelStr = None
+    context: WayStr = None
     context_idea_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
@@ -630,27 +630,27 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     divisor: int = None
-    fcontext: WayUnit = None
+    fcontext: WayStr = None
     fnigh: float = None
     fopen: float = None
     fund_coin: float = None
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_label: LabelUnit = None
-    healer_name: LabelUnit = None
+    group_label: LabelStr = None
+    healer_name: LabelStr = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    need: WayUnit = None
+    need: WayStr = None
     nigh: float = None
     numor: int = None
     open: float = None
     penny: float = None
-    fneed: WayUnit = None
+    fneed: WayStr = None
     pledge: bool = None
     problem_bool: bool = None
-    idea_way: WayUnit = None
+    idea_way: WayStr = None
     stop_want: float = None
     take_force: float = None
     tally: int = None
@@ -669,14 +669,14 @@ class AtomRow:
         for x_arg, class_type in get_atom_args_class_types().items():
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
-                if class_type == "NameUnit":
+                if class_type == "NameStr":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif class_type == "LabelUnit":
-                    self.__dict__[x_arg] = LabelUnit(x_value)
-                elif class_type == "WayUnit":
-                    self.__dict__[x_arg] = WayUnit(x_value)
-                elif class_type == "TagUnit":
-                    self.__dict__[x_arg] = TagUnit(x_value)
+                elif class_type == "LabelStr":
+                    self.__dict__[x_arg] = LabelStr(x_value)
+                elif class_type == "WayStr":
+                    self.__dict__[x_arg] = WayStr(x_value)
+                elif class_type == "TagStr":
+                    self.__dict__[x_arg] = TagStr(x_value)
                 elif class_type == "str":
                     self.__dict__[x_arg] = str(x_value)
                 elif class_type == "bool":

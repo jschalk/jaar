@@ -3,19 +3,19 @@
         "abbreviation": "budmemb",
         "jkeys": {
             "acct_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -72,15 +72,15 @@
         "abbreviation": "budacct",
         "jkeys": {
             "acct_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -145,15 +145,15 @@
         "abbreviation": "budgrou",
         "jkeys": {
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "group_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -202,19 +202,19 @@
         "abbreviation": "budawar",
         "jkeys": {
             "awardee_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -247,19 +247,19 @@
         "abbreviation": "budfact",
         "jkeys": {
             "fcontext": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -270,7 +270,7 @@
         "jmetrics": {},
         "jvalues": {
             "fneed": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "fnigh": {
@@ -287,19 +287,19 @@
         "abbreviation": "budheal",
         "jkeys": {
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "healer_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -314,23 +314,23 @@
         "abbreviation": "budprem",
         "jkeys": {
             "context": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "need": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -367,19 +367,19 @@
         "abbreviation": "budreas",
         "jkeys": {
             "context": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -412,19 +412,19 @@
         "abbreviation": "budteam",
         "jkeys": {
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "team_label": {
-                "class_type": "LabelUnit",
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -444,15 +444,15 @@
         "abbreviation": "budidea",
         "jkeys": {
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
-                "class_type": "WayUnit",
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -569,11 +569,11 @@
         "abbreviation": "budunit",
         "jkeys": {
             "fisc_tag": {
-                "class_type": "TagUnit",
+                "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
-                "class_type": "NameUnit",
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {

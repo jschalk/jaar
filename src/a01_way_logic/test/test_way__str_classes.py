@@ -1,12 +1,12 @@
 from src.a01_way_logic.way import (
-    TagUnit,
-    NameUnit,
-    LabelUnit,
+    TagStr,
+    NameStr,
+    LabelStr,
     HealerName,
     OwnerName,
     AcctName,
-    WayUnit,
-    YawUnit,
+    WayStr,
+    YawStr,
     GroupLabel,
     default_bridge_if_None,
     WorldID,
@@ -18,34 +18,34 @@ from src.a01_way_logic.way import (
 from inspect import getdoc as inspect_getdoc
 
 
-def test_NameUnit_exists():
+def test_NameStr_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_nameunit = NameUnit(bob_str)
+    bob_namestr = NameStr(bob_str)
     # THEN
-    assert bob_nameunit == bob_str
+    assert bob_namestr == bob_str
     doc_str = "All Name string classes should inherit from this class"
-    assert inspect_getdoc(bob_nameunit) == doc_str
+    assert inspect_getdoc(bob_namestr) == doc_str
 
 
-def test_NameUnit_is_name_ReturnsObj_Scenario0():
+def test_NameStr_is_name_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert NameUnit("").is_name() is False
-    assert NameUnit("A").is_name()
+    assert NameStr("").is_name() is False
+    assert NameStr("A").is_name()
 
     # WHEN / THEN
     x_s = default_bridge_if_None()
-    x_nameunit = NameUnit(f"casa{x_s}kitchen")
-    assert x_nameunit.is_name() is False
+    x_namestr = NameStr(f"casa{x_s}kitchen")
+    assert x_namestr.is_name() is False
 
 
-def test_NameUnit_is_name_ReturnsObj_Scenario1():
+def test_NameStr_is_name_ReturnsObj_Scenario1():
     # ESTABLISH / WHEN / THEN
     slash_str = "/"
-    x_nameunit = NameUnit(f"casa{slash_str}kitchen")
-    assert x_nameunit.is_name()
-    assert x_nameunit.is_name(slash_str) is False
+    x_namestr = NameStr(f"casa{slash_str}kitchen")
+    assert x_namestr.is_name()
+    assert x_namestr.is_name(slash_str) is False
 
 
 def test_HealerName_exists():
@@ -55,7 +55,7 @@ def test_HealerName_exists():
     bob_healer_name = HealerName(bob_str)
     # THEN
     assert bob_healer_name == bob_str
-    doc_str = "A TagUnit used to identify a Problem's Healer"
+    doc_str = "A TagStr used to identify a Problem's Healer"
     assert inspect_getdoc(bob_healer_name) == doc_str
 
 
@@ -66,7 +66,7 @@ def test_OwnerName_exists():
     bob_owner_name = OwnerName(bob_str)
     # THEN
     assert bob_owner_name == bob_str
-    doc_str = "A TagUnit used to identify a BudUnit's owner_name"
+    doc_str = "A TagStr used to identify a BudUnit's owner_name"
     assert inspect_getdoc(bob_owner_name) == doc_str
 
 
@@ -81,15 +81,15 @@ def test_AcctName_exists():
     assert inspect_getdoc(bob_acct_name) == doc_str
 
 
-def test_LabelUnit_exists():
+def test_LabelStr_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_nameunit = LabelUnit(bob_str)
+    bob_namestr = LabelStr(bob_str)
     # THEN
-    assert bob_nameunit == bob_str
-    doc_str = """If a LabelUnit contains bridges it represents a group otherwise it's a single member group of an AcctName."""
-    assert inspect_getdoc(bob_nameunit) == doc_str
+    assert bob_namestr == bob_str
+    doc_str = """If a LabelStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
+    assert inspect_getdoc(bob_namestr) == doc_str
 
 
 def test_GroupLabel_exists():
@@ -98,15 +98,15 @@ def test_GroupLabel_exists():
     assert str(type(bikers_group_label)).find("src.a01_way_logic.way.GroupLabel") > 0
 
 
-def test_TagUnit_exists():
+def test_TagStr_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = TagUnit(empty_str)
+    x_way = TagStr(empty_str)
     # THEN
     assert x_way == empty_str
     doc_str = (
-        "A string representation of a tree node. Nodes cannot contain WayUnit bridge"
+        "A string representation of a tree node. Nodes cannot contain WayStr bridge"
     )
     assert inspect_getdoc(x_way) == doc_str
 
@@ -128,46 +128,46 @@ def test_default_bridge_if_None_ReturnsObj():
     assert default_bridge_if_None(buzz_str) == buzz_str
 
 
-def test_TagUnit_is_tag_ReturnsObj_Scenario0():
+def test_TagStr_is_tag_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert TagUnit("").is_tag() is False
-    assert TagUnit("A").is_tag()
+    assert TagStr("").is_tag() is False
+    assert TagStr("A").is_tag()
 
     # WHEN / THEN
     x_s = default_bridge_if_None()
-    x_tagunit = TagUnit(f"casa{x_s}kitchen")
-    assert x_tagunit.is_tag() is False
+    x_tagstr = TagStr(f"casa{x_s}kitchen")
+    assert x_tagstr.is_tag() is False
 
 
-def test_TagUnit_is_tag_ReturnsObj_Scenario1():
+def test_TagStr_is_tag_ReturnsObj_Scenario1():
     # ESTABLISH / WHEN / THEN
     slash_str = "/"
-    x_tagunit = TagUnit(f"casa{slash_str}kitchen")
-    assert x_tagunit.is_tag()
-    assert x_tagunit.is_tag(slash_str) is False
+    x_tagstr = TagStr(f"casa{slash_str}kitchen")
+    assert x_tagstr.is_tag()
+    assert x_tagstr.is_tag(slash_str) is False
 
 
-def test_WayUnit_exists():
+def test_WayStr_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = WayUnit(empty_str)
+    x_way = WayStr(empty_str)
     # THEN
     assert x_way == empty_str
     doc_str = (
-        "A string representation of a tree path. TagUnits are seperated by way bridge"
+        "A string representation of a tree path. TagStrs are seperated by way bridge"
     )
     assert inspect_getdoc(x_way) == doc_str
 
 
-def test_YawUnit_exists():
+def test_YawStr_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = YawUnit(empty_str)
+    x_way = YawStr(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = "YawUnit is a WayUnit in reverse direction. A string representation of a tree path. TagUnits are seperated by way bridge."
+    doc_str = "YawStr is a WayStr in reverse direction. A string representation of a tree path. TagStrs are seperated by way bridge."
     assert inspect_getdoc(x_way) == doc_str
 
 
@@ -178,7 +178,7 @@ def test_TimeLineTag_exists():
     x_timelinetag = TimeLineTag(empty_str)
     # THEN
     assert x_timelinetag == empty_str
-    doc_str = "TimeLineTag is required for every TimeLineUnit. It is a TagUnit that must not container the bridge."
+    doc_str = "TimeLineTag is required for every TimeLineUnit. It is a TagStr that must not container the bridge."
     assert inspect_getdoc(x_timelinetag) == doc_str
 
 

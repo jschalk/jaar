@@ -43,20 +43,20 @@ def bud_groupunit_str() -> str:
     return "bud_groupunit"
 
 
-def type_NameUnit_str() -> str:
-    return "NameUnit"
+def type_NameStr_str() -> str:
+    return "NameStr"
 
 
-def type_LabelUnit_str() -> str:
-    return "LabelUnit"
+def type_LabelStr_str() -> str:
+    return "LabelStr"
 
 
-def type_WayUnit_str() -> str:
-    return "WayUnit"
+def type_WayStr_str() -> str:
+    return "WayStr"
 
 
-def type_TagUnit_str() -> str:
-    return "TagUnit"
+def type_TagStr_str() -> str:
+    return "TagStr"
 
 
 def face_name_str() -> str:
