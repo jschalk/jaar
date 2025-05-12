@@ -376,7 +376,7 @@ def add_bud_to_br00026_csv(
                     premiseunit.pbranch,
                     if_none_str(premiseunit.open),
                     if_none_str(premiseunit.pnigh),
-                    if_none_str(premiseunit.divisor),
+                    if_none_str(premiseunit.pdivisor),
                 ]
                 x_csv += csv_delimiter.join(x_row)
                 x_csv += "\n"
@@ -711,7 +711,7 @@ def add_pack_to_br00026_csv(
                 budatom.jkeys.get("pbranch"),
                 if_none_str(budatom.jvalues.get("open")),
                 if_none_str(budatom.jvalues.get("pnigh")),
-                if_none_str(budatom.jvalues.get("divisor")),
+                if_none_str(budatom.jvalues.get("pdivisor")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

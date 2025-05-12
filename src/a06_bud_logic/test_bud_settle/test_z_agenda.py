@@ -309,7 +309,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
         reason_premise=day_way,
         reason_premise_open=1,
         reason_pnigh=1,
-        reason_premise_divisor=2,
+        pdivisor=2,
     )
 
     run_idea = zia_bud.get_idea_obj(run_way)
@@ -424,12 +424,12 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     # segr_obj = premisestatusfinder_shop(
     #     premise_open=premiseunit.open,
     #     pnigh=premiseunit.pnigh,
-    #     premise_divisor=premiseunit.divisor,
+    #     pdivisor=premiseunit.pdivisor,
     #     fact_open_full=factheir_gregtime.open,
     #     fnigh_full=factheir_gregtime.pnigh,
     # )
     # print(
-    #     f"----\n  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.premise_divisor=}"
+    #     f"----\n  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}"
     # )
     # print(
     #     f"       {segr_obj.fact_open_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"

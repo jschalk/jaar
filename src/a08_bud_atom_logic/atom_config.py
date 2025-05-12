@@ -75,7 +75,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "debtit_vote": "float",
         "debtor_respect": "float",
         "denom": "int",
-        "divisor": "int",
+        "pdivisor": "int",
         "fcontext": "WayStr",
         "fnigh": "float",
         "fopen": "float",

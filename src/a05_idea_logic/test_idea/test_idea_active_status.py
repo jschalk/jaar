@@ -387,7 +387,7 @@ def test_IdeaUnit_factunit_exists_ReturnsObj():
 #         premise="testing1,sec,next",
 #         open=None,
 #         pnigh=None,
-#         divisor=None,
+#         pdivisor=None,
 #     )
 #     clean_idea._active_hx = {0: True, 4: False}
 #     assert clean_idea._active_hx != {0: False}

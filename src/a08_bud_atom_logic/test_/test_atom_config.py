@@ -656,7 +656,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtit_vote_str()) == "float"
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
-    assert x_class_types.get("divisor") == "int"
+    assert x_class_types.get("pdivisor") == "int"
     assert x_class_types.get(fcontext_str()) == type_WayStr_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"

@@ -84,7 +84,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtit_vote": "float",
         "debtor_respect": "float",
         "denom": "int",
-        "divisor": "int",
+        "pdivisor": "int",
         "face_name": "NameStr",
         "fcontext": "WayStr",
         "fisc_tag": "TagStr",

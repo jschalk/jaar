@@ -11,7 +11,7 @@ def test_IdeaAttrHolder_Exists():
     assert new_obj.reason_premise is None
     assert new_obj.reason_premise_open is None
     assert new_obj.reason_pnigh is None
-    assert new_obj.reason_premise_divisor is None
+    assert new_obj.pdivisor is None
     assert new_obj.reason_del_premise_rcontext is None
     assert new_obj.reason_del_premise_pbranch is None
     assert new_obj.reason_rcontext_idea_active_requisite is None
@@ -39,7 +39,7 @@ def test_IdeaAttrHolder_CorrectlyCalculatesPremiseRanges():
     assert idea_attr.reason_premise_open is None
     assert idea_attr.reason_pnigh is None
     # assert idea_attr.reason_premise_numor is None
-    assert idea_attr.reason_premise_divisor is None
+    assert idea_attr.pdivisor is None
     # assert idea_attr.reason_premise_morph is None
 
     # WHEN
@@ -53,7 +53,7 @@ def test_IdeaAttrHolder_CorrectlyCalculatesPremiseRanges():
     assert idea_attr.reason_premise_open == 5.0
     assert idea_attr.reason_pnigh == 20.0
     # assert idea_attr.reason_premise_numor is None
-    assert idea_attr.reason_premise_divisor == 4.0
+    assert idea_attr.pdivisor == 4.0
     # assert idea_attr.reason_premise_morph is None
 
 

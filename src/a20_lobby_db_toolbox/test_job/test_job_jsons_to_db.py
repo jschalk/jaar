@@ -383,14 +383,14 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_pbranch = 5
     x_pnigh = 6.0
     x_open = 7.0
-    x_divisor = 8
+    x_pdivisor = 8
     x__task = 9
     x__status = 10
     x_premiseunit = premiseunit_shop(pbranch=x_pbranch)
     x_premiseunit.pbranch = x_pbranch
     x_premiseunit.pnigh = x_pnigh
     x_premiseunit.open = x_open
-    x_premiseunit.divisor = x_divisor
+    x_premiseunit.pdivisor = x_pdivisor
     x_premiseunit._task = x__task
     x_premiseunit._status = x__status
 
@@ -420,7 +420,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
             str(x_pbranch),
             x_pnigh,
             x_open,
-            x_divisor,
+            x_pdivisor,
             x__task,
             x__status,
         )

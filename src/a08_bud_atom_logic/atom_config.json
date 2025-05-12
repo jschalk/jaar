@@ -211,7 +211,7 @@
             }
         },
         "jvalues": {
-            "divisor": {
+            "pdivisor": {
                 "class_type": "int",
                 "column_order": 5,
                 "sqlite_datatype": "INTEGER"

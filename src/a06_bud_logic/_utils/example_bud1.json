@@ -609,7 +609,7 @@
                                         "rcontext": ";accord45;year_month",
                                         "premises": {
                                             ";accord45;year_month;September": {
-                                                "divisor": 12,
+                                                "pdivisor": 12,
                                                 "pbranch": ";accord45;year_month;September",
                                                 "pnigh": 9,
                                                 "open": 9
@@ -640,7 +640,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -675,7 +675,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -712,7 +712,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -762,7 +762,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -799,7 +799,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -836,7 +836,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -871,7 +871,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month;September": {
-                                                        "divisor": 12,
+                                                        "pdivisor": 12,
                                                         "pbranch": ";accord45;year_month;September",
                                                         "pnigh": 9,
                                                         "open": 9
@@ -1565,7 +1565,7 @@
                                 "rcontext": ";accord45;year_month",
                                 "premises": {
                                     ";accord45;year_month": {
-                                        "divisor": 3,
+                                        "pdivisor": 3,
                                         "pbranch": ";accord45;year_month",
                                         "pnigh": 0,
                                         "open": 0
@@ -1694,7 +1694,7 @@
                                         "rcontext": ";accord45;year_month",
                                         "premises": {
                                             ";accord45;year_month": {
-                                                "divisor": 3,
+                                                "pdivisor": 3,
                                                 "pbranch": ";accord45;year_month",
                                                 "pnigh": 0,
                                                 "open": 0
@@ -1835,7 +1835,7 @@
                                         "rcontext": ";accord45;ced_week",
                                         "premises": {
                                             ";accord45;ced_week": {
-                                                "divisor": 6,
+                                                "pdivisor": 6,
                                                 "pbranch": ";accord45;ced_week",
                                                 "pnigh": 1,
                                                 "open": 1
@@ -1954,7 +1954,7 @@
                                         "rcontext": ";accord45;year_month",
                                         "premises": {
                                             ";accord45;year_month": {
-                                                "divisor": 2,
+                                                "pdivisor": 2,
                                                 "pbranch": ";accord45;year_month",
                                                 "pnigh": 0,
                                                 "open": 0
@@ -2566,7 +2566,7 @@
                                         "rcontext": ";accord45;year_month",
                                         "premises": {
                                             ";accord45;year_month": {
-                                                "divisor": 3,
+                                                "pdivisor": 3,
                                                 "pbranch": ";accord45;year_month",
                                                 "pnigh": 0,
                                                 "open": 0
@@ -2705,7 +2705,7 @@
                                         "rcontext": ";accord45;year_month",
                                         "premises": {
                                             ";accord45;year_month": {
-                                                "divisor": 3,
+                                                "pdivisor": 3,
                                                 "pbranch": ";accord45;year_month",
                                                 "pnigh": 0,
                                                 "open": 0
@@ -3398,7 +3398,7 @@
                                         "rcontext": ";accord45;ced_week",
                                         "premises": {
                                             ";accord45;ced_week": {
-                                                "divisor": 2,
+                                                "pdivisor": 2,
                                                 "pbranch": ";accord45;ced_week",
                                                 "pnigh": 1,
                                                 "open": 1
@@ -3468,7 +3468,7 @@
                                         "rcontext": ";accord45;year_month",
                                         "premises": {
                                             ";accord45;year_month": {
-                                                "divisor": 2,
+                                                "pdivisor": 2,
                                                 "pbranch": ";accord45;year_month",
                                                 "pnigh": 0,
                                                 "open": 0
@@ -3710,7 +3710,7 @@
                                         "rcontext": ";accord45;ced_week",
                                         "premises": {
                                             ";accord45;ced_week": {
-                                                "divisor": 2,
+                                                "pdivisor": 2,
                                                 "pbranch": ";accord45;ced_week",
                                                 "pnigh": 0,
                                                 "open": 0
@@ -3846,7 +3846,7 @@
                                                 "rcontext": ";accord45;year_month",
                                                 "premises": {
                                                     ";accord45;year_month": {
-                                                        "divisor": 1,
+                                                        "pdivisor": 1,
                                                         "pbranch": ";accord45;year_month",
                                                         "pnigh": 0,
                                                         "open": 0

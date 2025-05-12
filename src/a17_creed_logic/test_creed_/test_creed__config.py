@@ -274,7 +274,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[61] == "max_tree_traverse"
     assert table_sorting_priority[62] == pnigh_str()
     assert table_sorting_priority[63] == open_str()
-    assert table_sorting_priority[64] == "divisor"
+    assert table_sorting_priority[64] == "pdivisor"
     assert table_sorting_priority[65] == pledge_str()
     assert table_sorting_priority[66] == "problem_bool"
     assert table_sorting_priority[67] == take_force_str()
@@ -403,7 +403,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
     assert sqlite_types.get("pnigh") == "REAL"
     assert sqlite_types.get("open") == "REAL"
-    assert sqlite_types.get("divisor") == "INTEGER"
+    assert sqlite_types.get("pdivisor") == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"

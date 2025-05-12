@@ -77,7 +77,7 @@ class PremiseTable(Base):
     rcontext = Column(String)
     pbranch = Column(String)
     idea_way = Column(String)
-    divisor = Column(Integer)
+    pdivisor = Column(Integer)
     pnigh = Column(Float)
     open = Column(Float)
 

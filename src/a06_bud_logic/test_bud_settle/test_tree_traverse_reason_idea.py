@@ -342,7 +342,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     assert casa_idea1.reasonunits[week_way] == casa_wk_reason1
 
     # ESTABLISH
-    divisor_x = 34
+    pdivisor_x = 34
     open_x = 12
     x_pnigh = 12
 
@@ -351,7 +351,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
         casa_way,
         reason_rcontext=week_way,
         reason_premise=wed_way,
-        reason_premise_divisor=divisor_x,
+        pdivisor=pdivisor_x,
         reason_premise_open=open_x,
         reason_pnigh=x_pnigh,
     )
@@ -361,7 +361,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     assert casa_idea1.reasonunits[week_way].premises[wed_way].pnigh == 12
 
     wed_premise2 = premiseunit_shop(
-        pbranch=wed_way, divisor=divisor_x, open=open_x, pnigh=x_pnigh
+        pbranch=wed_way, pdivisor=pdivisor_x, open=open_x, pnigh=x_pnigh
     )
     casa_wk_reason2 = reasonunit_shop(
         rcontext=week_way, premises={wed_premise2.pbranch: wed_premise2}
@@ -377,7 +377,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
         casa_way,
         reason_rcontext=week_way,
         reason_premise=thu_way,
-        reason_premise_divisor=divisor_x,
+        pdivisor=pdivisor_x,
         reason_premise_open=open_x,
         reason_pnigh=x_pnigh,
     )
@@ -405,13 +405,13 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithDenomSetsPremiseDivision():
         reason_premise=week_way,
         reason_premise_open=2,
         reason_pnigh=5,
-        reason_premise_divisor=None,
+        pdivisor=None,
     )
 
     # THEN
     casa_idea1 = sue_bud.get_idea_obj(casa_way)
     assert casa_idea1.reasonunits[time_way] is not None
-    assert casa_idea1.reasonunits[time_way].premises[week_way].divisor == 7
+    assert casa_idea1.reasonunits[time_way].premises[week_way].pdivisor == 7
     assert casa_idea1.reasonunits[time_way].premises[week_way].open == 2
     assert casa_idea1.reasonunits[time_way].premises[week_way].pnigh == 5
 
@@ -435,13 +435,13 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremiseOpen_Pnigh(
         reason_premise=rus_war_way,
         reason_premise_open=None,
         reason_pnigh=None,
-        reason_premise_divisor=None,
+        pdivisor=None,
     )
 
     # THEN
     casa_idea1 = sue_bud.get_idea_obj(casa_way)
     assert casa_idea1.reasonunits[time_way] is not None
-    assert casa_idea1.reasonunits[time_way].premises[rus_war_way].divisor is None
+    assert casa_idea1.reasonunits[time_way].premises[rus_war_way].pdivisor is None
     assert casa_idea1.reasonunits[time_way].premises[rus_war_way].open == 22
     assert casa_idea1.reasonunits[time_way].premises[rus_war_way].pnigh == 34
 

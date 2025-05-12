@@ -3,7 +3,7 @@
         "rcontext": {
             "otx_key": true
         },
-        "divisor": {
+        "pdivisor": {
             "otx_key": false
         },
         "event_int": {

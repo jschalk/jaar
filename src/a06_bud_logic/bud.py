@@ -472,7 +472,7 @@ class BudUnit:
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
             # there exists a reason rcontext "timeline,weeks" with premise.pbranch = "timeline,weeks"
-            # and (1,2) divisor=2 (every other week)
+            # and (1,2) pdivisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
             # "timeline,weeks" should be set automatica_lly since there exists a reason
@@ -773,7 +773,7 @@ class BudUnit:
         reason_premise: WayStr = None,
         reason_premise_open: float = None,
         reason_pnigh: float = None,
-        reason_premise_divisor: int = None,
+        pdivisor: int = None,
     ):
         self.edit_idea_attr(
             idea_way=idea_way,
@@ -781,7 +781,7 @@ class BudUnit:
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
             reason_pnigh=reason_pnigh,
-            reason_premise_divisor=reason_premise_divisor,
+            pdivisor=pdivisor,
         )
 
     def edit_idea_attr(
@@ -794,7 +794,7 @@ class BudUnit:
         reason_premise: WayStr = None,
         reason_premise_open: float = None,
         reason_pnigh: float = None,
-        reason_premise_divisor: int = None,
+        pdivisor: int = None,
         reason_del_premise_rcontext: WayStr = None,
         reason_del_premise_pbranch: WayStr = None,
         reason_rcontext_idea_active_requisite: str = None,
@@ -832,7 +832,7 @@ class BudUnit:
             reason_premise=reason_premise,
             reason_premise_open=reason_premise_open,
             reason_pnigh=reason_pnigh,
-            reason_premise_divisor=reason_premise_divisor,
+            pdivisor=pdivisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,
             reason_del_premise_pbranch=reason_del_premise_pbranch,
             reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,

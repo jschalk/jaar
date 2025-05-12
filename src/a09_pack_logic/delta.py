@@ -627,8 +627,8 @@ class BudDelta:
                 x_budatom.set_jvalue("open", after_premiseunit.open)
             if after_premiseunit.pnigh is not None:
                 x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
-            if after_premiseunit.divisor is not None:
-                x_budatom.set_jvalue("divisor", after_premiseunit.divisor)
+            if after_premiseunit.pdivisor is not None:
+                x_budatom.set_jvalue("pdivisor", after_premiseunit.pdivisor)
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_reason_premiseunit_updates(
@@ -654,8 +654,8 @@ class BudDelta:
                     x_budatom.set_jvalue("open", after_premiseunit.open)
                 if after_premiseunit.pnigh != before_premiseunit.pnigh:
                     x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
-                if after_premiseunit.divisor != before_premiseunit.divisor:
-                    x_budatom.set_jvalue("divisor", after_premiseunit.divisor)
+                if after_premiseunit.pdivisor != before_premiseunit.pdivisor:
+                    x_budatom.set_jvalue("pdivisor", after_premiseunit.pdivisor)
                 self.set_budatom(x_budatom)
 
     def add_budatom_idea_reason_premiseunit_deletes(

@@ -382,7 +382,7 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
         reason_premise=x_atom.get_value("pbranch"),
         reason_premise_open=x_atom.get_value("open"),
         reason_pnigh=x_atom.get_value("pnigh"),
-        reason_premise_divisor=x_atom.get_value("divisor"),
+        pdivisor=x_atom.get_value("pdivisor"),
     )
 
 
@@ -393,7 +393,7 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         premise=x_atom.get_value("pbranch"),
         open=x_atom.get_value("open"),
         pnigh=x_atom.get_value("pnigh"),
-        divisor=x_atom.get_value("divisor"),
+        pdivisor=x_atom.get_value("pdivisor"),
     )
 
 
@@ -588,7 +588,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         return (
             x_obj.open != y_obj.open
             or x_obj.pnigh != y_obj.pnigh
-            or x_obj.divisor != y_obj.divisor
+            or x_obj.pdivisor != y_obj.pdivisor
         )
     elif dimen == "bud_acctunit":
         return (x_obj.credit_belief != y_obj.credit_belief) or (
@@ -629,7 +629,7 @@ class AtomRow:
     debtit_vote: int = None
     debtor_respect: int = None
     denom: int = None
-    divisor: int = None
+    pdivisor: int = None
     fcontext: WayStr = None
     fnigh: float = None
     fopen: float = None

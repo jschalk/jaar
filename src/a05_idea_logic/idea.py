@@ -101,7 +101,7 @@ class IdeaAttrHolder:
     reason_premise: WayStr = None
     reason_premise_open: float = None
     reason_pnigh: float = None
-    reason_premise_divisor: int = None
+    pdivisor: int = None
     reason_del_premise_rcontext: WayStr = None
     reason_del_premise_pbranch: WayStr = None
     reason_rcontext_idea_active_requisite: str = None
@@ -136,8 +136,8 @@ class IdeaAttrHolder:
                 self.reason_premise_open = premise_open
             if self.reason_pnigh is None:
                 self.reason_pnigh = pnigh
-            if self.reason_premise_divisor is None:
-                self.reason_premise_divisor = premise_denom
+            if self.pdivisor is None:
+                self.pdivisor = premise_denom
 
 
 def ideaattrholder_shop(
@@ -148,7 +148,7 @@ def ideaattrholder_shop(
     reason_premise: WayStr = None,
     reason_premise_open: float = None,
     reason_pnigh: float = None,
-    reason_premise_divisor: int = None,
+    pdivisor: int = None,
     reason_del_premise_rcontext: WayStr = None,
     reason_del_premise_pbranch: WayStr = None,
     reason_rcontext_idea_active_requisite: str = None,
@@ -180,7 +180,7 @@ def ideaattrholder_shop(
         reason_premise=reason_premise,
         reason_premise_open=reason_premise_open,
         reason_pnigh=reason_pnigh,
-        reason_premise_divisor=reason_premise_divisor,
+        pdivisor=pdivisor,
         reason_del_premise_rcontext=reason_del_premise_rcontext,
         reason_del_premise_pbranch=reason_del_premise_pbranch,
         reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
@@ -569,7 +569,7 @@ class IdeaUnit:
                 premise=idea_attr.reason_premise,
                 open=idea_attr.reason_premise_open,
                 pnigh=idea_attr.reason_pnigh,
-                divisor=idea_attr.reason_premise_divisor,
+                pdivisor=idea_attr.pdivisor,
             )
         if (
             idea_attr.reason_rcontext is not None
@@ -699,11 +699,11 @@ class IdeaUnit:
         premise: WayStr,
         open: float,
         pnigh: float,
-        divisor: int,
+        pdivisor: int,
     ):
         x_reasonunit = self._get_or_create_reasonunit(rcontext=rcontext)
         x_reasonunit.set_premise(
-            premise=premise, open=open, pnigh=pnigh, divisor=divisor
+            premise=premise, open=open, pnigh=pnigh, pdivisor=pdivisor
         )
 
     def del_reasonunit_rcontext(self, rcontext: WayStr):

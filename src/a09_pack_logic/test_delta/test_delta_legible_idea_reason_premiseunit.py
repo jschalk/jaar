@@ -48,14 +48,14 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumbe
     casa_way = sue_bud.make_l1_way("casa")
     rcontext_value = sue_bud.make_way(casa_way, "fridge status")
     pbranch_value = sue_bud.make_way(rcontext_value, "dirty")
-    divisor_value = 7
+    pdivisor_value = 7
     pnigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(idea_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pbranch_str(), pbranch_value)
-    swim_budatom.set_arg("divisor", divisor_value)
+    swim_budatom.set_arg("pdivisor", pdivisor_value)
     swim_budatom.set_arg(pnigh_str(), pnigh_value)
     swim_budatom.set_arg(open_str(), open_value)
     # print(f"{swim_budatom=}")
@@ -66,7 +66,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_INSERT_WithNumbe
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{pbranch_value}' created for reason '{rcontext_value}' for idea '{way_value}'. Open={open_value}. Pnigh={pnigh_value}. Divisor={divisor_value}."
+    x_str = f"PremiseUnit '{pbranch_value}' created for reason '{rcontext_value}' for idea '{way_value}'. Open={open_value}. Pnigh={pnigh_value}. Pdivisor={pdivisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -106,14 +106,14 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumbe
     casa_way = sue_bud.make_l1_way("casa")
     rcontext_value = sue_bud.make_way(casa_way, "fridge status")
     pbranch_value = sue_bud.make_way(rcontext_value, "dirty")
-    divisor_value = 7
+    pdivisor_value = 7
     pnigh_value = 13
     open_value = 17
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(idea_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pbranch_str(), pbranch_value)
-    swim_budatom.set_arg("divisor", divisor_value)
+    swim_budatom.set_arg("pdivisor", pdivisor_value)
     swim_budatom.set_arg(pnigh_str(), pnigh_value)
     swim_budatom.set_arg(open_str(), open_value)
     # print(f"{swim_budatom=}")
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_idea_reason_premiseunit_UPDATE_WithNumbe
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"PremiseUnit '{pbranch_value}' updated for reason '{rcontext_value}' for idea '{way_value}'. Open={open_value}. Pnigh={pnigh_value}. Divisor={divisor_value}."
+    x_str = f"PremiseUnit '{pbranch_value}' updated for reason '{rcontext_value}' for idea '{way_value}'. Open={open_value}. Pnigh={pnigh_value}. Pdivisor={pdivisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

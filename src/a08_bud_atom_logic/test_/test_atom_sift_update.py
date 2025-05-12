@@ -291,17 +291,17 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reason_premiseunit():
     clean_idea.set_reasonunit(reasonunit_shop(week_way))
     clean_idea.get_reasonunit(week_way).set_premise(thur_way)
 
-    thur_divisor = 39
+    thur_pdivisor = 39
     thur_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     thur_atom.set_arg(idea_way_str(), clean_way)
     thur_atom.set_arg(rcontext_str(), week_way)
     thur_atom.set_arg("pbranch", thur_way)
     assert thur_atom.is_valid()
-    thur_atom.set_arg("divisor", thur_divisor)
+    thur_atom.set_arg("pdivisor", thur_pdivisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
     thur_premiseunit = premiseunit_get_obj(sue_bud, thur_jkeys)
-    assert thur_premiseunit.divisor != thur_divisor
-    assert thur_premiseunit.divisor is None
+    assert thur_premiseunit.pdivisor != thur_pdivisor
+    assert thur_premiseunit.pdivisor is None
 
     # WHEN
     new_zia_budatom = sift_budatom(sue_bud, thur_atom)
@@ -311,7 +311,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reason_premiseunit():
     assert new_zia_budatom.crud_str == atom_update()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
-    assert zia_jvalues.get("divisor") == thur_divisor
+    assert zia_jvalues.get("pdivisor") == thur_pdivisor
 
 
 def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_factunit():

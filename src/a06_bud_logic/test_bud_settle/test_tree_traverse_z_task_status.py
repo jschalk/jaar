@@ -474,7 +474,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     # THEN
     ced_week_rcontext = yao_budunit.make_l1_way("ced_week")
 
-    premise_divisor = None
+    pdivisor = None
     premise_open = None
     pnigh = None
     print(f"{len(yao_budunit._idea_dict)=}")
@@ -490,7 +490,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
         f"{clean_sheet_idea.idea_tag=} {ced_week_reason.rcontext=} {ced_week_premise.pbranch=}"
     )
     # print(f"{clean_sheet_idea.idea_tag=} {ced_week_reason.rcontext=} {premise_x=}")
-    premise_divisor = ced_week_premise.divisor
+    pdivisor = ced_week_premise.pdivisor
     premise_open = ced_week_premise.open
     pnigh = ced_week_premise.pnigh
     # print(f"{idea.reasonunits=}")
@@ -501,7 +501,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     #     if idea.idea_tag == "clean sheets couch blankets":
     #         print(f"{idea.get_idea_way()=}")
 
-    assert premise_divisor == 6
+    assert pdivisor == 6
     assert premise_open == 1
     print(
         f"There exists a idea with a reason_rcontext {ced_week_rcontext} that also has lemmet div =6 and open/pnigh =1"
@@ -536,7 +536,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     week_reason = clean_couch_idea.reasonunits.get(week_way)
     week_premise = week_reason.premises.get(week_way)
     print(f"{clean_couch_idea.idea_tag=} {week_reason.rcontext=} {week_premise=}")
-    assert week_premise.divisor == 6 and week_premise.open == 1
+    assert week_premise.pdivisor == 6 and week_premise.open == 1
 
 
 def test_BudUnit_settle_bud_EveryIdeaHasActiveStatus_budunit_v001():

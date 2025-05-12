@@ -27,7 +27,7 @@ def test_PremiseUnit_Exists():
     assert email_premise.pbranch == email_way
     assert email_premise.open is None
     assert email_premise.pnigh is None
-    assert email_premise.divisor is None
+    assert email_premise.pdivisor is None
     assert email_premise._status is None
     assert email_premise._task is None
     assert email_premise.bridge is None
@@ -82,7 +82,7 @@ def test_PremiseUnit_is_range_IdentifiesStatus():
     assert casa_premise._is_range() is False
 
     # WHEN
-    casa_premise = premiseunit_shop(pbranch=casa_way, divisor=5, open=3, pnigh=3)
+    casa_premise = premiseunit_shop(pbranch=casa_way, pdivisor=5, open=3, pnigh=3)
     # THEN
     assert casa_premise._is_range() is False
 
@@ -103,7 +103,7 @@ def test_PremiseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
     assert casa_premise._is_segregate() is False
 
     # WHEN
-    casa_premise = premiseunit_shop(pbranch=casa_way, divisor=5, open=3, pnigh=3)
+    casa_premise = premiseunit_shop(pbranch=casa_way, pdivisor=5, open=3, pnigh=3)
     # THEN
     assert casa_premise._is_segregate()
 
@@ -231,7 +231,7 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
     # ESTABLISH
     yr_str = "ced_year"
     yr_way = create_way(root_tag(), yr_str)
-    yr_premise = premiseunit_shop(pbranch=yr_way, divisor=5, open=0, pnigh=0)
+    yr_premise = premiseunit_shop(pbranch=yr_way, pdivisor=5, open=0, pnigh=0)
 
     # WHEN / THEN
     yr_fact = factheir_shop(fcontext=yr_way, fbranch=yr_way, fopen=5, fnigh=5)
@@ -247,7 +247,7 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     # ESTABLISH
-    yr_premise = premiseunit_shop(pbranch=yr_way, divisor=5, open=0, pnigh=2)
+    yr_premise = premiseunit_shop(pbranch=yr_way, pdivisor=5, open=0, pnigh=2)
 
     # WHEN / THEN
     yr_fact = factheir_shop(fcontext=yr_way, fbranch=yr_way, fopen=2, fnigh=2)
@@ -272,7 +272,7 @@ def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
     wkday_premise = premiseunit_shop(pbranch=wkday_way, open=5, pnigh=13)
     assert wkday_premise._is_range_or_segregate()
 
-    wkday_premise = premiseunit_shop(pbranch=wkday_way, divisor=17, open=7, pnigh=7)
+    wkday_premise = premiseunit_shop(pbranch=wkday_way, pdivisor=17, open=7, pnigh=7)
     assert wkday_premise._is_range_or_segregate()
 
 
@@ -475,7 +475,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_tag(), hr24_str)
-    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, divisor=5, open=0, pnigh=0)
+    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, open=0, pnigh=0)
     o0_n0_d5_premise._status = True
 
     # WHEN / THEN
@@ -487,7 +487,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_tag(), hr24_str)
-    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, divisor=5, open=0, pnigh=0)
+    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, open=0, pnigh=0)
     o0_n0_d5_premise._status = False
 
     # WHEN / THEN
@@ -499,7 +499,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_tag(), hr24_str)
-    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, divisor=5, open=0, pnigh=0)
+    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, open=0, pnigh=0)
     o0_n0_d5_premise._status = True
 
     # WHEN / THEN
@@ -511,7 +511,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_tag(), hr24_str)
-    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, divisor=5, open=0, pnigh=0)
+    o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, open=0, pnigh=0)
     o0_n0_d5_premise._status = True
 
     # WHEN / THEN
@@ -605,7 +605,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
     timetech_way = create_way(root_tag(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
-    o1_n1_d6_premise = premiseunit_shop(pbranch=week_way, divisor=6, open=1, pnigh=1)
+    o1_n1_d6_premise = premiseunit_shop(pbranch=week_way, pdivisor=6, open=1, pnigh=1)
     assert o1_n1_d6_premise._status is None
 
     # WHEN
@@ -622,7 +622,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     timetech_way = create_way(root_tag(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
-    week_premise = premiseunit_shop(pbranch=week_way, divisor=6, open=1, pnigh=1)
+    week_premise = premiseunit_shop(pbranch=week_way, pdivisor=6, open=1, pnigh=1)
     bud_fact = factheir_shop(fcontext=week_way, fbranch=week_way, fopen=7, fnigh=7)
     assert week_premise._status is None
 
@@ -639,14 +639,14 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndOpen_Pnigh():
     timetech_way = create_way(root_tag(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
-    week_premise = premiseunit_shop(pbranch=week_way, divisor=6, open=1, pnigh=1)
+    week_premise = premiseunit_shop(pbranch=week_way, pdivisor=6, open=1, pnigh=1)
 
     # WHEN
     premise_dict = week_premise.get_dict()
 
     # THEN
     assert premise_dict is not None
-    static_dict = {"pbranch": week_way, "open": 1, "pnigh": 1, "divisor": 6}
+    static_dict = {"pbranch": week_way, "open": 1, "pnigh": 1, "pdivisor": 6}
     assert premise_dict == static_dict
 
 
@@ -726,7 +726,7 @@ def test_PremiseUnits_get_from_dict_ReturnsCompleteObj():
             "pbranch": weekday_way,
             "open": 1,
             "pnigh": 30,
-            "divisor": 5,
+            "pdivisor": 5,
         }
     }
 
@@ -736,7 +736,7 @@ def test_PremiseUnits_get_from_dict_ReturnsCompleteObj():
     # THEN
     assert len(premises_dict) == 1
     weekday_premise = premises_dict.get(weekday_way)
-    assert weekday_premise == premiseunit_shop(weekday_way, 1, 30, divisor=5)
+    assert weekday_premise == premiseunit_shop(weekday_way, 1, 30, pdivisor=5)
 
 
 def test_PremiseUnits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():

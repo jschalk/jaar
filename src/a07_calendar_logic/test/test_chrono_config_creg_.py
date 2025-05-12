@@ -695,7 +695,7 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
         reason_premise=cregtime_way,
         reason_premise_open=3420.0,
         reason_pnigh=3420.0,
-        reason_premise_divisor=10080.0,
+        pdivisor=10080.0,
     )
     print("set first fact")
 
