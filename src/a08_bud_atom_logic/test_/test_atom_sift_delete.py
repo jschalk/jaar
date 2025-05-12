@@ -19,8 +19,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     idea_tag_str,
     idea_way_str,
-    base_str,
-    fbase_str,
+    context_str,
+    fcontext_str,
 )
 from src.a08_bud_atom_logic.atom import atom_delete, budatom_shop, sift_budatom
 
@@ -199,10 +199,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_reasonunit():
 
     casa_week_atom = budatom_shop(bud_idea_reasonunit_str(), atom_delete())
     casa_week_atom.set_arg(idea_way_str(), casa_way)
-    casa_week_atom.set_arg(base_str(), week_way)
+    casa_week_atom.set_arg(context_str(), week_way)
     clean_week_atom = budatom_shop(bud_idea_reasonunit_str(), atom_delete())
     clean_week_atom.set_arg(idea_way_str(), clean_way)
-    clean_week_atom.set_arg(base_str(), week_way)
+    clean_week_atom.set_arg(context_str(), week_way)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
     assert not sift_budatom(sue_bud, casa_week_atom)
@@ -236,11 +236,11 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_reason_premiseunit_exists():
 
     casa_week_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_delete())
     casa_week_atom.set_arg(idea_way_str(), casa_way)
-    casa_week_atom.set_arg(base_str(), week_way)
+    casa_week_atom.set_arg(context_str(), week_way)
     casa_week_atom.set_arg("need", thur_way)
     clean_week_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_delete())
     clean_week_atom.set_arg(idea_way_str(), clean_way)
-    clean_week_atom.set_arg(base_str(), week_way)
+    clean_week_atom.set_arg(context_str(), week_way)
     clean_week_atom.set_arg("need", thur_way)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
@@ -346,10 +346,10 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_factunit():
 
     casa_week_atom = budatom_shop(bud_idea_factunit_str(), atom_delete())
     casa_week_atom.set_arg(idea_way_str(), casa_way)
-    casa_week_atom.set_arg(fbase_str(), week_way)
+    casa_week_atom.set_arg(fcontext_str(), week_way)
     clean_week_atom = budatom_shop(bud_idea_factunit_str(), atom_delete())
     clean_week_atom.set_arg(idea_way_str(), clean_way)
-    clean_week_atom.set_arg(fbase_str(), week_way)
+    clean_week_atom.set_arg(fcontext_str(), week_way)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
     assert not sift_budatom(sue_bud, casa_week_atom)

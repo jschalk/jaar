@@ -28,8 +28,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_factunit_str,
     acct_name_str,
     awardee_label_str,
-    base_str,
-    fbase_str,
+    context_str,
+    fcontext_str,
     group_label_str,
     need_str,
     idea_way_str,
@@ -171,9 +171,9 @@ def test_bud_idea_reasonunit_exists_ReturnsObj():
     root_way = to_way(sue_bud.fisc_tag)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
-    root_jkeys = {idea_way_str(): root_way, base_str(): week_way}
-    casa_jkeys = {idea_way_str(): casa_way, base_str(): week_way}
-    clean_jkeys = {idea_way_str(): clean_way, base_str(): week_way}
+    root_jkeys = {idea_way_str(): root_way, context_str(): week_way}
+    casa_jkeys = {idea_way_str(): casa_way, context_str(): week_way}
+    clean_jkeys = {idea_way_str(): clean_way, context_str(): week_way}
 
     # WHEN / THEN
     assert not bud_idea_reasonunit_exists(None, {})
@@ -203,11 +203,19 @@ def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
-    root_jkeys = {idea_way_str(): root_way, base_str(): week_way, need_str(): thur_way}
-    casa_jkeys = {idea_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    root_jkeys = {
+        idea_way_str(): root_way,
+        context_str(): week_way,
+        need_str(): thur_way,
+    }
+    casa_jkeys = {
+        idea_way_str(): casa_way,
+        context_str(): week_way,
+        need_str(): thur_way,
+    }
     clean_jkeys = {
         idea_way_str(): clean_way,
-        base_str(): week_way,
+        context_str(): week_way,
         need_str(): thur_way,
     }
 
@@ -308,9 +316,9 @@ def test_bud_idea_factunit_exists_ReturnsObj():
     root_way = to_way(sue_bud.fisc_tag)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
-    root_jkeys = {idea_way_str(): root_way, fbase_str(): week_way}
-    casa_jkeys = {idea_way_str(): casa_way, fbase_str(): week_way}
-    clean_jkeys = {idea_way_str(): clean_way, fbase_str(): week_way}
+    root_jkeys = {idea_way_str(): root_way, fcontext_str(): week_way}
+    casa_jkeys = {idea_way_str(): casa_way, fcontext_str(): week_way}
+    clean_jkeys = {idea_way_str(): clean_way, fcontext_str(): week_way}
 
     # WHEN / THEN
     assert not bud_idea_factunit_exists(None, {})
@@ -466,9 +474,9 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reasonunit():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     x_dimen = bud_idea_reasonunit_str()
-    root_jkeys = {idea_way_str(): root_way, base_str(): week_way}
-    casa_jkeys = {idea_way_str(): casa_way, base_str(): week_way}
-    clean_jkeys = {idea_way_str(): clean_way, base_str(): week_way}
+    root_jkeys = {idea_way_str(): root_way, context_str(): week_way}
+    casa_jkeys = {idea_way_str(): casa_way, context_str(): week_way}
+    clean_jkeys = {idea_way_str(): clean_way, context_str(): week_way}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -498,11 +506,19 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
     x_dimen = bud_idea_reason_premiseunit_str()
-    root_jkeys = {idea_way_str(): root_way, base_str(): week_way, need_str(): thur_way}
-    casa_jkeys = {idea_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    root_jkeys = {
+        idea_way_str(): root_way,
+        context_str(): week_way,
+        need_str(): thur_way,
+    }
+    casa_jkeys = {
+        idea_way_str(): casa_way,
+        context_str(): week_way,
+        need_str(): thur_way,
+    }
     clean_jkeys = {
         idea_way_str(): clean_way,
-        base_str(): week_way,
+        context_str(): week_way,
         need_str(): thur_way,
     }
 
@@ -604,9 +620,9 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_factunit():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     x_dimen = bud_idea_factunit_str()
-    root_jkeys = {idea_way_str(): root_way, fbase_str(): week_way}
-    casa_jkeys = {idea_way_str(): casa_way, fbase_str(): week_way}
-    clean_jkeys = {idea_way_str(): clean_way, fbase_str(): week_way}
+    root_jkeys = {idea_way_str(): root_way, fcontext_str(): week_way}
+    casa_jkeys = {idea_way_str(): casa_way, fcontext_str(): week_way}
+    clean_jkeys = {idea_way_str(): clean_way, fcontext_str(): week_way}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})

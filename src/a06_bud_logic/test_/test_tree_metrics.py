@@ -9,7 +9,7 @@ def test_TreeMetrics_Exists():
     assert x_tree_metrics is not None
     assert x_tree_metrics.tag_count is None
     assert x_tree_metrics.level_count is None
-    assert x_tree_metrics.reason_bases is None
+    assert x_tree_metrics.reason_contexts is None
     assert x_tree_metrics.awardlinks_metrics is None
     assert x_tree_metrics.uid_max is None
     assert x_tree_metrics.uid_dict is None
@@ -24,7 +24,7 @@ def test_treemetrics_shop_ReturnsObj():
     assert x_tree_metrics is not None
     assert x_tree_metrics.tag_count == 0
     assert x_tree_metrics.level_count == {}
-    assert x_tree_metrics.reason_bases == {}
+    assert x_tree_metrics.reason_contexts == {}
     assert x_tree_metrics.awardlinks_metrics == {}
     assert x_tree_metrics.uid_max == 0
     assert x_tree_metrics.uid_dict == {}

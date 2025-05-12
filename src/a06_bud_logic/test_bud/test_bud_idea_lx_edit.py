@@ -160,12 +160,12 @@ def test_bud_edit_idea_tag_Modifies_factunits():
     yao_bud.set_l1_idea(ideaunit_shop(casa_str))
     yao_bud.set_idea(ideaunit_shop(roses_str), parent_way=bloomers_way)
     yao_bud.set_idea(ideaunit_shop(rain_str), parent_way=old_water_way)
-    yao_bud.add_fact(fbase=old_water_way, fneed=old_rain_way)
+    yao_bud.add_fact(fcontext=old_water_way, fneed=old_rain_way)
 
     idea_x = yao_bud.get_idea_obj(roses_way)
     assert yao_bud.idearoot.factunits[old_water_way] is not None
     old_water_rain_factunit = yao_bud.idearoot.factunits[old_water_way]
-    assert old_water_rain_factunit.fbase == old_water_way
+    assert old_water_rain_factunit.fcontext == old_water_way
     assert old_water_rain_factunit.fneed == old_rain_way
 
     # WHEN
@@ -179,7 +179,7 @@ def test_bud_edit_idea_tag_Modifies_factunits():
     assert yao_bud.idearoot.factunits.get(old_water_way) is None
     assert yao_bud.idearoot.factunits.get(new_water_way) is not None
     new_water_rain_factunit = yao_bud.idearoot.factunits[new_water_way]
-    assert new_water_rain_factunit.fbase == new_water_way
+    assert new_water_rain_factunit.fcontext == new_water_way
     new_rain_way = yao_bud.make_way(new_water_way, rain_str)
     assert new_water_rain_factunit.fneed == new_rain_way
 
@@ -187,7 +187,7 @@ def test_bud_edit_idea_tag_Modifies_factunits():
     x_factunit = yao_bud.idearoot.factunits.get(new_water_way)
     # for factunit_key, x_factunit in yao_bud.idearoot.factunits.items():
     #     assert factunit_key == new_water_way
-    assert x_factunit.fbase == new_water_way
+    assert x_factunit.fcontext == new_water_way
     assert x_factunit.fneed == new_rain_way
 
 
@@ -213,13 +213,13 @@ def test_bud_edit_idea_tag_ModifiesIdeaReasonUnitsScenario1():
     assert casa_idea.reasonunits.get(new_weekday_str) is None
 
     # WHEN
-    # for key_x, reason_x in casa_idea.reasonunits.items():
-    #     print(f"Before {key_x=} {reason_x.base=}")
+    # for key_x, x_reason in casa_idea.reasonunits.items():
+    #     print(f"Before {key_x=} {x_reason.context=}")
     print(f"before {wednesday_idea.idea_tag=}")
     print(f"before {wednesday_idea.parent_way=}")
     sue_bud.edit_idea_tag(old_way=old_weekday_way, new_idea_tag=new_weekday_str)
-    # for key_x, reason_x in casa_idea.reasonunits.items():
-    #     print(f"after {key_x=} {reason_x.base=}")
+    # for key_x, x_reason in casa_idea.reasonunits.items():
+    #     print(f"after {key_x=} {x_reason.context=}")
     print(f"after  {wednesday_idea.idea_tag=}")
     print(f"after  {wednesday_idea.parent_way=}")
 

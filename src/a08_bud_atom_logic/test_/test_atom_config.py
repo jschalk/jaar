@@ -16,8 +16,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_pool_str,
     addin_str,
     awardee_label_str,
-    base_str,
-    fbase_str,
+    context_str,
+    fcontext_str,
     begin_str,
     close_str,
     credit_belief_str,
@@ -363,8 +363,8 @@ def unique_jkeys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
         if idea_way_str() in new_jkey_keys:
             new_jkey_keys.remove(idea_way_str())
-        if base_str() in new_jkey_keys:
-            new_jkey_keys.remove(base_str())
+        if context_str() in new_jkey_keys:
+            new_jkey_keys.remove(context_str())
         if acct_name_str() in new_jkey_keys:
             new_jkey_keys.remove(acct_name_str())
         if group_label_str() in new_jkey_keys:
@@ -403,7 +403,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_idea_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [idea_way_str(), base_str(), "need"]
+    assert x_sorted_jkey_keys == [idea_way_str(), context_str(), "need"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -644,8 +644,8 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(acct_name_str()) == type_NameUnit_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_label_str()) == type_LabelUnit_str()
-    assert x_class_types.get(base_str()) == type_WayUnit_str()
-    assert x_class_types.get("base_idea_active_requisite") == "bool"
+    assert x_class_types.get(context_str()) == type_WayUnit_str()
+    assert x_class_types.get("context_idea_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
@@ -657,7 +657,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("divisor") == "int"
-    assert x_class_types.get(fbase_str()) == type_WayUnit_str()
+    assert x_class_types.get(fcontext_str()) == type_WayUnit_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"

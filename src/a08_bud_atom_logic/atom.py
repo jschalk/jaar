@@ -317,12 +317,12 @@ def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_idea_factunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.del_factunit(x_atom.get_value("fbase"))
+    x_ideaunit.del_factunit(x_atom.get_value("fcontext"))
 
 
 def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_factunit = x_ideaunit.factunits.get(x_atom.get_value("fbase"))
+    x_factunit = x_ideaunit.factunits.get(x_atom.get_value("fcontext"))
     x_factunit.set_attr(
         fneed=x_atom.get_value("fneed"),
         fopen=x_atom.get_value("fopen"),
@@ -334,7 +334,7 @@ def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
         factunit=factunit_shop(
-            fbase=x_atom.get_value("fbase"),
+            fcontext=x_atom.get_value("fcontext"),
             fneed=x_atom.get_value("fneed"),
             fopen=x_atom.get_value("fopen"),
             fnigh=x_atom.get_value("fnigh"),
@@ -344,15 +344,15 @@ def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_idea_reasonunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.del_reasonunit_base(x_atom.get_value("base"))
+    x_ideaunit.del_reasonunit_context(x_atom.get_value("context"))
 
 
 def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_base=x_atom.get_value("base"),
-        reason_base_idea_active_requisite=x_atom.get_value(
-            "base_idea_active_requisite"
+        reason_context=x_atom.get_value("context"),
+        reason_context_idea_active_requisite=x_atom.get_value(
+            "context_idea_active_requisite"
         ),
     )
 
@@ -360,9 +360,9 @@ def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_base=x_atom.get_value("base"),
-        reason_base_idea_active_requisite=x_atom.get_value(
-            "base_idea_active_requisite"
+        reason_context=x_atom.get_value("context"),
+        reason_context_idea_active_requisite=x_atom.get_value(
+            "context_idea_active_requisite"
         ),
     )
 
@@ -370,7 +370,7 @@ def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_del_premise_base=x_atom.get_value("base"),
+        reason_del_premise_context=x_atom.get_value("context"),
         reason_del_premise_need=x_atom.get_value("need"),
     )
 
@@ -378,7 +378,7 @@ def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        reason_base=x_atom.get_value("base"),
+        reason_context=x_atom.get_value("context"),
         reason_premise=x_atom.get_value("need"),
         reason_premise_open=x_atom.get_value("open"),
         reason_premise_nigh=x_atom.get_value("nigh"),
@@ -389,7 +389,7 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
     x_ideaunit.set_reason_premise(
-        base=x_atom.get_value("base"),
+        context=x_atom.get_value("context"),
         premise=x_atom.get_value("need"),
         open=x_atom.get_value("open"),
         nigh=x_atom.get_value("nigh"),
@@ -581,7 +581,9 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or (x_obj.nigh != y_obj.nigh)
         )
     elif dimen == "bud_idea_reasonunit":
-        return x_obj.base_idea_active_requisite != y_obj.base_idea_active_requisite
+        return (
+            x_obj.context_idea_active_requisite != y_obj.context_idea_active_requisite
+        )
     elif dimen == "bud_idea_reason_premiseunit":
         return (
             x_obj.open != y_obj.open
@@ -615,8 +617,8 @@ class AtomRow:
     acct_name: AcctName = None
     addin: float = None
     awardee_label: LabelUnit = None
-    base: WayUnit = None
-    base_idea_active_requisite: bool = None
+    context: WayUnit = None
+    context_idea_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
     close: float = None
@@ -628,7 +630,7 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     divisor: int = None
-    fbase: WayUnit = None
+    fcontext: WayUnit = None
     fnigh: float = None
     fopen: float = None
     fund_coin: float = None

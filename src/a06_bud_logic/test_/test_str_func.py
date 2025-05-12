@@ -2,7 +2,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     addin_str,
     awardee_label_str,
-    base_str,
+    context_str,
     begin_str,
     close_str,
     credit_belief_str,
@@ -13,7 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtit_vote_str,
     denom_str,
     event_int_str,
-    fbase_str,
+    fcontext_str,
     fneed_str,
     fnigh_str,
     fopen_str,
@@ -43,8 +43,8 @@ def test_str_functions_ReturnsObj():
     assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
     assert awardee_label_str() == "awardee_label"
-    assert base_str() == "base"
-    assert fbase_str() == "fbase"
+    assert context_str() == "context"
+    assert fcontext_str() == "fcontext"
     assert begin_str() == "begin"
     assert close_str() == "close"
     assert credit_belief_str() == "credit_belief"

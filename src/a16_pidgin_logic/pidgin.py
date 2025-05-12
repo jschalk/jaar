@@ -39,9 +39,9 @@ def pidginable_atom_args() -> set:
     return {
         "acct_name",
         "awardee_label",
-        "base",
+        "context",
         "face_name",
-        "fbase",
+        "fcontext",
         "fisc_tag",
         "fneed",
         "group_label",

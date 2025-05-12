@@ -168,7 +168,7 @@ def test_BudUnit_set_idea_CorrectlyAddsIdeaObjWithNonDefault_bridge():
     assert wed_idea.bridge == bob_bud.bridge
 
     # WHEN
-    bob_bud.edit_idea_attr(casa_way, reason_base=week_way, reason_premise=wed_way)
+    bob_bud.edit_idea_attr(casa_way, reason_context=week_way, reason_premise=wed_way)
 
     # THEN
     casa_idea = bob_bud.get_idea_obj(casa_way)
@@ -363,14 +363,16 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
     assert sue_bud.idearoot._kids[casa_str].factunits == {}
     wkdays_way = sue_bud.make_l1_way("weekdays")
     fact_way = sue_bud.make_way(wkdays_way, "Sunday")
-    x_factunit = factunit_shop(fbase=fact_way, fneed=fact_way)
+    x_factunit = factunit_shop(fcontext=fact_way, fneed=fact_way)
 
     casa_factunits = sue_bud.idearoot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
     sue_bud.edit_idea_attr(casa_way, factunit=x_factunit)
     casa_factunits = sue_bud.idearoot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
-    assert sue_bud.idearoot._kids[casa_str].factunits == {x_factunit.fbase: x_factunit}
+    assert sue_bud.idearoot._kids[casa_str].factunits == {
+        x_factunit.fcontext: x_factunit
+    }
 
     # _descendant_pledge_count: int = None,
     sue_bud.idearoot._kids[casa_str]._descendant_pledge_count = 81

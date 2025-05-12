@@ -7,9 +7,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_WayUnit_str,
     acct_name_str,
     awardee_label_str,
-    base_str,
+    context_str,
     face_name_str,
-    fbase_str,
+    fcontext_str,
     fneed_str,
     fopen_str,
     fund_coin_str,
@@ -69,8 +69,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_label") == type_LabelUnit_str()
-    assert pidgin_args_class_types.get("base") == type_WayUnit_str()
-    assert pidgin_args_class_types.get("base_idea_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("context") == type_WayUnit_str()
+    assert pidgin_args_class_types.get("context_idea_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -85,7 +85,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("denom") == "int"
     assert pidgin_args_class_types.get("divisor") == "int"
     assert pidgin_args_class_types.get("face_name") == type_NameUnit_str()
-    assert pidgin_args_class_types.get("fbase") == type_WayUnit_str()
+    assert pidgin_args_class_types.get("fcontext") == type_WayUnit_str()
     assert pidgin_args_class_types.get("fisc_tag") == type_TagUnit_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
@@ -202,9 +202,9 @@ def test_pidginable_atom_args_ReturnsObj():
     assert pidginable_atom_args() == {
         acct_name_str(),
         awardee_label_str(),
-        base_str(),
+        context_str(),
         face_name_str(),
-        fbase_str(),
+        fcontext_str(),
         fisc_tag_str(),
         fneed_str(),
         group_label_str(),

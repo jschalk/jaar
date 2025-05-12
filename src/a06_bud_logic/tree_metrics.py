@@ -9,7 +9,7 @@ from dataclasses import dataclass
 class TreeMetrics:
     tag_count: int = None
     level_count: dict[int, int] = None
-    reason_bases: dict[WayUnit, int] = None
+    reason_contexts: dict[WayUnit, int] = None
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
@@ -45,10 +45,12 @@ class TreeMetrics:
     def evaluate_reasonunits(self, reasons: dict[WayUnit, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
-            if self.reason_bases.get(reason.base) is None:
-                self.reason_bases[reason.base] = 1
+            if self.reason_contexts.get(reason.context) is None:
+                self.reason_contexts[reason.context] = 1
             else:
-                self.reason_bases[reason.base] = self.reason_bases[reason.base] + 1
+                self.reason_contexts[reason.context] = (
+                    self.reason_contexts[reason.context] + 1
+                )
 
     def evaluate_awardlinks(self, awardlinks: dict[GroupLabel, AwardLink]):
         if awardlinks is not None:
@@ -69,7 +71,7 @@ class TreeMetrics:
 def treemetrics_shop(
     tag_count: int = None,
     level_count: dict[int, int] = None,
-    reason_bases: dict[WayUnit, int] = None,
+    reason_contexts: dict[WayUnit, int] = None,
     awardlinks_metrics: dict[GroupLabel, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,
@@ -77,7 +79,7 @@ def treemetrics_shop(
     x_treemetrics = TreeMetrics(
         tag_count=get_0_if_None(tag_count),
         level_count=get_empty_dict_if_None(level_count),
-        reason_bases=get_empty_dict_if_None(reason_bases),
+        reason_contexts=get_empty_dict_if_None(reason_contexts),
         awardlinks_metrics=get_empty_dict_if_None(awardlinks_metrics),
         uid_dict=get_empty_dict_if_None(uid_dict),
         uid_max=get_0_if_None(uid_max),

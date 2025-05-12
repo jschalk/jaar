@@ -1241,7 +1241,7 @@ def test_BudUnit_settle_bud_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ra
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud._reason_bases == set()
+    assert yao_bud._reason_contexts == set()
     assert sue_acct._fund_give == 50000000
     assert sue_acct._fund_take == 200000000
     assert bob_acct._fund_give == 150000000

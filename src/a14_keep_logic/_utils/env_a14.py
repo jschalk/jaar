@@ -47,13 +47,12 @@ class InvalidkeepCopyException(Exception):
 
 
 def copy_evaluation_keep(src_fisc_tag: str, dest_fisc_tag: str):
-    base_dir = "src\\keep\\_utils/keeps"
-    new_dir = create_path(base_dir, dest_fisc_tag)
+    keeps_dir = "src\\keep\\_utils/keeps"
+    new_dir = create_path(keeps_dir, dest_fisc_tag)
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(
             f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
-    # base_dir = keep_obj.hubunit.keep_dir()
-    src_dir = create_path(base_dir, src_fisc_tag)
-    dest_dir = create_path(base_dir, dest_fisc_tag)
+    src_dir = create_path(keeps_dir, src_fisc_tag)
+    dest_dir = create_path(keeps_dir, dest_fisc_tag)
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

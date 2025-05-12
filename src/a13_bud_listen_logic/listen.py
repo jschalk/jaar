@@ -24,7 +24,7 @@ class Missing_debtor_respectException(Exception):
 
 def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
     for x_factunit in perspective_bud.idearoot.factunits.values():
-        x_factunit.set_fneed_to_base()
+        x_factunit.set_fneed_to_fcontext()
     return list(perspective_bud.get_agenda_dict().values())
 
 
@@ -133,29 +133,29 @@ def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
     for x_factunit in src_listener.idearoot.factunits.values():
-        fbase_way = x_factunit.fbase
+        fcontext_way = x_factunit.fcontext
         fneed_way = x_factunit.fneed
-        if dst_listener.idea_exists(fbase_way) is False:
-            base_idea = src_listener.get_idea_obj(fbase_way)
-            dst_listener.set_idea(base_idea, base_idea.parent_way)
+        if dst_listener.idea_exists(fcontext_way) is False:
+            context_idea = src_listener.get_idea_obj(fcontext_way)
+            dst_listener.set_idea(context_idea, context_idea.parent_way)
         if dst_listener.idea_exists(fneed_way) is False:
             fneed_idea = src_listener.get_idea_obj(fneed_way)
             dst_listener.set_idea(fneed_idea, fneed_idea.parent_way)
-        dst_listener.add_fact(fbase_way, fneed_way)
+        dst_listener.add_fact(fcontext_way, fneed_way)
 
 
 def listen_to_speaker_fact(
     listener: BudUnit,
     speaker: BudUnit,
-    missing_fact_bases: list[WayUnit] = None,
+    missing_fact_contexts: list[WayUnit] = None,
 ) -> BudUnit:
-    if missing_fact_bases is None:
-        missing_fact_bases = list(listener.get_missing_fact_bases())
-    for missing_fact_base in missing_fact_bases:
-        x_factunit = speaker.get_fact(missing_fact_base)
+    if missing_fact_contexts is None:
+        missing_fact_contexts = list(listener.get_missing_fact_contexts())
+    for missing_fact_context in missing_fact_contexts:
+        x_factunit = speaker.get_fact(missing_fact_context)
         if x_factunit is not None:
             listener.add_fact(
-                fbase=x_factunit.fbase,
+                fcontext=x_factunit.fcontext,
                 fneed=x_factunit.fneed,
                 fopen=x_factunit.fopen,
                 fnigh=x_factunit.fnigh,

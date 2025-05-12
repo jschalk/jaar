@@ -144,7 +144,7 @@ def test_bud_set_bridge_CorrectlyModifiesReasonUnit():
     _8am_str = "8am"
     semicolon_8am_way = zia_bud.make_way(semicolon_time_way, _8am_str)
 
-    semicolon_time_reasonunit = reasonunit_shop(base=semicolon_time_way)
+    semicolon_time_reasonunit = reasonunit_shop(context=semicolon_time_way)
     semicolon_time_reasonunit.set_premise(semicolon_8am_way)
 
     semicolon_casa_way = zia_bud.make_l1_way(casa_str)
@@ -203,8 +203,8 @@ def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     slash_8am_way = zia_bud.make_way(slash_time_way, _8am_str)
     assert casa_idea.factunits.get(slash_time_way) is not None
     gen_time_factunit = casa_idea.factunits.get(slash_time_way)
-    assert gen_time_factunit.fbase is not None
-    assert gen_time_factunit.fbase == slash_time_way
+    assert gen_time_factunit.fcontext is not None
+    assert gen_time_factunit.fcontext == slash_time_way
     assert gen_time_factunit.fneed is not None
     assert gen_time_factunit.fneed == slash_8am_way
 

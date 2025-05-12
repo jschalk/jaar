@@ -3,7 +3,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_label_str,
     idea_way_str,
-    base_str,
+    context_str,
 )
 from src.a17_creed_logic.creed import CreedRef, creedref_shop
 
@@ -156,11 +156,11 @@ def test_CreedRef_get_otx_values_list_ReturnsObj_Scenario2():
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
     x3_creedref.set_attribute(idea_way_str(), True)
     x3_creedref.set_attribute(group_label_str(), False)
-    x3_creedref.set_attribute(base_str(), False)
+    x3_creedref.set_attribute(context_str(), False)
     x3_creedref.set_attribute(acct_name_str(), False)
 
     # WHEN
     x_otx_values_list = x3_creedref.get_otx_values_list()
 
     # THEN
-    assert x_otx_values_list == [acct_name_str(), group_label_str(), base_str()]
+    assert x_otx_values_list == [acct_name_str(), group_label_str(), context_str()]

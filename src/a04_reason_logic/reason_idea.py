@@ -17,14 +17,14 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    fbase: WayUnit
+    fcontext: WayUnit
     fneed: WayUnit
     fopen: float = None
     fnigh: float = None
 
     def get_dict(self) -> dict[str,]:
         x_dict = {
-            "fbase": self.fbase,
+            "fcontext": self.fcontext,
             "fneed": self.fneed,
         }
         if self.fopen is not None:
@@ -45,20 +45,20 @@ class FactCore:
         if fnigh is not None:
             self.fnigh = fnigh
 
-    def set_fneed_to_base(self):
-        self.set_attr(fneed=self.fbase)
+    def set_fneed_to_fcontext(self):
+        self.set_attr(fneed=self.fcontext)
         self.fopen = None
         self.fnigh = None
 
     def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
-        self.fbase = rebuild_way(self.fbase, old_way, new_way)
+        self.fcontext = rebuild_way(self.fcontext, old_way, new_way)
         self.fneed = rebuild_way(self.fneed, old_way, new_way)
 
     def get_obj_key(self) -> WayUnit:
-        return self.fbase
+        return self.fcontext
 
     def get_tuple(self) -> tuple[WayUnit, WayUnit, float, float]:
-        return (self.fbase, self.fneed, self.fopen, self.fnigh)
+        return (self.fcontext, self.fneed, self.fopen, self.fnigh)
 
 
 @dataclass
@@ -67,18 +67,18 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    fbase: WayUnit = None,
+    fcontext: WayUnit = None,
     fneed: WayUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
-    return FactUnit(fbase=fbase, fneed=fneed, fopen=fopen, fnigh=fnigh)
+    return FactUnit(fcontext=fcontext, fneed=fneed, fopen=fopen, fnigh=fnigh)
 
 
 def factunits_get_from_dict(x_dict: dict) -> dict[WayUnit, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
-        x_base = fact_dict["fbase"]
+        x_fcontext = fact_dict["fcontext"]
         x_fneed = fact_dict["fneed"]
 
         try:
@@ -91,13 +91,13 @@ def factunits_get_from_dict(x_dict: dict) -> dict[WayUnit, FactUnit]:
             x_fnigh = None
 
         x_fact = factunit_shop(
-            fbase=x_base,
+            fcontext=x_fcontext,
             fneed=x_fneed,
             fopen=x_fopen,
             fnigh=x_fnigh,
         )
 
-        facts[x_fact.fbase] = x_fact
+        facts[x_fact.fcontext] = x_fact
     return facts
 
 
@@ -110,7 +110,7 @@ def get_factunit_from_tuple(
 def get_dict_from_factunits(
     factunits: dict[WayUnit, FactUnit],
 ) -> dict[WayUnit, dict[str,]]:
-    return {fact.fbase: fact.get_dict() for fact in factunits.values()}
+    return {fact.fcontext: fact.get_dict() for fact in factunits.values()}
 
 
 @dataclass
@@ -125,12 +125,12 @@ class FactHeir(FactCore):
 
 
 def factheir_shop(
-    fbase: WayUnit = None,
+    fcontext: WayUnit = None,
     fneed: WayUnit = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
-    return FactHeir(fbase=fbase, fneed=fneed, fopen=fopen, fnigh=fnigh)
+    return FactHeir(fcontext=fcontext, fneed=fneed, fopen=fopen, fnigh=fnigh)
 
 
 class PremiseStatusFinderException(Exception):
@@ -455,15 +455,15 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 
 @dataclass
 class ReasonCore:
-    base: WayUnit
+    context: WayUnit
     premises: dict[WayUnit, PremiseUnit]
-    base_idea_active_requisite: bool = None
+    context_idea_active_requisite: bool = None
     bridge: str = None
 
     def set_bridge(self, new_bridge: str):
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
-        self.base = replace_bridge(self.base, old_bridge, new_bridge)
+        self.context = replace_bridge(self.context, old_bridge, new_bridge)
 
         new_premises = {}
         for premise_way, premise_obj in self.premises.items():
@@ -477,7 +477,7 @@ class ReasonCore:
         self.premises = new_premises
 
     def get_obj_key(self):
-        return self.base
+        return self.context
 
     def get_premises_count(self):
         return sum(1 for _ in self.premises.values())
@@ -510,22 +510,22 @@ class ReasonCore:
             raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
 
     def find_replace_way(self, old_way: WayUnit, new_way: WayUnit):
-        self.base = rebuild_way(self.base, old_way, new_way)
+        self.context = rebuild_way(self.context, old_way, new_way)
         self.premises = find_replace_way_key_dict(
             dict_x=self.premises, old_way=old_way, new_way=new_way
         )
 
 
 def reasoncore_shop(
-    base: WayUnit,
+    context: WayUnit,
     premises: dict[WayUnit, PremiseUnit] = None,
-    base_idea_active_requisite: bool = None,
+    context_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonCore(
-        base=base,
+        context=context,
         premises=get_empty_dict_if_None(premises),
-        base_idea_active_requisite=base_idea_active_requisite,
+        context_idea_active_requisite=context_idea_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -537,24 +537,24 @@ class ReasonUnit(ReasonCore):
             premise_way: premise.get_dict()
             for premise_way, premise in self.premises.items()
         }
-        x_dict = {"base": self.base}
+        x_dict = {"context": self.context}
         if premises_dict != {}:
             x_dict["premises"] = premises_dict
-        if self.base_idea_active_requisite is not None:
-            x_dict["base_idea_active_requisite"] = self.base_idea_active_requisite
+        if self.context_idea_active_requisite is not None:
+            x_dict["context_idea_active_requisite"] = self.context_idea_active_requisite
         return x_dict
 
 
 def reasonunit_shop(
-    base: WayUnit,
+    context: WayUnit,
     premises: dict[WayUnit, PremiseUnit] = None,
-    base_idea_active_requisite: bool = None,
+    context_idea_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonUnit(
-        base=base,
+        context=context,
         premises=get_empty_dict_if_None(premises),
-        base_idea_active_requisite=base_idea_active_requisite,
+        context_idea_active_requisite=context_idea_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -563,7 +563,7 @@ def reasonunit_shop(
 class ReasonHeir(ReasonCore):
     _status: bool = None
     _task: bool = None
-    _base_idea_active_value: bool = None
+    _context_idea_active_value: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
         x_premises = {}
@@ -586,21 +586,21 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_base_fact(self, factheirs: dict[WayUnit, FactHeir]) -> FactHeir:
-        base_fact = None
+    def _get_context_fact(self, factheirs: dict[WayUnit, FactHeir]) -> FactHeir:
+        context_fact = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
-            if self.base == y_factheir.fbase:
-                base_fact = y_factheir
-        return base_fact
+            if self.context == y_factheir.fcontext:
+                context_fact = y_factheir
+        return context_fact
 
-    def set_base_idea_active_value(self, bool_x: bool):
-        self._base_idea_active_value = bool_x
+    def set_context_idea_active_value(self, bool_x: bool):
+        self._context_idea_active_value = bool_x
 
-    def is_base_idea_active_requisite_operational(self) -> bool:
+    def is_context_idea_active_requisite_operational(self) -> bool:
         return (
-            self._base_idea_active_value is not None
-            and self._base_idea_active_value == self.base_idea_active_requisite
+            self._context_idea_active_value is not None
+            and self._context_idea_active_value == self.context_idea_active_requisite
         )
 
     def is_any_premise_true(self) -> tuple[bool, bool]:
@@ -615,7 +615,7 @@ class ReasonHeir(ReasonCore):
 
     def _set_attr_status(self, any_premise_true: bool):
         self._status = (
-            any_premise_true or self.is_base_idea_active_requisite_operational()
+            any_premise_true or self.is_context_idea_active_requisite_operational()
         )
 
     def _set_attr_task(self, any_task_true: bool):
@@ -625,28 +625,28 @@ class ReasonHeir(ReasonCore):
 
     def set_status(self, factheirs: dict[WayUnit, FactHeir]):
         self.clear_status()
-        self._set_premise_status(self._get_base_fact(factheirs))
+        self._set_premise_status(self._get_context_fact(factheirs))
         any_premise_true, any_task_true = self.is_any_premise_true()
         self._set_attr_status(any_premise_true)
         self._set_attr_task(any_task_true)
 
 
 def reasonheir_shop(
-    base: WayUnit,
+    context: WayUnit,
     premises: dict[WayUnit, PremiseUnit] = None,
-    base_idea_active_requisite: bool = None,
+    context_idea_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
-    _base_idea_active_value: bool = None,
+    _context_idea_active_value: bool = None,
     bridge: str = None,
 ):
     return ReasonHeir(
-        base=base,
+        context=context,
         premises=get_empty_dict_if_None(premises),
-        base_idea_active_requisite=base_idea_active_requisite,
+        context_idea_active_requisite=context_idea_active_requisite,
         _status=_status,
         _task=_task,
-        _base_idea_active_value=_base_idea_active_value,
+        _context_idea_active_value=_context_idea_active_value,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -655,14 +655,14 @@ def reasonheir_shop(
 def reasons_get_from_dict(reasons_dict: dict) -> dict[WayUnit, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
-        x_reasonunit = reasonunit_shop(base=reason_dict["base"])
+        x_reasonunit = reasonunit_shop(context=reason_dict["context"])
         if reason_dict.get("premises") is not None:
             x_reasonunit.premises = premises_get_from_dict(
                 x_dict=reason_dict["premises"]
             )
-        if reason_dict.get("base_idea_active_requisite") is not None:
-            x_reasonunit.base_idea_active_requisite = reason_dict.get(
-                "base_idea_active_requisite"
+        if reason_dict.get("context_idea_active_requisite") is not None:
+            x_reasonunit.context_idea_active_requisite = reason_dict.get(
+                "context_idea_active_requisite"
             )
-        x_dict[x_reasonunit.base] = x_reasonunit
+        x_dict[x_reasonunit.context] = x_reasonunit
     return x_dict

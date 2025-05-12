@@ -43,7 +43,7 @@ class CellUnit:
     budevent_facts: dict[WayUnit, FactUnit] = None
     found_facts: dict[WayUnit, FactUnit] = None
     boss_facts: dict[WayUnit, FactUnit] = None
-    _reason_bases: set[WayUnit] = None
+    _reason_contexts: set[WayUnit] = None
     _acct_mandate_ledger: dict[OwnerName, FundNum] = None
 
     def get_cell_owner_name(self) -> OwnerName:
@@ -53,12 +53,12 @@ class CellUnit:
         if not x_bud:
             self.budadjust = None
             self.budevent_facts = {}
-            self._reason_bases = set()
+            self._reason_contexts = set()
         else:
             self._load_existing_budevent(x_bud)
 
     def _load_existing_budevent(self, x_bud: BudUnit):
-        self._reason_bases = x_bud.get_reason_bases()
+        self._reason_contexts = x_bud.get_reason_contexts()
         self.budevent_facts = factunits_get_from_dict(get_facts_dict(x_bud))
         y_bud = copy_deepcopy(x_bud)
         clear_factunits_from_bud(y_bud)
@@ -83,23 +83,23 @@ class CellUnit:
     def set_boss_facts_from_other_facts(self):
         self.boss_facts = copy_deepcopy(self.budevent_facts)
         for x_fact in self.found_facts.values():
-            self.boss_facts[x_fact.fbase] = copy_deepcopy(x_fact)
+            self.boss_facts[x_fact.fcontext] = copy_deepcopy(x_fact)
 
     def add_other_facts_to_boss_facts(self):
         for x_fact in self.found_facts.values():
-            if not self.boss_facts.get(x_fact.fbase):
-                self.boss_facts[x_fact.fbase] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.fcontext):
+                self.boss_facts[x_fact.fcontext] = copy_deepcopy(x_fact)
         for x_fact in self.budevent_facts.values():
-            if not self.boss_facts.get(x_fact.fbase):
-                self.boss_facts[x_fact.fbase] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.fcontext):
+                self.boss_facts[x_fact.fcontext] = copy_deepcopy(x_fact)
 
-    def filter_facts_by_reason_bases(self):
+    def filter_facts_by_reason_contexts(self):
         to_delete_budevent_fact_keys = set(self.budevent_facts.keys())
         to_delete_found_fact_keys = set(self.found_facts.keys())
         to_delete_boss_fact_keys = set(self.boss_facts.keys())
-        to_delete_budevent_fact_keys.difference_update(self._reason_bases)
-        to_delete_found_fact_keys.difference_update(self._reason_bases)
-        to_delete_boss_fact_keys.difference_update(self._reason_bases)
+        to_delete_budevent_fact_keys.difference_update(self._reason_contexts)
+        to_delete_found_fact_keys.difference_update(self._reason_contexts)
+        to_delete_boss_fact_keys.difference_update(self._reason_contexts)
         for budevent_fact_key in to_delete_budevent_fact_keys:
             self.budevent_facts.pop(budevent_fact_key)
         for found_fact_key in to_delete_found_fact_keys:
@@ -110,15 +110,15 @@ class CellUnit:
     def set_budadjust_facts(self):
         for fact in self.budevent_facts.values():
             self.budadjust.add_fact(
-                fact.fbase, fact.fneed, fact.fopen, fact.fnigh, True
+                fact.fcontext, fact.fneed, fact.fopen, fact.fnigh, True
             )
         for fact in self.found_facts.values():
             self.budadjust.add_fact(
-                fact.fbase, fact.fneed, fact.fopen, fact.fnigh, True
+                fact.fcontext, fact.fneed, fact.fopen, fact.fnigh, True
             )
         for fact in self.boss_facts.values():
             self.budadjust.add_fact(
-                fact.fbase, fact.fneed, fact.fopen, fact.fnigh, True
+                fact.fcontext, fact.fneed, fact.fopen, fact.fnigh, True
             )
 
     def _set_acct_mandate_ledger(self):
@@ -126,8 +126,8 @@ class CellUnit:
         self._acct_mandate_ledger = get_acct_mandate_ledger(self.budadjust, True)
 
     def calc_acct_mandate_ledger(self):
-        self._reason_bases = self.budadjust.get_reason_bases()
-        self.filter_facts_by_reason_bases()
+        self._reason_contexts = self.budadjust.get_reason_contexts()
+        self.filter_facts_by_reason_contexts()
         self.set_budadjust_facts()
         self._set_acct_mandate_ledger()
 
@@ -171,7 +171,7 @@ def cellunit_shop(
         mandate = CELLNODE_QUOTA_DEFAULT
     if budadjust is None:
         budadjust = budunit_shop(deal_owner_name)
-    reason_bases = budadjust.get_reason_bases() if budadjust else set()
+    reason_contexts = budadjust.get_reason_contexts() if budadjust else set()
     if budadjust:
         budadjust = copy_deepcopy(budadjust)
         clear_factunits_from_bud(budadjust)
@@ -188,7 +188,7 @@ def cellunit_shop(
         budevent_facts=get_empty_dict_if_None(budevent_facts),
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
-        _reason_bases=reason_bases,
+        _reason_contexts=reason_contexts,
         _acct_mandate_ledger={},
     )
 

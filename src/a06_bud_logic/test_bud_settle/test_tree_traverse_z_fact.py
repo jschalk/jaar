@@ -14,13 +14,13 @@ def test_BudUnit_settle_bud_ChangesIdeaUnit_pledge_task():
     hour_way = yao_bud.make_l1_way(hour_str)
 
     # WHEN
-    yao_bud.add_fact(fbase=hour_way, fneed=hour_way, fopen=82, fnigh=85)
+    yao_bud.add_fact(fcontext=hour_way, fneed=hour_way, fopen=82, fnigh=85)
 
     # THEN
     mail_way = yao_bud.make_l1_way("obtain mail")
     idea_dict = yao_bud.get_idea_dict()
     mail_idea = idea_dict.get(mail_way)
-    yao_bud.add_fact(fbase=hour_way, fneed=hour_way, fopen=82, fnigh=95)
+    yao_bud.add_fact(fcontext=hour_way, fneed=hour_way, fopen=82, fnigh=95)
     assert mail_idea.pledge is True
     assert mail_idea._task is False
 
@@ -50,7 +50,7 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     sweep_idea = ideaunit_shop(sweep_str, gogo_want=sweep_gogo_want)
     sweep_idea.stop_want = sweep_stop_want
     zia_bud.set_idea(clean_idea, parent_way=casa_way)
-    zia_bud.add_fact(fbase=clean_way, fneed=clean_way, fopen=1, fnigh=5)
+    zia_bud.add_fact(fcontext=clean_way, fneed=clean_way, fopen=1, fnigh=5)
     assert zia_bud.idearoot._factheirs == {}
 
     # WHEN
@@ -59,7 +59,7 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     # THEN
     assert zia_bud.idearoot._factheirs != {}
     clean_factheir = factheir_shop(clean_way, clean_way, 1.0, 5.0)
-    assert zia_bud.idearoot._factheirs == {clean_factheir.fbase: clean_factheir}
+    assert zia_bud.idearoot._factheirs == {clean_factheir.fcontext: clean_factheir}
 
 
 def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
@@ -109,7 +109,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     swim_idea = zia_bud.get_idea_obj(swim_way)
     fast_idea = zia_bud.get_idea_obj(fast_way)
     slow_idea = zia_bud.get_idea_obj(slow_way)
-    zia_bud.add_fact(fbase=earth_way, fneed=earth_way, fopen=1.0, fnigh=5.0)
+    zia_bud.add_fact(fcontext=earth_way, fneed=earth_way, fopen=1.0, fnigh=5.0)
     assert swim_idea._factheirs == {}
     assert fast_idea._factheirs == {}
     assert slow_idea._factheirs == {}
@@ -122,7 +122,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     assert fast_idea._factheirs != {}
     assert slow_idea._factheirs != {}
     factheir_set_range = factheir_shop(earth_way, earth_way, 1.0, 5.0)
-    factheirs_set_range = {factheir_set_range.fbase: factheir_set_range}
+    factheirs_set_range = {factheir_set_range.fcontext: factheir_set_range}
     assert swim_idea._factheirs == factheirs_set_range
     assert fast_idea._factheirs == factheirs_set_range
     assert slow_idea._factheirs == factheirs_set_range
@@ -135,7 +135,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
 
     # THEN
     fact_none_range = factheir_shop(earth_way, earth_way, None, None)
-    facts_none_range = {fact_none_range.fbase: fact_none_range}
+    facts_none_range = {fact_none_range.fcontext: fact_none_range}
     assert swim_idea._factheirs == facts_none_range
     assert fast_idea._factheirs == factheirs_set_range
     assert slow_idea._factheirs == factheirs_set_range
@@ -166,23 +166,23 @@ def test_BudUnit_settle_bud_FactUnitMoldsFactHeir():
     assert swim_idea._factheirs == {}
 
     # WHEN
-    zia_bud.add_fact(fbase=earth_way, fneed=earth_way, fopen=1.0, fnigh=5.0)
+    zia_bud.add_fact(fcontext=earth_way, fneed=earth_way, fopen=1.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
     first_earthheir = factheir_shop(earth_way, earth_way, fopen=1.0, fnigh=5.0)
-    first_earthdict = {first_earthheir.fbase: first_earthheir}
+    first_earthdict = {first_earthheir.fcontext: first_earthheir}
     assert swim_idea._factheirs == first_earthdict
 
     # WHEN
-    # earth_curb = factunit_shop(fbase=earth_way, fneed=earth_way, open=3.0, nigh=4.0)
+    # earth_curb = factunit_shop(fcontext=earth_way, fneed=earth_way, open=3.0, nigh=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
-    zia_bud.add_fact(fbase=earth_way, fneed=earth_way, fopen=3.0, fnigh=5.0)
+    zia_bud.add_fact(fcontext=earth_way, fneed=earth_way, fopen=3.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
     after_earthheir = factheir_shop(earth_way, earth_way, fopen=3.0, fnigh=5.0)
-    after_earthdict = {after_earthheir.fbase: after_earthheir}
+    after_earthdict = {after_earthheir.fcontext: after_earthheir}
     assert swim_idea._factheirs == after_earthdict
 
 
@@ -201,7 +201,7 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
     sue_bud.set_l1_idea(ideaunit_shop(earth_str))
     swim_idea = sue_bud.get_idea_obj(swim_way)
     first_earthheir = factheir_shop(earth_way, earth_way, fopen=200.0, fnigh=500.0)
-    first_earthdict = {first_earthheir.fbase: first_earthheir}
+    first_earthdict = {first_earthheir.fcontext: first_earthheir}
     sue_bud.add_fact(earth_way, earth_way, fopen=200.0, fnigh=500.0)
     assert swim_idea._factheirs == {}
 

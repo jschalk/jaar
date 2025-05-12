@@ -302,7 +302,7 @@ def add_bud_to_br00023_csv(
             x_bud.fisc_tag,
             x_bud.owner_name,
             x_bud.idearoot.get_idea_way(),
-            factunit.fbase,
+            factunit.fcontext,
             factunit.fneed,
             if_none_str(factunit.fopen),
             if_none_str(factunit.fnigh),
@@ -372,7 +372,7 @@ def add_bud_to_br00026_csv(
                     x_bud.fisc_tag,
                     x_bud.owner_name,
                     ideaunit.get_idea_way(),
-                    reasonunit.base,
+                    reasonunit.context,
                     premiseunit.need,
                     if_none_str(premiseunit.open),
                     if_none_str(premiseunit.nigh),
@@ -398,8 +398,8 @@ def add_bud_to_br00027_csv(
                 x_bud.fisc_tag,
                 x_bud.owner_name,
                 ideaunit.get_idea_way(),
-                reasonunit.base,
-                if_none_str(reasonunit.base_idea_active_requisite),
+                reasonunit.context,
+                if_none_str(reasonunit.context_idea_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -650,7 +650,7 @@ def add_pack_to_br00023_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("fbase"),
+                budatom.jkeys.get("fcontext"),
                 if_none_str(budatom.jvalues.get("fneed")),
                 if_none_str(budatom.jvalues.get("fopen")),
                 if_none_str(budatom.jvalues.get("fnigh")),
@@ -707,7 +707,7 @@ def add_pack_to_br00026_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("base"),
+                budatom.jkeys.get("context"),
                 budatom.jkeys.get("need"),
                 if_none_str(budatom.jvalues.get("open")),
                 if_none_str(budatom.jvalues.get("nigh")),
@@ -729,8 +729,8 @@ def add_pack_to_br00027_csv(
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("base"),
-                if_none_str(budatom.jvalues.get("base_idea_active_requisite")),
+                budatom.jkeys.get("context"),
+                if_none_str(budatom.jvalues.get("context_idea_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

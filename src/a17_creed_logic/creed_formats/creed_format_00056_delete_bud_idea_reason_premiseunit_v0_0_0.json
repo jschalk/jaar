@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "base": {
+        "context": {
             "otx_key": true
         },
         "event_int": {

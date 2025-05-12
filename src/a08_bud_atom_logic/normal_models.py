@@ -66,15 +66,15 @@ class AwardLinkTable(Base):
 class ReasonTable(Base):
     __tablename__ = "reason"
     uid = Column(Integer, primary_key=True)
-    base = Column(String)
+    context = Column(String)
     idea_way = Column(String)
-    base_idea_active_requisite = Column(Integer)
+    context_idea_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):
     __tablename__ = "premise"
     uid = Column(Integer, primary_key=True)
-    base = Column(String)
+    context = Column(String)
     need = Column(String)
     idea_way = Column(String)
     divisor = Column(Integer)
@@ -99,7 +99,7 @@ class HealerLinkTable(Base):
 class FactTable(Base):
     __tablename__ = "fact"
     uid = Column(Integer, primary_key=True)
-    fbase = Column(String)
+    fcontext = Column(String)
     idea_way = Column(String)
     fnigh = Column(Float)
     fopen = Column(Float)

@@ -25,11 +25,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     begin_str,
     close_str,
     mass_str,
-    fbase_str,
+    fcontext_str,
     fneed_str,
     fnigh_str,
     fopen_str,
-    base_idea_active_requisite_str,
+    context_idea_active_requisite_str,
     give_force_str,
     take_force_str,
 )
@@ -705,7 +705,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_updat
     x_keylist = [atom_update(), bud_idea_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(fbase_str()) == knee_way
+    assert ball_budatom.get_value(fcontext_str()) == knee_way
     assert ball_budatom.get_value(fneed_str()) == damaged_way
     assert ball_budatom.get_value(fopen_str()) == after_fopen
     assert ball_budatom.get_value(fnigh_str()) == after_fnigh
@@ -744,7 +744,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_inser
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     print(f"{ball_budatom=}")
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(fbase_str()) == knee_way
+    assert ball_budatom.get_value(fcontext_str()) == knee_way
     assert ball_budatom.get_value(fneed_str()) == damaged_way
     assert ball_budatom.get_value(fopen_str()) == after_fopen
     assert ball_budatom.get_value(fnigh_str()) == after_fnigh
@@ -771,7 +771,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delet
     before_damaged_open = 55
     before_damaged_nigh = 66
     before_fact = factunit_shop(
-        fbase=knee_way,
+        fcontext=knee_way,
         fneed=damaged_way,
         fopen=before_damaged_open,
         fnigh=before_damaged_nigh,
@@ -787,7 +787,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delet
     x_keylist = [atom_delete(), bud_idea_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(fbase_str()) == knee_way
+    assert ball_budatom.get_value(fcontext_str()) == knee_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
@@ -810,7 +810,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
     before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
     before_sue_bud.edit_idea_attr(
-        ball_way, reason_base=knee_way, reason_premise=bend_way
+        ball_way, reason_context=knee_way, reason_premise=bend_way
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
@@ -819,7 +819,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     damaged_divisor = 3
     after_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=knee_way,
+        reason_context=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=damaged_open,
         reason_premise_nigh=damaged_nigh,
@@ -841,7 +841,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value("base") == knee_way
+    assert ball_budatom.get_value("context") == knee_way
     assert ball_budatom.get_value("need") == damaged_way
     assert ball_budatom.get_value("open") == damaged_open
     assert ball_budatom.get_value("nigh") == damaged_nigh
@@ -868,14 +868,14 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
     before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
     before_sue_bud.edit_idea_attr(
-        ball_way, reason_base=knee_way, reason_premise=bend_way
+        ball_way, reason_context=knee_way, reason_premise=bend_way
     )
     damaged_open = 45
     damaged_nigh = 77
     damaged_divisor = 3
     before_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=knee_way,
+        reason_context=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=damaged_open,
         reason_premise_nigh=damaged_nigh,
@@ -884,7 +884,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_sue_bud.edit_idea_attr(
         ball_way,
-        reason_del_premise_base=knee_way,
+        reason_del_premise_context=knee_way,
         reason_del_premise_need=damaged_way,
     )
 
@@ -903,7 +903,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value("base") == knee_way
+    assert ball_budatom.get_value("context") == knee_way
     assert ball_budatom.get_value("need") == damaged_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -927,14 +927,14 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
     before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
     before_sue_bud.edit_idea_attr(
-        ball_way, reason_base=knee_way, reason_premise=bend_way
+        ball_way, reason_context=knee_way, reason_premise=bend_way
     )
     before_damaged_open = 111
     before_damaged_nigh = 777
     before_damaged_divisor = 13
     before_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=knee_way,
+        reason_context=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=before_damaged_open,
         reason_premise_nigh=before_damaged_nigh,
@@ -947,7 +947,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     after_damaged_divisor = 78
     after_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=knee_way,
+        reason_context=knee_way,
         reason_premise=damaged_way,
         reason_premise_open=after_damaged_open,
         reason_premise_nigh=after_damaged_nigh,
@@ -969,7 +969,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value("base") == knee_way
+    assert ball_budatom.get_value("context") == knee_way
     assert ball_budatom.get_value("need") == damaged_way
     assert ball_budatom.get_value("open") == after_damaged_open
     assert ball_budatom.get_value("nigh") == after_damaged_nigh
@@ -994,11 +994,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_ins
     before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_base_idea_active_requisite = False
+    after_medical_context_idea_active_requisite = False
     after_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=medical_way,
-        reason_base_idea_active_requisite=after_medical_base_idea_active_requisite,
+        reason_context=medical_way,
+        reason_context_idea_active_requisite=after_medical_context_idea_active_requisite,
     )
 
     sue_buddelta = buddelta_shop()
@@ -1014,10 +1014,10 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_ins
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value("base") == medical_way
+    assert ball_budatom.get_value("context") == medical_way
     assert (
-        ball_budatom.get_value(base_idea_active_requisite_str())
-        == after_medical_base_idea_active_requisite
+        ball_budatom.get_value(context_idea_active_requisite_str())
+        == after_medical_context_idea_active_requisite
     )
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -1037,19 +1037,19 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_upd
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
     before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
     before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_way)
-    before_medical_base_idea_active_requisite = True
+    before_medical_context_idea_active_requisite = True
     before_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=medical_way,
-        reason_base_idea_active_requisite=before_medical_base_idea_active_requisite,
+        reason_context=medical_way,
+        reason_context_idea_active_requisite=before_medical_context_idea_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_base_idea_active_requisite = False
+    after_medical_context_idea_active_requisite = False
     after_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=medical_way,
-        reason_base_idea_active_requisite=after_medical_base_idea_active_requisite,
+        reason_context=medical_way,
+        reason_context_idea_active_requisite=after_medical_context_idea_active_requisite,
     )
 
     # WHEN
@@ -1066,10 +1066,10 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_upd
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value("base") == medical_way
+    assert ball_budatom.get_value("context") == medical_way
     assert (
-        ball_budatom.get_value(base_idea_active_requisite_str())
-        == after_medical_base_idea_active_requisite
+        ball_budatom.get_value(context_idea_active_requisite_str())
+        == after_medical_context_idea_active_requisite
     )
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -1089,16 +1089,16 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_del
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
     before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
     before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_way)
-    before_medical_base_idea_active_requisite = True
+    before_medical_context_idea_active_requisite = True
     before_sue_bud.edit_idea_attr(
         ball_way,
-        reason_base=medical_way,
-        reason_base_idea_active_requisite=before_medical_base_idea_active_requisite,
+        reason_context=medical_way,
+        reason_context_idea_active_requisite=before_medical_context_idea_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_idea = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_idea.del_reasonunit_base(medical_way)
+    after_ball_idea.del_reasonunit_context(medical_way)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1114,7 +1114,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_del
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value("base") == medical_way
+    assert ball_budatom.get_value("context") == medical_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
 

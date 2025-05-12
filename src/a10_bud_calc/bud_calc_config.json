@@ -246,7 +246,7 @@
     "bud_idea_factunit": {
         "abbreviation": "budfact",
         "jkeys": {
-            "fbase": {
+            "fcontext": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -313,7 +313,7 @@
     "bud_idea_reason_premiseunit": {
         "abbreviation": "budprem",
         "jkeys": {
-            "base": {
+            "context": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -366,7 +366,7 @@
     "bud_idea_reasonunit": {
         "abbreviation": "budreas",
         "jkeys": {
-            "base": {
+            "context": {
                 "class_type": "WayUnit",
                 "sqlite_datatype": "TEXT"
             },
@@ -388,7 +388,7 @@
             }
         },
         "jmetrics": {
-            "_base_idea_active_value": {
+            "_context_idea_active_value": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -402,7 +402,7 @@
             }
         },
         "jvalues": {
-            "base_idea_active_requisite": {
+            "context_idea_active_requisite": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
