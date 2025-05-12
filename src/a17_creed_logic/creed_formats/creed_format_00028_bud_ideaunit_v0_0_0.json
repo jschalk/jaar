@@ -24,6 +24,9 @@
         "gogo_want": {
             "otx_key": false
         },
+        "idea_way": {
+            "otx_key": true
+        },
         "mass": {
             "otx_key": false
         },
@@ -42,17 +45,14 @@
         "problem_bool": {
             "otx_key": false
         },
-        "idea_way": {
-            "otx_key": true
-        },
         "stop_want": {
             "otx_key": false
         }
     },
+    "creed_number": "br00028",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit"
-    ],
-    "creed_number": "br00028"
+    ]
 }

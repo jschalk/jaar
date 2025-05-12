@@ -191,12 +191,6 @@
             "atom_order": 8
         },
         "jkeys": {
-            "rcontext": {
-                "class_type": "WayStr",
-                "column_order": 1,
-                "nesting_order": 1,
-                "sqlite_datatype": "TEXT"
-            },
             "idea_way": {
                 "class_type": "WayStr",
                 "column_order": 0,
@@ -207,6 +201,12 @@
                 "class_type": "WayStr",
                 "column_order": 2,
                 "nesting_order": 2,
+                "sqlite_datatype": "TEXT"
+            },
+            "rcontext": {
+                "class_type": "WayStr",
+                "column_order": 1,
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -242,16 +242,16 @@
             "atom_order": 7
         },
         "jkeys": {
-            "rcontext": {
-                "class_type": "WayStr",
-                "column_order": 1,
-                "nesting_order": 1,
-                "sqlite_datatype": "TEXT"
-            },
             "idea_way": {
                 "class_type": "WayStr",
                 "column_order": 0,
                 "nesting_order": 0,
+                "sqlite_datatype": "TEXT"
+            },
+            "rcontext": {
+                "class_type": "WayStr",
+                "column_order": 1,
+                "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         },

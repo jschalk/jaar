@@ -12,18 +12,18 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "owner_name": {
+        "idea_way": {
             "otx_key": true
         },
-        "idea_way": {
+        "owner_name": {
             "otx_key": true
         }
     },
+    "creed_number": "br00052",
     "dimens": [
         "budunit",
         "fiscunit",
         "bud_ideaunit",
         "bud_idea_awardlink"
-    ],
-    "creed_number": "br00052"
+    ]
 }

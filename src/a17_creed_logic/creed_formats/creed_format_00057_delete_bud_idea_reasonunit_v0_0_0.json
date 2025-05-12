@@ -1,8 +1,5 @@
 {
     "attributes": {
-        "rcontext_ERASE": {
-            "otx_key": true
-        },
         "event_int": {
             "otx_key": true
         },
@@ -12,18 +9,21 @@
         "fisc_tag": {
             "otx_key": true
         },
+        "idea_way": {
+            "otx_key": true
+        },
         "owner_name": {
             "otx_key": true
         },
-        "idea_way": {
+        "rcontext_ERASE": {
             "otx_key": true
         }
     },
+    "creed_number": "br00057",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit",
         "bud_idea_reasonunit"
-    ],
-    "creed_number": "br00057"
+    ]
 }

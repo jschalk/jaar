@@ -12,18 +12,18 @@
         "healer_name_ERASE": {
             "otx_key": true
         },
-        "owner_name": {
+        "idea_way": {
             "otx_key": true
         },
-        "idea_way": {
+        "owner_name": {
             "otx_key": true
         }
     },
+    "creed_number": "br00055",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit",
         "bud_idea_healerlink"
-    ],
-    "creed_number": "br00055"
+    ]
 }

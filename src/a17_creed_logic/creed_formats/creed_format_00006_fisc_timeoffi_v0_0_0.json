@@ -13,9 +13,9 @@
             "otx_key": true
         }
     },
+    "creed_number": "br00006",
     "dimens": [
         "fiscunit",
         "fisc_timeoffi"
-    ],
-    "creed_number": "br00006"
+    ]
 }

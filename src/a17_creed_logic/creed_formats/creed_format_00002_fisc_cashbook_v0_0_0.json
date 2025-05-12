@@ -22,11 +22,11 @@
             "otx_key": true
         }
     },
+    "creed_number": "br00002",
     "dimens": [
         "fiscunit",
         "fisc_cashbook",
         "bud_acctunit",
         "budunit"
-    ],
-    "creed_number": "br00002"
+    ]
 }

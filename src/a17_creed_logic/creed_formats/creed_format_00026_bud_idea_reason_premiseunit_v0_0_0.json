@@ -1,11 +1,5 @@
 {
     "attributes": {
-        "rcontext": {
-            "otx_key": true
-        },
-        "pdivisor": {
-            "otx_key": false
-        },
         "event_int": {
             "otx_key": true
         },
@@ -15,8 +9,17 @@
         "fisc_tag": {
             "otx_key": true
         },
+        "idea_way": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
         "pbranch": {
             "otx_key": true
+        },
+        "pdivisor": {
+            "otx_key": false
         },
         "pnigh": {
             "otx_key": false
@@ -24,19 +27,16 @@
         "popen": {
             "otx_key": false
         },
-        "owner_name": {
-            "otx_key": true
-        },
-        "idea_way": {
+        "rcontext": {
             "otx_key": true
         }
     },
+    "creed_number": "br00026",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit",
         "bud_idea_reasonunit",
         "bud_idea_reason_premiseunit"
-    ],
-    "creed_number": "br00026"
+    ]
 }

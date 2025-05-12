@@ -172,7 +172,6 @@ def pidginable_atom_args() -> set:
     return {
         "acct_name",
         "awardee_label",
-        "rcontext",
         "face_name",
         "fcontext",
         "fisc_tag",
@@ -184,6 +183,7 @@ def pidginable_atom_args() -> set:
         "month_tag",
         "owner_name",
         "pbranch",
+        "rcontext",
         "team_label",
         "timeline_tag",
         "weekday_tag",

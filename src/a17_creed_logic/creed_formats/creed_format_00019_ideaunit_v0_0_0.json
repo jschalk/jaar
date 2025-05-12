@@ -24,6 +24,9 @@
         "gogo_want": {
             "otx_key": false
         },
+        "idea_way": {
+            "otx_key": true
+        },
         "morph": {
             "otx_key": false
         },
@@ -33,17 +36,14 @@
         "owner_name": {
             "otx_key": true
         },
-        "idea_way": {
-            "otx_key": true
-        },
         "stop_want": {
             "otx_key": false
         }
     },
+    "creed_number": "br00019",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit"
-    ],
-    "creed_number": "br00019"
+    ]
 }

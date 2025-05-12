@@ -37,9 +37,9 @@
             "otx_key": false
         }
     },
+    "creed_number": "br00029",
     "dimens": [
         "fiscunit",
         "budunit"
-    ],
-    "creed_number": "br00029"
+    ]
 }
