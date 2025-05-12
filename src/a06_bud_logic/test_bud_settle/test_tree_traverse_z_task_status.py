@@ -243,7 +243,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
 
     # WHEN
     sue_budunit.add_fact(
-        fcontext=day24hr_context,
+        day24hr_context,
         fbranch=day24hr_fbranch,
         fopen=day24hr_open,
         fnigh=day24hr_nigh,
@@ -259,7 +259,7 @@ def test_BudUnit_settle_bud_CorrectlyCalculatesRangeAttributes():
     day24hr_nigh = 10.0
     print(sue_budunit.idearoot.factunits[day24hr_way])
     sue_budunit.add_fact(
-        fcontext=day24hr_context,
+        day24hr_context,
         fbranch=day24hr_fbranch,
         fopen=day24hr_open,
         fnigh=day24hr_nigh,
@@ -511,7 +511,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
 
     # WHEN
     yao_budunit.add_fact(
-        fcontext=ced_week_context,
+        ced_week_context,
         fbranch=ced_week_context,
         fopen=ced_week_open,
         fnigh=ced_week_open,
@@ -620,7 +620,7 @@ def test_BudUnit_settle_bud_EveryTwoMonthReturnsObj_budunit_v001():
 
     # WHEN
     yao_budunit.add_fact(
-        fcontext=year_month_context, fbranch=year_month_context, fopen=0, fnigh=8
+        year_month_context, fbranch=year_month_context, fopen=0, fnigh=8
     )
     ced_week = yao_budunit.make_l1_way("ced_week")
     yao_budunit.add_fact(fcontext=ced_week, fbranch=ced_week, fopen=0, fnigh=4)

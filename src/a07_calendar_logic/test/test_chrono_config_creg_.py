@@ -585,9 +585,7 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeIdeasOutsideRange():
     # WHEN
     open_x = 2063971110
     nigh_x1 = 2063971523
-    sue_bud.add_fact(
-        fcontext=cregtime_way, fbranch=cregtime_way, fopen=open_x, fnigh=nigh_x1
-    )
+    sue_bud.add_fact(cregtime_way, fbranch=cregtime_way, fopen=open_x, fnigh=nigh_x1)
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()
@@ -599,10 +597,8 @@ def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeIdeasOutsideRange():
     # nigh_x2 = 1063971923
     open_x2 = 0
     nigh_x2 = 0
-    sue_bud.add_fact(
-        fcontext=cregtime_way, fbranch=cregtime_way, fopen=open_x2, fnigh=nigh_x2
-    )
-    print(f"YAYA {sue_bud.idearoot.factunits=}")
+    sue_bud.add_fact(cregtime_way, fbranch=cregtime_way, fopen=open_x2, fnigh=nigh_x2)
+    print(f"{sue_bud.idearoot.factunits=}")
 
     # THEN
     agenda_dict = sue_bud.get_agenda_dict()

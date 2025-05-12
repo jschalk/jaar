@@ -136,7 +136,7 @@ def test_BudUnit_get_missing_fact_contexts_ReturnsAllContextsNotCoveredByFacts()
     assert len(missing_contexts) == 11
 
     yao_budunit.add_fact(
-        fcontext=yao_budunit.make_l1_way("day_minute"),
+        yao_budunit.make_l1_way("day_minute"),
         fbranch=yao_budunit.make_l1_way("day_minute"),
         fopen=0,
         fnigh=1439,
