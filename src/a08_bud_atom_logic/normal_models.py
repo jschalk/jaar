@@ -75,7 +75,7 @@ class PremiseTable(Base):
     __tablename__ = "premise"
     uid = Column(Integer, primary_key=True)
     rcontext = Column(String)
-    rbranch = Column(String)
+    pbranch = Column(String)
     idea_way = Column(String)
     divisor = Column(Integer)
     pnigh = Column(Float)

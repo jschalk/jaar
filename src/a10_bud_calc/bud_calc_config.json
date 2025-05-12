@@ -321,7 +321,7 @@
                 "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
-            "rbranch": {
+            "pbranch": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },

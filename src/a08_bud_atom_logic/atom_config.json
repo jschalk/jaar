@@ -203,7 +203,7 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "rbranch": {
+            "pbranch": {
                 "class_type": "WayStr",
                 "column_order": 2,
                 "nesting_order": 2,

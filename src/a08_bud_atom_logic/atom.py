@@ -371,7 +371,7 @@ def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
         reason_del_premise_rcontext=x_atom.get_value("rcontext"),
-        reason_del_premise_rbranch=x_atom.get_value("rbranch"),
+        reason_del_premise_pbranch=x_atom.get_value("pbranch"),
     )
 
 
@@ -379,7 +379,7 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_premise=x_atom.get_value("rbranch"),
+        reason_premise=x_atom.get_value("pbranch"),
         reason_premise_open=x_atom.get_value("open"),
         reason_pnigh=x_atom.get_value("pnigh"),
         reason_premise_divisor=x_atom.get_value("divisor"),
@@ -390,7 +390,7 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
     x_ideaunit.set_reason_premise(
         rcontext=x_atom.get_value("rcontext"),
-        premise=x_atom.get_value("rbranch"),
+        premise=x_atom.get_value("pbranch"),
         open=x_atom.get_value("open"),
         pnigh=x_atom.get_value("pnigh"),
         divisor=x_atom.get_value("divisor"),
@@ -642,7 +642,7 @@ class AtomRow:
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    rbranch: WayStr = None
+    pbranch: WayStr = None
     pnigh: float = None
     numor: int = None
     open: float = None

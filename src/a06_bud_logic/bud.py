@@ -471,7 +471,7 @@ class BudUnit:
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason rcontext "timeline,weeks" with premise.rbranch = "timeline,weeks"
+            # there exists a reason rcontext "timeline,weeks" with premise.pbranch = "timeline,weeks"
             # and (1,2) divisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
@@ -684,7 +684,7 @@ class BudUnit:
         for x_reason in posted_idea.reasonunits.values():
             self._create_ideakid_if_empty(way=x_reason.rcontext)
             for premise_x in x_reason.premises.values():
-                self._create_ideakid_if_empty(way=premise_x.rbranch)
+                self._create_ideakid_if_empty(way=premise_x.pbranch)
 
     def _create_ideakid_if_empty(self, way: WayStr):
         if self.idea_exists(way) is False:
@@ -796,7 +796,7 @@ class BudUnit:
         reason_pnigh: float = None,
         reason_premise_divisor: int = None,
         reason_del_premise_rcontext: WayStr = None,
-        reason_del_premise_rbranch: WayStr = None,
+        reason_del_premise_pbranch: WayStr = None,
         reason_rcontext_idea_active_requisite: str = None,
         teamunit: TeamUnit = None,
         healerlink: HealerLink = None,
@@ -834,7 +834,7 @@ class BudUnit:
             reason_pnigh=reason_pnigh,
             reason_premise_divisor=reason_premise_divisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,
-            reason_del_premise_rbranch=reason_del_premise_rbranch,
+            reason_del_premise_pbranch=reason_del_premise_pbranch,
             reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
             teamunit=teamunit,
             healerlink=healerlink,

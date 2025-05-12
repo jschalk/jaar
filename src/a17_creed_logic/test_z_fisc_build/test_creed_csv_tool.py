@@ -79,7 +79,7 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00023": "fisc_tag,owner_name,idea_way,fcontext,fbranch,fopen,fnigh\n",
         "br00024": "fisc_tag,owner_name,idea_way,team_label\n",
         "br00025": "fisc_tag,owner_name,idea_way,healer_name\n",
-        "br00026": "fisc_tag,owner_name,idea_way,rcontext,rbranch,pnigh,open,divisor\n",
+        "br00026": "fisc_tag,owner_name,idea_way,rcontext,pbranch,pnigh,open,divisor\n",
         "br00027": "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite\n",
         "br00028": "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",

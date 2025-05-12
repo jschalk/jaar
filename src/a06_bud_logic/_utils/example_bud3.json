@@ -601,7 +601,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -612,7 +612,7 @@
                     "premises": {
                       ";accord45;year_month;September": {
                         "divisor": 12,
-                        "rbranch": ";accord45;year_month;September",
+                        "pbranch": ";accord45;year_month;September",
                         "pnigh": 9,
                         "open": 9
                       }
@@ -632,7 +632,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -643,7 +643,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -667,7 +667,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -678,7 +678,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -704,7 +704,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -715,7 +715,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -754,7 +754,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -765,7 +765,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -791,7 +791,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -802,7 +802,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -828,7 +828,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -839,7 +839,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -863,7 +863,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -874,7 +874,7 @@
                         "premises": {
                           ";accord45;year_month;September": {
                             "divisor": 12,
-                            "rbranch": ";accord45;year_month;September",
+                            "pbranch": ";accord45;year_month;September",
                             "pnigh": 9,
                             "open": 9
                           }
@@ -908,7 +908,7 @@
                             "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
-                                "rbranch": ";accord45;day_minute",
+                                "pbranch": ";accord45;day_minute",
                                 "pnigh": 360,
                                 "open": 360
                               }
@@ -948,7 +948,7 @@
                             "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
-                                "rbranch": ";accord45;day_minute",
+                                "pbranch": ";accord45;day_minute",
                                 "pnigh": 360,
                                 "open": 360
                               }
@@ -965,7 +965,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 360,
                             "open": 360
                           }
@@ -983,7 +983,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 450,
                             "open": 450
                           }
@@ -1002,7 +1002,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 525,
                             "open": 525
                           }
@@ -1019,7 +1019,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 1320,
                         "open": 360
                       }
@@ -1039,7 +1039,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -1057,7 +1057,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 541,
                             "open": 540
                           }
@@ -1077,7 +1077,7 @@
                             "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
-                                "rbranch": ";accord45;day_minute",
+                                "pbranch": ";accord45;day_minute",
                                 "pnigh": 540,
                                 "open": 540
                               }
@@ -1117,7 +1117,7 @@
                             "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
-                                "rbranch": ";accord45;day_minute",
+                                "pbranch": ";accord45;day_minute",
                                 "pnigh": 480,
                                 "open": 480
                               }
@@ -1135,7 +1135,7 @@
                             "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
-                                "rbranch": ";accord45;day_minute",
+                                "pbranch": ";accord45;day_minute",
                                 "pnigh": 582,
                                 "open": 582
                               }
@@ -1157,7 +1157,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 1019,
                             "open": 540
                           }
@@ -1175,7 +1175,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 540,
                             "open": 540
                           }
@@ -1194,7 +1194,7 @@
                             "rcontext": ";accord45;day_minute",
                             "premises": {
                               ";accord45;day_minute": {
-                                "rbranch": ";accord45;day_minute",
+                                "pbranch": ";accord45;day_minute",
                                 "pnigh": 541,
                                 "open": 540
                               }
@@ -1211,7 +1211,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 1020,
                             "open": 540
                           }
@@ -1229,7 +1229,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 1019,
                         "open": 540
                       }
@@ -1246,7 +1246,7 @@
                 "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
-                    "rbranch": ";accord45;day_minute",
+                    "pbranch": ";accord45;day_minute",
                     "pnigh": 1379,
                     "open": 360
                   }
@@ -1280,7 +1280,7 @@
                                 "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace": {
-                                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace"
+                                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;workspace"
                                   }
                                 }
                               }
@@ -1295,7 +1295,7 @@
                                 "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                                   }
                                 }
                               }
@@ -1312,7 +1312,7 @@
                                     "rcontext": ";accord45;Interweb",
                                     "premises": {
                                       ";accord45;Interweb;YahooVideo": {
-                                        "rbranch": ";accord45;Interweb;YahooVideo"
+                                        "pbranch": ";accord45;Interweb;YahooVideo"
                                       }
                                     }
                                   }
@@ -1327,7 +1327,7 @@
                                 "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden": {
-                                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden"
+                                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;10th floor gaarden"
                                   }
                                 }
                               }
@@ -1342,7 +1342,7 @@
                                 "rcontext": ";accord45;Moods",
                                 "premises": {
                                   ";accord45;Moods;hungry": {
-                                    "rbranch": ";accord45;Moods;hungry"
+                                    "pbranch": ";accord45;Moods;hungry"
                                   }
                                 }
                               }
@@ -1357,7 +1357,7 @@
                             "rcontext": ";accord45;Nation-States",
                             "premises": {
                               ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt": {
-                                "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt"
+                                "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt"
                               }
                             }
                           }
@@ -1374,7 +1374,7 @@
                                 "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library": {
-                                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library"
+                                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,library"
                                   }
                                 }
                               }
@@ -1389,7 +1389,7 @@
                                 "rcontext": ";accord45;Seasons",
                                 "premises": {
                                   ";accord45;Seasons;Summer": {
-                                    "rbranch": ";accord45;Seasons;Summer"
+                                    "pbranch": ";accord45;Seasons;Summer"
                                   }
                                 }
                               }
@@ -1404,7 +1404,7 @@
                                 "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field": {
-                                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
+                                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
                                   }
                                 }
                               }
@@ -1419,7 +1419,7 @@
                                 "rcontext": ";accord45;Nation-States",
                                 "premises": {
                                   ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool": {
-                                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"
+                                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"
                                   }
                                 }
                               }
@@ -1434,7 +1434,7 @@
                             "rcontext": ";accord45;Nation-States",
                             "premises": {
                               ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU": {
-                                "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU"
+                                "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU"
                               }
                             }
                           }
@@ -1449,7 +1449,7 @@
                         "rcontext": ";accord45;Nation-States",
                         "premises": {
                           ";accord45;Nation-States;USA;Portland; OR;Downtown": {
-                            "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown"
+                            "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown"
                           }
                         }
                       }
@@ -1464,7 +1464,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland OR"
+                        "pbranch": ";accord45;Nation-States;USA;Portland OR"
                       }
                     }
                   }
@@ -1479,7 +1479,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Texas": {
-                        "rbranch": ";accord45;Nation-States;USA;Texas"
+                        "pbranch": ";accord45;Nation-States;USA;Texas"
                       }
                     }
                   }
@@ -1494,7 +1494,7 @@
                 "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;USA": {
-                    "rbranch": ";accord45;Nation-States;USA"
+                    "pbranch": ";accord45;Nation-States;USA"
                   }
                 }
               }
@@ -1509,7 +1509,7 @@
                 "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;France2": {
-                    "rbranch": ";accord45;Nation-States;France2"
+                    "pbranch": ";accord45;Nation-States;France2"
                   }
                 }
               }
@@ -1557,7 +1557,7 @@
                 "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
-                    "rbranch": ";accord45;day_minute",
+                    "pbranch": ";accord45;day_minute",
                     "pnigh": 540,
                     "open": 540
                   }
@@ -1568,7 +1568,7 @@
                 "premises": {
                   ";accord45;year_month": {
                     "divisor": 3,
-                    "rbranch": ";accord45;year_month",
+                    "pbranch": ";accord45;year_month",
                     "pnigh": 0,
                     "open": 0
                   }
@@ -1585,7 +1585,7 @@
                 "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Happy,Happy - angerish": {
-                    "rbranch": ";accord45;Moods;Happy,Happy - angerish"
+                    "pbranch": ";accord45;Moods;Happy,Happy - angerish"
                   }
                 }
               }
@@ -1611,7 +1611,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -1621,7 +1621,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1629,7 +1629,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Sunday": {
-                        "rbranch": ";accord45;weekdays;Sunday"
+                        "pbranch": ";accord45;weekdays;Sunday"
                       }
                     }
                   }
@@ -1645,7 +1645,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -1655,7 +1655,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   }
@@ -1678,7 +1678,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -1688,7 +1688,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1697,7 +1697,7 @@
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 3,
-                        "rbranch": ";accord45;year_month",
+                        "pbranch": ";accord45;year_month",
                         "pnigh": 0,
                         "open": 0
                       }
@@ -1722,7 +1722,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 600,
                         "open": 600
                       }
@@ -1732,7 +1732,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   }
@@ -1755,7 +1755,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 480,
                         "open": 480
                       }
@@ -1765,7 +1765,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1773,7 +1773,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -1796,7 +1796,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -1806,7 +1806,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1814,7 +1814,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -1838,7 +1838,7 @@
                     "premises": {
                       ";accord45;ced_week": {
                         "divisor": 6,
-                        "rbranch": ";accord45;ced_week",
+                        "pbranch": ";accord45;ced_week",
                         "pnigh": 1,
                         "open": 1
                       }
@@ -1848,7 +1848,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -1858,7 +1858,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1866,7 +1866,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -1889,7 +1889,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -1899,7 +1899,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1907,7 +1907,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -1930,7 +1930,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -1940,7 +1940,7 @@
                     "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
-                        "rbranch": ";accord45;month_week;1st week"
+                        "pbranch": ";accord45;month_week;1st week"
                       }
                     }
                   },
@@ -1948,7 +1948,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -1957,7 +1957,7 @@
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 2,
-                        "rbranch": ";accord45;year_month",
+                        "pbranch": ";accord45;year_month",
                         "pnigh": 0,
                         "open": 0
                       }
@@ -1982,7 +1982,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 480,
                         "open": 480
                       }
@@ -1992,7 +1992,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2000,7 +2000,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
-                        "rbranch": ";accord45;weekdays;Friday"
+                        "pbranch": ";accord45;weekdays;Friday"
                       }
                     }
                   }
@@ -2023,7 +2023,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 480,
                         "open": 480
                       }
@@ -2033,7 +2033,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2041,7 +2041,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
-                        "rbranch": ";accord45;weekdays;Friday"
+                        "pbranch": ";accord45;weekdays;Friday"
                       }
                     }
                   }
@@ -2064,7 +2064,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -2074,7 +2074,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2082,7 +2082,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -2105,7 +2105,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2115,7 +2115,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2123,7 +2123,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Saturday": {
-                        "rbranch": ";accord45;weekdays;Saturday"
+                        "pbranch": ";accord45;weekdays;Saturday"
                       }
                     }
                   }
@@ -2146,7 +2146,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2156,7 +2156,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2164,7 +2164,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Wednesday": {
-                        "rbranch": ";accord45;weekdays;Wednesday"
+                        "pbranch": ";accord45;weekdays;Wednesday"
                       }
                     }
                   }
@@ -2179,7 +2179,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 480,
                         "open": 480
                       }
@@ -2189,7 +2189,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   }
@@ -2212,7 +2212,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 360,
                         "open": 360
                       }
@@ -2222,7 +2222,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   }
@@ -2245,7 +2245,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2255,7 +2255,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2263,7 +2263,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Tuesday": {
-                        "rbranch": ";accord45;weekdays;Tuesday"
+                        "pbranch": ";accord45;weekdays;Tuesday"
                       }
                     }
                   }
@@ -2286,7 +2286,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2296,7 +2296,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2304,7 +2304,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
-                        "rbranch": ";accord45;weekdays;Friday"
+                        "pbranch": ";accord45;weekdays;Friday"
                       }
                     }
                   }
@@ -2327,7 +2327,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 480,
                         "open": 480
                       }
@@ -2337,7 +2337,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2345,7 +2345,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -2368,7 +2368,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2378,7 +2378,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2386,7 +2386,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Thursday": {
-                        "rbranch": ";accord45;weekdays;Thursday"
+                        "pbranch": ";accord45;weekdays;Thursday"
                       }
                     }
                   }
@@ -2409,7 +2409,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -2419,7 +2419,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2427,7 +2427,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -2450,7 +2450,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -2460,7 +2460,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                        "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                       }
                     }
                   },
@@ -2468,7 +2468,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -2483,7 +2483,7 @@
                 "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX": {
-                    "rbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
+                    "pbranch": ";accord45;Nation-States;USA;Portland; OR;Downtown;Southpark Apt;Apt X4XX"
                   }
                 }
               }
@@ -2508,7 +2508,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2533,7 +2533,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2558,7 +2558,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -2569,7 +2569,7 @@
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 3,
-                        "rbranch": ";accord45;year_month",
+                        "pbranch": ";accord45;year_month",
                         "pnigh": 0,
                         "open": 0
                       }
@@ -2594,7 +2594,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -2604,7 +2604,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -2627,7 +2627,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -2647,7 +2647,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -2672,7 +2672,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 960,
                         "open": 960
                       }
@@ -2697,7 +2697,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -2708,7 +2708,7 @@
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 3,
-                        "rbranch": ";accord45;year_month",
+                        "pbranch": ";accord45;year_month",
                         "pnigh": 0,
                         "open": 0
                       }
@@ -2735,7 +2735,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -2745,7 +2745,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Saturday": {
-                            "rbranch": ";accord45;weekdays;Saturday"
+                            "pbranch": ";accord45;weekdays;Saturday"
                           }
                         }
                       }
@@ -2783,7 +2783,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -2793,7 +2793,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Monday": {
-                            "rbranch": ";accord45;weekdays;Monday"
+                            "pbranch": ";accord45;weekdays;Monday"
                           }
                         }
                       }
@@ -2808,7 +2808,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 482,
                             "open": 482
                           }
@@ -2818,7 +2818,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Friday": {
-                            "rbranch": ";accord45;weekdays;Friday"
+                            "pbranch": ";accord45;weekdays;Friday"
                           }
                         }
                       }
@@ -2841,7 +2841,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -2851,7 +2851,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Wednesday": {
-                            "rbranch": ";accord45;weekdays;Wednesday"
+                            "pbranch": ";accord45;weekdays;Wednesday"
                           }
                         }
                       }
@@ -2874,7 +2874,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Sunday": {
-                            "rbranch": ";accord45;weekdays;Sunday"
+                            "pbranch": ";accord45;weekdays;Sunday"
                           }
                         }
                       }
@@ -2912,7 +2912,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -2922,7 +2922,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Tuesday": {
-                            "rbranch": ";accord45;weekdays;Tuesday"
+                            "pbranch": ";accord45;weekdays;Tuesday"
                           }
                         }
                       }
@@ -2945,7 +2945,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -2955,7 +2955,7 @@
                         "rcontext": ";accord45;weekdays",
                         "premises": {
                           ";accord45;weekdays;Thursday": {
-                            "rbranch": ";accord45;weekdays;Thursday"
+                            "pbranch": ";accord45;weekdays;Thursday"
                           }
                         }
                       }
@@ -2983,7 +2983,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -3000,7 +3000,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 1080,
                         "open": 1080
                       }
@@ -3025,7 +3025,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -3035,7 +3035,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -3058,7 +3058,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 420,
                         "open": 420
                       }
@@ -3083,7 +3083,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -3093,7 +3093,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -3124,7 +3124,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -3134,7 +3134,7 @@
                     "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
-                        "rbranch": ";accord45;month_week;1st week"
+                        "pbranch": ";accord45;month_week;1st week"
                       }
                     }
                   }
@@ -3157,7 +3157,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -3167,7 +3167,7 @@
                     "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
-                        "rbranch": ";accord45;month_week;1st week"
+                        "pbranch": ";accord45;month_week;1st week"
                       }
                     }
                   }
@@ -3190,7 +3190,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -3200,7 +3200,7 @@
                     "rcontext": ";accord45;month_week",
                     "premises": {
                       ";accord45;month_week;1st week": {
-                        "rbranch": ";accord45;month_week;1st week"
+                        "pbranch": ";accord45;month_week;1st week"
                       }
                     }
                   }
@@ -3223,7 +3223,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 540,
                         "open": 540
                       }
@@ -3233,7 +3233,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Tuesday": {
-                        "rbranch": ";accord45;weekdays;Tuesday"
+                        "pbranch": ";accord45;weekdays;Tuesday"
                       }
                     }
                   }
@@ -3374,7 +3374,7 @@
                 "rcontext": ";accord45;Interweb",
                 "premises": {
                   ";accord45;Interweb;Faaceboook": {
-                    "rbranch": ";accord45;Interweb;Faaceboook"
+                    "pbranch": ";accord45;Interweb;Faaceboook"
                   }
                 }
               }
@@ -3401,7 +3401,7 @@
                     "premises": {
                       ";accord45;ced_week": {
                         "divisor": 2,
-                        "rbranch": ";accord45;ced_week",
+                        "pbranch": ";accord45;ced_week",
                         "pnigh": 1,
                         "open": 1
                       }
@@ -3411,7 +3411,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 241,
                         "open": 240
                       }
@@ -3421,7 +3421,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland OR"
+                        "pbranch": ";accord45;Nation-States;USA;Portland OR"
                       }
                     }
                   },
@@ -3429,7 +3429,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
-                        "rbranch": ";accord45;weekdays;Friday"
+                        "pbranch": ";accord45;weekdays;Friday"
                       }
                     }
                   }
@@ -3452,7 +3452,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 541,
                         "open": 540
                       }
@@ -3462,7 +3462,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland OR"
+                        "pbranch": ";accord45;Nation-States;USA;Portland OR"
                       }
                     }
                   },
@@ -3471,7 +3471,7 @@
                     "premises": {
                       ";accord45;year_month": {
                         "divisor": 2,
-                        "rbranch": ";accord45;year_month",
+                        "pbranch": ";accord45;year_month",
                         "pnigh": 0,
                         "open": 0
                       }
@@ -3489,7 +3489,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 1005,
                         "open": 1005
                       }
@@ -3499,7 +3499,7 @@
                     "rcontext": ";accord45;Nation-States",
                     "premises": {
                       ";accord45;Nation-States;USA;Portland OR": {
-                        "rbranch": ";accord45;Nation-States;USA;Portland OR"
+                        "pbranch": ";accord45;Nation-States;USA;Portland OR"
                       }
                     }
                   }
@@ -3514,7 +3514,7 @@
                 "rcontext": ";accord45;Nation-States",
                 "premises": {
                   ";accord45;Nation-States;USA;Portland OR": {
-                    "rbranch": ";accord45;Nation-States;USA;Portland OR"
+                    "pbranch": ";accord45;Nation-States;USA;Portland OR"
                   }
                 }
               }
@@ -3537,7 +3537,7 @@
                 "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
-                    "rbranch": ";accord45;day_minute",
+                    "pbranch": ";accord45;day_minute",
                     "pnigh": 425,
                     "open": 420
                   }
@@ -3547,7 +3547,7 @@
                 "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Bllod Meridan by Cormac": {
-                    "rbranch": ";accord45;Moods;Bllod Meridan by Cormac"
+                    "pbranch": ";accord45;Moods;Bllod Meridan by Cormac"
                   }
                 }
               }
@@ -3598,7 +3598,7 @@
                     "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                        "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                       }
                     }
                   }
@@ -3620,7 +3620,7 @@
                 "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                    "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                   }
                 }
               }
@@ -3638,7 +3638,7 @@
                     "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                        "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                       }
                     }
                   },
@@ -3646,7 +3646,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 660,
                         "open": 660
                       }
@@ -3656,7 +3656,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Monday": {
-                        "rbranch": ";accord45;weekdays;Monday"
+                        "pbranch": ";accord45;weekdays;Monday"
                       }
                     }
                   }
@@ -3678,7 +3678,7 @@
                 "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                    "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                   }
                 }
               }
@@ -3704,7 +3704,7 @@
                     "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                        "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                       }
                     }
                   },
@@ -3713,7 +3713,7 @@
                     "premises": {
                       ";accord45;ced_week": {
                         "divisor": 2,
-                        "rbranch": ";accord45;ced_week",
+                        "pbranch": ";accord45;ced_week",
                         "pnigh": 0,
                         "open": 0
                       }
@@ -3723,7 +3723,7 @@
                     "rcontext": ";accord45;day_minute",
                     "premises": {
                       ";accord45;day_minute": {
-                        "rbranch": ";accord45;day_minute",
+                        "pbranch": ";accord45;day_minute",
                         "pnigh": 600,
                         "open": 600
                       }
@@ -3733,7 +3733,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
-                        "rbranch": ";accord45;weekdays;Friday"
+                        "pbranch": ";accord45;weekdays;Friday"
                       }
                     }
                   }
@@ -3748,7 +3748,7 @@
                 "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                    "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                   }
                 }
               }
@@ -3764,7 +3764,7 @@
                 "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                    "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                   }
                 }
               }
@@ -3792,7 +3792,7 @@
                         "rcontext": ";accord45;Aaron Donald objects effected by him",
                         "premises": {
                           ";accord45;Aaron Donald objects effected by him;interesting": {
-                            "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                            "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                           }
                         }
                       },
@@ -3800,7 +3800,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 669,
                             "open": 666
                           }
@@ -3830,7 +3830,7 @@
                         "rcontext": ";accord45;Aaron Donald objects effected by him",
                         "premises": {
                           ";accord45;Aaron Donald objects effected by him;interesting": {
-                            "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                            "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                           }
                         }
                       },
@@ -3838,7 +3838,7 @@
                         "rcontext": ";accord45;day_minute",
                         "premises": {
                           ";accord45;day_minute": {
-                            "rbranch": ";accord45;day_minute",
+                            "pbranch": ";accord45;day_minute",
                             "pnigh": 480,
                             "open": 480
                           }
@@ -3849,7 +3849,7 @@
                         "premises": {
                           ";accord45;year_month": {
                             "divisor": 1,
-                            "rbranch": ";accord45;year_month",
+                            "pbranch": ";accord45;year_month",
                             "pnigh": 0,
                             "open": 0
                           }
@@ -3873,7 +3873,7 @@
                     "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                        "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                       }
                     }
                   }
@@ -3888,7 +3888,7 @@
                 "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                    "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                   }
                 }
               }
@@ -3913,7 +3913,7 @@
                     "rcontext": ";accord45;Aaron Donald objects effected by him",
                     "premises": {
                       ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                        "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                       }
                     }
                   },
@@ -3921,7 +3921,7 @@
                     "rcontext": ";accord45;weekdays",
                     "premises": {
                       ";accord45;weekdays;Friday": {
-                        "rbranch": ";accord45;weekdays;Friday"
+                        "pbranch": ";accord45;weekdays;Friday"
                       }
                     }
                   }
@@ -3936,7 +3936,7 @@
                 "rcontext": ";accord45;Aaron Donald objects effected by him",
                 "premises": {
                   ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                    "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
                   }
                 }
               }
@@ -3968,7 +3968,7 @@
             "rcontext": ";accord45;Aaron Donald objects effected by him",
             "premises": {
               ";accord45;Aaron Donald objects effected by him;interesting": {
-                "rbranch": ";accord45;Aaron Donald objects effected by him;interesting"
+                "pbranch": ";accord45;Aaron Donald objects effected by him;interesting"
               }
             }
           }
@@ -4008,7 +4008,7 @@
                 "rcontext": ";accord45;day_minute",
                 "premises": {
                   ";accord45;day_minute": {
-                    "rbranch": ";accord45;day_minute",
+                    "pbranch": ";accord45;day_minute",
                     "pnigh": 480,
                     "open": 480
                   }
@@ -4018,7 +4018,7 @@
                 "rcontext": ";accord45;weekdays",
                 "premises": {
                   ";accord45;weekdays;Friday": {
-                    "rbranch": ";accord45;weekdays;Friday"
+                    "pbranch": ";accord45;weekdays;Friday"
                   }
                 }
               }
@@ -4033,7 +4033,7 @@
             "rcontext": ";accord45;day_minute",
             "premises": {
               ";accord45;day_minute": {
-                "rbranch": ";accord45;day_minute",
+                "pbranch": ";accord45;day_minute",
                 "pnigh": 1019,
                 "open": 540
               }
@@ -4300,7 +4300,7 @@
                 "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Happy": {
-                    "rbranch": ";accord45;Moods;Happy"
+                    "pbranch": ";accord45;Moods;Happy"
                   }
                 }
               }
@@ -4315,7 +4315,7 @@
                 "rcontext": ";accord45;No Movie playing",
                 "premises": {
                   ";accord45;No Movie playing,Big Lewbwski": {
-                    "rbranch": ";accord45;No Movie playing,Big Lewbwski"
+                    "pbranch": ";accord45;No Movie playing,Big Lewbwski"
                   }
                 }
               }
@@ -4332,7 +4332,7 @@
                     "rcontext": ";accord45;Moods",
                     "premises": {
                       ";accord45;Moods;Happy": {
-                        "rbranch": ";accord45;Moods;Happy"
+                        "pbranch": ";accord45;Moods;Happy"
                       }
                     }
                   }
@@ -4347,7 +4347,7 @@
                 "rcontext": ";accord45;Moods",
                 "premises": {
                   ";accord45;Moods;Happy": {
-                    "rbranch": ";accord45;Moods;Happy"
+                    "pbranch": ";accord45;Moods;Happy"
                   }
                 }
               }
@@ -4362,7 +4362,7 @@
                 "rcontext": ";accord45;No Movie playing",
                 "premises": {
                   ";accord45;No Movie playing,Star Wars eps IV": {
-                    "rbranch": ";accord45;No Movie playing,Star Wars eps IV"
+                    "pbranch": ";accord45;No Movie playing,Star Wars eps IV"
                   }
                 }
               }
@@ -4377,7 +4377,7 @@
             "rcontext": ";accord45;Moods",
             "premises": {
               ";accord45;Moods;Happy": {
-                "rbranch": ";accord45;Moods;Happy"
+                "pbranch": ";accord45;Moods;Happy"
               }
             }
           }
@@ -4397,7 +4397,7 @@
                     "rcontext": ";accord45;WaterExistence",
                     "premises": {
                       ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
-                        "rbranch": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
+                        "pbranch": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
                       }
                     }
                   }
@@ -4412,7 +4412,7 @@
                     "rcontext": ";accord45;WaterExistence",
                     "premises": {
                       ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed": {
-                        "rbranch": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed"
+                        "pbranch": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed"
                       }
                     }
                   }
@@ -4427,7 +4427,7 @@
                     "rcontext": ";accord45;WaterExistence",
                     "premises": {
                       ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed": {
-                        "rbranch": ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed"
+                        "pbranch": ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed"
                       }
                     }
                   }
@@ -4442,7 +4442,7 @@
                 "rcontext": ";accord45;WaterExistence",
                 "premises": {
                   ";accord45;WaterExistence,Williamette WaterShed": {
-                    "rbranch": ";accord45;WaterExistence,Williamette WaterShed"
+                    "pbranch": ";accord45;WaterExistence,Williamette WaterShed"
                   }
                 }
               }

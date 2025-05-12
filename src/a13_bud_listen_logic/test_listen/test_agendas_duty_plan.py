@@ -107,7 +107,7 @@ def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplanBudWithDetailsDecidedB
     bob_plan.edit_idea_attr(
         cook_way(),
         reason_del_premise_rcontext=eat_way(),
-        reason_del_premise_rbranch=hungry_way(),
+        reason_del_premise_pbranch=hungry_way(),
     )
     bob_cook_ideaunit = bob_plan.get_idea_obj(cook_way())
     zia_cook_ideaunit = zia_plan.get_idea_obj(cook_way())

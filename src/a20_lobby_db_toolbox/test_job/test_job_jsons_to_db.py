@@ -380,14 +380,14 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_rbranch = 5
+    x_pbranch = 5
     x_pnigh = 6.0
     x_open = 7.0
     x_divisor = 8
     x__task = 9
     x__status = 10
-    x_premiseunit = premiseunit_shop(rbranch=x_rbranch)
-    x_premiseunit.rbranch = x_rbranch
+    x_premiseunit = premiseunit_shop(pbranch=x_pbranch)
+    x_premiseunit.pbranch = x_pbranch
     x_premiseunit.pnigh = x_pnigh
     x_premiseunit.open = x_open
     x_premiseunit.divisor = x_divisor
@@ -417,7 +417,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            str(x_rbranch),
+            str(x_pbranch),
             x_pnigh,
             x_open,
             x_divisor,

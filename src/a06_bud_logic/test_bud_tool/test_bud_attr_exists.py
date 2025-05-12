@@ -31,7 +31,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     rcontext_str,
     fcontext_str,
     group_label_str,
-    rbranch_str,
+    pbranch_str,
     idea_way_str,
     team_label_str,
     healer_name_str,
@@ -206,17 +206,17 @@ def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
     root_jkeys = {
         idea_way_str(): root_way,
         rcontext_str(): week_way,
-        rbranch_str(): thur_way,
+        pbranch_str(): thur_way,
     }
     casa_jkeys = {
         idea_way_str(): casa_way,
         rcontext_str(): week_way,
-        rbranch_str(): thur_way,
+        pbranch_str(): thur_way,
     }
     clean_jkeys = {
         idea_way_str(): clean_way,
         rcontext_str(): week_way,
-        rbranch_str(): thur_way,
+        pbranch_str(): thur_way,
     }
 
     # WHEN / THEN
@@ -509,17 +509,17 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
     root_jkeys = {
         idea_way_str(): root_way,
         rcontext_str(): week_way,
-        rbranch_str(): thur_way,
+        pbranch_str(): thur_way,
     }
     casa_jkeys = {
         idea_way_str(): casa_way,
         rcontext_str(): week_way,
-        rbranch_str(): thur_way,
+        pbranch_str(): thur_way,
     }
     clean_jkeys = {
         idea_way_str(): clean_way,
         rcontext_str(): week_way,
-        rbranch_str(): thur_way,
+        pbranch_str(): thur_way,
     }
 
     # WHEN / THEN

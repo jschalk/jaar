@@ -719,7 +719,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     before_knee_reasonunit = before_ball_idea.get_reasonunit(knee_way)
     assert before_knee_reasonunit is not None
     damaged_premiseunit = before_knee_reasonunit.get_premise(damaged_way)
-    assert damaged_premiseunit.rbranch == damaged_way
+    assert damaged_premiseunit.pbranch == damaged_way
     assert damaged_premiseunit.open is None
     assert damaged_premiseunit.pnigh is None
     assert damaged_premiseunit.divisor is None
@@ -731,7 +731,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_update())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
-    update_disc_budatom.set_jkey("rbranch", damaged_way)
+    update_disc_budatom.set_jkey("pbranch", damaged_way)
     update_disc_budatom.set_jvalue("open", damaged_open)
     update_disc_budatom.set_jvalue("pnigh", damaged_pnigh)
     update_disc_budatom.set_jvalue("divisor", damaged_divisor)
@@ -745,7 +745,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_reason_premiseun
     after_knee_reasonunit = after_ball_idea.get_reasonunit(knee_way)
     assert after_knee_reasonunit is not None
     after_damaged_premiseunit = after_knee_reasonunit.get_premise(damaged_way)
-    assert after_damaged_premiseunit.rbranch == damaged_way
+    assert after_damaged_premiseunit.pbranch == damaged_way
     assert after_damaged_premiseunit.open == damaged_open
     assert after_damaged_premiseunit.pnigh == damaged_pnigh
     assert after_damaged_premiseunit.divisor == damaged_divisor
@@ -784,7 +784,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_reason_premiseun
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
-    update_disc_budatom.set_jkey("rbranch", medical_way)
+    update_disc_budatom.set_jkey("pbranch", medical_way)
     update_disc_budatom.set_jvalue("open", medical_open)
     update_disc_budatom.set_jvalue("pnigh", medical_pnigh)
     update_disc_budatom.set_jvalue("divisor", medical_divisor)
@@ -798,7 +798,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_reason_premiseun
     after_knee_reasonunit = after_ball_idea.get_reasonunit(knee_way)
     after_medical_premiseunit = after_knee_reasonunit.get_premise(medical_way)
     assert after_medical_premiseunit is not None
-    assert after_medical_premiseunit.rbranch == medical_way
+    assert after_medical_premiseunit.pbranch == medical_way
     assert after_medical_premiseunit.open == medical_open
     assert after_medical_premiseunit.pnigh == medical_pnigh
     assert after_medical_premiseunit.divisor == medical_divisor
@@ -837,7 +837,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_reason_premiseun
     update_disc_budatom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_delete())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
-    update_disc_budatom.set_jkey("rbranch", medical_way)
+    update_disc_budatom.set_jkey("pbranch", medical_way)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)

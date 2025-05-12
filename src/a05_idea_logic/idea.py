@@ -103,7 +103,7 @@ class IdeaAttrHolder:
     reason_pnigh: float = None
     reason_premise_divisor: int = None
     reason_del_premise_rcontext: WayStr = None
-    reason_del_premise_rbranch: WayStr = None
+    reason_del_premise_pbranch: WayStr = None
     reason_rcontext_idea_active_requisite: str = None
     teamunit: TeamUnit = None
     healerlink: HealerLink = None
@@ -150,7 +150,7 @@ def ideaattrholder_shop(
     reason_pnigh: float = None,
     reason_premise_divisor: int = None,
     reason_del_premise_rcontext: WayStr = None,
-    reason_del_premise_rbranch: WayStr = None,
+    reason_del_premise_pbranch: WayStr = None,
     reason_rcontext_idea_active_requisite: str = None,
     teamunit: TeamUnit = None,
     healerlink: HealerLink = None,
@@ -182,7 +182,7 @@ def ideaattrholder_shop(
         reason_pnigh=reason_pnigh,
         reason_premise_divisor=reason_premise_divisor,
         reason_del_premise_rcontext=reason_del_premise_rcontext,
-        reason_del_premise_rbranch=reason_del_premise_rbranch,
+        reason_del_premise_pbranch=reason_del_premise_pbranch,
         reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
         teamunit=teamunit,
         healerlink=healerlink,
@@ -620,7 +620,7 @@ class IdeaUnit:
 
         self._del_reasonunit_all_cases(
             rcontext=idea_attr.reason_del_premise_rcontext,
-            premise=idea_attr.reason_del_premise_rbranch,
+            premise=idea_attr.reason_del_premise_pbranch,
         )
         self._set_addin_to_zero_if_any_moldations_exist()
 

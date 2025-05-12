@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     healer_name_str,
     morph_str,
-    rbranch_str,
+    pbranch_str,
     pnigh_str,
     numor_str,
     open_str,
@@ -62,7 +62,7 @@ def test_str_functions_ReturnsObj():
     assert gogo_want_str() == "gogo_want"
     assert group_label_str() == "group_label"
     assert morph_str() == "morph"
-    assert rbranch_str() == "rbranch"
+    assert pbranch_str() == "pbranch"
     assert pnigh_str() == "pnigh"
     assert numor_str() == "numor"
     assert open_str() == "open"
