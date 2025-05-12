@@ -471,7 +471,7 @@ class BudUnit:
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason context "timeline,weeks" with premise.branch = "timeline,weeks"
+            # there exists a reason context "timeline,weeks" with premise.rbranch = "timeline,weeks"
             # and (1,2) divisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
@@ -684,7 +684,7 @@ class BudUnit:
         for x_reason in posted_idea.reasonunits.values():
             self._create_ideakid_if_empty(way=x_reason.context)
             for premise_x in x_reason.premises.values():
-                self._create_ideakid_if_empty(way=premise_x.branch)
+                self._create_ideakid_if_empty(way=premise_x.rbranch)
 
     def _create_ideakid_if_empty(self, way: WayStr):
         if self.idea_exists(way) is False:

@@ -15,7 +15,7 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "branch": {
+        "rbranch": {
             "otx_key": true
         },
         "nigh": {

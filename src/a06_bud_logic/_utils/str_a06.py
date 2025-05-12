@@ -179,8 +179,8 @@ def morph_str() -> str:
     return "morph"
 
 
-def branch_str() -> str:
-    return "branch"
+def rbranch_str() -> str:
+    return "rbranch"
 
 
 def nigh_str() -> str:

@@ -119,25 +119,25 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     oregon_str = "Oregon"
     oregon_way = sue_budunit.make_way(usa_way, oregon_str)
 
-    wed = premiseunit_shop(branch=wed_way)
+    wed = premiseunit_shop(rbranch=wed_way)
     wed._status = True
     wed._task = False
-    usa = premiseunit_shop(branch=usa_way)
+    usa = premiseunit_shop(rbranch=usa_way)
     usa._status = True
     usa._task = False
 
-    wed_lu = reasonunit_shop(week_way, premises={wed.branch: wed})
-    sta_lu = reasonunit_shop(state_way, premises={usa.branch: usa})
+    wed_lu = reasonunit_shop(week_way, premises={wed.rbranch: wed})
+    sta_lu = reasonunit_shop(state_way, premises={usa.rbranch: usa})
     wed_lh = reasonheir_shop(
         context=week_way,
-        premises={wed.branch: wed},
+        premises={wed.rbranch: wed},
         _status=True,
         _task=False,
         _context_idea_active_value=True,
     )
     sta_lh = reasonheir_shop(
         context=state_way,
-        premises={usa.branch: usa},
+        premises={usa.rbranch: usa},
         _status=True,
         _task=False,
         _context_idea_active_value=True,
@@ -181,7 +181,7 @@ def test_BudUnit_settle_bud_CorrectlySets_idea_dict():
     # print(f"    {usa_premise._task=}")
     assert week_reasonheir._task is False
     # print(f"      premises: {w=}")
-    # w_branch = usa_premise.premises[wed_way].branch
+    # w_branch = usa_premise.premises[wed_way].rbranch
     # print(f"      {w_branch=}")
     # assert usa_premise._task == w_branch._task
     # assert usa_premise._status == w_branch._status
@@ -395,31 +395,31 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     mon_way = yao_budunit.make_way(week_way, mon_str)
     tue_str = "Tuesday"
     tue_way = yao_budunit.make_way(week_way, tue_str)
-    mon_premise_x = premiseunit_shop(branch=mon_way)
+    mon_premise_x = premiseunit_shop(rbranch=mon_way)
     mon_premise_x._status = False
     mon_premise_x._task = False
-    tue_premise_x = premiseunit_shop(branch=tue_way)
+    tue_premise_x = premiseunit_shop(rbranch=tue_way)
     tue_premise_x._status = False
     tue_premise_x._task = False
     mt_premises = {
-        mon_premise_x.branch: mon_premise_x,
-        tue_premise_x.branch: tue_premise_x,
+        mon_premise_x.rbranch: mon_premise_x,
+        tue_premise_x.rbranch: tue_premise_x,
     }
     mt_reasonunit = reasonunit_shop(week_way, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(week_way, premises=mt_premises, _status=False)
     x_idearoot = yao_budunit.get_idea_obj(to_way(yao_budunit.fisc_tag))
     x_idearoot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_budunit.reasonunits[week_way].context=}")
-    # print(f"{yao_budunit.reasonunits[week_way].premises[mon_way].branch=}")
-    # print(f"{yao_budunit.reasonunits[week_way].premises[tue_way].branch=}")
+    # print(f"{yao_budunit.reasonunits[week_way].premises[mon_way].rbranch=}")
+    # print(f"{yao_budunit.reasonunits[week_way].premises[tue_way].rbranch=}")
     week_reasonunit = x_idearoot.reasonunits[week_way]
     print(f"{week_reasonunit.premises=}")
     premise_mon = week_reasonunit.premises.get(mon_way)
     premise_tue = week_reasonunit.premises.get(tue_way)
     assert premise_mon
-    assert premise_mon == mt_reasonunit.premises[premise_mon.branch]
+    assert premise_mon == mt_reasonunit.premises[premise_mon.rbranch]
     assert premise_tue
-    assert premise_tue == mt_reasonunit.premises[premise_tue.branch]
+    assert premise_tue == mt_reasonunit.premises[premise_tue.rbranch]
     assert week_reasonunit == mt_reasonunit
 
     # WHEN
@@ -487,7 +487,7 @@ def test_BudUnit_settle_bud_CorrectlySetsIdeaUnitsActiveWithEvery6WeeksReason_bu
     ced_week_reason = clean_sheet_idea.reasonunits.get(ced_week_context)
     ced_week_premise = ced_week_reason.premises.get(ced_week_context)
     print(
-        f"{clean_sheet_idea.idea_tag=} {ced_week_reason.context=} {ced_week_premise.branch=}"
+        f"{clean_sheet_idea.idea_tag=} {ced_week_reason.context=} {ced_week_premise.rbranch=}"
     )
     # print(f"{clean_sheet_idea.idea_tag=} {ced_week_reason.context=} {premise_x=}")
     premise_divisor = ced_week_premise.divisor

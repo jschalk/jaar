@@ -600,7 +600,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -624,7 +624,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -649,7 +649,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -672,7 +672,7 @@
                                         "context": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;Sept 4th 2023 9am": {
-                                                "branch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
+                                                "rbranch": ";A;time;gregtime;x2;Sept 4th 2023 9am",
                                                 "nigh": 1064350680.0,
                                                 "open": 1064350680.0
                                             }
@@ -692,7 +692,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -717,7 +717,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -741,7 +741,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -766,7 +766,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -790,7 +790,7 @@
                                                 "context": ";A;time;gregtime",
                                                 "premises": {
                                                     "A;time;gregtime;x;Sept 4th 2023 9am": {
-                                                        "branch": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                                                        "rbranch": ";A;time;gregtime;x;Sept 4th 2023 9am",
                                                         "nigh": 1064350680.0,
                                                         "open": 1064350680.0
                                                     }
@@ -826,7 +826,7 @@
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "branch": ";A;time;gregtime;day",
+                                                                "rbranch": ";A;time;gregtime;day",
                                                                 "nigh": 360,
                                                                 "open": 360
                                                             }
@@ -867,7 +867,7 @@
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "branch": ";A;time;gregtime;day",
+                                                                "rbranch": ";A;time;gregtime;day",
                                                                 "nigh": 360,
                                                                 "open": 360
                                                             }
@@ -885,7 +885,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 360,
                                                         "open": 360
                                                     }
@@ -904,7 +904,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 450,
                                                         "open": 450
                                                     }
@@ -923,7 +923,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 525,
                                                         "open": 525
                                                     }
@@ -941,7 +941,7 @@
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "branch": ";A;time;gregtime;day",
+                                                "rbranch": ";A;time;gregtime;day",
                                                 "nigh": 360,
                                                 "open": 360
                                             }
@@ -962,7 +962,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -981,7 +981,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1002,7 +1002,7 @@
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "branch": ";A;time;gregtime;day",
+                                                                "rbranch": ";A;time;gregtime;day",
                                                                 "nigh": 540,
                                                                 "open": 540
                                                             }
@@ -1043,7 +1043,7 @@
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "branch": ";A;time;gregtime;day",
+                                                                "rbranch": ";A;time;gregtime;day",
                                                                 "nigh": 480,
                                                                 "open": 480
                                                             }
@@ -1062,7 +1062,7 @@
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "branch": ";A;time;gregtime;day",
+                                                                "rbranch": ";A;time;gregtime;day",
                                                                 "nigh": 540,
                                                                 "open": 540
                                                             }
@@ -1085,7 +1085,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 1020,
                                                         "open": 1020
                                                     }
@@ -1104,7 +1104,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1124,7 +1124,7 @@
                                                         "premises": {
                                                             "A;time;gregtime;day": {
                                                                 "divisor": 1440,
-                                                                "branch": ";A;time;gregtime;day",
+                                                                "rbranch": ";A;time;gregtime;day",
                                                                 "nigh": 540,
                                                                 "open": 540
                                                             }
@@ -1142,7 +1142,7 @@
                                                 "premises": {
                                                     "A;time;gregtime;day": {
                                                         "divisor": 1440,
-                                                        "branch": ";A;time;gregtime;day",
+                                                        "rbranch": ";A;time;gregtime;day",
                                                         "nigh": 540,
                                                         "open": 540
                                                     }
@@ -1162,7 +1162,7 @@
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime;day",
+                                                "rbranch": ";A;time;gregtime;day",
                                                 "nigh": 1080.0,
                                                 "open": 540.0
                                             }
@@ -1180,7 +1180,7 @@
                                 "premises": {
                                     "A;time;gregtime;day": {
                                         "divisor": 1440,
-                                        "branch": ";A;time;gregtime;day",
+                                        "rbranch": ";A;time;gregtime;day",
                                         "nigh": 360,
                                         "open": 360
                                     }
@@ -1213,7 +1213,7 @@
                                                                 "context": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace": {
-                                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
+                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
                                                                     }
                                                                 }
                                                             }
@@ -1230,7 +1230,7 @@
                                                                         "context": ";A;Interweb",
                                                                         "premises": {
                                                                             "A;Interweb,YahooVideo": {
-                                                                                "branch": ";A;Interweb,YahooVideo"
+                                                                                "rbranch": ";A;Interweb,YahooVideo"
                                                                             }
                                                                         }
                                                                     }
@@ -1245,7 +1245,7 @@
                                                                 "context": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden": {
-                                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden"
+                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden"
                                                                     }
                                                                 }
                                                             }
@@ -1260,7 +1260,7 @@
                                                                 "context": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                                                     }
                                                                 }
                                                             }
@@ -1275,7 +1275,7 @@
                                                                 "context": ";A;Moods",
                                                                 "premises": {
                                                                     "A;Moods;hungry": {
-                                                                        "branch": ";A;Moods;hungry"
+                                                                        "rbranch": ";A;Moods;hungry"
                                                                     }
                                                                 }
                                                             }
@@ -1290,7 +1290,7 @@
                                                         "context": ";A;Nation-States",
                                                         "premises": {
                                                             "A;Nation-States;USA;Portland OR;Downtown;Flats": {
-                                                                "branch": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
+                                                                "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
                                                             }
                                                         }
                                                     }
@@ -1307,7 +1307,7 @@
                                                                 "context": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
-                                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
+                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
                                                                     }
                                                                 }
                                                             }
@@ -1322,7 +1322,7 @@
                                                                 "context": ";A;Seasons",
                                                                 "premises": {
                                                                     "A;Seasons;Summer": {
-                                                                        "branch": ";A;Seasons;Summer"
+                                                                        "rbranch": ";A;Seasons;Summer"
                                                                     }
                                                                 }
                                                             }
@@ -1337,7 +1337,7 @@
                                                                 "context": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
-                                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
+                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
                                                                     }
                                                                 }
                                                             }
@@ -1352,7 +1352,7 @@
                                                                 "context": ";A;Nation-States",
                                                                 "premises": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
-                                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
+                                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
                                                                     }
                                                                 }
                                                             }
@@ -1367,7 +1367,7 @@
                                                         "context": ";A;Nation-States",
                                                         "premises": {
                                                             "A;Nation-States;USA;Portland OR;Downtown;PSU": {
-                                                                "branch": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
+                                                                "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
                                                             }
                                                         }
                                                     }
@@ -1382,7 +1382,7 @@
                                                 "context": ";A;Nation-States",
                                                 "premises": {
                                                     "A;Nation-States;USA;Portland OR;Downtown": {
-                                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown"
+                                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown"
                                                     }
                                                 }
                                             }
@@ -1397,7 +1397,7 @@
                                         "context": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "branch": ";A;Nation-States;USA;Portland OR"
+                                                "rbranch": ";A;Nation-States;USA;Portland OR"
                                             }
                                         }
                                     }
@@ -1412,7 +1412,7 @@
                                         "context": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Texas": {
-                                                "branch": ";A;Nation-States;USA;Texas"
+                                                "rbranch": ";A;Nation-States;USA;Texas"
                                             }
                                         }
                                     }
@@ -1427,7 +1427,7 @@
                                 "context": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;USA": {
-                                        "branch": ";A;Nation-States;USA"
+                                        "rbranch": ";A;Nation-States;USA"
                                     }
                                 }
                             }
@@ -1442,7 +1442,7 @@
                                 "context": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;France2": {
-                                        "branch": ";A;Nation-States;France2"
+                                        "rbranch": ";A;Nation-States;France2"
                                     }
                                 }
                             }
@@ -1468,7 +1468,7 @@
                                         "context": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime": {
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 1472657760,
                                                 "open": 0
                                             }
@@ -1525,7 +1525,7 @@
                                 "premises": {
                                     "A;time;gregtime": {
                                         "divisor": 10080.0,
-                                        "branch": ";A;time;gregtime",
+                                        "rbranch": ";A;time;gregtime",
                                         "nigh": 480.0,
                                         "open": 480.0
                                     }
@@ -1542,7 +1542,7 @@
                                 "context": ";A;Moods",
                                 "premises": {
                                     "A;Moods;Happy;Happy - angerish": {
-                                        "branch": ";A;Moods;Happy;Happy - angerish"
+                                        "rbranch": ";A;Moods;Happy;Happy - angerish"
                                     }
                                 }
                             }
@@ -1568,7 +1568,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3360.0,
                                                 "open": 3360.0
                                             }
@@ -1587,7 +1587,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -1613,7 +1613,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 60480.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 660.0,
                                                 "open": 660.0
                                             }
@@ -1639,7 +1639,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 600.0,
                                                 "open": 600.0
                                             }
@@ -1666,7 +1666,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1692,7 +1692,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1718,7 +1718,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 30240.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1744,7 +1744,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 1200.0,
                                                 "open": 1200.0
                                             }
@@ -1770,7 +1770,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 40320.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1796,7 +1796,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 4800.0,
                                                 "open": 4800.0
                                             }
@@ -1822,7 +1822,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 9120.0,
                                                 "open": 9120.0
                                             }
@@ -1864,7 +1864,7 @@
                                         "context": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "branch": ";A;casa;cleaning;laundry basket status;full"
+                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
@@ -1873,7 +1873,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -1898,7 +1898,7 @@
                                         "context": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "branch": ";A;casa;cleaning;laundry basket status;full"
+                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
@@ -1907,7 +1907,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -1925,7 +1925,7 @@
                                         "context": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "branch": ";A;casa;cleaning;laundry basket status;full"
+                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
@@ -1934,7 +1934,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 7740.0,
                                                 "open": 7740.0
                                             }
@@ -1959,7 +1959,7 @@
                                         "context": ";A;casa;cleaning;laundry basket status",
                                         "premises": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "branch": ";A;casa;cleaning;laundry basket status;full"
+                                                "rbranch": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         }
                                     },
@@ -1968,7 +1968,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 6300.0,
                                                 "open": 6300.0
                                             }
@@ -1986,7 +1986,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 480.0,
                                                 "open": 480.0
                                             }
@@ -2012,7 +2012,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 480.0,
                                                 "open": 480.0
                                             }
@@ -2038,7 +2038,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 4740.0,
                                                 "open": 4740.0
                                             }
@@ -2064,7 +2064,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 9060.0,
                                                 "open": 9060.0
                                             }
@@ -2090,7 +2090,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2116,7 +2116,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 7620.0,
                                                 "open": 7620.0
                                             }
@@ -2142,7 +2142,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2168,7 +2168,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2185,7 +2185,7 @@
                                 "context": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                        "branch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                        "rbranch": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                     }
                                 }
                             }
@@ -2212,7 +2212,7 @@
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "branch": ";A;time;gregtime;day",
+                                                "rbranch": ";A;time;gregtime;day",
                                                 "nigh": 420,
                                                 "open": 420
                                             }
@@ -2238,7 +2238,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2264,7 +2264,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 80640.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 4860.0,
                                                 "open": 4860.0
                                             }
@@ -2290,7 +2290,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2316,7 +2316,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2342,7 +2342,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 80640.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2370,7 +2370,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 9600.0,
                                                         "open": 9600.0
                                                     }
@@ -2408,7 +2408,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 3360.0,
                                                         "open": 3360.0
                                                     }
@@ -2426,7 +2426,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 6242.0,
                                                         "open": 6242.0
                                                     }
@@ -2452,7 +2452,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 3420.0,
                                                         "open": 3420.0
                                                     }
@@ -2477,7 +2477,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 7200.0,
                                                         "open": 7200.0
                                                     }
@@ -2519,7 +2519,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 4800.0,
                                                         "open": 4800.0
                                                     }
@@ -2545,7 +2545,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 6240.0,
                                                         "open": 6240.0
                                                     }
@@ -2576,7 +2576,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2594,7 +2594,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 1080.0,
                                                 "open": 1080.0
                                             }
@@ -2620,7 +2620,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2646,7 +2646,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 1440.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 420.0,
                                                 "open": 420.0
                                             }
@@ -2668,7 +2668,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 9180.0,
                                                         "open": 9180.0
                                                     }
@@ -2687,7 +2687,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 9180.0,
                                                         "open": 9180.0
                                                     }
@@ -2712,7 +2712,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 9180.0,
                                                 "open": 9180.0
                                             }
@@ -2738,7 +2738,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 3420.0,
                                                 "open": 3420.0
                                             }
@@ -2771,7 +2771,7 @@
                                         "context": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "branch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2796,7 +2796,7 @@
                                         "context": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "branch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2821,7 +2821,7 @@
                                         "context": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "branch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2846,7 +2846,7 @@
                                         "context": ";A;time;gregtime",
                                         "premises": {
                                             "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                                                "branch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
+                                                "rbranch": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
                                                 "nigh": 1064041020.0,
                                                 "open": 1064041020.0
                                             }
@@ -2988,7 +2988,7 @@
                                 "context": ";A;Interweb",
                                 "premises": {
                                     "A;Interweb,Faaceboook": {
-                                        "branch": ";A;Interweb,Faaceboook"
+                                        "rbranch": ";A;Interweb,Faaceboook"
                                     }
                                 }
                             }
@@ -3014,7 +3014,7 @@
                                         "context": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "branch": ";A;Nation-States;USA;Portland OR"
+                                                "rbranch": ";A;Nation-States;USA;Portland OR"
                                             }
                                         }
                                     },
@@ -3023,7 +3023,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 10080.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 5340.0,
                                                 "open": 5340.0
                                             }
@@ -3048,7 +3048,7 @@
                                         "context": ";A;Nation-States",
                                         "premises": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "branch": ";A;Nation-States;USA;Portland OR"
+                                                "rbranch": ";A;Nation-States;USA;Portland OR"
                                             }
                                         }
                                     },
@@ -3057,7 +3057,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 60480.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 840.0,
                                                 "open": 840.0
                                             }
@@ -3074,7 +3074,7 @@
                                 "context": ";A;Nation-States",
                                 "premises": {
                                     "A;Nation-States;USA;Portland OR": {
-                                        "branch": ";A;Nation-States;USA;Portland OR"
+                                        "rbranch": ";A;Nation-States;USA;Portland OR"
                                     }
                                 }
                             }
@@ -3091,7 +3091,7 @@
                                 "premises": {
                                     "A;time;gregtime;day": {
                                         "divisor": 1440.0,
-                                        "branch": ";A;time;gregtime;day",
+                                        "rbranch": ";A;time;gregtime;day",
                                         "nigh": 480.0,
                                         "open": 480.0
                                     }
@@ -3117,7 +3117,7 @@
                                 "premises": {
                                     "A;time;gregtime": {
                                         "divisor": 1440.0,
-                                        "branch": ";A;time;gregtime",
+                                        "rbranch": ";A;time;gregtime",
                                         "nigh": 480.0,
                                         "open": 480.0
                                     }
@@ -3152,7 +3152,7 @@
                                         "context": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     }
@@ -3174,7 +3174,7 @@
                                 "context": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3192,7 +3192,7 @@
                                         "context": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
@@ -3201,7 +3201,7 @@
                                         "premises": {
                                             "A;time;gregtime;day": {
                                                 "divisor": 1440,
-                                                "branch": ";A;time;gregtime;day",
+                                                "rbranch": ";A;time;gregtime;day",
                                                 "nigh": 660,
                                                 "open": 660
                                             }
@@ -3225,7 +3225,7 @@
                                 "context": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3250,7 +3250,7 @@
                                         "context": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
@@ -3259,7 +3259,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 20160.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 4920.0,
                                                 "open": 4920.0
                                             }
@@ -3276,7 +3276,7 @@
                                 "context": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3292,7 +3292,7 @@
                                 "context": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             },
@@ -3301,7 +3301,7 @@
                                 "premises": {
                                     "A;time;gregtime": {
                                         "divisor": 1440.0,
-                                        "branch": ";A;time;gregtime",
+                                        "rbranch": ";A;time;gregtime",
                                         "nigh": 1305.0,
                                         "open": 1305.0
                                     }
@@ -3324,7 +3324,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 6495.0,
                                                         "open": 6480.0
                                                     }
@@ -3361,7 +3361,7 @@
                                                 "context": ";A;Aaron Donald objects effected by him",
                                                 "premises": {
                                                     "A;Aaron Donald objects effected by him;interesting": {
-                                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 }
                                             },
@@ -3370,7 +3370,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 10080.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 6540.0,
                                                         "open": 6480.0
                                                     }
@@ -3400,7 +3400,7 @@
                                                 "context": ";A;Aaron Donald objects effected by him",
                                                 "premises": {
                                                     "A;Aaron Donald objects effected by him;interesting": {
-                                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 }
                                             },
@@ -3409,7 +3409,7 @@
                                                 "premises": {
                                                     "A;time;gregtime": {
                                                         "divisor": 20160.0,
-                                                        "branch": ";A;time;gregtime",
+                                                        "rbranch": ";A;time;gregtime",
                                                         "nigh": 600.0,
                                                         "open": 600.0
                                                     }
@@ -3433,7 +3433,7 @@
                                         "context": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     }
@@ -3448,7 +3448,7 @@
                                 "context": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3472,7 +3472,7 @@
                                         "context": ";A;Aaron Donald objects effected by him",
                                         "premises": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         }
                                     },
@@ -3481,7 +3481,7 @@
                                         "premises": {
                                             "A;time;gregtime": {
                                                 "divisor": 20160.0,
-                                                "branch": ";A;time;gregtime",
+                                                "rbranch": ";A;time;gregtime",
                                                 "nigh": 600.0,
                                                 "open": 600.0
                                             }
@@ -3498,7 +3498,7 @@
                                 "context": ";A;Aaron Donald objects effected by him",
                                 "premises": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                        "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 }
                             }
@@ -3530,7 +3530,7 @@
                         "context": ";A;Aaron Donald objects effected by him",
                         "premises": {
                             "A;Aaron Donald objects effected by him;interesting": {
-                                "branch": ";A;Aaron Donald objects effected by him;interesting"
+                                "rbranch": ";A;Aaron Donald objects effected by him;interesting"
                             }
                         }
                     }
@@ -5192,7 +5192,7 @@
                                 "context": ";A;Moods",
                                 "premises": {
                                     "A;Moods;Happy": {
-                                        "branch": ";A;Moods;Happy"
+                                        "rbranch": ";A;Moods;Happy"
                                     }
                                 }
                             }
@@ -5207,7 +5207,7 @@
                                 "context": ";A;No Movie playing",
                                 "premises": {
                                     "A;No Movie playing;Big Lewbwski": {
-                                        "branch": ";A;No Movie playing;Big Lewbwski"
+                                        "rbranch": ";A;No Movie playing;Big Lewbwski"
                                     }
                                 }
                             }
@@ -5224,7 +5224,7 @@
                                         "context": ";A;Moods",
                                         "premises": {
                                             "A;Moods;Happy": {
-                                                "branch": ";A;Moods;Happy"
+                                                "rbranch": ";A;Moods;Happy"
                                             }
                                         }
                                     }
@@ -5239,7 +5239,7 @@
                                 "context": ";A;Moods",
                                 "premises": {
                                     "A;Moods;Happy": {
-                                        "branch": ";A;Moods;Happy"
+                                        "rbranch": ";A;Moods;Happy"
                                     }
                                 }
                             }
@@ -5254,7 +5254,7 @@
                                 "context": ";A;No Movie playing",
                                 "premises": {
                                     "A;No Movie playing;Star Wars eps IV": {
-                                        "branch": ";A;No Movie playing;Star Wars eps IV"
+                                        "rbranch": ";A;No Movie playing;Star Wars eps IV"
                                     }
                                 }
                             }
@@ -5269,7 +5269,7 @@
                         "context": ";A;Moods",
                         "premises": {
                             "A;Moods;Happy": {
-                                "branch": ";A;Moods;Happy"
+                                "rbranch": ";A;Moods;Happy"
                             }
                         }
                     }
@@ -5289,7 +5289,7 @@
                                         "context": ";A;WaterExistence",
                                         "premises": {
                                             "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
-                                                "branch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                                                "rbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
                                             }
                                         }
                                     }
@@ -5304,7 +5304,7 @@
                                         "context": ";A;WaterExistence",
                                         "premises": {
                                             "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
-                                                "branch": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                                                "rbranch": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
                                             }
                                         }
                                     }
@@ -5319,7 +5319,7 @@
                                         "context": ";A;WaterExistence",
                                         "premises": {
                                             "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
-                                                "branch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                                                "rbranch": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
                                             }
                                         }
                                     }
@@ -5334,7 +5334,7 @@
                                 "context": ";A;WaterExistence",
                                 "premises": {
                                     "A;WaterExistence;Williamette WaterShed": {
-                                        "branch": ";A;WaterExistence;Williamette WaterShed"
+                                        "rbranch": ";A;WaterExistence;Williamette WaterShed"
                                     }
                                 }
                             }

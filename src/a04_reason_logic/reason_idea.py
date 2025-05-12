@@ -294,7 +294,7 @@ def premisestatusfinder_shop(
 
 @dataclass
 class PremiseUnit:
-    branch: WayStr
+    rbranch: WayStr
     open: float = None
     nigh: float = None
     divisor: int = None
@@ -303,10 +303,10 @@ class PremiseUnit:
     bridge: str = None
 
     def get_obj_key(self):
-        return self.branch
+        return self.rbranch
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"branch": self.branch}
+        x_dict = {"rbranch": self.rbranch}
         if self.open is not None:
             x_dict["open"] = self.open
         if self.nigh is not None:
@@ -323,14 +323,14 @@ class PremiseUnit:
     def set_bridge(self, new_bridge: str):
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
-        self.branch = replace_bridge(
-            way=self.branch, old_bridge=old_bridge, new_bridge=self.bridge
+        self.rbranch = replace_bridge(
+            way=self.rbranch, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
     def is_in_lineage(self, fact_fbranch: WayStr):
         return is_heir_way(
-            src=self.branch, heir=fact_fbranch, bridge=self.bridge
-        ) or is_heir_way(src=fact_fbranch, heir=self.branch, bridge=self.bridge)
+            src=self.rbranch, heir=fact_fbranch, bridge=self.bridge
+        ) or is_heir_way(src=fact_fbranch, heir=self.rbranch, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -409,19 +409,19 @@ class PremiseUnit:
         )
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
-        self.branch = rebuild_way(self.branch, old_way, new_way)
+        self.rbranch = rebuild_way(self.rbranch, old_way, new_way)
 
 
 # class premisesshop:
 def premiseunit_shop(
-    branch: WayStr,
+    rbranch: WayStr,
     open: float = None,
     nigh: float = None,
     divisor: float = None,
     bridge: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
-        branch=branch,
+        rbranch=rbranch,
         open=open,
         nigh=nigh,
         divisor=divisor,
@@ -446,12 +446,12 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
             x_divisor = None
 
         premise_x = premiseunit_shop(
-            branch=premise_dict["branch"],
+            rbranch=premise_dict["rbranch"],
             open=x_open,
             nigh=x_nigh,
             divisor=x_divisor,
         )
-        premises[premise_x.branch] = premise_x
+        premises[premise_x.rbranch] = premise_x
     return premises
 
 
@@ -492,7 +492,7 @@ class ReasonCore:
         divisor: int = None,
     ):
         self.premises[premise] = premiseunit_shop(
-            branch=premise,
+            rbranch=premise,
             open=open,
             nigh=nigh,
             divisor=divisor,
@@ -571,12 +571,12 @@ class ReasonHeir(ReasonCore):
         x_premises = {}
         for x_premiseunit in x_reasonunit.premises.values():
             premise_x = premiseunit_shop(
-                branch=x_premiseunit.branch,
+                rbranch=x_premiseunit.rbranch,
                 open=x_premiseunit.open,
                 nigh=x_premiseunit.nigh,
                 divisor=x_premiseunit.divisor,
             )
-            x_premises[premise_x.branch] = premise_x
+            x_premises[premise_x.rbranch] = premise_x
         self.premises = x_premises
 
     def clear_status(self):

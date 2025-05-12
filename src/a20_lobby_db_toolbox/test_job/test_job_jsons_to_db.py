@@ -386,8 +386,8 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_divisor = 8
     x__task = 9
     x__status = 10
-    x_premiseunit = premiseunit_shop(branch=x_branch)
-    x_premiseunit.branch = x_branch
+    x_premiseunit = premiseunit_shop(rbranch=x_branch)
+    x_premiseunit.rbranch = x_branch
     x_premiseunit.nigh = x_nigh
     x_premiseunit.open = x_open
     x_premiseunit.divisor = x_divisor

@@ -45,7 +45,7 @@ def test_AtomRow_exists():
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
-    assert x_atomrow.branch is None
+    assert x_atomrow.rbranch is None
     assert x_atomrow.nigh is None
     assert x_atomrow.numor is None
     assert x_atomrow.open is None

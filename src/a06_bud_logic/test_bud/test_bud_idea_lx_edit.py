@@ -199,15 +199,15 @@ def test_bud_edit_idea_tag_ModifiesIdeaReasonUnitsScenario1():
     wednesday_str = "Wednesday"
     old_wednesday_way = sue_bud.make_way(old_weekday_way, wednesday_str)
     casa_idea = sue_bud.get_idea_obj(sue_bud.make_l1_way("casa"))
-    # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.branch: wed_premise})
-    # nation_reason = reasonunit_shop(nationstate, premises={usa_premise.branch: usa_premise})
+    # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.rbranch: wed_premise})
+    # nation_reason = reasonunit_shop(nationstate, premises={usa_premise.rbranch: usa_premise})
     assert len(casa_idea.reasonunits) == 2
     assert casa_idea.reasonunits.get(old_weekday_way) is not None
     wednesday_idea = sue_bud.get_idea_obj(old_weekday_way)
     casa_weekday_reason = casa_idea.reasonunits.get(old_weekday_way)
     assert casa_weekday_reason.premises.get(old_wednesday_way) is not None
     assert (
-        casa_weekday_reason.premises.get(old_wednesday_way).branch == old_wednesday_way
+        casa_weekday_reason.premises.get(old_wednesday_way).rbranch == old_wednesday_way
     )
     new_weekday_str = "days of week"
     new_weekday_way = sue_bud.make_l1_way(new_weekday_str)
@@ -231,7 +231,7 @@ def test_bud_edit_idea_tag_ModifiesIdeaReasonUnitsScenario1():
     casa_weekday_reason = casa_idea.reasonunits.get(new_weekday_way)
     assert casa_weekday_reason.premises.get(new_wednesday_way) is not None
     assert (
-        casa_weekday_reason.premises.get(new_wednesday_way).branch == new_wednesday_way
+        casa_weekday_reason.premises.get(new_wednesday_way).rbranch == new_wednesday_way
     )
     assert len(casa_idea.reasonunits) == 2
 

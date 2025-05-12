@@ -273,7 +273,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "context": x_context,
-        "branch": x_branch,
+        "rbranch": x_branch,
         "nigh": x_nigh,
         "open": x_open,
         "divisor": x_divisor,

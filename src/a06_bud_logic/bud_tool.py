@@ -58,7 +58,7 @@ def bud_idea_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 def bud_idea_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_way = jkeys.get("idea_way")
     x_context = jkeys.get("context")
-    x_branch = jkeys.get("branch")
+    x_branch = jkeys.get("rbranch")
     return bool(
         bud_idea_reasonunit_exists(x_bud, jkeys)
         and x_bud.get_idea_obj(x_way).get_reasonunit(x_context).premise_exists(x_branch)
@@ -148,7 +148,7 @@ def bud_idea_reason_premiseunit_get_obj(
 ) -> PremiseUnit:
     x_way = jkeys.get("idea_way")
     x_context = jkeys.get("context")
-    x_branch = jkeys.get("branch")
+    x_branch = jkeys.get("rbranch")
     return x_bud.get_idea_obj(x_way).get_reasonunit(x_context).get_premise(x_branch)
 
 
