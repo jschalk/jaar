@@ -144,7 +144,7 @@ class PremiseStatusFinder:
     premise_open: float  # within 0 and pdivisor, can be more than pnigh
     pnigh: float  # within 0 and pdivisor, can be less than premise_open
     pdivisor: float  # greater than zero
-    fact_open_full: float  # less than fnigh
+    fopen_full: float  # less than fnigh
     fnigh_full: float  # less than fnigh
 
     def check_attr(self):
@@ -152,14 +152,14 @@ class PremiseStatusFinder:
             self.premise_open,
             self.pnigh,
             self.pdivisor,
-            self.fact_open_full,
+            self.fopen_full,
             self.fnigh_full,
         ):
             raise PremiseStatusFinderException("No parameter can be None")
 
-        if self.fact_open_full > self.fnigh_full:
+        if self.fopen_full > self.fnigh_full:
             raise PremiseStatusFinderException(
-                f"{self.fact_open_full=} cannot be greater that {self.fnigh_full=}"
+                f"{self.fopen_full=} cannot be greater that {self.fnigh_full=}"
             )
 
         if self.pdivisor <= 0:
@@ -178,7 +178,7 @@ class PremiseStatusFinder:
             )
 
     def bo(self) -> float:
-        return self.fact_open_full % self.pdivisor
+        return self.fopen_full % self.pdivisor
 
     def bn(self) -> float:
         return self.fnigh_full % self.pdivisor
@@ -193,7 +193,7 @@ class PremiseStatusFinder:
         return self.pdivisor
 
     def get_active(self) -> bool:
-        if self.fnigh_full - self.fact_open_full > self.pdivisor:
+        if self.fnigh_full - self.fopen_full > self.pdivisor:
             return True
         # Case B1
         elif get_range_less_than_pdivisor_active(
@@ -268,7 +268,7 @@ def get_collasped_fact_range_active(
         premise_open=premise_open,
         pnigh=pnigh,
         pdivisor=pdivisor,
-        fact_open_full=fnigh_full,
+        fopen_full=fnigh_full,
         fnigh_full=fnigh_full,
     )
     return x_pbsd.get_active()
@@ -278,14 +278,14 @@ def premisestatusfinder_shop(
     premise_open: float,
     pnigh: float,
     pdivisor: float,
-    fact_open_full: float,
+    fopen_full: float,
     fnigh_full: float,
 ):
     x_premisestatusfinder = PremiseStatusFinder(
         premise_open,
         pnigh,
         pdivisor,
-        fact_open_full,
+        fopen_full,
         fnigh_full,
     )
     x_premisestatusfinder.check_attr()
@@ -377,7 +377,7 @@ class PremiseUnit:
                 premise_open=self.open,
                 pnigh=self.pnigh,
                 pdivisor=self.pdivisor,
-                fact_open_full=factheir.fopen,
+                fopen_full=factheir.fopen,
                 fnigh_full=factheir.fnigh,
             )
             x_task = segr_obj.get_task_status()
@@ -400,7 +400,7 @@ class PremiseUnit:
             premise_open=self.open,
             pnigh=self.pnigh,
             pdivisor=self.pdivisor,
-            fact_open_full=factheir.fopen,
+            fopen_full=factheir.fopen,
             fnigh_full=factheir.fnigh,
         )
         return segr_obj.get_active()

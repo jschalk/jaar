@@ -425,14 +425,14 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #     premise_open=premiseunit.open,
     #     pnigh=premiseunit.pnigh,
     #     pdivisor=premiseunit.pdivisor,
-    #     fact_open_full=factheir_gregtime.open,
+    #     fopen_full=factheir_gregtime.open,
     #     fnigh_full=factheir_gregtime.pnigh,
     # )
     # print(
     #     f"----\n  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}"
     # )
     # print(
-    #     f"       {segr_obj.fact_open_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"
+    #     f"       {segr_obj.fopen_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     # )
 
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")

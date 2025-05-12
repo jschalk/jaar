@@ -12,7 +12,7 @@ def test_PremiseStatusFinder_Exists():
     x_premise_open = 1
     x_pnigh = 1
     x_pdivisor = 1
-    x_fact_open_full = 1
+    x_fopen_full = 1
     x_fnigh_full = 1
 
     # WHEN
@@ -20,7 +20,7 @@ def test_PremiseStatusFinder_Exists():
         x_premise_open,
         x_pnigh,
         x_pdivisor,
-        x_fact_open_full,
+        x_fopen_full,
         x_fnigh_full,
     )
 
@@ -28,7 +28,7 @@ def test_PremiseStatusFinder_Exists():
     assert x_pbsd.premise_open == x_premise_open
     assert x_pbsd.pnigh == x_pnigh
     assert x_pbsd.pdivisor == x_pdivisor
-    assert x_pbsd.fact_open_full == x_fact_open_full
+    assert x_pbsd.fopen_full == x_fopen_full
     assert x_pbsd.fnigh_full == x_fnigh_full
 
 
@@ -37,7 +37,7 @@ def test_premisestatusfinder_shop_ReturnsObj():
     x_premise_open = 1
     x_pnigh = 1
     x_pdivisor = 1
-    x_fact_open_full = 1
+    x_fopen_full = 1
     x_fnigh_full = 1
 
     # WHEN
@@ -45,7 +45,7 @@ def test_premisestatusfinder_shop_ReturnsObj():
         x_premise_open,
         x_pnigh,
         x_pdivisor,
-        x_fact_open_full,
+        x_fopen_full,
         x_fnigh_full,
     )
 
@@ -53,7 +53,7 @@ def test_premisestatusfinder_shop_ReturnsObj():
     assert x_pbsd.premise_open == x_premise_open
     assert x_pbsd.pnigh == x_pnigh
     assert x_pbsd.pdivisor == x_pdivisor
-    assert x_pbsd.fact_open_full == x_fact_open_full
+    assert x_pbsd.fopen_full == x_fopen_full
     assert x_pbsd.fnigh_full == x_fnigh_full
 
 
@@ -63,24 +63,24 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
             premise_open=1,
             pnigh=None,
             pdivisor=1,
-            fact_open_full=1,
+            fopen_full=1,
             fnigh_full=1,
         )
     assert str(excinfo_1.value) == "No parameter can be None"
 
-    x_fact_open_full = 2
+    x_fopen_full = 2
     x_fnigh_full = 1
     with pytest_raises(Exception) as excinfo_2:
         premisestatusfinder_shop(
             premise_open=1,
             pnigh=1,
             pdivisor=1,
-            fact_open_full=x_fact_open_full,
+            fopen_full=x_fopen_full,
             fnigh_full=x_fnigh_full,
         )
     assert (
         str(excinfo_2.value)
-        == f"self.fact_open_full={x_fact_open_full} cannot be greater that self.fnigh_full={x_fnigh_full}"
+        == f"self.fopen_full={x_fopen_full} cannot be greater that self.fnigh_full={x_fnigh_full}"
     )
 
     x_pdivisor = -1
@@ -89,7 +89,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
             premise_open=1,
             pnigh=1,
             pdivisor=x_pdivisor,
-            fact_open_full=1,
+            fopen_full=1,
             fnigh_full=1,
         )
     assert (
@@ -104,7 +104,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
             premise_open=x_premise_open,
             pnigh=1,
             pdivisor=x_pdivisor,
-            fact_open_full=1,
+            fopen_full=1,
             fnigh_full=1,
         )
     assert (
@@ -118,7 +118,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
             premise_open=1,
             pnigh=x_pnigh,
             pdivisor=x_pdivisor,
-            fact_open_full=1,
+            fopen_full=1,
             fnigh_full=1,
         )
     assert (
@@ -132,7 +132,7 @@ def test_PremiseStatusFinder_AbbrevationMethodsReturnsObjs():
     x_premise_open = 1
     x_pnigh = 2
     x_pdivisor = 3
-    x_fact_open_full = 4
+    x_fopen_full = 4
     x_fnigh_full = 5
 
     # WHEN
@@ -140,12 +140,12 @@ def test_PremiseStatusFinder_AbbrevationMethodsReturnsObjs():
         x_premise_open,
         x_pnigh,
         x_pdivisor,
-        x_fact_open_full,
+        x_fopen_full,
         x_fnigh_full,
     )
 
     # THEN
-    assert x_pbsd.bo() == x_fact_open_full % x_pdivisor
+    assert x_pbsd.bo() == x_fopen_full % x_pdivisor
     assert x_pbsd.bn() == x_fnigh_full % x_pdivisor
     assert x_pbsd.po() == x_premise_open
     assert x_pbsd.pn() == x_pnigh
@@ -564,13 +564,13 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
         premise_open=1305.0,
         pnigh=1305.0,
         pdivisor=1440,
-        fact_open_full=20000,
+        fopen_full=20000,
         fnigh_full=29000,
     )
-    print(f"----\n  {segr_obj.fact_open_full=}  {segr_obj.fnigh_full=}")
+    print(f"----\n  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=}")
     print(f"  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
     print(
-        f"  {segr_obj.fact_open_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"
+        f"  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     )
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
 
@@ -587,13 +587,13 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
         premise_open=1305.0,
         pnigh=1305.0,
         pdivisor=1440,
-        fact_open_full=1300,
+        fopen_full=1300,
         fnigh_full=1400,
     )
-    print(f"----\n  {segr_obj.fact_open_full=}  {segr_obj.fnigh_full=}")
+    print(f"----\n  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=}")
     print(f"  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
     print(
-        f"  {segr_obj.fact_open_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"
+        f"  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     )
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
 
@@ -608,13 +608,13 @@ def test_premisefactstatusdata_CorrectlyCalculates_active_AndTaskStatusExample_0
         premise_open=1305.0,
         pnigh=1305.0,
         pdivisor=1440,
-        fact_open_full=1300,
+        fopen_full=1300,
         fnigh_full=1300,
     )
-    print(f"----\n  {segr_obj.fact_open_full=}  {segr_obj.fnigh_full=}")
+    print(f"----\n  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=}")
     print(f"  {segr_obj.premise_open=}  {segr_obj.pnigh=}  {segr_obj.pdivisor=}")
     print(
-        f"  {segr_obj.fact_open_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fact_open_full}"
+        f"  {segr_obj.fopen_full=}  {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     )
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
 
