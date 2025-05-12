@@ -343,7 +343,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
 
     # ESTABLISH
     pdivisor_x = 34
-    open_x = 12
+    x_open = 12
     x_pnigh = 12
 
     # WHEN
@@ -352,7 +352,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
         reason_rcontext=week_way,
         reason_premise=wed_way,
         pdivisor=pdivisor_x,
-        reason_premise_open=open_x,
+        reason_premise_open=x_open,
         reason_pnigh=x_pnigh,
     )
 
@@ -361,7 +361,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
     assert casa_idea1.reasonunits[week_way].premises[wed_way].pnigh == 12
 
     wed_premise2 = premiseunit_shop(
-        pbranch=wed_way, pdivisor=pdivisor_x, open=open_x, pnigh=x_pnigh
+        wed_way, pdivisor=pdivisor_x, open=x_open, pnigh=x_pnigh
     )
     casa_wk_reason2 = reasonunit_shop(
         rcontext=week_way, premises={wed_premise2.pbranch: wed_premise2}
@@ -378,7 +378,7 @@ def test_BudUnit_ReasonUnits_set_UnCoupledMethod():
         reason_rcontext=week_way,
         reason_premise=thu_way,
         pdivisor=pdivisor_x,
-        reason_premise_open=open_x,
+        reason_premise_open=x_open,
         reason_pnigh=x_pnigh,
     )
 
