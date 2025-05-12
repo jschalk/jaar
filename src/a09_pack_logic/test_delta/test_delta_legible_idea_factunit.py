@@ -3,7 +3,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fnigh_str,
     fopen_str,
     idea_way_str,
-    fbase_str,
+    fcontext_str,
     fneed_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import atom_update, atom_insert, atom_delete
@@ -20,11 +20,11 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumberArgs()
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    fbase_value = sue_bud.make_way(casa_way, "fridge status")
-    fneed_value = sue_bud.make_way(fbase_value, "dirty")
+    fcontext_value = sue_bud.make_way(casa_way, "fridge status")
+    fneed_value = sue_bud.make_way(fcontext_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(fbase_str(), fbase_value)
+    swim_budatom.set_arg(fcontext_str(), fcontext_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -34,7 +34,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithOutNumberArgs()
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{fneed_value}' created for base '{fbase_value}' for idea '{way_value}'."
+    x_str = f"FactUnit '{fneed_value}' created for context '{fcontext_value}' for idea '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -46,13 +46,13 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    base_value = sue_bud.make_way(casa_way, "fridge status")
-    fneed_value = sue_bud.make_way(base_value, "dirty")
+    context_value = sue_bud.make_way(casa_way, "fridge status")
+    fneed_value = sue_bud.make_way(context_value, "dirty")
     fnigh_value = 13
     fopen_value = 17
     swim_budatom = budatom_shop(dimen, atom_insert())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(fbase_str(), base_value)
+    swim_budatom.set_arg(fcontext_str(), context_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     swim_budatom.set_arg(fnigh_str(), fnigh_value)
     swim_budatom.set_arg(fopen_str(), fopen_value)
@@ -64,7 +64,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_INSERT_WithNumberArgs():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{fneed_value}' created for base '{base_value}' for idea '{way_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
+    x_str = f"FactUnit '{fneed_value}' created for context '{context_value}' for idea '{way_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -76,11 +76,11 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumberArgs()
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    base_value = sue_bud.make_way(casa_way, "fridge status")
-    fneed_value = sue_bud.make_way(base_value, "dirty")
+    context_value = sue_bud.make_way(casa_way, "fridge status")
+    fneed_value = sue_bud.make_way(context_value, "dirty")
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(fbase_str(), base_value)
+    swim_budatom.set_arg(fcontext_str(), context_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
@@ -90,7 +90,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithOutNumberArgs()
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{fneed_value}' updated for base '{base_value}' for idea '{way_value}'."
+    x_str = f"FactUnit '{fneed_value}' updated for context '{context_value}' for idea '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -102,13 +102,13 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    base_value = sue_bud.make_way(casa_way, "fridge status")
-    fneed_value = sue_bud.make_way(base_value, "dirty")
+    context_value = sue_bud.make_way(casa_way, "fridge status")
+    fneed_value = sue_bud.make_way(context_value, "dirty")
     fnigh_value = 13
     fopen_value = 17
     swim_budatom = budatom_shop(dimen, atom_update())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(fbase_str(), base_value)
+    swim_budatom.set_arg(fcontext_str(), context_value)
     swim_budatom.set_arg(fneed_str(), fneed_value)
     swim_budatom.set_arg(fnigh_str(), fnigh_value)
     swim_budatom.set_arg(fopen_str(), fopen_value)
@@ -120,7 +120,7 @@ def test_create_legible_list_ReturnsObj_idea_factunit_UPDATE_WithNumberArgs():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"FactUnit '{fneed_value}' updated for base '{base_value}' for idea '{way_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
+    x_str = f"FactUnit '{fneed_value}' updated for context '{context_value}' for idea '{way_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -132,10 +132,10 @@ def test_create_legible_list_ReturnsObj_idea_factunit_DELETE():
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     casa_way = sue_bud.make_l1_way("casa")
-    base_value = sue_bud.make_way(casa_way, "fridge status")
+    context_value = sue_bud.make_way(casa_way, "fridge status")
     swim_budatom = budatom_shop(dimen, atom_delete())
     swim_budatom.set_arg(idea_way_str(), way_value)
-    swim_budatom.set_arg(fbase_str(), base_value)
+    swim_budatom.set_arg(fcontext_str(), context_value)
     # print(f"{swim_budatom=}")
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(swim_budatom)
@@ -144,6 +144,6 @@ def test_create_legible_list_ReturnsObj_idea_factunit_DELETE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"FactUnit base '{base_value}' deleted for idea '{way_value}'."
+    x_str = f"FactUnit context '{context_value}' deleted for idea '{way_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

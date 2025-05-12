@@ -20,13 +20,13 @@ def test_BudUnit_clear_idea_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     sue_bud._tree_traverse_count = x_tree_traverse_count
     sue_bud._idea_dict = x_idea_dict
     sue_bud._offtrack_kids_mass_set = "example"
-    sue_bud._reason_bases = {"example2"}
+    sue_bud._reason_contexts = {"example2"}
     sue_bud._range_inheritors = {"example2": 1}
     assert sue_bud._rational == x_rational
     assert sue_bud._tree_traverse_count == x_tree_traverse_count
     assert sue_bud._idea_dict == x_idea_dict
     assert sue_bud._offtrack_kids_mass_set != set()
-    assert sue_bud._reason_bases != set()
+    assert sue_bud._reason_contexts != set()
     assert sue_bud._range_inheritors != {}
 
     # WHEN
@@ -40,7 +40,7 @@ def test_BudUnit_clear_idea_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
     assert sue_bud._idea_dict != x_idea_dict
     assert sue_bud._idea_dict == {sue_bud.idearoot.get_idea_way(): sue_bud.idearoot}
     assert sue_bud._offtrack_kids_mass_set == set()
-    assert not sue_bud._reason_bases
+    assert not sue_bud._reason_contexts
     assert not sue_bud._range_inheritors
 
 
@@ -655,7 +655,7 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     tue_addin = 100
     yao_bud.set_idea(ideaunit_shop(tue_str, addin=tue_addin), week_way)
     root_way = to_way(yao_bud.fisc_tag)
-    yao_bud.edit_idea_attr(root_way, reason_base=tue_way, reason_premise=tue_way)
+    yao_bud.edit_idea_attr(root_way, reason_context=tue_way, reason_premise=tue_way)
 
     week_open = 3
     week_nigh = 7
@@ -707,7 +707,7 @@ def test_BudUnit_settle_bud_SetsIdeaUnit_factheir_With_range_factheirs():
     ball_str = "ball"
     ball_way = yao_bud.make_l1_way(ball_str)
     yao_bud.set_l1_idea(ideaunit_shop(ball_str))
-    yao_bud.edit_idea_attr(ball_way, reason_base=tue_way, reason_premise=tue_way)
+    yao_bud.edit_idea_attr(ball_way, reason_context=tue_way, reason_premise=tue_way)
 
     week_open = 3
     week_nigh = 7

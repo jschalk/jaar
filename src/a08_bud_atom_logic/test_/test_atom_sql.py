@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import create_way
 from src.a06_bud_logic._utils.str_a06 import budunit_str, bud_idea_factunit_str
-from src.a06_bud_logic._utils.str_a06 import idea_way_str, fbase_str, fopen_str
+from src.a06_bud_logic._utils.str_a06 import idea_way_str, fcontext_str, fopen_str
 from src.a08_bud_atom_logic._utils.str_a08 import atom_update, atom_insert
 from src.a08_bud_atom_logic.atom import (
     budatom_shop,
@@ -23,7 +23,7 @@ def test_BudAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     # WHEN
     x_dimen = bud_idea_factunit_str()
     update_disc_budatom = budatom_shop(x_dimen, atom_update())
-    update_disc_budatom.set_jkey("base", knee_way)
+    update_disc_budatom.set_jkey("context", knee_way)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -66,7 +66,7 @@ def test_BudAtom_get_insert_sqlstr_ReturnsObj_idea_factunit():
     x_dimen = bud_idea_factunit_str()
     update_disc_budatom = budatom_shop(x_dimen, atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(fbase_str(), knee_way)
+    update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fopen_str(), knee_open)
 
     # WHEN
@@ -76,7 +76,7 @@ def test_BudAtom_get_insert_sqlstr_ReturnsObj_idea_factunit():
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
   {x_dimen}_{atom_insert()}_{idea_way_str()}
-, {x_dimen}_{atom_insert()}_{fbase_str()}
+, {x_dimen}_{atom_insert()}_{fcontext_str()}
 , {x_dimen}_{atom_insert()}_{fopen_str()}
 )
 VALUES (
@@ -101,7 +101,7 @@ def test_get_budatom_from_rowdata_ReturnsObj_idea_factunit():
     x_dimen = bud_idea_factunit_str()
     x_sqlstr = f"""SELECT
   '{ball_way}' as {x_dimen}_{atom_insert()}_{idea_way_str()}
-, '{knee_way}' as {x_dimen}_{atom_insert()}_{fbase_str()}
+, '{knee_way}' as {x_dimen}_{atom_insert()}_{fcontext_str()}
 , {knee_fopen} as {x_dimen}_{atom_insert()}_{fopen_str()}
 """
     with sqlite_connection(":memory:") as x_conn:
@@ -113,7 +113,7 @@ def test_get_budatom_from_rowdata_ReturnsObj_idea_factunit():
     # THEN
     update_disc_budatom = budatom_shop(x_dimen, atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(fbase_str(), knee_way)
+    update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fopen_str(), knee_fopen)
     assert update_disc_budatom.dimen == x_budatom.dimen
     assert update_disc_budatom.crud_str == x_budatom.crud_str

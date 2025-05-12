@@ -1,5 +1,9 @@
 from src.a01_way_logic.way import default_bridge_if_None, create_way, to_way
-from src.a06_bud_logic._utils.str_a06 import acct_name_str, base_str, type_WayUnit_str
+from src.a06_bud_logic._utils.str_a06 import (
+    acct_name_str,
+    context_str,
+    type_WayUnit_str,
+)
 from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
@@ -256,11 +260,11 @@ def get_casa_maison_way_otx_dt() -> DataFrame:
     clean_otx_way = create_way(casa_otx_way, clean_otx_str)
     sweep_str = "sweep"
     sweep_otx_way = create_way(clean_otx_way, sweep_str)
-    otx_dt = DataFrame(columns=[base_str()])
-    otx_dt.loc[0, base_str()] = otx_accord45_way
-    otx_dt.loc[1, base_str()] = casa_otx_way
-    otx_dt.loc[2, base_str()] = clean_otx_way
-    otx_dt.loc[3, base_str()] = sweep_otx_way
+    otx_dt = DataFrame(columns=[context_str()])
+    otx_dt.loc[0, context_str()] = otx_accord45_way
+    otx_dt.loc[1, context_str()] = casa_otx_way
+    otx_dt.loc[2, context_str()] = clean_otx_way
+    otx_dt.loc[3, context_str()] = sweep_otx_way
     return otx_dt
 
 
@@ -270,11 +274,11 @@ def get_casa_maison_way_inx_dt() -> DataFrame:
     casa_inx_way = create_way(inx_accord87_way, "maison")
     clean_inx_way = create_way(casa_inx_way, "propre")
     sweep_inx_way = create_way(clean_inx_way, "sweep")
-    inx_dt = DataFrame(columns=[base_str()])
-    inx_dt.loc[0, base_str()] = inx_accord87_way
-    inx_dt.loc[1, base_str()] = casa_inx_way
-    inx_dt.loc[2, base_str()] = clean_inx_way
-    inx_dt.loc[3, base_str()] = sweep_inx_way
+    inx_dt = DataFrame(columns=[context_str()])
+    inx_dt.loc[0, context_str()] = inx_accord87_way
+    inx_dt.loc[1, context_str()] = casa_inx_way
+    inx_dt.loc[2, context_str()] = clean_inx_way
+    inx_dt.loc[3, context_str()] = sweep_inx_way
     return inx_dt
 
 

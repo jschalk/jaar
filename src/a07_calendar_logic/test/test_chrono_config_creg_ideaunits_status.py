@@ -61,7 +61,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario1():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=day_way,
+        reason_context=day_way,
         reason_premise=day_way,
         reason_premise_open=0,
         reason_premise_nigh=1,
@@ -95,7 +95,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_idea_Scenario2():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=day_way,
+        reason_context=day_way,
         reason_premise=day_way,
         reason_premise_open=360,
         reason_premise_nigh=420,
@@ -128,7 +128,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=days_way,
+        reason_context=days_way,
         reason_premise=days_way,
         reason_premise_open=4,
         reason_premise_nigh=5,
@@ -164,7 +164,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=week_way,
+        reason_context=week_way,
         reason_premise=week_way,
         reason_premise_open=0,
         reason_premise_nigh=1440,
@@ -198,7 +198,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_idea_Scenario1():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=week_way,
+        reason_context=week_way,
         reason_premise=week_way,
         reason_premise_open=2880,
         reason_premise_nigh=4220,
@@ -232,7 +232,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=weeks_way,
+        reason_context=weeks_way,
         reason_premise=weeks_way,
         reason_premise_open=4,
         reason_premise_nigh=5,
@@ -265,7 +265,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario0():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=year_way,
+        reason_context=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
         reason_premise_nigh=1440,
@@ -308,7 +308,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario1():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=year_way,
+        reason_context=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
         reason_premise_nigh=1440,
@@ -343,7 +343,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_idea_Scenario2():
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=year_way,
+        reason_context=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
         reason_premise_nigh=1440,
@@ -410,14 +410,14 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Wednesday_March1_200
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=wed_way,
+        reason_context=wed_way,
         reason_premise=wed_way,
         reason_premise_open=wed_gogo_want(),
         reason_premise_nigh=wed_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=year_way,
+        reason_context=year_way,
         reason_premise=year_way,
         reason_premise_open=0,
         reason_premise_nigh=1400,
@@ -537,14 +537,14 @@ def test_BudUnit_add_time_creg_ideaunit_SyncsWeekDayAndYear_Thursday_March2_2000
     sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=wed_way,
+        reason_context=wed_way,
         reason_premise=wed_way,
         reason_premise_open=thu_gogo_want(),
         reason_premise_nigh=thu_gogo_want() + 1440,
     )
     sue_budunit.edit_idea_attr(
         clean_way,
-        reason_base=year_way,
+        reason_context=year_way,
         reason_premise=year_way,
         reason_premise_open=1400,
         reason_premise_nigh=2800,

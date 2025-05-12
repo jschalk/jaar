@@ -107,7 +107,7 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debt
     bob_job = get_example_bob_speaker()
     bob_job.edit_idea_attr(
         cook_way(),
-        reason_del_premise_base=eat_way(),
+        reason_del_premise_context=eat_way(),
         reason_del_premise_need=hungry_way(),
     )
     bob_cook_ideaunit = bob_job.get_idea_obj(cook_way())
@@ -210,15 +210,15 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
     sue_job.edit_idea_attr(
         egg_way,
         pledge=True,
-        reason_base=chicken_way,
-        reason_base_idea_active_requisite=True,
+        reason_context=chicken_way,
+        reason_context_idea_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_job.edit_idea_attr(
         chicken_way,
         pledge=True,
-        reason_base=egg_way,
-        reason_base_idea_active_requisite=False,
+        reason_context=egg_way,
+        reason_context_idea_active_requisite=False,
     )
     save_job_file(fisc_mstr_dir, sue_job)
 

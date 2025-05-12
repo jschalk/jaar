@@ -23,8 +23,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     idea_way_str,
-    base_str,
-    fbase_str,
+    context_str,
+    fcontext_str,
     need_str,
     fneed_str,
 )
@@ -100,7 +100,7 @@ def test_bud_idea_reasonunit_get_obj_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_idea(casa_way)
-    jkeys = {idea_way_str(): casa_way, base_str(): week_way}
+    jkeys = {idea_way_str(): casa_way, context_str(): week_way}
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
     sue_bud.get_idea_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
@@ -120,7 +120,11 @@ def test_bud_idea_reason_premiseunit_get_obj_ReturnsObj():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
-    casa_jkeys = {idea_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    casa_jkeys = {
+        idea_way_str(): casa_way,
+        context_str(): week_way,
+        need_str(): thur_way,
+    }
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
     sue_bud.add_idea(thur_way)
@@ -142,7 +146,7 @@ def test_bud_idea_factunit_get_obj_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_idea(casa_way)
-    jkeys = {idea_way_str(): casa_way, fbase_str(): week_way}
+    jkeys = {idea_way_str(): casa_way, fcontext_str(): week_way}
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
     sue_bud.get_idea_obj(casa_way).set_factunit(factunit_shop(week_way))
@@ -238,7 +242,7 @@ def test_bud_get_obj_ReturnsObj_bud_idea_reasonunit_get_obj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_idea(casa_way)
-    jkeys = {idea_way_str(): casa_way, base_str(): week_way}
+    jkeys = {idea_way_str(): casa_way, context_str(): week_way}
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
     sue_bud.get_idea_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
@@ -258,7 +262,11 @@ def test_bud_get_obj_ReturnsObj_bud_idea_reason_premiseunit_get_obj():
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
-    casa_jkeys = {idea_way_str(): casa_way, base_str(): week_way, need_str(): thur_way}
+    casa_jkeys = {
+        idea_way_str(): casa_way,
+        context_str(): week_way,
+        need_str(): thur_way,
+    }
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
     sue_bud.add_idea(thur_way)
@@ -280,7 +288,7 @@ def test_bud_get_obj_ReturnsObj_bud_idea_factunit_get_obj():
     casa_way = sue_bud.make_l1_way(casa_str)
     week_way = sue_bud.make_l1_way("week")
     sue_bud.add_idea(casa_way)
-    jkeys = {idea_way_str(): casa_way, fbase_str(): week_way}
+    jkeys = {idea_way_str(): casa_way, fcontext_str(): week_way}
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(week_way)
     sue_bud.get_idea_obj(casa_way).set_factunit(factunit_shop(week_way))

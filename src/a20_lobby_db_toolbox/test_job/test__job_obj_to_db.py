@@ -196,21 +196,21 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_base = 2
-    x_base_idea_active_requisite = 3
+    x_context = 2
+    x_context_idea_active_requisite = 3
     x__task = 4
     x__status = 5
-    x__base_idea_active_value = 6
+    x__context_idea_active_value = 6
     values_dict = {
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "base": x_base,
-        "base_idea_active_requisite": x_base_idea_active_requisite,
+        "context": x_context,
+        "context_idea_active_requisite": x_context_idea_active_requisite,
         "_task": x__task,
         "_status": x__status,
-        "_base_idea_active_value": x__base_idea_active_value,
+        "_context_idea_active_value": x__context_idea_active_value,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -260,7 +260,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_base = 2
+    x_context = 2
     x_need = 3
     x_nigh = 4
     x_open = 5
@@ -272,7 +272,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "base": x_base,
+        "context": x_context,
         "need": x_need,
         "nigh": x_nigh,
         "open": x_open,
@@ -392,7 +392,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_fbase = 2
+    x_fcontext = 2
     x_fneed = 3
     x_fopen = 4
     x_fnigh = 5
@@ -401,7 +401,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "fbase": x_fbase,
+        "fcontext": x_fcontext,
         "fneed": x_fneed,
         "fopen": x_fopen,
         "fnigh": x_fnigh,

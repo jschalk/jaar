@@ -47,13 +47,13 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_reasonunits():
     # create reasonunit
     premise_x = premiseunit_shop(need=old_rain_way)
     premises_x = {premise_x.need: premise_x}
-    reason_x = reasonunit_shop(old_water_way, premises=premises_x)
-    reasons_x = {reason_x.base: reason_x}
+    x_reason = reasonunit_shop(old_water_way, premises=premises_x)
+    reasons_x = {x_reason.context: x_reason}
     x_idea = ideaunit_shop(roses_str, reasonunits=reasons_x)
     # check asserts
     assert x_idea.reasonunits.get(old_water_way) is not None
     old_water_rain_reason = x_idea.reasonunits[old_water_way]
-    assert old_water_rain_reason.base == old_water_way
+    assert old_water_rain_reason.context == old_water_way
     assert old_water_rain_reason.premises.get(old_rain_way) is not None
     water_rain_l_premise = old_water_rain_reason.premises[old_rain_way]
     assert water_rain_l_premise.need == old_rain_way
@@ -68,7 +68,7 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_reasonunits():
     assert x_idea.reasonunits.get(old_water_way) is None
     assert x_idea.reasonunits.get(new_water_way) is not None
     new_water_rain_reason = x_idea.reasonunits[new_water_way]
-    assert new_water_rain_reason.base == new_water_way
+    assert new_water_rain_reason.context == new_water_way
     new_rain_way = create_way(new_water_way, rain_str)
     assert new_water_rain_reason.premises.get(old_rain_way) is None
     assert new_water_rain_reason.premises.get(new_rain_way) is not None
@@ -93,12 +93,12 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_factunits():
     rain_str = "rain"
     old_rain_way = create_way(old_water_way, rain_str)
 
-    x_factunit = factunit_shop(fbase=old_water_way, fneed=old_rain_way)
-    factunits_x = {x_factunit.fbase: x_factunit}
+    x_factunit = factunit_shop(fcontext=old_water_way, fneed=old_rain_way)
+    factunits_x = {x_factunit.fcontext: x_factunit}
     x_idea = ideaunit_shop(roses_str, factunits=factunits_x)
     assert x_idea.factunits[old_water_way] is not None
     old_water_rain_factunit = x_idea.factunits[old_water_way]
-    assert old_water_rain_factunit.fbase == old_water_way
+    assert old_water_rain_factunit.fcontext == old_water_way
     assert old_water_rain_factunit.fneed == old_rain_way
 
     # WHEN
@@ -111,14 +111,14 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_factunits():
     assert x_idea.factunits.get(old_water_way) is None
     assert x_idea.factunits.get(new_water_way) is not None
     new_water_rain_factunit = x_idea.factunits[new_water_way]
-    assert new_water_rain_factunit.fbase == new_water_way
+    assert new_water_rain_factunit.fcontext == new_water_way
     new_rain_way = create_way(new_water_way, rain_str)
     assert new_water_rain_factunit.fneed == new_rain_way
 
     print(f"{len(x_idea.factunits)=}")
     x_factunit = x_idea.factunits.get(new_water_way)
     assert x_factunit is not None
-    assert x_factunit.fbase == new_water_way
+    assert x_factunit.fcontext == new_water_way
     assert x_factunit.fneed == new_rain_way
 
 

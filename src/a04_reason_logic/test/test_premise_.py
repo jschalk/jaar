@@ -114,7 +114,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     usa_way = create_way(nation_way, "USA")
     texas_way = create_way(usa_way, "Texas")
     idaho_way = create_way(usa_way, "Idaho")
-    texas_fact = factheir_shop(fbase=usa_way, fneed=texas_way)
+    texas_fact = factheir_shop(fcontext=usa_way, fneed=texas_way)
 
     # WHEN / THEN
     texas_premise = premiseunit_shop(need=texas_way)
@@ -133,7 +133,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     sea_premise = premiseunit_shop(need=sea_way)
 
     # THEN
-    sea_fact = factheir_shop(fbase=sea_way, fneed=sea_way)
+    sea_fact = factheir_shop(fcontext=sea_way, fneed=sea_way)
     assert sea_premise.is_in_lineage(fact_fneed=sea_fact.fneed)
     seaside_way = create_way("earth", "seaside")  # "earth,seaside,beach"
     seaside_beach_way = create_way(seaside_way, "beach")  # "earth,seaside,beach"
@@ -150,7 +150,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridg
     idaho_way = create_way(usa_way, "Idaho", bridge=slash_str)
 
     # WHEN
-    texas_fact = factheir_shop(fbase=usa_way, fneed=texas_way)
+    texas_fact = factheir_shop(fcontext=usa_way, fneed=texas_way)
 
     # THEN
     texas_premise = premiseunit_shop(need=texas_way, bridge=slash_str)
@@ -176,7 +176,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridg
     sea_premise = premiseunit_shop(need=sea_way, bridge=slash_str)
 
     # THEN
-    sea_fact = factheir_shop(fbase=sea_way, fneed=sea_way)
+    sea_fact = factheir_shop(fcontext=sea_way, fneed=sea_way)
     assert sea_premise.is_in_lineage(fact_fneed=sea_fact.fneed)
     seaside_fact = factheir_shop(seaside_beach_way, seaside_beach_way)
     assert sea_premise.is_in_lineage(fact_fneed=seaside_fact.fneed) is False
@@ -189,41 +189,41 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_r
     yr_premise = premiseunit_shop(need=yr_way, open=3, nigh=13)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(fbase=yr_way, fopen=5, fnigh=11, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=5, fnigh=11, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=1, fnigh=11, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=1, fnigh=11, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=8, fnigh=17, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=8, fnigh=17, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=0, fnigh=2, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=0, fnigh=2, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=15, fnigh=19, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=15, fnigh=19, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=1, fnigh=19, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=1, fnigh=19, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
     # boundary tests
-    yr_fact = factheir_shop(fbase=yr_way, fopen=13, fnigh=19, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=13, fnigh=19, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=0, fnigh=3, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=0, fnigh=3, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=0, fnigh=0, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=0, fnigh=0, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
-    yr_fact = factheir_shop(fbase=yr_way, fopen=3, fnigh=3, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=3, fnigh=3, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
-    yr_fact = factheir_shop(fbase=yr_way, fopen=13, fnigh=13, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=13, fnigh=13, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
-    yr_fact = factheir_shop(fbase=yr_way, fopen=17, fnigh=17, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=17, fnigh=17, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fopen=20, fnigh=17, fneed=yr_way)
+    yr_fact = factheir_shop(fcontext=yr_way, fopen=20, fnigh=17, fneed=yr_way)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
 
@@ -234,29 +234,29 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
     yr_premise = premiseunit_shop(need=yr_way, divisor=5, open=0, nigh=0)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=5, fnigh=5)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=5, fnigh=5)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=6, fnigh=6)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=6, fnigh=6)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=4, fnigh=6)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=4, fnigh=6)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=3, fnigh=4)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=3, fnigh=4)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
     # ESTABLISH
     yr_premise = premiseunit_shop(need=yr_way, divisor=5, open=0, nigh=2)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=2, fnigh=2)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=2, fnigh=2)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=102, fnigh=102)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=102, fnigh=102)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(fbase=yr_way, fneed=yr_way, fopen=1, fnigh=4)
+    yr_fact = factheir_shop(fcontext=yr_way, fneed=yr_way, fopen=1, fnigh=4)
     assert yr_premise._get_range_segregate_status(factheir=yr_fact)
 
 
@@ -283,10 +283,10 @@ def test_PremiseUnitUnit_get_premise_status_Returns_active_Boolean():
     wkday_premise = premiseunit_shop(need=wkday_way)
 
     # WHEN / THEN
-    wkday_fact = factheir_shop(fbase=wkday_way, fneed=wkday_way)
+    wkday_fact = factheir_shop(fcontext=wkday_way, fneed=wkday_way)
     assert wkday_premise._get_active(factheir=wkday_fact)
     # if fact has range but premise does not reqquire range, fact's range does not matter
-    wkday_fact = factheir_shop(fbase=wkday_way, fneed=wkday_way, fopen=0, fnigh=2)
+    wkday_fact = factheir_shop(fcontext=wkday_way, fneed=wkday_way, fopen=0, fnigh=2)
     assert wkday_premise._get_active(factheir=wkday_fact)
 
 
@@ -297,9 +297,9 @@ def test_PremiseUnitUnit_get_active_Returns_is_range_active_Boolean():
     wkday_premise = premiseunit_shop(need=wkday_way, open=3, nigh=7)
 
     # WHEN / THEN
-    wkday_fact = factheir_shop(fbase=wkday_way, fneed=wkday_way)
+    wkday_fact = factheir_shop(fcontext=wkday_way, fneed=wkday_way)
     assert wkday_premise._get_active(factheir=wkday_fact) is False
-    wkday_fact = factheir_shop(fbase=wkday_way, fneed=wkday_way, fopen=0, fnigh=2)
+    wkday_fact = factheir_shop(fcontext=wkday_way, fneed=wkday_way, fopen=0, fnigh=2)
     assert wkday_premise._get_active(factheir=wkday_fact) is False
 
 
@@ -327,7 +327,7 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     wed_premise = premiseunit_shop(need=wed_way)
-    bud_fact = factheir_shop(fbase=wkday_way, fneed=wed_way)
+    bud_fact = factheir_shop(fcontext=wkday_way, fneed=wed_way)
     assert wed_premise._status is None
 
     # WHEN
@@ -349,7 +349,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario2():
     assert wed_after_premise._status is None
 
     # WHEN
-    wed_fact = factheir_shop(fbase=wkday_way, fneed=wed_way)
+    wed_fact = factheir_shop(fcontext=wkday_way, fneed=wed_way)
     wed_after_premise.set_status(x_factheir=wed_fact)
 
     # THEN
@@ -368,7 +368,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario3():
     assert wed_premise._status is None
 
     # WHEN
-    noon_fact = factheir_shop(fbase=wkday_way, fneed=wed_noon_way)
+    noon_fact = factheir_shop(fcontext=wkday_way, fneed=wed_noon_way)
     wed_premise.set_status(x_factheir=noon_fact)
 
     # THEN
@@ -384,7 +384,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario4():
     thu_str = "thursday"
     thu_way = create_way(wkday_way, thu_str)
     wed_premise = premiseunit_shop(need=wed_way)
-    thu_fact = factheir_shop(fbase=wkday_way, fneed=thu_way)
+    thu_fact = factheir_shop(fcontext=wkday_way, fneed=thu_way)
     assert wed_premise._status is None
     assert wed_premise.is_in_lineage(fact_fneed=thu_fact.fneed) is False
     assert thu_fact.fopen is None
@@ -411,7 +411,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario5():
     assert wed_sun_premise._status is None
 
     # WHEN
-    wed_rain_fact = factheir_shop(fbase=wkday_way, fneed=wed_rain_way)
+    wed_rain_fact = factheir_shop(fcontext=wkday_way, fneed=wed_rain_way)
     wed_sun_premise.set_status(x_factheir=wed_rain_fact)
 
     # THEN
@@ -443,7 +443,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
     no_range_premise._status = False
 
     # WHEN / THEN
-    no_range_fact = factheir_shop(fbase=hr24_way, fneed=hr24_way)
+    no_range_fact = factheir_shop(fcontext=hr24_way, fneed=hr24_way)
     assert no_range_premise._get_task_status(factheir=no_range_fact) is False
 
 
@@ -529,7 +529,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
     wed_premise._status = True
 
     # ESTABLISH
-    factheir = factheir_shop(fbase=week_way, fneed=wed_way)
+    factheir = factheir_shop(fcontext=week_way, fneed=wed_way)
 
     # THEN
     assert wed_premise._get_task_status(factheir=factheir) is False
@@ -592,7 +592,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_premise._status is None
 
     # WHEN
-    bud_fact = factheir_shop(fbase=hr24_way, fneed=hr24_way, fopen=8, fnigh=10)
+    bud_fact = factheir_shop(fcontext=hr24_way, fneed=hr24_way, fopen=8, fnigh=10)
     hr24_premise.set_status(x_factheir=bud_fact)
 
     # THEN
@@ -623,7 +623,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     week_premise = premiseunit_shop(need=week_way, divisor=6, open=1, nigh=1)
-    bud_fact = factheir_shop(fbase=week_way, fneed=week_way, fopen=7, fnigh=7)
+    bud_fact = factheir_shop(fcontext=week_way, fneed=week_way, fopen=7, fnigh=7)
     assert week_premise._status is None
 
     # WHEN

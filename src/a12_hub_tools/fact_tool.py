@@ -29,12 +29,14 @@ def get_nodes_with_weighted_facts(
                     _add_to_tuple_quota_sum(to_eval_temp, child_fact, child_quota)
 
             for node_fact in node_facts.values():
-                if to_eval_temp.get(node_fact.fbase) is None:
-                    to_eval_temp[node_fact.fbase] = {node_fact.get_tuple(): child_quota}
+                if to_eval_temp.get(node_fact.fcontext) is None:
+                    to_eval_temp[node_fact.fcontext] = {
+                        node_fact.get_tuple(): child_quota
+                    }
 
         evaluated_facts = {
-            fact_base: get_factunit_from_tuple(get_max_key(wgt_facts))
-            for fact_base, wgt_facts in to_eval_temp.items()
+            fact_context: get_factunit_from_tuple(get_max_key(wgt_facts))
+            for fact_context, wgt_facts in to_eval_temp.items()
         }
         nodes_facts_dict[node_addr] = evaluated_facts
 
@@ -46,11 +48,11 @@ def _add_to_tuple_quota_sum(
     child_fact: FactUnit,
     child_quota: float,
 ):
-    if to_eval_temp.get(child_fact.fbase) is None:
-        to_eval_temp[child_fact.fbase] = {}
-    base_to_eval = to_eval_temp.get(child_fact.fbase)
+    if to_eval_temp.get(child_fact.fcontext) is None:
+        to_eval_temp[child_fact.fcontext] = {}
+    context_to_eval = to_eval_temp.get(child_fact.fcontext)
     child_fact_tuple = child_fact.get_tuple()
-    if base_to_eval.get(child_fact_tuple) is None:
-        base_to_eval[child_fact_tuple] = 0
-    current_fact_tuple_quota = base_to_eval.get(child_fact_tuple)
-    base_to_eval[child_fact_tuple] = child_quota + current_fact_tuple_quota
+    if context_to_eval.get(child_fact_tuple) is None:
+        context_to_eval[child_fact_tuple] = 0
+    current_fact_tuple_quota = context_to_eval.get(child_fact_tuple)
+    context_to_eval[child_fact_tuple] = child_quota + current_fact_tuple_quota

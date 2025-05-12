@@ -195,12 +195,12 @@ def stop_want_str() -> str:
     return "stop_want"
 
 
-def base_str() -> str:
-    return "base"
+def context_str() -> str:
+    return "context"
 
 
-def fbase_str() -> str:
-    return "fbase"
+def fcontext_str() -> str:
+    return "fcontext"
 
 
 def fopen_str() -> str:
@@ -219,5 +219,5 @@ def open_str() -> str:
     return "open"
 
 
-def base_idea_active_requisite_str() -> str:
-    return "base_idea_active_requisite"
+def context_idea_active_requisite_str() -> str:
+    return "context_idea_active_requisite"

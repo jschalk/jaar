@@ -55,7 +55,7 @@ def test_BudUnit_get_relevant_ways_SimpleReturnsOnlyAncestors():
     assert relevant_ways == {root_way, sun_way, week_way}
 
 
-def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitBase():
+def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitContext():
     # ESTABLISH
     sue_bud = budunit_shop(owner_name="Sue")
     casa_str = "casa"
@@ -74,7 +74,7 @@ def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitBase():
     status_way = sue_bud.make_way(casa_way, status_str)
     status_idea = ideaunit_shop(status_str)
     sue_bud.set_idea(status_idea, parent_way=casa_way)
-    floor_reason = reasonunit_shop(base=status_way)
+    floor_reason = reasonunit_shop(context=status_way)
     floor_reason.set_premise(premise=status_way)
     sue_bud.edit_idea_attr(floor_way, reason=floor_reason)
 
@@ -90,7 +90,7 @@ def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitBase():
     assert unim_way not in relevant_ways
 
 
-def test_BudUnit_get_relevant_ways_ReturnsReasonUnitBaseAndDescendents():
+def test_BudUnit_get_relevant_ways_ReturnsReasonUnitContextAndDescendents():
     # ESTABLISH
     x_bud = get_mop_with_reason_budunit_example1()
     root_way = to_way(x_bud.fisc_tag)

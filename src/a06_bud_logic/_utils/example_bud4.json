@@ -105,15 +105,15 @@
           "debtit_vote": 1,
           "group_label": ";ACME DevOps"
         },
-        ";Everyone": {
-          "credit_vote": 1,
-          "debtit_vote": 1,
-          "group_label": ";Everyone"
-        },
         ";appreciates US DOLLAR": {
           "credit_vote": 1,
           "debtit_vote": 1,
           "group_label": ";appreciates US DOLLAR"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
         },
         "Bob302": {
           "credit_vote": 1,
@@ -318,6 +318,11 @@
     },
     "Perrison": {
       "_memberships": {
+        ";appreciates US DOLLAR": {
+          "credit_vote": 5,
+          "debtit_vote": 1,
+          "group_label": ";appreciates US DOLLAR"
+        },
         ";Everyone": {
           "credit_vote": 1,
           "debtit_vote": 1,
@@ -327,11 +332,6 @@
           "credit_vote": 6.4,
           "debtit_vote": 1,
           "group_label": ";Friends"
-        },
-        ";appreciates US DOLLAR": {
-          "credit_vote": 5,
-          "debtit_vote": 1,
-          "group_label": ";appreciates US DOLLAR"
         },
         "Perrison": {
           "credit_vote": 1,
@@ -372,15 +372,15 @@
     },
     "Prashant": {
       "_memberships": {
-        ";Everyone": {
-          "credit_vote": 1,
-          "debtit_vote": 1,
-          "group_label": ";Everyone"
-        },
         ";appreciates US DOLLAR": {
           "credit_vote": 2,
           "debtit_vote": 1,
           "group_label": ";appreciates US DOLLAR"
+        },
+        ";Everyone": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";Everyone"
         },
         "Prashant": {
           "credit_vote": 1,
@@ -394,6 +394,11 @@
     },
     "Renee Elise Goldsberry": {
       "_memberships": {
+        ";appreciates US DOLLAR": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";appreciates US DOLLAR"
+        },
         ";Climate Death": {
           "credit_vote": 1,
           "debtit_vote": 1,
@@ -409,6 +414,11 @@
           "debtit_vote": 1,
           "group_label": ";Friends"
         },
+        ";hurt by us dollar": {
+          "credit_vote": 1,
+          "debtit_vote": 1,
+          "group_label": ";hurt by us dollar"
+        },
         ";People who identify by UTEP": {
           "credit_vote": 1,
           "debtit_vote": 1,
@@ -423,16 +433,6 @@
           "credit_vote": 1,
           "debtit_vote": 1,
           "group_label": ";SHOW ME2"
-        },
-        ";appreciates US DOLLAR": {
-          "credit_vote": 1,
-          "debtit_vote": 1,
-          "group_label": ";appreciates US DOLLAR"
-        },
-        ";hurt by us dollar": {
-          "credit_vote": 1,
-          "debtit_vote": 1,
-          "group_label": ";hurt by us dollar"
         },
         "Renee Elise Goldsberry": {
           "credit_vote": 1,
@@ -566,6 +566,24 @@
   "fund_pool": 1000000000.0,
   "idearoot": {
     "_kids": {
+      "Aaron Donald objects effected by him": {
+        "_is_expanded": false,
+        "_kids": {
+          "interesting": {
+            "_uid": 262,
+            "idea_tag": "interesting",
+            "mass": 1
+          },
+          "not interesting": {
+            "_uid": 263,
+            "idea_tag": "not interesting",
+            "mass": 1
+          }
+        },
+        "_uid": 261,
+        "idea_tag": "Aaron Donald objects effected by him",
+        "mass": 1
+      },
       "ACME": {
         "_is_expanded": false,
         "_kids": {
@@ -581,7 +599,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -605,7 +623,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -630,7 +648,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -653,7 +671,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;Sept 4th 2023 9am": {
                         "need": ";A;time;gregtime;x2;Sept 4th 2023 9am",
@@ -673,7 +691,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -698,7 +716,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -722,7 +740,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -738,30 +756,6 @@
                 "idea_tag": "Know Interbody retaliation guildlines",
                 "mass": 1
               },
-              "Rick Management and Hazard Analysis": {
-                "_kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "_uid": 122,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
-                            "nigh": 1064350680.0,
-                            "open": 1064350680.0
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "_uid": 112,
-                "idea_tag": "Rick Management and Hazard Analysis",
-                "mass": 1
-              },
               "know OSHA COVID-19 Rick Reduction guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
@@ -771,7 +765,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
                             "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
@@ -785,6 +779,30 @@
                 },
                 "_uid": 110,
                 "idea_tag": "know OSHA COVID-19 Rick Reduction guildlines",
+                "mass": 1
+              },
+              "Rick Management and Hazard Analysis": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 122,
+                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "need": ";A;time;gregtime;x;Sept 4th 2023 9am",
+                            "nigh": 1064350680.0,
+                            "open": 1064350680.0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 112,
+                "idea_tag": "Rick Management and Hazard Analysis",
                 "mass": 1
               }
             },
@@ -806,7 +824,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "base": ";A;time;gregtime",
+                            "context": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -847,7 +865,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "base": ";A;time;gregtime",
+                            "context": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -865,7 +883,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -884,7 +902,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -903,7 +921,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -921,7 +939,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
                         "divisor": 1440,
@@ -942,7 +960,26 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "divisor": 1440,
+                            "need": ";A;time;gregtime;day",
+                            "nigh": 540,
+                            "open": 540
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "consider management perspective": {
+                    "_uid": 155,
+                    "idea_tag": "consider management perspective",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -963,7 +1000,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "base": ";A;time;gregtime",
+                            "context": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1004,7 +1041,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "base": ";A;time;gregtime",
+                            "context": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1023,7 +1060,7 @@
                         "pledge": true,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "base": ";A;time;gregtime",
+                            "context": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1046,7 +1083,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1065,7 +1102,7 @@
                     "pledge": true,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1085,7 +1122,7 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;time;gregtime": {
-                            "base": ";A;time;gregtime",
+                            "context": ";A;time;gregtime",
                             "premises": {
                               "A;time;gregtime;day": {
                                 "divisor": 1440,
@@ -1103,26 +1140,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime;day": {
-                            "divisor": 1440,
-                            "need": ";A;time;gregtime;day",
-                            "nigh": 540,
-                            "open": 540
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "consider management perspective": {
-                    "_uid": 155,
-                    "idea_tag": "consider management perspective",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
+                        "context": ";A;time;gregtime",
                         "premises": {
                           "A;time;gregtime;day": {
                             "divisor": 1440,
@@ -1142,7 +1160,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;day": {
                         "divisor": 1440.0,
@@ -1160,7 +1178,7 @@
             "mass": 1,
             "reasonunits": {
               "A;time;gregtime": {
-                "base": ";A;time;gregtime",
+                "context": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime;day": {
                     "divisor": 1440,
@@ -1177,24 +1195,6 @@
         "idea_tag": "ACME",
         "mass": 1
       },
-      "Aaron Donald objects effected by him": {
-        "_is_expanded": false,
-        "_kids": {
-          "interesting": {
-            "_uid": 262,
-            "idea_tag": "interesting",
-            "mass": 1
-          },
-          "not interesting": {
-            "_uid": 263,
-            "idea_tag": "not interesting",
-            "mass": 1
-          }
-        },
-        "_uid": 261,
-        "idea_tag": "Aaron Donald objects effected by him",
-        "mass": 1
-      },
       "Asset management": {
         "_is_expanded": false,
         "_kids": {
@@ -1204,83 +1204,6 @@
                 "_kids": {
                   "downtown": {
                     "_kids": {
-                      "Local college": {
-                        "_kids": {
-                          "browsing": {
-                            "_uid": 217,
-                            "idea_tag": "browsing",
-                            "mass": 1,
-                            "reasonunits": {
-                              "A;Nation-States": {
-                                "base": ";A;Nation-States",
-                                "premises": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
-                                    "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "picnic": {
-                            "_uid": 216,
-                            "idea_tag": "picnic",
-                            "mass": 1,
-                            "reasonunits": {
-                              "A;Seasons": {
-                                "base": ";A;Seasons",
-                                "premises": {
-                                  "A;Seasons;Summer": {
-                                    "need": ";A;Seasons;Summer"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "street soccer": {
-                            "_uid": 213,
-                            "idea_tag": "street soccer",
-                            "mass": 1,
-                            "reasonunits": {
-                              "A;Nation-States": {
-                                "base": ";A;Nation-States",
-                                "premises": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
-                                    "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "swimming": {
-                            "_uid": 212,
-                            "idea_tag": "swimming",
-                            "mass": 1,
-                            "reasonunits": {
-                              "A;Nation-States": {
-                                "base": ";A;Nation-States",
-                                "premises": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
-                                    "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "_uid": 210,
-                        "idea_tag": "Local college",
-                        "mass": 1,
-                        "reasonunits": {
-                          "A;Nation-States": {
-                            "base": ";A;Nation-States",
-                            "premises": {
-                              "A;Nation-States;USA;Portland OR;Downtown;PSU": {
-                                "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
-                              }
-                            }
-                          }
-                        }
-                      },
                       "flats": {
                         "_kids": {
                           "be reponsible for rent": {
@@ -1289,7 +1212,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "base": ";A;Nation-States",
+                                "context": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace": {
                                     "need": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace"
@@ -1306,7 +1229,7 @@
                                 "mass": 1,
                                 "reasonunits": {
                                   "A;Interweb": {
-                                    "base": ";A;Interweb",
+                                    "context": ";A;Interweb",
                                     "premises": {
                                       "A;Interweb,YahooVideo": {
                                         "need": ";A;Interweb,YahooVideo"
@@ -1321,7 +1244,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "base": ";A;Nation-States",
+                                "context": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden": {
                                     "need": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden"
@@ -1336,7 +1259,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
-                                "base": ";A;Nation-States",
+                                "context": ";A;Nation-States",
                                 "premises": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
                                     "need": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
@@ -1351,7 +1274,7 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Moods": {
-                                "base": ";A;Moods",
+                                "context": ";A;Moods",
                                 "premises": {
                                   "A;Moods;hungry": {
                                     "need": ";A;Moods;hungry"
@@ -1366,10 +1289,87 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
-                            "base": ";A;Nation-States",
+                            "context": ";A;Nation-States",
                             "premises": {
                               "A;Nation-States;USA;Portland OR;Downtown;Flats": {
                                 "need": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "Local college": {
+                        "_kids": {
+                          "browsing": {
+                            "_uid": 217,
+                            "idea_tag": "browsing",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States": {
+                                "context": ";A;Nation-States",
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
+                                    "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "picnic": {
+                            "_uid": 216,
+                            "idea_tag": "picnic",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Seasons": {
+                                "context": ";A;Seasons",
+                                "premises": {
+                                  "A;Seasons;Summer": {
+                                    "need": ";A;Seasons;Summer"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "street soccer": {
+                            "_uid": 213,
+                            "idea_tag": "street soccer",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States": {
+                                "context": ";A;Nation-States",
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
+                                    "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "swimming": {
+                            "_uid": 212,
+                            "idea_tag": "swimming",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States": {
+                                "context": ";A;Nation-States",
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
+                                    "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "_uid": 210,
+                        "idea_tag": "Local college",
+                        "mass": 1,
+                        "reasonunits": {
+                          "A;Nation-States": {
+                            "context": ";A;Nation-States",
+                            "premises": {
+                              "A;Nation-States;USA;Portland OR;Downtown;PSU": {
+                                "need": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
                               }
                             }
                           }
@@ -1381,7 +1381,7 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;Nation-States": {
-                        "base": ";A;Nation-States",
+                        "context": ";A;Nation-States",
                         "premises": {
                           "A;Nation-States;USA;Portland OR;Downtown": {
                             "need": ";A;Nation-States;USA;Portland OR;Downtown"
@@ -1396,7 +1396,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "base": ";A;Nation-States",
+                    "context": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Portland OR": {
                         "need": ";A;Nation-States;USA;Portland OR"
@@ -1411,7 +1411,7 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "base": ";A;Nation-States",
+                    "context": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Texas": {
                         "need": ";A;Nation-States;USA;Texas"
@@ -1426,7 +1426,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "base": ";A;Nation-States",
+                "context": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;USA": {
                     "need": ";A;Nation-States;USA"
@@ -1441,7 +1441,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "base": ";A;Nation-States",
+                "context": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;France2": {
                     "need": ";A;Nation-States;France2"
@@ -1467,7 +1467,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "need": ";A;time;gregtime",
@@ -1505,356 +1505,142 @@
         "idea_tag": "Bob Dylan Root",
         "mass": 1
       },
-      "D&B": {
+      "casa": {
         "_is_expanded": false,
         "_kids": {
-          "bens friends be desperate for of housing support": {
-            "_kids": {
-              "Ask Aaron monthly what I can do": {
-                "_uid": 160,
-                "awardlinks": {
-                  "Renee Elise Goldsberry": {
-                    "awardee_label": "Renee Elise Goldsberry",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "Ask Aaron monthly what I can do",
-                "mass": 1,
-                "reasonunits": {
-                  "A;Aaron Donald objects effected by him": {
-                    "base": ";A;Aaron Donald objects effected by him",
-                    "premises": {
-                      "A;Aaron Donald objects effected by him;interesting": {
-                        "need": ";A;Aaron Donald objects effected by him;interesting"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 99,
+          "call Crazy pete to say hi": {
+            "_uid": 35,
             "awardlinks": {
-              "Renee Elise Goldsberry": {
-                "awardee_label": "Renee Elise Goldsberry",
+              "Perrison": {
+                "awardee_label": "Perrison",
                 "give_force": 1.0,
                 "take_force": 1
               }
             },
-            "idea_tag": "bens friends be desperate for of housing support",
-            "mass": 1,
-            "reasonunits": {
-              "A;Aaron Donald objects effected by him": {
-                "base": ";A;Aaron Donald objects effected by him",
-                "premises": {
-                  "A;Aaron Donald objects effected by him;interesting": {
-                    "need": ";A;Aaron Donald objects effected by him;interesting"
-                  }
-                }
-              }
-            }
-          },
-          "develop D&B software": {
-            "_kids": {
-              "test program": {
-                "_uid": 178,
-                "idea_tag": "test program",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;Aaron Donald objects effected by him": {
-                    "base": ";A;Aaron Donald objects effected by him",
-                    "premises": {
-                      "A;Aaron Donald objects effected by him;interesting": {
-                        "need": ";A;Aaron Donald objects effected by him;interesting"
-                      }
-                    }
-                  },
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime;day": {
-                        "divisor": 1440,
-                        "need": ";A;time;gregtime;day",
-                        "nigh": 660,
-                        "open": 660
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 169,
-            "awardlinks": {
-              ";hurt by us dollar": {
-                "awardee_label": ";hurt by us dollar",
-                "give_force": 1.0,
-                "take_force": 1
-              }
-            },
-            "idea_tag": "develop D&B software",
-            "mass": 1,
-            "reasonunits": {
-              "A;Aaron Donald objects effected by him": {
-                "base": ";A;Aaron Donald objects effected by him",
-                "premises": {
-                  "A;Aaron Donald objects effected by him;interesting": {
-                    "need": ";A;Aaron Donald objects effected by him;interesting"
-                  }
-                }
-              }
-            }
-          },
-          "donate to pro-climate committees": {
-            "_kids": {
-              "donate to influential people that are pro-Climate Death": {
-                "_uid": 168,
-                "awardlinks": {
-                  ";Climate Death": {
-                    "awardee_label": ";Climate Death",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "donate to influential people that are pro-Climate Death",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;Aaron Donald objects effected by him": {
-                    "base": ";A;Aaron Donald objects effected by him",
-                    "premises": {
-                      "A;Aaron Donald objects effected by him;interesting": {
-                        "need": ";A;Aaron Donald objects effected by him;interesting"
-                      }
-                    }
-                  },
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 20160.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 4920.0,
-                        "open": 4920.0
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 167,
-            "idea_tag": "donate to pro-climate committees",
-            "mass": 1,
-            "reasonunits": {
-              "A;Aaron Donald objects effected by him": {
-                "base": ";A;Aaron Donald objects effected by him",
-                "premises": {
-                  "A;Aaron Donald objects effected by him;interesting": {
-                    "need": ";A;Aaron Donald objects effected by him;interesting"
-                  }
-                }
-              }
-            }
-          },
-          "late_night_go_to_sleep": {
-            "_uid": 149,
-            "idea_tag": "late_night_go_to_sleep",
-            "mass": 1,
+            "idea_tag": "call Crazy pete to say hi",
+            "mass": 30,
+            "morph": false,
             "pledge": true,
             "reasonunits": {
-              "A;Aaron Donald objects effected by him": {
-                "base": ";A;Aaron Donald objects effected by him",
-                "premises": {
-                  "A;Aaron Donald objects effected by him;interesting": {
-                    "need": ";A;Aaron Donald objects effected by him;interesting"
-                  }
-                }
-              },
               "A;time;gregtime": {
-                "base": ";A;time;gregtime",
+                "context": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
-                    "divisor": 1440.0,
+                    "divisor": 10080.0,
                     "need": ";A;time;gregtime",
-                    "nigh": 1305.0,
-                    "open": 1305.0
+                    "nigh": 480.0,
+                    "open": 480.0
                   }
                 }
               }
             }
           },
-          "sympathetic receptive": {
-            "_kids": {
-              "Ernesto Chavez": {
-                "_kids": {
-                  "available for phone call": {
-                    "idea_tag": "available for phone call",
-                    "mass": 4,
-                    "morph": false,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 6495.0,
-                            "open": 6480.0
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "idea_tag": "Ernesto Chavez",
-                "mass": 4,
-                "morph": false,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime"
-                  }
-                }
-              },
-              "sympathetic receptive to Aaron": {
-                "_kids": {
-                  "be available for phone call": {
-                    "_uid": 163,
-                    "awardlinks": {
-                      "Renee Elise Goldsberry": {
-                        "awardee_label": "Renee Elise Goldsberry",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "be available for phone call",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;Aaron Donald objects effected by him": {
-                        "base": ";A;Aaron Donald objects effected by him",
-                        "premises": {
-                          "A;Aaron Donald objects effected by him;interesting": {
-                            "need": ";A;Aaron Donald objects effected by him;interesting"
-                          }
-                        }
-                      },
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 6540.0,
-                            "open": 6480.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "call Aaron and discuss methodology": {
-                    "_uid": 164,
-                    "awardlinks": {
-                      ";Climate Death": {
-                        "awardee_label": ";Climate Death",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      },
-                      "Renee Elise Goldsberry": {
-                        "awardee_label": "Renee Elise Goldsberry",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "call Aaron and discuss methodology",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;Aaron Donald objects effected by him": {
-                        "base": ";A;Aaron Donald objects effected by him",
-                        "premises": {
-                          "A;Aaron Donald objects effected by him;interesting": {
-                            "need": ";A;Aaron Donald objects effected by him;interesting"
-                          }
-                        }
-                      },
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 20160.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 600.0,
-                            "open": 600.0
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "_uid": 162,
-                "awardlinks": {
-                  "Renee Elise Goldsberry": {
-                    "awardee_label": "Renee Elise Goldsberry",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "sympathetic receptive to Aaron",
-                "mass": 1,
-                "reasonunits": {
-                  "A;Aaron Donald objects effected by him": {
-                    "base": ";A;Aaron Donald objects effected by him",
-                    "premises": {
-                      "A;Aaron Donald objects effected by him;interesting": {
-                        "need": ";A;Aaron Donald objects effected by him;interesting"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 161,
-            "idea_tag": "sympathetic receptive",
+          "check up on old family friends": {
+            "_uid": 222,
+            "idea_tag": "check up on old family friends",
             "mass": 1,
             "reasonunits": {
-              "A;Aaron Donald objects effected by him": {
-                "base": ";A;Aaron Donald objects effected by him",
+              "A;Moods": {
+                "context": ";A;Moods",
                 "premises": {
-                  "A;Aaron Donald objects effected by him;interesting": {
-                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  "A;Moods;Happy;Happy - angerish": {
+                    "need": ";A;Moods;Happy;Happy - angerish"
                   }
                 }
               }
             }
           },
-          "write letters to reps": {
+          "cleaning": {
             "_kids": {
-              "write letters about Climate Death to congressman": {
-                "_uid": 166,
+              "check cat water": {
+                "_uid": 33,
                 "awardlinks": {
-                  ";Climate Death": {
-                    "awardee_label": ";Climate Death",
+                  ";Family": {
+                    "awardee_label": ";Family",
                     "give_force": 1.0,
                     "take_force": 1
                   }
                 },
-                "idea_tag": "write letters about Climate Death to congressman",
+                "idea_tag": "check cat water",
                 "mass": 1,
+                "pledge": true,
                 "reasonunits": {
-                  "A;Aaron Donald objects effected by him": {
-                    "base": ";A;Aaron Donald objects effected by him",
-                    "premises": {
-                      "A;Aaron Donald objects effected by him;interesting": {
-                        "need": ";A;Aaron Donald objects effected by him;interesting"
-                      }
-                    }
-                  },
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
-                        "divisor": 20160.0,
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3360.0,
+                        "open": 3360.0
+                      }
+                    }
+                  }
+                }
+              },
+              "check humidifer": {
+                "_uid": 159,
+                "idea_tag": "check humidifer",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 420.0,
+                        "open": 420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean baby seats": {
+                "_uid": 49,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean baby seats",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 60480.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 660.0,
+                        "open": 660.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean bathroom": {
+                "_uid": 65,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean bathroom",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
                         "need": ";A;time;gregtime",
                         "nigh": 600.0,
                         "open": 600.0
@@ -1862,465 +1648,1111 @@
                     }
                   }
                 }
+              },
+              "clean cat poo": {
+                "_uid": 9,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean cat poo",
+                "mass": 1,
+                "morph": false,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean humidifiers": {
+                "_uid": 55,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean humidifiers",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean sheets couch blankets": {
+                "_uid": 41,
+                "awardlinks": {
+                  "Perrison": {
+                    "awardee_label": "Perrison",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean sheets couch blankets",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 30240.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean table": {
+                "_uid": 53,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean table",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 1200.0,
+                        "open": 1200.0
+                      }
+                    }
+                  }
+                }
+              },
+              "deep clean play mat": {
+                "_uid": 71,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "deep clean play mat",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 40320.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "empty roomba": {
+                "_uid": 11,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "empty roomba",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 4800.0,
+                        "open": 4800.0
+                      }
+                    }
+                  }
+                }
+              },
+              "empty roomba Friday": {
+                "_uid": 13,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "empty roomba Friday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 9120.0,
+                        "open": 9120.0
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry basket status": {
+                "_kids": {
+                  "full": {
+                    "idea_tag": "full",
+                    "mass": 1,
+                    "morph": false
+                  },
+                  "not full": {
+                    "idea_tag": "not full",
+                    "mass": 1,
+                    "morph": false
+                  }
+                },
+                "idea_tag": "laundry basket status",
+                "mass": 1,
+                "morph": false
+              },
+              "laundry monday": {
+                "_uid": 25,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "laundry monday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status": {
+                    "context": ";A;casa;cleaning;laundry basket status",
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "need": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry saturday": {
+                "_uid": 29,
+                "awardlinks": {
+                  "Travis Fox": {
+                    "awardee_label": "Travis Fox",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "laundry saturday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status": {
+                    "context": ";A;casa;cleaning;laundry basket status",
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "need": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 420.0,
+                        "open": 420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry thursday": {
+                "idea_tag": "laundry thursday",
+                "mass": 1,
+                "morph": false,
+                "pledge": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status": {
+                    "context": ";A;casa;cleaning;laundry basket status",
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "need": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 7740.0,
+                        "open": 7740.0
+                      }
+                    }
+                  }
+                }
+              },
+              "laundry wednesday": {
+                "_uid": 27,
+                "awardlinks": {
+                  "America": {
+                    "awardee_label": "America",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "laundry wednesday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status": {
+                    "context": ";A;casa;cleaning;laundry basket status",
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "need": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 6300.0,
+                        "open": 6300.0
+                      }
+                    }
+                  }
+                }
+              },
+              "morning cookery clean-up": {
+                "_uid": 150,
+                "idea_tag": "morning cookery clean-up",
+                "mass": 1,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 480.0,
+                        "open": 480.0
+                      }
+                    }
+                  }
+                }
+              },
+              "prepare_bed clean bedroom": {
+                "_uid": 63,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "prepare_bed clean bedroom",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 480.0,
+                        "open": 480.0
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba bedroom": {
+                "_uid": 15,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "roomba bedroom",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 4740.0,
+                        "open": 4740.0
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba bedroom Friday": {
+                "_uid": 17,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "roomba bedroom Friday",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 9060.0,
+                        "open": 9060.0
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba living area": {
+                "_uid": 19,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "roomba living area",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba living area thur": {
+                "_uid": 21,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "roomba living area thur",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 7620.0,
+                        "open": 7620.0
+                      }
+                    }
+                  }
+                }
+              },
+              "roomba maintenance": {
+                "_uid": 51,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "roomba maintenance",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "wipe down play mat2": {
+                "_uid": 69,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "wipe down play mat2",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
               }
             },
-            "_uid": 165,
-            "idea_tag": "write letters to reps",
+            "_uid": 146,
+            "idea_tag": "cleaning",
             "mass": 1,
             "reasonunits": {
-              "A;Aaron Donald objects effected by him": {
-                "base": ";A;Aaron Donald objects effected by him",
+              "A;Nation-States": {
+                "context": ";A;Nation-States",
                 "premises": {
-                  "A;Aaron Donald objects effected by him;interesting": {
-                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
+                    "need": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                   }
                 }
               }
             }
-          }
-        },
-        "_uid": 96,
-        "awardlinks": {
-          ";Climate Death": {
-            "awardee_label": ";Climate Death",
-            "give_force": 1.0,
-            "take_force": 1
           },
-          ";Family": {
-            "awardee_label": ";Family",
-            "give_force": 1.0,
-            "take_force": 1
-          },
-          "America": {
-            "awardee_label": "America",
-            "give_force": 1.0,
-            "take_force": 1
-          }
-        },
-        "idea_tag": "D&B",
-        "mass": 1,
-        "reasonunits": {
-          "A;Aaron Donald objects effected by him": {
-            "base": ";A;Aaron Donald objects effected by him",
-            "premises": {
-              "A;Aaron Donald objects effected by him;interesting": {
-                "need": ";A;Aaron Donald objects effected by him;interesting"
-              }
-            }
-          }
-        }
-      },
-      "Interweb": {
-        "_is_expanded": false,
-        "_kids": {
-          "AOL AIM": {
+          "exercise": {
+            "_is_expanded": false,
             "_kids": {
-              "PSU Ultimate": {
-                "_uid": 254,
-                "idea_tag": "PSU Ultimate",
-                "mass": 1
-              }
-            },
-            "_uid": 253,
-            "idea_tag": "AOL AIM",
-            "mass": 1
-          },
-          "Faaceboook": {
-            "_uid": 251,
-            "idea_tag": "Faaceboook",
-            "mass": 1
-          },
-          "Github": {
-            "_uid": 252,
-            "idea_tag": "Github",
-            "mass": 1
-          },
-          "YahooVideo": {
-            "_uid": 255,
-            "idea_tag": "YahooVideo",
-            "mass": 1
-          }
-        },
-        "_uid": 250,
-        "idea_tag": "Interweb",
-        "mass": 1
-      },
-      "Moods": {
-        "_kids": {
-          "Bllod Meridan by Cormac": {
-            "_uid": 265,
-            "idea_tag": "Bllod Meridan by Cormac",
-            "mass": 1
-          },
-          "Happy": {
-            "_kids": {
-              "Happy - angerish": {
-                "_uid": 267,
-                "idea_tag": "Happy - angerish",
-                "mass": 1
-              }
-            },
-            "_uid": 266,
-            "idea_tag": "Happy",
-            "mass": 1
-          },
-          "I need to waste time": {
-            "idea_tag": "I need to waste time",
-            "mass": 1,
-            "morph": false
-          },
-          "hungry": {
-            "_uid": 268,
-            "idea_tag": "hungry",
-            "mass": 1
-          }
-        },
-        "_uid": 264,
-        "idea_tag": "Moods",
-        "mass": 1
-      },
-      "Nation-States": {
-        "_is_expanded": false,
-        "_kids": {
-          "France2": {
-            "_uid": 235,
-            "idea_tag": "France2",
-            "mass": 1
-          },
-          "USA": {
-            "_kids": {
-              "Portland OR": {
+              "5 push-ups": {
+                "_uid": 5,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "5 push-ups",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime;day": {
+                        "divisor": 1440,
+                        "need": ";A;time;gregtime;day",
+                        "nigh": 420,
+                        "open": 420
+                      }
+                    }
+                  }
+                }
+              },
+              "check protein for week is adequate": {
+                "_uid": 61,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "check protein for week is adequate",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 420.0,
+                        "open": 420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clean ears": {
+                "_uid": 79,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clean ears",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 80640.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 4860.0,
+                        "open": 4860.0
+                      }
+                    }
+                  }
+                }
+              },
+              "clip body nails": {
+                "_uid": 77,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "clip body nails",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "cook veggies every morning": {
+                "_uid": 59,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "cook veggies every morning",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 420.0,
+                        "open": 420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "flossing teeth": {
+                "_uid": 47,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "flossing teeth",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 80640.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
+              },
+              "mass traaining": {
                 "_kids": {
-                  "Downtown": {
-                    "_kids": {
-                      "Flats": {
-                        "_kids": {
-                          "10th floor gaarden": {
-                            "_uid": 246,
-                            "idea_tag": "10th floor gaarden",
-                            "mass": 1
-                          },
-                          "Apt 450": {
-                            "_uid": 247,
-                            "idea_tag": "Apt 450",
-                            "mass": 1
-                          },
-                          "Gym": {
-                            "_uid": 248,
-                            "idea_tag": "Gym",
-                            "mass": 1
-                          },
-                          "workspace": {
-                            "_uid": 249,
-                            "idea_tag": "workspace",
-                            "mass": 1
+                  "bike or stuff": {
+                    "_uid": 92,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_label": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "bike or stuff",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 9600.0,
+                            "open": 9600.0
                           }
-                        },
-                        "_uid": 245,
-                        "idea_tag": "Flats",
+                        }
+                      }
+                    }
+                  },
+                  "chest and arms (mon)": {
+                    "_kids": {
+                      "bi and triceps exercises": {
+                        "_uid": 130,
+                        "idea_tag": "bi and triceps exercises",
                         "mass": 1
                       },
-                      "PSU": {
-                        "_kids": {
-                          "Park Squares": {
-                            "_uid": 241,
-                            "idea_tag": "Park Squares",
-                            "mass": 1
-                          },
-                          "Pool": {
-                            "_uid": 242,
-                            "idea_tag": "Pool",
-                            "mass": 1
-                          },
-                          "Stott Field": {
-                            "_uid": 243,
-                            "idea_tag": "Stott Field",
-                            "mass": 1
-                          },
-                          "library": {
-                            "_uid": 244,
-                            "idea_tag": "library",
-                            "mass": 1
-                          }
-                        },
-                        "_uid": 240,
-                        "idea_tag": "PSU",
+                      "chest  exercises": {
+                        "_uid": 129,
+                        "idea_tag": "chest  exercises",
                         "mass": 1
                       }
                     },
-                    "_uid": 239,
-                    "idea_tag": "Downtown",
-                    "mass": 1
+                    "_uid": 84,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_label": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "chest and arms (mon)",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 3360.0,
+                            "open": 3360.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "core and squats": {
+                    "_uid": 179,
+                    "idea_tag": "core and squats",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 6242.0,
+                            "open": 6242.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "core lower back": {
+                    "_uid": 86,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_label": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "core lower back",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 3420.0,
+                            "open": 3420.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rest": {
+                    "_uid": 94,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_label": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "rest",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 7200.0,
+                            "open": 7200.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "shoulders and upper back": {
+                    "_kids": {
+                      "shoulder exercises": {
+                        "_uid": 131,
+                        "idea_tag": "shoulder exercises",
+                        "mass": 1,
+                        "morph": false,
+                        "pledge": true
+                      },
+                      "upper back exercises": {
+                        "_uid": 132,
+                        "idea_tag": "upper back exercises",
+                        "mass": 1,
+                        "morph": false,
+                        "pledge": true
+                      }
+                    },
+                    "_uid": 82,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_label": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "shoulders and upper back",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 4800.0,
+                            "open": 4800.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "squats hamstrings and calves": {
+                    "_uid": 90,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_label": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "squats hamstrings and calves",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 6240.0,
+                            "open": 6240.0
+                          }
+                        }
+                      }
+                    }
                   }
                 },
-                "_uid": 237,
-                "idea_tag": "Portland OR",
+                "_uid": 81,
+                "idea_tag": "mass traaining",
                 "mass": 1
               },
-              "Texas": {
-                "_uid": 238,
-                "idea_tag": "Texas",
-                "mass": 1
-              }
-            },
-            "_uid": 236,
-            "idea_tag": "USA",
-            "mass": 1
-          }
-        },
-        "_uid": 234,
-        "idea_tag": "Nation-States",
-        "mass": 1
-      },
-      "No Movie playing": {
-        "_is_expanded": false,
-        "_kids": {
-          "Big Lewbwski": {
-            "_uid": 273,
-            "idea_tag": "Big Lewbwski",
-            "mass": 1
-          },
-          "Star Wars eps IV": {
-            "_uid": 274,
-            "idea_tag": "Star Wars eps IV",
-            "mass": 1
-          }
-        },
-        "_uid": 272,
-        "idea_tag": "No Movie playing",
-        "mass": 1
-      },
-      "Seasons": {
-        "_is_expanded": false,
-        "_kids": {
-          "Summer": {
-            "_uid": 276,
-            "idea_tag": "Summer",
-            "mass": 1
-          }
-        },
-        "_uid": 275,
-        "idea_tag": "Seasons",
-        "mass": 1
-      },
-      "Tired Status": {
-        "_is_expanded": false,
-        "_kids": {
-          "Not tired": {
-            "_uid": 278,
-            "idea_tag": "Not tired",
-            "mass": 1
-          },
-          "Tired": {
-            "_uid": 279,
-            "idea_tag": "Tired",
-            "mass": 1
-          }
-        },
-        "_uid": 277,
-        "idea_tag": "Tired Status",
-        "mass": 1
-      },
-      "Ultimate Frisbee": {
-        "_is_expanded": false,
-        "_kids": {
-          "check on m33": {
-            "_uid": 221,
-            "idea_tag": "check on m33",
-            "mass": 1,
-            "reasonunits": {
-              "A;Moods": {
-                "base": ";A;Moods",
-                "premises": {
-                  "A;Moods;Happy": {
-                    "need": ";A;Moods;Happy"
+              "morning multivitamin": {
+                "_uid": 3,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
                   }
-                }
-              }
-            }
-          },
-          "contemplate the disc": {
-            "_uid": 229,
-            "idea_tag": "contemplate the disc",
-            "mass": 1,
-            "reasonunits": {
-              "A;No Movie playing": {
-                "base": ";A;No Movie playing",
-                "premises": {
-                  "A;No Movie playing;Big Lewbwski": {
-                    "need": ";A;No Movie playing;Big Lewbwski"
-                  }
-                }
-              }
-            }
-          },
-          "playing ultimate": {
-            "_kids": {
-              "check for mini ultimate at park": {
-                "_uid": 219,
-                "idea_tag": "check for mini ultimate at park",
+                },
+                "idea_tag": "morning multivitamin",
                 "mass": 1,
+                "pledge": true,
                 "reasonunits": {
-                  "A;Moods": {
-                    "base": ";A;Moods",
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
                     "premises": {
-                      "A;Moods;Happy": {
-                        "need": ";A;Moods;Happy"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 201,
-            "idea_tag": "playing ultimate",
-            "mass": 1,
-            "reasonunits": {
-              "A;Moods": {
-                "base": ";A;Moods",
-                "premises": {
-                  "A;Moods;Happy": {
-                    "need": ";A;Moods;Happy"
-                  }
-                }
-              }
-            }
-          },
-          "relaxing": {
-            "_uid": 202,
-            "idea_tag": "relaxing",
-            "mass": 1,
-            "reasonunits": {
-              "A;No Movie playing": {
-                "base": ";A;No Movie playing",
-                "premises": {
-                  "A;No Movie playing;Star Wars eps IV": {
-                    "need": ";A;No Movie playing;Star Wars eps IV"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "_uid": 200,
-        "idea_tag": "Ultimate Frisbee",
-        "mass": 1,
-        "reasonunits": {
-          "A;Moods": {
-            "base": ";A;Moods",
-            "premises": {
-              "A;Moods;Happy": {
-                "need": ";A;Moods;Happy"
-              }
-            }
-          }
-        }
-      },
-      "Water Living": {
-        "_is_expanded": false,
-        "_kids": {
-          "Swimming in Williamette watershed": {
-            "_kids": {
-              "Go climbing at east Circuit": {
-                "_uid": 226,
-                "idea_tag": "Go climbing at east Circuit",
-                "mass": 1,
-                "reasonunits": {
-                  "A;WaterExistence": {
-                    "base": ";A;WaterExistence",
-                    "premises": {
-                      "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
-                        "need": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 420.0,
+                        "open": 420.0
                       }
                     }
                   }
                 }
               },
-              "bike around": {
-                "_uid": 227,
-                "idea_tag": "bike around",
+              "night multivitamin": {
+                "_uid": 230,
+                "idea_tag": "night multivitamin",
                 "mass": 1,
                 "reasonunits": {
-                  "A;WaterExistence": {
-                    "base": ";A;WaterExistence",
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
                     "premises": {
-                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
-                        "need": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 1080.0,
+                        "open": 1080.0
                       }
                     }
                   }
                 }
               },
-              "trout": {
-                "_uid": 228,
-                "idea_tag": "trout",
+              "shampooing": {
+                "_uid": 39,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "shampooing",
                 "mass": 1,
+                "pledge": true,
                 "reasonunits": {
-                  "A;WaterExistence": {
-                    "base": ";A;WaterExistence",
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
                     "premises": {
-                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
-                        "need": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
                       }
                     }
                   }
                 }
-              }
-            },
-            "_uid": 225,
-            "idea_tag": "Swimming in Williamette watershed",
-            "mass": 1,
-            "reasonunits": {
-              "A;WaterExistence": {
-                "base": ";A;WaterExistence",
-                "premises": {
-                  "A;WaterExistence;Williamette WaterShed": {
-                    "need": ";A;WaterExistence;Williamette WaterShed"
+              },
+              "straight back for 45 secs": {
+                "_uid": 57,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "straight back for 45 secs",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 1440.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 420.0,
+                        "open": 420.0
+                      }
+                    }
                   }
                 }
-              }
-            }
-          }
-        },
-        "_uid": 223,
-        "idea_tag": "Water Living",
-        "mass": 1
-      },
-      "WaterExistence": {
-        "_is_expanded": false,
-        "_kids": {
-          "Williamette WaterShed": {
-            "_kids": {
-              "East Side of Watershed": {
+              },
+              "stretch": {
+                "_is_expanded": false,
                 "_kids": {
-                  "flat": {
-                    "_uid": 260,
-                    "idea_tag": "flat",
-                    "mass": 1
+                  "back": {
+                    "idea_tag": "back",
+                    "mass": 30,
+                    "morph": false,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 9180.0,
+                            "open": 9180.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "legs": {
+                    "idea_tag": "legs",
+                    "mass": 30,
+                    "morph": false,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 9180.0,
+                            "open": 9180.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "waist": {
+                    "idea_tag": "waist",
+                    "mass": 30,
+                    "morph": false,
+                    "pledge": true
                   }
                 },
-                "_uid": 258,
-                "idea_tag": "East Side of Watershed",
-                "mass": 1
+                "idea_tag": "stretch",
+                "mass": 30,
+                "morph": false,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 9180.0,
+                        "open": 9180.0
+                      }
+                    }
+                  }
+                }
               },
-              "West side of Watershed": {
-                "_uid": 259,
-                "idea_tag": "West side of Watershed",
-                "mass": 1
+              "trim beard": {
+                "_uid": 73,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_label": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "trim beard",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 10080.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 3420.0,
+                        "open": 3420.0
+                      }
+                    }
+                  }
+                }
               }
             },
-            "_uid": 257,
-            "idea_tag": "Williamette WaterShed",
+            "_uid": 147,
+            "idea_tag": "exercise",
             "mass": 1
-          }
-        },
-        "_uid": 256,
-        "idea_tag": "WaterExistence",
-        "mass": 1
-      },
-      "casa": {
-        "_is_expanded": false,
-        "_kids": {
+          },
           "Financial Ops": {
             "_is_expanded": false,
             "_kids": {
@@ -2338,7 +2770,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "need": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2363,7 +2795,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "need": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2388,7 +2820,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "need": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2413,7 +2845,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
                         "need": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am",
@@ -2549,1258 +2981,13 @@
             "idea_tag": "Housing",
             "mass": 1
           },
-          "call Crazy pete to say hi": {
-            "_uid": 35,
-            "awardlinks": {
-              "Perrison": {
-                "awardee_label": "Perrison",
-                "give_force": 1.0,
-                "take_force": 1
-              }
-            },
-            "idea_tag": "call Crazy pete to say hi",
-            "mass": 30,
-            "morph": false,
-            "pledge": true,
-            "reasonunits": {
-              "A;time;gregtime": {
-                "base": ";A;time;gregtime",
-                "premises": {
-                  "A;time;gregtime": {
-                    "divisor": 10080.0,
-                    "need": ";A;time;gregtime",
-                    "nigh": 480.0,
-                    "open": 480.0
-                  }
-                }
-              }
-            }
-          },
-          "check up on old family friends": {
-            "_uid": 222,
-            "idea_tag": "check up on old family friends",
-            "mass": 1,
-            "reasonunits": {
-              "A;Moods": {
-                "base": ";A;Moods",
-                "premises": {
-                  "A;Moods;Happy;Happy - angerish": {
-                    "need": ";A;Moods;Happy;Happy - angerish"
-                  }
-                }
-              }
-            }
-          },
-          "cleaning": {
-            "_kids": {
-              "check cat water": {
-                "_uid": 33,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "check cat water",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3360.0,
-                        "open": 3360.0
-                      }
-                    }
-                  }
-                }
-              },
-              "check humidifer": {
-                "_uid": 159,
-                "idea_tag": "check humidifer",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 420.0,
-                        "open": 420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean baby seats": {
-                "_uid": 49,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean baby seats",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 60480.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 660.0,
-                        "open": 660.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean bathroom": {
-                "_uid": 65,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean bathroom",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 600.0,
-                        "open": 600.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean cat poo": {
-                "_uid": 9,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean cat poo",
-                "mass": 1,
-                "morph": false,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean humidifiers": {
-                "_uid": 55,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean humidifiers",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean sheets couch blankets": {
-                "_uid": 41,
-                "awardlinks": {
-                  "Perrison": {
-                    "awardee_label": "Perrison",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean sheets couch blankets",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 30240.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean table": {
-                "_uid": 53,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean table",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 1200.0,
-                        "open": 1200.0
-                      }
-                    }
-                  }
-                }
-              },
-              "deep clean play mat": {
-                "_uid": 71,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "deep clean play mat",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 40320.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "empty roomba": {
-                "_uid": 11,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "empty roomba",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 4800.0,
-                        "open": 4800.0
-                      }
-                    }
-                  }
-                }
-              },
-              "empty roomba Friday": {
-                "_uid": 13,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "empty roomba Friday",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 9120.0,
-                        "open": 9120.0
-                      }
-                    }
-                  }
-                }
-              },
-              "laundry basket status": {
-                "_kids": {
-                  "full": {
-                    "idea_tag": "full",
-                    "mass": 1,
-                    "morph": false
-                  },
-                  "not full": {
-                    "idea_tag": "not full",
-                    "mass": 1,
-                    "morph": false
-                  }
-                },
-                "idea_tag": "laundry basket status",
-                "mass": 1,
-                "morph": false
-              },
-              "laundry monday": {
-                "_uid": 25,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "laundry monday",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;casa;cleaning;laundry basket status": {
-                    "base": ";A;casa;cleaning;laundry basket status",
-                    "premises": {
-                      "A;casa;cleaning;laundry basket status;full": {
-                        "need": ";A;casa;cleaning;laundry basket status;full"
-                      }
-                    }
-                  },
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "laundry saturday": {
-                "_uid": 29,
-                "awardlinks": {
-                  "Travis Fox": {
-                    "awardee_label": "Travis Fox",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "laundry saturday",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;casa;cleaning;laundry basket status": {
-                    "base": ";A;casa;cleaning;laundry basket status",
-                    "premises": {
-                      "A;casa;cleaning;laundry basket status;full": {
-                        "need": ";A;casa;cleaning;laundry basket status;full"
-                      }
-                    }
-                  },
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 420.0,
-                        "open": 420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "laundry thursday": {
-                "idea_tag": "laundry thursday",
-                "mass": 1,
-                "morph": false,
-                "pledge": true,
-                "reasonunits": {
-                  "A;casa;cleaning;laundry basket status": {
-                    "base": ";A;casa;cleaning;laundry basket status",
-                    "premises": {
-                      "A;casa;cleaning;laundry basket status;full": {
-                        "need": ";A;casa;cleaning;laundry basket status;full"
-                      }
-                    }
-                  },
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 7740.0,
-                        "open": 7740.0
-                      }
-                    }
-                  }
-                }
-              },
-              "laundry wednesday": {
-                "_uid": 27,
-                "awardlinks": {
-                  "America": {
-                    "awardee_label": "America",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "laundry wednesday",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;casa;cleaning;laundry basket status": {
-                    "base": ";A;casa;cleaning;laundry basket status",
-                    "premises": {
-                      "A;casa;cleaning;laundry basket status;full": {
-                        "need": ";A;casa;cleaning;laundry basket status;full"
-                      }
-                    }
-                  },
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 6300.0,
-                        "open": 6300.0
-                      }
-                    }
-                  }
-                }
-              },
-              "morning cookery clean-up": {
-                "_uid": 150,
-                "idea_tag": "morning cookery clean-up",
-                "mass": 1,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 480.0,
-                        "open": 480.0
-                      }
-                    }
-                  }
-                }
-              },
-              "prepare_bed clean bedroom": {
-                "_uid": 63,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "prepare_bed clean bedroom",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 480.0,
-                        "open": 480.0
-                      }
-                    }
-                  }
-                }
-              },
-              "roomba bedroom": {
-                "_uid": 15,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "roomba bedroom",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 4740.0,
-                        "open": 4740.0
-                      }
-                    }
-                  }
-                }
-              },
-              "roomba bedroom Friday": {
-                "_uid": 17,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "roomba bedroom Friday",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 9060.0,
-                        "open": 9060.0
-                      }
-                    }
-                  }
-                }
-              },
-              "roomba living area": {
-                "_uid": 19,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "roomba living area",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "roomba living area thur": {
-                "_uid": 21,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "roomba living area thur",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 7620.0,
-                        "open": 7620.0
-                      }
-                    }
-                  }
-                }
-              },
-              "roomba maintenance": {
-                "_uid": 51,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "roomba maintenance",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "wipe down play mat2": {
-                "_uid": 69,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "wipe down play mat2",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 146,
-            "idea_tag": "cleaning",
-            "mass": 1,
-            "reasonunits": {
-              "A;Nation-States": {
-                "base": ";A;Nation-States",
-                "premises": {
-                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                    "need": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
-                  }
-                }
-              }
-            }
-          },
-          "exercise": {
-            "_is_expanded": false,
-            "_kids": {
-              "5 push-ups": {
-                "_uid": 5,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "5 push-ups",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime;day": {
-                        "divisor": 1440,
-                        "need": ";A;time;gregtime;day",
-                        "nigh": 420,
-                        "open": 420
-                      }
-                    }
-                  }
-                }
-              },
-              "check protein for week is adequate": {
-                "_uid": 61,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "check protein for week is adequate",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 420.0,
-                        "open": 420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clean ears": {
-                "_uid": 79,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clean ears",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 80640.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 4860.0,
-                        "open": 4860.0
-                      }
-                    }
-                  }
-                }
-              },
-              "clip body nails": {
-                "_uid": 77,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "clip body nails",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "cook veggies every morning": {
-                "_uid": 59,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "cook veggies every morning",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 420.0,
-                        "open": 420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "flossing teeth": {
-                "_uid": 47,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "flossing teeth",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 80640.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "mass traaining": {
-                "_kids": {
-                  "bike or stuff": {
-                    "_uid": 92,
-                    "awardlinks": {
-                      ";Family": {
-                        "awardee_label": ";Family",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "bike or stuff",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 9600.0,
-                            "open": 9600.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "chest and arms (mon)": {
-                    "_kids": {
-                      "bi and triceps exercises": {
-                        "_uid": 130,
-                        "idea_tag": "bi and triceps exercises",
-                        "mass": 1
-                      },
-                      "chest  exercises": {
-                        "_uid": 129,
-                        "idea_tag": "chest  exercises",
-                        "mass": 1
-                      }
-                    },
-                    "_uid": 84,
-                    "awardlinks": {
-                      ";Family": {
-                        "awardee_label": ";Family",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "chest and arms (mon)",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 3360.0,
-                            "open": 3360.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "core and squats": {
-                    "_uid": 179,
-                    "idea_tag": "core and squats",
-                    "mass": 1,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 6242.0,
-                            "open": 6242.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "core lower back": {
-                    "_uid": 86,
-                    "awardlinks": {
-                      ";Family": {
-                        "awardee_label": ";Family",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "core lower back",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 3420.0,
-                            "open": 3420.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "rest": {
-                    "_uid": 94,
-                    "awardlinks": {
-                      ";Family": {
-                        "awardee_label": ";Family",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "rest",
-                    "mass": 1,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 7200.0,
-                            "open": 7200.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "shoulders and upper back": {
-                    "_kids": {
-                      "shoulder exercises": {
-                        "_uid": 131,
-                        "idea_tag": "shoulder exercises",
-                        "mass": 1,
-                        "morph": false,
-                        "pledge": true
-                      },
-                      "upper back exercises": {
-                        "_uid": 132,
-                        "idea_tag": "upper back exercises",
-                        "mass": 1,
-                        "morph": false,
-                        "pledge": true
-                      }
-                    },
-                    "_uid": 82,
-                    "awardlinks": {
-                      ";Family": {
-                        "awardee_label": ";Family",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "shoulders and upper back",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 4800.0,
-                            "open": 4800.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "squats hamstrings and calves": {
-                    "_uid": 90,
-                    "awardlinks": {
-                      ";Family": {
-                        "awardee_label": ";Family",
-                        "give_force": 1.0,
-                        "take_force": 1
-                      }
-                    },
-                    "idea_tag": "squats hamstrings and calves",
-                    "mass": 1,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 6240.0,
-                            "open": 6240.0
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "_uid": 81,
-                "idea_tag": "mass traaining",
-                "mass": 1
-              },
-              "morning multivitamin": {
-                "_uid": 3,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "morning multivitamin",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 420.0,
-                        "open": 420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "night multivitamin": {
-                "_uid": 230,
-                "idea_tag": "night multivitamin",
-                "mass": 1,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 1080.0,
-                        "open": 1080.0
-                      }
-                    }
-                  }
-                }
-              },
-              "shampooing": {
-                "_uid": 39,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "shampooing",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "straight back for 45 secs": {
-                "_uid": 57,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "straight back for 45 secs",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 1440.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 420.0,
-                        "open": 420.0
-                      }
-                    }
-                  }
-                }
-              },
-              "stretch": {
-                "_is_expanded": false,
-                "_kids": {
-                  "back": {
-                    "idea_tag": "back",
-                    "mass": 30,
-                    "morph": false,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 9180.0,
-                            "open": 9180.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "legs": {
-                    "idea_tag": "legs",
-                    "mass": 30,
-                    "morph": false,
-                    "pledge": true,
-                    "reasonunits": {
-                      "A;time;gregtime": {
-                        "base": ";A;time;gregtime",
-                        "premises": {
-                          "A;time;gregtime": {
-                            "divisor": 10080.0,
-                            "need": ";A;time;gregtime",
-                            "nigh": 9180.0,
-                            "open": 9180.0
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "waist": {
-                    "idea_tag": "waist",
-                    "mass": 30,
-                    "morph": false,
-                    "pledge": true
-                  }
-                },
-                "idea_tag": "stretch",
-                "mass": 30,
-                "morph": false,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 9180.0,
-                        "open": 9180.0
-                      }
-                    }
-                  }
-                }
-              },
-              "trim beard": {
-                "_uid": 73,
-                "awardlinks": {
-                  ";Family": {
-                    "awardee_label": ";Family",
-                    "give_force": 1.0,
-                    "take_force": 1
-                  }
-                },
-                "idea_tag": "trim beard",
-                "mass": 1,
-                "pledge": true,
-                "reasonunits": {
-                  "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
-                    "premises": {
-                      "A;time;gregtime": {
-                        "divisor": 10080.0,
-                        "need": ";A;time;gregtime",
-                        "nigh": 3420.0,
-                        "open": 3420.0
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "_uid": 147,
-            "idea_tag": "exercise",
-            "mass": 1
-          },
           "keep up with friends": {
             "_uid": 220,
             "idea_tag": "keep up with friends",
             "mass": 1,
             "reasonunits": {
               "A;Interweb": {
-                "base": ";A;Interweb",
+                "context": ";A;Interweb",
                 "premises": {
                   "A;Interweb,Faaceboook": {
                     "need": ";A;Interweb,Faaceboook"
@@ -3826,7 +3013,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "base": ";A;Nation-States",
+                    "context": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Portland OR": {
                         "need": ";A;Nation-States;USA;Portland OR"
@@ -3834,7 +3021,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 10080.0,
@@ -3860,7 +3047,7 @@
                 "pledge": true,
                 "reasonunits": {
                   "A;Nation-States": {
-                    "base": ";A;Nation-States",
+                    "context": ";A;Nation-States",
                     "premises": {
                       "A;Nation-States;USA;Portland OR": {
                         "need": ";A;Nation-States;USA;Portland OR"
@@ -3868,7 +3055,7 @@
                     }
                   },
                   "A;time;gregtime": {
-                    "base": ";A;time;gregtime",
+                    "context": ";A;time;gregtime",
                     "premises": {
                       "A;time;gregtime": {
                         "divisor": 60480.0,
@@ -3886,7 +3073,7 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
-                "base": ";A;Nation-States",
+                "context": ";A;Nation-States",
                 "premises": {
                   "A;Nation-States;USA;Portland OR": {
                     "need": ";A;Nation-States;USA;Portland OR"
@@ -3902,7 +3089,7 @@
             "pledge": true,
             "reasonunits": {
               "A;time;gregtime": {
-                "base": ";A;time;gregtime",
+                "context": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime;day": {
                     "divisor": 1440.0,
@@ -3928,7 +3115,7 @@
             "pledge": true,
             "reasonunits": {
               "A;time;gregtime": {
-                "base": ";A;time;gregtime",
+                "context": ";A;time;gregtime",
                 "premises": {
                   "A;time;gregtime": {
                     "divisor": 1440.0,
@@ -3945,6 +3132,604 @@
         "idea_tag": "casa",
         "mass": 20,
         "morph": false
+      },
+      "D&B": {
+        "_is_expanded": false,
+        "_kids": {
+          "bens friends be desperate for of housing support": {
+            "_kids": {
+              "Ask Aaron monthly what I can do": {
+                "_uid": 160,
+                "awardlinks": {
+                  "Renee Elise Goldsberry": {
+                    "awardee_label": "Renee Elise Goldsberry",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "Ask Aaron monthly what I can do",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him": {
+                    "context": ";A;Aaron Donald objects effected by him",
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "need": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 99,
+            "awardlinks": {
+              "Renee Elise Goldsberry": {
+                "awardee_label": "Renee Elise Goldsberry",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "idea_tag": "bens friends be desperate for of housing support",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him": {
+                "context": ";A;Aaron Donald objects effected by him",
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "develop D&B software": {
+            "_kids": {
+              "test program": {
+                "_uid": 178,
+                "idea_tag": "test program",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him": {
+                    "context": ";A;Aaron Donald objects effected by him",
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "need": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime;day": {
+                        "divisor": 1440,
+                        "need": ";A;time;gregtime;day",
+                        "nigh": 660,
+                        "open": 660
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 169,
+            "awardlinks": {
+              ";hurt by us dollar": {
+                "awardee_label": ";hurt by us dollar",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "idea_tag": "develop D&B software",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him": {
+                "context": ";A;Aaron Donald objects effected by him",
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "donate to pro-climate committees": {
+            "_kids": {
+              "donate to influential people that are pro-Climate Death": {
+                "_uid": 168,
+                "awardlinks": {
+                  ";Climate Death": {
+                    "awardee_label": ";Climate Death",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "donate to influential people that are pro-Climate Death",
+                "mass": 1,
+                "pledge": true,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him": {
+                    "context": ";A;Aaron Donald objects effected by him",
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "need": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 20160.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 4920.0,
+                        "open": 4920.0
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 167,
+            "idea_tag": "donate to pro-climate committees",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him": {
+                "context": ";A;Aaron Donald objects effected by him",
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "late_night_go_to_sleep": {
+            "_uid": 149,
+            "idea_tag": "late_night_go_to_sleep",
+            "mass": 1,
+            "pledge": true,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him": {
+                "context": ";A;Aaron Donald objects effected by him",
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              },
+              "A;time;gregtime": {
+                "context": ";A;time;gregtime",
+                "premises": {
+                  "A;time;gregtime": {
+                    "divisor": 1440.0,
+                    "need": ";A;time;gregtime",
+                    "nigh": 1305.0,
+                    "open": 1305.0
+                  }
+                }
+              }
+            }
+          },
+          "sympathetic receptive": {
+            "_kids": {
+              "Ernesto Chavez": {
+                "_kids": {
+                  "available for phone call": {
+                    "idea_tag": "available for phone call",
+                    "mass": 4,
+                    "morph": false,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 6495.0,
+                            "open": 6480.0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "idea_tag": "Ernesto Chavez",
+                "mass": 4,
+                "morph": false,
+                "reasonunits": {
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime"
+                  }
+                }
+              },
+              "sympathetic receptive to Aaron": {
+                "_kids": {
+                  "be available for phone call": {
+                    "_uid": 163,
+                    "awardlinks": {
+                      "Renee Elise Goldsberry": {
+                        "awardee_label": "Renee Elise Goldsberry",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "be available for phone call",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;Aaron Donald objects effected by him": {
+                        "context": ";A;Aaron Donald objects effected by him",
+                        "premises": {
+                          "A;Aaron Donald objects effected by him;interesting": {
+                            "need": ";A;Aaron Donald objects effected by him;interesting"
+                          }
+                        }
+                      },
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 10080.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 6540.0,
+                            "open": 6480.0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "call Aaron and discuss methodology": {
+                    "_uid": 164,
+                    "awardlinks": {
+                      ";Climate Death": {
+                        "awardee_label": ";Climate Death",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      },
+                      "Renee Elise Goldsberry": {
+                        "awardee_label": "Renee Elise Goldsberry",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "idea_tag": "call Aaron and discuss methodology",
+                    "mass": 1,
+                    "pledge": true,
+                    "reasonunits": {
+                      "A;Aaron Donald objects effected by him": {
+                        "context": ";A;Aaron Donald objects effected by him",
+                        "premises": {
+                          "A;Aaron Donald objects effected by him;interesting": {
+                            "need": ";A;Aaron Donald objects effected by him;interesting"
+                          }
+                        }
+                      },
+                      "A;time;gregtime": {
+                        "context": ";A;time;gregtime",
+                        "premises": {
+                          "A;time;gregtime": {
+                            "divisor": 20160.0,
+                            "need": ";A;time;gregtime",
+                            "nigh": 600.0,
+                            "open": 600.0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "_uid": 162,
+                "awardlinks": {
+                  "Renee Elise Goldsberry": {
+                    "awardee_label": "Renee Elise Goldsberry",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "sympathetic receptive to Aaron",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him": {
+                    "context": ";A;Aaron Donald objects effected by him",
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "need": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 161,
+            "idea_tag": "sympathetic receptive",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him": {
+                "context": ";A;Aaron Donald objects effected by him",
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          },
+          "write letters to reps": {
+            "_kids": {
+              "write letters about Climate Death to congressman": {
+                "_uid": 166,
+                "awardlinks": {
+                  ";Climate Death": {
+                    "awardee_label": ";Climate Death",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "idea_tag": "write letters about Climate Death to congressman",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him": {
+                    "context": ";A;Aaron Donald objects effected by him",
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "need": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    }
+                  },
+                  "A;time;gregtime": {
+                    "context": ";A;time;gregtime",
+                    "premises": {
+                      "A;time;gregtime": {
+                        "divisor": 20160.0,
+                        "need": ";A;time;gregtime",
+                        "nigh": 600.0,
+                        "open": 600.0
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 165,
+            "idea_tag": "write letters to reps",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him": {
+                "context": ";A;Aaron Donald objects effected by him",
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "need": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 96,
+        "awardlinks": {
+          ";Climate Death": {
+            "awardee_label": ";Climate Death",
+            "give_force": 1.0,
+            "take_force": 1
+          },
+          ";Family": {
+            "awardee_label": ";Family",
+            "give_force": 1.0,
+            "take_force": 1
+          },
+          "America": {
+            "awardee_label": "America",
+            "give_force": 1.0,
+            "take_force": 1
+          }
+        },
+        "idea_tag": "D&B",
+        "mass": 1,
+        "reasonunits": {
+          "A;Aaron Donald objects effected by him": {
+            "context": ";A;Aaron Donald objects effected by him",
+            "premises": {
+              "A;Aaron Donald objects effected by him;interesting": {
+                "need": ";A;Aaron Donald objects effected by him;interesting"
+              }
+            }
+          }
+        }
+      },
+      "Interweb": {
+        "_is_expanded": false,
+        "_kids": {
+          "AOL AIM": {
+            "_kids": {
+              "PSU Ultimate": {
+                "_uid": 254,
+                "idea_tag": "PSU Ultimate",
+                "mass": 1
+              }
+            },
+            "_uid": 253,
+            "idea_tag": "AOL AIM",
+            "mass": 1
+          },
+          "Faaceboook": {
+            "_uid": 251,
+            "idea_tag": "Faaceboook",
+            "mass": 1
+          },
+          "Github": {
+            "_uid": 252,
+            "idea_tag": "Github",
+            "mass": 1
+          },
+          "YahooVideo": {
+            "_uid": 255,
+            "idea_tag": "YahooVideo",
+            "mass": 1
+          }
+        },
+        "_uid": 250,
+        "idea_tag": "Interweb",
+        "mass": 1
+      },
+      "Moods": {
+        "_kids": {
+          "Bllod Meridan by Cormac": {
+            "_uid": 265,
+            "idea_tag": "Bllod Meridan by Cormac",
+            "mass": 1
+          },
+          "Happy": {
+            "_kids": {
+              "Happy - angerish": {
+                "_uid": 267,
+                "idea_tag": "Happy - angerish",
+                "mass": 1
+              }
+            },
+            "_uid": 266,
+            "idea_tag": "Happy",
+            "mass": 1
+          },
+          "hungry": {
+            "_uid": 268,
+            "idea_tag": "hungry",
+            "mass": 1
+          },
+          "I need to waste time": {
+            "idea_tag": "I need to waste time",
+            "mass": 1,
+            "morph": false
+          }
+        },
+        "_uid": 264,
+        "idea_tag": "Moods",
+        "mass": 1
+      },
+      "Nation-States": {
+        "_is_expanded": false,
+        "_kids": {
+          "France2": {
+            "_uid": 235,
+            "idea_tag": "France2",
+            "mass": 1
+          },
+          "USA": {
+            "_kids": {
+              "Portland OR": {
+                "_kids": {
+                  "Downtown": {
+                    "_kids": {
+                      "Flats": {
+                        "_kids": {
+                          "10th floor gaarden": {
+                            "_uid": 246,
+                            "idea_tag": "10th floor gaarden",
+                            "mass": 1
+                          },
+                          "Apt 450": {
+                            "_uid": 247,
+                            "idea_tag": "Apt 450",
+                            "mass": 1
+                          },
+                          "Gym": {
+                            "_uid": 248,
+                            "idea_tag": "Gym",
+                            "mass": 1
+                          },
+                          "workspace": {
+                            "_uid": 249,
+                            "idea_tag": "workspace",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 245,
+                        "idea_tag": "Flats",
+                        "mass": 1
+                      },
+                      "PSU": {
+                        "_kids": {
+                          "library": {
+                            "_uid": 244,
+                            "idea_tag": "library",
+                            "mass": 1
+                          },
+                          "Park Squares": {
+                            "_uid": 241,
+                            "idea_tag": "Park Squares",
+                            "mass": 1
+                          },
+                          "Pool": {
+                            "_uid": 242,
+                            "idea_tag": "Pool",
+                            "mass": 1
+                          },
+                          "Stott Field": {
+                            "_uid": 243,
+                            "idea_tag": "Stott Field",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 240,
+                        "idea_tag": "PSU",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 239,
+                    "idea_tag": "Downtown",
+                    "mass": 1
+                  }
+                },
+                "_uid": 237,
+                "idea_tag": "Portland OR",
+                "mass": 1
+              },
+              "Texas": {
+                "_uid": 238,
+                "idea_tag": "Texas",
+                "mass": 1
+              }
+            },
+            "_uid": 236,
+            "idea_tag": "USA",
+            "mass": 1
+          }
+        },
+        "_uid": 234,
+        "idea_tag": "Nation-States",
+        "mass": 1
+      },
+      "No Movie playing": {
+        "_is_expanded": false,
+        "_kids": {
+          "Big Lewbwski": {
+            "_uid": 273,
+            "idea_tag": "Big Lewbwski",
+            "mass": 1
+          },
+          "Star Wars eps IV": {
+            "_uid": 274,
+            "idea_tag": "Star Wars eps IV",
+            "mass": 1
+          }
+        },
+        "_uid": 272,
+        "idea_tag": "No Movie playing",
+        "mass": 1
+      },
+      "Seasons": {
+        "_is_expanded": false,
+        "_kids": {
+          "Summer": {
+            "_uid": 276,
+            "idea_tag": "Summer",
+            "mass": 1
+          }
+        },
+        "_uid": 275,
+        "idea_tag": "Seasons",
+        "mass": 1
       },
       "time": {
         "_is_expanded": false,
@@ -4013,13 +3798,6 @@
               },
               "x2": {
                 "_kids": {
-                  "Sept 4th 2023 9am": {
-                    "gogo_want": 1064350680.0,
-                    "idea_tag": "Sept 4th 2023 9am",
-                    "mass": 1,
-                    "morph": false,
-                    "stop_want": 1064350680.0
-                  },
                   "monthly 1st business day": {
                     "_kids": {
                       "2023 Feb 9am": {
@@ -4035,6 +3813,13 @@
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1472657760.0
+                  },
+                  "Sept 4th 2023 9am": {
+                    "gogo_want": 1064350680.0,
+                    "idea_tag": "Sept 4th 2023 9am",
+                    "mass": 1,
+                    "morph": false,
+                    "stop_want": 1064350680.0
                   }
                 },
                 "gogo_want": 0.0,
@@ -5378,47 +5163,262 @@
         },
         "idea_tag": "time",
         "mass": 1
+      },
+      "Tired Status": {
+        "_is_expanded": false,
+        "_kids": {
+          "Not tired": {
+            "_uid": 278,
+            "idea_tag": "Not tired",
+            "mass": 1
+          },
+          "Tired": {
+            "_uid": 279,
+            "idea_tag": "Tired",
+            "mass": 1
+          }
+        },
+        "_uid": 277,
+        "idea_tag": "Tired Status",
+        "mass": 1
+      },
+      "Ultimate Frisbee": {
+        "_is_expanded": false,
+        "_kids": {
+          "check on m33": {
+            "_uid": 221,
+            "idea_tag": "check on m33",
+            "mass": 1,
+            "reasonunits": {
+              "A;Moods": {
+                "context": ";A;Moods",
+                "premises": {
+                  "A;Moods;Happy": {
+                    "need": ";A;Moods;Happy"
+                  }
+                }
+              }
+            }
+          },
+          "contemplate the disc": {
+            "_uid": 229,
+            "idea_tag": "contemplate the disc",
+            "mass": 1,
+            "reasonunits": {
+              "A;No Movie playing": {
+                "context": ";A;No Movie playing",
+                "premises": {
+                  "A;No Movie playing;Big Lewbwski": {
+                    "need": ";A;No Movie playing;Big Lewbwski"
+                  }
+                }
+              }
+            }
+          },
+          "playing ultimate": {
+            "_kids": {
+              "check for mini ultimate at park": {
+                "_uid": 219,
+                "idea_tag": "check for mini ultimate at park",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Moods": {
+                    "context": ";A;Moods",
+                    "premises": {
+                      "A;Moods;Happy": {
+                        "need": ";A;Moods;Happy"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 201,
+            "idea_tag": "playing ultimate",
+            "mass": 1,
+            "reasonunits": {
+              "A;Moods": {
+                "context": ";A;Moods",
+                "premises": {
+                  "A;Moods;Happy": {
+                    "need": ";A;Moods;Happy"
+                  }
+                }
+              }
+            }
+          },
+          "relaxing": {
+            "_uid": 202,
+            "idea_tag": "relaxing",
+            "mass": 1,
+            "reasonunits": {
+              "A;No Movie playing": {
+                "context": ";A;No Movie playing",
+                "premises": {
+                  "A;No Movie playing;Star Wars eps IV": {
+                    "need": ";A;No Movie playing;Star Wars eps IV"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 200,
+        "idea_tag": "Ultimate Frisbee",
+        "mass": 1,
+        "reasonunits": {
+          "A;Moods": {
+            "context": ";A;Moods",
+            "premises": {
+              "A;Moods;Happy": {
+                "need": ";A;Moods;Happy"
+              }
+            }
+          }
+        }
+      },
+      "Water Living": {
+        "_is_expanded": false,
+        "_kids": {
+          "Swimming in Williamette watershed": {
+            "_kids": {
+              "bike around": {
+                "_uid": 227,
+                "idea_tag": "bike around",
+                "mass": 1,
+                "reasonunits": {
+                  "A;WaterExistence": {
+                    "context": ";A;WaterExistence",
+                    "premises": {
+                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
+                        "need": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                      }
+                    }
+                  }
+                }
+              },
+              "Go climbing at east Circuit": {
+                "_uid": 226,
+                "idea_tag": "Go climbing at east Circuit",
+                "mass": 1,
+                "reasonunits": {
+                  "A;WaterExistence": {
+                    "context": ";A;WaterExistence",
+                    "premises": {
+                      "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
+                        "need": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                      }
+                    }
+                  }
+                }
+              },
+              "trout": {
+                "_uid": 228,
+                "idea_tag": "trout",
+                "mass": 1,
+                "reasonunits": {
+                  "A;WaterExistence": {
+                    "context": ";A;WaterExistence",
+                    "premises": {
+                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
+                        "need": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "_uid": 225,
+            "idea_tag": "Swimming in Williamette watershed",
+            "mass": 1,
+            "reasonunits": {
+              "A;WaterExistence": {
+                "context": ";A;WaterExistence",
+                "premises": {
+                  "A;WaterExistence;Williamette WaterShed": {
+                    "need": ";A;WaterExistence;Williamette WaterShed"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_uid": 223,
+        "idea_tag": "Water Living",
+        "mass": 1
+      },
+      "WaterExistence": {
+        "_is_expanded": false,
+        "_kids": {
+          "Williamette WaterShed": {
+            "_kids": {
+              "East Side of Watershed": {
+                "_kids": {
+                  "flat": {
+                    "_uid": 260,
+                    "idea_tag": "flat",
+                    "mass": 1
+                  }
+                },
+                "_uid": 258,
+                "idea_tag": "East Side of Watershed",
+                "mass": 1
+              },
+              "West side of Watershed": {
+                "_uid": 259,
+                "idea_tag": "West side of Watershed",
+                "mass": 1
+              }
+            },
+            "_uid": 257,
+            "idea_tag": "Williamette WaterShed",
+            "mass": 1
+          }
+        },
+        "_uid": 256,
+        "idea_tag": "WaterExistence",
+        "mass": 1
       }
     },
     "_uid": 1,
     "factunits": {
       "A;Aaron Donald objects effected by him": {
-        "fbase": ";A;Aaron Donald objects effected by him",
+        "fcontext": ";A;Aaron Donald objects effected by him",
         "fneed": ";A;Aaron Donald objects effected by him"
       },
+      "A;casa;cleaning;laundry basket status": {
+        "fcontext": ";A;casa;cleaning;laundry basket status",
+        "fneed": ";A;casa;cleaning;laundry basket status;not full"
+      },
       "A;Interweb": {
-        "fbase": ";A;Interweb",
+        "fcontext": ";A;Interweb",
         "fneed": ";A;Interweb"
       },
       "A;Moods": {
-        "fbase": ";A;Moods",
+        "fcontext": ";A;Moods",
         "fneed": ";A;Moods"
       },
       "A;Nation-States": {
-        "fbase": ";A;Nation-States",
+        "fcontext": ";A;Nation-States",
         "fneed": ";A;Nation-States"
       },
       "A;No Movie playing": {
-        "fbase": ";A;No Movie playing",
+        "fcontext": ";A;No Movie playing",
         "fneed": ";A;No Movie playing"
       },
       "A;Seasons": {
-        "fbase": ";A;Seasons",
+        "fcontext": ";A;Seasons",
         "fneed": ";A;Seasons"
       },
-      "A;WaterExistence": {
-        "fbase": ";A;WaterExistence",
-        "fneed": ";A;WaterExistence"
-      },
-      "A;casa;cleaning;laundry basket status": {
-        "fbase": ";A;casa;cleaning;laundry basket status",
-        "fneed": ";A;casa;cleaning;laundry basket status;not full"
-      },
       "A;time;gregtime": {
-        "fbase": ";A;time;gregtime",
+        "fcontext": ";A;time;gregtime",
+        "fneed": ";A;time;gregtime",
         "fnigh": 1064130373,
-        "fopen": 1064128320,
-        "fneed": ";A;time;gregtime"
+        "fopen": 1064128320
+      },
+      "A;WaterExistence": {
+        "fcontext": ";A;WaterExistence",
+        "fneed": ";A;WaterExistence"
       }
     },
     "idea_tag": "A",

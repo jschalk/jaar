@@ -663,12 +663,12 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
     sue_bud.add_idea(mop_way, 1, pledge=True)
-    sue_bud.edit_reason(mop_way, dirty_fact.fbase, dirty_fact.fneed)
-    sue_bud.add_fact(dirty_fact.fbase, dirty_fact.fneed, create_missing_ideas=True)
+    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fneed)
+    sue_bud.add_fact(dirty_fact.fcontext, dirty_fact.fneed, create_missing_ideas=True)
     sky_blue_fact = sky_blue_factunit()
-    sue_budevent_factunits = {clean_fact.fbase: clean_fact}
-    sue_found_factunits = {dirty_fact.fbase: dirty_fact}
-    sue_boss_factunits = {sky_blue_fact.fbase: sky_blue_fact}
+    sue_budevent_factunits = {clean_fact.fcontext: clean_fact}
+    sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
+    sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     sue_cell = cellunit_shop(
         deal_owner_name=yao_str,
         ancestors=sue_ancestors,
@@ -682,7 +682,7 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
     )
-    sue_cell._reason_bases = set()
+    sue_cell._reason_contexts = set()
     bob_str = "Bob"
     tp6 = 6
     sue_acct_mandate_ledger_path = create_cell_acct_mandate_ledger_path(

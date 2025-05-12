@@ -159,7 +159,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     run_premise = premiseunit_shop(need=run_way, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
-    reasonheirs = {reasonheir.base: reasonheir}
+    reasonheirs = {reasonheir.context: reasonheir}
     assert ball_idea._reasonheirs == {}
 
     # WHEN
@@ -178,8 +178,8 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     run_way = create_way(ball_way, run_str)
     run_premise = premiseunit_shop(need=run_way, open=0, nigh=7)
     run_premises = {run_premise.need: run_premise}
-    run_reasonunit = reasonunit_shop(base=run_way, premises=run_premises)
-    run_reasonunits = {run_reasonunit.base: run_reasonunit}
+    run_reasonunit = reasonunit_shop(context=run_way, premises=run_premises)
+    run_reasonunits = {run_reasonunit.context: run_reasonunit}
     ball_idea = ideaunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_idea.reasonunits != {}
 
@@ -188,7 +188,7 @@ def test_IdeaUnit_set_reasonheirs_CorrectlyRefusesNewValues():
 
     # THEN
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
-    reasonheirs = {reasonheir.base: reasonheir}
+    reasonheirs = {reasonheir.context: reasonheir}
     assert ball_idea._reasonheirs == reasonheirs
 
 
@@ -254,13 +254,13 @@ def test_IdeaUnit_set_reasonunit_SetsAttr():
     assert not clean_idea.reasonunits.get(dirty_str)
 
     # WHEN
-    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_str))
+    clean_idea.set_reasonunit(reasonunit_shop(context=dirty_str))
 
     # THEN
     assert clean_idea.reasonunits.get(dirty_str)
-    x_reasonunit = clean_idea.get_reasonunit(base=dirty_str)
+    x_reasonunit = clean_idea.get_reasonunit(context=dirty_str)
     assert x_reasonunit is not None
-    assert x_reasonunit.base == dirty_str
+    assert x_reasonunit.context == dirty_str
 
 
 def test_IdeaUnit_reasonunit_exists_ReturnsObj():
@@ -271,7 +271,7 @@ def test_IdeaUnit_reasonunit_exists_ReturnsObj():
     assert not clean_idea.reasonunit_exists(dirty_str)
 
     # WHEN
-    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_str))
+    clean_idea.set_reasonunit(reasonunit_shop(context=dirty_str))
 
     # THEN
     assert clean_idea.reasonunit_exists(dirty_str)
@@ -282,14 +282,14 @@ def test_IdeaUnit_get_reasonunit_ReturnsObj():
     clean_str = "clean"
     clean_idea = ideaunit_shop(clean_str)
     dirty_str = "dirty"
-    clean_idea.set_reasonunit(reasonunit_shop(base=dirty_str))
+    clean_idea.set_reasonunit(reasonunit_shop(context=dirty_str))
 
     # WHEN
-    x_reasonunit = clean_idea.get_reasonunit(base=dirty_str)
+    x_reasonunit = clean_idea.get_reasonunit(context=dirty_str)
 
     # THEN
     assert x_reasonunit is not None
-    assert x_reasonunit.base == dirty_str
+    assert x_reasonunit.context == dirty_str
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsObj():
@@ -297,16 +297,16 @@ def test_IdeaUnit_get_reasonheir_ReturnsObj():
     clean_str = "clean"
     clean_idea = ideaunit_shop(clean_str)
     dirty_str = "dirty"
-    reason_heir_x = reasonheir_shop(base=dirty_str)
-    reason_heirs_x = {reason_heir_x.base: reason_heir_x}
-    clean_idea.set_reasonheirs(reasonheirs=reason_heirs_x, bud_idea_dict={})
+    x_reasonheir = reasonheir_shop(context=dirty_str)
+    x_reasonheirs = {x_reasonheir.context: x_reasonheir}
+    clean_idea.set_reasonheirs(reasonheirs=x_reasonheirs, bud_idea_dict={})
 
     # WHEN
-    reason_heir_z = clean_idea.get_reasonheir(base=dirty_str)
+    z_reasonheir = clean_idea.get_reasonheir(context=dirty_str)
 
     # THEN
-    assert reason_heir_z is not None
-    assert reason_heir_z.base == dirty_str
+    assert z_reasonheir is not None
+    assert z_reasonheir.context == dirty_str
 
 
 def test_IdeaUnit_get_reasonheir_ReturnsNone():
@@ -314,13 +314,13 @@ def test_IdeaUnit_get_reasonheir_ReturnsNone():
     clean_str = "clean"
     clean_idea = ideaunit_shop(clean_str)
     dirty_str = "dirty"
-    reason_heir_x = reasonheir_shop(dirty_str)
-    reason_heirs_x = {reason_heir_x.base: reason_heir_x}
-    clean_idea.set_reasonheirs(reasonheirs=reason_heirs_x, bud_idea_dict={})
+    x_reasonheir = reasonheir_shop(dirty_str)
+    x_reasonheirs = {x_reasonheir.context: x_reasonheir}
+    clean_idea.set_reasonheirs(reasonheirs=x_reasonheirs, bud_idea_dict={})
 
     # WHEN
     test6_str = "test6"
-    reason_heir_test6 = clean_idea.get_reasonheir(base=test6_str)
+    reason_heir_test6 = clean_idea.get_reasonheir(context=test6_str)
 
     # THEN
     assert reason_heir_test6 is None
@@ -358,7 +358,7 @@ def test_IdeaUnit_set_factunit_SetsAttr():
     assert not clean_idea.factunits.get(dirty_str)
 
     # WHEN
-    clean_idea.set_factunit(factunit_shop(fbase=dirty_str))
+    clean_idea.set_factunit(factunit_shop(fcontext=dirty_str))
 
     # THEN
     assert clean_idea.factunits.get(dirty_str)
@@ -372,7 +372,7 @@ def test_IdeaUnit_factunit_exists_ReturnsObj():
     assert not clean_idea.factunit_exists(dirty_str)
 
     # WHEN
-    clean_idea.set_factunit(factunit_shop(fbase=dirty_str))
+    clean_idea.set_factunit(factunit_shop(fcontext=dirty_str))
 
     # THEN
     assert clean_idea.factunit_exists(dirty_str)
@@ -383,7 +383,7 @@ def test_IdeaUnit_factunit_exists_ReturnsObj():
 # clean_str = "clean"
 # clean_idea = ideaunit_shop(clean_str)
 #     clean_idea.set_reason_premise(
-#         base="testing1,sec",
+#         context="testing1,sec",
 #         premise="testing1,sec,next",
 #         open=None,
 #         nigh=None,

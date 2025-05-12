@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "base_ERASE": {
+        "context_ERASE": {
             "otx_key": true
         },
         "event_int": {

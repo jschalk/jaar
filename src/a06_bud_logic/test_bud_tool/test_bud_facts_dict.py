@@ -32,9 +32,9 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     # THEN
     assert sue_fact_dict.get(casa_way) != None
     casa_fact_dict = sue_fact_dict.get(casa_way)
-    assert casa_fact_dict.get("fbase") == casa_way
+    assert casa_fact_dict.get("fcontext") == casa_way
     assert casa_fact_dict.get("fneed") == dirty_way
-    expected_sue_fact_dict = {casa_way: {"fbase": casa_way, "fneed": dirty_way}}
+    expected_sue_fact_dict = {casa_way: {"fcontext": casa_way, "fneed": dirty_way}}
     print(f"{sue_fact_dict=}")
     print(f"{expected_sue_fact_dict=}")
     assert sue_fact_dict == expected_sue_fact_dict
@@ -57,13 +57,13 @@ def test_get_bud_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     # THEN
     assert sue_fact_dict.get(casa_way) != None
     casa_fact_dict = sue_fact_dict.get(casa_way)
-    assert casa_fact_dict.get("fbase") == casa_way
+    assert casa_fact_dict.get("fcontext") == casa_way
     assert casa_fact_dict.get("fneed") == dirty_way
     assert casa_fact_dict.get("fopen") == dirty_open
     assert casa_fact_dict.get("fnigh") == dirty_nigh
     expected_sue_fact_dict = {
         casa_way: {
-            "fbase": casa_way,
+            "fcontext": casa_way,
             "fneed": dirty_way,
             "fopen": dirty_open,
             "fnigh": dirty_nigh,
@@ -105,8 +105,8 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario1_Bud1FactsChanged():
     bob_bud.add_idea(clean_way)
     bob_bud.add_idea(dirty_way)
     bob_bud.add_idea(mop_way, pledge=True)
-    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
-    dirty_facts_dict = {floor_way: {"fbase": floor_way, "fneed": dirty_way}}
+    bob_bud.edit_idea_attr(mop_way, reason_context=floor_way, reason_premise=dirty_way)
+    dirty_facts_dict = {floor_way: {"fcontext": floor_way, "fneed": dirty_way}}
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != dirty_facts_dict
     assert bob_bud.get_factunits_dict() == {}
@@ -120,7 +120,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario1_Bud1FactsChanged():
     assert bob_bud.get_factunits_dict() == dirty_facts_dict
 
 
-def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_base_DoesNotExistInBud():
+def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_context_DoesNotExistInBud():
     # ESTABLISH
     bob_bud = budunit_shop("Bob", "accord23")
     casa_str = "casa"
@@ -137,8 +137,8 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_base_DoesNotExistInB
     # bob_bud.add_idea(clean_way)
     bob_bud.add_idea(dirty_way)
     bob_bud.add_idea(mop_way, pledge=True)
-    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
-    clean_facts_dict = {floor_way: {"fbase": floor_way, "fneed": clean_way}}
+    bob_bud.edit_idea_attr(mop_way, reason_context=floor_way, reason_premise=dirty_way)
+    clean_facts_dict = {floor_way: {"fcontext": floor_way, "fneed": clean_way}}
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != clean_facts_dict
     assert bob_bud.get_factunits_dict() == {}
@@ -153,7 +153,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_base_DoesNotExistInB
     assert bob_bud.get_idea_obj(clean_way)
 
 
-def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_base_WithoutBaseNotAddedToBud():
+def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_context_WithoutContextNotAddedToBud():
     # ESTABLISH
     bob_bud = budunit_shop("Bob", "accord23")
     casa_str = "casa"
@@ -170,7 +170,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_base_WithoutBaseNotA
     # bob_bud.add_idea(clean_way)
     bob_bud.add_idea(dirty_way)
     bob_bud.add_idea(mop_way, pledge=True)
-    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.edit_idea_attr(mop_way, reason_context=floor_way, reason_premise=dirty_way)
 
     weather_str = "weather"
     raining_str = "raining"
@@ -178,8 +178,8 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_base_WithoutBaseNotA
     rain_way = bob_bud.make_way(weather_way, raining_str)
 
     two_facts_dict = {
-        floor_way: {"fbase": floor_way, "fneed": clean_way},
-        weather_way: {"fbase": weather_way, "fneed": rain_way},
+        floor_way: {"fcontext": floor_way, "fneed": clean_way},
+        weather_way: {"fcontext": weather_way, "fneed": rain_way},
     }
     before_bob_bud = copy_deepcopy(bob_bud)
     assert bob_bud.get_factunits_dict() != two_facts_dict
@@ -212,9 +212,9 @@ def test_clear_factunits_from_bud_ReturnsObj_Scenario1_FactUnit_Exist():
     # bob_bud.add_idea(clean_way)
     bob_bud.add_idea(dirty_way)
     bob_bud.add_idea(mop_way, pledge=True)
-    bob_bud.edit_idea_attr(mop_way, reason_base=floor_way, reason_premise=dirty_way)
+    bob_bud.edit_idea_attr(mop_way, reason_context=floor_way, reason_premise=dirty_way)
     bob_bud.add_fact(floor_way, dirty_way)
-    floor_facts_dict = {floor_way: {"fbase": floor_way, "fneed": dirty_way}}
+    floor_facts_dict = {floor_way: {"fcontext": floor_way, "fneed": dirty_way}}
     assert bob_bud.get_factunits_dict() == floor_facts_dict
     assert bob_bud.get_factunits_dict() != {}
 

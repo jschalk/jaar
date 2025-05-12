@@ -138,19 +138,19 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_listener.set_idea(ideaunit_shop(dirty_str), status_way)
     yao_listener.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
     yao_listener.edit_idea_attr(
-        sweep_way, reason_base=status_way, reason_premise=dirty_way
+        sweep_way, reason_context=status_way, reason_premise=dirty_way
     )
-    missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
+    missing_fact_fcontexts = list(yao_listener.get_missing_fact_contexts().keys())
 
     yao_speaker = budunit_shop(yao_str)
     yao_speaker.add_fact(status_way, clean_way, create_missing_ideas=True)
-    assert yao_listener.get_missing_fact_bases().keys() == {status_way}
+    assert yao_listener.get_missing_fact_contexts().keys() == {status_way}
 
     # WHEN
-    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_bases)
+    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
 
     # THEN
-    assert len(yao_listener.get_missing_fact_bases().keys()) == 0
+    assert len(yao_listener.get_missing_fact_contexts().keys()) == 0
 
 
 def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
@@ -179,25 +179,25 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.set_idea(ideaunit_shop(dirty_str), status_way)
     yao_listener.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
     yao_listener.edit_idea_attr(
-        sweep_way, reason_base=status_way, reason_premise=dirty_way
+        sweep_way, reason_context=status_way, reason_premise=dirty_way
     )
     yao_listener.edit_idea_attr(
-        sweep_way, reason_base=fridge_way, reason_premise=running_way
+        sweep_way, reason_context=fridge_way, reason_premise=running_way
     )
-    assert len(yao_listener.get_missing_fact_bases()) == 2
+    assert len(yao_listener.get_missing_fact_contexts()) == 2
     yao_listener.add_fact(status_way, dirty_way)
-    assert len(yao_listener.get_missing_fact_bases()) == 1
+    assert len(yao_listener.get_missing_fact_contexts()) == 1
     assert yao_listener.get_fact(status_way).fneed == dirty_way
 
     # WHEN
     yao_speaker = budunit_shop(yao_str)
     yao_speaker.add_fact(status_way, clean_way, create_missing_ideas=True)
     yao_speaker.add_fact(fridge_way, running_way, create_missing_ideas=True)
-    missing_fact_bases = list(yao_listener.get_missing_fact_bases().keys())
-    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_bases)
+    missing_fact_fcontexts = list(yao_listener.get_missing_fact_contexts().keys())
+    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
 
     # THEN
-    assert len(yao_listener.get_missing_fact_bases()) == 0
+    assert len(yao_listener.get_missing_fact_contexts()) == 0
     # did not grab speaker's factunit
     assert yao_listener.get_fact(status_way).fneed == dirty_way
     # grabed speaker's factunit
@@ -231,7 +231,7 @@ def test_migrate_all_facts_CorrectlyAddsIdeaUnitsAndSetsFactUnits():
     yao_src.set_idea(ideaunit_shop(dirty_str), status_way)
     yao_src.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
     yao_src.edit_reason(sweep_way, status_way, dirty_way)
-    # missing_fact_bases = list(yao_src.get_missing_fact_bases().keys())
+    # missing_fact_fcontexts = list(yao_src.get_missing_fact_contexts().keys())
     yao_src.set_idea(ideaunit_shop(rain_str), weather_way)
     yao_src.set_idea(ideaunit_shop(snow_str), weather_way)
     yao_src.add_fact(weather_way, rain_way)

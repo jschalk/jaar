@@ -72,7 +72,7 @@ def get_example_zia_speaker() -> BudUnit:
     cook_ideaunit = zia_speaker.get_idea_obj(cook_way())
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     zia_speaker.edit_idea_attr(
-        cook_way(), reason_base=eat_way(), reason_premise=hungry_way()
+        cook_way(), reason_context=eat_way(), reason_premise=hungry_way()
     )
     zia_speaker.add_fact(eat_way(), full_way())
     zia_speaker.set_acct_respect(100)
@@ -91,7 +91,7 @@ def get_example_bob_speaker() -> BudUnit:
     cook_ideaunit = bob_speaker.get_idea_obj(cook_way())
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     bob_speaker.edit_idea_attr(
-        cook_way(), reason_base=eat_way(), reason_premise=hungry_way()
+        cook_way(), reason_context=eat_way(), reason_premise=hungry_way()
     )
     bob_speaker.add_fact(eat_way(), hungry_way())
     bob_speaker.set_acct_respect(100)
@@ -114,7 +114,7 @@ def get_example_yao_speaker() -> BudUnit:
     cook_ideaunit = yao_speaker.get_idea_obj(cook_way())
     cook_ideaunit.teamunit.set_teamlink(yao_str)
     yao_speaker.edit_idea_attr(
-        cook_way(), reason_base=eat_way(), reason_premise=hungry_way()
+        cook_way(), reason_context=eat_way(), reason_premise=hungry_way()
     )
     yao_speaker.add_fact(eat_way(), hungry_way())
     return yao_speaker

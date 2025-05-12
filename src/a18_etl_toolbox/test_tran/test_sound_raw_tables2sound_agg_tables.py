@@ -20,7 +20,7 @@ from src.a17_creed_logic._utils.str_a17 import creed_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
-    CREATE_PIDWAY_SOUND_RAW_SQLSTR,
+    CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
     create_sound_raw_update_inconsist_error_message_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
@@ -48,10 +48,10 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PIDWAY_SOUND_RAW_SQLSTR)
-        pidway_str = "pidgin_way"
-        pidway_s_raw_tablename = create_prime_tablename(pidway_str, "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidway_s_raw_tablename} (
+        cursor.execute(CREATE_PIDWAYY_SOUND_RAW_SQLSTR)
+        pidwayy_str = "pidgin_way"
+        pidwayy_s_raw_tablename = create_prime_tablename(pidwayy_str, "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -76,12 +76,12 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidway_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
-            cursor, pidway_str
+            cursor, pidwayy_str
         )
         cursor.execute(sqlstr)
 
@@ -107,8 +107,8 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidway_s_raw_tablename = create_prime_tablename(pidgin_way_str(), "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidway_s_raw_tablename} (
+        pidwayy_s_raw_tablename = create_prime_tablename(pidgin_way_str(), "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -133,7 +133,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidway_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -141,7 +141,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT creed_number, event_int FROM {pidway_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_select_sqlstr = f"SELECT creed_number, event_int FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -225,8 +225,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidway_s_raw_tablename = create_prime_tablename("PIDWAY", "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidway_s_raw_tablename} (
+        pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -276,21 +276,21 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidway_s_agg_tablename = create_prime_tablename("PIDWAY", "s", "agg")
+        pidwayy_s_agg_tablename = create_prime_tablename("PIDWAYY", "s", "agg")
         budacct_s_put_agg_tblname = create_prime_tablename("BUDACCT", "s", "agg", "put")
-        assert get_row_count(cursor, pidway_s_raw_tablename) == 7
+        assert get_row_count(cursor, pidwayy_s_raw_tablename) == 7
         assert get_row_count(cursor, budacct_s_put_raw_tblname) == 6
-        assert get_row_count(cursor, pidway_s_agg_tablename) == 0
+        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 0
         assert get_row_count(cursor, budacct_s_put_agg_tblname) == 0
 
         # WHEN
         insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidway_s_agg_tablename) == 2
+        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 2
         assert get_row_count(cursor, budacct_s_put_agg_tblname) == 2
 
-        select_agg_sqlstr = f"""SELECT * FROM {pidway_s_agg_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {pidwayy_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -392,8 +392,8 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidway_s_raw_tablename = create_prime_tablename("PIDWAY", "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidway_s_raw_tablename} (
+        pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -445,21 +445,21 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidway_s_agg_tablename = create_prime_tablename("PIDWAY", "s", "agg")
+        pidwayy_s_agg_tablename = create_prime_tablename("PIDWAYY", "s", "agg")
         budacct_s_put_agg_tblname = create_prime_tablename("BUDACCT", "s", "agg", "put")
-        assert get_row_count(cursor, pidway_s_raw_tablename) == 8
+        assert get_row_count(cursor, pidwayy_s_raw_tablename) == 8
         assert get_row_count(cursor, budacct_s_put_raw_tblname) == 7
-        assert get_row_count(cursor, pidway_s_agg_tablename) == 0
+        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 0
         assert get_row_count(cursor, budacct_s_put_agg_tblname) == 0
 
         # WHEN
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidway_s_agg_tablename) == 4
+        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 4
         assert get_row_count(cursor, budacct_s_put_agg_tblname) == 3
 
-        select_agg_sqlstr = f"""SELECT * FROM {pidway_s_agg_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {pidwayy_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)

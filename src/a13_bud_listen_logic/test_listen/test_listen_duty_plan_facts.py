@@ -48,15 +48,15 @@ def test_listen_to_facts_duty_plan_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     print(f"         {sue_texas_hubunit.plan_path(zia_str)=}")
 
     new_yao_plan = create_listen_basis(yao_duty)
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan, sue_texas_hubunit)
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is not None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is not None
 
     # WHEN
     listen_to_facts_duty_plan(new_yao_plan, sue_texas_hubunit)
 
     # THEN
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is None
 
 
 def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentTask(
@@ -82,9 +82,9 @@ def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentTask(
     sue_texas_hubunit.save_plan_bud(zia_plan)
 
     new_yao_plan = create_listen_basis(yao_duty)
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan, sue_texas_hubunit)
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is not None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is not None
     assert new_yao_plan.get_fact(eat_way()) is None
 
     # WHEN
@@ -114,9 +114,9 @@ def test_listen_to_facts_duty_plan_GetsFactsFromSrcBudSelfNotSpeakerSelf(
 
     new_yao_plan = create_listen_basis(yao_duty)
     assert new_yao_plan.get_fact(eat_way()) is None
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan, sue_texas_hubunit)
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is not None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is not None
 
     # WHEN
     listen_to_facts_duty_plan(new_yao_plan, sue_texas_hubunit)
@@ -147,11 +147,11 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 
     new_yao_plan = create_listen_basis(yao_duty)
     assert new_yao_plan.get_fact(eat_way()) is None
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan, sue_texas_hubunit)
-    print(f"{new_yao_plan.get_missing_fact_bases().keys()=}")
+    print(f"{new_yao_plan.get_missing_fact_contexts().keys()=}")
     print(f"{new_yao_plan.idearoot.factunits.keys()=}")
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is not None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is not None
 
     # WHEN
     listen_to_facts_duty_plan(new_yao_plan, sue_texas_hubunit)
@@ -180,9 +180,9 @@ def test_listen_to_facts_duty_plan_SetsPrioritizesSelfFactsOverSpeakers(
 
     new_yao_plan = create_listen_basis(yao_duty)
     assert new_yao_plan.get_fact(eat_way()) is None
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan, sue_texas_hubunit)
-    assert new_yao_plan.get_missing_fact_bases().get(eat_way()) is not None
+    assert new_yao_plan.get_missing_fact_contexts().get(eat_way()) is not None
 
     # WHEN
     listen_to_facts_duty_plan(new_yao_plan, sue_texas_hubunit)
@@ -215,11 +215,11 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 
     new_yao_plan1 = create_listen_basis(yao_duty)
     assert new_yao_plan1.get_fact(eat_way()) is None
-    assert new_yao_plan1.get_missing_fact_bases().get(eat_way()) is None
+    assert new_yao_plan1.get_missing_fact_contexts().get(eat_way()) is None
     listen_to_agendas_duty_plan(new_yao_plan1, sue_texas_hubunit)
-    print(f"{new_yao_plan1.get_missing_fact_bases().keys()=}")
+    print(f"{new_yao_plan1.get_missing_fact_contexts().keys()=}")
     print(f"{new_yao_plan1.idearoot.factunits.keys()=}")
-    assert new_yao_plan1.get_missing_fact_bases().get(eat_way()) is not None
+    assert new_yao_plan1.get_missing_fact_contexts().get(eat_way()) is not None
 
     # WHEN
     listen_to_facts_duty_plan(new_yao_plan1, sue_texas_hubunit)
@@ -274,7 +274,7 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 #     sue_speaker.set_idea(ideaunit_shop(dirty_str), status_way)
 #     sue_speaker.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
 #     sue_speaker.edit_idea_attr(
-#         sweep_way, reason_base=status_way, reason_premise=dirty_way
+#         sweep_way, reason_context=status_way, reason_premise=dirty_way
 #     )
 #     sweep_idea = sue_speaker.get_idea_obj(sweep_way)
 #     sweep_idea.teamunit.set_teamlink(yao_str)
@@ -286,19 +286,19 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 #     yao_duty.add_acctunit(sue_str)
 #     new_yao_plan = create_listen_basis(yao_duty)
 #     print(f"{new_yao_plan.get_idea_dict().keys()=}")
-#     # assert new_yao_plan.get_missing_fact_bases().get(status_way) is None
+#     # assert new_yao_plan.get_missing_fact_contexts().get(status_way) is None
 #     listen_to_agendas_duty_plan(new_yao_plan, texas_hubunit)
 #     print(f"{new_yao_plan.get_idea_dict().keys()=}")
-#     assert new_yao_plan.get_missing_fact_bases().get(status_way) is not None
+#     assert new_yao_plan.get_missing_fact_contexts().get(status_way) is not None
 
-#     # assert new_yao_plan.get_missing_fact_bases().keys() == {status_way}
+#     # assert new_yao_plan.get_missing_fact_contexts().keys() == {status_way}
 #     # sue_speaker.add_fact(status_way, clean_way, create_missing_ideas=True)
 
 #     # # WHEN
-#     # listen_to_facts_duty_plan(yao_duty, yao_plan, missing_fact_bases)
+#     # listen_to_facts_duty_plan(yao_duty, yao_plan, missing_fact_fcontexts)
 
 #     # # THEN
-#     # assert len(yao_duty.get_missing_fact_bases().keys()) == 0
+#     # assert len(yao_duty.get_missing_fact_contexts().keys()) == 0
 #     assert 1 == 3
 
 
@@ -328,25 +328,25 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfneededFromOwnersSpeakerDirBud_v
 #     yao_duty.set_idea(ideaunit_shop(dirty_str), status_way)
 #     yao_duty.set_idea(ideaunit_shop(sweep_str, pledge=True), casa_way)
 #     yao_duty.edit_idea_attr(
-#         sweep_way, reason_base=status_way, reason_premise=dirty_way
+#         sweep_way, reason_context=status_way, reason_premise=dirty_way
 #     )
 #     yao_duty.edit_idea_attr(
-#         sweep_way, reason_base=fridge_way, reason_premise=running_way
+#         sweep_way, reason_context=fridge_way, reason_premise=running_way
 #     )
-#     assert len(yao_duty.get_missing_fact_bases()) == 2
+#     assert len(yao_duty.get_missing_fact_contexts()) == 2
 #     yao_duty.add_fact(status_way, dirty_way)
-#     assert len(yao_duty.get_missing_fact_bases()) == 1
+#     assert len(yao_duty.get_missing_fact_contexts()) == 1
 #     assert yao_duty.get_fact(status_way).fneed == dirty_way
 
 #     # WHEN
 #     yao_plan = budunit_shop(yao_str)
 #     yao_plan.add_fact(status_way, clean_way, create_missing_ideas=True)
 #     yao_plan.add_fact(fridge_way, running_way, create_missing_ideas=True)
-#     missing_fact_bases = list(yao_duty.get_missing_fact_bases().keys())
-#     listen_to_facts_duty_plan(yao_duty, yao_plan, missing_fact_bases)
+#     missing_fact_fcontexts = list(yao_duty.get_missing_fact_contexts().keys())
+#     listen_to_facts_duty_plan(yao_duty, yao_plan, missing_fact_fcontexts)
 
 #     # THEN
-#     assert len(yao_duty.get_missing_fact_bases()) == 0
+#     assert len(yao_duty.get_missing_fact_contexts()) == 0
 #     # did not grab speaker's factunit
 #     assert yao_duty.get_fact(status_way).fneed == dirty_way
 #     # grabed speaker's factunit

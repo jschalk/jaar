@@ -131,7 +131,7 @@ def test_create_prime_tablename_ReturnsObj():
     fisoffi_dimen = fisc_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidtagg_dimen = pidgin_tag_str()
-    pidway_dimen = pidgin_way_str()
+    pidwayy_dimen = pidgin_way_str()
     pidlabe_dimen = pidgin_label_str()
     raw_str = "raw"
     agg_str = "agg"
@@ -159,7 +159,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("fisoffi", "s", agg_str) == f"{fisoffi_dimen}_s_agg"
     assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
     assert prime_tbl("pidtagg", "s", agg_str) == f"{pidtagg_dimen}_s_agg"
-    assert prime_tbl("pidway", "s", agg_str) == f"{pidway_dimen}_s_agg"
+    assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
     assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
     assert prime_tbl("pidlabe", "v", agg_str) == f"{pidlabe_dimen}_v_agg"
     assert prime_tbl("pidlabe", "s", raw_str) == f"{pidlabe_dimen}_s_raw"

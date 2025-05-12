@@ -629,7 +629,7 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         pidlabe_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
         pidname_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
         pidtagg_raw_cols = get_table_columns(cursor, pidgin_raw_tag_tablename)
-        pidway_raw_cols = get_table_columns(cursor, pidgin_raw_way_tablename)
+        pidwayy_raw_cols = get_table_columns(cursor, pidgin_raw_way_tablename)
         lab_table = pidgin_raw_label_tablename
         nam_table = pidgin_raw_name_tablename
         tag_table = pidgin_raw_tag_tablename
@@ -637,14 +637,14 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         select_pidlabe = create_select_query(cursor, lab_table, pidlabe_raw_cols)
         select_pidname = create_select_query(cursor, nam_table, pidname_raw_cols)
         select_pidtagg = create_select_query(cursor, tag_table, pidtagg_raw_cols)
-        select_pidway = create_select_query(cursor, roa_table, pidway_raw_cols)
+        select_pidwayy = create_select_query(cursor, roa_table, pidwayy_raw_cols)
         cursor.execute(select_pidlabe)
         lab_rows = cursor.fetchall()
         cursor.execute(select_pidname)
         nam_rows = cursor.fetchall()
         cursor.execute(select_pidtagg)
         tag_rows = cursor.fetchall()
-        cursor.execute(select_pidway)
+        cursor.execute(select_pidwayy)
         roa_rows = cursor.fetchall()
         assert len(lab_rows) == 5
         assert len(nam_rows) == 5

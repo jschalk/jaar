@@ -10,36 +10,36 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     sue_bud = get_budunit_with_4_levels()
     weekday_way = sue_bud.make_l1_way("weekdays")
     sunday_way = sue_bud.make_way(weekday_way, "Sunday")
-    sunday_bud_fact = factunit_shop(fbase=weekday_way, fneed=sunday_way)
+    sunday_bud_fact = factunit_shop(fcontext=weekday_way, fneed=sunday_way)
     print(sunday_bud_fact)
     x_idearoot = sue_bud.idearoot
-    x_idearoot.factunits = {sunday_bud_fact.fbase: sunday_bud_fact}
+    x_idearoot.factunits = {sunday_bud_fact.fcontext: sunday_bud_fact}
     assert x_idearoot.factunits is not None
     x_idearoot.factunits = {}
     assert not x_idearoot.factunits
 
     # ESTABLISH
-    sue_bud.add_fact(fbase=weekday_way, fneed=sunday_way)
+    sue_bud.add_fact(fcontext=weekday_way, fneed=sunday_way)
 
     # THEN
-    assert x_idearoot.factunits == {sunday_bud_fact.fbase: sunday_bud_fact}
+    assert x_idearoot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
     # ESTABLISH
     x_idearoot.factunits = {}
     assert not x_idearoot.factunits
     usa_week_way = sue_bud.make_l1_way("nation-state")
     usa_week_fact = factunit_shop(usa_week_way, usa_week_way, fopen=608, fnigh=610)
-    x_idearoot.factunits = {usa_week_fact.fbase: usa_week_fact}
+    x_idearoot.factunits = {usa_week_fact.fcontext: usa_week_fact}
 
     x_idearoot.factunits = {}
     assert not x_idearoot.factunits
 
     # WHEN
-    sue_bud.add_fact(fbase=usa_week_way, fneed=usa_week_way, fopen=608, fnigh=610)
+    sue_bud.add_fact(fcontext=usa_week_way, fneed=usa_week_way, fopen=608, fnigh=610)
 
     # THEN
     assert x_idearoot.factunits is not None
-    assert x_idearoot.factunits == {usa_week_fact.fbase: usa_week_fact}
+    assert x_idearoot.factunits == {usa_week_fact.fcontext: usa_week_fact}
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
@@ -49,12 +49,12 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
     sunday_way = sue_bud.make_way(weekday_way, "Sunday")
 
     # WHEN
-    sue_bud.add_fact(fbase=weekday_way, fneed=sunday_way)
+    sue_bud.add_fact(fcontext=weekday_way, fneed=sunday_way)
 
     # THEN
-    sunday_bud_fact = factunit_shop(fbase=weekday_way, fneed=sunday_way)
+    sunday_bud_fact = factunit_shop(fcontext=weekday_way, fneed=sunday_way)
     x_idearoot = sue_bud.idearoot
-    assert x_idearoot.factunits == {sunday_bud_fact.fbase: sunday_bud_fact}
+    assert x_idearoot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_fneed_IsNone():
@@ -63,32 +63,32 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_fneed_IsNone():
     weekday_way = sue_bud.make_l1_way("weekdays")
 
     # WHEN
-    sue_bud.add_fact(fbase=weekday_way, fopen=5, fnigh=7)
+    sue_bud.add_fact(fcontext=weekday_way, fopen=5, fnigh=7)
 
     # THEN
     sunday_bud_fact = factunit_shop(weekday_way, weekday_way, 5, 7)
     x_idearoot = sue_bud.idearoot
-    assert x_idearoot.factunits == {sunday_bud_fact.fbase: sunday_bud_fact}
+    assert x_idearoot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_open_IsNone():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     weekday_way = sue_bud.make_l1_way("weekdays")
-    sue_bud.add_fact(fbase=weekday_way, fopen=5, fnigh=7)
+    sue_bud.add_fact(fcontext=weekday_way, fopen=5, fnigh=7)
     x_idearoot = sue_bud.idearoot
     x7_factunit = factunit_shop(weekday_way, weekday_way, 5, 7)
     assert x_idearoot.factunits.get(weekday_way) == x7_factunit
 
     # WHEN
-    sue_bud.add_fact(fbase=weekday_way, fnigh=10)
+    sue_bud.add_fact(fcontext=weekday_way, fnigh=10)
 
     # THEN
     x10_factunit = factunit_shop(weekday_way, weekday_way, 5, 10)
     assert x_idearoot.factunits.get(weekday_way) == x10_factunit
 
 
-def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIsNot_RangeRoot():
+def test_BudUnit_set_fact_FailsToCreateWhenContextAndFactAreDifferenctAndFactIdeaIsNot_RangeRoot():
     # ESTABLISH
     bob_bud = budunit_shop("Bob")
     time_str = "time"
@@ -107,7 +107,7 @@ def test_BudUnit_set_fact_FailsToCreateWhenBaseAndFactAreDifferenctAndFactIdeaIs
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_bud.add_fact(fbase=a1e1_way, fneed=a1e1_way, fopen=20, fnigh=23)
+        bob_bud.add_fact(fcontext=a1e1_way, fneed=a1e1_way, fopen=20, fnigh=23)
     x_str = f"Non range-root fact:{a1e1_way} can only be set by range-root fact"
     assert str(excinfo.value) == x_str
 
@@ -117,13 +117,13 @@ def test_BudUnit_del_fact_CorrectlyModifiesAttr():
     sue_bud = get_budunit_with_4_levels()
     weekday_way = sue_bud.make_l1_way("weekdays")
     sunday_way = sue_bud.make_way(weekday_way, "Sunday")
-    sue_bud.add_fact(fbase=weekday_way, fneed=sunday_way)
-    sunday_bud_fact = factunit_shop(fbase=weekday_way, fneed=sunday_way)
+    sue_bud.add_fact(fcontext=weekday_way, fneed=sunday_way)
+    sunday_bud_fact = factunit_shop(fcontext=weekday_way, fneed=sunday_way)
     x_idearoot = sue_bud.idearoot
-    assert x_idearoot.factunits == {sunday_bud_fact.fbase: sunday_bud_fact}
+    assert x_idearoot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
     # WHEN
-    sue_bud.del_fact(fbase=weekday_way)
+    sue_bud.del_fact(fcontext=weekday_way)
 
     # THEN
     assert x_idearoot.factunits == {}
@@ -139,11 +139,11 @@ def test_BudUnit_get_fact_ReturnsFactUnit():
     sue_bud.add_fact(situations_way, climate_way, create_missing_ideas=True)
 
     # WHEN
-    generated_situations_base = sue_bud.get_fact(situations_way)
+    generated_situations_context = sue_bud.get_fact(situations_way)
 
     # THEN
-    static_situations_base = sue_bud.idearoot.factunits.get(situations_way)
-    assert generated_situations_base == static_situations_base
+    static_situations_context = sue_bud.idearoot.factunits.get(situations_way)
+    assert generated_situations_context == static_situations_context
 
 
 def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
@@ -158,9 +158,9 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud.set_l1_idea(clean_idea)
     c_way = sue_bud.make_l1_way(clean_str)
     time_way = sue_bud.make_l1_way(time_str)
-    # sue_bud.edit_idea_attr(c_way, reason_base=time_way, reason_premise=time_way, reason_premise_open=5, reason_premise_nigh=10)
+    # sue_bud.edit_idea_attr(c_way, reason_context=time_way, reason_premise=time_way, reason_premise_open=5, reason_premise_nigh=10)
 
-    sue_bud.add_fact(fbase=time_way, fneed=time_way, fopen=5, fnigh=10)
+    sue_bud.add_fact(fcontext=time_way, fneed=time_way, fopen=5, fnigh=10)
     print(f"Establish a single ranged fact {sue_bud.idearoot.factunits=}")
     assert len(sue_bud.idearoot.factunits) == 1
 
@@ -172,7 +172,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     place_idea = ideaunit_shop(place_str, begin=600, close=800)
     sue_bud.set_l1_idea(place_idea)
     place_way = sue_bud.make_l1_way(place_str)
-    sue_bud.add_fact(fbase=place_way, fneed=place_way, fopen=5, fnigh=10)
+    sue_bud.add_fact(fcontext=place_way, fneed=place_way, fopen=5, fnigh=10)
     print(f"When one ranged fact added {sue_bud.idearoot.factunits=}")
     assert len(sue_bud.idearoot.factunits) == 2
 
@@ -183,7 +183,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     mood = "mood_x"
     sue_bud.set_l1_idea(ideaunit_shop(mood))
     m_way = sue_bud.make_l1_way(mood)
-    sue_bud.add_fact(fbase=m_way, fneed=m_way)
+    sue_bud.add_fact(fcontext=m_way, fneed=m_way)
     print(f"When one non-ranged_fact added {sue_bud.idearoot.factunits=}")
     assert len(sue_bud.idearoot.factunits) == 3
 
@@ -204,8 +204,8 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     sad = "Sad"
     sue_bud.set_idea(ideaunit_shop(happy), parent_way=m_x_way)
     sue_bud.set_idea(ideaunit_shop(sad), parent_way=m_x_way)
-    sue_bud.add_fact(fbase=time_way, fneed=time_way, fopen=5, fnigh=10)
-    sue_bud.add_fact(fbase=m_x_way, fneed=sue_bud.make_way(m_x_way, happy))
+    sue_bud.add_fact(fcontext=time_way, fneed=time_way, fopen=5, fnigh=10)
+    sue_bud.add_fact(fcontext=m_x_way, fneed=sue_bud.make_way(m_x_way, happy))
     print(
         f"Establish a root ranged fact and non-range fact:\n{sue_bud.idearoot.factunits=}"
     )
@@ -213,10 +213,10 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
 
     # WHEN / THEN
     assert len(sue_bud._get_rangeroot_factunits()) == 1
-    assert sue_bud._get_rangeroot_factunits()[0].fbase == time_way
+    assert sue_bud._get_rangeroot_factunits()[0].fcontext == time_way
 
 
-def test_BudUnit_set_fact_create_missing_ideas_CreatesBaseAndFact():
+def test_BudUnit_set_fact_create_missing_ideas_CreatesContextAndFact():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     situations_str = "situations"

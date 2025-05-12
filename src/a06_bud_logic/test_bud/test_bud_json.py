@@ -13,7 +13,7 @@ from src.a06_bud_logic.bud import (
 from src.a06_bud_logic._utils.example_buds import (
     budunit_v001,
     get_budunit_x1_3levels_1reason_1facts,
-    get_budunit_base_time_example,
+    get_budunit_context_time_example,
 )
 from pytest import raises as pytest_raises
 
@@ -25,9 +25,9 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     day_hour_way = yao_bud.make_l1_way(day_hour_str)
     day_hour_idea = yao_bud.get_idea_obj(day_hour_way)
     day_hour_idea._originunit.set_originhold(acct_name="Bob", importance=2)
-    yao_bud.add_fact(fbase=day_hour_way, fneed=day_hour_way, fopen=0, fnigh=23)
+    yao_bud.add_fact(fcontext=day_hour_way, fneed=day_hour_way, fopen=0, fnigh=23)
     time_minute = yao_bud.make_l1_way("day_minute")
-    yao_bud.add_fact(fbase=time_minute, fneed=time_minute, fopen=0, fnigh=1440)
+    yao_bud.add_fact(fcontext=time_minute, fneed=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
     yao_bud.originunit.set_originhold(yao_str, 1)
     yao_fund_pool = 23000
@@ -232,12 +232,12 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_bud = budunit_v001()
     day_hour_str = "day_hour"
     day_hour_way = yao_bud.make_l1_way(day_hour_str)
-    yao_bud.add_fact(fbase=day_hour_way, fneed=day_hour_way, fopen=0, fnigh=23)
+    yao_bud.add_fact(fcontext=day_hour_way, fneed=day_hour_way, fopen=0, fnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_bud.make_l1_way(day_min_str)
-    yao_bud.add_fact(fbase=day_min_way, fneed=day_min_way, fopen=0, fnigh=59)
+    yao_bud.add_fact(fcontext=day_min_way, fneed=day_min_way, fopen=0, fnigh=59)
     x_factunit = factunit_shop(day_min_way, day_min_way, 5, 59)
-    yao_bud.edit_idea_attr(x_factunit.fbase, factunit=x_factunit)
+    yao_bud.edit_idea_attr(x_factunit.fcontext, factunit=x_factunit)
     yao_bud.set_max_tree_traverse(2)
     yao_str = "Yao"
     yao_bud.originunit.set_originhold(yao_str, 1)
@@ -539,7 +539,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     # ESTABLISH
     x1_bud = budunit_v001()
     x2_bud = get_budunit_x1_3levels_1reason_1facts()
-    x3_bud = get_budunit_base_time_example()
+    x3_bud = get_budunit_context_time_example()
     print(f"{x1_bud.owner_name}")
     print(f"{x2_bud.owner_name}")
     print(f"{x3_bud.owner_name}")

@@ -3,7 +3,7 @@ from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     credit_belief_str,
-    base_str,
+    context_str,
     type_NameUnit_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop
@@ -32,8 +32,8 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
     x_dt = DataFrame(columns=[acct_name_str(), credit_belief_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
-    x_dt = DataFrame(columns=[base_str(), acct_name_str(), credit_belief_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str(), base_str()}
+    x_dt = DataFrame(columns=[context_str(), acct_name_str(), credit_belief_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str(), context_str()}
     x_dt = DataFrame(columns=["calc_swim", acct_name_str(), credit_belief_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
 
@@ -226,20 +226,20 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     otx_dt = get_casa_maison_way_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_accord45_way
-    assert otx_dt.iloc[1][base_str()] == casa_otx_way
-    assert otx_dt.iloc[2][base_str()] == clean_otx_way
-    assert otx_dt.iloc[3][base_str()] == sweep_otx_way
+    assert otx_dt.iloc[0][context_str()] == otx_accord45_way
+    assert otx_dt.iloc[1][context_str()] == casa_otx_way
+    assert otx_dt.iloc[2][context_str()] == clean_otx_way
+    assert otx_dt.iloc[3][context_str()] == sweep_otx_way
     print(f"{otx_dt=}")
 
     # WHEN
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][base_str()] == inx_accord87_way
-    assert otx_dt.iloc[1][base_str()] == casa_inx_way
-    assert otx_dt.iloc[2][base_str()] == clean_inx_way
-    assert otx_dt.iloc[3][base_str()] == sweep_inx_way
+    assert otx_dt.iloc[0][context_str()] == inx_accord87_way
+    assert otx_dt.iloc[1][context_str()] == casa_inx_way
+    assert otx_dt.iloc[2][context_str()] == clean_inx_way
+    assert otx_dt.iloc[3][context_str()] == sweep_inx_way
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = get_casa_maison_way_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
@@ -269,10 +269,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_way_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][base_str()] == otx_accord45_way
-    assert otx_dt.iloc[1][base_str()] == casa_otx_way
-    assert otx_dt.iloc[2][base_str()] == clean_otx_way
-    assert otx_dt.iloc[3][base_str()] == sweep_otx_way
+    assert otx_dt.iloc[0][context_str()] == otx_accord45_way
+    assert otx_dt.iloc[1][context_str()] == casa_otx_way
+    assert otx_dt.iloc[2][context_str()] == clean_otx_way
+    assert otx_dt.iloc[3][context_str()] == sweep_otx_way
     print(f"Before {otx_dt=}")
     print("")
 
@@ -282,10 +282,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][base_str()] == inx_accord87_way
-    assert otx_dt.iloc[1][base_str()] == casa_inx_way
-    assert otx_dt.iloc[2][base_str()] == clean_inx_way
-    assert otx_dt.iloc[3][base_str()] == sweep_inx_way
+    assert otx_dt.iloc[0][context_str()] == inx_accord87_way
+    assert otx_dt.iloc[1][context_str()] == casa_inx_way
+    assert otx_dt.iloc[2][context_str()] == clean_inx_way
+    assert otx_dt.iloc[3][context_str()] == sweep_inx_way
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = get_casa_maison_way_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")

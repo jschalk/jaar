@@ -2,7 +2,7 @@ from src.a01_way_logic.way import create_way
 from src.a06_bud_logic._utils.str_a06 import bud_idea_factunit_str
 from src.a06_bud_logic._utils.str_a06 import (
     idea_way_str,
-    fbase_str,
+    fcontext_str,
     fopen_str,
     fnigh_str,
 )
@@ -33,7 +33,7 @@ def test_BudAtom_get_dict_ReturnsObj():
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_factunit_budatom.set_jkey(idea_way_str(), ball_way)
-    insert_factunit_budatom.set_jkey(fbase_str(), knee_way)
+    insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
 
@@ -44,7 +44,7 @@ def test_BudAtom_get_dict_ReturnsObj():
     assert atom_dict == {
         dimen_str(): x_dimen,
         crud_str(): atom_insert(),
-        jkeys_str(): {idea_way_str(): ball_way, fbase_str(): knee_way},
+        jkeys_str(): {idea_way_str(): ball_way, fcontext_str(): knee_way},
         jvalues_str(): {fopen_str(): knee_open, fnigh_str(): knee_nigh},
     }
 
@@ -62,7 +62,7 @@ def test_BudAtom_get_json_ReturnsObj():
     knee_nigh = 13
     insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
     insert_factunit_budatom.set_jkey(idea_way_str(), ball_way)
-    insert_factunit_budatom.set_jkey(fbase_str(), knee_way)
+    insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_open)
     insert_factunit_budatom.set_jvalue(fnigh_str(), knee_nigh)
 
@@ -86,7 +86,7 @@ def test_budatom_get_from_json_ReturnsObj():
     knee_nigh = 13
     gen_budatom = budatom_shop(x_dimen, atom_insert())
     gen_budatom.set_jkey(idea_way_str(), ball_way)
-    gen_budatom.set_jkey(fbase_str(), knee_way)
+    gen_budatom.set_jkey(fcontext_str(), knee_way)
     gen_budatom.set_jvalue(fopen_str(), knee_open)
     gen_budatom.set_jvalue(fnigh_str(), knee_nigh)
     atom_json = gen_budatom.get_json()

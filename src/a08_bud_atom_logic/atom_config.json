@@ -120,7 +120,7 @@
             "atom_order": 6
         },
         "jkeys": {
-            "fbase": {
+            "fcontext": {
                 "class_type": "WayUnit",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -191,7 +191,7 @@
             "atom_order": 8
         },
         "jkeys": {
-            "base": {
+            "context": {
                 "class_type": "WayUnit",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -242,7 +242,7 @@
             "atom_order": 7
         },
         "jkeys": {
-            "base": {
+            "context": {
                 "class_type": "WayUnit",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -256,7 +256,7 @@
             }
         },
         "jvalues": {
-            "base_idea_active_requisite": {
+            "context_idea_active_requisite": {
                 "class_type": "bool",
                 "column_order": 2,
                 "sqlite_datatype": "INTEGER"
