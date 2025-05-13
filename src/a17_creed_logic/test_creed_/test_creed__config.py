@@ -130,7 +130,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
-    pidginable_args,
+    get_pidginable_args,
 )
 from src.a17_creed_logic._utils.str_a17 import (
     creed_category_str,
@@ -210,8 +210,8 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     #     print(f"{bud_calc_arg=}")
     print(f"{bud_calc_args.difference(table_sorting_priority)=}")
     assert bud_calc_args.issubset(table_sorting_priority)
-    pidginable_otx_cols = {f"{pid_arg}_otx" for pid_arg in pidginable_args()}
-    pidginable_inx_cols = {f"{pid_arg}_inx" for pid_arg in pidginable_args()}
+    pidginable_otx_cols = {f"{pid_arg}_otx" for pid_arg in get_pidginable_args()}
+    pidginable_inx_cols = {f"{pid_arg}_inx" for pid_arg in get_pidginable_args()}
     x_delete_keys = all_bud_dimen_delete_keys
     pidginable_delete_otx_cols = {f"{pid_arg}_otx" for pid_arg in x_delete_keys}
     pidginable_delete_inx_cols = {f"{pid_arg}_inx" for pid_arg in x_delete_keys}

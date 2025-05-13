@@ -168,7 +168,7 @@ def pidginable_class_types() -> set:
     return {"NameStr", "LabelStr", "TagStr", "WayStr"}
 
 
-def pidginable_args() -> set:
+def get_pidginable_args() -> set:
     return {
         "acct_name",
         "awardee_label",
