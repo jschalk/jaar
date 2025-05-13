@@ -45,6 +45,10 @@ from src.a16_pidgin_logic.pidgin_config import (
     pidginable_class_types,
     get_pidginable_args,
     find_set_otx_inx_args,
+    get_pidgin_NameStr_args,
+    get_pidgin_LabelStr_args,
+    get_pidgin_TagStr_args,
+    get_pidgin_WayStr_args,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic._utils.example_pidgins import (
@@ -291,6 +295,83 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     }
     print(f"{otx_inx_args=}")
     assert otx_inx_args == expected_otx_inx_args
+
+
+def test_get_pidgin_NameStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_NameStr_args = get_pidgin_NameStr_args()
+
+    # THEN
+    assert pidgin_NameStr_args == {
+        acct_name_str(),
+        face_name_str(),
+        healer_name_str(),
+        owner_name_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_NameStr_str()
+    }
+    assert pidgin_NameStr_args == expected_args
+
+
+def test_get_pidgin_LabelStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_LabelStr_args = get_pidgin_LabelStr_args()
+
+    # THEN
+    assert pidgin_LabelStr_args == {
+        awardee_label_str(),
+        group_label_str(),
+        labor_label_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_LabelStr_str()
+    }
+    assert pidgin_LabelStr_args == expected_args
+
+
+def test_get_pidgin_TagStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_TagStr_args = get_pidgin_TagStr_args()
+
+    # THEN
+    assert pidgin_TagStr_args == {
+        fisc_tag_str(),
+        hour_tag_str(),
+        month_tag_str(),
+        timeline_tag_str(),
+        weekday_tag_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_TagStr_str()
+    }
+    assert pidgin_TagStr_args == expected_args
+
+
+def test_get_pidgin_WayStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_WayStr_args = get_pidgin_WayStr_args()
+
+    # THEN
+    assert pidgin_WayStr_args == {
+        fbranch_str(),
+        fcontext_str(),
+        idea_way_str(),
+        rcontext_str(),
+        pbranch_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_WayStr_str()
+    }
+    assert pidgin_WayStr_args == expected_args
 
 
 def test_PidginUnit_Exists():

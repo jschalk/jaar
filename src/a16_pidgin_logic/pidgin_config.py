@@ -204,3 +204,40 @@ def find_set_otx_inx_args(args: set) -> set:
         else:
             transformed_args.add(arg)
     return transformed_args
+
+
+def get_pidgin_NameStr_args() -> set[str]:
+    return {
+        "acct_name",
+        "face_name",
+        "healer_name",
+        "owner_name",
+    }
+
+
+def get_pidgin_LabelStr_args() -> set[str]:
+    return {
+        "awardee_label",
+        "group_label",
+        "labor_label",
+    }
+
+
+def get_pidgin_TagStr_args() -> set[str]:
+    return {
+        "fisc_tag",
+        "hour_tag",
+        "month_tag",
+        "timeline_tag",
+        "weekday_tag",
+    }
+
+
+def get_pidgin_WayStr_args() -> set[str]:
+    return {
+        "fbranch",
+        "fcontext",
+        "idea_way",
+        "pbranch",
+        "rcontext",
+    }
