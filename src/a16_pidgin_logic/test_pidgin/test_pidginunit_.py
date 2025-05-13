@@ -40,7 +40,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     default_unknown_word_if_None,
     pidginable_class_types,
-    pidginable_atom_args,
+    pidginable_args,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic._utils.example_pidgins import (
@@ -181,21 +181,21 @@ def test_pidginable_class_types_ReturnsObj():
     assert inter_x == x_pidginable_class_types
 
 
-def test_pidginable_atom_args_ReturnsObj():
+def test_pidginable_args_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     print(f"{pidginable_class_types()=}")
     all_pidgin_args = set(get_pidgin_args_class_types().keys())
-    print(f"{pidginable_atom_args().difference(all_pidgin_args)}")
-    assert pidginable_atom_args().issubset(all_pidgin_args)
-    static_pidginable_atom_args = {
+    print(f"{pidginable_args().difference(all_pidgin_args)}")
+    assert pidginable_args().issubset(all_pidgin_args)
+    static_pidginable_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
         if class_type in pidginable_class_types()
     }
-    assert pidginable_atom_args() == static_pidginable_atom_args
+    assert pidginable_args() == static_pidginable_args
 
-    assert len(pidginable_atom_args()) == 17
-    assert pidginable_atom_args() == {
+    assert len(pidginable_args()) == 17
+    assert pidginable_args() == {
         acct_name_str(),
         awardee_label_str(),
         rcontext_str(),

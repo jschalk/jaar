@@ -19,7 +19,7 @@ from src.a01_way_logic.way import FaceName, EventInt
 from src.a16_pidgin_logic.map import MapCore
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
-    pidginable_atom_args,
+    pidginable_args,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, get_pidginunit_from_json
 from src.a17_creed_logic.creed_config import (
@@ -122,7 +122,7 @@ def get_brick_raw_grouping_with_all_values_equal_df(
 
 
 def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
-    return {x_column for x_column in x_df.columns if x_column in pidginable_atom_args()}
+    return {x_column for x_column in x_df.columns if x_column in pidginable_args()}
 
 
 def translate_single_column_dataframe(
@@ -143,7 +143,7 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
         return None
 
     column_names = set(x_df.columns)
-    pidginable_columns = column_names.intersection(pidginable_atom_args())
+    pidginable_columns = column_names.intersection(pidginable_args())
     for pidginable_column in pidginable_columns:
         class_type = get_pidgin_args_class_types().get(pidginable_column)
         x_mapunit = x_pidginunit.get_mapunit(class_type)
