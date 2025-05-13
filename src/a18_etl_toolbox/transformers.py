@@ -567,6 +567,10 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
+def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
+    print("huh")
+
+
 def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor,
     brick_valid_table: str,

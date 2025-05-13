@@ -3,6 +3,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
 )
+from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args
 from src.a17_creed_logic.creed_db_tool import (
     get_default_sorted_list,
     create_creed_sorted_table,
@@ -720,6 +721,72 @@ WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;
 """
+
+
+def get_insert_into_voice_raw_sqlstrs(cursor: sqlite3_Connection, dimen: str) -> str:
+    if dimen[:3].lower() == "bud":
+        s_agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
+        v_raw_tablename = create_prime_tablename(dimen, "v", "raw", "put")
+    else:
+        s_raw_tablename = create_prime_tablename(dimen, "s", "raw")
+        v_agg_tablename = create_prime_tablename(dimen, "v", "agg")
+
+    _columns = set(get_table_columns(cursor, s_agg_tablename))
+    pigin = find_set_otx_inx_args()
+    valid_columns = set(get_table_columns(cursor, brick_valid_table))
+    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = get_default_sorted_list(common_cols)
+    select_str = create_select_query(cursor, brick_valid_table, common_cols)
+    select_str = select_str.replace("SELECT", f"SELECT '{creed_number}',")
+    common_cols.append("creed_number")
+    common_cols = get_default_sorted_list(common_cols)
+    x_dict = {common_col: None for common_col in common_cols}
+    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
+    insert_select_sqlstr = f"{insert_clause_str}\n{select_str};"
+    cursor.execute(insert_select_sqlstr)
+
+    return ""
+    # dimen_config = get_creed_config_dict().get(dimen)
+    # dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+
+    # if dimen[:4].lower() == "fisc":
+    #     exclude_cols = {"creed_number", "event_int", "face_name", "error_message"}
+    #     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
+    #     dimen_focus_columns.remove("event_int")
+    #     dimen_focus_columns.remove("face_name")
+    #     dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
+    # else:
+    #     exclude_cols = {"creed_number", "error_message"}
+
+    # if dimen[:3].lower() == "bud":
+    #     agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
+    #     raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
+    # else:
+    #     raw_tablename = create_prime_tablename(dimen, "s", "raw")
+    #     agg_tablename = create_prime_tablename(dimen, "s", "agg")
+
+    # pidgin_fisc_bud_put_sqlstr = create_table2table_agg_insert_query(
+    #     conn_or_cursor,
+    #     src_table=raw_tablename,
+    #     dst_table=agg_tablename,
+    #     focus_cols=dimen_focus_columns,
+    #     exclude_cols=exclude_cols,
+    # )
+    # sqlstrs = [pidgin_fisc_bud_put_sqlstr]
+    # if dimen[:3].lower() == "bud":
+    #     del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+    #     del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
+    #     bud_del_sqlstr = create_table2table_agg_insert_query(
+    #         conn_or_cursor,
+    #         src_table=del_raw_tablename,
+    #         dst_table=del_agg_tablename,
+    #         focus_cols=None,
+    #         exclude_cols=exclude_cols,
+    #         where_block="",
+    #     )
+    #     sqlstrs.append(bud_del_sqlstr)
+
+    # return sqlstrs
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
