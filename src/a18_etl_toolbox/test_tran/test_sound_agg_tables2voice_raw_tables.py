@@ -43,13 +43,13 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from src.a18_etl_toolbox.transformers import (
     insert_pidgin_sound_agg_into_pidgin_core_raw_table,
     insert_pidgin_core_agg_to_pidgin_core_vld_table,
+    insert_pidgin_sound_agg_into_pidgin_core_raw_table,
     update_inconsistency_pidgin_core_raw_table,
     insert_pidgin_core_raw_to_pidgin_core_agg_table,
     update_pidgin_sound_agg_inconsist_errors,
     update_pidgin_sound_agg_brick_errors,
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
-    etl_sound_agg_tables_to_pidgin_core_raw_table,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -1147,7 +1147,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        etl_sound_agg_tables_to_pidgin_core_raw_table(cursor)
+        insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
         pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
         pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
         pidgin_name_s_vld_tablename = create_prime_tablename("pidname", "s", "vld")
