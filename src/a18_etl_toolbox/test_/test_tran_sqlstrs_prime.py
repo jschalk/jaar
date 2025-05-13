@@ -29,7 +29,11 @@ from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeoffi_str,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, get_pidginable_args
+from src.a16_pidgin_logic.pidgin_config import (
+    get_pidgin_dimens,
+    get_pidginable_args,
+    find_set_otx_inx_args,
+)
 from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_label_str,
     pidgin_name_str,
@@ -257,13 +261,8 @@ def create_pidgin_core_vld_table_sqlstr(x_dimen):
 
 def create_fisc_voice_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
-    columns = set()
-    for column in get_all_dimen_columns_set(x_dimen):
-        if column in get_pidginable_args():
-            columns.add(f"{column}_otx")
-            columns.add(f"{column}_inx")
-        else:
-            columns.add(column)
+    columns = get_all_dimen_columns_set(x_dimen)
+    columns = find_set_otx_inx_args(columns)
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
@@ -312,12 +311,8 @@ def create_bud_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
 def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "put")
     columns = set()
-    for column in get_all_dimen_columns_set(x_dimen):
-        if column in get_pidginable_args():
-            columns.add(f"{column}_otx")
-            columns.add(f"{column}_inx")
-        else:
-            columns.add(column)
+    columns = get_all_dimen_columns_set(x_dimen)
+    columns = find_set_otx_inx_args(columns)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
@@ -332,13 +327,8 @@ def create_bud_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
 
 def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "del")
-    columns = set()
-    for column in get_del_dimen_columns_set(x_dimen):
-        if column in get_pidginable_args():
-            columns.add(f"{column}_otx")
-            columns.add(f"{column}_inx")
-        else:
-            columns.add(column)
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns = find_set_otx_inx_args(columns)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
