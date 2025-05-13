@@ -409,7 +409,7 @@
         }
     },
     "bud_idea_laborlink": {
-        "abbreviation": "budlabor",
+        "abbreviation": "budlabo",
         "jkeys": {
             "fisc_tag": {
                 "class_type": "TagStr",

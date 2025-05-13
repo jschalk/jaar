@@ -295,7 +295,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckAbbreviations():
     assert budawar_aspect.get(abbr_str) == "budawar"
     assert budreas_aspect.get(abbr_str) == "budreas"
     assert budprem_aspect.get(abbr_str) == "budprem"
-    assert budlabor_aspect.get(abbr_str) == "budlabor"
+    assert budlabor_aspect.get(abbr_str) == "budlabo"
     assert budheal_aspect.get(abbr_str) == "budheal"
     assert budfact_aspect.get(abbr_str) == "budfact"
     assert budgrou_aspect.get(abbr_str) == "budgrou"
