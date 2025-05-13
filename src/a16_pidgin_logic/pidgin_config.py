@@ -1,6 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a08_bud_atom_logic._utils.str_a08 import jkeys_str, jvalues_str
+from src.a08_bud_atom_logic.atom_config import get_all_bud_dimen_delete_keys
 from os import getcwd as os_getcwd
 
 
@@ -187,4 +188,56 @@ def get_pidginable_args() -> set:
         "labor_label",
         "timeline_tag",
         "weekday_tag",
+    }
+
+
+def find_set_otx_inx_args(args: set) -> set:
+    """Receives set of args, returns a set with all "Pidginable" args replaced with "_otx" and "_inx" """
+    all_pidginable = get_pidginable_args()
+    all_pidginable.update(get_all_bud_dimen_delete_keys())
+    all_pidginable.intersection_update(args)
+    transformed_args = set()
+    for arg in args:
+        if arg in all_pidginable:
+            transformed_args.add(f"{arg}_otx")
+            transformed_args.add(f"{arg}_inx")
+        else:
+            transformed_args.add(arg)
+    return transformed_args
+
+
+def get_pidgin_NameStr_args() -> set[str]:
+    return {
+        "acct_name",
+        "face_name",
+        "healer_name",
+        "owner_name",
+    }
+
+
+def get_pidgin_LabelStr_args() -> set[str]:
+    return {
+        "awardee_label",
+        "group_label",
+        "labor_label",
+    }
+
+
+def get_pidgin_TagStr_args() -> set[str]:
+    return {
+        "fisc_tag",
+        "hour_tag",
+        "month_tag",
+        "timeline_tag",
+        "weekday_tag",
+    }
+
+
+def get_pidgin_WayStr_args() -> set[str]:
+    return {
+        "fbranch",
+        "fcontext",
+        "idea_way",
+        "pbranch",
+        "rcontext",
     }

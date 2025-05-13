@@ -1,8 +1,11 @@
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_create_table_sqlstr,
+    get_table_columns,
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
+    create_insert_into_clause_str as get_insert_sql,
+    create_select_query,
 )
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
@@ -29,7 +32,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeoffi_str,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, get_pidginable_args
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, find_set_otx_inx_args
 from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_label_str,
     pidgin_name_str,
@@ -57,6 +60,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
+    get_insert_into_voice_raw_sqlstrs,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -257,13 +261,8 @@ def create_pidgin_core_vld_table_sqlstr(x_dimen):
 
 def create_fisc_voice_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
-    columns = set()
-    for column in get_all_dimen_columns_set(x_dimen):
-        if column in get_pidginable_args():
-            columns.add(f"{column}_otx")
-            columns.add(f"{column}_inx")
-        else:
-            columns.add(column)
+    columns = get_all_dimen_columns_set(x_dimen)
+    columns = find_set_otx_inx_args(columns)
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
@@ -312,12 +311,8 @@ def create_bud_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
 def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "put")
     columns = set()
-    for column in get_all_dimen_columns_set(x_dimen):
-        if column in get_pidginable_args():
-            columns.add(f"{column}_otx")
-            columns.add(f"{column}_inx")
-        else:
-            columns.add(column)
+    columns = get_all_dimen_columns_set(x_dimen)
+    columns = find_set_otx_inx_args(columns)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
@@ -332,13 +327,8 @@ def create_bud_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
 
 def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "del")
-    columns = set()
-    for column in get_del_dimen_columns_set(x_dimen):
-        if column in get_pidginable_args():
-            columns.add(f"{column}_otx")
-            columns.add(f"{column}_inx")
-        else:
-            columns.add(column)
+    columns = get_del_dimen_columns_set(x_dimen)
+    columns = find_set_otx_inx_args(columns)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
@@ -949,3 +939,53 @@ GROUP BY event_int, face_name
 ;
 """
     assert tag_sqlstr == expected_tag_sqlstr
+
+
+# TODO
+# def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj():
+#     # ESTABLISH
+#     creed_config = get_creed_config_dict()
+#     bud_dimens_config = {
+#         x_dimen: dimen_config
+#         for x_dimen, dimen_config in creed_config.items()
+#         if dimen_config.get(creed_category_str()) == "bud"
+#     }
+
+#     with sqlite3_connect(":memory:") as conn:
+#         cursor = conn.cursor()
+#         create_sound_and_voice_tables(cursor)
+
+#         for bud_dimen, creed_config in bud_dimens_config.items():
+#             print(f"{bud_dimen=}")
+#             s_put_agg_tablename = prime_tbl(bud_dimen, "s", "agg", "put")
+#             s_del_agg_tablename = prime_tbl(bud_dimen, "s", "agg", "del")
+#             v_put_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "put")
+#             v_del_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "del")
+#             s_put_agg_cols = get_table_columns(cursor, s_put_agg_tablename)
+#             s_del_agg_cols = get_table_columns(cursor, s_del_agg_tablename)
+#             v_put_raw_cols = get_table_columns(cursor, v_put_raw_tablename)
+#             v_del_raw_cols = get_table_columns(cursor, v_del_raw_tablename)
+#             v_put_vals = dict(find_set_otx_inx_args(v_put_raw_cols))
+#             v_del_vals = dict(find_set_otx_inx_args(v_del_raw_cols))
+#             v_put_raw_insert_sql = get_insert_sql(
+#                 cursor, v_put_raw_tablename, v_put_vals
+#             )
+#             v_del_raw_insert_sql = get_insert_sql(
+#                 cursor, v_del_raw_tablename, v_del_vals
+#             )
+#             print(f"{v_put_raw_insert_sql=}")
+#             print(f"{v_del_raw_insert_sql=}")
+#             # create_select_query(cursor=)
+
+#     #         static_example_sqlstr = f"""
+#     # INSERT INTO {voice_raw_tablename} (event_int, face_name_otx, fisc_tag_otx, cumlative_minute, hour_tag_otx)
+#     # SELECT event_int, face_name_otx, fisc_tag_otx, cumlative_minute
+#     # FROM {sound_agg_tablename}
+#     # ;
+#     # """
+#     #         print(insert_sqlstr)
+#     #         print(" static exmaple below")
+#     #         print(static_example_sqlstr)
+#     #         assert insert_sqlstr == static_example_sqlstr
+#     #         assert 1 == 2
+#     assert 1 == 2

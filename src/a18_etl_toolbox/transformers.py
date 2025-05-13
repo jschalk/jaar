@@ -285,7 +285,7 @@ def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection)
             insert_clause_sqlstr = create_insert_into_clause_str(
                 conn_or_cursor,
                 agg_tablename,
-                values_dict=creedref._attributes,
+                columns_set=set(creedref._attributes.keys()),
             )
             insert_from_select_sqlstr = f"""
 {insert_clause_sqlstr}
@@ -557,17 +557,18 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def etl_sound_agg_tables_to_pidgin_core_raw_table(cursor: sqlite3_Cursor):
-    insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
-
-
 def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
+    insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
     update_inconsistency_pidgin_core_raw_table(cursor)
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
     update_pidgin_sound_agg_brick_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
+
+
+def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
+    print("huh")
 
 
 def etl_brick_valid_table_into_prime_table(

@@ -23,7 +23,10 @@ from src.a06_bud_logic._utils.str_a06 import (
     labor_label_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
-from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
+from src.a08_bud_atom_logic.atom_config import (
+    get_atom_args_class_types,
+    get_all_bud_dimen_delete_keys,
+)
 from src.a15_fisc_logic._utils.str_a15 import (
     weekday_tag_str,
     month_tag_str,
@@ -41,6 +44,11 @@ from src.a16_pidgin_logic.pidgin_config import (
     default_unknown_word_if_None,
     pidginable_class_types,
     get_pidginable_args,
+    find_set_otx_inx_args,
+    get_pidgin_NameStr_args,
+    get_pidgin_LabelStr_args,
+    get_pidgin_TagStr_args,
+    get_pidgin_WayStr_args,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic._utils.example_pidgins import (
@@ -214,6 +222,156 @@ def test_get_pidginable_args_ReturnsObj():
         timeline_tag_str(),
         weekday_tag_str(),
     }
+
+
+def test_find_set_otx_inx_args_ReturnsObj_Scenario0_All_pidginable_args():
+    # ESTABLISH
+    pidginable_args = get_pidginable_args()
+
+    # WHEN
+    otx_inx_args = find_set_otx_inx_args(pidginable_args)
+
+    # THEN
+    expected_otx_inx_args = set()
+    for pidginable_arg in pidginable_args:
+        expected_otx_inx_args.add(f"{pidginable_arg}_otx")
+        expected_otx_inx_args.add(f"{pidginable_arg}_inx")
+    print(f"{otx_inx_args=}")
+    assert otx_inx_args == expected_otx_inx_args
+
+
+def test_find_set_otx_inx_args_ReturnsObj_Scenario1_bud_dimen_delete_keys():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
+
+    # WHEN
+    otx_inx_args = find_set_otx_inx_args(bud_dimen_delete_keys)
+
+    # THEN
+    expected_otx_inx_args = set()
+    for pidginable_arg in bud_dimen_delete_keys:
+        expected_otx_inx_args.add(f"{pidginable_arg}_otx")
+        expected_otx_inx_args.add(f"{pidginable_arg}_inx")
+    print(f"{otx_inx_args=}")
+    assert otx_inx_args == expected_otx_inx_args
+
+
+def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    run_str = "run"
+    given_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
+    given_bud_dimen_delete_keys.add(run_str)
+
+    # WHEN
+    otx_inx_args = find_set_otx_inx_args(given_bud_dimen_delete_keys)
+
+    # THEN
+    expected_otx_inx_args = set()
+    for pidginable_arg in get_all_bud_dimen_delete_keys():
+        expected_otx_inx_args.add(f"{pidginable_arg}_otx")
+        expected_otx_inx_args.add(f"{pidginable_arg}_inx")
+    expected_otx_inx_args.add(run_str)
+    print(f"{otx_inx_args=}")
+    assert otx_inx_args == expected_otx_inx_args
+
+
+def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
+    # ESTABLISH
+    healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
+    run_str = "run"
+    given_bud_dimen_delete_keys = {run_str, healer_name_ERASE_str}
+
+    # WHEN
+    otx_inx_args = find_set_otx_inx_args(given_bud_dimen_delete_keys)
+
+    # THEN
+    healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
+    expected_otx_inx_args = {
+        f"{healer_name_ERASE_str}_otx",
+        f"{healer_name_ERASE_str}_inx",
+        run_str,
+    }
+    print(f"{otx_inx_args=}")
+    assert otx_inx_args == expected_otx_inx_args
+
+
+def test_get_pidgin_NameStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_NameStr_args = get_pidgin_NameStr_args()
+
+    # THEN
+    assert pidgin_NameStr_args == {
+        acct_name_str(),
+        face_name_str(),
+        healer_name_str(),
+        owner_name_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_NameStr_str()
+    }
+    assert pidgin_NameStr_args == expected_args
+
+
+def test_get_pidgin_LabelStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_LabelStr_args = get_pidgin_LabelStr_args()
+
+    # THEN
+    assert pidgin_LabelStr_args == {
+        awardee_label_str(),
+        group_label_str(),
+        labor_label_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_LabelStr_str()
+    }
+    assert pidgin_LabelStr_args == expected_args
+
+
+def test_get_pidgin_TagStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_TagStr_args = get_pidgin_TagStr_args()
+
+    # THEN
+    assert pidgin_TagStr_args == {
+        fisc_tag_str(),
+        hour_tag_str(),
+        month_tag_str(),
+        timeline_tag_str(),
+        weekday_tag_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_TagStr_str()
+    }
+    assert pidgin_TagStr_args == expected_args
+
+
+def test_get_pidgin_WayStr_args_ReturnsObj():
+    # ESTABLISH / WHEN
+    pidgin_WayStr_args = get_pidgin_WayStr_args()
+
+    # THEN
+    assert pidgin_WayStr_args == {
+        fbranch_str(),
+        fcontext_str(),
+        idea_way_str(),
+        rcontext_str(),
+        pbranch_str(),
+    }
+    expected_args = {
+        x_arg
+        for x_arg, class_type in get_pidgin_args_class_types().items()
+        if class_type == type_WayStr_str()
+    }
+    assert pidgin_WayStr_args == expected_args
 
 
 def test_PidginUnit_Exists():

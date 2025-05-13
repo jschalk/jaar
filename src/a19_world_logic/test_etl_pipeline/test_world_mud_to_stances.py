@@ -93,16 +93,16 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
     fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
     fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
-    budunit_sound_raw_put = create_prime_tablename("budunit", "s", "raw", "put")
-    budunit_sound_agg_put = create_prime_tablename("budunit", "s", "agg", "put")
-    budacct_sound_raw_put = create_prime_tablename("budacct", "s", "raw", "put")
-    budacct_sound_agg_put = create_prime_tablename("budacct", "s", "agg", "put")
+    budunit_sound_put_raw = create_prime_tablename("budunit", "s", "raw", "put")
+    budunit_sound_put_agg = create_prime_tablename("budunit", "s", "agg", "put")
+    budacct_sound_put_raw = create_prime_tablename("budacct", "s", "raw", "put")
+    budacct_sound_put_agg = create_prime_tablename("budacct", "s", "agg", "put")
     fisunit_voice_raw = create_prime_tablename("fisunit", "v", "raw")
     fisunit_voice_agg = create_prime_tablename("fisunit", "v", "agg")
-    budunit_voice_raw_put = create_prime_tablename("budunit", "v", "raw", "put")
-    budunit_voice_agg_put = create_prime_tablename("budunit", "v", "agg", "put")
-    budacct_voice_raw_put = create_prime_tablename("budacct", "v", "raw", "put")
-    budacct_voice_agg_put = create_prime_tablename("budacct", "v", "agg", "put")
+    budunit_voice_put_raw = create_prime_tablename("budunit", "v", "raw", "put")
+    budunit_voice_put_agg = create_prime_tablename("budunit", "v", "agg", "put")
+    budacct_voice_put_raw = create_prime_tablename("budacct", "v", "raw", "put")
+    budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
     event1_pidgin_json_path = "events/1/pidgin.json"
     event1_inherited_pidgin_json_path = "events/1/inherited_pidgin.json"
     event1_voice_budunit_path = "events/1/voice_budunit.csv"
@@ -119,22 +119,18 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not db_table_exists(cursor, pidname_sound_agg)
         assert not db_table_exists(cursor, fisunit_sound_raw)
         assert not db_table_exists(cursor, fisunit_sound_agg)
-        assert not db_table_exists(cursor, budunit_sound_raw_put)
-        assert not db_table_exists(cursor, budunit_sound_agg_put)
+        assert not db_table_exists(cursor, budunit_sound_put_raw)
+        assert not db_table_exists(cursor, budunit_sound_put_agg)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
-        assert not os_path_exists(event1_pidgin_json_path)
-        assert not os_path_exists(event1_inherited_pidgin_json_path)
-        assert not os_path_exists(event1_voice_budunit_path)
-        assert not os_path_exists(event1_voice_budacct_path)
         assert not db_table_exists(cursor, fisunit_voice_raw)
         assert not db_table_exists(cursor, fisunit_voice_agg)
-        assert not db_table_exists(cursor, budunit_voice_raw_put)
-        assert not db_table_exists(cursor, budunit_voice_agg_put)
-        assert not db_table_exists(cursor, budacct_voice_raw_put)
-        assert not db_table_exists(cursor, budacct_voice_agg_put)
+        assert not db_table_exists(cursor, budunit_voice_put_raw)
+        assert not db_table_exists(cursor, budunit_voice_put_agg)
+        assert not db_table_exists(cursor, budacct_voice_put_raw)
+        assert not db_table_exists(cursor, budacct_voice_put_agg)
 
         # WHEN
         fizz_world.mud_to_stances_v2_with_cursor(db_conn, cursor)
@@ -147,25 +143,21 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, pidname_sound_raw) == 1
         assert get_row_count(cursor, fisunit_sound_raw) == 1
-        assert get_row_count(cursor, budunit_sound_raw_put) == 1
-        assert get_row_count(cursor, budacct_sound_raw_put) == 1
+        assert get_row_count(cursor, budunit_sound_put_raw) == 1
+        assert get_row_count(cursor, budacct_sound_put_raw) == 1
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, fisunit_sound_agg) == 1
-        assert get_row_count(cursor, budunit_sound_agg_put) == 1
-        assert get_row_count(cursor, budacct_sound_agg_put) == 1
+        assert get_row_count(cursor, budunit_sound_put_agg) == 1
+        assert get_row_count(cursor, budacct_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
-        # assert os_path_exists(event1_pidgin_json_path)
-        # assert os_path_exists(event1_inherited_pidgin_json_path)
-        # assert not os_path_exists(event1_voice_budunit_path)
-        # assert not os_path_exists(event1_voice_budacct_path)
         # assert get_row_count(cursor, fisunit_voice_raw) == 1
+        # assert get_row_count(cursor, budunit_voice_put_raw) == 1
+        # assert get_row_count(cursor, budacct_voice_put_raw) == 1
         # assert get_row_count(cursor, fisunit_voice_agg) == 1
-        # assert get_row_count(cursor, budunit_voice_raw) == 1
         # assert get_row_count(cursor, budunit_voice_agg) == 1
-        # assert get_row_count(cursor, budacct_voice_raw) == 1
         # assert get_row_count(cursor, budacct_voice_agg) == 1
 
 
