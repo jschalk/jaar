@@ -15,21 +15,21 @@
         "give_force": {
             "otx_key": false
         },
-        "owner_name": {
+        "idea_way": {
             "otx_key": true
         },
-        "idea_way": {
+        "owner_name": {
             "otx_key": true
         },
         "take_force": {
             "otx_key": false
         }
     },
+    "creed_number": "br00022",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit",
         "bud_idea_awardlink"
-    ],
-    "creed_number": "br00022"
+    ]
 }

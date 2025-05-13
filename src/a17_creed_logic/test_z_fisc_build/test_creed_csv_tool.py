@@ -77,7 +77,7 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00021": "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief\n",
         "br00022": "fisc_tag,owner_name,idea_way,awardee_label,give_force,take_force\n",
         "br00023": "fisc_tag,owner_name,idea_way,fcontext,fbranch,fopen,fnigh\n",
-        "br00024": "fisc_tag,owner_name,idea_way,team_label\n",
+        "br00024": "fisc_tag,owner_name,idea_way,labor_label\n",
         "br00025": "fisc_tag,owner_name,idea_way,healer_name\n",
         "br00026": "fisc_tag,owner_name,idea_way,rcontext,pbranch,pnigh,popen,pdivisor\n",
         "br00027": "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite\n",
@@ -397,7 +397,7 @@ def test_add_bud_to_br00024_csv_ReturnsObj():
     bob_bud.add_idea(casa_way)
     casa_idea = bob_bud.get_idea_obj(casa_way)
     cleaners_str = "cleaners"
-    casa_idea.teamunit.set_teamlink(cleaners_str)
+    casa_idea.laborunit.set_laborlink(cleaners_str)
     csv_header = x_creeds.get("br00024")
     print(f"{csv_header=}")
 
@@ -909,7 +909,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     bob_bud.add_idea(casa_way)
     casa_idea = bob_bud.get_idea_obj(casa_way)
     cleaners_str = "cleaners"
-    casa_idea.teamunit.set_teamlink(cleaners_str)
+    casa_idea.laborunit.set_laborlink(cleaners_str)
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)
     sue_str = "Sue"

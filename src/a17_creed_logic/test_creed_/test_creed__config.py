@@ -17,7 +17,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
@@ -35,7 +35,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     idea_way_str,
     numor_str,
-    team_label_str,
+    labor_label_str,
     close_str,
     credit_belief_str,
     debtit_belief_str,
@@ -130,6 +130,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
+    get_pidginable_args,
 )
 from src.a17_creed_logic._utils.str_a17 import (
     creed_category_str,
@@ -209,134 +210,205 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     #     print(f"{bud_calc_arg=}")
     print(f"{bud_calc_args.difference(table_sorting_priority)=}")
     assert bud_calc_args.issubset(table_sorting_priority)
+    pidginable_otx_cols = {f"{pid_arg}_otx" for pid_arg in get_pidginable_args()}
+    pidginable_inx_cols = {f"{pid_arg}_inx" for pid_arg in get_pidginable_args()}
+    x_delete_keys = all_bud_dimen_delete_keys
+    pidginable_delete_otx_cols = {f"{pid_arg}_otx" for pid_arg in x_delete_keys}
+    pidginable_delete_inx_cols = {f"{pid_arg}_inx" for pid_arg in x_delete_keys}
+    print(f"{pidginable_delete_otx_cols=}")
+    print(f"{pidginable_delete_inx_cols=}")
+    assert pidginable_otx_cols.issubset(table_sorting_priority)
+    assert pidginable_inx_cols.issubset(table_sorting_priority)
+    assert pidginable_delete_otx_cols.issubset(table_sorting_priority)
+    assert pidginable_delete_inx_cols.issubset(table_sorting_priority)
 
-    assert table_sorting_priority[0] == world_id_str()
-    assert table_sorting_priority[1] == creed_number_str()
+    # all the suffix otx/inx columns are only used in one table
+    assert table_sorting_priority[0] == "world_id"
+    assert table_sorting_priority[1] == "creed_number"
     assert table_sorting_priority[2] == "source_dimen"
     assert table_sorting_priority[3] == "pidgin_event_int"
-    assert table_sorting_priority[4] == event_int_str()
-    assert table_sorting_priority[5] == face_name_str()
-    assert table_sorting_priority[6] == fisc_tag_str()
-    assert table_sorting_priority[7] == timeline_tag_str()
-    assert table_sorting_priority[8] == offi_time_str()
-    assert table_sorting_priority[9] == c400_number_str()
-    assert table_sorting_priority[10] == yr1_jan1_offset_str()
-    assert table_sorting_priority[11] == monthday_distortion_str()
-    assert table_sorting_priority[12] == cumlative_day_str()
-    assert table_sorting_priority[13] == month_tag_str()
-    assert table_sorting_priority[14] == cumlative_minute_str()
-    assert table_sorting_priority[15] == hour_tag_str()
-    assert table_sorting_priority[16] == weekday_order_str()
-    assert table_sorting_priority[17] == weekday_tag_str()
-    assert table_sorting_priority[18] == owner_name_str()
-    assert table_sorting_priority[19] == get_delete_key_name(owner_name_str())
-    assert table_sorting_priority[20] == acct_name_str()
-    assert table_sorting_priority[21] == get_delete_key_name(acct_name_str())
-    assert table_sorting_priority[22] == group_label_str()
-    assert table_sorting_priority[23] == get_delete_key_name(group_label_str())
-    assert table_sorting_priority[24] == idea_way_str()
-    assert table_sorting_priority[25] == get_delete_key_name(idea_way_str())
-    assert table_sorting_priority[26] == rcontext_str()
-    assert table_sorting_priority[27] == get_delete_key_name(rcontext_str())
-    assert table_sorting_priority[28] == fcontext_str()
-    assert table_sorting_priority[29] == get_delete_key_name(fcontext_str())
-    assert table_sorting_priority[30] == pbranch_str()
-    assert table_sorting_priority[31] == get_delete_key_name(pbranch_str())
-    assert table_sorting_priority[32] == fbranch_str()
-    assert table_sorting_priority[33] == team_label_str()
-    assert table_sorting_priority[34] == get_delete_key_name(team_label_str())
-    assert table_sorting_priority[35] == awardee_label_str()
-    assert table_sorting_priority[36] == get_delete_key_name(awardee_label_str())
-    assert table_sorting_priority[37] == healer_name_str()
-    assert table_sorting_priority[38] == get_delete_key_name(healer_name_str())
-    assert table_sorting_priority[39] == deal_time_str()
-    assert table_sorting_priority[40] == tran_time_str()
-    assert table_sorting_priority[41] == begin_str()
-    assert table_sorting_priority[42] == close_str()
-    assert table_sorting_priority[43] == addin_str()
-    assert table_sorting_priority[44] == numor_str()
-    assert table_sorting_priority[45] == denom_str()
-    assert table_sorting_priority[46] == morph_str()
-    assert table_sorting_priority[47] == gogo_want_str()
-    assert table_sorting_priority[48] == stop_want_str()
-    assert table_sorting_priority[49] == rcontext_idea_active_requisite_str()
-    assert table_sorting_priority[50] == credit_belief_str()
-    assert table_sorting_priority[51] == debtit_belief_str()
-    assert table_sorting_priority[52] == credit_vote_str()
-    assert table_sorting_priority[53] == debtit_vote_str()
-    assert table_sorting_priority[54] == credor_respect_str()
-    assert table_sorting_priority[55] == debtor_respect_str()
-    assert table_sorting_priority[56] == fopen_str()
-    assert table_sorting_priority[57] == fnigh_str()
-    assert table_sorting_priority[58] == "fund_pool"
-    assert table_sorting_priority[59] == give_force_str()
-    assert table_sorting_priority[60] == mass_str()
-    assert table_sorting_priority[61] == "max_tree_traverse"
-    assert table_sorting_priority[62] == pnigh_str()
-    assert table_sorting_priority[63] == popen_str()
-    assert table_sorting_priority[64] == "pdivisor"
-    assert table_sorting_priority[65] == pledge_str()
-    assert table_sorting_priority[66] == "problem_bool"
-    assert table_sorting_priority[67] == take_force_str()
-    assert table_sorting_priority[68] == "tally"
-    assert table_sorting_priority[69] == fund_coin_str()
-    assert table_sorting_priority[70] == penny_str()
-    assert table_sorting_priority[71] == respect_bit_str()
-    assert table_sorting_priority[72] == amount_str()
-    assert table_sorting_priority[73] == otx_tag_str()
-    assert table_sorting_priority[74] == inx_tag_str()
-    assert table_sorting_priority[75] == otx_way_str()
-    assert table_sorting_priority[76] == inx_way_str()
-    assert table_sorting_priority[77] == otx_name_str()
-    assert table_sorting_priority[78] == inx_name_str()
-    assert table_sorting_priority[79] == otx_label_str()
-    assert table_sorting_priority[80] == inx_label_str()
-    assert table_sorting_priority[81] == otx_bridge_str()
-    assert table_sorting_priority[82] == inx_bridge_str()
-    assert table_sorting_priority[83] == bridge_str()
-    assert table_sorting_priority[84] == unknown_word_str()
-    assert table_sorting_priority[85] == quota_str()
-    assert table_sorting_priority[86] == celldepth_str()
-    assert table_sorting_priority[87] == "job_listen_rotations"
-    assert table_sorting_priority[88] == "error_message"
-    assert table_sorting_priority[89] == "_owner_name_team"
-    assert table_sorting_priority[90] == "_active"
-    assert table_sorting_priority[91] == "_task"
-    assert table_sorting_priority[92] == "_status"
-    assert table_sorting_priority[93] == "_credor_pool"
-    assert table_sorting_priority[94] == "_debtor_pool"
-    assert table_sorting_priority[95] == "_rational"
-    assert table_sorting_priority[96] == "_fund_give"
-    assert table_sorting_priority[97] == "_fund_take"
-    assert table_sorting_priority[98] == "_fund_onset"
-    assert table_sorting_priority[99] == "_fund_cease"
-    assert table_sorting_priority[100] == "_fund_ratio"
-    assert table_sorting_priority[101] == "_fund_agenda_give"
-    assert table_sorting_priority[102] == "_fund_agenda_take"
-    assert table_sorting_priority[103] == "_fund_agenda_ratio_give"
-    assert table_sorting_priority[104] == "_fund_agenda_ratio_take"
-    assert table_sorting_priority[105] == "_inallocable_debtit_belief"
-    assert table_sorting_priority[106] == "_gogo_calc"
-    assert table_sorting_priority[107] == "_stop_calc"
-    assert table_sorting_priority[108] == "_level"
-    assert table_sorting_priority[109] == "_range_evaluated"
-    assert table_sorting_priority[110] == "_descendant_pledge_count"
-    assert table_sorting_priority[111] == "_healerlink_ratio"
-    assert table_sorting_priority[112] == "_all_acct_cred"
-    assert table_sorting_priority[113] == "_keeps_justified"
-    assert table_sorting_priority[114] == "_offtrack_fund"
-    assert table_sorting_priority[115] == "_rcontext_idea_active_value"
-    assert table_sorting_priority[116] == "_irrational_debtit_belief"
-    assert table_sorting_priority[117] == "_sum_healerlink_share"
-    assert table_sorting_priority[118] == "_keeps_buildable"
-    assert table_sorting_priority[119] == "_all_acct_debt"
-    assert table_sorting_priority[120] == "_tree_traverse_count"
-    assert len(table_sorting_priority) == 121
+    assert table_sorting_priority[4] == "event_int"
+    assert table_sorting_priority[5] == "face_name"
+    assert table_sorting_priority[6] == "face_name_otx"
+    assert table_sorting_priority[7] == "face_name_inx"
+    assert table_sorting_priority[8] == "fisc_tag"
+    assert table_sorting_priority[9] == "fisc_tag_otx"
+    assert table_sorting_priority[10] == "fisc_tag_inx"
+    assert table_sorting_priority[11] == "timeline_tag"
+    assert table_sorting_priority[12] == "timeline_tag_otx"
+    assert table_sorting_priority[13] == "timeline_tag_inx"
+    assert table_sorting_priority[14] == "offi_time"
+    assert table_sorting_priority[15] == "c400_number"
+    assert table_sorting_priority[16] == "yr1_jan1_offset"
+    assert table_sorting_priority[17] == "monthday_distortion"
+    assert table_sorting_priority[18] == "cumlative_day"
+    assert table_sorting_priority[19] == "month_tag"
+    assert table_sorting_priority[20] == "month_tag_otx"
+    assert table_sorting_priority[21] == "month_tag_inx"
+    assert table_sorting_priority[22] == "cumlative_minute"
+    assert table_sorting_priority[23] == "hour_tag"
+    assert table_sorting_priority[24] == "hour_tag_otx"
+    assert table_sorting_priority[25] == "hour_tag_inx"
+    assert table_sorting_priority[26] == "weekday_order"
+    assert table_sorting_priority[27] == "weekday_tag"
+    assert table_sorting_priority[28] == "weekday_tag_otx"
+    assert table_sorting_priority[29] == "weekday_tag_inx"
+    assert table_sorting_priority[30] == "owner_name"
+    assert table_sorting_priority[31] == "owner_name_otx"
+    assert table_sorting_priority[32] == "owner_name_inx"
+    assert table_sorting_priority[33] == "owner_name_ERASE"
+    assert table_sorting_priority[34] == "owner_name_ERASE_otx"
+    assert table_sorting_priority[35] == "owner_name_ERASE_inx"
+    assert table_sorting_priority[36] == "acct_name"
+    assert table_sorting_priority[37] == "acct_name_otx"
+    assert table_sorting_priority[38] == "acct_name_inx"
+    assert table_sorting_priority[39] == "acct_name_ERASE"
+    assert table_sorting_priority[40] == "acct_name_ERASE_otx"
+    assert table_sorting_priority[41] == "acct_name_ERASE_inx"
+    assert table_sorting_priority[42] == "group_label"
+    assert table_sorting_priority[43] == "group_label_otx"
+    assert table_sorting_priority[44] == "group_label_inx"
+    assert table_sorting_priority[45] == "group_label_ERASE"
+    assert table_sorting_priority[46] == "group_label_ERASE_otx"
+    assert table_sorting_priority[47] == "group_label_ERASE_inx"
+    assert table_sorting_priority[48] == "idea_way"
+    assert table_sorting_priority[49] == "idea_way_otx"
+    assert table_sorting_priority[50] == "idea_way_inx"
+    assert table_sorting_priority[51] == "idea_way_ERASE"
+    assert table_sorting_priority[52] == "idea_way_ERASE_otx"
+    assert table_sorting_priority[53] == "idea_way_ERASE_inx"
+    assert table_sorting_priority[54] == "rcontext"
+    assert table_sorting_priority[55] == "rcontext_otx"
+    assert table_sorting_priority[56] == "rcontext_inx"
+    assert table_sorting_priority[57] == "rcontext_ERASE"
+    assert table_sorting_priority[58] == "rcontext_ERASE_otx"
+    assert table_sorting_priority[59] == "rcontext_ERASE_inx"
+    assert table_sorting_priority[60] == "fcontext"
+    assert table_sorting_priority[61] == "fcontext_otx"
+    assert table_sorting_priority[62] == "fcontext_inx"
+    assert table_sorting_priority[63] == "fcontext_ERASE"
+    assert table_sorting_priority[64] == "fcontext_ERASE_otx"
+    assert table_sorting_priority[65] == "fcontext_ERASE_inx"
+    assert table_sorting_priority[66] == "pbranch"
+    assert table_sorting_priority[67] == "pbranch_otx"
+    assert table_sorting_priority[68] == "pbranch_inx"
+    assert table_sorting_priority[69] == "pbranch_ERASE"
+    assert table_sorting_priority[70] == "pbranch_ERASE_otx"
+    assert table_sorting_priority[71] == "pbranch_ERASE_inx"
+    assert table_sorting_priority[72] == "fbranch"
+    assert table_sorting_priority[73] == "fbranch_otx"
+    assert table_sorting_priority[74] == "fbranch_inx"
+    assert table_sorting_priority[75] == "labor_label"
+    assert table_sorting_priority[76] == "labor_label_otx"
+    assert table_sorting_priority[77] == "labor_label_inx"
+    assert table_sorting_priority[78] == "labor_label_ERASE"
+    assert table_sorting_priority[79] == "labor_label_ERASE_otx"
+    assert table_sorting_priority[80] == "labor_label_ERASE_inx"
+    assert table_sorting_priority[81] == "awardee_label"
+    assert table_sorting_priority[82] == "awardee_label_otx"
+    assert table_sorting_priority[83] == "awardee_label_inx"
+    assert table_sorting_priority[84] == "awardee_label_ERASE"
+    assert table_sorting_priority[85] == "awardee_label_ERASE_otx"
+    assert table_sorting_priority[86] == "awardee_label_ERASE_inx"
+    assert table_sorting_priority[87] == "healer_name"
+    assert table_sorting_priority[88] == "healer_name_otx"
+    assert table_sorting_priority[89] == "healer_name_inx"
+    assert table_sorting_priority[90] == "healer_name_ERASE"
+    assert table_sorting_priority[91] == "healer_name_ERASE_otx"
+    assert table_sorting_priority[92] == "healer_name_ERASE_inx"
+    assert table_sorting_priority[93] == "deal_time"
+    assert table_sorting_priority[94] == "tran_time"
+    assert table_sorting_priority[95] == "begin"
+    assert table_sorting_priority[96] == "close"
+    assert table_sorting_priority[97] == "addin"
+    assert table_sorting_priority[98] == "numor"
+    assert table_sorting_priority[99] == "denom"
+    assert table_sorting_priority[100] == "morph"
+    assert table_sorting_priority[101] == "gogo_want"
+    assert table_sorting_priority[102] == "stop_want"
+    assert table_sorting_priority[103] == "rcontext_idea_active_requisite"
+    assert table_sorting_priority[104] == "credit_belief"
+    assert table_sorting_priority[105] == "debtit_belief"
+    assert table_sorting_priority[106] == "credit_vote"
+    assert table_sorting_priority[107] == "debtit_vote"
+    assert table_sorting_priority[108] == "credor_respect"
+    assert table_sorting_priority[109] == "debtor_respect"
+    assert table_sorting_priority[110] == "fopen"
+    assert table_sorting_priority[111] == "fnigh"
+    assert table_sorting_priority[112] == "fund_pool"
+    assert table_sorting_priority[113] == "give_force"
+    assert table_sorting_priority[114] == "mass"
+    assert table_sorting_priority[115] == "max_tree_traverse"
+    assert table_sorting_priority[116] == "pnigh"
+    assert table_sorting_priority[117] == "popen"
+    assert table_sorting_priority[118] == "pdivisor"
+    assert table_sorting_priority[119] == "pledge"
+    assert table_sorting_priority[120] == "problem_bool"
+    assert table_sorting_priority[121] == "take_force"
+    assert table_sorting_priority[122] == "tally"
+    assert table_sorting_priority[123] == "fund_coin"
+    assert table_sorting_priority[124] == "penny"
+    assert table_sorting_priority[125] == "respect_bit"
+    assert table_sorting_priority[126] == "amount"
+    assert table_sorting_priority[127] == "otx_tag"
+    assert table_sorting_priority[128] == "inx_tag"
+    assert table_sorting_priority[129] == "otx_way"
+    assert table_sorting_priority[130] == "inx_way"
+    assert table_sorting_priority[131] == "otx_name"
+    assert table_sorting_priority[132] == "inx_name"
+    assert table_sorting_priority[133] == "otx_label"
+    assert table_sorting_priority[134] == "inx_label"
+    assert table_sorting_priority[135] == "otx_bridge"
+    assert table_sorting_priority[136] == "inx_bridge"
+    assert table_sorting_priority[137] == "bridge"
+    assert table_sorting_priority[138] == "unknown_word"
+    assert table_sorting_priority[139] == "quota"
+    assert table_sorting_priority[140] == "celldepth"
+    assert table_sorting_priority[141] == "job_listen_rotations"
+    assert table_sorting_priority[142] == "error_message"
+    assert table_sorting_priority[143] == "_owner_name_labor"
+    assert table_sorting_priority[144] == "_active"
+    assert table_sorting_priority[145] == "_task"
+    assert table_sorting_priority[146] == "_status"
+    assert table_sorting_priority[147] == "_credor_pool"
+    assert table_sorting_priority[148] == "_debtor_pool"
+    assert table_sorting_priority[149] == "_rational"
+    assert table_sorting_priority[150] == "_fund_give"
+    assert table_sorting_priority[151] == "_fund_take"
+    assert table_sorting_priority[152] == "_fund_onset"
+    assert table_sorting_priority[153] == "_fund_cease"
+    assert table_sorting_priority[154] == "_fund_ratio"
+    assert table_sorting_priority[155] == "_fund_agenda_give"
+    assert table_sorting_priority[156] == "_fund_agenda_take"
+    assert table_sorting_priority[157] == "_fund_agenda_ratio_give"
+    assert table_sorting_priority[158] == "_fund_agenda_ratio_take"
+    assert table_sorting_priority[159] == "_inallocable_debtit_belief"
+    assert table_sorting_priority[160] == "_gogo_calc"
+    assert table_sorting_priority[161] == "_stop_calc"
+    assert table_sorting_priority[162] == "_level"
+    assert table_sorting_priority[163] == "_range_evaluated"
+    assert table_sorting_priority[164] == "_descendant_pledge_count"
+    assert table_sorting_priority[165] == "_healerlink_ratio"
+    assert table_sorting_priority[166] == "_all_acct_cred"
+    assert table_sorting_priority[167] == "_keeps_justified"
+    assert table_sorting_priority[168] == "_offtrack_fund"
+    assert table_sorting_priority[169] == "_rcontext_idea_active_value"
+    assert table_sorting_priority[170] == "_irrational_debtit_belief"
+    assert table_sorting_priority[171] == "_sum_healerlink_share"
+    assert table_sorting_priority[172] == "_keeps_buildable"
+    assert table_sorting_priority[173] == "_all_acct_debt"
+    assert table_sorting_priority[174] == "_tree_traverse_count"
+
+    assert len(table_sorting_priority) == 175
     all_args = copy_copy(atom_args)
     all_args.update(all_bud_dimen_delete_keys)
     all_args.update(fisc_args)
     all_args.update(pidgin_args)
     all_args.update(bud_calc_args)
+    all_args.update(pidginable_otx_cols)
+    all_args.update(pidginable_inx_cols)
+    all_args.update(pidginable_delete_otx_cols)
+    all_args.update(pidginable_delete_inx_cols)
     all_args.add(creed_number_str())
     all_args.add(event_int_str())
     all_args.add(face_name_str())
@@ -374,7 +446,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(rcontext_str()) == "TEXT"
     assert sqlite_types.get("pbranch") == "TEXT"
     assert sqlite_types.get("fbranch") == "TEXT"
-    assert sqlite_types.get(team_label_str()) == "TEXT"
+    assert sqlite_types.get(labor_label_str()) == "TEXT"
     assert sqlite_types.get(awardee_label_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
@@ -479,7 +551,7 @@ def test_get_creed_config_dict_ReturnsObj():
     assert bud_acctunit_str() in creed_config_dimens
     assert bud_idea_awardlink_str() in creed_config_dimens
     assert bud_idea_factunit_str() in creed_config_dimens
-    assert bud_idea_teamlink_str() in creed_config_dimens
+    assert bud_idea_laborlink_str() in creed_config_dimens
     assert bud_idea_healerlink_str() in creed_config_dimens
     assert bud_idea_reason_premiseunit_str() in creed_config_dimens
     assert bud_idea_reasonunit_str() in creed_config_dimens
@@ -785,7 +857,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     # set_creed_config_json(bud_acctunit_str(), 10)
     # set_creed_config_json(bud_idea_awardlink_str(), 11)
     # set_creed_config_json(bud_idea_factunit_str(), 12)
-    # set_creed_config_json(bud_idea_teamlink_str(), 14)
+    # set_creed_config_json(bud_idea_laborlink_str(), 14)
     # set_creed_config_json(bud_idea_healerlink_str(), 15)
     # set_creed_config_json(bud_idea_reason_premiseunit_str(), 16)
     # set_creed_config_json(bud_idea_reasonunit_str(), 17)
@@ -809,7 +881,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     assert x_creed_config.get(bud_acctunit_str()).get(bo) == 10
     assert x_creed_config.get(bud_idea_awardlink_str()).get(bo) == 11
     assert x_creed_config.get(bud_idea_factunit_str()).get(bo) == 12
-    assert x_creed_config.get(bud_idea_teamlink_str()).get(bo) == 14
+    assert x_creed_config.get(bud_idea_laborlink_str()).get(bo) == 14
     assert x_creed_config.get(bud_idea_healerlink_str()).get(bo) == 15
     assert x_creed_config.get(bud_idea_reason_premiseunit_str()).get(bo) == 16
     assert x_creed_config.get(bud_idea_reasonunit_str()).get(bo) == 17

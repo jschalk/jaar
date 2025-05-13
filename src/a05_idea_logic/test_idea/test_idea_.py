@@ -6,7 +6,7 @@ from src.a01_way_logic.way import (
 )
 from src.a05_idea_logic.healer import healerlink_shop
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_team import teamunit_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_idea_logic.origin import originunit_shop
 from src.a05_idea_logic.idea import IdeaUnit, ideaunit_shop
 
@@ -20,8 +20,8 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._uid is None
     assert x_ideaunit.reasonunits is None
     assert x_ideaunit._reasonheirs is None  # calculated field
-    assert x_ideaunit.teamunit is None
-    assert x_ideaunit._teamheir is None  # calculated field
+    assert x_ideaunit.laborunit is None
+    assert x_ideaunit._laborheir is None  # calculated field
     assert x_ideaunit.factunits is None
     assert x_ideaunit._factheirs is None  # calculated field
     assert x_ideaunit.awardlinks is None
@@ -96,8 +96,8 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit.reasonunits == {}
     assert x_ideaunit._reasonheirs == {}
-    assert x_ideaunit.teamunit == teamunit_shop()
-    assert x_ideaunit._teamheir is None
+    assert x_ideaunit.laborunit == laborunit_shop()
+    assert x_ideaunit._laborheir is None
     assert x_ideaunit._originunit == originunit_shop()
     assert x_ideaunit.bridge == default_bridge_if_None()
     assert x_ideaunit.root is False

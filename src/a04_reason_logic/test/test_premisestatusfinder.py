@@ -80,7 +80,7 @@ def test_PremiseStatusFinder_check_attr_CorrectlyRaisesError():
         )
     assert (
         str(excinfo_2.value)
-        == f"self.fopen_full={x_fopen_full} cannot be greater that self.fnigh_full={x_fnigh_full}"
+        == f"self.fopen_full={x_fopen_full} cannot be greater than self.fnigh_full={x_fnigh_full}"
     )
 
     x_pdivisor = -1

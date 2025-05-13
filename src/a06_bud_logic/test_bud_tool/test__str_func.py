@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     bud_groupunit_str,
@@ -45,8 +45,8 @@ def test_bud_idea_reason_premiseunit_str_ReturnsObj():
     assert bud_idea_reason_premiseunit_str() == "bud_idea_reason_premiseunit"
 
 
-def test_bud_idea_teamlink_str_ReturnsObj():
-    assert bud_idea_teamlink_str() == "bud_idea_teamlink"
+def test_bud_idea_laborlink_str_ReturnsObj():
+    assert bud_idea_laborlink_str() == "bud_idea_laborlink"
 
 
 def test_bud_idea_healerlink_str_ReturnsObj():

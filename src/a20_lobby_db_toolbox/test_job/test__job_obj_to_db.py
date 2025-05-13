@@ -10,7 +10,7 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     create_budheal_metrics_insert_sqlstr,
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
-    create_budteam_metrics_insert_sqlstr,
+    create_budlabor_metrics_insert_sqlstr,
     create_budidea_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
@@ -481,10 +481,10 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
+def test_create_budlabor_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_teamlink")
+    x_args = get_bud_calc_dimen_args("bud_idea_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -510,28 +510,28 @@ def test_create_budteam_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_tag = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_team_label = 2
-    x__owner_name_team = 3
+    x_labor_label = 2
+    x__owner_name_labor = 3
     values_dict = {
         "world_id": x_world_id,
         "fisc_tag": x_fisc_tag,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "team_label": x_team_label,
-        "_owner_name_team": x__owner_name_team,
+        "labor_label": x_labor_label,
+        "_owner_name_labor": x__owner_name_labor,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budteam_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_budlabor_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_teamlink_job"
+        table_name = "bud_idea_laborlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

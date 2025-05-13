@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason_idea import (
     factunit_shop,
     premiseunit_shop,
 )
-from src.a04_reason_logic.reason_team import teamunit_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_idea_logic.origin import originunit_shop
 from src.a05_idea_logic.idea import ideaunit_shop, get_obj_from_idea_dict
 
@@ -123,7 +123,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     }
     sue_str = "Sue"
     yao_str = "Yao"
-    sue_teamunit = teamunit_shop({sue_str: -1, yao_str: -1})
+    sue_laborunit = laborunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
     casa_way = create_way(root_tag(), casa_str)
@@ -137,7 +137,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
         _level=1,
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
-        teamunit=sue_teamunit,
+        laborunit=sue_laborunit,
         healerlink=yao_healerlink,
         _active=True,
         pledge=True,
@@ -176,7 +176,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["reasonunits"] == casa_idea.get_reasonunits_dict()
     assert casa_dict["awardlinks"] == casa_idea.get_awardlinks_dict()
     assert casa_dict["awardlinks"] == x1_awardlinks
-    assert casa_dict["teamunit"] == sue_teamunit.get_dict()
+    assert casa_dict["laborunit"] == sue_laborunit.get_dict()
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["originunit"] == casa_idea.get_originunit_dict()
     assert casa_dict["mass"] == casa_idea.mass
@@ -223,8 +223,8 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     yao_str = "Yao"
     casa_idea.set_awardlink(awardlink_shop(yao_str))
 
-    x_teamunit = casa_idea.teamunit
-    x_teamunit.set_teamlink(team_label=yao_str)
+    x_laborunit = casa_idea.laborunit
+    x_laborunit.set_laborlink(labor_label=yao_str)
 
     x_originunit = casa_idea._originunit
     x_originunit.set_originhold(yao_str, 1)
@@ -236,7 +236,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_idea.pledge
     assert casa_idea.factunits is not None
     assert casa_idea.awardlinks is not None
-    assert casa_idea.teamunit is not None
+    assert casa_idea.laborunit is not None
     assert casa_idea._originunit is not None
     assert casa_idea._kids != {}
 
@@ -248,7 +248,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_dict.get("pledge")
     assert casa_dict.get("factunits") is not None
     assert casa_dict.get("awardlinks") is not None
-    assert casa_dict.get("teamunit") is not None
+    assert casa_dict.get("laborunit") is not None
     assert casa_dict.get("originunit") is not None
     assert casa_dict.get("_kids") is not None
 
@@ -260,7 +260,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_idea.pledge is False
     assert casa_idea.factunits == {}
     assert casa_idea.awardlinks == {}
-    assert casa_idea.teamunit == teamunit_shop()
+    assert casa_idea.laborunit == laborunit_shop()
     assert casa_idea.healerlink == healerlink_shop()
     assert casa_idea._originunit == originunit_shop()
     assert casa_idea._kids == {}
@@ -273,7 +273,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_dict.get("pledge") is None
     assert casa_dict.get("factunits") is None
     assert casa_dict.get("awardlinks") is None
-    assert casa_dict.get("teamunit") is None
+    assert casa_dict.get("laborunit") is None
     assert casa_dict.get("healerlink") is None
     assert casa_dict.get("originunit") is None
     assert casa_dict.get("_kids") is None

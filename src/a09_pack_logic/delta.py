@@ -346,9 +346,9 @@ class BudDelta:
                 after_ideaunit=insert_ideaunit,
                 insert_reasonunit_rcontexts=set(insert_ideaunit.reasonunits.keys()),
             )
-            self.add_budatom_idea_teamlink_insert(
+            self.add_budatom_idea_laborlink_insert(
                 idea_way=insert_idea_way,
-                insert_teamlink_team_labels=insert_ideaunit.teamunit._teamlinks,
+                insert_laborlink_labor_labels=insert_ideaunit.laborunit._laborlinks,
             )
             self.add_budatom_idea_healerlink_insert(
                 idea_way=insert_idea_way,
@@ -455,19 +455,19 @@ class BudDelta:
             # update reasonunits_permises update_premise
             # update reasonunits_permises delete_premise
 
-            # insert / update / delete teamlinks
-            before_teamlinks_team_labels = set(before_ideaunit.teamunit._teamlinks)
-            after_teamlinks_team_labels = set(after_ideaunit.teamunit._teamlinks)
-            self.add_budatom_idea_teamlink_insert(
+            # insert / update / delete laborlinks
+            before_laborlinks_labor_labels = set(before_ideaunit.laborunit._laborlinks)
+            after_laborlinks_labor_labels = set(after_ideaunit.laborunit._laborlinks)
+            self.add_budatom_idea_laborlink_insert(
                 idea_way=idea_way,
-                insert_teamlink_team_labels=after_teamlinks_team_labels.difference(
-                    before_teamlinks_team_labels
+                insert_laborlink_labor_labels=after_laborlinks_labor_labels.difference(
+                    before_laborlinks_labor_labels
                 ),
             )
-            self.add_budatom_idea_teamlink_deletes(
+            self.add_budatom_idea_laborlink_deletes(
                 idea_way=idea_way,
-                delete_teamlink_team_labels=before_teamlinks_team_labels.difference(
-                    after_teamlinks_team_labels
+                delete_laborlink_labor_labels=before_laborlinks_labor_labels.difference(
+                    after_laborlinks_labor_labels
                 ),
             )
 
@@ -511,9 +511,9 @@ class BudDelta:
                 before_ideaunit=delete_ideaunit,
                 delete_reasonunit_rcontexts=set(delete_ideaunit.reasonunits.keys()),
             )
-            self.add_budatom_idea_teamlink_deletes(
+            self.add_budatom_idea_laborlink_deletes(
                 idea_way=delete_idea_way,
-                delete_teamlink_team_labels=delete_ideaunit.teamunit._teamlinks,
+                delete_laborlink_labor_labels=delete_ideaunit.laborunit._laborlinks,
             )
             self.add_budatom_idea_healerlink_deletes(
                 idea_way=delete_idea_way,
@@ -671,22 +671,22 @@ class BudDelta:
             x_budatom.set_jkey("pbranch", delete_premise_pbranch)
             self.set_budatom(x_budatom)
 
-    def add_budatom_idea_teamlink_insert(
-        self, idea_way: WayStr, insert_teamlink_team_labels: set
+    def add_budatom_idea_laborlink_insert(
+        self, idea_way: WayStr, insert_laborlink_labor_labels: set
     ):
-        for insert_teamlink_team_label in insert_teamlink_team_labels:
-            x_budatom = budatom_shop("bud_idea_teamlink", atom_insert())
+        for insert_laborlink_labor_label in insert_laborlink_labor_labels:
+            x_budatom = budatom_shop("bud_idea_laborlink", atom_insert())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("team_label", insert_teamlink_team_label)
+            x_budatom.set_jkey("labor_label", insert_laborlink_labor_label)
             self.set_budatom(x_budatom)
 
-    def add_budatom_idea_teamlink_deletes(
-        self, idea_way: WayStr, delete_teamlink_team_labels: set
+    def add_budatom_idea_laborlink_deletes(
+        self, idea_way: WayStr, delete_laborlink_labor_labels: set
     ):
-        for delete_teamlink_team_label in delete_teamlink_team_labels:
-            x_budatom = budatom_shop("bud_idea_teamlink", atom_delete())
+        for delete_laborlink_labor_label in delete_laborlink_labor_labels:
+            x_budatom = budatom_shop("bud_idea_laborlink", atom_delete())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("team_label", delete_teamlink_team_label)
+            x_budatom.set_jkey("labor_label", delete_laborlink_labor_label)
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_healerlink_insert(

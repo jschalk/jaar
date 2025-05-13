@@ -16,9 +16,9 @@
             "otx_key": false
         }
     },
+    "creed_number": "br00005",
     "dimens": [
         "fiscunit",
         "fisc_timeline_weekday"
-    ],
-    "creed_number": "br00005"
+    ]
 }

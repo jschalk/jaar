@@ -320,7 +320,7 @@ def add_bud_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for ideaunit in x_bud._idea_dict.values():
-        for group_label in ideaunit.teamunit._teamlinks:
+        for group_label in ideaunit.laborunit._laborlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
@@ -664,14 +664,14 @@ def add_pack_to_br00024_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_teamlink":
+        if budatom.dimen == "bud_idea_laborlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_tag,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("team_label"),
+                budatom.jkeys.get("labor_label"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

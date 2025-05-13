@@ -37,8 +37,8 @@
             "otx_key": false
         }
     },
+    "creed_number": "br00000",
     "dimens": [
         "fiscunit"
-    ],
-    "creed_number": "br00000"
+    ]
 }

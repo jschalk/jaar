@@ -31,7 +31,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     respect_bit_str,
     idea_way_str,
     stop_want_str,
-    team_label_str,
+    labor_label_str,
     type_NameStr_str,
     type_LabelStr_str,
     type_TagStr_str,
@@ -71,7 +71,7 @@ def test_str_functions_ReturnsObj():
     assert respect_bit_str() == "respect_bit"
     assert idea_way_str() == "idea_way"
     assert stop_want_str() == "stop_want"
-    assert team_label_str() == "team_label"
+    assert labor_label_str() == "labor_label"
     assert type_NameStr_str() == "NameStr"
     assert type_LabelStr_str() == "LabelStr"
     assert type_TagStr_str() == "TagStr"

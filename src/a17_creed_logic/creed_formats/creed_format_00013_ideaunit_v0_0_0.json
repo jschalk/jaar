@@ -9,6 +9,9 @@
         "fisc_tag": {
             "otx_key": true
         },
+        "idea_way": {
+            "otx_key": true
+        },
         "mass": {
             "otx_key": false
         },
@@ -17,15 +20,12 @@
         },
         "pledge": {
             "otx_key": false
-        },
-        "idea_way": {
-            "otx_key": true
         }
     },
+    "creed_number": "br00013",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit"
-    ],
-    "creed_number": "br00013"
+    ]
 }

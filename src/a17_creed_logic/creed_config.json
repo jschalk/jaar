@@ -41,8 +41,8 @@
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
-      "owner_name": {},
-      "idea_way": {}
+      "idea_way": {},
+      "owner_name": {}
     },
     "jvalues": {
       "give_force": {},
@@ -58,8 +58,8 @@
       "face_name": {},
       "fcontext": {},
       "fisc_tag": {},
-      "owner_name": {},
-      "idea_way": {}
+      "idea_way": {},
+      "owner_name": {}
     },
     "jvalues": {
       "fbranch": {},
@@ -76,8 +76,8 @@
       "face_name": {},
       "fisc_tag": {},
       "healer_name": {},
-      "owner_name": {},
-      "idea_way": {}
+      "idea_way": {},
+      "owner_name": {}
     },
     "jvalues": {}
   },
@@ -86,13 +86,13 @@
     "build_order": 16,
     "creed_category": "bud",
     "jkeys": {
-      "rcontext": {},
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
-      "pbranch": {},
+      "idea_way": {},
       "owner_name": {},
-      "idea_way": {}
+      "pbranch": {},
+      "rcontext": {}
     },
     "jvalues": {
       "pdivisor": {},
@@ -105,18 +105,18 @@
     "build_order": 17,
     "creed_category": "bud",
     "jkeys": {
-      "rcontext": {},
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
+      "idea_way": {},
       "owner_name": {},
-      "idea_way": {}
+      "rcontext": {}
     },
     "jvalues": {
       "rcontext_idea_active_requisite": {}
     }
   },
-  "bud_idea_teamlink": {
+  "bud_idea_laborlink": {
     "allowed_crud": "DELETE_INSERT",
     "build_order": 14,
     "creed_category": "bud",
@@ -124,9 +124,9 @@
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
-      "owner_name": {},
       "idea_way": {},
-      "team_label": {}
+      "owner_name": {},
+      "labor_label": {}
     },
     "jvalues": {}
   },
@@ -138,8 +138,8 @@
       "event_int": {},
       "face_name": {},
       "fisc_tag": {},
-      "owner_name": {},
-      "idea_way": {}
+      "idea_way": {},
+      "owner_name": {}
     },
     "jvalues": {
       "addin": {},
@@ -315,22 +315,6 @@
       "unknown_word": {}
     }
   },
-  "pidgin_way": {
-    "allowed_crud": "INSERT_ONE_TIME",
-    "build_order": 3,
-    "creed_category": "pidgin",
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "otx_way": {}
-    },
-    "jvalues": {
-      "inx_bridge": {},
-      "inx_way": {},
-      "otx_bridge": {},
-      "unknown_word": {}
-    }
-  },
   "pidgin_tag": {
     "allowed_crud": "INSERT_ONE_TIME",
     "build_order": 2,
@@ -343,6 +327,22 @@
     "jvalues": {
       "inx_bridge": {},
       "inx_tag": {},
+      "otx_bridge": {},
+      "unknown_word": {}
+    }
+  },
+  "pidgin_way": {
+    "allowed_crud": "INSERT_ONE_TIME",
+    "build_order": 3,
+    "creed_category": "pidgin",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_way": {}
+    },
+    "jvalues": {
+      "inx_bridge": {},
+      "inx_way": {},
       "otx_bridge": {},
       "unknown_word": {}
     }

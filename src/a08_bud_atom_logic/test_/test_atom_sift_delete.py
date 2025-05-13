@@ -9,13 +9,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
     awardee_label_str,
     group_label_str,
-    team_label_str,
+    labor_label_str,
     healer_name_str,
     idea_tag_str,
     idea_way_str,
@@ -266,7 +266,7 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_reason_premiseunit_exists():
     assert sift_budatom(sue_bud, clean_week_atom)
 
 
-def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_teamlink():
+def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_laborlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -275,26 +275,26 @@ def test_sift_atom_SetsBudDeltaBudAtom_bud_idea_teamlink():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = budatom_shop(bud_idea_teamlink_str(), atom_delete())
+    casa_swim_atom = budatom_shop(bud_idea_laborlink_str(), atom_delete())
     casa_swim_atom.set_arg(idea_way_str(), casa_way)
-    casa_swim_atom.set_arg(team_label_str(), swim_str)
-    clean_swim_atom = budatom_shop(bud_idea_teamlink_str(), atom_delete())
+    casa_swim_atom.set_arg(labor_label_str(), swim_str)
+    clean_swim_atom = budatom_shop(bud_idea_laborlink_str(), atom_delete())
     clean_swim_atom.set_arg(idea_way_str(), clean_way)
-    clean_swim_atom.set_arg(team_label_str(), swim_str)
+    clean_swim_atom.set_arg(labor_label_str(), swim_str)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
     assert not sift_budatom(sue_bud, casa_swim_atom)
     assert not sift_budatom(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(casa_way).teamunit.set_teamlink(swim_str)
+    sue_bud.get_idea_obj(casa_way).laborunit.set_laborlink(swim_str)
 
     # THEN
     assert sift_budatom(sue_bud, casa_swim_atom)
     assert not sift_budatom(sue_bud, clean_swim_atom)
 
     # WHEN
-    sue_bud.get_idea_obj(clean_way).teamunit.set_teamlink(swim_str)
+    sue_bud.get_idea_obj(clean_way).laborunit.set_laborlink(swim_str)
     # THEN
     assert sift_budatom(sue_bud, casa_swim_atom)
     assert sift_budatom(sue_bud, clean_swim_atom)

@@ -415,7 +415,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     casa_way = bob_gut.make_l1_way("casa")
     clean_way = bob_gut.make_way(casa_way, "clean")
     bob_gut.add_idea(clean_way, pledge=True)
-    bob_gut.get_idea_obj(clean_way).teamunit.set_teamlink(sue_str)
+    bob_gut.get_idea_obj(clean_way).laborunit.set_laborlink(sue_str)
     save_gut_file(fisc_mstr_dir, bob_gut)
     assert not open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
 

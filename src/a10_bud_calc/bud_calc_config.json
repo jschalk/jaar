@@ -209,12 +209,12 @@
                 "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
-            "owner_name": {
-                "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
             "idea_way": {
                 "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -254,12 +254,12 @@
                 "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
-            "owner_name": {
-                "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
             "idea_way": {
                 "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -294,12 +294,12 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "owner_name": {
-                "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
             "idea_way": {
                 "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {
@@ -313,15 +313,11 @@
     "bud_idea_reason_premiseunit": {
         "abbreviation": "budprem",
         "jkeys": {
-            "rcontext": {
-                "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
             "fisc_tag": {
                 "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
-            "pbranch": {
+            "idea_way": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -329,7 +325,11 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "idea_way": {
+            "pbranch": {
+                "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "rcontext": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -366,19 +366,19 @@
     "bud_idea_reasonunit": {
         "abbreviation": "budreas",
         "jkeys": {
-            "rcontext": {
-                "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
             "fisc_tag": {
                 "class_type": "TagStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "idea_way": {
+                "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "idea_way": {
+            "rcontext": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -408,22 +408,22 @@
             }
         }
     },
-    "bud_idea_teamlink": {
-        "abbreviation": "budteam",
+    "bud_idea_laborlink": {
+        "abbreviation": "budlabor",
         "jkeys": {
             "fisc_tag": {
                 "class_type": "TagStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "owner_name": {
-                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
-            "team_label": {
+            "owner_name": {
+                "class_type": "NameStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "labor_label": {
                 "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -433,7 +433,7 @@
             }
         },
         "jmetrics": {
-            "_owner_name_team": {
+            "_owner_name_labor": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
@@ -447,12 +447,12 @@
                 "class_type": "TagStr",
                 "sqlite_datatype": "TEXT"
             },
-            "owner_name": {
-                "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
             "idea_way": {
                 "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {

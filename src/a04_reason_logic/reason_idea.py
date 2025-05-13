@@ -159,7 +159,7 @@ class PremiseStatusFinder:
 
         if self.fopen_full > self.fnigh_full:
             raise PremiseStatusFinderException(
-                f"{self.fopen_full=} cannot be greater that {self.fnigh_full=}"
+                f"{self.fopen_full=} cannot be greater than {self.fnigh_full=}"
             )
 
         if self.pdivisor <= 0:

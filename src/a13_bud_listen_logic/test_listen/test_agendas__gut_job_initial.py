@@ -30,7 +30,7 @@ from src.a13_bud_listen_logic._utils.example_listen import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWhenNo_teamlinkIsSet(
+def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWhenNo_laborlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -85,8 +85,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBud(
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_gut.get_idea_obj(clean_way())
     cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_gut_file(fisc_mstr_dir, zia_gut)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
@@ -190,8 +190,8 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_gut.get_idea_obj(clean_way())
     cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_gut_file(fisc_mstr_dir, zia_gut)
 
     sue_gut = budunit_shop(sue_str, a23_str)
@@ -201,7 +201,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
     vacuum_way = sue_gut.make_l1_way(vacuum_str)
     sue_gut.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
     vacuum_ideaunit = sue_gut.get_idea_obj(vacuum_way)
-    vacuum_ideaunit.teamunit.set_teamlink(yao_str)
+    vacuum_ideaunit.laborunit.set_laborlink(yao_str)
 
     egg_str = "egg first"
     egg_way = sue_gut.make_l1_way(egg_str)
@@ -269,8 +269,8 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBud(
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_gut.get_idea_obj(clean_way())
     cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_gut_file(fisc_mstr_dir, zia_gut)
 
     # WHEN

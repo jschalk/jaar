@@ -90,7 +90,7 @@ def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None):
     # linen, magenta, maroon, mediumaquamarine,
     # mediumblue, mediumorchid, mediumpurple,
     # mediumseagreen, mediumslateblue, mediumspringgreen,
-    # mediumturquoise, mediumvioletred, mideveningblue,
+    # mediumturquoise, mediumvioletred, midnightblue,
     # mintcream, mistyrose, moccasin, navajowhite, navy,
     # oldlace, olive, olivedrab, orange, orangered,
     # orchid, palegoldenrod, palegreen, paleturquoise,

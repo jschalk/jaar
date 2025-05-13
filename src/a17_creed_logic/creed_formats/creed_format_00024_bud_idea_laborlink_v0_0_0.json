@@ -9,21 +9,21 @@
         "fisc_tag": {
             "otx_key": true
         },
-        "owner_name": {
-            "otx_key": true
-        },
         "idea_way": {
             "otx_key": true
         },
-        "team_label": {
+        "owner_name": {
+            "otx_key": true
+        },
+        "labor_label": {
             "otx_key": true
         }
     },
+    "creed_number": "br00024",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit",
-        "bud_idea_teamlink"
-    ],
-    "creed_number": "br00024"
+        "bud_idea_laborlink"
+    ]
 }

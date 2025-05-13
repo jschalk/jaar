@@ -67,12 +67,12 @@ def bud_idea_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
     )
 
 
-def bud_idea_teamlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_team_label = jkeys.get("team_label")
+def bud_idea_laborlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+    x_labor_label = jkeys.get("labor_label")
     x_way = jkeys.get("idea_way")
     return bool(
         bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).teamunit.teamlink_exists(x_team_label)
+        and x_bud.get_idea_obj(x_way).laborunit.laborlink_exists(x_labor_label)
     )
 
 
@@ -109,8 +109,8 @@ def bud_attr_exists(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool
         return bud_idea_reason_premiseunit_exists(x_bud, jkeys)
     elif x_dimen == "bud_idea_reasonunit":
         return bud_idea_reasonunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_teamlink":
-        return bud_idea_teamlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_idea_laborlink":
+        return bud_idea_laborlink_exists(x_bud, jkeys)
     elif x_dimen == "bud_ideaunit":
         return bud_ideaunit_exists(x_bud, jkeys)
     elif x_dimen == "budunit":

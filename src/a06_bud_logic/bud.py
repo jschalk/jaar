@@ -58,7 +58,7 @@ from src.a04_reason_logic.reason_idea import (
     WayStr,
     factunit_shop,
 )
-from src.a04_reason_logic.reason_team import TeamUnit
+from src.a04_reason_logic.reason_labor import LaborUnit
 from src.a05_idea_logic.healer import HealerLink
 from src.a05_idea_logic.idea import (
     IdeaUnit,
@@ -669,15 +669,15 @@ class BudUnit:
         ]
         for _awardlink_awardee_label in _awardlinks_to_delete:
             x_idea.awardlinks.pop(_awardlink_awardee_label)
-        if x_idea.teamunit is not None:
-            _teamlinks_to_delete = [
-                _teamlink_team_label
-                for _teamlink_team_label in x_idea.teamunit._teamlinks
-                if self.get_acctunit_group_labels_dict().get(_teamlink_team_label)
+        if x_idea.laborunit is not None:
+            _laborlinks_to_delete = [
+                _laborlink_labor_label
+                for _laborlink_labor_label in x_idea.laborunit._laborlinks
+                if self.get_acctunit_group_labels_dict().get(_laborlink_labor_label)
                 is None
             ]
-            for _teamlink_team_label in _teamlinks_to_delete:
-                x_idea.teamunit.del_teamlink(_teamlink_team_label)
+            for _laborlink_labor_label in _laborlinks_to_delete:
+                x_idea.laborunit.del_laborlink(_laborlink_labor_label)
         return x_idea
 
     def _create_missing_ideas(self, way):
@@ -801,7 +801,7 @@ class BudUnit:
         reason_del_premise_rcontext: WayStr = None,
         reason_del_premise_pbranch: WayStr = None,
         reason_rcontext_idea_active_requisite: str = None,
-        teamunit: TeamUnit = None,
+        laborunit: LaborUnit = None,
         healerlink: HealerLink = None,
         begin: float = None,
         close: float = None,
@@ -839,7 +839,7 @@ class BudUnit:
             reason_del_premise_rcontext=reason_del_premise_rcontext,
             reason_del_premise_pbranch=reason_del_premise_pbranch,
             reason_rcontext_idea_active_requisite=reason_rcontext_idea_active_requisite,
-            teamunit=teamunit,
+            laborunit=laborunit,
             healerlink=healerlink,
             begin=begin,
             close=close,
@@ -1208,17 +1208,17 @@ class BudUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_ideatree_factheirs_teamheirs_awardheirs(self):
+    def _set_ideatree_factheirs_laborheirs_awardheirs(self):
         for x_idea in get_sorted_idea_list(list(self._idea_dict.values())):
             if x_idea.root:
                 x_idea.set_factheirs(x_idea.factunits)
                 x_idea.set_idearoot_inherit_reasonheirs()
-                x_idea.set_teamheir(None, self._groupunits)
+                x_idea.set_laborheir(None, self._groupunits)
                 x_idea.inherit_awardheirs()
             else:
                 parent_idea = self.get_idea_obj(x_idea.parent_way)
                 x_idea.set_factheirs(parent_idea._factheirs)
-                x_idea.set_teamheir(parent_idea._teamheir, self._groupunits)
+                x_idea.set_laborheir(parent_idea._laborheir, self._groupunits)
                 x_idea.inherit_awardheirs(parent_idea._awardheirs)
             x_idea.set_awardheirs_fund_give_fund_take()
 
@@ -1229,7 +1229,7 @@ class BudUnit:
         self._set_acctunit_groupunit_respect_ledgers()
         self._clear_acctunit_fund_attrs()
         self._clear_ideatree_fund_and_active_status_attrs()
-        self._set_ideatree_factheirs_teamheirs_awardheirs()
+        self._set_ideatree_factheirs_laborheirs_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
@@ -1519,7 +1519,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         stop_want=get_obj_from_idea_dict(idearoot_dict, "stop_want"),
         problem_bool=get_obj_from_idea_dict(idearoot_dict, "problem_bool"),
         reasonunits=get_obj_from_idea_dict(idearoot_dict, "reasonunits"),
-        teamunit=get_obj_from_idea_dict(idearoot_dict, "teamunit"),
+        laborunit=get_obj_from_idea_dict(idearoot_dict, "laborunit"),
         healerlink=get_obj_from_idea_dict(idearoot_dict, "healerlink"),
         factunits=get_obj_from_idea_dict(idearoot_dict, "factunits"),
         awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
@@ -1561,7 +1561,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
             pledge=get_obj_from_idea_dict(idea_dict, "pledge"),
             problem_bool=get_obj_from_idea_dict(idea_dict, "problem_bool"),
             reasonunits=get_obj_from_idea_dict(idea_dict, "reasonunits"),
-            teamunit=get_obj_from_idea_dict(idea_dict, "teamunit"),
+            laborunit=get_obj_from_idea_dict(idea_dict, "laborunit"),
             healerlink=get_obj_from_idea_dict(idea_dict, "healerlink"),
             _originunit=get_obj_from_idea_dict(idea_dict, "originunit"),
             awardlinks=get_obj_from_idea_dict(idea_dict, "awardlinks"),

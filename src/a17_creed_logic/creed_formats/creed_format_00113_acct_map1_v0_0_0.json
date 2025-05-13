@@ -22,11 +22,11 @@
             "otx_key": true
         }
     },
+    "creed_number": "br00113",
     "dimens": [
         "pidgin_name",
         "bud_acctunit",
         "fiscunit",
         "budunit"
-    ],
-    "creed_number": "br00113"
+    ]
 }

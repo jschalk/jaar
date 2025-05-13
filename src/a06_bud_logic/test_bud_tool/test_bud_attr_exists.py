@@ -10,7 +10,7 @@ from src.a06_bud_logic.bud_tool import (
     bud_idea_awardlink_exists,
     bud_idea_reasonunit_exists,
     bud_idea_reason_premiseunit_exists as premiseunit_exists,
-    bud_idea_teamlink_exists,
+    bud_idea_laborlink_exists,
     bud_idea_healerlink_exists,
     bud_idea_factunit_exists,
     bud_attr_exists,
@@ -23,7 +23,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
@@ -33,7 +33,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     pbranch_str,
     idea_way_str,
-    team_label_str,
+    labor_label_str,
     healer_name_str,
 )
 
@@ -247,7 +247,7 @@ def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_bud, clean_jkeys)
 
 
-def test_bud_idea_teamlink_exists_ReturnsObj():
+def test_bud_idea_laborlink_exists_ReturnsObj():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -256,25 +256,25 @@ def test_bud_idea_teamlink_exists_ReturnsObj():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
-    root_jkeys = {idea_way_str(): root_way, team_label_str(): swim_str}
-    casa_jkeys = {idea_way_str(): casa_way, team_label_str(): swim_str}
-    clean_jkeys = {idea_way_str(): clean_way, team_label_str(): swim_str}
+    root_jkeys = {idea_way_str(): root_way, labor_label_str(): swim_str}
+    casa_jkeys = {idea_way_str(): casa_way, labor_label_str(): swim_str}
+    clean_jkeys = {idea_way_str(): clean_way, labor_label_str(): swim_str}
 
     # WHEN / THEN
-    assert not bud_idea_teamlink_exists(None, {})
-    assert not bud_idea_teamlink_exists(sue_bud, {})
-    assert not bud_idea_teamlink_exists(sue_bud, root_jkeys)
-    assert not bud_idea_teamlink_exists(sue_bud, casa_jkeys)
-    assert not bud_idea_teamlink_exists(sue_bud, clean_jkeys)
+    assert not bud_idea_laborlink_exists(None, {})
+    assert not bud_idea_laborlink_exists(sue_bud, {})
+    assert not bud_idea_laborlink_exists(sue_bud, root_jkeys)
+    assert not bud_idea_laborlink_exists(sue_bud, casa_jkeys)
+    assert not bud_idea_laborlink_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.idearoot.teamunit.set_teamlink(swim_str)
+    sue_bud.idearoot.laborunit.set_laborlink(swim_str)
 
     # THEN
-    assert not bud_idea_teamlink_exists(sue_bud, {})
-    assert bud_idea_teamlink_exists(sue_bud, root_jkeys)
-    assert not bud_idea_teamlink_exists(sue_bud, casa_jkeys)
-    assert not bud_idea_teamlink_exists(sue_bud, clean_jkeys)
+    assert not bud_idea_laborlink_exists(sue_bud, {})
+    assert bud_idea_laborlink_exists(sue_bud, root_jkeys)
+    assert not bud_idea_laborlink_exists(sue_bud, casa_jkeys)
+    assert not bud_idea_laborlink_exists(sue_bud, clean_jkeys)
 
 
 def test_bud_idea_healerlink_exists_ReturnsObj():
@@ -548,7 +548,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
     assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
 
-def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
+def test_bud_attr_exists_ReturnsObj_bud_idea_laborlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -557,10 +557,10 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_tag)
     swim_str = "Swim"
-    x_dimen = bud_idea_teamlink_str()
-    root_jkeys = {idea_way_str(): root_way, team_label_str(): swim_str}
-    casa_jkeys = {idea_way_str(): casa_way, team_label_str(): swim_str}
-    clean_jkeys = {idea_way_str(): clean_way, team_label_str(): swim_str}
+    x_dimen = bud_idea_laborlink_str()
+    root_jkeys = {idea_way_str(): root_way, labor_label_str(): swim_str}
+    casa_jkeys = {idea_way_str(): casa_way, labor_label_str(): swim_str}
+    clean_jkeys = {idea_way_str(): clean_way, labor_label_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -570,7 +570,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_teamlink():
     assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.idearoot.teamunit.set_teamlink(swim_str)
+    sue_bud.idearoot.laborunit.set_laborlink(swim_str)
 
     # THEN
     assert not bud_attr_exists(x_dimen, sue_bud, {})

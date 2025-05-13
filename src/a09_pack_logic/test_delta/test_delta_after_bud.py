@@ -11,13 +11,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
     awardee_label_str,
     group_label_str,
-    team_label_str,
+    labor_label_str,
     healer_name_str,
     idea_way_str,
     rcontext_idea_active_requisite_str,
@@ -979,7 +979,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_reasonunit():
     assert after_ball_idea.get_reasonunit(knee_way) is None
 
 
-def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_teamlink():
+def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_laborlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -991,23 +991,23 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_teamlink():
     ball_way = before_sue_au.make_way(sports_way, ball_str)
     before_sue_au.set_idea(ideaunit_shop(ball_str), sports_way)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_way)
-    assert before_ball_ideaunit.teamunit._teamlinks == set()
+    assert before_ball_ideaunit.laborunit._laborlinks == set()
 
     # WHEN
-    update_disc_budatom = budatom_shop(bud_idea_teamlink_str(), atom_insert())
+    update_disc_budatom = budatom_shop(bud_idea_laborlink_str(), atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(team_label_str(), yao_str)
+    update_disc_budatom.set_jkey(labor_label_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_way)
-    assert after_ball_ideaunit.teamunit._teamlinks != set()
-    assert after_ball_ideaunit.teamunit.get_teamlink(yao_str) is not None
+    assert after_ball_ideaunit.laborunit._laborlinks != set()
+    assert after_ball_ideaunit.laborunit.get_laborlink(yao_str) is not None
 
 
-def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_teamlink():
+def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_laborlink():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -1019,22 +1019,22 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_teamlink():
     ball_way = before_sue_au.make_way(sports_way, ball_str)
     before_sue_au.set_idea(ideaunit_shop(ball_str), sports_way)
     before_ball_ideaunit = before_sue_au.get_idea_obj(ball_way)
-    before_ball_ideaunit.teamunit.set_teamlink(yao_str)
-    assert before_ball_ideaunit.teamunit._teamlinks != set()
-    assert before_ball_ideaunit.teamunit.get_teamlink(yao_str) is not None
+    before_ball_ideaunit.laborunit.set_laborlink(yao_str)
+    assert before_ball_ideaunit.laborunit._laborlinks != set()
+    assert before_ball_ideaunit.laborunit.get_laborlink(yao_str) is not None
 
     # WHEN
-    update_disc_budatom = budatom_shop(bud_idea_teamlink_str(), atom_delete())
+    update_disc_budatom = budatom_shop(bud_idea_laborlink_str(), atom_delete())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(team_label_str(), yao_str)
+    update_disc_budatom.set_jkey(labor_label_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
-    print(f"{before_sue_au.get_idea_obj(ball_way).teamunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_way).laborunit=}")
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN
     after_ball_ideaunit = after_sue_au.get_idea_obj(ball_way)
-    assert after_ball_ideaunit.teamunit._teamlinks == set()
+    assert after_ball_ideaunit.laborunit._laborlinks == set()
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_healerlink():
@@ -1089,7 +1089,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_healerlink():
     x_budatom.set_jkey(healer_name_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(x_budatom)
-    print(f"{before_sue_au.get_idea_obj(ball_way).teamunit=}")
+    print(f"{before_sue_au.get_idea_obj(ball_way).laborunit=}")
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
 
     # THEN

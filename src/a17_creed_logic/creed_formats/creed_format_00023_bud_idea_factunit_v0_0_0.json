@@ -6,14 +6,14 @@
         "face_name": {
             "otx_key": true
         },
+        "fbranch": {
+            "otx_key": false
+        },
         "fcontext": {
             "otx_key": true
         },
         "fisc_tag": {
             "otx_key": true
-        },
-        "fbranch": {
-            "otx_key": false
         },
         "fnigh": {
             "otx_key": false
@@ -21,18 +21,18 @@
         "fopen": {
             "otx_key": false
         },
-        "owner_name": {
+        "idea_way": {
             "otx_key": true
         },
-        "idea_way": {
+        "owner_name": {
             "otx_key": true
         }
     },
+    "creed_number": "br00023",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_ideaunit",
         "bud_idea_factunit"
-    ],
-    "creed_number": "br00023"
+    ]
 }

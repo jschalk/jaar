@@ -504,7 +504,7 @@ def fund_graph0(
     blue_str = "blue"
     blue_str = "blue"
     d_sue1_tag = "How fund is distributed."
-    teamunit_str = "      AwardHeirs"
+    laborunit_str = "      AwardHeirs"
     add_rect_arrow(fig, 0.6, -0.1, 0.1, -0.1, "Purple")
     add_rect_arrow(fig, 0.6, -0.8, 0.1, -0.1, "Purple")
     add_rect_arrow(fig, 1.8, -1.1, 1.2, -1.1, "Purple")
@@ -514,13 +514,13 @@ def fund_graph0(
     add_rect_arrow(fig, 2.7, -3.1, 2.2, -3.1, "Purple")
     add_rect_arrow(fig, 2.7, -3.6, 2.2, -3.1, "Purple")
 
-    add_simp_rect(fig, 2, -0.3, 3, 0.3, teamunit_str)
+    add_simp_rect(fig, 2, -0.3, 3, 0.3, laborunit_str)
     add_rect_arrow(fig, 2, 0.1, 1.2, 0.1, green_str)
     add_rect_arrow(fig, 2, -0.1, 1.2, -0.1, blue_str)
-    add_simp_rect(fig, 4, -1.2, 5, -0.8, teamunit_str)
+    add_simp_rect(fig, 4, -1.2, 5, -0.8, laborunit_str)
     add_rect_arrow(fig, 4, -0.9, 3.1, -0.9, green_str)
     add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_str)
-    add_simp_rect(fig, 4, -3.2, 5, -2.8, teamunit_str)
+    add_simp_rect(fig, 4, -3.2, 5, -2.8, laborunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_tag, "", "", "")
     d_sue1_p0 = "Fund Source is IdeaRoot. Each Idea fund range calculated by mass "

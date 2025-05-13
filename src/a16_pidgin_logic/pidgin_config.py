@@ -69,8 +69,6 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "addin": "float",
         "amount": "float",
         "awardee_label": "LabelStr",
-        "rcontext": "WayStr",
-        "rcontext_idea_active_requisite": "bool",
         "begin": "float",
         "c400_number": "int",
         "celldepth": "int",
@@ -84,7 +82,6 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtit_vote": "float",
         "debtor_respect": "float",
         "denom": "int",
-        "pdivisor": "int",
         "face_name": "NameStr",
         "fcontext": "WayStr",
         "fisc_tag": "TagStr",
@@ -104,9 +101,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "month_tag": "TagStr",
         "monthday_distortion": "int",
         "morph": "bool",
-        "pnigh": "float",
         "numor": "int",
-        "popen": "float",
         "offi_time": "TimeLinePoint",
         "owner_name": "NameStr",
         "penny": "float",
@@ -115,11 +110,16 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "problem_bool": "bool",
         "quota": "int",
         "pbranch": "WayStr",
+        "pdivisor": "int",
+        "popen": "float",
+        "pnigh": "float",
+        "rcontext": "WayStr",
+        "rcontext_idea_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "LabelStr",
+        "labor_label": "LabelStr",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
         "timeline_tag": "TagStr",
@@ -135,31 +135,31 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     return {
         "pidgin_label": {
             "inx_label",
-            "unknown_word",
+            "otx_label",
             "inx_bridge",
             "otx_bridge",
-            "otx_label",
+            "unknown_word",
         },
         "pidgin_name": {
             "inx_name",
-            "unknown_word",
+            "otx_name",
             "inx_bridge",
             "otx_bridge",
-            "otx_name",
+            "unknown_word",
         },
         "pidgin_tag": {
             "inx_tag",
-            "unknown_word",
+            "otx_tag",
             "inx_bridge",
             "otx_bridge",
-            "otx_tag",
+            "unknown_word",
         },
         "pidgin_way": {
             "inx_way",
-            "unknown_word",
+            "otx_way",
             "inx_bridge",
             "otx_bridge",
-            "otx_way",
+            "unknown_word",
         },
     }
 
@@ -168,11 +168,10 @@ def pidginable_class_types() -> set:
     return {"NameStr", "LabelStr", "TagStr", "WayStr"}
 
 
-def pidginable_atom_args() -> set:
+def get_pidginable_args() -> set:
     return {
         "acct_name",
         "awardee_label",
-        "rcontext",
         "face_name",
         "fcontext",
         "fisc_tag",
@@ -184,7 +183,8 @@ def pidginable_atom_args() -> set:
         "month_tag",
         "owner_name",
         "pbranch",
-        "team_label",
+        "rcontext",
+        "labor_label",
         "timeline_tag",
         "weekday_tag",
     }

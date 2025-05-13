@@ -15,7 +15,7 @@ def test_IdeaAttrHolder_Exists():
     assert new_obj.reason_del_premise_rcontext is None
     assert new_obj.reason_del_premise_pbranch is None
     assert new_obj.reason_rcontext_idea_active_requisite is None
-    assert new_obj.teamunit is None
+    assert new_obj.laborunit is None
     assert new_obj.healerlink is None
     assert new_obj.begin is None
     assert new_obj.close is None

@@ -7,7 +7,7 @@ from src.a06_bud_logic.bud import (
     budunit_shop,
     get_from_json as budunit_get_from_json,
 )
-from src.a04_reason_logic.reason_team import teamunit_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a06_bud_logic._utils.env_a06 import get_bud_examples_dir as env_dir
 from os.path import exists as os_path_exists
 
@@ -369,9 +369,9 @@ def get_budunit_laundry_example1() -> BudUnit:
     amos_bud.edit_idea_attr(
         laundry_task_way, reason_rcontext=basket_way, reason_premise=b_smel_way
     )
-    cali_teamunit = teamunit_shop()
-    cali_teamunit.set_teamlink(cali_str)
-    amos_bud.edit_idea_attr(laundry_task_way, teamunit=cali_teamunit)
+    cali_laborunit = laborunit_shop()
+    cali_laborunit.set_laborlink(cali_str)
+    amos_bud.edit_idea_attr(laundry_task_way, laborunit=cali_laborunit)
     amos_bud.add_fact(fcontext=basket_way, fbranch=b_full_way)
 
     return amos_bud

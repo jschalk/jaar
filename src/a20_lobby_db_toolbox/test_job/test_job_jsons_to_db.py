@@ -8,7 +8,7 @@ from src.a03_group_logic.group import (
     membership_shop,
 )
 from src.a05_idea_logic.healer import healerlink_shop
-from src.a04_reason_logic.reason_team import teamheir_shop, teamunit_shop
+from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_idea import (
     reasonheir_shop,
     premiseunit_shop,
@@ -24,7 +24,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     bud_groupunit_str,
@@ -44,7 +44,7 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     insert_job_budheal,
     insert_job_budprem,
     insert_job_budreas,
-    insert_job_budteam,
+    insert_job_budlabor,
     insert_job_budidea,
     insert_job_budunit,
     insert_job_obj,
@@ -838,17 +838,17 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         assert rows == expected_data
 
 
-def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
+def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_teamlink")
+    # x_args = get_bud_calc_dimen_args("bud_idea_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_teamheir.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_laborheir.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
@@ -857,22 +857,22 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
     x_fisc_tag = 1
     x_owner_name = 2
     x_way = 3
-    x__owner_name_team = 5
-    x_teamheir = teamheir_shop()
-    x_teamheir._owner_name_team = x__owner_name_team
+    x__owner_name_labor = 5
+    x_laborheir = laborheir_shop()
+    x_laborheir._owner_name_labor = x__owner_name_labor
     bob_str = "Bob"
     sue_str = "Sue"
-    x_teamheir._teamlinks = {bob_str, sue_str}
+    x_laborheir._laborlinks = {bob_str, sue_str}
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_teamlink_job"
+        x_table_name = "bud_idea_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_tag, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budteam(cursor, x_objkeysholder, x_teamheir)
+        insert_job_budlabor(cursor, x_objkeysholder, x_laborheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -885,7 +885,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
             str(x_owner_name),
             str(x_way),
             bob_str,
-            x__owner_name_team,
+            x__owner_name_labor,
         )
         expected_row2 = (
             str(x_world_id),
@@ -893,7 +893,7 @@ def test_insert_job_budteam_CreatesTableRowsFor_budteam_job():
             str(x_owner_name),
             str(x_way),
             sue_str,
-            x__owner_name_team,
+            x__owner_name_labor,
         )
         expected_data = [expected_row1, expected_row2]
         assert rows == expected_data
@@ -923,7 +923,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     )
     sue_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(run_str))
     sue_bud.edit_idea_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_idea_attr(casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.edit_idea_attr(casa_way, laborunit=laborunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
 
     with sqlite3_connect(":memory:") as conn:
@@ -937,7 +937,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         budheal_job_table = "bud_idea_healerlink_job"
         budprem_job_table = "bud_idea_reason_premiseunit_job"
         budreas_job_table = "bud_idea_reasonunit_job"
-        budteam_job_table = "bud_idea_teamlink_job"
+        budlabor_job_table = "bud_idea_laborlink_job"
         budidea_job_table = "bud_ideaunit_job"
         budunit_job_table = "budunit_job"
         assert get_row_count(cursor, budunit_job_table) == 0
@@ -950,7 +950,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budheal_job_table) == 0
         assert get_row_count(cursor, budreas_job_table) == 0
         assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budteam_job_table) == 0
+        assert get_row_count(cursor, budlabor_job_table) == 0
 
         # WHEN
         insert_job_obj(cursor, x_world_id, sue_bud)
@@ -966,7 +966,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budheal_job_table) == 1
         assert get_row_count(cursor, budreas_job_table) == 1
         assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budteam_job_table) == 1
+        assert get_row_count(cursor, budlabor_job_table) == 1
 
 
 def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
@@ -997,9 +997,9 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     )
     sue_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(run_str))
     sue_bud.edit_idea_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_idea_attr(casa_way, teamunit=teamunit_shop({sue_str}))
+    sue_bud.edit_idea_attr(casa_way, laborunit=laborunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
-    print(f"{sue_bud.get_idea_obj(casa_way).teamunit=}")
+    print(f"{sue_bud.get_idea_obj(casa_way).laborunit=}")
     print(f"{sue_bud.get_idea_obj(casa_way).get_dict()=}")
     save_job_file(m23_fisc_mstr_dir, sue_bud)
 
@@ -1014,7 +1014,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
         budheal_job_table = f"{bud_idea_healerlink_str()}_job"
         budprem_job_table = f"{bud_idea_reason_premiseunit_str()}_job"
         budreas_job_table = f"{bud_idea_reasonunit_str()}_job"
-        budteam_job_table = f"{bud_idea_teamlink_str()}_job"
+        budlabor_job_table = f"{bud_idea_laborlink_str()}_job"
         budidea_job_table = f"{bud_ideaunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
         assert get_row_count(cursor, budunit_job_table) == 0
@@ -1027,7 +1027,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
         assert get_row_count(cursor, budheal_job_table) == 0
         assert get_row_count(cursor, budreas_job_table) == 0
         assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budteam_job_table) == 0
+        assert get_row_count(cursor, budlabor_job_table) == 0
 
         # WHEN
         etl_fisc_jobs_json_to_db(cursor, m23_str, m23_fisc_mstr_dir)
@@ -1043,7 +1043,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
         assert get_row_count(cursor, budheal_job_table) == 1
         assert get_row_count(cursor, budreas_job_table) == 1
         assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budteam_job_table) == 1
+        assert get_row_count(cursor, budlabor_job_table) == 1
 
 
 def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(

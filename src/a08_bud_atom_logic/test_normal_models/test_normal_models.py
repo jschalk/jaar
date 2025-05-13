@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
@@ -25,7 +25,7 @@ from src.a08_bud_atom_logic.normal_models import (
     AwardLinkTable,
     ReasonTable,
     PremiseTable,
-    TeamLinkTable,
+    LaborLinkTable,
     HealerLinkTable,
     FactTable,
 )
@@ -177,16 +177,16 @@ def test_normalized_table_PremiseTable_premise_Exists():
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
-def test_normalized_table_TeamLinkTable_teamlink_Exists():
+def test_normalized_table_LaborLinkTable_laborlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_bud_table_build().get(bud_idea_teamlink_str())
-    mapper = inspect(TeamLinkTable)
+    config_dimen = get_normalized_bud_table_build().get(bud_idea_laborlink_str())
+    mapper = inspect(LaborLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_dimen)
-    assert config_table_name == "teamlink"
-    assert config_table_name == TeamLinkTable.__tablename__
+    assert config_table_name == "laborlink"
+    assert config_table_name == LaborLinkTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 

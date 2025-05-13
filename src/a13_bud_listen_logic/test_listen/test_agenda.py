@@ -50,7 +50,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     before_yao_budunit.set_acct_respect(yao_acct_debtit_belief)
     clean_str = "clean"
     zia_clean_ideaunit = ideaunit_shop(clean_str, pledge=True)
-    zia_clean_ideaunit.teamunit.set_teamlink(yao_str)
+    zia_clean_ideaunit.laborunit.set_laborlink(yao_str)
     zia_budunit = budunit_shop(zia_str)
     zia_budunit.add_acctunit(yao_str)
     zia_budunit.set_l1_idea(zia_clean_ideaunit)
@@ -85,7 +85,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     zia_budunit.add_acctunit(yao_str)
     clean_str = "clean"
     zia_clean_ideaunit = ideaunit_shop(clean_str, pledge=True)
-    zia_clean_ideaunit.teamunit.set_teamlink(yao_str)
+    zia_clean_ideaunit.laborunit.set_laborlink(yao_str)
     casa_way = zia_budunit.make_l1_way("casa")
     zia_budunit.set_idea(zia_clean_ideaunit, casa_way)
     assert len(zia_budunit.get_agenda_dict()) == 0
@@ -127,11 +127,11 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBud():
     cook_str = "cook"
     fly_str = "fly"
     yao_clean_ideaunit = ideaunit_shop(clean_str, pledge=True)
-    yao_clean_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_clean_ideaunit.laborunit.set_laborlink(yao_str)
     yao_cook_ideaunit = ideaunit_shop(cook_str, pledge=True)
-    yao_cook_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_cook_ideaunit.laborunit.set_laborlink(yao_str)
     yao_fly_ideaunit = ideaunit_shop(fly_str, pledge=True)
-    yao_fly_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_fly_ideaunit.laborunit.set_laborlink(yao_str)
     casa_way = zia_budunit.make_l1_way("casa")
     fly_way = zia_budunit.make_l1_way(fly_str)
     zia_budunit.set_idea(yao_clean_ideaunit, casa_way)
@@ -182,16 +182,16 @@ def test_listen_to_speaker_agenda_Returns2AgendaIdeasLevel2TaskBudWhereAnIdeaUni
     cook_str = "cook"
     fly_str = "fly"
     yao_dish_ideaunit = ideaunit_shop(dish_str, pledge=True)
-    yao_dish_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_dish_ideaunit.laborunit.set_laborlink(yao_str)
     yao_cook_ideaunit = ideaunit_shop(cook_str, pledge=True)
-    yao_cook_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_cook_ideaunit.laborunit.set_laborlink(yao_str)
     yao_fly_ideaunit = ideaunit_shop(fly_str, pledge=True)
-    yao_fly_ideaunit.teamunit.set_teamlink(yao_str)
+    yao_fly_ideaunit.laborunit.set_laborlink(yao_str)
     casa_way = zia_budunit.make_l1_way("casa")
     dish_way = zia_budunit.make_way(casa_way, dish_str)
     fly_way = zia_budunit.make_l1_way(fly_str)
     before_yao_dish_ideaunit = ideaunit_shop(dish_str, pledge=True)
-    before_yao_dish_ideaunit.teamunit.set_teamlink(yao_str)
+    before_yao_dish_ideaunit.laborunit.set_laborlink(yao_str)
     before_yao_budunit.set_idea(before_yao_dish_ideaunit, casa_way)
     before_yao_budunit.edit_idea_attr(dish_way, mass=1000)
     zia_budunit.set_idea(yao_dish_ideaunit, casa_way)
@@ -247,7 +247,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     vacuum_way = sue_budunit.make_l1_way(vacuum_str)
     sue_budunit.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
     vacuum_ideaunit = sue_budunit.get_idea_obj(vacuum_way)
-    vacuum_ideaunit.teamunit.set_teamlink(yao_str)
+    vacuum_ideaunit.laborunit.set_laborlink(yao_str)
 
     egg_str = "egg first"
     egg_way = sue_budunit.make_l1_way(egg_str)
