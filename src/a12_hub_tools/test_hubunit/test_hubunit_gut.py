@@ -208,27 +208,27 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     assert os_path_exists(init_pack_file_path)
 
 
-# def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-#     sue_hubunit.initialize_pack_gut_files()
-#     sue_hubunit.save_pack_file(sue_2budatoms_packunit())
-#     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-#     # gut_bud.add_idea(gut_bud.make_l1_way("sports"))
-#     sports_str = "sports"
-#     sports_way = gut_bud.make_l1_way(sports_str)
-#     knee_str = "knee"
-#     knee_way = gut_bud.make_way(sports_way, knee_str)
-#     assert gut_bud.idea_exists(sports_way) is False
-#     assert gut_bud.idea_exists(knee_way) is False
+def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
+    sue_hubunit.initialize_pack_gut_files()
+    sue_hubunit.save_pack_file(sue_2budatoms_packunit())
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
+    # gut_bud.add_idea(gut_bud.make_l1_way("sports"))
+    sports_str = "sports"
+    sports_way = gut_bud.make_l1_way(sports_str)
+    knee_str = "knee"
+    knee_way = gut_bud.make_way(sports_way, knee_str)
+    assert gut_bud.idea_exists(sports_way) is False
+    assert gut_bud.idea_exists(knee_way) is False
 
-#     # WHEN
-#     new_bud = sue_hubunit.append_packs_to_gut_file()
+    # WHEN
+    new_bud = sue_hubunit.append_packs_to_gut_file()
 
-#     # THEN
-#     assert new_bud != gut_bud
-#     assert new_bud.idea_exists(sports_way)
-#     assert new_bud.idea_exists(knee_way)
+    # THEN
+    assert new_bud != gut_bud
+    assert new_bud.idea_exists(sports_way)
+    assert new_bud.idea_exists(knee_way)

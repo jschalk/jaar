@@ -507,27 +507,27 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     assert new_bud.idea_exists(sports_way)
 
 
-# def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-#     sue_hubunit.save_pack_file(sue_2budatoms_packunit())
-#     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-#     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-#     print(f"{gut_bud.fisc_tag=}")
-#     sports_str = "sports"
-#     sports_way = gut_bud.make_l1_way(sports_str)
-#     knee_str = "knee"
-#     knee_way = gut_bud.make_way(sports_way, knee_str)
-#     assert gut_bud.idea_exists(sports_way) is False
-#     assert gut_bud.idea_exists(knee_way) is False
+def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
+    sue_hubunit.save_pack_file(sue_2budatoms_packunit())
+    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
+    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
+    print(f"{gut_bud.fisc_tag=}")
+    sports_str = "sports"
+    sports_way = gut_bud.make_l1_way(sports_str)
+    knee_str = "knee"
+    knee_way = gut_bud.make_way(sports_way, knee_str)
+    assert gut_bud.idea_exists(sports_way) is False
+    assert gut_bud.idea_exists(knee_way) is False
 
-#     # WHEN
-#     new_bud = sue_hubunit._merge_any_packs(gut_bud)
+    # WHEN
+    new_bud = sue_hubunit._merge_any_packs(gut_bud)
 
-#     # THEN
-#     assert new_bud != gut_bud
-#     assert new_bud.idea_exists(sports_way)
-#     assert new_bud.idea_exists(knee_way)
+    # THEN
+    assert new_bud != gut_bud
+    assert new_bud.idea_exists(sports_way)
+    assert new_bud.idea_exists(knee_way)
