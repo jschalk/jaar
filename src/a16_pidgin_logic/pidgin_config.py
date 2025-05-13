@@ -119,7 +119,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "LabelStr",
+        "labor_label": "LabelStr",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
         "timeline_tag": "TagStr",
@@ -184,7 +184,7 @@ def pidginable_args() -> set:
         "owner_name",
         "pbranch",
         "rcontext",
-        "team_label",
+        "labor_label",
         "timeline_tag",
         "weekday_tag",
     }

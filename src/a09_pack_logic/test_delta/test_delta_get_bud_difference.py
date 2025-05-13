@@ -12,14 +12,14 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
     awardee_label_str,
     group_label_str,
     idea_way_str,
-    team_label_str,
+    labor_label_str,
     healer_name_str,
     pledge_str,
     begin_str,
@@ -1118,7 +1118,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_del
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_teamlink_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1132,7 +1132,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_teamlink_inser
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.teamunit.set_teamlink(xio_str)
+    after_ball_ideaunit.laborunit.set_laborlink(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1142,17 +1142,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_teamlink_inser
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_teamlink_str(),
+        bud_idea_laborlink_str(),
         ball_way,
         xio_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(team_label_str()) == xio_str
+    assert ball_budatom.get_value(labor_label_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_teamlink_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1164,11 +1164,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_teamlink_delet
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
     before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
     before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_way)
-    before_ball_ideaunit.teamunit.set_teamlink(xio_str)
+    before_ball_ideaunit.laborunit.set_laborlink(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.teamunit.del_teamlink(xio_str)
+    after_ball_ideaunit.laborunit.del_laborlink(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1178,13 +1178,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_teamlink_delet
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_teamlink_str(),
+        bud_idea_laborlink_str(),
         ball_way,
         xio_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(team_label_str()) == xio_str
+    assert ball_budatom.get_value(labor_label_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
@@ -1348,7 +1348,7 @@ def test_BudDelta_add_all_budatoms_CorrectlyCreates_BudAtoms():
     ball_way = after_sue_bud.make_way(sports_way, ball_str)
     after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
     after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.teamunit.set_teamlink(xio_str)
+    after_ball_ideaunit.laborunit.set_laborlink(xio_str)
 
     before_sue_bud = budunit_shop(sue_str)
     sue1_buddelta = buddelta_shop()

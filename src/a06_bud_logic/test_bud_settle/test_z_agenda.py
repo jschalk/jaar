@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import WayStr
-from src.a04_reason_logic.reason_team import teamunit_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_idea_logic.idea import IdeaUnit, ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a06_bud_logic._utils.example_buds import (
@@ -439,7 +439,7 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     assert get_tasks_count(pledge_idea_list) == 64
 
 
-def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
+def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -450,23 +450,23 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
 
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
-    teamunit_sue = teamunit_shop()
-    teamunit_sue.set_teamlink(team_label=sue_str)
+    laborunit_sue = laborunit_shop()
+    laborunit_sue.set_laborlink(labor_label=sue_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_idea_attr(casa_way, teamunit=teamunit_sue)
+    yao_bud.edit_idea_attr(casa_way, laborunit=laborunit_sue)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0
 
     # WHEN
     yao_bud.add_acctunit(yao_str)
-    teamunit_yao = teamunit_shop()
-    teamunit_yao.set_teamlink(team_label=yao_str)
+    laborunit_yao = laborunit_shop()
+    laborunit_yao.set_laborlink(labor_label=yao_str)
 
     # WHEN
-    yao_bud.edit_idea_attr(casa_way, teamunit=teamunit_yao)
+    yao_bud.edit_idea_attr(casa_way, laborunit=laborunit_yao)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
@@ -475,7 +475,7 @@ def test_BudUnit_agenda_IsSetByTeamUnit_1AcctGroup():
     # print(f"{agenda_dict[0].idea_tag=}")
 
 
-def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
+def test_BudUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -490,12 +490,12 @@ def test_BudUnit_get_agenda_dict_IsSetByTeamUnit_2AcctGroup():
     sue_acctunit = yao_bud.get_acct(sue_str)
     sue_acctunit.add_membership(run_str)
 
-    run_teamunit = teamunit_shop()
-    run_teamunit.set_teamlink(team_label=run_str)
+    run_laborunit = laborunit_shop()
+    run_laborunit.set_laborlink(labor_label=run_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_idea_attr(casa_way, teamunit=run_teamunit)
+    yao_bud.edit_idea_attr(casa_way, laborunit=run_laborunit)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0
@@ -526,7 +526,7 @@ def test_BudUnit_get_all_pledges_ReturnsObj():
     sweep_idea = zia_bud.get_idea_obj(sweep_way)
     yao_str = "Yao"
     zia_bud.add_acctunit(yao_str)
-    sweep_idea.teamunit.set_teamlink(yao_str)
+    sweep_idea.laborunit.set_laborlink(yao_str)
     print(f"{sweep_idea}")
     agenda_dict = zia_bud.get_agenda_dict()
     assert agenda_dict.get(clean_way) is not None

@@ -13,16 +13,16 @@ from copy import deepcopy as copy_deepcopy
 def create_pledge(
     x_bud: BudUnit,
     pledge_way: WayStr,
-    x_teamlink: LabelStr = None,
+    x_laborlink: LabelStr = None,
     reason_premise: WayStr = None,
 ):
     if pledge_way is not None and get_terminus_tag(pledge_way) != "":
         x_idea = x_bud.get_idea_obj(pledge_way, if_missing_create=True)
         x_idea.pledge = True
-        x_idea.teamunit.set_teamlink(x_teamlink)
+        x_idea.laborunit.set_laborlink(x_laborlink)
 
-        if x_teamlink is not None and x_bud.acct_exists(x_teamlink) is False:
-            x_bud.add_acctunit(x_teamlink)
+        if x_laborlink is not None and x_bud.acct_exists(x_laborlink) is False:
+            x_bud.add_acctunit(x_laborlink)
 
         if reason_premise is not None:
             if x_bud.idea_exists(reason_premise) is False:
@@ -34,7 +34,7 @@ def create_pledge(
 def add_gut_pledge(
     x_hubunit: HubUnit,
     pledge_way: WayStr,
-    x_teamlink: LabelStr = None,
+    x_laborlink: LabelStr = None,
     reason_premise: WayStr = None,
 ):
     gut_bud = open_gut_file(
@@ -43,7 +43,7 @@ def add_gut_pledge(
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)
-    create_pledge(gut_bud, pledge_way, x_teamlink, reason_premise)
+    create_pledge(gut_bud, pledge_way, x_laborlink, reason_premise)
     next_packunit = x_hubunit._default_packunit()
     next_packunit._buddelta.add_all_different_budatoms(old_gut_bud, gut_bud)
     next_packunit.save_files()

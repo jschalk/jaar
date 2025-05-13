@@ -82,10 +82,10 @@ class PremiseTable(Base):
     popen = Column(Float)
 
 
-class TeamLinkTable(Base):
-    __tablename__ = "teamlink"
+class LaborLinkTable(Base):
+    __tablename__ = "laborlink"
     uid = Column(Integer, primary_key=True)
-    team_label = Column(String)
+    labor_label = Column(String)
     idea_way = Column(String)
 
 

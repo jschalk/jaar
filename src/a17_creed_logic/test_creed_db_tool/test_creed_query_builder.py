@@ -3,7 +3,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
     idea_way_str,
-    team_label_str,
+    labor_label_str,
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
@@ -18,7 +18,7 @@ from src.a17_creed_logic.creed_db_tool import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_teamlink():
+def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_laborlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         creed_number = "br000XX"
@@ -27,38 +27,40 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_teamlink()
             face_name_str(),
             fisc_tag_str(),
             idea_way_str(),
-            team_label_str(),
+            labor_label_str(),
             owner_name_str(),
             acct_name_str(),
             amount_str(),
         ]
-        budteam_cat = "bud_idea_teamlink"
+        budlabor_cat = "bud_idea_laborlink"
         src_table = f"{creed_number}_raw"
-        dst_table = f"{budteam_cat}_raw"
+        dst_table = f"{budlabor_cat}_raw"
         creed_config = get_creed_config_dict()
-        budteam_config = creed_config.get(budteam_cat)
-        print(f"{budteam_cat=}")
-        print(f"{budteam_config=}")
-        budteam_jkeys = budteam_config.get("jkeys")
-        budteam_jvals = budteam_config.get("jvalues")
-        budteam_args = set(budteam_jkeys.keys()).union(set(budteam_jvals.keys()))
-        budteam_args = get_default_sorted_list(budteam_args)
-        print(f"{budteam_jkeys=}")
-        print(f"{budteam_jvals=}")
+        budlabor_config = creed_config.get(budlabor_cat)
+        print(f"{budlabor_cat=}")
+        print(f"{budlabor_config=}")
+        budlabor_jkeys = budlabor_config.get("jkeys")
+        budlabor_jvals = budlabor_config.get("jvalues")
+        budlabor_args = set(budlabor_jkeys.keys()).union(set(budlabor_jvals.keys()))
+        budlabor_args = get_default_sorted_list(budlabor_args)
+        print(f"{budlabor_jkeys=}")
+        print(f"{budlabor_jvals=}")
         create_creed_sorted_table(conn, src_table, creed_cols)
-        create_creed_sorted_table(conn, dst_table, budteam_args)
+        create_creed_sorted_table(conn, dst_table, budlabor_args)
 
         # WHEN
         gen_sqlstr = get_creed_into_dimen_raw_query(
-            conn, creed_number, budteam_cat, budteam_jkeys
+            conn, creed_number, budlabor_cat, budlabor_jkeys
         )
 
         # THEN
-        columns_str = "event_int, face_name, fisc_tag, owner_name, idea_way, team_label"
-        expected_sqlstr = f"""INSERT INTO {budteam_cat}_raw (creed_number, {columns_str})
+        columns_str = (
+            "event_int, face_name, fisc_tag, owner_name, idea_way, labor_label"
+        )
+        expected_sqlstr = f"""INSERT INTO {budlabor_cat}_raw (creed_number, {columns_str})
 SELECT '{creed_number}' as creed_number, {columns_str}
 FROM {creed_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND idea_way IS NOT NULL AND team_label IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_tag IS NOT NULL AND owner_name IS NOT NULL AND idea_way IS NOT NULL AND labor_label IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -77,7 +79,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
             face_name_str(),
             fisc_tag_str(),
             idea_way_str(),
-            team_label_str(),
+            labor_label_str(),
             owner_name_str(),
             acct_name_str(),
             credit_belief_str(),
@@ -127,7 +129,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
             face_name_str(),
             fisc_tag_str(),
             idea_way_str(),
-            team_label_str(),
+            labor_label_str(),
             owner_name_str(),
             acct_name_str(),
             credit_belief_str(),

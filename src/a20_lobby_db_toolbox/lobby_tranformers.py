@@ -4,7 +4,7 @@ from src.a02_finance_logic.deal import OwnerName, FiscTag
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a04_reason_logic.reason_idea import ReasonHeir, PremiseUnit, FactHeir
-from src.a04_reason_logic.reason_team import TeamHeir
+from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a05_idea_logic.healer import HealerLink
 from src.a05_idea_logic.idea import IdeaUnit
 from src.a06_bud_logic.bud import BudUnit
@@ -19,7 +19,7 @@ from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
     create_budheal_metrics_insert_sqlstr,
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
-    create_budteam_metrics_insert_sqlstr,
+    create_budlabor_metrics_insert_sqlstr,
     create_budidea_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
@@ -154,19 +154,19 @@ def insert_job_budreas(
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_budteam(
+def insert_job_budlabor(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
-    x_teamheir: TeamHeir,
+    x_laborheir: LaborHeir,
 ):
-    x_dict = copy_deepcopy(x_teamheir.__dict__)
+    x_dict = copy_deepcopy(x_laborheir.__dict__)
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["fisc_tag"] = x_objkeysholder.fisc_tag
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["idea_way"] = x_objkeysholder.way
-    for team_label in sorted(x_teamheir._teamlinks):
-        x_dict["team_label"] = team_label
-        insert_sqlstr = create_budteam_metrics_insert_sqlstr(x_dict)
+    for labor_label in sorted(x_laborheir._laborlinks):
+        x_dict["labor_label"] = labor_label
+        insert_sqlstr = create_budlabor_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
 
@@ -197,10 +197,10 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
     for x_idea in job_bud.get_idea_dict().values():
         x_objkeysholder.way = x_idea.get_idea_way()
         healerlink = x_idea.healerlink
-        teamheir = x_idea._teamheir
+        laborheir = x_idea._laborheir
         insert_job_budidea(cursor, x_objkeysholder, x_idea)
         insert_job_budheal(cursor, x_objkeysholder, healerlink)
-        insert_job_budteam(cursor, x_objkeysholder, teamheir)
+        insert_job_budlabor(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_idea._awardheirs.values():
             insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
         for rcontext, reasonheir in x_idea._reasonheirs.items():

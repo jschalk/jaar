@@ -116,7 +116,7 @@
       "rcontext_idea_active_requisite": {}
     }
   },
-  "bud_idea_teamlink": {
+  "bud_idea_laborlink": {
     "allowed_crud": "DELETE_INSERT",
     "build_order": 14,
     "creed_category": "bud",
@@ -126,7 +126,7 @@
       "fisc_tag": {},
       "idea_way": {},
       "owner_name": {},
-      "team_label": {}
+      "labor_label": {}
     },
     "jvalues": {}
   },

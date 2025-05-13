@@ -126,7 +126,7 @@ def get_example_yao_plan1_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_way())
     yao_speaker.set_idea(ideaunit_shop(full_str()), eat_way())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_way())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     yao_speaker.edit_reason(cook_way(), eat_way(), hungry_way())
     yao_speaker.add_fact(eat_way(), hungry_way())
     return yao_speaker
@@ -141,7 +141,7 @@ def get_example_yao_plan2_speaker() -> BudUnit:
     yao_speaker.set_idea(ideaunit_shop(hungry_str()), eat_way())
     yao_speaker.set_idea(ideaunit_shop(full_str()), eat_way())
     cook_ideaunit = yao_speaker.get_idea_obj(cook_way())
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     yao_speaker.edit_reason(cook_way(), eat_way(), hungry_way())
     yao_speaker.add_fact(eat_way(), hungry_way())
 

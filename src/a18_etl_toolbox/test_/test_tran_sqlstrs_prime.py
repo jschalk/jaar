@@ -12,7 +12,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     event_int_str,
@@ -76,8 +76,8 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_idea_reason_premiseunit_str()}_sound_put_raw": "BUDPREM_PUT_RAW",
     f"{bud_idea_reasonunit_str()}_sound_put_agg": "BUDREAS_PUT_AGG",
     f"{bud_idea_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
-    f"{bud_idea_teamlink_str()}_sound_put_agg": "BUDTEAM_PUT_AGG",
-    f"{bud_idea_teamlink_str()}_sound_put_raw": "BUDTEAM_PUT_RAW",
+    f"{bud_idea_laborlink_str()}_sound_put_agg": "BUDLABOR_PUT_AGG",
+    f"{bud_idea_laborlink_str()}_sound_put_raw": "BUDLABOR_PUT_RAW",
     f"{bud_ideaunit_str()}_sound_put_agg": "BUDIDEA_PUT_AGG",
     f"{bud_ideaunit_str()}_sound_put_raw": "BUDIDEA_PUT_RAW",
     f"{budunit_str()}_sound_put_agg": "BUDUNIT_PUT_AGG",
@@ -96,8 +96,8 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_idea_reason_premiseunit_str()}_sound_del_raw": "BUDPREM_DEL_RAW",
     f"{bud_idea_reasonunit_str()}_sound_del_agg": "BUDREAS_DEL_AGG",
     f"{bud_idea_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
-    f"{bud_idea_teamlink_str()}_sound_del_agg": "BUDTEAM_DEL_AGG",
-    f"{bud_idea_teamlink_str()}_sound_del_raw": "BUDTEAM_DEL_RAW",
+    f"{bud_idea_laborlink_str()}_sound_del_agg": "BUDLABOR_DEL_AGG",
+    f"{bud_idea_laborlink_str()}_sound_del_raw": "BUDLABOR_DEL_RAW",
     f"{bud_ideaunit_str()}_sound_del_agg": "BUDIDEA_DEL_AGG",
     f"{bud_ideaunit_str()}_sound_del_raw": "BUDIDEA_DEL_RAW",
     f"{budunit_str()}_sound_del_agg": "BUDUNIT_DEL_AGG",
@@ -119,7 +119,7 @@ def test_create_prime_tablename_ReturnsObj():
     budawar_dimen = bud_idea_awardlink_str()
     budreas_dimen = bud_idea_reasonunit_str()
     budprem_dimen = bud_idea_reason_premiseunit_str()
-    budteam_dimen = bud_idea_teamlink_str()
+    budlabor_dimen = bud_idea_laborlink_str()
     budheal_dimen = bud_idea_healerlink_str()
     budfact_dimen = bud_idea_factunit_str()
     fisunit_dimen = fiscunit_str()
@@ -146,7 +146,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
     assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
     assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
-    assert prime_tbl("budteam", "s", agg_str, put_str) == f"{budteam_dimen}_s_put_agg"
+    assert prime_tbl("budlabor", "s", agg_str, put_str) == f"{budlabor_dimen}_s_put_agg"
     assert prime_tbl("budheal", "s", agg_str, put_str) == f"{budheal_dimen}_s_put_agg"
     assert prime_tbl("budfact", "s", agg_str, put_str) == f"{budfact_dimen}_s_put_agg"
     assert prime_tbl("budfact", "s", agg_str, del_str) == f"{budfact_dimen}_s_del_agg"

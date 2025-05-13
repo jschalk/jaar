@@ -118,12 +118,12 @@ def get_creed_elements_sort_order() -> list[str]:
         "fbranch",
         "fbranch_otx",
         "fbranch_inx",
-        "team_label",
-        "team_label_otx",
-        "team_label_inx",
-        "team_label_ERASE",
-        "team_label_ERASE_otx",
-        "team_label_ERASE_inx",
+        "labor_label",
+        "labor_label_otx",
+        "labor_label_inx",
+        "labor_label_ERASE",
+        "labor_label_ERASE_otx",
+        "labor_label_ERASE_inx",
         "awardee_label",
         "awardee_label_otx",
         "awardee_label_inx",
@@ -186,7 +186,7 @@ def get_creed_elements_sort_order() -> list[str]:
         "celldepth",
         "job_listen_rotations",
         "error_message",
-        "_owner_name_team",
+        "_owner_name_labor",
         "_active",
         "_task",
         "_status",
@@ -289,12 +289,12 @@ def get_creed_sqlite_types() -> dict[str, str]:
         "fbranch": "TEXT",
         "fbranch_otx": "TEXT",
         "fbranch_inx": "TEXT",
-        "team_label": "TEXT",
-        "team_label_otx": "TEXT",
-        "team_label_inx": "TEXT",
-        "team_label_ERASE": "TEXT",
-        "team_label_ERASE_otx": "TEXT",
-        "team_label_ERASE_inx": "TEXT",
+        "labor_label": "TEXT",
+        "labor_label_otx": "TEXT",
+        "labor_label_inx": "TEXT",
+        "labor_label_ERASE": "TEXT",
+        "labor_label_ERASE_otx": "TEXT",
+        "labor_label_ERASE_inx": "TEXT",
         "awardee_label": "TEXT",
         "awardee_label_otx": "TEXT",
         "awardee_label_inx": "TEXT",
@@ -396,7 +396,7 @@ def get_creed_sqlite_types() -> dict[str, str]:
         "_irrational_debtit_belief": "REAL",
         "_status": "INTEGER",
         "_task": "INTEGER",
-        "_owner_name_team": "INTEGER",
+        "_owner_name_labor": "INTEGER",
         "_active": "INTEGER",
         "_descendant_pledge_count": "INTEGER",
         "_healerlink_ratio": "REAL",
@@ -467,7 +467,7 @@ def creed_format_00019_ideaunit_v0_0_0() -> str:
 # def creed_format_00021_bud_acctunit_v0_0_0()-> str: return "creed_format_00021_bud_acctunit_v0_0_0"
 # def creed_format_00022_bud_idea_awardlink_v0_0_0()-> str: return "creed_format_00022_bud_idea_awardlink_v0_0_0"
 # def creed_format_00023_bud_idea_factunit_v0_0_0()-> str: return "creed_format_00023_bud_idea_factunit_v0_0_0"
-# def creed_format_00024_bud_idea_teamlink_v0_0_0()-> str: return "creed_format_00024_bud_idea_teamlink_v0_0_0"
+# def creed_format_00024_bud_idea_laborlink_v0_0_0()-> str: return "creed_format_00024_bud_idea_laborlink_v0_0_0"
 # def creed_format_00025_bud_idea_healerlink_v0_0_0()-> str: return "creed_format_00025_bud_idea_healerlink_v0_0_0"
 # def creed_format_00026_bud_idea_reason_premiseunit_v0_0_0()-> str: return "creed_format_00026_bud_idea_reason_premiseunit_v0_0_0"
 # def creed_format_00027_bud_idea_reasonunit_v0_0_0()-> str: return "creed_format_00027_bud_idea_reasonunit_v0_0_0"
@@ -491,8 +491,8 @@ def creed_format_00023_bud_idea_factunit_v0_0_0() -> str:
     return "creed_format_00023_bud_idea_factunit_v0_0_0"
 
 
-def creed_format_00024_bud_idea_teamlink_v0_0_0() -> str:
-    return "creed_format_00024_bud_idea_teamlink_v0_0_0"
+def creed_format_00024_bud_idea_laborlink_v0_0_0() -> str:
+    return "creed_format_00024_bud_idea_laborlink_v0_0_0"
 
 
 def creed_format_00025_bud_idea_healerlink_v0_0_0() -> str:
@@ -555,8 +555,8 @@ def creed_format_00053_delete_bud_idea_factunit_v0_0_0() -> str:
     return "creed_format_00053_delete_bud_idea_factunit_v0_0_0"
 
 
-def creed_format_00054_delete_bud_idea_teamlink_v0_0_0() -> str:
-    return "creed_format_00054_delete_bud_idea_teamlink_v0_0_0"
+def creed_format_00054_delete_bud_idea_laborlink_v0_0_0() -> str:
+    return "creed_format_00054_delete_bud_idea_laborlink_v0_0_0"
 
 
 def creed_format_00055_delete_bud_idea_healerlink_v0_0_0() -> str:
@@ -616,7 +616,7 @@ def get_creed_format_filenames() -> set[str]:
         creed_format_00021_bud_acctunit_v0_0_0(),
         creed_format_00022_bud_idea_awardlink_v0_0_0(),
         creed_format_00023_bud_idea_factunit_v0_0_0(),
-        creed_format_00024_bud_idea_teamlink_v0_0_0(),
+        creed_format_00024_bud_idea_laborlink_v0_0_0(),
         creed_format_00025_bud_idea_healerlink_v0_0_0(),
         creed_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
         creed_format_00027_bud_idea_reasonunit_v0_0_0(),
@@ -631,7 +631,7 @@ def get_creed_format_filenames() -> set[str]:
         creed_format_00051_delete_bud_acctunit_v0_0_0(),
         creed_format_00052_delete_bud_idea_awardlink_v0_0_0(),
         creed_format_00053_delete_bud_idea_factunit_v0_0_0(),
-        creed_format_00054_delete_bud_idea_teamlink_v0_0_0(),
+        creed_format_00054_delete_bud_idea_laborlink_v0_0_0(),
         creed_format_00055_delete_bud_idea_healerlink_v0_0_0(),
         creed_format_00056_delete_bud_idea_reason_premiseunit_v0_0_0(),
         creed_format_00057_delete_bud_idea_reasonunit_v0_0_0(),
@@ -713,7 +713,7 @@ def get_creed_format_headers() -> dict[str, list[str]]:
         "fisc_tag,owner_name,acct_name,credit_belief,debtit_belief": creed_format_00021_bud_acctunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,awardee_label,give_force,take_force": creed_format_00022_bud_idea_awardlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,fcontext,fbranch,fopen,fnigh": creed_format_00023_bud_idea_factunit_v0_0_0(),
-        "fisc_tag,owner_name,idea_way,team_label": creed_format_00024_bud_idea_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,labor_label": creed_format_00024_bud_idea_laborlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,healer_name": creed_format_00025_bud_idea_healerlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,rcontext,pbranch,pnigh,popen,pdivisor": creed_format_00026_bud_idea_reason_premiseunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite": creed_format_00027_bud_idea_reasonunit_v0_0_0(),
@@ -728,7 +728,7 @@ def get_creed_format_headers() -> dict[str, list[str]]:
         "fisc_tag,owner_name,acct_name_ERASE": creed_format_00051_delete_bud_acctunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,awardee_label_ERASE": creed_format_00052_delete_bud_idea_awardlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,fcontext_ERASE": creed_format_00053_delete_bud_idea_factunit_v0_0_0(),
-        "fisc_tag,owner_name,idea_way,team_label_ERASE": creed_format_00054_delete_bud_idea_teamlink_v0_0_0(),
+        "fisc_tag,owner_name,idea_way,labor_label_ERASE": creed_format_00054_delete_bud_idea_laborlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,healer_name_ERASE": creed_format_00055_delete_bud_idea_healerlink_v0_0_0(),
         "fisc_tag,owner_name,idea_way,rcontext,pbranch_ERASE": creed_format_00056_delete_bud_idea_reason_premiseunit_v0_0_0(),
         "fisc_tag,owner_name,idea_way,rcontext_ERASE": creed_format_00057_delete_bud_idea_reasonunit_v0_0_0(),
@@ -777,7 +777,7 @@ def get_creed_dimen_ref() -> dict[str, set[str]]:
         "bud_idea_healerlink": {"br00025", "br00036", "br00055"},
         "bud_idea_reason_premiseunit": {"br00026", "br00056"},
         "bud_idea_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
-        "bud_idea_teamlink": {"br00024", "br00054"},
+        "bud_idea_laborlink": {"br00024", "br00054"},
         "bud_ideaunit": {
             "br00013",
             "br00019",

@@ -30,7 +30,7 @@ from src.a13_bud_listen_logic._utils.env_a13 import (
 from os.path import exists as os_path_exists
 
 
-def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWhenNo_teamlinkIsSet(
+def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWhenNo_laborlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -84,8 +84,8 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBud(env_dir_setup_cleanup):
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_way())
     cook_ideaunit = zia_job.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
@@ -187,8 +187,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_way())
     cook_ideaunit = zia_job.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
 
     sue_job = budunit_shop(sue_str, a23_str)
@@ -198,7 +198,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
     vacuum_way = sue_job.make_l1_way(vacuum_str)
     sue_job.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
     vacuum_ideaunit = sue_job.get_idea_obj(vacuum_way)
-    vacuum_ideaunit.teamunit.set_teamlink(yao_str)
+    vacuum_ideaunit.laborunit.set_laborlink(yao_str)
 
     egg_str = "egg first"
     egg_way = sue_job.make_l1_way(egg_str)
@@ -266,8 +266,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBud(
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_way())
     cook_ideaunit = zia_job.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
 
     # WHEN
@@ -314,8 +314,8 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_ideaunit = zia_job.get_idea_obj(clean_way())
     cook_ideaunit = zia_job.get_idea_obj(cook_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
-    cook_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
+    cook_ideaunit.laborunit.set_laborlink(yao_str)
     save_job_file(fisc_mstr_dir, zia_job)
 
     # save yao with task to dutys
@@ -324,7 +324,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     vacuum_way = yao_old_job.make_l1_way(vacuum_str)
     yao_old_job.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
     vacuum_ideaunit = yao_old_job.get_idea_obj(vacuum_way)
-    vacuum_ideaunit.teamunit.set_teamlink(yao_str)
+    vacuum_ideaunit.laborunit.set_laborlink(yao_str)
     save_job_file(fisc_mstr_dir, yao_old_job)
 
     # WHEN

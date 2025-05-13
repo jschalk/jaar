@@ -73,7 +73,7 @@ def test_create_pledge_CorrectlyModifiesBudNonpledgeIdeaTopledgeIdea():
     assert new_floor_idea.pledge
 
 
-def test_create_pledge_CorrectlySets_teamlink():
+def test_create_pledge_CorrectlySets_laborlink():
     # ESTABLISH
     sue_str = "Sue"
     sue_bud = budunit_shop(sue_str)
@@ -83,23 +83,23 @@ def test_create_pledge_CorrectlySets_teamlink():
     floor_way = sue_bud.make_way(clean_way, floor_str)
     bob_str = "Bob"
     floor_idea = ideaunit_shop(floor_str, pledge=True)
-    floor_idea.teamunit.set_teamlink(bob_str)
+    floor_idea.laborunit.set_laborlink(bob_str)
     sue_bud.set_idea(floor_idea, clean_way)
     floor_idea = sue_bud.get_idea_obj(floor_way)
-    assert floor_idea.teamunit.teamlink_exists(bob_str) is False
+    assert floor_idea.laborunit.laborlink_exists(bob_str) is False
 
     # WHEN
     create_pledge(sue_bud, floor_way, bob_str)
 
     # THEN
-    assert floor_idea.teamunit.teamlink_exists(bob_str)
+    assert floor_idea.laborunit.laborlink_exists(bob_str)
     yao_str = "Yao"
     assert sue_bud.acct_exists(yao_str) is False
-    assert floor_idea.teamunit.teamlink_exists(yao_str) is False
+    assert floor_idea.laborunit.laborlink_exists(yao_str) is False
 
     # WHEN
     create_pledge(sue_bud, floor_way, yao_str)
 
     # THEN
     assert sue_bud.acct_exists(yao_str)
-    assert floor_idea.teamunit.teamlink_exists(yao_str)
+    assert floor_idea.laborunit.laborlink_exists(yao_str)

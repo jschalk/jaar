@@ -8,7 +8,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
@@ -17,7 +17,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     awardee_label_str,
     group_label_str,
-    team_label_str,
+    labor_label_str,
     healer_name_str,
     idea_way_str,
     rcontext_idea_active_requisite_str,
@@ -93,10 +93,10 @@ def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), bud_idea_reason_premiseunit_str()]
     bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_teamlink_str()]
-    bud_idea_teamlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_teamlink_str()]
-    bud_idea_teamlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_idea_laborlink_str()]
+    bud_idea_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_idea_laborlink_str()]
+    bud_idea_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = [atom_insert(), bud_idea_healerlink_str()]
     bud_idea_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -185,13 +185,13 @@ def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
             leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
         )
 
-    if bud_idea_teamlink_insert_dict is not None:
-        add_bud_idea_teamlink_insert_to_legible_list(
-            leg_list, bud_idea_teamlink_insert_dict, x_bud
+    if bud_idea_laborlink_insert_dict is not None:
+        add_bud_idea_laborlink_insert_to_legible_list(
+            leg_list, bud_idea_laborlink_insert_dict, x_bud
         )
-    if bud_idea_teamlink_delete_dict is not None:
-        add_bud_idea_teamlink_delete_to_legible_list(
-            leg_list, bud_idea_teamlink_delete_dict, x_bud
+    if bud_idea_laborlink_delete_dict is not None:
+        add_bud_idea_laborlink_delete_to_legible_list(
+            leg_list, bud_idea_laborlink_delete_dict, x_bud
         )
 
     if bud_idea_healerlink_insert_dict is not None:
@@ -561,25 +561,25 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_bud_idea_teamlink_insert_to_legible_list(
-    legible_list: list[str], idea_teamlink_insert_dict: dict, x_bud: BudUnit
+def add_bud_idea_laborlink_insert_to_legible_list(
+    legible_list: list[str], idea_laborlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_teamlink_insert_dict.values():
-        for idea_teamlink_atom in way_dict.values():
-            team_label_value = idea_teamlink_atom.get_value(team_label_str())
-            way_value = idea_teamlink_atom.get_value("idea_way")
-            x_str = f"teamlink '{team_label_value}' created for idea '{way_value}'."
+    for way_dict in idea_laborlink_insert_dict.values():
+        for idea_laborlink_atom in way_dict.values():
+            labor_label_value = idea_laborlink_atom.get_value(labor_label_str())
+            way_value = idea_laborlink_atom.get_value("idea_way")
+            x_str = f"laborlink '{labor_label_value}' created for idea '{way_value}'."
             legible_list.append(x_str)
 
 
-def add_bud_idea_teamlink_delete_to_legible_list(
-    legible_list: list[str], idea_teamlink_delete_dict: dict, x_bud: BudUnit
+def add_bud_idea_laborlink_delete_to_legible_list(
+    legible_list: list[str], idea_laborlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_teamlink_delete_dict.values():
-        for idea_teamlink_atom in way_dict.values():
-            team_label_value = idea_teamlink_atom.get_value(team_label_str())
-            way_value = idea_teamlink_atom.get_value("idea_way")
-            x_str = f"teamlink '{team_label_value}' deleted for idea '{way_value}'."
+    for way_dict in idea_laborlink_delete_dict.values():
+        for idea_laborlink_atom in way_dict.values():
+            labor_label_value = idea_laborlink_atom.get_value(labor_label_str())
+            way_value = idea_laborlink_atom.get_value("idea_way")
+            x_str = f"laborlink '{labor_label_value}' deleted for idea '{way_value}'."
             legible_list.append(x_str)
 
 

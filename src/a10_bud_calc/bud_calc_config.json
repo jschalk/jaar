@@ -408,8 +408,8 @@
             }
         }
     },
-    "bud_idea_teamlink": {
-        "abbreviation": "budteam",
+    "bud_idea_laborlink": {
+        "abbreviation": "budlabor",
         "jkeys": {
             "fisc_tag": {
                 "class_type": "TagStr",
@@ -423,7 +423,7 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "team_label": {
+            "labor_label": {
                 "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
@@ -433,7 +433,7 @@
             }
         },
         "jmetrics": {
-            "_owner_name_team": {
+            "_owner_name_labor": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

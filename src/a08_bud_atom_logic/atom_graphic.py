@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
 )
@@ -178,7 +178,7 @@ def budatom_periodic_table0() -> plotly_Figure:
     bud_acct_membership_insert = get_insert_rect(bud_acct_membership_str())
     bud_ideaunit_insert = get_insert_rect(bud_ideaunit_str())
     bud_idea_awardlink_insert = get_insert_rect(bud_idea_awardlink_str())
-    bud_idea_teamlink_insert = get_insert_rect(bud_idea_teamlink_str())
+    bud_idea_laborlink_insert = get_insert_rect(bud_idea_laborlink_str())
     bud_idea_healerlink_insert = get_insert_rect(bud_idea_healerlink_str())
     bud_idea_factunit_insert = get_insert_rect(bud_idea_factunit_str())
     bud_idea_reasonunit_insert = get_insert_rect(bud_idea_reasonunit_str())
@@ -193,7 +193,7 @@ def budatom_periodic_table0() -> plotly_Figure:
     bud_idea_reason_premiseunit_delete = get_delete_rect(premise_str)
     bud_idea_reasonunit_delete = get_delete_rect(bud_idea_reasonunit_str())
     bud_idea_factunit_delete = get_delete_rect(bud_idea_factunit_str())
-    bud_idea_teamlink_delete = get_delete_rect(bud_idea_teamlink_str())
+    bud_idea_laborlink_delete = get_delete_rect(bud_idea_laborlink_str())
     bud_idea_healerlink_delete = get_delete_rect(bud_idea_healerlink_str())
     bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_str())
     bud_ideaunit_delete = get_delete_rect(bud_ideaunit_str())
@@ -210,8 +210,8 @@ def budatom_periodic_table0() -> plotly_Figure:
     bud_acct_membership_delete.set_level(1, 0.7, 1, green_str)
     bud_idea_healerlink_insert.set_level(3, 0.2, 0.4)
     bud_idea_healerlink_delete.set_level(3, 0.6, 0.8)
-    bud_idea_teamlink_insert.set_level(4, 0.2, 0.4)
-    bud_idea_teamlink_delete.set_level(4, 0.6, 0.8)
+    bud_idea_laborlink_insert.set_level(4, 0.2, 0.4)
+    bud_idea_laborlink_delete.set_level(4, 0.6, 0.8)
     bud_idea_awardlink_insert.set_level(5, 0.2, 0.4, green_str)
     bud_idea_awardlink_update.set_level(5, 0.4, 0.6, green_str)
     bud_idea_awardlink_delete.set_level(5, 0.6, 0.8, green_str)
@@ -231,7 +231,7 @@ def budatom_periodic_table0() -> plotly_Figure:
 
     # bud_ideaunit_insert = get_insert_rect(bud_ideaunit_str())
     # bud_idea_awardlink_insert = get_insert_rect(bud_idea_awardlink_str())
-    # bud_idea_teamlink_insert = get_insert_rect(bud_idea_teamlink_str())
+    # bud_idea_laborlink_insert = get_insert_rect(bud_idea_laborlink_str())
     # bud_idea_healerlink_insert = get_insert_rect(bud_idea_healerlink_str())
     # bud_idea_factunit_insert = get_insert_rect(bud_idea_factunit_str())
     # bud_idea_reasonunit_insert = get_insert_rect(bud_idea_reasonunit_str())
@@ -244,7 +244,7 @@ def budatom_periodic_table0() -> plotly_Figure:
     # bud_idea_reason_premiseunit_delete = get_delete_rect(premise_str)
     # bud_idea_reasonunit_delete = get_delete_rect(bud_idea_reasonunit_str())
     # bud_idea_factunit_delete = get_delete_rect(bud_idea_factunit_str())
-    # bud_idea_teamlink_delete = get_delete_rect(bud_idea_teamlink_str())
+    # bud_idea_laborlink_delete = get_delete_rect(bud_idea_laborlink_str())
     # bud_idea_healerlink_delete = get_delete_rect(bud_idea_healerlink_str())
     # bud_idea_awardlink_delete = get_delete_rect(bud_idea_awardlink_str())
     # bud_ideaunit_delete = get_delete_rect(bud_ideaunit_str())
@@ -255,7 +255,7 @@ def budatom_periodic_table0() -> plotly_Figure:
     # Add shapes
     add_atom_rect(fig, bud_acctunit_insert)
     add_atom_rect(fig, bud_acct_membership_insert)
-    add_atom_rect(fig, bud_idea_teamlink_insert)
+    add_atom_rect(fig, bud_idea_laborlink_insert)
     add_atom_rect(fig, bud_idea_healerlink_insert)
     add_atom_rect(fig, bud_idea_factunit_insert)
     add_atom_rect(fig, bud_idea_reasonunit_insert)
@@ -268,7 +268,7 @@ def budatom_periodic_table0() -> plotly_Figure:
     add_atom_rect(fig, bud_idea_reason_premiseunit_delete)
     add_atom_rect(fig, bud_idea_reasonunit_delete)
     add_atom_rect(fig, bud_idea_factunit_delete)
-    add_atom_rect(fig, bud_idea_teamlink_delete)
+    add_atom_rect(fig, bud_idea_laborlink_delete)
     add_atom_rect(fig, bud_idea_healerlink_delete)
     add_atom_rect(fig, bud_idea_awardlink_insert)
     add_atom_rect(fig, bud_idea_awardlink_update)

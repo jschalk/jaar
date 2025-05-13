@@ -26,8 +26,8 @@ def bud_idea_reason_premiseunit_str() -> str:
     return "bud_idea_reason_premiseunit"
 
 
-def bud_idea_teamlink_str() -> str:
-    return "bud_idea_teamlink"
+def bud_idea_laborlink_str() -> str:
+    return "bud_idea_laborlink"
 
 
 def bud_idea_healerlink_str() -> str:
@@ -107,8 +107,8 @@ def group_label_str() -> str:
     return "group_label"
 
 
-def team_label_str() -> str:
-    return "team_label"
+def labor_label_str() -> str:
+    return "labor_label"
 
 
 def healer_name_str() -> str:

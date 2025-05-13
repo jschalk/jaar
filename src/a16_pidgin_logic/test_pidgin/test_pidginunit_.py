@@ -20,7 +20,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     penny_str,
     respect_bit_str,
     idea_way_str,
-    team_label_str,
+    labor_label_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_tag_str
 from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
@@ -115,7 +115,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
-    assert pidgin_args_class_types.get("team_label") == type_LabelStr_str()
+    assert pidgin_args_class_types.get("labor_label") == type_LabelStr_str()
     assert pidgin_args_class_types.get("deal_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("tran_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("timeline_tag") == type_TagStr_str()
@@ -210,7 +210,7 @@ def test_pidginable_args_ReturnsObj():
         pbranch_str(),
         owner_name_str(),
         idea_way_str(),
-        team_label_str(),
+        labor_label_str(),
         timeline_tag_str(),
         weekday_tag_str(),
     }

@@ -17,7 +17,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_awardlink_str,
     bud_idea_reasonunit_str,
     bud_idea_reason_premiseunit_str,
-    bud_idea_teamlink_str,
+    bud_idea_laborlink_str,
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
@@ -35,7 +35,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     healer_name_str,
     idea_way_str,
     numor_str,
-    team_label_str,
+    labor_label_str,
     close_str,
     credit_belief_str,
     debtit_belief_str,
@@ -298,12 +298,12 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[72] == "fbranch"
     assert table_sorting_priority[73] == "fbranch_otx"
     assert table_sorting_priority[74] == "fbranch_inx"
-    assert table_sorting_priority[75] == "team_label"
-    assert table_sorting_priority[76] == "team_label_otx"
-    assert table_sorting_priority[77] == "team_label_inx"
-    assert table_sorting_priority[78] == "team_label_ERASE"
-    assert table_sorting_priority[79] == "team_label_ERASE_otx"
-    assert table_sorting_priority[80] == "team_label_ERASE_inx"
+    assert table_sorting_priority[75] == "labor_label"
+    assert table_sorting_priority[76] == "labor_label_otx"
+    assert table_sorting_priority[77] == "labor_label_inx"
+    assert table_sorting_priority[78] == "labor_label_ERASE"
+    assert table_sorting_priority[79] == "labor_label_ERASE_otx"
+    assert table_sorting_priority[80] == "labor_label_ERASE_inx"
     assert table_sorting_priority[81] == "awardee_label"
     assert table_sorting_priority[82] == "awardee_label_otx"
     assert table_sorting_priority[83] == "awardee_label_inx"
@@ -366,7 +366,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[140] == "celldepth"
     assert table_sorting_priority[141] == "job_listen_rotations"
     assert table_sorting_priority[142] == "error_message"
-    assert table_sorting_priority[143] == "_owner_name_team"
+    assert table_sorting_priority[143] == "_owner_name_labor"
     assert table_sorting_priority[144] == "_active"
     assert table_sorting_priority[145] == "_task"
     assert table_sorting_priority[146] == "_status"
@@ -446,7 +446,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(rcontext_str()) == "TEXT"
     assert sqlite_types.get("pbranch") == "TEXT"
     assert sqlite_types.get("fbranch") == "TEXT"
-    assert sqlite_types.get(team_label_str()) == "TEXT"
+    assert sqlite_types.get(labor_label_str()) == "TEXT"
     assert sqlite_types.get(awardee_label_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
@@ -551,7 +551,7 @@ def test_get_creed_config_dict_ReturnsObj():
     assert bud_acctunit_str() in creed_config_dimens
     assert bud_idea_awardlink_str() in creed_config_dimens
     assert bud_idea_factunit_str() in creed_config_dimens
-    assert bud_idea_teamlink_str() in creed_config_dimens
+    assert bud_idea_laborlink_str() in creed_config_dimens
     assert bud_idea_healerlink_str() in creed_config_dimens
     assert bud_idea_reason_premiseunit_str() in creed_config_dimens
     assert bud_idea_reasonunit_str() in creed_config_dimens
@@ -857,7 +857,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     # set_creed_config_json(bud_acctunit_str(), 10)
     # set_creed_config_json(bud_idea_awardlink_str(), 11)
     # set_creed_config_json(bud_idea_factunit_str(), 12)
-    # set_creed_config_json(bud_idea_teamlink_str(), 14)
+    # set_creed_config_json(bud_idea_laborlink_str(), 14)
     # set_creed_config_json(bud_idea_healerlink_str(), 15)
     # set_creed_config_json(bud_idea_reason_premiseunit_str(), 16)
     # set_creed_config_json(bud_idea_reasonunit_str(), 17)
@@ -881,7 +881,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     assert x_creed_config.get(bud_acctunit_str()).get(bo) == 10
     assert x_creed_config.get(bud_idea_awardlink_str()).get(bo) == 11
     assert x_creed_config.get(bud_idea_factunit_str()).get(bo) == 12
-    assert x_creed_config.get(bud_idea_teamlink_str()).get(bo) == 14
+    assert x_creed_config.get(bud_idea_laborlink_str()).get(bo) == 14
     assert x_creed_config.get(bud_idea_healerlink_str()).get(bo) == 15
     assert x_creed_config.get(bud_idea_reason_premiseunit_str()).get(bo) == 16
     assert x_creed_config.get(bud_idea_reasonunit_str()).get(bo) == 17

@@ -78,7 +78,7 @@ def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentTask(
     zia_plan = get_example_zia_speaker()
     zia_plan.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_way())
     clean_ideaunit = zia_plan.get_idea_obj(clean_way())
-    clean_ideaunit.teamunit.set_teamlink(yao_str)
+    clean_ideaunit.laborunit.set_laborlink(yao_str)
     sue_texas_hubunit.save_plan_bud(zia_plan)
 
     new_yao_plan = create_listen_basis(yao_duty)
@@ -277,7 +277,7 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfbranchedFromOwnersSpeakerDirBud
 #         sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
 #     )
 #     sweep_idea = sue_speaker.get_idea_obj(sweep_way)
-#     sweep_idea.teamunit.set_teamlink(yao_str)
+#     sweep_idea.laborunit.set_laborlink(yao_str)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_plan_bud(sue_str, sue_speaker.get_json(), True)

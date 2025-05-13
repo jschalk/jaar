@@ -31,7 +31,7 @@ def test_add_gut_pledge_Addspledgepack(env_dir_setup_cleanup):
     assert new_sue_gut.idea_exists(clean_way)
 
 
-def test_add_gut_pledge_SetsgutBudpledgeIdea_teamlink(env_dir_setup_cleanup):
+def test_add_gut_pledge_SetsgutBudpledgeIdea_laborlink(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), root_tag(), sue_str)
@@ -43,14 +43,14 @@ def test_add_gut_pledge_SetsgutBudpledgeIdea_teamlink(env_dir_setup_cleanup):
 
     # WHEN
     bob_str = "Bob"
-    add_gut_pledge(sue_hubunit, clean_way, x_teamlink=bob_str)
+    add_gut_pledge(sue_hubunit, clean_way, x_laborlink=bob_str)
 
     # THEN
     new_sue_gut = open_gut_file(env_dir(), root_tag(), sue_str)
     assert new_sue_gut.idea_exists(clean_way)
     clean_idea = new_sue_gut.get_idea_obj(clean_way)
-    print(f"{clean_idea.teamunit._teamlinks=}")
-    assert clean_idea.teamunit.teamlink_exists(bob_str)
+    print(f"{clean_idea.laborunit._laborlinks=}")
+    assert clean_idea.laborunit.laborlink_exists(bob_str)
 
 
 def test_add_gut_pledge_CanAdd_reasonunit(env_dir_setup_cleanup):

@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason_idea import (
     factheir_shop,
     factunit_shop,
 )
-from src.a04_reason_logic.reason_team import teamunit_shop, teamheir_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop, laborheir_shop
 from src.a05_idea_logic.idea import ideaunit_shop
 
 
@@ -434,38 +434,38 @@ def test_IdeaUnit_record_active_hx_CorrectlyRecordsHistorry():
     assert clean_idea._active_hx == {0: False}
 
 
-def test_IdeaUnit_set_teamunit_empty_if_None():
+def test_IdeaUnit_set_laborunit_empty_if_None():
     # ESTABLISH
     run_str = "run"
     run_idea = ideaunit_shop(run_str)
-    run_idea.teamunit = None
-    assert run_idea.teamunit is None
+    run_idea.laborunit = None
+    assert run_idea.laborunit is None
 
     # WHEN
-    run_idea.set_teamunit_empty_if_None()
+    run_idea.set_laborunit_empty_if_None()
 
     # THEN
-    assert run_idea.teamunit is not None
-    assert run_idea.teamunit == teamunit_shop()
+    assert run_idea.laborunit is not None
+    assert run_idea.laborunit == laborunit_shop()
 
 
-def test_IdeaUnit_set_teamheir_CorrectlySetsAttr():
+def test_IdeaUnit_set_laborheir_CorrectlySetsAttr():
     # ESTABLISH
     swim_str = "swimmers"
     sport_str = "sports"
     sport_idea = ideaunit_shop(sport_str)
-    sport_idea.teamunit.set_teamlink(team_label=swim_str)
-    # assert sport_idea._teamheir is None
+    sport_idea.laborunit.set_laborlink(labor_label=swim_str)
+    # assert sport_idea._laborheir is None
 
     # WHEN
-    sport_idea.set_teamheir(parent_teamheir=None, bud_groupunits=None)
+    sport_idea.set_laborheir(parent_laborheir=None, bud_groupunits=None)
 
     # THEN
-    assert sport_idea._teamheir is not None
-    swim_teamunit = teamunit_shop()
-    swim_teamunit.set_teamlink(team_label=swim_str)
-    swim_teamheir = teamheir_shop()
-    swim_teamheir.set_teamlinks(
-        teamunit=swim_teamunit, parent_teamheir=None, bud_groupunits=None
+    assert sport_idea._laborheir is not None
+    swim_laborunit = laborunit_shop()
+    swim_laborunit.set_laborlink(labor_label=swim_str)
+    swim_laborheir = laborheir_shop()
+    swim_laborheir.set_laborlinks(
+        laborunit=swim_laborunit, parent_laborheir=None, bud_groupunits=None
     )
-    assert sport_idea._teamheir == swim_teamheir
+    assert sport_idea._laborheir == swim_laborheir

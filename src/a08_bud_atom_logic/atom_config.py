@@ -101,7 +101,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "team_label": "LabelStr",
+        "labor_label": "LabelStr",
     }
 
 
@@ -233,7 +233,7 @@ def get_bud_dimens() -> set:
         "bud_idea_awardlink",
         "bud_idea_reasonunit",
         "bud_idea_reason_premiseunit",
-        "bud_idea_teamlink",
+        "bud_idea_laborlink",
         "bud_idea_healerlink",
         "bud_idea_factunit",
     }
@@ -250,7 +250,7 @@ def get_all_bud_dimen_keys() -> set:
         "pbranch",
         "owner_name",
         "idea_way",
-        "team_label",
+        "labor_label",
     }
 
 
@@ -269,7 +269,7 @@ def get_all_bud_dimen_delete_keys() -> set:
         "pbranch_ERASE",
         "owner_name_ERASE",
         "idea_way_ERASE",
-        "team_label_ERASE",
+        "labor_label_ERASE",
     }
 
 

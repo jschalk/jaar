@@ -397,14 +397,14 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     )
 
 
-def _modify_bud_idea_teamlink_delete(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_idea_laborlink_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.teamunit.del_teamlink(team_label=x_atom.get_value("team_label"))
+    x_ideaunit.laborunit.del_laborlink(labor_label=x_atom.get_value("labor_label"))
 
 
-def _modify_bud_idea_teamlink_insert(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_idea_laborlink_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.teamunit.set_teamlink(team_label=x_atom.get_value("team_label"))
+    x_ideaunit.laborunit.set_laborlink(labor_label=x_atom.get_value("labor_label"))
 
 
 def _modify_bud_idea_healerlink_delete(x_bud: BudUnit, x_atom: BudAtom):
@@ -498,11 +498,11 @@ def _modify_bud_idea_reason_premiseunit(x_bud: BudUnit, x_atom: BudAtom):
         _modify_bud_idea_reason_premiseunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_teamlink(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_idea_laborlink(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_teamlink_delete(x_bud, x_atom)
+        _modify_bud_idea_laborlink_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_teamlink_insert(x_bud, x_atom)
+        _modify_bud_idea_laborlink_insert(x_bud, x_atom)
 
 
 def _modify_bud_idea_healerlink(x_bud: BudUnit, x_atom: BudAtom):
@@ -538,8 +538,8 @@ def modify_bud_with_budatom(x_bud: BudUnit, x_atom: BudAtom):
         _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
     elif x_atom.dimen == "bud_idea_healerlink":
         _modify_bud_idea_healerlink(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_teamlink":
-        _modify_bud_idea_teamlink(x_bud, x_atom)
+    elif x_atom.dimen == "bud_idea_laborlink":
+        _modify_bud_idea_laborlink(x_bud, x_atom)
     elif x_atom.dimen == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
@@ -654,7 +654,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    team_label: int = None
+    labor_label: int = None
 
     def set_atom_dimen(self, atom_dimen: str):
         self._atom_dimens.add(atom_dimen)
