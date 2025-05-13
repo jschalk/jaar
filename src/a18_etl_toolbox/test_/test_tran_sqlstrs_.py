@@ -302,7 +302,7 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
     }
     s_types = get_creed_sqlite_types()
     for x_dimen in creed_config:
-        print(f"{x_dimen} checking...")
+        # print(f"{x_dimen} checking...")
         x_config = creed_config.get(x_dimen)
 
         ag_put_table = f"{x_dimen}_put_agg"
@@ -313,15 +313,15 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         # print(f"{ex_ag_put_sqlstr=}")
         # assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
 
-        st_put_table = f"{x_dimen}_put_raw"
-        st_put_cols = set(x_config.get("jkeys").keys())
-        st_put_cols.update(set(x_config.get("jvalues").keys()))
-        st_put_cols.add(creed_number_str())
-        st_put_cols.add("error_message")
-        st_put_cols = get_default_sorted_list(st_put_cols)
-        ex_st_put_sqlstr = get_create_table_sqlstr(st_put_table, st_put_cols, s_types)
-        # print(f"{ex_st_put_sqlstr=}")
-        # assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
+        ra_put_table = f"{x_dimen}_put_raw"
+        ra_put_cols = set(x_config.get("jkeys").keys())
+        ra_put_cols.update(set(x_config.get("jvalues").keys()))
+        ra_put_cols.add(creed_number_str())
+        ra_put_cols.add("error_message")
+        ra_put_cols = get_default_sorted_list(ra_put_cols)
+        ex_ra_put_sqlstr = get_create_table_sqlstr(ra_put_table, ra_put_cols, s_types)
+        # print(f"{ex_ra_put_sqlstr=}")
+        # assert create_table_sqlstrs.get(ra_put_table) == ex_ra_put_sqlstr
 
         ag_del_table = f"{x_dimen}_del_agg"
         ag_del_cols = set(x_config.get("jkeys").keys())
@@ -331,28 +331,28 @@ def test_get_bud_prime_create_table_sqlstrs_ReturnsObj():
         # print(f" {ex_ag_del_sqlstr}")
         # assert create_table_sqlstrs.get(ag_del_table) == ex_ag_del_sqlstr
 
-        st_del_table = f"{x_dimen}_del_raw"
-        st_del_cols = set(x_config.get("jkeys").keys())
-        st_del_cols.add(creed_number_str())
-        st_del_cols.add("error_message")
-        st_del_cols = get_default_sorted_list(st_del_cols)
-        st_del_cols[-2] = get_delete_key_name(st_del_cols[-2])
-        ex_st_del_sqlstr = get_create_table_sqlstr(st_del_table, st_del_cols, s_types)
-        # print(f" {ex_st_del_sqlstr}")
-        # assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
+        ra_del_table = f"{x_dimen}_del_raw"
+        ra_del_cols = set(x_config.get("jkeys").keys())
+        ra_del_cols.add(creed_number_str())
+        ra_del_cols.add("error_message")
+        ra_del_cols = get_default_sorted_list(ra_del_cols)
+        ra_del_cols[-2] = get_delete_key_name(ra_del_cols[-2])
+        ex_ra_del_sqlstr = get_create_table_sqlstr(ra_del_table, ra_del_cols, s_types)
+        # print(f" {ex_ra_del_sqlstr}")
+        # assert create_table_sqlstrs.get(ra_del_table) == ex_ra_del_sqlstr
 
+        print(f'CREATE_{abbv(ra_put_table)}_SQLSTR= """{ex_ra_put_sqlstr}"""')
         print(f'CREATE_{abbv(ag_put_table)}_SQLSTR= """{ex_ag_put_sqlstr}"""')
-        print(f'CREATE_{abbv(st_put_table)}_SQLSTR= """{ex_st_put_sqlstr}"""')
+        print(f'CREATE_{abbv(ra_del_table)}_SQLSTR= """{ex_ra_del_sqlstr}"""')
         print(f'CREATE_{abbv(ag_del_table)}_SQLSTR= """{ex_ag_del_sqlstr}"""')
-        print(f'CREATE_{abbv(st_del_table)}_SQLSTR= """{ex_st_del_sqlstr}"""')
+        # print(f'"{ra_put_table}": CREATE_{abbv(ra_put_table)}_SQLSTR,')
         # print(f'"{ag_put_table}": CREATE_{abbv(ag_put_table)}_SQLSTR,')
-        # print(f'"{st_put_table}": CREATE_{abbv(st_put_table)}_SQLSTR,')
+        # print(f'"{ra_del_table}": CREATE_{abbv(ra_del_table)}_SQLSTR,')
         # print(f'"{ag_del_table}": CREATE_{abbv(ag_del_table)}_SQLSTR,')
-        # print(f'"{st_del_table}": CREATE_{abbv(st_del_table)}_SQLSTR,')
+        assert create_table_sqlstrs.get(ra_put_table) == ex_ra_put_sqlstr
         assert create_table_sqlstrs.get(ag_put_table) == ex_ag_put_sqlstr
-        assert create_table_sqlstrs.get(st_put_table) == ex_st_put_sqlstr
+        assert create_table_sqlstrs.get(ra_del_table) == ex_ra_del_sqlstr
         assert create_table_sqlstrs.get(ag_del_table) == ex_ag_del_sqlstr
-        assert create_table_sqlstrs.get(st_del_table) == ex_st_del_sqlstr
 
 
 def test_get_fisc_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
