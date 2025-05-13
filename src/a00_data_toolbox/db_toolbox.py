@@ -496,9 +496,8 @@ def create_select_query(
 def create_insert_into_clause_str(
     cursor: sqlite3_Connection,
     x_tablename: str,
-    values_dict: dict[str,],
+    columns_set: set[str],
 ) -> str:
-    columns_set = set(values_dict.keys())
     table_columns = get_table_columns(cursor, x_tablename)
     columns_list = get_sorted_intersection_list(columns_set, table_columns)
     into_columns_str = ", ".join(columns_list)
