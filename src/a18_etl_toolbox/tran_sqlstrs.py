@@ -785,6 +785,37 @@ def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
     }
 
 
+def update_voice_raw_inx_name_col_sqlstr(table: str, column: str) -> str:
+    return f"""
+WITH mapped_names AS (
+    SELECT raw_dim.{column}_otx as otx_name, pid.inx_name
+    FROM {table} raw_dim
+    LEFT JOIN pidgin_name_s_vld pid ON pid.otx_name = raw_dim.{column}_otx
+)
+UPDATE {table}
+SET {column}_inx = (
+    SELECT IFNULL(inx_name, otx_name)
+    FROM mapped_names
+    WHERE {table}.{column}_otx = mapped_names.otx_name
+)
+;
+"""
+
+
+# WITH mapped_names AS (
+#     SELECT pid.otx_name, pid.inx_name
+#     FROM {table} raw_dim
+#     JOIN pidgin_name_s_vld pid ON pid.otx_name = raw_dim.{column}_otx
+# )
+# UPDATE {table}
+# SET {table}.{column}_inx = (
+#     SELECT inx_name
+#     FROM mapped_names
+#     WHERE {table}.{column}_otx = mapped_names.otx_name
+# )
+# return f"""UPDATE {table} SET {column}_inx = {column}_otx"""
+
+
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
 FROM pidgin_label_raw
 GROUP BY otx_label
